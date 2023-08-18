@@ -3,36 +3,30 @@ import {
 	CachedMetadata,
 	Command,
 	Constructor,
-	DataAdapter,
 	DataWriteOptions,
 	EditorRange,
 	EditorSuggest,
 	EventRef,
 	Events,
-	FileManager,
 	FileView,
 	KeymapEventHandler,
 	KeymapEventListener,
 	KeymapInfo,
-	Loc, Menu,
-	MetadataCache,
+	Loc,
 	Modifier,
 	ObsidianProtocolHandler,
 	OpenViewState,
 	PaneType,
 	Plugin,
 	Reference,
-	Scope,
-	SettingTab,
 	SplitDirection,
 	TAbstractFile,
 	TFile,
 	TFolder,
-	Vault,
 	View,
-	ViewState, Workspace,
-	WorkspaceLeaf, WorkspaceMobileDrawer,
-	WorkspaceParent,
+	ViewState,
+	WorkspaceLeaf,
+	WorkspaceMobileDrawer,
 	WorkspaceSidedock,
 	WorkspaceSplit,
 	WorkspaceTabs,
@@ -41,7 +35,6 @@ import {
 } from 'obsidian';
 import { EditorView } from '@codemirror/view';
 import { EditorState, Extension } from '@codemirror/state';
-import * as CodeMirror from 'codemirror';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -430,135 +423,6 @@ interface LinkUpdate {
 	sourceFile: TFile;
 }
 
-interface EFileManager extends FileManager {
-	/**
-	 * Reference to App
-	 */
-	app: App;
-	/**
-	 * Creates a new Markdown file in specified location and opens it in a new view
-	 * @param path - Path to the file to create (missing folders will be created)
-	 * @param manner - Where to open the view containing the new file
-	 */
-	createAndOpenMarkdownFile: (path: string, location: PaneType) => Promise<void>;
-	/**
-	 * Create a new file in the vault at specified location
-	 * @param location - Location to create the file in, defaults to root
-	 * @param filename - Name of the file to create, defaults to "Untitled" (incremented if file already exists)
-	 * @param extension - Extension of the file to create, defaults to "md"
-	 * @param contents - Contents of the file to create, defaults to empty string
-	 */
-	createNewFile: (location: TFolder = null, filename: string = null, extension: string = "md", contents: string = "") => Promise<TFile>;
-	/**
-	 * Creates a new untitled folder in the vault at specified location
-	 * @param location - Location to create the folder in, defaults to root
-	 */
-	createNewFolder: (location: TFolder = null) => Promise<TFolder>;
-	/**
-	 * Creates a new Markdown file in the vault at specified location
-	 */
-	createNewMarkdownFile: (location: TFolder = null, filename: string = null, contents: string = "") => Promise<TFile>;
-	/**
-	 * Creates a new Markdown file based on linktext and path
-	 * @param filename - Name of the file to create
-	 * @param path - Path to where the file should be created
-	 */
-	createNewMarkdownFileFromLinktext: (filename: string, path: string) => Promise<TFile>;
-	/**
-	 * @internal
-	 */
-	getAllLinkResolutions: () => [];
-	/**
-	 * Gets the folder that new markdown files should be saved to, based on the current settings
-	 * @param path - The path of the current opened/focused file, used when the user
-	 * 				wants new files to be created in the same folder as the current file
-	 */
-	getMarkdownNewFileParent: (path: string) => TFolder;
-	/**
-	 * Insert text into a file
-	 * @param file - File to insert text into
-	 * @param primary_text - Text to insert (will not be inserted if secondary_text exists)
-	 * @param basename - ???
-	 * @param secondary_text - Text to insert (always inserted)
-	 * @param atStart - Whether to insert text at the start or end of the file
-	 */
-	insertTextIntoFile: (file: TFile, primary_text: string, basename: string, secondary_text: string, atStart: boolean = true) => Promise<void>;
-	/**
-	 * Iterate over all links in the vault with callback
-	 * @param callback - Callback to execute for each link
-	 */
-	iterateAllRefs: (callback: (path: string, link: PositionedReference) => void) => void;
-	/**
-	 * Merge two files
-	 * @param file - File to merge to
-	 * @param otherFile - File to merge from
-	 * @param override - If not empty, will override the contents of the file with this string
-	 * @param atStart - Whether to insert text at the start or end of the file
-	 */
-	mergeFile: (file: TFile, otherFile: TFile, override: string, atStart: boolean) => Promise<void>;
-	/**
-	 * Prompt the user to delete a file
-	 */
-	promptForDeletion: (file: TFile) => Promise<void>;
-	/**
-	 * Prompt the user to rename a file
-	 */
-	promptForFileRename: (file: TFile) => Promise<void>;
-	/**
-	 * @internal
-	 * Register an extension to be the parent for a specific file type
-	 */
-	registerFileParentCreator: (extension: string, location: TFolder) => void;
-	/**
-	 * @internal
-	 * @param callback - Callback to execute for each link
-	 */
-	runAsyncLinkUpdate: (callback: (link: LinkUpdate) => any) => void;
-	/**
-	 * @internal
-	 * @param path
-	 * @param data
-	 */
-	storeTextFileBackup: (path: string, data: string) => void;
-	/**
-	 * Remove a file and put it in the trash (no confirmation modal)
-	 */
-	trashFile: (file: TFile) => Promise<void>;
-	/**
-	 * @internal: Unregister extension as root input directory for file type
-	 */
-	unregisterFileCreator: (extension: string) => void;
-	/**
-	 * @internal
-	 */
-	updateAllLinks: (links: any[]) => Promise<void>;
-	/**
-	 * @internal
-	 */
-	updateInternalLinks: (data: any) => any;
-
-	/**
-	 * @internal
-	 */
-	fileParentCreatorByType: Map<string, (e) => any>;
-	/**
-	 * @internal
-	 */
-	inProgressUpdates: null | any[];
-	/**
-	 * @internal
-	 */
-	linkUpdaters: Map<string, (e) => any>;
-	/**
-	 * @internal
-	 */
-	updateQueue: Map<string, (e) => any>;
-	/**
-	 * Reference to Vault
-	 */
-	vault: Vault;
-}
-
 interface HotkeyManager {
 	/**
 	 * Reference to App
@@ -754,42 +618,6 @@ interface KeyScope {
 	scope: EScope;
 }
 
-interface EScope extends Scope {
-	/**
-	 * Overridden keys that exist in this scope
-	 */
-	keys: KeyScope[];
-
-	/**
-	 * @internal Scope that this scope is a child of
-	 */
-	parent: EScope | undefined;
-	/**
-	 * @internal - Callback to execute when scope is matched
-	 */
-	cb: (() => boolean) | undefined;
-	/**
-	 * @internal
-	 */
-	tabFocusContainer: HTMLElement | null;
-	/**
-	 * @internal Execute keypress within this scope
- 	 * @param event - Keyboard event
-	 * @param keypress - Pressed key information
-	 */
-	handleKey: (event: KeyboardEvent, keypress: KeymapInfo) => any;
-	/**
-	 * @internal
-	 * @deprecated - Executes same functionality as `Scope.register`
-	 */
-	registerKey: (modifiers: Modifier[], key: string | null, func: KeymapEventListener) => KeymapEventHandler;
-	/**
-	 * @internal
-	 */
-	setTabFocusContainer: (container: HTMLElement) => void;
-}
-
-
 
 // interface KeymapManager {
 // 	/**
@@ -948,215 +776,6 @@ interface PropertyInfo {
 	 * Usage count of property
 	 */
 	count: number;
-}
-
-class EMetadataCache extends MetadataCache {
-	/**
-	 * Reference to App
-	 */
-	app: App;
-	/**
-	 * @internal
-	 */
-	blockCache: BlockCache;
-	/**
-	 * @internal IndexedDB database
-	 */
-	db: IDBDatabase
-	/**
-	 * @internal File contents cache
-	 */
-	fileCache: Record<string, FileCacheEntry>;
-	/**
-	 * @internal Amount of tasks currently in progress
-	 */
-	inProgressTaskCount: number;
-	/**
-	 * @internal Whether the cache is fully loaded
-	 */
-	initialized: boolean;
-	/**
-	 * @internal
-	 */
-	linkResolverQueue: any;
-	/**
-	 * @internal File hash to metadata cache entry mapping
-	 */
-	metadataCache: Record<string, CachedMetadata>;
-	/**
-	 * @internal Callbacks to execute on cache clean
-	 */
-	onCleanCacheCallbacks: any[];
-	/**
-	 * @internal Mapping of filename to collection of files that share the same name
-	 */
-	uniqueFileLookup: CustomArrayDict<string, TFile>;
-	/**
-	 * @internal
-	 */
-	userIgnoreFilterCache: any;
-	/**
-	 * @internal
-	 */
-	userIgnoreFilters: any;
-	/**
-	 * @internal
-	 */
-	userIgnoreFiltersString: string;
-	/**
-	 * Reference to Vault
-	 */
-	vault: Vault;
-	/**
-	 * @internal
-	 */
-	workQueue: any;
-	/**
-	 * @internal
-	 */
-	worker: Worker;
-	/**
-	 * @internal
-	 */
-	workerResolve: any;
-
-	/**
-	 * Get all property infos of the vault
-	 */
-	getAllPropertyInfos: () => Record<string, PropertyInfo>
-	/**
-	 * Get all backlink information for a file
-	 */
-	getBacklinksForFile: (file?: TFile) => CustomArrayDict<string, Reference>
-	/**
-	 * Get paths of all files cached in the vault
-	 */
-	getCachedFiles: () => string[];
-	/**
-	 * Get an entry from the file cache
-	 */
-	getFileInfo: (path: string) => FileCacheEntry;
-	/**
-	 * Get property values for frontmatter property key
-	 */
-	getFrontmatterPropertyValuesForKey: (key: string) => string[];
-	/**
-	 * Get all links (resolved or unresolved) in the vault
-	 */
-	getLinkSuggestions: () => { file: TFile | null, path: string }[];
-	/**
-	 * Get destination of link path
-	 */
-	getLinkpathDest: (origin: string = "", path: string) => TFile[];
-	/**
-	 * Get all links within the vault per file
-	 */
-	getLinks: () => Record<string, Reference[]>;
-	/**
-	 * Get all tags within the vault and their usage count
-	 */
-	getTags: () => Record<string, number>;
-
-	/**
-	 * @internal Clear all caches to null values
-	 */
-	cleanupDeletedCache: () => void;
-	/**
-	 * @internal
-	 */
-	clear: () => any;
-	/**
-	 * @internal
-	 */
-	computeMetadataAsync: (e: any) => Promise<any>;
-	/**
-	 * @internal Remove all entries that contain deleted path
-	 */
-	deletePath: (path: string) => void;
-	/**
-	 * @internal Initialize Database connection and load up caches
-	 */
-	initialize: () => Promise<void>;
-	/**
-	 * @internal Check whether there are no cache tasks in progress
-	 */
-	isCacheClean: () => boolean;
-	/**
-	 * @internal Check whether file can support metadata (by checking extension support)
-	 */
-	isSupportedFile: (file: TFile) => boolean;
-	/**
-	 * @internal Check whether string is part of the user ignore filters
-	 */
-	isUserIgnored: (filter: any) => boolean;
-	/**
-	 * Iterate over all link references in the vault with callback
-	 */
-	iterateReferences: (callback: (path: string) => void) => void;
-	/**
-	 * @internal
-	 */
-	linkResolver: () => void;
-	/**
-	 * @internal Execute onCleanCache callbacks if cache is clean
-	 */
-	onCleanCache: () => void;
-	/**
-	 * @internal On creation of the cache: update metadata cache
-	 */
-	onCreate: (file: TFile) => void;
-	/**
-	 * @internal On creation or modification of the cache: update metadata cache
-	 */
-	onCreateOrModify: (file: TFile) => void;
-	/**
-	 * @internal On deletion of the cache: update metadata cache
-	 */
-	onDelete: (file: TFile) => void;
-	/**
-	 * @internal
-	 */
-	onReceiveMessageFromWorker: (e: any) => void;
-	/**
-	 * @internal On rename of the cache: update metadata cache
-	 */
-	onRename: (file: TFile, oldPath: string) => void;
-	/**
-	 * @internal Check editor for unresolved links and mark these as unresolved
-	 */
-	resolveLinks: (editor: Element) => void;
-	/**
-	 * @internal Update file cache entry and sync to indexedDB
-	 */
-	saveFileCache: (path: string, entry: FileCacheEntry) => void;
-	/**
-	 * @internal Update metadata cache entry and sync to indexedDB
-	 */
-	saveMetaCache: (path: string, entry: CachedMetadata) => void;
-	/**
-	 * @internal Show a notice that the cache is being rebuilt
-	 */
-	showIndexingNotice: () => void;
-	/**
-	 * @internal
-	 */
-	trigger: (e: any) => void;
-	/**
-	 * @internal Re-resolve all links for changed path
-	 */
-	updateRelatedLinks: (path: string) => void;
-	/**
-	 * @internal Update user ignore filters from settings
-	 */
-	updateUserIgnoreFilters: () => void;
-	/**
-	 * @internal Bind actions to listeners on vault
-	 */
-	watchVaultChanges: () => void;
-	/**
-	 * @internal Send message to worker to update metadata cache
-	 */
-	work: (cacheEntry: any) => void;
 }
 
 type PropertyWidgetType = "aliases"
@@ -1526,178 +1145,11 @@ interface Plugins {
 	unloadPlugin: (id: string) => Promise<void>;
 }
 
-interface ESettingTab extends SettingTab {
-	/**
-	 * Unique ID of the tab
-	 */
-	id: string;
-	/**
-	 * Sidebar name of the tab
-	 */
-	name: string;
-	/**
-	 * Sidebar navigation element of the tab
-	 */
-	navEl: HTMLElement;
-	/**
-	 * Reference to the settings modal
-	 */
-	setting: Setting;
-	/**
-	 * Reference to the plugin that initialised the tab
-	 * @if Tab is a plugin tab
-	 */
-	plugin?: Plugin;
-	/**
-	 * Reference to installed plugins element
-	 * @if Tab is the community plugins tab
-	 */
-	installedPluginsEl?: HTMLElement;
-
-	// TODO: Editor, Files & Links, Appearance and About all have private properties too
-}
-
 interface WindowSelection {
 	focusEl: HTMLElement;
 	range: Range;
 	win: Window;
 }
-
-interface EModal extends Modal {
-	/**
-	 * @internal Background applied to application to dim it
-	 */
-	bgEl: HTMLElement;
-	/**
-	 * @internal Opacity percentage of the background
-	 */
-	bgOpacity: number;
-	/**
-	 * @internal Whether the background is being dimmed
-	 */
-	dimBackground: boolean;
-	/**
-	 * @internal Modal container element
-	 */
-	modalEl: HTMLElement;
-	/**
-	 * @internal Selection logic handler
-	 */
-	selection: WindowSelection;
-	/**
-	 * Reference to the global Window object
-	 */
-	win: Window;
-
-	/**
-	 * @internal On escape key press close modal
-	 */
-	onEscapeKey: () => void;
-	/**
-	 * @internal On closing of the modal
-	 */
-	onWindowClose: () => void;
-	/**
-	 * @internal Set the background opacity of the dimmed background
-	 * @param opacity Opacity percentage
-	 */
-	setBackgroundOpacity: (opacity: string) => this;
-	/**
-	 * @internal Set the content of the modal
-	 * @param content Content to set
-	 */
-	setContent: (content: HTMLElement | string) => this;
-	/**
-	 * @internal Set whether the background should be dimmed
-	 * @param dim Whether the background should be dimmed
-	 */
-	setDimBackground: (dim: boolean) => this;
-	/**
-	 * @internal Set the title of the modal
-	 * @param title Title to set
-	 */
-	setTitle: (title: string) => this;
-}
-
-
-interface Setting extends EModal {
-	/**
-	 * Current active tab of the settings modal
-	 */
-	activateTab: ESettingTab;
-	/**
-	 * @internal Container element containing the community plugins
-	 */
-	communityPluginTabContainer: HTMLElement;
-	/**
-	 * @internal Container element containing the community plugins header
-	 */
-	communityPluginTabHeaderGroup: HTMLElement;
-	/**
-	 * Previously opened tab ID
-	 */
-	lastTabId: string;
-	/**
-	 * List of all plugin tabs (core and community, ordered by precedence)
-	 */
-	pluginTabs: ESettingTab[];
-	/**
-	 * List of all core settings tabs (editor, files & links, ...)
-	 */
-	settingTabs: ESettingTab[];
-	/**
-	 * @internal Container element containing the core settings
-	 */
-	tabContainer: HTMLElement;
-	/**
-	 * @internal Container for currently active settings tab
-	 */
-	tabContentContainer: HTMLElement;
-	/**
-	 * @internal Container for all settings tabs
-	 */
-	tabHeadersEl: HTMLElement;
-
-	/**
-	 * Open a specific tab by ID
-	 * @param id ID of the tab to open
-	 */
-	openTabById: (id: string) => void;
-	/**
-	 * @internal Add a new plugin tab to the settings modal
-	 * @param tab Tab to add
-	 */
-	addSettingTab: (tab: ESettingTab) => void;
-	/**
-	 * @internal Closes the currently active tab
-	 */
-	closeActiveTab: () => void;
-	/**
-	 * @internal Check whether tab is a plugin tab
-	 * @param tab Tab to check
-	 */
-	isPluginSettingTab: (tab: ESettingTab) => boolean;
-	/**
-	 * @internal Open a specific tab by tab reference
-	 * @param tab Tab to open
-	 */
-	openTab: (tab: ESettingTab) => void;
-	/**
-	 * @internal Remove a plugin tab from the settings modal
-	 * @param tab Tab to remove
-	 */
-	removeSettingTab: (tab: ESettingTab) => void;
-	/**
-	 * @internal Update the title of the modal
-	 * @param tab Tab to update the title to
-	 */
-	updateModalTitle: (tab: ESettingTab) => void;
-	/**
-	 * @internal Update a tab section
-	 */
-	updatePluginSection: () => void;
-}
-
 
 type ConfigItem = "accentColor"
 	| "alwaysUpdateLinks"
@@ -2012,379 +1464,6 @@ interface FileEntry {
 	type: 'file' | 'folder';
 }
 
-
-interface EDataAdapter extends DataAdapter {
-	/**
-	 * Base OS path for the vault (e.g. /home/user/vault, or C:\Users\user\documents\vault)
-	 */
-	basePath: string;
-	/**
-	 * @internal
-	 */
-	btime: {btime: (path: string, btime: number) => void};
-	/**
-	 * Mapping of file/folder path to vault entry, includes non-MD files
-	 */
-	files: Record<string, FileEntry>;
-	/**
-	 * Reference to node fs module
-	 */
-	fs?: fs;
-	/**
-	 * Reference to node fs:promises module
-	 */
-	fsPromises?: fsPromises;
-	/**
-	 * @internal
-	 */
-	insensitive: boolean;
-	/**
-	 * Reference to electron ipcRenderer module
-	 */
-	ipcRenderer?: IpcRenderer;
-	/**
-	 * Reference to node path module
-	 */
-	path: path;
-	/**
-	 * @internal
-	 */
-	promise: Promise<any>;
-	/**
-	 * Reference to node URL module
-	 */
-	url: URL;
-	/**
-	 * @internal
-	 */
-	watcher: any;
-	/**
-	 * @internal
-	 */
-	watchers: Record<string, {resolvedPath: string, watcher: any}>;
-
-	/**
-	 * @internal Apply data write options to file
-	 * @param normalizedPath Path to file
-	 * @param options Data write options
-	 */
-	applyWriteOptions: (normalizedPath: string, options: DataWriteOptions) => Promise<void>;
-	/**
-	 * Get base path of vault (OS path)
-	 */
-	getBasePath: () => string;
-	/**
-	 * Get full path of file (OS path)
-	 * @param normalizedPath Path to file
-	 * @return URL path to file
-	 */
-	getFilePath: (normalizedPath: string) => URL;
-	/**
-	 * Get full path of file (OS path)
-	 * @param normalizedPath Path to file
-	 * @return string full path to file
-	 */
-	getFullPath: (normalizedPath: string) => string;
-	/**
-	 * Get full path of file (OS path)
-	 * @param normalizedPath Path to file
-	 * @return string full path to file
-	 */
-	getFullRealPath: (normalizedPath: string) => string;
-	/**
-	 * @internal Get resource path of file (URL path)
-	 * @param normalizedPath Path to file
-	 * @return string URL of form: app://FILEHASH/path/to/file
-	 */
-	getResourcePath: (normalizedPath: string) => string;
-	/**
-	 * @internal Handles vault events
-	 */
-	handler: () => void;
-	/**
-	 * @internal Kill file system action due to timeout
-	 */
-	kill: () => void;
-	/**
-	 * @internal
-	 */
-	killLastAction: () => void;
-	/**
-	 * @internal Generates `this.files` from the file system
-	 */
-	listAll: () => Promise<void>;
-	/**
-	 * @internal Generates `this.files` for specific directory of the vault
-	 */
-	listRecursive: (normalizedPath: string) => Promise<void>;
-	/**
-	 * @internal Helper function for `listRecursive` reads children of directory
-	 * @param normalizedPath Path to directory
-	 */
-	listRecursiveChild: (normalizedPath: string) => Promise<void>;
-	/**
-	 * @internal
-	 */
-	onFileChange: (normalizedPath: string) => void;
-	/**
-	 * @internal
-	 */
-	queue: (cb: any) => Promise<void>;
-
-	/**
-	 * @internal
-	 */
-	reconcileDeletion: (normalizedPath: string, normalizedNewPath: string, option: boolean) => void;
-	/**
-	 * @internal
-	 */
-	reconcileFile: (normalizedPath: string, normalizedNewPath: string, option: boolean) => void;
-	/**
-	 * @internal
-	 */
-	reconcileFileCreation: (normalizedPath: string, normalizedNewPath: string, option: boolean) => void;
-	/**
-	 * @internal
-	 */
-	reconcileFileInternal: (normalizedPath: string, normalizedNewPath: string) => void;
-	/**
-	 * @internal
-	 */
-	reconcileFolderCreation: (normalizedPath: string, normalizedNewPath: string) => void;
-	/**
-	 * @internal
-	 */
-	reconcileInternalFile: (normalizedPath: string) => void;
-	/**
-	 * @internal
-	 */
-	reconcileSymbolicLinkCreation: (normalizedPath: string, normalizedNewPath: string) => void;
-	/**
-	 * @internal Remove file from files listing and trigger deletion event
-	 */
-	removeFile: (normalizedPath: string) => void;
-	/**
-	 * @internal
-	 */
-	startWatchpath: (normalizedPath: string) => Promise<void>;
-	/**
-	 * @internal Remove all listeners
-	 */
-	stopWatch: () => void;
-	/**
-	 * @internal Remove listener on specific path
-	 */
-	stopWatchPath: (normalizedPath: string) => void;
-	/**
-	 * @internal Set whether OS is insensitive to case
-	 */
-	testInsensitive: () => void;
-	/**
-	 * @internal
-	 */
-	thingsHappening: () => void;
-	/**
-	 * @internal Trigger an event on handler
-	 */
-	trigger: (any) => void;
-	/**
-	 * @internal
-	 */
-	update: (normalizedPath: string) => any;
-	/**
-	 * @internal Add change watcher to path
-	 */
-	watch: (normalizedPath: string) => Promise<void>;
-	/**
-	 * @internal Watch recursively for changes
-	 */
-	watchHiddenRecursive: (normalizedPath: string) => Promise<void>;
-}
-
-
-interface EVault extends Vault {
-	/**
-	 * Low-level file system adapter for read and write operations
-	 * @tutorial Can be used to read binaries, or files not located directly within the vault
-	 */
-	adapter: EDataAdapter;
-	/**
-	 * @internal Max size of the cache in bytes
-	 */
-	cacheLimit: number;
-	/**
-	 * Object containing all config settings for the vault (editor, appearance, ... settings)
-	 * @remark Prefer usage of `app.vault.getConfig(key)` to get settings, config does not contain
-	 * 		   settings that were not changed from their default value
-	 */
-	config: AppVaultConfig;
-	/**
-	 * @internal Timestamp of the last config change
-	 */
-	configTs: number;
-	/**
-	 * @internal Mapping of path to Obsidian folder or file structure
-	 */
-	fileMap: Record<string, TAbstractFile>;
-
-
-	on(name: 'config-changed', callback: () => void, ctx?: any): EventRef;
-
-	/**
-	 * @internal Add file as child/parent to respective folders
-	 */
-	addChild: (file: TAbstractFile) => void;
-	/**
-	 * @internal Check whether new file path is available
-	 */
-	checkForDuplicate: (file: TAbstractFile, newPath: string) => boolean;
-	/**
-	 * @internal Check whether path has valid formatting (no dots/spaces at end, ...)
-	 */
-	checkPath: (path: string) => boolean;
-	/**
-	 * @internal Remove a vault config file
-	 */
-	deleteConfigJson: (configFile: string) => Promise<void>;
-	/**
-	 * Check whether a file exists in the vault
-	 */
-	exists: (file: TAbstractFile, senstive?: boolean) => Promise<boolean>;
-	/**
-	 * @internal
-	 */
-	generateFiles: (any) => Promise<void>;
-	/**
-	 * Get an abstract file by path, insensitive to case
-	 */
-	getAbstractFileByPathInsensitive: (path: string) => TAbstractFile | null;
-	/**
-	 * @internal Get path for file that does not conflict with other existing files
-	 */
-	getAvailablePath: (path: string, extension: string) => string;
-	/**
-	 * @internal Get path for attachment that does not conflict with other existing files
-	 */
-	getAvailablePathForAttachments: (filename: string, file: TAbstractFile, extension: string) => string;
-	/**
-	 * Get value from config by key
-	 * @remark Default value will be selected if config value was not manually changed
-	 * @param key Key of config value
-	 */
-	getConfig: (string: ConfigItem) => any;
-	/**
-	 * Get path to config file (relative to vault root)
-	 */
-	getConfigFile: (configFile: string) => string;
-	/**
-	 * Get direct parent of file
-	 * @param file File to get parent of
-	 */
-	getDirectParent: (file: TAbstractFile) => TFolder | null;
-	/**
-	 * @internal Check whether files map cache is empty
-	 */
-	isEmpty: () => boolean;
-	/**
-	 * @internal Iterate over the files and read them
-	 */
-	iterateFiles: (files: TFile[], cachedRead: boolean) => void;
-	/**
-	 * @internal Load vault adapter
-	 */
-	load: () => Promise<void>;
-	/**
-	 * @internal Listener for all events on the vault
-	 */
-	onChange: (eventType: string, path: string, x: any, y: any) => void;
-	/**
-	 * Read a config file from the vault and parse it as JSON
-	 * @param config Name of config file
-	 */
-	readConfigJson: (config: string) => Promise<null | object>;
-	/**
-	 * Read a config file (full path) from the vault and parse it as JSON
-	 * @param path Full path to config file
-	 */
-	readJson: (path: string) => Promise<null | object>;
-	/**
-	 * Read a plugin config file (full path relative to vault root) from the vault and parse it as JSON
-	 * @param path Full path to plugin config file
-	 */
-	readPluginData: (path: string) => Promise<null | object>;
-	/**
-	 * Read a file from the vault as a string
-	 * @param path Path to file
-	 */
-	readRaw: (path: string) => Promise<string>;
-	/**
-	 * @internal Reload all config files
-	 */
-	reloadConfig: () => void;
-	/**
-	 * @internal Remove file as child/parent from respective folders
-	 * @param file File to remove
-	 */
-	removeChild: (file: TAbstractFile) => void;
-	/**
-	 * @internal Get the file by absolute path
-	 * @param path Path to file
-	 */
-	resolveFilePath: (path: string) => TAbstractFile | null;
-	/**
-	 * @internal Get the file by Obsidian URL
-	 */
-	resolveFileUrl: (url: string) => TAbstractFile | null;
-	/**
-	 * @internal Debounced function for saving config
-	 */
-	requestSaveConfig: () => void;
-	/**
-	 * @internal Save app and appearance configs to disk
-	 */
-	saveConfig: () => Promise<void>;
-	/**
-	 * Set value of config by key
-	 * @param key Key of config value
-	 * @param value Value to set
-	 */
-	setConfig: (key: ConfigItem, value: any) => void;
-	/**
-	 * Set where the config files are stored (relative to vault root)
-	 * @param configDir Path to config files
-	 */
-	setConfigDir: (configDir: string) => void;
-	/**
-	 * @internal Set file cache limit
-	 */
-	setFileCacheLimit: (limit: number) => void;
-	/**
-	 * @internal Load all config files into memory
-	 */
-	setupConfig: () => Promise<void>;
-	/**
-	 * @internal Trigger an event on handler
-	 */
-	trigger: (type: string) => void;
-	/**
-	 * Write a config file to disk
-	 * @param config Name of config file
-	 * @param data Data to write
-	 */
-	writeConfigJson: (config: string, data: object) => Promise<void>;
-	/**
-	 * Write a config file (full path) to disk
-	 * @param path Full path to config file
-	 * @param data Data to write
-	 * @param pretty Whether to insert tabs or spaces
-	 */
-	writeJson: (path: string, data: object, pretty?: boolean) => Promise<void>;
-	/**
-	 * Write a plugin config file (path relative to vault root) to disk
-	 */
-	writePluginData: (path: string, data: object) => Promise<void>;
-}
-
 interface ViewRegistry extends Events {
 	/**
 	 * Mapping of file extensions to view type
@@ -2567,300 +1646,6 @@ interface SerializedWorkspace {
 	right: LeafEntry;
 }
 
-
-interface EWorkspace extends Workspace {
-	/**
-	 * Currently active tab group
-	 */
-	activeTabGroup: WorkspaceTabs;
-	/**
-	 * Reference to App
-	 */
-	app: App;
-	/**
-	 * @internal
-	 */
-	backlinkInDocument?: any;
-	/**
-	 * Registered CodeMirror editor extensions, to be applied to all CM instances
-	 */
-	editorExtensions: Extension[];
-	/**
-	 * @internal
-	 */
-	editorSuggest: {currentSuggest?: EditorSuggest<any>, suggests: EditorSuggest<any>[]};
-	/**
-	 * @internal
-	 */
-	floatingSplit: WorkspaceSplit;
-	/**
-	 * @internal
-	 */
-	hoverLinkSources: Record<string, HoverLinkSource>;
-	/**
-	 * Last opened file in the vault
-	 */
-	lastActiveFile: TFile;
-	/**
-	 * @internal
-	 */
-	lastTabGroupStacked: boolean;
-	/**
-	 * @internal
-	 */
-	layoutItemQueue: any[];
-	/**
-	 * Workspace has finished loading
-	 */
-	layoutReady: boolean;
-	/**
-	 * @internal
-	 */
-	leftSidebarToggleButtonEl: HTMLElement;
-	/**
-	 * @internal Array of renderCallbacks
-	 */
-	mobileFileInfos: any[];
-	/**
-	 * @internal
-	 */
-	onLayoutReadyCallbacks?: any;
-	/**
-	 * Protocol handlers registered on the workspace
-	 */
-	protocolHandlers: Map<string, ObsidianProtocolHandler>;
-	/**
-	 * Tracks last opened files in the vault
-	 */
-	recentFileTracker: RecentFileTracker;
-	/**
-	 * @internal
-	 */
-	rightSidebarToggleButtonEl: HTMLElement;
-	/**
-	 * @internal Keyscope registered to the vault
-	 */
-	scope: EScope;
-	/**
-	 * List of states that were closed and may be reopened
-	 */
-	undoHistory: StateHistory[];
-
-	/**
-	 * @internal Change active leaf and trigger leaf change event
-	 */
-	activeLeafEvents: () => void;
-	/**
-	 * @internal Add file to mobile file info
-	 */
-	addMobileFileInfo: (file: any) => void;
-	/**
-	 * @internal Clear layout of workspace and destruct all leaves
-	 */
-	clearLayout: () => Promise<void>;
-	/**
-	 * @internal Create a leaf in the selected tab group or last used tab group
-	 * @param tabs Tab group to create leaf in
-	 */
-	createLeafInTabGroup: (tabs?: WorkspaceTabs) => WorkspaceLeaf;
-	/**
-	 * @internal Deserialize workspace entries into actual Leaf objects
-	 * @param leaf Leaf entry to deserialize
-	 * @param ribbon Whether the leaf belongs to the left or right ribbon
-	 */
-	deserializeLayout: (leaf: LeafEntry, ribbon?: "left" | "right") => Promise<WorkspaceLeaf>;
-	/**
-	 * @internal Reveal leaf in side ribbon with specified view type and state
-	 * @param type View type of leaf
-	 * @param ribbon Side ribbon to reveal leaf in
-	 * @param viewstate Open state of leaf
-	 */
-	ensureSideLeaf: (type: string, ribbon: "left" | "right", viewstate: OpenViewState) => void;
-	/**
-	 * Get active file view if exists
-	 */
-	getActiveFileView: () => FileView | null;
-	/**
-	 * @deprecated Use `getActiveViewOfType` instead
-	 */
-	getActiveLeafOfViewType<T extends View>(type: Constructor<T>): T | null;
-	/**
-	 * Get adjacent leaf in specified direction
-	 * @remark Potentially does not work
-	 */
-	getAdjacentLeafInDirection: (leaf: WorkspaceLeaf, direction: "top" | "bottom" | "left" | "right") => WorkspaceLeaf | null;
-	/**
-	 * @internal Get the direction where the leaf should be dropped on dragevent
-	 */
-	getDropDirection: (e: DragEvent, rect: DOMRect, directions: ["left", "right"], leaf: WorkspaceLeaf) => "left" | "right" | "top" | "bottom" | "center";
-	/**
-	 * @internal Get the leaf where the leaf should be dropped on dragevent
-	 * @param e Drag event
-	 */
-	getDropLocation: (e: DragEvent) => WorkspaceLeaf | null;
-	/**
-	 * Get the workspace split for the currently focused container
-	 */
-	getFocusedContainer: () => WorkspaceSplit;
-	/**
-	 * Get n last opened files of type (defaults to 10)
-	 */
-	getRecentFiles: ({showMarkdown: boolean, showCanvas: boolean, showNonImageAttachments: boolean, showImages: boolean, maxCount: number}?) => string[];
-	/**
-	 * Get leaf in the side ribbon/dock and split if necessary
-	 * @param sideRibbon Side ribbon to get leaf from
-	 * @param split Whether to split the leaf if it does not exist
-	 */
-	getSideLeaf: (sideRibbon: WorkspaceSidedock | WorkspaceMobileDrawer, split: boolean) => WorkspaceLeaf;
-	/**
-	 * @internal
-	 */
-	handleExternalLinkContextMenu: (menu: Menu, linkText: string) => void;
-	/**
-	 * @internal
-	 */
-	handleLinkContextMenu: (menu: Menu, linkText: string, sourcePath: string) => void;
-	/**
-	 * @internal Check if leaf has been attached to the workspace
-	 */
-	isAttached: (leaf?: WorkspaceLeaf) => boolean;
-	/**
-	 * Iterate the leaves of a split
-	 */
-	iterateLeaves: (split: WorkspaceSplit, callback: (leaf: WorkspaceLeaf) => any) => void;
-	/**
-	 * Iterate the tabs of a split till meeting a condition
-	 */
-	iterateTabs: (tabs: WorkspaceSplit | WorkspaceSplit[], cb: (leaf) => boolean) => boolean;
-	/**
-	 * @internal Load workspace from disk and initialize
-	 */
-	loadLayout: () => Promise<void>;
-	/**
-	 * @internal
-	 */
-	on: (args: any[]) => EventRef;
-	/**
-	 * @internal Handles drag event on leaf
-	 */
-	onDragLeaf: (e: DragEvent, leaf: WorkspaceLeaf) => void;
-	/**
-	 * @internal Handles layout change and saves layout to disk
-	 */
-	onLayoutChange: (leaf?: WorkspaceLeaf) => void;
-	/**
-	 * @internal
-	 */
-	onLinkContextMenu: (args: any[]) => void;
-	/**
-	 * @internal
-	 */
-	onQuickPreview: (args: any[]) => void;
-	/**
-	 * @internal
-	 */
-	onResize: () => void;
-	/**
-	 * @internal
- 	 */
-	onStartLink: (leaf: WorkspaceLeaf) => void;
-	/**
-	 * Open a leaf in a popup window
-	 * @remark Prefer usage of `app.workspace.openPopoutLeaf`
-	 */
-	openPopout: (data?: WorkspaceWindowInitData) => WorkspaceWindow;
-	/**
-	 * @internal Push leaf change to history
-	 */
-	pushUndoHistory: (leaf: WorkspaceLeaf, parentID: string, rootID: string) => void;
-	/**
-	 * @internal Get drag event target location
-	 */
-	recursiveGetTarget: (e: DragEvent, leaf: WorkspaceLeaf) => WorkspaceTabs | null;
-	/**
-	 * @internal Register a CodeMirror editor extension
-	 * @remark Prefer registering the extension via the Plugin class
-	 */
-	registerEditorExtension: (extension: Extension) => void;
-	/**
-	 * @internal Registers hover link source
-	 */
-	registerHoverLinkSource: (key: string, source: HoverLinkSource) => void;
-	/**
-	 * @internal Registers Obsidian protocol handler
-	 */
-	registerObsidianProtocolHandler: (protocol: string, handler: ObsidianProtocolHandler) => void;
-	/**
-	 * @internal Constructs hook for receiving URI actions
-	 */
-	registerUriHook: () => void;
-	/**
-	 * @internal Request execution of activeLeaf change events
-	 */
-	requestActiveLeafEvents: () => void;
-	/**
-	 * @internal Request execution of resize event
-	 */
-	requestResize: () => void;
-	/**
-	 * @internal Request execution of layout save event
-	 */
-	requestSaveLayout: () => void;
-	/**
-	 * @internal Request execution of layout update event
-	 */
-	requestUpdateLayout: () => void;
-	/**
-	 * Save workspace layout to disk
-	 */
-	saveLayout: () => Promise<void>;
-	/**
-	 * @internal Use deserialized layout data to reconstruct the workspace
-	 */
-	setLayout: (data: SerializedWorkspace) => Promise<void>;
-	/**
-	 * @internal Split leaves in specified direction
-	 */
-	splitLeaf: (leaf: WorkspaceLeaf, newleaf: WorkspaceLeaf, direction?: SplitDirection, before?: boolean) => void;
-	/**
-	 * Split provided leaf, or active leaf if none provided
-	 */
-	splitLeafOrActive: (leaf?: WorkspaceLeaf, direction?: SplitDirection) => void;
-	/**
-	 * @internal
-	 */
-	trigger: (e: any) => void;
-	/**
-	 * @internal Unregister a CodeMirror editor extension
-	 */
-	unregisterEditorExtension: (extension: Extension) => void;
-	/**
-	 * @internal Unregister hover link source
-	 */
-	unregisterHoverLinkSource: (key: string) => void;
-	/**
-	 * @internal Unregister Obsidian protocol handler
-	 */
-	unregisterObsidianProtocolHandler: (protocol: string) => void;
-	/**
-	 * @internal
-	 */
-	updateFrameless: () => void;
-	/**
-	 * @internal Invoke workspace layout update, redraw and save
-	 */
-	updateLayout: () => void;
-	/**
-	 * @internal Update visibility of tab group
-	 */
-	updateMobileVisibleTabGroup: () => void;
-	/**
-	 * Update the internal title of the application
-	 * @remark This title is shown as the application title in the OS taskbar
-	 */
-	updateTitle: () => void;
-}
-
 interface ImportedAttachments {
 	data: Promise<ArrayBuffer>;
 	extension: string;
@@ -3005,7 +1790,7 @@ declare module 'obsidian' {
 		 * @tutorial Use `app.vault.adapter` for accessing files outside the vault (desktop-only)
 		 * @remark Prefer using the regular `vault` whenever possible
 		 */
-		vault: EVault;
+		vault: Vault;
 		/**
 		 * Manages the construction of appropriate views when opening a file of a certain type
 		 * @remark Prefer usage of view registration via the Plugin class
@@ -3015,7 +1800,7 @@ declare module 'obsidian' {
 		 * Manages the workspace layout, construction, rendering and manipulation of leaves
 		 * @tutorial Used for accessing the active editor leaf, grabbing references to your views, ...
 		 */
-		workspace: EWorkspace;
+		workspace: Workspace;
 
 		/**
 		 * Sets the accent color of the application to the OS preference
@@ -3202,6 +1987,1212 @@ declare module 'obsidian' {
 		 */
 		updateViewHeaderDisplay: () => void;
 	}
+
+	interface Scope {
+		/**
+		 * Overridden keys that exist in this scope
+		 */
+		keys: KeyScope[];
+
+		/**
+		 * @internal Scope that this scope is a child of
+		 */
+		parent: EScope | undefined;
+		/**
+		 * @internal - Callback to execute when scope is matched
+		 */
+		cb: (() => boolean) | undefined;
+		/**
+		 * @internal
+		 */
+		tabFocusContainer: HTMLElement | null;
+		/**
+		 * @internal Execute keypress within this scope
+		 * @param event - Keyboard event
+		 * @param keypress - Pressed key information
+		 */
+		handleKey: (event: KeyboardEvent, keypress: KeymapInfo) => any;
+		/**
+		 * @internal
+		 * @deprecated - Executes same functionality as `Scope.register`
+		 */
+		registerKey: (modifiers: Modifier[], key: string | null, func: KeymapEventListener) => KeymapEventHandler;
+		/**
+		 * @internal
+		 */
+		setTabFocusContainer: (container: HTMLElement) => void;
+	}
+
+	class MetadataCache {
+		/**
+		 * Reference to App
+		 */
+		app: App;
+		/**
+		 * @internal
+		 */
+		blockCache: BlockCache;
+		/**
+		 * @internal IndexedDB database
+		 */
+		db: IDBDatabase
+		/**
+		 * @internal File contents cache
+		 */
+		fileCache: Record<string, FileCacheEntry>;
+		/**
+		 * @internal Amount of tasks currently in progress
+		 */
+		inProgressTaskCount: number;
+		/**
+		 * @internal Whether the cache is fully loaded
+		 */
+		initialized: boolean;
+		/**
+		 * @internal
+		 */
+		linkResolverQueue: any;
+		/**
+		 * @internal File hash to metadata cache entry mapping
+		 */
+		metadataCache: Record<string, CachedMetadata>;
+		/**
+		 * @internal Callbacks to execute on cache clean
+		 */
+		onCleanCacheCallbacks: any[];
+		/**
+		 * @internal Mapping of filename to collection of files that share the same name
+		 */
+		uniqueFileLookup: CustomArrayDict<string, TFile>;
+		/**
+		 * @internal
+		 */
+		userIgnoreFilterCache: any;
+		/**
+		 * @internal
+		 */
+		userIgnoreFilters: any;
+		/**
+		 * @internal
+		 */
+		userIgnoreFiltersString: string;
+		/**
+		 * Reference to Vault
+		 */
+		vault: Vault;
+		/**
+		 * @internal
+		 */
+		workQueue: any;
+		/**
+		 * @internal
+		 */
+		worker: Worker;
+		/**
+		 * @internal
+		 */
+		workerResolve: any;
+
+		/**
+		 * Get all property infos of the vault
+		 */
+		getAllPropertyInfos: () => Record<string, PropertyInfo>
+		/**
+		 * Get all backlink information for a file
+		 */
+		getBacklinksForFile: (file?: TFile) => CustomArrayDict<string, Reference>
+		/**
+		 * Get paths of all files cached in the vault
+		 */
+		getCachedFiles: () => string[];
+		/**
+		 * Get an entry from the file cache
+		 */
+		getFileInfo: (path: string) => FileCacheEntry;
+		/**
+		 * Get property values for frontmatter property key
+		 */
+		getFrontmatterPropertyValuesForKey: (key: string) => string[];
+		/**
+		 * Get all links (resolved or unresolved) in the vault
+		 */
+		getLinkSuggestions: () => { file: TFile | null, path: string }[];
+		/**
+		 * Get destination of link path
+		 */
+		getLinkpathDest: (origin: string = "", path: string) => TFile[];
+		/**
+		 * Get all links within the vault per file
+		 */
+		getLinks: () => Record<string, Reference[]>;
+		/**
+		 * Get all tags within the vault and their usage count
+		 */
+		getTags: () => Record<string, number>;
+
+		/**
+		 * @internal Clear all caches to null values
+		 */
+		cleanupDeletedCache: () => void;
+		/**
+		 * @internal
+		 */
+		clear: () => any;
+		/**
+		 * @internal
+		 */
+		computeMetadataAsync: (e: any) => Promise<any>;
+		/**
+		 * @internal Remove all entries that contain deleted path
+		 */
+		deletePath: (path: string) => void;
+		/**
+		 * @internal Initialize Database connection and load up caches
+		 */
+		initialize: () => Promise<void>;
+		/**
+		 * @internal Check whether there are no cache tasks in progress
+		 */
+		isCacheClean: () => boolean;
+		/**
+		 * @internal Check whether file can support metadata (by checking extension support)
+		 */
+		isSupportedFile: (file: TFile) => boolean;
+		/**
+		 * @internal Check whether string is part of the user ignore filters
+		 */
+		isUserIgnored: (filter: any) => boolean;
+		/**
+		 * Iterate over all link references in the vault with callback
+		 */
+		iterateReferences: (callback: (path: string) => void) => void;
+		/**
+		 * @internal
+		 */
+		linkResolver: () => void;
+		/**
+		 * @internal Execute onCleanCache callbacks if cache is clean
+		 */
+		onCleanCache: () => void;
+		/**
+		 * @internal On creation of the cache: update metadata cache
+		 */
+		onCreate: (file: TFile) => void;
+		/**
+		 * @internal On creation or modification of the cache: update metadata cache
+		 */
+		onCreateOrModify: (file: TFile) => void;
+		/**
+		 * @internal On deletion of the cache: update metadata cache
+		 */
+		onDelete: (file: TFile) => void;
+		/**
+		 * @internal
+		 */
+		onReceiveMessageFromWorker: (e: any) => void;
+		/**
+		 * @internal On rename of the cache: update metadata cache
+		 */
+		onRename: (file: TFile, oldPath: string) => void;
+		/**
+		 * @internal Check editor for unresolved links and mark these as unresolved
+		 */
+		resolveLinks: (editor: Element) => void;
+		/**
+		 * @internal Update file cache entry and sync to indexedDB
+		 */
+		saveFileCache: (path: string, entry: FileCacheEntry) => void;
+		/**
+		 * @internal Update metadata cache entry and sync to indexedDB
+		 */
+		saveMetaCache: (path: string, entry: CachedMetadata) => void;
+		/**
+		 * @internal Show a notice that the cache is being rebuilt
+		 */
+		showIndexingNotice: () => void;
+		/**
+		 * @internal
+		 */
+		trigger: (e: any) => void;
+		/**
+		 * @internal Re-resolve all links for changed path
+		 */
+		updateRelatedLinks: (path: string) => void;
+		/**
+		 * @internal Update user ignore filters from settings
+		 */
+		updateUserIgnoreFilters: () => void;
+		/**
+		 * @internal Bind actions to listeners on vault
+		 */
+		watchVaultChanges: () => void;
+		/**
+		 * @internal Send message to worker to update metadata cache
+		 */
+		work: (cacheEntry: any) => void;
+	}
+
+	interface SettingTab {
+		/**
+		 * Unique ID of the tab
+		 */
+		id: string;
+		/**
+		 * Sidebar name of the tab
+		 */
+		name: string;
+		/**
+		 * Sidebar navigation element of the tab
+		 */
+		navEl: HTMLElement;
+		/**
+		 * Reference to the settings modal
+		 */
+		setting: Setting;
+		/**
+		 * Reference to the plugin that initialised the tab
+		 * @if Tab is a plugin tab
+		 */
+		plugin?: Plugin;
+		/**
+		 * Reference to installed plugins element
+		 * @if Tab is the community plugins tab
+		 */
+		installedPluginsEl?: HTMLElement;
+
+		// TODO: Editor, Files & Links, Appearance and About all have private properties too
+	}
+
+	interface FileManager {
+		/**
+		 * Reference to App
+		 */
+		app: App;
+		/**
+		 * Creates a new Markdown file in specified location and opens it in a new view
+		 * @param path - Path to the file to create (missing folders will be created)
+		 * @param manner - Where to open the view containing the new file
+		 */
+		createAndOpenMarkdownFile: (path: string, location: PaneType) => Promise<void>;
+		/**
+		 * Create a new file in the vault at specified location
+		 * @param location - Location to create the file in, defaults to root
+		 * @param filename - Name of the file to create, defaults to "Untitled" (incremented if file already exists)
+		 * @param extension - Extension of the file to create, defaults to "md"
+		 * @param contents - Contents of the file to create, defaults to empty string
+		 */
+		createNewFile: (location: TFolder = null, filename: string = null, extension: string = "md", contents: string = "") => Promise<TFile>;
+		/**
+		 * Creates a new untitled folder in the vault at specified location
+		 * @param location - Location to create the folder in, defaults to root
+		 */
+		createNewFolder: (location: TFolder = null) => Promise<TFolder>;
+		/**
+		 * Creates a new Markdown file in the vault at specified location
+		 */
+		createNewMarkdownFile: (location: TFolder = null, filename: string = null, contents: string = "") => Promise<TFile>;
+		/**
+		 * Creates a new Markdown file based on linktext and path
+		 * @param filename - Name of the file to create
+		 * @param path - Path to where the file should be created
+		 */
+		createNewMarkdownFileFromLinktext: (filename: string, path: string) => Promise<TFile>;
+		/**
+		 * @internal
+		 */
+		getAllLinkResolutions: () => [];
+		/**
+		 * Gets the folder that new markdown files should be saved to, based on the current settings
+		 * @param path - The path of the current opened/focused file, used when the user
+		 * 				wants new files to be created in the same folder as the current file
+		 */
+		getMarkdownNewFileParent: (path: string) => TFolder;
+		/**
+		 * Insert text into a file
+		 * @param file - File to insert text into
+		 * @param primary_text - Text to insert (will not be inserted if secondary_text exists)
+		 * @param basename - ???
+		 * @param secondary_text - Text to insert (always inserted)
+		 * @param atStart - Whether to insert text at the start or end of the file
+		 */
+		insertTextIntoFile: (file: TFile, primary_text: string, basename: string, secondary_text: string, atStart: boolean = true) => Promise<void>;
+		/**
+		 * Iterate over all links in the vault with callback
+		 * @param callback - Callback to execute for each link
+		 */
+		iterateAllRefs: (callback: (path: string, link: PositionedReference) => void) => void;
+		/**
+		 * Merge two files
+		 * @param file - File to merge to
+		 * @param otherFile - File to merge from
+		 * @param override - If not empty, will override the contents of the file with this string
+		 * @param atStart - Whether to insert text at the start or end of the file
+		 */
+		mergeFile: (file: TFile, otherFile: TFile, override: string, atStart: boolean) => Promise<void>;
+		/**
+		 * Prompt the user to delete a file
+		 */
+		promptForDeletion: (file: TFile) => Promise<void>;
+		/**
+		 * Prompt the user to rename a file
+		 */
+		promptForFileRename: (file: TFile) => Promise<void>;
+		/**
+		 * @internal
+		 * Register an extension to be the parent for a specific file type
+		 */
+		registerFileParentCreator: (extension: string, location: TFolder) => void;
+		/**
+		 * @internal
+		 * @param callback - Callback to execute for each link
+		 */
+		runAsyncLinkUpdate: (callback: (link: LinkUpdate) => any) => void;
+		/**
+		 * @internal
+		 * @param path
+		 * @param data
+		 */
+		storeTextFileBackup: (path: string, data: string) => void;
+		/**
+		 * Remove a file and put it in the trash (no confirmation modal)
+		 */
+		trashFile: (file: TFile) => Promise<void>;
+		/**
+		 * @internal: Unregister extension as root input directory for file type
+		 */
+		unregisterFileCreator: (extension: string) => void;
+		/**
+		 * @internal
+		 */
+		updateAllLinks: (links: any[]) => Promise<void>;
+		/**
+		 * @internal
+		 */
+		updateInternalLinks: (data: any) => any;
+
+		/**
+		 * @internal
+		 */
+		fileParentCreatorByType: Map<string, (e) => any>;
+		/**
+		 * @internal
+		 */
+		inProgressUpdates: null | any[];
+		/**
+		 * @internal
+		 */
+		linkUpdaters: Map<string, (e) => any>;
+		/**
+		 * @internal
+		 */
+		updateQueue: Map<string, (e) => any>;
+		/**
+		 * Reference to Vault
+		 */
+		vault: Vault;
+	}
+
+	interface Modal {
+		/**
+		 * @internal Background applied to application to dim it
+		 */
+		bgEl: HTMLElement;
+		/**
+		 * @internal Opacity percentage of the background
+		 */
+		bgOpacity: number;
+		/**
+		 * @internal Whether the background is being dimmed
+		 */
+		dimBackground: boolean;
+		/**
+		 * @internal Modal container element
+		 */
+		modalEl: HTMLElement;
+		/**
+		 * @internal Selection logic handler
+		 */
+		selection: WindowSelection;
+		/**
+		 * Reference to the global Window object
+		 */
+		win: Window;
+
+		/**
+		 * @internal On escape key press close modal
+		 */
+		onEscapeKey: () => void;
+		/**
+		 * @internal On closing of the modal
+		 */
+		onWindowClose: () => void;
+		/**
+		 * @internal Set the background opacity of the dimmed background
+		 * @param opacity Opacity percentage
+		 */
+		setBackgroundOpacity: (opacity: string) => this;
+		/**
+		 * @internal Set the content of the modal
+		 * @param content Content to set
+		 */
+		setContent: (content: HTMLElement | string) => this;
+		/**
+		 * @internal Set whether the background should be dimmed
+		 * @param dim Whether the background should be dimmed
+		 */
+		setDimBackground: (dim: boolean) => this;
+		/**
+		 * @internal Set the title of the modal
+		 * @param title Title to set
+		 */
+		setTitle: (title: string) => this;
+	}
+
+
+	interface Setting extends Modal {
+		/**
+		 * Current active tab of the settings modal
+		 */
+		activateTab: ESettingTab;
+		/**
+		 * @internal Container element containing the community plugins
+		 */
+		communityPluginTabContainer: HTMLElement;
+		/**
+		 * @internal Container element containing the community plugins header
+		 */
+		communityPluginTabHeaderGroup: HTMLElement;
+		/**
+		 * Previously opened tab ID
+		 */
+		lastTabId: string;
+		/**
+		 * List of all plugin tabs (core and community, ordered by precedence)
+		 */
+		pluginTabs: ESettingTab[];
+		/**
+		 * List of all core settings tabs (editor, files & links, ...)
+		 */
+		settingTabs: ESettingTab[];
+		/**
+		 * @internal Container element containing the core settings
+		 */
+		tabContainer: HTMLElement;
+		/**
+		 * @internal Container for currently active settings tab
+		 */
+		tabContentContainer: HTMLElement;
+		/**
+		 * @internal Container for all settings tabs
+		 */
+		tabHeadersEl: HTMLElement;
+
+		/**
+		 * Open a specific tab by ID
+		 * @param id ID of the tab to open
+		 */
+		openTabById: (id: string) => void;
+		/**
+		 * @internal Add a new plugin tab to the settings modal
+		 * @param tab Tab to add
+		 */
+		addSettingTab: (tab: ESettingTab) => void;
+		/**
+		 * @internal Closes the currently active tab
+		 */
+		closeActiveTab: () => void;
+		/**
+		 * @internal Check whether tab is a plugin tab
+		 * @param tab Tab to check
+		 */
+		isPluginSettingTab: (tab: ESettingTab) => boolean;
+		/**
+		 * @internal Open a specific tab by tab reference
+		 * @param tab Tab to open
+		 */
+		openTab: (tab: ESettingTab) => void;
+		/**
+		 * @internal Remove a plugin tab from the settings modal
+		 * @param tab Tab to remove
+		 */
+		removeSettingTab: (tab: ESettingTab) => void;
+		/**
+		 * @internal Update the title of the modal
+		 * @param tab Tab to update the title to
+		 */
+		updateModalTitle: (tab: ESettingTab) => void;
+		/**
+		 * @internal Update a tab section
+		 */
+		updatePluginSection: () => void;
+	}
+
+	interface DataAdapter {
+		/**
+		 * Base OS path for the vault (e.g. /home/user/vault, or C:\Users\user\documents\vault)
+		 */
+		basePath: string;
+		/**
+		 * @internal
+		 */
+		btime: {btime: (path: string, btime: number) => void};
+		/**
+		 * Mapping of file/folder path to vault entry, includes non-MD files
+		 */
+		files: Record<string, FileEntry>;
+		/**
+		 * Reference to node fs module
+		 */
+		fs?: fs;
+		/**
+		 * Reference to node fs:promises module
+		 */
+		fsPromises?: fsPromises;
+		/**
+		 * @internal
+		 */
+		insensitive: boolean;
+		/**
+		 * Reference to electron ipcRenderer module
+		 */
+		ipcRenderer?: IpcRenderer;
+		/**
+		 * Reference to node path module
+		 */
+		path: path;
+		/**
+		 * @internal
+		 */
+		promise: Promise<any>;
+		/**
+		 * Reference to node URL module
+		 */
+		url: URL;
+		/**
+		 * @internal
+		 */
+		watcher: any;
+		/**
+		 * @internal
+		 */
+		watchers: Record<string, {resolvedPath: string, watcher: any}>;
+
+		/**
+		 * @internal Apply data write options to file
+		 * @param normalizedPath Path to file
+		 * @param options Data write options
+		 */
+		applyWriteOptions: (normalizedPath: string, options: DataWriteOptions) => Promise<void>;
+		/**
+		 * Get base path of vault (OS path)
+		 */
+		getBasePath: () => string;
+		/**
+		 * Get full path of file (OS path)
+		 * @param normalizedPath Path to file
+		 * @return URL path to file
+		 */
+		getFilePath: (normalizedPath: string) => URL;
+		/**
+		 * Get full path of file (OS path)
+		 * @param normalizedPath Path to file
+		 * @return string full path to file
+		 */
+		getFullPath: (normalizedPath: string) => string;
+		/**
+		 * Get full path of file (OS path)
+		 * @param normalizedPath Path to file
+		 * @return string full path to file
+		 */
+		getFullRealPath: (normalizedPath: string) => string;
+		/**
+		 * @internal Get resource path of file (URL path)
+		 * @param normalizedPath Path to file
+		 * @return string URL of form: app://FILEHASH/path/to/file
+		 */
+		getResourcePath: (normalizedPath: string) => string;
+		/**
+		 * @internal Handles vault events
+		 */
+		handler: () => void;
+		/**
+		 * @internal Kill file system action due to timeout
+		 */
+		kill: () => void;
+		/**
+		 * @internal
+		 */
+		killLastAction: () => void;
+		/**
+		 * @internal Generates `this.files` from the file system
+		 */
+		listAll: () => Promise<void>;
+		/**
+		 * @internal Generates `this.files` for specific directory of the vault
+		 */
+		listRecursive: (normalizedPath: string) => Promise<void>;
+		/**
+		 * @internal Helper function for `listRecursive` reads children of directory
+		 * @param normalizedPath Path to directory
+		 */
+		listRecursiveChild: (normalizedPath: string) => Promise<void>;
+		/**
+		 * @internal
+		 */
+		onFileChange: (normalizedPath: string) => void;
+		/**
+		 * @internal
+		 */
+		queue: (cb: any) => Promise<void>;
+
+		/**
+		 * @internal
+		 */
+		reconcileDeletion: (normalizedPath: string, normalizedNewPath: string, option: boolean) => void;
+		/**
+		 * @internal
+		 */
+		reconcileFile: (normalizedPath: string, normalizedNewPath: string, option: boolean) => void;
+		/**
+		 * @internal
+		 */
+		reconcileFileCreation: (normalizedPath: string, normalizedNewPath: string, option: boolean) => void;
+		/**
+		 * @internal
+		 */
+		reconcileFileInternal: (normalizedPath: string, normalizedNewPath: string) => void;
+		/**
+		 * @internal
+		 */
+		reconcileFolderCreation: (normalizedPath: string, normalizedNewPath: string) => void;
+		/**
+		 * @internal
+		 */
+		reconcileInternalFile: (normalizedPath: string) => void;
+		/**
+		 * @internal
+		 */
+		reconcileSymbolicLinkCreation: (normalizedPath: string, normalizedNewPath: string) => void;
+		/**
+		 * @internal Remove file from files listing and trigger deletion event
+		 */
+		removeFile: (normalizedPath: string) => void;
+		/**
+		 * @internal
+		 */
+		startWatchpath: (normalizedPath: string) => Promise<void>;
+		/**
+		 * @internal Remove all listeners
+		 */
+		stopWatch: () => void;
+		/**
+		 * @internal Remove listener on specific path
+		 */
+		stopWatchPath: (normalizedPath: string) => void;
+		/**
+		 * @internal Set whether OS is insensitive to case
+		 */
+		testInsensitive: () => void;
+		/**
+		 * @internal
+		 */
+		thingsHappening: () => void;
+		/**
+		 * @internal Trigger an event on handler
+		 */
+		trigger: (any) => void;
+		/**
+		 * @internal
+		 */
+		update: (normalizedPath: string) => any;
+		/**
+		 * @internal Add change watcher to path
+		 */
+		watch: (normalizedPath: string) => Promise<void>;
+		/**
+		 * @internal Watch recursively for changes
+		 */
+		watchHiddenRecursive: (normalizedPath: string) => Promise<void>;
+	}
+
+	interface Workspace {
+		/**
+		 * Currently active tab group
+		 */
+		activeTabGroup: WorkspaceTabs;
+		/**
+		 * Reference to App
+		 */
+		app: App;
+		/**
+		 * @internal
+		 */
+		backlinkInDocument?: any;
+		/**
+		 * Registered CodeMirror editor extensions, to be applied to all CM instances
+		 */
+		editorExtensions: Extension[];
+		/**
+		 * @internal
+		 */
+		editorSuggest: {currentSuggest?: EditorSuggest<any>, suggests: EditorSuggest<any>[]};
+		/**
+		 * @internal
+		 */
+		floatingSplit: WorkspaceSplit;
+		/**
+		 * @internal
+		 */
+		hoverLinkSources: Record<string, HoverLinkSource>;
+		/**
+		 * Last opened file in the vault
+		 */
+		lastActiveFile: TFile;
+		/**
+		 * @internal
+		 */
+		lastTabGroupStacked: boolean;
+		/**
+		 * @internal
+		 */
+		layoutItemQueue: any[];
+		/**
+		 * Workspace has finished loading
+		 */
+		layoutReady: boolean;
+		/**
+		 * @internal
+		 */
+		leftSidebarToggleButtonEl: HTMLElement;
+		/**
+		 * @internal Array of renderCallbacks
+		 */
+		mobileFileInfos: any[];
+		/**
+		 * @internal
+		 */
+		onLayoutReadyCallbacks?: any;
+		/**
+		 * Protocol handlers registered on the workspace
+		 */
+		protocolHandlers: Map<string, ObsidianProtocolHandler>;
+		/**
+		 * Tracks last opened files in the vault
+		 */
+		recentFileTracker: RecentFileTracker;
+		/**
+		 * @internal
+		 */
+		rightSidebarToggleButtonEl: HTMLElement;
+		/**
+		 * @internal Keyscope registered to the vault
+		 */
+		scope: EScope;
+		/**
+		 * List of states that were closed and may be reopened
+		 */
+		undoHistory: StateHistory[];
+
+		/**
+		 * @internal Change active leaf and trigger leaf change event
+		 */
+		activeLeafEvents: () => void;
+		/**
+		 * @internal Add file to mobile file info
+		 */
+		addMobileFileInfo: (file: any) => void;
+		/**
+		 * @internal Clear layout of workspace and destruct all leaves
+		 */
+		clearLayout: () => Promise<void>;
+		/**
+		 * @internal Create a leaf in the selected tab group or last used tab group
+		 * @param tabs Tab group to create leaf in
+		 */
+		createLeafInTabGroup: (tabs?: WorkspaceTabs) => WorkspaceLeaf;
+		/**
+		 * @internal Deserialize workspace entries into actual Leaf objects
+		 * @param leaf Leaf entry to deserialize
+		 * @param ribbon Whether the leaf belongs to the left or right ribbon
+		 */
+		deserializeLayout: (leaf: LeafEntry, ribbon?: "left" | "right") => Promise<WorkspaceLeaf>;
+		/**
+		 * @internal Reveal leaf in side ribbon with specified view type and state
+		 * @param type View type of leaf
+		 * @param ribbon Side ribbon to reveal leaf in
+		 * @param viewstate Open state of leaf
+		 */
+		ensureSideLeaf: (type: string, ribbon: "left" | "right", viewstate: OpenViewState) => void;
+		/**
+		 * Get active file view if exists
+		 */
+		getActiveFileView: () => FileView | null;
+		/**
+		 * @deprecated Use `getActiveViewOfType` instead
+		 */
+		getActiveLeafOfViewType<T extends View>(type: Constructor<T>): T | null;
+		/**
+		 * Get adjacent leaf in specified direction
+		 * @remark Potentially does not work
+		 */
+		getAdjacentLeafInDirection: (leaf: WorkspaceLeaf, direction: "top" | "bottom" | "left" | "right") => WorkspaceLeaf | null;
+		/**
+		 * @internal Get the direction where the leaf should be dropped on dragevent
+		 */
+		getDropDirection: (e: DragEvent, rect: DOMRect, directions: ["left", "right"], leaf: WorkspaceLeaf) => "left" | "right" | "top" | "bottom" | "center";
+		/**
+		 * @internal Get the leaf where the leaf should be dropped on dragevent
+		 * @param e Drag event
+		 */
+		getDropLocation: (e: DragEvent) => WorkspaceLeaf | null;
+		/**
+		 * Get the workspace split for the currently focused container
+		 */
+		getFocusedContainer: () => WorkspaceSplit;
+		/**
+		 * Get n last opened files of type (defaults to 10)
+		 */
+		getRecentFiles: ({showMarkdown: boolean, showCanvas: boolean, showNonImageAttachments: boolean, showImages: boolean, maxCount: number}?) => string[];
+		/**
+		 * Get leaf in the side ribbon/dock and split if necessary
+		 * @param sideRibbon Side ribbon to get leaf from
+		 * @param split Whether to split the leaf if it does not exist
+		 */
+		getSideLeaf: (sideRibbon: WorkspaceSidedock | WorkspaceMobileDrawer, split: boolean) => WorkspaceLeaf;
+		/**
+		 * @internal
+		 */
+		handleExternalLinkContextMenu: (menu: Menu, linkText: string) => void;
+		/**
+		 * @internal
+		 */
+		handleLinkContextMenu: (menu: Menu, linkText: string, sourcePath: string) => void;
+		/**
+		 * @internal Check if leaf has been attached to the workspace
+		 */
+		isAttached: (leaf?: WorkspaceLeaf) => boolean;
+		/**
+		 * Iterate the leaves of a split
+		 */
+		iterateLeaves: (split: WorkspaceSplit, callback: (leaf: WorkspaceLeaf) => any) => void;
+		/**
+		 * Iterate the tabs of a split till meeting a condition
+		 */
+		iterateTabs: (tabs: WorkspaceSplit | WorkspaceSplit[], cb: (leaf) => boolean) => boolean;
+		/**
+		 * @internal Load workspace from disk and initialize
+		 */
+		loadLayout: () => Promise<void>;
+		/**
+		 * @internal
+		 */
+		on: (args: any[]) => EventRef;
+		/**
+		 * @internal Handles drag event on leaf
+		 */
+		onDragLeaf: (e: DragEvent, leaf: WorkspaceLeaf) => void;
+		/**
+		 * @internal Handles layout change and saves layout to disk
+		 */
+		onLayoutChange: (leaf?: WorkspaceLeaf) => void;
+		/**
+		 * @internal
+		 */
+		onLinkContextMenu: (args: any[]) => void;
+		/**
+		 * @internal
+		 */
+		onQuickPreview: (args: any[]) => void;
+		/**
+		 * @internal
+		 */
+		onResize: () => void;
+		/**
+		 * @internal
+		 */
+		onStartLink: (leaf: WorkspaceLeaf) => void;
+		/**
+		 * Open a leaf in a popup window
+		 * @remark Prefer usage of `app.workspace.openPopoutLeaf`
+		 */
+		openPopout: (data?: WorkspaceWindowInitData) => WorkspaceWindow;
+		/**
+		 * @internal Push leaf change to history
+		 */
+		pushUndoHistory: (leaf: WorkspaceLeaf, parentID: string, rootID: string) => void;
+		/**
+		 * @internal Get drag event target location
+		 */
+		recursiveGetTarget: (e: DragEvent, leaf: WorkspaceLeaf) => WorkspaceTabs | null;
+		/**
+		 * @internal Register a CodeMirror editor extension
+		 * @remark Prefer registering the extension via the Plugin class
+		 */
+		registerEditorExtension: (extension: Extension) => void;
+		/**
+		 * @internal Registers hover link source
+		 */
+		registerHoverLinkSource: (key: string, source: HoverLinkSource) => void;
+		/**
+		 * @internal Registers Obsidian protocol handler
+		 */
+		registerObsidianProtocolHandler: (protocol: string, handler: ObsidianProtocolHandler) => void;
+		/**
+		 * @internal Constructs hook for receiving URI actions
+		 */
+		registerUriHook: () => void;
+		/**
+		 * @internal Request execution of activeLeaf change events
+		 */
+		requestActiveLeafEvents: () => void;
+		/**
+		 * @internal Request execution of resize event
+		 */
+		requestResize: () => void;
+		/**
+		 * @internal Request execution of layout save event
+		 */
+		requestSaveLayout: () => void;
+		/**
+		 * @internal Request execution of layout update event
+		 */
+		requestUpdateLayout: () => void;
+		/**
+		 * Save workspace layout to disk
+		 */
+		saveLayout: () => Promise<void>;
+		/**
+		 * @internal Use deserialized layout data to reconstruct the workspace
+		 */
+		setLayout: (data: SerializedWorkspace) => Promise<void>;
+		/**
+		 * @internal Split leaves in specified direction
+		 */
+		splitLeaf: (leaf: WorkspaceLeaf, newleaf: WorkspaceLeaf, direction?: SplitDirection, before?: boolean) => void;
+		/**
+		 * Split provided leaf, or active leaf if none provided
+		 */
+		splitLeafOrActive: (leaf?: WorkspaceLeaf, direction?: SplitDirection) => void;
+		/**
+		 * @internal
+		 */
+		trigger: (e: any) => void;
+		/**
+		 * @internal Unregister a CodeMirror editor extension
+		 */
+		unregisterEditorExtension: (extension: Extension) => void;
+		/**
+		 * @internal Unregister hover link source
+		 */
+		unregisterHoverLinkSource: (key: string) => void;
+		/**
+		 * @internal Unregister Obsidian protocol handler
+		 */
+		unregisterObsidianProtocolHandler: (protocol: string) => void;
+		/**
+		 * @internal
+		 */
+		updateFrameless: () => void;
+		/**
+		 * @internal Invoke workspace layout update, redraw and save
+		 */
+		updateLayout: () => void;
+		/**
+		 * @internal Update visibility of tab group
+		 */
+		updateMobileVisibleTabGroup: () => void;
+		/**
+		 * Update the internal title of the application
+		 * @remark This title is shown as the application title in the OS taskbar
+		 */
+		updateTitle: () => void;
+	}
+
+
+	interface Vault {
+		/**
+		 * Low-level file system adapter for read and write operations
+		 * @tutorial Can be used to read binaries, or files not located directly within the vault
+		 */
+		adapter: DataAdapter;
+		/**
+		 * @internal Max size of the cache in bytes
+		 */
+		cacheLimit: number;
+		/**
+		 * Object containing all config settings for the vault (editor, appearance, ... settings)
+		 * @remark Prefer usage of `app.vault.getConfig(key)` to get settings, config does not contain
+		 * 		   settings that were not changed from their default value
+		 */
+		config: AppVaultConfig;
+		/**
+		 * @internal Timestamp of the last config change
+		 */
+		configTs: number;
+		/**
+		 * @internal Mapping of path to Obsidian folder or file structure
+		 */
+		fileMap: Record<string, TAbstractFile>;
+
+
+		on(name: 'config-changed', callback: () => void, ctx?: any): EventRef;
+
+		/**
+		 * @internal Add file as child/parent to respective folders
+		 */
+		addChild: (file: TAbstractFile) => void;
+		/**
+		 * @internal Check whether new file path is available
+		 */
+		checkForDuplicate: (file: TAbstractFile, newPath: string) => boolean;
+		/**
+		 * @internal Check whether path has valid formatting (no dots/spaces at end, ...)
+		 */
+		checkPath: (path: string) => boolean;
+		/**
+		 * @internal Remove a vault config file
+		 */
+		deleteConfigJson: (configFile: string) => Promise<void>;
+		/**
+		 * Check whether a file exists in the vault
+		 */
+		exists: (file: TAbstractFile, senstive?: boolean) => Promise<boolean>;
+		/**
+		 * @internal
+		 */
+		generateFiles: (any) => Promise<void>;
+		/**
+		 * Get an abstract file by path, insensitive to case
+		 */
+		getAbstractFileByPathInsensitive: (path: string) => TAbstractFile | null;
+		/**
+		 * @internal Get path for file that does not conflict with other existing files
+		 */
+		getAvailablePath: (path: string, extension: string) => string;
+		/**
+		 * @internal Get path for attachment that does not conflict with other existing files
+		 */
+		getAvailablePathForAttachments: (filename: string, file: TAbstractFile, extension: string) => string;
+		/**
+		 * Get value from config by key
+		 * @remark Default value will be selected if config value was not manually changed
+		 * @param key Key of config value
+		 */
+		getConfig: (string: ConfigItem) => any;
+		/**
+		 * Get path to config file (relative to vault root)
+		 */
+		getConfigFile: (configFile: string) => string;
+		/**
+		 * Get direct parent of file
+		 * @param file File to get parent of
+		 */
+		getDirectParent: (file: TAbstractFile) => TFolder | null;
+		/**
+		 * @internal Check whether files map cache is empty
+		 */
+		isEmpty: () => boolean;
+		/**
+		 * @internal Iterate over the files and read them
+		 */
+		iterateFiles: (files: TFile[], cachedRead: boolean) => void;
+		/**
+		 * @internal Load vault adapter
+		 */
+		load: () => Promise<void>;
+		/**
+		 * @internal Listener for all events on the vault
+		 */
+		onChange: (eventType: string, path: string, x: any, y: any) => void;
+		/**
+		 * Read a config file from the vault and parse it as JSON
+		 * @param config Name of config file
+		 */
+		readConfigJson: (config: string) => Promise<null | object>;
+		/**
+		 * Read a config file (full path) from the vault and parse it as JSON
+		 * @param path Full path to config file
+		 */
+		readJson: (path: string) => Promise<null | object>;
+		/**
+		 * Read a plugin config file (full path relative to vault root) from the vault and parse it as JSON
+		 * @param path Full path to plugin config file
+		 */
+		readPluginData: (path: string) => Promise<null | object>;
+		/**
+		 * Read a file from the vault as a string
+		 * @param path Path to file
+		 */
+		readRaw: (path: string) => Promise<string>;
+		/**
+		 * @internal Reload all config files
+		 */
+		reloadConfig: () => void;
+		/**
+		 * @internal Remove file as child/parent from respective folders
+		 * @param file File to remove
+		 */
+		removeChild: (file: TAbstractFile) => void;
+		/**
+		 * @internal Get the file by absolute path
+		 * @param path Path to file
+		 */
+		resolveFilePath: (path: string) => TAbstractFile | null;
+		/**
+		 * @internal Get the file by Obsidian URL
+		 */
+		resolveFileUrl: (url: string) => TAbstractFile | null;
+		/**
+		 * @internal Debounced function for saving config
+		 */
+		requestSaveConfig: () => void;
+		/**
+		 * @internal Save app and appearance configs to disk
+		 */
+		saveConfig: () => Promise<void>;
+		/**
+		 * Set value of config by key
+		 * @param key Key of config value
+		 * @param value Value to set
+		 */
+		setConfig: (key: ConfigItem, value: any) => void;
+		/**
+		 * Set where the config files are stored (relative to vault root)
+		 * @param configDir Path to config files
+		 */
+		setConfigDir: (configDir: string) => void;
+		/**
+		 * @internal Set file cache limit
+		 */
+		setFileCacheLimit: (limit: number) => void;
+		/**
+		 * @internal Load all config files into memory
+		 */
+		setupConfig: () => Promise<void>;
+		/**
+		 * @internal Trigger an event on handler
+		 */
+		trigger: (type: string) => void;
+		/**
+		 * Write a config file to disk
+		 * @param config Name of config file
+		 * @param data Data to write
+		 */
+		writeConfigJson: (config: string, data: object) => Promise<void>;
+		/**
+		 * Write a config file (full path) to disk
+		 * @param path Full path to config file
+		 * @param data Data to write
+		 * @param pretty Whether to insert tabs or spaces
+		 */
+		writeJson: (path: string, data: object, pretty?: boolean) => Promise<void>;
+		/**
+		 * Write a plugin config file (path relative to vault root) to disk
+		 */
+		writePluginData: (path: string, data: object) => Promise<void>;
+	}
+
+
 
 	// TODO: Add missing elements to other Obsidian interfaces and classes
 
