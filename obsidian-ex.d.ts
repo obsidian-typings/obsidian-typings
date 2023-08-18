@@ -2,30 +2,46 @@ import {
 	App,
 	CachedMetadata,
 	Command,
+	Constructor,
 	DataAdapter,
 	DataWriteOptions,
+	EditorRange,
+	EditorSuggest,
 	EventRef,
 	Events,
 	FileManager,
+	FileView,
 	KeymapEventHandler,
 	KeymapEventListener,
 	KeymapInfo,
-	Loc,
+	Loc, Menu,
 	MetadataCache,
 	Modifier,
+	ObsidianProtocolHandler,
+	OpenViewState,
 	PaneType,
 	Plugin,
 	Reference,
 	Scope,
 	SettingTab,
+	SplitDirection,
 	TAbstractFile,
 	TFile,
+	TFolder,
 	Vault,
 	View,
-	WorkspaceLeaf,
+	ViewState, Workspace,
+	WorkspaceLeaf, WorkspaceMobileDrawer,
+	WorkspaceParent,
+	WorkspaceSidedock,
+	WorkspaceSplit,
+	WorkspaceTabs,
+	WorkspaceWindow,
+	WorkspaceWindowInitData,
 } from 'obsidian';
 import { EditorView } from '@codemirror/view';
-import { EditorState } from '@codemirror/state';
+import { EditorState, Extension } from '@codemirror/state';
+import * as CodeMirror from 'codemirror';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -1953,7 +1969,7 @@ interface AppVaultConfig {
 	/**
 	 * @deprecated Probably left-over code from old properties type storage
 	 */
-	types: {};
+	types: object;
 	/**
 	 * Files & Links > Use [[Wikilinks]]
 	 */
@@ -2187,192 +2203,670 @@ interface EDataAdapter extends DataAdapter {
 
 
 interface EVault extends Vault {
+	/**
+	 * Low-level file system adapter for read and write operations
+	 * @tutorial Can be used to read binaries, or files not located directly within the vault
+	 */
 	adapter: EDataAdapter;
+	/**
+	 * @internal Max size of the cache in bytes
+	 */
 	cacheLimit: number;
+	/**
+	 * Object containing all config settings for the vault (editor, appearance, ... settings)
+	 * @remark Prefer usage of `app.vault.getConfig(key)` to get settings, config does not contain
+	 * 		   settings that were not changed from their default value
+	 */
 	config: AppVaultConfig;
+	/**
+	 * @internal Timestamp of the last config change
+	 */
 	configTs: number;
+	/**
+	 * @internal Mapping of path to Obsidian folder or file structure
+	 */
 	fileMap: Record<string, TAbstractFile>;
 
 
 	on(name: 'config-changed', callback: () => void, ctx?: any): EventRef;
 
-
-	addChild
-	append
-	cachedRead
-	checkForDuplicate
-	checkPath
-	copy
-	create
-	createBinary
-	createFolder
-	delete
-	deleteConfigJson
-	exists
-	generateFiles
-	getAbstractFileByPath
-	getAbstractFileByPathInsensitive
-	getAllLoadedFiles
-	getAvailablePath
-	getAvailablePathForAttachments
-	getConfig: (key: ConfigItem) => any;
-	getConfigFile
-	getDirectParent
-	getFiles
-	getMarkdownFiles
-	getName
-	getResourcePath
-	getRoot
-	isEmpty
-	iterateFiles
-	load
-	modify
-	modifyBinary
-	on
-	onChange
-	process
-	read
-	readBinary
-	readConfigJson
-	readJson
-	readPluginData
-	readRaw
-	reloadConfig
-	removeChild
-	rename
-	resolveFilePath
-	resolveFileUrl
-	requestSaveConfig
-	saveConfig
+	/**
+	 * @internal Add file as child/parent to respective folders
+	 */
+	addChild: (file: TAbstractFile) => void;
+	/**
+	 * @internal Check whether new file path is available
+	 */
+	checkForDuplicate: (file: TAbstractFile, newPath: string) => boolean;
+	/**
+	 * @internal Check whether path has valid formatting (no dots/spaces at end, ...)
+	 */
+	checkPath: (path: string) => boolean;
+	/**
+	 * @internal Remove a vault config file
+	 */
+	deleteConfigJson: (configFile: string) => Promise<void>;
+	/**
+	 * Check whether a file exists in the vault
+	 */
+	exists: (file: TAbstractFile, senstive?: boolean) => Promise<boolean>;
+	/**
+	 * @internal
+	 */
+	generateFiles: (any) => Promise<void>;
+	/**
+	 * Get an abstract file by path, insensitive to case
+	 */
+	getAbstractFileByPathInsensitive: (path: string) => TAbstractFile | null;
+	/**
+	 * @internal Get path for file that does not conflict with other existing files
+	 */
+	getAvailablePath: (path: string, extension: string) => string;
+	/**
+	 * @internal Get path for attachment that does not conflict with other existing files
+	 */
+	getAvailablePathForAttachments: (filename: string, file: TAbstractFile, extension: string) => string;
+	/**
+	 * Get value from config by key
+	 * @remark Default value will be selected if config value was not manually changed
+	 * @param key Key of config value
+	 */
+	getConfig: (string: ConfigItem) => any;
+	/**
+	 * Get path to config file (relative to vault root)
+	 */
+	getConfigFile: (configFile: string) => string;
+	/**
+	 * Get direct parent of file
+	 * @param file File to get parent of
+	 */
+	getDirectParent: (file: TAbstractFile) => TFolder | null;
+	/**
+	 * @internal Check whether files map cache is empty
+	 */
+	isEmpty: () => boolean;
+	/**
+	 * @internal Iterate over the files and read them
+	 */
+	iterateFiles: (files: TFile[], cachedRead: boolean) => void;
+	/**
+	 * @internal Load vault adapter
+	 */
+	load: () => Promise<void>;
+	/**
+	 * @internal Listener for all events on the vault
+	 */
+	onChange: (eventType: string, path: string, x: any, y: any) => void;
+	/**
+	 * Read a config file from the vault and parse it as JSON
+	 * @param config Name of config file
+	 */
+	readConfigJson: (config: string) => Promise<null | object>;
+	/**
+	 * Read a config file (full path) from the vault and parse it as JSON
+	 * @param path Full path to config file
+	 */
+	readJson: (path: string) => Promise<null | object>;
+	/**
+	 * Read a plugin config file (full path relative to vault root) from the vault and parse it as JSON
+	 * @param path Full path to plugin config file
+	 */
+	readPluginData: (path: string) => Promise<null | object>;
+	/**
+	 * Read a file from the vault as a string
+	 * @param path Path to file
+	 */
+	readRaw: (path: string) => Promise<string>;
+	/**
+	 * @internal Reload all config files
+	 */
+	reloadConfig: () => void;
+	/**
+	 * @internal Remove file as child/parent from respective folders
+	 * @param file File to remove
+	 */
+	removeChild: (file: TAbstractFile) => void;
+	/**
+	 * @internal Get the file by absolute path
+	 * @param path Path to file
+	 */
+	resolveFilePath: (path: string) => TAbstractFile | null;
+	/**
+	 * @internal Get the file by Obsidian URL
+	 */
+	resolveFileUrl: (url: string) => TAbstractFile | null;
+	/**
+	 * @internal Debounced function for saving config
+	 */
+	requestSaveConfig: () => void;
+	/**
+	 * @internal Save app and appearance configs to disk
+	 */
+	saveConfig: () => Promise<void>;
+	/**
+	 * Set value of config by key
+	 * @param key Key of config value
+	 * @param value Value to set
+	 */
 	setConfig: (key: ConfigItem, value: any) => void;
-	setConfigDir
-	setFileCacheLimit
-	setupConfig
-	trash
-	trigger
-	writeConfigJson
-	writeJson
-	writePluginData
+	/**
+	 * Set where the config files are stored (relative to vault root)
+	 * @param configDir Path to config files
+	 */
+	setConfigDir: (configDir: string) => void;
+	/**
+	 * @internal Set file cache limit
+	 */
+	setFileCacheLimit: (limit: number) => void;
+	/**
+	 * @internal Load all config files into memory
+	 */
+	setupConfig: () => Promise<void>;
+	/**
+	 * @internal Trigger an event on handler
+	 */
+	trigger: (type: string) => void;
+	/**
+	 * Write a config file to disk
+	 * @param config Name of config file
+	 * @param data Data to write
+	 */
+	writeConfigJson: (config: string, data: object) => Promise<void>;
+	/**
+	 * Write a config file (full path) to disk
+	 * @param path Full path to config file
+	 * @param data Data to write
+	 * @param pretty Whether to insert tabs or spaces
+	 */
+	writeJson: (path: string, data: object, pretty?: boolean) => Promise<void>;
+	/**
+	 * Write a plugin config file (path relative to vault root) to disk
+	 */
+	writePluginData: (path: string, data: object) => Promise<void>;
 }
 
 interface ViewRegistry extends Events {
+	/**
+	 * Mapping of file extensions to view type
+	 */
 	typeByExtension: Record<string, string>;
+	/**
+	 * Mapping of view type to view constructor
+	 */
 	viewByType: Record<string, (leaf: WorkspaceLeaf) => View>;
 
-	getTypeByExtension
-	getViewCreatorByType
-	isExtensionRegistered
-	on
-	registerExtensions
-	registerView
-	registerViewWithExtensions
-	trigger
-	unregisterExtensions
-	unregisterView
+	/**
+	 * Get the view type associated with a file extension
+	 * @param extension File extension
+	 */
+	getTypeByExtension: (extension: string) => string;
+	/**
+	 * Get the view constructor associated with a view type
+	 */
+	getViewCreatorByType: (type: string) => (leaf: WorkspaceLeaf) => View;
+	/**
+	 * Check whether a view type is registered
+	 */
+	isExtensionRegistered: (extension: string) => boolean;
+	/**
+	 * @internal
+	 */
+	on: (args: any[]) => EventRef;
+	/**
+	 * Register a view type for a file extension
+	 * @param extension File extension
+	 * @param type View type
+	 * @remark Prefer registering the extension via the Plugin class
+	 */
+	registerExtensions: (extension: string[], type: string) => void;
+	/**
+	 * Register a view constructor for a view type
+	 */
+	registerView: (type: string, viewCreator: (leaf: WorkspaceLeaf) => View) => void;
+	/**
+	 * Register a view and its associated file extensions
+	 */
+	registerViewWithExtensions: (extensions: string[], type: string, viewCreator: (leaf: WorkspaceLeaf) => View) => void;
+	/**
+	 * @internal
+	 */
+	trigger: (type: string) => void;
+	/**
+	 * Unregister extensions for a view type
+	 */
+	unregisterExtensions: (extension: string[]) => void;
+	/**
+	 * Unregister a view type
+	 */
+	unregisterView: (type: string) => void;
 }
+
+interface HoverLinkSource {
+	display: string;
+	defaultMod: boolean;
+}
+
+interface RecentFileTracker {
+	/**
+	 * List of last opened file paths, limited to 50
+	 */
+	lastOpenFiles: string[];
+	/**
+	 * Reference to Vault
+	 */
+	vault: EVault;
+	/**
+	 * Reference to Workspace
+ 	 */
+	workspace: EWorkspace;
+
+	/**
+	 * @internal
+	 */
+	collect: (file: TFile) => void;
+	/**
+	 * Returns the last 10 opened files
+	 */
+	getLastOpenFiles: () => string[];
+	/**
+	 * Get last n files of type (defaults to 10)
+	 */
+	getRecentFiles: ({showMarkdown: boolean, showCanvas: boolean, showNonImageAttachments: boolean, showImages: boolean, maxCount: number}?) => string[];
+	/**
+	 * Set the last opened files
+	 */
+	load: (savedFiles: string[]) => void;
+	/**
+	 * @internal On file create, save file to last opened files
+	 */
+	onFileCreated: (file: TFile) => void;
+	/**
+	 * @internal On file open, save file to last opened files
+	 */
+	onFileOpen: (prevFile: TFile, file: TFile) => void;
+	/**
+	 * @internal On file rename, update file path in last opened files
+	 */
+	onRename: (file: TFile, oldPath: string) => void;
+	/**
+	 * @internal Get last opened files
+	 */
+	serialize: () => string[];
+}
+
+interface StateHistory {
+	/**
+	 * Ephemeral cursor state within Editor of leaf
+	 */
+	eState: {
+		cursor: EditorRange;
+		scroll: number;
+	};
+	/**
+	 * Icon of the leaf
+	 */
+	icon?: string;
+	/**
+	 * History of previous and future states of leaf
+	 */
+	leafHistory?: {
+		backHistory: StateHistory[];
+		forwardHistory: StateHistory[];
+	};
+	/**
+	 * Id of parent to which the leaf belonged
+	 */
+	parentId?: string;
+	/**
+	 * Id of root to which the leaf belonged
+	 */
+	rootId?: string;
+	/**
+	 * Last state of the leaf
+	 */
+	state: ViewState;
+	/**
+	 * Title of the leaf
+	 */
+	title?: string;
+}
+
+interface LeafEntry {
+	children?: LeafEntry[];
+	direction?: SplitDirection;
+	id: string;
+	state?: ViewState;
+	type: string;
+	width?: number;
+}
+
+interface SerializedWorkspace {
+	/**
+	 * Last active leaf
+	 */
+	active: string;
+	/**
+	 * Last opened files
+	 */
+	lastOpenFiles: string[];
+	/**
+	 * Left opened leaf
+	 */
+	left: LeafEntry;
+	/**
+	 * Left ribbon
+	 */
+	leftRibbon: {hiddenItems: Record<string, boolean>};
+	/**
+	 * Main (center) workspace leaf
+	 */
+	main: LeafEntry;
+	/**
+	 * Right opened leaf
+	 */
+	right: LeafEntry;
+}
+
 
 interface EWorkspace extends Workspace {
-	activeTabGroup
-	app
-	backlinkInDocument
-	editorExtensions
-	editorSuggest
-	floatingSplit
-	hoverLinkSources
-	lastActiveFile
-	lastTabGroupStacked
-	layoutItemQueue
-	layoutReady
-	leftSidebarToggleButtonEl
-	mobileFileInfos
-	onLayoutReadyCallbacks
-	protocolHandlers
-	recentFileTracker
-	rightRibbon
-	rightSidebarToggleButtonEl
-	scope
-	undoHistory
+	/**
+	 * Currently active tab group
+	 */
+	activeTabGroup: WorkspaceTabs;
+	/**
+	 * Reference to App
+	 */
+	app: App;
+	/**
+	 * @internal
+	 */
+	backlinkInDocument?: any;
+	/**
+	 * Registered CodeMirror editor extensions, to be applied to all CM instances
+	 */
+	editorExtensions: Extension[];
+	/**
+	 * @internal
+	 */
+	editorSuggest: {currentSuggest?: EditorSuggest<any>, suggests: EditorSuggest<any>[]};
+	/**
+	 * @internal
+	 */
+	floatingSplit: WorkspaceSplit;
+	/**
+	 * @internal
+	 */
+	hoverLinkSources: Record<string, HoverLinkSource>;
+	/**
+	 * Last opened file in the vault
+	 */
+	lastActiveFile: TFile;
+	/**
+	 * @internal
+	 */
+	lastTabGroupStacked: boolean;
+	/**
+	 * @internal
+	 */
+	layoutItemQueue: any[];
+	/**
+	 * Workspace has finished loading
+	 */
+	layoutReady: boolean;
+	/**
+	 * @internal
+	 */
+	leftSidebarToggleButtonEl: HTMLElement;
+	/**
+	 * @internal Array of renderCallbacks
+	 */
+	mobileFileInfos: any[];
+	/**
+	 * @internal
+	 */
+	onLayoutReadyCallbacks?: any;
+	/**
+	 * Protocol handlers registered on the workspace
+	 */
+	protocolHandlers: Map<string, ObsidianProtocolHandler>;
+	/**
+	 * Tracks last opened files in the vault
+	 */
+	recentFileTracker: RecentFileTracker;
+	/**
+	 * @internal
+	 */
+	rightSidebarToggleButtonEl: HTMLElement;
+	/**
+	 * @internal Keyscope registered to the vault
+	 */
+	scope: EScope;
+	/**
+	 * List of states that were closed and may be reopened
+	 */
+	undoHistory: StateHistory[];
 
-	activeLeafEvents
-	addMobileFileInfo
-	changeLayout
-	clearLayout
-	createLeafBySplit
-	createLeafInParent
-	createLeafInTabGroup
-	deserializeLayout
-	detachLeavesOfType
-	duplicateLeaf
-	ensureSideLeaf
-	getActiveFile
-	getActiveFileView
-	getActiveLeafOfViewType
-	getActiveViewOfType
-	getAdjacentLeafInDirection
-	getDropDirection
-	getDropLocation
-	getFocusedContainer
-	getGroupLeaves
-	getLastOpenFiles
-	getLayout
-	getLeaf
-	getLeafById
-	getLeavesOfType
-	getLeftLeaf
-	getMostRecentLeaf
-	getRecentFiles
-	getRightLeaf
-	getSideLeaf
-	getUnpinnedLeaf
-	handleExternalLinkContextMenu
-	handleLinkContextMenu
-	isAttached
-	iterateAllLeaves
-	iterateCodeMirrors
-	iterateLeaves
-	iterateRootLeaves
-	iterateTabs
-	laodLayout
-	moveLeafToPopout
-	on
-	onDragLeaf
-	onLayoutChange
-	onLayoutReady
-	onLinkContextMenu
-	onQuickPreview
-	onResize
-	onStartLink
-	openLinkText
-	openPopout
-	openPopoutLeaf
-	pushUndoHistory
-	recursiveGetTarget
-	registerEditorExtension
-	registerHoverLinkSource
-	registerObsidianProtocolHandler
-	registerUriHook
-	requestActiveLeafEvents
-	requestResize
-	requestSaveLayout
-	requestUpdateLayout
-	revealLeaf
-	saveLayout
-	setActiveLeaf
-	setLayout
-	splitActiveLeaf
-	splitLeaf
-	splitLeafOrActive
-	trigger
-	unregisterEditorExtension
-	unregisterHoverLinkSource
-	unregisterObsidianProtocolHandler
-	updateFrameless
-	updateLayout
-	updateMobileVisibileTabGroup
-	updateOptions
-	updateTitle
+	/**
+	 * @internal Change active leaf and trigger leaf change event
+	 */
+	activeLeafEvents: () => void;
+	/**
+	 * @internal Add file to mobile file info
+	 */
+	addMobileFileInfo: (file: any) => void;
+	/**
+	 * @internal Clear layout of workspace and destruct all leaves
+	 */
+	clearLayout: () => Promise<void>;
+	/**
+	 * @internal Create a leaf in the selected tab group or last used tab group
+	 * @param tabs Tab group to create leaf in
+	 */
+	createLeafInTabGroup: (tabs?: WorkspaceTabs) => WorkspaceLeaf;
+	/**
+	 * @internal Deserialize workspace entries into actual Leaf objects
+	 * @param leaf Leaf entry to deserialize
+	 * @param ribbon Whether the leaf belongs to the left or right ribbon
+	 */
+	deserializeLayout: (leaf: LeafEntry, ribbon?: "left" | "right") => Promise<WorkspaceLeaf>;
+	/**
+	 * @internal Reveal leaf in side ribbon with specified view type and state
+	 * @param type View type of leaf
+	 * @param ribbon Side ribbon to reveal leaf in
+	 * @param viewstate Open state of leaf
+	 */
+	ensureSideLeaf: (type: string, ribbon: "left" | "right", viewstate: OpenViewState) => void;
+	/**
+	 * Get active file view if exists
+	 */
+	getActiveFileView: () => FileView | null;
+	/**
+	 * @deprecated Use `getActiveViewOfType` instead
+	 */
+	getActiveLeafOfViewType<T extends View>(type: Constructor<T>): T | null;
+	/**
+	 * Get adjacent leaf in specified direction
+	 * @remark Potentially does not work
+	 */
+	getAdjacentLeafInDirection: (leaf: WorkspaceLeaf, direction: "top" | "bottom" | "left" | "right") => WorkspaceLeaf | null;
+	/**
+	 * @internal Get the direction where the leaf should be dropped on dragevent
+	 */
+	getDropDirection: (e: DragEvent, rect: DOMRect, directions: ["left", "right"], leaf: WorkspaceLeaf) => "left" | "right" | "top" | "bottom" | "center";
+	/**
+	 * @internal Get the leaf where the leaf should be dropped on dragevent
+	 * @param e Drag event
+	 */
+	getDropLocation: (e: DragEvent) => WorkspaceLeaf | null;
+	/**
+	 * Get the workspace split for the currently focused container
+	 */
+	getFocusedContainer: () => WorkspaceSplit;
+	/**
+	 * Get n last opened files of type (defaults to 10)
+	 */
+	getRecentFiles: ({showMarkdown: boolean, showCanvas: boolean, showNonImageAttachments: boolean, showImages: boolean, maxCount: number}?) => string[];
+	/**
+	 * Get leaf in the side ribbon/dock and split if necessary
+	 * @param sideRibbon Side ribbon to get leaf from
+	 * @param split Whether to split the leaf if it does not exist
+	 */
+	getSideLeaf: (sideRibbon: WorkspaceSidedock | WorkspaceMobileDrawer, split: boolean) => WorkspaceLeaf;
+	/**
+	 * @internal
+	 */
+	handleExternalLinkContextMenu: (menu: Menu, linkText: string) => void;
+	/**
+	 * @internal
+	 */
+	handleLinkContextMenu: (menu: Menu, linkText: string, sourcePath: string) => void;
+	/**
+	 * @internal Check if leaf has been attached to the workspace
+	 */
+	isAttached: (leaf?: WorkspaceLeaf) => boolean;
+	/**
+	 * Iterate the leaves of a split
+	 */
+	iterateLeaves: (split: WorkspaceSplit, callback: (leaf: WorkspaceLeaf) => any) => void;
+	/**
+	 * Iterate the tabs of a split till meeting a condition
+	 */
+	iterateTabs: (tabs: WorkspaceSplit | WorkspaceSplit[], cb: (leaf) => boolean) => boolean;
+	/**
+	 * @internal Load workspace from disk and initialize
+	 */
+	loadLayout: () => Promise<void>;
+	/**
+	 * @internal
+	 */
+	on: (args: any[]) => EventRef;
+	/**
+	 * @internal Handles drag event on leaf
+	 */
+	onDragLeaf: (e: DragEvent, leaf: WorkspaceLeaf) => void;
+	/**
+	 * @internal Handles layout change and saves layout to disk
+	 */
+	onLayoutChange: (leaf?: WorkspaceLeaf) => void;
+	/**
+	 * @internal
+	 */
+	onLinkContextMenu: (args: any[]) => void;
+	/**
+	 * @internal
+	 */
+	onQuickPreview: (args: any[]) => void;
+	/**
+	 * @internal
+	 */
+	onResize: () => void;
+	/**
+	 * @internal
+ 	 */
+	onStartLink: (leaf: WorkspaceLeaf) => void;
+	/**
+	 * Open a leaf in a popup window
+	 * @remark Prefer usage of `app.workspace.openPopoutLeaf`
+	 */
+	openPopout: (data?: WorkspaceWindowInitData) => WorkspaceWindow;
+	/**
+	 * @internal Push leaf change to history
+	 */
+	pushUndoHistory: (leaf: WorkspaceLeaf, parentID: string, rootID: string) => void;
+	/**
+	 * @internal Get drag event target location
+	 */
+	recursiveGetTarget: (e: DragEvent, leaf: WorkspaceLeaf) => WorkspaceTabs | null;
+	/**
+	 * @internal Register a CodeMirror editor extension
+	 * @remark Prefer registering the extension via the Plugin class
+	 */
+	registerEditorExtension: (extension: Extension) => void;
+	/**
+	 * @internal Registers hover link source
+	 */
+	registerHoverLinkSource: (key: string, source: HoverLinkSource) => void;
+	/**
+	 * @internal Registers Obsidian protocol handler
+	 */
+	registerObsidianProtocolHandler: (protocol: string, handler: ObsidianProtocolHandler) => void;
+	/**
+	 * @internal Constructs hook for receiving URI actions
+	 */
+	registerUriHook: () => void;
+	/**
+	 * @internal Request execution of activeLeaf change events
+	 */
+	requestActiveLeafEvents: () => void;
+	/**
+	 * @internal Request execution of resize event
+	 */
+	requestResize: () => void;
+	/**
+	 * @internal Request execution of layout save event
+	 */
+	requestSaveLayout: () => void;
+	/**
+	 * @internal Request execution of layout update event
+	 */
+	requestUpdateLayout: () => void;
+	/**
+	 * Save workspace layout to disk
+	 */
+	saveLayout: () => Promise<void>;
+	/**
+	 * @internal Use deserialized layout data to reconstruct the workspace
+	 */
+	setLayout: (data: SerializedWorkspace) => Promise<void>;
+	/**
+	 * @internal Split leaves in specified direction
+	 */
+	splitLeaf: (leaf: WorkspaceLeaf, newleaf: WorkspaceLeaf, direction?: SplitDirection, before?: boolean) => void;
+	/**
+	 * Split provided leaf, or active leaf if none provided
+	 */
+	splitLeafOrActive: (leaf?: WorkspaceLeaf, direction?: SplitDirection) => void;
+	/**
+	 * @internal
+	 */
+	trigger: (e: any) => void;
+	/**
+	 * @internal Unregister a CodeMirror editor extension
+	 */
+	unregisterEditorExtension: (extension: Extension) => void;
+	/**
+	 * @internal Unregister hover link source
+	 */
+	unregisterHoverLinkSource: (key: string) => void;
+	/**
+	 * @internal Unregister Obsidian protocol handler
+	 */
+	unregisterObsidianProtocolHandler: (protocol: string) => void;
+	/**
+	 * @internal
+	 */
+	updateFrameless: () => void;
+	/**
+	 * @internal Invoke workspace layout update, redraw and save
+	 */
+	updateLayout: () => void;
+	/**
+	 * @internal Update visibility of tab group
+	 */
+	updateMobileVisibleTabGroup: () => void;
+	/**
+	 * Update the internal title of the application
+	 * @remark This title is shown as the application title in the OS taskbar
+	 */
+	updateTitle: () => void;
 }
 
+interface ImportedAttachments {
+	data: Promise<ArrayBuffer>;
+	extension: string;
+	filename: string;
+	name: string;
+}
 
 declare module 'obsidian' {
 	interface App {
@@ -2491,70 +2985,225 @@ declare module 'obsidian' {
 		 * @remark Do not use this to get settings values from other plugins, it is better to do this via `app.plugins.getPlugin(ID)?.settings` (check how the plugin stores its settings)
 		 */
 		setting: Setting;
-
-		/**
-		 * @internal
-		 */
-		shareReceiver: { app: App }
-
-		/**
-		 * @internal Status bar of the application
-		 */
-		statusBar: { app: App , containerEl: HTMLElement }
-
+		// /**
+		//  * @internal
+		//  */
+		// shareReceiver: { app: App }
+		// /**
+		//  * @internal Status bar of the application
+		//  */
+		// statusBar: { app: App , containerEl: HTMLElement }
 		/**
 		 * Name of the vault with version suffix
 		 * @remark Formatted as 'NAME - Obsidian vX.Y.Z'
 		 */
 		title: string;
-
+		/**
+		 * Manages all file operations for the vault, contains hooks for file changes, and an adapter
+		 * for low-level file system operations
+		 * @tutorial Used for creating your own files and folders, renaming, ...
+		 * @tutorial Use `app.vault.adapter` for accessing files outside the vault (desktop-only)
+		 * @remark Prefer using the regular `vault` whenever possible
+		 */
 		vault: EVault;
+		/**
+		 * Manages the construction of appropriate views when opening a file of a certain type
+		 * @remark Prefer usage of view registration via the Plugin class
+		 */
 		viewRegistry: ViewRegistry;
+		/**
+		 * Manages the workspace layout, construction, rendering and manipulation of leaves
+		 * @tutorial Used for accessing the active editor leaf, grabbing references to your views, ...
+		 */
 		workspace: EWorkspace;
 
-
-		adaptToSystemTheme
-		changeTheme
-		copyObsidianUrl
-		disableCssTransition
-		emulateMobile
-		enableCssTransition
-		fixFileLinks
-		garbleText
-		getAccentColor
-		getAppTitle
-		getObsidianUrl
-		getSpellcheckLanguages
-		getTheme
-		importAttachments
-		initializeWithAdapter
+		/**
+		 * Sets the accent color of the application to the OS preference
+		 */
+		adaptToSystemTheme: () => void;
+		/**
+		 * Sets the accent color of the application (light/dark mode)
+		 */
+		changeTheme: (theme: "moonstone" | "obsidian") => void;
+		/**
+		 * Copies Obsidian URI of given file to clipboard
+		 * @param file File to generate URI for
+		 */
+		copyObsidianUrl: (file: TFile) => void;
+		/**
+		 * Disables all CSS transitions in the vault (until manually re-enabled)
+		 */
+		disableCssTransition: () => void;
+		/**
+		 * Restarts Obsidian and renders workspace in mobile mode
+		 * @tutorial Very useful for testing the rendering of your plugin on mobile devices
+		 */
+		emulateMobile: (emulate: boolean) => void;
+		/**
+		 * Enables all CSS transitions in the vault
+		 */
+		enableCssTransition: () => void;
+		/**
+		 * Manually fix all file links pointing towards image/audio/video resources in element
+		 * @param element Element to fix links in
+		 */
+		fixFileLinks: (element: HTMLElement) => void;
+		/**
+		 * Applies an obfuscation font to all text characters in the vault
+		 * @tutorial Useful for hiding sensitive information or sharing pretty screenshots of your vault
+		 * @remark Uses the `Flow Circular` font
+		 * @remark You will have to restart the app to get normal text back
+		 */
+		garbleText: () => void;
+		/**
+		 * Get the accent color of the application
+		 * @remark Often a better alternative than `app.vault.getConfig('accentColor')` as it returns an empty string if no accent color was set
+		 */
+		getAccentColor: () => string;
+		/**
+		 * Get the current title of the application
+		 * @remark The title is based on the currently active leaf
+		 */
+		getAppTitle: () => string;
+		/**
+		 * Get the URI for opening specified file in Obsidian
+		 */
+		getObsidianUrl: (file: TFile) => string;
+		/**
+		 * Get currently active spellcheck languages
+		 * @deprecated Originally spellcheck languages were stored in app settings,
+		 * languages are now stored in `localStorage.getItem(spellcheck-languages)`
+		 */
+		getSpellcheckLanguages: () => string[];
+		/**
+		 * Get the current color scheme of the application
+		 * @remark Identical to `app.vault.getConfig('theme')`
+		 */
+		getTheme: () => "moonstone" | "obsidian";
+		/**
+		 * Import attachments into specified folder
+		 */
+		importAttachments: (imports: ImportedAttachments[], folder: TFolder) => Promise<void>;
+		/**
+		 * @internal Initialize the entire application using the provided FS adapter
+		 */
+		initializeWithAdapter: (adapter: EDataAdapter) => Promise<void>;
+		/**
+		 * Load a value from the localstorage given key
+		 * @param key Key of value to load
+		 * @remark This method is device *and* vault specific
+		 * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault
+		 */
 		loadLocalStorage: (key: string) => any;
-		nextFrame
-		nextFrameOnceCallback
-		nextFramePromise
-		on
-		onMouseEvent
-		onNextFrame
-		openHelp
-		openVaultChooser
-		openWithDefaultApp
-		registerCommands
-		registerQuitHook
-		saveAttachment
+		/**
+		 * @internal Add callback to execute on next frame
+		 */
+		nextFrame: (callback: () => void) => void;
+		/**
+		 * @internal Add callback to execute on next frame, and remove after execution
+		 */
+		nextFrameOnceCallback: (callback: () => void) => void;
+		/**
+		 * @internal Add callback to execute on next frame with promise
+		 */
+		nextFramePromise: (callback: () => Promise<void>) => Promise<void>;
+		/**
+		 * @internal
+		 */
+		on: (args: any[]) => EventRef;
+		/**
+		 * @internal
+		 */
+		onMouseEvent: (evt: MouseEvent) => void;
+		/**
+		 * @internal Execute all logged callback (called when next frame is loaded)
+		 */
+		onNextFrame: (callback: () => void) => void;
+		/**
+		 * Open the help vault (or site if mobile)
+		 */
+		openHelp: () => void;
+		/**
+		 * Open the vault picker
+		 */
+		openVaultChooser: () => void;
+		/**
+		 * Open the file with OS defined default file browser application
+		 */
+		openWithDefaultApp: (path: string) => void;
+		/**
+		 * @internal Register all basic application commands
+		 */
+		registerCommands: () => void;
+		/**
+		 * @internal Register a hook for saving workspace data before unload
+		 */
+		registerQuitHook: () => void;
+		/**
+		 * @internal Save attachment at default attachments location
+		 */
+		saveAttachment: (path: string, extension: string, data: ArrayBuffer) => Promise<void>;
+		/**
+		 * Save a value to the localstorage given key
+		 * @param key Key of value to save
+		 * @param value Value to save
+		 * @remark This method is device *and* vault specific
+		 * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault
+		 */
 		saveLocalStorage: (key: string, value: any) => void;
-		setAccentColor
-		setAttachmentFolder
-		setSpellcheckLanguages
-		setTheme
-		showInFolder
-		showReleaseNotes
-		updateAccentColor
-		updateFontFamily
-		updateFontSize
-		updateInlineTitleDisplay
-		updateTheme
-		updateViewHeaderDisplay
+		/**
+		 * Set the accent color of the application
+		 * @remark Also updates the CSS `--accent` variables
+		 */
+		setAccentColor: (color: string) => void;
+		/**
+		 * Set the path where attachments should be stored
+		 */
+		setAttachmentFolder: (path: string) => void;
+		/**
+		 * Set the spellcheck languages
+		 */
+		setSpellcheckLanguages: (languages: string[]) => void;
+		/**
+		 * Set the current color scheme of the application and reload the CSS
+		 */
+		setTheme: (theme: "moonstone" | "obsidian") => void;
+		/**
+		 * Open the OS file picker at path location
+		 */
+		showInFolder: (path: string) => void;
+		/**
+		 * Show the release notes for provided version as a new leaf
+		 * @param version Version to show release notes for (defaults to current version)
+		 */
+		showReleaseNotes: (version?: string) => void;
+		/**
+		 * Updates the accent color and reloads the CSS
+		 */
+		updateAccentColor: () => void;
+		/**
+		 * Update the font family of the application and reloads the CSS
+		 */
+		updateFontFamily: () => void;
+		/**
+		 * Update the font size of the application and reloads the CSS
+		 */
+		updateFontSize: () => void;
+		/**
+		 * Update the inline title rendering in notes
+		 */
+		updateInlineTitleDisplay: () => void;
+		/**
+		 * Update the color scheme of the application and reloads the CSS
+		 */
+		updateTheme: () => void;
+		/**
+		 * Update the view header display in notes
+		 */
+		updateViewHeaderDisplay: () => void;
 	}
+
+	// TODO: Add missing elements to other Obsidian interfaces and classes
 
 	interface View {
 		headerEl: HTMLElement;
@@ -2620,12 +3269,6 @@ interface ReadViewRenderer {
 	rendered: any[];
 
 }
-
-interface CursorLocation {
-	ch: number,
-	line: number
-}
-
 
 interface CMState extends EditorState {
 	vim: {
