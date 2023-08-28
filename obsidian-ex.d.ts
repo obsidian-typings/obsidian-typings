@@ -3232,7 +3232,31 @@ declare module 'obsidian' {
 		renderer: ReadViewRenderer;
 	}
 
+
+	interface EventRef {
+		/**
+		 * Context applied to the event callback
+		 */
+		ctx?: any;
+
+		/**
+		 * Events object the event was registered on
+		 */
+		e: Events;
+
+		/**
+		 * Function to be called on event trigger on the events object
+		 */
+		fn: (any) => void;
+
+		/**
+		 * Event name the event was registered on
+		 */
+		name: string;
+	}
 }
+
+
 
 
 interface RendererSection {
