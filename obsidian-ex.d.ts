@@ -3,7 +3,7 @@ import {
 	CachedMetadata,
 	Command,
 	Constructor,
-	DataWriteOptions,
+	DataWriteOptions, EditorPosition,
 	EditorRange,
 	EditorSuggest,
 	EventRef,
@@ -3196,6 +3196,155 @@ declare module 'obsidian' {
 
 	// TODO: Add missing elements to other Obsidian interfaces and classes
 
+	interface Editor {
+		/**
+		 * CodeMirror editor instance
+		 */
+		cm: EditorViewI;
+		/**
+		 * HTML instance the CM editor is attached to
+		 */
+		containerEl: HTMLElement;
+
+		/**
+		 * Make ranges of text highlighted within the editor given specified class (style)
+		 */
+		addHighlights: (ranges: {from: EditorPosition, to: EditorPosition}[], style: "is-flashing" | "obsidian-search-match-highlight", remove_previous: boolean, x: boolean) => void;
+		/**
+		 * Convert editor position to screen position
+		 * @param pos Editor position
+		 * @param mode Relative to the editor or the application window
+		 */
+		coordsAtPos: (pos: EditorPosition, relative_to_editor = false) => {left: number, top: number, bottom: number, right: number};
+		/**
+		 * Unfolds all folded lines one level up
+		 * @remark If level 1 and 2 headings are folded, level 2 headings will be unfolded
+		 */
+		foldLess: () => void;
+		/**
+		 * Folds all the blocks that are of the lowest unfolded level
+		 * @remark If there is a document with level 1 and 2 headings, level 2 headings will be folded
+		 */
+		foldMore: () => void;
+		/**
+		 * Get all ranges that can be folded away in the editor
+		 */
+		getAllFoldableLines: () => { from:number, to:number }[];
+		/**
+		 * Get a clickable link - if it exists - at specified position
+		 */
+		getClickableTokenAt: (pos: EditorPosition) => { start: EditorPosition, end: EditorPosition, text: string, type: string } | null;
+		/**
+		 * Get all blocks that were folded by their starting character position
+		 */
+		getFoldOffsets: () => Set<number>;
+		/**
+		 * Checks whether the editor has a highlight of specified class
+		 * @remark If no style is specified, checks whether the editor has any highlights
+		 */
+		hasHighlight: (style?: string) => boolean;
+		/**
+		 * Wraps current line around specified characters
+		 * @remark Was added in a recent Obsidian update (1.4.0 update cycle)
+		 **/
+		insertBlock: (start: string, end: string) => void;
+		/**
+		 * Get the closest character position to the specified coordinates
+		 */
+		posAtCoords: (coords: {left: number, top: number}) => EditorPosition;
+		/**
+		 * Removes all highlights of specified class
+		 */
+		removeHighlights: (style: string) => void;
+		/**
+		 * Adds a search cursor to the editor
+		 */
+		searchCursor: (searchString: string) => {
+			current: () => {from: EditorPosition, to: EditorPosition};
+			findAll: () => {from: EditorPosition, to: EditorPosition}[];
+			findNext: () => {from: EditorPosition, to: EditorPosition};
+			findPrevious: () => {from: EditorPosition, to: EditorPosition};
+			replace: (replacement?: string, origin: string) => void;
+			replaceAll: (replacement?: string, origin: string) => void;
+		}
+		/**
+		 * Applies specified markdown syntax to selected text or word under cursor
+		 */
+		toggleMarkdownFormatting: (syntax: "bold" | "italic" | "strikethrough" | "highlight" | "code" | "math" | "comment") => void;
+
+		/**
+		 * Clean-up function executed after indenting lists
+ 		 */
+		afterIndent: () => void;
+		/**
+		 * Expand text
+		 * @internal
+		 */
+		expandText: () => void;
+		/**
+		 * Indents a list by one level
+		 */
+		indentList: () => void;
+		/**
+		 * Insert a template callout at the current cursor position
+		 */
+		insertCallout: () => void;
+		/**
+		 * Insert a template code block at the current cursor position
+		 */
+		insertCodeblock: () => void;
+		/**
+		 * Insert a markdown link at the current cursor position
+		 */
+		insertLink: () => void;
+		/**
+		 * Insert a mathjax equation block at the current cursor position
+		 */
+		insertMathJax: () => void;
+		/**
+		 * Insert specified text at the current cursor position
+		 * @remark Might be broken, inserts at the end of the document
+		 */
+		insertText: (text: string) => void;
+		/**
+		 * Inserts a new line and continues a markdown bullet point list at the same level
+		 */
+		newlineAndIndentContinueMarkdownList: () => void;
+		/**
+		 * Inserts a new line at the same indent level
+		 */
+		newlineAndIndentOnly: () => void;
+		/**
+		 * Get the character position at a mouse event
+		 */
+		posAtMouse: (e: MouseEvent) => EditorPosition;
+		/**
+		 * Toggles blockquote syntax on paragraph under cursor
+		 */
+		toggleBlockquote: () => void;
+		/**
+		 * Toggle bullet point list syntax on paragraph under cursor
+		 */
+		toggleBulletList: () => void;
+		/**
+		 * Toggle checkbox syntax on paragraph under cursor
+		 */
+		toggleCheckList: () => void;
+		/**
+		 * Toggle numbered list syntax on paragraph under cursor
+		 */
+		toggleNumberList: () => void;
+		/**
+		 * Convert word under cursor into a wikilink
+		 * @param embed Whether to embed the link or not
+		 */
+		triggerWikiLink: (embed: boolean) => void;
+		/**
+		 * Unindents a list by one level
+		 */
+		unindentList: () => void;
+	}
+
 	interface View {
 		headerEl: HTMLElement;
 		titleEl: HTMLElement;
@@ -3222,10 +3371,6 @@ declare module 'obsidian' {
 		setSubmenu: () => Menu;
 		onClick: (evt: MouseEvent) => void;
 		disabled: boolean;
-	}
-
-	interface Editor {
-		cm: EditorViewI;
 	}
 
 	interface MarkdownPreviewView {
