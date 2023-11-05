@@ -2648,31 +2648,31 @@ declare module 'obsidian' {
 		/**
 		 * @internal
 		 */
-		reconcileDeletion: (normalizedPath: string, normalizedNewPath: string, option: boolean) => void;
+		reconcileDeletion: (normalizedPath: string, normalizedNewPath: string, option: boolean) => Promise<void>;
 		/**
 		 * @internal
 		 */
-		reconcileFile: (normalizedPath: string, normalizedNewPath: string, option: boolean) => void;
+		reconcileFile: (normalizedPath: string, normalizedNewPath: string, option: boolean) => Promise<void>;
 		/**
 		 * @internal
 		 */
-		reconcileFileCreation: (normalizedPath: string, normalizedNewPath: string, option: boolean) => void;
+		reconcileFileCreation: (normalizedPath: string, normalizedNewPath: string, option: boolean) => Promise<void>;
 		/**
 		 * @internal
 		 */
-		reconcileFileInternal: (normalizedPath: string, normalizedNewPath: string) => void;
+		reconcileFileInternal: (normalizedPath: string, normalizedNewPath: string) => Promise<void>;
 		/**
 		 * @internal
 		 */
-		reconcileFolderCreation: (normalizedPath: string, normalizedNewPath: string) => void;
+		reconcileFolderCreation: (normalizedPath: string, normalizedNewPath: string) => Promise<void>;
 		/**
 		 * @internal
 		 */
-		reconcileInternalFile: (normalizedPath: string) => void;
+		reconcileInternalFile: (normalizedPath: string) => Promise<void>;
 		/**
 		 * @internal
 		 */
-		reconcileSymbolicLinkCreation: (normalizedPath: string, normalizedNewPath: string) => void;
+		reconcileSymbolicLinkCreation: (normalizedPath: string, normalizedNewPath: string) => Promise<void>;
 		/**
 		 * @internal Remove file from files listing and trigger deletion event
 		 */
