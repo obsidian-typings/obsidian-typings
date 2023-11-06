@@ -1102,7 +1102,7 @@ interface Plugins {
 	/**
 	 * Install a plugin from a given URL
 	 */
-	installPlugin: (repo: string, manifest: PluginManifest, version: string) => Promise<void>;
+	installPlugin: (repo: string, version: string, manifest: PluginManifest) => Promise<void>;
 	/**
 	 * Check whether a plugin is deprecated
 	 */
