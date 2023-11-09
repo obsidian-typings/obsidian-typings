@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "TypeScript typings for undocumented Obsidian API functions",
   "main": "",
+  "types": "obsidian-ex.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Fevol/obsidian-typings.git"
