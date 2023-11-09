@@ -1,0 +1,21 @@
+{
+  "name": "obsidian-typings",
+  "version": "1.0.0",
+  "description": "TypeScript typings for undocumented Obsidian API functions",
+  "main": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fevol/obsidian-typings.git"
+  },
+  "keywords": [
+    "obsidian",
+    "typings",
+    "API"
+  ],
+  "author": "Fevol",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fevol/obsidian-typings/issues"
+  },
+  "homepage": "https://github.com/Fevol/obsidian-typings#readme"
+}
