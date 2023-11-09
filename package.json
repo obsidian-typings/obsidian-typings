@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Fevol/obsidian-typings/issues"
   },
-  "homepage": "https://github.com/Fevol/obsidian-typings#readme"
+  "homepage": "https://github.com/Fevol/obsidian-typings#readme",
+  "dependencies": {
+    "obsidian": "^1.4.11"
+  }
 }
