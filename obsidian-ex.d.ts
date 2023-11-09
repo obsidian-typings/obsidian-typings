@@ -4,7 +4,6 @@ import {
 	Component,
 	Constructor,
 	EditorRange,
-	EventRef,
 	Events,
 	KeymapInfo,
 	Loc,
