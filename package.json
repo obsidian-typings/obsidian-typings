@@ -1,5 +1,5 @@
 {
-  "name": "obsidian-typings",
+  "name": "@types/obsidian-typings",
   "version": "1.0.0",
   "description": "TypeScript typings for undocumented Obsidian API functions",
   "main": "",
