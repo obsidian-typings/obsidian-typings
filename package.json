@@ -21,5 +21,8 @@
   "homepage": "https://github.com/Fevol/obsidian-typings#readme",
   "dependencies": {
     "obsidian": "^1.4.11"
+  },
+  "devDependencies": {
+    "@ophidian/electron-types": "^24.3.1"
   }
 }

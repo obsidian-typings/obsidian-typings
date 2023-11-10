@@ -1,40 +1,29 @@
 import {
 	App,
-	CachedMetadata,
 	Command,
+	Component,
 	Constructor,
-	DataWriteOptions, EditorPosition,
 	EditorRange,
-	EditorSuggest,
-	EventRef,
 	Events,
-	FileView,
-	KeymapEventHandler,
-	KeymapEventListener,
 	KeymapInfo,
 	Loc,
-	Modifier,
-	ObsidianProtocolHandler,
-	OpenViewState,
-	PaneType,
 	Plugin,
 	Reference,
+	Scope,
 	SplitDirection,
-	TAbstractFile,
 	TFile,
-	TFolder,
+	Vault,
 	View,
 	ViewState,
-	WorkspaceLeaf,
-	WorkspaceMobileDrawer,
-	WorkspaceSidedock,
-	WorkspaceSplit,
-	WorkspaceTabs,
-	WorkspaceWindow,
-	WorkspaceWindowInitData,
+	Workspace,
+	WorkspaceLeaf
 } from 'obsidian';
 import { EditorView } from '@codemirror/view';
 import { EditorState, Extension } from '@codemirror/state';
+import * as fs from 'fs';
+import * as fsPromises from 'fs/promises';
+import * as path from 'path';
+import { IpcRenderer } from 'electron';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -235,7 +224,7 @@ interface CustomCSS extends Component {
 	/**
 	 * @internal
 	 */
-	queue: WeakMap;
+	queue: WeakMap<any, any>;
 	/**
 	 * @internal
 	 */
@@ -320,11 +309,11 @@ interface CustomCSS extends Component {
 	 * Will create a corresponding dummy manifest for the theme
 	 * @remark Name will be used as the folder name for the theme
 	 */
-	installLegacyTheme: ({ name: string, repo: string, author: string }) => Promise<void>;
+	installLegacyTheme: (arg: { name: string, repo: string, author: string }) => Promise<void>;
 	/**
 	 * Install a theme using the regular theme download pipeline
 	 */
-	installTheme: ({ name: string, repo: string, author: string }, version: string) => Promise<void>;
+	installTheme: (arg: { name: string, repo: string, author: string }, version: string) => Promise<void>;
 	/**
 	 * Check whether a specific theme is installed by theme name
 	 */
@@ -580,11 +569,7 @@ interface InternalPlugins extends Events {
 	/**
 	 * @internal
 	 */
-	loadPlugin: ({id: string, name: string}) => string;
-	/**
-	 * @internal
-	 */
-	on: (inp: any, cb: () => void, arg: string) => void;
+	loadPlugin: (arg: {id: string, name: string}) => string;
 	/**
 	 * @internal
 	 */
@@ -615,7 +600,7 @@ interface KeyScope {
 	/**
 	 * Scope where the key interceptor is registered
 	 */
-	scope: EScope;
+	scope: Scope;
 }
 
 
@@ -851,7 +836,7 @@ interface MetadataTypeManager extends Events {
 	/**
 	 * @internal Get expected widget type for property and the one inferred from the property value
 	 */
-	getTypeInfo: ({key: string, type: string, value: any}) => { inferred: PropertyWidget, expected: PropertyWidget }
+	getTypeInfo: (arg: {key: string, type: string, value: any}) => { inferred: PropertyWidget, expected: PropertyWidget }
 	/**
 	 * Get all properties with an assigned widget type
 	 */
@@ -860,10 +845,6 @@ interface MetadataTypeManager extends Events {
 	 * @internal Load property types from config
 	 */
 	loadData: () => Promise<void>;
-	/**
-	 * @internal
-	 */
-	on: (args: any) => void;
 	/**
 	 * @internal Save property types to config
 	 */
@@ -1488,10 +1469,6 @@ interface ViewRegistry extends Events {
 	 */
 	isExtensionRegistered: (extension: string) => boolean;
 	/**
-	 * @internal
-	 */
-	on: (args: any[]) => EventRef;
-	/**
 	 * Register a view type for a file extension
 	 * @param extension File extension
 	 * @param type View type
@@ -1533,11 +1510,11 @@ interface RecentFileTracker {
 	/**
 	 * Reference to Vault
 	 */
-	vault: EVault;
+	vault: Vault;
 	/**
 	 * Reference to Workspace
  	 */
-	workspace: EWorkspace;
+	workspace: Workspace;
 
 	/**
 	 * @internal
@@ -1550,7 +1527,7 @@ interface RecentFileTracker {
 	/**
 	 * Get last n files of type (defaults to 10)
 	 */
-	getRecentFiles: ({showMarkdown: boolean, showCanvas: boolean, showNonImageAttachments: boolean, showImages: boolean, maxCount: number}?) => string[];
+	getRecentFiles: (arg?: {showMarkdown: boolean, showCanvas: boolean, showNonImageAttachments: boolean, showImages: boolean, maxCount: number}) => string[];
 	/**
 	 * Set the last opened files
 	 */
@@ -1694,7 +1671,7 @@ declare module 'obsidian' {
 		 * Manage the creation, deletion and renaming of files from the UI.
 		 * @remark Prefer using the `vault` API for programmatic file management
 		 */
-		fileManager: EFileManager;
+		fileManager: FileManager;
 		// /**
 		//  * @internal
 		//  */
@@ -1729,7 +1706,7 @@ declare module 'obsidian' {
 		 * Manages the gathering and updating of metadata for all files in the vault
 		 * @tutorial Use for finding tags and backlinks for specific files, grabbing frontmatter properties, ...
 		 */
-		metadataCache: EMetadataCache;
+		metadataCache: MetadataCache;
 		/**
 		 * Manages the frontmatter properties of the vault and the rendering of the properties
 		 * @tutorial Fetching properties used in all frontmatter fields, may potentially be used for adding custom frontmatter widgets
@@ -1763,7 +1740,7 @@ declare module 'obsidian' {
 		/**
 		 * @internal Root keyscope of the application
 		 */
-		scope: EScope;
+		scope: Scope;
 		/**
 		 * Manages the settings modal and its tabs
 		 * @tutorial Can be used to open the settings modal to a specific tab, extend the settings modal functionality, ...
@@ -1872,7 +1849,7 @@ declare module 'obsidian' {
 		/**
 		 * @internal Initialize the entire application using the provided FS adapter
 		 */
-		initializeWithAdapter: (adapter: EDataAdapter) => Promise<void>;
+		initializeWithAdapter: (adapter: DataAdapter) => Promise<void>;
 		/**
 		 * Load a value from the localstorage given key
 		 * @param key Key of value to load
@@ -1892,10 +1869,6 @@ declare module 'obsidian' {
 		 * @internal Add callback to execute on next frame with promise
 		 */
 		nextFramePromise: (callback: () => Promise<void>) => Promise<void>;
-		/**
-		 * @internal
-		 */
-		on: (args: any[]) => EventRef;
 		/**
 		 * @internal
 		 */
@@ -1997,7 +1970,7 @@ declare module 'obsidian' {
 		/**
 		 * @internal Scope that this scope is a child of
 		 */
-		parent: EScope | undefined;
+		parent: Scope | undefined;
 		/**
 		 * @internal - Callback to execute when scope is matched
 		 */
@@ -2023,7 +1996,7 @@ declare module 'obsidian' {
 		setTabFocusContainer: (container: HTMLElement) => void;
 	}
 
-	class MetadataCache {
+	interface MetadataCache {
 		/**
 		 * Reference to App
 		 */
@@ -2120,7 +2093,7 @@ declare module 'obsidian' {
 		/**
 		 * Get destination of link path
 		 */
-		getLinkpathDest: (origin: string = "", path: string) => TFile[];
+		getLinkpathDest: (origin: string, path: string) => TFile[];
 		/**
 		 * Get all links within the vault per file
 		 */
@@ -2281,16 +2254,16 @@ declare module 'obsidian' {
 		 * @param extension - Extension of the file to create, defaults to "md"
 		 * @param contents - Contents of the file to create, defaults to empty string
 		 */
-		createNewFile: (location: TFolder = null, filename: string = null, extension: string = "md", contents: string = "") => Promise<TFile>;
+		createNewFile: (location: TFolder, filename: string, extension: string, contents: string) => Promise<TFile>;
 		/**
 		 * Creates a new untitled folder in the vault at specified location
 		 * @param location - Location to create the folder in, defaults to root
 		 */
-		createNewFolder: (location: TFolder = null) => Promise<TFolder>;
+		createNewFolder: (location: TFolder) => Promise<TFolder>;
 		/**
 		 * Creates a new Markdown file in the vault at specified location
 		 */
-		createNewMarkdownFile: (location: TFolder = null, filename: string = null, contents: string = "") => Promise<TFile>;
+		createNewMarkdownFile: (location: TFolder, filename: string, contents: string) => Promise<TFile>;
 		/**
 		 * Creates a new Markdown file based on linktext and path
 		 * @param filename - Name of the file to create
@@ -2315,7 +2288,7 @@ declare module 'obsidian' {
 		 * @param secondary_text - Text to insert (always inserted)
 		 * @param atStart - Whether to insert text at the start or end of the file
 		 */
-		insertTextIntoFile: (file: TFile, primary_text: string, basename: string, secondary_text: string, atStart: boolean = true) => Promise<void>;
+		insertTextIntoFile: (file: TFile, primary_text: string, basename: string, secondary_text: string, atStart: boolean) => Promise<void>;
 		/**
 		 * Iterate over all links in the vault with callback
 		 * @param callback - Callback to execute for each link
@@ -2453,7 +2426,7 @@ declare module 'obsidian' {
 		/**
 		 * Current active tab of the settings modal
 		 */
-		activateTab: ESettingTab;
+		activateTab: SettingTab;
 		/**
 		 * @internal Container element containing the community plugins
 		 */
@@ -2469,11 +2442,11 @@ declare module 'obsidian' {
 		/**
 		 * List of all plugin tabs (core and community, ordered by precedence)
 		 */
-		pluginTabs: ESettingTab[];
+		pluginTabs: SettingTab[];
 		/**
 		 * List of all core settings tabs (editor, files & links, ...)
 		 */
-		settingTabs: ESettingTab[];
+		settingTabs: SettingTab[];
 		/**
 		 * @internal Container element containing the core settings
 		 */
@@ -2496,7 +2469,7 @@ declare module 'obsidian' {
 		 * @internal Add a new plugin tab to the settings modal
 		 * @param tab Tab to add
 		 */
-		addSettingTab: (tab: ESettingTab) => void;
+		addSettingTab: (tab: SettingTab) => void;
 		/**
 		 * @internal Closes the currently active tab
 		 */
@@ -2505,22 +2478,22 @@ declare module 'obsidian' {
 		 * @internal Check whether tab is a plugin tab
 		 * @param tab Tab to check
 		 */
-		isPluginSettingTab: (tab: ESettingTab) => boolean;
+		isPluginSettingTab: (tab: SettingTab) => boolean;
 		/**
 		 * @internal Open a specific tab by tab reference
 		 * @param tab Tab to open
 		 */
-		openTab: (tab: ESettingTab) => void;
+		openTab: (tab: SettingTab) => void;
 		/**
 		 * @internal Remove a plugin tab from the settings modal
 		 * @param tab Tab to remove
 		 */
-		removeSettingTab: (tab: ESettingTab) => void;
+		removeSettingTab: (tab: SettingTab) => void;
 		/**
 		 * @internal Update the title of the modal
 		 * @param tab Tab to update the title to
 		 */
-		updateModalTitle: (tab: ESettingTab) => void;
+		updateModalTitle: (tab: SettingTab) => void;
 		/**
 		 * @internal Update a tab section
 		 */
@@ -2543,11 +2516,11 @@ declare module 'obsidian' {
 		/**
 		 * Reference to node fs module
 		 */
-		fs?: fs;
+		fs?: typeof fs;
 		/**
 		 * Reference to node fs:promises module
 		 */
-		fsPromises?: fsPromises;
+		fsPromises?: typeof fsPromises;
 		/**
 		 * @internal
 		 */
@@ -2559,7 +2532,7 @@ declare module 'obsidian' {
 		/**
 		 * Reference to node path module
 		 */
-		path: path;
+		path: typeof path;
 		/**
 		 * @internal
 		 */
@@ -2787,7 +2760,7 @@ declare module 'obsidian' {
 		/**
 		 * @internal Keyscope registered to the vault
 		 */
-		scope: EScope;
+		scope: Scope;
 		/**
 		 * List of states that were closed and may be reopened
 		 */
@@ -2852,7 +2825,7 @@ declare module 'obsidian' {
 		/**
 		 * Get n last opened files of type (defaults to 10)
 		 */
-		getRecentFiles: ({showMarkdown: boolean, showCanvas: boolean, showNonImageAttachments: boolean, showImages: boolean, maxCount: number}?) => string[];
+		getRecentFiles: (arg?: {showMarkdown: boolean, showCanvas: boolean, showNonImageAttachments: boolean, showImages: boolean, maxCount: number}) => string[];
 		/**
 		 * Get leaf in the side ribbon/dock and split if necessary
 		 * @param sideRibbon Side ribbon to get leaf from
@@ -2883,10 +2856,6 @@ declare module 'obsidian' {
 		 * @internal Load workspace from disk and initialize
 		 */
 		loadLayout: () => Promise<void>;
-		/**
-		 * @internal
-		 */
-		on: (args: any[]) => EventRef;
 		/**
 		 * @internal Handles drag event on leaf
 		 */
@@ -2949,10 +2918,6 @@ declare module 'obsidian' {
 		 * @internal Request execution of resize event
 		 */
 		requestResize: () => void;
-		/**
-		 * @internal Request execution of layout save event
-		 */
-		requestSaveLayout: () => void;
 		/**
 		 * @internal Request execution of layout update event
 		 */
@@ -3215,7 +3180,7 @@ declare module 'obsidian' {
 		 * @param pos Editor position
 		 * @param mode Relative to the editor or the application window
 		 */
-		coordsAtPos: (pos: EditorPosition, relative_to_editor = false) => {left: number, top: number, bottom: number, right: number};
+		coordsAtPos: (pos: EditorPosition, relative_to_editor: boolean) => {left: number, top: number, bottom: number, right: number};
 		/**
 		 * Unfolds all folded lines one level up
 		 * @remark If level 1 and 2 headings are folded, level 2 headings will be unfolded
@@ -3264,8 +3229,8 @@ declare module 'obsidian' {
 			findAll: () => {from: EditorPosition, to: EditorPosition}[];
 			findNext: () => {from: EditorPosition, to: EditorPosition};
 			findPrevious: () => {from: EditorPosition, to: EditorPosition};
-			replace: (replacement?: string, origin: string) => void;
-			replaceAll: (replacement?: string, origin: string) => void;
+			replace: (replacement: string, origin: string) => void;
+			replaceAll: (replacement: string, origin: string) => void;
 		}
 		/**
 		 * Applies specified markdown syntax to selected text or word under cursor
@@ -3362,14 +3327,12 @@ declare module 'obsidian' {
 		dom: HTMLElement;
 		items: MenuItem[];
 		onMouseOver: (evt: MouseEvent) => void;
-		hide: () => void;
 	}
 
 	interface MenuItem {
 		callback: () => void;
 		dom: HTMLElement;
 		setSubmenu: () => Menu;
-		onClick: (evt: MouseEvent) => void;
 		disabled: boolean;
 	}
 
