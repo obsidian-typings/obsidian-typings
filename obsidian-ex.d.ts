@@ -734,17 +734,17 @@ interface FileCacheEntry {
 	size: number;
 }
 
-interface CustomArrayDict<T extends string | number | symbol, Q> {
-	data: Record<T, Q>;
+interface CustomArrayDict<T> {
+	data: Record<string, T[]>;
 
-	add: (key: T, value: Q) => void;
-	remove: (key: T, value: Q) => void;
-	removeKey: (key: T) => void;
-	get: (key: T) => Q;
-	keys: () => T[];
-	clear: (key: T) => void;
+	add: (key: string, value: T) => void;
+	remove: (key: string, value: T) => void;
+	removeKey: (key: string) => void;
+	get: (key: string) => T[] | null;
+	keys: () => string[];
+	clear: (key: string) => void;
 	clearAll: () => void;
-	contains: (key: T) => boolean;
+	contains: (key: string, value: T) => boolean;
 	count: () => number;
 }
 
@@ -2036,7 +2036,7 @@ declare module 'obsidian' {
 		/**
 		 * @internal Mapping of filename to collection of files that share the same name
 		 */
-		uniqueFileLookup: CustomArrayDict<string, TFile>;
+		uniqueFileLookup: CustomArrayDict<TFile>;
 		/**
 		 * @internal
 		 */
@@ -2073,7 +2073,7 @@ declare module 'obsidian' {
 		/**
 		 * Get all backlink information for a file
 		 */
-		getBacklinksForFile: (file?: TFile) => CustomArrayDict<string, Reference>
+		getBacklinksForFile: (file?: TFile) => CustomArrayDict<LinkCache>
 		/**
 		 * Get paths of all files cached in the vault
 		 */
