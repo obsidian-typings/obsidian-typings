@@ -16,7 +16,8 @@ import {
 	View,
 	ViewState,
 	Workspace,
-	WorkspaceLeaf
+	WorkspaceLeaf,
+	WorkspaceSplit
 } from 'obsidian';
 import { EditorView } from '@codemirror/view';
 import { EditorState, Extension } from '@codemirror/state';
@@ -3318,9 +3319,17 @@ declare module 'obsidian' {
 	interface WorkspaceLeaf {
 		id?: string;
 
+		activeTime?: number;
+
+		parent?: WorkspaceSplit;
+
 		tabHeaderEl: HTMLElement;
 		tabHeaderInnerIconEl: HTMLElement;
 		tabHeaderInnerTitleEl: HTMLElement;
+	}
+
+	interface WorkspaceSplit {
+		parent?: WorkspaceSplit;
 	}
 
 	interface Menu {
