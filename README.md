@@ -1,6 +1,8 @@
 This mini-repository contains TypeScript typings for undocumented [Obsidian](https://obsidian.md/) API functions.
 You can add the code as a submodule to your project - or as an NPM package via `npm install --save-dev https://github.com/Fevol/obsidian-typings`.
 
+If you prefer to have automatic types discovery without needing to explicitly `import` current package, use `npm install --save-dev @types/obsidian-typings@https://github.com/Fevol/obsidian-typings`
+
 These typings contain _almost_ all of the undocumented API methods and variables, excluding those that 
 seem to be intended solely for internal use and will not be relevant for plugin development.
 
