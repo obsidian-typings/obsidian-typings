@@ -3371,6 +3371,11 @@ declare module 'obsidian' {
 		 */
 		name: string;
 	}
+
+	interface Plugin {
+		disable: () => void;
+		enable: () => void;
+	}
 }
 
 
