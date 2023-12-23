@@ -547,7 +547,7 @@ interface InternalPlugins extends Events {
 	/**
 	 * Plugin configs for internal plugins
 	 */
-	plugins: Record<InternalPluginName, Plugin>;
+	plugins: Record<InternalPluginName, InternalPlugin>;
 	/**
 	 * @internal Request save of plugin configs
 	 */
