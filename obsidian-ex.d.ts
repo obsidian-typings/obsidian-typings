@@ -496,7 +496,7 @@ interface HotkeyManager {
 	save: () => void;
 }
 
-type InternalPlugin = "audio-recorder" |
+type InternalPluginName = "audio-recorder" |
 	"backlink" |
 	"bookmarks" |
 	"canvas" |
@@ -526,6 +526,11 @@ type InternalPlugin = "audio-recorder" |
 	"workspaces" |
 	"zk-prefixer"
 
+interface InternalPlugin extends Plugin {
+	disable: () => void;
+	enable: () => void;
+}
+
 interface InternalPlugins extends Events {
 	/**
 	 * Reference to App
@@ -534,7 +539,7 @@ interface InternalPlugins extends Events {
 	/**
 	 * Mapping of whether an internal plugin is enabled
 	 */
-	config: Record<InternalPlugin, boolean>;
+	config: Record<InternalPluginName, boolean>;
 	/**
 	 * @internal
 	 */
@@ -542,7 +547,7 @@ interface InternalPlugins extends Events {
 	/**
 	 * Plugin configs for internal plugins
 	 */
-	plugins: Record<InternalPlugin, Plugin>;
+	plugins: Record<InternalPluginName, InternalPlugin>;
 	/**
 	 * @internal Request save of plugin configs
 	 */
@@ -552,16 +557,16 @@ interface InternalPlugins extends Events {
 	 * Get an enabled internal plugin by ID
 	 * @param id - ID of the plugin to get
 	 */
-	getEnabledPluginById: (id: InternalPlugin) => Plugin | null;
+	getEnabledPluginById: (id: InternalPluginName) => InternalPlugin | null;
 	/**
 	 * Get all enabled internal plugins
 	 */
-	getEnabledPlugins: () => Plugin[];
+	getEnabledPlugins: () => InternalPlugin[];
 	/**
 	 * Get an internal plugin by ID
 	 * @param id - ID of the plugin to get
 	 */
-	getPluginById: (id: InternalPlugin) => Plugin;
+	getPluginById: (id: InternalPluginName) => InternalPlugin;
 
 	/**
 	 * @internal - Load plugin configs and enable plugins
@@ -3370,11 +3375,6 @@ declare module 'obsidian' {
 		 * Event name the event was registered on
 		 */
 		name: string;
-	}
-
-	interface Plugin {
-		disable: () => void;
-		enable: () => void;
 	}
 }
 
