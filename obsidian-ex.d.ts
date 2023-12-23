@@ -1094,9 +1094,9 @@ interface Plugins {
 	 */
 	isEnabled: () => boolean;
 	/**
-	 * Load a specific plugin's manifest by its ID
+	 * Load a specific plugin's manifest by its folder path
 	 */
-	loadManifest: (id: string) => Promise<void>;
+	loadManifest: (path: string) => Promise<void>;
 	/**
 	 * @internal Load all plugin manifests from plugin folder
 	 */
