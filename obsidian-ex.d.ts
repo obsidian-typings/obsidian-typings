@@ -70,20 +70,20 @@ interface Account {
 }
 
 // interface AppMenuBarManager {
-// 	/**
-// 	 * Reference to App
-// 	 */
-// 	app: App;
+//     /**
+//      * Reference to App
+//      */
+//     app: App;
 //
-// 	/**
-// 	 *
-// 	 */
-// 	requestRender: () => void;
+//     /**
+//      *
+//      */
+//     requestRender: () => void;
 //
-// 	/**
-// 	 *
-// 	 */
-// 	requestUpdateViewState: () => void;
+//     /**
+//      *
+//      */
+//     requestUpdateViewState: () => void;
 // }
 
 interface Commands {
@@ -134,34 +134,34 @@ interface Commands {
 }
 
 // interface ThemeRecord {
-// 	/**
-// 	 * Author of the theme
-// 	 */
-// 	author: string;
-// 	/**
-// 	 * @internal
-// 	 */
-// 	authorEl?: HTMLElement;
-// 	/**
-// 	 * Amount of downloads the theme
-// 	 */
-// 	downloads: number;
-// 	/**
-// 	 * @internal
-// 	 */
-// 	el?: HTMLElement;
-// 	matches: null;
-// 	modes: ['light', 'dark'] | ['light'];
-// 	name: string;
-// 	nameEl?: HTMLElement;
-// 	repo: string;
-// 	score: number;
-// 	screenshot: string;
-// 	updateIconEl?: HTMLElement;
-// 	/**
-// 	 * Whether the theme was updated
-// 	 */
-// 	updated: number;
+//     /**
+//      * Author of the theme
+//      */
+//     author: string;
+//     /**
+//      * @internal
+//      */
+//     authorEl?: HTMLElement;
+//     /**
+//      * Amount of downloads the theme
+//      */
+//     downloads: number;
+//     /**
+//      * @internal
+//      */
+//     el?: HTMLElement;
+//     matches: null;
+//     modes: ['light', 'dark'] | ['light'];
+//     name: string;
+//     nameEl?: HTMLElement;
+//     repo: string;
+//     score: number;
+//     screenshot: string;
+//     updateIconEl?: HTMLElement;
+//     /**
+//      * Whether the theme was updated
+//      */
+//     updated: number;
 // }
 
 interface ThemeManifest {
@@ -375,7 +375,7 @@ interface ObsidianDOM {
 }
 
 // interface EmbedRegistry {
-// 	embedByExtension: Map<string, (e) => any>;
+//     embedByExtension: Map<string, (e) => any>;
 // }
 
 interface PositionedReference extends Reference {
@@ -614,106 +614,106 @@ interface KeyScope {
 }
 
 // interface KeymapManager {
-// 	/**
-// 	 * Modifiers pressed within keyscope
-// 	 */
-// 	modifiers: string;
-// 	/**
-// 	 * @internal
-// 	 */
-// 	prevScopes: EScope[];
-// 	/**
-// 	 * @internal - Root scope of the application
-// 	 */
-// 	rootScope: EScope;
+//     /**
+//      * Modifiers pressed within keyscope
+//      */
+//     modifiers: string;
+//     /**
+//      * @internal
+//      */
+//     prevScopes: EScope[];
+//     /**
+//      * @internal - Root scope of the application
+//      */
+//     rootScope: EScope;
 //
-// 	/**
-// 	 * Get the root scope of the application
-// 	 */
-// 	getRootScope: () => EScope;
-// 	/**
-// 	 * Check whether a specific modifier was part of the keypress
-// 	 */
-// 	hasModifier(modifier: Modifier): boolean;
-// 	/**
-// 	 * Check whether event has same modifiers as the current keypress
-// 	 */
-// 	matchModifiers(event: KeyboardEvent): boolean;
-// 	/**
-// 	 * @internal - On focus keyscope
-// 	 */
-// 	onFocusIn(event: FocusEvent): void;
-// 	/**
-// 	 * @internal - On keypress find matching keyscope and execute callback
-// 	 */
-// 	onKeyEvent(event: KeyboardEvent): void;
-// 	/**
-// 	 * @internal - Pop a scope from the prevScopes stack
-// 	 */
-// 	popScope(scope: EScope): void;
-// 	/**
-// 	 * @internal - Push a scope to the prevScopes stack and set it as the current scope
-// 	 */
-// 	pushScope(scope: EScope): void;
-// 	/**
-// 	 * @internal - Update last pressed modifiers
-// 	 */
-// 	updateModifiers(event: KeyboardEvent): void;
+//     /**
+//      * Get the root scope of the application
+//      */
+//     getRootScope: () => EScope;
+//     /**
+//      * Check whether a specific modifier was part of the keypress
+//      */
+//     hasModifier(modifier: Modifier): boolean;
+//     /**
+//      * Check whether event has same modifiers as the current keypress
+//      */
+//     matchModifiers(event: KeyboardEvent): boolean;
+//     /**
+//      * @internal - On focus keyscope
+//      */
+//     onFocusIn(event: FocusEvent): void;
+//     /**
+//      * @internal - On keypress find matching keyscope and execute callback
+//      */
+//     onKeyEvent(event: KeyboardEvent): void;
+//     /**
+//      * @internal - Pop a scope from the prevScopes stack
+//      */
+//     popScope(scope: EScope): void;
+//     /**
+//      * @internal - Push a scope to the prevScopes stack and set it as the current scope
+//      */
+//     pushScope(scope: EScope): void;
+//     /**
+//      * @internal - Update last pressed modifiers
+//      */
+//     updateModifiers(event: KeyboardEvent): void;
 // }
 
 // interface LoadProgress {
-// 	/**
-// 	 * Application's document
-// 	 */
-// 	doc: Document;
-// 	/**
-// 	 * @internal Loading bar element
-// 	 */
-// 	el: HTMLElement;
-// 	/**
-// 	 * @internal First part of the line
-// 	 */
-// 	line1El: HTMLElement;
-// 	/**
-// 	 * @internal Second part of the line
-// 	 */
-// 	line2El: HTMLElement;
-// 	/**
-// 	 * @internal Main line element
-// 	 */
-// 	lineEl: HTMLElement;
-// 	/**
-// 	 * @internal Message element for the loading bar
-// 	 */
-// 	messageEl: HTMLElement;
-// 	/**
-// 	 * @internal Timeout for the loading bar
-// 	 */
-// 	showTimeout: number;
+//     /**
+//      * Application's document
+//      */
+//     doc: Document;
+//     /**
+//      * @internal Loading bar element
+//      */
+//     el: HTMLElement;
+//     /**
+//      * @internal First part of the line
+//      */
+//     line1El: HTMLElement;
+//     /**
+//      * @internal Second part of the line
+//      */
+//     line2El: HTMLElement;
+//     /**
+//      * @internal Main line element
+//      */
+//     lineEl: HTMLElement;
+//     /**
+//      * @internal Message element for the loading bar
+//      */
+//     messageEl: HTMLElement;
+//     /**
+//      * @internal Timeout for the loading bar
+//      */
+//     showTimeout: number;
 //
-// 	/**
-// 	 * @internal Delay showing the loading bar
-// 	 */
-// 	delayedShow: () => LoadProgress;
-// 	/**
-// 	 * @internal Hide and remove the loading bar
-// 	 */
-// 	hide: () => LoadProgress;
-// 	/**
-// 	 * @internal Update the loading bar message
-// 	 * @param message - Message to update to
-// 	 */
-// 	setMessage(message: string): LoadProgress;
-// 	/**
-// 	 * @internal Update the loading bar progress
-// 	 * @param current - Current progress
-// 	 * @param max - Maximum progress
-// 	 */
-// 	setProgress(current: number, max: number): LoadProgress;
-// 	/**
-// 	 * @internal Set the loading bar to unknown progress
-// 	 */
-// 	setUnknownProgress: () => LoadProgress;
+//     /**
+//      * @internal Delay showing the loading bar
+//      */
+//     delayedShow: () => LoadProgress;
+//     /**
+//      * @internal Hide and remove the loading bar
+//      */
+//     hide: () => LoadProgress;
+//     /**
+//      * @internal Update the loading bar message
+//      * @param message - Message to update to
+//      */
+//     setMessage(message: string): LoadProgress;
+//     /**
+//      * @internal Update the loading bar progress
+//      * @param current - Current progress
+//      * @param max - Maximum progress
+//      */
+//     setProgress(current: number, max: number): LoadProgress;
+//     /**
+//      * @internal Set the loading bar to unknown progress
+//      */
+//     setUnknownProgress: () => LoadProgress;
 // }
 
 interface BlockCache {
@@ -877,95 +877,95 @@ interface MetadataTypeManager extends Events {
 }
 //
 // interface MobileNavbar {
-// 	/**
-// 	 * Reference to App
-// 	 */
-// 	app: App;
-// 	/**
-// 	 * @internal Back button element
-// 	 */
-// 	backButtonEl: HTMLElement;
-// 	/**
-// 	 * @internal Container element
-// 	 */
-// 	containerEl: HTMLElement;
-// 	/**
-// 	 * @internal Forward button element
-// 	 */
-// 	forwardButtonEl: HTMLElement;
-// 	/**
-// 	 * Whether the mobile navbar is currently visible
-// 	 */
-// 	isVisible: boolean;
-// 	/**
-// 	 * @internal On ribbon click
-// 	 */
-// 	onRibbonClick: () => void;
-// 	/**
-// 	 * @internal Ribbon menu flair element
-// 	 */
-// 	ribbonMenuFlairEl: HTMLElement;
-// 	/**
-// 	 * @internal Ribbon menu item element
-// 	 */
-// 	ribbonMenuItemEl: HTMLElement;
-// 	/**
-// 	 * @internal Tab button element
-// 	 */
-// 	tabButtonEl: HTMLElement;
+//     /**
+//      * Reference to App
+//      */
+//     app: App;
+//     /**
+//      * @internal Back button element
+//      */
+//     backButtonEl: HTMLElement;
+//     /**
+//      * @internal Container element
+//      */
+//     containerEl: HTMLElement;
+//     /**
+//      * @internal Forward button element
+//      */
+//     forwardButtonEl: HTMLElement;
+//     /**
+//      * Whether the mobile navbar is currently visible
+//      */
+//     isVisible: boolean;
+//     /**
+//      * @internal On ribbon click
+//      */
+//     onRibbonClick: () => void;
+//     /**
+//      * @internal Ribbon menu flair element
+//      */
+//     ribbonMenuFlairEl: HTMLElement;
+//     /**
+//      * @internal Ribbon menu item element
+//      */
+//     ribbonMenuItemEl: HTMLElement;
+//     /**
+//      * @internal Tab button element
+//      */
+//     tabButtonEl: HTMLElement;
 //
-// 	/**
-// 	 * @internal Hide mobile navbar
-// 	 */
-// 	hide: () => void;
-// 	/**
-// 	 * @internal Show mobile navbar
-// 	 */
-// 	show: () => void;
-// 	/**
-// 	 * @internal Show ribbon menu
-// 	 */
-// 	showRibbonMenu: () => void;
-// 	/**
-// 	 * @internal Update navigation buttons
-// 	 */
-// 	updateNavButtons: () => void;
-// 	/**
-// 	 * @internal Update ribbon menu item
-// 	 */
-// 	updateRibbonMenuItem: () => void;
+//     /**
+//      * @internal Hide mobile navbar
+//      */
+//     hide: () => void;
+//     /**
+//      * @internal Show mobile navbar
+//      */
+//     show: () => void;
+//     /**
+//      * @internal Show ribbon menu
+//      */
+//     showRibbonMenu: () => void;
+//     /**
+//      * @internal Update navigation buttons
+//      */
+//     updateNavButtons: () => void;
+//     /**
+//      * @internal Update ribbon menu item
+//      */
+//     updateRibbonMenuItem: () => void;
 // }
 //
 // interface MobileToolbar {
-// 	/**
-// 	 * Reference to App
-// 	 */
-// 	app: App;
-// 	/**
-// 	 * @internal Container element
-// 	 */
-// 	containerEl: HTMLElement;
-// 	/**
-// 	 * @internal Last selected command ID
-// 	 */
-// 	lastCommandIds: string;
-// 	/**
-// 	 * @internal Options container element
-// 	 */
-// 	optionsContainerEl: HTMLElement;
+//     /**
+//      * Reference to App
+//      */
+//     app: App;
+//     /**
+//      * @internal Container element
+//      */
+//     containerEl: HTMLElement;
+//     /**
+//      * @internal Last selected command ID
+//      */
+//     lastCommandIds: string;
+//     /**
+//      * @internal Options container element
+//      */
+//     optionsContainerEl: HTMLElement;
 //
-// 	/**
-// 	 * @internal Compile all actions for the toolbar
-// 	 */
-// 	compileToolbar: () => void;
-// 	/**
-// 	 * @internal Hide mobile toolbar
-// 	 */
-// 	hide: () => void;
-// 	/**
-// 	 * @internal Show mobile toolbar
-// 	 */
-// 	show: () => void;
+//     /**
+//      * @internal Compile all actions for the toolbar
+//      */
+//     compileToolbar: () => void;
+//     /**
+//      * @internal Hide mobile toolbar
+//      */
+//     hide: () => void;
+//     /**
+//      * @internal Show mobile toolbar
+//      */
+//     show: () => void;
 // }
 
 interface PluginManifest {
@@ -1647,7 +1647,7 @@ declare module 'obsidian' {
         /**
          * ID that uniquely identifies the vault
          * @tutorial Used for implementing device *and* vault-specific
-         *  	   data storage using LocalStorage or IndexedDB
+         *         data storage using LocalStorage or IndexedDB
          */
         appId: string;
         // /**
@@ -1662,7 +1662,7 @@ declare module 'obsidian' {
         /**
          * Custom CSS (snippets/themes) applied to the application
          * @tutorial Can be used to view which snippets are enabled or available,
-         * 	   		or inspect loaded-in theme manifests
+         *                or inspect loaded-in theme manifests
          */
         customCss: CustomCSS;
         /** References to important DOM elements of the application */
@@ -1693,7 +1693,7 @@ declare module 'obsidian' {
         /**
          * Manager of internal 'core' plugins
          * @tutorial Can be used to check whether a specific internal plugin is enabled, or grab specific parts
-         * 			 from its config for simplifying your own plugin's settings
+         *              from its config for simplifying your own plugin's settings
          */
         internalPlugins: InternalPlugins;
         /**
@@ -2287,7 +2287,7 @@ declare module 'obsidian' {
         /**
          * Gets the folder that new markdown files should be saved to, based on the current settings
          * @param path - The path of the current opened/focused file, used when the user
-         * 				wants new files to be created in the same folder as the current file
+         *                 wants new files to be created in the same folder as the current file
          */
         getMarkdownNewFileParent(path: string): TFolder;
         /**
@@ -3005,7 +3005,7 @@ declare module 'obsidian' {
         /**
          * Object containing all config settings for the vault (editor, appearance, ... settings)
          * @remark Prefer usage of `app.vault.getConfig(key)` to get settings, config does not contain
-         * 		   settings that were not changed from their default value
+         *            settings that were not changed from their default value
          */
         config: AppVaultConfig;
         /**
