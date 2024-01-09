@@ -17,7 +17,6 @@ import {
 	ViewState,
 	Workspace,
 	WorkspaceLeaf,
-	WorkspaceSplit
 } from 'obsidian';
 import { EditorView } from '@codemirror/view';
 import { EditorState, Extension } from '@codemirror/state';
@@ -2352,7 +2351,7 @@ declare module 'obsidian' {
 		/**
 		 * @internal
 		 */
-		fileParentCreatorByType: Map<string, (e) => any>;
+		fileParentCreatorByType: Map<string, (path: string) => TFolder>;
 		/**
 		 * @internal
 		 */
@@ -2360,11 +2359,18 @@ declare module 'obsidian' {
 		/**
 		 * @internal
 		 */
-		linkUpdaters: Map<string, (e) => any>;
+		linkUpdaters: {
+			canvas: {
+				app: App,
+				canvas: unknown
+			}
+		};
 		/**
 		 * @internal
 		 */
-		updateQueue: Map<string, (e) => any>;
+		updateQueue: {
+			promise: Promise<void>
+		}
 		/**
 		 * Reference to Vault
 		 */
@@ -2571,7 +2577,7 @@ declare module 'obsidian' {
 		 * @param normalizedPath Path to file
 		 * @return URL path to file
 		 */
-		getFilePath: (normalizedPath: string) => URL;
+		getFilePath: (normalizedPath: string) => string;
 		/**
 		 * Get full path of file (OS path)
 		 * @param normalizedPath Path to file
@@ -2679,7 +2685,7 @@ declare module 'obsidian' {
 		/**
 		 * @internal Trigger an event on handler
 		 */
-		trigger: (any) => void;
+		trigger(e: unknown, t: unknown, n: unknown, i: unknown): void;
 		/**
 		 * @internal
 		 */
@@ -2692,6 +2698,9 @@ declare module 'obsidian' {
 		 * @internal Watch recursively for changes
 		 */
 		watchHiddenRecursive: (normalizedPath: string) => Promise<void>;
+	}
+
+	interface FileSystemAdapter extends DataAdapter {
 	}
 
 	interface Workspace {
@@ -2857,7 +2866,7 @@ declare module 'obsidian' {
 		/**
 		 * Iterate the tabs of a split till meeting a condition
 		 */
-		iterateTabs: (tabs: WorkspaceSplit | WorkspaceSplit[], cb: (leaf) => boolean) => boolean;
+		iterateTabs: (tabs: WorkspaceSplit | WorkspaceSplit[], cb: (leaf: WorkspaceLeaf) => boolean) => boolean;
 		/**
 		 * @internal Load workspace from disk and initialize
 		 */
@@ -3031,7 +3040,7 @@ declare module 'obsidian' {
 		/**
 		 * @internal
 		 */
-		generateFiles: (any) => Promise<void>;
+		generateFiles(e: AsyncGenerator<TFile>, t: boolean): Promise<void>;
 		/**
 		 * Get an abstract file by path, insensitive to case
 		 */
@@ -3369,7 +3378,7 @@ declare module 'obsidian' {
 		/**
 		 * Function to be called on event trigger on the events object
 		 */
-		fn: (any) => void;
+		fn: (...arg: any[]) => void;
 
 		/**
 		 * Event name the event was registered on
