@@ -12,6 +12,7 @@ import {
 	Scope,
 	SplitDirection,
 	TFile,
+	TFolder,
 	Vault,
 	View,
 	ViewState,
@@ -530,6 +531,10 @@ interface InternalPlugin extends Plugin {
 	enable: () => void;
 }
 
+interface FileExplorerPlugin extends InternalPlugin {
+	revealInFolder(folder: TFolder): Promise<void>;
+}
+
 interface InternalPlugins extends Events {
 	/**
 	 * Reference to App
@@ -556,7 +561,9 @@ interface InternalPlugins extends Events {
 	 * Get an enabled internal plugin by ID
 	 * @param id - ID of the plugin to get
 	 */
-	getEnabledPluginById: (id: InternalPluginName) => InternalPlugin | null;
+	getEnabledPluginById(id: InternalPluginName): InternalPlugin | null;
+	getEnabledPluginById(id: "file-explorer"): FileExplorerPlugin | null;
+
 	/**
 	 * Get all enabled internal plugins
 	 */
@@ -2208,6 +2215,8 @@ declare module 'obsidian' {
 		 * @internal Send message to worker to update metadata cache
 		 */
 		work: (cacheEntry: any) => void;
+
+		_getLinkpathDest(origin: string, path: string): TFile[];
 	}
 
 	interface SettingTab {
@@ -3384,6 +3393,10 @@ declare module 'obsidian' {
 		 * Event name the event was registered on
 		 */
 		name: string;
+	}
+
+	interface TFile {
+		deleted: boolean;
 	}
 }
 
