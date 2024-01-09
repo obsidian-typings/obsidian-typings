@@ -1646,8 +1646,7 @@ declare module 'obsidian' {
         account: Account;
         /**
          * ID that uniquely identifies the vault
-         * @tutorial Used for implementing device *and* vault-specific
-         *         data storage using LocalStorage or IndexedDB
+         * @tutorial Used for implementing device *and* vault-specific data storage using LocalStorage or IndexedDB
          */
         appId: string;
         // /**
@@ -1661,8 +1660,7 @@ declare module 'obsidian' {
         commands: Commands;
         /**
          * Custom CSS (snippets/themes) applied to the application
-         * @tutorial Can be used to view which snippets are enabled or available,
-         *                or inspect loaded-in theme manifests
+         * @tutorial Can be used to view which snippets are enabled or available, or inspect loaded-in theme manifests
          */
         customCss: CustomCSS;
         /** References to important DOM elements of the application */
@@ -1692,8 +1690,7 @@ declare module 'obsidian' {
         hotkeyManager: HotkeyManager;
         /**
          * Manager of internal 'core' plugins
-         * @tutorial Can be used to check whether a specific internal plugin is enabled, or grab specific parts
-         *              from its config for simplifying your own plugin's settings
+         * @tutorial Can be used to check whether a specific internal plugin is enabled, or grab specific parts from its config for simplifying your own plugin's settings
          */
         internalPlugins: InternalPlugins;
         /**
@@ -2286,8 +2283,7 @@ declare module 'obsidian' {
         getAllLinkResolutions: () => [];
         /**
          * Gets the folder that new markdown files should be saved to, based on the current settings
-         * @param path - The path of the current opened/focused file, used when the user
-         *                 wants new files to be created in the same folder as the current file
+         * @param path - The path of the current opened/focused file, used when the user wants new files to be created in the same folder as the current file
          */
         getMarkdownNewFileParent(path: string): TFolder;
         /**
@@ -3004,8 +3000,7 @@ declare module 'obsidian' {
         cacheLimit: number;
         /**
          * Object containing all config settings for the vault (editor, appearance, ... settings)
-         * @remark Prefer usage of `app.vault.getConfig(key)` to get settings, config does not contain
-         *            settings that were not changed from their default value
+         * @remark Prefer usage of `app.vault.getConfig(key)` to get settings, config does not contain settings that were not changed from their default value
          */
         config: AppVaultConfig;
         /**
