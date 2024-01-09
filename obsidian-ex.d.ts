@@ -494,35 +494,35 @@ interface HotkeyManager {
     save: () => void;
 }
 
-type InternalPluginName = "audio-recorder" |
-    "backlink" |
-    "bookmarks" |
-    "canvas" |
-    "command-palette" |
-    "daily-notes" |
-    "editor-status" |
-    "file-explorer" |
-    "file-recovery" |
-    "global-search" |
-    "graph" |
-    "markdown-importer" |
-    "note-composer" |
-    "outgoing-link" |
-    "outline" |
-    "page-preview" |
-    "properties" |
-    "publish" |
-    "random-note" |
-    "slash-command" |
-    "slides" |
-    "starred" |
-    "switcher" |
-    "sync" |
-    "tag-pane" |
-    "templates" |
-    "word-count" |
-    "workspaces" |
-    "zk-prefixer"
+type InternalPluginName = 'audio-recorder' |
+    'backlink' |
+    'bookmarks' |
+    'canvas' |
+    'command-palette' |
+    'daily-notes' |
+    'editor-status' |
+    'file-explorer' |
+    'file-recovery' |
+    'global-search' |
+    'graph' |
+    'markdown-importer' |
+    'note-composer' |
+    'outgoing-link' |
+    'outline' |
+    'page-preview' |
+    'properties' |
+    'publish' |
+    'random-note' |
+    'slash-command' |
+    'slides' |
+    'starred' |
+    'switcher' |
+    'sync' |
+    'tag-pane' |
+    'templates' |
+    'word-count' |
+    'workspaces' |
+    'zk-prefixer'
 
 interface InternalPlugin extends Plugin {
     disable: () => void;
@@ -560,7 +560,7 @@ interface InternalPlugins extends Events {
      * @param id - ID of the plugin to get
      */
     getEnabledPluginById(id: InternalPluginName): InternalPlugin | null;
-    getEnabledPluginById(id: "file-explorer"): FileExplorerPlugin | null;
+    getEnabledPluginById(id: 'file-explorer'): FileExplorerPlugin | null;
 
     /**
      * Get all enabled internal plugins
@@ -772,14 +772,14 @@ interface PropertyInfo {
     count: number;
 }
 
-type PropertyWidgetType = "aliases"
-    | "checkbox"
-    | "date"
-    | "datetime"
-    | "multitext"
-    | "number"
-    | "tags"
-    | "text"
+type PropertyWidgetType = 'aliases'
+    | 'checkbox'
+    | 'date'
+    | 'datetime'
+    | 'multitext'
+    | 'number'
+    | 'tags'
+    | 'text'
 
 interface PropertyWidget {
     /**
@@ -1140,58 +1140,58 @@ interface WindowSelection {
     win: Window;
 }
 
-type ConfigItem = "accentColor"
-    | "alwaysUpdateLinks"
-    | "attachmentFolderPath"
-    | "autoConvertHtml"
-    | "autoPairBrackets"
-    | "autoPairMarkdown"
-    | "baseFontSize"
-    | "baseFontSizeAction"
-    | "cssTheme"
-    | "defaultViewMode"
-    | "emacsyKeys"
-    | "enabledCssSnippets"
-    | "fileSortOrder"
-    | "focusNewTab"
-    | "foldHeading"
-    | "foldIndent"
-    | "hotkeys"
-    | "interfaceFontFamily"
-    | "legacyEditor"
-    | "livePreview"
-    | "mobilePullAction"
-    | "mobileQuickRibbonItem"
-    | "mobileToolbarCommands"
-    | "monospaceFontFamily"
-    | "nativeMenus"
-    | "newFileFolderPath"
-    | "newFileLocation"
-    | "newLinkFormat"
-    | "pdfExportSettings"
-    | "promptDelete"
-    | "propertiesInDocument"
-    | "readableLineLength"
-    | "rightToLeft"
-    | "showIndentGuide"
-    | "showInlineTitle"
-    | "showLineNumber"
-    | "showUnsupportedFiles"
-    | "showViewHeader"
-    | "smartIndentList"
-    | "spellcheck"
-    | "spellcheckLanguages"
-    | "strictLineBreaks"
-    | "tabSize"
-    | "textFontFamily"
-    | "theme"
-    | "translucency"
-    | "trashOption"
-    | "types"
-    | "useMarkdownLinks"
-    | "useTab"
-    | "userIgnoreFilters"
-    | "vimMode"
+type ConfigItem = 'accentColor'
+    | 'alwaysUpdateLinks'
+    | 'attachmentFolderPath'
+    | 'autoConvertHtml'
+    | 'autoPairBrackets'
+    | 'autoPairMarkdown'
+    | 'baseFontSize'
+    | 'baseFontSizeAction'
+    | 'cssTheme'
+    | 'defaultViewMode'
+    | 'emacsyKeys'
+    | 'enabledCssSnippets'
+    | 'fileSortOrder'
+    | 'focusNewTab'
+    | 'foldHeading'
+    | 'foldIndent'
+    | 'hotkeys'
+    | 'interfaceFontFamily'
+    | 'legacyEditor'
+    | 'livePreview'
+    | 'mobilePullAction'
+    | 'mobileQuickRibbonItem'
+    | 'mobileToolbarCommands'
+    | 'monospaceFontFamily'
+    | 'nativeMenus'
+    | 'newFileFolderPath'
+    | 'newFileLocation'
+    | 'newLinkFormat'
+    | 'pdfExportSettings'
+    | 'promptDelete'
+    | 'propertiesInDocument'
+    | 'readableLineLength'
+    | 'rightToLeft'
+    | 'showIndentGuide'
+    | 'showInlineTitle'
+    | 'showLineNumber'
+    | 'showUnsupportedFiles'
+    | 'showViewHeader'
+    | 'smartIndentList'
+    | 'spellcheck'
+    | 'spellcheckLanguages'
+    | 'strictLineBreaks'
+    | 'tabSize'
+    | 'textFontFamily'
+    | 'theme'
+    | 'translucency'
+    | 'trashOption'
+    | 'types'
+    | 'useMarkdownLinks'
+    | 'useTab'
+    | 'userIgnoreFilters'
+    | 'vimMode'
 
 interface AppVaultConfig {
     /**
@@ -1291,7 +1291,7 @@ interface AppVaultConfig {
     /**
      *
      */
-    mobileQuickRibbonItem?: "" | string;
+    mobileQuickRibbonItem?: '' | string;
     /**
      * Mobile > Manage toolbar options
      */
@@ -1794,7 +1794,7 @@ declare module 'obsidian' {
         /**
          * Sets the accent color of the application (light/dark mode)
          */
-        changeTheme: (theme: "moonstone" | "obsidian") => void;
+        changeTheme: (theme: 'moonstone' | 'obsidian') => void;
         /**
          * Copies Obsidian URI of given file to clipboard
          * @param file File to generate URI for
@@ -1849,7 +1849,7 @@ declare module 'obsidian' {
          * Get the current color scheme of the application
          * @remark Identical to `app.vault.getConfig('theme')`
          */
-        getTheme: () => "moonstone" | "obsidian";
+        getTheme: () => 'moonstone' | 'obsidian';
         /**
          * Import attachments into specified folder
          */
@@ -1933,7 +1933,7 @@ declare module 'obsidian' {
         /**
          * Set the current color scheme of the application and reload the CSS
          */
-        setTheme: (theme: "moonstone" | "obsidian") => void;
+        setTheme: (theme: 'moonstone' | 'obsidian') => void;
         /**
          * Open the OS file picker at path location
          */
@@ -2807,14 +2807,14 @@ declare module 'obsidian' {
          * @param leaf Leaf entry to deserialize
          * @param ribbon Whether the leaf belongs to the left or right ribbon
          */
-        deserializeLayout: (leaf: LeafEntry, ribbon?: "left" | "right") => Promise<WorkspaceLeaf>;
+        deserializeLayout: (leaf: LeafEntry, ribbon?: 'left' | 'right') => Promise<WorkspaceLeaf>;
         /**
          * @internal Reveal leaf in side ribbon with specified view type and state
          * @param type View type of leaf
          * @param ribbon Side ribbon to reveal leaf in
          * @param viewstate Open state of leaf
          */
-        ensureSideLeaf: (type: string, ribbon: "left" | "right", viewstate: OpenViewState) => void;
+        ensureSideLeaf: (type: string, ribbon: 'left' | 'right', viewstate: OpenViewState) => void;
         /**
          * Get active file view if exists
          */
@@ -2827,11 +2827,11 @@ declare module 'obsidian' {
          * Get adjacent leaf in specified direction
          * @remark Potentially does not work
          */
-        getAdjacentLeafInDirection: (leaf: WorkspaceLeaf, direction: "top" | "bottom" | "left" | "right") => WorkspaceLeaf | null;
+        getAdjacentLeafInDirection: (leaf: WorkspaceLeaf, direction: 'top' | 'bottom' | 'left' | 'right') => WorkspaceLeaf | null;
         /**
          * @internal Get the direction where the leaf should be dropped on dragevent
          */
-        getDropDirection: (e: DragEvent, rect: DOMRect, directions: ["left", "right"], leaf: WorkspaceLeaf) => "left" | "right" | "top" | "bottom" | "center";
+        getDropDirection: (e: DragEvent, rect: DOMRect, directions: ['left', 'right'], leaf: WorkspaceLeaf) => 'left' | 'right' | 'top' | 'bottom' | 'center';
         /**
          * @internal Get the leaf where the leaf should be dropped on dragevent
          * @param e Drag event
@@ -3189,7 +3189,7 @@ declare module 'obsidian' {
         /**
          * Make ranges of text highlighted within the editor given specified class (style)
          */
-        addHighlights: (ranges: { from: EditorPosition, to: EditorPosition }[], style: "is-flashing" | "obsidian-search-match-highlight", remove_previous: boolean, x: boolean) => void;
+        addHighlights: (ranges: { from: EditorPosition, to: EditorPosition }[], style: 'is-flashing' | 'obsidian-search-match-highlight', remove_previous: boolean, x: boolean) => void;
         /**
          * Convert editor position to screen position
          * @param pos Editor position
@@ -3250,7 +3250,7 @@ declare module 'obsidian' {
         /**
          * Applies specified markdown syntax to selected text or word under cursor
          */
-        toggleMarkdownFormatting: (syntax: "bold" | "italic" | "strikethrough" | "highlight" | "code" | "math" | "comment") => void;
+        toggleMarkdownFormatting: (syntax: 'bold' | 'italic' | 'strikethrough' | 'highlight' | 'code' | 'math' | 'comment') => void;
 
         /**
          * Clean-up function executed after indenting lists
