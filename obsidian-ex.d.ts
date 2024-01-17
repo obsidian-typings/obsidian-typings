@@ -3043,7 +3043,7 @@ declare module 'obsidian' {
          */
         getFocusedContainer(): WorkspaceSplit;
 
-        getLeavesOfType(viewType: "file-explorer"): FileExplorerLeaf[];
+        getLeavesOfType(viewType: 'file-explorer'): FileExplorerLeaf[];
         /**
          * Get n last opened files of type (defaults to 10)
          */
