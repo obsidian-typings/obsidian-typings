@@ -390,7 +390,7 @@ interface Commands {
     /**
      * Lists **all** commands, both with and without editor callback
      */
-    listCommands: () => Command[];
+    listCommands(): Command[];
     /**
      * Remove a command from the command registry
      * @param commandId Command to remove
@@ -458,11 +458,11 @@ interface CustomArrayDict<T> {
     remove(key: string, value: T): void;
     removeKey(key: string): void;
     get(key: string): T[] | null;
-    keys: () => string[];
+    keys(): string[];
     clear(key: string): void;
-    clearAll: () => void;
+    clearAll(): void;
     contains(key: string, value: T): boolean;
-    count: () => number;
+    count(): number;
 }
 
 interface CustomCSS extends Component {
@@ -473,7 +473,7 @@ interface CustomCSS extends Component {
     /**
      * @internal
      */
-    boundRaw: () => void;
+    boundRaw(): void;
     /**
      * @internal Cache of CSS snippet filepath (relative to vault root) to CSS snippet contents
      */
@@ -498,15 +498,15 @@ interface CustomCSS extends Component {
     /**
      * @internal
      */
-    requestLoadSnippets: () => void;
+    requestLoadSnippets(): void;
     /**
      * @internal
      */
-    requestLoadTheme: () => void;
+    requestLoadTheme(): void;
     /**
      * @internal
      */
-    requestReadThemes: () => void;
+    requestReadThemes(): void;
     /**
      * List of snippets detected by Obsidian, given by their filenames
      */
@@ -533,11 +533,11 @@ interface CustomCSS extends Component {
     /**
      * Check all themes for updates
      */
-    checkForUpdates: () => void;
+    checkForUpdates(): void;
     /**
      * Disable translucency of application background
      */
-    disableTranslucency: () => void;
+    disableTranslucency(): void;
     /**
      * Fetch legacy theme CSS using the pre-v1.0.0 theme download pipeline
      * @returns string obsidian.css contents
@@ -546,7 +546,7 @@ interface CustomCSS extends Component {
     /**
      * Enable translucency of application background
      */
-    enableTranslucency: () => void;
+    enableTranslucency(): void;
     /**
      * Fetch a theme's manifest using repository URL
      * @remark Do **not** include github prefix, only `username/repo`
@@ -560,11 +560,11 @@ interface CustomCSS extends Component {
     /**
      * Returns the folder path where snippets are stored (relative to vault root)
      */
-    getSnippetsFolder: () => string;
+    getSnippetsFolder(): string;
     /**
      * Returns the folder path where themes are stored (relative to vault root)
      */
-    getThemesFolder: () => string;
+    getThemesFolder(): string;
     /**
      * Convert theme name to its corresponding filepath (relative to vault root)
      * @returns string `.obsidian/themes/${themeName}/theme.css`
@@ -573,7 +573,7 @@ interface CustomCSS extends Component {
     /**
      * Returns whether there are themes that can be updated
      */
-    hasUpdates: () => boolean;
+    hasUpdates(): boolean;
     /**
      * Install a legacy theme using the pre-v1.0.0 theme download pipeline<br>
      * Will create a corresponding dummy manifest for the theme
@@ -595,17 +595,17 @@ interface CustomCSS extends Component {
     /**
      * @internal
      */
-    onload: () => void;
+    onload(): void;
     /**
      * @todo
      * @internal
      */
-    readSnippets: () => void;
+    readSnippets(): void;
     /**
      * @todo
      * @internal
      */
-    readThemes: () => void;
+    readThemes(): void;
     /**
      * Remove a theme by theme name
      */
@@ -743,15 +743,15 @@ interface HotkeyManager {
     /**
      * @internal Bake hotkeys (create mapping of pressed key to command ID)
      */
-    bake: () => void;
+    bake(): void;
     /**
      * @internal Load hotkeys from storage
      */
-    load: () => void;
+    load(): void;
     /**
      * @internal Save custom hotkeys to storage
      */
-    save: () => void;
+    save(): void;
 }
 
 interface HoverLinkSource {
@@ -767,8 +767,8 @@ interface ImportedAttachments {
 }
 
 interface InternalPlugin extends Plugin {
-    disable: () => void;
-    enable: () => void;
+    disable(): void;
+    enable(): void;
 }
 
 type InternalPluginName = 'audio-recorder' |
@@ -821,7 +821,7 @@ interface InternalPlugins extends Events {
     /**
      * @internal Request save of plugin configs
      */
-    requestSaveConfig: () => void;
+    requestSaveConfig(): void;
 
     /**
      * Get an enabled internal plugin by ID
@@ -833,7 +833,7 @@ interface InternalPlugins extends Events {
     /**
      * Get all enabled internal plugins
      */
-    getEnabledPlugins: () => InternalPlugin[];
+    getEnabledPlugins(): InternalPlugin[];
     /**
      * Get an internal plugin by ID
      * @param id - ID of the plugin to get
@@ -843,7 +843,7 @@ interface InternalPlugins extends Events {
     /**
      * @internal - Load plugin configs and enable plugins
      */
-    enable: () => Promise<void>;
+    enable(): Promise<void>;
     /**
      * @internal
      */
@@ -855,7 +855,7 @@ interface InternalPlugins extends Events {
     /**
      * @internal - Save current plugin configs
      */
-    saveConfig: () => Promise<void>;
+    saveConfig(): Promise<void>;
     /**
      * @internal
      */
@@ -866,7 +866,7 @@ interface KeyScope {
     /**
      * Callback of function to execute when key is pressed
      */
-    func: () => void;
+    func(): void;
     /**
      * Key to match
      */
@@ -934,7 +934,7 @@ interface MetadataTypeManager extends Events {
     /**
      * Get all registered properties of the vault
      */
-    getAllProperties: () => Record<string, PropertyInfo>;
+    getAllProperties(): Record<string, PropertyInfo>;
     /**
      * Get assigned widget type for property
      */
@@ -950,19 +950,19 @@ interface MetadataTypeManager extends Events {
     /**
      * Get all properties with an assigned widget type
      */
-    getTypes: () => string[];
+    getTypes(): string[];
     /**
      * @internal Load property types from config
      */
-    loadData: () => Promise<void>;
+    loadData(): Promise<void>;
     /**
      * @internal Save property types to config
      */
-    save: () => Promise<void>;
+    save(): Promise<void>;
     /**
      * @internal Get all properties from metadata cache
      */
-    savePropertyInfo: () => void;
+    savePropertyInfo(): void;
     /**
      * @internal Set widget type for property
      */
@@ -1068,11 +1068,11 @@ interface Plugins {
     /**
      * @internal Check online list for deprecated plugins to automatically disable
      */
-    checkForDeprecations: () => Promise<void>;
+    checkForDeprecations(): Promise<void>;
     /**
      * Check for plugin updates
      */
-    checkForUpdates: () => Promise<void>;
+    checkForUpdates(): Promise<void>;
     /**
      * Unload a plugin by ID
      */
@@ -1096,11 +1096,11 @@ interface Plugins {
     /**
      * Get the folder where plugins are stored
      */
-    getPluginFolder: () => string;
+    getPluginFolder(): string;
     /**
      * @internal Load plugin manifests and enable plugins from config
      */
-    initialize: () => Promise<void>;
+    initialize(): Promise<void>;
     /**
      * Install a plugin from a given URL
      */
@@ -1112,7 +1112,7 @@ interface Plugins {
     /**
      * Check whether community plugins are enabled
      */
-    isEnabled: () => boolean;
+    isEnabled(): boolean;
     /**
      * Load a specific plugin's manifest by its folder path
      */
@@ -1120,7 +1120,7 @@ interface Plugins {
     /**
      * @internal Load all plugin manifests from plugin folder
      */
-    loadManifests: () => Promise<void>;
+    loadManifests(): Promise<void>;
     /**
      *Load a plugin by its ID
      */
@@ -1132,7 +1132,7 @@ interface Plugins {
     /**
      * @internal - Save current plugin configs
      */
-    saveConfig: () => Promise<void>;
+    saveConfig(): Promise<void>;
     /**
      * @internal Toggle whether community plugins are enabled
      */
@@ -1191,7 +1191,7 @@ interface PropertyWidget {
     /**
      * @internal
      */
-    default: () => void;
+    default(): void;
     /**
      * Lucide-dev icon associated with the widget
      */
@@ -1234,10 +1234,10 @@ interface ReadViewRenderer {
     lastText: string;
     previewEl: HTMLElement;
     pusherEl: HTMLElement;
-    clear: () => void;
-    queueRender: () => void;
-    parseSync: () => void;
-    parseAsync: () => void;
+    clear(): void;
+    queueRender(): void;
+    parseSync(): void;
+    parseAsync(): void;
     set(text: string): void;
     text: string;
     sections: RendererSection[];
@@ -1267,7 +1267,7 @@ interface RecentFileTracker {
     /**
      * Returns the last 10 opened files
      */
-    getLastOpenFiles: () => string[];
+    getLastOpenFiles(): string[];
     /**
      * Get last n files of type (defaults to 10)
      */
@@ -1291,7 +1291,7 @@ interface RecentFileTracker {
     /**
      * @internal Get last opened files
      */
-    serialize: () => string[];
+    serialize(): string[];
 }
 
 interface RendererSection {
@@ -1603,7 +1603,7 @@ declare module 'obsidian' {
         /**
          * Sets the accent color of the application to the OS preference
          */
-        adaptToSystemTheme: () => void;
+        adaptToSystemTheme(): void;
         /**
          * Sets the accent color of the application (light/dark mode)
          */
@@ -1616,7 +1616,7 @@ declare module 'obsidian' {
         /**
          * Disables all CSS transitions in the vault (until manually re-enabled)
          */
-        disableCssTransition: () => void;
+        disableCssTransition(): void;
         /**
          * Restarts Obsidian and renders workspace in mobile mode
          * @tutorial Very useful for testing the rendering of your plugin on mobile devices
@@ -1625,7 +1625,7 @@ declare module 'obsidian' {
         /**
          * Enables all CSS transitions in the vault
          */
-        enableCssTransition: () => void;
+        enableCssTransition(): void;
         /**
          * Manually fix all file links pointing towards image/audio/video resources in element
          * @param element Element to fix links in
@@ -1637,17 +1637,17 @@ declare module 'obsidian' {
          * @remark Uses the `Flow Circular` font
          * @remark You will have to restart the app to get normal text back
          */
-        garbleText: () => void;
+        garbleText(): void;
         /**
          * Get the accent color of the application
          * @remark Often a better alternative than `app.vault.getConfig('accentColor')` as it returns an empty string if no accent color was set
          */
-        getAccentColor: () => string;
+        getAccentColor(): string;
         /**
          * Get the current title of the application
          * @remark The title is based on the currently active leaf
          */
-        getAppTitle: () => string;
+        getAppTitle(): string;
         /**
          * Get the URI for opening specified file in Obsidian
          */
@@ -1657,12 +1657,12 @@ declare module 'obsidian' {
          * @deprecated Originally spellcheck languages were stored in app settings,
          * languages are now stored in `localStorage.getItem(spellcheck-languages)`
          */
-        getSpellcheckLanguages: () => string[];
+        getSpellcheckLanguages(): string[];
         /**
          * Get the current color scheme of the application
          * @remark Identical to `app.vault.getConfig('theme')`
          */
-        getTheme: () => 'moonstone' | 'obsidian';
+        getTheme(): 'moonstone' | 'obsidian';
         /**
          * Import attachments into specified folder
          */
@@ -1701,11 +1701,11 @@ declare module 'obsidian' {
         /**
          * Open the help vault (or site if mobile)
          */
-        openHelp: () => void;
+        openHelp(): void;
         /**
          * Open the vault picker
          */
-        openVaultChooser: () => void;
+        openVaultChooser(): void;
         /**
          * Open the file with OS defined default file browser application
          */
@@ -1713,11 +1713,11 @@ declare module 'obsidian' {
         /**
          * @internal Register all basic application commands
          */
-        registerCommands: () => void;
+        registerCommands(): void;
         /**
          * @internal Register a hook for saving workspace data before unload
          */
-        registerQuitHook: () => void;
+        registerQuitHook(): void;
         /**
          * @internal Save attachment at default attachments location
          */
@@ -1759,27 +1759,27 @@ declare module 'obsidian' {
         /**
          * Updates the accent color and reloads the CSS
          */
-        updateAccentColor: () => void;
+        updateAccentColor(): void;
         /**
          * Update the font family of the application and reloads the CSS
          */
-        updateFontFamily: () => void;
+        updateFontFamily(): void;
         /**
          * Update the font size of the application and reloads the CSS
          */
-        updateFontSize: () => void;
+        updateFontSize(): void;
         /**
          * Update the inline title rendering in notes
          */
-        updateInlineTitleDisplay: () => void;
+        updateInlineTitleDisplay(): void;
         /**
          * Update the color scheme of the application and reloads the CSS
          */
-        updateTheme: () => void;
+        updateTheme(): void;
         /**
          * Update the view header display in notes
          */
-        updateViewHeaderDisplay: () => void;
+        updateViewHeaderDisplay(): void;
     }
 
     interface DataAdapter {
@@ -1841,7 +1841,7 @@ declare module 'obsidian' {
         /**
          * Get base path of vault (OS path)
          */
-        getBasePath: () => string;
+        getBasePath(): string;
         /**
          * Get full path of file (OS path)
          * @param normalizedPath Path to file
@@ -1869,19 +1869,19 @@ declare module 'obsidian' {
         /**
          * @internal Handles vault events
          */
-        handler: () => void;
+        handler(): void;
         /**
          * @internal Kill file system action due to timeout
          */
-        kill: () => void;
+        kill(): void;
         /**
          * @internal
          */
-        killLastAction: () => void;
+        killLastAction(): void;
         /**
          * @internal Generates `this.files` from the file system
          */
-        listAll: () => Promise<void>;
+        listAll(): Promise<void>;
         /**
          * @internal Generates `this.files` for specific directory of the vault
          */
@@ -1939,7 +1939,7 @@ declare module 'obsidian' {
         /**
          * @internal Remove all listeners
          */
-        stopWatch: () => void;
+        stopWatch(): void;
         /**
          * @internal Remove listener on specific path
          */
@@ -1947,11 +1947,11 @@ declare module 'obsidian' {
         /**
          * @internal Set whether OS is insensitive to case
          */
-        testInsensitive: () => void;
+        testInsensitive(): void;
         /**
          * @internal
          */
-        thingsHappening: () => void;
+        thingsHappening(): void;
         /**
          * @internal Trigger an event on handler
          */
@@ -1994,16 +1994,16 @@ declare module 'obsidian' {
          * Unfolds all folded lines one level up
          * @remark If level 1 and 2 headings are folded, level 2 headings will be unfolded
          */
-        foldLess: () => void;
+        foldLess(): void;
         /**
          * Folds all the blocks that are of the lowest unfolded level
          * @remark If there is a document with level 1 and 2 headings, level 2 headings will be folded
          */
-        foldMore: () => void;
+        foldMore(): void;
         /**
          * Get all ranges that can be folded away in the editor
          */
-        getAllFoldableLines: () => { from: number, to: number }[];
+        getAllFoldableLines(): { from: number, to: number }[];
         /**
          * Get a clickable link - if it exists - at specified position
          */
@@ -2011,7 +2011,7 @@ declare module 'obsidian' {
         /**
          * Get all blocks that were folded by their starting character position
          */
-        getFoldOffsets: () => Set<number>;
+        getFoldOffsets(): Set<number>;
         /**
          * Checks whether the editor has a highlight of specified class
          * @remark If no style is specified, checks whether the editor has any highlights
@@ -2034,10 +2034,10 @@ declare module 'obsidian' {
          * Adds a search cursor to the editor
          */
         searchCursor: (searchString: string) => {
-            current: () => { from: EditorPosition, to: EditorPosition };
-            findAll: () => { from: EditorPosition, to: EditorPosition }[];
-            findNext: () => { from: EditorPosition, to: EditorPosition };
-            findPrevious: () => { from: EditorPosition, to: EditorPosition };
+            current(): { from: EditorPosition, to: EditorPosition };
+            findAll(): { from: EditorPosition, to: EditorPosition }[];
+            findNext(): { from: EditorPosition, to: EditorPosition };
+            findPrevious(): { from: EditorPosition, to: EditorPosition };
             replace(replacement: string, origin: string): void;
             replaceAll(replacement: string, origin: string): void;
         }
@@ -2049,32 +2049,32 @@ declare module 'obsidian' {
         /**
          * Clean-up function executed after indenting lists
              */
-        afterIndent: () => void;
+        afterIndent(): void;
         /**
          * Expand text
          * @internal
          */
-        expandText: () => void;
+        expandText(): void;
         /**
          * Indents a list by one level
          */
-        indentList: () => void;
+        indentList(): void;
         /**
          * Insert a template callout at the current cursor position
          */
-        insertCallout: () => void;
+        insertCallout(): void;
         /**
          * Insert a template code block at the current cursor position
          */
-        insertCodeblock: () => void;
+        insertCodeblock(): void;
         /**
          * Insert a markdown link at the current cursor position
          */
-        insertLink: () => void;
+        insertLink(): void;
         /**
          * Insert a mathjax equation block at the current cursor position
          */
-        insertMathJax: () => void;
+        insertMathJax(): void;
         /**
          * Insert specified text at the current cursor position
          * @remark Might be broken, inserts at the end of the document
@@ -2083,11 +2083,11 @@ declare module 'obsidian' {
         /**
          * Inserts a new line and continues a markdown bullet point list at the same level
          */
-        newlineAndIndentContinueMarkdownList: () => void;
+        newlineAndIndentContinueMarkdownList(): void;
         /**
          * Inserts a new line at the same indent level
          */
-        newlineAndIndentOnly: () => void;
+        newlineAndIndentOnly(): void;
         /**
          * Get the character position at a mouse event
          */
@@ -2095,19 +2095,19 @@ declare module 'obsidian' {
         /**
          * Toggles blockquote syntax on paragraph under cursor
          */
-        toggleBlockquote: () => void;
+        toggleBlockquote(): void;
         /**
          * Toggle bullet point list syntax on paragraph under cursor
          */
-        toggleBulletList: () => void;
+        toggleBulletList(): void;
         /**
          * Toggle checkbox syntax on paragraph under cursor
          */
-        toggleCheckList: () => void;
+        toggleCheckList(): void;
         /**
          * Toggle numbered list syntax on paragraph under cursor
          */
-        toggleNumberList: () => void;
+        toggleNumberList(): void;
         /**
          * Convert word under cursor into a wikilink
          * @param embed Whether to embed the link or not
@@ -2116,7 +2116,7 @@ declare module 'obsidian' {
         /**
          * Unindents a list by one level
          */
-        unindentList: () => void;
+        unindentList(): void;
     }
 
     interface EventRef {
@@ -2178,7 +2178,7 @@ declare module 'obsidian' {
         /**
          * @internal
          */
-        getAllLinkResolutions: () => [];
+        getAllLinkResolutions(): [];
         /**
          * Gets the folder that new markdown files should be saved to, based on the current settings
          * @param path - The path of the current opened/focused file, used when the user wants new files to be created in the same folder as the current file
@@ -2292,7 +2292,7 @@ declare module 'obsidian' {
     interface MenuItem {
         callback: () => void;
         dom: HTMLElement;
-        setSubmenu: () => Menu;
+        setSubmenu(): Menu;
         disabled: boolean;
     }
 
@@ -2369,7 +2369,7 @@ declare module 'obsidian' {
         /**
          * Get all property infos of the vault
          */
-        getAllPropertyInfos: () => Record<string, PropertyInfo>
+        getAllPropertyInfos(): Record<string, PropertyInfo>
         /**
          * Get all backlink information for a file
          */
@@ -2377,7 +2377,7 @@ declare module 'obsidian' {
         /**
          * Get paths of all files cached in the vault
          */
-        getCachedFiles: () => string[];
+        getCachedFiles(): string[];
         /**
          * Get an entry from the file cache
          */
@@ -2389,7 +2389,7 @@ declare module 'obsidian' {
         /**
          * Get all links (resolved or unresolved) in the vault
          */
-        getLinkSuggestions: () => { file: TFile | null, path: string }[];
+        getLinkSuggestions(): { file: TFile | null, path: string }[];
         /**
          * Get destination of link path
          */
@@ -2397,20 +2397,20 @@ declare module 'obsidian' {
         /**
          * Get all links within the vault per file
          */
-        getLinks: () => Record<string, Reference[]>;
+        getLinks(): Record<string, Reference[]>;
         /**
          * Get all tags within the vault and their usage count
          */
-        getTags: () => Record<string, number>;
+        getTags(): Record<string, number>;
 
         /**
          * @internal Clear all caches to null values
          */
-        cleanupDeletedCache: () => void;
+        cleanupDeletedCache(): void;
         /**
          * @internal
          */
-        clear: () => any;
+        clear(): any;
         /**
          * @internal
          */
@@ -2422,11 +2422,11 @@ declare module 'obsidian' {
         /**
          * @internal Initialize Database connection and load up caches
          */
-        initialize: () => Promise<void>;
+        initialize(): Promise<void>;
         /**
          * @internal Check whether there are no cache tasks in progress
          */
-        isCacheClean: () => boolean;
+        isCacheClean(): boolean;
         /**
          * @internal Check whether file can support metadata (by checking extension support)
          */
@@ -2442,11 +2442,11 @@ declare module 'obsidian' {
         /**
          * @internal
          */
-        linkResolver: () => void;
+        linkResolver(): void;
         /**
          * @internal Execute onCleanCache callbacks if cache is clean
          */
-        onCleanCache: () => void;
+        onCleanCache(): void;
         /**
          * @internal On creation of the cache: update metadata cache
          */
@@ -2482,7 +2482,7 @@ declare module 'obsidian' {
         /**
          * @internal Show a notice that the cache is being rebuilt
          */
-        showIndexingNotice: () => void;
+        showIndexingNotice(): void;
         /**
          * @internal
          */
@@ -2494,11 +2494,11 @@ declare module 'obsidian' {
         /**
          * @internal Update user ignore filters from settings
          */
-        updateUserIgnoreFilters: () => void;
+        updateUserIgnoreFilters(): void;
         /**
          * @internal Bind actions to listeners on vault
          */
-        watchVaultChanges: () => void;
+        watchVaultChanges(): void;
         /**
          * @internal Send message to worker to update metadata cache
          */
@@ -2536,11 +2536,11 @@ declare module 'obsidian' {
         /**
          * @internal On escape key press close modal
          */
-        onEscapeKey: () => void;
+        onEscapeKey(): void;
         /**
          * @internal On closing of the modal
          */
-        onWindowClose: () => void;
+        onWindowClose(): void;
         /**
          * @internal Set the background opacity of the dimmed background
          * @param opacity Opacity percentage
@@ -2649,7 +2649,7 @@ declare module 'obsidian' {
         /**
          * @internal Closes the currently active tab
          */
-        closeActiveTab: () => void;
+        closeActiveTab(): void;
         /**
          * @internal Check whether tab is a plugin tab
          * @param tab Tab to check
@@ -2673,7 +2673,7 @@ declare module 'obsidian' {
         /**
          * @internal Update a tab section
          */
-        updatePluginSection: () => void;
+        updatePluginSection(): void;
     }
 
     interface SettingTab {
@@ -2791,7 +2791,7 @@ declare module 'obsidian' {
         /**
          * @internal Check whether files map cache is empty
          */
-        isEmpty: () => boolean;
+        isEmpty(): boolean;
         /**
          * @internal Iterate over the files and read them
          */
@@ -2799,7 +2799,7 @@ declare module 'obsidian' {
         /**
          * @internal Load vault adapter
          */
-        load: () => Promise<void>;
+        load(): Promise<void>;
         /**
          * @internal Listener for all events on the vault
          */
@@ -2827,7 +2827,7 @@ declare module 'obsidian' {
         /**
          * @internal Reload all config files
          */
-        reloadConfig: () => void;
+        reloadConfig(): void;
         /**
          * @internal Remove file as child/parent from respective folders
          * @param file File to remove
@@ -2845,11 +2845,11 @@ declare module 'obsidian' {
         /**
          * @internal Debounced function for saving config
          */
-        requestSaveConfig: () => void;
+        requestSaveConfig(): void;
         /**
          * @internal Save app and appearance configs to disk
          */
-        saveConfig: () => Promise<void>;
+        saveConfig(): Promise<void>;
         /**
          * Set value of config by key
          * @param key Key of config value
@@ -2868,7 +2868,7 @@ declare module 'obsidian' {
         /**
          * @internal Load all config files into memory
          */
-        setupConfig: () => Promise<void>;
+        setupConfig(): Promise<void>;
         /**
          * @internal Trigger an event on handler
          */
@@ -2978,7 +2978,7 @@ declare module 'obsidian' {
         /**
          * @internal Change active leaf and trigger leaf change event
          */
-        activeLeafEvents: () => void;
+        activeLeafEvents(): void;
         /**
          * @internal Add file to mobile file info
          */
@@ -2986,7 +2986,7 @@ declare module 'obsidian' {
         /**
          * @internal Clear layout of workspace and destruct all leaves
          */
-        clearLayout: () => Promise<void>;
+        clearLayout(): Promise<void>;
         /**
          * @internal Create a leaf in the selected tab group or last used tab group
          * @param tabs Tab group to create leaf in
@@ -3008,7 +3008,7 @@ declare module 'obsidian' {
         /**
          * Get active file view if exists
          */
-        getActiveFileView: () => FileView | null;
+        getActiveFileView(): FileView | null;
         /**
          * @deprecated Use `getActiveViewOfType` instead
          */
@@ -3030,7 +3030,8 @@ declare module 'obsidian' {
         /**
          * Get the workspace split for the currently focused container
          */
-        getFocusedContainer: () => WorkspaceSplit;
+        getFocusedContainer(): WorkspaceSplit;
+
         /**
          * Get n last opened files of type (defaults to 10)
          */
@@ -3064,7 +3065,7 @@ declare module 'obsidian' {
         /**
          * @internal Load workspace from disk and initialize
          */
-        loadLayout: () => Promise<void>;
+        loadLayout(): Promise<void>;
         /**
          * @internal Handles drag event on leaf
          */
@@ -3084,7 +3085,7 @@ declare module 'obsidian' {
         /**
          * @internal
          */
-        onResize: () => void;
+        onResize(): void;
         /**
          * @internal
          */
@@ -3118,23 +3119,23 @@ declare module 'obsidian' {
         /**
          * @internal Constructs hook for receiving URI actions
          */
-        registerUriHook: () => void;
+        registerUriHook(): void;
         /**
          * @internal Request execution of activeLeaf change events
          */
-        requestActiveLeafEvents: () => void;
+        requestActiveLeafEvents(): void;
         /**
          * @internal Request execution of resize event
          */
-        requestResize: () => void;
+        requestResize(): void;
         /**
          * @internal Request execution of layout update event
          */
-        requestUpdateLayout: () => void;
+        requestUpdateLayout(): void;
         /**
          * Save workspace layout to disk
          */
-        saveLayout: () => Promise<void>;
+        saveLayout(): Promise<void>;
         /**
          * @internal Use deserialized layout data to reconstruct the workspace
          */
@@ -3166,20 +3167,20 @@ declare module 'obsidian' {
         /**
          * @internal
          */
-        updateFrameless: () => void;
+        updateFrameless(): void;
         /**
          * @internal Invoke workspace layout update, redraw and save
          */
-        updateLayout: () => void;
+        updateLayout(): void;
         /**
          * @internal Update visibility of tab group
          */
-        updateMobileVisibleTabGroup: () => void;
+        updateMobileVisibleTabGroup(): void;
         /**
          * Update the internal title of the application
          * @remark This title is shown as the application title in the OS taskbar
          */
-        updateTitle: () => void;
+        updateTitle(): void;
     }
 
     interface WorkspaceLeaf {
