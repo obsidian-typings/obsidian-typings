@@ -677,7 +677,7 @@ interface FileExplorerPlugin extends InternalPlugin {
 }
 
 interface FileExplorerView extends View {
-    files: Map<HTMLElement | null, TAbstractFile>;
+    files: WeakMapWrapper<HTMLElement, TAbstractFile>;
 
     openFileContextMenu(event: Event, fileItemElement: HTMLElement): void;
 }
@@ -1457,6 +1457,10 @@ interface ViewRegistry extends Events {
      * Unregister a view type
      */
     unregisterView(type: string): void;
+}
+
+interface WeakMapWrapper<K extends WeakKey, V> extends WeakMap<K, V> {
+    map: WeakMap<K, V>;
 }
 
 interface WindowSelection {
