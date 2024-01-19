@@ -11,6 +11,7 @@ import {
     Reference,
     Scope,
     SplitDirection,
+    TAbstractFile,
     TFile,
     TFolder,
     Vault,
@@ -667,8 +668,18 @@ interface FileEntry {
     type: 'file' | 'folder';
 }
 
+interface FileExplorerLeaf extends WorkspaceLeaf {
+    view: FileExplorerView;
+}
+
 interface FileExplorerPlugin extends InternalPlugin {
     revealInFolder(folder: TFolder): Promise<void>;
+}
+
+interface FileExplorerView extends View {
+    files: WeakMapWrapper<HTMLElement, TAbstractFile>;
+
+    openFileContextMenu(event: Event, fileItemElement: HTMLElement): void;
 }
 
 interface HotkeyManager {
@@ -1446,6 +1457,10 @@ interface ViewRegistry extends Events {
      * Unregister a view type
      */
     unregisterView(type: string): void;
+}
+
+interface WeakMapWrapper<K extends WeakKey, V> extends WeakMap<K, V> {
+    map: WeakMap<K, V>;
 }
 
 interface WindowSelection {
@@ -3032,6 +3047,7 @@ declare module 'obsidian' {
          */
         getFocusedContainer(): WorkspaceSplit;
 
+        getLeavesOfType(viewType: 'file-explorer'): FileExplorerLeaf[];
         /**
          * Get n last opened files of type (defaults to 10)
          */
