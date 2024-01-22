@@ -1,5 +1,43 @@
 
+<center>
+
 # Obsidian Extended Typings
+</center>
+
+---
+
+<div align="center">
+    <a href="https://www.npmjs.com/package/obsidian-typings" style="text-decoration: none">
+        <img alt="NPM downloads" src="https://img.shields.io/npm/v/obsidian-typings?color=red&label=Version%3A&logo=npm&logoColor=white&labelColor=red">
+    </a>
+    <a href="https://www.npmjs.com/package/obsidian-typings" style="text-decoration: none">
+        <img alt="NPM downloads" src="https://img.shields.io/npm/dw/obsidian-typings?style=flat&label=Downloads">
+    </a>
+    <a href="https://github.com/Fevol/obsidian-typings/stargazers" style="text-decoration: none">
+        <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/fevol/obsidian-typings?color=yellow&label=Stargazers%3A&logo=OpenTelemetry&logoColor=yellow">
+    </a><br>
+    <a href="https://www.typescriptlang.org/" style="text-decoration: none">
+        <img alt="Typescript" src="https://img.shields.io/badge/-Typescript-3178C6?logo=Typescript&logoColor=white&style=flat&">
+    </a>
+</div>
+
+
+
+---
+<div align="center">
+<h4>
+ <a href="https://github.com/Fevol/obsidian-typings/blob/master/src/CHANGELOG.md">CHANGELOG</a>
+ <span>&nbsp;·&nbsp;</span>
+ <a href="https://www.npmjs.com/package/obsidian-typings">NPM</a>
+ <span>&nbsp;·&nbsp;</span>
+ <a href="https://github.com/Fevol/obsidian-typings/blob/master/docs/CONTRIBUTING.md">CONTRIBUTING</a>
+
+</h4>
+</div>
+
+
+---
+
 
 This repository contains TypeScript typings for undocumented [Obsidian](https://obsidian.md/) API functions and variables and additional descriptions, 
 essentially extending the official [Obsidian API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).

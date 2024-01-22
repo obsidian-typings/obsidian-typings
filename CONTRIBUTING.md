@@ -194,7 +194,8 @@ For any method "XYZ", start by just searching for "XYZ". Generally, the method i
 - `t.prototype.XYZ = ...` (for prototype methods)
 - `function XYZ(` (for internal/minified methods)
 
-At this stage, you might get lucky and get a single definition, or you might get multiple definitions. In the latter case,
+At this stage, you might get lucky and get a single definition, or you may get multiple definitions of the method. 
+In the latter case,
 you will need try to look at the context of the code to determine which interface/class the method belongs to. 
 The main tip for finding the correct definition, is to look at the other methods being defined on the prototype, 
 and check if these match with the other methods of your object.
@@ -230,9 +231,5 @@ function at(e, t, n) {
 }
 ```
 
-At this point, you may want to pass the code through your favourite flavour of LLM or de-minifier, to make the code more understandable.
-In this case, it seems that a function is constructed and some timeouts are started/reset, and other shenanigans.
-Since I personally didn't want to spend too much time on this, I forewent the effort of trying to understand what the code does,
-and just marked the method as `@internal`. Generally, if you can't understand the code within 10 minutes, it's probably not something
-you should be touching anyway.  (Though feel free to open an issue if you understand what semi-arcane magic is happening here!)
-
+You may want to pass the code through your favourite flavour of LLM or de-minifier to make the code at least somewhat understandable.
+Depending on whether you manage to decipher the code, you can now explicitly define the behaviour and/or types of the method.
