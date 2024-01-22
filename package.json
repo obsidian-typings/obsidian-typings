@@ -1,7 +1,7 @@
 {
-  "name": "@Fevol/obsidian-typings",
+  "name": "obsidian-typings",
   "version": "1.0.0",
-  "description": "TypeScript typings for undocumented Obsidian API functions",
+  "description": "Extended type definitions for the Obsidian API (https://obsidian.md)",
   "main": "",
   "types": "obsidian-ex.d.ts",
   "repository": {
@@ -9,6 +9,7 @@
     "url": "git+https://github.com/Fevol/obsidian-typings.git"
   },
   "keywords": [
+    "obsmd",
     "obsidian",
     "typings",
     "API"

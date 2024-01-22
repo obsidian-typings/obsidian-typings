@@ -27,6 +27,10 @@ import * as fsPromises from 'fs/promises';
 import * as path from 'path';
 import { IpcRenderer } from 'electron';
 
+export * from 'obsidian';
+
+
+// TODO: Interfaces that have not been fully typed yet are marked as @internal with 'any'
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface Account {
@@ -1268,7 +1272,7 @@ interface RecentFileTracker {
     vault: Vault;
     /**
      * Reference to Workspace
-         */
+     */
     workspace: Workspace;
 
     /**
@@ -2063,7 +2067,7 @@ declare module 'obsidian' {
 
         /**
          * Clean-up function executed after indenting lists
-             */
+         */
         afterIndent(): void;
         /**
          * Expand text
