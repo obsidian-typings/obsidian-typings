@@ -26,11 +26,11 @@
 ---
 <div align="center">
 <h4>
- <a href="https://github.com/Fevol/obsidian-typings/blob/master/src/CHANGELOG.md">CHANGELOG</a>
+ <a href="https://github.com/Fevol/obsidian-typings/blob/main/CHANGELOG.md">CHANGELOG</a>
  <span>&nbsp;·&nbsp;</span>
  <a href="https://www.npmjs.com/package/obsidian-typings">NPM</a>
  <span>&nbsp;·&nbsp;</span>
- <a href="https://github.com/Fevol/obsidian-typings/blob/master/docs/CONTRIBUTING.md">CONTRIBUTING</a>
+ <a href="https://github.com/Fevol/obsidian-typings/blob/main/CONTRIBUTING.md">CONTRIBUTING</a>
 
 </h4>
 </div>
