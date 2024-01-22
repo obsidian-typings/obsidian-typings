@@ -1,3 +1,4 @@
 .editorconfig
+.github/
 dummy.ts
 tsconfig.json
