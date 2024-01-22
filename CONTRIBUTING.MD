@@ -63,19 +63,19 @@ Thus, to define `InternalPlugin`, you can start by adding each of the methods an
 interface InternalPlugins extends Events {
     // Variables
     app: App;
-    config: Record<any, any>;
-    migration: any;
-    plugins: Record<any, any>;
+    config: Record<unknown, unknown>;
+    migration: unknown;
+    plugins: Record<unknown, unknown>;
     
     // Methods
-    requestSaveConfig(): any;
-    enable(): any;
-    getEnabledPluginById(var1: any): any;
-    getEnabledPlugins(): any;
+    requestSaveConfig(): unknown;
+    enable(): unknown;
+    getEnabledPluginById(var1: unknown): unknown;
+    getEnabledPlugins(): unknown;
     // ...
 }
 ```
-To keep it simple, we first add `any` as type to every variable and method -- unless it is obvious what the type should be
+To keep it simple, we first add `unknown` as type to every variable and method -- unless it is obvious what the type should be
 (i.e. `app` will always be an instance of `App`).
 
 Next up, is the most tedious part of adding typings: finding the correct types for each of the methods and variables.
@@ -105,7 +105,7 @@ interface InternalPlugins extends Events {
 }
 ```
 
-Similarly, you can define the `plugins` variable as `Record<InternalPluginName, any>`.
+Similarly, you can define the `plugins` variable as `Record<InternalPluginName, unknown>`.
 
 Further, it is safe to assume that each element in `Plugins` would be some instance of a `InternalPlugin` class, so we
 will also need to add a new interface for this:
@@ -113,7 +113,7 @@ will also need to add a new interface for this:
 ```ts
 interface InternalPlugin {
     app: App;
-    commands: any;
+    commands: unknown;
     // etc. (repeat the same procedure)
 }
 
@@ -140,7 +140,7 @@ However, to make sure whether this assumption is correct, you _**should**_ check
 If possible, you can also run the method in the console, and see what happens (in this case, nothing happens, so it is likely just `void`).
 
 As before, if you are not certain about the return type or the workings of the function in general,
-add a `@internal` tag to the method description, and/or mark the return type as `any`.
+add a `@internal` tag to the method description, and/or mark the return type as `unknown`.
 
 
 ```ts
@@ -149,7 +149,7 @@ interface InternalPlugins extends Events {
     /**
      * @internal Request save of plugin configs
      */
-    requestSaveConfig(): any;
+    requestSaveConfig(): unknown;
     // ...
 }
 ```
