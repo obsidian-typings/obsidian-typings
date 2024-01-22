@@ -47,8 +47,11 @@ you have in your codebase, or discover solutions that didn't seem possible befor
 
 > [!NOTE] 
 > **TL;DR:** Use at your own risk, verify that the code behaves as expected, and be prepared to update your code if the API changes.
+> 
 > `@internal` methods are especially risky to use.
+> 
 > `@remark` tags give some warnings about the inputs/outputs of the function, or provide better alternatives.
+> 
 > `@tutorial` gives additional information on how to use the function in your plugin.
 
 

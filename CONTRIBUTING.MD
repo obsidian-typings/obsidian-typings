@@ -30,8 +30,11 @@ interface someObject {
 
 > [!NOTE]
 > `@internal` --- Method is *very likely* not fully/correctly typed, and/or is not intended to be used by plugins.
+> 
 > `@remark` --- Alternatives that should be used instead, or warnings about the function.
+> 
 > `@tutorial` --- Short description on how the function could be used in your plugin.
+> 
 > `@deprecated` --- Method is deprecated in a particular version (can't be found in `app.js` anymore).
 
 
