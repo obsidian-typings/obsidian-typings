@@ -960,7 +960,7 @@ interface MetadataTypeManager extends Events {
     /**
      * @internal Get expected widget type for property and the one inferred from the property value
      */
-    getTypeInfo: (arg: { key: string, type: string, value: unknown }) => { inferred: PropertyWidget, expected: PropertyWidget }
+    getTypeInfo(arg: { key: string, type: string, value: unknown }): { inferred: PropertyWidget, expected: PropertyWidget };
     /**
      * Get all properties with an assigned widget type
      */
@@ -2051,7 +2051,7 @@ declare module 'obsidian' {
         /**
          * Adds a search cursor to the editor
          */
-        searchCursor: (searchString: string) => {
+        searchCursor(searchString: string): {
             current(): { from: EditorPosition, to: EditorPosition };
             findAll(): { from: EditorPosition, to: EditorPosition }[];
             findNext(): { from: EditorPosition, to: EditorPosition };
@@ -2308,7 +2308,7 @@ declare module 'obsidian' {
     }
 
     interface MenuItem {
-        callback: () => void;
+        callback(): void;
         dom: HTMLElement;
         setSubmenu(): Menu;
         disabled: boolean;
@@ -2391,7 +2391,7 @@ declare module 'obsidian' {
         /**
          * Get all backlink information for a file
          */
-        getBacklinksForFile: (file?: TFile) => CustomArrayDict<LinkCache>
+        getBacklinksForFile(file?: TFile): CustomArrayDict<LinkCache>
         /**
          * Get paths of all files cached in the vault
          */
