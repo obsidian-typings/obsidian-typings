@@ -498,7 +498,7 @@ interface CustomCSS extends Component {
     /**
      * @internal
      */
-    queue: WeakMap<unknown, unknown>;
+    queue: WeakMap<object, unknown>;
     /**
      * @internal
      */
@@ -546,7 +546,7 @@ interface CustomCSS extends Component {
      * Fetch legacy theme CSS using the pre-v1.0.0 theme download pipeline
      * @returns string obsidian.css contents
      */
-    downloadLegacyTheme({ repo: string }): Promise<string>;
+    downloadLegacyTheme(arg: { repo: string }): Promise<string>;
     /**
      * Enable translucency of application background
      */
@@ -1462,7 +1462,7 @@ interface ViewRegistry extends Events {
     unregisterView(type: string): void;
 }
 
-interface WeakMapWrapper<K extends WeakKey, V> extends WeakMap<K, V> {
+interface WeakMapWrapper<K extends object, V> extends WeakMap<K, V> {
     map: WeakMap<K, V>;
 }
 
