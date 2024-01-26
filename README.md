@@ -54,6 +54,18 @@ There are three options for installing this package:
 
 3. **Add extended typings as submodule** <br> Your IDE will likely pick up the typings automatically when the project is added as a submodule for your plugin, this also makes it simpler to test and submit features to the repository. <br> _Install via:_ `git submodule add https://github.com/Fevol/obsidian-typings.git typings` (or any other folder)
 
+4. **Add `types` setting to `tsconfig.json`** <br> If you prefer to have original NPM package name `obsidian-typings` but don't want to explicitly import its types to your source codes, you could add in your `tsconfig.json`:
+
+```json
+{
+    "compilerOptions": {
+        ...
+        "types": [
+            "obsidian-typings"
+        ]
+    }
+}
+```
 
 ## Disclaimer
 
