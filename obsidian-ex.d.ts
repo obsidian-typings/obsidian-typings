@@ -3433,6 +3433,12 @@ declare module 'obsidian' {
          * Triggers when context menu action is executed on the leaf
          */
         on(name: 'leaf-menu', callback: (menu: Menu, leaf: WorkspaceLeaf) => void, ctx?: unknown): EventRef;
+
+        /**
+         * Set the vertical height a leaf may occupy if it is in a split
+         * @param pct_height - Percentage of the split's height the leaf should occupy (0-100)
+         */
+        setDimension(pct_height?: number | null): void;
     }
 
     interface WorkspaceSplit {
