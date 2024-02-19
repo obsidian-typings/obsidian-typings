@@ -3,7 +3,8 @@ import {
     Command,
     Component,
     Constructor,
-    EditorRange,
+    EditorRange, 
+    EventRef,
     Events,
     KeymapInfo,
     Loc,
@@ -31,6 +32,11 @@ export * from 'obsidian';
 
 
 // TODO: Interfaces that have not been fully typed yet are marked as @internal with 'unknown'
+// TODO: Add Canvas typings (work off base from Dev-Mike, attribute)
+// TODO: Missing event types on sync plugin (but not the internalplugin itself):
+//  - new-log
+//  - status-change
+
 
 interface Account {
     /**
@@ -319,6 +325,26 @@ interface BlockCache {
      * @internal
      */
     cache: unknown;
+}
+
+interface CanvasConnection {
+    
+}
+
+interface CanvasLeaf extends WorkspaceLeaf {
+
+}
+
+interface CanvasNode {
+    
+}
+
+interface CanvasPlugin extends InternalPlugin {
+
+}
+
+interface CanvasView {
+    
 }
 
 interface CMState extends EditorState {
@@ -685,6 +711,14 @@ interface FileExplorerView extends View {
     openFileContextMenu(event: Event, fileItemElement: HTMLElement): void;
 }
 
+interface GlobalSearchLeaf extends WorkspaceLeaf {
+
+}
+
+interface GlobalSearchPlugin extends InternalPlugin {
+
+}
+
 interface HotkeyManager {
     /**
      * Reference to App
@@ -773,6 +807,18 @@ interface HoverLinkSource {
     defaultMod: boolean;
 }
 
+interface HoverLinkEvent {
+    event: MouseEvent,
+    source: "search" | "editor" | "preview" | "properties" | "graph" | "file-explorer" | "hover-link",
+    hoverParent: WorkspaceLeaf,
+    targetEl: HTMLElement | null,
+    linktext: string,
+    sourcePath?: string,
+    state?: {
+        scroll: unknown,
+    }
+}
+
 interface ImportedAttachments {
     data: Promise<ArrayBuffer>;
     extension: string;
@@ -830,8 +876,13 @@ interface InternalPlugins extends Events {
     migration: boolean;
     /**
      * Plugin configs for internal plugins
+     * @remark Prefer usage of getPluginById to access a plugin
      */
-    plugins: Record<InternalPluginName, InternalPlugin>;
+    plugins: {
+        "file-explorer": FileExplorerPlugin,
+        "global-search": GlobalSearchPlugin,
+        [key: string]: InternalPlugin,
+    }
     /**
      * @internal Request save of plugin configs
      */
@@ -843,6 +894,7 @@ interface InternalPlugins extends Events {
      */
     getEnabledPluginById(id: InternalPluginName): InternalPlugin | null;
     getEnabledPluginById(id: 'file-explorer'): FileExplorerPlugin | null;
+    getEnabledPluginById(id: 'global-search'): GlobalSearchPlugin | null;
 
     /**
      * Get all enabled internal plugins
@@ -1072,6 +1124,7 @@ interface Plugins {
     manifests: Record<string, PluginManifest>;
     /**
      * Mapping of plugin ID to plugin instance
+     * @remark Prefer usage of getPlugin to access a plugin
      */
     plugins: Record<string, Plugin>;
     /**
@@ -1419,6 +1472,21 @@ interface ViewRegistry extends Events {
      * Mapping of view type to view constructor
      */
     viewByType: Record<string, (leaf: WorkspaceLeaf) => View>;
+
+    /**
+     * Called when a view of type has been registered into the registry
+     */
+    on(name: 'view-registered', callback: (type: string) => void): EventRef;
+    
+    /**
+     * Called when a view of type has been unregistered from the registry
+     */
+    on(name: 'view-unregistered', callback: (type: string) => void): EventRef;
+
+    /**
+     * Called when the file extensions mapping has been updated
+     */
+    on(name: 'extensions-updated', callback: () => void): EventRef;
 
     /**
      * Get the view type associated with a file extension
@@ -2385,6 +2453,18 @@ declare module 'obsidian' {
         workerResolve: unknown;
 
         /**
+         * Called whenever the metadatacache is fully loaded in
+         * @remark 'finished' is also emitted when the cache is initialized
+         */
+        on(name: 'initialized', callback: () => void): EventRef;
+
+        /**
+         * Called whenever the metadatacache has finished updating
+         */
+        on(name: 'finished', callback: () => void): EventRef;
+        
+
+        /**
          * Get all property infos of the vault
          */
         getAllPropertyInfos(): Record<string, PropertyInfo>
@@ -2729,6 +2809,27 @@ declare module 'obsidian' {
         deleted: boolean;
     }
 
+    /**
+     * @internal Used for Obsidian's touch event handling
+     */
+    interface ObsidianTouchEvent {
+        direction: "x" | "y";
+        evt: TouchEvent;
+        points: number;
+        registerCallback: ({
+            move: (x: number) => void,
+            cancel: () => void,
+            finish: (x: number, y: number, z: number) => void
+        }),
+        startX: number;
+        startY: number;
+        targetEl: HTMLElement;
+        touch: Touch;
+        
+        x: number;
+        y: number;
+    }
+
     interface Vault {
         /**
          * Low-level file system adapter for read and write operations
@@ -2753,8 +2854,56 @@ declare module 'obsidian' {
          */
         fileMap: Record<string, TAbstractFile>;
 
+        /**
+         * Called whenever any of Obsidian's settings are changed
+         * @remark Does *not* trigger when a particular plugin's settings are changed, for that, you could monkey-patch the `saveSettings` method of a plugin instance 
+         */
         on(name: 'config-changed', callback: () => void, ctx?: unknown): EventRef;
 
+        /**
+         * @internal Triggered whenever a file gets loaded internally
+         */
+        on(name: 'raw', callback: (path: string) => void, ctx?: unknown): EventRef;
+
+        /**
+         * @internal Not accessible
+         * @remark Always prefer usage of on(name: 'rename', ...) instead
+         */
+        // on(name: 'renamed', callback: (oldPath: string, newPath: string) => void): EventRef;
+        
+        /**
+         * @internal Not accessible
+         * @remark Always prefer usage of on(name: 'modify', ...) instead
+         */
+        // on(name: 'modified', callback: () => void): EventRef;
+        
+        /**
+         * @internal Not accessible
+         */
+        // on(name: 'file-created', callback: () => void): EventRef;
+        
+        /**
+         * @internal Not accessible
+         */
+        // on(name: 'folder-created', callback: () => void): EventRef;
+        
+        /**
+         * @internal Not accessible
+         */
+        // on(name: 'file-removed', callback: () => void): EventRef;
+        
+        /**
+         * @internal Not accessible
+         */
+        // on(name: 'folder-removed', callback: () => void): EventRef;
+        
+        /**
+         * @internal Not accessible
+         */
+        // on(name: 'closed', callback: () => void): EventRef;       
+        
+        
+        
         /**
          * @internal Add file as child/parent to respective folders
          */
@@ -2994,6 +3143,68 @@ declare module 'obsidian' {
         undoHistory: StateHistory[];
 
         /**
+         * @internal Triggers when user hovers over any note link element (file explorer, editor, ...)
+         * @remark Used for preparing (Ctrl) hover previews
+         */
+        on(name: 'hover-link', callback: (event: HoverLinkEvent) => void, ctx?: unknown): EventRef;
+
+        /**
+         * @internal Called whenever user opens tab group menu (contains e.g. stacked tabs button)
+         */
+        on(name: 'tab-group-menu', callback: (tabMenu: Menu, tabsLeaf: WorkspaceTabs) => void, ctx?: unknown): EventRef;
+
+        /**
+         * @internal Triggers when user swipes open left/right sidebar
+         */
+        on(name: 'swipe', callback: (touchEvents: ObsidianTouchEvent[]) => void, ctx?: unknown): EventRef;
+
+        /**
+         * Triggers when workspace layout is loaded
+         * @remark Prefer usage of onLayoutReady instead
+         */
+        on(name: 'layout-ready', callback: () => void, ctx?: unknown): EventRef;
+        
+        /**
+         * @internal Triggers when user right-clicks on external URL in editor
+         */
+        on(name: 'url-menu', callback: (menu: Menu, url: string) => void, ctx?: unknown): EventRef;
+        
+        /**
+         * Triggers when user clicks on 'N results' button in search view
+         */
+        on(name: 'search:results-menu', callback: (menu: Menu, search: GlobalSearchLeaf) => void, ctx?: unknown): EventRef;
+
+        /**
+         * @internal Called when user shares text on mobile
+         */
+        on(name: 'receive-text-menu', callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
+        
+        /**
+         * @internal Called when user shares files on mobile
+         */
+        on(name: 'receive-files-menu', callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
+
+        /**
+         * Triggers when the user opens a context menu on a selection of multiple nodes in the canvas
+         */
+        on(name: 'canvas:selection-menu', callback: (menu: Menu, canvasView: CanvasView) => void, ctx?: unknown): EventRef;
+
+        /**
+         * Triggers when the user opens a context menu on a single node in the canvas
+         */
+        on(name: 'canvas:node-menu', callback: (menu: Menu, node: CanvasNode) => void, ctx?: unknown): EventRef;
+
+        /**
+         * Triggers when the user drops edge connection to empty space in the canvas
+         */
+        on(name: 'canvas:node-connection-drop-menu', callback: (menu: Menu, originalNode: CanvasNode, connection: CanvasConnection) => void, ctx?: unknown): EventRef;
+
+        /**
+         * Triggers when the user opens a context menu on a connection in the canvas
+         */
+        on(name: 'canvas:edge-menu', callback: (menu: Menu, connection: CanvasConnection) => void, ctx?: unknown): EventRef;
+
+        /**
          * @internal Change active leaf and trigger leaf change event
          */
         activeLeafEvents(): void;
@@ -3212,6 +3423,16 @@ declare module 'obsidian' {
         tabHeaderEl: HTMLElement;
         tabHeaderInnerIconEl: HTMLElement;
         tabHeaderInnerTitleEl: HTMLElement;
+
+        /**
+         * Triggers when the leaf's history gets updated (e.g. when new file is opened, or moving through history)
+         */
+        on(name: 'history-change', callback: () => void, ctx?: unknown): EventRef;
+
+        /**
+         * Triggers when context menu action is executed on the leaf
+         */
+        on(name: 'leaf-menu', callback: (menu: Menu, leaf: WorkspaceLeaf) => void, ctx?: unknown): EventRef;
     }
 
     interface WorkspaceSplit {
