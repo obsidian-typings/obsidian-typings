@@ -1112,6 +1112,7 @@ interface Plugins {
     app: App;
     /**
      * Set of enabled plugin IDs
+     * @remark The plugin ids aren't guaranteed to be either active (in `app.plugins.plugins`) or installed (in `app.plugins.manifests`) 
      */
     enabledPlugins: Set<string>;
     /**
@@ -1119,11 +1120,11 @@ interface Plugins {
      */
     loadingPluginId: string | null;
     /**
-     * Manifests of all the plugins
+     * Manifests of all the plugins that are installed
      */
     manifests: Record<string, PluginManifest>;
     /**
-     * Mapping of plugin ID to plugin instance
+     * Mapping of plugin ID to active plugin instance
      * @remark Prefer usage of getPlugin to access a plugin
      */
     plugins: Record<string, Plugin>;
