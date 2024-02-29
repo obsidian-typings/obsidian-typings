@@ -2370,16 +2370,218 @@ declare module 'obsidian' {
     }
 
     interface Menu {
+        /**
+         * Background for the suggestion menu
+         */
+        bgEl: HTMLElement;
+        /**
+         * The currently active submenu, if any
+         */
+        currentSubmenu?: Menu;
+        /**
+         * DOM element of the menu
+         */
         dom: HTMLElement;
+        /**
+         * Callback to execute when the menu is hidden
+         */
+        hideCallback: () => void;
+        /**
+         * Items contained in the menu
+         */
         items: MenuItem[];
-        onMouseOver(evt: MouseEvent): void;
+        /**
+         * @internal Callback that opens the submenu after a delay
+         */
+        openSubmenuSoon: () => void;
+        /**
+         * Parent menu of the current menu
+         */
+        parentMenu: Menu | null;
+        /**
+         * Scope in which the menu is active
+         */
+        scope: Scope;
+        /**
+         * Sections within the menu
+         */
+        sections: string[];
+        /**
+         * @internal Which menuitem is currently selected
+         */
+        selected: number;
+        /**
+         * @internal Configurations for the submenu configs
+         */
+        submenuConfig: Record<string, { title: string, icon: string }>;
+        /**
+         * @internal Whether the submenu is currently unloading
+         */
+        unloading: boolean;
+        /**
+         * Whether the menu is rendered in native mode
+         */
+        useNativeMenu: boolean;
+
+        /**
+         * @internal Children of the menu
+         */
+        _children: unknown[];
+        /**
+         * @internal Events registered on the menu
+         */
+        _events: unknown[];
+        /**
+         * @internal Whether the menu is loaded
+         */
+        _loaded: boolean;
+        
+        /**
+         * @internal Add a section to the menu
+         */
+        addSections(items: string[]): void;
+        /**
+         * @internal Close the currently open submenu
+         */
+        closeSubmenu(): void;
+        /**
+         * @internal Check whether the clicked element is inside the menu
+         */
+        isInside(e: HTMLElement): boolean;
+        /**
+         * @internal Move selection to the next item in the menu
+         * @param e - Keyboard event
+         */
+        onArrowDown(e: KeyboardEvent): void;
+        /**
+         * @internal Move selection to the previous item in the menu
+         * @param e - Keyboard event
+         */
+        onArrowUp(e: KeyboardEvent): void;
+        /**
+         * @internal Move selection into the submenu
+         */
+        onArrowRight(e: KeyboardEvent): void;
+        /**
+         * @internal Move selection out of the submenu
+         */
+        onArrowLeft(e: KeyboardEvent): void;
+        /**
+         * @internal Execute selected menu item (does nothing if item is submenu)
+         */
+        onEnter(e: KeyboardEvent): void;
+        /**
+         * @internal Pre-emptively closes the menu if click is registered on menu item
+         * @param e
+         */
+        onMenuClick(e: MouseEvent): void;
+        /**
+         * @internal Opens submenu if mouse is hovering over item with submenu
+         * @param e - Mouse event
+         */
+        onMouseOver(e: MouseEvent): void;
+        /**
+         * @internal Registers dom events and scope for the menu
+         */
+        onload(): void;
+        /**
+         * @internal Unregisters scope for the menu
+         */
+        onunload():  void;
+        /**
+         * @internal Open the submenu of the selected item
+         * @param item - Item to open submenu for
+         */
+        openSubmenu(item: MenuItem): void;
+        /**
+         * @internal Select the item at the specified index (after either hovering or arrowing over it)
+         * @param index
+         */
+        select(index: number): void;
+        /**
+         * @internal Set the parent element of the menu (i.e. for workspace leaf context menu)
+         * @param el - Element to set as parent
+         */
+        setParentElement(el: HTMLElement): void;
+        /**
+         * @internal Add a section to the submenu config
+         * @param section
+         * @param submenu
+         */
+        setSectionSubmenu(section: string, submenu: {title: string, icon: string}): void;
+        /**
+         * @internal Sort the items in the menu
+         */
+        sort(): void;
+        /**
+         * @internal Unselect the currently selected item and closes the submenu
+         */
+        unselect(): void;
     }
 
     interface MenuItem {
-        callback(): void;
-        dom: HTMLElement;
-        setSubmenu(): Menu;
+        /**
+         * The callback that is executed when the menu item is clicked
+         */
+        callback?: () => void;
+        /**
+         * Whether the menu item is checked
+         */
+        checked: boolean | null;
+        /**
+         * Whether the menu item is disabled
+         */
         disabled: boolean;
+        /**
+         * Dom element of the menu item
+         */
+        dom: HTMLElement;
+        /**
+         * Icon element of the menu item
+         */
+        iconEl: HTMLElement;
+        /**
+         * Menu the item is in
+         */
+        menu: Menu;
+        /**
+         * The section the item belongs to
+         */
+        section: string;
+        /**
+         * The submenu that is attached to the item
+         */
+        submenu: Menu | null;
+        /**
+         * Title of the menu item
+         */
+        titleEl: string;
+
+        /**
+         * @internal Executes the callback of the onClick event (if not disabled)
+         * @param e - Mouse or keyboard event
+         */
+        handleEvent(e: MouseEvent | KeyboardEvent): void;
+        /**
+         * @internal Remove the icon element from the menu item
+         */
+        removeIcon(): void;
+        /**
+         * @deprecated
+         * @internal Calls `setChecked`, prefer usage of that function instead  
+         * @param active - Whether the menu item should be checked 
+         */
+        setActive(active: boolean): void;
+        /**
+         * Create a submenu on the menu item
+         * @tutorial Creates the foldable menus with more options as seen when you right-click in the editor (e.g. "Insert", "Format", ...) 
+         */
+        setSubmenu(): Menu;
+        /**
+         * @internal Add warning styling to the menu item
+         * @param warning - Whether the menu item should be styled as a warning
+         */
+        setWarning(warning: boolean): void;
     }
 
     interface MetadataCache {
