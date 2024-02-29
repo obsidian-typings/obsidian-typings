@@ -2439,7 +2439,7 @@ declare module 'obsidian' {
         /**
          * @internal Add a section to the menu
          */
-        addSections(items: string[]): void;
+        addSections(items: string[]): Menu;
         /**
          * @internal Close the currently open submenu
          */
@@ -2452,24 +2452,24 @@ declare module 'obsidian' {
          * @internal Move selection to the next item in the menu
          * @param e - Keyboard event
          */
-        onArrowDown(e: KeyboardEvent): void;
+        onArrowDown(e: KeyboardEvent): boolean;
         /**
          * @internal Move selection to the previous item in the menu
          * @param e - Keyboard event
          */
-        onArrowUp(e: KeyboardEvent): void;
+        onArrowUp(e: KeyboardEvent): boolean;
         /**
          * @internal Move selection into the submenu
          */
-        onArrowRight(e: KeyboardEvent): void;
+        onArrowRight(e: KeyboardEvent): boolean;
         /**
          * @internal Move selection out of the submenu
          */
-        onArrowLeft(e: KeyboardEvent): void;
+        onArrowLeft(e: KeyboardEvent): boolean;
         /**
          * @internal Execute selected menu item (does nothing if item is submenu)
          */
-        onEnter(e: KeyboardEvent): void;
+        onEnter(e: KeyboardEvent): boolean;
         /**
          * @internal Pre-emptively closes the menu if click is registered on menu item
          * @param e
@@ -2479,7 +2479,7 @@ declare module 'obsidian' {
          * @internal Opens submenu if mouse is hovering over item with submenu
          * @param e - Mouse event
          */
-        onMouseOver(e: MouseEvent): void;
+        onMouseOver(e: MouseEvent): boolean;
         /**
          * @internal Registers dom events and scope for the menu
          */
@@ -2502,13 +2502,13 @@ declare module 'obsidian' {
          * @internal Set the parent element of the menu (i.e. for workspace leaf context menu)
          * @param el - Element to set as parent
          */
-        setParentElement(el: HTMLElement): void;
+        setParentElement(el: HTMLElement): Menu;
         /**
          * @internal Add a section to the submenu config
          * @param section
          * @param submenu
          */
-        setSectionSubmenu(section: string, submenu: {title: string, icon: string}): void;
+        setSectionSubmenu(section: string, submenu: {title: string, icon: string}): Menu;
         /**
          * @internal Sort the items in the menu
          */
@@ -2528,6 +2528,10 @@ declare module 'obsidian' {
          * Whether the menu item is checked
          */
         checked: boolean | null;
+        /**
+         * Check icon element of the menu item, only present if the item is checked
+         */
+        checkIconEl?: HTMLElement;
         /**
          * Whether the menu item is disabled
          */
