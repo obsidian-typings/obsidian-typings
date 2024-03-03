@@ -1464,6 +1464,10 @@ interface ThemeManifest {
     version: '0.0.0' | string;
 }
 
+export interface Token extends EditorRange {
+    type: "tag" | "external-link" | "internal-link";
+}
+
 interface ViewRegistry extends Events {
     /**
      * Mapping of file extensions to view type
@@ -2364,6 +2368,15 @@ declare module 'obsidian' {
     }
 
     interface FileSystemAdapter extends DataAdapter {
+    }
+
+
+    interface MarkdownEditView {
+        triggerClickableToken(token: Token, new_leaf: boolean): void;
+    }
+    
+    interface MarkdownView {
+        editMode: MarkdownEditView;
     }
 
     interface MarkdownPreviewView {
