@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.0.4
+- Added missing EventRef types
+  - **View Registry:** `view-registered`, `view-unregistered`, `extensions-updated`
+  - **Metadata Cache:** `initialized`, `finished`
+  - **Workspace:** `hover-link`, `tab-group-menu`, `swipe`, `layout-ready`, `url-menu`, `search:results-menu`, `receive-text-menu`,
+            `receive-files-menu`, `canvas:selection-menu`, `canvas:node-menu`, `canvas:node-connection-drop-menu`, `canvas:edge-menu`
+  - **Workspace Leaf:** `history-change`, `leaf-menu`
+- Added missing typings for `Menu` and `MenuItem` classes
+- Added missing typings for `Tree` and `TreeItem` classes (used in `Outline` and `FileExplorer` plugin views)
+- Set vertical height for a split leaf item via `setDimension`
+- Bumped `electron-types` version
+
 ## v1.0.3
 - Change `electron-types` types inclusion
 - Added note in `README.md` on automatically including new types
