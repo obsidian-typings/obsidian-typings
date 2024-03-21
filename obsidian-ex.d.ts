@@ -706,10 +706,26 @@ interface FileExplorerPlugin extends InternalPlugin {
 }
 
 interface FileExplorerView extends View {
+    /**
+     * Mapping of tree self element to abstract file
+     */
     files: WeakMapWrapper<HTMLElement, TAbstractFile>;
-
+    /**
+     * Mapping of file path to tree item
+     */
+    fileItems: Record<string, TreeItem<FileTreeItem>>;
+    /**
+     * Tree view of files
+     */
+    tree: Tree<FileTreeItem>;
+    
     openFileContextMenu(event: Event, fileItemElement: HTMLElement): void;
 }
+
+interface FileTreeItem {
+    file: TAbstractFile;
+}
+
 
 interface GlobalSearchLeaf extends WorkspaceLeaf {
 
@@ -824,6 +840,37 @@ interface ImportedAttachments {
     extension: string;
     filename: string;
     name: string;
+}
+
+/**
+ * @internal
+ */
+interface InfinityScroll {
+    height: number;
+    lastScroll: number;
+    queued: unknown | null;
+    renderBlockSize: number;
+    rootEl: unknown;
+    scrollEl: HTMLElement;
+    setWidth: boolean;
+    width: number;
+
+    compute(x: unknown): unknown;
+    findElementTop(x: unknown, y: unknown, z: unknown): unknown;
+    getRootTop(): unknown;
+    invalidate(x: unknown, y: unknown): unknown;
+    invalidateAll(): unknown;
+    measure(x: unknown, y: unknown): unknown;
+    onResize(): unknown;
+    onScroll(): unknown;
+    queueCompute(): unknown;
+    scrollIntoView(x: unknown, y: unknown): unknown;
+    update(x: unknown, y: unknown, z: unknown, u: unknown, v: unknown, w: unknown): unknown;
+    updateVirtualDisplay(x: unknown): unknown;
+    
+    _layout(x: unknown, y: unknown): unknown;
+    _measure(x: unknown): unknown;
+    _precompute(x: unknown): unknown;
 }
 
 interface InternalPlugin extends Plugin {
@@ -1467,6 +1514,220 @@ interface ThemeManifest {
 export interface Token extends EditorRange {
     type: "tag" | "external-link" | "internal-link";
 }
+
+interface Tree<T> {
+    /**
+     * Currently active item in tree view
+     */
+    activeDom: TreeNode<T> | null;
+    /**
+     * Reference to App
+     */
+    app: App;
+    /**
+     * Container element of the tree view
+     */
+    containerEl: HTMLElement;
+    /**
+     * Currently focused item in tree view
+     */
+    focusedItem: TreeNode<T> | null;
+    /**
+     * Gets the ID of a tree item given its Node
+     */
+    getNodeId: (node: TreeNode<T>) => string | undefined;
+    /**
+     * Handle collapsing of all nodes
+     */
+    handleCollapseAll: () => void;
+    /**
+     * Handle deletion of selected nodes
+     */
+    handleDeleteSelectedItems: () => void | undefined;
+    /**
+     * Handle renaming of focused item
+     */
+    handleRenameFocusedItem: () => void;
+    /**
+     * ID of the view the tree is associated with
+     */
+    id: string;
+    /**
+     * @internal Facilitates rendering of tree view
+     */
+    infinityScroll: InfinityScroll;
+    /**
+     * Whether all items in the tree are collapsed
+     */
+    isAllCollapsed: boolean;
+    /**
+     * Whether tree items should default to collapsed state
+     */
+    prefersCollapsed: boolean;
+    /**
+     * Request saving of the current fold states
+     */
+    requestSaveFolds: () => void;
+    /**
+     * Key scope for tree view
+     */
+    scope: Scope;
+    /**
+     * Currently selected items in tree view
+     */
+    selectedDoms: Set<TreeNode<T>>;
+    /**
+     * The view the tree is associated with
+     */
+    view: View;
+
+    /**
+     * Root item of the tree view
+     */
+    get root(): TreeNode<T>;
+
+    /**
+     * Change the focused item to the next item in specified direction
+     */
+    changeFocusedItem(direction: "forwards" | "backwards"): void;
+    /**
+     * Unselect all selected items in the tree view
+     */
+    clearSelectedDoms(): void;
+    /**
+     * Mark tree item as deselected
+     */
+    deselectItem(node: TreeNode<T>): void;
+    /**
+     * Get the local storage key for the saved tree view folds
+     */
+    getFoldKey(): string;
+    /**
+     * Handle selection of tree item via keyboard event
+     */
+    handleItemSelection(event: MouseEvent, node: TreeNode<T>): void;
+    /**
+     * @internal Registers all keyboard actions to the tree view keyscope
+     */
+    initializeKeyboardNav(): void;
+    /**
+     * Check whether item is a valid tree item
+     */
+    isItem(node: TreeNode<T> | undefined): boolean;
+    /**
+     * Load the saved fold states of the tree view from local storage
+     */
+    loadFolds(): void;
+    /**
+     * Handle keyboard event for moving/selecting tree item below
+     */
+    onKeyArrowDown(event: KeyboardEvent): void;
+    /**
+     * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding)
+     */
+    onKeyArrowLeft(event: KeyboardEvent): void;
+    /**
+     * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding)
+     */
+    onKeyArrowRight(event: KeyboardEvent): void;
+    /**
+     * Handle keyboard event for moving/selecting tree item above
+     */
+    onKeyArrowUp(event: KeyboardEvent): void;
+    /**
+     * Handle keyboard event for opening tree item
+     */
+    onKeyOpen(event: KeyboardEvent): void;
+    /**
+     * @internal Update scroll representation on resize
+     */
+    onResize(): void;
+    /**
+     * Save the current fold states of the tree view to local storage
+     */
+    saveFolds(): void;
+    /**
+     * Mark tree item as selected
+     */
+    selectItem(node: TreeNode<T>): void;
+    /**
+     * Set all items in the tree view to be collapsed or expanded
+     */
+    setCollapseAll(collapse: boolean): void;
+    /**
+     * Set the focused item in the tree view
+     */
+    setFocusedItem(node: TreeNode<T>, scrollIntoView?: boolean): void;
+    /**
+     * (Un)Collapse all items in the tree view
+     */
+    toggleCollapseAll(): void;
+}
+    
+    
+
+type TreeNode<T = object> = T & {
+    childrenEl: HTMLElement;
+    el: HTMLElement;
+    info: {
+        childLeft: number;
+        childLeftPadding: number;
+        childTop: number;
+        computed: boolean;
+        height: number;
+        hidden: boolean;
+        next: boolean;
+        queued: boolean;
+        width: number;
+    };
+    pusherEl: HTMLElement;
+    vChildren: {
+        _children: TreeNode<T>[];
+        owner: TreeNode<T>;
+    };
+}
+
+// NOTE: File-explorer root vs Outline root are different (former is a treeitem, latter just a treenode)
+type TreeItem<T> = TreeNode<T> & {
+    collapseEl: HTMLElement;
+    collapsed: boolean;
+    collapsible: boolean;
+    coverEl: HTMLElement;
+    innerEl: HTMLElement;
+    parent: TreeNode<T> | undefined;
+    selfEl: HTMLElement;
+    view: View;
+
+    /**
+     * Execute collapse functionality on mouse click
+     */
+    onCollapseClick(event: MouseEvent): void;
+    /**
+     * Execute item functionality on clicking tree item
+     */
+    onSelfClick(event: MouseEvent): void;
+    /**
+     * Set clickable state of tree item 
+     */
+    setClickable(clickable: boolean): void;
+    /**
+     * Set collapsed state of tree item
+     */
+    setCollapsed(collapsed: boolean, check: boolean): Promise<undefined>;
+    /**
+     * Set collapsible state of tree item
+     */
+    setCollapsible(collapsible: boolean): void;
+    /**
+     * Toggle collapsed state of tree item
+     */
+    toggleCollapsed(check: boolean): Promise<undefined>;
+    /**
+     * @internal Update the tree item's cover element
+     */
+    updateCollapsed(check: boolean): Promise<undefined>;
+}
+
 
 interface ViewRegistry extends Events {
     /**
