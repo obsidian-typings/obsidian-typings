@@ -1125,7 +1125,7 @@ interface PluginManifest {
     /**
      * Storage location of the plugin relative to the vault root
      */
-    dir: string;
+    dir?: string;
     /**
      * URL for funding the author
      */
@@ -1137,7 +1137,7 @@ interface PluginManifest {
     /**
      * Whether the plugin is designed for desktop use only
      */
-    isDesktopOnly: boolean;
+    isDesktopOnly?: boolean;
     /**
      * Minimum Obsidian version compatible with the plugin
      */
