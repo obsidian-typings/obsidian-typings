@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.5
+- Fix some methods on `Menu` and `MenuItem` not being chainable 
+
 ## v1.0.4
 - Added missing EventRef types
   - **View Registry:** `view-registered`, `view-unregistered`, `extensions-updated`

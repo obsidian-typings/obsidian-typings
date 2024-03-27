@@ -1,4 +1,7 @@
 .editorconfig
 .github/
+images/
+CONTRIBUTING.md
+CHANGELOG.md
 dummy.ts
 tsconfig.json
