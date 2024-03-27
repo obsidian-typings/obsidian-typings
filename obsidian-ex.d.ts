@@ -2714,7 +2714,7 @@ declare module 'obsidian' {
         /**
          * @internal Add a section to the menu
          */
-        addSections(items: string[]): Menu;
+        addSections(items: string[]): this;
         /**
          * @internal Close the currently open submenu
          */
@@ -2777,13 +2777,13 @@ declare module 'obsidian' {
          * @internal Set the parent element of the menu (i.e. for workspace leaf context menu)
          * @param el - Element to set as parent
          */
-        setParentElement(el: HTMLElement): Menu;
+        setParentElement(el: HTMLElement): this;
         /**
          * @internal Add a section to the submenu config
          * @param section
          * @param submenu
          */
-        setSectionSubmenu(section: string, submenu: {title: string, icon: string}): Menu;
+        setSectionSubmenu(section: string, submenu: {title: string, icon: string}): this;
         /**
          * @internal Sort the items in the menu
          */
@@ -2850,7 +2850,7 @@ declare module 'obsidian' {
          * @internal Calls `setChecked`, prefer usage of that function instead  
          * @param active - Whether the menu item should be checked 
          */
-        setActive(active: boolean): void;
+        setActive(active: boolean): this;
         /**
          * Create a submenu on the menu item
          * @tutorial Creates the foldable menus with more options as seen when you right-click in the editor (e.g. "Insert", "Format", ...) 
@@ -2860,7 +2860,7 @@ declare module 'obsidian' {
          * @internal Add warning styling to the menu item
          * @param warning - Whether the menu item should be styled as a warning
          */
-        setWarning(warning: boolean): void;
+        setWarning(warning: boolean): this;
     }
 
     interface MetadataCache {
