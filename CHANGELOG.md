@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6
+- Fix unnecessary typings for overridden `trigger` functions on `Events`-derived classes
+- Fix `revealInFolder` for file-explorer plugin not accepting `TFile` inputs
+
 ## v1.0.5
 - Fix some methods on `Menu` and `MenuItem` not being chainable 
 
