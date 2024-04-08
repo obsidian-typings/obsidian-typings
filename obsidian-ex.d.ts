@@ -972,7 +972,7 @@ interface InternalPlugins extends Events {
     /**
      * @internal
      */
-    trigger(arg: string): void;
+    // trigger(arg: string): void;
 }
 
 interface KeyScope {
@@ -1083,7 +1083,7 @@ interface MetadataTypeManager extends Events {
     /**
      * @internal
      */
-    trigger(e: unknown): void;
+    // trigger(e: unknown): void;
     /**
      * @internal Unset widget type for property
      */
@@ -1785,7 +1785,7 @@ interface ViewRegistry extends Events {
     /**
      * @internal
      */
-    trigger(type: string): void;
+    // trigger(type: string): void;
     /**
      * Unregister extensions for a view type
      */
@@ -2307,7 +2307,7 @@ declare module 'obsidian' {
         /**
          * @internal Trigger an event on handler
          */
-        trigger(e: unknown, t: unknown, n: unknown, i: unknown): void;
+        // trigger(e: unknown, t: unknown, n: unknown, i: unknown): void;
         /**
          * @internal
          */
@@ -3065,7 +3065,7 @@ declare module 'obsidian' {
         /**
          * @internal
          */
-        trigger(e: unknown): void;
+        // trigger(e: unknown): void;
         /**
          * @internal Re-resolve all links for changed path
          */
@@ -3520,7 +3520,7 @@ declare module 'obsidian' {
         /**
          * @internal Trigger an event on handler
          */
-        trigger(type: string): void;
+        // trigger(type: string): void;
         /**
          * Write a config file to disk
          * @param config Name of config file
@@ -3862,7 +3862,7 @@ declare module 'obsidian' {
         /**
          * @internal
          */
-        trigger(e: unknown): void;
+        // trigger(e: unknown): void;
         /**
          * @internal Unregister a CodeMirror editor extension
          */
