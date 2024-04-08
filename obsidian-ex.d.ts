@@ -702,7 +702,10 @@ interface FileExplorerLeaf extends WorkspaceLeaf {
 }
 
 interface FileExplorerPlugin extends InternalPlugin {
-    revealInFolder(folder: TFolder): Promise<void>;
+    /**
+     * Reveals a file or folder in the file explorer view, opens the view if it is not already open/visible
+     */
+    revealInFolder(item: TFile | TFolder): void;
 }
 
 interface FileExplorerView extends View {
@@ -720,6 +723,11 @@ interface FileExplorerView extends View {
     tree: Tree<FileTreeItem>;
     
     openFileContextMenu(event: Event, fileItemElement: HTMLElement): void;
+
+    /**
+     * Reveal a file or folder in the file tree
+     */
+    revealInFolder(file: TFile | TFolder): void;
 }
 
 interface FileTreeItem {
