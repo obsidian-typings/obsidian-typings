@@ -1,7 +1,7 @@
 # Changelog
 
 ## 1.0.7
-- Fix `setType` and `unsetType` of `app.metadataTypeManager` being incorrectly marked as `async`
+- Fix `setType` and `unsetType` of `app.metadataTypeManager` not being marked as `async`
 
 ## 1.0.6
 - Fix unnecessary typings for overridden `trigger` functions on `Events`-derived classes
