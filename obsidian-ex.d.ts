@@ -1087,7 +1087,7 @@ interface MetadataTypeManager extends Events {
     /**
      * @internal Set widget type for property
      */
-    setType(property: string, type: PropertyWidgetType): void;
+    setType(property: string, type: PropertyWidgetType): Promise<void>;
     /**
      * @internal
      */
@@ -1095,7 +1095,7 @@ interface MetadataTypeManager extends Events {
     /**
      * @internal Unset widget type for property
      */
-    unsetType(property: string): void;
+    unsetType(property: string): Promise<void>;
 }
 
 interface ObsidianDOM {
