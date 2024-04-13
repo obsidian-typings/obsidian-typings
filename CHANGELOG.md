@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.8
+- Add `aliases` widget type to `PropertyWidghetType`
+- Allow arbitrary widgets for `PropertyWidgetType`
+
 ## 1.0.7
 - Fix `setType` and `unsetType` of `app.metadataTypeManager` not being marked as `async`
 
