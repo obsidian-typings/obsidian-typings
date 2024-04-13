@@ -1341,14 +1341,16 @@ interface PropertyWidget {
     validate(value: unknown): boolean;
 }
 
-type PropertyWidgetType = 'aliases'
+export type PropertyWidgetType = 
+    | 'aliases'
     | 'checkbox'
     | 'date'
     | 'datetime'
     | 'multitext'
     | 'number'
     | 'tags'
-    | 'text';
+    | 'text'
+    | (string & {})
 
 interface ReadViewRenderer {
     addBottomPadding: boolean;
