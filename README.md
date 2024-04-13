@@ -50,13 +50,13 @@ are covered, but typings for views like `Graph`, `Canvas`, ... are still missing
 There are three options for installing this package:
 1. **Explicit type importing** <br> Each typing has to be imported explicitly from `obsidian-typings` instead of `obsidian`, e.g. `import {App, MarkdownView} from "obsidian-typings"`. <br> _Install via:_ `npm install --save-dev  obsidian-typings`
 
-2. **Automatic type extending** (recommended) <br> The typings are automatically added to the existing `obsidian` module, so you can use them without any changes to your code. <br> _Install via:_ `npm install --save-dev @types/obsidian-typings@npm:obsidian-typings`
+2. **Automatic type extending** (recommended) <br> The typings are automatically added to the existing `obsidian` module, so you can use them without any changes to your code. <br> _Install via:_ `npm install --save-dev @types/obsidian-typings@npm:obsidian-typings`.
 
 3. **Add extended typings as submodule** <br> Your IDE will likely pick up the typings automatically when the project is added as a submodule for your plugin, this also makes it simpler to test and submit features to the repository. <br> _Install via:_ `git submodule add https://github.com/Fevol/obsidian-typings.git typings` (or any other folder)
 
 
-> [!NOTE]
-> If you prefer to use the original NPM package name `obsidian-typings`, but don't want to explicitly import its types into your source code, you could adapt your `tsconfig.json` as follows:
+> [!WARNING]
+> If your IDE or TS compiler is not able to pick up the types from `obsidian-typings` but they were installed properly, you will need to adapt your `tsconfig.json` as follows:
 > ```json
 > {
 >     "compilerOptions": {
@@ -67,6 +67,7 @@ There are three options for installing this package:
 >     }
 > }
 > ```
+> (Add `"obsidian-typings"` to the `types` array for `compilerOptions`)
 
 ## Disclaimer
 
