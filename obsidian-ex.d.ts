@@ -2,8 +2,7 @@ import {
     App,
     Command,
     Component,
-    Constructor,
-    EditorRange, 
+    EditorRange,
     EventRef,
     Events,
     KeymapInfo,
@@ -328,7 +327,7 @@ interface BlockCache {
 }
 
 interface CanvasConnection {
-    
+
 }
 
 interface CanvasLeaf extends WorkspaceLeaf {
@@ -336,7 +335,7 @@ interface CanvasLeaf extends WorkspaceLeaf {
 }
 
 interface CanvasNode {
-    
+
 }
 
 interface CanvasPlugin extends InternalPlugin {
@@ -344,7 +343,7 @@ interface CanvasPlugin extends InternalPlugin {
 }
 
 interface CanvasView {
-    
+
 }
 
 interface CMState extends EditorState {
@@ -721,7 +720,7 @@ interface FileExplorerView extends View {
      * Tree view of files
      */
     tree: Tree<FileTreeItem>;
-    
+
     openFileContextMenu(event: Event, fileItemElement: HTMLElement): void;
 
     /**
@@ -875,7 +874,7 @@ interface InfinityScroll {
     scrollIntoView(x: unknown, y: unknown): unknown;
     update(x: unknown, y: unknown, z: unknown, u: unknown, v: unknown, w: unknown): unknown;
     updateVirtualDisplay(x: unknown): unknown;
-    
+
     _layout(x: unknown, y: unknown): unknown;
     _measure(x: unknown): unknown;
     _precompute(x: unknown): unknown;
@@ -1167,7 +1166,7 @@ interface Plugins {
     app: App;
     /**
      * Set of enabled plugin IDs
-     * @remark The plugin ids aren't guaranteed to be either active (in `app.plugins.plugins`) or installed (in `app.plugins.manifests`) 
+     * @remark The plugin ids aren't guaranteed to be either active (in `app.plugins.plugins`) or installed (in `app.plugins.manifests`)
      */
     enabledPlugins: Set<string>;
     /**
@@ -1341,7 +1340,7 @@ interface PropertyWidget {
     validate(value: unknown): boolean;
 }
 
-export type PropertyWidgetType = 
+export type PropertyWidgetType =
     | 'aliases'
     | 'checkbox'
     | 'date'
@@ -1350,7 +1349,7 @@ export type PropertyWidgetType =
     | 'number'
     | 'tags'
     | 'text'
-    | (string & {})
+    | (string & any)
 
 interface ReadViewRenderer {
     addBottomPadding: boolean;
@@ -1523,6 +1522,7 @@ interface ThemeManifest {
 
 export interface Token extends EditorRange {
     type: "tag" | "external-link" | "internal-link";
+    text: string;
 }
 
 interface Tree<T> {
@@ -1673,8 +1673,8 @@ interface Tree<T> {
      */
     toggleCollapseAll(): void;
 }
-    
-    
+
+
 
 type TreeNode<T = object> = T & {
     childrenEl: HTMLElement;
@@ -1717,7 +1717,7 @@ type TreeItem<T> = TreeNode<T> & {
      */
     onSelfClick(event: MouseEvent): void;
     /**
-     * Set clickable state of tree item 
+     * Set clickable state of tree item
      */
     setClickable(clickable: boolean): void;
     /**
@@ -1753,7 +1753,7 @@ interface ViewRegistry extends Events {
      * Called when a view of type has been registered into the registry
      */
     on(name: 'view-registered', callback: (type: string) => void): EventRef;
-    
+
     /**
      * Called when a view of type has been unregistered from the registry
      */
@@ -1847,10 +1847,10 @@ declare module 'obsidian' {
         //  * @internal
         //  */
         // dragManager: unknown;
-        // /**
-        //  * @internal
-        //  */
-        // embedRegistry: EmbedRegistry;
+        /**
+         * Registry that manages the creation of generic media type embeds
+         */
+        embedRegistry: EmbedRegistry;
         /**
          * Manage the creation, deletion and renaming of files from the UI.
          * @remark Prefer using the `vault` API for programmatic file management
@@ -2332,16 +2332,15 @@ declare module 'obsidian' {
         watchHiddenRecursive(normalizedPath: string): Promise<void>;
     }
 
-    interface Editor {
-        /**
-         * CodeMirror editor instance
-         */
-        cm: EditorViewI;
-        /**
-         * HTML instance the CM editor is attached to
-         */
-        containerEl: HTMLElement;
-
+    /**
+     * @todo Missing functions related to ranges and markdown
+     */
+    interface ExtendedEditor extends Editor {
+        editorComponent: undefined | ScrollableMarkdownEditor;
+        
+        get activeCm(): EditorView;
+        get inTableCell(): boolean;
+        
         /**
          * Make ranges of text highlighted within the editor given specified class (style)
          */
@@ -2349,7 +2348,7 @@ declare module 'obsidian' {
         /**
          * Convert editor position to screen position
          * @param pos Editor position
-         * @param mode Relative to the editor or the application window
+         * @param relative_to_editor Relative to the editor or the application window
          */
         coordsAtPos(pos: EditorPosition, relative_to_editor: boolean): { left: number, top: number, bottom: number, right: number };
         /**
@@ -2407,6 +2406,18 @@ declare module 'obsidian' {
          * Applies specified markdown syntax to selected text or word under cursor
          */
         toggleMarkdownFormatting(syntax: 'bold' | 'italic' | 'strikethrough' | 'highlight' | 'code' | 'math' | 'comment'): void;
+    }
+
+    interface Editor {
+        /**
+         * CodeMirror editor instance
+         */
+        cm: EditorView;
+        /**
+         * HTML instance the CM editor is attached to
+         */
+        containerEl: HTMLElement;
+
 
         /**
          * Clean-up function executed after indenting lists
@@ -2641,20 +2652,526 @@ declare module 'obsidian' {
     interface FileSystemAdapter extends DataAdapter {
     }
 
-
-    interface MarkdownEditView {
-        triggerClickableToken(token: Token, new_leaf: boolean): void;
+    
+    interface EmbedContext {
+        app: App;
+        linktext?: string;
+        sourcePath?: string;
+        containerEl: HTMLElement;
+        displayMode?: boolean;
+        showInline?: boolean;
+        state?: any;
+        depth?: number;
     }
     
+    type EmbedableConstructor = (context: EmbedContext, file: TFile, path?: string) => Component;
+
+    interface EmbedRegistry extends Events {
+        embedByExtension: Record<string, EmbedableConstructor>;
+
+        getEmbedCreator(file: TFile): EmbedableConstructor | null;
+        isExtensionRegistered(extension: string): boolean;
+        registerExtension(extension: string, embedCreator: EmbedableConstructor): void;
+        registerExtensions(extensions: string[], embedCreator: EmbedableConstructor): void;
+        unregisterExtension(extension: string): void;
+        unregisterExtensions(extensions: string[]): void;
+    }
+    
+    interface EditorSuggests<T> {
+        currentSuggest: null | unknown;
+        suggests: EditorSuggest<T>[];
+
+        addSuggest(e: unknown): unknown;
+        close(): unknown;
+        isShowingSuggestion(): unknown;
+        removeSuggest(e: unknown): unknown;
+        reposition(): unknown;
+        setCurrentSuggest(e: unknown): unknown;
+        trigger(e: unknown, t: unknown, n: unknown): unknown;
+    }
+
+    interface EditorSuggest<T> {
+        isOpen: boolean
+        suggestEl: HTMLElement;
+        suggestManager: SuggestManager;
+        suggestions: SuggestionContainer<T>;
+
+        close(): void;
+        renderSuggestion(e: unknown, t: unknown): unknown;
+        selectSuggestion(e: unknown, t: unknown): unknown;
+        showSuggestions(t: unknown): unknown;
+    }
+
+    interface SuggestManager {
+        app: App;
+        fileSuggestions: null | unknown;
+        getSourcePath: () => unknown;
+        global: boolean
+        mode: "file" | string;
+        runnable: null | unknown;
+
+        getBlockSuggestions(e: unknown, t: unknown, n: unknown): unknown;
+        getDisplaySuggestions(e: unknown, t: unknown, n: unknown, i: unknown): unknown;
+        getFileSuggestions(e: unknown, t: unknown): unknown;
+        getGlobalBlockSuggestions(e: unknown, t: unknown): unknown;
+        getGlobalHeadingSuggestions(e: unknown, t: unknown): unknown;
+        getHeadingSuggestions(e: unknown, t: unknown, n: unknown): unknown;
+        getSuggestionsAsync(e: unknown, t: unknown): unknown;
+        matchBlock(e: unknown, t: unknown, n: unknown, i: unknown, r: unknown, o: unknown): unknown;
+    }
+
+    interface SuggestionContainer<T> {
+        chooser: EditorSuggest<T>;
+        containerEl: HTMLElement;
+        selectedItem: number;
+        suggestions: unknown[];
+        values: unknown[];
+
+        addMessage(e: unknown): unknown;
+        addSuggestion(e: unknown): unknown;
+        forceSetSelectedItem(e: unknown, t: unknown): unknown;
+        moveDown(e: unknown): unknown;
+        moveUp(e: unknown): unknown;
+        onSuggestionClick(e: unknown, t: unknown): unknown;
+        onSuggestionMouseover(e: unknown, t: unknown): unknown;
+        pageDown(e: unknown): unknown;
+        pageUp(e: unknown): unknown;
+        setSelectedItem(e: unknown, t: unknown): unknown;
+        setSuggestions(e: unknown): unknown;
+        useSelectedItem(e: unknown): unknown;
+
+        get numVisibleItems(): unknown;
+        get rowHeight(): unknown;
+    }
+
+
+    interface Component {
+        _children: Component[];
+        _events: EventRef[];
+        _loaded: boolean;
+    }
+
+    interface ClipBoardManager {
+        app: App;
+        info: MarkdownView;
+
+        getPath(): unknown;
+        handleDataTransfer(e: unknown): unknown;
+        handleDragOver(e: unknown): unknown;
+        handleDrop(e: unknown): unknown;
+        handleDropIntoEditor(e: unknown): unknown;
+        handlePaste(e: unknown): unknown;
+        insertAttachmentEmbed(e: unknown, t: unknown): unknown;
+        insertFiles(e: unknown): unknown;
+        saveAttachment(e: unknown, t: unknown, n: unknown, i: unknown): unknown;
+    }
+
+    interface EditorSearchComponent extends SearchComponent {
+        cursor: null | unknown;
+        editor: ExtendedEditor;
+        isActive: boolean;
+        isReplace: boolean;
+
+        clear(): unknown;
+        findNext(): unknown;
+        findNextOrReplace(): unknown;
+        findPrevious(): unknown;
+        hide(): unknown;
+        highlight(e: unknown): unknown;
+        onAltEnter(e: unknown): unknown;
+        onModAltEnter(e: unknown): unknown;
+        onSearchInput(): unknown;
+        replaceAll(): unknown;
+        replaceCurrentMatch(): unknown;
+        searchAll(): unknown;
+        show(e: unknown): unknown;
+    }
+
+    interface SearchComponent {
+        app: App;
+        containerEl: HTMLElement;
+        scope: Scope;
+        searchButtonContainerEl: HTMLElement;
+        searchContainerEl: HTMLElement;
+        replaceInputEl: HTMLInputElement;
+        searchInputEl: HTMLInputElement;
+
+        applyScope(e: unknown): unknown;
+        getQuery(): unknown;
+        goToNextInput(e: unknown): unknown;
+        onEnter(e: unknown): unknown;
+        onShiftEnter(e: unknown): unknown;
+    }
+
+
+    class MarkdownSourceView extends ScrollableMarkdownEditor {
+        propertiesExtension: Extension[];
+        type: "source"
+        view: MarkdownView;
+
+        beforeUnload(): unknown;
+        clear(): unknown;
+        destroy(): unknown;
+        getDynamicExtensions(): unknown;
+        getEphemeralState(e: unknown): unknown;
+        getFoldInfo(): unknown;
+        getSelection(): unknown;
+        highlightSearchMatches(e: unknown, t: unknown, n: unknown, i: unknown): unknown;
+        onUpdate(t: unknown, n: unknown): unknown;
+        requestOnInternalDataChange(): unknown;
+        requestSaveFolds(): unknown;
+        set(t: unknown, n: unknown): unknown;
+        setEphemeralState(e: unknown): unknown;
+        setHighlight(e: unknown): unknown;
+        setState(e: unknown): unknown;
+        show(): unknown;
+        updateBottomPadding(e: unknown): unknown;
+        updateOptions(): unknown;
+    }
+
+    
+    class IFramedMarkdownEditor extends ScrollableMarkdownEditor {
+        constructor(context: WidgetEditorView);
+        
+        cleanup: null | (() => void);
+        iframeEl: null | HTMLIFrameElement;
+        
+        cleanupIframe(): unknown;
+        getDynamicExtensions(): unknown;
+        onIframeLoad(): unknown;
+        onUpdate(e: unknown, t: unknown): unknown;
+        onunload(): unknown;
+    }
+    
+    class ScrollableMarkdownEditor extends GenericMarkdownEditor {
+        cssClasses: []
+        isScrolling: boolean;
+        search: EditorSearchComponent;
+        sizerEl: HTMLElement;
+        
+        applyScroll(e: unknown): unknown;
+        buildLocalExtensions(): Extension[];
+        focus(): unknown;
+        getDynamicExtensions(): unknown;
+        getScroll(): unknown;
+        handleScroll(): unknown;
+        hide(): unknown;
+        onCssChange(): unknown;
+        onResize(): unknown;
+        onScroll(): unknown;
+        onUpdate(t: unknown, n: unknown): unknown;
+        onViewClick(e: unknown): unknown;
+        setCssClass(e: unknown): unknown;
+        show(): unknown;
+        showSearch(e: unknown): unknown;
+        updateBottomPadding(e: unknown): unknown;
+    }
+
+    class GenericMarkdownEditor extends Component {
+        app: App;
+        cleanupLivePreview: null | (() => void);
+        clipboardManager: ClipBoardManager;
+        cm: EditorView;
+        cmInit: boolean;
+        containerEl: HTMLElement;
+        cursorPopupEl: HTMLElement | null;
+        editor: ExtendedEditor;
+        editorEl: HTMLElement;
+        editorSuggest: EditorSuggests<any>;
+        livePreviewPlugin: Extension[];
+        localExtensions: Extension[];
+        sourceMode: boolean;
+        tableCell: null;
+        owner: ItemView;
+
+        applyFoldInfo(e: unknown): unknown;
+        buildLocalExtensions(): unknown;
+        clear(): void;
+        destroy(): void;
+        destroyTableCell(e: unknown): unknown;
+        editTableCell(e: unknown, t: unknown): unknown;
+        get(): unknown;
+        getDynamicExtensions(): unknown;
+        getFoldInfo(): unknown;
+        getLocalExtensions(): unknown;
+        onContextMenu(e: unknown, t: unknown): unknown;
+        onEditorClick(e: unknown, t: unknown): unknown;
+        onEditorDragStart(e: unknown): unknown;
+        onEditorLinkMouseover(e: unknown, t: unknown): unknown;
+        onMenu(e: unknown): unknown;
+        onResize(): unknown;
+        onUpdate(e: unknown, t: unknown): unknown;
+        reinit(): unknown;
+        reparent(e: unknown): unknown;
+        resetSyntaxHighlighting(): unknown;
+        saveHistory(): unknown;
+        set(doc: string, force_reinitialize?: boolean): void;
+        toggleFoldFrontmatter(): unknown;
+        toggleSource(): unknown;
+        triggerClickableToken(token: Token, new_leaf: boolean): void;
+        updateEvent(): unknown;
+        updateLinkPopup(): unknown;
+        updateOptions(): unknown;
+        
+        get activeCM(): unknown;
+        get file(): unknown;
+        get path(): unknown;
+    }
+
+    interface MetadataEditor extends Component {
+        addPropertyButtonEl: HTMLElement;
+        app: App;
+        collapsed: boolean;
+        containerEl: HTMLElement;
+        contentEl: HTMLElement;
+        focusedLine: null | unknown;
+        foldEl: HTMLElement;
+        headingEl: HTMLElement;
+        hoverPopover: null | unknown;
+        owner: MarkdownView;
+        properties: unknown[];
+        propertyListEl: HTMLElement;
+        rendered: unknown[];
+        selectedLines: Set<unknown>;
+
+        addProperty(): unknown
+        clear(): unknown
+        clearSelection(): unknown
+        focusKey(e: unknown): unknown
+        focusProperty(e: unknown): unknown
+        focusPropertyAtIndex(e: unknown): unknown
+        focusValue(e: unknown, t: unknown): unknown
+        handleCopy(e: unknown): unknown
+        handleCut(e: unknown): unknown
+        handleItemSelection(e: unknown, t: unknown): unknown
+        handleKeypress(e: unknown): unknown
+        handlePaste(e: unknown): unknown
+        hasFocus(): unknown
+        hasPropertyFocused(): unknown
+        insertProperties(e: unknown): unknown
+        onMetadataTypeChange(e: unknown): unknown
+        onload(): unknown
+        removeProperties(e: unknown, t: unknown): unknown
+        reorderKey(e: unknown, t: unknown): unknown
+        save(): unknown
+        selectAll(): unknown
+        selectProperty(e: unknown, t: unknown): unknown
+        serialize(): unknown
+        setCollapse(e: unknown, t: unknown): unknown
+        showPropertiesMenu(e: unknown): unknown
+        synchronize(e: unknown): unknown
+        toggleCollapse(): unknown
+        _copyToClipboard(e: unknown, t: unknown): unknown
+    }
+    
+    class WidgetEditorView extends EmbeddedEditorView {
+        constructor(context: EmbedContext, file: TFile, path?: string);
+
+        after: string;
+        before: string;
+        data: string;
+        fileBeingRenamed: null;
+        heading: string;
+        indent: string;
+        inlineTitleEl: HTMLElement;
+        lastSavedData: null | unknown;
+        saveAgain: boolean;
+        saving: boolean;
+        subpath: string;
+        subpathNotFound: boolean;
+        
+        applyScope(e: unknown): unknown;
+        getFoldInfo(): unknown;
+        loadContents(e: unknown, t: unknown): unknown;
+        loadFile(): unknown;
+        loadFileInternal(e: unknown, t: unknown): unknown;
+        onFileChanged(e: unknown, t: unknown, n: unknown): unknown;
+        onFileRename(e: unknown, t: unknown): unknown;
+        onMarkdownFold(): unknown;
+        onTitleChange(e: unknown): unknown;
+        onTitleKeydown(e: unknown): unknown;
+        onTitlePaste(e: unknown, t: unknown): unknown;
+        onload(): unknown;
+        onunload(): unknown;
+        save(t: unknown, n: unknown): unknown;
+        saveTitle(e: unknown): unknown;
+        showPreview(t: unknown): unknown;
+    }
+    
+    export class EmbeddedEditorView extends Component {
+        constructor(app: App, containerEl: HTMLElement, file: TFile | null, state: EditorState);
+        
+        app: App;
+        containerEl: HTMLElement;
+        dirty: boolean;
+        editable: boolean;
+        editMode?: IFramedMarkdownEditor | undefined;
+        editorEl: HTMLElement;
+        file: null | TFile;
+        hoverPopover: null | unknown;
+        previewEl: HTMLElement;
+        previewMode: MarkdownPreviewView;
+        state: {} | EditorState | unknown;
+        text: string;
+        useIframe: boolean;
+        
+        
+        destroyEditor(e: unknown): unknown
+        getMode(): unknown;
+        onMarkdownScroll(): unknown;
+        onload(): unknown;
+        onunload(): unknown;
+        requestSave(): unknown;
+        requestSaveFolds(): unknown;
+        save(e: unknown, t: unknown): unknown;
+        set(e: unknown, t: unknown): unknown;
+        showEditor(): unknown;
+        showPreview(e: unknown): unknown;
+        showSearch(e: unknown): unknown;
+        toggleMode(): unknown;
+        
+        get editor(): unknown;
+        get path(): unknown;
+        get scroll(): unknown;
+    }
+    
+
     interface MarkdownView {
-        editMode: MarkdownEditView;
+        actionsEl: HTMLElement;
+        allowNoFile: boolean;
+
+        backButtonEl: HTMLButtonElement;
+        backlinksEl: HTMLElement;
+        canDropAnywhere: boolean;
+        closeable: boolean;
+        containerEl: HTMLElement;
+        contentEl: HTMLElement;
+        currentMode: MarkdownSubView;
+        data: string;
+        dirty: boolean;
+        editMode: MarkdownSourceView;
+        file: TFile;
+        fileBeingRenamed: null | unknown;
+        forwardButtonEl: HTMLButtonElement;
+        headerEl: HTMLElement;
+        icon: "lucide-file" | string;
+        iconEl: HTMLElement;
+        inlineTitleEl: HTMLElement;
+        isPlaintext: boolean;
+        lastSavedData: string;
+        leaf: WorkspaceLeaf;
+        metadataEditor: MetadataEditor;
+        modeButtonEl: HTMLAnchorElement;
+        modes: {source: MarkdownSourceView, preview: MarkdownPreviewView};
+        moreOptionsButtonEl: HTMLAnchorElement;
+        navigation: boolean;
+        previewMode: MarkdownPreviewView;
+        rawFrontmatter: "" | string;
+        saveAgain: boolean;
+        saving: boolean;
+        scroll: null | unknown;
+        showBacklinks: undefined | unknown;
+        /**
+         * @deprecated CM5 Editor
+         */
+        sourceMode: {cmEditor: any};
+        titleContainerEl: HTMLElement;
+        titleEl: HTMLElement;
+        titleParentEl: HTMLElement;
+
+
+        addProperty(x: unknown): unknown;
+        canShowProperties(): unknown;
+        canToggleBacklinks(): unknown;
+        clear(): unknown;
+        collapseProperties(x: unknown): unknown;
+        editProperty(x: unknown): unknown;
+        focusMetadata(x: unknown): unknown;
+        getEphemeralState(): unknown;
+        getFile(): unknown;
+        getMode(): unknown;
+        getSelection(): unknown;
+        getSyncViewState(): unknown;
+        getViewType(): unknown;
+        handleCopy(x: unknown): unknown;
+        handleCut(x: unknown): unknown;
+        handlePaste(x: unknown): unknown;
+        loadFrontmatter(x: unknown): unknown;
+        metadataHasFocus(): unknown;
+        onCssChange(): unknown;
+        onExternalDataChange(x: unknown, y: unknown): unknown;
+        onInlineTitleBlur(): unknown;
+        onInternalDataChange(): unknown;
+        onMarkdownFold(): unknown;
+        onMarkdownScroll(): unknown;
+        onPaneMenu(x: unknown, y: unknown): unknown;
+        onResize(): unknown;
+        onSwitchView(x: unknown): unknown;
+        onload(): unknown;
+        printToPdf(): unknown;
+        redo(): unknown;
+        registerMode(x: unknown): unknown;
+        saveFrontmatter(x: unknown): unknown;
+        setEphemeralState(x: unknown): unknown;
+        setMode(x: unknown): unknown;
+        setViewData(x: unknown, y: unknown): unknown;
+        shiftFocusAfter(): unknown;
+        shiftFocusBefore(): unknown;
+        showSearch(x: unknown): unknown;
+        toggleBacklinks(): unknown;
+        toggleCollapseProperties(): unknown;
+        toggleMode(): unknown;
+        triggerClickableToken(x: unknown, y: unknown): unknown;
+        undo(): unknown;
+        updateBacklinks(): unknown;
+        updateButtons(): unknown;
+        updateOptions(): unknown;
+        updateShowBacklinks(): unknown;
+
     }
 
     interface MarkdownPreviewView {
+        docId: string;
         renderer: ReadViewRenderer;
+        search: null | unknown;
+        type: "preview" | string;
+        view: MarkdownView;
+
+        applyFoldInfo(e: unknown): unknown;
+        beforeUnload(): unknown;
+        clear(): unknown;
+        edit(e: unknown): unknown;
+        foldAll(): unknown;
+        getEphemeralState(e: unknown): unknown;
+        getFoldInfo(): unknown;
+        getSelection(): unknown;
+        hide(): unknown;
+        onFoldChange(): unknown;
+        onRenderComplete(): unknown;
+        onResize(): unknown;
+        onScroll(): unknown;
+        requestUpdateLinks(): unknown;
+        setEphemeralState(e: unknown): unknown;
+        show(): unknown;
+        showSearch(): unknown;
+        unfoldAll(): unknown;
+        updateOptions(): unknown;
     }
 
-    interface Menu {
+    interface MarkdownRenderer {
+        onCheckboxClick(e: unknown, n: unknown, i: unknown): unknown
+        onFileChange(e: unknown): unknown;
+        onFoldChange(): unknown;
+        onRenderComplete(): unknown;
+        onScroll(): unknown;
+        onload(): unknown;
+        postProcess(e: unknown, t: unknown, n: unknown): unknown
+        resolveLinks(e: unknown): unknown;
+
+        get path(): unknown;
+    }
+
+    interface Menu extends Component {
         /**
          * Background for the suggestion menu
          */
@@ -2709,19 +3226,6 @@ declare module 'obsidian' {
         useNativeMenu: boolean;
 
         /**
-         * @internal Children of the menu
-         */
-        _children: unknown[];
-        /**
-         * @internal Events registered on the menu
-         */
-        _events: unknown[];
-        /**
-         * @internal Whether the menu is loaded
-         */
-        _loaded: boolean;
-        
-        /**
          * @internal Add a section to the menu
          */
         addSections(items: string[]): this;
@@ -2767,15 +3271,6 @@ declare module 'obsidian' {
         onMouseOver(e: MouseEvent): boolean;
         /**
          * @internal Registers dom events and scope for the menu
-         */
-        onload(): void;
-        /**
-         * @internal Unregisters scope for the menu
-         */
-        onunload():  void;
-        /**
-         * @internal Open the submenu of the selected item
-         * @param item - Item to open submenu for
          */
         openSubmenu(item: MenuItem): void;
         /**
@@ -2857,13 +3352,13 @@ declare module 'obsidian' {
         removeIcon(): void;
         /**
          * @deprecated
-         * @internal Calls `setChecked`, prefer usage of that function instead  
-         * @param active - Whether the menu item should be checked 
+         * @internal Calls `setChecked`, prefer usage of that function instead
+         * @param active - Whether the menu item should be checked
          */
         setActive(active: boolean): this;
         /**
          * Create a submenu on the menu item
-         * @tutorial Creates the foldable menus with more options as seen when you right-click in the editor (e.g. "Insert", "Format", ...) 
+         * @tutorial Creates the foldable menus with more options as seen when you right-click in the editor (e.g. "Insert", "Format", ...)
          */
         setSubmenu(): Menu;
         /**
@@ -2953,7 +3448,7 @@ declare module 'obsidian' {
          * Called whenever the metadatacache has finished updating
          */
         on(name: 'finished', callback: () => void): EventRef;
-        
+
 
         /**
          * Get all property infos of the vault
@@ -3316,7 +3811,7 @@ declare module 'obsidian' {
         startY: number;
         targetEl: HTMLElement;
         touch: Touch;
-        
+
         x: number;
         y: number;
     }
@@ -3347,7 +3842,7 @@ declare module 'obsidian' {
 
         /**
          * Called whenever any of Obsidian's settings are changed
-         * @remark Does *not* trigger when a particular plugin's settings are changed, for that, you could monkey-patch the `saveSettings` method of a plugin instance 
+         * @remark Does *not* trigger when a particular plugin's settings are changed, for that, you could monkey-patch the `saveSettings` method of a plugin instance
          */
         on(name: 'config-changed', callback: () => void, ctx?: unknown): EventRef;
 
@@ -3361,40 +3856,40 @@ declare module 'obsidian' {
          * @remark Always prefer usage of on(name: 'rename', ...) instead
          */
         // on(name: 'renamed', callback: (oldPath: string, newPath: string) => void): EventRef;
-        
+
         /**
          * @internal Not accessible
          * @remark Always prefer usage of on(name: 'modify', ...) instead
          */
         // on(name: 'modified', callback: () => void): EventRef;
-        
+
         /**
          * @internal Not accessible
          */
         // on(name: 'file-created', callback: () => void): EventRef;
-        
+
         /**
          * @internal Not accessible
          */
         // on(name: 'folder-created', callback: () => void): EventRef;
-        
+
         /**
          * @internal Not accessible
          */
         // on(name: 'file-removed', callback: () => void): EventRef;
-        
+
         /**
          * @internal Not accessible
          */
         // on(name: 'folder-removed', callback: () => void): EventRef;
-        
+
         /**
          * @internal Not accessible
          */
         // on(name: 'closed', callback: () => void): EventRef;       
-        
-        
-        
+
+
+
         /**
          * @internal Add file as child/parent to respective folders
          */
@@ -3654,12 +4149,12 @@ declare module 'obsidian' {
          * @remark Prefer usage of onLayoutReady instead
          */
         on(name: 'layout-ready', callback: () => void, ctx?: unknown): EventRef;
-        
+
         /**
          * @internal Triggers when user right-clicks on external URL in editor
          */
         on(name: 'url-menu', callback: (menu: Menu, url: string) => void, ctx?: unknown): EventRef;
-        
+
         /**
          * Triggers when user clicks on 'N results' button in search view
          */
@@ -3669,7 +4164,7 @@ declare module 'obsidian' {
          * @internal Called when user shares text on mobile
          */
         on(name: 'receive-text-menu', callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
-        
+
         /**
          * @internal Called when user shares files on mobile
          */
@@ -3927,8 +4422,8 @@ declare module 'obsidian' {
 
         /**
          * Set the vertical height a leaf may occupy if it is in a split. The height is not set directly, but
-         * by setting the flex-grow (css) of the element. This means to predictably affect the height, you also 
-         * need to use setDimension on the other leafs of the column. (The flex-grow values of every leaf work 
+         * by setting the flex-grow (css) of the element. This means to predictably affect the height, you also
+         * need to use setDimension on the other leafs of the column. (The flex-grow values of every leaf work
          basically like a ratio, e.g. 1:2 meaning the first leaf takes 33% of the height, and the second 67%.)
          * @param flexgrow - sets the flex-grow of the leaf. (0-100)
          */
