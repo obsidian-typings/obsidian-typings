@@ -1,15 +1,29 @@
+import { EditorSelection, EditorState, Extension } from "@codemirror/state";
+import { EditorView, ViewUpdate } from "@codemirror/view";
+import { IpcRenderer } from "electron";
+import * as fs from "fs";
+import * as fsPromises from "fs/promises";
 import {
-    App, CachedMetadata,
+    App,
+    CachedMetadata,
     Command,
-    Component, EditorPosition,
-    EditorRange, EditorRangeOrCaret, EditorSuggest,
+    Component,
+    EditorPosition,
+    EditorRange,
+    EditorRangeOrCaret,
+    EditorSuggest,
     EventRef,
-    Events, HoverPopover,
+    Events,
+    HoverPopover,
     KeymapInfo,
-    Loc, MarkdownFileInfo, MarkdownSubView, MarkdownViewModeType,
+    Loc,
+    MarkdownFileInfo,
+    MarkdownSubView,
+    MarkdownViewModeType,
     Plugin,
     Reference,
-    Scope, SearchResult,
+    Scope,
+    SearchResult,
     SplitDirection,
     TAbstractFile,
     TFile,
@@ -19,1804 +33,249 @@ import {
     ViewState,
     Workspace,
     WorkspaceLeaf,
-} from 'obsidian';
-import {EditorView, ViewUpdate} from '@codemirror/view';
-import {EditorSelection, EditorState, Extension} from '@codemirror/state';
-import * as fs from 'fs';
-import * as fsPromises from 'fs/promises';
-import * as path from 'path';
-import { IpcRenderer } from 'electron';
-
-export * from 'obsidian';
-
-
-// TODO: Interfaces that have not been fully typed yet are marked as @internal with 'unknown'
-// TODO: Add Canvas typings (work off base from Dev-Mike, attribute)
-// TODO: Missing event types on sync plugin (but not the internalplugin itself):
-//  - new-log
-//  - status-change
-
-
-interface Account {
-    /**
-     * The company associated with the activated commercial license
-     */
-    company: string;
-    /**
-     * The email address associated with the account
-     */
-    email: string;
-    /**
-     *
-     */
-    expiry: number;
-    /**
-     *
-     */
-    key: string | undefined;
-    /**
-     *
-     */
-    keyValidation: string;
-    /**
-     * The license available to the account
-     */
-    license: '' | 'insider';
-    /**
-     * Profile name
-     */
-    name: string;
-    /**
-     *
-     */
-    seats: number;
-    /**
-     *
-     */
-    token: string;
-
-    // TODO: Add Sync and Publish API functions here
-}
-
-interface AppVaultConfig {
-    /**
-     * Appearance > Accent color
-     */
-    accentColor: '' | string;
-    /**
-     * Files & Links > Automatically update internal links
-     */
-    alwaysUpdateLinks?: false | boolean;
-    /**
-     * Files & Links > Attachment folder path
-     */
-    attachmentFolderPath?: '/' | string;
-    /**
-     * Editor > Auto convert HTML
-     */
-    autoConvertHtml?: true | boolean;
-    /**
-     * Editor > Auto pair brackets
-     */
-    autoPairBrackets?: true | boolean;
-    /**
-     * Editor > Auto pair Markdown syntax
-     */
-    autoPairMarkdown?: true | boolean;
-    /**
-     * Appearance > Font size
-     */
-    baseFontSize?: 16 | number;
-    /**
-     * Appearance > Quick font size adjustment
-     */
-    baseFontSizeAction?: true | boolean;
-    /**
-     * Community Plugins > Browse > Sort order
-     */
-    communityPluginSortOrder: 'download' | 'update' | 'release' | 'alphabetical';
-    /**
-     * Themes > Browse > Sort order
-     */
-    communityThemeSortOrder: 'download' | 'update' | 'release' | 'alphabetical';
-    /**
-     * Appearance > Theme
-     * @remark "" is the default Obsidian theme
-     */
-    cssTheme?: '' | string;
-    /**
-     * Editor > Default view for new tabs
-     */
-    defaultViewMode?: 'source' | 'preview';
-    /**
-     *
-     */
-    emacsyKeys?: true | boolean;
-    /**
-     * Appearance > CSS snippets
-     */
-    enabledCssSnippets?: string[];
-    /**
-     *
-     */
-    fileSortOrder?: 'alphabetical';
-    /**
-     * Editor > Always focus new tabs
-     */
-    focusNewTab?: true | boolean;
-    /**
-     * Editor > Fold heading
-     */
-    foldHeading?: true | boolean;
-    /**
-     * Editor > Fold indent
-     */
-    foldIndent?: true | boolean;
-    /**
-     * Hotkeys
-     * @deprecated Likely not used anymore
-     */
-    hotkeys?: Record<string, string>;
-    /**
-     * Appearance > Interface font
-     */
-    interfaceFontFamily?: '' | string;
-    /**
-     * Editor > Use legacy editor
-     */
-    legacyEditor?: false | boolean;
-    /**
-     *
-     */
-    livePreview?: true | boolean;
-    /**
-     * Mobile > Configure mobile Quick Action
-     */
-    mobilePullAction?: 'command-palette:open' | string;
-    /**
-     *
-     */
-    mobileQuickRibbonItem?: '' | string;
-    /**
-     * Mobile > Manage toolbar options
-     */
-    mobileToolbarCommands?: string[];
-    /**
-     *
-     */
-    monospaceFontFamily?: '' | string;
-    /**
-     * Appearance > Native menus
-     */
-    nativeMenus?: null | boolean;
-    /**
-     * Files & Links > Default location for new notes | 'folder' > Folder to create new notes in
-     */
-    newFileFolderPath?: '/' | string;
-    /**
-     * Files & Links > Default location for new notes
-     */
-    newFileLocation?: 'root' | 'current' | 'folder';
-    /**
-     * Files & Links > New link format
-     */
-    newLinkFormat?: 'shortest' | 'relative' | 'absolute';
-    /**
-     * Saved on executing 'Export to PDF' command
-     */
-    pdfExportSettings?: {
-        pageSize: 'letter' | string;
-        landscape: false | boolean;
-        margin: '0' | string;
-        downscalePercent: 100 | number;
-    };
-    /**
-     * Files & Links > Confirm line deletion
-     */
-    promptDelete?: true | boolean;
-    /**
-     * Editor > Properties in document
-     */
-    propertiesInDocument?: 'visible' | 'hidden' | 'source'
-    /**
-     * Editor > Readable line length
-     */
-    readableLineLength?: true | boolean;
-    /**
-     * Editor > Right-to-left (RTL)
-     */
-    rightToLeft?: false | boolean;
-    /**
-     * @deprecated Removed as of version 1.4.3
-     */
-    showFrontmatter?: false | boolean;
-    /**
-     * Editor > Show indentation guides
-     */
-    showIndentGuide?: true | boolean;
-    /**
-     * Editor > Show inline title
-     */
-    showInlineTitle?: true | boolean;
-    /**
-     * Editor > Show line numbers
-     */
-    showLineNumber?: false | boolean;
-    /**
-     * Files & Links > Detect all file extensions
-     */
-    showUnsupportedFiles?: false | boolean;
-    /**
-     * Appearance > Show tab title bar
-     */
-    showViewHeader?: false | boolean;
-    /**
-     * Editor > Smart indent lists
-     */
-    smartIndentList?: true | boolean;
-    /**
-     * Editor > Spellcheck
-     */
-    spellcheck?: false | boolean;
-    /**
-     * @deprecated
-     */
-    spellcheckDictionary?: [] | string[];
-    /**
-     * Editor > Spellcheck languages
-     */
-    spellcheckLanguages?: null | string[];
-    /**
-     * Editor > Strict line breaks
-     */
-    strictLineBreaks?: false | boolean;
-    /**
-     * Editor > Tab indent size
-     */
-    tabSize?: 4 | number;
-    /**
-     * Appearance > Text font
-     */
-    textFontFamily?: '' | string;
-    /**
-     * Appearance > Base color scheme
-     * @remark Not be confused with cssTheme, this setting is for the light/dark mode
-     * @remark "moonstone" is light theme, "obsidian" is dark theme
-     */
-    theme?: 'moonstone' | 'obsidian';
-    /**
-     * Appearance > Translucent window
-     */
-    translucency?: false | boolean;
-    /**
-     * Files & Links > Deleted files
-     */
-    trashOption?: 'system' | 'local' | 'none';
-    /**
-     * @deprecated Probably left-over code from old properties type storage
-     */
-    types: object;
-    /**
-     * Files & Links > Use [[Wikilinks]]
-     */
-    useMarkdownLinks?: false | boolean;
-    /**
-     * Editor > Indent using tabs
-     */
-    useTab?: true | boolean;
-    /**
-     * Files & Links > Excluded files
-     */
-    userIgnoreFilters?: null | string[];
-    /**
-     * Editor > Vim key bindings
-     */
-    vimMode?: false | boolean;
-}
-
-interface BlockCache {
-    /**
-     * Reference to App
-     */
-    app: App;
-
-    /**
-     * @internal
-     */
-    cache: unknown;
-}
-
-interface CanvasConnection {
-
-}
-
-interface CanvasLeaf extends WorkspaceLeaf {
-
-}
-
-interface CanvasNode {
-
-}
-
-interface CanvasPlugin extends InternalPlugin {
-
-}
-
-interface CanvasView {
-
-}
-
-interface CMState extends EditorState {
-    vim: {
-        inputState: {
-            changeQueue: null,
-            keyBuffer: [],
-            motion: null,
-            motionArgs: null,
-            motionRepeat: [],
-            operator: null,
-            operatorArgs: null,
-            prefixRepeat: [],
-            registerName: null,
-        },
-        insertMode: false,
-        insertModeRepeat: undefined,
-        lastEditActionCommand: undefined,
-        lastEditInputState: undefined,
-        lastHPos: number,
-        lastHSPos: number,
-        lastMotion: {
-            name?: string,
-        },
-        lastPastedText: null,
-        lastSelection: null,
-    },
-    vimPlugin: {
-        lastKeydown: string,
-    }
-}
-
-interface CMView extends EditorView {
-    state: CMState;
-}
-
-interface Commands {
-    /**
-     * Reference to App
-     */
-    app: App;
-
-    /**
-     * Commands *without* editor callback, will always be available in the command palette
-     * @example `app:open-vault` or `app:reload`
-     */
-    commands: Record<string, Command>;
-    /**
-     * Commands *with* editor callback, will only be available when editor is active and callback returns true
-     * @example `editor:fold-all` or `command-palette:open`
-     */
-    editorCommands: Record<string, Command>;
-    /**
-     * Add a command to the command registry
-     * @param command Command to add
-     */
-    addCommand(command: Command): void;
-    /**
-     * Execute a command by reference
-     * @param command Command to execute
-     */
-    executeCommand(command: Command): boolean;
-    /**
-     * Execute a command by ID
-     * @param commandId ID of command to execute
-     */
-    executeCommandById(commandId: string): boolean;
-    /**
-     * Find a command by ID
-     * @param commandId
-     */
-    findCommand(commandId: string): Command | undefined;
-    /**
-     * Lists **all** commands, both with and without editor callback
-     */
-    listCommands(): Command[];
-    /**
-     * Remove a command from the command registry
-     * @param commandId Command to remove
-     */
-    removeCommand(commandId: string): void;
-}
-
-type ConfigItem = 'accentColor'
-    | 'alwaysUpdateLinks'
-    | 'attachmentFolderPath'
-    | 'autoConvertHtml'
-    | 'autoPairBrackets'
-    | 'autoPairMarkdown'
-    | 'baseFontSize'
-    | 'baseFontSizeAction'
-    | 'cssTheme'
-    | 'defaultViewMode'
-    | 'emacsyKeys'
-    | 'enabledCssSnippets'
-    | 'fileSortOrder'
-    | 'focusNewTab'
-    | 'foldHeading'
-    | 'foldIndent'
-    | 'hotkeys'
-    | 'interfaceFontFamily'
-    | 'legacyEditor'
-    | 'livePreview'
-    | 'mobilePullAction'
-    | 'mobileQuickRibbonItem'
-    | 'mobileToolbarCommands'
-    | 'monospaceFontFamily'
-    | 'nativeMenus'
-    | 'newFileFolderPath'
-    | 'newFileLocation'
-    | 'newLinkFormat'
-    | 'pdfExportSettings'
-    | 'promptDelete'
-    | 'propertiesInDocument'
-    | 'readableLineLength'
-    | 'rightToLeft'
-    | 'showIndentGuide'
-    | 'showInlineTitle'
-    | 'showLineNumber'
-    | 'showUnsupportedFiles'
-    | 'showViewHeader'
-    | 'smartIndentList'
-    | 'spellcheck'
-    | 'spellcheckLanguages'
-    | 'strictLineBreaks'
-    | 'tabSize'
-    | 'textFontFamily'
-    | 'theme'
-    | 'translucency'
-    | 'trashOption'
-    | 'types'
-    | 'useMarkdownLinks'
-    | 'useTab'
-    | 'userIgnoreFilters'
-    | 'vimMode';
-
-interface CustomArrayDict<T> {
-    data: Record<string, T[]>;
-
-    add(key: string, value: T): void;
-    remove(key: string, value: T): void;
-    removeKey(key: string): void;
-    get(key: string): T[] | null;
-    keys(): string[];
-    clear(key: string): void;
-    clearAll(): void;
-    contains(key: string, value: T): boolean;
-    count(): number;
-}
-
-interface CustomCSS extends Component {
-    /**
-     * Reference to App
-     */
-    app: App;
-    /**
-     * @internal
-     */
-    boundRaw(): void;
-    /**
-     * @internal Cache of CSS snippet filepath (relative to vault root) to CSS snippet contents
-     */
-    csscache: Map<string, string>;
-    /**
-     * Set of enabled snippet, given by filenames
-     */
-    enabledSnippets: Set<string>;
-    /**
-     * @internal
-     * Contains references to Style elements containing custom CSS snippets
-     */
-    extraStyleEls: HTMLStyleElement[];
-    /**
-     * List of theme names not fully updated to post v1.0.0 theme guidelines
-     */
-    oldThemes: string[];
-    /**
-     * @internal
-     */
-    queue: WeakMap<object, unknown>;
-    /**
-     * @internal
-     */
-    requestLoadSnippets(): void;
-    /**
-     * @internal
-     */
-    requestLoadTheme(): void;
-    /**
-     * @internal
-     */
-    requestReadThemes(): void;
-    /**
-     * List of snippets detected by Obsidian, given by their filenames
-     */
-    snippets: string[];
-    /**
-     * Currently active theme, given by its name
-     * @remark "" is the default Obsidian theme
-     */
-    theme: '' | string;
-    /**
-     * Mapping of theme names to their manifest
-     */
-    themes: Record<string, ThemeManifest>;
-    /**
-     * @internal
-     */
-    updates: Record<string, unknown>;
-
-    /**
-     * Check whether a specific theme can be updated
-     * @param themeName - Name of the theme to check
-     */
-    checkForUpdate(themeName: string): void;
-    /**
-     * Check all themes for updates
-     */
-    checkForUpdates(): void;
-    /**
-     * Disable translucency of application background
-     */
-    disableTranslucency(): void;
-    /**
-     * Fetch legacy theme CSS using the pre-v1.0.0 theme download pipeline
-     * @returns string obsidian.css contents
-     */
-    downloadLegacyTheme(arg: { repo: string }): Promise<string>;
-    /**
-     * Enable translucency of application background
-     */
-    enableTranslucency(): void;
-    /**
-     * Fetch a theme's manifest using repository URL
-     * @remark Do **not** include github prefix, only `username/repo`
-     */
-    getManifest(repoUrl: string): Promise<ThemeManifest>;
-    /**
-     * Convert snippet name to its corresponding filepath (relative to vault root)
-     * @returns string `.obsidian/snippets/${snippetName}.css`
-     */
-    getSnippetPath(snippetName: string): string;
-    /**
-     * Returns the folder path where snippets are stored (relative to vault root)
-     */
-    getSnippetsFolder(): string;
-    /**
-     * Returns the folder path where themes are stored (relative to vault root)
-     */
-    getThemesFolder(): string;
-    /**
-     * Convert theme name to its corresponding filepath (relative to vault root)
-     * @returns string `.obsidian/themes/${themeName}/theme.css`
-     */
-    getThemePath(themeName: string): string;
-    /**
-     * Returns whether there are themes that can be updated
-     */
-    hasUpdates(): boolean;
-    /**
-     * Install a legacy theme using the pre-v1.0.0 theme download pipeline<br>
-     * Will create a corresponding dummy manifest for the theme
-     * @remark Name will be used as the folder name for the theme
-     */
-    installLegacyTheme(arg: { name: string, repo: string, author: string }): Promise<void>;
-    /**
-     * Install a theme using the regular theme download pipeline
-     */
-    installTheme(arg: { name: string, repo: string, author: string }, version: string): Promise<void>;
-    /**
-     * Check whether a specific theme is installed by theme name
-     */
-    isThemeInstalled(themeName: string): boolean;
-    /**
-     * @internal
-     */
-    onRaw(e: unknown): void;
-    /**
-     * @internal
-     */
-    onload(): void;
-    /**
-     * @todo
-     * @internal
-     */
-    readSnippets(): void;
-    /**
-     * @todo
-     * @internal
-     */
-    readThemes(): void;
-    /**
-     * Remove a theme by theme name
-     */
-    removeTheme(themeName: string): Promise<void>;
-    /**
-     * Set the activation status of a snippet by snippet name
-     */
-    setCssEnabledStatus(snippetName: string, enabled: boolean): void;
-    /**
-     * Set the active theme by theme name
-     */
-    setTheme(themeName: string): void;
-    /**
-     * Set the translucency of application background
-     */
-    setTranslucency(translucency: boolean): void;
-}
-
-interface EditorViewI extends EditorView {
-    cm?: CMView;
-}
-
-interface FileCacheEntry {
-    /**
-     * Hash of file contents
-     */
-    hash: string;
-    /**
-     * Last modified time of file
-     */
-    mtime: number;
-    /**
-     * Size of file in bytes
-     */
-    size: number;
-}
-
-interface FileEntry {
-    /**
-     * Creation time (if file)
-     */
-    ctime?: number;
-    /**
-     * Modification time (if file)
-     */
-    mtime?: number;
-    /**
-     * Full path to file or folder
-     * @remark Might be used for resolving symlinks
-     */
-    realpath: string;
-    /**
-     * Size in bytes (if file)
-     */
-    size?: number;
-    /**
-     * Type of entry
-     */
-    type: 'file' | 'folder';
-}
-
-interface FileExplorerLeaf extends WorkspaceLeaf {
-    view: FileExplorerView;
-}
-
-interface FileExplorerPlugin extends InternalPlugin {
-    /**
-     * Reveals a file or folder in the file explorer view, opens the view if it is not already open/visible
-     */
-    revealInFolder(item: TFile | TFolder): void;
-}
-
-interface FileExplorerView extends View {
-    /**
-     * Mapping of tree self element to abstract file
-     */
-    files: WeakMapWrapper<HTMLElement, TAbstractFile>;
-    /**
-     * Mapping of file path to tree item
-     */
-    fileItems: Record<string, TreeItem<FileTreeItem>>;
-    /**
-     * Tree view of files
-     */
-    tree: Tree<FileTreeItem>;
-
-    openFileContextMenu(event: Event, fileItemElement: HTMLElement): void;
-
-    /**
-     * Reveal a file or folder in the file tree
-     */
-    revealInFolder(file: TFile | TFolder): void;
-}
-
-interface FileTreeItem {
-    file: TAbstractFile;
-}
-
-
-interface GlobalSearchLeaf extends WorkspaceLeaf {
-
-}
-
-interface GlobalSearchPlugin extends InternalPlugin {
-
-}
-
-interface HotkeyManager {
-    /**
-     * Reference to App
-     */
-    app: App;
-    /**
-     * @internal Whether hotkeys have been baked (checks completed)
-     */
-    baked: boolean;
-    /**
-     * Assigned hotkeys
-     */
-    bakedHotkeys: KeymapInfo[];
-    /**
-     * Array of hotkey index to command ID
-     */
-    bakedIds: string[];
-    /**
-     * Custom (non-Obsidian default) hotkeys, one to many mapping of command ID to assigned hotkey
-     */
-    customKeys: Record<string, KeymapInfo[]>;
-    /**
-     * Default hotkeys, one to many mapping of command ID to assigned hotkey
-     */
-    defaultKeys: Record<string, KeymapInfo[]>;
-
-    /**
-     * Add a hotkey to the default hotkeys
-     * @param command - Command ID to add hotkey to
-     * @param keys - Hotkeys to add
-     */
-    addDefaultHotkeys(command: string, keys: KeymapInfo[]): void;
-    /**
-     * Get hotkey associated with command ID
-     * @param command - Command ID to get hotkey for
-     */
-    getDefaultHotkeys(command: string): KeymapInfo[];
-    /**
-     * Remove a hotkey from the default hotkeys
-     * @param command - Command ID to remove hotkey from
-     */
-    removeDefaultHotkeys(command: string): void;
-    /**
-     * Add a hotkey to the custom hotkeys (overrides default hotkeys)
-     * @param command - Command ID to add hotkey to
-     * @param keys - Hotkeys to add
-     */
-    setHotkeys(command: string, keys: KeymapInfo[]): void;
-    /**
-     * Get hotkey associated with command ID
-     * @param command - Command ID to get hotkey for
-     */
-    getHotkeys(command: string): KeymapInfo[];
-    /**
-     * Remove a hotkey from the custom hotkeys
-     * @param command - Command ID to remove hotkey from
-     */
-    removeHotkeys(command: string): void;
-    /**
-     * Pretty-print hotkey of a command
-     * @param command
-     */
-    printHotkeyForCommand(command: string): string;
-    /**
-     * Trigger a command by keyboard event
-     * @param event - Keyboard event to trigger command with
-     * @param keypress - Pressed key information
-     */
-    onTrigger(event: KeyboardEvent, keypress: KeymapInfo): boolean;
-    /**
-     * @internal Bake hotkeys (create mapping of pressed key to command ID)
-     */
-    bake(): void;
-    /**
-     * @internal Load hotkeys from storage
-     */
-    load(): void;
-    /**
-     * @internal Save custom hotkeys to storage
-     */
-    save(): void;
-}
-
-interface HoverLinkSource {
-    display: string;
-    defaultMod: boolean;
-}
-
-interface HoverLinkEvent {
-    event: MouseEvent,
-    source: "search" | "editor" | "preview" | "properties" | "graph" | "file-explorer" | "hover-link",
-    hoverParent: WorkspaceLeaf,
-    targetEl: HTMLElement | null,
-    linktext: string,
-    sourcePath?: string,
-    state?: {
-        scroll: unknown,
-    }
-}
-
-interface ImportedAttachments {
-    data: Promise<ArrayBuffer>;
-    extension: string;
-    filename: string;
-    name: string;
-}
+} from "obsidian";
+import * as path from "path";
+export * from "obsidian";
 
 /**
- * @internal
+ * @remark Interfaces that have not been fully typed yet are marked as @internal with 'unknown'
+ * @Missing event types on sync plugin (but not the internalplugin itself):
+ *   - new-log
+ *   - status-change
+ * @todo Add Canvas typings (work off base from Dev-Mike, attribute)
  */
-interface InfinityScroll {
-    height: number;
-    lastScroll: number;
-    queued: unknown | null;
-    renderBlockSize: number;
-    rootEl: unknown;
-    scrollEl: HTMLElement;
-    setWidth: boolean;
-    width: number;
+declare module "obsidian" {
+    type ConfigItem =
+        | "accentColor"
+        | "alwaysUpdateLinks"
+        | "attachmentFolderPath"
+        | "autoConvertHtml"
+        | "autoPairBrackets"
+        | "autoPairMarkdown"
+        | "baseFontSize"
+        | "baseFontSizeAction"
+        | "cssTheme"
+        | "defaultViewMode"
+        | "emacsyKeys"
+        | "enabledCssSnippets"
+        | "fileSortOrder"
+        | "focusNewTab"
+        | "foldHeading"
+        | "foldIndent"
+        | "hotkeys"
+        | "interfaceFontFamily"
+        | "legacyEditor"
+        | "livePreview"
+        | "mobilePullAction"
+        | "mobileQuickRibbonItem"
+        | "mobileToolbarCommands"
+        | "monospaceFontFamily"
+        | "nativeMenus"
+        | "newFileFolderPath"
+        | "newFileLocation"
+        | "newLinkFormat"
+        | "pdfExportSettings"
+        | "promptDelete"
+        | "propertiesInDocument"
+        | "readableLineLength"
+        | "rightToLeft"
+        | "showIndentGuide"
+        | "showInlineTitle"
+        | "showLineNumber"
+        | "showUnsupportedFiles"
+        | "showViewHeader"
+        | "smartIndentList"
+        | "spellcheck"
+        | "spellcheckLanguages"
+        | "strictLineBreaks"
+        | "tabSize"
+        | "textFontFamily"
+        | "theme"
+        | "translucency"
+        | "trashOption"
+        | "types"
+        | "useMarkdownLinks"
+        | "useTab"
+        | "userIgnoreFilters"
+        | "vimMode";
 
-    compute(x: unknown): unknown;
-    findElementTop(x: unknown, y: unknown, z: unknown): unknown;
-    getRootTop(): unknown;
-    invalidate(x: unknown, y: unknown): unknown;
-    invalidateAll(): unknown;
-    measure(x: unknown, y: unknown): unknown;
-    onResize(): unknown;
-    onScroll(): unknown;
-    queueCompute(): unknown;
-    scrollIntoView(x: unknown, y: unknown): unknown;
-    update(x: unknown, y: unknown, z: unknown, u: unknown, v: unknown, w: unknown): unknown;
-    updateVirtualDisplay(x: unknown): unknown;
+    type EmbedableConstructor = (context: EmbedContext, file: TFile, path?: string) => Component;
 
-    _layout(x: unknown, y: unknown): unknown;
-    _measure(x: unknown): unknown;
-    _precompute(x: unknown): unknown;
-}
+    type InternalPluginName =
+        | "audio-recorder"
+        | "backlink"
+        | "bookmarks"
+        | "canvas"
+        | "command-palette"
+        | "daily-notes"
+        | "editor-status"
+        | "file-explorer"
+        | "file-recovery"
+        | "global-search"
+        | "graph"
+        | "markdown-importer"
+        | "note-composer"
+        | "outgoing-link"
+        | "outline"
+        | "page-preview"
+        | "properties"
+        | "publish"
+        | "random-note"
+        | "slash-command"
+        | "slides"
+        | "starred"
+        | "switcher"
+        | "sync"
+        | "tag-pane"
+        | "templates"
+        | "word-count"
+        | "workspaces"
+        | "zk-prefixer";
 
-interface InternalPlugin extends Plugin {
-    disable(): void;
-    enable(): void;
-}
+    type PropertyWidgetType =
+        | "aliases"
+        | "checkbox"
+        | "date"
+        | "datetime"
+        | "multitext"
+        | "number"
+        | "tags"
+        | "text"
+        | (string & any);
 
-type InternalPluginName = 'audio-recorder' |
-    'backlink' |
-    'bookmarks' |
-    'canvas' |
-    'command-palette' |
-    'daily-notes' |
-    'editor-status' |
-    'file-explorer' |
-    'file-recovery' |
-    'global-search' |
-    'graph' |
-    'markdown-importer' |
-    'note-composer' |
-    'outgoing-link' |
-    'outline' |
-    'page-preview' |
-    'properties' |
-    'publish' |
-    'random-note' |
-    'slash-command' |
-    'slides' |
-    'starred' |
-    'switcher' |
-    'sync' |
-    'tag-pane' |
-    'templates' |
-    'word-count' |
-    'workspaces' |
-    'zk-prefixer';
+    type TreeItem<T> = TreeNode<T> & {
+        collapseEl: HTMLElement;
+        collapsed: boolean;
+        collapsible: boolean;
+        coverEl: HTMLElement;
+        innerEl: HTMLElement;
+        parent: TreeNode<T> | undefined;
+        selfEl: HTMLElement;
+        view: View;
 
-interface InternalPlugins extends Events {
-    /**
-     * Reference to App
-     */
-    app: App;
-    /**
-     * Mapping of whether an internal plugin is enabled
-     */
-    config: Record<InternalPluginName, boolean>;
-    /**
-     * @internal
-     */
-    migration: boolean;
-    /**
-     * Plugin configs for internal plugins
-     * @remark Prefer usage of getPluginById to access a plugin
-     */
-    plugins: {
-        "file-explorer": FileExplorerPlugin,
-        "global-search": GlobalSearchPlugin,
-        [key: string]: InternalPlugin,
+        /**
+         * Execute collapse functionality on mouse click
+         */
+        onCollapseClick(event: MouseEvent): void;
+        /**
+         * Execute item functionality on clicking tree item
+         */
+        onSelfClick(event: MouseEvent): void;
+        /**
+         * Set clickable state of tree item
+         */
+        setClickable(clickable: boolean): void;
+        /**
+         * Set collapsed state of tree item
+         */
+        setCollapsed(collapsed: boolean, check: boolean): Promise<undefined>;
+        /**
+         * Set collapsible state of tree item
+         */
+        setCollapsible(collapsible: boolean): void;
+        /**
+         * Toggle collapsed state of tree item
+         */
+        toggleCollapsed(check: boolean): Promise<undefined>;
+        /**
+         * @internal Update the tree item's cover element
+         */
+        updateCollapsed(check: boolean): Promise<undefined>;
+    };
+
+    type TreeNode<T = object> = T & {
+        childrenEl: HTMLElement;
+        el: HTMLElement;
+        info: {
+            childLeft: number;
+            childLeftPadding: number;
+            childTop: number;
+            computed: boolean;
+            height: number;
+            hidden: boolean;
+            next: boolean;
+            queued: boolean;
+            width: number;
+        };
+        pusherEl: HTMLElement;
+        vChildren: {
+            _children: TreeNode<T>[];
+            owner: TreeNode<T>;
+        };
+    };
+    
+    interface AbstractSearchComponent {
+        /**
+         * Reference to the app
+         */
+        app: App;
+        /**
+         * The container element in which the search component exists (i.e. Editor)
+         */
+        containerEl: HTMLElement;
+        /**
+         * Container for the replacement input field
+         */
+        replaceInputEl: HTMLInputElement;
+        /**
+         * Keyscope for search component
+         */
+        scope: Scope;
+        /**
+         * Container for all the action buttons
+         */
+        searchButtonContainerEl: HTMLElement;
+        /**
+         * Container for the search component itself
+         */
+        searchContainerEl: HTMLElement;
+        /**
+         * Container for the search input field
+         */
+        searchInputEl: HTMLInputElement;
+
+        /**
+         * Returns the current search query
+         */
+        getQuery(): string;
+        /**
+         * Switch to the next inputElement
+         */
+        goToNextInput(event: KeyboardEvent): unknown;
+        /**
+         * Invokes findNextOrReplace
+         */
+        onEnter(event: KeyboardEvent): unknown;
+        /**
+         * Invokes findPrevious
+         */
+        onShiftEnter(event: KeyboardEvent): unknown;
     }
-    /**
-     * @internal Request save of plugin configs
-     */
-    requestSaveConfig(): void;
 
-    /**
-     * Get an enabled internal plugin by ID
-     * @param id - ID of the plugin to get
-     */
-    getEnabledPluginById(id: InternalPluginName): InternalPlugin | null;
-    getEnabledPluginById(id: 'file-explorer'): FileExplorerPlugin | null;
-    getEnabledPluginById(id: 'global-search'): GlobalSearchPlugin | null;
-
-    /**
-     * Get all enabled internal plugins
-     */
-    getEnabledPlugins(): InternalPlugin[];
-    /**
-     * Get an internal plugin by ID
-     * @param id - ID of the plugin to get
-     */
-    getPluginById(id: InternalPluginName): InternalPlugin;
-
-    /**
-     * @internal - Load plugin configs and enable plugins
-     */
-    enable(): Promise<void>;
-    /**
-     * @internal
-     */
-    loadPlugin(arg: { id: string, name: string }): string;
-    /**
-     * @internal
-     */
-    onRaw(cb1: unknown, cb2: unknown): void;
-    /**
-     * @internal - Save current plugin configs
-     */
-    saveConfig(): Promise<void>;
-    /**
-     * @internal
-     */
-    // trigger(arg: string): void;
-}
-
-interface KeyScope {
-    /**
-     * Callback of function to execute when key is pressed
-     */
-    func(): void;
-    /**
-     * Key to match
-     */
-    key: string | null;
-    /**
-     * Modifiers to match
-     */
-    modifiers: string | null;
-    /**
-     * Scope where the key interceptor is registered
-     */
-    scope: Scope;
-}
-
-interface LeafEntry {
-    children?: LeafEntry[];
-    direction?: SplitDirection;
-    id: string;
-    state?: ViewState;
-    type: string;
-    width?: number;
-}
-
-interface LinkUpdate {
-    /**
-     * Reference to App
-     */
-    app: App;
-    /**
-     * Link position in the file
-     */
-    reference: PositionedReference;
-    /**
-     * File that was resolved
-     */
-    resolvedFile: TFile;
-    /**
-     * Paths the file could have been resolved to
-     */
-    resolvedPaths: string[];
-    /**
-     * File that contains the link
-     */
-    sourceFile: TFile;
-}
-
-interface MetadataTypeManager extends Events {
-    /**
-     * Reference to App
-     */
-    app: App;
-    /**
-     * Registered properties of the vault
-     */
-    properties: Record<string, PropertyInfo>;
-    /**
-     * @internal Registered type widgets
-     */
-    registeredTypeWidgets: Record<PropertyWidgetType, PropertyWidget>;
-    /**
-     * Associated widget types for each property
-     */
-    types: Record<string, PropertyWidgetType>;
-
-    /**
-     * Get all registered properties of the vault
-     */
-    getAllProperties(): Record<string, PropertyInfo>;
-    /**
-     * Get assigned widget type for property
-     */
-    getAssignedType(property: string): PropertyWidgetType | null;
-    /**
-     * Get info for property
-     */
-    getPropertyInfo(property: string): PropertyInfo;
-    /**
-     * @internal Get expected widget type for property and the one inferred from the property value
-     */
-    getTypeInfo(arg: { key: string, type: string, value: unknown }): { inferred: PropertyWidget, expected: PropertyWidget };
-    /**
-     * Get all properties with an assigned widget type
-     */
-    getTypes(): string[];
-    /**
-     * @internal Load property types from config
-     */
-    loadData(): Promise<void>;
-    /**
-     * @internal Save property types to config
-     */
-    save(): Promise<void>;
-    /**
-     * @internal Get all properties from metadata cache
-     */
-    savePropertyInfo(): void;
-    /**
-     * @internal Set widget type for property
-     */
-    setType(property: string, type: PropertyWidgetType): Promise<void>;
-    /**
-     * @internal
-     */
-    // trigger(e: unknown): void;
-    /**
-     * @internal Unset widget type for property
-     */
-    unsetType(property: string): Promise<void>;
-}
-
-interface ObsidianDOM {
-    /**
-     * Root element of the application
-     */
-    appContainerEl: HTMLElement;
-    /**
-     * Child of `appContainerEl` containing the main content of the application
-     */
-    horizontalMainContainerEl: HTMLElement;
-    /**
-     * Status bar element containing word count among other things
-     */
-    statusBarEl: HTMLElement;
-    /**
-     * Child of `horizontalMainContainerEl` containing the workspace DOM
-     */
-    workspaceEl: HTMLElement;
-}
-
-interface PluginManifest {
-    /**
-     * Name of the author of the plugin
-     */
-    author: string;
-    /**
-     * URL to the author's website
-     */
-    authorUrl?: string;
-    /**
-     * Description of the plugin's functionality
-     */
-    description: string;
-    /**
-     * Storage location of the plugin relative to the vault root
-     */
-    dir?: string;
-    /**
-     * URL for funding the author
-     */
-    fundingUrl?: string;
-    /**
-     * Unique identifier of the plugin
-     */
-    id: string;
-    /**
-     * Whether the plugin is designed for desktop use only
-     */
-    isDesktopOnly?: boolean;
-    /**
-     * Minimum Obsidian version compatible with the plugin
-     */
-    minAppVersion: string;
-    /**
-     * Name of the plugin
-     */
-    name: string;
-    /**
-     * Version of the plugin
-     */
-    version: string;
-}
-
-interface Plugins {
-    /**
-     * Reference to App
-     */
-    app: App;
-    /**
-     * Set of enabled plugin IDs
-     * @remark The plugin ids aren't guaranteed to be either active (in `app.plugins.plugins`) or installed (in `app.plugins.manifests`)
-     */
-    enabledPlugins: Set<string>;
-    /**
-     * @internal Plugin ID that is currently being enabled
-     */
-    loadingPluginId: string | null;
-    /**
-     * Manifests of all the plugins that are installed
-     */
-    manifests: Record<string, PluginManifest>;
-    /**
-     * Mapping of plugin ID to active plugin instance
-     * @remark Prefer usage of getPlugin to access a plugin
-     */
-    plugins: Record<string, Plugin>;
-    /**
-     * Mapping of plugin ID to available updates
-     */
-    updates: Map<string, PluginUpdateManifest>;
-
-    /**
-     * @internal Check online list for deprecated plugins to automatically disable
-     */
-    checkForDeprecations(): Promise<void>;
-    /**
-     * Check for plugin updates
-     */
-    checkForUpdates(): Promise<void>;
-    /**
-     * Unload a plugin by ID
-     */
-    disablePlugin(id: string): Promise<void>;
-    /**
-     * Unload a plugin by ID and save config for persistence
-     */
-    disablePluginAndSave(id: string): Promise<void>;
-    /**
-     * Enable a plugin by ID
-     */
-    enablePlugin(id: string): Promise<void>;
-    /**
-     * Enable a plugin by ID and save config for persistence
-     */
-    enablePluginAndSave(id: string): Promise<void>;
-    /**
-     * Get a plugin by ID
-     */
-    getPlugin(id: string): Plugin | null;
-    /**
-     * Get the folder where plugins are stored
-     */
-    getPluginFolder(): string;
-    /**
-     * @internal Load plugin manifests and enable plugins from config
-     */
-    initialize(): Promise<void>;
-    /**
-     * Install a plugin from a given URL
-     */
-    installPlugin(repo: string, version: string, manifest: PluginManifest): Promise<void>;
-    /**
-     * Check whether a plugin is deprecated
-     */
-    isDeprecated(id: string): boolean;
-    /**
-     * Check whether community plugins are enabled
-     */
-    isEnabled(): boolean;
-    /**
-     * Load a specific plugin's manifest by its folder path
-     */
-    loadManifest(path: string): Promise<void>;
-    /**
-     * @internal Load all plugin manifests from plugin folder
-     */
-    loadManifests(): Promise<void>;
-    /**
-     *Load a plugin by its ID
-     */
-    loadPlugin(id: string): Promise<Plugin>;
-    /**
-     * @internal
-     */
-    onRaw(e: unknown): void;
-    /**
-     * @internal - Save current plugin configs
-     */
-    saveConfig(): Promise<void>;
-    /**
-     * @internal Toggle whether community plugins are enabled
-     */
-    setEnable(enabled: boolean): Promise<void>;
-    /**
-     * Uninstall a plugin by ID
-     */
-    uninstallPlugin(id: string): Promise<void>;
-    /**
-     * Unload a plugin by ID
-     */
-    unloadPlugin(id: string): Promise<void>;
-}
-
-interface PluginUpdateManifest {
-    /**
-     * Manifest of the plugin
-     */
-    manifest: PluginManifest;
-    /**
-     * Repository of the plugin
-     */
-    repo: string;
-    /**
-     * New version of the plugin
-     */
-    version: string;
-}
-
-interface PositionedReference extends Reference {
-    /**
-     * Position of the reference in the file
-     */
-    position: {
-        start: Loc;
-        end: Loc;
+    interface Account {
+        /**
+         * The company associated with the activated commercial license
+         */
+        company: string;
+        /**
+         * The email address associated with the account
+         */
+        email: string;
+        expiry: number;
+        key: string | undefined;
+        keyValidation: string;
+        /**
+         * The license available to the account
+         */
+        license: "" | "insider";
+        /**
+         * Profile name
+         */
+        name: string;
+        seats: number;
+        token: string;
     }
-}
 
-interface PropertyInfo {
-    /**
-     * Name of property
-     */
-    name: string;
-    /**
-     * Type of property
-     */
-    type: string;
-    /**
-     * Usage count of property
-     */
-    count: number;
-}
-
-interface PropertyWidget {
-    /**
-     * @internal
-     */
-    default(): void;
-    /**
-     * Lucide-dev icon associated with the widget
-     */
-    icon: string;
-    /**
-     * @internal Name proxy
-     */
-    name: unknown;
-    /**
-     * @internal Render function for the widget
-     */
-    render(element: HTMLElement, metadataField: unknown, property: PropertyInfo): void;
-    /**
-     * @internal Reserved keys for the widget
-     */
-    reservedKeys: string[];
-    /**
-     * Widget type
-     */
-    type: string;
-    /**
-     * @internal Validate correctness of property input with respects to the widget
-     */
-    validate(value: unknown): boolean;
-}
-
-export type PropertyWidgetType =
-    | 'aliases'
-    | 'checkbox'
-    | 'date'
-    | 'datetime'
-    | 'multitext'
-    | 'number'
-    | 'tags'
-    | 'text'
-    | (string & any)
-
-interface ReadViewRenderer {
-    addBottomPadding: boolean;
-    lastRender: number;
-    lastScroll: number;
-    lastText: string;
-    previewEl: HTMLElement;
-    pusherEl: HTMLElement;
-    clear(): void;
-    queueRender(): void;
-    parseSync(): void;
-    parseAsync(): void;
-    set(text: string): void;
-    text: string;
-    sections: RendererSection[];
-    asyncSections: unknown[];
-    recycledSections: unknown[];
-    rendered: unknown[];
-}
-
-interface RecentFileTracker {
-    /**
-     * List of last opened file paths, limited to 50
-     */
-    lastOpenFiles: string[];
-    /**
-     * Reference to Vault
-     */
-    vault: Vault;
-    /**
-     * Reference to Workspace
-     */
-    workspace: Workspace;
-
-    /**
-     * @internal
-     */
-    collect(file: TFile): void;
-    /**
-     * Returns the last 10 opened files
-     */
-    getLastOpenFiles(): string[];
-    /**
-     * Get last n files of type (defaults to 10)
-     */
-    getRecentFiles(arg?: { showMarkdown: boolean, showCanvas: boolean, showNonImageAttachments: boolean, showImages: boolean, maxCount: number }): string[];
-    /**
-     * Set the last opened files
-     */
-    load(savedFiles: string[]): void;
-    /**
-     * @internal On file create, save file to last opened files
-     */
-    onFileCreated(file: TFile): void;
-    /**
-     * @internal On file open, save file to last opened files
-     */
-    onFileOpen(prevFile: TFile, file: TFile): void;
-    /**
-     * @internal On file rename, update file path in last opened files
-     */
-    onRename(file: TFile, oldPath: string): void;
-    /**
-     * @internal Get last opened files
-     */
-    serialize(): string[];
-}
-
-interface RendererSection {
-    el: HTMLElement;
-    html: string;
-    rendered: boolean;
-}
-
-interface SerializedWorkspace {
-    /**
-     * Last active leaf
-     */
-    active: string;
-    /**
-     * Last opened files
-     */
-    lastOpenFiles: string[];
-    /**
-     * Left opened leaf
-     */
-    left: LeafEntry;
-    /**
-     * Left ribbon
-     */
-    leftRibbon: { hiddenItems: Record<string, boolean> };
-    /**
-     * Main (center) workspace leaf
-     */
-    main: LeafEntry;
-    /**
-     * Right opened leaf
-     */
-    right: LeafEntry;
-}
-
-interface StateHistory {
-    /**
-     * Ephemeral cursor state within Editor of leaf
-     */
-    eState: {
-        cursor: EditorRange;
-        scroll: number;
-    };
-    /**
-     * Icon of the leaf
-     */
-    icon?: string;
-    /**
-     * History of previous and future states of leaf
-     */
-    leafHistory?: {
-        backHistory: StateHistory[];
-        forwardHistory: StateHistory[];
-    };
-    /**
-     * Id of parent to which the leaf belonged
-     */
-    parentId?: string;
-    /**
-     * Id of root to which the leaf belonged
-     */
-    rootId?: string;
-    /**
-     * Last state of the leaf
-     */
-    state: ViewState;
-    /**
-     * Title of the leaf
-     */
-    title?: string;
-}
-
-interface ThemeManifest {
-    /**
-     * Name of the author of the theme
-     */
-    author: string;
-    /**
-     * URL to the author's website
-     */
-    authorUrl?: string;
-    /**
-     * Storage location of the theme relative to the vault root
-     */
-    dir: string;
-    /**
-     * URL for funding the author
-     */
-    fundingUrl?: string;
-    /**
-     * Minimum Obsidian version compatible with the theme
-     */
-    minAppVersion: string;
-    /**
-     * Name of the theme
-     */
-    name: string;
-    /**
-     * Version of the theme
-     * @remark Defaults to "0.0.0" if no theme manifest was provided in the repository
-     */
-    version: '0.0.0' | string;
-}
-
-export interface Token extends EditorRange {
-    type: "tag" | "external-link" | "internal-link";
-    text: string;
-}
-
-interface Tree<T> {
-    /**
-     * Currently active item in tree view
-     */
-    activeDom: TreeNode<T> | null;
-    /**
-     * Reference to App
-     */
-    app: App;
-    /**
-     * Container element of the tree view
-     */
-    containerEl: HTMLElement;
-    /**
-     * Currently focused item in tree view
-     */
-    focusedItem: TreeNode<T> | null;
-    /**
-     * Gets the ID of a tree item given its Node
-     */
-    getNodeId: (node: TreeNode<T>) => string | undefined;
-    /**
-     * Handle collapsing of all nodes
-     */
-    handleCollapseAll: () => void;
-    /**
-     * Handle deletion of selected nodes
-     */
-    handleDeleteSelectedItems: () => void | undefined;
-    /**
-     * Handle renaming of focused item
-     */
-    handleRenameFocusedItem: () => void;
-    /**
-     * ID of the view the tree is associated with
-     */
-    id: string;
-    /**
-     * @internal Facilitates rendering of tree view
-     */
-    infinityScroll: InfinityScroll;
-    /**
-     * Whether all items in the tree are collapsed
-     */
-    isAllCollapsed: boolean;
-    /**
-     * Whether tree items should default to collapsed state
-     */
-    prefersCollapsed: boolean;
-    /**
-     * Request saving of the current fold states
-     */
-    requestSaveFolds: () => void;
-    /**
-     * Key scope for tree view
-     */
-    scope: Scope;
-    /**
-     * Currently selected items in tree view
-     */
-    selectedDoms: Set<TreeNode<T>>;
-    /**
-     * The view the tree is associated with
-     */
-    view: View;
-
-    /**
-     * Root item of the tree view
-     */
-    get root(): TreeNode<T>;
-
-    /**
-     * Change the focused item to the next item in specified direction
-     */
-    changeFocusedItem(direction: "forwards" | "backwards"): void;
-    /**
-     * Unselect all selected items in the tree view
-     */
-    clearSelectedDoms(): void;
-    /**
-     * Mark tree item as deselected
-     */
-    deselectItem(node: TreeNode<T>): void;
-    /**
-     * Get the local storage key for the saved tree view folds
-     */
-    getFoldKey(): string;
-    /**
-     * Handle selection of tree item via keyboard event
-     */
-    handleItemSelection(event: MouseEvent, node: TreeNode<T>): void;
-    /**
-     * @internal Registers all keyboard actions to the tree view keyscope
-     */
-    initializeKeyboardNav(): void;
-    /**
-     * Check whether item is a valid tree item
-     */
-    isItem(node: TreeNode<T> | undefined): boolean;
-    /**
-     * Load the saved fold states of the tree view from local storage
-     */
-    loadFolds(): void;
-    /**
-     * Handle keyboard event for moving/selecting tree item below
-     */
-    onKeyArrowDown(event: KeyboardEvent): void;
-    /**
-     * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding)
-     */
-    onKeyArrowLeft(event: KeyboardEvent): void;
-    /**
-     * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding)
-     */
-    onKeyArrowRight(event: KeyboardEvent): void;
-    /**
-     * Handle keyboard event for moving/selecting tree item above
-     */
-    onKeyArrowUp(event: KeyboardEvent): void;
-    /**
-     * Handle keyboard event for opening tree item
-     */
-    onKeyOpen(event: KeyboardEvent): void;
-    /**
-     * @internal Update scroll representation on resize
-     */
-    onResize(): void;
-    /**
-     * Save the current fold states of the tree view to local storage
-     */
-    saveFolds(): void;
-    /**
-     * Mark tree item as selected
-     */
-    selectItem(node: TreeNode<T>): void;
-    /**
-     * Set all items in the tree view to be collapsed or expanded
-     */
-    setCollapseAll(collapse: boolean): void;
-    /**
-     * Set the focused item in the tree view
-     */
-    setFocusedItem(node: TreeNode<T>, scrollIntoView?: boolean): void;
-    /**
-     * (Un)Collapse all items in the tree view
-     */
-    toggleCollapseAll(): void;
-}
-
-
-
-type TreeNode<T = object> = T & {
-    childrenEl: HTMLElement;
-    el: HTMLElement;
-    info: {
-        childLeft: number;
-        childLeftPadding: number;
-        childTop: number;
-        computed: boolean;
-        height: number;
-        hidden: boolean;
-        next: boolean;
-        queued: boolean;
-        width: number;
-    };
-    pusherEl: HTMLElement;
-    vChildren: {
-        _children: TreeNode<T>[];
-        owner: TreeNode<T>;
-    };
-}
-
-// NOTE: File-explorer root vs Outline root are different (former is a treeitem, latter just a treenode)
-type TreeItem<T> = TreeNode<T> & {
-    collapseEl: HTMLElement;
-    collapsed: boolean;
-    collapsible: boolean;
-    coverEl: HTMLElement;
-    innerEl: HTMLElement;
-    parent: TreeNode<T> | undefined;
-    selfEl: HTMLElement;
-    view: View;
-
-    /**
-     * Execute collapse functionality on mouse click
-     */
-    onCollapseClick(event: MouseEvent): void;
-    /**
-     * Execute item functionality on clicking tree item
-     */
-    onSelfClick(event: MouseEvent): void;
-    /**
-     * Set clickable state of tree item
-     */
-    setClickable(clickable: boolean): void;
-    /**
-     * Set collapsed state of tree item
-     */
-    setCollapsed(collapsed: boolean, check: boolean): Promise<undefined>;
-    /**
-     * Set collapsible state of tree item
-     */
-    setCollapsible(collapsible: boolean): void;
-    /**
-     * Toggle collapsed state of tree item
-     */
-    toggleCollapsed(check: boolean): Promise<undefined>;
-    /**
-     * @internal Update the tree item's cover element
-     */
-    updateCollapsed(check: boolean): Promise<undefined>;
-}
-
-
-interface ViewRegistry extends Events {
-    /**
-     * Mapping of file extensions to view type
-     */
-    typeByExtension: Record<string, string>;
-    /**
-     * Mapping of view type to view constructor
-     */
-    viewByType: Record<string, (leaf: WorkspaceLeaf) => View>;
-
-    /**
-     * Called when a view of type has been registered into the registry
-     */
-    on(name: 'view-registered', callback: (type: string) => void): EventRef;
-
-    /**
-     * Called when a view of type has been unregistered from the registry
-     */
-    on(name: 'view-unregistered', callback: (type: string) => void): EventRef;
-
-    /**
-     * Called when the file extensions mapping has been updated
-     */
-    on(name: 'extensions-updated', callback: () => void): EventRef;
-
-    /**
-     * Get the view type associated with a file extension
-     * @param extension File extension
-     */
-    getTypeByExtension(extension: string): string;
-    /**
-     * Get the view constructor associated with a view type
-     */
-    getViewCreatorByType(type: string): (leaf: WorkspaceLeaf) => View;
-    /**
-     * Check whether a view type is registered
-     */
-    isExtensionRegistered(extension: string): boolean;
-    /**
-     * Register a view type for a file extension
-     * @param extension File extension
-     * @param type View type
-     * @remark Prefer registering the extension via the Plugin class
-     */
-    registerExtensions(extension: string[], type: string): void;
-    /**
-     * Register a view constructor for a view type
-     */
-    registerView(type: string, viewCreator: (leaf: WorkspaceLeaf) => View): void;
-    /**
-     * Register a view and its associated file extensions
-     */
-    registerViewWithExtensions(extensions: string[], type: string, viewCreator: (leaf: WorkspaceLeaf) => View): void;
-    /**
-     * @internal
-     */
-    // trigger(type: string): void;
-    /**
-     * Unregister extensions for a view type
-     */
-    unregisterExtensions(extension: string[]): void;
-    /**
-     * Unregister a view type
-     */
-    unregisterView(type: string): void;
-}
-
-interface WeakMapWrapper<K extends object, V> extends WeakMap<K, V> {
-    map: WeakMap<K, V>;
-}
-
-interface WindowSelection {
-    focusEl: HTMLElement;
-    range: Range;
-    win: Window;
-}
-
-declare module 'obsidian' {
     interface App {
         /**
          * The account signed in to Obsidian
@@ -1824,128 +283,116 @@ declare module 'obsidian' {
         account: Account;
         /**
          * ID that uniquely identifies the vault
+         *
          * @tutorial Used for implementing device *and* vault-specific data storage using LocalStorage or IndexedDB
          */
         appId: string;
-        // /**
-        //  * @internal
-        //  */
-        // appMenuBarManager: AppMenuBarManager;
+        /** @internal */
+        appMenuBarManager: AppMenuBarManager;
         /**
          * Contains all registered commands
+         *
          * @tutorial Can be used to manually invoke the functionality of a specific command
          */
         commands: Commands;
         /**
          * Custom CSS (snippets/themes) applied to the application
+         *
          * @tutorial Can be used to view which snippets are enabled or available, or inspect loaded-in theme manifests
          */
         customCss: CustomCSS;
-        /** References to important DOM elements of the application */
+        /**
+         * References to important DOM elements of the application
+         */
         dom: ObsidianDOM;
-        // /**
-        //  * @internal
-        //  */
-        // dragManager: unknown;
+        /** @internal */
+        dragManager: unknown;
         /**
          * Registry that manages the creation of generic media type embeds
          */
         embedRegistry: EmbedRegistry;
         /**
          * Manage the creation, deletion and renaming of files from the UI.
+         *
          * @remark Prefer using the `vault` API for programmatic file management
          */
         fileManager: FileManager;
-        // /**
-        //  * @internal
-        //  */
-        // foldManager: unknown;
+        /** @internal */
+        foldManager: unknown;
         /**
          * Manages global hotkeys
+         *
          * @tutorial Can be used for manually invoking a command, or finding which hotkey is assigned to a specific key input
          * @remark This should not be used for adding hotkeys to your custom commands, this can easily be done via the official API
          */
         hotkeyManager: HotkeyManager;
         /**
          * Manager of internal 'core' plugins
+         *
          * @tutorial Can be used to check whether a specific internal plugin is enabled, or grab specific parts from its config for simplifying your own plugin's settings
          */
         internalPlugins: InternalPlugins;
         /**
          * Whether the application is currently running on mobile
+         *
          * @remark Prefer usage of `Platform.isMobile`
          * @remark Will be true if `app.emulateMobile()` was enabled
          */
         isMobile: boolean;
-        // /**
-        //  * @internal
-        //  */
-        // keymap: KeymapManager;
-        // /**
-        //  * @internal
-        //  */
-        // loadProgress: LoadProgress;
+        /** @internal */
+        keymap: KeymapManager;
+        /** @internal */
+        loadProgress: LoadProgress;
         /**
          * Manages the gathering and updating of metadata for all files in the vault
+         *
          * @tutorial Use for finding tags and backlinks for specific files, grabbing frontmatter properties, ...
          */
         metadataCache: MetadataCache;
         /**
          * Manages the frontmatter properties of the vault and the rendering of the properties
+         *
          * @tutorial Fetching properties used in all frontmatter fields, may potentially be used for adding custom frontmatter widgets
          */
         metadataTypeManager: MetadataTypeManager;
-
-        // /**
-        //  * @internal
-        //  */
-        // mobileNavbar?: MobileNavbar;
-        // /**
-        //  * @internal
-        //  */
-        // mobileToolbar?: MobileToolbar;
-
-        // /**
-        //  * @internal Events to execute on the next frame
-        //  */
-        // nextFrameEvents: unknown[];
-        // /**
-        //  * @internal Timer for the next frame
-        //  */
-        // nextFrameTimer: number;
-
+        /** @internal */
+        mobileNavbar?: MobileNavbar;
+        /** @internal */
+        mobileToolbar?: MobileToolbar;
+        /** @internal Events to execute on the next frame */
+        nextFrameEvents: unknown[];
+        /** @internal Timer for the next frame */
+        nextFrameTimer: number;
         /**
          * Manages loading and enabling of community (non-core) plugins
+         *
          * @tutorial Can be used to communicate with other plugins, custom plugin management, ...
          * @remark Be careful when overriding loading logic, as this may result in other plugins not loading
          */
         plugins: Plugins;
-        /**
-         * @internal Root keyscope of the application
-         */
+        /** @internal Root keyscope of the application */
         scope: Scope;
         /**
          * Manages the settings modal and its tabs
+         *
          * @tutorial Can be used to open the settings modal to a specific tab, extend the settings modal functionality, ...
          * @remark Do not use this to get settings values from other plugins, it is better to do this via `app.plugins.getPlugin(ID)?.settings` (check how the plugin stores its settings)
          */
         setting: Setting;
-        // /**
-        //  * @internal
-        //  */
-        // shareReceiver: { app: App }
-        // /**
-        //  * @internal Status bar of the application
-        //  */
-        // statusBar: { app: App , containerEl: HTMLElement }
+        /** @internal */
+        shareReceiver: { app: App };
+        /** @internal Status bar of the application */
+        statusBar: { app: App; containerEl: HTMLElement };
         /**
          * Name of the vault with version suffix
+         *
          * @remark Formatted as 'NAME - Obsidian vX.Y.Z'
          */
         title: string;
         /**
-         * Manages all file operations for the vault, contains hooks for file changes, and an adapter
-         * for low-level file system operations
+         * Manages all file operations for the vault, contains hooks for file changes, and an adapter for
+         * low-level file system operations
+         *
          * @tutorial Used for creating your own files and folders, renaming, ...
          * @tutorial Use `app.vault.adapter` for accessing files outside the vault (desktop-only)
          * @remark Prefer using the regular `vault` whenever possible
@@ -1953,11 +400,13 @@ declare module 'obsidian' {
         vault: Vault;
         /**
          * Manages the construction of appropriate views when opening a file of a certain type
+         *
          * @remark Prefer usage of view registration via the Plugin class
          */
         viewRegistry: ViewRegistry;
         /**
          * Manages the workspace layout, construction, rendering and manipulation of leaves
+         *
          * @tutorial Used for accessing the active editor leaf, grabbing references to your views, ...
          */
         workspace: Workspace;
@@ -1969,9 +418,10 @@ declare module 'obsidian' {
         /**
          * Sets the accent color of the application (light/dark mode)
          */
-        changeTheme(theme: 'moonstone' | 'obsidian'): void;
+        changeTheme(theme: "moonstone" | "obsidian"): void;
         /**
          * Copies Obsidian URI of given file to clipboard
+         *
          * @param file File to generate URI for
          */
         copyObsidianUrl(file: TFile): void;
@@ -1981,6 +431,7 @@ declare module 'obsidian' {
         disableCssTransition(): void;
         /**
          * Restarts Obsidian and renders workspace in mobile mode
+         *
          * @tutorial Very useful for testing the rendering of your plugin on mobile devices
          */
         emulateMobile(emulate: boolean): void;
@@ -1990,11 +441,13 @@ declare module 'obsidian' {
         enableCssTransition(): void;
         /**
          * Manually fix all file links pointing towards image/audio/video resources in element
+         *
          * @param element Element to fix links in
          */
         fixFileLinks(element: HTMLElement): void;
         /**
          * Applies an obfuscation font to all text characters in the vault
+         *
          * @tutorial Useful for hiding sensitive information or sharing pretty screenshots of your vault
          * @remark Uses the `Flow Circular` font
          * @remark You will have to restart the app to get normal text back
@@ -2002,11 +455,13 @@ declare module 'obsidian' {
         garbleText(): void;
         /**
          * Get the accent color of the application
+         *
          * @remark Often a better alternative than `app.vault.getConfig('accentColor')` as it returns an empty string if no accent color was set
          */
         getAccentColor(): string;
         /**
          * Get the current title of the application
+         *
          * @remark The title is based on the currently active leaf
          */
         getAppTitle(): string;
@@ -2016,49 +471,40 @@ declare module 'obsidian' {
         getObsidianUrl(file: TFile): string;
         /**
          * Get currently active spellcheck languages
-         * @deprecated Originally spellcheck languages were stored in app settings,
-         * languages are now stored in `localStorage.getItem(spellcheck-languages)`
+         *
+         * @deprecated Originally spellcheck languages were stored in app settings, languages are now stored
+         *   in `localStorage.getItem(spellcheck-languages)`
          */
         getSpellcheckLanguages(): string[];
         /**
          * Get the current color scheme of the application
+         *
          * @remark Identical to `app.vault.getConfig('theme')`
          */
-        getTheme(): 'moonstone' | 'obsidian';
+        getTheme(): "moonstone" | "obsidian";
         /**
          * Import attachments into specified folder
          */
         importAttachments(imports: ImportedAttachments[], folder: TFolder): Promise<void>;
-        /**
-         * @internal Initialize the entire application using the provided FS adapter
-         */
+        /** @internal Initialize the entire application using the provided FS adapter */
         initializeWithAdapter(adapter: DataAdapter): Promise<void>;
         /**
          * Load a value from the localstorage given key
+         *
          * @param key Key of value to load
          * @remark This method is device *and* vault specific
          * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault
          */
         loadLocalStorage(key: string): string;
-        /**
-         * @internal Add callback to execute on next frame
-         */
+        /** @internal Add callback to execute on next frame */
         nextFrame(callback: () => void): void;
-        /**
-         * @internal Add callback to execute on next frame, and remove after execution
-         */
+        /** @internal Add callback to execute on next frame, and remove after execution */
         nextFrameOnceCallback(callback: () => void): void;
-        /**
-         * @internal Add callback to execute on next frame with promise
-         */
+        /** @internal Add callback to execute on next frame with promise */
         nextFramePromise(callback: () => Promise<void>): Promise<void>;
-        /**
-         * @internal
-         */
+        /** @internal */
         onMouseEvent(evt: MouseEvent): void;
-        /**
-         * @internal Execute all logged callback (called when next frame is loaded)
-         */
+        /** @internal Execute all logged callback (called when next frame is loaded) */
         onNextFrame(callback: () => void): void;
         /**
          * Open the help vault (or site if mobile)
@@ -2072,20 +518,15 @@ declare module 'obsidian' {
          * Open the file with OS defined default file browser application
          */
         openWithDefaultApp(path: string): void;
-        /**
-         * @internal Register all basic application commands
-         */
+        /** @internal Register all basic application commands */
         registerCommands(): void;
-        /**
-         * @internal Register a hook for saving workspace data before unload
-         */
+        /** @internal Register a hook for saving workspace data before unload */
         registerQuitHook(): void;
-        /**
-         * @internal Save attachment at default attachments location
-         */
+        /** @internal Save attachment at default attachments location */
         saveAttachment(path: string, extension: string, data: ArrayBuffer): Promise<void>;
         /**
          * Save a value to the localstorage given key
+         *
          * @param key Key of value to save
          * @param value Value to save
          * @remark This method is device *and* vault specific
@@ -2094,6 +535,7 @@ declare module 'obsidian' {
         saveLocalStorage(key: string, value: unknown): void;
         /**
          * Set the accent color of the application
+         *
          * @remark Also updates the CSS `--accent` variables
          */
         setAccentColor(color: string): void;
@@ -2108,13 +550,14 @@ declare module 'obsidian' {
         /**
          * Set the current color scheme of the application and reload the CSS
          */
-        setTheme(theme: 'moonstone' | 'obsidian'): void;
+        setTheme(theme: "moonstone" | "obsidian"): void;
         /**
          * Open the OS file picker at path location
          */
         showInFolder(path: string): void;
         /**
          * Show the release notes for provided version as a new leaf
+         *
          * @param version Version to show release notes for (defaults to current version)
          */
         showReleaseNotes(version?: string): void;
@@ -2144,14 +587,563 @@ declare module 'obsidian' {
         updateViewHeaderDisplay(): void;
     }
 
+    interface AppVaultConfig {
+        /**
+         * Appearance > Accent color
+         */
+        accentColor: "" | string;
+        /**
+         * Files & Links > Automatically update internal links
+         */
+        alwaysUpdateLinks?: false | boolean;
+        /**
+         * Files & Links > Attachment folder path
+         */
+        attachmentFolderPath?: "/" | string;
+        /**
+         * Editor > Auto convert HTML
+         */
+        autoConvertHtml?: true | boolean;
+        /**
+         * Editor > Auto pair brackets
+         */
+        autoPairBrackets?: true | boolean;
+        /**
+         * Editor > Auto pair Markdown syntax
+         */
+        autoPairMarkdown?: true | boolean;
+        /**
+         * Appearance > Font size
+         */
+        baseFontSize?: 16 | number;
+        /**
+         * Appearance > Quick font size adjustment
+         */
+        baseFontSizeAction?: true | boolean;
+        /**
+         * Community Plugins > Browse > Sort order
+         */
+        communityPluginSortOrder: "download" | "update" | "release" | "alphabetical";
+        /**
+         * Themes > Browse > Sort order
+         */
+        communityThemeSortOrder: "download" | "update" | "release" | "alphabetical";
+        /**
+         * Appearance > Theme
+         *
+         * @remark is the default Obsidian theme
+         */
+        cssTheme?: "" | string;
+        /**
+         * Editor > Default view for new tabs
+         */
+        defaultViewMode?: "source" | "preview";
+        emacsyKeys?: true | boolean;
+        /**
+         * Appearance > CSS snippets
+         */
+        enabledCssSnippets?: string[];
+        fileSortOrder?: "alphabetical";
+        /**
+         * Editor > Always focus new tabs
+         */
+        focusNewTab?: true | boolean;
+        /**
+         * Editor > Fold heading
+         */
+        foldHeading?: true | boolean;
+        /**
+         * Editor > Fold indent
+         */
+        foldIndent?: true | boolean;
+        /**
+         * Hotkeys
+         *
+         * @deprecated Likely not used anymore
+         */
+        hotkeys?: Record<string, string>;
+        /**
+         * Appearance > Interface font
+         */
+        interfaceFontFamily?: "" | string;
+        /**
+         * Editor > Use legacy editor
+         */
+        legacyEditor?: false | boolean;
+        livePreview?: true | boolean;
+        /**
+         * Mobile > Configure mobile Quick Action
+         */
+        mobilePullAction?: "command-palette:open" | string;
+        mobileQuickRibbonItem?: "" | string;
+        /**
+         * Mobile > Manage toolbar options
+         */
+        mobileToolbarCommands?: string[];
+        monospaceFontFamily?: "" | string;
+        /**
+         * Appearance > Native menus
+         */
+        nativeMenus?: null | boolean;
+        /**
+         * Files & Links > Default location for new notes | 'folder' > Folder to create new notes in
+         */
+        newFileFolderPath?: "/" | string;
+        /**
+         * Files & Links > Default location for new notes
+         */
+        newFileLocation?: "root" | "current" | "folder";
+        /**
+         * Files & Links > New link format
+         */
+        newLinkFormat?: "shortest" | "relative" | "absolute";
+        /**
+         * Saved on executing 'Export to PDF' command
+         */
+        pdfExportSettings?: {
+            pageSize: "letter" | string;
+            landscape: false | boolean;
+            margin: "0" | string;
+            downscalePercent: 100 | number;
+        };
+        /**
+         * Files & Links > Confirm line deletion
+         */
+        promptDelete?: true | boolean;
+        /**
+         * Editor > Properties in document
+         */
+        propertiesInDocument?: "visible" | "hidden" | "source";
+        /**
+         * Editor > Readable line length
+         */
+        readableLineLength?: true | boolean;
+        /**
+         * Editor > Right-to-left (RTL)
+         */
+        rightToLeft?: false | boolean;
+        /** @deprecated Removed as of version 1.4.3 */
+        showFrontmatter?: false | boolean;
+        /**
+         * Editor > Show indentation guides
+         */
+        showIndentGuide?: true | boolean;
+        /**
+         * Editor > Show inline title
+         */
+        showInlineTitle?: true | boolean;
+        /**
+         * Editor > Show line numbers
+         */
+        showLineNumber?: false | boolean;
+        /**
+         * Files & Links > Detect all file extensions
+         */
+        showUnsupportedFiles?: false | boolean;
+        /**
+         * Appearance > Show tab title bar
+         */
+        showViewHeader?: false | boolean;
+        /**
+         * Editor > Smart indent lists
+         */
+        smartIndentList?: true | boolean;
+        /**
+         * Editor > Spellcheck
+         */
+        spellcheck?: false | boolean;
+        /** @deprecated */
+        spellcheckDictionary?: [] | string[];
+        /**
+         * Editor > Spellcheck languages
+         */
+        spellcheckLanguages?: null | string[];
+        /**
+         * Editor > Strict line breaks
+         */
+        strictLineBreaks?: false | boolean;
+        /**
+         * Editor > Tab indent size
+         */
+        tabSize?: 4 | number;
+        /**
+         * Appearance > Text font
+         */
+        textFontFamily?: "" | string;
+        /**
+         * Appearance > Base color scheme
+         *
+         * @remark Not be confused with cssTheme, this setting is for the light/dark mode
+         * @remark moonstone is light theme, "obsidian" is dark theme
+         */
+        theme?: "moonstone" | "obsidian";
+        /**
+         * Appearance > Translucent window
+         */
+        translucency?: false | boolean;
+        /**
+         * Files & Links > Deleted files
+         */
+        trashOption?: "system" | "local" | "none";
+        /** @deprecated Probably left-over code from old properties type storage */
+        types: object;
+        /**
+         * Files & Links > Use [[Wikilinks]]
+         */
+        useMarkdownLinks?: false | boolean;
+        /**
+         * Files & Links > Excluded files
+         */
+        userIgnoreFilters?: null | string[];
+        /**
+         * Editor > Indent using tabs
+         */
+        useTab?: true | boolean;
+        /**
+         * Editor > Vim key bindings
+         */
+        vimMode?: false | boolean;
+    }
+
+    interface BlockCache {
+        /**
+         * Reference to App
+         */
+        app: App;
+        /** @internal */
+        cache: unknown;
+    }
+
+    interface CanvasConnection {}
+
+    interface CanvasLeaf extends WorkspaceLeaf {}
+
+    interface CanvasNode {}
+
+    interface CanvasPlugin extends InternalPlugin {}
+
+    interface CanvasView {}
+
+    interface ClipBoardManager {
+        /**
+         * Reference to the app
+         */
+        app: App;
+        /**
+         * Reference to the Editor View
+         */
+        info: MarkdownView;
+
+        /**
+         * Get current path of editor view for determining storage location embed
+         */
+        getPath(): string;
+        /**
+         * Process incoming data (image, text, url, html)
+         *
+         * @remark When processing HTML, function will be async
+         */
+        handleDataTransfer(data: DataTransfer): null | Promise<void>;
+        /**
+         * Handle an incoming drag-over event
+         */
+        handleDragOver(event: DragEvent): void;
+        /**
+         * Handle an incoming drag-drop event
+         */
+        handleDrop(event: DragEvent): boolean;
+        /**
+         * Process a drop event into the editor
+         */
+        handleDropIntoEditor(event: DragEvent): null | string;
+        /**
+         * Handle an incoming paste event
+         */
+        handlePaste(event: ClipboardEvent): boolean;
+        /**
+         * Insert single file as embed into the editor
+         */
+        insertAttachmentEmbed(file: TAbstractFile, replace: boolean): Promise<void>;
+        /**
+         * Insert files from drop-event into the editor
+         */
+        insertFiles(files: ImportedAttachments[]): Promise<void>;
+        /**
+         * Save an attachment of specified name and extension to the vault
+         *
+         * @remark Invokes insertAttachmentEmbed
+         */
+        saveAttachment(name: string, extension: string, data: ArrayBuffer, replace: boolean): Promise<void>;
+    }
+
+    interface CMState extends EditorState {
+        vim: {
+            inputState: {
+                changeQueue: null;
+                keyBuffer: [];
+                motion: null;
+                motionArgs: null;
+                motionRepeat: [];
+                operator: null;
+                operatorArgs: null;
+                prefixRepeat: [];
+                registerName: null;
+            };
+            insertMode: false;
+            insertModeRepeat: undefined;
+            lastEditActionCommand: undefined;
+            lastEditInputState: undefined;
+            lastHPos: number;
+            lastHSPos: number;
+            lastMotion: {
+                name?: string;
+            };
+            lastPastedText: null;
+            lastSelection: null;
+        };
+        vimPlugin: {
+            lastKeydown: string;
+        };
+    }
+
+    interface CMView extends EditorView {
+        state: CMState;
+    }
+
+    interface Commands {
+        /**
+         * Reference to App
+         */
+        app: App;
+        /**
+         * Commands *without* editor callback, will always be available in the command palette
+         *
+         * @example
+         *     `app:open-vault` or `app:reload`
+         */
+        commands: Record<string, Command>;
+        /**
+         * Commands *with* editor callback, will only be available when editor is active and callback returns
+         * true
+         *
+         * @example
+         *     `editor:fold-all` or `command-palette:open`
+         */
+        editorCommands: Record<string, Command>;
+
+        /**
+         * Add a command to the command registry
+         *
+         * @param command Command to add
+         */
+        addCommand(command: Command): void;
+        /**
+         * Execute a command by reference
+         *
+         * @param command Command to execute
+         */
+        executeCommand(command: Command): boolean;
+        /**
+         * Execute a command by ID
+         *
+         * @param commandId ID of command to execute
+         */
+        executeCommandById(commandId: string): boolean;
+        /**
+         * Find a command by ID
+         *
+         * @param commandId
+         */
+        findCommand(commandId: string): Command | undefined;
+        /**
+         * Lists **all** commands, both with and without editor callback
+         */
+        listCommands(): Command[];
+        /**
+         * Remove a command from the command registry
+         *
+         * @param commandId Command to remove
+         */
+        removeCommand(commandId: string): void;
+    }
+
+    interface Component {
+        /**
+         * Child Components attached to current component, will be unloaded on unloading parent component
+         */
+        _children: Component[];
+        /**
+         * Events that are attached to the current component, will be detached on unloading parent component
+         */
+        _events: EventRef[];
+        /**
+         * Whether the component and its children are loaded
+         */
+        _loaded: boolean;
+    }
+
+    interface CustomArrayDict<T> {
+        data: Record<string, T[]>;
+
+        add(key: string, value: T): void;
+        clear(key: string): void;
+        clearAll(): void;
+        contains(key: string, value: T): boolean;
+        count(): number;
+        get(key: string): T[] | null;
+        keys(): string[];
+        remove(key: string, value: T): void;
+        removeKey(key: string): void;
+    }
+
+    interface CustomCSS extends Component {
+        /**
+         * Reference to App
+         */
+        app: App;
+        /** @internal Cache of CSS snippet filepath (relative to vault root) to CSS snippet contents */
+        csscache: Map<string, string>;
+        /**
+         * Set of enabled snippet, given by filenames
+         */
+        enabledSnippets: Set<string>;
+        /**
+         * @internal
+         * Contains references to Style elements containing custom CSS snippets
+         */
+        extraStyleEls: HTMLStyleElement[];
+        /**
+         * List of theme names not fully updated to post v1.0.0 theme guidelines
+         */
+        oldThemes: string[];
+        /** @internal */
+        queue: WeakMap<object, unknown>;
+        /**
+         * List of snippets detected by Obsidian, given by their filenames
+         */
+        snippets: string[];
+        /**
+         * Currently active theme, given by its name
+         *
+         * @remark is the default Obsidian theme
+         */
+        theme: "" | string;
+        /**
+         * Mapping of theme names to their manifest
+         */
+        themes: Record<string, ThemeManifest>;
+        /** @internal */
+        updates: Record<string, unknown>;
+
+        /** @internal */
+        boundRaw(): void;
+        /**
+         * Check whether a specific theme can be updated
+         *
+         * @param themeName - Name of the theme to check
+         */
+        checkForUpdate(themeName: string): void;
+        /**
+         * Check all themes for updates
+         */
+        checkForUpdates(): void;
+        /**
+         * Disable translucency of application background
+         */
+        disableTranslucency(): void;
+        /**
+         * Fetch legacy theme CSS using the pre-v1.0.0 theme download pipeline
+         *
+         * @returns String obsidian.css contents
+         */
+        downloadLegacyTheme(arg: { repo: string }): Promise<string>;
+        /**
+         * Enable translucency of application background
+         */
+        enableTranslucency(): void;
+        /**
+         * Fetch a theme's manifest using repository URL
+         *
+         * @remark Do **not** include github prefix, only `username/repo`
+         */
+        getManifest(repoUrl: string): Promise<ThemeManifest>;
+        /**
+         * Convert snippet name to its corresponding filepath (relative to vault root)
+         *
+         * @returns String `.obsidian/snippets/${snippetName}.css`
+         */
+        getSnippetPath(snippetName: string): string;
+        /**
+         * Returns the folder path where snippets are stored (relative to vault root)
+         */
+        getSnippetsFolder(): string;
+        /**
+         * Convert theme name to its corresponding filepath (relative to vault root)
+         *
+         * @returns String `.obsidian/themes/${themeName}/theme.css`
+         */
+        getThemePath(themeName: string): string;
+        /**
+         * Returns the folder path where themes are stored (relative to vault root)
+         */
+        getThemesFolder(): string;
+        /**
+         * Returns whether there are themes that can be updated
+         */
+        hasUpdates(): boolean;
+        /**
+         * Install a legacy theme using the pre-v1.0.0 theme download pipeline<br> Will create a corresponding
+         * dummy manifest for the theme
+         *
+         * @remark Name will be used as the folder name for the theme
+         */
+        installLegacyTheme(arg: { name: string; repo: string; author: string }): Promise<void>;
+        /**
+         * Install a theme using the regular theme download pipeline
+         */
+        installTheme(arg: { name: string; repo: string; author: string }, version: string): Promise<void>;
+        /**
+         * Check whether a specific theme is installed by theme name
+         */
+        isThemeInstalled(themeName: string): boolean;
+        /** @internal */
+        onload(): void;
+        /** @internal */
+        onRaw(e: unknown): void;
+        /** @internal */
+        readSnippets(): void;
+        /** @internal */
+        readThemes(): void;
+        /**
+         * Remove a theme by theme name
+         */
+        removeTheme(themeName: string): Promise<void>;
+        /** @internal */
+        requestLoadSnippets(): void;
+        /** @internal */
+        requestLoadTheme(): void;
+        /** @internal */
+        requestReadThemes(): void;
+        /**
+         * Set the activation status of a snippet by snippet name
+         */
+        setCssEnabledStatus(snippetName: string, enabled: boolean): void;
+        /**
+         * Set the active theme by theme name
+         */
+        setTheme(themeName: string): void;
+        /**
+         * Set the translucency of application background
+         */
+        setTranslucency(translucency: boolean): void;
+    }
+
     interface DataAdapter {
         /**
          * Base OS path for the vault (e.g. /home/user/vault, or C:\Users\user\documents\vault)
          */
         basePath: string;
-        /**
-         * @internal
-         */
+        /** @internal */
         btime: { btime(path: string, btime: number): void };
         /**
          * Mapping of file/folder path to vault entry, includes non-MD files
@@ -2165,9 +1157,7 @@ declare module 'obsidian' {
          * Reference to node fs:promises module
          */
         fsPromises?: typeof fsPromises;
-        /**
-         * @internal
-         */
+        /** @internal */
         insensitive: boolean;
         /**
          * Reference to electron ipcRenderer module
@@ -2177,27 +1167,21 @@ declare module 'obsidian' {
          * Reference to node path module
          */
         path: typeof path;
-        /**
-         * @internal
-         */
+        /** @internal */
         promise: Promise<unknown>;
         /**
          * Reference to node URL module
          */
         url: URL;
-        /**
-         * @internal
-         */
+        /** @internal */
         watcher: unknown;
-        /**
-         * @internal
-         */
-        watchers: Record<string, { resolvedPath: string, watcher: unknown }>;
+        /** @internal */
+        watchers: Record<string, { resolvedPath: string; watcher: unknown }>;
 
         /**
-         * @internal Apply data write options to file
          * @param normalizedPath Path to file
          * @param options Data write options
+         * @internal Apply data write options to file
          */
         applyWriteOptions(normalizedPath: string, options: DataWriteOptions): Promise<void>;
         /**
@@ -2206,209 +1190,89 @@ declare module 'obsidian' {
         getBasePath(): string;
         /**
          * Get full path of file (OS path)
+         *
          * @param normalizedPath Path to file
-         * @return URL path to file
+         * @returns URL path to file
          */
         getFilePath(normalizedPath: string): string;
         /**
          * Get full path of file (OS path)
+         *
          * @param normalizedPath Path to file
-         * @return string full path to file
+         * @returns String full path to file
          */
         getFullPath(normalizedPath: string): string;
         /**
          * Get full path of file (OS path)
+         *
          * @param normalizedPath Path to file
-         * @return string full path to file
+         * @returns String full path to file
          */
         getFullRealPath(normalizedPath: string): string;
         /**
-         * @internal Get resource path of file (URL path)
          * @param normalizedPath Path to file
-         * @return string URL of form: app://FILEHASH/path/to/file
+         * @returns String URL of form: app://FILEHASH/path/to/file
+         * @internal Get resource path of file (URL path)
          */
         getResourcePath(normalizedPath: string): string;
-        /**
-         * @internal Handles vault events
-         */
+        /** @internal Handles vault events */
         handler(): void;
-        /**
-         * @internal Kill file system action due to timeout
-         */
+        /** @internal Kill file system action due to timeout */
         kill(): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         killLastAction(): void;
-        /**
-         * @internal Generates `this.files` from the file system
-         */
+        /** @internal Generates `this.files` from the file system */
         listAll(): Promise<void>;
-        /**
-         * @internal Generates `this.files` for specific directory of the vault
-         */
+        /** @internal Generates `this.files` for specific directory of the vault */
         listRecursive(normalizedPath: string): Promise<void>;
         /**
-         * @internal Helper function for `listRecursive` reads children of directory
          * @param normalizedPath Path to directory
+         * @internal Helper function for `listRecursive` reads children of directory
          */
         listRecursiveChild(normalizedPath: string): Promise<void>;
-        /**
-         * @internal
-         */
+        /** @internal */
         onFileChange(normalizedPath: string): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         queue(cb: unknown): Promise<void>;
-
-        /**
-         * @internal
-         */
+        /** @internal */
         reconcileDeletion(normalizedPath: string, normalizedNewPath: string, option: boolean): Promise<void>;
-        /**
-         * @internal
-         */
+        /** @internal */
         reconcileFile(normalizedPath: string, normalizedNewPath: string, option: boolean): Promise<void>;
-        /**
-         * @internal
-         */
+        /** @internal */
         reconcileFileCreation(normalizedPath: string, normalizedNewPath: string, option: boolean): Promise<void>;
-        /**
-         * @internal
-         */
+        /** @internal */
         reconcileFileInternal(normalizedPath: string, normalizedNewPath: string): Promise<void>;
-        /**
-         * @internal
-         */
+        /** @internal */
         reconcileFolderCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
-        /**
-         * @internal
-         */
+        /** @internal */
         reconcileInternalFile(normalizedPath: string): Promise<void>;
-        /**
-         * @internal
-         */
+        /** @internal */
         reconcileSymbolicLinkCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
-        /**
-         * @internal Remove file from files listing and trigger deletion event
-         */
+        /** @internal Remove file from files listing and trigger deletion event */
         removeFile(normalizedPath: string): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         startWatchpath(normalizedPath: string): Promise<void>;
-        /**
-         * @internal Remove all listeners
-         */
+        /** @internal Remove all listeners */
         stopWatch(): void;
-        /**
-         * @internal Remove listener on specific path
-         */
+        /** @internal Remove listener on specific path */
         stopWatchPath(normalizedPath: string): void;
-        /**
-         * @internal Set whether OS is insensitive to case
-         */
+        /** @internal Set whether OS is insensitive to case */
         testInsensitive(): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         thingsHappening(): void;
-        /**
-         * @internal Trigger an event on handler
-         */
-        // trigger(e: unknown, t: unknown, n: unknown, i: unknown): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         update(normalizedPath: string): unknown;
-        /**
-         * @internal Add change watcher to path
-         */
+        /** @internal Add change watcher to path */
         watch(normalizedPath: string): Promise<void>;
-        /**
-         * @internal Watch recursively for changes
-         */
+        /** @internal Watch recursively for changes */
         watchHiddenRecursive(normalizedPath: string): Promise<void>;
     }
 
-    /**
-     * @todo Missing functions related to ranges and markdown
-     */
-    interface ExtendedEditor extends Editor {
+    interface EditableFileView {
         /**
-         * Linked Editor manager instance
+         * The file that is currently being renamed
          */
-        editorComponent: undefined | MarkdownScrollableEditView;
-
-        /**
-         * Currently active CM instance
-         * @remark Can be null when Editor is not instantiated
-         */
-        get activeCm(): EditorView | null;
-        /**
-         * Whether the editor is embedded in a table cell
-         */
-        get inTableCell(): boolean;
-        
-        /**
-         * Make ranges of text highlighted within the editor given specified class (style)
-         */
-        addHighlights(ranges: EditorRange[], style: 'is-flashing' | 'obsidian-search-match-highlight', remove_previous: boolean, range?: EditorSelection): void;
-        /**
-         * Convert editor position to screen position
-         * @param pos Editor position
-         * @param relative_to_editor Relative to the editor or the application window
-         */
-        coordsAtPos(pos: EditorPosition, relative_to_editor: boolean): { left: number, top: number, bottom: number, right: number };
-        /**
-         * Unfolds all folded lines one level up
-         * @remark If level 1 and 2 headings are folded, level 2 headings will be unfolded
-         */
-        foldLess(): void;
-        /**
-         * Folds all the blocks that are of the lowest unfolded level
-         * @remark If there is a document with level 1 and 2 headings, level 2 headings will be folded
-         */
-        foldMore(): void;
-        /**
-         * Get all ranges that can be folded away in the editor
-         */
-        getAllFoldableLines(): { from: number, to: number }[];
-        /**
-         * Get a clickable link - if it exists - at specified position
-         */
-        getClickableTokenAt(pos: EditorPosition): { start: EditorPosition, end: EditorPosition, text: string, type: string } | null;
-        /**
-         * Get all blocks that were folded by their starting character position
-         */
-        getFoldOffsets(): Set<number>;
-        /**
-         * Checks whether the editor has a highlight of specified class
-         * @remark If no style is specified, checks whether the editor has unknown highlights
-         */
-        hasHighlight(style?: string): boolean;
-        /**
-         * Wraps current line around specified characters
-         * @remark Was added in a recent Obsidian update (1.4.0 update cycle)
-         **/
-        insertBlock(start: string, end: string): void;
-        /**
-         * Get the closest character position to the specified coordinates
-         */
-        posAtCoords(coords: { left: number, top: number }): EditorPosition;
-        /**
-         * Removes all highlights of specified class
-         */
-        removeHighlights(style: string): void;
-        /**
-         * Adds a search cursor to the editor
-         */
-        searchCursor(searchString: string): SearchCursor;
-        /**
-         * Applies specified markdown syntax to selected text or word under cursor
-         */
-        toggleMarkdownFormatting(syntax: 'bold' | 'italic' | 'strikethrough' | 'highlight' | 'code' | 'math' | 'comment'): void;
+        fileBeingRenamed: null | TFile;
     }
 
     interface Editor {
@@ -2421,13 +1285,13 @@ declare module 'obsidian' {
          */
         containerEl: HTMLElement;
 
-
         /**
          * Clean-up function executed after indenting lists
          */
         afterIndent(): void;
         /**
          * Expand text
+         *
          * @internal
          */
         expandText(): void;
@@ -2453,6 +1317,7 @@ declare module 'obsidian' {
         insertMathJax(): void;
         /**
          * Insert specified text at the current cursor position
+         *
          * @remark Might be broken, inserts at the end of the document
          */
         insertText(text: string): void;
@@ -2486,6 +1351,7 @@ declare module 'obsidian' {
         toggleNumberList(): void;
         /**
          * Convert word under cursor into a wikilink
+         *
          * @param embed Whether to embed the link or not
          */
         triggerWikiLink(embed: boolean): void;
@@ -2495,576 +1361,6 @@ declare module 'obsidian' {
         unindentList(): void;
     }
 
-    interface EventRef {
-        /**
-         * Context applied to the event callback
-         */
-        ctx?: unknown;
-
-        /**
-         * Events object the event was registered on
-         */
-        e: Events;
-
-        /**
-         * Function to be called on event trigger on the events object
-         */
-        fn(...arg: unknown[]): void;
-
-        /**
-         * Event name the event was registered on
-         */
-        name: string;
-    }
-
-    interface FileManager {
-        /**
-         * Reference to App
-         */
-        app: App;
-        /**
-         * Creates a new Markdown file in specified location and opens it in a new view
-         * @param path - Path to the file to create (missing folders will be created)
-         * @param manner - Where to open the view containing the new file
-         */
-        createAndOpenMarkdownFile(path: string, location: PaneType): Promise<void>;
-        /**
-         * Create a new file in the vault at specified location
-         * @param location - Location to create the file in, defaults to root
-         * @param filename - Name of the file to create, defaults to "Untitled" (incremented if file already exists)
-         * @param extension - Extension of the file to create, defaults to "md"
-         * @param contents - Contents of the file to create, defaults to empty string
-         */
-        createNewFile(location: TFolder, filename: string, extension: string, contents: string): Promise<TFile>;
-        /**
-         * Creates a new untitled folder in the vault at specified location
-         * @param location - Location to create the folder in, defaults to root
-         */
-        createNewFolder(location: TFolder): Promise<TFolder>;
-        /**
-         * Creates a new Markdown file in the vault at specified location
-         */
-        createNewMarkdownFile(location: TFolder, filename: string, contents: string): Promise<TFile>;
-        /**
-         * Creates a new Markdown file based on linktext and path
-         * @param filename - Name of the file to create
-         * @param path - Path to where the file should be created
-         */
-        createNewMarkdownFileFromLinktext(filename: string, path: string): Promise<TFile>;
-        /**
-         * @internal
-         */
-        getAllLinkResolutions(): [];
-        /**
-         * Gets the folder that new markdown files should be saved to, based on the current settings
-         * @param path - The path of the current opened/focused file, used when the user wants new files to be created in the same folder as the current file
-         */
-        getMarkdownNewFileParent(path: string): TFolder;
-        /**
-         * Insert text into a file
-         * @param file - File to insert text into
-         * @param primary_text - Text to insert (will not be inserted if secondary_text exists)
-         * @param basename - ???
-         * @param secondary_text - Text to insert (always inserted)
-         * @param atStart - Whether to insert text at the start or end of the file
-         */
-        insertTextIntoFile(file: TFile, primary_text: string, basename: string, secondary_text: string, atStart: boolean): Promise<void>;
-        /**
-         * Iterate over all links in the vault with callback
-         * @param callback - Callback to execute for each link
-         */
-        iterateAllRefs(callback: (path: string, link: PositionedReference) => void): void;
-        /**
-         * Merge two files
-         * @param file - File to merge to
-         * @param otherFile - File to merge from
-         * @param override - If not empty, will override the contents of the file with this string
-         * @param atStart - Whether to insert text at the start or end of the file
-         */
-        mergeFile(file: TFile, otherFile: TFile, override: string, atStart: boolean): Promise<void>;
-        /**
-         * Prompt the user to delete a file
-         */
-        promptForDeletion(file: TFile): Promise<void>;
-        /**
-         * Prompt the user to rename a file
-         */
-        promptForFileRename(file: TFile): Promise<void>;
-        /**
-         * @internal
-         * Register an extension to be the parent for a specific file type
-         */
-        registerFileParentCreator(extension: string, location: TFolder): void;
-        /**
-         * @internal
-         * @param callback - Callback to execute for each link
-         */
-        runAsyncLinkUpdate(callback: (link: LinkUpdate) => unknown): void;
-        /**
-         * @internal
-         * @param path
-         * @param data
-         */
-        storeTextFileBackup(path: string, data: string): void;
-        /**
-         * Remove a file and put it in the trash (no confirmation modal)
-         */
-        trashFile(file: TFile): Promise<void>;
-        /**
-         * @internal: Unregister extension as root input directory for file type
-         */
-        unregisterFileCreator(extension: string): void;
-        /**
-         * @internal
-         */
-        updateAllLinks(links: unknown[]): Promise<void>;
-        /**
-         * @internal
-         */
-        updateInternalLinks(data: unknown): unknown;
-
-        /**
-         * @internal
-         */
-        fileParentCreatorByType: Map<string, (path: string) => TFolder>;
-        /**
-         * @internal
-         */
-        inProgressUpdates: null | unknown[];
-        /**
-         * @internal
-         */
-        linkUpdaters: {
-            canvas: {
-                app: App,
-                canvas: unknown
-            }
-        };
-        /**
-         * @internal
-         */
-        updateQueue: {
-            promise: Promise<void>
-        }
-        /**
-         * Reference to Vault
-         */
-        vault: Vault;
-    }
-
-    interface FileSystemAdapter extends DataAdapter {
-    }
-
-    
-    interface EmbedContext {
-        /**
-         * Reference to the app
-         */
-        app: App;
-        /**
-         * Text that should be displayed in the embed
-         */
-        linktext?: string;
-        /**
-         * Optional path to the current open file
-         */
-        sourcePath?: string;
-        /**
-         * Element where the embed should be displayed
-         */
-        containerEl: HTMLElement;
-        /**
-         * Whether the embed should be dynamic (CM) or static (postProcessed)
-         */
-        displayMode?: boolean;
-        /**
-         * Whether the embed should be an inline embed
-         */
-        showInline?: boolean;
-        /**
-         * @internal
-         */
-        state?: unknown;
-        /**
-         * Depth of the embed within its container (how many levels of embeds are above it)
-         */
-        depth?: number;
-    }
-
-    /**
-     * Constructor for an embeddable widget
-     */
-    type EmbedableConstructor = (context: EmbedContext, file: TFile, path?: string) => Component;
-
-    interface EmbedRegistry extends Events {
-        /**
-         * Mapping of file extensions to constructors for embeddable widgets
-         */
-        embedByExtension: Record<string, EmbedableConstructor>;
-
-        /**
-         * Get the embed constructor for a specific file type
-         */
-        getEmbedCreator(file: TFile): EmbedableConstructor | null;
-        /**
-         * Check whether a file extension has a registered embed constructor
-         */
-        isExtensionRegistered(extension: string): boolean;
-        /**
-         * Register an embed constructor for a specific file extension
-         */
-        registerExtension(extension: string, embedCreator: EmbedableConstructor): void;
-        /**
-         * Register an embed constructor for a list of file extensions
-         */
-        registerExtensions(extensions: string[], embedCreator: EmbedableConstructor): void;
-        /**
-         * Unregister an embed constructor for a specific file extension
-         */
-        unregisterExtension(extension: string): void;
-        /**
-         * Unregister an embed constructor for a list of file extensions
-         */
-        unregisterExtensions(extensions: string[]): void;
-    }
-    
-    interface EditorSuggests {
-        /**
-         * Currently active and rendered editor suggestion popup
-         */
-        currentSuggest: null | EditorSuggest<any>;
-        /**
-         * Registered editor suggestions
-         * @remark Used for providing autocompletions for specific strings
-         * @tutorial Reference official documentation under EditorSuggest<T> for usage
-         */
-        suggests: EditorSuggest<any>[];
-
-        /**
-         * Add a new editor suggestion to the list of registered suggestion providers
-         */
-        addSuggest(suggest: EditorSuggest<any>): void;
-        /**
-         * Close the currently active editor suggestion popup
-         */
-        close(): void;
-        /**
-         * Whether there is a editor suggestion popup active and visible
-         */
-        isShowingSuggestion(): boolean;
-        /**
-         * Remove a registered editor suggestion from the list of registered suggestion providers
-         */
-        removeSuggest(suggest: EditorSuggest<any>): void;
-        /**
-         * Update position of currently active and rendered editor suggestion popup
-         */
-        reposition(): void;
-        /**
-         * Set the currently active editor suggestion popup to specified suggestor
-         */
-        setCurrentSuggest(suggest: EditorSuggest<any>): void;
-        /**
-         * Run check on focused editor to see whether a suggestion should be triggered and rendered
-         */
-        trigger(editor: MarkdownBaseView, t: TFile, n: boolean): void;
-    }
-
-    
-    interface PopoverSuggest<T> {
-        /**
-         * Whether the suggestion popup is currently open and visible
-         */
-        isOpen: boolean
-        /**
-         * Suggestion container element
-         */
-        suggestEl: HTMLElement;
-        /**
-         * Handles selection and rendering of the suggestions
-         */
-        suggestions: SuggestionContainer<T>;
-    }
-    
-    class FileSuggest<T> extends EditorSuggest<T> {
-        /**
-         * Manages fetching of suggestions from metadatacache 
-         */
-        suggestManager: FileSuggestManager;
-
-        // TODO: Add extra typings
-    }
-    
-    interface EditorSuggest<T> {
-        showSuggestions(results: SearchResult[]): void;
-        
-        // TODO: Each suggest returns different results for SearchResults
-    }
-
-    /**
-     * Helper class for managing queues of asynchronous tasks
-     */
-    interface Runnable {
-        cancelled: boolean;
-        onCancel: null | (() => void);
-        onStart: null | (() => void);
-        onStop: null | (() => void);
-        running: boolean;
-
-        cancel(): void;
-        isCancelled(): boolean;
-        isRunning(): boolean;
-        start(): void;
-        stop(): void;
-    }
-    
-    interface FileSuggestManager {
-        /**
-         * Reference to the app
-         */
-        app: App;
-
-        /**
-         * Selection of files and their paths that can be matched to
-         */
-        fileSuggestions: null | { file: TFile | null, path: string }[];
-        /**
-         * Determine the source path of current context
-         */
-        getSourcePath: () => null | string;
-        /**
-         * Whether search should be vault-wide rather than scoped to current file
-         */
-        global: boolean
-        /**
-         * Type of suggestions that should be provided
-         */
-        mode: "file" | "heading" | "block" | "display" | string;
-        /**
-         * Executor of the search
-         */
-        runnable: null | Runnable;
-
-        /**
-         * Get suggestions for block query
-         */
-        getBlockSuggestions(runner: Runnable, file: TFile, text: string): Promise<SearchResult[]>;
-        /**
-         * Get suggestions for display alias query
-         */
-        getDisplaySuggestions(runner: Runnable, linkpath: string, subpath: string, alias: string): Promise<SearchResult[]>;
-        /**
-         * Get suggestions for file query
-         */
-        getFileSuggestions(runner: Runnable, text: string): Promise<SearchResult[]>;
-        /**
-         * Get suggestions for global block query
-         */
-        getGlobalBlockSuggestions(runner: Runnable, text: string): Promise<SearchResult[]>;
-        /**
-         * Get suggestions for global heading query
-         */
-        getGlobalHeadingSuggestions(runner: Runnable, text: string): Promise<SearchResult[]>;
-        /**
-         * Get suggestions for file heading query
-         */
-        getHeadingSuggestions(runner: Runnable, file: TFile, text: string): Promise<SearchResult[]>;
-        /**
-         * Get suggestions for current input text
-         * @remark Type is determined from text: e.g. [[Thi]] will give completions for files, [[Thi^]] for blocks, etc.
-         */
-        getSuggestionsAsync(runner: Runnable, text: string): Promise<SearchResult[]>;
-        /**
-         * Match search fragments to a block
-         */
-        matchBlock(path: string, file: TFile, block: BlockCache, sourcePath: null | string, content: string, text_parts: string[]): SearchResult | null;
-    }
-
-    interface SuggestionContainer<T> {
-        /**
-         * Which suggestions should be picked from
-         */
-        chooser: EditorSuggest<T>;
-        /**
-         * Pop-up element that displays the suggestions
-         */
-        containerEl: HTMLElement;
-        /**
-         * The currently focused item
-         */
-        selectedItem: number;
-        /**
-         * List of all possible suggestions as elements
-         */
-        suggestions: HTMLElement[];
-        /**
-         * List of all possible suggestions as data
-         */
-        values: SearchResult[];
-
-        /**
-         * Add an empty message with provided text
-         */
-        addMessage(text: string): HTMLElement;
-        /**
-         * Add suggestion to container
-         */
-        addSuggestion(suggestion: SearchResult): void;
-        /**
-         * Set selected item to one specified by index, if keyboard navigation, force scroll into view
-         * @remark Prefer setSelectedItem, which clamps the index to within suggestions array
-         */
-        forceSetSelectedItem(index: number, event: Event): void;
-        /**
-         * Move selected item to next suggestion
-         */
-        moveDown(event: KeyboardEvent): boolean;
-        /**
-         * Move selected item to previous suggestion
-         */
-        moveUp(event: KeyboardEvent): boolean;
-        /**
-         * Process click on suggestion item
-         */
-        onSuggestionClick(event: MouseEvent, element: HTMLElement): void;
-        /**
-         * Process hover on suggestion item
-         */
-        onSuggestionMouseover(event: MouseEvent, element: HTMLElement): unknown;
-        /**
-         * Move selected item to the one in the next 'page' (next visible block)
-         */
-        pageDown(event: KeyboardEvent): boolean;
-        /**
-         * Move selected item to the one in the previous 'page' (previous visible block)
-         */
-        pageUp(event: KeyboardEvent): boolean;
-        /**
-         * Set selected item to one specified by index, invokes forceSetSelectedItem
-         */
-        setSelectedItem(index: number, event: Event): void;
-        /**
-         * Empties original container and adds multiple suggestions
-         */
-        setSuggestions(suggestions: SearchResult[]): void;
-        /**
-         * Use currently selected suggestion as the accepted one
-         */
-        useSelectedItem(event: Event): boolean;
-
-        /**
-         * Amount of suggestions that can be displayed at once within containerEl
-         */
-        get numVisibleItems(): number;
-
-        /**
-         * Height in pixels of the selected item
-         */
-        get rowHeight(): number;
-    }
-
-
-    interface Component {
-        /**
-         * Child Components attached to current component, will be unloaded on unloading parent component
-         */
-        _children: Component[];
-        /**
-         * Events that are attached to the current component, will be detached on unloading parent component
-         */
-        _events: EventRef[];
-        /**
-         * Whether the component and its children are loaded
-         */
-        _loaded: boolean;
-    }
-    
-    interface FoldInfo {
-        folds: { from: number, to: number }[], 
-        lines: number
-    }
-    
-    interface SearchCursor {
-        /**
-         * Current editor search position
-         */
-        current(): { from: EditorPosition, to: EditorPosition };
-        /**
-         * All search results
-         */
-        findAll(): { from: EditorPosition, to: EditorPosition }[];
-        /**
-         * Next editor search position
-         */
-        findNext(): { from: EditorPosition, to: EditorPosition };
-        /**
-         * Previous editor search position
-         */
-        findPrevious(): { from: EditorPosition, to: EditorPosition };
-        /**
-         * Replace current search result with specified text
-         * @remark origin is used by CodeMirror to determine which component was responsible for the change
-         */
-        replace(replacement: string, origin: string): void;
-        /**
-         * Replace all search results with specified text
-         */
-        replaceAll(replacement: string, origin: string): void;
-    }
-
-    interface ClipBoardManager {
-        /**
-         * Reference to the app
-         */
-        app: App;
-        /**
-         * Reference to the Editor View
-         */
-        info: MarkdownView;
-
-        /**
-         * Get current path of editor view for determining storage location embed
-         */
-        getPath(): string;
-        /**
-         * Process incoming data (image, text, url, html)
-         * @remark When processing HTML, function will be async
-         */
-        handleDataTransfer(data: DataTransfer): null | Promise<void>;
-        /**
-         * Handle an incoming drag-over event
-         */
-        handleDragOver(event: DragEvent): void;
-        /**
-         * Handle an incoming drag-drop event
-         */
-        handleDrop(event: DragEvent): boolean;
-        /**
-         * Process a drop event into the editor
-         */
-        handleDropIntoEditor(event: DragEvent): null | string;
-        /**
-         * Handle an incoming paste event
-         */
-        handlePaste(event: ClipboardEvent): boolean;
-        /**
-         * Insert single file as embed into the editor
-         */
-        insertAttachmentEmbed(file: TAbstractFile, replace: boolean): Promise<void>;
-        /**
-         * Insert files from drop-event into the editor
-         */
-        insertFiles(files: ImportedAttachments[]): Promise<void>;
-        /**
-         * Save an attachment of specified name and extension to the vault
-         * @remark Invokes insertAttachmentEmbed
-         */
-        saveAttachment(name: string, extension: string, data: ArrayBuffer, replace: boolean): Promise<void>;
-    }
-
-    /**
-     * Extends Search Component to provide highlight and search functionality for editor objects
-     */
     interface EditorSearchComponent extends AbstractSearchComponent {
         /**
          * Search cursor for editor, handles search and replace functionality for editor
@@ -3105,6 +1401,7 @@ declare module 'obsidian' {
         hide(): void;
         /**
          * Add highlights for specified ranges
+         *
          * @remark Invokes editor.addHighlights
          */
         highlight(ranges: EditorRange[]): void;
@@ -3138,900 +1435,92 @@ declare module 'obsidian' {
         show(replace: boolean): void;
     }
 
-    interface AbstractSearchComponent {
+    interface EditorSuggest<T> {
+        showSuggestions(results: SearchResult[]): void;
+    }
+
+    interface EditorSuggests {
+        /**
+         * Currently active and rendered editor suggestion popup
+         */
+        currentSuggest: null | EditorSuggest<any>;
+        /**
+         * Registered editor suggestions
+         *
+         * @remark Used for providing autocompletions for specific strings
+         * @tutorial Reference official documentation under EditorSuggest<T> for usage
+         */
+        suggests: EditorSuggest<any>[];
+
+        /**
+         * Add a new editor suggestion to the list of registered suggestion providers
+         */
+        addSuggest(suggest: EditorSuggest<any>): void;
+        /**
+         * Close the currently active editor suggestion popup
+         */
+        close(): void;
+        /**
+         * Whether there is a editor suggestion popup active and visible
+         */
+        isShowingSuggestion(): boolean;
+        /**
+         * Remove a registered editor suggestion from the list of registered suggestion providers
+         */
+        removeSuggest(suggest: EditorSuggest<any>): void;
+        /**
+         * Update position of currently active and rendered editor suggestion popup
+         */
+        reposition(): void;
+        /**
+         * Set the currently active editor suggestion popup to specified suggestor
+         */
+        setCurrentSuggest(suggest: EditorSuggest<any>): void;
+        /**
+         * Run check on focused editor to see whether a suggestion should be triggered and rendered
+         */
+        trigger(editor: MarkdownBaseView, t: TFile, n: boolean): void;
+    }
+
+    interface EditorViewI extends EditorView {
+        cm?: CMView;
+    }
+
+    interface EmbedContext {
         /**
          * Reference to the app
          */
         app: App;
         /**
-         * The container element in which the search component exists (i.e. Editor)
+         * Element where the embed should be displayed
          */
         containerEl: HTMLElement;
         /**
-         * Keyscope for search component 
+         * Depth of the embed within its container (how many levels of embeds are above it)
          */
-        scope: Scope;
+        depth?: number;
         /**
-         * Container for all the action buttons
+         * Whether the embed should be dynamic (CM) or static (postProcessed)
          */
-        searchButtonContainerEl: HTMLElement;
+        displayMode?: boolean;
         /**
-         * Container for the search component itself
+         * Text that should be displayed in the embed
          */
-        searchContainerEl: HTMLElement;
+        linktext?: string;
         /**
-         * Container for the replacement input field
+         * Whether the embed should be an inline embed
          */
-        replaceInputEl: HTMLInputElement;
+        showInline?: boolean;
         /**
-         * Container for the search input field
+         * Optional path to the current open file
          */
-        searchInputEl: HTMLInputElement;
-
-        /**
-         * Returns the current search query
-         */
-        getQuery(): string;
-        /**
-         * Switch to the next inputElement
-         */
-        goToNextInput(event: KeyboardEvent): unknown;
-        /**
-         * Invokes findNextOrReplace
-         */
-        onEnter(event: KeyboardEvent): unknown;
-        /**
-         * Invokes findPrevious
-         */
-        onShiftEnter(event: KeyboardEvent): unknown;
+        sourcePath?: string;
+        /** @internal */
+        state?: unknown;
     }
 
-
-    /**
-     * Live preview editor view
-     * @todo Does *not* contain a hoverPopover element
-     */
-    interface MarkdownEditView extends MarkdownScrollableEditView {
-        /**
-         * Frontmatter editor extension for the editor
-         */
-        propertiesExtension: Extension[];
-        /**
-         * Editing mode of the editor
-         */
-        type: "source"
-        /**
-         * View the source view editor is attached to
-         */
-        view: MarkdownView;
-
-        /**
-         * Save functionality to execute before editor view unload
-         */
-        beforeUnload(): void;
-        /**
-         * Clear the editor view
-         */
-        clear(): void;
-        /**
-         * Destroy/Detach the editor view
-         */
-        destroy(): void;
-        /**
-         * Constructs extensions for the editor based on user settings
-         * @remark Creates extension for properties rendering
-         */
-        getDynamicExtensions(): Extension[];
-        /**
-         * Gets the ephemeral (non-persistent) state of the editor
-         */
-        getEphemeralState(state: any): { cursor: EditorRange } & any;
-        /**
-         * Get the current folds of the editor
-         */
-        getFoldInfo(): null | FoldInfo;
-        /**
-         * Get the main selected range as string
-         */
-        getSelection(): string;
-        /**
-         * Add highlights for specified ranges
-         * @remark Only ranges parameter is used
-         */
-        highlightSearchMatches(ranges: EditorRange[], style?: 'is-flashing' | 'obsidian-search-match-highlight', remove_previous?: boolean, range?: EditorSelection): void;
-        /**
-         * Execute functionality on CM editor state update
-         */
-        onUpdate(update: ViewUpdate, changed: boolean): void;
-        /**
-         * Debounced onInternalDataChange of view
-         */
-        requestOnInternalDataChange(): void;
-        /**
-         * Debounced onMarkdownFold of view
-         */
-        requestSaveFolds(): unknown;
-        /**
-         * Set the state of the editor
-         */
-        set(data: string, clear: boolean): void;
-        /**
-         * Set the ephemeral (non-persistent) state of the editor
-         */
-        setEphemeralState(state: any): void;
-        /**
-         * Set highlight of any search match
-         */
-        setHighlight(match: {focus: boolean, startLoc?: number, endLoc?: number, line?: number, match?: unknown}): void;
-        /**
-         * Set the state of the editor (applies selections, scrolls, ...)
-         */
-        setState(state: any): void;
-        /**
-         * Render the editor and the metadata-editor element
-         */
-        show(): void;
-        /**
-         * Update the bottom padding of the CodeMirror contentdom (based on backlinksEl)
-         */
-        updateBottomPadding(height: number): void;
-        /**
-         * Update options of the editor from settings
-         */
-        updateOptions(): void;
-    }
-
-    
-    class IFramedMarkdownEditor extends MarkdownScrollableEditView {
-        constructor(context: WidgetEditorView);
-        
-        /**
-         * Function that cleans up the iframe and listeners
-         */
-        cleanup: null | (() => void);
-        /**
-         * Element where the editor is embedded into
-         */
-        iframeEl: null | HTMLIFrameElement;
-        
-        /**
-         * Executes cleanup function if exists
-         */
-        cleanupIframe(): void;
-        /**
-         * Constructs extensions for the editor based on user settings
-         * @remark Creates extension for overriding escape keymap to showPreview
-         */
-        getDynamicExtensions(): Extension[];
-        /**
-         * Loads the iframe element and prepare cleanup function
-         */
-        onIframeLoad(): void;
-        /**
-         * Execute functionality on CM editor state update
-         */
-        onUpdate(update: ViewUpdate, changed: boolean): void;
-        /**
-         * Execute cleanup of the iframe
-         */
-        onunload(): void;
-    }
-    
-    class MarkdownScrollableEditView extends MarkdownBaseView {
-        /**
-         * List of CSS classes applied to the editor
-         */
-        cssClasses: []
-        /**
-         * Whether the editor is currently scrolling
-         */
-        isScrolling: boolean;
-        /**
-         * Search component for the editor, provides highlight and search functionality
-         */
-        search: EditorSearchComponent;
-        /**
-         * Container for the editor, handles editor size
-         */
-        sizerEl: HTMLElement;
-        /**
-         * Scope for the search component, if exists
-         */
-        scope: Scope | undefined;
-        
-        
-        /**
-         * Set the scroll count of the editor scrollbar
-         */
-        applyScroll(scroll: number): void;
-        /**
-         * Constructs local (always active) extensions for the editor
-         * @remark Creates extensions for list indentation, tab indentations
-         */
-        buildLocalExtensions(): Extension[];
-        /**
-         * Focus the editor (and for mobile: render keyboard)
-         */
-        focus(): void;
-        /**
-         * Constructs extensions for the editor based on user settings
-         * @remark Creates toggleable extensions for showing line numbers, indentation guides, 
-         *          folding, brackets pairing and properties rendering
-         */
-        getDynamicExtensions(): Extension[];
-        /**
-         * Get the current scroll count of the editor scrollbar
-         */
-        getScroll(): number;
-        /**
-         * Invokes onMarkdownScroll on scroll
-         */
-        handleScroll(): void;
-        /**
-         * Hides the editor (sets display: none)
-         */
-        hide(): void;
-        /**
-         * Clear editor cache and refreshes editor on app css change
-         */
-        onCssChange(): void;
-        /**
-         * Update editor size and bottom padding on resize
-         */
-        onResize(): void;
-        /**
-         * Update editor suggest position and invokes handleScroll on scroll
-         */
-        onScroll(): void;
-        /**
-         * Execute functionality on CM editor state update
-         */
-        onUpdate(update: ViewUpdate, changed: boolean): void;
-        /**
-         * Close editor suggest and removes highlights on click
-         */
-        onViewClick(event?: MouseEvent): void;
-        /**
-         * Add classes to the editor, functions as a toggle
-         */
-        setCssClass(classes: string[]): void;
-        /**
-         * Reveal the editor (sets display: block)
-         */
-        show(): void;
-        /**
-         * Reveal the search (and replace) component
-         */
-        showSearch(replace: boolean): void;
-        /**
-         * Update the bottom padding of the CodeMirror contentdom
-         */
-        updateBottomPadding(height: number): void;
-    }
-
-    /**
-     * @todo
-     */
-    class TableCellEditor extends MarkdownBaseView implements TableCell {
-        
-    }
-    
-    interface TableEditor {
-        
-    }
-    
-    /**
-     * @todo
-     */
-    interface TableCell {
-        col: number;
-        contentEl: HTMLElement;
-        dirty: boolean;
-        el: HTMLElement;
-        end: number;
-        padEnd: number;
-        padStart: number;
-        row: number;
-        start: number;
-        table: TableCellEditor;
-        text: string;
-    }
-    
-    class MarkdownBaseView extends Component {
-        /**
-         * Reference to the app
-         */
-        app: App;
-        /**
-         * Callback to clear all elements 
-         */
-        cleanupLivePreview: null | (() => void);
-        /**
-         * Manager that handles pasting text, html and images into the editor
-         */
-        clipboardManager: ClipBoardManager;
-        /**
-         * Codemirror editor instance
-         */
-        cm: EditorView;
-        /**
-         * Whether CodeMirror is initialized
-         */
-        cmInit: boolean;
-        /**
-         * Container element of the editor view
-         */
-        containerEl: HTMLElement;
-        /**
-         * Popup element for internal link
-         */
-        cursorPopupEl: HTMLElement | null;
-        /**
-         * Obsidian editor instance 
-         * @remark Handles formatting, table creation, highlight adding, etc.
-         */
-        editor: ExtendedEditor;
-        /**
-         * Element in which the CodeMirror editor resides
-         */
-        editorEl: HTMLElement;
-        /**
-         * Editor suggestor for autocompleting files, links, aliases, etc.
-         */
-        editorSuggest: EditorSuggests;
-        /**
-         * The CodeMirror plugins that handle the rendering of, and interaction with Obsidian's Markdown
-         */
-        livePreviewPlugin: Extension[];
-        /**
-         * Local (always active) extensions for the editor
-         */
-        localExtensions: Extension[];
-        /**
-         * Whether live preview rendering is disabled
-         */
-        sourceMode: boolean;
-        /**
-         * Reference to editor attached to table cell, if any
-         */
-        tableCell: null | TableCellEditor;
-        /**
-         * Controller of the editor view 
-         */
-        owner: MarkdownFileInfo;
-
-        /**
-         * Currently active CM instance (table cell CM or main CM)
-         */
-        get activeCM(): EditorView;
-        /**
-         * Returns attached file of the owner instance
-         */
-        get file(): TFile | null;
-        /**
-         * Returns path of the attached file
-         */
-        get path(): string;
-        
-        /**
-         * Apply fold history to editor
-         */
-        applyFoldInfo(info: FoldInfo): void;
-        /**
-         * Constructs local (always active) extensions for the editor
-         * @remark Creates extensions for handling dom events, editor info statefields, update listener, suggestions
-         */
-        buildLocalExtensions(): Extension[];
-        /**
-         * Cleanup live preview, remove and then re-add all editor extensions 
-         */
-        clear(): void;
-        /**
-         * Clean up live preview, remove all extensions, destory editor
-         */
-        destroy(): void;
-        /**
-         * Removes specified tablecell
-         */
-        destroyTableCell(cell?: TableCellEditor): void;
-        /**
-         * Edit a specified table cell, creating a table cell editor
-         */
-        editTableCell(cell: TableEditor, new_cell: TableCell): TableCellEditor;
-        /**
-         * Get the current editor document as a string
-         */
-        get(): string;
-        /**
-         * Constructs extensions for the editor based on user settings
-         * @remark Creates extension for tab size, RTL rendering, spellchecking, pairing markdown syntax, live preview and vim
-         */
-        getDynamicExtensions(): Extension[];
-        /**
-         * Get the current folds of the editor
-         */
-        getFoldInfo(): null | FoldInfo;
-        /**
-         * Builds all local extensions and assigns to this.localExtensions
-         * @remark Will build extensions if they were not already built
-         */
-        getLocalExtensions(): unknown;
-        /**
-         * Creates menu on right mouse click
-         */
-        onContextMenu(event: PointerEvent, x: boolean): Promise<void>;
-        /**
-         * Execute click functionality on token on mouse click
-         */
-        onEditorClick(event: MouseEvent, element?: HTMLElement): void;
-        /**
-         * Execute drag functionality on drag start
-         * @remark Interfaces with dragManager
-         */
-        onEditorDragStart(event: DragEvent): void;
-        /**
-         * Execute hover functionality on mouse over event
-         */
-        onEditorLinkMouseover(event: MouseEvent, target: HTMLElement): void;
-        /**
-         * Execute context menu functionality on right mouse click
-         * @deprecated Use onContextMenu instead
-         */
-        onMenu(event: MouseEvent): void;
-        /**
-         * Reposition suggest and scroll position on resize
-         */
-        onResize(): void;
-        /**
-         * Execute functionality on CM editor state update
-         */
-        onUpdate(update: ViewUpdate, changed: boolean): void;
-        /**
-         * Reinitialize the editor inside new container
-         */
-        reinit(): void;
-        /**
-         * Move the editor into the new container
-         */
-        reparent(new_container: HTMLElement): void;
-        /**
-         * Bodge to reset the syntax highlighting
-         * @remark Uses single-character replacement transaction
-         */
-        resetSyntaxHighlighting(): void;
-        /**
-         * @internal Save history of file and data (for caching, for faster reopening of same file in editor)
-         */
-        saveHistory(): void;
-        /**
-         * Set the state of the editor
-         */
-        set(data: string, clear: boolean): void;
-        /**
-         * Enables/disables frontmatter folding
-         */
-        toggleFoldFrontmatter(): void;
-        /**
-         * Toggle sourcemode for editor and dispatch effect
-         */
-        toggleSource(): void;
-        /**
-         * Execute functionality of token (open external link, open internal link in leaf, ...)
-         */
-        triggerClickableToken(token: Token, new_leaf: boolean): void;
-        /**
-         * @internal Callback for onUpdate functionality added as an extension
-         */
-        updateEvent(): (update: ViewUpdate) => void;
-        /**
-         * In mobile, creates a popover link on clickable token, if exists
-         */
-        updateLinkPopup(): void;
-        /**
-         * Reconfigure/re-add all the dynamic extensions
-         */
-        updateOptions(): void;
-    }
-    
-    interface MetadataWidget {
-        // TODO: Add typings
-    }
-    
-    interface MetadataEntryData {
-        key: string;
-        type: PropertyWidgetType | string;
-        value: any;
-    }
-    
-    
-    interface MetadataEditorProperty extends Component {
-        /**
-         * Reference to the app
-         */
-        app: App;
-        /**
-         * Container element for the metadata editor property
-         */
-        containerEl: HTMLElement;
-        /**
-         * Entry information for the property
-         */
-        entry: MetadataEntryData;
-        /**
-         * Icon element of the property
-         */
-        iconEl: HTMLSpanElement;
-        /**
-         * Key value of the property
-         */
-        keyEl: HTMLElement;
-        /**
-         * Input field for key value of the property
-         */
-        keyInputEl: HTMLInputElement;
-        /**
-         * Metadata editor the property is attached to
-         */
-        metadataEditor: MetadataEditor;
-        /**
-         * Widget that handles user input for this property widget type
-         */
-        rendered: MetadataWidget | null;
-        /**
-         * Info about the inferred and expected property widget given key-value pair
-         */
-        typeInfo: {expected: PropertyWidget, inferred: PropertyWidget}
-        /**
-         * Element that contains the value input or widget
-         */
-        valueEl: HTMLElement;
-        /**
-         * Element containing the displayed warning on malformed property field
-         */
-        warningEl: HTMLElement;
-
-        /**
-         * Focus on the key input element
-         */
-        focusKey(): void;
-        /**
-         * Focus on the property (container element)
-         */
-        focusProperty(): void;
-        /**
-         * Focus on the value input element
-         */
-        focusValue(which?: "both" | "end" | "start"): void
-        /**
-         * Reveal the property menu on click event
-         */
-        handleItemClick(event: MouseEvent): void
-        /**
-         * Focus on property on blur event
-         */
-        handlePropertyBlur(): void;
-        /**
-         * Update key of property and saves, returns false if error
-         */
-        handleUpdateKey(key: string): boolean
-        /**
-         * Update value of property and saves
-         */
-        handleUpdateValue(value: any): void
-        /**
-         * Loads as draggable property element
-         */
-        onload(): void;
-        /**
-         * Render property widget based on type
-         */
-        renderProperty(entry: MetadataEntryData, check_errors?: boolean, use_expected_type?: boolean): void
-        /**
-         * Set the selected class of property
-         */
-        setSelected(selected: boolean): void
-        /**
-         * Reveal property selection menu at mouse event 
-         */
-        showPropertyMenu(event: MouseEvent): void
-    }
-
-    interface MetadataEditor extends Component {
-        /**
-         * Button element for adding a new property 
-         */
-        addPropertyButtonEl: HTMLButtonElement;
-        /**
-         * Reference to the app
-         */
-        app: App;
-        /**
-         * Whether the frontmatter editor is collapsed
-         */
-        collapsed: boolean;
-        /**
-         * Container element for the metadata editor
-         */
-        containerEl: HTMLElement;
-        /**
-         * Element containing metadata table and addPropertyButton
-         */
-        contentEl: HTMLElement;
-        /**
-         * The currently focused property
-         */
-        focusedLine: null | MetadataEditorProperty;
-        /**
-         * Fold button for folding away the frontmatter editor on hovering over headingEl
-         */
-        foldEl: HTMLElement;
-        /**
-         * Heading element for the metadata editor
-         */
-        headingEl: HTMLElement;
-        /**
-         * Hover element container
-         */
-        hoverPopover: null | HoverPopover;
-        /**
-         * Owner of the metadata editor
-         */
-        owner: MarkdownView;
-        /**
-         * All properties existing in the metadata editor
-         */
-        properties: MetadataEntryData[];
-        /**
-         * Element containing all property elements
-         */
-        propertyListEl: HTMLElement;
-        /**
-         * List of all property field editors
-         */
-        rendered: MetadataEditorProperty[];
-        /**
-         * Set of all selected property editors
-         */
-        selectedLines: Set<MetadataEditorProperty>;
-
-        /**
-         * Uncollapse editor if collapsed and create a new property row
-         */
-        addProperty(): void;
-        /**
-         * Clear all properties
-         */
-        clear(): void;
-        /**
-         * Unselect all lines
-         */
-        clearSelection(): void;
-        /**
-         * Focus on property field with given key
-         */
-        focusKey(key: string): void;
-        /**
-         * Focus on property
-         */
-        focusProperty(property: MetadataEditorProperty): void;
-        /**
-         * Focus on property at specified index
-         */
-        focusPropertyAtIndex(index: number): void;
-        /**
-         * Focus on property with value 
-         */
-        focusValue(value: string, which: "both" | "end" | "start"): void;
-        /**
-         * Handle copy event on selection and serialize properties
-         */
-        handleCopy(event: ClipboardEvent): void;
-        /**
-         * Handle cut event and serialize and remove properties
-         */
-        handleCut(event: ClipboardEvent): void;
-        /**
-         * Handle selection of item for drag handling
-         */
-        handleItemSelection(event: PointerEvent, property: MetadataEditorProperty): boolean;
-        /**
-         * Handle key press event for controlling selection or movement of property up/down
-         */
-        handleKeypress(event: KeyboardEvent): void;
-        /**
-         * Handle paste event of properties into metadata editor
-         */
-        handlePaste(event: ClipboardEvent): void;
-        /**
-         * Whether the editor has focus
-         */
-        hasFocus(): boolean;
-        /**
-         * Whether there is a property that is focused
-         */
-        hasPropertyFocused(): boolean;
-        /**
-         * Add new properties to the metadata editor and save
-         */
-        insertProperties(properties: Record<string, any>): void;
-        /**
-         * On vault metadata update, update property render
-         */
-        onMetadataTypeChange(property: MetadataEditorProperty): void;
-        /**
-         * On loading of the metadata editor, register on metadata type change event
-         */
-        onload(): void;
-        /**
-         * Remove specified properties from the metadata editor and save, and reset focus if specified
-         */
-        removeProperties(properties: MetadataEditorProperty[], reset_focus?: boolean): unknown;
-        /**
-         * Reorder the entry to specified index position and save
-         */
-        reorderKey(entry: MetadataEntryData, index: number): unknown;
-        /**
-         * Serialize the properties and save frontmatter
-         */
-        save(): void;
-        /**
-         * Select all property fields
-         */
-        selectAll(): void;
-        /**
-         * Mark specified property as selected
-         */
-        selectProperty(property: MetadataEditorProperty | undefined, select: boolean): void;
-        /**
-         * Convert properties to a serialized object
-         */
-        serialize(): Record<string, any>;
-        /**
-         * Sets frontmatter as collapsed or uncollapsed
-         */
-        setCollapse(collapsed: boolean, x: boolean): void;
-        /**
-         * On context menu event on header element, show property menu
-         */
-        showPropertiesMenu(event: MouseEvent): void;
-        /**
-         * Synchronize data with given properties and re-render them
-         */
-        synchronize(data: Record<string, any>): void;
-        /**
-         * Toggle collapsed state of the metadata editor
-         */
-        toggleCollapse(): void;
-        /**
-         * Convert given properties to a serialized object and store in clipboard as obsidian/properties
-         */
-        _copyToClipboard(event: ClipboardEvent, properties: MetadataEditorProperty[]): void;
-    }
-
-    /**
-     * @todo Documentation is very lacking
-     */
-    class WidgetEditorView extends EmbeddedEditorView {
-        constructor(context: EmbedContext, file: TFile, path?: string);
-
-        /**
-         * Data after reference
-         */
-        after: string;
-        /**
-         * Data before reference
-         */
-        before: string;
-        /**
-         * Full file contents
-         */
-        data: string;
-        /**
-         * File being currently renamed
-         */
-        fileBeingRenamed: null | TFile;
-        /**
-         * Current heading
-         */
-        heading: string;
-        /**
-         * Indent
-         */
-        indent: string;
-        /**
-         * Inline title element
-         */
-        inlineTitleEl: HTMLElement;
-        /**
-         * Full inline content string
-         */
-        lastSavedData: null | string;
-        /**
-         * Whether embedding should be saved twice on save
-         */
-        saveAgain: boolean;
-        /**
-         * Whether the widget is currently saving
-         */
-        saving: boolean;
-        /**
-         * Subpath reference of the path
-         */
-        subpath: string;
-        /**
-         * Whether the subpath was not found in the cache
-         */
-        subpathNotFound: boolean;
-        
-        /**
-         * Push/pop current scope
-         */
-        applyScope(scope: Scope): void;
-        /**
-         * Get the current folds of the editor
-         */
-        getFoldInfo(): null | FoldInfo;
-        /**
-         * Splice incoming data at according to subpath for correct reference, then update heading and render
-         */
-        loadContents(data: string, cache: CachedMetadata): void;
-        /**
-         * Load file from cache based on stored path
-         */
-        loadFile(): Promise<void>;
-        /**
-         * Load file and check if data is different from last saved data, then loads contents
-         */
-        loadFileInternal(data: string, cache?: CachedMetadata): void;
-        /**
-         * Update representation on file finished updating
-         */
-        onFileChanged(file: TFile, data: string, cache: CachedMetadata): void;
-        /**
-         * Update representation on file rename
-         */
-        onFileRename(file: TAbstractFile, oldPath: string): void;
-        /**
-         * Save fold made in the editor to foldmanager
-         */
-        onMarkdownFold(): void;
-        /**
-         * @internal On change of editor title element
-         */
-        onTitleChange(element: HTMLElement): void;
-        /**
-         * @internal On keypress on editor title element
-         */
-        onTitleKeydown(event: KeyboardEvent): void;
-        /**
-         * @internal On pasting on editor title element
-         */
-        onTitlePaste(element: HTMLElement, event: ClipboardEvent): void;
-        /**
-         * On loading widget, register vault change and rename events
-         */
-        onload(): void;
-        /**
-         * On unloading widget, unload component and remove scope
-         */
-        onunload(): void;
-        /**
-         * Save changes made in editable widget
-         */
-        save(data: string, delayed?: boolean): Promise<void>;
-        /**
-         * On blur widget, save title
-         */
-        saveTitle(element: HTMLElement): void;
-        /**
-         * Show preview of widget
-         */
-        showPreview(show?: boolean): void;
-    }
-    
-    export class EmbeddedEditorView extends Component {
+    class EmbeddedEditorView extends Component {
         constructor(app: App, containerEl: HTMLElement, file: TFile | null, state: EditorState);
-        
         /**
          * Reference to the app
          */
@@ -4046,6 +1535,7 @@ declare module 'obsidian' {
         dirty: boolean;
         /**
          * Whether the editor may be edited
+         *
          * @remark Fun fact, setting this to true and calling showEditor() for embedded MD views, allows them to be edited.
          *          Though the experience is a little buggy
          */
@@ -4099,23 +1589,23 @@ declare module 'obsidian' {
          * Get the scroll of the file renderer component
          */
         get scroll(): unknown;
-        
+
         /**
          * Destroy edit component editor and save contents if specified
          */
-        destroyEditor(save?: boolean): void
+        destroyEditor(save?: boolean): void;
         /**
          * Gets currently active mode (editMode returns 'source')
          */
         getMode(): "source" | "preview";
         /**
-         * Trigger markdown scroll on workspace
-         */
-        onMarkdownScroll(): void;
-        /**
          * On load of editor, show preview
          */
         onload(): void;
+        /**
+         * Trigger markdown scroll on workspace
+         */
+        onMarkdownScroll(): void;
         /**
          * On unload of editor, destroy editor and unset workspace activeEditor
          */
@@ -4153,13 +1643,690 @@ declare module 'obsidian' {
          */
         toggleMode(): void;
     }
-    
-    // TODO: At typings for View interfaces
-    interface View {
+
+    interface EmbedRegistry extends Events {
         /**
-         * Whether the leaf may close the view
+         * Mapping of file extensions to constructors for embeddable widgets
          */
-        closeable: boolean;
+        embedByExtension: Record<string, EmbedableConstructor>;
+
+        /**
+         * Get the embed constructor for a specific file type
+         */
+        getEmbedCreator(file: TFile): EmbedableConstructor | null;
+        /**
+         * Check whether a file extension has a registered embed constructor
+         */
+        isExtensionRegistered(extension: string): boolean;
+        /**
+         * Register an embed constructor for a specific file extension
+         */
+        registerExtension(extension: string, embedCreator: EmbedableConstructor): void;
+        /**
+         * Register an embed constructor for a list of file extensions
+         */
+        registerExtensions(extensions: string[], embedCreator: EmbedableConstructor): void;
+        /**
+         * Unregister an embed constructor for a specific file extension
+         */
+        unregisterExtension(extension: string): void;
+        /**
+         * Unregister an embed constructor for a list of file extensions
+         */
+        unregisterExtensions(extensions: string[]): void;
+    }
+
+    interface EventRef {
+        /**
+         * Context applied to the event callback
+         */
+        ctx?: unknown;
+        /**
+         * Events object the event was registered on
+         */
+        e: Events;
+        /**
+         * Event name the event was registered on
+         */
+        name: string;
+
+        /**
+         * Function to be called on event trigger on the events object
+         */
+        fn(...arg: unknown[]): void;
+    }
+
+    interface ExtendedEditor extends Editor {
+        /**
+         * Linked Editor manager instance
+         */
+        editorComponent: undefined | MarkdownScrollableEditView;
+        /**
+         * Currently active CM instance
+         *
+         * @remark Can be null when Editor is not instantiated
+         */
+        get activeCm(): EditorView | null;
+        /**
+         * Whether the editor is embedded in a table cell
+         */
+        get inTableCell(): boolean;
+
+        /**
+         * Make ranges of text highlighted within the editor given specified class (style)
+         */
+        addHighlights(
+            ranges: EditorRange[],
+            style: "is-flashing" | "obsidian-search-match-highlight",
+            remove_previous: boolean,
+            range?: EditorSelection,
+        ): void;
+        /**
+         * Convert editor position to screen position
+         *
+         * @param pos Editor position
+         * @param relative_to_editor Relative to the editor or the application window
+         */
+        coordsAtPos(
+            pos: EditorPosition,
+            relative_to_editor: boolean,
+        ): { left: number; top: number; bottom: number; right: number };
+        /**
+         * Unfolds all folded lines one level up
+         *
+         * @remark If level 1 and 2 headings are folded, level 2 headings will be unfolded
+         */
+        foldLess(): void;
+        /**
+         * Folds all the blocks that are of the lowest unfolded level
+         *
+         * @remark If there is a document with level 1 and 2 headings, level 2 headings will be folded
+         */
+        foldMore(): void;
+        /**
+         * Get all ranges that can be folded away in the editor
+         */
+        getAllFoldableLines(): { from: number; to: number }[];
+        /**
+         * Get a clickable link - if it exists - at specified position
+         */
+        getClickableTokenAt(pos: EditorPosition): {
+            start: EditorPosition;
+            end: EditorPosition;
+            text: string;
+            type: string;
+        } | null;
+        /**
+         * Get all blocks that were folded by their starting character position
+         */
+        getFoldOffsets(): Set<number>;
+        /**
+         * Checks whether the editor has a highlight of specified class
+         *
+         * @remark If no style is specified, checks whether the editor has unknown highlights
+         */
+        hasHighlight(style?: string): boolean;
+        /**
+         * Wraps current line around specified characters
+         *
+         * @remark Was added in a recent Obsidian update (1.4.0 update cycle)
+         */
+        insertBlock(start: string, end: string): void;
+        /**
+         * Get the closest character position to the specified coordinates
+         */
+        posAtCoords(coords: { left: number; top: number }): EditorPosition;
+        /**
+         * Removes all highlights of specified class
+         */
+        removeHighlights(style: string): void;
+        /**
+         * Adds a search cursor to the editor
+         */
+        searchCursor(searchString: string): SearchCursor;
+        /**
+         * Applies specified markdown syntax to selected text or word under cursor
+         */
+        toggleMarkdownFormatting(
+            syntax: "bold" | "italic" | "strikethrough" | "highlight" | "code" | "math" | "comment",
+        ): void;
+    }
+
+    interface FileCacheEntry {
+        /**
+         * Hash of file contents
+         */
+        hash: string;
+        /**
+         * Last modified time of file
+         */
+        mtime: number;
+        /**
+         * Size of file in bytes
+         */
+        size: number;
+    }
+
+    interface FileEntry {
+        /**
+         * Creation time (if file)
+         */
+        ctime?: number;
+        /**
+         * Modification time (if file)
+         */
+        mtime?: number;
+        /**
+         * Full path to file or folder
+         *
+         * @remark Might be used for resolving symlinks
+         */
+        realpath: string;
+        /**
+         * Size in bytes (if file)
+         */
+        size?: number;
+        /**
+         * Type of entry
+         */
+        type: "file" | "folder";
+    }
+
+    interface FileExplorerLeaf extends WorkspaceLeaf {
+        view: FileExplorerView;
+    }
+
+    interface FileExplorerPlugin extends InternalPlugin {
+        /**
+         * Reveals a file or folder in the file explorer view, opens the view if it is not already
+         * open/visible
+         */
+        revealInFolder(item: TFile | TFolder): void;
+    }
+
+    interface FileExplorerView extends View {
+        /**
+         * Mapping of file path to tree item
+         */
+        fileItems: Record<string, TreeItem<FileTreeItem>>;
+        /**
+         * Mapping of tree self element to abstract file
+         */
+        files: WeakMapWrapper<HTMLElement, TAbstractFile>;
+        /**
+         * Tree view of files
+         */
+        tree: Tree<FileTreeItem>;
+
+        openFileContextMenu(event: Event, fileItemElement: HTMLElement): void;
+        /**
+         * Reveal a file or folder in the file tree
+         */
+        revealInFolder(file: TFile | TFolder): void;
+    }
+
+    interface FileManager {
+        /**
+         * Reference to App
+         */
+        app: App;
+        /** @internal */
+        fileParentCreatorByType: Map<string, (path: string) => TFolder>;
+        /** @internal */
+        inProgressUpdates: null | unknown[];
+        /** @internal */
+        linkUpdaters: {
+            canvas: {
+                app: App;
+                canvas: unknown;
+            };
+        };
+        /** @internal */
+        updateQueue: {
+            promise: Promise<void>;
+        };
+        /**
+         * Reference to Vault
+         */
+        vault: Vault;
+
+        /**
+         * Creates a new Markdown file in specified location and opens it in a new view
+         *
+         * @param path - Path to the file to create (missing folders will be created)
+         * @param manner - Where to open the view containing the new file
+         */
+        createAndOpenMarkdownFile(path: string, location: PaneType): Promise<void>;
+        /**
+         * Create a new file in the vault at specified location
+         *
+         * @param location - Location to create the file in, defaults to root
+         * @param filename - Name of the file to create, defaults to "Untitled" (incremented if file already
+         *   exists)
+         * @param extension - Extension of the file to create, defaults to "md"
+         * @param contents - Contents of the file to create, defaults to empty string
+         */
+        createNewFile(location: TFolder, filename: string, extension: string, contents: string): Promise<TFile>;
+        /**
+         * Creates a new untitled folder in the vault at specified location
+         *
+         * @param location - Location to create the folder in, defaults to root
+         */
+        createNewFolder(location: TFolder): Promise<TFolder>;
+        /**
+         * Creates a new Markdown file in the vault at specified location
+         */
+        createNewMarkdownFile(location: TFolder, filename: string, contents: string): Promise<TFile>;
+        /**
+         * Creates a new Markdown file based on linktext and path
+         *
+         * @param filename - Name of the file to create
+         * @param path - Path to where the file should be created
+         */
+        createNewMarkdownFileFromLinktext(filename: string, path: string): Promise<TFile>;
+        /** @internal */
+        getAllLinkResolutions(): [];
+        /**
+         * Gets the folder that new markdown files should be saved to, based on the current settings
+         *
+         * @param path - The path of the current opened/focused file, used when the user wants new files to be
+         *   created in the same folder as the current file
+         */
+        getMarkdownNewFileParent(path: string): TFolder;
+        /**
+         * Insert text into a file
+         *
+         * @param file - File to insert text into
+         * @param primary_text - Text to insert (will not be inserted if secondary_text exists)
+         * @param basename - ???
+         * @param secondary_text - Text to insert (always inserted)
+         * @param atStart - Whether to insert text at the start or end of the file
+         */
+        insertTextIntoFile(
+            file: TFile,
+            primary_text: string,
+            basename: string,
+            secondary_text: string,
+            atStart: boolean,
+        ): Promise<void>;
+        /**
+         * Iterate over all links in the vault with callback
+         *
+         * @param callback - Callback to execute for each link
+         */
+        iterateAllRefs(callback: (path: string, link: PositionedReference) => void): void;
+        /**
+         * Merge two files
+         *
+         * @param file - File to merge to
+         * @param otherFile - File to merge from
+         * @param override - If not empty, will override the contents of the file with this string
+         * @param atStart - Whether to insert text at the start or end of the file
+         */
+        mergeFile(file: TFile, otherFile: TFile, override: string, atStart: boolean): Promise<void>;
+        /**
+         * Prompt the user to delete a file
+         */
+        promptForDeletion(file: TFile): Promise<void>;
+        /**
+         * Prompt the user to rename a file
+         */
+        promptForFileRename(file: TFile): Promise<void>;
+        /**
+         * @internal
+         * Register an extension to be the parent for a specific file type
+         */
+        registerFileParentCreator(extension: string, location: TFolder): void;
+        /**
+         * @param callback - Callback to execute for each link
+         * @internal
+         */
+        runAsyncLinkUpdate(callback: (link: LinkUpdate) => unknown): void;
+        /**
+         * @param path
+         * @param data
+         * @internal
+         */
+        storeTextFileBackup(path: string, data: string): void;
+        /**
+         * Remove a file and put it in the trash (no confirmation modal)
+         */
+        trashFile(file: TFile): Promise<void>;
+        /** @internal : Unregister extension as root input directory for file type */
+        unregisterFileCreator(extension: string): void;
+        /** @internal */
+        updateAllLinks(links: unknown[]): Promise<void>;
+        /** @internal */
+        updateInternalLinks(data: unknown): unknown;
+    }
+
+    class FileSuggest<T> extends EditorSuggest<T> {
+        /**
+         * Manages fetching of suggestions from metadatacache
+         */
+        suggestManager: FileSuggestManager;
+    }
+
+    interface FileSuggestManager {
+        /**
+         * Reference to the app
+         */
+        app: App;
+        /**
+         * Selection of files and their paths that can be matched to
+         */
+        fileSuggestions: null | { file: TFile | null; path: string }[];
+        /**
+         * Determine the source path of current context
+         */
+        getSourcePath: () => null | string;
+        /**
+         * Whether search should be vault-wide rather than scoped to current file
+         */
+        global: boolean;
+        /**
+         * Type of suggestions that should be provided
+         */
+        mode: "file" | "heading" | "block" | "display" | string;
+        /**
+         * Executor of the search
+         */
+        runnable: null | Runnable;
+
+        /**
+         * Get suggestions for block query
+         */
+        getBlockSuggestions(runner: Runnable, file: TFile, text: string): Promise<SearchResult[]>;
+        /**
+         * Get suggestions for display alias query
+         */
+        getDisplaySuggestions(
+            runner: Runnable,
+            linkpath: string,
+            subpath: string,
+            alias: string,
+        ): Promise<SearchResult[]>;
+        /**
+         * Get suggestions for file query
+         */
+        getFileSuggestions(runner: Runnable, text: string): Promise<SearchResult[]>;
+        /**
+         * Get suggestions for global block query
+         */
+        getGlobalBlockSuggestions(runner: Runnable, text: string): Promise<SearchResult[]>;
+        /**
+         * Get suggestions for global heading query
+         */
+        getGlobalHeadingSuggestions(runner: Runnable, text: string): Promise<SearchResult[]>;
+        /**
+         * Get suggestions for file heading query
+         */
+        getHeadingSuggestions(runner: Runnable, file: TFile, text: string): Promise<SearchResult[]>;
+        /**
+         * Get suggestions for current input text
+         *
+         * @remark Type is determined from text: e.g. [[Thi]] will give completions for files, [[Thi^]] for blocks, etc.
+         */
+        getSuggestionsAsync(runner: Runnable, text: string): Promise<SearchResult[]>;
+        /**
+         * Match search fragments to a block
+         */
+        matchBlock(
+            path: string,
+            file: TFile,
+            block: BlockCache,
+            sourcePath: null | string,
+            content: string,
+            text_parts: string[],
+        ): SearchResult | null;
+    }
+
+    interface FileSystemAdapter extends DataAdapter {}
+
+    interface FileTreeItem {
+        file: TAbstractFile;
+    }
+
+    interface FileView {
+        /**
+         * Whether the view may be run without an attached file
+         */
+        allowNoFile: boolean;
+    }
+
+    interface FoldInfo {
+        folds: { from: number; to: number }[];
+        lines: number;
+    }
+
+    interface GlobalSearchLeaf extends WorkspaceLeaf {}
+
+    interface GlobalSearchPlugin extends InternalPlugin {}
+
+    interface HotkeyManager {
+        /**
+         * Reference to App
+         */
+        app: App;
+        /** @internal Whether hotkeys have been baked (checks completed) */
+        baked: boolean;
+        /**
+         * Assigned hotkeys
+         */
+        bakedHotkeys: KeymapInfo[];
+        /**
+         * Array of hotkey index to command ID
+         */
+        bakedIds: string[];
+        /**
+         * Custom (non-Obsidian default) hotkeys, one to many mapping of command ID to assigned hotkey
+         */
+        customKeys: Record<string, KeymapInfo[]>;
+        /**
+         * Default hotkeys, one to many mapping of command ID to assigned hotkey
+         */
+        defaultKeys: Record<string, KeymapInfo[]>;
+
+        /**
+         * Add a hotkey to the default hotkeys
+         *
+         * @param command - Command ID to add hotkey to
+         * @param keys - Hotkeys to add
+         */
+        addDefaultHotkeys(command: string, keys: KeymapInfo[]): void;
+        /** @internal Bake hotkeys (create mapping of pressed key to command ID) */
+        bake(): void;
+        /**
+         * Get hotkey associated with command ID
+         *
+         * @param command - Command ID to get hotkey for
+         */
+        getDefaultHotkeys(command: string): KeymapInfo[];
+        /**
+         * Get hotkey associated with command ID
+         *
+         * @param command - Command ID to get hotkey for
+         */
+        getHotkeys(command: string): KeymapInfo[];
+        /** @internal Load hotkeys from storage */
+        load(): void;
+        /**
+         * Trigger a command by keyboard event
+         *
+         * @param event - Keyboard event to trigger command with
+         * @param keypress - Pressed key information
+         */
+        onTrigger(event: KeyboardEvent, keypress: KeymapInfo): boolean;
+        /**
+         * Pretty-print hotkey of a command
+         *
+         * @param command
+         */
+        printHotkeyForCommand(command: string): string;
+        /**
+         * Remove a hotkey from the default hotkeys
+         *
+         * @param command - Command ID to remove hotkey from
+         */
+        removeDefaultHotkeys(command: string): void;
+        /**
+         * Remove a hotkey from the custom hotkeys
+         *
+         * @param command - Command ID to remove hotkey from
+         */
+        removeHotkeys(command: string): void;
+        /** @internal Save custom hotkeys to storage */
+        save(): void;
+        /**
+         * Add a hotkey to the custom hotkeys (overrides default hotkeys)
+         *
+         * @param command - Command ID to add hotkey to
+         * @param keys - Hotkeys to add
+         */
+        setHotkeys(command: string, keys: KeymapInfo[]): void;
+    }
+
+    interface HoverLinkEvent {
+        event: MouseEvent;
+        hoverParent: WorkspaceLeaf;
+        linktext: string;
+        source: "search" | "editor" | "preview" | "properties" | "graph" | "file-explorer" | "hover-link";
+        sourcePath?: string;
+        state?: {
+            scroll: unknown;
+        };
+        targetEl: HTMLElement | null;
+    }
+
+    interface HoverLinkSource {
+        defaultMod: boolean;
+        display: string;
+    }
+
+    class IFramedMarkdownEditor extends MarkdownScrollableEditView {
+        constructor(context: WidgetEditorView);
+        /**
+         * Function that cleans up the iframe and listeners
+         */
+        cleanup: null | (() => void);
+        /**
+         * Element where the editor is embedded into
+         */
+        iframeEl: null | HTMLIFrameElement;
+
+        /**
+         * Executes cleanup function if exists
+         */
+        cleanupIframe(): void;
+        /**
+         * Constructs extensions for the editor based on user settings
+         *
+         * @remark Creates extension for overriding escape keymap to showPreview
+         */
+        getDynamicExtensions(): Extension[];
+        /**
+         * Loads the iframe element and prepare cleanup function
+         */
+        onIframeLoad(): void;
+        /**
+         * Execute cleanup of the iframe
+         */
+        onunload(): void;
+        /**
+         * Execute functionality on CM editor state update
+         */
+        onUpdate(update: ViewUpdate, changed: boolean): void;
+    }
+
+    interface ImportedAttachments {
+        data: Promise<ArrayBuffer>;
+        extension: string;
+        filename: string;
+        name: string;
+    }
+
+    interface InfinityScroll {
+        height: number;
+        lastScroll: number;
+        queued: unknown | null;
+        renderBlockSize: number;
+        rootEl: unknown;
+        scrollEl: HTMLElement;
+        setWidth: boolean;
+        width: number;
+
+        _layout(x: unknown, y: unknown): unknown;
+        _measure(x: unknown): unknown;
+        _precompute(x: unknown): unknown;
+        compute(x: unknown): unknown;
+        findElementTop(x: unknown, y: unknown, z: unknown): unknown;
+        getRootTop(): unknown;
+        invalidate(x: unknown, y: unknown): unknown;
+        invalidateAll(): unknown;
+        measure(x: unknown, y: unknown): unknown;
+        onResize(): unknown;
+        onScroll(): unknown;
+        queueCompute(): unknown;
+        scrollIntoView(x: unknown, y: unknown): unknown;
+        update(x: unknown, y: unknown, z: unknown, u: unknown, v: unknown, w: unknown): unknown;
+        updateVirtualDisplay(x: unknown): unknown;
+    }
+
+    interface InternalPlugin extends Plugin {
+        disable(): void;
+        enable(): void;
+    }
+
+    interface InternalPlugins extends Events {
+        /**
+         * Reference to App
+         */
+        app: App;
+        /**
+         * Mapping of whether an internal plugin is enabled
+         */
+        config: Record<InternalPluginName, boolean>;
+        /** @internal */
+        migration: boolean;
+        /**
+         * Plugin configs for internal plugins
+         *
+         * @remark Prefer usage of getPluginById to access a plugin
+         */
+        plugins: {
+            "file-explorer": FileExplorerPlugin;
+            "global-search": GlobalSearchPlugin;
+            [key: string]: InternalPlugin;
+        };
+
+        /** @internal - Load plugin configs and enable plugins */
+        enable(): Promise<void>;
+        /**
+         * Get an enabled internal plugin by ID
+         *
+         * @param id - ID of the plugin to get
+         */
+        getEnabledPluginById(id: InternalPluginName): InternalPlugin | null;
+        getEnabledPluginById(id: "file-explorer"): FileExplorerPlugin | null;
+        getEnabledPluginById(id: "global-search"): GlobalSearchPlugin | null;
+        /**
+         * Get all enabled internal plugins
+         */
+        getEnabledPlugins(): InternalPlugin[];
+        /**
+         * Get an internal plugin by ID
+         *
+         * @param id - ID of the plugin to get
+         */
+        getPluginById(id: InternalPluginName): InternalPlugin;
+        /** @internal */
+        loadPlugin(arg: { id: string; name: string }): string;
+        /** @internal */
+        onRaw(cb1: unknown, cb2: unknown): void;
+        /** @internal Request save of plugin configs */
+        requestSaveConfig(): void;
+        /** @internal - Save current plugin configs */
+        saveConfig(): Promise<void>;
     }
 
     interface ItemView {
@@ -4176,6 +2343,10 @@ declare module 'obsidian' {
          */
         canDropAnywhere: boolean;
         /**
+         * Forward button element for changing view history
+         */
+        forwardButtonEl: HTMLButtonElement;
+        /**
          * Header bar container of view
          */
         headerEl: HTMLElement;
@@ -4183,10 +2354,6 @@ declare module 'obsidian' {
          * Icon element for the view (for dragging)
          */
         iconEl: HTMLElement;
-        /**
-         * Forward button element for changing view history
-         */
-        forwardButtonEl: HTMLButtonElement;
         /**
          * Anchor button for revealing more view actions
          */
@@ -4201,48 +2368,505 @@ declare module 'obsidian' {
         titleEl: HTMLElement;
         /**
          * Title of the parent
+         *
          * @remark Used for breadcrumbs rendering
          */
         titleParentEl: HTMLElement;
     }
 
-    interface FileView {
+    interface KeyScope {
         /**
-         * Whether the view may be run without an attached file
+         * Key to match
          */
-        allowNoFile: boolean;
+        key: string | null;
+        /**
+         * Modifiers to match
+         */
+        modifiers: string | null;
+        /**
+         * Scope where the key interceptor is registered
+         */
+        scope: Scope;
+
+        /**
+         * Callback of function to execute when key is pressed
+         */
+        func(): void;
     }
-    
-    interface EditableFileView {
-        /**
-         * The file that is currently being renamed
-         */
-        fileBeingRenamed: null | TFile;
+
+    interface LeafEntry {
+        children?: LeafEntry[];
+        direction?: SplitDirection;
+        id: string;
+        state?: ViewState;
+        type: string;
+        width?: number;
     }
-    
-    interface TextFileView {
+
+    interface LinkUpdate {
         /**
-         * Whether current file is dirty (different from saved contents)
+         * Reference to App
          */
-        dirty: boolean;
+        app: App;
         /**
-         * Whether editor should be rendered as plaintext
+         * Link position in the file
          */
-        isPlaintext: boolean;
+        reference: PositionedReference;
         /**
-         * The data that was last saved
+         * File that was resolved
          */
-        lastSavedData: null | string;
+        resolvedFile: TFile;
         /**
-         * Whether on saving, the file should be saved again (for dirtyness checks)
+         * Paths the file could have been resolved to
          */
-        saveAgain: boolean;
+        resolvedPaths: string[];
         /**
-         * Whether the file is currently saving
+         * File that contains the link
          */
-        saving: boolean;
+        sourceFile: TFile;
     }
-    
+
+    class MarkdownBaseView extends Component {
+        /**
+         * Reference to the app
+         */
+        app: App;
+        /**
+         * Callback to clear all elements
+         */
+        cleanupLivePreview: null | (() => void);
+        /**
+         * Manager that handles pasting text, html and images into the editor
+         */
+        clipboardManager: ClipBoardManager;
+        /**
+         * Codemirror editor instance
+         */
+        cm: EditorView;
+        /**
+         * Whether CodeMirror is initialized
+         */
+        cmInit: boolean;
+        /**
+         * Container element of the editor view
+         */
+        containerEl: HTMLElement;
+        /**
+         * Popup element for internal link
+         */
+        cursorPopupEl: HTMLElement | null;
+        /**
+         * Obsidian editor instance
+         *
+         * @remark Handles formatting, table creation, highlight adding, etc.
+         */
+        editor: ExtendedEditor;
+        /**
+         * Element in which the CodeMirror editor resides
+         */
+        editorEl: HTMLElement;
+        /**
+         * Editor suggestor for autocompleting files, links, aliases, etc.
+         */
+        editorSuggest: EditorSuggests;
+        /**
+         * The CodeMirror plugins that handle the rendering of, and interaction with Obsidian's Markdown
+         */
+        livePreviewPlugin: Extension[];
+        /**
+         * Local (always active) extensions for the editor
+         */
+        localExtensions: Extension[];
+        /**
+         * Controller of the editor view
+         */
+        owner: MarkdownFileInfo;
+        /**
+         * Whether live preview rendering is disabled
+         */
+        sourceMode: boolean;
+        /**
+         * Reference to editor attached to table cell, if any
+         */
+        tableCell: null | TableCellEditor;
+
+        /**
+         * Currently active CM instance (table cell CM or main CM)
+         */
+        get activeCM(): EditorView;
+        /**
+         * Returns attached file of the owner instance
+         */
+        get file(): TFile | null;
+        /**
+         * Returns path of the attached file
+         */
+        get path(): string;
+
+        /**
+         * Apply fold history to editor
+         */
+        applyFoldInfo(info: FoldInfo): void;
+        /**
+         * Constructs local (always active) extensions for the editor
+         *
+         * @remark Creates extensions for handling dom events, editor info statefields, update listener, suggestions
+         */
+        buildLocalExtensions(): Extension[];
+        /**
+         * Cleanup live preview, remove and then re-add all editor extensions
+         */
+        clear(): void;
+        /**
+         * Clean up live preview, remove all extensions, destory editor
+         */
+        destroy(): void;
+        /**
+         * Removes specified tablecell
+         */
+        destroyTableCell(cell?: TableCellEditor): void;
+        /**
+         * Edit a specified table cell, creating a table cell editor
+         */
+        editTableCell(cell: TableEditor, new_cell: TableCell): TableCellEditor;
+        /**
+         * Get the current editor document as a string
+         */
+        get(): string;
+        /**
+         * Constructs extensions for the editor based on user settings
+         *
+         * @remark Creates extension for tab size, RTL rendering, spellchecking, pairing markdown syntax, live preview and vim
+         */
+        getDynamicExtensions(): Extension[];
+        /**
+         * Get the current folds of the editor
+         */
+        getFoldInfo(): null | FoldInfo;
+        /**
+         * Builds all local extensions and assigns to this.localExtensions
+         *
+         * @remark Will build extensions if they were not already built
+         */
+        getLocalExtensions(): unknown;
+        /**
+         * Creates menu on right mouse click
+         */
+        onContextMenu(event: PointerEvent, x: boolean): Promise<void>;
+        /**
+         * Execute click functionality on token on mouse click
+         */
+        onEditorClick(event: MouseEvent, element?: HTMLElement): void;
+        /**
+         * Execute drag functionality on drag start
+         *
+         * @remark Interfaces with dragManager
+         */
+        onEditorDragStart(event: DragEvent): void;
+        /**
+         * Execute hover functionality on mouse over event
+         */
+        onEditorLinkMouseover(event: MouseEvent, target: HTMLElement): void;
+        /**
+         * Execute context menu functionality on right mouse click
+         *
+         * @deprecated Use onContextMenu instead
+         */
+        onMenu(event: MouseEvent): void;
+        /**
+         * Reposition suggest and scroll position on resize
+         */
+        onResize(): void;
+        /**
+         * Execute functionality on CM editor state update
+         */
+        onUpdate(update: ViewUpdate, changed: boolean): void;
+        /**
+         * Reinitialize the editor inside new container
+         */
+        reinit(): void;
+        /**
+         * Move the editor into the new container
+         */
+        reparent(new_container: HTMLElement): void;
+        /**
+         * Bodge to reset the syntax highlighting
+         *
+         * @remark Uses single-character replacement transaction
+         */
+        resetSyntaxHighlighting(): void;
+        /** @internal Save history of file and data (for caching, for faster reopening of same file in editor) */
+        saveHistory(): void;
+        /**
+         * Set the state of the editor
+         */
+        set(data: string, clear: boolean): void;
+        /**
+         * Enables/disables frontmatter folding
+         */
+        toggleFoldFrontmatter(): void;
+        /**
+         * Toggle sourcemode for editor and dispatch effect
+         */
+        toggleSource(): void;
+        /**
+         * Execute functionality of token (open external link, open internal link in leaf, ...)
+         */
+        triggerClickableToken(token: Token, new_leaf: boolean): void;
+        /** @internal Callback for onUpdate functionality added as an extension */
+        updateEvent(): (update: ViewUpdate) => void;
+        /**
+         * In mobile, creates a popover link on clickable token, if exists
+         */
+        updateLinkPopup(): void;
+        /**
+         * Reconfigure/re-add all the dynamic extensions
+         */
+        updateOptions(): void;
+    }
+
+    interface MarkdownEditView extends MarkdownScrollableEditView {
+        /**
+         * Frontmatter editor extension for the editor
+         */
+        propertiesExtension: Extension[];
+        /**
+         * Editing mode of the editor
+         */
+        type: "source";
+        /**
+         * View the source view editor is attached to
+         */
+        view: MarkdownView;
+
+        /**
+         * Save functionality to execute before editor view unload
+         */
+        beforeUnload(): void;
+        /**
+         * Clear the editor view
+         */
+        clear(): void;
+        /**
+         * Destroy/Detach the editor view
+         */
+        destroy(): void;
+        /**
+         * Constructs extensions for the editor based on user settings
+         *
+         * @remark Creates extension for properties rendering
+         */
+        getDynamicExtensions(): Extension[];
+        /**
+         * Gets the ephemeral (non-persistent) state of the editor
+         */
+        getEphemeralState(state: any): { cursor: EditorRange } & any;
+        /**
+         * Get the current folds of the editor
+         */
+        getFoldInfo(): null | FoldInfo;
+        /**
+         * Get the main selected range as string
+         */
+        getSelection(): string;
+        /**
+         * Add highlights for specified ranges
+         *
+         * @remark Only ranges parameter is used
+         */
+        highlightSearchMatches(
+            ranges: EditorRange[],
+            style?: "is-flashing" | "obsidian-search-match-highlight",
+            remove_previous?: boolean,
+            range?: EditorSelection,
+        ): void;
+        /**
+         * Execute functionality on CM editor state update
+         */
+        onUpdate(update: ViewUpdate, changed: boolean): void;
+        /**
+         * Debounced onInternalDataChange of view
+         */
+        requestOnInternalDataChange(): void;
+        /**
+         * Debounced onMarkdownFold of view
+         */
+        requestSaveFolds(): unknown;
+        /**
+         * Set the state of the editor
+         */
+        set(data: string, clear: boolean): void;
+        /**
+         * Set the ephemeral (non-persistent) state of the editor
+         */
+        setEphemeralState(state: any): void;
+        /**
+         * Set highlight of any search match
+         */
+        setHighlight(match: {
+            focus: boolean;
+            startLoc?: number;
+            endLoc?: number;
+            line?: number;
+            match?: unknown;
+        }): void;
+        /**
+         * Set the state of the editor (applies selections, scrolls, ...)
+         */
+        setState(state: any): void;
+        /**
+         * Render the editor and the metadata-editor element
+         */
+        show(): void;
+        /**
+         * Update the bottom padding of the CodeMirror contentdom (based on backlinksEl)
+         */
+        updateBottomPadding(height: number): void;
+        /**
+         * Update options of the editor from settings
+         */
+        updateOptions(): void;
+    }
+
+    interface MarkdownPreviewView {
+        /**
+         * Unique identifier for the rendered element
+         */
+        docId: string;
+        /**
+         * HTML renderer for the Markdown
+         */
+        renderer: ReadViewRenderer;
+        search: null | unknown;
+        type: "preview" | string;
+        view: MarkdownView;
+
+        applyFoldInfo(e: unknown): unknown;
+        beforeUnload(): unknown;
+        clear(): unknown;
+        edit(e: unknown): unknown;
+        foldAll(): unknown;
+        getEphemeralState(e: unknown): unknown;
+        getFoldInfo(): unknown;
+        getSelection(): unknown;
+        hide(): unknown;
+        onFoldChange(): unknown;
+        onRenderComplete(): unknown;
+        onResize(): unknown;
+        onScroll(): unknown;
+        requestUpdateLinks(): unknown;
+        setEphemeralState(e: unknown): unknown;
+        show(): unknown;
+        showSearch(): unknown;
+        unfoldAll(): unknown;
+        updateOptions(): unknown;
+    }
+
+    interface MarkdownRenderer {
+        get path(): unknown;
+        onCheckboxClick(e: unknown, n: unknown, i: unknown): unknown;
+        onFileChange(e: unknown): unknown;
+        onFoldChange(): unknown;
+        onload(): unknown;
+        onRenderComplete(): unknown;
+        onScroll(): unknown;
+        postProcess(e: unknown, t: unknown, n: unknown): unknown;
+        resolveLinks(e: unknown): unknown;
+    }
+
+    class MarkdownScrollableEditView extends MarkdownBaseView {
+        /**
+         * List of CSS classes applied to the editor
+         */
+        cssClasses: [];
+        /**
+         * Whether the editor is currently scrolling
+         */
+        isScrolling: boolean;
+        /**
+         * Scope for the search component, if exists
+         */
+        scope: Scope | undefined;
+        /**
+         * Search component for the editor, provides highlight and search functionality
+         */
+        search: EditorSearchComponent;
+        /**
+         * Container for the editor, handles editor size
+         */
+        sizerEl: HTMLElement;
+
+        /**
+         * Set the scroll count of the editor scrollbar
+         */
+        applyScroll(scroll: number): void;
+        /**
+         * Constructs local (always active) extensions for the editor
+         *
+         * @remark Creates extensions for list indentation, tab indentations
+         */
+        buildLocalExtensions(): Extension[];
+        /**
+         * Focus the editor (and for mobile: render keyboard)
+         */
+        focus(): void;
+        /**
+         * Constructs extensions for the editor based on user settings
+         *
+         * @remark Creates toggleable extensions for showing line numbers, indentation guides,
+         *          folding, brackets pairing and properties rendering
+         */
+        getDynamicExtensions(): Extension[];
+        /**
+         * Get the current scroll count of the editor scrollbar
+         */
+        getScroll(): number;
+        /**
+         * Invokes onMarkdownScroll on scroll
+         */
+        handleScroll(): void;
+        /**
+         * Hides the editor (sets display: none)
+         */
+        hide(): void;
+        /**
+         * Clear editor cache and refreshes editor on app css change
+         */
+        onCssChange(): void;
+        /**
+         * Update editor size and bottom padding on resize
+         */
+        onResize(): void;
+        /**
+         * Update editor suggest position and invokes handleScroll on scroll
+         */
+        onScroll(): void;
+        /**
+         * Execute functionality on CM editor state update
+         */
+        onUpdate(update: ViewUpdate, changed: boolean): void;
+        /**
+         * Close editor suggest and removes highlights on click
+         */
+        onViewClick(event?: MouseEvent): void;
+        /**
+         * Add classes to the editor, functions as a toggle
+         */
+        setCssClass(classes: string[]): void;
+        /**
+         * Reveal the editor (sets display: block)
+         */
+        show(): void;
+        /**
+         * Reveal the search (and replace) component
+         */
+        showSearch(replace: boolean): void;
+        /**
+         * Update the bottom padding of the CodeMirror contentdom
+         */
+        updateBottomPadding(height: number): void;
+    }
+
     interface MarkdownView {
         /**
          * Backlinks component
@@ -4265,7 +2889,7 @@ declare module 'obsidian' {
          */
         inlineTitleEl: HTMLElement;
         /**
-         *  Frontmatter editor of the editor
+         * Frontmatter editor of the editor
          */
         metadataEditor: MetadataEditor;
         /**
@@ -4275,7 +2899,7 @@ declare module 'obsidian' {
         /**
          * The registered modes of the view
          */
-        modes: {source: MarkdownEditView, preview: MarkdownPreviewView};
+        modes: { source: MarkdownEditView; preview: MarkdownPreviewView };
         /**
          * Preview component of the view
          */
@@ -4292,14 +2916,12 @@ declare module 'obsidian' {
          * Whether to show backlinks in the editor
          */
         showBacklinks: boolean;
-        /**
-         * @deprecated CM5 Editor
-         */
-        sourceMode: {cmEditor: any};
-
+        /** @deprecated CM5 Editor */
+        sourceMode: { cmEditor: any };
 
         /**
          * Add property to inline metadata editor or properties plugin
+         *
          * @remark Parameter is not used
          */
         addProperty(unused: undefined): void;
@@ -4317,13 +2939,14 @@ declare module 'obsidian' {
         collapseProperties(collapse: boolean): void;
         /**
          * Edit the focused property in the metadata editor
+         *
          * @remark Parameter is not used
          */
         editProperty(unused: undefined): void;
         /**
          * Focus on the metadata editor given property information
          */
-        focusMetadata(focus?: { focusHeading: boolean, propertyIdx?: number, propertyKey?: string }): void;
+        focusMetadata(focus?: { focusHeading: boolean; propertyIdx?: number; propertyKey?: string }): void;
         /**
          * Gets the ephemeral (non-persistent) state of the editor
          */
@@ -4385,6 +3008,10 @@ declare module 'obsidian' {
          */
         onInternalDataChange(): void;
         /**
+         * On loading markdown view, register resize, css-change and quick-preview events
+         */
+        onload(): void;
+        /**
          * On fold of markdown in source editor, save fold info to fold manager
          */
         onMarkdownFold(): void;
@@ -4395,7 +3022,7 @@ declare module 'obsidian' {
         /**
          * Populate the context menu
          */
-        onPaneMenu(menu: Menu, source: 'more-options' | 'tab-header' | string): void;
+        onPaneMenu(menu: Menu, source: "more-options" | "tab-header" | string): void;
         /**
          * Trigger onResize function of currently active editor component
          */
@@ -4404,10 +3031,6 @@ declare module 'obsidian' {
          * On mod click, opens editor of opposite mode in split view to right
          */
         onSwitchView(event: KeyboardEvent | MouseEvent): Promise<void>;
-        /**
-         * On loading markdown view, register resize, css-change and quick-preview events
-         */
-        onload(): void;
         /**
          * Opens PDF modal for exporting PDF of the current file
          */
@@ -4427,7 +3050,13 @@ declare module 'obsidian' {
         /**
          * Set the ephemeral (non-persistent) state of the editor
          */
-        setEphemeralState(state: any & { focus: boolean, focusOnMobie: boolean, cursor: EditorRangeOrCaret }): void;
+        setEphemeralState(
+            state: any & {
+                focus: boolean;
+                focusOnMobie: boolean;
+                cursor: EditorRangeOrCaret;
+            },
+        ): void;
         /**
          * Set the mode of the editor
          */
@@ -4476,147 +3105,6 @@ declare module 'obsidian' {
          * Hide/render backlinks component
          */
         updateShowBacklinks(): void;
-
-    }
-
-    interface MarkdownPreviewView {
-        /**
-         * Unique identifier for the rendered element
-         */
-        docId: string;
-        /**
-         * HTML renderer for the Markdown
-         */
-        renderer: ReadViewRenderer;
-        /**
-         * 
-         */
-        search: null | unknown;
-        /**
-         * 
-         */
-        type: "preview" | string;
-        /**
-         * 
-         */
-        view: MarkdownView;
-
-        /**
-         * 
-         */
-        applyFoldInfo(e: unknown): unknown;
-        /**
-         * 
-         */
-        beforeUnload(): unknown;
-        /**
-         * 
-         */
-        clear(): unknown;
-        /**
-         * 
-         */
-        edit(e: unknown): unknown;
-        /**
-         * 
-         */
-        foldAll(): unknown;
-        /**
-         * 
-         */
-        getEphemeralState(e: unknown): unknown;
-        /**
-         * 
-         */
-        getFoldInfo(): unknown;
-        /**
-         * 
-         */
-        getSelection(): unknown;
-        /**
-         * 
-         */
-        hide(): unknown;
-        /**
-         * 
-         */
-        onFoldChange(): unknown;
-        /**
-         * 
-         */
-        onRenderComplete(): unknown;
-        /**
-         * 
-         */
-        onResize(): unknown;
-        /**
-         * 
-         */
-        onScroll(): unknown;
-        /**
-         * 
-         */
-        requestUpdateLinks(): unknown;
-        /**
-         * 
-         */
-        setEphemeralState(e: unknown): unknown;
-        /**
-         * 
-         */
-        show(): unknown;
-        /**
-         * 
-         */
-        showSearch(): unknown;
-        /**
-         * 
-         */
-        unfoldAll(): unknown;
-        /**
-         * 
-         */
-        updateOptions(): unknown;
-    }
-
-    interface MarkdownRenderer {
-        /**
-         * 
-         */
-        onCheckboxClick(e: unknown, n: unknown, i: unknown): unknown
-        /**
-         * 
-         */
-        onFileChange(e: unknown): unknown;
-        /**
-         * 
-         */
-        onFoldChange(): unknown;
-        /**
-         * 
-         */
-        onRenderComplete(): unknown;
-        /**
-         * 
-         */
-        onScroll(): unknown;
-        /**
-         * 
-         */
-        onload(): unknown;
-        /**
-         * 
-         */
-        postProcess(e: unknown, t: unknown, n: unknown): unknown
-        /**
-         * 
-         */
-        resolveLinks(e: unknown): unknown;
-
-        /**
-         *
-         */
-        get path(): unknown;
     }
 
     interface Menu extends Component {
@@ -4640,9 +3128,7 @@ declare module 'obsidian' {
          * Items contained in the menu
          */
         items: MenuItem[];
-        /**
-         * @internal Callback that opens the submenu after a delay
-         */
+        /** @internal Callback that opens the submenu after a delay */
         openSubmenuSoon: () => void;
         /**
          * Parent menu of the current menu
@@ -4656,94 +3142,70 @@ declare module 'obsidian' {
          * Sections within the menu
          */
         sections: string[];
-        /**
-         * @internal Which menuitem is currently selected
-         */
+        /** @internal Which menuitem is currently selected */
         selected: number;
-        /**
-         * @internal Configurations for the submenu configs
-         */
-        submenuConfig: Record<string, { title: string, icon: string }>;
-        /**
-         * @internal Whether the submenu is currently unloading
-         */
+        /** @internal Configurations for the submenu configs */
+        submenuConfig: Record<string, { title: string; icon: string }>;
+        /** @internal Whether the submenu is currently unloading */
         unloading: boolean;
         /**
          * Whether the menu is rendered in native mode
          */
         useNativeMenu: boolean;
 
-        /**
-         * @internal Add a section to the menu
-         */
+        /** @internal Add a section to the menu */
         addSections(items: string[]): this;
-        /**
-         * @internal Close the currently open submenu
-         */
+        /** @internal Close the currently open submenu */
         closeSubmenu(): void;
-        /**
-         * @internal Check whether the clicked element is inside the menu
-         */
+        /** @internal Check whether the clicked element is inside the menu */
         isInside(e: HTMLElement): boolean;
         /**
-         * @internal Move selection to the next item in the menu
          * @param e - Keyboard event
+         * @internal Move selection to the next item in the menu
          */
         onArrowDown(e: KeyboardEvent): boolean;
-        /**
-         * @internal Move selection to the previous item in the menu
-         * @param e - Keyboard event
-         */
-        onArrowUp(e: KeyboardEvent): boolean;
-        /**
-         * @internal Move selection into the submenu
-         */
+        /** @internal Move selection out of the submenu */
+        onArrowLeft(e: KeyboardEvent): boolean;
+        /** @internal Move selection into the submenu */
         onArrowRight(e: KeyboardEvent): boolean;
         /**
-         * @internal Move selection out of the submenu
+         * @param e - Keyboard event
+         * @internal Move selection to the previous item in the menu
          */
-        onArrowLeft(e: KeyboardEvent): boolean;
-        /**
-         * @internal Execute selected menu item (does nothing if item is submenu)
-         */
+        onArrowUp(e: KeyboardEvent): boolean;
+        /** @internal Execute selected menu item (does nothing if item is submenu) */
         onEnter(e: KeyboardEvent): boolean;
         /**
-         * @internal Pre-emptively closes the menu if click is registered on menu item
          * @param e
+         * @internal Pre-emptively closes the menu if click is registered on menu item
          */
         onMenuClick(e: MouseEvent): void;
         /**
-         * @internal Opens submenu if mouse is hovering over item with submenu
          * @param e - Mouse event
+         * @internal Opens submenu if mouse is hovering over item with submenu
          */
         onMouseOver(e: MouseEvent): boolean;
-        /**
-         * @internal Registers dom events and scope for the menu
-         */
+        /** @internal Registers dom events and scope for the menu */
         openSubmenu(item: MenuItem): void;
         /**
-         * @internal Select the item at the specified index (after either hovering or arrowing over it)
          * @param index
+         * @internal Select the item at the specified index (after either hovering or arrowing over it)
          */
         select(index: number): void;
         /**
-         * @internal Set the parent element of the menu (i.e. for workspace leaf context menu)
          * @param el - Element to set as parent
+         * @internal Set the parent element of the menu (i.e. for workspace leaf context menu)
          */
         setParentElement(el: HTMLElement): this;
         /**
-         * @internal Add a section to the submenu config
          * @param section
          * @param submenu
+         * @internal Add a section to the submenu config
          */
-        setSectionSubmenu(section: string, submenu: {title: string, icon: string}): this;
-        /**
-         * @internal Sort the items in the menu
-         */
+        setSectionSubmenu(section: string, submenu: { title: string; icon: string }): this;
+        /** @internal Sort the items in the menu */
         sort(): void;
-        /**
-         * @internal Unselect the currently selected item and closes the submenu
-         */
+        /** @internal Unselect the currently selected item and closes the submenu */
         unselect(): void;
     }
 
@@ -4790,28 +3252,27 @@ declare module 'obsidian' {
         titleEl: string;
 
         /**
-         * @internal Executes the callback of the onClick event (if not disabled)
          * @param e - Mouse or keyboard event
+         * @internal Executes the callback of the onClick event (if not disabled)
          */
         handleEvent(e: MouseEvent | KeyboardEvent): void;
-        /**
-         * @internal Remove the icon element from the menu item
-         */
+        /** @internal Remove the icon element from the menu item */
         removeIcon(): void;
         /**
          * @deprecated
-         * @internal Calls `setChecked`, prefer usage of that function instead
          * @param active - Whether the menu item should be checked
+         * @internal Calls `setChecked`, prefer usage of that function instead
          */
         setActive(active: boolean): this;
         /**
          * Create a submenu on the menu item
+         *
          * @tutorial Creates the foldable menus with more options as seen when you right-click in the editor (e.g. "Insert", "Format", ...)
          */
         setSubmenu(): Menu;
         /**
-         * @internal Add warning styling to the menu item
          * @param warning - Whether the menu item should be styled as a warning
+         * @internal Add warning styling to the menu item
          */
         setWarning(warning: boolean): this;
     }
@@ -4821,91 +3282,58 @@ declare module 'obsidian' {
          * Reference to App
          */
         app: App;
-        /**
-         * @internal
-         */
+        /** @internal */
         blockCache: BlockCache;
-        /**
-         * @internal IndexedDB database
-         */
-        db: IDBDatabase
-        /**
-         * @internal File contents cache
-         */
+        /** @internal IndexedDB database */
+        db: IDBDatabase;
+        /** @internal File contents cache */
         fileCache: Record<string, FileCacheEntry>;
-        /**
-         * @internal Amount of tasks currently in progress
-         */
-        inProgressTaskCount: number;
-        /**
-         * @internal Whether the cache is fully loaded
-         */
+        /** @internal Whether the cache is fully loaded */
         initialized: boolean;
-        /**
-         * @internal
-         */
+        /** @internal Amount of tasks currently in progress */
+        inProgressTaskCount: number;
+        /** @internal */
         linkResolverQueue: unknown;
-        /**
-         * @internal File hash to metadata cache entry mapping
-         */
+        /** @internal File hash to metadata cache entry mapping */
         metadataCache: Record<string, CachedMetadata>;
-        /**
-         * @internal Callbacks to execute on cache clean
-         */
+        /** @internal Callbacks to execute on cache clean */
         onCleanCacheCallbacks: unknown[];
-        /**
-         * @internal Mapping of filename to collection of files that share the same name
-         */
+        /** @internal Mapping of filename to collection of files that share the same name */
         uniqueFileLookup: CustomArrayDict<TFile>;
-        /**
-         * @internal
-         */
+        /** @internal */
         userIgnoreFilterCache: unknown;
-        /**
-         * @internal
-         */
+        /** @internal */
         userIgnoreFilters: unknown;
-        /**
-         * @internal
-         */
+        /** @internal */
         userIgnoreFiltersString: string;
         /**
          * Reference to Vault
          */
         vault: Vault;
-        /**
-         * @internal
-         */
-        workQueue: unknown;
-        /**
-         * @internal
-         */
+        /** @internal */
         worker: Worker;
-        /**
-         * @internal
-         */
+        /** @internal */
         workerResolve: unknown;
+        /** @internal */
+        workQueue: unknown;
 
-        /**
-         * Called whenever the metadatacache is fully loaded in
-         * @remark 'finished' is also emitted when the cache is initialized
-         */
-        on(name: 'initialized', callback: () => void): EventRef;
-
-        /**
-         * Called whenever the metadatacache has finished updating
-         */
-        on(name: 'finished', callback: () => void): EventRef;
-
-
+        _getLinkpathDest(origin: string, path: string): TFile[];
+        /** @internal Clear all caches to null values */
+        cleanupDeletedCache(): void;
+        /** @internal */
+        clear(): unknown;
+        /** @internal */
+        computeMetadataAsync(e: unknown): Promise<unknown>;
+        /** @internal Remove all entries that contain deleted path */
+        deletePath(path: string): void;
         /**
          * Get all property infos of the vault
          */
-        getAllPropertyInfos(): Record<string, PropertyInfo>
+        getAllPropertyInfos(): Record<string, PropertyInfo>;
         /**
          * Get all backlink information for a file
          */
-        getBacklinksForFile(file?: TFile): CustomArrayDict<LinkCache>
+        getBacklinksForFile(file?: TFile): CustomArrayDict<LinkCache>;
         /**
          * Get paths of all files cached in the vault
          */
@@ -4919,10 +3347,6 @@ declare module 'obsidian' {
          */
         getFrontmatterPropertyValuesForKey(key: string): string[];
         /**
-         * Get all links (resolved or unresolved) in the vault
-         */
-        getLinkSuggestions(): { file: TFile | null, path: string }[];
-        /**
          * Get destination of link path
          */
         getLinkpathDest(origin: string, path: string): TFile[];
@@ -4931,203 +3355,849 @@ declare module 'obsidian' {
          */
         getLinks(): Record<string, Reference[]>;
         /**
+         * Get all links (resolved or unresolved) in the vault
+         */
+        getLinkSuggestions(): { file: TFile | null; path: string }[];
+        /**
          * Get all tags within the vault and their usage count
          */
         getTags(): Record<string, number>;
-
-        /**
-         * @internal Clear all caches to null values
-         */
-        cleanupDeletedCache(): void;
-        /**
-         * @internal
-         */
-        clear(): unknown;
-        /**
-         * @internal
-         */
-        computeMetadataAsync(e: unknown): Promise<unknown>;
-        /**
-         * @internal Remove all entries that contain deleted path
-         */
-        deletePath(path: string): void;
-        /**
-         * @internal Initialize Database connection and load up caches
-         */
+        /** @internal Initialize Database connection and load up caches */
         initialize(): Promise<void>;
-        /**
-         * @internal Check whether there are no cache tasks in progress
-         */
+        /** @internal Check whether there are no cache tasks in progress */
         isCacheClean(): boolean;
-        /**
-         * @internal Check whether file can support metadata (by checking extension support)
-         */
+        /** @internal Check whether file can support metadata (by checking extension support) */
         isSupportedFile(file: TFile): boolean;
-        /**
-         * @internal Check whether string is part of the user ignore filters
-         */
+        /** @internal Check whether string is part of the user ignore filters */
         isUserIgnored(filter: unknown): boolean;
         /**
          * Iterate over all link references in the vault with callback
          */
         iterateReferences(callback: (path: string) => void): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         linkResolver(): void;
         /**
-         * @internal Execute onCleanCache callbacks if cache is clean
+         * Called whenever the metadatacache is fully loaded in
+         *
+         * @remark 'finished' is also emitted when the cache is initialized
          */
+        on(name: "initialized", callback: () => void): EventRef;
+        /**
+         * Called whenever the metadatacache has finished updating
+         */
+        on(name: "finished", callback: () => void): EventRef;
+        /** @internal Execute onCleanCache callbacks if cache is clean */
         onCleanCache(): void;
-        /**
-         * @internal On creation of the cache: update metadata cache
-         */
+        /** @internal On creation of the cache: update metadata cache */
         onCreate(file: TFile): void;
-        /**
-         * @internal On creation or modification of the cache: update metadata cache
-         */
+        /** @internal On creation or modification of the cache: update metadata cache */
         onCreateOrModify(file: TFile): void;
-        /**
-         * @internal On deletion of the cache: update metadata cache
-         */
+        /** @internal On deletion of the cache: update metadata cache */
         onDelete(file: TFile): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         onReceiveMessageFromWorker(e: unknown): void;
-        /**
-         * @internal On rename of the cache: update metadata cache
-         */
+        /** @internal On rename of the cache: update metadata cache */
         onRename(file: TFile, oldPath: string): void;
-        /**
-         * @internal Check editor for unresolved links and mark these as unresolved
-         */
+        /** @internal Check editor for unresolved links and mark these as unresolved */
         resolveLinks(editor: Element): void;
-        /**
-         * @internal Update file cache entry and sync to indexedDB
-         */
+        /** @internal Update file cache entry and sync to indexedDB */
         saveFileCache(path: string, entry: FileCacheEntry): void;
-        /**
-         * @internal Update metadata cache entry and sync to indexedDB
-         */
+        /** @internal Update metadata cache entry and sync to indexedDB */
         saveMetaCache(path: string, entry: CachedMetadata): void;
-        /**
-         * @internal Show a notice that the cache is being rebuilt
-         */
+        /** @internal Show a notice that the cache is being rebuilt */
         showIndexingNotice(): void;
-        /**
-         * @internal
-         */
-        // trigger(e: unknown): void;
-        /**
-         * @internal Re-resolve all links for changed path
-         */
+        /** @internal Re-resolve all links for changed path */
         updateRelatedLinks(path: string): void;
-        /**
-         * @internal Update user ignore filters from settings
-         */
+        /** @internal Update user ignore filters from settings */
         updateUserIgnoreFilters(): void;
-        /**
-         * @internal Bind actions to listeners on vault
-         */
+        /** @internal Bind actions to listeners on vault */
         watchVaultChanges(): void;
-        /**
-         * @internal Send message to worker to update metadata cache
-         */
+        /** @internal Send message to worker to update metadata cache */
         work(cacheEntry: unknown): void;
-
-        _getLinkpathDest(origin: string, path: string): TFile[];
     }
 
+    interface MetadataEditor extends Component {
+        /**
+         * Button element for adding a new property
+         */
+        addPropertyButtonEl: HTMLButtonElement;
+        /**
+         * Reference to the app
+         */
+        app: App;
+        /**
+         * Whether the frontmatter editor is collapsed
+         */
+        collapsed: boolean;
+        /**
+         * Container element for the metadata editor
+         */
+        containerEl: HTMLElement;
+        /**
+         * Element containing metadata table and addPropertyButton
+         */
+        contentEl: HTMLElement;
+        /**
+         * The currently focused property
+         */
+        focusedLine: null | MetadataEditorProperty;
+        /**
+         * Fold button for folding away the frontmatter editor on hovering over headingEl
+         */
+        foldEl: HTMLElement;
+        /**
+         * Heading element for the metadata editor
+         */
+        headingEl: HTMLElement;
+        /**
+         * Hover element container
+         */
+        hoverPopover: null | HoverPopover;
+        /**
+         * Owner of the metadata editor
+         */
+        owner: MarkdownView;
+        /**
+         * All properties existing in the metadata editor
+         */
+        properties: MetadataEntryData[];
+        /**
+         * Element containing all property elements
+         */
+        propertyListEl: HTMLElement;
+        /**
+         * List of all property field editors
+         */
+        rendered: MetadataEditorProperty[];
+        /**
+         * Set of all selected property editors
+         */
+        selectedLines: Set<MetadataEditorProperty>;
+
+        /**
+         * Convert given properties to a serialized object and store in clipboard as obsidian/properties
+         */
+        _copyToClipboard(event: ClipboardEvent, properties: MetadataEditorProperty[]): void;
+        /**
+         * Uncollapse editor if collapsed and create a new property row
+         */
+        addProperty(): void;
+        /**
+         * Clear all properties
+         */
+        clear(): void;
+        /**
+         * Unselect all lines
+         */
+        clearSelection(): void;
+        /**
+         * Focus on property field with given key
+         */
+        focusKey(key: string): void;
+        /**
+         * Focus on property
+         */
+        focusProperty(property: MetadataEditorProperty): void;
+        /**
+         * Focus on property at specified index
+         */
+        focusPropertyAtIndex(index: number): void;
+        /**
+         * Focus on property with value
+         */
+        focusValue(value: string, which: "both" | "end" | "start"): void;
+        /**
+         * Handle copy event on selection and serialize properties
+         */
+        handleCopy(event: ClipboardEvent): void;
+        /**
+         * Handle cut event and serialize and remove properties
+         */
+        handleCut(event: ClipboardEvent): void;
+        /**
+         * Handle selection of item for drag handling
+         */
+        handleItemSelection(event: PointerEvent, property: MetadataEditorProperty): boolean;
+        /**
+         * Handle key press event for controlling selection or movement of property up/down
+         */
+        handleKeypress(event: KeyboardEvent): void;
+        /**
+         * Handle paste event of properties into metadata editor
+         */
+        handlePaste(event: ClipboardEvent): void;
+        /**
+         * Whether the editor has focus
+         */
+        hasFocus(): boolean;
+        /**
+         * Whether there is a property that is focused
+         */
+        hasPropertyFocused(): boolean;
+        /**
+         * Add new properties to the metadata editor and save
+         */
+        insertProperties(properties: Record<string, any>): void;
+        /**
+         * On loading of the metadata editor, register on metadata type change event
+         */
+        onload(): void;
+        /**
+         * On vault metadata update, update property render
+         */
+        onMetadataTypeChange(property: MetadataEditorProperty): void;
+        /**
+         * Remove specified properties from the metadata editor and save, and reset focus if specified
+         */
+        removeProperties(properties: MetadataEditorProperty[], reset_focus?: boolean): unknown;
+        /**
+         * Reorder the entry to specified index position and save
+         */
+        reorderKey(entry: MetadataEntryData, index: number): unknown;
+        /**
+         * Serialize the properties and save frontmatter
+         */
+        save(): void;
+        /**
+         * Select all property fields
+         */
+        selectAll(): void;
+        /**
+         * Mark specified property as selected
+         */
+        selectProperty(property: MetadataEditorProperty | undefined, select: boolean): void;
+        /**
+         * Convert properties to a serialized object
+         */
+        serialize(): Record<string, any>;
+        /**
+         * Sets frontmatter as collapsed or uncollapsed
+         */
+        setCollapse(collapsed: boolean, x: boolean): void;
+        /**
+         * On context menu event on header element, show property menu
+         */
+        showPropertiesMenu(event: MouseEvent): void;
+        /**
+         * Synchronize data with given properties and re-render them
+         */
+        synchronize(data: Record<string, any>): void;
+        /**
+         * Toggle collapsed state of the metadata editor
+         */
+        toggleCollapse(): void;
+    }
+
+    interface MetadataEditorProperty extends Component {
+        /**
+         * Reference to the app
+         */
+        app: App;
+        /**
+         * Container element for the metadata editor property
+         */
+        containerEl: HTMLElement;
+        /**
+         * Entry information for the property
+         */
+        entry: MetadataEntryData;
+        /**
+         * Icon element of the property
+         */
+        iconEl: HTMLSpanElement;
+        /**
+         * Key value of the property
+         */
+        keyEl: HTMLElement;
+        /**
+         * Input field for key value of the property
+         */
+        keyInputEl: HTMLInputElement;
+        /**
+         * Metadata editor the property is attached to
+         */
+        metadataEditor: MetadataEditor;
+        /**
+         * Widget that handles user input for this property widget type
+         */
+        rendered: MetadataWidget | null;
+        /**
+         * Info about the inferred and expected property widget given key-value pair
+         */
+        typeInfo: { expected: PropertyWidget; inferred: PropertyWidget };
+        /**
+         * Element that contains the value input or widget
+         */
+        valueEl: HTMLElement;
+        /**
+         * Element containing the displayed warning on malformed property field
+         */
+        warningEl: HTMLElement;
+
+        /**
+         * Focus on the key input element
+         */
+        focusKey(): void;
+        /**
+         * Focus on the property (container element)
+         */
+        focusProperty(): void;
+        /**
+         * Focus on the value input element
+         */
+        focusValue(which?: "both" | "end" | "start"): void;
+        /**
+         * Reveal the property menu on click event
+         */
+        handleItemClick(event: MouseEvent): void;
+        /**
+         * Focus on property on blur event
+         */
+        handlePropertyBlur(): void;
+        /**
+         * Update key of property and saves, returns false if error
+         */
+        handleUpdateKey(key: string): boolean;
+        /**
+         * Update value of property and saves
+         */
+        handleUpdateValue(value: any): void;
+        /**
+         * Loads as draggable property element
+         */
+        onload(): void;
+        /**
+         * Render property widget based on type
+         */
+        renderProperty(entry: MetadataEntryData, check_errors?: boolean, use_expected_type?: boolean): void;
+        /**
+         * Set the selected class of property
+         */
+        setSelected(selected: boolean): void;
+        /**
+         * Reveal property selection menu at mouse event
+         */
+        showPropertyMenu(event: MouseEvent): void;
+    }
+
+    interface MetadataEntryData {
+        key: string;
+        type: PropertyWidgetType | string;
+        value: any;
+    }
+
+    interface MetadataTypeManager extends Events {
+        /**
+         * Reference to App
+         */
+        app: App;
+        /**
+         * Registered properties of the vault
+         */
+        properties: Record<string, PropertyInfo>;
+        /** @internal Registered type widgets */
+        registeredTypeWidgets: Record<PropertyWidgetType, PropertyWidget>;
+        /**
+         * Associated widget types for each property
+         */
+        types: Record<string, PropertyWidgetType>;
+
+        /**
+         * Get all registered properties of the vault
+         */
+        getAllProperties(): Record<string, PropertyInfo>;
+        /**
+         * Get assigned widget type for property
+         */
+        getAssignedType(property: string): PropertyWidgetType | null;
+        /**
+         * Get info for property
+         */
+        getPropertyInfo(property: string): PropertyInfo;
+        /** @internal Get expected widget type for property and the one inferred from the property value */
+        getTypeInfo(arg: { key: string; type: string; value: unknown }): {
+            inferred: PropertyWidget;
+            expected: PropertyWidget;
+        };
+        /**
+         * Get all properties with an assigned widget type
+         */
+        getTypes(): string[];
+        /** @internal Load property types from config */
+        loadData(): Promise<void>;
+        /** @internal Save property types to config */
+        save(): Promise<void>;
+        /** @internal Get all properties from metadata cache */
+        savePropertyInfo(): void;
+        /** @internal Set widget type for property */
+        setType(property: string, type: PropertyWidgetType): Promise<void>;
+        /** @internal Unset widget type for property */
+        unsetType(property: string): Promise<void>;
+    }
+
+    interface MetadataWidget {}
+
     interface Modal {
-        /**
-         * @internal Background applied to application to dim it
-         */
+        /** @internal Background applied to application to dim it */
         bgEl: HTMLElement;
-        /**
-         * @internal Opacity percentage of the background
-         */
+        /** @internal Opacity percentage of the background */
         bgOpacity: number;
-        /**
-         * @internal Whether the background is being dimmed
-         */
+        /** @internal Whether the background is being dimmed */
         dimBackground: boolean;
-        /**
-         * @internal Modal container element
-         */
+        /** @internal Modal container element */
         modalEl: HTMLElement;
-        /**
-         * @internal Selection logic handler
-         */
+        /** @internal Selection logic handler */
         selection: WindowSelection;
         /**
          * Reference to the global Window object
          */
         win: Window;
 
-        /**
-         * @internal On escape key press close modal
-         */
+        /** @internal On escape key press close modal */
         onEscapeKey(): void;
-        /**
-         * @internal On closing of the modal
-         */
+        /** @internal On closing of the modal */
         onWindowClose(): void;
         /**
-         * @internal Set the background opacity of the dimmed background
          * @param opacity Opacity percentage
+         * @internal Set the background opacity of the dimmed background
          */
         setBackgroundOpacity(opacity: string): this;
         /**
-         * @internal Set the content of the modal
          * @param content Content to set
+         * @internal Set the content of the modal
          */
         setContent(content: HTMLElement | string): this;
         /**
-         * @internal Set whether the background should be dimmed
          * @param dim Whether the background should be dimmed
+         * @internal Set whether the background should be dimmed
          */
         setDimBackground(dim: boolean): this;
         /**
-         * @internal Set the title of the modal
          * @param title Title to set
+         * @internal Set the title of the modal
          */
         setTitle(title: string): this;
     }
 
+    interface ObsidianDOM {
+        /**
+         * Root element of the application
+         */
+        appContainerEl: HTMLElement;
+        /**
+         * Child of `appContainerEl` containing the main content of the application
+         */
+        horizontalMainContainerEl: HTMLElement;
+        /**
+         * Status bar element containing word count among other things
+         */
+        statusBarEl: HTMLElement;
+        /**
+         * Child of `horizontalMainContainerEl` containing the workspace DOM
+         */
+        workspaceEl: HTMLElement;
+    }
+
+    interface ObsidianTouchEvent {
+        direction: "x" | "y";
+        evt: TouchEvent;
+        points: number;
+        registerCallback: {
+            move: (x: number) => void;
+            cancel: () => void;
+            finish: (x: number, y: number, z: number) => void;
+        };
+        startX: number;
+        startY: number;
+        targetEl: HTMLElement;
+        touch: Touch;
+        x: number;
+        y: number;
+    }
+
+    interface PluginManifest {
+        /**
+         * Name of the author of the plugin
+         */
+        author: string;
+        /**
+         * URL to the author's website
+         */
+        authorUrl?: string;
+        /**
+         * Description of the plugin's functionality
+         */
+        description: string;
+        /**
+         * Storage location of the plugin relative to the vault root
+         */
+        dir?: string;
+        /**
+         * URL for funding the author
+         */
+        fundingUrl?: string;
+        /**
+         * Unique identifier of the plugin
+         */
+        id: string;
+        /**
+         * Whether the plugin is designed for desktop use only
+         */
+        isDesktopOnly?: boolean;
+        /**
+         * Minimum Obsidian version compatible with the plugin
+         */
+        minAppVersion: string;
+        /**
+         * Name of the plugin
+         */
+        name: string;
+        /**
+         * Version of the plugin
+         */
+        version: string;
+    }
+
+    interface Plugins {
+        /**
+         * Reference to App
+         */
+        app: App;
+        /**
+         * Set of enabled plugin IDs
+         *
+         * @remark The plugin ids aren't guaranteed to be either active (in `app.plugins.plugins`) or installed (in `app.plugins.manifests`)
+         */
+        enabledPlugins: Set<string>;
+        /** @internal Plugin ID that is currently being enabled */
+        loadingPluginId: string | null;
+        /**
+         * Manifests of all the plugins that are installed
+         */
+        manifests: Record<string, PluginManifest>;
+        /**
+         * Mapping of plugin ID to active plugin instance
+         *
+         * @remark Prefer usage of getPlugin to access a plugin
+         */
+        plugins: Record<string, Plugin>;
+        /**
+         * Mapping of plugin ID to available updates
+         */
+        updates: Map<string, PluginUpdateManifest>;
+
+        /** @internal Check online list for deprecated plugins to automatically disable */
+        checkForDeprecations(): Promise<void>;
+        /**
+         * Check for plugin updates
+         */
+        checkForUpdates(): Promise<void>;
+        /**
+         * Unload a plugin by ID
+         */
+        disablePlugin(id: string): Promise<void>;
+        /**
+         * Unload a plugin by ID and save config for persistence
+         */
+        disablePluginAndSave(id: string): Promise<void>;
+        /**
+         * Enable a plugin by ID
+         */
+        enablePlugin(id: string): Promise<void>;
+        /**
+         * Enable a plugin by ID and save config for persistence
+         */
+        enablePluginAndSave(id: string): Promise<void>;
+        /**
+         * Get a plugin by ID
+         */
+        getPlugin(id: string): Plugin | null;
+        /**
+         * Get the folder where plugins are stored
+         */
+        getPluginFolder(): string;
+        /** @internal Load plugin manifests and enable plugins from config */
+        initialize(): Promise<void>;
+        /**
+         * Install a plugin from a given URL
+         */
+        installPlugin(repo: string, version: string, manifest: PluginManifest): Promise<void>;
+        /**
+         * Check whether a plugin is deprecated
+         */
+        isDeprecated(id: string): boolean;
+        /**
+         * Check whether community plugins are enabled
+         */
+        isEnabled(): boolean;
+        /**
+         * Load a specific plugin's manifest by its folder path
+         */
+        loadManifest(path: string): Promise<void>;
+        /** @internal Load all plugin manifests from plugin folder */
+        loadManifests(): Promise<void>;
+        /**
+         * Load a plugin by its ID
+         */
+        loadPlugin(id: string): Promise<Plugin>;
+        /** @internal */
+        onRaw(e: unknown): void;
+        /** @internal - Save current plugin configs */
+        saveConfig(): Promise<void>;
+        /** @internal Toggle whether community plugins are enabled */
+        setEnable(enabled: boolean): Promise<void>;
+        /**
+         * Uninstall a plugin by ID
+         */
+        uninstallPlugin(id: string): Promise<void>;
+        /**
+         * Unload a plugin by ID
+         */
+        unloadPlugin(id: string): Promise<void>;
+    }
+
+    interface PluginUpdateManifest {
+        /**
+         * Manifest of the plugin
+         */
+        manifest: PluginManifest;
+        /**
+         * Repository of the plugin
+         */
+        repo: string;
+        /**
+         * New version of the plugin
+         */
+        version: string;
+    }
+
+    interface PopoverSuggest<T> {
+        /**
+         * Whether the suggestion popup is currently open and visible
+         */
+        isOpen: boolean;
+        /**
+         * Suggestion container element
+         */
+        suggestEl: HTMLElement;
+        /**
+         * Handles selection and rendering of the suggestions
+         */
+        suggestions: SuggestionContainer<T>;
+    }
+
+    interface PositionedReference extends Reference {
+        /**
+         * Position of the reference in the file
+         */
+        position: {
+            start: Loc;
+            end: Loc;
+        };
+    }
+
+    interface PropertyInfo {
+        /**
+         * Usage count of property
+         */
+        count: number;
+        /**
+         * Name of property
+         */
+        name: string;
+        /**
+         * Type of property
+         */
+        type: string;
+    }
+
+    interface PropertyWidget {
+        /**
+         * Lucide-dev icon associated with the widget
+         */
+        icon: string;
+        /** @internal Name proxy */
+        name: unknown;
+        /** @internal Reserved keys for the widget */
+        reservedKeys: string[];
+        /**
+         * Widget type
+         */
+        type: string;
+
+        /** @internal */
+        default(): void;
+        /** @internal Render function for the widget */
+        render(element: HTMLElement, metadataField: unknown, property: PropertyInfo): void;
+        /** @internal Validate correctness of property input with respects to the widget */
+        validate(value: unknown): boolean;
+    }
+
+    interface ReadViewRenderer {
+        addBottomPadding: boolean;
+        asyncSections: unknown[];
+        lastRender: number;
+        lastScroll: number;
+        lastText: string;
+        previewEl: HTMLElement;
+        pusherEl: HTMLElement;
+        recycledSections: unknown[];
+        rendered: unknown[];
+        sections: RendererSection[];
+        text: string;
+
+        clear(): void;
+        parseAsync(): void;
+        parseSync(): void;
+        queueRender(): void;
+        set(text: string): void;
+    }
+
+    interface RecentFileTracker {
+        /**
+         * List of last opened file paths, limited to 50
+         */
+        lastOpenFiles: string[];
+        /**
+         * Reference to Vault
+         */
+        vault: Vault;
+        /**
+         * Reference to Workspace
+         */
+        workspace: Workspace;
+
+        /** @internal */
+        collect(file: TFile): void;
+        /**
+         * Returns the last 10 opened files
+         */
+        getLastOpenFiles(): string[];
+        /**
+         * Get last n files of type (defaults to 10)
+         */
+        getRecentFiles(arg?: {
+            showMarkdown: boolean;
+            showCanvas: boolean;
+            showNonImageAttachments: boolean;
+            showImages: boolean;
+            maxCount: number;
+        }): string[];
+        /**
+         * Set the last opened files
+         */
+        load(savedFiles: string[]): void;
+        /** @internal On file create, save file to last opened files */
+        onFileCreated(file: TFile): void;
+        /** @internal On file open, save file to last opened files */
+        onFileOpen(prevFile: TFile, file: TFile): void;
+        /** @internal On file rename, update file path in last opened files */
+        onRename(file: TFile, oldPath: string): void;
+        /** @internal Get last opened files */
+        serialize(): string[];
+    }
+
+    interface RendererSection {
+        el: HTMLElement;
+        html: string;
+        rendered: boolean;
+    }
+
+    interface Runnable {
+        cancelled: boolean;
+        onCancel: null | (() => void);
+        onStart: null | (() => void);
+        onStop: null | (() => void);
+        running: boolean;
+
+        cancel(): void;
+        isCancelled(): boolean;
+        isRunning(): boolean;
+        start(): void;
+        stop(): void;
+    }
+
     interface Scope {
+        /** @internal - Callback to execute when scope is matched */
+        cb: (() => boolean) | undefined;
         /**
          * Overridden keys that exist in this scope
          */
         keys: KeyScope[];
+        /** @internal Scope that this scope is a child of */
+        parent: Scope | undefined;
+        /** @internal */
+        tabFocusContainer: HTMLElement | null;
 
         /**
-         * @internal Scope that this scope is a child of
-         */
-        parent: Scope | undefined;
-        /**
-         * @internal - Callback to execute when scope is matched
-         */
-        cb: (() => boolean) | undefined;
-        /**
-         * @internal
-         */
-        tabFocusContainer: HTMLElement | null;
-        /**
-         * @internal Execute keypress within this scope
          * @param event - Keyboard event
          * @param keypress - Pressed key information
+         * @internal Execute keypress within this scope
          */
         handleKey(event: KeyboardEvent, keypress: KeymapInfo): unknown;
         /**
-         * @internal
          * @deprecated - Executes same functionality as `Scope.register`
+         * @internal
          */
         registerKey(modifiers: Modifier[], key: string | null, func: KeymapEventListener): KeymapEventHandler;
-        /**
-         * @internal
-         */
+        /** @internal */
         setTabFocusContainer(container: HTMLElement): void;
+    }
+
+    interface SearchCursor {
+        /**
+         * Current editor search position
+         */
+        current(): { from: EditorPosition; to: EditorPosition };
+        /**
+         * All search results
+         */
+        findAll(): { from: EditorPosition; to: EditorPosition }[];
+        /**
+         * Next editor search position
+         */
+        findNext(): { from: EditorPosition; to: EditorPosition };
+        /**
+         * Previous editor search position
+         */
+        findPrevious(): { from: EditorPosition; to: EditorPosition };
+        /**
+         * Replace current search result with specified text
+         *
+         * @remark origin is used by CodeMirror to determine which component was responsible for the change
+         */
+        replace(replacement: string, origin: string): void;
+        /**
+         * Replace all search results with specified text
+         */
+        replaceAll(replacement: string, origin: string): void;
+    }
+
+    interface SerializedWorkspace {
+        /**
+         * Last active leaf
+         */
+        active: string;
+        /**
+         * Last opened files
+         */
+        lastOpenFiles: string[];
+        /**
+         * Left opened leaf
+         */
+        left: LeafEntry;
+        /**
+         * Left ribbon
+         */
+        leftRibbon: { hiddenItems: Record<string, boolean> };
+        /**
+         * Main (center) workspace leaf
+         */
+        main: LeafEntry;
+        /**
+         * Right opened leaf
+         */
+        right: LeafEntry;
     }
 
     interface Setting extends Modal {
@@ -5135,13 +4205,9 @@ declare module 'obsidian' {
          * Current active tab of the settings modal
          */
         activateTab: SettingTab;
-        /**
-         * @internal Container element containing the community plugins
-         */
+        /** @internal Container element containing the community plugins */
         communityPluginTabContainer: HTMLElement;
-        /**
-         * @internal Container element containing the community plugins header
-         */
+        /** @internal Container element containing the community plugins header */
         communityPluginTabHeaderGroup: HTMLElement;
         /**
          * Previously opened tab ID
@@ -5155,56 +4221,47 @@ declare module 'obsidian' {
          * List of all core settings tabs (editor, files & links, ...)
          */
         settingTabs: SettingTab[];
-        /**
-         * @internal Container element containing the core settings
-         */
+        /** @internal Container element containing the core settings */
         tabContainer: HTMLElement;
-        /**
-         * @internal Container for currently active settings tab
-         */
+        /** @internal Container for currently active settings tab */
         tabContentContainer: HTMLElement;
-        /**
-         * @internal Container for all settings tabs
-         */
+        /** @internal Container for all settings tabs */
         tabHeadersEl: HTMLElement;
 
         /**
+         * @param tab Tab to add
+         * @internal Add a new plugin tab to the settings modal
+         */
+        addSettingTab(tab: SettingTab): void;
+        /** @internal Closes the currently active tab */
+        closeActiveTab(): void;
+        /**
+         * @param tab Tab to check
+         * @internal Check whether tab is a plugin tab
+         */
+        isPluginSettingTab(tab: SettingTab): boolean;
+        /**
+         * @param tab Tab to open
+         * @internal Open a specific tab by tab reference
+         */
+        openTab(tab: SettingTab): void;
+        /**
          * Open a specific tab by ID
+         *
          * @param id ID of the tab to open
          */
         openTabById(id: string): void;
         /**
-         * @internal Add a new plugin tab to the settings modal
-         * @param tab Tab to add
-         */
-        addSettingTab(tab: SettingTab): void;
-        /**
-         * @internal Closes the currently active tab
-         */
-        closeActiveTab(): void;
-        /**
-         * @internal Check whether tab is a plugin tab
-         * @param tab Tab to check
-         */
-        isPluginSettingTab(tab: SettingTab): boolean;
-        /**
-         * @internal Open a specific tab by tab reference
-         * @param tab Tab to open
-         */
-        openTab(tab: SettingTab): void;
-        /**
-         * @internal Remove a plugin tab from the settings modal
          * @param tab Tab to remove
+         * @internal Remove a plugin tab from the settings modal
          */
         removeSettingTab(tab: SettingTab): void;
         /**
-         * @internal Update the title of the modal
          * @param tab Tab to update the title to
+         * @internal Update the title of the modal
          */
         updateModalTitle(tab: SettingTab): void;
-        /**
-         * @internal Update a tab section
-         */
+        /** @internal Update a tab section */
         updatePluginSection(): void;
     }
 
@@ -5214,6 +4271,12 @@ declare module 'obsidian' {
          */
         id: string;
         /**
+         * Reference to installed plugins element
+         *
+         * @if Tab is the community plugins tab
+         */
+        installedPluginsEl?: HTMLElement;
+        /**
          * Sidebar name of the tab
          */
         name: string;
@@ -5222,162 +4285,408 @@ declare module 'obsidian' {
          */
         navEl: HTMLElement;
         /**
-         * Reference to the settings modal
-         */
-        setting: Setting;
-        /**
          * Reference to the plugin that initialised the tab
+         *
          * @if Tab is a plugin tab
          */
         plugin?: Plugin;
         /**
-         * Reference to installed plugins element
-         * @if Tab is the community plugins tab
+         * Reference to the settings modal
          */
-        installedPluginsEl?: HTMLElement;
+        setting: Setting;
+    }
 
-        // TODO: Editor, Files & Links, Appearance and About all have private properties too
+    interface StateHistory {
+        /**
+         * Ephemeral cursor state within Editor of leaf
+         */
+        eState: {
+            cursor: EditorRange;
+            scroll: number;
+        };
+        /**
+         * Icon of the leaf
+         */
+        icon?: string;
+        /**
+         * History of previous and future states of leaf
+         */
+        leafHistory?: {
+            backHistory: StateHistory[];
+            forwardHistory: StateHistory[];
+        };
+        /**
+         * Id of parent to which the leaf belonged
+         */
+        parentId?: string;
+        /**
+         * Id of root to which the leaf belonged
+         */
+        rootId?: string;
+        /**
+         * Last state of the leaf
+         */
+        state: ViewState;
+        /**
+         * Title of the leaf
+         */
+        title?: string;
+    }
+
+    interface SuggestionContainer<T> {
+        /**
+         * Which suggestions should be picked from
+         */
+        chooser: EditorSuggest<T>;
+        /**
+         * Pop-up element that displays the suggestions
+         */
+        containerEl: HTMLElement;
+        /**
+         * The currently focused item
+         */
+        selectedItem: number;
+        /**
+         * List of all possible suggestions as elements
+         */
+        suggestions: HTMLElement[];
+        /**
+         * List of all possible suggestions as data
+         */
+        values: SearchResult[];
+        /**
+         * Amount of suggestions that can be displayed at once within containerEl
+         */
+        get numVisibleItems(): number;
+        /**
+         * Height in pixels of the selected item
+         */
+        get rowHeight(): number;
+
+        /**
+         * Add an empty message with provided text
+         */
+        addMessage(text: string): HTMLElement;
+        /**
+         * Add suggestion to container
+         */
+        addSuggestion(suggestion: SearchResult): void;
+        /**
+         * Set selected item to one specified by index, if keyboard navigation, force scroll into view
+         *
+         * @remark Prefer setSelectedItem, which clamps the index to within suggestions array
+         */
+        forceSetSelectedItem(index: number, event: Event): void;
+        /**
+         * Move selected item to next suggestion
+         */
+        moveDown(event: KeyboardEvent): boolean;
+        /**
+         * Move selected item to previous suggestion
+         */
+        moveUp(event: KeyboardEvent): boolean;
+        /**
+         * Process click on suggestion item
+         */
+        onSuggestionClick(event: MouseEvent, element: HTMLElement): void;
+        /**
+         * Process hover on suggestion item
+         */
+        onSuggestionMouseover(event: MouseEvent, element: HTMLElement): unknown;
+        /**
+         * Move selected item to the one in the next 'page' (next visible block)
+         */
+        pageDown(event: KeyboardEvent): boolean;
+        /**
+         * Move selected item to the one in the previous 'page' (previous visible block)
+         */
+        pageUp(event: KeyboardEvent): boolean;
+        /**
+         * Set selected item to one specified by index, invokes forceSetSelectedItem
+         */
+        setSelectedItem(index: number, event: Event): void;
+        /**
+         * Empties original container and adds multiple suggestions
+         */
+        setSuggestions(suggestions: SearchResult[]): void;
+        /**
+         * Use currently selected suggestion as the accepted one
+         */
+        useSelectedItem(event: Event): boolean;
+    }
+
+    interface TableCell {
+        col: number;
+        contentEl: HTMLElement;
+        dirty: boolean;
+        el: HTMLElement;
+        end: number;
+        padEnd: number;
+        padStart: number;
+        row: number;
+        start: number;
+        table: TableCellEditor;
+        text: string;
+    }
+
+    class TableCellEditor extends MarkdownBaseView implements TableCell {}
+
+    interface TableEditor {}
+
+    interface TextFileView {
+        /**
+         * Whether current file is dirty (different from saved contents)
+         */
+        dirty: boolean;
+        /**
+         * Whether editor should be rendered as plaintext
+         */
+        isPlaintext: boolean;
+        /**
+         * The data that was last saved
+         */
+        lastSavedData: null | string;
+        /**
+         * Whether on saving, the file should be saved again (for dirtyness checks)
+         */
+        saveAgain: boolean;
+        /**
+         * Whether the file is currently saving
+         */
+        saving: boolean;
     }
 
     interface TFile {
         deleted: boolean;
     }
 
-    /**
-     * @internal Used for Obsidian's touch event handling
-     */
-    interface ObsidianTouchEvent {
-        direction: "x" | "y";
-        evt: TouchEvent;
-        points: number;
-        registerCallback: ({
-            move: (x: number) => void,
-            cancel: () => void,
-            finish: (x: number, y: number, z: number) => void
-        }),
-        startX: number;
-        startY: number;
-        targetEl: HTMLElement;
-        touch: Touch;
+    interface ThemeManifest {
+        /**
+         * Name of the author of the theme
+         */
+        author: string;
+        /**
+         * URL to the author's website
+         */
+        authorUrl?: string;
+        /**
+         * Storage location of the theme relative to the vault root
+         */
+        dir: string;
+        /**
+         * URL for funding the author
+         */
+        fundingUrl?: string;
+        /**
+         * Minimum Obsidian version compatible with the theme
+         */
+        minAppVersion: string;
+        /**
+         * Name of the theme
+         */
+        name: string;
+        /**
+         * Version of the theme
+         *
+         * @remark Defaults to "0.0.0" if no theme manifest was provided in the repository
+         */
+        version: "0.0.0" | string;
+    }
 
-        x: number;
-        y: number;
+    interface Token extends EditorRange {
+        text: string;
+        type: "tag" | "external-link" | "internal-link";
+    }
+
+    interface Tree<T> {
+        /**
+         * Currently active item in tree view
+         */
+        activeDom: TreeNode<T> | null;
+        /**
+         * Reference to App
+         */
+        app: App;
+        /**
+         * Container element of the tree view
+         */
+        containerEl: HTMLElement;
+        /**
+         * Currently focused item in tree view
+         */
+        focusedItem: TreeNode<T> | null;
+        /**
+         * Gets the ID of a tree item given its Node
+         */
+        getNodeId: (node: TreeNode<T>) => string | undefined;
+        /**
+         * Handle collapsing of all nodes
+         */
+        handleCollapseAll: () => void;
+        /**
+         * Handle deletion of selected nodes
+         */
+        handleDeleteSelectedItems: () => void | undefined;
+        /**
+         * Handle renaming of focused item
+         */
+        handleRenameFocusedItem: () => void;
+        /**
+         * ID of the view the tree is associated with
+         */
+        id: string;
+        /** @internal Facilitates rendering of tree view */
+        infinityScroll: InfinityScroll;
+        /**
+         * Whether all items in the tree are collapsed
+         */
+        isAllCollapsed: boolean;
+        /**
+         * Whether tree items should default to collapsed state
+         */
+        prefersCollapsed: boolean;
+        /**
+         * Request saving of the current fold states
+         */
+        requestSaveFolds: () => void;
+        /**
+         * Key scope for tree view
+         */
+        scope: Scope;
+        /**
+         * Currently selected items in tree view
+         */
+        selectedDoms: Set<TreeNode<T>>;
+        /**
+         * The view the tree is associated with
+         */
+        view: View;
+        /**
+         * Root item of the tree view
+         */
+        get root(): TreeNode<T>;
+
+        /**
+         * Change the focused item to the next item in specified direction
+         */
+        changeFocusedItem(direction: "forwards" | "backwards"): void;
+        /**
+         * Unselect all selected items in the tree view
+         */
+        clearSelectedDoms(): void;
+        /**
+         * Mark tree item as deselected
+         */
+        deselectItem(node: TreeNode<T>): void;
+        /**
+         * Get the local storage key for the saved tree view folds
+         */
+        getFoldKey(): string;
+        /**
+         * Handle selection of tree item via keyboard event
+         */
+        handleItemSelection(event: MouseEvent, node: TreeNode<T>): void;
+        /** @internal Registers all keyboard actions to the tree view keyscope */
+        initializeKeyboardNav(): void;
+        /**
+         * Check whether item is a valid tree item
+         */
+        isItem(node: TreeNode<T> | undefined): boolean;
+        /**
+         * Load the saved fold states of the tree view from local storage
+         */
+        loadFolds(): void;
+        /**
+         * Handle keyboard event for moving/selecting tree item below
+         */
+        onKeyArrowDown(event: KeyboardEvent): void;
+        /**
+         * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding)
+         */
+        onKeyArrowLeft(event: KeyboardEvent): void;
+        /**
+         * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding)
+         */
+        onKeyArrowRight(event: KeyboardEvent): void;
+        /**
+         * Handle keyboard event for moving/selecting tree item above
+         */
+        onKeyArrowUp(event: KeyboardEvent): void;
+        /**
+         * Handle keyboard event for opening tree item
+         */
+        onKeyOpen(event: KeyboardEvent): void;
+        /** @internal Update scroll representation on resize */
+        onResize(): void;
+        /**
+         * Save the current fold states of the tree view to local storage
+         */
+        saveFolds(): void;
+        /**
+         * Mark tree item as selected
+         */
+        selectItem(node: TreeNode<T>): void;
+        /**
+         * Set all items in the tree view to be collapsed or expanded
+         */
+        setCollapseAll(collapse: boolean): void;
+        /**
+         * Set the focused item in the tree view
+         */
+        setFocusedItem(node: TreeNode<T>, scrollIntoView?: boolean): void;
+        /**
+         * (Un)Collapse all items in the tree view
+         */
+        toggleCollapseAll(): void;
     }
 
     interface Vault {
         /**
          * Low-level file system adapter for read and write operations
+         *
          * @tutorial Can be used to read binaries, or files not located directly within the vault
          */
         adapter: DataAdapter;
-        /**
-         * @internal Max size of the cache in bytes
-         */
+        /** @internal Max size of the cache in bytes */
         cacheLimit: number;
         /**
          * Object containing all config settings for the vault (editor, appearance, ... settings)
+         *
          * @remark Prefer usage of `app.vault.getConfig(key)` to get settings, config does not contain settings that were not changed from their default value
          */
         config: AppVaultConfig;
-        /**
-         * @internal Timestamp of the last config change
-         */
+        /** @internal Timestamp of the last config change */
         configTs: number;
-        /**
-         * @internal Mapping of path to Obsidian folder or file structure
-         */
+        /** @internal Mapping of path to Obsidian folder or file structure */
         fileMap: Record<string, TAbstractFile>;
 
-        /**
-         * Called whenever any of Obsidian's settings are changed
-         * @remark Does *not* trigger when a particular plugin's settings are changed, for that, you could monkey-patch the `saveSettings` method of a plugin instance
-         */
-        on(name: 'config-changed', callback: () => void, ctx?: unknown): EventRef;
-
-        /**
-         * @internal Triggered whenever a file gets loaded internally
-         */
-        on(name: 'raw', callback: (path: string) => void, ctx?: unknown): EventRef;
-
-        /**
-         * @internal Not accessible
-         * @remark Always prefer usage of on(name: 'rename', ...) instead
-         */
-        // on(name: 'renamed', callback: (oldPath: string, newPath: string) => void): EventRef;
-
-        /**
-         * @internal Not accessible
-         * @remark Always prefer usage of on(name: 'modify', ...) instead
-         */
-        // on(name: 'modified', callback: () => void): EventRef;
-
-        /**
-         * @internal Not accessible
-         */
-        // on(name: 'file-created', callback: () => void): EventRef;
-
-        /**
-         * @internal Not accessible
-         */
-        // on(name: 'folder-created', callback: () => void): EventRef;
-
-        /**
-         * @internal Not accessible
-         */
-        // on(name: 'file-removed', callback: () => void): EventRef;
-
-        /**
-         * @internal Not accessible
-         */
-        // on(name: 'folder-removed', callback: () => void): EventRef;
-
-        /**
-         * @internal Not accessible
-         */
-        // on(name: 'closed', callback: () => void): EventRef;       
-
-
-
-        /**
-         * @internal Add file as child/parent to respective folders
-         */
+        /** @internal Add file as child/parent to respective folders */
         addChild(file: TAbstractFile): void;
-        /**
-         * @internal Check whether new file path is available
-         */
+        /** @internal Check whether new file path is available */
         checkForDuplicate(file: TAbstractFile, newPath: string): boolean;
-        /**
-         * @internal Check whether path has valid formatting (no dots/spaces at end, ...)
-         */
+        /** @internal Check whether path has valid formatting (no dots/spaces at end, ...) */
         checkPath(path: string): boolean;
-        /**
-         * @internal Remove a vault config file
-         */
+        /** @internal Remove a vault config file */
         deleteConfigJson(configFile: string): Promise<void>;
         /**
          * Check whether a file exists in the vault
          */
         exists(file: TAbstractFile, senstive?: boolean): Promise<boolean>;
-        /**
-         * @internal
-         */
+        /** @internal */
         generateFiles(e: AsyncGenerator<TFile>, t: boolean): Promise<void>;
         /**
          * Get an abstract file by path, insensitive to case
          */
         getAbstractFileByPathInsensitive(path: string): TAbstractFile | null;
-        /**
-         * @internal Get path for file that does not conflict with other existing files
-         */
+        /** @internal Get path for file that does not conflict with other existing files */
         getAvailablePath(path: string, extension: string): string;
-        /**
-         * @internal Get path for attachment that does not conflict with other existing files
-         */
+        /** @internal Get path for attachment that does not conflict with other existing files */
         getAvailablePathForAttachments(filename: string, file: TAbstractFile, extension: string): string;
         /**
          * Get value from config by key
-         * @remark Default value will be selected if config value was not manually changed
+         *
          * @param key Key of config value
+         * @remark Default value will be selected if config value was not manually changed
          */
         getConfig(string: ConfigItem): unknown;
         /**
@@ -5386,102 +4695,95 @@ declare module 'obsidian' {
         getConfigFile(configFile: string): string;
         /**
          * Get direct parent of file
+         *
          * @param file File to get parent of
          */
         getDirectParent(file: TAbstractFile): TFolder | null;
-        /**
-         * @internal Check whether files map cache is empty
-         */
+        /** @internal Check whether files map cache is empty */
         isEmpty(): boolean;
-        /**
-         * @internal Iterate over the files and read them
-         */
+        /** @internal Iterate over the files and read them */
         iterateFiles(files: TFile[], cachedRead: boolean): void;
-        /**
-         * @internal Load vault adapter
-         */
+        /** @internal Load vault adapter */
         load(): Promise<void>;
         /**
-         * @internal Listener for all events on the vault
+         * Called whenever any of Obsidian's settings are changed
+         *
+         * @remark Does *not* trigger when a particular plugin's settings are changed, for that, you could monkey-patch the `saveSettings` method of a plugin instance
          */
+        on(name: "config-changed", callback: () => void, ctx?: unknown): EventRef;
+        /** @internal Triggered whenever a file gets loaded internally */
+        on(name: "raw", callback: (path: string) => void, ctx?: unknown): EventRef;
+        /** @internal Listener for all events on the vault */
         onChange(eventType: string, path: string, x: unknown, y: unknown): void;
         /**
          * Read a config file from the vault and parse it as JSON
+         *
          * @param config Name of config file
          */
         readConfigJson(config: string): Promise<null | object>;
         /**
          * Read a config file (full path) from the vault and parse it as JSON
+         *
          * @param path Full path to config file
          */
         readJson(path: string): Promise<null | object>;
         /**
          * Read a plugin config file (full path relative to vault root) from the vault and parse it as JSON
+         *
          * @param path Full path to plugin config file
          */
         readPluginData(path: string): Promise<null | object>;
         /**
          * Read a file from the vault as a string
+         *
          * @param path Path to file
          */
         readRaw(path: string): Promise<string>;
-        /**
-         * @internal Reload all config files
-         */
+        /** @internal Reload all config files */
         reloadConfig(): void;
         /**
-         * @internal Remove file as child/parent from respective folders
          * @param file File to remove
+         * @internal Remove file as child/parent from respective folders
          */
         removeChild(file: TAbstractFile): void;
-        /**
-         * @internal Get the file by absolute path
-         * @param path Path to file
-         */
-        resolveFilePath(path: string): TAbstractFile | null;
-        /**
-         * @internal Get the file by Obsidian URL
-         */
-        resolveFileUrl(url: string): TAbstractFile | null;
-        /**
-         * @internal Debounced function for saving config
-         */
+        /** @internal Debounced function for saving config */
         requestSaveConfig(): void;
         /**
-         * @internal Save app and appearance configs to disk
+         * @param path Path to file
+         * @internal Get the file by absolute path
          */
+        resolveFilePath(path: string): TAbstractFile | null;
+        /** @internal Get the file by Obsidian URL */
+        resolveFileUrl(url: string): TAbstractFile | null;
+        /** @internal Save app and appearance configs to disk */
         saveConfig(): Promise<void>;
         /**
          * Set value of config by key
+         *
          * @param key Key of config value
          * @param value Value to set
          */
         setConfig(key: ConfigItem, value: unknown): void;
         /**
          * Set where the config files are stored (relative to vault root)
+         *
          * @param configDir Path to config files
          */
         setConfigDir(configDir: string): void;
-        /**
-         * @internal Set file cache limit
-         */
+        /** @internal Set file cache limit */
         setFileCacheLimit(limit: number): void;
-        /**
-         * @internal Load all config files into memory
-         */
+        /** @internal Load all config files into memory */
         setupConfig(): Promise<void>;
         /**
-         * @internal Trigger an event on handler
-         */
-        // trigger(type: string): void;
-        /**
          * Write a config file to disk
+         *
          * @param config Name of config file
          * @param data Data to write
          */
         writeConfigJson(config: string, data: object): Promise<void>;
         /**
          * Write a config file (full path) to disk
+         *
          * @param path Full path to config file
          * @param data Data to write
          * @param pretty Whether to insert tabs or spaces
@@ -5494,8 +4796,202 @@ declare module 'obsidian' {
     }
 
     interface View {
+        /**
+         * Whether the leaf may close the view
+         */
+        closeable: boolean;
+    }
+
+    interface View {
         headerEl: HTMLElement;
         titleEl: HTMLElement;
+    }
+
+    interface ViewRegistry extends Events {
+        /**
+         * Mapping of file extensions to view type
+         */
+        typeByExtension: Record<string, string>;
+        /**
+         * Mapping of view type to view constructor
+         */
+        viewByType: Record<string, (leaf: WorkspaceLeaf) => View>;
+
+        /**
+         * Get the view type associated with a file extension
+         *
+         * @param extension File extension
+         */
+        getTypeByExtension(extension: string): string;
+        /**
+         * Get the view constructor associated with a view type
+         */
+        getViewCreatorByType(type: string): (leaf: WorkspaceLeaf) => View;
+        /**
+         * Check whether a view type is registered
+         */
+        isExtensionRegistered(extension: string): boolean;
+        /**
+         * Called when a view of type has been registered into the registry
+         */
+        on(name: "view-registered", callback: (type: string) => void): EventRef;
+        /**
+         * Called when a view of type has been unregistered from the registry
+         */
+        on(name: "view-unregistered", callback: (type: string) => void): EventRef;
+        /**
+         * Called when the file extensions mapping has been updated
+         */
+        on(name: "extensions-updated", callback: () => void): EventRef;
+        /**
+         * Register a view type for a file extension
+         *
+         * @param extension File extension
+         * @param type View type
+         * @remark Prefer registering the extension via the Plugin class
+         */
+        registerExtensions(extension: string[], type: string): void;
+        /**
+         * Register a view constructor for a view type
+         */
+        registerView(type: string, viewCreator: (leaf: WorkspaceLeaf) => View): void;
+        /**
+         * Register a view and its associated file extensions
+         */
+        registerViewWithExtensions(
+            extensions: string[],
+            type: string,
+            viewCreator: (leaf: WorkspaceLeaf) => View,
+        ): void;
+        /**
+         * Unregister extensions for a view type
+         */
+        unregisterExtensions(extension: string[]): void;
+        /**
+         * Unregister a view type
+         */
+        unregisterView(type: string): void;
+    }
+
+    interface WeakMapWrapper<K extends object, V> extends WeakMap<K, V> {
+        map: WeakMap<K, V>;
+    }
+
+    class WidgetEditorView extends EmbeddedEditorView {
+        constructor(context: EmbedContext, file: TFile, path?: string);
+        /**
+         * Data after reference
+         */
+        after: string;
+        /**
+         * Data before reference
+         */
+        before: string;
+        /**
+         * Full file contents
+         */
+        data: string;
+        /**
+         * File being currently renamed
+         */
+        fileBeingRenamed: null | TFile;
+        /**
+         * Current heading
+         */
+        heading: string;
+        /**
+         * Indent
+         */
+        indent: string;
+        /**
+         * Inline title element
+         */
+        inlineTitleEl: HTMLElement;
+        /**
+         * Full inline content string
+         */
+        lastSavedData: null | string;
+        /**
+         * Whether embedding should be saved twice on save
+         */
+        saveAgain: boolean;
+        /**
+         * Whether the widget is currently saving
+         */
+        saving: boolean;
+        /**
+         * Subpath reference of the path
+         */
+        subpath: string;
+        /**
+         * Whether the subpath was not found in the cache
+         */
+        subpathNotFound: boolean;
+
+        /**
+         * Push/pop current scope
+         */
+        applyScope(scope: Scope): void;
+        /**
+         * Get the current folds of the editor
+         */
+        getFoldInfo(): null | FoldInfo;
+        /**
+         * Splice incoming data at according to subpath for correct reference, then update heading and render
+         */
+        loadContents(data: string, cache: CachedMetadata): void;
+        /**
+         * Load file from cache based on stored path
+         */
+        loadFile(): Promise<void>;
+        /**
+         * Load file and check if data is different from last saved data, then loads contents
+         */
+        loadFileInternal(data: string, cache?: CachedMetadata): void;
+        /**
+         * Update representation on file finished updating
+         */
+        onFileChanged(file: TFile, data: string, cache: CachedMetadata): void;
+        /**
+         * Update representation on file rename
+         */
+        onFileRename(file: TAbstractFile, oldPath: string): void;
+        /**
+         * On loading widget, register vault change and rename events
+         */
+        onload(): void;
+        /**
+         * Save fold made in the editor to foldmanager
+         */
+        onMarkdownFold(): void;
+        /** @internal On change of editor title element */
+        onTitleChange(element: HTMLElement): void;
+        /** @internal On keypress on editor title element */
+        onTitleKeydown(event: KeyboardEvent): void;
+        /** @internal On pasting on editor title element */
+        onTitlePaste(element: HTMLElement, event: ClipboardEvent): void;
+        /**
+         * On unloading widget, unload component and remove scope
+         */
+        onunload(): void;
+        /**
+         * Save changes made in editable widget
+         */
+        save(data: string, delayed?: boolean): Promise<void>;
+        /**
+         * On blur widget, save title
+         */
+        saveTitle(element: HTMLElement): void;
+        /**
+         * Show preview of widget
+         */
+        showPreview(show?: boolean): void;
+    }
+
+    interface WindowSelection {
+        focusEl: HTMLElement;
+        range: Range;
+        win: Window;
     }
 
     interface Workspace {
@@ -5507,53 +5003,38 @@ declare module 'obsidian' {
          * Reference to App
          */
         app: App;
-        /**
-         * @internal
-         */
+        /** @internal */
         backlinkInDocument?: unknown;
         /**
          * Registered CodeMirror editor extensions, to be applied to all CM instances
          */
         editorExtensions: Extension[];
-        /**
-         * @internal
-         */
-        editorSuggest: { currentSuggest?: EditorSuggest<unknown>, suggests: EditorSuggest<unknown>[] };
-        /**
-         * @internal
-         */
+        /** @internal */
+        editorSuggest: {
+            currentSuggest?: EditorSuggest<unknown>;
+            suggests: EditorSuggest<unknown>[];
+        };
+        /** @internal */
         floatingSplit: WorkspaceSplit;
-        /**
-         * @internal
-         */
+        /** @internal */
         hoverLinkSources: Record<string, HoverLinkSource>;
         /**
          * Last opened file in the vault
          */
         lastActiveFile: TFile;
-        /**
-         * @internal
-         */
+        /** @internal */
         lastTabGroupStacked: boolean;
-        /**
-         * @internal
-         */
+        /** @internal */
         layoutItemQueue: unknown[];
         /**
          * Workspace has finished loading
          */
         layoutReady: boolean;
-        /**
-         * @internal
-         */
+        /** @internal */
         leftSidebarToggleButtonEl: HTMLElement;
-        /**
-         * @internal Array of renderCallbacks
-         */
+        /** @internal Array of renderCallbacks */
         mobileFileInfos: unknown[];
-        /**
-         * @internal
-         */
+        /** @internal */
         onLayoutReadyCallbacks?: unknown;
         /**
          * Protocol handlers registered on the workspace
@@ -5563,160 +5044,93 @@ declare module 'obsidian' {
          * Tracks last opened files in the vault
          */
         recentFileTracker: RecentFileTracker;
-        /**
-         * @internal
-         */
+        /** @internal */
         rightSidebarToggleButtonEl: HTMLElement;
-        /**
-         * @internal Keyscope registered to the vault
-         */
+        /** @internal Keyscope registered to the vault */
         scope: Scope;
         /**
          * List of states that were closed and may be reopened
          */
         undoHistory: StateHistory[];
 
-        /**
-         * @internal Triggers when user hovers over any note link element (file explorer, editor, ...)
-         * @remark Used for preparing (Ctrl) hover previews
-         */
-        on(name: 'hover-link', callback: (event: HoverLinkEvent) => void, ctx?: unknown): EventRef;
-
-        /**
-         * @internal Called whenever user opens tab group menu (contains e.g. stacked tabs button)
-         */
-        on(name: 'tab-group-menu', callback: (tabMenu: Menu, tabsLeaf: WorkspaceTabs) => void, ctx?: unknown): EventRef;
-
-        /**
-         * @internal Triggers when user swipes open left/right sidebar
-         */
-        on(name: 'swipe', callback: (touchEvents: ObsidianTouchEvent[]) => void, ctx?: unknown): EventRef;
-
-        /**
-         * Triggers when workspace layout is loaded
-         * @remark Prefer usage of onLayoutReady instead
-         */
-        on(name: 'layout-ready', callback: () => void, ctx?: unknown): EventRef;
-
-        /**
-         * @internal Triggers when user right-clicks on external URL in editor
-         */
-        on(name: 'url-menu', callback: (menu: Menu, url: string) => void, ctx?: unknown): EventRef;
-
-        /**
-         * Triggers when user clicks on 'N results' button in search view
-         */
-        on(name: 'search:results-menu', callback: (menu: Menu, search: GlobalSearchLeaf) => void, ctx?: unknown): EventRef;
-
-        /**
-         * @internal Called when user shares text on mobile
-         */
-        on(name: 'receive-text-menu', callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
-
-        /**
-         * @internal Called when user shares files on mobile
-         */
-        on(name: 'receive-files-menu', callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
-
-        /**
-         * Triggers when the user opens a context menu on a selection of multiple nodes in the canvas
-         */
-        on(name: 'canvas:selection-menu', callback: (menu: Menu, canvasView: CanvasView) => void, ctx?: unknown): EventRef;
-
-        /**
-         * Triggers when the user opens a context menu on a single node in the canvas
-         */
-        on(name: 'canvas:node-menu', callback: (menu: Menu, node: CanvasNode) => void, ctx?: unknown): EventRef;
-
-        /**
-         * Triggers when the user drops edge connection to empty space in the canvas
-         */
-        on(name: 'canvas:node-connection-drop-menu', callback: (menu: Menu, originalNode: CanvasNode, connection: CanvasConnection) => void, ctx?: unknown): EventRef;
-
-        /**
-         * Triggers when the user opens a context menu on a connection in the canvas
-         */
-        on(name: 'canvas:edge-menu', callback: (menu: Menu, connection: CanvasConnection) => void, ctx?: unknown): EventRef;
-
-        /**
-         * @internal Change active leaf and trigger leaf change event
-         */
+        /** @internal Change active leaf and trigger leaf change event */
         activeLeafEvents(): void;
-        /**
-         * @internal Add file to mobile file info
-         */
+        /** @internal Add file to mobile file info */
         addMobileFileInfo(file: unknown): void;
-        /**
-         * @internal Clear layout of workspace and destruct all leaves
-         */
+        /** @internal Clear layout of workspace and destruct all leaves */
         clearLayout(): Promise<void>;
         /**
-         * @internal Create a leaf in the selected tab group or last used tab group
          * @param tabs Tab group to create leaf in
+         * @internal Create a leaf in the selected tab group or last used tab group
          */
         createLeafInTabGroup(tabs?: WorkspaceTabs): WorkspaceLeaf;
         /**
-         * @internal Deserialize workspace entries into actual Leaf objects
          * @param leaf Leaf entry to deserialize
          * @param ribbon Whether the leaf belongs to the left or right ribbon
+         * @internal Deserialize workspace entries into actual Leaf objects
          */
-        deserializeLayout(leaf: LeafEntry, ribbon?: 'left' | 'right'): Promise<WorkspaceLeaf>;
+        deserializeLayout(leaf: LeafEntry, ribbon?: "left" | "right"): Promise<WorkspaceLeaf>;
         /**
-         * @internal Reveal leaf in side ribbon with specified view type and state
          * @param type View type of leaf
          * @param ribbon Side ribbon to reveal leaf in
          * @param viewstate Open state of leaf
+         * @internal Reveal leaf in side ribbon with specified view type and state
          */
-        ensureSideLeaf(type: string, ribbon: 'left' | 'right', viewstate: OpenViewState): void;
+        ensureSideLeaf(type: string, ribbon: "left" | "right", viewstate: OpenViewState): void;
         /**
          * Get active file view if exists
          */
         getActiveFileView(): FileView | null;
-        /**
-         * @deprecated Use `getActiveViewOfType` instead
-         */
+        /** @deprecated Use `getActiveViewOfType` instead */
         getActiveLeafOfViewType<T extends View>(type: Constructor<T>): T | null;
         /**
          * Get adjacent leaf in specified direction
+         *
          * @remark Potentially does not work
          */
-        getAdjacentLeafInDirection(leaf: WorkspaceLeaf, direction: 'top' | 'bottom' | 'left' | 'right'): WorkspaceLeaf | null;
+        getAdjacentLeafInDirection(
+            leaf: WorkspaceLeaf,
+            direction: "top" | "bottom" | "left" | "right",
+        ): WorkspaceLeaf | null;
+        /** @internal Get the direction where the leaf should be dropped on dragevent */
+        getDropDirection(
+            e: DragEvent,
+            rect: DOMRect,
+            directions: ["left", "right"],
+            leaf: WorkspaceLeaf,
+        ): "left" | "right" | "top" | "bottom" | "center";
         /**
-         * @internal Get the direction where the leaf should be dropped on dragevent
-         */
-        getDropDirection(e: DragEvent, rect: DOMRect, directions: ['left', 'right'], leaf: WorkspaceLeaf): 'left' | 'right' | 'top' | 'bottom' | 'center';
-        /**
-         * @internal Get the leaf where the leaf should be dropped on dragevent
          * @param e Drag event
+         * @internal Get the leaf where the leaf should be dropped on dragevent
          */
         getDropLocation(e: DragEvent): WorkspaceLeaf | null;
         /**
          * Get the workspace split for the currently focused container
          */
         getFocusedContainer(): WorkspaceSplit;
-
-        getLeavesOfType(viewType: 'file-explorer'): FileExplorerLeaf[];
+        getLeavesOfType(viewType: "file-explorer"): FileExplorerLeaf[];
         /**
          * Get n last opened files of type (defaults to 10)
          */
-        getRecentFiles(arg?: { showMarkdown: boolean, showCanvas: boolean, showNonImageAttachments: boolean, showImages: boolean, maxCount: number }): string[];
+        getRecentFiles(arg?: {
+            showMarkdown: boolean;
+            showCanvas: boolean;
+            showNonImageAttachments: boolean;
+            showImages: boolean;
+            maxCount: number;
+        }): string[];
         /**
          * Get leaf in the side ribbon/dock and split if necessary
+         *
          * @param sideRibbon Side ribbon to get leaf from
          * @param split Whether to split the leaf if it does not exist
          */
         getSideLeaf(sideRibbon: WorkspaceSidedock | WorkspaceMobileDrawer, split: boolean): WorkspaceLeaf;
-        /**
-         * @internal
-         */
+        /** @internal */
         handleExternalLinkContextMenu(menu: Menu, linkText: string): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         handleLinkContextMenu(menu: Menu, linkText: string, sourcePath: string): void;
-        /**
-         * @internal Check if leaf has been attached to the workspace
-         */
+        /** @internal Check if leaf has been attached to the workspace */
         isAttached(leaf?: WorkspaceLeaf): boolean;
         /**
          * Iterate the leaves of a split
@@ -5726,154 +5140,161 @@ declare module 'obsidian' {
          * Iterate the tabs of a split till meeting a condition
          */
         iterateTabs(tabs: WorkspaceSplit | WorkspaceSplit[], cb: (leaf: WorkspaceLeaf) => boolean): boolean;
-        /**
-         * @internal Load workspace from disk and initialize
-         */
+        /** @internal Load workspace from disk and initialize */
         loadLayout(): Promise<void>;
         /**
-         * @internal Handles drag event on leaf
+         * @internal Triggers when user hovers over any note link element (file explorer, editor, ...)
+         * @remark Used for preparing (Ctrl) hover previews
          */
+        on(name: "hover-link", callback: (event: HoverLinkEvent) => void, ctx?: unknown): EventRef;
+        /** @internal Called whenever user opens tab group menu (contains e.g. stacked tabs button) */
+        on(name: "tab-group-menu", callback: (tabMenu: Menu, tabsLeaf: WorkspaceTabs) => void, ctx?: unknown): EventRef;
+        /** @internal Triggers when user swipes open left/right sidebar */
+        on(name: "swipe", callback: (touchEvents: ObsidianTouchEvent[]) => void, ctx?: unknown): EventRef;
+        /**
+         * Triggers when workspace layout is loaded
+         *
+         * @remark Prefer usage of onLayoutReady instead
+         */
+        on(name: "layout-ready", callback: () => void, ctx?: unknown): EventRef;
+        /** @internal Triggers when user right-clicks on external URL in editor */
+        on(name: "url-menu", callback: (menu: Menu, url: string) => void, ctx?: unknown): EventRef;
+        /**
+         * Triggers when user clicks on 'N results' button in search view
+         */
+        on(
+            name: "search:results-menu",
+            callback: (menu: Menu, search: GlobalSearchLeaf) => void,
+            ctx?: unknown,
+        ): EventRef;
+        /** @internal Called when user shares text on mobile */
+        on(name: "receive-text-menu", callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
+        /** @internal Called when user shares files on mobile */
+        on(name: "receive-files-menu", callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
+        /**
+         * Triggers when the user opens a context menu on a selection of multiple nodes in the canvas
+         */
+        on(
+            name: "canvas:selection-menu",
+            callback: (menu: Menu, canvasView: CanvasView) => void,
+            ctx?: unknown,
+        ): EventRef;
+        /**
+         * Triggers when the user opens a context menu on a single node in the canvas
+         */
+        on(name: "canvas:node-menu", callback: (menu: Menu, node: CanvasNode) => void, ctx?: unknown): EventRef;
+        /**
+         * Triggers when the user drops edge connection to empty space in the canvas
+         */
+        on(
+            name: "canvas:node-connection-drop-menu",
+            callback: (menu: Menu, originalNode: CanvasNode, connection: CanvasConnection) => void,
+            ctx?: unknown,
+        ): EventRef;
+        /**
+         * Triggers when the user opens a context menu on a connection in the canvas
+         */
+        on(
+            name: "canvas:edge-menu",
+            callback: (menu: Menu, connection: CanvasConnection) => void,
+            ctx?: unknown,
+        ): EventRef;
+        /** @internal Handles drag event on leaf */
         onDragLeaf(e: DragEvent, leaf: WorkspaceLeaf): void;
-        /**
-         * @internal Handles layout change and saves layout to disk
-         */
+        /** @internal Handles layout change and saves layout to disk */
         onLayoutChange(leaf?: WorkspaceLeaf): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         onLinkContextMenu(args: unknown[]): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         onQuickPreview(args: unknown[]): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         onResize(): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         onStartLink(leaf: WorkspaceLeaf): void;
         /**
          * Open a leaf in a popup window
+         *
          * @remark Prefer usage of `app.workspace.openPopoutLeaf`
          */
         openPopout(data?: WorkspaceWindowInitData): WorkspaceWindow;
-        /**
-         * @internal Push leaf change to history
-         */
+        /** @internal Push leaf change to history */
         pushUndoHistory(leaf: WorkspaceLeaf, parentID: string, rootID: string): void;
-        /**
-         * @internal Get drag event target location
-         */
+        /** @internal Get drag event target location */
         recursiveGetTarget(e: DragEvent, leaf: WorkspaceLeaf): WorkspaceTabs | null;
         /**
          * @internal Register a CodeMirror editor extension
          * @remark Prefer registering the extension via the Plugin class
          */
         registerEditorExtension(extension: Extension): void;
-        /**
-         * @internal Registers hover link source
-         */
+        /** @internal Registers hover link source */
         registerHoverLinkSource(key: string, source: HoverLinkSource): void;
-        /**
-         * @internal Registers Obsidian protocol handler
-         */
+        /** @internal Registers Obsidian protocol handler */
         registerObsidianProtocolHandler(protocol: string, handler: ObsidianProtocolHandler): void;
-        /**
-         * @internal Constructs hook for receiving URI actions
-         */
+        /** @internal Constructs hook for receiving URI actions */
         registerUriHook(): void;
-        /**
-         * @internal Request execution of activeLeaf change events
-         */
+        /** @internal Request execution of activeLeaf change events */
         requestActiveLeafEvents(): void;
-        /**
-         * @internal Request execution of resize event
-         */
+        /** @internal Request execution of resize event */
         requestResize(): void;
-        /**
-         * @internal Request execution of layout update event
-         */
+        /** @internal Request execution of layout update event */
         requestUpdateLayout(): void;
         /**
          * Save workspace layout to disk
          */
         saveLayout(): Promise<void>;
-        /**
-         * @internal Use deserialized layout data to reconstruct the workspace
-         */
+        /** @internal Use deserialized layout data to reconstruct the workspace */
         setLayout(data: SerializedWorkspace): Promise<void>;
-        /**
-         * @internal Split leaves in specified direction
-         */
+        /** @internal Split leaves in specified direction */
         splitLeaf(leaf: WorkspaceLeaf, newleaf: WorkspaceLeaf, direction?: SplitDirection, before?: boolean): void;
         /**
          * Split provided leaf, or active leaf if none provided
          */
         splitLeafOrActive(leaf?: WorkspaceLeaf, direction?: SplitDirection): void;
-        /**
-         * @internal
-         */
-        // trigger(e: unknown): void;
-        /**
-         * @internal Unregister a CodeMirror editor extension
-         */
+        /** @internal Unregister a CodeMirror editor extension */
         unregisterEditorExtension(extension: Extension): void;
-        /**
-         * @internal Unregister hover link source
-         */
+        /** @internal Unregister hover link source */
         unregisterHoverLinkSource(key: string): void;
-        /**
-         * @internal Unregister Obsidian protocol handler
-         */
+        /** @internal Unregister Obsidian protocol handler */
         unregisterObsidianProtocolHandler(protocol: string): void;
-        /**
-         * @internal
-         */
+        /** @internal */
         updateFrameless(): void;
-        /**
-         * @internal Invoke workspace layout update, redraw and save
-         */
+        /** @internal Invoke workspace layout update, redraw and save */
         updateLayout(): void;
-        /**
-         * @internal Update visibility of tab group
-         */
+        /** @internal Update visibility of tab group */
         updateMobileVisibleTabGroup(): void;
         /**
          * Update the internal title of the application
+         *
          * @remark This title is shown as the application title in the OS taskbar
          */
         updateTitle(): void;
     }
 
     interface WorkspaceLeaf {
-        id?: string;
-
         activeTime?: number;
-
+        id?: string;
         parent?: WorkspaceSplit;
-
         tabHeaderEl: HTMLElement;
         tabHeaderInnerIconEl: HTMLElement;
         tabHeaderInnerTitleEl: HTMLElement;
 
         /**
-         * Triggers when the leaf's history gets updated (e.g. when new file is opened, or moving through history)
+         * Triggers when the leaf's history gets updated (e.g. when new file is opened, or moving through
+         * history)
          */
-        on(name: 'history-change', callback: () => void, ctx?: unknown): EventRef;
-
+        on(name: "history-change", callback: () => void, ctx?: unknown): EventRef;
         /**
          * Triggers when context menu action is executed on the leaf
          */
-        on(name: 'leaf-menu', callback: (menu: Menu, leaf: WorkspaceLeaf) => void, ctx?: unknown): EventRef;
-
+        on(name: "leaf-menu", callback: (menu: Menu, leaf: WorkspaceLeaf) => void, ctx?: unknown): EventRef;
         /**
          * Set the vertical height a leaf may occupy if it is in a split. The height is not set directly, but
-         * by setting the flex-grow (css) of the element. This means to predictably affect the height, you also
-         * need to use setDimension on the other leafs of the column. (The flex-grow values of every leaf work
-         basically like a ratio, e.g. 1:2 meaning the first leaf takes 33% of the height, and the second 67%.)
-         * @param flexgrow - sets the flex-grow of the leaf. (0-100)
+         * by setting the flex-grow (css) of the element. This means to predictably affect the height, you
+         * also need to use setDimension on the other leafs of the column. (The flex-grow values of every leaf
+         * work basically like a ratio, e.g. 1:2 meaning the first leaf takes 33% of the height, and the
+         * second 67%.)
+         *
+         * @param flexgrow - Sets the flex-grow of the leaf. (0-100)
          */
         setDimension(flexgrow?: number | null): void;
     }
