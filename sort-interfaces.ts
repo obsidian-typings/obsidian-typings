@@ -1,8 +1,18 @@
+/**
+ * This script is very bad, verging on being completely broken.
+ * Current problems:
+ *   - Only keeps interfaces, types and classes inside the obsidian module
+ *   - Sorting of interface properties and methods is quite slow
+ *   - Probably improper re-setting of declaration structure for new ordering of properties and methods
+ *   - Endlines between methods/properties, types/interfaces is quite bodgy
+ * PR's would be very welcome to improve this hot mess of a code
+ */
+
 import {Project, Node} from "ts-morph";
 import * as fs from "node:fs";
 
 const project = new Project();
-const declarationsToText = (declarationArray: Node[]) => declarationArray.map(declaration => declaration.getText()).join('\n\n');
+const declarationsToText = (declarationArray: Node[]) => declarationArray.map(declaration => declaration.getText(true)).join('\n\n');
 const sortFn = (a: any, b: any) => a.getName().localeCompare(b.getName());
 
 async function parseFile(file: string, output_file: string = file) {
@@ -22,10 +32,8 @@ async function parseFile(file: string, output_file: string = file) {
 
         // @ts-ignore
         declaration.set(structure);
-        if (structure.methods!.length && structure.properties!.length) {
-            const firstMethod = declaration.getMethods()[0];
-            declaration.insertText((firstMethod.getJsDocs()[0] || firstMethod).getStart(), '\n');
-        }
+        if (structure.methods!.length && structure.properties!.length)
+            declaration.insertText(declaration.getMethods()[0].getStart(true), '\n');
     }
 
     const newFile = project.createSourceFile(file === output_file ? "temp.d.ts" : output_file, '', {overwrite: true});
@@ -38,8 +46,8 @@ async function parseFile(file: string, output_file: string = file) {
 
     const newModule = newFile.addModule({ name: obsidianDeclaration.getName() });
 
-    newModule.addStatements(declarationsToText(typeDeclarations));
-    newModule.addStatements('');
+    // Apparently I can't just add an endline to the end, nor use a writer to add an endline at the end, hence the comment
+    newModule.addStatements(declarationsToText(typeDeclarations) + " \n\n// Interfaces \n");
     newModule.addStatements(declarationsToText(interfaceDeclarations));
 
     await newFile.save()
