@@ -1,15 +1,15 @@
 import {
-    App,
+    App, CachedMetadata,
     Command,
-    Component,
-    EditorRange,
+    Component, EditorPosition,
+    EditorRange, EditorRangeOrCaret, EditorSuggest,
     EventRef,
-    Events,
+    Events, HoverPopover,
     KeymapInfo,
-    Loc,
+    Loc, MarkdownFileInfo, MarkdownSubView, MarkdownViewModeType,
     Plugin,
     Reference,
-    Scope,
+    Scope, SearchResult,
     SplitDirection,
     TAbstractFile,
     TFile,
@@ -20,8 +20,8 @@ import {
     Workspace,
     WorkspaceLeaf,
 } from 'obsidian';
-import { EditorView } from '@codemirror/view';
-import { EditorState, Extension } from '@codemirror/state';
+import {EditorView, ViewUpdate} from '@codemirror/view';
+import {EditorSelection, EditorState, Extension} from '@codemirror/state';
 import * as fs from 'fs';
 import * as fsPromises from 'fs/promises';
 import * as path from 'path';
@@ -2336,15 +2336,25 @@ declare module 'obsidian' {
      * @todo Missing functions related to ranges and markdown
      */
     interface ExtendedEditor extends Editor {
-        editorComponent: undefined | ScrollableMarkdownEditor;
-        
-        get activeCm(): EditorView;
+        /**
+         * Linked Editor manager instance
+         */
+        editorComponent: undefined | MarkdownScrollableEditView;
+
+        /**
+         * Currently active CM instance
+         * @remark Can be null when Editor is not instantiated
+         */
+        get activeCm(): EditorView | null;
+        /**
+         * Whether the editor is embedded in a table cell
+         */
         get inTableCell(): boolean;
         
         /**
          * Make ranges of text highlighted within the editor given specified class (style)
          */
-        addHighlights(ranges: { from: EditorPosition, to: EditorPosition }[], style: 'is-flashing' | 'obsidian-search-match-highlight', remove_previous: boolean, x: boolean): void;
+        addHighlights(ranges: EditorRange[], style: 'is-flashing' | 'obsidian-search-match-highlight', remove_previous: boolean, range?: EditorSelection): void;
         /**
          * Convert editor position to screen position
          * @param pos Editor position
@@ -2394,14 +2404,7 @@ declare module 'obsidian' {
         /**
          * Adds a search cursor to the editor
          */
-        searchCursor(searchString: string): {
-            current(): { from: EditorPosition, to: EditorPosition };
-            findAll(): { from: EditorPosition, to: EditorPosition }[];
-            findNext(): { from: EditorPosition, to: EditorPosition };
-            findPrevious(): { from: EditorPosition, to: EditorPosition };
-            replace(replacement: string, origin: string): void;
-            replaceAll(replacement: string, origin: string): void;
-        }
+        searchCursor(searchString: string): SearchCursor;
         /**
          * Applies specified markdown syntax to selected text or word under cursor
          */
@@ -2654,520 +2657,1965 @@ declare module 'obsidian' {
 
     
     interface EmbedContext {
+        /**
+         * Reference to the app
+         */
         app: App;
+        /**
+         * Text that should be displayed in the embed
+         */
         linktext?: string;
+        /**
+         * Optional path to the current open file
+         */
         sourcePath?: string;
+        /**
+         * Element where the embed should be displayed
+         */
         containerEl: HTMLElement;
+        /**
+         * Whether the embed should be dynamic (CM) or static (postProcessed)
+         */
         displayMode?: boolean;
+        /**
+         * Whether the embed should be an inline embed
+         */
         showInline?: boolean;
-        state?: any;
+        /**
+         * @internal
+         */
+        state?: unknown;
+        /**
+         * Depth of the embed within its container (how many levels of embeds are above it)
+         */
         depth?: number;
     }
-    
+
+    /**
+     * Constructor for an embeddable widget
+     */
     type EmbedableConstructor = (context: EmbedContext, file: TFile, path?: string) => Component;
 
     interface EmbedRegistry extends Events {
+        /**
+         * Mapping of file extensions to constructors for embeddable widgets
+         */
         embedByExtension: Record<string, EmbedableConstructor>;
 
+        /**
+         * Get the embed constructor for a specific file type
+         */
         getEmbedCreator(file: TFile): EmbedableConstructor | null;
+        /**
+         * Check whether a file extension has a registered embed constructor
+         */
         isExtensionRegistered(extension: string): boolean;
+        /**
+         * Register an embed constructor for a specific file extension
+         */
         registerExtension(extension: string, embedCreator: EmbedableConstructor): void;
+        /**
+         * Register an embed constructor for a list of file extensions
+         */
         registerExtensions(extensions: string[], embedCreator: EmbedableConstructor): void;
+        /**
+         * Unregister an embed constructor for a specific file extension
+         */
         unregisterExtension(extension: string): void;
+        /**
+         * Unregister an embed constructor for a list of file extensions
+         */
         unregisterExtensions(extensions: string[]): void;
     }
     
-    interface EditorSuggests<T> {
-        currentSuggest: null | unknown;
-        suggests: EditorSuggest<T>[];
+    interface EditorSuggests {
+        /**
+         * Currently active and rendered editor suggestion popup
+         */
+        currentSuggest: null | EditorSuggest<any>;
+        /**
+         * Registered editor suggestions
+         * @remark Used for providing autocompletions for specific strings
+         * @tutorial Reference official documentation under EditorSuggest<T> for usage
+         */
+        suggests: EditorSuggest<any>[];
 
-        addSuggest(e: unknown): unknown;
-        close(): unknown;
-        isShowingSuggestion(): unknown;
-        removeSuggest(e: unknown): unknown;
-        reposition(): unknown;
-        setCurrentSuggest(e: unknown): unknown;
-        trigger(e: unknown, t: unknown, n: unknown): unknown;
-    }
-
-    interface EditorSuggest<T> {
-        isOpen: boolean
-        suggestEl: HTMLElement;
-        suggestManager: SuggestManager;
-        suggestions: SuggestionContainer<T>;
-
+        /**
+         * Add a new editor suggestion to the list of registered suggestion providers
+         */
+        addSuggest(suggest: EditorSuggest<any>): void;
+        /**
+         * Close the currently active editor suggestion popup
+         */
         close(): void;
-        renderSuggestion(e: unknown, t: unknown): unknown;
-        selectSuggestion(e: unknown, t: unknown): unknown;
-        showSuggestions(t: unknown): unknown;
+        /**
+         * Whether there is a editor suggestion popup active and visible
+         */
+        isShowingSuggestion(): boolean;
+        /**
+         * Remove a registered editor suggestion from the list of registered suggestion providers
+         */
+        removeSuggest(suggest: EditorSuggest<any>): void;
+        /**
+         * Update position of currently active and rendered editor suggestion popup
+         */
+        reposition(): void;
+        /**
+         * Set the currently active editor suggestion popup to specified suggestor
+         */
+        setCurrentSuggest(suggest: EditorSuggest<any>): void;
+        /**
+         * Run check on focused editor to see whether a suggestion should be triggered and rendered
+         */
+        trigger(editor: MarkdownBaseView, t: TFile, n: boolean): void;
     }
 
-    interface SuggestManager {
-        app: App;
-        fileSuggestions: null | unknown;
-        getSourcePath: () => unknown;
-        global: boolean
-        mode: "file" | string;
-        runnable: null | unknown;
+    
+    interface PopoverSuggest<T> {
+        /**
+         * Whether the suggestion popup is currently open and visible
+         */
+        isOpen: boolean
+        /**
+         * Suggestion container element
+         */
+        suggestEl: HTMLElement;
+        /**
+         * Handles selection and rendering of the suggestions
+         */
+        suggestions: SuggestionContainer<T>;
+    }
+    
+    class FileSuggest<T> extends EditorSuggest<T> {
+        /**
+         * Manages fetching of suggestions from metadatacache 
+         */
+        suggestManager: FileSuggestManager;
 
-        getBlockSuggestions(e: unknown, t: unknown, n: unknown): unknown;
-        getDisplaySuggestions(e: unknown, t: unknown, n: unknown, i: unknown): unknown;
-        getFileSuggestions(e: unknown, t: unknown): unknown;
-        getGlobalBlockSuggestions(e: unknown, t: unknown): unknown;
-        getGlobalHeadingSuggestions(e: unknown, t: unknown): unknown;
-        getHeadingSuggestions(e: unknown, t: unknown, n: unknown): unknown;
-        getSuggestionsAsync(e: unknown, t: unknown): unknown;
-        matchBlock(e: unknown, t: unknown, n: unknown, i: unknown, r: unknown, o: unknown): unknown;
+        // TODO: Add extra typings
+    }
+    
+    interface EditorSuggest<T> {
+        showSuggestions(results: SearchResult[]): void;
+        
+        // TODO: Each suggest returns different results for SearchResults
+    }
+
+    /**
+     * Helper class for managing queues of asynchronous tasks
+     */
+    interface Runnable {
+        cancelled: boolean;
+        onCancel: null | (() => void);
+        onStart: null | (() => void);
+        onStop: null | (() => void);
+        running: boolean;
+
+        cancel(): void;
+        isCancelled(): boolean;
+        isRunning(): boolean;
+        start(): void;
+        stop(): void;
+    }
+    
+    interface FileSuggestManager {
+        /**
+         * Reference to the app
+         */
+        app: App;
+
+        /**
+         * Selection of files and their paths that can be matched to
+         */
+        fileSuggestions: null | { file: TFile | null, path: string }[];
+        /**
+         * Determine the source path of current context
+         */
+        getSourcePath: () => null | string;
+        /**
+         * Whether search should be vault-wide rather than scoped to current file
+         */
+        global: boolean
+        /**
+         * Type of suggestions that should be provided
+         */
+        mode: "file" | "heading" | "block" | "display" | string;
+        /**
+         * Executor of the search
+         */
+        runnable: null | Runnable;
+
+        /**
+         * Get suggestions for block query
+         */
+        getBlockSuggestions(runner: Runnable, file: TFile, text: string): Promise<SearchResult[]>;
+        /**
+         * Get suggestions for display alias query
+         */
+        getDisplaySuggestions(runner: Runnable, linkpath: string, subpath: string, alias: string): Promise<SearchResult[]>;
+        /**
+         * Get suggestions for file query
+         */
+        getFileSuggestions(runner: Runnable, text: string): Promise<SearchResult[]>;
+        /**
+         * Get suggestions for global block query
+         */
+        getGlobalBlockSuggestions(runner: Runnable, text: string): Promise<SearchResult[]>;
+        /**
+         * Get suggestions for global heading query
+         */
+        getGlobalHeadingSuggestions(runner: Runnable, text: string): Promise<SearchResult[]>;
+        /**
+         * Get suggestions for file heading query
+         */
+        getHeadingSuggestions(runner: Runnable, file: TFile, text: string): Promise<SearchResult[]>;
+        /**
+         * Get suggestions for current input text
+         * @remark Type is determined from text: e.g. [[Thi]] will give completions for files, [[Thi^]] for blocks, etc.
+         */
+        getSuggestionsAsync(runner: Runnable, text: string): Promise<SearchResult[]>;
+        /**
+         * Match search fragments to a block
+         */
+        matchBlock(path: string, file: TFile, block: BlockCache, sourcePath: null | string, content: string, text_parts: string[]): SearchResult | null;
     }
 
     interface SuggestionContainer<T> {
+        /**
+         * Which suggestions should be picked from
+         */
         chooser: EditorSuggest<T>;
+        /**
+         * Pop-up element that displays the suggestions
+         */
         containerEl: HTMLElement;
+        /**
+         * The currently focused item
+         */
         selectedItem: number;
-        suggestions: unknown[];
-        values: unknown[];
+        /**
+         * List of all possible suggestions as elements
+         */
+        suggestions: HTMLElement[];
+        /**
+         * List of all possible suggestions as data
+         */
+        values: SearchResult[];
 
-        addMessage(e: unknown): unknown;
-        addSuggestion(e: unknown): unknown;
-        forceSetSelectedItem(e: unknown, t: unknown): unknown;
-        moveDown(e: unknown): unknown;
-        moveUp(e: unknown): unknown;
-        onSuggestionClick(e: unknown, t: unknown): unknown;
-        onSuggestionMouseover(e: unknown, t: unknown): unknown;
-        pageDown(e: unknown): unknown;
-        pageUp(e: unknown): unknown;
-        setSelectedItem(e: unknown, t: unknown): unknown;
-        setSuggestions(e: unknown): unknown;
-        useSelectedItem(e: unknown): unknown;
+        /**
+         * Add an empty message with provided text
+         */
+        addMessage(text: string): HTMLElement;
+        /**
+         * Add suggestion to container
+         */
+        addSuggestion(suggestion: SearchResult): void;
+        /**
+         * Set selected item to one specified by index, if keyboard navigation, force scroll into view
+         * @remark Prefer setSelectedItem, which clamps the index to within suggestions array
+         */
+        forceSetSelectedItem(index: number, event: Event): void;
+        /**
+         * Move selected item to next suggestion
+         */
+        moveDown(event: KeyboardEvent): boolean;
+        /**
+         * Move selected item to previous suggestion
+         */
+        moveUp(event: KeyboardEvent): boolean;
+        /**
+         * Process click on suggestion item
+         */
+        onSuggestionClick(event: MouseEvent, element: HTMLElement): void;
+        /**
+         * Process hover on suggestion item
+         */
+        onSuggestionMouseover(event: MouseEvent, element: HTMLElement): unknown;
+        /**
+         * Move selected item to the one in the next 'page' (next visible block)
+         */
+        pageDown(event: KeyboardEvent): boolean;
+        /**
+         * Move selected item to the one in the previous 'page' (previous visible block)
+         */
+        pageUp(event: KeyboardEvent): boolean;
+        /**
+         * Set selected item to one specified by index, invokes forceSetSelectedItem
+         */
+        setSelectedItem(index: number, event: Event): void;
+        /**
+         * Empties original container and adds multiple suggestions
+         */
+        setSuggestions(suggestions: SearchResult[]): void;
+        /**
+         * Use currently selected suggestion as the accepted one
+         */
+        useSelectedItem(event: Event): boolean;
 
-        get numVisibleItems(): unknown;
-        get rowHeight(): unknown;
+        /**
+         * Amount of suggestions that can be displayed at once within containerEl
+         */
+        get numVisibleItems(): number;
+
+        /**
+         * Height in pixels of the selected item
+         */
+        get rowHeight(): number;
     }
 
 
     interface Component {
+        /**
+         * Child Components attached to current component, will be unloaded on unloading parent component
+         */
         _children: Component[];
+        /**
+         * Events that are attached to the current component, will be detached on unloading parent component
+         */
         _events: EventRef[];
+        /**
+         * Whether the component and its children are loaded
+         */
         _loaded: boolean;
+    }
+    
+    interface FoldInfo {
+        folds: { from: number, to: number }[], 
+        lines: number
+    }
+    
+    interface SearchCursor {
+        /**
+         * Current editor search position
+         */
+        current(): { from: EditorPosition, to: EditorPosition };
+        /**
+         * All search results
+         */
+        findAll(): { from: EditorPosition, to: EditorPosition }[];
+        /**
+         * Next editor search position
+         */
+        findNext(): { from: EditorPosition, to: EditorPosition };
+        /**
+         * Previous editor search position
+         */
+        findPrevious(): { from: EditorPosition, to: EditorPosition };
+        /**
+         * Replace current search result with specified text
+         * @remark origin is used by CodeMirror to determine which component was responsible for the change
+         */
+        replace(replacement: string, origin: string): void;
+        /**
+         * Replace all search results with specified text
+         */
+        replaceAll(replacement: string, origin: string): void;
     }
 
     interface ClipBoardManager {
+        /**
+         * Reference to the app
+         */
         app: App;
+        /**
+         * Reference to the Editor View
+         */
         info: MarkdownView;
 
-        getPath(): unknown;
-        handleDataTransfer(e: unknown): unknown;
-        handleDragOver(e: unknown): unknown;
-        handleDrop(e: unknown): unknown;
-        handleDropIntoEditor(e: unknown): unknown;
-        handlePaste(e: unknown): unknown;
-        insertAttachmentEmbed(e: unknown, t: unknown): unknown;
-        insertFiles(e: unknown): unknown;
-        saveAttachment(e: unknown, t: unknown, n: unknown, i: unknown): unknown;
+        /**
+         * Get current path of editor view for determining storage location embed
+         */
+        getPath(): string;
+        /**
+         * Process incoming data (image, text, url, html)
+         * @remark When processing HTML, function will be async
+         */
+        handleDataTransfer(data: DataTransfer): null | Promise<void>;
+        /**
+         * Handle an incoming drag-over event
+         */
+        handleDragOver(event: DragEvent): void;
+        /**
+         * Handle an incoming drag-drop event
+         */
+        handleDrop(event: DragEvent): boolean;
+        /**
+         * Process a drop event into the editor
+         */
+        handleDropIntoEditor(event: DragEvent): null | string;
+        /**
+         * Handle an incoming paste event
+         */
+        handlePaste(event: ClipboardEvent): boolean;
+        /**
+         * Insert single file as embed into the editor
+         */
+        insertAttachmentEmbed(file: TAbstractFile, replace: boolean): Promise<void>;
+        /**
+         * Insert files from drop-event into the editor
+         */
+        insertFiles(files: ImportedAttachments[]): Promise<void>;
+        /**
+         * Save an attachment of specified name and extension to the vault
+         * @remark Invokes insertAttachmentEmbed
+         */
+        saveAttachment(name: string, extension: string, data: ArrayBuffer, replace: boolean): Promise<void>;
     }
 
-    interface EditorSearchComponent extends SearchComponent {
-        cursor: null | unknown;
+    /**
+     * Extends Search Component to provide highlight and search functionality for editor objects
+     */
+    interface EditorSearchComponent extends AbstractSearchComponent {
+        /**
+         * Search cursor for editor, handles search and replace functionality for editor
+         */
+        cursor: null | SearchCursor;
+        /**
+         * Linked editor for search component
+         */
         editor: ExtendedEditor;
+        /**
+         * Whether search component is currently rendering
+         */
         isActive: boolean;
+        /**
+         * Whether search component is replacing text (includes "Replace" input field)
+         */
         isReplace: boolean;
 
-        clear(): unknown;
-        findNext(): unknown;
-        findNextOrReplace(): unknown;
-        findPrevious(): unknown;
-        hide(): unknown;
-        highlight(e: unknown): unknown;
-        onAltEnter(e: unknown): unknown;
-        onModAltEnter(e: unknown): unknown;
-        onSearchInput(): unknown;
-        replaceAll(): unknown;
-        replaceCurrentMatch(): unknown;
-        searchAll(): unknown;
-        show(e: unknown): unknown;
+        /**
+         * Remove all highlights from editor
+         */
+        clear(): void;
+        /**
+         * Find next search results from cursor and highlights it
+         */
+        findNext(): void;
+        /**
+         * Replace cursor with replacement string if not null and moves to next search result
+         */
+        findNextOrReplace(): void;
+        /**
+         * Find previous search results from cursor and highlights it
+         */
+        findPrevious(): void;
+        /**
+         * Hide/detaches the search component and removes cursor highlights
+         */
+        hide(): void;
+        /**
+         * Add highlights for specified ranges
+         * @remark Invokes editor.addHighlights
+         */
+        highlight(ranges: EditorRange[]): void;
+        /**
+         * Highlights all matches if search element focused
+         */
+        onAltEnter(e?: KeyboardEvent): void;
+        /**
+         * Replace all search results with specified text if replace mode and replacement element is focused
+         */
+        onModAltEnter(e?: KeyboardEvent): void;
+        /**
+         * Updates search cursor on new input query and highlights search results
+         */
+        onSearchInput(): void;
+        /**
+         * Replaces all search results with replacement query
+         */
+        replaceAll(): void;
+        /**
+         * Replace current search result, if any, with replacement query
+         */
+        replaceCurrentMatch(): void;
+        /**
+         * Find all matches of search query and highlights them
+         */
+        searchAll(): void;
+        /**
+         * Reveal the search (and replace) component
+         */
+        show(replace: boolean): void;
     }
 
-    interface SearchComponent {
+    interface AbstractSearchComponent {
+        /**
+         * Reference to the app
+         */
         app: App;
+        /**
+         * The container element in which the search component exists (i.e. Editor)
+         */
         containerEl: HTMLElement;
+        /**
+         * Keyscope for search component 
+         */
         scope: Scope;
+        /**
+         * Container for all the action buttons
+         */
         searchButtonContainerEl: HTMLElement;
+        /**
+         * Container for the search component itself
+         */
         searchContainerEl: HTMLElement;
+        /**
+         * Container for the replacement input field
+         */
         replaceInputEl: HTMLInputElement;
+        /**
+         * Container for the search input field
+         */
         searchInputEl: HTMLInputElement;
 
-        applyScope(e: unknown): unknown;
-        getQuery(): unknown;
-        goToNextInput(e: unknown): unknown;
-        onEnter(e: unknown): unknown;
-        onShiftEnter(e: unknown): unknown;
+        /**
+         * Returns the current search query
+         */
+        getQuery(): string;
+        /**
+         * Switch to the next inputElement
+         */
+        goToNextInput(event: KeyboardEvent): unknown;
+        /**
+         * Invokes findNextOrReplace
+         */
+        onEnter(event: KeyboardEvent): unknown;
+        /**
+         * Invokes findPrevious
+         */
+        onShiftEnter(event: KeyboardEvent): unknown;
     }
 
 
-    class MarkdownSourceView extends ScrollableMarkdownEditor {
+    /**
+     * Live preview editor view
+     * @todo Does *not* contain a hoverPopover element
+     */
+    interface MarkdownEditView extends MarkdownScrollableEditView {
+        /**
+         * Frontmatter editor extension for the editor
+         */
         propertiesExtension: Extension[];
+        /**
+         * Editing mode of the editor
+         */
         type: "source"
+        /**
+         * View the source view editor is attached to
+         */
         view: MarkdownView;
 
-        beforeUnload(): unknown;
-        clear(): unknown;
-        destroy(): unknown;
-        getDynamicExtensions(): unknown;
-        getEphemeralState(e: unknown): unknown;
-        getFoldInfo(): unknown;
-        getSelection(): unknown;
-        highlightSearchMatches(e: unknown, t: unknown, n: unknown, i: unknown): unknown;
-        onUpdate(t: unknown, n: unknown): unknown;
-        requestOnInternalDataChange(): unknown;
+        /**
+         * Save functionality to execute before editor view unload
+         */
+        beforeUnload(): void;
+        /**
+         * Clear the editor view
+         */
+        clear(): void;
+        /**
+         * Destroy/Detach the editor view
+         */
+        destroy(): void;
+        /**
+         * Constructs extensions for the editor based on user settings
+         * @remark Creates extension for properties rendering
+         */
+        getDynamicExtensions(): Extension[];
+        /**
+         * Gets the ephemeral (non-persistent) state of the editor
+         */
+        getEphemeralState(state: any): { cursor: EditorRange } & any;
+        /**
+         * Get the current folds of the editor
+         */
+        getFoldInfo(): null | FoldInfo;
+        /**
+         * Get the main selected range as string
+         */
+        getSelection(): string;
+        /**
+         * Add highlights for specified ranges
+         * @remark Only ranges parameter is used
+         */
+        highlightSearchMatches(ranges: EditorRange[], style?: 'is-flashing' | 'obsidian-search-match-highlight', remove_previous?: boolean, range?: EditorSelection): void;
+        /**
+         * Execute functionality on CM editor state update
+         */
+        onUpdate(update: ViewUpdate, changed: boolean): void;
+        /**
+         * Debounced onInternalDataChange of view
+         */
+        requestOnInternalDataChange(): void;
+        /**
+         * Debounced onMarkdownFold of view
+         */
         requestSaveFolds(): unknown;
-        set(t: unknown, n: unknown): unknown;
-        setEphemeralState(e: unknown): unknown;
-        setHighlight(e: unknown): unknown;
-        setState(e: unknown): unknown;
-        show(): unknown;
-        updateBottomPadding(e: unknown): unknown;
-        updateOptions(): unknown;
+        /**
+         * Set the state of the editor
+         */
+        set(data: string, clear: boolean): void;
+        /**
+         * Set the ephemeral (non-persistent) state of the editor
+         */
+        setEphemeralState(state: any): void;
+        /**
+         * Set highlight of any search match
+         */
+        setHighlight(match: {focus: boolean, startLoc?: number, endLoc?: number, line?: number, match?: unknown}): void;
+        /**
+         * Set the state of the editor (applies selections, scrolls, ...)
+         */
+        setState(state: any): void;
+        /**
+         * Render the editor and the metadata-editor element
+         */
+        show(): void;
+        /**
+         * Update the bottom padding of the CodeMirror contentdom (based on backlinksEl)
+         */
+        updateBottomPadding(height: number): void;
+        /**
+         * Update options of the editor from settings
+         */
+        updateOptions(): void;
     }
 
     
-    class IFramedMarkdownEditor extends ScrollableMarkdownEditor {
+    class IFramedMarkdownEditor extends MarkdownScrollableEditView {
         constructor(context: WidgetEditorView);
         
+        /**
+         * Function that cleans up the iframe and listeners
+         */
         cleanup: null | (() => void);
+        /**
+         * Element where the editor is embedded into
+         */
         iframeEl: null | HTMLIFrameElement;
         
-        cleanupIframe(): unknown;
-        getDynamicExtensions(): unknown;
-        onIframeLoad(): unknown;
-        onUpdate(e: unknown, t: unknown): unknown;
-        onunload(): unknown;
+        /**
+         * Executes cleanup function if exists
+         */
+        cleanupIframe(): void;
+        /**
+         * Constructs extensions for the editor based on user settings
+         * @remark Creates extension for overriding escape keymap to showPreview
+         */
+        getDynamicExtensions(): Extension[];
+        /**
+         * Loads the iframe element and prepare cleanup function
+         */
+        onIframeLoad(): void;
+        /**
+         * Execute functionality on CM editor state update
+         */
+        onUpdate(update: ViewUpdate, changed: boolean): void;
+        /**
+         * Execute cleanup of the iframe
+         */
+        onunload(): void;
     }
     
-    class ScrollableMarkdownEditor extends GenericMarkdownEditor {
+    class MarkdownScrollableEditView extends MarkdownBaseView {
+        /**
+         * List of CSS classes applied to the editor
+         */
         cssClasses: []
+        /**
+         * Whether the editor is currently scrolling
+         */
         isScrolling: boolean;
+        /**
+         * Search component for the editor, provides highlight and search functionality
+         */
         search: EditorSearchComponent;
+        /**
+         * Container for the editor, handles editor size
+         */
         sizerEl: HTMLElement;
+        /**
+         * Scope for the search component, if exists
+         */
+        scope: Scope | undefined;
         
-        applyScroll(e: unknown): unknown;
+        
+        /**
+         * Set the scroll count of the editor scrollbar
+         */
+        applyScroll(scroll: number): void;
+        /**
+         * Constructs local (always active) extensions for the editor
+         * @remark Creates extensions for list indentation, tab indentations
+         */
         buildLocalExtensions(): Extension[];
-        focus(): unknown;
-        getDynamicExtensions(): unknown;
-        getScroll(): unknown;
-        handleScroll(): unknown;
-        hide(): unknown;
-        onCssChange(): unknown;
-        onResize(): unknown;
-        onScroll(): unknown;
-        onUpdate(t: unknown, n: unknown): unknown;
-        onViewClick(e: unknown): unknown;
-        setCssClass(e: unknown): unknown;
-        show(): unknown;
-        showSearch(e: unknown): unknown;
-        updateBottomPadding(e: unknown): unknown;
+        /**
+         * Focus the editor (and for mobile: render keyboard)
+         */
+        focus(): void;
+        /**
+         * Constructs extensions for the editor based on user settings
+         * @remark Creates toggleable extensions for showing line numbers, indentation guides, 
+         *          folding, brackets pairing and properties rendering
+         */
+        getDynamicExtensions(): Extension[];
+        /**
+         * Get the current scroll count of the editor scrollbar
+         */
+        getScroll(): number;
+        /**
+         * Invokes onMarkdownScroll on scroll
+         */
+        handleScroll(): void;
+        /**
+         * Hides the editor (sets display: none)
+         */
+        hide(): void;
+        /**
+         * Clear editor cache and refreshes editor on app css change
+         */
+        onCssChange(): void;
+        /**
+         * Update editor size and bottom padding on resize
+         */
+        onResize(): void;
+        /**
+         * Update editor suggest position and invokes handleScroll on scroll
+         */
+        onScroll(): void;
+        /**
+         * Execute functionality on CM editor state update
+         */
+        onUpdate(update: ViewUpdate, changed: boolean): void;
+        /**
+         * Close editor suggest and removes highlights on click
+         */
+        onViewClick(event?: MouseEvent): void;
+        /**
+         * Add classes to the editor, functions as a toggle
+         */
+        setCssClass(classes: string[]): void;
+        /**
+         * Reveal the editor (sets display: block)
+         */
+        show(): void;
+        /**
+         * Reveal the search (and replace) component
+         */
+        showSearch(replace: boolean): void;
+        /**
+         * Update the bottom padding of the CodeMirror contentdom
+         */
+        updateBottomPadding(height: number): void;
     }
 
-    class GenericMarkdownEditor extends Component {
-        app: App;
-        cleanupLivePreview: null | (() => void);
-        clipboardManager: ClipBoardManager;
-        cm: EditorView;
-        cmInit: boolean;
-        containerEl: HTMLElement;
-        cursorPopupEl: HTMLElement | null;
-        editor: ExtendedEditor;
-        editorEl: HTMLElement;
-        editorSuggest: EditorSuggests<any>;
-        livePreviewPlugin: Extension[];
-        localExtensions: Extension[];
-        sourceMode: boolean;
-        tableCell: null;
-        owner: ItemView;
-
-        applyFoldInfo(e: unknown): unknown;
-        buildLocalExtensions(): unknown;
-        clear(): void;
-        destroy(): void;
-        destroyTableCell(e: unknown): unknown;
-        editTableCell(e: unknown, t: unknown): unknown;
-        get(): unknown;
-        getDynamicExtensions(): unknown;
-        getFoldInfo(): unknown;
-        getLocalExtensions(): unknown;
-        onContextMenu(e: unknown, t: unknown): unknown;
-        onEditorClick(e: unknown, t: unknown): unknown;
-        onEditorDragStart(e: unknown): unknown;
-        onEditorLinkMouseover(e: unknown, t: unknown): unknown;
-        onMenu(e: unknown): unknown;
-        onResize(): unknown;
-        onUpdate(e: unknown, t: unknown): unknown;
-        reinit(): unknown;
-        reparent(e: unknown): unknown;
-        resetSyntaxHighlighting(): unknown;
-        saveHistory(): unknown;
-        set(doc: string, force_reinitialize?: boolean): void;
-        toggleFoldFrontmatter(): unknown;
-        toggleSource(): unknown;
-        triggerClickableToken(token: Token, new_leaf: boolean): void;
-        updateEvent(): unknown;
-        updateLinkPopup(): unknown;
-        updateOptions(): unknown;
+    /**
+     * @todo
+     */
+    class TableCellEditor extends MarkdownBaseView implements TableCell {
         
-        get activeCM(): unknown;
-        get file(): unknown;
-        get path(): unknown;
+    }
+    
+    interface TableEditor {
+        
+    }
+    
+    /**
+     * @todo
+     */
+    interface TableCell {
+        col: number;
+        contentEl: HTMLElement;
+        dirty: boolean;
+        el: HTMLElement;
+        end: number;
+        padEnd: number;
+        padStart: number;
+        row: number;
+        start: number;
+        table: TableCellEditor;
+        text: string;
+    }
+    
+    class MarkdownBaseView extends Component {
+        /**
+         * Reference to the app
+         */
+        app: App;
+        /**
+         * Callback to clear all elements 
+         */
+        cleanupLivePreview: null | (() => void);
+        /**
+         * Manager that handles pasting text, html and images into the editor
+         */
+        clipboardManager: ClipBoardManager;
+        /**
+         * Codemirror editor instance
+         */
+        cm: EditorView;
+        /**
+         * Whether CodeMirror is initialized
+         */
+        cmInit: boolean;
+        /**
+         * Container element of the editor view
+         */
+        containerEl: HTMLElement;
+        /**
+         * Popup element for internal link
+         */
+        cursorPopupEl: HTMLElement | null;
+        /**
+         * Obsidian editor instance 
+         * @remark Handles formatting, table creation, highlight adding, etc.
+         */
+        editor: ExtendedEditor;
+        /**
+         * Element in which the CodeMirror editor resides
+         */
+        editorEl: HTMLElement;
+        /**
+         * Editor suggestor for autocompleting files, links, aliases, etc.
+         */
+        editorSuggest: EditorSuggests;
+        /**
+         * The CodeMirror plugins that handle the rendering of, and interaction with Obsidian's Markdown
+         */
+        livePreviewPlugin: Extension[];
+        /**
+         * Local (always active) extensions for the editor
+         */
+        localExtensions: Extension[];
+        /**
+         * Whether live preview rendering is disabled
+         */
+        sourceMode: boolean;
+        /**
+         * Reference to editor attached to table cell, if any
+         */
+        tableCell: null | TableCellEditor;
+        /**
+         * Controller of the editor view 
+         */
+        owner: MarkdownFileInfo;
+
+        /**
+         * Currently active CM instance (table cell CM or main CM)
+         */
+        get activeCM(): EditorView;
+        /**
+         * Returns attached file of the owner instance
+         */
+        get file(): TFile | null;
+        /**
+         * Returns path of the attached file
+         */
+        get path(): string;
+        
+        /**
+         * Apply fold history to editor
+         */
+        applyFoldInfo(info: FoldInfo): void;
+        /**
+         * Constructs local (always active) extensions for the editor
+         * @remark Creates extensions for handling dom events, editor info statefields, update listener, suggestions
+         */
+        buildLocalExtensions(): Extension[];
+        /**
+         * Cleanup live preview, remove and then re-add all editor extensions 
+         */
+        clear(): void;
+        /**
+         * Clean up live preview, remove all extensions, destory editor
+         */
+        destroy(): void;
+        /**
+         * Removes specified tablecell
+         */
+        destroyTableCell(cell?: TableCellEditor): void;
+        /**
+         * Edit a specified table cell, creating a table cell editor
+         */
+        editTableCell(cell: TableEditor, new_cell: TableCell): TableCellEditor;
+        /**
+         * Get the current editor document as a string
+         */
+        get(): string;
+        /**
+         * Constructs extensions for the editor based on user settings
+         * @remark Creates extension for tab size, RTL rendering, spellchecking, pairing markdown syntax, live preview and vim
+         */
+        getDynamicExtensions(): Extension[];
+        /**
+         * Get the current folds of the editor
+         */
+        getFoldInfo(): null | FoldInfo;
+        /**
+         * Builds all local extensions and assigns to this.localExtensions
+         * @remark Will build extensions if they were not already built
+         */
+        getLocalExtensions(): unknown;
+        /**
+         * Creates menu on right mouse click
+         */
+        onContextMenu(event: PointerEvent, x: boolean): Promise<void>;
+        /**
+         * Execute click functionality on token on mouse click
+         */
+        onEditorClick(event: MouseEvent, element?: HTMLElement): void;
+        /**
+         * Execute drag functionality on drag start
+         * @remark Interfaces with dragManager
+         */
+        onEditorDragStart(event: DragEvent): void;
+        /**
+         * Execute hover functionality on mouse over event
+         */
+        onEditorLinkMouseover(event: MouseEvent, target: HTMLElement): void;
+        /**
+         * Execute context menu functionality on right mouse click
+         * @deprecated Use onContextMenu instead
+         */
+        onMenu(event: MouseEvent): void;
+        /**
+         * Reposition suggest and scroll position on resize
+         */
+        onResize(): void;
+        /**
+         * Execute functionality on CM editor state update
+         */
+        onUpdate(update: ViewUpdate, changed: boolean): void;
+        /**
+         * Reinitialize the editor inside new container
+         */
+        reinit(): void;
+        /**
+         * Move the editor into the new container
+         */
+        reparent(new_container: HTMLElement): void;
+        /**
+         * Bodge to reset the syntax highlighting
+         * @remark Uses single-character replacement transaction
+         */
+        resetSyntaxHighlighting(): void;
+        /**
+         * @internal Save history of file and data (for caching, for faster reopening of same file in editor)
+         */
+        saveHistory(): void;
+        /**
+         * Set the state of the editor
+         */
+        set(data: string, clear: boolean): void;
+        /**
+         * Enables/disables frontmatter folding
+         */
+        toggleFoldFrontmatter(): void;
+        /**
+         * Toggle sourcemode for editor and dispatch effect
+         */
+        toggleSource(): void;
+        /**
+         * Execute functionality of token (open external link, open internal link in leaf, ...)
+         */
+        triggerClickableToken(token: Token, new_leaf: boolean): void;
+        /**
+         * @internal Callback for onUpdate functionality added as an extension
+         */
+        updateEvent(): (update: ViewUpdate) => void;
+        /**
+         * In mobile, creates a popover link on clickable token, if exists
+         */
+        updateLinkPopup(): void;
+        /**
+         * Reconfigure/re-add all the dynamic extensions
+         */
+        updateOptions(): void;
+    }
+    
+    interface MetadataWidget {
+        // TODO: Add typings
+    }
+    
+    interface MetadataEntryData {
+        key: string;
+        type: PropertyWidgetType | string;
+        value: any;
+    }
+    
+    
+    interface MetadataEditorProperty extends Component {
+        /**
+         * Reference to the app
+         */
+        app: App;
+        /**
+         * Container element for the metadata editor property
+         */
+        containerEl: HTMLElement;
+        /**
+         * Entry information for the property
+         */
+        entry: MetadataEntryData;
+        /**
+         * Icon element of the property
+         */
+        iconEl: HTMLSpanElement;
+        /**
+         * Key value of the property
+         */
+        keyEl: HTMLElement;
+        /**
+         * Input field for key value of the property
+         */
+        keyInputEl: HTMLInputElement;
+        /**
+         * Metadata editor the property is attached to
+         */
+        metadataEditor: MetadataEditor;
+        /**
+         * Widget that handles user input for this property widget type
+         */
+        rendered: MetadataWidget | null;
+        /**
+         * Info about the inferred and expected property widget given key-value pair
+         */
+        typeInfo: {expected: PropertyWidget, inferred: PropertyWidget}
+        /**
+         * Element that contains the value input or widget
+         */
+        valueEl: HTMLElement;
+        /**
+         * Element containing the displayed warning on malformed property field
+         */
+        warningEl: HTMLElement;
+
+        /**
+         * Focus on the key input element
+         */
+        focusKey(): void;
+        /**
+         * Focus on the property (container element)
+         */
+        focusProperty(): void;
+        /**
+         * Focus on the value input element
+         */
+        focusValue(which?: "both" | "end" | "start"): void
+        /**
+         * Reveal the property menu on click event
+         */
+        handleItemClick(event: MouseEvent): void
+        /**
+         * Focus on property on blur event
+         */
+        handlePropertyBlur(): void;
+        /**
+         * Update key of property and saves, returns false if error
+         */
+        handleUpdateKey(key: string): boolean
+        /**
+         * Update value of property and saves
+         */
+        handleUpdateValue(value: any): void
+        /**
+         * Loads as draggable property element
+         */
+        onload(): void;
+        /**
+         * Render property widget based on type
+         */
+        renderProperty(entry: MetadataEntryData, check_errors?: boolean, use_expected_type?: boolean): void
+        /**
+         * Set the selected class of property
+         */
+        setSelected(selected: boolean): void
+        /**
+         * Reveal property selection menu at mouse event 
+         */
+        showPropertyMenu(event: MouseEvent): void
     }
 
     interface MetadataEditor extends Component {
-        addPropertyButtonEl: HTMLElement;
+        /**
+         * Button element for adding a new property 
+         */
+        addPropertyButtonEl: HTMLButtonElement;
+        /**
+         * Reference to the app
+         */
         app: App;
+        /**
+         * Whether the frontmatter editor is collapsed
+         */
         collapsed: boolean;
+        /**
+         * Container element for the metadata editor
+         */
         containerEl: HTMLElement;
+        /**
+         * Element containing metadata table and addPropertyButton
+         */
         contentEl: HTMLElement;
-        focusedLine: null | unknown;
+        /**
+         * The currently focused property
+         */
+        focusedLine: null | MetadataEditorProperty;
+        /**
+         * Fold button for folding away the frontmatter editor on hovering over headingEl
+         */
         foldEl: HTMLElement;
+        /**
+         * Heading element for the metadata editor
+         */
         headingEl: HTMLElement;
-        hoverPopover: null | unknown;
+        /**
+         * Hover element container
+         */
+        hoverPopover: null | HoverPopover;
+        /**
+         * Owner of the metadata editor
+         */
         owner: MarkdownView;
-        properties: unknown[];
+        /**
+         * All properties existing in the metadata editor
+         */
+        properties: MetadataEntryData[];
+        /**
+         * Element containing all property elements
+         */
         propertyListEl: HTMLElement;
-        rendered: unknown[];
-        selectedLines: Set<unknown>;
+        /**
+         * List of all property field editors
+         */
+        rendered: MetadataEditorProperty[];
+        /**
+         * Set of all selected property editors
+         */
+        selectedLines: Set<MetadataEditorProperty>;
 
-        addProperty(): unknown
-        clear(): unknown
-        clearSelection(): unknown
-        focusKey(e: unknown): unknown
-        focusProperty(e: unknown): unknown
-        focusPropertyAtIndex(e: unknown): unknown
-        focusValue(e: unknown, t: unknown): unknown
-        handleCopy(e: unknown): unknown
-        handleCut(e: unknown): unknown
-        handleItemSelection(e: unknown, t: unknown): unknown
-        handleKeypress(e: unknown): unknown
-        handlePaste(e: unknown): unknown
-        hasFocus(): unknown
-        hasPropertyFocused(): unknown
-        insertProperties(e: unknown): unknown
-        onMetadataTypeChange(e: unknown): unknown
-        onload(): unknown
-        removeProperties(e: unknown, t: unknown): unknown
-        reorderKey(e: unknown, t: unknown): unknown
-        save(): unknown
-        selectAll(): unknown
-        selectProperty(e: unknown, t: unknown): unknown
-        serialize(): unknown
-        setCollapse(e: unknown, t: unknown): unknown
-        showPropertiesMenu(e: unknown): unknown
-        synchronize(e: unknown): unknown
-        toggleCollapse(): unknown
-        _copyToClipboard(e: unknown, t: unknown): unknown
+        /**
+         * Uncollapse editor if collapsed and create a new property row
+         */
+        addProperty(): void;
+        /**
+         * Clear all properties
+         */
+        clear(): void;
+        /**
+         * Unselect all lines
+         */
+        clearSelection(): void;
+        /**
+         * Focus on property field with given key
+         */
+        focusKey(key: string): void;
+        /**
+         * Focus on property
+         */
+        focusProperty(property: MetadataEditorProperty): void;
+        /**
+         * Focus on property at specified index
+         */
+        focusPropertyAtIndex(index: number): void;
+        /**
+         * Focus on property with value 
+         */
+        focusValue(value: string, which: "both" | "end" | "start"): void;
+        /**
+         * Handle copy event on selection and serialize properties
+         */
+        handleCopy(event: ClipboardEvent): void;
+        /**
+         * Handle cut event and serialize and remove properties
+         */
+        handleCut(event: ClipboardEvent): void;
+        /**
+         * Handle selection of item for drag handling
+         */
+        handleItemSelection(event: PointerEvent, property: MetadataEditorProperty): boolean;
+        /**
+         * Handle key press event for controlling selection or movement of property up/down
+         */
+        handleKeypress(event: KeyboardEvent): void;
+        /**
+         * Handle paste event of properties into metadata editor
+         */
+        handlePaste(event: ClipboardEvent): void;
+        /**
+         * Whether the editor has focus
+         */
+        hasFocus(): boolean;
+        /**
+         * Whether there is a property that is focused
+         */
+        hasPropertyFocused(): boolean;
+        /**
+         * Add new properties to the metadata editor and save
+         */
+        insertProperties(properties: Record<string, any>): void;
+        /**
+         * On vault metadata update, update property render
+         */
+        onMetadataTypeChange(property: MetadataEditorProperty): void;
+        /**
+         * On loading of the metadata editor, register on metadata type change event
+         */
+        onload(): void;
+        /**
+         * Remove specified properties from the metadata editor and save, and reset focus if specified
+         */
+        removeProperties(properties: MetadataEditorProperty[], reset_focus?: boolean): unknown;
+        /**
+         * Reorder the entry to specified index position and save
+         */
+        reorderKey(entry: MetadataEntryData, index: number): unknown;
+        /**
+         * Serialize the properties and save frontmatter
+         */
+        save(): void;
+        /**
+         * Select all property fields
+         */
+        selectAll(): void;
+        /**
+         * Mark specified property as selected
+         */
+        selectProperty(property: MetadataEditorProperty | undefined, select: boolean): void;
+        /**
+         * Convert properties to a serialized object
+         */
+        serialize(): Record<string, any>;
+        /**
+         * Sets frontmatter as collapsed or uncollapsed
+         */
+        setCollapse(collapsed: boolean, x: boolean): void;
+        /**
+         * On context menu event on header element, show property menu
+         */
+        showPropertiesMenu(event: MouseEvent): void;
+        /**
+         * Synchronize data with given properties and re-render them
+         */
+        synchronize(data: Record<string, any>): void;
+        /**
+         * Toggle collapsed state of the metadata editor
+         */
+        toggleCollapse(): void;
+        /**
+         * Convert given properties to a serialized object and store in clipboard as obsidian/properties
+         */
+        _copyToClipboard(event: ClipboardEvent, properties: MetadataEditorProperty[]): void;
     }
-    
+
+    /**
+     * @todo Documentation is very lacking
+     */
     class WidgetEditorView extends EmbeddedEditorView {
         constructor(context: EmbedContext, file: TFile, path?: string);
 
+        /**
+         * Data after reference
+         */
         after: string;
+        /**
+         * Data before reference
+         */
         before: string;
+        /**
+         * Full file contents
+         */
         data: string;
-        fileBeingRenamed: null;
+        /**
+         * File being currently renamed
+         */
+        fileBeingRenamed: null | TFile;
+        /**
+         * Current heading
+         */
         heading: string;
+        /**
+         * Indent
+         */
         indent: string;
+        /**
+         * Inline title element
+         */
         inlineTitleEl: HTMLElement;
-        lastSavedData: null | unknown;
+        /**
+         * Full inline content string
+         */
+        lastSavedData: null | string;
+        /**
+         * Whether embedding should be saved twice on save
+         */
         saveAgain: boolean;
+        /**
+         * Whether the widget is currently saving
+         */
         saving: boolean;
+        /**
+         * Subpath reference of the path
+         */
         subpath: string;
+        /**
+         * Whether the subpath was not found in the cache
+         */
         subpathNotFound: boolean;
         
-        applyScope(e: unknown): unknown;
-        getFoldInfo(): unknown;
-        loadContents(e: unknown, t: unknown): unknown;
-        loadFile(): unknown;
-        loadFileInternal(e: unknown, t: unknown): unknown;
-        onFileChanged(e: unknown, t: unknown, n: unknown): unknown;
-        onFileRename(e: unknown, t: unknown): unknown;
-        onMarkdownFold(): unknown;
-        onTitleChange(e: unknown): unknown;
-        onTitleKeydown(e: unknown): unknown;
-        onTitlePaste(e: unknown, t: unknown): unknown;
-        onload(): unknown;
-        onunload(): unknown;
-        save(t: unknown, n: unknown): unknown;
-        saveTitle(e: unknown): unknown;
-        showPreview(t: unknown): unknown;
+        /**
+         * Push/pop current scope
+         */
+        applyScope(scope: Scope): void;
+        /**
+         * Get the current folds of the editor
+         */
+        getFoldInfo(): null | FoldInfo;
+        /**
+         * Splice incoming data at according to subpath for correct reference, then update heading and render
+         */
+        loadContents(data: string, cache: CachedMetadata): void;
+        /**
+         * Load file from cache based on stored path
+         */
+        loadFile(): Promise<void>;
+        /**
+         * Load file and check if data is different from last saved data, then loads contents
+         */
+        loadFileInternal(data: string, cache?: CachedMetadata): void;
+        /**
+         * Update representation on file finished updating
+         */
+        onFileChanged(file: TFile, data: string, cache: CachedMetadata): void;
+        /**
+         * Update representation on file rename
+         */
+        onFileRename(file: TAbstractFile, oldPath: string): void;
+        /**
+         * Save fold made in the editor to foldmanager
+         */
+        onMarkdownFold(): void;
+        /**
+         * @internal On change of editor title element
+         */
+        onTitleChange(element: HTMLElement): void;
+        /**
+         * @internal On keypress on editor title element
+         */
+        onTitleKeydown(event: KeyboardEvent): void;
+        /**
+         * @internal On pasting on editor title element
+         */
+        onTitlePaste(element: HTMLElement, event: ClipboardEvent): void;
+        /**
+         * On loading widget, register vault change and rename events
+         */
+        onload(): void;
+        /**
+         * On unloading widget, unload component and remove scope
+         */
+        onunload(): void;
+        /**
+         * Save changes made in editable widget
+         */
+        save(data: string, delayed?: boolean): Promise<void>;
+        /**
+         * On blur widget, save title
+         */
+        saveTitle(element: HTMLElement): void;
+        /**
+         * Show preview of widget
+         */
+        showPreview(show?: boolean): void;
     }
     
     export class EmbeddedEditorView extends Component {
         constructor(app: App, containerEl: HTMLElement, file: TFile | null, state: EditorState);
         
+        /**
+         * Reference to the app
+         */
         app: App;
+        /**
+         * Container element for the embedded view
+         */
         containerEl: HTMLElement;
+        /**
+         * Whether the view is currently saving
+         */
         dirty: boolean;
+        /**
+         * Whether the editor may be edited
+         * @remark Fun fact, setting this to true and calling showEditor() for embedded MD views, allows them to be edited.
+         *          Though the experience is a little buggy
+         */
         editable: boolean;
+        /**
+         * Editor component of the view
+         */
         editMode?: IFramedMarkdownEditor | undefined;
+        /**
+         * Container in which the editor is embedded
+         */
         editorEl: HTMLElement;
+        /**
+         * File to which the view is attached
+         */
         file: null | TFile;
-        hoverPopover: null | unknown;
+        /**
+         * Hover element container
+         */
+        hoverPopover: null | HoverPopover;
+        /**
+         * Element containing the preview for the embedded markdown
+         */
         previewEl: HTMLElement;
+        /**
+         * Preview component of the view
+         */
         previewMode: MarkdownPreviewView;
+        /**
+         * Current state of the editor
+         */
         state: {} | EditorState | unknown;
+        /**
+         * Text contents being embedded
+         */
         text: string;
+        /**
+         * Whether the view renders contents using an iFrame
+         */
         useIframe: boolean;
-        
-        
-        destroyEditor(e: unknown): unknown
-        getMode(): unknown;
-        onMarkdownScroll(): unknown;
-        onload(): unknown;
-        onunload(): unknown;
-        requestSave(): unknown;
-        requestSaveFolds(): unknown;
-        save(e: unknown, t: unknown): unknown;
-        set(e: unknown, t: unknown): unknown;
-        showEditor(): unknown;
-        showPreview(e: unknown): unknown;
-        showSearch(e: unknown): unknown;
-        toggleMode(): unknown;
-        
-        get editor(): unknown;
-        get path(): unknown;
+
+        /**
+         * Get the preview editor, if exists
+         */
+        get editor(): IFramedMarkdownEditor | null;
+        /**
+         * Get the path to the file, if any file registered
+         */
+        get path(): string;
+        /**
+         * Get the scroll of the file renderer component
+         */
         get scroll(): unknown;
+        
+        /**
+         * Destroy edit component editor and save contents if specified
+         */
+        destroyEditor(save?: boolean): void
+        /**
+         * Gets currently active mode (editMode returns 'source')
+         */
+        getMode(): "source" | "preview";
+        /**
+         * Trigger markdown scroll on workspace
+         */
+        onMarkdownScroll(): void;
+        /**
+         * On load of editor, show preview
+         */
+        onload(): void;
+        /**
+         * On unload of editor, destroy editor and unset workspace activeEditor
+         */
+        onunload(): void;
+        /**
+         * Debounced save of contents
+         */
+        requestSave(): void;
+        /**
+         * Debounced save of editor folds
+         */
+        requestSaveFolds(): void;
+        /**
+         * Set file contents
+         */
+        save(data: string, save?: boolean): void;
+        /**
+         * Set the state of the editor
+         */
+        set(data: string, clear: boolean): void;
+        /**
+         * Reveal the editor if editable widget and applies saved state
+         */
+        showEditor(): void;
+        /**
+         * Reveal preview mode and destroy editor, save if specified
+         */
+        showPreview(save?: boolean): void;
+        /**
+         * Reveal search component in file renderer component
+         */
+        showSearch(replace?: boolean): void;
+        /**
+         * Toggle between edit and preview mode
+         */
+        toggleMode(): void;
     }
     
-
-    interface MarkdownView {
-        actionsEl: HTMLElement;
-        allowNoFile: boolean;
-
-        backButtonEl: HTMLButtonElement;
-        backlinksEl: HTMLElement;
-        canDropAnywhere: boolean;
+    // TODO: At typings for View interfaces
+    interface View {
+        /**
+         * Whether the leaf may close the view
+         */
         closeable: boolean;
-        containerEl: HTMLElement;
-        contentEl: HTMLElement;
-        currentMode: MarkdownSubView;
-        data: string;
-        dirty: boolean;
-        editMode: MarkdownSourceView;
-        file: TFile;
-        fileBeingRenamed: null | unknown;
-        forwardButtonEl: HTMLButtonElement;
+    }
+
+    interface ItemView {
+        /**
+         * Container of actions for the view
+         */
+        actionsEl: HTMLElement;
+        /**
+         * Back button element for changing view history
+         */
+        backButtonEl: HTMLButtonElement;
+        /**
+         * Whether the view may be dropped anywhere in workspace
+         */
+        canDropAnywhere: boolean;
+        /**
+         * Header bar container of view
+         */
         headerEl: HTMLElement;
-        icon: "lucide-file" | string;
+        /**
+         * Icon element for the view (for dragging)
+         */
         iconEl: HTMLElement;
-        inlineTitleEl: HTMLElement;
-        isPlaintext: boolean;
-        lastSavedData: string;
-        leaf: WorkspaceLeaf;
-        metadataEditor: MetadataEditor;
-        modeButtonEl: HTMLAnchorElement;
-        modes: {source: MarkdownSourceView, preview: MarkdownPreviewView};
+        /**
+         * Forward button element for changing view history
+         */
+        forwardButtonEl: HTMLButtonElement;
+        /**
+         * Anchor button for revealing more view actions
+         */
         moreOptionsButtonEl: HTMLAnchorElement;
-        navigation: boolean;
-        previewMode: MarkdownPreviewView;
-        rawFrontmatter: "" | string;
+        /**
+         * Container for the title of the view
+         */
+        titleContainerEl: HTMLElement;
+        /**
+         * Title element for the view
+         */
+        titleEl: HTMLElement;
+        /**
+         * Title of the parent
+         * @remark Used for breadcrumbs rendering
+         */
+        titleParentEl: HTMLElement;
+    }
+
+    interface FileView {
+        /**
+         * Whether the view may be run without an attached file
+         */
+        allowNoFile: boolean;
+    }
+    
+    interface EditableFileView {
+        /**
+         * The file that is currently being renamed
+         */
+        fileBeingRenamed: null | TFile;
+    }
+    
+    interface TextFileView {
+        /**
+         * Whether current file is dirty (different from saved contents)
+         */
+        dirty: boolean;
+        /**
+         * Whether editor should be rendered as plaintext
+         */
+        isPlaintext: boolean;
+        /**
+         * The data that was last saved
+         */
+        lastSavedData: null | string;
+        /**
+         * Whether on saving, the file should be saved again (for dirtyness checks)
+         */
         saveAgain: boolean;
+        /**
+         * Whether the file is currently saving
+         */
         saving: boolean;
-        scroll: null | unknown;
-        showBacklinks: undefined | unknown;
+    }
+    
+    interface MarkdownView {
+        /**
+         * Backlinks component
+         */
+        backlinks: null | unknown;
+        /**
+         * The embedded backlinks element for the current file
+         */
+        backlinksEl: HTMLElement;
+        /**
+         * The currently active markdown view (preview or edit view)
+         */
+        currentMode: MarkdownSubView;
+        /**
+         * Editor component of the view
+         */
+        editMode: MarkdownEditView;
+        /**
+         * Editable title element of the view
+         */
+        inlineTitleEl: HTMLElement;
+        /**
+         *  Frontmatter editor of the editor
+         */
+        metadataEditor: MetadataEditor;
+        /**
+         * Button for switching between different modes of the view
+         */
+        modeButtonEl: HTMLAnchorElement;
+        /**
+         * The registered modes of the view
+         */
+        modes: {source: MarkdownEditView, preview: MarkdownPreviewView};
+        /**
+         * Preview component of the view
+         */
+        previewMode: MarkdownPreviewView;
+        /**
+         * File frontmatter as a raw string
+         */
+        rawFrontmatter: string;
+        /**
+         * Current scroll position of the editor
+         */
+        scroll: null | number;
+        /**
+         * Whether to show backlinks in the editor
+         */
+        showBacklinks: boolean;
         /**
          * @deprecated CM5 Editor
          */
         sourceMode: {cmEditor: any};
-        titleContainerEl: HTMLElement;
-        titleEl: HTMLElement;
-        titleParentEl: HTMLElement;
 
 
-        addProperty(x: unknown): unknown;
-        canShowProperties(): unknown;
-        canToggleBacklinks(): unknown;
-        clear(): unknown;
-        collapseProperties(x: unknown): unknown;
-        editProperty(x: unknown): unknown;
-        focusMetadata(x: unknown): unknown;
-        getEphemeralState(): unknown;
-        getFile(): unknown;
-        getMode(): unknown;
-        getSelection(): unknown;
-        getSyncViewState(): unknown;
-        getViewType(): unknown;
-        handleCopy(x: unknown): unknown;
-        handleCut(x: unknown): unknown;
-        handlePaste(x: unknown): unknown;
-        loadFrontmatter(x: unknown): unknown;
-        metadataHasFocus(): unknown;
-        onCssChange(): unknown;
-        onExternalDataChange(x: unknown, y: unknown): unknown;
-        onInlineTitleBlur(): unknown;
-        onInternalDataChange(): unknown;
-        onMarkdownFold(): unknown;
-        onMarkdownScroll(): unknown;
-        onPaneMenu(x: unknown, y: unknown): unknown;
-        onResize(): unknown;
-        onSwitchView(x: unknown): unknown;
-        onload(): unknown;
-        printToPdf(): unknown;
-        redo(): unknown;
-        registerMode(x: unknown): unknown;
-        saveFrontmatter(x: unknown): unknown;
-        setEphemeralState(x: unknown): unknown;
-        setMode(x: unknown): unknown;
-        setViewData(x: unknown, y: unknown): unknown;
-        shiftFocusAfter(): unknown;
-        shiftFocusBefore(): unknown;
-        showSearch(x: unknown): unknown;
-        toggleBacklinks(): unknown;
-        toggleCollapseProperties(): unknown;
-        toggleMode(): unknown;
-        triggerClickableToken(x: unknown, y: unknown): unknown;
-        undo(): unknown;
-        updateBacklinks(): unknown;
-        updateButtons(): unknown;
-        updateOptions(): unknown;
-        updateShowBacklinks(): unknown;
+        /**
+         * Add property to inline metadata editor or properties plugin
+         * @remark Parameter is not used
+         */
+        addProperty(unused: undefined): void;
+        /**
+         * Whether the editor can render properties according to the current mode and config
+         */
+        canShowProperties(): boolean;
+        /**
+         * Whether the editor can toggle backlinks according to current mode
+         */
+        canToggleBacklinks(): boolean;
+        /**
+         * Collapse the properties editor
+         */
+        collapseProperties(collapse: boolean): void;
+        /**
+         * Edit the focused property in the metadata editor
+         * @remark Parameter is not used
+         */
+        editProperty(unused: undefined): void;
+        /**
+         * Focus on the metadata editor given property information
+         */
+        focusMetadata(focus?: { focusHeading: boolean, propertyIdx?: number, propertyKey?: string }): void;
+        /**
+         * Gets the ephemeral (non-persistent) state of the editor
+         */
+        getEphemeralState(): any & { scroll: number };
+        /**
+         * Get the file attached to the view
+         */
+        getFile(): TFile | null;
+        /**
+         * Get the current mode of the editor
+         */
+        getMode(): MarkdownViewModeType;
+        /**
+         * Get selection of current mode
+         */
+        getSelection(): string;
+        /**
+         * Get view state for sync plugin
+         */
+        getSyncViewState(): any;
+        /**
+         * Get the current view type
+         */
+        getViewType(): string;
+        /**
+         * Handle copy event on metadata editor and serialize properties
+         */
+        handleCopy(event: ClipboardEvent): void;
+        /**
+         * Handle cut event on metadata editor and serialize and remove properties
+         */
+        handleCut(event: ClipboardEvent): void;
+        /**
+         * Handle paste event of properties on metadata editor
+         */
+        handlePaste(event: ClipboardEvent): void;
+        /**
+         * Validate correctness of frontmatter and update metadata editor
+         */
+        loadFrontmatter(data: string): void;
+        /**
+         * Whether the metadata editor has focus
+         */
+        metadataHasFocus(): boolean;
+        /**
+         * On app css change, update source mode editor
+         */
+        onCssChange(): void;
+        /**
+         * Update editor on external data change (from sync plugin)
+         */
+        onExternalDataChange(file: TFile, data: string): void;
+        /**
+         * On blur of inline title, save new filename
+         */
+        onInlineTitleBlur(): Promise<void>;
+        /**
+         * On data change of editor, update internal data and metadata editor
+         */
+        onInternalDataChange(): void;
+        /**
+         * On fold of markdown in source editor, save fold info to fold manager
+         */
+        onMarkdownFold(): void;
+        /**
+         * On markdown scroll in editors, update scroll, sync state and trigger markdown scroll event
+         */
+        onMarkdownScroll(): void;
+        /**
+         * Populate the context menu
+         */
+        onPaneMenu(menu: Menu, source: 'more-options' | 'tab-header' | string): void;
+        /**
+         * Trigger onResize function of currently active editor component
+         */
+        onResize(): void;
+        /**
+         * On mod click, opens editor of opposite mode in split view to right
+         */
+        onSwitchView(event: KeyboardEvent | MouseEvent): Promise<void>;
+        /**
+         * On loading markdown view, register resize, css-change and quick-preview events
+         */
+        onload(): void;
+        /**
+         * Opens PDF modal for exporting PDF of the current file
+         */
+        printToPdf(): void;
+        /**
+         * Redo action of source mode editor
+         */
+        redo(): void;
+        /**
+         * Register editor mode component to view
+         */
+        registerMode(component: MarkdownSubView): void;
+        /**
+         * Save the frontmatter of the file
+         */
+        saveFrontmatter(properties: Record<string, any>): void;
+        /**
+         * Set the ephemeral (non-persistent) state of the editor
+         */
+        setEphemeralState(state: any & { focus: boolean, focusOnMobie: boolean, cursor: EditorRangeOrCaret }): void;
+        /**
+         * Set the mode of the editor
+         */
+        setMode(component: MarkdownSubView): Promise<void>;
+        /**
+         * Shift focus to first line of editor
+         */
+        shiftFocusAfter(): void;
+        /**
+         * Shift focus to inline title
+         */
+        shiftFocusBefore(): void;
+        /**
+         * Toggle backlinks on editor
+         */
+        toggleBacklinks(): Promise<void>;
+        /**
+         * Toggle collapse status of properties editor if allowed
+         */
+        toggleCollapseProperties(): void;
+        /**
+         * Toggle between source and preview mode
+         */
+        toggleMode(): void;
+        /**
+         * Execute functionality of token (open external link, open internal link in leaf, ...)
+         */
+        triggerClickableToken(token: Token, new_leaf: boolean): void;
+        /**
+         * Undo action of source mode editor
+         */
+        undo(): void;
+        /**
+         * Update the backlinks component for new file
+         */
+        updateBacklinks(): void;
+        /**
+         * Update reading/source view action buttons of modeButtonEl with current mode
+         */
+        updateButtons(): void;
+        /**
+         * Update options of the editors from settings
+         */
+        updateOptions(): void;
+        /**
+         * Hide/render backlinks component
+         */
+        updateShowBacklinks(): void;
 
     }
 
     interface MarkdownPreviewView {
+        /**
+         * Unique identifier for the rendered element
+         */
         docId: string;
+        /**
+         * HTML renderer for the Markdown
+         */
         renderer: ReadViewRenderer;
+        /**
+         * 
+         */
         search: null | unknown;
+        /**
+         * 
+         */
         type: "preview" | string;
+        /**
+         * 
+         */
         view: MarkdownView;
 
+        /**
+         * 
+         */
         applyFoldInfo(e: unknown): unknown;
+        /**
+         * 
+         */
         beforeUnload(): unknown;
+        /**
+         * 
+         */
         clear(): unknown;
+        /**
+         * 
+         */
         edit(e: unknown): unknown;
+        /**
+         * 
+         */
         foldAll(): unknown;
+        /**
+         * 
+         */
         getEphemeralState(e: unknown): unknown;
+        /**
+         * 
+         */
         getFoldInfo(): unknown;
+        /**
+         * 
+         */
         getSelection(): unknown;
+        /**
+         * 
+         */
         hide(): unknown;
+        /**
+         * 
+         */
         onFoldChange(): unknown;
+        /**
+         * 
+         */
         onRenderComplete(): unknown;
+        /**
+         * 
+         */
         onResize(): unknown;
+        /**
+         * 
+         */
         onScroll(): unknown;
+        /**
+         * 
+         */
         requestUpdateLinks(): unknown;
+        /**
+         * 
+         */
         setEphemeralState(e: unknown): unknown;
+        /**
+         * 
+         */
         show(): unknown;
+        /**
+         * 
+         */
         showSearch(): unknown;
+        /**
+         * 
+         */
         unfoldAll(): unknown;
+        /**
+         * 
+         */
         updateOptions(): unknown;
     }
 
     interface MarkdownRenderer {
+        /**
+         * 
+         */
         onCheckboxClick(e: unknown, n: unknown, i: unknown): unknown
+        /**
+         * 
+         */
         onFileChange(e: unknown): unknown;
+        /**
+         * 
+         */
         onFoldChange(): unknown;
+        /**
+         * 
+         */
         onRenderComplete(): unknown;
+        /**
+         * 
+         */
         onScroll(): unknown;
+        /**
+         * 
+         */
         onload(): unknown;
+        /**
+         * 
+         */
         postProcess(e: unknown, t: unknown, n: unknown): unknown
+        /**
+         * 
+         */
         resolveLinks(e: unknown): unknown;
 
+        /**
+         *
+         */
         get path(): unknown;
     }
 
