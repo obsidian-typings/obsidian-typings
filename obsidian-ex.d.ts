@@ -27,6 +27,53 @@ import {
 } from "obsidian";
 import * as path from "path";
 export * from "obsidian";
+
+declare module "@codemirror/view" {
+    /** @todo Documentation incomplete */
+    interface EditorView {
+        cm?: VimEditor;
+    }
+
+
+    /** @todo Documentation incomplete */
+    interface VimEditor {
+        state: VimState;
+    }
+
+    /** @todo Documentation incomplete */
+    interface VimState {
+        vim: {
+            inputState: {
+                changeQueue: null;
+                keyBuffer: [];
+                motion: null;
+                motionArgs: null;
+                motionRepeat: [];
+                operator: null;
+                operatorArgs: null;
+                prefixRepeat: [];
+                registerName: null;
+            };
+            insertMode: false;
+            insertModeRepeat: undefined;
+            lastEditActionCommand: undefined;
+            lastEditInputState: undefined;
+            lastHPos: number;
+            lastHSPos: number;
+            lastMotion: {
+                name?: string;
+            };
+            lastPastedText: null;
+            lastSelection: null;
+        };
+        vimPlugin: {
+            lastKeydown: string;
+        };
+    }
+
+}
+
+
 /**
  * @remark Interfaces that have not been fully typed yet are marked as @internal with 'unknown'
  * @todo Add Canvas typings (work off base from Dev-Mike, attribute)
@@ -1458,11 +1505,6 @@ declare module "obsidian" {
 		 * Run check on focused editor to see whether a suggestion should be triggered and rendered
 		 */
 		trigger(editor: MarkdownBaseView, t: TFile, n: boolean): void;
-	}
-
-	/** @todo Documentation incomplete */
-	interface EditorView {
-		cm?: VimEditor;
 	}
 
 	interface EmbedContext {
@@ -4904,42 +4946,6 @@ declare module "obsidian" {
 		 * Unregister a view type
 		 */
 		unregisterView(type: string): void;
-	}
-
-	/** @todo Documentation incomplete */
-	interface VimEditor {
-		state: VimState;
-	}
-
-	/** @todo Documentation incomplete */
-	interface VimState {
-		vim: {
-			inputState: {
-				changeQueue: null;
-				keyBuffer: [];
-				motion: null;
-				motionArgs: null;
-				motionRepeat: [];
-				operator: null;
-				operatorArgs: null;
-				prefixRepeat: [];
-				registerName: null;
-			};
-			insertMode: false;
-			insertModeRepeat: undefined;
-			lastEditActionCommand: undefined;
-			lastEditInputState: undefined;
-			lastHPos: number;
-			lastHSPos: number;
-			lastMotion: {
-				name?: string;
-			};
-			lastPastedText: null;
-			lastSelection: null;
-		};
-		vimPlugin: {
-			lastKeydown: string;
-		};
 	}
 
 	interface WeakMapWrapper<K extends object, V> extends WeakMap<K, V> {
