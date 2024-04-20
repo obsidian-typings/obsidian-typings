@@ -32,7 +32,7 @@ export * from "obsidian";
  * @todo Add Canvas typings (work off base from Dev-Mike, attribute)
  */
 declare module "obsidian" {
-    /** @todo Documentation incomplete */
+	/** @todo Documentation incomplete */
 	type ConfigItem =
 		| "accentColor"
 		| "alwaysUpdateLinks"
@@ -87,10 +87,10 @@ declare module "obsidian" {
 		| "userIgnoreFilters"
 		| "vimMode";
 
-    /** @todo Documentation incomplete */
+	/** @todo Documentation incomplete */
 	type EmbedableConstructor = (context: EmbedContext, file: TFile, path?: string) => Component;
 
-    /** @todo Documentation incomplete */
+	/** @todo Documentation incomplete */
 	type InternalPluginName =
 		| "audio-recorder"
 		| "backlink"
@@ -136,7 +136,7 @@ declare module "obsidian" {
 		| "text"
 		| (string & any);
 
-    /** @todo Documentation incomplete */
+	/** @todo Documentation incomplete */
 	type TreeItem<T> = TreeNode<T> & {
 		collapseEl: HTMLElement;
 		collapsed: boolean;
@@ -879,42 +879,6 @@ declare module "obsidian" {
 		saveAttachment(name: string, extension: string, data: ArrayBuffer, replace: boolean): Promise<void>;
 	}
 
-	/** @todo Documentation incomplete */
-	interface CMState extends EditorState {
-		vim: {
-			inputState: {
-				changeQueue: null;
-				keyBuffer: [];
-				motion: null;
-				motionArgs: null;
-				motionRepeat: [];
-				operator: null;
-				operatorArgs: null;
-				prefixRepeat: [];
-				registerName: null;
-			};
-			insertMode: false;
-			insertModeRepeat: undefined;
-			lastEditActionCommand: undefined;
-			lastEditInputState: undefined;
-			lastHPos: number;
-			lastHSPos: number;
-			lastMotion: {
-				name?: string;
-			};
-			lastPastedText: null;
-			lastSelection: null;
-		};
-		vimPlugin: {
-			lastKeydown: string;
-		};
-	}
-
-	/** @todo Documentation incomplete */
-	interface CMView extends EditorView {
-		state: CMState;
-	}
-
 	interface Commands {
 		/**
 		 * Reference to App
@@ -1494,6 +1458,11 @@ declare module "obsidian" {
 		 * Run check on focused editor to see whether a suggestion should be triggered and rendered
 		 */
 		trigger(editor: MarkdownBaseView, t: TFile, n: boolean): void;
+	}
+
+	/** @todo Documentation incomplete */
+	interface EditorView {
+		cm?: VimEditor;
 	}
 
 	interface EmbedContext {
@@ -4935,6 +4904,42 @@ declare module "obsidian" {
 		 * Unregister a view type
 		 */
 		unregisterView(type: string): void;
+	}
+
+	/** @todo Documentation incomplete */
+	interface VimEditor {
+		state: VimState;
+	}
+
+	/** @todo Documentation incomplete */
+	interface VimState {
+		vim: {
+			inputState: {
+				changeQueue: null;
+				keyBuffer: [];
+				motion: null;
+				motionArgs: null;
+				motionRepeat: [];
+				operator: null;
+				operatorArgs: null;
+				prefixRepeat: [];
+				registerName: null;
+			};
+			insertMode: false;
+			insertModeRepeat: undefined;
+			lastEditActionCommand: undefined;
+			lastEditInputState: undefined;
+			lastHPos: number;
+			lastHSPos: number;
+			lastMotion: {
+				name?: string;
+			};
+			lastPastedText: null;
+			lastSelection: null;
+		};
+		vimPlugin: {
+			lastKeydown: string;
+		};
 	}
 
 	interface WeakMapWrapper<K extends object, V> extends WeakMap<K, V> {
