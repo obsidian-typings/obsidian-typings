@@ -1,7 +1,9 @@
 .editorconfig
 .github/
-images/
-CONTRIBUTING.md
 CHANGELOG.md
+CONTRIBUTING.md
+dprint.json
 dummy.ts
+images/
+sort-interfaces.ts
 tsconfig.json
