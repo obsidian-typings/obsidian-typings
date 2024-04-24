@@ -3509,7 +3509,7 @@ declare module "obsidian" {
 		/**
 		 * All properties existing in the metadata editor
 		 */
-		properties: MetadataEntryData[];
+		properties: PropertyEntryData<unknown>[];
 		/**
 		 * Element containing all property elements
 		 */
@@ -3602,7 +3602,7 @@ declare module "obsidian" {
 		/**
 		 * Reorder the entry to specified index position and save
 		 */
-		reorderKey(entry: MetadataEntryData, index: number): unknown;
+		reorderKey(entry: PropertyEntryData<unknown>, index: number): unknown;
 		/**
 		 * Serialize the properties and save frontmatter
 		 */
@@ -3649,7 +3649,7 @@ declare module "obsidian" {
 		/**
 		 * Entry information for the property
 		 */
-		entry: MetadataEntryData;
+		entry: PropertyEntryData<unknown>;
 		/**
 		 * Icon element of the property
 		 */
@@ -3673,7 +3673,7 @@ declare module "obsidian" {
 		/**
 		 * Info about the inferred and expected property widget given key-value pair
 		 */
-		typeInfo: { expected: PropertyWidget; inferred: PropertyWidget };
+		typeInfo: { expected: PropertyWidget<unknown>; inferred: PropertyWidget<unknown> };
 		/**
 		 * Element that contains the value input or widget
 		 */
@@ -3718,7 +3718,7 @@ declare module "obsidian" {
 		/**
 		 * Render property widget based on type
 		 */
-		renderProperty(entry: MetadataEntryData, check_errors?: boolean, use_expected_type?: boolean): void;
+		renderProperty(entry: PropertyEntryData<unknown>, check_errors?: boolean, use_expected_type?: boolean): void;
 		/**
 		 * Set the selected class of property
 		 */
@@ -3727,13 +3727,6 @@ declare module "obsidian" {
 		 * Reveal property selection menu at mouse event
 		 */
 		showPropertyMenu(event: MouseEvent): void;
-	}
-
-	/** @todo Documentation incomplete */
-	interface MetadataEntryData {
-		key: string;
-		type: PropertyWidgetType | string;
-		value: any;
 	}
 
 	interface MetadataTypeManager extends Events {
@@ -4055,6 +4048,21 @@ declare module "obsidian" {
 		};
 	}
 
+	interface PropertyEntryData<T> {
+		/**
+		 * Property key
+		 */
+		key: string;
+		/**
+		 * Property widget type
+		 */
+		type: string;
+		/**
+		 * Property value
+		 */
+		value: T;
+	}
+
 	interface PropertyInfo {
 		/**
 		 * Usage count of property
@@ -4070,26 +4078,63 @@ declare module "obsidian" {
 		type: string;
 	}
 
-	interface PropertyWidget {
+	interface PropertyRenderContext {
+		/**
+		 * Reference to the app
+		 */
+		app: App;
+		/**
+		 * Callback called on property field unfocus
+		 */
+		blur: () => void;
+		/**
+		 * Key of the property field
+		 */
+		key: string;
+		/**
+		 * Reference to the metadata editor
+		 */
+		metadataEditor: MetadataEditor;
+		/**
+		 * Callback called on property value change
+		 */
+		onChange: () => void;
+		/**
+		 * Determine the source path of current context
+		 */
+		sourcePath: string;
+	}
+
+	interface PropertyWidget<T> {
 		/**
 		 * Lucide-dev icon associated with the widget
 		 */
 		icon: string;
-		/** @internal Name proxy */
-		name: unknown;
-		/** @internal Reserved keys for the widget */
-		reservedKeys: string[];
 		/**
-		 * Widget type
+		 * Returns the I18N name of the widget
+		 */
+		name: () => string;
+		/**
+		 * Reserved keys for the widget
+		 */
+		reservedKeys?: string[];
+		/**
+		 * Identifier for the widget
 		 */
 		type: string;
 
-		/** @internal */
-		default(): void;
-		/** @internal Render function for the widget */
-		render(element: HTMLElement, metadataField: unknown, property: PropertyInfo): void;
-		/** @internal Validate correctness of property input with respects to the widget */
-		validate(value: unknown): boolean;
+		/**
+		 * Get the default value for the property widget
+		 */
+		default(): T;
+		/**
+		 * Render function for the widget on field container given context and data
+		 */
+		render(containerEl: HTMLElement, data: PropertyEntryData<T>, context: PropertyRenderContext): Component | void;
+		/**
+		 * Validate whether the input value to the widget is correct
+		 */
+		validate(value: T): boolean;
 	}
 
 	/** @todo Documentation incomplete */
