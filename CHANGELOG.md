@@ -1,7 +1,16 @@
 # Changelog
 
+## 1.1.0
+- Add typings for Live Preview Editor instances (`MarkdownView`, `MarkdownEditView`, `MarkdownScrollableEditView`, ...)
+- Improved typings for `MetadataEditor` and `PropertyWidgetType`
+- Add basic typings for Vim CM plugin to `@codemirror/view` module
+- Moved all interfaces and classes under the `obsidian` module
+- Removed commented trigger functions from `Events`-derived classes
+- Removed duplicated definitions
+- Sorted file interfaces alphabetically, applied dprint formatting
+
 ## 1.0.8
-- Add `aliases` widget type to `PropertyWidghetType`
+- Add `aliases` widget type to `PropertyWidgetType`
 - Allow arbitrary widgets for `PropertyWidgetType`
 
 ## 1.0.7
