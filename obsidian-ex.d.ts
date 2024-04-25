@@ -537,7 +537,7 @@ declare module "obsidian" {
 		 * @remark This method is device *and* vault specific
 		 * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault
 		 */
-		loadLocalStorage(key: string): string;
+		loadLocalStorage(key: string): any;
 		/** @internal Add callback to execute on next frame */
 		nextFrame(callback: () => void): void;
 		/** @internal Add callback to execute on next frame, and remove after execution */
