@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.1
+- Fix incorrect return type for `loadLocalStorage` function
+
 ## 1.1.0
 - Add typings for Live Preview Editor instances (`MarkdownView`, `MarkdownEditView`, `MarkdownScrollableEditView`, ...)
 - Improved typings for `MetadataEditor` and `PropertyWidgetType`
