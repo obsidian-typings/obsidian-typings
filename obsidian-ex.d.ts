@@ -854,7 +854,10 @@ declare module "obsidian" {
     /**
      * @remark `BaseEditor` is never used in the Obsidian codebase, but is exposed in the Obsidian module as `Editor`.
      *       However, most editor components actually make use of the extended `Editor`, so this interface is purposely
-     *       named to `BaseEditor` to not require any casting for most purposes
+     *       named to `BaseEditor` to not require any casting for most purposes (or overriding the `editor` property type
+     *       for all components).
+     * @todo Potential risk of confusion when `Editor` is constructed from the Obsidian module, as it only has the 
+     *       methods from `BaseEditor`, *not* `Editor`
      */
 	interface BaseEditor {
 		/**

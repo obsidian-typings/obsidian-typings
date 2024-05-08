@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2
+- Renamed `Editor` to `BaseEditor` and `ExtendedEditor` to `Editor`, as most components and views directly make use of
+     the `Editor` class (and `BaseEditor` is never used directly)
+
 ## 1.1.1
 - Fix incorrect return type for `loadLocalStorage` function
 
