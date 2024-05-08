@@ -851,6 +851,97 @@ declare module "obsidian" {
 		vimMode?: false | boolean;
 	}
 
+    /**
+     * @remark `BaseEditor` is never used in the Obsidian codebase, but is exposed in the Obsidian module as `Editor`.
+     *       However, most editor components actually make use of the extended `Editor`, so this interface is purposely
+     *       named to `BaseEditor` to not require any casting for most purposes
+     */
+	interface BaseEditor {
+		/**
+		 * CodeMirror editor instance
+		 */
+		cm: EditorView;
+		/**
+		 * HTML instance the CM editor is attached to
+		 */
+		containerEl: HTMLElement;
+
+		/**
+		 * Clean-up function executed after indenting lists
+		 */
+		afterIndent(): void;
+		/**
+		 * Expand text
+		 *
+		 * @internal
+		 */
+		expandText(): void;
+		/**
+		 * Indents a list by one level
+		 */
+		indentList(): void;
+		/**
+		 * Insert a template callout at the current cursor position
+		 */
+		insertCallout(): void;
+		/**
+		 * Insert a template code block at the current cursor position
+		 */
+		insertCodeblock(): void;
+		/**
+		 * Insert a markdown link at the current cursor position
+		 */
+		insertLink(): void;
+		/**
+		 * Insert a mathjax equation block at the current cursor position
+		 */
+		insertMathJax(): void;
+		/**
+		 * Insert specified text at the current cursor position
+		 *
+		 * @remark Might be broken, inserts at the end of the document
+		 */
+		insertText(text: string): void;
+		/**
+		 * Inserts a new line and continues a markdown bullet point list at the same level
+		 */
+		newlineAndIndentContinueMarkdownList(): void;
+		/**
+		 * Inserts a new line at the same indent level
+		 */
+		newlineAndIndentOnly(): void;
+		/**
+		 * Get the character position at a mouse event
+		 */
+		posAtMouse(e: MouseEvent): EditorPosition;
+		/**
+		 * Toggles blockquote syntax on paragraph under cursor
+		 */
+		toggleBlockquote(): void;
+		/**
+		 * Toggle bullet point list syntax on paragraph under cursor
+		 */
+		toggleBulletList(): void;
+		/**
+		 * Toggle checkbox syntax on paragraph under cursor
+		 */
+		toggleCheckList(): void;
+		/**
+		 * Toggle numbered list syntax on paragraph under cursor
+		 */
+		toggleNumberList(): void;
+		/**
+		 * Convert word under cursor into a wikilink
+		 *
+		 * @param embed Whether to embed the link or not
+		 */
+		triggerWikiLink(embed: boolean): void;
+		/**
+		 * Unindents a list by one level
+		 */
+		unindentList(): void;
+	}
+
 	/** @todo Documentation incomplete */
 	interface BlockCache {
 		/**
@@ -1296,90 +1387,100 @@ declare module "obsidian" {
 		fileBeingRenamed: null | TFile;
 	}
 
-	interface Editor {
+	interface Editor extends BaseEditor {
 		/**
-		 * CodeMirror editor instance
+		 * Linked Editor manager instance
 		 */
-		cm: EditorView;
+		editorComponent: undefined | MarkdownScrollableEditView;
 		/**
-		 * HTML instance the CM editor is attached to
+		 * Currently active CM instance
+		 *
+		 * @remark Can be null when Editor is not instantiated
 		 */
-		containerEl: HTMLElement;
+		get activeCm(): EditorView | null;
+		/**
+		 * Whether the editor is embedded in a table cell
+		 */
+		get inTableCell(): boolean;
 
 		/**
-		 * Clean-up function executed after indenting lists
+		 * Make ranges of text highlighted within the editor given specified class (style)
 		 */
-		afterIndent(): void;
+		addHighlights(
+			ranges: EditorRange[],
+			style: "is-flashing" | "obsidian-search-match-highlight",
+			remove_previous: boolean,
+			range?: EditorSelection,
+		): void;
 		/**
-		 * Expand text
+		 * Convert editor position to screen position
 		 *
-		 * @internal
+		 * @param pos Editor position
+		 * @param relative_to_editor Relative to the editor or the application window
 		 */
-		expandText(): void;
+		coordsAtPos(
+			pos: EditorPosition,
+			relative_to_editor: boolean,
+		): { left: number; top: number; bottom: number; right: number };
 		/**
-		 * Indents a list by one level
-		 */
-		indentList(): void;
-		/**
-		 * Insert a template callout at the current cursor position
-		 */
-		insertCallout(): void;
-		/**
-		 * Insert a template code block at the current cursor position
-		 */
-		insertCodeblock(): void;
-		/**
-		 * Insert a markdown link at the current cursor position
-		 */
-		insertLink(): void;
-		/**
-		 * Insert a mathjax equation block at the current cursor position
-		 */
-		insertMathJax(): void;
-		/**
-		 * Insert specified text at the current cursor position
+		 * Unfolds all folded lines one level up
 		 *
-		 * @remark Might be broken, inserts at the end of the document
+		 * @remark If level 1 and 2 headings are folded, level 2 headings will be unfolded
 		 */
-		insertText(text: string): void;
+		foldLess(): void;
 		/**
-		 * Inserts a new line and continues a markdown bullet point list at the same level
-		 */
-		newlineAndIndentContinueMarkdownList(): void;
-		/**
-		 * Inserts a new line at the same indent level
-		 */
-		newlineAndIndentOnly(): void;
-		/**
-		 * Get the character position at a mouse event
-		 */
-		posAtMouse(e: MouseEvent): EditorPosition;
-		/**
-		 * Toggles blockquote syntax on paragraph under cursor
-		 */
-		toggleBlockquote(): void;
-		/**
-		 * Toggle bullet point list syntax on paragraph under cursor
-		 */
-		toggleBulletList(): void;
-		/**
-		 * Toggle checkbox syntax on paragraph under cursor
-		 */
-		toggleCheckList(): void;
-		/**
-		 * Toggle numbered list syntax on paragraph under cursor
-		 */
-		toggleNumberList(): void;
-		/**
-		 * Convert word under cursor into a wikilink
+		 * Folds all the blocks that are of the lowest unfolded level
 		 *
-		 * @param embed Whether to embed the link or not
+		 * @remark If there is a document with level 1 and 2 headings, level 2 headings will be folded
 		 */
-		triggerWikiLink(embed: boolean): void;
+		foldMore(): void;
 		/**
-		 * Unindents a list by one level
+		 * Get all ranges that can be folded away in the editor
 		 */
-		unindentList(): void;
+		getAllFoldableLines(): { from: number; to: number }[];
+		/**
+		 * Get a clickable link - if it exists - at specified position
+		 */
+		getClickableTokenAt(pos: EditorPosition): {
+			start: EditorPosition;
+			end: EditorPosition;
+			text: string;
+			type: string;
+		} | null;
+		/**
+		 * Get all blocks that were folded by their starting character position
+		 */
+		getFoldOffsets(): Set<number>;
+		/**
+		 * Checks whether the editor has a highlight of specified class
+		 *
+		 * @remark If no style is specified, checks whether the editor has unknown highlights
+		 */
+		hasHighlight(style?: string): boolean;
+		/**
+		 * Wraps current line around specified characters
+		 *
+		 * @remark Was added in a recent Obsidian update (1.4.0 update cycle)
+		 */
+		insertBlock(start: string, end: string): void;
+		/**
+		 * Get the closest character position to the specified coordinates
+		 */
+		posAtCoords(coords: { left: number; top: number }): EditorPosition;
+		/**
+		 * Removes all highlights of specified class
+		 */
+		removeHighlights(style: string): void;
+		/**
+		 * Adds a search cursor to the editor
+		 */
+		searchCursor(searchString: string): SearchCursor;
+		/**
+		 * Applies specified markdown syntax to selected text or word under cursor
+		 */
+		toggleMarkdownFormatting(
+			syntax: "bold" | "italic" | "strikethrough" | "highlight" | "code" | "math" | "comment",
+		): void;
 	}
 
 	interface EditorSearchComponent extends AbstractSearchComponent {
@@ -1390,7 +1491,7 @@ declare module "obsidian" {
 		/**
 		 * Linked editor for search component
 		 */
-		editor: ExtendedEditor;
+		editor: Editor;
 		/**
 		 * Whether search component is currently rendering
 		 */
@@ -1712,102 +1813,6 @@ declare module "obsidian" {
 		 * Function to be called on event trigger on the events object
 		 */
 		fn(...arg: unknown[]): void;
-	}
-
-	interface ExtendedEditor extends Editor {
-		/**
-		 * Linked Editor manager instance
-		 */
-		editorComponent: undefined | MarkdownScrollableEditView;
-		/**
-		 * Currently active CM instance
-		 *
-		 * @remark Can be null when Editor is not instantiated
-		 */
-		get activeCm(): EditorView | null;
-		/**
-		 * Whether the editor is embedded in a table cell
-		 */
-		get inTableCell(): boolean;
-
-		/**
-		 * Make ranges of text highlighted within the editor given specified class (style)
-		 */
-		addHighlights(
-			ranges: EditorRange[],
-			style: "is-flashing" | "obsidian-search-match-highlight",
-			remove_previous: boolean,
-			range?: EditorSelection,
-		): void;
-		/**
-		 * Convert editor position to screen position
-		 *
-		 * @param pos Editor position
-		 * @param relative_to_editor Relative to the editor or the application window
-		 */
-		coordsAtPos(
-			pos: EditorPosition,
-			relative_to_editor: boolean,
-		): { left: number; top: number; bottom: number; right: number };
-		/**
-		 * Unfolds all folded lines one level up
-		 *
-		 * @remark If level 1 and 2 headings are folded, level 2 headings will be unfolded
-		 */
-		foldLess(): void;
-		/**
-		 * Folds all the blocks that are of the lowest unfolded level
-		 *
-		 * @remark If there is a document with level 1 and 2 headings, level 2 headings will be folded
-		 */
-		foldMore(): void;
-		/**
-		 * Get all ranges that can be folded away in the editor
-		 */
-		getAllFoldableLines(): { from: number; to: number }[];
-		/**
-		 * Get a clickable link - if it exists - at specified position
-		 */
-		getClickableTokenAt(pos: EditorPosition): {
-			start: EditorPosition;
-			end: EditorPosition;
-			text: string;
-			type: string;
-		} | null;
-		/**
-		 * Get all blocks that were folded by their starting character position
-		 */
-		getFoldOffsets(): Set<number>;
-		/**
-		 * Checks whether the editor has a highlight of specified class
-		 *
-		 * @remark If no style is specified, checks whether the editor has unknown highlights
-		 */
-		hasHighlight(style?: string): boolean;
-		/**
-		 * Wraps current line around specified characters
-		 *
-		 * @remark Was added in a recent Obsidian update (1.4.0 update cycle)
-		 */
-		insertBlock(start: string, end: string): void;
-		/**
-		 * Get the closest character position to the specified coordinates
-		 */
-		posAtCoords(coords: { left: number; top: number }): EditorPosition;
-		/**
-		 * Removes all highlights of specified class
-		 */
-		removeHighlights(style: string): void;
-		/**
-		 * Adds a search cursor to the editor
-		 */
-		searchCursor(searchString: string): SearchCursor;
-		/**
-		 * Applies specified markdown syntax to selected text or word under cursor
-		 */
-		toggleMarkdownFormatting(
-			syntax: "bold" | "italic" | "strikethrough" | "highlight" | "code" | "math" | "comment",
-		): void;
 	}
 
 	interface FileCacheEntry {
@@ -2507,7 +2512,7 @@ declare module "obsidian" {
 		 *
 		 * @remark Handles formatting, table creation, highlight adding, etc.
 		 */
-		editor: ExtendedEditor;
+		editor: Editor;
 		/**
 		 * Element in which the CodeMirror editor resides
 		 */
