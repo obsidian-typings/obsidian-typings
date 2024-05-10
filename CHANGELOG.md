@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.3
+- Use obsidian as a peer dependency when installing the package
+
 ## 1.1.2
 - Renamed `Editor` to `BaseEditor` and `ExtendedEditor` to `Editor`, as most components and views directly make use of
      the `Editor` class (and `BaseEditor` is never used directly)
