@@ -20,12 +20,12 @@
         "url": "https://github.com/Fevol/obsidian-typings/issues"
     },
     "homepage": "https://github.com/Fevol/obsidian-typings#readme",
-    "dependencies": {
-        "obsidian": "^1.4.11"
-    },
-    "devDependencies": {
+    "peerDependencies": {
         "@types/node": "^20.10.7",
         "@types/electron": "npm:@ophidian/electron-types",
+        "obsidian": "^1.5.7-1"
+    },
+    "devDependencies": {
         "dprint": "^0.45.1",
         "ts-morph": "^22.0.0"
     },
