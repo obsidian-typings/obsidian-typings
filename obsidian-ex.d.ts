@@ -2319,6 +2319,11 @@ declare module "obsidian" {
 	interface InternalPlugin extends Plugin {
 		disable(): void;
 		enable(): void;
+		instance: InternalPluginInstance<this>;
+	}
+
+	interface InternalPluginInstance<TPlugin> {
+		plugin: TPlugin;
 	}
 
 	interface InternalPlugins extends Events {
@@ -2350,9 +2355,9 @@ declare module "obsidian" {
 		 *
 		 * @param id - ID of the plugin to get
 		 */
-		getEnabledPluginById(id: InternalPluginName): InternalPlugin | null;
-		getEnabledPluginById(id: "file-explorer"): FileExplorerPlugin | null;
-		getEnabledPluginById(id: "global-search"): GlobalSearchPlugin | null;
+		getEnabledPluginById(id: InternalPluginName): InternalPluginInstance<InternalPlugin> | null;
+		getEnabledPluginById(id: "file-explorer"): InternalPluginInstance<FileExplorerPlugin> | null;
+		getEnabledPluginById(id: "global-search"): InternalPluginInstance<GlobalSearchPlugin> | null;
 		/**
 		 * Get all enabled internal plugins
 		 */
