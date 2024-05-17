@@ -28,6 +28,12 @@ import {
 import * as path from "path";
 export * from "obsidian";
 
+declare global {
+	interface DomElementInfo {
+		[eventName: `on${string}`]: EventListenerOrEventListenerObject;
+	}
+}
+
 declare module "@codemirror/view" {
 	/** @todo Documentation incomplete */
 	interface EditorView {
