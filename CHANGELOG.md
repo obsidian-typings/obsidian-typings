@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.4
+- **NOTE:** the global `app` variable has been removed from the official Obsidian API as of 1.6.0, it will _not_ be re-added by `obsidian-typings`.
+- **DEPRECATED:** `loadProgress` has been made inaccessible in version 1.6.0
+- **DEPRECATED:** `collapsed`/`collapsible` properties of `TreeItem` have been removed in 1.6.0
+- `showRibbon` setting was added
+- `footnotes` were added to `MetadataCache`
+- Added typings for `DomElementInfo` to allow for adding eventlisteners directly within `createEl`
+- Added `instance` to `InternalPlugin` definitions
+- New methods/variables added in 1.6.0/1.6.1 have gotten preliminary typings
+
 ## 1.1.3
 - Use obsidian as a peer dependency when installing the package
 
