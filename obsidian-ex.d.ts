@@ -4578,6 +4578,12 @@ declare module "obsidian" {
 		 */
 		useSelectedItem(event: Event): boolean;
 	}
+    
+    /** @todo Documentation incomplete */
+    interface SuggestModal<T> {
+        /** @internal */
+        clearButtonEl: HTMLButtonElement;
+    }
 
 	/** @todo Documentation incomplete */
 	interface TableCell {
