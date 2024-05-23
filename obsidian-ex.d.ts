@@ -4,26 +4,26 @@ import { IpcRenderer } from "electron";
 import * as fs from "fs";
 import * as fsPromises from "fs/promises";
 import {
-	CachedMetadata,
-	Command,
-	Component,
-	EditorPosition,
-	EditorRange,
-	EditorRangeOrCaret,
-	EditorSuggest,
-	Events,
-	HoverPopover,
-	KeymapInfo,
-	Loc,
-	MarkdownFileInfo,
-	MarkdownSubView,
-	MarkdownViewModeType,
-	Plugin,
-	Reference,
-	SearchResult,
-	SplitDirection,
-	TFolder,
-	ViewState,
+    CachedMetadata, CacheItem,
+    Command,
+    Component,
+    EditorPosition,
+    EditorRange,
+    EditorRangeOrCaret,
+    EditorSuggest,
+    Events,
+    HoverPopover,
+    KeymapInfo,
+    Loc,
+    MarkdownFileInfo,
+    MarkdownSubView,
+    MarkdownViewModeType,
+    Plugin,
+    Reference,
+    SearchResult,
+    SplitDirection,
+    TFolder,
+    ViewState,
 } from "obsidian";
 import * as path from "path";
 export * from "obsidian";
@@ -116,6 +116,7 @@ declare module "obsidian" {
 		| "showLineNumber"
 		| "showUnsupportedFiles"
 		| "showViewHeader"
+        | "showRibbon"
 		| "smartIndentList"
 		| "spellcheck"
 		| "spellcheckLanguages"
@@ -182,8 +183,14 @@ declare module "obsidian" {
 
 	/** @todo Documentation incomplete */
 	type TreeItem<T> = TreeNode<T> & {
-		collapseEl: HTMLElement;
-		collapsed: boolean;
+        collapseEl: HTMLElement;
+        /**
+         * @deprecated Potentially removed in 1.6.0 for some tree-likes
+         */
+        collapsed: boolean;
+        /**
+         * @deprecated Potentially removed in 1.6.0 for some tree-likes
+         */
 		collapsible: boolean;
 		coverEl: HTMLElement;
 		innerEl: HTMLElement;
@@ -383,7 +390,7 @@ declare module "obsidian" {
 		 * @remark Will be true if `app.emulateMobile()` was enabled
 		 */
 		isMobile: boolean;
-		/** @internal */
+		/** @deprecated Made inaccessible in 1.6.0, this object can be recreated using Notices */
 		loadProgress: LoadProgress;
 		/**
 		 * Manages the gathering and updating of metadata for all files in the vault
@@ -782,6 +789,10 @@ declare module "obsidian" {
 		 * Editor > Show line numbers
 		 */
 		showLineNumber?: false | boolean;
+        /**
+         * Appearance > Show ribbon 
+         */
+        showRibbon?: true | boolean;
 		/**
 		 * Files & Links > Detect all file extensions
 		 */
@@ -954,6 +965,10 @@ declare module "obsidian" {
 		/** @internal */
 		cache: unknown;
 	}
+    
+    interface CachedMetadata {
+        footnotes?: FootnoteCache[];
+    }
 
 	interface CanvasConnection {}
 
@@ -1865,6 +1880,10 @@ declare module "obsidian" {
 
 	/** @todo Documentation incomplete */
 	interface FileExplorerPlugin extends InternalPlugin {
+        /** @internal */
+        attachDropHandler(x: unknown, y: unknown, z: unknown): unknown;
+        /** @internal Get a sorted list of the tree items for a specific folder) */
+        getSortedFolderItems(folder: TFolder): FileTreeItem[];
 		/**
 		 * Reveals a file or folder in the file explorer view, opens the view if it is not already
 		 * open/visible
@@ -2092,6 +2111,10 @@ declare module "obsidian" {
 		 * Get suggestions for file heading query
 		 */
 		getHeadingSuggestions(runner: Runnable, file: TFile, text: string): Promise<SearchResult[]>;
+        /**
+         * @internal Generate instructions for specific actions in suggestion manager (e.g. accept, select, ...)
+         */
+        getInstructions(): [{command: "string", purpose: "string"}];
 		/**
 		 * Get suggestions for current input text
 		 *
@@ -2135,6 +2158,13 @@ declare module "obsidian" {
 	/** @todo Documentation incomplete */
 	interface FoldManager {
 	}
+
+    /**
+     * Cache item containing a notes footnotes metadata
+     */
+    interface FootnoteCache extends CacheItem {
+        identifier: string;
+    }
 
 	/** @todo Documentation incomplete */
 	interface GlobalSearchLeaf extends WorkspaceLeaf {}
@@ -2189,6 +2219,10 @@ declare module "obsidian" {
 		getHotkeys(command: string): KeymapInfo[];
 		/** @internal Load hotkeys from storage */
 		load(): void;
+        /** @internal */
+        onConfigFileChanged(): void;
+        /** @internal */
+        onRaw(e: unknown): void;
 		/**
 		 * Trigger a command by keyboard event
 		 *
@@ -2202,6 +2236,8 @@ declare module "obsidian" {
 		 * @param command
 		 */
 		printHotkeyForCommand(command: string): string;
+        /** @internal */
+        registerListeners(): void;
 		/**
 		 * Remove a hotkey from the default hotkeys
 		 *
@@ -2243,6 +2279,12 @@ declare module "obsidian" {
 		defaultMod: boolean;
 		display: string;
 	}
+
+    /** @todo Documentation incomplete */
+    interface HoverPopover {
+        /** @internal */
+        watchResize(): void;
+    }
 
 	class IFramedMarkdownEditor extends MarkdownScrollableEditView {
 		constructor(context: WidgetEditorView);
@@ -2979,6 +3021,7 @@ declare module "obsidian" {
 		/**
 		 * Add property to inline metadata editor or properties plugin
 		 *
+         * @deprecated Removed in 1.6.0
 		 * @remark Parameter is not used
 		 */
 		addProperty(unused: undefined): void;
@@ -3012,6 +3055,8 @@ declare module "obsidian" {
 		 * Get the file attached to the view
 		 */
 		getFile(): TFile | null;
+        /** @internal Get the current mode of the editor */
+        getHoverSource(): string;
 		/**
 		 * Get the current mode of the editor
 		 */
@@ -3776,6 +3821,10 @@ declare module "obsidian" {
 		getTypes(): string[];
 		/** @internal Load property types from config */
 		loadData(): Promise<void>;
+        /** @internal */
+        onRaw(e: unknown): void;
+        /** @internal */
+        registerListeners(): void;
 		/** @internal Save property types to config */
 		save(): Promise<void>;
 		/** @internal Get all properties from metadata cache */
