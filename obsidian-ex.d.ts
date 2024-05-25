@@ -4,26 +4,27 @@ import { IpcRenderer } from "electron";
 import * as fs from "fs";
 import * as fsPromises from "fs/promises";
 import {
-    CachedMetadata, CacheItem,
-    Command,
-    Component,
-    EditorPosition,
-    EditorRange,
-    EditorRangeOrCaret,
-    EditorSuggest,
-    Events,
-    HoverPopover,
-    KeymapInfo,
-    Loc,
-    MarkdownFileInfo,
-    MarkdownSubView,
-    MarkdownViewModeType,
-    Plugin,
-    Reference,
-    SearchResult,
-    SplitDirection,
-    TFolder,
-    ViewState,
+	CachedMetadata,
+	CacheItem,
+	Command,
+	Component,
+	EditorPosition,
+	EditorRange,
+	EditorRangeOrCaret,
+	EditorSuggest,
+	Events,
+	HoverPopover,
+	KeymapInfo,
+	Loc,
+	MarkdownFileInfo,
+	MarkdownSubView,
+	MarkdownViewModeType,
+	Plugin,
+	Reference,
+	SearchResult,
+	SplitDirection,
+	TFolder,
+	ViewState,
 } from "obsidian";
 import * as path from "path";
 export * from "obsidian";
@@ -122,7 +123,7 @@ declare module "obsidian" {
 		| "showLineNumber"
 		| "showUnsupportedFiles"
 		| "showViewHeader"
-        | "showRibbon"
+		| "showRibbon"
 		| "smartIndentList"
 		| "spellcheck"
 		| "spellcheckLanguages"
@@ -189,14 +190,14 @@ declare module "obsidian" {
 
 	/** @todo Documentation incomplete */
 	type TreeItem<T> = TreeNode<T> & {
-        collapseEl: HTMLElement;
-        /**
-         * @deprecated Potentially removed in 1.6.0 for some tree-likes
-         */
-        collapsed: boolean;
-        /**
-         * @deprecated Potentially removed in 1.6.0 for some tree-likes
-         */
+		collapseEl: HTMLElement;
+		/**
+		 * @deprecated Potentially removed in 1.6.0 for some tree-likes
+		 */
+		collapsed: boolean;
+		/**
+		 * @deprecated Potentially removed in 1.6.0 for some tree-likes
+		 */
 		collapsible: boolean;
 		coverEl: HTMLElement;
 		innerEl: HTMLElement;
@@ -336,8 +337,10 @@ declare module "obsidian" {
 	interface App {
 		/**
 		 * The account signed in to Obsidian
+		 *
+		 * @deprecated Property is now undefined, removed pre-1.6.0
 		 */
-		account: Account;
+		account: Account | undefined;
 		/**
 		 * ID that uniquely identifies the vault
 		 *
@@ -392,6 +395,7 @@ declare module "obsidian" {
 		/**
 		 * Whether the application is currently running on mobile
 		 *
+		 * @deprecated Will be inaccessible in a future version, prefer using `Platform.isMobile`
 		 * @remark Prefer usage of `Platform.isMobile`
 		 * @remark Will be true if `app.emulateMobile()` was enabled
 		 */
@@ -795,10 +799,10 @@ declare module "obsidian" {
 		 * Editor > Show line numbers
 		 */
 		showLineNumber?: false | boolean;
-        /**
-         * Appearance > Show ribbon 
-         */
-        showRibbon?: true | boolean;
+		/**
+		 * Appearance > Show ribbon
+		 */
+		showRibbon?: true | boolean;
 		/**
 		 * Files & Links > Detect all file extensions
 		 */
@@ -868,14 +872,14 @@ declare module "obsidian" {
 		vimMode?: false | boolean;
 	}
 
-    /**
-     * @remark `BaseEditor` is never used in the Obsidian codebase, but is exposed in the Obsidian module as `Editor`.
-     *       However, most editor components actually make use of the extended `Editor`, so this interface is purposely
-     *       named to `BaseEditor` to not require any casting for most purposes (or overriding the `editor` property type
-     *       for all components).
-     * @todo Potential risk of confusion when `Editor` is constructed from the Obsidian module, as it only has the 
-     *       methods from `BaseEditor`, *not* `Editor`
-     */
+	/**
+	 * @remark `BaseEditor` is never used in the Obsidian codebase, but is exposed in the Obsidian module as `Editor`.
+	 *       However, most editor components actually make use of the extended `Editor`, so this interface is purposely
+	 *       named to `BaseEditor` to not require any casting for most purposes (or overriding the `editor` property type
+	 *       for all components).
+	 * @todo Potential risk of confusion when `Editor` is constructed from the Obsidian module, as it only has the
+	 *       methods from `BaseEditor`, *not* `Editor`
+	 */
 	interface BaseEditor {
 		/**
 		 * CodeMirror editor instance
@@ -971,10 +975,10 @@ declare module "obsidian" {
 		/** @internal */
 		cache: unknown;
 	}
-    
-    interface CachedMetadata {
-        footnotes?: FootnoteCache[];
-    }
+
+	interface CachedMetadata {
+		footnotes?: FootnoteCache[];
+	}
 
 	interface CanvasConnection {}
 
@@ -1886,10 +1890,10 @@ declare module "obsidian" {
 
 	/** @todo Documentation incomplete */
 	interface FileExplorerPlugin extends InternalPlugin {
-        /** @internal */
-        attachDropHandler(x: unknown, y: unknown, z: unknown): unknown;
-        /** @internal Get a sorted list of the tree items for a specific folder) */
-        getSortedFolderItems(folder: TFolder): FileTreeItem[];
+		/** @internal */
+		attachDropHandler(x: unknown, y: unknown, z: unknown): unknown;
+		/** @internal Get a sorted list of the tree items for a specific folder) */
+		getSortedFolderItems(folder: TFolder): FileTreeItem[];
 		/**
 		 * Reveals a file or folder in the file explorer view, opens the view if it is not already
 		 * open/visible
@@ -2117,10 +2121,8 @@ declare module "obsidian" {
 		 * Get suggestions for file heading query
 		 */
 		getHeadingSuggestions(runner: Runnable, file: TFile, text: string): Promise<SearchResult[]>;
-        /**
-         * @internal Generate instructions for specific actions in suggestion manager (e.g. accept, select, ...)
-         */
-        getInstructions(): [{command: "string", purpose: "string"}];
+		/** @internal Generate instructions for specific actions in suggestion manager (e.g. accept, select, ...) */
+		getInstructions(): [{ command: "string"; purpose: "string" }];
 		/**
 		 * Get suggestions for current input text
 		 *
@@ -2165,12 +2167,12 @@ declare module "obsidian" {
 	interface FoldManager {
 	}
 
-    /**
-     * Cache item containing a notes footnotes metadata
-     */
-    interface FootnoteCache extends CacheItem {
-        identifier: string;
-    }
+	/**
+	 * Cache item containing a notes footnotes metadata
+	 */
+	interface FootnoteCache extends CacheItem {
+		identifier: string;
+	}
 
 	/** @todo Documentation incomplete */
 	interface GlobalSearchLeaf extends WorkspaceLeaf {}
@@ -2225,10 +2227,10 @@ declare module "obsidian" {
 		getHotkeys(command: string): KeymapInfo[];
 		/** @internal Load hotkeys from storage */
 		load(): void;
-        /** @internal */
-        onConfigFileChanged(): void;
-        /** @internal */
-        onRaw(e: unknown): void;
+		/** @internal */
+		onConfigFileChanged(): void;
+		/** @internal */
+		onRaw(e: unknown): void;
 		/**
 		 * Trigger a command by keyboard event
 		 *
@@ -2242,8 +2244,8 @@ declare module "obsidian" {
 		 * @param command
 		 */
 		printHotkeyForCommand(command: string): string;
-        /** @internal */
-        registerListeners(): void;
+		/** @internal */
+		registerListeners(): void;
 		/**
 		 * Remove a hotkey from the default hotkeys
 		 *
@@ -2286,11 +2288,11 @@ declare module "obsidian" {
 		display: string;
 	}
 
-    /** @todo Documentation incomplete */
-    interface HoverPopover {
-        /** @internal */
-        watchResize(): void;
-    }
+	/** @todo Documentation incomplete */
+	interface HoverPopover {
+		/** @internal */
+		watchResize(): void;
+	}
 
 	class IFramedMarkdownEditor extends MarkdownScrollableEditView {
 		constructor(context: WidgetEditorView);
@@ -2365,9 +2367,10 @@ declare module "obsidian" {
 
 	/** @todo Documentation incomplete */
 	interface InternalPlugin extends Plugin {
+		instance: InternalPluginInstance<this>;
+
 		disable(): void;
 		enable(): void;
-		instance: InternalPluginInstance<this>;
 	}
 
 	interface InternalPluginInstance<TPlugin> {
@@ -3032,7 +3035,7 @@ declare module "obsidian" {
 		/**
 		 * Add property to inline metadata editor or properties plugin
 		 *
-         * @deprecated Removed in 1.6.0
+		 * @deprecated Removed in 1.6.0
 		 * @remark Parameter is not used
 		 */
 		addProperty(unused: undefined): void;
@@ -3066,8 +3069,8 @@ declare module "obsidian" {
 		 * Get the file attached to the view
 		 */
 		getFile(): TFile | null;
-        /** @internal Get the current mode of the editor */
-        getHoverSource(): string;
+		/** @internal Get the current mode of the editor */
+		getHoverSource(): string;
 		/**
 		 * Get the current mode of the editor
 		 */
@@ -3832,10 +3835,10 @@ declare module "obsidian" {
 		getTypes(): string[];
 		/** @internal Load property types from config */
 		loadData(): Promise<void>;
-        /** @internal */
-        onRaw(e: unknown): void;
-        /** @internal */
-        registerListeners(): void;
+		/** @internal */
+		onRaw(e: unknown): void;
+		/** @internal */
+		registerListeners(): void;
 		/** @internal Save property types to config */
 		save(): Promise<void>;
 		/** @internal Get all properties from metadata cache */
@@ -4589,12 +4592,12 @@ declare module "obsidian" {
 		 */
 		useSelectedItem(event: Event): boolean;
 	}
-    
-    /** @todo Documentation incomplete */
-    interface SuggestModal<T> {
-        /** @internal */
-        clearButtonEl: HTMLButtonElement;
-    }
+
+	/** @todo Documentation incomplete */
+	interface SuggestModal<T> {
+		/** @internal */
+		clearButtonEl: HTMLButtonElement;
+	}
 
 	/** @todo Documentation incomplete */
 	interface TableCell {
