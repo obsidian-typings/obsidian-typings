@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.5
+- **DEPRECATED:** `app.isMobile` will be removed in a future version, prefer usage of `Platform.isMobile`
+- **DEPRECATED:** `app.account` has been removed
+- Fix `getFileInfo`, returns `undefined` if file does not exist
+
 ## 1.1.4
 - **NOTE:** the global `app` variable has been removed from the official Obsidian API as of 1.6.0, it will _not_ be re-added by `obsidian-typings`.
 - **DEPRECATED:** `loadProgress` has been made inaccessible in version 1.6.0
