@@ -3454,7 +3454,7 @@ declare module "obsidian" {
 		/**
 		 * Get an entry from the file cache
 		 */
-		getFileInfo(path: string): FileCacheEntry;
+		getFileInfo(path: string): FileCacheEntry | undefined;
 		/**
 		 * Get property values for frontmatter property key
 		 */
