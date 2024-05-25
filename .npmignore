@@ -5,5 +5,5 @@ CONTRIBUTING.md
 dprint.json
 dummy.ts
 images/
-sort-interfaces.ts
+scripts/
 tsconfig.json
