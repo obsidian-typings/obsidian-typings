@@ -2394,9 +2394,10 @@ declare module "obsidian" {
 		 * @remark Prefer usage of getPluginById to access a plugin
 		 */
 		plugins: {
+			"canvas": InternalPlugin<CanvasPluginInstance>;
 			"file-explorer": InternalPlugin<FileExplorerPluginInstance>;
 			"global-search": InternalPlugin<GlobalSearchPluginInstance>;
-			[key: string]: InternalPlugin;
+			[key: string]: InternalPlugin | undefined;
 		};
 
 		/** @internal - Load plugin configs and enable plugins */
@@ -2407,6 +2408,7 @@ declare module "obsidian" {
 		 * @param id - ID of the plugin to get
 		 */
 		getEnabledPluginById(id: InternalPluginName): InternalPluginInstance | null;
+		getEnabledPluginById(id: "canvas"): CanvasPluginInstance | null;
 		getEnabledPluginById(id: "file-explorer"): FileExplorerPluginInstance | null;
 		getEnabledPluginById(id: "global-search"): GlobalSearchPluginInstance | null;
 		/**
@@ -2418,7 +2420,7 @@ declare module "obsidian" {
 		 *
 		 * @param id - ID of the plugin to get
 		 */
-		getPluginById(id: InternalPluginName): InternalPlugin;
+		getPluginById(id: InternalPluginName): InternalPlugin | null;
 		/** @internal */
 		loadPlugin(arg: { id: string; name: string }): string;
 		/** @internal */
