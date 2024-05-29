@@ -2064,6 +2064,11 @@ declare module "obsidian" {
 		 * Manages fetching of suggestions from metadatacache
 		 */
 		suggestManager: FileSuggestManager;
+
+        onTrigger(cursor: EditorPosition, editor: Editor, file: TFile | null): EditorSuggestTriggerInfo | null;
+        getSuggestions(context: EditorSuggestContext): T[] | Promise<T[]>;
+        renderSuggestion(value: T, el: HTMLElement): void;
+        selectSuggestion(value: T, evt: MouseEvent | KeyboardEvent): void;
 	}
 
 	interface FileSuggestManager {
@@ -3808,7 +3813,7 @@ declare module "obsidian" {
 		 */
 		properties: Record<string, PropertyInfo>;
 		/** @internal Registered type widgets */
-		registeredTypeWidgets: Record<PropertyWidgetType, PropertyWidget>;
+		registeredTypeWidgets: Record<PropertyWidgetType, PropertyWidget<unknown>>;
 		/**
 		 * Associated widget types for each property
 		 */
@@ -3828,8 +3833,8 @@ declare module "obsidian" {
 		getPropertyInfo(property: string): PropertyInfo;
 		/** @internal Get expected widget type for property and the one inferred from the property value */
 		getTypeInfo(arg: { key: string; type: string; value: unknown }): {
-			inferred: PropertyWidget;
-			expected: PropertyWidget;
+			inferred: PropertyWidget<unknown>;
+			expected: PropertyWidget<unknown>;
 		};
 		/**
 		 * Get all properties with an assigned widget type
@@ -4617,7 +4622,19 @@ declare module "obsidian" {
 	}
 
 	/** @todo Documentation incomplete */
-	class TableCellEditor extends MarkdownBaseView implements TableCell {}
+	class TableCellEditor extends MarkdownBaseView implements TableCell {
+        col: number;
+        contentEl: HTMLElement;
+        dirty: boolean;
+        el: HTMLElement;
+        end: number;
+        padEnd: number;
+        padStart: number;
+        row: number;
+        start: number;
+        table: TableCellEditor;
+        text: string;
+}
 
 	/** @todo Documentation incomplete */
 	interface TableEditor {}
