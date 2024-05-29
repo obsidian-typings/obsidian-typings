@@ -140,7 +140,7 @@ declare module "obsidian" {
 		| "vimMode";
 
 	/** @todo Documentation incomplete */
-	type EmbedableConstructor = (context: EmbedContext, file: TFile, path?: string) => Component;
+	type EmbeddableConstructor = (context: EmbedContext, file: TFile, path?: string) => Component;
 
 	/** @todo Documentation incomplete */
 	type InternalPluginName =
@@ -1624,7 +1624,7 @@ declare module "obsidian" {
 		 */
 		reposition(): void;
 		/**
-		 * Set the currently active editor suggestion popup to specified suggestor
+		 * Set the currently active editor suggestion popup to specified suggester
 		 */
 		setCurrentSuggest(suggest: EditorSuggest<any>): void;
 		/**
@@ -1795,12 +1795,12 @@ declare module "obsidian" {
 		/**
 		 * Mapping of file extensions to constructors for embeddable widgets
 		 */
-		embedByExtension: Record<string, EmbedableConstructor>;
+		embedByExtension: Record<string, EmbeddableConstructor>;
 
 		/**
 		 * Get the embed constructor for a specific file type
 		 */
-		getEmbedCreator(file: TFile): EmbedableConstructor | null;
+		getEmbedCreator(file: TFile): EmbeddableConstructor | null;
 		/**
 		 * Check whether a file extension has a registered embed constructor
 		 */
@@ -1808,11 +1808,11 @@ declare module "obsidian" {
 		/**
 		 * Register an embed constructor for a specific file extension
 		 */
-		registerExtension(extension: string, embedCreator: EmbedableConstructor): void;
+		registerExtension(extension: string, embedCreator: EmbeddableConstructor): void;
 		/**
 		 * Register an embed constructor for a list of file extensions
 		 */
-		registerExtensions(extensions: string[], embedCreator: EmbedableConstructor): void;
+		registerExtensions(extensions: string[], embedCreator: EmbeddableConstructor): void;
 		/**
 		 * Unregister an embed constructor for a specific file extension
 		 */
@@ -2579,7 +2579,7 @@ declare module "obsidian" {
 		 */
 		editorEl: HTMLElement;
 		/**
-		 * Editor suggestor for autocompleting files, links, aliases, etc.
+		 * Editor suggester for autocompleting files, links, aliases, etc.
 		 */
 		editorSuggest: EditorSuggests;
 		/**
@@ -2623,7 +2623,7 @@ declare module "obsidian" {
 		/**
 		 * Constructs local (always active) extensions for the editor
 		 *
-		 * @remark Creates extensions for handling dom events, editor info statefields, update listener, suggestions
+		 * @remark Creates extensions for handling dom events, editor info state fields, update listener, suggestions
 		 */
 		buildLocalExtensions(): Extension[];
 		/**
@@ -2631,7 +2631,7 @@ declare module "obsidian" {
 		 */
 		clear(): void;
 		/**
-		 * Clean up live preview, remove all extensions, destory editor
+		 * Clean up live preview, remove all extensions, destroy editor
 		 */
 		destroy(): void;
 		/**
@@ -2719,7 +2719,7 @@ declare module "obsidian" {
 		 */
 		toggleFoldFrontmatter(): void;
 		/**
-		 * Toggle sourcemode for editor and dispatch effect
+		 * Toggle source mode for editor and dispatch effect
 		 */
 		toggleSource(): void;
 		/**
@@ -3171,7 +3171,7 @@ declare module "obsidian" {
 		setEphemeralState(
 			state: any & {
 				focus: boolean;
-				focusOnMobie: boolean;
+				focusOnMobile: boolean;
 				cursor: EditorRangeOrCaret;
 			},
 		): void;
@@ -3295,7 +3295,7 @@ declare module "obsidian" {
 		onEnter(e: KeyboardEvent): boolean;
 		/**
 		 * @param e
-		 * @internal Pre-emptively closes the menu if click is registered on menu item
+		 * @internal Preemptively closes the menu if click is registered on menu item
 		 */
 		onMenuClick(e: MouseEvent): void;
 		/**
@@ -4465,7 +4465,7 @@ declare module "obsidian" {
 		 */
 		navEl: HTMLElement;
 		/**
-		 * Reference to the plugin that initialised the tab
+		 * Reference to the plugin that initialized the tab
 		 *
 		 * @if Tab is a plugin tab
 		 */
@@ -4643,7 +4643,7 @@ declare module "obsidian" {
 		 */
 		lastSavedData: null | string;
 		/**
-		 * Whether on saving, the file should be saved again (for dirtyness checks)
+		 * Whether on saving, the file should be saved again (for dirtiness checks)
 		 */
 		saveAgain: boolean;
 		/**
@@ -4871,7 +4871,7 @@ declare module "obsidian" {
 		/**
 		 * Check whether a file exists in the vault
 		 */
-		exists(file: TAbstractFile, senstive?: boolean): Promise<boolean>;
+		exists(file: TAbstractFile, isCaseSensitive?: boolean): Promise<boolean>;
 		/** @internal */
 		generateFiles(e: AsyncGenerator<TFile>, t: boolean): Promise<void>;
 		/**
@@ -5157,7 +5157,7 @@ declare module "obsidian" {
 		 */
 		onload(): void;
 		/**
-		 * Save fold made in the editor to foldmanager
+		 * Save fold made in the editor to foldManager
 		 */
 		onMarkdownFold(): void;
 		/** @internal On change of editor title element */
@@ -5270,10 +5270,10 @@ declare module "obsidian" {
 		/**
 		 * @param type View type of leaf
 		 * @param ribbon Side ribbon to reveal leaf in
-		 * @param viewstate Open state of leaf
+		 * @param viewState Open state of leaf
 		 * @internal Reveal leaf in side ribbon with specified view type and state
 		 */
-		ensureSideLeaf(type: string, ribbon: "left" | "right", viewstate: OpenViewState): void;
+		ensureSideLeaf(type: string, ribbon: "left" | "right", viewState: OpenViewState): void;
 		/**
 		 * Get active file view if exists
 		 */
@@ -5442,7 +5442,7 @@ declare module "obsidian" {
 		/** @internal Use deserialized layout data to reconstruct the workspace */
 		setLayout(data: SerializedWorkspace): Promise<void>;
 		/** @internal Split leaves in specified direction */
-		splitLeaf(leaf: WorkspaceLeaf, newleaf: WorkspaceLeaf, direction?: SplitDirection, before?: boolean): void;
+		splitLeaf(leaf: WorkspaceLeaf, newLeaf: WorkspaceLeaf, direction?: SplitDirection, before?: boolean): void;
 		/**
 		 * Split provided leaf, or active leaf if none provided
 		 */
