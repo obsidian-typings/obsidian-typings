@@ -5446,7 +5446,7 @@ declare module "obsidian" {
 		/**
 		 * Split provided leaf, or active leaf if none provided
 		 */
-		splitLeafOrActive(leaf?: WorkspaceLeaf, direction?: SplitDirection): void;
+		splitLeafOrActive(leaf?: WorkspaceLeaf, direction?: SplitDirection): WorkspaceLeaf;
 		/** @internal Unregister a CodeMirror editor extension */
 		unregisterEditorExtension(extension: Extension): void;
 		/** @internal Unregister hover link source */
