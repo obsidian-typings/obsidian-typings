@@ -986,7 +986,7 @@ declare module "obsidian" {
 
 	interface CanvasNode {}
 
-	interface CanvasPlugin extends InternalPlugin {}
+	interface CanvasPluginInstance extends InternalPluginInstance {}
 
 	interface CanvasView {}
 
@@ -1889,7 +1889,7 @@ declare module "obsidian" {
 	}
 
 	/** @todo Documentation incomplete */
-	interface FileExplorerPlugin extends InternalPlugin {
+	interface FileExplorerPluginInstance extends InternalPluginInstance {
 		/** @internal */
 		attachDropHandler(x: unknown, y: unknown, z: unknown): unknown;
 		/** @internal Get a sorted list of the tree items for a specific folder) */
@@ -2178,7 +2178,7 @@ declare module "obsidian" {
 	interface GlobalSearchLeaf extends WorkspaceLeaf {}
 
 	/** @todo Documentation incomplete */
-	interface GlobalSearchPlugin extends InternalPlugin {}
+	interface GlobalSearchPluginInstance extends InternalPluginInstance {}
 
 	interface HotkeyManager {
 		/**
@@ -2366,15 +2366,15 @@ declare module "obsidian" {
 	}
 
 	/** @todo Documentation incomplete */
-	interface InternalPlugin extends Plugin {
-		instance: InternalPluginInstance<this>;
+	interface InternalPlugin<TInstance extends InternalPluginInstance = InternalPluginInstance> extends Plugin {
+		instance: TInstance;
 
 		disable(): void;
 		enable(): void;
 	}
 
-	interface InternalPluginInstance<TPlugin> {
-		plugin: TPlugin;
+	interface InternalPluginInstance {
+		plugin: InternalPlugin<this>;
 	}
 
 	interface InternalPlugins extends Events {
@@ -2394,9 +2394,10 @@ declare module "obsidian" {
 		 * @remark Prefer usage of getPluginById to access a plugin
 		 */
 		plugins: {
-			"file-explorer": FileExplorerPlugin;
-			"global-search": GlobalSearchPlugin;
-			[key: string]: InternalPlugin;
+			"canvas": InternalPlugin<CanvasPluginInstance>;
+			"file-explorer": InternalPlugin<FileExplorerPluginInstance>;
+			"global-search": InternalPlugin<GlobalSearchPluginInstance>;
+			[key: string]: InternalPlugin | undefined;
 		};
 
 		/** @internal - Load plugin configs and enable plugins */
@@ -2406,9 +2407,10 @@ declare module "obsidian" {
 		 *
 		 * @param id - ID of the plugin to get
 		 */
-		getEnabledPluginById(id: InternalPluginName): InternalPluginInstance<InternalPlugin> | null;
-		getEnabledPluginById(id: "file-explorer"): InternalPluginInstance<FileExplorerPlugin> | null;
-		getEnabledPluginById(id: "global-search"): InternalPluginInstance<GlobalSearchPlugin> | null;
+		getEnabledPluginById(id: InternalPluginName): InternalPluginInstance | null;
+		getEnabledPluginById(id: "canvas"): CanvasPluginInstance | null;
+		getEnabledPluginById(id: "file-explorer"): FileExplorerPluginInstance | null;
+		getEnabledPluginById(id: "global-search"): GlobalSearchPluginInstance | null;
 		/**
 		 * Get all enabled internal plugins
 		 */
@@ -2418,7 +2420,7 @@ declare module "obsidian" {
 		 *
 		 * @param id - ID of the plugin to get
 		 */
-		getPluginById(id: InternalPluginName): InternalPlugin;
+		getPluginById(id: InternalPluginName): InternalPlugin | null;
 		/** @internal */
 		loadPlugin(arg: { id: string; name: string }): string;
 		/** @internal */
