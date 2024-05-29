@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.6
+- Refactored `InternalPlugin` instance structure
+- Fixed return type of `splitLeafOrActive`, returns `WorkspaceLeaf`
+
 ## 1.1.5
 - **DEPRECATED:** `app.isMobile` will be removed in a future version, prefer usage of `Platform.isMobile`
 - **DEPRECATED:** `app.account` has been removed
