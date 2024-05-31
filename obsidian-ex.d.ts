@@ -1666,8 +1666,7 @@ declare module "obsidian" {
 		state?: unknown;
 	}
 
-	class EmbeddedEditorView extends Component {
-		constructor(app: App, containerEl: HTMLElement, file: TFile | null, state: EditorState);
+	interface EmbeddedEditorView extends Component {
 		/**
 		 * Reference to the app
 		 */
@@ -2059,16 +2058,11 @@ declare module "obsidian" {
 	}
 
 	/** @todo Documentation incomplete */
-	class FileSuggest<T> extends EditorSuggest<T> {
+	interface FileSuggest<T> extends EditorSuggest<T> {
 		/**
 		 * Manages fetching of suggestions from metadatacache
 		 */
 		suggestManager: FileSuggestManager;
-
-        onTrigger(cursor: EditorPosition, editor: Editor, file: TFile | null): EditorSuggestTriggerInfo | null;
-        getSuggestions(context: EditorSuggestContext): T[] | Promise<T[]>;
-        renderSuggestion(value: T, el: HTMLElement): void;
-        selectSuggestion(value: T, evt: MouseEvent | KeyboardEvent): void;
 	}
 
 	interface FileSuggestManager {
@@ -2299,8 +2293,7 @@ declare module "obsidian" {
 		watchResize(): void;
 	}
 
-	class IFramedMarkdownEditor extends MarkdownScrollableEditView {
-		constructor(context: WidgetEditorView);
+	interface IFramedMarkdownEditor extends MarkdownScrollableEditView {
 		/**
 		 * Function that cleans up the iframe and listeners
 		 */
@@ -2544,7 +2537,7 @@ declare module "obsidian" {
 	interface LoadProgress {
 	}
 
-	class MarkdownBaseView extends Component {
+	interface MarkdownBaseView extends Component {
 		/**
 		 * Reference to the app
 		 */
@@ -2894,7 +2887,7 @@ declare module "obsidian" {
 		resolveLinks(e: unknown): unknown;
 	}
 
-	class MarkdownScrollableEditView extends MarkdownBaseView {
+	interface MarkdownScrollableEditView extends MarkdownBaseView {
 		/**
 		 * List of CSS classes applied to the editor
 		 */
@@ -4622,19 +4615,7 @@ declare module "obsidian" {
 	}
 
 	/** @todo Documentation incomplete */
-	class TableCellEditor extends MarkdownBaseView implements TableCell {
-        col: number;
-        contentEl: HTMLElement;
-        dirty: boolean;
-        el: HTMLElement;
-        end: number;
-        padEnd: number;
-        padStart: number;
-        row: number;
-        start: number;
-        table: TableCellEditor;
-        text: string;
-}
+	interface TableCellEditor extends MarkdownBaseView, TableCell {}
 
 	/** @todo Documentation incomplete */
 	interface TableEditor {}
@@ -5090,8 +5071,7 @@ declare module "obsidian" {
 		map: WeakMap<K, V>;
 	}
 
-	class WidgetEditorView extends EmbeddedEditorView {
-		constructor(context: EmbedContext, file: TFile, path?: string);
+	interface WidgetEditorView extends EmbeddedEditorView {
 		/**
 		 * Data after reference
 		 */
