@@ -2368,7 +2368,7 @@ declare module "obsidian" {
 		instance: TInstance;
 
 		disable(): void;
-		enable(): void;
+		enable(): Promise<void>;
 	}
 
 	interface InternalPluginInstance {
