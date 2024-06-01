@@ -1,31 +1,8 @@
-import { EditorSelection, EditorState, Extension } from "@codemirror/state";
+import { EditorState, Extension } from "@codemirror/state";
 import { EditorView, ViewUpdate } from "@codemirror/view";
 import { IpcRenderer } from "electron";
 import * as fs from "fs";
 import * as fsPromises from "fs/promises";
-import {
-    CachedMetadata,
-    CacheItem,
-    Command,
-    Component,
-    EditorPosition,
-    EditorRange,
-    EditorRangeOrCaret,
-    EditorSuggest,
-    Events,
-    HoverPopover,
-    KeymapInfo,
-    Loc,
-    MarkdownFileInfo,
-    MarkdownSubView,
-    MarkdownViewModeType,
-    Plugin,
-    Reference,
-    SearchResult,
-    SplitDirection,
-    TFolder,
-    ViewState,
-} from "obsidian";
 import * as path from "path";
 export * from "obsidian";
 
