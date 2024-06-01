@@ -4,6 +4,7 @@ import { IpcRenderer } from "electron";
 import * as fs from "fs";
 import * as fsPromises from "fs/promises";
 import * as path from "path";
+import type { InternalPluginName } from "./index.ts";
 export * from "obsidian";
 
 declare global {
@@ -119,37 +120,37 @@ declare module "obsidian" {
     /** @todo Documentation incomplete */
     type EmbeddableConstructor = (context: EmbedContext, file: TFile, path?: string) => Component;
 
-    /** @todo Documentation incomplete */
-    type InternalPluginName =
-        | "audio-recorder"
-        | "backlink"
-        | "bookmarks"
-        | "canvas"
-        | "command-palette"
-        | "daily-notes"
-        | "editor-status"
-        | "file-explorer"
-        | "file-recovery"
-        | "global-search"
-        | "graph"
-        | "markdown-importer"
-        | "note-composer"
-        | "outgoing-link"
-        | "outline"
-        | "page-preview"
-        | "properties"
-        | "publish"
-        | "random-note"
-        | "slash-command"
-        | "slides"
-        | "starred"
-        | "switcher"
-        | "sync"
-        | "tag-pane"
-        | "templates"
-        | "word-count"
-        | "workspaces"
-        | "zk-prefixer";
+    type InternalPluginNameInstancesMapping = {
+        [InternalPluginName.AudioRecorder]: AudioRecorderPluginInstance;
+        [InternalPluginName.Backlink]: BacklinkPluginInstance;
+        [InternalPluginName.Bookmarks]: BookmarksPluginInstance;
+        [InternalPluginName.Canvas]: CanvasPluginInstance;
+        [InternalPluginName.CommandPalette]: CommandPalettePluginInstance;
+        [InternalPluginName.DailyNotes]: DailyNotesPluginInstance;
+        [InternalPluginName.EditorStatus]: EditorStatusPluginInstance;
+        [InternalPluginName.FileExplorer]: FileExplorerPluginInstance;
+        [InternalPluginName.FileRecovery]: FileRecoveryPluginInstance;
+        [InternalPluginName.GlobalSearch]: GlobalSearchPluginInstance;
+        [InternalPluginName.Graph]: GraphPluginInstance;
+        [InternalPluginName.MarkdownImporter]: MarkdownImporterPluginInstance;
+        [InternalPluginName.NoteComposer]: NoteComposerPluginInstance;
+        [InternalPluginName.OutgoingLink]: OutgoingLinkPluginInstance;
+        [InternalPluginName.Outline]: OutlinePluginInstance;
+        [InternalPluginName.PagePreview]: PagePreviewPluginInstance;
+        [InternalPluginName.Properties]: PropertiesPluginInstance;
+        [InternalPluginName.Publish]: PublishPluginInstance;
+        [InternalPluginName.RandomNote]: RandomNotePluginInstance;
+        [InternalPluginName.SlashCommand]: SlashCommandPluginInstance;
+        [InternalPluginName.Slides]: SlidesPluginInstance;
+        [InternalPluginName.Starred]: StarredPluginInstance;
+        [InternalPluginName.Switcher]: SwitcherPluginInstance;
+        [InternalPluginName.Sync]: SyncPluginInstance;
+        [InternalPluginName.TagPane]: TagPanePluginInstance;
+        [InternalPluginName.Templates]: TemplatesPluginInstance;
+        [InternalPluginName.WordCount]: WordCountPluginInstance;
+        [InternalPluginName.Workspaces]: WorkspacesPluginInstance;
+        [InternalPluginName.ZkPrefixer]: ZkPrefixerPluginInstance;
+    };
 
     /**
      * @todo Documentation incomplete
@@ -849,6 +850,10 @@ declare module "obsidian" {
         vimMode?: false | boolean;
     }
 
+    interface AudioRecorderPluginInstance extends InternalPluginInstance { }
+
+    interface BacklinkPluginInstance extends InternalPluginInstance { }
+
     /**
      * @remark `BaseEditor` is never used in the Obsidian codebase, but is exposed in the Obsidian module as `Editor`.
      *       However, most editor components actually make use of the extended `Editor`, so this interface is purposely
@@ -953,6 +958,8 @@ declare module "obsidian" {
         cache: unknown;
     }
 
+    interface BookmarksPluginInstance extends InternalPluginInstance { }
+
     interface CachedMetadata {
         footnotes?: FootnoteCache[];
     }
@@ -1018,6 +1025,8 @@ declare module "obsidian" {
          */
         saveAttachment(name: string, extension: string, data: ArrayBuffer, replace: boolean): Promise<void>;
     }
+
+    interface CommandPalettePluginInstance extends InternalPluginInstance { }
 
     interface Commands {
         /**
@@ -1248,6 +1257,8 @@ declare module "obsidian" {
          */
         setTranslucency(translucency: boolean): void;
     }
+
+    interface DailyNotesPluginInstance extends InternalPluginInstance { }
 
     /** @todo Documentation incomplete */
     interface DataAdapter {
@@ -1561,6 +1572,8 @@ declare module "obsidian" {
          */
         show(replace: boolean): void;
     }
+
+    interface EditorStatusPluginInstance extends InternalPluginInstance { }
 
     /** @todo Documentation incomplete */
     interface EditorSuggest<T> {
@@ -2034,6 +2047,8 @@ declare module "obsidian" {
         updateInternalLinks(data: unknown): unknown;
     }
 
+    interface FileRecoveryPluginInstance extends InternalPluginInstance { }
+
     /** @todo Documentation incomplete */
     interface FileSuggest<T> extends EditorSuggest<T> {
         /**
@@ -2155,6 +2170,8 @@ declare module "obsidian" {
 
     /** @todo Documentation incomplete */
     interface GlobalSearchPluginInstance extends InternalPluginInstance { }
+
+    interface GraphPluginInstance extends InternalPluginInstance { }
 
     interface HotkeyManager {
         /**
@@ -2369,10 +2386,7 @@ declare module "obsidian" {
          * @remark Prefer usage of getPluginById to access a plugin
          */
         plugins: {
-            "canvas": InternalPlugin<CanvasPluginInstance>;
-            "file-explorer": InternalPlugin<FileExplorerPluginInstance>;
-            "global-search": InternalPlugin<GlobalSearchPluginInstance>;
-            [key: string]: InternalPlugin | undefined;
+            [InternalPluginNameValue in keyof InternalPluginNameInstancesMapping]: InternalPlugin<InternalPluginNameInstancesMapping[InternalPluginNameValue]>;
         };
 
         /** @internal - Load plugin configs and enable plugins */
@@ -2382,10 +2396,10 @@ declare module "obsidian" {
          *
          * @param id - ID of the plugin to get
          */
-        getEnabledPluginById(id: InternalPluginName): InternalPluginInstance | null;
-        getEnabledPluginById(id: "canvas"): CanvasPluginInstance | null;
-        getEnabledPluginById(id: "file-explorer"): FileExplorerPluginInstance | null;
-        getEnabledPluginById(id: "global-search"): GlobalSearchPluginInstance | null;
+        getEnabledPluginById: {
+            <InternalPluginNameValue extends keyof InternalPluginNameInstancesMapping>(id: InternalPluginNameValue): InternalPluginNameInstancesMapping[InternalPluginNameValue] | null;
+        };
+        
         /**
          * Get all enabled internal plugins
          */
@@ -2395,7 +2409,9 @@ declare module "obsidian" {
          *
          * @param id - ID of the plugin to get
          */
-        getPluginById(id: InternalPluginName): InternalPlugin | null;
+        getPluginById: {
+            <InternalPluginNameValue extends keyof InternalPluginNameInstancesMapping>(id: InternalPluginNameValue): InternalPlugin<InternalPluginNameInstancesMapping[InternalPluginNameValue]>;
+        };
         /** @internal */
         loadPlugin(arg: { id: string; name: string }): string;
         /** @internal */
@@ -2815,6 +2831,8 @@ declare module "obsidian" {
          */
         updateOptions(): void;
     }
+
+    interface MarkdownImporterPluginInstance extends InternalPluginInstance { }
 
     /** @todo Documentation incomplete */
     interface MarkdownPreviewView {
@@ -3878,6 +3896,8 @@ declare module "obsidian" {
         setTitle(title: string): this;
     }
 
+    interface NoteComposerPluginInstance extends InternalPluginInstance { }
+
     interface ObsidianDOM {
         /**
          * Root element of the application
@@ -3914,6 +3934,12 @@ declare module "obsidian" {
         x: number;
         y: number;
     }
+
+    interface OutgoingLinkPluginInstance extends InternalPluginInstance { }
+
+    interface OutlinePluginInstance extends InternalPluginInstance { }
+
+    interface PagePreviewPluginInstance extends InternalPluginInstance { }
 
     interface PluginManifest {
         /**
@@ -4096,6 +4122,8 @@ declare module "obsidian" {
         };
     }
 
+    interface PropertiesPluginInstance extends InternalPluginInstance { }
+
     interface PropertyEntryData<T> {
         /**
          * Property key
@@ -4184,6 +4212,10 @@ declare module "obsidian" {
          */
         validate(value: T): boolean;
     }
+
+    interface PublishPluginInstance extends InternalPluginInstance { }
+
+    interface RandomNotePluginInstance extends InternalPluginInstance { }
 
     /** @todo Documentation incomplete */
     interface ReadViewRenderer {
@@ -4451,6 +4483,12 @@ declare module "obsidian" {
         setting: Setting;
     }
 
+    interface SlashCommandPluginInstance extends InternalPluginInstance { }
+
+    interface SlidesPluginInstance extends InternalPluginInstance { }
+
+    interface StarredPluginInstance extends InternalPluginInstance { }
+
     interface StateHistory {
         /**
          * Ephemeral cursor state within Editor of leaf
@@ -4576,6 +4614,10 @@ declare module "obsidian" {
         clearButtonEl: HTMLButtonElement;
     }
 
+    interface SwitcherPluginInstance extends InternalPluginInstance { }
+
+    interface SyncPluginInstance extends InternalPluginInstance { }
+
     /** @todo Documentation incomplete */
     interface TableCell {
         col: number;
@@ -4603,6 +4645,10 @@ declare module "obsidian" {
          */
         deleted: boolean;
     }
+
+    interface TagPanePluginInstance extends InternalPluginInstance { }
+
+    interface TemplatesPluginInstance extends InternalPluginInstance { }
 
     interface TextFileView {
         /**
@@ -5165,6 +5211,8 @@ declare module "obsidian" {
         win: Window;
     }
 
+    interface WordCountPluginInstance extends InternalPluginInstance { }
+
     interface Workspace {
         /**
          * Currently active tab group
@@ -5279,7 +5327,7 @@ declare module "obsidian" {
          * Get the workspace split for the currently focused container
          */
         getFocusedContainer(): WorkspaceSplit;
-        getLeavesOfType(viewType: "file-explorer"): FileExplorerLeaf[];
+        getLeavesOfType(viewType: typeof InternalPluginName.FileExplorer): FileExplorerLeaf[];
         /**
          * Get n last opened files of type (defaults to 10)
          */
@@ -5475,4 +5523,8 @@ declare module "obsidian" {
     interface WorkspaceSplit {
         parent?: WorkspaceSplit;
     }
+
+    interface WorkspacesPluginInstance extends InternalPluginInstance { }
+
+    interface ZkPrefixerPluginInstance extends InternalPluginInstance { }
 }

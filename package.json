@@ -2,8 +2,6 @@
     "name": "obsidian-typings",
     "version": "1.1.6",
     "description": "Extended type definitions for the Obsidian API (https://obsidian.md)",
-    "main": "",
-    "types": "obsidian-ex.d.ts",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Fevol/obsidian-typings.git"
@@ -35,5 +33,6 @@
         "release-patch": "bun run scripts/bump-version.ts patch",
         "release-minor": "bun run scripts/bump-version.ts minor",
         "release-major": "bun run scripts/bump-version.ts major"
-    }
+    },
+    "exports": "./index.ts"
 }
