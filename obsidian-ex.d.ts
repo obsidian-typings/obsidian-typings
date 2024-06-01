@@ -4,7 +4,7 @@ import { IpcRenderer } from "electron";
 import * as fs from "fs";
 import * as fsPromises from "fs/promises";
 import * as path from "path";
-import type { InternalPluginName } from "./index.ts";
+import { InternalPluginName } from "./index";
 export * from "obsidian";
 
 declare global {
@@ -236,8 +236,7 @@ declare module "obsidian" {
             owner: TreeNode<T>;
         };
     };
-
-    // Interfaces
+    
     interface AbstractSearchComponent {
         /**
          * Reference to the app
@@ -850,9 +849,9 @@ declare module "obsidian" {
         vimMode?: false | boolean;
     }
 
-    interface AudioRecorderPluginInstance extends InternalPluginInstance { }
+    interface AudioRecorderPluginInstance extends InternalPluginInstance {}
 
-    interface BacklinkPluginInstance extends InternalPluginInstance { }
+    interface BacklinkPluginInstance extends InternalPluginInstance {}
 
     /**
      * @remark `BaseEditor` is never used in the Obsidian codebase, but is exposed in the Obsidian module as `Editor`.
@@ -958,21 +957,21 @@ declare module "obsidian" {
         cache: unknown;
     }
 
-    interface BookmarksPluginInstance extends InternalPluginInstance { }
+    interface BookmarksPluginInstance extends InternalPluginInstance {}
 
     interface CachedMetadata {
         footnotes?: FootnoteCache[];
     }
 
-    interface CanvasConnection { }
+    interface CanvasConnection {}
 
-    interface CanvasLeaf extends WorkspaceLeaf { }
+    interface CanvasLeaf extends WorkspaceLeaf {}
 
-    interface CanvasNode { }
+    interface CanvasNode {}
 
-    interface CanvasPluginInstance extends InternalPluginInstance { }
+    interface CanvasPluginInstance extends InternalPluginInstance {}
 
-    interface CanvasView { }
+    interface CanvasView {}
 
     interface ClipBoardManager {
         /**
@@ -1026,7 +1025,7 @@ declare module "obsidian" {
         saveAttachment(name: string, extension: string, data: ArrayBuffer, replace: boolean): Promise<void>;
     }
 
-    interface CommandPalettePluginInstance extends InternalPluginInstance { }
+    interface CommandPalettePluginInstance extends InternalPluginInstance {}
 
     interface Commands {
         /**
@@ -1258,7 +1257,7 @@ declare module "obsidian" {
         setTranslucency(translucency: boolean): void;
     }
 
-    interface DailyNotesPluginInstance extends InternalPluginInstance { }
+    interface DailyNotesPluginInstance extends InternalPluginInstance {}
 
     /** @todo Documentation incomplete */
     interface DataAdapter {
@@ -1573,7 +1572,7 @@ declare module "obsidian" {
         show(replace: boolean): void;
     }
 
-    interface EditorStatusPluginInstance extends InternalPluginInstance { }
+    interface EditorStatusPluginInstance extends InternalPluginInstance {}
 
     /** @todo Documentation incomplete */
     interface EditorSuggest<T> {
@@ -1712,7 +1711,6 @@ declare module "obsidian" {
          * Whether the view renders contents using an iFrame
          */
         useIframe: boolean;
-
         /**
          * Get the preview editor, if exists
          */
@@ -1875,14 +1873,15 @@ declare module "obsidian" {
     /** @todo Documentation incomplete */
     interface FileExplorerLeaf extends WorkspaceLeaf {
         view: FileExplorerView;
-    }
 
-    /** @todo Documentation incomplete */
-    interface FileExplorerPluginInstance extends InternalPluginInstance {
         /** @internal */
         attachDropHandler(x: unknown, y: unknown, z: unknown): unknown;
         /** @internal Get a sorted list of the tree items for a specific folder) */
         getSortedFolderItems(folder: TFolder): FileTreeItem[];
+    }
+
+    /** @todo Documentation incomplete */
+    interface FileExplorerPluginInstance extends InternalPluginInstance {
         /**
          * Reveals a file or folder in the file explorer view, opens the view if it is not already
          * open/visible
@@ -2047,7 +2046,7 @@ declare module "obsidian" {
         updateInternalLinks(data: unknown): unknown;
     }
 
-    interface FileRecoveryPluginInstance extends InternalPluginInstance { }
+    interface FileRecoveryPluginInstance extends InternalPluginInstance {}
 
     /** @todo Documentation incomplete */
     interface FileSuggest<T> extends EditorSuggest<T> {
@@ -2133,7 +2132,7 @@ declare module "obsidian" {
         ): SearchResult | null;
     }
 
-    interface FileSystemAdapter extends DataAdapter { }
+    interface FileSystemAdapter extends DataAdapter {}
 
     /** @todo Documentation incomplete */
     interface FileTreeItem {
@@ -2166,12 +2165,12 @@ declare module "obsidian" {
     }
 
     /** @todo Documentation incomplete */
-    interface GlobalSearchLeaf extends WorkspaceLeaf { }
+    interface GlobalSearchLeaf extends WorkspaceLeaf {}
 
     /** @todo Documentation incomplete */
-    interface GlobalSearchPluginInstance extends InternalPluginInstance { }
+    interface GlobalSearchPluginInstance extends InternalPluginInstance {}
 
-    interface GraphPluginInstance extends InternalPluginInstance { }
+    interface GraphPluginInstance extends InternalPluginInstance {}
 
     interface HotkeyManager {
         /**
@@ -2386,7 +2385,9 @@ declare module "obsidian" {
          * @remark Prefer usage of getPluginById to access a plugin
          */
         plugins: {
-            [InternalPluginNameValue in keyof InternalPluginNameInstancesMapping]: InternalPlugin<InternalPluginNameInstancesMapping[InternalPluginNameValue]>;
+            [InternalPluginNameValue in keyof InternalPluginNameInstancesMapping]: InternalPlugin<
+                InternalPluginNameInstancesMapping[InternalPluginNameValue]
+            >;
         };
 
         /** @internal - Load plugin configs and enable plugins */
@@ -2396,10 +2397,9 @@ declare module "obsidian" {
          *
          * @param id - ID of the plugin to get
          */
-        getEnabledPluginById: {
-            <InternalPluginNameValue extends keyof InternalPluginNameInstancesMapping>(id: InternalPluginNameValue): InternalPluginNameInstancesMapping[InternalPluginNameValue] | null;
-        };
-        
+        getEnabledPluginById<ID extends InternalPluginName>(
+            id: ID,
+        ): InternalPlugin<InternalPluginNameInstancesMapping[ID]> | null;
         /**
          * Get all enabled internal plugins
          */
@@ -2409,9 +2409,9 @@ declare module "obsidian" {
          *
          * @param id - ID of the plugin to get
          */
-        getPluginById: {
-            <InternalPluginNameValue extends keyof InternalPluginNameInstancesMapping>(id: InternalPluginNameValue): InternalPlugin<InternalPluginNameInstancesMapping[InternalPluginNameValue]>;
-        };
+        getPluginById<ID extends InternalPluginName>(
+            id: ID,
+        ): InternalPlugin<InternalPluginNameInstancesMapping[ID]> | null;
         /** @internal */
         loadPlugin(arg: { id: string; name: string }): string;
         /** @internal */
@@ -2593,7 +2593,6 @@ declare module "obsidian" {
          * Reference to editor attached to table cell, if any
          */
         tableCell: null | TableCellEditor;
-
         /**
          * Currently active CM instance (table cell CM or main CM)
          */
@@ -2832,7 +2831,7 @@ declare module "obsidian" {
         updateOptions(): void;
     }
 
-    interface MarkdownImporterPluginInstance extends InternalPluginInstance { }
+    interface MarkdownImporterPluginInstance extends InternalPluginInstance {}
 
     /** @todo Documentation incomplete */
     interface MarkdownPreviewView {
@@ -3844,7 +3843,7 @@ declare module "obsidian" {
         unsetType(property: string): Promise<void>;
     }
 
-    interface MetadataWidget { }
+    interface MetadataWidget {}
 
     /** @todo Documentation incomplete */
     interface MobileNavbar {
@@ -3896,7 +3895,7 @@ declare module "obsidian" {
         setTitle(title: string): this;
     }
 
-    interface NoteComposerPluginInstance extends InternalPluginInstance { }
+    interface NoteComposerPluginInstance extends InternalPluginInstance {}
 
     interface ObsidianDOM {
         /**
@@ -3935,11 +3934,11 @@ declare module "obsidian" {
         y: number;
     }
 
-    interface OutgoingLinkPluginInstance extends InternalPluginInstance { }
+    interface OutgoingLinkPluginInstance extends InternalPluginInstance {}
 
-    interface OutlinePluginInstance extends InternalPluginInstance { }
+    interface OutlinePluginInstance extends InternalPluginInstance {}
 
-    interface PagePreviewPluginInstance extends InternalPluginInstance { }
+    interface PagePreviewPluginInstance extends InternalPluginInstance {}
 
     interface PluginManifest {
         /**
@@ -4122,7 +4121,7 @@ declare module "obsidian" {
         };
     }
 
-    interface PropertiesPluginInstance extends InternalPluginInstance { }
+    interface PropertiesPluginInstance extends InternalPluginInstance {}
 
     interface PropertyEntryData<T> {
         /**
@@ -4213,9 +4212,9 @@ declare module "obsidian" {
         validate(value: T): boolean;
     }
 
-    interface PublishPluginInstance extends InternalPluginInstance { }
+    interface PublishPluginInstance extends InternalPluginInstance {}
 
-    interface RandomNotePluginInstance extends InternalPluginInstance { }
+    interface RandomNotePluginInstance extends InternalPluginInstance {}
 
     /** @todo Documentation incomplete */
     interface ReadViewRenderer {
@@ -4483,11 +4482,11 @@ declare module "obsidian" {
         setting: Setting;
     }
 
-    interface SlashCommandPluginInstance extends InternalPluginInstance { }
+    interface SlashCommandPluginInstance extends InternalPluginInstance {}
 
-    interface SlidesPluginInstance extends InternalPluginInstance { }
+    interface SlidesPluginInstance extends InternalPluginInstance {}
 
-    interface StarredPluginInstance extends InternalPluginInstance { }
+    interface StarredPluginInstance extends InternalPluginInstance {}
 
     interface StateHistory {
         /**
@@ -4614,9 +4613,9 @@ declare module "obsidian" {
         clearButtonEl: HTMLButtonElement;
     }
 
-    interface SwitcherPluginInstance extends InternalPluginInstance { }
+    interface SwitcherPluginInstance extends InternalPluginInstance {}
 
-    interface SyncPluginInstance extends InternalPluginInstance { }
+    interface SyncPluginInstance extends InternalPluginInstance {}
 
     /** @todo Documentation incomplete */
     interface TableCell {
@@ -4634,10 +4633,10 @@ declare module "obsidian" {
     }
 
     /** @todo Documentation incomplete */
-    interface TableCellEditor extends MarkdownBaseView, TableCell { }
+    interface TableCellEditor extends MarkdownBaseView, TableCell {}
 
     /** @todo Documentation incomplete */
-    interface TableEditor { }
+    interface TableEditor {}
 
     interface TAbstractFile {
         /**
@@ -4646,9 +4645,9 @@ declare module "obsidian" {
         deleted: boolean;
     }
 
-    interface TagPanePluginInstance extends InternalPluginInstance { }
+    interface TagPanePluginInstance extends InternalPluginInstance {}
 
-    interface TemplatesPluginInstance extends InternalPluginInstance { }
+    interface TemplatesPluginInstance extends InternalPluginInstance {}
 
     interface TextFileView {
         /**
@@ -5211,7 +5210,7 @@ declare module "obsidian" {
         win: Window;
     }
 
-    interface WordCountPluginInstance extends InternalPluginInstance { }
+    interface WordCountPluginInstance extends InternalPluginInstance {}
 
     interface Workspace {
         /**
@@ -5524,7 +5523,7 @@ declare module "obsidian" {
         parent?: WorkspaceSplit;
     }
 
-    interface WorkspacesPluginInstance extends InternalPluginInstance { }
+    interface WorkspacesPluginInstance extends InternalPluginInstance {}
 
-    interface ZkPrefixerPluginInstance extends InternalPluginInstance { }
+    interface ZkPrefixerPluginInstance extends InternalPluginInstance {}
 }
