@@ -2,7 +2,7 @@
   "typescript": {
     "lineWidth": 120,
     "indentWidth": 4,
-    "useTabs": true,
+    "useTabs": false,
     "semiColons": "prefer",
     "quoteStyle": "alwaysDouble",
     "quoteProps": "preserve",

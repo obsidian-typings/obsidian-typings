@@ -34,15 +34,16 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile) {
         if (structure.methods!.length && structure.properties!.length)
             declaration.insertText(declaration.getMethods()[0].getStart(true), '\n');
     }
-
+    
     const newModule = file.addModule({
         name: module.getName(),
+        kind: module.getDeclarationKind(),
         docs: module.getJsDocs().map((getJsDoc) => getJsDoc.getStructure())
     });
 
     // Apparently I can't just add an endline to the end, nor use a writer to add an endline at the end, hence the comment
     if (typeDeclarations.length)
-        newModule.addStatements(declarationsToText(typeDeclarations) + " \n\n// Interfaces \n");
+        newModule.addStatements(declarationsToText(typeDeclarations) + " \n\n\n");
     newModule.addStatements(declarationsToText(interfaceDeclarations));
 }
 
