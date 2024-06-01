@@ -2399,7 +2399,7 @@ declare module "obsidian" {
          */
         getEnabledPluginById<ID extends InternalPluginName>(
             id: ID,
-        ): InternalPlugin<InternalPluginNameInstancesMapping[ID]> | null;
+        ): InternalPluginNameInstancesMapping[ID] | null;
         /**
          * Get all enabled internal plugins
          */
