@@ -1,5 +1,3 @@
-import "./obsidian-ex.d.ts";
-
 export const InternalPluginName = {
   AudioRecorder: "audio-recorder",
   Backlink: "backlink",
