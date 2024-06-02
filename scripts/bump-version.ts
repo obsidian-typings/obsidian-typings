@@ -1,13 +1,14 @@
-import {readFileSync, writeFileSync} from "fs";
+import {readFileSync, writeFileSync} from "node:fs";
 import {spawnSync} from "node:child_process";
+import process from "node:process";
 
 const versionType = process.argv[2];
-const currentVersion = process.env.npm_package_version!;
+const currentVersion = process.env["npm_package_version"]!;
 
 const package_json = JSON.parse(readFileSync("package.json", "utf8"));
 const package_lock_json = JSON.parse(readFileSync("package-lock.json", "utf8"));
 
-const [major, minor, patch] = currentVersion.split(".").map(Number);
+const [major = 0, minor = 0, patch = 0] = currentVersion.split(".").map(Number);
 let newVersion = "";
 switch (versionType) {
     case "patch":
