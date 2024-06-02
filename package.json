@@ -24,6 +24,7 @@
         "obsidian": "^1.5.7-1"
     },
     "devDependencies": {
+        "@tsconfig/strictest": "^2.0.5",
         "dprint": "^0.45.1",
         "ts-morph": "^22.0.0"
     },
