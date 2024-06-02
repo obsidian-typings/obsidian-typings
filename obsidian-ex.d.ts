@@ -4,7 +4,7 @@ import { IpcRenderer } from "electron";
 import * as fs from "fs";
 import * as fsPromises from "fs/promises";
 import * as path from "path";
-import { InternalPluginName } from "./index";
+import { InternalPluginName } from "./index.ts";
 export * from "obsidian";
 
 declare global {
