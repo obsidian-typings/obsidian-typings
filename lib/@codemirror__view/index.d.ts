@@ -1,4 +1,5 @@
 import "@codemirror/view";
+
 export * from "./EditorView.d.ts";
 import type _EditorView from "./EditorView.d.ts";
 
