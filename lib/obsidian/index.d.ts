@@ -181,7 +181,42 @@ export type { HoverLinkEvent } from "./internals/HoverLinkEvent.d.ts";
 export type { IFramedMarkdownEditor } from "./internals/IFramedMarkdownEditor.d.ts";
 export type { ImportedAttachments } from "./internals/ImportedAttachments.d.ts";
 export type { InfinityScroll } from "./internals/InfinityScroll.d.ts";
-export type { InternalPlugin } from "./internals/InternalPlugin.d.ts";
+export type {
+    AudioRecorderPluginInstance,
+    BacklinkPluginInstance,
+    BookmarksPluginInstance,
+    CanvasPluginInstance,
+    CommandPalettePluginInstance,
+    DailyNotesPluginInstance,
+    EditorStatusPluginInstance,
+    FileExplorerPluginInstance,
+    FileRecoveryPluginInstance,
+    GlobalSearchPluginInstance,
+    GraphPluginInstance,
+    InternalPlugin,
+    InternalPluginInstance,
+    InternalPluginNameInstancesMapping,
+    InternalPluginNameType,
+    InternalPlugins,
+    MarkdownImporterPluginInstance,
+    NoteComposerPluginInstance,
+    OutgoingLinkPluginInstance,
+    OutlinePluginInstance,
+    PagePreviewPluginInstance,
+    PropertiesPluginInstance,
+    PublishPluginInstance,
+    RandomNotePluginInstance,
+    SlashCommandPluginInstance,
+    SlidesPluginInstance,
+    StarredPluginInstance,
+    SwitcherPluginInstance,
+    SyncPluginInstance,
+    TagPanePluginInstance,
+    TemplatesPluginInstance,
+    WordCountPluginInstance,
+    WorkspacesPluginInstance,
+    ZkPrefixerPluginInstance
+} from "./internals/InternalPlugin.d.ts";
 export type { KeyScope } from "./internals/KeyScope.d.ts";
 export type { LeafEntry } from "./internals/LeafEntry.d.ts";
 export type { LinkUpdate } from "./internals/LinkUpdate.d.ts";
@@ -224,8 +259,3 @@ export type { ViewRegistry } from "./internals/ViewRegistry.d.ts";
 export type { WeakMapWrapper } from "./internals/WeakMapWrapper.d.ts";
 export type { WidgetEditorView } from "./internals/WidgetEditorView.d.ts";
 export type { WindowSelection } from "./internals/WindowSelection.d.ts";
-
-/**
- * @note @see {@link file://./../../index.d.ts}
- */
-export * from "./internals/InternalPlugin.ts";
