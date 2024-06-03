@@ -1,4 +1,4 @@
-interface HotkeyManager {
+export default interface HotkeyManager {
     /**
      * Reference to App
      */

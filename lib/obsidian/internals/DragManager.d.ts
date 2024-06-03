@@ -1,3 +1,3 @@
 /** @todo Documentation incomplete */
-interface DragManager {
+export default interface DragManager {
 }

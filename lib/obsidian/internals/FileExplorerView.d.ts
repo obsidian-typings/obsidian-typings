@@ -6,7 +6,7 @@ import { TAbstractFile } from "./TAbstractFile.d.ts";
 import { FileTreeItem } from "./FileTreeItem.d.ts";
 
 /** @todo Documentation incomplete */
-interface FileExplorerView extends View {
+export default interface FileExplorerView extends View {
     /**
      * Mapping of file path to tree item
      */

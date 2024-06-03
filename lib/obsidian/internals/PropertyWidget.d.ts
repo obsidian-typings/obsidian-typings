@@ -2,7 +2,7 @@ import { Component } from "./Component.d.ts";
 import { PropertyEntryData } from "./PropertyEntryData.d.ts";
 import { PropertyRenderContext } from "./PropertyRenderContext.d.ts";
 
-interface PropertyWidget<T> {
+export default interface PropertyWidget<T> {
     /**
      * Lucide-dev icon associated with the widget
      */

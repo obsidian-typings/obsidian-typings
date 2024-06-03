@@ -1,7 +1,7 @@
 import { WorkspaceLeaf } from "./WorkspaceLeaf.d.ts";
 
 /** @todo Documentation incomplete */
-export interface HoverLinkEvent {
+export default interface HoverLinkEvent {
     event: MouseEvent;
     hoverParent: WorkspaceLeaf;
     linktext: string;

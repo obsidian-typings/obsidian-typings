@@ -4,7 +4,7 @@ import { MarkdownView } from "./MarkdownView.d.ts";
 import { PropertyEntryData } from "./PropertyEntryData.d.ts";
 import { MetadataEditorProperty } from "./MetadataEditorProperty.d.ts";
 
-export interface MetadataEditor extends Component {
+export default interface MetadataEditor extends Component {
     /**
      * Button element for adding a new property
      */

@@ -1,7 +1,7 @@
 import { Scope } from "./Scope.d.ts";
 
 /** @todo Documentation incomplete */
-export interface KeyScope {
+export default interface KeyScope {
     /**
      * Key to match
      */

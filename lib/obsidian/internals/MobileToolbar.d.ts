@@ -1,3 +1,3 @@
 /** @todo Documentation incomplete */
-interface MobileToolbar {
+export default interface MobileToolbar {
 }

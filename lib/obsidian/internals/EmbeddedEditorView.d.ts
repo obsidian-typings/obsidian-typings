@@ -5,7 +5,7 @@ import { MarkdownPreviewView } from "./MarkdownPreviewView.d.ts";
 import { IFramedMarkdownEditor } from "./IFramedMarkdownEditor.d.ts";
 import { HoverPopover } from "./HoverPopover.d.ts";
 
-export interface EmbeddedEditorView extends Component {
+export default interface EmbeddedEditorView extends Component {
     /**
      * Reference to the app
      */

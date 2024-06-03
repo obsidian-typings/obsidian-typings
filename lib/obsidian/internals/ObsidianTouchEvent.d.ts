@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-export interface ObsidianTouchEvent {
+export default interface ObsidianTouchEvent {
     direction: "x" | "y";
     evt: TouchEvent;
     points: number;

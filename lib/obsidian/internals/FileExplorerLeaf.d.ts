@@ -3,7 +3,7 @@ import { FileTreeItem } from "./FileTreeItem.d.ts";
 import { FileExplorerView } from "./FileExplorerView.d.ts";
 
 /** @todo Documentation incomplete */
-export interface FileExplorerLeaf extends WorkspaceLeaf {
+export default interface FileExplorerLeaf extends WorkspaceLeaf {
     view: FileExplorerView;
 
     /** @internal */

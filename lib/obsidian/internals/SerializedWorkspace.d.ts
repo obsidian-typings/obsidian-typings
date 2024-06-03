@@ -1,6 +1,6 @@
 import { LeafEntry } from "./LeafEntry.d.ts";
 
-export interface SerializedWorkspace {
+export default interface SerializedWorkspace {
     /**
      * Last active leaf
      */

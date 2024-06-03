@@ -1,4 +1,4 @@
-interface PropertyInfo {
+export default interface PropertyInfo {
     /**
      * Usage count of property
      */

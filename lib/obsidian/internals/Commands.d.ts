@@ -1,4 +1,4 @@
-interface Commands {
+export default interface Commands {
     /**
      * Reference to App
      */

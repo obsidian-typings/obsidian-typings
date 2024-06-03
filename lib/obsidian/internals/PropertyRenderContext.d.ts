@@ -1,6 +1,6 @@
 import { MetadataEditor } from "./MetadataEditor.d.ts";
 
-export interface PropertyRenderContext {
+export default interface PropertyRenderContext {
     /**
      * Reference to the app
      */

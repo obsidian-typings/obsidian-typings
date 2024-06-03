@@ -1,4 +1,4 @@
-interface SearchCursor {
+export default interface SearchCursor {
     /**
      * Current editor search position
      */

@@ -2,7 +2,7 @@ import { EventRef } from "./EventRef.d.ts";
 import { View } from "./View.d.ts";
 import { WorkspaceLeaf } from "./WorkspaceLeaf.d.ts";
 
-interface ViewRegistry extends Events {
+export default interface ViewRegistry extends Events {
     /**
      * Mapping of file extensions to view type
      */

@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-export interface LeafEntry {
+export default interface LeafEntry {
     children?: LeafEntry[];
     direction?: SplitDirection;
     id: string;

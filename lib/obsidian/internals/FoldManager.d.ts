@@ -1,3 +1,3 @@
 /** @todo Documentation incomplete */
-interface FoldManager {
+export default interface FoldManager {
 }

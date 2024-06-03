@@ -1,1 +1,1 @@
-export interface CanvasConnection { }
+export default interface CanvasConnection { }

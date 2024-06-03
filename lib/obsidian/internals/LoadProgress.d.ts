@@ -1,3 +1,3 @@
 /** @todo Documentation incomplete */
-interface LoadProgress {
+export default interface LoadProgress {
 }

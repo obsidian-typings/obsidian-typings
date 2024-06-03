@@ -1,7 +1,7 @@
 import { PluginManifest } from "./PluginManifest.d.ts";
 import { PluginUpdateManifest } from "./PluginUpdateManifest.d.ts";
 
-interface Plugins {
+export default interface Plugins {
     /**
      * Reference to App
      */

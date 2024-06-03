@@ -1,7 +1,7 @@
 import { TFile } from "./TFile.d.ts";
 import { PositionedReference } from "./PositionedReference.d.ts";
 
-interface LinkUpdate {
+export default interface LinkUpdate {
     /**
      * Reference to App
      */

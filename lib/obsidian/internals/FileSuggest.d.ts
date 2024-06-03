@@ -2,7 +2,7 @@ import { EditorSuggest } from "./EditorSuggest.d.ts";
 import { FileSuggestManager } from "./FileSuggestManager.d.ts";
 
 /** @todo Documentation incomplete */
-interface FileSuggest<T> extends EditorSuggest<T> {
+export default interface FileSuggest<T> extends EditorSuggest<T> {
     /**
      * Manages fetching of suggestions from metadatacache
      */

@@ -1,4 +1,4 @@
 import { WorkspaceLeaf } from "./WorkspaceLeaf.d.ts";
 
 /** @todo Documentation incomplete */
-export interface GlobalSearchLeaf extends WorkspaceLeaf { }
+export default interface GlobalSearchLeaf extends WorkspaceLeaf { }

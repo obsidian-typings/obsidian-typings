@@ -4,7 +4,7 @@ import { EditorSearchComponent } from "./EditorSearchComponent.d.ts";
 import { MarkdownBaseView } from "./MarkdownBaseView.d.ts";
 import { Scope } from "./Scope.d.ts";
 
-interface MarkdownScrollableEditView extends MarkdownBaseView {
+export default interface MarkdownScrollableEditView extends MarkdownBaseView {
     /**
      * List of CSS classes applied to the editor
      */

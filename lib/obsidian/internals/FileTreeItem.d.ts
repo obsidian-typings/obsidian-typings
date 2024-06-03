@@ -1,6 +1,6 @@
 import { TAbstractFile } from "./TAbstractFile.d.ts";
 
 /** @todo Documentation incomplete */
-interface FileTreeItem {
+export default interface FileTreeItem {
     file: TAbstractFile;
 }

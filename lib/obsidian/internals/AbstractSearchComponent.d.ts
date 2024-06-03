@@ -1,4 +1,4 @@
-interface AbstractSearchComponent {
+export default interface AbstractSearchComponent {
     /**
      * Reference to the app
      */

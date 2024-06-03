@@ -2,7 +2,7 @@ import { TAbstractFile } from "./TAbstractFile.d.ts";
 import { MarkdownView } from "./MarkdownView.d.ts";
 import { ImportedAttachments } from "./ImportedAttachments.d.ts";
 
-export interface ClipBoardManager {
+export default interface ClipBoardManager {
     /**
      * Reference to the app
      */

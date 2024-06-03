@@ -2,7 +2,7 @@ import { InfinityScroll } from "./InfinityScroll.d.ts";
 import { Scope } from "./Scope.d.ts";
 import { View } from "./View.d.ts";
 
-interface Tree<T> {
+export default interface Tree<T> {
     /**
      * Currently active item in tree view
      */

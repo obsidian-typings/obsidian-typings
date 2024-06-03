@@ -2,7 +2,7 @@ import { Component } from "./Component.d.ts";
 import { ThemeManifest } from "./ThemeManifest.d.ts";
 
 /** @todo Documentation incomplete */
-interface CustomCSS extends Component {
+export default interface CustomCSS extends Component {
     /**
      * Reference to App
      */

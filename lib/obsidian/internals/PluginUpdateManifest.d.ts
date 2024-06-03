@@ -1,6 +1,6 @@
 import { PluginManifest } from "./PluginManifest.d.ts";
 
-interface PluginUpdateManifest {
+export default interface PluginUpdateManifest {
     /**
      * Manifest of the plugin
      */

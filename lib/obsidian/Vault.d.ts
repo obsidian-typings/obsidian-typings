@@ -1,4 +1,4 @@
-import { AppVaultConfig } from "./AppVaultConfig.d.ts";
+import { AppVaultConfig } from "./internals/AppVaultConfig.d.ts";
 import { DataAdapter } from "./DataAdapter.d.ts";
 import { EventRef } from "./EventRef.d.ts";
 import { TAbstractFile } from "./TAbstractFile.d.ts";

@@ -1,4 +1,4 @@
-interface EmbedContext {
+export default interface EmbedContext {
     /**
      * Reference to the app
      */

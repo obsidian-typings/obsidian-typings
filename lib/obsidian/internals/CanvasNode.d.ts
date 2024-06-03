@@ -1,1 +1,1 @@
-export interface CanvasNode { }
+export default interface CanvasNode { }

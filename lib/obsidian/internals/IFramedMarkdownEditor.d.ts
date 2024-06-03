@@ -2,7 +2,7 @@ import { Extension } from "@codemirror/state";
 import { ViewUpdate } from "@codemirror/view";
 import { MarkdownScrollableEditView } from "./MarkdownScrollableEditView.d.ts";
 
-interface IFramedMarkdownEditor extends MarkdownScrollableEditView {
+export default interface IFramedMarkdownEditor extends MarkdownScrollableEditView {
     /**
      * Function that cleans up the iframe and listeners
      */

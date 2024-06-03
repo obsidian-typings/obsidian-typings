@@ -5,7 +5,7 @@ import { Scope } from "./Scope.d.ts";
 import { TAbstractFile } from "./TAbstractFile.d.ts";
 import { TFile } from "./TFile.d.ts";
 
-interface WidgetEditorView extends EmbeddedEditorView {
+export default interface WidgetEditorView extends EmbeddedEditorView {
     /**
      * Data after reference
      */

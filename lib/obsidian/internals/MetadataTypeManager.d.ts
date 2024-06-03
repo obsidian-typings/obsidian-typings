@@ -1,7 +1,7 @@
 import { PropertyWidget } from "./PropertyWidget.d.ts";
 import { PropertyInfo } from "./PropertyInfo.d.ts";
 
-interface MetadataTypeManager extends Events {
+export default interface MetadataTypeManager extends Events {
     /**
      * Reference to App
      */

@@ -4,7 +4,7 @@ import { PropertyWidget } from "./PropertyWidget.d.ts";
 import { PropertyEntryData } from "./PropertyEntryData.d.ts";
 import { MetadataWidget } from "./MetadataWidget.d.ts";
 
-interface MetadataEditorProperty extends Component {
+export default interface MetadataEditorProperty extends Component {
     /**
      * Reference to the app
      */

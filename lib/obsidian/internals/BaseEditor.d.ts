@@ -8,7 +8,7 @@ import { EditorView } from "@codemirror/view";
  * @todo Potential risk of confusion when `Editor` is constructed from the Obsidian module, as it only has the
  *       methods from `BaseEditor`, *not* `Editor`
  */
-export interface BaseEditor {
+export default interface BaseEditor {
     /**
      * CodeMirror editor instance
      */

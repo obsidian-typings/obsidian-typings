@@ -1,7 +1,7 @@
 import { Editor } from "./Editor.d.ts";
 import { SearchCursor } from "./SearchCursor.d.ts";
 
-export interface EditorSearchComponent extends AbstractSearchComponent {
+export default interface EditorSearchComponent extends AbstractSearchComponent {
     /**
      * Search cursor for editor, handles search and replace functionality for editor
      */

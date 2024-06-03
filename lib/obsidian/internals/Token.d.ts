@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-interface Token extends EditorRange {
+export default interface Token extends EditorRange {
     text: string;
     type: "tag" | "external-link" | "internal-link";
 }

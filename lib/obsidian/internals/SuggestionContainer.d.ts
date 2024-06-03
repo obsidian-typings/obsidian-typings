@@ -1,6 +1,6 @@
 import { EditorSuggest } from "./EditorSuggest.d.ts";
 
-interface SuggestionContainer<T> {
+export default interface SuggestionContainer<T> {
     /**
      * Which suggestions should be picked from
      */

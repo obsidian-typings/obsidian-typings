@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-interface RendererSection {
+export default interface RendererSection {
     el: HTMLElement;
     html: string;
     rendered: boolean;

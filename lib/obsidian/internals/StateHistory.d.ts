@@ -1,4 +1,4 @@
-export interface StateHistory {
+export default interface StateHistory {
     /**
      * Ephemeral cursor state within Editor of leaf
      */

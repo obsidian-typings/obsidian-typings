@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-export interface CustomArrayDict<T> {
+export default interface CustomArrayDict<T> {
     data: Record<string, T[]>;
 
     add(key: string, value: T): void;

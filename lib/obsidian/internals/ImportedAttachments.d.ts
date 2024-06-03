@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-interface ImportedAttachments {
+export default interface ImportedAttachments {
     data: Promise<ArrayBuffer>;
     extension: string;
     filename: string;

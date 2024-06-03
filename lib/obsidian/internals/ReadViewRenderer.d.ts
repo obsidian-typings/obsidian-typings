@@ -1,7 +1,7 @@
 import { RendererSection } from "./RendererSection.d.ts";
 
 /** @todo Documentation incomplete */
-interface ReadViewRenderer {
+export default interface ReadViewRenderer {
     addBottomPadding: boolean;
     asyncSections: unknown[];
     lastRender: number;

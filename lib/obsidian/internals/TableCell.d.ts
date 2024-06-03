@@ -1,7 +1,7 @@
 import { TableCellEditor } from "./TableCellEditor.d.ts";
 
 /** @todo Documentation incomplete */
-export interface TableCell {
+export default interface TableCell {
     col: number;
     contentEl: HTMLElement;
     dirty: boolean;

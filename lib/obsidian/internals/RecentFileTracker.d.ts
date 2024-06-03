@@ -2,7 +2,7 @@ import { Workspace } from "./Workspace.d.ts";
 import { Vault } from "./Vault.d.ts";
 import { TFile } from "./TFile.d.ts";
 
-export interface RecentFileTracker {
+export default interface RecentFileTracker {
     /**
      * List of last opened file paths, limited to 50
      */

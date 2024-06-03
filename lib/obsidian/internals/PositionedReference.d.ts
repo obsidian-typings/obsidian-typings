@@ -1,4 +1,4 @@
-interface PositionedReference extends Reference {
+export default interface PositionedReference extends Reference {
     /**
      * Position of the reference in the file
      */

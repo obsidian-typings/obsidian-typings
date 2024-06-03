@@ -1,6 +1,6 @@
 import { TFile } from "./TFile.d.ts";
 
-interface EmbedRegistry extends Events {
+export default interface EmbedRegistry extends Events {
     /**
      * Mapping of file extensions to constructors for embeddable widgets
      */

@@ -2,7 +2,7 @@ import { EditorSuggest } from "./EditorSuggest.d.ts";
 import { TFile } from "./TFile.d.ts";
 import { MarkdownBaseView } from "./MarkdownBaseView.d.ts";
 
-export interface EditorSuggests {
+export default interface EditorSuggests {
     /**
      * Currently active and rendered editor suggestion popup
      */

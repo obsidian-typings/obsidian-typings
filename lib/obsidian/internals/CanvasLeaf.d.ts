@@ -1,3 +1,3 @@
 import { WorkspaceLeaf } from "./WorkspaceLeaf.d.ts";
 
-interface CanvasLeaf extends WorkspaceLeaf { }
+export default interface CanvasLeaf extends WorkspaceLeaf { }

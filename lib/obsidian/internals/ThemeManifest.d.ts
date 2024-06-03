@@ -1,4 +1,4 @@
-interface ThemeManifest {
+export default interface ThemeManifest {
     /**
      * Name of the author of the theme
      */

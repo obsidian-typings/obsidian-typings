@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-interface Runnable {
+export default interface Runnable {
     cancelled: boolean;
     onCancel: null | (() => void);
     onStart: null | (() => void);

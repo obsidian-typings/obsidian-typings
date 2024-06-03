@@ -2,7 +2,7 @@ import { BlockCache } from "./BlockCache.d.ts";
 import { TFile } from "./TFile.d.ts";
 import { Runnable } from "./Runnable.d.ts";
 
-interface FileSuggestManager {
+export default interface FileSuggestManager {
     /**
      * Reference to the app
      */

@@ -11,7 +11,7 @@ import { TableEditor } from "./TableEditor.d.ts";
 import { TableCellEditor } from "./TableCellEditor.d.ts";
 import { TableCell } from "./TableCell.d.ts";
 
-export interface MarkdownBaseView extends Component {
+export default interface MarkdownBaseView extends Component {
     /**
      * Reference to the app
      */
