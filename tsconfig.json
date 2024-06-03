@@ -16,7 +16,8 @@
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
         "noEmit": true,
-        "target": "ESNext"
+        "target": "ESNext",
+        "skipLibCheck": false
     },
     "include": [
         "**/*.ts"
