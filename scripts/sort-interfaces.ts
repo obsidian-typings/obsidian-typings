@@ -9,8 +9,8 @@
  */
 // @ts-nocheck (Prevent compilation errors for people use the package as a submodule)
 
-import { Project, Node, ModuleDeclaration, SourceFile } from "ts-morph.d.ts";
-import * as fs from "node:fs.d.ts";
+import { Project, Node, ModuleDeclaration, SourceFile } from "ts-morph";
+import * as fs from "node:fs";
 
 const project = new Project();
 const declarationsToText = (declarationArray: Node[]) =>
@@ -59,7 +59,7 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile) {
 async function parseFile(file: string, output_file: string = file) {
     const sourceFile = project.addSourceFileAtPath(file);
 
-    const newFile = project.createSourceFile(file === output_file ? "temp.d.ts" : output_file, "", {
+    const newFile = project.createSourceFile(file === output_file ? "temp.ts" : output_file, "", {
         overwrite: true
     });
 
@@ -101,7 +101,7 @@ async function parseFile(file: string, output_file: string = file) {
     await newFile.save();
 
     if (file === output_file)
-        fs.renameSync("temp.d.ts", file);
+        fs.renameSync("temp.ts", file);
 }
 
 // Get passed parameter
