@@ -1,3 +1,5 @@
+export default TreeItem;
+
 /** @todo Documentation incomplete */
 type TreeItem<T> = TreeNode<T> & {
     collapseEl: HTMLElement;

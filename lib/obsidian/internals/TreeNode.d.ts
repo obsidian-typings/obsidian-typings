@@ -1,3 +1,5 @@
+export default TreeNode;
+
 /**
  * @todo Documentation incomplete
  */

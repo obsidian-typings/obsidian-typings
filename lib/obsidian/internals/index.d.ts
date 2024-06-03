@@ -34,7 +34,6 @@ export { default as HotkeyManager } from "./HotkeyManager.d.ts";
 export { default as HoverLinkEvent } from "./HoverLinkEvent.d.ts";
 export { default as IFramedMarkdownEditor } from "./IFramedMarkdownEditor.d.ts";
 export { default as ImportedAttachments } from "./ImportedAttachments.d.ts";
-export { default as index } from "./index.d.ts";
 export { default as InfinityScroll } from "./InfinityScroll.d.ts";
 export { default as InternalPlugin } from "./InternalPlugin.d.ts";
 export { default as InternalPluginName } from "./InternalPluginName.d.ts";
