@@ -1,5 +1,2 @@
-import VimEditor from "./VimEditor.d.ts";
-export { VimEditor };
-
-import VimState from "./VimState.d.ts";
-export { VimState };
+export { default as VimEditor } from "./VimEditor.d.ts";
+export { default as VimState } from "./VimEditor.d.ts";
