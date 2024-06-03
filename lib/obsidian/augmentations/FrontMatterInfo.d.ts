@@ -1,5 +1,5 @@
-export { };
+export {};
 
 declare module "obsidian" {
-    interface FrontMatterInfo { }
+    interface FrontMatterInfo {}
 }

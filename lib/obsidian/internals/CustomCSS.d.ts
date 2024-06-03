@@ -1,9 +1,8 @@
+import type { ThemeManifest } from "../types.d.ts";
 import type {
     App,
     Component
 } from "obsidian";
-import type { ThemeManifest } from "../types.d.ts";
-
 /** @todo Documentation incomplete */
 export interface CustomCSS extends Component {
     /**
@@ -65,7 +64,7 @@ export interface CustomCSS extends Component {
      *
      * @returns String obsidian.css contents
      */
-    downloadLegacyTheme(arg: { repo: string; }): Promise<string>;
+    downloadLegacyTheme(arg: { repo: string }): Promise<string>;
     /**
      * Enable translucency of application background
      */
@@ -106,11 +105,11 @@ export interface CustomCSS extends Component {
      *
      * @remark Name will be used as the folder name for the theme
      */
-    installLegacyTheme(arg: { name: string; repo: string; author: string; }): Promise<void>;
+    installLegacyTheme(arg: { name: string; repo: string; author: string }): Promise<void>;
     /**
      * Install a theme using the regular theme download pipeline
      */
-    installTheme(arg: { name: string; repo: string; author: string; }, version: string): Promise<void>;
+    installTheme(arg: { name: string; repo: string; author: string }, version: string): Promise<void>;
     /**
      * Check whether a specific theme is installed by theme name
      */

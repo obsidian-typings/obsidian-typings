@@ -1,5 +1,5 @@
-export { };
+export {};
 
 declare module "obsidian" {
-    interface ToggleComponent { }
+    interface ToggleComponent {}
 }

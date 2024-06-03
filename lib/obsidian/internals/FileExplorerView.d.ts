@@ -1,16 +1,15 @@
 import type {
-    TAbstractFile,
-    TFile,
-    TFolder,
-    View
-} from "obsidian";
-import type {
     FileTreeItem,
     Tree,
     TreeItem,
     WeakMapWrapper
 } from "../types.d.ts";
-
+import type {
+    TAbstractFile,
+    TFile,
+    TFolder,
+    View
+} from "obsidian";
 /** @todo Documentation incomplete */
 export interface FileExplorerView extends View {
     /**

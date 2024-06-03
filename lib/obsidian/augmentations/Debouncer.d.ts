@@ -1,5 +1,5 @@
-export { };
+export {};
 
 declare module "obsidian" {
-    interface Debouncer<T, V> { }
+    interface Debouncer<T, V> {}
 }

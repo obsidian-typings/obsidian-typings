@@ -1,11 +1,11 @@
-export { };
-
-import type { Extension } from "@codemirror/state";
-import type { ViewUpdate } from "@codemirror/view";
 import type {
     FoldInfo,
     MarkdownScrollableEditView
 } from "../types.d.ts";
+import type { Extension } from "@codemirror/state";
+import type { ViewUpdate } from "@codemirror/view";
+
+export {};
 
 declare module "obsidian" {
     interface MarkdownEditView extends MarkdownScrollableEditView {
@@ -43,7 +43,7 @@ declare module "obsidian" {
         /**
          * Gets the ephemeral (non-persistent) state of the editor
          */
-        getEphemeralState(state: any): { cursor: EditorRange; } & any;
+        getEphemeralState(state: any): { cursor: EditorRange } & any;
         /**
          * Get the current folds of the editor
          */

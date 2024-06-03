@@ -1,3 +1,4 @@
+import type { IFramedMarkdownEditor } from "../types.d.ts";
 import type { EditorState } from "@codemirror/state";
 import type {
     App,
@@ -6,8 +7,6 @@ import type {
     MarkdownPreviewView,
     TFile
 } from "obsidian";
-import type { IFramedMarkdownEditor } from "../types.d.ts";
-
 export interface EmbeddedEditorView extends Component {
     /**
      * Reference to the app

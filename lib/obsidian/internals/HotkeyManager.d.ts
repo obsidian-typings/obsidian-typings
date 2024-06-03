@@ -2,7 +2,6 @@ import type {
     App,
     KeymapInfo
 } from "obsidian";
-
 export interface HotkeyManager {
     /**
      * Reference to App

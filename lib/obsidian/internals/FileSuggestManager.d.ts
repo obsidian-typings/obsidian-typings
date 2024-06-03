@@ -1,11 +1,10 @@
+import type { Runnable } from "../types.d.ts";
 import type {
     App,
     BlockCache,
     SearchResult,
     TFile
 } from "obsidian";
-import type { Runnable } from "../types.d.ts";
-
 export interface FileSuggestManager {
     /**
      * Reference to the app
@@ -14,7 +13,7 @@ export interface FileSuggestManager {
     /**
      * Selection of files and their paths that can be matched to
      */
-    fileSuggestions: null | { file: TFile | null; path: string; }[];
+    fileSuggestions: null | { file: TFile | null; path: string }[];
     /**
      * Determine the source path of current context
      */
@@ -62,7 +61,7 @@ export interface FileSuggestManager {
      */
     getHeadingSuggestions(runner: Runnable, file: TFile, text: string): Promise<SearchResult[]>;
     /** @internal Generate instructions for specific actions in suggestion manager (e.g. accept, select, ...) */
-    getInstructions(): [{ command: "string"; purpose: "string"; }];
+    getInstructions(): [{ command: "string"; purpose: "string" }];
     /**
      * Get suggestions for current input text
      *

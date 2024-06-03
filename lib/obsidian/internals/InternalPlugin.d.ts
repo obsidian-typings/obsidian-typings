@@ -1,24 +1,10 @@
+import type { InternalPluginName } from "../implementations.ts";
 import type {
     App,
+    Events,
     TFile,
-    TFolder,
-    Events
+    TFolder
 } from "obsidian";
-import type { InternalPluginName } from "../implementations.ts";
-
-/** @todo Documentation incomplete */
-export interface InternalPlugin<TInstance extends InternalPluginInstance = InternalPluginInstance> extends Plugin {
-    instance: TInstance;
-
-    disable(): void;
-    enable(): Promise<void>;
-}
-
-export type InternalPluginNameType = typeof InternalPluginName[keyof typeof InternalPluginName];
-
-export interface InternalPluginInstance {
-    plugin: InternalPlugin<this>;
-}
 
 export type InternalPluginNameInstancesMapping = {
     [InternalPluginName.AudioRecorder]: AudioRecorderPluginInstance;
@@ -51,20 +37,20 @@ export type InternalPluginNameInstancesMapping = {
     [InternalPluginName.Workspaces]: WorkspacesPluginInstance;
     [InternalPluginName.ZkPrefixer]: ZkPrefixerPluginInstance;
 };
+export type InternalPluginNameType = typeof InternalPluginName[keyof typeof InternalPluginName];
+export interface AudioRecorderPluginInstance extends InternalPluginInstance {}
 
-export interface AudioRecorderPluginInstance extends InternalPluginInstance { }
+export interface BacklinkPluginInstance extends InternalPluginInstance {}
 
-export interface BacklinkPluginInstance extends InternalPluginInstance { }
+export interface BookmarksPluginInstance extends InternalPluginInstance {}
 
-export interface BookmarksPluginInstance extends InternalPluginInstance { }
+export interface CanvasPluginInstance extends InternalPluginInstance {}
 
-export interface CanvasPluginInstance extends InternalPluginInstance { }
+export interface CommandPalettePluginInstance extends InternalPluginInstance {}
 
-export interface CommandPalettePluginInstance extends InternalPluginInstance { }
+export interface DailyNotesPluginInstance extends InternalPluginInstance {}
 
-export interface DailyNotesPluginInstance extends InternalPluginInstance { }
-
-export interface EditorStatusPluginInstance extends InternalPluginInstance { }
+export interface EditorStatusPluginInstance extends InternalPluginInstance {}
 
 /** @todo Documentation incomplete */
 export interface FileExplorerPluginInstance extends InternalPluginInstance {
@@ -75,48 +61,24 @@ export interface FileExplorerPluginInstance extends InternalPluginInstance {
     revealInFolder(item: TFile | TFolder): void;
 }
 
-export interface FileRecoveryPluginInstance extends InternalPluginInstance { }
+export interface FileRecoveryPluginInstance extends InternalPluginInstance {}
 
 /** @todo Documentation incomplete */
-export interface GlobalSearchPluginInstance extends InternalPluginInstance { }
+export interface GlobalSearchPluginInstance extends InternalPluginInstance {}
 
-export interface GraphPluginInstance extends InternalPluginInstance { }
+export interface GraphPluginInstance extends InternalPluginInstance {}
 
-export interface MarkdownImporterPluginInstance extends InternalPluginInstance { }
+/** @todo Documentation incomplete */
+export interface InternalPlugin<TInstance extends InternalPluginInstance = InternalPluginInstance> extends Plugin {
+    instance: TInstance;
 
-export interface NoteComposerPluginInstance extends InternalPluginInstance { }
+    disable(): void;
+    enable(): Promise<void>;
+}
 
-export interface OutgoingLinkPluginInstance extends InternalPluginInstance { }
-
-export interface OutlinePluginInstance extends InternalPluginInstance { }
-
-export interface PagePreviewPluginInstance extends InternalPluginInstance { }
-
-export interface PropertiesPluginInstance extends InternalPluginInstance { }
-
-export interface PublishPluginInstance extends InternalPluginInstance { }
-
-export interface RandomNotePluginInstance extends InternalPluginInstance { }
-
-export interface SlashCommandPluginInstance extends InternalPluginInstance { }
-
-export interface SlidesPluginInstance extends InternalPluginInstance { }
-
-export interface StarredPluginInstance extends InternalPluginInstance { }
-
-export interface SwitcherPluginInstance extends InternalPluginInstance { }
-
-export interface SyncPluginInstance extends InternalPluginInstance { }
-
-export interface TagPanePluginInstance extends InternalPluginInstance { }
-
-export interface TemplatesPluginInstance extends InternalPluginInstance { }
-
-export interface WordCountPluginInstance extends InternalPluginInstance { }
-
-export interface WorkspacesPluginInstance extends InternalPluginInstance { }
-
-export interface ZkPrefixerPluginInstance extends InternalPluginInstance { }
+export interface InternalPluginInstance {
+    plugin: InternalPlugin<this>;
+}
 
 export interface InternalPlugins extends Events {
     /**
@@ -163,7 +125,7 @@ export interface InternalPlugins extends Events {
         id: ID
     ): InternalPlugin<InternalPluginNameInstancesMapping[ID]> | null;
     /** @internal */
-    loadPlugin(arg: { id: string; name: string; }): string;
+    loadPlugin(arg: { id: string; name: string }): string;
     /** @internal */
     onRaw(cb1: unknown, cb2: unknown): void;
     /** @internal Request save of plugin configs */
@@ -171,3 +133,39 @@ export interface InternalPlugins extends Events {
     /** @internal - Save current plugin configs */
     saveConfig(): Promise<void>;
 }
+
+export interface MarkdownImporterPluginInstance extends InternalPluginInstance {}
+
+export interface NoteComposerPluginInstance extends InternalPluginInstance {}
+
+export interface OutgoingLinkPluginInstance extends InternalPluginInstance {}
+
+export interface OutlinePluginInstance extends InternalPluginInstance {}
+
+export interface PagePreviewPluginInstance extends InternalPluginInstance {}
+
+export interface PropertiesPluginInstance extends InternalPluginInstance {}
+
+export interface PublishPluginInstance extends InternalPluginInstance {}
+
+export interface RandomNotePluginInstance extends InternalPluginInstance {}
+
+export interface SlashCommandPluginInstance extends InternalPluginInstance {}
+
+export interface SlidesPluginInstance extends InternalPluginInstance {}
+
+export interface StarredPluginInstance extends InternalPluginInstance {}
+
+export interface SwitcherPluginInstance extends InternalPluginInstance {}
+
+export interface SyncPluginInstance extends InternalPluginInstance {}
+
+export interface TagPanePluginInstance extends InternalPluginInstance {}
+
+export interface TemplatesPluginInstance extends InternalPluginInstance {}
+
+export interface WordCountPluginInstance extends InternalPluginInstance {}
+
+export interface WorkspacesPluginInstance extends InternalPluginInstance {}
+
+export interface ZkPrefixerPluginInstance extends InternalPluginInstance {}

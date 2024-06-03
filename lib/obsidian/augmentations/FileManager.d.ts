@@ -1,9 +1,9 @@
-export { };
-
 import type {
     LinkUpdate,
     PositionedReference
 } from "../types.d.ts";
+
+export {};
 
 declare module "obsidian" {
     interface FileManager {

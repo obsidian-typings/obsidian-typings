@@ -9,7 +9,7 @@
  */
 // @ts-nocheck (Prevent compilation errors for people use the package as a submodule)
 
-import { Project, Node, ModuleDeclaration, SourceFile } from "ts-morph";
+import { ModuleDeclaration, Node, Project, SourceFile } from "ts-morph";
 import * as fs from "node:fs";
 
 const project = new Project();

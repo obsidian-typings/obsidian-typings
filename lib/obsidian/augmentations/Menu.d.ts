@@ -1,4 +1,4 @@
-export { };
+export {};
 
 declare module "obsidian" {
     interface Menu extends Component {
@@ -39,7 +39,7 @@ declare module "obsidian" {
         /** @internal Which menuitem is currently selected */
         selected: number;
         /** @internal Configurations for the submenu configs */
-        submenuConfig: Record<string, { title: string; icon: string; }>;
+        submenuConfig: Record<string, { title: string; icon: string }>;
         /** @internal Whether the submenu is currently unloading */
         unloading: boolean;
         /**
@@ -96,7 +96,7 @@ declare module "obsidian" {
          * @param submenu
          * @internal Add a section to the submenu config
          */
-        setSectionSubmenu(section: string, submenu: { title: string; icon: string; }): this;
+        setSectionSubmenu(section: string, submenu: { title: string; icon: string }): this;
         /** @internal Sort the items in the menu */
         sort(): void;
         /** @internal Unselect the currently selected item and closes the submenu */

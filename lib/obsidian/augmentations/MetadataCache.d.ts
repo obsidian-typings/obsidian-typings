@@ -1,10 +1,10 @@
-export { };
-
 import type {
     CustomArrayDict,
     FileCacheEntry,
     PropertyInfo
 } from "../types.d.ts";
+
+export {};
 
 declare module "obsidian" {
     interface MetadataCache {
@@ -87,7 +87,7 @@ declare module "obsidian" {
         /**
          * Get all links (resolved or unresolved) in the vault
          */
-        getLinkSuggestions(): { file: TFile | null; path: string; }[];
+        getLinkSuggestions(): { file: TFile | null; path: string }[];
         /**
          * Get all tags within the vault and their usage count
          */

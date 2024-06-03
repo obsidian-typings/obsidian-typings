@@ -1,10 +1,9 @@
+import type { ImportedAttachments } from "../types.d.ts";
 import type {
     App,
     MarkdownView,
     TAbstractFile
 } from "obsidian";
-import type { ImportedAttachments } from "../types.d.ts";
-
 export interface ClipBoardManager {
     /**
      * Reference to the app

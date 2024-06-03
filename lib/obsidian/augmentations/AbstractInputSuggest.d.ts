@@ -1,5 +1,5 @@
-export { };
+export {};
 
 declare module "obsidian" {
-    interface AbstractInputSuggest<T> { }
+    interface AbstractInputSuggest<T> {}
 }

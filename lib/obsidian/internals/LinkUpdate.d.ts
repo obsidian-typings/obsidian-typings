@@ -1,9 +1,8 @@
+import type { PositionedReference } from "../types.d.ts";
 import type {
     App,
     TFile
 } from "obsidian";
-import type { PositionedReference } from "../types.d.ts";
-
 export interface LinkUpdate {
     /**
      * Reference to App

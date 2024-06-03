@@ -1,13 +1,12 @@
 import type {
-    App,
-    Events
-} from "obsidian";
-import type {
     PropertyInfo,
     PropertyWidget,
     PropertyWidgetType
 } from "../types.d.ts";
-
+import type {
+    App,
+    Events
+} from "obsidian";
 export interface MetadataTypeManager extends Events {
     /**
      * Reference to App
@@ -37,7 +36,7 @@ export interface MetadataTypeManager extends Events {
      */
     getPropertyInfo(property: string): PropertyInfo;
     /** @internal Get expected widget type for property and the one inferred from the property value */
-    getTypeInfo(arg: { key: string; type: string; value: unknown; }): {
+    getTypeInfo(arg: { key: string; type: string; value: unknown }): {
         inferred: PropertyWidget<unknown>;
         expected: PropertyWidget<unknown>;
     };

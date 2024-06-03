@@ -1,6 +1,6 @@
-export { };
-
 import type { ReadViewRenderer } from "../types.d.ts";
+
+export {};
 
 declare module "obsidian" {
     /** @todo Documentation incomplete */

@@ -1,11 +1,11 @@
-export { };
-
-import type { EditorView } from "@codemirror/view";
 import type {
     BaseEditor,
     MarkdownScrollableEditView,
     SearchCursor
 } from "../types.d.ts";
+import type { EditorView } from "@codemirror/view";
+
+export {};
 
 declare module "obsidian" {
     interface Editor extends BaseEditor {
@@ -42,7 +42,7 @@ declare module "obsidian" {
         coordsAtPos(
             pos: EditorPosition,
             relative_to_editor: boolean
-        ): { left: number; top: number; bottom: number; right: number; };
+        ): { left: number; top: number; bottom: number; right: number };
         /**
          * Unfolds all folded lines one level up
          *
@@ -58,7 +58,7 @@ declare module "obsidian" {
         /**
          * Get all ranges that can be folded away in the editor
          */
-        getAllFoldableLines(): { from: number; to: number; }[];
+        getAllFoldableLines(): { from: number; to: number }[];
         /**
          * Get a clickable link - if it exists - at specified position
          */
@@ -87,7 +87,7 @@ declare module "obsidian" {
         /**
          * Get the closest character position to the specified coordinates
          */
-        posAtCoords(coords: { left: number; top: number; }): EditorPosition;
+        posAtCoords(coords: { left: number; top: number }): EditorPosition;
         /**
          * Removes all highlights of specified class
          */

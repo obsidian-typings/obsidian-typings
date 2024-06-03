@@ -1,5 +1,4 @@
 import type { LeafEntry } from "../types.d.ts";
-
 export interface SerializedWorkspace {
     /**
      * Last active leaf
@@ -16,7 +15,7 @@ export interface SerializedWorkspace {
     /**
      * Left ribbon
      */
-    leftRibbon: { hiddenItems: Record<string, boolean>; };
+    leftRibbon: { hiddenItems: Record<string, boolean> };
     /**
      * Main (center) workspace leaf
      */

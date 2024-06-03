@@ -1,9 +1,8 @@
+import type { EmbeddableConstructor } from "../types.d.ts";
 import type {
     Events,
     TFile
 } from "obsidian";
-import type { EmbeddableConstructor } from "../types.d.ts";
-
 export interface EmbedRegistry extends Events {
     /**
      * Mapping of file extensions to constructors for embeddable widgets

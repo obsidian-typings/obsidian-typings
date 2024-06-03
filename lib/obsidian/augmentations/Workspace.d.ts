@@ -1,7 +1,4 @@
-export { };
-
-import type { Extension } from "@codemirror/state";
-import type { Constructor } from "obsidian";
+import type { InternalPluginName } from "../implementations.ts";
 import type {
     CanvasConnection,
     CanvasNode,
@@ -15,7 +12,10 @@ import type {
     SerializedWorkspace,
     StateHistory
 } from "../types.d.ts";
-import type { InternalPluginName } from "../implementations.ts";
+import type { Extension } from "@codemirror/state";
+import type { Constructor } from "obsidian";
+
+export {};
 
 declare module "obsidian" {
     interface Workspace {

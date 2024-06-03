@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-export { };
+export {};
 
 declare module "obsidian" {
     interface WorkspaceSplit {

@@ -4,7 +4,6 @@ import type {
     View,
     WorkspaceLeaf
 } from "obsidian";
-
 export interface ViewRegistry extends Events {
     /**
      * Mapping of file extensions to view type

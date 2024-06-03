@@ -1,5 +1,5 @@
-export { };
+export {};
 
 declare module "obsidian" {
-    interface RequestUrlParam { }
+    interface RequestUrlParam {}
 }

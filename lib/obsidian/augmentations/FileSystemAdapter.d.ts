@@ -1,5 +1,5 @@
-export { };
+export {};
 
 declare module "obsidian" {
-    interface FileSystemAdapter extends DataAdapter { }
+    interface FileSystemAdapter extends DataAdapter {}
 }

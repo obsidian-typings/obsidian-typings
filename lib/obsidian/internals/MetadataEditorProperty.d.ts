@@ -1,14 +1,13 @@
 import type {
-    App,
-    Component
-} from "obsidian";
-import type {
     MetadataEditor,
     MetadataWidget,
     PropertyEntryData,
     PropertyWidget
 } from "../types.d.ts";
-
+import type {
+    App,
+    Component
+} from "obsidian";
 export interface MetadataEditorProperty extends Component {
     /**
      * Reference to the app
@@ -45,7 +44,7 @@ export interface MetadataEditorProperty extends Component {
     /**
      * Info about the inferred and expected property widget given key-value pair
      */
-    typeInfo: { expected: PropertyWidget<unknown>; inferred: PropertyWidget<unknown>; };
+    typeInfo: { expected: PropertyWidget<unknown>; inferred: PropertyWidget<unknown> };
     /**
      * Element that contains the value input or widget
      */

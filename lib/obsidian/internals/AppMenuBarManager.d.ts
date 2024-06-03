@@ -1,2 +1,2 @@
 /** @todo Documentation incomplete */
-export interface AppMenuBarManager { }
+export interface AppMenuBarManager {}

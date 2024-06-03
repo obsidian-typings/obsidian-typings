@@ -1,22 +1,21 @@
 import type { EditorPosition } from "obsidian";
-
 export interface SearchCursor {
     /**
      * Current editor search position
      */
-    current(): { from: EditorPosition; to: EditorPosition; };
+    current(): { from: EditorPosition; to: EditorPosition };
     /**
      * All search results
      */
-    findAll(): { from: EditorPosition; to: EditorPosition; }[];
+    findAll(): { from: EditorPosition; to: EditorPosition }[];
     /**
      * Next editor search position
      */
-    findNext(): { from: EditorPosition; to: EditorPosition; };
+    findNext(): { from: EditorPosition; to: EditorPosition };
     /**
      * Previous editor search position
      */
-    findPrevious(): { from: EditorPosition; to: EditorPosition; };
+    findPrevious(): { from: EditorPosition; to: EditorPosition };
     /**
      * Replace current search result with specified text
      *

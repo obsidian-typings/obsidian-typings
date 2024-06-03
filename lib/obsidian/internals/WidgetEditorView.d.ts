@@ -1,14 +1,13 @@
 import type {
-    TFile,
-    Scope,
-    CachedMetadata,
-    TAbstractFile
-} from "obsidian";
-import type {
     EmbeddedEditorView,
     FoldInfo
 } from "../types.d.ts";
-
+import type {
+    CachedMetadata,
+    Scope,
+    TAbstractFile,
+    TFile
+} from "obsidian";
 export interface WidgetEditorView extends EmbeddedEditorView {
     /**
      * Data after reference

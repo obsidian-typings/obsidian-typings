@@ -1,10 +1,10 @@
-export { };
-
 import type { FileEntry } from "../types.d.ts";
 import type { IpcRenderer } from "electron";
 import * as fs from "node:fs";
 import * as fsPromises from "node:fs/promises";
 import * as path from "node:path";
+
+export {};
 
 declare module "obsidian" {
     /** @todo Documentation incomplete */
@@ -14,7 +14,7 @@ declare module "obsidian" {
          */
         basePath: string;
         /** @internal */
-        btime: { btime(path: string, btime: number): void; };
+        btime: { btime(path: string, btime: number): void };
         /**
          * Mapping of file/folder path to vault entry, includes non-MD files
          */
@@ -46,7 +46,7 @@ declare module "obsidian" {
         /** @internal */
         watcher: unknown;
         /** @internal */
-        watchers: Record<string, { resolvedPath: string; watcher: unknown; }>;
+        watchers: Record<string, { resolvedPath: string; watcher: unknown }>;
 
         /**
          * @param normalizedPath Path to file

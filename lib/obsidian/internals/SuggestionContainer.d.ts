@@ -2,7 +2,6 @@ import type {
     EditorSuggest,
     SearchResult
 } from "obsidian";
-
 export interface SuggestionContainer<T> {
     /**
      * Which suggestions should be picked from

@@ -1,9 +1,8 @@
+import type { MarkdownBaseView } from "../types.d.ts";
 import type {
     EditorSuggest,
     TFile
 } from "obsidian";
-import type { MarkdownBaseView } from "../types.d.ts";
-
 export interface EditorSuggests {
     /**
      * Currently active and rendered editor suggestion popup

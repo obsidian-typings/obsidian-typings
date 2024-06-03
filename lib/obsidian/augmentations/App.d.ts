@@ -1,5 +1,3 @@
-export { };
-
 import type {
     Account,
     AppMenuBarManager,
@@ -19,6 +17,8 @@ import type {
     Plugins,
     ViewRegistry
 } from "../types.d.ts";
+
+export {};
 
 declare module "obsidian" {
     interface App {
