@@ -5,6 +5,8 @@
  */
 import "obsidian";
 
+export * from "./internals/index.d.ts";
+
 import type _AbstractInputSuggest from "./AbstractInputSuggest.d.ts";
 import type _AbstractTextComponent from "./AbstractTextComponent.d.ts";
 import type _App from "./App.d.ts";
