@@ -68,6 +68,48 @@ There are three options for installing this package:
 >
 > (Add `"obsidian-typings"` to the `types` array for `compilerOptions`)
 
+> [!WARNING]
+> If your `tsconfig.json` did not specify `types` setting before, and you add it, your automatic discovery of `@types/some-package-name` will stop working and you might need to add:
+> ```json
+> {
+>     "compilerOptions": {
+>         ...
+>         "types": [
+>             "obsidian-typings",
+>             "some-package-name"
+>         ]
+>     }
+> }
+> ```
+
+## Usage
+
+To access the types from the `obsidian` module, the module import syntax doesn't change, but now you can access its internal definitions using:
+
+```ts
+import { App } from "obsidian";
+
+function printInternalPlugins(app: App): void {
+    console.log(app.internalPlugins);
+}
+```
+
+You can access the additional interfaces added by this package using:
+
+```ts
+import { InternalPlugins } from "obsidian-typings";
+
+const internalPlugins: InternalPlugins = app.internalPlugins;
+```
+
+You can access additional implementations added by this package that you can use in runtime using:
+
+```ts
+import { InternalPluginName } from "obsidian-typings/implementations";
+
+app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
+```
+
 ## Disclaimer
 
 > [!WARNING]
