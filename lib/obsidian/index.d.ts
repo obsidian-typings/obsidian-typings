@@ -3,7 +3,6 @@
  * {@link https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts}
  * {@link file://./../../node_modules/obsidian/obsidian.d.ts}
  */
-import "obsidian";
 
 import "./AbstractInputSuggest.d.ts";
 import "./AbstractTextComponent.d.ts";
