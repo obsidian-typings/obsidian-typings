@@ -5,7 +5,7 @@ import type {
 import type {
     FileExplorerView,
     FileTreeItem
-} from "./index.d.ts";
+} from "../index.d.ts";
 
 /** @todo Documentation incomplete */
 export default interface FileExplorerLeaf extends WorkspaceLeaf {

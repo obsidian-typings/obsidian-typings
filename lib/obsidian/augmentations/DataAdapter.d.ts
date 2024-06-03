@@ -1,6 +1,6 @@
 export { };
 
-import type { FileEntry } from "../internals/index.d.ts";
+import type { FileEntry } from "../index.d.ts";
 import type { IpcRenderer } from "electron";
 import * as fs from "node:fs";
 import * as fsPromises from "node:fs/promises";

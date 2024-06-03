@@ -1,6 +1,6 @@
 export { };
 
-import type { ReadViewRenderer } from "../internals/index.d.ts";
+import type { ReadViewRenderer } from "../index.d.ts";
 
 declare module "obsidian" {
     /** @todo Documentation incomplete */

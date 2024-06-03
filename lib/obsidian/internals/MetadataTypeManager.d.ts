@@ -6,7 +6,7 @@ import type {
     PropertyInfo,
     PropertyWidget,
     PropertyWidgetType
-} from "./index.d.ts";
+} from "../index.d.ts";
 
 export default interface MetadataTypeManager extends Events {
     /**

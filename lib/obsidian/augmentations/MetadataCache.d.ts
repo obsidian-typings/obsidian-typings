@@ -4,7 +4,7 @@ import type {
     CustomArrayDict,
     FileCacheEntry,
     PropertyInfo
-} from "../internals/index.d.ts";
+} from "../index.d.ts";
 
 declare module "obsidian" {
     interface MetadataCache {

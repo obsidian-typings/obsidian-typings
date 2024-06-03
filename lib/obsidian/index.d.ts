@@ -5,11 +5,6 @@
  */
 import "obsidian";
 
-/**
- * @see {@link file://./../index.d.ts}
- */
-export * from "./internals/index.ts";
-
 import "./AbstractInputSuggest.d.ts";
 import "./AbstractTextComponent.d.ts";
 import "./App.d.ts";
@@ -149,3 +144,91 @@ import "./WorkspaceSplit.d.ts";
 import "./WorkspaceTabs.d.ts";
 import "./WorkspaceWindow.d.ts";
 import "./WorkspaceWindowInitData.d.ts";
+
+export * from "./implementations/index.ts";
+
+export type { default as AbstractSearchComponent } from "./internals/AbstractSearchComponent.d.ts";
+export type { default as Account } from "./internals/Account.d.ts";
+export type { default as AppMenuBarManager } from "./internals/AppMenuBarManager.d.ts";
+export type { default as AppVaultConfig } from "./internals/AppVaultConfig.d.ts";
+export type { default as BaseEditor } from "./internals/BaseEditor.d.ts";
+export type { default as CanvasConnection } from "./internals/CanvasConnection.d.ts";
+export type { default as CanvasLeaf } from "./internals/CanvasLeaf.d.ts";
+export type { default as CanvasNode } from "./internals/CanvasNode.d.ts";
+export type { default as CanvasView } from "./internals/CanvasView.d.ts";
+export type { default as ClipBoardManager } from "./internals/ClipBoardManager.d.ts";
+export type { default as Commands } from "./internals/Commands.d.ts";
+export type { default as ConfigItem } from "./internals/ConfigItem.d.ts";
+export type { default as CustomArrayDict } from "./internals/CustomArrayDict.d.ts";
+export type { default as CustomCSS } from "./internals/CustomCSS.d.ts";
+export type { default as DragManager } from "./internals/DragManager.d.ts";
+export type { default as EditorSearchComponent } from "./internals/EditorSearchComponent.d.ts";
+export type { default as EditorSuggests } from "./internals/EditorSuggests.d.ts";
+export type { default as EmbedContext } from "./internals/EmbedContext.d.ts";
+export type { default as EmbeddableConstructor } from "./internals/EmbeddableConstructor.d.ts";
+export type { default as EmbeddedEditorView } from "./internals/EmbeddedEditorView.d.ts";
+export type { default as EmbedRegistry } from "./internals/EmbedRegistry.d.ts";
+export type { default as FileCacheEntry } from "./internals/FileCacheEntry.d.ts";
+export type { default as FileEntry } from "./internals/FileEntry.d.ts";
+export type { default as FileExplorerLeaf } from "./internals/FileExplorerLeaf.d.ts";
+export type { default as FileExplorerView } from "./internals/FileExplorerView.d.ts";
+export type { default as FileSuggest } from "./internals/FileSuggest.d.ts";
+export type { default as FileSuggestManager } from "./internals/FileSuggestManager.d.ts";
+export type { default as FileTreeItem } from "./internals/FileTreeItem.d.ts";
+export type { default as FoldInfo } from "./internals/FoldInfo.d.ts";
+export type { default as FoldManager } from "./internals/FoldManager.d.ts";
+export type { default as FootnoteCache } from "./internals/FootnoteCache.d.ts";
+export type { default as GlobalSearchLeaf } from "./internals/GlobalSearchLeaf.d.ts";
+export type { default as HotkeyManager } from "./internals/HotkeyManager.d.ts";
+export type { default as HoverLinkEvent } from "./internals/HoverLinkEvent.d.ts";
+export type { default as IFramedMarkdownEditor } from "./internals/IFramedMarkdownEditor.d.ts";
+export type { default as ImportedAttachments } from "./internals/ImportedAttachments.d.ts";
+export type { default as InfinityScroll } from "./internals/InfinityScroll.d.ts";
+export type { default as InternalPlugin } from "./internals/InternalPlugin.d.ts";
+export type { default as KeyScope } from "./internals/KeyScope.d.ts";
+export type { default as LeafEntry } from "./internals/LeafEntry.d.ts";
+export type { default as LinkUpdate } from "./internals/LinkUpdate.d.ts";
+export type { default as LoadProgress } from "./internals/LoadProgress.d.ts";
+export type { default as MarkdownBaseView } from "./internals/MarkdownBaseView.d.ts";
+export type { default as MarkdownScrollableEditView } from "./internals/MarkdownScrollableEditView.d.ts";
+export type { default as MetadataEditor } from "./internals/MetadataEditor.d.ts";
+export type { default as MetadataEditorProperty } from "./internals/MetadataEditorProperty.d.ts";
+export type { default as MetadataTypeManager } from "./internals/MetadataTypeManager.d.ts";
+export type { default as MetadataWidget } from "./internals/MetadataWidget.d.ts";
+export type { default as MobileNavbar } from "./internals/MobileNavbar.d.ts";
+export type { default as MobileToolbar } from "./internals/MobileToolbar.d.ts";
+export type { default as ObsidianDOM } from "./internals/ObsidianDOM.d.ts";
+export type { default as ObsidianTouchEvent } from "./internals/ObsidianTouchEvent.d.ts";
+export type { default as Plugins } from "./internals/Plugins.d.ts";
+export type { default as PluginUpdateManifest } from "./internals/PluginUpdateManifest.d.ts";
+export type { default as PositionedReference } from "./internals/PositionedReference.d.ts";
+export type { default as PropertyEntryData } from "./internals/PropertyEntryData.d.ts";
+export type { default as PropertyInfo } from "./internals/PropertyInfo.d.ts";
+export type { default as PropertyRenderContext } from "./internals/PropertyRenderContext.d.ts";
+export type { default as PropertyWidget } from "./internals/PropertyWidget.d.ts";
+export type { default as PropertyWidgetType } from "./internals/PropertyWidgetType.d.ts";
+export type { default as ReadViewRenderer } from "./internals/ReadViewRenderer.d.ts";
+export type { default as RecentFileTracker } from "./internals/RecentFileTracker.d.ts";
+export type { default as RendererSection } from "./internals/RendererSection.d.ts";
+export type { default as Runnable } from "./internals/Runnable.d.ts";
+export type { default as SearchCursor } from "./internals/SearchCursor.d.ts";
+export type { default as SerializedWorkspace } from "./internals/SerializedWorkspace.d.ts";
+export type { default as StateHistory } from "./internals/StateHistory.d.ts";
+export type { default as SuggestionContainer } from "./internals/SuggestionContainer.d.ts";
+export type { default as TableCell } from "./internals/TableCell.d.ts";
+export type { default as TableCellEditor } from "./internals/TableCellEditor.d.ts";
+export type { default as TableEditor } from "./internals/TableEditor.d.ts";
+export type { default as ThemeManifest } from "./internals/ThemeManifest.d.ts";
+export type { default as Token } from "./internals/Token.d.ts";
+export type { default as Tree } from "./internals/Tree.d.ts";
+export type { default as TreeItem } from "./internals/TreeItem.d.ts";
+export type { default as TreeNode } from "./internals/TreeNode.d.ts";
+export type { default as ViewRegistry } from "./internals/ViewRegistry.d.ts";
+export type { default as WeakMapWrapper } from "./internals/WeakMapWrapper.d.ts";
+export type { default as WidgetEditorView } from "./internals/WidgetEditorView.d.ts";
+export type { default as WindowSelection } from "./internals/WindowSelection.d.ts";
+
+/**
+ * @note @see {@link file://./../../index.d.ts}
+ */
+export * from "./internals/InternalPlugin.ts";

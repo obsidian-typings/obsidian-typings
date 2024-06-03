@@ -7,7 +7,7 @@ import type {
 import type {
     EmbeddedEditorView,
     FoldInfo
-} from "./index.d.ts";
+} from "../index.d.ts";
 
 export default interface WidgetEditorView extends EmbeddedEditorView {
     /**

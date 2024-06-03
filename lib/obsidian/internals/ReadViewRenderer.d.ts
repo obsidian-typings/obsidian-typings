@@ -1,4 +1,4 @@
-import type { RendererSection } from "./index.d.ts";
+import type { RendererSection } from "../index.d.ts";
 
 /** @todo Documentation incomplete */
 export default interface ReadViewRenderer {

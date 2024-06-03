@@ -15,7 +15,7 @@ import type {
     RecentFileTracker,
     SerializedWorkspace,
     StateHistory
-} from "../internals/index.d.ts";
+} from "../index.d.ts";
 
 declare module "obsidian" {
     interface Workspace {

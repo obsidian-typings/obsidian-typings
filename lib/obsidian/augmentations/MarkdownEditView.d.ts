@@ -5,7 +5,7 @@ import type { ViewUpdate } from "@codemirror/view";
 import type {
     FoldInfo,
     MarkdownScrollableEditView
-} from "../internals/index.d.ts";
+} from "../index.d.ts";
 
 declare module "obsidian" {
     interface MarkdownEditView extends MarkdownScrollableEditView {

@@ -4,7 +4,7 @@ import type { Scope } from "obsidian";
 import type {
     EditorSearchComponent,
     MarkdownBaseView
-} from "./index.d.ts";
+} from "../index.d.ts";
 
 export default interface MarkdownScrollableEditView extends MarkdownBaseView {
     /**

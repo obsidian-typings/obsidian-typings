@@ -5,9 +5,7 @@
  */
 import "@codemirror/view";
 
-/**
- * @note @see {@link file://./../index.d.ts}
- */
-export * from "./internals/index.ts";
-
 import "./EditorView.d.ts";
+
+export { default as VimEditor } from "./internals/VimEditor.ts";
+export { default as VimState } from "./internals/VimEditor.ts";
