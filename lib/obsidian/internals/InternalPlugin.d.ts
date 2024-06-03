@@ -133,8 +133,8 @@ interface InternalPlugins extends Events {
      * @remark Prefer usage of getPluginById to access a plugin
      */
     plugins: {
-        [InternalPluginNameValue in keyof InternalPluginNameInstancesMapping]: InternalPlugin<
-            InternalPluginNameInstancesMapping[InternalPluginNameValue]
+        [ID in InternalPluginName]: InternalPlugin<
+            InternalPluginNameInstancesMapping[ID]
         >;
     };
 
