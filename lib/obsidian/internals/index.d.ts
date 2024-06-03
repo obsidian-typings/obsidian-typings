@@ -36,6 +36,7 @@ export { default as IFramedMarkdownEditor } from "./IFramedMarkdownEditor.d.ts";
 export { default as ImportedAttachments } from "./ImportedAttachments.d.ts";
 export { default as InfinityScroll } from "./InfinityScroll.d.ts";
 export { default as InternalPlugin } from "./InternalPlugin.d.ts";
+export * from "./InternalPlugin.d.ts";
 export { default as InternalPluginName } from "./InternalPluginName.d.ts";
 export { default as KeyScope } from "./KeyScope.d.ts";
 export { default as LeafEntry } from "./LeafEntry.d.ts";
