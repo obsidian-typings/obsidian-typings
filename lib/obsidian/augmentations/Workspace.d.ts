@@ -15,7 +15,7 @@ import type {
     SerializedWorkspace,
     StateHistory
 } from "../index.d.ts";
-import type { InternalPluginName } from "../../index.ts";
+import type { InternalPluginName } from "../implementations.ts";
 
 declare module "obsidian" {
     interface Workspace {
