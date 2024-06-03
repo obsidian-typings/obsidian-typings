@@ -1,3 +1,8 @@
+/**
+ * @see Original module
+ * {@link https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts}
+ * {@link file://./../../node_modules/obsidian/obsidian.d.ts}
+ */
 import "obsidian";
 
 export * from "./AbstractInputSuggest.d.ts";
@@ -279,11 +284,6 @@ import type _WorkspaceWindow from "./WorkspaceWindow.d.ts";
 export * from "./WorkspaceWindowInitData.d.ts";
 import type _WorkspaceWindowInitData from "./WorkspaceWindowInitData.d.ts";
 
-/**
- * @see Original module
- * {@link https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts}
- * {@link file://./../../node_modules/obsidian/obsidian.d.ts}
- */
 declare module "obsidian" {
     interface AbstractInputSuggest extends _AbstractInputSuggest {}
     interface AbstractTextComponent extends _AbstractTextComponent {}
