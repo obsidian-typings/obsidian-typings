@@ -4,7 +4,7 @@ import type {
 } from "obsidian";
 import type { EmbeddableConstructor } from "../index.d.ts";
 
-export default interface EmbedRegistry extends Events {
+export interface EmbedRegistry extends Events {
     /**
      * Mapping of file extensions to constructors for embeddable widgets
      */

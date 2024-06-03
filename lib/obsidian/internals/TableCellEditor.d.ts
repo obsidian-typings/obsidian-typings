@@ -4,4 +4,4 @@ import type {
 } from "../index.d.ts";
 
 /** @todo Documentation incomplete */
-export default interface TableCellEditor extends MarkdownBaseView, TableCell { }
+export interface TableCellEditor extends MarkdownBaseView, TableCell { }

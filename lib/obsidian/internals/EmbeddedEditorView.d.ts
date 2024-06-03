@@ -8,7 +8,7 @@ import type {
 } from "obsidian";
 import type { IFramedMarkdownEditor } from "../index.d.ts";
 
-export default interface EmbeddedEditorView extends Component {
+export interface EmbeddedEditorView extends Component {
     /**
      * Reference to the app
      */

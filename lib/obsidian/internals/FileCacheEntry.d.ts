@@ -1,4 +1,4 @@
-export default interface FileCacheEntry {
+export interface FileCacheEntry {
     /**
      * Hash of file contents
      */

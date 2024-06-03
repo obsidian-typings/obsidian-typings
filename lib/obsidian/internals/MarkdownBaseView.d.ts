@@ -17,7 +17,7 @@ import type {
     Token
 } from "../index.d.ts";
 
-export default interface MarkdownBaseView extends Component {
+export interface MarkdownBaseView extends Component {
     /**
      * Reference to the app
      */

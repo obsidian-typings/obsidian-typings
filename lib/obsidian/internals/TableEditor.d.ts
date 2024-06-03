@@ -1,2 +1,2 @@
 /** @todo Documentation incomplete */
-export default interface TableEditor { }
+export interface TableEditor { }

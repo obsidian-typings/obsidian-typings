@@ -7,7 +7,7 @@ import type {
 import type { InternalPluginName } from "../index.d.ts";
 
 /** @todo Documentation incomplete */
-export default interface InternalPlugin<TInstance extends InternalPluginInstance = InternalPluginInstance> extends Plugin {
+export interface InternalPlugin<TInstance extends InternalPluginInstance = InternalPluginInstance> extends Plugin {
     instance: TInstance;
 
     disable(): void;

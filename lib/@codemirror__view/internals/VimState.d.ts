@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-export default interface VimState {
+export interface VimState {
     vim: {
         inputState: {
             changeQueue: null;

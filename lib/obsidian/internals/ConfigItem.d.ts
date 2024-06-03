@@ -1,7 +1,5 @@
-export default ConfigItem;
-
 /** @todo Documentation incomplete */
-type ConfigItem =
+export type ConfigItem =
     | "accentColor"
     | "alwaysUpdateLinks"
     | "attachmentFolderPath"

@@ -4,7 +4,7 @@ import type {
 } from "obsidian";
 import type { PluginUpdateManifest } from "../index.d.ts";
 
-export default interface Plugins {
+export interface Plugins {
     /**
      * Reference to App
      */

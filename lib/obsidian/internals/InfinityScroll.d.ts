@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-export default interface InfinityScroll {
+export interface InfinityScroll {
     height: number;
     lastScroll: number;
     queued: unknown | null;

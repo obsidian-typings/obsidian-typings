@@ -1,1 +1,1 @@
-export { default as InternalPluginName } from "./InternalPluginName.ts";
+export { InternalPluginName } from "./InternalPluginName.ts";

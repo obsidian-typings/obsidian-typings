@@ -1,7 +1,7 @@
 import type { WorkspaceLeaf } from "obsidian";
 
 /** @todo Documentation incomplete */
-export default interface HoverLinkEvent {
+export interface HoverLinkEvent {
     event: MouseEvent;
     hoverParent: WorkspaceLeaf;
     linktext: string;

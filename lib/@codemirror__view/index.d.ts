@@ -7,5 +7,5 @@ import "@codemirror/view";
 
 import "./EditorView.d.ts";
 
-export { default as VimEditor } from "./internals/VimEditor.ts";
-export { default as VimState } from "./internals/VimState.ts";
+export { VimEditor } from "./internals/VimEditor.ts";
+export { VimState } from "./internals/VimState.ts";

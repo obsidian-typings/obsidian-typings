@@ -3,7 +3,7 @@ import type {
     PropertyEntryData,
     PropertyRenderContext
 } from "../index.d.ts";
-export default interface PropertyWidget<T> {
+export interface PropertyWidget<T> {
     /**
      * Lucide-dev icon associated with the widget
      */

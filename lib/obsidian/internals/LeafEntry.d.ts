@@ -4,7 +4,7 @@ import type {
 } from "obsidian";
 
 /** @todo Documentation incomplete */
-export default interface LeafEntry {
+export interface LeafEntry {
     children?: LeafEntry[];
     direction?: SplitDirection;
     id: string;

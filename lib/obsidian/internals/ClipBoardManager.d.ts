@@ -5,7 +5,7 @@ import type {
 } from "obsidian";
 import type { ImportedAttachments } from "../index.d.ts";
 
-export default interface ClipBoardManager {
+export interface ClipBoardManager {
     /**
      * Reference to the app
      */

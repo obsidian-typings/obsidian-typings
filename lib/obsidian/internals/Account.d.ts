@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-export default interface Account {
+export interface Account {
     /**
      * The company associated with the activated commercial license
      */

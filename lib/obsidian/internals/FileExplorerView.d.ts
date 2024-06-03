@@ -12,7 +12,7 @@ import type {
 } from "../index.d.ts";
 
 /** @todo Documentation incomplete */
-export default interface FileExplorerView extends View {
+export interface FileExplorerView extends View {
     /**
      * Mapping of file path to tree item
      */

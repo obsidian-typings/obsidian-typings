@@ -4,7 +4,7 @@ import type {
 } from "obsidian";
 import type { PositionedReference } from "../index.d.ts";
 
-export default interface LinkUpdate {
+export interface LinkUpdate {
     /**
      * Reference to App
      */

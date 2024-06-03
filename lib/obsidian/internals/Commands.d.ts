@@ -3,7 +3,7 @@ import type {
     Command
 } from "obsidian";
 
-export default interface Commands {
+export interface Commands {
     /**
      * Reference to App
      */

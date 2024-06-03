@@ -1,9 +1,7 @@
-export default PropertyWidgetType;
-
 /**
  * @todo Documentation incomplete
  */
-type PropertyWidgetType =
+export type PropertyWidgetType =
     | "aliases"
     | "checkbox"
     | "date"

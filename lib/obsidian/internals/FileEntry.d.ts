@@ -1,4 +1,4 @@
-export default interface FileEntry {
+export interface FileEntry {
     /**
      * Creation time (if file)
      */

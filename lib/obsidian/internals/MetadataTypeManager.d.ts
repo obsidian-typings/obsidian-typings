@@ -8,7 +8,7 @@ import type {
     PropertyWidgetType
 } from "../index.d.ts";
 
-export default interface MetadataTypeManager extends Events {
+export interface MetadataTypeManager extends Events {
     /**
      * Reference to App
      */

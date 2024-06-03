@@ -8,7 +8,7 @@ import type {
 } from "../index.d.ts";
 
 /** @todo Documentation incomplete */
-export default interface FileExplorerLeaf extends WorkspaceLeaf {
+export interface FileExplorerLeaf extends WorkspaceLeaf {
     view: FileExplorerView;
 
     /** @internal */

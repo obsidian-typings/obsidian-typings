@@ -9,7 +9,7 @@ import type { EditorPosition } from "obsidian";
  * @todo Potential risk of confusion when `Editor` is constructed from the Obsidian module, as it only has the
  *       methods from `BaseEditor`, *not* `Editor`
  */
-export default interface BaseEditor {
+export interface BaseEditor {
     /**
      * CodeMirror editor instance
      */

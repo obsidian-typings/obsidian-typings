@@ -5,7 +5,7 @@ import type {
 import type { ThemeManifest } from "../index.d.ts";
 
 /** @todo Documentation incomplete */
-export default interface CustomCSS extends Component {
+export interface CustomCSS extends Component {
     /**
      * Reference to App
      */

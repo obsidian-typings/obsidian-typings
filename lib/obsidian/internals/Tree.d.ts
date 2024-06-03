@@ -8,7 +8,7 @@ import type {
     TreeNode
 } from "../index.d.ts";
 
-export default interface Tree<T> {
+export interface Tree<T> {
     /**
      * Currently active item in tree view
      */

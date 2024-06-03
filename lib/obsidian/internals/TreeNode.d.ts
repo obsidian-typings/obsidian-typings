@@ -1,9 +1,7 @@
-export default TreeNode;
-
 /**
  * @todo Documentation incomplete
  */
-type TreeNode<T = object> = T & {
+export type TreeNode<T = object> = T & {
     childrenEl: HTMLElement;
     el: HTMLElement;
     info: {

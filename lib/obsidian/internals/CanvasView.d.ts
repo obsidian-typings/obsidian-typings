@@ -1,1 +1,1 @@
-export default interface CanvasView { }
+export interface CanvasView { }

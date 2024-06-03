@@ -6,7 +6,7 @@ import type {
     MarkdownBaseView
 } from "../index.d.ts";
 
-export default interface MarkdownScrollableEditView extends MarkdownBaseView {
+export interface MarkdownScrollableEditView extends MarkdownBaseView {
     /**
      * List of CSS classes applied to the editor
      */

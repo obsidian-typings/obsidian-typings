@@ -1,4 +1,4 @@
-const InternalPluginName = {
+export const InternalPluginName = {
     AudioRecorder: "audio-recorder",
     Backlink: "backlink",
     Bookmarks: "bookmarks",
@@ -29,5 +29,3 @@ const InternalPluginName = {
     Workspaces: "workspaces",
     ZkPrefixer: "zk-prefixer"
 } as const;
-
-export default InternalPluginName;

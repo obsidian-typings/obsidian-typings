@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-export default interface FoldInfo {
+export interface FoldInfo {
     folds: { from: number; to: number; }[];
     lines: number;
 }

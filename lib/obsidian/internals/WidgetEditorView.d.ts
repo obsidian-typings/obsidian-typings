@@ -9,7 +9,7 @@ import type {
     FoldInfo
 } from "../index.d.ts";
 
-export default interface WidgetEditorView extends EmbeddedEditorView {
+export interface WidgetEditorView extends EmbeddedEditorView {
     /**
      * Data after reference
      */

@@ -4,7 +4,7 @@ import type {
     Workspace
 } from "obsidian";
 
-export default interface RecentFileTracker {
+export interface RecentFileTracker {
     /**
      * List of last opened file paths, limited to 50
      */

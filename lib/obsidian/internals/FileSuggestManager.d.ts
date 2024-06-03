@@ -6,7 +6,7 @@ import type {
 } from "obsidian";
 import type { Runnable } from "../index.d.ts";
 
-export default interface FileSuggestManager {
+export interface FileSuggestManager {
     /**
      * Reference to the app
      */

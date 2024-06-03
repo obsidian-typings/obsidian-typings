@@ -1,4 +1,4 @@
-export default interface AppVaultConfig {
+export interface AppVaultConfig {
     /**
      * Appearance > Accent color
      */

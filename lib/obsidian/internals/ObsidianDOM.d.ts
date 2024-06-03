@@ -1,4 +1,4 @@
-export default interface ObsidianDOM {
+export interface ObsidianDOM {
     /**
      * Root element of the application
      */

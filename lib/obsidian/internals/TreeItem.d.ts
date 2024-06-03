@@ -1,10 +1,8 @@
 import type { View } from "obsidian";
 import type { TreeNode } from "../index.d.ts";
 
-export default TreeItem;
-
 /** @todo Documentation incomplete */
-type TreeItem<T> = TreeNode<T> & {
+export type TreeItem<T> = TreeNode<T> & {
     collapseEl: HTMLElement;
     /**
      * @deprecated Potentially removed in 1.6.0 for some tree-likes

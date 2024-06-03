@@ -3,7 +3,7 @@ import type {
     Reference
 } from "obsidian";
 
-export default interface PositionedReference extends Reference {
+export interface PositionedReference extends Reference {
     /**
      * Position of the reference in the file
      */

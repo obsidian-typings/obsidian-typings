@@ -9,7 +9,7 @@ import type {
     PropertyEntryData
 } from "../index.d.ts";
 
-export default interface MetadataEditor extends Component {
+export interface MetadataEditor extends Component {
     /**
      * Button element for adding a new property
      */

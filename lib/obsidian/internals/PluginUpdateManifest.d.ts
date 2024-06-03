@@ -1,6 +1,6 @@
 import type { PluginManifest } from "obsidian";
 
-export default interface PluginUpdateManifest {
+export interface PluginUpdateManifest {
     /**
      * Manifest of the plugin
      */

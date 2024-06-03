@@ -1,1 +1,1 @@
-export default interface MetadataWidget { }
+export interface MetadataWidget { }

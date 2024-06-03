@@ -1,4 +1,4 @@
-export default interface PropertyEntryData<T> {
+export interface PropertyEntryData<T> {
     /**
      * Property key
      */

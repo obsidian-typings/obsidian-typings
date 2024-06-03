@@ -1,7 +1,7 @@
 import type { App } from "obsidian";
 import type { MetadataEditor } from "../index.d.ts";
 
-export default interface PropertyRenderContext {
+export interface PropertyRenderContext {
     /**
      * Reference to the app
      */
