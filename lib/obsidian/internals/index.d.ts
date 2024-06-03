@@ -1,3 +1,5 @@
+export * from "./implementations/index.ts";
+
 export { default as AbstractSearchComponent } from "./AbstractSearchComponent.ts";
 export { default as Account } from "./Account.ts";
 export { default as AppMenuBarManager } from "./AppMenuBarManager.ts";
@@ -36,7 +38,6 @@ export { default as IFramedMarkdownEditor } from "./IFramedMarkdownEditor.ts";
 export { default as ImportedAttachments } from "./ImportedAttachments.ts";
 export { default as InfinityScroll } from "./InfinityScroll.ts";
 export { default as InternalPlugin } from "./InternalPlugin.ts";
-export { default as InternalPluginName } from "./InternalPluginName.ts";
 export { default as KeyScope } from "./KeyScope.ts";
 export { default as LeafEntry } from "./LeafEntry.ts";
 export { default as LinkUpdate } from "./LinkUpdate.ts";

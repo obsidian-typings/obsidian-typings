@@ -14,7 +14,7 @@ export default interface InternalPlugin<TInstance extends InternalPluginInstance
     enable(): Promise<void>;
 }
 
-export type InternalPluginName = typeof InternalPluginName[keyof typeof InternalPluginName];
+export type InternalPluginNameType = typeof InternalPluginName[keyof typeof InternalPluginName];
 
 export interface InternalPluginInstance {
     plugin: InternalPlugin<this>;
@@ -126,7 +126,7 @@ export interface InternalPlugins extends Events {
     /**
      * Mapping of whether an internal plugin is enabled
      */
-    config: Record<InternalPluginName, boolean>;
+    config: Record<InternalPluginNameType, boolean>;
     /** @internal */
     migration: boolean;
     /**
@@ -135,7 +135,7 @@ export interface InternalPlugins extends Events {
      * @remark Prefer usage of getPluginById to access a plugin
      */
     plugins: {
-        [ID in InternalPluginName]: InternalPlugin<
+        [ID in InternalPluginNameType]: InternalPlugin<
             InternalPluginNameInstancesMapping[ID]
         >;
     };
@@ -147,7 +147,7 @@ export interface InternalPlugins extends Events {
      *
      * @param id - ID of the plugin to get
      */
-    getEnabledPluginById<ID extends InternalPluginName>(
+    getEnabledPluginById<ID extends InternalPluginNameType>(
         id: ID
     ): InternalPluginNameInstancesMapping[ID] | null;
     /**
@@ -159,7 +159,7 @@ export interface InternalPlugins extends Events {
      *
      * @param id - ID of the plugin to get
      */
-    getPluginById<ID extends InternalPluginName>(
+    getPluginById<ID extends InternalPluginNameType>(
         id: ID
     ): InternalPlugin<InternalPluginNameInstancesMapping[ID]> | null;
     /** @internal */
