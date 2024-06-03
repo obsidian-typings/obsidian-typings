@@ -35,7 +35,7 @@
     },
     "scripts": {
         "build": "tsc --build --force",
-        "format": "bun run scripts/sort-interfaces.ts obsidian-ex.d.ts && bun dprint fmt obsidian-ex.d.ts",
+        "format": "bun run scripts/sort-interfaces.ts ./lib/ && bun dprint fmt",
         "release-patch": "bun run scripts/bump-version.ts patch",
         "release-minor": "bun run scripts/bump-version.ts minor",
         "release-major": "bun run scripts/bump-version.ts major"

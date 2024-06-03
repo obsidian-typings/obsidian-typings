@@ -7,11 +7,11 @@
         "quoteStyle": "alwaysDouble",
         "quoteProps": "preserve",
         "newLineKind": "crlf",
-        "useBraces": "whenNotSingleLine",
+        "useBraces": "preferNone",
         "bracePosition": "sameLineUnlessHanging",
         "singleBodyPosition": "maintain",
         "nextControlFlowPosition": "sameLine",
-        "trailingCommas": "onlyMultiLine",
+        "trailingCommas": "never",
         "operatorPosition": "nextLine",
         "preferHanging": false,
         "preferSingleLine": false,
@@ -32,15 +32,23 @@
         "exportDeclaration.spaceSurroundingNamedExports": true,
         "importDeclaration.spaceSurroundingNamedImports": true,
         "typeAssertion.spaceBeforeExpression": true,
-        "module.sortImportDeclarations": "caseInsensitive",
-        "module.sortExportDeclarations": "caseInsensitive",
+        "module.sortImportDeclarations": "maintain",
+        "module.sortExportDeclarations": "maintain",
         "exportDeclaration.sortNamedExports": "caseInsensitive",
         "importDeclaration.sortNamedImports": "caseInsensitive"
+    },
+    "json": {
+        "indentWidth": 4,
+        "useTabs": false,
+        "newLineKind": "crlf",
+        "preferSingleLine": false,
+        "trailingCommas": "never"
     },
     "excludes": [
         "**/node_modules"
     ],
     "plugins": [
-        "https://plugins.dprint.dev/typescript-0.90.3.wasm"
+        "https://plugins.dprint.dev/typescript-0.90.3.wasm",
+        "https://plugins.dprint.dev/json-0.19.3.wasm"
     ]
 }

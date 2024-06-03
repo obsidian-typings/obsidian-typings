@@ -1,5 +1,5 @@
-import { readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
+import { readFileSync, writeFileSync } from "node:fs";
 import process from "node:process";
 
 const versionType = process.argv[2];
@@ -32,12 +32,12 @@ writeFileSync("package.d.tson", JSON.stringify(package_json, null, 4).replace(/\
 writeFileSync("package-lock.d.tson", JSON.stringify(package_lock_json, null, 4).replace(/\n/g, "\r\n"));
 
 try {
-    spawnSync('git', ['add', 'CHANGELOG.md', 'package.d.tson', 'package-lock.d.tson']);
-    spawnSync('git', ['commit', '-m', `chore(release): ${newVersion}`]);
-    spawnSync('git', ['tag', '-a', newVersion, '-m', `chore(release): ${newVersion}`]);
+    spawnSync("git", ["add", "CHANGELOG.md", "package.json", "package-lock.json"]);
+    spawnSync("git", ["commit", "-m", `chore(release): ${newVersion}`]);
+    spawnSync("git", ["tag", "-a", newVersion, "-m", `chore(release): ${newVersion}`]);
     console.log(`Package has been successfully bumped | ${currentVersion} -> ${newVersion} [${versionType}]`);
 } catch (error) {
-    console.error('Error running git commands:', error);
+    console.error("Error running git commands:", error);
 }
 
 process.exit(0);
