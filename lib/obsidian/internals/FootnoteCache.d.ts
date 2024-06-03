@@ -1,3 +1,5 @@
+import type { CacheItem } from "obsidian";
+
 /**
  * Cache item containing a notes footnotes metadata
  */

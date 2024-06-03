@@ -1,9 +1,15 @@
-import { WeakMapWrapper } from "./WeakMapWrapper.d.ts";
-import { View } from "./View.d.ts";
-import { Tree } from "./Tree.d.ts";
-import { TFile } from "./TFile.d.ts";
-import { TAbstractFile } from "./TAbstractFile.d.ts";
-import { FileTreeItem } from "./FileTreeItem.d.ts";
+import type {
+    TAbstractFile,
+    TFile,
+    TFolder,
+    View
+} from "obsidian";
+import type {
+    FileTreeItem,
+    Tree,
+    TreeItem,
+    WeakMapWrapper
+} from "./index.d.ts";
 
 /** @todo Documentation incomplete */
 export default interface FileExplorerView extends View {

@@ -1,5 +1,7 @@
-import { Modal } from "./Modal.d.ts";
-import { SettingTab } from "./SettingTab.d.ts";
+import type {
+    Modal,
+    SettingTab
+} from "obsidian";
 
 export default interface Setting extends Modal {
     /**

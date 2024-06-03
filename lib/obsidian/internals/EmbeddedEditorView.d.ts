@@ -1,9 +1,12 @@
-import { EditorState } from "@codemirror/state";
-import { Component } from "./Component.d.ts";
-import { TFile } from "./TFile.d.ts";
-import { MarkdownPreviewView } from "./MarkdownPreviewView.d.ts";
-import { IFramedMarkdownEditor } from "./IFramedMarkdownEditor.d.ts";
-import { HoverPopover } from "./HoverPopover.d.ts";
+import type { EditorState } from "@codemirror/state";
+import type {
+    App,
+    Component,
+    HoverPopover,
+    MarkdownPreviewView,
+    TFile
+} from "obsidian";
+import type { IFramedMarkdownEditor } from "./index.d.ts";
 
 export default interface EmbeddedEditorView extends Component {
     /**

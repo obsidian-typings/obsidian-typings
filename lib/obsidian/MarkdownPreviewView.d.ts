@@ -1,5 +1,5 @@
-import { ReadViewRenderer } from "./ReadViewRenderer.d.ts";
-import { MarkdownView } from "./MarkdownView.d.ts";
+import type { MarkdownView } from "obsidian";
+import type { ReadViewRenderer } from "./internals/index.d.ts";
 
 /** @todo Documentation incomplete */
 export default interface MarkdownPreviewView {

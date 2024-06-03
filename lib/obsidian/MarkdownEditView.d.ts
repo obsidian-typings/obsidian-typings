@@ -1,8 +1,14 @@
-import { Extension } from "@codemirror/state";
-import { ViewUpdate } from "@codemirror/view";
-import { FoldInfo } from "./FoldInfo.d.ts";
-import { MarkdownView } from "./MarkdownView.d.ts";
-import { MarkdownScrollableEditView } from "./MarkdownScrollableEditView.d.ts";
+import type { Extension } from "@codemirror/state";
+import type { ViewUpdate } from "@codemirror/view";
+import type {
+    EditorRange,
+    EditorSelection,
+    MarkdownView
+} from "obsidian";
+import type {
+    FoldInfo,
+    MarkdownScrollableEditView
+} from "./internals/index.d.ts";
 
 export default interface MarkdownEditView extends MarkdownScrollableEditView {
     /**

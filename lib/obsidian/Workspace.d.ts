@@ -1,26 +1,40 @@
-import { Extension } from "@codemirror/state";
-import { InternalPluginName } from "../index.d.ts";
-import { CanvasConnection } from "./CanvasConnection.d.ts";
-import { CanvasNode } from "./CanvasNode.d.ts";
-import { CanvasView } from "./CanvasView.d.ts";
-import { EditorSuggest } from "./EditorSuggest.d.ts";
-import { EventRef } from "./EventRef.d.ts";
-import { FileExplorerLeaf } from "./FileExplorerLeaf.d.ts";
-import { FileView } from "./FileView.d.ts";
-import { GlobalSearchLeaf } from "./GlobalSearchLeaf.d.ts";
-import { HoverLinkEvent } from "./HoverLinkEvent.d.ts";
-import { HoverLinkSource } from "./HoverLinkSource.d.ts";
-import { LeafEntry } from "./LeafEntry.d.ts";
-import { Menu } from "./Menu.d.ts";
-import { ObsidianTouchEvent } from "./ObsidianTouchEvent.d.ts";
-import { RecentFileTracker } from "./RecentFileTracker.d.ts";
-import { Scope } from "./Scope.d.ts";
-import { SerializedWorkspace } from "./SerializedWorkspace.d.ts";
-import { StateHistory } from "./StateHistory.d.ts";
-import { TFile } from "./TFile.d.ts";
-import { View } from "./View.d.ts";
-import { WorkspaceSplit } from "./WorkspaceSplit.d.ts";
-import { WorkspaceLeaf } from "./WorkspaceLeaf.d.ts";
+import type { Extension } from "@codemirror/state";
+import type {
+    App,
+    Constructor,
+    EditorSuggest,
+    EventRef,
+    FileView,
+    HoverLinkSource,
+    Menu,
+    ObsidianProtocolHandler,
+    OpenViewState,
+    Scope,
+    SplitDirection,
+    TFile,
+    View,
+    WorkspaceLeaf,
+    WorkspaceMobileDrawer,
+    WorkspaceSidedock,
+    WorkspaceSplit,
+    WorkspaceTabs,
+    WorkspaceWindow,
+    WorkspaceWindowInitData
+} from "obsidian";
+import type {
+    CanvasConnection,
+    CanvasNode,
+    CanvasView,
+    FileExplorerLeaf,
+    GlobalSearchLeaf,
+    HoverLinkEvent,
+    InternalPluginName,
+    LeafEntry,
+    ObsidianTouchEvent,
+    RecentFileTracker,
+    SerializedWorkspace,
+    StateHistory
+} from "./internals/index.d.ts";
 
 export default interface Workspace {
     /**

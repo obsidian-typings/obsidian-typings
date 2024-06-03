@@ -1,6 +1,9 @@
-import { TAbstractFile } from "./TAbstractFile.d.ts";
-import { MarkdownView } from "./MarkdownView.d.ts";
-import { ImportedAttachments } from "./ImportedAttachments.d.ts";
+import type {
+    App,
+    MarkdownView,
+    TAbstractFile
+} from "obsidian";
+import type { ImportedAttachments } from "./index.d.ts";
 
 export default interface ClipBoardManager {
     /**

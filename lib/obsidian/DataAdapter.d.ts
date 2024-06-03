@@ -1,8 +1,9 @@
-import { IpcRenderer } from "electron";
+import type { DataWriteOptions } from "obsidian";
+import type { FileEntry } from "./internals/index.d.ts";
+import type { IpcRenderer } from "electron";
 import * as fs from "node:fs";
 import * as fsPromises from "node:fs/promises";
 import * as path from "node:path";
-import { FileEntry } from "./FileEntry.d.ts";
 
 /** @todo Documentation incomplete */
 export default interface DataAdapter {

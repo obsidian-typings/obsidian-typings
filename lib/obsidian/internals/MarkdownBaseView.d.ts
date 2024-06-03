@@ -1,15 +1,21 @@
-import { Extension } from "@codemirror/state";
-import { EditorView, ViewUpdate } from "@codemirror/view";
-import { ClipBoardManager } from "./ClipBoardManager.d.ts";
-import { Component } from "./Component.d.ts";
-import { Editor } from "./Editor.d.ts";
-import { EditorSuggests } from "./EditorSuggests.d.ts";
-import { FoldInfo } from "./FoldInfo.d.ts";
-import { Token } from "./Token.d.ts";
-import { TFile } from "./TFile.d.ts";
-import { TableEditor } from "./TableEditor.d.ts";
-import { TableCellEditor } from "./TableCellEditor.d.ts";
-import { TableCell } from "./TableCell.d.ts";
+import type { Extension } from "@codemirror/state";
+import type { EditorView, ViewUpdate } from "@codemirror/view";
+import type {
+    App,
+    Component,
+    Editor,
+    MarkdownFileInfo,
+    TFile
+} from "obsidian";
+import type {
+    ClipBoardManager,
+    EditorSuggests,
+    FoldInfo,
+    TableCell,
+    TableCellEditor,
+    TableEditor,
+    Token
+} from "./index.d.ts";
 
 export default interface MarkdownBaseView extends Component {
     /**

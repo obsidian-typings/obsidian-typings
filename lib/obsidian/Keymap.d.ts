@@ -1,3 +1,2 @@
 /** @todo Documentation incomplete */
-export default interface Keymap {
-}
+export default interface Keymap { }

@@ -1,6 +1,8 @@
-import { Component } from "./Component.d.ts";
-import { Scope } from "./Scope.d.ts";
-import { MenuItem } from "./MenuItem.d.ts";
+import type {
+    Component,
+    MenuItem,
+    Scope
+} from "obsidian";
 
 export default interface Menu extends Component {
     /**

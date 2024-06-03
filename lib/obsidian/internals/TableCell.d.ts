@@ -1,5 +1,4 @@
-import { TableCellEditor } from "./TableCellEditor.d.ts";
-
+import type { TableCellEditor } from "./index.d.ts";
 /** @todo Documentation incomplete */
 export default interface TableCell {
     col: number;

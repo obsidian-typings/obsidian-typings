@@ -1,1 +1,1 @@
-export default interface FuzzyMatch { }
+export default interface FuzzyMatch<T> { }

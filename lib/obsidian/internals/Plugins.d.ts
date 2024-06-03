@@ -1,5 +1,8 @@
-import { PluginManifest } from "./PluginManifest.d.ts";
-import { PluginUpdateManifest } from "./PluginUpdateManifest.d.ts";
+import type {
+    App,
+    PluginManifest
+} from "obsidian";
+import type { PluginUpdateManifest } from "./index.d.ts";
 
 export default interface Plugins {
     /**

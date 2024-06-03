@@ -1,6 +1,9 @@
-import { EventRef } from "./EventRef.d.ts";
-import { View } from "./View.d.ts";
-import { WorkspaceLeaf } from "./WorkspaceLeaf.d.ts";
+import type {
+    EventRef,
+    Events,
+    View,
+    WorkspaceLeaf
+} from "obsidian";
 
 export default interface ViewRegistry extends Events {
     /**

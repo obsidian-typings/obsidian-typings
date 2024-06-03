@@ -1,11 +1,18 @@
-import { BlockCache } from "./BlockCache.d.ts";
-import { CachedMetadata } from "./CachedMetadata.d.ts";
-import { CustomArrayDict } from "./CustomArrayDict.d.ts";
-import { EventRef } from "./EventRef.d.ts";
-import { FileCacheEntry } from "./FileCacheEntry.d.ts";
-import { Vault } from "./Vault.d.ts";
-import { TFile } from "./TFile.d.ts";
-import { PropertyInfo } from "./PropertyInfo.d.ts";
+import type {
+    App,
+    BlockCache,
+    CachedMetadata,
+    TFile,
+    Vault,
+    LinkCache,
+    Reference,
+    EventRef
+} from "obsidian";
+import type {
+    CustomArrayDict,
+    FileCacheEntry,
+    PropertyInfo
+} from "./internals/index.d.ts";
 
 export default interface MetadataCache {
     /**

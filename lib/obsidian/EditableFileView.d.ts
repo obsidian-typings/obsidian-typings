@@ -1,4 +1,4 @@
-import { TFile } from "./TFile.d.ts";
+import type { TFile } from "obsidian";
 
 /** @todo Documentation incomplete */
 export default interface EditableFileView {

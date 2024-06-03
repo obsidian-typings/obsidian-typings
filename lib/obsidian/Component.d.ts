@@ -1,4 +1,4 @@
-import { EventRef } from "./EventRef.d.ts";
+import type { EventRef } from "obsidian";
 
 export default interface Component {
     /**

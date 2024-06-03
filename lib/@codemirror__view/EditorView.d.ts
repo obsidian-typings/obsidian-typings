@@ -1,4 +1,4 @@
-import type VimEditor from "./internals/VimEditor.d.ts";
+import type { VimEditor } from "./internals/index.d.ts";
 
 /** @todo Documentation incomplete */
 export default interface EditorView {

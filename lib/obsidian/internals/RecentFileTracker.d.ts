@@ -1,6 +1,8 @@
-import { Workspace } from "./Workspace.d.ts";
-import { Vault } from "./Vault.d.ts";
-import { TFile } from "./TFile.d.ts";
+import type {
+    TFile,
+    Vault,
+    Workspace
+} from "obsidian";
 
 export default interface RecentFileTracker {
     /**

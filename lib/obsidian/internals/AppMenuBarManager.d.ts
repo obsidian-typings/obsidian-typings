@@ -1,3 +1,2 @@
 /** @todo Documentation incomplete */
-export default interface AppMenuBarManager {
-}
+export default interface AppMenuBarManager { }

@@ -1,4 +1,5 @@
-import { EditorView } from "@codemirror/view";
+import type { EditorView } from "@codemirror/view";
+import type { EditorPosition } from "obsidian";
 
 /**
  * @remark `BaseEditor` is never used in the Obsidian codebase, but is exposed in the Obsidian module as `Editor`.

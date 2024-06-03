@@ -1,3 +1,5 @@
+import type { App } from "obsidian";
+
 /** @todo Documentation incomplete */
 export default interface BlockCache {
     /**

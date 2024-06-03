@@ -5,7 +5,7 @@
  */
 import "@codemirror/view";
 
-export * from "./internals/index.d.ts";
+export * from "./internals/index.ts";
 
 import type _EditorView from "./EditorView.d.ts";
 

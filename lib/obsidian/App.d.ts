@@ -1,3 +1,34 @@
+import type {
+    DataAdapter,
+    FileManager,
+    MetadataCache,
+    Scope,
+    Setting,
+    TFile,
+    TFolder,
+    Vault,
+    Workspace
+} from "obsidian";
+import type {
+    Account,
+    AppMenuBarManager,
+    Commands,
+    CustomCSS,
+    DragManager,
+    EmbedRegistry,
+    FoldManager,
+    HotkeyManager,
+    ImportedAttachments,
+    InternalPlugins,
+    LoadProgress,
+    MetadataTypeManager,
+    MobileNavbar,
+    MobileToolbar,
+    ObsidianDOM,
+    Plugins,
+    ViewRegistry
+} from "./internals/index.d.ts";
+
 export default interface App {
     /**
      * The account signed in to Obsidian

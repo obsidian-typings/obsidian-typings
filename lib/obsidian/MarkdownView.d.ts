@@ -1,9 +1,16 @@
-import { MarkdownEditView } from "./MarkdownEditView.d.ts";
-import { MarkdownPreviewView } from "./MarkdownPreviewView.d.ts";
-import { Token } from "./Token.d.ts";
-import { TFile } from "./TFile.d.ts";
-import { MetadataEditor } from "./MetadataEditor.d.ts";
-import { Menu } from "./Menu.d.ts";
+import type {
+    EditorRangeOrCaret,
+    MarkdownEditView,
+    MarkdownPreviewView,
+    MarkdownSubView,
+    MarkdownViewModeType,
+    Menu,
+    TFile
+} from "obsidian";
+import type {
+    MetadataEditor,
+    Token
+} from "./internals/index.d.ts";
 
 export default interface MarkdownView {
     /**

@@ -1,3 +1,5 @@
+import type { Events } from "obsidian";
+
 export default interface EventRef {
     /**
      * Context applied to the event callback

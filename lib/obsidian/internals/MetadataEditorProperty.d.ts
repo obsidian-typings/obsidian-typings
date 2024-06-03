@@ -1,8 +1,13 @@
-import { Component } from "./Component.d.ts";
-import { MetadataEditor } from "./MetadataEditor.d.ts";
-import { PropertyWidget } from "./PropertyWidget.d.ts";
-import { PropertyEntryData } from "./PropertyEntryData.d.ts";
-import { MetadataWidget } from "./MetadataWidget.d.ts";
+import type {
+    App,
+    Component
+} from "obsidian";
+import type {
+    MetadataEditor,
+    MetadataWidget,
+    PropertyEntryData,
+    PropertyWidget
+} from "./index.d.ts";
 
 export default interface MetadataEditorProperty extends Component {
     /**

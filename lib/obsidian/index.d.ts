@@ -5,7 +5,7 @@
  */
 import "obsidian";
 
-export * from "./internals/index.d.ts";
+export * from "./internals/index.ts";
 
 import type _AbstractInputSuggest from "./AbstractInputSuggest.d.ts";
 import type _AbstractTextComponent from "./AbstractTextComponent.d.ts";
@@ -148,8 +148,8 @@ import type _WorkspaceWindow from "./WorkspaceWindow.d.ts";
 import type _WorkspaceWindowInitData from "./WorkspaceWindowInitData.d.ts";
 
 declare module "obsidian" {
-    interface AbstractInputSuggest extends _AbstractInputSuggest {}
-    interface AbstractTextComponent extends _AbstractTextComponent {}
+    interface AbstractInputSuggest<T> extends _AbstractInputSuggest<T> {}
+    interface AbstractTextComponent<T> extends _AbstractTextComponent<T> {}
     interface App extends _App {}
     interface BaseComponent extends _BaseComponent {}
     interface BlockCache extends _BlockCache {}
@@ -163,7 +163,7 @@ declare module "obsidian" {
     interface Component extends _Component {}
     interface DataAdapter extends _DataAdapter {}
     interface DataWriteOptions extends _DataWriteOptions {}
-    interface Debouncer extends _Debouncer {}
+    interface Debouncer<T, V> extends _Debouncer<T, V> {}
     interface DropdownComponent extends _DropdownComponent {}
     interface EditableFileView extends _EditableFileView {}
     interface Editor extends _Editor {}
@@ -174,7 +174,7 @@ declare module "obsidian" {
     interface EditorScrollInfo extends _EditorScrollInfo {}
     interface EditorSelection extends _EditorSelection {}
     interface EditorSelectionOrCaret extends _EditorSelectionOrCaret {}
-    interface EditorSuggest extends _EditorSuggest {}
+    interface EditorSuggest<T> extends _EditorSuggest<T> {}
     interface EditorSuggestContext extends _EditorSuggestContext {}
     interface EditorSuggestTriggerInfo extends _EditorSuggestTriggerInfo {}
     interface EditorTransaction extends _EditorTransaction {}
@@ -189,8 +189,8 @@ declare module "obsidian" {
     interface FrontMatterCache extends _FrontMatterCache {}
     interface FrontMatterInfo extends _FrontMatterInfo {}
     interface FrontmatterLinkCache extends _FrontmatterLinkCache {}
-    interface FuzzyMatch extends _FuzzyMatch {}
-    interface FuzzySuggestModal extends _FuzzySuggestModal {}
+    interface FuzzyMatch<T> extends _FuzzyMatch<T> {}
+    interface FuzzySuggestModal<T> extends _FuzzySuggestModal<T> {}
     interface HeadingCache extends _HeadingCache {}
     interface HeadingSubpathResult extends _HeadingSubpathResult {}
     interface Hotkey extends _Hotkey {}
@@ -199,7 +199,7 @@ declare module "obsidian" {
     interface HoverPopover extends _HoverPopover {}
     interface HSL extends _HSL {}
     interface Instruction extends _Instruction {}
-    interface ISuggestOwner extends _ISuggestOwner {}
+    interface ISuggestOwner<T> extends _ISuggestOwner<T> {}
     interface ItemView extends _ItemView {}
     interface Keymap extends _Keymap {}
     interface KeymapContext extends _KeymapContext {}
@@ -237,7 +237,7 @@ declare module "obsidian" {
     interface PluginManifest extends _PluginManifest {}
     interface PluginSettingTab extends _PluginSettingTab {}
     interface Point extends _Point {}
-    interface PopoverSuggest extends _PopoverSuggest {}
+    interface PopoverSuggest<T> extends _PopoverSuggest<T> {}
     interface Pos extends _Pos {}
     interface PreparedQuery extends _PreparedQuery {}
     interface ProgressBarComponent extends _ProgressBarComponent {}
@@ -257,7 +257,7 @@ declare module "obsidian" {
     interface SliderComponent extends _SliderComponent {}
     interface Stat extends _Stat {}
     interface SubpathResult extends _SubpathResult {}
-    interface SuggestModal extends _SuggestModal {}
+    interface SuggestModal<T> extends _SuggestModal<T> {}
     interface TAbstractFile extends _TAbstractFile {}
     interface TagCache extends _TagCache {}
     interface Tasks extends _Tasks {}
@@ -268,7 +268,7 @@ declare module "obsidian" {
     interface TFolder extends _TFolder {}
     interface ToggleComponent extends _ToggleComponent {}
     interface TooltipOptions extends _TooltipOptions {}
-    interface ValueComponent extends _ValueComponent {}
+    interface ValueComponent<T> extends _ValueComponent<T> {}
     interface Vault extends _Vault {}
     interface View extends _View {}
     interface ViewState extends _ViewState {}

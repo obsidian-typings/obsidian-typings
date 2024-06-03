@@ -1,1 +1,1 @@
-export default interface ISuggestOwner { }
+export default interface ISuggestOwner<T> { }

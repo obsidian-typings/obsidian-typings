@@ -1,6 +1,8 @@
-import { EventRef } from "./EventRef.d.ts";
-import { Menu } from "./Menu.d.ts";
-import { WorkspaceSplit } from "./WorkspaceSplit.d.ts";
+import type {
+    EventRef,
+    Menu,
+    WorkspaceSplit
+} from "obsidian";
 
 /** @todo Documentation incomplete */
 export default interface WorkspaceLeaf {

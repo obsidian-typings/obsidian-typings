@@ -1,5 +1,8 @@
-import { Component } from "./Component.d.ts";
-import { ThemeManifest } from "./ThemeManifest.d.ts";
+import type {
+    App,
+    Component
+} from "obsidian";
+import type { ThemeManifest } from "./index.d.ts";
 
 /** @todo Documentation incomplete */
 export default interface CustomCSS extends Component {

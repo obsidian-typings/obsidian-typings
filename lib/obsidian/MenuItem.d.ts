@@ -1,4 +1,4 @@
-import { Menu } from "./Menu.d.ts";
+import type { Menu } from "obsidian";
 
 export default interface MenuItem {
     /**

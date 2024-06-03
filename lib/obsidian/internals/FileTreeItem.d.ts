@@ -1,4 +1,4 @@
-import { TAbstractFile } from "./TAbstractFile.d.ts";
+import type { TAbstractFile } from "obsidian";
 
 /** @todo Documentation incomplete */
 export default interface FileTreeItem {

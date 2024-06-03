@@ -1,3 +1,8 @@
+import type {
+    EditorRange,
+    ViewState
+} from "obsidian";
+
 export default interface StateHistory {
     /**
      * Ephemeral cursor state within Editor of leaf

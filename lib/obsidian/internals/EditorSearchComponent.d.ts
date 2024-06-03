@@ -1,5 +1,11 @@
-import { Editor } from "./Editor.d.ts";
-import { SearchCursor } from "./SearchCursor.d.ts";
+import type {
+    Editor,
+    EditorRange
+} from "obsidian";
+import type {
+    AbstractSearchComponent,
+    SearchCursor
+} from "./index.d.ts";
 
 export default interface EditorSearchComponent extends AbstractSearchComponent {
     /**

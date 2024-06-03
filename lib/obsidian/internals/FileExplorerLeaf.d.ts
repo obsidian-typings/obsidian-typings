@@ -1,6 +1,11 @@
-import { WorkspaceLeaf } from "./WorkspaceLeaf.d.ts";
-import { FileTreeItem } from "./FileTreeItem.d.ts";
-import { FileExplorerView } from "./FileExplorerView.d.ts";
+import type {
+    TFolder,
+    WorkspaceLeaf
+} from "obsidian";
+import type {
+    FileExplorerView,
+    FileTreeItem
+} from "./index.d.ts";
 
 /** @todo Documentation incomplete */
 export default interface FileExplorerLeaf extends WorkspaceLeaf {

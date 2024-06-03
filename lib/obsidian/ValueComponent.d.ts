@@ -1,1 +1,1 @@
-export default interface ValueComponent { }
+export default interface ValueComponent<T> { }

@@ -1,8 +1,13 @@
-import { Component } from "./Component.d.ts";
-import { HoverPopover } from "./HoverPopover.d.ts";
-import { MarkdownView } from "./MarkdownView.d.ts";
-import { PropertyEntryData } from "./PropertyEntryData.d.ts";
-import { MetadataEditorProperty } from "./MetadataEditorProperty.d.ts";
+import type {
+    App,
+    Component,
+    HoverPopover,
+    MarkdownView
+} from "obsidian";
+import type {
+    MetadataEditorProperty,
+    PropertyEntryData
+} from "./index.d.ts";
 
 export default interface MetadataEditor extends Component {
     /**

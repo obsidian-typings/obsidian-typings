@@ -1,4 +1,10 @@
-import { KeyScope } from "./KeyScope.d.ts";
+import type {
+    KeymapEventHandler,
+    KeymapEventListener,
+    KeymapInfo,
+    Modifier
+} from "obsidian";
+import type { KeyScope } from "./internals/index.d.ts";
 
 export default interface Scope {
     /** @internal - Callback to execute when scope is matched */

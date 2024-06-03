@@ -1,3 +1,3 @@
-import { WorkspaceLeaf } from "./WorkspaceLeaf.d.ts";
+import type { WorkspaceLeaf } from "obsidian";
 
 export default interface CanvasLeaf extends WorkspaceLeaf { }

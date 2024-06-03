@@ -1,4 +1,4 @@
-import { PluginManifest } from "./PluginManifest.d.ts";
+import type { PluginManifest } from "obsidian";
 
 export default interface PluginUpdateManifest {
     /**

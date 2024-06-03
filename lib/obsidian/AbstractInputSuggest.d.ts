@@ -1,1 +1,1 @@
-export default interface AbstractInputSuggest { }
+export default interface AbstractInputSuggest<T> { }

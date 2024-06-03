@@ -1,5 +1,12 @@
-import { PropertyWidget } from "./PropertyWidget.d.ts";
-import { PropertyInfo } from "./PropertyInfo.d.ts";
+import type {
+    App,
+    Events
+} from "obsidian";
+import type {
+    PropertyInfo,
+    PropertyWidget,
+    PropertyWidgetType
+} from "./index.d.ts";
 
 export default interface MetadataTypeManager extends Events {
     /**

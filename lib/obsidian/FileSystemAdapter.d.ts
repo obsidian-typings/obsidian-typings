@@ -1,3 +1,3 @@
-import { DataAdapter } from "./DataAdapter.d.ts";
+import type { DataAdapter } from "obsidian";
 
 export default interface FileSystemAdapter extends DataAdapter { }

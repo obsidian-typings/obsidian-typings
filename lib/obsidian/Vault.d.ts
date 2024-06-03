@@ -1,8 +1,14 @@
-import { AppVaultConfig } from "./internals/AppVaultConfig.d.ts";
-import { DataAdapter } from "./DataAdapter.d.ts";
-import { EventRef } from "./EventRef.d.ts";
-import { TAbstractFile } from "./TAbstractFile.d.ts";
-import { TFile } from "./TFile.d.ts";
+import type {
+    DataAdapter,
+    EventRef,
+    TAbstractFile,
+    TFile,
+    TFolder
+} from "obsidian";
+import type {
+    AppVaultConfig,
+    ConfigItem
+} from "./internals/index.d.ts";
 
 export default interface Vault {
     /**

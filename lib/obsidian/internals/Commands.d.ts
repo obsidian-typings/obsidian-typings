@@ -1,3 +1,8 @@
+import type {
+    App,
+    Command
+} from "obsidian";
+
 export default interface Commands {
     /**
      * Reference to App

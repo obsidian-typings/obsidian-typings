@@ -1,1 +1,1 @@
-export default interface FuzzySuggestModal { }
+export default interface FuzzySuggestModal<T> { }

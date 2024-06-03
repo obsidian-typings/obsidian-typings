@@ -1,8 +1,10 @@
-import { Extension } from "@codemirror/state";
-import { ViewUpdate } from "@codemirror/view";
-import { EditorSearchComponent } from "./EditorSearchComponent.d.ts";
-import { MarkdownBaseView } from "./MarkdownBaseView.d.ts";
-import { Scope } from "./Scope.d.ts";
+import type { Extension } from "@codemirror/state";
+import type { ViewUpdate } from "@codemirror/view";
+import type { Scope } from "obsidian";
+import type {
+    EditorSearchComponent,
+    MarkdownBaseView
+} from "./index.d.ts";
 
 export default interface MarkdownScrollableEditView extends MarkdownBaseView {
     /**

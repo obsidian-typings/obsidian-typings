@@ -1,1 +1,1 @@
-export default interface Debouncer { }
+export default interface Debouncer<T, V> { }

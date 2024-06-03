@@ -1,1 +1,1 @@
-export default interface AbstractTextComponent { }
+export default interface AbstractTextComponent<T> { }

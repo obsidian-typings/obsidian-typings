@@ -1,3 +1,5 @@
+import type { EditorRange } from "obsidian";
+
 /** @todo Documentation incomplete */
 export default interface Token extends EditorRange {
     text: string;

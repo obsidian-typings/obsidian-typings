@@ -1,4 +1,7 @@
-import { EditorSuggest } from "./EditorSuggest.d.ts";
+import type {
+    EditorSuggest,
+    SearchResult
+} from "obsidian";
 
 export default interface SuggestionContainer<T> {
     /**

@@ -1,4 +1,4 @@
-import { Scope } from "./Scope.d.ts";
+import type { Scope } from "obsidian";
 
 /** @todo Documentation incomplete */
 export default interface KeyScope {

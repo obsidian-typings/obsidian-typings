@@ -1,7 +1,14 @@
-import { EditorView } from "@codemirror/view";
-import { BaseEditor } from "./BaseEditor.d.ts";
-import { SearchCursor } from "./SearchCursor.d.ts";
-import { MarkdownScrollableEditView } from "./MarkdownScrollableEditView.d.ts";
+import type {
+    EditorPosition,
+    EditorRange,
+    EditorSelection
+} from "obsidian";
+import type { EditorView } from "@codemirror/view";
+import type {
+    BaseEditor,
+    MarkdownScrollableEditView,
+    SearchCursor
+} from "./internals/index.d.ts";
 
 export default interface Editor extends BaseEditor {
     /**

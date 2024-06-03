@@ -1,6 +1,12 @@
-import { InfinityScroll } from "./InfinityScroll.d.ts";
-import { Scope } from "./Scope.d.ts";
-import { View } from "./View.d.ts";
+import type {
+    App,
+    Scope,
+    View
+} from "obsidian";
+import type {
+    InfinityScroll,
+    TreeNode
+} from "./index.d.ts";
 
 export default interface Tree<T> {
     /**

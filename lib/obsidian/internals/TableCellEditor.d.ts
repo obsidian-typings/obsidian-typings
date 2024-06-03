@@ -1,5 +1,7 @@
-import { MarkdownBaseView } from "./MarkdownBaseView.d.ts";
-import { TableCell } from "./TableCell.d.ts";
+import type {
+    MarkdownBaseView,
+    TableCell
+} from "./index.d.ts";
 
 /** @todo Documentation incomplete */
 export default interface TableCellEditor extends MarkdownBaseView, TableCell { }

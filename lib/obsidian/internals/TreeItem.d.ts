@@ -1,3 +1,6 @@
+import type { View } from "obsidian";
+import type { TreeNode } from "./index.d.ts";
+
 export default TreeItem;
 
 /** @todo Documentation incomplete */

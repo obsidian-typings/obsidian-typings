@@ -1,4 +1,4 @@
-import { WindowSelection } from "./WindowSelection.d.ts";
+import type { WindowSelection } from "./internals/index.d.ts";
 
 export default interface Modal {
     /** @internal Background applied to application to dim it */
@@ -29,7 +29,7 @@ export default interface Modal {
      * @param content Content to set
      * @internal Set the content of the modal
      */
-    setContent(content: HTMLElement | string): this;
+    setContent(content: DocumentFragment | string): this;
     /**
      * @param dim Whether the background should be dimmed
      * @internal Set whether the background should be dimmed

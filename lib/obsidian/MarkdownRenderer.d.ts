@@ -4,7 +4,7 @@ export default interface MarkdownRenderer {
     onCheckboxClick(e: unknown, n: unknown, i: unknown): unknown;
     onFileChange(e: unknown): unknown;
     onFoldChange(): unknown;
-    onload(): unknown;
+    onload(): void;
     onRenderComplete(): unknown;
     onScroll(): unknown;
     postProcess(e: unknown, t: unknown, n: unknown): unknown;

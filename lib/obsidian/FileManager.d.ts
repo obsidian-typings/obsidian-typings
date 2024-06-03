@@ -1,7 +1,14 @@
-import { Vault } from "./Vault.d.ts";
-import { TFile } from "./TFile.d.ts";
-import { PositionedReference } from "./PositionedReference.d.ts";
-import { LinkUpdate } from "./LinkUpdate.d.ts";
+import type {
+    App,
+    PaneType,
+    TFile,
+    TFolder,
+    Vault
+} from "obsidian";
+import type {
+    LinkUpdate,
+    PositionedReference
+} from "./internals/index.d.ts";
 
 export default interface FileManager {
     /**

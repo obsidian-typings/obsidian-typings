@@ -1,3 +1,2 @@
 /** @todo Documentation incomplete */
-export default interface MobileNavbar {
-}
+export default interface MobileNavbar { }

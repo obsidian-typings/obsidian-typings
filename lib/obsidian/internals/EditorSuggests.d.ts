@@ -1,6 +1,8 @@
-import { EditorSuggest } from "./EditorSuggest.d.ts";
-import { TFile } from "./TFile.d.ts";
-import { MarkdownBaseView } from "./MarkdownBaseView.d.ts";
+import type {
+    EditorSuggest,
+    TFile
+} from "obsidian";
+import type { MarkdownBaseView } from "./index.d.ts";
 
 export default interface EditorSuggests {
     /**

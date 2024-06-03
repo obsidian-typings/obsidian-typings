@@ -1,4 +1,4 @@
-import { Setting } from "./Setting.d.ts";
+import type { Setting } from "obsidian";
 
 export default interface SettingTab {
     /**

@@ -1,4 +1,4 @@
-import { SuggestionContainer } from "./SuggestionContainer.d.ts";
+import type { SuggestionContainer } from "./internals/index.d.ts";
 
 export default interface PopoverSuggest<T> {
     /**

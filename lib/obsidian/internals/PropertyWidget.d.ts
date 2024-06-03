@@ -1,7 +1,8 @@
-import { Component } from "./Component.d.ts";
-import { PropertyEntryData } from "./PropertyEntryData.d.ts";
-import { PropertyRenderContext } from "./PropertyRenderContext.d.ts";
-
+import type { Component } from "obsidian";
+import type {
+    PropertyEntryData,
+    PropertyRenderContext
+} from "./index.d.ts";
 export default interface PropertyWidget<T> {
     /**
      * Lucide-dev icon associated with the widget

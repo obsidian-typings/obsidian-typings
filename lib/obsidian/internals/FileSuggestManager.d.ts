@@ -1,6 +1,10 @@
-import { BlockCache } from "./BlockCache.d.ts";
-import { TFile } from "./TFile.d.ts";
-import { Runnable } from "./Runnable.d.ts";
+import type {
+    App,
+    BlockCache,
+    SearchResult,
+    TFile
+} from "obsidian";
+import type { Runnable } from "./index.d.ts";
 
 export default interface FileSuggestManager {
     /**
