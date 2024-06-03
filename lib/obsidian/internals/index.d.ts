@@ -1,4 +1,4 @@
-export * from "./implementations/index.ts";
+export * from "../implementations/index.ts";
 
 export type { default as AbstractSearchComponent } from "./AbstractSearchComponent.d.ts";
 export type { default as Account } from "./Account.d.ts";

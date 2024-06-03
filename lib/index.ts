@@ -1,1 +1,1 @@
-export * from "./obsidian/internals/implementations/index.ts";
+export * from "./obsidian/implementations/index.ts";

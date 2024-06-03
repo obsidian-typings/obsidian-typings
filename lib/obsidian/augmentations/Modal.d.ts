@@ -1,6 +1,6 @@
 export { };
 
-import type { WindowSelection } from "./internals/index.d.ts";
+import type { WindowSelection } from "../internals/index.d.ts";
 
 declare module "obsidian" {
     interface Modal {

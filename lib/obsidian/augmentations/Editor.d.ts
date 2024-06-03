@@ -5,7 +5,7 @@ import type {
     BaseEditor,
     MarkdownScrollableEditView,
     SearchCursor
-} from "./internals/index.d.ts";
+} from "../internals/index.d.ts";
 
 declare module "obsidian" {
     interface Editor extends BaseEditor {

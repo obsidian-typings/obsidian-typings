@@ -18,7 +18,7 @@ import type {
     ObsidianDOM,
     Plugins,
     ViewRegistry
-} from "./internals/index.d.ts";
+} from "../internals/index.d.ts";
 
 declare module "obsidian" {
     interface App {
