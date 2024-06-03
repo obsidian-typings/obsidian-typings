@@ -5,6 +5,9 @@
  */
 import "obsidian";
 
+/**
+ * @see {@link file://./../index.d.ts}
+ */
 export * from "./internals/index.ts";
 
 import "./AbstractInputSuggest.d.ts";
