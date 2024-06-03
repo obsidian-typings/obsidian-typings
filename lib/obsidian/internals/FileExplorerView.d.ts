@@ -9,7 +9,7 @@ import type {
     Tree,
     TreeItem,
     WeakMapWrapper
-} from "../index.d.ts";
+} from "../types.d.ts";
 
 /** @todo Documentation incomplete */
 export interface FileExplorerView extends View {

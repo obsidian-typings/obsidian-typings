@@ -5,7 +5,7 @@ import type {
 import type {
     AbstractSearchComponent,
     SearchCursor
-} from "../index.d.ts";
+} from "../types.d.ts";
 
 export interface EditorSearchComponent extends AbstractSearchComponent {
     /**

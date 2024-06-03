@@ -1,7 +1,7 @@
 import type {
     MarkdownBaseView,
     TableCell
-} from "../index.d.ts";
+} from "../types.d.ts";
 
 /** @todo Documentation incomplete */
 export interface TableCellEditor extends MarkdownBaseView, TableCell { }

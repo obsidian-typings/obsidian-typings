@@ -1,4 +1,4 @@
-import type { LeafEntry } from "../index.d.ts";
+import type { LeafEntry } from "../types.d.ts";
 
 export interface SerializedWorkspace {
     /**

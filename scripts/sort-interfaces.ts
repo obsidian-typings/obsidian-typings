@@ -9,8 +9,8 @@
  */
 // @ts-nocheck (Prevent compilation errors for people use the package as a submodule)
 
-import { Project, Node, ModuleDeclaration, SourceFile } from "ts-morph";
-import * as fs from "node:fs";
+import { Project, Node, ModuleDeclaration, SourceFile } from "ts-morph.d.ts";
+import * as fs from "node:fs.d.ts";
 
 const project = new Project();
 const declarationsToText = (declarationArray: Node[]) => declarationArray.map(declaration => declaration.getText(true)).join('\n\n');

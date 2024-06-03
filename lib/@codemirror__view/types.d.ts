@@ -6,5 +6,5 @@
 
 import "./augmentations/EditorView.d.ts";
 
-export { VimEditor } from "./internals/VimEditor.ts";
-export { VimState } from "./internals/VimState.ts";
+export type { VimEditor } from "./internals/VimEditor.d.ts";
+export type { VimState } from "./internals/VimState.d.ts";

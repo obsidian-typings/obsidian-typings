@@ -3,7 +3,7 @@ export { };
 import type {
     AppVaultConfig,
     ConfigItem
-} from "../index.d.ts";
+} from "../types.d.ts";
 
 declare module "obsidian" {
     interface Vault {

@@ -1,6 +1,6 @@
 export { };
 
-import type { SuggestionContainer } from "../index.d.ts";
+import type { SuggestionContainer } from "../types.d.ts";
 
 declare module "obsidian" {
     interface PopoverSuggest<T> {

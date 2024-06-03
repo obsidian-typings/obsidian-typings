@@ -2,7 +2,7 @@ import type {
     App,
     PluginManifest
 } from "obsidian";
-import type { PluginUpdateManifest } from "../index.d.ts";
+import type { PluginUpdateManifest } from "../types.d.ts";
 
 export interface Plugins {
     /**

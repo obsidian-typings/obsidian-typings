@@ -15,7 +15,7 @@ import type {
     TableCellEditor,
     TableEditor,
     Token
-} from "../index.d.ts";
+} from "../types.d.ts";
 
 export interface MarkdownBaseView extends Component {
     /**

@@ -7,7 +7,7 @@ import type {
     MetadataWidget,
     PropertyEntryData,
     PropertyWidget
-} from "../index.d.ts";
+} from "../types.d.ts";
 
 export interface MetadataEditorProperty extends Component {
     /**

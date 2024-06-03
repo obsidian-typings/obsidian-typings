@@ -6,7 +6,7 @@ import type {
 import type {
     InfinityScroll,
     TreeNode
-} from "../index.d.ts";
+} from "../types.d.ts";
 
 export interface Tree<T> {
     /**

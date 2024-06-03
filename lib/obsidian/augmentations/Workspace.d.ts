@@ -14,7 +14,7 @@ import type {
     RecentFileTracker,
     SerializedWorkspace,
     StateHistory
-} from "../index.d.ts";
+} from "../types.d.ts";
 import type { InternalPluginName } from "../implementations.ts";
 
 declare module "obsidian" {

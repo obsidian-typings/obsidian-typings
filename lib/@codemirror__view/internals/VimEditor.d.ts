@@ -1,4 +1,4 @@
-import type { VimState } from "../index.d.ts";
+import type { VimState } from "../types.d.ts";
 
 /** @todo Documentation incomplete */
 export interface VimEditor {

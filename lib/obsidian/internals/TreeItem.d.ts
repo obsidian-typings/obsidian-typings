@@ -1,5 +1,5 @@
 import type { View } from "obsidian";
-import type { TreeNode } from "../index.d.ts";
+import type { TreeNode } from "../types.d.ts";
 
 /** @todo Documentation incomplete */
 export type TreeItem<T> = TreeNode<T> & {

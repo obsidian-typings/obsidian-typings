@@ -1,6 +1,6 @@
 export { };
 
-import type { KeyScope } from "../index.d.ts";
+import type { KeyScope } from "../types.d.ts";
 
 declare module "obsidian" {
     interface Scope {

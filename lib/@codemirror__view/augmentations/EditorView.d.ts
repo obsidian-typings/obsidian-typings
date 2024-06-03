@@ -1,6 +1,6 @@
 export { };
 
-import type { VimEditor } from "../index.d.ts";
+import type { VimEditor } from "../types.d.ts";
 
 declare module "@codemirror/view" {
     /** @todo Documentation incomplete */
