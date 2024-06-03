@@ -4,18 +4,18 @@ import type TFile from "../TFile.d.ts";
 import type TFolder from "../TFolder.d.ts";
 import type Plugin from "../Plugin.d.ts";
 
-export type InternalPluginName = typeof InternalPluginName[keyof typeof InternalPluginName];
-
-export interface InternalPluginInstance {
-    plugin: InternalPlugin<this>;
-}
-
 /** @todo Documentation incomplete */
-export interface InternalPlugin<TInstance extends InternalPluginInstance = InternalPluginInstance> extends Plugin {
+export default interface InternalPlugin<TInstance extends InternalPluginInstance = InternalPluginInstance> extends Plugin {
     instance: TInstance;
 
     disable(): void;
     enable(): Promise<void>;
+}
+
+export type InternalPluginName = typeof InternalPluginName[keyof typeof InternalPluginName];
+
+export interface InternalPluginInstance {
+    plugin: InternalPlugin<this>;
 }
 
 export type InternalPluginNameInstancesMapping = {
