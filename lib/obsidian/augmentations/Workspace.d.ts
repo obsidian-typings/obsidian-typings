@@ -9,13 +9,13 @@ import type {
     FileExplorerLeaf,
     GlobalSearchLeaf,
     HoverLinkEvent,
-    InternalPluginName,
     LeafEntry,
     ObsidianTouchEvent,
     RecentFileTracker,
     SerializedWorkspace,
     StateHistory
 } from "../index.d.ts";
+import type { InternalPluginName } from "../../index.ts";
 
 declare module "obsidian" {
     interface Workspace {

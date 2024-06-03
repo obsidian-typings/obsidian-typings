@@ -4,7 +4,7 @@ import type {
     TFolder,
     Events
 } from "obsidian";
-import type { InternalPluginName } from "../index.d.ts";
+import type { InternalPluginName } from "../../index.ts";
 
 /** @todo Documentation incomplete */
 export interface InternalPlugin<TInstance extends InternalPluginInstance = InternalPluginInstance> extends Plugin {

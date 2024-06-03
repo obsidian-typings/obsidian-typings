@@ -144,8 +144,6 @@ import "./augmentations/WorkspaceTabs.d.ts";
 import "./augmentations/WorkspaceWindow.d.ts";
 import "./augmentations/WorkspaceWindowInitData.d.ts";
 
-export * from "./implementations/index.ts";
-
 export type { AbstractSearchComponent } from "./internals/AbstractSearchComponent.d.ts";
 export type { Account } from "./internals/Account.d.ts";
 export type { AppMenuBarManager } from "./internals/AppMenuBarManager.d.ts";
