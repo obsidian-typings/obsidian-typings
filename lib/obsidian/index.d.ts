@@ -148,143 +148,143 @@ import type _WorkspaceWindow from "./WorkspaceWindow.d.ts";
 import type _WorkspaceWindowInitData from "./WorkspaceWindowInitData.d.ts";
 
 declare module "obsidian" {
-    interface AbstractInputSuggest<T> extends _AbstractInputSuggest<T> {}
-    interface AbstractTextComponent<T> extends _AbstractTextComponent<T> {}
-    interface App extends _App {}
-    interface BaseComponent extends _BaseComponent {}
-    interface BlockCache extends _BlockCache {}
-    interface BlockSubpathResult extends _BlockSubpathResult {}
-    interface ButtonComponent extends _ButtonComponent {}
-    interface CachedMetadata extends _CachedMetadata {}
-    interface CacheItem extends _CacheItem {}
-    interface CloseableComponent extends _CloseableComponent {}
-    interface ColorComponent extends _ColorComponent {}
-    interface Command extends _Command {}
-    interface Component extends _Component {}
-    interface DataAdapter extends _DataAdapter {}
-    interface DataWriteOptions extends _DataWriteOptions {}
-    interface Debouncer<T, V> extends _Debouncer<T, V> {}
-    interface DropdownComponent extends _DropdownComponent {}
-    interface EditableFileView extends _EditableFileView {}
-    interface Editor extends _Editor {}
-    interface EditorChange extends _EditorChange {}
-    interface EditorPosition extends _EditorPosition {}
-    interface EditorRange extends _EditorRange {}
-    interface EditorRangeOrCaret extends _EditorRangeOrCaret {}
-    interface EditorScrollInfo extends _EditorScrollInfo {}
-    interface EditorSelection extends _EditorSelection {}
-    interface EditorSelectionOrCaret extends _EditorSelectionOrCaret {}
-    interface EditorSuggest<T> extends _EditorSuggest<T> {}
-    interface EditorSuggestContext extends _EditorSuggestContext {}
-    interface EditorSuggestTriggerInfo extends _EditorSuggestTriggerInfo {}
-    interface EditorTransaction extends _EditorTransaction {}
-    interface EmbedCache extends _EmbedCache {}
-    interface EventRef extends _EventRef {}
-    interface Events extends _Events {}
-    interface ExtraButtonComponent extends _ExtraButtonComponent {}
-    interface FileManager extends _FileManager {}
-    interface FileStats extends _FileStats {}
-    interface FileSystemAdapter extends _FileSystemAdapter {}
-    interface FileView extends _FileView {}
-    interface FrontMatterCache extends _FrontMatterCache {}
-    interface FrontMatterInfo extends _FrontMatterInfo {}
-    interface FrontmatterLinkCache extends _FrontmatterLinkCache {}
-    interface FuzzyMatch<T> extends _FuzzyMatch<T> {}
-    interface FuzzySuggestModal<T> extends _FuzzySuggestModal<T> {}
-    interface HeadingCache extends _HeadingCache {}
-    interface HeadingSubpathResult extends _HeadingSubpathResult {}
-    interface Hotkey extends _Hotkey {}
-    interface HoverLinkSource extends _HoverLinkSource {}
-    interface HoverParent extends _HoverParent {}
-    interface HoverPopover extends _HoverPopover {}
-    interface HSL extends _HSL {}
-    interface Instruction extends _Instruction {}
-    interface ISuggestOwner<T> extends _ISuggestOwner<T> {}
-    interface ItemView extends _ItemView {}
-    interface Keymap extends _Keymap {}
-    interface KeymapContext extends _KeymapContext {}
-    interface KeymapEventHandler extends _KeymapEventHandler {}
-    interface KeymapInfo extends _KeymapInfo {}
-    interface LinkCache extends _LinkCache {}
-    interface ListedFiles extends _ListedFiles {}
-    interface ListItemCache extends _ListItemCache {}
-    interface LivePreviewState extends _LivePreviewState {}
-    interface Loc extends _Loc {}
-    interface MarkdownEditView extends _MarkdownEditView {}
-    interface MarkdownFileInfo extends _MarkdownFileInfo {}
-    interface MarkdownPostProcessor extends _MarkdownPostProcessor {}
-    interface MarkdownPostProcessorContext extends _MarkdownPostProcessorContext {}
-    interface MarkdownPreviewEvents extends _MarkdownPreviewEvents {}
-    interface MarkdownPreviewRenderer extends _MarkdownPreviewRenderer {}
-    interface MarkdownPreviewView extends _MarkdownPreviewView {}
-    interface MarkdownRenderChild extends _MarkdownRenderChild {}
-    interface MarkdownRenderer extends _MarkdownRenderer {}
-    interface MarkdownSectionInformation extends _MarkdownSectionInformation {}
-    interface MarkdownSubView extends _MarkdownSubView {}
-    interface MarkdownView extends _MarkdownView {}
-    interface Menu extends _Menu {}
-    interface MenuItem extends _MenuItem {}
-    interface MenuPositionDef extends _MenuPositionDef {}
-    interface MenuSeparator extends _MenuSeparator {}
-    interface MetadataCache extends _MetadataCache {}
-    interface Modal extends _Modal {}
-    interface MomentFormatComponent extends _MomentFormatComponent {}
-    interface Notice extends _Notice {}
-    interface ObsidianProtocolData extends _ObsidianProtocolData {}
-    interface OpenViewState extends _OpenViewState {}
-    interface Platform extends _Platform {}
-    interface Plugin extends _Plugin {}
-    interface PluginManifest extends _PluginManifest {}
-    interface PluginSettingTab extends _PluginSettingTab {}
-    interface Point extends _Point {}
-    interface PopoverSuggest<T> extends _PopoverSuggest<T> {}
-    interface Pos extends _Pos {}
-    interface PreparedQuery extends _PreparedQuery {}
-    interface ProgressBarComponent extends _ProgressBarComponent {}
-    interface Reference extends _Reference {}
-    interface ReferenceCache extends _ReferenceCache {}
-    interface RequestUrlParam extends _RequestUrlParam {}
-    interface RequestUrlResponse extends _RequestUrlResponse {}
-    interface RequestUrlResponsePromise extends _RequestUrlResponsePromise {}
-    interface RGB extends _RGB {}
-    interface Scope extends _Scope {}
-    interface SearchComponent extends _SearchComponent {}
-    interface SearchResult extends _SearchResult {}
-    interface SearchResultContainer extends _SearchResultContainer {}
-    interface SectionCache extends _SectionCache {}
-    interface Setting extends _Setting {}
-    interface SettingTab extends _SettingTab {}
-    interface SliderComponent extends _SliderComponent {}
-    interface Stat extends _Stat {}
-    interface SubpathResult extends _SubpathResult {}
-    interface SuggestModal<T> extends _SuggestModal<T> {}
-    interface TAbstractFile extends _TAbstractFile {}
-    interface TagCache extends _TagCache {}
-    interface Tasks extends _Tasks {}
-    interface TextAreaComponent extends _TextAreaComponent {}
-    interface TextComponent extends _TextComponent {}
-    interface TextFileView extends _TextFileView {}
-    interface TFile extends _TFile {}
-    interface TFolder extends _TFolder {}
-    interface ToggleComponent extends _ToggleComponent {}
-    interface TooltipOptions extends _TooltipOptions {}
-    interface ValueComponent<T> extends _ValueComponent<T> {}
-    interface Vault extends _Vault {}
-    interface View extends _View {}
-    interface ViewState extends _ViewState {}
-    interface ViewStateResult extends _ViewStateResult {}
-    interface Workspace extends _Workspace {}
-    interface WorkspaceContainer extends _WorkspaceContainer {}
-    interface WorkspaceFloating extends _WorkspaceFloating {}
-    interface WorkspaceItem extends _WorkspaceItem {}
-    interface WorkspaceLeaf extends _WorkspaceLeaf {}
-    interface WorkspaceMobileDrawer extends _WorkspaceMobileDrawer {}
-    interface WorkspaceParent extends _WorkspaceParent {}
-    interface WorkspaceRibbon extends _WorkspaceRibbon {}
-    interface WorkspaceRoot extends _WorkspaceRoot {}
-    interface WorkspaceSidedock extends _WorkspaceSidedock {}
-    interface WorkspaceSplit extends _WorkspaceSplit {}
-    interface WorkspaceTabs extends _WorkspaceTabs {}
-    interface WorkspaceWindow extends _WorkspaceWindow {}
-    interface WorkspaceWindowInitData extends _WorkspaceWindowInitData {}
+    interface AbstractInputSuggest<T> extends _AbstractInputSuggest<T> { }
+    interface AbstractTextComponent<T> extends _AbstractTextComponent<T> { }
+    interface App extends _App { }
+    interface BaseComponent extends _BaseComponent { }
+    interface BlockCache extends _BlockCache { }
+    interface BlockSubpathResult extends _BlockSubpathResult { }
+    interface ButtonComponent extends _ButtonComponent { }
+    interface CachedMetadata extends _CachedMetadata { }
+    interface CacheItem extends _CacheItem { }
+    interface CloseableComponent extends _CloseableComponent { }
+    interface ColorComponent extends _ColorComponent { }
+    interface Command extends _Command { }
+    interface Component extends _Component { }
+    interface DataAdapter extends _DataAdapter { }
+    interface DataWriteOptions extends _DataWriteOptions { }
+    interface Debouncer<T, V> extends _Debouncer<T, V> { }
+    interface DropdownComponent extends _DropdownComponent { }
+    interface EditableFileView extends _EditableFileView { }
+    interface Editor extends _Editor { }
+    interface EditorChange extends _EditorChange { }
+    interface EditorPosition extends _EditorPosition { }
+    interface EditorRange extends _EditorRange { }
+    interface EditorRangeOrCaret extends _EditorRangeOrCaret { }
+    interface EditorScrollInfo extends _EditorScrollInfo { }
+    interface EditorSelection extends _EditorSelection { }
+    interface EditorSelectionOrCaret extends _EditorSelectionOrCaret { }
+    interface EditorSuggest<T> extends _EditorSuggest<T> { }
+    interface EditorSuggestContext extends _EditorSuggestContext { }
+    interface EditorSuggestTriggerInfo extends _EditorSuggestTriggerInfo { }
+    interface EditorTransaction extends _EditorTransaction { }
+    interface EmbedCache extends _EmbedCache { }
+    interface EventRef extends _EventRef { }
+    interface Events extends _Events { }
+    interface ExtraButtonComponent extends _ExtraButtonComponent { }
+    interface FileManager extends _FileManager { }
+    interface FileStats extends _FileStats { }
+    interface FileSystemAdapter extends _FileSystemAdapter { }
+    interface FileView extends _FileView { }
+    interface FrontMatterCache extends _FrontMatterCache { }
+    interface FrontMatterInfo extends _FrontMatterInfo { }
+    interface FrontmatterLinkCache extends _FrontmatterLinkCache { }
+    interface FuzzyMatch<T> extends _FuzzyMatch<T> { }
+    interface FuzzySuggestModal<T> extends _FuzzySuggestModal<T> { }
+    interface HeadingCache extends _HeadingCache { }
+    interface HeadingSubpathResult extends _HeadingSubpathResult { }
+    interface Hotkey extends _Hotkey { }
+    interface HoverLinkSource extends _HoverLinkSource { }
+    interface HoverParent extends _HoverParent { }
+    interface HoverPopover extends _HoverPopover { }
+    interface HSL extends _HSL { }
+    interface Instruction extends _Instruction { }
+    interface ISuggestOwner<T> extends _ISuggestOwner<T> { }
+    interface ItemView extends _ItemView { }
+    interface Keymap extends _Keymap { }
+    interface KeymapContext extends _KeymapContext { }
+    interface KeymapEventHandler extends _KeymapEventHandler { }
+    interface KeymapInfo extends _KeymapInfo { }
+    interface LinkCache extends _LinkCache { }
+    interface ListedFiles extends _ListedFiles { }
+    interface ListItemCache extends _ListItemCache { }
+    interface LivePreviewState extends _LivePreviewState { }
+    interface Loc extends _Loc { }
+    interface MarkdownEditView extends _MarkdownEditView { }
+    interface MarkdownFileInfo extends _MarkdownFileInfo { }
+    interface MarkdownPostProcessor extends _MarkdownPostProcessor { }
+    interface MarkdownPostProcessorContext extends _MarkdownPostProcessorContext { }
+    interface MarkdownPreviewEvents extends _MarkdownPreviewEvents { }
+    interface MarkdownPreviewRenderer extends _MarkdownPreviewRenderer { }
+    interface MarkdownPreviewView extends _MarkdownPreviewView { }
+    interface MarkdownRenderChild extends _MarkdownRenderChild { }
+    interface MarkdownRenderer extends _MarkdownRenderer { }
+    interface MarkdownSectionInformation extends _MarkdownSectionInformation { }
+    interface MarkdownSubView extends _MarkdownSubView { }
+    interface MarkdownView extends _MarkdownView { }
+    interface Menu extends _Menu { }
+    interface MenuItem extends _MenuItem { }
+    interface MenuPositionDef extends _MenuPositionDef { }
+    interface MenuSeparator extends _MenuSeparator { }
+    interface MetadataCache extends _MetadataCache { }
+    interface Modal extends _Modal { }
+    interface MomentFormatComponent extends _MomentFormatComponent { }
+    interface Notice extends _Notice { }
+    interface ObsidianProtocolData extends _ObsidianProtocolData { }
+    interface OpenViewState extends _OpenViewState { }
+    interface Platform extends _Platform { }
+    interface Plugin extends _Plugin { }
+    interface PluginManifest extends _PluginManifest { }
+    interface PluginSettingTab extends _PluginSettingTab { }
+    interface Point extends _Point { }
+    interface PopoverSuggest<T> extends _PopoverSuggest<T> { }
+    interface Pos extends _Pos { }
+    interface PreparedQuery extends _PreparedQuery { }
+    interface ProgressBarComponent extends _ProgressBarComponent { }
+    interface Reference extends _Reference { }
+    interface ReferenceCache extends _ReferenceCache { }
+    interface RequestUrlParam extends _RequestUrlParam { }
+    interface RequestUrlResponse extends _RequestUrlResponse { }
+    interface RequestUrlResponsePromise extends _RequestUrlResponsePromise { }
+    interface RGB extends _RGB { }
+    interface Scope extends _Scope { }
+    interface SearchComponent extends _SearchComponent { }
+    interface SearchResult extends _SearchResult { }
+    interface SearchResultContainer extends _SearchResultContainer { }
+    interface SectionCache extends _SectionCache { }
+    interface Setting extends _Setting { }
+    interface SettingTab extends _SettingTab { }
+    interface SliderComponent extends _SliderComponent { }
+    interface Stat extends _Stat { }
+    interface SubpathResult extends _SubpathResult { }
+    interface SuggestModal<T> extends _SuggestModal<T> { }
+    interface TAbstractFile extends _TAbstractFile { }
+    interface TagCache extends _TagCache { }
+    interface Tasks extends _Tasks { }
+    interface TextAreaComponent extends _TextAreaComponent { }
+    interface TextComponent extends _TextComponent { }
+    interface TextFileView extends _TextFileView { }
+    interface TFile extends _TFile { }
+    interface TFolder extends _TFolder { }
+    interface ToggleComponent extends _ToggleComponent { }
+    interface TooltipOptions extends _TooltipOptions { }
+    interface ValueComponent<T> extends _ValueComponent<T> { }
+    interface Vault extends _Vault { }
+    interface View extends _View { }
+    interface ViewState extends _ViewState { }
+    interface ViewStateResult extends _ViewStateResult { }
+    interface Workspace extends _Workspace { }
+    interface WorkspaceContainer extends _WorkspaceContainer { }
+    interface WorkspaceFloating extends _WorkspaceFloating { }
+    interface WorkspaceItem extends _WorkspaceItem { }
+    interface WorkspaceLeaf extends _WorkspaceLeaf { }
+    interface WorkspaceMobileDrawer extends _WorkspaceMobileDrawer { }
+    interface WorkspaceParent extends _WorkspaceParent { }
+    interface WorkspaceRibbon extends _WorkspaceRibbon { }
+    interface WorkspaceRoot extends _WorkspaceRoot { }
+    interface WorkspaceSidedock extends _WorkspaceSidedock { }
+    interface WorkspaceSplit extends _WorkspaceSplit { }
+    interface WorkspaceTabs extends _WorkspaceTabs { }
+    interface WorkspaceWindow extends _WorkspaceWindow { }
+    interface WorkspaceWindowInitData extends _WorkspaceWindowInitData { }
 }
