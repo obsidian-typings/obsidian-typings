@@ -4,7 +4,7 @@
  * {@link file://./../../node_modules/@codemirror/view/dist/index.d.ts}
  */
 
-import "./EditorView.d.ts";
+import "./augmentations/EditorView.d.ts";
 
 export { VimEditor } from "./internals/VimEditor.ts";
 export { VimState } from "./internals/VimState.ts";
