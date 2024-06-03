@@ -1,15 +1,17 @@
 # Introduction
 
 ## General Notes
+
 Feel free to start typing any part of the Obsidian API that is not yet typed, or fixing/adding additional descriptions to existing typings.
 If you are unsure about anything, don't hesitate to open an issue.
 
 ### TSDoc
+
 Please use [TSDoc](https://tsdoc.org/) to document the typings. This will allow the documentation to be automatically generated
 within your IDE, and can help with the discoverability of the typings.
 
+Example:
 
-Example: 
 ```ts
 interface someObject {
     /**
@@ -28,21 +30,19 @@ interface someObject {
 }
 ```
 
-> [!NOTE]
-> `@internal` --- Method is *very likely* not fully/correctly typed, and/or is not intended to be used by plugins.
-> 
+> [!NOTE] > `@internal` --- Method is _very likely_ not fully/correctly typed, and/or is not intended to be used by plugins.
+>
 > `@remark` --- Alternatives that should be used instead, or warnings about the function.
-> 
+>
 > `@tutorial` --- Short description on how the function could be used in your plugin.
-> 
+>
 > `@deprecated` --- Method is deprecated in a particular version (can't be found in `app.js` anymore).
-
 
 # Tutorial
 
 ## Adding new typings
 
-### Finding/Discovering new typings 
+### Finding/Discovering new typings
 
 The first step to add new typings, is finding the object/interface/module you want to add typings for within the Obsidian app.
 One of the easiest way to do this, is to open the developer console (Ctrl+Shift+I), and start searching for the interface you wish to
@@ -66,7 +66,7 @@ interface InternalPlugins extends Events {
     config: Record<unknown, unknown>;
     migration: unknown;
     plugins: Record<unknown, unknown>;
-    
+
     // Methods
     requestSaveConfig(): unknown;
     enable(): unknown;
@@ -75,6 +75,7 @@ interface InternalPlugins extends Events {
     // ...
 }
 ```
+
 To keep it simple, we first add `unknown` as type to every variable and method -- unless it is obvious what the type should be
 (i.e. `app` will always be an instance of `App`).
 
@@ -97,7 +98,11 @@ However, you can take this one step further still by considering the fact that e
 In this case, we might just define a new type that contains all the plugin IDs, and use this as the key for the `config` object:
 
 ```ts
-type InternalPluginName = 'audio-recorder' | 'backlink' | 'bookmarks' | 'canvas' /*| ... */;
+type InternalPluginName =
+    | "audio-recorder"
+    | "backlink"
+    | "bookmarks"
+    | "canvas" /*| ... */;
 interface InternalPlugins extends Events {
     // ...
     config: Record<InternalPluginName, boolean>;
@@ -127,7 +132,6 @@ interface InternalPlugins extends Events {
 Make sure to also add brief descriptions (using [TSDoc](https://tsdoc.org/)) to each of the variables. Mark variables that you are not entirely sure about with `@internal`.
 Feel free to copy descriptions from previous typings, or from the official API.
 
-
 ### Typing methods
 
 Typing methods is a bit more difficult, as aside you will need to know what the method does, and what the expected input and output is.
@@ -141,7 +145,6 @@ If possible, you can also run the method in the console, and see what happens (i
 
 As before, if you are not certain about the return type or the workings of the function in general,
 add a `@internal` tag to the method description, and/or mark the return type as `unknown`.
-
 
 ```ts
 interface InternalPlugins extends Events {
@@ -171,7 +174,6 @@ interface InternalPlugins extends Events {
 }
 ```
 
-
 ## Traversing and analysing the source code
 
 Finally, this is both the most tedious but also the most important technique: finding the definition of the method in the minified source code.
@@ -184,24 +186,24 @@ all the internal methods are defined.
 3. `Pretty format` the code (optional)
 4. Copy the code to your IDE of choice (optional, but recommended)
 
-
 ![images/accessing-main.png](images/accessing-main.png)
 
 With access to the minified code, you can now start searching through it and find the definition of the method you are trying to type.
 
 For any method "XYZ", start by just searching for "XYZ". Generally, the method is defined as either:
-- `t.XYZ = ...` (for prototype methods)
-- `t.prototype.XYZ = ...` (for prototype methods)
-- `function XYZ(` (for internal/minified methods)
 
-At this stage, you might get lucky and get a single definition, or you may get multiple definitions of the method. 
+-   `t.XYZ = ...` (for prototype methods)
+-   `t.prototype.XYZ = ...` (for prototype methods)
+-   `function XYZ(` (for internal/minified methods)
+
+At this stage, you might get lucky and get a single definition, or you may get multiple definitions of the method.
 In the latter case,
-you will need try to look at the context of the code to determine which interface/class the method belongs to. 
-The main tip for finding the correct definition, is to look at the other methods being defined on the prototype, 
+you will need try to look at the context of the code to determine which interface/class the method belongs to.
+The main tip for finding the correct definition, is to look at the other methods being defined on the prototype,
 and check if these match with the other methods of your object.
 
 With the correct line found for the definition, you can now start analysing the code to determine the input/output types
-and its behaviour. 
+and its behaviour.
 
 For example, the `requestSaveConfig` method (seen earlier) is defined as follows:
 
@@ -210,9 +212,10 @@ n.requestSaveConfig = at(n.saveConfig.bind(n), 1e3, !0),
 ```
 
 Here, we find the following three things:
-- `at` is a minified function that takes three arguments, and its return value is the return value of the method
-- `1e3` is shorthand notation for `1000`
-- `!0` is shorthand notation for `true`
+
+-   `at` is a minified function that takes three arguments, and its return value is the return value of the method
+-   `1e3` is shorthand notation for `1000`
+-   `!0` is shorthand notation for `true`
 
 (There are many shorthands and structural changes that you will need to get used to in the minified code)
 
@@ -221,13 +224,17 @@ Start by searching for `function at`, or `.prototype.at`. With any luck, this wi
 
 ```js
 function at(e, t, n) {
-    void 0 === t && (t = 0),
-    void 0 === n && (n = !1);
-    var i, r = null, o = null, a = null, s = 0, l = function() {
-        var t = o
-            , n = a;
-        /*   ...    */
-    }
+    void 0 === t && (t = 0), void 0 === n && (n = !1);
+    var i,
+        r = null,
+        o = null,
+        a = null,
+        s = 0,
+        l = function () {
+            var t = o,
+                n = a;
+            /*   ...    */
+        };
 }
 ```
 

@@ -9,7 +9,7 @@
  */
 // @ts-nocheck (Prevent compilation errors for people use the package as a submodule)
 
-import {Project, Node, ModuleDeclaration, SourceFile} from "ts-morph";
+import { Project, Node, ModuleDeclaration, SourceFile } from "ts-morph";
 import * as fs from "node:fs";
 
 const project = new Project();
@@ -34,7 +34,7 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile) {
         if (structure.methods!.length && structure.properties!.length)
             declaration.insertText(declaration.getMethods()[0].getStart(true), '\n');
     }
-    
+
     const newModule = file.addModule({
         name: module.getName(),
         kind: module.getDeclarationKind(),
@@ -50,16 +50,16 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile) {
 async function parseFile(file: string, output_file: string = file) {
     const sourceFile = project.addSourceFileAtPath(file);
 
-    const newFile = project.createSourceFile(file === output_file ? "temp.d.ts" : output_file, '', {overwrite: true});
-    
+    const newFile = project.createSourceFile(file === output_file ? "temp.d.ts" : output_file, '', { overwrite: true });
+
     const imports = sourceFile.getImportDeclarations().map(declaration => declaration.getText());
     const exports = sourceFile.getExportDeclarations().map(declaration => declaration.getText());
     newFile.addStatements(imports);
     newFile.addStatements(exports);
-    
+
     for (const module of sourceFile.getModules())
         await sortModule(module, newFile);
-    
+
     await newFile.save()
 
     if (file === output_file)

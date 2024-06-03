@@ -1,5 +1,5 @@
-import {readFileSync, writeFileSync} from "node:fs";
-import {spawnSync} from "node:child_process";
+import { readFileSync, writeFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
 import process from "node:process";
 
 const versionType = process.argv[2];

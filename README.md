@@ -1,7 +1,7 @@
-
 <center>
 
 # Obsidian Extended Typings
+
 </center>
 
 ---
@@ -21,9 +21,8 @@
     </a>
 </div>
 
-
-
 ---
+
 <div align="center">
 <h4>
  <a href="https://github.com/Fevol/obsidian-typings/blob/main/CHANGELOG.md">CHANGELOG</a>
@@ -35,11 +34,9 @@
 </h4>
 </div>
 
-
 ---
 
-
-This repository contains TypeScript typings for undocumented [Obsidian](https://obsidian.md/) API functions and variables and additional descriptions, 
+This repository contains TypeScript typings for undocumented [Obsidian](https://obsidian.md/) API functions and variables and additional descriptions,
 essentially extending the official [Obsidian API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
 
 Be aware that the typings currently only cover a subset of all methods: most of the `App` interface and its sub-interfaces
@@ -48,15 +45,16 @@ are covered, but typings for views like `Graph`, `Canvas`, ... are still missing
 ## Installation
 
 There are three options for installing this package:
+
 1. **Explicit type importing** <br> Each typing has to be imported explicitly from `obsidian-typings` instead of `obsidian`, e.g. `import {App, MarkdownView} from "obsidian-typings"`. <br> _Install via:_ `npm install --save-dev  obsidian-typings`
 
 2. **Automatic type extending** (recommended) <br> The typings are automatically added to the existing `obsidian` module, so you can use them without any changes to your code. <br> _Install via:_ `npm install --save-dev @types/obsidian-typings@npm:obsidian-typings`.
 
 3. **Add extended typings as submodule** <br> Your IDE will likely pick up the typings automatically when the project is added as a submodule for your plugin, this also makes it simpler to test and submit features to the repository. <br> _Install via:_ `git submodule add https://github.com/Fevol/obsidian-typings.git typings` (or any other folder)
 
-
 > [!WARNING]
 > If your IDE or TS compiler is not able to pick up the types from `obsidian-typings` but they were installed properly, you will need to adapt your `tsconfig.json` as follows:
+>
 > ```json
 > {
 >     "compilerOptions": {
@@ -67,6 +65,7 @@ There are three options for installing this package:
 >     }
 > }
 > ```
+>
 > (Add `"obsidian-typings"` to the `types` array for `compilerOptions`)
 
 ## Disclaimer
@@ -75,12 +74,13 @@ There are three options for installing this package:
 > Make sure to read below section in detail before using these typings.
 
 Please be aware that there is a good reason why (some of) the functions and types defined here are not included with the official API definitions:
-- The methods are not fully defined, and will be changed or removed in the near-future
-- There is a high risk of the code behaving unexpectedly if used improperly
-- The function was never meant to be used
+
+-   The methods are not fully defined, and will be changed or removed in the near-future
+-   There is a high risk of the code behaving unexpectedly if used improperly
+-   The function was never meant to be used
 
 Please use the functions and variables provided with caution. Be prepared to update your code if the API changes,
-and only use the functions if you are confident that you understand what they will do. Reference the [official API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts) 
+and only use the functions if you are confident that you understand what they will do. Reference the [official API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts)
 first to see if your problem may be solved with a documented function, or search
 in the #plugin-dev channel of the Obsidian Discord server. Some functions will also contain `@remark` TSDoc tags that provide
 alternatives or better solutions.
@@ -89,23 +89,21 @@ Methods marked `@internal` are especially risky to use: these are either not ful
 to be used internally by the Obsidian app.
 
 Furthermore, there is a very high chance that there are mistakes in the typings, despite best efforts.
-All types had to be deduced from either context, manually running the function, or from the minified app code. 
-You _**should**_ verify that the code behaves as expected, both with regard to the expected (input/output)types, as well as what 
+All types had to be deduced from either context, manually running the function, or from the minified app code.
+You _**should**_ verify that the code behaves as expected, both with regard to the expected (input/output)types, as well as what
 the function description promises.
 
 With these scary disclaimers out of the way, hopefully these typings will help you in removing 90% of the `@ts-ignore`s
 you have in your codebase, or discover solutions that didn't seem possible before.
 
-
-> [!NOTE] 
+> [!NOTE]
 > **TL;DR:** Use at your own risk, verify that the code behaves as expected, and be prepared to update your code if the API changes.
-> 
+>
 > `@internal` methods are especially risky to use.
-> 
+>
 > `@remark` tags give some warnings about the inputs/outputs of the function, or provide better alternatives.
-> 
+>
 > `@tutorial` gives additional information on how to use the function in your plugin.
-
 
 ## Contributing
 
