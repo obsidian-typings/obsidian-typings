@@ -1,1 +1,5 @@
-export default interface MarkdownRenderChild { }
+export { };
+
+declare module "obsidian" {
+    interface MarkdownRenderChild { }
+}

@@ -1,1 +1,5 @@
-export default interface Stat { }
+export { };
+
+declare module "obsidian" {
+    interface Stat { }
+}

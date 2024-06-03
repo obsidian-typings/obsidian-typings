@@ -1,1 +1,5 @@
-export default interface EditorTransaction { }
+export { };
+
+declare module "obsidian" {
+    interface EditorTransaction { }
+}

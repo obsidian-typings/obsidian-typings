@@ -1,1 +1,5 @@
-export default interface ReferenceCache { }
+export { };
+
+declare module "obsidian" {
+    interface ReferenceCache { }
+}

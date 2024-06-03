@@ -1,1 +1,5 @@
-export default interface CloseableComponent { }
+export { };
+
+declare module "obsidian" {
+    interface CloseableComponent { }
+}

@@ -1,1 +1,5 @@
-export default interface WorkspaceTabs { }
+export { };
+
+declare module "obsidian" {
+    interface WorkspaceTabs { }
+}

@@ -1,1 +1,5 @@
-export default interface TagCache { }
+export { };
+
+declare module "obsidian" {
+    interface TagCache { }
+}

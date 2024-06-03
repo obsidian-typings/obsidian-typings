@@ -1,11 +1,13 @@
-import type { App } from "obsidian";
+export { };
 
-/** @todo Documentation incomplete */
-export default interface BlockCache {
-    /**
-     * Reference to App
-     */
-    app: App;
-    /** @internal */
-    cache: unknown;
+declare module "obsidian" {
+    /** @todo Documentation incomplete */
+    interface BlockCache {
+        /**
+         * Reference to App
+         */
+        app: App;
+        /** @internal */
+        cache: unknown;
+    }
 }

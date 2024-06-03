@@ -1,1 +1,5 @@
-export default interface ListedFiles { }
+export { };
+
+declare module "obsidian" {
+    interface ListedFiles { }
+}

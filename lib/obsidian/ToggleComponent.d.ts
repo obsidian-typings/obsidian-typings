@@ -1,1 +1,5 @@
-export default interface ToggleComponent { }
+export { };
+
+declare module "obsidian" {
+    interface ToggleComponent { }
+}

@@ -1,1 +1,5 @@
-export default interface WorkspaceContainer { }
+export { };
+
+declare module "obsidian" {
+    interface WorkspaceContainer { }
+}

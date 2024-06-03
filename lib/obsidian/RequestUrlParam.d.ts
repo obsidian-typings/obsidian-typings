@@ -1,1 +1,5 @@
-export default interface RequestUrlParam { }
+export { };
+
+declare module "obsidian" {
+    interface RequestUrlParam { }
+}

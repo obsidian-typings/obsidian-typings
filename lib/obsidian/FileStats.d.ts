@@ -1,1 +1,5 @@
-export default interface FileStats { }
+export { };
+
+declare module "obsidian" {
+    interface FileStats { }
+}

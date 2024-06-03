@@ -1,1 +1,5 @@
-export default interface Notice { }
+export { };
+
+declare module "obsidian" {
+    interface Notice { }
+}

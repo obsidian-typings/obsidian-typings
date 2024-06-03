@@ -1,1 +1,5 @@
-export default interface WorkspaceFloating { }
+export { };
+
+declare module "obsidian" {
+    interface WorkspaceFloating { }
+}

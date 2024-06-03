@@ -1,1 +1,5 @@
-export default interface SearchComponent { }
+export { };
+
+declare module "obsidian" {
+    interface SearchComponent { }
+}

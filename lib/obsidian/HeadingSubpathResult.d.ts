@@ -1,1 +1,5 @@
-export default interface HeadingSubpathResult { }
+export { };
+
+declare module "obsidian" {
+    interface HeadingSubpathResult { }
+}

@@ -1,6 +1,8 @@
-import type { SearchResult } from "obsidian";
+export { };
 
-/** @todo Documentation incomplete */
-export default interface EditorSuggest<T> {
-    showSuggestions(results: SearchResult[]): void;
+declare module "obsidian" {
+    /** @todo Documentation incomplete */
+    interface EditorSuggest<T> {
+        showSuggestions(results: SearchResult[]): void;
+    }
 }

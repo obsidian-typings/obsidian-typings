@@ -1,1 +1,5 @@
-export default interface TextAreaComponent { }
+export { };
+
+declare module "obsidian" {
+    interface TextAreaComponent { }
+}

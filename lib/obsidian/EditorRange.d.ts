@@ -1,1 +1,5 @@
-export default interface EditorRange { }
+export { };
+
+declare module "obsidian" {
+    interface EditorRange { }
+}

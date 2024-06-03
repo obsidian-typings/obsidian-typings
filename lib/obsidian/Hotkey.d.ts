@@ -1,1 +1,5 @@
-export default interface Hotkey { }
+export { };
+
+declare module "obsidian" {
+    interface Hotkey { }
+}

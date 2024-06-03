@@ -1,1 +1,5 @@
-export default interface ColorComponent { }
+export { };
+
+declare module "obsidian" {
+    interface ColorComponent { }
+}

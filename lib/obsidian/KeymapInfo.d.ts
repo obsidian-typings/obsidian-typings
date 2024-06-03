@@ -1,1 +1,5 @@
-export default interface KeymapInfo { }
+export { };
+
+declare module "obsidian" {
+    interface KeymapInfo { }
+}

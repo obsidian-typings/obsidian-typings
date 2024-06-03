@@ -1,3 +1,7 @@
-export default interface DomElementInfo {
-    [eventName: `on${string}`]: EventListenerOrEventListenerObject;
+export { };
+
+declare global {
+    interface DomElementInfo {
+        [eventName: `on${string}`]: EventListenerOrEventListenerObject;
+    }
 }

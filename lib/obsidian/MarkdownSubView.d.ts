@@ -1,1 +1,5 @@
-export default interface MarkdownSubView { }
+export { };
+
+declare module "obsidian" {
+    interface MarkdownSubView { }
+}

@@ -1,1 +1,5 @@
-export default interface MomentFormatComponent { }
+export { };
+
+declare module "obsidian" {
+    interface MomentFormatComponent { }
+}

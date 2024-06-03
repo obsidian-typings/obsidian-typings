@@ -1,5 +1,9 @@
-/** @todo Documentation incomplete */
-export default interface SuggestModal<T> {
-    /** @internal */
-    clearButtonEl: HTMLButtonElement;
+export { };
+
+declare module "obsidian" {
+    /** @todo Documentation incomplete */
+    interface SuggestModal<T> {
+        /** @internal */
+        clearButtonEl: HTMLButtonElement;
+    }
 }

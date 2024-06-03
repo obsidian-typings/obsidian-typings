@@ -1,1 +1,5 @@
-export default interface FuzzyMatch<T> { }
+export { };
+
+declare module "obsidian" {
+    interface FuzzyMatch<T> { }
+}

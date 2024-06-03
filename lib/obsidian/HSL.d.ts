@@ -1,1 +1,5 @@
-export default interface HSL { }
+export { };
+
+declare module "obsidian" {
+    interface HSL { }
+}

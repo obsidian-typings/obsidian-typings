@@ -1,1 +1,5 @@
-export default interface ListItemCache { }
+export { };
+
+declare module "obsidian" {
+    interface ListItemCache { }
+}

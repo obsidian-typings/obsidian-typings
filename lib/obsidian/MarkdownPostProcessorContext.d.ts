@@ -1,1 +1,5 @@
-export default interface MarkdownPostProcessorContext { }
+export { };
+
+declare module "obsidian" {
+    interface MarkdownPostProcessorContext { }
+}

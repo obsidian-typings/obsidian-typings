@@ -1,1 +1,5 @@
-export default interface EditorSuggestContext { }
+export { };
+
+declare module "obsidian" {
+    interface EditorSuggestContext { }
+}

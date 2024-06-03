@@ -1,1 +1,5 @@
-export default interface SearchResultContainer { }
+export { };
+
+declare module "obsidian" {
+    interface SearchResultContainer { }
+}

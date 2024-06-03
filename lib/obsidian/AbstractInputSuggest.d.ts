@@ -1,1 +1,5 @@
-export default interface AbstractInputSuggest<T> { }
+export { };
+
+declare module "obsidian" {
+    interface AbstractInputSuggest<T> { }
+}

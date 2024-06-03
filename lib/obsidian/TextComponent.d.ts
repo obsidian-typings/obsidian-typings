@@ -1,1 +1,5 @@
-export default interface TextComponent { }
+export { };
+
+declare module "obsidian" {
+    interface TextComponent { }
+}

@@ -1,1 +1,5 @@
-export default interface Command { }
+export { };
+
+declare module "obsidian" {
+    interface Command { }
+}

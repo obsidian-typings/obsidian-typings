@@ -1,4 +1,8 @@
 /** @todo Documentation incomplete */
-export default interface WorkspaceSplit {
-    parent?: WorkspaceSplit;
+export { };
+
+declare module "obsidian" {
+    interface WorkspaceSplit {
+        parent?: WorkspaceSplit;
+    }
 }

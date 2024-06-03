@@ -1,1 +1,5 @@
-export default interface KeymapContext { }
+export { };
+
+declare module "obsidian" {
+    interface KeymapContext { }
+}

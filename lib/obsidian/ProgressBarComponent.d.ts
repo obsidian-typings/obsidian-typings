@@ -1,1 +1,5 @@
-export default interface ProgressBarComponent { }
+export { };
+
+declare module "obsidian" {
+    interface ProgressBarComponent { }
+}

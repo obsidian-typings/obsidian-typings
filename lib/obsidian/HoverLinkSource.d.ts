@@ -1,5 +1,9 @@
-/** @todo Documentation incomplete */
-export default interface HoverLinkSource {
-    defaultMod: boolean;
-    display: string;
+export { };
+
+declare module "obsidian" {
+    /** @todo Documentation incomplete */
+    interface HoverLinkSource {
+        defaultMod: boolean;
+        display: string;
+    }
 }

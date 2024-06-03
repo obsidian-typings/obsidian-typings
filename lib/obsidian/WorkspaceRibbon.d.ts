@@ -1,1 +1,5 @@
-export default interface WorkspaceRibbon { }
+export { };
+
+declare module "obsidian" {
+    interface WorkspaceRibbon { }
+}

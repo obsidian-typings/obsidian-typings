@@ -1,1 +1,5 @@
-export default interface SectionCache { }
+export { };
+
+declare module "obsidian" {
+    interface SectionCache { }
+}

@@ -1,1 +1,5 @@
-export default interface ISuggestOwner<T> { }
+export { };
+
+declare module "obsidian" {
+    interface ISuggestOwner<T> { }
+}

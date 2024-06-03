@@ -1,1 +1,5 @@
-export default interface livePreviewState { }
+export { };
+
+declare module "obsidian" {
+    interface livePreviewState { }
+}

@@ -1,9 +1,11 @@
-import type { TFile } from "obsidian";
+export { };
 
-/** @todo Documentation incomplete */
-export default interface EditableFileView {
-    /**
-     * The file that is currently being renamed
-     */
-    fileBeingRenamed: null | TFile;
+declare module "obsidian" {
+    /** @todo Documentation incomplete */
+    interface EditableFileView {
+        /**
+         * The file that is currently being renamed
+         */
+        fileBeingRenamed: null | TFile;
+    }
 }

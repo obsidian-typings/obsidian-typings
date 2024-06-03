@@ -1,3 +1,5 @@
-import type { DataAdapter } from "obsidian";
+export { };
 
-export default interface FileSystemAdapter extends DataAdapter { }
+declare module "obsidian" {
+    interface FileSystemAdapter extends DataAdapter { }
+}

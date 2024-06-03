@@ -1,1 +1,5 @@
-export default interface ValueComponent<T> { }
+export { };
+
+declare module "obsidian" {
+    interface ValueComponent<T> { }
+}

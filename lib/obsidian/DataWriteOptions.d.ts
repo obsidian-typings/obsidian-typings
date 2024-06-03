@@ -1,1 +1,5 @@
-export default interface DataWriteOptions { }
+export { };
+
+declare module "obsidian" {
+    interface DataWriteOptions { }
+}

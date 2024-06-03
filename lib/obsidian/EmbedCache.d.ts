@@ -1,1 +1,5 @@
-export default interface EmbedCache { }
+export { };
+
+declare module "obsidian" {
+    interface EmbedCache { }
+}

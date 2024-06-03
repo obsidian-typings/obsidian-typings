@@ -1,1 +1,5 @@
-export default interface MarkdownSectionInformation { }
+export { };
+
+declare module "obsidian" {
+    interface MarkdownSectionInformation { }
+}

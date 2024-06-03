@@ -1,1 +1,5 @@
-export default interface Debouncer<T, V> { }
+export { };
+
+declare module "obsidian" {
+    interface Debouncer<T, V> { }
+}

@@ -1,1 +1,5 @@
-export default interface Point { }
+export { };
+
+declare module "obsidian" {
+    interface Point { }
+}

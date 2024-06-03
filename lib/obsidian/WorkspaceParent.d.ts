@@ -1,1 +1,5 @@
-export default interface WorkspaceParent { }
+export { };
+
+declare module "obsidian" {
+    interface WorkspaceParent { }
+}

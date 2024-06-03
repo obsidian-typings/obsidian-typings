@@ -1,1 +1,5 @@
-export default interface RGB { }
+export { };
+
+declare module "obsidian" {
+    interface RGB { }
+}

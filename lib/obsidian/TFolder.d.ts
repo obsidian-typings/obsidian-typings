@@ -1,1 +1,5 @@
-export default interface TFolder { }
+export { };
+
+declare module "obsidian" {
+    interface TFolder { }
+}

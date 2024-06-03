@@ -1,1 +1,5 @@
-export default interface RequestUrlResponsePromise { }
+export { };
+
+declare module "obsidian" {
+    interface RequestUrlResponsePromise { }
+}

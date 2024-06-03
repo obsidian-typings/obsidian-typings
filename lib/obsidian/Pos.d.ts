@@ -1,1 +1,5 @@
-export default interface Pos { }
+export { };
+
+declare module "obsidian" {
+    interface Pos { }
+}

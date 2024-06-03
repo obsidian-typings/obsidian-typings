@@ -1,6 +1,10 @@
+export { };
+
 import type { VimEditor } from "./internals/index.d.ts";
 
-/** @todo Documentation incomplete */
-export default interface EditorView {
-    cm?: VimEditor;
+declare module "@codemirror/view" {
+    /** @todo Documentation incomplete */
+    interface EditorView {
+        cm?: VimEditor;
+    }
 }

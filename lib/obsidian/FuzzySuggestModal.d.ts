@@ -1,1 +1,5 @@
-export default interface FuzzySuggestModal<T> { }
+export { };
+
+declare module "obsidian" {
+    interface FuzzySuggestModal<T> { }
+}

@@ -1,1 +1,5 @@
-export default interface MarkdownPreviewRenderer { }
+export { };
+
+declare module "obsidian" {
+    interface MarkdownPreviewRenderer { }
+}

@@ -1,1 +1,5 @@
-export default interface HoverParent { }
+export { };
+
+declare module "obsidian" {
+    interface HoverParent { }
+}

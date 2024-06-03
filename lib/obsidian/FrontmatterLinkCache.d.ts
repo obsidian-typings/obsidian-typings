@@ -1,1 +1,5 @@
-export default interface FrontmatterLinkCache { }
+export { };
+
+declare module "obsidian" {
+    interface FrontmatterLinkCache { }
+}

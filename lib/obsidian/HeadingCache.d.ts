@@ -1,1 +1,5 @@
-export default interface HeadingCache { }
+export { };
+
+declare module "obsidian" {
+    interface HeadingCache { }
+}

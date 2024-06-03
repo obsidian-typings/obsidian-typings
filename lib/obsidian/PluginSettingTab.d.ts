@@ -1,1 +1,5 @@
-export default interface PluginSettingTab { }
+export { };
+
+declare module "obsidian" {
+    interface PluginSettingTab { }
+}

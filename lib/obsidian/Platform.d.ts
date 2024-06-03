@@ -1,1 +1,5 @@
-export default interface Platform { }
+export { };
+
+declare module "obsidian" {
+    interface Platform { }
+}

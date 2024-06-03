@@ -1,1 +1,5 @@
-export default interface MenuPositionDef { }
+export { };
+
+declare module "obsidian" {
+    interface MenuPositionDef { }
+}

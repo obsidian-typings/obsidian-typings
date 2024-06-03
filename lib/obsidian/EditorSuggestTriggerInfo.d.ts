@@ -1,1 +1,5 @@
-export default interface EditorSuggestTriggerInfo { }
+export { };
+
+declare module "obsidian" {
+    interface EditorSuggestTriggerInfo { }
+}

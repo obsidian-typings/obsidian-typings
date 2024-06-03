@@ -1,1 +1,5 @@
-export default interface PreparedQuery { }
+export { };
+
+declare module "obsidian" {
+    interface PreparedQuery { }
+}

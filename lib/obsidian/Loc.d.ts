@@ -1,1 +1,5 @@
-export default interface Loc { }
+export { };
+
+declare module "obsidian" {
+    interface Loc { }
+}

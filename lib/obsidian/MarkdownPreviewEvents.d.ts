@@ -1,1 +1,5 @@
-export default interface MarkdownPreviewEvents { }
+export { };
+
+declare module "obsidian" {
+    interface MarkdownPreviewEvents { }
+}

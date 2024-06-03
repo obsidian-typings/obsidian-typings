@@ -1,1 +1,5 @@
-export default interface Reference { }
+export { };
+
+declare module "obsidian" {
+    interface Reference { }
+}

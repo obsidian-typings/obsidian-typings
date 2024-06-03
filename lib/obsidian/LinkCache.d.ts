@@ -1,1 +1,5 @@
-export default interface LinkCache { }
+export { };
+
+declare module "obsidian" {
+    interface LinkCache { }
+}

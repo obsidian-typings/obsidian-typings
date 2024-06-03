@@ -1,5 +1,9 @@
+export { };
+
 import type { FootnoteCache } from "./internals/index.d.ts";
 
-export default interface CachedMetadata {
-    footnotes?: FootnoteCache[];
+declare module "obsidian" {
+    interface CachedMetadata {
+        footnotes?: FootnoteCache[];
+    }
 }

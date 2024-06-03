@@ -1,1 +1,5 @@
-export default interface EditorSelectionOrCaret { }
+export { };
+
+declare module "obsidian" {
+    interface EditorSelectionOrCaret { }
+}

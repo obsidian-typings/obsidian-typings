@@ -1,1 +1,5 @@
-export default interface WorkspaceMobileDrawer { }
+export { };
+
+declare module "obsidian" {
+    interface WorkspaceMobileDrawer { }
+}

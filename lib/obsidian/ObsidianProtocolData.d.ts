@@ -1,1 +1,5 @@
-export default interface ObsidianProtocolData { }
+export { };
+
+declare module "obsidian" {
+    interface ObsidianProtocolData { }
+}

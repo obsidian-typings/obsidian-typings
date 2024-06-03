@@ -1,1 +1,5 @@
-export default interface WorkspaceItem { }
+export { };
+
+declare module "obsidian" {
+    interface WorkspaceItem { }
+}

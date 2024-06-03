@@ -1,1 +1,5 @@
-export default interface ExtraButtonComponent { }
+export { };
+
+declare module "obsidian" {
+    interface ExtraButtonComponent { }
+}

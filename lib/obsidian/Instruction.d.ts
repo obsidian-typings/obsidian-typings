@@ -1,1 +1,5 @@
-export default interface Instruction { }
+export { };
+
+declare module "obsidian" {
+    interface Instruction { }
+}

@@ -1,1 +1,5 @@
-export default interface TooltipOptions { }
+export { };
+
+declare module "obsidian" {
+    interface TooltipOptions { }
+}

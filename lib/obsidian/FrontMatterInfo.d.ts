@@ -1,1 +1,5 @@
-export default interface FrontMatterInfo { }
+export { };
+
+declare module "obsidian" {
+    interface FrontMatterInfo { }
+}

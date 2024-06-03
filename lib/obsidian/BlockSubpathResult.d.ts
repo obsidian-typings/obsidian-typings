@@ -1,1 +1,5 @@
-export default interface BlockSubpathResult { }
+export { };
+
+declare module "obsidian" {
+    interface BlockSubpathResult { }
+}

@@ -1,1 +1,5 @@
-export default interface SliderComponent { }
+export { };
+
+declare module "obsidian" {
+    interface SliderComponent { }
+}

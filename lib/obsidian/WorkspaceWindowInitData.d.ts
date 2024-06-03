@@ -1,1 +1,5 @@
-export default interface WorkspaceWindowInitData { }
+export { };
+
+declare module "obsidian" {
+    interface WorkspaceWindowInitData { }
+}

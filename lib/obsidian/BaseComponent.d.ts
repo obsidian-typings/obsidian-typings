@@ -1,1 +1,5 @@
-export default interface BaseComponent { }
+export { };
+
+declare module "obsidian" {
+    interface BaseComponent { }
+}

@@ -1,1 +1,5 @@
-export default interface EditorPosition { }
+export { };
+
+declare module "obsidian" {
+    interface EditorPosition { }
+}

@@ -1,5 +1,9 @@
-/** @todo Documentation incomplete */
-export default interface HoverPopover {
-    /** @internal */
-    watchResize(): void;
+export { };
+
+declare module "obsidian" {
+    /** @todo Documentation incomplete */
+    interface HoverPopover {
+        /** @internal */
+        watchResize(): void;
+    }
 }

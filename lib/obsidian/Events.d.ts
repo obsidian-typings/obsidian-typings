@@ -1,1 +1,5 @@
-export default interface Events { }
+export { };
+
+declare module "obsidian" {
+    interface Events { }
+}

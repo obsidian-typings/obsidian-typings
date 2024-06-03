@@ -4,8 +4,4 @@
  * {@link file://./../../node_modules/obsidian/obsidian.d.ts}
  */
 
-import type _DomElementInfo from "./DomElementInfo.d.ts";
-
-declare global {
-    interface DomElementInfo extends _DomElementInfo {}
-}
+import "./DomElementInfo.d.ts";

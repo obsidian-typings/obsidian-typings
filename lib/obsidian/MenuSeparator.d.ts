@@ -1,1 +1,5 @@
-export default interface MenuSeparator { }
+export { };
+
+declare module "obsidian" {
+    interface MenuSeparator { }
+}

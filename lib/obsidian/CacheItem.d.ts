@@ -1,1 +1,5 @@
-export default interface CacheItem { }
+export { };
+
+declare module "obsidian" {
+    interface CacheItem { }
+}

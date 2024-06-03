@@ -1,1 +1,5 @@
-export default interface AbstractTextComponent<T> { }
+export { };
+
+declare module "obsidian" {
+    interface AbstractTextComponent<T> { }
+}

@@ -1,1 +1,5 @@
-export default interface ViewState { }
+export { };
+
+declare module "obsidian" {
+    interface ViewState { }
+}

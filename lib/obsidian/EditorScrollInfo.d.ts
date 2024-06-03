@@ -1,1 +1,5 @@
-export default interface EditorScrollInfo { }
+export { };
+
+declare module "obsidian" {
+    interface EditorScrollInfo { }
+}

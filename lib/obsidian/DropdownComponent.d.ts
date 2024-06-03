@@ -1,1 +1,5 @@
-export default interface DropdownComponent { }
+export { };
+
+declare module "obsidian" {
+    interface DropdownComponent { }
+}

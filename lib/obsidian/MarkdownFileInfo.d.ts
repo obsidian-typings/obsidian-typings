@@ -1,1 +1,5 @@
-export default interface MarkdownFileInfo { }
+export { };
+
+declare module "obsidian" {
+    interface MarkdownFileInfo { }
+}

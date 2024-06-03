@@ -1,1 +1,5 @@
-export default interface Tasks { }
+export { };
+
+declare module "obsidian" {
+    interface Tasks { }
+}

@@ -1,2 +1,6 @@
-/** @todo Documentation incomplete */
-export default interface Keymap { }
+export { };
+
+declare module "obsidian" {
+    /** @todo Documentation incomplete */
+    interface Keymap { }
+}

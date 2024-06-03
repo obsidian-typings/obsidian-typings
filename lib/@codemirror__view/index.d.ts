@@ -7,8 +7,4 @@ import "@codemirror/view";
 
 export * from "./internals/index.ts";
 
-import type _EditorView from "./EditorView.d.ts";
-
-declare module "@codemirror/view" {
-    interface EditorView extends _EditorView { }
-}
+import "./EditorView.d.ts";
