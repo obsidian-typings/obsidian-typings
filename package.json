@@ -2,8 +2,10 @@
     "name": "obsidian-typings",
     "version": "1.1.6",
     "description": "Extended type definitions for the Obsidian API (https://obsidian.md)",
-    "main": "lib/index.ts",
-    "types": "lib/index.d.ts",
+    "exports": {
+        ".": "./lib/index.d.ts",
+        "./implementations": "./lib/implementations.ts"
+    },
     "type": "module",
     "repository": {
         "type": "git",
