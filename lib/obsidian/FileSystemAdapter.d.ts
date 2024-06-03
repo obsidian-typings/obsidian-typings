@@ -1,1 +1,3 @@
-export default interface FileSystemAdapter { }
+import { DataAdapter } from "./DataAdapter.d.ts";
+
+export default interface FileSystemAdapter extends DataAdapter { }

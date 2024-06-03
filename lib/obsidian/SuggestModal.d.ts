@@ -1,1 +1,5 @@
-export default interface SuggestModal { }
+/** @todo Documentation incomplete */
+export default interface SuggestModal<T> {
+    /** @internal */
+    clearButtonEl: HTMLButtonElement;
+}

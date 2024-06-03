@@ -1,1 +1,4 @@
-export default interface WorkspaceSplit { }
+/** @todo Documentation incomplete */
+export default interface WorkspaceSplit {
+    parent?: WorkspaceSplit;
+}
