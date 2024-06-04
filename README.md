@@ -58,11 +58,11 @@ There are three options for installing this package:
 
     _Install via_: `npm install --save-dev @types/obsidian-typings@npm:obsidian-typings`.
 
-    > [!WARNING]
-    >
-    >  In this approach you will not be able to use `import { ... } from "obsidian-typings/implementations"`.
-    >
-    >  You will have to use a hack `import { ... } from "./node_modules/@types/obsidian-typings/lib/implementations.js"`.
+> [!WARNING]
+>
+>  In this approach you will not be able to use `import { ... } from "obsidian-typings/implementations"`.
+>
+>  You will have to use a hack `import { ... } from "./node_modules/@types/obsidian-typings/lib/implementations.js"`.
 
 3. **Add extended typings as submodule**
 
@@ -86,19 +86,19 @@ There are three options for installing this package:
     }
     ```
 
-    > [!WARNING]
-    >
-    > If your `tsconfig.json` did not specify `types` setting before, and you add it, your automatic discovery of `@types/some-package-name` will stop working and you might need to add:
-    > ```json
-    > {
-    >     "compilerOptions": {
-    >         ...
-    >         "types": [
-    >             "obsidian-typings",
-    >             "some-package-name"
-    >         ]
-    >     }
-    > }
+> [!WARNING]
+>
+> If your `tsconfig.json` did not specify `types` setting before, and you add it, your automatic discovery of `@types/some-package-name` will stop working and you might need to add:
+> ```json
+> {
+>     "compilerOptions": {
+>         ...
+>         "types": [
+>             "obsidian-typings",
+>             "some-package-name"
+>         ]
+>     }
+> }
 
 ## Usage
 
