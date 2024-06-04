@@ -128,6 +128,20 @@ import { InternalPluginName } from "obsidian-typings/implementations";
 app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
 ```
 
+If you need to extend the typings provided by this package, add to any `.d.ts` file in your project:
+
+```ts
+export {};
+
+declare module "obsidian-typings" {
+    interface Plugins {
+        plugins: {
+            "myPlugin": MyPlugin;
+        };
+    }
+}
+```
+
 ## Disclaimer
 
 > [!WARNING]
