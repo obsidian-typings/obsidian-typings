@@ -46,41 +46,59 @@ are covered, but typings for views like `Graph`, `Canvas`, ... are still missing
 
 There are three options for installing this package:
 
-1. **Explicit type importing** <br> Each typing has to be imported explicitly from `obsidian-typings` instead of `obsidian`, e.g. `import {App, MarkdownView} from "obsidian-typings"`. <br> _Install via:_ `npm install --save-dev  obsidian-typings`
+1. **Explicit type importing** 
 
-2. **Automatic type extending** (recommended) <br> The typings are automatically added to the existing `obsidian` module, so you can use them without any changes to your code. <br> _Install via:_ `npm install --save-dev @types/obsidian-typings@npm:obsidian-typings`.
+    Explicitly add `import "obsidian-typings";` in any project file.
 
-3. **Add extended typings as submodule** <br> Your IDE will likely pick up the typings automatically when the project is added as a submodule for your plugin, this also makes it simpler to test and submit features to the repository. <br> _Install via:_ `git submodule add https://github.com/Fevol/obsidian-typings.git typings` (or any other folder)
+    _Install via_: `npm install --save-dev obsidian-typings`
 
-> [!WARNING]
-> If your IDE or TS compiler is not able to pick up the types from `obsidian-typings` but they were installed properly, you will need to adapt your `tsconfig.json` as follows:
->
-> ```json
-> {
->     "compilerOptions": {
->         ...
->         "types": [
->             "obsidian-typings"
->         ]
->     }
-> }
-> ```
->
-> (Add `"obsidian-typings"` to the `types` array for `compilerOptions`)
+2. **Automatic type extending** (recommended)
 
-> [!WARNING]
-> If your `tsconfig.json` did not specify `types` setting before, and you add it, your automatic discovery of `@types/some-package-name` will stop working and you might need to add:
-> ```json
-> {
->     "compilerOptions": {
->         ...
->         "types": [
->             "obsidian-typings",
->             "some-package-name"
->         ]
->     }
-> }
-> ```
+    The typings are automatically added to the existing `obsidian` module, so you can use them without any changes to your code.
+
+    _Install via_: `npm install --save-dev @types/obsidian-typings@npm:obsidian-typings`.
+
+    > [!WARNING]
+    >
+    >  In this approach you will not be able to use `import { ... } from "obsidian-typings/implementations"`.
+    >
+    >  You will have to use a hack `import { ... } from "./node_modules/@types/obsidian-typings/lib/implementations.js"`.
+
+3. **Add extended typings as submodule**
+
+    Your IDE will likely pick up the typings automatically when the project is added as a submodule for your plugin, this also makes it simpler to test and submit features to the repository.
+
+    _Install via_: `git submodule add https://github.com/Fevol/obsidian-typings.git typings` (or any other folder)
+
+
+4. **Add `types` setting to `tsconfig.json`**
+
+    If you prefer to have original NPM package name `obsidian-typings` but don't want to explicitly import its types to your source codes, you could add in your `tsconfig.json`:
+
+    ```json
+    {
+        "compilerOptions": {
+            ...
+            "types": [
+                "obsidian-typings"
+            ]
+        }
+    }
+    ```
+
+    > [!WARNING]
+    >
+    > If your `tsconfig.json` did not specify `types` setting before, and you add it, your automatic discovery of `@types/some-package-name` will stop working and you might need to add:
+    > ```json
+    > {
+    >     "compilerOptions": {
+    >         ...
+    >         "types": [
+    >             "obsidian-typings",
+    >             "some-package-name"
+    >         ]
+    >     }
+    > }
 
 ## Usage
 
@@ -113,6 +131,7 @@ app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
 ## Disclaimer
 
 > [!WARNING]
+>
 > Make sure to read below section in detail before using these typings.
 
 Please be aware that there is a good reason why (some of) the functions and types defined here are not included with the official API definitions:
@@ -139,6 +158,7 @@ With these scary disclaimers out of the way, hopefully these typings will help y
 you have in your codebase, or discover solutions that didn't seem possible before.
 
 > [!NOTE]
+>
 > **TL;DR:** Use at your own risk, verify that the code behaves as expected, and be prepared to update your code if the API changes.
 >
 > `@internal` methods are especially risky to use.
