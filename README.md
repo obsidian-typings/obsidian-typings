@@ -136,7 +136,7 @@ export {};
 declare module "obsidian-typings" {
     interface Plugins {
         plugins: {
-            "myPlugin": MyPlugin;
+            myPlugin: MyPlugin;
         };
     }
 }
