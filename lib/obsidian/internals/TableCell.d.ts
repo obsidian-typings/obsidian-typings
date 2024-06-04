@@ -1,4 +1,4 @@
-import type { TableCellEditor } from "../types.d.ts";
+import type { TableCellEditor } from "../types.js";
 /** @todo Documentation incomplete */
 export interface TableCell {
     col: number;

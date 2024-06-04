@@ -1,4 +1,4 @@
-import type { CustomArrayDict } from "../types.d.ts";
+import type { CustomArrayDict } from "../types.js";
 
 export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
     public data: Record<string, T[]> = {};

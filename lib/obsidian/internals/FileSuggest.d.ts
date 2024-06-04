@@ -1,4 +1,4 @@
-import type { FileSuggestManager } from "../types.d.ts";
+import type { FileSuggestManager } from "../types.js";
 import type { EditorSuggest } from "obsidian";
 /** @todo Documentation incomplete */
 export interface FileSuggest<T> extends EditorSuggest<T> {

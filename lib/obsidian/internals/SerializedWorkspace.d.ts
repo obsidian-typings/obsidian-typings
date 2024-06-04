@@ -1,4 +1,4 @@
-import type { LeafEntry } from "../types.d.ts";
+import type { LeafEntry } from "../types.js";
 export interface SerializedWorkspace {
     /**
      * Last active leaf

@@ -1,4 +1,4 @@
-import type { ThemeManifest } from "../types.d.ts";
+import type { ThemeManifest } from "../types.js";
 import type {
     App,
     Component

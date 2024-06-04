@@ -1,4 +1,4 @@
-import type { ImportedAttachments } from "../types.d.ts";
+import type { ImportedAttachments } from "../types.js";
 import type {
     App,
     MarkdownView,

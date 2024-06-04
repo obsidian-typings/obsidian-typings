@@ -1,7 +1,7 @@
 import type {
     FoldInfo,
     MarkdownScrollableEditView
-} from "../types.d.ts";
+} from "../types.js";
 import type { Extension } from "@codemirror/state";
 import type { ViewUpdate } from "@codemirror/view";
 

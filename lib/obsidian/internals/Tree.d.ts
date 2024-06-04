@@ -1,7 +1,7 @@
 import type {
     InfinityScroll,
     TreeNode
-} from "../types.d.ts";
+} from "../types.js";
 import type {
     App,
     Scope,

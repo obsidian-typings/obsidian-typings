@@ -1,4 +1,4 @@
-import type { RendererSection } from "../types.d.ts";
+import type { RendererSection } from "../types.js";
 /** @todo Documentation incomplete */
 export interface ReadViewRenderer {
     addBottomPadding: boolean;

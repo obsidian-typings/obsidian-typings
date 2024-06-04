@@ -1,4 +1,4 @@
-import type { VimEditor } from "../types.d.ts";
+import type { VimEditor } from "../types.js";
 
 export {};
 

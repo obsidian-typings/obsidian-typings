@@ -2,7 +2,7 @@ import type {
     CustomArrayDict,
     FileCacheEntry,
     PropertyInfo
-} from "../types.d.ts";
+} from "../types.js";
 
 export {};
 

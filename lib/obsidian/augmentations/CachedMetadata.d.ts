@@ -1,4 +1,4 @@
-import type { FootnoteCache } from "../types.d.ts";
+import type { FootnoteCache } from "../types.js";
 
 export {};
 

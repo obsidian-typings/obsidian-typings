@@ -1,4 +1,4 @@
-import type { Runnable } from "../types.d.ts";
+import type { Runnable } from "../types.js";
 import type {
     App,
     BlockCache,

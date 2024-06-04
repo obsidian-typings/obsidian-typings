@@ -4,4 +4,4 @@
  * {@link file://./../../node_modules/obsidian/obsidian.d.ts}
  */
 
-import "./augmentations/DomElementInfo.d.ts";
+import "./augmentations/DomElementInfo.js";

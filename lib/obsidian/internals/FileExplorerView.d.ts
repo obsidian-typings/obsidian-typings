@@ -3,7 +3,7 @@ import type {
     Tree,
     TreeItem,
     WeakMapWrapper
-} from "../types.d.ts";
+} from "../types.js";
 import type {
     TAbstractFile,
     TFile,

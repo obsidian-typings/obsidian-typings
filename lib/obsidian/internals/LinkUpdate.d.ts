@@ -1,4 +1,4 @@
-import type { PositionedReference } from "../types.d.ts";
+import type { PositionedReference } from "../types.js";
 import type {
     App,
     TFile

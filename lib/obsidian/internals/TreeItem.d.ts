@@ -1,4 +1,4 @@
-import type { TreeNode } from "../types.d.ts";
+import type { TreeNode } from "../types.js";
 import type { View } from "obsidian";
 
 /** @todo Documentation incomplete */

@@ -1,4 +1,4 @@
-import type { KeyScope } from "../types.d.ts";
+import type { KeyScope } from "../types.js";
 
 export {};
 

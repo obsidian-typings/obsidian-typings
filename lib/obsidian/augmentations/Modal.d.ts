@@ -1,4 +1,4 @@
-import type { WindowSelection } from "../types.d.ts";
+import type { WindowSelection } from "../types.js";
 
 export {};
 

@@ -1,4 +1,4 @@
-import type { InternalPluginName } from "../implementations.ts";
+import type { InternalPluginName } from "../implementations.js";
 import type {
     CanvasConnection,
     CanvasNode,
@@ -11,7 +11,7 @@ import type {
     RecentFileTracker,
     SerializedWorkspace,
     StateHistory
-} from "../types.d.ts";
+} from "../types.js";
 import type { Extension } from "@codemirror/state";
 import type { Constructor } from "obsidian";
 

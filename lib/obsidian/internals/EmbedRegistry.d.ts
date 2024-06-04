@@ -1,4 +1,4 @@
-import type { EmbeddableConstructor } from "../types.d.ts";
+import type { EmbeddableConstructor } from "../types.js";
 import type {
     Events,
     TFile

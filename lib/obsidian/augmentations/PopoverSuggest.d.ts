@@ -1,4 +1,4 @@
-import type { SuggestionContainer } from "../types.d.ts";
+import type { SuggestionContainer } from "../types.js";
 
 export {};
 

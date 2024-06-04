@@ -1,4 +1,4 @@
-import type { PluginUpdateManifest } from "../types.d.ts";
+import type { PluginUpdateManifest } from "../types.js";
 import type {
     App,
     PluginManifest

@@ -1,7 +1,7 @@
 import type {
     AppVaultConfig,
     ConfigItem
-} from "../types.d.ts";
+} from "../types.js";
 
 export {};
 

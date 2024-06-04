@@ -1,2 +1,2 @@
-export { CustomArrayDictImpl } from "./implementations/CustomArrayDictImpl.ts";
-export { InternalPluginName } from "./implementations/InternalPluginName.ts";
+export { CustomArrayDictImpl } from "./implementations/CustomArrayDictImpl.js";
+export { InternalPluginName } from "./implementations/InternalPluginName.js";

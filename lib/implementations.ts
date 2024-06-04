@@ -1,1 +1,1 @@
-export * from "./obsidian/implementations.ts";
+export * from "./obsidian/implementations.js";

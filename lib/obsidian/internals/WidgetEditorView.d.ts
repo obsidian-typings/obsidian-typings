@@ -1,7 +1,7 @@
 import type {
     EmbeddedEditorView,
     FoldInfo
-} from "../types.d.ts";
+} from "../types.js";
 import type {
     CachedMetadata,
     Scope,

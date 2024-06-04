@@ -6,7 +6,7 @@ import type {
     TableCellEditor,
     TableEditor,
     Token
-} from "../types.d.ts";
+} from "../types.js";
 import type { Extension } from "@codemirror/state";
 import type { EditorView, ViewUpdate } from "@codemirror/view";
 import type {

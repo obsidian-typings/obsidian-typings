@@ -16,7 +16,7 @@ import type {
     ObsidianDOM,
     Plugins,
     ViewRegistry
-} from "../types.d.ts";
+} from "../types.js";
 
 export {};
 

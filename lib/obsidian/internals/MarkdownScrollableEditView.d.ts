@@ -1,7 +1,7 @@
 import type {
     EditorSearchComponent,
     MarkdownBaseView
-} from "../types.d.ts";
+} from "../types.js";
 import type { Extension } from "@codemirror/state";
 import type { ViewUpdate } from "@codemirror/view";
 import type { Scope } from "obsidian";

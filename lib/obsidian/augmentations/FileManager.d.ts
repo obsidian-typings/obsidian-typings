@@ -1,7 +1,7 @@
 import type {
     LinkUpdate,
     PositionedReference
-} from "../types.d.ts";
+} from "../types.js";
 
 export {};
 

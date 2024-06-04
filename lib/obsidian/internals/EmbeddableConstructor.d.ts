@@ -1,4 +1,4 @@
-import type { EmbedContext } from "../types.d.ts";
+import type { EmbedContext } from "../types.js";
 import type {
     Component,
     TFile

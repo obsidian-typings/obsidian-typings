@@ -1,4 +1,4 @@
-import type { FileEntry } from "../types.d.ts";
+import type { FileEntry } from "../types.js";
 import type { IpcRenderer } from "electron";
 import * as fs from "node:fs";
 import * as fsPromises from "node:fs/promises";
