@@ -24,8 +24,8 @@
     },
     "homepage": "https://github.com/Fevol/obsidian-typings#readme",
     "peerDependencies": {
-        "@types/electron": "npm:@ophidian/electron-types",
         "@types/node": "^20.10.7",
+        "electron": "^30.0.9",
         "obsidian": "^1.5.7-1"
     },
     "devDependencies": {
