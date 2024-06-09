@@ -1,6 +1,7 @@
 import type { PluginUpdateManifest } from "../types.js";
 import type {
     App,
+    Plugin,
     PluginManifest
 } from "obsidian";
 export interface Plugins {
