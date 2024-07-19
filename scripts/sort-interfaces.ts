@@ -4,7 +4,7 @@
  *   - Only keeps interfaces, types and classes inside modules
  *   - Sorting of interface properties and methods is quite slow
  *   - Probably improper re-setting of declaration structure for new ordering of properties and methods
- *   - Endlines between methods/properties, types/interfaces is quite bodgy
+ *   - End lines between methods/properties, types/interfaces is quite bodgy
  * PR's would be very welcome to improve this hot mess of a code
  */
 // @ts-nocheck (Prevent compilation errors for people use the package as a submodule)

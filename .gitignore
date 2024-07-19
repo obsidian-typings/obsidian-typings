@@ -1,3 +1,5 @@
 node_modules/
 dist/
 /src/implementations/**/*.d.ts
+.vscode
+
