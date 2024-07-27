@@ -231,7 +231,7 @@ declare module "obsidian" {
         /**
          * Import attachments into specified folder
          */
-        importAttachments(imports: ImportedAttachments[], folder: TFolder): Promise<void>;
+        importAttachments(imports: ImportedAttachments[], folder: TFolder | null): Promise<void>;
         /** @internal Initialize the entire application using the provided FS adapter */
         initializeWithAdapter(adapter: DataAdapter): Promise<void>;
         /**
