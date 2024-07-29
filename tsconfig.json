@@ -4,7 +4,6 @@
         "allowImportingTsExtensions": true,
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
-        "baseUrl": ".",
         "forceConsistentCasingInFileNames": true,
         "importHelpers": true,
         "inlineSourceMap": true,
