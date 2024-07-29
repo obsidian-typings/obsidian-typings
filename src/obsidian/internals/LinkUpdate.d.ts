@@ -31,7 +31,7 @@ export interface LinkUpdate {
 }
 
 export interface LinkUpdaters {
-    [key: string]: LinkUpdater;
+    [key: string]: LinkUpdater | undefined;
     canvas?: CanvasLinkUpdater;
 }
 
