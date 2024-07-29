@@ -1,3 +1,5 @@
+import type { MenuSubmenuConfigRecord } from "../types.js";
+
 export {};
 
 declare module "obsidian" {
@@ -39,7 +41,7 @@ declare module "obsidian" {
         /** @internal Which menuitem is currently selected */
         selected: number;
         /** @internal Configurations for the submenu configs */
-        submenuConfig: Record<string, { title: string; icon: string }>;
+        submenuConfig: MenuSubmenuConfigRecord;
         /** @internal Whether the submenu is currently unloading */
         unloading: boolean;
         /**

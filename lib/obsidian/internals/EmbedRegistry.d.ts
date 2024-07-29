@@ -7,7 +7,7 @@ export interface EmbedRegistry extends Events {
     /**
      * Mapping of file extensions to constructors for embeddable widgets
      */
-    embedByExtension: Record<string, EmbeddableConstructor>;
+    embedByExtension: EmbedRegistryEmbedByExtensionRecord;
 
     /**
      * Get the embed constructor for a specific file type
@@ -34,3 +34,5 @@ export interface EmbedRegistry extends Events {
      */
     unregisterExtensions(extensions: string[]): void;
 }
+
+export interface EmbedRegistryEmbedByExtensionRecord extends Record<string, EmbeddableConstructor> {}

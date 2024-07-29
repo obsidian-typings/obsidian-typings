@@ -1,6 +1,6 @@
 /** @todo Documentation incomplete */
 export interface CustomArrayDict<T> {
-    data: Record<string, T[]>;
+    data: CustomArrayDictDataRecord<T>;
 
     add(key: string, value: T): void;
     clear(key: string): void;
@@ -12,3 +12,5 @@ export interface CustomArrayDict<T> {
     remove(key: string, value: T): void;
     removeKey(key: string): void;
 }
+
+export interface CustomArrayDictDataRecord<T> extends Record<string, T[]> {}

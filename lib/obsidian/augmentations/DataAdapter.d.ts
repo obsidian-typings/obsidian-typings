@@ -1,4 +1,7 @@
-import type { FileEntry } from "../types.js";
+import type {
+    DataAdapterFilesRecord,
+    DataAdapterWatchersRecord
+} from "../types.js";
 import type { IpcRenderer } from "electron";
 import * as fs from "node:fs";
 import * as fsPromises from "node:fs/promises";
@@ -18,7 +21,7 @@ declare module "obsidian" {
         /**
          * Mapping of file/folder path to vault entry, includes non-MD files
          */
-        files: Record<string, FileEntry>;
+        files: DataAdapterFilesRecord;
         /**
          * Reference to node fs module
          */
@@ -46,7 +49,7 @@ declare module "obsidian" {
         /** @internal */
         watcher: unknown;
         /** @internal */
-        watchers: Record<string, { resolvedPath: string; watcher: unknown }>;
+        watchers: DataAdapterWatchersRecord;
 
         /**
          * @param normalizedPath Path to file

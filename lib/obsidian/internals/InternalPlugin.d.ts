@@ -88,7 +88,7 @@ export interface InternalPlugins extends Events {
     /**
      * Mapping of whether an internal plugin is enabled
      */
-    config: Record<InternalPluginNameType, boolean>;
+    config: InternalPluginsConfigRecord;
     /** @internal */
     migration: boolean;
     /**
@@ -169,3 +169,5 @@ export interface WordCountPluginInstance extends InternalPluginInstance {}
 export interface WorkspacesPluginInstance extends InternalPluginInstance {}
 
 export interface ZkPrefixerPluginInstance extends InternalPluginInstance {}
+
+export interface InternalPluginsConfigRecord extends Record<InternalPluginNameType, boolean> {}

@@ -13,7 +13,7 @@ export interface Commands {
      * @example
      *     `app:open-vault` or `app:reload`
      */
-    commands: Record<string, Command>;
+    commands: CommandsCommandsRecord;
     /**
      * Commands *with* editor callback, will only be available when editor is active and callback returns
      * true
@@ -21,7 +21,7 @@ export interface Commands {
      * @example
      *     `editor:fold-all` or `command-palette:open`
      */
-    editorCommands: Record<string, Command>;
+    editorCommands: CommandsEditorCommandsRecord;
 
     /**
      * Add a command to the command registry
@@ -58,3 +58,6 @@ export interface Commands {
      */
     removeCommand(commandId: string): void;
 }
+
+export interface CommandsEditorCommandsRecord extends Record<string, Command> {}
+export interface CommandsCommandsRecord extends Record<string, Command> {}

@@ -8,11 +8,11 @@ export interface ViewRegistry extends Events {
     /**
      * Mapping of file extensions to view type
      */
-    typeByExtension: Record<string, string>;
+    typeByExtension: ViewRegistryTypeByExtensionRecord;
     /**
      * Mapping of view type to view constructor
      */
-    viewByType: Record<string, (leaf: WorkspaceLeaf) => View>;
+    viewByType: ViewRegistryViewByTypeRecord;
 
     /**
      * Get the view type associated with a file extension
@@ -69,3 +69,6 @@ export interface ViewRegistry extends Events {
      */
     unregisterView(type: string): void;
 }
+
+export interface ViewRegistryTypeByExtensionRecord extends Record<string, string> {}
+export interface ViewRegistryViewByTypeRecord extends Record<string, (leaf: WorkspaceLeaf) => View> {}

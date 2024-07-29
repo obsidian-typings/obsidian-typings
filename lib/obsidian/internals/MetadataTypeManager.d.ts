@@ -15,13 +15,13 @@ export interface MetadataTypeManager extends Events {
     /**
      * Registered properties of the vault
      */
-    properties: Record<string, PropertyInfo>;
+    properties: MetadataTypeManagerPropertiesRecord;
     /** @internal Registered type widgets */
-    registeredTypeWidgets: Record<PropertyWidgetType, PropertyWidget<unknown>>;
+    registeredTypeWidgets: MetadataTypeManagerRegisteredTypeWidgetsRecord;
     /**
      * Associated widget types for each property
      */
-    types: Record<string, PropertyWidgetType>;
+    types: MetadataTypeManagerTypesRecord;
 
     /**
      * Get all registered properties of the vault
@@ -59,3 +59,7 @@ export interface MetadataTypeManager extends Events {
     /** @internal Unset widget type for property */
     unsetType(property: string): Promise<void>;
 }
+
+export interface MetadataTypeManagerPropertiesRecord extends Record<string, PropertyInfo> {}
+export interface MetadataTypeManagerRegisteredTypeWidgetsRecord extends Record<PropertyWidgetType, PropertyWidget<unknown>> {}
+export interface MetadataTypeManagerTypesRecord extends Record<string, PropertyWidgetType> {}

@@ -20,13 +20,13 @@ export interface Plugins {
     /**
      * Manifests of all the plugins that are installed
      */
-    manifests: Record<string, PluginManifest>;
+    manifests: PluginsManifestsRecord;
     /**
      * Mapping of plugin ID to active plugin instance
      *
      * @remark Prefer usage of getPlugin to access a plugin
      */
-    plugins: Record<string, Plugin>;
+    plugins: PluginsPluginsRecord;
     /**
      * Mapping of plugin ID to available updates
      */
@@ -101,3 +101,6 @@ export interface Plugins {
      */
     unloadPlugin(id: string): Promise<void>;
 }
+
+export interface PluginsManifestsRecord extends Record<string, PluginManifest> {}
+export interface PluginsPluginsRecord extends Record<string, Plugin> {}

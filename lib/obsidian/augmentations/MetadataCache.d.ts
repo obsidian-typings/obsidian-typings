@@ -1,6 +1,8 @@
 import type {
     CustomArrayDict,
     FileCacheEntry,
+    MetadataCacheFileCacheRecord,
+    MetadataCacheMetadataCacheRecord,
     PropertyInfo
 } from "../types.js";
 
@@ -17,7 +19,7 @@ declare module "obsidian" {
         /** @internal IndexedDB database */
         db: IDBDatabase;
         /** @internal File contents cache */
-        fileCache: Record<string, FileCacheEntry>;
+        fileCache: MetadataCacheFileCacheRecord;
         /** @internal Whether the cache is fully loaded */
         initialized: boolean;
         /** @internal Amount of tasks currently in progress */
@@ -25,7 +27,7 @@ declare module "obsidian" {
         /** @internal */
         linkResolverQueue: unknown;
         /** @internal File hash to metadata cache entry mapping */
-        metadataCache: Record<string, CachedMetadata>;
+        metadataCache: MetadataCacheMetadataCacheRecord;
         /** @internal Callbacks to execute on cache clean */
         onCleanCacheCallbacks: unknown[];
         /** @internal Mapping of filename to collection of files that share the same name */

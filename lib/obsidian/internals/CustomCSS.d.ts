@@ -39,9 +39,9 @@ export interface CustomCSS extends Component {
     /**
      * Mapping of theme names to their manifest
      */
-    themes: Record<string, ThemeManifest>;
+    themes: CustomCSSThemesRecord;
     /** @internal */
-    updates: Record<string, unknown>;
+    updates: CustomCSSUpdatesRecord;
 
     /** @internal */
     boundRaw(): void;
@@ -145,3 +145,6 @@ export interface CustomCSS extends Component {
      */
     setTranslucency(translucency: boolean): void;
 }
+
+export interface CustomCSSThemesRecord extends Record<string, ThemeManifest> {}
+export interface CustomCSSUpdatesRecord extends Record<string, unknown> {}

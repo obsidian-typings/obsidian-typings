@@ -15,7 +15,7 @@ export interface SerializedWorkspace {
     /**
      * Left ribbon
      */
-    leftRibbon: { hiddenItems: Record<string, boolean> };
+    leftRibbon: { hiddenItems: SerializedWorkspaceLeftRibbonHiddenItemsRecord };
     /**
      * Main (center) workspace leaf
      */
@@ -25,3 +25,5 @@ export interface SerializedWorkspace {
      */
     right: LeafEntry;
 }
+
+export interface SerializedWorkspaceLeftRibbonHiddenItemsRecord extends Record<string, boolean> {}

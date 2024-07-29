@@ -15,7 +15,7 @@ export interface FileExplorerView extends View {
     /**
      * Mapping of file path to tree item
      */
-    fileItems: Record<string, TreeItem<FileTreeItem>>;
+    fileItems: FileExplorerViewFileItemsRecord;
     /**
      * Mapping of tree self element to abstract file
      */
@@ -31,3 +31,5 @@ export interface FileExplorerView extends View {
      */
     revealInFolder(file: TFile | TFolder): void;
 }
+
+export interface FileExplorerViewFileItemsRecord extends Record<string, TreeItem<FileTreeItem>> {}

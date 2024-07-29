@@ -72,7 +72,7 @@ export interface AppVaultConfig {
      *
      * @deprecated Likely not used anymore
      */
-    hotkeys?: Record<string, string>;
+    hotkeys?: AppVaultConfigHotkeysRecord;
     /**
      * Appearance > Interface font
      */
@@ -219,3 +219,5 @@ export interface AppVaultConfig {
      */
     vimMode?: false | boolean;
 }
+
+export interface AppVaultConfigHotkeysRecord extends Record<string, string> {}

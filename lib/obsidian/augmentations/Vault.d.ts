@@ -1,6 +1,7 @@
 import type {
     AppVaultConfig,
-    ConfigItem
+    ConfigItem,
+    VaultFileMapRecord
 } from "../types.js";
 
 export {};
@@ -24,7 +25,7 @@ declare module "obsidian" {
         /** @internal Timestamp of the last config change */
         configTs: number;
         /** @internal Mapping of path to Obsidian folder or file structure */
-        fileMap: Record<string, TAbstractFile>;
+        fileMap: VaultFileMapRecord;
 
         /** @internal Add file as child/parent to respective folders */
         addChild(file: TAbstractFile): void;

@@ -10,7 +10,8 @@ import type {
     ObsidianTouchEvent,
     RecentFileTracker,
     SerializedWorkspace,
-    StateHistory
+    StateHistory,
+    WorkspaceHoverLinkSourcesRecord
 } from "../types.js";
 import type { Extension } from "@codemirror/state";
 import type { Constructor } from "obsidian";
@@ -41,7 +42,7 @@ declare module "obsidian" {
         /** @internal */
         floatingSplit: WorkspaceSplit;
         /** @internal */
-        hoverLinkSources: Record<string, HoverLinkSource>;
+        hoverLinkSources: WorkspaceHoverLinkSourcesRecord;
         /**
          * Last opened file in the vault
          */

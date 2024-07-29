@@ -147,28 +147,52 @@ import "./augmentations/WorkspaceWindowInitData.js";
 export type { AbstractSearchComponent } from "./internals/AbstractSearchComponent.js";
 export type { Account } from "./internals/Account.js";
 export type { AppMenuBarManager } from "./internals/AppMenuBarManager.js";
-export type { AppVaultConfig } from "./internals/AppVaultConfig.js";
+export type {
+    AppVaultConfig,
+    AppVaultConfigHotkeysRecord
+} from "./internals/AppVaultConfig.js";
 export type { BaseEditor } from "./internals/BaseEditor.js";
 export type { CanvasConnection } from "./internals/CanvasConnection.js";
 export type { CanvasLeaf } from "./internals/CanvasLeaf.js";
 export type { CanvasNode } from "./internals/CanvasNode.js";
 export type { CanvasView } from "./internals/CanvasView.js";
 export type { ClipBoardManager } from "./internals/ClipBoardManager.js";
-export type { Commands } from "./internals/Commands.js";
+export type {
+    Commands,
+    CommandsEditorCommandsRecord,
+    CommandsCommandsRecord
+} from "./internals/Commands.js";
 export type { ConfigItem } from "./internals/ConfigItem.js";
-export type { CustomArrayDict } from "./internals/CustomArrayDict.js";
-export type { CustomCSS } from "./internals/CustomCSS.js";
+export type {
+    CustomArrayDict,
+    CustomArrayDictDataRecord
+} from "./internals/CustomArrayDict.js";
+export type {
+    CustomCSS,
+    CustomCSSThemesRecord,
+    CustomCSSUpdatesRecord
+} from "./internals/CustomCSS.js";
+export type {
+    DataAdapterFilesRecord,
+    DataAdapterWatchersRecord
+} from "./internals/DataAdapterRecords.js";
 export type { DragManager } from "./internals/DragManager.js";
 export type { EditorSearchComponent } from "./internals/EditorSearchComponent.js";
 export type { EditorSuggests } from "./internals/EditorSuggests.js";
 export type { EmbedContext } from "./internals/EmbedContext.js";
 export type { EmbeddableConstructor } from "./internals/EmbeddableConstructor.js";
 export type { EmbeddedEditorView } from "./internals/EmbeddedEditorView.js";
-export type { EmbedRegistry } from "./internals/EmbedRegistry.js";
+export type {
+    EmbedRegistry,
+    EmbedRegistryEmbedByExtensionRecord
+} from "./internals/EmbedRegistry.js";
 export type { FileCacheEntry } from "./internals/FileCacheEntry.js";
 export type { FileEntry } from "./internals/FileEntry.js";
 export type { FileExplorerLeaf } from "./internals/FileExplorerLeaf.js";
-export type { FileExplorerView } from "./internals/FileExplorerView.js";
+export type {
+    FileExplorerView,
+    FileExplorerViewFileItemsRecord
+} from "./internals/FileExplorerView.js";
 export type { FileSuggest } from "./internals/FileSuggest.js";
 export type { FileSuggestManager } from "./internals/FileSuggestManager.js";
 export type { FileTreeItem } from "./internals/FileTreeItem.js";
@@ -176,7 +200,11 @@ export type { FoldInfo } from "./internals/FoldInfo.js";
 export type { FoldManager } from "./internals/FoldManager.js";
 export type { FootnoteCache } from "./internals/FootnoteCache.js";
 export type { GlobalSearchLeaf } from "./internals/GlobalSearchLeaf.js";
-export type { HotkeyManager } from "./internals/HotkeyManager.js";
+export type {
+    HotkeyManager,
+    HotkeyManagerCustomKeysRecord,
+    HotkeyManagerDefaultKeysRecord
+} from "./internals/HotkeyManager.js";
 export type { HoverLinkEvent } from "./internals/HoverLinkEvent.js";
 export type { IFramedMarkdownEditor } from "./internals/IFramedMarkdownEditor.js";
 export type { ImportedAttachments } from "./internals/ImportedAttachments.js";
@@ -198,6 +226,7 @@ export type {
     InternalPluginNameInstancesMapping,
     InternalPluginNameType,
     InternalPlugins,
+    InternalPluginsConfigRecord,
     MarkdownImporterPluginInstance,
     NoteComposerPluginInstance,
     OutgoingLinkPluginInstance,
@@ -223,15 +252,29 @@ export type { LinkUpdate } from "./internals/LinkUpdate.js";
 export type { LoadProgress } from "./internals/LoadProgress.js";
 export type { MarkdownBaseView } from "./internals/MarkdownBaseView.js";
 export type { MarkdownScrollableEditView } from "./internals/MarkdownScrollableEditView.js";
+export type { MenuSubmenuConfigRecord } from "./internals/MenuRecords.js";
+export type {
+    MetadataCacheFileCacheRecord,
+    MetadataCacheMetadataCacheRecord
+} from "./internals/MetadataCacheRecords.d.ts";
 export type { MetadataEditor } from "./internals/MetadataEditor.js";
 export type { MetadataEditorProperty } from "./internals/MetadataEditorProperty.js";
-export type { MetadataTypeManager } from "./internals/MetadataTypeManager.js";
+export type {
+    MetadataTypeManager,
+    MetadataTypeManagerPropertiesRecord,
+    MetadataTypeManagerRegisteredTypeWidgetsRecord,
+    MetadataTypeManagerTypesRecord
+} from "./internals/MetadataTypeManager.js";
 export type { MetadataWidget } from "./internals/MetadataWidget.js";
 export type { MobileNavbar } from "./internals/MobileNavbar.js";
 export type { MobileToolbar } from "./internals/MobileToolbar.js";
 export type { ObsidianDOM } from "./internals/ObsidianDOM.js";
 export type { ObsidianTouchEvent } from "./internals/ObsidianTouchEvent.js";
-export type { Plugins } from "./internals/Plugins.js";
+export type {
+    Plugins,
+    PluginsManifestsRecord,
+    PluginsPluginsRecord
+} from "./internals/Plugins.js";
 export type { PluginUpdateManifest } from "./internals/PluginUpdateManifest.js";
 export type { PositionedReference } from "./internals/PositionedReference.js";
 export type { PropertyEntryData } from "./internals/PropertyEntryData.js";
@@ -244,7 +287,10 @@ export type { RecentFileTracker } from "./internals/RecentFileTracker.js";
 export type { RendererSection } from "./internals/RendererSection.js";
 export type { Runnable } from "./internals/Runnable.js";
 export type { SearchCursor } from "./internals/SearchCursor.js";
-export type { SerializedWorkspace } from "./internals/SerializedWorkspace.js";
+export type {
+    SerializedWorkspace,
+    SerializedWorkspaceLeftRibbonHiddenItemsRecord
+} from "./internals/SerializedWorkspace.js";
 export type { StateHistory } from "./internals/StateHistory.js";
 export type { SuggestionContainer } from "./internals/SuggestionContainer.js";
 export type { TableCell } from "./internals/TableCell.js";
@@ -255,7 +301,13 @@ export type { Token } from "./internals/Token.js";
 export type { Tree } from "./internals/Tree.js";
 export type { TreeItem } from "./internals/TreeItem.js";
 export type { TreeNode } from "./internals/TreeNode.js";
-export type { ViewRegistry } from "./internals/ViewRegistry.js";
+export type { VaultFileMapRecord } from "./internals/VaultRecords.js";
+export type {
+    ViewRegistry,
+    ViewRegistryTypeByExtensionRecord,
+    ViewRegistryViewByTypeRecord
+} from "./internals/ViewRegistry.js";
 export type { WeakMapWrapper } from "./internals/WeakMapWrapper.js";
 export type { WidgetEditorView } from "./internals/WidgetEditorView.js";
 export type { WindowSelection } from "./internals/WindowSelection.js";
+export type { WorkspaceHoverLinkSourcesRecord } from "./internals/WorkspaceRecords.js";

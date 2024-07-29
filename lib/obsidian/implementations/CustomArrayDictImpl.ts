@@ -1,7 +1,7 @@
-import type { CustomArrayDict } from "../types.js";
+import type { CustomArrayDict, CustomArrayDictDataRecord } from "../types.js";
 
 export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
-    public data: Record<string, T[]> = {};
+    public data: CustomArrayDictDataRecord<T> = {};
 
     public add(key: string, value: T): void {
         if (!(this.data.hasOwnProperty(key)))

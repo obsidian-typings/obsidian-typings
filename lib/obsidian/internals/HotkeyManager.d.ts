@@ -20,11 +20,11 @@ export interface HotkeyManager {
     /**
      * Custom (non-Obsidian default) hotkeys, one to many mapping of command ID to assigned hotkey
      */
-    customKeys: Record<string, KeymapInfo[]>;
+    customKeys: HotkeyManagerCustomKeysRecord;
     /**
      * Default hotkeys, one to many mapping of command ID to assigned hotkey
      */
-    defaultKeys: Record<string, KeymapInfo[]>;
+    defaultKeys: HotkeyManagerDefaultKeysRecord;
 
     /**
      * Add a hotkey to the default hotkeys
@@ -90,3 +90,6 @@ export interface HotkeyManager {
      */
     setHotkeys(command: string, keys: KeymapInfo[]): void;
 }
+
+export interface HotkeyManagerCustomKeysRecord extends Record<string, KeymapInfo[]> {}
+export interface HotkeyManagerDefaultKeysRecord extends Record<string, KeymapInfo[]> {}
