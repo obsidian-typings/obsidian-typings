@@ -37,6 +37,7 @@
     },
     "scripts": {
         "build": "tsc --build --force",
+        "build:types": "dts-bundle-generator -o dist/types.d.ts lib/types.d.ts --inline-declare-global  --inline-declare-externals",
         "format": "bun run scripts/sort-interfaces.ts ./lib/ && bun dprint fmt",
         "release-patch": "bun run scripts/bump-version.ts patch",
         "release-minor": "bun run scripts/bump-version.ts minor",
