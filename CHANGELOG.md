@@ -1,5 +1,25 @@
 # Changelog
 
+## 2.0.0
+
+-   Split up typings codebase into separate files
+-   Added `/implementations` submodule which provides additional code imports
+    -   `InternalPluginName`
+    -   `createTFile` and `createTFolder` functions
+    -   `CustomArrayDictImpl`
+-   Added typings for:
+    -   Missing `Platform` constants
+    -   `HotkeysSettingTab`
+    -   `LinkUpdaters`
+    -   `DragManager`
+-   Fixed typings for:
+    -   `enable` is async (`Plugin`)
+    -   Return type of `getEnabledPluginById` (`InternalPlugins`)
+    -   Return type of `saveAttachment` (`App`)
+    -   Return type of `importAttachments` (`App`)
+    -   Parameter order of `getAvailablePathForAttachments` (`Vault`)
+-   Improved compatibility with older and newer Node and TS configurations
+
 ## 1.1.6
 
 -   Refactored `InternalPlugin` instance structure
