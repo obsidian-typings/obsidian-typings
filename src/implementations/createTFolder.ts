@@ -5,7 +5,11 @@ import {
 
 type TFolderConstructor = { new(vault: Vault, path: string): TFolder };
 
-export function createTFolder(vault: Vault, path: string) {
+/**
+ * Creates and properly initializes the instance of TFolder even the underlying folder does not exist.
+ * This doesn't create the missing folder on the file system.
+ */
+export function createTFolder(vault: Vault, path: string): TFolder {
     let folder = vault.getFolderByPath(path);
     if (folder) {
         return folder;

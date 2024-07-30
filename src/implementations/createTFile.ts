@@ -6,7 +6,11 @@ import { createTFolder } from "./index.ts";
 
 type TFileConstructor = { new(vault: Vault, path: string): TFile };
 
-export function createTFile(vault: Vault, path: string) {
+/**
+ * Creates and properly initializes the instance of TFile even the underlying file does not exist.
+ * This doesn't create the missing file on the file system.
+ */
+export function createTFile(vault: Vault, path: string): TFile {
     let file = vault.getFileByPath(path);
     if (file) {
         return file;
