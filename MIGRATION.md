@@ -172,6 +172,8 @@ Some breaking changes were made between `1.x.x` and `2.0.0` versions of this pac
     You will have to change it to:
 
     ```ts
+    export {};
+  
     declare module "obsidian-typings" {
       interface PluginsPluginsRecord {
         myPlugin: MyPlugin;
