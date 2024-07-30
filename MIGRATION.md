@@ -169,17 +169,7 @@ Some breaking changes were made between `1.x.x` and `2.0.0` versions of this pac
     }
     ```
 
-    You will have to change it to:
-
-    ```ts
-    export {};
-  
-    declare module "obsidian-typings" {
-      interface PluginsPluginsRecord {
-        myPlugin: MyPlugin;
-      }
-    }
-    ```
+    You will have to change it to the [new approach](https://github.com/Fevol/obsidian-typings/blob/main/README.md#extend-with-your-own-typings).
 
 - If you used `obsidian-typings` package with an alias, such as `@types/obsidian-typings`, `import { X } from "obsidian-typings/implementations";` will not work. You will need to use the ["Using `obsidian-typings/implementations`"](https://github.com/Fevol/obsidian-typings/blob/main/README.md#using-obsidian-typings-implementations) approach to alias the import to the corresponding path.
 
@@ -190,4 +180,4 @@ While these changes are not strictly required, they will help to keep your code 
 - Switch to latest `TypeScript` version `npm install typescript@latest --save-dev` to support modern `TypeScript` features.<br>The sample plugin has version 4.7.6 set as its default, so it is likely that you need to upgrade. 
 - Set in `tsconfig.json`, `moduleResolution` option to `nodenext` or `bundler`. <br>With `nodenext` you will have to add extensions to all your relative imports such as `import { fn1 } from "./module2.js";`. <br>With `bundler` you can keep using `import { fn1 } from "./module2";`
 - Set in `tsconfig.json`, `skipLibCheck` to `false`. This will compile your `.d.ts` definitions and allow you to detect the errors earlier.
-- Switch to the ["Add `types` setting to `tsconfig.json`"](README.md#add-types-setting-to-tsconfig-json) approach, as it is the most robust.
+- Switch to the ["Add `types` setting to `tsconfig.json`"](https://github.com/Fevol/obsidian-typings/blob/main/README.md#add-types-setting-to-tsconfig-json) approach, as it is the most robust.

@@ -144,6 +144,7 @@ this.app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
 If you need to extend the typings provided by this package, add the following to any `.d.ts` file in your project:
 
 ```ts
+export {}; // This is a very essential line. If you don't have any other top-level `import/export` statements, those typings will work not as expected.
 declare module "obsidian-typings" {
   interface PluginsPluginsRecord {
     myPlugin: MyPlugin;
@@ -184,11 +185,11 @@ With these scary disclaimers out of the way, hopefully these typings will help y
 
 ## Migration
 
-If you were using a `1.x.x` version of this package, you may need to follow the [Migration guide](MIGRATION.md) after updating to `2.0.0` or newer.
+If you were using a `1.x.x` version of this package, you may need to follow the [Migration guide](https://github.com/Fevol/obsidian-typings/blob/main/MIGRATION.md) after updating to `2.0.0` or newer.
 
 
 ## Contributing
 
 Feel free to start typing any part of the Obsidian API that is not yet typed, or fixing/adding additional descriptions to existing typings. If you are unsure about anything, don't hesitate to open an issue.
 
-A brief tutorial is available on how you can get started with adding new typings, or fixing existing ones, see: [CONTRIBUTING.md](CONTRIBUTING.md).
+A brief tutorial is available on how you can get started with adding new typings, or fixing existing ones, see: [CONTRIBUTING.md](https://github.com/Fevol/obsidian-typings/blob/main/CONTRIBUTING.md).
