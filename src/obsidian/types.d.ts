@@ -176,7 +176,12 @@ export type {
     DataAdapterFilesRecord,
     DataAdapterWatchersRecord
 } from "./internals/DataAdapterRecords.js";
-export type { DragManager } from "./internals/DragManager.js";
+export type {
+    Draggable,
+    DragManager,
+    DragStartEvent,
+    DropResult
+} from "./internals/DragManager.js";
 export type { EditorSearchComponent } from "./internals/EditorSearchComponent.js";
 export type { EditorSuggests } from "./internals/EditorSuggests.js";
 export type { EmbedContext } from "./internals/EmbedContext.js";
