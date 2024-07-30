@@ -57,9 +57,6 @@
         "npm-run-all": "^4.1.5",
         "ts-morph": "^22.0.0"
     },
-    "optionalDependencies": {
-        "dprint": "^0.45.1"
-    },
     "scripts": {
         "build": "npm-run-all build:clean build:validate build:bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:style-mod",
         "build:clean": "bun run scripts/build-clean.ts",
