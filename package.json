@@ -59,6 +59,6 @@
         "release-patch": "bun run scripts/bump-version.ts patch",
         "release-minor": "bun run scripts/bump-version.ts minor",
         "release-major": "bun run scripts/bump-version.ts major",
-        "spellcheck": "npx cspell . --no-progress"
+        "spellcheck": "cspell . --no-progress"
     }
 }
