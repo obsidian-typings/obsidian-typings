@@ -1,4 +1,7 @@
-import type { CustomArrayDict, CustomArrayDictDataRecord } from "../types.js";
+import type {
+    CustomArrayDict,
+    CustomArrayDictDataRecord
+} from "../obsidian/types.d.ts";
 
 export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
     public data: CustomArrayDictDataRecord<T> = {};

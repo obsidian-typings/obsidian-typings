@@ -4,6 +4,8 @@
         "allowImportingTsExtensions": true,
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "emitDeclarationOnly": true,
         "forceConsistentCasingInFileNames": true,
         "importHelpers": true,
         "inlineSourceMap": true,
@@ -14,17 +16,14 @@
         ],
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
-        "noEmit": true,
         "paths": {
-            "style-mod": [
-                "./src/style-mod/style-mod.cts"
-            ]
+            "style-mod": ["./src/style-mod/style-mod.cts"]
         },
         "target": "ESNext",
         "skipLibCheck": false,
         "verbatimModuleSyntax": true
     },
     "include": [
-        "./src/**/*.ts"
+        "./src/implementations/**/*.ts"
     ]
 }

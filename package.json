@@ -10,8 +10,8 @@
         },
         "./implementations": {
             "types": "./dist/implementations.d.ts",
-            "import": "./dist/implementations.js",
-            "require": "./dist/implementations.js"
+            "import": "./dist/implementations.cjs",
+            "require": "./dist/implementations.cjs"
         }
     },
     "type": "module",
@@ -38,13 +38,21 @@
     },
     "devDependencies": {
         "@tsconfig/strictest": "^2.0.5",
+        "builtin-modules": "^4.0.0",
         "dprint": "^0.45.1",
         "dts-bundle-generator": "^9.5.1",
+        "esbuild": "^0.23.0",
+        "npm-run-all": "^4.1.5",
         "ts-morph": "^22.0.0"
     },
     "scripts": {
-        "build": "tsc --build --force",
-        "build:types": "dts-bundle-generator -o ./dist/types.d.ts ./src/types.d.ts --inline-declare-global  --inline-declare-externals",
+        "build": "npm-run-all build:clean build:validate build:implementations build:implementations:generate-types build:implementations:bundle-types build:bundle-types",
+        "build:clean": "bun run scripts/build-clean.ts",
+        "build:validate": "tsc --build --force",
+        "build:implementations": "bun run scripts/build-implementations.ts",
+        "build:implementations:generate-types": "tsc --project ./tsconfig.implementations.json",
+        "build:implementations:bundle-types": "dts-bundle-generator -o ./dist/implementations.d.ts ./src/implementations/index.d.ts --inline-declare-global  --inline-declare-externals",
+        "build:bundle-types": "dts-bundle-generator -o ./dist/types.d.ts ./src/types.d.ts --inline-declare-global  --inline-declare-externals",
         "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
         "release-patch": "bun run scripts/bump-version.ts patch",
         "release-minor": "bun run scripts/bump-version.ts minor",
