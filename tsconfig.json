@@ -16,13 +16,13 @@
         "moduleResolution": "NodeNext",
         "noEmit": true,
         "paths": {
-            "style-mod": ["./lib/style-mod/style-mod.cts"]
+            "style-mod": ["./src/style-mod/style-mod.cts"]
         },
         "target": "ESNext",
         "skipLibCheck": false,
         "verbatimModuleSyntax": true
     },
     "include": [
-        "lib/*.ts"
+        "./src/*.ts"
     ]
 }
