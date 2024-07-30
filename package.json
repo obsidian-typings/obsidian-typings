@@ -2,19 +2,16 @@
     "name": "obsidian-typings",
     "version": "1.1.6",
     "description": "Extended type definitions for the Obsidian API (https://obsidian.md)",
-    "main": "./dist/types.d.ts",
-    "module": "./dist/types.d.ts",
+    "main": "",
+    "module": "",
     "types": "./dist/types.d.ts",
     "exports": {
         ".": {
-            "types": "./dist/types.d.ts",
-            "import": "./dist/types.d.ts",
-            "require": "./dist/types.d.ts"
+            "types": "./dist/types.d.ts"
         },
         "./implementations": {
             "types": "./dist/implementations.d.ts",
-            "import": "./dist/implementations.cjs",
-            "require": "./dist/implementations.cjs"
+            "default": "./dist/implementations.cjs"
         }
     },
     "type": "module",
