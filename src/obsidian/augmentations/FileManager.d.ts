@@ -1,5 +1,6 @@
 import type {
     LinkUpdate,
+    LinkUpdaters,
     PositionedReference
 } from "../types.js";
 
@@ -16,12 +17,7 @@ declare module "obsidian" {
         /** @internal */
         inProgressUpdates: null | unknown[];
         /** @internal */
-        linkUpdaters: {
-            canvas: {
-                app: App;
-                canvas: unknown;
-            };
-        };
+        linkUpdaters: LinkUpdaters;
         /** @internal */
         updateQueue: {
             promise: Promise<void>;

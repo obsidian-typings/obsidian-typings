@@ -249,7 +249,11 @@ export type {
 } from "./internals/InternalPlugin.js";
 export type { KeyScope } from "./internals/KeyScope.js";
 export type { LeafEntry } from "./internals/LeafEntry.js";
-export type { LinkUpdate } from "./internals/LinkUpdate.js";
+export type {
+    LinkChangeUpdate,
+    LinkUpdate,
+    LinkUpdaters
+} from "./internals/LinkUpdate.js";
 export type { LoadProgress } from "./internals/LoadProgress.js";
 export type { MarkdownBaseView } from "./internals/MarkdownBaseView.js";
 export type { MarkdownScrollableEditView } from "./internals/MarkdownScrollableEditView.js";
