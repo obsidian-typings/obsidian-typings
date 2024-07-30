@@ -3,6 +3,5 @@ export {};
 
 declare module "obsidian" {
     interface WorkspaceSplit {
-        parent?: WorkspaceSplit;
     }
 }

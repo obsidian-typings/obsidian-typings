@@ -4,7 +4,6 @@ declare module "obsidian" {
     interface WorkspaceLeaf {
         activeTime?: number;
         id?: string;
-        parent?: WorkspaceSplit;
         tabHeaderEl: HTMLElement;
         tabHeaderInnerIconEl: HTMLElement;
         tabHeaderInnerTitleEl: HTMLElement;
