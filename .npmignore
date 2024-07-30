@@ -1,9 +1,12 @@
 .editorconfig
 .github/
-CHANGELOG.md
 CONTRIBUTING.md
+cspell.json
 dprint.json
 dummy.ts
 images/
+MIGRATION.md
 scripts/
+src/
+tsconfig.implementations.json
 tsconfig.json
