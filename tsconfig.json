@@ -17,7 +17,7 @@
         "noEmit": true,
         "paths": {
             "style-mod": [
-                "./src/style-mod/style-mod.cts"
+                "./src/style-mod/style-mod.d.cts"
             ]
         },
         "target": "ESNext",
