@@ -19,7 +19,7 @@ jobs:
                 id: build
                 run: |
                     bun install --frozen-lockfile
-                    bun run build --if-present
+                    bun run build 
             -   name: Create NPM Release
                 run: npm publish
                 env:
