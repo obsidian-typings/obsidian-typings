@@ -1,3 +1,5 @@
+import type { HotkeysSettingTab } from "../types.js";
+
 export {};
 
 declare module "obsidian" {
@@ -51,7 +53,8 @@ declare module "obsidian" {
          *
          * @param id ID of the tab to open
          */
-        openTabById(id: string): void;
+        openTabById(id: string): SettingTab;
+        openTabById(id: "hotkeys"): HotkeysSettingTab
         /**
          * @param tab Tab to remove
          * @internal Remove a plugin tab from the settings modal

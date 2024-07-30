@@ -205,6 +205,7 @@ export type {
     HotkeyManagerCustomKeysRecord,
     HotkeyManagerDefaultKeysRecord
 } from "./internals/HotkeyManager.js";
+export type { HotkeysSettingTab } from "./internals/HotkeysSettingTab.js";
 export type { HoverLinkEvent } from "./internals/HoverLinkEvent.js";
 export type { IFramedMarkdownEditor } from "./internals/IFramedMarkdownEditor.js";
 export type { ImportedAttachments } from "./internals/ImportedAttachments.js";
