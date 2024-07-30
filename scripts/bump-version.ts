@@ -1,13 +1,14 @@
-import {readFileSync, writeFileSync} from "fs";
-import {spawnSync} from "node:child_process";
+import { spawnSync } from "node:child_process";
+import { readFileSync, writeFileSync } from "node:fs";
+import process from "node:process";
 
 const versionType = process.argv[2];
-const currentVersion = process.env.npm_package_version!;
+const currentVersion = process.env["npm_package_version"]!;
 
 const package_json = JSON.parse(readFileSync("package.json", "utf8"));
 const package_lock_json = JSON.parse(readFileSync("package-lock.json", "utf8"));
 
-const [major, minor, patch] = currentVersion.split(".").map(Number);
+const [major = 0, minor = 0, patch = 0] = currentVersion.split(".").map(Number);
 let newVersion = "";
 switch (versionType) {
     case "patch":
@@ -31,12 +32,12 @@ writeFileSync("package.json", JSON.stringify(package_json, null, 4).replace(/\n/
 writeFileSync("package-lock.json", JSON.stringify(package_lock_json, null, 4).replace(/\n/g, "\r\n"));
 
 try {
-    spawnSync('git', ['add', 'CHANGELOG.md', 'package.json', 'package-lock.json']);
-    spawnSync('git', ['commit', '-m', `chore(release): ${newVersion}`]);
-    spawnSync('git', ['tag', '-a', newVersion, '-m', `chore(release): ${newVersion}`]);
+    spawnSync("git", ["add", "CHANGELOG.md", "package.json", "package-lock.json"]);
+    spawnSync("git", ["commit", "-m", `chore(release): ${newVersion}`]);
+    spawnSync("git", ["tag", "-a", newVersion, "-m", `chore(release): ${newVersion}`]);
     console.log(`Package has been successfully bumped | ${currentVersion} -> ${newVersion} [${versionType}]`);
 } catch (error) {
-    console.error('Error running git commands:', error);
+    console.error("Error running git commands:", error);
 }
 
 process.exit(0);
