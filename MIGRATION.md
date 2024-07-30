@@ -1,11 +1,11 @@
 # Migration guide
 
-There are some breaking changes made between `v1` and `v2` of this package.
+Some breaking changes were made between `1.x.x` and `2.0.0` versions of this package.
 
 ## Mandatory changes
 
-- If you were using in your `tsconfig.json`, `"moduleResolution": "Classic"`, switch it to more modern option.
-- Importing undocumented methods now requires you to import from `obsidian-typings`, and not just `obsidian` module. This is done in order to make it more apparent that you are making use of undocumented and possibly volatile API. See below for the full list of interfaces that should be imported as `import { X } from "obsidian-typings"` instead of `import { X } from "obsidian"`:
+- If you were using in your `tsconfig.json`, `"moduleResolution": "classic"`, you will need to switch to a more modern option (such as `bundler`, `nodenext`, `node10`).
+- Importing undocumented methods now requires you to import from `obsidian-typings`, rather than the `obsidian` package. This is done in order to make it more apparent that you are making use of undocumented and possibly volatile API. These should be imported as `import { X } from "obsidian-typings"` instead of `import { X } from "obsidian"`. See below for the full list of interfaces:
 
   <details>
     <summary>Full list of interfaces that need to be imported from <code>obsidian-typings</code> module</summary>
@@ -157,7 +157,7 @@ There are some breaking changes made between `v1` and `v2` of this package.
   </code></pre>
   </details>
 
-- If you used to add register you own plugins something like
+- If you used to register your own plugins using a declaration like:
 
     ```ts
     declare module "obsidian" {
@@ -169,11 +169,9 @@ There are some breaking changes made between `v1` and `v2` of this package.
     }
     ```
 
-    You have to change it to
+    You will have to change it to:
 
     ```ts
-    export {};
-
     declare module "obsidian-typings" {
       interface PluginsPluginsRecord {
         myPlugin: MyPlugin;
@@ -181,13 +179,13 @@ There are some breaking changes made between `v1` and `v2` of this package.
     }
     ```
 
-- If you used `obsidian-typings` package with an alias, such as `@types/obsidian-typings`, `import { X } from "obsidian-typings/implementations";` won't work. You will need to adjust [Using `obsidian-typings/implementations`](README.md#using-obsidian-typings-implementations) approach to the corresponding path such as `./node_modules/@types/obsidian-typings/...`.
+- If you used `obsidian-typings` package with an alias, such as `@types/obsidian-typings`, `import { X } from "obsidian-typings/implementations";` will not work. You will need to use the ["Using `obsidian-typings/implementations`"](https://github.com/Fevol/obsidian-typings/blob/main/README.md#using-obsidian-typings-implementations) approach to alias the import to the corresponding path.
 
 ## Recommended optional changes
 
-While those changes are not strictly required, they will help to keep your code more modern, future-proof and avoids the need to use legacy workarounds.
+While these changes are not strictly required, they will help to keep your code more modern, future-proof and avoids the need to use legacy workarounds.
 
-- Switch to latest `TypeScript` version `npm install typescript@latest --save-dev` to support modern `TypeScript` features.
-- Set in `tsconfig.json`, `moduleResolution` option to `NodeNext` or `Bundler`. With `NodeNext` you will have to add extensions to all your relative imports such as `import { fn1 } from "./module2.js";`. With `Bundler` you can keep using `import { fn1 } from "./module2";`
+- Switch to latest `TypeScript` version `npm install typescript@latest --save-dev` to support modern `TypeScript` features.<br>The sample plugin has version 4.7.6 set as its default, so it is likely that you need to upgrade. 
+- Set in `tsconfig.json`, `moduleResolution` option to `nodenext` or `bundler`. <br>With `nodenext` you will have to add extensions to all your relative imports such as `import { fn1 } from "./module2.js";`. <br>With `bundler` you can keep using `import { fn1 } from "./module2";`
 - Set in `tsconfig.json`, `skipLibCheck` to `false`. This will compile your `.d.ts` definitions and allow you to detect the errors earlier.
-- Switch to [Add `types` setting to `tsconfig.json`](README.md#add-types-setting-to-tsconfig-json) approach as it is the most robust.
+- Switch to the ["Add `types` setting to `tsconfig.json`"](README.md#add-types-setting-to-tsconfig-json) approach, as it is the most robust.
