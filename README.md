@@ -115,9 +115,10 @@ There are several options for installing this package:
                 ...
                 "paths": {
                     "obsidian-typings/implementations": [
-                        "./node_modules/obsidian-typings/lib/implementations.ts"
-                        // or
-                        "./node_modules/@types/obsidian-typings/lib/implementations.ts"
+                        // A)
+                        "./node_modules/obsidian-typings/dist/implementations.d.ts"
+                        // B)
+                        "./node_modules/@types/obsidian-typings/dist/implementations.d.ts"
                     ]
                 }
             }
