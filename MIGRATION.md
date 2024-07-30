@@ -188,3 +188,17 @@ While those changes are not strictly required, they will help to keep your code 
 - Switch to latest `TypeScript` version `npm install typescript@latest --save-dev` to support modern `TypeScript` features.
 - Set in `tsconfig.json`, `moduleResolution` option to `NodeNext` or `Bundler`. With `NodeNext` you will have to add extensions to all your relative imports such as `import { fn1 } from "./module2.js";`. With `Bundler` you can keep using `import { fn1 } from "./module2";`
 - Set in `tsconfig.json`, `skipLibCheck` to `false`. This will compile your `.d.ts` definitions and allow you to detect the errors earlier.
+
+    There is one problem with packages `@codemirror/view` and `style-mode` which always shows an error if you set `skipLibCheck` to `false`.
+
+    In order to fix it, you can add to your `tsconfig.json`
+
+    ```json
+    {
+      ...
+      "include": [
+        "**/*.ts",
+        "./node_modules/obsidian-typings/src/style-mod/style-mod.fix.d.ts"
+      ]
+    }
+    ```
