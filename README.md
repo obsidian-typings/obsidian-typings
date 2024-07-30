@@ -50,7 +50,7 @@ There are several options for installing this package:
 
     _Install via_: `npm install --save-dev obsidian-typings`
 
-2. **Automatic type extending** {#automatic-type-extending}
+2. **Automatic type extending** <span id="automatic-type-extending"></span>
 
     The typings are automatically added to the existing `obsidian` module, so you can use them without any changes to your code.
 
@@ -60,7 +60,7 @@ There are several options for installing this package:
 >
 >  In this approach you will not be able to use `import { X } from "obsidian-typings/implementations";`.
 >
->  See `5.` below for the workaround.
+>  See [Using `obsidian-typings/implementations`](#using-obsidian-typings-implementation) below for the workaround.
 
 3. **Add extended typings as submodule**
 
@@ -98,7 +98,7 @@ There are several options for installing this package:
 >     }
 > }
 
-5. **Using `obsidian-typings/implementations`**
+5. **Using `obsidian-typings/implementations`** <span id="using-obsidian-typings-implementation"></span>
 
     There are cases when `import { X } from "obsidian-typings/implementations";` doesn't work out of the box, e.g.,
 
