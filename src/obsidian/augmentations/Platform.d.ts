@@ -2,6 +2,7 @@ export {};
 
 declare module "obsidian" {
     interface Platform {
+        canDisplayRibbon: boolean;
         canExportPdf: boolean;
         canPopoutWindow: boolean;
         canSplit: boolean;
