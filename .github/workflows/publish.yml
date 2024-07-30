@@ -19,7 +19,7 @@ jobs:
             -   name: Build
                 id: build
                 run: |
-                    bun install --force
+                    bun install --frozen-lockfile
                     bun run build --if-present
             -   run: npm publish
                 env:
