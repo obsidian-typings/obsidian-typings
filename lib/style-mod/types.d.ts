@@ -6,10 +6,10 @@
  * node_modules/@codemirror/view/dist/index.d.cts:3:40 - error TS7016: Could not find a declaration file for module 'style-mod'. 'F:/dev/projects/obsidian-typings/node_modules/style-mod/dist/style-mod.cjs' implicitly has an 'any' type.
  * If the 'style-mod' package actually exposes this module, try adding a new declaration (.d.ts) file containing `declare module 'style-mod';`
  * import { StyleModule, StyleSpec } from 'style-mod';
- * @note This file should not have `export { };` because the fix can only work in the ambient module declaration.
  */
-declare module "style-mod" {
-    interface StyleModule {}
 
-    interface StyleSpec {}
+export {};
+import "./style-mod.cts";
+
+declare module "style-mod" {
 }

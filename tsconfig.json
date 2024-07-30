@@ -15,11 +15,14 @@
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
         "noEmit": true,
+        "paths": {
+            "style-mod": ["./lib/style-mod/style-mod.cts"]
+        },
         "target": "ESNext",
         "skipLibCheck": false,
         "verbatimModuleSyntax": true
     },
     "include": [
-        "**/*.ts"
+        "lib/*.ts"
     ]
 }
