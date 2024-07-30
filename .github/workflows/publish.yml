@@ -24,11 +24,18 @@ jobs:
                 run: npm publish
                 env:
                     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            -   name: Create Archive
+                run: |
+                    mkdir build
+                    cp -r dist build
+                    cp README.md LICENSE CHANGELOG.md package.json build
+                    cd build
+                    zip -r obsidian-typings-${{ github.ref }}.zip .
+                    cd ..
             -   name: Create Release
                 uses: softprops/action-gh-release@v2
+                permissions:
+                    contents: write
                 with:
-                    files: |
-                        dist/*
-                        README.md
-                        LICENSE
-                        CHANGELOG.md
+                    files: build/obsidian-typings-${{ github.ref }}.zip
+                    token: ${{ secrets.GITHUB_TOKEN }}
