@@ -36,15 +36,13 @@
 
 ---
 
-This repository contains TypeScript typings for undocumented [Obsidian](https://obsidian.md/) API functions and variables and additional descriptions,
-essentially extending the official [Obsidian API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
+This repository contains TypeScript typings for undocumented [Obsidian](https://obsidian.md/) API functions and variables and additional descriptions, essentially extending the official [Obsidian API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
 
-Be aware that the typings currently only cover a subset of all methods: most of the `App` interface and its sub-interfaces
-are covered, but typings for views like `Graph`, `Canvas`, ... are still missing -- contributions for these would be very welcome!
+Be aware that the typings currently only cover a subset of all methods: most of the `App` interface and its sub-interfaces are covered, but typings for views like `Graph`, `Canvas`, ... are still missing -- contributions for these would be very welcome!
 
 ## Installation
 
-There are three options for installing this package:
+There are several options for installing this package:
 
 1. **Explicit type importing** 
 
@@ -52,7 +50,7 @@ There are three options for installing this package:
 
     _Install via_: `npm install --save-dev obsidian-typings`
 
-2. **Automatic type extending** (recommended)
+2. **Automatic type extending** {#automatic-type-extending}
 
     The typings are automatically added to the existing `obsidian` module, so you can use them without any changes to your code.
 
@@ -60,9 +58,9 @@ There are three options for installing this package:
 
 > [!WARNING]
 >
->  In this approach you will not be able to use `import { ... } from "obsidian-typings/implementations"`.
+>  In this approach you will not be able to use `import { X } from "obsidian-typings/implementations";`.
 >
->  You will have to use a hack `import { ... } from "./node_modules/@types/obsidian-typings/lib/implementations.js"`.
+>  See `5.` below for the workaround.
 
 3. **Add extended typings as submodule**
 
@@ -71,7 +69,7 @@ There are three options for installing this package:
     _Install via_: `git submodule add https://github.com/Fevol/obsidian-typings.git typings` (or any other folder)
 
 
-4. **Add `types` setting to `tsconfig.json`**
+4. **Add `types` setting to `tsconfig.json`** (recommended)
 
     If you prefer to have original NPM package name `obsidian-typings` but don't want to explicitly import its types to your source codes, you could add in your `tsconfig.json`:
 
@@ -100,7 +98,35 @@ There are three options for installing this package:
 >     }
 > }
 
+5. **Using `obsidian-typings/implementations`**
+
+    There are cases when `import { X } from "obsidian-typings/implementations";` doesn't work out of the box, e.g.,
+
+    - A) if you have `"moduleResolution": "Node"` or `"Node10"` in your `tsconfig.json`
+    - B) if you used [Automatic type extending](#automatic-type-extending)
+
+    1. In B) you can use `import { X } from "./node_modules/@types/obsidian-typings/lib/implementations.js";`.
+
+    2. More universal way is to add to `tsconfig.json`:
+
+        ```json
+        {
+            "compilerOptions": {
+                ...
+                "paths": {
+                    "obsidian-typings/implementations": [
+                        "./node_modules/obsidian-typings/lib/implementations.ts"
+                        // or
+                        "./node_modules/@types/obsidian-typings/lib/implementations.ts"
+                    ]
+                }
+            }
+        }
+        ```
+
 ## Usage
+
+### `obsidian` module internals
 
 To access the types from the `obsidian` module, the module import syntax doesn't change, but now you can access its internal definitions using:
 
@@ -108,25 +134,31 @@ To access the types from the `obsidian` module, the module import syntax doesn't
 import { App } from "obsidian";
 
 function printInternalPlugins(app: App): void {
-    console.log(app.internalPlugins);
+  console.log(app.internalPlugins);
 }
 ```
+
+### `obsidian-typings` additional interfaces
 
 You can access the additional interfaces added by this package using:
 
 ```ts
 import { InternalPlugins } from "obsidian-typings";
 
-const internalPlugins: InternalPlugins = app.internalPlugins;
+const internalPlugins: InternalPlugins = this.app.internalPlugins;
 ```
+
+### `obsidian-typings/implementation`
 
 You can access additional implementations added by this package that you can use in runtime using:
 
 ```ts
 import { InternalPluginName } from "obsidian-typings/implementations";
 
-app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
+this.app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
 ```
+
+### Extend with your own typings
 
 If you need to extend the typings provided by this package, add to any `.d.ts` file in your project:
 
@@ -134,11 +166,9 @@ If you need to extend the typings provided by this package, add to any `.d.ts` f
 export {};
 
 declare module "obsidian-typings" {
-    interface Plugins {
-        plugins: {
-            myPlugin: MyPlugin;
-        };
-    }
+  interface PluginsPluginsRecord {
+    myPlugin: MyPlugin;
+  }
 }
 ```
 
@@ -154,22 +184,13 @@ Please be aware that there is a good reason why (some of) the functions and type
 -   There is a high risk of the code behaving unexpectedly if used improperly
 -   The function was never meant to be used
 
-Please use the functions and variables provided with caution. Be prepared to update your code if the API changes,
-and only use the functions if you are confident that you understand what they will do. Reference the [official API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts)
-first to see if your problem may be solved with a documented function, or search
-in the #plugin-dev channel of the Obsidian Discord server. Some functions will also contain `@remark` TSDoc tags that provide
-alternatives or better solutions.
+Please use the functions and variables provided with caution. Be prepared to update your code if the API changes, and only use the functions if you are confident that you understand what they will do. Reference the [official API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts) first to see if your problem may be solved with a documented function, or search in the #plugin-dev channel of the Obsidian Discord server. Some functions will also contain `@remark` TSDoc tags that provide alternatives or better solutions.
 
-Methods marked `@internal` are especially risky to use: these are either not fully typed yet, or are solely intended
-to be used internally by the Obsidian app.
+Methods marked `@internal` are especially risky to use: these are either not fully typed yet, or are solely intended to be used internally by the Obsidian app.
 
-Furthermore, there is a very high chance that there are mistakes in the typings, despite best efforts.
-All types had to be deduced from either context, manually running the function, or from the minified app code.
-You _**should**_ verify that the code behaves as expected, both with regard to the expected (input/output)types, as well as what
-the function description promises.
+Furthermore, there is a very high chance that there are mistakes in the typings, despite best efforts. All types had to be deduced from either context, manually running the function, or from the minified app code. You _**should**_ verify that the code behaves as expected, both with regard to the expected (input/output)types, as well as what the function description promises.
 
-With these scary disclaimers out of the way, hopefully these typings will help you in removing 90% of the `@ts-ignore`s
-you have in your codebase, or discover solutions that didn't seem possible before.
+With these scary disclaimers out of the way, hopefully these typings will help you in removing 90% of the `@ts-ignore`s you have in your codebase, or discover solutions that didn't seem possible before.
 
 > [!NOTE]
 >
@@ -183,7 +204,11 @@ you have in your codebase, or discover solutions that didn't seem possible befor
 
 ## Contributing
 
-Feel free to start typing any part of the Obsidian API that is not yet typed, or fixing/adding additional descriptions to existing typings.
-If you are unsure about anything, don't hesitate to open an issue.
+Feel free to start typing any part of the Obsidian API that is not yet typed, or fixing/adding additional descriptions to existing typings. If you are unsure about anything, don't hesitate to open an issue.
 
 A brief tutorial is available on how you can get started with adding new typings, or fixing existing ones, see: [CONTRIBUTING.md](CONTRIBUTING.md).
+
+
+## Migration
+
+If you were using `v1` of this package, you might need to follow the [Migration guide](MIGRATION.md) after updating to `v2'.
