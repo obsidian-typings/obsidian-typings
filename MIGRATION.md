@@ -181,6 +181,8 @@ There are some breaking changes made between `v1` and `v2` of this package.
     }
     ```
 
+- If you used `obsidian-typings` package with an alias, such as `@types/obsidian-typings`, `import { X } from "obsidian-typings/implementations";` won't work. You will need to adjust [Using `obsidian-typings/implementations`](README.md#using-obsidian-typings-implementations) approach to the corresponding path such as `./node_modules/@types/obsidian-typings/...`.
+
 ## Recommended optional changes
 
 While those changes are not strictly required, they will help to keep your code more modern, future-proof and avoids the need to use legacy workarounds.
@@ -202,3 +204,4 @@ While those changes are not strictly required, they will help to keep your code 
       ]
     }
     ```
+- Switch to [Add `types` setting to `tsconfig.json`](README.md#add-types-setting-to-tsconfig-json) approach as it is the most robust.

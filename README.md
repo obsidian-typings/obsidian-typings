@@ -50,26 +50,15 @@ There are several options for installing this package:
 
     _Install via_: `npm install --save-dev obsidian-typings`
 
-2. **Automatic type extending** <span id="automatic-type-extending"></span>
 
-    The typings are automatically added to the existing `obsidian` module, so you can use them without any changes to your code.
-
-    _Install via_: `npm install --save-dev @types/obsidian-typings@npm:obsidian-typings`.
-
-> [!WARNING]
->
->  In this approach you will not be able to use `import { X } from "obsidian-typings/implementations";`.
->
->  See [Using `obsidian-typings/implementations`](#using-obsidian-typings-implementation) below for the workaround.
-
-3. **Add extended typings as submodule**
+2. **Add extended typings as submodule**
 
     Your IDE will likely pick up the typings automatically when the project is added as a submodule for your plugin, this also makes it simpler to test and submit features to the repository.
 
     _Install via_: `git submodule add https://github.com/Fevol/obsidian-typings.git typings` (or any other folder)
 
 
-4. **Add `types` setting to `tsconfig.json`** (recommended)
+3. **Add `types` setting to `tsconfig.json`** (recommended) <span id="add-types-setting-to-tsconfig-json"></span>
 
     If you prefer to have original NPM package name `obsidian-typings` but don't want to explicitly import its types to your source codes, you could add in your `tsconfig.json`:
 
@@ -98,35 +87,26 @@ There are several options for installing this package:
 >     }
 > }
 
-5. **Using `obsidian-typings/implementations`** <span id="using-obsidian-typings-implementation"></span>
 
-    There are cases when `import { X } from "obsidian-typings/implementations";` doesn't work out of the box, e.g.,
+4. **Using `obsidian-typings/implementations`** <span id="using-obsidian-typings-implementations"></span>
 
-    - A) if you have `"moduleResolution": "Node"` or `"Node10"` in your `tsconfig.json`
-    - B) if you used [Automatic type extending](#automatic-type-extending)
+    There are cases when `import { X } from "obsidian-typings/implementations";` doesn't work out of the box, e.g., if you have `"moduleResolution": "Node"` or `"Node10"` in your `tsconfig.json`
 
-    1. In B) you can use `import { X } from "./node_modules/@types/obsidian-typings/lib/implementations.js";`.
+    To solve it, add to `tsconfig.json`:
 
-    2. More universal way is to add to `tsconfig.json`:
-
-        ```json
-        {
-            "compilerOptions": {
-                ...
-                "paths": {
-                    "obsidian-typings/implementations": [
-                        // A)
-                        "./node_modules/obsidian-typings/dist/implementations.d.ts",
-                        "./node_modules/obsidian-typings/dist/implementations.cjs"
-
-                        // B)
-                        "./node_modules/@types/obsidian-typings/dist/implementations.d.ts",
-                        "./node_modules/@types/obsidian-typings/dist/implementations.cjs"
-                    ]
-                }
+    ```json
+    {
+        "compilerOptions": {
+            ...
+            "paths": {
+                "obsidian-typings/implementations": [
+                    "./node_modules/obsidian-typings/dist/implementations.d.ts",
+                    "./node_modules/obsidian-typings/dist/implementations.cjs"
+                ]
             }
         }
-        ```
+    }
+    ```
 
 ## Usage
 
