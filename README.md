@@ -148,7 +148,7 @@ import { InternalPlugins } from "obsidian-typings";
 const internalPlugins: InternalPlugins = this.app.internalPlugins;
 ```
 
-### `obsidian-typings/implementation`
+### `obsidian-typings/implementations`
 
 You can access additional implementations added by this package that you can use in runtime using:
 
