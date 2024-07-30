@@ -26,5 +26,8 @@
     },
     "include": [
         "./src/**/*.ts"
+    ],
+    "exclude": [
+        "./src/style-mod/style-mod.fix.d.ts"
     ]
 }
