@@ -27,6 +27,8 @@
 <h4>
  <a href="https://github.com/Fevol/obsidian-typings/blob/main/CHANGELOG.md">CHANGELOG</a>
  <span>&nbsp;·&nbsp;</span>
+ <a href="https://github.com/Fevol/obsidian-typings/blob/main/MIGRATION.md">MIGRATION</a>
+ <span>&nbsp;·&nbsp;</span>
  <a href="https://www.npmjs.com/package/obsidian-typings">NPM</a>
  <span>&nbsp;·&nbsp;</span>
  <a href="https://github.com/Fevol/obsidian-typings/blob/main/CONTRIBUTING.md">CONTRIBUTING</a>
@@ -36,36 +38,24 @@
 
 ---
 
-This repository contains TypeScript typings for undocumented [Obsidian](https://obsidian.md/) API functions and variables and additional descriptions, essentially extending the official [Obsidian API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
+This repository contains TypeScript typings for undocumented [Obsidian API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts) methods and variables, including additional descriptions and example uses.
 
-Be aware that the typings currently only cover a subset of all methods: most of the `App` interface and its sub-interfaces are covered, but typings for views like `Graph`, `Canvas`, ... are still missing -- contributions for these would be very welcome!
+Be aware that the typings currently only cover a subset of the full API: while most of the `App` interface and its sub-interfaces are covered, this package does not yet provide typings for views like `Graph`, `Canvas`, ... — contributions for these would be very welcome!
 
-## Installation
+## Set-up
+1. **Installation**
 
-There are several options for installing this package:
-
-1. **Explicit type importing** 
-
-    Explicitly add `import "obsidian-typings";` in any project file.
-
-    _Install via_: `npm install --save-dev obsidian-typings`
+   _Install using_: `npm install --save-dev obsidian-typings`
 
 
-2. **Add extended typings as submodule**
+2. **Add `obsidian-typings` to `types` in `tsconfig.json`** (_recommended_) <span id="add-types-setting-to-tsconfig-json"></span>
 
-    Your IDE will likely pick up the typings automatically when the project is added as a submodule for your plugin, this also makes it simpler to test and submit features to the repository.
-
-    _Install via_: `git submodule add https://github.com/Fevol/obsidian-typings.git typings` (or any other folder)
-
-
-3. **Add `types` setting to `tsconfig.json`** (recommended) <span id="add-types-setting-to-tsconfig-json"></span>
-
-    If you prefer to have original NPM package name `obsidian-typings` but don't want to explicitly import its types to your source codes, you could add in your `tsconfig.json`:
+    If you want to have all overridden types of `obsidian-typings` available in your project without explicit imports, add the following to your `tsconfig.json`:
 
     ```json
     {
         "compilerOptions": {
-            ...
+            "...": "...",
             "types": [
                 "obsidian-typings"
             ]
@@ -75,11 +65,11 @@ There are several options for installing this package:
 
 > [!WARNING]
 >
-> If your `tsconfig.json` did not specify `types` setting before, and you add it, your automatic discovery of `@types/some-package-name` will stop working and you might need to add:
+> If you added the `types` field to your `tsconfig.json`, and `@types/some-package-name` does not get recognized anymore, you may need to re-add it to `types`:
 > ```json
 > {
 >     "compilerOptions": {
->         ...
+>         "...": "...",
 >         "types": [
 >             "obsidian-typings",
 >             "some-package-name"
@@ -87,12 +77,17 @@ There are several options for installing this package:
 >     }
 > }
 
+3. **Explicit type importing**
+
+   If you prefer not to add `obsidian-typings` to your `types`, you can also add `import "obsidian-typings";` to any project file.
+
+
 
 4. **Using `obsidian-typings/implementations`** <span id="using-obsidian-typings-implementations"></span>
 
-    There are cases when `import { X } from "obsidian-typings/implementations";` doesn't work out of the box, e.g., if you have `"moduleResolution": "Node"` or `"Node10"` in your `tsconfig.json`
+    Depending on how your project is set up, `import { X } from "obsidian-typings/implementations";` may not work straight out of the box, e.g., if you have `"moduleResolution": "node"` or `"node10"` in your `tsconfig.json`
 
-    To solve it, add to `tsconfig.json`:
+    To solve this, you can add the following to your `tsconfig.json`:
 
     ```json
     {
@@ -112,7 +107,7 @@ There are several options for installing this package:
 
 ### `obsidian` module internals
 
-To access the types from the `obsidian` module, the module import syntax doesn't change, but now you can access its internal definitions using:
+To access types from the `obsidian` module, the import syntax does not change:
 
 ```ts
 import { App } from "obsidian";
@@ -124,7 +119,7 @@ function printInternalPlugins(app: App): void {
 
 ### `obsidian-typings` additional interfaces
 
-You can access the additional interfaces added by this package using:
+Additional interfaces added by this package (which do not exist in the official API), can be imported using:
 
 ```ts
 import { InternalPlugins } from "obsidian-typings";
@@ -134,7 +129,7 @@ const internalPlugins: InternalPlugins = this.app.internalPlugins;
 
 ### `obsidian-typings/implementations`
 
-You can access additional implementations added by this package that you can use in runtime using:
+Additional helper functions/types/... added by this package can be used by importing from `obsidian-typings/implementations`:
 
 ```ts
 import { InternalPluginName } from "obsidian-typings/implementations";
@@ -142,13 +137,13 @@ import { InternalPluginName } from "obsidian-typings/implementations";
 this.app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
 ```
 
+(The list of all available implementations can be found in the [implementations](https://github.com/Fevol/obsidian-typings/tree/main/src/implementations) folder.)
+
 ### Extend with your own typings
 
-If you need to extend the typings provided by this package, add to any `.d.ts` file in your project:
+If you need to extend the typings provided by this package, add the following to any `.d.ts` file in your project:
 
 ```ts
-export {};
-
 declare module "obsidian-typings" {
   interface PluginsPluginsRecord {
     myPlugin: MyPlugin;
@@ -186,13 +181,14 @@ With these scary disclaimers out of the way, hopefully these typings will help y
 >
 > `@tutorial` gives additional information on how to use the function in your plugin.
 
+
+## Migration
+
+If you were using a `1.x.x` version of this package, you may need to follow the [Migration guide](MIGRATION.md) after updating to `2.0.0` or newer.
+
+
 ## Contributing
 
 Feel free to start typing any part of the Obsidian API that is not yet typed, or fixing/adding additional descriptions to existing typings. If you are unsure about anything, don't hesitate to open an issue.
 
 A brief tutorial is available on how you can get started with adding new typings, or fixing existing ones, see: [CONTRIBUTING.md](CONTRIBUTING.md).
-
-
-## Migration
-
-If you were using `v1` of this package, you might need to follow the [Migration guide](MIGRATION.md) after updating to `v2'.
