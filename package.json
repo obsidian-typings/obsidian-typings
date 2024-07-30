@@ -59,17 +59,17 @@
     },
     "scripts": {
         "build": "npm-run-all build:clean build:validate build:bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:style-mod",
-        "build:clean": "npm run scripts/build-clean.ts",
+        "build:clean": "bun run scripts/build-clean.ts",
         "build:validate": "tsc --build --force",
         "build:bundle-types": "dts-bundle-generator -o ./dist/types.d.ts ./src/types.d.ts --inline-declare-global --inline-declare-externals",
-        "build:implementations": "npm run scripts/build-implementations.ts",
+        "build:implementations": "bun run scripts/build-implementations.ts",
         "build:implementations:generate-types": "tsc --project ./tsconfig.implementations.json",
         "build:implementations:bundle-types": "dts-bundle-generator -o ./dist/implementations.d.ts ./src/implementations/index.ts",
-        "build:style-mod": "npm run scripts/build-style-mod.ts",
-        "format": "npm run scripts/sort-interfaces.ts ./src/ && npm dprint fmt",
-        "release-patch": "npm run scripts/bump-version.ts patch",
-        "release-minor": "npm run scripts/bump-version.ts minor",
-        "release-major": "npm run scripts/bump-version.ts major",
+        "build:style-mod": "bun run scripts/build-style-mod.ts",
+        "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
+        "release-patch": "bun run scripts/bump-version.ts patch",
+        "release-minor": "bun run scripts/bump-version.ts minor",
+        "release-major": "bun run scripts/bump-version.ts major",
         "spellcheck": "cspell . --no-progress"
     }
 }
