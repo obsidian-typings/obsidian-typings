@@ -195,4 +195,4 @@ A brief tutorial is available on how you can get started with adding new typings
 
 ## Migration
 
-If you were using `v1` of this package, you might need to follow the [Migration guide](MIGRATION.md) after updating to `v2'.
+If you were using `v1` of this package, you might need to follow the [Migration guide](MIGRATION.md) after updating to `v2`.
