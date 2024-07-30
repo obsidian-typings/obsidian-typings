@@ -94,7 +94,7 @@ interface InternalPlugins extends Events {
 }
 ```
 
-However, you can take this one step further still by considering the fact that each string is essentialy a different plugin ID.
+However, you can take this one step further still by considering the fact that each string is essentially a different plugin ID.
 In this case, we might just define a new type that contains all the plugin IDs, and use this as the key for the `config` object:
 
 ```ts
@@ -174,7 +174,7 @@ interface InternalPlugins extends Events {
 }
 ```
 
-## Traversing and analysing the source code
+## Traversing and analyzing the source code
 
 Finally, this is both the most tedious but also the most important technique: finding the definition of the method in the minified source code.
 
@@ -202,8 +202,8 @@ you will need try to look at the context of the code to determine which interfac
 The main tip for finding the correct definition, is to look at the other methods being defined on the prototype,
 and check if these match with the other methods of your object.
 
-With the correct line found for the definition, you can now start analysing the code to determine the input/output types
-and its behaviour.
+With the correct line found for the definition, you can now start analyzing the code to determine the input/output types
+and its behavior.
 
 For example, the `requestSaveConfig` method (seen earlier) is defined as follows:
 
@@ -238,5 +238,5 @@ function at(e, t, n) {
 }
 ```
 
-You may want to pass the code through your favourite flavour of LLM or de-minifier to make the code at least somewhat understandable.
-Depending on whether you manage to decipher the code, you can now explicitly define the behaviour and/or types of the method.
+You may want to pass the code through your favorite flavour of LLM or de-minifier to make the code at least somewhat understandable.
+Depending on whether you manage to decipher the code, you can now explicitly define the behavior and/or types of the method.

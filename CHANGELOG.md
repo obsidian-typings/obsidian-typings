@@ -18,7 +18,7 @@
 -   **DEPRECATED:** `collapsed`/`collapsible` properties of `TreeItem` have been removed in 1.6.0
 -   `showRibbon` setting was added
 -   `footnotes` were added to `MetadataCache`
--   Added typings for `DomElementInfo` to allow for adding eventlisteners directly within `createEl`
+-   Added typings for `DomElementInfo` to allow for adding event listeners directly within `createEl`
 -   Added `instance` to `InternalPlugin` definitions
 -   New methods/variables added in 1.6.0/1.6.1 have gotten preliminary typings
 
@@ -80,7 +80,7 @@
 
 -   Change `electron-types` types inclusion
 -   Added note in `README.md` on automatically including new types
--   Fix lambda definitions and tsc compilatiion
+-   Fix lambda definitions and tsc compilation
 
 ## v1.0.2
 
