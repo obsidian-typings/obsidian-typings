@@ -9,7 +9,7 @@ import type {
 export {};
 
 declare module "obsidian" {
-    interface MetadataCache {
+    interface MetadataCache extends Events {
         /**
          * Reference to App
          */

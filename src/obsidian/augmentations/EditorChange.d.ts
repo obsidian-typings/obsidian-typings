@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface EditorChange {}
+    interface EditorChange extends EditorRangeOrCaret {}
 }

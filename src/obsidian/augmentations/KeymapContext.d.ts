@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface KeymapContext {}
+    interface KeymapContext extends KeymapInfo {}
 }

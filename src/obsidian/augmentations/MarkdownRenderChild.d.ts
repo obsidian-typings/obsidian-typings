@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface MarkdownRenderChild {}
+    interface MarkdownRenderChild extends Component {}
 }

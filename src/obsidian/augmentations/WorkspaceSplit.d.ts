@@ -2,6 +2,6 @@
 export {};
 
 declare module "obsidian" {
-    interface WorkspaceSplit {
+    interface WorkspaceSplit extends WorkspaceParent {
     }
 }

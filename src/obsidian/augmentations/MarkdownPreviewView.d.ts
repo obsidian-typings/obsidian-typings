@@ -4,7 +4,7 @@ export {};
 
 declare module "obsidian" {
     /** @todo Documentation incomplete */
-    interface MarkdownPreviewView {
+    interface MarkdownPreviewView extends MarkdownRenderer, MarkdownSubView, MarkdownPreviewEvents {
         /**
          * Unique identifier for the rendered element
          */

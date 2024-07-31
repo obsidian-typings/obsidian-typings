@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface PluginSettingTab {}
+    interface PluginSettingTab extends SettingTab {}
 }

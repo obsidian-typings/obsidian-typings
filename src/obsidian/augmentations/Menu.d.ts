@@ -3,7 +3,7 @@ import type { MenuSubmenuConfigRecord } from "../types.js";
 export {};
 
 declare module "obsidian" {
-    interface Menu extends Component {
+    interface Menu extends Component, CloseableComponent {
         /**
          * Background for the suggestion menu
          */

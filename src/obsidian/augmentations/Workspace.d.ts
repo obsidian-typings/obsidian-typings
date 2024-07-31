@@ -19,7 +19,7 @@ import type { Constructor } from "obsidian";
 export {};
 
 declare module "obsidian" {
-    interface Workspace {
+    interface Workspace extends Events {
         /**
          * Currently active tab group
          */

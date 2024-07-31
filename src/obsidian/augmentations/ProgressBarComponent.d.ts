@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface ProgressBarComponent {}
+    interface ProgressBarComponent extends ValueComponent<number> {}
 }

@@ -6,7 +6,7 @@ import type {
 export {};
 
 declare module "obsidian" {
-    interface MarkdownView {
+    interface MarkdownView extends TextFileView, MarkdownFileInfo {
         /**
          * Backlinks component
          */

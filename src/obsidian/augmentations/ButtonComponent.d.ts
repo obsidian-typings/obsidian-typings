@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface ButtonComponent {}
+    interface ButtonComponent extends BaseComponent {}
 }

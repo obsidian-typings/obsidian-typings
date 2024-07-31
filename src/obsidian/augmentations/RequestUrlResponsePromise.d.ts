@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface RequestUrlResponsePromise {}
+    interface RequestUrlResponsePromise extends Promise<RequestUrlResponse> {}
 }

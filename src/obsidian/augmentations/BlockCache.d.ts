@@ -2,7 +2,7 @@ export {};
 
 declare module "obsidian" {
     /** @todo Documentation incomplete */
-    interface BlockCache {
+    interface BlockCache extends CacheItem {
         /**
          * Reference to App
          */

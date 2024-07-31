@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface EditorSuggestContext {}
+    interface EditorSuggestContext extends EditorSuggestTriggerInfo {}
 }

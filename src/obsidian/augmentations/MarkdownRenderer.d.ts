@@ -2,7 +2,7 @@ export {};
 
 declare module "obsidian" {
     /** @todo Documentation incomplete */
-    interface MarkdownRenderer {
+    interface MarkdownRenderer extends MarkdownRenderChild, MarkdownPreviewEvents, HoverParent {
         get path(): unknown;
         onCheckboxClick(e: unknown, n: unknown, i: unknown): unknown;
         onFileChange(e: unknown): unknown;

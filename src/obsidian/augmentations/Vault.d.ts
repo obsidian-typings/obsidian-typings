@@ -7,7 +7,7 @@ import type {
 export {};
 
 declare module "obsidian" {
-    interface Vault {
+    interface Vault extends Events {
         /**
          * Low-level file system adapter for read and write operations
          *

@@ -1,7 +1,7 @@
 export {};
 
 declare module "obsidian" {
-    interface TextFileView {
+    interface TextFileView extends EditableFileView {
         /**
          * Whether current file is dirty (different from saved contents)
          */
