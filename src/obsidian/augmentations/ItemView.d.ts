@@ -45,5 +45,16 @@ declare module "obsidian" {
          * @remark Used for breadcrumbs rendering
          */
         titleParentEl: HTMLElement;
+
+        /** @internal */
+        handleDrop(e: unknown, t: unknown, n: unknown): unknown;
+        /** @internal */
+        onGroupChange(): void;
+        /** @internal */
+        onMoreOptions(e: unknown): void;
+        /** @deprecated use onPaneMenu instead */
+        onMoreOptionsMenu(e: unknown): void;
+        /** @internal */
+        updateNavButtons(): void;
     }
 }

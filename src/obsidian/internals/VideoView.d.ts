@@ -1,4 +1,8 @@
 import type { EditableFileView } from "obsidian";
-/** @todo Documentation incomplete */
 export interface VideoView extends EditableFileView {
+    /**
+     * Get the current view type
+     * @returns "video"
+     */
+    getViewType(): string;
 }

@@ -111,6 +111,7 @@ declare module "obsidian" {
         getSyncViewState(): any;
         /**
          * Get the current view type
+         * @returns "markdown"
          */
         getViewType(): string;
         /**

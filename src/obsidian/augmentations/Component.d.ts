@@ -1,6 +1,7 @@
 export {};
 
 declare module "obsidian" {
+    /** @todo Documentation incomplete */
     interface Component {
         /**
          * Child Components attached to current component, will be unloaded on unloading parent component
@@ -14,5 +15,7 @@ declare module "obsidian" {
          * Whether the component and its children are loaded
          */
         _loaded: boolean;
+
+        registerScopeEvent(e: unknown): void;
     }
 }

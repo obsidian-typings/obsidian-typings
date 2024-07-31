@@ -22,5 +22,14 @@ declare module "obsidian" {
          * Whether the file is currently saving
          */
         saving: boolean;
+
+        /** @internal */
+        loadFileInternal(e: unknown, t: unknown): unknown;
+        /** @internal */
+        onModify(e: unknown): void;
+        /** @internal */
+        saveImmediately(): void;
+        /** @internal */
+        setData(e: unknown, t: unknown): void;
     }
 }
