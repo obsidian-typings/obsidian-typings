@@ -42,6 +42,7 @@ import "./augmentations/FileManager.js";
 import "./augmentations/FileStats.js";
 import "./augmentations/FileSystemAdapter.js";
 import "./augmentations/FileView.js";
+import "./augmentations/FootnoteCache.js";
 import "./augmentations/FrontMatterCache.js";
 import "./augmentations/FrontMatterInfo.js";
 import "./augmentations/FrontmatterLinkCache.js";
@@ -203,7 +204,6 @@ export type { FileSuggestManager } from "./internals/FileSuggestManager.js";
 export type { FileTreeItem } from "./internals/FileTreeItem.js";
 export type { FoldInfo } from "./internals/FoldInfo.js";
 export type { FoldManager } from "./internals/FoldManager.js";
-export type { FootnoteCache } from "./internals/FootnoteCache.js";
 export type { GlobalSearchLeaf } from "./internals/GlobalSearchLeaf.js";
 export type {
     HotkeyManager,
