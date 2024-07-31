@@ -1,12 +1,31 @@
 import type {
+    MarkdownFileInfo,
+    MarkdownView,
+    FileView,
+    TextFileView
+} from "obsidian";
+import type {
     MetadataEditor,
     Token
 } from "../types.js";
 
 export {};
 
+/**
+ * @note This workaround is required because of the following error:
+ *
+ * error TS2320: Interface '{@link MarkdownView}' cannot simultaneously extend types '{@link TextFileView}' and '{@link MarkdownFileInfo}'
+ *
+ * Named property `file` of types '{@link TextFileView}' and '{@link MarkdownFileInfo}' are not identical.
+ *
+ * {@link TextFileView} (from {@link FileView}) has `file: TFile | null`
+ *
+ * {@link MarkdownFileInfo} has `get file(): TFile | null`
+ */
+type TextFileView_MarkdownFileInfo = TextFileView & MarkdownFileInfo;
+
 declare module "obsidian" {
-    interface MarkdownView extends TextFileView, MarkdownFileInfo {
+    interface MarkdownView extends TextFileView_MarkdownFileInfo {
         /**
          * Backlinks component
          */
