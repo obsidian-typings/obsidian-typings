@@ -2,7 +2,7 @@ export {};
 
 declare module "obsidian" {
     /** @todo Documentation incomplete */
-    interface ItemView {
+    interface ItemView extends View {
         /**
          * Container of actions for the view
          */
