@@ -8,6 +8,7 @@
  * PR's would be very welcome to improve this hot mess of a code
  */
 
+import * as fs from "node:fs";
 import {
     ClassDeclaration,
     ExportDeclaration,
@@ -19,7 +20,6 @@ import {
     Project,
     SourceFile
 } from "ts-morph";
-import * as fs from "node:fs";
 
 interface Nameable {
     getName(): string | undefined;

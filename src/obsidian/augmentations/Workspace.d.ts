@@ -1,3 +1,5 @@
+import type { Extension } from "@codemirror/state";
+import type { Constructor } from "obsidian";
 import type { InternalPluginName } from "../implementations/index.ts";
 import type {
     CanvasConnection,
@@ -13,8 +15,6 @@ import type {
     StateHistory,
     WorkspaceHoverLinkSourcesRecord
 } from "../index.js";
-import type { Extension } from "@codemirror/state";
-import type { Constructor } from "obsidian";
 
 export {};
 

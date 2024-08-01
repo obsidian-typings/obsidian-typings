@@ -1,9 +1,9 @@
+import type { EditorView } from "@codemirror/view";
 import type {
     BaseEditor,
     MarkdownScrollableEditView,
     SearchCursor
 } from "../index.js";
-import type { EditorView } from "@codemirror/view";
 
 export {};
 

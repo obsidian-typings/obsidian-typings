@@ -1,9 +1,9 @@
-import type { PluginUpdateManifest } from "../index.js";
 import type {
     App,
     Plugin,
     PluginManifest
 } from "obsidian";
+import type { PluginUpdateManifest } from "../index.js";
 import type {
     PluginsManifestsRecord,
     PluginsPluginsRecord

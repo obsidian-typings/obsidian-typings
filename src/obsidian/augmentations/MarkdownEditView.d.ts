@@ -1,9 +1,9 @@
+import type { Extension } from "@codemirror/state";
+import type { ViewUpdate } from "@codemirror/view";
 import type {
     FoldInfo,
     MarkdownScrollableEditView
 } from "../index.js";
-import type { Extension } from "@codemirror/state";
-import type { ViewUpdate } from "@codemirror/view";
 
 export {};
 

@@ -1,13 +1,13 @@
 import type {
+    App,
+    Component
+} from "obsidian";
+import type {
     MetadataEditor,
     MetadataWidget,
     PropertyEntryData,
     PropertyWidget
 } from "../index.js";
-import type {
-    App,
-    Component
-} from "obsidian";
 export interface MetadataEditorProperty extends Component {
     /**
      * Reference to the app

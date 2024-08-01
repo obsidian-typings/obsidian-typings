@@ -1,11 +1,11 @@
 import type {
-    FileExplorerView,
-    FileTreeItem
-} from "../index.js";
-import type {
     TFolder,
     WorkspaceLeaf
 } from "obsidian";
+import type {
+    FileExplorerView,
+    FileTreeItem
+} from "../index.js";
 /** @todo Documentation incomplete */
 export interface FileExplorerLeaf extends WorkspaceLeaf {
     view: FileExplorerView;

@@ -1,14 +1,14 @@
 import type {
-    FileTreeItem,
-    Tree,
-    WeakMapWrapper
-} from "../index.js";
-import type {
     TAbstractFile,
     TFile,
     TFolder,
     View
 } from "obsidian";
+import type {
+    FileTreeItem,
+    Tree,
+    WeakMapWrapper
+} from "../index.js";
 import type { FileExplorerViewFileItemsRecord } from "./index.js";
 
 /** @todo Documentation incomplete */

@@ -32,10 +32,12 @@
         "exportDeclaration.spaceSurroundingNamedExports": true,
         "importDeclaration.spaceSurroundingNamedImports": true,
         "typeAssertion.spaceBeforeExpression": true,
-        "module.sortImportDeclarations": "maintain",
-        "module.sortExportDeclarations": "maintain",
+        "module.sortImportDeclarations": "caseInsensitive",
+        "module.sortExportDeclarations": "caseInsensitive",
         "exportDeclaration.sortNamedExports": "caseInsensitive",
-        "importDeclaration.sortNamedImports": "caseInsensitive"
+        "importDeclaration.sortNamedImports": "caseInsensitive",
+        "exportDeclaration.forceMultiLine": "whenMultiple",
+        "importDeclaration.forceMultiLine": "whenMultiple"
     },
     "json": {
         "indentWidth": 4,

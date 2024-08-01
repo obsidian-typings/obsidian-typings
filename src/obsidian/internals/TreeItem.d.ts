@@ -1,5 +1,5 @@
-import type { TreeNode } from "../index.js";
 import type { View } from "obsidian";
+import type { TreeNode } from "../index.js";
 
 /** @todo Documentation incomplete */
 export type TreeItem<T> = TreeNode<T> & {

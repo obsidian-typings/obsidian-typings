@@ -1,12 +1,12 @@
 import type {
+    App,
+    Events
+} from "obsidian";
+import type {
     PropertyInfo,
     PropertyWidget,
     PropertyWidgetType
 } from "../index.js";
-import type {
-    App,
-    Events
-} from "obsidian";
 import type {
     MetadataTypeManagerPropertiesRecord,
     MetadataTypeManagerRegisteredTypeWidgetsRecord,

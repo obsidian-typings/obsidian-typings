@@ -1,3 +1,15 @@
+import type { Extension } from "@codemirror/state";
+import type {
+    EditorView,
+    ViewUpdate
+} from "@codemirror/view";
+import type {
+    App,
+    Component,
+    Editor,
+    MarkdownFileInfo,
+    TFile
+} from "obsidian";
 import type {
     ClipBoardManager,
     EditorSuggests,
@@ -7,15 +19,6 @@ import type {
     TableEditor,
     Token
 } from "../index.js";
-import type { Extension } from "@codemirror/state";
-import type { EditorView, ViewUpdate } from "@codemirror/view";
-import type {
-    App,
-    Component,
-    Editor,
-    MarkdownFileInfo,
-    TFile
-} from "obsidian";
 export interface MarkdownBaseView extends Component {
     /**
      * Reference to the app
