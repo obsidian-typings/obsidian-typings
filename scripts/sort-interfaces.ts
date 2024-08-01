@@ -7,24 +7,38 @@
  *   - End lines between methods/properties, types/interfaces is quite bodgy
  * PR's would be very welcome to improve this hot mess of a code
  */
-// @ts-nocheck (Prevent compilation errors for people use the package as a submodule)
 
-import { ModuleDeclaration, Node, Project, SourceFile } from "ts-morph";
+import {
+    ClassDeclaration,
+    ClassDeclarationStructure,
+    ExportDeclaration,
+    ImportDeclaration,
+    InterfaceDeclaration,
+    InterfaceDeclarationStructure,
+    ModuleDeclaration,
+    Node,
+    Project,
+    SourceFile
+} from "ts-morph";
 import * as fs from "node:fs";
+
+interface Nameable {
+    getName(): string | undefined;
+};
 
 const project = new Project();
 const declarationsToText = (declarationArray: Node[]) =>
     declarationArray.map(declaration => declaration.getText(true)).join("\n\n");
-const sortName = (a: any, b: any) => a.getName().localeCompare(b.getName());
-const sortSpecifierName = (a: any, b: any) => a.getModuleSpecifierValue().localeCompare(b.getModuleSpecifierValue());
-const sortStarExports = (a: any, b: any) =>
+const sortName = (a: Nameable, b: Nameable) => (a.getName() ?? "").localeCompare(b.getName() ?? "");
+const sortSpecifierName = (a: ImportDeclaration | ExportDeclaration, b: ImportDeclaration | ExportDeclaration) => (a.getModuleSpecifierValue() ?? "").localeCompare(b.getModuleSpecifierValue() ?? "");
+const sortStarExports = (a: ExportDeclaration, b: ExportDeclaration) =>
     a.getText().includes("*") === b.getText().includes("*") ? 0 : a.getText().includes("*") ? -1 : 1;
-const sortFilesystemSpecifier = (a: any, b: any) =>
+const sortFilesystemSpecifier = (a: ImportDeclaration, b: ImportDeclaration) =>
     a.getModuleSpecifierValue().startsWith("./") === b.getModuleSpecifierValue().startsWith("./")
         ? 0
         : a.getModuleSpecifierValue().startsWith("./")
-        ? 1
-        : -1;
+            ? 1
+            : -1;
 
 async function sortModule(module: ModuleDeclaration, file: SourceFile) {
     const typeDeclarations = module.getTypeAliases().sort(sortName);
@@ -32,27 +46,29 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile) {
     for (const declaration of interfaceDeclarations) {
         const structure = declaration.getStructure();
         // NOTE: This is pretty slow, not sure what the proper way to sort properties would be
-        // @ts-ignore
         structure.methods = declaration.getMethods().sort(sortName).map(method => method.getStructure());
-
-        // @ts-ignore
         structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
+        if (declaration instanceof ClassDeclaration) {
+            declaration.set(structure as ClassDeclarationStructure);
+        } else if (declaration instanceof InterfaceDeclaration) {
+            declaration.set(structure as InterfaceDeclarationStructure);
+        }
 
-        // @ts-ignore
-        declaration.set(structure);
-        if (structure.methods!.length && structure.properties!.length)
+        if (structure.methods!.length && structure.properties!.length) {
             declaration.insertText(declaration.getMethods()[0].getStart(true), " \n");
+        }
     }
 
     const newModule = file.addModule({
         name: module.getName(),
-        kind: module.getDeclarationKind(),
+        declarationKind: module.getDeclarationKind(),
         docs: module.getJsDocs().map((getJsDoc) => getJsDoc.getStructure())
     });
 
     // Apparently I can't just add an endline to the end, nor use a writer to add an endline at the end, hence the comment
-    if (typeDeclarations.length)
+    if (typeDeclarations.length) {
         newModule.addStatements(declarationsToText(typeDeclarations) + " \n\n\n");
+    }
     newModule.addStatements(declarationsToText(interfaceDeclarations));
 }
 
@@ -119,7 +135,7 @@ if (!fs.existsSync(args[0])) {
 
 // Check if file is a directory
 if (fs.lstatSync(args[0]).isDirectory()) {
-    const files = fs.readdirSync(args[0], { recursive: true });
+    const files = fs.readdirSync(args[0], { recursive: true, encoding: "utf-8" });
     for (const file of files) {
         if (file.endsWith("d.ts"))
             await parseFile(args[0] + file);
