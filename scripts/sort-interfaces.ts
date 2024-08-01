@@ -27,20 +27,32 @@ interface Nameable {
 };
 
 const project = new Project();
-const declarationsToText = (declarationArray: Node[]) =>
-    declarationArray.map(declaration => declaration.getText(true)).join("\n\n");
-const sortName = (a: Nameable, b: Nameable) => (a.getName() ?? "").localeCompare(b.getName() ?? "");
-const sortSpecifierName = (a: ImportDeclaration | ExportDeclaration, b: ImportDeclaration | ExportDeclaration) => (a.getModuleSpecifierValue() ?? "").localeCompare(b.getModuleSpecifierValue() ?? "");
-const sortStarExports = (a: ExportDeclaration, b: ExportDeclaration) =>
-    a.getText().includes("*") === b.getText().includes("*") ? 0 : a.getText().includes("*") ? -1 : 1;
-const sortFilesystemSpecifier = (a: ImportDeclaration, b: ImportDeclaration) =>
-    a.getModuleSpecifierValue().startsWith("./") === b.getModuleSpecifierValue().startsWith("./")
+
+function declarationsToText(declarationArray: Node[]): string {
+    return declarationArray.map(declaration => declaration.getText(true)).join("\n\n");
+}
+
+function sortName(a: Nameable, b: Nameable): number {
+    return (a.getName() ?? "").localeCompare(b.getName() ?? "");
+}
+
+function sortSpecifierName(a: ImportDeclaration | ExportDeclaration, b: ImportDeclaration | ExportDeclaration): number {
+    return (a.getModuleSpecifierValue() ?? "").localeCompare(b.getModuleSpecifierValue() ?? "");
+}
+
+function sortStarExports(a: ExportDeclaration, b: ExportDeclaration): number {
+    return a.getText().includes("*") === b.getText().includes("*") ? 0 : a.getText().includes("*") ? -1 : 1;
+}
+
+function sortFilesystemSpecifier(a: ImportDeclaration, b: ImportDeclaration): number {
+    return a.getModuleSpecifierValue().startsWith("./") === b.getModuleSpecifierValue().startsWith("./")
         ? 0
         : a.getModuleSpecifierValue().startsWith("./")
             ? 1
             : -1;
+}
 
-async function sortModule(module: ModuleDeclaration, file: SourceFile) {
+async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<void> {
     const typeDeclarations = module.getTypeAliases().sort(sortName);
     const interfaceDeclarations = [...module.getClasses(), ...module.getInterfaces()].sort(sortName);
     for (const declaration of interfaceDeclarations) {
@@ -72,7 +84,7 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile) {
     newModule.addStatements(declarationsToText(interfaceDeclarations));
 }
 
-async function parseFile(file: string, output_file: string = file) {
+async function parseFile(file: string, output_file: string = file): Promise<void> {
     const sourceFile = project.addSourceFileAtPath(file);
 
     const newFile = project.createSourceFile(file === output_file ? "temp.ts" : output_file, "", {
