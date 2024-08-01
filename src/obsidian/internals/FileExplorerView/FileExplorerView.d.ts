@@ -10,7 +10,6 @@ import type {
     WeakMapWrapper
 } from "../index.js";
 import type { FileExplorerViewFileItemsRecord } from "./index.js";
-
 /** @todo Documentation incomplete */
 export interface FileExplorerView extends View {
     /**

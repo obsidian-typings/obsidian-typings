@@ -3,7 +3,6 @@ import type {
     TFolder
 } from "obsidian";
 import type { InternalPluginInstance } from "./index.js";
-
 /** @todo Documentation incomplete */
 export interface FileExplorerPluginInstance extends InternalPluginInstance {
     /**

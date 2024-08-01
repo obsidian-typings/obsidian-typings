@@ -1,5 +1,4 @@
 import type { TAbstractFile } from "obsidian";
-
 export interface Draggable {
     source?: unknown;
     type: string;

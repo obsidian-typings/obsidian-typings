@@ -211,13 +211,11 @@ declare module "obsidian" {
         /**
          * Set the ephemeral (non-persistent) state of the editor
          */
-        setEphemeralState(
-            state: {
-                focus: boolean;
-                focusOnMobile: boolean;
-                cursor: EditorRangeOrCaret;
-            }
-        ): void;
+        setEphemeralState(state: {
+            focus: boolean;
+            focusOnMobile: boolean;
+            cursor: EditorRangeOrCaret;
+        }): void;
         /**
          * Set the mode of the editor
          */

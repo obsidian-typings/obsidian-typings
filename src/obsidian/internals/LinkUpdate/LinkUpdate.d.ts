@@ -3,7 +3,6 @@ import type {
     TFile
 } from "obsidian";
 import type { PositionedReference } from "../index.js";
-
 export interface LinkUpdate {
     /**
      * Reference to App

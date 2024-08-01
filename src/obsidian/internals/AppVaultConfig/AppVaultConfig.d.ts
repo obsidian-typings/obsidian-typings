@@ -1,5 +1,4 @@
 import type { AppVaultConfigHotkeysRecord } from "./index.js";
-
 export interface AppVaultConfig {
     /**
      * Appearance > Accent color

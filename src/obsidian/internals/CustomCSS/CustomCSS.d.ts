@@ -1,13 +1,12 @@
+import type {
+    App,
+    Component
+} from "obsidian";
 import type { ThemeManifest } from "../index.js";
 import type {
     CustomCSSThemesRecord,
     CustomCSSUpdatesRecord
 } from "./index.js";
-
-import type {
-    App,
-    Component
-} from "obsidian";
 /** @todo Documentation incomplete */
 export interface CustomCSS extends Component {
     /**
