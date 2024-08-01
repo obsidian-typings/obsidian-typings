@@ -137,7 +137,7 @@ if (!fs.existsSync(args[0])) {
 if (fs.lstatSync(args[0]).isDirectory()) {
     const files = fs.readdirSync(args[0], { recursive: true, encoding: "utf-8" });
     for (const file of files) {
-        if (file.endsWith("d.ts"))
+        if (file.endsWith(".d.ts"))
             await parseFile(args[0] + file);
     }
 } else {
