@@ -3,7 +3,6 @@ import type {
     LinkUpdater
 } from "./index.js";
 
-export interface LinkUpdaters {
-    [key: string]: LinkUpdater | undefined;
+export interface LinkUpdaters extends Record<string, LinkUpdater> {
     canvas?: CanvasLinkUpdater;
 }
