@@ -8,7 +8,12 @@
  * PR's would be very welcome to improve this hot mess of a code
  */
 
-import * as fs from "node:fs";
+import {
+    existsSync,
+    lstatSync,
+    readdirSync,
+    renameSync
+} from "node:fs";
 import {
     basename,
     extname
@@ -38,14 +43,14 @@ async function main(): Promise<void> {
     }
 
     // Check if file exists
-    if (!fs.existsSync(args[0])) {
+    if (!existsSync(args[0])) {
         console.error("File does not exist");
         process.exit(1);
     }
 
     // Check if file is a directory
-    if (fs.lstatSync(args[0]).isDirectory()) {
-        const files = fs.readdirSync(args[0], { recursive: true, encoding: "utf-8" });
+    if (lstatSync(args[0]).isDirectory()) {
+        const files = readdirSync(args[0], { recursive: true, encoding: "utf-8" });
         for (const file of files) {
             if (file.endsWith(".d.ts")) {
                 await parseFile(args[0] + file);
@@ -184,7 +189,7 @@ async function parseFile(file: string, output_file: string = file): Promise<void
     await newFile.save();
 
     if (file === output_file) {
-        fs.renameSync("temp.ts", file);
+        renameSync("temp.ts", file);
     }
 }
 
