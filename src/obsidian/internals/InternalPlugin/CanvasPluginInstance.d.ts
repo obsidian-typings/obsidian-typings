@@ -1,0 +1,3 @@
+import type { InternalPluginInstance } from "./index.js";
+
+export interface CanvasPluginInstance extends InternalPluginInstance {}
