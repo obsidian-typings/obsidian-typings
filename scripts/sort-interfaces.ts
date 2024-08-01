@@ -53,8 +53,6 @@ async function main(): Promise<void> {
     }
 }
 
-const project = new Project();
-
 function declarationsToText(declarationArray: Node[]): string {
     return declarationArray.map(declaration => declaration.getText(true)).join("\n\n");
 }
@@ -112,6 +110,7 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<
 }
 
 async function parseFile(file: string, output_file: string = file): Promise<void> {
+    const project = new Project();
     const sourceFile = project.addSourceFileAtPath(file);
 
     const newFile = project.createSourceFile(file === output_file ? "temp.ts" : output_file, "", {
