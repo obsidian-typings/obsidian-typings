@@ -1,4 +1,4 @@
-import type { Runnable } from "../types.js";
+import type { Runnable } from "../index.js";
 import type {
     App,
     BlockCache,

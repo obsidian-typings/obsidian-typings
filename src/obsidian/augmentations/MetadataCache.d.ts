@@ -4,7 +4,7 @@ import type {
     MetadataCacheFileCacheRecord,
     MetadataCacheMetadataCacheRecord,
     PropertyInfo
-} from "../types.js";
+} from "../index.js";
 
 export {};
 

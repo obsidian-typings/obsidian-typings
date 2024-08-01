@@ -1,7 +1,7 @@
 import type {
     AbstractSearchComponent,
     SearchCursor
-} from "../types.js";
+} from "../index.js";
 import type {
     Editor,
     EditorRange

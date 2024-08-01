@@ -2,7 +2,7 @@ import type {
     PropertyInfo,
     PropertyWidget,
     PropertyWidgetType
-} from "../types.js";
+} from "../index.js";
 import type {
     App,
     Events

@@ -1,7 +1,7 @@
 import type {
     MetadataEditorProperty,
     PropertyEntryData
-} from "../types.js";
+} from "../index.js";
 import type {
     App,
     Component,

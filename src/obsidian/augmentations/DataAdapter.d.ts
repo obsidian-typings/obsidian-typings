@@ -1,7 +1,7 @@
 import type {
     DataAdapterFilesRecord,
     DataAdapterWatchersRecord
-} from "../types.js";
+} from "../index.js";
 import type { IpcRenderer } from "electron";
 import * as fs from "node:fs";
 import * as fsPromises from "node:fs/promises";

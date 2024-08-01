@@ -1,4 +1,4 @@
-import type { WindowSelection } from "../types.js";
+import type { WindowSelection } from "../index.js";
 
 export {};
 

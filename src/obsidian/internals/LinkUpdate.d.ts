@@ -1,7 +1,7 @@
 import type {
     CanvasPluginInstance,
     PositionedReference
-} from "../types.js";
+} from "../index.js";
 import type {
     App,
     ReferenceCache,

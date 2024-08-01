@@ -1,7 +1,7 @@
 import type {
     FileExplorerView,
     FileTreeItem
-} from "../types.js";
+} from "../index.js";
 import type {
     TFolder,
     WorkspaceLeaf

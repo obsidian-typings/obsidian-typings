@@ -1,4 +1,4 @@
-import type { IFramedMarkdownEditor } from "../types.js";
+import type { IFramedMarkdownEditor } from "../index.js";
 import type { EditorState } from "@codemirror/state";
 import type {
     App,

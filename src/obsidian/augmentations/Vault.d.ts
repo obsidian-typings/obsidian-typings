@@ -2,7 +2,7 @@ import type {
     AppVaultConfig,
     ConfigItem,
     VaultFileMapRecord
-} from "../types.js";
+} from "../index.js";
 
 export {};
 

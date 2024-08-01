@@ -3,7 +3,7 @@ import type {
     MetadataWidget,
     PropertyEntryData,
     PropertyWidget
-} from "../types.js";
+} from "../index.js";
 import type {
     App,
     Component

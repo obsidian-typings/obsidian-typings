@@ -1,4 +1,4 @@
-import type { ImportedAttachments } from "../types.js";
+import type { ImportedAttachments } from "../index.js";
 import type {
     App,
     MarkdownView,

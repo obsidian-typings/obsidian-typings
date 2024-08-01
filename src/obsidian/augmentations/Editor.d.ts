@@ -2,7 +2,7 @@ import type {
     BaseEditor,
     MarkdownScrollableEditView,
     SearchCursor
-} from "../types.js";
+} from "../index.js";
 import type { EditorView } from "@codemirror/view";
 
 export {};

@@ -12,7 +12,7 @@ import type {
     SerializedWorkspace,
     StateHistory,
     WorkspaceHoverLinkSourcesRecord
-} from "../types.js";
+} from "../index.js";
 import type { Extension } from "@codemirror/state";
 import type { Constructor } from "obsidian";
 

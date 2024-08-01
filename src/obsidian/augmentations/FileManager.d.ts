@@ -2,7 +2,7 @@ import type {
     LinkUpdate,
     LinkUpdaters,
     PositionedReference
-} from "../types.js";
+} from "../index.js";
 
 export {};
 

@@ -1,4 +1,4 @@
-import type { ThemeManifest } from "../types.js";
+import type { ThemeManifest } from "../index.js";
 import type {
     App,
     Component

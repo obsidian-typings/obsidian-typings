@@ -1,6 +1,6 @@
 import type {
     MarkdownBaseView,
     TableCell
-} from "../types.js";
+} from "../index.js";
 /** @todo Documentation incomplete */
 export interface TableCellEditor extends MarkdownBaseView, TableCell {}

@@ -1,4 +1,4 @@
-import type { MarkdownBaseView } from "../types.js";
+import type { MarkdownBaseView } from "../index.js";
 import type {
     EditorSuggest,
     TFile

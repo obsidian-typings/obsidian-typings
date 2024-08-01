@@ -1,4 +1,4 @@
-import type { HotkeysSettingTab } from "../types.js";
+import type { HotkeysSettingTab } from "../index.js";
 
 export {};
 
