@@ -1,7 +1,7 @@
 import type {
+    FileView,
     MarkdownFileInfo,
     MarkdownView,
-    FileView,
     TextFileView
 } from "obsidian";
 import type {

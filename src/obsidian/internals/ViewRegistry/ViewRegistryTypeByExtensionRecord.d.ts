@@ -1,1 +1,1 @@
-export interface ViewRegistryTypeByExtensionRecord extends Record<string, string> { }
+export interface ViewRegistryTypeByExtensionRecord extends Record<string, string> {}

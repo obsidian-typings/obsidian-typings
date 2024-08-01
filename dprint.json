@@ -7,7 +7,7 @@
         "quoteStyle": "alwaysDouble",
         "quoteProps": "preserve",
         "newLineKind": "crlf",
-        "useBraces": "preferNone",
+        "useBraces": "always",
         "bracePosition": "sameLineUnlessHanging",
         "singleBodyPosition": "maintain",
         "nextControlFlowPosition": "sameLine",

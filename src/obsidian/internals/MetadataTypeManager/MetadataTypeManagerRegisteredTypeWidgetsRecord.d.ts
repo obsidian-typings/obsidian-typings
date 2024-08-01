@@ -3,4 +3,6 @@ import type {
     PropertyWidgetType
 } from "../index.js";
 
-export interface MetadataTypeManagerRegisteredTypeWidgetsRecord extends Record<PropertyWidgetType, PropertyWidget<unknown>> { }
+export interface MetadataTypeManagerRegisteredTypeWidgetsRecord
+    extends Record<PropertyWidgetType, PropertyWidget<unknown>>
+{}

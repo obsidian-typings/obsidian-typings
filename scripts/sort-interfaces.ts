@@ -17,12 +17,13 @@ import {
     ModuleDeclaration,
     Node,
     Project,
-    SourceFile} from "ts-morph";
+    SourceFile
+} from "ts-morph";
 import * as fs from "node:fs";
 
 interface Nameable {
     getName(): string | undefined;
-};
+}
 
 async function main(): Promise<void> {
     // Get passed parameter
@@ -71,8 +72,8 @@ function sortFilesystemSpecifier(a: ImportDeclaration, b: ImportDeclaration): nu
     return a.getModuleSpecifierValue().startsWith("./") === b.getModuleSpecifierValue().startsWith("./")
         ? 0
         : a.getModuleSpecifierValue().startsWith("./")
-            ? 1
-            : -1;
+        ? 1
+        : -1;
 }
 
 async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<void> {
@@ -103,7 +104,9 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<
 
 function sortClassDeclaration(declaration: ClassDeclaration): void {
     const structure = declaration.getStructure();
-    structure.methods = declaration.getMethods().sort(sortName).map(method => method.getStructure() as MethodDeclarationStructure);
+    structure.methods = declaration.getMethods().sort(sortName).map(method =>
+        method.getStructure() as MethodDeclarationStructure
+    );
     structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
     declaration.set(structure);
 
@@ -168,8 +171,9 @@ async function parseFile(file: string, output_file: string = file): Promise<void
         .map(inter => inter.getText(true));
     newFile.addStatements(interfaces);
 
-    for (const module of sourceFile.getModules())
+    for (const module of sourceFile.getModules()) {
         await sortModule(module, newFile);
+    }
 
     await newFile.save();
 

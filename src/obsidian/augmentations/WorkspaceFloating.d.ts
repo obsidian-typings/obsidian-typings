@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface  WorkspaceFloating extends WorkspaceParent {}
+    interface WorkspaceFloating extends WorkspaceParent {}
 }

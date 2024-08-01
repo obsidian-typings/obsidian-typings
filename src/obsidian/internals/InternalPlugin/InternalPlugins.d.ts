@@ -4,9 +4,9 @@ import type {
 } from "obsidian";
 import type {
     InternalPlugin,
-    InternalPluginsConfigRecord,
     InternalPluginNameInstancesMapping,
-    InternalPluginNameType
+    InternalPluginNameType,
+    InternalPluginsConfigRecord
 } from "./index.js";
 
 export interface InternalPlugins extends Events {
@@ -54,7 +54,7 @@ export interface InternalPlugins extends Events {
         id: ID
     ): InternalPlugin<InternalPluginNameInstancesMapping[ID]> | null;
     /** @internal */
-    loadPlugin(arg: { id: string; name: string; }): string;
+    loadPlugin(arg: { id: string; name: string }): string;
     /** @internal */
     onRaw(cb1: unknown, cb2: unknown): void;
     /** @internal Request save of plugin configs */

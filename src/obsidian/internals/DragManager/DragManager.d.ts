@@ -30,7 +30,11 @@ export interface DragManager {
     dragFolder(event: DragEvent, folder: TFolder, source?: unknown): Draggable;
     dragLink(event: DragEvent, linkText: string, sourcePath: string, title?: string, source?: unknown): Draggable;
     handleDrag(el: HTMLElement, draggableGetter: (event: DragEvent) => Draggable | null): void;
-    handleDrop(el: HTMLElement, dropHandler: (event: DragEvent, draggable: Draggable, isOver: boolean) => DropResult | null, draggable?: boolean): void;
+    handleDrop(
+        el: HTMLElement,
+        dropHandler: (event: DragEvent, draggable: Draggable, isOver: boolean) => DropResult | null,
+        draggable?: boolean
+    ): void;
     hideOverlay(): void;
     onDragEnd(): void;
     onDragLeave(event: DragEvent): void;

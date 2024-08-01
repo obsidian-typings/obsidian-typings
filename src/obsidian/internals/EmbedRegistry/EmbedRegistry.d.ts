@@ -36,5 +36,3 @@ export interface EmbedRegistry extends Events {
      */
     unregisterExtensions(extensions: string[]): void;
 }
-
-

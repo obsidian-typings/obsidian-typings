@@ -2,7 +2,7 @@ import type { ThemeManifest } from "../index.js";
 import type {
     CustomCSSThemesRecord,
     CustomCSSUpdatesRecord
-} from "./index.js"
+} from "./index.js";
 
 import type {
     App,

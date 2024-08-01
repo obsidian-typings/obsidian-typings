@@ -32,4 +32,3 @@ export interface FileExplorerView extends View {
      */
     revealInFolder(file: TFile | TFolder): void;
 }
-

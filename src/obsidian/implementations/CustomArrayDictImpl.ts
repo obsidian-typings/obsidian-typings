@@ -7,23 +7,27 @@ export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
     public data: CustomArrayDictDataRecord<T> = {};
 
     public add(key: string, value: T): void {
-        if (!(this.data.hasOwnProperty(key)))
+        if (!(this.data.hasOwnProperty(key))) {
             this.data[key] = [] as T[];
+        }
 
         const values = this.data[key]!;
 
-        if (!values.includes(value))
+        if (!values.includes(value)) {
             values.push(value);
+        }
     }
 
     public remove(key: string, value: T): void {
         const values = this.data[key];
-        if (!values)
+        if (!values) {
             return;
+        }
         values.remove(value);
 
-        if (values.length === 0)
+        if (values.length === 0) {
             delete this.data[key];
+        }
     }
 
     public removeKey(key: string): void {
@@ -54,8 +58,9 @@ export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
     public count(): number {
         let ans = 0;
         for (const key in this.data) {
-            if (this.data.hasOwnProperty(key))
+            if (this.data.hasOwnProperty(key)) {
                 ans += this.data[key]!.length;
+            }
         }
 
         return ans;

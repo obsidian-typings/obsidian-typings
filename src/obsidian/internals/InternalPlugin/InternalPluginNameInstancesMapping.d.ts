@@ -1,5 +1,5 @@
 import type { InternalPluginName } from "../../implementations/index.ts";
-import type { 
+import type {
     AudioRecorderPluginInstance,
     BacklinkPluginInstance,
     BookmarksPluginInstance,
@@ -28,7 +28,7 @@ import type {
     TemplatesPluginInstance,
     WordCountPluginInstance,
     WorkspacesPluginInstance,
-    ZkPrefixerPluginInstance,
+    ZkPrefixerPluginInstance
 } from "./index.js";
 
 export type InternalPluginNameInstancesMapping = {

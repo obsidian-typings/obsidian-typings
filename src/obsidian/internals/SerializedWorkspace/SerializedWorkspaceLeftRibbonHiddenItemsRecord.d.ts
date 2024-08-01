@@ -1,1 +1,1 @@
-export interface SerializedWorkspaceLeftRibbonHiddenItemsRecord extends Record<string, boolean> { }
+export interface SerializedWorkspaceLeftRibbonHiddenItemsRecord extends Record<string, boolean> {}
