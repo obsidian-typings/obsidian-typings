@@ -266,7 +266,7 @@ export type { MenuSubmenuConfigRecord } from "./internals/MenuRecords.js";
 export type {
     MetadataCacheFileCacheRecord,
     MetadataCacheMetadataCacheRecord
-} from "./internals/MetadataCacheRecords.d.ts";
+} from "./internals/MetadataCacheRecords.js";
 export type { MetadataEditor } from "./internals/MetadataEditor.js";
 export type { MetadataEditorProperty } from "./internals/MetadataEditorProperty.js";
 export type {
