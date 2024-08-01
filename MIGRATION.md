@@ -4,7 +4,7 @@ Some breaking changes were made between `1.x.x` and `2.0.0` versions of this pac
 
 ## Mandatory changes
 
-- If you were using in your `tsconfig.json`, `"moduleResolution": "classic"`, you will need to switch to a more modern option (such as `bundler`, `nodenext`, `node10`).
+- If you were using in your `tsconfig.json`, `"moduleResolution": "classic"`, you will need to switch to a more modern option (such as `bundler`, `nodenext`, `node16`, `node`, `node10`).
 - Importing undocumented methods now requires you to import from `obsidian-typings`, rather than the `obsidian` package. This is done in order to make it more apparent that you are making use of undocumented and possibly volatile API. These should be imported as `import { X } from "obsidian-typings"` instead of `import { X } from "obsidian"`. See below for the full list of interfaces:
 
   <details>
