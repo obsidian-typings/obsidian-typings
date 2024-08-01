@@ -96,6 +96,7 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<
     const newModule = file.addModule({
         name: module.getName(),
         declarationKind: module.getDeclarationKind(),
+        hasDeclareKeyword: module.hasDeclareKeyword(),
         docs: module.getJsDocs().map((getJsDoc) => getJsDoc.getStructure())
     });
 
