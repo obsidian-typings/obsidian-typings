@@ -3,9 +3,8 @@ import type { ItemView } from "obsidian";
 export interface BrowserView extends ItemView {
     /**
      * Get the current view type
-     * @returns "browser"
      */
-    getViewType(): string;
+    getViewType(): "browser";
     /** @internal */
     toggleReaderMode(): void;
     /** @internal */

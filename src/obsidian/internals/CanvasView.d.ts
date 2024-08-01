@@ -3,9 +3,8 @@ import type { TextFileView } from "obsidian";
 export interface CanvasView extends TextFileView {
     /**
      * Get the current view type
-     * @returns "canvas"
      */
-    getViewType(): string;
+    getViewType(): "canvas";
     getLocalData(): unknown;
     saveLocalData(): void;
 }

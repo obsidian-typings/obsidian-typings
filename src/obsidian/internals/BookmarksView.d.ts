@@ -6,9 +6,8 @@ export interface BookmarksView extends ItemView {
     handleCollapseAll(e: unknown): void;
     /**
      * Get the current view type
-     * @returns "bookmarks"
      */
-    getViewType(): string;
+    getViewType(): "bookmarks";
     /** @internal */
     isItem(e: unknown): boolean;
     /** @internal */

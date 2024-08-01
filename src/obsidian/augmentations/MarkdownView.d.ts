@@ -111,9 +111,8 @@ declare module "obsidian" {
         getSyncViewState(): any;
         /**
          * Get the current view type
-         * @returns "markdown"
          */
-        getViewType(): string;
+        getViewType(): "markdown";
         /**
          * Handle copy event on metadata editor and serialize properties
          */

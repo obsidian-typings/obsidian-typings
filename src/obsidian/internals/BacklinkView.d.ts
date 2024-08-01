@@ -3,9 +3,8 @@ import type { InfoFileView } from "../types.js";
 export interface BacklinkView extends InfoFileView {
     /**
      * Get the current view type
-     * @returns "backlink"
      */
-    getViewType(): string;
+    getViewType(): "backlink";
     /** @internal */
     showSearch(): void;
     /** @internal */

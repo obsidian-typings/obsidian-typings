@@ -25,9 +25,8 @@ export interface SearchView extends View {
     toggleFilterSection(): void;
     /**
      * Get the current view type
-     * @returns "search"
      */
-    getViewType(): string;
+    getViewType(): "search";
     /** @internal */
     onKeyArrowRightInFocus(e: unknown): void;
     /** @internal */

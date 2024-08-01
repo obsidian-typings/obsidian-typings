@@ -38,9 +38,8 @@ export interface FileExplorerView extends View {
     setIsAllCollapsed(e: unknown): void;
     /**
      * Get the current view type
-     * @returns "file-explorer"
      */
-    getViewType(): string;
+    getViewType(): "file-explorer";
     /** @internal */
     onCreate(e: unknown): void;
     /** @internal */

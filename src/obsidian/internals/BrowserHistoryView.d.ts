@@ -3,9 +3,8 @@ import type { ItemView } from "obsidian";
 export interface BrowserHistoryView extends ItemView {
     /**
      * Get the current view type
-     * @returns "browser-history"
      */
-    getViewType(): string;
+    getViewType(): "browser-history";
     /** @internal */
     update(): unknown;
 }

@@ -3,9 +3,8 @@ import type { InfoFileView } from "../types.js";
 export interface LocalGraphView extends InfoFileView {
     /**
      * Get the current view type
-     * @returns "localgraph"
      */
-    getViewType(): string;
+    getViewType(): "localgraph";
     /** @internal */
     onFileChanged(e: unknown): void;
     /** @internal */

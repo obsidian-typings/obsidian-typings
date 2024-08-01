@@ -3,9 +3,8 @@ import type { ItemView } from "obsidian";
 export interface GraphView extends ItemView {
     /**
      * Get the current view type
-     * @returns "graph"
      */
-    getViewType(): string;
+    getViewType(): "graph";
     /** @internal */
     update(): void;
     /** @internal */

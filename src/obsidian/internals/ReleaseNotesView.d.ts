@@ -3,9 +3,8 @@ import type { ItemView } from "obsidian";
 export interface ReleaseNotesView extends ItemView {
     /**
      * Get the current view type
-     * @returns "release-notes"
      */
-    getViewType(): string;
+    getViewType(): "release-notes";
     /** @internal */
     fetchReleaseNotes(e: unknown): unknown;
     /** @internal */

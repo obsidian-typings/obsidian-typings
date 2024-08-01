@@ -3,9 +3,8 @@ import type { InfoFileView } from "../types.js";
 export interface OutgoingLinkView extends InfoFileView {
     /**
      * Get the current view type
-     * @returns "outgoing-link"
      */
-    getViewType(): string;
+    getViewType(): "outgoing-link";
     /** @internal */
     update(): void;
 }

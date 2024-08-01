@@ -5,9 +5,8 @@ export interface OutlineView extends InfoFileView {
     handleCollapseAll(e: unknown): void;
     /**
      * Get the current view type
-     * @returns "outline"
      */
-    getViewType(): string;
+    getViewType(): "outline";
     /** @internal */
     findActiveHeading(e: unknown): unknown | undefined;
     /** @internal */

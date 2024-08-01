@@ -25,9 +25,8 @@ export interface AllPropertiesView extends ItemView {
     onKeyEnterInFocus(e: unknown): void;
     /**
      * Get the current view type
-     * @returns "all-properties"
      */
-    getViewType(): string;
+    getViewType(): "all-properties";
     /** @internal */
     setSortOrder(e: unknown): void;
     /** @internal */

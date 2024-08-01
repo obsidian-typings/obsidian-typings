@@ -5,9 +5,8 @@ export interface PdfView extends EditableFileView {
 
     /**
      * Get the current view type
-     * @returns "pdf"
      */
-    getViewType(): string;
+    getViewType(): "pdf";
     /** @internal */
     onModify(e: unknown): void;
     /** @internal */

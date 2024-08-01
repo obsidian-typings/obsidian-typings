@@ -19,9 +19,8 @@ export interface FilePropertiesView extends InfoFileView {
     onFileChange(e: unknown): unknown;
     /**
      * Get the current view type
-     * @returns "file-properties"
      */
-    getViewType(): string;
+    getViewType(): "file-properties";
     /** @internal */
     updateFrontmatter(e: unknown, t: unknown): unknown;
     /** @internal */

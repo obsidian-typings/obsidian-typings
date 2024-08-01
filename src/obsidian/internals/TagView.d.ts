@@ -9,9 +9,8 @@ export interface TagView extends View {
     onKeyEnterInFocus(e: unknown): void;
     /**
      * Get the current view type
-     * @returns "tag"
      */
-    getViewType(): string;
+    getViewType(): "tag";
     /** @internal */
     setIsAllCollapsed(e: unknown): void;
     /** @internal */
