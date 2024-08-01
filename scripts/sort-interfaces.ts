@@ -10,16 +10,14 @@
 
 import {
     ClassDeclaration,
-    ClassDeclarationStructure,
     ExportDeclaration,
     ImportDeclaration,
     InterfaceDeclaration,
-    InterfaceDeclarationStructure,
+    MethodDeclarationStructure,
     ModuleDeclaration,
     Node,
     Project,
-    SourceFile
-} from "ts-morph";
+    SourceFile} from "ts-morph";
 import * as fs from "node:fs";
 
 interface Nameable {
@@ -80,19 +78,13 @@ function sortFilesystemSpecifier(a: ImportDeclaration, b: ImportDeclaration): nu
 async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<void> {
     const typeDeclarations = module.getTypeAliases().sort(sortName);
     const interfaceDeclarations = [...module.getClasses(), ...module.getInterfaces()].sort(sortName);
-    for (const declaration of interfaceDeclarations) {
-        const structure = declaration.getStructure();
-        // NOTE: This is pretty slow, not sure what the proper way to sort properties would be
-        structure.methods = declaration.getMethods().sort(sortName).map(method => method.getStructure());
-        structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
-        if (declaration instanceof ClassDeclaration) {
-            declaration.set(structure as ClassDeclarationStructure);
-        } else if (declaration instanceof InterfaceDeclaration) {
-            declaration.set(structure as InterfaceDeclarationStructure);
-        }
 
-        if (structure.methods!.length && structure.properties!.length) {
-            declaration.insertText(declaration.getMethods()[0].getStart(true), " \n");
+    // NOTE: This is pretty slow, not sure what the proper way to sort properties would be
+    for (const declaration of interfaceDeclarations) {
+        if (declaration instanceof ClassDeclaration) {
+            sortClassDeclaration(declaration);
+        } else if (declaration instanceof InterfaceDeclaration) {
+            sortInterfaceDeclaration(declaration);
         }
     }
 
@@ -107,6 +99,28 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<
         newModule.addStatements(declarationsToText(typeDeclarations) + " \n\n\n");
     }
     newModule.addStatements(declarationsToText(interfaceDeclarations));
+}
+
+function sortClassDeclaration(declaration: ClassDeclaration): void {
+    const structure = declaration.getStructure();
+    structure.methods = declaration.getMethods().sort(sortName).map(method => method.getStructure() as MethodDeclarationStructure);
+    structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
+    declaration.set(structure);
+
+    if (structure.methods!.length && structure.properties!.length) {
+        declaration.insertText(declaration.getMethods()[0].getStart(true), " \n");
+    }
+}
+
+function sortInterfaceDeclaration(declaration: InterfaceDeclaration): void {
+    const structure = declaration.getStructure();
+    structure.methods = declaration.getMethods().sort(sortName).map(method => method.getStructure());
+    structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
+    declaration.set(structure);
+
+    if (structure.methods!.length && structure.properties!.length) {
+        declaration.insertText(declaration.getMethods()[0].getStart(true), " \n");
+    }
 }
 
 async function parseFile(file: string, output_file: string = file): Promise<void> {
