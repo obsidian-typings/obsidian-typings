@@ -1,7 +1,7 @@
 import type {
     MetadataEditor,
     Token
-} from "../types.js";
+} from "../../types.js";
 
 export {};
 
