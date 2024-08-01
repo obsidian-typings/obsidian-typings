@@ -10,6 +10,10 @@
 
 import * as fs from "node:fs";
 import {
+    basename,
+    extname
+} from "node:path";
+import {
     ClassDeclaration,
     ExportDeclaration,
     ImportDeclaration,
@@ -139,6 +143,7 @@ async function parseFile(file: string, output_file: string = file): Promise<void
         .sort((a, b) => sortStarExports(a, b) || sortSpecifierName(a, b))
         .map(declaration => declaration.getText(true));
     const imports = sourceFile.getImportDeclarations()
+        .map(declaration => fixImport(declaration, file))
         .sort((a, b) => sortFilesystemSpecifier(a, b) || sortSpecifierName(a, b))
         .map(declaration => declaration.getText(true));
 
@@ -180,6 +185,39 @@ async function parseFile(file: string, output_file: string = file): Promise<void
     if (file === output_file) {
         fs.renameSync("temp.ts", file);
     }
+}
+
+function fixImport(declaration: ImportDeclaration, file: string): ImportDeclaration {
+    let moduleSpecifier = declaration.getModuleSpecifierValue();
+    if (!moduleSpecifier.startsWith(".")) {
+        return declaration;
+    }
+
+    const fileExtension = getExtension(file);
+    const isDeclarationFile = fileExtension === ".d.ts";
+    const fileName = basename(file, fileExtension);
+
+    if (isDeclarationFile) {
+        moduleSpecifier = moduleSpecifier.replace("/(\.d)?\.ts$/", ".js");
+    }
+
+    const moduleExt = getExtension(moduleSpecifier);
+    const moduleFileName = basename(moduleSpecifier, moduleExt);
+
+    if (moduleFileName !== "index" && (fileName !== "index" || moduleSpecifier.startsWith(".."))) {
+        moduleSpecifier = moduleSpecifier.replace(`${moduleFileName}${moduleExt}`, `index${moduleExt}`);
+    }
+
+    declaration.setModuleSpecifier(moduleSpecifier);
+    return declaration;
+}
+
+function getExtension(file: string): string {
+    if (file.endsWith(".d.ts")) {
+        return ".d.ts";
+    }
+
+    return extname(file);
 }
 
 await main();
