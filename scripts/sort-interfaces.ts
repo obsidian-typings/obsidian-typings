@@ -90,20 +90,24 @@ async function parseFile(file: string, output_file: string = file) {
     newFile.addStatements(imports);
     newFile.addStatements(exports);
 
-    if (default_export)
+    if (default_export) {
         newFile.addStatements(default_export.getDeclarations().map(declaration => declaration.getText(true)));
+    }
 
-    if (exports.length && imports.length)
+    if (exports.length && imports.length) {
         newFile.insertStatements(newFile.getExportDeclarations()[0].getChildIndex(), writer => writer.newLine());
-    if (default_export && (exports.length || imports.length))
+    }
+    if (default_export && (exports.length || imports.length)) {
         newFile.insertStatements(default_export.getDeclarations()[0].getChildIndex(), writer => writer.newLine());
+    }
 
     const types = sourceFile.getTypeAliases()
         .sort(sortName)
         .map(type => type.getText(true));
     newFile.addStatements(types);
-    if (types.length)
+    if (types.length) {
         newFile.insertStatements(newFile.getTypeAliases()[0].getChildIndex(), writer => writer.newLine());
+    }
 
     const interfaces = sourceFile.getInterfaces()
         .filter(inter => !inter.isDefaultExport())
@@ -116,8 +120,9 @@ async function parseFile(file: string, output_file: string = file) {
 
     await newFile.save();
 
-    if (file === output_file)
+    if (file === output_file) {
         fs.renameSync("temp.ts", file);
+    }
 }
 
 // Get passed parameter
@@ -137,8 +142,9 @@ if (!fs.existsSync(args[0])) {
 if (fs.lstatSync(args[0]).isDirectory()) {
     const files = fs.readdirSync(args[0], { recursive: true, encoding: "utf-8" });
     for (const file of files) {
-        if (file.endsWith(".d.ts"))
+        if (file.endsWith(".d.ts")) {
             await parseFile(args[0] + file);
+        }
     }
 } else {
     await parseFile(args[0], args[1]);
