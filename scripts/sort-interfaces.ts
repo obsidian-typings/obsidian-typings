@@ -26,6 +26,33 @@ interface Nameable {
     getName(): string | undefined;
 };
 
+async function main(): Promise<void> {
+    // Get passed parameter
+    const args = process.argv.slice(2);
+    if (args.length === 0) {
+        console.error("Please provide a file to parse");
+        process.exit(1);
+    }
+
+    // Check if file exists
+    if (!fs.existsSync(args[0])) {
+        console.error("File does not exist");
+        process.exit(1);
+    }
+
+    // Check if file is a directory
+    if (fs.lstatSync(args[0]).isDirectory()) {
+        const files = fs.readdirSync(args[0], { recursive: true, encoding: "utf-8" });
+        for (const file of files) {
+            if (file.endsWith(".d.ts")) {
+                await parseFile(args[0] + file);
+            }
+        }
+    } else {
+        await parseFile(args[0], args[1]);
+    }
+}
+
 const project = new Project();
 
 function declarationsToText(declarationArray: Node[]): string {
@@ -137,27 +164,4 @@ async function parseFile(file: string, output_file: string = file): Promise<void
     }
 }
 
-// Get passed parameter
-const args = process.argv.slice(2);
-if (args.length === 0) {
-    console.error("Please provide a file to parse");
-    process.exit(1);
-}
-
-// Check if file exists
-if (!fs.existsSync(args[0])) {
-    console.error("File does not exist");
-    process.exit(1);
-}
-
-// Check if file is a directory
-if (fs.lstatSync(args[0]).isDirectory()) {
-    const files = fs.readdirSync(args[0], { recursive: true, encoding: "utf-8" });
-    for (const file of files) {
-        if (file.endsWith(".d.ts")) {
-            await parseFile(args[0] + file);
-        }
-    }
-} else {
-    await parseFile(args[0], args[1]);
-}
+await main();
