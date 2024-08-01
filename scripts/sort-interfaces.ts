@@ -124,6 +124,7 @@ function sortInterfaceDeclaration(declaration: InterfaceDeclaration): void {
 }
 
 async function parseFile(file: string, output_file: string = file): Promise<void> {
+    console.log(`Parsing file: ${file}`);
     const project = new Project();
     const sourceFile = project.addSourceFileAtPath(file);
 
