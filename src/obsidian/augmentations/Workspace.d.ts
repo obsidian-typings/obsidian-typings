@@ -1,4 +1,4 @@
-import type { InternalPluginName } from "../../implementations/InternalPluginName.ts";
+import type { InternalPluginName } from "../implementations/index.ts";
 import type {
     CanvasConnection,
     CanvasNode,

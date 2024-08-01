@@ -6,6 +6,6 @@
         "noEmit": false
     },
     "include": [
-        "./src/implementations/**/*.ts"
+        "./src/obsidian/implementations/**/*.ts"
     ]
 }
