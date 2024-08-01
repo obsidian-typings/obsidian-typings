@@ -81,7 +81,7 @@ export interface MetadataEditorProperty extends Component {
     /**
      * Update value of property and saves
      */
-    handleUpdateValue(value: any): void;
+    handleUpdateValue(value: unknown): void;
     /**
      * Loads as draggable property element
      */
