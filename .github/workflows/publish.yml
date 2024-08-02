@@ -37,5 +37,7 @@ jobs:
                 permissions:
                     contents: write
                 with:
-                    files: build/obsidian-typings-${{ github.ref }}.zip
+                    files: | 
+                        build/obsidian-typings-${{ github.ref }}.zip
+                        dist/obsidian-typings.api.json
                     token: ${{ secrets.GITHUB_TOKEN }}

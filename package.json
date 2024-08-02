@@ -48,6 +48,7 @@
         "obsidian": "^1.6.6"
     },
     "devDependencies": {
+        "@microsoft/api-extractor": "^7.47.5",
         "@tsconfig/strictest": "^2.0.5",
         "builtin-modules": "^4.0.0",
         "cspell": "^8.13.0",
@@ -58,7 +59,7 @@
         "ts-morph": "^22.0.0"
     },
     "scripts": {
-        "build": "npm-run-all build:clean build:validate build:bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:style-mod",
+        "build": "npm-run-all build:clean build:validate build:bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:style-mod build:extract-api",
         "build:clean": "bun run scripts/build-clean.ts",
         "build:validate": "tsc --build --force",
         "build:bundle-types": "dts-bundle-generator -o ./dist/types.d.ts ./src/index.d.ts --inline-declare-global --inline-declare-externals",
@@ -66,6 +67,7 @@
         "build:implementations:generate-types": "tsc --project ./tsconfig.implementations.json",
         "build:implementations:bundle-types": "dts-bundle-generator -o ./dist/implementations.d.ts ./src/obsidian/implementations/index.ts",
         "build:style-mod": "bun run scripts/build-style-mod.ts",
+        "build:extract-api": "api-extractor run --local",
         "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
         "release-patch": "bun run scripts/bump-version.ts patch",
         "release-minor": "bun run scripts/bump-version.ts minor",
