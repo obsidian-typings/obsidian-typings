@@ -3,6 +3,7 @@ import type {
     PropertyEntryData,
     PropertyRenderContext
 } from "../index.js";
+
 export interface PropertyWidget<T> {
     /**
      * Lucide-dev icon associated with the widget

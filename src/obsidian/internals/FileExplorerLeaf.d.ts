@@ -6,6 +6,7 @@ import type {
     FileExplorerView,
     FileTreeItem
 } from "../index.js";
+
 /** @todo Documentation incomplete */
 export interface FileExplorerLeaf extends WorkspaceLeaf {
     view: FileExplorerView;

@@ -7,6 +7,7 @@ import type {
     TFile
 } from "obsidian";
 import type { IFramedMarkdownEditor } from "../index.js";
+
 export interface EmbeddedEditorView extends Component {
     /**
      * Reference to the app

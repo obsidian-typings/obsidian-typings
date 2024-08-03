@@ -4,6 +4,7 @@ import type {
     TAbstractFile
 } from "obsidian";
 import type { ImportedAttachments } from "../index.js";
+
 export interface ClipBoardManager {
     /**
      * Reference to the app

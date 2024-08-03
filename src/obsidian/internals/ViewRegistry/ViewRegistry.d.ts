@@ -8,6 +8,7 @@ import type {
     ViewRegistryTypeByExtensionRecord,
     ViewRegistryViewByTypeRecord
 } from "./index.js";
+
 export interface ViewRegistry extends Events {
     /**
      * Mapping of file extensions to view type

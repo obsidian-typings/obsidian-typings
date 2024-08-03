@@ -8,6 +8,7 @@ import type {
     PluginsManifestsRecord,
     PluginsPluginsRecord
 } from "./index.js";
+
 export interface Plugins {
     /**
      * Reference to App

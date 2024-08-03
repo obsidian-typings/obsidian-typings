@@ -8,6 +8,7 @@ import type {
     MetadataEditorProperty,
     PropertyEntryData
 } from "../index.js";
+
 export interface MetadataEditor extends Component {
     /**
      * Button element for adding a new property

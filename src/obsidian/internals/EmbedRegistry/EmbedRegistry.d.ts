@@ -4,6 +4,7 @@ import type {
 } from "obsidian";
 import type { EmbeddableConstructor } from "../index.js";
 import type { EmbedRegistryEmbedByExtensionRecord } from "./index.js";
+
 export interface EmbedRegistry extends Events {
     /**
      * Mapping of file extensions to constructors for embeddable widgets

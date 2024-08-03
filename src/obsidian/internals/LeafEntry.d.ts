@@ -2,6 +2,7 @@ import type {
     SplitDirection,
     ViewState
 } from "obsidian";
+
 /** @todo Documentation incomplete */
 export interface LeafEntry {
     children?: LeafEntry[];

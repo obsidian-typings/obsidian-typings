@@ -5,6 +5,7 @@ import type {
     EditorSearchComponent,
     MarkdownBaseView
 } from "../index.js";
+
 export interface MarkdownScrollableEditView extends MarkdownBaseView {
     /**
      * List of CSS classes applied to the editor

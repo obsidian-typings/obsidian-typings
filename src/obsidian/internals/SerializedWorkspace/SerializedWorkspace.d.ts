@@ -1,5 +1,6 @@
 import type { LeafEntry } from "../index.js";
 import type { SerializedWorkspaceLeftRibbonHiddenItemsRecord } from "./index.js";
+
 export interface SerializedWorkspace {
     /**
      * Last active leaf

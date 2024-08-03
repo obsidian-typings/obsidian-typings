@@ -1,4 +1,5 @@
 import type { CustomArrayDictDataRecord } from "./index.js";
+
 /** @todo Documentation incomplete */
 export interface CustomArrayDict<T> {
     data: CustomArrayDictDataRecord<T>;

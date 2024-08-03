@@ -1,4 +1,5 @@
 import type { RendererSection } from "../index.js";
+
 /** @todo Documentation incomplete */
 export interface ReadViewRenderer {
     addBottomPadding: boolean;

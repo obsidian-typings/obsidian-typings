@@ -19,6 +19,7 @@ import type {
     TableEditor,
     Token
 } from "../index.js";
+
 export interface MarkdownBaseView extends Component {
     /**
      * Reference to the app

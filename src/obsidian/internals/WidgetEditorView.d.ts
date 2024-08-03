@@ -8,6 +8,7 @@ import type {
     EmbeddedEditorView,
     FoldInfo
 } from "../index.js";
+
 export interface WidgetEditorView extends EmbeddedEditorView {
     /**
      * Data after reference

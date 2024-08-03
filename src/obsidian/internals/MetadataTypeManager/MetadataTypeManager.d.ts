@@ -12,6 +12,7 @@ import type {
     MetadataTypeManagerRegisteredTypeWidgetsRecord,
     MetadataTypeManagerTypesRecord
 } from "./index.js";
+
 export interface MetadataTypeManager extends Events {
     /**
      * Reference to App

@@ -1,4 +1,5 @@
 import type { Scope } from "obsidian";
+
 /** @todo Documentation incomplete */
 export interface KeyScope {
     /**

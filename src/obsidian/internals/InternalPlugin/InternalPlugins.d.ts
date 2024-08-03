@@ -8,6 +8,7 @@ import type {
     InternalPluginNameType,
     InternalPluginsConfigRecord
 } from "./index.js";
+
 export interface InternalPlugins extends Events {
     /**
      * Reference to App

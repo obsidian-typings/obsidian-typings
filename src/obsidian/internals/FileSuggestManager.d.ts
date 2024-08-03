@@ -5,6 +5,7 @@ import type {
     TFile
 } from "obsidian";
 import type { Runnable } from "../index.js";
+
 export interface FileSuggestManager {
     /**
      * Reference to the app

@@ -3,6 +3,7 @@ import type {
     TFile
 } from "obsidian";
 import type { MarkdownBaseView } from "../index.js";
+
 export interface EditorSuggests {
     /**
      * Currently active and rendered editor suggestion popup

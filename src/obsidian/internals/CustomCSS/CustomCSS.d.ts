@@ -7,6 +7,7 @@ import type {
     CustomCSSThemesRecord,
     CustomCSSUpdatesRecord
 } from "./index.js";
+
 /** @todo Documentation incomplete */
 export interface CustomCSS extends Component {
     /**

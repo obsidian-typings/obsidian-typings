@@ -10,7 +10,6 @@ import type {
 } from "../index.js";
 
 export {};
-
 /**
  * @note This workaround is required because of the following error:
  *

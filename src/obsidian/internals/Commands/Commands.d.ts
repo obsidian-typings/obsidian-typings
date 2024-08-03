@@ -6,6 +6,7 @@ import type {
     CommandsCommandsRecord,
     CommandsEditorCommandsRecord
 } from "./index.js";
+
 export interface Commands {
     /**
      * Reference to App

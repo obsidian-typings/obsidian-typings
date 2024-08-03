@@ -6,6 +6,7 @@ import type {
     HotkeyManagerCustomKeysRecord,
     HotkeyManagerDefaultKeysRecord
 } from "./index.js";
+
 export interface HotkeyManager {
     /**
      * Reference to App

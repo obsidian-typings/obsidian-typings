@@ -6,6 +6,7 @@ import type {
     AbstractSearchComponent,
     SearchCursor
 } from "../index.js";
+
 export interface EditorSearchComponent extends AbstractSearchComponent {
     /**
      * Search cursor for editor, handles search and replace functionality for editor
