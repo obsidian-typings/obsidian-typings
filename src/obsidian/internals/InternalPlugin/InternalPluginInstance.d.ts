@@ -1,4 +1,4 @@
-import type { InternalPlugin } from "./index.js";
+import type { InternalPlugin } from "./InternalPlugin.js";
 
 export interface InternalPluginInstance {
     plugin: InternalPlugin<this>;

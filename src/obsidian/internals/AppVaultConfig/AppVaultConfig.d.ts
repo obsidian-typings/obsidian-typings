@@ -1,4 +1,4 @@
-import type { AppVaultConfigHotkeysRecord } from "./index.js";
+import type { AppVaultConfigHotkeysRecord } from "./AppVaultConfigHotkeysRecord.js";
 
 export interface AppVaultConfig {
     /**

@@ -1,3 +1,3 @@
-import type { ThemeManifest } from "../index.js";
+import type { ThemeManifest } from "../ThemeManifest.js";
 
 export interface CustomCSSThemesRecord extends Record<string, ThemeManifest> {}

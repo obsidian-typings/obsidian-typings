@@ -2,12 +2,10 @@ import type {
     App,
     Component
 } from "obsidian";
-import type {
-    MetadataEditor,
-    MetadataWidget,
-    PropertyEntryData,
-    PropertyWidget
-} from "../index.js";
+import type { MetadataEditor } from "./MetadataEditor.js";
+import type { MetadataWidget } from "./MetadataWidget.js";
+import type { PropertyEntryData } from "./PropertyEntryData.js";
+import type { PropertyWidget } from "./PropertyWidget.js";
 
 export interface MetadataEditorProperty extends Component {
     /**

@@ -1,3 +1,3 @@
-import type { InternalPluginNameType } from "./index.js";
+import type { InternalPluginNameType } from "./InternalPluginNameType.js";
 
 export interface InternalPluginsConfigRecord extends Record<InternalPluginNameType, boolean> {}

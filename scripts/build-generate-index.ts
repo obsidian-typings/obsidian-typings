@@ -2,7 +2,7 @@ import { existsSync } from "node:fs";
 import {
     readdir,
     rm,
-    writeFile,
+    writeFile
 } from "node:fs/promises";
 import {
     basename,

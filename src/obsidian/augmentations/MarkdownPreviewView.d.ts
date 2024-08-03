@@ -1,4 +1,4 @@
-import type { ReadViewRenderer } from "../index.js";
+import type { ReadViewRenderer } from "../internals/ReadViewRenderer.js";
 
 export {};
 

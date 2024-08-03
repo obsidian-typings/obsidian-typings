@@ -1,8 +1,6 @@
-import type {
-    LinkUpdate,
-    LinkUpdaters,
-    PositionedReference
-} from "../index.js";
+import type { LinkUpdate } from "../internals/LinkUpdate/LinkUpdate.js";
+import type { LinkUpdaters } from "../internals/LinkUpdate/LinkUpdaters.js";
+import type { PositionedReference } from "../internals/PositionedReference.js";
 
 export {};
 

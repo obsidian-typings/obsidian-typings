@@ -1,7 +1,5 @@
-import type {
-    PropertyWidget,
-    PropertyWidgetType
-} from "../index.js";
+import { PropertyWidget } from "../PropertyWidget.js";
+import { PropertyWidgetType } from "../PropertyWidgetType.js";
 
 export interface MetadataTypeManagerRegisteredTypeWidgetsRecord
     extends Record<PropertyWidgetType, PropertyWidget<unknown>>

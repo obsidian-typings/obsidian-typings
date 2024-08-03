@@ -2,16 +2,12 @@ import type {
     App,
     Events
 } from "obsidian";
-import type {
-    PropertyInfo,
-    PropertyWidget,
-    PropertyWidgetType
-} from "../index.js";
-import type {
-    MetadataTypeManagerPropertiesRecord,
-    MetadataTypeManagerRegisteredTypeWidgetsRecord,
-    MetadataTypeManagerTypesRecord
-} from "./index.js";
+import { PropertyInfo } from "../PropertyInfo.js";
+import { PropertyWidget } from "../PropertyWidget.js";
+import { PropertyWidgetType } from "../PropertyWidgetType.js";
+import { MetadataTypeManagerPropertiesRecord } from "./MetadataTypeManagerPropertiesRecord.js";
+import { MetadataTypeManagerRegisteredTypeWidgetsRecord } from "./MetadataTypeManagerRegisteredTypeWidgetsRecord.js";
+import { MetadataTypeManagerTypesRecord } from "./MetadataTypeManagerTypesRecord.js";
 
 export interface MetadataTypeManager extends Events {
     /**

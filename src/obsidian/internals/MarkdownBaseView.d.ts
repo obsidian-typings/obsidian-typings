@@ -10,15 +10,13 @@ import type {
     MarkdownFileInfo,
     TFile
 } from "obsidian";
-import type {
-    ClipBoardManager,
-    EditorSuggests,
-    FoldInfo,
-    TableCell,
-    TableCellEditor,
-    TableEditor,
-    Token
-} from "../index.js";
+import type { ClipBoardManager } from "./ClipBoardManager.js";
+import type { EditorSuggests } from "./EditorSuggests.js";
+import type { FoldInfo } from "./FoldInfo.js";
+import type { TableCell } from "./TableCell.js";
+import type { TableCellEditor } from "./TableCellEditor.js";
+import type { TableEditor } from "./TableEditor.js";
+import type { Token } from "./Token.js";
 
 export interface MarkdownBaseView extends Component {
     /**

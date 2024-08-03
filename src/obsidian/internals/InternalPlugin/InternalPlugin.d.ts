@@ -1,4 +1,4 @@
-import type { InternalPluginInstance } from "./index.js";
+import type { InternalPluginInstance } from "./InternalPluginInstance.js";
 
 /** @todo Documentation incomplete */
 export interface InternalPlugin<TInstance extends InternalPluginInstance = InternalPluginInstance> extends Plugin {

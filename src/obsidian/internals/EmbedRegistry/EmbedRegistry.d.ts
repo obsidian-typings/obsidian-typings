@@ -2,8 +2,8 @@ import type {
     Events,
     TFile
 } from "obsidian";
-import type { EmbeddableConstructor } from "../index.js";
-import type { EmbedRegistryEmbedByExtensionRecord } from "./index.js";
+import type { EmbeddableConstructor } from "../EmbeddableConstructor.js";
+import type { EmbedRegistryEmbedByExtensionRecord } from "./EmbedRegistryEmbedByExtensionRecord.js";
 
 export interface EmbedRegistry extends Events {
     /**

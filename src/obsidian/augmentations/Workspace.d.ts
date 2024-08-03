@@ -1,20 +1,18 @@
-import type { Extension } from "@codemirror/state";
+import type { CanvasConnection } from "../internals/CanvasConnection.js";
+import type { CanvasNode } from "../internals/CanvasNode.js";
+import type { CanvasView } from "../internals/CanvasView.js";
 import type { Constructor } from "obsidian";
-import type { InternalPluginName } from "../implementations/index.ts";
-import type {
-    CanvasConnection,
-    CanvasNode,
-    CanvasView,
-    FileExplorerLeaf,
-    GlobalSearchLeaf,
-    HoverLinkEvent,
-    LeafEntry,
-    ObsidianTouchEvent,
-    RecentFileTracker,
-    SerializedWorkspace,
-    StateHistory,
-    WorkspaceHoverLinkSourcesRecord
-} from "../index.js";
+import type { Extension } from "@codemirror/state";
+import type { FileExplorerLeaf } from "../internals/FileExplorerLeaf.js";
+import type { GlobalSearchLeaf } from "../internals/GlobalSearchLeaf.js";
+import type { HoverLinkEvent } from "../internals/HoverLinkEvent.js";
+import type { InternalPluginName } from "../implementations/InternalPluginName.js";
+import type { LeafEntry } from "../internals/LeafEntry.js";
+import type { ObsidianTouchEvent } from "../internals/ObsidianTouchEvent.js";
+import type { RecentFileTracker } from "../internals/RecentFileTracker.js";
+import type { SerializedWorkspace } from "../internals/SerializedWorkspace/SerializedWorkspace.js";
+import type { StateHistory } from "../internals/StateHistory.js";
+import type { WorkspaceHoverLinkSourcesRecord } from "../internals/WorkspaceHoverLinkSourcesRecord.js";
 
 export {};
 

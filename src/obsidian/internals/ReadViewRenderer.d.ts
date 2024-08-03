@@ -1,4 +1,4 @@
-import type { RendererSection } from "../index.js";
+import type { RendererSection } from "./RendererSection.js";
 
 /** @todo Documentation incomplete */
 export interface ReadViewRenderer {

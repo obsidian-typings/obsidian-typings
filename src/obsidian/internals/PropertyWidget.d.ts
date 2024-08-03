@@ -1,8 +1,6 @@
 import type { Component } from "obsidian";
-import type {
-    PropertyEntryData,
-    PropertyRenderContext
-} from "../index.js";
+import type { PropertyEntryData } from "./PropertyEntryData.js";
+import type { PropertyRenderContext } from "./PropertyRenderContext.js";
 
 export interface PropertyWidget<T> {
     /**

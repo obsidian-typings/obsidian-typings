@@ -2,7 +2,7 @@ import {
     TFile,
     type Vault
 } from "obsidian";
-import { createTFolderInstance } from "./index.ts";
+import { createTFolderInstance } from "./createTFolderInstance.ts";
 
 type TFileConstructor = { new(vault: Vault, path: string): TFile };
 

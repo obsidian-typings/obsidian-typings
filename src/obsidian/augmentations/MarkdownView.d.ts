@@ -4,10 +4,8 @@ import type {
     MarkdownView,
     TextFileView
 } from "obsidian";
-import type {
-    MetadataEditor,
-    Token
-} from "../index.js";
+import type { MetadataEditor } from "../internals/MetadataEditor.js";
+import type { Token } from "../internals/Token.js";
 
 export {};
 /**

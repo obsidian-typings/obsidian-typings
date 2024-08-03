@@ -1,22 +1,20 @@
-import type {
-    Account,
-    AppMenuBarManager,
-    Commands,
-    CustomCSS,
-    DragManager,
-    EmbedRegistry,
-    FoldManager,
-    HotkeyManager,
-    ImportedAttachments,
-    InternalPlugins,
-    LoadProgress,
-    MetadataTypeManager,
-    MobileNavbar,
-    MobileToolbar,
-    ObsidianDOM,
-    Plugins,
-    ViewRegistry
-} from "../index.js";
+import type { Account } from "../internals/Account.js";
+import type { AppMenuBarManager } from "../internals/AppMenuBarManager.js";
+import type { Commands } from "../internals/Commands/Commands.js";
+import type { CustomCSS } from "../internals/CustomCSS/CustomCSS.js";
+import type { DragManager } from "../internals/DragManager/DragManager.js";
+import type { EmbedRegistry } from "../internals/EmbedRegistry/EmbedRegistry.js";
+import type { FoldManager } from "../internals/FoldManager.js";
+import type { HotkeyManager } from "../internals/HotkeyManager/HotkeyManager.js";
+import type { ImportedAttachments } from "../internals/ImportedAttachments.js";
+import type { InternalPlugins } from "../internals/InternalPlugin/InternalPlugins.js";
+import type { LoadProgress } from "../internals/LoadProgress.js";
+import type { MetadataTypeManager } from "../internals/MetadataTypeManager/MetadataTypeManager.js";
+import type { MobileNavbar } from "../internals/MobileNavbar.js";
+import type { MobileToolbar } from "../internals/MobileToolbar.js";
+import type { ObsidianDOM } from "../internals/ObsidianDOM.js";
+import type { Plugins } from "../internals/Plugins/Plugins.js";
+import type { ViewRegistry } from "../internals/ViewRegistry/ViewRegistry.js";
 
 export {};
 

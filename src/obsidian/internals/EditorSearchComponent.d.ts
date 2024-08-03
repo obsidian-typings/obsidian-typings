@@ -2,10 +2,9 @@ import type {
     Editor,
     EditorRange
 } from "obsidian";
-import type {
-    AbstractSearchComponent,
-    SearchCursor
-} from "../index.js";
+
+import type { AbstractSearchComponent } from "../internals/AbstractSearchComponent.js";
+import type { SearchCursor } from "../internals/SearchCursor.js";
 
 export interface EditorSearchComponent extends AbstractSearchComponent {
     /**

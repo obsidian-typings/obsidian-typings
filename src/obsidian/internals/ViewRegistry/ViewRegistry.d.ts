@@ -4,10 +4,8 @@ import type {
     View,
     WorkspaceLeaf
 } from "obsidian";
-import type {
-    ViewRegistryTypeByExtensionRecord,
-    ViewRegistryViewByTypeRecord
-} from "./index.js";
+import type { ViewRegistryTypeByExtensionRecord } from "./ViewRegistryTypeByExtensionRecord.js";
+import type { ViewRegistryViewByTypeRecord } from "./ViewRegistryViewByTypeRecord.js";
 
 export interface ViewRegistry extends Events {
     /**

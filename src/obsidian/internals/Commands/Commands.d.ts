@@ -2,10 +2,8 @@ import type {
     App,
     Command
 } from "obsidian";
-import type {
-    CommandsCommandsRecord,
-    CommandsEditorCommandsRecord
-} from "./index.js";
+import type { CommandsCommandsRecord } from "./CommandsCommandsRecord.js";
+import type { CommandsEditorCommandsRecord } from "./CommandsEditorCommandsRecord.js";
 
 export interface Commands {
     /**

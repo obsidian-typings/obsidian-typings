@@ -1,4 +1,4 @@
-import type { MenuSubmenuConfigRecord } from "../index.js";
+import type { MenuSubmenuConfigRecord } from "../internals/MenuSubmenuConfigRecord.js";
 
 export {};
 

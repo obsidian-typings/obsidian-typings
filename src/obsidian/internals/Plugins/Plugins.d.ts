@@ -3,11 +3,9 @@ import type {
     Plugin,
     PluginManifest
 } from "obsidian";
-import type { PluginUpdateManifest } from "../index.js";
-import type {
-    PluginsManifestsRecord,
-    PluginsPluginsRecord
-} from "./index.js";
+import type { PluginUpdateManifest } from "../PluginUpdateManifest.js";
+import type { PluginsManifestsRecord } from "./PluginsManifestsRecord.js";
+import type { PluginsPluginsRecord } from "./PluginsPluginsRecord.js";
 
 export interface Plugins {
     /**

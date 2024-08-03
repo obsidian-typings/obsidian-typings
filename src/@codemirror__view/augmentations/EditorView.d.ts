@@ -1,4 +1,4 @@
-import type { VimEditor } from "../index.js";
+import type { VimEditor } from "../internals/VimEditor.js";
 
 export {};
 

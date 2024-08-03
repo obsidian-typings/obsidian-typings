@@ -1,8 +1,6 @@
-import type {
-    AppVaultConfig,
-    ConfigItem,
-    VaultFileMapRecord
-} from "../index.js";
+import type { AppVaultConfig } from "../internals/AppVaultConfig/AppVaultConfig.js";
+import type { ConfigItem } from "../internals/ConfigItem.js";
+import type { VaultFileMapRecord } from "../internals/VaultFileMapRecord.js";
 
 export {};
 

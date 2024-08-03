@@ -2,12 +2,10 @@ import type {
     App,
     Events
 } from "obsidian";
-import type {
-    InternalPlugin,
-    InternalPluginNameInstancesMapping,
-    InternalPluginNameType,
-    InternalPluginsConfigRecord
-} from "./index.js";
+import type { InternalPlugin } from "./InternalPlugin.js";
+import type { InternalPluginNameInstancesMapping } from "./InternalPluginNameInstancesMapping.js";
+import type { InternalPluginNameType } from "./InternalPluginNameType.js";
+import type { InternalPluginsConfigRecord } from "./InternalPluginsConfigRecord.js";
 
 export interface InternalPlugins extends Events {
     /**

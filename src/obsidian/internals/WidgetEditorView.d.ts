@@ -4,10 +4,8 @@ import type {
     TAbstractFile,
     TFile
 } from "obsidian";
-import type {
-    EmbeddedEditorView,
-    FoldInfo
-} from "../index.js";
+import type { EmbeddedEditorView } from "./EmbeddedEditorView.js";
+import type { FoldInfo } from "./FoldInfo.js";
 
 export interface WidgetEditorView extends EmbeddedEditorView {
     /**

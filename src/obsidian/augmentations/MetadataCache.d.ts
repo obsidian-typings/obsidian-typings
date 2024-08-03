@@ -1,10 +1,8 @@
-import type {
-    CustomArrayDict,
-    FileCacheEntry,
-    MetadataCacheFileCacheRecord,
-    MetadataCacheMetadataCacheRecord,
-    PropertyInfo
-} from "../index.js";
+import type { CustomArrayDict } from "../internals/CustomArrayDict/CustomArrayDict.js";
+import type { FileCacheEntry } from "../internals/FileCacheEntry.js";
+import type { MetadataCacheFileCacheRecord } from "../internals/MetadataCacheRecords/MetadataCacheFileCacheRecord.js";
+import type { MetadataCacheMetadataCacheRecord } from "../internals/MetadataCacheRecords/MetadataCacheMetadataCacheRecord.js";
+import type { PropertyInfo } from "../internals/PropertyInfo.js";
 
 export {};
 

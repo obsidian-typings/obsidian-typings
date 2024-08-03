@@ -1,4 +1,4 @@
-import type { SuggestionContainer } from "../index.js";
+import type { SuggestionContainer } from "../internals/SuggestionContainer.js";
 
 export {};
 

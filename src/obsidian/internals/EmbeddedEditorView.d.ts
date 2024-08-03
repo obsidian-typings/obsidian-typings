@@ -6,7 +6,7 @@ import type {
     MarkdownPreviewView,
     TFile
 } from "obsidian";
-import type { IFramedMarkdownEditor } from "../index.js";
+import type { IFramedMarkdownEditor } from "./IFramedMarkdownEditor.js";
 
 export interface EmbeddedEditorView extends Component {
     /**

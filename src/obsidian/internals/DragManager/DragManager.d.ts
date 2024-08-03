@@ -4,11 +4,9 @@ import type {
     TFile,
     TFolder
 } from "obsidian";
-import type {
-    Draggable,
-    DragStartEvent,
-    DropResult
-} from "./index.js";
+import type { Draggable } from "./Draggable.js";
+import type { DragStartEvent } from "./DragStartEvent.js";
+import type { DropResult } from "./DropResult.js";
 
 /** @todo Documentation incomplete */
 export interface DragManager {
