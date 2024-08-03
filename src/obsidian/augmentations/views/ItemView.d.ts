@@ -56,5 +56,7 @@ declare module "obsidian" {
         onMoreOptionsMenu(e: unknown): void;
         /** @internal */
         updateNavButtons(): void;
+		/** @internal */
+		addAction(icon: IconName, title: string, callback: (evt: MouseEvent) => any): HTMLElement;
     }
 }

@@ -87,7 +87,7 @@ declare module "obsidian" {
          * Focus on the metadata editor given property information
          */
         focusMetadata(focus?: { focusHeading: boolean; propertyIdx?: number; propertyKey?: string }): void;
-        /**
+		/**
          * Gets the ephemeral (non-persistent) state of the editor
          */
         getEphemeralState(): any & { scroll: number };
@@ -106,25 +106,9 @@ declare module "obsidian" {
          */
         getSelection(): string;
         /**
-         * Get view state for sync plugin
-         */
-        getSyncViewState(): any;
-        /**
          * Get the current view type
          */
         getViewType(): "markdown";
-        /**
-         * Handle copy event on metadata editor and serialize properties
-         */
-        handleCopy(event: ClipboardEvent): void;
-        /**
-         * Handle cut event on metadata editor and serialize and remove properties
-         */
-        handleCut(event: ClipboardEvent): void;
-        /**
-         * Handle paste event of properties on metadata editor
-         */
-        handlePaste(event: ClipboardEvent): void;
         /**
          * Validate correctness of frontmatter and update metadata editor
          */
@@ -162,14 +146,6 @@ declare module "obsidian" {
          */
         onMarkdownScroll(): void;
         /**
-         * Populate the context menu
-         */
-        onPaneMenu(menu: Menu, source: "more-options" | "tab-header" | string): void;
-        /**
-         * Trigger onResize function of currently active editor component
-         */
-        onResize(): void;
-        /**
          * On mod click, opens editor of opposite mode in split view to right
          */
         onSwitchView(event: KeyboardEvent | MouseEvent): Promise<void>;
@@ -189,16 +165,6 @@ declare module "obsidian" {
          * Save the frontmatter of the file
          */
         saveFrontmatter(properties: Record<string, any>): void;
-        /**
-         * Set the ephemeral (non-persistent) state of the editor
-         */
-        setEphemeralState(
-            state: any & {
-                focus: boolean;
-                focusOnMobile: boolean;
-                cursor: EditorRangeOrCaret;
-            }
-        ): void;
         /**
          * Set the mode of the editor
          */

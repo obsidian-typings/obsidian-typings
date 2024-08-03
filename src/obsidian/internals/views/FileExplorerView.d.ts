@@ -24,7 +24,8 @@ export interface FileExplorerView extends View {
      * Tree view of files
      */
     tree: Tree<FileTreeItem>;
-
+	
+	/** @internal */
     openFileContextMenu(event: Event, fileItemElement: HTMLElement): void;
     /**
      * Reveal a file or folder in the file tree

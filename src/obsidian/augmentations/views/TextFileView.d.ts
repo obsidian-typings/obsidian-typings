@@ -24,12 +24,14 @@ declare module "obsidian" {
         saving: boolean;
 
         /** @internal */
-        loadFileInternal(e: unknown, t: unknown): unknown;
+        loadFileInternal(e: unknown, t: unknown): Promise<unknown>;
         /** @internal */
         onModify(e: unknown): void;
         /** @internal */
         saveImmediately(): void;
         /** @internal */
         setData(e: unknown, t: unknown): void;
+		/** @internal */
+		save(clear?: boolean): Promise<void>;
     }
 }

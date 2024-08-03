@@ -3,7 +3,7 @@ import type { ItemView } from "obsidian";
 export interface BookmarksView extends ItemView {
     onFileCreate(e: unknown): void;
     onFileDelete(e: unknown): void;
-    handleCollapseAll(e: unknown): void;
+    handleCollapseAll(event: unknown): void;
     /**
      * Get the current view type
      */
