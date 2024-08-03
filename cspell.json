@@ -41,6 +41,7 @@
         "precompute",
         "prefixer",
         "reinit",
+        "Renameable",
         "reparent",
         "Sidedock",
         "toggleable",

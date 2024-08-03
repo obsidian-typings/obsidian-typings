@@ -21,13 +21,16 @@ import {
 import {
     ClassDeclaration,
     ExportDeclaration,
+    ExportGetableNode,
     ImportDeclaration,
     InterfaceDeclaration,
     MethodDeclarationStructure,
     ModuleDeclaration,
     Node,
     Project,
-    SourceFile
+    RenameableNode,
+    SourceFile,
+    StatementedNode
 } from "ts-morph";
 
 interface Nameable {
@@ -59,10 +62,6 @@ async function main(): Promise<void> {
     } else {
         await parseFile(args[0], args[1]);
     }
-}
-
-function declarationsToText(declarationArray: Node[]): string {
-    return declarationArray.map(declaration => declaration.getText(true)).join("\n\n");
 }
 
 function sortName(a: Nameable, b: Nameable): number {
@@ -105,11 +104,9 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<
         docs: module.getJsDocs().map((getJsDoc) => getJsDoc.getStructure())
     });
 
-    // Apparently I can't just add an endline to the end, nor use a writer to add an endline at the end, hence the comment
-    if (typeDeclarations.length) {
-        newModule.addStatements(declarationsToText(typeDeclarations) + " \n\n\n");
-    }
-    newModule.addStatements(declarationsToText(interfaceDeclarations));
+    addStatements(newModule, typeDeclarations, true, false);
+    let addLeadingNewLine = typeDeclarations.length > 0;
+    addStatements(newModule, interfaceDeclarations, true, addLeadingNewLine);
 }
 
 function sortClassDeclaration(declaration: ClassDeclaration): void {
@@ -146,41 +143,32 @@ async function parseFile(file: string, output_file: string = file): Promise<void
     });
 
     const exports = sourceFile.getExportDeclarations()
-        .sort((a, b) => sortStarExports(a, b) || sortSpecifierName(a, b))
-        .map(declaration => declaration.getText(true));
+        .map(declaration => fixExport(declaration, file))
+        .filter(declaration => declaration !== null)
+        .sort((a, b) => sortStarExports(a, b) || sortSpecifierName(a, b));
     const imports = sourceFile.getImportDeclarations()
         .map(declaration => fixImport(declaration, file))
-        .sort((a, b) => sortFilesystemSpecifier(a, b) || sortSpecifierName(a, b))
-        .map(declaration => declaration.getText(true));
+        .sort((a, b) => sortFilesystemSpecifier(a, b) || sortSpecifierName(a, b));
 
-    const default_export = sourceFile.getDefaultExportSymbol();
-    newFile.addStatements(imports);
-    newFile.addStatements(exports);
+    addStatements(newFile, imports, false, false);
+    let addLeadingNewLine = imports.length > 0;
+    addLeadingNewLine = addStatements(newFile, exports, false, addLeadingNewLine);
 
-    if (default_export) {
-        newFile.addStatements(default_export.getDeclarations().map(declaration => declaration.getText(true)));
+    const fileName = basename(file, getExtension(file));
+    const isFileIndex = fileName === "index";
+
+    if (!isFileIndex) {
+        const types = sourceFile.getTypeAliases()
+            .sort(sortName)
+            .map(type => renameIfExported(type, fileName));
+        addLeadingNewLine = addStatements(newFile, types, true, addLeadingNewLine);
+
+        const interfaces = sourceFile.getInterfaces()
+            .filter(inter => !inter.isDefaultExport())
+            .sort(sortName)
+            .map(inter => renameIfExported(inter, fileName));
+        addStatements(newFile, interfaces, true, addLeadingNewLine);
     }
-
-    if (exports.length && imports.length) {
-        newFile.insertStatements(newFile.getExportDeclarations()[0].getChildIndex(), writer => writer.newLine());
-    }
-    if (default_export && (exports.length || imports.length)) {
-        newFile.insertStatements(default_export.getDeclarations()[0].getChildIndex(), writer => writer.newLine());
-    }
-
-    const types = sourceFile.getTypeAliases()
-        .sort(sortName)
-        .map(type => type.getText(true));
-    newFile.addStatements(types);
-    if (types.length) {
-        newFile.insertStatements(newFile.getTypeAliases()[0].getChildIndex(), writer => writer.newLine());
-    }
-
-    const interfaces = sourceFile.getInterfaces()
-        .filter(inter => !inter.isDefaultExport())
-        .sort(sortName)
-        .map(inter => inter.getText(true));
-    newFile.addStatements(interfaces);
 
     for (const module of sourceFile.getModules()) {
         await sortModule(module, newFile);
@@ -202,6 +190,7 @@ function fixImport(declaration: ImportDeclaration, file: string): ImportDeclarat
     const fileExtension = getExtension(file);
     const isDeclarationFile = fileExtension === ".d.ts";
     const fileName = basename(file, fileExtension);
+    const isFileIndex = fileName === "index";
 
     if (isDeclarationFile) {
         moduleSpecifier = moduleSpecifier.replace("/(\.d)?\.ts$/", ".js");
@@ -209,12 +198,21 @@ function fixImport(declaration: ImportDeclaration, file: string): ImportDeclarat
 
     const moduleExt = getExtension(moduleSpecifier);
     const moduleFileName = basename(moduleSpecifier, moduleExt);
+    const isModuleIndex = moduleFileName === "index";
 
-    if (moduleFileName !== "index" && (fileName !== "index" || moduleSpecifier.startsWith(".."))) {
+    if (!isModuleIndex && (!isFileIndex || moduleSpecifier.startsWith(".."))) {
         moduleSpecifier = moduleSpecifier.replace(`${moduleFileName}${moduleExt}`, `index${moduleExt}`);
     }
 
     declaration.setModuleSpecifier(moduleSpecifier);
+
+    if (declaration.getNamespaceImport()) {
+        declaration.removeNamespaceImport();
+        declaration.addNamedImports(
+            declaration.getModuleSpecifierSourceFileOrThrow().getExportSymbols().map(symbol => symbol.getName())
+        );
+    }
+
     return declaration;
 }
 
@@ -224,6 +222,50 @@ function getExtension(file: string): string {
     }
 
     return extname(file);
+}
+
+function fixExport(declaration: ExportDeclaration, file: string): ExportDeclaration | null {
+    const fileExtension = getExtension(file);
+    const fileName = basename(file, fileExtension);
+    const isFileIndex = fileName === "index";
+    const isStarExport = declaration.isNamespaceExport();
+
+    if (isFileIndex) {
+        if (!isStarExport) {
+            return null;
+        }
+    } else if (isStarExport) {
+        return null;
+    } else {
+        for (const namedExport of declaration.getNamedExports()) {
+            namedExport.setName(fileName);
+        }
+    }
+
+    return declaration;
+}
+
+function renameIfExported<T extends ExportGetableNode & RenameableNode>(declaration: T, fileName: string): T {
+    if (declaration.isExported()) {
+        declaration.rename(fileName);
+    }
+    return declaration;
+}
+
+function addStatements(
+    statementedNode: StatementedNode,
+    nodes: Node[],
+    useNewLineBetweenNodes: boolean,
+    addLeadingNewLine: boolean
+): boolean {
+    if (nodes.length === 0) {
+        return addLeadingNewLine;
+    }
+
+    const statements = (addLeadingNewLine ? "\n" : "")
+        + nodes.map(node => node.getText(true)).join(useNewLineBetweenNodes ? "\n\n" : "\n");
+    statementedNode.addStatements(statements);
+    return false;
 }
 
 await main();
