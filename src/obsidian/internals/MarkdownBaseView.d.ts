@@ -54,7 +54,7 @@ export interface MarkdownBaseView extends Component {
      *
      * @remark Handles formatting, table creation, highlight adding, etc.
      */
-    editor: Editor;
+    editor?: Editor;
     /**
      * Element in which the CodeMirror editor resides
      */
