@@ -3,3 +3,5 @@ dist/
 /src/obsidian/implementations/**/*.d.ts
 .vscode
 
+index.d.ts
+index.ts
