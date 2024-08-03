@@ -3,7 +3,7 @@ import type { WindowSelection } from "../index.js";
 export {};
 
 declare module "obsidian" {
-    interface Modal {
+    interface Modal extends CloseableComponent {
         /** @internal Background applied to application to dim it */
         bgEl: HTMLElement;
         /** @internal Opacity percentage of the background */

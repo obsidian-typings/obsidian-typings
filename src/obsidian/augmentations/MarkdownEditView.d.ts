@@ -8,7 +8,7 @@ import type {
 export {};
 
 declare module "obsidian" {
-    interface MarkdownEditView extends MarkdownScrollableEditView {
+    interface MarkdownEditView extends MarkdownSubView, HoverParent, MarkdownFileInfo, MarkdownScrollableEditView {
         /**
          * Frontmatter editor extension for the editor
          */
