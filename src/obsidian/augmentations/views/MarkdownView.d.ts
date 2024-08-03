@@ -9,6 +9,7 @@ declare module "obsidian" {
     interface MarkdownView extends TextFileView {
         /**
          * Backlinks component
+         * @todo Documentation incomplete
          */
         backlinks: null | unknown;
         /**
@@ -87,7 +88,7 @@ declare module "obsidian" {
          * Focus on the metadata editor given property information
          */
         focusMetadata(focus?: { focusHeading: boolean; propertyIdx?: number; propertyKey?: string }): void;
-		/**
+        /**
          * Gets the ephemeral (non-persistent) state of the editor
          */
         getEphemeralState(): any & { scroll: number };

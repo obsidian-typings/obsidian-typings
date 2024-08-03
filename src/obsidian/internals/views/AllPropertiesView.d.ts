@@ -1,8 +1,8 @@
 import type { ItemView } from "obsidian";
 /** @todo Documentation incomplete */
 export interface AllPropertiesView extends ItemView {
-    /** @internal */
-    startRename(e: unknown): unknown;
+    /** @todo Documentation incomplete */
+    startRename(e: unknown): Promise<unknown>;
     /** @internal */
     onKeyEnterInRename(e: unknown): void;
     /** @internal */

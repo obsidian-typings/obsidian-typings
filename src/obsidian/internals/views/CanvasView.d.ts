@@ -5,8 +5,8 @@ export interface CanvasView extends TextFileView {
      * Get the current view type
      */
     getViewType(): "canvas";
-	/** @internal */
+    /** @internal */
     getLocalData(): unknown;
-	/** @internal */
+    /** @internal */
     saveLocalData(): void;
 }

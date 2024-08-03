@@ -4,7 +4,7 @@ export {};
 
 declare module "obsidian" {
     /** @todo Documentation incomplete */
-    interface MarkdownPreviewView extends MarkdownRenderer{
+    interface MarkdownPreviewView extends MarkdownRenderer {
         /**
          * Unique identifier for the rendered element
          */
@@ -19,12 +19,16 @@ declare module "obsidian" {
 
         applyFoldInfo(e: unknown): unknown;
         beforeUnload(): unknown;
-		/**
-		 * Clears the rendered preview
-		 */
+        /**
+         * Clears the rendered preview
+         */
         clear(): unknown;
         edit(e: unknown): unknown;
         foldAll(): unknown;
+        /**
+         * Returns the renderer text
+         */
+        get(): string;
         getEphemeralState(e: unknown): unknown;
         getFoldInfo(): unknown;
         getSelection(): unknown;
@@ -34,20 +38,16 @@ declare module "obsidian" {
         onResize(): unknown;
         onScroll(): unknown;
         requestUpdateLinks(): unknown;
+        /**
+         * Set the Preview to new data
+         * @param data The data to set the renderer to
+         * @param clear If the preview should be cleared
+         */
+        set(data: string, clear: boolean): void;
         setEphemeralState(e: unknown): unknown;
         show(): void;
         showSearch(): unknown;
         unfoldAll(): unknown;
         updateOptions(): unknown;
-		/**
-		 * Returns the renderer text
-		 */
-		get(): string;
-		/**
-		 * Set the Preview to new data
-		 * @param data The data to set the renderer to
-		 * @param clear If the preview should be cleared
-		 */
-		set(data: string, clear: boolean): void;
     }
 }

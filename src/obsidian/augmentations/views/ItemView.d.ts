@@ -46,17 +46,24 @@ declare module "obsidian" {
          */
         titleParentEl: HTMLElement;
 
-        /** @internal */
-        handleDrop(e: unknown, t: unknown, n: unknown): unknown;
-        /** @internal */
+        /**
+         * Adds an action button to the header of the view
+         * @param icon - The icon for the action
+         * @param title - The title for the action
+         * @param callback - Callback to execute on click
+         */
+        addAction(icon: IconName, title: string, callback: (evt: MouseEvent) => any): HTMLElement;
+        /** @todo Documentation incomplete */
+        handleDrop(event: DragEvent, t: unknown, n: unknown): unknown;
+        /** @todo Documentation incomplete */
         onGroupChange(): void;
-        /** @internal */
-        onMoreOptions(e: unknown): void;
+        /** @todo Documentation incomplete */
+        onMoreOptions(event: Event): void;
         /** @deprecated use onPaneMenu instead */
         onMoreOptionsMenu(e: unknown): void;
-        /** @internal */
+        /**
+         * Updates the navigation buttons depending on the history
+         */
         updateNavButtons(): void;
-		/** @internal */
-		addAction(icon: IconName, title: string, callback: (evt: MouseEvent) => any): HTMLElement;
     }
 }

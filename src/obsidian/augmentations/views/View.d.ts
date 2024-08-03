@@ -3,16 +3,44 @@ export {};
 declare module "obsidian" {
     /** @todo Documentation incomplete */
     interface View extends Component {
+        app: App;
         /**
          * Whether the leaf may close the view
          */
         closeable: boolean;
+        containerEl: HTMLElement;
+        /**
+         * The icon string
+         */
+        icon: IconName;
+        leaf: WorkspaceLeaf;
 
-        /** @internal */
-        close(): unknown;
-        /** @internal */
-        getSideTooltipPlacement(): string | undefined;
-		/**
+        /**
+         * Closes the view
+         */
+        close(): Promise<void>;
+        /**
+         * Returns the display text
+         */
+		//@ts-expect-error because in obsidian documentation is abstract
+        getDisplayText(): string;
+        /**
+         * Gets the ephemeral (non-persistent) state of the editor
+         */
+        getEphemeralState(): {};
+        /**
+         * Returns the icon name
+         */
+        getIcon(): IconName;
+        /**
+         * Returns the placement of the tooltip
+         */
+        getSideTooltipPlacement(): "left" | "right" | undefined;
+        /**
+         * Returns the current state of the view
+         */
+        getState(): {};
+        /**
          * Handle copy event on metadata editor and serialize properties
          */
         handleCopy(event: ClipboardEvent): void;
@@ -24,17 +52,29 @@ declare module "obsidian" {
          * Handle paste event of properties on metadata editor
          */
         handlePaste(event: ClipboardEvent): void;
+        /**
+         * Is called when the view is closed
+         */
+		//@ts-expect-error because in obsidian documentation is protected
+        onClose(): Promise<void>;
         /** @deprecated use `onPaneMenu` instead */
         onHeaderMenu(e: unknown): void;
-        /** @internal */
-        onTabMenu(e: unknown): void;
-        /** @internal */
-        open(e: unknown): unknown;
-		/**
-         * Gets the ephemeral (non-persistent) state of the editor
+        /**
+         * Is called when the view is opened
          */
-        getEphemeralState(): {};
-		/**
+		//@ts-expect-error because in obsidian documentation is protected
+        onOpen(): Promise<void>;
+        /**
+         * Adds the menu items to the menu
+         * @param menu the menu to fill
+         */
+        onTabMenu(menu: Menu): void;
+        /**
+         * Opens the view
+         * @param parentEl The node the view get attached to
+         */
+        open(parentEl: Node): Promise<void>;
+        /**
          * Set the ephemeral (non-persistent) state of the editor
          */
         setEphemeralState(
@@ -44,20 +84,7 @@ declare module "obsidian" {
                 cursor: EditorRangeOrCaret;
             }
         ): void;
-		/** @internal */
-		//@ts-expect-error
-		onOpen(): Promise<void>;
-		/** @internal */
-		//@ts-expect-error
-		onClose(): Promise<void>;
-		/** @internal */
-		getState(): {};
-		/** @internal */
-		setState(state: any, result: ViewStateResult): Promise<void>;
-		/** @internal */
-		getIcon(): IconName;
-		/** @internal */
-		//@ts-expect-error
-		getDisplayText(): string;
+        /** @todo Documentation incomplete */
+        setState(state: any, result: ViewStateResult): Promise<void>;
     }
 }
