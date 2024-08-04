@@ -1,12 +1,12 @@
+import type { Extension } from "@codemirror/state";
+import type { Constructor } from "obsidian";
+import type { InternalPluginName } from "../implementations/InternalPluginName.js";
 import type { CanvasConnection } from "../internals/CanvasConnection.js";
 import type { CanvasNode } from "../internals/CanvasNode.js";
 import type { CanvasView } from "../internals/CanvasView.js";
-import type { Constructor } from "obsidian";
-import type { Extension } from "@codemirror/state";
 import type { FileExplorerLeaf } from "../internals/FileExplorerLeaf.js";
 import type { GlobalSearchLeaf } from "../internals/GlobalSearchLeaf.js";
 import type { HoverLinkEvent } from "../internals/HoverLinkEvent.js";
-import type { InternalPluginName } from "../implementations/InternalPluginName.js";
 import type { LeafEntry } from "../internals/LeafEntry.js";
 import type { ObsidianTouchEvent } from "../internals/ObsidianTouchEvent.js";
 import type { RecentFileTracker } from "../internals/RecentFileTracker.js";

@@ -1,5 +1,4 @@
 import type { EditorView } from "@codemirror/view";
-
 import type { BaseEditor } from "../internals/BaseEditor.js";
 import type { MarkdownScrollableEditView } from "../internals/MarkdownScrollableEditView.js";
 import type { SearchCursor } from "../internals/SearchCursor.js";
