@@ -4,7 +4,7 @@ import {
 } from "node:fs/promises";
 await rm("dist", { recursive: true, force: true });
 
-const files = await readdir("src/obsidian/implementations");
+const files = await readdir("src/obsidian/implementations", { recursive: true });
 const dtsFiles = files.filter(file => file.endsWith(".d.ts"));
 
 for (const file of dtsFiles) {
