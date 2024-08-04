@@ -1,4 +1,3 @@
-import type { InternalPluginName } from "./InternalPluginName.js";
 import type { AudioRecorderPluginInstance } from "./AudioRecorderPluginInstance.js";
 import type { BacklinkPluginInstance } from "./BacklinkPluginInstance.js";
 import type { BookmarksPluginInstance } from "./BookmarksPluginInstance.js";
@@ -10,6 +9,7 @@ import type { FileExplorerPluginInstance } from "./FileExplorerPluginInstance.js
 import type { FileRecoveryPluginInstance } from "./FileRecoveryPluginInstance.js";
 import type { GlobalSearchPluginInstance } from "./GlobalSearchPluginInstance.js";
 import type { GraphPluginInstance } from "./GraphPluginInstance.js";
+import type { InternalPluginName } from "./InternalPluginName.js";
 import type { MarkdownImporterPluginInstance } from "./MarkdownImporterPluginInstance.js";
 import type { NoteComposerPluginInstance } from "./NoteComposerPluginInstance.js";
 import type { OutgoingLinkPluginInstance } from "./OutgoingLinkPluginInstance.js";
