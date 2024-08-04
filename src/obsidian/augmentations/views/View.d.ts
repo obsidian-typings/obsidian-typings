@@ -22,7 +22,6 @@ declare module "obsidian" {
         /**
          * Returns the display text
          */
-		//@ts-expect-error because in obsidian documentation is abstract
         getDisplayText(): string;
         /**
          * Gets the ephemeral (non-persistent) state of the editor
@@ -55,14 +54,12 @@ declare module "obsidian" {
         /**
          * Is called when the view is closed
          */
-		//@ts-expect-error because in obsidian documentation is protected
         onClose(): Promise<void>;
         /** @deprecated use `onPaneMenu` instead */
         onHeaderMenu(e: unknown): void;
         /**
          * Is called when the view is opened
          */
-		//@ts-expect-error because in obsidian documentation is protected
         onOpen(): Promise<void>;
         /**
          * Adds the menu items to the menu
