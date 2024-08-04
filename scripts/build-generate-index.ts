@@ -26,8 +26,7 @@ async function generateIndex(dir: string, indexFile: string): Promise<void> {
 function generateExportLine(file: string, dir: string): string {
     file = file.replace(/\\/g, "/");
     const jsFile = file.replace(getExtension(file), ".js");
-    const relativePath = relative(dir, jsFile);
-    return `export * from "./${relativePath}";`;
+    return `export * from "./${jsFile}";`;
 }
 
 function getExtension(file: string): string {
