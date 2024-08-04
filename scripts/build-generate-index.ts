@@ -1,16 +1,17 @@
 import {
+    appendFile,
     readdir,
     writeFile
 } from "node:fs/promises";
 import {
     basename,
-    extname,
-    relative
+    extname
 } from "node:path/posix";
 
 async function main(): Promise<void> {
     await generateIndex("src", "src/index.d.ts");
     await generateIndex("src/obsidian/implementations", "src/obsidian/implementations/index.ts");
+    await appendFile("src/obsidian/implementations/index.ts", "import \"../../index.js\";\n", "utf-8");
 }
 
 async function generateIndex(dir: string, indexFile: string): Promise<void> {
@@ -20,7 +21,7 @@ async function generateIndex(dir: string, indexFile: string): Promise<void> {
         return fileExtension === extension && basename(file, extension) !== "index";
     });
     const lines = files.map(file => generateExportLine(file, dir));
-    await writeFile(indexFile, lines.join("\n"), "utf-8");
+    await writeFile(indexFile, lines.join("\n") + "\n", "utf-8");
 }
 
 function generateExportLine(file: string, dir: string): string {
