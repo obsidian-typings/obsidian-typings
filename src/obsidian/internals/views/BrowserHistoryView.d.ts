@@ -5,6 +5,6 @@ export interface BrowserHistoryView extends ItemView {
      * Get the current view type
      */
     getViewType(): "browser-history";
-    /** @internal */
-    update(): unknown;
+    /** @todo Documentation incomplete */
+    update(): Promise<unknown>;
 }

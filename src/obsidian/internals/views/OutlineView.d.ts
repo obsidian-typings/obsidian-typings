@@ -1,38 +1,53 @@
 import type { InfoFileView } from "../../types.js";
+import type { TFile, View, WorkspaceLeaf } from "obsidian";
 /** @todo Documentation incomplete */
 export interface OutlineView extends InfoFileView {
-    findCorrespondingLeaf(): unknown;
-    handleCollapseAll(event: unknown): void;
+    /**
+     * Finds the active leaf
+     */
+    findCorrespondingLeaf(): WorkspaceLeaf | null;
+    /** @todo Documentation incomplete */
+    handleCollapseAll(e: unknown): void;
     /**
      * Get the current view type
      */
     getViewType(): "outline";
-    /** @internal */
+    /** @todo Documentation incomplete */
     findActiveHeading(e: unknown): unknown | undefined;
-    /** @internal */
+    /** @todo Documentation incomplete */
     setHighlightedItem(e: unknown): void;
-    /** @internal */
-    getOwner(): unknown;
-    /** @internal */
+    /**
+     * Finds the view to the active leaf
+     */
+    getOwner(): View | null;
+    /** @todo Documentation incomplete */
     onMarkdownScroll(e: unknown): void;
-    /** @internal */
-    onFileChanged(e: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
+    onFileChanged(file: TFile): void;
+    /** @todo Documentation incomplete */
     handleSelectionChange(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     createItemDom(e: unknown): unknown;
-    /** @internal */
+    /** @todo Documentation incomplete */
     update(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     filterSearchResults(): void;
-    /** @internal */
-    getHeadings(): unknown;
-    /** @internal */
+    /**
+     * Returns the headings of the active file
+     */
+    getHeadings(): string[];
+    /**
+     * Toggles the visibility of the search
+     */
     onToggleShowSearch(): void;
-    /** @internal */
+    /**
+     * Shows the search
+     */
     showSearch(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     setShowSearch(e: unknown): void;
-    /** @internal */
+    /**
+     * Updates the search
+     */
     updateSearch(): void;
 }

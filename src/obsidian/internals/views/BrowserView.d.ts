@@ -5,82 +5,98 @@ export interface BrowserView extends ItemView {
      * Get the current view type
      */
     getViewType(): "browser";
-    /** @internal */
+    /**
+     * Toggles the reader mode
+     */
     toggleReaderMode(): void;
-    /** @internal */
+    /**
+     * Zoom in the webview
+     */
     zoomIn(): void;
-    /** @internal */
+    /**
+     * Zoom out the webview
+     */
     zoomOut(): void;
-    /** @internal */
+    /**
+     * Resets the zoom factor of the webview
+     */
     zoomReset(): void;
-    /** @internal */
-    reportPageLoad(e: unknown, t: unknown, n: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
+    reportPageLoad(url: string, title: string, navigate: unknown): void;
+    /** @todo Documentation incomplete */
     commitPageLoad(): unknown;
-    /** @internal */
+    /**
+     * Setup the webview
+     */
     instantiateWebView(): void;
-    /** @internal */
-    storeCurrentPageTitle(): unknown;
-    /** @internal */
+    /**
+     * Stores the title of the current webview
+     */
+    storeCurrentPageTitle(): Promise<unknown>;
+    /**
+     * Shows the error view
+     */
     displayErrorView(): void;
-    /** @internal */
+    /**
+     * Shows the webview
+     */
     displayWebView(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     configureWebContents(): void;
-    /** @internal */
-    getReaderModeContent(): unknown;
-    /** @internal */
-    displayReaderView(): unknown;
-    /** @internal */
+    /** @todo Documentation incomplete */
+    getReaderModeContent(): Promise<unknown>;
+    /** @todo Documentation incomplete */
+    displayReaderView(): Promise<unknown>;
+    /** @todo Documentation incomplete */
     displayBlank(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     hideAll(): void;
-    /** @internal */
-    saveAsMarkdown(): unknown;
-    /** @internal */
+    /** @todo Documentation incomplete */
+    saveAsMarkdown(): Promise<unknown>;
+    /** @todo Documentation incomplete */
     navigate(e: unknown, t: unknown): unknown;
-    /** @internal */
+    /** @todo Documentation incomplete */
     pushViewStackHistory(e: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     selectFavicon(e: unknown): unknown;
-    /** @internal */
+    /** @todo Documentation incomplete */
     setFavicon(e: unknown): unknown;
-    /** @internal */
+    /** @todo Documentation incomplete */
     contextMenuItemsForLink(e: unknown, t: unknown): unknown;
-    /** @internal */
+    /** @todo Documentation incomplete */
     contextMenuItemsForSelection(e: unknown, t: unknown): unknown;
-    /** @internal */
+    /** @todo Documentation incomplete */
     contextMenuItemsForImg(e: unknown): unknown;
-    /** @internal */
+    /** @todo Documentation incomplete */
     displayContextMenu(e: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     showSearch(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     closeSearch(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     onExternalLinkClick(e: unknown, t: unknown, n: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     onReaderModeContextMenu(e: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     onCheckboxClick(e: unknown, t: unknown, n: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     onFoldChange(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     onScroll(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     postProcess(e: unknown, t: unknown, n: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     onRenderComplete(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     onInternalLinkClick(e: unknown, t: unknown, n: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     onInternalLinkRightClick(e: unknown, t: unknown, n: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     onInternalLinkDrag(e: unknown, t: unknown, n: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     onInternalLinkMouseover(e: unknown, t: unknown, n: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     onTagClick(e: unknown, t: unknown, n: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     onExternalLinkRightClick(e: unknown, t: unknown, n: unknown): void;
 }

@@ -3,32 +3,53 @@ import type { ItemView } from "obsidian";
 export interface AllPropertiesView extends ItemView {
     /** @todo Documentation incomplete */
     startRename(e: unknown): Promise<unknown>;
-    /** @internal */
-    onKeyEnterInRename(e: unknown): void;
-    /** @internal */
+    /**
+     * Called when 'Enter' is pressed while rename. Accepts the rename
+     * @param event The event triggered this function
+     */
+    onKeyEnterInRename(event: KeyboardEvent): void;
+    /**
+     * Quits the rename
+     */
     exitRename(): void;
-    /** @internal */
+    /**
+     * Cancels the rename
+     */
     cancelRename(): void;
-    /** @internal */
-    acceptRename(e: unknown): unknown;
-    /** @internal */
+    /**
+     * Try to rename the file
+     */
+    acceptRename(): Promise<void>;
+    /**
+     * Toggles the visibility of the search
+     */
     onToggleShowSearch(): void;
-    /** @internal */
+    /**
+     * Shows the search and focus is
+     */
     showSearch(): void;
-    /** @internal */
-    setShowSearch(e: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
+    setShowSearch(e: boolean): void;
+    /**
+     * Updates the search
+     */
     updateSearch(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     isItem(e: unknown): boolean;
-    /** @internal */
-    onKeyEnterInFocus(e: unknown): void;
+    /**
+     * Select the item in focus if pressed 'Enter'
+     * @param event The event triggered this function
+     */
+    onKeyEnterInFocus(event: KeyboardEvent): void;
     /**
      * Get the current view type
      */
     getViewType(): "all-properties";
-    /** @internal */
-    setSortOrder(e: unknown): void;
-    /** @internal */
+    /**
+     * Updates the sort order and sort by it
+     * @param order The sort order
+     */
+    setSortOrder(order: unknown): void;
+    /** @todo Documentation incomplete */
     update(): void;
 }

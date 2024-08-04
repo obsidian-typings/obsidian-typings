@@ -5,8 +5,10 @@ export interface BacklinkView extends InfoFileView {
      * Get the current view type
      */
     getViewType(): "backlink";
-    /** @internal */
+    /**
+     * Shows the search
+     */
     showSearch(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     update(): void;
 }

@@ -1,30 +1,39 @@
 import type { InfoFileView } from "../../types.js";
+import type { TFile } from "obsidian";
 /** @todo Documentation incomplete */
 export interface FilePropertiesView extends InfoFileView {
-    /** @internal */
-    getFile(): unknown;
-    /** @internal */
+    /**
+     * Returns the file
+     */
+    getFile(): TFile;
+    /** @todo Documentation incomplete */
     shiftFocusAfter(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     shiftFocusBefore(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     saveFrontmatter(e: unknown): void;
-    /** @internal */
-    isSupportedFile(e: unknown): boolean;
-    /** @internal */
-    readSupportedFile(e: unknown): unknown;
-    /** @internal */
-    onQuickPreview(e: unknown, t: unknown): void;
-    /** @internal */
-    onFileChange(e: unknown): unknown;
+    /**
+     * Checks the file is an markdown file
+     * @param file The file to check
+     */
+    isSupportedFile(file: TFile): boolean;
+    /**
+     * Reads the file if it is supported
+     * @param file The file to read
+     */
+    readSupportedFile(file: TFile): Promise<unknown>;
+    /** @todo Documentation incomplete */
+    onQuickPreview(file: TFile, t: unknown): void;
+    /** @todo Documentation incomplete */
+    onFileChange(file: TFile): Promise<unknown>;
     /**
      * Get the current view type
      */
     getViewType(): "file-properties";
-    /** @internal */
-    updateFrontmatter(e: unknown, t: unknown): unknown;
-    /** @internal */
+    /** @todo Documentation incomplete */
+    updateFrontmatter(file: TFile, t: unknown): unknown;
+    /** @todo Documentation incomplete */
     updateEmptyState(): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     update(): void;
 }

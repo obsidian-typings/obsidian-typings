@@ -1,20 +1,22 @@
 import type { View } from "obsidian";
 /** @todo Documentation incomplete */
 export interface TagView extends View {
-    /** @internal */
+    /** @todo Documentation incomplete */
     getNodeId(e: unknown): unknown;
-    /** @internal */
-    isItem(e: unknown): boolean;
-    /** @internal */
-    onKeyEnterInFocus(e: unknown): void;
+    /** @todo Documentation incomplete */
+    isItem(item: unknown): boolean;
+    /** @todo Documentation incomplete */
+    onKeyEnterInFocus(event: KeyboardEvent): void;
     /**
      * Get the current view type
      */
     getViewType(): "tag";
-    /** @internal */
+    /** @todo Documentation incomplete */
     setIsAllCollapsed(e: unknown): void;
-    /** @internal */
+    /** @todo Documentation incomplete */
     setUseHierarchy(e: unknown): void;
-    /** @internal */
+    /**
+     * Reloads all tags from vault, update all items and sort those
+     */
     updateTags(): void;
 }

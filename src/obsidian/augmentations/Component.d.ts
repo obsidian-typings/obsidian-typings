@@ -15,6 +15,7 @@ declare module "obsidian" {
          * Whether the component and its children are loaded
          */
         _loaded: boolean;
+
         registerScopeEvent(keymapEventHandler: KeymapEventHandler): void;
     }
 }

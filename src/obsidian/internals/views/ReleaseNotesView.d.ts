@@ -5,10 +5,15 @@ export interface ReleaseNotesView extends ItemView {
      * Get the current view type
      */
     getViewType(): "release-notes";
-    /** @internal */
-    fetchReleaseNotes(e: unknown): unknown;
-    /** @internal */
-    showPatchNotes(e: unknown, t: unknown): unknown;
-    /** @internal */
-    render(): unknown;
+    /**
+     * Get the release notes from GitHub
+     * @param version The version of the release notes
+     */
+    fetchReleaseNotes(version: string): Promise<unknown>;
+    /** @todo Documentation incomplete */
+    showPatchNotes(e: unknown, version: string): Promise<unknown>;
+    /**
+     * Renders the release notes
+     */
+    render(): Promise<unknown>;
 }

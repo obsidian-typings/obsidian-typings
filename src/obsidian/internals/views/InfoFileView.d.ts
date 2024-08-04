@@ -1,9 +1,11 @@
-import type { FileView } from "obsidian";
+import type { FileView, TFile } from "obsidian";
 /**
  * @todo This is probably not the right term
- * @todo Documentation incomplete
  */
 export interface InfoFileView extends FileView {
-    /** @internal */
-    onFileOpen(e: unknown): void;
+    /**
+     * Called when a file is opened. Loads the file and requests a content update
+     * @param file The opened file
+     */
+    onFileOpen(file: TFile): void;
 }
