@@ -53,7 +53,7 @@ async function main(): Promise<void> {
 
     // Check if file is a directory
     if ((await lstat(args[0])).isDirectory()) {
-        const files = await readdir(args[0], { recursive: true, encoding: "utf-8" });
+        const files = (await readdir(args[0], { recursive: true, encoding: "utf-8" })).map(file => file.replace(/\\/g, "/"));
         for (const file of files) {
             if (file.endsWith(".d.ts")) {
                 await parseFile(args[0] + file);
