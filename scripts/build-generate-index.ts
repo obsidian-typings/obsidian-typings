@@ -20,11 +20,11 @@ async function generateIndex(dir: string, indexFile: string): Promise<void> {
         const fileExtension = getExtension(file);
         return fileExtension === extension && basename(file, extension) !== "index";
     });
-    const lines = files.map(file => generateExportLine(file, dir));
+    const lines = files.map(file => generateExportLine(file));
     await writeFile(indexFile, lines.join("\n") + "\n", "utf-8");
 }
 
-function generateExportLine(file: string, dir: string): string {
+function generateExportLine(file: string): string {
     file = file.replace(/\\/g, "/");
     const jsFile = file.replace(getExtension(file), ".js");
     return `export * from "./${jsFile}";`;
