@@ -1,6 +1,7 @@
 import type { ItemView } from "obsidian";
 
 /** @todo Documentation incomplete */
+/** @public */
 export interface ReleaseNotesView extends ItemView {
     /**
      * Get the current view type
@@ -8,7 +9,7 @@ export interface ReleaseNotesView extends ItemView {
     getViewType(): "release-notes";
     /**
      * Get the release notes from GitHub
-     * @param version The version of the release notes
+     * @param version - The version of the release notes
      */
     fetchReleaseNotes(version: string): Promise<unknown>;
     /** @todo Documentation incomplete */

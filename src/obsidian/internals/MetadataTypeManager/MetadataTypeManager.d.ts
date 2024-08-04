@@ -9,6 +9,7 @@ import { MetadataTypeManagerPropertiesRecord } from "./MetadataTypeManagerProper
 import { MetadataTypeManagerRegisteredTypeWidgetsRecord } from "./MetadataTypeManagerRegisteredTypeWidgetsRecord.js";
 import { MetadataTypeManagerTypesRecord } from "./MetadataTypeManagerTypesRecord.js";
 
+/** @public */
 export interface MetadataTypeManager extends Events {
     /**
      * Reference to App

@@ -7,6 +7,7 @@ import type { InternalPluginNameInstancesMapping } from "./InternalPluginNameIns
 import type { InternalPluginNameType } from "./InternalPluginNameType.js";
 import type { InternalPluginsConfigRecord } from "./InternalPluginsConfigRecord.js";
 
+/** @public */
 export interface InternalPlugins extends Events {
     /**
      * Reference to App

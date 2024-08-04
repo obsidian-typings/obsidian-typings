@@ -3,6 +3,7 @@ import type {
     SerializedWorkspaceLeftRibbonHiddenItemsRecord
 } from "./SerializedWorkspaceLeftRibbonHiddenItemsRecord.js";
 
+/** @public */
 export interface SerializedWorkspace {
     /**
      * Last active leaf

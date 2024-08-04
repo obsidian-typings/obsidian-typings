@@ -8,6 +8,7 @@ import type {
 } from "obsidian";
 import type { IFramedMarkdownEditor } from "./IFramedMarkdownEditor.js";
 
+/** @public */
 export interface EmbeddedEditorView extends Component {
     /**
      * Reference to the app

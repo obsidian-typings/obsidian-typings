@@ -1,3 +1,4 @@
+/** @public */
 export interface FileCacheEntry {
     /**
      * Hash of file contents

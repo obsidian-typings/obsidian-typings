@@ -7,6 +7,7 @@ import type { PluginUpdateManifest } from "../PluginUpdateManifest.js";
 import type { PluginsManifestsRecord } from "./PluginsManifestsRecord.js";
 import type { PluginsPluginsRecord } from "./PluginsPluginsRecord.js";
 
+/** @public */
 export interface Plugins {
     /**
      * Reference to App

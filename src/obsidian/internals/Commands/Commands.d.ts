@@ -5,6 +5,7 @@ import type {
 import type { CommandsCommandsRecord } from "./CommandsCommandsRecord.js";
 import type { CommandsEditorCommandsRecord } from "./CommandsEditorCommandsRecord.js";
 
+/** @public */
 export interface Commands {
     /**
      * Reference to App
@@ -29,25 +30,25 @@ export interface Commands {
     /**
      * Add a command to the command registry
      *
-     * @param command Command to add
+     * @param command - Command to add
      */
     addCommand(command: Command): void;
     /**
      * Execute a command by reference
      *
-     * @param command Command to execute
+     * @param command - Command to execute
      */
     executeCommand(command: Command): boolean;
     /**
      * Execute a command by ID
      *
-     * @param commandId ID of command to execute
+     * @param commandId - ID of command to execute
      */
     executeCommandById(commandId: string): boolean;
     /**
      * Find a command by ID
      *
-     * @param commandId
+     * @param commandId - ID of command to find
      */
     findCommand(commandId: string): Command | undefined;
     /**
@@ -57,7 +58,7 @@ export interface Commands {
     /**
      * Remove a command from the command registry
      *
-     * @param commandId Command to remove
+     * @param commandId - ID of command to remove
      */
     removeCommand(commandId: string): void;
 }

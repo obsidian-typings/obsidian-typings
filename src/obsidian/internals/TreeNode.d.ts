@@ -1,6 +1,7 @@
 /**
  * @todo Documentation incomplete
  */
+/** @public */
 export type TreeNode<T = object> = T & {
     childrenEl: HTMLElement;
     el: HTMLElement;

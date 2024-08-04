@@ -1,4 +1,5 @@
 /** @todo Documentation incomplete */
+/** @public */
 export interface VimState {
     vim: {
         inputState: {

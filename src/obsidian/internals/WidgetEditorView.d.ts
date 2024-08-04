@@ -7,6 +7,7 @@ import type {
 import type { EmbeddedEditorView } from "./EmbeddedEditorView.js";
 import type { FoldInfo } from "./FoldInfo.js";
 
+/** @public */
 export interface WidgetEditorView extends EmbeddedEditorView {
     /**
      * Data after reference

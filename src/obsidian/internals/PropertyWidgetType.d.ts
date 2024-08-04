@@ -1,6 +1,7 @@
 /**
  * @todo Documentation incomplete
  */
+/** @public */
 export type PropertyWidgetType =
     | "aliases"
     | "checkbox"

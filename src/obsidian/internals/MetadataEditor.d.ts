@@ -7,6 +7,7 @@ import type {
 import type { MetadataEditorProperty } from "./MetadataEditorProperty.js";
 import type { PropertyEntryData } from "./PropertyEntryData.js";
 
+/** @public */
 export interface MetadataEditor extends Component {
     /**
      * Button element for adding a new property

@@ -1,4 +1,5 @@
 /** @todo Documentation incomplete */
+/** @public */
 export interface InfinityScroll {
     height: number;
     lastScroll: number;

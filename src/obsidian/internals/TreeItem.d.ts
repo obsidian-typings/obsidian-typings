@@ -2,6 +2,7 @@ import type { View } from "obsidian";
 import type { TreeNode } from "../internals/TreeNode.js";
 
 /** @todo Documentation incomplete */
+/** @public */
 export type TreeItem<T> = TreeNode<T> & {
     collapseEl: HTMLElement;
     /**

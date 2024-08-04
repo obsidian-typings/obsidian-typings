@@ -1,3 +1,4 @@
+/** @public */
 export interface FileEntry {
     /**
      * Creation time (if file)

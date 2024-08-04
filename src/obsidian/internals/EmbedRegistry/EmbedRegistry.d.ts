@@ -5,6 +5,7 @@ import type {
 import type { EmbeddableConstructor } from "../EmbeddableConstructor.js";
 import type { EmbedRegistryEmbedByExtensionRecord } from "./EmbedRegistryEmbedByExtensionRecord.js";
 
+/** @public */
 export interface EmbedRegistry extends Events {
     /**
      * Mapping of file extensions to constructors for embeddable widgets

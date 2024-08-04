@@ -6,6 +6,7 @@ import type {
 } from "obsidian";
 import type { Runnable } from "./Runnable.js";
 
+/** @public */
 export interface FileSuggestManager {
     /**
      * Reference to the app

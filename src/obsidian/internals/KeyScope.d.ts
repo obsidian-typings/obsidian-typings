@@ -1,6 +1,7 @@
 import type { Scope } from "obsidian";
 
 /** @todo Documentation incomplete */
+/** @public */
 export interface KeyScope {
     /**
      * Key to match

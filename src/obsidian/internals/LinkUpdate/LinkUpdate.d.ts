@@ -4,6 +4,7 @@ import type {
 } from "obsidian";
 import type { PositionedReference } from "../PositionedReference.js";
 
+/** @public */
 export interface LinkUpdate {
     /**
      * Reference to App

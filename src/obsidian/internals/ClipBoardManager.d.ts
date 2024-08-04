@@ -5,6 +5,7 @@ import type {
 } from "obsidian";
 import type { ImportedAttachments } from "./ImportedAttachments.js";
 
+/** @public */
 export interface ClipBoardManager {
     /**
      * Reference to the app

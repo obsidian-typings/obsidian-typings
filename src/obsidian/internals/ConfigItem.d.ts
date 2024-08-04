@@ -1,4 +1,5 @@
 /** @todo Documentation incomplete */
+/** @public */
 export type ConfigItem =
     | "accentColor"
     | "alwaysUpdateLinks"

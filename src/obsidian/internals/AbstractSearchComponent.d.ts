@@ -3,6 +3,7 @@ import type {
     Scope
 } from "obsidian";
 
+/** @public */
 export interface AbstractSearchComponent {
     /**
      * Reference to the app

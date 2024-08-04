@@ -4,6 +4,7 @@ import type { Scope } from "obsidian";
 import type { EditorSearchComponent } from "./EditorSearchComponent.js";
 import type { MarkdownBaseView } from "./MarkdownBaseView.js";
 
+/** @public */
 export interface MarkdownScrollableEditView extends MarkdownBaseView {
     /**
      * List of CSS classes applied to the editor

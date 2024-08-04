@@ -4,6 +4,7 @@ import type {
 } from "obsidian";
 import type { LinkChangeUpdate } from "./LinkChangeUpdate.js";
 
+/** @public */
 export interface LinkUpdater {
     applyUpdates(file: TFile, updates: LinkChangeUpdate[]): Promise<void>;
     iterateReferences(callback: (path: string, reference: ReferenceCache) => void): void;

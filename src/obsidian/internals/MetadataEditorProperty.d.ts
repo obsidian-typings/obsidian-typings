@@ -7,6 +7,7 @@ import type { MetadataWidget } from "./MetadataWidget.js";
 import type { PropertyEntryData } from "./PropertyEntryData.js";
 import type { PropertyWidget } from "./PropertyWidget.js";
 
+/** @public */
 export interface MetadataEditorProperty extends Component {
     /**
      * Reference to the app

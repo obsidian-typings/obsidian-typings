@@ -1,6 +1,7 @@
 import type { RendererSection } from "./RendererSection.js";
 
 /** @todo Documentation incomplete */
+/** @public */
 export interface ReadViewRenderer {
     addBottomPadding: boolean;
     asyncSections: unknown[];

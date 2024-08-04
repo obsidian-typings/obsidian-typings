@@ -1,6 +1,7 @@
 import type { TableCellEditor } from "./TableCellEditor.js";
 
 /** @todo Documentation incomplete */
+/** @public */
 export interface TableCell {
     col: number;
     contentEl: HTMLElement;

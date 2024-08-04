@@ -3,6 +3,7 @@ import type {
     ViewState
 } from "obsidian";
 
+/** @public */
 export interface StateHistory {
     /**
      * Ephemeral cursor state within Editor of leaf

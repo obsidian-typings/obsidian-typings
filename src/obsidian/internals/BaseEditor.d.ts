@@ -9,6 +9,7 @@ import type { EditorPosition } from "obsidian";
  * @todo Potential risk of confusion when `Editor` is constructed from the Obsidian module, as it only has the
  *       methods from `BaseEditor`, *not* `Editor`
  */
+/** @public */
 export interface BaseEditor {
     /**
      * CodeMirror editor instance
@@ -86,7 +87,7 @@ export interface BaseEditor {
     /**
      * Convert word under cursor into a wikilink
      *
-     * @param embed Whether to embed the link or not
+     * @param embed - Whether to embed the link or not
      */
     triggerWikiLink(embed: boolean): void;
     /**

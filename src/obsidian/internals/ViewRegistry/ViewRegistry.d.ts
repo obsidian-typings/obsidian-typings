@@ -7,6 +7,7 @@ import type {
 import type { ViewRegistryTypeByExtensionRecord } from "./ViewRegistryTypeByExtensionRecord.js";
 import type { ViewRegistryViewByTypeRecord } from "./ViewRegistryViewByTypeRecord.js";
 
+/** @public */
 export interface ViewRegistry extends Events {
     /**
      * Mapping of file extensions to view type
@@ -20,7 +21,7 @@ export interface ViewRegistry extends Events {
     /**
      * Get the view type associated with a file extension
      *
-     * @param extension File extension
+     * @param extension - File extension
      */
     getTypeByExtension(extension: string): string;
     /**
@@ -46,8 +47,8 @@ export interface ViewRegistry extends Events {
     /**
      * Register a view type for a file extension
      *
-     * @param extension File extension
-     * @param type View type
+     * @param extension - File extension
+     * @param type - View type
      * @remark Prefer registering the extension via the Plugin class
      */
     registerExtensions(extension: string[], type: string): void;

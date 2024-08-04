@@ -5,6 +5,7 @@ import type {
 import type { HotkeyManagerCustomKeysRecord } from "./HotkeyManagerCustomKeysRecord.js";
 import type { HotkeyManagerDefaultKeysRecord } from "./HotkeyManagerDefaultKeysRecord.js";
 
+/** @public */
 export interface HotkeyManager {
     /**
      * Reference to App
@@ -66,9 +67,9 @@ export interface HotkeyManager {
     /**
      * Pretty-print hotkey of a command
      *
-     * @param command
+     * @param commandId - Command ID to print hotkey for
      */
-    printHotkeyForCommand(command: string): string;
+    printHotkeyForCommand(commandId: string): string;
     /** @internal */
     registerListeners(): void;
     /**

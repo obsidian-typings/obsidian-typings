@@ -4,15 +4,16 @@ import type {
 } from "obsidian";
 
 /** @todo Documentation incomplete */
+/** @public */
 export interface BookmarksView extends ItemView {
     /**
      * Called when a file is created.
-     * @param file The created file
+     * @param file - The created file
      */
     onFileCreate(file: TFile): void;
     /**
      * Called when a file is deleted.
-     * @param file The deleted file
+     * @param file - The deleted file
      */
     onFileDelete(file: TFile): void;
     /** @todo Documentation incomplete */
@@ -29,12 +30,12 @@ export interface BookmarksView extends ItemView {
     attachDropHandler(): void;
     /**
      * Called when the rename shortcut is pressed
-     * @param event The event triggered this function
+     * @param event - The event triggered this function
      */
     onRenameKey(event: KeyboardEvent): void;
     /**
      * Called when delete is requested
-     * @param event The event triggered this function
+     * @param event - The event triggered this function
      */
     onDeleteSelectedItems(event: unknown): unknown;
     /** @todo Documentation incomplete */

@@ -3,6 +3,7 @@ import type {
     SearchResult
 } from "obsidian";
 
+/** @public */
 export interface SuggestionContainer<T> {
     /**
      * Which suggestions should be picked from

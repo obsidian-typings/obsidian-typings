@@ -1,6 +1,7 @@
 import type { View } from "obsidian";
 
 /** @todo Documentation incomplete */
+/** @public */
 export interface SearchView extends View {
     /** @todo Documentation incomplete */
     onCopyResultsClick(event: MouseEvent): void;
@@ -52,7 +53,7 @@ export interface SearchView extends View {
     renderSearchInfo(e: unknown, parentEl: HTMLElement): void;
     /**
      * Sets the value of the search element
-     * @param value The search string
+     * @param value - The search string
      */
     setQuery(value: string): void;
     /**

@@ -1,12 +1,13 @@
 import type { ItemView } from "obsidian";
 
 /** @todo Documentation incomplete */
+/** @public */
 export interface AllPropertiesView extends ItemView {
     /** @todo Documentation incomplete */
     startRename(e: unknown): Promise<unknown>;
     /**
      * Called when 'Enter' is pressed while rename. Accepts the rename
-     * @param event The event triggered this function
+     * @param event - The event triggered this function
      */
     onKeyEnterInRename(event: KeyboardEvent): void;
     /**
@@ -39,7 +40,7 @@ export interface AllPropertiesView extends ItemView {
     isItem(e: unknown): boolean;
     /**
      * Select the item in focus if pressed 'Enter'
-     * @param event The event triggered this function
+     * @param event - The event triggered this function
      */
     onKeyEnterInFocus(event: KeyboardEvent): void;
     /**
@@ -48,7 +49,7 @@ export interface AllPropertiesView extends ItemView {
     getViewType(): "all-properties";
     /**
      * Updates the sort order and sort by it
-     * @param order The sort order
+     * @param order - The sort order
      */
     setSortOrder(order: unknown): void;
     /** @todo Documentation incomplete */

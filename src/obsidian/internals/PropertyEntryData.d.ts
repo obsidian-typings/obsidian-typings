@@ -1,3 +1,4 @@
+/** @public */
 export interface PropertyEntryData<T> {
     /**
      * Property key

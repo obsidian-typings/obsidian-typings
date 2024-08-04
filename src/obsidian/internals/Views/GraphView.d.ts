@@ -1,6 +1,7 @@
 import type { ItemView } from "obsidian";
 
 /** @todo Documentation incomplete */
+/** @public */
 export interface GraphView extends ItemView {
     dataEngine: unknown;
     /**

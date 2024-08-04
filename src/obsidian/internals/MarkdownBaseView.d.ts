@@ -18,6 +18,7 @@ import type { TableCellEditor } from "./TableCellEditor.js";
 import type { TableEditor } from "./TableEditor.js";
 import type { Token } from "./Token.js";
 
+/** @public */
 export interface MarkdownBaseView extends Component {
     /**
      * Reference to the app

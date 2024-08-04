@@ -1,5 +1,6 @@
 import type { App } from "obsidian";
 
+/** @public */
 export interface EmbedContext {
     /**
      * Reference to the app

@@ -5,4 +5,5 @@ import type {
 import type { EmbedContext } from "./EmbedContext.js";
 
 /** @todo Documentation incomplete */
+/** @public */
 export type EmbeddableConstructor = (context: EmbedContext, file: TFile, path?: string) => Component;

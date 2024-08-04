@@ -2,6 +2,7 @@ import type { TFile } from "obsidian";
 import type { InfoFileView } from "./InfoFileView.js";
 
 /** @todo Documentation incomplete */
+/** @public */
 export interface FilePropertiesView extends InfoFileView {
     /**
      * Returns the file
@@ -15,12 +16,12 @@ export interface FilePropertiesView extends InfoFileView {
     saveFrontmatter(e: unknown): void;
     /**
      * Checks the file is an markdown file
-     * @param file The file to check
+     * @param file - The file to check
      */
     isSupportedFile(file: TFile): boolean;
     /**
      * Reads the file if it is supported
-     * @param file The file to read
+     * @param file - The file to read
      */
     readSupportedFile(file: TFile): Promise<unknown>;
     /** @todo Documentation incomplete */

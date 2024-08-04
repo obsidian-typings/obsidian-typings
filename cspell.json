@@ -45,6 +45,7 @@
         "reparent",
         "Sidedock",
         "toggleable",
+        "tsdoc",
         "Uncollapse",
         "uncollapsed",
         "Unindents",
