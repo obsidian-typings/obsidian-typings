@@ -20,10 +20,6 @@ declare module "obsidian" {
          */
         close(): Promise<void>;
         /**
-         * Returns the display text
-         */
-        getDisplayText(): string;
-        /**
          * Gets the ephemeral (non-persistent) state of the editor
          */
         getEphemeralState(): {};
@@ -51,16 +47,8 @@ declare module "obsidian" {
          * Handle paste event of properties on metadata editor
          */
         handlePaste(event: ClipboardEvent): void;
-        /**
-         * Is called when the view is closed
-         */
-        onClose(): Promise<void>;
         /** @deprecated use `onPaneMenu` instead */
         onHeaderMenu(e: unknown): void;
-        /**
-         * Is called when the view is opened
-         */
-        onOpen(): Promise<void>;
         /**
          * Adds the menu items to the menu
          * @param menu the menu to fill
