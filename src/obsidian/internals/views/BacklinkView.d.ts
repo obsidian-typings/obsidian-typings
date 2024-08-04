@@ -1,4 +1,5 @@
-import type { InfoFileView } from "../../types.js";
+import type { InfoFileView } from "../views/InfoFileView.js";
+
 /** @todo Documentation incomplete */
 export interface BacklinkView extends InfoFileView {
     /**

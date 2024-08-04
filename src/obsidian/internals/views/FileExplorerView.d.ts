@@ -1,9 +1,7 @@
-import type {
-    FileTreeItem,
-    Tree,
-    TreeItem,
-    WeakMapWrapper
-} from "../../types.js";
+import type { FileTreeItem } from "../FileTreeItem.js";
+import type { Tree } from "../Tree.js";
+import type { WeakMapWrapper } from "../WeakMapWrapper.js";
+
 import type {
     PaneType,
     TAbstractFile,
@@ -11,6 +9,7 @@ import type {
     TFolder,
     View
 } from "obsidian";
+import type { FileExplorerViewFileItemsRecord } from "./FileExplorerViewFileItemsRecord.js";
 /** @todo Documentation incomplete */
 export interface FileExplorerView extends View {
     /**
@@ -172,5 +171,3 @@ export interface FileExplorerView extends View {
      */
     onExtensionsUpdated(): void;
 }
-
-export interface FileExplorerViewFileItemsRecord extends Record<string, TreeItem<FileTreeItem>> {}

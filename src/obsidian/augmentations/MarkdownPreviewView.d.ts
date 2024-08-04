@@ -1,10 +1,10 @@
-import type { ReadViewRenderer } from "../types.js";
+import type { ReadViewRenderer } from "../internals/ReadViewRenderer.js";
 
 export {};
 
 declare module "obsidian" {
     /** @todo Documentation incomplete */
-    interface MarkdownPreviewView extends MarkdownRenderer {
+    interface MarkdownPreviewView extends MarkdownRenderer, MarkdownSubView, MarkdownPreviewEvents {
         /**
          * Unique identifier for the rendered element
          */

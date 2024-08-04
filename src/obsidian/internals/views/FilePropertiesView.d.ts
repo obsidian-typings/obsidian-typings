@@ -1,4 +1,4 @@
-import type { InfoFileView } from "../../types.js";
+import type { InfoFileView } from "../views/InfoFileView.js";
 import type { TFile } from "obsidian";
 /** @todo Documentation incomplete */
 export interface FilePropertiesView extends InfoFileView {
