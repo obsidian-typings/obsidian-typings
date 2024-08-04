@@ -44,7 +44,7 @@ const context = await esbuild.context({
                 build.onResolve({ filter: /\.js$/ }, args => {
                     const extensions = [".ts", ".d.ts"];
                     for (const ext of extensions) {
-                        const fullPath = join(args.resolveDir, args.path.replace(".js", ext));
+                        const fullPath = join(args.resolveDir.replace(/\\/g, "/"), args.path.replace(".js", ext));
                         if (existsSync(fullPath)) {
                             return { path: fullPath };
                         }
