@@ -166,6 +166,17 @@ async function parseFile(file: string, output_file: string = file): Promise<void
         .map(type => renameIfExported(type, fileName));
     addLeadingNewLine = addStatements(newFile, types, true, addLeadingNewLine);
 
+    const variables = sourceFile.getVariableStatements()
+        .map(variable => {
+            for (const declaration of variable.getDeclarations()) {
+                renameIfExported(declaration, fileName);
+            }
+            return variable;
+        })
+        .sort((a, b) => sortName(a.getDeclarations()[0], b.getDeclarations()[0]));
+
+    addLeadingNewLine = addStatements(newFile, variables, true, addLeadingNewLine);
+
     const interfaces = sourceFile.getInterfaces()
         .filter(inter => !inter.isDefaultExport())
         .sort(sortName)
