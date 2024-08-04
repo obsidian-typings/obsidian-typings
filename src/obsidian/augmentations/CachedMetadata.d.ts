@@ -1,5 +1,3 @@
-import type { FootnoteCache } from "../types.js";
-
 export {};
 
 declare module "obsidian" {

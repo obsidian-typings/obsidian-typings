@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface Plugin {}
+    interface Plugin extends Component {}
 }

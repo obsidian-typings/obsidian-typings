@@ -1,15 +1,15 @@
+import type { CustomArrayDict } from "../internals/CustomArrayDict/CustomArrayDict.js";
+import type { FileCacheEntry } from "../internals/FileCacheEntry.js";
+import type { MetadataCacheFileCacheRecord } from "../internals/MetadataCacheRecords/MetadataCacheFileCacheRecord.js";
 import type {
-    CustomArrayDict,
-    FileCacheEntry,
-    MetadataCacheFileCacheRecord,
-    MetadataCacheMetadataCacheRecord,
-    PropertyInfo
-} from "../types.js";
+    MetadataCacheMetadataCacheRecord
+} from "../internals/MetadataCacheRecords/MetadataCacheMetadataCacheRecord.js";
+import type { PropertyInfo } from "../internals/PropertyInfo.js";
 
 export {};
 
 declare module "obsidian" {
-    interface MetadataCache {
+    interface MetadataCache extends Events {
         /**
          * Reference to App
          */

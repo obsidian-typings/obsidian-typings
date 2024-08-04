@@ -1,13 +1,11 @@
-import type {
-    AppVaultConfig,
-    ConfigItem,
-    VaultFileMapRecord
-} from "../types.js";
+import type { AppVaultConfig } from "../internals/AppVaultConfig/AppVaultConfig.js";
+import type { ConfigItem } from "../internals/ConfigItem.js";
+import type { VaultFileMapRecord } from "../internals/VaultFileMapRecord.js";
 
 export {};
 
 declare module "obsidian" {
-    interface Vault {
+    interface Vault extends Events {
         /**
          * Low-level file system adapter for read and write operations
          *

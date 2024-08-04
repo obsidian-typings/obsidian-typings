@@ -1,6 +1,7 @@
-import type { MarkdownScrollableEditView } from "../types.js";
 import type { Extension } from "@codemirror/state";
 import type { ViewUpdate } from "@codemirror/view";
+import type { MarkdownScrollableEditView } from "./MarkdownScrollableEditView.js";
+
 export interface IFramedMarkdownEditor extends MarkdownScrollableEditView {
     /**
      * Function that cleans up the iframe and listeners

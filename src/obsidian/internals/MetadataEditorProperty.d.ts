@@ -1,13 +1,12 @@
 import type {
-    MetadataEditor,
-    MetadataWidget,
-    PropertyEntryData,
-    PropertyWidget
-} from "../types.js";
-import type {
     App,
     Component
 } from "obsidian";
+import type { MetadataEditor } from "./MetadataEditor.js";
+import type { MetadataWidget } from "./MetadataWidget.js";
+import type { PropertyEntryData } from "./PropertyEntryData.js";
+import type { PropertyWidget } from "./PropertyWidget.js";
+
 export interface MetadataEditorProperty extends Component {
     /**
      * Reference to the app
@@ -81,7 +80,7 @@ export interface MetadataEditorProperty extends Component {
     /**
      * Update value of property and saves
      */
-    handleUpdateValue(value: any): void;
+    handleUpdateValue(value: unknown): void;
     /**
      * Loads as draggable property element
      */

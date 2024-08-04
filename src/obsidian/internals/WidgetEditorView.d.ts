@@ -1,13 +1,12 @@
 import type {
-    EmbeddedEditorView,
-    FoldInfo
-} from "../types.js";
-import type {
     CachedMetadata,
     Scope,
     TAbstractFile,
     TFile
 } from "obsidian";
+import type { EmbeddedEditorView } from "./EmbeddedEditorView.js";
+import type { FoldInfo } from "./FoldInfo.js";
+
 export interface WidgetEditorView extends EmbeddedEditorView {
     /**
      * Data after reference

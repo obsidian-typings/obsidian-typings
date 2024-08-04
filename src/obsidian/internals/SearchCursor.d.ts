@@ -1,4 +1,5 @@
 import type { EditorPosition } from "obsidian";
+
 export interface SearchCursor {
     /**
      * Current editor search position

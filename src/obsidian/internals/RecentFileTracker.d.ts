@@ -3,6 +3,7 @@ import type {
     Vault,
     Workspace
 } from "obsidian";
+
 export interface RecentFileTracker {
     /**
      * List of last opened file paths, limited to 50

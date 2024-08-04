@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface SectionCache {}
+    interface SectionCache extends CacheItem {}
 }

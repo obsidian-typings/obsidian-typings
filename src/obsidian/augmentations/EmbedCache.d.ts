@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface EmbedCache {}
+    interface EmbedCache extends ReferenceCache {}
 }

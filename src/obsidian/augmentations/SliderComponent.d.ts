@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface SliderComponent {}
+    interface SliderComponent extends ValueComponent<number> {}
 }

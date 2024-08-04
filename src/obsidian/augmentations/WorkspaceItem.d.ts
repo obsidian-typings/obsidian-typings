@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface WorkspaceItem {}
+    interface WorkspaceItem extends Events {}
 }

@@ -1,14 +1,8 @@
-import type {
-    ClipBoardManager,
-    EditorSuggests,
-    FoldInfo,
-    TableCell,
-    TableCellEditor,
-    TableEditor,
-    Token
-} from "../types.js";
 import type { Extension } from "@codemirror/state";
-import type { EditorView, ViewUpdate } from "@codemirror/view";
+import type {
+    EditorView,
+    ViewUpdate
+} from "@codemirror/view";
 import type {
     App,
     Component,
@@ -16,6 +10,14 @@ import type {
     MarkdownFileInfo,
     TFile
 } from "obsidian";
+import type { ClipBoardManager } from "./ClipBoardManager.js";
+import type { EditorSuggests } from "./EditorSuggests.js";
+import type { FoldInfo } from "./FoldInfo.js";
+import type { TableCell } from "./TableCell.js";
+import type { TableCellEditor } from "./TableCellEditor.js";
+import type { TableEditor } from "./TableEditor.js";
+import type { Token } from "./Token.js";
+
 export interface MarkdownBaseView extends Component {
     /**
      * Reference to the app
@@ -50,7 +52,7 @@ export interface MarkdownBaseView extends Component {
      *
      * @remark Handles formatting, table creation, highlight adding, etc.
      */
-    editor: Editor;
+    editor?: Editor;
     /**
      * Element in which the CodeMirror editor resides
      */

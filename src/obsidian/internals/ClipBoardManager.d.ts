@@ -1,9 +1,10 @@
-import type { ImportedAttachments } from "../types.js";
 import type {
     App,
     MarkdownView,
     TAbstractFile
 } from "obsidian";
+import type { ImportedAttachments } from "./ImportedAttachments.js";
+
 export interface ClipBoardManager {
     /**
      * Reference to the app

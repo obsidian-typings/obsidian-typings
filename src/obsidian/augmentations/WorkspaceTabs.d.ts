@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface WorkspaceTabs {}
+    interface WorkspaceTabs extends WorkspaceParent {}
 }

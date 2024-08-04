@@ -1,10 +1,9 @@
-import type {
-    EditorSearchComponent,
-    MarkdownBaseView
-} from "../types.js";
 import type { Extension } from "@codemirror/state";
 import type { ViewUpdate } from "@codemirror/view";
 import type { Scope } from "obsidian";
+import type { EditorSearchComponent } from "./EditorSearchComponent.js";
+import type { MarkdownBaseView } from "./MarkdownBaseView.js";
+
 export interface MarkdownScrollableEditView extends MarkdownBaseView {
     /**
      * List of CSS classes applied to the editor

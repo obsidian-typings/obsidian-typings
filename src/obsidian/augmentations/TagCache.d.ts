@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface TagCache {}
+    interface TagCache extends CacheItem {}
 }

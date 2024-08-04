@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface TextComponent {}
+    interface TextComponent extends AbstractTextComponent<HTMLInputElement> {}
 }

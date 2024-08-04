@@ -1,14 +1,12 @@
-import type {
-    FoldInfo,
-    MarkdownScrollableEditView
-} from "../types.js";
 import type { Extension } from "@codemirror/state";
 import type { ViewUpdate } from "@codemirror/view";
+import type { FoldInfo } from "../internals/FoldInfo.js";
+import type { MarkdownScrollableEditView } from "../internals/MarkdownScrollableEditView.js";
 
 export {};
 
 declare module "obsidian" {
-    interface MarkdownEditView extends MarkdownScrollableEditView {
+    interface MarkdownEditView extends MarkdownSubView, HoverParent, MarkdownFileInfo, MarkdownScrollableEditView {
         /**
          * Frontmatter editor extension for the editor
          */
@@ -43,7 +41,7 @@ declare module "obsidian" {
         /**
          * Gets the ephemeral (non-persistent) state of the editor
          */
-        getEphemeralState(state: any): { cursor: EditorRange } & any;
+        getEphemeralState(state: unknown): { cursor: EditorRange };
         /**
          * Get the current folds of the editor
          */
@@ -82,7 +80,7 @@ declare module "obsidian" {
         /**
          * Set the ephemeral (non-persistent) state of the editor
          */
-        setEphemeralState(state: any): void;
+        setEphemeralState(state: unknown): void;
         /**
          * Set highlight of any search match
          */
@@ -96,7 +94,7 @@ declare module "obsidian" {
         /**
          * Set the state of the editor (applies selections, scrolls, ...)
          */
-        setState(state: any): void;
+        setState(state: unknown): void;
         /**
          * Render the editor and the metadata-editor element
          */

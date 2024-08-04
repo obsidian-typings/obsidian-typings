@@ -1,10 +1,11 @@
-import type { Runnable } from "../types.js";
 import type {
     App,
     BlockCache,
     SearchResult,
     TFile
 } from "obsidian";
+import type { Runnable } from "./Runnable.js";
+
 export interface FileSuggestManager {
     /**
      * Reference to the app

@@ -1,5 +1,7 @@
 node_modules/
 dist/
-/src/implementations/**/*.d.ts
+/src/obsidian/implementations/**/*.d.ts
 .vscode
 
+index.d.ts
+index.ts

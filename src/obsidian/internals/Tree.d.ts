@@ -1,12 +1,11 @@
 import type {
-    InfinityScroll,
-    TreeNode
-} from "../types.js";
-import type {
     App,
     Scope,
     View
 } from "obsidian";
+import type { InfinityScroll } from "./InfinityScroll.js";
+import type { TreeNode } from "./TreeNode.js";
+
 export interface Tree<T> {
     /**
      * Currently active item in tree view

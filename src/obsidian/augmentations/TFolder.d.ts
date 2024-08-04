@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface TFolder {}
+    interface TFolder extends TAbstractFile {}
 }

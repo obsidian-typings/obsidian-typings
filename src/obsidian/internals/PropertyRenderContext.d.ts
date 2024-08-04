@@ -1,5 +1,6 @@
-import type { MetadataEditor } from "../types.js";
 import type { App } from "obsidian";
+import type { MetadataEditor } from "./MetadataEditor.js";
+
 export interface PropertyRenderContext {
     /**
      * Reference to the app

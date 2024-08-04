@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface LinkCache {}
+    interface LinkCache extends ReferenceCache {}
 }

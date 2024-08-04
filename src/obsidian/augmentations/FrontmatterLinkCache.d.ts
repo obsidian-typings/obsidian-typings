@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface FrontmatterLinkCache {}
+    interface FrontmatterLinkCache extends Reference {}
 }

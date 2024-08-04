@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface DropdownComponent {}
+    interface DropdownComponent extends ValueComponent<string> {}
 }

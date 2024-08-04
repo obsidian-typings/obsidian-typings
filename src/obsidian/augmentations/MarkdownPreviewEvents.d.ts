@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface MarkdownPreviewEvents {}
+    interface MarkdownPreviewEvents extends Component {}
 }

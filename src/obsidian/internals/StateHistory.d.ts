@@ -2,6 +2,7 @@ import type {
     EditorRange,
     ViewState
 } from "obsidian";
+
 export interface StateHistory {
     /**
      * Ephemeral cursor state within Editor of leaf

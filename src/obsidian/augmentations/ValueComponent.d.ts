@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface ValueComponent<T> {}
+    interface ValueComponent<T> extends BaseComponent {}
 }

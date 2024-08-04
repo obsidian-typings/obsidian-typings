@@ -2,7 +2,7 @@ export {};
 
 declare module "obsidian" {
     /** @todo Documentation incomplete */
-    interface HoverPopover {
+    interface HoverPopover extends Component {
         /** @internal */
         watchResize(): void;
     }

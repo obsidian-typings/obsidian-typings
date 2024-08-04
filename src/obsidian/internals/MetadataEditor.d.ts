@@ -1,13 +1,12 @@
 import type {
-    MetadataEditorProperty,
-    PropertyEntryData
-} from "../types.js";
-import type {
     App,
     Component,
     HoverPopover,
     MarkdownView
 } from "obsidian";
+import type { MetadataEditorProperty } from "./MetadataEditorProperty.js";
+import type { PropertyEntryData } from "./PropertyEntryData.js";
+
 export interface MetadataEditor extends Component {
     /**
      * Button element for adding a new property

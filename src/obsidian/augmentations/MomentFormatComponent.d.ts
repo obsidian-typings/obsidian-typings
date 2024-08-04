@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface MomentFormatComponent {}
+    interface MomentFormatComponent extends TextComponent {}
 }

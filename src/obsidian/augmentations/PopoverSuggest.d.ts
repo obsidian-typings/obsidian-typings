@@ -1,9 +1,9 @@
-import type { SuggestionContainer } from "../types.js";
+import type { SuggestionContainer } from "../internals/SuggestionContainer.js";
 
 export {};
 
 declare module "obsidian" {
-    interface PopoverSuggest<T> {
+    interface PopoverSuggest<T> extends ISuggestOwner<T>, CloseableComponent {
         /**
          * Whether the suggestion popup is currently open and visible
          */

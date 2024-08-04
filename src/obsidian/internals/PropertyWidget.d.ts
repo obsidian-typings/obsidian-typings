@@ -1,8 +1,7 @@
-import type {
-    PropertyEntryData,
-    PropertyRenderContext
-} from "../types.js";
 import type { Component } from "obsidian";
+import type { PropertyEntryData } from "./PropertyEntryData.js";
+import type { PropertyRenderContext } from "./PropertyRenderContext.js";
+
 export interface PropertyWidget<T> {
     /**
      * Lucide-dev icon associated with the widget

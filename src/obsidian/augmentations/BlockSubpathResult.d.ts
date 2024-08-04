@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface BlockSubpathResult {}
+    interface BlockSubpathResult extends SubpathResult {}
 }

@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface WorkspaceWindow {}
+    interface WorkspaceWindow extends WorkspaceContainer {}
 }

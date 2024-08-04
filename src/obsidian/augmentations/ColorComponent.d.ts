@@ -1,5 +1,5 @@
 export {};
 
 declare module "obsidian" {
-    interface ColorComponent {}
+    interface ColorComponent extends ValueComponent<string> {}
 }
