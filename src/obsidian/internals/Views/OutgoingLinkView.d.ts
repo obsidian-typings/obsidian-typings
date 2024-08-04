@@ -1,4 +1,5 @@
 import type { InfoFileView } from "./InfoFileView.js";
+
 /** @todo Documentation incomplete */
 export interface OutgoingLinkView extends InfoFileView {
     /**

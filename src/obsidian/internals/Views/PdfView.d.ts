@@ -1,4 +1,8 @@
-import type { EditableFileView, TFile } from "obsidian";
+import type {
+    EditableFileView,
+    TFile
+} from "obsidian";
+
 /** @todo Documentation incomplete */
 export interface PdfView extends EditableFileView {
     viewer: unknown;

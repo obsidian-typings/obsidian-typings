@@ -1,4 +1,8 @@
-import type { ItemView, TFile } from "obsidian";
+import type {
+    ItemView,
+    TFile
+} from "obsidian";
+
 /** @todo Documentation incomplete */
 export interface BookmarksView extends ItemView {
     /**

@@ -1,9 +1,10 @@
-import type { InfoFileView } from "./InfoFileView.js";
 import type {
     TFile,
     View,
     WorkspaceLeaf
 } from "obsidian";
+import type { InfoFileView } from "./InfoFileView.js";
+
 /** @todo Documentation incomplete */
 export interface OutlineView extends InfoFileView {
     /**

@@ -1,4 +1,8 @@
-import type { FileView, TFile } from "obsidian";
+import type {
+    FileView,
+    TFile
+} from "obsidian";
+
 /**
  * @todo This is probably not the right term
  */
