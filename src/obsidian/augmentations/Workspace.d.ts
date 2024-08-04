@@ -1,6 +1,6 @@
 import type { Extension } from "@codemirror/state";
 import type { Constructor } from "obsidian";
-import type { InternalPluginName } from "../implementations/InternalPluginName.js";
+import type { InternalPluginName } from "../internals/InternalPlugin/InternalPluginName.js";
 import type { CanvasConnection } from "../internals/CanvasConnection.js";
 import type { CanvasNode } from "../internals/CanvasNode.js";
 import type { FileExplorerLeaf } from "../internals/FileExplorerLeaf.js";
