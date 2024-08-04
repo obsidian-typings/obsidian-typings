@@ -60,10 +60,10 @@
         "ts-morph": "^22.0.0"
     },
     "scripts": {
-        "build": "npm-run-all build:clean build:generate-index build:validate build:bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:style-mod build:extract-api",
+        "build": "npm-run-all build:clean build:validate build:generate-index build:bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:style-mod build:extract-api",
         "build:clean": "bun run scripts/build-clean.ts",
-        "build:generate-index": "bun run scripts/build-generate-index.ts",
         "build:validate": "tsc --build --force",
+        "build:generate-index": "bun run scripts/build-generate-index.ts",
         "build:bundle-types": "dts-bundle-generator -o ./dist/types.d.ts ./src/index.d.ts --inline-declare-global --inline-declare-externals",
         "build:implementations": "bun run scripts/build-implementations.ts",
         "build:implementations:generate-types": "tsc --project ./tsconfig.implementations.json",
