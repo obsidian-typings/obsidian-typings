@@ -135,6 +135,12 @@ function sortInterfaceDeclaration(declaration: InterfaceDeclaration): void {
 
 async function parseFile(file: string, output_file: string = file): Promise<void> {
     console.log(`Parsing file: ${file}`);
+
+    const fileName = basename(file, getExtension(file));
+    if (fileName === "index") {
+        return;
+    }
+
     const project = new Project();
     const sourceFile = project.addSourceFileAtPath(file);
 
@@ -144,7 +150,6 @@ async function parseFile(file: string, output_file: string = file): Promise<void
 
     const exports = sourceFile.getExportDeclarations()
         .map(declaration => fixExport(declaration, file))
-        .filter(declaration => declaration !== null)
         .sort((a, b) => sortStarExports(a, b) || sortSpecifierName(a, b));
     const imports = sourceFile.getImportDeclarations()
         .map(declaration => fixImport(declaration, file))
@@ -154,21 +159,16 @@ async function parseFile(file: string, output_file: string = file): Promise<void
     let addLeadingNewLine = imports.length > 0;
     addLeadingNewLine = addStatements(newFile, exports, false, addLeadingNewLine);
 
-    const fileName = basename(file, getExtension(file));
-    const isFileIndex = fileName === "index";
+    const types = sourceFile.getTypeAliases()
+        .sort(sortName)
+        .map(type => renameIfExported(type, fileName));
+    addLeadingNewLine = addStatements(newFile, types, true, addLeadingNewLine);
 
-    if (!isFileIndex) {
-        const types = sourceFile.getTypeAliases()
-            .sort(sortName)
-            .map(type => renameIfExported(type, fileName));
-        addLeadingNewLine = addStatements(newFile, types, true, addLeadingNewLine);
-
-        const interfaces = sourceFile.getInterfaces()
-            .filter(inter => !inter.isDefaultExport())
-            .sort(sortName)
-            .map(inter => renameIfExported(inter, fileName));
-        addStatements(newFile, interfaces, true, addLeadingNewLine);
-    }
+    const interfaces = sourceFile.getInterfaces()
+        .filter(inter => !inter.isDefaultExport())
+        .sort(sortName)
+        .map(inter => renameIfExported(inter, fileName));
+    addStatements(newFile, interfaces, true, addLeadingNewLine);
 
     for (const module of sourceFile.getModules()) {
         await sortModule(module, newFile);
@@ -189,28 +189,23 @@ function fixImport(declaration: ImportDeclaration, file: string): ImportDeclarat
 
     const fileExtension = getExtension(file);
     const isDeclarationFile = fileExtension === ".d.ts";
-    const fileName = basename(file, fileExtension);
-    const isFileIndex = fileName === "index";
 
     if (isDeclarationFile) {
         moduleSpecifier = moduleSpecifier.replace("/(\.d)?\.ts$/", ".js");
     }
-
-    const moduleExt = getExtension(moduleSpecifier);
-    const moduleFileName = basename(moduleSpecifier, moduleExt);
-    const isModuleIndex = moduleFileName === "index";
-
-    if (!isModuleIndex && (!isFileIndex || moduleSpecifier.startsWith(".."))) {
-        moduleSpecifier = moduleSpecifier.replace(`${moduleFileName}${moduleExt}`, `index${moduleExt}`);
-    }
-
-    declaration.setModuleSpecifier(moduleSpecifier);
 
     if (declaration.getNamespaceImport()) {
         declaration.removeNamespaceImport();
         declaration.addNamedImports(
             declaration.getModuleSpecifierSourceFileOrThrow().getExportSymbols().map(symbol => symbol.getName())
         );
+    }
+
+    const moduleExt = getExtension(moduleSpecifier);
+    const moduleFileName = basename(moduleSpecifier, moduleExt);
+
+    if (moduleFileName === "index") {
+        declaration.setModuleSpecifier(moduleSpecifier.replace("index.", "ERROR_INDEX_IS_NOT_ALLOWED."));
     }
 
     return declaration;
@@ -224,18 +219,13 @@ function getExtension(file: string): string {
     return extname(file);
 }
 
-function fixExport(declaration: ExportDeclaration, file: string): ExportDeclaration | null {
+function fixExport(declaration: ExportDeclaration, file: string): ExportDeclaration {
     const fileExtension = getExtension(file);
     const fileName = basename(file, fileExtension);
-    const isFileIndex = fileName === "index";
     const isStarExport = declaration.isNamespaceExport();
 
-    if (isFileIndex) {
-        if (!isStarExport) {
-            return null;
-        }
-    } else if (isStarExport) {
-        return null;
+    if (isStarExport) {
+        declaration.setModuleSpecifier("ERROR_STAR_EXPORT_IS_NOT_ALLOWED");
     } else {
         for (const namedExport of declaration.getNamedExports()) {
             namedExport.setName(fileName);
