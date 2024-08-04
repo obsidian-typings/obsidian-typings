@@ -1,4 +1,4 @@
-import type { InfoFileView } from "../views/InfoFileView.js";
+import type { InfoFileView } from "./InfoFileView.js";
 import type {
     TFile,
     View,

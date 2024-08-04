@@ -1,4 +1,4 @@
-import type { EmptyView } from "../views/EmptyView.js";
+import type { EmptyView } from "./EmptyView.js";
 /**
  * Views of plugins that have been deactivated become an UnknownView
  * @todo This is probably not the right term

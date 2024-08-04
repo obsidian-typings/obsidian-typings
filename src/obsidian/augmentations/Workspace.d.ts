@@ -3,7 +3,7 @@ import type { Constructor } from "obsidian";
 import type { InternalPluginName } from "../implementations/InternalPluginName.js";
 import type { CanvasConnection } from "../internals/CanvasConnection.js";
 import type { CanvasNode } from "../internals/CanvasNode.js";
-import type { CanvasView } from "../internals/views/CanvasView.js";
+import type { CanvasView } from "../internals/Views/CanvasView.js";
 import type { FileExplorerLeaf } from "../internals/FileExplorerLeaf.js";
 import type { GlobalSearchLeaf } from "../internals/GlobalSearchLeaf.js";
 import type { HoverLinkEvent } from "../internals/HoverLinkEvent.js";
