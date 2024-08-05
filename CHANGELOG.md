@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.1.0
+## 2.1.3
 
 -   Added _initial_ typings for following views:
     -   `AllPropertiesView`
