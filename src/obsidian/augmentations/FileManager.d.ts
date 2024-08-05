@@ -19,7 +19,7 @@ declare module "obsidian" {
         /** @internal */
         updateQueue: {
             promise: Promise<void>;
-            queue(next: Promise<void>): Promise<void>;
+            queue(next: () => void | Promise<void>): Promise<void>;
         };
         /**
          * Reference to Vault
