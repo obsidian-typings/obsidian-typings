@@ -1,13 +1,30 @@
 # Changelog
 
-## 2.1.1
-
--   Fix `FileManager` queue
-
 ## 2.1.0
 
--   Add more views
--   Add `FileManager` queue
+-   Added _initial_ typings for following views:
+    -   `AllPropertiesView`
+    -   `AudioView`
+    -   `BacklinkView`
+    -   `BookmarksView`
+    -   `BrowserHistoryView`
+    -   `BrowserView`
+    -   `CanvasView`
+    -   `EmptyView`
+    -   `FilePropertiesView`
+    -   `GraphView`
+    -   `ImageView`
+    -   `InfoFileView`
+    -   `LocalGraphView`
+    -   `OutgoingLinkView`
+    -   `OutlineView`
+    -   `PdfView`
+    -   `ReleaseNotesView`
+    -   `SearchView`
+    -   `TagView`
+    -   `UnknownView`
+    -   `VideoView`
+-   Add typings for `queue` method on `FileManager`
 
 ## 2.0.0
 
