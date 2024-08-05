@@ -30,16 +30,17 @@ jobs:
                     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
             -   name: Create Archive
                 run: |
+                    tag_name=${GITHUB_REF#refs/tags/}
                     mkdir build
                     cp -r dist build
                     cp README.md LICENSE CHANGELOG.md package.json build
                     cd build
-                    zip -r obsidian-typings-${{ github.ref }}.zip .
+                    zip -r obsidian-typings-${tag_name}.zip .
                     cd ..
             -   name: Create Release
                 uses: softprops/action-gh-release@v2
                 with:
                     files: | 
-                        build/obsidian-typings-${{ github.ref }}.zip
+                        build/obsidian-typings-${tag_name}.zip
                         dist/obsidian-typings.api.json
                     token: ${{ secrets.GITHUB_TOKEN }}
