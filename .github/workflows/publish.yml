@@ -6,6 +6,10 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+
+        permissions:
+            contents: write
+
         steps:
             -   uses: actions/checkout@v4
             -   uses: actions/setup-node@v3
@@ -34,8 +38,6 @@ jobs:
                     cd ..
             -   name: Create Release
                 uses: softprops/action-gh-release@v2
-                permissions:
-                    contents: write
                 with:
                     files: | 
                         build/obsidian-typings-${{ github.ref }}.zip
