@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0
+
+-   Add more views
+-   Add `FileManager` queue
+
 ## 2.0.0
 
 -   Split up typings codebase into separate files
