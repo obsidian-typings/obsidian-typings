@@ -1,4 +1,5 @@
 import type { LinkUpdate } from "../internals/LinkUpdate/LinkUpdate.js";
+import type { LinkUpdateHandler } from "../internals/LinkUpdate/LinkUpdateHandler.js";
 import type { LinkUpdaters } from "../internals/LinkUpdate/LinkUpdaters.js";
 import type { PositionedReference } from "../internals/PositionedReference.js";
 
@@ -13,7 +14,7 @@ declare module "obsidian" {
         /** @internal */
         fileParentCreatorByType: Map<string, (path: string) => TFolder>;
         /** @internal */
-        inProgressUpdates: null | unknown[];
+        inProgressUpdates: null | LinkUpdateHandler[];
         /** @internal */
         linkUpdaters: LinkUpdaters;
         /** @internal */
@@ -114,10 +115,10 @@ declare module "obsidian" {
          */
         registerFileParentCreator(extension: string, location: TFolder): void;
         /**
-         * @param callback - Callback to execute for each link
+         * @param linkUpdateHandler - Handler to execute for each updated link
          * @internal
          */
-        runAsyncLinkUpdate(callback: (link: LinkUpdate) => unknown): void;
+        runAsyncLinkUpdate(linkUpdateHandler: LinkUpdateHandler): Promise<void>;
         /**
          * @param path
          * @param data
