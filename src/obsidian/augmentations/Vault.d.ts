@@ -34,9 +34,9 @@ declare module "obsidian" {
         /** @internal Remove a vault config file */
         deleteConfigJson(configFile: string): Promise<void>;
         /**
-         * Check whether a file exists in the vault
+         * Check whether a path exists in the vault
          */
-        exists(file: TAbstractFile, isCaseSensitive?: boolean): Promise<boolean>;
+        exists(path: string, isCaseSensitive?: boolean): Promise<boolean>;
         /** @internal */
         generateFiles(e: AsyncGenerator<TFile>, t: boolean): Promise<void>;
         /**
