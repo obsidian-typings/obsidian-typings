@@ -46,7 +46,7 @@ declare module "obsidian" {
         /** @internal Get path for file that does not conflict with other existing files */
         getAvailablePath(path: string, extension: string): string;
         /** @internal Get path for attachment that does not conflict with other existing files */
-        getAvailablePathForAttachments(filename: string, extension: string, file: TAbstractFile): Promise<string>;
+        getAvailablePathForAttachments(filename: string, extension: string, file: TAbstractFile | null): Promise<string>;
         /**
          * Get value from config by key
          *
