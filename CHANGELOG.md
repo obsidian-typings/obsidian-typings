@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.0
+- Added typings for `LinkUpdateHandler` for `inProgressUpdates` and `runAsyncLinkUpdate` (`FileManager`)
+- Added typings for `onChange` method (`Vault`)
+- Fix first parameter type of `exists` (`Vault`)
+- Fix optionality of `getAvailablePathForAttachments` (`Vault`)
+
 ## 2.1.3
 
 -   Added _initial_ typings for following views:
