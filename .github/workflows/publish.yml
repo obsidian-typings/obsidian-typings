@@ -26,9 +26,17 @@ jobs:
                     bun install --frozen-lockfile
                     bun run build 
             -   name: Create NPM Release
+                if: ${{ !contains(github.ref_name, 'beta') }}
                 run: npm publish
                 env:
                     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+            -   name: Create Beta NPM Release
+                if: ${{ contains(github.ref_name, 'beta') }}
+                run: npm publish --tag beta
+                env:
+                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
             -   name: Create Archive
                 run: |
                     mkdir build
