@@ -44,3 +44,4 @@ jobs:
                         build/obsidian-typings-${{ github.ref_name }}.zip
                         dist/obsidian-typings.api.json
                     token: ${{ secrets.GITHUB_TOKEN }}
+                    prerelease: ${{ contains(github.ref_name, 'beta') }}
