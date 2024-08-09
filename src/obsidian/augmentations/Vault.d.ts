@@ -25,6 +25,8 @@ declare module "obsidian" {
         configTs: number;
         /** @internal Mapping of path to Obsidian folder or file structure */
         fileMap: VaultFileMapRecord;
+        /** @internal Listener for all events on the vault */
+        onChange: FileSystemWatchHandler;
 
         /** @internal Add file as child/parent to respective folders */
         addChild(file: TAbstractFile): void;
@@ -47,7 +49,11 @@ declare module "obsidian" {
         /** @internal Get path for file that does not conflict with other existing files */
         getAvailablePath(path: string, extension: string): string;
         /** @internal Get path for attachment that does not conflict with other existing files */
-        getAvailablePathForAttachments(filename: string, extension: string, file: TAbstractFile | null): Promise<string>;
+        getAvailablePathForAttachments(
+            filename: string,
+            extension: string,
+            file: TAbstractFile | null
+        ): Promise<string>;
         /**
          * Get value from config by key
          *
@@ -79,8 +85,6 @@ declare module "obsidian" {
         on(name: "config-changed", callback: () => void, ctx?: unknown): EventRef;
         /** @internal Triggered whenever a file gets loaded internally */
         on(name: "raw", callback: (path: string) => void, ctx?: unknown): EventRef;
-        /** @internal Listener for all events on the vault */
-        onChange: FileSystemWatchHandler;
         /**
          * Read a config file from the vault and parse it as JSON
          *
