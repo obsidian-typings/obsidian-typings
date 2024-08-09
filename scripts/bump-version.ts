@@ -25,6 +25,7 @@ let newVersion = "";
 switch (versionType) {
     case "beta":
         newVersion = `${major}.${minor}.${beta ? patch : patch + 1}-beta.${beta + 1}`;
+        break;
     case "patch":
         newVersion = `${major}.${minor}.${patch + 1}`;
         break;
