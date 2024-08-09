@@ -1,5 +1,6 @@
 import type { AppVaultConfig } from "../internals/AppVaultConfig/AppVaultConfig.js";
 import type { ConfigItem } from "../internals/ConfigItem.js";
+import type { FileSystemWatchHandler } from "../internals/FileSystemWatchHandler.js";
 import type { VaultFileMapRecord } from "../internals/VaultFileMapRecord.js";
 
 export {};
@@ -79,7 +80,7 @@ declare module "obsidian" {
         /** @internal Triggered whenever a file gets loaded internally */
         on(name: "raw", callback: (path: string) => void, ctx?: unknown): EventRef;
         /** @internal Listener for all events on the vault */
-        onChange(eventType: string, path: string, oldPath?: string, stats?: FileStats): void;
+        onChange: FileSystemWatchHandler;
         /**
          * Read a config file from the vault and parse it as JSON
          *

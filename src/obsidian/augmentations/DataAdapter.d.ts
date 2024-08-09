@@ -4,6 +4,7 @@ import * as fsPromises from "node:fs/promises";
 import * as path from "node:path";
 import type { DataAdapterFilesRecord } from "../internals/DataAdapterRecords/DataAdapterFilesRecord.js";
 import type { DataAdapterWatchersRecord } from "../internals/DataAdapterRecords/DataAdapterWatchersRecord.js";
+import type { FileSystemWatchHandler } from "../internals/FileSystemWatchHandler.js";
 
 export {};
 
@@ -134,7 +135,7 @@ declare module "obsidian" {
         /** @internal */
         update(normalizedPath: string): unknown;
         /** @internal Add change watcher to path */
-        watch(normalizedPath: string): Promise<void>;
+        watch(handler: FileSystemWatchHandler): Promise<void>;
         /** @internal Watch recursively for changes */
         watchHiddenRecursive(normalizedPath: string): Promise<void>;
     }
