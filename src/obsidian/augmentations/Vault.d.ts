@@ -79,7 +79,7 @@ declare module "obsidian" {
         /** @internal Triggered whenever a file gets loaded internally */
         on(name: "raw", callback: (path: string) => void, ctx?: unknown): EventRef;
         /** @internal Listener for all events on the vault */
-        onChange(eventType: string, path: string, x: unknown, y: unknown): void;
+        onChange(eventType: string, path: string, oldPath?: string, stats?: FileStats): void;
         /**
          * Read a config file from the vault and parse it as JSON
          *
