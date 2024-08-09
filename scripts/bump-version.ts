@@ -11,9 +11,20 @@ const currentVersion = process.env["npm_package_version"]!;
 const package_json = JSON.parse(readFileSync("package.json", "utf8"));
 const package_lock_json = JSON.parse(readFileSync("package-lock.json", "utf8"));
 
-const [major = 0, minor = 0, patch = 0] = currentVersion.split(".").map(Number);
+const match = currentVersion.match(/(\d+)\.(\d+)\.(\d+)(-beta.(\d+))?/);
+if (!match) {
+    throw new Error(`Invalid version format: ${currentVersion}`);
+}
+
+const major = Number(match[1]);
+const minor = Number(match[2]);
+const patch = Number(match[3]);
+const beta = match[5] ? Number(match[5]) : 0;
+
 let newVersion = "";
 switch (versionType) {
+    case "beta":
+        newVersion = `${major}.${minor}.${beta ? patch : patch + 1}-beta.${beta + 1}`;
     case "patch":
         newVersion = `${major}.${minor}.${patch + 1}`;
         break;
