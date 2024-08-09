@@ -20,11 +20,13 @@ jobs:
             -   uses: oven-sh/setup-bun@v1
                 with:
                     bun-version: latest
+
             -   name: Create Build
                 id: build
                 run: |
                     bun install --frozen-lockfile
-                    bun run build 
+                    bun run build
+
             -   name: Create NPM Release
                 if: ${{ !contains(github.ref_name, 'beta') }}
                 run: npm publish
@@ -45,6 +47,7 @@ jobs:
                     cd build
                     zip -r obsidian-typings-${{ github.ref_name }}.zip .
                     cd ..
+
             -   name: Create Release
                 uses: softprops/action-gh-release@v2
                 with:
