@@ -17,5 +17,6 @@ export function createTFolderInstance(vault: Vault, path: string): TFolder {
 
     folder = new (TFolder as TFolderConstructor)(vault, path);
     folder.parent = createTFolderInstance(vault, vault.adapter.path.dirname(path));
+    folder.deleted = true;
     return folder;
 }
