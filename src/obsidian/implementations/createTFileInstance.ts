@@ -3,6 +3,7 @@ import {
     type Vault
 } from "obsidian";
 import { createTFolderInstance } from "./createTFolderInstance.ts";
+import { dirname } from "./PathUtils.ts";
 
 type TFileConstructor = { new(vault: Vault, path: string): TFile };
 
@@ -17,7 +18,7 @@ export function createTFileInstance(vault: Vault, path: string): TFile {
     }
 
     file = new (TFile as TFileConstructor)(vault, path);
-    file.parent = createTFolderInstance(vault, vault.adapter.path.dirname(path));
+    file.parent = createTFolderInstance(vault, dirname(path));
     file.deleted = true;
     return file;
 }
