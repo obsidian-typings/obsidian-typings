@@ -5,12 +5,13 @@ import * as path from "node:path";
 import type { DataAdapterFilesRecord } from "../internals/DataAdapterRecords/DataAdapterFilesRecord.js";
 import type { DataAdapterWatchersRecord } from "../internals/DataAdapterRecords/DataAdapterWatchersRecord.js";
 import type { FileSystemWatchHandler } from "../internals/FileSystemWatchHandler.js";
+import type { PromisedQueue } from "../internals/PromisedQueue.js";
 
 export {};
 
 declare module "obsidian" {
     /** @todo Documentation incomplete */
-    interface DataAdapter {
+    interface DataAdapter extends PromisedQueue {
         /**
          * Base OS path for the vault (e.g. /home/user/vault, or C:\Users\user\documents\vault)
          */
@@ -41,8 +42,6 @@ declare module "obsidian" {
          * Reference to node path module
          */
         path: typeof path;
-        /** @internal */
-        promise: Promise<unknown>;
         /** @internal Triggers handler for vault events */
         trigger: FileSystemWatchHandler;
         /**
@@ -106,8 +105,6 @@ declare module "obsidian" {
         listRecursiveChild(normalizedPath: string): Promise<void>;
         /** @internal */
         onFileChange(normalizedPath: string): void;
-        /** @internal */
-        queue(cb: unknown): Promise<void>;
         /** @internal */
         reconcileDeletion(normalizedPath: string, normalizedNewPath: string, option: boolean): Promise<void>;
         /** @internal */

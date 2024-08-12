@@ -1,7 +1,7 @@
-import type { LinkUpdate } from "../internals/LinkUpdate/LinkUpdate.js";
 import type { LinkUpdateHandler } from "../internals/LinkUpdate/LinkUpdateHandler.js";
 import type { LinkUpdaters } from "../internals/LinkUpdate/LinkUpdaters.js";
 import type { PositionedReference } from "../internals/PositionedReference.js";
+import type { PromisedQueue } from "../internals/PromisedQueue.js";
 
 export {};
 
@@ -18,10 +18,7 @@ declare module "obsidian" {
         /** @internal */
         linkUpdaters: LinkUpdaters;
         /** @internal */
-        updateQueue: {
-            promise: Promise<void>;
-            queue(next: () => void | Promise<void>): Promise<void>;
-        };
+        updateQueue: PromisedQueue;
         /**
          * Reference to Vault
          */
