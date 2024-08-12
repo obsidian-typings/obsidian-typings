@@ -1,3 +1,3 @@
-export function dirname(path: string): string {
-    return path.replace(/\/?[^\/]*$/, "");
+export function parentFolderPath(path: string): string {
+    return path.replace(/\/?[^\/]*$/, "") || "/";
 }
