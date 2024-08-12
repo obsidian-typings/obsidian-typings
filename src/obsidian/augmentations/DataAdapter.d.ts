@@ -11,11 +11,6 @@ export {};
 declare module "obsidian" {
     /** @todo Documentation incomplete */
     interface DataAdapter {
-        /** @internal Handles vault events */
-        handler: FileSystemWatchHandler | null;
-        /** @internal Triggers handler for vault events */
-        trigger: FileSystemWatchHandler;
-
         /**
          * Base OS path for the vault (e.g. /home/user/vault, or C:\Users\user\documents\vault)
          */
@@ -34,6 +29,8 @@ declare module "obsidian" {
          * Reference to node fs:promises module
          */
         fsPromises?: typeof fsPromises;
+        /** @internal Handles vault events */
+        handler: FileSystemWatchHandler | null;
         /** @internal */
         insensitive: boolean;
         /**
@@ -46,6 +43,8 @@ declare module "obsidian" {
         path: typeof path;
         /** @internal */
         promise: Promise<unknown>;
+        /** @internal Triggers handler for vault events */
+        trigger: FileSystemWatchHandler;
         /**
          * Reference to node URL module
          */
