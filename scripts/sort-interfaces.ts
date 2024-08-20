@@ -39,7 +39,7 @@ interface Nameable {
 
 async function main(): Promise<void> {
     // Get passed parameter
-    const args = process.argv.slice(2);
+    const args = ["./src/obsidian/global.d.ts"]; // process.argv.slice(2);
     if (args.length === 0) {
         console.error("Please provide a file to parse");
         process.exit(1);
@@ -87,6 +87,9 @@ function sortFilesystemSpecifier(a: ImportDeclaration, b: ImportDeclaration): nu
 }
 
 async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<void> {
+    const variables = module.getVariableStatements()
+        .sort((a, b) => sortName(a.getDeclarations()[0], b.getDeclarations()[0]));
+
     const typeDeclarations = module.getTypeAliases().sort(sortName);
     const interfaceDeclarations = [...module.getClasses(), ...module.getInterfaces()].sort(sortName);
 
@@ -106,8 +109,9 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<
         docs: module.getJsDocs().map((getJsDoc) => getJsDoc.getStructure())
     });
 
-    addStatements(newModule, typeDeclarations, true, false);
-    let addLeadingNewLine = typeDeclarations.length > 0;
+    addStatements(newModule, variables, true, false);
+    let addLeadingNewLine = variables.length > 0;
+    addLeadingNewLine = addStatements(newModule, typeDeclarations, true, addLeadingNewLine);
     addStatements(newModule, interfaceDeclarations, true, addLeadingNewLine);
 }
 
