@@ -8,14 +8,12 @@ declare module "obsidian" {
          * @returns The number of files in the folder.
          */
         getFileCount(): number;
-
         /**
          * Gets the count of subfolders in the folder.
          *
          * @returns The number of subfolders in the folder.
          */
         getFolderCount(): number;
-
         /**
          * Returns the prefix of the folder path.
          * If the folder is in the root '/', it returns an empty string.

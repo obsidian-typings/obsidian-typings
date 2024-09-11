@@ -13,7 +13,6 @@ declare module "obsidian" {
          * @param content The content to cache. If `null`, the cache is cleared.
          */
         cache(content: string | null): void;
-
         /**
          * Gets the short name of the file.
          *
@@ -24,7 +23,6 @@ declare module "obsidian" {
          * @returns The short name of the file.
          */
         getShortName(): string;
-
         /**
          * Removes the file from the cache if its content length greater than `app.vault.cacheLimit`.
          */

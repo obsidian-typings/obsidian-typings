@@ -223,7 +223,6 @@ declare module "obsidian" {
             callback: (menu: Menu, connection: CanvasConnection) => void,
             ctx?: unknown
         ): EventRef;
-
         /**
          * Triggers when the editor selection changes.
          *
@@ -237,7 +236,6 @@ declare module "obsidian" {
             callback: (editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
             ctx?: unknown
         ): EventRef;
-
         /**
          * Triggers when the markdown viewport menu is opened.
          *
@@ -251,7 +249,6 @@ declare module "obsidian" {
             callback: (menu: Menu, view: MarkdownPreviewView, sectionName: string, menuItem: string) => unknown,
             ctx?: unknown
         ): EventRef;
-
         /**
          * Triggers when the markdown scroll event is fired.
          *
@@ -261,7 +258,6 @@ declare module "obsidian" {
          * @returns Event reference
          */
         on(name: "markdown-scroll", callback: (view: MarkdownScrollableEditView) => unknown, ctx?: unknown): EventRef;
-
         /**
          * Triggers when the leaf menu is opened.
          *
@@ -271,7 +267,6 @@ declare module "obsidian" {
          * @returns Event reference
          */
         on(name: "leaf-menu", callback: (menu: Menu, leaf: WorkspaceLeaf) => unknown, ctx?: unknown): EventRef;
-
         /**
          * Triggers when the browser history is updated.
          *
@@ -281,7 +276,6 @@ declare module "obsidian" {
          * @returns Event reference
          */
         on(name: "browser:update-history", callback: () => unknown, ctx?: unknown): EventRef;
-
         /** @internal Handles drag event on leaf */
         onDragLeaf(e: DragEvent, leaf: WorkspaceLeaf): void;
         /** @internal Handles layout change and saves layout to disk */
