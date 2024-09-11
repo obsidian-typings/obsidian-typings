@@ -14,6 +14,7 @@ import type { MobileNavbar } from "../internals/MobileNavbar.js";
 import type { MobileToolbar } from "../internals/MobileToolbar.js";
 import type { ObsidianDOM } from "../internals/ObsidianDOM.js";
 import type { Plugins } from "../internals/Plugins/Plugins.js";
+import type { ShareReceiver } from "../internals/ShareReceiver.js";
 import type { ViewRegistry } from "../internals/ViewRegistry/ViewRegistry.js";
 
 export {};
@@ -124,7 +125,7 @@ declare module "obsidian" {
          */
         setting: Setting;
         /** @internal */
-        shareReceiver: { app: App };
+        shareReceiver: ShareReceiver;
         /** @internal Status bar of the application */
         statusBar: { app: App; containerEl: HTMLElement };
         /**
