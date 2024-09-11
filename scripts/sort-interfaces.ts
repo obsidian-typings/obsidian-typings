@@ -24,7 +24,9 @@ import {
     ExportGetableNode,
     ImportDeclaration,
     InterfaceDeclaration,
+    MethodDeclaration,
     MethodDeclarationStructure,
+    MethodSignature,
     ModuleDeclaration,
     Node,
     Project,
@@ -86,6 +88,10 @@ function sortFilesystemSpecifier(a: ImportDeclaration, b: ImportDeclaration): nu
         : -1;
 }
 
+function sortMethodSignature(a: MethodDeclaration | MethodSignature, b: MethodDeclaration | MethodSignature): number {
+    return a.getText().localeCompare(b.getText());
+}
+
 async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<void> {
     const variables = module.getVariableStatements()
         .sort((a, b) => sortName(a.getDeclarations()[0], b.getDeclarations()[0]));
@@ -117,7 +123,7 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<
 
 function sortClassDeclaration(declaration: ClassDeclaration): void {
     const structure = declaration.getStructure();
-    structure.methods = declaration.getMethods().sort(sortName).map(method =>
+    structure.methods = declaration.getMethods().sort(sortMethodSignature).map(method =>
         method.getStructure() as MethodDeclarationStructure
     );
     structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
@@ -130,7 +136,7 @@ function sortClassDeclaration(declaration: ClassDeclaration): void {
 
 function sortInterfaceDeclaration(declaration: InterfaceDeclaration): void {
     const structure = declaration.getStructure();
-    structure.methods = declaration.getMethods().sort(sortName).map(method => method.getStructure());
+    structure.methods = declaration.getMethods().sort(sortMethodSignature).map(method => method.getStructure());
     structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
     declaration.set(structure);
 
