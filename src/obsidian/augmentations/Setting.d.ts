@@ -48,13 +48,13 @@ declare module "obsidian" {
          * @internal Open a specific tab by tab reference
          */
         openTab(tab: SettingTab): void;
+        openTabById(id: "hotkeys"): HotkeysSettingTab;
         /**
          * Open a specific tab by ID
          *
          * @param id ID of the tab to open
          */
         openTabById(id: string): SettingTab;
-        openTabById(id: "hotkeys"): HotkeysSettingTab;
         /**
          * @param tab Tab to remove
          * @internal Remove a plugin tab from the settings modal

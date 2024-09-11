@@ -167,46 +167,13 @@ declare module "obsidian" {
         /** @internal Load workspace from disk and initialize */
         loadLayout(): Promise<void>;
         /**
-         * @internal Triggers when user hovers over any note link element (file explorer, editor, ...)
-         * @remark Used for preparing (Ctrl) hover previews
-         */
-        on(name: "hover-link", callback: (event: HoverLinkEvent) => void, ctx?: unknown): EventRef;
-        /** @internal Called whenever user opens tab group menu (contains e.g. stacked tabs button) */
-        on(name: "tab-group-menu", callback: (tabMenu: Menu, tabsLeaf: WorkspaceTabs) => void, ctx?: unknown): EventRef;
-        /** @internal Triggers when user swipes open left/right sidebar */
-        on(name: "swipe", callback: (touchEvents: ObsidianTouchEvent[]) => void, ctx?: unknown): EventRef;
-        /**
-         * Triggers when workspace layout is loaded
-         *
-         * @remark Prefer usage of onLayoutReady instead
-         */
-        on(name: "layout-ready", callback: () => void, ctx?: unknown): EventRef;
-        /** @internal Triggers when user right-clicks on external URL in editor */
-        on(name: "url-menu", callback: (menu: Menu, url: string) => void, ctx?: unknown): EventRef;
-        /**
-         * Triggers when user clicks on 'N results' button in search view
+         * Triggers when the user opens a context menu on a connection in the canvas
          */
         on(
-            name: "search:results-menu",
-            callback: (menu: Menu, search: GlobalSearchLeaf) => void,
+            name: "canvas:edge-menu",
+            callback: (menu: Menu, connection: CanvasConnection) => void,
             ctx?: unknown
         ): EventRef;
-        /** @internal Called when user shares text on mobile */
-        on(name: "receive-text-menu", callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
-        /** @internal Called when user shares files on mobile */
-        on(name: "receive-files-menu", callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
-        /**
-         * Triggers when the user opens a context menu on a selection of multiple nodes in the canvas
-         */
-        on(
-            name: "canvas:selection-menu",
-            callback: (menu: Menu, canvasView: CanvasView) => void,
-            ctx?: unknown
-        ): EventRef;
-        /**
-         * Triggers when the user opens a context menu on a single node in the canvas
-         */
-        on(name: "canvas:node-menu", callback: (menu: Menu, node: CanvasNode) => void, ctx?: unknown): EventRef;
         /**
          * Triggers when the user drops edge connection to empty space in the canvas
          */
@@ -216,11 +183,11 @@ declare module "obsidian" {
             ctx?: unknown
         ): EventRef;
         /**
-         * Triggers when the user opens a context menu on a connection in the canvas
+         * Triggers when the user opens a context menu on a selection of multiple nodes in the canvas
          */
         on(
-            name: "canvas:edge-menu",
-            callback: (menu: Menu, connection: CanvasConnection) => void,
+            name: "canvas:selection-menu",
+            callback: (menu: Menu, canvasView: CanvasView) => void,
             ctx?: unknown
         ): EventRef;
         /**
@@ -250,14 +217,37 @@ declare module "obsidian" {
             ctx?: unknown
         ): EventRef;
         /**
-         * Triggers when the markdown scroll event is fired.
+         * Triggers when user clicks on 'N results' button in search view
+         */
+        on(
+            name: "search:results-menu",
+            callback: (menu: Menu, search: GlobalSearchLeaf) => void,
+            ctx?: unknown
+        ): EventRef;
+        /**
+         * Triggers when the browser history is updated.
          *
-         * @param name - "markdown-scroll"
+         * @param name - "browser:update-history"
          * @param callback - Callback function
          * @param ctx - Context
          * @returns Event reference
          */
-        on(name: "markdown-scroll", callback: (view: MarkdownScrollableEditView) => unknown, ctx?: unknown): EventRef;
+        on(name: "browser:update-history", callback: () => unknown, ctx?: unknown): EventRef;
+        /**
+         * Triggers when the user opens a context menu on a single node in the canvas
+         */
+        on(name: "canvas:node-menu", callback: (menu: Menu, node: CanvasNode) => void, ctx?: unknown): EventRef;
+        /**
+         * @internal Triggers when user hovers over any note link element (file explorer, editor, ...)
+         * @remark Used for preparing (Ctrl) hover previews
+         */
+        on(name: "hover-link", callback: (event: HoverLinkEvent) => void, ctx?: unknown): EventRef;
+        /**
+         * Triggers when workspace layout is loaded
+         *
+         * @remark Prefer usage of onLayoutReady instead
+         */
+        on(name: "layout-ready", callback: () => void, ctx?: unknown): EventRef;
         /**
          * Triggers when the leaf menu is opened.
          *
@@ -268,14 +258,24 @@ declare module "obsidian" {
          */
         on(name: "leaf-menu", callback: (menu: Menu, leaf: WorkspaceLeaf) => unknown, ctx?: unknown): EventRef;
         /**
-         * Triggers when the browser history is updated.
+         * Triggers when the markdown scroll event is fired.
          *
-         * @param name - "browser:update-history"
+         * @param name - "markdown-scroll"
          * @param callback - Callback function
          * @param ctx - Context
          * @returns Event reference
          */
-        on(name: "browser:update-history", callback: () => unknown, ctx?: unknown): EventRef;
+        on(name: "markdown-scroll", callback: (view: MarkdownScrollableEditView) => unknown, ctx?: unknown): EventRef;
+        /** @internal Called when user shares files on mobile */
+        on(name: "receive-files-menu", callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
+        /** @internal Called when user shares text on mobile */
+        on(name: "receive-text-menu", callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
+        /** @internal Triggers when user swipes open left/right sidebar */
+        on(name: "swipe", callback: (touchEvents: ObsidianTouchEvent[]) => void, ctx?: unknown): EventRef;
+        /** @internal Called whenever user opens tab group menu (contains e.g. stacked tabs button) */
+        on(name: "tab-group-menu", callback: (tabMenu: Menu, tabsLeaf: WorkspaceTabs) => void, ctx?: unknown): EventRef;
+        /** @internal Triggers when user right-clicks on external URL in editor */
+        on(name: "url-menu", callback: (menu: Menu, url: string) => void, ctx?: unknown): EventRef;
         /** @internal Handles drag event on leaf */
         onDragLeaf(e: DragEvent, leaf: WorkspaceLeaf): void;
         /** @internal Handles layout change and saves layout to disk */

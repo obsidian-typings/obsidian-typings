@@ -109,15 +109,15 @@ declare module "obsidian" {
         /** @internal */
         linkResolver(): void;
         /**
+         * Called whenever the metadatacache has finished updating
+         */
+        on(name: "finished", callback: () => void): EventRef;
+        /**
          * Called whenever the metadatacache is fully loaded in
          *
          * @remark 'finished' is also emitted when the cache is initialized
          */
         on(name: "initialized", callback: () => void): EventRef;
-        /**
-         * Called whenever the metadatacache has finished updating
-         */
-        on(name: "finished", callback: () => void): EventRef;
         /** @internal Execute onCleanCache callbacks if cache is clean */
         onCleanCache(): void;
         /** @internal On creation of the cache: update metadata cache */
