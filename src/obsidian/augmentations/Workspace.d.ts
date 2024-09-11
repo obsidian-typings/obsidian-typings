@@ -7,6 +7,7 @@ import type { GlobalSearchLeaf } from "../internals/GlobalSearchLeaf.js";
 import type { HoverLinkEvent } from "../internals/HoverLinkEvent.js";
 import type { InternalPluginName } from "../internals/InternalPlugin/InternalPluginName.js";
 import type { LeafEntry } from "../internals/LeafEntry.js";
+import type { MarkdownScrollableEditView } from "../internals/MarkdownScrollableEditView.js";
 import type { ObsidianTouchEvent } from "../internals/ObsidianTouchEvent.js";
 import type { RecentFileTracker } from "../internals/RecentFileTracker.js";
 import type { SerializedWorkspace } from "../internals/SerializedWorkspace/SerializedWorkspace.js";
@@ -222,6 +223,65 @@ declare module "obsidian" {
             callback: (menu: Menu, connection: CanvasConnection) => void,
             ctx?: unknown
         ): EventRef;
+
+        /**
+         * Triggers when the editor selection changes.
+         *
+         * @param name - "editor-selection-change"
+         * @param callback - Callback function
+         * @param ctx - Context
+         * @returns Event reference
+         */
+        on(
+            name: "editor-selection-change",
+            callback: (editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
+            ctx?: unknown
+        ): EventRef;
+
+        /**
+         * Triggers when the markdown viewport menu is opened.
+         *
+         * @param name - "markdown-viewport-menu"
+         * @param callback - Callback function
+         * @param ctx - Context
+         * @returns Event reference
+         */
+        on(
+            name: "markdown-viewport-menu",
+            callback: (menu: Menu, view: MarkdownPreviewView, sectionName: string, menuItem: string) => unknown,
+            ctx?: unknown
+        ): EventRef;
+
+        /**
+         * Triggers when the markdown scroll event is fired.
+         *
+         * @param name - "markdown-scroll"
+         * @param callback - Callback function
+         * @param ctx - Context
+         * @returns Event reference
+         */
+        on(name: "markdown-scroll", callback: (view: MarkdownScrollableEditView) => unknown, ctx?: unknown): EventRef;
+
+        /**
+         * Triggers when the leaf menu is opened.
+         *
+         * @param name - "leaf-menu"
+         * @param callback - Callback function
+         * @param ctx - Context
+         * @returns Event reference
+         */
+        on(name: "leaf-menu", callback: (menu: Menu, leaf: WorkspaceLeaf) => unknown, ctx?: unknown): EventRef;
+
+        /**
+         * Triggers when the browser history is updated.
+         *
+         * @param name - "browser:update-history"
+         * @param callback - Callback function
+         * @param ctx - Context
+         * @returns Event reference
+         */
+        on(name: "browser:update-history", callback: () => unknown, ctx?: unknown): EventRef;
+
         /** @internal Handles drag event on leaf */
         onDragLeaf(e: DragEvent, leaf: WorkspaceLeaf): void;
         /** @internal Handles layout change and saves layout to disk */
