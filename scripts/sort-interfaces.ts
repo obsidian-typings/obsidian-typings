@@ -39,7 +39,7 @@ interface Nameable {
 
 async function main(): Promise<void> {
     // Get passed parameter
-    const args = ["./src/obsidian/global.d.ts"]; // process.argv.slice(2);
+    const args = process.argv.slice(2);
     if (args.length === 0) {
         console.error("Please provide a file to parse");
         process.exit(1);
