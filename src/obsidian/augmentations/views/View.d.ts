@@ -1,6 +1,6 @@
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     /** @todo Documentation incomplete */
     interface View extends Component {
         app: App;
@@ -30,7 +30,7 @@ declare module "obsidian" {
         /**
          * Returns the placement of the tooltip
          */
-        getSideTooltipPlacement(): "left" | "right" | undefined;
+        getSideTooltipPlacement(): 'left' | 'right' | undefined;
         /**
          * Returns the current state of the view
          */

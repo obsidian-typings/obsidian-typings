@@ -1,4 +1,4 @@
-import type { Scope } from "obsidian";
+import type { Scope } from 'obsidian';
 
 /** @todo Documentation incomplete */
 /** @public */

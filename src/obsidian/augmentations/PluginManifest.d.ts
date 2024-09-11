@@ -1,6 +1,6 @@
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface PluginManifest {
         /**
          * Name of the author of the plugin

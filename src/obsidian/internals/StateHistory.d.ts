@@ -1,7 +1,7 @@
 import type {
     EditorRange,
     ViewState
-} from "obsidian";
+} from 'obsidian';
 
 /** @public */
 export interface StateHistory {

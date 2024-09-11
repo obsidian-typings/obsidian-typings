@@ -1,4 +1,4 @@
-import type { InternalPluginInstance } from "./InternalPluginInstance.js";
+import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @todo Documentation incomplete */
 /** @public */

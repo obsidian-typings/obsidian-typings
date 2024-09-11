@@ -1,11 +1,11 @@
-import type { AppVaultConfigHotkeysRecord } from "./AppVaultConfigHotkeysRecord.js";
+import type { AppVaultConfigHotkeysRecord } from './AppVaultConfigHotkeysRecord.js';
 
 /** @public */
 export interface AppVaultConfig {
     /**
      * Appearance \> Accent color
      */
-    accentColor: "" | string;
+    accentColor: '' | string;
     /**
      * Files & Links \> Automatically update internal links
      */
@@ -13,7 +13,7 @@ export interface AppVaultConfig {
     /**
      * Files & Links \> Attachment folder path
      */
-    attachmentFolderPath?: "/" | string;
+    attachmentFolderPath?: '/' | string;
     /**
      * Editor \> Auto convert HTML
      */
@@ -37,27 +37,27 @@ export interface AppVaultConfig {
     /**
      * Community Plugins \> Browse \> Sort order
      */
-    communityPluginSortOrder: "download" | "update" | "release" | "alphabetical";
+    communityPluginSortOrder: 'download' | 'update' | 'release' | 'alphabetical';
     /**
      * Themes \> Browse \> Sort order
      */
-    communityThemeSortOrder: "download" | "update" | "release" | "alphabetical";
+    communityThemeSortOrder: 'download' | 'update' | 'release' | 'alphabetical';
     /**
      * Appearance \> Theme
      *
      * @remark is the default Obsidian theme
      */
-    cssTheme?: "" | string;
+    cssTheme?: '' | string;
     /**
      * Editor \> Default view for new tabs
      */
-    defaultViewMode?: "source" | "preview";
+    defaultViewMode?: 'source' | 'preview';
     emacsyKeys?: true | boolean;
     /**
      * Appearance \> CSS snippets
      */
     enabledCssSnippets?: string[];
-    fileSortOrder?: "alphabetical";
+    fileSortOrder?: 'alphabetical';
     /**
      * Editor \> Always focus new tabs
      */
@@ -79,7 +79,7 @@ export interface AppVaultConfig {
     /**
      * Appearance \> Interface font
      */
-    interfaceFontFamily?: "" | string;
+    interfaceFontFamily?: '' | string;
     /**
      * Editor \> Use legacy editor
      */
@@ -88,13 +88,13 @@ export interface AppVaultConfig {
     /**
      * Mobile \> Configure mobile Quick Action
      */
-    mobilePullAction?: "command-palette:open" | string;
-    mobileQuickRibbonItem?: "" | string;
+    mobilePullAction?: 'command-palette:open' | string;
+    mobileQuickRibbonItem?: '' | string;
     /**
      * Mobile \> Manage toolbar options
      */
     mobileToolbarCommands?: string[];
-    monospaceFontFamily?: "" | string;
+    monospaceFontFamily?: '' | string;
     /**
      * Appearance \> Native menus
      */
@@ -102,22 +102,22 @@ export interface AppVaultConfig {
     /**
      * Files & Links \> Default location for new notes | 'folder' \> Folder to create new notes in
      */
-    newFileFolderPath?: "/" | string;
+    newFileFolderPath?: '/' | string;
     /**
      * Files & Links \> Default location for new notes
      */
-    newFileLocation?: "root" | "current" | "folder";
+    newFileLocation?: 'root' | 'current' | 'folder';
     /**
      * Files & Links \> New link format
      */
-    newLinkFormat?: "shortest" | "relative" | "absolute";
+    newLinkFormat?: 'shortest' | 'relative' | 'absolute';
     /**
      * Saved on executing 'Export to PDF' command
      */
     pdfExportSettings?: {
-        pageSize: "letter" | string;
+        pageSize: 'letter' | string;
         landscape: false | boolean;
-        margin: "0" | string;
+        margin: '0' | string;
         downscalePercent: 100 | number;
     };
     /**
@@ -127,7 +127,7 @@ export interface AppVaultConfig {
     /**
      * Editor \> Properties in document
      */
-    propertiesInDocument?: "visible" | "hidden" | "source";
+    propertiesInDocument?: 'visible' | 'hidden' | 'source';
     /**
      * Editor \> Readable line length
      */
@@ -187,14 +187,14 @@ export interface AppVaultConfig {
     /**
      * Appearance \> Text font
      */
-    textFontFamily?: "" | string;
+    textFontFamily?: '' | string;
     /**
      * Appearance \> Base color scheme
      *
      * @remark Not be confused with cssTheme, this setting is for the light/dark mode
-     * @remark moonstone is light theme, "obsidian" is dark theme
+     * @remark moonstone is light theme, 'obsidian' is dark theme
      */
-    theme?: "moonstone" | "obsidian";
+    theme?: 'moonstone' | 'obsidian';
     /**
      * Appearance \> Translucent window
      */
@@ -202,7 +202,7 @@ export interface AppVaultConfig {
     /**
      * Files & Links \> Deleted files
      */
-    trashOption?: "system" | "local" | "none";
+    trashOption?: 'system' | 'local' | 'none';
     /** @deprecated Probably left-over code from old properties type storage */
     types: object;
     /**

@@ -1,4 +1,4 @@
-import type { App } from "obsidian";
+import type { App } from 'obsidian';
 
 declare global {
     /** Global reference to the app

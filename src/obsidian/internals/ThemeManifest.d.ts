@@ -27,7 +27,7 @@ export interface ThemeManifest {
     /**
      * Version of the theme
      *
-     * @remark Defaults to "0.0.0" if no theme manifest was provided in the repository
+     * @remark Defaults to '0.0.0' if no theme manifest was provided in the repository
      */
-    version: "0.0.0" | string;
+    version: '0.0.0' | string;
 }

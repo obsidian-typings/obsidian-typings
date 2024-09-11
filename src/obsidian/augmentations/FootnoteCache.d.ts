@@ -1,6 +1,6 @@
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     /**
      * Cache item containing a notes footnotes metadata
      */

@@ -1,6 +1,6 @@
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface Platform {
         canDisplayRibbon: boolean;
         canExportPdf: boolean;

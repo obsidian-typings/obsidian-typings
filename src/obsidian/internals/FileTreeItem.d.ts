@@ -1,4 +1,4 @@
-import type { TAbstractFile } from "obsidian";
+import type { TAbstractFile } from 'obsidian';
 
 /** @todo Documentation incomplete */
 /** @public */

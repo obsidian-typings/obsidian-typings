@@ -1,6 +1,6 @@
-import type { MetadataEditor } from "../internals/MetadataEditor.js";
+import type { MetadataEditor } from '../internals/MetadataEditor.js';
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface MarkdownFileInfo extends HoverParent {
         metadataEditor?: MetadataEditor;
     }

@@ -1,9 +1,9 @@
-import type { MetadataEditor } from "../../internals/MetadataEditor.js";
-import type { Token } from "../../internals/Token.js";
+import type { MetadataEditor } from '../../internals/MetadataEditor.js';
+import type { Token } from '../../internals/Token.js';
 
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface MarkdownView extends TextFileView {
         /**
          * Backlinks component
@@ -107,7 +107,7 @@ declare module "obsidian" {
         /**
          * Get the current view type
          */
-        getViewType(): "markdown";
+        getViewType(): 'markdown';
         /**
          * Validate correctness of frontmatter and update metadata editor
          */

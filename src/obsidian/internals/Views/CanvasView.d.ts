@@ -1,4 +1,4 @@
-import type { TextFileView } from "obsidian";
+import type { TextFileView } from 'obsidian';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -6,7 +6,7 @@ export interface CanvasView extends TextFileView {
     /**
      * Get the current view type
      */
-    getViewType(): "canvas";
+    getViewType(): 'canvas';
     /**
      * Loads the local data of the canvas
      */

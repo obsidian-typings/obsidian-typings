@@ -1,15 +1,15 @@
-import type { IpcRenderer } from "electron";
-import * as fs from "node:fs";
-import * as fsPromises from "node:fs/promises";
-import * as path from "node:path";
-import type { DataAdapterFilesRecord } from "../internals/DataAdapterRecords/DataAdapterFilesRecord.js";
-import type { DataAdapterWatchersRecord } from "../internals/DataAdapterRecords/DataAdapterWatchersRecord.js";
-import type { FileSystemWatchHandler } from "../internals/FileSystemWatchHandler.js";
-import type { PromisedQueue } from "../internals/PromisedQueue.js";
+import type { IpcRenderer } from 'electron';
+import * as fs from 'node:fs';
+import * as fsPromises from 'node:fs/promises';
+import * as path from 'node:path';
+import type { DataAdapterFilesRecord } from '../internals/DataAdapterRecords/DataAdapterFilesRecord.js';
+import type { DataAdapterWatchersRecord } from '../internals/DataAdapterRecords/DataAdapterWatchersRecord.js';
+import type { FileSystemWatchHandler } from '../internals/FileSystemWatchHandler.js';
+import type { PromisedQueue } from '../internals/PromisedQueue.js';
 
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     /** @todo Documentation incomplete */
     interface DataAdapter extends PromisedQueue {
         /**

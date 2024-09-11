@@ -13,7 +13,7 @@
 
 export {};
 
-declare module "style-mod" {
+declare module 'style-mod' {
     export type StyleModule = {};
     export type StyleSpec = {};
 }

@@ -2,7 +2,7 @@ import type {
     TFile,
     Vault,
     Workspace
-} from "obsidian";
+} from 'obsidian';
 
 /** @public */
 export interface RecentFileTracker {

@@ -1,8 +1,8 @@
-import type { MenuSubmenuConfigRecord } from "../internals/MenuSubmenuConfigRecord.js";
+import type { MenuSubmenuConfigRecord } from '../internals/MenuSubmenuConfigRecord.js';
 
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface Menu extends Component, CloseableComponent {
         /**
          * Background for the suggestion menu

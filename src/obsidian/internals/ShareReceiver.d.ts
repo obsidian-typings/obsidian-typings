@@ -1,5 +1,5 @@
-import type { App } from "obsidian";
-import type { SharedFile } from "./SharedFile.js";
+import type { App } from 'obsidian';
+import type { SharedFile } from './SharedFile.js';
 
 /**
  * @public

@@ -3,9 +3,9 @@ import type {
     Component,
     HoverPopover,
     MarkdownView
-} from "obsidian";
-import type { MetadataEditorProperty } from "./MetadataEditorProperty.js";
-import type { PropertyEntryData } from "./PropertyEntryData.js";
+} from 'obsidian';
+import type { MetadataEditorProperty } from './MetadataEditorProperty.js';
+import type { PropertyEntryData } from './PropertyEntryData.js';
 
 /** @public */
 export interface MetadataEditor extends Component {
@@ -97,7 +97,7 @@ export interface MetadataEditor extends Component {
     /**
      * Focus on property with value
      */
-    focusValue(value: string, which: "both" | "end" | "start"): void;
+    focusValue(value: string, which: 'both' | 'end' | 'start'): void;
     /**
      * Handle copy event on selection and serialize properties
      */

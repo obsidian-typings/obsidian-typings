@@ -1,5 +1,5 @@
-import type { CustomArrayDict } from "../internals/CustomArrayDict/CustomArrayDict.js";
-import type { CustomArrayDictDataRecord } from "../internals/CustomArrayDict/CustomArrayDictDataRecord.js";
+import type { CustomArrayDict } from '../internals/CustomArrayDict/CustomArrayDict.js';
+import type { CustomArrayDictDataRecord } from '../internals/CustomArrayDict/CustomArrayDictDataRecord.js';
 
 export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
     public data: CustomArrayDictDataRecord<T> = {};

@@ -1,4 +1,4 @@
-import type { PluginManifest } from "obsidian";
+import type { PluginManifest } from 'obsidian';
 
 /** @public */
 export interface PluginUpdateManifest {

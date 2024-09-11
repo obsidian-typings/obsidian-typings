@@ -1,5 +1,5 @@
-import type { TFile } from "obsidian";
-import type { InfoFileView } from "./InfoFileView.js";
+import type { TFile } from 'obsidian';
+import type { InfoFileView } from './InfoFileView.js';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -31,7 +31,7 @@ export interface FilePropertiesView extends InfoFileView {
     /**
      * Get the current view type
      */
-    getViewType(): "file-properties";
+    getViewType(): 'file-properties';
     /** @todo Documentation incomplete */
     updateFrontmatter(file: TFile, t: unknown): unknown;
     /** @todo Documentation incomplete */

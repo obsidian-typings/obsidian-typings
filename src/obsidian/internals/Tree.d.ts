@@ -2,9 +2,9 @@ import type {
     App,
     Scope,
     View
-} from "obsidian";
-import type { InfinityScroll } from "./InfinityScroll.js";
-import type { TreeNode } from "./TreeNode.js";
+} from 'obsidian';
+import type { InfinityScroll } from './InfinityScroll.js';
+import type { TreeNode } from './TreeNode.js';
 
 /** @public */
 export interface Tree<T> {
@@ -78,7 +78,7 @@ export interface Tree<T> {
     /**
      * Change the focused item to the next item in specified direction
      */
-    changeFocusedItem(direction: "forwards" | "backwards"): void;
+    changeFocusedItem(direction: 'forwards' | 'backwards'): void;
     /**
      * Unselect all selected items in the tree view
      */

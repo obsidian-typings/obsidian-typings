@@ -1,22 +1,22 @@
-import type { Extension } from "@codemirror/state";
+import type { Extension } from '@codemirror/state';
 import type {
     EditorView,
     ViewUpdate
-} from "@codemirror/view";
+} from '@codemirror/view';
 import type {
     App,
     Component,
     Editor,
     MarkdownFileInfo,
     TFile
-} from "obsidian";
-import type { ClipBoardManager } from "./ClipBoardManager.js";
-import type { EditorSuggests } from "./EditorSuggests.js";
-import type { FoldInfo } from "./FoldInfo.js";
-import type { TableCell } from "./TableCell.js";
-import type { TableCellEditor } from "./TableCellEditor.js";
-import type { TableEditor } from "./TableEditor.js";
-import type { Token } from "./Token.js";
+} from 'obsidian';
+import type { ClipBoardManager } from './ClipBoardManager.js';
+import type { EditorSuggests } from './EditorSuggests.js';
+import type { FoldInfo } from './FoldInfo.js';
+import type { TableCell } from './TableCell.js';
+import type { TableCellEditor } from './TableCellEditor.js';
+import type { TableEditor } from './TableEditor.js';
+import type { Token } from './Token.js';
 
 /** @public */
 export interface MarkdownBaseView extends Component {

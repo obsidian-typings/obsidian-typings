@@ -1,8 +1,8 @@
-import type { HotkeysSettingTab } from "../internals/HotkeysSettingTab.js";
+import type { HotkeysSettingTab } from '../internals/HotkeysSettingTab.js';
 
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface Setting extends Modal {
         /**
          * Current active tab of the settings modal
@@ -48,7 +48,7 @@ declare module "obsidian" {
          * @internal Open a specific tab by tab reference
          */
         openTab(tab: SettingTab): void;
-        openTabById(id: "hotkeys"): HotkeysSettingTab;
+        openTabById(id: 'hotkeys'): HotkeysSettingTab;
         /**
          * Open a specific tab by ID
          *

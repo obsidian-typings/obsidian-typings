@@ -1,7 +1,7 @@
 import type {
     EditableFileView,
     TFile
-} from "obsidian";
+} from 'obsidian';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -11,9 +11,9 @@ export interface PdfView extends EditableFileView {
     /**
      * Get the current view type
      */
-    getViewType(): "pdf";
+    getViewType(): 'pdf';
     /**
-     * Is called when the vault has a "modify" event. Reloads the file if the modified file is the file in this view.
+     * Is called when the vault has a 'modify' event. Reloads the file if the modified file is the file in this view.
      * @param file - The modified file
      */
     onModify(file: TFile): void;

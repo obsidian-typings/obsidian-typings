@@ -1,23 +1,23 @@
-import type { Extension } from "@codemirror/state";
-import type { Constructor } from "obsidian";
-import type { CanvasConnection } from "../internals/CanvasConnection.js";
-import type { CanvasNode } from "../internals/CanvasNode.js";
-import type { FileExplorerLeaf } from "../internals/FileExplorerLeaf.js";
-import type { GlobalSearchLeaf } from "../internals/GlobalSearchLeaf.js";
-import type { HoverLinkEvent } from "../internals/HoverLinkEvent.js";
-import type { InternalPluginName } from "../internals/InternalPlugin/InternalPluginName.js";
-import type { LeafEntry } from "../internals/LeafEntry.js";
-import type { MarkdownScrollableEditView } from "../internals/MarkdownScrollableEditView.js";
-import type { ObsidianTouchEvent } from "../internals/ObsidianTouchEvent.js";
-import type { RecentFileTracker } from "../internals/RecentFileTracker.js";
-import type { SerializedWorkspace } from "../internals/SerializedWorkspace/SerializedWorkspace.js";
-import type { StateHistory } from "../internals/StateHistory.js";
-import type { CanvasView } from "../internals/Views/CanvasView.js";
-import type { WorkspaceHoverLinkSourcesRecord } from "../internals/WorkspaceHoverLinkSourcesRecord.js";
+import type { Extension } from '@codemirror/state';
+import type { Constructor } from 'obsidian';
+import type { CanvasConnection } from '../internals/CanvasConnection.js';
+import type { CanvasNode } from '../internals/CanvasNode.js';
+import type { FileExplorerLeaf } from '../internals/FileExplorerLeaf.js';
+import type { GlobalSearchLeaf } from '../internals/GlobalSearchLeaf.js';
+import type { HoverLinkEvent } from '../internals/HoverLinkEvent.js';
+import type { InternalPluginName } from '../internals/InternalPlugin/InternalPluginName.js';
+import type { LeafEntry } from '../internals/LeafEntry.js';
+import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.js';
+import type { ObsidianTouchEvent } from '../internals/ObsidianTouchEvent.js';
+import type { RecentFileTracker } from '../internals/RecentFileTracker.js';
+import type { SerializedWorkspace } from '../internals/SerializedWorkspace/SerializedWorkspace.js';
+import type { StateHistory } from '../internals/StateHistory.js';
+import type { CanvasView } from '../internals/Views/CanvasView.js';
+import type { WorkspaceHoverLinkSourcesRecord } from '../internals/WorkspaceHoverLinkSourcesRecord.js';
 
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface Workspace extends Events {
         /**
          * Currently active tab group
@@ -93,14 +93,14 @@ declare module "obsidian" {
          * @param ribbon Whether the leaf belongs to the left or right ribbon
          * @internal Deserialize workspace entries into actual Leaf objects
          */
-        deserializeLayout(leaf: LeafEntry, ribbon?: "left" | "right"): Promise<WorkspaceLeaf>;
+        deserializeLayout(leaf: LeafEntry, ribbon?: 'left' | 'right'): Promise<WorkspaceLeaf>;
         /**
          * @param type View type of leaf
          * @param ribbon Side ribbon to reveal leaf in
          * @param viewState Open state of leaf
          * @internal Reveal leaf in side ribbon with specified view type and state
          */
-        ensureSideLeaf(type: string, ribbon: "left" | "right", viewState: OpenViewState): void;
+        ensureSideLeaf(type: string, ribbon: 'left' | 'right', viewState: OpenViewState): void;
         /**
          * Get active file view if exists
          */
@@ -114,15 +114,15 @@ declare module "obsidian" {
          */
         getAdjacentLeafInDirection(
             leaf: WorkspaceLeaf,
-            direction: "top" | "bottom" | "left" | "right"
+            direction: 'top' | 'bottom' | 'left' | 'right'
         ): WorkspaceLeaf | null;
         /** @internal Get the direction where the leaf should be dropped on dragevent */
         getDropDirection(
             e: DragEvent,
             rect: DOMRect,
-            directions: ["left", "right"],
+            directions: ['left', 'right'],
             leaf: WorkspaceLeaf
-        ): "left" | "right" | "top" | "bottom" | "center";
+        ): 'left' | 'right' | 'top' | 'bottom' | 'center';
         /**
          * @param e Drag event
          * @internal Get the leaf where the leaf should be dropped on dragevent
@@ -170,7 +170,7 @@ declare module "obsidian" {
          * Triggers when the user opens a context menu on a connection in the canvas
          */
         on(
-            name: "canvas:edge-menu",
+            name: 'canvas:edge-menu',
             callback: (menu: Menu, connection: CanvasConnection) => void,
             ctx?: unknown
         ): EventRef;
@@ -178,7 +178,7 @@ declare module "obsidian" {
          * Triggers when the user drops edge connection to empty space in the canvas
          */
         on(
-            name: "canvas:node-connection-drop-menu",
+            name: 'canvas:node-connection-drop-menu',
             callback: (menu: Menu, originalNode: CanvasNode, connection: CanvasConnection) => void,
             ctx?: unknown
         ): EventRef;
@@ -186,33 +186,33 @@ declare module "obsidian" {
          * Triggers when the user opens a context menu on a selection of multiple nodes in the canvas
          */
         on(
-            name: "canvas:selection-menu",
+            name: 'canvas:selection-menu',
             callback: (menu: Menu, canvasView: CanvasView) => void,
             ctx?: unknown
         ): EventRef;
         /**
          * Triggers when the editor selection changes.
          *
-         * @param name - "editor-selection-change"
+         * @param name - 'editor-selection-change'
          * @param callback - Callback function
          * @param ctx - Context
          * @returns Event reference
          */
         on(
-            name: "editor-selection-change",
+            name: 'editor-selection-change',
             callback: (editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
             ctx?: unknown
         ): EventRef;
         /**
          * Triggers when the markdown viewport menu is opened.
          *
-         * @param name - "markdown-viewport-menu"
+         * @param name - 'markdown-viewport-menu'
          * @param callback - Callback function
          * @param ctx - Context
          * @returns Event reference
          */
         on(
-            name: "markdown-viewport-menu",
+            name: 'markdown-viewport-menu',
             callback: (menu: Menu, view: MarkdownPreviewView, sectionName: string, menuItem: string) => unknown,
             ctx?: unknown
         ): EventRef;
@@ -220,62 +220,62 @@ declare module "obsidian" {
          * Triggers when user clicks on 'N results' button in search view
          */
         on(
-            name: "search:results-menu",
+            name: 'search:results-menu',
             callback: (menu: Menu, search: GlobalSearchLeaf) => void,
             ctx?: unknown
         ): EventRef;
         /**
          * Triggers when the browser history is updated.
          *
-         * @param name - "browser:update-history"
+         * @param name - 'browser:update-history'
          * @param callback - Callback function
          * @param ctx - Context
          * @returns Event reference
          */
-        on(name: "browser:update-history", callback: () => unknown, ctx?: unknown): EventRef;
+        on(name: 'browser:update-history', callback: () => unknown, ctx?: unknown): EventRef;
         /**
          * Triggers when the user opens a context menu on a single node in the canvas
          */
-        on(name: "canvas:node-menu", callback: (menu: Menu, node: CanvasNode) => void, ctx?: unknown): EventRef;
+        on(name: 'canvas:node-menu', callback: (menu: Menu, node: CanvasNode) => void, ctx?: unknown): EventRef;
         /**
          * @internal Triggers when user hovers over any note link element (file explorer, editor, ...)
          * @remark Used for preparing (Ctrl) hover previews
          */
-        on(name: "hover-link", callback: (event: HoverLinkEvent) => void, ctx?: unknown): EventRef;
+        on(name: 'hover-link', callback: (event: HoverLinkEvent) => void, ctx?: unknown): EventRef;
         /**
          * Triggers when workspace layout is loaded
          *
          * @remark Prefer usage of onLayoutReady instead
          */
-        on(name: "layout-ready", callback: () => void, ctx?: unknown): EventRef;
+        on(name: 'layout-ready', callback: () => void, ctx?: unknown): EventRef;
         /**
          * Triggers when the leaf menu is opened.
          *
-         * @param name - "leaf-menu"
+         * @param name - 'leaf-menu'
          * @param callback - Callback function
          * @param ctx - Context
          * @returns Event reference
          */
-        on(name: "leaf-menu", callback: (menu: Menu, leaf: WorkspaceLeaf) => unknown, ctx?: unknown): EventRef;
+        on(name: 'leaf-menu', callback: (menu: Menu, leaf: WorkspaceLeaf) => unknown, ctx?: unknown): EventRef;
         /**
          * Triggers when the markdown scroll event is fired.
          *
-         * @param name - "markdown-scroll"
+         * @param name - 'markdown-scroll'
          * @param callback - Callback function
          * @param ctx - Context
          * @returns Event reference
          */
-        on(name: "markdown-scroll", callback: (view: MarkdownScrollableEditView) => unknown, ctx?: unknown): EventRef;
+        on(name: 'markdown-scroll', callback: (view: MarkdownScrollableEditView) => unknown, ctx?: unknown): EventRef;
         /** @internal Called when user shares files on mobile */
-        on(name: "receive-files-menu", callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
+        on(name: 'receive-files-menu', callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
         /** @internal Called when user shares text on mobile */
-        on(name: "receive-text-menu", callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
+        on(name: 'receive-text-menu', callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
         /** @internal Triggers when user swipes open left/right sidebar */
-        on(name: "swipe", callback: (touchEvents: ObsidianTouchEvent[]) => void, ctx?: unknown): EventRef;
+        on(name: 'swipe', callback: (touchEvents: ObsidianTouchEvent[]) => void, ctx?: unknown): EventRef;
         /** @internal Called whenever user opens tab group menu (contains e.g. stacked tabs button) */
-        on(name: "tab-group-menu", callback: (tabMenu: Menu, tabsLeaf: WorkspaceTabs) => void, ctx?: unknown): EventRef;
+        on(name: 'tab-group-menu', callback: (tabMenu: Menu, tabsLeaf: WorkspaceTabs) => void, ctx?: unknown): EventRef;
         /** @internal Triggers when user right-clicks on external URL in editor */
-        on(name: "url-menu", callback: (menu: Menu, url: string) => void, ctx?: unknown): EventRef;
+        on(name: 'url-menu', callback: (menu: Menu, url: string) => void, ctx?: unknown): EventRef;
         /** @internal Handles drag event on leaf */
         onDragLeaf(e: DragEvent, leaf: WorkspaceLeaf): void;
         /** @internal Handles layout change and saves layout to disk */

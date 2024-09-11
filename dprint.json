@@ -4,7 +4,7 @@
         "indentWidth": 4,
         "useTabs": false,
         "semiColons": "prefer",
-        "quoteStyle": "alwaysDouble",
+        "quoteStyle": "alwaysSingle",
         "quoteProps": "preserve",
         "newLineKind": "crlf",
         "useBraces": "always",

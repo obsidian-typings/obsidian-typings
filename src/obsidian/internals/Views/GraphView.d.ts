@@ -1,4 +1,4 @@
-import type { ItemView } from "obsidian";
+import type { ItemView } from 'obsidian';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -7,7 +7,7 @@ export interface GraphView extends ItemView {
     /**
      * Get the current view type
      */
-    getViewType(): "graph";
+    getViewType(): 'graph';
     /**
      * Renders the graph
      */

@@ -1,7 +1,7 @@
 import type {
     SplitDirection,
     ViewState
-} from "obsidian";
+} from 'obsidian';
 
 /** @todo Documentation incomplete */
 /** @public */

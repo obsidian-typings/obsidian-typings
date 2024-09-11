@@ -1,6 +1,6 @@
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface TFolder extends TAbstractFile {
         /**
          * Gets the count of files in the folder.

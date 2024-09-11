@@ -1,7 +1,7 @@
 import type {
     View,
     WorkspaceLeaf
-} from "obsidian";
+} from 'obsidian';
 
 /** @public */
 export interface ViewRegistryViewByTypeRecord extends Record<string, (leaf: WorkspaceLeaf) => View> {}

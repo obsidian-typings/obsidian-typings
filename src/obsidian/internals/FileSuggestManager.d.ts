@@ -3,8 +3,8 @@ import type {
     BlockCache,
     SearchResult,
     TFile
-} from "obsidian";
-import type { Runnable } from "./Runnable.js";
+} from 'obsidian';
+import type { Runnable } from './Runnable.js';
 
 /** @public */
 export interface FileSuggestManager {
@@ -27,7 +27,7 @@ export interface FileSuggestManager {
     /**
      * Type of suggestions that should be provided
      */
-    mode: "file" | "heading" | "block" | "display" | string;
+    mode: 'file' | 'heading' | 'block' | 'display' | string;
     /**
      * Executor of the search
      */
@@ -63,7 +63,7 @@ export interface FileSuggestManager {
      */
     getHeadingSuggestions(runner: Runnable, file: TFile, text: string): Promise<SearchResult[]>;
     /** @internal Generate instructions for specific actions in suggestion manager (e.g. accept, select, ...) */
-    getInstructions(): [{ command: "string"; purpose: "string" }];
+    getInstructions(): [{ command: 'string'; purpose: 'string' }];
     /**
      * Get suggestions for current input text
      *

@@ -1,6 +1,6 @@
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     /** @todo Documentation incomplete */
     interface MarkdownRenderer extends MarkdownRenderChild, MarkdownPreviewEvents, HoverParent {
         get path(): unknown;

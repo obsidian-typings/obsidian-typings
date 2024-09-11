@@ -1,11 +1,11 @@
-import type { Extension } from "@codemirror/state";
-import type { ViewUpdate } from "@codemirror/view";
-import type { FoldInfo } from "../internals/FoldInfo.js";
-import type { MarkdownScrollableEditView } from "../internals/MarkdownScrollableEditView.js";
+import type { Extension } from '@codemirror/state';
+import type { ViewUpdate } from '@codemirror/view';
+import type { FoldInfo } from '../internals/FoldInfo.js';
+import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.js';
 
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface MarkdownEditView extends MarkdownSubView, HoverParent, MarkdownFileInfo, MarkdownScrollableEditView {
         /**
          * Frontmatter editor extension for the editor
@@ -14,7 +14,7 @@ declare module "obsidian" {
         /**
          * Editing mode of the editor
          */
-        type: "source";
+        type: 'source';
         /**
          * View the source view editor is attached to
          */
@@ -57,7 +57,7 @@ declare module "obsidian" {
          */
         highlightSearchMatches(
             ranges: EditorRange[],
-            style?: "is-flashing" | "obsidian-search-match-highlight",
+            style?: 'is-flashing' | 'obsidian-search-match-highlight',
             remove_previous?: boolean,
             range?: EditorSelection
         ): void;

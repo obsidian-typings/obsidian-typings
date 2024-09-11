@@ -1,9 +1,9 @@
 import type {
     App,
     KeymapInfo
-} from "obsidian";
-import type { HotkeyManagerCustomKeysRecord } from "./HotkeyManagerCustomKeysRecord.js";
-import type { HotkeyManagerDefaultKeysRecord } from "./HotkeyManagerDefaultKeysRecord.js";
+} from 'obsidian';
+import type { HotkeyManagerCustomKeysRecord } from './HotkeyManagerCustomKeysRecord.js';
+import type { HotkeyManagerDefaultKeysRecord } from './HotkeyManagerDefaultKeysRecord.js';
 
 /** @public */
 export interface HotkeyManager {

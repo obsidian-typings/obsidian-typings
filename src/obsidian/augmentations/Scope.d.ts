@@ -1,8 +1,8 @@
-import type { KeyScope } from "../internals/KeyScope.js";
+import type { KeyScope } from '../internals/KeyScope.js';
 
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface Scope {
         /** @internal - Callback to execute when scope is matched */
         cb: (() => boolean) | undefined;

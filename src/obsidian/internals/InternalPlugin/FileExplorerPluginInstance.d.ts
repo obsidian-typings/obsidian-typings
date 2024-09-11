@@ -1,8 +1,8 @@
 import type {
     TFile,
     TFolder
-} from "obsidian";
-import type { InternalPluginInstance } from "./InternalPluginInstance.js";
+} from 'obsidian';
+import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @todo Documentation incomplete */
 /** @public */

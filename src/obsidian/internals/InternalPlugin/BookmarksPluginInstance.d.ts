@@ -1,4 +1,4 @@
-import type { InternalPluginInstance } from "./InternalPluginInstance.js";
+import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @public */
 export interface BookmarksPluginInstance extends InternalPluginInstance {}

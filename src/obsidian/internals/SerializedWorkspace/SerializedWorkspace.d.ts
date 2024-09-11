@@ -1,7 +1,7 @@
-import type { LeafEntry } from "../LeafEntry.js";
+import type { LeafEntry } from '../LeafEntry.js';
 import type {
     SerializedWorkspaceLeftRibbonHiddenItemsRecord
-} from "./SerializedWorkspaceLeftRibbonHiddenItemsRecord.js";
+} from './SerializedWorkspaceLeftRibbonHiddenItemsRecord.js';
 
 /** @public */
 export interface SerializedWorkspace {

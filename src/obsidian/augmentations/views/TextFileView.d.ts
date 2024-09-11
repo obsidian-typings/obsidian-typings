@@ -1,6 +1,6 @@
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface TextFileView extends EditableFileView {
         /**
          * Whether current file is dirty (different from saved contents)
@@ -26,7 +26,7 @@ declare module "obsidian" {
         /** @todo Documentation incomplete */
         loadFileInternal(file: TFile, clear: boolean): Promise<unknown>;
         /**
-         * Is called when the vault has a "modify" event. Reloads the file if the view is currently not saving the file and the modified file is the file in this view.
+         * Is called when the vault has a 'modify' event. Reloads the file if the view is currently not saving the file and the modified file is the file in this view.
          * @param file The modified file
          */
         onModify(file: TFile): void;

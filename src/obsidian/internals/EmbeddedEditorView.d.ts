@@ -1,12 +1,12 @@
-import type { EditorState } from "@codemirror/state";
+import type { EditorState } from '@codemirror/state';
 import type {
     App,
     Component,
     HoverPopover,
     MarkdownPreviewView,
     TFile
-} from "obsidian";
-import type { IFramedMarkdownEditor } from "./IFramedMarkdownEditor.js";
+} from 'obsidian';
+import type { IFramedMarkdownEditor } from './IFramedMarkdownEditor.js';
 
 /** @public */
 export interface EmbeddedEditorView extends Component {
@@ -85,7 +85,7 @@ export interface EmbeddedEditorView extends Component {
     /**
      * Gets currently active mode (editMode returns 'source')
      */
-    getMode(): "source" | "preview";
+    getMode(): 'source' | 'preview';
     /**
      * On load of editor, show preview
      */

@@ -1,5 +1,5 @@
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface FuzzySuggestModal<T> extends SuggestModal<FuzzyMatch<T>> {}
 }

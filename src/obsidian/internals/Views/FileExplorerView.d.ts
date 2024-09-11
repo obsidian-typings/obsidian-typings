@@ -4,11 +4,11 @@ import type {
     TFile,
     TFolder,
     View
-} from "obsidian";
-import type { FileTreeItem } from "../FileTreeItem.js";
-import type { Tree } from "../Tree.js";
-import type { WeakMapWrapper } from "../WeakMapWrapper.js";
-import type { FileExplorerViewFileItemsRecord } from "./FileExplorerViewFileItemsRecord.js";
+} from 'obsidian';
+import type { FileTreeItem } from '../FileTreeItem.js';
+import type { Tree } from '../Tree.js';
+import type { WeakMapWrapper } from '../WeakMapWrapper.js';
+import type { FileExplorerViewFileItemsRecord } from './FileExplorerViewFileItemsRecord.js';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -45,7 +45,7 @@ export interface FileExplorerView extends View {
     /**
      * Get the current view type
      */
-    getViewType(): "file-explorer";
+    getViewType(): 'file-explorer';
     /**
      * Is called when a new file is created in vault. Updates the file tree
      * @param file - The new file
@@ -91,7 +91,7 @@ export interface FileExplorerView extends View {
      * @param location - The location where to create the file
      * @param newLeaf - Where to open the view for this file
      */
-    createAbstractFile(type: "file" | "folder", location: TFolder, newLeaf: PaneType | boolean): Promise<void>;
+    createAbstractFile(type: 'file' | 'folder', location: TFolder, newLeaf: PaneType | boolean): Promise<void>;
     /**
      * Is Executed after creating the file or folder and opens the view and/or starts the rename
      * @param file - The created file

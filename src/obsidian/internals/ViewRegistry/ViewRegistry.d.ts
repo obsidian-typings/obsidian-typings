@@ -3,9 +3,9 @@ import type {
     Events,
     View,
     WorkspaceLeaf
-} from "obsidian";
-import type { ViewRegistryTypeByExtensionRecord } from "./ViewRegistryTypeByExtensionRecord.js";
-import type { ViewRegistryViewByTypeRecord } from "./ViewRegistryViewByTypeRecord.js";
+} from 'obsidian';
+import type { ViewRegistryTypeByExtensionRecord } from './ViewRegistryTypeByExtensionRecord.js';
+import type { ViewRegistryViewByTypeRecord } from './ViewRegistryViewByTypeRecord.js';
 
 /** @public */
 export interface ViewRegistry extends Events {
@@ -35,15 +35,15 @@ export interface ViewRegistry extends Events {
     /**
      * Called when a view of type has been registered into the registry
      */
-    on(name: "view-registered", callback: (type: string) => void): EventRef;
+    on(name: 'view-registered', callback: (type: string) => void): EventRef;
     /**
      * Called when a view of type has been unregistered from the registry
      */
-    on(name: "view-unregistered", callback: (type: string) => void): EventRef;
+    on(name: 'view-unregistered', callback: (type: string) => void): EventRef;
     /**
      * Called when the file extensions mapping has been updated
      */
-    on(name: "extensions-updated", callback: () => void): EventRef;
+    on(name: 'extensions-updated', callback: () => void): EventRef;
     /**
      * Register a view type for a file extension
      *

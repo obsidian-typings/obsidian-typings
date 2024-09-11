@@ -1,11 +1,11 @@
-import type { LinkUpdateHandler } from "../internals/LinkUpdate/LinkUpdateHandler.js";
-import type { LinkUpdaters } from "../internals/LinkUpdate/LinkUpdaters.js";
-import type { PositionedReference } from "../internals/PositionedReference.js";
-import type { PromisedQueue } from "../internals/PromisedQueue.js";
+import type { LinkUpdateHandler } from '../internals/LinkUpdate/LinkUpdateHandler.js';
+import type { LinkUpdaters } from '../internals/LinkUpdate/LinkUpdaters.js';
+import type { PositionedReference } from '../internals/PositionedReference.js';
+import type { PromisedQueue } from '../internals/PromisedQueue.js';
 
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface FileManager {
         /**
          * Reference to App
@@ -35,9 +35,9 @@ declare module "obsidian" {
          * Create a new file in the vault at specified location
          *
          * @param location - Location to create the file in, defaults to root
-         * @param filename - Name of the file to create, defaults to "Untitled" (incremented if file already
+         * @param filename - Name of the file to create, defaults to 'Untitled' (incremented if file already
          *   exists)
-         * @param extension - Extension of the file to create, defaults to "md"
+         * @param extension - Extension of the file to create, defaults to 'md'
          * @param contents - Contents of the file to create, defaults to empty string
          */
         createNewFile(location: TFolder, filename: string, extension: string, contents: string): Promise<TFile>;

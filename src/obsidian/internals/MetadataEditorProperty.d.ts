@@ -1,11 +1,11 @@
 import type {
     App,
     Component
-} from "obsidian";
-import type { MetadataEditor } from "./MetadataEditor.js";
-import type { MetadataWidget } from "./MetadataWidget.js";
-import type { PropertyEntryData } from "./PropertyEntryData.js";
-import type { PropertyWidget } from "./PropertyWidget.js";
+} from 'obsidian';
+import type { MetadataEditor } from './MetadataEditor.js';
+import type { MetadataWidget } from './MetadataWidget.js';
+import type { PropertyEntryData } from './PropertyEntryData.js';
+import type { PropertyWidget } from './PropertyWidget.js';
 
 /** @public */
 export interface MetadataEditorProperty extends Component {
@@ -65,7 +65,7 @@ export interface MetadataEditorProperty extends Component {
     /**
      * Focus on the value input element
      */
-    focusValue(which?: "both" | "end" | "start"): void;
+    focusValue(which?: 'both' | 'end' | 'start'): void;
     /**
      * Reveal the property menu on click event
      */

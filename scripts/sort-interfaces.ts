@@ -8,16 +8,16 @@
  * PR's would be very welcome to improve this hot mess of a code
  */
 
-import { existsSync } from "node:fs";
+import { existsSync } from 'node:fs';
 import {
     lstat,
     readdir,
     rename
-} from "node:fs/promises";
+} from 'node:fs/promises';
 import {
     basename,
     extname
-} from "node:path";
+} from 'node:path';
 import {
     ClassDeclaration,
     ExportDeclaration,
@@ -33,7 +33,7 @@ import {
     RenameableNode,
     SourceFile,
     StatementedNode
-} from "ts-morph";
+} from 'ts-morph';
 
 interface Nameable {
     getName(): string | undefined;
@@ -43,23 +43,23 @@ async function main(): Promise<void> {
     // Get passed parameter
     const args = process.argv.slice(2);
     if (args.length === 0) {
-        console.error("Please provide a file to parse");
+        console.error('Please provide a file to parse');
         process.exit(1);
     }
 
     // Check if file exists
     if (!existsSync(args[0])) {
-        console.error("File does not exist");
+        console.error('File does not exist');
         process.exit(1);
     }
 
     // Check if file is a directory
     if ((await lstat(args[0])).isDirectory()) {
-        const files = (await readdir(args[0], { recursive: true, encoding: "utf-8" })).map(file =>
-            file.replace(/\\/g, "/")
+        const files = (await readdir(args[0], { recursive: true, encoding: 'utf-8' })).map(file =>
+            file.replace(/\\/g, '/')
         );
         for (const file of files) {
-            if (file.endsWith(".d.ts")) {
+            if (file.endsWith('.d.ts')) {
                 await parseFile(args[0] + file);
             }
         }
@@ -69,21 +69,21 @@ async function main(): Promise<void> {
 }
 
 function sortName(a: Nameable, b: Nameable): number {
-    return (a.getName() ?? "").localeCompare(b.getName() ?? "");
+    return (a.getName() ?? '').localeCompare(b.getName() ?? '');
 }
 
 function sortSpecifierName(a: ImportDeclaration | ExportDeclaration, b: ImportDeclaration | ExportDeclaration): number {
-    return (a.getModuleSpecifierValue() ?? "").localeCompare(b.getModuleSpecifierValue() ?? "");
+    return (a.getModuleSpecifierValue() ?? '').localeCompare(b.getModuleSpecifierValue() ?? '');
 }
 
 function sortStarExports(a: ExportDeclaration, b: ExportDeclaration): number {
-    return a.getText().includes("*") === b.getText().includes("*") ? 0 : a.getText().includes("*") ? -1 : 1;
+    return a.getText().includes('*') === b.getText().includes('*') ? 0 : a.getText().includes('*') ? -1 : 1;
 }
 
 function sortFilesystemSpecifier(a: ImportDeclaration, b: ImportDeclaration): number {
-    return a.getModuleSpecifierValue().startsWith("./") === b.getModuleSpecifierValue().startsWith("./")
+    return a.getModuleSpecifierValue().startsWith('./') === b.getModuleSpecifierValue().startsWith('./')
         ? 0
-        : a.getModuleSpecifierValue().startsWith("./")
+        : a.getModuleSpecifierValue().startsWith('./')
         ? 1
         : -1;
 }
@@ -130,7 +130,7 @@ function sortClassDeclaration(declaration: ClassDeclaration): void {
     declaration.set(structure);
 
     if (structure.methods!.length && structure.properties!.length) {
-        declaration.insertText(declaration.getMethods()[0].getStart(true), " \n");
+        declaration.insertText(declaration.getMethods()[0].getStart(true), ' \n');
     }
 }
 
@@ -141,7 +141,7 @@ function sortInterfaceDeclaration(declaration: InterfaceDeclaration): void {
     declaration.set(structure);
 
     if (structure.methods!.length && structure.properties!.length) {
-        declaration.insertText(declaration.getMethods()[0].getStart(true), " \n");
+        declaration.insertText(declaration.getMethods()[0].getStart(true), ' \n');
     }
 }
 
@@ -149,14 +149,14 @@ async function parseFile(file: string, output_file: string = file): Promise<void
     console.log(`Parsing file: ${file}`);
 
     const fileName = basename(file, getExtension(file));
-    if (fileName === "index") {
+    if (fileName === 'index') {
         return;
     }
 
     const project = new Project();
     const sourceFile = project.addSourceFileAtPath(file);
 
-    const newFile = project.createSourceFile(file === output_file ? "temp.ts" : output_file, "", {
+    const newFile = project.createSourceFile(file === output_file ? 'temp.ts' : output_file, '', {
         overwrite: true
     });
 
@@ -200,21 +200,21 @@ async function parseFile(file: string, output_file: string = file): Promise<void
     await newFile.save();
 
     if (file === output_file) {
-        await rename("temp.ts", file);
+        await rename('temp.ts', file);
     }
 }
 
 function fixImport(declaration: ImportDeclaration, file: string): ImportDeclaration {
     let moduleSpecifier = declaration.getModuleSpecifierValue();
-    if (!moduleSpecifier.startsWith(".")) {
+    if (!moduleSpecifier.startsWith('.')) {
         return declaration;
     }
 
     const fileExtension = getExtension(file);
-    const isDeclarationFile = fileExtension === ".d.ts";
+    const isDeclarationFile = fileExtension === '.d.ts';
 
     if (isDeclarationFile) {
-        moduleSpecifier = moduleSpecifier.replace("/(\.d)?\.ts$/", ".js");
+        moduleSpecifier = moduleSpecifier.replace('/(\.d)?\.ts$/', '.js');
     }
 
     if (declaration.getNamespaceImport()) {
@@ -227,16 +227,16 @@ function fixImport(declaration: ImportDeclaration, file: string): ImportDeclarat
     const moduleExt = getExtension(moduleSpecifier);
     const moduleFileName = basename(moduleSpecifier, moduleExt);
 
-    if (moduleFileName === "index") {
-        declaration.setModuleSpecifier(moduleSpecifier.replace("index.", "ERROR_INDEX_IS_NOT_ALLOWED."));
+    if (moduleFileName === 'index') {
+        declaration.setModuleSpecifier(moduleSpecifier.replace('index.', 'ERROR_INDEX_IS_NOT_ALLOWED.'));
     }
 
     return declaration;
 }
 
 function getExtension(file: string): string {
-    if (file.endsWith(".d.ts")) {
-        return ".d.ts";
+    if (file.endsWith('.d.ts')) {
+        return '.d.ts';
     }
 
     return extname(file);
@@ -248,7 +248,7 @@ function fixExport(declaration: ExportDeclaration, file: string): ExportDeclarat
     const isStarExport = declaration.isNamespaceExport();
 
     if (isStarExport) {
-        declaration.setModuleSpecifier("ERROR_STAR_EXPORT_IS_NOT_ALLOWED");
+        declaration.setModuleSpecifier('ERROR_STAR_EXPORT_IS_NOT_ALLOWED');
     } else {
         for (const namedExport of declaration.getNamedExports()) {
             namedExport.setName(fileName);
@@ -275,8 +275,8 @@ function addStatements(
         return addLeadingNewLine;
     }
 
-    const statements = (addLeadingNewLine ? "\n" : "")
-        + nodes.map(node => node.getText(true)).join(useNewLineBetweenNodes ? "\n\n" : "\n");
+    const statements = (addLeadingNewLine ? '\n' : '')
+        + nodes.map(node => node.getText(true)).join(useNewLineBetweenNodes ? '\n\n' : '\n');
     statementedNode.addStatements(statements);
     return false;
 }

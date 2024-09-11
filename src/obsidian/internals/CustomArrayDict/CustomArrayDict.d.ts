@@ -1,4 +1,4 @@
-import type { CustomArrayDictDataRecord } from "./CustomArrayDictDataRecord.js";
+import type { CustomArrayDictDataRecord } from './CustomArrayDictDataRecord.js';
 
 /** @todo Documentation incomplete */
 /** @public */

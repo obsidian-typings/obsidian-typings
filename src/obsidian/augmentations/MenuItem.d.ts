@@ -1,6 +1,6 @@
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface MenuItem {
         /**
          * The callback that is executed when the menu item is clicked
@@ -59,7 +59,7 @@ declare module "obsidian" {
         /**
          * Create a submenu on the menu item
          *
-         * @tutorial Creates the foldable menus with more options as seen when you right-click in the editor (e.g. "Insert", "Format", ...)
+         * @tutorial Creates the foldable menus with more options as seen when you right-click in the editor (e.g. 'Insert', 'Format', ...)
          */
         setSubmenu(): Menu;
         /**

@@ -1,11 +1,11 @@
-import type { EditorView } from "@codemirror/view";
-import type { BaseEditor } from "../internals/BaseEditor.js";
-import type { MarkdownScrollableEditView } from "../internals/MarkdownScrollableEditView.js";
-import type { SearchCursor } from "../internals/SearchCursor.js";
+import type { EditorView } from '@codemirror/view';
+import type { BaseEditor } from '../internals/BaseEditor.js';
+import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.js';
+import type { SearchCursor } from '../internals/SearchCursor.js';
 
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface Editor extends BaseEditor {
         /**
          * Linked Editor manager instance
@@ -27,7 +27,7 @@ declare module "obsidian" {
          */
         addHighlights(
             ranges: EditorRange[],
-            style: "is-flashing" | "obsidian-search-match-highlight",
+            style: 'is-flashing' | 'obsidian-search-match-highlight',
             remove_previous: boolean,
             range?: EditorSelection
         ): void;
@@ -98,7 +98,7 @@ declare module "obsidian" {
          * Applies specified markdown syntax to selected text or word under cursor
          */
         toggleMarkdownFormatting(
-            syntax: "bold" | "italic" | "strikethrough" | "highlight" | "code" | "math" | "comment"
+            syntax: 'bold' | 'italic' | 'strikethrough' | 'highlight' | 'code' | 'math' | 'comment'
         ): void;
     }
 }

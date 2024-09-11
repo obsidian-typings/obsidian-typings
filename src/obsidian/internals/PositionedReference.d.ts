@@ -1,7 +1,7 @@
 import type {
     Loc,
     Reference
-} from "obsidian";
+} from 'obsidian';
 
 /** @public */
 export interface PositionedReference extends Reference {

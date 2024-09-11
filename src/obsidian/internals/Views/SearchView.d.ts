@@ -1,4 +1,4 @@
-import type { View } from "obsidian";
+import type { View } from 'obsidian';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -32,7 +32,7 @@ export interface SearchView extends View {
     /**
      * Get the current view type
      */
-    getViewType(): "search";
+    getViewType(): 'search';
     /** @todo Documentation incomplete */
     onKeyArrowRightInFocus(event: KeyboardEvent): void;
     /** @todo Documentation incomplete */

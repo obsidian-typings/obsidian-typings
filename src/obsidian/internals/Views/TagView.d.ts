@@ -1,4 +1,4 @@
-import type { View } from "obsidian";
+import type { View } from 'obsidian';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -12,7 +12,7 @@ export interface TagView extends View {
     /**
      * Get the current view type
      */
-    getViewType(): "tag";
+    getViewType(): 'tag';
     /** @todo Documentation incomplete */
     setIsAllCollapsed(e: unknown): void;
     /** @todo Documentation incomplete */

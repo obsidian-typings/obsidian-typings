@@ -1,4 +1,4 @@
-import type { WorkspaceLeaf } from "obsidian";
+import type { WorkspaceLeaf } from 'obsidian';
 
 /** @todo Documentation incomplete */
 /** @public */

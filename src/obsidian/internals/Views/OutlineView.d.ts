@@ -2,8 +2,8 @@ import type {
     TFile,
     View,
     WorkspaceLeaf
-} from "obsidian";
-import type { InfoFileView } from "./InfoFileView.js";
+} from 'obsidian';
+import type { InfoFileView } from './InfoFileView.js';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -17,7 +17,7 @@ export interface OutlineView extends InfoFileView {
     /**
      * Get the current view type
      */
-    getViewType(): "outline";
+    getViewType(): 'outline';
     /** @todo Documentation incomplete */
     findActiveHeading(e: unknown): unknown | undefined;
     /** @todo Documentation incomplete */

@@ -1,5 +1,5 @@
-import type { MarkdownBaseView } from "./MarkdownBaseView.js";
-import type { TableCell } from "./TableCell.js";
+import type { MarkdownBaseView } from './MarkdownBaseView.js';
+import type { TableCell } from './TableCell.js';
 
 /** @todo Documentation incomplete */
 /** @public */

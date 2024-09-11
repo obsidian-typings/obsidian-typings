@@ -15,7 +15,7 @@ export interface Account {
     /**
      * The license available to the account
      */
-    license: "" | "insider";
+    license: '' | 'insider';
     /**
      * Profile name
      */

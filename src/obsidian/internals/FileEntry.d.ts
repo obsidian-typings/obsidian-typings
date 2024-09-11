@@ -21,5 +21,5 @@ export interface FileEntry {
     /**
      * Type of entry
      */
-    type: "file" | "folder";
+    type: 'file' | 'folder';
 }

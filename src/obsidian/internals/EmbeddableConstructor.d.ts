@@ -1,8 +1,8 @@
 import type {
     Component,
     TFile
-} from "obsidian";
-import type { EmbedContext } from "./EmbedContext.js";
+} from 'obsidian';
+import type { EmbedContext } from './EmbedContext.js';
 
 /** @todo Documentation incomplete */
 /** @public */

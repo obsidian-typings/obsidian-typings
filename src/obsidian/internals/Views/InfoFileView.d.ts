@@ -1,7 +1,7 @@
 import type {
     FileView,
     TFile
-} from "obsidian";
+} from 'obsidian';
 
 /**
  * @todo This is probably not the right term

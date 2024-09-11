@@ -1,6 +1,6 @@
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface SettingTab {
         /**
          * Unique ID of the tab

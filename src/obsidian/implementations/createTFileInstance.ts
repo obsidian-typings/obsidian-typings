@@ -1,9 +1,9 @@
 import {
     TFile,
     type Vault
-} from "obsidian";
-import { createTFolderInstance } from "./createTFolderInstance.ts";
-import { parentFolderPath } from "./PathUtils.ts";
+} from 'obsidian';
+import { createTFolderInstance } from './createTFolderInstance.ts';
+import { parentFolderPath } from './PathUtils.ts';
 
 type TFileConstructor = { new(vault: Vault, path: string): TFile };
 

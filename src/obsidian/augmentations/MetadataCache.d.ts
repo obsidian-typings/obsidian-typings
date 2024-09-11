@@ -1,14 +1,14 @@
-import type { CustomArrayDict } from "../internals/CustomArrayDict/CustomArrayDict.js";
-import type { FileCacheEntry } from "../internals/FileCacheEntry.js";
-import type { MetadataCacheFileCacheRecord } from "../internals/MetadataCacheRecords/MetadataCacheFileCacheRecord.js";
+import type { CustomArrayDict } from '../internals/CustomArrayDict/CustomArrayDict.js';
+import type { FileCacheEntry } from '../internals/FileCacheEntry.js';
+import type { MetadataCacheFileCacheRecord } from '../internals/MetadataCacheRecords/MetadataCacheFileCacheRecord.js';
 import type {
     MetadataCacheMetadataCacheRecord
-} from "../internals/MetadataCacheRecords/MetadataCacheMetadataCacheRecord.js";
-import type { PropertyInfo } from "../internals/PropertyInfo.js";
+} from '../internals/MetadataCacheRecords/MetadataCacheMetadataCacheRecord.js';
+import type { PropertyInfo } from '../internals/PropertyInfo.js';
 
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface MetadataCache extends Events {
         /**
          * Reference to App
@@ -111,13 +111,13 @@ declare module "obsidian" {
         /**
          * Called whenever the metadatacache has finished updating
          */
-        on(name: "finished", callback: () => void): EventRef;
+        on(name: 'finished', callback: () => void): EventRef;
         /**
          * Called whenever the metadatacache is fully loaded in
          *
          * @remark 'finished' is also emitted when the cache is initialized
          */
-        on(name: "initialized", callback: () => void): EventRef;
+        on(name: 'initialized', callback: () => void): EventRef;
         /** @internal Execute onCleanCache callbacks if cache is clean */
         onCleanCache(): void;
         /** @internal On creation of the cache: update metadata cache */

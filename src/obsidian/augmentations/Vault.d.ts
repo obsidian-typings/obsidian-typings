@@ -1,11 +1,11 @@
-import type { AppVaultConfig } from "../internals/AppVaultConfig/AppVaultConfig.js";
-import type { ConfigItem } from "../internals/ConfigItem.js";
-import type { FileSystemWatchHandler } from "../internals/FileSystemWatchHandler.js";
-import type { VaultFileMapRecord } from "../internals/VaultFileMapRecord.js";
+import type { AppVaultConfig } from '../internals/AppVaultConfig/AppVaultConfig.js';
+import type { ConfigItem } from '../internals/ConfigItem.js';
+import type { FileSystemWatchHandler } from '../internals/FileSystemWatchHandler.js';
+import type { VaultFileMapRecord } from '../internals/VaultFileMapRecord.js';
 
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     interface Vault extends Events {
         /**
          * Low-level file system adapter for read and write operations
@@ -82,9 +82,9 @@ declare module "obsidian" {
          *
          * @remark Does *not* trigger when a particular plugin's settings are changed, for that, you could monkey-patch the `saveSettings` method of a plugin instance
          */
-        on(name: "config-changed", callback: () => void, ctx?: unknown): EventRef;
+        on(name: 'config-changed', callback: () => void, ctx?: unknown): EventRef;
         /** @internal Triggered whenever a file gets loaded internally */
-        on(name: "raw", callback: (path: string) => void, ctx?: unknown): EventRef;
+        on(name: 'raw', callback: (path: string) => void, ctx?: unknown): EventRef;
         /**
          * Read a config file from the vault and parse it as JSON
          *

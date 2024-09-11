@@ -1,7 +1,7 @@
 import type {
     EditorSuggest,
     SearchResult
-} from "obsidian";
+} from 'obsidian';
 
 /** @public */
 export interface SuggestionContainer<T> {

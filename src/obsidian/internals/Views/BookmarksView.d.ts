@@ -1,7 +1,7 @@
 import type {
     ItemView,
     TFile
-} from "obsidian";
+} from 'obsidian';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -21,7 +21,7 @@ export interface BookmarksView extends ItemView {
     /**
      * Get the current view type
      */
-    getViewType(): "bookmarks";
+    getViewType(): 'bookmarks';
     /** @todo Documentation incomplete */
     isItem(item: unknown): boolean;
     /**

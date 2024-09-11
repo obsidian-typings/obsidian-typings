@@ -1,7 +1,7 @@
 import type {
     App,
     Scope
-} from "obsidian";
+} from 'obsidian';
 
 /** @public */
 export interface AbstractSearchComponent {

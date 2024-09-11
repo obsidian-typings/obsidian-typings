@@ -1,8 +1,8 @@
-import type { ReadViewRenderer } from "../internals/ReadViewRenderer.js";
+import type { ReadViewRenderer } from '../internals/ReadViewRenderer.js';
 
 export {};
 
-declare module "obsidian" {
+declare module 'obsidian' {
     /** @todo Documentation incomplete */
     interface MarkdownPreviewView extends MarkdownRenderer, MarkdownSubView, MarkdownPreviewEvents {
         /**
@@ -14,7 +14,7 @@ declare module "obsidian" {
          */
         renderer: ReadViewRenderer;
         search: null | unknown;
-        type: "preview" | string;
+        type: 'preview' | string;
         view: MarkdownView;
 
         applyFoldInfo(e: unknown): unknown;

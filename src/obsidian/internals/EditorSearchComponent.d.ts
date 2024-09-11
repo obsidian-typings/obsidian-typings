@@ -1,9 +1,9 @@
 import type {
     Editor,
     EditorRange
-} from "obsidian";
-import type { AbstractSearchComponent } from "../internals/AbstractSearchComponent.js";
-import type { SearchCursor } from "../internals/SearchCursor.js";
+} from 'obsidian';
+import type { AbstractSearchComponent } from '../internals/AbstractSearchComponent.js';
+import type { SearchCursor } from '../internals/SearchCursor.js';
 
 /** @public */
 export interface EditorSearchComponent extends AbstractSearchComponent {
@@ -20,7 +20,7 @@ export interface EditorSearchComponent extends AbstractSearchComponent {
      */
     isActive: boolean;
     /**
-     * Whether search component is replacing text (includes "Replace" input field)
+     * Whether search component is replacing text (includes 'Replace' input field)
      */
     isReplace: boolean;
 

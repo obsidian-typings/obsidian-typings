@@ -1,4 +1,4 @@
-import type { ItemView } from "obsidian";
+import type { ItemView } from 'obsidian';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -6,7 +6,7 @@ export interface ReleaseNotesView extends ItemView {
     /**
      * Get the current view type
      */
-    getViewType(): "release-notes";
+    getViewType(): 'release-notes';
     /**
      * Get the release notes from GitHub
      * @param version - The version of the release notes

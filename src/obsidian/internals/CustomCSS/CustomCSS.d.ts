@@ -1,10 +1,10 @@
 import type {
     App,
     Component
-} from "obsidian";
-import type { ThemeManifest } from "../ThemeManifest.js";
-import type { CustomCSSThemesRecord } from "./CustomCSSThemesRecord.js";
-import type { CustomCSSUpdatesRecord } from "./CustomCSSUpdatesRecord.js";
+} from 'obsidian';
+import type { ThemeManifest } from '../ThemeManifest.js';
+import type { CustomCSSThemesRecord } from './CustomCSSThemesRecord.js';
+import type { CustomCSSUpdatesRecord } from './CustomCSSUpdatesRecord.js';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -39,7 +39,7 @@ export interface CustomCSS extends Component {
      *
      * @remark is the default Obsidian theme
      */
-    theme: "" | string;
+    theme: '' | string;
     /**
      * Mapping of theme names to their manifest
      */

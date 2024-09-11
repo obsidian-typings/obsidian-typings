@@ -1,4 +1,4 @@
-import type { ItemView } from "obsidian";
+import type { ItemView } from 'obsidian';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -46,7 +46,7 @@ export interface AllPropertiesView extends ItemView {
     /**
      * Get the current view type
      */
-    getViewType(): "all-properties";
+    getViewType(): 'all-properties';
     /**
      * Updates the sort order and sort by it
      * @param order - The sort order

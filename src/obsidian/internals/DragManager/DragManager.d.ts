@@ -3,10 +3,10 @@ import type {
     TAbstractFile,
     TFile,
     TFolder
-} from "obsidian";
-import type { Draggable } from "./Draggable.js";
-import type { DragStartEvent } from "./DragStartEvent.js";
-import type { DropResult } from "./DropResult.js";
+} from 'obsidian';
+import type { Draggable } from './Draggable.js';
+import type { DragStartEvent } from './DragStartEvent.js';
+import type { DropResult } from './DropResult.js';
 
 /** @todo Documentation incomplete */
 /** @public */

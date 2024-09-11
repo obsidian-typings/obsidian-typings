@@ -1,7 +1,7 @@
 /** @todo Documentation incomplete */
 /** @public */
 export interface ObsidianTouchEvent {
-    direction: "x" | "y";
+    direction: 'x' | 'y';
     evt: TouchEvent;
     points: number;
     registerCallback: {
