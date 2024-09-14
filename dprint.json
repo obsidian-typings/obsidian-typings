@@ -6,7 +6,7 @@
         "semiColons": "prefer",
         "quoteStyle": "alwaysSingle",
         "quoteProps": "preserve",
-        "newLineKind": "crlf",
+        "newLineKind": "lf",
         "useBraces": "always",
         "bracePosition": "sameLineUnlessHanging",
         "singleBodyPosition": "maintain",
