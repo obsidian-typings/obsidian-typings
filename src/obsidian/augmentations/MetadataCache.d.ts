@@ -89,7 +89,7 @@ declare module 'obsidian' {
         /**
          * Get all links (resolved or unresolved) in the vault
          */
-        getLinkSuggestions(): { file: TFile | null; path: string }[];
+        getLinkSuggestions(): { file: TFile | null; path: string; alias?: string }[];
         /**
          * Get all tags within the vault and their usage count
          */
