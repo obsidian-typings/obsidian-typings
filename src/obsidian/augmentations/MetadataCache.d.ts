@@ -1,5 +1,6 @@
 import type { CustomArrayDict } from '../internals/CustomArrayDict/CustomArrayDict.js';
 import type { FileCacheEntry } from '../internals/FileCacheEntry.js';
+import type { LinkSuggestion } from '../internals/LinkSuggestion.js';
 import type { MetadataCacheFileCacheRecord } from '../internals/MetadataCacheRecords/MetadataCacheFileCacheRecord.js';
 import type {
     MetadataCacheMetadataCacheRecord
@@ -87,9 +88,10 @@ declare module 'obsidian' {
          */
         getLinks(): Record<string, Reference[]>;
         /**
-         * Get all links (resolved or unresolved) in the vault
+         * Get all links (resolved or unresolved) in the vault.
+         * If the note has multiple aliases, it will be returned multiple times for each alias.
          */
-        getLinkSuggestions(): { file: TFile | null; path: string }[];
+        getLinkSuggestions(): LinkSuggestion[];
         /**
          * Get all tags within the vault and their usage count
          */
