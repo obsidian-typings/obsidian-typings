@@ -92,7 +92,7 @@ Be aware that the typings currently only cover a subset of the full API: while m
     ```json
     {
         "compilerOptions": {
-            ...
+            "...": "...",
             "paths": {
                 "obsidian-typings/implementations": [
                     "./node_modules/obsidian-typings/dist/implementations.d.ts",
