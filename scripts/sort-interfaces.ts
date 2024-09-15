@@ -92,9 +92,12 @@ function sortMethodSignature(a: MethodDeclaration | MethodSignature, b: MethodDe
     return a.getText().localeCompare(b.getText());
 }
 
-async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<void> {
+async function sortModule(module: ModuleDeclaration, parentModule: ModuleDeclaration | SourceFile): Promise<void> {
     const variables = module.getVariableStatements()
         .sort((a, b) => sortName(a.getDeclarations()[0], b.getDeclarations()[0]));
+
+    const functions = module.getFunctions()
+        .sort((a, b) => a.getText().localeCompare(b.getText()));
 
     const typeDeclarations = module.getTypeAliases().sort(sortName);
     const interfaceDeclarations = [...module.getClasses(), ...module.getInterfaces()].sort(sortName);
@@ -108,7 +111,7 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<
         }
     }
 
-    const newModule = file.addModule({
+    const newModule = parentModule.addModule({
         name: module.getName(),
         declarationKind: module.getDeclarationKind(),
         hasDeclareKeyword: module.hasDeclareKeyword(),
@@ -117,8 +120,14 @@ async function sortModule(module: ModuleDeclaration, file: SourceFile): Promise<
 
     addStatements(newModule, variables, true, false);
     let addLeadingNewLine = variables.length > 0;
+    addStatements(newModule, functions, true, addLeadingNewLine);
     addLeadingNewLine = addStatements(newModule, typeDeclarations, true, addLeadingNewLine);
     addStatements(newModule, interfaceDeclarations, true, addLeadingNewLine);
+
+    const moduleDeclarations = module.getModules();
+    for (const submodule of moduleDeclarations) {
+        await sortModule(submodule, newModule);
+    }
 }
 
 function sortClassDeclaration(declaration: ClassDeclaration): void {
