@@ -30,7 +30,8 @@ interface someObject {
 }
 ```
 
-> [!NOTE] > `@internal` --- Method is _very likely_ not fully/correctly typed, and/or is not intended to be used by plugins.
+> [!NOTE]
+> `@internal` --- Method is _very likely_ not fully/correctly typed, and/or is not intended to be used by plugins.
 >
 > `@remark` --- Alternatives that should be used instead, or warnings about the function.
 >
