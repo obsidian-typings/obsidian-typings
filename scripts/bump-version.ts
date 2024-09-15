@@ -43,8 +43,8 @@ package_json.version = newVersion;
 package_lock_json.version = newVersion;
 package_lock_json.packages['']['version'] = newVersion;
 
-writeFileSync('package.json', JSON.stringify(package_json, null, 4).replace(/\n/g, '\r\n'));
-writeFileSync('package-lock.json', JSON.stringify(package_lock_json, null, 4).replace(/\n/g, '\r\n'));
+writeFileSync('package.json', JSON.stringify(package_json, null, 4) + '\n');
+writeFileSync('package-lock.json', JSON.stringify(package_lock_json, null, 4) + '\n');
 
 try {
     spawnSync('git', ['add', 'CHANGELOG.md', 'package.json', 'package-lock.json']);
