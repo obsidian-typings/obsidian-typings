@@ -15,7 +15,6 @@ import type { MobileToolbar } from '../internals/MobileToolbar.js';
 import type { ObsidianDOM } from '../internals/ObsidianDOM.js';
 import type { Plugins } from '../internals/Plugins/Plugins.js';
 import type { ShareReceiver } from '../internals/ShareReceiver.js';
-import type { ViewRegistry } from '../internals/ViewRegistry/ViewRegistry.js';
 
 export {};
 
