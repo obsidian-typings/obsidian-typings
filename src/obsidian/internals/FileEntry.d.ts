@@ -1,13 +1,7 @@
+import type { FileStats } from "obsidian";
+
 /** @public */
-export interface FileEntry {
-    /**
-     * Creation time (if file)
-     */
-    ctime?: number;
-    /**
-     * Modification time (if file)
-     */
-    mtime?: number;
+export interface FileEntry extends Partial<FileStats> {
     /**
      * Full path to file or folder
      *
@@ -15,11 +9,17 @@ export interface FileEntry {
      */
     realpath: string;
     /**
-     * Size in bytes (if file)
-     */
-    size?: number;
-    /**
      * Type of entry
      */
     type: 'file' | 'folder';
+
+    /**
+     * Name of file or folder
+     */
+    name?: string;
+
+    /**
+     * URI of file or folder
+     */
+    uri?: string;
 }
