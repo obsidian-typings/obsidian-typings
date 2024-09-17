@@ -10,8 +10,8 @@ declare module 'obsidian' {
         html: string;
         level: number;
         lineEnd: number;
-        lineStart: number
         lines: number;
+        lineStart: number;
         rendered: boolean;
         shown: boolean;
         used: boolean;

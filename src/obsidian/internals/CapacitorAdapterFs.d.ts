@@ -1,4 +1,4 @@
-import type { FileEntry } from "./FileEntry.js";
+import type { FileEntry } from './FileEntry.js';
 
 /** @public */
 export interface CapacitorAdapterFs {

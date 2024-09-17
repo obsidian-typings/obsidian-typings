@@ -2,7 +2,7 @@ import type { DataAdapterFilesRecord } from '../internals/DataAdapterRecords/Dat
 import type { FileSystemWatchHandler } from '../internals/FileSystemWatchHandler.js';
 import type { PromisedQueue } from '../internals/PromisedQueue.js';
 
-export { };
+export {};
 
 declare module 'obsidian' {
     /** @todo Documentation incomplete */
@@ -19,11 +19,11 @@ declare module 'obsidian' {
         handler: FileSystemWatchHandler | null;
         /** @internal */
         insensitive: boolean;
+        /** @internal */
+        promise: Promise<void>;
         /** @internal Triggers handler for vault events */
         trigger: FileSystemWatchHandler;
 
-        /** @internal */
-        promise: Promise<void>;
         /**
          * Get full path of file (OS path)
          *

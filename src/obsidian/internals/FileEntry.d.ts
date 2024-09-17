@@ -1,4 +1,4 @@
-import type { FileStats } from "obsidian";
+import type { FileStats } from 'obsidian';
 
 /** @public */
 export interface FileEntry extends Partial<FileStats> {

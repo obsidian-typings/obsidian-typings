@@ -1,10 +1,10 @@
 import type { IpcRenderer } from 'electron';
-import * as path from 'node:path';
 import * as fs from 'node:fs';
 import * as fsPromises from 'node:fs/promises';
+import * as path from 'node:path';
 import type { DataAdapterWatchersRecord } from '../internals/DataAdapterRecords/DataAdapterWatchersRecord.js';
 
-export { };
+export {};
 
 declare module 'obsidian' {
     interface FileSystemAdapter extends DataAdapter {
@@ -34,6 +34,7 @@ declare module 'obsidian' {
         watcher: unknown;
         /** @internal */
         watchers: DataAdapterWatchersRecord;
+
         /**
          * @param normalizedPath Path to file
          * @param options Data write options
