@@ -52,7 +52,7 @@ declare module 'obsidian' {
         getAvailablePathForAttachments(
             filename: string,
             extension: string,
-            file: TAbstractFile | null
+            file: TFile | null
         ): Promise<string>;
         /**
          * Get value from config by key
