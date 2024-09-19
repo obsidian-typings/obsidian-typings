@@ -22,7 +22,7 @@ export interface PropertyRenderContext {
     /**
      * Callback called on property value change
      */
-    onChange: () => void;
+    onChange: (value: unknown) => void;
     /**
      * Determine the source path of current context
      */
