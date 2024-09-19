@@ -21,6 +21,7 @@ export interface PropertyRenderContext {
     metadataEditor: MetadataEditor;
     /**
      * Callback called on property value change
+     * @remark This will not always run when it's value changes. e.g. Clicking the "x" button to delete a multi-text item
      */
     onChange: (value: unknown) => void;
     /**
