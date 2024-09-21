@@ -1,6 +1,6 @@
 {
     "name": "obsidian-typings",
-    "version": "2.2.1-beta.21",
+    "version": "2.2.1-beta.22",
     "description": "Extended type definitions for the Obsidian API (https://obsidian.md)",
     "main": "",
     "module": "",
