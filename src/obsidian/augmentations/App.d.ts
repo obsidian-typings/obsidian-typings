@@ -1,5 +1,6 @@
 import type { Account } from '../internals/Account.js';
 import type { AppMenuBarManager } from '../internals/AppMenuBarManager.js';
+import type { AppSetting } from '../internals/AppSetting.js';
 import type { Commands } from '../internals/Commands/Commands.js';
 import type { CustomCSS } from '../internals/CustomCSS/CustomCSS.js';
 import type { DragManager } from '../internals/DragManager/DragManager.js';
@@ -122,7 +123,7 @@ declare module 'obsidian' {
          * @tutorial Can be used to open the settings modal to a specific tab, extend the settings modal functionality, ...
          * @remark Do not use this to get settings values from other plugins, it is better to do this via `app.plugins.getPlugin(ID)?.settings` (check how the plugin stores its settings)
          */
-        setting: Setting;
+        setting: AppSetting;
         /** @internal */
         shareReceiver: ShareReceiver;
         /** @internal Status bar of the application */

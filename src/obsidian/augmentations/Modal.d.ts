@@ -14,11 +14,17 @@ declare module 'obsidian' {
         modalEl: HTMLElement;
         /** @internal Selection logic handler */
         selection: WindowSelection;
+        /** Whether the modal should animate */
+        shouldAnimate: boolean;
         /**
          * Reference to the global Window object
          */
         win: Window;
 
+        /** @internal Performed when animation is complete */
+        animateClose(): Promise<void>;
+        /** @internal Performed when animation is started */
+        animateOpen(): Promise<void>;
         /** @internal On escape key press close modal */
         onEscapeKey(): void;
         /** @internal On closing of the modal */
