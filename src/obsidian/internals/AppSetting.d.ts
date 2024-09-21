@@ -12,11 +12,11 @@ export interface AppSetting extends Modal {
     /**
      * Current active tab of the settings modal
      */
-    activeTab: SettingTab;
+    activeTab: SettingTab | null;
     /**
      * Closeable component for the active tab
      */
-    activeTabCloseable: CloseableComponent;
+    activeTabCloseable: CloseableComponent | null;
     /** @internal Container element containing the community plugins */
     communityPluginTabContainer: HTMLElement;
     /** @internal Container element containing the community plugins header */
