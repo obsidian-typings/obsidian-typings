@@ -123,15 +123,15 @@ declare module 'obsidian' {
         /** @internal Execute onCleanCache callbacks if cache is clean */
         onCleanCache(): void;
         /** @internal On creation of the cache: update metadata cache */
-        onCreate(file: TFile): void;
+        onCreate(file: TAbstractFile): void;
         /** @internal On creation or modification of the cache: update metadata cache */
-        onCreateOrModify(file: TFile): void;
+        onCreateOrModify(file: TAbstractFile): void;
         /** @internal On deletion of the cache: update metadata cache */
-        onDelete(file: TFile): void;
+        onDelete(file: TAbstractFile): void;
         /** @internal */
         onReceiveMessageFromWorker(e: unknown): void;
         /** @internal On rename of the cache: update metadata cache */
-        onRename(file: TFile, oldPath: string): void;
+        onRename(file: TAbstractFile, oldPath: string): void;
         /** @internal Check editor for unresolved links and mark these as unresolved */
         resolveLinks(editor: Element): void;
         /** @internal Update file cache entry and sync to indexedDB */
