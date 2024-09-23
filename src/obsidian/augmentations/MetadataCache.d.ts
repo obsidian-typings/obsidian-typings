@@ -1,5 +1,6 @@
 import type { CustomArrayDict } from '../internals/CustomArrayDict/CustomArrayDict.js';
 import type { FileCacheEntry } from '../internals/FileCacheEntry.js';
+import type { LinkResolverQueue } from '../internals/LinkResolverQueue/LinkResolverQueue.js';
 import type { LinkSuggestion } from '../internals/LinkSuggestion.js';
 import type { MetadataCacheFileCacheRecord } from '../internals/MetadataCacheRecords/MetadataCacheFileCacheRecord.js';
 import type {
@@ -26,7 +27,7 @@ declare module 'obsidian' {
         /** @internal Amount of tasks currently in progress */
         inProgressTaskCount: number;
         /** @internal */
-        linkResolverQueue: unknown;
+        linkResolverQueue: LinkResolverQueue | null;
         /** @internal File hash to metadata cache entry mapping */
         metadataCache: MetadataCacheMetadataCacheRecord;
         /** @internal Callbacks to execute on cache clean */
