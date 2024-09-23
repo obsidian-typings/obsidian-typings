@@ -59,7 +59,7 @@ declare module 'obsidian' {
         /** @internal */
         clear(): Promise<void>;
         /** @internal */
-        computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<void>;
+        computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<CachedMetadata | undefined>;
         /** @internal Remove all entries that contain deleted path */
         deletePath(path: string): void;
         /**
