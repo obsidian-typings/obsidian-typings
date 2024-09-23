@@ -6,6 +6,7 @@ import type { MetadataCacheFileCacheRecord } from '../internals/MetadataCacheRec
 import type {
     MetadataCacheMetadataCacheRecord
 } from '../internals/MetadataCacheRecords/MetadataCacheMetadataCacheRecord.js';
+import type { PromisedQueue } from '../internals/PromisedQueue.js';
 import type { PropertyInfo } from '../internals/PropertyInfo.js';
 
 export {};
@@ -32,13 +33,13 @@ declare module 'obsidian' {
         /** @internal File hash to metadata cache entry mapping */
         metadataCache: MetadataCacheMetadataCacheRecord;
         /** @internal Callbacks to execute on cache clean */
-        onCleanCacheCallbacks: unknown[];
+        onCleanCacheCallbacks: (() => void)[];
         /** @internal Mapping of filename to collection of files that share the same name */
         uniqueFileLookup: CustomArrayDict<TFile>;
         /** @internal */
-        userIgnoreFilterCache: unknown;
+        userIgnoreFilterCache: Record<string, boolean>;
         /** @internal */
-        userIgnoreFilters: unknown;
+        userIgnoreFilters: RegExp[] | null;
         /** @internal */
         userIgnoreFiltersString: string;
         /**
@@ -48,15 +49,15 @@ declare module 'obsidian' {
         /** @internal */
         worker: Worker;
         /** @internal */
-        workerResolve: unknown;
+        workerResolve: ((value: CachedMetadata | PromiseLike<CachedMetadata>) => void) | null;
         /** @internal */
-        workQueue: unknown;
+        workQueue: PromisedQueue;
 
         _getLinkpathDest(origin: string, path: string): TFile[];
         /** @internal Clear all caches to null values */
         cleanupDeletedCache(): void;
         /** @internal */
-        clear(): unknown;
+        clear(): Promise<void>;
         /** @internal */
         computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<void>;
         /** @internal Remove all entries that contain deleted path */
@@ -105,7 +106,7 @@ declare module 'obsidian' {
         /** @internal Check whether file can support metadata (by checking extension support) */
         isSupportedFile(file: TFile): boolean;
         /** @internal Check whether string is part of the user ignore filters */
-        isUserIgnored(filter: unknown): boolean;
+        isUserIgnored(path: string): boolean;
         /**
          * Iterate over all link references in the vault with callback
          */
@@ -123,7 +124,7 @@ declare module 'obsidian' {
          */
         on(name: 'initialized', callback: () => void): EventRef;
         /** @internal Execute onCleanCache callbacks if cache is clean */
-        onCleanCache(): void;
+        onCleanCache(onCleanCacheCallback: () => void): void;
         /** @internal On creation of the cache: update metadata cache */
         onCreate(file: TAbstractFile): void;
         /** @internal On creation or modification of the cache: update metadata cache */
@@ -131,7 +132,7 @@ declare module 'obsidian' {
         /** @internal On deletion of the cache: update metadata cache */
         onDelete(file: TAbstractFile): void;
         /** @internal */
-        onReceiveMessageFromWorker(e: unknown): void;
+        onReceiveMessageFromWorker(message: { data: CachedMetadata }): void;
         /** @internal On rename of the cache: update metadata cache */
         onRename(file: TAbstractFile, oldPath: string): void;
         /** @internal Check editor for unresolved links and mark these as unresolved */
