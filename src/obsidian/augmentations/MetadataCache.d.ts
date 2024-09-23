@@ -20,6 +20,7 @@ declare module 'obsidian' {
         blockCache: BlockCache;
         /** @internal IndexedDB database */
         db: IDBDatabase;
+        didFinish: Debouncer<[], void>;
         /** @internal File contents cache */
         fileCache: MetadataCacheFileCacheRecord;
         /** @internal Whether the cache is fully loaded */
@@ -57,7 +58,7 @@ declare module 'obsidian' {
         /** @internal */
         clear(): unknown;
         /** @internal */
-        computeMetadataAsync(e: unknown): Promise<unknown>;
+        computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<void>;
         /** @internal Remove all entries that contain deleted path */
         deletePath(path: string): void;
         /**
@@ -148,6 +149,6 @@ declare module 'obsidian' {
         /** @internal Bind actions to listeners on vault */
         watchVaultChanges(): void;
         /** @internal Send message to worker to update metadata cache */
-        work(cacheEntry: unknown): void;
+        work(arrayBuffer: ArrayBuffer): Promise<CachedMetadata>;
     }
 }
