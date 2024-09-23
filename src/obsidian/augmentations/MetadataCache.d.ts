@@ -136,7 +136,7 @@ declare module 'obsidian' {
         /** @internal On rename of the cache: update metadata cache */
         onRename(file: TAbstractFile, oldPath: string): void;
         /** @internal Check editor for unresolved links and mark these as unresolved */
-        resolveLinks(editor: Element): void;
+        resolveLinks(path: string): void;
         /** @internal Update file cache entry and sync to indexedDB */
         saveFileCache(path: string, entry: FileCacheEntry): void;
         /** @internal Update metadata cache entry and sync to indexedDB */
