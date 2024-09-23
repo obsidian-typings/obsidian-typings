@@ -58,6 +58,7 @@ async function main(): Promise<void> {
         const files = (await readdir(args[0], { recursive: true, encoding: 'utf-8' })).map(file =>
             file.replace(/\\/g, '/')
         );
+        files.sort((a, b) => a.localeCompare(b));
         for (const file of files) {
             if (file.endsWith('.d.ts')) {
                 await parseFile(args[0] + file);
