@@ -17,7 +17,7 @@ import {
 import {
     basename,
     extname
-} from 'node:path';
+} from 'node:path/posix';
 import {
     ClassDeclaration,
     ExportDeclaration,
