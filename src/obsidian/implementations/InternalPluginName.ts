@@ -20,7 +20,6 @@ export const InternalPluginName = {
     RandomNote: 'random-note',
     SlashCommand: 'slash-command',
     Slides: 'slides',
-    Starred: 'starred',
     Switcher: 'switcher',
     Sync: 'sync',
     TagPane: 'tag-pane',

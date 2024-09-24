@@ -20,7 +20,6 @@ import type { PublishPluginInstance } from './PublishPluginInstance.js';
 import type { RandomNotePluginInstance } from './RandomNotePluginInstance.js';
 import type { SlashCommandPluginInstance } from './SlashCommandPluginInstance.js';
 import type { SlidesPluginInstance } from './SlidesPluginInstance.js';
-import type { StarredPluginInstance } from './StarredPluginInstance.js';
 import type { SwitcherPluginInstance } from './SwitcherPluginInstance.js';
 import type { SyncPluginInstance } from './SyncPluginInstance.js';
 import type { TagPanePluginInstance } from './TagPanePluginInstance.js';
@@ -52,7 +51,6 @@ export type InternalPluginNameInstancesMapping = {
     [InternalPluginName.RandomNote]: RandomNotePluginInstance;
     [InternalPluginName.SlashCommand]: SlashCommandPluginInstance;
     [InternalPluginName.Slides]: SlidesPluginInstance;
-    [InternalPluginName.Starred]: StarredPluginInstance;
     [InternalPluginName.Switcher]: SwitcherPluginInstance;
     [InternalPluginName.Sync]: SyncPluginInstance;
     [InternalPluginName.TagPane]: TagPanePluginInstance;
