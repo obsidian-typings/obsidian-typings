@@ -6,6 +6,7 @@ import type { InternalPlugin } from './InternalPlugin.js';
 import type { InternalPluginNameInstancesMapping } from './InternalPluginNameInstancesMapping.js';
 import type { InternalPluginNameType } from './InternalPluginNameType.js';
 import type { InternalPluginsConfigRecord } from './InternalPluginsConfigRecord.js';
+import type { InternalPluginNamePluginsMapping } from './InternalPluginNamePluginsMapping.js';
 
 /** @public */
 export interface InternalPlugins extends Events {
@@ -25,9 +26,7 @@ export interface InternalPlugins extends Events {
      * @remark Prefer usage of getPluginById to access a plugin
      */
     plugins: {
-        [ID in InternalPluginNameType]: InternalPlugin<
-            InternalPluginNameInstancesMapping[ID]
-        >;
+        [ID in InternalPluginNameType]: InternalPluginNamePluginsMapping[ID];
     };
 
     /** @internal - Load plugin configs and enable plugins */
@@ -51,7 +50,7 @@ export interface InternalPlugins extends Events {
      */
     getPluginById<ID extends InternalPluginNameType>(
         id: ID
-    ): InternalPlugin<InternalPluginNameInstancesMapping[ID]> | null;
+    ): InternalPluginNamePluginsMapping[ID] | null;
     /** @internal */
     loadPlugin(arg: { id: string; name: string }): string;
     /** @internal */

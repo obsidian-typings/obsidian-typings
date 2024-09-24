@@ -1,3 +1,5 @@
+import type { Plugin } from 'obsidian';
+import type { App } from 'obsidian';
 import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @todo Documentation incomplete */

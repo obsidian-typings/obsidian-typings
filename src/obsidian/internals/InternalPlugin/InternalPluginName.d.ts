@@ -21,7 +21,6 @@ export declare const InternalPluginName: {
     readonly RandomNote: 'random-note';
     readonly SlashCommand: 'slash-command';
     readonly Slides: 'slides';
-    readonly Starred: 'starred';
     readonly Switcher: 'switcher';
     readonly Sync: 'sync';
     readonly TagPane: 'tag-pane';
