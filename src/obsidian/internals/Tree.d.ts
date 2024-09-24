@@ -25,10 +25,6 @@ export interface Tree<T> {
      */
     focusedItem: TreeNode<T> | null;
     /**
-     * Gets the ID of a tree item given its Node
-     */
-    getNodeId: (node: TreeNode<T>) => string | undefined;
-    /**
      * Handle collapsing of all nodes
      */
     handleCollapseAll: () => void;
@@ -91,6 +87,10 @@ export interface Tree<T> {
      * Get the local storage key for the saved tree view folds
      */
     getFoldKey(): string;
+    /**
+     * Gets the ID of a tree item given its Node
+     */
+    getNodeId(node: TreeNode<T>): string | undefined;
     /**
      * Handle selection of tree item via keyboard event
      */

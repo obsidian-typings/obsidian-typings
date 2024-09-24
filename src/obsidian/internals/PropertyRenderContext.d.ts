@@ -20,11 +20,12 @@ export interface PropertyRenderContext {
      */
     metadataEditor: MetadataEditor;
     /**
-     * Callback called on property value change
-     */
-    onChange: (value: unknown) => void;
-    /**
      * Determine the source path of current context
      */
     sourcePath: string;
+
+    /**
+     * Callback called on property value change
+     */
+    onChange(value: unknown): void;
 }

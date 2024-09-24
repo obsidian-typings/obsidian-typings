@@ -11,12 +11,12 @@ import type { VimEditor } from './VimEditor.js';
 export interface CodeMirrorAdapter2 {
     new(cm6: VimEditor): CodeMirrorEditor;
     commands: {
-        cursorCharLeft: (editor: CodeMirrorEditor) => void;
-        redo: (editor: CodeMirrorEditor) => void;
-        undo: (editor: CodeMirrorEditor) => void;
-        newlineAndIndent: (editor: CodeMirrorEditor) => void;
-        newlineAndIndentBefore: (editor: CodeMirrorEditor) => void;
-        indentAuto: (editor: CodeMirrorEditor) => void;
+        cursorCharLeft(editor: CodeMirrorEditor): void;
+        redo(editor: CodeMirrorEditor): void;
+        undo(editor: CodeMirrorEditor): void;
+        newlineAndIndent(editor: CodeMirrorEditor): void;
+        newlineAndIndentBefore(editor: CodeMirrorEditor): void;
+        indentAuto(editor: CodeMirrorEditor): void;
     };
     isMac: boolean;
     keyMap: Record<string, unknown>;
