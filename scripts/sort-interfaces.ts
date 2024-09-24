@@ -93,7 +93,7 @@ function sortMethodSignature(a: MethodDeclaration | MethodSignature, b: MethodDe
     return a.getText().localeCompare(b.getText());
 }
 
-async function sortModule(module: ModuleDeclaration, parentModule: ModuleDeclaration | SourceFile): Promise<void> {
+async function sortModule(module: ModuleDeclaration | SourceFile, parentModule: ModuleDeclaration | SourceFile, addLeadingNewLine: boolean): Promise<void> {
     const variables = module.getVariableStatements()
         .sort((a, b) => sortName(a.getDeclarations()[0], b.getDeclarations()[0]));
 
@@ -112,22 +112,21 @@ async function sortModule(module: ModuleDeclaration, parentModule: ModuleDeclara
         }
     }
 
-    const newModule = parentModule.addModule({
+    const newModule = module instanceof ModuleDeclaration ? parentModule.addModule({
         name: module.getName(),
         declarationKind: module.getDeclarationKind(),
         hasDeclareKeyword: module.hasDeclareKeyword(),
         docs: module.getJsDocs().map((getJsDoc) => getJsDoc.getStructure())
-    });
+    }) : parentModule;
 
-    addStatements(newModule, variables, true, false);
-    let addLeadingNewLine = variables.length > 0;
+    addLeadingNewLine = addStatements(newModule, variables, true, addLeadingNewLine);
     addStatements(newModule, functions, true, addLeadingNewLine);
     addLeadingNewLine = addStatements(newModule, typeDeclarations, true, addLeadingNewLine);
     addStatements(newModule, interfaceDeclarations, true, addLeadingNewLine);
 
     const moduleDeclarations = module.getModules();
     for (const submodule of moduleDeclarations) {
-        await sortModule(submodule, newModule);
+        await sortModule(submodule, newModule, false);
     }
 }
 
@@ -181,31 +180,7 @@ async function parseFile(file: string, output_file: string = file): Promise<void
     let addLeadingNewLine = imports.length > 0;
     addLeadingNewLine = addStatements(newFile, exports, false, addLeadingNewLine);
 
-    const types = sourceFile.getTypeAliases()
-        .map(type => renameIfExported(type, fileName))
-        .sort(sortName);
-    addLeadingNewLine = addStatements(newFile, types, true, addLeadingNewLine);
-
-    const variables = sourceFile.getVariableStatements()
-        .map(variable => {
-            for (const declaration of variable.getDeclarations()) {
-                renameIfExported(declaration, fileName);
-            }
-            return variable;
-        })
-        .sort((a, b) => sortName(a.getDeclarations()[0], b.getDeclarations()[0]));
-
-    addLeadingNewLine = addStatements(newFile, variables, true, addLeadingNewLine);
-
-    const interfaces = sourceFile.getInterfaces()
-        .filter(inter => !inter.isDefaultExport())
-        .map(inter => renameIfExported(inter, fileName))
-        .sort(sortName);
-    addStatements(newFile, interfaces, true, addLeadingNewLine);
-
-    for (const module of sourceFile.getModules()) {
-        await sortModule(module, newFile);
-    }
+    sortModule(sourceFile, newFile, addLeadingNewLine);
 
     await newFile.save();
 
