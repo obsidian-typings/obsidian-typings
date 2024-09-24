@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
-import type { InternalPluginInstance } from './InternalPluginInstance.js';
 import type { GraphPlugin } from './GraphPlugin.js';
+import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @public */
 export interface GraphPluginInstance extends InternalPluginInstance {

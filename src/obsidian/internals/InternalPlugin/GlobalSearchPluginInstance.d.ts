@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
-import type { InternalPluginInstance } from './InternalPluginInstance.js';
 import type { GlobalSearchPlugin } from './GlobalSearchPlugin.js';
+import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @todo Documentation incomplete */
 /** @public */

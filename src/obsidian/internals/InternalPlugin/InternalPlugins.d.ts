@@ -4,9 +4,9 @@ import type {
 } from 'obsidian';
 import type { InternalPlugin } from './InternalPlugin.js';
 import type { InternalPluginNameInstancesMapping } from './InternalPluginNameInstancesMapping.js';
+import type { InternalPluginNamePluginsMapping } from './InternalPluginNamePluginsMapping.js';
 import type { InternalPluginNameType } from './InternalPluginNameType.js';
 import type { InternalPluginsConfigRecord } from './InternalPluginsConfigRecord.js';
-import type { InternalPluginNamePluginsMapping } from './InternalPluginNamePluginsMapping.js';
 
 /** @public */
 export interface InternalPlugins extends Events {
