@@ -13,8 +13,8 @@ import type { DropResult } from './DropResult.js';
 export interface DragManager {
     actionEl: HTMLElement | null;
     app: App;
-    dragStart: DragStartEvent | null;
     draggable: Draggable | null;
+    dragStart: DragStartEvent | null;
     ghostEl: HTMLElement | null;
     hoverClass: string;
     hoverEl: HTMLElement | null;

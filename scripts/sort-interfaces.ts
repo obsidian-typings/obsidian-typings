@@ -93,7 +93,11 @@ function sortMethodSignature(a: MethodDeclaration | MethodSignature, b: MethodDe
     return a.getText().localeCompare(b.getText());
 }
 
-async function sortModule(module: ModuleDeclaration | SourceFile, parentModule: ModuleDeclaration | SourceFile, addLeadingNewLine: boolean): Promise<void> {
+async function sortModule(
+    module: ModuleDeclaration | SourceFile,
+    parentModule: ModuleDeclaration | SourceFile,
+    addLeadingNewLine: boolean
+): Promise<void> {
     const variables = module.getVariableStatements()
         .sort((a, b) => sortName(a.getDeclarations()[0], b.getDeclarations()[0]));
 
@@ -112,12 +116,14 @@ async function sortModule(module: ModuleDeclaration | SourceFile, parentModule: 
         }
     }
 
-    const newModule = module instanceof ModuleDeclaration ? parentModule.addModule({
-        name: module.getName(),
-        declarationKind: module.getDeclarationKind(),
-        hasDeclareKeyword: module.hasDeclareKeyword(),
-        docs: module.getJsDocs().map((getJsDoc) => getJsDoc.getStructure())
-    }) : parentModule;
+    const newModule = module instanceof ModuleDeclaration
+        ? parentModule.addModule({
+            name: module.getName(),
+            declarationKind: module.getDeclarationKind(),
+            hasDeclareKeyword: module.hasDeclareKeyword(),
+            docs: module.getJsDocs().map((getJsDoc) => getJsDoc.getStructure())
+        })
+        : parentModule;
 
     addLeadingNewLine = addStatements(newModule, variables, true, addLeadingNewLine);
     addStatements(newModule, functions, true, addLeadingNewLine);

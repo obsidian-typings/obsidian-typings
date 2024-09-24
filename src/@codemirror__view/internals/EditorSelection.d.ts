@@ -1,8 +1,6 @@
 import type { EditorPosition } from 'obsidian';
 
-/**
- * @public
- */
+/** @public */
 export interface EditorSelection {
     anchor: EditorPosition;
     head: EditorPosition;

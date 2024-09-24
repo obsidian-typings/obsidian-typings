@@ -1,9 +1,7 @@
 import type { App } from 'obsidian';
 import type { SharedFile } from './SharedFile.js';
 
-/**
- * @public
- */
+/** @public */
 export interface ShareReceiver {
     app: App;
 
@@ -13,26 +11,22 @@ export interface ShareReceiver {
      * @param files - Shared files
      */
     handleShareFiles(files: SharedFile[]): Promise<void>;
-
     /**
      * Handles shared text.
      *
      * @param text - Shared text
      */
     handleShareText(text: string): Promise<void>;
-
     /**
      * Imports shared files.
      *
      * @param files - Shared files
      */
     importFiles(files: SharedFile[]): Promise<void>;
-
     /**
      * Configures mobile native events to handle file and text sharing.
      */
     setupNative(): void;
-
     /**
      * Configures the workspace to handle file and text sharing.
      */

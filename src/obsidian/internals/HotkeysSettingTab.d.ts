@@ -6,5 +6,6 @@ import type {
 /** @public */
 export interface HotkeysSettingTab extends SettingTab {
     searchComponent: SearchComponent;
+
     updateHotkeyVisibility(): void;
 }

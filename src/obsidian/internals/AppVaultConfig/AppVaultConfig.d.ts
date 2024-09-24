@@ -170,7 +170,10 @@ export interface AppVaultConfig {
      * Editor \> Spellcheck
      */
     spellcheck?: false | boolean;
-    /** @deprecated Deprecated @todo */
+    /**
+     * @deprecated Deprecated
+     * @todo
+     */
     spellcheckDictionary?: [] | string[];
     /**
      * Editor \> Spellcheck languages

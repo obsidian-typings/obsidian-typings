@@ -2,14 +2,12 @@ import { ChangeDesc } from '@codemirror/state';
 import type { EditorPosition } from 'obsidian';
 import type { CodeMirrorEditor } from './CodeMirrorEditor.js';
 
-/**
- * @public
- */
+/** @public */
 export interface Bookmark {
+    assoc: number;
     cm: CodeMirrorEditor;
     id: number;
     offset: number;
-    assoc: number;
 
     clear(): void;
     find(): EditorPosition | null;

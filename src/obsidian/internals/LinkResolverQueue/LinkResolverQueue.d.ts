@@ -2,9 +2,7 @@ import type { TFile } from 'obsidian';
 import type { Runnable } from '../Runnable.js';
 import type { QueueItems } from './QueueItems.js';
 
-/**
- * @public
- */
+/** @public */
 export interface LinkResolverQueue {
     items: QueueItems<TFile | null>;
     promise: PromiseWithResolvers<TFile | null> | null;

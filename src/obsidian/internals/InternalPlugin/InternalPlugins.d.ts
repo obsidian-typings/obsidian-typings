@@ -36,9 +36,7 @@ export interface InternalPlugins extends Events {
      *
      * @param id - ID of the plugin to get
      */
-    getEnabledPluginById<ID extends InternalPluginNameType>(
-        id: ID
-    ): InternalPluginNameInstancesMapping[ID] | null;
+    getEnabledPluginById<ID extends InternalPluginNameType>(id: ID): InternalPluginNameInstancesMapping[ID] | null;
     /**
      * Get all enabled internal plugins
      */
@@ -48,9 +46,7 @@ export interface InternalPlugins extends Events {
      *
      * @param id - ID of the plugin to get
      */
-    getPluginById<ID extends InternalPluginNameType>(
-        id: ID
-    ): InternalPluginNamePluginsMapping[ID] | null;
+    getPluginById<ID extends InternalPluginNameType>(id: ID): InternalPluginNamePluginsMapping[ID] | null;
     /** @internal */
     loadPlugin(arg: { id: string; name: string }): string;
     /** @internal */

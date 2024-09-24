@@ -1,8 +1,6 @@
 import type { Events } from 'obsidian';
 
-/**
- * @public
- */
+/** @public */
 export interface EventsEntry {
     ctx: unknown;
     e: Events;

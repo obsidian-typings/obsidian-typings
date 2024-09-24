@@ -4,6 +4,6 @@ import type { ZkPrefixerPlugin } from './ZkPrefixerPlugin.js';
 
 /** @public */
 export interface ZkPrefixerPluginInstance extends InternalPluginInstance {
-    plugin: ZkPrefixerPlugin;
     app: App;
+    plugin: ZkPrefixerPlugin;
 }

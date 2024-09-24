@@ -3,9 +3,7 @@ import type {
     TFile
 } from 'obsidian';
 
-/**
- * @todo This is probably not the right term
- */
+/** @todo This is probably not the right term */
 /** @public */
 export interface InfoFileView extends FileView {
     /**

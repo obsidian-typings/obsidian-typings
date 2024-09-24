@@ -1,7 +1,5 @@
-/**
- * @public
- */
+/** @public */
 export interface LineHandle {
-    row: number;
     index: number;
+    row: number;
 }

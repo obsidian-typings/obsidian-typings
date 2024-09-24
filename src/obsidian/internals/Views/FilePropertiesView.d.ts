@@ -8,34 +8,34 @@ export interface FilePropertiesView extends InfoFileView {
      * Returns the file
      */
     getFile(): TFile;
-    /** @todo Documentation incomplete */
-    shiftFocusAfter(): void;
-    /** @todo Documentation incomplete */
-    shiftFocusBefore(): void;
-    /** @todo Documentation incomplete */
-    saveFrontmatter(e: unknown): void;
+    /**
+     * Get the current view type
+     */
+    getViewType(): 'file-properties';
     /**
      * Checks the file is an markdown file
      * @param file - The file to check
      */
     isSupportedFile(file: TFile): boolean;
+    /** @todo Documentation incomplete */
+    onFileChange(file: TFile): Promise<unknown>;
+    /** @todo Documentation incomplete */
+    onQuickPreview(file: TFile, t: unknown): void;
     /**
      * Reads the file if it is supported
      * @param file - The file to read
      */
     readSupportedFile(file: TFile): Promise<unknown>;
     /** @todo Documentation incomplete */
-    onQuickPreview(file: TFile, t: unknown): void;
+    saveFrontmatter(e: unknown): void;
     /** @todo Documentation incomplete */
-    onFileChange(file: TFile): Promise<unknown>;
-    /**
-     * Get the current view type
-     */
-    getViewType(): 'file-properties';
+    shiftFocusAfter(): void;
     /** @todo Documentation incomplete */
-    updateFrontmatter(file: TFile, t: unknown): unknown;
+    shiftFocusBefore(): void;
+    /** @todo Documentation incomplete */
+    update(): void;
     /** @todo Documentation incomplete */
     updateEmptyState(): void;
     /** @todo Documentation incomplete */
-    update(): void;
+    updateFrontmatter(file: TFile, t: unknown): unknown;
 }

@@ -1,9 +1,7 @@
 import type { SQLError } from './SQLError.js';
 import type { SQLResultSet } from './SQLResultSet.js';
 
-/**
- * @public
- */
+/** @public */
 export interface SQLTransaction {
     executeSql(
         sqlStatement: string,

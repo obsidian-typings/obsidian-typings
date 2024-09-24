@@ -1,6 +1,4 @@
-/**
- * @public
- */
+/** @public */
 export interface SQLError {
     code: number;
     message: string;

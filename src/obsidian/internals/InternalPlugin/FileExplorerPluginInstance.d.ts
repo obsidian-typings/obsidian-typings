@@ -9,8 +9,8 @@ import type { InternalPluginInstance } from './InternalPluginInstance.js';
 /** @todo Documentation incomplete */
 /** @public */
 export interface FileExplorerPluginInstance extends InternalPluginInstance {
-    defaultOn: boolean;
     app: App;
+    defaultOn: boolean;
     plugin: FileExplorerPlugin;
 
     /**

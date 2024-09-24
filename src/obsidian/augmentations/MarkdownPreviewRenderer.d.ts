@@ -8,7 +8,6 @@ declare module 'obsidian' {
          * The currently registered code block post processors
          */
         export const codeBlockPostProcessors: Record<string, CodeBlockPostProcessorHandler>;
-
         /**
          * Remove the code block post processor currently registered with the given language
          *

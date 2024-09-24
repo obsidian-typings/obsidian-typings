@@ -3,6 +3,14 @@ import type { View } from 'obsidian';
 /** @todo Documentation incomplete */
 /** @public */
 export interface SearchView extends View {
+    /**
+     * Returns the value of the search element
+     */
+    getQuery(): string;
+    /**
+     * Get the current view type
+     */
+    getViewType(): 'search';
     /** @todo Documentation incomplete */
     onCopyResultsClick(event: MouseEvent): void;
     /** @todo Documentation incomplete */
@@ -10,9 +18,21 @@ export interface SearchView extends View {
     /** @todo Documentation incomplete */
     onKeyArrowLeftInFocus(event: KeyboardEvent): void;
     /** @todo Documentation incomplete */
+    onKeyArrowRightInFocus(event: KeyboardEvent): void;
+    /** @todo Documentation incomplete */
     onKeyArrowUpInFocus(event: KeyboardEvent): void;
     /** @todo Documentation incomplete */
     onKeyEnterInFocus(event: KeyboardEvent): void;
+    /** @todo Documentation incomplete */
+    onKeyShowMoreAfter(e: unknown): void;
+    /** @todo Documentation incomplete */
+    onKeyShowMoreBefore(e: unknown): void;
+    /**
+     * Called when the tap header is clicked. Brings this tab to the front
+     */
+    onTabHeaderClick(): void;
+    /** @todo Documentation incomplete */
+    renderSearchInfo(e: unknown, parentEl: HTMLElement): void;
     /**
      * Saves the current search string to the recent searches in Local Storage
      */
@@ -26,19 +46,10 @@ export interface SearchView extends View {
     /** @todo Documentation incomplete */
     setMatchingCase(e: unknown): void;
     /**
-     * Toggles the visibility of the filter section. Called if clicked on 'Search settings'
+     * Sets the value of the search element
+     * @param value - The search string
      */
-    toggleFilterSection(): void;
-    /**
-     * Get the current view type
-     */
-    getViewType(): 'search';
-    /** @todo Documentation incomplete */
-    onKeyArrowRightInFocus(event: KeyboardEvent): void;
-    /** @todo Documentation incomplete */
-    onKeyShowMoreBefore(e: unknown): void;
-    /** @todo Documentation incomplete */
-    onKeyShowMoreAfter(e: unknown): void;
+    setQuery(value: string): void;
     /** @todo Documentation incomplete */
     setSortOrder(sortOrder: unknown): void;
     /**
@@ -49,19 +60,8 @@ export interface SearchView extends View {
      * Stops the search and clears the results
      */
     stopSearch(): void;
-    /** @todo Documentation incomplete */
-    renderSearchInfo(e: unknown, parentEl: HTMLElement): void;
     /**
-     * Sets the value of the search element
-     * @param value - The search string
+     * Toggles the visibility of the filter section. Called if clicked on 'Search settings'
      */
-    setQuery(value: string): void;
-    /**
-     * Returns the value of the search element
-     */
-    getQuery(): string;
-    /**
-     * Called when the tap header is clicked. Brings this tab to the front
-     */
-    onTabHeaderClick(): void;
+    toggleFilterSection(): void;
 }

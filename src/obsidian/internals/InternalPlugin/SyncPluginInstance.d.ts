@@ -4,6 +4,6 @@ import type { SyncPlugin } from './SyncPlugin.js';
 
 /** @public */
 export interface SyncPluginInstance extends InternalPluginInstance {
-    plugin: SyncPlugin;
     app: App;
+    plugin: SyncPlugin;
 }

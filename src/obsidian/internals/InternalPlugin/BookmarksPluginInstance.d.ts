@@ -4,7 +4,7 @@ import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @public */
 export interface BookmarksPluginInstance extends InternalPluginInstance {
-    defaultOn: boolean;
     app: App;
+    defaultOn: boolean;
     plugin: BookmarksPlugin;
 }

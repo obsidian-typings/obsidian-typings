@@ -2,8 +2,8 @@ import type { FileEntry } from './FileEntry.js';
 
 /** @public */
 export interface CapacitorAdapterFs {
-    uri: string;
     dir: string | null;
+    uri: string;
 
     append(realPath: string, data: string): Promise<void>;
     copy(realPath: string, newRealPath: string): Promise<void>;

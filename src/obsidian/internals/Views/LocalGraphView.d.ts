@@ -14,11 +14,11 @@ export interface LocalGraphView extends InfoFileView {
      */
     onFileChanged(file: TFile): void;
     /**
-     * Renders the graph
-     */
-    update(): void;
-    /**
      * Updates the options from the plugin when changed in view
      */
     onOptionsChange(): void;
+    /**
+     * Renders the graph
+     */
+    update(): void;
 }

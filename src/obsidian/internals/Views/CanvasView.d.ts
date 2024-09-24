@@ -4,13 +4,13 @@ import type { TextFileView } from 'obsidian';
 /** @public */
 export interface CanvasView extends TextFileView {
     /**
-     * Get the current view type
-     */
-    getViewType(): 'canvas';
-    /**
      * Loads the local data of the canvas
      */
     getLocalData(): unknown;
+    /**
+     * Get the current view type
+     */
+    getViewType(): 'canvas';
     /**
      * Saves the local data of the canvas
      */

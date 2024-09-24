@@ -4,7 +4,7 @@ import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @public */
 export interface EditorStatusPluginInstance extends InternalPluginInstance {
-    defaultOn: boolean;
     app: App;
+    defaultOn: boolean;
     plugin: EditorStatusPlugin;
 }

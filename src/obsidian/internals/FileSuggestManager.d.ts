@@ -40,12 +40,7 @@ export interface FileSuggestManager {
     /**
      * Get suggestions for display alias query
      */
-    getDisplaySuggestions(
-        runner: Runnable,
-        linkpath: string,
-        subpath: string,
-        alias: string
-    ): Promise<SearchResult[]>;
+    getDisplaySuggestions(runner: Runnable, linkpath: string, subpath: string, alias: string): Promise<SearchResult[]>;
     /**
      * Get suggestions for file query
      */

@@ -4,7 +4,7 @@ import type { SwitcherPlugin } from './SwitcherPlugin.js';
 
 /** @public */
 export interface SwitcherPluginInstance extends InternalPluginInstance {
+    app: App;
     defaultOn: boolean;
     plugin: SwitcherPlugin;
-    app: App;
 }

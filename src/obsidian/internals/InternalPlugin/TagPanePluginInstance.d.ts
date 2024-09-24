@@ -4,7 +4,7 @@ import type { TagPanePlugin } from './TagPanePlugin.js';
 
 /** @public */
 export interface TagPanePluginInstance extends InternalPluginInstance {
+    app: App;
     defaultOn: boolean;
     plugin: TagPanePlugin;
-    app: App;
 }

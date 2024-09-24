@@ -1,10 +1,8 @@
-/**
- * @public
- */
+/** @public */
 export interface QueueItems<T> {
-    queue: T[];
-    offset: number;
     length: number;
+    offset: number;
+    queue: T[];
 
     clear(): void;
     dequeue(): T | undefined;

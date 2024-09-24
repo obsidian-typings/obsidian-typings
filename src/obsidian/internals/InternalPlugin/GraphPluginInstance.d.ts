@@ -4,7 +4,7 @@ import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @public */
 export interface GraphPluginInstance extends InternalPluginInstance {
+    app: App;
     defaultOn: boolean;
     plugin: GraphPlugin;
-    app: App;
 }

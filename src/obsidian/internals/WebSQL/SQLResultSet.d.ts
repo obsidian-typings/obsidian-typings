@@ -1,10 +1,8 @@
 import type { SQLResultSetRowList } from './SQLResultSetRowList.js';
 
-/**
- * @public
- */
+/** @public */
 export interface SQLResultSet {
     insertId: number;
-    rowsAffected: number;
     rows: SQLResultSetRowList;
+    rowsAffected: number;
 }
