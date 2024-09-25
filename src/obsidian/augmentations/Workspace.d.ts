@@ -167,6 +167,15 @@ declare module 'obsidian' {
         /** @internal Load workspace from disk and initialize */
         loadLayout(): Promise<void>;
         /**
+         * Triggers when the browser history is updated.
+         *
+         * @param name - 'browser:update-history'
+         * @param callback - Callback function
+         * @param ctx - Context
+         * @returns Event reference
+         */
+        on(name: 'browser:update-history', callback: () => unknown, ctx?: unknown): EventRef;
+        /**
          * Triggers when the user opens a context menu on a connection in the canvas
          */
         on(
@@ -182,6 +191,10 @@ declare module 'obsidian' {
             callback: (menu: Menu, originalNode: CanvasNode, connection: CanvasConnection) => void,
             ctx?: unknown
         ): EventRef;
+        /**
+         * Triggers when the user opens a context menu on a single node in the canvas
+         */
+        on(name: 'canvas:node-menu', callback: (menu: Menu, node: CanvasNode) => void, ctx?: unknown): EventRef;
         /**
          * Triggers when the user opens a context menu on a selection of multiple nodes in the canvas
          */
@@ -203,40 +216,6 @@ declare module 'obsidian' {
             callback: (editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
             ctx?: unknown
         ): EventRef;
-        /**
-         * Triggers when the markdown viewport menu is opened.
-         *
-         * @param name - 'markdown-viewport-menu'
-         * @param callback - Callback function
-         * @param ctx - Context
-         * @returns Event reference
-         */
-        on(
-            name: 'markdown-viewport-menu',
-            callback: (menu: Menu, view: MarkdownPreviewView, sectionName: string, menuItem: string) => unknown,
-            ctx?: unknown
-        ): EventRef;
-        /**
-         * Triggers when user clicks on 'N results' button in search view
-         */
-        on(
-            name: 'search:results-menu',
-            callback: (menu: Menu, search: GlobalSearchLeaf) => void,
-            ctx?: unknown
-        ): EventRef;
-        /**
-         * Triggers when the browser history is updated.
-         *
-         * @param name - 'browser:update-history'
-         * @param callback - Callback function
-         * @param ctx - Context
-         * @returns Event reference
-         */
-        on(name: 'browser:update-history', callback: () => unknown, ctx?: unknown): EventRef;
-        /**
-         * Triggers when the user opens a context menu on a single node in the canvas
-         */
-        on(name: 'canvas:node-menu', callback: (menu: Menu, node: CanvasNode) => void, ctx?: unknown): EventRef;
         /**
          * @internal Triggers when user hovers over any note link element (file explorer, editor, ...)
          * @remark Used for preparing (Ctrl) hover previews
@@ -266,10 +245,31 @@ declare module 'obsidian' {
          * @returns Event reference
          */
         on(name: 'markdown-scroll', callback: (view: MarkdownScrollableEditView) => unknown, ctx?: unknown): EventRef;
+        /**
+         * Triggers when the markdown viewport menu is opened.
+         *
+         * @param name - 'markdown-viewport-menu'
+         * @param callback - Callback function
+         * @param ctx - Context
+         * @returns Event reference
+         */
+        on(
+            name: 'markdown-viewport-menu',
+            callback: (menu: Menu, view: MarkdownPreviewView, sectionName: string, menuItem: string) => unknown,
+            ctx?: unknown
+        ): EventRef;
         /** @internal Called when user shares files on mobile */
         on(name: 'receive-files-menu', callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
         /** @internal Called when user shares text on mobile */
         on(name: 'receive-text-menu', callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
+        /**
+         * Triggers when user clicks on 'N results' button in search view
+         */
+        on(
+            name: 'search:results-menu',
+            callback: (menu: Menu, search: GlobalSearchLeaf) => void,
+            ctx?: unknown
+        ): EventRef;
         /** @internal Triggers when user swipes open left/right sidebar */
         on(name: 'swipe', callback: (touchEvents: ObsidianTouchEvent[]) => void, ctx?: unknown): EventRef;
         /** @internal Called whenever user opens tab group menu (contains e.g. stacked tabs button) */
