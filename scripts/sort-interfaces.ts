@@ -90,7 +90,7 @@ function sortFilesystemSpecifier(a: ImportDeclaration, b: ImportDeclaration): nu
 }
 
 function sortMethodSignature(a: MethodDeclaration | MethodSignature, b: MethodDeclaration | MethodSignature): number {
-    return a.getText().localeCompare(b.getText());
+    return a.getText().replace(/\s/g, '').localeCompare(b.getText().replace(/\s/g, ''));
 }
 
 async function sortModule(
