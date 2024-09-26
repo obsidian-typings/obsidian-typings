@@ -96,9 +96,9 @@ function generateTypes(obj: unknown, inferKnownRootType?: false): string {
         if (arr.length === 0) {
             return 'unknown[]';
         }
-        const arrayTypes = arr.map((item, index) => inferType(item, customTypes, true, `${path}[${index}]`, objectTypeMap));
-        const typesString = Array.from(new Set<string>(arrayTypes)).join(' | ');
-        return `(${typesString})[]`;
+        const arrayTypes = new Set(arr.map((item, index) => inferType(item, customTypes, true, `${path}[${index}]`, objectTypeMap)));
+        const typesString = Array.from(arrayTypes).join(' | ');
+        return arrayTypes.size > 1 ? `(${typesString})[]` : `${typesString}[]`;
     }
 
     function inferObjectType(obj: object, customTypes: string[], path: string, objectTypeMap: Map<object, string>): string {
