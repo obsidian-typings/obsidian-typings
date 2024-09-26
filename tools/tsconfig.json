@@ -1,0 +1,19 @@
+{
+    "extends": "@tsconfig/strictest/tsconfig.json",
+    "compilerOptions": {
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "importHelpers": true,
+        "inlineSourceMap": false,
+        "inlineSources": false,
+        "module": "Preserve",
+        "noEmit": false,
+        "target": "ESNext",
+        "skipLibCheck": true,
+        "verbatimModuleSyntax": true
+    },
+    "include": [
+        "./*.ts"
+    ]
+}
