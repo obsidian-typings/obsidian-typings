@@ -1,126 +1,126 @@
 "use strict";
 function generateTypes(obj, inferKnownRootType) {
-    const funcToTypeNameMap = new Map();
+    const builtInPrototypeNameMap = new Map();
     function main() {
         init();
-        const repeatedMap = new Map();
-        detectRepeatedReferences(obj, new WeakSet(), repeatedMap);
-        const type = inferType(obj, new WeakSet(), repeatedMap);
-        return `declare var root: ${type};`;
+        const customTypes = [];
+        const rootType = inferType(obj, customTypes);
+        return `declare const root: ${rootType};\n\n` + customTypes.join('\n\n');
     }
     function init() {
-        if (funcToTypeNameMap.size > 0) {
+        if (builtInPrototypeNameMap.size > 0) {
             return;
         }
         const obsidian = window.require('obsidian');
-        for (const [key, value] of allEntries(obsidian)) {
+        for (const [key, value] of entriesSafe(obsidian)) {
             if (typeof value === 'function') {
-                funcToTypeNameMap.set(value, key);
+                builtInPrototypeNameMap.set(value.prototype, key);
             }
         }
-        funcToTypeNameMap.set(window.constructor, 'Window');
-        funcToTypeNameMap.set(document.constructor, 'Document');
-        funcToTypeNameMap.set(Promise, 'Promise<unknown>');
+        builtInPrototypeNameMap.set(Window.prototype, 'Window');
+        builtInPrototypeNameMap.set(Document.prototype, 'Document');
+        builtInPrototypeNameMap.set(Promise.prototype, 'Promise<unknown>');
         for (const key of Object.getOwnPropertyNames(window).filter((key) => key.match(/HTML.+Element/))) {
-            const element = window[key];
-            funcToTypeNameMap.set(element, key);
+            const htmlElementClass = window[key];
+            builtInPrototypeNameMap.set(htmlElementClass.prototype, key);
         }
     }
-    function allEntries(obj) {
+    function sortedEntries(obj) {
+        return entriesSafe(obj).sort(([key1, value1], [key2, value2]) => (Number(typeof value1 === 'function') - Number(typeof value2 === 'function')) || key1.localeCompare(key2));
+    }
+    function entriesSafe(obj) {
         const record = obj;
-        const entries = [];
-        for (const key in record) {
-            if (key === 'constructor') {
-                continue;
+        return Object.getOwnPropertyNames(record).map((key) => {
+            try {
+                return [key, record[key]];
             }
-            entries.push([key, record[key]]);
-        }
-        return entries.sort(([key1, value1], [key2, value2]) => (Number(typeof value1 === 'function') - Number(typeof value2 === 'function')) || key1.localeCompare(key2));
+            catch (e) {
+                return [key, undefined];
+            }
+        });
     }
-    function getKnownTypeName(obj) {
+    function inferType(obj, customTypes, inArray = false, path = 'root', objectTypeMap = new Map()) {
+        console.debug(`Inferring path: ${path}`);
         if (obj === null) {
             return 'null';
         }
         if (obj === undefined) {
             return 'undefined';
         }
-        return funcToTypeNameMap.get(obj?.constructor);
-    }
-    function detectRepeatedReferences(obj, visited = new WeakSet(), repeatedMap = new Map(), path = 'root') {
-        console.debug(`Detecting path: ${path}`);
-        if ((getKnownTypeName(obj) && (path !== 'root' || !inferKnownRootType)) || obj === null) {
-            return;
-        }
-        if (typeof obj === 'object') {
-            if (visited.has(obj)) {
-                if (!repeatedMap.has(obj)) {
-                    const referenceName = `RepeatedReference${repeatedMap.size}`;
-                    repeatedMap.set(obj, referenceName);
-                }
-                return;
-            }
-            visited.add(obj);
-            if (Array.isArray(obj)) {
-                for (let i = 0; i < obj.length; i++) {
-                    detectRepeatedReferences(obj[i], visited, repeatedMap, `${path}[${i}]`);
-                }
-            }
-            else {
-                for (const [key, value] of allEntries(obj)) {
-                    detectRepeatedReferences(value, visited, repeatedMap, `${path}.${key}`);
-                }
-            }
-        }
-    }
-    function inferType(obj, visited = new WeakSet(), repeatedMap = new Map(), depth = 0, inArray = false, path = 'root') {
-        console.debug(`Inferring path: ${path}`);
-        const indent = '  '.repeat(depth);
-        const nestedIndent = '  '.repeat(depth + 1);
-        const knownTypeName = getKnownTypeName(obj);
-        if (knownTypeName && (path !== 'root' || !inferKnownRootType)) {
-            return knownTypeName;
-        }
         if (obj === null) {
             return 'null';
         }
+        let type = '';
         if (typeof obj === 'object') {
-            if (visited.has(obj)) {
-                const repeatedReferenceName = repeatedMap.get(obj) ?? 'RepeatedReferenceUnknown';
-                return `'${repeatedReferenceName}' /* TODO */`;
+            type = objectTypeMap.get(obj) ?? '';
+            if (type) {
+                return type;
             }
-            visited.add(obj);
             if (Array.isArray(obj)) {
-                if (obj.length === 0) {
-                    return 'unknown[]';
-                }
-                const arrayTypes = new Set(obj.map((item, index) => inferType(item, visited, repeatedMap, depth + 1, true, `${path}[${index}]`)));
-                const typesString = Array.from(arrayTypes).join(' | ');
-                return `(${typesString})[]`;
+                type = inferArrayType(obj, customTypes, path, objectTypeMap);
             }
             else {
-                const objectFields = allEntries(obj)
-                    .map(([key, value]) => {
-                    const formattedKey = isValidIdentifier(key) ? key : `'${key}'`;
-                    const inferredType = inferType(value, visited, repeatedMap, depth + 1, false, `${path}.${key}`);
-                    if (typeof value === 'function') {
-                        return `${nestedIndent}${formattedKey}${inferredType}`;
-                    }
-                    else {
-                        return `${nestedIndent}${formattedKey}: ${inferredType}`;
-                    }
-                })
-                    .join(';\n');
-                const repeatedReferenceComment = repeatedMap.has(obj)
-                    ? ` /* original ${repeatedMap.get(obj)} */`
-                    : '';
-                return `{\n${objectFields}\n${indent}}${repeatedReferenceComment}`;
+                type = inferObjectType(obj, customTypes, path, objectTypeMap);
             }
         }
         else if (typeof obj === 'function') {
-            return inferFunctionSignature(obj, path, inArray);
+            type = inferFunctionSignature(obj, path, inArray);
         }
         else {
             return typeof obj;
+        }
+        objectTypeMap.set(obj, type);
+        return type;
+    }
+    function inferArrayType(arr, customTypes, path, objectTypeMap) {
+        if (arr.length === 0) {
+            return 'unknown[]';
+        }
+        const arrayTypes = arr.map((item, index) => inferType(item, customTypes, true, `${path}[${index}]`, objectTypeMap));
+        const typesString = Array.from(new Set(arrayTypes)).join(' | ');
+        return `(${typesString})[]`;
+    }
+    function inferObjectType(obj, customTypes, path, objectTypeMap) {
+        if (obj === Object.prototype) {
+            return 'Object';
+        }
+        const proto = Object.getPrototypeOf(obj);
+        if (path !== 'root' || !inferKnownRootType) {
+            const builtInType = builtInPrototypeNameMap.get(proto);
+            if (builtInType) {
+                return builtInType;
+            }
+        }
+        const type = `Type${customTypes.length}`;
+        objectTypeMap.set(obj, type);
+        const newTypeIndex = customTypes.length;
+        customTypes.push('TODO');
+        const typeOfProto = inferType(proto, customTypes, false, `${path}.__proto__`, objectTypeMap);
+        const objectFieldsStr = sortedEntries(obj)
+            .map(([key, value]) => {
+            const formattedKey = isValidIdentifier(key) ? key : `'${key}'`;
+            const inferredType = inferType(value, customTypes, false, `${path}.${key}`, objectTypeMap);
+            if (typeof value === 'undefined') {
+                return `    ${formattedKey}?: unknown;`;
+            }
+            else if (typeof value === 'function') {
+                return `    ${formattedKey}${inferredType};`;
+            }
+            else {
+                return `    ${formattedKey}: ${inferredType};`;
+            }
+        })
+            .join('\n');
+        if (objectFieldsStr) {
+            const extendsStr = typeOfProto === 'Object' ? '' : ` extends ${typeOfProto}`;
+            const str = `interface ${type}${extendsStr} {\n${objectFieldsStr}\n}`;
+            customTypes[newTypeIndex] = str;
+            return type;
+        }
+        else {
+            objectTypeMap.set(obj, typeOfProto);
+            customTypes.splice(newTypeIndex, 1);
+            return typeOfProto;
         }
     }
     function inferFunctionSignature(fn, path = 'root', inArray = false) {
@@ -136,7 +136,7 @@ function generateTypes(obj, inferKnownRootType) {
         const paramList = params.length > 0
             ? params.map((param) => param.startsWith('...') ? `${param}: unknown[]` : `${param}: unknown`).join(', ')
             : '';
-        const isAsync = fnStr.includes(' v(this,void 0,');
+        const isAsync = fnStr.includes(' v(this,void 0,') || fnStr.includes('await ');
         const returnType = isAsync ? 'Promise<unknown>' : 'unknown';
         return inArray ? `(${paramList}) => ${returnType}` : `(${paramList}): ${returnType}`;
     }
