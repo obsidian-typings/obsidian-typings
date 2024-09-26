@@ -18,6 +18,7 @@
         "csscache",
         "datetime",
         "Debouncer",
+        "discoverability",
         "dompurify",
         "dprint",
         "dragevent",
