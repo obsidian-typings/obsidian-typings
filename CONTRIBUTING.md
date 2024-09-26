@@ -46,7 +46,7 @@ interface someObject {
 ### Finding/Discovering new typings
 
 The first step to add new typings, is finding the object/interface/module you want to add typings for within the Obsidian app.
-One of the easiest way to do this, is to open the developer console (Ctrl+Shift+I), and start searching for the interface you wish to
+One of the easiest way to do this, is to open the Obsidian DevTools Console (`Ctrl + Shift + I`), and start searching for the interface you wish to
 type from the `app.` object.
 
 If you want to, for example, add typings for the `InternalPlugins` object, you can type `app.internalPlugins` into the console,
@@ -81,6 +81,26 @@ To keep it simple, we first add `unknown` as type to every variable and method -
 (i.e. `app` will always be an instance of `App`).
 
 Next up, is the most tedious part of adding typings: finding the correct types for each of the methods and variables.
+
+### `generateTypes` helper
+
+We built a helper to simplify discoverability process. The generated types contain all the properties and functions that could be reached from the provided objects.
+
+Most of types, especially for function parameters would be marked as `unknown`, so you would still have to reverse engineer the logic to replace `unknown` with something meaningful, but it's a good starting point.
+
+In order to use the helper:
+
+1. Install [Fix Require Modules](https://obsidian.md/plugins?id=fix-require-modules) plugin. This is needed to be able to run `require('obsidian')` from the Obsidian DevTools Console.
+2. Copy the code from `https://github.com/Fevol/obsidian-typings/blob/main/tools/generateTypes.js`.
+3. Open Obsidian DevTools Console (`Ctrl + Shift + I`).
+4. Paste the copied code into your Obsidian DevTools Console.
+5. Invoke the function like `generateTypes(app.internalPlugins)`.
+
+The helper tries to detect all known `obsidian` types.
+
+If you invoke `generateTypes(app)` you will get just `declare var root: App;`.
+
+If you need to see detailed typings for the known type like `App`, invoke `generateTypes(app, true)`.
 
 ### Typing variables
 
@@ -241,3 +261,16 @@ function at(e, t, n) {
 
 You may want to pass the code through your favorite flavour of LLM or de-minifier to make the code at least somewhat understandable.
 Depending on whether you manage to decipher the code, you can now explicitly define the behavior and/or types of the method.
+
+### Async functions
+
+Reverse engineering the async functions is more challenging.
+
+In the `app.js`, you won't see many `async` functions. Most of them are converted to the equivalent state machine code.
+
+- If your function has `v(this, void 0,`, it's an async function.
+- If your function has `return [2]`, your function doesn't return anything and the return type of your function will be `Promise<void>`.
+- If your function has `return [2, someValue]`, your function returns `someValue` and the return type of your function will be `Promise<TypeOfSomeValue>`.
+- If your function has `return [4, someValue]`, it corresponds to `await someValue` and the awaited value is later retrieved as `n.sent()`.
+
+For more details how exactly it works, see [The `__generator` helper](https://github.com/microsoft/tslib/blob/main/docs/generator.md) documentation.
