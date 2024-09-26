@@ -91,7 +91,7 @@ Most of types, especially for function parameters would be marked as `unknown`, 
 In order to use the helper:
 
 1. Install [Fix Require Modules](https://obsidian.md/plugins?id=fix-require-modules) plugin. This is needed to be able to run `require('obsidian')` from the Obsidian DevTools Console.
-2. Copy the code from `https://github.com/Fevol/obsidian-typings/blob/main/tools/generateTypes.js`.
+2. Copy the code from [generateTypes.js](https://github.com/Fevol/obsidian-typings/blob/main/tools/generateTypes.js).
 3. Open Obsidian DevTools Console (`Ctrl + Shift + I`).
 4. Paste the copied code into your Obsidian DevTools Console.
 5. Invoke the function like `generateTypes(app.internalPlugins)`.
