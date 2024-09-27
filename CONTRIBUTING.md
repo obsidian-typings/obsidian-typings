@@ -96,11 +96,7 @@ In order to use the helper:
 4. Paste the copied code into your Obsidian DevTools Console.
 5. Invoke the function like `generateTypes(app.internalPlugins)`.
 
-The helper tries to detect all known `obsidian` types.
-
-If you invoke `generateTypes(app)` you will get just `declare var root: App;`.
-
-If you need to see detailed typings for the known type like `App`, invoke `generateTypes(app, true)`.
+The helper tries to detect all known `obsidian` types, so in the output you will see types like `App123`, meaning it's the most likely can be replaced with just `App` (from `obsidian` types), but the helper keeps inferring those type to ensure the typings are complete.
 
 ### Typing variables
 
