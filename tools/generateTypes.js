@@ -97,7 +97,8 @@ function generateTypes(obj) {
         const objectFieldsStr = sortedEntries(obj)
             .map(([key, value]) => {
             const formattedKey = isValidIdentifier(key) ? key : `'${key}'`;
-            const inferredType = inferType(value, customTypes, false, `${path}.${key}`, objectTypeMap);
+            const nextPath = isValidIdentifier(key) ? `${path}.${formattedKey}` : `${path}[${formattedKey}]`;
+            const inferredType = inferType(value, customTypes, false, nextPath, objectTypeMap);
             if (typeof value === 'undefined') {
                 return `    ${formattedKey}?: unknown;`;
             }
@@ -111,7 +112,7 @@ function generateTypes(obj) {
             .join('\n');
         if (objectFieldsStr) {
             const extendsStr = typeOfProto === 'Object' ? '' : ` extends ${typeOfProto}`;
-            const str = `interface ${type}${extendsStr} {\n${objectFieldsStr}\n}`;
+            const str = `// ${path}\ninterface ${type}${extendsStr} {\n${objectFieldsStr}\n}`;
             customTypes[newTypeIndex] = str;
             return type;
         }
@@ -124,19 +125,10 @@ function generateTypes(obj) {
     function inferFunctionSignature(fn, path = 'root', inArray = false) {
         console.debug(`Inferring function at path: ${path}`);
         const fnStr = fn.toString();
-        const paramsMatch = fnStr.match(/\(([^)]*)\)/);
-        const params = paramsMatch
-            ? (paramsMatch[1] ?? '')
-                .split(',')
-                .map((p) => p.trim())
-                .filter(Boolean)
-            : [];
-        const paramList = params.length > 0
-            ? params.map((param) => param.startsWith('...') ? `${param}: unknown[]` : `${param}: unknown`).join(', ')
-            : '';
+        const paramList = Array(fn.length).fill(0).map((_, i) => `arg${i + 1}: unknown`).join(', ');
         const isAsync = fnStr.includes(' v(this,void 0,') || fnStr.includes('await ');
         const returnType = isAsync ? 'Promise<unknown>' : 'unknown';
-        return inArray ? `(${paramList}) => ${returnType}` : `(${paramList}): ${returnType}`;
+        return inArray ? `((${paramList}) => ${returnType})` : `(${paramList}): ${returnType}`;
     }
     function isValidIdentifier(key) {
         return /^[A-Za-z_$][A-Za-z_$0-9]*$/.test(key);
