@@ -5,8 +5,8 @@ function generateTypes(obj) {
     function main() {
         init();
         const customTypes = [];
-        const rootType = inferType(obj, customTypes);
-        return `declare const root: ${rootType};\n\n` + customTypes.join('\n\n');
+        inferType(obj, customTypes);
+        return customTypes.join('\n\n');
     }
     function init() {
         if (builtInPrototypeNameMap.size > 0) {
