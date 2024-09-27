@@ -158,7 +158,7 @@ function generateTypes(obj: unknown): string {
         const paramList = Array(fn.length).fill(0).map((_, i) => `arg${i + 1}: unknown`).join(', ');
         const isAsync = fnStr.includes(' v(this,void 0,') || fnStr.includes('await ');
         const returnType = isAsync ? 'Promise<unknown>' : 'unknown';
-        return inArray ? `(${paramList}) => ${returnType}` : `(${paramList}): ${returnType}`;
+        return inArray ? `((${paramList}) => ${returnType})` : `(${paramList}): ${returnType}`;
     }
 
     function isValidIdentifier(key: string): boolean {
