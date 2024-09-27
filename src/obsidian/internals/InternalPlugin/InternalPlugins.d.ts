@@ -1,5 +1,6 @@
 import type {
     App,
+    Debouncer,
     Events
 } from 'obsidian';
 import type { InternalPlugin } from './InternalPlugin.js';
@@ -7,6 +8,7 @@ import type { InternalPluginNameInstancesMapping } from './InternalPluginNameIns
 import type { InternalPluginNamePluginsMapping } from './InternalPluginNamePluginsMapping.js';
 import type { InternalPluginNameType } from './InternalPluginNameType.js';
 import type { InternalPluginsConfigRecord } from './InternalPluginsConfigRecord.js';
+import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @public */
 export interface InternalPlugins extends Events {
@@ -18,8 +20,6 @@ export interface InternalPlugins extends Events {
      * Mapping of whether an internal plugin is enabled
      */
     config: InternalPluginsConfigRecord;
-    /** @internal */
-    migration: boolean;
     /**
      * Plugin configs for internal plugins
      *
@@ -48,11 +48,11 @@ export interface InternalPlugins extends Events {
      */
     getPluginById<ID extends InternalPluginNameType>(id: ID): InternalPluginNamePluginsMapping[ID] | null;
     /** @internal */
-    loadPlugin(arg: { id: string; name: string }): string;
+    loadPlugin(internalPluginInstance: InternalPluginInstance): InternalPluginInstance;
     /** @internal */
-    onRaw(cb1: unknown, cb2: unknown): void;
+    onRaw(configPath: string): void;
     /** @internal Request save of plugin configs */
-    requestSaveConfig(): void;
+    requestSaveConfig(): Debouncer<[], void>;
     /** @internal - Save current plugin configs */
     saveConfig(): Promise<void>;
 }
