@@ -3,8 +3,7 @@ import {
     type Vault
 } from 'obsidian';
 import { parentFolderPath } from './PathUtils.ts';
-
-type TFolderConstructor = { new(vault: Vault, path: string): TFolder };
+import { constructTFolder } from './Constructors/constructTFolder.ts';
 
 /**
  * Creates and properly initializes the instance of TFolder even the underlying folder does not exist.
@@ -16,7 +15,7 @@ export function createTFolderInstance(vault: Vault, path: string): TFolder {
         return folder;
     }
 
-    folder = new (TFolder as TFolderConstructor)(vault, path);
+    folder = constructTFolder(vault, path);
     folder.parent = createTFolderInstance(vault, parentFolderPath(path));
     folder.deleted = true;
     return folder;
