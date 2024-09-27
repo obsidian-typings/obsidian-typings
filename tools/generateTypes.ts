@@ -1,5 +1,6 @@
-function generateTypes(obj: unknown, inferKnownRootType?: false): string {
+function generateTypes(obj: unknown): string {
     const builtInPrototypeNameMap = new Map<object, string>();
+    const obsidianPrototypeNameMap = new Map<object, string>();
 
     function main(): string {
         init();
@@ -17,13 +18,14 @@ function generateTypes(obj: unknown, inferKnownRootType?: false): string {
 
         for (const [key, value] of entriesSafe(obsidian)) {
             if (typeof value === 'function') {
-                builtInPrototypeNameMap.set(value.prototype, key);
+                obsidianPrototypeNameMap.set(value.prototype, key);
             }
         }
 
-        builtInPrototypeNameMap.set(Window.prototype, 'Window');
-        builtInPrototypeNameMap.set(Document.prototype, 'Document');
+        builtInPrototypeNameMap.set(window, 'Window');
+        builtInPrototypeNameMap.set(document, 'Document');
         builtInPrototypeNameMap.set(Promise.prototype, 'Promise<unknown>');
+        builtInPrototypeNameMap.set(Object.prototype, 'Object');
 
         for (const key of Object.getOwnPropertyNames(window).filter((key) =>
             key.match(/HTML.+Element/)
@@ -102,20 +104,15 @@ function generateTypes(obj: unknown, inferKnownRootType?: false): string {
     }
 
     function inferObjectType(obj: object, customTypes: string[], path: string, objectTypeMap: Map<object, string>): string {
-        if (obj === Object.prototype) {
-            return 'Object';
+        const builtInType = builtInPrototypeNameMap.get(obj) ?? '';
+        if (builtInType) {
+            return builtInType;
         }
 
         const proto = Object.getPrototypeOf(obj);
 
-        if (path !== 'root' || !inferKnownRootType) {
-            const builtInType = builtInPrototypeNameMap.get(proto);
-            if (builtInType) {
-                return builtInType;
-            }
-        }
-
-        const type = `Type${customTypes.length}`;
+        const prefix = obsidianPrototypeNameMap.get(obj) ?? obsidianPrototypeNameMap.get(proto) ?? 'Type';
+        const type = `${prefix}${customTypes.length}`;
         objectTypeMap.set(obj, type);
         const newTypeIndex = customTypes.length
         customTypes.push('TODO');
