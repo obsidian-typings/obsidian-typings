@@ -155,19 +155,7 @@ function generateTypes(obj: unknown): string {
     function inferFunctionSignature(fn: Function, path = 'root', inArray = false): string {
         console.debug(`Inferring function at path: ${path}`);
         const fnStr = fn.toString();
-        const paramsMatch = fnStr.match(/\(([^)]*)\)/);
-        const params = paramsMatch
-            ? (paramsMatch[1] ?? '')
-                .split(',')
-                .map((p) => p.trim())
-                .filter(Boolean)
-            : [];
-
-        const paramList =
-            params.length > 0
-                ? params.map((param) => param.startsWith('...') ? `${param}: unknown[]` : `${param}: unknown`).join(', ')
-                : '';
-
+        const paramList = Array(fn.length).fill(0).map((_, i) => `arg${i + 1}: unknown`).join(', ');
         const isAsync = fnStr.includes(' v(this,void 0,') || fnStr.includes('await ');
         const returnType = isAsync ? 'Promise<unknown>' : 'unknown';
         return inArray ? `(${paramList}) => ${returnType}` : `(${paramList}): ${returnType}`;
