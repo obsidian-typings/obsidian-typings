@@ -121,11 +121,12 @@ function generateTypes(obj: unknown): string {
         const objectFieldsStr = sortedEntries(obj)
             .map(([key, value]) => {
                 const formattedKey = isValidIdentifier(key) ? key : `'${key}'`;
+                const nextPath = isValidIdentifier(key) ? `${path}.${formattedKey}` : `${path}[${formattedKey}]`;
                 const inferredType = inferType(
                     value,
                     customTypes,
                     false,
-                    `${path}.${key}`,
+                    nextPath,
                     objectTypeMap
                 );
 
@@ -141,7 +142,7 @@ function generateTypes(obj: unknown): string {
 
         if (objectFieldsStr) {
             const extendsStr = typeOfProto === 'Object' ? '' : ` extends ${typeOfProto}`;
-            const str = `interface ${type}${extendsStr} {\n${objectFieldsStr}\n}`;
+            const str = `// ${path}\ninterface ${type}${extendsStr} {\n${objectFieldsStr}\n}`;
             customTypes[newTypeIndex] = str;
             return type;
         } else {
