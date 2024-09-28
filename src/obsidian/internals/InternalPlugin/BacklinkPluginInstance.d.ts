@@ -3,7 +3,7 @@ import type { BacklinkPlugin } from './BacklinkPlugin.js';
 import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @public */
-export interface BacklinkPluginInstance extends InternalPluginInstance {
+export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkPlugin> {
     app: App;
     defaultOn: boolean;
     plugin: BacklinkPlugin;

@@ -3,7 +3,7 @@ import type { AudioRecorderPlugin } from './AudioRecorderPlugin.js';
 import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @public */
-export interface AudioRecorderPluginInstance extends InternalPluginInstance {
+export interface AudioRecorderPluginInstance extends InternalPluginInstance<AudioRecorderPlugin> {
     app: App;
     extension: string;
     plugin: AudioRecorderPlugin;

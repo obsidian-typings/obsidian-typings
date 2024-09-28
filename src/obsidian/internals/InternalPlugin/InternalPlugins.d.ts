@@ -40,7 +40,7 @@ export interface InternalPlugins extends Events {
     /**
      * Get all enabled internal plugins
      */
-    getEnabledPlugins(): InternalPlugin[];
+    getEnabledPlugins(): InternalPlugin<unknown>[];
     /**
      * Get an internal plugin by ID
      *
@@ -48,7 +48,7 @@ export interface InternalPlugins extends Events {
      */
     getPluginById<ID extends InternalPluginNameType>(id: ID): InternalPluginNamePluginsMapping[ID] | null;
     /** @internal */
-    loadPlugin(internalPluginInstance: InternalPluginInstance): InternalPluginInstance;
+    loadPlugin<Instance extends InternalPluginInstance<unknown>>(internalPluginInstance: Instance): Instance;
     /** @internal */
     onRaw(configPath: string): void;
     /** @internal Request save of plugin configs */

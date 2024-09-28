@@ -3,7 +3,7 @@ import type { CanvasPlugin } from './CanvasPlugin.js';
 import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @public */
-export interface CanvasPluginInstance extends InternalPluginInstance {
+export interface CanvasPluginInstance extends InternalPluginInstance<CanvasPlugin> {
     app: App;
     defaultOn: boolean;
     plugin: CanvasPlugin;

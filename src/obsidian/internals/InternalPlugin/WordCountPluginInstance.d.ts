@@ -3,7 +3,7 @@ import type { InternalPluginInstance } from './InternalPluginInstance.js';
 import type { WordCountPlugin } from './WordCountPlugin.js';
 
 /** @public */
-export interface WordCountPluginInstance extends InternalPluginInstance {
+export interface WordCountPluginInstance extends InternalPluginInstance<WordCountPlugin> {
     app: App;
     defaultOn: boolean;
     plugin: WordCountPlugin;
