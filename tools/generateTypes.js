@@ -8,7 +8,7 @@ function generateTypes(obj, maxDepth = 1) {
     const DEPTH_LIMIT_REACHED_TYPE_NAME = 'DepthLimitReached';
     function main() {
         init();
-        const customTypes = [];
+        const customTypes = new CustomTypes();
         inferType({
             obj,
             customTypes,
@@ -17,7 +17,34 @@ function generateTypes(obj, maxDepth = 1) {
             objectTypeMap: new Map(),
             depth: 1
         });
-        return customTypes.join('\n\n');
+        return customTypes.toString();
+    }
+    class CustomTypes {
+        extraLength = 0;
+        typeEntryMap = new Map();
+        definitionTypeMap = new Map();
+        increaseLength() {
+            this.extraLength++;
+        }
+        decreaseLength() {
+            this.extraLength--;
+        }
+        toString() {
+            return Array.from(this.typeEntryMap.entries())
+                .sort(([_1, { path: path1 }], [_2, { path: path2 }]) => path1.localeCompare(path2))
+                .map(([type, { path, definition }]) => `// ${path}\ninterface ${type}${definition}`)
+                .join('\n\n');
+        }
+        get length() {
+            return this.typeEntryMap.size + this.extraLength;
+        }
+        set(type, path, definition) {
+            this.typeEntryMap.set(type, { path, definition });
+            this.definitionTypeMap.set(definition, type);
+        }
+        getByDefinition(definition) {
+            return this.definitionTypeMap.get(definition);
+        }
     }
     function init() {
         if (builtInPrototypeNameMap.size > 0) {
@@ -130,8 +157,7 @@ function generateTypes(obj, maxDepth = 1) {
         const prefix = obsidianPrototypeNameMap.get(obj) ?? obsidianPrototypeNameMap.get(proto) ?? 'Type';
         const type = `${prefix}${customTypes.length}`;
         objectTypeMap.set(obj, type);
-        const newTypeIndex = customTypes.length;
-        customTypes.push('TODO');
+        customTypes.increaseLength();
         const typeOfProto = inferType({
             obj: proto,
             customTypes,
@@ -162,15 +188,19 @@ function generateTypes(obj, maxDepth = 1) {
             }
         })
             .join('\n');
+        customTypes.decreaseLength();
         if (objectFieldsStr) {
             const extendsStr = typeOfProto === 'Object' ? '' : ` extends ${typeOfProto}`;
-            const str = `// ${path}\ninterface ${type}${extendsStr} {\n${objectFieldsStr}\n}`;
-            customTypes[newTypeIndex] = str;
+            const definition = `${extendsStr} {\n${objectFieldsStr}\n}`;
+            const type2 = customTypes.getByDefinition(definition);
+            if (type2) {
+                return type2;
+            }
+            customTypes.set(type, path, definition);
             return type;
         }
         else {
             objectTypeMap.set(obj, typeOfProto);
-            customTypes.splice(newTypeIndex, 1);
             return typeOfProto;
         }
     }

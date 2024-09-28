@@ -9,7 +9,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
     function main(): string {
         init();
-        const customTypes: string[] = [];
+        const customTypes = new CustomTypes();
         inferType({
             obj,
             customTypes,
@@ -18,7 +18,46 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             objectTypeMap: new Map<object, string>(),
             depth: 1
         });
-        return customTypes.join('\n\n');
+        return customTypes.toString();
+    }
+
+    interface CustomTypesEntry {
+        path: string;
+        definition: string;
+    }
+
+    class CustomTypes {
+        private extraLength = 0;
+        private typeEntryMap = new Map<string, CustomTypesEntry>();
+        private definitionTypeMap = new Map<string, string>();
+
+        public increaseLength() {
+            this.extraLength++;
+        }
+
+        public decreaseLength() {
+            this.extraLength--;
+        }
+
+        public toString(): string {
+            return Array.from(this.typeEntryMap.entries())
+                .sort(([_1, { path: path1 }], [_2, { path: path2 }]) => path1.localeCompare(path2))
+                .map(([type, { path, definition }]) => `// ${path}\ninterface ${type}${definition}`)
+                .join('\n\n');
+        }
+
+        public get length(): number {
+            return this.typeEntryMap.size + this.extraLength;
+        }
+
+        public set(type: string, path: string, definition: string): void {
+            this.typeEntryMap.set(type, { path, definition });
+            this.definitionTypeMap.set(definition, type);
+        }
+
+        public getByDefinition(definition: string): string | undefined {
+            return this.definitionTypeMap.get(definition);
+        }
     }
 
     function init(): void {
@@ -71,7 +110,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         depth
     }: {
         obj: unknown,
-        customTypes: string[],
+        customTypes: CustomTypes,
         inArray: boolean,
         path: string,
         objectTypeMap: Map<object, string>,
@@ -141,7 +180,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         depth
     }: {
         arr: unknown[],
-        customTypes: string[],
+        customTypes: CustomTypes,
         path: string,
         objectTypeMap: Map<object, string>,
         depth: number,
@@ -169,7 +208,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         depth
     }: {
         obj: object,
-        customTypes: string[],
+        customTypes: CustomTypes,
         path: string,
         objectTypeMap: Map<object, string>,
         depth: number
@@ -188,8 +227,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         const prefix = obsidianPrototypeNameMap.get(obj) ?? obsidianPrototypeNameMap.get(proto) ?? 'Type';
         const type = `${prefix}${customTypes.length}`;
         objectTypeMap.set(obj, type);
-        const newTypeIndex = customTypes.length
-        customTypes.push('TODO');
+        customTypes.increaseLength();
         const typeOfProto = inferType({
             obj: proto,
             customTypes,
@@ -220,20 +258,24 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
                 }
             })
             .join('\n');
-
+        customTypes.decreaseLength();
         if (objectFieldsStr) {
             const extendsStr = typeOfProto === 'Object' ? '' : ` extends ${typeOfProto}`;
-            const str = `// ${path}\ninterface ${type}${extendsStr} {\n${objectFieldsStr}\n}`;
-            customTypes[newTypeIndex] = str;
+            const definition = `${extendsStr} {\n${objectFieldsStr}\n}`;
+            const typeWithSameDefinition = customTypes.getByDefinition(definition);
+            if (typeWithSameDefinition) {
+                return typeWithSameDefinition;
+            }
+            customTypes.set(type, path, definition);
             return type;
         } else {
             objectTypeMap.set(obj, typeOfProto);
-            customTypes.splice(newTypeIndex, 1)
             return typeOfProto;
         }
     }
 
-    function inferFunctionSignature({ fn,
+    function inferFunctionSignature({
+        fn,
         path,
         inArray
     }: {
