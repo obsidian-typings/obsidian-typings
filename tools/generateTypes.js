@@ -1,11 +1,21 @@
 "use strict";
-function generateTypes(obj) {
+function generateTypes(obj, maxDepth = 1) {
+    if (maxDepth === 0) {
+        maxDepth = Number.MAX_SAFE_INTEGER;
+    }
     const builtInPrototypeNameMap = new Map();
     const obsidianPrototypeNameMap = new Map();
     function main() {
         init();
         const customTypes = [];
-        inferType(obj, customTypes);
+        inferType({
+            obj,
+            customTypes,
+            inArray: false,
+            path: 'root',
+            objectTypeMap: new Map(),
+            depth: 1
+        });
         return customTypes.join('\n\n');
     }
     function init() {
@@ -41,7 +51,7 @@ function generateTypes(obj) {
             }
         });
     }
-    function inferType(obj, customTypes, inArray = false, path = 'root', objectTypeMap = new Map()) {
+    function inferType({ obj, customTypes, inArray, path, objectTypeMap, depth }) {
         console.debug(`Inferring path: ${path}`);
         if (obj === null) {
             return 'null';
@@ -59,14 +69,30 @@ function generateTypes(obj) {
                 return type;
             }
             if (Array.isArray(obj)) {
-                type = inferArrayType(obj, customTypes, path, objectTypeMap);
+                type = inferArrayType({
+                    arr: obj,
+                    customTypes,
+                    path,
+                    objectTypeMap,
+                    depth
+                });
             }
             else {
-                type = inferObjectType(obj, customTypes, path, objectTypeMap);
+                type = inferObjectType({
+                    obj,
+                    customTypes,
+                    path,
+                    objectTypeMap,
+                    depth
+                });
             }
         }
         else if (typeof obj === 'function') {
-            type = inferFunctionSignature(obj, path, inArray);
+            type = inferFunctionSignature({
+                fn: obj,
+                path,
+                inArray
+            });
         }
         else {
             return typeof obj;
@@ -74,18 +100,28 @@ function generateTypes(obj) {
         objectTypeMap.set(obj, type);
         return type;
     }
-    function inferArrayType(arr, customTypes, path, objectTypeMap) {
+    function inferArrayType({ arr, customTypes, path, objectTypeMap, depth }) {
         if (arr.length === 0) {
             return 'unknown[]';
         }
-        const arrayTypes = new Set(arr.map((item, index) => inferType(item, customTypes, true, `${path}[${index}]`, objectTypeMap)));
+        const arrayTypes = new Set(arr.map((item, index) => inferType({
+            obj: item,
+            customTypes,
+            inArray: true,
+            path: `${path}[${index}]`,
+            objectTypeMap,
+            depth: depth + 1
+        })));
         const typesString = Array.from(arrayTypes).join(' | ');
         return arrayTypes.size > 1 ? `(${typesString})[]` : `${typesString}[]`;
     }
-    function inferObjectType(obj, customTypes, path, objectTypeMap) {
+    function inferObjectType({ obj, customTypes, path, objectTypeMap, depth }) {
         const builtInType = builtInPrototypeNameMap.get(obj) ?? '';
         if (builtInType) {
             return builtInType;
+        }
+        if (depth > maxDepth) {
+            return 'DepthLimitReached';
         }
         const proto = Object.getPrototypeOf(obj);
         const prefix = obsidianPrototypeNameMap.get(obj) ?? obsidianPrototypeNameMap.get(proto) ?? 'Type';
@@ -93,12 +129,25 @@ function generateTypes(obj) {
         objectTypeMap.set(obj, type);
         const newTypeIndex = customTypes.length;
         customTypes.push('TODO');
-        const typeOfProto = inferType(proto, customTypes, false, `${path}.__proto__`, objectTypeMap);
+        const typeOfProto = inferType({
+            obj: proto,
+            customTypes,
+            inArray: false,
+            path: `${path}.__proto__`,
+            objectTypeMap,
+            depth: depth + 1
+        });
         const objectFieldsStr = sortedEntries(obj)
             .map(([key, value]) => {
             const formattedKey = isValidIdentifier(key) ? key : `'${key}'`;
-            const nextPath = isValidIdentifier(key) ? `${path}.${formattedKey}` : `${path}[${formattedKey}]`;
-            const inferredType = inferType(value, customTypes, false, nextPath, objectTypeMap);
+            const inferredType = inferType({
+                obj: value,
+                customTypes,
+                inArray: false,
+                path: isValidIdentifier(key) ? `${path}.${formattedKey}` : `${path}[${formattedKey}]`,
+                objectTypeMap,
+                depth: depth + 1
+            });
             if (typeof value === 'undefined') {
                 return `    ${formattedKey}?: unknown;`;
             }
@@ -122,7 +171,7 @@ function generateTypes(obj) {
             return typeOfProto;
         }
     }
-    function inferFunctionSignature(fn, path = 'root', inArray = false) {
+    function inferFunctionSignature({ fn, path, inArray }) {
         console.debug(`Inferring function at path: ${path}`);
         const fnStr = fn.toString();
         const paramList = Array(fn.length).fill(0).map((_, i) => `arg${i + 1}: unknown`).join(', ');

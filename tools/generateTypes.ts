@@ -1,4 +1,8 @@
-function generateTypes(obj: unknown): string {
+function generateTypes(obj: unknown, maxDepth = 1): string {
+    if (maxDepth === 0) {
+        maxDepth = Number.MAX_SAFE_INTEGER;
+    }
+
     const builtInPrototypeNameMap = new Map<object, string>();
     const obsidianPrototypeNameMap = new Map<object, string>();
 
@@ -10,7 +14,8 @@ function generateTypes(obj: unknown): string {
             customTypes,
             inArray: false,
             path: 'root',
-            objectTypeMap: new Map<object, string>()
+            objectTypeMap: new Map<object, string>(),
+            depth: 1
         });
         return customTypes.join('\n\n');
     }
@@ -60,13 +65,15 @@ function generateTypes(obj: unknown): string {
         obj,
         customTypes,
         inArray, path,
-        objectTypeMap
+        objectTypeMap,
+        depth
     }: {
         obj: unknown,
         customTypes: string[],
         inArray: boolean,
         path: string,
-        objectTypeMap: Map<object, string>
+        objectTypeMap: Map<object, string>,
+        depth: number
     }
     ): string {
         console.debug(`Inferring path: ${path}`);
@@ -96,14 +103,16 @@ function generateTypes(obj: unknown): string {
                     arr: obj,
                     customTypes,
                     path,
-                    objectTypeMap
+                    objectTypeMap,
+                    depth
                 });
             } else {
                 type = inferObjectType({
                     obj,
                     customTypes,
                     path,
-                    objectTypeMap
+                    objectTypeMap,
+                    depth
                 });
             }
         } else if (typeof obj === 'function') {
@@ -124,12 +133,14 @@ function generateTypes(obj: unknown): string {
         arr,
         customTypes,
         path,
-        objectTypeMap
+        objectTypeMap,
+        depth
     }: {
         arr: unknown[],
         customTypes: string[],
         path: string,
-        objectTypeMap: Map<object, string>
+        objectTypeMap: Map<object, string>,
+        depth: number,
     }): string {
         if (arr.length === 0) {
             return 'unknown[]';
@@ -139,7 +150,8 @@ function generateTypes(obj: unknown): string {
             customTypes,
             inArray: true,
             path: `${path}[${index}]`,
-            objectTypeMap
+            objectTypeMap,
+            depth: depth + 1
         })));
         const typesString = Array.from(arrayTypes).join(' | ');
         return arrayTypes.size > 1 ? `(${typesString})[]` : `${typesString}[]`;
@@ -149,16 +161,22 @@ function generateTypes(obj: unknown): string {
         obj,
         customTypes,
         path,
-        objectTypeMap
+        objectTypeMap,
+        depth
     }: {
         obj: object,
         customTypes: string[],
         path: string,
-        objectTypeMap: Map<object, string>
+        objectTypeMap: Map<object, string>,
+        depth: number
     }): string {
         const builtInType = builtInPrototypeNameMap.get(obj) ?? '';
         if (builtInType) {
             return builtInType;
+        }
+
+        if (depth > maxDepth) {
+            return 'DepthLimitReached';
         }
 
         const proto = Object.getPrototypeOf(obj);
@@ -173,7 +191,8 @@ function generateTypes(obj: unknown): string {
             customTypes,
             inArray: false,
             path: `${path}.__proto__`,
-            objectTypeMap
+            objectTypeMap,
+            depth: depth + 1
         });
 
         const objectFieldsStr = sortedEntries(obj)
@@ -184,7 +203,8 @@ function generateTypes(obj: unknown): string {
                     customTypes,
                     inArray: false,
                     path: isValidIdentifier(key) ? `${path}.${formattedKey}` : `${path}[${formattedKey}]`,
-                    objectTypeMap
+                    objectTypeMap,
+                    depth: depth + 1
                 });
 
                 if (typeof value === 'undefined') {
