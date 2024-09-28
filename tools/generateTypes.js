@@ -20,23 +20,18 @@ function generateTypes(obj, maxDepth = 1) {
         return customTypes.toString();
     }
     class CustomTypes {
-        extraLength = 0;
+        counter = 0;
         typeEntryMap = new Map();
         definitionTypeMap = new Map();
-        increaseLength() {
-            this.extraLength++;
-        }
-        decreaseLength() {
-            this.extraLength--;
+        nextCounter() {
+            this.counter++;
+            return this.counter;
         }
         toString() {
             return Array.from(this.typeEntryMap.entries())
                 .sort(([_1, { path: path1 }], [_2, { path: path2 }]) => path1.localeCompare(path2))
                 .map(([type, { path, definition }]) => `// ${path}\ninterface ${type}${definition}`)
                 .join('\n\n');
-        }
-        get length() {
-            return this.typeEntryMap.size + this.extraLength;
         }
         set(type, path, definition) {
             this.typeEntryMap.set(type, { path, definition });
@@ -155,9 +150,8 @@ function generateTypes(obj, maxDepth = 1) {
         }
         const proto = Object.getPrototypeOf(obj);
         const prefix = obsidianPrototypeNameMap.get(obj) ?? obsidianPrototypeNameMap.get(proto) ?? 'Type';
-        const type = `${prefix}${customTypes.length}`;
+        const type = `${prefix}${customTypes.nextCounter()}`;
         objectTypeMap.set(obj, type);
-        customTypes.increaseLength();
         const typeOfProto = inferType({
             obj: proto,
             customTypes,
@@ -188,13 +182,12 @@ function generateTypes(obj, maxDepth = 1) {
             }
         })
             .join('\n');
-        customTypes.decreaseLength();
         if (objectFieldsStr) {
             const extendsStr = typeOfProto === 'Object' ? '' : ` extends ${typeOfProto}`;
             const definition = `${extendsStr} {\n${objectFieldsStr}\n}`;
-            const type2 = customTypes.getByDefinition(definition);
-            if (type2) {
-                return type2;
+            const typeWithSameDefinition = customTypes.getByDefinition(definition);
+            if (typeWithSameDefinition) {
+                return typeWithSameDefinition;
             }
             customTypes.set(type, path, definition);
             return type;

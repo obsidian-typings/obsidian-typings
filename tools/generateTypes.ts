@@ -27,16 +27,13 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
     }
 
     class CustomTypes {
-        private extraLength = 0;
+        private counter = 0;
         private typeEntryMap = new Map<string, CustomTypesEntry>();
         private definitionTypeMap = new Map<string, string>();
 
-        public increaseLength() {
-            this.extraLength++;
-        }
-
-        public decreaseLength() {
-            this.extraLength--;
+        public nextCounter() {
+            this.counter++;
+            return this.counter;
         }
 
         public toString(): string {
@@ -44,10 +41,6 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
                 .sort(([_1, { path: path1 }], [_2, { path: path2 }]) => path1.localeCompare(path2))
                 .map(([type, { path, definition }]) => `// ${path}\ninterface ${type}${definition}`)
                 .join('\n\n');
-        }
-
-        public get length(): number {
-            return this.typeEntryMap.size + this.extraLength;
         }
 
         public set(type: string, path: string, definition: string): void {
@@ -225,9 +218,8 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         const proto = Object.getPrototypeOf(obj);
 
         const prefix = obsidianPrototypeNameMap.get(obj) ?? obsidianPrototypeNameMap.get(proto) ?? 'Type';
-        const type = `${prefix}${customTypes.length}`;
+        const type = `${prefix}${customTypes.nextCounter()}`;
         objectTypeMap.set(obj, type);
-        customTypes.increaseLength();
         const typeOfProto = inferType({
             obj: proto,
             customTypes,
@@ -258,7 +250,6 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
                 }
             })
             .join('\n');
-        customTypes.decreaseLength();
         if (objectFieldsStr) {
             const extendsStr = typeOfProto === 'Object' ? '' : ` extends ${typeOfProto}`;
             const definition = `${extendsStr} {\n${objectFieldsStr}\n}`;
