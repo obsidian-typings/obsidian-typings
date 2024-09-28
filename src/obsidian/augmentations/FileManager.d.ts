@@ -30,7 +30,10 @@ declare module 'obsidian' {
          * @param path - Path to the file to create (missing folders will be created)
          * @param location - Where to open the view containing the new file
          */
-        createAndOpenMarkdownFile(path: string, location: PaneType): Promise<void>;
+        createAndOpenMarkdownFile(
+            path: string,
+            location: PaneType
+        ): Promise<void>;
         /**
          * Create a new file in the vault at specified location
          *
@@ -40,7 +43,12 @@ declare module 'obsidian' {
          * @param extension - Extension of the file to create, defaults to 'md'
          * @param contents - Contents of the file to create, defaults to empty string
          */
-        createNewFile(location: TFolder, filename: string, extension: string, contents: string): Promise<TFile>;
+        createNewFile(
+            location: TFolder,
+            filename: string,
+            extension: string,
+            contents: string
+        ): Promise<TFile>;
         /**
          * Creates a new untitled folder in the vault at specified location
          *
@@ -50,14 +58,21 @@ declare module 'obsidian' {
         /**
          * Creates a new Markdown file in the vault at specified location
          */
-        createNewMarkdownFile(location: TFolder, filename: string, contents: string): Promise<TFile>;
+        createNewMarkdownFile(
+            location: TFolder,
+            filename: string,
+            contents: string
+        ): Promise<TFile>;
         /**
          * Creates a new Markdown file based on linktext and path
          *
          * @param filename - Name of the file to create
          * @param path - Path to where the file should be created
          */
-        createNewMarkdownFileFromLinktext(filename: string, path: string): Promise<TFile>;
+        createNewMarkdownFileFromLinktext(
+            filename: string,
+            path: string
+        ): Promise<TFile>;
         /** @internal */
         getAllLinkResolutions(): [];
         /**
@@ -88,7 +103,9 @@ declare module 'obsidian' {
          *
          * @param callback - Callback to execute for each link
          */
-        iterateAllRefs(callback: (path: string, link: PositionedReference) => void): void;
+        iterateAllRefs(
+            callback: (path: string, link: PositionedReference) => void
+        ): void;
         /**
          * Merge two files
          *
@@ -97,7 +114,12 @@ declare module 'obsidian' {
          * @param override - If not empty, will override the contents of the file with this string
          * @param atStart - Whether to insert text at the start or end of the file
          */
-        mergeFile(file: TFile, otherFile: TFile, override: string, atStart: boolean): Promise<void>;
+        mergeFile(
+            file: TFile,
+            otherFile: TFile,
+            override: string,
+            atStart: boolean
+        ): Promise<void>;
         /**
          * Prompt the user to delete a file
          */
@@ -111,6 +133,12 @@ declare module 'obsidian' {
          * Register an extension to be the parent for a specific file type
          */
         registerFileParentCreator(extension: string, location: TFolder): void;
+        /**
+         * Rename's a property for all notes currently that have the old key
+         * @remark The current property type is maintained
+         * @remark Is case sensitive, despite Obsidian *typically* ignoring case for property names
+         */
+        renameProperty(oldKey: string, newKey: string): Promise<void>;
         /**
          * @param linkUpdateHandler - Handler to execute for each updated link
          * @internal
