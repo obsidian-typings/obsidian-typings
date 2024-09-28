@@ -5,6 +5,7 @@ function generateTypes(obj, maxDepth = 1) {
     }
     const builtInPrototypeNameMap = new Map();
     const obsidianPrototypeNameMap = new Map();
+    const DEPTH_LIMIT_REACHED_TYPE_NAME = 'DepthLimitReached';
     function main() {
         init();
         const customTypes = [];
@@ -97,7 +98,9 @@ function generateTypes(obj, maxDepth = 1) {
         else {
             return typeof obj;
         }
-        objectTypeMap.set(obj, type);
+        if (type !== DEPTH_LIMIT_REACHED_TYPE_NAME) {
+            objectTypeMap.set(obj, type);
+        }
         return type;
     }
     function inferArrayType({ arr, customTypes, path, objectTypeMap, depth }) {
@@ -110,7 +113,7 @@ function generateTypes(obj, maxDepth = 1) {
             inArray: true,
             path: `${path}[${index}]`,
             objectTypeMap,
-            depth: depth + 1
+            depth
         })));
         const typesString = Array.from(arrayTypes).join(' | ');
         return arrayTypes.size > 1 ? `(${typesString})[]` : `${typesString}[]`;
@@ -121,7 +124,7 @@ function generateTypes(obj, maxDepth = 1) {
             return builtInType;
         }
         if (depth > maxDepth) {
-            return 'DepthLimitReached';
+            return DEPTH_LIMIT_REACHED_TYPE_NAME;
         }
         const proto = Object.getPrototypeOf(obj);
         const prefix = obsidianPrototypeNameMap.get(obj) ?? obsidianPrototypeNameMap.get(proto) ?? 'Type';

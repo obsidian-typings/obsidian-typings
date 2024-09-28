@@ -5,6 +5,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
     const builtInPrototypeNameMap = new Map<object, string>();
     const obsidianPrototypeNameMap = new Map<object, string>();
+    const DEPTH_LIMIT_REACHED_TYPE_NAME = 'DepthLimitReached';
 
     function main(): string {
         init();
@@ -126,7 +127,9 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             return typeof obj;
         }
 
-        objectTypeMap.set(obj, type);
+        if (type !== DEPTH_LIMIT_REACHED_TYPE_NAME) {
+            objectTypeMap.set(obj, type);
+        }
         return type;
     }
 
@@ -177,7 +180,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         }
 
         if (depth > maxDepth) {
-            return 'DepthLimitReached';
+            return DEPTH_LIMIT_REACHED_TYPE_NAME;
         }
 
         const proto = Object.getPrototypeOf(obj);
