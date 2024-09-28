@@ -24,6 +24,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
     interface CustomTypesEntry {
         path: string;
         definition: string;
+        depth: number;
     }
 
     class CustomTypes {
@@ -38,18 +39,57 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
         public toString(): string {
             return Array.from(this.typeEntryMap.entries())
-                .sort(([_1, { path: path1 }], [_2, { path: path2 }]) => path1.localeCompare(path2))
-                .map(([type, { path, definition }]) => `// ${path}\ninterface ${type}${definition}`)
+                .sort(([_1, entry1], [_2, entry2]) => this.compareEntries(entry1, entry2))
+                .map(([type, entry]) => `// ${entry.path}\ninterface ${type}${entry.definition}`)
                 .join('\n\n');
         }
 
-        public set(type: string, path: string, definition: string): void {
-            this.typeEntryMap.set(type, { path, definition });
+        public set({
+            type,
+            path,
+            definition,
+            depth
+        }: {
+            type: string,
+            path: string,
+            definition: string,
+            depth: number
+        }): void {
+            this.typeEntryMap.set(type, {
+                path,
+                definition,
+                depth
+            });
             this.definitionTypeMap.set(definition, type);
+        }
+
+        public update(type: string, path: string, depth: number) {
+            const entry = this.typeEntryMap.get(type);
+            if (!entry) {
+                return;
+            }
+
+            const newEntry: CustomTypesEntry = {
+                path,
+                definition: entry.definition,
+                depth
+            };
+
+            if (this.compareEntries(newEntry, entry) < 0) {
+                this.typeEntryMap.set(type, newEntry);
+            }
         }
 
         public getByDefinition(definition: string): string | undefined {
             return this.definitionTypeMap.get(definition);
+        }
+
+        private compareEntries(a: CustomTypesEntry, b: CustomTypesEntry): number {
+            return (a.depth - b.depth) || this.toDotPath(a.path).localeCompare(this.toDotPath(b.path));
+        }
+
+        private toDotPath(path: string): string {
+            return path.replace(/\['(.+?)'\]/, '.$1');
         }
     }
 
@@ -129,6 +169,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         if (typeof obj === 'object') {
             type = objectTypeMap.get(obj) ?? '';
             if (type) {
+                customTypes.update(type, path, depth);
                 return type;
             }
 
@@ -255,9 +296,15 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             const definition = `${extendsStr} {\n${objectFieldsStr}\n}`;
             const typeWithSameDefinition = customTypes.getByDefinition(definition);
             if (typeWithSameDefinition) {
+                customTypes.update(typeWithSameDefinition, path, depth);
                 return typeWithSameDefinition;
             }
-            customTypes.set(type, path, definition);
+            customTypes.set({
+                type,
+                path,
+                definition,
+                depth
+            });
             return type;
         } else {
             objectTypeMap.set(obj, typeOfProto);
