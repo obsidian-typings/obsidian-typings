@@ -50,10 +50,10 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             definition,
             depth
         }: {
-            type: string,
-            path: string,
-            definition: string,
-            depth: number
+            type: string;
+            path: string;
+            definition: string;
+            depth: number;
         }): void {
             this.typeEntryMap.set(type, {
                 path,
@@ -142,12 +142,12 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         objectTypeMap,
         depth
     }: {
-        obj: unknown,
-        customTypes: CustomTypes,
-        inArray: boolean,
-        path: string,
-        objectTypeMap: Map<unknown, string>,
-        depth: number
+        obj: unknown;
+        customTypes: CustomTypes;
+        inArray: boolean;
+        path: string;
+        objectTypeMap: Map<unknown, string>;
+        depth: number;
     }
     ): string {
         console.debug(`Inferring path: ${path}`);
@@ -220,11 +220,11 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         objectTypeMap,
         depth
     }: {
-        arr: unknown[],
-        customTypes: CustomTypes,
-        path: string,
-        objectTypeMap: Map<unknown, string>,
-        depth: number,
+        arr: unknown[];
+        customTypes: CustomTypes;
+        path: string;
+        objectTypeMap: Map<unknown, string>;
+        depth: number;
     }): string {
         if (arr.length === 0) {
             return 'unknown[]';
@@ -248,11 +248,11 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         objectTypeMap,
         depth
     }: {
-        obj: object,
-        customTypes: CustomTypes,
-        path: string,
-        objectTypeMap: Map<unknown, string>,
-        depth: number
+        obj: object;
+        customTypes: CustomTypes;
+        path: string;
+        objectTypeMap: Map<unknown, string>;
+        depth: number;
     }): string {
         const builtInType = builtInPrototypeNameMap.get(obj) ?? '';
         if (builtInType) {
@@ -324,9 +324,9 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         path,
         inArray
     }: {
-        fn: Function,
-        path: string,
-        inArray: boolean
+        fn: Function;
+        path: string;
+        inArray: boolean;
     }): string {
         console.debug(`Inferring function at path: ${path}`);
         const fnStr = fn.toString();
