@@ -64,7 +64,8 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
     function inferType({
         obj,
         customTypes,
-        inArray, path,
+        inArray,
+        path,
         objectTypeMap,
         depth
     }: {
