@@ -29,16 +29,40 @@ function generateTypes(obj, maxDepth = 1) {
         }
         toString() {
             return Array.from(this.typeEntryMap.entries())
-                .sort(([_1, { path: path1 }], [_2, { path: path2 }]) => path1.localeCompare(path2))
-                .map(([type, { path, definition }]) => `// ${path}\ninterface ${type}${definition}`)
+                .sort(([_1, entry1], [_2, entry2]) => this.compareEntries(entry1, entry2))
+                .map(([type, entry]) => `// ${entry.path}\ninterface ${type}${entry.definition}`)
                 .join('\n\n');
         }
-        set(type, path, definition) {
-            this.typeEntryMap.set(type, { path, definition });
+        set({ type, path, definition, depth }) {
+            this.typeEntryMap.set(type, {
+                path,
+                definition,
+                depth
+            });
             this.definitionTypeMap.set(definition, type);
+        }
+        update(type, path, depth) {
+            const entry = this.typeEntryMap.get(type);
+            if (!entry) {
+                return;
+            }
+            const newEntry = {
+                path,
+                definition: entry.definition,
+                depth
+            };
+            if (this.compareEntries(newEntry, entry) < 0) {
+                this.typeEntryMap.set(type, newEntry);
+            }
         }
         getByDefinition(definition) {
             return this.definitionTypeMap.get(definition);
+        }
+        compareEntries(a, b) {
+            return (a.depth - b.depth) || this.toDotPath(a.path).localeCompare(this.toDotPath(b.path));
+        }
+        toDotPath(path) {
+            return path.replace(/\['(.+?)'\]/, '.$1');
         }
     }
     function init() {
@@ -82,15 +106,12 @@ function generateTypes(obj, maxDepth = 1) {
         if (obj === undefined) {
             return 'undefined';
         }
-        if (obj === null) {
-            return 'null';
+        let type = objectTypeMap.get(obj) ?? '';
+        if (type) {
+            customTypes.update(type, path, depth);
+            return type;
         }
-        let type = '';
         if (typeof obj === 'object') {
-            type = objectTypeMap.get(obj) ?? '';
-            if (type) {
-                return type;
-            }
             if (Array.isArray(obj)) {
                 type = inferArrayType({
                     arr: obj,
@@ -122,6 +143,17 @@ function generateTypes(obj, maxDepth = 1) {
         }
         if (type !== DEPTH_LIMIT_REACHED_TYPE_NAME) {
             objectTypeMap.set(obj, type);
+            if (hasAdditionalKeys(obj)) {
+                const objType = inferObjectType({
+                    obj: Object.assign({}, obj),
+                    customTypes,
+                    path,
+                    objectTypeMap,
+                    depth
+                });
+                type = `${type} & ${objType}`;
+                objectTypeMap.set(obj, type);
+            }
         }
         return type;
     }
@@ -166,7 +198,7 @@ function generateTypes(obj, maxDepth = 1) {
             const inferredType = inferType({
                 obj: value,
                 customTypes,
-                inArray: false,
+                inArray: hasAdditionalKeys(value),
                 path: isValidIdentifier(key) ? `${path}.${formattedKey}` : `${path}[${formattedKey}]`,
                 objectTypeMap,
                 depth: depth + 1
@@ -174,7 +206,7 @@ function generateTypes(obj, maxDepth = 1) {
             if (typeof value === 'undefined') {
                 return `    ${formattedKey}?: unknown;`;
             }
-            else if (typeof value === 'function') {
+            else if (typeof value === 'function' && !hasAdditionalKeys(value)) {
                 return `    ${formattedKey}${inferredType};`;
             }
             else {
@@ -187,9 +219,15 @@ function generateTypes(obj, maxDepth = 1) {
             const definition = `${extendsStr} {\n${objectFieldsStr}\n}`;
             const typeWithSameDefinition = customTypes.getByDefinition(definition);
             if (typeWithSameDefinition) {
+                customTypes.update(typeWithSameDefinition, path, depth);
                 return typeWithSameDefinition;
             }
-            customTypes.set(type, path, definition);
+            customTypes.set({
+                type,
+                path,
+                definition,
+                depth
+            });
             return type;
         }
         else {
@@ -207,6 +245,9 @@ function generateTypes(obj, maxDepth = 1) {
     }
     function isValidIdentifier(key) {
         return /^[A-Za-z_$][A-Za-z_$0-9]*$/.test(key);
+    }
+    function hasAdditionalKeys(obj) {
+        return typeof obj !== 'object' && obj !== null && obj !== undefined && Object.keys(obj).length > 0;
     }
     return main();
 }

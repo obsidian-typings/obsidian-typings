@@ -146,7 +146,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         customTypes: CustomTypes,
         inArray: boolean,
         path: string,
-        objectTypeMap: Map<object, string>,
+        objectTypeMap: Map<unknown, string>,
         depth: number
     }
     ): string {
@@ -160,19 +160,13 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             return 'undefined';
         }
 
-        if (obj === null) {
-            return 'null';
+        let type = objectTypeMap.get(obj) ?? '';
+        if (type) {
+            customTypes.update(type, path, depth);
+            return type;
         }
 
-        let type = '';
-
         if (typeof obj === 'object') {
-            type = objectTypeMap.get(obj) ?? '';
-            if (type) {
-                customTypes.update(type, path, depth);
-                return type;
-            }
-
             if (Array.isArray(obj)) {
                 type = inferArrayType({
                     arr: obj,
@@ -202,6 +196,19 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
         if (type !== DEPTH_LIMIT_REACHED_TYPE_NAME) {
             objectTypeMap.set(obj, type);
+
+            if (hasAdditionalKeys(obj)) {
+                const objType = inferObjectType({
+                    obj: Object.assign({}, obj),
+                    customTypes,
+                    path,
+                    objectTypeMap,
+                    depth
+                });
+
+                type = `${type} & ${objType}`;
+                objectTypeMap.set(obj, type);
+            }
         }
         return type;
     }
@@ -216,7 +223,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         arr: unknown[],
         customTypes: CustomTypes,
         path: string,
-        objectTypeMap: Map<object, string>,
+        objectTypeMap: Map<unknown, string>,
         depth: number,
     }): string {
         if (arr.length === 0) {
@@ -244,7 +251,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         obj: object,
         customTypes: CustomTypes,
         path: string,
-        objectTypeMap: Map<object, string>,
+        objectTypeMap: Map<unknown, string>,
         depth: number
     }): string {
         const builtInType = builtInPrototypeNameMap.get(obj) ?? '';
@@ -276,7 +283,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
                 const inferredType = inferType({
                     obj: value,
                     customTypes,
-                    inArray: false,
+                    inArray: hasAdditionalKeys(value),
                     path: isValidIdentifier(key) ? `${path}.${formattedKey}` : `${path}[${formattedKey}]`,
                     objectTypeMap,
                     depth: depth + 1
@@ -284,7 +291,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
                 if (typeof value === 'undefined') {
                     return `    ${formattedKey}?: unknown;`;
-                } else if (typeof value === 'function') {
+                } else if (typeof value === 'function' && !hasAdditionalKeys(value)) {
                     return `    ${formattedKey}${inferredType};`;
                 } else {
                     return `    ${formattedKey}: ${inferredType};`;
@@ -331,6 +338,10 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
     function isValidIdentifier(key: string): boolean {
         return /^[A-Za-z_$][A-Za-z_$0-9]*$/.test(key);
+    }
+
+    function hasAdditionalKeys(obj: unknown): boolean {
+        return typeof obj !== 'object' && obj !== null && obj !== undefined && Object.keys(obj).length > 0;
     }
 
     return main();
