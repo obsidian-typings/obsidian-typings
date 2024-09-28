@@ -152,7 +152,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             inArray: true,
             path: `${path}[${index}]`,
             objectTypeMap,
-            depth: depth + 1
+            depth
         })));
         const typesString = Array.from(arrayTypes).join(' | ');
         return arrayTypes.size > 1 ? `(${typesString})[]` : `${typesString}[]`;
