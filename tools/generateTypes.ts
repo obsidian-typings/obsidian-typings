@@ -5,7 +5,13 @@ function generateTypes(obj: unknown): string {
     function main(): string {
         init();
         const customTypes: string[] = [];
-        inferType(obj, customTypes);
+        inferType({
+            obj,
+            customTypes,
+            inArray: false,
+            path: 'root',
+            objectTypeMap: new Map<object, string>()
+        });
         return customTypes.join('\n\n');
     }
 
@@ -50,12 +56,18 @@ function generateTypes(obj: unknown): string {
         });
     }
 
-    function inferType(
+    function inferType({
+        obj,
+        customTypes,
+        inArray, path,
+        objectTypeMap
+    }: {
         obj: unknown,
         customTypes: string[],
-        inArray = false,
-        path = 'root',
-        objectTypeMap = new Map<object, string>()
+        inArray: boolean,
+        path: string,
+        objectTypeMap: Map<object, string>
+    }
     ): string {
         console.debug(`Inferring path: ${path}`);
 
@@ -80,12 +92,26 @@ function generateTypes(obj: unknown): string {
             }
 
             if (Array.isArray(obj)) {
-                type = inferArrayType(obj, customTypes, path, objectTypeMap);
+                type = inferArrayType({
+                    arr: obj,
+                    customTypes,
+                    path,
+                    objectTypeMap
+                });
             } else {
-                type = inferObjectType(obj, customTypes, path, objectTypeMap);
+                type = inferObjectType({
+                    obj,
+                    customTypes,
+                    path,
+                    objectTypeMap
+                });
             }
         } else if (typeof obj === 'function') {
-            type = inferFunctionSignature(obj, path, inArray);
+            type = inferFunctionSignature({
+                fn: obj,
+                path,
+                inArray
+            });
         } else {
             return typeof obj;
         }
@@ -94,16 +120,42 @@ function generateTypes(obj: unknown): string {
         return type;
     }
 
-    function inferArrayType(arr: unknown[], customTypes: string[], path: string, objectTypeMap: Map<object, string>): string {
+    function inferArrayType({
+        arr,
+        customTypes,
+        path,
+        objectTypeMap
+    }: {
+        arr: unknown[],
+        customTypes: string[],
+        path: string,
+        objectTypeMap: Map<object, string>
+    }): string {
         if (arr.length === 0) {
             return 'unknown[]';
         }
-        const arrayTypes = new Set(arr.map((item, index) => inferType(item, customTypes, true, `${path}[${index}]`, objectTypeMap)));
+        const arrayTypes = new Set(arr.map((item, index) => inferType({
+            obj: item,
+            customTypes,
+            inArray: true,
+            path: `${path}[${index}]`,
+            objectTypeMap
+        })));
         const typesString = Array.from(arrayTypes).join(' | ');
         return arrayTypes.size > 1 ? `(${typesString})[]` : `${typesString}[]`;
     }
 
-    function inferObjectType(obj: object, customTypes: string[], path: string, objectTypeMap: Map<object, string>): string {
+    function inferObjectType({
+        obj,
+        customTypes,
+        path,
+        objectTypeMap
+    }: {
+        obj: object,
+        customTypes: string[],
+        path: string,
+        objectTypeMap: Map<object, string>
+    }): string {
         const builtInType = builtInPrototypeNameMap.get(obj) ?? '';
         if (builtInType) {
             return builtInType;
@@ -116,19 +168,24 @@ function generateTypes(obj: unknown): string {
         objectTypeMap.set(obj, type);
         const newTypeIndex = customTypes.length
         customTypes.push('TODO');
-        const typeOfProto = inferType(proto, customTypes, false, `${path}.__proto__`, objectTypeMap);
+        const typeOfProto = inferType({
+            obj: proto,
+            customTypes,
+            inArray: false,
+            path: `${path}.__proto__`,
+            objectTypeMap
+        });
 
         const objectFieldsStr = sortedEntries(obj)
             .map(([key, value]) => {
                 const formattedKey = isValidIdentifier(key) ? key : `'${key}'`;
-                const nextPath = isValidIdentifier(key) ? `${path}.${formattedKey}` : `${path}[${formattedKey}]`;
-                const inferredType = inferType(
-                    value,
+                const inferredType = inferType({
+                    obj: value,
                     customTypes,
-                    false,
-                    nextPath,
+                    inArray: false,
+                    path: isValidIdentifier(key) ? `${path}.${formattedKey}` : `${path}[${formattedKey}]`,
                     objectTypeMap
-                );
+                });
 
                 if (typeof value === 'undefined') {
                     return `    ${formattedKey}?: unknown;`;
@@ -152,7 +209,14 @@ function generateTypes(obj: unknown): string {
         }
     }
 
-    function inferFunctionSignature(fn: Function, path = 'root', inArray = false): string {
+    function inferFunctionSignature({ fn,
+        path,
+        inArray
+    }: {
+        fn: Function,
+        path: string,
+        inArray: boolean
+    }): string {
         console.debug(`Inferring function at path: ${path}`);
         const fnStr = fn.toString();
         const paramList = Array(fn.length).fill(0).map((_, i) => `arg${i + 1}: unknown`).join(', ');
