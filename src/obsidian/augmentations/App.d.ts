@@ -1,4 +1,3 @@
-import type { Account } from '../internals/Account.js';
 import type { AppMenuBarManager } from '../internals/AppMenuBarManager.js';
 import type { AppSetting } from '../internals/AppSetting.js';
 import type { Commands } from '../internals/Commands/Commands.js';
@@ -12,6 +11,7 @@ import type { InternalPlugins } from '../internals/InternalPlugin/InternalPlugin
 import type { LoadProgress } from '../internals/LoadProgress.js';
 import type { MetadataTypeManager } from '../internals/MetadataTypeManager/MetadataTypeManager.js';
 import type { MobileNavbar } from '../internals/MobileNavbar.js';
+import type { MobileTabSwitcher } from '../internals/MobileTabSwitcher.js';
 import type { MobileToolbar } from '../internals/MobileToolbar.js';
 import type { ObsidianDOM } from '../internals/ObsidianDOM.js';
 import type { Plugins } from '../internals/Plugins/Plugins.js';
@@ -21,12 +21,6 @@ export {};
 
 declare module 'obsidian' {
     interface App {
-        /**
-         * The account signed in to Obsidian
-         *
-         * @deprecated Property is now undefined, removed pre-1.6.0
-         */
-        account: Account | undefined;
         /**
          * ID that uniquely identifies the vault
          *
@@ -101,13 +95,14 @@ declare module 'obsidian' {
          */
         metadataTypeManager: MetadataTypeManager;
         /** @internal */
-        mobileNavbar?: MobileNavbar;
+        mobileNavbar: MobileNavbar | null;
+        mobileTabSwitcher: MobileTabSwitcher | null;
         /** @internal */
-        mobileToolbar?: MobileToolbar;
+        mobileToolbar: MobileToolbar | null;
         /** @internal Events to execute on the next frame */
-        nextFrameEvents: unknown[];
+        nextFrameEvents: (() => void)[];
         /** @internal Timer for the next frame */
-        nextFrameTimer: number;
+        nextFrameTimer: number | null;
         /**
          * Manages loading and enabling of community (non-core) plugins
          *
@@ -156,10 +151,6 @@ declare module 'obsidian' {
          */
         workspace: Workspace;
 
-        /**
-         * Sets the accent color of the application to the OS preference
-         */
-        adaptToSystemTheme(): void;
         /**
          * Sets the accent color of the application (light/dark mode)
          */
@@ -233,6 +224,7 @@ declare module 'obsidian' {
         importAttachments(imports: ImportedAttachments[], folder: TFolder | null): Promise<void>;
         /** @internal Initialize the entire application using the provided FS adapter */
         initializeWithAdapter(adapter: DataAdapter): Promise<void>;
+        isVimEnabled(): boolean;
         /**
          * Load a value from the localstorage given key
          *
@@ -240,15 +232,14 @@ declare module 'obsidian' {
          * @remark This method is device *and* vault specific
          * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault
          */
-        loadLocalStorage(key: string): unknown;
+        loadLocalStorage(key: string): unknown | null;
         /** @internal Add callback to execute on next frame */
         nextFrame(callback: () => void): void;
         /** @internal Add callback to execute on next frame, and remove after execution */
         nextFrameOnceCallback(callback: () => void): void;
         /** @internal Add callback to execute on next frame with promise */
         nextFramePromise(callback: () => Promise<void>): Promise<void>;
-        /** @internal */
-        onMouseEvent(evt: MouseEvent): void;
+        on(): void;
         /** @internal Execute all logged callback (called when next frame is loaded) */
         onNextFrame(callback: () => void): void;
         /**
@@ -322,6 +313,7 @@ declare module 'obsidian' {
          * Update the inline title rendering in notes
          */
         updateInlineTitleDisplay(): void;
+        updateRibbonDisplay(): void;
         /**
          * Update the color scheme of the application and reloads the CSS
          */
@@ -330,5 +322,9 @@ declare module 'obsidian' {
          * Update the view header display in notes
          */
         updateViewHeaderDisplay(): void;
+    }
+
+    namespace App {
+        function getOverrideConfigDir(appId: string): string | null;
     }
 }
