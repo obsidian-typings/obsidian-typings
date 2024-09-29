@@ -47,7 +47,8 @@
         "trailingCommas": "never"
     },
     "excludes": [
-        "**/node_modules"
+        "**/node_modules",
+        "**/scripts/tools/*.js"
     ],
     "plugins": [
         "https://plugins.dprint.dev/typescript-0.90.3.wasm",
