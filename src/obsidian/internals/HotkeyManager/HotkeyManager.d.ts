@@ -1,5 +1,6 @@
 import type {
     App,
+    Debouncer,
     KeymapInfo
 } from 'obsidian';
 import type { HotkeyManagerCustomKeysRecord } from './HotkeyManagerCustomKeysRecord.js';
@@ -29,6 +30,8 @@ export interface HotkeyManager {
      * Default hotkeys, one to many mapping of command ID to assigned hotkey
      */
     defaultKeys: HotkeyManagerDefaultKeysRecord;
+    /** @internal */
+    onConfigFileChange: Debouncer<[], Promise<void>>;
 
     /**
      * Add a hotkey to the default hotkeys
@@ -53,8 +56,6 @@ export interface HotkeyManager {
     getHotkeys(command: string): KeymapInfo[];
     /** @internal Load hotkeys from storage */
     load(): void;
-    /** @internal */
-    onConfigFileChanged(): void;
     /** @internal */
     onRaw(e: unknown): void;
     /**

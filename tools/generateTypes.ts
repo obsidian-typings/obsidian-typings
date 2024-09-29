@@ -206,8 +206,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
                         path,
                         depth
                     });
-                }
-                else {
+                } else {
                     queue.push({
                         obj: Object.getPrototypeOf(obj),
                         path: `${path}.__proto__`,
@@ -312,8 +311,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
                     depth
                 });
                 type = `Set<${itemsType}>`;
-            }
-            else {
+            } else {
                 type = inferObjectType({
                     obj,
                     path,

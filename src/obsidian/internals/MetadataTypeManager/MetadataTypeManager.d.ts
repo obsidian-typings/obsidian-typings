@@ -1,5 +1,6 @@
 import type {
     App,
+    Debouncer,
     Events
 } from 'obsidian';
 import { PropertyInfo } from '../PropertyInfo.js';
@@ -15,6 +16,7 @@ export interface MetadataTypeManager extends Events {
      * Reference to App
      */
     app: App;
+    onConfigFileChange: Debouncer<[], Promise<void>>;
     /**
      * Registered properties of the vault
      */
