@@ -115,7 +115,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             }
 
             const { obj, path, depth } = entry;
-            console.debug(`initializing: ${path}`);
+            console.debug(`Preprocessing: ${path} (depth: ${depth})`);
 
             if (depth > maxDepth) {
                 continue;
@@ -204,7 +204,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         depth: number;
     }
     ): string {
-        console.debug(`Inferring path: ${path}`);
+        console.debug(`Inferring type: ${path} (depth: ${depth})`);
 
         if (obj === null) {
             return 'null';
@@ -237,7 +237,8 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             type = inferFunctionSignature({
                 fn: obj,
                 path,
-                inArray
+                inArray,
+                depth
             });
         } else {
             return typeof obj;
@@ -269,6 +270,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         path: string;
         depth: number;
     }): string {
+        console.debug(`Inferring array type: ${path} (depth: ${depth})`);
         if (arr.length === 0) {
             return 'unknown[]';
         }
@@ -291,6 +293,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         path: string;
         depth: number;
     }): string {
+        console.debug(`Inferring object type: ${path} (depth: ${depth})`);
         const builtInType = builtInPrototypeNameMap.get(obj) ?? '';
         if (builtInType) {
             return builtInType;
@@ -352,13 +355,15 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
     function inferFunctionSignature({
         fn,
         path,
-        inArray
+        inArray,
+        depth
     }: {
         fn: Function;
         path: string;
         inArray: boolean;
+        depth: number;
     }): string {
-        console.debug(`Inferring function at path: ${path}`);
+        console.debug(`Inferring function type: ${path} (depth: ${depth})`);
         const fnStr = fn.toString();
         const paramList = Array(fn.length).fill(0).map((_, i) => `arg${i + 1}: unknown`).join(', ');
         const isAsync = fnStr.includes(' v(this,void 0,') || fnStr.includes('await ');
