@@ -89,6 +89,24 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         builtInPrototypeNameMap.set(document, 'Document');
         builtInPrototypeNameMap.set(Promise.prototype, 'Promise<unknown>');
         builtInPrototypeNameMap.set(Object.prototype, 'Object');
+        builtInPrototypeNameMap.set(Symbol.prototype, 'Symbol');
+        builtInPrototypeNameMap.set(WeakMap.prototype, 'WeakMap<object, unknown>');
+        builtInPrototypeNameMap.set(WeakSet.prototype, 'WeakSet<object>');
+        builtInPrototypeNameMap.set(BigInt.prototype, 'BigInt');
+        builtInPrototypeNameMap.set(Node.prototype, 'Node');
+        builtInPrototypeNameMap.set(Event.prototype, 'Event');
+        builtInPrototypeNameMap.set(HTMLElement.prototype, 'HTMLElement');
+        builtInPrototypeNameMap.set(SVGElement.prototype, 'SVGElement');
+        builtInPrototypeNameMap.set(DocumentFragment.prototype, 'DocumentFragment');
+        builtInPrototypeNameMap.set(ArrayBuffer.prototype, 'ArrayBuffer');
+        builtInPrototypeNameMap.set(Int8Array.prototype, 'Int8Array');
+        builtInPrototypeNameMap.set(Uint8Array.prototype, 'Uint8Array');
+        builtInPrototypeNameMap.set(Float32Array.prototype, 'Float32Array');
+        builtInPrototypeNameMap.set(Float64Array.prototype, 'Float64Array');
+        builtInPrototypeNameMap.set(Error.prototype, 'Error');
+        builtInPrototypeNameMap.set(TypeError.prototype, 'TypeError');
+        builtInPrototypeNameMap.set(ReferenceError.prototype, 'ReferenceError');
+        builtInPrototypeNameMap.set(SyntaxError.prototype, 'SyntaxError');
 
         for (const key of Object.getOwnPropertyNames(window).filter((key) => key.match(/HTML.+Element/))) {
             const htmlElementClass = (window as unknown as Record<string, unknown>)[key] as Function;
@@ -150,7 +168,26 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
                             depth: depth + 1
                         });
                     }
-                } else {
+                } else if (Object.getPrototypeOf(obj) === Map.prototype) {
+                    const map = obj as Map<unknown, unknown>;
+                    queue.push({
+                        obj: Array.from(map.keys()),
+                        path: `Array.from(${path}.keys())`,
+                        depth
+                    });
+                    queue.push({
+                        obj: Array.from(map.values()),
+                        path: `Array.from(${path}.values())`,
+                        depth
+                    });
+                } else if (Object.getPrototypeOf(obj) === Set.prototype) {
+                    queue.push({
+                        obj: Array.from(obj as Set<unknown>),
+                        path,
+                        depth
+                    });
+                }
+                else {
                     queue.push({
                         obj: Object.getPrototypeOf(obj),
                         path: `${path}.__proto__`,
@@ -224,12 +261,33 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
         if (typeof obj === 'object') {
             if (Array.isArray(obj)) {
-                type = inferArrayType({
+                type = inferArrayItemType({
                     arr: obj,
                     path,
                     depth
+                }) + '[]';
+            } else if (Object.getPrototypeOf(obj) === Map.prototype) {
+                const map = obj as Map<unknown, unknown>;
+                const keysType = inferArrayItemType({
+                    arr: Array.from(map.keys()),
+                    path: `Array.from(${path}.keys())`,
+                    depth
                 });
-            } else {
+                const valuesType = inferArrayItemType({
+                    arr: Array.from(map.values()),
+                    path: `Array.from(${path}.values())`,
+                    depth
+                });
+                type = `Map<${keysType}, ${valuesType}>`;
+            } else if (Object.getPrototypeOf(obj) === Set.prototype) {
+                const itemsType = inferArrayItemType({
+                    arr: Array.from(obj as Set<unknown>),
+                    path: `Array.from(${path}.keys())`,
+                    depth
+                });
+                type = `Set<${itemsType}>`;
+            }
+            else {
                 type = inferObjectType({
                     obj,
                     path,
@@ -264,7 +322,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         return type;
     }
 
-    function inferArrayType({
+    function inferArrayItemType({
         arr,
         path,
         depth
@@ -275,7 +333,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
     }): string {
         console.debug(`Inferring array type: ${path} (depth: ${depth})`);
         if (arr.length === 0) {
-            return 'unknown[]';
+            return 'unknown';
         }
         const arrayTypes = new Set(arr.map((item, index) =>
             inferType({
@@ -286,7 +344,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             })
         ));
         const typesString = Array.from(arrayTypes).join(' | ');
-        return arrayTypes.size > 1 ? `(${typesString})[]` : `${typesString}[]`;
+        return arrayTypes.size > 1 ? `(${typesString})` : typesString;
     }
 
     function inferObjectType({
