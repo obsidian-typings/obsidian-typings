@@ -79,7 +79,7 @@
         "build:implementations:generate-types": "tsc --project ./tsconfig.implementations.json",
         "build:implementations:bundle-types": "dts-bundle-generator -o ./dist/implementations.d.ts ./src/obsidian/implementations/index.ts",
         "build:style-mod": "bun run scripts/build-style-mod.ts",
-        "build:tools": ": tsc --project ./tools/tsconfig.json",
+        "build:tools": "tsc --project ./tools/tsconfig.json",
         "build:extract-api": "api-extractor run --local",
         "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
         "release-beta": "bun run scripts/bump-version.ts beta",
