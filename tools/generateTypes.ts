@@ -404,13 +404,18 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
         const objectFieldsStr = sortedEntries(obj)
             .map(([key, value]) => {
-                const formattedKey = isValidIdentifier(key) ? key : `'${key}'`;
+                let formattedKey = isValidIdentifier(key) ? key : `'${key}'`;
+
                 const inferredType = inferType({
                     obj: value,
                     inArray: hasAdditionalKeys(value),
                     path: isValidIdentifier(key) ? `${path}.${formattedKey}` : `${path}[${formattedKey}]`,
                     depth: depth + 1
                 });
+
+                if (formattedKey === 'constructor') {
+                    formattedKey += type;
+                }
 
                 if (typeof value === 'undefined') {
                     return `    ${formattedKey}?: unknown;`;
