@@ -1,6 +1,15 @@
-import type { App, Command, Component, Debouncer, IconName, Plugin, PluginSettingTab, ViewCreator } from 'obsidian';
-import type { InternalPlugins } from './InternalPlugins.js';
+import type {
+    App,
+    Command,
+    Component,
+    Debouncer,
+    IconName,
+    Plugin,
+    PluginSettingTab,
+    ViewCreator
+} from 'obsidian';
 import type { MobileFileInfo } from '../MobileFileInfo.js';
+import type { InternalPlugins } from './InternalPlugins.js';
 import type { RibbonItem } from './RibbonItem.js';
 
 /** @todo Documentation incomplete */
@@ -15,10 +24,10 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
     lastSave: number;
     manager: InternalPlugins;
     mobileFileInfo: MobileFileInfo[];
+    onConfigFileChange: Debouncer<[], Promise<void>>;
     ribbonItems: RibbonItem[];
     statusBarEl: HTMLDivElement | null;
     views: Record<string, ViewCreator>;
-    onConfigFileChange: Debouncer<[], Promise<void>>;
 
     addSettingTab(settingTab: PluginSettingTab): void;
     deleteData(): Promise<void>;

@@ -2,8 +2,8 @@ import {
     TFolder,
     type Vault
 } from 'obsidian';
-import { parentFolderPath } from './PathUtils.ts';
 import { constructTFolder } from './Constructors/constructTFolder.ts';
+import { parentFolderPath } from './PathUtils.ts';
 
 /**
  * Creates and properly initializes the instance of TFolder even the underlying folder does not exist.

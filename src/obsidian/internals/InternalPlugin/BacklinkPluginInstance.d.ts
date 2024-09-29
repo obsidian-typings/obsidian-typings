@@ -1,4 +1,10 @@
-import type { App, Menu, TAbstractFile, TFile, WorkspaceLeaf } from 'obsidian';
+import type {
+    App,
+    Menu,
+    TAbstractFile,
+    TFile,
+    WorkspaceLeaf
+} from 'obsidian';
 import type { BacklinkPlugin } from './BacklinkPlugin.js';
 import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
@@ -7,10 +13,10 @@ export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkP
     app: App;
     defaultOn: boolean;
     file?: TFile | null;
-    plugin: BacklinkPlugin;
     options: {
         backlinkInDocument?: boolean;
     };
+    plugin: BacklinkPlugin;
 
     initLeaf(): void;
     onEnable(app: App, plugin: BacklinkPlugin): Promise<void>;
@@ -22,5 +28,4 @@ export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkP
     openBacklinksForActiveFile(skipSplit: boolean): boolean | undefined;
     toggleBacklinksInDocument(skip: boolean): boolean | undefined;
     updateBacklinks(): void;
-
 }

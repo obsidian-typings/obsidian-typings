@@ -12,7 +12,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         public toString(): string {
             interface PathIndex {
                 path: string;
-                index: number
+                index: number;
             }
 
             let index = 0;
@@ -28,8 +28,12 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             }
 
             return Array.from(this.typeDefinitionMap.entries())
-                .sort(([type1], [type2]) => (typePathIndexMap.get(type1)?.index ?? 0) - (typePathIndexMap.get(type2)?.index ?? 0))
-                .map(([type, definition]) => `// ${typePathIndexMap.get(type)?.path ?? ''}\ninterface ${type}${definition}`)
+                .sort(([type1], [type2]) =>
+                    (typePathIndexMap.get(type1)?.index ?? 0) - (typePathIndexMap.get(type2)?.index ?? 0)
+                )
+                .map(([type, definition]) =>
+                    `// ${typePathIndexMap.get(type)?.path ?? ''}\ninterface ${type}${definition}`
+                )
                 .join('\n\n');
         }
 
@@ -86,9 +90,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         builtInPrototypeNameMap.set(Promise.prototype, 'Promise<unknown>');
         builtInPrototypeNameMap.set(Object.prototype, 'Object');
 
-        for (const key of Object.getOwnPropertyNames(window).filter((key) =>
-            key.match(/HTML.+Element/)
-        )) {
+        for (const key of Object.getOwnPropertyNames(window).filter((key) => key.match(/HTML.+Element/))) {
             const htmlElementClass = (window as unknown as Record<string, unknown>)[key] as Function;
             builtInPrototypeNameMap.set(htmlElementClass.prototype, key);
         }
@@ -178,7 +180,9 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
     }
 
     function sortedEntries(obj: object): [string, unknown][] {
-        return entriesSafe(obj).sort(([key1, value1], [key2, value2]) => (Number(typeof value1 === 'function') - Number(typeof value2 === 'function')) || key1.localeCompare(key2));
+        return entriesSafe(obj).sort(([key1, value1], [key2, value2]) =>
+            (Number(typeof value1 === 'function') - Number(typeof value2 === 'function')) || key1.localeCompare(key2)
+        );
     }
 
     function entriesSafe(obj: object): [string, unknown][] {
@@ -202,8 +206,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         inArray: boolean;
         path: string;
         depth: number;
-    }
-    ): string {
+    }): string {
         console.debug(`Inferring type: ${path} (depth: ${depth})`);
 
         if (obj === null) {
@@ -274,12 +277,14 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         if (arr.length === 0) {
             return 'unknown[]';
         }
-        const arrayTypes = new Set(arr.map((item, index) => inferType({
-            obj: item,
-            inArray: true,
-            path: `${path}[${index}]`,
-            depth
-        })));
+        const arrayTypes = new Set(arr.map((item, index) =>
+            inferType({
+                obj: item,
+                inArray: true,
+                path: `${path}[${index}]`,
+                depth
+            })
+        ));
         const typesString = Array.from(arrayTypes).join(' | ');
         return arrayTypes.size > 1 ? `(${typesString})[]` : `${typesString}[]`;
     }

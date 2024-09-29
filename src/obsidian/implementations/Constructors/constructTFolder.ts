@@ -3,7 +3,7 @@ import {
     type Vault
 } from 'obsidian';
 
-type TFolderConstructor = new (vault: Vault, path: string) => TFolder;
+type TFolderConstructor = new(vault: Vault, path: string) => TFolder;
 
 /**
  * Constructs a new TFolder instance.

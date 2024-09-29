@@ -1,7 +1,7 @@
-import type { App } from "obsidian";
-import type { InternalPlugins } from "../../internals/InternalPlugin/InternalPlugins.js";
+import type { App } from 'obsidian';
+import type { InternalPlugins } from '../../internals/InternalPlugin/InternalPlugins.js';
 
-type InternalPluginsConstructor = new (app: App) => InternalPlugins;
+type InternalPluginsConstructor = new(app: App) => InternalPlugins;
 
 /**
  * Constructs a new InternalPlugins instance.
