@@ -113,7 +113,7 @@ declare module 'obsidian' {
          */
         removeChild(file: TAbstractFile): void;
         /** @internal Debounced function for saving config */
-        requestSaveConfig(): Debouncer<[], Promise<void>>;
+        requestSaveConfig: Debouncer<[], Promise<void>>;
         /**
          * @param path Path to file
          * @internal Get the file by absolute path

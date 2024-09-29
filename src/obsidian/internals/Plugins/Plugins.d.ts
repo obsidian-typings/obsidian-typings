@@ -93,6 +93,7 @@ export interface Plugins {
     loadPlugin(id: string): Promise<Plugin>;
     /** @internal */
     onRaw(e: unknown): void;
+    requestSaveConfig: Debouncer<[], Promise<void>>;
     /** @internal - Save current plugin configs */
     saveConfig(): Promise<void>;
     /** @internal Toggle whether community plugins are enabled */
@@ -105,5 +106,4 @@ export interface Plugins {
      * Unload a plugin by ID
      */
     unloadPlugin(id: string): Promise<void>;
-    requestSaveConfig(): Debouncer<[], Promise<void>>
 }

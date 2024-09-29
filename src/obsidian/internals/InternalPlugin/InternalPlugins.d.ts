@@ -4,11 +4,11 @@ import type {
     Events
 } from 'obsidian';
 import type { InternalPlugin } from './InternalPlugin.js';
+import type { InternalPluginInstance } from './InternalPluginInstance.js';
 import type { InternalPluginNameInstancesMapping } from './InternalPluginNameInstancesMapping.js';
 import type { InternalPluginNamePluginsMapping } from './InternalPluginNamePluginsMapping.js';
 import type { InternalPluginNameType } from './InternalPluginNameType.js';
 import type { InternalPluginsConfigRecord } from './InternalPluginsConfigRecord.js';
-import type { InternalPluginInstance } from './InternalPluginInstance.js';
 
 /** @public */
 export interface InternalPlugins extends Events {
@@ -52,7 +52,7 @@ export interface InternalPlugins extends Events {
     /** @internal */
     onRaw(configPath: string): void;
     /** @internal Request save of plugin configs */
-    requestSaveConfig(): Debouncer<[], Promise<void>>;
+    requestSaveConfig: Debouncer<[], Promise<void>>;
     /** @internal - Save current plugin configs */
     saveConfig(): Promise<void>;
 }
