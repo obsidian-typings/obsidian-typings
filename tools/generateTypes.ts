@@ -422,7 +422,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             })
             .join('\n');
         if (objectFieldsStr) {
-            const extendsStr = typeOfProto === 'Object' ? '' : ` extends ${typeOfProto}`;
+            const extendsStr = typeOfProto === 'Object' || typeOfProto === 'null' ? '' : ` extends ${typeOfProto}`;
             const definition = `${extendsStr} {\n${objectFieldsStr}\n}`;
             const typeWithSameDefinition = customTypes.getByDefinition(definition);
             if (typeWithSameDefinition) {
