@@ -27,6 +27,8 @@ declare module 'obsidian' {
         fileMap: VaultFileMapRecord;
         /** @internal Listener for all events on the vault */
         onChange: FileSystemWatchHandler;
+        /** @internal Debounced function for saving config */
+        requestSaveConfig: Debouncer<[], Promise<void>>;
 
         /** @internal Add file as child/parent to respective folders */
         addChild(file: TAbstractFile): void;
@@ -112,8 +114,6 @@ declare module 'obsidian' {
          * @internal Remove file as child/parent from respective folders
          */
         removeChild(file: TAbstractFile): void;
-        /** @internal Debounced function for saving config */
-        requestSaveConfig: Debouncer<[], Promise<void>>;
         /**
          * @param path Path to file
          * @internal Get the file by absolute path

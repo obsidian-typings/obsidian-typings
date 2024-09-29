@@ -28,6 +28,8 @@ export interface InternalPlugins extends Events {
     plugins: {
         [ID in InternalPluginNameType]: InternalPluginNamePluginsMapping[ID];
     };
+    /** @internal Request save of plugin configs */
+    requestSaveConfig: Debouncer<[], Promise<void>>;
 
     /** @internal - Load plugin configs and enable plugins */
     enable(): Promise<void>;
@@ -51,8 +53,6 @@ export interface InternalPlugins extends Events {
     loadPlugin<Instance extends InternalPluginInstance<unknown>>(internalPluginInstance: Instance): Instance;
     /** @internal */
     onRaw(configPath: string): void;
-    /** @internal Request save of plugin configs */
-    requestSaveConfig: Debouncer<[], Promise<void>>;
     /** @internal - Save current plugin configs */
     saveConfig(): Promise<void>;
 }

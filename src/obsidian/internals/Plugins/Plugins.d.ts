@@ -32,6 +32,7 @@ export interface Plugins {
      * @remark Prefer usage of getPlugin to access a plugin
      */
     plugins: PluginsPluginsRecord;
+    requestSaveConfig: Debouncer<[], Promise<void>>;
     /**
      * Mapping of plugin ID to available updates
      */
@@ -93,7 +94,6 @@ export interface Plugins {
     loadPlugin(id: string): Promise<Plugin>;
     /** @internal */
     onRaw(e: unknown): void;
-    requestSaveConfig: Debouncer<[], Promise<void>>;
     /** @internal - Save current plugin configs */
     saveConfig(): Promise<void>;
     /** @internal Toggle whether community plugins are enabled */
