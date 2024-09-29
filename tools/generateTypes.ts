@@ -60,6 +60,7 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
     const objectTypeMap = new Map<object, string>();
     const objectPathDepthMap = new Map<object, string>();
     const functionObjectMap = new Map<Function, object>();
+    const fixDuplicatesMap = new Map<Function, object | null>();
 
     function main(): string {
         if (maxDepth === 0) {
@@ -84,6 +85,9 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
                 obsidianPrototypeNameMap.set(value.prototype, key);
             }
         }
+
+        fixDuplicatesMap.set(obsidian.TFile, null);
+        fixDuplicatesMap.set(obsidian.TFolder, null);
 
         builtInPrototypeNameMap.set(window, 'Window');
         builtInPrototypeNameMap.set(document, 'Document');
@@ -154,6 +158,22 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             }
 
             if (builtInPrototypeNameMap.has(obj)) {
+                continue;
+            }
+
+            let isDuplicate = false;
+            for (const [fn, sampleObj] of fixDuplicatesMap.entries()) {
+                if (obj instanceof fn) {
+                    if (sampleObj) {
+                        isDuplicate = true;
+                        break;
+                    }
+
+                    fixDuplicatesMap.set(fn, obj);
+                }
+            }
+
+            if (isDuplicate) {
                 continue;
             }
 
@@ -245,6 +265,12 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         depth: number;
     }): string {
         console.debug(`Inferring type: ${path} (depth: ${depth})`);
+
+        for (const [fn, sampleObj] of fixDuplicatesMap.entries()) {
+            if (obj instanceof fn) {
+                obj = sampleObj;
+            }
+        }
 
         if (obj === null) {
             return 'null';
