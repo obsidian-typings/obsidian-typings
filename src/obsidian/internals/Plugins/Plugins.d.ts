@@ -1,5 +1,6 @@
 import type {
     App,
+    Debouncer,
     Plugin,
     PluginManifest
 } from 'obsidian';
@@ -104,4 +105,5 @@ export interface Plugins {
      * Unload a plugin by ID
      */
     unloadPlugin(id: string): Promise<void>;
+    requestSaveConfig(): Debouncer<[], Promise<void>>
 }

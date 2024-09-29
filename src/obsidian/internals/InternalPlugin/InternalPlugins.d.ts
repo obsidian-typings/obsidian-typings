@@ -52,7 +52,7 @@ export interface InternalPlugins extends Events {
     /** @internal */
     onRaw(configPath: string): void;
     /** @internal Request save of plugin configs */
-    requestSaveConfig(): Debouncer<[], void>;
+    requestSaveConfig(): Debouncer<[], Promise<void>>;
     /** @internal - Save current plugin configs */
     saveConfig(): Promise<void>;
 }
