@@ -381,16 +381,20 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         depth: number;
     }): string {
         console.debug(`Inferring object type: ${path} (depth: ${depth})`);
-        const builtInType = builtInPrototypeNameMap.get(obj) ?? '';
+        const proto = Object.getPrototypeOf(obj);
+        let builtInType = builtInPrototypeNameMap.get(obj) ?? '';
         if (builtInType) {
+            return builtInType;
+        }
+
+        builtInType = builtInPrototypeNameMap.get(proto) ?? '';
+        if (builtInType && builtInType !== 'Object') {
             return builtInType;
         }
 
         if (depth > maxDepth) {
             return DEPTH_LIMIT_REACHED_TYPE_NAME;
         }
-
-        const proto = Object.getPrototypeOf(obj);
 
         const prefix = obsidianPrototypeNameMap.get(obj) ?? obsidianPrototypeNameMap.get(proto) ?? 'Type';
         const type = `${prefix}${customTypes.nextCounter()}`;
