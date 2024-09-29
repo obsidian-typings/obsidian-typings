@@ -42,7 +42,7 @@
     "json": {
         "indentWidth": 4,
         "useTabs": false,
-        "newLineKind": "crlf",
+        "newLineKind": "lf",
         "preferSingleLine": false,
         "trailingCommas": "never"
     },
