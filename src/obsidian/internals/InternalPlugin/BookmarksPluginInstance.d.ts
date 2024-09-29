@@ -11,9 +11,9 @@ import type {
     TFile,
     WorkspaceLeaf
 } from 'obsidian';
+import type { BookmarkItem } from './BookmarkItem.js';
 import type { BookmarksPlugin } from './BookmarksPlugin.js';
 import type { InternalPluginInstance } from './InternalPluginInstance.js';
-import type { BookmarkItem } from './BookmarkItem.js';
 
 /** @public */
 export interface BookmarksPluginInstance extends InternalPluginInstance<BookmarksPlugin>, Events {
