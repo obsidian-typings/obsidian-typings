@@ -1,35 +1,7 @@
 function generateTypes(obj: unknown, maxDepth = 1): string {
-    if (maxDepth === 0) {
-        maxDepth = Number.MAX_SAFE_INTEGER;
-    }
-
-    const builtInPrototypeNameMap = new Map<object, string>();
-    const obsidianPrototypeNameMap = new Map<object, string>();
-    const DEPTH_LIMIT_REACHED_TYPE_NAME = 'DepthLimitReached';
-
-    function main(): string {
-        init();
-        const customTypes = new CustomTypes();
-        inferType({
-            obj,
-            customTypes,
-            inArray: false,
-            path: 'root',
-            objectTypeMap: new Map<object, string>(),
-            depth: 1
-        });
-        return customTypes.toString();
-    }
-
-    interface CustomTypesEntry {
-        path: string;
-        definition: string;
-        depth: number;
-    }
-
     class CustomTypes {
         private counter = 0;
-        private typeEntryMap = new Map<string, CustomTypesEntry>();
+        private typeDefinitionMap = new Map<string, string>();
         private definitionTypeMap = new Map<string, string>();
 
         public nextCounter() {
@@ -38,66 +10,69 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         }
 
         public toString(): string {
-            return Array.from(this.typeEntryMap.entries())
-                .sort(([_1, entry1], [_2, entry2]) => this.compareEntries(entry1, entry2))
-                .map(([type, entry]) => `// ${entry.path}\ninterface ${type}${entry.definition}`)
+            interface PathIndex {
+                path: string;
+                index: number
+            }
+
+            let index = 0;
+            const typePathIndexMap = new Map<string, PathIndex>();
+
+            for (const [obj, path] of objectPathDepthMap.entries()) {
+                const type = objectTypeMap.get(obj);
+                if (!type) {
+                    continue;
+                }
+                typePathIndexMap.set(type, { path, index });
+                index++;
+            }
+
+            return Array.from(this.typeDefinitionMap.entries())
+                .sort(([type1], [type2]) => (typePathIndexMap.get(type1)?.index ?? 0) - (typePathIndexMap.get(type2)?.index ?? 0))
+                .map(([type, definition]) => `// ${typePathIndexMap.get(type)?.path ?? ''}\ninterface ${type}${definition}`)
                 .join('\n\n');
         }
 
         public set({
             type,
-            path,
-            definition,
-            depth
+            definition
         }: {
             type: string;
-            path: string;
             definition: string;
-            depth: number;
         }): void {
-            this.typeEntryMap.set(type, {
-                path,
-                definition,
-                depth
-            });
+            this.typeDefinitionMap.set(type, definition);
             this.definitionTypeMap.set(definition, type);
-        }
-
-        public update(type: string, path: string, depth: number) {
-            const entry = this.typeEntryMap.get(type);
-            if (!entry) {
-                return;
-            }
-
-            const newEntry: CustomTypesEntry = {
-                path,
-                definition: entry.definition,
-                depth
-            };
-
-            if (this.compareEntries(newEntry, entry) < 0) {
-                this.typeEntryMap.set(type, newEntry);
-            }
         }
 
         public getByDefinition(definition: string): string | undefined {
             return this.definitionTypeMap.get(definition);
         }
-
-        private compareEntries(a: CustomTypesEntry, b: CustomTypesEntry): number {
-            return (a.depth - b.depth) || this.toDotPath(a.path).localeCompare(this.toDotPath(b.path));
-        }
-
-        private toDotPath(path: string): string {
-            return path.replace(/\['(.+?)'\]/, '.$1');
-        }
     }
 
-    function init(): void {
-        if (builtInPrototypeNameMap.size > 0) {
-            return;
-        }
+    const builtInPrototypeNameMap = new Map<object, string>();
+    const obsidianPrototypeNameMap = new Map<object, string>();
+    const DEPTH_LIMIT_REACHED_TYPE_NAME = 'DepthLimitReached';
+    const customTypes = new CustomTypes();
+    const objectTypeMap = new Map<object, string>();
+    const objectPathDepthMap = new Map<object, string>();
+    const functionObjectMap = new Map<Function, object>();
 
+    function main(): string {
+        if (maxDepth === 0) {
+            maxDepth = Number.MAX_SAFE_INTEGER;
+        }
+        initBuiltInPrototypeNameMap();
+        initObjectPathMap();
+        inferType({
+            obj,
+            inArray: false,
+            path: 'root',
+            depth: 1
+        });
+        return customTypes.toString();
+    }
+
+    function initBuiltInPrototypeNameMap(): void {
         const obsidian = window.require('obsidian');
 
         for (const [key, value] of entriesSafe(obsidian)) {
@@ -119,6 +94,89 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         }
     }
 
+    function initObjectPathMap(): void {
+        interface Entry {
+            obj: unknown;
+            path: string;
+            depth: number;
+        }
+
+        const queue: Entry[] = [];
+        queue.push({
+            obj,
+            path: 'root',
+            depth: 1
+        });
+
+        while (queue.length > 0) {
+            const entry = queue.shift();
+            if (!entry) {
+                continue;
+            }
+
+            const { obj, path, depth } = entry;
+            console.debug(`initializing: ${path}`);
+
+            if (depth > maxDepth) {
+                continue;
+            }
+
+            if (obj === null || obj === undefined) {
+                continue;
+            }
+
+            if (typeof obj !== 'object' && typeof obj !== 'function') {
+                continue;
+            }
+
+            if (objectPathDepthMap.has(obj)) {
+                continue;
+            }
+
+            if (builtInPrototypeNameMap.has(obj)) {
+                continue;
+            }
+
+            objectPathDepthMap.set(obj, path);
+
+            if (typeof obj === 'object') {
+                if (Array.isArray(obj)) {
+                    for (let index = 0; index < obj.length; index++) {
+                        queue.push({
+                            obj: obj[index],
+                            path: `${path}[${index}]`,
+                            depth: depth + 1
+                        });
+                    }
+                } else {
+                    queue.push({
+                        obj: Object.getPrototypeOf(obj),
+                        path: `${path}.__proto__`,
+                        depth: depth + 1
+                    });
+
+                    for (const [key, value] of sortedEntries(obj)) {
+                        queue.push({
+                            obj: value,
+                            path: isValidIdentifier(key) ? `${path}.${key}` : `${path}['${key}']`,
+                            depth: depth + 1
+                        });
+                    }
+                }
+            } else {
+                if (Object.keys(obj).length > 0) {
+                    const mappedObj = Object.assign({}, obj);
+                    functionObjectMap.set(obj, mappedObj);
+                    queue.push({
+                        obj: mappedObj,
+                        path,
+                        depth
+                    });
+                }
+            }
+        }
+    }
+
     function sortedEntries(obj: object): [string, unknown][] {
         return entriesSafe(obj).sort(([key1, value1], [key2, value2]) => (Number(typeof value1 === 'function') - Number(typeof value2 === 'function')) || key1.localeCompare(key2));
     }
@@ -136,17 +194,13 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
     function inferType({
         obj,
-        customTypes,
         inArray,
         path,
-        objectTypeMap,
         depth
     }: {
         obj: unknown;
-        customTypes: CustomTypes;
         inArray: boolean;
         path: string;
-        objectTypeMap: Map<unknown, string>;
         depth: number;
     }
     ): string {
@@ -162,7 +216,6 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
         let type = objectTypeMap.get(obj) ?? '';
         if (type) {
-            customTypes.update(type, path, depth);
             return type;
         }
 
@@ -170,17 +223,13 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             if (Array.isArray(obj)) {
                 type = inferArrayType({
                     arr: obj,
-                    customTypes,
                     path,
-                    objectTypeMap,
                     depth
                 });
             } else {
                 type = inferObjectType({
                     obj,
-                    customTypes,
                     path,
-                    objectTypeMap,
                     depth
                 });
             }
@@ -199,10 +248,8 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
             if (hasAdditionalKeys(obj)) {
                 const objType = inferObjectType({
-                    obj: Object.assign({}, obj),
-                    customTypes,
+                    obj: functionObjectMap.get(obj as Function) ?? {},
                     path,
-                    objectTypeMap,
                     depth
                 });
 
@@ -215,15 +262,11 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
     function inferArrayType({
         arr,
-        customTypes,
         path,
-        objectTypeMap,
         depth
     }: {
         arr: unknown[];
-        customTypes: CustomTypes;
         path: string;
-        objectTypeMap: Map<unknown, string>;
         depth: number;
     }): string {
         if (arr.length === 0) {
@@ -231,10 +274,8 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         }
         const arrayTypes = new Set(arr.map((item, index) => inferType({
             obj: item,
-            customTypes,
             inArray: true,
             path: `${path}[${index}]`,
-            objectTypeMap,
             depth
         })));
         const typesString = Array.from(arrayTypes).join(' | ');
@@ -243,15 +284,11 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
 
     function inferObjectType({
         obj,
-        customTypes,
         path,
-        objectTypeMap,
         depth
     }: {
         obj: object;
-        customTypes: CustomTypes;
         path: string;
-        objectTypeMap: Map<unknown, string>;
         depth: number;
     }): string {
         const builtInType = builtInPrototypeNameMap.get(obj) ?? '';
@@ -270,10 +307,8 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
         objectTypeMap.set(obj, type);
         const typeOfProto = inferType({
             obj: proto,
-            customTypes,
             inArray: false,
             path: `${path}.__proto__`,
-            objectTypeMap,
             depth: depth + 1
         });
 
@@ -282,10 +317,8 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
                 const formattedKey = isValidIdentifier(key) ? key : `'${key}'`;
                 const inferredType = inferType({
                     obj: value,
-                    customTypes,
                     inArray: hasAdditionalKeys(value),
                     path: isValidIdentifier(key) ? `${path}.${formattedKey}` : `${path}[${formattedKey}]`,
-                    objectTypeMap,
                     depth: depth + 1
                 });
 
@@ -303,14 +336,11 @@ function generateTypes(obj: unknown, maxDepth = 1): string {
             const definition = `${extendsStr} {\n${objectFieldsStr}\n}`;
             const typeWithSameDefinition = customTypes.getByDefinition(definition);
             if (typeWithSameDefinition) {
-                customTypes.update(typeWithSameDefinition, path, depth);
                 return typeWithSameDefinition;
             }
             customTypes.set({
                 type,
-                path,
-                definition,
-                depth
+                definition
             });
             return type;
         } else {

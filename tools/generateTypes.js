@@ -1,74 +1,59 @@
 "use strict";
 function generateTypes(obj, maxDepth = 1) {
-    if (maxDepth === 0) {
-        maxDepth = Number.MAX_SAFE_INTEGER;
-    }
-    const builtInPrototypeNameMap = new Map();
-    const obsidianPrototypeNameMap = new Map();
-    const DEPTH_LIMIT_REACHED_TYPE_NAME = 'DepthLimitReached';
-    function main() {
-        init();
-        const customTypes = new CustomTypes();
-        inferType({
-            obj,
-            customTypes,
-            inArray: false,
-            path: 'root',
-            objectTypeMap: new Map(),
-            depth: 1
-        });
-        return customTypes.toString();
-    }
     class CustomTypes {
         counter = 0;
-        typeEntryMap = new Map();
+        typeDefinitionMap = new Map();
         definitionTypeMap = new Map();
         nextCounter() {
             this.counter++;
             return this.counter;
         }
         toString() {
-            return Array.from(this.typeEntryMap.entries())
-                .sort(([_1, entry1], [_2, entry2]) => this.compareEntries(entry1, entry2))
-                .map(([type, entry]) => `// ${entry.path}\ninterface ${type}${entry.definition}`)
+            let index = 0;
+            const typePathIndexMap = new Map();
+            for (const [obj, path] of objectPathDepthMap.entries()) {
+                const type = objectTypeMap.get(obj);
+                if (!type) {
+                    continue;
+                }
+                typePathIndexMap.set(type, { path, index });
+                index++;
+            }
+            return Array.from(this.typeDefinitionMap.entries())
+                .sort(([type1], [type2]) => (typePathIndexMap.get(type1)?.index ?? 0) - (typePathIndexMap.get(type2)?.index ?? 0))
+                .map(([type, definition]) => `// ${typePathIndexMap.get(type)?.path ?? ''}\ninterface ${type}${definition}`)
                 .join('\n\n');
         }
-        set({ type, path, definition, depth }) {
-            this.typeEntryMap.set(type, {
-                path,
-                definition,
-                depth
-            });
+        set({ type, definition }) {
+            this.typeDefinitionMap.set(type, definition);
             this.definitionTypeMap.set(definition, type);
-        }
-        update(type, path, depth) {
-            const entry = this.typeEntryMap.get(type);
-            if (!entry) {
-                return;
-            }
-            const newEntry = {
-                path,
-                definition: entry.definition,
-                depth
-            };
-            if (this.compareEntries(newEntry, entry) < 0) {
-                this.typeEntryMap.set(type, newEntry);
-            }
         }
         getByDefinition(definition) {
             return this.definitionTypeMap.get(definition);
         }
-        compareEntries(a, b) {
-            return (a.depth - b.depth) || this.toDotPath(a.path).localeCompare(this.toDotPath(b.path));
-        }
-        toDotPath(path) {
-            return path.replace(/\['(.+?)'\]/, '.$1');
-        }
     }
-    function init() {
-        if (builtInPrototypeNameMap.size > 0) {
-            return;
+    const builtInPrototypeNameMap = new Map();
+    const obsidianPrototypeNameMap = new Map();
+    const DEPTH_LIMIT_REACHED_TYPE_NAME = 'DepthLimitReached';
+    const customTypes = new CustomTypes();
+    const objectTypeMap = new Map();
+    const objectPathDepthMap = new Map();
+    const functionObjectMap = new Map();
+    function main() {
+        if (maxDepth === 0) {
+            maxDepth = Number.MAX_SAFE_INTEGER;
         }
+        initBuiltInPrototypeNameMap();
+        initObjectPathMap();
+        inferType({
+            obj,
+            inArray: false,
+            path: 'root',
+            depth: 1
+        });
+        return customTypes.toString();
+    }
+    function initBuiltInPrototypeNameMap() {
         const obsidian = window.require('obsidian');
         for (const [key, value] of entriesSafe(obsidian)) {
             if (typeof value === 'function') {
@@ -82,6 +67,74 @@ function generateTypes(obj, maxDepth = 1) {
         for (const key of Object.getOwnPropertyNames(window).filter((key) => key.match(/HTML.+Element/))) {
             const htmlElementClass = window[key];
             builtInPrototypeNameMap.set(htmlElementClass.prototype, key);
+        }
+    }
+    function initObjectPathMap() {
+        const queue = [];
+        queue.push({
+            obj,
+            path: 'root',
+            depth: 1
+        });
+        while (queue.length > 0) {
+            const entry = queue.shift();
+            if (!entry) {
+                continue;
+            }
+            const { obj, path, depth } = entry;
+            console.debug(`initializing: ${path}`);
+            if (depth > maxDepth) {
+                continue;
+            }
+            if (obj === null || obj === undefined) {
+                continue;
+            }
+            if (typeof obj !== 'object' && typeof obj !== 'function') {
+                continue;
+            }
+            if (objectPathDepthMap.has(obj)) {
+                continue;
+            }
+            if (builtInPrototypeNameMap.has(obj)) {
+                continue;
+            }
+            objectPathDepthMap.set(obj, path);
+            if (typeof obj === 'object') {
+                if (Array.isArray(obj)) {
+                    for (let index = 0; index < obj.length; index++) {
+                        queue.push({
+                            obj: obj[index],
+                            path: `${path}[${index}]`,
+                            depth: depth + 1
+                        });
+                    }
+                }
+                else {
+                    queue.push({
+                        obj: Object.getPrototypeOf(obj),
+                        path: `${path}.__proto__`,
+                        depth: depth + 1
+                    });
+                    for (const [key, value] of sortedEntries(obj)) {
+                        queue.push({
+                            obj: value,
+                            path: isValidIdentifier(key) ? `${path}.${key}` : `${path}['${key}']`,
+                            depth: depth + 1
+                        });
+                    }
+                }
+            }
+            else {
+                if (Object.keys(obj).length > 0) {
+                    const mappedObj = Object.assign({}, obj);
+                    functionObjectMap.set(obj, mappedObj);
+                    queue.push({
+                        obj: mappedObj,
+                        path,
+                        depth
+                    });
+                }
+            }
         }
     }
     function sortedEntries(obj) {
@@ -98,7 +151,7 @@ function generateTypes(obj, maxDepth = 1) {
             }
         });
     }
-    function inferType({ obj, customTypes, inArray, path, objectTypeMap, depth }) {
+    function inferType({ obj, inArray, path, depth }) {
         console.debug(`Inferring path: ${path}`);
         if (obj === null) {
             return 'null';
@@ -108,25 +161,20 @@ function generateTypes(obj, maxDepth = 1) {
         }
         let type = objectTypeMap.get(obj) ?? '';
         if (type) {
-            customTypes.update(type, path, depth);
             return type;
         }
         if (typeof obj === 'object') {
             if (Array.isArray(obj)) {
                 type = inferArrayType({
                     arr: obj,
-                    customTypes,
                     path,
-                    objectTypeMap,
                     depth
                 });
             }
             else {
                 type = inferObjectType({
                     obj,
-                    customTypes,
                     path,
-                    objectTypeMap,
                     depth
                 });
             }
@@ -145,10 +193,8 @@ function generateTypes(obj, maxDepth = 1) {
             objectTypeMap.set(obj, type);
             if (hasAdditionalKeys(obj)) {
                 const objType = inferObjectType({
-                    obj: Object.assign({}, obj),
-                    customTypes,
+                    obj: functionObjectMap.get(obj) ?? {},
                     path,
-                    objectTypeMap,
                     depth
                 });
                 type = `${type} & ${objType}`;
@@ -157,22 +203,20 @@ function generateTypes(obj, maxDepth = 1) {
         }
         return type;
     }
-    function inferArrayType({ arr, customTypes, path, objectTypeMap, depth }) {
+    function inferArrayType({ arr, path, depth }) {
         if (arr.length === 0) {
             return 'unknown[]';
         }
         const arrayTypes = new Set(arr.map((item, index) => inferType({
             obj: item,
-            customTypes,
             inArray: true,
             path: `${path}[${index}]`,
-            objectTypeMap,
             depth
         })));
         const typesString = Array.from(arrayTypes).join(' | ');
         return arrayTypes.size > 1 ? `(${typesString})[]` : `${typesString}[]`;
     }
-    function inferObjectType({ obj, customTypes, path, objectTypeMap, depth }) {
+    function inferObjectType({ obj, path, depth }) {
         const builtInType = builtInPrototypeNameMap.get(obj) ?? '';
         if (builtInType) {
             return builtInType;
@@ -186,10 +230,8 @@ function generateTypes(obj, maxDepth = 1) {
         objectTypeMap.set(obj, type);
         const typeOfProto = inferType({
             obj: proto,
-            customTypes,
             inArray: false,
             path: `${path}.__proto__`,
-            objectTypeMap,
             depth: depth + 1
         });
         const objectFieldsStr = sortedEntries(obj)
@@ -197,10 +239,8 @@ function generateTypes(obj, maxDepth = 1) {
             const formattedKey = isValidIdentifier(key) ? key : `'${key}'`;
             const inferredType = inferType({
                 obj: value,
-                customTypes,
                 inArray: hasAdditionalKeys(value),
                 path: isValidIdentifier(key) ? `${path}.${formattedKey}` : `${path}[${formattedKey}]`,
-                objectTypeMap,
                 depth: depth + 1
             });
             if (typeof value === 'undefined') {
@@ -219,14 +259,11 @@ function generateTypes(obj, maxDepth = 1) {
             const definition = `${extendsStr} {\n${objectFieldsStr}\n}`;
             const typeWithSameDefinition = customTypes.getByDefinition(definition);
             if (typeWithSameDefinition) {
-                customTypes.update(typeWithSameDefinition, path, depth);
                 return typeWithSameDefinition;
             }
             customTypes.set({
                 type,
-                path,
-                definition,
-                depth
+                definition
             });
             return type;
         }
