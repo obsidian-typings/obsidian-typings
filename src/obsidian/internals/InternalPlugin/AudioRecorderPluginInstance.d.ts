@@ -11,7 +11,6 @@ export interface AudioRecorderPluginInstance extends InternalPluginInstance<Audi
     recording: boolean;
 
     checkPermission(): Promise<boolean>;
-    init(app: App, plugin: AudioRecorderPlugin): void;
     onRecordAudio(): Promise<void>;
     onStartRecording(): Promise<void>;
     onStopRecording(): void;
