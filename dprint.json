@@ -48,7 +48,7 @@
     },
     "excludes": [
         "**/node_modules",
-        "**/scripts/tools/*.js"
+        "**/tools/*.js"
     ],
     "plugins": [
         "https://plugins.dprint.dev/typescript-0.90.3.wasm",
