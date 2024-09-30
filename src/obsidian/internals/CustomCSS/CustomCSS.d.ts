@@ -1,7 +1,9 @@
 import type {
     App,
-    Component
+    Component,
+    Debouncer
 } from 'obsidian';
+import type { PromisedQueue } from '../PromisedQueue.js';
 import type { ThemeManifest } from '../ThemeManifest.js';
 import type { CustomCSSThemesRecord } from './CustomCSSThemesRecord.js';
 import type { CustomCSSUpdatesRecord } from './CustomCSSUpdatesRecord.js';
@@ -29,7 +31,13 @@ export interface CustomCSS extends Component {
      */
     oldThemes: string[];
     /** @internal */
-    queue: WeakMap<object, unknown>;
+    queue: PromisedQueue;
+    /** @internal */
+    requestLoadSnippets: Debouncer<[], void>;
+    /** @internal */
+    requestLoadTheme: Debouncer<[], void>;
+    /** @internal */
+    requestReadThemes: Debouncer<[], void>;
     /**
      * List of snippets detected by Obsidian, given by their filenames
      */
@@ -48,7 +56,7 @@ export interface CustomCSS extends Component {
     updates: CustomCSSUpdatesRecord;
 
     /** @internal */
-    boundRaw(): void;
+    boundRaw(themeName: string): void;
     /**
      * Check whether a specific theme can be updated
      *
@@ -90,15 +98,15 @@ export interface CustomCSS extends Component {
      */
     getSnippetsFolder(): string;
     /**
+     * Returns the folder path where themes are stored (relative to vault root)
+     */
+    getThemeFolder(): string;
+    /**
      * Convert theme name to its corresponding filepath (relative to vault root)
      *
      * @returns String `.obsidian/themes/${themeName}/theme.css`
      */
     getThemePath(themeName: string): string;
-    /**
-     * Returns the folder path where themes are stored (relative to vault root)
-     */
-    getThemesFolder(): string;
     /**
      * Returns whether there are themes that can be updated
      */
@@ -118,10 +126,14 @@ export interface CustomCSS extends Component {
      * Check whether a specific theme is installed by theme name
      */
     isThemeInstalled(themeName: string): boolean;
+    loadCss(arg1: unknown): Promise<unknown>;
+    loadData(): unknown;
+    loadSnippets(): unknown;
+    loadTheme(arg1: unknown): unknown;
     /** @internal */
     onload(): void;
     /** @internal */
-    onRaw(e: unknown): void;
+    onRaw(themeName: string): void;
     /** @internal */
     readSnippets(): void;
     /** @internal */
@@ -130,12 +142,6 @@ export interface CustomCSS extends Component {
      * Remove a theme by theme name
      */
     removeTheme(themeName: string): Promise<void>;
-    /** @internal */
-    requestLoadSnippets(): void;
-    /** @internal */
-    requestLoadTheme(): void;
-    /** @internal */
-    requestReadThemes(): void;
     /**
      * Set the activation status of a snippet by snippet name
      */

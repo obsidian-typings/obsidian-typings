@@ -12,7 +12,7 @@ declare module 'obsidian' {
          */
         app: App;
         /** @internal */
-        fileParentCreatorByType: Map<string, (path: string) => TFolder>;
+        fileParentCreatorByType: Record<string, (path: string) => TFolder>;
         /** @internal */
         inProgressUpdates: null | LinkUpdateHandler[];
         /** @internal */
@@ -24,6 +24,7 @@ declare module 'obsidian' {
          */
         vault: Vault;
 
+        canCreateFileWithExt(arg1: unknown): unknown;
         /**
          * Creates a new Markdown file in specified location and opens it in a new view
          *
@@ -59,7 +60,7 @@ declare module 'obsidian' {
          */
         createNewMarkdownFileFromLinktext(filename: string, path: string): Promise<TFile>;
         /** @internal */
-        getAllLinkResolutions(): [];
+        getAllLinkResolutions(): unknown[];
         /**
          * Gets the folder that new markdown files should be saved to, based on the current settings
          *
@@ -67,22 +68,7 @@ declare module 'obsidian' {
          *   created in the same folder as the current file
          */
         getMarkdownNewFileParent(path: string): TFolder;
-        /**
-         * Insert text into a file
-         *
-         * @param file - File to insert text into
-         * @param primary_text - Text to insert (will not be inserted if secondary_text exists)
-         * @param basename - ???
-         * @param secondary_text - Text to insert (always inserted)
-         * @param atStart - Whether to insert text at the start or end of the file
-         */
-        insertTextIntoFile(
-            file: TFile,
-            primary_text: string,
-            basename: string,
-            secondary_text: string,
-            atStart: boolean
-        ): Promise<void>;
+        insertIntoFile(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
         /**
          * Iterate over all links in the vault with callback
          *
@@ -102,10 +88,12 @@ declare module 'obsidian' {
          * Prompt the user to delete a file
          */
         promptForDeletion(file: TFile): Promise<void>;
+        promptForFileDeletion(arg1: unknown): Promise<unknown>;
         /**
          * Prompt the user to rename a file
          */
         promptForFileRename(file: TFile): Promise<void>;
+        promptForFolderDeletion(arg1: unknown): Promise<unknown>;
         /**
          * @internal
          * Register an extension to be the parent for a specific file type
@@ -128,10 +116,6 @@ declare module 'obsidian' {
          * @internal
          */
         storeTextFileBackup(path: string, data: string): void;
-        /**
-         * Remove a file and put it in the trash (no confirmation modal)
-         */
-        trashFile(file: TFile): Promise<void>;
         /** @internal : Unregister extension as root input directory for file type */
         unregisterFileCreator(extension: string): void;
         /** @internal */
