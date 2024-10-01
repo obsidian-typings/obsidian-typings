@@ -6,5 +6,8 @@ declare module 'obsidian' {
          * Access the underlying input element of type "color"
          */
         colorPickerEl: HTMLInputElement;
+
+        getValueInt(): number;
+        setValueInt(value: number): this;
     }
 }
