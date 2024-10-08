@@ -3,7 +3,6 @@ export {};
 declare module 'obsidian' {
     interface WorkspaceLeaf extends WorkspaceItem {
         activeTime?: number;
-        id?: string;
         tabHeaderEl: HTMLElement;
         tabHeaderInnerIconEl: HTMLElement;
         tabHeaderInnerTitleEl: HTMLElement;

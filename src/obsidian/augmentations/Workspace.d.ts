@@ -10,12 +10,10 @@ import type { LeafEntry } from '../internals/LeafEntry.js';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.js';
 import type { ObsidianTouchEvent } from '../internals/ObsidianTouchEvent.js';
 import type { RecentFileTracker } from '../internals/RecentFileTracker.js';
-import type { SerializedWorkspace } from '../internals/SerializedWorkspace/SerializedWorkspace.js';
 import type { StateHistory } from '../internals/StateHistory.js';
 import type { CanvasView } from '../internals/Views/CanvasView.js';
-import type { WorkspaceHoverLinkSourcesRecord } from '../internals/WorkspaceHoverLinkSourcesRecord.js';
-
-export {};
+import type { SerializedWorkspace } from '../internals/Workspace/SerializedWorkspace.js';
+import type { WorkspaceHoverLinkSourcesRecord } from '../internals/Workspace/WorkspaceHoverLinkSourcesRecord.js';
 
 declare module 'obsidian' {
     interface Workspace extends Events {
