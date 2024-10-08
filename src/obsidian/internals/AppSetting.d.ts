@@ -43,19 +43,19 @@ export interface AppSetting extends Modal {
     tabHeadersEl: HTMLElement;
 
     /**
-     * @param tab Tab to add
+     * @param tab - Tab to add
      * @internal Add a new plugin tab to the settings modal
      */
     addSettingTab(tab: SettingTab): void;
     /** @internal Closes the currently active tab */
     closeActiveTab(): void;
     /**
-     * @param tab Tab to check
+     * @param tab - Tab to check
      * @internal Check whether tab is a plugin tab
      */
     isPluginSettingTab(tab: SettingTab): boolean;
     /**
-     * @param tab Tab to open
+     * @param tab - Tab to open
      * @internal Open a specific tab by tab reference
      */
     openTab(tab: SettingTab): void;
@@ -63,16 +63,16 @@ export interface AppSetting extends Modal {
     /**
      * Open a specific tab by ID
      *
-     * @param id ID of the tab to open
+     * @param id - ID of the tab to open
      */
     openTabById(id: string): SettingTab;
     /**
-     * @param tab Tab to remove
+     * @param tab - Tab to remove
      * @internal Remove a plugin tab from the settings modal
      */
     removeSettingTab(tab: SettingTab): void;
     /**
-     * @param tab Tab to update the title to
+     * @param tab - Tab to update the title to
      * @internal Update the title of the modal
      */
     updateModalTitle(tab: SettingTab): void;
