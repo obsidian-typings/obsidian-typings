@@ -211,7 +211,7 @@ With access to the minified code, you can now start searching through it and fin
 
 For any method "XYZ", start by just searching for "XYZ". Generally, the method is defined as either:
 
--   `t.XYZ = ...` (for prototype methods)
+-   `t.XYZ = ...` (for static methods)
 -   `t.prototype.XYZ = ...` (for prototype methods)
 -   `function XYZ(` (for internal/minified methods)
 
