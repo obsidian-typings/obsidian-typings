@@ -79,13 +79,13 @@ Be aware that the typings currently only cover a subset of the full API: while m
 
 3. **Explicit type importing**
 
-   If you prefer not to add `obsidian-typings` to your `types`, you can also add `import "obsidian-typings";` to any project file.
+   If you prefer not to add `obsidian-typings` to your `types`, you can also add `import 'obsidian-typings';` to any project file.
 
 
 
 4. **Using `obsidian-typings/implementations`** <span id="using-obsidian-typings-implementations"></span>
 
-    Depending on how your project is set up, `import { X } from "obsidian-typings/implementations";` may not work straight out of the box, e.g., if you have `"moduleResolution": "node"` or `"node10"` in your `tsconfig.json`
+    Depending on how your project is set up, `import { X } from 'obsidian-typings/implementations';` may not work straight out of the box, e.g., if you have `"moduleResolution": "node"` or `"node10"` in your `tsconfig.json`
 
     To solve this, you can add the following to your `tsconfig.json`:
 
@@ -110,7 +110,7 @@ Be aware that the typings currently only cover a subset of the full API: while m
 To access types from the `obsidian` module, the import syntax does not change:
 
 ```ts
-import { App } from "obsidian";
+import { App } from 'obsidian';
 
 function printInternalPlugins(app: App): void {
   console.log(app.internalPlugins);
@@ -122,7 +122,7 @@ function printInternalPlugins(app: App): void {
 Additional interfaces added by this package (which do not exist in the official API), can be imported using:
 
 ```ts
-import { InternalPlugins } from "obsidian-typings";
+import { InternalPlugins } from 'obsidian-typings';
 
 const internalPlugins: InternalPlugins = this.app.internalPlugins;
 ```
@@ -132,7 +132,7 @@ const internalPlugins: InternalPlugins = this.app.internalPlugins;
 Additional helper functions/types/... added by this package can be used by importing from `obsidian-typings/implementations`:
 
 ```ts
-import { InternalPluginName } from "obsidian-typings/implementations";
+import { InternalPluginName } from 'obsidian-typings/implementations';
 
 this.app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
 ```
@@ -145,7 +145,7 @@ If you need to extend the typings provided by this package, add the following to
 
 ```ts
 export {}; // This is a very essential line. If you don't have any other top-level `import/export` statements, those typings will work not as expected.
-declare module "obsidian-typings" {
+declare module 'obsidian-typings' {
   interface PluginsPluginsRecord {
     myPlugin: MyPlugin;
   }

@@ -118,10 +118,10 @@ In this case, we might just define a new type that contains all the plugin IDs, 
 
 ```ts
 type InternalPluginName =
-    | "audio-recorder"
-    | "backlink"
-    | "bookmarks"
-    | "canvas" /*| ... */;
+    | 'audio-recorder'
+    | 'backlink'
+    | 'bookmarks'
+    | 'canvas' /*| ... */;
 interface InternalPlugins extends Events {
     // ...
     config: Record<InternalPluginName, boolean>;
