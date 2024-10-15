@@ -19,13 +19,13 @@ declare module 'obsidian' {
         /**
          * Callback to execute when the menu is hidden
          */
-        hideCallback: () => void;
+        hideCallback(): void;
         /**
          * Items contained in the menu
          */
         items: MenuItem[];
         /** @internal Callback that opens the submenu after a delay */
-        openSubmenuSoon: () => void;
+        openSubmenuSoon(): void;
         /**
          * Parent menu of the current menu
          */

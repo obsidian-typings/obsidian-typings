@@ -19,7 +19,7 @@ export interface FileSuggestManager {
     /**
      * Determine the source path of current context
      */
-    getSourcePath: () => null | string;
+    getSourcePath(): null | string;
     /**
      * Whether search should be vault-wide rather than scoped to current file
      */

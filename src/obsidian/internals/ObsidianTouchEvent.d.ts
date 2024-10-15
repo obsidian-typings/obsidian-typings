@@ -6,7 +6,7 @@ export interface ObsidianTouchEvent {
     points: number;
     registerCallback: {
         move(x: number): void;
-        cancel: () => void;
+        cancel(): void;
         finish(x: number, y: number, z: number): void;
     };
     startX: number;

@@ -10,7 +10,7 @@ export interface PropertyRenderContext {
     /**
      * Callback called on property field unfocus
      */
-    blur: () => void;
+    blur(): void;
     /**
      * Key of the property field
      */

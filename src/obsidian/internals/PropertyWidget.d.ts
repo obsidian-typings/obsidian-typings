@@ -11,7 +11,7 @@ export interface PropertyWidget<T> {
     /**
      * Returns the I18N name of the widget
      */
-    name: () => string;
+    name(): string;
     /**
      * Reserved keys for the widget
      */
