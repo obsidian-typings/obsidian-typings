@@ -17,10 +17,6 @@ export interface FileSuggestManager {
      */
     fileSuggestions: null | { file: TFile | null; path: string }[];
     /**
-     * Determine the source path of current context
-     */
-    getSourcePath(): null | string;
-    /**
      * Whether search should be vault-wide rather than scoped to current file
      */
     global: boolean;
@@ -59,6 +55,10 @@ export interface FileSuggestManager {
     getHeadingSuggestions(runner: Runnable, file: TFile, text: string): Promise<SearchResult[]>;
     /** @internal Generate instructions for specific actions in suggestion manager (e.g. accept, select, ...) */
     getInstructions(): [{ command: 'string'; purpose: 'string' }];
+    /**
+     * Determine the source path of current context
+     */
+    getSourcePath(): null | string;
     /**
      * Get suggestions for current input text
      *

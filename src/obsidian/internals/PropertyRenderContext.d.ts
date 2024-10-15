@@ -8,10 +8,6 @@ export interface PropertyRenderContext {
      */
     app: App;
     /**
-     * Callback called on property field unfocus
-     */
-    blur(): void;
-    /**
      * Key of the property field
      */
     key: string;
@@ -24,6 +20,10 @@ export interface PropertyRenderContext {
      */
     sourcePath: string;
 
+    /**
+     * Callback called on property field unfocus
+     */
+    blur(): void;
     /**
      * Callback called on property value change
      */

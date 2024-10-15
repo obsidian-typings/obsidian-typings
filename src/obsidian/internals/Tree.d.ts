@@ -29,10 +29,6 @@ export interface Tree<T> {
      */
     handleCollapseAll: () => void;
     /**
-     * Handle deletion of selected nodes
-     */
-    handleDeleteSelectedItems(event: KeyboardEvent): Promise<void>;
-    /**
      * Handle renaming of focused item
      */
     handleRenameFocusedItem: () => void;
@@ -91,6 +87,10 @@ export interface Tree<T> {
      * Gets the ID of a tree item given its Node
      */
     getNodeId(node: TreeNode<T>): string | undefined;
+    /**
+     * Handle deletion of selected nodes
+     */
+    handleDeleteSelectedItems(event: KeyboardEvent): Promise<void>;
     /**
      * Handle selection of tree item via keyboard event
      */

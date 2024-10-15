@@ -17,15 +17,9 @@ declare module 'obsidian' {
          */
         dom: HTMLElement;
         /**
-         * Callback to execute when the menu is hidden
-         */
-        hideCallback(): void;
-        /**
          * Items contained in the menu
          */
         items: MenuItem[];
-        /** @internal Callback that opens the submenu after a delay */
-        openSubmenuSoon(): void;
         /**
          * Parent menu of the current menu
          */
@@ -53,6 +47,10 @@ declare module 'obsidian' {
         addSections(items: string[]): this;
         /** @internal Close the currently open submenu */
         closeSubmenu(): void;
+        /**
+         * Callback to execute when the menu is hidden
+         */
+        hideCallback(): void;
         /** @internal Check whether the clicked element is inside the menu */
         isInside(e: HTMLElement): boolean;
         /**
@@ -83,6 +81,8 @@ declare module 'obsidian' {
         onMouseOver(e: MouseEvent): boolean;
         /** @internal Registers dom events and scope for the menu */
         openSubmenu(item: MenuItem): void;
+        /** @internal Callback that opens the submenu after a delay */
+        openSubmenuSoon(): void;
         /**
          * @param index
          * @internal Select the item at the specified index (after either hovering or arrowing over it)
