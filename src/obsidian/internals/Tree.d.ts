@@ -31,7 +31,7 @@ export interface Tree<T> {
     /**
      * Handle deletion of selected nodes
      */
-    handleDeleteSelectedItems: (event: KeyboardEvent) => void | undefined;
+    handleDeleteSelectedItems(event: KeyboardEvent): Promise<void>;
     /**
      * Handle renaming of focused item
      */
