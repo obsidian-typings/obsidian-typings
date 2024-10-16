@@ -5,7 +5,7 @@ declare module 'obsidian' {
         /**
          * Access the "bar" element
          */
-        progresBar: HTMLDivElement;
+        progressBar: HTMLDivElement;
 
         /**
          * Access the "line" element which is a child of the progressBar element
