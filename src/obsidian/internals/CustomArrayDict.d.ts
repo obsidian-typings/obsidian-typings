@@ -1,9 +1,7 @@
-import type { CustomArrayDictDataRecord } from './CustomArrayDictDataRecord.js';
-
 /** @todo Documentation incomplete */
 /** @public */
 export interface CustomArrayDict<T> {
-    data: CustomArrayDictDataRecord<T>;
+    data: Map<string, T[]>;
 
     add(key: string, value: T): void;
     clear(key: string): void;

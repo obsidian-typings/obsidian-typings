@@ -1,4 +1,4 @@
-import type { CustomArrayDict } from '../internals/CustomArrayDict/CustomArrayDict.js';
+import type { CustomArrayDict } from '../internals/CustomArrayDict.js';
 import type { FileCacheEntry } from '../internals/FileCacheEntry.js';
 import type { LinkResolverQueue } from '../internals/LinkResolverQueue/LinkResolverQueue.js';
 import type { LinkSuggestion } from '../internals/LinkSuggestion.js';
