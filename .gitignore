@@ -5,3 +5,5 @@ dist/
 
 index.d.ts
 index.ts
+
+/tsconfig.tsbuildinfo

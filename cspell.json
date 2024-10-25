@@ -1,7 +1,9 @@
 {
     "version": "0.2",
     "ignorePaths": [
-        "dist"
+        "dist",
+        "node_modules",
+        "tsconfig.tsbuildinfo"
     ],
     "dictionaryDefinitions": [],
     "dictionaries": [],
@@ -75,6 +77,7 @@
         "tablecell",
         "titlebar",
         "toggleable",
+        "tsbuildinfo",
         "tsdoc",
         "Uncollapse",
         "uncollapsed",
