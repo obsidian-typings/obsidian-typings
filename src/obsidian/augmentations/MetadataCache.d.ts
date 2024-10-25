@@ -69,7 +69,7 @@ declare module 'obsidian' {
         /**
          * Get all backlink information for a file
          */
-        getBacklinksForFile(file: TFile): CustomArrayDict<LinkCache | EmbedCache | FrontmatterLinkCache>;
+        getBacklinksForFile(file: TFile): CustomArrayDict<Reference>;
         /**
          * Get paths of all files cached in the vault
          */
