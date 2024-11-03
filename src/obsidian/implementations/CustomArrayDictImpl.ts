@@ -23,12 +23,8 @@ export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
         values.remove(value);
 
         if (values.length === 0) {
-            this.removeKey(key);
+            this.clear(key);
         }
-    }
-
-    public removeKey(key: string): void {
-        this.data.delete(key);
     }
 
     public get(key: string): T[] | null {
@@ -40,7 +36,7 @@ export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
     }
 
     public clear(key: string): void {
-        this.removeKey(key);
+        this.data.delete(key);
     }
 
     public clearAll(): void {

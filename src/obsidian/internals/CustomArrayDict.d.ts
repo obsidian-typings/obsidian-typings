@@ -11,5 +11,4 @@ export interface CustomArrayDict<T> {
     get(key: string): T[] | null;
     keys(): string[];
     remove(key: string, value: T): void;
-    removeKey(key: string): void;
 }
