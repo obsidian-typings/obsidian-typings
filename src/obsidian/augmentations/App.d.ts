@@ -162,6 +162,12 @@ declare module 'obsidian' {
          */
         copyObsidianUrl(file: TFile): void;
         /**
+         * Toggles debug mode
+         *
+         * @param isEnabled Whether to enable or disable debug mode
+         */
+        debugMode(isEnabled: boolean): void;
+        /**
          * Disables all CSS transitions in the vault (until manually re-enabled)
          */
         disableCssTransition(): void;
