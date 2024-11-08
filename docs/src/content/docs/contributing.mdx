@@ -1,0 +1,70 @@
+---
+title: Contributing
+description: Help improve the Obsidian Typings package by contributing to the project.
+---
+
+import { CardGrid } from '@astrojs/starlight/components';
+import { LinkCardIcon } from '../../components';
+
+This project accepts contributions of all kind, be it for documentation improvements, fixing incorrect typings
+or adding entirely new typings for yet undocumented parts of the Obsidian API.
+
+## General Notes
+
+Feel free to start typing any part of the Obsidian API that is not yet typed, or fixing/adding additional descriptions to existing typings.
+If you are unsure about anything, don't hesitate to open an issue.
+
+### Guides
+
+Some guides are provided for you to get started with contributing to the project:
+
+<CardGrid>
+    <LinkCardIcon
+        icon="seti:json"
+        title="Adding New Typings"
+        href="/obsidian-typings/guides/adding-new-typings"
+        description="Learn how to find, discover and add new typings."
+    />
+
+    <LinkCardIcon
+        icon="magnifier"
+        title="Analyzing Source Code"
+        href="/starlight-site-graph/components/analyzing-source-code"
+        description="Learn how to analyze the minified source code of Obsidian."
+    />
+</CardGrid>
+
+### TSDoc
+
+Please use [TSDoc](https://tsdoc.org/) to document the typings. This will allow the documentation to be automatically generated
+within your IDE, and can help with the discoverability of the typings.
+
+Example:
+
+```ts
+interface someObject {
+    /**
+     * Does something specific
+     * @param val1 Enables some functionality
+     * @tutorial Useful for implementing some features for your plugin
+     * @remark Prefer using `someOtherMethod` instead
+     */
+    someMethod(val1: boolean): number;
+
+    /**
+     * Does something that you're not certain about, and should probably not be used
+     * @internal
+     */
+    someInternalMethod(): void;
+}
+```
+
+:::note
+`@internal` — Method is _very likely_ not fully/correctly typed, and/or is not intended to be used by plugins.
+
+`@remark` — Alternatives that should be used instead, or warnings about the function.
+
+`@tutorial` — Short description on how the function could be used in your plugin.
+
+`@deprecated` — Method is deprecated in a particular version (can't be found in `app.js` anymore).
+:::

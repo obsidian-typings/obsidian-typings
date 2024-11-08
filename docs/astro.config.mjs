@@ -7,7 +7,7 @@ import starlightThemeObsidian from "starlight-theme-obsidian";
 
 export default defineConfig({
     site: 'https://fevol.github.io',
-    base: '/obsidian-typings-website',
+    base: '/obsidian-typings',
     integrations: [
         starlight({
             title: 'Obsidian Typings',
@@ -16,8 +16,13 @@ export default defineConfig({
             },
             sidebar: [
                 {
-                    label: 'Reference',
-                    autogenerate: {directory: 'reference'}
+                    label: 'Start Here',
+                    items: [
+                        { label: 'Getting Started', link: '/getting-started/' },
+                        { label: 'Disclaimer', link: '/disclaimer/' },
+                        { label: 'Contributing', link: '/contributing/' },
+                        { label: 'Attribution', link: '/attribution/' },
+                    ],
                 },
                 {
                     label: 'Guides',
