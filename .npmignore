@@ -8,5 +8,6 @@ images/
 MIGRATION.md
 scripts/
 src/
+website/
 tsconfig.implementations.json
 tsconfig.json

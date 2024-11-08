@@ -1,0 +1,174 @@
+:root {
+    --icon-size-med: 20px;
+}
+
+.svg-embed {
+    display: flex;
+}
+
+.starlight-aside {
+    --sl-color-asides-text-accent: var(--sl-color-red-high);
+    --sl-color-asides-border: var(--sl-color-red);
+    background-color: var(--sl-color-red-low);
+    border-radius: 8px;
+    border: unset;
+
+    svg {
+        width: var(--icon-size-med);
+        height: var(--icon-size-med);
+    }
+}
+
+.starlight-aside--todo {
+    --sl-color-asides-text-accent: var(--sl-color-red-high);
+    --sl-color-asides-border: var(--sl-color-red);
+    background-color: var(--sl-color-red-low);
+}
+
+.starlight-aside--tutorial {
+    --sl-color-asides-text-accent: #85d4da;
+    --sl-color-asides-border: #5eb5bd;
+    background-color: #416263;
+}
+
+
+.starlight-aside--remark {
+    --sl-color-asides-text-accent: #f8ce96;
+    --sl-color-asides-border: #af6b32;
+    background-color: #ae7238;
+}
+
+.sl-separator {
+    display: flex;
+}
+
+.sl-separator:after {
+    content: "";
+    height: 2rem;
+    border-inline-end: 1px solid var(--sl-color-gray-5);
+}
+
+.obsidian-docs-link {
+    text-decoration: none;
+    color: var(--sl-color-accent);
+    font-weight: 600;
+    padding: 0 8px;
+}
+
+.code-location-icon {
+    display: flex;
+    margin-left: auto;
+}
+
+.code-location-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.object-signature {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 0.25rem;
+    font-weight: 600;
+    color: var(--sl-color-white);
+
+
+    .deprecated {
+        position: relative;
+    }
+
+    .deprecated::after {
+        background-color: rgba(122, 23, 41, 0.94);
+        content: "";
+        height: 8px;
+        left: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-10%);
+        width: 100%;
+    }
+}
+
+h3 + .object-signature {
+    font-size: var(--sl-text-h3);
+}
+
+h4 + .object-signature {
+    font-size: var(--sl-text-h4);
+}
+
+h5 + .object-signature {
+    font-size: var(--sl-text-h5);
+}
+
+h3, h4, h5 {
+    display: flex;
+}
+
+.group-label {
+    text-transform: capitalize;
+}
+
+.signature-type {
+    height: fit-content;
+    font-size: var(--sl-text-sm) !important;
+    padding: 0px 12px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    margin-top: unset !important;
+
+    a {
+        text-decoration: none;
+
+    }
+
+}
+
+.abstract-method {
+    background-color: var(--sl-color-purple-low) !important;
+}
+
+.parameter {
+    background-color: var(--sl-color-green-low) !important;
+    display: flex;
+    gap: 5px;
+}
+.parameter.parameter-optional {
+    background-color: unset !important;
+    outline: 4px dotted var(--sl-color-green-low);
+    color: var(--sl-color-green-low);
+    font-weight: 900;
+}
+
+.parameter-field {
+    display: flex;
+    gap: 5px;
+    margin-top: 0 !important;
+}
+
+.parameter-type {
+    display: flex;
+}
+
+.nested-parameter-type {
+    display: flex;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.field-type {
+    background-color: var(--sl-color-blue-low) !important;
+}
+
+.return-type {
+    background-color: var(--sl-color-red-low) !important;
+}
+
+.generic-type {
+    background-color: var(--sl-color-orange-low) !important;
+}

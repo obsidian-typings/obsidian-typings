@@ -7,3 +7,4 @@ index.d.ts
 index.ts
 
 /tsconfig.tsbuildinfo
+website/src/content/docs/api/namespaces/**/*
