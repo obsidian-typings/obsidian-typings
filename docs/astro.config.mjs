@@ -11,7 +11,7 @@ export default defineConfig({
     integrations: [
         starlight({
             title: 'Obsidian Typings',
-            favicon: './assets/favicon.png',
+            favicon: './assets/favicon-test.png',
             social: {
                 github: 'https://github.com/fevol/obsidian-typings'
             },
@@ -60,7 +60,7 @@ export default defineConfig({
                             'typedoc-plugin-frontmatter',
                             './typedoc-plugins/resolve-source-plugin.js',
                             './typedoc-plugins/badge-addition-plugin.js',
-                            // './typedoc-plugins/custom-md-render-plugin.js',
+                            './typedoc-plugins/custom-md-render-plugin.js',
                         ],
                         theme: 'starlight-typedoc',
                         githubPages: false,
@@ -69,7 +69,12 @@ export default defineConfig({
                     },
                 }),
                 starlightThemeObsidian({
-
+                    graphConfig: {
+                        renderArrows: true,
+                        nodeDefaultStyle: {
+                            neighborScale: 0.3
+                        }
+                    }
                 })
             ]
         }),
