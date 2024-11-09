@@ -1,14 +1,51 @@
 ---
 title: Obsidian Typings
 description: Typescript typings for undocumented parts of the Obsidian API.
+head:
+  - tag: title
+    content: Obsidian Typings
+template: splash
+editUrl: false
+lastUpdated: false
+hero:
+    tagline: Typescript typings for undocumented parts of the Obsidian API.
+    image:
+        alt: A glittering purple star being obscured by a moon
+        dark: ../../../assets/obsidian-typings-logo-dark.png
+        light: ../../../assets/obsidian-typings-logo-light.png
+    actions:
+        - text: Getting Started
+          link: /obsidian-typings/getting-started/
+          icon: rocket
+        - text: Usage
+          link: /obsidian-typings/usage/
+          icon: external
+          variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components'
 
-### Someday
+## Features
 
-<CardGrid>
-    <Card title="Not Complete" icon="approve-check-circle">
-        Todo
+<CardGrid stagger>
+    <Card title="Typings for Private API" icon="magnify">
+        Adds typings for the private API of Obsidian, allowing you to access and use undocumented parts of the API.
+    </Card>
+
+    <Card title="Custom Implementations" icon="seti:graphql">
+        Provides some custom methods for specific tasks.
+    </Card>
+</CardGrid>
+
+
+## Next steps
+
+<CardGrid stagger>
+    <Card title="Install the package" icon="puzzle">
+        Check the [getting started guide](/obsidian-typings/getting-started/) for installation
+        instructions.
+    </Card>
+    <Card title="Read the disclaimer" icon="open-book">
+        Read [the disclaimer](/obsidian-typings/disclaimer/) to understand the limitations of the typings.
     </Card>
 </CardGrid>

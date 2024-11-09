@@ -11,6 +11,7 @@ export default defineConfig({
     integrations: [
         starlight({
             title: 'Obsidian Typings',
+            favicon: './assets/favicon.png',
             social: {
                 github: 'https://github.com/fevol/obsidian-typings'
             },
