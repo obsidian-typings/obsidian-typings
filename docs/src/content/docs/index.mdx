@@ -8,7 +8,7 @@ template: splash
 editUrl: false
 lastUpdated: false
 hero:
-    tagline: Typescript typings for undocumented parts of the Obsidian API.
+    tagline: Typescript typings for private parts of the Obsidian API.
     image:
         alt: A glittering purple star being obscured by a moon
         dark: ../../../assets/obsidian-typings-logo-dark.png
@@ -17,10 +17,10 @@ hero:
         - text: Getting Started
           link: /obsidian-typings/getting-started/
           icon: rocket
-        - text: Usage
-          link: /obsidian-typings/usage/
-          icon: external
-          variant: minimal
+        - text: Disclaimer
+          link: /obsidian-typings/disclaimer/
+          icon: warning
+          variant: secondary
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components'
@@ -28,12 +28,16 @@ import { Card, CardGrid } from '@astrojs/starlight/components'
 ## Features
 
 <CardGrid stagger>
-    <Card title="Typings for Private API" icon="magnifier">
-        Adds typings for the private API of Obsidian, allowing you to access and use undocumented parts of the API.
+    <Card title="Typesafe access to Private API" icon="approve-check">
+        Adds typings for the private API of Obsidian, allowing you to access undocumented methods in a typesafe way.
     </Card>
 
-    <Card title="Custom Implementations" icon="rocket">
-        Provides some custom methods for specific tasks.
+    <Card title="Explanations and examples" icon="open-book">
+        Adds explanations and examples for methods to help you understand how to properly use them.
+    </Card>
+
+    <Card title="Custom implementations" icon="rocket">
+        Provides custom methods for adding mocks or accessing unexposed API.
     </Card>
 </CardGrid>
 
@@ -47,5 +51,9 @@ import { Card, CardGrid } from '@astrojs/starlight/components'
     </Card>
     <Card title="Read the disclaimer" icon="warning">
         Read [the disclaimer](/obsidian-typings/disclaimer/) to understand the limitations of the typings.
+    </Card>
+    <Card title="Contribute to the project" icon="comment">
+        Follow the [contribution guide](/obsidian-typings/contributing/) to help improve the typings and
+        expand this project!
     </Card>
 </CardGrid>

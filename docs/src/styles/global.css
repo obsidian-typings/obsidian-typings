@@ -152,7 +152,7 @@ h3, h4, h5 {
 
 .content-badge {
     color: white;
-    background-color: var(--badge-color);
+    background-color: var(--badge-color, var(--sl-color-accent));
     border-radius: 4px;
     padding: 0.1rem 0.25rem;
     font-weight: 800;
@@ -173,4 +173,8 @@ h3, h4, h5 {
 }
 .content-badge--html {
     --badge-color: var(--sl-color-blue);
+}
+
+.content-badge--warning {
+    --badge-color: var(--sl-color-red);
 }
