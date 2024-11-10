@@ -24,7 +24,7 @@
     "starlight-contributor-list": "^0.1.0",
     "starlight-package-managers": "^0.8.0",
     "starlight-site-graph": "^0.1.8",
-    "starlight-theme-obsidian": "^0.0.8",
+    "starlight-theme-obsidian": "^0.0.9",
     "starlight-typedoc": "^0.16.0",
     "typedoc": "^0.26.8",
     "typedoc-plugin-frontmatter": "^1.0.0",
