@@ -16,6 +16,11 @@ export function load(app) {
                     ...page.frontmatter,
                 };
             }
+
+            page.frontmatter = {
+                ...page.frontmatter,
+                editUrl: false
+            }
         }
     );
 }

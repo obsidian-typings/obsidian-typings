@@ -11,7 +11,10 @@ export default defineConfig({
     integrations: [
         starlight({
             title: 'Obsidian Typings',
-            favicon: './assets/favicon-test.png',
+            editLink: {
+              baseUrl: 'https://github.com/Fevol/obsidian-typings/tree/main/docs/'
+            },
+            favicon: './assets/favicon.png',
             social: {
                 github: 'https://github.com/fevol/obsidian-typings'
             },
@@ -59,7 +62,7 @@ export default defineConfig({
                             'typedoc-plugin-mdn-links',
                             'typedoc-plugin-frontmatter',
                             './typedoc-plugins/resolve-source-plugin.js',
-                            './typedoc-plugins/badge-addition-plugin.js',
+                            './typedoc-plugins/alter-frontmatter-plugin.js',
                             './typedoc-plugins/custom-md-render-plugin.js',
                         ],
                         theme: 'starlight-typedoc',
@@ -70,9 +73,34 @@ export default defineConfig({
                 }),
                 starlightThemeObsidian({
                     graphConfig: {
+                        actions: ["fullscreen", "reset-zoom", "depth"],
                         renderArrows: true,
+                        repelForce: 500,
+                        labelFontSize: 8,
                         nodeDefaultStyle: {
                             neighborScale: 0.3
+                        },
+                        tagRenderMode: "same",
+                        tagStyles: {
+                            "obsidian": { shapeSize: 8, shapeColor: "nodeColor9" },
+                            "internals": { shapeSize: 8, shapeColor: "nodeColor8" },
+                            "augmentations": { shapeSize: 8, shapeColor: "nodeColor7" },
+                            "canvas": { shapeSize: 8, shapeColor: "nodeColor3" },
+                            "publish": { shapeSize: 8, shapeColor: "nodeColor4" },
+                            "codemirror__view": { shapeSize: 8, shapeColor: "nodeColor5" },
+                            "global": { shapeSize: 8, shapeColor: "nodeColor2" },
+                        }
+                    },
+                    sitemapConfig: {
+                        tagRules: {
+                            "obsidian": [ "**/obsidian/**/*" ],
+                            "internals": [ "**/internals/**/*" ],
+                            "augmentations": [ "**/augmentations/**/*" ],
+                            "canvas": [ "**/canvas/**/*" ],
+                            "publish": [ "**/publish/**/*" ],
+                            "codemirror__view": [ "**/codemirror__view/**/*" ],
+                            "global": [ "**/global/**/*" ],
+
                         }
                     }
                 })
