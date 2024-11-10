@@ -23,6 +23,7 @@ export default defineConfig({
                     label: 'Start Here',
                     items: [
                         { label: 'Getting Started', link: '/getting-started/' },
+                        { label: 'Usage', link: '/usage/' },
                         { label: 'Disclaimer', link: '/disclaimer/' },
                         { label: 'Contributing', link: '/contributing/' },
                         { label: 'Attribution', link: '/attribution/' },

@@ -1,0 +1,61 @@
+---
+title: Usage
+description: Learn how to import and use the library in your project.
+---
+
+On this page, you can find information on how you can import and use the library in your project.
+
+## Accessing types
+### Import from&nbsp;`obsidian`
+
+If you want to access types from the `obsidian` module, the import syntax is unchanged:
+
+```ts
+import { App } from 'obsidian';
+
+function printInternalPlugins(app: App): void {
+  console.log(app.internalPlugins);
+}
+```
+
+### Import from&nbsp;`obsidian-typings`
+
+Additional interfaces added by this package (which are not documented anywhere in the official API) can be imported using:
+
+```ts
+import { InternalPlugins } from 'obsidian-typings';
+
+const internalPlugins: InternalPlugins = this.app.internalPlugins;
+```
+
+### Extend with your own typings
+
+If you need to extend the typings provided by this package with your own types,
+add the following to any `.d.ts` file in your project:
+
+```ts {4}
+// This is a very essential line.
+// If you don't have any other top-level `import/export` statements,
+//      the typings listed below will work not as expected.
+export {};
+declare module 'obsidian-typings' {
+  interface PluginsPluginsRecord {
+    myPlugin: MyPlugin;
+  }
+}
+```
+
+## Using implementations
+### Via&nbsp;`obsidian-typings/implementations`
+
+Additional helper functions/types/... added by this package, can be added by importing from `obsidian-typings/implementations`:
+
+```ts
+import { InternalPluginName } from 'obsidian-typings/implementations';
+
+this.app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
+```
+
+(The list of all available implementations can be found in the [implementations](https://github.com/Fevol/obsidian-typings/tree/main/src/implementations) folder.)
+
+
