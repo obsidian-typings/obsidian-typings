@@ -67,12 +67,14 @@ const obsidian_version_resolution = {
     "1.4.11": "83ce5767ab107e888079e9a673ce4c3153db1ff2",
     "1.5.1": "bbb696aeb8bf5126bf2ecbf84fc8284fe133bc20",
     "1.5.7": "cdc74f2c3b245abc20e71e6ca996ea21e9fd1a13",
-    "1.6.6": "ea526e2459ad3f188c994862a9b106d94bf0f692"
+    "1.6.6": "ea526e2459ad3f188c994862a9b106d94bf0f692",
+    "1.7.2": "3f5614ae8e872a4edbb528468f70023792aaa905",
+    // TODO: Update this list when the latest version is released (otherwise, links will point to HEAD)
+    //  Make sure the actual commit is used that matches with the NPM version
 }
 
 const packages = {
     "obsidian": {
-        // TODO: Obsidian does not version its github repository, so links will be to master (with risk of being out of sync when an update occurs)
         version: obsidian_version_resolution[JSON.parse(fs.readFileSync(ROOT_FOLDER + "node_modules/obsidian/package.json", "utf-8")).version],
         github: "obsidianmd/obsidian-api",
     },
@@ -99,7 +101,7 @@ function setSources(ref, file_name = "", file_path = "", offset = 0) {
     if (ref.sources?.length > 0) {
         for (const source of ref.sources) {
             // Do not point to the bundled node_modules, but to the appropriate package instead
-            if (source.fullFileName.includes("node_modules") || file_path.includes("node_modules")) {
+            if (source.fullFileName.includes("node_modules") || (file_path.includes("node_modules") && !source.url)) {
                 const path = (file_path || source.fullFileName).split("node_modules/")[1];
                 const package_name = path.split("/")[0];
                 if (packages[package_name]) {
@@ -112,7 +114,7 @@ function setSources(ref, file_name = "", file_path = "", offset = 0) {
             }
 
             // If typing came from the full types entrypoint, custom resolution via file_name/file_path
-            else if (source.fullFileName.includes(ENTRYPOINT_NAME)) {
+            else if (source.fullFileName.includes(ENTRYPOINT_NAME) && file_path) {
                 source.fileName = file_name;
                 source.fullFileName = file_path;
                 source.line -= offset;
@@ -120,7 +122,7 @@ function setSources(ref, file_name = "", file_path = "", offset = 0) {
             }
 
             // Force URL to point to corresponding version, rather than a git commit
-            else if (source.url.match(/blob\/[0-9a-f]{5,40}\/src/)) {
+            else if (source.url?.match(/blob\/[0-9a-f]{5,40}\/src/)) {
                 source.url = source.url.replace(/blob\/[0-9a-f]{5,40}\/src/, `blob/${typings_version}/src`);
             }
         }

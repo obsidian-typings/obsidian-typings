@@ -21,9 +21,9 @@
     }
 
     .starlight-aside--remark {
-        --sl-color-asides-text-accent: #f8ce96;
+        --sl-color-asides-text-accent: #ea9f52;
         --sl-color-asides-border: #af6b32;
-        background-color: #ae7238;
+        background-color: #302418;
     }
 
     .starlight-aside--todo {

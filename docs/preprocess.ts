@@ -8,8 +8,6 @@ import {
 
 import {Project} from "ts-morph";
 
-import obsidian_package from "../node_modules/obsidian/package.json";
-
 const project = new Project();
 
 const augmentations = new Map<string, string>();
@@ -86,7 +84,10 @@ async function convertRecursive(dir: string): Promise<void> {
 const srcDir = join(process.cwd().replaceAll("\\", "/"), "../src");
 await convertRecursive(srcDir);
 
+// Start creating the final output file starting with the augmentations types as a base
 const typesSourceFile = project.addSourceFileAtPath("../src/obsidian/augmentations/index.d.ts");
+
+// Import all required imports into the types source file
 for (const [moduleSpecifier, importedNames] of imports) {
     typesSourceFile.addImportDeclaration({
         moduleSpecifier: moduleSpecifier,
@@ -100,6 +101,13 @@ for (const [moduleSpecifier, importedNames] of imports) {
 for (const exportDeclaration of typesSourceFile.getExportDeclarations()) {
     exportDeclaration.remove();
 }
+
+// Join augmentations into obsidian namespace (because otherwise types are duplicated in both)
+const obsidianNamespace = augmentations.get("obsidian");
+const augmentationsNamespace = augmentations.get("augmentations");
+augmentations.set("obsidian", obsidianNamespace + augmentationsNamespace);
+augmentations.delete("augmentations");
+
 for (let [augmentationsDirName, augmentation] of augmentations) {
     const namespaceName = "_" + augmentationsDirName.replace(/[^a-zA-Z0-9]/g, "_");
     if (augmentationsDirName === "obsidian") {
@@ -139,7 +147,7 @@ typesSourceFile.addModule({
     docs: [{
         tags: [{
             tagName: "source",
-            text: `node_modules/obsidian/canvas.d.ts#` + (typesSourceFile.getEndLineNumber() + 2)
+            text: `node_modules/obsidian/canvas.d.ts#` + (typesSourceFile.getEndLineNumber() + 3)
         }]
     }]
 });
@@ -152,7 +160,7 @@ typesSourceFile.addModule({
     docs: [{
         tags: [{
             tagName: "source",
-            text: `node_modules/obsidian/publish.d.ts#` + (typesSourceFile.getEndLineNumber() + 2)
+            text: `node_modules/obsidian/publish.d.ts#` + (typesSourceFile.getEndLineNumber() + 3)
         }]
     }]
 });
