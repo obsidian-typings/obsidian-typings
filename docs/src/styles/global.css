@@ -15,9 +15,9 @@
     --sl-hero-color: hsla(179, 26%, 49%, 30%);
 
     .starlight-aside--tutorial {
-        --sl-color-asides-text-accent: #85d4da;
-        --sl-color-asides-border: #5eb5bd;
-        background-color: #416263;
+        --sl-color-asides-text-accent: #157AFF;
+        --sl-color-asides-border: #21385a;
+        background-color: #1e314c;
     }
 
     .starlight-aside--remark {
@@ -30,6 +30,12 @@
         --sl-color-asides-text-accent: #d2c7ff;
         --sl-color-asides-border: #291761;
         background-color: #321c81;
+    }
+
+    .starlight-aside--note {
+        --sl-color-asides-text-accent: #85d4da;
+        --sl-color-asides-border: #5eb5bd;
+        background-color: #416263;
     }
 }
 
@@ -55,6 +61,12 @@
         --sl-color-asides-text-accent: #6844dc;
         --sl-color-asides-border: #5f3ad6;
         background-color: #ddd5f8;
+    }
+
+    .starlight-aside--note {
+        --sl-color-asides-text-accent: #0d9a99;
+        --sl-color-asides-border: #21a6a5;
+        background-color: #cdeded;
     }
 }
 
@@ -135,4 +147,30 @@
 
 h3, h4, h5 {
     display: flex;
+}
+
+
+.content-badge {
+    color: white;
+    background-color: var(--badge-color);
+    border-radius: 4px;
+    padding: 0.1rem 0.25rem;
+    font-weight: 800;
+    font-size: 0.75rem;
+}
+
+.content-badge--devtools {
+    --badge-color: var(--sl-color-accent);
+}
+.content-badge--css {
+    --badge-color: var(--sl-color-red);
+}
+.content-badge--js {
+    --badge-color: var(--sl-color-purple);
+}
+.content-badge--electron {
+    --badge-color: var(--sl-color-orange);
+}
+.content-badge--html {
+    --badge-color: var(--sl-color-blue);
 }

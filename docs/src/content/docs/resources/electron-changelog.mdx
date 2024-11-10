@@ -1,0 +1,218 @@
+---
+title: Electron Changelog
+description: An overview of the additions brought by each Electron version update.
+---
+
+export function DevTools() {
+    return <span class="content-badge content-badge--devtools">Devtools</span>
+}
+
+export function CSS() {
+    return <span class="content-badge content-badge--css">CSS</span>
+}
+
+export function JS() {
+    return <span class="content-badge content-badge--js">JS</span>
+}
+
+export function Electron() {
+    return <span class="content-badge content-badge--electron">Electron</span>
+}
+export function HTML() {
+    return <span class="content-badge content-badge--html">HTML</span>
+}
+
+The following page lists the most important features and changes brought by each Electron version update.
+A focus is put on the features that are most likely to be used by Obsidian developers.
+
+New Electron versions can be installed by running the Obsidian installer again.
+
+:::note
+This page has been written from the perspective of a plugin developer, it is likely
+that some features from the Chromium/Electron/Node.js updates are not listed here.
+
+Links have been provided to the official changelogs where all changes can be found.
+:::
+
+:::danger
+Users only sporadically update Obsidian's installer versions on desktop,
+these features will only be available for most users after a couple of months.
+
+Feel free to use these features in your personal plugins, themes and snippets.
+:::
+
+## [Obsidian 1.7.5](https://obsidian.md/changelog/2024-11-04-desktop-v1.7.5/) (2024/11/04)
+### [Electron v32](https://www.electronjs.org/blog/electron-32-0)&nbsp;(chromium&nbsp;[127](https://developer.chrome.com/blog/new-in-chrome-127/)&nbsp;+&nbsp;[128](https://developer.chrome.com/blog/new-in-chrome-128/))
+- <JS/> [`Promise.try`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/try): Errors in (sync/async) function are always returned as a rejected promise
+- <JS/> [Distinguish different pens via `deviceProperties`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/try)
+- <CSS/> [`font-size-adjust`](https://developer.chrome.com/blog/new-in-chrome-127/#font-size-adjust): Decrease size for a fallback font
+- <DevTools/> [Gemini Console insights](https://developer.chrome.com/docs/devtools/console/understand-messages)
+- <DevTools/> [Inspect CSS anchor positions](https://developer.chrome.com/blog/new-in-devtools-127#elements-links)
+- <DevTools/> [`Never pause here` option for breakpoints](https://developer.chrome.com/blog/new-in-devtools-127#never-pause-here)
+- <DevTools/> [User timings](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing) included in [`Performance` summary](https://developer.chrome.com/blog/new-in-devtools-128#timings-details)
+- <DevTools/> [Improved Network request inspection in `Performance` panel](https://developer.chrome.com/blog/new-in-devtools-128#perf-network)
+- <DevTools/> [Cleaner Memory snapshots and more descriptive labels](https://developer.chrome.com/blog/new-in-devtools-128#heap-snapshots)
+- <DevTools/> [Live editing of `@keyframes` animation while inspecting](https://developer.chrome.com/blog/new-in-devtools-128#animations)
+
+### [Electron v31](https://www.electronjs.org/blog/electron-31-0)&nbsp;(chromium&nbsp;[125](https://developer.chrome.com/blog/new-in-chrome-125/)&nbsp;+&nbsp;[126](https://developer.chrome.com/blog/new-in-chrome-126/))
+- <JS/> [Gamepad API rumble support](https://developer.mozilla.org/en-US/docs/Web/API/GamepadHapticActuator)
+- <JS/> [Compute Pressure API](https://developer.chrome.com/docs/web-platform/compute-pressure): Represent how busy the system is on CPU level
+- <CSS/> [Anchor Positioning](https://developer.chrome.com/blog/anchor-positioning-api): Natively position elements relative to other elements
+- <CSS/> [`round()`](https://developer.mozilla.org/en-US/docs/Web/CSS/round), [`mod()`](https://developer.mozilla.org/en-US/docs/Web/CSS/mod), [`clamp()`](https://developer.mozilla.org/en-US/docs/Web/CSS/clamp) functions have been added
+- <Electron/> [`WebSQL` support has been removed](https://www.electronjs.org/blog/electron-31-0#highlights)
+- <Electron/> [Added support for the `File System API` web standard](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API)
+- <DevTools/> [Capture CSS selector statistics for long-running selectors in `Performance` tab](https://developer.chrome.com/blog/new-in-devtools-125#selector-stats)
+- <DevTools/> [Hide and reorder tracks in `Performance` tab](https://developer.chrome.com/blog/new-in-devtools-125#track-config)
+- <DevTools/> [`Console` tab will now show chain of error causes, instead of just the last error](https://developer.chrome.com/blog/new-in-devtools-125#error-cause)
+- <DevTools/> [Enable automatic `pretty-printing` of minified code](https://developer.chrome.com/blog/new-in-devtools-125#settings)
+- <DevTools/> [20x CPU throttling speed option for `Performance` inspection](https://developer.chrome.com/blog/new-in-devtools-126#throttle-20x)
+
+## [Obsidian 1.6.5](https://obsidian.md/changelog/2024-06-25-desktop-v1.6.5/) (2024/06/25)
+### [Electron v30](https://www.electronjs.org/blog/electron-30-0)&nbsp;(chromium&nbsp;[123](https://developer.chrome.com/blog/new-in-chrome-123/)&nbsp;+&nbsp;[124](https://developer.chrome.com/blog/new-in-chrome-124/))
+- <JS/> [`Websocket Stream API`](https://developer.chrome.com/docs/capabilities/web-apis/websocketstream), regulates the flow of data between client and server
+- <CSS/> [`light-dark(light_val, dark_val)`](https://web.dev/articles/light-dark), which returns a value based on [`color-scheme`](https://web.dev/articles/color-scheme)
+- <DevTools/> [WebRTC throttling](https://developer.chrome.com/blog/new-in-devtools-124/#throttling)
+- <DevTools/> [Scroll-driven animations inspection](https://developer.chrome.com/blog/new-in-devtools-124/#animations)
+- <DevTools/> [Improved visualization of nested CSS](https://developer.chrome.com/blog/new-in-devtools-124/#nested-css)
+- <DevTools/> [Value editors for `var()` fallbacks](https://developer.chrome.com/blog/new-in-devtools-123/#var-fallbacks)
+- <DevTools/> [Enabled/Disable all breakpoint in `Sources` tab](https://developer.chrome.com/blog/new-in-devtools-123/#breakpoints)
+- <DevTools/> [UIX improvements for `Performance` tab](https://developer.chrome.com/blog/new-in-devtools-124/#perf)
+
+### [Electron v29](https://www.electronjs.org/blog/electron-29-0)&nbsp;(chromium&nbsp;[121](https://developer.chrome.com/blog/new-in-chrome-121/)&nbsp;+&nbsp;[122](https://developer.chrome.com/blog/new-in-chrome-122/))
+- <JS/> Capture and record specific HTML Elements via [`Element Capture API`](https://developer.chrome.com/docs/web-platform/element-capture)
+- <JS/> Programmatically open `<select>` elements via [`showPicker`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/showPicker) method
+- <CSS/> Set [`scrollbar-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color) and [`scrollbar-width`](https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-width) to customize scrollbars
+- <CSS/> Customize [`::spelling-error`](https://developer.mozilla.org/en-US/docs/Web/CSS/::spelling-error) and [`::grammar-error`](https://developer.mozilla.org/en-US/docs/Web/CSS/::grammar-error) pseudo-elements
+- <CSS/> Define [`font-palette`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-palette) for [COLRv1 fonts](developer.chrome.com/blog/colrv1-fonts)
+- <DevTools/> [Breadcrumbs in the `Performance` timeline](https://developer.chrome.com/blog/new-in-devtools-122/#perf-breadcrumbs)
+- <DevTools/> [Initiator of event (handler) is now shown via arrow in `Performance` timeline](https://developer.chrome.com/blog/new-in-devtools-122/#event-initiators)
+- <DevTools/> [Set devtools theming to match Chrome color theme](https://developer.chrome.com/blog/new-in-devtools-122/#dynamic-theming)
+- <DevTools/> [Improved filtering of `Performance` tabs](https://developer.chrome.com/blog/new-in-devtools-121/#filters)
+- <DevTools/> [Indentation markers in `Sources` tab](https://developer.chrome.com/blog/new-in-devtools-121/#sources)
+
+## [Obsidian 1.5.8](https://obsidian.md/changelog/2024-02-22-desktop-v1.5.8/) (2024/02/22)
+### [Electron v28](https://www.electronjs.org/blog/electron-28-0)&nbsp;(chromium&nbsp;[119](https://developer.chrome.com/blog/new-in-chrome-119/)&nbsp;+&nbsp;[120](https://developer.chrome.com/blog/new-in-chrome-120/))
+- <JS/> [Creating `<details>` groups with name attribute](https://developer.chrome.com/blog/new-in-chrome-120/#details-name)
+- <JS/> [`CloseWatcher API`](https://html.spec.whatwg.org/multipage/interaction.html#the-closewatcher-interface) for detecting closing of modals.
+- <CSS/> [`:user-invalid`](https://developer.mozilla.org/en-US/docs/Web/CSS/:user-invalid) and [`:user-valid`](https://developer.mozilla.org/en-US/docs/Web/CSS/:user-valid) pseudo-classes for form interaction
+- <CSS/> [Relative color syntax for `color`](https://developer.chrome.com/blog/css-relative-color-syntax)
+- <Electron/> [Support for ESM/ECMAScript modules](https://www.electronjs.org/docs/latest/tutorial/esm)
+- <DevTools/> [Improved animation debugging](https://developer.chrome.com/blog/new-in-devtools-120/#animations)
+
+### [Electron v27](https://www.electronjs.org/blog/electron-27-0)&nbsp;(chromium&nbsp;[117](https://developer.chrome.com/blog/new-in-chrome-117/)&nbsp;+&nbsp;[118](https://developer.chrome.com/blog/new-in-chrome-118/))
+- <JS/> [`Array.groupBy()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy) for grouping array values
+- <CSS/>[`@scope selector rules`](https://developer.chrome.com/docs/css-ui/at-scope), matches to closest ancestor
+- <CSS/> [Smooth entry/exit animations](https://developer.chrome.com/blog/entry-exit-animations)
+- <DevTools/> [Mock/override contents of fetch requests in `Network` tab](https://developer.chrome.com/docs/devtools/overrides)
+- <DevTools/> [Search improvements, shows _all_ matches and faster](https://developer.chrome.com/blog/new-in-devtools-118/#search)
+- <DevTools/> [`Sources` pane l reordering](https://developer.chrome.com/blog/new-in-devtools-118/#reorder-panes)
+
+### [Electron v26](https://www.electronjs.org/blog/electron-26-0)&nbsp;(chromium&nbsp;[115](https://developer.chrome.com/blog/new-in-chrome-115/)&nbsp;+&nbsp;[116](https://developer.chrome.com/blog/new-in-chrome-116/))
+- <JS/> [Document PiP](https://developer.chrome.com/docs/web-platform/document-picture-in-picture/)
+- <CSS/> [Custom Scroll Animators](https://developer.chrome.com/articles/scroll-driven-animations/)
+- <DevTools/> [Specificity inspection](https://developer.chrome.com/blog/new-in-devtools-115/#specificity)
+- <DevTools/> [Syntax highlight for preprocessed CSS](https://developer.chrome.com/blog/new-in-devtools-115#css)
+
+
+:::note
+From this point onwards, the exact dates of the Electron installer updates
+are not clearly specified in the Obsidian changelogs, so it is possible that the
+versions were already added in earlier updates.
+
+Further, only the most important features will be listed (specifically CSS and JS features).
+:::
+
+
+## [Obsidian 1.4.5](https://obsidian.md/changelog/2023-08-31-desktop-v1.4.5/) (2023/08/31)
+### [Electron v25](https://www.electronjs.org/blog/electron-25-0)&nbsp;(chromium&nbsp;[113](https://developer.chrome.com/blog/new-in-chrome-113/)&nbsp;+&nbsp;[114](https://developer.chrome.com/blog/new-in-chrome-114/))
+- <JS/> [Popover API](https://developer.chrome.com/blog/introducing-popover-api/)
+- <CSS/> [`text-wrap:balance`](https://developer.chrome.com/blog/css-text-wrap-balance/):A cleaner way to balance your text, max. 6 lines
+
+### [Electron v24](https://www.electronjs.org/blog/electron-24-0)&nbsp;(chromium&nbsp;[111](https://developer.chrome.com/blog/new-in-chrome-111/)&nbsp;+&nbsp;[112](https://developer.chrome.com/blog/new-in-chrome-112/))
+- <JS/> [View Transitions API](https://developer.chrome.com/blog/new-in-chrome-111/#view-transitions-api)
+- <CSS/> [Nesting style rules](https://developer.chrome.com/blog/new-in-chrome-112/#nesting-rules)
+- <CSS/> [CSS Color Level 4](https://developer.chrome.com/blog/new-in-chrome-111/#css-color-level4)
+- <CSS/> [`sin()`](https://developer.mozilla.org/en-US/docs/Web/CSS/sin), [`cos()`](https://developer.mozilla.org/en-US/docs/Web/CSS/cos), [`tan()`](https://developer.mozilla.org/en-US/docs/Web/CSS/tan) trigonometric functions
+- <CSS/> More [`:nth-child()` S syntax](https://developer.chrome.com/docs/css-ui/css-nth-child-of-s) selectors
+
+### [Electron v23](https://www.electronjs.org/blog/electron-23-0)&nbsp;(chromium&nbsp;[109](https://developer.chrome.com/blog/new-in-chrome-109/)&nbsp;+&nbsp;[110](https://developer.chrome.com/blog/new-in-chrome-110/))
+- <JS/> [`MathML Core` support](https://www.w3.org/TR/mathml-core/)
+- <CSS/> [`lh` length unit](https://developer.chrome.com/blog/new-in-chrome-109/#css-updates), equal to the computed line height of the element
+- <CSS/> [`hyphenate-limit-chars`](https://developer.mozilla.org/en-US/docs/Web/CSS/hyphenate-limit-chars): specifies the minimum number of characters in a hyphenated word
+- <CSS/> [`:picture-in-picture`](https://developer.mozilla.org/en-US/docs/Web/CSS/:picture-in-picture): Pseudo-class for Picture-in-Picture mode
+- <CSS/> [`initial-letter`](https://developer.mozilla.org/en-US/docs/Web/CSS/initial-letter): Style the first letter of a block
+- <Electron/> [`app.getPreferredSystemLanguages()`](https://github.com/electron/electron/pull/36035): Get the user's preferred system languages
+
+### [Electron v22](https://www.electronjs.org/blog/electron-22-0)&nbsp;(chromium&nbsp;[107](https://developer.chrome.com/blog/new-in-chrome-107/)&nbsp;+&nbsp;[108](https://developer.chrome.com/blog/new-in-chrome-108/))
+- <CSS/> [Dynamic viewport units](https://web.dev/blog/viewport-units) for creating better adaptive UIs
+- <CSS/> [Variable COLRv1 fonts](https://developer.chrome.com/blog/new-in-chrome-108/#colrv1-support)
+- <CSS/> [CSS animated grid layouts](https://web.dev/articles/css-animated-grid-layouts)
+
+## [Obsidian 1.1.9](https://obsidian.md/changelog/2022-12-23-desktop-v1.1.9/) (2022/12/23)
+### [Electron v21](https://www.electronjs.org/blog/electron-21-0)&nbsp;(chromium&nbsp;[105](https://developer.chrome.com/blog/new-in-chrome-105/)&nbsp;+&nbsp;[106](https://developer.chrome.com/blog/new-in-chrome-106/))
+- <JS/> [`Sanitizer` API](https://web.dev/sanitizer/): HTML sanitization for untrusted strings
+- <JS/> [`Intl` number formatting API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat)
+- <HTML/> [Popup elements](https://developer.chrome.com/blog/pop-ups-theyre-making-a-resurgence)
+- <CSS/> [`:has()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:has) selector and pseudo-class for selecting elements with specific children
+- <CSS/> [`ic`](https://developer.mozilla.org/en-US/docs/Web/CSS/length#ic) unit for specifying the width of ideograms
+
+### [Electron v20](https://www.electronjs.org/blog/electron-20-0)&nbsp;(chromium&nbsp;[103](https://developer.chrome.com/blog/new-in-chrome-103/)&nbsp;+&nbsp;[104](https://developer.chrome.com/blog/new-in-chrome-104/))
+- <JS/> [Local Font Access API](https://developer.chrome.com/docs/capabilities/web-apis/local-fonts): Enumerate local fonts on the user's device
+- <JS/> [`AbortSignal.timeout()`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) for setting a timeout signal on fetch requests
+- <CSS/> [Range media queries](https://web.dev/articles/media-query-range-syntax): specify intervals for media queries
+- <CSS/> [`overflow-clip-margin`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-clip-margin): how far content is allowed to overflow before clipping
+
+### [Electron v19](https://www.electronjs.org/blog/electron-19-0)&nbsp;(chromium&nbsp;[101](https://developer.chrome.com/blog/new-in-chrome-101/)&nbsp;+&nbsp;[102](https://developer.chrome.com/blog/new-in-chrome-102/))
+- <HTML/> [`inert` property](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/inert): Make an element non-interactive
+- <CSS/> [`hwb()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/hwb) color function for specifying colors
+
+
+## [Obsidian 0.14.5](https://obsidian.md/changelog/2022-04-01-desktop-v0.14.5/) (2022/04/01)
+### [Electron v18](https://www.electronjs.org/blog/electron-18-0)&nbsp;(chromium&nbsp;[99](https://developer.chrome.com/blog/new-in-chrome-99/)&nbsp;+&nbsp;[100](https://developer.chrome.com/blog/new-in-chrome-100/))
+ - <JS/> [`showPicker()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/showPicker): Programmatically open `<input>` elements
+ - <JS/> [Multi-screen window placement API](https://developer.chrome.com/docs/capabilities/web-apis/window-management)
+- <CSS/> [`CSS Cascade Layers`](https://developer.chrome.com/blog/new-in-chrome-99/#css-cascade-layers): Control the order of CSS rules
+
+## [Obsidian 0.13.31](https://obsidian.md/changelog/2022-03-08-desktop-v0.13.31/) (2022/03/08)
+### [Electron v17](https://www.electronjs.org/blog/electron-17-0)&nbsp;(chromium&nbsp;[97](https://developer.chrome.com/blog/new-in-chrome-97/)&nbsp;+&nbsp;[98](https://developer.chrome.com/blog/new-in-chrome-98/))
+- <JS/> [Web Transport API](https://developer.mozilla.org/en-US/docs/Web/API/WebTransport): Client-server messaging with low latency
+- <JS/> [`findLast`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLast) and [`findLastIndex`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex) array methods
+- <CSS/> [COLRv1 fonts](https://developer.chrome.com/blog/colrv1-fonts/): Color fonts with multiple layers
+
+## [Obsidian 0.13.30](https://obsidian.md/changelog/2022-03-07-desktop-v0.13.30/) (2022/03/07)
+### [Electron v16](https://www.electronjs.org/blog/electron-16-0)&nbsp;(chromium&nbsp;[95](https://developer.chrome.com/blog/new-in-chrome-95/)&nbsp;+&nbsp;[96](https://developer.chrome.com/blog/new-in-chrome-96/))
+- <JS/> [`URLPatern`](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern): Match URLs with patterns
+- <JS/> [Eye Dropper API](https://developer.chrome.com/blog/new-in-chrome-95/#eyedropper): Get color values from the screen
+
+### [Electron v15](https://www.electronjs.org/blog/electron-15-0)&nbsp;(chromium&nbsp;[94](https://developer.chrome.com/blog/new-in-chrome-94/))
+- <JS/> [Specify color space for `<canvas>` elements](https://developer.chrome.com/blog/new-in-chrome-94/#canvas-colorspace)
+- <JS/> [WebCodecs API](https://developer.mozilla.org/en-US/docs/Web/API/WebCodecs_API): Encode and decode media streams
+- <JS/> [WebGPU API](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API): Low-level graphics API
+- <CSS/> [`scrollbar-gutter`](https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-gutter): Control the space between the scrollbar and the content
+
+### [Electron v14](https://www.electronjs.org/blog/electron-14-0)&nbsp;(chromium&nbsp;[92](https://chromestatus.com/features#milestone%3D92)&nbsp;+&nbsp;[93](https://developer.chrome.com/blog/new-in-chrome-93/))
+- <JS/> [Load CSS modules with `import`](https://web.dev/articles/css-module-scripts)
+
+### [Electron v13](https://www.electronjs.org/blog/electron-13-0)&nbsp;(chromium&nbsp;[90](https://developer.chrome.com/blog/new-in-chrome-90/)&nbsp;+&nbsp;[91](https://developer.chrome.com/blog/new-in-chrome-91/))
+- <JS/> [Read files from clipboard](https://developer.chrome.com/blog/new-in-chrome-91/#reading_files_from_the_clipboard)
+- <CSS/> [`overflow: clip`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow#clip): Clip content without any scrollbars
+
+## [Obsidian 0.12.3](https://obsidian.md/changelog/2021-05-10-desktop-v0.12.3/) (2021/05/10)
+### [Electron v12](https://www.electronjs.org/blog/electron-12-0)&nbsp;(chromium&nbsp;[88](https://developer.chrome.com/blog/new-in-chrome-88/)&nbsp;+&nbsp;[89](https://developer.chrome.com/blog/new-in-chrome-89/))
+- <JS/> [Pointer Lock API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_Lock_API): Control mouse movement and acceleration
+- <CSS/> [`aspect-ratio`](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio): Set the aspect ratio of an element
+
+
+### [Electron v11](https://www.electronjs.org/blog/electron-11-0)&nbsp;(chromium&nbsp;[86](https://developer.chrome.com/blog/new-in-chrome-86/)&nbsp;+&nbsp;[87](https://developer.chrome.com/blog/new-in-chrome-87/))
+- <CSS/> [`:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible): Style elements that are focused by keyboard
+
+
+## [Obsidian 0.8.12](https://obsidian.md/changelog/2020-09-07-desktop-v0.8.12/) (2020/09/07)
+### [Electron v10](https://www.electronjs.org/blog/electron-10-0)&nbsp;(chromium&nbsp;[84](https://developer.chrome.com/blog/new-in-chrome-84/)&nbsp;+&nbsp;[85](https://developer.chrome.com/blog/new-in-chrome-85/))
+- <JS/> [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API): Control animations with JavaScript
+- <CSS/> [`content-visibility`](https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility): Skip rendering of off-screen elements
+- <CSS/> [`@property`](https://developer.mozilla.org/en-US/docs/Web/CSS/@property): Define custom CSS properties
+
+### [Electron v9](https://www.electronjs.org/blog/electron-9-0)&nbsp;(chromium&nbsp;[81](https://developer.chrome.com/blog/new-in-chrome-81/)&nbsp;+&nbsp;[83](https://developer.chrome.com/blog/new-in-chrome-83/))
+- <JS/> [`measureMemory`](https://developer.mozilla.org/en-US/docs/Web/API/Performance/measureMemory): Measure memory usage of a page
+- <CSS/> [`@supports`](https://developer.mozilla.org/en-US/docs/Web/CSS/@supports): Provide feature detection for CSS selectors
