@@ -1,0 +1,81 @@
+---
+title: Getting Started
+description: Learn how to use the Obsidian Typings in your Obsidian plugin.
+---
+
+Obsidian Typings is a TypeScript library that provides type definitions for private parts of the Obsidian API.
+This project is not officially affiliated with [Obsidian](https://obsidian.md/).
+
+:::caution[Warning]
+Before using this package, make sure to read through the [**disclaimer**](/obsidian-typings/disclaimer/)
+to understand the risks associated with using these typings,
+and to know for who and what types of projects this package is intended.
+:::
+
+## Prerequisites
+
+You will need to have a plugin template set up with a package manager and TypeScript.
+If you don't have one yet, follow the ["Build a plugin"](https://docs.obsidian.md/Plugins/Getting+started/Build+a+plugin) guide
+in the official Obsidian docs to create one.
+
+## Installation
+
+import { Steps } from '@astrojs/starlight/components'
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+    1. **Installation** <br/>
+        Obsidian Typings is a [NPM package](https://www.npmjs.com/package/obsidian-typings) that you can install using your favorite package manager:
+        <PackageManagers pkg="obsidian-typings" dev={true} pkgManagers={["npm", "yarn", "pnpm", "bun"]}/>
+    2. **Add `obsidian-typings` to `types` in `tsconfig.json`** (_recommended_) <br/>
+        Register the types from `obsidian-typings` to your project with the `tsconfig.json` file.
+        ```diff lang="json"
+            // tsconfig.json
+            {
+                "compilerOptions": {
+                    "...": "...",
+        +           "types": [
+        +               "obsidian-typings"
+        +           ]
+                }
+            }
+        ```
+        :::remark
+        If you added the `types` field to your `tsconfig.json`, and `@types/some-package-name` does not get recognized anymore, you may need to re-add it to `types`:
+        ```diff lang="json"
+        // tsconfig.json
+        {
+            "compilerOptions": {
+                "...": "...",
+                "types": [
+                    "obsidian-typings",
+        +            "some-package-name"
+                ]
+            }
+        }
+        ```
+        :::
+	3. **Explicit type importing** <br/>
+        If you prefer not to add `obsidian-typings` to your `types`, you can also add `import 'obsidian-typings';` to any project file.
+
+    4. **Using `obsidian-typings/implementations`** <br/>
+        Depending on how your project is set up, `import { X } from 'obsidian-typings/implementations';` may not work straight out of the box, e.g., if you have `"moduleResolution": "node"` or `"node10"` in your `tsconfig.json`. <br/><br/>
+        To solve this, you can add the following to your `tsconfig.json`:
+
+        ```diff lang="json"
+        // tsconfig.json
+        {
+            "compilerOptions": {
+                "...": "...",
+                "paths": {
+        +           "obsidian-typings/implementations": [
+        +               "./node_modules/obsidian-typings/dist/implementations.d.ts",
+        +               "./node_modules/obsidian-typings/dist/implementations.cjs"
+        +           ]
+                }
+            }
+        }
+        ```
+</Steps>
+
+That's it! Now the type definitions should be accessible in your project.

@@ -1,0 +1,107 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'title'> {
+    title: string;
+    description?: string;
+    icon?: any;
+}
+
+const { title, description, icon, ...attributes } = Astro.props;
+---
+
+<div class="sl-link-card-icon">
+	<span class="sl-flex stack">
+		<a {...attributes} class="title sl-flex">
+			{icon && <Icon name={icon} class="icon" size="1.333em" />}
+            <span set:html={title} />
+		</a>
+        {description && <span class="description" set:html={description} />}
+	</span>
+    <Icon name="right-arrow" size="1.333em" class="icon rtl:flip" />
+</div>
+
+<style>
+    .sl-link-card-icon {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.5rem;
+        border: 1px solid var(--sl-color-gray-5);
+        border-radius: 0.5rem;
+        padding: 1rem;
+        box-shadow: var(--sl-shadow-sm);
+        position: relative;
+
+        --sl-card-border: var(--sl-color-purple);
+        --sl-card-bg: var(--sl-color-purple-low);
+    }
+
+    a {
+        text-decoration: none;
+        line-height: var(--sl-line-height-headings);
+    }
+
+    /* a11y fix for https://github.com/withastro/starlight/issues/487 */
+    a::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+    }
+
+    .stack {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .title.title {
+        color: var(--sl-color-white);
+        font-weight: 600;
+        font-size: var(--sl-text-lg);
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .description {
+        color: var(--sl-color-gray-3);
+        line-height: 1.5;
+    }
+
+    .title .icon {
+        border: 1px solid var(--sl-card-border);
+        background-color: var(--sl-card-bg);
+        padding: 0.15em;
+        border-radius: 0.25rem;
+    }
+
+    .icon {
+        color: var(--sl-color-gray-2);
+    }
+
+    /* Hover state */
+    .sl-link-card-icon:hover {
+        background: var(--sl-color-gray-7);
+        border-color: var(--sl-color-accent-high);
+    }
+
+    .sl-link-card-icon:hover .icon {
+        color: var(--sl-color-white);
+    }
+
+    .sl-link-card-icon:nth-child(4n + 1) {
+        --sl-card-border: var(--sl-color-orange);
+        --sl-card-bg: var(--sl-color-orange-low);
+    }
+    .sl-link-card-icon:nth-child(4n + 3) {
+        --sl-card-border: var(--sl-color-green);
+        --sl-card-bg: var(--sl-color-green-low);
+    }
+    .sl-link-card-icon:nth-child(4n + 4) {
+        --sl-card-border: var(--sl-color-red);
+        --sl-card-bg: var(--sl-color-red-low);
+    }
+    .sl-link-card-icon:nth-child(4n + 5) {
+        --sl-card-border: var(--sl-color-blue);
+        --sl-card-bg: var(--sl-color-blue-low);
+    }
+</style>

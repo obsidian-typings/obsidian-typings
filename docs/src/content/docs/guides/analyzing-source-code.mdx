@@ -1,0 +1,85 @@
+---
+title: Analyzing minified source code
+description: Learn how to analyze the minified source code to understand the behavior of undocumented functions.
+---
+
+## Traversing and analyzing the source code
+
+Sometimes just looking at the function name is not enough to understand what it does,
+that's why it can be helpful to look at the actual definition of the function in the minified source code.
+
+Start off by going to the console, and then to the `Sources` tab.
+Here you will find the `app.js` file where all the internal methods are defined.
+
+1. Go to the `Sources` tab
+2. Select the `app.js` file
+3. `Pretty format` the code (optional)
+4. Copy the code to your IDE of choice (optional, but recommended)
+
+![A showcase of how `main.js` can be accessed](../../../assets/accessing-main.png)
+
+With access to the minified code, you can now start searching through it and find the definition of the method you are trying to type.
+
+For any method "XYZ", start by just searching for "XYZ". Generally, the method is defined as either:
+
+-   `t.XYZ = ...` (for static methods)
+-   `t.prototype.XYZ = ...` (for prototype methods)
+-   `function XYZ(` (for internal/minified methods)
+
+At this stage, you might get lucky and get a single definition, or you may get multiple definitions of the method.
+In the latter case,
+you will need try to look at the context of the code to determine which interface/class the method belongs to.
+The main tip for finding the correct definition, is to look at the other methods being defined on the prototype,
+and check if these match with the other methods of your object.
+
+With the correct line found for the definition, you can now start analyzing the code to determine the input/output types
+and its behavior.
+
+For example, the `requestSaveConfig` method (seen earlier) is defined as follows:
+
+```js
+n.requestSaveConfig = at(n.saveConfig.bind(n), 1e3, !0),
+```
+
+Here, we find the following three things:
+
+-   `at` is a minified function that takes three arguments, and its return value is the return value of the method
+-   `1e3` is shorthand notation for `1000`
+-   `!0` is shorthand notation for `true`
+
+(There are many shorthands and structural changes that you will need to get used to in the minified code)
+
+Since we don't know what `at` does, we need to start searching through the code again. Make sure to enable caps + whole word search, as `at` is a very common word.
+Start by searching for `function at`, or `.prototype.at`. With any luck, this will lead you to the following definition:
+
+```js
+function at(e, t, n) {
+    void 0 === t && (t = 0), void 0 === n && (n = !1);
+    var i,
+        r = null,
+        o = null,
+        a = null,
+        s = 0,
+        l = function () {
+            var t = o,
+                n = a;
+            /*   ...    */
+        };
+}
+```
+
+You may want to pass the code through your favorite flavour of LLM or de-minifier to make the code at least somewhat understandable.
+Depending on whether you manage to decipher the code, you can now explicitly define the behavior and/or types of the method.
+
+### Async functions
+
+Reverse engineering the async functions is more challenging.
+
+In the `app.js`, you won't see many `async` functions. Most of them are converted to the equivalent state machine code.
+
+- If your function has `v(this, void 0,`, it's an async function.
+- If your function has `return [2]`, your function doesn't return anything and the return type of your function will be `Promise<void>`.
+- If your function has `return [2, someValue]`, your function returns `someValue` and the return type of your function will be `Promise<TypeOfSomeValue>`.
+- If your function has `return [4, someValue]`, it corresponds to `await someValue` and the awaited value is later retrieved as `n.sent()`.
+
+For more details how exactly it works, see [The `__generator` helper](https://github.com/microsoft/tslib/blob/main/docs/generator.md) documentation.

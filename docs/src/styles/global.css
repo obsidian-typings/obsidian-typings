@@ -1,0 +1,180 @@
+:root {
+    --icon-size-med: 20px;
+
+    .starlight-aside--todo {
+        --sl-color-asides-text-accent: var(--sl-color-red-high);
+        --sl-color-asides-border: var(--sl-color-red);
+        background-color: var(--sl-color-red-low);
+    }
+}
+
+:root[data-theme='dark'] {
+    --sl-color-accent-high: hsl(180, 26%, 51%);
+    --sl-color-accent: hsl(179, 26%, 49%);
+    --sl-color-accent-low: hsl(179, 36%, 35%);
+    --sl-hero-color: hsla(179, 26%, 49%, 30%);
+
+    .starlight-aside--tutorial {
+        --sl-color-asides-text-accent: #157AFF;
+        --sl-color-asides-border: #21385a;
+        background-color: #1e314c;
+    }
+
+    .starlight-aside--remark {
+        --sl-color-asides-text-accent: #ea9f52;
+        --sl-color-asides-border: #af6b32;
+        background-color: #302418;
+    }
+
+    .starlight-aside--todo {
+        --sl-color-asides-text-accent: #d2c7ff;
+        --sl-color-asides-border: #291761;
+        background-color: #321c81;
+    }
+
+    .starlight-aside--note {
+        --sl-color-asides-text-accent: #85d4da;
+        --sl-color-asides-border: #5eb5bd;
+        background-color: #416263;
+    }
+}
+
+:root[data-theme='light'] {
+    --sl-color-accent-high: hsl(179, 48%, 26%);
+    --sl-color-accent: hsl(178, 41%, 41%);
+    --sl-color-accent-low: hsl(179, 38%, 54%);
+    --sl-hero-color: hsl(178, 41%, 41%, 25%);
+
+    .starlight-aside--tutorial {
+        --sl-color-asides-text-accent: #086DDD;
+        --sl-color-asides-border: #1e5a97;
+        background-color: #E6F0FB;
+    }
+
+    .starlight-aside--remark {
+        --sl-color-asides-text-accent: #EC7500;
+        --sl-color-asides-border: #7a390c;
+        background-color: #ffead5;
+    }
+
+    .starlight-aside--todo {
+        --sl-color-asides-text-accent: #6844dc;
+        --sl-color-asides-border: #5f3ad6;
+        background-color: #ddd5f8;
+    }
+
+    .starlight-aside--note {
+        --sl-color-asides-text-accent: #0d9a99;
+        --sl-color-asides-border: #21a6a5;
+        background-color: #cdeded;
+    }
+}
+
+.group-label {
+    text-transform: capitalize;
+}
+
+
+/* Hero style */
+[data-has-hero] .page {
+    height: 100%;
+    background:
+        linear-gradient(215deg, var(--sl-hero-color), transparent 40%),
+        radial-gradient(var(--sl-hero-color), transparent 40%) no-repeat -80vw -70vh / 150vw 200vh,
+        radial-gradient(var(--sl-hero-color), transparent 65%) no-repeat 50% calc(100% + 20rem) /
+			150rem 30rem;
+}
+
+[data-has-hero] header {
+    border-bottom: 1px solid transparent;
+    background-color: transparent;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+}
+
+
+[data-has-hero] .hero > img {
+    filter: drop-shadow(0 0 3rem var(--sl-hero-color));
+}
+
+
+.svg-embed {
+    display: flex;
+}
+
+.starlight-aside {
+    --sl-color-asides-text-accent: var(--sl-color-red-high);
+    --sl-color-asides-border: var(--sl-color-red);
+    background-color: var(--sl-color-red-low);
+    border-radius: 8px;
+    border: unset;
+
+    svg {
+        width: var(--icon-size-med);
+        height: var(--icon-size-med);
+    }
+}
+
+.sl-separator {
+    display: flex;
+}
+
+.sl-separator:after {
+    content: "";
+    height: 2rem;
+    border-inline-end: 1px solid var(--sl-color-gray-5);
+}
+
+.obsidian-docs-link {
+    text-decoration: none;
+    color: var(--sl-color-accent);
+    font-weight: 600;
+    padding: 0 8px;
+}
+
+.code-location-icon {
+    display: flex;
+    margin-left: auto;
+}
+
+.code-location-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+h3, h4, h5 {
+    display: flex;
+}
+
+
+.content-badge {
+    color: white;
+    background-color: var(--badge-color, var(--sl-color-accent));
+    border-radius: 4px;
+    padding: 0.1rem 0.25rem;
+    font-weight: 800;
+    font-size: 0.75rem;
+}
+
+.content-badge--devtools {
+    --badge-color: var(--sl-color-accent);
+}
+.content-badge--css {
+    --badge-color: var(--sl-color-red);
+}
+.content-badge--js {
+    --badge-color: var(--sl-color-purple);
+}
+.content-badge--electron {
+    --badge-color: var(--sl-color-orange);
+}
+.content-badge--html {
+    --badge-color: var(--sl-color-blue);
+}
+
+.content-badge--warning {
+    --badge-color: var(--sl-color-red);
+}

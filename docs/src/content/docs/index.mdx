@@ -1,0 +1,59 @@
+---
+title: Obsidian Typings
+description: Typescript typings for undocumented parts of the Obsidian API.
+head:
+  - tag: title
+    content: Obsidian Typings
+template: splash
+editUrl: false
+lastUpdated: false
+hero:
+    tagline: Typescript typings for private parts of the Obsidian API.
+    image:
+        alt: A partially blurred cyan Obsidian logo, partially unblurred by a frame.
+        dark: ../../assets/obsidian-typings-logo-dark.png
+        light: ../../assets/obsidian-typings-logo-light.png
+    actions:
+        - text: Getting Started
+          link: /obsidian-typings/getting-started/
+          icon: rocket
+        - text: Disclaimer
+          link: /obsidian-typings/disclaimer/
+          icon: warning
+          variant: secondary
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components'
+
+## Features
+
+<CardGrid stagger>
+    <Card title="Typesafe access to Private API" icon="approve-check">
+        Adds typings for the private API of Obsidian, allowing you to access undocumented methods in a typesafe way.
+    </Card>
+
+    <Card title="Explanations and examples" icon="open-book">
+        Adds explanations and examples for methods to help you understand how to properly use them.
+    </Card>
+
+    <Card title="Custom implementations" icon="rocket">
+        Provides custom methods for adding mocks or accessing unexposed API.
+    </Card>
+</CardGrid>
+
+
+## Next steps
+
+<CardGrid stagger>
+    <Card title="Install the package" icon="puzzle">
+        Check the [getting started guide](/obsidian-typings/getting-started/) for installation
+        instructions.
+    </Card>
+    <Card title="Read the disclaimer" icon="warning">
+        Read [the disclaimer](/obsidian-typings/disclaimer/) to understand the limitations of the typings.
+    </Card>
+    <Card title="Contribute to the project" icon="comment">
+        Follow the [contribution guide](/obsidian-typings/contributing/) to help improve the typings and
+        expand this project!
+    </Card>
+</CardGrid>
