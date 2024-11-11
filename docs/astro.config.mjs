@@ -3,6 +3,7 @@ import {defineConfig} from 'astro/config'
 import starlightTypeDoc, {typeDocSidebarGroup} from 'starlight-typedoc'
 import {admonitionRenderer, githubLocationRenderer} from './remark-plugins'
 import starlightThemeObsidian from "starlight-theme-obsidian";
+import starlightLinksValidator from 'starlight-links-validator';
 
 
 export default defineConfig({
@@ -71,6 +72,11 @@ export default defineConfig({
                         entryPointStrategy: 'expand',
                         excludeExternals: false,
                     },
+                }),
+                starlightLinksValidator({
+                    errorOnInvalidHashes: false,
+                    // FIXME: TypeDoc generates relative links on its own, which are valid but could be expressed as just absolute links.
+                    errorOnRelativeLinks: false
                 }),
                 starlightThemeObsidian({
                     graphConfig: {
