@@ -5,6 +5,14 @@ export function load(app) {
         MarkdownPageEvent.BEGIN,
         /** @param {MarkdownPageEvent} page */
         (page) => {
+            if (page.filename.endsWith("README.md")) {
+                page.frontmatter = {
+                    ...page.frontmatter,
+                    draft: true,
+                    pagefind: false
+                }
+            }
+
             if (page.model.comment?.blockTags.some(tag => tag.tag === "@todo")) {
                 page.frontmatter = {
                     sidebar: {

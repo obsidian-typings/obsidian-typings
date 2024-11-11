@@ -71,6 +71,8 @@ export default defineConfig({
                         githubPages: false,
                         entryPointStrategy: 'expand',
                         excludeExternals: false,
+                        // FIXME: Prevent Readme from being generated, as it creates invalid links
+                        readme: "none"
                     },
                 }),
                 starlightLinksValidator({
