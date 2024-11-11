@@ -22,7 +22,7 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - name: Install packages inside starlight-theme-obsidian dependency
+      - name: Install packages of obsidian-typings and docs
         run: |
           bun install
           cd ./docs
