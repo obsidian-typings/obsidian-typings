@@ -15,7 +15,7 @@ export default defineConfig({
             editLink: {
               baseUrl: 'https://github.com/Fevol/obsidian-typings/tree/main/docs/'
             },
-            favicon: './assets/favicon.png',
+            favicon: './favicon.png',
             social: {
                 github: 'https://github.com/fevol/obsidian-typings'
             },
