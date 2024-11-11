@@ -25,7 +25,7 @@ Like IDE's, the Chrome Devtools provide a way to break and pause on certain line
 6. Click the line number to set a breakpoint on that line
 7. Run your code to start the debugger
 
-![Opening the Devtools and setting a breakpoint](../../../../assets/devtools-breakpoint.png)
+![Opening the Devtools and setting a breakpoint](../../../assets/devtools-breakpoint.png)
 
 Note: from any `console.log`/`console.trace` in the console, you can directly jump to the location in the transpiled file
 
@@ -46,7 +46,7 @@ If you have a breakpoint and your code gets executed, the debugger should normal
 5. View current `Call Stack`
 6. Go to the `Console` tab, you can test and play around with the values in the current scope
 
-![Possible options when paused at a breakpoint](../../../../assets/devtools-breakpoint.png)
+![Possible options when paused at a breakpoint](../../../assets/devtools-breakpoint.png)
 
 ## Investigating performance of your code
 
@@ -74,7 +74,7 @@ Generating and displaying a flamechart:
 *(if your code only runs on app/plugin start-up, you can run the `Reload app without saving` command without the capture stopping - create a shortcut to this action for convenience)*
 5. Stop the recording with the same button or `Ctrl + E`
 6. Wait for the graph to render
-![Opening the Performance tab and capturing a flame chart](../../../../assets/flame-chart-open.png)
+![Opening the Performance tab and capturing a flame chart](../../../assets/flame-chart-open.png)
 
 ### Using the Flame Chart
 There's a lot of information contained within the `Performance` capture, here are some important elements:
@@ -85,7 +85,7 @@ b) Wide blocks indicate a **long execution times**
 3. Zoom into the graph to narrow the time interval
 4. Click on a block in the graph
 5. ...to view information about how it was executed
-![Flame Chart with information about a block](../../../../assets/flame-chart-analyze.png)
+![Flame Chart with information about a block](../../../assets/flame-chart-analyze.png)
 
 ### Adding markings to the Flame Chart
 Flame charts are fantastic tools and all, but it can get quite tricky to find where and when your code is being executed - especially with dozens of other plugins running their code concurrently.
@@ -101,7 +101,7 @@ performance.mark('end');
 const code_perf = performance.measure('label', 'start', 'end');
 // can be used computing averages and logged
 ```
-![Flame Chart with markings for a specific block of code](../../../../assets/flame-chart-markings.png)
+![Flame Chart with markings for a specific block of code](../../../assets/flame-chart-markings.png)
 
 ### Interpreting your flame chart
 As mentioned before, **wide** blocks are the root cause of bad performance. In the example I show (my plugin), it takes 20ms to execute a render function (as indicated by the `Total Time` given in the `Summary`.
@@ -114,4 +114,4 @@ Finally, having detected the performance hog, you can either take steps to eithe
 ### Extra tips
 When you have a `Performance Snapshot`, you can go to to the `Sources` tab that now places a duration in milliseconds next to (some) code lines, which can give an indication of how long it took to execute a particular line/function
 (NOTE: it isn't exactly documented anywhere what this duration represents)
-![Performance metrics in the Sources tab](../../../../assets/flame-chart-snapshot.png)
+![Performance metrics in the Sources tab](../../../assets/flame-chart-snapshot.png)
