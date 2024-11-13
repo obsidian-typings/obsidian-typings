@@ -7,7 +7,7 @@ export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
         let values = this.get(key);
         if (!values) {
             values = [];
-            this.data.set(key, []);
+            this.data.set(key, values);
         }
 
         if (!values.includes(value)) {
