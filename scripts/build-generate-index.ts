@@ -11,7 +11,7 @@ import {
 async function main(): Promise<void> {
     await generateIndex('src', 'src/index.d.ts');
     await generateIndex('src/obsidian', 'src/obsidian/index.d.ts');
-    await generateIndex("src/obsidian/augmentations", "src/obsidian/augmentations/index.d.ts");
+    await generateIndex('src/obsidian/augmentations', 'src/obsidian/augmentations/index.d.ts');
     await generateIndex('src/obsidian/implementations', 'src/obsidian/implementations/index.ts');
     await appendFile('src/obsidian/implementations/index.ts', 'import \'../../index.js\';\n', 'utf-8');
 }
