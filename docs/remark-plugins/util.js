@@ -7,7 +7,7 @@
 export const decorateHast = node => {
     Object.assign(node.data ?? (node.data = {}), {
         hName: node.tagName,
-        hProperties: node.properties,
+        hProperties: node.properties
     });
 
     if (node.children && Array.isArray(node.children)) {

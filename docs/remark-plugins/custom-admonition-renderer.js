@@ -1,7 +1,7 @@
-import {h} from 'hastscript';
-import {visit} from 'unist-util-visit';
-import {fromHtml} from 'hast-util-from-html';
-import {decorateHast} from "./util.js";
+import { fromHtml } from 'hast-util-from-html';
+import { h } from 'hastscript';
+import { visit } from 'unist-util-visit';
+import { decorateHast } from './util.js';
 
 const acceptableCalloutTypes = {
     'todo': {
@@ -27,47 +27,47 @@ const acceptableCalloutTypes = {
         svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="6" cy="6" r="3"/><path d="M6 9v12"/><path d="m21 3-6 6"/><path d="m21 9-6-6"/><path d="M18 11.5V15"/><circle cx="18" cy="18" r="3"/>
             </svg>`
-    },
+    }
 };
 
 export default function remarkToc() {
-    return function (tree) {
+    return function(tree) {
         visit(tree, (node) => {
             if (
                 !(
-                    node.type === 'textDirective' ||
-                    node.type === 'leafDirective' ||
-                    node.type === 'containerDirective'
+                    node.type === 'textDirective'
+                    || node.type === 'leafDirective'
+                    || node.type === 'containerDirective'
                 )
             ) {
                 return;
             }
 
-            if (!acceptableCalloutTypes[node.name])
+            if (!acceptableCalloutTypes[node.name]) {
                 return;
+            }
 
             const svgContent = acceptableCalloutTypes[node.name].svg;
             const svg = fromHtml(svgContent);
 
-
             const bodyContainer = h(
                 'section',
                 {
-                    class: 'starlight-aside__content',
+                    class: 'starlight-aside__content'
                 },
-                node.children,
+                node.children
             );
 
             const titleContainer = h(
                 'p',
                 {
                     class: 'starlight-aside__title',
-                    'aria-hidden': 'true',
+                    'aria-hidden': 'true'
                 },
-                [svg, acceptableCalloutTypes[node.name].representation],
+                [svg, acceptableCalloutTypes[node.name].representation]
             );
 
-            node.tagName = "aside";
+            node.tagName = 'aside';
             node.properties = {
                 'aria-label': acceptableCalloutTypes[node.name].representation,
                 class: `starlight-aside starlight-aside--${node.name}`
@@ -76,5 +76,5 @@ export default function remarkToc() {
 
             decorateHast(node);
         });
-    }
+    };
 }

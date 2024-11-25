@@ -1,10 +1,12 @@
-import starlight from '@astrojs/starlight'
-import {defineConfig} from 'astro/config'
-import starlightTypeDoc, {typeDocSidebarGroup} from 'starlight-typedoc'
-import {admonitionRenderer, githubLocationRenderer} from './remark-plugins'
-import starlightThemeObsidian from "starlight-theme-obsidian";
+import starlight from '@astrojs/starlight';
+import { defineConfig } from 'astro/config';
 import starlightLinksValidator from 'starlight-links-validator';
-
+import starlightThemeObsidian from 'starlight-theme-obsidian';
+import starlightTypeDoc, { typeDocSidebarGroup } from 'starlight-typedoc';
+import {
+    admonitionRenderer,
+    githubLocationRenderer
+} from './remark-plugins';
 
 export default defineConfig({
     site: 'https://fevol.github.io',
@@ -13,7 +15,7 @@ export default defineConfig({
         starlight({
             title: 'Obsidian Typings',
             editLink: {
-              baseUrl: 'https://github.com/Fevol/obsidian-typings/tree/main/docs/'
+                baseUrl: 'https://github.com/Fevol/obsidian-typings/tree/main/docs/'
             },
             favicon: './favicon.png',
             social: {
@@ -27,21 +29,21 @@ export default defineConfig({
                         { label: 'Usage', link: '/usage/' },
                         { label: 'Disclaimer', link: '/disclaimer/' },
                         { label: 'Contributing', link: '/contributing/' },
-                        { label: 'Attribution', link: '/attribution/' },
-                    ],
+                        { label: 'Attribution', link: '/attribution/' }
+                    ]
                 },
                 {
                     label: 'Guides',
-                    autogenerate: {directory: 'guides'},
+                    autogenerate: { directory: 'guides' }
                 },
                 {
                     label: 'Resources',
-                    autogenerate: {directory: 'resources'},
+                    autogenerate: { directory: 'resources' }
                 },
                 // typeDocSidebarGroup
                 {
                     label: 'API',
-                    autogenerate: {directory: 'api'}
+                    autogenerate: { directory: 'api' }
                 }
             ],
             customCss: [
@@ -65,15 +67,15 @@ export default defineConfig({
                             'typedoc-plugin-frontmatter',
                             './typedoc-plugins/resolve-source-plugin.js',
                             './typedoc-plugins/alter-frontmatter-plugin.js',
-                            './typedoc-plugins/custom-md-render-plugin.js',
+                            './typedoc-plugins/custom-md-render-plugin.js'
                         ],
                         theme: 'starlight-typedoc',
                         githubPages: false,
                         entryPointStrategy: 'expand',
                         excludeExternals: false,
                         // FIXME: Prevent Readme from being generated, as it creates invalid links
-                        readme: "none"
-                    },
+                        readme: 'none'
+                    }
                 }),
                 starlightLinksValidator({
                     errorOnInvalidHashes: false,
@@ -82,39 +84,38 @@ export default defineConfig({
                 }),
                 starlightThemeObsidian({
                     graphConfig: {
-                        actions: ["fullscreen", "reset-zoom", "depth"],
+                        actions: ['fullscreen', 'reset-zoom', 'depth'],
                         renderArrows: true,
                         repelForce: 500,
                         labelFontSize: 8,
                         nodeDefaultStyle: {
                             neighborScale: 0.3
                         },
-                        tagRenderMode: "same",
+                        tagRenderMode: 'same',
                         tagStyles: {
-                            "obsidian": { shapeSize: 8, shapeColor: "nodeColor9" },
-                            "internals": { shapeSize: 8, shapeColor: "nodeColor8" },
-                            "augmentations": { shapeSize: 8, shapeColor: "nodeColor7" },
-                            "canvas": { shapeSize: 8, shapeColor: "nodeColor3" },
-                            "publish": { shapeSize: 8, shapeColor: "nodeColor4" },
-                            "codemirror__view": { shapeSize: 8, shapeColor: "nodeColor5" },
-                            "global": { shapeSize: 8, shapeColor: "nodeColor2" },
+                            'obsidian': { shapeSize: 8, shapeColor: 'nodeColor9' },
+                            'internals': { shapeSize: 8, shapeColor: 'nodeColor8' },
+                            'augmentations': { shapeSize: 8, shapeColor: 'nodeColor7' },
+                            'canvas': { shapeSize: 8, shapeColor: 'nodeColor3' },
+                            'publish': { shapeSize: 8, shapeColor: 'nodeColor4' },
+                            'codemirror__view': { shapeSize: 8, shapeColor: 'nodeColor5' },
+                            'global': { shapeSize: 8, shapeColor: 'nodeColor2' }
                         }
                     },
                     sitemapConfig: {
                         tagRules: {
-                            "obsidian": [ "**/obsidian/**/*" ],
-                            "internals": [ "**/internals/**/*" ],
-                            "augmentations": [ "**/augmentations/**/*" ],
-                            "canvas": [ "**/canvas/**/*" ],
-                            "publish": [ "**/publish/**/*" ],
-                            "codemirror__view": [ "**/codemirror__view/**/*" ],
-                            "global": [ "**/global/**/*" ],
-
+                            'obsidian': ['**/obsidian/**/*'],
+                            'internals': ['**/internals/**/*'],
+                            'augmentations': ['**/augmentations/**/*'],
+                            'canvas': ['**/canvas/**/*'],
+                            'publish': ['**/publish/**/*'],
+                            'codemirror__view': ['**/codemirror__view/**/*'],
+                            'global': ['**/global/**/*']
                         }
                     }
                 })
             ]
-        }),
+        })
     ],
     markdown: {
         remarkPlugins: [
@@ -125,5 +126,4 @@ export default defineConfig({
     devToolbar: {
         enabled: false
     }
-})
-
+});

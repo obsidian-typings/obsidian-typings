@@ -1,15 +1,15 @@
-import { MarkdownPageEvent } from "typedoc-plugin-markdown";
+import { MarkdownPageEvent } from 'typedoc-plugin-markdown';
 
 export function load(app) {
-    const convertHeadings = ["Todo", "Tutorial", "Remark", "Deprecated"]
+    const convertHeadings = ['Todo', 'Tutorial', 'Remark', 'Deprecated'];
     const regexes = convertHeadings.map(heading => {
         return {
             type: heading.toLowerCase(),
             regex: [
-                new RegExp(`#{1,6} ${heading}\n([\\s\\S]*?)(?=^##|\\z|:::)`, "gm"),
-                new RegExp(`#{1,6} ${heading}\n([\\s\\S]*)(?=:::)`, "gm")
+                new RegExp(`#{1,6} ${heading}\n([\\s\\S]*?)(?=^##|\\z|:::)`, 'gm'),
+                new RegExp(`#{1,6} ${heading}\n([\\s\\S]*)(?=:::)`, 'gm')
             ]
-        }
+        };
     });
 
     app.renderer.on(MarkdownPageEvent.END, (page) => {
