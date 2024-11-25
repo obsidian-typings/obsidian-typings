@@ -11,4 +11,4 @@ export type PropertyWidgetType =
     | 'number'
     | 'tags'
     | 'text'
-    | (string & any);
+    | string;

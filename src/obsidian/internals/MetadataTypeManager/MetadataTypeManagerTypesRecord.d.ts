@@ -1,4 +1,4 @@
-import type { PropertyWidgetType } from '../PropertyWidgetType.js';
+import type { PropertyWidgetEntry } from '../PropertyWidgetEntry.js';
 
 /** @public */
-export interface MetadataTypeManagerTypesRecord extends Record<string, PropertyWidgetType> {}
+export interface MetadataTypeManagerTypesRecord extends Record<string, PropertyWidgetEntry> {}
