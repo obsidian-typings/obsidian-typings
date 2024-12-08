@@ -1,8 +1,13 @@
+import type { TFile } from 'obsidian';
 import type { InfoFileView } from './InfoFileView.js';
 
 /** @todo Documentation incomplete */
 /** @public */
 export interface BacklinkView extends InfoFileView {
+    backlink: {
+        recomputeBacklink: (backlinkFile: TFile) => void;
+    };
+
     /**
      * Get the current view type
      */
