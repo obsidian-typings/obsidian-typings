@@ -140,7 +140,7 @@ declare module 'obsidian' {
         /** @internal Update file cache entry and sync to indexedDB */
         saveFileCache(path: string, entry: FileCacheEntry): void;
         /** @internal Update metadata cache entry and sync to indexedDB */
-        saveMetaCache(path: string, entry: CachedMetadata): void;
+        saveMetaCache(hash: string, entry: CachedMetadata): void;
         /** @internal Show a notice that the cache is being rebuilt */
         showIndexingNotice(): void;
         /** @internal Re-resolve all links for changed path */
