@@ -5,9 +5,9 @@ import type {
     TFolder,
     View
 } from 'obsidian';
-import type { FileTreeItem } from '../FileTreeItem.js';
-import type { Tree } from '../Tree.js';
-import type { WeakMapWrapper } from '../WeakMapWrapper.js';
+import type { FileTreeItem } from './FileTreeItem.js';
+import type { Tree } from '../../Tree.js';
+import type { WeakMapWrapper } from '../../WeakMapWrapper.js';
 import type { FileExplorerViewFileItemsRecord } from './FileExplorerViewFileItemsRecord.js';
 
 /** @todo Documentation incomplete */

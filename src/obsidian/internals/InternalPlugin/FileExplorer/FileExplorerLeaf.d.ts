@@ -3,7 +3,7 @@ import type {
     WorkspaceLeaf
 } from 'obsidian';
 import type { FileTreeItem } from './FileTreeItem.js';
-import type { FileExplorerView } from './Views/FileExplorerView.js';
+import type { FileExplorerView } from './FileExplorerView.js';
 
 /** @todo Documentation incomplete */
 /** @public */

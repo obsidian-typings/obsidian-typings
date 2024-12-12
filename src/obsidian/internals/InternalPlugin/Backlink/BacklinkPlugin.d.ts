@@ -1,5 +1,5 @@
 import type { WorkspaceLeaf } from 'obsidian';
-import type { BacklinkView } from '../../Views/BacklinkView.js';
+import type { BacklinkView } from './BacklinkView.js';
 import type { BacklinkPluginInstance } from './BacklinkPluginInstance.js';
 import type { InternalPlugin } from '../InternalPlugin.js';
 

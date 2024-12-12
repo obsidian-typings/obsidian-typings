@@ -3,7 +3,7 @@ import type {
     View,
     WorkspaceLeaf
 } from 'obsidian';
-import type { InfoFileView } from './InfoFileView.js';
+import type { InfoFileView } from '../../Views/InfoFileView.js';
 
 /** @todo Documentation incomplete */
 /** @public */

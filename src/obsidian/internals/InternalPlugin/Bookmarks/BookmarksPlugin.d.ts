@@ -1,5 +1,5 @@
 import type { WorkspaceLeaf } from 'obsidian';
-import type { BookmarksView } from '../../Views/BookmarksView.js';
+import type { BookmarksView } from './BookmarksView.js';
 import type { BookmarksPluginInstance } from './BookmarksPluginInstance.js';
 import type { InternalPlugin } from '../InternalPlugin.js';
 
