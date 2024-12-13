@@ -1,6 +1,7 @@
 import type { ViewRegistryTypeByExtensionRecord } from '../internals/ViewRegistry/ViewRegistryTypeByExtensionRecord.js';
 import type { ViewRegistryViewByTypeRecord } from '../internals/ViewRegistry/ViewRegistryViewByTypeRecord.js';
-
+import type { ViewTypeType } from '../internals/Views/ViewTypeType.js';
+import type { ViewTypeViewMapping } from '../internals/Views/ViewTypeViewMapping.js';
 export {};
 
 declare module 'obsidian' {
@@ -19,11 +20,12 @@ declare module 'obsidian' {
          *
          * @param extension - File extension
          */
-        getTypeByExtension(extension: string): string;
+        getTypeByExtension(extension: string): string | undefined;
         /**
          * Get the view constructor associated with a view type
          */
-        getViewCreatorByType(type: string): (leaf: WorkspaceLeaf) => View;
+        getViewCreatorByType<TViewType extends ViewTypeType>(type: TViewType): ((leaf: WorkspaceLeaf) => ViewTypeViewMapping[TViewType]) | undefined;
+        getViewCreatorByType(type: string): ((leaf: WorkspaceLeaf) => View) | undefined;
         /**
          * Check whether a view type is registered
          */

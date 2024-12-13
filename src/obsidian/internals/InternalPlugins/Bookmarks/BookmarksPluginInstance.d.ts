@@ -14,11 +14,11 @@ import type {
     WorkspaceLeaf,
     WorkspaceTabs
 } from 'obsidian';
-import type { SearchLeaf } from '../GlobalSearch/SearchLeaf.js';
 import type { InternalPluginInstance } from '../InternalPluginInstance.js';
 import type { BookmarkItem } from './BookmarkItem.js';
 import type { BookmarksPlugin } from './BookmarksPlugin.js';
-
+import type { SearchView } from '../GlobalSearch/SearchView.js';
+import type { TypedWorkspaceLeaf } from '../../TypedWorkspaceLeaf.js';
 /** @public */
 export interface BookmarksPluginInstance extends InternalPluginInstance<BookmarksPlugin>, Events {
     app: App;
@@ -47,7 +47,7 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
     onFileRename(file: TFile, oldPath: string): void;
     onFilesMenu(menu: Menu, files: TAbstractFile[], source: string, leaf?: WorkspaceLeaf): void;
     onLeafMenu(menu: Menu, leaf: WorkspaceLeaf): void;
-    onSearchResultsMenu(menu: Menu, search: SearchLeaf): void;
+    onSearchResultsMenu(menu: Menu, search: TypedWorkspaceLeaf<SearchView>): void;
     onTabGroupMenu(menu: Menu, tabsLeaf: WorkspaceTabs): void;
     onUserEnable(): void;
     openBookmark(item: BookmarkItem, newLeaf: PaneType | boolean, newLeaf2?: PaneType | boolean): Promise<void>;

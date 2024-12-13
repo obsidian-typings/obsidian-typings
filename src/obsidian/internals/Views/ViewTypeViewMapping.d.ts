@@ -1,0 +1,47 @@
+import type { MarkdownView } from "obsidian";
+import type { ViewType } from "../../apiExtractorHack.js";
+import type { BacklinkView } from "../InternalPlugins/Backlink/BacklinkView.js";
+import type { BookmarksView } from "../InternalPlugins/Bookmarks/BookmarksView.js";
+import type { CanvasView } from "../InternalPlugins/Canvas/CanvasView.js";
+import type { FileExplorerView } from "../InternalPlugins/FileExplorer/FileExplorerView.js";
+import type { SearchView } from "../InternalPlugins/GlobalSearch/SearchView.js";
+import type { GraphView } from "../InternalPlugins/Graph/GraphView.js";
+import type { LocalGraphView } from "../InternalPlugins/Graph/LocalGraphView.js";
+import type { OutgoingLinkView } from "../InternalPlugins/OutgoingLink/OutgoingLinkView.js";
+import type { OutlineView } from "../InternalPlugins/Outline/OutlineView.js";
+import type { AllPropertiesView } from "../InternalPlugins/Properties/AllPropertiesView.js";
+import type { FilePropertiesView } from "../InternalPlugins/Properties/FilePropertiesView.js";
+import type { AudioView } from "./AudioView.js";
+import type { BrowserHistoryView } from "./BrowserHistoryView.js";
+import type { BrowserView } from "./BrowserView.js";
+import type { EmptyView } from "./EmptyView.js";
+import type { ImageView } from "./ImageView.js";
+import type { PdfView } from "./PdfView.js";
+import type { ReleaseNotesView } from "./ReleaseNotesView.js";
+import type { TagView } from "./TagView.js";
+import type { VideoView } from "./VideoView.js";
+
+/** @public */
+export type ViewTypeViewMapping = {
+    [ViewType.AllProperties]: AllPropertiesView;
+    [ViewType.Audio]: AudioView;
+    [ViewType.Backlink]: BacklinkView;
+    [ViewType.Bookmarks]: BookmarksView;
+    [ViewType.Browser]: BrowserView;
+    [ViewType.BrowserHistory]: BrowserHistoryView;
+    [ViewType.Canvas]: CanvasView;
+    [ViewType.Empty]: EmptyView;
+    [ViewType.FileExplorer]: FileExplorerView;
+    [ViewType.FileProperties]: FilePropertiesView;
+    [ViewType.Graph]: GraphView;
+    [ViewType.Image]: ImageView;
+    [ViewType.LocalGraph]: LocalGraphView;
+    [ViewType.Markdown]: MarkdownView;
+    [ViewType.OutgoingLink]: OutgoingLinkView;
+    [ViewType.Outline]: OutlineView;
+    [ViewType.Pdf]: PdfView;
+    [ViewType.ReleaseNotes]: ReleaseNotesView;
+    [ViewType.Search]: SearchView;
+    [ViewType.Tag]: TagView;
+    [ViewType.Video]: VideoView;
+};
