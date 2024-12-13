@@ -3,4 +3,4 @@ import type {
     WorkspaceLeaf
 } from 'obsidian';
 
-export type TypedViewConstructor<TView extends View> = new (leaf: WorkspaceLeaf) => TView;
+export type TypedViewConstructor<TView extends View> = new(leaf: WorkspaceLeaf) => TView;

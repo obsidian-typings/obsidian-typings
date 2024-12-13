@@ -3,8 +3,8 @@ import {
     type Vault
 } from 'obsidian';
 import { getTFileConstructor } from '../Constructors/getTFileConstructor.ts';
-import { createTFolderInstance } from './createTFolderInstance.ts';
 import { parentFolderPath } from '../Utils/PathUtils.js';
+import { createTFolderInstance } from './createTFolderInstance.ts';
 
 /**
  * Creates and properly initializes the instance of TFile even the underlying file does not exist.

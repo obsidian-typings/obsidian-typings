@@ -1,8 +1,8 @@
-import type { App } from "obsidian";
-import type { ReleaseNotesView } from "../../../internals/Views/ReleaseNotesView.js";
-import { ViewType } from "../../Constants/ViewType.ts";
-import { getViewConstructorByViewType } from "./getViewConstructorByViewType.ts";
-import type { TypedViewConstructor } from "./TypedViewConstructor.ts";
+import type { App } from 'obsidian';
+import type { ReleaseNotesView } from '../../../internals/Views/ReleaseNotesView.js';
+import { ViewType } from '../../Constants/ViewType.ts';
+import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
+import type { TypedViewConstructor } from './TypedViewConstructor.ts';
 
 /**
  * Get the ReleaseNotesView constructor.
