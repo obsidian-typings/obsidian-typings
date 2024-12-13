@@ -1,5 +1,5 @@
 import type {
-    ViewCreator,
+    ViewCreator
 } from 'obsidian';
 
 /** @public */

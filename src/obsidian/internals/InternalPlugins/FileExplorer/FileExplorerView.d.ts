@@ -37,6 +37,8 @@ export interface FileExplorerView extends View {
      * @param newLeaf - Where to open the view for this file
      */
     afterCreate(file: TFile, newLeaf: PaneType | boolean): Promise<void>;
+    /** @internal */
+    attachDropHandler(x: unknown, y: unknown, z: unknown): unknown;
     /** @todo Documentation incomplete */
     attachFileEvents(e: unknown): void;
     /**
@@ -60,6 +62,8 @@ export interface FileExplorerView extends View {
     exitRename(): void;
     /** @todo Documentation incomplete */
     getNodeId(e: unknown): unknown;
+    /** @internal Get a sorted list of the tree items for a specific folder) */
+    getSortedFolderItems(folder: TFolder): FileTreeItem[];
     /**
      * Get the current view type
      */
@@ -172,8 +176,4 @@ export interface FileExplorerView extends View {
      * Reloads the config from vault and update all items
      */
     updateConfig(): void;
-    /** @internal */
-    attachDropHandler(x: unknown, y: unknown, z: unknown): unknown;
-    /** @internal Get a sorted list of the tree items for a specific folder) */
-    getSortedFolderItems(folder: TFolder): FileTreeItem[];
 }

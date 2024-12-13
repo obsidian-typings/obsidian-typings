@@ -1,25 +1,25 @@
-import type { MarkdownView } from "obsidian";
-import type { ViewType } from "../../apiExtractorHack.js";
-import type { BacklinkView } from "../InternalPlugins/Backlink/BacklinkView.js";
-import type { BookmarksView } from "../InternalPlugins/Bookmarks/BookmarksView.js";
-import type { CanvasView } from "../InternalPlugins/Canvas/CanvasView.js";
-import type { FileExplorerView } from "../InternalPlugins/FileExplorer/FileExplorerView.js";
-import type { SearchView } from "../InternalPlugins/GlobalSearch/SearchView.js";
-import type { GraphView } from "../InternalPlugins/Graph/GraphView.js";
-import type { LocalGraphView } from "../InternalPlugins/Graph/LocalGraphView.js";
-import type { OutgoingLinkView } from "../InternalPlugins/OutgoingLink/OutgoingLinkView.js";
-import type { OutlineView } from "../InternalPlugins/Outline/OutlineView.js";
-import type { AllPropertiesView } from "../InternalPlugins/Properties/AllPropertiesView.js";
-import type { FilePropertiesView } from "../InternalPlugins/Properties/FilePropertiesView.js";
-import type { AudioView } from "./AudioView.js";
-import type { BrowserHistoryView } from "./BrowserHistoryView.js";
-import type { BrowserView } from "./BrowserView.js";
-import type { EmptyView } from "./EmptyView.js";
-import type { ImageView } from "./ImageView.js";
-import type { PdfView } from "./PdfView.js";
-import type { ReleaseNotesView } from "./ReleaseNotesView.js";
-import type { TagView } from "./TagView.js";
-import type { VideoView } from "./VideoView.js";
+import type { MarkdownView } from 'obsidian';
+import type { ViewType } from '../../apiExtractorHack.js';
+import type { BacklinkView } from '../InternalPlugins/Backlink/BacklinkView.js';
+import type { BookmarksView } from '../InternalPlugins/Bookmarks/BookmarksView.js';
+import type { CanvasView } from '../InternalPlugins/Canvas/CanvasView.js';
+import type { FileExplorerView } from '../InternalPlugins/FileExplorer/FileExplorerView.js';
+import type { SearchView } from '../InternalPlugins/GlobalSearch/SearchView.js';
+import type { GraphView } from '../InternalPlugins/Graph/GraphView.js';
+import type { LocalGraphView } from '../InternalPlugins/Graph/LocalGraphView.js';
+import type { OutgoingLinkView } from '../InternalPlugins/OutgoingLink/OutgoingLinkView.js';
+import type { OutlineView } from '../InternalPlugins/Outline/OutlineView.js';
+import type { AllPropertiesView } from '../InternalPlugins/Properties/AllPropertiesView.js';
+import type { FilePropertiesView } from '../InternalPlugins/Properties/FilePropertiesView.js';
+import type { AudioView } from './AudioView.js';
+import type { BrowserHistoryView } from './BrowserHistoryView.js';
+import type { BrowserView } from './BrowserView.js';
+import type { EmptyView } from './EmptyView.js';
+import type { ImageView } from './ImageView.js';
+import type { PdfView } from './PdfView.js';
+import type { ReleaseNotesView } from './ReleaseNotesView.js';
+import type { TagView } from './TagView.js';
+import type { VideoView } from './VideoView.js';
 
 /** @public */
 export type ViewTypeViewMapping = {

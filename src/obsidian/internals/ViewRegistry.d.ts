@@ -1,4 +1,8 @@
-import type { EventRef, Events, ViewCreator } from 'obsidian';
+import type {
+    EventRef,
+    Events,
+    ViewCreator
+} from 'obsidian';
 import type { ViewRegistryTypeByExtensionRecord } from './ViewRegistry/ViewRegistryTypeByExtensionRecord.js';
 import type { ViewRegistryViewByTypeRecord } from './ViewRegistry/ViewRegistryViewByTypeRecord.js';
 import type { TypedViewCreator } from './Views/TypedViewCreator.js';
@@ -22,11 +26,13 @@ export interface ViewRegistry extends Events {
      * @param extension - File extension
      */
     getTypeByExtension(extension: string): string | undefined;
+    getViewCreatorByType(type: string): ViewCreator | undefined;
     /**
      * Get the view constructor associated with a view type
      */
-    getViewCreatorByType<TViewType extends ViewTypeType>(type: TViewType): TypedViewCreator<ViewTypeViewMapping[TViewType]> | undefined;
-    getViewCreatorByType(type: string): ViewCreator | undefined;
+    getViewCreatorByType<TViewType extends ViewTypeType>(
+        type: TViewType
+    ): TypedViewCreator<ViewTypeViewMapping[TViewType]> | undefined;
     /**
      * Check whether a view type is registered
      */
@@ -58,11 +64,7 @@ export interface ViewRegistry extends Events {
     /**
      * Register a view and its associated file extensions
      */
-    registerViewWithExtensions(
-        extensions: string[],
-        type: string,
-        viewCreator: ViewCreator
-    ): void;
+    registerViewWithExtensions(extensions: string[], type: string, viewCreator: ViewCreator): void;
     /**
      * Unregister extensions for a view type
      */

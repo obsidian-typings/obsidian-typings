@@ -1,9 +1,9 @@
-import type { PlatformType } from "./PlatformType.js";
+import type { PlatformType } from './PlatformType.js';
 
-/** @public
+/**
+ * @public
  *
  * Due to limitations of TypeScript, we cannot extend the Platform constant directly.
-  *
  * @example
  * ```ts
  * import { Platform } from 'obsidian';

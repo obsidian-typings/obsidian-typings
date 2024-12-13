@@ -4,17 +4,17 @@ import type { CanvasConnection } from '../internals/CanvasConnection.js';
 import type { CanvasNode } from '../internals/CanvasNode.js';
 import type { HoverLinkEvent } from '../internals/HoverLinkEvent.js';
 import type { CanvasView } from '../internals/InternalPlugins/Canvas/CanvasView.js';
+import type { SearchView } from '../internals/InternalPlugins/GlobalSearch/SearchView.js';
 import type { LeafEntry } from '../internals/LeafEntry.js';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.js';
 import type { ObsidianTouchEvent } from '../internals/ObsidianTouchEvent.js';
 import type { RecentFileTracker } from '../internals/RecentFileTracker.js';
 import type { StateHistory } from '../internals/StateHistory.js';
+import type { TypedWorkspaceLeaf } from '../internals/TypedWorkspaceLeaf.js';
 import type { ViewTypeType } from '../internals/Views/ViewTypeType.js';
+import type { ViewTypeViewMapping } from '../internals/Views/ViewTypeViewMapping.js';
 import type { SerializedWorkspace } from '../internals/Workspace/SerializedWorkspace.js';
 import type { WorkspaceHoverLinkSourcesRecord } from '../internals/Workspace/WorkspaceHoverLinkSourcesRecord.js';
-import type { ViewTypeViewMapping } from '../internals/Views/ViewTypeViewMapping.js';
-import type { TypedWorkspaceLeaf } from '../internals/TypedWorkspaceLeaf.js';
-import type { SearchView } from '../internals/InternalPlugins/GlobalSearch/SearchView.js';
 
 declare module 'obsidian' {
     interface Workspace extends Events {
@@ -134,7 +134,9 @@ declare module 'obsidian' {
         /**
          * Get leaves of a specific view type
          */
-        getLeavesOfType<TViewType extends ViewTypeType>(viewType: TViewType): TypedWorkspaceLeaf<ViewTypeViewMapping[TViewType]>[];
+        getLeavesOfType<TViewType extends ViewTypeType>(
+            viewType: TViewType
+        ): TypedWorkspaceLeaf<ViewTypeViewMapping[TViewType]>[];
         /**
          * Get n last opened files of type (defaults to 10)
          */
@@ -267,7 +269,11 @@ declare module 'obsidian' {
         /**
          * Triggers when user clicks on 'N results' button in search view
          */
-        on(name: 'search:results-menu', callback: (menu: Menu, search: TypedWorkspaceLeaf<SearchView>) => void, ctx?: unknown): EventRef;
+        on(
+            name: 'search:results-menu',
+            callback: (menu: Menu, search: TypedWorkspaceLeaf<SearchView>) => void,
+            ctx?: unknown
+        ): EventRef;
         /** @internal Triggers when user swipes open left/right sidebar */
         on(name: 'swipe', callback: (touchEvents: ObsidianTouchEvent[]) => void, ctx?: unknown): EventRef;
         /** @internal Called whenever user opens tab group menu (contains e.g. stacked tabs button) */
