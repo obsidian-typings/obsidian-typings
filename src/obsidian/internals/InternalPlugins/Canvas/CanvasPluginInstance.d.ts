@@ -3,10 +3,10 @@ import type {
     Debouncer
 } from 'obsidian';
 import type { PromisedQueue } from '../../PromisedQueue.js';
+import type { InternalPluginInstance } from '../InternalPluginInstance.js';
 import type { CanvasDataManager } from './CanvasDataManager.js';
 import type { CanvasIndex } from './CanvasIndex.js';
 import type { CanvasPlugin } from './CanvasPlugin.js';
-import type { InternalPluginInstance } from '../InternalPluginInstance.js';
 
 /** @public */
 export interface CanvasPluginInstance extends InternalPluginInstance<CanvasPlugin> {

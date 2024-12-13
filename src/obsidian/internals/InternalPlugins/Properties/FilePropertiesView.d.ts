@@ -1,5 +1,6 @@
 import type { TFile } from 'obsidian';
-import type { InfoFileView } from './InfoFileView.js';
+import type { ViewType } from '../../../implementations/ViewType.ts';
+import type { InfoFileView } from '../../Views/InfoFileView.js';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -11,7 +12,7 @@ export interface FilePropertiesView extends InfoFileView {
     /**
      * Get the current view type
      */
-    getViewType(): 'file-properties';
+    getViewType(): typeof ViewType.FileProperties;
     /**
      * Checks the file is an markdown file
      * @param file - The file to check

@@ -1,0 +1,47 @@
+import type { ViewType } from '../../implementations/ViewType.ts';
+import type { BacklinkLeaf } from '../InternalPlugins/Backlink/BacklinkLeaf.js';
+import type { BookmarksLeaf } from '../InternalPlugins/Bookmarks/BookmarksLeaf.js';
+import type { CanvasLeaf } from '../InternalPlugins/Canvas/CanvasLeaf.js';
+import type { FileExplorerLeaf } from '../InternalPlugins/FileExplorer/FileExplorerLeaf.js';
+import type { SearchLeaf } from '../InternalPlugins/GlobalSearch/SearchLeaf.js';
+import type { GraphLeaf } from '../InternalPlugins/Graph/GraphLeaf.js';
+import type { LocalGraphLeaf } from '../InternalPlugins/Graph/LocalGraphLeaf.js';
+import type { OutgoingLinkLeaf } from '../InternalPlugins/OutgoingLink/OutgoingLinkLeaf.js';
+import type { OutlineLeaf } from '../InternalPlugins/Outline/OutlineLeaf.js';
+import type { AllPropertiesLeaf } from '../InternalPlugins/Properties/AllPropertiesLeaf.js';
+import type { FilePropertiesLeaf } from '../InternalPlugins/Properties/FilePropertiesLeaf.js';
+import type { TagLeaf } from '../InternalPlugins/TagPane/TagLeaf.js';
+import type { AudioLeaf } from './AudioLeaf.js';
+import type { BrowserHistoryLeaf } from './BrowserHistoryLeaf.js';
+import type { BrowserLeaf } from './BrowserLeaf.js';
+import type { EmptyLeaf } from './EmptyLeaf.js';
+import type { ImageLeaf } from './ImageLeaf.js';
+import type { MarkdownLeaf } from './MarkdownLeaf.js';
+import type { PdfLeaf } from './PdfLeaf.js';
+import type { ReleaseNotesLeaf } from './ReleaseNotesLeaf.js';
+import type { VideoLeaf } from './VideoLeaf.js';
+
+/** @public */
+export type ViewTypeLeafMapping = {
+    [ViewType.AllProperties]: AllPropertiesLeaf;
+    [ViewType.Audio]: AudioLeaf;
+    [ViewType.Backlink]: BacklinkLeaf;
+    [ViewType.Bookmarks]: BookmarksLeaf;
+    [ViewType.Browser]: BrowserLeaf;
+    [ViewType.BrowserHistory]: BrowserHistoryLeaf;
+    [ViewType.Canvas]: CanvasLeaf;
+    [ViewType.Empty]: EmptyLeaf;
+    [ViewType.FileExplorer]: FileExplorerLeaf;
+    [ViewType.FileProperties]: FilePropertiesLeaf;
+    [ViewType.Graph]: GraphLeaf;
+    [ViewType.Image]: ImageLeaf;
+    [ViewType.LocalGraph]: LocalGraphLeaf;
+    [ViewType.Markdown]: MarkdownLeaf;
+    [ViewType.OutgoingLink]: OutgoingLinkLeaf;
+    [ViewType.Outline]: OutlineLeaf;
+    [ViewType.Pdf]: PdfLeaf;
+    [ViewType.ReleaseNotes]: ReleaseNotesLeaf;
+    [ViewType.Search]: SearchLeaf;
+    [ViewType.Tag]: TagLeaf;
+    [ViewType.Video]: VideoLeaf;
+};

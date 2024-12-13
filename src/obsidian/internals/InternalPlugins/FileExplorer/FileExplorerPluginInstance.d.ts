@@ -3,8 +3,8 @@ import type {
     TFolder
 } from 'obsidian';
 import type { App } from 'obsidian';
-import type { FileExplorerPlugin } from './FileExplorerPlugin.js';
 import type { InternalPluginInstance } from '../InternalPluginInstance.js';
+import type { FileExplorerPlugin } from './FileExplorerPlugin.js';
 
 /** @todo Documentation incomplete */
 /** @public */

@@ -1,4 +1,5 @@
 import type { TextFileView } from 'obsidian';
+import type { ViewType } from '../../../implementations/ViewType.ts';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -10,7 +11,7 @@ export interface CanvasView extends TextFileView {
     /**
      * Get the current view type
      */
-    getViewType(): 'canvas';
+    getViewType(): typeof ViewType.Canvas;
     /**
      * Saves the local data of the canvas
      */

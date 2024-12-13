@@ -2,8 +2,8 @@ import type {
     TFile,
     TFolder
 } from 'obsidian';
-import type { FileExplorerPluginInstance } from './FileExplorerPluginInstance.js';
 import type { InternalPlugin } from '../InternalPlugin.js';
+import type { FileExplorerPluginInstance } from './FileExplorerPluginInstance.js';
 
 /** @todo Documentation incomplete */
 /** @public */

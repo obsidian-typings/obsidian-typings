@@ -1,4 +1,5 @@
 import type { TFile } from 'obsidian';
+import type { ViewType } from '../../../implementations/ViewType.ts';
 import type { InfoFileView } from '../../Views/InfoFileView.js';
 
 /** @todo Documentation incomplete */
@@ -7,7 +8,7 @@ export interface LocalGraphView extends InfoFileView {
     /**
      * Get the current view type
      */
-    getViewType(): 'localgraph';
+    getViewType(): typeof ViewType.LocalGraph;
     /**
      * Requests a update if the changed file is the opened file
      * @param file - The changed file

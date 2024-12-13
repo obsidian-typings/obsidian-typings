@@ -1,4 +1,5 @@
 import type { View } from 'obsidian';
+import type { ViewType } from '../../../implementations/ViewType.ts';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -10,7 +11,7 @@ export interface SearchView extends View {
     /**
      * Get the current view type
      */
-    getViewType(): 'search';
+    getViewType(): typeof ViewType.Search;
     /** @todo Documentation incomplete */
     onCopyResultsClick(event: MouseEvent): void;
     /** @todo Documentation incomplete */

@@ -1,4 +1,5 @@
 import type { ItemView } from 'obsidian';
+import type { ViewType } from '../../../implementations/ViewType.ts';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -8,7 +9,7 @@ export interface GraphView extends ItemView {
     /**
      * Get the current view type
      */
-    getViewType(): 'graph';
+    getViewType(): typeof ViewType.Graph;
     /**
      * Updates the options from the plugin when changed in view
      */

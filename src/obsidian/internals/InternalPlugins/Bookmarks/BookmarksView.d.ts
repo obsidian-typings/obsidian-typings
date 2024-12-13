@@ -2,6 +2,7 @@ import type {
     ItemView,
     TFile
 } from 'obsidian';
+import type { ViewType } from '../../../implementations/ViewType.js';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -29,7 +30,7 @@ export interface BookmarksView extends ItemView {
     /**
      * Get the current view type
      */
-    getViewType(): 'bookmarks';
+    getViewType(): typeof ViewType.Bookmarks;
     /** @todo Documentation incomplete */
     handleCollapseAll(e: unknown): void;
     /** @todo Documentation incomplete */

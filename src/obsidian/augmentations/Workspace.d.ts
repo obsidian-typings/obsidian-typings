@@ -2,16 +2,17 @@ import type { Extension } from '@codemirror/state';
 import type { Constructor } from 'obsidian';
 import type { CanvasConnection } from '../internals/CanvasConnection.js';
 import type { CanvasNode } from '../internals/CanvasNode.js';
-import type { FileExplorerLeaf } from '../internals/InternalPlugins/FileExplorer/FileExplorerLeaf.js';
-import type { GlobalSearchLeaf } from '../internals/GlobalSearchLeaf.js';
 import type { HoverLinkEvent } from '../internals/HoverLinkEvent.js';
-import type { InternalPluginName } from '../implementations/InternalPluginName.js';
+import type { CanvasView } from '../internals/InternalPlugins/Canvas/CanvasView.js';
+import type { FileExplorerLeaf } from '../internals/InternalPlugins/FileExplorer/FileExplorerLeaf.js';
+import type { SearchLeaf } from '../internals/InternalPlugins/GlobalSearch/SearchLeaf.js';
 import type { LeafEntry } from '../internals/LeafEntry.js';
+import type { ViewTypeLeafMapping } from '../internals/Leaves/ViewTypeLeafMapping.js';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.js';
 import type { ObsidianTouchEvent } from '../internals/ObsidianTouchEvent.js';
 import type { RecentFileTracker } from '../internals/RecentFileTracker.js';
 import type { StateHistory } from '../internals/StateHistory.js';
-import type { CanvasView } from '../internals/Views/CanvasView.js';
+import type { ViewTypeType } from '../internals/Views/ViewTypeType.js';
 import type { SerializedWorkspace } from '../internals/Workspace/SerializedWorkspace.js';
 import type { WorkspaceHoverLinkSourcesRecord } from '../internals/Workspace/WorkspaceHoverLinkSourcesRecord.js';
 
@@ -130,7 +131,10 @@ declare module 'obsidian' {
          * Get the workspace split for the currently focused container
          */
         getFocusedContainer(): WorkspaceSplit;
-        getLeavesOfType(viewType: typeof InternalPluginName.FileExplorer): FileExplorerLeaf[];
+        /**
+         * Get leaves of a specific view type
+         */
+        getLeavesOfType<TViewType extends ViewTypeType>(viewType: TViewType): ViewTypeLeafMapping[TViewType][];
         /**
          * Get n last opened files of type (defaults to 10)
          */
@@ -263,11 +267,7 @@ declare module 'obsidian' {
         /**
          * Triggers when user clicks on 'N results' button in search view
          */
-        on(
-            name: 'search:results-menu',
-            callback: (menu: Menu, search: GlobalSearchLeaf) => void,
-            ctx?: unknown
-        ): EventRef;
+        on(name: 'search:results-menu', callback: (menu: Menu, search: SearchLeaf) => void, ctx?: unknown): EventRef;
         /** @internal Triggers when user swipes open left/right sidebar */
         on(name: 'swipe', callback: (touchEvents: ObsidianTouchEvent[]) => void, ctx?: unknown): EventRef;
         /** @internal Called whenever user opens tab group menu (contains e.g. stacked tabs button) */

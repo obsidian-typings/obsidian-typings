@@ -1,4 +1,5 @@
 import type { ItemView } from 'obsidian';
+import type { ViewType } from '../../implementations/ViewType.ts';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -34,7 +35,7 @@ export interface BrowserView extends ItemView {
     /**
      * Get the current view type
      */
-    getViewType(): 'browser';
+    getViewType(): typeof ViewType.Browser;
     /** @todo Documentation incomplete */
     hideAll(): void;
     /**

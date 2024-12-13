@@ -1,4 +1,5 @@
 import type { TFile } from 'obsidian';
+import type { ViewType } from '../../../implementations/ViewType.js';
 import type { InfoFileView } from '../../Views/InfoFileView.js';
 
 /** @todo Documentation incomplete */
@@ -11,7 +12,7 @@ export interface BacklinkView extends InfoFileView {
     /**
      * Get the current view type
      */
-    getViewType(): 'backlink';
+    getViewType(): typeof ViewType.Backlink;
     /**
      * Shows the search
      */

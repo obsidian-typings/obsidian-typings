@@ -1,4 +1,5 @@
 import type { ItemView } from 'obsidian';
+import type { ViewType } from '../../implementations/ViewType.js';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -11,7 +12,7 @@ export interface ReleaseNotesView extends ItemView {
     /**
      * Get the current view type
      */
-    getViewType(): 'release-notes';
+    getViewType(): typeof ViewType.ReleaseNotes;
     /**
      * Renders the release notes
      */

@@ -3,6 +3,7 @@ import type {
     View,
     WorkspaceLeaf
 } from 'obsidian';
+import type { ViewType } from '../../../implementations/ViewType.ts';
 import type { InfoFileView } from '../../Views/InfoFileView.js';
 
 /** @todo Documentation incomplete */
@@ -29,7 +30,7 @@ export interface OutlineView extends InfoFileView {
     /**
      * Get the current view type
      */
-    getViewType(): 'outline';
+    getViewType(): typeof ViewType.Outline;
     /** @todo Documentation incomplete */
     handleCollapseAll(e: unknown): void;
     /** @todo Documentation incomplete */

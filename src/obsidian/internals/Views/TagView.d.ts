@@ -1,4 +1,5 @@
 import type { View } from 'obsidian';
+import type { ViewType } from '../../implementations/ViewType.ts';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -8,7 +9,7 @@ export interface TagView extends View {
     /**
      * Get the current view type
      */
-    getViewType(): 'tag';
+    getViewType(): typeof ViewType.Tag;
     /** @todo Documentation incomplete */
     isItem(item: unknown): boolean;
     /** @todo Documentation incomplete */

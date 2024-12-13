@@ -5,10 +5,11 @@ import type {
     TFolder,
     View
 } from 'obsidian';
-import type { FileTreeItem } from './FileTreeItem.js';
+import type { ViewType } from '../../../implementations/ViewType.ts';
 import type { Tree } from '../../Tree.js';
 import type { WeakMapWrapper } from '../../WeakMapWrapper.js';
 import type { FileExplorerViewFileItemsRecord } from './FileExplorerViewFileItemsRecord.js';
+import type { FileTreeItem } from './FileTreeItem.js';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -62,7 +63,7 @@ export interface FileExplorerView extends View {
     /**
      * Get the current view type
      */
-    getViewType(): 'file-explorer';
+    getViewType(): typeof ViewType.FileExplorer;
     /** @todo Documentation incomplete maybe FileTreeItem */
     isItem(item: unknown): boolean;
     /**

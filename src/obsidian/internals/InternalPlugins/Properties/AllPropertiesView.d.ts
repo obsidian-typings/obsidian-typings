@@ -1,4 +1,5 @@
 import type { ItemView } from 'obsidian';
+import type { ViewType } from '../../../implementations/ViewType.ts';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -18,7 +19,7 @@ export interface AllPropertiesView extends ItemView {
     /**
      * Get the current view type
      */
-    getViewType(): 'all-properties';
+    getViewType(): typeof ViewType.AllProperties;
     /** @todo Documentation incomplete */
     isItem(e: unknown): boolean;
     /**
