@@ -5,4 +5,5 @@
  * Warning: (...) - (ae-forgotten-export) The symbol "(...)" needs to be exported by the entry point index.d.ts
  */
 
-export * from './implementations/InternalPluginName.js';
+export { InternalPluginName } from './implementations/InternalPluginName.js';
+export { ViewType } from './implementations/ViewType.js';
