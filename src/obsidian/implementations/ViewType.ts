@@ -21,6 +21,7 @@ export const ViewType = {
     Pdf: 'pdf',
     ReleaseNotes: 'release-notes',
     Search: 'search',
+    Sync: 'sync',
     Tag: 'tag',
     Video: 'video'
 } as const;

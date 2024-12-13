@@ -18,6 +18,7 @@ import type { EmptyView } from './EmptyView.js';
 import type { ImageView } from './ImageView.js';
 import type { PdfView } from './PdfView.js';
 import type { ReleaseNotesView } from './ReleaseNotesView.js';
+import type { SyncView } from '../InternalPlugins/Sync/SyncView.js';
 import type { TagView } from './TagView.js';
 import type { VideoView } from './VideoView.js';
 
@@ -42,6 +43,7 @@ export type ViewTypeViewMapping = {
     [ViewType.Pdf]: PdfView;
     [ViewType.ReleaseNotes]: ReleaseNotesView;
     [ViewType.Search]: SearchView;
+    [ViewType.Sync]: SyncView;
     [ViewType.Tag]: TagView;
     [ViewType.Video]: VideoView;
 };
