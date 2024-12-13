@@ -1,3 +1,4 @@
+/** @public */
 export const InternalPluginName = {
     AudioRecorder: 'audio-recorder',
     Backlink: 'backlink',

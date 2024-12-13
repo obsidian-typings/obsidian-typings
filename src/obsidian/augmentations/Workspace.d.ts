@@ -5,7 +5,7 @@ import type { CanvasNode } from '../internals/CanvasNode.js';
 import type { FileExplorerLeaf } from '../internals/InternalPlugin/FileExplorer/FileExplorerLeaf.js';
 import type { GlobalSearchLeaf } from '../internals/GlobalSearchLeaf.js';
 import type { HoverLinkEvent } from '../internals/HoverLinkEvent.js';
-import type { InternalPluginName } from '../internals/InternalPlugin/InternalPluginName.js';
+import type { InternalPluginName } from '../implementations/InternalPluginName.js';
 import type { LeafEntry } from '../internals/LeafEntry.js';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.js';
 import type { ObsidianTouchEvent } from '../internals/ObsidianTouchEvent.js';

@@ -9,7 +9,7 @@ import type { FileExplorerPlugin } from './FileExplorer/FileExplorerPlugin.js';
 import type { FileRecoveryPlugin } from './FileRecovery/FileRecoveryPlugin.js';
 import type { GlobalSearchPlugin } from './GlobalSearch/GlobalSearchPlugin.js';
 import type { GraphPlugin } from './Graph/GraphPlugin.js';
-import type { InternalPluginName } from './InternalPluginName.js';
+import type { InternalPluginName } from '../../implementations/InternalPluginName.js';
 import type { MarkdownImporterPlugin } from './MarkdownImporter/MarkdownImporterPlugin.js';
 import type { NoteComposerPlugin } from './NoteComposer/NoteComposerPlugin.js';
 import type { OutgoingLinkPlugin } from './OutgoingLink/OutgoingLinkPlugin.js';
