@@ -239,10 +239,12 @@ function fixExport(declaration: ExportDeclaration, file: string): ExportDeclarat
     const isStarExport = declaration.isNamespaceExport();
 
     if (isStarExport) {
-        declaration.setModuleSpecifier('ERROR_STAR_EXPORT_IS_NOT_ALLOWED');
+        declaration.setModuleSpecifier('ERROR_STAR_EXPORT_IS_NOT_ALLOWED__' + declaration.getModuleSpecifierValue() ?? '');
     } else {
         for (const namedExport of declaration.getNamedExports()) {
-            namedExport.setName(fileName);
+            if (namedExport.getName() !== fileName) {
+                namedExport.setName('ERROR_NAMED_EXPORT_NAME_DOES_NOT_MATCH_FILE_NAME__' + namedExport.getName());
+            }
         }
     }
 
