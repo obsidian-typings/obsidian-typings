@@ -2,7 +2,7 @@ import {
     TFolder,
     type Vault
 } from 'obsidian';
-import { constructTFolder } from '../Constructors/constructTFolder.ts';
+import { getTFolderConstructor } from '../Constructors/getTFolderConstructor.ts';
 import { parentFolderPath } from '../Utils/PathUtils.js';
 
 /**
@@ -15,7 +15,7 @@ export function createTFolderInstance(vault: Vault, path: string): TFolder {
         return folder;
     }
 
-    folder = constructTFolder(vault, path);
+    folder = new (getTFolderConstructor())(vault, path);
     folder.parent = createTFolderInstance(vault, parentFolderPath(path));
     folder.deleted = true;
     return folder;

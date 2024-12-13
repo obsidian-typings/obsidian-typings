@@ -2,7 +2,7 @@ import {
     TFile,
     type Vault
 } from 'obsidian';
-import { constructTFile } from '../Constructors/constructTFile.ts';
+import { constructTFile } from '../Constructors/getTFileConstructor.ts';
 import { createTFolderInstance } from './createTFolderInstance.ts';
 import { parentFolderPath } from '../Utils/PathUtils.js';
 
