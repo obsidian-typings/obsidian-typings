@@ -1,0 +1,15 @@
+import type { App } from "obsidian";
+import type { PdfView } from "../../../internals/Views/PdfView.js";
+import { ViewType } from "../../Constants/ViewType.ts";
+import { getViewConstructorByViewType } from "./getViewConstructorByViewType.ts";
+import type { TypedViewConstructor } from "./TypedViewConstructor.ts";
+
+/**
+ * Get the PdfView constructor.
+ *
+ * @returns The PdfView constructor.
+ */
+
+export function getPdfViewConstructor(app: App): TypedViewConstructor<PdfView> {
+    return getViewConstructorByViewType(app, ViewType.Pdf) as TypedViewConstructor<PdfView>;
+}
