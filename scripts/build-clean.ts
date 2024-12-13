@@ -11,5 +11,13 @@ for (const file of dtsFiles) {
     await rm(`src/obsidian/implementations/${file}`);
 }
 
-await rm('src/index.d.ts', { force: true });
-await rm('src/obsidian/implementations/index.ts', { force: true });
+const filesToRemove = [
+    'src/index.d.ts',
+    'src/obsidian/index.d.ts',
+    'src/obsidian/augmentations/index.d.ts',
+    'src/obsidian/implementations/index.ts'
+];
+
+for (const file of filesToRemove) {
+    await rm(file, { force: true });
+}
