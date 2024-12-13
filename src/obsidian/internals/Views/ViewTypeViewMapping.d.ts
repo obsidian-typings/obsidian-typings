@@ -1,5 +1,5 @@
 import type { MarkdownView } from 'obsidian';
-import type { ViewType } from '../../apiExtractorHack.js';
+import type { ViewType } from '../../implementations/Constants/ViewType.js';
 import type { BacklinkView } from '../InternalPlugins/Backlink/BacklinkView.js';
 import type { BookmarksView } from '../InternalPlugins/Bookmarks/BookmarksView.js';
 import type { CanvasView } from '../InternalPlugins/Canvas/CanvasView.js';

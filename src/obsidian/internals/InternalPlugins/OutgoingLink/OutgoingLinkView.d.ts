@@ -1,4 +1,4 @@
-import type { ViewType } from '../../../implementations/ViewType.ts';
+import type { ViewType } from '../../../implementations/Constants/ViewType.js';
 import type { InfoFileView } from '../../Views/InfoFileView.js';
 
 /** @todo Documentation incomplete */

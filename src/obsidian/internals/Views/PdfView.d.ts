@@ -2,7 +2,7 @@ import type {
     EditableFileView,
     TFile
 } from 'obsidian';
-import type { ViewType } from '../../implementations/ViewType.js';
+import type { ViewType } from '../../implementations/Constants/ViewType.js';
 
 /** @todo Documentation incomplete */
 /** @public */

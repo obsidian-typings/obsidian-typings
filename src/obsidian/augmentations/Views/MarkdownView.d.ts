@@ -1,4 +1,4 @@
-import type { ViewType } from '../../implementations/ViewType.js';
+import type { ViewType } from '../../implementations/Constants/ViewType.js';
 import type { MetadataEditor } from '../../internals/MetadataEditor.js';
 import type { Token } from '../../internals/Token.js';
 

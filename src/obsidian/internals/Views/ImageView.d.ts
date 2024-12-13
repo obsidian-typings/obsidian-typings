@@ -1,5 +1,5 @@
 import type { EditableFileView } from 'obsidian';
-import type { ViewType } from '../../implementations/ViewType.ts';
+import type { ViewType } from '../../implementations/Constants/ViewType.js';
 
 /** @public */
 export interface ImageView extends EditableFileView {

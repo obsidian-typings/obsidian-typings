@@ -1,4 +1,4 @@
-import type { InternalPluginName } from '../../implementations/InternalPluginName.js';
+import type { InternalPluginName } from '../../implementations/Constants/InternalPluginName.js';
 import type { AudioRecorderPluginInstance } from './AudioRecorder/AudioRecorderPluginInstance.js';
 import type { BacklinkPluginInstance } from './Backlink/BacklinkPluginInstance.js';
 import type { BookmarksPluginInstance } from './Bookmarks/BookmarksPluginInstance.js';
