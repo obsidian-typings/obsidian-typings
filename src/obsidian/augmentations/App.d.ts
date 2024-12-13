@@ -7,7 +7,7 @@ import type { EmbedRegistry } from '../internals/EmbedRegistry/EmbedRegistry.js'
 import type { FoldManager } from '../internals/FoldManager.js';
 import type { HotkeyManager } from '../internals/HotkeyManager/HotkeyManager.js';
 import type { ImportedAttachments } from '../internals/ImportedAttachments.js';
-import type { InternalPlugins } from '../internals/InternalPlugin/InternalPlugins.js';
+import type { InternalPlugins } from '../internals/InternalPlugins/InternalPlugins.js';
 import type { LoadProgress } from '../internals/LoadProgress.js';
 import type { MetadataTypeManager } from '../internals/MetadataTypeManager/MetadataTypeManager.js';
 import type { MobileNavbar } from '../internals/MobileNavbar.js';

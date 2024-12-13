@@ -2,7 +2,7 @@ import type { Extension } from '@codemirror/state';
 import type { Constructor } from 'obsidian';
 import type { CanvasConnection } from '../internals/CanvasConnection.js';
 import type { CanvasNode } from '../internals/CanvasNode.js';
-import type { FileExplorerLeaf } from '../internals/InternalPlugin/FileExplorer/FileExplorerLeaf.js';
+import type { FileExplorerLeaf } from '../internals/InternalPlugins/FileExplorer/FileExplorerLeaf.js';
 import type { GlobalSearchLeaf } from '../internals/GlobalSearchLeaf.js';
 import type { HoverLinkEvent } from '../internals/HoverLinkEvent.js';
 import type { InternalPluginName } from '../implementations/InternalPluginName.js';
