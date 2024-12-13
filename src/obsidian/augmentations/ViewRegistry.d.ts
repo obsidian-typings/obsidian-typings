@@ -1,5 +1,6 @@
 import type { ViewRegistryTypeByExtensionRecord } from '../internals/ViewRegistry/ViewRegistryTypeByExtensionRecord.js';
 import type { ViewRegistryViewByTypeRecord } from '../internals/ViewRegistry/ViewRegistryViewByTypeRecord.js';
+import type { TypedViewCreator } from '../internals/Views/TypedViewCreator.js';
 import type { ViewTypeType } from '../internals/Views/ViewTypeType.js';
 import type { ViewTypeViewMapping } from '../internals/Views/ViewTypeViewMapping.js';
 export {};
@@ -24,8 +25,8 @@ declare module 'obsidian' {
         /**
          * Get the view constructor associated with a view type
          */
-        getViewCreatorByType<TViewType extends ViewTypeType>(type: TViewType): ((leaf: WorkspaceLeaf) => ViewTypeViewMapping[TViewType]) | undefined;
-        getViewCreatorByType(type: string): ((leaf: WorkspaceLeaf) => View) | undefined;
+        getViewCreatorByType<TViewType extends ViewTypeType>(type: TViewType): TypedViewCreator<ViewTypeViewMapping[TViewType]> | undefined;
+        getViewCreatorByType(type: string): ViewCreator | undefined;
         /**
          * Check whether a view type is registered
          */
@@ -53,14 +54,14 @@ declare module 'obsidian' {
         /**
          * Register a view constructor for a view type
          */
-        registerView(type: string, viewCreator: (leaf: WorkspaceLeaf) => View): void;
+        registerView(type: string, viewCreator: ViewCreator): void;
         /**
          * Register a view and its associated file extensions
          */
         registerViewWithExtensions(
             extensions: string[],
             type: string,
-            viewCreator: (leaf: WorkspaceLeaf) => View
+            viewCreator: ViewCreator
         ): void;
         /**
          * Unregister extensions for a view type
