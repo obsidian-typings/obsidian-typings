@@ -2,7 +2,7 @@ import type { App } from 'obsidian';
 import type { PdfView } from '../../../internals/Views/PdfView.js';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
-import type { TypedViewConstructor } from './TypedViewConstructor.ts';
+import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
 
 /**
  * Get the PdfView constructor.

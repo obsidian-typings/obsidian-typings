@@ -1,13 +1,8 @@
 import type {
-    App,
-    WorkspaceLeaf
-} from 'obsidian';
-import type { FilePropertiesView } from '../../../internals/InternalPlugins/Properties/FilePropertiesView.js';
-import type {
-    PropertiesPluginInstance
-} from '../../../internals/InternalPlugins/Properties/PropertiesPluginInstance.js';
+    App} from 'obsidian';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
+import type { FilePropertiesViewConstructor } from '../../../internals/Constructors/Views/FilePropertiesViewConstructor.ts';
 
 /**
  * Get the FilePropertiesView constructor.
@@ -18,13 +13,3 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
 export function getFilePropertiesViewConstructor(app: App): FilePropertiesViewConstructor {
     return getViewConstructorByViewType(app, ViewType.FileProperties) as FilePropertiesViewConstructor;
 }
-
-/**
- * A constructor for a file properties view.
- *
- * @public
- */
-type FilePropertiesViewConstructor = new(
-    leaf: WorkspaceLeaf,
-    propertiesPluginInstance: PropertiesPluginInstance
-) => FilePropertiesView;

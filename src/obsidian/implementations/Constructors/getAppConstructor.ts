@@ -1,9 +1,6 @@
 import {
-    App,
-    type DataAdapter
-} from 'obsidian';
-
-type AppConstructor = new(adapter: DataAdapter, appId: string) => App;
+    App} from 'obsidian';
+import type { AppConstructor } from '../../internals/Constructors/AppConstructor.ts';
 
 /**
  * Get the App constructor.

@@ -1,11 +1,8 @@
 import type {
-    App,
-    WorkspaceLeaf
-} from 'obsidian';
-import type { BrowserPluginInstance } from '../../../internals/InternalPlugins/Browser/BrowserPluginInstance.js';
-import type { BrowserView } from '../../../internals/InternalPlugins/Browser/BrowserView.js';
+    App} from 'obsidian';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
+import type { BrowserViewConstructor } from '../../../internals/Constructors/Views/BrowserViewConstructor.js';
 
 /**
  * Get the BrowserView constructor.
@@ -16,13 +13,3 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
 export function getBrowserViewConstructor(app: App): BrowserViewConstructor {
     return getViewConstructorByViewType(app, ViewType.Browser) as BrowserViewConstructor;
 }
-
-/**
- * A constructor for a browser view.
- *
- * @public
- */
-type BrowserViewConstructor = new(
-    leaf: WorkspaceLeaf,
-    browserPluginInstance: BrowserPluginInstance
-) => BrowserView;

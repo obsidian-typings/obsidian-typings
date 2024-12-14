@@ -1,9 +1,6 @@
 import {
-    TFile,
-    type Vault
-} from 'obsidian';
-
-type TFileConstructor = new(vault: Vault, path: string) => TFile;
+    TFile} from 'obsidian';
+import type { TFileConstructor } from '../../internals/Constructors/TFileConstructor.ts';
 
 /**
  * Get the TFile constructor.

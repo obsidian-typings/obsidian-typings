@@ -1,11 +1,8 @@
 import type {
-    App,
-    WorkspaceLeaf
-} from 'obsidian';
-import type { BrowserHistoryView } from '../../../internals/InternalPlugins/Browser/BrowserHistoryView.js';
-import type { BrowserPluginInstance } from '../../../internals/InternalPlugins/Browser/BrowserPluginInstance.js';
+    App} from 'obsidian';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
+import type { BrowserHistoryViewConstructor } from '../../../internals/Constructors/Views/BrowserHistoryViewConstructor.js';
 
 /**
  * Get the BrowserHistoryView constructor.
@@ -16,13 +13,3 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
 export function getBrowserHistoryViewConstructor(app: App): BrowserHistoryViewConstructor {
     return getViewConstructorByViewType(app, ViewType.BrowserHistory) as BrowserHistoryViewConstructor;
 }
-
-/**
- * A constructor for a browser history view.
- *
- * @public
- */
-type BrowserHistoryViewConstructor = new(
-    leaf: WorkspaceLeaf,
-    browserPluginInstance: BrowserPluginInstance
-) => BrowserHistoryView;

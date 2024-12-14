@@ -1,9 +1,6 @@
 import {
-    TFolder,
-    type Vault
-} from 'obsidian';
-
-type TFolderConstructor = new(vault: Vault, path: string) => TFolder;
+    TFolder} from 'obsidian';
+import type { TFolderConstructor } from '../../internals/Constructors/TFolderConstructor.ts';
 
 /**
  * Get the TFolder constructor.
