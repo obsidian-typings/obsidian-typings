@@ -1,6 +1,6 @@
 import {
-    TFile,
-    type Vault
+    type App,
+    TFile
 } from 'obsidian';
 import { getTFileConstructor } from '../Constructors/getTFileConstructor.ts';
 import { parentFolderPath } from '../Utils/PathUtils.js';
@@ -11,14 +11,14 @@ import { createTFolderInstance } from './createTFolderInstance.ts';
  * This doesn't create the missing file on the file system.
  * @public
  */
-export function createTFileInstance(vault: Vault, path: string): TFile {
-    let file = vault.getFileByPath(path);
+export function createTFileInstance(app: App, path: string): TFile {
+    let file = app.vault.getFileByPath(path);
     if (file) {
         return file;
     }
 
-    file = new (getTFileConstructor())(vault, path);
-    file.parent = createTFolderInstance(vault, parentFolderPath(path));
+    file = new (getTFileConstructor())(app.vault, path);
+    file.parent = createTFolderInstance(app, parentFolderPath(path));
     file.deleted = true;
     return file;
 }

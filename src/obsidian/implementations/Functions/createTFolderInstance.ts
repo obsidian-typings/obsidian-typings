@@ -1,6 +1,6 @@
 import {
-    TFolder,
-    type Vault
+    type App,
+    TFolder
 } from 'obsidian';
 import { getTFolderConstructor } from '../Constructors/getTFolderConstructor.ts';
 import { parentFolderPath } from '../Utils/PathUtils.js';
@@ -10,14 +10,14 @@ import { parentFolderPath } from '../Utils/PathUtils.js';
  * This doesn't create the missing folder on the file system.
  * @public
  */
-export function createTFolderInstance(vault: Vault, path: string): TFolder {
-    let folder = vault.getFolderByPath(path);
+export function createTFolderInstance(app: App, path: string): TFolder {
+    let folder = app.vault.getFolderByPath(path);
     if (folder) {
         return folder;
     }
 
-    folder = new (getTFolderConstructor())(vault, path);
-    folder.parent = createTFolderInstance(vault, parentFolderPath(path));
+    folder = new (getTFolderConstructor())(app.vault, path);
+    folder.parent = createTFolderInstance(app, parentFolderPath(path));
     folder.deleted = true;
     return folder;
 }
