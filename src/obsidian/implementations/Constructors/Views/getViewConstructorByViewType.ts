@@ -11,7 +11,7 @@ import type {
  * @param viewType - The view type.
  * @returns The view constructor.
  */
-export function getViewConstructorByViewType(app: App, viewType: string): Constructor<View> {
+export function getViewConstructorByViewType<TView extends View = View>(app: App, viewType: string): Constructor<TView> {
     const leaf = app.workspace.createLeafInTabGroup();
     try {
         const viewCreator = app.viewRegistry.getViewCreatorByType(viewType);
@@ -19,7 +19,7 @@ export function getViewConstructorByViewType(app: App, viewType: string): Constr
             throw new Error('View creator not found');
         }
         const view = viewCreator(leaf);
-        return view.constructor as Constructor<View>;
+        return view.constructor as Constructor<TView>;
     } finally {
         leaf.detach();
     }
