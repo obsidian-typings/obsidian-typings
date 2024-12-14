@@ -1,5 +1,5 @@
 /** @public */
-export const Extension = {
+export const FileExtension = {
     _3gp: '3gp',
     avif: 'avif',
     bmp: 'bmp',
