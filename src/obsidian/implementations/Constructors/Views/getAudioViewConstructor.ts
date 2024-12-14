@@ -1,8 +1,8 @@
 import type { App } from 'obsidian';
+import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
 import type { AudioView } from '../../../internals/Views/AudioView.js';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
-import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
 
 /**
  * Get the AudioView constructor.

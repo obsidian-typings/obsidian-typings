@@ -1,8 +1,11 @@
 import type {
-    App} from 'obsidian';
+    App
+} from 'obsidian';
+import type {
+    FilePropertiesViewConstructor
+} from '../../../internals/Constructors/Views/FilePropertiesViewConstructor.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
-import type { FilePropertiesViewConstructor } from '../../../internals/Constructors/Views/FilePropertiesViewConstructor.ts';
 
 /**
  * Get the FilePropertiesView constructor.

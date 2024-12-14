@@ -1,8 +1,9 @@
 import type {
-    App} from 'obsidian';
+    App
+} from 'obsidian';
+import type { OutlineViewConstructor } from '../../../internals/Constructors/Views/OutlineViewConstructor.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
-import type { OutlineViewConstructor } from '../../../internals/Constructors/Views/OutlineViewConstructor.ts';
 
 /**
  * Get the OutlineView constructor.
@@ -13,5 +14,3 @@ import type { OutlineViewConstructor } from '../../../internals/Constructors/Vie
 export function getOutlineViewConstructor(app: App): OutlineViewConstructor {
     return getViewConstructorByViewType(app, ViewType.Outline) as OutlineViewConstructor;
 }
-
-

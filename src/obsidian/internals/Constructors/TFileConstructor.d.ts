@@ -1,8 +1,11 @@
-import type { Vault, TFile } from "obsidian";
+import type {
+    TFile,
+    Vault
+} from 'obsidian';
 
 /**
  * The TFile constructor.
  *
  * @public
  */
-export type TFileConstructor = new (vault: Vault, path: string) => TFile;
+export type TFileConstructor = new(vault: Vault, path: string) => TFile;

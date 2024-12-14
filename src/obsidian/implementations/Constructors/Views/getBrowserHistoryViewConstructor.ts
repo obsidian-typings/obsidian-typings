@@ -1,8 +1,11 @@
 import type {
-    App} from 'obsidian';
+    App
+} from 'obsidian';
+import type {
+    BrowserHistoryViewConstructor
+} from '../../../internals/Constructors/Views/BrowserHistoryViewConstructor.js';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
-import type { BrowserHistoryViewConstructor } from '../../../internals/Constructors/Views/BrowserHistoryViewConstructor.js';
 
 /**
  * Get the BrowserHistoryView constructor.

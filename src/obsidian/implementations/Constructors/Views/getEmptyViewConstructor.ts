@@ -1,8 +1,8 @@
 import type { App } from 'obsidian';
+import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
 import type { EmptyView } from '../../../internals/Views/EmptyView.js';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
-import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
 
 /**
  * Get the EmptyView constructor.

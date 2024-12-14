@@ -1,5 +1,6 @@
 import {
-    TFile} from 'obsidian';
+    TFile
+} from 'obsidian';
 import type { TFileConstructor } from '../../internals/Constructors/TFileConstructor.ts';
 
 /**

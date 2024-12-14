@@ -1,8 +1,9 @@
 import type {
-    App} from 'obsidian';
+    App
+} from 'obsidian';
+import type { CanvasViewConstructor } from '../../../internals/Constructors/Views/CanvasViewConstructor.js';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
-import type { CanvasViewConstructor } from '../../../internals/Constructors/Views/CanvasViewConstructor.js';
 
 /**
  * Get the CanvasView constructor.

@@ -1,5 +1,6 @@
 import {
-    App} from 'obsidian';
+    App
+} from 'obsidian';
 import type { AppConstructor } from '../../internals/Constructors/AppConstructor.ts';
 
 /**

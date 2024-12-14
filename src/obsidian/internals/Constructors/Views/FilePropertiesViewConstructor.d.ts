@@ -1,13 +1,13 @@
-import type { WorkspaceLeaf } from "obsidian";
-import type { FilePropertiesView } from "../../InternalPlugins/Properties/FilePropertiesView.js";
-import type { PropertiesPluginInstance } from "../../InternalPlugins/Properties/PropertiesPluginInstance.js";
+import type { WorkspaceLeaf } from 'obsidian';
+import type { FilePropertiesView } from '../../InternalPlugins/Properties/FilePropertiesView.js';
+import type { PropertiesPluginInstance } from '../../InternalPlugins/Properties/PropertiesPluginInstance.js';
 
 /**
  * A constructor for a file properties view.
  *
  * @public
  */
-export type FilePropertiesViewConstructor = new (
+export type FilePropertiesViewConstructor = new(
     leaf: WorkspaceLeaf,
     propertiesPluginInstance: PropertiesPluginInstance
 ) => FilePropertiesView;

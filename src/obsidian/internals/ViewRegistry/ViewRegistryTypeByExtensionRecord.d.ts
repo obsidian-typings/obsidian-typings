@@ -1,5 +1,5 @@
-import type { FileExtension } from "../../implementations/Constants/FileExtension.ts";
-import type { ViewType } from "../../implementations/Constants/ViewType.ts";
+import type { FileExtension } from '../../implementations/Constants/FileExtension.ts';
+import type { ViewType } from '../../implementations/Constants/ViewType.ts';
 
 /** @public */
 export interface ViewRegistryTypeByExtensionRecord extends Record<string, string> {

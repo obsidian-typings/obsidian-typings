@@ -1,8 +1,9 @@
 import type {
-    App} from 'obsidian';
+    App
+} from 'obsidian';
+import type { SyncViewConstructor } from '../../../internals/Constructors/Views/SyncViewConstructor.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
-import type { SyncViewConstructor } from '../../../internals/Constructors/Views/SyncViewConstructor.ts';
 
 /**
  * Get the SyncView constructor.

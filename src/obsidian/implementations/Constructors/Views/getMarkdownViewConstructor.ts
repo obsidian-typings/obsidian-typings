@@ -2,9 +2,9 @@ import type {
     App,
     MarkdownView
 } from 'obsidian';
+import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
-import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
 
 /**
  * Get the MarkdownView constructor.
