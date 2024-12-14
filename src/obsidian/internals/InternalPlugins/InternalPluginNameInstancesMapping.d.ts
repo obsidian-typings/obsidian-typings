@@ -2,6 +2,7 @@ import type { InternalPluginName } from '../../implementations/Constants/Interna
 import type { AudioRecorderPluginInstance } from './AudioRecorder/AudioRecorderPluginInstance.js';
 import type { BacklinkPluginInstance } from './Backlink/BacklinkPluginInstance.js';
 import type { BookmarksPluginInstance } from './Bookmarks/BookmarksPluginInstance.js';
+import type { BrowserPluginInstance } from './Browser/BrowserPluginInstance.js';
 import type { CanvasPluginInstance } from './Canvas/CanvasPluginInstance.js';
 import type { CommandPalettePluginInstance } from './CommandPalette/CommandPalettePluginInstance.js';
 import type { DailyNotesPluginInstance } from './DailyNotes/DailyNotesPluginInstance.js';
@@ -33,6 +34,7 @@ export type InternalPluginNameInstancesMapping = {
     [InternalPluginName.AudioRecorder]: AudioRecorderPluginInstance;
     [InternalPluginName.Backlink]: BacklinkPluginInstance;
     [InternalPluginName.Bookmarks]: BookmarksPluginInstance;
+    [InternalPluginName.Browser]: BrowserPluginInstance;
     [InternalPluginName.Canvas]: CanvasPluginInstance;
     [InternalPluginName.CommandPalette]: CommandPalettePluginInstance;
     [InternalPluginName.DailyNotes]: DailyNotesPluginInstance;
