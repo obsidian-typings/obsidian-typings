@@ -19,9 +19,6 @@ export function getViewConstructorByViewType(app: App, viewType: string): Constr
             throw new Error('View creator not found');
         }
         const view = viewCreator(leaf);
-        if (!view) {
-            throw new Error('View not found');
-        }
         return view.constructor as Constructor<View>;
     } finally {
         leaf.detach();
