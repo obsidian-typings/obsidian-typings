@@ -9,6 +9,7 @@ import type { ViewTypeType } from '../Views/ViewTypeType.js';
 export interface ViewRegistryViewByTypeRecord extends Record<string, ViewCreator>, Mapping {
 }
 
+/** @public */
 type Mapping = {
     [TViewType in ViewTypeType]: TypedViewCreator<ViewTypeViewMapping[TViewType]>
 };
