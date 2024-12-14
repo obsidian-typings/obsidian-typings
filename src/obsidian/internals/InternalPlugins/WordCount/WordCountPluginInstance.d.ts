@@ -5,6 +5,6 @@ import type { WordCountPlugin } from './WordCountPlugin.js';
 /** @public */
 export interface WordCountPluginInstance extends InternalPluginInstance<WordCountPlugin> {
     app: App;
-    defaultOn: boolean;
+    defaultOn: true;
     plugin: WordCountPlugin;
 }

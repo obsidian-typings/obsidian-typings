@@ -6,6 +6,6 @@ import type { GlobalSearchPlugin } from './GlobalSearchPlugin.js';
 /** @public */
 export interface GlobalSearchPluginInstance extends InternalPluginInstance<GlobalSearchPlugin> {
     app: App;
-    defaultOn: boolean;
+    defaultOn: true;
     plugin: GlobalSearchPlugin;
 }

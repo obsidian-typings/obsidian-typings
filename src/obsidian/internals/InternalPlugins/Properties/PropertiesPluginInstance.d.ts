@@ -5,6 +5,6 @@ import type { PropertiesPlugin } from './PropertiesPlugin.js';
 /** @public */
 export interface PropertiesPluginInstance extends InternalPluginInstance<PropertiesPlugin> {
     app: App;
-    defaultOn: boolean;
+    defaultOn: false;
     plugin: PropertiesPlugin;
 }

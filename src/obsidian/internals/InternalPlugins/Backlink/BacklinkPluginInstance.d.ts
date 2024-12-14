@@ -11,7 +11,7 @@ import type { BacklinkPlugin } from './BacklinkPlugin.js';
 /** @public */
 export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkPlugin> {
     app: App;
-    defaultOn: boolean;
+    defaultOn: true;
     file?: TFile | null;
     options: {
         backlinkInDocument?: boolean;

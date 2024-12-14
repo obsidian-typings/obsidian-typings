@@ -5,6 +5,6 @@ import type { OutlinePlugin } from './OutlinePlugin.js';
 /** @public */
 export interface OutlinePluginInstance extends InternalPluginInstance<OutlinePlugin> {
     app: App;
-    defaultOn: boolean;
+    defaultOn: true;
     plugin: OutlinePlugin;
 }

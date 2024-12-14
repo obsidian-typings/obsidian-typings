@@ -11,7 +11,7 @@ import type { CanvasPlugin } from './CanvasPlugin.js';
 /** @public */
 export interface CanvasPluginInstance extends InternalPluginInstance<CanvasPlugin> {
     app: App;
-    defaultOn: boolean;
+    defaultOn: true;
     index: CanvasIndex;
     localDataManager: CanvasDataManager;
     options: {

@@ -3,4 +3,6 @@ import type { BrowserPlugin } from './BrowserPlugin.js';
 
 /** @public */
 export interface BrowserPluginInstance extends InternalPluginInstance<BrowserPlugin> {
+    defaultOn: false;
+    pendingIgnoredURLs: string[];
 }

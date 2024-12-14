@@ -5,6 +5,6 @@ import type { TemplatesPlugin } from './TemplatesPlugin.js';
 /** @public */
 export interface TemplatesPluginInstance extends InternalPluginInstance<TemplatesPlugin> {
     app: App;
-    defaultOn: boolean;
+    defaultOn: true;
     plugin: TemplatesPlugin;
 }

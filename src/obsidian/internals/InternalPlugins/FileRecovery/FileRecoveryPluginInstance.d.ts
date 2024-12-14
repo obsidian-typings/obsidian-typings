@@ -5,5 +5,5 @@ import type { FileRecoveryPlugin } from './FileRecoveryPlugin.js';
 /** @public */
 export interface FileRecoveryPluginInstance extends InternalPluginInstance<FileRecoveryPlugin> {
     app: App;
-    defaultOn: boolean;
+    defaultOn: true;
 }

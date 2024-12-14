@@ -5,6 +5,6 @@ import type { DailyNotesPlugin } from './DailyNotesPlugin.js';
 /** @public */
 export interface DailyNotesPluginInstance extends InternalPluginInstance<DailyNotesPlugin> {
     app: App;
-    defaultOn: boolean;
+    defaultOn: true;
     plugin: DailyNotesPlugin;
 }

@@ -10,7 +10,7 @@ import type { FileExplorerPlugin } from './FileExplorerPlugin.js';
 /** @public */
 export interface FileExplorerPluginInstance extends InternalPluginInstance<FileExplorerPlugin> {
     app: App;
-    defaultOn: boolean;
+    defaultOn: true;
     plugin: FileExplorerPlugin;
 
     /**

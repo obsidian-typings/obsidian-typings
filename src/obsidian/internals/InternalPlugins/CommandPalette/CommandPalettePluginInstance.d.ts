@@ -5,6 +5,6 @@ import type { CommandPalettePlugin } from './CommandPalettePlugin.js';
 /** @public */
 export interface CommandPalettePluginInstance extends InternalPluginInstance<CommandPalettePlugin> {
     app: App;
-    defaultOn: boolean;
+    defaultOn: true;
     plugin: CommandPalettePlugin;
 }

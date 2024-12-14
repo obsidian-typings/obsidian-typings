@@ -25,7 +25,7 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
     app: App;
     bookmarkedViews: WeakMap<View, HTMLElement>;
     bookmarkLookup: Record<string, BookmarkItem>;
-    defaultOn: boolean;
+    defaultOn: true;
     hasValidData: boolean;
     items: BookmarkItem[];
     onItemsChanged: Debouncer<[boolean], void>;

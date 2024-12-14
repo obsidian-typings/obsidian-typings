@@ -5,5 +5,5 @@ import type { PagePreviewPlugin } from './PagePreviewPlugin.js';
 /** @public */
 export interface PagePreviewPluginInstance extends InternalPluginInstance<PagePreviewPlugin> {
     app: App;
-    defaultOn: boolean;
+    defaultOn: true;
 }
