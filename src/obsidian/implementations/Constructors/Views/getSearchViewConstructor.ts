@@ -8,8 +8,8 @@ import type { TypedViewConstructor } from './TypedViewConstructor.ts';
  * Get the SearchView constructor.
  *
  * @returns The SearchView constructor.
+ * @public
  */
-
 export function getSearchViewConstructor(app: App): TypedViewConstructor<SearchView> {
     return getViewConstructorByViewType(app, ViewType.Search) as TypedViewConstructor<SearchView>;
 }

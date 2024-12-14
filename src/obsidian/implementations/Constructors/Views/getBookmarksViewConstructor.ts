@@ -11,12 +11,17 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * Get the BookmarksView constructor.
  *
  * @returns The BookmarksView constructor.
+ * @public
  */
-
 export function getBookmarksViewConstructor(app: App): BookmarksViewConstructor {
     return getViewConstructorByViewType(app, ViewType.Bookmarks) as BookmarksViewConstructor;
 }
 
+/**
+ * A constructor for a bookmarks view.
+ *
+ * @public
+ */
 type BookmarksViewConstructor = new(
     leaf: WorkspaceLeaf,
     bookmarksPluginInstance: BookmarksPluginInstance

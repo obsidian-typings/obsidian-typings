@@ -11,10 +11,18 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * Get the CanvasView constructor.
  *
  * @returns The CanvasView constructor.
+ * @public
  */
-
 export function getCanvasViewConstructor(app: App): CanvasViewConstructor {
     return getViewConstructorByViewType(app, ViewType.Canvas) as CanvasViewConstructor;
 }
 
-type CanvasViewConstructor = new(leaf: WorkspaceLeaf, canvasPluginInstance: CanvasPluginInstance) => CanvasView;
+/**
+ * A constructor for a canvas view.
+ *
+ * @public
+ */
+type CanvasViewConstructor = new(
+    leaf: WorkspaceLeaf,
+    canvasPluginInstance: CanvasPluginInstance
+) => CanvasView;

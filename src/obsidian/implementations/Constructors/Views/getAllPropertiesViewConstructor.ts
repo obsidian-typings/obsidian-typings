@@ -8,6 +8,7 @@ import type { TypedViewConstructor } from './TypedViewConstructor.ts';
  * Get the AllPropertiesView constructor.
  *
  * @returns The AllPropertiesView constructor.
+ * @public
  */
 export function getAllPropertiesViewConstructor(app: App): TypedViewConstructor<AllPropertiesView> {
     return getViewConstructorByViewType(app, ViewType.AllProperties) as TypedViewConstructor<AllPropertiesView>;

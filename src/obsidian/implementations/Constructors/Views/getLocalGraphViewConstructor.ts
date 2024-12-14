@@ -8,8 +8,8 @@ import type { TypedViewConstructor } from './TypedViewConstructor.ts';
  * Get the LocalGraphView constructor.
  *
  * @returns The LocalGraphView constructor.
+ * @public
  */
-
 export function getLocalGraphViewConstructor(app: App): TypedViewConstructor<LocalGraphView> {
     return getViewConstructorByViewType(app, ViewType.LocalGraph) as TypedViewConstructor<LocalGraphView>;
 }

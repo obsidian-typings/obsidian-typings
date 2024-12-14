@@ -8,6 +8,7 @@ type InternalPluginsConstructor = new(app: App) => InternalPlugins;
  *
  * @param app - The app instance.
  * @returns The InternalPlugins constructor.
+ * @public
  */
 export function getInternalPluginsConstructor(app: App): InternalPluginsConstructor {
     return app.internalPlugins.constructor as InternalPluginsConstructor;

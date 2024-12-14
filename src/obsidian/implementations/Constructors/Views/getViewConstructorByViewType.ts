@@ -10,6 +10,7 @@ import type {
  * @param app - The app.
  * @param viewType - The view type.
  * @returns The view constructor.
+ * @public
  */
 export function getViewConstructorByViewType<TView extends View = View>(app: App, viewType: string): Constructor<TView> {
     const leaf = app.workspace.createLeafInTabGroup();

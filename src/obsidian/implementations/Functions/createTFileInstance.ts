@@ -9,6 +9,7 @@ import { createTFolderInstance } from './createTFolderInstance.ts';
 /**
  * Creates and properly initializes the instance of TFile even the underlying file does not exist.
  * This doesn't create the missing file on the file system.
+ * @public
  */
 export function createTFileInstance(vault: Vault, path: string): TFile {
     let file = vault.getFileByPath(path);

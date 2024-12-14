@@ -11,10 +11,18 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * Get the SyncView constructor.
  *
  * @returns The SyncView constructor.
+ * @public
  */
-
 export function getSyncViewConstructor(app: App): SyncViewConstructor {
     return getViewConstructorByViewType(app, ViewType.Sync) as SyncViewConstructor;
 }
 
-type SyncViewConstructor = new(leaf: WorkspaceLeaf, syncPluginInstance: SyncPluginInstance) => SyncView;
+/**
+ * A constructor for a sync view.
+ *
+ * @public
+ */
+type SyncViewConstructor = new(
+    leaf: WorkspaceLeaf,
+    syncPluginInstance: SyncPluginInstance
+) => SyncView;

@@ -8,8 +8,8 @@ import type { TypedViewConstructor } from './TypedViewConstructor.ts';
  * Get the EmptyView constructor.
  *
  * @returns The EmptyView constructor.
+ * @public
  */
-
 export function getEmptyViewConstructor(app: App): TypedViewConstructor<EmptyView> {
     return getViewConstructorByViewType(app, ViewType.Empty) as TypedViewConstructor<EmptyView>;
 }

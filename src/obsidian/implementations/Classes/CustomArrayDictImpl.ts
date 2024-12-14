@@ -1,5 +1,6 @@
 import type { CustomArrayDict } from '../../internals/CustomArrayDict.js';
 
+/** @public */
 export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
     public data: Map<string, T[]> = new Map();
 

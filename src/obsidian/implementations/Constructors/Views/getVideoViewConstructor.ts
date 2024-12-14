@@ -8,8 +8,8 @@ import type { TypedViewConstructor } from './TypedViewConstructor.ts';
  * Get the VideoView constructor.
  *
  * @returns The VideoView constructor.
+ * @public
  */
-
 export function getVideoViewConstructor(app: App): TypedViewConstructor<VideoView> {
     return getViewConstructorByViewType(app, ViewType.Video) as TypedViewConstructor<VideoView>;
 }

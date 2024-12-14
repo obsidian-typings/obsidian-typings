@@ -11,10 +11,18 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * Get the BrowserView constructor.
  *
  * @returns The BrowserView constructor.
+ * @public
  */
-
 export function getBrowserViewConstructor(app: App): BrowserViewConstructor {
     return getViewConstructorByViewType(app, ViewType.Browser) as BrowserViewConstructor;
 }
 
-type BrowserViewConstructor = new(leaf: WorkspaceLeaf, browserPluginInstance: BrowserPluginInstance) => BrowserView;
+/**
+ * A constructor for a browser view.
+ *
+ * @public
+ */
+type BrowserViewConstructor = new(
+    leaf: WorkspaceLeaf,
+    browserPluginInstance: BrowserPluginInstance
+) => BrowserView;

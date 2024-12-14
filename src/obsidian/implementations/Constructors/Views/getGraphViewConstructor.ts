@@ -8,8 +8,8 @@ import type { TypedViewConstructor } from './TypedViewConstructor.ts';
  * Get the GraphView constructor.
  *
  * @returns The GraphView constructor.
+ * @public
  */
-
 export function getGraphViewConstructor(app: App): TypedViewConstructor<GraphView> {
     return getViewConstructorByViewType(app, ViewType.Graph) as TypedViewConstructor<GraphView>;
 }

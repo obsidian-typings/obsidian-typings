@@ -8,8 +8,8 @@ import type { TypedViewConstructor } from './TypedViewConstructor.ts';
  * Get the AudioView constructor.
  *
  * @returns The AudioView constructor.
+ * @public
  */
-
 export function getAudioViewConstructor(app: App): TypedViewConstructor<AudioView> {
     return getViewConstructorByViewType(app, ViewType.Audio) as TypedViewConstructor<AudioView>;
 }

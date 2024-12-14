@@ -11,10 +11,18 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * Get the OutlineView constructor.
  *
  * @returns The OutlineView constructor.
+ * @public
  */
-
 export function getOutlineViewConstructor(app: App): OutlineViewConstructor {
     return getViewConstructorByViewType(app, ViewType.Outline) as OutlineViewConstructor;
 }
 
-type OutlineViewConstructor = new(leaf: WorkspaceLeaf, outlinePluginInstance: OutlinePluginInstance) => OutlineView;
+/**
+ * A constructor for an outline view.
+ *
+ * @public
+ */
+type OutlineViewConstructor = new(
+    leaf: WorkspaceLeaf,
+    outlinePluginInstance: OutlinePluginInstance
+) => OutlineView;

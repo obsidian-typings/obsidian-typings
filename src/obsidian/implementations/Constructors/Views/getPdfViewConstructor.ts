@@ -8,8 +8,8 @@ import type { TypedViewConstructor } from './TypedViewConstructor.ts';
  * Get the PdfView constructor.
  *
  * @returns The PdfView constructor.
+ * @public
  */
-
 export function getPdfViewConstructor(app: App): TypedViewConstructor<PdfView> {
     return getViewConstructorByViewType(app, ViewType.Pdf) as TypedViewConstructor<PdfView>;
 }

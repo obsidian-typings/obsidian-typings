@@ -8,8 +8,8 @@ import type { TypedViewConstructor } from './TypedViewConstructor.ts';
  * Get the ImageView constructor.
  *
  * @returns The ImageView constructor.
+ * @public
  */
-
 export function getImageViewConstructor(app: App): TypedViewConstructor<ImageView> {
     return getViewConstructorByViewType(app, ViewType.Image) as TypedViewConstructor<ImageView>;
 }

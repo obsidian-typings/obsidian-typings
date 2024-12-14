@@ -8,8 +8,8 @@ import type { TypedViewConstructor } from './TypedViewConstructor.ts';
  * Get the ReleaseNotesView constructor.
  *
  * @returns The ReleaseNotesView constructor.
+ * @public
  */
-
 export function getReleaseNotesViewConstructor(app: App): TypedViewConstructor<ReleaseNotesView> {
     return getViewConstructorByViewType(app, ViewType.ReleaseNotes) as TypedViewConstructor<ReleaseNotesView>;
 }

@@ -8,8 +8,8 @@ import type { TypedViewConstructor } from './TypedViewConstructor.ts';
  * Get the BacklinkView constructor.
  *
  * @returns The BacklinkView constructor.
+ * @public
  */
-
 export function getBacklinkViewConstructor(app: App): TypedViewConstructor<BacklinkView> {
     return getViewConstructorByViewType(app, ViewType.Backlink) as TypedViewConstructor<BacklinkView>;
 }

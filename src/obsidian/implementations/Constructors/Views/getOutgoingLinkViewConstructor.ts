@@ -8,8 +8,8 @@ import type { TypedViewConstructor } from './TypedViewConstructor.ts';
  * Get the OutgoingLinkView constructor.
  *
  * @returns The OutgoingLinkView constructor.
+ * @public
  */
-
 export function getOutgoingLinkViewConstructor(app: App): TypedViewConstructor<OutgoingLinkView> {
     return getViewConstructorByViewType(app, ViewType.OutgoingLink) as TypedViewConstructor<OutgoingLinkView>;
 }
