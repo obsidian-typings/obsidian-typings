@@ -32,15 +32,15 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
     plugin: BookmarksPlugin;
     urlBookmarkLookup: Record<string, BookmarkItem>;
 
-    _onItemsChanged(arg1: boolean): void;
-    addItem(item: BookmarkItem, instance: BookmarksPluginInstance): void;
+    _onItemsChanged(shouldSave: boolean): void;
+    addItem(item: BookmarkItem, instance?: BookmarksPluginInstance): void;
     editItem(item: BookmarkItem): void;
     findBookmarkByView(view: FileView): BookmarkItem | null | undefined;
     getBookmarks(): BookmarkItem[];
     getItemTitle(item: BookmarkItem): string;
     initLeaf(): void;
     loadData(): Promise<boolean>;
-    moveItem(item: BookmarkItem, instance: BookmarksPluginInstance, arg3: number): void;
+    moveItem(item: BookmarkItem, instance: BookmarksPluginInstance | undefined, index: number): void;
     onEditorMenu(menu: Menu, editor: Editor, info: MarkdownView | MarkdownFileInfo): void;
     onEnable(app: App, plugin: BookmarksPlugin): Promise<void>;
     onExternalSettingsChange(): Promise<void>;
