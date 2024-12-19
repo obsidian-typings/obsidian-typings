@@ -14,7 +14,6 @@ export const InternalPluginName = {
     Bookmarks: 'bookmarks',
     /**
      * Plugin name in UI: Web viewer
-     * @remark Currently disabled
      */
     Browser: 'browser',
     /**
