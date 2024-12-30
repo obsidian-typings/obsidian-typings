@@ -160,7 +160,7 @@ declare module 'obsidian' {
         /**
          * Register editor mode component to view
          */
-        registerMode(component: MarkdownSubView): void;
+        registerMode(mode: MarkdownSubView): MarkdownSubView;
         /**
          * Save the frontmatter of the file
          */
