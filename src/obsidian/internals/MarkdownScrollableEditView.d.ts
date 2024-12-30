@@ -1,7 +1,7 @@
 import type { Extension } from '@codemirror/state';
 import type { ViewUpdate } from '@codemirror/view';
 import type { Scope } from 'obsidian';
-import type { EditorSearchComponent } from './EditorSearchComponent.js';
+import type { EditorSearchComponent } from './Components/EditorSearchComponent.js';
 import type { MarkdownBaseView } from './MarkdownBaseView.js';
 
 /** @public */
