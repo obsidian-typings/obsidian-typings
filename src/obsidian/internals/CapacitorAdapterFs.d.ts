@@ -20,7 +20,7 @@ export interface CapacitorAdapterFs {
     rename(realPath: string, newRealPath: string): Promise<void>;
     rmdir(realPath: string): Promise<void>;
     setTimes(realPath: string, ctime: number, mtime: number): Promise<void>;
-    stat(realPath: string): FileEntry;
+    stat(realPath: string): Promise<FileEntry>;
     trash(realPath: string): Promise<void>;
     verifyIcloud(realPath: string): Promise<void>;
     watch(realPath: string): Promise<void>;
