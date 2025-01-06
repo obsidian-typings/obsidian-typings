@@ -41,7 +41,7 @@ declare module 'obsidian' {
         /**
          * Title of the menu item
          */
-        titleEl: string;
+        titleEl: HTMLElement;
 
         /**
          * @param e - Mouse or keyboard event
