@@ -272,3 +272,93 @@ In the `app.js`, you won't see many `async` functions. Most of them are converte
 - If your function has `return [4, someValue]`, it corresponds to `await someValue` and the awaited value is later retrieved as `n.sent()`.
 
 For more details how exactly it works, see [The `__generator` helper](https://github.com/microsoft/tslib/blob/main/docs/generator.md) documentation.
+
+### Class hierarchies
+
+Detecting class hierarchies is a bit tricky.
+
+#### Static analysis
+
+In the `app.js` code, the pattern looks like:
+
+```js
+childClass = (function (e) {
+    function t(constructorArg1, constructorArg2, ..., constructorArgN) {
+        var n = e.call(this, baseConstructorArg1, baseConstructorArg2, ..., baseConstructorArgN) || this;
+        return (
+            n.childClassVariable = 'value1',
+            n.parentClassVariable = 'value2',
+            // some initialization logic
+            n
+        );
+    }
+    return (
+        f(t, e), // that's the
+        (t.prototype.childClassMethod = function (childClassMethodArg1, childClassMethodArg2, ..., childClassMethodArgN) {
+            e.prototype.parentClassMethod.call(this, parentClassMethodArg1, parentClassMethodArg2, ..., parentClassMethodArgN);
+            // some logic
+        }),
+        //... other methods
+        t
+    );
+})(parentClass)
+```
+
+Which translates to the following code:
+
+```ts
+class childClass extends parentClass {
+    constructor(constructorArg1, constructorArg2, ..., constructorArgN) {
+        super(baseConstructorArg1, baseConstructorArg2, ..., baseConstructorArgN);
+        this.childClassVariable = 'value1';
+        this.parentClassVariable = 'value2';
+        // some initialization logic
+    }
+
+    childClassMethod(childClassMethodArg1, childClassMethodArg2, ..., childClassMethodArgN) {
+        super.parentClassMethod(parentClassMethodArg1, parentClassMethodArg2, ..., parentClassMethodArgN);
+        // some logic
+    }
+
+    //... other methods
+}
+```
+
+Decrypted names of some public classes (or other variables) can also be found in the `app.js` file.
+
+```js
+AbstractInputSuggest: () => aF,
+AbstractTextComponent: () => MO,
+...
+```
+
+#### Runtime analysis
+
+If you have an instance `obj` of an unknown class and you want to understand its class hierarchy, you can use
+
+```js
+const objClass = obj.constructor;
+
+const objProto = Object.getPrototypeOf(obj);
+// or
+const objProto = obj.__proto__;
+// or
+const objProto = objClass.prototype;
+
+const parentClass = Object.getPrototypeOf(objProto).constructor;
+
+// obj1 = new class1();
+const isObj1AnDirectInstanceOfClass1 = obj1.constructor === class1;
+
+// class1 extends class2 {}
+const doesClass1DirectlyExtendClass2 = Object.getPrototypeOf(class1) === class2;
+
+// obj = new class1();
+// class1 extends intermediateClass1 {}
+// intermediateClass1 extends intermediateClass2 {}
+// intermediateClass2 extends class2 {}
+const isObjAnIndirectInstanceOfClass2 = obj instanceof class2;
+const doesClass1IndirectlyExtendClass2 = class2.prototype.isPrototypeOf(class1.prototype);
+```
+
+Also you can use [`generateTypes(obj)`](#generatetypes-helper) helper to get the entire definition of of the object `obj` including its class hierarchy.
