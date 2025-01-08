@@ -293,7 +293,7 @@ childClass = (function (e) {
         );
     }
     return (
-        f(t, e), // that's the
+        f(t, e), // that's the part that corresponds to `class childClass extends parentClass`
         (t.prototype.childClassMethod = function (childClassMethodArg1, childClassMethodArg2, ..., childClassMethodArgN) {
             e.prototype.parentClassMethod.call(this, parentClassMethodArg1, parentClassMethodArg2, ..., parentClassMethodArgN);
             // some logic
