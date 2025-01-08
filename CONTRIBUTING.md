@@ -52,7 +52,7 @@ type from the `app.` object.
 If you want to, for example, add typings for the `InternalPlugins` object, you can type `app.internalPlugins` into the console,
 which will produce the following output:
 
-![images/prototype-reference.png](images/prototype-reference.png)
+![docs/src/assets/prototype-reference.png](docs/src/assets/prototype-reference.png)
 
 Note how the internalPlugins object contains multiple prototypes: the `InternalPlugins` interface itself, but also
 the `Events` class and then the `Object` literal (does not need to be typed). This can be determined this by looking at the other definitions in the (un)official API,
@@ -205,7 +205,7 @@ all the internal methods are defined.
 3. `Pretty format` the code (optional)
 4. Copy the code to your IDE of choice (optional, but recommended)
 
-![images/accessing-main.png](images/accessing-main.png)
+![docs/src/assets/accessing-main.png](docs/src/assets/accessing-main.png)
 
 With access to the minified code, you can now start searching through it and find the definition of the method you are trying to type.
 
