@@ -41,7 +41,7 @@ declare module 'obsidian' {
          * @param extension - Extension of the file to create, defaults to 'md'
          * @param contents - Contents of the file to create, defaults to empty string
          */
-        createNewFile(location: TFolder, filename: string, extension: string, contents: string): Promise<TFile>;
+        createNewFile(location?: TFolder, filename?: string, extension?: string, contents?: string): Promise<TFile>;
         /**
          * Creates a new untitled folder in the vault at specified location
          *
