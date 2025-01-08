@@ -350,13 +350,13 @@ const parentClass = Object.getPrototypeOf(objProto).constructor;
 // obj1 = new class1();
 const isObj1AnDirectInstanceOfClass1 = obj1.constructor === class1;
 
-// class1 extends class2 {}
+// class class1 extends class2 {}
 const doesClass1DirectlyExtendClass2 = Object.getPrototypeOf(class1) === class2;
 
 // obj = new class1();
-// class1 extends intermediateClass1 {}
-// intermediateClass1 extends intermediateClass2 {}
-// intermediateClass2 extends class2 {}
+// class class1 extends intermediateClass1 {}
+// class intermediateClass1 extends intermediateClass2 {}
+// class intermediateClass2 extends class2 {}
 const isObjAnIndirectInstanceOfClass2 = obj instanceof class2;
 const doesClass1IndirectlyExtendClass2 = class2.prototype.isPrototypeOf(class1.prototype);
 ```
