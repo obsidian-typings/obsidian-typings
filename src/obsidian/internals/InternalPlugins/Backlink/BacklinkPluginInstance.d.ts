@@ -21,7 +21,7 @@ export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkP
     initLeaf(): void;
     onEnable(app: App, plugin: BacklinkPlugin): Promise<void>;
     onExternalSettingsChange(): Promise<void>;
-    onFileMenu(menu: Menu, file: TAbstractFile, title: string, leaf?: WorkspaceLeaf): Menu;
+    onFileMenu(menu: Menu, file: TAbstractFile, source: string, leaf?: WorkspaceLeaf): void;
     onFileOpen(file: TAbstractFile): void;
     onUserDisable(app: App): void;
     onUserEnable(): void;
