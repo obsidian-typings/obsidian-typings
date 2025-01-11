@@ -1,3 +1,6 @@
+import type { GraphColorGroup } from "./GraphColorGroup.js";
+
+/** @public */
 export interface GraphPluginInstanceOptions {
     centerStrength?: number;
     close?: boolean;
@@ -23,14 +26,4 @@ export interface GraphPluginInstanceOptions {
     showOrphans?: boolean;
     showTags?: boolean;
     textFadeMultiplier?: number;
-}
-
-export class GraphColorGroup {
-    color: GraphColorAttributes;
-    query: string;
-}
-
-export type GraphColorAttributes = {
-    a: number,
-    rgb: number
 }

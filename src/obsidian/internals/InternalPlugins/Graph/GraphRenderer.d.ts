@@ -1,20 +1,10 @@
 import { Application }  from 'pixi.js';
-import type { GraphColorAttributes } from './GraphPluginInstanceOptions.js';
+import type { GraphColorAttributes } from "./GraphColorAttributes.js";
 import type { GraphLink } from './GraphLink.js';
 import type { GraphNode } from './GraphNode.js';
+import type { GraphColor } from './GraphColor.js';
 
-type GraphColor = 
-    | 'circle'
-    | 'arrow'
-    | 'line'
-    | 'lineHighlight'
-    | 'fill'
-    | 'fillHighlight'
-    | 'fillFocused'
-    | 'fillTag'
-    | 'fillUnresolved'
-    | 'fillAttachment';
-
+/** @public */
 export interface GraphRenderer {
     /**
      * Specify that the renderer has changed and needs to be rendered again

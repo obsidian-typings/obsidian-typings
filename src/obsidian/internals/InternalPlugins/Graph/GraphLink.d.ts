@@ -2,6 +2,7 @@ import { Container, Graphics } from "pixi.js";
 import type { GraphRenderer } from "./GraphRenderer.js";
 import type { GraphNode } from "./GraphNode.js";
 
+/** @public */
 export interface GraphLink {
     /**
      * Destroy the graphics and its children, and remove them from the scene

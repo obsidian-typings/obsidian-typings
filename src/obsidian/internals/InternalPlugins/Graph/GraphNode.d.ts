@@ -1,8 +1,8 @@
 import { Graphics, Text } from "pixi.js";
-import type { GraphColorAttributes } from "./GraphPluginInstanceOptions.js";
+import type { GraphColorAttributes } from "./GraphColorAttributes.js";
 import type { GraphRenderer } from "./GraphRenderer.js";
 
-
+/** @public */
 export interface GraphNode {
     /**
      * Destroy the graphics and its children, and remove them from the scene
