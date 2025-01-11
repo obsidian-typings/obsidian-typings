@@ -1,4 +1,9 @@
-import type { App } from 'obsidian';
+import type {
+    App,
+    Menu,
+    TAbstractFile,
+    WorkspaceLeaf
+} from 'obsidian';
 import type { InternalPluginInstance } from '../InternalPluginInstance.js';
 import type { GraphPlugin } from './GraphPlugin.js';
 import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.js';
@@ -11,10 +16,10 @@ export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin>
     options: GraphPluginInstanceOptions;
     plugin: GraphPlugin;
 
-    onExternalSettingsChange(): unknown;
-    onFileMenu(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): unknown;
-    openGraphView(arg1: unknown): unknown;
-    openLocalGraph(arg1: unknown): unknown;
+    onExternalSettingsChange(): Promise<void>;
+    onFileMenu(menu: Menu, file: TAbstractFile, source: string, leaf?: WorkspaceLeaf): void;
+    openGraphView(newLeaf: boolean): void;
+    openLocalGraph(checking: boolean): true | undefined;
     /**
      * Saves the options in graph.json
      * @internal
