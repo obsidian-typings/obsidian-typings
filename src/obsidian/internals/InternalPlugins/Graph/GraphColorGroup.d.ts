@@ -1,4 +1,4 @@
-import type { GraphColorAttributes } from "./GraphColorAttributes.js";
+import type { GraphColorAttributes } from './GraphColorAttributes.js';
 
 /** @public */
 export class GraphColorGroup {

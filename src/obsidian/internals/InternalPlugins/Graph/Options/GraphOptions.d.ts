@@ -1,4 +1,4 @@
-import type { TreeItem } from "../../../TreeItem.js";
+import type { TreeItem } from '../../../TreeItem.js';
 
 /** @public */
 export interface GraphOptions extends TreeItem<unknown> {

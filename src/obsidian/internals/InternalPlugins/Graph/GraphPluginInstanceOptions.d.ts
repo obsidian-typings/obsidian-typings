@@ -1,13 +1,13 @@
-import type { GraphColorGroup } from "./GraphColorGroup.js";
+import type { GraphColorGroup } from './GraphColorGroup.js';
 
 /** @public */
 export interface GraphPluginInstanceOptions {
-    centerStrength?: number;
-    close?: boolean;
     'collapse-color-groups'?: boolean;
     'collapse-display'?: boolean;
     'collapse-filter'?: boolean;
     'collapse-forces'?: boolean;
+    centerStrength?: number;
+    close?: boolean;
     colorGroups?: GraphColorGroup[];
     hideUnresolved?: boolean;
     lineSizeMultiplier?: number;

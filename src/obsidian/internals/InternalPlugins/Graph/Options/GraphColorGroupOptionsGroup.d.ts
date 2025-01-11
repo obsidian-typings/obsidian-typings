@@ -1,4 +1,7 @@
-import type { ColorComponent, TextComponent } from "obsidian";
+import type {
+    ColorComponent,
+    TextComponent
+} from 'obsidian';
 
 /** @public */
 export interface GraphColorGroupOptionsGroup {
