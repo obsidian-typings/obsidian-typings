@@ -348,7 +348,7 @@ const objProto = objClass.prototype;
 const parentClass = Object.getPrototypeOf(objProto).constructor;
 
 // obj1 = new class1();
-const isObj1AnDirectInstanceOfClass1 = obj1.constructor === class1;
+const isObj1ADirectInstanceOfClass1 = obj1.constructor === class1;
 
 // class class1 extends class2 {}
 const doesClass1DirectlyExtendClass2 = Object.getPrototypeOf(class1) === class2;
