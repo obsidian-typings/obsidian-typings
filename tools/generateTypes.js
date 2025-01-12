@@ -104,7 +104,7 @@ function generateTypes(obj, maxDepth = 1) {
             }
             const { obj, path, depth } = entry;
             console.debug(`Preprocessing: ${path} (depth: ${depth})`);
-            if (depth > maxDepth) {
+            if (depth > maxDepth + 1) {
                 continue;
             }
             if (obj === null || obj === undefined) {
