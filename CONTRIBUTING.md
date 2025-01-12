@@ -354,11 +354,11 @@ const isObj1ADirectInstanceOfClass1 = obj1.constructor === class1;
 const doesClass1DirectlyExtendClass2 = Object.getPrototypeOf(class1) === class2;
 
 // obj = new class1();
-// class class1 extends intermediateClass1 {}
-// class intermediateClass1 extends intermediateClass2 {}
-// class intermediateClass2 extends class2 {}
-const isObjAnIndirectInstanceOfClass2 = obj instanceof class2;
-const doesClass1IndirectlyExtendClass2 = class2.prototype.isPrototypeOf(class1.prototype);
+// class class1 extends class2 {}
+// class class2 extends class3 {}
+// class class3 extends class4 {}
+const isObjAnIndirectInstanceOfClass4 = obj instanceof class4;
+const doesClass1IndirectlyExtendClass4 = class2.prototype.isPrototypeOf(class4.prototype);
 ```
 
 Also you can use [`generateTypes(obj)`](#generatetypes-helper) helper to get the entire definition of of the object `obj` including its class hierarchy.
