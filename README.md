@@ -137,7 +137,7 @@ import { InternalPluginName } from 'obsidian-typings/implementations';
 this.app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
 ```
 
-(The list of all available implementations can be found in the [implementations](https://github.com/Fevol/obsidian-typings/tree/main/src/implementations) folder.)
+(The list of all available implementations can be found in the [implementations](https://github.com/Fevol/obsidian-typings/tree/main/src/obsidian/implementations) folder.)
 
 ### Extend with your own typings
 
