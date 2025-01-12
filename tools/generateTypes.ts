@@ -83,10 +83,11 @@ class CustomTypes {
     }
 }
 
+let isInitialized = false;
 const builtInPrototypeNameMap = new Map<object, string>();
 const obsidianPrototypeNameMap = new Map<object, string>();
 const DEPTH_LIMIT_REACHED_TYPE_NAME = 'DepthLimitReached';
-const customTypes = new CustomTypes();
+let customTypes = new CustomTypes();
 const objectTypeMap = new Map<object, string>();
 const objectPathDepthMap = new Map<object, string>();
 const functionObjectMap = new Map<Function, object>();
@@ -94,6 +95,16 @@ const fixDuplicatesMap = new Map<Function, object | null>();
 
 
 function initBuiltInPrototypeNameMap(): void {
+    if (isInitialized) {
+        customTypes = new CustomTypes();
+        objectTypeMap.clear();
+        objectPathDepthMap.clear();
+        functionObjectMap.clear();
+        return;
+    }
+
+    isInitialized = true;
+
     let obsidian = window.require('obsidian') as typeof import('obsidian');
 
     for (const [key, value] of entriesSafe(obsidian)) {
