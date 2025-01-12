@@ -1,3 +1,5 @@
+// WORKAROUND for https://github.com/pixijs/pixijs/pull/11195
+
 import {
     readFile,
     writeFile
