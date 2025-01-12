@@ -7,4 +7,17 @@ export interface DailyNotesPluginInstance extends InternalPluginInstance<DailyNo
     app: App;
     defaultOn: true;
     plugin: DailyNotesPlugin;
+    options: {
+        /**
+         * Naming syntax for daily note in momentjs syntax.
+         * https://momentjs.com/docs/#/displaying/format/ 
+         */
+        format?: string;
+        /** New daily notes will be placed here. */
+        folder?: string;
+        /** Path to the file to use as a template. */
+        template?: string;
+        /** Open the daily note automatically whenever the vault is opened. */
+        autorun?: boolean;
+    }
 }
