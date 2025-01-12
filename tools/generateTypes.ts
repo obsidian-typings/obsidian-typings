@@ -349,7 +349,7 @@ function inferType({
         return typeof obj;
     }
 
-    if (type !== DEPTH_LIMIT_REACHED_TYPE_NAME) {
+    if (type !== DEPTH_LIMIT_REACHED_TYPE_NAME + maxDepth.toString()) {
         objectTypeMap.set(obj, type);
 
         if (hasAdditionalKeys(obj)) {
@@ -409,7 +409,7 @@ function inferObjectType({
     }
 
     if (depth > maxDepth) {
-        return DEPTH_LIMIT_REACHED_TYPE_NAME;
+        return DEPTH_LIMIT_REACHED_TYPE_NAME + maxDepth.toString();
     }
 
     const prefix = obsidianPrototypeNameMap.get(obj) ?? obsidianPrototypeNameMap.get(proto) ?? 'Type';
