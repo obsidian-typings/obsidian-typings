@@ -88,13 +88,17 @@ We built a helper to simplify discoverability process. The generated types conta
 
 Most of types, especially for function parameters would be marked as `unknown`, so you would still have to reverse engineer the logic to replace `unknown` with something meaningful, but it's a good starting point.
 
-In order to use the helper:
+The only prerequisite to use the helper is to have the [CodeScript Toolkit](https://obsidian.md/plugins?id=fix-require-modules) plugin installed.
 
-1. Install [CodeScript Toolkit](https://obsidian.md/plugins?id=fix-require-modules) plugin. This is needed to be able to run `require('obsidian')` from the Obsidian DevTools Console.
-2. Copy the code from [generateTypes.js](https://github.com/Fevol/obsidian-typings/blob/main/tools/generateTypes.js).
-3. Open Obsidian DevTools Console (`Ctrl + Shift + I`).
-4. Paste the copied code into your Obsidian DevTools Console.
-5. Invoke the function like `generateTypes(app.internalPlugins)`.
+```js
+const generateTypes = (await requireAsync('https://raw.githubusercontent.com/Fevol/obsidian-typings/refs/heads/main/tools/generateTypes.ts')).generateTypes;
+
+// Print to the console
+console.log(generateTypes(app.internalPlugins));
+
+// Copy to the clipboard
+copy(generateTypes(app.internalPlugins));
+```
 
 The helper tries to detect all known `obsidian` types, so in the output you will see types like `App123`, meaning it's the most likely can be replaced with just `App` (from `obsidian` types), but the helper keeps inferring those type to ensure the typings are complete.
 
