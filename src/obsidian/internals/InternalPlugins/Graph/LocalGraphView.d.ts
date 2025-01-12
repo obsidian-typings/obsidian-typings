@@ -1,10 +1,15 @@
 import type { TFile } from 'obsidian';
 import type { ViewType } from '../../../implementations/Constants/ViewType.js';
 import type { InfoFileView } from '../../Views/InfoFileView.js';
+import type { GraphEngine } from './GraphEngine.js';
+import type { GraphRenderer } from './GraphRenderer.js';
 
 /** @todo Documentation incomplete */
 /** @public */
 export interface LocalGraphView extends InfoFileView {
+    engine: GraphEngine;
+    renderer: GraphRenderer;
+    
     /**
      * Get the current view type
      */
