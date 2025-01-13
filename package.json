@@ -51,7 +51,7 @@
         "electron": ">=1.6.10",
         "i18next": "^23.15.1",
         "obsidian": "^1.7.2",
-        "pixi.js": "git://github.com/mnaoumov/pixijs-fork.git"
+        "pixi.js": "git+https://github.com/mnaoumov/pixijs-fork.git"
     },
     "devDependencies": {
         "@microsoft/api-extractor": "^7.49.1",
