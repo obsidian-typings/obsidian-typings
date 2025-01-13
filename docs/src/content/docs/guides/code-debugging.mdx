@@ -5,7 +5,7 @@ description: Learn how to debug the code of your Obsidian plugin.
 
 ## Debugging your code
 ### Unwinding the code trace
-Sometimes you want to figure out what path your code takes when getting executed. This may be helpful for investigating inconsistent behaviour between function calls or finding where exactly in the bundled/minified code your function is located
+Sometimes you want to figure out what path your code takes when getting executed. This may be helpful for investigating inconsistent behavior between function calls or finding where exactly in the bundled/minified code your function is located
 ```ts
 // Logs the current stack trace of the code, also logs any provided parameters
 
@@ -64,9 +64,9 @@ console.timeEnd('label');
 ```
 
 ### Flame Charts (🔥📈)
-If you want *more* information about your code, try generating a flame chart. It displays all fired events, executed functions and visualizes the stack traces of the program (including separate threads held by webworkers).
+If you want *more* information about your code, try generating a flame chart. It displays all fired events, executed functions and visualizes the stack traces of the program (including separate threads held by web-workers).
 
-Generating and displaying a flamechart:
+Generating and displaying a flame chart:
 1. Open the Developer Tools (`Ctrl + Shift + I`)
 2. Go to the `Performance` tab (may be hidden behind the arrows)
 3. Press the `Record` button or `Ctrl + E` (leftmost button, under the devtools tabs)
@@ -93,7 +93,7 @@ Flame charts are fantastic tools and all, but it can get quite tricky to find wh
 Luckily, the [`performance API`](<https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/Performance_data>) provides a couple methods that will add markings to the graph, under `Timings`
 
 ```ts
-// Measures execution time of code and marks it in the Performance flamechart under 'Timings'
+// Measures execution time of code and marks it in the Performance flame chart under 'Timings'
 
 performance.mark('start');
 // YOUR HEAVY CODE HERE
