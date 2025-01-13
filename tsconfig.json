@@ -10,7 +10,7 @@
         "inlineSources": true,
         "lib": [
             "DOM",
-            "ES2023"
+            "ES2024"
         ],
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
@@ -20,7 +20,7 @@
                 "./src/style-mod/style-mod.d.cts"
             ]
         },
-        "target": "ESNext",
+        "target": "ES2024",
         "skipLibCheck": false,
         "verbatimModuleSyntax": true
     },

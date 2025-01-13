@@ -1,5 +1,4 @@
 import type { TFile } from 'obsidian';
-import type { PromiseWithResolvers } from '../PromiseWithResolvers.ts';
 import type { Runnable } from '../Runnable.js';
 import type { QueueItems } from './QueueItems.js';
 
