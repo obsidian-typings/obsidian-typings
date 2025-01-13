@@ -79,7 +79,7 @@
         "build:fix-pixi-js": "bun run scripts/build-fix-pixi-js.ts",
         "build:implementations": "bun run scripts/build-implementations.ts",
         "build:implementations:generate-types": "tsc --project ./tsconfig.implementations.json",
-        "build:implementations:bundle-types": "dts-bundle-generator ./src/obsidian/implementations/index.ts --out-file ./dist/implementations.d.ts --inline-declare-global --inline-declare-externals --sort",
+        "build:implementations:bundle-types": "dts-bundle-generator ./src/obsidian/implementations/index.ts --out-file ./dist/implementations.d.ts --sort --no-check",
         "build:style-mod": "bun run scripts/build-style-mod.ts",
         "build:extract-api": "api-extractor run --local",
         "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
