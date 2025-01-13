@@ -51,7 +51,7 @@
         "electron": ">=1.6.10",
         "i18next": "^23.15.1",
         "obsidian": "^1.7.2",
-        "pixi.js": "^8.6.6"
+        "pixi.js": "git://github.com/mnaoumov/pixijs-fork.git"
     },
     "devDependencies": {
         "@microsoft/api-extractor": "^7.49.1",
@@ -70,13 +70,12 @@
         "ts-morph": "^25.0.0"
     },
     "scripts": {
-        "build": "npm-run-all build:clean build:fix-pixi-js build:validate build:generate-index build:bundle-types build:fix-bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:style-mod build:extract-api",
+        "build": "npm-run-all build:clean build:validate build:generate-index build:bundle-types build:fix-bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:style-mod build:extract-api",
         "build:clean": "bun run scripts/build-clean.ts",
         "build:validate": "tsc --build --force",
         "build:generate-index": "bun run scripts/build-generate-index.ts",
         "build:bundle-types": "dts-bundle-generator ./src/index.d.ts --out-file ./dist/types.d.ts --inline-declare-global --inline-declare-externals --sort",
         "build:fix-bundle-types": "bun run scripts/build-fix-bundle-types.ts",
-        "build:fix-pixi-js": "bun run scripts/build-fix-pixi-js.ts",
         "build:implementations": "bun run scripts/build-implementations.ts",
         "build:implementations:generate-types": "tsc --project ./tsconfig.implementations.json",
         "build:implementations:bundle-types": "dts-bundle-generator ./src/obsidian/implementations/index.ts --out-file ./dist/implementations.d.ts --sort --no-check",
