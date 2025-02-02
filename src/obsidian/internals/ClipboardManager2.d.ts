@@ -6,7 +6,7 @@ import type {
 import type { ImportedAttachments } from './ImportedAttachments.js';
 
 /** @public */
-export interface ClipBoardManager {
+export interface ClipboardManager {
     /**
      * Reference to the app
      */
