@@ -10,7 +10,7 @@ import type {
     MarkdownFileInfo,
     TFile
 } from 'obsidian';
-import type { ClipBoardManager } from './ClipBoardManager.js';
+import type { ClipboardManager } from './ClipboardManager.js';
 import type { EditorSuggests } from './EditorSuggests.js';
 import type { FoldInfo } from './FoldInfo.js';
 import type { TableCell } from './TableCell.js';
@@ -31,7 +31,7 @@ export interface MarkdownBaseView extends Component {
     /**
      * Manager that handles pasting text, html and images into the editor
      */
-    clipboardManager: ClipBoardManager;
+    clipboardManager: ClipboardManager;
     /**
      * Codemirror editor instance
      */
