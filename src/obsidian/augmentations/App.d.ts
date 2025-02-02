@@ -266,7 +266,7 @@ declare module 'obsidian' {
         /** @internal Register a hook for saving workspace data before unload */
         registerQuitHook(): void;
         /** @internal Save attachment at default attachments location */
-        saveAttachment(path: string, extension: string, data: ArrayBuffer): Promise<TFile>;
+        saveAttachment(name: string, extension: string, data: ArrayBuffer): Promise<TFile>;
         /**
          * Save a value to the localstorage given key
          *
