@@ -17,7 +17,7 @@ import type {
 import type { TypedWorkspaceLeaf } from '../../TypedWorkspaceLeaf.js';
 import type { SearchView } from '../GlobalSearch/SearchView.js';
 import type { InternalPluginInstance } from '../InternalPluginInstance.js';
-import type { BookmarkItem } from './BookmarkItem.js';
+import type { BookmarkItem } from './BookmarkItems/BookmarkItem.js';
 import type { BookmarksPlugin } from './BookmarksPlugin.js';
 
 /** @public */
