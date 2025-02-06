@@ -9,7 +9,7 @@ import type { GraphRenderer } from './GraphRenderer.js';
 export interface LocalGraphView extends InfoFileView {
     engine: GraphEngine;
     renderer: GraphRenderer;
-    
+
     /**
      * Get the current view type
      */

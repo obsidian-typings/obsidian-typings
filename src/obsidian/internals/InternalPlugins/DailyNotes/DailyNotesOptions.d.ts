@@ -4,7 +4,8 @@ export interface DailyNotesOptions {
     autorun?: boolean;
     /** New daily notes will be placed here. */
     folder?: string;
-    /** Naming syntax for daily note in Moment.js syntax.
+    /**
+     * Naming syntax for daily note in Moment.js syntax.
      * https://momentjs.com/docs/#/displaying/format/
      */
     format?: string;

@@ -1,5 +1,5 @@
-import { docsSchema } from '@astrojs/starlight/schema';
 import { docsLoader } from '@astrojs/starlight/loaders';
+import { docsSchema } from '@astrojs/starlight/schema';
 import { defineCollection } from 'astro:content';
 import { pageThemeObsidianSchema } from 'starlight-theme-obsidian/schema';
 

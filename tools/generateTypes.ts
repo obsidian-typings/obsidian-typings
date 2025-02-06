@@ -61,9 +61,7 @@ class CustomTypes {
             .sort(([type1], [type2]) =>
                 (typePathIndexMap.get(type1)?.index ?? 0) - (typePathIndexMap.get(type2)?.index ?? 0)
             )
-            .map(([type, definition]) =>
-                `// ${typePathIndexMap.get(type)?.path ?? ''}\ninterface ${type}${definition}`
-            )
+            .map(([type, definition]) => `// ${typePathIndexMap.get(type)?.path ?? ''}\ninterface ${type}${definition}`)
             .join('\n\n');
     }
 
@@ -92,7 +90,6 @@ const objectTypeMap = new Map<object, string>();
 const objectPathDepthMap = new Map<object, string>();
 const functionObjectMap = new Map<Function, object>();
 const fixDuplicatesMap = new Map<Function, object | null>();
-
 
 function initBuiltInPrototypeNameMap(): void {
     if (isInitialized) {
