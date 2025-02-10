@@ -1,5 +1,8 @@
 import builtins from 'builtin-modules';
-import { context, type Plugin } from 'esbuild';
+import {
+    context,
+    type Plugin
+} from 'esbuild';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path/posix';
 import { exit } from 'node:process';

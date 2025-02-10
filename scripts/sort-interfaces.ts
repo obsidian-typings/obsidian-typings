@@ -21,16 +21,14 @@ import {
 import {
     ClassDeclaration,
     ExportDeclaration,
-    ExportGetableNode,
     ImportDeclaration,
     InterfaceDeclaration,
     MethodDeclaration,
-    MethodDeclarationStructure,
+    type MethodDeclarationStructure,
     MethodSignature,
     ModuleDeclaration,
     Node,
     Project,
-    RenameableNode,
     SourceFile,
     StatementedNode
 } from 'ts-morph';
@@ -47,30 +45,32 @@ async function main(): Promise<void> {
         process.exit(1);
     }
 
+    const filePath = args[0] ?? '';
+
     // Check if file exists
-    if (!existsSync(args[0])) {
+    if (!existsSync(filePath)) {
         console.error('File does not exist');
         process.exit(1);
     }
 
     // Check if file is a directory
-    if ((await lstat(args[0])).isDirectory()) {
-        const files = (await readdir(args[0], { recursive: true, encoding: 'utf-8' })).map(file =>
+    if ((await lstat(filePath)).isDirectory()) {
+        const files = (await readdir(filePath, { recursive: true, encoding: 'utf-8' })).map(file =>
             file.replace(/\\/g, '/')
         );
         files.sort((a, b) => a.localeCompare(b));
         for (const file of files) {
             if (file.endsWith('.d.ts')) {
-                await parseFile(args[0] + file);
+                await parseFile(filePath + file);
             }
         }
     } else {
-        await parseFile(args[0], args[1]);
+        await parseFile(filePath, args[1]);
     }
 }
 
-function sortName(a: Nameable, b: Nameable): number {
-    return (a.getName() ?? '').localeCompare(b.getName() ?? '');
+function sortName(a: Nameable | undefined, b: Nameable | undefined): number {
+    return (a?.getName() ?? '').localeCompare(b?.getName() ?? '');
 }
 
 function sortSpecifierName(a: ImportDeclaration | ExportDeclaration, b: ImportDeclaration | ExportDeclaration): number {
@@ -145,7 +145,7 @@ function sortClassDeclaration(declaration: ClassDeclaration): void {
     declaration.set(structure);
 
     if (structure.methods!.length && structure.properties!.length) {
-        declaration.insertText(declaration.getMethods()[0].getStart(true), ' \n');
+        declaration.insertText(declaration.getMethods()[0]?.getStart(true) ?? 0, ' \n');
     }
 }
 
@@ -156,7 +156,7 @@ function sortInterfaceDeclaration(declaration: InterfaceDeclaration): void {
     declaration.set(structure);
 
     if (structure.methods!.length && structure.properties!.length) {
-        declaration.insertText(declaration.getMethods()[0].getStart(true), ' \n');
+        declaration.insertText(declaration.getMethods()[0]?.getStart(true) ?? 0, ' \n');
     }
 }
 
@@ -240,7 +240,7 @@ function fixExport(declaration: ExportDeclaration, file: string): ExportDeclarat
 
     if (isStarExport) {
         declaration.setModuleSpecifier(
-            'ERROR_STAR_EXPORT_IS_NOT_ALLOWED__' + declaration.getModuleSpecifierValue() ?? ''
+            'ERROR_STAR_EXPORT_IS_NOT_ALLOWED__' + (declaration.getModuleSpecifierValue() ?? '')
         );
     } else {
         for (const namedExport of declaration.getNamedExports()) {
@@ -250,13 +250,6 @@ function fixExport(declaration: ExportDeclaration, file: string): ExportDeclarat
         }
     }
 
-    return declaration;
-}
-
-function renameIfExported<T extends ExportGetableNode & RenameableNode>(declaration: T, fileName: string): T {
-    if (declaration.isExported()) {
-        declaration.rename(fileName);
-    }
     return declaration;
 }
 
