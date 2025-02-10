@@ -11,7 +11,8 @@
         },
         "./implementations": {
             "types": "./dist/implementations.d.ts",
-            "default": "./dist/implementations.cjs"
+            "import": "./dist/implementations.mjs",
+            "require": "./dist/implementations.cjs"
         }
     },
     "type": "module",
