@@ -174,7 +174,7 @@ Some breaking changes were made between `1.x.x` and `2.0.0` versions of this pac
 
 While these changes are not strictly required, they will help to keep your code more modern, future-proof and avoids the need to use legacy workarounds.
 
-- Switch to latest `TypeScript` version `npm install typescript@latest --save-dev` to support modern `TypeScript` features.<br>The sample plugin has version 4.7.6 set as its default, so it is likely that you need to upgrade. 
+- Switch to latest `TypeScript` version `npm install typescript@latest --save-dev` to support modern `TypeScript` features.<br>The sample plugin has version 4.7.6 set as its default, so it is likely that you need to upgrade.
 - Set in `tsconfig.json`, `moduleResolution` option to `nodenext` or `bundler`. <br>With `nodenext` you will have to add extensions to all your relative imports such as `import { fn1 } from './module2.js';`. <br>With `bundler` you can keep using `import { fn1 } from './module2';`
 - Set in `tsconfig.json`, `skipLibCheck` to `false`. This will compile your `.d.ts` definitions and allow you to detect the errors earlier.
 - Switch to the [Add `types` setting to `tsconfig.json`](https://github.com/Fevol/obsidian-typings/blob/main/README.md#add-types-setting-to-tsconfig-json) approach, as it is the most robust.
