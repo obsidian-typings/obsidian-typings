@@ -4,4 +4,4 @@ import {
 } from 'node:fs/promises';
 
 await cp('src/style-mod/style-mod.d.cts.dist', 'dist/style-mod.d.cts');
-await appendFile('dist/types.d.ts', 'import \'./style-mod.d.cts\';\n');
+await appendFile('dist/types.d.cts', 'import \'./style-mod.d.cts\';\n');

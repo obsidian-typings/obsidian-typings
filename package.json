@@ -4,15 +4,21 @@
     "description": "Extended type definitions for the Obsidian API (https://obsidian.md)",
     "main": "",
     "module": "",
-    "types": "./dist/types.d.ts",
+    "types": "./dist/types.d.cts",
     "exports": {
         ".": {
-            "types": "./dist/types.d.ts"
+            "types": {
+                "require": "./dist/types.d.cts",
+                "import": "./dist/types.d.mts"
+            }
         },
         "./implementations": {
-            "types": "./dist/implementations.d.ts",
-            "import": "./dist/implementations.mjs",
-            "require": "./dist/implementations.cjs"
+            "types": {
+                "require": "./dist/implementations.d.cts",
+                "import": "./dist/implementations.d.mts"
+            },
+            "require": "./dist/implementations.cjs",
+            "import": "./dist/implementations.mjs"
         }
     },
     "type": "module",
@@ -74,15 +80,16 @@
         "boolean": "npm:dry-uninstall"
     },
     "scripts": {
-        "build": "npm-run-all build:clean build:compile build:generate-index build:bundle-types build:fix-bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:style-mod build:extract-api",
+        "build": "npm-run-all build:clean build:compile build:generate-index build:bundle-types build:fix-bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:style-mod build:copy-mts build:extract-api",
         "build:clean": "bun run scripts/build-clean.ts",
         "build:compile": "tsc --build --force",
         "build:generate-index": "bun run scripts/build-generate-index.ts",
-        "build:bundle-types": "dts-bundle-generator ./src/index.d.ts --out-file ./dist/types.d.ts --inline-declare-global --inline-declare-externals --sort",
+        "build:bundle-types": "dts-bundle-generator ./src/index.d.ts --out-file ./dist/types.d.cts --inline-declare-global --inline-declare-externals --sort",
         "build:fix-bundle-types": "bun run scripts/build-fix-bundle-types.ts",
         "build:implementations": "bun run scripts/build-implementations.ts",
         "build:implementations:generate-types": "tsc --project ./tsconfig.implementations.json",
-        "build:implementations:bundle-types": "dts-bundle-generator ./src/obsidian/implementations/index.ts --out-file ./dist/implementations.d.ts --sort --no-check",
+        "build:implementations:bundle-types": "dts-bundle-generator ./src/obsidian/implementations/index.ts --out-file ./dist/implementations.d.cts --sort --no-check",
+        "build:copy-mts": "bun run scripts/build-copy-mts.ts",
         "build:style-mod": "bun run scripts/build-style-mod.ts",
         "build:extract-api": "api-extractor run --local",
         "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
