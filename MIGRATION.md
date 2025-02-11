@@ -170,8 +170,6 @@ Some breaking changes were made between `1.x.x` and `2.0.0` versions of this pac
 
     You will have to change it to the [new approach](https://github.com/Fevol/obsidian-typings/blob/main/README.md#extend-with-your-own-typings).
 
-- If you used `obsidian-typings` package with an alias, such as `@types/obsidian-typings`, `import { X } from 'obsidian-typings/implementations';` will not work. You will need to use the [Using `obsidian-typings/implementations`](https://github.com/Fevol/obsidian-typings/blob/main/README.md#using-obsidian-typings-implementations) approach to alias the import to the corresponding path.
-
 ## Recommended optional changes
 
 While these changes are not strictly required, they will help to keep your code more modern, future-proof and avoids the need to use legacy workarounds.

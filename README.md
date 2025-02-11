@@ -81,28 +81,6 @@ Be aware that the typings currently only cover a subset of the full API: while m
 
    If you prefer not to add `obsidian-typings` to your `types`, you can also add `import 'obsidian-typings';` to any project file.
 
-
-
-4. **Using `obsidian-typings/implementations`** <span id="using-obsidian-typings-implementations"></span>
-
-    Depending on how your project is set up, `import { X } from 'obsidian-typings/implementations';` may not work straight out of the box, e.g., if you have `"moduleResolution": "node"` or `"node10"` in your `tsconfig.json`
-
-    To solve this, you can add the following to your `tsconfig.json`:
-
-    ```json
-    {
-        "compilerOptions": {
-            "...": "...",
-            "paths": {
-                "obsidian-typings/implementations": [
-                    "./node_modules/obsidian-typings/dist/implementations.d.ts",
-                    "./node_modules/obsidian-typings/dist/implementations.cjs"
-                ]
-            }
-        }
-    }
-    ```
-
 ## Usage
 
 ### `obsidian` module internals
