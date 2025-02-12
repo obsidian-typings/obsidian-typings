@@ -7,18 +7,24 @@
     "types": "./dist/types.d.cts",
     "exports": {
         ".": {
-            "types": {
-                "require": "./dist/types.d.cts",
-                "import": "./dist/types.d.mts"
+            "require": {
+                "types": "./dist/types.d.cts",
+                "default": "./dist/index.cjs"
+            },
+            "import": {
+                "types": "./dist/types.d.mts",
+                "default": "./dist/index.mjs"
             }
         },
         "./implementations": {
-            "types": {
-                "require": "./dist/implementations.d.cts",
-                "import": "./dist/implementations.d.mts"
+            "require": {
+                "types": "./dist/implementations.d.cts",
+                "default": "./dist/implementations.cjs"
             },
-            "require": "./dist/implementations.cjs",
-            "import": "./dist/implementations.mjs"
+            "import": {
+                "types": "./dist/implementations.d.mts",
+                "default": "./dist/implementations.mjs"
+            }
         }
     },
     "type": "module",
