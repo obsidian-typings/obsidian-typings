@@ -1,1 +1,1 @@
-export type * from './types.d.cts';
+export * from './types.cjs';
