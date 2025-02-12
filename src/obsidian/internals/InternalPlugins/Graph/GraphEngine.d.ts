@@ -1,5 +1,4 @@
 import type { App } from 'obsidian';
-import type { Renderer } from 'pixi.js';
 import type { GraphColorGroup } from './GraphColorGroup.js';
 import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.js';
 import type { GraphView } from './GraphView.js';
@@ -8,6 +7,7 @@ import type { GraphColorGroupOptions } from './Options/GraphColorGroupOptions.js
 import type { GraphDisplayOptions } from './Options/GraphDisplayOptions.js';
 import type { GraphFilterOptions } from './Options/GraphFilterOptions.js';
 import type { GraphForceOptions } from './Options/GraphForceOptions.js';
+import type { GraphRenderer } from './GraphRenderer.js';
 
 /** @public */
 export interface GraphEngine {
@@ -40,7 +40,7 @@ export interface GraphEngine {
     /** @internal */
     progressionSpeed: number;
     /** @internal */
-    renderer: Renderer;
+    renderer: GraphRenderer;
     /** @internal */
     searchQueries: GraphColorGroup[];
     /** @internal */
