@@ -1,13 +1,13 @@
 import type { App } from 'obsidian';
 import type { GraphColorGroup } from './GraphColorGroup.js';
 import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.js';
+import type { GraphRenderer } from './GraphRenderer.js';
 import type { GraphView } from './GraphView.js';
 import type { LocalGraphView } from './LocalGraphView.js';
 import type { GraphColorGroupOptions } from './Options/GraphColorGroupOptions.js';
 import type { GraphDisplayOptions } from './Options/GraphDisplayOptions.js';
 import type { GraphFilterOptions } from './Options/GraphFilterOptions.js';
 import type { GraphForceOptions } from './Options/GraphForceOptions.js';
-import type { GraphRenderer } from './GraphRenderer.js';
 
 /** @public */
 export interface GraphEngine {

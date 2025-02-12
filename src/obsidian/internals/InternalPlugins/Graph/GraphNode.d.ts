@@ -13,12 +13,12 @@ export interface GraphNode {
     color: GraphColorAttributes;
     /** @internal */
     forward: Record<string, GraphNode>;
-	/** @internal */
-	fx: number | null;
-	/** @internal */
-	fy: number | null;
-	/** @internal */
-	highlight: Graphics | null;
+    /** @internal */
+    fx: number | null;
+    /** @internal */
+    fy: number | null;
+    /** @internal */
+    highlight: Graphics | null;
     /** @internal */
     id: string;
     /** @internal */

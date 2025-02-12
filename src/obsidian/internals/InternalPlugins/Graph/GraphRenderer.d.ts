@@ -1,4 +1,7 @@
-import { Application, Container } from 'pixi.js';
+import {
+    Application,
+    Container
+} from 'pixi.js';
 import type { GraphColor } from './GraphColor.js';
 import type { GraphColorAttributes } from './GraphColorAttributes.js';
 import type { GraphLink } from './GraphLink.js';
@@ -8,16 +11,16 @@ import type { GraphNode } from './GraphNode.js';
 export interface GraphRenderer {
     /** @internal */
     colors: Record<GraphColor, GraphColorAttributes>;
-	/** @internal */
-	dragNode: GraphNode | null;
-	/** @internal */
-	fLineSizeMult: number;
+    /** @internal */
+    dragNode: GraphNode | null;
+    /** @internal */
+    fLineSizeMult: number;
     /** @internal */
     fNodeSizeMult: number;
-	/** @internal */
-	hanger: Container;
-	/** @internal */
-	height: number;
+    /** @internal */
+    hanger: Container;
+    /** @internal */
+    height: number;
     /** @internal */
     idleFrames: number;
     /** @internal */
@@ -38,27 +41,27 @@ export interface GraphRenderer {
     scale: number;
     /** @internal */
     targetScale: number;
-	/** @internal */
-	viewport: {bottom: number, left: number, right: number, top: number};
-	/** @internal */
-	width: number;
+    /** @internal */
+    viewport: { bottom: number; left: number; right: number; top: number };
+    /** @internal */
+    width: number;
     /** @internal */
     worker: Worker;
-	/** @internal */
-	zoomCenterX: number;
-	/** @internal */
-	zoomCenterY: number;
+    /** @internal */
+    zoomCenterX: number;
+    /** @internal */
+    zoomCenterY: number;
 
     /**
      * Specify that the renderer has changed and needs to be rendered again
      */
     changed(): unknown;
-	/** @internal */
-	renderCallback(): void;
-	/** @internal */
-	getHighlightNode(): GraphNode;
-	/** @internal */
-	setPan(panX: number, panY: number): void;
-	/** @internal */
-	setScale(scale: number): void;
+    /** @internal */
+    getHighlightNode(): GraphNode;
+    /** @internal */
+    renderCallback(): void;
+    /** @internal */
+    setPan(panX: number, panY: number): void;
+    /** @internal */
+    setScale(scale: number): void;
 }
