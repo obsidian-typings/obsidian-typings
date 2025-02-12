@@ -8,11 +8,17 @@ import type { GraphRenderer } from './GraphRenderer.js';
 /** @public */
 export interface GraphNode {
     /** @internal */
-    circle: Graphics;
+    circle: Graphics | null;
     /** @internal */
     color: GraphColorAttributes;
     /** @internal */
     forward: Record<string, GraphNode>;
+	/** @internal */
+	fx: number | null;
+	/** @internal */
+	fy: number | null;
+	/** @internal */
+	highlight: Graphics | null;
     /** @internal */
     id: string;
     /** @internal */
@@ -22,7 +28,7 @@ export interface GraphNode {
     /** @internal */
     reverse: Record<string, GraphNode>;
     /** @internal */
-    text: Text;
+    text: Text | null;
     /** @internal */
     type: string;
     /** @internal */

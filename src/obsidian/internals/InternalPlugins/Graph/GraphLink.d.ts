@@ -8,11 +8,11 @@ import type { GraphRenderer } from './GraphRenderer.js';
 /** @public */
 export interface GraphLink {
     /** @internal */
-    arrow: Graphics;
+    arrow: Graphics | null;
     /** @internal */
-    line: Graphics;
+    line: Graphics | null;
     /** @internal */
-    px: Container;
+    px: Container | null;
     /** @internal */
     rendered: boolean;
     /** @internal */
