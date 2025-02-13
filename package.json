@@ -65,7 +65,7 @@
         "i18next": "^23.15.1",
         "moment": "^2.30.1",
         "obsidian": "^1.7.2",
-        "pixi.js": "https://github.com/mnaoumov/pixijs-fork/archive/refs/tags/8.6.6.tar.gz"
+        "pixi.js": "7.2.4"
     },
     "devDependencies": {
         "@microsoft/api-extractor": "^7.49.1",
