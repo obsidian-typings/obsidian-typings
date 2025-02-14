@@ -1,5 +1,6 @@
 import type { IAdapter } from './adapter.js';
-interface ISettings {
+/** @public */
+export interface ISettings {
     ADAPTER: IAdapter;
     RESOLUTION: number;
     CREATE_IMAGE_BITMAP: boolean;
