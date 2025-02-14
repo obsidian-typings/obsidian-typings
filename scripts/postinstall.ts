@@ -19,8 +19,8 @@ console.warn('env', JSON.stringify(env, null, 2));
 // console.warn('patchDir', patchDir);
 // console.warn('initCwd', initCwd);
 
-// spawnSync('npx', ['patch-package', '--patch-dir', patchDir], {
-//     shell: true,
-//     stdio: 'inherit',
-//     cwd: initCwd
-// });
+spawnSync('npx', ['patch-package', '--patch-dir', './patches'], {
+    shell: true,
+    stdio: 'inherit',
+    cwd: initCwd
+});
