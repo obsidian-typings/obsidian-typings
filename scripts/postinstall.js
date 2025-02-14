@@ -7,4 +7,4 @@ if (!existsSync(patchDir)) {
     patchDir = './patches';
 }
 
-spawnSync('npx', ['patch-package', '--patch-dir', patchDir], { stdio: 'inherit' });
+spawnSync('npx', ['patch-package', '--patch-dir', patchDir], { shell: true, stdio: 'inherit' });

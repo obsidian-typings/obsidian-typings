@@ -99,7 +99,7 @@
         "build:static": "bun run scripts/build-static.ts",
         "build:extract-api": "api-extractor run --local",
         "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
-        "postinstall": "npx bun run scripts/postinstall.ts",
+        "postinstall": "node scripts/postinstall.js",
         "release-beta": "bun run scripts/bump-version.ts beta",
         "release-patch": "bun run scripts/bump-version.ts patch",
         "release-minor": "bun run scripts/bump-version.ts minor",
