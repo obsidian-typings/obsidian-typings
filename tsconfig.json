@@ -15,17 +15,6 @@
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
         "noEmit": true,
-        "paths": {
-            "@pixi/settings": [
-                "./src/lib/@pixi/settings/index.d.ts"
-            ],
-            "colord/types": [
-                "./src/lib/colord/index.d.ts"
-            ],
-            "style-mod": [
-                "./src/style-mod/style-mod.d.cts"
-            ]
-        },
         "target": "ES2024",
         "skipLibCheck": false,
         "verbatimModuleSyntax": true

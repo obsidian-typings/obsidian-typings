@@ -86,7 +86,7 @@
         "boolean": "npm:dry-uninstall"
     },
     "scripts": {
-        "build": "npm-run-all build:clean build:compile build:generate-index build:bundle-types build:fix-bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:style-mod build:static build:extract-api",
+        "build": "npm-run-all build:clean build:compile build:generate-index build:bundle-types build:fix-bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:static build:extract-api",
         "build:clean": "bun run scripts/build-clean.ts",
         "build:compile": "tsc --build --force",
         "build:generate-index": "bun run scripts/build-generate-index.ts",
@@ -96,7 +96,6 @@
         "build:implementations:generate-types": "tsc --project ./tsconfig.implementations.json",
         "build:implementations:bundle-types": "dts-bundle-generator ./src/obsidian/implementations/index.ts --out-file ./dist/implementations.d.cts --sort --no-check",
         "build:static": "bun run scripts/build-static.ts",
-        "build:style-mod": "bun run scripts/build-style-mod.ts",
         "build:extract-api": "api-extractor run --local",
         "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
         "release-beta": "bun run scripts/bump-version.ts beta",
