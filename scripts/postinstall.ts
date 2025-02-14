@@ -10,7 +10,11 @@ import {
 
 const initCwd = env['INIT_CWD'] ?? cwd();
 
-spawnSync('npx', ['patch-package', '--patch-dir', relative(initCwd, join(cwd(), 'patches'))], {
+const patchDir = relative(initCwd, join(cwd(), 'patches'));
+console.warn('patchDir', patchDir);
+console.warn('initCwd', initCwd);
+
+spawnSync('npx', ['patch-package', '--patch-dir', patchDir], {
     shell: true,
     stdio: 'inherit',
     cwd: initCwd
