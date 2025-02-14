@@ -6,7 +6,8 @@ dprint.json
 dummy.ts
 images/
 MIGRATION.md
-scripts/
+scripts/*
+!scripts/postinstall.ts
 src/
 docs/
 tsconfig.implementations.json
