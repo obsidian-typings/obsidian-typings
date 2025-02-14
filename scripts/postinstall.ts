@@ -1,10 +1,17 @@
 import { spawnSync } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import {
+    join,
+    relative
+} from 'node:path/posix';
+import {
+    cwd,
+    env
+} from 'node:process';
 
-let patchDir = './node_modules/obsidian-typings/patches';
+const initCwd = env['INIT_CWD'] ?? cwd();
 
-if (!existsSync(patchDir)) {
-    patchDir = './patches';
-}
-
-spawnSync('npx', ['patch-package', '--patch-dir', patchDir], { shell: true, stdio: 'inherit' });
+spawnSync('npx', ['patch-package', '--patch-dir', relative(initCwd, join(cwd(), 'patches'))], {
+    shell: true,
+    stdio: 'inherit',
+    cwd: initCwd
+});
