@@ -103,5 +103,8 @@
         "release-minor": "bun run scripts/bump-version.ts minor",
         "release-major": "bun run scripts/bump-version.ts major",
         "spellcheck": "cspell . --no-progress"
+    },
+    "dependencies": {
+        "patch-package": "^8.0.0"
     }
 }
