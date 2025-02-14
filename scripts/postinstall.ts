@@ -1,18 +1,19 @@
 import { spawnSync } from 'node:child_process';
+import { cwd } from 'node:process';
 import {
-    cwd,
-    env
-} from 'node:process';
+    join,
+    relative
+} from 'node:path/posix';
 
+let pkgDir = cwd().replace(/\\/g, '/');
+const patchDir = join(pkgDir, 'patches');
+const relativePath = '/node_modules/obsidian-typings';
+if (pkgDir.endsWith(relativePath)) {
+    pkgDir = pkgDir.slice(0, -relativePath.length);
+}
 
-const initCwd = env['INIT_CWD'];
-
-console.warn('initCwd', initCwd);
-console.warn('cwd', cwd());
-console.warn('env', JSON.stringify(env, null, 2));
-
-spawnSync('npx', ['patch-package', '--patch-dir', './patches'], {
+spawnSync('npx', ['patch-package', '--patch-dir', relative(pkgDir, patchDir)], {
     shell: true,
     stdio: 'inherit',
-    cwd: initCwd
+    cwd: pkgDir
 });
