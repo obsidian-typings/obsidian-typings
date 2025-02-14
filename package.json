@@ -80,6 +80,7 @@
         "dts-bundle-generator": "^9.5.1",
         "esbuild": "^0.24.2",
         "npm-run-all": "^4.1.5",
+        "patch-package": "^8.0.0",
         "ts-morph": "^25.0.0"
     },
     "overrides": {
@@ -98,14 +99,14 @@
         "build:static": "bun run scripts/build-static.ts",
         "build:extract-api": "api-extractor run --local",
         "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
-        "prepare": "patch-package",
+        "postinstall": "patch-package",
         "release-beta": "bun run scripts/bump-version.ts beta",
         "release-patch": "bun run scripts/bump-version.ts patch",
         "release-minor": "bun run scripts/bump-version.ts minor",
         "release-major": "bun run scripts/bump-version.ts major",
         "spellcheck": "cspell . --no-progress"
     },
-    "dependencies": {
-        "patch-package": "^8.0.0"
+    "bin": {
+        "obsidian-typings-patch": "npx patch-package --patch-dir ./node_modules/obsidian-typings/patches"
     }
 }
