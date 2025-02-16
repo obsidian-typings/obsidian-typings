@@ -1,4 +1,4 @@
-import { InternalPluginName } from './InternalPluginName.d.ts';
+import { InternalPluginName } from './InternalPluginName.ts';
 
 /** @public */
 export const ViewType = {

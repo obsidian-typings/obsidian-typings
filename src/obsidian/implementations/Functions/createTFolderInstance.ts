@@ -3,7 +3,7 @@ import {
     TFolder
 } from 'obsidian';
 import { getTFolderConstructor } from '../Constructors/getTFolderConstructor.ts';
-import { parentFolderPath } from '../Utils/PathUtils.d.ts';
+import { parentFolderPath } from '../Utils/PathUtils.ts';
 
 /**
  * Creates and properly initializes the instance of TFolder even the underlying folder does not exist.
