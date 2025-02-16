@@ -21,23 +21,8 @@ index 24b2706..d8b1c78 100644
    "types": "src/style-mod.d.ts",
 diff --git a/node_modules/style-mod/src/style-mod.d.cts b/node_modules/style-mod/src/style-mod.d.cts
 new file mode 100644
-index 0000000..081f0f2
+index 0000000..6c79d85
 --- /dev/null
 +++ b/node_modules/style-mod/src/style-mod.d.cts
-@@ -0,0 +1,16 @@
-+export class StyleModule {
-+  constructor(spec: {[selector: string]: StyleSpec}, options?: {
-+    finish?(sel: string): string
-+  })
-+  getRules(): string
-+  static mount(
-+    root: Document | ShadowRoot | DocumentOrShadowRoot,
-+    module: StyleModule | ReadonlyArray<StyleModule>,
-+    options?: {nonce?: string}
-+  ): void
-+  static newName(): string
-+}
-+
-+export type StyleSpec = {
-+  [propOrSelector: string]: string | number | StyleSpec | null
-+}
+@@ -0,0 +1 @@
++export type * from './style-mod.js' with { 'resolution-mode': 'require' };
