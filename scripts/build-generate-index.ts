@@ -30,8 +30,8 @@ async function generateIndex(dir: string, extension: string): Promise<void> {
 
 function generateExportLine(file: string): string {
     file = file.replace(/\\/g, '/');
-    const jsFile = file.replace(getExtension(file), '.js');
-    return `export * from './${jsFile}';`;
+    const exportPrefix = file.endsWith('.d.ts') ? 'export type' : 'export';
+    return `${exportPrefix} * from './${file}';`;
 }
 
 function getExtension(file: string): string {
