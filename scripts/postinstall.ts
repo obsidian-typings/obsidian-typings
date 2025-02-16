@@ -1,9 +1,9 @@
 import { spawnSync } from 'node:child_process';
-import { cwd } from 'node:process';
 import {
     join,
     relative
 } from 'node:path/posix';
+import { cwd } from 'node:process';
 
 let pkgDir = cwd().replace(/\\/g, '/');
 const patchDir = join(pkgDir, 'patches');
