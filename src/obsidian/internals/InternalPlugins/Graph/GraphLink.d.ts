@@ -1,7 +1,7 @@
 import {
     Container,
     Graphics
-} from 'pixi.d.ts';
+} from 'pixi.js';
 import type { GraphNode } from './GraphNode.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 

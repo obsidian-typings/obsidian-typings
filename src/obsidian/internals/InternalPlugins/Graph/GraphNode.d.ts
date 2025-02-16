@@ -1,7 +1,7 @@
 import {
     Graphics,
     Text
-} from 'pixi.d.ts';
+} from 'pixi.js';
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 

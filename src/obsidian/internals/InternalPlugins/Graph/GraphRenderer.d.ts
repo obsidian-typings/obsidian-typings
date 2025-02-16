@@ -1,7 +1,7 @@
 import {
     Application,
     Container
-} from 'pixi.d.ts';
+} from 'pixi.js';
 import type { GraphColor } from './GraphColor.d.ts';
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 import type { GraphLink } from './GraphLink.d.ts';
