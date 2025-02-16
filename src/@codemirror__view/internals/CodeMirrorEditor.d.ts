@@ -1,10 +1,10 @@
 import type { SearchQuery } from '@codemirror/search';
 import type { ChangeDesc } from '@codemirror/state';
 import type { EditorPosition } from 'obsidian';
-import type { Bookmark } from './Bookmark.js';
-import type { EditorSelection } from './EditorSelection.js';
-import type { LineHandle } from './LineHandle.js';
-import type { OpenDialogOptions } from './OpenDialogOptions.js';
+import type { Bookmark } from './Bookmark.d.ts';
+import type { EditorSelection } from './EditorSelection.d.ts';
+import type { LineHandle } from './LineHandle.d.ts';
+import type { OpenDialogOptions } from './OpenDialogOptions.d.ts';
 
 /** @public */
 interface CodeMirrorEditor {

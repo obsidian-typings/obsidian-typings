@@ -1,6 +1,6 @@
 import type { WorkspaceLeaf } from 'obsidian';
-import type { BrowserPluginInstance } from '../../InternalPlugins/Browser/BrowserPluginInstance.js';
-import type { BrowserView } from '../../InternalPlugins/Browser/BrowserView.js';
+import type { BrowserPluginInstance } from '../../InternalPlugins/Browser/BrowserPluginInstance.d.ts';
+import type { BrowserView } from '../../InternalPlugins/Browser/BrowserView.d.ts';
 
 /**
  * A constructor for a browser view.

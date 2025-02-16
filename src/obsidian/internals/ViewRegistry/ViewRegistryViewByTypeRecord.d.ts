@@ -1,9 +1,9 @@
 import type {
     ViewCreator
 } from 'obsidian';
-import type { TypedViewCreator } from '../Views/TypedViewCreator.js';
-import type { ViewTypeType } from '../Views/ViewTypeType.js';
-import type { ViewTypeViewMapping } from '../Views/ViewTypeViewMapping.js';
+import type { TypedViewCreator } from '../Views/TypedViewCreator.d.ts';
+import type { ViewTypeType } from '../Views/ViewTypeType.d.ts';
+import type { ViewTypeViewMapping } from '../Views/ViewTypeViewMapping.d.ts';
 
 /** @public */
 type Mapping = {

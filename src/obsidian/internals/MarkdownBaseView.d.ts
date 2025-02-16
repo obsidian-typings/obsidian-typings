@@ -10,13 +10,13 @@ import type {
     MarkdownFileInfo,
     TFile
 } from 'obsidian';
-import type { ClipboardManager } from './ClipboardManager.js';
-import type { EditorSuggests } from './EditorSuggests.js';
-import type { FoldInfo } from './FoldInfo.js';
-import type { TableCell } from './TableCell.js';
-import type { TableCellEditor } from './TableCellEditor.js';
-import type { TableEditor } from './TableEditor.js';
-import type { Token } from './Token.js';
+import type { ClipboardManager } from './ClipboardManager.d.ts';
+import type { EditorSuggests } from './EditorSuggests.d.ts';
+import type { FoldInfo } from './FoldInfo.d.ts';
+import type { TableCell } from './TableCell.d.ts';
+import type { TableCellEditor } from './TableCellEditor.d.ts';
+import type { TableEditor } from './TableEditor.d.ts';
+import type { Token } from './Token.d.ts';
 
 /** @public */
 export interface MarkdownBaseView extends Component {

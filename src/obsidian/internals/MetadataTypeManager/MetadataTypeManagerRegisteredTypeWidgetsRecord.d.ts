@@ -1,5 +1,5 @@
-import { PropertyWidget } from '../PropertyWidget.js';
-import { PropertyWidgetType } from '../PropertyWidgetType.js';
+import { PropertyWidget } from '../PropertyWidget.d.ts';
+import { PropertyWidgetType } from '../PropertyWidgetType.d.ts';
 
 /** @public */
 export interface MetadataTypeManagerRegisteredTypeWidgetsRecord

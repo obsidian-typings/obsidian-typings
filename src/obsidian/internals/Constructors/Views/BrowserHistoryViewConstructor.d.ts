@@ -1,6 +1,6 @@
 import type { WorkspaceLeaf } from 'obsidian';
-import type { BrowserHistoryView } from '../../InternalPlugins/Browser/BrowserHistoryView.js';
-import type { BrowserPluginInstance } from '../../InternalPlugins/Browser/BrowserPluginInstance.js';
+import type { BrowserHistoryView } from '../../InternalPlugins/Browser/BrowserHistoryView.d.ts';
+import type { BrowserPluginInstance } from '../../InternalPlugins/Browser/BrowserPluginInstance.d.ts';
 
 /**
  * A constructor for a browser history view.

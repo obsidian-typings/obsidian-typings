@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
 import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
-import type { TagView } from '../../../internals/Views/TagView.js';
+import type { TagView } from '../../../internals/Views/TagView.d.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 

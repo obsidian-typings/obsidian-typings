@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
-import type { InternalPluginInstance } from '../InternalPluginInstance.js';
-import type { TemplatesPlugin } from './TemplatesPlugin.js';
+import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
+import type { TemplatesPlugin } from './TemplatesPlugin.d.ts';
 
 /** @public */
 export interface TemplatesPluginInstance extends InternalPluginInstance<TemplatesPlugin> {

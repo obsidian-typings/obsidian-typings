@@ -1,9 +1,9 @@
 import {
     Graphics,
     Text
-} from 'pixi.js';
-import type { GraphColorAttributes } from './GraphColorAttributes.js';
-import type { GraphRenderer } from './GraphRenderer.js';
+} from 'pixi.d.ts';
+import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
+import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /** @public */
 export interface GraphNode {

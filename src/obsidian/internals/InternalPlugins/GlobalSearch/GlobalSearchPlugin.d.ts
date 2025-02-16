@@ -1,5 +1,5 @@
-import type { InternalPlugin } from '../InternalPlugin.js';
-import type { GlobalSearchPluginInstance } from './GlobalSearchPluginInstance.js';
+import type { InternalPlugin } from '../InternalPlugin.d.ts';
+import type { GlobalSearchPluginInstance } from './GlobalSearchPluginInstance.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */

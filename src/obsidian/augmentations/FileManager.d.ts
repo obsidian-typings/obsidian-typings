@@ -1,7 +1,7 @@
-import type { LinkUpdateHandler } from '../internals/LinkUpdate/LinkUpdateHandler.js';
-import type { LinkUpdaters } from '../internals/LinkUpdate/LinkUpdaters.js';
-import type { PositionedReference } from '../internals/PositionedReference.js';
-import type { PromisedQueue } from '../internals/PromisedQueue.js';
+import type { LinkUpdateHandler } from '../internals/LinkUpdate/LinkUpdateHandler.d.ts';
+import type { LinkUpdaters } from '../internals/LinkUpdate/LinkUpdaters.d.ts';
+import type { PositionedReference } from '../internals/PositionedReference.d.ts';
+import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
 
 export {};
 

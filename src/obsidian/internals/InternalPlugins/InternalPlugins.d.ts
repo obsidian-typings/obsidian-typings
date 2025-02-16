@@ -3,12 +3,12 @@ import type {
     Debouncer,
     Events
 } from 'obsidian';
-import type { InternalPlugin } from './InternalPlugin.js';
-import type { InternalPluginInstance } from './InternalPluginInstance.js';
-import type { InternalPluginNameInstancesMapping } from './InternalPluginNameInstancesMapping.js';
-import type { InternalPluginNamePluginsMapping } from './InternalPluginNamePluginsMapping.js';
-import type { InternalPluginNameType } from './InternalPluginNameType.js';
-import type { InternalPluginsConfigRecord } from './InternalPluginsConfigRecord.js';
+import type { InternalPlugin } from './InternalPlugin.d.ts';
+import type { InternalPluginInstance } from './InternalPluginInstance.d.ts';
+import type { InternalPluginNameInstancesMapping } from './InternalPluginNameInstancesMapping.d.ts';
+import type { InternalPluginNamePluginsMapping } from './InternalPluginNamePluginsMapping.d.ts';
+import type { InternalPluginNameType } from './InternalPluginNameType.d.ts';
+import type { InternalPluginsConfigRecord } from './InternalPluginsConfigRecord.d.ts';
 
 /** @public */
 export interface InternalPlugins extends Events {

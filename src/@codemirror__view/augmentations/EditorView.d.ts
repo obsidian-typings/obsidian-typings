@@ -1,5 +1,5 @@
-import type { EditorViewState } from '../internals/EditorViewState.js';
-import type { VimEditor } from '../internals/VimEditor.js';
+import type { EditorViewState } from '../internals/EditorViewState.d.ts';
+import type { VimEditor } from '../internals/VimEditor.d.ts';
 
 export {};
 

@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
-import type { InternalPlugin } from '../InternalPlugins/InternalPlugin.js';
-import type { InternalPlugins } from '../InternalPlugins/InternalPlugins.js';
+import type { InternalPlugin } from '../InternalPlugins/InternalPlugin.d.ts';
+import type { InternalPlugins } from '../InternalPlugins/InternalPlugins.d.ts';
 
 /**
  * The InternalPlugin constructor.

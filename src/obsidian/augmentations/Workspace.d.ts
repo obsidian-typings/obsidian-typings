@@ -1,20 +1,20 @@
 import type { Extension } from '@codemirror/state';
 import type { Constructor } from 'obsidian';
-import type { CanvasConnection } from '../internals/CanvasConnection.js';
-import type { CanvasNode } from '../internals/CanvasNode.js';
-import type { HoverLinkEvent } from '../internals/HoverLinkEvent.js';
-import type { CanvasView } from '../internals/InternalPlugins/Canvas/CanvasView.js';
-import type { SearchView } from '../internals/InternalPlugins/GlobalSearch/SearchView.js';
-import type { LeafEntry } from '../internals/LeafEntry.js';
-import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.js';
-import type { ObsidianTouchEvent } from '../internals/ObsidianTouchEvent.js';
-import type { RecentFileTracker } from '../internals/RecentFileTracker.js';
-import type { StateHistory } from '../internals/StateHistory.js';
-import type { TypedWorkspaceLeaf } from '../internals/TypedWorkspaceLeaf.js';
-import type { ViewTypeType } from '../internals/Views/ViewTypeType.js';
-import type { ViewTypeViewMapping } from '../internals/Views/ViewTypeViewMapping.js';
-import type { SerializedWorkspace } from '../internals/Workspace/SerializedWorkspace.js';
-import type { WorkspaceHoverLinkSourcesRecord } from '../internals/Workspace/WorkspaceHoverLinkSourcesRecord.js';
+import type { CanvasConnection } from '../internals/CanvasConnection.d.ts';
+import type { CanvasNode } from '../internals/CanvasNode.d.ts';
+import type { HoverLinkEvent } from '../internals/HoverLinkEvent.d.ts';
+import type { CanvasView } from '../internals/InternalPlugins/Canvas/CanvasView.d.ts';
+import type { SearchView } from '../internals/InternalPlugins/GlobalSearch/SearchView.d.ts';
+import type { LeafEntry } from '../internals/LeafEntry.d.ts';
+import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
+import type { ObsidianTouchEvent } from '../internals/ObsidianTouchEvent.d.ts';
+import type { RecentFileTracker } from '../internals/RecentFileTracker.d.ts';
+import type { StateHistory } from '../internals/StateHistory.d.ts';
+import type { TypedWorkspaceLeaf } from '../internals/TypedWorkspaceLeaf.d.ts';
+import type { ViewTypeType } from '../internals/Views/ViewTypeType.d.ts';
+import type { ViewTypeViewMapping } from '../internals/Views/ViewTypeViewMapping.d.ts';
+import type { SerializedWorkspace } from '../internals/Workspace/SerializedWorkspace.d.ts';
+import type { WorkspaceHoverLinkSourcesRecord } from '../internals/Workspace/WorkspaceHoverLinkSourcesRecord.d.ts';
 
 declare module 'obsidian' {
     interface Workspace extends Events {

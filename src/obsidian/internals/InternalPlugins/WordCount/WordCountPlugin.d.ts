@@ -1,5 +1,5 @@
-import type { InternalPlugin } from '../InternalPlugin.js';
-import type { WordCountPluginInstance } from './WordCountPluginInstance.js';
+import type { InternalPlugin } from '../InternalPlugin.d.ts';
+import type { WordCountPluginInstance } from './WordCountPluginInstance.d.ts';
 
 /** @public */
 export interface WordCountPlugin extends InternalPlugin<WordCountPluginInstance> {}

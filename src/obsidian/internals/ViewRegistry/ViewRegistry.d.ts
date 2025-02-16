@@ -3,11 +3,11 @@ import type {
     Events,
     ViewCreator
 } from 'obsidian';
-import type { TypedViewCreator } from '../Views/TypedViewCreator.js';
-import type { ViewTypeType } from '../Views/ViewTypeType.js';
-import type { ViewTypeViewMapping } from '../Views/ViewTypeViewMapping.js';
-import type { ViewRegistryTypeByExtensionRecord } from './ViewRegistryTypeByExtensionRecord.js';
-import type { ViewRegistryViewByTypeRecord } from './ViewRegistryViewByTypeRecord.js';
+import type { TypedViewCreator } from '../Views/TypedViewCreator.d.ts';
+import type { ViewTypeType } from '../Views/ViewTypeType.d.ts';
+import type { ViewTypeViewMapping } from '../Views/ViewTypeViewMapping.d.ts';
+import type { ViewRegistryTypeByExtensionRecord } from './ViewRegistryTypeByExtensionRecord.d.ts';
+import type { ViewRegistryViewByTypeRecord } from './ViewRegistryViewByTypeRecord.d.ts';
 
 /** @public */
 export interface ViewRegistry extends Events {

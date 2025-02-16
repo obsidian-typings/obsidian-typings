@@ -5,11 +5,11 @@ import type {
     TFolder,
     View
 } from 'obsidian';
-import type { ViewType } from '../../../implementations/Constants/ViewType.js';
-import type { Tree } from '../../Tree.js';
-import type { WeakMapWrapper } from '../../WeakMapWrapper.js';
-import type { FileExplorerViewFileItemsRecord } from './FileExplorerViewFileItemsRecord.js';
-import type { FileTreeItem } from './FileTreeItem.js';
+import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
+import type { Tree } from '../../Tree.d.ts';
+import type { WeakMapWrapper } from '../../WeakMapWrapper.d.ts';
+import type { FileExplorerViewFileItemsRecord } from './FileExplorerViewFileItemsRecord.d.ts';
+import type { FileTreeItem } from './FileTreeItem.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */

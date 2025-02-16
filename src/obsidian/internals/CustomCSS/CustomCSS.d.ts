@@ -3,10 +3,10 @@ import type {
     Component,
     Debouncer
 } from 'obsidian';
-import type { PromisedQueue } from '../PromisedQueue.js';
-import type { ThemeManifest } from '../ThemeManifest.js';
-import type { CustomCSSThemesRecord } from './CustomCSSThemesRecord.js';
-import type { CustomCSSUpdatesRecord } from './CustomCSSUpdatesRecord.js';
+import type { PromisedQueue } from '../PromisedQueue.d.ts';
+import type { ThemeManifest } from '../ThemeManifest.d.ts';
+import type { CustomCSSThemesRecord } from './CustomCSSThemesRecord.d.ts';
+import type { CustomCSSUpdatesRecord } from './CustomCSSUpdatesRecord.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */

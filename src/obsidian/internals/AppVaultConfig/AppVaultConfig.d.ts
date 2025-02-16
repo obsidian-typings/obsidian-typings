@@ -1,4 +1,4 @@
-import type { AppVaultConfigHotkeysRecord } from './AppVaultConfigHotkeysRecord.js';
+import type { AppVaultConfigHotkeysRecord } from './AppVaultConfigHotkeysRecord.d.ts';
 
 /** @public */
 export interface AppVaultConfig {

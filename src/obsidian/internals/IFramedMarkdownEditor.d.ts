@@ -1,6 +1,6 @@
 import type { Extension } from '@codemirror/state';
 import type { ViewUpdate } from '@codemirror/view';
-import type { MarkdownScrollableEditView } from './MarkdownScrollableEditView.js';
+import type { MarkdownScrollableEditView } from './MarkdownScrollableEditView.d.ts';
 
 /** @public */
 export interface IFramedMarkdownEditor extends MarkdownScrollableEditView {

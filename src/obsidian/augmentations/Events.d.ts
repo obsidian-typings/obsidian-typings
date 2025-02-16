@@ -1,4 +1,4 @@
-import type { EventsEntry } from '../internals/EventsEntry.js';
+import type { EventsEntry } from '../internals/EventsEntry.d.ts';
 
 declare module 'obsidian' {
     interface Events {

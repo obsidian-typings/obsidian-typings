@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
 import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
-import type { SearchView } from '../../../internals/InternalPlugins/GlobalSearch/SearchView.js';
+import type { SearchView } from '../../../internals/InternalPlugins/GlobalSearch/SearchView.d.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 

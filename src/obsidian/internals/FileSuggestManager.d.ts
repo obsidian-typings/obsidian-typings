@@ -4,7 +4,7 @@ import type {
     SearchResult,
     TFile
 } from 'obsidian';
-import type { Runnable } from './Runnable.js';
+import type { Runnable } from './Runnable.d.ts';
 
 /** @public */
 export interface FileSuggestManager {

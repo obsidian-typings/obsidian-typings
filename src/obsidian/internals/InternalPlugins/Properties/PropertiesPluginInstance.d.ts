@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
-import type { InternalPluginInstance } from '../InternalPluginInstance.js';
-import type { PropertiesPlugin } from './PropertiesPlugin.js';
+import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
+import type { PropertiesPlugin } from './PropertiesPlugin.d.ts';
 
 /** @public */
 export interface PropertiesPluginInstance extends InternalPluginInstance<PropertiesPlugin> {

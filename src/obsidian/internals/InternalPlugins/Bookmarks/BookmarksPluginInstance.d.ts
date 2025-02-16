@@ -14,11 +14,11 @@ import type {
     WorkspaceLeaf,
     WorkspaceTabs
 } from 'obsidian';
-import type { TypedWorkspaceLeaf } from '../../TypedWorkspaceLeaf.js';
-import type { SearchView } from '../GlobalSearch/SearchView.js';
-import type { InternalPluginInstance } from '../InternalPluginInstance.js';
-import type { BookmarkItem } from './BookmarkItems/BookmarkItem.js';
-import type { BookmarksPlugin } from './BookmarksPlugin.js';
+import type { TypedWorkspaceLeaf } from '../../TypedWorkspaceLeaf.d.ts';
+import type { SearchView } from '../GlobalSearch/SearchView.d.ts';
+import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
+import type { BookmarkItem } from './BookmarkItems/BookmarkItem.d.ts';
+import type { BookmarksPlugin } from './BookmarksPlugin.d.ts';
 
 /** @public */
 export interface BookmarksPluginInstance extends InternalPluginInstance<BookmarksPlugin>, Events {

@@ -3,9 +3,9 @@ import type {
     App,
     TFile
 } from 'obsidian';
-import type { InternalPluginInstance } from '../InternalPluginInstance.js';
-import type { DailyNotesOptions } from './DailyNotesOptions.js';
-import type { DailyNotesPlugin } from './DailyNotesPlugin.js';
+import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
+import type { DailyNotesOptions } from './DailyNotesOptions.d.ts';
+import type { DailyNotesPlugin } from './DailyNotesPlugin.d.ts';
 
 /** @public */
 export interface DailyNotesPluginInstance extends InternalPluginInstance<DailyNotesPlugin> {

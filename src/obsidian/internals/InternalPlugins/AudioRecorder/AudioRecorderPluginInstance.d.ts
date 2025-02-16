@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
-import type { InternalPluginInstance } from '../InternalPluginInstance.js';
-import type { AudioRecorderPlugin } from './AudioRecorderPlugin.js';
+import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
+import type { AudioRecorderPlugin } from './AudioRecorderPlugin.d.ts';
 
 /** @public */
 export interface AudioRecorderPluginInstance extends InternalPluginInstance<AudioRecorderPlugin> {

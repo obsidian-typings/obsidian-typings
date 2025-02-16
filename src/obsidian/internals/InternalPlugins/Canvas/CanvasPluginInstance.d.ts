@@ -2,11 +2,11 @@ import type {
     App,
     Debouncer
 } from 'obsidian';
-import type { PromisedQueue } from '../../PromisedQueue.js';
-import type { InternalPluginInstance } from '../InternalPluginInstance.js';
-import type { CanvasDataManager } from './CanvasDataManager.js';
-import type { CanvasIndex } from './CanvasIndex.js';
-import type { CanvasPlugin } from './CanvasPlugin.js';
+import type { PromisedQueue } from '../../PromisedQueue.d.ts';
+import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
+import type { CanvasDataManager } from './CanvasDataManager.d.ts';
+import type { CanvasIndex } from './CanvasIndex.d.ts';
+import type { CanvasPlugin } from './CanvasPlugin.d.ts';
 
 /** @public */
 export interface CanvasPluginInstance extends InternalPluginInstance<CanvasPlugin> {

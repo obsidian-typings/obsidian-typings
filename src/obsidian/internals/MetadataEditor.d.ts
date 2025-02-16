@@ -4,8 +4,8 @@ import type {
     HoverPopover,
     MarkdownView
 } from 'obsidian';
-import type { MetadataEditorProperty } from './MetadataEditorProperty.js';
-import type { PropertyEntryData } from './PropertyEntryData.js';
+import type { MetadataEditorProperty } from './MetadataEditorProperty.d.ts';
+import type { PropertyEntryData } from './PropertyEntryData.d.ts';
 
 /** @public */
 export interface MetadataEditor extends Component {

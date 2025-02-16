@@ -3,12 +3,12 @@ import type {
     Debouncer,
     Events
 } from 'obsidian';
-import { PropertyInfo } from '../PropertyInfo.js';
-import { PropertyWidget } from '../PropertyWidget.js';
-import { PropertyWidgetType } from '../PropertyWidgetType.js';
-import { MetadataTypeManagerPropertiesRecord } from './MetadataTypeManagerPropertiesRecord.js';
-import { MetadataTypeManagerRegisteredTypeWidgetsRecord } from './MetadataTypeManagerRegisteredTypeWidgetsRecord.js';
-import { MetadataTypeManagerTypesRecord } from './MetadataTypeManagerTypesRecord.js';
+import { PropertyInfo } from '../PropertyInfo.d.ts';
+import { PropertyWidget } from '../PropertyWidget.d.ts';
+import { PropertyWidgetType } from '../PropertyWidgetType.d.ts';
+import { MetadataTypeManagerPropertiesRecord } from './MetadataTypeManagerPropertiesRecord.d.ts';
+import { MetadataTypeManagerRegisteredTypeWidgetsRecord } from './MetadataTypeManagerRegisteredTypeWidgetsRecord.d.ts';
+import { MetadataTypeManagerTypesRecord } from './MetadataTypeManagerTypesRecord.d.ts';
 
 /** @public */
 export interface MetadataTypeManager extends Events {

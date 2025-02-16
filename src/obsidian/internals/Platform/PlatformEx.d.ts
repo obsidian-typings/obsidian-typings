@@ -1,4 +1,4 @@
-import type { PlatformType } from './PlatformType.js';
+import type { PlatformType } from './PlatformType.d.ts';
 
 /**
  * @public

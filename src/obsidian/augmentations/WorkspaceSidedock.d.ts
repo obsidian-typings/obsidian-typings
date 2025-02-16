@@ -1,4 +1,4 @@
-import type { SerializedWorkspaceSidedock } from '../internals/Workspace/SerializedWorkspaceSidedock.js';
+import type { SerializedWorkspaceSidedock } from '../internals/Workspace/SerializedWorkspaceSidedock.d.ts';
 
 declare module 'obsidian' {
     interface WorkspaceSidedock extends WorkspaceSplit {

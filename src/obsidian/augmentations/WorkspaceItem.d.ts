@@ -1,4 +1,4 @@
-import type { SerializedWorkspaceItem } from '../internals/Workspace/SerializedWorkspaceItem.js';
+import type { SerializedWorkspaceItem } from '../internals/Workspace/SerializedWorkspaceItem.d.ts';
 
 declare module 'obsidian' {
     interface WorkspaceItem extends Events {

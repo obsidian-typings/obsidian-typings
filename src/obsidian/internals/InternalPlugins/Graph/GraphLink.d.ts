@@ -1,9 +1,9 @@
 import {
     Container,
     Graphics
-} from 'pixi.js';
-import type { GraphNode } from './GraphNode.js';
-import type { GraphRenderer } from './GraphRenderer.js';
+} from 'pixi.d.ts';
+import type { GraphNode } from './GraphNode.d.ts';
+import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /** @public */
 export interface GraphLink {

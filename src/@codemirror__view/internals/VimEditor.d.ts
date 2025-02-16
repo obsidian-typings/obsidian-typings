@@ -1,4 +1,4 @@
-import type { VimState } from './VimState.js';
+import type { VimState } from './VimState.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */

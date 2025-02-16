@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
 import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
-import type { ReleaseNotesView } from '../../../internals/Views/ReleaseNotesView.js';
+import type { ReleaseNotesView } from '../../../internals/Views/ReleaseNotesView.d.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 

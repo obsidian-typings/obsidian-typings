@@ -5,8 +5,8 @@ import type {
     TFile,
     WorkspaceLeaf
 } from 'obsidian';
-import type { InternalPluginInstance } from '../InternalPluginInstance.js';
-import type { BacklinkPlugin } from './BacklinkPlugin.js';
+import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
+import type { BacklinkPlugin } from './BacklinkPlugin.d.ts';
 
 /** @public */
 export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkPlugin> {

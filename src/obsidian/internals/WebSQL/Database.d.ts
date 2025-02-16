@@ -1,5 +1,5 @@
-import type { SQLError } from './SQLError.js';
-import type { SQLTransaction } from './SQLTransaction.js';
+import type { SQLError } from './SQLError.d.ts';
+import type { SQLTransaction } from './SQLTransaction.d.ts';
 
 /** @public */
 export interface Database {

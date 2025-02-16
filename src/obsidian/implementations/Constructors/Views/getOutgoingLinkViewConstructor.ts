@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
 import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
-import type { OutgoingLinkView } from '../../../internals/InternalPlugins/OutgoingLink/OutgoingLinkView.js';
+import type { OutgoingLinkView } from '../../../internals/InternalPlugins/OutgoingLink/OutgoingLinkView.d.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 

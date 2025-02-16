@@ -2,10 +2,10 @@ import type {
     EditorPosition,
     Pos
 } from 'obsidian';
-import type { CodeMirrorEditor } from './CodeMirrorEditor.js';
-import type { EditorRange2 } from './EditorRange2.js';
-import type { VimApi } from './VimApi.js';
-import type { VimEditor } from './VimEditor.js';
+import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
+import type { EditorRange2 } from './EditorRange2.d.ts';
+import type { VimApi } from './VimApi.d.ts';
+import type { VimEditor } from './VimEditor.d.ts';
 
 /** @public */
 export interface CodeMirrorAdapter2 {

@@ -1,5 +1,5 @@
-import type { InternalPlugin } from '../InternalPlugin.js';
-import type { TemplatesPluginInstance } from './TemplatesPluginInstance.js';
+import type { InternalPlugin } from '../InternalPlugin.d.ts';
+import type { TemplatesPluginInstance } from './TemplatesPluginInstance.d.ts';
 
 /** @public */
 export interface TemplatesPlugin extends InternalPlugin<TemplatesPluginInstance> {}

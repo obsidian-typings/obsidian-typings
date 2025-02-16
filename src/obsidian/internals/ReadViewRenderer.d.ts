@@ -1,4 +1,4 @@
-import type { RendererSection } from './RendererSection.js';
+import type { RendererSection } from './RendererSection.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */

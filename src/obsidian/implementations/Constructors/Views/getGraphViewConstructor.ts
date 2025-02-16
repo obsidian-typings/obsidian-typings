@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
 import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
-import type { GraphView } from '../../../internals/InternalPlugins/Graph/GraphView.js';
+import type { GraphView } from '../../../internals/InternalPlugins/Graph/GraphView.d.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 

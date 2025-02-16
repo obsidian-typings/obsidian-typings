@@ -1,7 +1,7 @@
 import type {
     App
 } from 'obsidian';
-import type { BrowserViewConstructor } from '../../../internals/Constructors/Views/BrowserViewConstructor.js';
+import type { BrowserViewConstructor } from '../../../internals/Constructors/Views/BrowserViewConstructor.d.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 

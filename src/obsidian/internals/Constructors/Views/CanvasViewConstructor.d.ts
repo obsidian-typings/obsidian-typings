@@ -1,6 +1,6 @@
 import type { WorkspaceLeaf } from 'obsidian';
-import type { CanvasPluginInstance } from '../../InternalPlugins/Canvas/CanvasPluginInstance.js';
-import type { CanvasView } from '../../InternalPlugins/Canvas/CanvasView.js';
+import type { CanvasPluginInstance } from '../../InternalPlugins/Canvas/CanvasPluginInstance.d.ts';
+import type { CanvasView } from '../../InternalPlugins/Canvas/CanvasView.d.ts';
 
 /**
  * A constructor for a canvas view.

@@ -1,4 +1,4 @@
-import type { GraphColorGroup } from './GraphColorGroup.js';
+import type { GraphColorGroup } from './GraphColorGroup.d.ts';
 
 /** @public */
 export interface GraphPluginInstanceOptions {

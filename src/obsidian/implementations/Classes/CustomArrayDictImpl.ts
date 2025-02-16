@@ -1,4 +1,4 @@
-import type { CustomArrayDict } from '../../internals/CustomArrayDict.js';
+import type { CustomArrayDict } from '../../internals/CustomArrayDict.d.ts';
 
 /** @public */
 export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {

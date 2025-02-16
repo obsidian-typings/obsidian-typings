@@ -4,9 +4,9 @@ import type {
     TAbstractFile,
     WorkspaceLeaf
 } from 'obsidian';
-import type { InternalPluginInstance } from '../InternalPluginInstance.js';
-import type { GraphPlugin } from './GraphPlugin.js';
-import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.js';
+import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
+import type { GraphPlugin } from './GraphPlugin.d.ts';
+import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.d.ts';
 
 /** @public */
 export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin> {

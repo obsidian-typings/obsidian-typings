@@ -1,5 +1,5 @@
-import type { VimEditor } from './VimEditor.js';
-import type { VimState } from './VimState.js';
+import type { VimEditor } from './VimEditor.d.ts';
+import type { VimState } from './VimState.d.ts';
 
 /** @public */
 export interface VimApi {

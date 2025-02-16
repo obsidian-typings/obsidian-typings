@@ -8,9 +8,9 @@ import type {
     PluginSettingTab,
     ViewCreator
 } from 'obsidian';
-import type { MobileFileInfo } from '../MobileFileInfo.js';
-import type { InternalPlugins } from './InternalPlugins.js';
-import type { RibbonItem } from './RibbonItem.js';
+import type { MobileFileInfo } from '../MobileFileInfo.d.ts';
+import type { InternalPlugins } from './InternalPlugins.d.ts';
+import type { RibbonItem } from './RibbonItem.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */

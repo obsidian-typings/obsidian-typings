@@ -3,8 +3,8 @@ import type {
     Debouncer,
     KeymapInfo
 } from 'obsidian';
-import type { HotkeyManagerCustomKeysRecord } from './HotkeyManagerCustomKeysRecord.js';
-import type { HotkeyManagerDefaultKeysRecord } from './HotkeyManagerDefaultKeysRecord.js';
+import type { HotkeyManagerCustomKeysRecord } from './HotkeyManagerCustomKeysRecord.d.ts';
+import type { HotkeyManagerDefaultKeysRecord } from './HotkeyManagerDefaultKeysRecord.d.ts';
 
 /** @public */
 export interface HotkeyManager {

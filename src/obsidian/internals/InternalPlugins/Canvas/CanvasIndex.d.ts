@@ -3,7 +3,7 @@ import type {
     CachedMetadata,
     Component
 } from 'obsidian';
-import type { CanvasIndexEntry } from './CanvasIndexEntry.js';
+import type { CanvasIndexEntry } from './CanvasIndexEntry.d.ts';
 
 /** @public */
 export interface CanvasIndex extends Component {

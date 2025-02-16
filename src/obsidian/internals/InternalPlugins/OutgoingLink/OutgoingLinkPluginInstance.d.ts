@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
-import type { InternalPluginInstance } from '../InternalPluginInstance.js';
-import type { OutgoingLinkPlugin } from './OutgoingLinkPlugin.js';
+import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
+import type { OutgoingLinkPlugin } from './OutgoingLinkPlugin.d.ts';
 
 /** @public */
 export interface OutgoingLinkPluginInstance extends InternalPluginInstance<OutgoingLinkPlugin> {

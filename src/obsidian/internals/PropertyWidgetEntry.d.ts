@@ -1,4 +1,4 @@
-import type { PropertyWidgetType } from './PropertyWidgetType.js';
+import type { PropertyWidgetType } from './PropertyWidgetType.d.ts';
 
 /** @public */
 export interface PropertyWidgetEntry {

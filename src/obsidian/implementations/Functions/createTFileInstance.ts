@@ -3,7 +3,7 @@ import {
     TFile
 } from 'obsidian';
 import { getTFileConstructor } from '../Constructors/getTFileConstructor.ts';
-import { parentFolderPath } from '../Utils/PathUtils.js';
+import { parentFolderPath } from '../Utils/PathUtils.d.ts';
 import { createTFolderInstance } from './createTFolderInstance.ts';
 
 /**

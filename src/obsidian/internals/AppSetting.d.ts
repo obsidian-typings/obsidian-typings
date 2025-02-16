@@ -3,7 +3,7 @@ import type {
     Modal,
     SettingTab
 } from 'obsidian';
-import type { HotkeysSettingTab } from './HotkeysSettingTab.js';
+import type { HotkeysSettingTab } from './HotkeysSettingTab.d.ts';
 
 /** @public */
 export interface AppSetting extends Modal {

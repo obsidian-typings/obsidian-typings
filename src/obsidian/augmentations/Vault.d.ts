@@ -1,7 +1,7 @@
-import type { AppVaultConfig } from '../internals/AppVaultConfig/AppVaultConfig.js';
-import type { ConfigItem } from '../internals/ConfigItem.js';
-import type { FileSystemWatchHandler } from '../internals/FileSystemWatchHandler.js';
-import type { VaultFileMapRecord } from '../internals/VaultFileMapRecord.js';
+import type { AppVaultConfig } from '../internals/AppVaultConfig/AppVaultConfig.d.ts';
+import type { ConfigItem } from '../internals/ConfigItem.d.ts';
+import type { FileSystemWatchHandler } from '../internals/FileSystemWatchHandler.d.ts';
+import type { VaultFileMapRecord } from '../internals/VaultFileMapRecord.d.ts';
 
 export {};
 

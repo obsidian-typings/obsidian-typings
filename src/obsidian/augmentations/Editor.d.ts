@@ -1,7 +1,7 @@
 import type { EditorView } from '@codemirror/view';
-import type { BaseEditor } from '../internals/BaseEditor.js';
-import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.js';
-import type { SearchCursor } from '../internals/SearchCursor.js';
+import type { BaseEditor } from '../internals/BaseEditor.d.ts';
+import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
+import type { SearchCursor } from '../internals/SearchCursor.d.ts';
 
 export {};
 

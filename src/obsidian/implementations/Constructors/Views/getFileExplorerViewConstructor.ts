@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
 import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
-import type { FileExplorerView } from '../../../internals/InternalPlugins/FileExplorer/FileExplorerView.js';
+import type { FileExplorerView } from '../../../internals/InternalPlugins/FileExplorer/FileExplorerView.d.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 

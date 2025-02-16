@@ -1,11 +1,11 @@
 import {
     Application,
     Container
-} from 'pixi.js';
-import type { GraphColor } from './GraphColor.js';
-import type { GraphColorAttributes } from './GraphColorAttributes.js';
-import type { GraphLink } from './GraphLink.js';
-import type { GraphNode } from './GraphNode.js';
+} from 'pixi.d.ts';
+import type { GraphColor } from './GraphColor.d.ts';
+import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
+import type { GraphLink } from './GraphLink.d.ts';
+import type { GraphNode } from './GraphNode.d.ts';
 
 /** @public */
 export interface GraphRenderer {

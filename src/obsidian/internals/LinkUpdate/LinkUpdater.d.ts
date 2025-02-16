@@ -2,7 +2,7 @@ import type {
     ReferenceCache,
     TFile
 } from 'obsidian';
-import type { LinkChangeUpdate } from './LinkChangeUpdate.js';
+import type { LinkChangeUpdate } from './LinkChangeUpdate.d.ts';
 
 /** @public */
 export interface LinkUpdater {

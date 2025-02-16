@@ -2,7 +2,7 @@ import type {
     App,
     TFile
 } from 'obsidian';
-import type { PositionedReference } from '../PositionedReference.js';
+import type { PositionedReference } from '../PositionedReference.d.ts';
 
 /** @public */
 export interface LinkUpdate {

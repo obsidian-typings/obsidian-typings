@@ -1,5 +1,5 @@
-import type { InternalPlugin } from '../InternalPlugin.js';
-import type { SyncPluginInstance } from './SyncPluginInstance.js';
+import type { InternalPlugin } from '../InternalPlugin.d.ts';
+import type { SyncPluginInstance } from './SyncPluginInstance.d.ts';
 
 /** @public */
 export interface SyncPlugin extends InternalPlugin<SyncPluginInstance> {}

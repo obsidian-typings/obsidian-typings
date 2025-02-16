@@ -1,7 +1,7 @@
 import type { Extension } from '@codemirror/state';
 import type { ViewUpdate } from '@codemirror/view';
-import type { FoldInfo } from '../internals/FoldInfo.js';
-import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.js';
+import type { FoldInfo } from '../internals/FoldInfo.d.ts';
+import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
 
 export {};
 

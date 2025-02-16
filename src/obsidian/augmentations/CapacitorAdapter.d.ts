@@ -1,5 +1,5 @@
-import type { CapacitorAdapterFs } from '../internals/CapacitorAdapterFs.js';
-import type { FileEntry } from '../internals/FileEntry.js';
+import type { CapacitorAdapterFs } from '../internals/CapacitorAdapterFs.d.ts';
+import type { FileEntry } from '../internals/FileEntry.d.ts';
 
 export {};
 

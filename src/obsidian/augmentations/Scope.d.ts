@@ -1,4 +1,4 @@
-import type { KeyScope } from '../internals/KeyScope.js';
+import type { KeyScope } from '../internals/KeyScope.d.ts';
 
 export {};
 

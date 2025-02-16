@@ -1,4 +1,4 @@
-import type { CodeBlockPostProcessorHandler } from '../internals/CodeBlockPostProcessorHandler.js';
+import type { CodeBlockPostProcessorHandler } from '../internals/CodeBlockPostProcessorHandler.d.ts';
 
 declare module 'obsidian' {
     interface MarkdownPreviewRenderer {}

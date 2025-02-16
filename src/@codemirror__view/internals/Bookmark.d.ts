@@ -1,6 +1,6 @@
 import { ChangeDesc } from '@codemirror/state';
 import type { EditorPosition } from 'obsidian';
-import type { CodeMirrorEditor } from './CodeMirrorEditor.js';
+import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 
 /** @public */
 export interface Bookmark {

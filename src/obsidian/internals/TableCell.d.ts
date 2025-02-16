@@ -1,4 +1,4 @@
-import type { TableCellEditor } from './TableCellEditor.js';
+import type { TableCellEditor } from './TableCellEditor.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */

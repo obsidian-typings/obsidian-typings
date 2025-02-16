@@ -1,5 +1,5 @@
-import type { InternalPlugin } from '../InternalPlugin.js';
-import type { MarkdownImporterPluginInstance } from './MarkdownImporterPluginInstance.js';
+import type { InternalPlugin } from '../InternalPlugin.d.ts';
+import type { MarkdownImporterPluginInstance } from './MarkdownImporterPluginInstance.d.ts';
 
 /** @public */
 export interface MarkdownImporterPlugin extends InternalPlugin<MarkdownImporterPluginInstance> {}

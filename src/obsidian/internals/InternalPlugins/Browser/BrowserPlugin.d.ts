@@ -1,5 +1,5 @@
-import type { InternalPlugin } from '../InternalPlugin.js';
-import type { BrowserPluginInstance } from './BrowserPluginInstance.js';
+import type { InternalPlugin } from '../InternalPlugin.d.ts';
+import type { BrowserPluginInstance } from './BrowserPluginInstance.d.ts';
 
 /** @public */
 export interface BrowserPlugin extends InternalPlugin<BrowserPluginInstance> {

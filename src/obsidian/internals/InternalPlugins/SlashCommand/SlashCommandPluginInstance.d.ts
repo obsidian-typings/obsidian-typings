@@ -1,5 +1,5 @@
-import type { InternalPluginInstance } from '../InternalPluginInstance.js';
-import type { SlashCommandPlugin } from './SlashCommandPlugin.js';
+import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
+import type { SlashCommandPlugin } from './SlashCommandPlugin.d.ts';
 
 /** @public */
 export interface SlashCommandPluginInstance extends InternalPluginInstance<SlashCommandPlugin> {

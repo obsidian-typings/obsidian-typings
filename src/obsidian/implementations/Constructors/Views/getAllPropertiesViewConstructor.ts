@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
 import type { TypedViewConstructor } from '../../../internals/Constructors/Views/TypedViewConstructor.ts';
-import type { AllPropertiesView } from '../../../internals/InternalPlugins/Properties/AllPropertiesView.js';
+import type { AllPropertiesView } from '../../../internals/InternalPlugins/Properties/AllPropertiesView.d.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 

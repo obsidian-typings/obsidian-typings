@@ -2,8 +2,8 @@ import type {
     Editor,
     EditorRange
 } from 'obsidian';
-import type { SearchCursor } from '../SearchCursor.js';
-import type { AbstractSearchComponent } from './AbstractSearchComponent.js';
+import type { SearchCursor } from '../SearchCursor.d.ts';
+import type { AbstractSearchComponent } from './AbstractSearchComponent.d.ts';
 
 /** @public */
 export interface EditorSearchComponent extends AbstractSearchComponent {

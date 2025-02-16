@@ -1,13 +1,13 @@
-import type { CustomArrayDict } from '../internals/CustomArrayDict.js';
-import type { FileCacheEntry } from '../internals/FileCacheEntry.js';
-import type { LinkResolverQueue } from '../internals/LinkResolverQueue/LinkResolverQueue.js';
-import type { LinkSuggestion } from '../internals/LinkSuggestion.js';
-import type { MetadataCacheFileCacheRecord } from '../internals/MetadataCacheRecords/MetadataCacheFileCacheRecord.js';
+import type { CustomArrayDict } from '../internals/CustomArrayDict.d.ts';
+import type { FileCacheEntry } from '../internals/FileCacheEntry.d.ts';
+import type { LinkResolverQueue } from '../internals/LinkResolverQueue/LinkResolverQueue.d.ts';
+import type { LinkSuggestion } from '../internals/LinkSuggestion.d.ts';
+import type { MetadataCacheFileCacheRecord } from '../internals/MetadataCacheRecords/MetadataCacheFileCacheRecord.d.ts';
 import type {
     MetadataCacheMetadataCacheRecord
-} from '../internals/MetadataCacheRecords/MetadataCacheMetadataCacheRecord.js';
-import type { PromisedQueue } from '../internals/PromisedQueue.js';
-import type { PropertyInfo } from '../internals/PropertyInfo.js';
+} from '../internals/MetadataCacheRecords/MetadataCacheMetadataCacheRecord.d.ts';
+import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
+import type { PropertyInfo } from '../internals/PropertyInfo.d.ts';
 
 export {};
 

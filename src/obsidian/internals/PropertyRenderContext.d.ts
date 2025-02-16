@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { MetadataEditor } from './MetadataEditor.js';
+import type { MetadataEditor } from './MetadataEditor.d.ts';
 
 /** @public */
 export interface PropertyRenderContext {

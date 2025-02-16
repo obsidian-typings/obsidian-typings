@@ -1,4 +1,4 @@
-import type { BookmarkItem } from './BookmarkItem.js';
+import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /** @public */
 export interface UrlBookmarkItem extends BookmarkItem {

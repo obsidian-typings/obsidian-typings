@@ -1,4 +1,4 @@
-import type { EmptyView } from './EmptyView.js';
+import type { EmptyView } from './EmptyView.d.ts';
 
 /**
  * Views of plugins that have been deactivated become an UnknownView

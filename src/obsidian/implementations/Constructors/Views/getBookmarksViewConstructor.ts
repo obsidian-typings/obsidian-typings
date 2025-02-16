@@ -1,7 +1,7 @@
 import type {
     App
 } from 'obsidian';
-import type { BookmarksViewConstructor } from '../../../internals/Constructors/Views/BookmarksViewConstructor.js';
+import type { BookmarksViewConstructor } from '../../../internals/Constructors/Views/BookmarksViewConstructor.d.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 

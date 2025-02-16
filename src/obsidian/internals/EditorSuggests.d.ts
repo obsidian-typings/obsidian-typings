@@ -2,7 +2,7 @@ import type {
     EditorSuggest,
     TFile
 } from 'obsidian';
-import type { MarkdownBaseView } from './MarkdownBaseView.js';
+import type { MarkdownBaseView } from './MarkdownBaseView.d.ts';
 
 /** @public */
 export interface EditorSuggests {

@@ -1,5 +1,5 @@
 import type { View } from 'obsidian';
-import type { TreeNode } from './TreeNode.js';
+import type { TreeNode } from './TreeNode.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */

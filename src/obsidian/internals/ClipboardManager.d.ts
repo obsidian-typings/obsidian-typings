@@ -3,7 +3,7 @@ import type {
     MarkdownView,
     TAbstractFile
 } from 'obsidian';
-import type { ImportedAttachments } from './ImportedAttachments.js';
+import type { ImportedAttachments } from './ImportedAttachments.d.ts';
 
 /** @public */
 export interface ClipboardManager {

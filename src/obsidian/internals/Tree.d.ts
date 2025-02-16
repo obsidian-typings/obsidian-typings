@@ -3,8 +3,8 @@ import type {
     Scope,
     View
 } from 'obsidian';
-import type { InfinityScroll } from './InfinityScroll.js';
-import type { TreeNode } from './TreeNode.js';
+import type { InfinityScroll } from './InfinityScroll.d.ts';
+import type { TreeNode } from './TreeNode.d.ts';
 
 /** @public */
 export interface Tree<T> {

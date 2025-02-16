@@ -1,6 +1,6 @@
 import type { WorkspaceLeaf } from 'obsidian';
-import type { OutlinePluginInstance } from '../../InternalPlugins/Outline/OutlinePluginInstance.js';
-import type { OutlineView } from '../../InternalPlugins/Outline/OutlineView.js';
+import type { OutlinePluginInstance } from '../../InternalPlugins/Outline/OutlinePluginInstance.d.ts';
+import type { OutlineView } from '../../InternalPlugins/Outline/OutlineView.d.ts';
 
 /**
  * A constructor for an outline view.

@@ -1,6 +1,6 @@
 import type { TFile } from 'obsidian';
-import type { Runnable } from '../Runnable.js';
-import type { QueueItems } from './QueueItems.js';
+import type { Runnable } from '../Runnable.d.ts';
+import type { QueueItems } from './QueueItems.d.ts';
 
 /** @public */
 export interface LinkResolverQueue {

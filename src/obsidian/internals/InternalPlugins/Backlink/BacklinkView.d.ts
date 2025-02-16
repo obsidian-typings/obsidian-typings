@@ -1,6 +1,6 @@
 import type { TFile } from 'obsidian';
-import type { ViewType } from '../../../implementations/Constants/ViewType.js';
-import type { InfoFileView } from '../../Views/InfoFileView.js';
+import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
+import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */

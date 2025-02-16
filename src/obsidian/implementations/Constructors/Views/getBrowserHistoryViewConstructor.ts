@@ -3,7 +3,7 @@ import type {
 } from 'obsidian';
 import type {
     BrowserHistoryViewConstructor
-} from '../../../internals/Constructors/Views/BrowserHistoryViewConstructor.js';
+} from '../../../internals/Constructors/Views/BrowserHistoryViewConstructor.d.ts';
 import { ViewType } from '../../Constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 

@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
-import type { InternalPluginInstance } from '../InternalPluginInstance.js';
-import type { SwitcherPlugin } from './SwitcherPlugin.js';
+import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
+import type { SwitcherPlugin } from './SwitcherPlugin.d.ts';
 
 /** @public */
 export interface SwitcherPluginInstance extends InternalPluginInstance<SwitcherPlugin> {

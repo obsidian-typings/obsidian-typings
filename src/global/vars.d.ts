@@ -11,13 +11,13 @@ import type {
     requestUrl as _requestUrl
 } from 'obsidian';
 import _TurndownService from 'turndown';
-import type { CodeMirrorAdapter2 } from '../@codemirror__view/internals/CodeMirrorAdapter2.js';
-import type { VimApi } from '../@codemirror__view/internals/VimApi.js';
-import type { CapacitorAdapterFs } from '../obsidian/internals/CapacitorAdapterFs.js';
-import type { ElectronWindow } from '../obsidian/internals/ElectronWindow.js';
-import type { FrameDom } from '../obsidian/internals/FrameDom.js';
-import type { Localization } from '../obsidian/internals/Localization.js';
-import type { Database } from '../obsidian/internals/WebSQL/Database.js';
+import type { CodeMirrorAdapter2 } from '../@codemirror__view/internals/CodeMirrorAdapter2.d.ts';
+import type { VimApi } from '../@codemirror__view/internals/VimApi.d.ts';
+import type { CapacitorAdapterFs } from '../obsidian/internals/CapacitorAdapterFs.d.ts';
+import type { ElectronWindow } from '../obsidian/internals/ElectronWindow.d.ts';
+import type { FrameDom } from '../obsidian/internals/FrameDom.d.ts';
+import type { Localization } from '../obsidian/internals/Localization.d.ts';
+import type { Database } from '../obsidian/internals/WebSQL/Database.d.ts';
 
 declare global {
     /**

@@ -1,6 +1,6 @@
 import type { WorkspaceLeaf } from 'obsidian';
-import type { SyncPluginInstance } from '../../InternalPlugins/Sync/SyncPluginInstance.js';
-import type { SyncView } from '../../InternalPlugins/Sync/SyncView.js';
+import type { SyncPluginInstance } from '../../InternalPlugins/Sync/SyncPluginInstance.d.ts';
+import type { SyncView } from '../../InternalPlugins/Sync/SyncView.d.ts';
 
 /**
  * A constructor for a sync view.
