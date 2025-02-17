@@ -57,6 +57,9 @@
         "@capacitor/core": "^6.1.2",
         "@codemirror/search": "^6.5.6",
         "@codemirror/state": "^6.4.1",
+        "@pixi/color": "7.2.4",
+        "@pixi/events": "7.2.4",
+        "@pixi/settings": "7.2.4",
         "@types/css-font-loading-module": "^0.0.14",
         "@types/node": ">=14.0.0",
         "@types/turndown": "^5.0.5",
@@ -64,7 +67,8 @@
         "i18next": "^23.15.1",
         "moment": "^2.30.1",
         "obsidian": "^1.7.2",
-        "pixi.js": "7.2.4"
+        "pixi.js": "7.2.4",
+        "style-mod": "4.1.2"
     },
     "devDependencies": {
         "@microsoft/api-extractor": "^7.49.1",
