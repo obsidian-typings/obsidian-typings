@@ -14,7 +14,7 @@ async function main(): Promise<void> {
     await generateIndex('src/obsidian', '.d.ts');
     await generateIndex('src/obsidian/augmentations', '.d.ts');
     await generateIndex('src/obsidian/implementations', '.ts');
-    await appendFile('src/obsidian/implementations/index.ts', 'export * from \'../../index.js\';\n', 'utf-8');
+    await appendFile('src/obsidian/implementations/index.ts', 'export type * from \'../../index.d.ts\';\n', 'utf-8');
 }
 
 async function generateIndex(dir: string, extension: string): Promise<void> {
