@@ -1,6 +1,5 @@
 import type {
     App,
-    CachedMetadata,
     Component
 } from 'obsidian';
 import type { CanvasIndexEntry } from './CanvasIndexEntry.d.ts';

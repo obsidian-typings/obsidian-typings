@@ -1,9 +1,18 @@
-import type { TextFileView } from 'obsidian';
+import type {
+    HoverPopover,
+    TextFileView
+} from 'obsidian';
 import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
+import type { CanvasPluginInstance } from './CanvasPluginInstance.d.ts';
+import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */
 export interface CanvasView extends TextFileView {
+    canvas: CanvasViewCanvas;
+    hoverPopover: null | HoverPopover;
+    plugin: CanvasPluginInstance;
+
     /**
      * Loads the local data of the canvas
      */

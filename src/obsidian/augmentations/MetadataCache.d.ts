@@ -1,4 +1,4 @@
-import type { CustomArrayDict } from '../internals/CustomArrayDict.d.ts';
+import type { CustomArrayDict } from '../internals/Collections/CustomArrayDict.d.ts';
 import type { FileCacheEntry } from '../internals/FileCacheEntry.d.ts';
 import type { LinkResolverQueue } from '../internals/LinkResolverQueue/LinkResolverQueue.d.ts';
 import type { LinkSuggestion } from '../internals/LinkSuggestion.d.ts';
