@@ -55,7 +55,7 @@ declare module 'obsidian' {
         /** @internal Kill file system action due to timeout */
         kill(): void;
         /** @internal */
-        killLastAction(): void;
+        killLastAction: null | ((e: Error)=> void);
         /** @internal Generates `this.files` from the file system */
         listAll(): Promise<void>;
         /** @internal */

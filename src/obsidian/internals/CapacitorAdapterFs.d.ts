@@ -1,5 +1,7 @@
 import type { FileEntry } from './FileEntry.d.ts';
 
+type CapacitorFileEntry = Omit<FileEntry, "type" | "realpath"> & { realpath?: string; type: "file" | "directory"};
+
 /** @public */
 export interface CapacitorAdapterFs {
     dir: string | null;
@@ -16,15 +18,15 @@ export interface CapacitorAdapterFs {
     open(realPath: string): Promise<void>;
     read(realPath: string): Promise<string>;
     readBinary(realPath: string): Promise<ArrayBuffer>;
-    readdir(realPath: string): FileEntry[];
+    readdir(realPath: string): Promise<CapacitorFileEntry[]>;
     rename(realPath: string, newRealPath: string): Promise<void>;
     rmdir(realPath: string): Promise<void>;
     setTimes(realPath: string, ctime: number, mtime: number): Promise<void>;
-    stat(realPath: string): Promise<FileEntry>;
+    stat(realPath: string): Promise<CapacitorFileEntry>;
     trash(realPath: string): Promise<void>;
     verifyIcloud(realPath: string): Promise<void>;
     watch(realPath: string): Promise<void>;
-    watchAndStatAll(realPath: string): Promise<{ children: FileEntry[] }>;
+    watchAndStatAll(realPath: string): Promise<{ children: CapacitorFileEntry[] }>;
     write(realPath: string, data: string): Promise<void>;
     writeBinary(realPath: string, data: ArrayBuffer): Promise<void>;
     writeBinaryInternal(realPath: string, data: ArrayBuffer): Promise<void>;

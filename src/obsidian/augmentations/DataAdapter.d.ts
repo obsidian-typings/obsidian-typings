@@ -50,7 +50,7 @@ declare module 'obsidian' {
          * @param normalizedPath Path to directory
          * @internal Helper function for `listRecursive` reads children of directory
          */
-        listRecursiveChild(normalizedPath: string): Promise<void>;
+        listRecursiveChild(normalizedPath: string, child: string): Promise<void>;
         /** @internal */
         onFileChange(normalizedPath: string): void;
         /** @internal */
@@ -58,7 +58,11 @@ declare module 'obsidian' {
         /** @internal */
         reconcileFile(normalizedPath: string, normalizedNewPath: string, option: boolean): Promise<void>;
         /** @internal */
-        reconcileFileCreation(normalizedPath: string, normalizedNewPath: string, option: boolean): Promise<void>;
+        reconcileFileCreation(normalizedPath: string, normalizedNewPath: string, option: {
+            birthtimeMs: number;
+            mtimeMs: number;
+            size: number;
+        }): Promise<void>;
         /** @internal */
         reconcileFolderCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
         /** @internal */
