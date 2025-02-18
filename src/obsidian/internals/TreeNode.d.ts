@@ -18,6 +18,7 @@ export type TreeNode<T = object> = T & {
     };
     pusherEl: HTMLElement;
     vChildren: {
+        addChild: (item: TreeNode<T>) => void;
         _children: TreeNode<T>[];
         owner: TreeNode<T>;
     };

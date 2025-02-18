@@ -17,6 +17,8 @@ declare module 'obsidian' {
          * Reference to App
          */
         app: App;
+        /** @internal Called by preload() which is in turn called by initialize() */
+        _preload: () => Promise<unknown>;
         /** @internal */
         blockCache: BlockCache;
         /** @internal IndexedDB database */
@@ -60,6 +62,8 @@ declare module 'obsidian' {
         clear(): Promise<void>;
         /** @internal */
         computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<CachedMetadata | undefined>;
+        /** @internal Called by initialize() */
+        computeFileMetadataAsync(file: TFile): Promise<unknown>;
         /** @internal Remove all entries that contain deleted path */
         deletePath(path: string): void;
         /**
