@@ -46,11 +46,6 @@ declare module 'obsidian' {
         getResourcePath(normalizedPath: string): string;
         /** @internal Generates `this.files` for specific directory of the vault */
         listRecursive(normalizedPath: string): Promise<void>;
-        /**
-         * @param normalizedPath Path to directory
-         * @internal Helper function for `listRecursive` reads children of directory
-         */
-        listRecursiveChild(normalizedPath: string, child: string): Promise<void>;
         /** @internal */
         onFileChange(normalizedPath: string): void;
         /** @internal */

@@ -55,9 +55,14 @@ declare module 'obsidian' {
         /** @internal Kill file system action due to timeout */
         kill(): void;
         /** @internal */
-        killLastAction: null | ((e: Error)=> void);
+        killLastAction: null | ((e: Error) => void);
         /** @internal Generates `this.files` from the file system */
         listAll(): Promise<void>;
+        /**
+         * @param normalizedPath Path to directory
+         * @internal Helper function for `listRecursive` reads children of directory
+         */
+        listRecursiveChild(normalizedPath: string, child: string): Promise<void>;
         /** @internal */
         reconcileFileInternal(normalizedPath: string, normalizedNewPath: string): Promise<void>;
         /** @internal */
