@@ -3,6 +3,7 @@ import * as fs from 'node:fs';
 import * as fsPromises from 'node:fs/promises';
 import * as path from 'node:path';
 import type { DataAdapterWatchersRecord } from '../internals/DataAdapterRecords/DataAdapterWatchersRecord.d.ts';
+import type { Stats } from 'node:fs';
 
 export {};
 
@@ -63,6 +64,16 @@ declare module 'obsidian' {
          * @internal Helper function for `listRecursive` reads children of directory
          */
         listRecursiveChild(normalizedPath: string, child: string): Promise<void>;
+
+        /**
+         * Reconcile file creation
+         *
+         * @param normalizedPath - Path to file
+         * @param normalizedNewPath - Path to new file
+         * @param stats - Stats object
+         */
+        reconcileFileCreation(normalizedPath: string, normalizedNewPath: string, stats: Stats): Promise<void>;
+
         /** @internal */
         reconcileFileInternal(normalizedPath: string, normalizedNewPath: string): Promise<void>;
         /** @internal */

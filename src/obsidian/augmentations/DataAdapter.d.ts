@@ -53,12 +53,6 @@ declare module 'obsidian' {
         /** @internal */
         reconcileFile(normalizedPath: string, normalizedNewPath: string, option: boolean): Promise<void>;
         /** @internal */
-        reconcileFileCreation(normalizedPath: string, normalizedNewPath: string, option: {
-            birthtimeMs: number;
-            mtimeMs: number;
-            size: number;
-        }): Promise<void>;
-        /** @internal */
         reconcileFolderCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
         /** @internal */
         reconcileInternalFile(normalizedPath: string): Promise<void>;

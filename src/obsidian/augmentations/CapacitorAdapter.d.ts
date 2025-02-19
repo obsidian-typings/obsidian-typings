@@ -1,4 +1,7 @@
-import type { CapacitorAdapterFs } from '../internals/CapacitorAdapterFs.d.ts';
+import type {
+    CapacitorAdapterFs,
+    CapacitorFileEntry
+} from '../internals/CapacitorAdapterFs.d.ts';
 import type { FileEntry } from '../internals/FileEntry.d.ts';
 
 export {};
@@ -19,6 +22,7 @@ declare module 'obsidian' {
         open(normalizedPath: string): Promise<void>;
         quickList(normalizedFolderPath: string, fileEntry: FileEntry): void;
         reconcileFileChanged(realFilePath: string, normalizedPath: string, fileEntry: FileEntry): void;
+        reconcileFileCreation(normalizedPath: string, normalizedNewPath: string, fileEntry: CapacitorFileEntry): Promise<void>;
         removeFile(normalizedPath: string): Promise<void>;
         stopWatch(): Promise<void>;
         testInsensitive(): Promise<void>;
