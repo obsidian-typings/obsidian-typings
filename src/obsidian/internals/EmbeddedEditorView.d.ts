@@ -56,7 +56,7 @@ export interface EmbeddedEditorView extends Component {
     /**
      * Current state of the editor
      */
-    state: {} | EditorState | unknown;
+    state: unknown;
     /**
      * Text contents being embedded
      */

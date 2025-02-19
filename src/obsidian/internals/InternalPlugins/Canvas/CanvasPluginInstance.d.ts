@@ -7,6 +7,7 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { CanvasDataManager } from './CanvasDataManager.d.ts';
 import type { CanvasIndex } from './CanvasIndex.d.ts';
 import type { CanvasPlugin } from './CanvasPlugin.d.ts';
+import type { CanvasPluginInstanceOptions } from './CanvasPluginInstanceOptions.d.ts';
 
 /** @public */
 export interface CanvasPluginInstance extends InternalPluginInstance<CanvasPlugin> {
@@ -14,16 +15,7 @@ export interface CanvasPluginInstance extends InternalPluginInstance<CanvasPlugi
     defaultOn: true;
     index: CanvasIndex;
     localDataManager: CanvasDataManager;
-    options: {
-        cardLabelVisibility?: 'always' | 'hover' | 'never';
-        defaultModDragBehavior?: 'card' | 'group' | 'media' | 'menu' | 'note' | 'webpage';
-        defaultWheelBehavior?: 'pan' | 'zoom';
-        newFileLocation?: 'root' | 'current' | 'folder';
-        newFileFolderPath?: string;
-        snapToGrid?: boolean;
-        snapToObjects?: boolean;
-        zoomBreakpoint?: number;
-    };
+    options: CanvasPluginInstanceOptions;
     plugin: CanvasPlugin;
     renameQueue: PromisedQueue;
     renames: unknown[];

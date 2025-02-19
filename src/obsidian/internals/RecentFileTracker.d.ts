@@ -3,6 +3,7 @@ import type {
     Vault,
     Workspace
 } from 'obsidian';
+import type { GetRecentFilesOptions } from './GetRecentFilesOptions.d.ts';
 
 /** @public */
 export interface RecentFileTracker {
@@ -28,13 +29,7 @@ export interface RecentFileTracker {
     /**
      * Get last n files of type (defaults to 10)
      */
-    getRecentFiles(arg?: {
-        showMarkdown: boolean;
-        showCanvas: boolean;
-        showNonImageAttachments: boolean;
-        showImages: boolean;
-        maxCount: number;
-    }): string[];
+    getRecentFiles(options?: GetRecentFilesOptions): string[];
     /**
      * Set the last opened files
      */

@@ -1,3 +1,4 @@
+import type { MetadataCacheWorkerMessage } from '../internals/MetadataCacheWorkerMessage.d.ts';
 import type { CustomArrayDict } from '../internals/Collections/CustomArrayDict.d.ts';
 import type { FileCacheEntry } from '../internals/FileCacheEntry.d.ts';
 import type { LinkResolverQueue } from '../internals/LinkResolverQueue/LinkResolverQueue.d.ts';
@@ -138,7 +139,7 @@ declare module 'obsidian' {
         /** @internal On deletion of the cache: update metadata cache */
         onDelete(file: TAbstractFile): void;
         /** @internal */
-        onReceiveMessageFromWorker(message: { data: CachedMetadata }): void;
+        onReceiveMessageFromWorker(message: MetadataCacheWorkerMessage): void;
         /** @internal On rename of the cache: update metadata cache */
         onRename(file: TAbstractFile, oldPath: string): void;
         /** @internal Check editor for unresolved links and mark these as unresolved */

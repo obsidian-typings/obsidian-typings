@@ -25,9 +25,7 @@ export interface InternalPlugins extends Events {
      *
      * @remark Prefer usage of getPluginById to access a plugin
      */
-    plugins: {
-        [ID in InternalPluginNameType]: InternalPluginNamePluginsMapping[ID];
-    };
+    plugins: InternalPluginNamePluginsMapping;
     /** @internal Request save of plugin configs */
     requestSaveConfig: Debouncer<[], Promise<void>>;
 

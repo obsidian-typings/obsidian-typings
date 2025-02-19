@@ -1,3 +1,5 @@
+import type { ViewEphemeralState } from '../../internals/ViewEphemeralState.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -20,10 +22,6 @@ declare module 'obsidian' {
          */
         close(): Promise<void>;
         /**
-         * Gets the ephemeral (non-persistent) state of the editor
-         */
-        getEphemeralState(): {};
-        /**
          * Returns the icon name
          */
         getIcon(): IconName;
@@ -31,10 +29,6 @@ declare module 'obsidian' {
          * Returns the placement of the tooltip
          */
         getSideTooltipPlacement(): 'left' | 'right' | undefined;
-        /**
-         * Returns the current state of the view
-         */
-        getState(): {};
         /**
          * Handle copy event on metadata editor and serialize properties
          */
@@ -62,14 +56,6 @@ declare module 'obsidian' {
         /**
          * Set the ephemeral (non-persistent) state of the editor
          */
-        setEphemeralState(
-            state: {
-                focus: boolean;
-                focusOnMobile: boolean;
-                cursor: EditorRangeOrCaret;
-            }
-        ): void;
-        /** @todo Documentation incomplete */
-        setState(state: unknown, result: ViewStateResult): Promise<void>;
+        setEphemeralState(state: ViewEphemeralState): void;
     }
 }

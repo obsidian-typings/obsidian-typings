@@ -4,13 +4,14 @@ import type {
     Events
 } from 'obsidian';
 import type { PropertyInfo } from '../PropertyInfo.d.ts';
-import type { PropertyWidget } from '../PropertyWidget.d.ts';
 import type { PropertyWidgetType } from '../PropertyWidgetType.d.ts';
 import type { MetadataTypeManagerPropertiesRecord } from './MetadataTypeManagerPropertiesRecord.d.ts';
 import type {
     MetadataTypeManagerRegisteredTypeWidgetsRecord
 } from './MetadataTypeManagerRegisteredTypeWidgetsRecord.d.ts';
 import type { MetadataTypeManagerTypesRecord } from './MetadataTypeManagerTypesRecord.d.ts';
+import type { GetTypeInfoOptions } from './GetTypeInfoOptions.d.ts';
+import type { TypeInfo } from './TypeInfo.d.ts';
 
 /** @public */
 export interface MetadataTypeManager extends Events {
@@ -43,10 +44,7 @@ export interface MetadataTypeManager extends Events {
      */
     getPropertyInfo(property: string): PropertyInfo;
     /** @internal Get expected widget type for property and the one inferred from the property value */
-    getTypeInfo(arg: { key: string; type: string; value: unknown }): {
-        inferred: PropertyWidget<unknown>;
-        expected: PropertyWidget<unknown>;
-    };
+    getTypeInfo(options: GetTypeInfoOptions): TypeInfo;
     /**
      * Get all properties with an assigned widget type
      */

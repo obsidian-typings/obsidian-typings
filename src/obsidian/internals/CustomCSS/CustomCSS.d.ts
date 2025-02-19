@@ -7,6 +7,8 @@ import type { PromisedQueue } from '../PromisedQueue.d.ts';
 import type { ThemeManifest } from '../ThemeManifest.d.ts';
 import type { CustomCSSThemesRecord } from './CustomCSSThemesRecord.d.ts';
 import type { CustomCSSUpdatesRecord } from './CustomCSSUpdatesRecord.d.ts';
+import type { DownloadLegacyThemeOptions } from './DownloadLegacyThemeOptions.d.ts';
+import type { InstallThemeOptions } from './InstallThemeOptions.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -76,7 +78,7 @@ export interface CustomCSS extends Component {
      *
      * @returns String obsidian.css contents
      */
-    downloadLegacyTheme(arg: { repo: string }): Promise<string>;
+    downloadLegacyTheme(options: DownloadLegacyThemeOptions): Promise<string>;
     /**
      * Enable translucency of application background
      */
@@ -117,11 +119,11 @@ export interface CustomCSS extends Component {
      *
      * @remark Name will be used as the folder name for the theme
      */
-    installLegacyTheme(arg: { name: string; repo: string; author: string }): Promise<void>;
+    installLegacyTheme(options: InstallThemeOptions): Promise<void>;
     /**
      * Install a theme using the regular theme download pipeline
      */
-    installTheme(arg: { name: string; repo: string; author: string }, version: string): Promise<void>;
+    installTheme(options: InstallThemeOptions, version: string): Promise<void>;
     /**
      * Check whether a specific theme is installed by theme name
      */

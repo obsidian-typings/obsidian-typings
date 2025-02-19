@@ -1,23 +1,23 @@
-import type { EditorPosition } from 'obsidian';
+import type { EditorRange } from 'obsidian';
 
 /** @public */
 export interface SearchCursor {
     /**
      * Current editor search position
      */
-    current(): { from: EditorPosition; to: EditorPosition };
+    current(): EditorRange;
     /**
      * All search results
      */
-    findAll(): { from: EditorPosition; to: EditorPosition }[];
+    findAll(): EditorRange[];
     /**
      * Next editor search position
      */
-    findNext(): { from: EditorPosition; to: EditorPosition };
+    findNext(): EditorRange;
     /**
      * Previous editor search position
      */
-    findPrevious(): { from: EditorPosition; to: EditorPosition };
+    findPrevious(): EditorRange;
     /**
      * Replace current search result with specified text
      *

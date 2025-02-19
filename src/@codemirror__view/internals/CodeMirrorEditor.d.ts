@@ -1,27 +1,38 @@
 import type { SearchQuery } from '@codemirror/search';
-import type { ChangeDesc } from '@codemirror/state';
 import type { EditorPosition } from 'obsidian';
 import type { Bookmark } from './Bookmark.d.ts';
 import type { EditorSelection } from './EditorSelection.d.ts';
 import type { LineHandle } from './LineHandle.d.ts';
 import type { OpenDialogOptions } from './OpenDialogOptions.d.ts';
+import type { LineHandleChange } from './LineHandleChange.d.ts';
+import type { AddOverlayOptions } from './AddOverlayOptions.d.ts';
+import type { Coords } from './Coords.d.ts';
+import type { MatchingBracket } from './MatchingBracket.d.ts';
+import type { SetSelectionOptions } from './SetSelectionOptions.d.ts';
+import type { SetBookmarkOptions } from './SetBookmarkOptions.d.ts';
+import type { Bracket } from './Bracket.d.ts';
+import type { OpenNotificationOptions } from './OpenNotificationOptions.d.ts';
+import type { HardWrapOptions } from './HardWrapOptions.d.ts';
+import type { CodeMirrorEditorSearchCursor } from './CodeMirrorEditorSearchCursor.d.ts';
+import type { ScrollInfo } from './ScrollInfo.d.ts';
+import type { CodeMirrorEditorMode } from './CodeMirrorEditorMode.d.ts';
 
 /** @public */
-interface CodeMirrorEditor {
-    $lineHandleChanges: { changes: ChangeDesc }[] | undefined;
+export interface CodeMirrorEditor {
+    $lineHandleChanges: LineHandleChange[] | undefined;
 
-    addOverlay(options: { query: RegExp }): SearchQuery | undefined;
+    addOverlay(options: AddOverlayOptions): SearchQuery | undefined;
     blur(): void;
     charCoords(
         pos: EditorPosition,
         mode: 'local' | 'page' | 'window' | 'div'
-    ): { left: number; top: number; bottom: number };
+    ): Coords;
     clipPos(pos: EditorPosition): EditorPosition;
-    coordsChar(coords: { left: number; top: number }, mode: 'local' | 'page' | 'window' | 'div'): EditorPosition;
+    coordsChar(coords: Coords, mode: 'local' | 'page' | 'window' | 'div'): EditorPosition;
     defaultTextHeight(): number;
     destroy(): void;
     execCommand(command: string): void;
-    findMatchingBracket(pos: EditorPosition): { to?: EditorPosition };
+    findMatchingBracket(pos: EditorPosition): MatchingBracket;
     findPosV(start: EditorPosition, amount: number, unit: 'line' | 'page', goalColumn: number): EditorPosition;
     firstLine(): number;
     focus(): void;
@@ -34,31 +45,17 @@ interface CodeMirrorEditor {
     getLineHandle(line: number): LineHandle;
     getLineNumber(handle: LineHandle): number | null;
     getMainSelection(): EditorSelection;
-    getMode(): { name: string };
+    getMode(): CodeMirrorEditorMode;
     getOption(option: string): unknown;
     getRange(from: EditorPosition, to: EditorPosition): string;
-    getScrollInfo(): {
-        left: number;
-        top: number;
-        height: number;
-        width: number;
-        clientHeight: number;
-        clientWidth: number;
-    };
-    getSearchCursor(query: RegExp, pos: EditorPosition): {
-        findNext(): boolean;
-        findPrevious(): boolean;
-        find(reverse?: boolean): boolean;
-        from(): EditorPosition | void;
-        to(): EditorPosition | void;
-        replace(text: string): void;
-    };
+    getScrollInfo(): ScrollInfo;
+    getSearchCursor(query: RegExp, pos: EditorPosition): CodeMirrorEditorSearchCursor;
     getSelection(): string;
     getSelections(): string[];
     getTokenTypeAt(pos: EditorPosition): string;
     getValue(): string;
     getWrapperElement(): HTMLElement;
-    hardWrap(options: { column?: number; from?: number; to?: number; allowMerge?: boolean }): void;
+    hardWrap(options: HardWrapOptions): void;
     indentLess(): void;
     indentLine(line: number, more?: boolean): void;
     indentMore(): void;
@@ -75,14 +72,14 @@ interface CodeMirrorEditor {
     off(event: string, listener: EventListenerOrEventListenerObject): void;
     on(event: string, listener: EventListenerOrEventListenerObject): void;
     onBeforeEndOperation(): void;
-    onChange(lineHandleChange: { changes: ChangeDesc }): void;
+    onChange(lineHandleChange: LineHandleChange): void;
     onSelectionChange(): void;
     openDialog(
         template: string,
         keyValidator: (keyValue: string) => boolean,
         options?: Partial<OpenDialogOptions>
     ): void;
-    openNotification(message: string, options?: { duration?: number; bottom?: boolean }): () => void;
+    openNotification(message: string, options?: OpenNotificationOptions): () => void;
     operation<T>(fn: () => T): T;
     overWriteSelection(text: string): void;
     posFromIndex(index: number): EditorPosition;
@@ -92,21 +89,14 @@ interface CodeMirrorEditor {
     replaceRange(text: string, from: EditorPosition, to?: EditorPosition): void;
     replaceSelection(text: string): void;
     replaceSelections(texts: string[]): void;
-    scanForBracket(from: EditorPosition, direction: number, style?: string): { pos: EditorPosition; ch: string } | null;
-    scrollInfo(): {
-        left: number;
-        top: number;
-        height: number;
-        width: number;
-        clientHeight: number;
-        clientWidth: number;
-    };
+    scanForBracket(from: EditorPosition, direction: number, style?: string): Bracket | null;
+    scrollInfo(): ScrollInfo;
     scrollIntoView(pos?: EditorPosition, margin?: number): void;
     scrollTo(x?: number, y?: number): void;
-    setBookmark(pos: EditorPosition, options?: { insertLeft?: boolean }): Bookmark;
+    setBookmark(pos: EditorPosition, options?: SetBookmarkOptions): Bookmark;
     setCursor(line: number, ch: number): void;
     setOption(option: string, value: unknown): void;
-    setSelection(anchor: EditorPosition, head: EditorPosition, options?: { origin?: string }): void;
+    setSelection(anchor: EditorPosition, head: EditorPosition, options?: SetSelectionOptions): void;
     setSelections(selections: EditorSelection[], primaryIndex?: number): void;
     setSize(width: number, height: number): void;
     setValue(content: string): void;

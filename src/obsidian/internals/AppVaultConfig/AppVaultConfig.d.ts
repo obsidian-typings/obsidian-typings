@@ -1,4 +1,5 @@
 import type { AppVaultConfigHotkeysRecord } from './AppVaultConfigHotkeysRecord.d.ts';
+import type { PdfExportSettings } from './PdfExportSettings.d.ts';
 
 /** @public */
 export interface AppVaultConfig {
@@ -114,12 +115,7 @@ export interface AppVaultConfig {
     /**
      * Saved on executing 'Export to PDF' command
      */
-    pdfExportSettings?: {
-        pageSize: 'letter' | string;
-        landscape: false | boolean;
-        margin: '0' | string;
-        downscalePercent: 100 | number;
-    };
+    pdfExportSettings?: PdfExportSettings;
     /**
      * Files & Links \> Confirm line deletion
      */

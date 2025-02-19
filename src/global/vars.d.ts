@@ -11,8 +11,8 @@ import type {
     requestUrl as _requestUrl
 } from 'obsidian';
 import _TurndownService from 'turndown';
-import type { CodeMirrorAdapterEx } from '../@codemirror__view/internals/CodeMirrorAdapterEx.js';
-import type { VimApi } from '../@codemirror__view/internals/VimApi.d.ts';
+import type { CodeMirrorAdapterEx } from '../@codemirror__view/internals/CodeMirrorAdapterEx.d.ts';
+import type { VimApi } from '../@codemirror__view/internals/Vim/VimApi.d.ts';
 import type { CapacitorAdapterFs } from '../obsidian/internals/CapacitorAdapterFs.d.ts';
 import type { ElectronWindow } from '../obsidian/internals/ElectronWindow.d.ts';
 import type { FrameDom } from '../obsidian/internals/FrameDom.d.ts';

@@ -4,13 +4,12 @@ import type {
     App,
     Debouncer
 } from 'obsidian';
+import type { AppMenuBarManagerConstructor } from './AppMenuBarManagerConstructor.d.ts';
 
 /** @public */
 export interface AppMenuBarManager {
     app: App;
-    constructor: {
-        updateMenuItems(arg1: unknown, arg2: unknown): unknown;
-    };
+    constructor: AppMenuBarManagerConstructor;
     onLayoutChange: Debouncer<[], unknown>;
     onWindowFrameChange: Debouncer<[], unknown>;
     requestRender: Debouncer<[], unknown>;

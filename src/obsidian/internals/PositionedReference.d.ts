@@ -1,15 +1,8 @@
 import type {
-    Loc,
+    CacheItem,
     Reference
 } from 'obsidian';
 
 /** @public */
-export interface PositionedReference extends Reference {
-    /**
-     * Position of the reference in the file
-     */
-    position: {
-        start: Loc;
-        end: Loc;
-    };
+export interface PositionedReference extends Reference, CacheItem {
 }

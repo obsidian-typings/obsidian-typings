@@ -1,13 +1,11 @@
-import type { TFile } from 'obsidian';
 import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
 import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
+import type { BacklinkViewBacklink } from './BacklinkViewBacklink.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */
 export interface BacklinkView extends InfoFileView {
-    backlink: {
-        recomputeBacklink: (backlinkFile: TFile) => void;
-    };
+    backlink: BacklinkViewBacklink;
 
     /**
      * Get the current view type

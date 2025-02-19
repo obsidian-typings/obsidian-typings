@@ -1,17 +1,13 @@
-import type {
-    EditorRange,
-    ViewState
-} from 'obsidian';
+import type { ViewState } from 'obsidian';
+import type { StateHistoryEphemeralState } from './StateHistoryEphemeralState.d.ts';
+import type { StateHistoryLeafHistory } from './StateHistoryLeafHistory.d.ts';
 
 /** @public */
 export interface StateHistory {
     /**
      * Ephemeral cursor state within Editor of leaf
      */
-    eState: {
-        cursor: EditorRange;
-        scroll: number;
-    };
+    eState: StateHistoryEphemeralState;
     /**
      * Icon of the leaf
      */
@@ -19,10 +15,7 @@ export interface StateHistory {
     /**
      * History of previous and future states of leaf
      */
-    leafHistory?: {
-        backHistory: StateHistory[];
-        forwardHistory: StateHistory[];
-    };
+    leafHistory?: StateHistoryLeafHistory;
     /**
      * Id of parent to which the leaf belonged
      */

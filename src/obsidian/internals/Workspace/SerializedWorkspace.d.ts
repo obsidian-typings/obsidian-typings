@@ -1,7 +1,5 @@
 import type { LeafEntry } from '../LeafEntry.d.ts';
-import type {
-    SerializedWorkspaceLeftRibbonHiddenItemsRecord
-} from './SerializedWorkspaceLeftRibbonHiddenItemsRecord.d.ts';
+import type { SerializedWorkspaceLeftRibbon } from './SerializedWorkspaceLeftRibbon.d.ts';
 
 /** @public */
 export interface SerializedWorkspace {
@@ -20,7 +18,7 @@ export interface SerializedWorkspace {
     /**
      * Left ribbon
      */
-    leftRibbon: { hiddenItems: SerializedWorkspaceLeftRibbonHiddenItemsRecord };
+    leftRibbon: SerializedWorkspaceLeftRibbon;
     /**
      * Main (center) workspace leaf
      */

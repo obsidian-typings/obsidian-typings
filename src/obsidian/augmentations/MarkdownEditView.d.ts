@@ -2,6 +2,8 @@ import type { Extension } from '@codemirror/state';
 import type { ViewUpdate } from '@codemirror/view';
 import type { FoldInfo } from '../internals/FoldInfo.d.ts';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
+import type { MarkdownEditViewEphemeralState } from '../internals/MarkdownEditViewEphemeralState.d.ts';
+import type { SetHighlightMatch } from '../internals/SetHighlightMatch.d.ts';
 
 export {};
 
@@ -41,7 +43,7 @@ declare module 'obsidian' {
         /**
          * Gets the ephemeral (non-persistent) state of the editor
          */
-        getEphemeralState(state: unknown): { cursor: EditorRange };
+        getEphemeralState(state: unknown): MarkdownEditViewEphemeralState;
         /**
          * Get the current folds of the editor
          */
@@ -84,13 +86,7 @@ declare module 'obsidian' {
         /**
          * Set highlight of any search match
          */
-        setHighlight(match: {
-            focus: boolean;
-            startLoc?: number;
-            endLoc?: number;
-            line?: number;
-            match?: unknown;
-        }): void;
+        setHighlight(match: SetHighlightMatch): void;
         /**
          * Set the state of the editor (applies selections, scrolls, ...)
          */

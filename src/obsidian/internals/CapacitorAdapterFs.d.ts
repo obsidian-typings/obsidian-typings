@@ -1,4 +1,4 @@
-import type { CapacitorFileEntry } from './CapacitorFileEntry.js';
+import type { CapacitorFileEntry } from './CapacitorFileEntry.d.ts';
 
 /** @public */
 export interface CapacitorAdapterFs {

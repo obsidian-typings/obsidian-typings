@@ -4,13 +4,14 @@ import * as fsPromises from 'node:fs/promises';
 import * as path from 'node:path';
 import type { DataAdapterWatchersRecord } from '../internals/DataAdapterRecords/DataAdapterWatchersRecord.d.ts';
 import type { Stats } from 'node:fs';
+import type { Btime } from '../internals/Btime.d.ts';
 
 export {};
 
 declare module 'obsidian' {
     interface FileSystemAdapter extends DataAdapter {
         /** @internal */
-        btime: { btime(path: string, btime: number): void };
+        btime: Btime;
         /**
          * Reference to node fs module
          */

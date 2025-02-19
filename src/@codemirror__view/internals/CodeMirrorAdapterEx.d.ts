@@ -2,22 +2,16 @@ import type {
     EditorPosition,
     Pos
 } from 'obsidian';
-import type { CodeMirrorEditor } from './CodeMirrorEditor.js';
-import type { EditorRangeEx } from './EditorRangeEx.js';
-import type { VimApi } from './VimApi.js';
-import type { VimEditor } from './VimEditor.js';
+import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
+import type { VimApi } from './Vim/VimApi.d.ts';
+import type { VimEditor } from './Vim/VimEditor.d.ts';
+import type { CodeMirrorAdapterExCommands } from './CodeMirrorAdapterExCommands.d.ts';
+import type { EnclosingTag } from './EnclosingTag.d.ts';
 
 /** @public */
 export interface CodeMirrorAdapterEx {
     new(cm6: VimEditor): CodeMirrorEditor;
-    commands: {
-        cursorCharLeft(editor: CodeMirrorEditor): void;
-        redo(editor: CodeMirrorEditor): void;
-        undo(editor: CodeMirrorEditor): void;
-        newlineAndIndent(editor: CodeMirrorEditor): void;
-        newlineAndIndentBefore(editor: CodeMirrorEditor): void;
-        indentAuto(editor: CodeMirrorEditor): void;
-    };
+    commands: CodeMirrorAdapterExCommands;
     isMac: boolean;
     keyMap: Record<string, unknown>;
     keys: Record<string, unknown>;
@@ -29,10 +23,7 @@ export interface CodeMirrorAdapterEx {
     defineOption(option: string, defaultValue: unknown, handler: () => void): void;
     e_preventDefault(event: Event): void;
     e_stop(event: Event): void;
-    findEnclosingTag(doc: CodeMirrorAdapterEx, pos: EditorPosition): {
-        open: EditorRangeEx;
-        close: EditorRangeEx;
-    } | undefined;
+    findEnclosingTag(doc: CodeMirrorAdapterEx, pos: EditorPosition): EnclosingTag | undefined;
     findMatchingTag(doc: CodeMirrorAdapterEx, pos: EditorPosition): void;
     isWordChar(char: string): boolean;
     keyName(event: KeyboardEvent): string;

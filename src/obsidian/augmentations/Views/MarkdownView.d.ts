@@ -1,6 +1,10 @@
 import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
+import type { MarkdownViewSourceMode } from '../../internals/MarkdownViewSourceMode.d.ts';
+import type { MarkdownViewModes } from '../../internals/MarkdownViewModes.d.ts';
 import type { MetadataEditor } from '../../internals/MetadataEditor.d.ts';
 import type { Token } from '../../internals/Token.d.ts';
+import type { FocusMetadataOptions } from '../../internals/FocusMetadataOptions.d.ts';
+import type { MarkdownViewEphemeralState } from '../../internals/MarkdownViewEphemeralState.d.ts';
 
 export {};
 
@@ -38,7 +42,7 @@ declare module 'obsidian' {
         /**
          * The registered modes of the view
          */
-        modes: { source: MarkdownEditView; preview: MarkdownPreviewView };
+        modes: MarkdownViewModes;
         /**
          * Preview component of the view
          */
@@ -56,7 +60,7 @@ declare module 'obsidian' {
          */
         showBacklinks: boolean;
         /** @deprecated CM5 Editor */
-        sourceMode: { cmEditor: unknown };
+        sourceMode: MarkdownViewSourceMode;
 
         /**
          * Add property to inline metadata editor or properties plugin
@@ -86,11 +90,11 @@ declare module 'obsidian' {
         /**
          * Focus on the metadata editor given property information
          */
-        focusMetadata(focus?: { focusHeading: boolean; propertyIdx?: number; propertyKey?: string }): void;
+        focusMetadata(focus?: FocusMetadataOptions): void;
         /**
          * Gets the ephemeral (non-persistent) state of the editor
          */
-        getEphemeralState(): { scroll: number };
+        getEphemeralState(): MarkdownViewEphemeralState;
         /**
          * Get the file attached to the view
          */

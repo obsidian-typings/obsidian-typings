@@ -16,6 +16,7 @@ import type { MobileToolbar } from '../internals/MobileToolbar.d.ts';
 import type { ObsidianDOM } from '../internals/ObsidianDOM.d.ts';
 import type { Plugins } from '../internals/Plugins/Plugins.d.ts';
 import type { ShareReceiver } from '../internals/ShareReceiver.d.ts';
+import type { StatusBar } from '../internals/StatusBar.d.ts';
 import type { ViewRegistry } from '../internals/ViewRegistry/ViewRegistry.d.ts';
 
 export {};
@@ -123,7 +124,7 @@ declare module 'obsidian' {
         /** @internal */
         shareReceiver: ShareReceiver;
         /** @internal Status bar of the application */
-        statusBar: { app: App; containerEl: HTMLElement };
+        statusBar: StatusBar;
         /**
          * Name of the vault with version suffix
          *

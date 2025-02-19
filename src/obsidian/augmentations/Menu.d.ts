@@ -1,4 +1,5 @@
 import type { MenuSubmenuConfigRecord } from '../internals/MenuSubmenuConfigRecord.d.ts';
+import type { Submenu } from '../internals/Submenu.d.ts';
 
 export {};
 
@@ -98,7 +99,7 @@ declare module 'obsidian' {
          * @param submenu
          * @internal Add a section to the submenu config
          */
-        setSectionSubmenu(section: string, submenu: { title: string; icon: string }): this;
+        setSectionSubmenu(section: string, submenu: Submenu): this;
         /** @internal Sort the items in the menu */
         sort(): void;
         /** @internal Unselect the currently selected item and closes the submenu */

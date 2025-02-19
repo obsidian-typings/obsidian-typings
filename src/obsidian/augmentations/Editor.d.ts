@@ -2,6 +2,10 @@ import type { EditorView } from '@codemirror/view';
 import type { BaseEditor } from '../internals/BaseEditor.d.ts';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
 import type { SearchCursor } from '../internals/SearchCursor.d.ts';
+import type { Coords } from '../../@codemirror__view/internals/Coords.d.ts';
+import type { Fold } from '../internals/Fold.d.ts';
+import type { ClickableToken } from '../internals/ClickableToken.d.ts';
+import type { CoordsLeftTop } from '../internals/CoordsLeftTop.d.ts';
 
 export {};
 
@@ -40,7 +44,7 @@ declare module 'obsidian' {
         coordsAtPos(
             pos: EditorPosition,
             relative_to_editor: boolean
-        ): { left: number; top: number; bottom: number; right: number };
+        ): Coords;
         /**
          * Unfolds all folded lines one level up
          *
@@ -56,16 +60,11 @@ declare module 'obsidian' {
         /**
          * Get all ranges that can be folded away in the editor
          */
-        getAllFoldableLines(): { from: number; to: number }[];
+        getAllFoldableLines(): Fold[];
         /**
          * Get a clickable link - if it exists - at specified position
          */
-        getClickableTokenAt(pos: EditorPosition): {
-            start: EditorPosition;
-            end: EditorPosition;
-            text: string;
-            type: string;
-        } | null;
+        getClickableTokenAt(pos: EditorPosition): ClickableToken | null;
         /**
          * Get all blocks that were folded by their starting character position
          */
@@ -85,7 +84,7 @@ declare module 'obsidian' {
         /**
          * Get the closest character position to the specified coordinates
          */
-        posAtCoords(coords: { left: number; top: number }): EditorPosition;
+        posAtCoords(coords: CoordsLeftTop): EditorPosition;
         /**
          * Removes all highlights of specified class
          */

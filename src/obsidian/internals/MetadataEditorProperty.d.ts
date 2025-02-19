@@ -5,7 +5,7 @@ import type {
 import type { MetadataEditor } from './MetadataEditor.d.ts';
 import type { MetadataWidget } from './MetadataWidget.d.ts';
 import type { PropertyEntryData } from './PropertyEntryData.d.ts';
-import type { PropertyWidget } from './PropertyWidget.d.ts';
+import type { MetadataEditorPropertyTypeInfo } from './MetadataEditorPropertyTypeInfo.d.ts';
 
 /** @public */
 export interface MetadataEditorProperty extends Component {
@@ -44,7 +44,7 @@ export interface MetadataEditorProperty extends Component {
     /**
      * Info about the inferred and expected property widget given key-value pair
      */
-    typeInfo: { expected: PropertyWidget<unknown>; inferred: PropertyWidget<unknown> };
+    typeInfo: MetadataEditorPropertyTypeInfo;
     /**
      * Element that contains the value input or widget
      */

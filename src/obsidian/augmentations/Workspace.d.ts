@@ -15,6 +15,8 @@ import type { ViewTypeType } from '../internals/Views/ViewTypeType.d.ts';
 import type { ViewTypeViewMapping } from '../internals/Views/ViewTypeViewMapping.d.ts';
 import type { SerializedWorkspace } from '../internals/Workspace/SerializedWorkspace.d.ts';
 import type { WorkspaceHoverLinkSourcesRecord } from '../internals/Workspace/WorkspaceHoverLinkSourcesRecord.d.ts';
+import type { EditorSuggestEx } from '../internals/EditorSuggestEx.d.ts';
+import type { GetRecentFilesOptions } from '../internals/GetRecentFilesOptions.d.ts';
 
 declare module 'obsidian' {
     interface Workspace extends Events {
@@ -33,10 +35,7 @@ declare module 'obsidian' {
          */
         editorExtensions: Extension[];
         /** @internal */
-        editorSuggest: {
-            currentSuggest?: EditorSuggest<unknown>;
-            suggests: EditorSuggest<unknown>[];
-        };
+        editorSuggest: EditorSuggestEx;
         /** @internal */
         floatingSplit: WorkspaceSplit;
         /** @internal */
@@ -140,13 +139,7 @@ declare module 'obsidian' {
         /**
          * Get n last opened files of type (defaults to 10)
          */
-        getRecentFiles(arg?: {
-            showMarkdown: boolean;
-            showCanvas: boolean;
-            showNonImageAttachments: boolean;
-            showImages: boolean;
-            maxCount: number;
-        }): string[];
+        getRecentFiles(options?: GetRecentFilesOptions): string[];
         /**
          * Get leaf in the side ribbon/dock and split if necessary
          *

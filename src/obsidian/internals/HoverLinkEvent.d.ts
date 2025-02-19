@@ -1,4 +1,5 @@
 import type { WorkspaceLeaf } from 'obsidian';
+import type { HoverLinkEventState } from './HoverLinkEventState.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */
@@ -8,8 +9,6 @@ export interface HoverLinkEvent {
     linktext: string;
     source: 'search' | 'editor' | 'preview' | 'properties' | 'graph' | 'file-explorer' | 'hover-link';
     sourcePath?: string;
-    state?: {
-        scroll: unknown;
-    };
+    state?: HoverLinkEventState;
     targetEl: HTMLElement | null;
 }

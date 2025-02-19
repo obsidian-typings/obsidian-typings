@@ -7,15 +7,14 @@ import type {
 } from 'obsidian';
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { BacklinkPlugin } from './BacklinkPlugin.d.ts';
+import type { BacklinkPluginInstanceOptions } from './BacklinkPluginInstanceOptions.d.ts';
 
 /** @public */
 export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkPlugin> {
     app: App;
     defaultOn: true;
     file?: TFile | null;
-    options: {
-        backlinkInDocument?: boolean;
-    };
+    options: BacklinkPluginInstanceOptions;
     plugin: BacklinkPlugin;
 
     initLeaf(): void;
