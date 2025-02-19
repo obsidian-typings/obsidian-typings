@@ -2,13 +2,13 @@ import type {
     EditorPosition,
     Pos
 } from 'obsidian';
-import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
-import type { EditorRange2 } from './EditorRange2.d.ts';
-import type { VimApi } from './VimApi.d.ts';
-import type { VimEditor } from './VimEditor.d.ts';
+import type { CodeMirrorEditor } from './CodeMirrorEditor.js';
+import type { EditorRangeEx } from './EditorRangeEx.js';
+import type { VimApi } from './VimApi.js';
+import type { VimEditor } from './VimEditor.js';
 
 /** @public */
-export interface CodeMirrorAdapter2 {
+export interface CodeMirrorAdapterEx {
     new(cm6: VimEditor): CodeMirrorEditor;
     commands: {
         cursorCharLeft(editor: CodeMirrorEditor): void;
@@ -29,17 +29,17 @@ export interface CodeMirrorAdapter2 {
     defineOption(option: string, defaultValue: unknown, handler: () => void): void;
     e_preventDefault(event: Event): void;
     e_stop(event: Event): void;
-    findEnclosingTag(doc: CodeMirrorAdapter2, pos: EditorPosition): {
-        open: EditorRange2;
-        close: EditorRange2;
+    findEnclosingTag(doc: CodeMirrorAdapterEx, pos: EditorPosition): {
+        open: EditorRangeEx;
+        close: EditorRangeEx;
     } | undefined;
-    findMatchingTag(doc: CodeMirrorAdapter2, pos: EditorPosition): void;
+    findMatchingTag(doc: CodeMirrorAdapterEx, pos: EditorPosition): void;
     isWordChar(char: string): boolean;
     keyName(event: KeyboardEvent): string;
     lookupKey(
         key: string,
         context: unknown,
-        callback: (action: (codeMirrorAdapter: CodeMirrorAdapter2) => boolean) => void
+        callback: (action: (codeMirrorAdapter: CodeMirrorAdapterEx) => boolean) => void
     ): void;
     off(event: string, listener: EventListenerOrEventListenerObject): void;
     on(event: string, listener: EventListenerOrEventListenerObject): void;

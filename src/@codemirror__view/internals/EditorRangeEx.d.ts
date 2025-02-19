@@ -1,7 +1,7 @@
 import type { EditorPosition } from 'obsidian';
 
 /** @public */
-export interface EditorRange2 {
+export interface EditorRangeEx {
     from: EditorPosition | null;
     to: EditorPosition | null;
 }

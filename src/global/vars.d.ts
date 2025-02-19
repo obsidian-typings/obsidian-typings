@@ -11,7 +11,7 @@ import type {
     requestUrl as _requestUrl
 } from 'obsidian';
 import _TurndownService from 'turndown';
-import type { CodeMirrorAdapter2 } from '../@codemirror__view/internals/CodeMirrorAdapter2.d.ts';
+import type { CodeMirrorAdapterEx } from '../@codemirror__view/internals/CodeMirrorAdapterEx.js';
 import type { VimApi } from '../@codemirror__view/internals/VimApi.d.ts';
 import type { CapacitorAdapterFs } from '../obsidian/internals/CapacitorAdapterFs.d.ts';
 import type { ElectronWindow } from '../obsidian/internals/ElectronWindow.d.ts';
@@ -82,7 +82,7 @@ declare global {
     /**
      * @public
      */
-    var CodeMirrorAdapter: CodeMirrorAdapter2;
+    var CodeMirrorAdapter: CodeMirrorAdapterEx;
 
     /**
      * DOMPurify is a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG.
@@ -175,7 +175,7 @@ declare global {
      *
      * @public
      */
-    var initVimMode: (CodeMirror: CodeMirrorAdapter2) => VimApi;
+    var initVimMode: (CodeMirror: CodeMirrorAdapterEx) => VimApi;
 
     /**
      * @public
