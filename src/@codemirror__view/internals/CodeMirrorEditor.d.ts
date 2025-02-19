@@ -1,21 +1,21 @@
 import type { SearchQuery } from '@codemirror/search';
 import type { EditorPosition } from 'obsidian';
-import type { Bookmark } from './Bookmark.d.ts';
-import type { EditorSelection } from './EditorSelection.d.ts';
-import type { LineHandle } from './LineHandle.d.ts';
-import type { OpenDialogOptions } from './OpenDialogOptions.d.ts';
-import type { LineHandleChange } from './LineHandleChange.d.ts';
 import type { AddOverlayOptions } from './AddOverlayOptions.d.ts';
-import type { Coords } from './Coords.d.ts';
-import type { MatchingBracket } from './MatchingBracket.d.ts';
-import type { SetSelectionOptions } from './SetSelectionOptions.d.ts';
-import type { SetBookmarkOptions } from './SetBookmarkOptions.d.ts';
+import type { Bookmark } from './Bookmark.d.ts';
 import type { Bracket } from './Bracket.d.ts';
-import type { OpenNotificationOptions } from './OpenNotificationOptions.d.ts';
-import type { HardWrapOptions } from './HardWrapOptions.d.ts';
-import type { CodeMirrorEditorSearchCursor } from './CodeMirrorEditorSearchCursor.d.ts';
-import type { ScrollInfo } from './ScrollInfo.d.ts';
 import type { CodeMirrorEditorMode } from './CodeMirrorEditorMode.d.ts';
+import type { CodeMirrorEditorSearchCursor } from './CodeMirrorEditorSearchCursor.d.ts';
+import type { Coords } from './Coords.d.ts';
+import type { EditorSelection } from './EditorSelection.d.ts';
+import type { HardWrapOptions } from './HardWrapOptions.d.ts';
+import type { LineHandle } from './LineHandle.d.ts';
+import type { LineHandleChange } from './LineHandleChange.d.ts';
+import type { MatchingBracket } from './MatchingBracket.d.ts';
+import type { OpenDialogOptions } from './OpenDialogOptions.d.ts';
+import type { OpenNotificationOptions } from './OpenNotificationOptions.d.ts';
+import type { ScrollInfo } from './ScrollInfo.d.ts';
+import type { SetBookmarkOptions } from './SetBookmarkOptions.d.ts';
+import type { SetSelectionOptions } from './SetSelectionOptions.d.ts';
 
 /** @public */
 export interface CodeMirrorEditor {
@@ -23,10 +23,7 @@ export interface CodeMirrorEditor {
 
     addOverlay(options: AddOverlayOptions): SearchQuery | undefined;
     blur(): void;
-    charCoords(
-        pos: EditorPosition,
-        mode: 'local' | 'page' | 'window' | 'div'
-    ): Coords;
+    charCoords(pos: EditorPosition, mode: 'local' | 'page' | 'window' | 'div'): Coords;
     clipPos(pos: EditorPosition): EditorPosition;
     coordsChar(coords: Coords, mode: 'local' | 'page' | 'window' | 'div'): EditorPosition;
     defaultTextHeight(): number;

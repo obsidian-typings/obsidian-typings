@@ -1,8 +1,8 @@
 import type { Extension } from '@codemirror/state';
 import type { ViewUpdate } from '@codemirror/view';
 import type { FoldInfo } from '../internals/FoldInfo.d.ts';
-import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
 import type { MarkdownEditViewEphemeralState } from '../internals/MarkdownEditViewEphemeralState.d.ts';
+import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
 import type { SetHighlightMatch } from '../internals/SetHighlightMatch.d.ts';
 
 export {};

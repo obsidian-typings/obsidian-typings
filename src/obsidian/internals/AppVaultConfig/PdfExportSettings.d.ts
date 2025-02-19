@@ -1,9 +1,9 @@
 /** @public */
 export interface PdfExportSettings {
     /**
-     * Default: 'letter'
+     * Default: 100
      */
-    pageSize: string;
+    downscalePercent: number;
     /**
      * Default: false
      */
@@ -13,7 +13,7 @@ export interface PdfExportSettings {
      */
     margin: string;
     /**
-     * Default: 100
+     * Default: 'letter'
      */
-    downscalePercent: number;
+    pageSize: string;
 }

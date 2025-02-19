@@ -1,4 +1,6 @@
-import type { SerializedWorkspaceLeftRibbonHiddenItemsRecord } from './SerializedWorkspaceLeftRibbonHiddenItemsRecord.d.ts';
+import type {
+    SerializedWorkspaceLeftRibbonHiddenItemsRecord
+} from './SerializedWorkspaceLeftRibbonHiddenItemsRecord.d.ts';
 
 /** @public */
 export interface SerializedWorkspaceLeftRibbon {

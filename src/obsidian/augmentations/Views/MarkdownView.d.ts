@@ -1,10 +1,10 @@
 import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
-import type { MarkdownViewSourceMode } from '../../internals/MarkdownViewSourceMode.d.ts';
-import type { MarkdownViewModes } from '../../internals/MarkdownViewModes.d.ts';
-import type { MetadataEditor } from '../../internals/MetadataEditor.d.ts';
-import type { Token } from '../../internals/Token.d.ts';
 import type { FocusMetadataOptions } from '../../internals/FocusMetadataOptions.d.ts';
 import type { MarkdownViewEphemeralState } from '../../internals/MarkdownViewEphemeralState.d.ts';
+import type { MarkdownViewModes } from '../../internals/MarkdownViewModes.d.ts';
+import type { MarkdownViewSourceMode } from '../../internals/MarkdownViewSourceMode.d.ts';
+import type { MetadataEditor } from '../../internals/MetadataEditor.d.ts';
+import type { Token } from '../../internals/Token.d.ts';
 
 export {};
 

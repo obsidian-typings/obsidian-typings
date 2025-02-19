@@ -3,9 +3,9 @@ import type {
     Component
 } from 'obsidian';
 import type { MetadataEditor } from './MetadataEditor.d.ts';
+import type { MetadataEditorPropertyTypeInfo } from './MetadataEditorPropertyTypeInfo.d.ts';
 import type { MetadataWidget } from './MetadataWidget.d.ts';
 import type { PropertyEntryData } from './PropertyEntryData.d.ts';
-import type { MetadataEditorPropertyTypeInfo } from './MetadataEditorPropertyTypeInfo.d.ts';
 
 /** @public */
 export interface MetadataEditorProperty extends Component {

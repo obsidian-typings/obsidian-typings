@@ -1,10 +1,10 @@
 import type { IpcRenderer } from 'electron';
 import * as fs from 'node:fs';
+import type { Stats } from 'node:fs';
 import * as fsPromises from 'node:fs/promises';
 import * as path from 'node:path';
-import type { DataAdapterWatchersRecord } from '../internals/DataAdapterRecords/DataAdapterWatchersRecord.d.ts';
-import type { Stats } from 'node:fs';
 import type { Btime } from '../internals/Btime.d.ts';
+import type { DataAdapterWatchersRecord } from '../internals/DataAdapterRecords/DataAdapterWatchersRecord.d.ts';
 
 export {};
 
@@ -24,6 +24,8 @@ declare module 'obsidian' {
          * Reference to electron ipcRenderer module
          */
         ipcRenderer?: IpcRenderer;
+        /** @internal */
+        killLastAction: null | ((e: Error) => void);
         /**
          * Reference to node path module
          */
@@ -56,8 +58,6 @@ declare module 'obsidian' {
         getFilePath(normalizedPath: string): string;
         /** @internal Kill file system action due to timeout */
         kill(): void;
-        /** @internal */
-        killLastAction: null | ((e: Error) => void);
         /** @internal Generates `this.files` from the file system */
         listAll(): Promise<void>;
         /**
@@ -65,7 +65,6 @@ declare module 'obsidian' {
          * @internal Helper function for `listRecursive` reads children of directory
          */
         listRecursiveChild(normalizedPath: string, child: string): Promise<void>;
-
         /**
          * Reconcile file creation
          *
@@ -74,7 +73,6 @@ declare module 'obsidian' {
          * @param stats - Stats object
          */
         reconcileFileCreation(normalizedPath: string, normalizedNewPath: string, stats: Stats): Promise<void>;
-
         /** @internal */
         reconcileFileInternal(normalizedPath: string, normalizedNewPath: string): Promise<void>;
         /** @internal */

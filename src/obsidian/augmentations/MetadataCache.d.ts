@@ -1,4 +1,3 @@
-import type { MetadataCacheWorkerMessage } from '../internals/MetadataCacheWorkerMessage.d.ts';
 import type { CustomArrayDict } from '../internals/Collections/CustomArrayDict.d.ts';
 import type { FileCacheEntry } from '../internals/FileCacheEntry.d.ts';
 import type { LinkResolverQueue } from '../internals/LinkResolverQueue/LinkResolverQueue.d.ts';
@@ -7,6 +6,7 @@ import type { MetadataCacheFileCacheRecord } from '../internals/MetadataCacheRec
 import type {
     MetadataCacheMetadataCacheRecord
 } from '../internals/MetadataCacheRecords/MetadataCacheMetadataCacheRecord.d.ts';
+import type { MetadataCacheWorkerMessage } from '../internals/MetadataCacheWorkerMessage.d.ts';
 import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
 import type { PropertyInfo } from '../internals/PropertyInfo.d.ts';
 
@@ -14,14 +14,12 @@ export {};
 
 declare module 'obsidian' {
     interface MetadataCache extends Events {
+        /** @internal Called by preload() which is in turn called by initialize() */
+        _preload: () => Promise<void>;
         /**
          * Reference to App
          */
         app: App;
-        /** @internal Called by preload() which is in turn called by initialize() */
-        _preload: () => Promise<void>;
-        preloadPromise: Promise<void> | null;
-        preload: () => Promise<void>;
         /** @internal */
         blockCache: BlockCache;
         /** @internal IndexedDB database */
@@ -39,6 +37,8 @@ declare module 'obsidian' {
         metadataCache: MetadataCacheMetadataCacheRecord;
         /** @internal Callbacks to execute on cache clean */
         onCleanCacheCallbacks: (() => void)[];
+        preload: () => Promise<void>;
+        preloadPromise: Promise<void> | null;
         /** @internal Mapping of filename to collection of files that share the same name */
         uniqueFileLookup: CustomArrayDict<TFile>;
         /** @internal */
@@ -63,10 +63,10 @@ declare module 'obsidian' {
         cleanupDeletedCache(): void;
         /** @internal */
         clear(): Promise<void>;
-        /** @internal */
-        computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<CachedMetadata | undefined>;
         /** @internal Called by initialize() */
         computeFileMetadataAsync(file: TFile): Promise<void>;
+        /** @internal */
+        computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<CachedMetadata | undefined>;
         /** @internal Remove all entries that contain deleted path */
         deletePath(path: string): void;
         /**

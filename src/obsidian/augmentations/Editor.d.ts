@@ -1,11 +1,11 @@
 import type { EditorView } from '@codemirror/view';
-import type { BaseEditor } from '../internals/BaseEditor.d.ts';
-import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
-import type { SearchCursor } from '../internals/SearchCursor.d.ts';
 import type { Coords } from '../../@codemirror__view/internals/Coords.d.ts';
-import type { Fold } from '../internals/Fold.d.ts';
+import type { BaseEditor } from '../internals/BaseEditor.d.ts';
 import type { ClickableToken } from '../internals/ClickableToken.d.ts';
 import type { CoordsLeftTop } from '../internals/CoordsLeftTop.d.ts';
+import type { Fold } from '../internals/Fold.d.ts';
+import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
+import type { SearchCursor } from '../internals/SearchCursor.d.ts';
 
 export {};
 
@@ -41,10 +41,7 @@ declare module 'obsidian' {
          * @param pos Editor position
          * @param relative_to_editor Relative to the editor or the application window
          */
-        coordsAtPos(
-            pos: EditorPosition,
-            relative_to_editor: boolean
-        ): Coords;
+        coordsAtPos(pos: EditorPosition, relative_to_editor: boolean): Coords;
         /**
          * Unfolds all folded lines one level up
          *

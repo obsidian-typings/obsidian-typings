@@ -2,6 +2,8 @@ import type { Extension } from '@codemirror/state';
 import type { Constructor } from 'obsidian';
 import type { CanvasConnection } from '../internals/CanvasConnection.d.ts';
 import type { CanvasNode } from '../internals/CanvasNode.d.ts';
+import type { EditorSuggestEx } from '../internals/EditorSuggestEx.d.ts';
+import type { GetRecentFilesOptions } from '../internals/GetRecentFilesOptions.d.ts';
 import type { HoverLinkEvent } from '../internals/HoverLinkEvent.d.ts';
 import type { CanvasView } from '../internals/InternalPlugins/Canvas/CanvasView.d.ts';
 import type { SearchView } from '../internals/InternalPlugins/GlobalSearch/SearchView.d.ts';
@@ -15,8 +17,6 @@ import type { ViewTypeType } from '../internals/Views/ViewTypeType.d.ts';
 import type { ViewTypeViewMapping } from '../internals/Views/ViewTypeViewMapping.d.ts';
 import type { SerializedWorkspace } from '../internals/Workspace/SerializedWorkspace.d.ts';
 import type { WorkspaceHoverLinkSourcesRecord } from '../internals/Workspace/WorkspaceHoverLinkSourcesRecord.d.ts';
-import type { EditorSuggestEx } from '../internals/EditorSuggestEx.d.ts';
-import type { GetRecentFilesOptions } from '../internals/GetRecentFilesOptions.d.ts';
 
 declare module 'obsidian' {
     interface Workspace extends Events {

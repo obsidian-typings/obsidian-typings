@@ -1,8 +1,8 @@
 /** @public */
 export interface SetHighlightMatch {
-    focus: boolean;
-    startLoc?: number;
     endLoc?: number;
+    focus: boolean;
     line?: number;
     match?: unknown;
+    startLoc?: number;
 }
