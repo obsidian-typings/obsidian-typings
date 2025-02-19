@@ -1,6 +1,4 @@
-import type { FileEntry } from './FileEntry.d.ts';
-
-type CapacitorFileEntry = Omit<FileEntry, "type" | "realpath"> & { realpath?: string; type: "file" | "directory"};
+import type { CapacitorFileEntry } from './CapacitorFileEntry.js';
 
 /** @public */
 export interface CapacitorAdapterFs {
