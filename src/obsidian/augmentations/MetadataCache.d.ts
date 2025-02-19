@@ -65,7 +65,7 @@ declare module 'obsidian' {
         /** @internal */
         computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<CachedMetadata | undefined>;
         /** @internal Called by initialize() */
-        computeFileMetadataAsync(file: TFile): Promise<unknown>;
+        computeFileMetadataAsync(file: TFile): Promise<void>;
         /** @internal Remove all entries that contain deleted path */
         deletePath(path: string): void;
         /**
