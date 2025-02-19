@@ -2,5 +2,5 @@
 export interface SQLResultSetRowList {
     length: number;
 
-    item(index: number): any;
+    item(index: number): unknown;
 }

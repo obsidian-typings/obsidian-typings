@@ -9,19 +9,19 @@ export interface EditorSuggests {
     /**
      * Currently active and rendered editor suggestion popup
      */
-    currentSuggest: null | EditorSuggest<any>;
+    currentSuggest: null | EditorSuggest<unknown>;
     /**
      * Registered editor suggestions
      *
      * @remark Used for providing autocompletions for specific strings
      * @tutorial Reference official documentation under EditorSuggest<T> for usage
      */
-    suggests: EditorSuggest<any>[];
+    suggests: EditorSuggest<unknown>[];
 
     /**
      * Add a new editor suggestion to the list of registered suggestion providers
      */
-    addSuggest(suggest: EditorSuggest<any>): void;
+    addSuggest(suggest: EditorSuggest<unknown>): void;
     /**
      * Close the currently active editor suggestion popup
      */
@@ -33,7 +33,7 @@ export interface EditorSuggests {
     /**
      * Remove a registered editor suggestion from the list of registered suggestion providers
      */
-    removeSuggest(suggest: EditorSuggest<any>): void;
+    removeSuggest(suggest: EditorSuggest<unknown>): void;
     /**
      * Update position of currently active and rendered editor suggestion popup
      */
@@ -41,7 +41,7 @@ export interface EditorSuggests {
     /**
      * Set the currently active editor suggestion popup to specified suggester
      */
-    setCurrentSuggest(suggest: EditorSuggest<any>): void;
+    setCurrentSuggest(suggest: EditorSuggest<unknown>): void;
     /**
      * Run check on focused editor to see whether a suggestion should be triggered and rendered
      */

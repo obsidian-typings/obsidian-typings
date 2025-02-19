@@ -56,7 +56,7 @@ declare module 'obsidian' {
          */
         showBacklinks: boolean;
         /** @deprecated CM5 Editor */
-        sourceMode: { cmEditor: any };
+        sourceMode: { cmEditor: unknown };
 
         /**
          * Add property to inline metadata editor or properties plugin
@@ -90,7 +90,7 @@ declare module 'obsidian' {
         /**
          * Gets the ephemeral (non-persistent) state of the editor
          */
-        getEphemeralState(): any & { scroll: number };
+        getEphemeralState(): { scroll: number };
         /**
          * Get the file attached to the view
          */

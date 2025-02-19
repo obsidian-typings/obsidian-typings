@@ -16,7 +16,7 @@ declare module 'obsidian' {
         /**
          * Get view state for sync plugin
          */
-        getSyncViewState(): any;
+        getSyncViewState(): unknown;
         /**
          * Loads the file with the onLoadFile function
          * @param file The File to load

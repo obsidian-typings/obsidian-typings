@@ -63,13 +63,13 @@ declare module 'obsidian' {
          * Set the ephemeral (non-persistent) state of the editor
          */
         setEphemeralState(
-            state: any & {
+            state: {
                 focus: boolean;
                 focusOnMobile: boolean;
                 cursor: EditorRangeOrCaret;
             }
         ): void;
         /** @todo Documentation incomplete */
-        setState(state: any, result: ViewStateResult): Promise<void>;
+        setState(state: unknown, result: ViewStateResult): Promise<void>;
     }
 }
