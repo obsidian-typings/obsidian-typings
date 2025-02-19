@@ -18,7 +18,9 @@ declare module 'obsidian' {
          */
         app: App;
         /** @internal Called by preload() which is in turn called by initialize() */
-        _preload: () => Promise<unknown>;
+        _preload: () => Promise<void>;
+        preloadPromise: Promise<void> | null;
+        preload: () => Promise<void>;
         /** @internal */
         blockCache: BlockCache;
         /** @internal IndexedDB database */
