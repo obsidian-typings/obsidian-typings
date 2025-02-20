@@ -7,6 +7,8 @@ export {};
 
 declare module 'obsidian' {
     interface Vault extends Events {
+        /** @internal The same TFolder object as `.fileMap["/"]` */
+        root: TFolder;
         /**
          * Low-level file system adapter for read and write operations
          *

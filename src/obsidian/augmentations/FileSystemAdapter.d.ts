@@ -76,7 +76,7 @@ declare module 'obsidian' {
         /** @internal */
         reconcileFileInternal(normalizedPath: string, normalizedNewPath: string): Promise<void>;
         /** @internal */
-        startWatchpath(normalizedPath: string): Promise<void>;
+        startWatchPath(normalizedPath: string): Promise<void>;
         /** @internal Remove listener on specific path */
         stopWatchPath(normalizedPath: string): void;
         /** @internal */
