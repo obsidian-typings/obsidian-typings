@@ -7,8 +7,6 @@ export {};
 
 declare module 'obsidian' {
     interface Vault extends Events {
-        /** @internal The same TFolder object as `.fileMap["/"]` */
-        root: TFolder;
         /**
          * Low-level file system adapter for read and write operations
          *
@@ -31,6 +29,8 @@ declare module 'obsidian' {
         onChange: FileSystemWatchHandler;
         /** @internal Debounced function for saving config */
         requestSaveConfig: Debouncer<[], Promise<void>>;
+        /** @internal The same TFolder object as `.fileMap["/"]` */
+        root: TFolder;
 
         /** @internal Add file as child/parent to respective folders */
         addChild(file: TAbstractFile): void;
