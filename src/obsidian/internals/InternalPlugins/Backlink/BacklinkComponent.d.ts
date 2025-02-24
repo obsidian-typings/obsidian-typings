@@ -17,7 +17,7 @@ export interface BacklinkComponent extends Component {
     backlinkDom: TreeDom<ResultDom>;
     backlinkFile: TFile | null;
     backlinkHeaderEl: HTMLDivElement;
-    backlinkQueue: ItemQueue<TFile>;
+    backlinkQueue: ItemQueue<TFile> | null;
     collapseAll: boolean;
     collapseAllButtonEl: HTMLDivElement;
     extraContext: boolean;
