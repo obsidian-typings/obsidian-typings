@@ -1,4 +1,9 @@
 import type { FileStats } from 'obsidian';
 
-/** @public */
-export type FileSystemWatchHandler = (eventType: string, path: string, oldPath?: string, stats?: FileStats) => void;
+/** @internal */
+export interface FileSystemWatchHandler {
+    (eventType: 'raw' | 'folder-created' | 'folder-removed' | 'file-removed', path: string): void;
+    (eventType: 'modified' | 'file-created', path: string, oldPath: undefined, stats: FileStats): void;
+    (eventType: 'renamed', path: string, oldPath: string): void;
+    (eventType: 'closed'): void;
+}
