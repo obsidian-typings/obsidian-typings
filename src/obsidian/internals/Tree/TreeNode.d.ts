@@ -5,10 +5,10 @@ import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
  * @todo Documentation incomplete
  * @public
  */
-export type TreeNode<T = object> = T & {
+export type TreeNode<T = object, Child = T, Owner = T> = T & {
     childrenEl: HTMLElement;
     el: HTMLElement;
     info: TreeNodeInfo;
     pusherEl: HTMLElement;
-    vChildren: TreeNodeVChildren<T>;
+    vChildren: TreeNodeVChildren<Child, Owner>;
 };
