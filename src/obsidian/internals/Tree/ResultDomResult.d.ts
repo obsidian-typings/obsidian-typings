@@ -1,5 +1,8 @@
+import type { ContentPosition } from './ContentPosition.d.ts';
+import type { ResultProperty } from './ResultProperty.d.ts';
+
 /** @public */
 export interface ResultDomResult {
-    content: number[][];
-    properties: unknown[];
+    content: ContentPosition[];
+    properties: ResultProperty[];
 }
