@@ -1,5 +1,6 @@
 import type { App } from 'obsidian';
 import type { GraphColorGroup } from './GraphColorGroup.d.ts';
+import type { GraphFileFilter } from './GraphFileFilter.d.ts';
 import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 import type { GraphView } from './GraphView.d.ts';
@@ -8,7 +9,6 @@ import type { GraphColorGroupOptions } from './Options/GraphColorGroupOptions.d.
 import type { GraphDisplayOptions } from './Options/GraphDisplayOptions.d.ts';
 import type { GraphFilterOptions } from './Options/GraphFilterOptions.d.ts';
 import type { GraphForceOptions } from './Options/GraphForceOptions.d.ts';
-import type { GraphFileFilter } from './GraphFileFilter.d.ts';
 
 /** @public */
 export interface GraphEngine {
@@ -47,16 +47,16 @@ export interface GraphEngine {
     /** @internal */
     view: LocalGraphView | GraphView;
 
-    /** 
-     * Rerenders the graph
-     * @internal
-     */
-    render(): void;
     /**
      * Gets the engine options
      * @internal
      */
     getOptions(): GraphPluginInstanceOptions;
+    /**
+     * Rerenders the graph
+     * @internal
+     */
+    render(): void;
     /**
      * Sets the engine options
      * @param options - New options. Undefined elements will not be considered.
