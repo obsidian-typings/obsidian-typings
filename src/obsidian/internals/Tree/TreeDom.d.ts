@@ -32,7 +32,7 @@ export interface TreeDom {
     changeFocusedItem(arg1: unknown): unknown;
     emptyResults(): unknown;
     getFiles(): unknown;
-    getMatchCount(): unknown;
+    getMatchCount(): number;
     getResult(arg1: unknown): unknown;
     onChange(): unknown;
     onResize(): unknown;
