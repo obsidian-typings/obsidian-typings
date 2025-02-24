@@ -8,6 +8,7 @@ import type { GraphColorGroupOptions } from './Options/GraphColorGroupOptions.d.
 import type { GraphDisplayOptions } from './Options/GraphDisplayOptions.d.ts';
 import type { GraphFilterOptions } from './Options/GraphFilterOptions.d.ts';
 import type { GraphForceOptions } from './Options/GraphForceOptions.d.ts';
+import type { GraphFileFilter } from './GraphFileFilter.d.ts';
 
 /** @public */
 export interface GraphEngine {
@@ -22,7 +23,7 @@ export interface GraphEngine {
     /** @internal */
     displayOptions: GraphDisplayOptions;
     /** @internal */
-    fileFilter: unknown;
+    fileFilter: GraphFileFilter;
     /** @internal */
     filterOptions: GraphFilterOptions;
     /** @internal */
@@ -46,6 +47,11 @@ export interface GraphEngine {
     /** @internal */
     view: LocalGraphView | GraphView;
 
+    /** 
+     * Rerenders the graph
+     * @internal
+     */
+    render(): void;
     /**
      * Gets the engine options
      * @internal
