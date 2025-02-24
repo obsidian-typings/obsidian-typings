@@ -1,11 +1,11 @@
 import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
 import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
-import type { BacklinkViewBacklink } from './BacklinkViewBacklink.d.ts';
+import type { BacklinkComponent } from './BacklinkComponent.d.ts';
 
 /** @todo Documentation incomplete */
 /** @public */
 export interface BacklinkView extends InfoFileView {
-    backlink: BacklinkViewBacklink;
+    backlink: BacklinkComponent;
 
     /**
      * Get the current view type
