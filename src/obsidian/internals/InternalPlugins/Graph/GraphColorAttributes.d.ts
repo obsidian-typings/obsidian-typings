@@ -1,5 +1,5 @@
 /** @public */
-export type GraphColorAttributes = {
+export interface GraphColorAttributes {
     a: number;
     rgb: number;
-};
+}
