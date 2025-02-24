@@ -1,9 +1,9 @@
 import type { App } from 'electron';
 import type { TFile } from 'obsidian';
-import type { TreeDom } from '../../Tree/TreeDom.d.ts';
-import type { TreeNodeInfo } from '../../Tree/TreeNodeInfo.d.ts';
-import type { TreeNodeVChildren } from '../../Tree/TreeNodeVChildren.d.ts';
 import type { ResultDomResult } from './ResultDomResult.d.ts';
+import type { TreeDom } from './TreeDom.d.ts';
+import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
+import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
 
 /** @public */
 export interface ResultDom {
@@ -19,8 +19,8 @@ export interface ResultDom {
     file: TFile;
     info: TreeNodeInfo;
     onMatchRender: null;
-    parent: TreeDom<ResultDom>;
-    parentDom: TreeDom<ResultDom>;
+    parent: TreeDom;
+    parentDom: TreeDom;
     pusherEl: HTMLDivElement;
     result: ResultDomResult;
     separateMatches: boolean;
@@ -33,7 +33,7 @@ export interface ResultDom {
     onResultClick(arg1: unknown): unknown;
     onResultContextMenu(arg1: unknown): unknown;
     onResultMouseover(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
-    renderContentMatches(): unknown;
+    renderContentMatches(): void;
     setCollapse(arg1: unknown, arg2: unknown): Promise<unknown>;
     setCollapsible(arg1: unknown): unknown;
     setExtraContext(arg1: unknown): unknown;

@@ -7,14 +7,13 @@ import type {
 import type { ItemQueue } from '../../Collections/ItemQueue.d.ts';
 import type { TreeDom } from '../../Tree/TreeDom.d.ts';
 import type { HeaderDom } from './HeaderDom.d.ts';
-import type { ResultDom } from './ResultDom.d.ts';
 
 /** @public */
 export interface BacklinkComponent extends Component {
     app: App;
     backlinkCollapsed: boolean;
     backlinkCountEl: HTMLSpanElement;
-    backlinkDom: TreeDom<ResultDom>;
+    backlinkDom: TreeDom;
     backlinkFile: TFile | null;
     backlinkHeaderEl: HTMLDivElement;
     backlinkQueue: ItemQueue<TFile> | null;
@@ -33,7 +32,7 @@ export interface BacklinkComponent extends Component {
     unlinkedAliases: string;
     unlinkedCollapsed: boolean;
     unlinkedCountEl: HTMLSpanElement;
-    unlinkedDom: TreeDom<ResultDom>;
+    unlinkedDom: TreeDom;
     unlinkedFile: null;
     unlinkedHeaderEl: HTMLDivElement;
     unlinkedQueue: null;

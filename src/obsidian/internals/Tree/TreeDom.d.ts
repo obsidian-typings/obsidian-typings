@@ -4,12 +4,13 @@ import type {
     TFile
 } from 'obsidian';
 import type { InfinityScroll } from './InfinityScroll.d.ts';
-import type { TreeNode } from './TreeNode.d.ts';
+import type { ResultDom } from './ResultDom.d.ts';
+import type { ResultDomResult } from './ResultDomResult.d.ts';
 import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
 
 /** @public */
-export interface TreeDom<Child> {
+export interface TreeDom {
     app: App;
     changed: Debouncer<[], unknown>;
     childrenEl: HTMLDivElement;
@@ -21,13 +22,13 @@ export interface TreeDom<Child> {
     infinityScroll: InfinityScroll;
     info: TreeNodeInfo;
     pusherEl: HTMLDivElement;
-    resultDomLookup: Map<TFile, Child>;
+    resultDomLookup: Map<TFile, ResultDom>;
     showingEmptyState: boolean;
     sortOrder: string;
-    vChildren: TreeNodeVChildren<Child, TreeDom<Child>>;
+    vChildren: TreeNodeVChildren<ResultDom, TreeDom>;
     working: boolean;
 
-    addResult(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): unknown;
+    addResult(file: TFile, result: ResultDomResult, content: string, shouldShowTitle?: boolean): ResultDom;
     changeFocusedItem(arg1: unknown): unknown;
     emptyResults(): unknown;
     getFiles(): unknown;
