@@ -1,6 +1,6 @@
 import type { CustomArrayDict } from '../internals/Collections/CustomArrayDict.d.ts';
+import type { ItemQueue } from '../internals/Collections/ItemQueue.d.ts';
 import type { FileCacheEntry } from '../internals/FileCacheEntry.d.ts';
-import type { LinkResolverQueue } from '../internals/LinkResolverQueue/LinkResolverQueue.d.ts';
 import type { LinkSuggestion } from '../internals/LinkSuggestion.d.ts';
 import type { MetadataCacheFileCacheRecord } from '../internals/MetadataCacheRecords/MetadataCacheFileCacheRecord.d.ts';
 import type {
@@ -32,7 +32,7 @@ declare module 'obsidian' {
         /** @internal Amount of tasks currently in progress */
         inProgressTaskCount: number;
         /** @internal */
-        linkResolverQueue: LinkResolverQueue | null;
+        linkResolverQueue: ItemQueue<TFile | null> | null;
         /** @internal File hash to metadata cache entry mapping */
         metadataCache: MetadataCacheMetadataCacheRecord;
         /** @internal Callbacks to execute on cache clean */

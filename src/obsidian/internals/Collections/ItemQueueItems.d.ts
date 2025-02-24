@@ -1,5 +1,5 @@
 /** @public */
-export interface QueueItems<T> {
+export interface ItemQueueItems<T> {
     length: number;
     offset: number;
     queue: T[];
