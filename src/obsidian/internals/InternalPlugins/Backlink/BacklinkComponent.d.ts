@@ -49,7 +49,7 @@ export interface BacklinkComponent extends Component {
     onToggleMoreContextClick(): unknown;
     onToggleShowSearch(): unknown;
     passSearchFilter(arg1: unknown, arg2: unknown): unknown;
-    recomputeBacklink(backlinkFile: TFile): void;
+    recomputeBacklink(backlinkFile: TFile | null): void;
     recomputeUnlinked(arg1: unknown): unknown;
     setBacklinkCollapsed(arg1: unknown, arg2: unknown): Promise<unknown>;
     setCollapseAll(arg1: unknown): unknown;
