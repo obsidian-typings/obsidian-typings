@@ -1,5 +1,6 @@
 import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
 import type { FocusMetadataOptions } from '../../internals/FocusMetadataOptions.d.ts';
+import type { BacklinkComponent } from '../../internals/InternalPlugins/Backlink/BacklinkComponent.d.ts';
 import type { MarkdownViewEphemeralState } from '../../internals/MarkdownViewEphemeralState.d.ts';
 import type { MarkdownViewModes } from '../../internals/MarkdownViewModes.d.ts';
 import type { MarkdownViewSourceMode } from '../../internals/MarkdownViewSourceMode.d.ts';
@@ -14,7 +15,7 @@ declare module 'obsidian' {
          * Backlinks component
          * @todo Documentation incomplete
          */
-        backlinks: null | unknown;
+        backlinks: BacklinkComponent | null;
         /**
          * The embedded backlinks element for the current file
          */
