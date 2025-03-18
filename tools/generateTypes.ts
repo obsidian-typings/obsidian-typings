@@ -182,7 +182,7 @@ function initObjectPathMap(obj: unknown, options: GenerateTypesOptions): void {
         const { obj, path, depth } = entry;
         console.debug(`Preprocessing: ${path} (depth: ${depth})`);
 
-        if (depth > options.maxDepth + 1) {
+        if (depth > options.maxDepth) {
             continue;
         }
 
