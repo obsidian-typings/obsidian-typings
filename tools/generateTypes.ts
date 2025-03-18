@@ -123,9 +123,6 @@ function initBuiltInPrototypeNameMap(): void {
     builtInPrototypeNameMap.set(BigInt.prototype, 'BigInt');
     builtInPrototypeNameMap.set(Node.prototype, 'Node');
     builtInPrototypeNameMap.set(Event.prototype, 'Event');
-    builtInPrototypeNameMap.set(HTMLElement.prototype, 'HTMLElement');
-    builtInPrototypeNameMap.set(SVGElement.prototype, 'SVGElement');
-    builtInPrototypeNameMap.set(DocumentFragment.prototype, 'DocumentFragment');
     builtInPrototypeNameMap.set(ArrayBuffer.prototype, 'ArrayBuffer');
     builtInPrototypeNameMap.set(Int8Array.prototype, 'Int8Array');
     builtInPrototypeNameMap.set(Uint8Array.prototype, 'Uint8Array');
@@ -136,9 +133,13 @@ function initBuiltInPrototypeNameMap(): void {
     builtInPrototypeNameMap.set(ReferenceError.prototype, 'ReferenceError');
     builtInPrototypeNameMap.set(SyntaxError.prototype, 'SyntaxError');
 
-    for (const key of Object.getOwnPropertyNames(window).filter((key) => key.match(/HTML.+Element/))) {
-        const htmlElementClass = (window as unknown as Record<string, unknown>)[key] as Function;
-        builtInPrototypeNameMap.set(htmlElementClass.prototype, key);
+    const windowRecord = window as unknown as Record<string, unknown>;
+
+    for (const key of Object.getOwnPropertyNames(windowRecord)) {
+        const constructor = windowRecord[key];
+        if (typeof constructor === 'function' && constructor.prototype instanceof Node) {
+            builtInPrototypeNameMap.set(constructor.prototype, key);
+        }
     }
 }
 
