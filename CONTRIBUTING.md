@@ -106,9 +106,16 @@ console.log(generateTypes(app.internalPlugins));
 copy(generateTypes(app.internalPlugins));
 ```
 
-The helper tries to detect all known `obsidian` types, so in the output you will see types like `App123`, meaning it's the most likely can be replaced with just `App` (from `obsidian` types), but the helper keeps inferring those type to ensure the typings are complete.
+The signature of this helper function:
 
-By default, the generator depth is `1`, but you can change it `generateTypes(app.internalPlugins, depth)`, if you use `depth = 0` it means `unlimited`.
+```ts
+function generateTypes(obj: unknown, options: Partial<GenerateTypesOptions> = {}): string;
+
+interface GenerateTypesOptions {
+    maxDepth: number; // default: 1
+    obsidianTypesTraverseDepth: number; // default: 0
+}
+```
 
 ### Typing variables
 
