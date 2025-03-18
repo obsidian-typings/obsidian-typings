@@ -7,9 +7,10 @@ declare module 'obsidian' {
         /** @internal Background applied to application to dim it */
         bgEl: HTMLElement;
         /** @internal Opacity percentage of the background */
-        bgOpacity: number;
+        bgOpacity: string;
         /** @internal Whether the background is being dimmed */
         dimBackground: boolean;
+        headerEl: HTMLDivElement;
         /** @internal Modal container element */
         modalEl: HTMLElement;
         /** @internal Selection logic handler */

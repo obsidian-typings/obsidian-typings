@@ -13,7 +13,7 @@ declare module 'obsidian' {
         /** @internal Scope that this scope is a child of */
         parent: Scope | undefined;
         /** @internal */
-        tabFocusContainer: HTMLElement | null;
+        tabFocusContainerEl: HTMLElement | null;
 
         /**
          * @param event - Keyboard event
