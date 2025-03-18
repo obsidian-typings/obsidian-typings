@@ -1,6 +1,6 @@
 import type { FileStats } from 'obsidian';
 
-/** @internal */
+/** @public */
 export interface FileSystemWatchHandler {
     (eventType: 'raw' | 'folder-created' | 'folder-removed' | 'file-removed', path: string): void;
     (eventType: 'modified' | 'file-created', path: string, oldPath: undefined, stats: FileStats): void;
