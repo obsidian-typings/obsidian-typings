@@ -93,7 +93,7 @@ The only prerequisite to use the helper is to have the [CodeScript Toolkit](http
 The following code loads the helper into the console:
 
 ```js
-const generateTypes = (await requireAsync('https://raw.githubusercontent.com/Fevol/obsidian-typings/refs/heads/main/tools/generateTypes.ts')).generateTypes;
+generateTypes = (await requireAsync('https://raw.githubusercontent.com/Fevol/obsidian-typings/refs/heads/main/tools/generateTypes.ts')).generateTypes;
 ```
 
 Now you can use the helper to generate the types:
