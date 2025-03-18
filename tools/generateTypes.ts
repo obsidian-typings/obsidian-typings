@@ -9,6 +9,7 @@ export function generateTypes(obj: unknown, options: Partial<GenerateTypesOption
     const DEFAULT_OPTIONS: GenerateTypesOptions = {
         maxDepth: 1,
         obsidianTypesTraverseDepth: 0,
+        pathsToSkip: []
     };
     const fullOptions: GenerateTypesOptions = {
         ...DEFAULT_OPTIONS,
@@ -32,6 +33,7 @@ export function generateTypes(obj: unknown, options: Partial<GenerateTypesOption
 interface GenerateTypesOptions {
     maxDepth: number;
     obsidianTypesTraverseDepth: number;
+    pathsToSkip: string[];
 }
 
 interface Entry<T = unknown> {
@@ -218,6 +220,10 @@ function initObjectPathMap(obj: unknown, options: GenerateTypesOptions): void {
 
         objectPathDepthMap.set(obj, path);
 
+        if (options.pathsToSkip.includes(path)) {
+            continue;
+        }
+
         if (typeof obj === 'object') {
             if (Array.isArray(obj)) {
                 for (let index = 0; index < obj.length; index++) {
@@ -326,7 +332,9 @@ function inferType({
         return type;
     }
 
-    if (typeof obj === 'object') {
+    if (options.pathsToSkip.includes(path)) {
+        type = 'Skip' + customTypes.nextCounter();
+    } else if (typeof obj === 'object') {
         if (Array.isArray(obj)) {
             type = inferArrayItemType({
                 obj,
@@ -380,7 +388,7 @@ function inferType({
     if (type !== DEPTH_LIMIT_REACHED_TYPE_NAME + options.maxDepth.toString()) {
         objectTypeMap.set(obj, type);
 
-        if (hasAdditionalKeys(obj)) {
+        if (!options.pathsToSkip.includes(path) && hasAdditionalKeys(obj)) {
             const objType = inferObjectType({
                 obj: functionObjectMap.get(obj as Function) ?? {},
                 path,

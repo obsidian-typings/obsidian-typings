@@ -114,6 +114,7 @@ function generateTypes(obj: unknown, options: Partial<GenerateTypesOptions> = {}
 interface GenerateTypesOptions {
     maxDepth: number; // default: 1
     obsidianTypesTraverseDepth: number; // default: 0
+    pathsToSkip: string[]; // default: []
 }
 ```
 
