@@ -77,7 +77,7 @@ class CustomTypes {
             }
         }
 
-        const str= Array.from(this.typeDefinitionMap.entries())
+        const str = Array.from(this.typeDefinitionMap.entries())
             .sort(([type1], [type2]) =>
                 (typePathIndexMap.get(type1)?.index ?? 0) - (typePathIndexMap.get(type2)?.index ?? 0)
             )
