@@ -61,6 +61,8 @@ class CustomTypes {
         let index = 0;
         const typePathIndexMap = new Map<string, PathIndex>();
 
+        let rootType = '';
+
         for (const [obj, path] of objectPathDepthMap.entries()) {
             const type = objectTypeMap.get(obj);
             if (!type) {
@@ -68,14 +70,18 @@ class CustomTypes {
             }
             typePathIndexMap.set(type, { path, index });
             index++;
+            if (path === 'root') {
+                rootType = type;
+            }
         }
 
-        return Array.from(this.typeDefinitionMap.entries())
+        const str= Array.from(this.typeDefinitionMap.entries())
             .sort(([type1], [type2]) =>
                 (typePathIndexMap.get(type1)?.index ?? 0) - (typePathIndexMap.get(type2)?.index ?? 0)
             )
             .map(([type, definition]) => `// ${typePathIndexMap.get(type)?.path ?? ''}\ninterface ${type}${definition}`)
             .join('\n\n');
+        return str || rootType;
     }
 
     public set({
