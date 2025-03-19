@@ -47,7 +47,7 @@ declare module 'obsidian' {
         /** @internal Generates `this.files` for specific directory of the vault */
         listRecursive(normalizedPath: string): Promise<void>;
         /** @internal */
-        onFileChange(normalizedPath: string): void;
+        onFileChange(normalizedPath: string | null): void;
         /** @internal */
         reconcileDeletion(normalizedPath: string, normalizedNewPath: string, option: boolean): Promise<void>;
         /** @internal */
