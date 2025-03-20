@@ -33,9 +33,11 @@ declare module 'obsidian' {
         /**
          * Reference to node URL module
          */
-        url: URL;
-        /** @internal */
-        watcher: unknown;
+        url: typeof URL;
+        /**
+         * Seems to always be `null` and unused.
+         */
+        watcher: null;
         /** @internal */
         watchers: DataAdapterWatchersRecord;
 
@@ -45,6 +47,14 @@ declare module 'obsidian' {
          * @internal Apply data write options to file
          */
         applyWriteOptions(normalizedPath: string, options: DataWriteOptions): Promise<void>;
+        /**
+         * Copy a file or directory recursively.
+         *
+         * @param sourcePath - Source path.
+         * @param destinationPath - Destination path.
+         * @returns A promise that resolves when the copy is complete.
+         */
+        copyRecursive(sourcePath: string, destinationPath: string): Promise<void>;
         /**
          * Get base path of vault (OS path)
          */
@@ -80,7 +90,7 @@ declare module 'obsidian' {
         /** @internal Remove listener on specific path */
         stopWatchPath(normalizedPath: string): void;
         /** @internal */
-        thingsHappening(): void;
+        thingsHappening(): Debouncer<[], void>;
         /** @internal Watch recursively for changes */
         watchHiddenRecursive(normalizedPath: string): Promise<void>;
     }

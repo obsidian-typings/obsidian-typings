@@ -25,19 +25,36 @@ declare module 'obsidian' {
         trigger: FileSystemWatchHandler;
 
         /**
-         * Get full path of file (OS path)
+         * Check if a file exists.
          *
-         * @param normalizedPath Path to file
-         * @returns String full path to file
+         * @param fullPath Full path to the file.
+         * @param sensitive Whether to check case-sensitive.
+         * @returns A promise that resolves to `true` if the file exists, `false` otherwise.
          */
-        getFullPath(normalizedPath: string): string;
+        _exists(fullPath: string, sensitive?: boolean): Promise<boolean>;
         /**
-         * Get full path of file (OS path)
+         * Get canonical full path of file.
          *
-         * @param normalizedPath Path to file
-         * @returns String full path to file
+         * @param path Path to file.
+         * @returns Full path to file.
+         */
+        getFullPath(path: string): string;
+        /**
+         * Get canonical full path of file.
+         *
+         * @param normalizedPath Normalized path to file.
+         * @returns String full path to file.
          */
         getFullRealPath(normalizedPath: string): string;
+        /**
+         * Get normalized path.
+         * For vault-relative path, it's normalized vault-relative path.
+         * For absolute path, it's path as is.
+         *
+         * @param path Path to file.
+         * @returns Normalized path.
+         */
+        getRealPath(path: string): string;
         /**
          * @param normalizedPath Path to file
          * @returns String URL of form: app://FILEHASH/path/to/file
@@ -65,7 +82,7 @@ declare module 'obsidian' {
         /** @internal Set whether OS is insensitive to case */
         testInsensitive(): void;
         /** @internal */
-        update(normalizedPath: string): unknown;
+        update(normalizedPath: string): Promise<void>;
         /** @internal Add change watcher to path */
         watch(handler: FileSystemWatchHandler): Promise<void>;
     }

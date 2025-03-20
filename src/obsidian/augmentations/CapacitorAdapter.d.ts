@@ -8,9 +8,7 @@ declare module 'obsidian' {
     interface CapacitorAdapter extends DataAdapter {
         fs: CapacitorAdapterFs;
 
-        _exists(normalizedPath: string, sensitive?: boolean): Promise<boolean>;
         getNativePath(normalizedPath: string): string;
-        getRealPath(normalizedPath: string): string;
         /**
          * @param normalizedPath Path to directory
          * @internal Helper function for `listRecursive` reads children of directory
