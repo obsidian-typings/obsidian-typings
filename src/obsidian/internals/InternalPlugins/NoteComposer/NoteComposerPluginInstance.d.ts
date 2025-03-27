@@ -21,7 +21,7 @@ export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteC
 
     applyTemplate(content: string, fromTitle: string, newTitle: string): Promise<string>;
     extractHeading(file: TFile, editor: Editor): void;
-    getSelectionUnderHeading(file: TFile, editor: Editor, line: number): GetSelectionUnderHeadingResult;
+    getSelectionUnderHeading(file: TFile, editor: Editor, line: number): GetSelectionUnderHeadingResult | null;
     onEditorMenu(menu: Menu, editor: Editor, info: MarkdownView | MarkdownFileInfo): void;
     onExternalSettingsChange(): Promise<void>;
     onFileMenu(menu: Menu, file: TFile, source: string): void;
