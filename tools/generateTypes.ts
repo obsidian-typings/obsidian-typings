@@ -439,16 +439,11 @@ function inferObjectType({
         return builtInType;
     }
 
-    builtInType = builtInPrototypeNameMap.get(proto) ?? '';
-    if (builtInType && builtInType !== 'Object') {
-        return builtInType;
-    }
-
     if (depth > options.maxDepth) {
         return DEPTH_LIMIT_REACHED_TYPE_NAME + options.maxDepth.toString();
     }
 
-    const prefix = obsidianPrototypeNameMap.get(obj) ?? obsidianPrototypeNameMap.get(proto) ?? 'Type';
+    const prefix = obsidianPrototypeNameMap.get(obj) ?? 'Type';
 
     if (prefix !== 'Type' && depth > options.obsidianTypesTraverseDepth) {
         objectTypeMap.set(obj, prefix);
