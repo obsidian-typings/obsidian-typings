@@ -1,3 +1,5 @@
+import type { LinkChangeUpdate } from '../internals/LinkUpdate/LinkChangeUpdate.d.ts';
+import type { LinkUpdate } from '../internals/LinkUpdate/LinkUpdate.d.ts';
 import type { LinkUpdateHandler } from '../internals/LinkUpdate/LinkUpdateHandler.d.ts';
 import type { LinkUpdaters } from '../internals/LinkUpdate/LinkUpdaters.d.ts';
 import type { PositionedReference } from '../internals/PositionedReference.d.ts';
@@ -24,7 +26,7 @@ declare module 'obsidian' {
          */
         vault: Vault;
 
-        canCreateFileWithExt(arg1: unknown): unknown;
+        canCreateFileWithExt(extension: string): boolean;
         /**
          * Creates a new Markdown file in specified location and opens it in a new view
          *
@@ -59,8 +61,13 @@ declare module 'obsidian' {
          * @param path - Path to where the file should be created
          */
         createNewMarkdownFileFromLinktext(filename: string, path: string): Promise<TFile>;
-        /** @internal */
-        getAllLinkResolutions(): unknown[];
+        downloadAttachmentsForNote(file: TFile): Promise<void>;
+        /**
+         * Always returns an empty array
+         *
+         * @internal
+         */
+        getAllLinkResolutions(): [];
         /**
          * Gets the folder that new markdown files should be saved to, based on the current settings
          *
@@ -68,7 +75,7 @@ declare module 'obsidian' {
          *   created in the same folder as the current file
          */
         getMarkdownNewFileParent(path: string): TFolder;
-        insertIntoFile(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
+        insertIntoFile(file: TFile, text: string, position?: 'append' | 'prepend'): Promise<void>;
         /**
          * Iterate over all links in the vault with callback
          *
@@ -87,13 +94,14 @@ declare module 'obsidian' {
         /**
          * Prompt the user to delete a file
          */
-        promptForDeletion(file: TFile): Promise<void>;
-        promptForFileDeletion(arg1: unknown): Promise<unknown>;
+        promptForDeletion(file: TAbstractFile): Promise<void>;
+        promptForFileDeletion(file: TFile): Promise<void>;
         /**
          * Prompt the user to rename a file
          */
         promptForFileRename(file: TFile): Promise<void>;
-        promptForFolderDeletion(arg1: unknown): Promise<unknown>;
+        promptForFolderDeletion(folder: TFolder): Promise<void>;
+        promptForImageDownload(urls: string[]): Promise<undefined | null | Record<string, TFile>>;
         /**
          * @internal
          * Register an extension to be the parent for a specific file type
@@ -119,8 +127,8 @@ declare module 'obsidian' {
         /** @internal : Unregister extension as root input directory for file type */
         unregisterFileCreator(extension: string): void;
         /** @internal */
-        updateAllLinks(links: unknown[]): Promise<void>;
+        updateAllLinks(links: LinkUpdate[]): Promise<void>;
         /** @internal */
-        updateInternalLinks(data: unknown): unknown;
+        updateInternalLinks(data: Map<string, LinkChangeUpdate>): Promise<void>;
     }
 }
