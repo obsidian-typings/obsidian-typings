@@ -82,7 +82,7 @@ declare module 'obsidian' {
          *
          * @remark Does *not* trigger when a particular plugin's settings are changed, for that, you could monkey-patch the `saveSettings` method of a plugin instance
          */
-        on(name: 'config-changed', callback: () => void, ctx?: unknown): EventRef;
+        on(name: 'config-changed', callback: (configKey: string) => void, ctx?: unknown): EventRef;
         /** @internal Triggered whenever a file gets loaded internally */
         on(name: 'raw', callback: (path: string) => void, ctx?: unknown): EventRef;
         /**
