@@ -66,9 +66,9 @@ declare module 'obsidian' {
         /** @internal */
         onFileChange(normalizedPath: string | null): void;
         /** @internal */
-        reconcileDeletion(normalizedPath: string, normalizedNewPath: string, option: boolean): Promise<void>;
+        reconcileDeletion(normalizedPath: string, normalizedNewPath: string, shouldRetryAfterTimeout?: boolean): Promise<void>;
         /** @internal */
-        reconcileFile(normalizedPath: string, normalizedNewPath: string, option: boolean): Promise<void>;
+        reconcileFile(normalizedPath: string, normalizedNewPath: string, shouldRetryAfterTimeout?: boolean): Promise<void>;
         /** @internal */
         reconcileFolderCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
         /** @internal */
