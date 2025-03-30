@@ -65,10 +65,28 @@ declare module 'obsidian' {
         listRecursive(normalizedPath: string): Promise<void>;
         /** @internal */
         onFileChange(normalizedPath: string | null): void;
-        /** @internal */
-        reconcileDeletion(normalizedPath: string, normalizedNewPath: string, shouldRetryAfterTimeout?: boolean): Promise<void>;
-        /** @internal */
-        reconcileFile(normalizedPath: string, normalizedNewPath: string, shouldRetryAfterTimeout?: boolean): Promise<void>;
+        /**
+         * Reconcile a deletion.
+         *
+         * @param normalizedPath Path to file
+         * @param normalizedNewPath New path to file
+         * @param shouldSkipDeletionTimeout Whether the deletion timeout should be skipped (default: `true`)
+         * @returns A promise that resolves when the file is reconciled
+         *
+         * @internal
+         */
+        reconcileDeletion(normalizedPath: string, normalizedNewPath: string, shouldSkipDeletionTimeout?: boolean): Promise<void>;
+        /**
+         * Reconcile a file.
+         *
+         * @param normalizedPath Path to file
+         * @param normalizedNewPath New path to file
+         * @param shouldSkipDeletionTimeout Whether the deletion timeout should be skipped - applies only to {@link reconcileDeletion}
+         * @returns A promise that resolves when the file is reconciled
+         *
+         * @internal
+         */
+        reconcileFile(normalizedPath: string, normalizedNewPath: string, shouldSkipDeletionTimeout?: boolean): Promise<void>;
         /** @internal */
         reconcileFolderCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
         /** @internal */
