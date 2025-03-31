@@ -1,6 +1,6 @@
 /** @public */
 export interface PromisedQueue {
-    promise: Promise<void>;
+    promise: Promise<unknown>;
 
-    queue(next: () => void | Promise<void>): Promise<void>;
+    queue<T>(fn: () => T | Promise<T>): Promise<T>;
 }
