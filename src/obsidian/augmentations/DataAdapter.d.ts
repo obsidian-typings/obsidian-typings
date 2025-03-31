@@ -19,8 +19,6 @@ declare module 'obsidian' {
         handler: FileSystemWatchHandler | null;
         /** @internal */
         insensitive: boolean;
-        /** @internal */
-        promise: Promise<void>;
         /** @internal Triggers handler for vault events */
         trigger: FileSystemWatchHandler;
 
