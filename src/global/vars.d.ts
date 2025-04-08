@@ -1,4 +1,4 @@
-import {
+import type {
     Capacitor as _Capacitor,
     CapacitorPlatforms as _CapacitorPlatforms
 } from '@capacitor/core';

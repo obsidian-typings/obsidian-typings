@@ -88,7 +88,7 @@ Be aware that the typings currently only cover a subset of the full API: while m
 To access types from the `obsidian` module, the import syntax does not change:
 
 ```ts
-import { App } from 'obsidian';
+import type { App } from 'obsidian';
 
 function printInternalPlugins(app: App): void {
   console.log(app.internalPlugins);
@@ -100,7 +100,7 @@ function printInternalPlugins(app: App): void {
 Additional interfaces added by this package (which do not exist in the official API), can be imported using:
 
 ```ts
-import { InternalPlugins } from 'obsidian-typings';
+import type { InternalPlugins } from 'obsidian-typings';
 
 const internalPlugins: InternalPlugins = this.app.internalPlugins;
 ```
