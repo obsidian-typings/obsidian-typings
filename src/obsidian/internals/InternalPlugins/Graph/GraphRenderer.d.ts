@@ -25,6 +25,8 @@ export interface GraphRenderer {
     /** @internal */
     idleFrames: number;
     /** @internal */
+    iframeEl: HTMLIFrameElement;
+    /** @internal */
     interactiveEl: HTMLCanvasElement;
     /** @internal */
     links: GraphLink[];
@@ -58,7 +60,11 @@ export interface GraphRenderer {
      */
     changed(): unknown;
     /** @internal */
+    destroyGraphics(): void;
+    /** @internal */
     getHighlightNode(): GraphNode;
+    /** @internal */
+    initGraphics(): void;
     /** @internal */
     renderCallback(): void;
     /** @internal */
