@@ -1,4 +1,4 @@
-import {
+import type {
     Container,
     Graphics
 } from 'pixi.js';

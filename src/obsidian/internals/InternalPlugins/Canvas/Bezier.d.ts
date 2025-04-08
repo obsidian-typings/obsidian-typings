@@ -1,4 +1,4 @@
-import type { Pointer } from './Pointer.d.ts';
+import type { Pointer } from '../../Pointer.d.ts';
 
 /** @public */
 export interface Bezier {

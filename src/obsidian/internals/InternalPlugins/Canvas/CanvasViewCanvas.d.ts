@@ -3,6 +3,7 @@ import type {
     Debouncer
 } from 'obsidian';
 import type { MapOfSets } from '../../Collections/MapOfSets.d.ts';
+import type { Pointer } from '../../Pointer.d.ts';
 import type { CanvasViewData } from './CanvasData.d.ts';
 import type { CanvasMenu } from './CanvasMenu.d.ts';
 import type { CanvasRectEx } from './CanvasRectEx.d.ts';
@@ -13,7 +14,6 @@ import type { CanvasViewConfig } from './CanvasViewConfig.d.ts';
 import type { CanvasViewHistory } from './CanvasViewHistory.d.ts';
 import type { EdgeIndex } from './EdgeIndex.d.ts';
 import type { NodeInteractionLayer } from './NodeInteractionLayer.d.ts';
-import type { Pointer } from './Pointer.d.ts';
 
 /** @public */
 export interface CanvasViewCanvas {

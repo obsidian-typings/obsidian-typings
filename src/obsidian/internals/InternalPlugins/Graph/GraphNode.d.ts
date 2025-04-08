@@ -1,6 +1,7 @@
-import {
+import type {
     Graphics,
-    Text
+    Text,
+    TextStyle
 } from 'pixi.js';
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
@@ -64,8 +65,18 @@ export interface GraphNode {
      */
     getSize(): number;
     /**
+     * Get the text style of the node.
+     *
+     * @returns The text style of the node.
+     */
+    getTextStyle(): TextStyle;
+    /**
      * Initialize the node, text, listeners, and add them to the scene
      * @internal
      */
     initGraphics(): void;
+    /**
+     * Render the node.
+     */
+    render(): void;
 }
