@@ -79,9 +79,13 @@ declare module 'obsidian' {
          */
         insertBlock(start: string, end: string): void;
         /**
-         * Get the closest character position to the specified coordinates
+         * Get the closest character position to the specified coordinates.
+         *
+         * @param x - The `x` coordinate.
+         * @param y - The `y` coordinate.
+         * @returns The closest character position to the specified coordinates.
          */
-        posAtCoords(coords: CoordsLeftTop): EditorPosition;
+        posAtCoords(x: number, y: number): EditorPosition;
         /**
          * Removes all highlights of specified class
          */
