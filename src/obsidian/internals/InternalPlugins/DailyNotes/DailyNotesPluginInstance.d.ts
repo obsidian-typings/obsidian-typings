@@ -1,4 +1,4 @@
-import type moment from 'moment';
+import type { default as moment } from 'moment';
 import type {
     App,
     TFile
