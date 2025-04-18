@@ -15,7 +15,7 @@ import type {
     request as _request,
     requestUrl as _requestUrl
 } from 'obsidian';
-import type * as pdfjsLib from 'pdfjs-dist';
+import type { default as pdfjsLib } from 'pdfjs-dist';
 import type { default as PIXI } from 'pixi.js';
 import type { default as Prism } from 'prismjs';
 import type { default as scrypt } from 'scrypt-js';
