@@ -74,6 +74,7 @@
         "@microsoft/api-extractor": "^7.52.4",
         "@tsconfig/strictest": "^2.0.5",
         "@types/codemirror": "^5.60.15",
+        "@types/mermaid": "^9.1.0",
         "@types/node": "^18.17.0 || >=20.1.0",
         "@types/prismjs": "^1.26.5",
         "builtin-modules": "^5.0.0",

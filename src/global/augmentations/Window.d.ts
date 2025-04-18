@@ -26,6 +26,7 @@ import type { FrameDom } from '../../obsidian/internals/FrameDom.d.ts';
 import type { Localization } from '../../obsidian/internals/Localization.d.ts';
 import type { MathJax } from '../../obsidian/internals/MathJax/MathJax.d.ts';
 import type { Database } from '../../obsidian/internals/WebSQL/Database.d.ts';
+import type { Mermaid } from 'mermaid';
 
 export {};
 
@@ -81,6 +82,8 @@ declare global {
         i18next: typeof i18next;
         /** @public */
         MathJax?: MathJax;
+        /** @public */
+        mermaid?: Mermaid;
         /**
          * Parse, validate, manipulate, and display dates in javascript.
          * @public
