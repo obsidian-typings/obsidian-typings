@@ -5,9 +5,9 @@ import type { default as Prism } from 'prismjs';
 export {};
 
 declare module 'obsidian' {
-    function loadMermaid(): Promise<Mermaid>;
+    export function loadMermaid(): Promise<Mermaid>;
 
-    function loadPdfJs(): Promise<typeof pdfjsLib>;
+    export function loadPdfJs(): Promise<typeof pdfjsLib>;
 
-    function loadPrism(): Promise<typeof Prism>;
+    export function loadPrism(): Promise<typeof Prism>;
 }
