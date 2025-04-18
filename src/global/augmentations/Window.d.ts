@@ -24,6 +24,7 @@ import type { CapacitorAdapterFsConstructor } from '../../obsidian/internals/Cap
 import type { ElectronWindow } from '../../obsidian/internals/ElectronWindow.d.ts';
 import type { FrameDom } from '../../obsidian/internals/FrameDom.d.ts';
 import type { Localization } from '../../obsidian/internals/Localization.d.ts';
+import type { MathJax } from '../../obsidian/internals/MathJax/MathJax.d.ts';
 import type { Database } from '../../obsidian/internals/WebSQL/Database.d.ts';
 
 export {};
@@ -78,6 +79,8 @@ declare global {
         FS: CapacitorAdapterFsConstructor;
         /** @public */
         i18next: typeof i18next;
+        /** @public */
+        MathJax?: MathJax;
         /**
          * Parse, validate, manipulate, and display dates in javascript.
          * @public
