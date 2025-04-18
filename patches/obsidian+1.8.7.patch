@@ -1,12 +1,12 @@
 diff --git a/node_modules/obsidian/obsidian.d.ts b/node_modules/obsidian/obsidian.d.ts
-index 6b78a9f..e4ca3d2 100644
+index 6b78a9f..a2f7270 100644
 --- a/node_modules/obsidian/obsidian.d.ts
 +++ b/node_modules/obsidian/obsidian.d.ts
 @@ -7,6 +7,9 @@ import { Extension, StateField } from '@codemirror/state';
  import { EditorView, ViewPlugin } from '@codemirror/view';
  import * as CodeMirror from 'codemirror';
  import * as Moment from 'moment';
-+import type { Mermaid } from 'mermaid';
++import type { Mermaid } from 'mermaid' with { 'resolution-mode': 'import' };
 +import type { default as pdfjsLib } from 'pdfjs-dist';
 +import type { default as Prism } from 'prismjs';
  
