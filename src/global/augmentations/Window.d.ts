@@ -107,6 +107,8 @@ declare global {
         OBSIDIAN_DEFAULT_I18N: Localization;
         /** @public */
         PIXI: typeof PIXI;
+        /** @public */
+        Prism?: typeof Prism;
         /**
          * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
          * Returns the text value of the response.
