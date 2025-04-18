@@ -6,6 +6,7 @@ import type { default as CodeMirror } from 'codemirror';
 import type { default as DOMPurify } from 'dompurify';
 import type * as electron from 'electron';
 import type { default as i18next } from 'i18next';
+import type { Mermaid } from 'mermaid';
 import type { default as moment } from 'moment';
 import type {
     App,
@@ -14,6 +15,7 @@ import type {
     request as _request,
     requestUrl as _requestUrl
 } from 'obsidian';
+import type * as pdfjsLib from 'pdfjs-dist';
 import type { default as PIXI } from 'pixi.js';
 import type { default as Prism } from 'prismjs';
 import type { default as scrypt } from 'scrypt-js';
@@ -25,10 +27,8 @@ import type { ElectronWindow } from '../../obsidian/internals/ElectronWindow.d.t
 import type { FrameDom } from '../../obsidian/internals/FrameDom.d.ts';
 import type { Localization } from '../../obsidian/internals/Localization.d.ts';
 import type { MathJax } from '../../obsidian/internals/MathJax/MathJax.d.ts';
-import type { Database } from '../../obsidian/internals/WebSQL/Database.d.ts';
-import type { Mermaid } from 'mermaid';
-import type * as pdfjsLib from 'pdfjs-dist';
 import type { PdfJsTestingUtils } from '../../obsidian/internals/PdfJsTestingUtils.js';
+import type { Database } from '../../obsidian/internals/WebSQL/Database.d.ts';
 
 export {};
 
