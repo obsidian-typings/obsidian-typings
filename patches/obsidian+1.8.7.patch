@@ -1,0 +1,41 @@
+diff --git a/node_modules/obsidian/obsidian.d.ts b/node_modules/obsidian/obsidian.d.ts
+index 6b78a9f..e4ca3d2 100644
+--- a/node_modules/obsidian/obsidian.d.ts
++++ b/node_modules/obsidian/obsidian.d.ts
+@@ -7,6 +7,9 @@ import { Extension, StateField } from '@codemirror/state';
+ import { EditorView, ViewPlugin } from '@codemirror/view';
+ import * as CodeMirror from 'codemirror';
+ import * as Moment from 'moment';
++import type { Mermaid } from 'mermaid';
++import type { default as pdfjsLib } from 'pdfjs-dist';
++import type { default as Prism } from 'prismjs';
+ 
+ declare global {
+     interface ObjectConstructor {
+@@ -2287,7 +2290,7 @@ export function loadMathJax(): Promise<void>;
+  * @see {@link https://mermaid.js.org/ Official Mermaid documentation}
+  * @public
+  */
+-export function loadMermaid(): Promise<any>;
++export function loadMermaid(): Promise<Mermaid>;
+ 
+ /**
+  * Load PDF.js and return a promise to the global pdfjsLib object.
+@@ -2295,7 +2298,7 @@ export function loadMermaid(): Promise<any>;
+  * @see {@link https://mozilla.github.io/pdf.js/ Official PDF.js documentation}
+  * @public
+  */
+-export function loadPdfJs(): Promise<any>;
++export function loadPdfJs(): Promise<typeof pdfjsLib>;
+ 
+ /**
+  * Load Prism.js and return a promise to the global Prism object.
+@@ -2303,7 +2306,7 @@ export function loadPdfJs(): Promise<any>;
+  * @see {@link https://prismjs.com/ Official Prism documentation}
+  * @public
+  */
+-export function loadPrism(): Promise<any>;
++export function loadPrism(): Promise<typeof Prism>;
+ 
+ /**
+  * Location within a Markdown document
