@@ -6,6 +6,8 @@ export {};
 
 declare module 'obsidian' {
     function loadMermaid(): Promise<Mermaid>;
+
     function loadPdfJs(): Promise<typeof pdfjsLib>;
+
     function loadPrism(): Promise<typeof Prism>;
 }
