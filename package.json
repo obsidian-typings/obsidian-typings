@@ -97,7 +97,7 @@
         "build:clean": "bun run scripts/build-clean.ts",
         "build:compile": "tsc --build --force",
         "build:generate-index": "bun run scripts/build-generate-index.ts",
-        "build:bundle-types": "dts-bundle-generator ./src/index.d.ts --out-file ./dist/cjs/types.d.cts --inline-declare-global --inline-declare-externals --sort",
+        "build:bundle-types": "dts-bundle-generator ./src/index.d.ts --out-file ./dist/cjs/types.d.cts --inline-declare-global --inline-declare-externals --sort --no-check",
         "build:fix-bundle-types": "bun run scripts/build-fix-bundle-types.ts",
         "build:implementations": "bun run scripts/build-implementations.ts",
         "build:implementations:generate-types": "tsc --project ./tsconfig.implementations.json",
