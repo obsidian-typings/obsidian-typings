@@ -85,6 +85,7 @@
         "esbuild": "^0.25.2",
         "npm-run-all": "^4.1.5",
         "patch-package": "^8.0.0",
+        "pdfjs-dist": "^5.1.91",
         "scrypt-js": "^3.0.1",
         "ts-morph": "^25.0.1"
     },

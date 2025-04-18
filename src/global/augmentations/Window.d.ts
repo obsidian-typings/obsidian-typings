@@ -27,6 +27,8 @@ import type { Localization } from '../../obsidian/internals/Localization.d.ts';
 import type { MathJax } from '../../obsidian/internals/MathJax/MathJax.d.ts';
 import type { Database } from '../../obsidian/internals/WebSQL/Database.d.ts';
 import type { Mermaid } from 'mermaid';
+import type * as pdfjsLib from 'pdfjs-dist';
+import type { PdfJsTestingUtils } from '../../obsidian/internals/PdfJsTestingUtils.js';
 
 export {};
 
@@ -105,6 +107,10 @@ declare global {
         OBS_ACT: ObsidianProtocolHandler;
         /** @public */
         OBSIDIAN_DEFAULT_I18N: Localization;
+        /** @public */
+        pdfjsLib: typeof pdfjsLib;
+        /** @public */
+        pdfjsTestingUtils: PdfJsTestingUtils;
         /** @public */
         PIXI: typeof PIXI;
         /** @public */
