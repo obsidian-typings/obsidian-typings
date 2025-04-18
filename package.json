@@ -53,13 +53,14 @@
         "url": "https://github.com/Fevol/obsidian-typings/issues"
     },
     "homepage": "https://github.com/Fevol/obsidian-typings#readme",
-    "peerDependencies": {
+    "dependencies": {
         "@capacitor/core": "^6.1.2",
         "@codemirror/search": "^6.5.6",
         "@codemirror/state": "^6.4.1",
         "@pixi/color": "7.2.4",
         "@pixi/events": "7.2.4",
         "@pixi/settings": "7.2.4",
+        "@types/codemirror": "^5.60.15",
         "@types/css-font-loading-module": "^0.0.14",
         "@types/node": ">=14.0.0",
         "@types/prismjs": "^1.26.5",
@@ -78,7 +79,6 @@
     "devDependencies": {
         "@microsoft/api-extractor": "^7.52.4",
         "@tsconfig/strictest": "^2.0.5",
-        "@types/codemirror": "^5.60.15",
         "@types/node": "^18.17.0 || >=20.1.0",
         "builtin-modules": "^5.0.0",
         "cspell": "^8.19.0",
