@@ -2,7 +2,7 @@
 
 import type { App } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface FoldManager {
     app: App;
 

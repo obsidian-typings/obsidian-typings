@@ -1,7 +1,7 @@
 import type { EdgeIndexBase } from './EdgeIndexBase.d.ts';
 import type { EdgeIndexData } from './EdgeIndexData.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface EdgeIndex extends EdgeIndexBase {
     _maxEntries: number;
     _minEntries: number;

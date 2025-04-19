@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export interface CanvasViewCanvasNodeBaseBaseBase {
     isAttached?: unknown;
     isFocused?: unknown;

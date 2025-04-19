@@ -6,7 +6,7 @@ import type {
 import type { InfinityScroll } from './InfinityScroll.d.ts';
 import type { TreeNode } from './TreeNode.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface Tree<T> {
     /**
      * Currently active item in tree view

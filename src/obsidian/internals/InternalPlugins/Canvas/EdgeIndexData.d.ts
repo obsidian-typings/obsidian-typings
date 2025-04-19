@@ -1,6 +1,6 @@
 import type { CanvasViewCanvasEdge } from './CanvasViewCanvasEdge.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface EdgeIndexData {
     children: CanvasViewCanvasEdge[];
     height: number;

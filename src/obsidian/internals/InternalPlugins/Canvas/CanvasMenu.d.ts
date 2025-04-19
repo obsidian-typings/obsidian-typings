@@ -1,7 +1,7 @@
 import type { CanvasSelection } from './CanvasSelection.d.ts';
 import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface CanvasMenu {
     canvas: CanvasViewCanvas;
     containerEl: HTMLDivElement;

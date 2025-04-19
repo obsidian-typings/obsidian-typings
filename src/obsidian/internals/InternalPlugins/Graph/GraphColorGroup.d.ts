@@ -1,6 +1,6 @@
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export class GraphColorGroup {
     color: GraphColorAttributes;
     query: string;

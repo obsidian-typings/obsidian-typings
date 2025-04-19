@@ -1,4 +1,4 @@
 import type { InternalPluginNameType } from './InternalPluginNameType.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface InternalPluginsConfigRecord extends Record<InternalPluginNameType, boolean> {}

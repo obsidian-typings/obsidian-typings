@@ -1,2 +1,2 @@
-/** @public */
+/** @public @unofficial */
 export interface CanvasConnection {}

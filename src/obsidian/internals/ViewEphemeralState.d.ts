@@ -1,6 +1,6 @@
 import type { EditorRangeOrCaret } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface ViewEphemeralState {
     cursor?: EditorRangeOrCaret;
     focus: boolean;

@@ -1,6 +1,6 @@
 import type { EditorPosition } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface ClickableToken {
     end: EditorPosition;
     start: EditorPosition;

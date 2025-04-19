@@ -1,6 +1,6 @@
 import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface NodeInteractionLayer {
     canvas: CanvasViewCanvas;
     interactionEl: HTMLDivElement;

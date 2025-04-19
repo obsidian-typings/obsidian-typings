@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export interface CanvasViewDataNode {
     file: string;
     height: number;

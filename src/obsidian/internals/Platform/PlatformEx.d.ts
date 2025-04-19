@@ -1,7 +1,7 @@
 import type { PlatformType } from './PlatformType.d.ts';
 
 /**
- * @public
+ * @public @unofficial
  *
  * Due to limitations of TypeScript, we cannot extend the Platform constant directly.
  * @example

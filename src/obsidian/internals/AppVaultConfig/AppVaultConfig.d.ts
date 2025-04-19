@@ -1,7 +1,7 @@
 import type { AppVaultConfigHotkeysRecord } from './AppVaultConfigHotkeysRecord.d.ts';
 import type { PdfExportSettings } from './PdfExportSettings.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface AppVaultConfig {
     /**
      * Appearance \> Accent color

@@ -7,7 +7,7 @@ import type { TFileConstructor } from '../../internals/Constructors/TFileConstru
  * Get the TFile constructor.
  *
  * @returns The TFile constructor.
- * @public
+ * @public @unofficial
  */
 export function getTFileConstructor(): TFileConstructor {
     return TFile as TFileConstructor;

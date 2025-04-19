@@ -1,4 +1,4 @@
 import type { Platform } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export type PlatformType = typeof Platform;

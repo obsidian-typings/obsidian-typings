@@ -1,5 +1,5 @@
 import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { FileRecoveryPluginInstance } from './FileRecoveryPluginInstance.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface FileRecoveryPlugin extends InternalPlugin<FileRecoveryPluginInstance> {}

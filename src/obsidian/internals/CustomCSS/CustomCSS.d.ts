@@ -11,7 +11,7 @@ import type { DownloadLegacyThemeOptions } from './DownloadLegacyThemeOptions.d.
 import type { InstallThemeOptions } from './InstallThemeOptions.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public */
+/** @public @unofficial */
 export interface CustomCSS extends Component {
     /**
      * Reference to App

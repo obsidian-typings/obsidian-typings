@@ -2,7 +2,7 @@ import type { ItemView } from 'obsidian';
 import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public */
+/** @public @unofficial */
 export interface AllPropertiesView extends ItemView {
     /**
      * Try to rename the file

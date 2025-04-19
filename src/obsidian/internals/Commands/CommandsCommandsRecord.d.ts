@@ -1,4 +1,4 @@
 import type { Command } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface CommandsCommandsRecord extends Record<string, Command> {}

@@ -2,7 +2,7 @@ import type { WorkspaceLeaf } from 'obsidian';
 import type { HoverLinkEventState } from './HoverLinkEventState.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public */
+/** @public @unofficial */
 export interface HoverLinkEvent {
     event: MouseEvent;
     hoverParent: WorkspaceLeaf;

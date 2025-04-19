@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export interface ThemeManifest {
     /**
      * Name of the author of the theme

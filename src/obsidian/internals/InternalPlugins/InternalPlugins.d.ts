@@ -10,7 +10,7 @@ import type { InternalPluginNamePluginsMapping } from './InternalPluginNamePlugi
 import type { InternalPluginNameType } from './InternalPluginNameType.d.ts';
 import type { InternalPluginsConfigRecord } from './InternalPluginsConfigRecord.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface InternalPlugins extends Events {
     /**
      * Reference to App

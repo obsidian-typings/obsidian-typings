@@ -1,6 +1,6 @@
 import type { CanvasViewCanvasNodeBaseBase } from './CanvasViewCanvasNodeBaseBase.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface CanvasViewCanvasNodeBase extends CanvasViewCanvasNodeBaseBase {
     blur(): unknown;
     destroy(): unknown;

@@ -2,7 +2,7 @@ import type { ItemView } from 'obsidian';
 import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public */
+/** @public @unofficial */
 export interface BrowserHistoryView extends ItemView {
     /**
      * Get the current view type

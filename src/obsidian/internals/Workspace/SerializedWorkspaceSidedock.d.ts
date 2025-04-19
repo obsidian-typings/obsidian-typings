@@ -1,6 +1,6 @@
 import type { SerializedWorkspaceItem } from './SerializedWorkspaceItem.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface SerializedWorkspaceSidedock extends SerializedWorkspaceItem {
     collapsed: boolean;
     width: number;

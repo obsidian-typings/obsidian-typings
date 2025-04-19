@@ -1,6 +1,6 @@
 import type { EditorRange } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface StateHistoryEphemeralState {
     cursor: EditorRange;
     scroll: number;

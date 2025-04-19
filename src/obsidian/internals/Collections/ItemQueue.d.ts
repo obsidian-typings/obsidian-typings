@@ -1,7 +1,7 @@
 import type { Runnable } from '../Runnable.d.ts';
 import type { ItemQueueItems } from './ItemQueueItems.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface ItemQueue<T> {
     items: ItemQueueItems<T>;
     promise: PromiseWithResolvers<T> | null;

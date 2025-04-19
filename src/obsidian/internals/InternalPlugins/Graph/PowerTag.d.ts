@@ -7,7 +7,7 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
 /**
  * Power tag.
  *
- * @public
+ * @public @unofficial
  */
 export interface PowerTag {
     rendered: boolean;

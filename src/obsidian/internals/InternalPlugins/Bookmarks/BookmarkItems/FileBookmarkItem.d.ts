@@ -1,6 +1,6 @@
 import type { BookmarkItem } from './BookmarkItem.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface FileBookmarkItem extends BookmarkItem {
     path: string;
     subpath: string;

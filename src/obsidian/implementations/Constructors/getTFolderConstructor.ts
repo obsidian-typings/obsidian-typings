@@ -7,7 +7,7 @@ import type { TFolderConstructor } from '../../internals/Constructors/TFolderCon
  * Get the TFolder constructor.
  *
  * @returns The TFolder constructor.
- * @public
+ * @public @unofficial
  */
 export function getTFolderConstructor(): TFolderConstructor {
     return TFolder as TFolderConstructor;

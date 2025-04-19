@@ -1,6 +1,6 @@
 import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface CodeMirrorAdapterExCommands {
     cursorCharLeft(editor: CodeMirrorEditor): void;
     indentAuto(editor: CodeMirrorEditor): void;

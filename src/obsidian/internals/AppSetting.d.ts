@@ -5,7 +5,7 @@ import type {
 } from 'obsidian';
 import type { HotkeysSettingTab } from './HotkeysSettingTab.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface AppSetting extends Modal {
     /**
      * Current active tab of the settings modal

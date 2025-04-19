@@ -9,7 +9,7 @@ import { isReferenceCache } from './isReferenceCache.ts';
  *
  * @param reference - The reference to check.
  * @returns Whether the reference is a link cache.
- * @public
+ * @public @unofficial
  */
 export function isLinkCache(reference: Reference): reference is LinkCache {
     return isReferenceCache(reference) && reference.original[0] !== '!';

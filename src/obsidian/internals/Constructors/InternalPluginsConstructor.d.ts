@@ -5,6 +5,6 @@ import type { ConstructorBase } from './ConstructorBase.d.ts';
 /**
  * The InternalPlugins constructor.
  *
- * @public
+ * @public @unofficial
  */
 export interface InternalPluginsConstructor extends ConstructorBase<[app: App], InternalPlugins> {}

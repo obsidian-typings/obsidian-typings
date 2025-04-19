@@ -3,7 +3,7 @@ import type {
     MarkdownPreviewView
 } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface MarkdownViewModes {
     preview: MarkdownPreviewView;
     source: MarkdownEditView;

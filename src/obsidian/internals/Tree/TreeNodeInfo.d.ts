@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export interface TreeNodeInfo {
     childLeft: number;
     childLeftPadding: number;

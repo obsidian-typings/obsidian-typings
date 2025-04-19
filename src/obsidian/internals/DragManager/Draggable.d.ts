@@ -1,6 +1,6 @@
 import type { TAbstractFile } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface Draggable {
     file?: TAbstractFile;
     files?: TAbstractFile[];

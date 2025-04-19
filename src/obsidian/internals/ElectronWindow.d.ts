@@ -1,6 +1,6 @@
 import type { BrowserWindow } from 'electron';
 
-/** @public */
+/** @public @unofficial */
 export interface ElectronWindow extends BrowserWindow {
     _browserViews: unknown;
     _events: unknown;

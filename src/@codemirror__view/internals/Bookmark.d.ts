@@ -2,7 +2,7 @@ import type { ChangeDesc } from '@codemirror/state';
 import type { EditorPosition } from 'obsidian';
 import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface Bookmark {
     assoc: number;
     cm: CodeMirrorEditor;

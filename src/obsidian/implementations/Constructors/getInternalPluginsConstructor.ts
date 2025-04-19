@@ -6,7 +6,7 @@ import type { InternalPluginsConstructor } from '../../internals/Constructors/In
  *
  * @param app - The app instance.
  * @returns The InternalPlugins constructor.
- * @public
+ * @public @unofficial
  */
 export function getInternalPluginsConstructor(app: App): InternalPluginsConstructor {
     return app.internalPlugins.constructor as InternalPluginsConstructor;

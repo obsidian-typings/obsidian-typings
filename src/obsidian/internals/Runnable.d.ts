@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-/** @public */
+/** @public @unofficial */
 export interface Runnable {
     cancelled: boolean;
     onCancel: null | (() => void);

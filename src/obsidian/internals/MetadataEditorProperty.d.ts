@@ -7,7 +7,7 @@ import type { MetadataEditorPropertyTypeInfo } from './MetadataEditorPropertyTyp
 import type { MetadataWidget } from './MetadataWidget.d.ts';
 import type { PropertyEntryData } from './PropertyEntryData.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface MetadataEditorProperty extends Component {
     /**
      * Reference to the app

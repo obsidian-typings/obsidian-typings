@@ -1,6 +1,6 @@
 import type { ChangeDesc } from '@codemirror/state';
 
-/** @public */
+/** @public @unofficial */
 export interface LineHandleChange {
     changes: ChangeDesc;
 }

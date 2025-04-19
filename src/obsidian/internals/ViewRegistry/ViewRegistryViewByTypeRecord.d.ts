@@ -5,10 +5,10 @@ import type { TypedViewCreator } from '../Views/TypedViewCreator.d.ts';
 import type { ViewTypeType } from '../Views/ViewTypeType.d.ts';
 import type { ViewTypeViewMapping } from '../Views/ViewTypeViewMapping.d.ts';
 
-/** @public */
+/** @public @unofficial */
 type Mapping = {
     [TViewType in ViewTypeType]: TypedViewCreator<ViewTypeViewMapping[TViewType]>;
 };
-/** @public */
+/** @public @unofficial */
 export interface ViewRegistryViewByTypeRecord extends Record<string, ViewCreator>, Mapping {
 }

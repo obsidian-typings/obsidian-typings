@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-/** @public */
+/** @public @unofficial */
 export interface WindowSelection {
     focusEl: HTMLElement;
     range: Range;

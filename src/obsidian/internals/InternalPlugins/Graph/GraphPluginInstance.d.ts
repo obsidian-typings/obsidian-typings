@@ -8,7 +8,7 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { GraphPlugin } from './GraphPlugin.d.ts';
 import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin> {
     app: App;
     defaultOn: true;

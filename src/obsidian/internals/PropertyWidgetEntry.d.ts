@@ -1,6 +1,6 @@
 import type { PropertyWidgetType } from './PropertyWidgetType.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface PropertyWidgetEntry {
     name: string;
     type: PropertyWidgetType;

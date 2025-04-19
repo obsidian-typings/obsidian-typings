@@ -3,7 +3,7 @@
 import type { VimStateVim } from './VimStateVim.d.ts';
 import type { VimStateVimPlugin } from './VimStateVimPlugin.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface VimState {
     vim: VimStateVim;
     vimPlugin: VimStateVimPlugin;

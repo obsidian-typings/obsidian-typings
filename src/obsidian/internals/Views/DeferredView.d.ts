@@ -1,5 +1,5 @@
 import type { View } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface DeferredView extends View {
 }

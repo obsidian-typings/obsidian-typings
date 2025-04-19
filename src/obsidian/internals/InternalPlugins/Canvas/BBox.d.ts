@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export interface BBox {
     maxX: number;
     maxY: number;

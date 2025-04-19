@@ -1,7 +1,7 @@
 import type { FileExtension } from '../../implementations/Constants/FileExtension.ts';
 import type { ViewType } from '../../implementations/Constants/ViewType.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface ViewRegistryTypeByExtensionRecord extends Record<string, string> {
     [FileExtension._3gp]: typeof ViewType.Audio;
     [FileExtension.avif]: typeof ViewType.Image;

@@ -1,6 +1,6 @@
 import type { ReferenceCache } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface LinkChangeUpdate {
     change: string;
     reference: ReferenceCache;

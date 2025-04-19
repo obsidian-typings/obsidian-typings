@@ -8,7 +8,7 @@ import type {
  *
  * @param reference - The reference to check.
  * @returns Whether the reference is a reference cache.
- * @public
+ * @public @unofficial
  */
 export function isReferenceCache(reference: Reference): reference is ReferenceCache {
     return !!(reference as Partial<ReferenceCache>).position;

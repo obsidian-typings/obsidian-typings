@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface HeaderDom {
     app: App;
     navButtonsEl: HTMLDivElement;

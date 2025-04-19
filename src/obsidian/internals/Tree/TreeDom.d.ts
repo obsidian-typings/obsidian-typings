@@ -9,7 +9,7 @@ import type { ResultDomResult } from './ResultDomResult.d.ts';
 import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface TreeDom {
     app: App;
     changed: Debouncer<[], unknown>;

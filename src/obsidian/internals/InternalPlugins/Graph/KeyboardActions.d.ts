@@ -1,7 +1,7 @@
 /**
  * Keyboard actions.
  *
- * @public
+ * @public @unofficial
  */
 export interface KeyboardActions {
     down?: boolean;

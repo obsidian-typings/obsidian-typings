@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface InternalPluginInstance<InternalPlugin> {
     description: string;
     id: string;

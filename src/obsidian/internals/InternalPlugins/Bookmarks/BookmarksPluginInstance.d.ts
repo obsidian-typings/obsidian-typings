@@ -20,7 +20,7 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { BookmarkItem } from './BookmarkItems/BookmarkItem.d.ts';
 import type { BookmarksPlugin } from './BookmarksPlugin.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface BookmarksPluginInstance extends InternalPluginInstance<BookmarksPlugin>, Events {
     app: App;
     bookmarkedViews: WeakMap<View, HTMLElement>;

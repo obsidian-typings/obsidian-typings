@@ -1,5 +1,5 @@
 /** @todo Documentation incomplete */
-/** @public */
+/** @public @unofficial */
 export interface ImportedAttachments {
     data: Promise<ArrayBuffer>;
     extension: string;

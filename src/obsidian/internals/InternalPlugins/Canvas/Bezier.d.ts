@@ -1,6 +1,6 @@
 import type { Pointer } from '../../Pointer.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface Bezier {
     cp1: Pointer;
     cp2: Pointer;

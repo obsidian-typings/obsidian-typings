@@ -15,7 +15,7 @@ import type { CanvasViewHistory } from './CanvasViewHistory.d.ts';
 import type { EdgeIndex } from './EdgeIndex.d.ts';
 import type { NodeInteractionLayer } from './NodeInteractionLayer.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface CanvasViewCanvas {
     app: App;
     backgroundPatternEl: SVGPatternElement;

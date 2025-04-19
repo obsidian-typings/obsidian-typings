@@ -3,7 +3,7 @@ import type {
     TextComponent
 } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface GraphColorGroupOptionsGroup {
     color: ColorComponent;
     el: HTMLDivElement;

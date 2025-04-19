@@ -2,7 +2,7 @@ import type { App } from 'obsidian';
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { EditorStatusPlugin } from './EditorStatusPlugin.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface EditorStatusPluginInstance extends InternalPluginInstance<EditorStatusPlugin> {
     app: App;
     defaultOn: true;

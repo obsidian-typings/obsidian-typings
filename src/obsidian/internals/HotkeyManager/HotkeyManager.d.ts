@@ -6,7 +6,7 @@ import type {
 import type { HotkeyManagerCustomKeysRecord } from './HotkeyManagerCustomKeysRecord.d.ts';
 import type { HotkeyManagerDefaultKeysRecord } from './HotkeyManagerDefaultKeysRecord.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface HotkeyManager {
     /**
      * Reference to App

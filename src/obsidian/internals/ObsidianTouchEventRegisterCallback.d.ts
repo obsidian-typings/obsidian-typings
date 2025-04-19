@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export interface ObsidianTouchEventRegisterCallback {
     cancel(): void;
     finish(x: number, y: number, z: number): void;

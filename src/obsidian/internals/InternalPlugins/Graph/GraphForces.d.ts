@@ -1,7 +1,7 @@
 /**
  * Graph forces.
  *
- * @public
+ * @public @unofficial
  */
 export interface GraphForces {
     centerStrength?: number;

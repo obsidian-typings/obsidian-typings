@@ -12,7 +12,7 @@ import type { FileExplorerViewFileItemsRecord } from './FileExplorerViewFileItem
 import type { FileTreeItem } from './FileTreeItem.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public */
+/** @public @unofficial */
 export interface FileExplorerView extends View {
     /**
      * Mapping of file path to tree item

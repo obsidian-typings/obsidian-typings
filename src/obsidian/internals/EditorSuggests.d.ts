@@ -4,7 +4,7 @@ import type {
 } from 'obsidian';
 import type { MarkdownBaseView } from './MarkdownBaseView.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface EditorSuggests {
     /**
      * Currently active and rendered editor suggestion popup

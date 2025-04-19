@@ -1,7 +1,7 @@
 import type { App } from 'obsidian';
 import type { SharedFile } from './SharedFile.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface ShareReceiver {
     app: App;
 

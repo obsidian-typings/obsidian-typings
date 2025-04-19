@@ -1,4 +1,4 @@
 import type { KeymapInfo } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface HotkeyManagerCustomKeysRecord extends Record<string, KeymapInfo[]> {}

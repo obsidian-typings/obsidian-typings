@@ -1,6 +1,6 @@
 import type { GraphColorGroup } from './GraphColorGroup.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface GraphPluginInstanceOptions {
     'collapse-color-groups'?: boolean;
     'collapse-display'?: boolean;

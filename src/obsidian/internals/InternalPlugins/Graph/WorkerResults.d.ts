@@ -1,7 +1,7 @@
 /**
  * Worker results.
  *
- * @public
+ * @public @unofficial
  */
 export interface WorkerResults {
     buffer: SharedArrayBuffer;

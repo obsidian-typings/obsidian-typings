@@ -7,7 +7,7 @@ import type {
 import type { MetadataEditorProperty } from './MetadataEditorProperty.d.ts';
 import type { PropertyEntryData } from './PropertyEntryData.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface MetadataEditor extends Component {
     /**
      * Button element for adding a new property

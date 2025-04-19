@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export interface PdfExportSettings {
     /**
      * Default: 100

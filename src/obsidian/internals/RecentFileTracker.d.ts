@@ -5,7 +5,7 @@ import type {
 } from 'obsidian';
 import type { GetRecentFilesOptions } from './GetRecentFilesOptions.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface RecentFileTracker {
     /**
      * List of last opened file paths, limited to 50

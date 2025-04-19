@@ -8,7 +8,7 @@ import type { ViewTypeViewConstructorMapping } from '../../internals/Views/ViewT
  * @param app - The app.
  * @param viewType - The view type.
  * @returns The view constructor.
- * @public
+ * @public @unofficial
  */
 export function getViewConstructorByViewType<TViewType extends ViewTypeType>(
     app: App,

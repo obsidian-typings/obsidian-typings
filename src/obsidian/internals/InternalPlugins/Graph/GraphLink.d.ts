@@ -5,7 +5,7 @@ import type {
 import type { GraphNode } from './GraphNode.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface GraphLink {
     /** @internal */
     arrow: Graphics | null;

@@ -7,7 +7,7 @@ import type { CanvasPluginInstance } from './CanvasPluginInstance.d.ts';
 import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public */
+/** @public @unofficial */
 export interface CanvasView extends TextFileView {
     canvas: CanvasViewCanvas;
     hoverPopover: null | HoverPopover;

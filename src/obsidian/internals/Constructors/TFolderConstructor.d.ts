@@ -7,6 +7,6 @@ import type { ConstructorBase } from './ConstructorBase.d.ts';
 /**
  * The TFolder constructor.
  *
- * @public
+ * @public @unofficial
  */
 export interface TFolderConstructor extends ConstructorBase<[vault: Vault, path: string], TFolder> {}

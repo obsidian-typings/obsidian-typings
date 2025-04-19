@@ -1,5 +1,5 @@
 import type { TypedViewConstructor } from '../Views/TypedViewConstructor.d.ts';
 import type { AudioView } from './AudioView.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface AudioViewConstructor extends TypedViewConstructor<AudioView> {}

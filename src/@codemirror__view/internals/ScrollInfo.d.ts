@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export interface ScrollInfo {
     clientHeight: number;
     clientWidth: number;

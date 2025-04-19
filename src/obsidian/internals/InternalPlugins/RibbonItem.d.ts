@@ -1,6 +1,6 @@
 import type { IconName } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface RibbonItem {
     hidden: boolean;
     icon: IconName;

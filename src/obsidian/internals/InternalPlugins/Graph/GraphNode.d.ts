@@ -6,7 +6,7 @@ import type {
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface GraphNode {
     /** @internal */
     circle: Graphics | null;

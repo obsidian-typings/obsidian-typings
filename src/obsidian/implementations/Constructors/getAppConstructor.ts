@@ -7,7 +7,7 @@ import type { AppConstructor } from '../../internals/Constructors/AppConstructor
  * Get the App constructor.
  *
  * @returns The App constructor.
- * @public
+ * @public @unofficial
  */
 export function getAppConstructor(): AppConstructor {
     return App as AppConstructor;

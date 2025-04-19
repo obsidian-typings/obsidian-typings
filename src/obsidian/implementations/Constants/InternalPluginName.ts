@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export const InternalPluginName = {
     /**
      * Plugin name in UI: Audio recorder

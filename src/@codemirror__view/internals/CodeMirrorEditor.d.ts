@@ -17,7 +17,7 @@ import type { ScrollInfo } from './ScrollInfo.d.ts';
 import type { SetBookmarkOptions } from './SetBookmarkOptions.d.ts';
 import type { SetSelectionOptions } from './SetSelectionOptions.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface CodeMirrorEditor {
     $lineHandleChanges: LineHandleChange[] | undefined;
 

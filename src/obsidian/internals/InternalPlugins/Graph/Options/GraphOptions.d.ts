@@ -1,6 +1,6 @@
 import type { TreeItem } from '../../../Tree/TreeItem.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface GraphOptions extends TreeItem<unknown> {
     /** @internal */
     getOptions(e: unknown): unknown;

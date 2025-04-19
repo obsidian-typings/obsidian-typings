@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export interface InstallThemeOptions {
     author: string;
     name: string;

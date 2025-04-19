@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export interface ItemQueueItems<T> {
     length: number;
     offset: number;

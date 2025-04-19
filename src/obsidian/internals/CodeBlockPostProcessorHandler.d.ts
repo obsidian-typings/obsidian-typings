@@ -1,7 +1,7 @@
 import type { MarkdownPostProcessorContext } from 'obsidian';
 
 /**
- * @public
+ * @public @unofficial
  *
  * Handler function for post processing a code block
  */

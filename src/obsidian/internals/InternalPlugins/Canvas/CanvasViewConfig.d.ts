@@ -1,6 +1,6 @@
 import type { Dimensions } from './Dimensions.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface CanvasViewConfig {
     defaultFileNodeDimensions: Dimensions;
     defaultTextNodeDimensions: Dimensions;

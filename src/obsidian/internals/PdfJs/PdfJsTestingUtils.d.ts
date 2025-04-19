@@ -1,6 +1,6 @@
 import type { HighlightOutliner } from './HighlightOutliner.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface PdfJsTestingUtils {
     HighlightOutliner: HighlightOutliner;
 }

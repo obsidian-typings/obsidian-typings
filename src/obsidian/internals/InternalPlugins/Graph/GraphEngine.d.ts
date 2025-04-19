@@ -10,7 +10,7 @@ import type { GraphDisplayOptions } from './Options/GraphDisplayOptions.d.ts';
 import type { GraphFilterOptions } from './Options/GraphFilterOptions.d.ts';
 import type { GraphForceOptions } from './Options/GraphForceOptions.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface GraphEngine {
     /** @internal */
     app: App;

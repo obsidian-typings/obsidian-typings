@@ -9,7 +9,7 @@ import type { ViewTypeViewMapping } from '../Views/ViewTypeViewMapping.d.ts';
 import type { ViewRegistryTypeByExtensionRecord } from './ViewRegistryTypeByExtensionRecord.d.ts';
 import type { ViewRegistryViewByTypeRecord } from './ViewRegistryViewByTypeRecord.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface ViewRegistry extends Events {
     /**
      * Mapping of file extensions to view type

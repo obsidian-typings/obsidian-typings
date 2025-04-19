@@ -1,4 +1,4 @@
 import type { TAbstractFile } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface VaultFileMapRecord extends Record<string, TAbstractFile> {}

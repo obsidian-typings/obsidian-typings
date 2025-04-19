@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export interface Dimensions {
     height: number;
     width: number;

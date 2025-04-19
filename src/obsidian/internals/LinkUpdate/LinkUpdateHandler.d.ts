@@ -1,4 +1,4 @@
 import type { LinkUpdate } from './LinkUpdate.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export type LinkUpdateHandler = (link: LinkUpdate) => void | Promise<void>;

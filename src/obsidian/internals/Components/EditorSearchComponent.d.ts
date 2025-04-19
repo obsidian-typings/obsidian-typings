@@ -5,7 +5,7 @@ import type {
 import type { SearchCursor } from '../SearchCursor.d.ts';
 import type { AbstractSearchComponent } from './AbstractSearchComponent.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface EditorSearchComponent extends AbstractSearchComponent {
     /**
      * Search cursor for editor, handles search and replace functionality for editor

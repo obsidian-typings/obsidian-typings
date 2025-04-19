@@ -7,6 +7,6 @@ import type { ConstructorBase } from './ConstructorBase.d.ts';
 /**
  * The TFile constructor.
  *
- * @public
+ * @public @unofficial
  */
 export interface TFileConstructor extends ConstructorBase<[vault: Vault, path: string], TFile> {}

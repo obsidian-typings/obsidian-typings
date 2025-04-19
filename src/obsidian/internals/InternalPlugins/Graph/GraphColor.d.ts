@@ -1,4 +1,4 @@
-/** @public */
+/** @public @unofficial */
 export type GraphColor =
     | 'arrow'
     | 'circle'

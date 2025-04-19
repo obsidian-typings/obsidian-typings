@@ -1,6 +1,6 @@
 import type { CanvasViewData } from './CanvasData.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface CanvasViewHistory {
     current: number;
     data: CanvasViewData[];

@@ -1,6 +1,6 @@
 import type { EditorRangeEx } from './EditorRangeEx.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface EnclosingTag {
     close: EditorRangeEx;
     open: EditorRangeEx;

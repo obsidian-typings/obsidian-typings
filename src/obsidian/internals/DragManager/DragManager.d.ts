@@ -9,7 +9,7 @@ import type { DragStartEvent } from './DragStartEvent.d.ts';
 import type { DropResult } from './DropResult.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public */
+/** @public @unofficial */
 export interface DragManager {
     actionEl: HTMLElement | null;
     app: App;

@@ -5,7 +5,7 @@ import type {
 import type { CommandsCommandsRecord } from './CommandsCommandsRecord.d.ts';
 import type { CommandsEditorCommandsRecord } from './CommandsEditorCommandsRecord.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface Commands {
     /**
      * Reference to App

@@ -5,7 +5,7 @@ import type { CanvasViewCanvasEdgeLineEnd } from './CanvasViewCanvasEdgeLineEnd.
 import type { CanvasViewCanvasEdgeLink } from './CanvasViewCanvasEdgeLink.d.ts';
 import type { CanvasViewCanvasEdgePath } from './CanvasViewCanvasEdgePath.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface CanvasViewCanvasEdge {
     bbox: BBox;
     bezier: Bezier;

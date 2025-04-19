@@ -3,7 +3,7 @@ import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
 import type { BacklinkComponent } from './BacklinkComponent.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public */
+/** @public @unofficial */
 export interface BacklinkView extends InfoFileView {
     backlink: BacklinkComponent;
 

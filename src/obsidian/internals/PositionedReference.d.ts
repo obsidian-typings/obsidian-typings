@@ -3,6 +3,6 @@ import type {
     Reference
 } from 'obsidian';
 
-/** @public */
+/** @public @unofficial */
 export interface PositionedReference extends Reference, CacheItem {
 }

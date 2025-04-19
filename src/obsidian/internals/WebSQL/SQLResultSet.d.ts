@@ -1,6 +1,6 @@
 import type { SQLResultSetRowList } from './SQLResultSetRowList.d.ts';
 
-/** @public */
+/** @public @unofficial */
 export interface SQLResultSet {
     insertId: number;
     rows: SQLResultSetRowList;
