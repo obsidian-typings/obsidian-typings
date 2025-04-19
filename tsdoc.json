@@ -15,11 +15,21 @@
         {
             "tagName": "@tutorial",
             "syntaxKind": "block"
+        },
+        {
+            "tagName": "@official",
+            "syntaxKind": "block"
+        },
+        {
+            "tagName": "@unofficial",
+            "syntaxKind": "block"
         }
     ],
     "supportForTags": {
         "@remark": true,
         "@todo": true,
-        "@tutorial": true
+        "@tutorial": true,
+        "@official": true,
+        "@unofficial": true
     }
 }
