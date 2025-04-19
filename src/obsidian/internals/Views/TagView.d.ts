@@ -7,7 +7,7 @@ export interface TagView extends View {
     /** @todo Documentation incomplete */
     getNodeId(e: unknown): unknown;
     /**
-     * Get the current view type
+     * Get the current view type.
      */
     getViewType(): typeof ViewType.Tag;
     /** @todo Documentation incomplete */
@@ -19,7 +19,7 @@ export interface TagView extends View {
     /** @todo Documentation incomplete */
     setUseHierarchy(e: unknown): void;
     /**
-     * Reloads all tags from vault, update all items and sort those
+     * Reloads all tags from vault, update all items and sort those.
      */
     updateTags(): void;
 }

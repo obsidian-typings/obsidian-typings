@@ -5,34 +5,34 @@ import type { MarkdownScrollableEditView } from './MarkdownScrollableEditView.d.
 /** @public @unofficial */
 export interface IFramedMarkdownEditor extends MarkdownScrollableEditView {
     /**
-     * Function that cleans up the iframe and listeners
+     * Function that cleans up the iframe and listeners.
      */
     cleanup: null | (() => void);
     /**
-     * Element where the editor is embedded into
+     * Element where the editor is embedded into.
      */
     iframeEl: null | HTMLIFrameElement;
 
     /**
-     * Executes cleanup function if exists
+     * Executes cleanup function if exists.
      */
     cleanupIframe(): void;
     /**
-     * Constructs extensions for the editor based on user settings
+     * Constructs extensions for the editor based on user settings.
      *
-     * @remark Creates extension for overriding escape keymap to showPreview
+     * @remark Creates extension for overriding escape keymap to showPreview.
      */
     getDynamicExtensions(): Extension[];
     /**
-     * Loads the iframe element and prepare cleanup function
+     * Loads the iframe element and prepare cleanup function.
      */
     onIframeLoad(): void;
     /**
-     * Execute cleanup of the iframe
+     * Execute cleanup of the iframe.
      */
     onunload(): void;
     /**
-     * Execute functionality on CM editor state update
+     * Execute functionality on CM editor state update.
      */
     onUpdate(update: ViewUpdate, changed: boolean): void;
 }

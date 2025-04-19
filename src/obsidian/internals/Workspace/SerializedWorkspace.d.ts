@@ -4,27 +4,27 @@ import type { SerializedWorkspaceLeftRibbon } from './SerializedWorkspaceLeftRib
 /** @public @unofficial */
 export interface SerializedWorkspace {
     /**
-     * Last active leaf
+     * Last active leaf.
      */
     active: string;
     /**
-     * Last opened files
+     * Last opened files.
      */
     lastOpenFiles: string[];
     /**
-     * Left opened leaf
+     * Left opened leaf.
      */
     left: LeafEntry;
     /**
-     * Left ribbon
+     * Left ribbon.
      */
     leftRibbon: SerializedWorkspaceLeftRibbon;
     /**
-     * Main (center) workspace leaf
+     * Main (center) workspace leaf.
      */
     main: LeafEntry;
     /**
-     * Right opened leaf
+     * Right opened leaf.
      */
     right: LeafEntry;
 }

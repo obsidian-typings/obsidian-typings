@@ -8,19 +8,19 @@ export interface ShareReceiver {
     /**
      * Handles shared files.
      *
-     * @param files - Shared files
+     * @param files - Shared files.
      */
     handleShareFiles(files: SharedFile[]): Promise<void>;
     /**
      * Handles shared text.
      *
-     * @param text - Shared text
+     * @param text - Shared text.
      */
     handleShareText(text: string): Promise<void>;
     /**
      * Imports shared files.
      *
-     * @param files - Shared files
+     * @param files - Shared files.
      */
     importFiles(files: SharedFile[]): Promise<void>;
     /**

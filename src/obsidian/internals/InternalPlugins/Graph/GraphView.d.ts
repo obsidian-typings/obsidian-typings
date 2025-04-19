@@ -10,15 +10,15 @@ export interface GraphView extends ItemView {
     renderer: GraphRenderer;
 
     /**
-     * Get the current view type
+     * Get the current view type.
      */
     getViewType(): typeof ViewType.Graph;
     /**
-     * Updates the options from the plugin when changed in view
+     * Updates the options from the plugin when changed in view.
      */
     onOptionsChange(): void;
     /**
-     * Renders the graph
+     * Renders the graph.
      */
     update(): void;
 }

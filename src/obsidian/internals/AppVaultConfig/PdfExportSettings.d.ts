@@ -1,19 +1,19 @@
 /** @public @unofficial */
 export interface PdfExportSettings {
     /**
-     * Default: 100
+     * Default: 100.
      */
     downscalePercent: number;
     /**
-     * Default: false
+     * Default: false.
      */
     landscape: boolean;
     /**
-     * Default: '0'
+     * Default: '0'.
      */
     margin: string;
     /**
-     * Default: 'letter'
+     * Default: 'letter'.
      */
     pageSize: string;
 }

@@ -1,15 +1,15 @@
 /** @public @unofficial */
 export interface PropertyInfo {
     /**
-     * Usage count of property
+     * Usage count of property.
      */
     count: number;
     /**
-     * Name of property
+     * Name of property.
      */
     name: string;
     /**
-     * Type of property
+     * Type of property.
      */
     type: string;
 }

@@ -16,37 +16,37 @@ import type { TypeInfo } from './TypeInfo.d.ts';
 /** @public @unofficial */
 export interface MetadataTypeManager extends Events {
     /**
-     * Reference to App
+     * Reference to App.
      */
     app: App;
     onConfigFileChange: Debouncer<[], Promise<void>>;
     /**
-     * Registered properties of the vault
+     * Registered properties of the vault.
      */
     properties: MetadataTypeManagerPropertiesRecord;
     /** @internal Registered type widgets */
     registeredTypeWidgets: MetadataTypeManagerRegisteredTypeWidgetsRecord;
     /**
-     * Associated widget types for each property
+     * Associated widget types for each property.
      */
     types: MetadataTypeManagerTypesRecord;
 
     /**
-     * Get all registered properties of the vault
+     * Get all registered properties of the vault.
      */
     getAllProperties(): Record<string, PropertyInfo>;
     /**
-     * Get assigned widget type for property
+     * Get assigned widget type for property.
      */
     getAssignedType(property: string): PropertyWidgetType | null;
     /**
-     * Get info for property
+     * Get info for property.
      */
     getPropertyInfo(property: string): PropertyInfo;
     /** @internal Get expected widget type for property and the one inferred from the property value */
     getTypeInfo(options: GetTypeInfoOptions): TypeInfo;
     /**
-     * Get all properties with an assigned widget type
+     * Get all properties with an assigned widget type.
      */
     getTypes(): string[];
     /** @internal Load property types from config */

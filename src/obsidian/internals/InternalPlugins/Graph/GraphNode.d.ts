@@ -40,28 +40,28 @@ export interface GraphNode {
     y: number;
 
     /**
-     * Destroy the graphics and its children, and remove them from the scene
-     * @internal
+     * Destroy the graphics and its children, and remove them from the scene.
+     * @internal.
      */
     clearGraphics(): void;
     /**
-     * Get the displayed text associated to the node
-     * @returns The displayed text of the node
+     * Get the displayed text associated to the node.
+     * @returns The displayed text of the node.
      */
     getDisplayText(): string;
     /**
-     * Get the current fill color
-     * @returns The color of the node
+     * Get the current fill color.
+     * @returns The color of the node.
      */
     getFillColor(): GraphColorAttributes;
     /**
-     * Get the ids of connected nodes (back and forward links)
-     * @returns An array of string ids of connected nodes
+     * Get the ids of connected nodes (back and forward links).
+     * @returns An array of string ids of connected nodes.
      */
     getRelated(): string[];
     /**
-     * Get the current size of the node, after weight and node size multiplier have been applied
-     * @returns The size of the node
+     * Get the current size of the node, after weight and node size multiplier have been applied.
+     * @returns The size of the node.
      */
     getSize(): number;
     /**
@@ -71,8 +71,8 @@ export interface GraphNode {
      */
     getTextStyle(): TextStyle;
     /**
-     * Initialize the node, text, listeners, and add them to the scene
-     * @internal
+     * Initialize the node, text, listeners, and add them to the scene.
+     * @internal.
      */
     initGraphics(): void;
     /**

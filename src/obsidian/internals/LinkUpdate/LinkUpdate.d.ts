@@ -7,23 +7,23 @@ import type { PositionedReference } from '../PositionedReference.d.ts';
 /** @public @unofficial */
 export interface LinkUpdate {
     /**
-     * Reference to App
+     * Reference to App.
      */
     app: App;
     /**
-     * Link position in the file
+     * Link position in the file.
      */
     reference: PositionedReference;
     /**
-     * File that was resolved
+     * File that was resolved.
      */
     resolvedFile: TFile;
     /**
-     * Paths the file could have been resolved to
+     * Paths the file could have been resolved to.
      */
     resolvedPaths: string[];
     /**
-     * File that contains the link
+     * File that contains the link.
      */
     sourceFile: TFile;
 }

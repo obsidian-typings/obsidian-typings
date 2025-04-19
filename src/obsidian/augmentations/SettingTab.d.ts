@@ -3,31 +3,31 @@ export {};
 declare module 'obsidian' {
     interface SettingTab {
         /**
-         * Unique ID of the tab
+         * Unique ID of the tab.
          */
         id: string;
         /**
-         * Reference to installed plugins element
+         * Reference to installed plugins element.
          *
-         * @if Tab is the community plugins tab
+         * @if Tab is the community plugins tab.
          */
         installedPluginsEl?: HTMLElement;
         /**
-         * Sidebar name of the tab
+         * Sidebar name of the tab.
          */
         name: string;
         /**
-         * Sidebar navigation element of the tab
+         * Sidebar navigation element of the tab.
          */
         navEl: HTMLElement;
         /**
-         * Reference to the plugin that initialized the tab
+         * Reference to the plugin that initialized the tab.
          *
-         * @if Tab is a plugin tab
+         * @if Tab is a plugin tab.
          */
         plugin?: Plugin;
         /**
-         * Reference to the settings modal
+         * Reference to the settings modal.
          */
         setting: Setting;
     }

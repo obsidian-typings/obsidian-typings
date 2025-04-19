@@ -6,31 +6,31 @@ export {};
 declare module 'obsidian' {
     interface Menu extends Component, CloseableComponent {
         /**
-         * Background for the suggestion menu
+         * Background for the suggestion menu.
          */
         bgEl: HTMLElement;
         /**
-         * The currently active submenu, if any
+         * The currently active submenu, if any.
          */
         currentSubmenu?: Menu;
         /**
-         * DOM element of the menu
+         * DOM element of the menu.
          */
         dom: HTMLElement;
         /**
-         * Items contained in the menu
+         * Items contained in the menu.
          */
         items: MenuItem[];
         /**
-         * Parent menu of the current menu
+         * Parent menu of the current menu.
          */
         parentMenu: Menu | null;
         /**
-         * Scope in which the menu is active
+         * Scope in which the menu is active.
          */
         scope: Scope;
         /**
-         * Sections within the menu
+         * Sections within the menu.
          */
         sections: string[];
         /** @internal Which menuitem is currently selected */
@@ -40,7 +40,7 @@ declare module 'obsidian' {
         /** @internal Whether the submenu is currently unloading */
         unloading: boolean;
         /**
-         * Whether the menu is rendered in native mode
+         * Whether the menu is rendered in native mode.
          */
         useNativeMenu: boolean;
 
@@ -49,14 +49,14 @@ declare module 'obsidian' {
         /** @internal Close the currently open submenu */
         closeSubmenu(): void;
         /**
-         * Callback to execute when the menu is hidden
+         * Callback to execute when the menu is hidden.
          */
         hideCallback(): void;
         /** @internal Check whether the clicked element is inside the menu */
         isInside(e: HTMLElement): boolean;
         /**
-         * @param e - Keyboard event
-         * @internal Move selection to the next item in the menu
+         * @param e - Keyboard event.
+         * @internal Move selection to the next item in the menu.
          */
         onArrowDown(e: KeyboardEvent): boolean;
         /** @internal Move selection out of the submenu */
@@ -64,20 +64,20 @@ declare module 'obsidian' {
         /** @internal Move selection into the submenu */
         onArrowRight(e: KeyboardEvent): boolean;
         /**
-         * @param e - Keyboard event
-         * @internal Move selection to the previous item in the menu
+         * @param e - Keyboard event.
+         * @internal Move selection to the previous item in the menu.
          */
         onArrowUp(e: KeyboardEvent): boolean;
         /** @internal Execute selected menu item (does nothing if item is submenu) */
         onEnter(e: KeyboardEvent): boolean;
         /**
-         * @param e
-         * @internal Preemptively closes the menu if click is registered on menu item
+         * @param e.
+         * @internal Preemptively closes the menu if click is registered on menu item.
          */
         onMenuClick(e: MouseEvent): void;
         /**
-         * @param e - Mouse event
-         * @internal Opens submenu if mouse is hovering over item with submenu
+         * @param e - Mouse event.
+         * @internal Opens submenu if mouse is hovering over item with submenu.
          */
         onMouseOver(e: MouseEvent): boolean;
         /** @internal Registers dom events and scope for the menu */
@@ -85,19 +85,19 @@ declare module 'obsidian' {
         /** @internal Callback that opens the submenu after a delay */
         openSubmenuSoon(): void;
         /**
-         * @param index
-         * @internal Select the item at the specified index (after either hovering or arrowing over it)
+         * @param index.
+         * @internal Select the item at the specified index (after either hovering or arrowing over it).
          */
         select(index: number): void;
         /**
-         * @param el - Element to set as parent
-         * @internal Set the parent element of the menu (i.e. for workspace leaf context menu)
+         * @param el - Element to set as parent.
+         * @internal Set the parent element of the menu (i.e. for workspace leaf context menu).
          */
         setParentElement(el: HTMLElement): this;
         /**
-         * @param section
-         * @param submenu
-         * @internal Add a section to the submenu config
+         * @param section.
+         * @param submenu.
+         * @internal Add a section to the submenu config.
          */
         setSectionSubmenu(section: string, submenu: Submenu): this;
         /** @internal Sort the items in the menu */

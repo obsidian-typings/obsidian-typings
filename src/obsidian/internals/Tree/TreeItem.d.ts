@@ -6,11 +6,11 @@ import type { TreeNode } from './TreeNode.d.ts';
 export type TreeItem<T> = TreeNode<T> & {
     collapseEl: HTMLElement;
     /**
-     * @deprecated Potentially removed in 1.6.0 for some tree-likes
+     * @deprecated Potentially removed in 1.6.0 for some tree-likes.
      */
     collapsed: boolean;
     /**
-     * @deprecated Potentially removed in 1.6.0 for some tree-likes
+     * @deprecated Potentially removed in 1.6.0 for some tree-likes.
      */
     collapsible: boolean;
     coverEl: HTMLElement;
@@ -20,31 +20,31 @@ export type TreeItem<T> = TreeNode<T> & {
     view: View;
 
     /**
-     * Execute collapse functionality on mouse click
+     * Execute collapse functionality on mouse click.
      */
     onCollapseClick(event: MouseEvent): void;
     /**
-     * Execute item functionality on clicking tree item
+     * Execute item functionality on clicking tree item.
      */
     onSelfClick(event: MouseEvent): void;
     /**
-     * Set clickable state of tree item
+     * Set clickable state of tree item.
      */
     setClickable(clickable: boolean): void;
     /**
-     * Set collapsed state of tree item
+     * Set collapsed state of tree item.
      */
     setCollapsed(collapsed: boolean, check: boolean): Promise<undefined>;
     /**
-     * Set collapsible state of tree item
+     * Set collapsible state of tree item.
      */
     setCollapsible(collapsible: boolean): void;
     /**
-     * Toggle collapsed state of tree item
+     * Toggle collapsed state of tree item.
      */
     toggleCollapsed(check: boolean): Promise<undefined>;
     /**
-     * @internal Update the tree item's cover element
+     * @internal Update the tree item's cover element.
      */
     updateCollapsed(check: boolean): Promise<undefined>;
 };

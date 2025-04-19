@@ -12,11 +12,11 @@ export interface BookmarksView extends ItemView {
     /** @todo Documentation incomplete */
     _getActiveBookmarks(): unknown[];
     /**
-     * Attaches the handleDrag of DragManager
+     * Attaches the handleDrag of DragManager.
      */
     attachDragHandler(e: unknown): void;
     /**
-     * Attaches the handleDrop of DragManager to containerEl
+     * Attaches the handleDrop of DragManager to containerEl.
      */
     attachDropHandler(): void;
     /** @todo Documentation incomplete */
@@ -28,7 +28,7 @@ export interface BookmarksView extends ItemView {
     /** @todo Documentation incomplete */
     getNodeId(e: unknown): string;
     /**
-     * Get the current view type
+     * Get the current view type.
      */
     getViewType(): typeof ViewType.Bookmarks;
     /** @todo Documentation incomplete */
@@ -38,25 +38,25 @@ export interface BookmarksView extends ItemView {
     /** @todo Documentation incomplete */
     onContextMenu(event: unknown): void;
     /**
-     * Called when delete is requested
-     * @param event - The event triggered this function
+     * Called when delete is requested.
+     * @param event - The event triggered this function.
      */
     onDeleteSelectedItems(event: unknown): unknown;
     /**
      * Called when a file is created.
-     * @param file - The created file
+     * @param file - The created file.
      */
     onFileCreate(file: TFile): void;
     /**
      * Called when a file is deleted.
-     * @param file - The deleted file
+     * @param file - The deleted file.
      */
     onFileDelete(file: TFile): void;
     /** @todo Documentation incomplete */
     onFileOpen(file: TFile): void;
     /**
-     * Called when the rename shortcut is pressed
-     * @param event - The event triggered this function
+     * Called when the rename shortcut is pressed.
+     * @param event - The event triggered this function.
      */
     onRenameKey(event: KeyboardEvent): void;
     /** @todo Documentation incomplete */

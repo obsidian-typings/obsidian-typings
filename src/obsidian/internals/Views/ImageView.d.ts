@@ -4,7 +4,7 @@ import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
 /** @public @unofficial */
 export interface ImageView extends EditableFileView {
     /**
-     * Get the current view type
+     * Get the current view type.
      */
     getViewType(): typeof ViewType.Image;
 }

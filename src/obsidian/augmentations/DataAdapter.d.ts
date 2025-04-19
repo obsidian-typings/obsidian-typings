@@ -8,11 +8,11 @@ declare module 'obsidian' {
     /** @todo Documentation incomplete */
     interface DataAdapter extends PromisedQueue {
         /**
-         * Base OS path for the vault (e.g. /home/user/vault, or C:\Users\user\documents\vault)
+         * Base OS path for the vault (e.g. /home/user/vault, or C:\Users\user\documents\vault).
          */
         basePath: string;
         /**
-         * Mapping of file/folder path to vault entry, includes non-MD files
+         * Mapping of file/folder path to vault entry, includes non-MD files.
          */
         files: DataAdapterFilesRecord;
         /** @internal Handles vault events */
@@ -54,9 +54,9 @@ declare module 'obsidian' {
          */
         getRealPath(path: string): string;
         /**
-         * @param normalizedPath Path to file
-         * @returns String URL of form: app://FILEHASH/path/to/file
-         * @internal Get resource path of file (URL path)
+         * @param normalizedPath Path to file.
+         * @returns String URL of form: app://FILEHASH/path/to/file.
+         * @internal Get resource path of file (URL path).
          */
         getResourcePath(normalizedPath: string): string;
         /** @internal Generates `this.files` for specific directory of the vault */
@@ -66,11 +66,11 @@ declare module 'obsidian' {
         /**
          * Reconcile a deletion.
          *
-         * @param normalizedPath Path to file
-         * @param normalizedNewPath New path to file
-         * @param shouldSkipDeletionTimeout Whether the deletion timeout should be skipped (default: `true`)
-         * @returns A promise that resolves when the file is reconciled
-         * @internal
+         * @param normalizedPath Path to file.
+         * @param normalizedNewPath New path to file.
+         * @param shouldSkipDeletionTimeout Whether the deletion timeout should be skipped (default: `true`).
+         * @returns A promise that resolves when the file is reconciled.
+         * @internal.
          */
         reconcileDeletion(
             normalizedPath: string,
@@ -80,11 +80,11 @@ declare module 'obsidian' {
         /**
          * Reconcile a file.
          *
-         * @param normalizedPath Path to file
-         * @param normalizedNewPath New path to file
-         * @param shouldSkipDeletionTimeout Whether the deletion timeout should be skipped - applies only to {@link reconcileDeletion}
-         * @returns A promise that resolves when the file is reconciled
-         * @internal
+         * @param normalizedPath Path to file.
+         * @param normalizedNewPath New path to file.
+         * @param shouldSkipDeletionTimeout Whether the deletion timeout should be skipped - applies only to {@link reconcileDeletion}.
+         * @returns A promise that resolves when the file is reconciled.
+         * @internal.
          */
         reconcileFile(
             normalizedPath: string,

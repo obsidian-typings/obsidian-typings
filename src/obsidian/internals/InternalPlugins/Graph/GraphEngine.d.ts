@@ -48,24 +48,24 @@ export interface GraphEngine {
     view: LocalGraphView | GraphView;
 
     /**
-     * Gets the engine options
-     * @internal
+     * Gets the engine options.
+     * @internal.
      */
     getOptions(): GraphPluginInstanceOptions;
     /**
-     * Rerenders the graph
-     * @internal
+     * Rerenders the graph.
+     * @internal.
      */
     render(): void;
     /**
-     * Sets the engine options
+     * Sets the engine options.
      * @param options - New options. Undefined elements will not be considered.
-     * @internal
+     * @internal.
      */
     setOptions(options: GraphPluginInstanceOptions | undefined): void;
     /**
-     * Updates the engine after the search filter has changed
-     * @internal
+     * Updates the engine after the search filter has changed.
+     * @internal.
      */
     updateSearch(): void;
 }

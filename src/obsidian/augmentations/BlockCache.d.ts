@@ -4,7 +4,7 @@ declare module 'obsidian' {
     /** @todo Documentation incomplete */
     interface BlockCache extends CacheItem {
         /**
-         * Reference to App
+         * Reference to App.
          */
         app: App;
         /** @internal */

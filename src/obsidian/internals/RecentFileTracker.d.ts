@@ -8,30 +8,30 @@ import type { GetRecentFilesOptions } from './GetRecentFilesOptions.d.ts';
 /** @public @unofficial */
 export interface RecentFileTracker {
     /**
-     * List of last opened file paths, limited to 50
+     * List of last opened file paths, limited to 50.
      */
     lastOpenFiles: string[];
     /**
-     * Reference to Vault
+     * Reference to Vault.
      */
     vault: Vault;
     /**
-     * Reference to Workspace
+     * Reference to Workspace.
      */
     workspace: Workspace;
 
     /** @internal */
     collect(file: TFile): void;
     /**
-     * Returns the last 10 opened files
+     * Returns the last 10 opened files.
      */
     getLastOpenFiles(): string[];
     /**
-     * Get last n files of type (defaults to 10)
+     * Get last n files of type (defaults to 10).
      */
     getRecentFiles(options?: GetRecentFilesOptions): string[];
     /**
-     * Set the last opened files
+     * Set the last opened files.
      */
     load(savedFiles: string[]): void;
     /** @internal On file create, save file to last opened files */

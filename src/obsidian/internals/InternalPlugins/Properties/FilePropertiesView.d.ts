@@ -6,16 +6,16 @@ import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
 /** @public @unofficial */
 export interface FilePropertiesView extends InfoFileView {
     /**
-     * Returns the file
+     * Returns the file.
      */
     getFile(): TFile;
     /**
-     * Get the current view type
+     * Get the current view type.
      */
     getViewType(): typeof ViewType.FileProperties;
     /**
-     * Checks the file is an markdown file
-     * @param file - The file to check
+     * Checks the file is an markdown file.
+     * @param file - The file to check.
      */
     isSupportedFile(file: TFile): boolean;
     /** @todo Documentation incomplete */
@@ -23,8 +23,8 @@ export interface FilePropertiesView extends InfoFileView {
     /** @todo Documentation incomplete */
     onQuickPreview(file: TFile, t: unknown): void;
     /**
-     * Reads the file if it is supported
-     * @param file - The file to read
+     * Reads the file if it is supported.
+     * @param file - The file to read.
      */
     readSupportedFile(file: TFile): Promise<unknown>;
     /** @todo Documentation incomplete */

@@ -13,25 +13,25 @@ declare module 'obsidian' {
         /** @internal */
         btime: Btime;
         /**
-         * Reference to node fs module
+         * Reference to node fs module.
          */
         fs: typeof fs;
         /**
-         * Reference to node fs:promises module
+         * Reference to node fs:promises module.
          */
         fsPromises: typeof fsPromises;
         /**
-         * Reference to electron ipcRenderer module
+         * Reference to electron ipcRenderer module.
          */
         ipcRenderer?: IpcRenderer;
         /** @internal */
         killLastAction: null | ((e: Error) => void);
         /**
-         * Reference to node path module
+         * Reference to node path module.
          */
         path: typeof path;
         /**
-         * Reference to node URL module
+         * Reference to node URL module.
          */
         url: typeof URL;
         /**
@@ -42,9 +42,9 @@ declare module 'obsidian' {
         watchers: DataAdapterWatchersRecord;
 
         /**
-         * @param normalizedPath Path to file
-         * @param options Data write options
-         * @internal Apply data write options to file
+         * @param normalizedPath Path to file.
+         * @param options Data write options.
+         * @internal Apply data write options to file.
          */
         applyWriteOptions(normalizedPath: string, options: DataWriteOptions): Promise<void>;
         /**
@@ -56,14 +56,14 @@ declare module 'obsidian' {
          */
         copyRecursive(sourcePath: string, destinationPath: string): Promise<void>;
         /**
-         * Get base path of vault (OS path)
+         * Get base path of vault (OS path).
          */
         getBasePath(): string;
         /**
-         * Get full path of file (OS path)
+         * Get full path of file (OS path).
          *
-         * @param normalizedPath Path to file
-         * @returns URL path to file
+         * @param normalizedPath Path to file.
+         * @returns URL path to file.
          */
         getFilePath(normalizedPath: string): string;
         /** @internal Kill file system action due to timeout */
@@ -71,16 +71,16 @@ declare module 'obsidian' {
         /** @internal Generates `this.files` from the file system */
         listAll(): Promise<void>;
         /**
-         * @param normalizedPath Path to directory
-         * @internal Helper function for `listRecursive` reads children of directory
+         * @param normalizedPath Path to directory.
+         * @internal Helper function for `listRecursive` reads children of directory.
          */
         listRecursiveChild(normalizedPath: string, child: string): Promise<void>;
         /**
-         * Reconcile file creation
+         * Reconcile file creation.
          *
-         * @param normalizedPath - Path to file
-         * @param normalizedNewPath - Path to new file
-         * @param stats - Stats object
+         * @param normalizedPath - Path to file.
+         * @param normalizedNewPath - Path to new file.
+         * @param stats - Stats object.
          */
         reconcileFileCreation(normalizedPath: string, normalizedNewPath: string, stats: Stats): Promise<void>;
         /** @internal */

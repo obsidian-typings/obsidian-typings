@@ -8,11 +8,11 @@ export interface BacklinkView extends InfoFileView {
     backlink: BacklinkComponent;
 
     /**
-     * Get the current view type
+     * Get the current view type.
      */
     getViewType(): typeof ViewType.Backlink;
     /**
-     * Shows the search
+     * Shows the search.
      */
     showSearch(): void;
     /** @todo Documentation incomplete */

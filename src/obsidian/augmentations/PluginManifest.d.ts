@@ -3,43 +3,43 @@ export {};
 declare module 'obsidian' {
     interface PluginManifest {
         /**
-         * Name of the author of the plugin
+         * Name of the author of the plugin.
          */
         author: string;
         /**
-         * URL to the author's website
+         * URL to the author's website.
          */
         authorUrl?: string;
         /**
-         * Description of the plugin's functionality
+         * Description of the plugin's functionality.
          */
         description: string;
         /**
-         * Storage location of the plugin relative to the vault root
+         * Storage location of the plugin relative to the vault root.
          */
         dir?: string;
         /**
-         * URL for funding the author
+         * URL for funding the author.
          */
         fundingUrl?: string;
         /**
-         * Unique identifier of the plugin
+         * Unique identifier of the plugin.
          */
         id: string;
         /**
-         * Whether the plugin is designed for desktop use only
+         * Whether the plugin is designed for desktop use only.
          */
         isDesktopOnly?: boolean;
         /**
-         * Minimum Obsidian version compatible with the plugin
+         * Minimum Obsidian version compatible with the plugin.
          */
         minAppVersion: string;
         /**
-         * Name of the plugin
+         * Name of the plugin.
          */
         name: string;
         /**
-         * Version of the plugin
+         * Version of the plugin.
          */
         version: string;
     }

@@ -6,7 +6,7 @@ export interface DailyNotesOptions {
     folder?: string;
     /**
      * Naming syntax for daily note in Moment.js syntax.
-     * https://momentjs.com/docs/#/displaying/format/
+     * https://momentjs.com/docs/#/displaying/format/.
      */
     format?: string;
     /** Path to the file to use as a template. */

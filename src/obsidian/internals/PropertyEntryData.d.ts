@@ -1,15 +1,15 @@
 /** @public @unofficial */
 export interface PropertyEntryData<T> {
     /**
-     * Property key
+     * Property key.
      */
     key: string;
     /**
-     * Property widget type
+     * Property widget type.
      */
     type: string;
     /**
-     * Property value
+     * Property value.
      */
     value: T;
 }

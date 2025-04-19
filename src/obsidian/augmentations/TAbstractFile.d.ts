@@ -3,7 +3,7 @@ export {};
 declare module 'obsidian' {
     interface TAbstractFile {
         /**
-         * Whether the file or folder is being deleted
+         * Whether the file or folder is being deleted.
          */
         deleted: boolean;
 
@@ -14,7 +14,7 @@ declare module 'obsidian' {
          */
         getNewPathAfterRename(newName: string): string;
         /**
-         * @internal
+         * @internal.
          *
          * Sets the path of the file or folder.
          * @param path The new path of the file or folder.

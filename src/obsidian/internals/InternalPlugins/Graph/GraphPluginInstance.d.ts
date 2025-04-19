@@ -21,8 +21,8 @@ export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin>
     openGraphView(newLeaf: boolean): void;
     openLocalGraph(checking: boolean): true | undefined;
     /**
-     * Saves the options in graph.json
-     * @internal
+     * Saves the options in graph.json.
+     * @internal.
      */
     saveOptions(): void;
 }

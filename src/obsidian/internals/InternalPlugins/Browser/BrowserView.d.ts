@@ -21,25 +21,25 @@ export interface BrowserView extends ItemView {
     /** @todo Documentation incomplete */
     displayContextMenu(e: unknown): void;
     /**
-     * Shows the error view
+     * Shows the error view.
      */
     displayErrorView(): void;
     /** @todo Documentation incomplete */
     displayReaderView(): Promise<unknown>;
     /**
-     * Shows the webview
+     * Shows the webview.
      */
     displayWebView(): void;
     /** @todo Documentation incomplete */
     getReaderModeContent(): Promise<unknown>;
     /**
-     * Get the current view type
+     * Get the current view type.
      */
     getViewType(): typeof ViewType.Browser;
     /** @todo Documentation incomplete */
     hideAll(): void;
     /**
-     * Setup the webview
+     * Setup the webview.
      */
     instantiateWebView(): void;
     /** @todo Documentation incomplete */
@@ -83,23 +83,23 @@ export interface BrowserView extends ItemView {
     /** @todo Documentation incomplete */
     showSearch(): void;
     /**
-     * Stores the title of the current webview
+     * Stores the title of the current webview.
      */
     storeCurrentPageTitle(): Promise<unknown>;
     /**
-     * Toggles the reader mode
+     * Toggles the reader mode.
      */
     toggleReaderMode(): void;
     /**
-     * Zoom in the webview
+     * Zoom in the webview.
      */
     zoomIn(): void;
     /**
-     * Zoom out the webview
+     * Zoom out the webview.
      */
     zoomOut(): void;
     /**
-     * Resets the zoom factor of the webview
+     * Resets the zoom factor of the webview.
      */
     zoomReset(): void;
 }

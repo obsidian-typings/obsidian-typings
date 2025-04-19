@@ -4,220 +4,220 @@ import type { PdfExportSettings } from './PdfExportSettings.d.ts';
 /** @public @unofficial */
 export interface AppVaultConfig {
     /**
-     * Appearance \> Accent color
+     * Appearance \> Accent color.
      */
     accentColor: '' | string;
     /**
-     * Files & Links \> Automatically update internal links
+     * Files & Links \> Automatically update internal links.
      */
     alwaysUpdateLinks?: false | boolean;
     /**
-     * Files & Links \> Attachment folder path
+     * Files & Links \> Attachment folder path.
      */
     attachmentFolderPath?: '/' | string;
     /**
-     * Editor \> Auto convert HTML
+     * Editor \> Auto convert HTML.
      */
     autoConvertHtml?: true | boolean;
     /**
-     * Editor \> Auto pair brackets
+     * Editor \> Auto pair brackets.
      */
     autoPairBrackets?: true | boolean;
     /**
-     * Editor \> Auto pair Markdown syntax
+     * Editor \> Auto pair Markdown syntax.
      */
     autoPairMarkdown?: true | boolean;
     /**
-     * Appearance \> Font size
+     * Appearance \> Font size.
      */
     baseFontSize?: 16 | number;
     /**
-     * Appearance \> Quick font size adjustment
+     * Appearance \> Quick font size adjustment.
      */
     baseFontSizeAction?: true | boolean;
     /**
-     * Community Plugins \> Browse \> Sort order
+     * Community Plugins \> Browse \> Sort order.
      */
     communityPluginSortOrder: 'download' | 'update' | 'release' | 'alphabetical';
     /**
-     * Themes \> Browse \> Sort order
+     * Themes \> Browse \> Sort order.
      */
     communityThemeSortOrder: 'download' | 'update' | 'release' | 'alphabetical';
     /**
-     * Appearance \> Theme
+     * Appearance \> Theme.
      *
-     * @remark is the default Obsidian theme
+     * @remark is the default Obsidian theme.
      */
     cssTheme?: '' | string;
     /**
-     * Editor \> Default view for new tabs
+     * Editor \> Default view for new tabs.
      */
     defaultViewMode?: 'source' | 'preview';
     emacsyKeys?: true | boolean;
     /**
-     * Appearance \> CSS snippets
+     * Appearance \> CSS snippets.
      */
     enabledCssSnippets?: string[];
     fileSortOrder?: 'alphabetical';
     /**
-     * Editor \> Always focus new tabs
+     * Editor \> Always focus new tabs.
      */
     focusNewTab?: true | boolean;
     /**
-     * Editor \> Fold heading
+     * Editor \> Fold heading.
      */
     foldHeading?: true | boolean;
     /**
-     * Editor \> Fold indent
+     * Editor \> Fold indent.
      */
     foldIndent?: true | boolean;
     /**
-     * Hotkeys
+     * Hotkeys.
      *
-     * @deprecated Likely not used anymore
+     * @deprecated Likely not used anymore.
      */
     hotkeys?: AppVaultConfigHotkeysRecord;
     /**
-     * Appearance \> Interface font
+     * Appearance \> Interface font.
      */
     interfaceFontFamily?: '' | string;
     /**
-     * Editor \> Use legacy editor
+     * Editor \> Use legacy editor.
      */
     legacyEditor?: false | boolean;
     livePreview?: true | boolean;
     /**
-     * Mobile \> Configure mobile Quick Action
+     * Mobile \> Configure mobile Quick Action.
      */
     mobilePullAction?: 'command-palette:open' | string;
     mobileQuickRibbonItem?: '' | string;
     /**
-     * Mobile \> Manage toolbar options
+     * Mobile \> Manage toolbar options.
      */
     mobileToolbarCommands?: string[];
     monospaceFontFamily?: '' | string;
     /**
-     * Appearance \> Native menus
+     * Appearance \> Native menus.
      */
     nativeMenus?: null | boolean;
     /**
-     * Files & Links \> Default location for new notes | 'folder' \> Folder to create new notes in
+     * Files & Links \> Default location for new notes | 'folder' \> Folder to create new notes in.
      */
     newFileFolderPath?: '/' | string;
     /**
-     * Files & Links \> Default location for new notes
+     * Files & Links \> Default location for new notes.
      */
     newFileLocation?: 'root' | 'current' | 'folder';
     /**
-     * Files & Links \> New link format
+     * Files & Links \> New link format.
      */
     newLinkFormat?: 'shortest' | 'relative' | 'absolute';
     /**
-     * Saved on executing 'Export to PDF' command
+     * Saved on executing 'Export to PDF' command.
      */
     pdfExportSettings?: PdfExportSettings;
     /**
-     * Files & Links \> Confirm line deletion
+     * Files & Links \> Confirm line deletion.
      */
     promptDelete?: true | boolean;
     /**
-     * Editor \> Properties in document
+     * Editor \> Properties in document.
      */
     propertiesInDocument?: 'visible' | 'hidden' | 'source';
     /**
-     * Editor \> Readable line length
+     * Editor \> Readable line length.
      */
     readableLineLength?: true | boolean;
     /**
-     * Editor \> Right-to-left (RTL)
+     * Editor \> Right-to-left (RTL).
      */
     rightToLeft?: false | boolean;
     /** @deprecated Removed as of version 1.4.3 */
     showFrontmatter?: false | boolean;
     /**
-     * Editor \> Show indentation guides
+     * Editor \> Show indentation guides.
      */
     showIndentGuide?: true | boolean;
     /**
-     * Editor \> Show inline title
+     * Editor \> Show inline title.
      */
     showInlineTitle?: true | boolean;
     /**
-     * Editor \> Show line numbers
+     * Editor \> Show line numbers.
      */
     showLineNumber?: false | boolean;
     /**
-     * Appearance \> Show ribbon
+     * Appearance \> Show ribbon.
      */
     showRibbon?: true | boolean;
     /**
-     * Files & Links \> Detect all file extensions
+     * Files & Links \> Detect all file extensions.
      */
     showUnsupportedFiles?: false | boolean;
     /**
-     * Appearance \> Show tab title bar
+     * Appearance \> Show tab title bar.
      */
     showViewHeader?: false | boolean;
     /**
-     * Editor \> Smart indent lists
+     * Editor \> Smart indent lists.
      */
     smartIndentList?: true | boolean;
     /**
-     * Editor \> Spellcheck
+     * Editor \> Spellcheck.
      */
     spellcheck?: false | boolean;
     /**
-     * @deprecated Deprecated
-     * @todo
+     * @deprecated Deprecated.
+     * @todo.
      */
     spellcheckDictionary?: [] | string[];
     /**
-     * Editor \> Spellcheck languages
+     * Editor \> Spellcheck languages.
      */
     spellcheckLanguages?: null | string[];
     /**
-     * Editor \> Strict line breaks
+     * Editor \> Strict line breaks.
      */
     strictLineBreaks?: false | boolean;
     /**
-     * Editor \> Tab indent size
+     * Editor \> Tab indent size.
      */
     tabSize?: 4 | number;
     /**
-     * Appearance \> Text font
+     * Appearance \> Text font.
      */
     textFontFamily?: '' | string;
     /**
-     * Appearance \> Base color scheme
+     * Appearance \> Base color scheme.
      *
-     * @remark Not be confused with cssTheme, this setting is for the light/dark mode
-     * @remark moonstone is light theme, 'obsidian' is dark theme
+     * @remark Not be confused with cssTheme, this setting is for the light/dark mode.
+     * @remark moonstone is light theme, 'obsidian' is dark theme.
      */
     theme?: 'moonstone' | 'obsidian';
     /**
-     * Appearance \> Translucent window
+     * Appearance \> Translucent window.
      */
     translucency?: false | boolean;
     /**
-     * Files & Links \> Deleted files
+     * Files & Links \> Deleted files.
      */
     trashOption?: 'system' | 'local' | 'none';
     /** @deprecated Probably left-over code from old properties type storage */
     types: object;
     /**
-     * Files & Links \> Use [[Wikilinks]]
+     * Files & Links \> Use [[Wikilinks]].
      */
     useMarkdownLinks?: false | boolean;
     /**
-     * Files & Links \> Excluded files
+     * Files & Links \> Excluded files.
      */
     userIgnoreFilters?: null | string[];
     /**
-     * Editor \> Indent using tabs
+     * Editor \> Indent using tabs.
      */
     useTab?: true | boolean;
     /**
-     * Editor \> Vim key bindings
+     * Editor \> Vim key bindings.
      */
     vimMode?: false | boolean;
 }

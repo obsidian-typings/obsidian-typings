@@ -23,13 +23,13 @@ export interface GraphLink {
     target: GraphNode;
 
     /**
-     * Destroy the graphics and its children, and remove them from the scene
-     * @internal
+     * Destroy the graphics and its children, and remove them from the scene.
+     * @internal.
      */
     clearGraphics(): void;
     /**
-     * Initialize the link (line and arrow), and add them to the scene
-     * @internal
+     * Initialize the link (line and arrow), and add them to the scene.
+     * @internal.
      */
     initGraphics(): void;
 }

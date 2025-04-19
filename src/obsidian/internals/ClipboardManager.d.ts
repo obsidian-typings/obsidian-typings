@@ -8,52 +8,52 @@ import type { ImportedAttachments } from './ImportedAttachments.d.ts';
 /** @public @unofficial */
 export interface ClipboardManager {
     /**
-     * Reference to the app
+     * Reference to the app.
      */
     app: App;
     /**
-     * Reference to the Editor View
+     * Reference to the Editor View.
      */
     info: MarkdownView;
 
     /**
-     * Get current path of editor view for determining storage location embed
+     * Get current path of editor view for determining storage location embed.
      */
     getPath(): string;
     /**
-     * Process incoming data (image, text, url, html)
+     * Process incoming data (image, text, url, html).
      *
-     * @remark When processing HTML, function will be async
+     * @remark When processing HTML, function will be async.
      */
     handleDataTransfer(data: DataTransfer): null | Promise<void>;
     /**
-     * Handle an incoming drag-over event
+     * Handle an incoming drag-over event.
      */
     handleDragOver(event: DragEvent): void;
     /**
-     * Handle an incoming drag-drop event
+     * Handle an incoming drag-drop event.
      */
     handleDrop(event: DragEvent): boolean;
     /**
-     * Process a drop event into the editor
+     * Process a drop event into the editor.
      */
     handleDropIntoEditor(event: DragEvent): null | string;
     /**
-     * Handle an incoming paste event
+     * Handle an incoming paste event.
      */
     handlePaste(event: ClipboardEvent): boolean;
     /**
-     * Insert single file as embed into the editor
+     * Insert single file as embed into the editor.
      */
     insertAttachmentEmbed(file: TAbstractFile, replace: boolean): Promise<void>;
     /**
-     * Insert files from drop-event into the editor
+     * Insert files from drop-event into the editor.
      */
     insertFiles(files: ImportedAttachments[]): Promise<void>;
     /**
-     * Save an attachment of specified name and extension to the vault
+     * Save an attachment of specified name and extension to the vault.
      *
-     * @remark Invokes insertAttachmentEmbed
+     * @remark Invokes insertAttachmentEmbed.
      */
     saveAttachment(name: string, extension: string, data: ArrayBuffer, replace: boolean): Promise<void>;
 }

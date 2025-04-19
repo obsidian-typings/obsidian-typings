@@ -8,74 +8,74 @@ import type { AbstractSearchComponent } from './AbstractSearchComponent.d.ts';
 /** @public @unofficial */
 export interface EditorSearchComponent extends AbstractSearchComponent {
     /**
-     * Search cursor for editor, handles search and replace functionality for editor
+     * Search cursor for editor, handles search and replace functionality for editor.
      */
     cursor: null | SearchCursor;
     /**
-     * Linked editor for search component
+     * Linked editor for search component.
      */
     editor: Editor;
     /**
-     * Whether search component is currently rendering
+     * Whether search component is currently rendering.
      */
     isActive: boolean;
     /**
-     * Whether search component is replacing text (includes 'Replace' input field)
+     * Whether search component is replacing text (includes 'Replace' input field).
      */
     isReplace: boolean;
 
     /**
-     * Remove all highlights from editor
+     * Remove all highlights from editor.
      */
     clear(): void;
     /**
-     * Find next search results from cursor and highlights it
+     * Find next search results from cursor and highlights it.
      */
     findNext(): void;
     /**
-     * Replace cursor with replacement string if not null and moves to next search result
+     * Replace cursor with replacement string if not null and moves to next search result.
      */
     findNextOrReplace(): void;
     /**
-     * Find previous search results from cursor and highlights it
+     * Find previous search results from cursor and highlights it.
      */
     findPrevious(): void;
     /**
-     * Hide/detaches the search component and removes cursor highlights
+     * Hide/detaches the search component and removes cursor highlights.
      */
     hide(): void;
     /**
-     * Add highlights for specified ranges
+     * Add highlights for specified ranges.
      *
-     * @remark Invokes editor.addHighlights
+     * @remark Invokes editor.addHighlights.
      */
     highlight(ranges: EditorRange[]): void;
     /**
-     * Highlights all matches if search element focused
+     * Highlights all matches if search element focused.
      */
     onAltEnter(e?: KeyboardEvent): void;
     /**
-     * Replace all search results with specified text if replace mode and replacement element is focused
+     * Replace all search results with specified text if replace mode and replacement element is focused.
      */
     onModAltEnter(e?: KeyboardEvent): void;
     /**
-     * Updates search cursor on new input query and highlights search results
+     * Updates search cursor on new input query and highlights search results.
      */
     onSearchInput(): void;
     /**
-     * Replaces all search results with replacement query
+     * Replaces all search results with replacement query.
      */
     replaceAll(): void;
     /**
-     * Replace current search result, if any, with replacement query
+     * Replace current search result, if any, with replacement query.
      */
     replaceCurrentMatch(): void;
     /**
-     * Find all matches of search query and highlights them
+     * Find all matches of search query and highlights them.
      */
     searchAll(): void;
     /**
-     * Reveal the search (and replace) component
+     * Reveal the search (and replace) component.
      */
     show(replace: boolean): void;
 }

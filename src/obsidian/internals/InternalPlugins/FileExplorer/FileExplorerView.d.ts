@@ -15,26 +15,26 @@ import type { FileTreeItem } from './FileTreeItem.d.ts';
 /** @public @unofficial */
 export interface FileExplorerView extends View {
     /**
-     * Mapping of file path to tree item
+     * Mapping of file path to tree item.
      */
     fileItems: FileExplorerViewFileItemsRecord;
     /**
-     * Mapping of tree self element to abstract file
+     * Mapping of tree self element to abstract file.
      */
     files: WeakMapWrapper<HTMLElement, TAbstractFile>;
     /**
-     * Tree view of files
+     * Tree view of files.
      */
     tree: Tree<FileTreeItem>;
 
     /**
-     * Try to rename the file
+     * Try to rename the file.
      */
     acceptRename(): Promise<void>;
     /**
-     * Is Executed after creating the file or folder and opens the view and/or starts the rename
-     * @param file - The created file
-     * @param newLeaf - Where to open the view for this file
+     * Is Executed after creating the file or folder and opens the view and/or starts the rename.
+     * @param file - The created file.
+     * @param newLeaf - Where to open the view for this file.
      */
     afterCreate(file: TFile, newLeaf: PaneType | boolean): Promise<void>;
     /** @internal */
@@ -42,10 +42,10 @@ export interface FileExplorerView extends View {
     /** @todo Documentation incomplete */
     attachFileEvents(e: unknown): void;
     /**
-     * Creates an file or folder
-     * @param type - The type of file to create
-     * @param location - The location where to create the file
-     * @param newLeaf - Where to open the view for this file
+     * Creates an file or folder.
+     * @param type - The type of file to create.
+     * @param location - The location where to create the file.
+     * @param newLeaf - Where to open the view for this file.
      */
     createAbstractFile(type: 'file' | 'folder', location: TFolder, newLeaf: PaneType | boolean): Promise<void>;
     /** @todo Documentation incomplete */
@@ -57,7 +57,7 @@ export interface FileExplorerView extends View {
     /** @todo Documentation incomplete */
     dragFiles(event: DragEvent, t: unknown): unknown;
     /**
-     * Quits the rename
+     * Quits the rename.
      */
     exitRename(): void;
     /** @todo Documentation incomplete */
@@ -65,115 +65,115 @@ export interface FileExplorerView extends View {
     /** @internal Get a sorted list of the tree items for a specific folder) */
     getSortedFolderItems(folder: TFolder): FileTreeItem[];
     /**
-     * Get the current view type
+     * Get the current view type.
      */
     getViewType(): typeof ViewType.FileExplorer;
     /** @todo Documentation incomplete maybe FileTreeItem */
     isItem(item: unknown): boolean;
     /**
-     * Is called when a new file is created in vault. Updates the file tree
-     * @param file - The new file
+     * Is called when a new file is created in vault. Updates the file tree.
+     * @param file - The new file.
      */
     onCreate(file: TFile): void;
     /**
-     * Is called when on the new folder icon is clicked. Call createAbstractFile()
-     * @param event - The MouseEvent which triggered this function
+     * Is called when on the new folder icon is clicked. Call createAbstractFile().
+     * @param event - The MouseEvent which triggered this function.
      */
     onCreateNewFolderClick(event: MouseEvent): Promise<void>;
     /**
-     * Is called when on the new note icon is clicked. Call createAbstractFile()
-     * @param event - The MouseEvent which triggered this function
+     * Is called when on the new note icon is clicked. Call createAbstractFile().
+     * @param event - The MouseEvent which triggered this function.
      */
     onCreateNewNoteClick(event: MouseEvent): Promise<void>;
     /**
-     * Is called when a file in vault is deleted. Updates the file tree
-     * @param file - The deleted file
+     * Is called when a file in vault is deleted. Updates the file tree.
+     * @param file - The deleted file.
      */
     onDelete(file: TFile): void;
     /**
-     * Called when delete is requested
-     * @param event - The event triggered this function
+     * Called when delete is requested.
+     * @param event - The event triggered this function.
      */
     onDeleteSelectedFiles(event: unknown): unknown;
     /**
-     * Called when a extensions update is triggered
-     * Event: 'extensions-updated'
+     * Called when a extensions update is triggered.
+     * Event: 'extensions-updated'.
      */
     onExtensionsUpdated(): void;
     /**
      * Called when the mouse pointer moves away from an element.
-     * Event: 'mouseout'
-     * @param event - The event triggered this function
-     * @param targetEl - The target Element
+     * Event: 'mouseout'.
+     * @param event - The event triggered this function.
+     * @param targetEl - The target Element.
      */
     onFileMouseout(event: MouseEvent, targetEl: HTMLElement): void;
     /**
-     * Called when the mouse pointer is moved over an element. Updates the tooltip information
-     * Event: 'mouseover'
-     * @param event - The event triggered this function
-     * @param targetEl - The target Element
+     * Called when the mouse pointer is moved over an element. Updates the tooltip information.
+     * Event: 'mouseover'.
+     * @param event - The event triggered this function.
+     * @param targetEl - The target Element.
      */
     onFileMouseover(event: MouseEvent, targetEl: HTMLElement): void;
     /**
      * Called when a file is opened. Brings the file to the front.
-     * @param file - The opened file
+     * @param file - The opened file.
      */
     onFileOpen(file: TFile): void;
     /** @todo Documentation incomplete */
     onFileRenameInput(e: unknown): void;
     /**
-     * Called when 'Enter' is pressed while rename. Accepts the rename
-     * @param event - The event triggered this function
+     * Called when 'Enter' is pressed while rename. Accepts the rename.
+     * @param event - The event triggered this function.
      */
     onKeyEnterInRename(event: KeyboardEvent): void;
     /**
-     * Called when 'ESC' is pressed while rename. Denies the rename
+     * Called when 'ESC' is pressed while rename. Denies the rename.
      */
     onKeyEscInRename(): void;
     /**
-     * Called when the rename shortcut is pressed
-     * @param event - The event triggered this function
+     * Called when the rename shortcut is pressed.
+     * @param event - The event triggered this function.
      */
     onKeyRename(event: KeyboardEvent): void;
     /**
-     * Request a sort if not sorted properly
+     * Request a sort if not sorted properly.
      */
     onModify(): void;
     /**
-     * Is called when a file in vault is renamed. Updates the file tree
-     * @param file - The renamed file
-     * @param oldPath - The old file path
+     * Is called when a file in vault is renamed. Updates the file tree.
+     * @param file - The renamed file.
+     * @param oldPath - The old file path.
      */
     onRename(file: TFile, oldPath: string): void;
     /**
-     * Called when the title is deselected. Calls acceptRename()
+     * Called when the title is deselected. Calls acceptRename().
      */
     onTitleBlur(): void;
     /**
-     * Opens the context menu for the file item
-     * @param event - The event
-     * @param fileItemEl - The file item clicked on
+     * Opens the context menu for the file item.
+     * @param event - The event.
+     * @param fileItemEl - The file item clicked on.
      */
     openFileContextMenu(event: Event, fileItemEl: HTMLElement): void;
     /**
-     * Reveal a file or folder in the file tree
+     * Reveal a file or folder in the file tree.
      */
     revealInFolder(file: TFile | TFolder): void;
     /** @todo Documentation incomplete */
     setIsAllCollapsed(e: unknown): void;
     /**
-     * Updates the sort order and sort by it
-     * @param order - The sort order
+     * Updates the sort order and sort by it.
+     * @param order - The sort order.
      */
     setSortOrder(order: unknown): void;
     /**
-     * Sorts the file items in this view
+     * Sorts the file items in this view.
      */
     sort(): void;
     /** @todo Documentation incomplete */
     startRenameFile(e: unknown): unknown;
     /**
-     * Reloads the config from vault and update all items
+     * Reloads the config from vault and update all items.
      */
     updateConfig(): void;
 }

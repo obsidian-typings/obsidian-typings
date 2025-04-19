@@ -14,15 +14,15 @@ export interface CanvasView extends TextFileView {
     plugin: CanvasPluginInstance;
 
     /**
-     * Loads the local data of the canvas
+     * Loads the local data of the canvas.
      */
     getLocalData(): unknown;
     /**
-     * Get the current view type
+     * Get the current view type.
      */
     getViewType(): typeof ViewType.Canvas;
     /**
-     * Saves the local data of the canvas
+     * Saves the local data of the canvas.
      */
     saveLocalData(): void;
 }

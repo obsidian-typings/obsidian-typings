@@ -7,7 +7,7 @@ declare module 'obsidian' {
         /** @internal - Callback to execute when scope is matched */
         cb: (() => boolean) | undefined;
         /**
-         * Overridden keys that exist in this scope
+         * Overridden keys that exist in this scope.
          */
         keys: KeyScope[];
         /** @internal Scope that this scope is a child of */
@@ -16,14 +16,14 @@ declare module 'obsidian' {
         tabFocusContainerEl: HTMLElement | null;
 
         /**
-         * @param event - Keyboard event
-         * @param keypress - Pressed key information
-         * @internal Execute keypress within this scope
+         * @param event - Keyboard event.
+         * @param keypress - Pressed key information.
+         * @internal Execute keypress within this scope.
          */
         handleKey(event: KeyboardEvent, keypress: KeymapInfo): unknown;
         /**
-         * @deprecated - Executes same functionality as `Scope.register`
-         * @internal
+         * @deprecated - Executes same functionality as `Scope.register`.
+         * @internal.
          */
         registerKey(modifiers: Modifier[], key: string | null, func: KeymapEventListener): KeymapEventHandler;
         /** @internal */

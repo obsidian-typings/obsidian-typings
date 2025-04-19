@@ -80,7 +80,7 @@ export interface GraphRenderer {
     zoomCenterY: number;
 
     /**
-     * Specify that the renderer has changed and needs to be rendered again
+     * Specify that the renderer has changed and needs to be rendered again.
      */
     changed(): void;
     destroy(): void;

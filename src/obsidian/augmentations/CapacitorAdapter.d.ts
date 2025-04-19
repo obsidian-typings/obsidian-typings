@@ -10,8 +10,8 @@ declare module 'obsidian' {
 
         getNativePath(normalizedPath: string): string;
         /**
-         * @param normalizedPath Path to directory
-         * @internal Helper function for `listRecursive` reads children of directory
+         * @param normalizedPath Path to directory.
+         * @internal Helper function for `listRecursive` reads children of directory.
          */
         listRecursiveChild(normalizedPath: string, child: FileEntry): Promise<void>;
         onFileChange(normalizedPath: string): void;

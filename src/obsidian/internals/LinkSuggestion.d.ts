@@ -2,7 +2,7 @@ import type { TFile } from 'obsidian';
 
 /**
  * @public @unofficial
- * Suggestion for a link to a file
+ * Suggestion for a link to a file.
  */
 export interface LinkSuggestion {
     /**

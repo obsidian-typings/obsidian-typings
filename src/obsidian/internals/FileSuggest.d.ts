@@ -5,7 +5,7 @@ import type { FileSuggestManager } from './FileSuggestManager.d.ts';
 /** @public @unofficial */
 export interface FileSuggest<T> extends EditorSuggest<T> {
     /**
-     * Manages fetching of suggestions from metadatacache
+     * Manages fetching of suggestions from metadatacache.
      */
     suggestManager: FileSuggestManager;
 }

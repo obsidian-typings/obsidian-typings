@@ -4,20 +4,20 @@ import type { Scope } from 'obsidian';
 /** @public @unofficial */
 export interface KeyScope {
     /**
-     * Key to match
+     * Key to match.
      */
     key: string | null;
     /**
-     * Modifiers to match
+     * Modifiers to match.
      */
     modifiers: string | null;
     /**
-     * Scope where the key interceptor is registered
+     * Scope where the key interceptor is registered.
      */
     scope: Scope;
 
     /**
-     * Callback of function to execute when key is pressed
+     * Callback of function to execute when key is pressed.
      */
     func(): void;
 }

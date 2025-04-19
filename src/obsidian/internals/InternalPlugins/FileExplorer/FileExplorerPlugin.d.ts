@@ -9,8 +9,8 @@ import type { FileExplorerPluginInstance } from './FileExplorerPluginInstance.d.
 /** @public @unofficial */
 export interface FileExplorerPlugin extends InternalPlugin<FileExplorerPluginInstance> {
     /**
-     * Reveals a file or folder in the file explorer view, opens the view if it is not already
-     * open/visible
+     * Reveals a file or folder in the file explorer view, opens the view if it is not already.
+     * open/visible.
      */
     revealInFolder(item: TFile | TFolder): void;
 }

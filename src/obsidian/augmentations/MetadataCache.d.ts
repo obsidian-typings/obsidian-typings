@@ -17,7 +17,7 @@ declare module 'obsidian' {
         /** @internal Called by preload() which is in turn called by initialize() */
         _preload: () => Promise<void>;
         /**
-         * Reference to App
+         * Reference to App.
          */
         app: App;
         /** @internal */
@@ -48,7 +48,7 @@ declare module 'obsidian' {
         /** @internal */
         userIgnoreFiltersString: string;
         /**
-         * Reference to Vault
+         * Reference to Vault.
          */
         vault: Vault;
         /** @internal */
@@ -70,31 +70,31 @@ declare module 'obsidian' {
         /** @internal Remove all entries that contain deleted path */
         deletePath(path: string): void;
         /**
-         * Get all property infos of the vault
+         * Get all property infos of the vault.
          */
         getAllPropertyInfos(): Record<string, PropertyInfo>;
         /**
-         * Get all backlink information for a file
+         * Get all backlink information for a file.
          */
         getBacklinksForFile(file: TFile): CustomArrayDict<Reference>;
         /**
-         * Get paths of all files cached in the vault
+         * Get paths of all files cached in the vault.
          */
         getCachedFiles(): string[];
         /**
-         * Get an entry from the file cache
+         * Get an entry from the file cache.
          */
         getFileInfo(path: string): FileCacheEntry | undefined;
         /**
-         * Get property values for frontmatter property key
+         * Get property values for frontmatter property key.
          */
         getFrontmatterPropertyValuesForKey(key: string): string[];
         /**
-         * Get destination of link path
+         * Get destination of link path.
          */
         getLinkpathDest(origin: string, path: string): TFile[];
         /**
-         * Get all links within the vault per file
+         * Get all links within the vault per file.
          */
         getLinks(): Record<string, Reference[]>;
         /**
@@ -103,7 +103,7 @@ declare module 'obsidian' {
          */
         getLinkSuggestions(): LinkSuggestion[];
         /**
-         * Get all tags within the vault and their usage count
+         * Get all tags within the vault and their usage count.
          */
         getTags(): Record<string, number>;
         /** @internal Initialize Database connection and load up caches */
@@ -115,19 +115,19 @@ declare module 'obsidian' {
         /** @internal Check whether string is part of the user ignore filters */
         isUserIgnored(path: string): boolean;
         /**
-         * Iterate over all link references in the vault with callback
+         * Iterate over all link references in the vault with callback.
          */
         iterateReferences(callback: (path: string) => void): void;
         /** @internal */
         linkResolver(): void;
         /**
-         * Called whenever the metadatacache has finished updating
+         * Called whenever the metadatacache has finished updating.
          */
         on(name: 'finished', callback: () => void): EventRef;
         /**
-         * Called whenever the metadatacache is fully loaded in
+         * Called whenever the metadatacache is fully loaded in.
          *
-         * @remark 'finished' is also emitted when the cache is initialized
+         * @remark 'finished' is also emitted when the cache is initialized.
          */
         on(name: 'initialized', callback: () => void): EventRef;
         /** @internal Execute onCleanCache callbacks if cache is clean */
