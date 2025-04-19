@@ -32,21 +32,25 @@ declare module 'obsidian' {
         onWindowClose(): void;
         /**
          * @param opacity Opacity percentage.
+         *
          * @internal Set the background opacity of the dimmed background.
          */
         setBackgroundOpacity(opacity: string): this;
         /**
          * @param content Content to set.
+         *
          * @internal Set the content of the modal.
          */
         setContent(content: DocumentFragment | string): this;
         /**
          * @param dim Whether the background should be dimmed.
+         *
          * @internal Set whether the background should be dimmed.
          */
         setDimBackground(dim: boolean): this;
         /**
          * @param title Title to set.
+         *
          * @internal Set the title of the modal.
          */
         setTitle(title: string): this;

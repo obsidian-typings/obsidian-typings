@@ -56,6 +56,7 @@ declare module 'obsidian' {
         isInside(e: HTMLElement): boolean;
         /**
          * @param e - Keyboard event.
+         *
          * @internal Move selection to the next item in the menu.
          */
         onArrowDown(e: KeyboardEvent): boolean;
@@ -65,6 +66,7 @@ declare module 'obsidian' {
         onArrowRight(e: KeyboardEvent): boolean;
         /**
          * @param e - Keyboard event.
+         *
          * @internal Move selection to the previous item in the menu.
          */
         onArrowUp(e: KeyboardEvent): boolean;
@@ -72,11 +74,13 @@ declare module 'obsidian' {
         onEnter(e: KeyboardEvent): boolean;
         /**
          * @param e.
+         *
          * @internal Preemptively closes the menu if click is registered on menu item.
          */
         onMenuClick(e: MouseEvent): void;
         /**
          * @param e - Mouse event.
+         *
          * @internal Opens submenu if mouse is hovering over item with submenu.
          */
         onMouseOver(e: MouseEvent): boolean;
@@ -86,16 +90,19 @@ declare module 'obsidian' {
         openSubmenuSoon(): void;
         /**
          * @param index.
+         *
          * @internal Select the item at the specified index (after either hovering or arrowing over it).
          */
         select(index: number): void;
         /**
          * @param el - Element to set as parent.
+         *
          * @internal Set the parent element of the menu (i.e. for workspace leaf context menu).
          */
         setParentElement(el: HTMLElement): this;
         /**
          * @param section.
+         *
          * @param submenu.
          * @internal Add a section to the submenu config.
          */

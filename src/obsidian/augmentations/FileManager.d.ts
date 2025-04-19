@@ -104,22 +104,26 @@ declare module 'obsidian' {
         promptForImageDownload(urls: string[]): Promise<undefined | null | Record<string, TFile>>;
         /**
          * @internal.
+         *
          * Register an extension to be the parent for a specific file type.
          */
         registerFileParentCreator(extension: string, location: TFolder): void;
         /**
          * Rename's a property for all notes currently that have the old key.
+         *
          * @remark The current property type is maintained.
          * @remark Is case sensitive, despite Obsidian *typically* ignoring case for property names.
          */
         renameProperty(oldKey: string, newKey: string): Promise<void>;
         /**
          * @param linkUpdateHandler - Handler to execute for each updated link.
+         *
          * @internal.
          */
         runAsyncLinkUpdate(linkUpdateHandler: LinkUpdateHandler): Promise<void>;
         /**
          * @param path.
+         *
          * @param data.
          * @internal.
          */

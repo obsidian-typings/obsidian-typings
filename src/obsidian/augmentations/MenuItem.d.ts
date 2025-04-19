@@ -45,6 +45,7 @@ declare module 'obsidian' {
         callback?(): void;
         /**
          * @param e - Mouse or keyboard event.
+         *
          * @internal Executes the callback of the onClick event (if not disabled).
          */
         handleEvent(e: MouseEvent | KeyboardEvent): void;
@@ -52,6 +53,7 @@ declare module 'obsidian' {
         removeIcon(): void;
         /**
          * @deprecated.
+         *
          * @param active - Whether the menu item should be checked.
          * @internal Calls `setChecked`, prefer usage of that function instead.
          */
@@ -64,6 +66,7 @@ declare module 'obsidian' {
         setSubmenu(): Menu;
         /**
          * @param warning - Whether the menu item should be styled as a warning.
+         *
          * @internal Add warning styling to the menu item.
          */
         setWarning(warning: boolean): this;

@@ -113,11 +113,13 @@ declare module 'obsidian' {
         reloadConfig(): void;
         /**
          * @param file File to remove.
+         *
          * @internal Remove file as child/parent from respective folders.
          */
         removeChild(file: TAbstractFile): void;
         /**
          * @param path Path to file.
+         *
          * @internal Get the file by absolute path.
          */
         resolveFilePath(path: string): TAbstractFile | null;

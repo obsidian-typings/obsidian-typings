@@ -133,6 +133,7 @@ declare module 'obsidian' {
         title: string;
         /**
          * Manages all file operations for the vault, contains hooks for file changes, and an adapter for.
+         *
          * low-level file system operations.
          *
          * @tutorial Used for creating your own files and folders, renaming, ...

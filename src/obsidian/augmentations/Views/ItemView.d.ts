@@ -48,6 +48,7 @@ declare module 'obsidian' {
 
         /**
          * Adds an action button to the header of the view.
+         *
          * @param icon - The icon for the action.
          * @param title - The title for the action.
          * @param callback - Callback to execute on click.

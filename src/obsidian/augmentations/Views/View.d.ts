@@ -45,11 +45,13 @@ declare module 'obsidian' {
         onHeaderMenu(e: unknown): void;
         /**
          * Adds the menu items to the menu.
+         *
          * @param menu the menu to fill.
          */
         onTabMenu(menu: Menu): void;
         /**
          * Opens the view.
+         *
          * @param parentEl The node the view get attached to.
          */
         open(parentEl: Node): Promise<void>;

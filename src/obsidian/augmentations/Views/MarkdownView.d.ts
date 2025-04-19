@@ -13,6 +13,7 @@ declare module 'obsidian' {
     interface MarkdownView extends TextFileView {
         /**
          * Backlinks component.
+         *
          * @todo Documentation incomplete.
          */
         backlinks: BacklinkComponent | null;

@@ -40,6 +40,7 @@ declare module 'obsidian' {
         requestUpdateLinks(): unknown;
         /**
          * Set the Preview to new data.
+         *
          * @param data The data to set the renderer to.
          * @param clear If the preview should be cleared.
          */

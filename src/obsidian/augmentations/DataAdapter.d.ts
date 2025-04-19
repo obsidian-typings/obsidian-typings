@@ -46,6 +46,7 @@ declare module 'obsidian' {
         getFullRealPath(normalizedPath: string): string;
         /**
          * Get normalized path.
+         *
          * For vault-relative path, it's normalized vault-relative path.
          * For absolute path, it's path as is.
          *
@@ -55,6 +56,7 @@ declare module 'obsidian' {
         getRealPath(path: string): string;
         /**
          * @param normalizedPath Path to file.
+         *
          * @returns String URL of form: app://FILEHASH/path/to/file.
          * @internal Get resource path of file (URL path).
          */

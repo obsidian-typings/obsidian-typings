@@ -43,6 +43,7 @@ declare module 'obsidian' {
 
         /**
          * @param normalizedPath Path to file.
+         *
          * @param options Data write options.
          * @internal Apply data write options to file.
          */
@@ -72,6 +73,7 @@ declare module 'obsidian' {
         listAll(): Promise<void>;
         /**
          * @param normalizedPath Path to directory.
+         *
          * @internal Helper function for `listRecursive` reads children of directory.
          */
         listRecursiveChild(normalizedPath: string, child: string): Promise<void>;

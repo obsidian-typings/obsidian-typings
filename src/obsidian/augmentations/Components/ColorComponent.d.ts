@@ -9,6 +9,7 @@ declare module 'obsidian' {
 
         /**
          * The function that's called after changing the value of the component.
+         *
          * @remark Using `ColorComponent.onChange(callback)` assigns the callback to this method.
          */
         changeCallback?(value: HexString): void;

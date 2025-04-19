@@ -99,6 +99,7 @@ declare module 'obsidian' {
         getLinks(): Record<string, Reference[]>;
         /**
          * Get all links (resolved or unresolved) in the vault.
+         *
          * If the note has multiple aliases, it will be returned multiple times for each alias.
          */
         getLinkSuggestions(): LinkSuggestion[];

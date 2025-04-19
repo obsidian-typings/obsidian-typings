@@ -36,6 +36,7 @@ declare global {
     interface Window {
         /**
          * Global reference to the app.
+         *
          * @public @unofficial
          * @deprecated - Prefer not to use this value directly.
          */
@@ -64,6 +65,7 @@ declare global {
         CodeMirrorAdapter: CodeMirrorAdapterEx;
         /**
          * DOMPurify is a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG.
+         *
          * @public @unofficial
          */
         DOMPurify: typeof DOMPurify;
@@ -77,6 +79,7 @@ declare global {
         frameDom: FrameDom;
         /**
          * Constructor for the Capacitor file system adapter.
+         *
          * @public @unofficial
          */
         FS: CapacitorAdapterFsConstructor;
@@ -88,6 +91,7 @@ declare global {
         mermaid?: Mermaid;
         /**
          * Parse, validate, manipulate, and display dates in javascript.
+         *
          * @public @unofficial
          *
          * Commented out because the global variable is already declared in the `moment` package.
@@ -97,11 +101,13 @@ declare global {
         mr: typeof Object.getOwnPropertySymbols;
         /**
          * Notification component. Use to present timely, high-value information.
+         *
          * @public @unofficial
          */
         Notice: typeof _Notice;
         /**
          * Invoke obsidian protocol action.
+         *
          * @public @unofficial
          */
         OBS_ACT: ObsidianProtocolHandler;
@@ -117,12 +123,14 @@ declare global {
         Prism?: typeof Prism;
         /**
          * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
+         *
          * Returns the text value of the response.
          * @public @unofficial
          */
         request: typeof _request;
         /**
          * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
+         *
          * @public @unofficial
          */
         requestUrl: typeof _requestUrl;
@@ -200,6 +208,7 @@ declare global {
         ): Database;
         /**
          * Select a language file location.
+         *
          * @public @unofficial
          */
         selectLanguageFileLocation(): void;

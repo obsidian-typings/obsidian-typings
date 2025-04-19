@@ -83,17 +83,20 @@ declare module 'obsidian' {
         clearLayout(): Promise<void>;
         /**
          * @param tabs Tab group to create leaf in.
+         *
          * @internal Create a leaf in the selected tab group or last used tab group.
          */
         createLeafInTabGroup(tabs?: WorkspaceTabs): WorkspaceLeaf;
         /**
          * @param leaf Leaf entry to deserialize.
+         *
          * @param ribbon Whether the leaf belongs to the left or right ribbon.
          * @internal Deserialize workspace entries into actual Leaf objects.
          */
         deserializeLayout(leaf: LeafEntry, ribbon?: 'left' | 'right'): Promise<WorkspaceLeaf>;
         /**
          * @param type View type of leaf.
+         *
          * @param ribbon Side ribbon to reveal leaf in.
          * @param viewState Open state of leaf.
          * @internal Reveal leaf in side ribbon with specified view type and state.
@@ -123,6 +126,7 @@ declare module 'obsidian' {
         ): 'left' | 'right' | 'top' | 'bottom' | 'center';
         /**
          * @param e Drag event.
+         *
          * @internal Get the leaf where the leaf should be dropped on dragevent.
          */
         getDropLocation(e: DragEvent): WorkspaceLeaf | null;
@@ -215,6 +219,7 @@ declare module 'obsidian' {
         ): EventRef;
         /**
          * @internal Triggers when user hovers over any note link element (file explorer, editor, ...).
+         *
          * @remark Used for preparing (Ctrl) hover previews.
          */
         on(name: 'hover-link', callback: (event: HoverLinkEvent) => void, ctx?: unknown): EventRef;
@@ -297,6 +302,7 @@ declare module 'obsidian' {
         recursiveGetTarget(e: DragEvent, leaf: WorkspaceLeaf): WorkspaceTabs | null;
         /**
          * @internal Register a CodeMirror editor extension.
+         *
          * @remark Prefer registering the extension via the Plugin class.
          */
         registerEditorExtension(extension: Extension): void;

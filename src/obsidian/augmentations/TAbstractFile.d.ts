@@ -9,6 +9,7 @@ declare module 'obsidian' {
 
         /**
          * Gets the path after renaming the file or folder.
+         *
          * @param newName The new name of the file or folder.
          * @returns The new path of the file or folder.
          */

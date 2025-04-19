@@ -17,12 +17,14 @@ declare module 'obsidian' {
 
         /**
          * @param event - Keyboard event.
+         *
          * @param keypress - Pressed key information.
          * @internal Execute keypress within this scope.
          */
         handleKey(event: KeyboardEvent, keypress: KeymapInfo): unknown;
         /**
          * @deprecated - Executes same functionality as `Scope.register`.
+         *
          * @internal.
          */
         registerKey(modifiers: Modifier[], key: string | null, func: KeymapEventListener): KeymapEventHandler;
