@@ -3,10 +3,6 @@ export {};
 declare module 'obsidian' {
     interface MenuItem {
         /**
-         * The callback that is executed when the menu item is clicked
-         */
-        callback?: () => void;
-        /**
          * Whether the menu item is checked
          */
         checked: boolean | null;
@@ -43,6 +39,10 @@ declare module 'obsidian' {
          */
         titleEl: HTMLElement;
 
+        /**
+         * The callback that is executed when the menu item is clicked
+         */
+        callback?(): void;
         /**
          * @param e - Mouse or keyboard event
          * @internal Executes the callback of the onClick event (if not disabled)
