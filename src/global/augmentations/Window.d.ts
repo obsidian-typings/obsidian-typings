@@ -33,7 +33,35 @@ import type { Database } from '../../obsidian/internals/WebSQL/Database.d.ts';
 export {};
 
 declare global {
-    interface Window {
+    /**
+     * Augments the built-in {@link Window} interface.
+     */
+    interface Window
+        extends
+            EventTarget,
+            AnimationFrameProvider,
+            GlobalEventHandlers,
+            WindowEventHandlers,
+            WindowLocalStorage,
+            WindowOrWorkerGlobalScope,
+            WindowSessionStorage
+    {
+        /**
+         * The actively focused Document object. This is usually the same as `document` but.
+         * it will be different when using popout windows.
+         *
+         * @official
+         */
+        activeDocument: Document;
+
+        /**
+         * The actively focused Window object. This is usually the same as `window` but.
+         * it will be different when using popout windows.
+         *
+         * @official
+         */
+        activeWindow: Window;
+
         /**
          * Global reference to the app.
          *
@@ -187,6 +215,163 @@ declare global {
         /** @unofficial */
         wf: typeof Object.defineProperty;
 
+        /**
+         * Sends an AJAX request.
+         *
+         * @param options - The options for the AJAX request.
+         * @example
+         * ```ts
+         * ajax({
+         *     url: 'https://example.com',
+         *     success: (response) => {
+         *         console.log(response);
+         *     },
+         *     error: (error) => {
+         *         console.error(error);
+         *     }
+         * });
+         * ```
+         * @official
+         */
+        ajax(options: AjaxOptions): void;
+
+        /**
+         * Sends an AJAX request and returns a promise.
+         *
+         * @param options - The options for the AJAX request.
+         * @returns A promise that resolves to the response.
+         * @example
+         * ```ts
+         * const response = await ajaxPromise({ url: 'https://example.com' });
+         * console.log(response);
+         * ```
+         * @official
+         */
+        ajaxPromise(options: AjaxOptions): Promise<any>;
+
+        /**
+         * Creates a new `<div>` element.
+         *
+         * @param o - The options object.
+         * @param callback - A callback function to be called when the element is created.
+         * @returns The created element.
+         * @example
+         * ```ts
+         * createDiv({ text: 'foo' }, (div) => {
+         *     div.createEl('strong', { text: 'bar' });
+         * });
+         * ```
+         * @official
+         */
+        createDiv(o?: DomElementInfo | string, callback?: (el: HTMLDivElement) => void): HTMLDivElement;
+
+        /**
+         * Creates a new element.
+         *
+         * @typeParam K - The type of the element to create.
+         * @param tag - The tag name of the element to create.
+         * @param o - The options object.
+         * @param callback - A callback function to be called when the element is created.
+         * @returns The created element.
+         * @example
+         * ```ts
+         * createEl('p', { text: 'foo' }, (p) => {
+         *     p.createEl('strong', { text: 'bar' });
+         * });
+         * ```
+         * @official
+         */
+        createEl<K extends keyof HTMLElementTagNameMap>(
+            tag: K,
+            o?: DomElementInfo | string,
+            callback?: (el: HTMLElementTagNameMap[K]) => void
+        ): HTMLElementTagNameMap[K];
+
+        /**
+         * Creates a new document fragment.
+         *
+         * @param callback - A callback function to be called when the element is created.
+         * @returns The created element.
+         * @example
+         * ```ts
+         * createFragment((fragment) => {
+         *     fragment.createEl('p', { text: 'foo' });
+         * });
+         * ```
+         * @official
+         */
+        createFragment(callback?: (el: DocumentFragment) => void): DocumentFragment;
+
+        /**
+         * Creates a new `<span>` element.
+         *
+         * @param o - The options object.
+         * @param callback - A callback function to be called when the element is created.
+         * @returns The created element.
+         * @example
+         * ```ts
+         * createSpan({ text: 'foo' }, (span) => {
+         *     span.createEl('strong', { text: 'bar' });
+         * });
+         * ```
+         * @official
+         */
+        createSpan(o?: DomElementInfo | string, callback?: (el: HTMLSpanElement) => void): HTMLSpanElement;
+
+        /**
+         * Creates a new svg element such as `<svg>`, `<circle>`, `<rect>`, etc.
+         *
+         * @param tag - The tag name of the element to create.
+         * @param o - The options object.
+         * @param callback - A callback function to be called when the element is created.
+         * @returns The created element.
+         * @example
+         * ```ts
+         * createSvg('svg', { cls: 'foo bar' }, (svg) => {
+         *     svg.createSvg('circle');
+         * });
+         * ```
+         * @official
+         */
+        createSvg<K extends keyof SVGElementTagNameMap>(
+            tag: K,
+            o?: SvgElementInfo | string,
+            callback?: (el: SVGElementTagNameMap[K]) => void
+        ): SVGElementTagNameMap[K];
+
+        /**
+         * Finds the first element that matches the selector.
+         *
+         * @param selector - The selector to find the element with.
+         * @returns The first element that matches the selector, or `null` if no match is found.
+         * @example
+         * ```ts
+         * const element = document.body.createEl('p');
+         * element.createEl('strong', { cls: 'foo' });
+         * console.log(fish('.foo')); // <strong class="foo"></span>
+         * console.log(fish('.bar')); // null
+         * ```
+         * @official
+         */
+        fish(selector: string): HTMLElement | null;
+
+        /**
+         * Finds all elements that match the selector.
+         *
+         * @param selector - The selector to find the elements with.
+         * @returns An array of all elements that match the selector.
+         * @example
+         * ```ts
+         * const element = document.body.createEl('p');
+         * element.createEl('strong', { cls: 'foo' });
+         * element.createEl('strong', { cls: 'foo' });
+         * console.log(fishAll('.foo')); // [<strong class="foo"></strong>, <strong class="foo"></strong>]
+         * console.log(fishAll('.bar')); // []
+         * ```
+         * @official
+         */
+        fishAll(selector: string): HTMLElement[];
+
         /** @unofficial */
         globalEnhance(): void;
 
@@ -234,11 +419,37 @@ declare global {
          */
         initVimMode(CodeMirror: CodeMirrorAdapterEx): VimApi;
 
+        /**
+         * Checks if the given object is a boolean.
+         *
+         * @param obj - The object to check.
+         * @returns `true` if the object is a boolean, `false` otherwise.
+         * @example
+         * ```ts
+         * console.log(isBoolean(false)); // true
+         * console.log(isBoolean('not a boolean')); // false
+         * ```
+         * @official
+         */
+        isBoolean(obj: any): obj is boolean;
+
         /** @unofficial */
         li(target: object, source: object): object;
 
         /** @unofficial */
         mo(target: object, propertyNames: string[]): object;
+
+        /**
+         * Waits for the next frame.
+         *
+         * @returns A promise that resolves after the next frame.
+         * @example
+         * ```ts
+         * await nextFrame();
+         * ```
+         * @official
+         */
+        nextFrame(): Promise<void>;
 
         /** @unofficial */
         openDatabase(
@@ -250,11 +461,37 @@ declare global {
         ): Database;
 
         /**
+         * Executes a function when the DOM is ready.
+         *
+         * @param fn - The function to execute when the DOM is ready.
+         * @example
+         * ```ts
+         * ready(() => {
+         *     console.log('DOM is ready');
+         * });
+         * @official
+         */
+        ready(fn: () => any): void;
+
+        /**
          * Select a language file location.
          *
          * @unofficial
          */
         selectLanguageFileLocation(): void;
+
+        /**
+         * Sleeps for a given number of milliseconds.
+         *
+         * @param ms - The number of milliseconds to sleep.
+         * @returns A promise that resolves after the given number of milliseconds.
+         * @example
+         * ```ts
+         * await sleep(1000);
+         * ```
+         * @official
+         */
+        sleep(ms: number): Promise<void>;
 
         /** @unofficial */
         St(target: object, source: object | undefined): object;
