@@ -7,5 +7,8 @@ import type { RandomNotePlugin } from './RandomNotePlugin.d.ts';
  * @unofficial
  */
 export interface RandomNotePluginInstance extends InternalPluginInstance<RandomNotePlugin> {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
 }

@@ -6,8 +6,14 @@ import type { SQLTransaction } from './SQLTransaction.d.ts';
  * @unofficial
  */
 export interface Database {
+    /**
+     * @todo Documentation incomplete.
+     */
     version: string;
 
+    /**
+     * @todo Documentation incomplete.
+     */
     changeVersion(
         oldVersion: string,
         newVersion: string,
@@ -15,11 +21,19 @@ export interface Database {
         errorCallback?: (error: SQLError) => void,
         successCallback?: () => void
     ): void;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     readTransaction(
         callback: (transaction: SQLTransaction) => void,
         errorCallback?: (error: SQLError) => void,
         successCallback?: () => void
     ): void;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     transaction(
         callback: (transaction: SQLTransaction) => void,
         errorCallback?: (error: SQLError) => void,

@@ -40,15 +40,16 @@ declare module 'obsidian' {
             remove_previous: boolean,
             range?: EditorSelection
         ): void;
+
         /**
          * Convert editor position to screen position.
          *
          * @param pos Editor position.
          * @param relative_to_editor Relative to the editor or the application window.
-         *
          * @unofficial
          */
         coordsAtPos(pos: EditorPosition, relative_to_editor: boolean): Coords;
+
         /**
          * Unfolds all folded lines one level up.
          *
@@ -56,6 +57,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         foldLess(): void;
+
         /**
          * Folds all the blocks that are of the lowest unfolded level.
          *
@@ -63,24 +65,28 @@ declare module 'obsidian' {
          * @unofficial
          */
         foldMore(): void;
+
         /**
          * Get all ranges that can be folded away in the editor.
          *
          * @unofficial
          */
         getAllFoldableLines(): Fold[];
+
         /**
          * Get a clickable link - if it exists - at specified position.
          *
          * @unofficial
          */
         getClickableTokenAt(pos: EditorPosition): ClickableToken | null;
+
         /**
          * Get all blocks that were folded by their starting character position.
          *
          * @unofficial
          */
         getFoldOffsets(): Set<number>;
+
         /**
          * Checks whether the editor has a highlight of specified class.
          *
@@ -88,6 +94,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         hasHighlight(style?: string): boolean;
+
         /**
          * Wraps current line around specified characters.
          *
@@ -95,28 +102,31 @@ declare module 'obsidian' {
          * @unofficial
          */
         insertBlock(start: string, end: string): void;
+
         /**
          * Get the closest character position to the specified coordinates.
          *
          * @param x - The `x` coordinate.
          * @param y - The `y` coordinate.
          * @returns The closest character position to the specified coordinates.
-         *
          * @unofficial
          */
         posAtCoords(x: number, y: number): EditorPosition;
+
         /**
          * Removes all highlights of specified class.
          *
          * @unofficial
          */
         removeHighlights(style: string): void;
+
         /**
          * Adds a search cursor to the editor.
          *
          * @unofficial
          */
         searchCursor(searchString: string): SearchCursor;
+
         /**
          * Applies specified markdown syntax to selected text or word under cursor.
          *

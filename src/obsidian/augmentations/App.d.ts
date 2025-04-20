@@ -30,10 +30,10 @@ declare module 'obsidian' {
          * @unofficial
          */
         appId: string;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         appMenuBarManager: AppMenuBarManager;
+
         /**
          * Contains all registered commands.
          *
@@ -41,6 +41,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         commands: Commands;
+
         /**
          * Custom CSS (snippets/themes) applied to the application.
          *
@@ -48,22 +49,24 @@ declare module 'obsidian' {
          * @unofficial
          */
         customCss: CustomCSS;
+
         /**
          * References to important DOM elements of the application.
          *
          * @unofficial
          */
         dom: ObsidianDOM;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         dragManager: DragManager;
+
         /**
          * Registry that manages the creation of generic media type embeds.
          *
          * @unofficial
          */
         embedRegistry: EmbedRegistry;
+
         /**
          * Manage the creation, deletion and renaming of files from the UI.
          *
@@ -71,10 +74,10 @@ declare module 'obsidian' {
          * @unofficial
          */
         fileManager: FileManager;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         foldManager: FoldManager;
+
         /**
          * Manages global hotkeys.
          *
@@ -83,6 +86,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         hotkeyManager: HotkeyManager;
+
         /**
          * Manager of internal 'core' plugins.
          *
@@ -90,6 +94,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         internalPlugins: InternalPlugins;
+
         /**
          * Whether the application is currently running on mobile.
          *
@@ -99,11 +104,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         isMobile: boolean;
+
         /**
          * @deprecated Made inaccessible in 1.6.0, this object can be recreated using Notices
          * @unofficial
          */
         loadProgress: LoadProgress;
+
         /**
          * Manages the gathering and updating of metadata for all files in the vault.
          *
@@ -111,6 +118,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         metadataCache: MetadataCache;
+
         /**
          * Manages the frontmatter properties of the vault and the rendering of the properties.
          *
@@ -118,30 +126,30 @@ declare module 'obsidian' {
          * @unofficial
          */
         metadataTypeManager: MetadataTypeManager;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         mobileNavbar: MobileNavbar | null;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         mobileTabSwitcher: MobileTabSwitcher | null;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         mobileToolbar: MobileToolbar | null;
+
         /**
          * Events to execute on the next frame
          *
          * @unofficial
          */
         nextFrameEvents: (() => void)[];
+
         /**
          * Timer for the next frame
          *
          * @unofficial
          */
         nextFrameTimer: number | null;
+
         /**
          * Manages loading and enabling of community (non-core) plugins.
          *
@@ -150,12 +158,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         plugins: Plugins;
+
         /**
          * Root keyscope of the application
          *
          * @unofficial
          */
         scope: Scope;
+
         /**
          * Manages the settings modal and its tabs.
          *
@@ -164,16 +174,17 @@ declare module 'obsidian' {
          * @unofficial
          */
         setting: AppSetting;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         shareReceiver: ShareReceiver;
+
         /**
          * Status bar of the application
          *
          * @unofficial
          */
         statusBar: StatusBar;
+
         /**
          * Name of the vault with version suffix.
          *
@@ -181,6 +192,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         title: string;
+
         /**
          * Manages all file operations for the vault, contains hooks for file changes, and an adapter for.
          *
@@ -192,6 +204,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         vault: Vault;
+
         /**
          * Manages the construction of appropriate views when opening a file of a certain type.
          *
@@ -199,6 +212,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         viewRegistry: ViewRegistry;
+
         /**
          * Manages the workspace layout, construction, rendering and manipulation of leaves.
          *
@@ -213,50 +227,53 @@ declare module 'obsidian' {
          * @unofficial
          */
         changeTheme(theme: 'moonstone' | 'obsidian'): void;
+
         /**
          * Copies Obsidian URI of given file to clipboard.
          *
          * @param file File to generate URI for.
-         *
          * @unofficial
          */
         copyObsidianUrl(file: TFile): void;
+
         /**
          * Toggles debug mode.
          *
          * @param isEnabled Whether to enable or disable debug mode.
-         *
          * @unofficial
          */
         debugMode(isEnabled: boolean): void;
+
         /**
          * Disables all CSS transitions in the vault (until manually re-enabled).
          *
          * @unofficial
          */
         disableCssTransition(): void;
+
         /**
          * Restarts Obsidian and renders workspace in mobile mode.
          *
          * @tutorial Very useful for testing the rendering of your plugin on mobile devices.
-         *
          * @unofficial
          */
         emulateMobile(emulate: boolean): void;
+
         /**
          * Enables all CSS transitions in the vault.
          *
          * @unofficial
          */
         enableCssTransition(): void;
+
         /**
          * Manually fix all file links pointing towards image/audio/video resources in element.
          *
          * @param element Element to fix links in.
-         *
          * @unofficial
          */
         fixFileLinks(element: HTMLElement): void;
+
         /**
          * Applies an obfuscation font to all text characters in the vault.
          *
@@ -266,6 +283,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         garbleText(): void;
+
         /**
          * Get the accent color of the application.
          *
@@ -273,6 +291,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         getAccentColor(): string;
+
         /**
          * Get the current title of the application.
          *
@@ -280,12 +299,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         getAppTitle(): string;
+
         /**
          * Get the URI for opening specified file in Obsidian.
          *
          * @unofficial
          */
         getObsidianUrl(file: TFile): string;
+
         /**
          * Get currently active spellcheck languages.
          *
@@ -294,6 +315,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         getSpellcheckLanguages(): string[];
+
         /**
          * Get the current color scheme of the application.
          *
@@ -301,93 +323,111 @@ declare module 'obsidian' {
          * @unofficial
          */
         getTheme(): 'moonstone' | 'obsidian';
+
         /**
          * Import attachments into specified folder.
          *
          * @unofficial
          */
         importAttachments(imports: ImportedAttachments[], folder: TFolder | null): Promise<void>;
+
         /**
          * Initialize the entire application using the provided FS adapter
          *
          * @unofficial
          */
         initializeWithAdapter(adapter: DataAdapter): Promise<void>;
+
+        /**
+             * @todo Documentation incomplete.
+             *
+            @unofficial
+             */
         isVimEnabled(): boolean;
+
         /**
          * Load a value from the localstorage given key.
          *
          * @param key Key of value to load.
          * @remark This method is device *and* vault specific.
          * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault.
-         *
          * @unofficial
          */
         loadLocalStorage(key: string): unknown | null;
+
         /**
          * Add callback to execute on next frame
          *
          * @unofficial
          */
         nextFrame(callback: () => void): void;
+
         /**
          * Add callback to execute on next frame, and remove after execution
          *
          * @unofficial
          */
         nextFrameOnceCallback(callback: () => void): void;
+
         /**
          * Add callback to execute on next frame with promise
          *
          * @unofficial
          */
         nextFramePromise(callback: () => Promise<void>): Promise<void>;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         on(): void;
+
         /**
          * Execute all logged callback (called when next frame is loaded)
          *
          * @unofficial
          */
         onNextFrame(callback: () => void): void;
+
         /**
          * Open the help vault (or site if mobile).
          *
          * @unofficial
          */
         openHelp(): void;
+
         /**
          * Open the vault picker.
          *
          * @unofficial
          */
         openVaultChooser(): void;
+
         /**
          * Open the file with OS defined default file browser application.
          *
          * @unofficial
          */
         openWithDefaultApp(path: string): void;
+
         /**
          * Register all basic application commands
          *
          * @unofficial
          */
         registerCommands(): void;
+
         /**
          * Register a hook for saving workspace data before unload
          *
          * @unofficial
          */
         registerQuitHook(): void;
+
         /**
          * Save attachment at default attachments location
          *
          * @unofficial
          */
         saveAttachment(name: string, extension: string, data: ArrayBuffer): Promise<TFile>;
+
         /**
          * Save a value to the localstorage given key.
          *
@@ -395,86 +435,96 @@ declare module 'obsidian' {
          * @param value Value to save.
          * @remark This method is device *and* vault specific.
          * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault.
-         *
          * @unofficial
          */
         saveLocalStorage(key: string, value: unknown): void;
+
         /**
          * Set the accent color of the application.
          *
          * @remark Also updates the CSS `--accent` variables.
-         *
          * @unofficial
          */
         setAccentColor(color: string): void;
+
         /**
          * Set the path where attachments should be stored.
          *
          * @unofficial
          */
         setAttachmentFolder(path: string): void;
+
         /**
          * Set the spellcheck languages.
          *
          * @unofficial
          */
         setSpellcheckLanguages(languages: string[]): void;
+
         /**
          * Set the current color scheme of the application and reload the CSS.
          *
          * @unofficial
          */
         setTheme(theme: 'moonstone' | 'obsidian'): void;
+
         /**
          * Open the OS file picker at path location.
          *
          * @unofficial
          */
         showInFolder(path: string): void;
+
         /**
          * Show the release notes for provided version as a new leaf.
          *
          * @param version Version to show release notes for (defaults to current version).
-         *
          * @unofficial
          */
         showReleaseNotes(version?: string): void;
+
         /**
          * Updates the accent color and reloads the CSS.
          *
          * @unofficial
          */
         updateAccentColor(): void;
+
         /**
          * Update the font family of the application and reloads the CSS.
          *
          * @unofficial
          */
         updateFontFamily(): void;
+
         /**
          * Update the font size of the application and reloads the CSS.
          *
          * @unofficial
          */
         updateFontSize(): void;
+
         /**
          * Update the inline title rendering in notes.
          *
          * @unofficial
          */
         updateInlineTitleDisplay(): void;
+
         /**
          * Update the ribbon display.
          *
          * @unofficial
          */
         updateRibbonDisplay(): void;
+
         /**
          * Update the color scheme of the application and reloads the CSS.
          *
          * @unofficial
          */
         updateTheme(): void;
+
         /**
          * Update the view header display in notes.
          *

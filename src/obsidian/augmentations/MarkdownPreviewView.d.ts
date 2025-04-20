@@ -11,112 +11,95 @@ declare module 'obsidian' {
          * @unofficial
          */
         docId: string;
+
         /**
          * HTML renderer for the Markdown.
          *
          * @unofficial
          */
         renderer: ReadViewRenderer;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         search: null | unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         type: 'preview' | string;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         view: MarkdownView;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         applyFoldInfo(e: unknown): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         beforeUnload(): unknown;
+
         /**
          * Clears the rendered preview.
          *
          * @unofficial
          */
         clear(): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         edit(e: unknown): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         foldAll(): unknown;
+
         /**
          * Returns the renderer text.
          *
          * @unofficial
          */
         get(): string;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         getEphemeralState(e: unknown): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         getFoldInfo(): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         getSelection(): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         hide(): void;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         onFoldChange(): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         onResize(): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         onScroll(): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         requestUpdateLinks(): unknown;
+
         /**
          * Set the Preview to new data.
          *
          * @param data The data to set the renderer to.
          * @param clear If the preview should be cleared.
-         *
          * @unofficial
          */
         set(data: string, clear: boolean): void;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         setEphemeralState(e: unknown): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         show(): void;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         showSearch(): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         unfoldAll(): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         updateOptions(): unknown;
     }
 }

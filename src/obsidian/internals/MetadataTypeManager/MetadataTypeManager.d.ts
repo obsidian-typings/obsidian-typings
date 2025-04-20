@@ -22,15 +22,22 @@ export interface MetadataTypeManager extends Events {
      * Reference to App.
      */
     app: App;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     onConfigFileChange: Debouncer<[], Promise<void>>;
+
     /**
      * Registered properties of the vault.
      */
     properties: MetadataTypeManagerPropertiesRecord;
+
     /**
      * Registered type widgets.
      */
     registeredTypeWidgets: MetadataTypeManagerRegisteredTypeWidgetsRecord;
+
     /**
      * Associated widget types for each property.
      */
@@ -40,40 +47,57 @@ export interface MetadataTypeManager extends Events {
      * Get all registered properties of the vault.
      */
     getAllProperties(): Record<string, PropertyInfo>;
+
     /**
      * Get assigned widget type for property.
      */
     getAssignedType(property: string): PropertyWidgetType | null;
+
     /**
      * Get info for property.
      */
     getPropertyInfo(property: string): PropertyInfo;
+
     /**
      * Get expected widget type for property and the one inferred from the property value.
      */
     getTypeInfo(options: GetTypeInfoOptions): TypeInfo;
+
     /**
      * Get all properties with an assigned widget type.
      */
     getTypes(): string[];
+
     /**
      * Load property types from config.
      */
     loadData(): Promise<void>;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     onRaw(e: unknown): void;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     registerListeners(): void;
+
     /**
      * Save property types to config.
      */
     save(): Promise<void>;
+
     /**
      * Get all properties from metadata cache.
      */
     savePropertyInfo(): void;
+
     /**
      * Set widget type for property.
      */
     setType(property: string, type: PropertyWidgetType): Promise<void>;
+
     /**
      * Unset widget type for property.
      */

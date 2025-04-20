@@ -7,7 +7,18 @@ import type { OutgoingLinkPlugin } from './OutgoingLinkPlugin.d.ts';
  * @unofficial
  */
 export interface OutgoingLinkPluginInstance extends InternalPluginInstance<OutgoingLinkPlugin> {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     defaultOn: true;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     plugin: OutgoingLinkPlugin;
 }

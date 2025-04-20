@@ -7,7 +7,18 @@ import type { SwitcherPlugin } from './SwitcherPlugin.d.ts';
  * @unofficial
  */
 export interface SwitcherPluginInstance extends InternalPluginInstance<SwitcherPlugin> {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     defaultOn: true;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     plugin: SwitcherPlugin;
 }

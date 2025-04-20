@@ -6,18 +6,18 @@ declare module 'obsidian' {
          * Gets the count of files in the folder.
          *
          * @returns The number of files in the folder.
-         *
          * @unofficial
          */
         getFileCount(): number;
+
         /**
          * Gets the count of subfolders in the folder.
          *
          * @returns The number of subfolders in the folder.
-         *
          * @unofficial
          */
         getFolderCount(): number;
+
         /**
          * Returns the prefix of the folder path.
          *
@@ -25,7 +25,6 @@ declare module 'obsidian' {
          * If the folder is 'a/b/c', it returns 'a/b/'.
          *
          * @returns The prefix of the folder.
-         *
          * @unofficial
          */
         getParentPrefix(): string;

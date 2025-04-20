@@ -5,7 +5,18 @@ import type { ReferenceCache } from 'obsidian';
  * @unofficial
  */
 export interface LinkChangeUpdate {
+    /**
+     * @todo Documentation incomplete.
+     */
     change: string;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     reference: ReferenceCache;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     sourcePath: string;
 }

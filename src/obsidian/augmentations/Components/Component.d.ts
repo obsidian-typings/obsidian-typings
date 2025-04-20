@@ -9,12 +9,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         _children: Component[];
+
         /**
          * Events that are attached to the current component, will be detached on unloading parent component.
          *
          * @unofficial
          */
         _events: EventRef[];
+
         /**
          * Whether the component and its children are loaded.
          *
@@ -22,9 +24,7 @@ declare module 'obsidian' {
          */
         _loaded: boolean;
 
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         registerScopeEvent(keymapEventHandler: KeymapEventHandler): void;
     }
 }

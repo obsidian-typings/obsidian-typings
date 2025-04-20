@@ -7,6 +7,13 @@ import type { PublishPlugin } from './PublishPlugin.d.ts';
  * @unofficial
  */
 export interface PublishPluginInstance extends InternalPluginInstance<PublishPlugin> {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     plugin: PublishPlugin;
 }

@@ -6,6 +6,9 @@ import type { Outline } from './Outline.js';
  */
 export declare class HighlightOutline extends Outline {
     constructor(outlines: unknown, box: unknown, lastPoint: any);
+    /**
+     * @todo Documentation incomplete.
+     */
     lastPoint: unknown;
 
     get box(): Object | null;

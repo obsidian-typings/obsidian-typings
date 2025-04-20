@@ -6,5 +6,8 @@ import type { VimState } from './VimState.d.ts';
  * @unofficial
  */
 export interface VimEditor {
+    /**
+     * @todo Documentation incomplete.
+     */
     state: VimState;
 }

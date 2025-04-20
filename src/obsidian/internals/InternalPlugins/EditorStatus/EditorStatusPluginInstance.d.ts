@@ -7,8 +7,23 @@ import type { EditorStatusPlugin } from './EditorStatusPlugin.d.ts';
  * @unofficial
  */
 export interface EditorStatusPluginInstance extends InternalPluginInstance<EditorStatusPlugin> {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     defaultOn: true;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     hiddenFromList: true;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     plugin: EditorStatusPlugin;
 }

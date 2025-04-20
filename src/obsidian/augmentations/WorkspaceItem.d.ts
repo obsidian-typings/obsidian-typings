@@ -2,62 +2,46 @@ import type { SerializedWorkspaceItem } from '../internals/Workspace/SerializedW
 
 declare module 'obsidian' {
     interface WorkspaceItem extends Events {
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         app: App;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         component: Component;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         containerEl: HTMLDivElement;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         dimension: number | null;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         id: string;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         resizeHandleEl: HTMLHRElement;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         type: string;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         workspace: Workspace;
 
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         detach(): void;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         getIcon(): IconName;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         onResizeStart(evt: MouseEvent): void;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         serialize(): SerializedWorkspaceItem;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         setDimension(dimension: number | null): void;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         setParent(parent: WorkspaceParent): void;
     }
 }

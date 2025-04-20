@@ -5,5 +5,8 @@ import type { ChangeDesc } from '@codemirror/state';
  * @unofficial
  */
 export interface LineHandleChange {
+    /**
+     * @todo Documentation incomplete.
+     */
     changes: ChangeDesc;
 }

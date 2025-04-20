@@ -6,57 +6,46 @@ export {};
 
 declare module 'obsidian' {
     interface CapacitorAdapter extends DataAdapter {
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         fs: CapacitorAdapterFs;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         getNativePath(normalizedPath: string): string;
+
         /**
          * Helper function for `listRecursive` reads children of directory.
          *
          * @param normalizedPath Path to directory.
-         *
          * @unofficial
          */
         listRecursiveChild(normalizedPath: string, child: FileEntry): Promise<void>;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         onFileChange(normalizedPath: string): void;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         open(normalizedPath: string): Promise<void>;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         quickList(normalizedFolderPath: string, fileEntry: FileEntry): void;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         reconcileFileCreation(
             normalizedPath: string,
             normalizedNewPath: string,
             fileEntry: CapacitorFileEntry
         ): Promise<void>;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         removeFile(normalizedPath: string): Promise<void>;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         stopWatch(): Promise<void>;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         testInsensitive(): Promise<void>;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         update(normalizedPath: string): Promise<void>;
     }
 }

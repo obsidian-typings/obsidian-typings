@@ -3,41 +3,30 @@ export {};
 declare module 'obsidian' {
     /** @todo Documentation incomplete */
     interface MarkdownRenderer extends MarkdownRenderChild, MarkdownPreviewEvents, HoverParent {
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         get path(): unknown;
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         onCheckboxClick(e: unknown, n: unknown, i: unknown): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         onFileChange(e: unknown): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         onFoldChange(): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         onload(): void;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         onRenderComplete(): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         onScroll(): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         postProcess(e: unknown, t: unknown, n: unknown): unknown;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         resolveLinks(e: unknown): unknown;
     }
 }

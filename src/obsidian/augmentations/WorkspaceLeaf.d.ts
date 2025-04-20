@@ -2,21 +2,16 @@ export {};
 
 declare module 'obsidian' {
     interface WorkspaceLeaf extends WorkspaceItem {
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         activeTime?: number;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         tabHeaderEl: HTMLElement;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         tabHeaderInnerIconEl: HTMLElement;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         tabHeaderInnerTitleEl: HTMLElement;
 
         /**
@@ -25,22 +20,24 @@ declare module 'obsidian' {
          * @unofficial
          */
         on(name: 'history-change', callback: () => void, ctx?: unknown): EventRef;
+
         /**
          * Triggers when context menu action is executed on the leaf.
          *
          * @unofficial
          */
         on(name: 'leaf-menu', callback: (menu: Menu, leaf: WorkspaceLeaf) => void, ctx?: unknown): EventRef;
+
         /**
          * Open a link in the current leaf.
          *
          * @param linktext - The link text to open.
          * @param sourcePath - The path of the source file.
          * @param openViewState - The view state to open the link in.
-         *
          * @unofficial
          */
         openLinkText(linktext: string, sourcePath: string, openViewState?: OpenViewState): Promise<void>;
+
         /**
          * Set the vertical height a leaf may occupy if it is in a split. The height is not set directly, but.
          *
@@ -50,7 +47,6 @@ declare module 'obsidian' {
          * second 67%.).
          *
          * @param flexgrow - Sets the flex-grow of the leaf. (0-100).
-         *
          * @unofficial
          */
         setDimension(flexgrow?: number | null): void;

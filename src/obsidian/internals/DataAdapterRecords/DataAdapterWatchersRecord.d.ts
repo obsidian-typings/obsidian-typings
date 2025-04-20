@@ -3,6 +3,7 @@ import type { DataAdapterWatchersRecordEntry } from './DataAdapterWatchersRecord
 /**
  * A mapping between a vault-relative folder paths to the corresponding watcher entries.
  *
- * @public @unofficial
+ * @public
+ * @unofficial
  */
 export interface DataAdapterWatchersRecord extends Record<string, DataAdapterWatchersRecordEntry> {}

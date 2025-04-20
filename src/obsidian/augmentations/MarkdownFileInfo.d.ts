@@ -2,9 +2,7 @@ import type { MetadataEditor } from '../internals/MetadataEditor.d.ts';
 
 declare module 'obsidian' {
     interface MarkdownFileInfo extends HoverParent {
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         metadataEditor?: MetadataEditor;
     }
 }

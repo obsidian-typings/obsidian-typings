@@ -8,6 +8,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         id: string;
+
         /**
          * Reference to installed plugins element.
          *
@@ -16,18 +17,21 @@ declare module 'obsidian' {
          * @unofficial
          */
         installedPluginsEl?: HTMLElement;
+
         /**
          * Sidebar name of the tab.
          *
          * @unofficial
          */
         name: string;
+
         /**
          * Sidebar navigation element of the tab.
          *
          * @unofficial
          */
         navEl: HTMLElement;
+
         /**
          * Reference to the plugin that initialized the tab.
          *
@@ -36,6 +40,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         plugin?: Plugin;
+
         /**
          * Reference to the settings modal.
          *

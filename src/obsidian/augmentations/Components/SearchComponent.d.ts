@@ -15,6 +15,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         addRightDecorator(decoratorFn: (containerEl: HTMLElement) => void): this;
+
         /**
          * Adds a class to the search component.
          *

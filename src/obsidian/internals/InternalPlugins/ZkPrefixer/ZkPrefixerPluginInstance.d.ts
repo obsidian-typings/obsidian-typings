@@ -7,6 +7,13 @@ import type { ZkPrefixerPlugin } from './ZkPrefixerPlugin.d.ts';
  * @unofficial
  */
 export interface ZkPrefixerPluginInstance extends InternalPluginInstance<ZkPrefixerPlugin> {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     plugin: ZkPrefixerPlugin;
 }

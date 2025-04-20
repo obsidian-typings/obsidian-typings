@@ -6,5 +6,8 @@ import type { TAbstractFile } from 'obsidian';
  * @unofficial
  */
 export interface FileTreeItem {
+    /**
+     * @todo Documentation incomplete.
+     */
     file: TAbstractFile;
 }

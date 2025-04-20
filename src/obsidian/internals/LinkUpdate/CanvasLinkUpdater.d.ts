@@ -7,6 +7,13 @@ import type { LinkUpdater } from './LinkUpdater.d.ts';
  * @unofficial
  */
 export interface CanvasLinkUpdater extends LinkUpdater {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     canvas: CanvasPluginInstance;
 }

@@ -8,6 +8,13 @@ import type { VimStateVimPlugin } from './VimStateVimPlugin.d.ts';
  * @unofficial
  */
 export interface VimState {
+    /**
+     * @todo Documentation incomplete.
+     */
     vim: VimStateVim;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     vimPlugin: VimStateVimPlugin;
 }

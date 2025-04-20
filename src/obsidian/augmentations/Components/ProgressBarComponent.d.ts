@@ -8,6 +8,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         lineEl: HTMLDivElement;
+
         /**
          * Access the "bar" element.
          *
@@ -20,7 +21,6 @@ declare module 'obsidian' {
          *
          * @param visible Whether the setting should be visible.
          * @returns The component.
-         *
          * @unofficial
          */
         setVisibility(visible: boolean): this;

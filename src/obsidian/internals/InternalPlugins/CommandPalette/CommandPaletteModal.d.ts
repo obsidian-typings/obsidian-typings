@@ -9,6 +9,13 @@ import type { CommandPalettePluginInstance } from './CommandPalettePluginInstanc
  * @unofficial
  */
 export interface CommandPaletteModal extends FuzzySuggestModal<Command> {
+    /**
+     * @todo Documentation incomplete.
+     */
     commands: Command[] | null;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     plugin: CommandPalettePluginInstance;
 }

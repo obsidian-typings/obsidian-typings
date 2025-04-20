@@ -6,6 +6,9 @@ import type { SharedFile } from './SharedFile.d.ts';
  * @unofficial
  */
 export interface ShareReceiver {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
 
     /**
@@ -14,22 +17,26 @@ export interface ShareReceiver {
      * @param files - Shared files.
      */
     handleShareFiles(files: SharedFile[]): Promise<void>;
+
     /**
      * Handles shared text.
      *
      * @param text - Shared text.
      */
     handleShareText(text: string): Promise<void>;
+
     /**
      * Imports shared files.
      *
      * @param files - Shared files.
      */
     importFiles(files: SharedFile[]): Promise<void>;
+
     /**
      * Configures mobile native events to handle file and text sharing.
      */
     setupNative(): void;
+
     /**
      * Configures the workspace to handle file and text sharing.
      */

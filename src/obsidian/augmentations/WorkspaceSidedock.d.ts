@@ -2,62 +2,46 @@ import type { SerializedWorkspaceSidedock } from '../internals/Workspace/Seriali
 
 declare module 'obsidian' {
     interface WorkspaceSidedock extends WorkspaceSplit {
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         allowSingleChild: boolean;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         autoManageDOM: boolean;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         children: WorkspaceTabs[];
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         direction: string;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         emptyStateEl: HTMLDivElement;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         isResizing: boolean;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         originalSizes: null;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         resizeStartPos: null;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         side: string;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         size: number;
 
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         onSidedockResizeStart(evt: MouseEvent): void;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         recomputeChildrenDimensions(): void;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         serialize(): SerializedWorkspaceSidedock;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         setSize(size: number): void;
     }
 }

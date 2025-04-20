@@ -6,5 +6,8 @@ import type { SlashCommandPlugin } from './SlashCommandPlugin.d.ts';
  * @unofficial
  */
 export interface SlashCommandPluginInstance extends InternalPluginInstance<SlashCommandPlugin> {
+    /**
+     * @todo Documentation incomplete.
+     */
     defaultOn: false;
 }

@@ -17,14 +17,10 @@ declare module 'obsidian' {
          */
         changeCallback?(value: HexString): void;
 
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         getValueInt(): number;
 
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         setValueInt(value: number): this;
     }
 }

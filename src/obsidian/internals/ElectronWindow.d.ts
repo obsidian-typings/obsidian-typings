@@ -5,8 +5,23 @@ import type { BrowserWindow } from 'electron';
  * @unofficial
  */
 export interface ElectronWindow extends BrowserWindow {
+    /**
+     * @todo Documentation incomplete.
+     */
     _browserViews: unknown;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     _events: unknown;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     _eventsCount: unknown;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     devToolsWebContents: unknown;
 }

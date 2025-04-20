@@ -1,10 +1,11 @@
 import type { PlatformType } from './PlatformType.d.ts';
 
 /**
- * @public @unofficial
+ * @public
+ * @unofficial
  *
  * Due to limitations of TypeScript, we cannot extend the Platform constant directly.
- * @example.
+ * @example .
  * ```ts.
  * import { Platform } from 'obsidian';.
  * import type { PlatformEx } from 'obsidian-typings';.
@@ -13,12 +14,43 @@ import type { PlatformType } from './PlatformType.d.ts';
  * ```.
  */
 export interface PlatformEx extends PlatformType {
+    /**
+     * @todo Documentation incomplete.
+     */
     canDisplayRibbon: boolean;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     canExportPdf: boolean;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     canPopoutWindow: boolean;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     canSplit: boolean;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     canStackTabs: boolean;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     mobileDeviceHeight: number;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     mobileKeyboardHeight: number;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     mobileSoftKeyboardVisible: boolean;
 }

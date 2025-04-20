@@ -6,6 +6,9 @@ import type { SQLResultSet } from './SQLResultSet.d.ts';
  * @unofficial
  */
 export interface SQLTransaction {
+    /**
+     * @todo Documentation incomplete.
+     */
     executeSql(
         sqlStatement: string,
         arguments?: unknown[],

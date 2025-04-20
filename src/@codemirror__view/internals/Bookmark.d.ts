@@ -7,12 +7,38 @@ import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
  * @unofficial
  */
 export interface Bookmark {
+    /**
+     * @todo Documentation incomplete.
+     */
     assoc: number;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     cm: CodeMirrorEditor;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     id: number;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     offset: number;
 
+    /**
+     * @todo Documentation incomplete.
+     */
     clear(): void;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     find(): EditorPosition | null;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     update(changeDesc: ChangeDesc): void;
 }

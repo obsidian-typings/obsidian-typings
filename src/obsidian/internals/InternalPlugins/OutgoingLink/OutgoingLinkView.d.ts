@@ -11,6 +11,7 @@ export interface OutgoingLinkView extends InfoFileView {
      * Get the current view type.
      */
     getViewType(): typeof ViewType.OutgoingLink;
+
     /** @todo Documentation incomplete */
     update(): void;
 }

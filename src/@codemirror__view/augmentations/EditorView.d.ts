@@ -6,18 +6,13 @@ export {};
 declare module '@codemirror/view' {
     /** @todo Documentation incomplete */
     interface EditorView {
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         cm?: VimEditor;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         viewState: EditorViewState;
 
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         measure(): void;
     }
 }

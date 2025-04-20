@@ -5,6 +5,13 @@ import type { App } from 'obsidian';
  * @unofficial
  */
 export interface StatusBar {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     containerEl: HTMLElement;
 }

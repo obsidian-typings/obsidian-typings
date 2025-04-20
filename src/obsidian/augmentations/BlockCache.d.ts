@@ -9,9 +9,8 @@ declare module 'obsidian' {
          * @unofficial
          */
         app: App;
-        /**
-         * @unofficial
-         */
+
+        /** @unofficial */
         cache: unknown;
     }
 }

@@ -6,6 +6,13 @@ import type { BrowserPlugin } from './BrowserPlugin.d.ts';
  * @unofficial
  */
 export interface BrowserPluginInstance extends InternalPluginInstance<BrowserPlugin> {
+    /**
+     * @todo Documentation incomplete.
+     */
     defaultOn: false;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     pendingIgnoredURLs: string[];
 }

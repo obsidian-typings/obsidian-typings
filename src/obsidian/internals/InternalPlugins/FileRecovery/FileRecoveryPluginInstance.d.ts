@@ -7,6 +7,13 @@ import type { FileRecoveryPlugin } from './FileRecoveryPlugin.d.ts';
  * @unofficial
  */
 export interface FileRecoveryPluginInstance extends InternalPluginInstance<FileRecoveryPlugin> {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     defaultOn: true;
 }

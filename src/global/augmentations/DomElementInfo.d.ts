@@ -2,9 +2,7 @@ export {};
 
 declare global {
     interface DomElementInfo {
-        /**
-         * @unofficial
-         */
+        /** @unofficial */
         [eventName: `on${string}`]: EventListenerOrEventListenerObject;
     }
 }

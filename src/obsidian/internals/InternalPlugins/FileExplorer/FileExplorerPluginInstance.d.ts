@@ -12,8 +12,19 @@ import type { FileExplorerPlugin } from './FileExplorerPlugin.d.ts';
  * @unofficial
  */
 export interface FileExplorerPluginInstance extends InternalPluginInstance<FileExplorerPlugin> {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     defaultOn: true;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     plugin: FileExplorerPlugin;
 
     /**

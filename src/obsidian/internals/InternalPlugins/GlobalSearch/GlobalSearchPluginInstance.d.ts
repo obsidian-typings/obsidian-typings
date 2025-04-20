@@ -8,7 +8,18 @@ import type { GlobalSearchPlugin } from './GlobalSearchPlugin.d.ts';
  * @unofficial
  */
 export interface GlobalSearchPluginInstance extends InternalPluginInstance<GlobalSearchPlugin> {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     defaultOn: true;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     plugin: GlobalSearchPlugin;
 }

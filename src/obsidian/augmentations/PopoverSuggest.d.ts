@@ -10,12 +10,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         isOpen: boolean;
+
         /**
          * Suggestion container element.
          *
          * @unofficial
          */
         suggestEl: HTMLElement;
+
         /**
          * Handles selection and rendering of the suggestions.
          *

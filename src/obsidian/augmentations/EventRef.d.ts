@@ -8,12 +8,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         ctx?: unknown;
+
         /**
          * Events object the event was registered on.
          *
          * @unofficial
          */
         e: Events;
+
         /**
          * Event name the event was registered on.
          *

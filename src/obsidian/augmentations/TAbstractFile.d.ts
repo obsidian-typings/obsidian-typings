@@ -14,16 +14,15 @@ declare module 'obsidian' {
          *
          * @param newName The new name of the file or folder.
          * @returns The new path of the file or folder.
-         *
          * @unofficial
          */
         getNewPathAfterRename(newName: string): string;
+
         /**
          * @unofficial
          *
          * Sets the path of the file or folder.
          * @param path The new path of the file or folder.
-         *
          * @unofficial
          */
         setPath(path: string): void;

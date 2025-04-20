@@ -5,5 +5,8 @@ import type { EditorRange } from 'obsidian';
  * @unofficial
  */
 export interface MarkdownEditViewEphemeralState {
+    /**
+     * @todo Documentation incomplete.
+     */
     cursor: EditorRange;
 }

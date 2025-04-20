@@ -5,6 +5,13 @@ import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
  * @unofficial
  */
 export class GraphColorGroup {
+    /**
+     * @todo Documentation incomplete.
+     */
     color: GraphColorAttributes;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     query: string;
 }

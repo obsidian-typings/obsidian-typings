@@ -41,54 +41,75 @@ declare global {
          * @deprecated - Prefer not to use this value directly.
          */
         app: App;
+
         /** @unofficial */
         bl: typeof Object.hasOwnProperty;
+
         /** @unofficial */
         blinkfetch: typeof fetch;
+
         /** @unofficial */
         blinkFormData: typeof FormData;
+
         /** @unofficial */
         blinkHeaders: typeof Headers;
+
         /** @unofficial */
         blinkRequest: typeof Request;
+
         /** @unofficial */
         blinkResponse: typeof Response;
+
         /** @unofficial */
         Capacitor: typeof _Capacitor;
+
         /** @unofficial */
         CapacitorPlatforms: typeof _CapacitorPlatforms;
+
         /** @unofficial */
         Cf: typeof Object.getOwnPropertyDescriptors;
+
         /** @unofficial */
         CodeMirror: typeof CodeMirror;
+
         /** @unofficial */
         CodeMirrorAdapter: CodeMirrorAdapterEx;
+
         /**
          * DOMPurify is a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG.
          *
          * @unofficial
          */
         DOMPurify: typeof DOMPurify;
+
         /** @unofficial */
         El: typeof Object.propertyIsEnumerable;
+
         /** @unofficial */
         electron: typeof electron;
+
         /** @unofficial */
         electronWindow: ElectronWindow;
+
         /** @unofficial */
         frameDom: FrameDom;
+
         /**
          * Constructor for the Capacitor file system adapter.
          *
          * @unofficial
          */
         FS: CapacitorAdapterFsConstructor;
+
         /** @unofficial */
         i18next: typeof i18next;
+
         /** @unofficial */
         MathJax?: MathJax;
+
         /** @unofficial */
         mermaid?: Mermaid;
+
         /**
          * Parse, validate, manipulate, and display dates in javascript.
          *
@@ -97,30 +118,39 @@ declare global {
          * Commented out because the global variable is already declared in the `moment` package.
          */
         moment: typeof moment;
+
         /** @unofficial */
         mr: typeof Object.getOwnPropertySymbols;
+
         /**
          * Notification component. Use to present timely, high-value information.
          *
          * @unofficial
          */
         Notice: typeof _Notice;
+
         /**
          * Invoke obsidian protocol action.
          *
          * @unofficial
          */
         OBS_ACT: ObsidianProtocolHandler;
+
         /** @unofficial */
         OBSIDIAN_DEFAULT_I18N: Localization;
+
         /** @unofficial */
         pdfjsLib: typeof pdfjsLib;
+
         /** @unofficial */
         pdfjsTestingUtils: PdfJsTestingUtils;
+
         /** @unofficial */
         PIXI: typeof PIXI;
+
         /** @unofficial */
         Prism?: typeof Prism;
+
         /**
          * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
          *
@@ -128,29 +158,38 @@ declare global {
          * @unofficial
          */
         request: typeof _request;
+
         /**
          * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
          *
          * @unofficial
          */
         requestUrl: typeof _requestUrl;
+
         /** @unofficial */
         scrypt: typeof scrypt;
+
         /** @unofficial */
         Sf: typeof Object.defineProperties;
+
         /** @unofficial */
         temp1: Database['changeVersion'];
+
         /** @unofficial */
         titlebarStyle: string;
+
         /** @unofficial */
         TurndownService: typeof TurndownService;
+
         /** @unofficial */
         WebView: electron.WebviewTag;
+
         /** @unofficial */
         wf: typeof Object.defineProperty;
 
         /** @unofficial */
         globalEnhance(): void;
+
         /**
          * vim.js based on https://github.com/codemirror/CodeMirror/commit/793c9e65e09ec7fba3f4f5aaf366b3d36e1a709e (2021-12-04)
          *
@@ -194,10 +233,13 @@ declare global {
          * @unofficial
          */
         initVimMode(CodeMirror: CodeMirrorAdapterEx): VimApi;
+
         /** @unofficial */
         li(target: object, source: object): object;
+
         /** @unofficial */
         mo(target: object, propertyNames: string[]): object;
+
         /** @unofficial */
         openDatabase(
             name: string,
@@ -206,14 +248,17 @@ declare global {
             estimatedSize: number,
             creationCallback?: (database: Database) => void
         ): Database;
+
         /**
          * Select a language file location.
          *
          * @unofficial
          */
         selectLanguageFileLocation(): void;
+
         /** @unofficial */
         St(target: object, source: object | undefined): object;
+
         /** @unofficial */
         Tl(target: object, propertyName: string, propertyValue: unknown): unknown;
     }

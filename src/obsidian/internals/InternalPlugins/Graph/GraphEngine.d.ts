@@ -15,37 +15,107 @@ import type { GraphForceOptions } from './Options/GraphForceOptions.d.ts';
  * @unofficial
  */
 export interface GraphEngine {
+    /**
+     * @todo Documentation incomplete.
+     */
     app: App;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     colorGroupOptions: GraphColorGroupOptions;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     controlsEl: HTMLDivElement;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     currentFocusFile: string;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     displayOptions: GraphDisplayOptions;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     fileFilter: GraphFileFilter;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     filterOptions: GraphFilterOptions;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     forceOptions: GraphForceOptions;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     hasFilter: boolean;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     hoverPopover: unknown;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     lastHoverLink: unknown;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     options: GraphPluginInstanceOptions;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     progression: number;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     progressionSpeed: number;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     renderer: GraphRenderer;
+
+    /**
+     * @todo Documentation incomplete.
+     */
     searchQueries: GraphColorGroup[];
+
+    /**
+     * @todo Documentation incomplete.
+     */
     view: LocalGraphView | GraphView;
 
     /**
      * Gets the engine options.
      */
     getOptions(): GraphPluginInstanceOptions;
+
     /**
      * Rerenders the graph.
      */
     render(): void;
+
     /**
      * Sets the engine options.
      * @param options - New options. Undefined elements will not be considered.
      */
     setOptions(options: GraphPluginInstanceOptions | undefined): void;
+
     /**
      * Updates the engine after the search filter has changed.
      */

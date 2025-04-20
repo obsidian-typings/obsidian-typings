@@ -11,12 +11,14 @@ declare module 'obsidian' {
      * @unofficial
      */
     export function loadMermaid(): Promise<Mermaid>;
+
     /**
      * Load PDF.js.
      *
      * @unofficial
      */
     export function loadPdfJs(): Promise<typeof pdfjsLib>;
+
     /**
      * Load Prism.
      *

@@ -10,14 +10,17 @@ export interface PropertyRenderContext {
      * Reference to the app.
      */
     app: App;
+
     /**
      * Key of the property field.
      */
     key: string;
+
     /**
      * Reference to the metadata editor.
      */
     metadataEditor: MetadataEditor;
+
     /**
      * Determine the source path of current context.
      */
@@ -27,6 +30,7 @@ export interface PropertyRenderContext {
      * Callback called on property field unfocus.
      */
     blur(): void;
+
     /**
      * Callback called on property value change.
      */

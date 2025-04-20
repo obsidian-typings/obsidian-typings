@@ -6,5 +6,8 @@ import type { GraphOptions } from './GraphOptions.d.ts';
  * @unofficial
  */
 export interface GraphColorGroupOptions extends GraphOptions {
+    /**
+     * @todo Documentation incomplete.
+     */
     groups: GraphColorGroupOptionsGroup[];
 }

@@ -7,6 +7,7 @@ import type { ConstructorBase } from './ConstructorBase.d.ts';
 /**
  * The App constructor.
  *
- * @public @unofficial
+ * @public
+ * @unofficial
  */
 export interface AppConstructor extends ConstructorBase<[adapter: DataAdapter, appId: string], App> {}

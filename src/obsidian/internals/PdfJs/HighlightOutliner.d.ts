@@ -18,5 +18,8 @@ export declare class HighlightOutliner {
      *   the last point of the boxes.
      */
     constructor(boxes: Array<Object>, borderWidth?: number, innerMargin?: number, isLTR?: boolean);
+    /**
+     * @todo Documentation incomplete.
+     */
     getOutlines(): HighlightOutline;
 }

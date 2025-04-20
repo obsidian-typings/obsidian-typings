@@ -9,6 +9,7 @@ export interface DataAdapterWatchersRecordEntry {
      * Resolved full path to the folder.
      */
     resolvedPath: string;
+
     /**
      * Node.js file system watcher.
      */

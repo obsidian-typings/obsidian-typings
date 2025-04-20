@@ -9,5 +9,8 @@ import type { MaybeDeferredView } from './Views/MaybeDeferredView.d.ts';
  * @unofficial
  */
 export interface TypedWorkspaceLeaf<TView extends View> extends WorkspaceLeaf {
+    /**
+     * @todo Documentation incomplete.
+     */
     view: MaybeDeferredView<TView>;
 }

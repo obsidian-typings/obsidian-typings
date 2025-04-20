@@ -12,14 +12,17 @@ export interface ReleaseNotesView extends ItemView {
      * @param version - The version of the release notes.
      */
     fetchReleaseNotes(version: string): Promise<unknown>;
+
     /**
      * Get the current view type.
      */
     getViewType(): typeof ViewType.ReleaseNotes;
+
     /**
      * Renders the release notes.
      */
     render(): Promise<unknown>;
+
     /** @todo Documentation incomplete */
     showPatchNotes(e: unknown, version: string): Promise<unknown>;
 }
