@@ -144,11 +144,37 @@ function sortClassDeclaration(declaration: ClassDeclaration): void {
     structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
     declaration.set(structure);
 
-    insertNewLines(declaration);
+    processClassInterfaceDeclaration(declaration);
 }
 
-function insertNewLines(declaration: ClassDeclaration | InterfaceDeclaration): void {
+function processClassInterfaceDeclaration(declaration: ClassDeclaration | InterfaceDeclaration): void {
     const nodes = [...declaration.getProperties(), ...declaration.getMethods()];
+
+    const filePath = declaration.getSourceFile().getFilePath();
+    const isAugmentation = filePath.includes('augmentations');
+
+    for (const node of nodes) {
+        let jsDoc = node.getJsDocs()[0];
+        if (!jsDoc) {
+            jsDoc = node.addJsDoc({
+                tags: [
+                    {
+                        tagName: 'todo',
+                        text: 'Documentation incomplete.',
+                        leadingTrivia: '\n'
+                    }
+                ]
+            });
+        }
+
+        if (isAugmentation && !jsDoc.getTags().some(tag => tag.getTagName() === 'unofficial')) {
+            jsDoc.addTag({
+                tagName: 'unofficial',
+                leadingTrivia: '\n'
+            });
+        }
+    }
+
     const starts = nodes.map(node => node.getStartLinePos(true));
 
     for (let i = starts.length - 1; i >= 1; i--) {
@@ -162,7 +188,7 @@ function sortInterfaceDeclaration(declaration: InterfaceDeclaration): void {
     structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
     declaration.set(structure);
 
-    insertNewLines(declaration);
+    processClassInterfaceDeclaration(declaration);
 }
 
 async function parseFile(file: string, output_file: string = file): Promise<void> {
