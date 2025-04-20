@@ -10,19 +10,12 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  * @unofficial
  */
 export interface GraphLink {
-    /** @internal */
     arrow: Graphics | null;
-    /** @internal */
     line: Graphics | null;
-    /** @internal */
     px: Container | null;
-    /** @internal */
     rendered: boolean;
-    /** @internal */
     renderer: GraphRenderer;
-    /** @internal */
     source: GraphNode;
-    /** @internal */
     target: GraphNode;
 
     /**

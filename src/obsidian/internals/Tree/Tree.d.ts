@@ -39,7 +39,9 @@ export interface Tree<T> {
      * ID of the view the tree is associated with.
      */
     id: string;
-    /** @internal Facilitates rendering of tree view */
+    /**
+     * Facilitates rendering of tree view.
+     */
     infinityScroll: InfinityScroll;
     /**
      * Whether all items in the tree are collapsed.
@@ -98,7 +100,9 @@ export interface Tree<T> {
      * Handle selection of tree item via keyboard event.
      */
     handleItemSelection(event: MouseEvent, node: TreeNode<T>): void;
-    /** @internal Registers all keyboard actions to the tree view keyscope */
+    /**
+     * Registers all keyboard actions to the tree view keyscope.
+     */
     initializeKeyboardNav(): void;
     /**
      * Check whether item is a valid tree item.
@@ -128,7 +132,9 @@ export interface Tree<T> {
      * Handle keyboard event for opening tree item.
      */
     onKeyOpen(event: KeyboardEvent): void;
-    /** @internal Update scroll representation on resize */
+    /**
+     * Update scroll representation on resize.
+     */
     onResize(): void;
     /**
      * Save the current fold states of the tree view to local storage.

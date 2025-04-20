@@ -15,39 +15,22 @@ import type { GraphForceOptions } from './Options/GraphForceOptions.d.ts';
  * @unofficial
  */
 export interface GraphEngine {
-    /** @internal */
     app: App;
-    /** @internal */
     colorGroupOptions: GraphColorGroupOptions;
-    /** @internal */
     controlsEl: HTMLDivElement;
-    /** @internal */
     currentFocusFile: string;
-    /** @internal */
     displayOptions: GraphDisplayOptions;
-    /** @internal */
     fileFilter: GraphFileFilter;
-    /** @internal */
     filterOptions: GraphFilterOptions;
-    /** @internal */
     forceOptions: GraphForceOptions;
-    /** @internal */
     hasFilter: boolean;
-    /** @internal */
     hoverPopover: unknown;
-    /** @internal */
     lastHoverLink: unknown;
-    /** @internal */
     options: GraphPluginInstanceOptions;
-    /** @internal */
     progression: number;
-    /** @internal */
     progressionSpeed: number;
-    /** @internal */
     renderer: GraphRenderer;
-    /** @internal */
     searchQueries: GraphColorGroup[];
-    /** @internal */
     view: LocalGraphView | GraphView;
 
     /**

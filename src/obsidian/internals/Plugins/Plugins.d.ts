@@ -23,7 +23,9 @@ export interface Plugins {
      * @remark The plugin ids aren't guaranteed to be either active (in `app.plugins.plugins`) or installed (in `app.plugins.manifests`).
      */
     enabledPlugins: Set<string>;
-    /** @internal Plugin ID that is currently being enabled */
+    /**
+     * Plugin ID that is currently being enabled.
+     */
     loadingPluginId: string | null;
     /**
      * Manifests of all the plugins that are installed.
@@ -41,7 +43,9 @@ export interface Plugins {
      */
     updates: Map<string, PluginUpdateManifest>;
 
-    /** @internal Check online list for deprecated plugins to automatically disable */
+    /**
+     * Check online list for deprecated plugins to automatically disable.
+     */
     checkForDeprecations(): Promise<void>;
     /**
      * Check for plugin updates.
@@ -71,7 +75,9 @@ export interface Plugins {
      * Get the folder where plugins are stored.
      */
     getPluginFolder(): string;
-    /** @internal Load plugin manifests and enable plugins from config */
+    /**
+     * Load plugin manifests and enable plugins from config.
+     */
     initialize(): Promise<void>;
     /**
      * Install a plugin from a given URL.
@@ -89,17 +95,22 @@ export interface Plugins {
      * Load a specific plugin's manifest by its folder path.
      */
     loadManifest(path: string): Promise<void>;
-    /** @internal Load all plugin manifests from plugin folder */
+    /**
+     * Load all plugin manifests from plugin folder.
+     */
     loadManifests(): Promise<void>;
     /**
      * Load a plugin by its ID.
      */
     loadPlugin(id: string): Promise<Plugin>;
-    /** @internal */
     onRaw(e: unknown): void;
-    /** @internal - Save current plugin configs */
+    /**
+     * - Save current plugin configs.
+     */
     saveConfig(): Promise<void>;
-    /** @internal Toggle whether community plugins are enabled */
+    /**
+     * Toggle whether community plugins are enabled.
+     */
     setEnable(enabled: boolean): Promise<void>;
     /**
      * Uninstall a plugin by ID.

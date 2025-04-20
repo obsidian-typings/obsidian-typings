@@ -62,10 +62,11 @@ declare module 'obsidian' {
         watchers: DataAdapterWatchersRecord;
 
         /**
+         * Apply data write options to file.
+         *
          * @param normalizedPath Path to file.
          *
          * @param options Data write options.
-         * @internal Apply data write options to file.
          *
          * @unofficial
          */
@@ -102,7 +103,7 @@ declare module 'obsidian' {
          */
         kill(): void;
         /**
-         * @internal Generates `this.files` from the file system.
+         * Generates `this.files` from the file system.
          *
          * @unofficial
          */

@@ -21,65 +21,43 @@ import type { WorkerResults } from './WorkerResults.d.ts';
  * @unofficial
  */
 export interface GraphRenderer {
-    /** @internal */
     colors: Record<GraphColor, GraphColorAttributes>;
     containerEl: HTMLDivElement;
-    /** @internal */
     dragNode: GraphNode | null;
-    /** @internal */
     fLineSizeMult: number;
-    /** @internal */
     fNodeSizeMult: number;
     fShowArrow: boolean;
     fTextShowMult: number;
-    /** @internal */
     hanger: Container;
-    /** @internal */
     height: number;
     hidePowerTag: boolean;
     highlightNode: GraphNode | null;
-    /** @internal */
     idleFrames: number;
-    /** @internal */
     iframeEl: HTMLIFrameElement;
-    /** @internal */
     interactiveEl: HTMLCanvasElement;
     keyboardActions: KeyboardActions;
-    /** @internal */
     links: GraphLink[];
     mouseX: null;
     mouseY: null;
     nodeLookup: Record<string, GraphNode>;
-    /** @internal */
     nodes: GraphNode[];
-    /** @internal */
     nodeScale: number;
     panning: boolean;
     panvX: number;
     panvY: number;
-    /** @internal */
     panX: number;
-    /** @internal */
     panY: number;
     powerTag: PowerTag;
-    /** @internal */
     px: Application;
     renderTimer: null | number;
-    /** @internal */
     scale: number;
-    /** @internal */
     targetScale: number;
     textAlpha: number;
-    /** @internal */
     viewport: Coords;
-    /** @internal */
     width: number;
-    /** @internal */
     worker: Worker;
     workerResults: WorkerResults;
-    /** @internal */
     zoomCenterX: number;
-    /** @internal */
     zoomCenterY: number;
 
     /**
@@ -87,13 +65,10 @@ export interface GraphRenderer {
      */
     changed(): void;
     destroy(): void;
-    /** @internal */
     destroyGraphics(): void;
     getBackgroundScreenshot(): HTMLCanvasElement;
-    /** @internal */
     getHighlightNode(): GraphNode | null;
     getTransparentScreenshot(): ICanvas;
-    /** @internal */
     initGraphics(): void;
     onIframeLoad(): void;
     onIframeUnload(): void;
@@ -108,15 +83,12 @@ export interface GraphRenderer {
     onResize(): void;
     onWheel(evt: WheelEvent): void;
     queueRender(): void;
-    /** @internal */
     renderCallback(): void;
     resetPan(): void;
     setData(data: GraphData): void;
     setForces(forces: GraphForces): void;
-    /** @internal */
     setPan(panX: number, panY: number): void;
     setRenderOptions(options: GraphPluginInstanceOptions): void;
-    /** @internal */
     setScale(scale: number): void;
     testCSS(): void;
     updateZoom(): void;

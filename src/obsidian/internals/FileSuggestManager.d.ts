@@ -56,7 +56,9 @@ export interface FileSuggestManager {
      * Get suggestions for file heading query.
      */
     getHeadingSuggestions(runner: Runnable, file: TFile, text: string): Promise<SearchResult[]>;
-    /** @internal Generate instructions for specific actions in suggestion manager (e.g. accept, select, ...) */
+    /**
+     * Generate instructions for specific actions in suggestion manager (e.g. accept, select, ...).
+     */
     getInstructions(): [{ command: 'string'; purpose: 'string' }];
     /**
      * Determine the source path of current context.

@@ -15,7 +15,6 @@ import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.d.
 export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin> {
     app: App;
     defaultOn: true;
-    /** @internal */
     options: GraphPluginInstanceOptions;
     plugin: GraphPlugin;
 

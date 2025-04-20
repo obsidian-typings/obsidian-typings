@@ -190,7 +190,9 @@ export interface MarkdownBaseView extends Component {
      * @remark Uses single-character replacement transaction.
      */
     resetSyntaxHighlighting(): void;
-    /** @internal Save history of file and data (for caching, for faster reopening of same file in editor) */
+    /**
+     * Save history of file and data (for caching, for faster reopening of same file in editor).
+     */
     saveHistory(): void;
     /**
      * Set the state of the editor.
@@ -208,7 +210,9 @@ export interface MarkdownBaseView extends Component {
      * Execute functionality of token (open external link, open internal link in leaf, ...).
      */
     triggerClickableToken(token: Token, new_leaf: boolean): void;
-    /** @internal Callback for onUpdate functionality added as an extension */
+    /**
+     * Callback for onUpdate functionality added as an extension.
+     */
     updateEvent(): (update: ViewUpdate) => void;
     /**
      * In mobile, creates a popover link on clickable token, if exists.

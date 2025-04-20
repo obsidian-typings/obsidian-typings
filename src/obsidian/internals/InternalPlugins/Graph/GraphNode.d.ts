@@ -11,35 +11,20 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  * @unofficial
  */
 export interface GraphNode {
-    /** @internal */
     circle: Graphics | null;
-    /** @internal */
     color: GraphColorAttributes;
-    /** @internal */
     forward: Record<string, GraphNode>;
-    /** @internal */
     fx: number | null;
-    /** @internal */
     fy: number | null;
-    /** @internal */
     highlight: Graphics | null;
-    /** @internal */
     id: string;
-    /** @internal */
     rendered: boolean;
-    /** @internal */
     renderer: GraphRenderer;
-    /** @internal */
     reverse: Record<string, GraphNode>;
-    /** @internal */
     text: Text | null;
-    /** @internal */
     type: string;
-    /** @internal */
     weight: number;
-    /** @internal */
     x: number;
-    /** @internal */
     y: number;
 
     /**

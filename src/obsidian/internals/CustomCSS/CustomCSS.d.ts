@@ -20,7 +20,9 @@ export interface CustomCSS extends Component {
      * Reference to App.
      */
     app: App;
-    /** @internal Cache of CSS snippet filepath (relative to vault root) to CSS snippet contents */
+    /**
+     * Cache of CSS snippet filepath (relative to vault root) to CSS snippet contents.
+     */
     csscache: Map<string, string>;
     /**
      * Set of enabled snippet, given by filenames.
@@ -34,13 +36,9 @@ export interface CustomCSS extends Component {
      * List of theme names not fully updated to post v1.0.0 theme guidelines.
      */
     oldThemes: string[];
-    /** @internal */
     queue: PromisedQueue;
-    /** @internal */
     requestLoadSnippets: Debouncer<[], void>;
-    /** @internal */
     requestLoadTheme: Debouncer<[], void>;
-    /** @internal */
     requestReadThemes: Debouncer<[], void>;
     /**
      * List of snippets detected by Obsidian, given by their filenames.
@@ -56,10 +54,8 @@ export interface CustomCSS extends Component {
      * Mapping of theme names to their manifest.
      */
     themes: CustomCSSThemesRecord;
-    /** @internal */
     updates: CustomCSSUpdatesRecord;
 
-    /** @internal */
     boundRaw(themeName: string): void;
     /**
      * Check whether a specific theme can be updated.
@@ -134,13 +130,9 @@ export interface CustomCSS extends Component {
     loadData(): unknown;
     loadSnippets(): unknown;
     loadTheme(arg1: unknown): unknown;
-    /** @internal */
     onload(): void;
-    /** @internal */
     onRaw(themeName: string): void;
-    /** @internal */
     readSnippets(): void;
-    /** @internal */
     readThemes(): void;
     /**
      * Remove a theme by theme name.

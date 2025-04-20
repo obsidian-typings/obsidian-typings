@@ -23,7 +23,6 @@ export interface RecentFileTracker {
      */
     workspace: Workspace;
 
-    /** @internal */
     collect(file: TFile): void;
     /**
      * Returns the last 10 opened files.
@@ -37,12 +36,20 @@ export interface RecentFileTracker {
      * Set the last opened files.
      */
     load(savedFiles: string[]): void;
-    /** @internal On file create, save file to last opened files */
+    /**
+     * On file create, save file to last opened files.
+     */
     onFileCreated(file: TFile): void;
-    /** @internal On file open, save file to last opened files */
+    /**
+     * On file open, save file to last opened files.
+     */
     onFileOpen(prevFile: TFile, file: TFile): void;
-    /** @internal On file rename, update file path in last opened files */
+    /**
+     * On file rename, update file path in last opened files.
+     */
     onRename(file: TFile, oldPath: string): void;
-    /** @internal Get last opened files */
+    /**
+     * Get last opened files.
+     */
     serialize(): string[];
 }

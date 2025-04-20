@@ -33,6 +33,5 @@ export interface EmbedContext {
      * Optional path to the current open file.
      */
     sourcePath?: string;
-    /** @internal */
     state?: unknown;
 }

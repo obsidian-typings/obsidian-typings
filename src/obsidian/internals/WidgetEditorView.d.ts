@@ -97,11 +97,17 @@ export interface WidgetEditorView extends EmbeddedEditorView {
      * Save fold made in the editor to foldManager.
      */
     onMarkdownFold(): void;
-    /** @internal On change of editor title element */
+    /**
+     * On change of editor title element.
+     */
     onTitleChange(element: HTMLElement): void;
-    /** @internal On keypress on editor title element */
+    /**
+     * On keypress on editor title element.
+     */
     onTitleKeydown(event: KeyboardEvent): void;
-    /** @internal On pasting on editor title element */
+    /**
+     * On pasting on editor title element.
+     */
     onTitlePaste(element: HTMLElement, event: ClipboardEvent): void;
     /**
      * On unloading widget, unload component and remove scope.

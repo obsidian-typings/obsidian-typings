@@ -467,7 +467,7 @@ declare module 'obsidian' {
           */
         recursiveGetTarget(e: DragEvent, leaf: WorkspaceLeaf): WorkspaceTabs | null;
         /**
-         * @internal Register a CodeMirror editor extension.
+         * Register a CodeMirror editor extension.
          *
          * @remark Prefer registering the extension via the Plugin class.
          * @unofficial

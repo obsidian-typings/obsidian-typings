@@ -29,10 +29,14 @@ export interface InternalPlugins extends Events {
      * @remark Prefer usage of getPluginById to access a plugin.
      */
     plugins: InternalPluginNamePluginsMapping;
-    /** @internal Request save of plugin configs */
+    /**
+     * Request save of plugin configs.
+     */
     requestSaveConfig: Debouncer<[], Promise<void>>;
 
-    /** @internal - Load plugin configs and enable plugins */
+    /**
+     * - Load plugin configs and enable plugins.
+     */
     enable(): Promise<void>;
     /**
      * Get an enabled internal plugin by ID.
@@ -50,10 +54,10 @@ export interface InternalPlugins extends Events {
      * @param id - ID of the plugin to get.
      */
     getPluginById<ID extends InternalPluginNameType>(id: ID): InternalPluginNamePluginsMapping[ID] | null;
-    /** @internal */
     loadPlugin<Instance extends InternalPluginInstance<unknown>>(internalPluginInstance: Instance): Instance;
-    /** @internal */
     onRaw(configPath: string): void;
-    /** @internal - Save current plugin configs */
+    /**
+     * - Save current plugin configs.
+     */
     saveConfig(): Promise<void>;
 }

@@ -47,7 +47,7 @@ export type TreeItem<T> = TreeNode<T> & {
      */
     toggleCollapsed(check: boolean): Promise<undefined>;
     /**
-     * @internal Update the tree item's cover element.
+     * Update the tree item's cover element.
      */
     updateCollapsed(check: boolean): Promise<undefined>;
 };

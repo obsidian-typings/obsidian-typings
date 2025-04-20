@@ -15,7 +15,9 @@ export interface HotkeyManager {
      * Reference to App.
      */
     app: App;
-    /** @internal Whether hotkeys have been baked (checks completed) */
+    /**
+     * Whether hotkeys have been baked (checks completed).
+     */
     baked: boolean;
     /**
      * Assigned hotkeys.
@@ -33,7 +35,6 @@ export interface HotkeyManager {
      * Default hotkeys, one to many mapping of command ID to assigned hotkey.
      */
     defaultKeys: HotkeyManagerDefaultKeysRecord;
-    /** @internal */
     onConfigFileChange: Debouncer<[], Promise<void>>;
 
     /**
@@ -43,7 +44,9 @@ export interface HotkeyManager {
      * @param keys - Hotkeys to add.
      */
     addDefaultHotkeys(command: string, keys: KeymapInfo[]): void;
-    /** @internal Bake hotkeys (create mapping of pressed key to command ID) */
+    /**
+     * Bake hotkeys (create mapping of pressed key to command ID).
+     */
     bake(): void;
     /**
      * Get hotkey associated with command ID.
@@ -57,9 +60,10 @@ export interface HotkeyManager {
      * @param command - Command ID to get hotkey for.
      */
     getHotkeys(command: string): KeymapInfo[];
-    /** @internal Load hotkeys from storage */
+    /**
+     * Load hotkeys from storage.
+     */
     load(): void;
-    /** @internal */
     onRaw(e: unknown): void;
     /**
      * Trigger a command by keyboard event.
@@ -74,7 +78,6 @@ export interface HotkeyManager {
      * @param commandId - Command ID to print hotkey for.
      */
     printHotkeyForCommand(commandId: string): string;
-    /** @internal */
     registerListeners(): void;
     /**
      * Remove a hotkey from the default hotkeys.
@@ -88,7 +91,9 @@ export interface HotkeyManager {
      * @param command - Command ID to remove hotkey from.
      */
     removeHotkeys(command: string): void;
-    /** @internal Save custom hotkeys to storage */
+    /**
+     * Save custom hotkeys to storage.
+     */
     save(): void;
     /**
      * Add a hotkey to the custom hotkeys (overrides default hotkeys).

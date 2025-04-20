@@ -18,13 +18,21 @@ export interface AppSetting extends Modal {
      * Closeable component for the active tab.
      */
     activeTabCloseable: CloseableComponent | null;
-    /** @internal Container element containing the community plugins */
+    /**
+     * Container element containing the community plugins
+     */
     communityPluginTabContainer: HTMLElement;
-    /** @internal Container element containing the community plugins header */
+    /**
+     * Container element containing the community plugins header.
+     */
     communityPluginTabHeaderGroup: HTMLElement;
-    /** @internal Container element containing the core plugins */
+    /**
+     * Container element containing the core plugins.
+     */
     corePluginTabContainer: HTMLElement;
-    /** @internal Container element containing the core plugins header */
+    /**
+     * Container element containing the core plugins header.
+     */
     corePluginTabHeaderGroup: HTMLElement;
     /**
      * Previously opened tab ID.
@@ -38,28 +46,39 @@ export interface AppSetting extends Modal {
      * List of all core settings tabs (editor, files & links, ...).
      */
     settingTabs: SettingTab[];
-    /** @internal Container element containing the core settings */
+    /**
+     * Container element containing the core settings.
+     */
     tabContainer: HTMLElement;
-    /** @internal Container for currently active settings tab */
+    /**
+     * Container for currently active settings tab.
+     */
     tabContentContainer: HTMLElement;
-    /** @internal Container for all settings tabs */
+    /**
+     * Container for all settings tabs.
+     */
     tabHeadersEl: HTMLElement;
 
     /**
+     * Add a new plugin tab to the settings modal.
+     *
      * @param tab - Tab to add.
-     * @internal Add a new plugin tab to the settings modal.
      */
     addSettingTab(tab: SettingTab): void;
-    /** @internal Closes the currently active tab */
+    /**
+     * Closes the currently active tab.
+     */
     closeActiveTab(): void;
     /**
+     * Check whether tab is a plugin tab.
+     *
      * @param tab - Tab to check.
-     * @internal Check whether tab is a plugin tab.
      */
     isPluginSettingTab(tab: SettingTab): boolean;
     /**
+     * Open a specific tab by tab reference.
+     *
      * @param tab - Tab to open.
-     * @internal Open a specific tab by tab reference.
      */
     openTab(tab: SettingTab): void;
     openTabById(id: 'hotkeys'): HotkeysSettingTab;
@@ -70,15 +89,19 @@ export interface AppSetting extends Modal {
      */
     openTabById(id: string): SettingTab;
     /**
+     * Remove a plugin tab from the settings modal.
+     *
      * @param tab - Tab to remove.
-     * @internal Remove a plugin tab from the settings modal.
      */
     removeSettingTab(tab: SettingTab): void;
     /**
+     * Update the title of the modal.
+     *
      * @param tab - Tab to update the title to.
-     * @internal Update the title of the modal.
      */
     updateModalTitle(tab: SettingTab): void;
-    /** @internal Update a tab section */
+    /**
+     * Update a tab section.
+     */
     updatePluginSection(): void;
 }
