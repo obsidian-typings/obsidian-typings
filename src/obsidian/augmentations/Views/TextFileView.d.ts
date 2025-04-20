@@ -37,7 +37,10 @@ declare module 'obsidian' {
          */
         saving: boolean;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         loadFileInternal(file: TFile, clear: boolean): Promise<unknown>;
 
         /**

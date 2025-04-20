@@ -84,19 +84,34 @@ declare module 'obsidian' {
          */
         addAction(icon: IconName, title: string, callback: (evt: MouseEvent) => any): HTMLElement;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         handleDrop(event: DragEvent, t: unknown, n: unknown): unknown;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onGroupChange(): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onMoreOptions(event: Event): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onMoreOptionsMenu(e: unknown): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         updateNavButtons(): void;
     }
 }

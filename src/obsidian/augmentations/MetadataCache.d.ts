@@ -28,7 +28,10 @@ declare module 'obsidian' {
          */
         app: App;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         blockCache: BlockCache;
 
         /**
@@ -38,7 +41,10 @@ declare module 'obsidian' {
          */
         db: IDBDatabase;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         didFinish: Debouncer<[], void>;
 
         /**
@@ -62,7 +68,10 @@ declare module 'obsidian' {
          */
         inProgressTaskCount: number;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         linkResolverQueue: ItemQueue<TFile | null> | null;
 
         /**
@@ -79,10 +88,16 @@ declare module 'obsidian' {
          */
         onCleanCacheCallbacks: (() => void)[];
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         preload: () => Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         preloadPromise: Promise<void> | null;
 
         /**
@@ -92,13 +107,22 @@ declare module 'obsidian' {
          */
         uniqueFileLookup: CustomArrayDict<TFile>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         userIgnoreFilterCache: Record<string, boolean>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         userIgnoreFilters: RegExp[] | null;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         userIgnoreFiltersString: string;
 
         /**
@@ -108,16 +132,28 @@ declare module 'obsidian' {
          */
         vault: Vault;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         worker: Worker;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         workerResolve: ((value: CachedMetadata | PromiseLike<CachedMetadata>) => void) | null;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         workQueue: PromisedQueue;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         _getLinkpathDest(origin: string, path: string): TFile[];
 
         /**
@@ -127,7 +163,10 @@ declare module 'obsidian' {
          */
         cleanupDeletedCache(): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         clear(): Promise<void>;
 
         /**
@@ -137,7 +176,10 @@ declare module 'obsidian' {
          */
         computeFileMetadataAsync(file: TFile): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<CachedMetadata | undefined>;
 
         /**
@@ -247,7 +289,10 @@ declare module 'obsidian' {
              */
         iterateReferences(callback: (path: string) => void): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         linkResolver(): void;
 
         /**
@@ -294,7 +339,10 @@ declare module 'obsidian' {
          */
         onDelete(file: TAbstractFile): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onReceiveMessageFromWorker(message: MetadataCacheWorkerMessage): void;
 
         /**

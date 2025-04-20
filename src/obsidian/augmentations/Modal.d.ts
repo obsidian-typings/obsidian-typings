@@ -25,7 +25,10 @@ declare module 'obsidian' {
          */
         dimBackground: boolean;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         headerEl: HTMLDivElement;
 
         /**

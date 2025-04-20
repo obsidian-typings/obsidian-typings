@@ -2,7 +2,10 @@ export {};
 
 declare module 'obsidian' {
     interface CachedMetadata {
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         footnotes?: FootnoteCache[];
     }
 }

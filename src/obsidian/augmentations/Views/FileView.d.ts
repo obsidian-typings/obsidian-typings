@@ -66,10 +66,16 @@ declare module 'obsidian' {
          */
         onUnloadFile(file: TFile): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         renderBreadcrumbs(): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         syncState(e: boolean): Promise<unknown>;
     }
 }

@@ -3,10 +3,16 @@ export {};
 declare module 'obsidian' {
     /** @todo Documentation incomplete */
     interface HoverLinkSource {
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         defaultMod: boolean;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         display: string;
     }
 }

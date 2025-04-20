@@ -2,16 +2,28 @@ export {};
 
 declare module 'obsidian' {
     interface WorkspaceLeaf extends WorkspaceItem {
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         activeTime?: number;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         tabHeaderEl: HTMLElement;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         tabHeaderInnerIconEl: HTMLElement;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         tabHeaderInnerTitleEl: HTMLElement;
 
         /**

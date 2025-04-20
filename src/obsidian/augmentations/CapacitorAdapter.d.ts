@@ -6,10 +6,16 @@ export {};
 
 declare module 'obsidian' {
     interface CapacitorAdapter extends DataAdapter {
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         fs: CapacitorAdapterFs;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         getNativePath(normalizedPath: string): string;
 
         /**
@@ -20,32 +26,56 @@ declare module 'obsidian' {
          */
         listRecursiveChild(normalizedPath: string, child: FileEntry): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onFileChange(normalizedPath: string): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         open(normalizedPath: string): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         quickList(normalizedFolderPath: string, fileEntry: FileEntry): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         reconcileFileCreation(
             normalizedPath: string,
             normalizedNewPath: string,
             fileEntry: CapacitorFileEntry
         ): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         removeFile(normalizedPath: string): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         stopWatch(): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         testInsensitive(): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         update(normalizedPath: string): Promise<void>;
     }
 }

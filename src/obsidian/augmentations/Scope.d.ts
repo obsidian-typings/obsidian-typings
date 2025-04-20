@@ -25,7 +25,10 @@ declare module 'obsidian' {
          */
         parent: Scope | undefined;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         tabFocusContainerEl: HTMLElement | null;
 
         /**
@@ -43,7 +46,10 @@ declare module 'obsidian' {
          */
         registerKey(modifiers: Modifier[], key: string | null, func: KeymapEventListener): KeymapEventHandler;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         setTabFocusContainer(container: HTMLElement): void;
     }
 }

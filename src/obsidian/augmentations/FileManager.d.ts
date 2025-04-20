@@ -16,16 +16,28 @@ declare module 'obsidian' {
          */
         app: App;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         fileParentCreatorByType: Record<string, (path: string) => TFolder>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         inProgressUpdates: null | LinkUpdateHandler[];
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         linkUpdaters: LinkUpdaters;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         updateQueue: PromisedQueue;
 
         /**
@@ -35,7 +47,10 @@ declare module 'obsidian' {
          */
         vault: Vault;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         canCreateFileWithExt(extension: string): boolean;
 
         /**

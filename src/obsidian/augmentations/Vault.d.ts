@@ -100,7 +100,10 @@ declare module 'obsidian' {
              */
         exists(path: string, isCaseSensitive?: boolean): Promise<boolean>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         generateFiles(e: AsyncGenerator<TFile>, t: boolean): Promise<void>;
 
         /**

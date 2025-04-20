@@ -5,7 +5,10 @@ declare global {
      * Options object passed to {@link createEl}.
      */
     interface DomElementInfo {
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         [eventName: `on${string}`]: EventListenerOrEventListenerObject;
 
         /**

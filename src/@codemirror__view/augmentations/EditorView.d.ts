@@ -11,13 +11,22 @@ declare module '@codemirror/view' {
      * transactions for editing actions.
      */
     interface EditorView {
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         cm?: VimEditor;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         viewState: EditorViewState;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         measure(): void;
     }
 }

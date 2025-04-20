@@ -34,7 +34,10 @@ declare module 'obsidian' {
          */
         app: App;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         backlinkInDocument?: unknown;
 
         /**
@@ -44,13 +47,22 @@ declare module 'obsidian' {
          */
         editorExtensions: Extension[];
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         editorSuggest: EditorSuggestEx;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         floatingSplit: WorkspaceSplit;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         hoverLinkSources: WorkspaceHoverLinkSourcesRecord;
 
         /**
@@ -60,10 +72,16 @@ declare module 'obsidian' {
          */
         lastActiveFile: TFile;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         lastTabGroupStacked: boolean;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         layoutItemQueue: unknown[];
 
         /**
@@ -73,7 +91,10 @@ declare module 'obsidian' {
          */
         layoutReady: boolean;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         leftSidebarToggleButtonEl: HTMLElement;
 
         /**
@@ -83,7 +104,10 @@ declare module 'obsidian' {
          */
         mobileFileInfos: unknown[];
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onLayoutReadyCallbacks?: unknown;
 
         /**
@@ -100,7 +124,10 @@ declare module 'obsidian' {
          */
         recentFileTracker: RecentFileTracker;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         rightSidebarToggleButtonEl: HTMLElement;
 
         /**
@@ -241,10 +268,16 @@ declare module 'obsidian' {
          */
         getSideLeaf(sideRibbon: WorkspaceSidedock | WorkspaceMobileDrawer, split: boolean): WorkspaceLeaf;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         handleExternalLinkContextMenu(menu: Menu, linkText: string): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         handleLinkContextMenu(menu: Menu, linkText: string, sourcePath: string): void;
 
         /**
@@ -454,16 +487,28 @@ declare module 'obsidian' {
          */
         onLayoutChange(leaf?: WorkspaceLeaf): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onLinkContextMenu(args: unknown[]): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onQuickPreview(args: unknown[]): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onResize(): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onStartLink(leaf: WorkspaceLeaf): void;
 
         /**
@@ -587,7 +632,10 @@ declare module 'obsidian' {
          */
         unregisterObsidianProtocolHandler(protocol: string): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         updateFrameless(): void;
 
         /**

@@ -28,7 +28,10 @@ declare module 'obsidian' {
          */
         handler: FileSystemWatchHandler | null;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         insensitive: boolean;
 
         /**
@@ -94,7 +97,10 @@ declare module 'obsidian' {
          */
         listRecursive(normalizedPath: string): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onFileChange(normalizedPath: string | null): void;
 
         /**
@@ -127,13 +133,22 @@ declare module 'obsidian' {
             shouldSkipDeletionTimeout?: boolean
         ): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         reconcileFolderCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         reconcileInternalFile(normalizedPath: string): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         reconcileSymbolicLinkCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
 
         /**

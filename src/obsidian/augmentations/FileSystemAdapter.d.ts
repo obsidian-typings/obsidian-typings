@@ -10,7 +10,10 @@ export {};
 
 declare module 'obsidian' {
     interface FileSystemAdapter extends DataAdapter {
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         btime: Btime;
 
         /**
@@ -62,7 +65,10 @@ declare module 'obsidian' {
          */
         watcher: null;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         watchers: DataAdapterWatchersRecord;
 
         /**
@@ -133,10 +139,16 @@ declare module 'obsidian' {
          */
         reconcileFileCreation(normalizedPath: string, normalizedNewPath: string, stats: Stats): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         reconcileFileInternal(normalizedPath: string, normalizedNewPath: string): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         startWatchPath(normalizedPath: string): Promise<void>;
 
         /**
@@ -146,7 +158,10 @@ declare module 'obsidian' {
          */
         stopWatchPath(normalizedPath: string): void;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         thingsHappening(): Debouncer<[], void>;
 
         /**

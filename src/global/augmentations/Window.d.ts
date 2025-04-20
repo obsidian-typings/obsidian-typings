@@ -70,37 +70,70 @@ declare global {
          */
         app: App;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         bl: typeof Object.hasOwnProperty;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         blinkfetch: typeof fetch;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         blinkFormData: typeof FormData;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         blinkHeaders: typeof Headers;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         blinkRequest: typeof Request;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         blinkResponse: typeof Response;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         Capacitor: typeof _Capacitor;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         CapacitorPlatforms: typeof _CapacitorPlatforms;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         Cf: typeof Object.getOwnPropertyDescriptors;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         CodeMirror: typeof CodeMirror;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         CodeMirrorAdapter: CodeMirrorAdapterEx;
 
         /**
@@ -110,16 +143,28 @@ declare global {
          */
         DOMPurify: typeof DOMPurify;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         El: typeof Object.propertyIsEnumerable;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         electron: typeof electron;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         electronWindow: ElectronWindow;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         frameDom: FrameDom;
 
         /**
@@ -129,13 +174,22 @@ declare global {
          */
         FS: CapacitorAdapterFsConstructor;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         i18next: typeof i18next;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         MathJax?: MathJax;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         mermaid?: Mermaid;
 
         /**
@@ -147,7 +201,10 @@ declare global {
          */
         moment: typeof moment;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         mr: typeof Object.getOwnPropertySymbols;
 
         /**
@@ -164,19 +221,34 @@ declare global {
          */
         OBS_ACT: ObsidianProtocolHandler;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         OBSIDIAN_DEFAULT_I18N: Localization;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         pdfjsLib: typeof pdfjsLib;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         pdfjsTestingUtils: PdfJsTestingUtils;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         PIXI: typeof PIXI;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         Prism?: typeof Prism;
 
         /**
@@ -194,25 +266,46 @@ declare global {
          */
         requestUrl: typeof _requestUrl;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         scrypt: typeof scrypt;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         Sf: typeof Object.defineProperties;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         temp1: Database['changeVersion'];
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         titlebarStyle: string;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         TurndownService: typeof TurndownService;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         WebView: electron.WebviewTag;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         wf: typeof Object.defineProperty;
 
         /**
@@ -372,7 +465,10 @@ declare global {
          */
         fishAll(selector: string): HTMLElement[];
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         globalEnhance(): void;
 
         /**
@@ -433,10 +529,16 @@ declare global {
          */
         isBoolean(obj: any): obj is boolean;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         li(target: object, source: object): object;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         mo(target: object, propertyNames: string[]): object;
 
         /**
@@ -451,7 +553,10 @@ declare global {
          */
         nextFrame(): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         openDatabase(
             name: string,
             version: string,
@@ -493,10 +598,16 @@ declare global {
          */
         sleep(ms: number): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         St(target: object, source: object | undefined): object;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         Tl(target: object, propertyName: string, propertyValue: unknown): unknown;
     }
 }

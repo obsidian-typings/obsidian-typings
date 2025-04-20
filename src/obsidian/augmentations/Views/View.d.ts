@@ -5,7 +5,10 @@ export {};
 declare module 'obsidian' {
     /** @todo Documentation incomplete */
     interface View extends Component {
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         app: App;
 
         /**
@@ -15,7 +18,10 @@ declare module 'obsidian' {
          */
         closeable: boolean;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         containerEl: HTMLElement;
 
         /**
@@ -25,7 +31,10 @@ declare module 'obsidian' {
          */
         icon: IconName;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         leaf: WorkspaceLeaf;
 
         /**

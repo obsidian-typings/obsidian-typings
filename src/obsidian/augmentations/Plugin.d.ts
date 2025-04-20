@@ -2,10 +2,16 @@ export {};
 
 declare module 'obsidian' {
     interface Plugin extends Component {
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onConfigFileChange: Debouncer<[], Promise<void>>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         _onConfigFileChange(): Promise<void>;
     }
 }
