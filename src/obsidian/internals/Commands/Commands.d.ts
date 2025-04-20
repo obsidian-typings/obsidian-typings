@@ -18,8 +18,7 @@ export interface Commands {
     /**
      * Commands *without* editor callback, will always be available in the command palette.
      *
-     * @example .
-     *     `app:open-vault` or `app:reload`.
+     * @example `app:open-vault` or `app:reload`.
      */
     commands: CommandsCommandsRecord;
 
@@ -27,8 +26,7 @@ export interface Commands {
      * Commands *with* editor callback, will only be available when editor is active and callback returns.
      * true.
      *
-     * @example .
-     *     `editor:fold-all` or `command-palette:open`.
+     * @example `editor:fold-all` or `command-palette:open`.
      */
     editorCommands: CommandsEditorCommandsRecord;
 
