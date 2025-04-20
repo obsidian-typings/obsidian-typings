@@ -144,8 +144,6 @@ Please be aware that there is a good reason why (some of) the functions and type
 
 Please use the functions and variables provided with caution. Be prepared to update your code if the API changes, and only use the functions if you are confident that you understand what they will do. Reference the [official API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts) first to see if your problem may be solved with a documented function, or search in the #plugin-dev channel of the Obsidian Discord server. Some functions will also contain `@remark` TSDoc tags that provide alternatives or better solutions.
 
-Methods marked `@internal` are especially risky to use: these are either not fully typed yet, or are solely intended to be used internally by the Obsidian app.
-
 Furthermore, there is a very high chance that there are mistakes in the typings, despite best efforts. All types had to be deduced from either context, manually running the function, or from the minified app code. You _**should**_ verify that the code behaves as expected, both with regard to the expected (input/output)types, as well as what the function description promises.
 
 With these scary disclaimers out of the way, hopefully these typings will help you in removing 90% of the `@ts-ignore`s you have in your codebase, or discover solutions that didn't seem possible before.
@@ -153,8 +151,6 @@ With these scary disclaimers out of the way, hopefully these typings will help y
 > [!NOTE]
 >
 > **TL;DR:** Use at your own risk, verify that the code behaves as expected, and be prepared to update your code if the API changes.
->
-> `@internal` methods are especially risky to use.
 >
 > `@remark` tags give some warnings about the inputs/outputs of the function, or provide better alternatives.
 >

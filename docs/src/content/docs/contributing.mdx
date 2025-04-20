@@ -44,24 +44,18 @@ Example:
 ```ts
 interface someObject {
     /**
-     * Does something specific
-     * @param val1 Enables some functionality
-     * @tutorial Useful for implementing some features for your plugin
-     * @remark Prefer using `someOtherMethod` instead
+     * Does something specific.
+     *
+     * @param val1 - Enables some functionality
+     *
+     * @tutorial - Useful for implementing some features for your plugin
+     * @remark Prefer using {@link someOtherMethod} instead
      */
     someMethod(val1: boolean): number;
-
-    /**
-     * Does something that you're not certain about, and should probably not be used
-     * @internal
-     */
-    someInternalMethod(): void;
 }
 ```
 
 :::note
-`@internal` — Method is _very likely_ not fully/correctly typed, and/or is not intended to be used by plugins.
-
 `@remark` — Alternatives that should be used instead, or warnings about the function.
 
 `@tutorial` — Short description on how the function could be used in your plugin.

@@ -15,24 +15,18 @@ Example:
 ```ts
 interface someObject {
     /**
-     * Does something specific
-     * @param val1 Enables some functionality
-     * @tutorial Useful for implementing some features for your plugin
-     * @remark Prefer using `someOtherMethod` instead
+     * Does something specific.
+     *
+     * @param val1 - Enables some functionality
+     *
+     * @tutorial - Useful for implementing some features for your plugin
+     * @remark Prefer using {@link someOtherMethod} instead
      */
     someMethod(val1: boolean): number;
-
-    /**
-     * Does something that you're not certain about, and should probably not be used
-     * @internal
-     */
-    someInternalMethod(): void;
 }
 ```
 
 > [!NOTE]
-> `@internal` --- Method is _very likely_ not fully/correctly typed, and/or is not intended to be used by plugins.
->
 > `@remark` --- Alternatives that should be used instead, or warnings about the function.
 >
 > `@tutorial` --- Short description on how the function could be used in your plugin.
@@ -166,7 +160,8 @@ interface InternalPlugins extends Events {
 }
 ```
 
-Make sure to also add brief descriptions (using [TSDoc](https://tsdoc.org/)) to each of the variables. Mark variables that you are not entirely sure about with `@internal`.
+Make sure to also add brief descriptions (using [TSDoc](https://tsdoc.org/)) to each of the variables.
+
 Feel free to copy descriptions from previous typings, or from the official API.
 
 ### Typing methods
@@ -180,14 +175,13 @@ the app that a config should be saved, the method will thus _likely_ be of type 
 However, to make sure whether this assumption is correct, you _**should**_ check the source code (see next section).
 If possible, you can also run the method in the console, and see what happens (in this case, nothing happens, so it is likely just `void`).
 
-As before, if you are not certain about the return type or the workings of the function in general,
-add a `@internal` tag to the method description, and/or mark the return type as `unknown`.
+As before, if you are not certain about the return type or the workings of the function in general, mark the return type as `unknown`.
 
 ```ts
 interface InternalPlugins extends Events {
     // ...
     /**
-     * @internal Request save of plugin configs
+     * Request save of plugin configs
      */
     requestSaveConfig(): unknown;
     // ...

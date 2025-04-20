@@ -23,9 +23,6 @@ Reference the [official API](https://github.com/obsidianmd/obsidian-api/blob/mas
 or search in the #plugin-dev channel of the Obsidian Discord server.
 Some functions will also contain `@remark` TSDoc tags that provide alternatives or better solutions.
 
-Methods marked `@internal` are especially risky to use: these are either not fully typed yet,
-or are solely intended to be used internally by the Obsidian app.
-
 Furthermore, there is a very high chance that there are mistakes in the typings, despite best efforts.
 All types had to be deduced from either context, manually running the function, or from the minified app code.
 You _**should**_ verify that the code behaves as expected, both with regard to the expected (input/output)types,
@@ -36,8 +33,6 @@ With these scary disclaimers out of the way, hopefully these typings will help y
 
 :::note
 **TL;DR:** Use at your own risk, verify that the code behaves as expected, and be prepared to update your code if the API changes.
-
-`@internal` methods are especially risky to use.
 
 `@remark` tags give some warnings about the inputs/outputs of the function, or provide better alternatives.
 
