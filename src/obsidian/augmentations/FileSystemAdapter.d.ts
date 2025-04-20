@@ -10,35 +10,55 @@ export {};
 
 declare module 'obsidian' {
     interface FileSystemAdapter extends DataAdapter {
-        /** @internal */
+        /**
+         * @unofficial
+         */
         btime: Btime;
         /**
          * Reference to node fs module.
+         *
+         * @unofficial
          */
         fs: typeof fs;
         /**
          * Reference to node fs:promises module.
+         *
+         * @unofficial
          */
         fsPromises: typeof fsPromises;
         /**
          * Reference to electron ipcRenderer module.
+         *
+         * @unofficial
          */
         ipcRenderer?: IpcRenderer;
-        /** @internal */
+        /**
+         * Kill last action.
+         *
+         * @unofficial
+         */
         killLastAction: null | ((e: Error) => void);
         /**
          * Reference to node path module.
+         *
+         * @unofficial
          */
         path: typeof path;
         /**
          * Reference to node URL module.
+         *
+         * @unofficial
          */
         url: typeof URL;
         /**
          * Seems to always be `null` and unused.
+         *
+         * @unofficial
          */
         watcher: null;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         watchers: DataAdapterWatchersRecord;
 
         /**
@@ -46,6 +66,8 @@ declare module 'obsidian' {
          *
          * @param options Data write options.
          * @internal Apply data write options to file.
+         *
+         * @unofficial
          */
         applyWriteOptions(normalizedPath: string, options: DataWriteOptions): Promise<void>;
         /**
@@ -54,10 +76,14 @@ declare module 'obsidian' {
          * @param sourcePath - Source path.
          * @param destinationPath - Destination path.
          * @returns A promise that resolves when the copy is complete.
+         *
+         * @unofficial
          */
         copyRecursive(sourcePath: string, destinationPath: string): Promise<void>;
         /**
          * Get base path of vault (OS path).
+         *
+         * @unofficial
          */
         getBasePath(): string;
         /**
@@ -65,16 +91,29 @@ declare module 'obsidian' {
          *
          * @param normalizedPath Path to file.
          * @returns URL path to file.
+         *
+         * @unofficial
          */
         getFilePath(normalizedPath: string): string;
-        /** @internal Kill file system action due to timeout */
+        /**
+         * Kill file system action due to timeout.
+         *
+         * @unofficial
+         */
         kill(): void;
-        /** @internal Generates `this.files` from the file system */
+        /**
+         * @internal Generates `this.files` from the file system.
+         *
+         * @unofficial
+         */
         listAll(): Promise<void>;
         /**
-         * @param normalizedPath Path to directory.
+         * Helper function for `listRecursive` reads children of directory.
          *
-         * @internal Helper function for `listRecursive` reads children of directory.
+         * @param normalizedPath Path to directory.
+         * @param child File entry.
+         *
+         * @unofficial
          */
         listRecursiveChild(normalizedPath: string, child: string): Promise<void>;
         /**
@@ -83,17 +122,33 @@ declare module 'obsidian' {
          * @param normalizedPath - Path to file.
          * @param normalizedNewPath - Path to new file.
          * @param stats - Stats object.
+         *
+         * @unofficial
          */
         reconcileFileCreation(normalizedPath: string, normalizedNewPath: string, stats: Stats): Promise<void>;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         reconcileFileInternal(normalizedPath: string, normalizedNewPath: string): Promise<void>;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         startWatchPath(normalizedPath: string): Promise<void>;
-        /** @internal Remove listener on specific path */
+        /**
+         * Remove listener on specific path.
+         *
+         * @unofficial
+         */
         stopWatchPath(normalizedPath: string): void;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         thingsHappening(): Debouncer<[], void>;
-        /** @internal Watch recursively for changes */
+        /**
+         * Watch recursively for changes.
+         *
+         * @unofficial
+         */
         watchHiddenRecursive(normalizedPath: string): Promise<void>;
     }
 }

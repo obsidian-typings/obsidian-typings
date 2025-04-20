@@ -10,154 +10,328 @@ import type { MetadataCacheWorkerMessage } from '../internals/MetadataCacheWorke
 import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
 import type { PropertyInfo } from '../internals/PropertyInfo.d.ts';
 
-export {};
+export { };
 
 declare module 'obsidian' {
     interface MetadataCache extends Events {
-        /** @internal Called by preload() which is in turn called by initialize() */
+        /**
+          * Called by preload() which is in turn called by initialize()
+          *
+          * @unofficial
+          */
         _preload: () => Promise<void>;
         /**
          * Reference to App.
+         *
+         * @unofficial
          */
         app: App;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         blockCache: BlockCache;
-        /** @internal IndexedDB database */
+        /**
+          * IndexedDB database
+          *
+          * @unofficial
+          */
         db: IDBDatabase;
+        /**
+         * @unofficial
+         */
         didFinish: Debouncer<[], void>;
-        /** @internal File contents cache */
+        /**
+          * File contents cache
+          *
+          * @unofficial
+          */
         fileCache: MetadataCacheFileCacheRecord;
-        /** @internal Whether the cache is fully loaded */
+        /**
+          * Whether the cache is fully loaded
+          *
+          * @unofficial
+          */
         initialized: boolean;
-        /** @internal Amount of tasks currently in progress */
+        /**
+          * Amount of tasks currently in progress
+          *
+          * @unofficial
+          */
         inProgressTaskCount: number;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         linkResolverQueue: ItemQueue<TFile | null> | null;
-        /** @internal File hash to metadata cache entry mapping */
+        /**
+          * File hash to metadata cache entry mapping
+          *
+          * @unofficial
+          */
         metadataCache: MetadataCacheMetadataCacheRecord;
-        /** @internal Callbacks to execute on cache clean */
+        /**
+          * Callbacks to execute on cache clean
+          *
+          * @unofficial
+          */
         onCleanCacheCallbacks: (() => void)[];
+        /**
+         * @unofficial
+         */
         preload: () => Promise<void>;
+        /**
+         * @unofficial
+         */
         preloadPromise: Promise<void> | null;
-        /** @internal Mapping of filename to collection of files that share the same name */
+        /**
+          * Mapping of filename to collection of files that share the same name
+          *
+          * @unofficial
+          */
         uniqueFileLookup: CustomArrayDict<TFile>;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         userIgnoreFilterCache: Record<string, boolean>;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         userIgnoreFilters: RegExp[] | null;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         userIgnoreFiltersString: string;
         /**
          * Reference to Vault.
+         *
+         * @unofficial
          */
         vault: Vault;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         worker: Worker;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         workerResolve: ((value: CachedMetadata | PromiseLike<CachedMetadata>) => void) | null;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         workQueue: PromisedQueue;
 
+        /**
+         * @unofficial
+         */
         _getLinkpathDest(origin: string, path: string): TFile[];
-        /** @internal Clear all caches to null values */
+        /**
+          * Clear all caches to null values
+          *
+          * @unofficial
+          */
         cleanupDeletedCache(): void;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         clear(): Promise<void>;
-        /** @internal Called by initialize() */
+        /**
+          * Called by initialize()
+          *
+          * @unofficial
+          */
         computeFileMetadataAsync(file: TFile): Promise<void>;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<CachedMetadata | undefined>;
-        /** @internal Remove all entries that contain deleted path */
+        /**
+          * Remove all entries that contain deleted path
+          *
+          * @unofficial
+          */
         deletePath(path: string): void;
         /**
          * Get all property infos of the vault.
+         *
+         * @unofficial
          */
         getAllPropertyInfos(): Record<string, PropertyInfo>;
         /**
          * Get all backlink information for a file.
+         *
+         * @unofficial
          */
         getBacklinksForFile(file: TFile): CustomArrayDict<Reference>;
         /**
          * Get paths of all files cached in the vault.
+         *
+         * @unofficial
          */
         getCachedFiles(): string[];
         /**
          * Get an entry from the file cache.
+         *
+         * @unofficial
          */
         getFileInfo(path: string): FileCacheEntry | undefined;
         /**
          * Get property values for frontmatter property key.
+         *
+         * @unofficial
          */
         getFrontmatterPropertyValuesForKey(key: string): string[];
         /**
          * Get destination of link path.
+         *
+         * @unofficial
          */
         getLinkpathDest(origin: string, path: string): TFile[];
         /**
          * Get all links within the vault per file.
+         *
+         * @unofficial
          */
         getLinks(): Record<string, Reference[]>;
         /**
          * Get all links (resolved or unresolved) in the vault.
          *
          * If the note has multiple aliases, it will be returned multiple times for each alias.
+         *
+         * @unofficial
          */
         getLinkSuggestions(): LinkSuggestion[];
         /**
          * Get all tags within the vault and their usage count.
+         *
+         * @unofficial
          */
         getTags(): Record<string, number>;
-        /** @internal Initialize Database connection and load up caches */
+        /**
+          * Initialize Database connection and load up caches
+          *
+          * @unofficial
+          */
         initialize(): Promise<void>;
-        /** @internal Check whether there are no cache tasks in progress */
+        /**
+          * Check whether there are no cache tasks in progress
+          *
+          * @unofficial
+          */
         isCacheClean(): boolean;
-        /** @internal Check whether file can support metadata (by checking extension support) */
+        /**
+          * Check whether file can support metadata (by checking extension support)
+          *
+          * @unofficial
+          */
         isSupportedFile(file: TFile): boolean;
-        /** @internal Check whether string is part of the user ignore filters */
+        /**
+          * Check whether string is part of the user ignore filters
+          *
+          * @unofficial
+          */
         isUserIgnored(path: string): boolean;
         /**
          * Iterate over all link references in the vault with callback.
          */
         iterateReferences(callback: (path: string) => void): void;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         linkResolver(): void;
         /**
          * Called whenever the metadatacache has finished updating.
+         *
+         * @unofficial
          */
         on(name: 'finished', callback: () => void): EventRef;
         /**
          * Called whenever the metadatacache is fully loaded in.
          *
          * @remark 'finished' is also emitted when the cache is initialized.
+         * @unofficial
          */
         on(name: 'initialized', callback: () => void): EventRef;
-        /** @internal Execute onCleanCache callbacks if cache is clean */
+        /**
+          * Execute onCleanCache callbacks if cache is clean
+          *
+          * @unofficial
+          * @unofficial
+          */
         onCleanCache(onCleanCacheCallback: () => void): void;
-        /** @internal On creation of the cache: update metadata cache */
+        /**
+          * On creation of the cache: update metadata cache
+          *
+          * @unofficial
+          */
         onCreate(file: TAbstractFile): void;
-        /** @internal On creation or modification of the cache: update metadata cache */
+        /**
+          * On creation or modification of the cache: update metadata cache
+          *
+          * @unofficial
+          */
         onCreateOrModify(file: TAbstractFile): void;
-        /** @internal On deletion of the cache: update metadata cache */
+        /**
+          * On deletion of the cache: update metadata cache
+          *
+          * @unofficial
+          */
         onDelete(file: TAbstractFile): void;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         onReceiveMessageFromWorker(message: MetadataCacheWorkerMessage): void;
-        /** @internal On rename of the cache: update metadata cache */
+        /**
+          * On rename of the cache: update metadata cache
+          *
+          * @unofficial
+          */
         onRename(file: TAbstractFile, oldPath: string): void;
-        /** @internal Check editor for unresolved links and mark these as unresolved */
+        /**
+          * Check editor for unresolved links and mark these as unresolved
+          *
+          * @unofficial
+          */
         resolveLinks(path: string): void;
-        /** @internal Update file cache entry and sync to indexedDB */
+        /**
+          * Update file cache entry and sync to indexedDB
+          *
+          * @unofficial
+          */
         saveFileCache(path: string, entry: FileCacheEntry): void;
-        /** @internal Update metadata cache entry and sync to indexedDB */
+        /**
+          * Update metadata cache entry and sync to indexedDB
+          *
+          * @unofficial
+          */
         saveMetaCache(hash: string, entry: CachedMetadata): void;
-        /** @internal Show a notice that the cache is being rebuilt */
+        /**
+          * Show a notice that the cache is being rebuilt
+          *
+          * @unofficial
+          */
         showIndexingNotice(): void;
-        /** @internal Re-resolve all links for changed path */
+        /**
+          * Re-resolve all links for changed path
+          *
+          * @unofficial
+          */
         updateRelatedLinks(path: string): void;
-        /** @internal Update user ignore filters from settings */
+        /**
+          * Update user ignore filters from settings
+          *
+          * @unofficial
+          */
         updateUserIgnoreFilters(): void;
-        /** @internal Bind actions to listeners on vault */
+        /**
+          * Bind actions to listeners on vault
+          *
+          * @unofficial
+          */
         watchVaultChanges(): void;
-        /** @internal Send message to worker to update metadata cache */
+        /**
+          * Send message to worker to update metadata cache
+          *
+          * @unofficial
+          */
         work(arrayBuffer: ArrayBuffer): Promise<CachedMetadata>;
     }
 }

@@ -37,119 +37,119 @@ declare global {
         /**
          * Global reference to the app.
          *
-         * @public @unofficial
+         * @unofficial
          * @deprecated - Prefer not to use this value directly.
          */
         app: App;
-        /** @public @unofficial */
+        /** @unofficial */
         bl: typeof Object.hasOwnProperty;
-        /** @public @unofficial */
+        /** @unofficial */
         blinkfetch: typeof fetch;
-        /** @public @unofficial */
+        /** @unofficial */
         blinkFormData: typeof FormData;
-        /** @public @unofficial */
+        /** @unofficial */
         blinkHeaders: typeof Headers;
-        /** @public @unofficial */
+        /** @unofficial */
         blinkRequest: typeof Request;
-        /** @public @unofficial */
+        /** @unofficial */
         blinkResponse: typeof Response;
-        /** @public @unofficial */
+        /** @unofficial */
         Capacitor: typeof _Capacitor;
-        /** @public @unofficial */
+        /** @unofficial */
         CapacitorPlatforms: typeof _CapacitorPlatforms;
-        /** @public @unofficial */
+        /** @unofficial */
         Cf: typeof Object.getOwnPropertyDescriptors;
-        /** @public @unofficial */
+        /** @unofficial */
         CodeMirror: typeof CodeMirror;
-        /** @public @unofficial */
+        /** @unofficial */
         CodeMirrorAdapter: CodeMirrorAdapterEx;
         /**
          * DOMPurify is a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG.
          *
-         * @public @unofficial
+         * @unofficial
          */
         DOMPurify: typeof DOMPurify;
-        /** @public @unofficial */
+        /** @unofficial */
         El: typeof Object.propertyIsEnumerable;
-        /** @public @unofficial */
+        /** @unofficial */
         electron: typeof electron;
-        /** @public @unofficial */
+        /** @unofficial */
         electronWindow: ElectronWindow;
-        /** @public @unofficial */
+        /** @unofficial */
         frameDom: FrameDom;
         /**
          * Constructor for the Capacitor file system adapter.
          *
-         * @public @unofficial
+         * @unofficial
          */
         FS: CapacitorAdapterFsConstructor;
-        /** @public @unofficial */
+        /** @unofficial */
         i18next: typeof i18next;
-        /** @public @unofficial */
+        /** @unofficial */
         MathJax?: MathJax;
-        /** @public @unofficial */
+        /** @unofficial */
         mermaid?: Mermaid;
         /**
          * Parse, validate, manipulate, and display dates in javascript.
          *
-         * @public @unofficial
+         * @unofficial
          *
          * Commented out because the global variable is already declared in the `moment` package.
          */
         moment: typeof moment;
-        /** @public @unofficial */
+        /** @unofficial */
         mr: typeof Object.getOwnPropertySymbols;
         /**
          * Notification component. Use to present timely, high-value information.
          *
-         * @public @unofficial
+         * @unofficial
          */
         Notice: typeof _Notice;
         /**
          * Invoke obsidian protocol action.
          *
-         * @public @unofficial
+         * @unofficial
          */
         OBS_ACT: ObsidianProtocolHandler;
-        /** @public @unofficial */
+        /** @unofficial */
         OBSIDIAN_DEFAULT_I18N: Localization;
-        /** @public @unofficial */
+        /** @unofficial */
         pdfjsLib: typeof pdfjsLib;
-        /** @public @unofficial */
+        /** @unofficial */
         pdfjsTestingUtils: PdfJsTestingUtils;
-        /** @public @unofficial */
+        /** @unofficial */
         PIXI: typeof PIXI;
-        /** @public @unofficial */
+        /** @unofficial */
         Prism?: typeof Prism;
         /**
          * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
          *
          * Returns the text value of the response.
-         * @public @unofficial
+         * @unofficial
          */
         request: typeof _request;
         /**
          * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
          *
-         * @public @unofficial
+         * @unofficial
          */
         requestUrl: typeof _requestUrl;
-        /** @public @unofficial */
+        /** @unofficial */
         scrypt: typeof scrypt;
-        /** @public @unofficial */
+        /** @unofficial */
         Sf: typeof Object.defineProperties;
-        /** @public @unofficial */
+        /** @unofficial */
         temp1: Database['changeVersion'];
-        /** @public @unofficial */
+        /** @unofficial */
         titlebarStyle: string;
-        /** @public @unofficial */
+        /** @unofficial */
         TurndownService: typeof TurndownService;
-        /** @public @unofficial */
+        /** @unofficial */
         WebView: electron.WebviewTag;
-        /** @public @unofficial */
+        /** @unofficial */
         wf: typeof Object.defineProperty;
 
-        /** @public @unofficial */
+        /** @unofficial */
         globalEnhance(): void;
         /**
          * vim.js based on https://github.com/codemirror/CodeMirror/commit/793c9e65e09ec7fba3f4f5aaf366b3d36e1a709e (2021-12-04)
@@ -191,14 +191,14 @@ declare global {
          *  8. Set up Vim to work as a keymap for CodeMirror.
          *  9. Ex command implementations.
          *
-         * @public @unofficial
+         * @unofficial
          */
         initVimMode(CodeMirror: CodeMirrorAdapterEx): VimApi;
-        /** @public @unofficial */
+        /** @unofficial */
         li(target: object, source: object): object;
-        /** @public @unofficial */
+        /** @unofficial */
         mo(target: object, propertyNames: string[]): object;
-        /** @public @unofficial */
+        /** @unofficial */
         openDatabase(
             name: string,
             version: string,
@@ -209,12 +209,12 @@ declare global {
         /**
          * Select a language file location.
          *
-         * @public @unofficial
+         * @unofficial
          */
         selectLanguageFileLocation(): void;
-        /** @public @unofficial */
+        /** @unofficial */
         St(target: object, source: object | undefined): object;
-        /** @public @unofficial */
+        /** @unofficial */
         Tl(target: object, propertyName: string, propertyValue: unknown): unknown;
     }
 }

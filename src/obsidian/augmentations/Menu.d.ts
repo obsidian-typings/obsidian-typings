@@ -7,109 +7,197 @@ declare module 'obsidian' {
     interface Menu extends Component, CloseableComponent {
         /**
          * Background for the suggestion menu.
+         *
+         * @unofficial
          */
         bgEl: HTMLElement;
         /**
          * The currently active submenu, if any.
+         *
+         * @unofficial
          */
         currentSubmenu?: Menu;
         /**
          * DOM element of the menu.
+         *
+         * @unofficial
          */
         dom: HTMLElement;
         /**
          * Items contained in the menu.
+         *
+         * @unofficial
          */
         items: MenuItem[];
         /**
          * Parent menu of the current menu.
+         *
+         * @unofficial
          */
         parentMenu: Menu | null;
         /**
          * Scope in which the menu is active.
+         *
+         * @unofficial
          */
         scope: Scope;
         /**
          * Sections within the menu.
+         *
+         * @unofficial
          */
         sections: string[];
-        /** @internal Which menuitem is currently selected */
+        /**
+         * Which menuitem is currently selected.
+         *
+         * @unofficial
+         */
         selected: number;
-        /** @internal Configurations for the submenu configs */
+        /**
+         * Configurations for the submenu configs.
+         *
+         * @unofficial
+         */
         submenuConfig: MenuSubmenuConfigRecord;
-        /** @internal Whether the submenu is currently unloading */
+        /**
+         * Whether the submenu is currently unloading.
+         *
+         * @unofficial
+         */
         unloading: boolean;
         /**
          * Whether the menu is rendered in native mode.
+         *
+         * @unofficial
          */
         useNativeMenu: boolean;
 
-        /** @internal Add a section to the menu */
+        /**
+         * Add a section to the menu.
+         *
+         * @unofficial
+         */
         addSections(items: string[]): this;
-        /** @internal Close the currently open submenu */
+        /**
+         * Close the currently open submenu.
+         *
+         * @unofficial
+         */
         closeSubmenu(): void;
         /**
          * Callback to execute when the menu is hidden.
+         *
+         * @unofficial
          */
         hideCallback(): void;
-        /** @internal Check whether the clicked element is inside the menu */
+        /**
+         * Check whether the clicked element is inside the menu.
+         *
+         * @unofficial
+         */
         isInside(e: HTMLElement): boolean;
         /**
+         * Move selection to the next item in the menu.
+         *
          * @param e - Keyboard event.
          *
-         * @internal Move selection to the next item in the menu.
+         * @unofficial
          */
         onArrowDown(e: KeyboardEvent): boolean;
-        /** @internal Move selection out of the submenu */
+        /**
+         * Move selection out of the submenu.
+         *
+         * @unofficial
+         */
         onArrowLeft(e: KeyboardEvent): boolean;
-        /** @internal Move selection into the submenu */
+        /**
+         * Move selection into the submenu.
+         *
+         * @unofficial
+         */
         onArrowRight(e: KeyboardEvent): boolean;
         /**
+         * Move selection to the previous item in the menu.
+         *
          * @param e - Keyboard event.
          *
-         * @internal Move selection to the previous item in the menu.
+         * @unofficial
          */
         onArrowUp(e: KeyboardEvent): boolean;
-        /** @internal Execute selected menu item (does nothing if item is submenu) */
+        /**
+         * Execute selected menu item (does nothing if item is submenu).
+         *
+         * @param e - Keyboard event.
+         *
+         * @unofficial
+         */
         onEnter(e: KeyboardEvent): boolean;
         /**
-         * @param e.
+         * Preemptively closes the menu if click is registered on menu item.
          *
-         * @internal Preemptively closes the menu if click is registered on menu item.
+         * @param e - Mouse event.
+         *
+         * @unofficial
          */
         onMenuClick(e: MouseEvent): void;
         /**
+         * Opens submenu if mouse is hovering over item with submenu.
+         *
          * @param e - Mouse event.
          *
-         * @internal Opens submenu if mouse is hovering over item with submenu.
+         * @unofficial
          */
         onMouseOver(e: MouseEvent): boolean;
-        /** @internal Registers dom events and scope for the menu */
+        /**
+         * Registers dom events and scope for the menu.
+         *
+         * @param item - Menu item.
+         *
+         * @unofficial
+         */
         openSubmenu(item: MenuItem): void;
-        /** @internal Callback that opens the submenu after a delay */
+        /**
+         * Callback that opens the submenu after a delay.
+         *
+         * @unofficial
+         */
         openSubmenuSoon(): void;
         /**
-         * @param index.
+         * Select the item at the specified index (after either hovering or arrowing over it).
          *
-         * @internal Select the item at the specified index (after either hovering or arrowing over it).
+         * @param index - Index of the item to select.
+         *
+         * @unofficial
          */
         select(index: number): void;
         /**
+         * Set the parent element of the menu (i.e. for workspace leaf context menu).
+         *
          * @param el - Element to set as parent.
          *
-         * @internal Set the parent element of the menu (i.e. for workspace leaf context menu).
+         * @unofficial
          */
         setParentElement(el: HTMLElement): this;
         /**
-         * @param section.
+         * Add a section to the submenu config.
          *
-         * @param submenu.
-         * @internal Add a section to the submenu config.
+         * @param section - Section to add.
+         * @param submenu - Submenu to add.
+         *
+         * @unofficial
          */
         setSectionSubmenu(section: string, submenu: Submenu): this;
-        /** @internal Sort the items in the menu */
+        /**
+         * Sort the items in the menu.
+         *
+         * @unofficial
+         */
         sort(): void;
-        /** @internal Unselect the currently selected item and closes the submenu */
+        /**
+         * Unselect the currently selected item and closes the submenu.
+         *
+         * @unofficial
+         */
         unselect(): void;
     }
 }

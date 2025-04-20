@@ -5,14 +5,34 @@ export {};
 declare module 'obsidian' {
     /** @todo Documentation incomplete */
     interface SuggestModal<T> extends Modal, ISuggestOwner<T> {
+        /**
+         * @unofficial
+         */
         chooser: SuggestModalChooser<T, this>;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         clearButtonEl: HTMLDivElement;
+        /**
+         * @unofficial
+         */
         ctaEl: HTMLDivElement;
+        /**
+         * @unofficial
+         */
         instructionsEl: HTMLDivElement;
+        /**
+         * @unofficial
+         */
         isOpen: boolean;
 
+        /**
+         * @unofficial
+         */
         onInput(): void;
+        /**
+         * @unofficial
+         */
         updateSuggestions(): void;
     }
 }

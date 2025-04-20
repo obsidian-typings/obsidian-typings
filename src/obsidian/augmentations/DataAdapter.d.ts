@@ -9,17 +9,30 @@ declare module 'obsidian' {
     interface DataAdapter extends PromisedQueue {
         /**
          * Base OS path for the vault (e.g. /home/user/vault, or C:\Users\user\documents\vault).
+         *
+         * @unofficial
          */
         basePath: string;
         /**
          * Mapping of file/folder path to vault entry, includes non-MD files.
+         *
+         * @unofficial
          */
         files: DataAdapterFilesRecord;
-        /** @internal Handles vault events */
+        /** Handles vault events.
+         *
+         * @unofficial
+         */
         handler: FileSystemWatchHandler | null;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         insensitive: boolean;
-        /** @internal Triggers handler for vault events */
+        /**
+         * Triggers handler for vault events.
+         *
+         * @unofficial
+         */
         trigger: FileSystemWatchHandler;
 
         /**
@@ -28,6 +41,8 @@ declare module 'obsidian' {
          * @param fullPath Full path to the file.
          * @param sensitive Whether to check case-sensitive.
          * @returns A promise that resolves to `true` if the file exists, `false` otherwise.
+         *
+         * @unofficial
          */
         _exists(fullPath: string, sensitive?: boolean): Promise<boolean>;
         /**
@@ -35,6 +50,8 @@ declare module 'obsidian' {
          *
          * @param path Path to file.
          * @returns Full path to file.
+         *
+         * @unofficial
          */
         getFullPath(path: string): string;
         /**
@@ -42,6 +59,8 @@ declare module 'obsidian' {
          *
          * @param normalizedPath Normalized path to file.
          * @returns String full path to file.
+         *
+         * @unofficial
          */
         getFullRealPath(normalizedPath: string): string;
         /**
@@ -52,18 +71,29 @@ declare module 'obsidian' {
          *
          * @param path Path to file.
          * @returns Normalized path.
+         *
+         * @unofficial
          */
         getRealPath(path: string): string;
         /**
+         * Get resource path of file (URL path).
+         *
          * @param normalizedPath Path to file.
          *
          * @returns String URL of form: app://FILEHASH/path/to/file.
-         * @internal Get resource path of file (URL path).
+         *
+         * @unofficial
          */
         getResourcePath(normalizedPath: string): string;
-        /** @internal Generates `this.files` for specific directory of the vault */
+        /**
+         * Generates `this.files` for specific directory of the vault
+         *
+         * @unofficial
+         */
         listRecursive(normalizedPath: string): Promise<void>;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         onFileChange(normalizedPath: string | null): void;
         /**
          * Reconcile a deletion.
@@ -72,7 +102,8 @@ declare module 'obsidian' {
          * @param normalizedNewPath New path to file.
          * @param shouldSkipDeletionTimeout Whether the deletion timeout should be skipped (default: `true`).
          * @returns A promise that resolves when the file is reconciled.
-         * @internal.
+         *
+         * @unofficial
          */
         reconcileDeletion(
             normalizedPath: string,
@@ -86,28 +117,49 @@ declare module 'obsidian' {
          * @param normalizedNewPath New path to file.
          * @param shouldSkipDeletionTimeout Whether the deletion timeout should be skipped - applies only to {@link reconcileDeletion}.
          * @returns A promise that resolves when the file is reconciled.
-         * @internal.
+         *
+         * @unofficial
          */
         reconcileFile(
             normalizedPath: string,
             normalizedNewPath: string,
             shouldSkipDeletionTimeout?: boolean
         ): Promise<void>;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         reconcileFolderCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         reconcileInternalFile(normalizedPath: string): Promise<void>;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         reconcileSymbolicLinkCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
-        /** @internal Remove file from files listing and trigger deletion event */
+        /**
+         * Remove file from files listing and trigger deletion event.
+         *
+         * @unofficial
+         */
         removeFile(normalizedPath: string): void;
-        /** @internal Remove all listeners */
+        /**
+         * Remove all listeners.
+         *
+         * @unofficial
+         */
         stopWatch(): void;
-        /** @internal Set whether OS is insensitive to case */
-        testInsensitive(): void;
-        /** @internal */
+        /**
+         * Set whether OS is insensitive to case.
+         *
+         * @unofficial
+         */
         update(normalizedPath: string): Promise<void>;
-        /** @internal Add change watcher to path */
+        /**
+         * Add change watcher to path.
+         *
+         * @unofficial
+         */
         watch(handler: FileSystemWatchHandler): Promise<void>;
     }
 }

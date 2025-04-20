@@ -27,51 +27,67 @@ declare module 'obsidian' {
          * ID that uniquely identifies the vault.
          *
          * @tutorial Used for implementing device *and* vault-specific data storage using LocalStorage or IndexedDB.
+         * @unofficial
          */
         appId: string;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         appMenuBarManager: AppMenuBarManager;
         /**
          * Contains all registered commands.
          *
          * @tutorial Can be used to manually invoke the functionality of a specific command.
+         * @unofficial
          */
         commands: Commands;
         /**
          * Custom CSS (snippets/themes) applied to the application.
          *
          * @tutorial Can be used to view which snippets are enabled or available, or inspect loaded-in theme manifests.
+         * @unofficial
          */
         customCss: CustomCSS;
         /**
          * References to important DOM elements of the application.
+         *
+         * @unofficial
          */
         dom: ObsidianDOM;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         dragManager: DragManager;
         /**
          * Registry that manages the creation of generic media type embeds.
+         *
+         * @unofficial
          */
         embedRegistry: EmbedRegistry;
         /**
          * Manage the creation, deletion and renaming of files from the UI.
          *
          * @remark Prefer using the `vault` API for programmatic file management.
+         * @unofficial
          */
         fileManager: FileManager;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         foldManager: FoldManager;
         /**
          * Manages global hotkeys.
          *
          * @tutorial Can be used for manually invoking a command, or finding which hotkey is assigned to a specific key input.
          * @remark This should not be used for adding hotkeys to your custom commands, this can easily be done via the official API.
+         * @unofficial
          */
         hotkeyManager: HotkeyManager;
         /**
          * Manager of internal 'core' plugins.
          *
          * @tutorial Can be used to check whether a specific internal plugin is enabled, or grab specific parts from its config for simplifying your own plugin's settings.
+         * @unofficial
          */
         internalPlugins: InternalPlugins;
         /**
@@ -80,55 +96,89 @@ declare module 'obsidian' {
          * @deprecated Will be inaccessible in a future version, prefer using `Platform.isMobile`.
          * @remark Prefer usage of `Platform.isMobile`.
          * @remark Will be true if `app.emulateMobile()` was enabled.
+         * @unofficial
          */
         isMobile: boolean;
-        /** @deprecated Made inaccessible in 1.6.0, this object can be recreated using Notices */
+        /**
+         * @deprecated Made inaccessible in 1.6.0, this object can be recreated using Notices
+         * @unofficial
+         */
         loadProgress: LoadProgress;
         /**
          * Manages the gathering and updating of metadata for all files in the vault.
          *
          * @tutorial Use for finding tags and backlinks for specific files, grabbing frontmatter properties, ...
+         * @unofficial
          */
         metadataCache: MetadataCache;
         /**
          * Manages the frontmatter properties of the vault and the rendering of the properties.
          *
          * @tutorial Fetching properties used in all frontmatter fields, may potentially be used for adding custom frontmatter widgets.
+         * @unofficial
          */
         metadataTypeManager: MetadataTypeManager;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         mobileNavbar: MobileNavbar | null;
+        /**
+         * @unofficial
+         */
         mobileTabSwitcher: MobileTabSwitcher | null;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         mobileToolbar: MobileToolbar | null;
-        /** @internal Events to execute on the next frame */
+        /**
+         * Events to execute on the next frame
+         *
+         * @unofficial
+         */
         nextFrameEvents: (() => void)[];
-        /** @internal Timer for the next frame */
+        /**
+         * Timer for the next frame
+         *
+         * @unofficial
+         */
         nextFrameTimer: number | null;
         /**
          * Manages loading and enabling of community (non-core) plugins.
          *
          * @tutorial Can be used to communicate with other plugins, custom plugin management, ...
          * @remark Be careful when overriding loading logic, as this may result in other plugins not loading.
+         * @unofficial
          */
         plugins: Plugins;
-        /** @internal Root keyscope of the application */
+        /**
+         * Root keyscope of the application
+         *
+         * @unofficial
+         */
         scope: Scope;
         /**
          * Manages the settings modal and its tabs.
          *
          * @tutorial Can be used to open the settings modal to a specific tab, extend the settings modal functionality, ...
          * @remark Do not use this to get settings values from other plugins, it is better to do this via `app.plugins.getPlugin(ID)?.settings` (check how the plugin stores its settings).
+         * @unofficial
          */
         setting: AppSetting;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         shareReceiver: ShareReceiver;
-        /** @internal Status bar of the application */
+        /**
+         * Status bar of the application
+         *
+         * @unofficial
+         */
         statusBar: StatusBar;
         /**
          * Name of the vault with version suffix.
          *
          * @remark Formatted as 'NAME - Obsidian vX.Y.Z'.
+         * @unofficial
          */
         title: string;
         /**
@@ -139,55 +189,72 @@ declare module 'obsidian' {
          * @tutorial Used for creating your own files and folders, renaming, ...
          * @tutorial Use `app.vault.adapter` for accessing files outside the vault (desktop-only).
          * @remark Prefer using the regular `vault` whenever possible.
+         * @unofficial
          */
         vault: Vault;
         /**
          * Manages the construction of appropriate views when opening a file of a certain type.
          *
          * @remark Prefer usage of view registration via the Plugin class.
+         * @unofficial
          */
         viewRegistry: ViewRegistry;
         /**
          * Manages the workspace layout, construction, rendering and manipulation of leaves.
          *
          * @tutorial Used for accessing the active editor leaf, grabbing references to your views, ...
+         * @unofficial
          */
         workspace: Workspace;
 
         /**
          * Sets the accent color of the application (light/dark mode).
+         *
+         * @unofficial
          */
         changeTheme(theme: 'moonstone' | 'obsidian'): void;
         /**
          * Copies Obsidian URI of given file to clipboard.
          *
          * @param file File to generate URI for.
+         *
+         * @unofficial
          */
         copyObsidianUrl(file: TFile): void;
         /**
          * Toggles debug mode.
          *
          * @param isEnabled Whether to enable or disable debug mode.
+         *
+         * @unofficial
          */
         debugMode(isEnabled: boolean): void;
         /**
          * Disables all CSS transitions in the vault (until manually re-enabled).
+         *
+         * @unofficial
          */
         disableCssTransition(): void;
         /**
          * Restarts Obsidian and renders workspace in mobile mode.
          *
          * @tutorial Very useful for testing the rendering of your plugin on mobile devices.
+         *
+         * @unofficial
          */
         emulateMobile(emulate: boolean): void;
         /**
          * Enables all CSS transitions in the vault.
+         *
+         * @unofficial
          */
         enableCssTransition(): void;
         /**
          * Manually fix all file links pointing towards image/audio/video resources in element.
          *
          * @param element Element to fix links in.
+         *
+         * @unofficial
          */
         fixFileLinks(element: HTMLElement): void;
         /**
@@ -196,22 +263,27 @@ declare module 'obsidian' {
          * @tutorial Useful for hiding sensitive information or sharing pretty screenshots of your vault.
          * @remark Uses the `Flow Circular` font.
          * @remark You will have to restart the app to get normal text back.
+         * @unofficial
          */
         garbleText(): void;
         /**
          * Get the accent color of the application.
          *
          * @remark Often a better alternative than `app.vault.getConfig('accentColor')` as it returns an empty string if no accent color was set.
+         * @unofficial
          */
         getAccentColor(): string;
         /**
          * Get the current title of the application.
          *
          * @remark The title is based on the currently active leaf.
+         * @unofficial
          */
         getAppTitle(): string;
         /**
          * Get the URI for opening specified file in Obsidian.
+         *
+         * @unofficial
          */
         getObsidianUrl(file: TFile): string;
         /**
@@ -219,19 +291,27 @@ declare module 'obsidian' {
          *
          * @deprecated Originally spellcheck languages were stored in app settings, languages are now stored.
          *   in `localStorage.getItem(spellcheck-languages)`.
+         * @unofficial
          */
         getSpellcheckLanguages(): string[];
         /**
          * Get the current color scheme of the application.
          *
          * @remark Identical to `app.vault.getConfig('theme')`.
+         * @unofficial
          */
         getTheme(): 'moonstone' | 'obsidian';
         /**
          * Import attachments into specified folder.
+         *
+         * @unofficial
          */
         importAttachments(imports: ImportedAttachments[], folder: TFolder | null): Promise<void>;
-        /** @internal Initialize the entire application using the provided FS adapter */
+        /**
+         * Initialize the entire application using the provided FS adapter
+         *
+         * @unofficial
+         */
         initializeWithAdapter(adapter: DataAdapter): Promise<void>;
         isVimEnabled(): boolean;
         /**
@@ -240,34 +320,73 @@ declare module 'obsidian' {
          * @param key Key of value to load.
          * @remark This method is device *and* vault specific.
          * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault.
+         *
+         * @unofficial
          */
         loadLocalStorage(key: string): unknown | null;
-        /** @internal Add callback to execute on next frame */
+        /**
+         * Add callback to execute on next frame
+         *
+         * @unofficial
+         */
         nextFrame(callback: () => void): void;
-        /** @internal Add callback to execute on next frame, and remove after execution */
+        /**
+         * Add callback to execute on next frame, and remove after execution
+         *
+         * @unofficial
+         */
         nextFrameOnceCallback(callback: () => void): void;
-        /** @internal Add callback to execute on next frame with promise */
+        /**
+         * Add callback to execute on next frame with promise
+         *
+         * @unofficial
+         */
         nextFramePromise(callback: () => Promise<void>): Promise<void>;
+        /**
+         * @unofficial
+         */
         on(): void;
-        /** @internal Execute all logged callback (called when next frame is loaded) */
+        /**
+         * Execute all logged callback (called when next frame is loaded)
+         *
+         * @unofficial
+         */
         onNextFrame(callback: () => void): void;
         /**
          * Open the help vault (or site if mobile).
+         *
+         * @unofficial
          */
         openHelp(): void;
         /**
          * Open the vault picker.
+         *
+         * @unofficial
          */
         openVaultChooser(): void;
         /**
          * Open the file with OS defined default file browser application.
+         *
+         * @unofficial
          */
         openWithDefaultApp(path: string): void;
-        /** @internal Register all basic application commands */
+        /**
+         * Register all basic application commands
+         *
+         * @unofficial
+         */
         registerCommands(): void;
-        /** @internal Register a hook for saving workspace data before unload */
+        /**
+         * Register a hook for saving workspace data before unload
+         *
+         * @unofficial
+         */
         registerQuitHook(): void;
-        /** @internal Save attachment at default attachments location */
+        /**
+         * Save attachment at default attachments location
+         *
+         * @unofficial
+         */
         saveAttachment(name: string, extension: string, data: ArrayBuffer): Promise<TFile>;
         /**
          * Save a value to the localstorage given key.
@@ -276,64 +395,100 @@ declare module 'obsidian' {
          * @param value Value to save.
          * @remark This method is device *and* vault specific.
          * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault.
+         *
+         * @unofficial
          */
         saveLocalStorage(key: string, value: unknown): void;
         /**
          * Set the accent color of the application.
          *
          * @remark Also updates the CSS `--accent` variables.
+         *
+         * @unofficial
          */
         setAccentColor(color: string): void;
         /**
          * Set the path where attachments should be stored.
+         *
+         * @unofficial
          */
         setAttachmentFolder(path: string): void;
         /**
          * Set the spellcheck languages.
+         *
+         * @unofficial
          */
         setSpellcheckLanguages(languages: string[]): void;
         /**
          * Set the current color scheme of the application and reload the CSS.
+         *
+         * @unofficial
          */
         setTheme(theme: 'moonstone' | 'obsidian'): void;
         /**
          * Open the OS file picker at path location.
+         *
+         * @unofficial
          */
         showInFolder(path: string): void;
         /**
          * Show the release notes for provided version as a new leaf.
          *
          * @param version Version to show release notes for (defaults to current version).
+         *
+         * @unofficial
          */
         showReleaseNotes(version?: string): void;
         /**
          * Updates the accent color and reloads the CSS.
+         *
+         * @unofficial
          */
         updateAccentColor(): void;
         /**
          * Update the font family of the application and reloads the CSS.
+         *
+         * @unofficial
          */
         updateFontFamily(): void;
         /**
          * Update the font size of the application and reloads the CSS.
+         *
+         * @unofficial
          */
         updateFontSize(): void;
         /**
          * Update the inline title rendering in notes.
+         *
+         * @unofficial
          */
         updateInlineTitleDisplay(): void;
+        /**
+         * Update the ribbon display.
+         *
+         * @unofficial
+         */
         updateRibbonDisplay(): void;
         /**
          * Update the color scheme of the application and reloads the CSS.
+         *
+         * @unofficial
          */
         updateTheme(): void;
         /**
          * Update the view header display in notes.
+         *
+         * @unofficial
          */
         updateViewHeaderDisplay(): void;
     }
 
     namespace App {
+        /**
+         * Get the override config directory for the given app ID.
+         *
+         * @unofficial
+         */
         function getOverrideConfigDir(appId: string): string | null;
     }
 }

@@ -4,31 +4,46 @@ export {};
 
 declare module 'obsidian' {
     interface Scope {
-        /** @internal - Callback to execute when scope is matched */
+        /**
+          * Callback to execute when scope is matched
+          *
+          * @unofficial
+          */
         cb: (() => boolean) | undefined;
         /**
          * Overridden keys that exist in this scope.
+         *
+         * @unofficial
          */
         keys: KeyScope[];
-        /** @internal Scope that this scope is a child of */
+        /**
+          * Scope that this scope is a child of
+          *
+          * @unofficial
+          */
         parent: Scope | undefined;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         tabFocusContainerEl: HTMLElement | null;
 
         /**
+         * Execute keypress within this scope.
+         *
          * @param event - Keyboard event.
          *
          * @param keypress - Pressed key information.
-         * @internal Execute keypress within this scope.
+         * @unofficial
          */
         handleKey(event: KeyboardEvent, keypress: KeymapInfo): unknown;
         /**
          * @deprecated - Executes same functionality as `Scope.register`.
-         *
-         * @internal.
+         * @unofficial
          */
         registerKey(modifiers: Modifier[], key: string | null, func: KeymapEventListener): KeymapEventHandler;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         setTabFocusContainer(container: HTMLElement): void;
     }
 }

@@ -6,6 +6,8 @@ declare module 'obsidian' {
     namespace MarkdownPreviewRenderer {
         /**
          * The currently registered code block post processors.
+         *
+         * @unofficial
          */
         export const codeBlockPostProcessors: Record<string, CodeBlockPostProcessorHandler>;
         /**
@@ -14,6 +16,7 @@ declare module 'obsidian' {
          * @param language - The language to unregister the post processor for.
          *
          * @remark Views will not reflect the removal until being re-rendered.
+         * @unofficial
          */
         export function unregisterCodeBlockPostProcessor(language: string): void;
     }

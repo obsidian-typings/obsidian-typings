@@ -4,54 +4,107 @@ export {};
 
 declare module 'obsidian' {
     interface Modal extends CloseableComponent {
-        /** @internal Background applied to application to dim it */
+        /**
+          * Background applied to application to dim it
+          *
+          * @unofficial
+          */
         bgEl: HTMLElement;
-        /** @internal Opacity percentage of the background */
+        /**
+          * Opacity percentage of the background
+          *
+          * @unofficial
+          */
         bgOpacity: string;
-        /** @internal Whether the background is being dimmed */
+        /**
+          * Whether the background is being dimmed
+          *
+          * @unofficial
+          */
         dimBackground: boolean;
+        /**
+         * @unofficial
+         */
         headerEl: HTMLDivElement;
-        /** @internal Modal container element */
+        /**
+          * Modal container element
+          *
+          * @unofficial
+          */
         modalEl: HTMLElement;
-        /** @internal Selection logic handler */
+        /**
+          * Selection logic handler
+          *
+          * @unofficial
+          */
         selection: WindowSelection | null;
-        /** Whether the modal should animate */
+        /**
+         * Whether the modal should animate
+         *
+         * @unofficial
+         */
         shouldAnimate: boolean;
         /**
          * Reference to the global Window object.
+         *
+         * @unofficial
          */
         win: Window | null;
 
-        /** @internal Performed when animation is complete */
+        /**
+          * Performed when animation is complete
+          *
+          * @unofficial
+          */
         animateClose(): Promise<void>;
-        /** @internal Performed when animation is started */
+        /**
+          * Performed when animation is started
+          *
+          * @unofficial
+          */
         animateOpen(): Promise<void>;
-        /** @internal On escape key press close modal */
+        /**
+          * On escape key press close modal
+          *
+          * @unofficial
+          */
         onEscapeKey(): void;
-        /** @internal On closing of the modal */
+        /**
+          * On closing of the modal
+          *
+          * @unofficial
+          */
         onWindowClose(): void;
         /**
+         * Set the background opacity of the dimmed background.
+         *
          * @param opacity Opacity percentage.
          *
-         * @internal Set the background opacity of the dimmed background.
+         * @unofficial
          */
         setBackgroundOpacity(opacity: string): this;
         /**
+         * Set the content of the modal.
+         *
          * @param content Content to set.
          *
-         * @internal Set the content of the modal.
+         * @unofficial
          */
         setContent(content: DocumentFragment | string): this;
         /**
+         * Set whether the background should be dimmed.
+         *
          * @param dim Whether the background should be dimmed.
          *
-         * @internal Set whether the background should be dimmed.
+         * @unofficial
          */
         setDimBackground(dim: boolean): this;
         /**
+         * Set the title of the modal.
+         *
          * @param title Title to set.
          *
-         * @internal Set the title of the modal.
+         * @unofficial
          */
         setTitle(title: string): this;
     }

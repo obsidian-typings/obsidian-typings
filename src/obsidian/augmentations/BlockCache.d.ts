@@ -5,9 +5,13 @@ declare module 'obsidian' {
     interface BlockCache extends CacheItem {
         /**
          * Reference to App.
+         *
+         * @unofficial
          */
         app: App;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         cache: unknown;
     }
 }

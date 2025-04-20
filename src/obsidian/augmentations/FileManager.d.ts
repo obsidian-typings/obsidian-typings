@@ -11,47 +11,69 @@ declare module 'obsidian' {
     interface FileManager {
         /**
          * Reference to App.
+         *
+         * @unofficial
          */
         app: App;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         fileParentCreatorByType: Record<string, (path: string) => TFolder>;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         inProgressUpdates: null | LinkUpdateHandler[];
-        /** @internal */
+        /**
+         * @unofficial
+         */
         linkUpdaters: LinkUpdaters;
-        /** @internal */
+        /**
+         * @unofficial
+         */
         updateQueue: PromisedQueue;
         /**
          * Reference to Vault.
+         *
+         * @unofficial
          */
         vault: Vault;
 
+        /**
+         * @unofficial
+         */
         canCreateFileWithExt(extension: string): boolean;
         /**
          * Creates a new Markdown file in specified location and opens it in a new view.
          *
          * @param path - Path to the file to create (missing folders will be created).
          * @param location - Where to open the view containing the new file.
+         *
+         * @unofficial
          */
         createAndOpenMarkdownFile(path: string, location: PaneType): Promise<void>;
         /**
          * Create a new file in the vault at specified location.
          *
          * @param location - Location to create the file in, defaults to root.
-         * @param filename - Name of the file to create, defaults to 'Untitled' (incremented if file already.
-         *   exists).
+         * @param filename - Name of the file to create, defaults to 'Untitled' (incremented if file already exists).
          * @param extension - Extension of the file to create, defaults to 'md'.
          * @param contents - Contents of the file to create, defaults to empty string.
+         *
+         * @unofficial
          */
         createNewFile(location?: TFolder, filename?: string, extension?: string, contents?: string): Promise<TFile>;
         /**
          * Creates a new untitled folder in the vault at specified location.
          *
          * @param location - Location to create the folder in, defaults to root.
+         *
+         * @unofficial
          */
         createNewFolder(location: TFolder): Promise<TFolder>;
         /**
          * Creates a new Markdown file in the vault at specified location.
+         *
+         * @unofficial
          */
         createNewMarkdownFile(location: TFolder, filename: string, contents: string): Promise<TFile>;
         /**
@@ -59,27 +81,42 @@ declare module 'obsidian' {
          *
          * @param filename - Name of the file to create.
          * @param path - Path to where the file should be created.
+         *
+         * @unofficial
          */
         createNewMarkdownFileFromLinktext(filename: string, path: string): Promise<TFile>;
+        /**
+         * Download attachments for note.
+         *
+         * @unofficial
+         */
         downloadAttachmentsForNote(file: TFile): Promise<void>;
         /**
          * Always returns an empty array.
          *
-         * @internal.
+         * @unofficial
          */
         getAllLinkResolutions(): [];
         /**
          * Gets the folder that new markdown files should be saved to, based on the current settings.
          *
-         * @param path - The path of the current opened/focused file, used when the user wants new files to be.
-         *   created in the same folder as the current file.
+         * @param path - The path of the current opened/focused file, used when the user wants new files to be created in the same folder as the current file.
+         *
+         * @unofficial
          */
         getMarkdownNewFileParent(path: string): TFolder;
+        /**
+         * Insert text into a file.
+         *
+         * @unofficial
+         */
         insertIntoFile(file: TFile, text: string, position?: 'append' | 'prepend'): Promise<void>;
         /**
          * Iterate over all links in the vault with callback.
          *
          * @param callback - Callback to execute for each link.
+         *
+         * @unofficial
          */
         iterateAllRefs(callback: (path: string, link: PositionedReference) => void): void;
         /**
@@ -89,23 +126,44 @@ declare module 'obsidian' {
          * @param otherFile - File to merge from.
          * @param override - If not empty, will override the contents of the file with this string.
          * @param atStart - Whether to insert text at the start or end of the file.
+         *
+         * @unofficial
          */
         mergeFile(file: TFile, otherFile: TFile, override: string, atStart: boolean): Promise<void>;
         /**
          * Prompt the user to delete a file.
+         *
+         * @unofficial
          */
         promptForDeletion(file: TAbstractFile): Promise<void>;
+        /**
+         * Prompt the user to delete a file.
+         *
+         * @unofficial
+         */
         promptForFileDeletion(file: TFile): Promise<void>;
         /**
          * Prompt the user to rename a file.
+         *
+         * @unofficial
          */
         promptForFileRename(file: TFile): Promise<void>;
+        /**
+         * Prompt the user to delete a folder.
+         *
+         * @unofficial
+         */
         promptForFolderDeletion(folder: TFolder): Promise<void>;
+        /**
+         * Prompt the user to download an image.
+         *
+         * @unofficial
+         */
         promptForImageDownload(urls: string[]): Promise<undefined | null | Record<string, TFile>>;
         /**
-         * @internal.
-         *
          * Register an extension to be the parent for a specific file type.
+         *
+         * @unofficial
          */
         registerFileParentCreator(extension: string, location: TFolder): void;
         /**
@@ -113,26 +171,39 @@ declare module 'obsidian' {
          *
          * @remark The current property type is maintained.
          * @remark Is case sensitive, despite Obsidian *typically* ignoring case for property names.
+         *
+         * @unofficial
          */
         renameProperty(oldKey: string, newKey: string): Promise<void>;
         /**
-         * @param linkUpdateHandler - Handler to execute for each updated link.
+         * Run async link update.
          *
-         * @internal.
+         * @unofficial
          */
         runAsyncLinkUpdate(linkUpdateHandler: LinkUpdateHandler): Promise<void>;
         /**
-         * @param path.
+         * Store text file backup.
          *
-         * @param data.
-         * @internal.
+         * @unofficial
          */
         storeTextFileBackup(path: string, data: string): void;
-        /** @internal : Unregister extension as root input directory for file type */
+        /**
+         * Unregister extension as root input directory for file type.
+         *
+         * @unofficial
+         */
         unregisterFileCreator(extension: string): void;
-        /** @internal */
+        /**
+         * Update all links.
+         *
+         * @unofficial
+         */
         updateAllLinks(links: LinkUpdate[]): Promise<void>;
-        /** @internal */
+        /**
+         * Update internal links.
+         *
+         * @unofficial
+         */
         updateInternalLinks(data: Map<string, LinkChangeUpdate>): Promise<void>;
     }
 }

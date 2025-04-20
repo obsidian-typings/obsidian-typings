@@ -4,6 +4,8 @@ declare module 'obsidian' {
     interface TAbstractFile {
         /**
          * Whether the file or folder is being deleted.
+         *
+         * @unofficial
          */
         deleted: boolean;
 
@@ -12,13 +14,17 @@ declare module 'obsidian' {
          *
          * @param newName The new name of the file or folder.
          * @returns The new path of the file or folder.
+         *
+         * @unofficial
          */
         getNewPathAfterRename(newName: string): string;
         /**
-         * @internal.
+         * @unofficial
          *
          * Sets the path of the file or folder.
          * @param path The new path of the file or folder.
+         *
+         * @unofficial
          */
         setPath(path: string): void;
     }

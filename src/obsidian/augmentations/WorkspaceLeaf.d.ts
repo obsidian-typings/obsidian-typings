@@ -2,19 +2,33 @@ export {};
 
 declare module 'obsidian' {
     interface WorkspaceLeaf extends WorkspaceItem {
+        /**
+         * @unofficial
+         */
         activeTime?: number;
+        /**
+         * @unofficial
+         */
         tabHeaderEl: HTMLElement;
+        /**
+         * @unofficial
+         */
         tabHeaderInnerIconEl: HTMLElement;
+        /**
+         * @unofficial
+         */
         tabHeaderInnerTitleEl: HTMLElement;
 
         /**
-         * Triggers when the leaf's history gets updated (e.g. when new file is opened, or moving through.
+         * Triggers when the leaf's history gets updated (e.g. when new file is opened, or moving through history).
          *
-         * history).
+         * @unofficial
          */
         on(name: 'history-change', callback: () => void, ctx?: unknown): EventRef;
         /**
          * Triggers when context menu action is executed on the leaf.
+         *
+         * @unofficial
          */
         on(name: 'leaf-menu', callback: (menu: Menu, leaf: WorkspaceLeaf) => void, ctx?: unknown): EventRef;
         /**
@@ -23,6 +37,8 @@ declare module 'obsidian' {
          * @param linktext - The link text to open.
          * @param sourcePath - The path of the source file.
          * @param openViewState - The view state to open the link in.
+         *
+         * @unofficial
          */
         openLinkText(linktext: string, sourcePath: string, openViewState?: OpenViewState): Promise<void>;
         /**
@@ -34,6 +50,8 @@ declare module 'obsidian' {
          * second 67%.).
          *
          * @param flexgrow - Sets the flex-grow of the leaf. (0-100).
+         *
+         * @unofficial
          */
         setDimension(flexgrow?: number | null): void;
     }
