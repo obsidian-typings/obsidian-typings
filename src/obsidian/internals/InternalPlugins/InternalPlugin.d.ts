@@ -13,7 +13,10 @@ import type { InternalPlugins } from './InternalPlugins.d.ts';
 import type { RibbonItem } from './RibbonItem.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface InternalPlugin<InternalPluginInstance> extends Component {
     addedButtonEls: HTMLDivElement[];
     app: App;

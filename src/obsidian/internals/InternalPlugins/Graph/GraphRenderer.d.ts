@@ -16,7 +16,10 @@ import type { KeyboardActions } from './KeyboardActions.d.ts';
 import type { PowerTag } from './PowerTag.d.ts';
 import type { WorkerResults } from './WorkerResults.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface GraphRenderer {
     /** @internal */
     colors: Record<GraphColor, GraphColorAttributes>;

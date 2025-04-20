@@ -2,7 +2,10 @@ import type { CanvasView } from '../../InternalPlugins/Canvas/CanvasView.d.ts';
 import type { TypedViewConstructor } from '../../Views/TypedViewConstructor.d.ts';
 import type { CanvasPluginInstance } from './CanvasPluginInstance.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CanvasViewConstructor
     extends TypedViewConstructor<CanvasView, [canvasPluginInstance: CanvasPluginInstance]>
 {}

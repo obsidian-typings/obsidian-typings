@@ -1,6 +1,9 @@
 import type { FSWatcher } from 'node:fs';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface DataAdapterWatchersRecordEntry {
     /**
      * Resolved full path to the folder.

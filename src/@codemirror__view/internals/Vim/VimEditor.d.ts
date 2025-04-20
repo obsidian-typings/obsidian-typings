@@ -1,7 +1,10 @@
 import type { VimState } from './VimState.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface VimEditor {
     state: VimState;
 }

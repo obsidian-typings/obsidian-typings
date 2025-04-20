@@ -22,7 +22,10 @@ import type { ReleaseNotesView } from './ReleaseNotesView.d.ts';
 import type { TagView } from './TagView.d.ts';
 import type { VideoView } from './VideoView.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export type ViewTypeViewMapping = {
     [ViewType.AllProperties]: AllPropertiesView;
     [ViewType.Audio]: AudioView;

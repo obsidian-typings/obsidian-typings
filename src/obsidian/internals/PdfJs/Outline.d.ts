@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export declare class Outline {
     static PRECISION: number;
 

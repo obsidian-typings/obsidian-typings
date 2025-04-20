@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface MarkdownViewEphemeralState extends Record<string, unknown> {
     scroll: number;
 }

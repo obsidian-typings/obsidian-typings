@@ -1,6 +1,9 @@
 import type { EditorSuggest } from 'obsidian';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface EditorSuggestEx {
     currentSuggest?: EditorSuggest<unknown>;
     suggests: EditorSuggest<unknown>[];

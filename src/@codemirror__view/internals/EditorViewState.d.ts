@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface EditorViewState {
     printing: boolean;
 }

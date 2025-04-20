@@ -7,7 +7,10 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { FileExplorerPlugin } from './FileExplorerPlugin.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface FileExplorerPluginInstance extends InternalPluginInstance<FileExplorerPlugin> {
     app: App;
     defaultOn: true;

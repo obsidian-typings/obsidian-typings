@@ -1,6 +1,9 @@
 import type { CanvasViewCanvasNode } from './CanvasViewCanvasNode.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CanvasViewCanvasEdgeLink {
     end: string;
     node: CanvasViewCanvasNode;

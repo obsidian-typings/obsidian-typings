@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export const FileExtension = {
     _3gp: '3gp',
     avif: 'avif',

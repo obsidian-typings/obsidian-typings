@@ -1,6 +1,9 @@
 import { InternalPluginName } from './InternalPluginName.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export const ViewType = {
     AllProperties: 'all-properties',
     Audio: 'audio',

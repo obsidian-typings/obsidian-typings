@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface FrameDom {
     eWin: Electron.BrowserWindow;
     isMac: boolean;

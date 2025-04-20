@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CanvasViewCanvasNodeUnknownData {
     file: string;
     id: string;

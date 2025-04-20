@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface EdgeIndexBaseBase {
     _adjustParentBBoxes(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
     _all(arg1: unknown, arg2: unknown): unknown;

@@ -1,4 +1,7 @@
 import type { GraphOptions } from './GraphOptions.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface GraphDisplayOptions extends GraphOptions {}

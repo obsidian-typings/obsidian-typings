@@ -5,7 +5,10 @@ import type {
 } from 'obsidian';
 import type { ImportedAttachments } from './ImportedAttachments.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface ClipboardManager {
     /**
      * Reference to the app.

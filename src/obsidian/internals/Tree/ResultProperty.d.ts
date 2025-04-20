@@ -1,6 +1,9 @@
 import type { ContentPosition } from './ContentPosition.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface ResultProperty {
     key: string;
     pos: ContentPosition;

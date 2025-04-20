@@ -4,7 +4,10 @@ import type {
 } from 'obsidian';
 import type { PositionedReference } from '../PositionedReference.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface LinkUpdate {
     /**
      * Reference to App.

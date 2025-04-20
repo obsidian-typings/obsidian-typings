@@ -1,7 +1,10 @@
 import type { SQLError } from './SQLError.d.ts';
 import type { SQLResultSet } from './SQLResultSet.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface SQLTransaction {
     executeSql(
         sqlStatement: string,

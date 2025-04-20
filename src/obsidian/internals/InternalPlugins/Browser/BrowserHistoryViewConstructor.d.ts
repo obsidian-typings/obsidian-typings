@@ -2,7 +2,10 @@ import type { BrowserHistoryView } from '../../InternalPlugins/Browser/BrowserHi
 import type { TypedViewConstructor } from '../../Views/TypedViewConstructor.d.ts';
 import type { BrowserPluginInstance } from './BrowserPluginInstance.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface BrowserHistoryViewConstructor
     extends TypedViewConstructor<BrowserHistoryView, [browserPluginInstance: BrowserPluginInstance]>
 {}

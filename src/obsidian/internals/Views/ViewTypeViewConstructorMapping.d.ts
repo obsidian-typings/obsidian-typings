@@ -22,7 +22,10 @@ import type { ReleaseNotesViewConstructor } from './ReleaseNotesViewConstructor.
 import type { TagViewConstructor } from './TagViewConstructor.d.ts';
 import type { VideoViewConstructor } from './VideoViewConstructor.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export type ViewTypeViewConstructorMapping = {
     [ViewType.AllProperties]: AllPropertiesViewConstructor;
     [ViewType.Audio]: AudioViewConstructor;

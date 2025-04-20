@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface DailyNotesOptions {
     /** Open the daily note automatically whenever the vault is opened. */
     autorun?: boolean;

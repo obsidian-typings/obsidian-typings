@@ -1,3 +1,6 @@
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface LoadProgress {}

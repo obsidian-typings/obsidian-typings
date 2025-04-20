@@ -1,6 +1,9 @@
 import type { CanvasViewCanvasNodeBaseBaseBase } from './CanvasViewCanvasNodeBaseBaseBase.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CanvasViewCanvasNodeBaseBase extends CanvasViewCanvasNodeBaseBaseBase {
     attach(): unknown;
     detach(): unknown;

@@ -3,7 +3,10 @@ import type {
     Debouncer
 } from 'obsidian';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface MobileTabSwitcher {
     app: App;
     cacheDir: string;

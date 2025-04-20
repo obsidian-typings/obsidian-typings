@@ -1,6 +1,9 @@
 import type { FileStats } from 'obsidian';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CapacitorFileEntry extends Partial<FileStats> {
     name: string;
     type: 'file' | 'directory';

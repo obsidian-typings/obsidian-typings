@@ -1,6 +1,9 @@
 import type { EditorRange } from 'obsidian';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface SearchCursor {
     /**
      * Current editor search position.

@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface SuggestModalChooser<T, TModal> {
     chooser: TModal;
     containerEl: HTMLDivElement;

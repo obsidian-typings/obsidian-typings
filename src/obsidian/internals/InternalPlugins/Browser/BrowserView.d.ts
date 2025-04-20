@@ -2,7 +2,10 @@ import type { ItemView } from 'obsidian';
 import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface BrowserView extends ItemView {
     /** @todo Documentation incomplete */
     closeSearch(): void;

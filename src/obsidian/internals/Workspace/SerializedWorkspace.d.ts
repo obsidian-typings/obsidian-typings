@@ -1,7 +1,10 @@
 import type { LeafEntry } from '../LeafEntry.d.ts';
 import type { SerializedWorkspaceLeftRibbon } from './SerializedWorkspaceLeftRibbon.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface SerializedWorkspace {
     /**
      * Last active leaf.

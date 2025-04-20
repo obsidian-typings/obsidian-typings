@@ -1,7 +1,10 @@
 import type { ObsidianTouchEventRegisterCallback } from './ObsidianTouchEventRegisterCallback.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface ObsidianTouchEvent {
     direction: 'x' | 'y';
     evt: TouchEvent;

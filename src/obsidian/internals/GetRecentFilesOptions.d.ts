@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface GetRecentFilesOptions {
     maxCount: number;
     showCanvas: boolean;

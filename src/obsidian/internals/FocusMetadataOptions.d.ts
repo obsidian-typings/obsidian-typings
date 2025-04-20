@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface FocusMetadataOptions {
     focusHeading: boolean;
     propertyIdx?: number;

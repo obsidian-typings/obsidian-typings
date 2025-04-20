@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CanvasRectEx {
     cx: number;
     cy: number;

@@ -9,7 +9,10 @@ import type { EditorPosition } from 'obsidian';
  * @todo Potential risk of confusion when `Editor` is constructed from the Obsidian module, as it only has the.
  *       methods from `BaseEditor`, *not* `Editor`.
  */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface BaseEditor {
     /**
      * CodeMirror editor instance.
@@ -26,8 +29,6 @@ export interface BaseEditor {
     afterIndent(): void;
     /**
      * Expand text.
-     *
-     * @internal.
      */
     expandText(): void;
     /**

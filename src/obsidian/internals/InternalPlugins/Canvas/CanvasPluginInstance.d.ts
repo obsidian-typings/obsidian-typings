@@ -9,7 +9,10 @@ import type { CanvasIndex } from './CanvasIndex.d.ts';
 import type { CanvasPlugin } from './CanvasPlugin.d.ts';
 import type { CanvasPluginInstanceOptions } from './CanvasPluginInstanceOptions.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CanvasPluginInstance extends InternalPluginInstance<CanvasPlugin> {
     app: App;
     defaultOn: true;

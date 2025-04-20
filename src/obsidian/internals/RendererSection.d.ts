@@ -1,5 +1,8 @@
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface RendererSection {
     el: HTMLElement;
     html: string;

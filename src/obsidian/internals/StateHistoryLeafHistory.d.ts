@@ -1,6 +1,9 @@
 import type { StateHistory } from './StateHistory.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface StateHistoryLeafHistory {
     backHistory: StateHistory[];
     forwardHistory: StateHistory[];

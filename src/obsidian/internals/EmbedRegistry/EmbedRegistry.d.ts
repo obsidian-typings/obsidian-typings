@@ -5,7 +5,10 @@ import type {
 import type { EmbeddableConstructor } from '../EmbeddableConstructor.d.ts';
 import type { EmbedRegistryEmbedByExtensionRecord } from './EmbedRegistryEmbedByExtensionRecord.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface EmbedRegistry extends Events {
     /**
      * Mapping of file extensions to constructors for embeddable widgets.

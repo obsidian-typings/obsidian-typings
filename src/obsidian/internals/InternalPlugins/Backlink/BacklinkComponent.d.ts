@@ -8,7 +8,10 @@ import type { ItemQueue } from '../../Collections/ItemQueue.d.ts';
 import type { TreeDom } from '../../Tree/TreeDom.d.ts';
 import type { HeaderDom } from './HeaderDom.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface BacklinkComponent extends Component {
     app: App;
     backlinkCollapsed: boolean;

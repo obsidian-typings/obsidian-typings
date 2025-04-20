@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface ExtendedMetrics {
     containerWidth: number;
     em: number;

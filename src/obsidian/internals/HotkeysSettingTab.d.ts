@@ -3,7 +3,10 @@ import type {
     SettingTab
 } from 'obsidian';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface HotkeysSettingTab extends SettingTab {
     searchComponent: SearchComponent;
 

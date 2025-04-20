@@ -1,7 +1,10 @@
 import type { TAbstractFile } from 'obsidian';
 
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface FileTreeItem {
     file: TAbstractFile;
 }

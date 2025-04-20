@@ -1,6 +1,9 @@
 import type { FileStats } from 'obsidian';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface FileEntry extends Partial<FileStats> {
     /**
      * Name of file or folder.

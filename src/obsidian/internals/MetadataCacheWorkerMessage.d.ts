@@ -1,6 +1,9 @@
 import type { CachedMetadata } from 'obsidian';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface MetadataCacheWorkerMessage {
     data: CachedMetadata;
 }

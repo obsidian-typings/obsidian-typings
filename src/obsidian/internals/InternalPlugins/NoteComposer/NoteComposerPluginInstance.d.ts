@@ -11,7 +11,10 @@ import type { HeadingInfo } from './HeadingInfo.d.ts';
 import type { NoteComposerPlugin } from './NoteComposerPlugin.d.ts';
 import type { NoteComposerPluginOptions } from './NoteComposerPluginOptions.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteComposerPlugin> {
     app: App;
     defaultOn: true;

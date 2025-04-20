@@ -1,4 +1,7 @@
 import type { PluginManifest } from 'obsidian';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface PluginsManifestsRecord extends Record<string, PluginManifest> {}

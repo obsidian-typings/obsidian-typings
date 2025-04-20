@@ -1,6 +1,9 @@
 import type { HighlightOutline } from './HighlightOutline.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export declare class HighlightOutliner {
     /**
      * Construct an outliner.

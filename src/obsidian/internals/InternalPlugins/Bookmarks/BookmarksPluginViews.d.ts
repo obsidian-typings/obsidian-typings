@@ -4,7 +4,10 @@ import type {
 } from 'obsidian';
 import type { BookmarksView } from './BookmarksView.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface BookmarksPluginViews extends Record<string, ViewCreator> {
     bookmarks(left: WorkspaceLeaf): BookmarksView;
 }

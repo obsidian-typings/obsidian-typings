@@ -5,7 +5,10 @@ import type { TreeDom } from './TreeDom.d.ts';
 import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface ResultDom {
     app: App;
     childrenEl: HTMLDivElement;

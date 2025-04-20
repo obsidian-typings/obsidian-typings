@@ -1,7 +1,10 @@
 import type { TableCellEditor } from './TableCellEditor.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface TableCell {
     col: number;
     contentEl: HTMLElement;

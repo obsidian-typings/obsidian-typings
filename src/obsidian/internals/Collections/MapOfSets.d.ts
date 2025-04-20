@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface MapOfSets<Key, Value> {
     data: Map<Key, Set<Value>>;
 

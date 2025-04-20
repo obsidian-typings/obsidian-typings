@@ -6,7 +6,10 @@ import type {
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface GraphNode {
     /** @internal */
     circle: Graphics | null;
@@ -41,7 +44,6 @@ export interface GraphNode {
 
     /**
      * Destroy the graphics and its children, and remove them from the scene.
-     * @internal.
      */
     clearGraphics(): void;
     /**
@@ -72,7 +74,6 @@ export interface GraphNode {
     getTextStyle(): TextStyle;
     /**
      * Initialize the node, text, listeners, and add them to the scene.
-     * @internal.
      */
     initGraphics(): void;
     /**

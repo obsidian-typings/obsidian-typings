@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface HardWrapOptions {
     allowMerge?: boolean;
     column?: number;

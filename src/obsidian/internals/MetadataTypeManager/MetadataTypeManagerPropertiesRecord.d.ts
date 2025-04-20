@@ -1,4 +1,7 @@
 import type { PropertyInfo } from '../PropertyInfo.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface MetadataTypeManagerPropertiesRecord extends Record<string, PropertyInfo> {}

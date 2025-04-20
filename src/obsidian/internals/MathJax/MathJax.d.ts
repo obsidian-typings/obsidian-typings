@@ -1,6 +1,9 @@
 import type { ExtendedMetrics } from './ExtendedMetrics.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface MathJax {
     config: unknown;
     loader: unknown;

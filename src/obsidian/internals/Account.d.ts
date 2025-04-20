@@ -1,5 +1,8 @@
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface Account {
     /**
      * The company associated with the activated commercial license.

@@ -13,7 +13,10 @@ import type {
 import type { MetadataTypeManagerTypesRecord } from './MetadataTypeManagerTypesRecord.d.ts';
 import type { TypeInfo } from './TypeInfo.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface MetadataTypeManager extends Events {
     /**
      * Reference to App.

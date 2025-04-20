@@ -1,4 +1,7 @@
 import type { CachedMetadata } from 'obsidian';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface MetadataCacheMetadataCacheRecord extends Record<string, CachedMetadata> {}

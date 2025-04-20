@@ -1,6 +1,9 @@
 import type { CapacitorFileEntry } from './CapacitorFileEntry.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CapacitorAdapterFs {
     dir: string | null;
     uri: string;

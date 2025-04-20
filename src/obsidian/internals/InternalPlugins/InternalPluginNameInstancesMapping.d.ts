@@ -29,7 +29,10 @@ import type { WordCountPluginInstance } from './WordCount/WordCountPluginInstanc
 import type { WorkspacesPluginInstance } from './Workspaces/WorkspacesPluginInstance.d.ts';
 import type { ZkPrefixerPluginInstance } from './ZkPrefixer/ZkPrefixerPluginInstance.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export type InternalPluginNameInstancesMapping = {
     [InternalPluginName.AudioRecorder]: AudioRecorderPluginInstance;
     [InternalPluginName.Backlink]: BacklinkPluginInstance;

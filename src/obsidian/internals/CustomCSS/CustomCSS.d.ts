@@ -11,7 +11,10 @@ import type { DownloadLegacyThemeOptions } from './DownloadLegacyThemeOptions.d.
 import type { InstallThemeOptions } from './InstallThemeOptions.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CustomCSS extends Component {
     /**
      * Reference to App.
@@ -24,7 +27,6 @@ export interface CustomCSS extends Component {
      */
     enabledSnippets: Set<string>;
     /**
-     * @internal.
      * Contains references to Style elements containing custom CSS snippets.
      */
     extraStyleEls: HTMLStyleElement[];

@@ -9,7 +9,10 @@ import type { EmbedMarkdownComponent } from './EmbedMarkdownComponent.d.ts';
 import type { EmbedPdfComponent } from './EmbedPdfComponent.d.ts';
 import type { EmbedVideoComponent } from './EmbedVideoComponent.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface EmbedRegistryEmbedByExtensionRecord extends Record<string, EmbeddableConstructor> {
     [FileExtension._3gp]: (context: EmbedContext, file: TFile) => EmbedAudioComponent;
     [FileExtension.avif]: (context: EmbedContext, file: TFile) => EmbedImageComponent;

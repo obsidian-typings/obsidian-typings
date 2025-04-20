@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface TreeNodeVChildren<Item, Owner> {
     _children: Item[];
     children?: Item[];

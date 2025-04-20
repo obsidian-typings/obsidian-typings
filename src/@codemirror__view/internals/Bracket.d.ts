@@ -1,6 +1,9 @@
 import type { EditorPosition } from 'obsidian';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface Bracket {
     ch: string;
     pos: EditorPosition;

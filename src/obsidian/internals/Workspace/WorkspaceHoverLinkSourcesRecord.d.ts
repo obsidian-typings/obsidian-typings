@@ -1,4 +1,7 @@
 import type { HoverLinkSource } from 'obsidian';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface WorkspaceHoverLinkSourcesRecord extends Record<string, HoverLinkSource> {}

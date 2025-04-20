@@ -1,6 +1,9 @@
 import type { BookmarkItem } from './BookmarkItem.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface UrlBookmarkItem extends BookmarkItem {
     title: string;
     type: 'url';

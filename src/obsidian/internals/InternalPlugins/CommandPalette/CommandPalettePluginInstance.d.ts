@@ -7,7 +7,10 @@ import type { CommandPaletteModal } from './CommandPaletteModal.d.ts';
 import type { CommandPaletteOptions } from './CommandPaletteOptions.d.ts';
 import type { CommandPalettePlugin } from './CommandPalettePlugin.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CommandPalettePluginInstance extends InternalPluginInstance<CommandPalettePlugin> {
     app: App;
     defaultOn: true;

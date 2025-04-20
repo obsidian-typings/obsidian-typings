@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface FileCacheEntry {
     /**
      * Hash of file contents.

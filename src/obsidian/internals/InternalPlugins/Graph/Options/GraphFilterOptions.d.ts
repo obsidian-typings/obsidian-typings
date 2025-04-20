@@ -4,7 +4,10 @@ import type {
 } from 'obsidian';
 import type { GraphOptions } from './GraphOptions.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface GraphFilterOptions extends GraphOptions {
     search: SearchComponent;
     searchSetting: Setting;

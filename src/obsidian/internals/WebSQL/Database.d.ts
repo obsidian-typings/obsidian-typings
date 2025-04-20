@@ -1,7 +1,10 @@
 import type { SQLError } from './SQLError.d.ts';
 import type { SQLTransaction } from './SQLTransaction.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface Database {
     version: string;
 

@@ -8,7 +8,10 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { GraphPlugin } from './GraphPlugin.d.ts';
 import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin> {
     app: App;
     defaultOn: true;
@@ -22,7 +25,6 @@ export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin>
     openLocalGraph(checking: boolean): true | undefined;
     /**
      * Saves the options in graph.json.
-     * @internal.
      */
     saveOptions(): void;
 }

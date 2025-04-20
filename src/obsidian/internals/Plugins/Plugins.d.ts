@@ -8,7 +8,10 @@ import type { PluginUpdateManifest } from '../PluginUpdateManifest.d.ts';
 import type { PluginsManifestsRecord } from './PluginsManifestsRecord.d.ts';
 import type { PluginsPluginsRecord } from './PluginsPluginsRecord.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface Plugins {
     /**
      * Reference to App.

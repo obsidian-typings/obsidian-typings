@@ -1,7 +1,10 @@
 import type { VimStateVimInputState } from './VimStateVimInputState.d.ts';
 import type { VimStateVimLastMotion } from './VimStateVimLastMotion.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface VimStateVim {
     inputState: VimStateVimInputState;
     insertMode: false;

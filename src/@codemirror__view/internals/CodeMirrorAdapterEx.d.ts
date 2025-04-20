@@ -8,7 +8,10 @@ import type { EnclosingTag } from './EnclosingTag.d.ts';
 import type { VimApi } from './Vim/VimApi.d.ts';
 import type { VimEditor } from './Vim/VimEditor.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CodeMirrorAdapterEx {
     new(cm6: VimEditor): CodeMirrorEditor;
     commands: CodeMirrorAdapterExCommands;

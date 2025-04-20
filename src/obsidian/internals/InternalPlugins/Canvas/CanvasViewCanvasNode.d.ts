@@ -8,7 +8,10 @@ import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 import type { CanvasViewCanvasNodeBase } from './CanvasViewCanvasNodeBase.d.ts';
 import type { CanvasViewCanvasNodeUnknownData } from './CanvasViewCanvasNodeUnknownData.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CanvasViewCanvasNode extends CanvasViewCanvasNodeBase {
     alwaysKeepLoaded: boolean;
     app: App;

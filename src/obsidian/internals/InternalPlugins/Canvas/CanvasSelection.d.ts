@@ -1,7 +1,10 @@
 import type { BBox } from './BBox.d.ts';
 import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CanvasSelection {
     bbox: BBox;
     canvas: CanvasViewCanvas;

@@ -1,7 +1,10 @@
 import type { VimEditor } from './VimEditor.d.ts';
 import type { VimState } from './VimState.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface VimApi {
     suppressErrorLogging: boolean;
 

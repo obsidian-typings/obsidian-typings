@@ -9,7 +9,10 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { BacklinkPlugin } from './BacklinkPlugin.d.ts';
 import type { BacklinkPluginInstanceOptions } from './BacklinkPluginInstanceOptions.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkPlugin> {
     app: App;
     defaultOn: true;

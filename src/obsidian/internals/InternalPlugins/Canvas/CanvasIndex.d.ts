@@ -4,7 +4,10 @@ import type {
 } from 'obsidian';
 import type { CanvasIndexEntry } from './CanvasIndexEntry.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CanvasIndex extends Component {
     app: App;
     fileQueue: unknown[];

@@ -10,7 +10,10 @@ import type { GraphDisplayOptions } from './Options/GraphDisplayOptions.d.ts';
 import type { GraphFilterOptions } from './Options/GraphFilterOptions.d.ts';
 import type { GraphForceOptions } from './Options/GraphForceOptions.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface GraphEngine {
     /** @internal */
     app: App;
@@ -49,23 +52,19 @@ export interface GraphEngine {
 
     /**
      * Gets the engine options.
-     * @internal.
      */
     getOptions(): GraphPluginInstanceOptions;
     /**
      * Rerenders the graph.
-     * @internal.
      */
     render(): void;
     /**
      * Sets the engine options.
      * @param options - New options. Undefined elements will not be considered.
-     * @internal.
      */
     setOptions(options: GraphPluginInstanceOptions | undefined): void;
     /**
      * Updates the engine after the search filter has changed.
-     * @internal.
      */
     updateSearch(): void;
 }

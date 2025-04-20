@@ -6,7 +6,10 @@ import type {
 } from 'obsidian';
 import type { AppMenuBarManagerConstructor } from './AppMenuBarManagerConstructor.d.ts';
 
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface AppMenuBarManager {
     app: App;
     constructor: AppMenuBarManagerConstructor;

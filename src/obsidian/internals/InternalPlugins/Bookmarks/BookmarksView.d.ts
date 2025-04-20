@@ -5,7 +5,10 @@ import type {
 import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface BookmarksView extends ItemView {
     /** @todo Documentation incomplete */
     _copyToClipboard(e: unknown, t: unknown): void;

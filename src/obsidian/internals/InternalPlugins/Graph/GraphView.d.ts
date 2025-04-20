@@ -4,7 +4,10 @@ import type { GraphEngine } from './GraphEngine.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /** @todo Documentation incomplete */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface GraphView extends ItemView {
     dataEngine: GraphEngine;
     renderer: GraphRenderer;

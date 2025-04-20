@@ -1,4 +1,7 @@
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface CanvasPluginInstanceOptions {
     cardLabelVisibility?: 'always' | 'hover' | 'never';
     defaultModDragBehavior?: 'card' | 'group' | 'media' | 'menu' | 'note' | 'webpage';

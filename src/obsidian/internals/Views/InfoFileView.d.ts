@@ -4,7 +4,10 @@ import type {
 } from 'obsidian';
 
 /** @todo This is probably not the right term */
-/** @public @unofficial */
+/**
+ * @public
+ * @unofficial
+ */
 export interface InfoFileView extends FileView {
     /**
      * Called when a file is opened. Loads the file and requests a content update.
