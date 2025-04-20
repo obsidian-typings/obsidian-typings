@@ -148,15 +148,13 @@ function sortClassDeclaration(declaration: ClassDeclaration): void {
 }
 
 function processClassInterfaceDeclaration(declaration: ClassDeclaration | InterfaceDeclaration): void {
-    const nodes = [...declaration.getProperties(), ...declaration.getMethods()];
-
     const filePath = declaration.getSourceFile().getFilePath();
     const isAugmentation = filePath.includes('augmentations');
 
-    for (const node of nodes) {
-        let jsDoc = node.getJsDocs()[0];
+    for (const member of declaration.getMembers()) {
+        let jsDoc = member.getJsDocs()[0];
         if (!jsDoc) {
-            jsDoc = node.addJsDoc({
+            jsDoc = member.addJsDoc({
                 tags: [
                     {
                         tagName: 'todo',
@@ -179,7 +177,7 @@ function processClassInterfaceDeclaration(declaration: ClassDeclaration | Interf
         }
     }
 
-    const starts = nodes.map(node => node.getStartLinePos(true));
+    const starts = declaration.getMembers().map(node => node.getStartLinePos(true));
 
     for (let i = starts.length - 1; i >= 1; i--) {
         declaration.insertText(starts[i] ?? 0, '\n');
