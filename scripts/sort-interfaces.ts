@@ -167,9 +167,13 @@ function processClassInterfaceDeclaration(declaration: ClassDeclaration | Interf
             });
         }
 
-        if (isAugmentation && !jsDoc.getTags().some(tag => tag.getTagName() === 'unofficial')) {
+        if (
+            isAugmentation
+            && !jsDoc.getTags().some(tag => tag.getTagName() === 'unofficial' || tag.getTagName() === 'official')
+        ) {
             jsDoc.addTag({
                 tagName: 'unofficial',
+                text: 'ERROR: Missing `@unofficial` or `@official` tag',
                 leadingTrivia: '\n'
             });
         }
