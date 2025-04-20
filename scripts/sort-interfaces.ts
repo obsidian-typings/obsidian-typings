@@ -144,8 +144,15 @@ function sortClassDeclaration(declaration: ClassDeclaration): void {
     structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
     declaration.set(structure);
 
-    if (structure.methods!.length && structure.properties!.length) {
-        declaration.insertText(declaration.getMethods()[0]?.getStart(true) ?? 0, ' \n');
+    insertNewLines(declaration);
+}
+
+function insertNewLines(declaration: ClassDeclaration | InterfaceDeclaration): void {
+    const nodes = [...declaration.getProperties(), ...declaration.getMethods()];
+    const starts = nodes.map(node => node.getStartLinePos(true));
+
+    for (let i = starts.length - 1; i >= 1; i--) {
+        declaration.insertText(starts[i] ?? 0, '\n');
     }
 }
 
@@ -155,9 +162,7 @@ function sortInterfaceDeclaration(declaration: InterfaceDeclaration): void {
     structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
     declaration.set(structure);
 
-    if (structure.methods!.length && structure.properties!.length) {
-        declaration.insertText(declaration.getMethods()[0]?.getStart(true) ?? 0, ' \n');
-    }
+    insertNewLines(declaration);
 }
 
 async function parseFile(file: string, output_file: string = file): Promise<void> {
