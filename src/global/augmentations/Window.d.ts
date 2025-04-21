@@ -1,6 +1,6 @@
 import type {
-    Capacitor as _Capacitor,
-    CapacitorPlatforms as _CapacitorPlatforms
+    Capacitor,
+    CapacitorPlatforms
 } from '@capacitor/core';
 import type { default as CodeMirror } from 'codemirror';
 import type { default as DOMPurify } from 'dompurify';
@@ -10,10 +10,10 @@ import type { Mermaid } from 'mermaid';
 import type { default as moment } from 'moment';
 import type {
     App,
-    Notice as _Notice,
+    Notice,
     ObsidianProtocolHandler,
-    request as _request,
-    requestUrl as _requestUrl
+    request,
+    requestUrl
 } from 'obsidian';
 import type { default as pdfjsLib } from 'pdfjs-dist';
 import type { default as PIXI } from 'pixi.js';
@@ -110,13 +110,13 @@ declare global {
          * @todo Documentation incomplete.
          * @unofficial
          */
-        Capacitor: typeof _Capacitor;
+        Capacitor: typeof Capacitor;
 
         /**
          * @todo Documentation incomplete.
          * @unofficial
          */
-        CapacitorPlatforms: typeof _CapacitorPlatforms;
+        CapacitorPlatforms: typeof CapacitorPlatforms;
 
         /**
          * @todo Documentation incomplete.
@@ -212,7 +212,7 @@ declare global {
          *
          * @unofficial
          */
-        Notice: typeof _Notice;
+        Notice: typeof Notice;
 
         /**
          * Invoke obsidian protocol action.
@@ -257,14 +257,14 @@ declare global {
          * Returns the text value of the response.
          * @unofficial
          */
-        request: typeof _request;
+        request: typeof request;
 
         /**
          * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
          *
          * @unofficial
          */
-        requestUrl: typeof _requestUrl;
+        requestUrl: typeof requestUrl;
 
         /**
          * @todo Documentation incomplete.
