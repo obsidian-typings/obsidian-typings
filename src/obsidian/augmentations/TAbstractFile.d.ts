@@ -1,6 +1,9 @@
 export {};
 
 declare module 'obsidian' {
+    /**
+     * This can be either a {@link TFile} or a {@link TFolder}.
+     */
     interface TAbstractFile {
         /**
          * Whether the file or folder is being deleted.
@@ -8,6 +11,34 @@ declare module 'obsidian' {
          * @unofficial
          */
         deleted: boolean;
+
+        /**
+         * The name of the file.
+         *
+         * @official
+         */
+        name: string;
+
+        /**
+         * The parent folder of the file.
+         *
+         * @official
+         */
+        parent: TFolder | null;
+
+        /**
+         * The path of the file.
+         *
+         * @official
+         */
+        path: string;
+
+        /**
+         * The vault.
+         *
+         * @official
+         */
+        vault: Vault;
 
         /**
          * Gets the path after renaming the file or folder.

@@ -1,5 +1,9 @@
 export {};
 
 declare module 'obsidian' {
-    interface WorkspaceRibbon {}
+    /**
+     * Workspace ribbon.
+     */
+    interface WorkspaceRibbon {
+    }
 }

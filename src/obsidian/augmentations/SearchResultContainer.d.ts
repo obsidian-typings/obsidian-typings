@@ -1,5 +1,15 @@
 export {};
 
 declare module 'obsidian' {
-    interface SearchResultContainer {}
+    /**
+     * A search result container.
+     */
+    interface SearchResultContainer {
+        /**
+         * The search result.
+         *
+         * @official
+         */
+        match: SearchResult;
+    }
 }

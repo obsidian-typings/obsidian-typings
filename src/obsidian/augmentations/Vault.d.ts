@@ -6,12 +6,15 @@ import type { VaultFileMapRecord } from '../internals/VaultFileMapRecord.d.ts';
 export {};
 
 declare module 'obsidian' {
+    /**
+     * Work with files and folders stored inside a vault.
+     * @see {@link https://docs.obsidian.md/Plugins/Vault}.
+     */
     interface Vault extends Events {
         /**
-         * Low-level file system adapter for read and write operations.
+         * The low-level adapter of the vault.
          *
-         * @tutorial Can be used to read binaries, or files not located directly within the vault.
-         * @unofficial
+         * @official
          */
         adapter: DataAdapter;
 
@@ -29,6 +32,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         config: AppVaultConfig;
+
+        /**
+         * Gets the path to the config folder.
+         * This value is typically `.obsidian` but it could be different.
+         *
+         * @official
+         */
+        configDir: string;
 
         /**
          * Timestamp of the last config change
@@ -73,6 +84,28 @@ declare module 'obsidian' {
         addChild(file: TAbstractFile): void;
 
         /**
+         * Add text to the end of a plaintext file inside the vault.
+         *
+         * @param file - The file.
+         * @param data - The text to append.
+         * @param options - Write options.
+         * @returns The promise that resolves when the text is appended.
+         * @official
+         */
+        append(file: TFile, data: string, options?: DataWriteOptions): Promise<void>;
+
+        /**
+         * Read the content of a plaintext file stored inside the vault.
+         * Use this if you only want to display the content to the user.
+         * If you want to modify the file content afterward use {@link Vault.read}
+         *
+         * @param file - The file to read.
+         * @returns The promise that resolves to the cached file content.
+         * @official
+         */
+        cachedRead(file: TFile): Promise<string>;
+
+        /**
          * Check whether new file path is available
          *
          * @unofficial
@@ -87,6 +120,71 @@ declare module 'obsidian' {
         checkPath(path: string): boolean;
 
         /**
+         * Create a copy of a file or folder.
+         *
+         * @param file - The file or folder.
+         * @param newPath - Vault absolute path for the new copy.
+         * @returns The promise that resolves to the new copy.
+         * @official
+         */
+        copy<T extends TAbstractFile>(file: T, newPath: string): Promise<T>;
+
+        /**
+         * Create a new plaintext file inside the vault.
+         *
+         * @param path - Vault absolute path for the new file, with extension.
+         * @param data - Text content for the new file.
+         * @param options - Write options.
+         * @returns The promise that resolves to the new file.
+         * @example
+         * ```ts
+         * await vault.create('foo.md', 'bar');
+         * ```
+         * @official
+         */
+        create(path: string, data: string, options?: DataWriteOptions): Promise<TFile>;
+
+        /**
+         * Create a new binary file inside the vault.
+         *
+         * @param path - Vault absolute path for the new file, with extension.
+         * @param data - Content for the new file.
+         * @param options - Write options.
+         * @returns The promise that resolves to the new file.
+         * @throws Error if file already exists.
+         * @example
+         * ```ts
+         * await vault.createBinary('foo.png', new Uint8Array([1, 2, 3]).buffer);
+         * ```
+         * @official
+         */
+        createBinary(path: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<TFile>;
+
+        /**
+         * Create a new folder inside the vault.
+         *
+         * @param path - Vault absolute path for the new folder.
+         * @throws Error if folder already exists.
+         * @returns The promise that resolves to the new folder.
+         * @example
+         * ```ts
+         * await vault.createFolder('foo');
+         * ```
+         * @official
+         */
+        createFolder(path: string): Promise<TFolder>;
+
+        /**
+         * Deletes the file completely.
+         *
+         * @param file - The file or folder to be deleted.
+         * @param force - Should attempt to delete folder even if it has hidden children.
+         * @returns The promise that resolves when the file is deleted.
+         * @official
+         */
+        delete(file: TAbstractFile, force?: boolean): Promise<void>;
+
+        /**
          * Remove a vault config file
          *
          * @unofficial
@@ -94,10 +192,10 @@ declare module 'obsidian' {
         deleteConfigJson(configFile: string): Promise<void>;
 
         /**
-             * Check whether a path exists in the vault.
-             *
-            @unofficial
-             */
+         * Check whether a path exists in the vault.
+         *
+         * @unofficial
+         */
         exists(path: string, isCaseSensitive?: boolean): Promise<boolean>;
 
         /**
@@ -107,11 +205,45 @@ declare module 'obsidian' {
         generateFiles(e: AsyncGenerator<TFile>, t: boolean): Promise<void>;
 
         /**
+         * Get a file or folder inside the vault at the given path. To check if the return type is.
+         * a file, use `instanceof TFile`. To check if it is a folder, use `instanceof TFolder`.
+         *
+         * @param path - vault absolute path to the folder or file, with extension, case sensitive.
+         * @returns the abstract file, if it's found.
+         * @example
+         * ```ts
+         * console.log(vault.getAbstractFileByPath('existent-file.md')); // TFile
+         * console.log(vault.getAbstractFileByPath('existent-folder')); // TFolder
+         * console.log(vault.getAbstractFileByPath('non-existent-file.md')); // null
+         * console.log(vault.getAbstractFileByPath('non-existent-folder')); // null
+         * ```
+         * @official
+         */
+        getAbstractFileByPath(path: string): TAbstractFile | null;
+
+        /**
          * Get an abstract file by path, insensitive to case.
          *
          * @unofficial
          */
         getAbstractFileByPathInsensitive(path: string): TAbstractFile | null;
+
+        /**
+         * Get all folders in the vault.
+         *
+         * @param includeRoot - Should the root folder (`/`) be returned.
+         * @returns All folders in the vault.
+         * @official
+         */
+        getAllFolders(includeRoot?: boolean): TFolder[];
+
+        /**
+         * Get all files and folders in the vault.
+         *
+         * @returns All files and folders in the vault.
+         * @official
+         */
+        getAllLoadedFiles(): TAbstractFile[];
 
         /**
          * Get path for file that does not conflict with other existing files
@@ -152,6 +284,74 @@ declare module 'obsidian' {
         getDirectParent(file: TAbstractFile): TFolder | null;
 
         /**
+         * Get a file inside the vault at the given path.
+         *
+         * @param path - The path to the file.
+         * @returns The file or `null` if it does not exist.
+         * @example
+         * ```ts
+         * console.log(vault.getFileByPath('existent-file.md')); // TFile
+         * console.log(vault.getFileByPath('non-existent-file.md')); // null
+         * ```
+         * @official
+         */
+        getFileByPath(path: string): TFile | null;
+
+        /**
+         * Get all files in the vault.
+         *
+         * @returns All files in the vault.
+         * @official
+         */
+        getFiles(): TFile[];
+
+        /**
+         * Get a folder inside the vault at the given path.
+         *
+         * @param path - The path to the folder.
+         * @returns The folder or `null` if it does not exist.
+         * @example
+         * ```ts
+         * console.log(vault.getFolderByPath('existent-folder')); // TFolder
+         * console.log(vault.getFolderByPath('non-existent-folder')); // null
+         * ```
+         * @official
+         */
+        getFolderByPath(path: string): TFolder | null;
+
+        /**
+         * Get all Markdown files in the vault.
+         *
+         * @returns All Markdown files in the vault.
+         * @official
+         */
+        getMarkdownFiles(): TFile[];
+
+        /**
+         * Gets the name of the vault.
+         *
+         * @official
+         */
+        getName(): string;
+
+        /**
+         * Returns an URI for the browser engine to use, for example to embed an image.
+         *
+         * @param file - The file to get the resource path for.
+         * @returns The resource path for the file.
+         * @official
+         */
+        getResourcePath(file: TFile): string;
+
+        /**
+         * Get the root folder of the current vault.
+         *
+         * @returns The root folder of the current vault.
+         * @official
+         */
+        getRoot(): TFolder;
+
+        /**
          * Check whether files map cache is empty
          *
          * @unofficial
@@ -173,6 +373,28 @@ declare module 'obsidian' {
         load(): Promise<void>;
 
         /**
+         * Modify the contents of a plaintext file.
+         *
+         * @param file - The file.
+         * @param data - The new file content.
+         * @param options - Write options.
+         * @returns The promise that resolves when the file is modified.
+         * @official
+         */
+        modify(file: TFile, data: string, options?: DataWriteOptions): Promise<void>;
+
+        /**
+         * Modify the contents of a binary file.
+         *
+         * @param file - The file.
+         * @param data - The new file content.
+         * @param options - Write options.
+         * @returns The promise that resolves when the file is modified.
+         * @official
+         */
+        modifyBinary(file: TFile, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
+
+        /**
          * Called whenever any of Obsidian's settings are changed.
          *
          * @remark Does *not* trigger when a particular plugin's settings are changed, for that, you could monkey-patch the `saveSettings` method of a plugin instance.
@@ -181,11 +403,118 @@ declare module 'obsidian' {
         on(name: 'config-changed', callback: (configKey: string) => void, ctx?: unknown): EventRef;
 
         /**
+         * Called when a file is created.
+         * This is also called when the vault is first loaded for each existing file
+         * If you do not wish to receive create events on vault load, register your event handler inside {@link Workspace.onLayoutReady}.
+         *
+         * @param name - Should be `'create'`.
+         * @param callback - The callback function.
+         * @param ctx - The context passed as `this` to the `callback` function.
+         * @returns The event reference.
+         * @example
+         * ```ts
+         * app.vault.on('create', (file) => {
+         *     console.log(file);
+         * });
+         * ```
+         * @official
+         */
+        on(name: 'create', callback: (file: TAbstractFile) => any, ctx?: any): EventRef;
+
+        /**
+         * Called when a file is deleted.
+         *
+         * @param name - Should be `'delete'`.
+         * @param callback - The callback function.
+         * @param ctx - The context passed as `this` to the `callback` function.
+         * @returns The event reference.
+         * @example
+         * ```ts
+         * app.vault.on('delete', (file) => {
+         *     console.log(file);
+         * });
+         * ```
+         * @official
+         */
+        on(name: 'delete', callback: (file: TAbstractFile) => any, ctx?: any): EventRef;
+
+        /**
+         * Called when a file is modified.
+         *
+         * @param name - Should be `'modify'`.
+         * @param callback - The callback function.
+         * @param ctx - The context passed as `this` to the `callback` function.
+         * @returns The event reference.
+         * @example
+         * ```ts
+         * app.vault.on('modify', (file) => {
+         *     console.log(file);
+         * });
+         * ```
+         * @official
+         */
+        on(name: 'modify', callback: (file: TAbstractFile) => any, ctx?: any): EventRef;
+
+        /**
          * Triggered whenever a file gets loaded internally
          *
          * @unofficial
          */
         on(name: 'raw', callback: (path: string) => void, ctx?: unknown): EventRef;
+
+        /**
+         * Called when a file is renamed.
+         *
+         * @param name - Should be `'rename'`.
+         * @param callback - The callback function.
+         * @param ctx - The context passed as `this` to the `callback` function.
+         * @returns The event reference.
+         * @example
+         * ```ts
+         * app.vault.on('rename', (file, oldPath) => {
+         *     console.log(file, oldPath);
+         * });
+         * ```
+         * @official
+         */
+        on(name: 'rename', callback: (file: TAbstractFile, oldPath: string) => any, ctx?: any): EventRef;
+
+        /**
+         * Atomically read, modify, and save the contents of a note.
+         *
+         * @param file - The file to be read and modified.
+         * @param fn - A callback function which returns the new content of the note synchronously.
+         * @param options - Write options.
+         * @returns The promise that resolves to the text value of the note that was written.
+         * @example
+         * ```ts
+         * await app.vault.process(file, (data) => {
+         *     return data.replace('foo', 'bar');
+         * });
+         * ```
+         * @official
+         */
+        process(file: TFile, fn: (data: string) => string, options?: DataWriteOptions): Promise<string>;
+
+        /**
+         * Read a plaintext file that is stored inside the vault, directly from disk.
+         * Use this if you intend to modify the file content afterwards.
+         * Use {@link Vault.cachedRead} otherwise for better performance.
+         *
+         * @param file - The file to read.
+         * @returns The promise that resolves to the file content.
+         * @official
+         */
+        read(file: TFile): Promise<string>;
+
+        /**
+         * Read the content of a binary file stored inside the vault.
+         *
+         * @param file - The file to read.
+         * @returns The promise that resolves to the binary file content.
+         * @official
+         */
+        readBinary(file: TFile): Promise<ArrayBuffer>;
 
         /**
          * Read a config file from the vault and parse it as JSON.
@@ -233,6 +562,17 @@ declare module 'obsidian' {
          * @unofficial
          */
         removeChild(file: TAbstractFile): void;
+
+        /**
+         * Rename or move a file. To ensure links are automatically renamed,.
+         * use {@link FileManager.renameFile} instead.
+         *
+         * @param file - The file to rename/move.
+         * @param newPath - Vault absolute path to move file to.
+         * @returns The promise that resolves when the file is renamed.
+         * @official
+         */
+        rename(file: TAbstractFile, newPath: string): Promise<void>;
 
         /**
          * Get the file by absolute path.
@@ -288,6 +628,16 @@ declare module 'obsidian' {
         setupConfig(): Promise<void>;
 
         /**
+         * Tries to move to system trash. If that isn't successful/allowed, use local trash.
+         *
+         * @param file - The file or folder to be trashed.
+         * @param system - Set to `false` to use local trash by default.
+         * @returns The promise that resolves when the file is trashed.
+         * @official
+         */
+        trash(file: TAbstractFile, system: boolean): Promise<void>;
+
+        /**
          * Write a config file to disk.
          *
          * @param config Name of config file.
@@ -312,5 +662,25 @@ declare module 'obsidian' {
          * @unofficial
          */
         writePluginData(path: string, data: object): Promise<void>;
+    }
+
+    namespace Vault {
+        /**
+         * Recursively iterate over all files and folders in the vault.
+         *
+         * @param root - The root folder to iterate over.
+         * @param cb - A callback function that will be called for each file and folder.
+         *
+         * @example
+         * ```ts
+         * Vault.recurseChildren(vault.getRoot(), (file) => {
+         *     console.log(file);
+         * });
+         * ```
+         *
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link recurseChildren} instead.
+         */
+        function recurseChildren__(root: TFolder, cb: (file: TAbstractFile) => any): void;
     }
 }

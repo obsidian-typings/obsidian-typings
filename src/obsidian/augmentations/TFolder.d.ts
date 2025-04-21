@@ -1,7 +1,17 @@
 export {};
 
 declare module 'obsidian' {
+    /**
+     * A folder.
+     */
     interface TFolder extends TAbstractFile {
+        /**
+         * The children of the folder.
+         *
+         * @official
+         */
+        children: TAbstractFile[];
+
         /**
          * Gets the count of files in the folder.
          *
@@ -28,5 +38,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         getParentPrefix(): string;
+
+        /**
+         * Check if the folder is the root folder.
+         *
+         * @returns Whether the folder is the root folder.
+         * @official
+         */
+        isRoot(): boolean;
     }
 }

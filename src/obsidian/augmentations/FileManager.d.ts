@@ -8,6 +8,9 @@ import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
 export {};
 
 declare module 'obsidian' {
+    /**
+     * Manage the creation, deletion and renaming of files from the UI.
+     */
     interface FileManager {
         /**
          * Reference to App.
@@ -105,11 +108,44 @@ declare module 'obsidian' {
         downloadAttachmentsForNote(file: TFile): Promise<void>;
 
         /**
+         * Generate a Markdown link based on the user's preferences.
+         *
+         * @param file - the file to link to.
+         * @param sourcePath - where the link is stored in, used to compute relative links.
+         * @param subpath - A subpath, starting with `#`, used for linking to headings or blocks.
+         * @param alias - The display text if it's to be different than the file name. Pass empty string to use file name.
+         * @returns A markdown link.
+         * @example
+         * ```ts
+         * const file = app.vault.getFileByPath('foo/bar.md');
+         * console.log(app.fileManager.generateMarkdownLink(file, 'baz/qux.md', '#heading', 'Display text')); // [[bar#heading|Display text]]
+         * ```
+         * @official
+         */
+        generateMarkdownLink(file: TFile, sourcePath: string, subpath?: string, alias?: string): string;
+
+        /**
          * Always returns an empty array.
          *
          * @unofficial
          */
         getAllLinkResolutions(): [];
+
+        /**
+         * Resolves a unique path for the attachment file being saved.
+         * Ensures that the parent directory exists and dedupes the
+         * filename if the destination filename already exists.
+         *
+         * @param filename Name of the attachment being saved.
+         * @param sourcePath The path to the note associated with this attachment, defaults to the workspace's active file.
+         * @returns A promise that resolves to the full path for where the attachment should be saved, according to the user's settings.
+         * @example
+         * ```ts
+         * console.log(await app.fileManager.getAvailablePathForAttachment('image.png'));
+         * ```
+         * @official
+         */
+        getAvailablePathForAttachment(filename: string, sourcePath?: string): Promise<string>;
 
         /**
          * Gets the folder that new markdown files should be saved to, based on the current settings.
@@ -118,6 +154,23 @@ declare module 'obsidian' {
          * @unofficial
          */
         getMarkdownNewFileParent(path: string): TFolder;
+
+        /**
+         * Gets the folder that new files should be saved to, given the user's preferences.
+         *
+         * @param sourcePath - The path to the current open/focused file,
+         * used when the user wants new files to be created 'in the same folder'.
+         * Use an empty string if there is no active file.
+         * @param newFilePath - The path to the file that will be newly created,
+         * used to infer what settings to use based on the path's extension.
+         * @returns The folder that new files should be saved to.
+         * @example
+         * ```ts
+         * console.log(app.fileManager.getNewFileParent('foo/bar.md', 'baz/qux.md'));
+         * ```
+         * @official
+         */
+        getNewFileParent(sourcePath: string, newFilePath?: string): TFolder;
 
         /**
          * Insert text into a file.
@@ -144,6 +197,28 @@ declare module 'obsidian' {
          * @unofficial
          */
         mergeFile(file: TFile, otherFile: TFile, override: string, atStart: boolean): Promise<void>;
+
+        /**
+         * Atomically read, modify, and save the frontmatter of a note.
+         * The frontmatter is passed in as a JS object, and should be mutated directly to achieve the desired result.
+         *
+         * Remember to handle errors thrown by this method.
+         *
+         * @param file - the file to be modified. Must be a Markdown file.
+         * @param fn - a callback function which mutates the frontmatter object synchronously.
+         * @param options - write options.
+         * @throws YAMLParseError if the YAML parsing fails.
+         * @throws any errors that your callback function throws.
+         * @example
+         * ```ts
+         * await app.fileManager.processFrontMatter(file, (frontmatter) => {
+         *     frontmatter['key1'] = value;
+         *     delete frontmatter['key2'];
+         * });
+         * ```
+         * @official
+         */
+        processFrontMatter(file: TFile, fn: (frontmatter: any) => void, options?: DataWriteOptions): Promise<void>;
 
         /**
          * Prompt the user to delete a file.
@@ -188,6 +263,21 @@ declare module 'obsidian' {
         registerFileParentCreator(extension: string, location: TFolder): void;
 
         /**
+         * Rename or move a file or folder safely, and update all links to it depending on the user's preferences.
+         *
+         * @param file - the file or folder to rename.
+         * @param newPath - the new path for the file or folder.
+         * @returns A promise that resolves when the file or folder is renamed.
+         * @example
+         * ```ts
+         * const file = app.vault.getFileByPath('foo/bar.md');
+         * await app.fileManager.renameFile(file, 'baz/qux.md');
+         * ```
+         * @official
+         */
+        renameFile(file: TAbstractFile, newPath: string): Promise<void>;
+
+        /**
          * Rename's a property for all notes currently that have the old key.
          *
          * @remark The current property type is maintained.
@@ -209,6 +299,21 @@ declare module 'obsidian' {
          * @unofficial
          */
         storeTextFileBackup(path: string, data: string): void;
+
+        /**
+         * Remove a file or a folder from the vault according the user's preferred 'trash'.
+         * options (either moving the file to .trash/ or the OS trash bin).
+         *
+         * @param file - the file or folder to trash.
+         * @returns A promise that resolves when the file or folder is trashed.
+         * @example
+         * ```ts
+         * const file = app.vault.getFileByPath('foo/bar.md');
+         * await app.fileManager.trashFile(file);
+         * ```
+         * @official
+         */
+        trashFile(file: TAbstractFile): Promise<void>;
 
         /**
          * Unregister extension as root input directory for file type.

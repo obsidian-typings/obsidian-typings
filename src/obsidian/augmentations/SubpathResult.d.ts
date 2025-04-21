@@ -1,5 +1,22 @@
 export {};
 
 declare module 'obsidian' {
-    interface SubpathResult {}
+    /**
+     * A result of a subpath search.
+     */
+    interface SubpathResult {
+        /**
+         * The end location of the subpath.
+         *
+         * @official
+         */
+        end: Loc | null;
+
+        /**
+         * The start location of the subpath.
+         *
+         * @official
+         */
+        start: Loc;
+    }
 }

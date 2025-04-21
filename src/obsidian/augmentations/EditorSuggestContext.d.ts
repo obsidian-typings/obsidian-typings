@@ -1,5 +1,22 @@
 export {};
 
 declare module 'obsidian' {
-    interface EditorSuggestContext extends EditorSuggestTriggerInfo {}
+    /**
+     * The context of the suggestion
+     */
+    interface EditorSuggestContext extends EditorSuggestTriggerInfo {
+        /**
+         * The editor instance.
+         *
+         * @official
+         */
+        editor: Editor;
+
+        /**
+         * The file instance.
+         *
+         * @official
+         */
+        file: TFile;
+    }
 }

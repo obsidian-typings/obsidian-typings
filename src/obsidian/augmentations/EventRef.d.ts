@@ -1,6 +1,9 @@
 export {};
 
 declare module 'obsidian' {
+    /**
+     * Event reference
+     */
     interface EventRef {
         /**
          * Context applied to the event callback.

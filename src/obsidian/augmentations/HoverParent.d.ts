@@ -1,5 +1,15 @@
 export {};
 
 declare module 'obsidian' {
-    interface HoverParent {}
+    /**
+     * A parent for hover links.
+     */
+    interface HoverParent {
+        /**
+         * The hover popover.
+         *
+         * @official
+         */
+        hoverPopover: HoverPopover | null;
+    }
 }

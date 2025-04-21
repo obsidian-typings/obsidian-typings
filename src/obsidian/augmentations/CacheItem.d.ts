@@ -1,5 +1,15 @@
 export {};
 
 declare module 'obsidian' {
-    interface CacheItem {}
+    /**
+     * A cache item with a position within a note.
+     */
+    interface CacheItem {
+        /**
+         * Position of this item in the note.
+         *
+         * @official
+         */
+        position: Pos;
+    }
 }

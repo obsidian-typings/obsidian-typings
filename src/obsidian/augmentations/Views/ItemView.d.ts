@@ -1,7 +1,9 @@
 export {};
 
 declare module 'obsidian' {
-    /** @todo Documentation incomplete */
+    /**
+     * A view that displays an item.
+     */
     interface ItemView extends View {
         /**
          * Container of actions for the view.
@@ -23,6 +25,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         canDropAnywhere: boolean;
+
+        /**
+         * The parent element of the content.
+         *
+         * @official
+         */
+        contentEl: HTMLElement;
 
         /**
          * Forward button element for changing view history.
@@ -83,6 +92,32 @@ declare module 'obsidian' {
          * @unofficial
          */
         addAction(icon: IconName, title: string, callback: (evt: MouseEvent) => any): HTMLElement;
+
+        /**
+         * Add an action to the item view.
+         *
+         * @param icon - The icon of the action.
+         * @param title - The title of the action.
+         * @param callback - The callback to call when the action is clicked.
+         * @returns The DOM element of the action.
+         * @example
+         * ```ts
+         * const action = itemView.addAction('dice', 'foo', () => {
+         *     console.log('bar');
+         * });
+         * ```
+         * @official
+         */
+        addAction(icon: IconName, title: string, callback: (evt: MouseEvent) => any): HTMLElement;
+
+        /**
+         * Create a new item view.
+         *
+         * @param leaf - The workspace leaf to create the item view in.
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         */
+        constructor__(leaf: WorkspaceLeaf): this;
 
         /**
          * @todo Documentation incomplete.

@@ -1,7 +1,13 @@
 export {};
 
 declare module 'obsidian' {
-    /** @todo Documentation incomplete */
+    /**
+     * The cache of the block in the note.
+     *
+     * ```markdown
+     * foo ^bar
+     * ```
+     */
     interface BlockCache extends CacheItem {
         /**
          * Reference to App.
@@ -10,7 +16,21 @@ declare module 'obsidian' {
          */
         app: App;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         cache: unknown;
+
+        /**
+         * The ID of the block.
+         *
+         * @example
+         * ```ts
+         * console.log(blockCache.id); // bar
+         * ```
+         * @official
+         */
+        id: string;
     }
 }

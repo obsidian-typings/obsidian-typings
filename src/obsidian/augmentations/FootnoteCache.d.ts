@@ -2,13 +2,29 @@ export {};
 
 declare module 'obsidian' {
     /**
-     * Cache item containing a notes footnotes metadata.
+     * The cache of the footnote in the note.
+     *
+     * ```markdown
+     * foo [^1]
+     *
+     * [^1]: bar
+     *
+     * baz [^qux]
+     *
+     * [^qux]: quux
+     * ```
      */
     interface FootnoteCache extends CacheItem {
         /**
-         * @todo Documentation incomplete.
-         * @unofficial
+         * The ID of the footnote.
+         *
+         * @example
+         * ```ts
+         * console.log(footnoteCache.id); // 1
+         * console.log(footnoteCache.id); // qux
+         * ```
+         * @official
          */
-        identifier: string;
+        id: string;
     }
 }

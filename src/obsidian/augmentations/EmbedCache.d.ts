@@ -1,5 +1,15 @@
 export {};
 
 declare module 'obsidian' {
-    interface EmbedCache extends ReferenceCache {}
+    /**
+     * The cache of the embed in the note.
+     *
+     * ```markdown
+     * ![[wikilink]]
+     * ![[wikilink|alias]]
+     * ![alias](markdown-link)
+     * ```
+     */
+    interface EmbedCache extends ReferenceCache {
+    }
 }

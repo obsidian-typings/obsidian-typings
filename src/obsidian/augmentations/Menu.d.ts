@@ -4,6 +4,9 @@ import type { Submenu } from '../internals/Submenu.d.ts';
 export {};
 
 declare module 'obsidian' {
+    /**
+     * A component for context menus.
+     */
     interface Menu extends Component, CloseableComponent {
         /**
          * Background for the suggestion menu.
@@ -83,6 +86,21 @@ declare module 'obsidian' {
         useNativeMenu: boolean;
 
         /**
+         * Adds a menu item. Only works when menu is not shown yet.
+         *
+         * @param cb - The callback function.
+         * @returns The menu instance.
+         * @example
+         * ```ts
+         * menu.addItem((item) => {
+         *     item.setTitle('foo');
+         * });
+         * ```
+         * @official
+         */
+        addItem(cb: (item: MenuItem) => any): this;
+
+        /**
          * Add a section to the menu.
          *
          * @unofficial
@@ -90,11 +108,43 @@ declare module 'obsidian' {
         addSections(items: string[]): this;
 
         /**
+         * Adds a separator. Only works when menu is not shown yet.
+         *
+         * @returns The menu instance.
+         * @official
+         */
+        addSeparator(): this;
+
+        /**
+         * Close the menu.
+         *
+         * @returns The menu instance.
+         * @official
+         */
+        close(): void;
+
+        /**
          * Close the currently open submenu.
          *
          * @unofficial
          */
         closeSubmenu(): void;
+
+        /**
+         * Create a new menu.
+         *
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         */
+        constructor__(): this;
+
+        /**
+         * Hide the menu.
+         *
+         * @returns The menu instance.
+         * @official
+         */
+        hide(): this;
 
         /**
          * Callback to execute when the menu is hidden.
@@ -149,6 +199,21 @@ declare module 'obsidian' {
         onEnter(e: KeyboardEvent): boolean;
 
         /**
+         * Add a callback to be called when the menu is hidden.
+         *
+         * @param callback - The callback function.
+         * @returns The menu instance.
+         * @example
+         * ```ts
+         * menu.onHide(() => {
+         *     console.log('Menu hidden');
+         * });
+         * ```
+         * @official
+         */
+        onHide(callback: () => any): void;
+
+        /**
          * Preemptively closes the menu if click is registered on menu item.
          *
          * @param e - Mouse event.
@@ -188,6 +253,14 @@ declare module 'obsidian' {
         select(index: number): void;
 
         /**
+         * Set the menu to not use an icon.
+         *
+         * @returns The menu instance.
+         * @official
+         */
+        setNoIcon(): this;
+
+        /**
          * Set the parent element of the menu (i.e. for workspace leaf context menu).
          *
          * @param el - Element to set as parent.
@@ -203,6 +276,47 @@ declare module 'obsidian' {
          * @unofficial
          */
         setSectionSubmenu(section: string, submenu: Submenu): this;
+
+        /**
+         * Force this menu to use native or DOM.
+         * (Only works on the desktop app)
+         *
+         * @param useNativeMenu - Whether to use a native menu.
+         * @returns The menu instance.
+         * @example
+         * ```ts
+         * menu.setUseNativeMenu(true);
+         * ```
+         * @official
+         */
+        setUseNativeMenu(useNativeMenu: boolean): this;
+
+        /**
+         * Show the menu at the position of the mouse event.
+         *
+         * @param evt - The mouse event.
+         * @returns The menu instance.
+         * @example
+         * ```ts
+         * menu.showAtMouseEvent(evt);
+         * ```
+         * @official
+         */
+        showAtMouseEvent(evt: MouseEvent): this;
+
+        /**
+         * Show the menu at a specific position.
+         *
+         * @param position - The position of the menu.
+         * @param doc - The document. Use if you need to show the menu in another window.
+         * @returns The menu instance.
+         * @example
+         * ```ts
+         * menu.showAtPosition({ x: 100, y: 100 });
+         * ```
+         * @official
+         */
+        showAtPosition(position: MenuPositionDef, doc?: Document): this;
 
         /**
          * Sort the items in the menu.

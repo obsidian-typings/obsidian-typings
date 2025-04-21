@@ -1,5 +1,22 @@
 export {};
 
 declare module 'obsidian' {
-    interface WorkspaceWindow extends WorkspaceContainer {}
+    /**
+     * Workspace window.
+     */
+    interface WorkspaceWindow extends WorkspaceContainer {
+        /**
+         * The document object.
+         *
+         * @official
+         */
+        doc: Document;
+
+        /**
+         * The window object.
+         *
+         * @official
+         */
+        win: Window;
+    }
 }

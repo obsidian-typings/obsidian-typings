@@ -1,6 +1,9 @@
 import type { SerializedWorkspaceItem } from '../internals/Workspace/SerializedWorkspaceItem.d.ts';
 
 declare module 'obsidian' {
+    /**
+     * Workspace item.
+     */
     interface WorkspaceItem extends Events {
         /**
          * @todo Documentation incomplete.
@@ -33,6 +36,14 @@ declare module 'obsidian' {
         id: string;
 
         /**
+         * The direct parent of the leaf.
+         *
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link parent} instead.
+         */
+        parent__: WorkspaceParent;
+
+        /**
          * @todo Documentation incomplete.
          * @unofficial
          */
@@ -57,10 +68,26 @@ declare module 'obsidian' {
         detach(): void;
 
         /**
+         * Get the root container parent item, which can be one of:.
+         * - {@link WorkspaceRoot}
+         * - {@link WorkspaceWindow}
+         *
+         * @official
+         */
+        getContainer(): WorkspaceContainer;
+
+        /**
          * @todo Documentation incomplete.
          * @unofficial
          */
         getIcon(): IconName;
+
+        /**
+         * Get the root item.
+         *
+         * @official
+         */
+        getRoot(): WorkspaceItem;
 
         /**
          * @todo Documentation incomplete.

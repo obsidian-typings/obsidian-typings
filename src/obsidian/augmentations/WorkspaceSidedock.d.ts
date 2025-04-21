@@ -1,6 +1,9 @@
 import type { SerializedWorkspaceSidedock } from '../internals/Workspace/SerializedWorkspaceSidedock.d.ts';
 
 declare module 'obsidian' {
+    /**
+     * Workspace sidedock.
+     */
     interface WorkspaceSidedock extends WorkspaceSplit {
         /**
          * @todo Documentation incomplete.
@@ -19,6 +22,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         children: WorkspaceTabs[];
+
+        /**
+         * Whether the sidedock is collapsed.
+         *
+         * @official
+         */
+        collapsed: boolean;
 
         /**
          * @todo Documentation incomplete.
@@ -63,6 +73,20 @@ declare module 'obsidian' {
         size: number;
 
         /**
+         * Collapse the sidedock.
+         *
+         * @official
+         */
+        collapse(): void;
+
+        /**
+         * Expand the sidedock.
+         *
+         * @official
+         */
+        expand(): void;
+
+        /**
          * @todo Documentation incomplete.
          * @unofficial
          */
@@ -85,5 +109,12 @@ declare module 'obsidian' {
          * @unofficial
          */
         setSize(size: number): void;
+
+        /**
+         * Toggle the sidedock.
+         *
+         * @official
+         */
+        toggle(): void;
     }
 }

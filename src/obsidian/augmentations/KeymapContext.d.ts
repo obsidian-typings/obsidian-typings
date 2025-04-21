@@ -1,5 +1,15 @@
 export {};
 
 declare module 'obsidian' {
-    interface KeymapContext extends KeymapInfo {}
+    /**
+     * Context of the keymap.
+     */
+    interface KeymapContext extends KeymapInfo {
+        /**
+         * Interpreted virtual key.
+         *
+         * @official
+         */
+        vkey: string;
+    }
 }

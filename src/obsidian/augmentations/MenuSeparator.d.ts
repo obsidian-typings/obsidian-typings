@@ -1,5 +1,9 @@
 export {};
 
 declare module 'obsidian' {
-    interface MenuSeparator {}
+    /**
+     * A separator for the menu.
+     */
+    interface MenuSeparator {
+    }
 }

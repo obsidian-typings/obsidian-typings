@@ -1,5 +1,15 @@
 export {};
 
 declare module 'obsidian' {
-    interface CloseableComponent {}
+    /**
+     * A closeable component that can get dismissed via the Android 'back' button.
+     */
+    interface CloseableComponent {
+        /**
+         * Close the component.
+         *
+         * @official
+         */
+        close(): void;
+    }
 }

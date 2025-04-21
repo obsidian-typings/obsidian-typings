@@ -3,8 +3,17 @@ import type { ReadViewRenderer } from '../internals/ReadViewRenderer.d.ts';
 export {};
 
 declare module 'obsidian' {
-    /** @todo Documentation incomplete */
+    /**
+     * The markdown preview view.
+     */
     interface MarkdownPreviewView extends MarkdownRenderer, MarkdownSubView, MarkdownPreviewEvents {
+        /**
+         * The container element of the markdown preview view.
+         *
+         * @official
+         */
+        containerEl: HTMLElement;
+
         /**
          * Unique identifier for the rendered element.
          *
@@ -38,10 +47,29 @@ declare module 'obsidian' {
         view: MarkdownView;
 
         /**
+         * The file associated with the markdown preview view.
+         *
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link file} instead.
+         */
+        get file__(): TFile;
+
+        /**
          * @todo Documentation incomplete.
          * @unofficial
          */
         applyFoldInfo(e: unknown): unknown;
+
+        /**
+         * Apply the scroll position to the markdown preview view.
+         *
+         * @example
+         * ```ts
+         * markdownPreviewView.applyScroll(100);
+         * ```
+         * @official
+         */
+        applyScroll(scroll: number): void;
 
         /**
          * @todo Documentation incomplete.
@@ -55,6 +83,17 @@ declare module 'obsidian' {
          * @unofficial
          */
         clear(): unknown;
+
+        /**
+         * Clear the markdown content of the markdown preview view.
+         *
+         * @example
+         * ```ts
+         * markdownPreviewView.clear();
+         * ```
+         * @official
+         */
+        clear(): void;
 
         /**
          * @todo Documentation incomplete.
@@ -76,6 +115,13 @@ declare module 'obsidian' {
         get(): string;
 
         /**
+         * Get the markdown content of the markdown preview view.
+         *
+         * @official
+         */
+        get(): string;
+
+        /**
          * @todo Documentation incomplete.
          * @unofficial
          */
@@ -86,6 +132,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         getFoldInfo(): unknown;
+
+        /**
+         * Get the scroll position of the markdown preview view.
+         *
+         * @official
+         */
+        getScroll(): number;
 
         /**
          * @todo Documentation incomplete.
@@ -109,6 +162,12 @@ declare module 'obsidian' {
          * @todo Documentation incomplete.
          * @unofficial
          */
+        onload(): void;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         onResize(): unknown;
 
         /**
@@ -124,11 +183,36 @@ declare module 'obsidian' {
         requestUpdateLinks(): unknown;
 
         /**
+         * Force the markdown preview view to rerender.
+         *
+         * @param full - Whether to rerender the entire preview or just the changed parts.
+         * @example
+         * ```ts
+         * markdownPreviewView.rerender(true);
+         * ```
+         * @official
+         */
+        rerender(full?: boolean): void;
+
+        /**
          * Set the Preview to new data.
          *
          * @param data The data to set the renderer to.
          * @param clear If the preview should be cleared.
          * @unofficial
+         */
+        set(data: string, clear: boolean): void;
+
+        /**
+         * Set the markdown content of the markdown preview view.
+         *
+         * @param data - The markdown content.
+         * @param clear - Whether to clear the content before setting it.
+         * @example
+         * ```ts
+         * markdownPreviewView.set('**foo** bar', true);
+         * ```
+         * @official
          */
         set(data: string, clear: boolean): void;
 

@@ -1,3 +1,10 @@
+import type {
+    FileManager,
+    Vault,
+    Workspace
+} from 'obsidian';
+import type { Scope } from 'obsidian';
+import type { Keymap } from 'obsidian';
 import type { AppMenuBarManager } from '../internals/AppMenuBarManager.d.ts';
 import type { AppSetting } from '../internals/AppSetting.d.ts';
 import type { Commands } from '../internals/Commands/Commands.d.ts';
@@ -22,6 +29,9 @@ import type { ViewRegistry } from '../internals/ViewRegistry/ViewRegistry.d.ts';
 export {};
 
 declare module 'obsidian' {
+    /**
+     * The main app object.
+     */
     interface App {
         /**
          * ID that uniquely identifies the vault.
@@ -31,7 +41,10 @@ declare module 'obsidian' {
          */
         appId: string;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         appMenuBarManager: AppMenuBarManager;
 
         /**
@@ -57,7 +70,10 @@ declare module 'obsidian' {
          */
         dom: ObsidianDOM;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         dragManager: DragManager;
 
         /**
@@ -68,14 +84,16 @@ declare module 'obsidian' {
         embedRegistry: EmbedRegistry;
 
         /**
-         * Manage the creation, deletion and renaming of files from the UI.
+         * The file manager object.
          *
-         * @remark Prefer using the `vault` API for programmatic file management.
-         * @unofficial
+         * @official
          */
         fileManager: FileManager;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         foldManager: FoldManager;
 
         /**
@@ -106,6 +124,20 @@ declare module 'obsidian' {
         isMobile: boolean;
 
         /**
+         * The keymap object.
+         *
+         * @official
+         */
+        keymap: Keymap;
+
+        /**
+         * The last known user interaction event, to help commands find out what modifier keys are pressed.
+         *
+         * @official
+         */
+        lastEvent: UserEvent | null;
+
+        /**
          * @deprecated Made inaccessible in 1.6.0, this object can be recreated using Notices
          * @unofficial
          */
@@ -127,13 +159,22 @@ declare module 'obsidian' {
          */
         metadataTypeManager: MetadataTypeManager;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         mobileNavbar: MobileNavbar | null;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         mobileTabSwitcher: MobileTabSwitcher | null;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         mobileToolbar: MobileToolbar | null;
 
         /**
@@ -160,9 +201,9 @@ declare module 'obsidian' {
         plugins: Plugins;
 
         /**
-         * Root keyscope of the application
+         * The scope object.
          *
-         * @unofficial
+         * @official
          */
         scope: Scope;
 
@@ -175,7 +216,10 @@ declare module 'obsidian' {
          */
         setting: AppSetting;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         shareReceiver: ShareReceiver;
 
         /**
@@ -194,14 +238,14 @@ declare module 'obsidian' {
         title: string;
 
         /**
-         * Manages all file operations for the vault, contains hooks for file changes, and an adapter for.
+         * The vault object.
          *
-         * low-level file system operations.
+         * Manages all file operations for the vault, contains hooks for file changes, and an adapter for low-level file system operations.
          *
          * @tutorial Used for creating your own files and folders, renaming, ...
-         * @tutorial Use `app.vault.adapter` for accessing files outside the vault (desktop-only).
+         * @tutorial Use `app.vault.adapter` for accessing files outside the vault.
          * @remark Prefer using the regular `vault` whenever possible.
-         * @unofficial
+         * @official
          */
         vault: Vault;
 
@@ -214,10 +258,12 @@ declare module 'obsidian' {
         viewRegistry: ViewRegistry;
 
         /**
+         * The workspace object.
+         *
          * Manages the workspace layout, construction, rendering and manipulation of leaves.
          *
          * @tutorial Used for accessing the active editor leaf, grabbing references to your views, ...
-         * @unofficial
+         * @official
          */
         workspace: Workspace;
 
@@ -339,11 +385,19 @@ declare module 'obsidian' {
         initializeWithAdapter(adapter: DataAdapter): Promise<void>;
 
         /**
-             * @todo Documentation incomplete.
-             *
-            @unofficial
-             */
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         isVimEnabled(): boolean;
+
+        /**
+         * Retrieve value from `localStorage` for this vault.
+         *
+         * @param key - The key to retrieve.
+         * @returns The value from `localStorage`.
+         * @official
+         */
+        loadLocalStorage(key: string): any | null;
 
         /**
          * Load a value from the localstorage given key.
@@ -376,7 +430,10 @@ declare module 'obsidian' {
          */
         nextFramePromise(callback: () => Promise<void>): Promise<void>;
 
-        /** @unofficial */
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         on(): void;
 
         /**
@@ -427,6 +484,19 @@ declare module 'obsidian' {
          * @unofficial
          */
         saveAttachment(name: string, extension: string, data: ArrayBuffer): Promise<TFile>;
+
+        /**
+         * Save vault-specific value to `localStorage`. If data is `null`, the entry will be cleared.
+         *
+         * @param key - The key to save.
+         * @param data - The value to save. Must be serializable.
+         * @example
+         * ```ts
+         * app.saveLocalStorage('my-key', 'my-value');
+         * ```
+         * @official
+         */
+        saveLocalStorage(key: string, data: unknown | null): void;
 
         /**
          * Save a value to the localstorage given key.

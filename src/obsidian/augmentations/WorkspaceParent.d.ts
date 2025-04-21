@@ -1,5 +1,9 @@
 export {};
 
 declare module 'obsidian' {
-    interface WorkspaceParent extends WorkspaceItem {}
+    /**
+     * Workspace parent.
+     */
+    interface WorkspaceParent extends WorkspaceItem {
+    }
 }

@@ -1,32 +1,36 @@
 export {};
 
 declare module 'obsidian' {
+    /**
+     * Metadata about a Community plugin.
+     * @see {@link https://docs.obsidian.md/Reference/Manifest}.
+     */
     interface PluginManifest {
         /**
-         * Name of the author of the plugin.
+         * The author's name.
          *
-         * @unofficial
+         * @official
          */
         author: string;
 
         /**
-         * URL to the author's website.
+         * A URL to the author's website.
          *
-         * @unofficial
+         * @official
          */
         authorUrl?: string;
 
         /**
-         * Description of the plugin's functionality.
+         * A description of the plugin.
          *
-         * @unofficial
+         * @official
          */
         description: string;
 
         /**
-         * Storage location of the plugin relative to the vault root.
+         * Vault path to the plugin folder in the config directory.
          *
-         * @unofficial
+         * @official
          */
         dir?: string;
 
@@ -38,37 +42,37 @@ declare module 'obsidian' {
         fundingUrl?: string;
 
         /**
-         * Unique identifier of the plugin.
+         * The plugin ID.
          *
-         * @unofficial
+         * @official
          */
         id: string;
 
         /**
-         * Whether the plugin is designed for desktop use only.
+         * Whether the plugin can be used only on desktop.
          *
-         * @unofficial
+         * @official
          */
         isDesktopOnly?: boolean;
 
         /**
-         * Minimum Obsidian version compatible with the plugin.
+         * The minimum required Obsidian version to run this plugin.
          *
-         * @unofficial
+         * @official
          */
         minAppVersion: string;
 
         /**
-         * Name of the plugin.
+         * The display name.
          *
-         * @unofficial
+         * @official
          */
         name: string;
 
         /**
-         * Version of the plugin.
+         * The current version, using {@link https://semver.org/ Semantic Versioning}.
          *
-         * @unofficial
+         * @official
          */
         version: string;
     }

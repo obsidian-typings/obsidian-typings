@@ -10,6 +10,9 @@ import type { Token } from '../../internals/Token.d.ts';
 export {};
 
 declare module 'obsidian' {
+    /**
+     * A view for markdown files.
+     */
     interface MarkdownView extends TextFileView {
         /**
          * Backlinks component.
@@ -26,9 +29,9 @@ declare module 'obsidian' {
         backlinksEl: HTMLElement;
 
         /**
-         * The currently active markdown view (preview or edit view).
+         * The current mode of the markdown view.
          *
-         * @unofficial
+         * @official
          */
         currentMode: MarkdownSubView;
 
@@ -38,6 +41,20 @@ declare module 'obsidian' {
          * @unofficial
          */
         editMode: MarkdownEditView;
+
+        /**
+         * The editor of the markdown view.
+         *
+         * @official
+         */
+        editor: Editor;
+
+        /**
+         * The hover popover of the markdown view.
+         *
+         * @official
+         */
+        hoverPopover: HoverPopover | null;
 
         /**
          * Editable title element of the view.
@@ -68,9 +85,9 @@ declare module 'obsidian' {
         modes: MarkdownViewModes;
 
         /**
-         * Preview component of the view.
+         * The preview mode of the markdown view.
          *
-         * @unofficial
+         * @official
          */
         previewMode: MarkdownPreviewView;
 
@@ -102,6 +119,18 @@ declare module 'obsidian' {
         sourceMode: MarkdownViewSourceMode;
 
         /**
+         * The associated file.
+         *
+         * @example
+         * ```ts
+         * console.log(markdownFileInfo.file);
+         * ```
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link file} instead.
+         */
+        get file__(): TFile | null;
+
+        /**
          * Add property to inline metadata editor or properties plugin.
          *
          * @deprecated - Removed in 1.6.0.
@@ -125,11 +154,27 @@ declare module 'obsidian' {
         canToggleBacklinks(): boolean;
 
         /**
+         * Clear the view data of the markdown view.
+         *
+         * @official
+         */
+        clear(): void;
+
+        /**
          * Collapse the properties editor.
          *
          * @unofficial
          */
         collapseProperties(collapse: boolean): void;
+
+        /**
+         * Create a new markdown view.
+         *
+         * @param leaf - The workspace leaf to attach the markdown view to.
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         */
+        constructor__(leaf: WorkspaceLeaf): this;
 
         /**
          * Edit the focused property in the metadata editor.
@@ -175,11 +220,35 @@ declare module 'obsidian' {
         getMode(): MarkdownViewModeType;
 
         /**
+         * Get the current mode of the markdown view.
+         *
+         * @returns A string representing the current mode.
+         * @official
+         */
+        getMode(): MarkdownViewModeType;
+
+        /**
          * Get selection of current mode.
          *
          * @unofficial
          */
         getSelection(): string;
+
+        /**
+         * Get the view data of the markdown view.
+         *
+         * @returns A string representing the view data.
+         * @official
+         */
+        getViewData(): string;
+
+        /**
+         * Get the view type of the markdown view.
+         *
+         * @returns A string representing the view type.
+         * @official
+         */
+        getViewType(): string;
 
         /**
          * Get the current view type.
@@ -294,6 +363,19 @@ declare module 'obsidian' {
         setMode(component: MarkdownSubView): Promise<void>;
 
         /**
+         * Set the view data of the markdown view.
+         *
+         * @param data - The view data.
+         * @param clear - Whether to clear the view data before setting it.
+         * @example
+         * ```ts
+         * markdownView.setViewData('**foo** bar', true);
+         * ```
+         * @official
+         */
+        setViewData(data: string, clear: boolean): void;
+
+        /**
          * Shift focus to first line of editor.
          *
          * @unofficial
@@ -306,6 +388,20 @@ declare module 'obsidian' {
          * @unofficial
          */
         shiftFocusBefore(): void;
+
+        /**
+         * Show the search modal.
+         *
+         * @param replace - Whether to perform a search & replace.
+         * - `true` - Perform a search & replace.
+         * - `false` - Perform a search.
+         * @example
+         * ```ts
+         * markdownView.showSearch(true);
+         * ```
+         * @official
+         */
+        showSearch(replace?: boolean): void;
 
         /**
          * Toggle backlinks on editor.

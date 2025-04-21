@@ -6,42 +6,6 @@ export {};
 
 declare module 'obsidian' {
     /**
-     * Load Mermaid and return a promise to the global mermaid object.
-     * Can also use {@link Window.mermaid} after this promise resolves to get the same reference.
-     *
-     * @returns A promise that resolves to the global {@link Window.mermaid} object.
-     *
-     * @see {@link https://mermaid.js.org/ Official Mermaid documentation}.
-     * @public
-     * @official - Patched return type to be more specific.
-     */
-    export function loadMermaid(): Promise<Mermaid>;
-
-    /**
-     * Load PDF.js and return a promise to the global pdfjsLib object.
-     * Can also use {@link Window.pdfjsLib} after this promise resolves to get the same reference.
-     *
-     * @returns A promise that resolves to the global {@link Window.pdfjsLib} object.
-     *
-     * @see {@link https://mozilla.github.io/pdf.js/ Official PDF.js documentation}.
-     * @public
-     * @official - Patched return type to be more specific.
-     */
-    export function loadPdfJs(): Promise<typeof pdfjsLib>;
-
-    /**
-     * Load Prism.js and return a promise to the global Prism object.
-     * Can also use {@link Window.Prism} after this promise resolves to get the same reference.
-     *
-     * @returns A promise that resolves to the global {@link Window.Prism} object.
-     *
-     * @see {@link https://prismjs.com/ Official Prism documentation}.
-     * @public
-     * @official - Patched return type to be more specific.
-     */
-    export function loadPrism(): Promise<typeof Prism>;
-
-    /**
      * Adds an icon to the library.
      *
      * @param iconId - the icon ID.
@@ -52,10 +16,9 @@ declare module 'obsidian' {
      * addIcon('my-icon', '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="40"/></svg>');
      * ```
      *
-     * @public
      * @official
      */
-    export function addIcon(iconId: string, svgContent: string): void;
+    function addIcon(iconId: string, svgContent: string): void;
 
     /**
      * Converts an `ArrayBuffer` to a base64 string.
@@ -68,10 +31,9 @@ declare module 'obsidian' {
      * console.log(arrayBufferToBase64(new Uint8Array([1,2,3]).buffer)); // AQID
      * ```
      *
-     * @public
      * @official
      */
-    export function arrayBufferToBase64(buffer: ArrayBuffer): string;
+    function arrayBufferToBase64(buffer: ArrayBuffer): string;
 
     /**
      * Converts an `ArrayBuffer` to a hex string.
@@ -84,10 +46,9 @@ declare module 'obsidian' {
      * console.log(arrayBufferToHex(new Uint8Array([1,2,3]).buffer)); // 010203
      * ```
      *
-     * @public
      * @official
      */
-    export function arrayBufferToHex(data: ArrayBuffer): string;
+    function arrayBufferToHex(data: ArrayBuffer): string;
 
     /**
      * Converts a base64 string to an `ArrayBuffer`.
@@ -100,10 +61,9 @@ declare module 'obsidian' {
      * console.log(base64ToArrayBuffer('AQID'));
      * ```
      *
-     * @public
      * @official
      */
-    export function base64ToArrayBuffer(base64: string): ArrayBuffer;
+    function base64ToArrayBuffer(base64: string): ArrayBuffer;
 
     /**
      * A standard debounce function.
@@ -126,10 +86,9 @@ declare module 'obsidian' {
      * debounced('bar'); // this will be printed to the console.
      * ```
      *
-     * @public
      * @official
      */
-    export function debounce<T extends unknown[], V>(
+    function debounce<T extends unknown[], V>(
         cb: (...args: [...T]) => V,
         timeout?: number,
         resetTimer?: boolean
@@ -148,10 +107,9 @@ declare module 'obsidian' {
      * displayTooltip(document.body, 'foo');
      * ```
      *
-     * @public
      * @official
      */
-    export function displayTooltip(
+    function displayTooltip(
         newTargetEl: HTMLElement,
         content: string | DocumentFragment,
         options?: TooltipOptions
@@ -160,10 +118,9 @@ declare module 'obsidian' {
     /**
      * Flush the MathJax stylesheet.
      *
-     * @public
      * @official
      */
-    export function finishRenderMath(): Promise<void>;
+    function finishRenderMath(): Promise<void>;
 
     /**
      * Combines all tags from frontmatter and note content into a single array.
@@ -187,10 +144,9 @@ declare module 'obsidian' {
      * console.log(getAllTags(cache)); // ['foo', 'bar', 'baz']
      * ```
      *
-     * @public
      * @official
      */
-    export function getAllTags(cache: CachedMetadata): string[] | null;
+    function getAllTags(cache: CachedMetadata): string[] | null;
 
     /**
      * Converts a Blob to an ArrayBuffer.
@@ -203,10 +159,9 @@ declare module 'obsidian' {
      * console.log(await getBlobArrayBuffer(blob));
      * ```
      *
-     * @public
      * @official
      */
-    export function getBlobArrayBuffer(blob: Blob): Promise<ArrayBuffer>;
+    function getBlobArrayBuffer(blob: Blob): Promise<ArrayBuffer>;
 
     /**
      * Given the contents of a file, get information about the frontmatter of the file, including
@@ -223,10 +178,9 @@ declare module 'obsidian' {
      * console.log(getFrontMatterInfo(content));
      * ```
      *
-     * @public
      * @official
      */
-    export function getFrontMatterInfo(content: string): FrontMatterInfo;
+    function getFrontMatterInfo(content: string): FrontMatterInfo;
 
     /**
      * Create an SVG from an iconId. Returns `null` if no icon associated with the iconId.
@@ -239,27 +193,24 @@ declare module 'obsidian' {
      * console.log(getIcon('dice')); // <svg>...</svg>
      * ```
      *
-     * @public
      * @official
      */
-    export function getIcon(iconId: string): SVGSVGElement | null;
+    function getIcon(iconId: string): SVGSVGElement | null;
 
     /**
      * Get the list of registered icons.
      *
-     * @public
      * @official
      */
-    export function getIconIds(): IconName[];
+    function getIconIds(): IconName[];
 
     /**
      * Get the ISO code for the currently configured app language. Defaults to 'en'.
      * See {@link https://github.com/obsidianmd/obsidian-translations?tab=readme-ov-file#existing-languages} for list of options.
      *
-     * @public
      * @official
      */
-    export function getLanguage(): string;
+    function getLanguage(): string;
 
     /**
      * Converts the linktext to a linkpath.
@@ -272,10 +223,9 @@ declare module 'obsidian' {
      * console.log(getLinkpath('foo#bar')); // foo
      * ```
      *
-     * @public
      * @official
      */
-    export function getLinkpath(linktext: string): string;
+    function getLinkpath(linktext: string): string;
 
     /**
      * Converts a hex string to an ArrayBuffer.
@@ -288,10 +238,9 @@ declare module 'obsidian' {
      * console.log(hexToArrayBuffer('00112233445566778899aabbccddeeff'));
      * ```
      *
-     * @public
      * @official
      */
-    export function hexToArrayBuffer(hex: string): ArrayBuffer;
+    function hexToArrayBuffer(hex: string): ArrayBuffer;
 
     /**
      * Converts HTML to a Markdown string.
@@ -307,10 +256,9 @@ declare module 'obsidian' {
      * console.log(htmlToMarkdown(fragment)); // ### baz
      * ```
      *
-     * @public
      * @official
      */
-    export function htmlToMarkdown(html: string | HTMLElement | Document | DocumentFragment): string;
+    function htmlToMarkdown(html: string | HTMLElement | Document | DocumentFragment): string;
 
     /**
      * Iterate links and embeds.
@@ -326,11 +274,10 @@ declare module 'obsidian' {
      *     console.log(ref);
      *     return true;
      * });
-     * @public
      * @official
      * @deprecated - Use {@link iterateRefs} instead.
      */
-    export function iterateCacheRefs(cache: CachedMetadata, cb: (ref: ReferenceCache) => boolean | void): boolean;
+    function iterateCacheRefs(cache: CachedMetadata, cb: (ref: ReferenceCache) => boolean | void): boolean;
 
     /**
      * If callback returns true, the iteration process will be interrupted.
@@ -345,10 +292,9 @@ declare module 'obsidian' {
      *     console.log(ref);
      *     return true;
      * });
-     * @public
      * @official
      */
-    export function iterateRefs(refs: Reference[], cb: (ref: Reference) => boolean | void): boolean;
+    function iterateRefs(refs: Reference[], cb: (ref: Reference) => boolean | void): boolean;
 
     /**
      * Load MathJax.
@@ -356,10 +302,42 @@ declare module 'obsidian' {
      * @returns A promise that resolves when MathJax is loaded.
      *
      * @see {@link https://www.mathjax.org/ Official MathJax documentation}.
-     * @public
      * @official
      */
-    export function loadMathJax(): Promise<void>;
+    function loadMathJax(): Promise<void>;
+
+    /**
+     * Load Mermaid and return a promise to the global mermaid object.
+     * Can also use {@link Window.mermaid} after this promise resolves to get the same reference.
+     *
+     * @returns A promise that resolves to the global {@link Window.mermaid} object.
+     *
+     * @see {@link https://mermaid.js.org/ Official Mermaid documentation}.
+     * @official - Patched return type to be more specific.
+     */
+    function loadMermaid(): Promise<Mermaid>;
+
+    /**
+     * Load PDF.js and return a promise to the global pdfjsLib object.
+     * Can also use {@link Window.pdfjsLib} after this promise resolves to get the same reference.
+     *
+     * @returns A promise that resolves to the global {@link Window.pdfjsLib} object.
+     *
+     * @see {@link https://mozilla.github.io/pdf.js/ Official PDF.js documentation}.
+     * @official - Patched return type to be more specific.
+     */
+    function loadPdfJs(): Promise<typeof pdfjsLib>;
+
+    /**
+     * Load Prism.js and return a promise to the global Prism object.
+     * Can also use {@link Window.Prism} after this promise resolves to get the same reference.
+     *
+     * @returns A promise that resolves to the global {@link Window.Prism} object.
+     *
+     * @see {@link https://prismjs.com/ Official Prism documentation}.
+     * @official - Patched return type to be more specific.
+     */
+    function loadPrism(): Promise<typeof Prism>;
 
     /**
      * Normalizes a path replacing all invalid symbols.
@@ -378,10 +356,9 @@ declare module 'obsidian' {
      * normalizePath('foo\u202Fbar'); // foo bar
      * ```
      *
-     * @public
      * @official
      */
-    export function normalizePath(path: string): string;
+    function normalizePath(path: string): string;
 
     /**
      * Parses the frontmatter aliases from the frontmatter object.
@@ -396,10 +373,9 @@ declare module 'obsidian' {
      * console.log(parseFrontMatterAliases({ aliases: 'baz' })); // ['baz']
      * ```
      *
-     * @public
      * @official
      */
-    export function parseFrontMatterAliases(frontmatter: any | null): string[] | null;
+    function parseFrontMatterAliases(frontmatter: any | null): string[] | null;
 
     /**
      * Parses a frontmatter entry from the frontmatter object.
@@ -414,10 +390,9 @@ declare module 'obsidian' {
      * console.log(parseFrontMatterEntry({ baz: 'qux' }, /ba./)); // qux
      * ```
      *
-     * @public
      * @official
      */
-    export function parseFrontMatterEntry(frontmatter: any | null, key: string | RegExp): any | null;
+    function parseFrontMatterEntry(frontmatter: any | null, key: string | RegExp): any | null;
 
     /**
      * Parses a frontmatter string array from the frontmatter object.
@@ -438,10 +413,9 @@ declare module 'obsidian' {
      * console.log(parseFrontMatterStringArray({ foo: ['bar', 'baz'] }, /fo./)); // ['bar', 'baz']
      * ```
      *
-     * @public
      * @official
      */
-    export function parseFrontMatterStringArray(
+    function parseFrontMatterStringArray(
         frontmatter: any | null,
         key: string | RegExp,
         nospaces?: boolean
@@ -460,10 +434,9 @@ declare module 'obsidian' {
      * console.log(parseFrontMatterTags({ tags: 'foo bar' })); // ['#foo', '#bar']
      * ```
      *
-     * @public
      * @official
      */
-    export function parseFrontMatterTags(frontmatter: any | null): string[] | null;
+    function parseFrontMatterTags(frontmatter: any | null): string[] | null;
 
     /**
      * Parses the linktext of a wikilink into its component parts.
@@ -477,17 +450,14 @@ declare module 'obsidian' {
      * console.log(parseLinktext('[[foo#bar]]')); // { path: 'foo', subpath: 'bar' }
      * ```
      *
-     * @public
      * @official
      */
-    export function parseLinktext(linktext: string): {
+    function parseLinktext(linktext: string): {
         /**
-         * @public
          * @official
          */
         path: string;
         /**
-         * @public
          * @official
          */
         subpath: string;
@@ -504,10 +474,9 @@ declare module 'obsidian' {
      * console.log(parseYaml('foo: bar')); // { foo: 'bar' }
      * ```
      *
-     * @public
      * @official
      */
-    export function parseYaml(yaml: string): any;
+    function parseYaml(yaml: string): any;
 
     /**
      * Construct a fuzzy search callback that runs on a target string.
@@ -517,10 +486,9 @@ declare module 'obsidian' {
      * @param query - the fuzzy query.
      * @return fn - the callback function to apply the search on or `null` if the query is empty.
      *
-     * @public
      * @official
      */
-    export function prepareFuzzySearch(query: string): (text: string) => SearchResult | null;
+    function prepareFuzzySearch(query: string): (text: string) => SearchResult | null;
 
     /**
      * Construct a simple search callback that runs on a target string.
@@ -528,10 +496,9 @@ declare module 'obsidian' {
      * @param query - the space-separated words.
      * @return fn - the callback function to apply the search on or `null` if the query is empty.
      *
-     * @public
      * @official
      */
-    export function prepareSimpleSearch(query: string): (text: string) => SearchResult | null;
+    function prepareSimpleSearch(query: string): (text: string) => SearchResult | null;
 
     /**
      * Remove a custom icon from the library.
@@ -543,10 +510,9 @@ declare module 'obsidian' {
      * removeIcon('my-icon');
      * ```
      *
-     * @public
      * @official
      */
-    export function removeIcon(iconId: string): void;
+    function removeIcon(iconId: string): void;
 
     /**
      * Render the matches of a search.
@@ -561,10 +527,9 @@ declare module 'obsidian' {
      * renderMatches(document.body, 'foo', [[0, 3]]);
      * ```
      *
-     * @public
      * @official
      */
-    export function renderMatches(
+    function renderMatches(
         el: HTMLElement | DocumentFragment,
         text: string,
         matches: SearchMatches | null,
@@ -584,10 +549,9 @@ declare module 'obsidian' {
      * console.log(renderMath('\\frac{1}{2}', true));
      * ```
      *
-     * @public
      * @official
      */
-    export function renderMath(source: string, display: boolean): HTMLElement;
+    function renderMath(source: string, display: boolean): HTMLElement;
 
     /**
      * Render the results of a search.
@@ -605,10 +569,9 @@ declare module 'obsidian' {
      * });
      * ```
      *
-     * @public
      * @official
      */
-    export function renderResults(el: HTMLElement, text: string, result: SearchResult, offset?: number): void;
+    function renderResults(el: HTMLElement, text: string, result: SearchResult, offset?: number): void;
 
     /**
      * Similar to {@link fetch}, request a URL using HTTP/HTTPS, without any CORS restrictions.
@@ -622,10 +585,9 @@ declare module 'obsidian' {
      * console.log(await request('https://google.com'));
      * ```
      *
-     * @public
      * @official
      */
-    export function request(request: RequestUrlParam | string): Promise<string>;
+    function request(request: RequestUrlParam | string): Promise<string>;
 
     /**
      * Similar to {@link fetch}, request a URL using HTTP/HTTPS, without any CORS restrictions.
@@ -643,10 +605,9 @@ declare module 'obsidian' {
      * console.log(await requestUrl('https://google.com'));
      * ```
      *
-     * @public
      * @official
      */
-    export function requestUrl(request: RequestUrlParam | string): RequestUrlResponsePromise;
+    function requestUrl(request: RequestUrlParam | string): RequestUrlResponsePromise;
 
     /**
      * Returns `true` if the API version is equal or higher than the requested version.
@@ -661,10 +622,9 @@ declare module 'obsidian' {
      * console.log(requireApiVersion('1.8.9')); // true
      * ```
      *
-     * @public
      * @official
      */
-    export function requireApiVersion(version: string): boolean;
+    function requireApiVersion(version: string): boolean;
 
     /**
      * Resolve the given subpath to a reference in the MetadataCache.
@@ -678,10 +638,9 @@ declare module 'obsidian' {
      * console.log(resolveSubpath(cache, '#foo'));
      * ```
      *
-     * @public
      * @official
      */
-    export function resolveSubpath(
+    function resolveSubpath(
         cache: CachedMetadata,
         subpath: string
     ): HeadingSubpathResult | BlockSubpathResult | FootnoteSubpathResult | null;
@@ -697,10 +656,9 @@ declare module 'obsidian' {
      * console.log(sanitizeHTMLToDom('<div>foo</div>')); #document-fragment
      * ```
      *
-     * @public
      * @official
      */
-    export function sanitizeHTMLToDom(html: string): DocumentFragment;
+    function sanitizeHTMLToDom(html: string): DocumentFragment;
 
     /**
      * Insert an SVG into the element from an iconId. Does nothing if no icon associated with the iconId.
@@ -714,10 +672,9 @@ declare module 'obsidian' {
      * setIcon(document.body, 'dice');
      * ```
      *
-     * @public
      * @official
      */
-    export function setIcon(parent: HTMLElement, iconId: IconName): void;
+    function setIcon(parent: HTMLElement, iconId: IconName): void;
 
     /**
      * Set a tooltip on an element.
@@ -731,10 +688,9 @@ declare module 'obsidian' {
      * setTooltip(document.body, 'foo');
      * ```
      *
-     * @public
      * @official
      */
-    export function setTooltip(el: HTMLElement, tooltip: string, options?: TooltipOptions): void;
+    function setTooltip(el: HTMLElement, tooltip: string, options?: TooltipOptions): void;
 
     /**
      * Sort search results.
@@ -746,10 +702,9 @@ declare module 'obsidian' {
      * sortSearchResults([{ match: { score: 1, matches: [[0, 3]]} }]);
      * ```
      *
-     * @public
      * @official
      */
-    export function sortSearchResults(results: SearchResultContainer[]): void;
+    function sortSearchResults(results: SearchResultContainer[]): void;
 
     /**
      * Stringify a YAML object.
@@ -762,10 +717,9 @@ declare module 'obsidian' {
      * console.log(stringifyYaml({ foo: 'bar' })); // foo: bar
      * ```
      *
-     * @public
      * @official
      */
-    export function stringifyYaml(obj: any): string;
+    function stringifyYaml(obj: any): string;
 
     /**
      * Normalizes headings for link matching by stripping out special characters and shrinking consecutive spaces.
@@ -778,10 +732,9 @@ declare module 'obsidian' {
      * console.log(stripHeading('foo!"#$%&()*+,.:;<=>?@^`{|}~\/\[\]\\\r\nbar')); // foo bar
      * ```
      *
-     * @public
      * @official
      */
-    export function stripHeading(heading: string): string;
+    function stripHeading(heading: string): string;
 
     /**
      * Prepares headings for linking by stripping out some bad combinations of special characters that could break links.
@@ -794,8 +747,7 @@ declare module 'obsidian' {
      * console.log(stripHeadingForLink('foo:#|^\\\r\n%%[[]]bar')); // foo bar
      * ```
      *
-     * @public
      * @official
      */
-    export function stripHeadingForLink(heading: string): string;
+    function stripHeadingForLink(heading: string): string;
 }
