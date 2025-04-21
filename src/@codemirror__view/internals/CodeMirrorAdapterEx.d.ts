@@ -13,9 +13,7 @@ import type { VimEditor } from './Vim/VimEditor.d.ts';
  * @unofficial
  */
 export interface CodeMirrorAdapterEx {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     new(cm6: VimEditor): CodeMirrorEditor;
 
     /** @todo Documentation incomplete. */

@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface Localization {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     [key: string]: string | Localization;
 }
