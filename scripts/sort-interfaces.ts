@@ -21,6 +21,7 @@ import {
 import {
     ClassDeclaration,
     ExportDeclaration,
+    FunctionDeclaration,
     ImportDeclaration,
     InterfaceDeclaration,
     JSDocableNode,
@@ -30,8 +31,10 @@ import {
     ModuleDeclaration,
     Node,
     Project,
+    PropertyDeclaration,
+    PropertySignature,
     SourceFile,
-    StatementedNode,
+    SyntaxKind,
     type TextInsertableNode
 } from 'ts-morph';
 
@@ -102,11 +105,9 @@ async function sortModule(
 ): Promise<void> {
     const variables = module.getVariableStatements()
         .sort((a, b) => sortName(a.getDeclarations()[0], b.getDeclarations()[0]));
-    processMembers(module, variables, module.getSourceFile());
 
     const functions = module.getFunctions()
         .sort((a, b) => a.getText().localeCompare(b.getText()));
-    processMembers(module, functions, module.getSourceFile());
 
     const typeDeclarations = module.getTypeAliases().sort(sortName);
     const interfaceDeclarations = [...module.getEnums(), ...module.getClasses(), ...module.getInterfaces()].sort(
@@ -131,10 +132,10 @@ async function sortModule(
         })
         : parentModule;
 
-    addLeadingNewLine = addStatements(newModule, variables, true, addLeadingNewLine);
-    addStatements(newModule, functions, true, addLeadingNewLine);
-    addLeadingNewLine = addStatements(newModule, typeDeclarations, true, addLeadingNewLine);
-    addStatements(newModule, interfaceDeclarations, true, addLeadingNewLine);
+    addLeadingNewLine = addStatements(newModule, variables, true, addLeadingNewLine, module.getSourceFile());
+    addStatements(newModule, functions, true, addLeadingNewLine, module.getSourceFile());
+    addLeadingNewLine = addStatements(newModule, typeDeclarations, true, addLeadingNewLine, module.getSourceFile());
+    addStatements(newModule, interfaceDeclarations, true, addLeadingNewLine, module.getSourceFile());
 
     const moduleDeclarations = module.getModules();
     for (const submodule of moduleDeclarations) {
@@ -153,33 +154,54 @@ function sortClassDeclaration(declaration: ClassDeclaration): void {
     processMembers(declaration, declaration.getMembers(), declaration.getSourceFile());
 }
 
-function processMembers(declaration: TextInsertableNode, nodes: (Node & JSDocableNode)[], sourceFile: SourceFile): void {
+function processMembers(
+    declaration: TextInsertableNode & Node,
+    nodes: Node[],
+    sourceFile: SourceFile
+): void {
     const filePath = sourceFile.getFilePath();
     const isAugmentation = filePath.includes('augmentations');
 
     for (const node of nodes) {
-        let jsDoc = node.getJsDocs()[0];
-        if (!jsDoc) {
-            jsDoc = node.addJsDoc({
-                tags: [
-                    {
-                        tagName: 'todo',
-                        text: 'Documentation incomplete.',
-                        leadingTrivia: '\n'
-                    }
-                ]
-            });
-        }
+        console.warn(node.getKindName());
+        switch (node.getKind()) {
+            case SyntaxKind.CallSignature:
+            case SyntaxKind.ConstructSignature:
+            case SyntaxKind.FunctionDeclaration:
+            case SyntaxKind.GetAccessor:
+            case SyntaxKind.IndexSignature:
+            case SyntaxKind.MethodSignature:
+            case SyntaxKind.PropertySignature:
+            case SyntaxKind.VariableDeclaration:
+                const jsDocableNode = node as unknown as JSDocableNode;
+                let jsDoc = jsDocableNode.getJsDocs()[0];
+                if (!jsDoc) {
+                    jsDoc = jsDocableNode.addJsDoc({
+                        tags: [
+                            {
+                                tagName: 'todo',
+                                text: 'Documentation incomplete.',
+                                leadingTrivia: '\n'
+                            }
+                        ]
+                    });
+                }
 
-        if (
-            isAugmentation
-            && !jsDoc.getTags().some(tag => tag.getTagName() === 'unofficial' || tag.getTagName() === 'official')
-        ) {
-            jsDoc.addTag({
-                tagName: 'unofficial',
-                text: 'ERROR: Missing `@unofficial` or `@official` tag',
-                leadingTrivia: '\n'
-            });
+                if (
+                    isAugmentation
+                    && !jsDoc.getTags().some(tag =>
+                        tag.getTagName() === 'unofficial' || tag.getTagName() === 'official'
+                    )
+                ) {
+                    jsDoc.addTag({
+                        tagName: 'unofficial',
+                        text: 'ERROR: Missing `@unofficial` or `@official` tag',
+                        leadingTrivia: '\n'
+                    });
+                }
+                break;
+            default:
+                return;
         }
     }
 
@@ -221,9 +243,9 @@ async function parseFile(file: string, output_file: string = file): Promise<void
         .map(declaration => fixImport(declaration, file))
         .sort((a, b) => sortFilesystemSpecifier(a, b) || sortSpecifierName(a, b));
 
-    addStatements(newFile, imports, false, false);
+    addStatements(newFile, imports, false, false, sourceFile);
     let addLeadingNewLine = imports.length > 0;
-    addLeadingNewLine = addStatements(newFile, exports, false, addLeadingNewLine);
+    addLeadingNewLine = addStatements(newFile, exports, false, addLeadingNewLine, sourceFile);
 
     sortModule(sourceFile, newFile, addLeadingNewLine);
 
@@ -293,10 +315,11 @@ function fixExport(declaration: ExportDeclaration, file: string): ExportDeclarat
 }
 
 function addStatements(
-    statementedNode: StatementedNode,
+    statementedNode: ModuleDeclaration | SourceFile,
     nodes: Node[],
     useNewLineBetweenNodes: boolean,
-    addLeadingNewLine: boolean
+    addLeadingNewLine: boolean,
+    sourceFile: SourceFile
 ): boolean {
     if (nodes.length === 0) {
         return addLeadingNewLine;
@@ -304,7 +327,8 @@ function addStatements(
 
     const statements = (addLeadingNewLine ? '\n' : '')
         + nodes.map(node => node.getText(true)).join(useNewLineBetweenNodes ? '\n\n' : '\n');
-    statementedNode.addStatements(statements);
+    const newStatements = statementedNode.addStatements(statements);
+    processMembers(statementedNode, newStatements, sourceFile);
     return false;
 }
 
