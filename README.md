@@ -155,7 +155,10 @@ With these scary disclaimers out of the way, hopefully these typings will help y
 > `@remark` tags give some warnings about the inputs/outputs of the function, or provide better alternatives.
 >
 > `@tutorial` gives additional information on how to use the function in your plugin.
-
+>
+> `@official` comes from the [official API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
+>
+> `@unofficial` comes from reverse-engineering.
 
 ## Migration
 
