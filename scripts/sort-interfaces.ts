@@ -105,7 +105,9 @@ async function sortModule(
         .sort((a, b) => a.getText().localeCompare(b.getText()));
 
     const typeDeclarations = module.getTypeAliases().sort(sortName);
-    const interfaceDeclarations = [...module.getClasses(), ...module.getInterfaces()].sort(sortName);
+    const interfaceDeclarations = [...module.getEnums(), ...module.getClasses(), ...module.getInterfaces()].sort(
+        sortName
+    );
 
     // NOTE: This is pretty slow, not sure what the proper way to sort properties would be
     for (const declaration of interfaceDeclarations) {
