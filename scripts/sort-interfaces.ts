@@ -21,7 +21,6 @@ import {
 import {
     ClassDeclaration,
     ExportDeclaration,
-    FunctionDeclaration,
     ImportDeclaration,
     InterfaceDeclaration,
     JSDocableNode,
@@ -31,8 +30,6 @@ import {
     ModuleDeclaration,
     Node,
     Project,
-    PropertyDeclaration,
-    PropertySignature,
     SourceFile,
     SyntaxKind,
     type TextInsertableNode
