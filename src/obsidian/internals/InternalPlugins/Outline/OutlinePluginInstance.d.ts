@@ -7,18 +7,12 @@ import type { OutlinePlugin } from './OutlinePlugin.d.ts';
  * @unofficial
  */
 export interface OutlinePluginInstance extends InternalPluginInstance<OutlinePlugin> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     app: App;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     defaultOn: true;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     plugin: OutlinePlugin;
 }

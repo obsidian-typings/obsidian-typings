@@ -9,14 +9,10 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  * @unofficial
  */
 export interface GraphView extends ItemView {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     dataEngine: GraphEngine;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     renderer: GraphRenderer;
 
     /**

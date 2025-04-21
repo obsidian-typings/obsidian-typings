@@ -5,13 +5,9 @@ import type { EditorPosition } from 'obsidian';
  * @unofficial
  */
 export interface EditorRangeEx {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     from: EditorPosition | null;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     to: EditorPosition | null;
 }

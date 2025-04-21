@@ -3,18 +3,12 @@
  * @unofficial
  */
 export interface GetTypeInfoOptions {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     key: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     type: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     value: unknown;
 }

@@ -5,18 +5,12 @@
  * @unofficial
  */
 export interface WorkerResults {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     buffer: SharedArrayBuffer;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     id: number[];
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     v?: number;
 }

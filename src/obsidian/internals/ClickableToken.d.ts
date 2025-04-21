@@ -5,23 +5,15 @@ import type { EditorPosition } from 'obsidian';
  * @unofficial
  */
 export interface ClickableToken {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     end: EditorPosition;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     start: EditorPosition;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     text: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     type: string;
 }

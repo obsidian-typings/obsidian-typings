@@ -96,9 +96,7 @@ export interface AppSetting extends Modal {
      */
     openTab(tab: SettingTab): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     openTabById(id: 'hotkeys'): HotkeysSettingTab;
 
     /**

@@ -5,33 +5,21 @@ import type { App } from 'obsidian';
  * @unofficial
  */
 export interface CanvasDataManager {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     app: App;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     handleDelete(arg1: unknown): unknown;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     handleRename(arg1: unknown, arg2: unknown): unknown;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     load(arg1: unknown): unknown;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     remove(arg1: unknown): unknown;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     save(arg1: unknown, arg2: unknown): unknown;
 }

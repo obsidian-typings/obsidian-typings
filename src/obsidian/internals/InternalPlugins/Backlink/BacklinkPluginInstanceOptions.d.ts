@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface BacklinkPluginInstanceOptions {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     backlinkInDocument?: boolean;
 }

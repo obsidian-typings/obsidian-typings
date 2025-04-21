@@ -5,33 +5,21 @@ import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
  * @unofficial
  */
 export interface CodeMirrorAdapterExCommands {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     cursorCharLeft(editor: CodeMirrorEditor): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     indentAuto(editor: CodeMirrorEditor): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     newlineAndIndent(editor: CodeMirrorEditor): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     newlineAndIndentBefore(editor: CodeMirrorEditor): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     redo(editor: CodeMirrorEditor): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     undo(editor: CodeMirrorEditor): void;
 }

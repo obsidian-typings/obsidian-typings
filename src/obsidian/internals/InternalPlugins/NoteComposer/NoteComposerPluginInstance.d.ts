@@ -16,58 +16,36 @@ import type { NoteComposerPluginOptions } from './NoteComposerPluginOptions.d.ts
  * @unofficial
  */
 export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteComposerPlugin> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     app: App;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     defaultOn: true;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     onEnable: (app: App, plugin: NoteComposerPlugin) => Promise<void>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     options: NoteComposerPluginOptions;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     pluginInstance: NoteComposerPlugin;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     applyTemplate(content: string, fromTitle: string, newTitle: string): Promise<string>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     extractHeading(file: TFile, editor: Editor): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     getSelectionUnderHeading(file: TFile, editor: Editor, line: number): HeadingInfo | null;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     onEditorMenu(menu: Menu, editor: Editor, info: MarkdownView | MarkdownFileInfo): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     onExternalSettingsChange(): Promise<void>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     onFileMenu(menu: Menu, file: TFile, source: string): void;
 }

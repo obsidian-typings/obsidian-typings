@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface SetBookmarkOptions {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     insertLeft?: boolean;
 }

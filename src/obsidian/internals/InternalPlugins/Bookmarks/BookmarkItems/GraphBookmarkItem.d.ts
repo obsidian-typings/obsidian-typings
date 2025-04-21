@@ -6,18 +6,12 @@ import type { BookmarkItem } from './BookmarkItem.d.ts';
  * @unofficial
  */
 export interface GraphBookmarkItem extends BookmarkItem {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     options: GraphPluginInstanceOptions;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     title: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     type: 'graph';
 }

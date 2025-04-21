@@ -40,8 +40,6 @@ export interface EmbedContext {
      */
     sourcePath?: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     state?: unknown;
 }

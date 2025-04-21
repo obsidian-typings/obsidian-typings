@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface MobileFileInfo {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     renderCallback(el: HTMLElement): void;
 }

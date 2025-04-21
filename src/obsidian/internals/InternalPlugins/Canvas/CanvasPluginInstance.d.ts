@@ -14,48 +14,30 @@ import type { CanvasPluginInstanceOptions } from './CanvasPluginInstanceOptions.
  * @unofficial
  */
 export interface CanvasPluginInstance extends InternalPluginInstance<CanvasPlugin> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     app: App;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     defaultOn: true;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     index: CanvasIndex;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     localDataManager: CanvasDataManager;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     options: CanvasPluginInstanceOptions;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     plugin: CanvasPlugin;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     renameQueue: PromisedQueue;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     renames: unknown[];
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     requestProcessRename: Debouncer<[], unknown>;
 }

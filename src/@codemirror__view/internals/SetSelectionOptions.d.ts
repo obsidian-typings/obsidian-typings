@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface SetSelectionOptions {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     origin?: string;
 }

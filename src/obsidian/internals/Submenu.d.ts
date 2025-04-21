@@ -3,13 +3,9 @@
  * @unofficial
  */
 export interface Submenu {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     icon: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     title: string;
 }

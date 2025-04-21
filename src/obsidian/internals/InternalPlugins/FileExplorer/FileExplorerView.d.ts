@@ -44,9 +44,7 @@ export interface FileExplorerView extends View {
      */
     afterCreate(file: TFile, newLeaf: PaneType | boolean): Promise<void>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     attachDropHandler(x: unknown, y: unknown, z: unknown): unknown;
 
     /** @todo Documentation incomplete */

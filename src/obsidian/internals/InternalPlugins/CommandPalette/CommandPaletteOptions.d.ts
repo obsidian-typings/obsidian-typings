@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface CommandPaletteOptions {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     pinned: string[];
 }

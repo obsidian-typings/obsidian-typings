@@ -80,14 +80,17 @@ export interface EmbeddedEditorView extends Component {
      * Whether the view renders contents using an iFrame.
      */
     useIframe: boolean;
+
     /**
      * Get the preview editor, if exists.
      */
     get editor(): IFramedMarkdownEditor | null;
+
     /**
      * Get the path to the file, if any file registered.
      */
     get path(): string;
+
     /**
      * Get the scroll of the file renderer component.
      */

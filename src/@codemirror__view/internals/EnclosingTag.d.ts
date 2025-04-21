@@ -5,13 +5,9 @@ import type { EditorRangeEx } from './EditorRangeEx.d.ts';
  * @unofficial
  */
 export interface EnclosingTag {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     close: EditorRangeEx;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     open: EditorRangeEx;
 }

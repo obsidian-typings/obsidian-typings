@@ -5,18 +5,12 @@ import type { EditorPosition } from 'obsidian';
  * @unofficial
  */
 export interface HeadingInfo {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     end: EditorPosition;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     heading: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     start: EditorPosition;
 }

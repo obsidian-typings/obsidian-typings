@@ -5,18 +5,12 @@ import type { BookmarkItem } from './BookmarkItem.d.ts';
  * @unofficial
  */
 export interface UrlBookmarkItem extends BookmarkItem {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     title: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     type: 'url';
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     url: string;
 }

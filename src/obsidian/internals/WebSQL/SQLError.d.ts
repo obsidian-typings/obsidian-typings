@@ -3,13 +3,9 @@
  * @unofficial
  */
 export interface SQLError {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     code: number;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     message: string;
 }

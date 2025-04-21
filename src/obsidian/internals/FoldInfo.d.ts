@@ -6,13 +6,9 @@ import type { Fold } from './Fold.d.ts';
  * @unofficial
  */
 export interface FoldInfo {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     folds: Fold[];
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     lines: number;
 }

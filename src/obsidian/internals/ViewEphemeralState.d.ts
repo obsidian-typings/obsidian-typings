@@ -5,18 +5,12 @@ import type { EditorRangeOrCaret } from 'obsidian';
  * @unofficial
  */
 export interface ViewEphemeralState {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     cursor?: EditorRangeOrCaret;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     focus: boolean;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     focusOnMobile: boolean;
 }

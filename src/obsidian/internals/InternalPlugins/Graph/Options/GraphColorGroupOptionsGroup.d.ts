@@ -8,18 +8,12 @@ import type {
  * @unofficial
  */
 export interface GraphColorGroupOptionsGroup {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     color: ColorComponent;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     el: HTMLDivElement;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     query: TextComponent;
 }

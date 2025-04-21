@@ -7,8 +7,6 @@ import type { BacklinkPluginViews } from './BacklinkPluginViews.d.ts';
  * @unofficial
  */
 export interface BacklinkPlugin extends InternalPlugin<BacklinkPluginInstance> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     views: BacklinkPluginViews;
 }

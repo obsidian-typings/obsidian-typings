@@ -5,13 +5,9 @@ import type { BookmarkItem } from './BookmarkItem.d.ts';
  * @unofficial
  */
 export interface SearchBookmarkItem extends BookmarkItem {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     query: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     type: 'search';
 }

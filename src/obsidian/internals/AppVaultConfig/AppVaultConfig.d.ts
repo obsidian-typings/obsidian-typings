@@ -68,9 +68,7 @@ export interface AppVaultConfig {
      */
     defaultViewMode?: 'source' | 'preview';
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     emacsyKeys?: true | boolean;
 
     /**
@@ -78,9 +76,7 @@ export interface AppVaultConfig {
      */
     enabledCssSnippets?: string[];
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     fileSortOrder?: 'alphabetical';
 
     /**
@@ -115,9 +111,7 @@ export interface AppVaultConfig {
      */
     legacyEditor?: false | boolean;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     livePreview?: true | boolean;
 
     /**
@@ -125,9 +119,7 @@ export interface AppVaultConfig {
      */
     mobilePullAction?: 'command-palette:open' | string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     mobileQuickRibbonItem?: '' | string;
 
     /**
@@ -135,9 +127,7 @@ export interface AppVaultConfig {
      */
     mobileToolbarCommands?: string[];
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     monospaceFontFamily?: '' | string;
 
     /**

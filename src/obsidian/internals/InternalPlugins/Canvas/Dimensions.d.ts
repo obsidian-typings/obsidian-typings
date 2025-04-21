@@ -3,13 +3,9 @@
  * @unofficial
  */
 export interface Dimensions {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     height: number;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     width: number;
 }

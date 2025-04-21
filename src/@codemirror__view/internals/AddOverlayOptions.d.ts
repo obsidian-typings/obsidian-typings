@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface AddOverlayOptions {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     query: RegExp;
 }

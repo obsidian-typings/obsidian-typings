@@ -5,13 +5,9 @@ import type { StateHistory } from './StateHistory.d.ts';
  * @unofficial
  */
 export interface StateHistoryLeafHistory {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     backHistory: StateHistory[];
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     forwardHistory: StateHistory[];
 }

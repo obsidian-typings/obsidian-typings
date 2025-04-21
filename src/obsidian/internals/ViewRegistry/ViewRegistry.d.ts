@@ -31,9 +31,7 @@ export interface ViewRegistry extends Events {
      */
     getTypeByExtension(extension: string): string | undefined;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     getViewCreatorByType(type: string): ViewCreator | undefined;
 
     /**

@@ -3,13 +3,9 @@
  * @unofficial
  */
 export interface CanvasViewCanvasEdgeLineEnd {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     el: SVGGElement;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     type: string;
 }

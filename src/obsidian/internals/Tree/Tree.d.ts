@@ -80,6 +80,7 @@ export interface Tree<T> {
      * The view the tree is associated with.
      */
     view: View;
+
     /**
      * Root item of the tree view.
      */

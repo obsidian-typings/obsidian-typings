@@ -10,9 +10,7 @@ import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
  * @unofficial
  */
 export interface PdfView extends EditableFileView {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     viewer: unknown;
 
     /**

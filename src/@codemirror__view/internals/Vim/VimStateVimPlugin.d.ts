@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface VimStateVimPlugin {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     lastKeydown: string;
 }

@@ -5,13 +5,9 @@ import type { EditorRange } from 'obsidian';
  * @unofficial
  */
 export interface StateHistoryEphemeralState {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     cursor: EditorRange;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     scroll: number;
 }

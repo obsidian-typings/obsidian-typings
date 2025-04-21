@@ -7,18 +7,12 @@ import type { PropertiesPlugin } from './PropertiesPlugin.d.ts';
  * @unofficial
  */
 export interface PropertiesPluginInstance extends InternalPluginInstance<PropertiesPlugin> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     app: App;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     defaultOn: false;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     plugin: PropertiesPlugin;
 }

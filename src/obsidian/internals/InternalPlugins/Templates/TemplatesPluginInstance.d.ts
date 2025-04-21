@@ -7,18 +7,12 @@ import type { TemplatesPlugin } from './TemplatesPlugin.d.ts';
  * @unofficial
  */
 export interface TemplatesPluginInstance extends InternalPluginInstance<TemplatesPlugin> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     app: App;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     defaultOn: true;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     plugin: TemplatesPlugin;
 }

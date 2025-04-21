@@ -42,9 +42,7 @@ export interface Plugins {
      */
     plugins: PluginsPluginsRecord;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     requestSaveConfig: Debouncer<[], Promise<void>>;
 
     /**
@@ -127,9 +125,7 @@ export interface Plugins {
      */
     loadPlugin(id: string): Promise<Plugin>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     onRaw(e: unknown): void;
 
     /**

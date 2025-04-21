@@ -8,13 +8,9 @@ import type {
  * @unofficial
  */
 export interface MarkdownViewModes {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     preview: MarkdownPreviewView;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     source: MarkdownEditView;
 }

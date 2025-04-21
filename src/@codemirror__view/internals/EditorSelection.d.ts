@@ -5,13 +5,9 @@ import type { EditorPosition } from 'obsidian';
  * @unofficial
  */
 export interface EditorSelection {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     anchor: EditorPosition;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     head: EditorPosition;
 }

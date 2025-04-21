@@ -6,13 +6,9 @@ import type { CanvasViewDataNode } from './CanvasViewDataNode.d.ts';
  * @unofficial
  */
 export interface CanvasViewData {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     edges: CanvasViewDataEdge[];
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     nodes: CanvasViewDataNode[];
 }

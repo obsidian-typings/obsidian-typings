@@ -6,13 +6,9 @@ import type { ResultProperty } from './ResultProperty.d.ts';
  * @unofficial
  */
 export interface ResultDomResult {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     content: ContentPosition[];
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     properties: ResultProperty[];
 }

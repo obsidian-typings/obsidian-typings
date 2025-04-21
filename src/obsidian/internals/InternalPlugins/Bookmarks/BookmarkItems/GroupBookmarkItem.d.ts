@@ -5,18 +5,12 @@ import type { BookmarkItem } from './BookmarkItem.d.ts';
  * @unofficial
  */
 export interface GroupBookmarkItem extends BookmarkItem {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     items: BookmarkItem[];
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     title: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     type: 'group';
 }

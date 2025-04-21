@@ -8,9 +8,7 @@ import type { BacklinkComponent } from './BacklinkComponent.d.ts';
  * @unofficial
  */
 export interface BacklinkView extends InfoFileView {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     backlink: BacklinkComponent;
 
     /**

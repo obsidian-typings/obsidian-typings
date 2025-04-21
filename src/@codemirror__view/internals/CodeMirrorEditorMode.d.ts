@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface CodeMirrorEditorMode {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     name: string;
 }

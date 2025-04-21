@@ -5,18 +5,12 @@ import type { ContentPosition } from './ContentPosition.d.ts';
  * @unofficial
  */
 export interface ResultProperty {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     key: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     pos: ContentPosition;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     subkey: (number | string)[];
 }

@@ -41,9 +41,7 @@ export interface HotkeyManager {
      */
     defaultKeys: HotkeyManagerDefaultKeysRecord;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     onConfigFileChange: Debouncer<[], Promise<void>>;
 
     /**
@@ -78,9 +76,7 @@ export interface HotkeyManager {
      */
     load(): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     onRaw(e: unknown): void;
 
     /**
@@ -98,9 +94,7 @@ export interface HotkeyManager {
      */
     printHotkeyForCommand(commandId: string): string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     registerListeners(): void;
 
     /**

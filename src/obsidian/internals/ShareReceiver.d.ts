@@ -6,9 +6,7 @@ import type { SharedFile } from './SharedFile.d.ts';
  * @unofficial
  */
 export interface ShareReceiver {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     app: App;
 
     /**

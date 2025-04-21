@@ -7,18 +7,12 @@ import type { WordCountPlugin } from './WordCountPlugin.d.ts';
  * @unofficial
  */
 export interface WordCountPluginInstance extends InternalPluginInstance<WordCountPlugin> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     app: App;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     defaultOn: true;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     plugin: WordCountPlugin;
 }

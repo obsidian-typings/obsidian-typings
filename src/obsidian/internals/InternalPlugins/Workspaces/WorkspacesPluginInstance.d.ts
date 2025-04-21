@@ -7,13 +7,9 @@ import type { WorkspacesPlugin } from './WorkspacesPlugin.d.ts';
  * @unofficial
  */
 export interface WorkspacesPluginInstance extends InternalPluginInstance<WorkspacesPlugin> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     app: App;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     plugin: WorkspacesPlugin;
 }

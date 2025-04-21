@@ -5,8 +5,6 @@ import type { EditorPosition } from 'obsidian';
  * @unofficial
  */
 export interface MatchingBracket {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     to?: EditorPosition;
 }

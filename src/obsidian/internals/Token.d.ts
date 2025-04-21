@@ -6,13 +6,9 @@ import type { EditorRange } from 'obsidian';
  * @unofficial
  */
 export interface Token extends EditorRange {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     text: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     type: 'tag' | 'external-link' | 'internal-link';
 }

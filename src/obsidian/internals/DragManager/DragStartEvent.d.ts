@@ -3,13 +3,9 @@
  * @unofficial
  */
 export interface DragStartEvent {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     evt: DragEvent;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     moved: boolean;
 }

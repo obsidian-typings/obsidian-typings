@@ -5,8 +5,6 @@ import type { HighlightOutliner } from './HighlightOutliner.d.ts';
  * @unofficial
  */
 export interface PdfJsTestingUtils {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     HighlightOutliner: HighlightOutliner;
 }

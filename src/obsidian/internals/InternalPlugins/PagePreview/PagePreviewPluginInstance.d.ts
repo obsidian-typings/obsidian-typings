@@ -7,13 +7,9 @@ import type { PagePreviewPlugin } from './PagePreviewPlugin.d.ts';
  * @unofficial
  */
 export interface PagePreviewPluginInstance extends InternalPluginInstance<PagePreviewPlugin> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     app: App;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     defaultOn: true;
 }

@@ -12,19 +12,13 @@ import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
  * @unofficial
  */
 export interface CanvasView extends TextFileView {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     canvas: CanvasViewCanvas;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     hoverPopover: null | HoverPopover;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     plugin: CanvasPluginInstance;
 
     /**

@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface MarkdownViewSourceMode {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     cmEditor: unknown;
 }

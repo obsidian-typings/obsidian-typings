@@ -3,13 +3,9 @@
  * @unofficial
  */
 export interface LineHandle {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     index: number;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     row: number;
 }

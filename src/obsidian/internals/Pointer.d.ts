@@ -3,13 +3,9 @@
  * @unofficial
  */
 export interface Pointer {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     x: number;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     y: number;
 }

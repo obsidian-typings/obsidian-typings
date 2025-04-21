@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface HoverLinkEventState {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     scroll: unknown;
 }

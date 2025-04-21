@@ -8,13 +8,9 @@ import type {
  * @unofficial
  */
 export interface HotkeysSettingTab extends SettingTab {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     searchComponent: SearchComponent;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     updateHotkeyVisibility(): void;
 }

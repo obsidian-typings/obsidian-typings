@@ -41,24 +41,16 @@ export interface CustomCSS extends Component {
      */
     oldThemes: string[];
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     queue: PromisedQueue;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     requestLoadSnippets: Debouncer<[], void>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     requestLoadTheme: Debouncer<[], void>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     requestReadThemes: Debouncer<[], void>;
 
     /**
@@ -78,14 +70,10 @@ export interface CustomCSS extends Component {
      */
     themes: CustomCSSThemesRecord;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     updates: CustomCSSUpdatesRecord;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     boundRaw(themeName: string): void;
 
     /**
@@ -171,44 +159,28 @@ export interface CustomCSS extends Component {
      */
     isThemeInstalled(themeName: string): boolean;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     loadCss(arg1: unknown): Promise<unknown>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     loadData(): unknown;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     loadSnippets(): unknown;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     loadTheme(arg1: unknown): unknown;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     onload(): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     onRaw(themeName: string): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     readSnippets(): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     readThemes(): void;
 
     /**

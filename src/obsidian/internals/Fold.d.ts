@@ -3,13 +3,9 @@
  * @unofficial
  */
 export interface Fold {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     from: number;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     to: number;
 }

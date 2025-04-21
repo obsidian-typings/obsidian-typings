@@ -5,28 +5,18 @@ import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
  * @unofficial
  */
 export interface NodeInteractionLayer {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     canvas: CanvasViewCanvas;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     interactionEl: HTMLDivElement;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     target: null;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     render(): unknown;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     setTarget(arg1: unknown): unknown;
 }

@@ -9,8 +9,6 @@ import type { BookmarksView } from './BookmarksView.d.ts';
  * @unofficial
  */
 export interface BookmarksPluginViews extends Record<string, ViewCreator> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     bookmarks(left: WorkspaceLeaf): BookmarksView;
 }

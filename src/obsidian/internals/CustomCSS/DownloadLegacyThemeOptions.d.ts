@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface DownloadLegacyThemeOptions {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     repo: string;
 }

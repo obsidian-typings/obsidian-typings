@@ -5,13 +5,9 @@ import type { PropertyWidgetType } from './PropertyWidgetType.d.ts';
  * @unofficial
  */
 export interface PropertyWidgetEntry {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     name: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     type: PropertyWidgetType;
 }

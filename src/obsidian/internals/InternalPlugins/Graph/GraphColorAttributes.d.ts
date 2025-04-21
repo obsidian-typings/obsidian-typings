@@ -3,13 +3,9 @@
  * @unofficial
  */
 export interface GraphColorAttributes {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     a: number;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     rgb: number;
 }

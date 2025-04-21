@@ -99,14 +99,17 @@ export interface MarkdownBaseView extends Component {
      * Reference to editor attached to table cell, if any.
      */
     tableCell: null | TableCellEditor;
+
     /**
      * Currently active CM instance (table cell CM or main CM).
      */
     get activeCM(): EditorView;
+
     /**
      * Returns attached file of the owner instance.
      */
     get file(): TFile | null;
+
     /**
      * Returns path of the attached file.
      */

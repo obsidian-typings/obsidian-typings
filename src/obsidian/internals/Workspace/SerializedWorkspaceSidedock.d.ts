@@ -5,13 +5,9 @@ import type { SerializedWorkspaceItem } from './SerializedWorkspaceItem.d.ts';
  * @unofficial
  */
 export interface SerializedWorkspaceSidedock extends SerializedWorkspaceItem {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     collapsed: boolean;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     width: number;
 }

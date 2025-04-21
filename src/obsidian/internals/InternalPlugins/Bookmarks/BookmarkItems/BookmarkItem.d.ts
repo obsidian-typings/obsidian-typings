@@ -3,13 +3,9 @@
  * @unofficial
  */
 export interface BookmarkItem {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     ctime: number;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     type: 'file' | 'folder' | 'group' | 'graph' | 'search' | 'url';
 }

@@ -7,18 +7,12 @@ import type { TagPanePlugin } from './TagPanePlugin.d.ts';
  * @unofficial
  */
 export interface TagPanePluginInstance extends InternalPluginInstance<TagPanePlugin> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     app: App;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     defaultOn: true;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     plugin: TagPanePlugin;
 }

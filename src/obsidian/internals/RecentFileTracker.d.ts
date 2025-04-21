@@ -25,9 +25,7 @@ export interface RecentFileTracker {
      */
     workspace: Workspace;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     collect(file: TFile): void;
 
     /**

@@ -32,10 +32,12 @@ export interface SuggestionContainer<T> {
      * List of all possible suggestions as data.
      */
     values: SearchResult[];
+
     /**
      * Amount of suggestions that can be displayed at once within containerEl.
      */
     get numVisibleItems(): number;
+
     /**
      * Height in pixels of the selected item.
      */

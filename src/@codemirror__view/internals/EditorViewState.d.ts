@@ -3,8 +3,6 @@
  * @unofficial
  */
 export interface EditorViewState {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     printing: boolean;
 }

@@ -6,8 +6,6 @@ import type { LinkUpdater } from './LinkUpdater.d.ts';
  * @unofficial
  */
 export interface LinkUpdaters extends Record<string, LinkUpdater> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     canvas?: CanvasLinkUpdater;
 }

@@ -3,13 +3,9 @@
  * @unofficial
  */
 export interface CanvasViewCanvasEdgePath {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     display: SVGPathElement;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     interaction: SVGPathElement;
 }

@@ -7,13 +7,9 @@ import type { SyncPlugin } from './SyncPlugin.d.ts';
  * @unofficial
  */
 export interface SyncPluginInstance extends InternalPluginInstance<SyncPlugin> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     app: App;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     plugin: SyncPlugin;
 }

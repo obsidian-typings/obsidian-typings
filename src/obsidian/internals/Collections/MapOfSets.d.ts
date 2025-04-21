@@ -3,28 +3,18 @@
  * @unofficial
  */
 export interface MapOfSets<Key, Value> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     data: Map<Key, Set<Value>>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     add(key: Key, value: Value): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     delete(key: Key, value: Value): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     get(key: Key): Set<Value> | null;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     getArray(key: Key): Value[];
 }

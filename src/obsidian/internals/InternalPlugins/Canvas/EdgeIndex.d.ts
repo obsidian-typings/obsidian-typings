@@ -6,28 +6,18 @@ import type { EdgeIndexData } from './EdgeIndexData.d.ts';
  * @unofficial
  */
 export interface EdgeIndex extends EdgeIndexBase {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     _maxEntries: number;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     _minEntries: number;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     data: EdgeIndexData;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     compareMinX(arg1: unknown, arg2: unknown): unknown;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     compareMinY(arg1: unknown, arg2: unknown): unknown;
 }

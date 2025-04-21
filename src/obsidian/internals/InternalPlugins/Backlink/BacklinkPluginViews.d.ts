@@ -9,8 +9,6 @@ import type { BacklinkView } from './BacklinkView.d.ts';
  * @unofficial
  */
 export interface BacklinkPluginViews extends Record<string, ViewCreator> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     backlink(left: WorkspaceLeaf): BacklinkView;
 }

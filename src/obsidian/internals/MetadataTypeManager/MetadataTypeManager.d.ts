@@ -23,9 +23,7 @@ export interface MetadataTypeManager extends Events {
      */
     app: App;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     onConfigFileChange: Debouncer<[], Promise<void>>;
 
     /**
@@ -73,14 +71,10 @@ export interface MetadataTypeManager extends Events {
      */
     loadData(): Promise<void>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     onRaw(e: unknown): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     registerListeners(): void;
 
     /**

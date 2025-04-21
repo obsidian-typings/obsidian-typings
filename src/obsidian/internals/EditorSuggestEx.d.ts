@@ -5,13 +5,9 @@ import type { EditorSuggest } from 'obsidian';
  * @unofficial
  */
 export interface EditorSuggestEx {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     currentSuggest?: EditorSuggest<unknown>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     suggests: EditorSuggest<unknown>[];
 }
