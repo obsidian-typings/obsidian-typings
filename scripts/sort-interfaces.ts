@@ -163,14 +163,16 @@ function processMembers(
     const isAugmentation = filePath.includes('augmentations');
 
     for (const node of nodes) {
-        console.warn(node.getKindName());
         switch (node.getKind()) {
             case SyntaxKind.CallSignature:
+            case SyntaxKind.Constructor:
             case SyntaxKind.ConstructSignature:
             case SyntaxKind.FunctionDeclaration:
             case SyntaxKind.GetAccessor:
             case SyntaxKind.IndexSignature:
+            case SyntaxKind.MethodDeclaration:
             case SyntaxKind.MethodSignature:
+            case SyntaxKind.PropertyDeclaration:
             case SyntaxKind.PropertySignature:
             case SyntaxKind.VariableDeclaration:
                 const jsDocableNode = node as unknown as JSDocableNode;
