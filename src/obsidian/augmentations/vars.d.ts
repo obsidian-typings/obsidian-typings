@@ -3,7 +3,7 @@ import type {
     EditorView,
     ViewPlugin
 } from '@codemirror/view';
-import type * as Moment from 'moment';
+import type { default as moment } from 'moment';
 
 export {};
 
@@ -64,7 +64,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link moment} instead.
      */
-    const moment__: typeof Moment;
+    const moment__: typeof moment;
 
     /**
      * Information about the current platform.
