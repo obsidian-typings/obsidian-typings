@@ -3,7 +3,9 @@
  *
  * @param path - The path to get the parent folder path of.
  * @returns The parent folder path.
- * @public @unofficial
+ *
+ * @public
+ * @unofficial
  */
 export function parentFolderPath(path: string): string {
     return path.replace(/\/?[^\/]*$/, '') || '/';

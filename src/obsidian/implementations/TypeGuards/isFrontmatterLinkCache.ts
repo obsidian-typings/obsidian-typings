@@ -8,7 +8,9 @@ import type {
  *
  * @param reference - The reference to check.
  * @returns Whether the reference is a frontmatter link cache.
- * @public @unofficial
+ *
+ * @public
+ * @unofficial
  */
 export function isFrontmatterLinkCache(reference: Reference): reference is FrontmatterLinkCache {
     return !!(reference as Partial<FrontmatterLinkCache>).key;

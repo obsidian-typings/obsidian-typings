@@ -8,7 +8,9 @@ import { parentFolderPath } from '../Utils/PathUtils.ts';
 /**
  * Creates and properly initializes the instance of TFolder even the underlying folder does not exist.
  * This doesn't create the missing folder on the file system.
- * @public @unofficial
+ *
+ * @public
+ * @unofficial
  */
 export function createTFolderInstance(app: App, path: string): TFolder {
     let folder = app.vault.getFolderByPath(path);

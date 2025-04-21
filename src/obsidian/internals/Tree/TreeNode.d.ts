@@ -3,7 +3,9 @@ import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
 
 /**
  * @todo Documentation incomplete.
- * @public @unofficial
+ *
+ * @public
+ * @unofficial
  */
 export type TreeNode<T = object, Child = T, Owner = T> = T & {
     childrenEl: HTMLElement;

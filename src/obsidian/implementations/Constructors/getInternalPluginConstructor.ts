@@ -6,7 +6,9 @@ import type { InternalPluginConstructor } from '../../internals/Constructors/Int
  *
  * @param app - The app instance.
  * @returns The InternalPlugin constructor.
- * @public @unofficial
+ *
+ * @public
+ * @unofficial
  */
 export function getInternalPluginConstructor<Instance>(app: App): InternalPluginConstructor<Instance> {
     const anyPlugin = Object.values(app.internalPlugins.plugins)[0];

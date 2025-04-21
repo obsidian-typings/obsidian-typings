@@ -1,6 +1,9 @@
 import type { CapacitorAdapterFs } from './CapacitorAdapterFs.d.ts';
 
 /**
- * @public @unofficial
+ * The constructor for the CapacitorAdapterFs class.
+ *
+ * @public
+ * @unofficial
  */
 export type CapacitorAdapterFsConstructor = new(dir: string) => CapacitorAdapterFs;
