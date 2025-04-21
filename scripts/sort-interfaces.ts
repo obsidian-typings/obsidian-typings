@@ -23,6 +23,7 @@ import {
     ExportDeclaration,
     ImportDeclaration,
     InterfaceDeclaration,
+    JSDocableNode,
     MethodDeclaration,
     type MethodDeclarationStructure,
     MethodSignature,
@@ -30,7 +31,8 @@ import {
     Node,
     Project,
     SourceFile,
-    StatementedNode
+    StatementedNode,
+    type TextInsertableNode
 } from 'ts-morph';
 
 interface Nameable {
@@ -100,9 +102,11 @@ async function sortModule(
 ): Promise<void> {
     const variables = module.getVariableStatements()
         .sort((a, b) => sortName(a.getDeclarations()[0], b.getDeclarations()[0]));
+    processMembers(module, variables, module.getSourceFile());
 
     const functions = module.getFunctions()
         .sort((a, b) => a.getText().localeCompare(b.getText()));
+    processMembers(module, functions, module.getSourceFile());
 
     const typeDeclarations = module.getTypeAliases().sort(sortName);
     const interfaceDeclarations = [...module.getEnums(), ...module.getClasses(), ...module.getInterfaces()].sort(
@@ -146,17 +150,17 @@ function sortClassDeclaration(declaration: ClassDeclaration): void {
     structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
     declaration.set(structure);
 
-    processClassInterfaceDeclaration(declaration);
+    processMembers(declaration, declaration.getMembers(), declaration.getSourceFile());
 }
 
-function processClassInterfaceDeclaration(declaration: ClassDeclaration | InterfaceDeclaration): void {
-    const filePath = declaration.getSourceFile().getFilePath();
+function processMembers(declaration: TextInsertableNode, nodes: (Node & JSDocableNode)[], sourceFile: SourceFile): void {
+    const filePath = sourceFile.getFilePath();
     const isAugmentation = filePath.includes('augmentations');
 
-    for (const member of declaration.getMembers()) {
-        let jsDoc = member.getJsDocs()[0];
+    for (const node of nodes) {
+        let jsDoc = node.getJsDocs()[0];
         if (!jsDoc) {
-            jsDoc = member.addJsDoc({
+            jsDoc = node.addJsDoc({
                 tags: [
                     {
                         tagName: 'todo',
@@ -179,7 +183,7 @@ function processClassInterfaceDeclaration(declaration: ClassDeclaration | Interf
         }
     }
 
-    const starts = declaration.getMembers().map(node => node.getStartLinePos(true));
+    const starts = nodes.map(node => node.getStartLinePos(true));
 
     for (let i = starts.length - 1; i >= 1; i--) {
         declaration.insertText(starts[i] ?? 0, '\n');
@@ -192,7 +196,7 @@ function sortInterfaceDeclaration(declaration: InterfaceDeclaration): void {
     structure.properties = declaration.getProperties().sort(sortName).map(property => property.getStructure());
     declaration.set(structure);
 
-    processClassInterfaceDeclaration(declaration);
+    processMembers(declaration, declaration.getMembers(), declaration.getSourceFile());
 }
 
 async function parseFile(file: string, output_file: string = file): Promise<void> {
