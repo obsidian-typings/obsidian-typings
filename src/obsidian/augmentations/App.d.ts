@@ -395,19 +395,11 @@ declare module 'obsidian' {
          *
          * @param key - The key to retrieve.
          * @returns The value from `localStorage`.
-         * @official
-         */
-        loadLocalStorage(key: string): any | null;
-
-        /**
-         * Load a value from the localstorage given key.
-         *
-         * @param key Key of value to load.
          * @remark This method is device *and* vault specific.
          * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault.
-         * @unofficial
+         * @official - Changed return type.
          */
-        loadLocalStorage(key: string): unknown | null;
+        loadLocalStorage(key: string): null | unknown;
 
         /**
          * Add callback to execute on next frame
@@ -494,20 +486,11 @@ declare module 'obsidian' {
          * ```ts
          * app.saveLocalStorage('my-key', 'my-value');
          * ```
+         * @remark This method is device *and* vault specific.
+         * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault.
          * @official
          */
         saveLocalStorage(key: string, data: unknown | null): void;
-
-        /**
-         * Save a value to the localstorage given key.
-         *
-         * @param key Key of value to save.
-         * @param value Value to save.
-         * @remark This method is device *and* vault specific.
-         * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault.
-         * @unofficial
-         */
-        saveLocalStorage(key: string, value: unknown): void;
 
         /**
          * Set the accent color of the application.

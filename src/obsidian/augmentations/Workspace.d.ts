@@ -3,6 +3,7 @@ import type { Constructor } from 'obsidian';
 import type { CanvasConnection } from '../internals/CanvasConnection.d.ts';
 import type { CanvasNode } from '../internals/CanvasNode.d.ts';
 import type { EditorSuggestEx } from '../internals/EditorSuggestEx.d.ts';
+import type { EnsureSideLeafOptions } from '../internals/EnsureSideLeafOptions.d.ts';
 import type { GetRecentFilesOptions } from '../internals/GetRecentFilesOptions.d.ts';
 import type { HoverLinkEvent } from '../internals/HoverLinkEvent.d.ts';
 import type { CanvasView } from '../internals/InternalPlugins/Canvas/CanvasView.d.ts';
@@ -323,34 +324,15 @@ declare module 'obsidian' {
         ): Promise<WorkspaceLeaf>;
 
         /**
-         * Reveal leaf in side ribbon with specified view type and state.
-         *
-         * @param type View type of leaf.
-         * @param ribbon Side ribbon to reveal leaf in.
-         * @param viewState Open state of leaf.
-         * @unofficial
-         */
-        ensureSideLeaf(type: string, ribbon: 'left' | 'right', viewState: OpenViewState): void;
-
-        /**
          * Get side leaf or create one if one does not exist.
          *
          * @param type - The type of the leaf to get or create.
          * @param side - The side of the leaf to get or create.
          * @param options - The options to pass to the leaf.
-         * @returns The promise that is resolved to the leaf that was created or `null` if the side is not open.
-         * @official
+         * @returns The promise that is resolved to the leaf that was created.
+         * @official - Changed signature.
          */
-        ensureSideLeaf(type: string, side: Side, options?: {
-            /** @official */
-            active?: boolean;
-            /** @official */
-            split?: boolean;
-            /** @official */
-            reveal?: boolean;
-            /** @official */
-            state?: any;
-        }): Promise<WorkspaceLeaf>;
+        ensureSideLeaf(type: string, side: Side, options?: EnsureSideLeafOptions): Promise<WorkspaceLeaf>;
 
         /**
          * Returns the file for the current view if it's a `FileView`.
@@ -1045,13 +1027,6 @@ declare module 'obsidian' {
          * @official
          */
         on(name: 'url-menu', callback: (menu: Menu, url: string) => any, ctx?: any): EventRef;
-
-        /**
-         * Triggers when user right-clicks on external URL in editor
-         *
-         * @unofficial
-         */
-        on(name: 'url-menu', callback: (menu: Menu, url: string) => void, ctx?: unknown): EventRef;
 
         /**
          * Triggered when a popout window is closed.

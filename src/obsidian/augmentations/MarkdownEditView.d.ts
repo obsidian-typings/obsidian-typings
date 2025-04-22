@@ -78,13 +78,6 @@ declare module 'obsidian' {
         beforeUnload(): void;
 
         /**
-         * Clear the editor view.
-         *
-         * @unofficial
-         */
-        clear(): void;
-
-        /**
          * Clear the markdown edit view.
          *
          * @example
@@ -148,13 +141,6 @@ declare module 'obsidian' {
         getScroll(): number;
 
         /**
-         * Get the main selected range as string.
-         *
-         * @unofficial
-         */
-        getSelection(): string;
-
-        /**
          * Get the selection of the edit view.
          *
          * @official
@@ -194,13 +180,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         requestSaveFolds(): unknown;
-
-        /**
-         * Set the state of the editor.
-         *
-         * @unofficial
-         */
-        set(data: string, clear: boolean): void;
 
         /**
          * Set the markdown content of the edit view.

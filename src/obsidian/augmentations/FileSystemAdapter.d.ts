@@ -139,27 +139,11 @@ declare module 'obsidian' {
         exists(normalizedPath: string, sensitive?: boolean): Promise<boolean>;
 
         /**
-         * Get base path of vault (OS path).
-         *
-         * @unofficial
-         */
-        getBasePath(): string;
-
-        /**
          * Get the absolute path to the vault.
          *
          * @official
          */
         getBasePath(): string;
-
-        /**
-         * Get full path of file (OS path).
-         *
-         * @param normalizedPath Path to file.
-         * @returns URL path to file.
-         * @unofficial
-         */
-        getFilePath(normalizedPath: string): string;
 
         /**
          * Returns the file:// path of this file.

@@ -78,13 +78,6 @@ declare module 'obsidian' {
         beforeUnload(): unknown;
 
         /**
-         * Clears the rendered preview.
-         *
-         * @unofficial
-         */
-        clear(): unknown;
-
-        /**
          * Clear the markdown content of the markdown preview view.
          *
          * @example
@@ -106,13 +99,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         foldAll(): unknown;
-
-        /**
-         * Returns the renderer text.
-         *
-         * @unofficial
-         */
-        get(): string;
 
         /**
          * Get the markdown content of the markdown preview view.
@@ -193,15 +179,6 @@ declare module 'obsidian' {
          * @official
          */
         rerender(full?: boolean): void;
-
-        /**
-         * Set the Preview to new data.
-         *
-         * @param data The data to set the renderer to.
-         * @param clear If the preview should be cleared.
-         * @unofficial
-         */
-        set(data: string, clear: boolean): void;
 
         /**
          * Set the markdown content of the markdown preview view.

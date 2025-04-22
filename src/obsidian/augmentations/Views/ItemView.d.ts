@@ -84,16 +84,6 @@ declare module 'obsidian' {
         titleParentEl: HTMLElement;
 
         /**
-         * Adds an action button to the header of the view.
-         *
-         * @param icon - The icon for the action.
-         * @param title - The title for the action.
-         * @param callback - Callback to execute on click.
-         * @unofficial
-         */
-        addAction(icon: IconName, title: string, callback: (evt: MouseEvent) => any): HTMLElement;
-
-        /**
          * Add an action to the item view.
          *
          * @param icon - The icon of the action.

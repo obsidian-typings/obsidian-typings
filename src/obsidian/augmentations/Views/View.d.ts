@@ -100,13 +100,6 @@ declare module 'obsidian' {
         getEphemeralState(): Record<string, unknown>;
 
         /**
-         * Returns the icon name.
-         *
-         * @unofficial
-         */
-        getIcon(): IconName;
-
-        /**
          * Get the icon of the view.
          *
          * @returns The icon of the view.
@@ -228,13 +221,6 @@ declare module 'obsidian' {
          * @official
          */
         setEphemeralState(state: unknown): void;
-
-        /**
-         * Set the ephemeral (non-persistent) state of the editor.
-         *
-         * @unofficial
-         */
-        setEphemeralState(state: ViewEphemeralState): void;
 
         /**
          * Set the state of the view.

@@ -196,14 +196,6 @@ declare module 'obsidian' {
         /**
          * Set the content of the modal.
          *
-         * @param content Content to set.
-         * @unofficial
-         */
-        setContent(content: DocumentFragment | string): this;
-
-        /**
-         * Set the content of the modal.
-         *
          * @param content - The content of the modal.
          * @returns The modal instance.
          * @example
@@ -225,14 +217,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         setDimBackground(dim: boolean): this;
-
-        /**
-         * Set the title of the modal.
-         *
-         * @param title Title to set.
-         * @unofficial
-         */
-        setTitle(title: string): this;
 
         /**
          * Set the title of the modal.

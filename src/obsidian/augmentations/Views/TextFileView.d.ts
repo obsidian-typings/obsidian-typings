@@ -117,14 +117,6 @@ declare module 'obsidian' {
         onUnloadFile(file: TFile): Promise<void>;
 
         /**
-         * Saves the opened file.
-         *
-         * @param clear If set clears the editor under certain conditions.
-         * @unofficial
-         */
-        save(clear?: boolean): Promise<void>;
-
-        /**
          * Save the file.
          *
          * @param clear - Whether to clear the file.

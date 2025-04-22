@@ -213,13 +213,6 @@ declare module 'obsidian' {
         getHoverSource(): string;
 
         /**
-         * Get the current mode of the editor.
-         *
-         * @unofficial
-         */
-        getMode(): MarkdownViewModeType;
-
-        /**
          * Get the current mode of the markdown view.
          *
          * @returns A string representing the current mode.
@@ -246,14 +239,7 @@ declare module 'obsidian' {
          * Get the view type of the markdown view.
          *
          * @returns A string representing the view type.
-         * @official
-         */
-        getViewType(): string;
-
-        /**
-         * Get the current view type.
-         *
-         * @unofficial
+         * @official - changed the return type.
          */
         getViewType(): typeof ViewType.Markdown;
 

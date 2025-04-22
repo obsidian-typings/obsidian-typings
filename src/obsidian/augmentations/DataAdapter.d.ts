@@ -137,15 +137,6 @@ declare module 'obsidian' {
         getRealPath(path: string): string;
 
         /**
-         * Get resource path of file (URL path).
-         *
-         * @param normalizedPath Path to file.
-         * @returns String URL of form: app://FILEHASH/path/to/file.
-         * @unofficial
-         */
-        getResourcePath(normalizedPath: string): string;
-
-        /**
          * Returns an URI for the browser engine to use, for example to embed an image.
          *
          * @param normalizedPath - path to file/folder, use {@link normalizePath} to normalize beforehand.
