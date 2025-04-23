@@ -89,6 +89,9 @@
         "patch-package": "^8.0.0",
         "ts-morph": "^25.0.1"
     },
+    "peerDependencies": {
+        "typescript": ">=4.8.0"
+    },
     "overrides": {
         "boolean": "npm:dry-uninstall"
     },
