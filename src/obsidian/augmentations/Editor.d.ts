@@ -56,7 +56,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link blur} instead.
          */
-        blur__(): void;
+        blur__?(): void;
 
         /**
          * Convert editor position to screen position.
@@ -90,7 +90,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link focus} instead.
          */
-        focus__(): void;
+        focus__?(): void;
 
         /**
          * Unfolds all folded lines one level up.
@@ -186,7 +186,7 @@ declare module 'obsidian' {
          * @returns The scroll info.
          * @official
          */
-        getScrollInfo__(): {
+        getScrollInfo__?(): {
             /** @official */
             top: number;
             /** @official */
@@ -200,7 +200,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getSelection} instead.
          */
-        getSelection__(): string;
+        getSelection__?(): string;
 
         /**
          * Get the content of the editor.
@@ -209,7 +209,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getValue} instead.
          */
-        getValue__(): string;
+        getValue__?(): string;
 
         /**
          * Check if the editor is focused.
@@ -217,7 +217,7 @@ declare module 'obsidian' {
          * @returns Whether the editor is focused.
          * @official
          */
-        hasFocus__(): boolean;
+        hasFocus__?(): boolean;
 
         /**
          * Checks whether the editor has a highlight of specified class.
@@ -242,7 +242,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link lastLine} instead.
          */
-        lastLine__(): number;
+        lastLine__?(): number;
 
         /**
          * Gets the amount of lines in the document.
@@ -251,7 +251,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link lineCount} instead.
          */
-        lineCount__(): number;
+        lineCount__?(): number;
 
         /**
          * Get the list of selections if multiple cursors are active.
@@ -260,7 +260,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link listSelections} instead.
          */
-        listSelections__(): EditorSelection[];
+        listSelections__?(): EditorSelection[];
 
         /**
          * Convert an offset to a position.
@@ -333,7 +333,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link redo} instead.
          */
-        redo__(): void;
+        redo__?(): void;
 
         /**
          * Refresh the editor.
@@ -345,7 +345,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link refresh} instead.
          */
-        refresh__(): void;
+        refresh__?(): void;
 
         /**
          * Removes all highlights of specified class.
@@ -503,7 +503,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link undo} instead.
          */
-        undo__(): void;
+        undo__?(): void;
 
         /**
          * Get the word at a specific position.

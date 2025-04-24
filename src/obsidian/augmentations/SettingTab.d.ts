@@ -73,7 +73,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link display} instead.
          */
-        display__(): void;
+        display__?(): void;
 
         /**
          * Hides the contents of the setting tab.

@@ -81,7 +81,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
-        constructor__(): this;
+        constructor__?(): this;
 
         /**
          * Executes the callback of the onClick event (if not disabled).

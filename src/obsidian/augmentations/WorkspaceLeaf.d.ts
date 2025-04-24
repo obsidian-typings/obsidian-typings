@@ -66,7 +66,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link isDeferred} instead.
          */
-        get isDeferred__(): boolean;
+        isDeferred__?(): boolean;
 
         /**
          * Detach this leaf from its parent.

@@ -57,7 +57,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link file} instead.
          */
-        get file__(): TFile;
+        file__?(): TFile;
 
         /**
          * Apply the scroll position to the edit view.

@@ -89,7 +89,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getDisplayText} instead.
          */
-        getDisplayText__(): string;
+        getDisplayText__?(): string;
 
         /**
          * Get the ephemeral state of the view.
@@ -129,7 +129,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getViewType} instead.
          */
-        getViewType__(): string;
+        getViewType__?(): string;
 
         /**
          * Handle copy event on metadata editor and serialize properties.
@@ -159,7 +159,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link onClose} instead.
          */
-        onClose__(): Promise<void>;
+        onClose__?(): Promise<void>;
 
         /**
          * @deprecated use `onPaneMenu` instead
@@ -174,7 +174,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link onOpen} instead.
          */
-        onOpen__(): Promise<void>;
+        onOpen__?(): Promise<void>;
 
         /**
          * Populates the pane menu.

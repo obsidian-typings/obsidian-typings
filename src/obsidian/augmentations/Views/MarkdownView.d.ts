@@ -128,7 +128,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link file} instead.
          */
-        get file__(): TFile | null;
+        file__?(): TFile | null;
 
         /**
          * Add property to inline metadata editor or properties plugin.

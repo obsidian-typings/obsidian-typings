@@ -12,7 +12,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getValue} instead.
          */
-        getValue__(): T;
+        getValue__?(): T;
 
         /**
          * Register an option listener.

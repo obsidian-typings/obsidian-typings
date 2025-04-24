@@ -22,7 +22,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getItems} instead.
          */
-        getItems__(): T[];
+        getItems__?(): T[];
 
         /**
          * Get the text to be used in the fuzzy search.

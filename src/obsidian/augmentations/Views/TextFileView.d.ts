@@ -65,7 +65,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link clear} instead.
          */
-        clear__(): void;
+        clear__?(): void;
 
         /**
          * Create a new text file view.
@@ -82,7 +82,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getViewData} instead.
          */
-        getViewData__(): string;
+        getViewData__?(): string;
 
         /**
          * @todo Documentation incomplete.
