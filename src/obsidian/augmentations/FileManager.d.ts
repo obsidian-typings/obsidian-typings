@@ -1,7 +1,7 @@
 import type { LinkChangeUpdate } from '../internals/LinkUpdate/LinkChangeUpdate.d.ts';
 import type { LinkUpdate } from '../internals/LinkUpdate/LinkUpdate.d.ts';
-import type { LinkUpdateHandler } from '../internals/LinkUpdate/LinkUpdateHandler.d.ts';
 import type { LinkUpdaters } from '../internals/LinkUpdate/LinkUpdaters.d.ts';
+import type { LinkUpdatesHandler } from '../internals/LinkUpdate/LinkUpdatesHandler.d.ts';
 import type { PositionedReference } from '../internals/PositionedReference.d.ts';
 import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
 
@@ -29,7 +29,7 @@ declare module 'obsidian' {
          * @todo Documentation incomplete.
          * @unofficial
          */
-        inProgressUpdates: null | LinkUpdateHandler[];
+        inProgressUpdates: null | LinkUpdatesHandler[];
 
         /**
          * @todo Documentation incomplete.
@@ -291,7 +291,7 @@ declare module 'obsidian' {
          *
          * @unofficial
          */
-        runAsyncLinkUpdate(linkUpdateHandler: LinkUpdateHandler): Promise<void>;
+        runAsyncLinkUpdate(linkUpdatesHandler: LinkUpdatesHandler): Promise<void>;
 
         /**
          * Store text file backup.

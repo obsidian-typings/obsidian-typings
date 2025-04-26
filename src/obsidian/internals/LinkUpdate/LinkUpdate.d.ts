@@ -10,11 +10,6 @@ import type { PositionedReference } from '../PositionedReference.d.ts';
  */
 export interface LinkUpdate {
     /**
-     * Reference to App.
-     */
-    app: App;
-
-    /**
      * Link position in the file.
      */
     reference: PositionedReference;
