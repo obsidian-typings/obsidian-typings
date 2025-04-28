@@ -93,9 +93,10 @@ export interface FileExplorerView extends View {
 
     /**
      * Is called when a new file is created in vault. Updates the file tree.
-     * @param file - The new file.
+     *
+     * @param file - The new file or folder.
      */
-    onCreate(file: TFile): void;
+    onCreate(file: TAbstractFile): void;
 
     /**
      * Is called when on the new folder icon is clicked. Call createAbstractFile().
@@ -111,9 +112,10 @@ export interface FileExplorerView extends View {
 
     /**
      * Is called when a file in vault is deleted. Updates the file tree.
-     * @param file - The deleted file.
+     *
+     * @param file - The deleted file or folder.
      */
-    onDelete(file: TFile): void;
+    onDelete(file: TAbstractFile): void;
 
     /**
      * Called when delete is requested.
@@ -176,10 +178,11 @@ export interface FileExplorerView extends View {
 
     /**
      * Is called when a file in vault is renamed. Updates the file tree.
-     * @param file - The renamed file.
-     * @param oldPath - The old file path.
+     *
+     * @param file - The renamed file or folder.
+     * @param oldPath - The old file or folder path.
      */
-    onRename(file: TFile, oldPath: string): void;
+    onRename(file: TAbstractFile, oldPath: string): void;
 
     /**
      * Called when the title is deselected. Calls acceptRename().
