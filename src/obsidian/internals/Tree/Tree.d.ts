@@ -4,17 +4,18 @@ import type {
     View
 } from 'obsidian';
 import type { InfinityScroll } from './InfinityScroll.d.ts';
-import type { TreeNode } from './TreeNode.d.ts';
+import type { TreeItem } from './TreeItem.d.ts';
+import type { TreeRoot } from './TreeRoot.d.ts';
 
 /**
  * @public
  * @unofficial
  */
-export interface Tree<T> {
+export interface Tree<T extends TreeItem> {
     /**
      * Currently active item in tree view.
      */
-    activeDom: TreeNode<T> | null;
+    activeDom: T | null;
 
     /**
      * Reference to App.
@@ -29,7 +30,7 @@ export interface Tree<T> {
     /**
      * Currently focused item in tree view.
      */
-    focusedItem: TreeNode<T> | null;
+    focusedItem: T | null;
 
     /**
      * Handle collapsing of all nodes.
@@ -74,7 +75,7 @@ export interface Tree<T> {
     /**
      * Currently selected items in tree view.
      */
-    selectedDoms: Set<TreeNode<T>>;
+    selectedDoms: Set<T>;
 
     /**
      * The view the tree is associated with.
@@ -84,7 +85,7 @@ export interface Tree<T> {
     /**
      * Root item of the tree view.
      */
-    get root(): TreeNode<T>;
+    get root(): TreeRoot<T>;
 
     /**
      * Change the focused item to the next item in specified direction.
@@ -99,7 +100,7 @@ export interface Tree<T> {
     /**
      * Mark tree item as deselected.
      */
-    deselectItem(node: TreeNode<T>): void;
+    deselectItem(node: T): void;
 
     /**
      * Get the local storage key for the saved tree view folds.
@@ -109,7 +110,7 @@ export interface Tree<T> {
     /**
      * Gets the ID of a tree item given its Node.
      */
-    getNodeId(node: TreeNode<T>): string | undefined;
+    getNodeId(node: T): string | undefined;
 
     /**
      * Handle deletion of selected nodes.
@@ -119,7 +120,7 @@ export interface Tree<T> {
     /**
      * Handle selection of tree item via keyboard event.
      */
-    handleItemSelection(event: MouseEvent, node: TreeNode<T>): void;
+    handleItemSelection(event: MouseEvent, node: T): void;
 
     /**
      * Registers all keyboard actions to the tree view keyscope.
@@ -129,7 +130,7 @@ export interface Tree<T> {
     /**
      * Check whether item is a valid tree item.
      */
-    isItem(node: TreeNode<T> | undefined): boolean;
+    isItem(node: T | undefined): boolean;
 
     /**
      * Load the saved fold states of the tree view from local storage.
@@ -174,7 +175,7 @@ export interface Tree<T> {
     /**
      * Mark tree item as selected.
      */
-    selectItem(node: TreeNode<T>): void;
+    selectItem(node: T): void;
 
     /**
      * Set all items in the tree view to be collapsed or expanded.
@@ -184,7 +185,7 @@ export interface Tree<T> {
     /**
      * Set the focused item in the tree view.
      */
-    setFocusedItem(node: TreeNode<T>, scrollIntoView?: boolean): void;
+    setFocusedItem(node: T, scrollIntoView?: boolean): void;
 
     /**
      * (Un)Collapse all items in the tree view.
