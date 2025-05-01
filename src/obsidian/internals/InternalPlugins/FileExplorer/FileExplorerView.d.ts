@@ -26,6 +26,10 @@ export interface FileExplorerView extends View {
      * Mapping of tree self element to abstract file.
      */
     files: WeakMapWrapper<HTMLElement, TAbstractFile>;
+    /**
+     * Current sort order of file tree items.
+     */
+    sortOrder: FileExplorerViewSortOrder;
 
     /**
      * Tree view of files.
