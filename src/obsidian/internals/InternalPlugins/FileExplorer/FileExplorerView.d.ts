@@ -78,7 +78,7 @@ export interface FileExplorerView extends View {
 
     /**
      * Used internally to attach drop handler to the tree root and folder items.
-     * @param folder - Folder that's associated to the item.
+     * @param folder - Folder that's associated with the item.
      * @param el - Element of the tree root or folder item.
      * 
      * @internal
