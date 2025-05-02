@@ -53,7 +53,7 @@ export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
 
     public count(): number {
         let ans = 0;
-        for (const key in this.keys()) {
+        for (const key of this.keys()) {
             ans += this.get(key)?.length ?? 0;
         }
 
