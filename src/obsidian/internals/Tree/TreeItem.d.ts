@@ -1,28 +1,31 @@
+import type { View } from 'obsidian';
 import type { TreeNode } from './TreeNode.d.ts';
 
+/** @todo Documentation incomplete */
 /**
- * @todo Documentation incomplete
- * 
  * @public
  * @unofficial
  */
-export interface TreeItem<Parent extends TreeNode = TreeNode> extends TreeNode {
+export type TreeItem<T> = TreeNode<T> & {
+    collapseEl: HTMLElement;
     /**
-     * @todo Documentation incomplete
-     */ 
+     * @deprecated Potentially removed in 1.6.0 for some tree-likes.
+     */
+    collapsed: boolean;
+    /**
+     * @deprecated Potentially removed in 1.6.0 for some tree-likes.
+     */
+    collapsible: boolean;
     coverEl: HTMLElement;
-    /**
-     * @todo Documentation incomplete
-     */ 
     innerEl: HTMLElement;
-    /**
-     * @todo Documentation incomplete
-     */ 
-    parent: Parent | undefined;
-    /**
-     * @todo Documentation incomplete
-     */ 
+    parent: TreeNode<T> | undefined;
     selfEl: HTMLElement;
+    view: View;
+
+    /**
+     * Execute collapse functionality on mouse click.
+     */
+    onCollapseClick(event: MouseEvent): void;
     /**
      * Execute item functionality on clicking tree item.
      */
@@ -30,5 +33,21 @@ export interface TreeItem<Parent extends TreeNode = TreeNode> extends TreeNode {
     /**
      * Set clickable state of tree item.
      */
-    setClickable(value: boolean): void;
-}
+    setClickable(clickable: boolean): void;
+    /**
+     * Set collapsed state of tree item.
+     */
+    setCollapsed(collapsed: boolean, check: boolean): Promise<undefined>;
+    /**
+     * Set collapsible state of tree item.
+     */
+    setCollapsible(collapsible: boolean): void;
+    /**
+     * Toggle collapsed state of tree item.
+     */
+    toggleCollapsed(check: boolean): Promise<undefined>;
+    /**
+     * Update the tree item's cover element.
+     */
+    updateCollapsed(check: boolean): Promise<undefined>;
+};
