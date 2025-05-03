@@ -50,10 +50,7 @@ export interface FileExplorerView extends View {
     /**
      * Try to sort tree items.
      */
-    requestSort: Debouncer<
-        Parameters<FileExplorerView['sort']>,
-        ReturnType<FileExplorerView['sort']>
-    >;
+    requestSort: Debouncer<[], void>;
 
     /**
      * Current sort order of file tree items.
