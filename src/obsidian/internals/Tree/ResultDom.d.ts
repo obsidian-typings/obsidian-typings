@@ -1,7 +1,11 @@
-import type { App } from 'electron';
-import type { TFile } from 'obsidian';
+import type {
+    App,
+    Debouncer,
+    TFile
+} from 'obsidian';
+import type { InfinityScroll } from './InfinityScroll.d.ts';
+import type { ResultDomItem } from './ResultDomItem.d.ts';
 import type { ResultDomResult } from './ResultDomResult.d.ts';
-import type { TreeDom } from './TreeDom.d.ts';
 import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
 
@@ -14,86 +18,92 @@ export interface ResultDom {
     app: App;
 
     /** @todo Documentation incomplete. */
+    changed: Debouncer<[], unknown>;
+
+    /** @todo Documentation incomplete. */
     childrenEl: HTMLDivElement;
 
     /** @todo Documentation incomplete. */
-    collapsed: boolean;
-
-    /** @todo Documentation incomplete. */
-    collapseEl: HTMLDivElement;
-
-    /** @todo Documentation incomplete. */
-    collapsible: boolean;
-
-    /** @todo Documentation incomplete. */
-    containerEl: HTMLDivElement;
-
-    /** @todo Documentation incomplete. */
-    content: string;
+    collapseAll: boolean;
 
     /** @todo Documentation incomplete. */
     el: HTMLDivElement;
 
     /** @todo Documentation incomplete. */
+    emptyStateEl: HTMLDivElement;
+
+    /** @todo Documentation incomplete. */
     extraContext: boolean;
 
     /** @todo Documentation incomplete. */
-    file: TFile;
+    focusedItem: null;
+
+    /** @todo Documentation incomplete. */
+    infinityScroll: InfinityScroll;
 
     /** @todo Documentation incomplete. */
     info: TreeNodeInfo;
 
     /** @todo Documentation incomplete. */
-    onMatchRender: null;
-
-    /** @todo Documentation incomplete. */
-    parent: TreeDom;
-
-    /** @todo Documentation incomplete. */
-    parentDom: TreeDom;
-
-    /** @todo Documentation incomplete. */
     pusherEl: HTMLDivElement;
 
     /** @todo Documentation incomplete. */
-    result: ResultDomResult;
+    resultDomLookup: Map<TFile, ResultDomItem>;
 
     /** @todo Documentation incomplete. */
-    separateMatches: boolean;
+    showingEmptyState: boolean;
 
     /** @todo Documentation incomplete. */
-    showTitle: boolean;
+    sortOrder: string;
 
     /** @todo Documentation incomplete. */
-    vChildren: TreeNodeVChildren<ResultDom, ResultDom>;
+    vChildren: TreeNodeVChildren<ResultDomItem, ResultDom>;
 
     /** @todo Documentation incomplete. */
-    getMatchExtraPositions(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
+    working: boolean;
 
     /** @todo Documentation incomplete. */
-    invalidate(): unknown;
+    addResult(file: TFile, result: ResultDomResult, content: string, shouldShowTitle?: boolean): ResultDomItem;
 
     /** @todo Documentation incomplete. */
-    onCollapseClick(arg1: unknown): unknown;
+    changeFocusedItem(arg1: unknown): unknown;
 
     /** @todo Documentation incomplete. */
-    onResultClick(arg1: unknown): unknown;
+    emptyResults(): unknown;
 
     /** @todo Documentation incomplete. */
-    onResultContextMenu(arg1: unknown): unknown;
+    getFiles(): unknown;
 
     /** @todo Documentation incomplete. */
-    onResultMouseover(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
+    getMatchCount(): number;
 
     /** @todo Documentation incomplete. */
-    renderContentMatches(): void;
+    getResult(arg1: unknown): unknown;
 
     /** @todo Documentation incomplete. */
-    setCollapse(arg1: unknown, arg2: unknown): Promise<unknown>;
+    onChange(): unknown;
 
     /** @todo Documentation incomplete. */
-    setCollapsible(arg1: unknown): unknown;
+    onResize(): unknown;
+
+    /** @todo Documentation incomplete. */
+    removeResult(arg1: unknown): unknown;
+
+    /** @todo Documentation incomplete. */
+    setCollapseAll(arg1: unknown): unknown;
 
     /** @todo Documentation incomplete. */
     setExtraContext(arg1: unknown): unknown;
+
+    /** @todo Documentation incomplete. */
+    setFocusedItem(arg1: unknown): unknown;
+
+    /** @todo Documentation incomplete. */
+    startLoader(): unknown;
+
+    /** @todo Documentation incomplete. */
+    stopLoader(): unknown;
+
+    /** @todo Documentation incomplete. */
+    toggle(arg1: unknown, arg2: unknown): Promise<unknown>;
 }

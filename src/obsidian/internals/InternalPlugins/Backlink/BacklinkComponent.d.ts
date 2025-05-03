@@ -5,7 +5,7 @@ import type {
     TFile
 } from 'obsidian';
 import type { ItemQueue } from '../../Collections/ItemQueue.d.ts';
-import type { TreeDom } from '../../Tree/TreeDom.d.ts';
+import type { ResultDom } from '../../Tree/ResultDom.d.ts';
 import type { HeaderDom } from './HeaderDom.d.ts';
 
 /**
@@ -23,7 +23,7 @@ export interface BacklinkComponent extends Component {
     backlinkCountEl: HTMLSpanElement;
 
     /** @todo Documentation incomplete. */
-    backlinkDom: TreeDom;
+    backlinkDom: ResultDom;
 
     /** @todo Documentation incomplete. */
     backlinkFile: TFile | null;
@@ -80,7 +80,7 @@ export interface BacklinkComponent extends Component {
     unlinkedCountEl: HTMLSpanElement;
 
     /** @todo Documentation incomplete. */
-    unlinkedDom: TreeDom;
+    unlinkedDom: ResultDom;
 
     /** @todo Documentation incomplete. */
     unlinkedFile: null;
