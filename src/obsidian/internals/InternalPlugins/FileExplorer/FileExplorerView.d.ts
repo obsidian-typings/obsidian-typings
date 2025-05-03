@@ -1,4 +1,5 @@
 import type {
+    Debouncer,
     PaneType,
     TAbstractFile,
     TFile,
@@ -11,6 +12,7 @@ import type { WeakMapWrapper } from '../../WeakMapWrapper.d.ts';
 import type { FileExplorerViewFileItemsRecord } from './FileExplorerViewFileItemsRecord.d.ts';
 import type { FileTreeItem } from './FileTreeItem.d.ts';
 import type { FolderTreeItem } from './FolderTreeItem.d.ts';
+import type { FileExplorerViewSortOrder } from './FileExplorerViewSortOrder.d.ts';
 
 /** @todo Documentation incomplete */
 /**
@@ -29,6 +31,35 @@ export interface FileExplorerView extends View {
     files: WeakMapWrapper<HTMLElement, TAbstractFile>;
 
     /**
+     * Last dragged over folder item element.
+     * `null` when there is no folder item being dragged over.
+     */
+    lastDropTargetEl: HTMLElement | null;
+
+    /**
+     * @todo Documentation incomplete.
+     */
+    mouseoverExpandTimeout: number | null;
+
+    /**
+     * Indicate ready state of the view.
+     */
+    ready: boolean;
+
+    /**
+     * Try to sort tree items.
+     */
+    requestSort: Debouncer<
+        Parameters<FileExplorerView['sort']>,
+        ReturnType<FileExplorerView['sort']>
+    >;
+
+    /**
+     * Current sort order of file tree items.
+     */
+    sortOrder: FileExplorerViewSortOrder;
+
+    /**
      * Tree view of files.
      */
     tree: Tree<FileTreeItem | FolderTreeItem>;
@@ -45,8 +76,14 @@ export interface FileExplorerView extends View {
      */
     afterCreate(file: TFile, newLeaf: PaneType | boolean): Promise<void>;
 
-    /** @todo Documentation incomplete. */
-    attachDropHandler(x: unknown, y: unknown, z: unknown): unknown;
+    /**
+     * Used internally to attach drop handler to the tree root and folder items.
+     * @param folder - Folder that's associated with the item.
+     * @param el - Element of the tree root or folder item.
+     * 
+     * @internal
+     */
+	attachDropHandler(folder: TFolder, el: HTMLElement): void;
 
     /** @todo Documentation incomplete */
     attachFileEvents(e: unknown): void;
