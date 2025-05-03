@@ -1,6 +1,8 @@
 import type { CanvasViewCanvasNode } from './CanvasViewCanvasNode.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

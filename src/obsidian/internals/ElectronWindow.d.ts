@@ -1,6 +1,8 @@
 import type { BrowserWindow } from 'electron';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

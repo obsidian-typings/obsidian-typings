@@ -23,6 +23,8 @@ import type { TagViewConstructor } from './TagViewConstructor.d.ts';
 import type { VideoViewConstructor } from './VideoViewConstructor.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

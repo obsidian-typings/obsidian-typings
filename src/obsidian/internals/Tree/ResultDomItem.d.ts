@@ -8,6 +8,8 @@ import type { TreeNode } from './TreeNode.d.ts';
 import type { ResultDomItemChild } from './ResultDomItemChild.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

@@ -9,6 +9,8 @@ import type { PluginsManifestsRecord } from './PluginsManifestsRecord.d.ts';
 import type { PluginsPluginsRecord } from './PluginsPluginsRecord.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

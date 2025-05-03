@@ -1,6 +1,8 @@
 import type { ExtendedMetrics } from './ExtendedMetrics.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

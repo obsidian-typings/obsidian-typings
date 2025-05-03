@@ -2,6 +2,8 @@ import type { Runnable } from '../Runnable.d.ts';
 import type { ItemQueueItems } from './ItemQueueItems.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

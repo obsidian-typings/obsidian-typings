@@ -17,6 +17,8 @@ import type { PowerTag } from './PowerTag.d.ts';
 import type { WorkerResults } from './WorkerResults.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

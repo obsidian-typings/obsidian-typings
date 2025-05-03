@@ -1,6 +1,8 @@
 import type { Command } from 'obsidian';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

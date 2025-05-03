@@ -6,6 +6,8 @@ import type { CommandsCommandsRecord } from './CommandsCommandsRecord.d.ts';
 import type { CommandsEditorCommandsRecord } from './CommandsEditorCommandsRecord.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

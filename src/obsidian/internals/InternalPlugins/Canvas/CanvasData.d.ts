@@ -2,6 +2,8 @@ import type { CanvasViewDataEdge } from './CanvasViewDataEdge.d.ts';
 import type { CanvasViewDataNode } from './CanvasViewDataNode.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

@@ -1,6 +1,8 @@
 import type { EdgeIndexBaseBase } from './EdgeIndexBaseBase.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

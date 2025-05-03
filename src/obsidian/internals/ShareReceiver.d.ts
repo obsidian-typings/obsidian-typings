@@ -2,6 +2,8 @@ import type { App } from 'obsidian';
 import type { SharedFile } from './SharedFile.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

@@ -10,6 +10,8 @@ import type { EmbedPdfComponent } from './EmbedPdfComponent.d.ts';
 import type { EmbedVideoComponent } from './EmbedVideoComponent.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

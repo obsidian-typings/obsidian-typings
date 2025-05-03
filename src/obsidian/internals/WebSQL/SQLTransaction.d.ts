@@ -2,6 +2,8 @@ import type { SQLError } from './SQLError.d.ts';
 import type { SQLResultSet } from './SQLResultSet.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

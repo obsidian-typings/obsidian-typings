@@ -3,6 +3,8 @@ import type { CanvasPluginInstance } from '../InternalPlugins/Canvas/CanvasPlugi
 import type { LinkUpdater } from './LinkUpdater.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

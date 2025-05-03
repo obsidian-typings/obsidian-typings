@@ -4,6 +4,8 @@ import type { VimStateVim } from './VimStateVim.d.ts';
 import type { VimStateVimPlugin } from './VimStateVimPlugin.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

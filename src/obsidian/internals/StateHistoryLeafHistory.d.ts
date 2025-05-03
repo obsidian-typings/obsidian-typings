@@ -1,6 +1,8 @@
 import type { StateHistory } from './StateHistory.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

@@ -1,6 +1,8 @@
 import type { PropertyWidgetEntry } from '../PropertyWidgetEntry.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

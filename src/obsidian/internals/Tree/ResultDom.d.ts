@@ -10,6 +10,8 @@ import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

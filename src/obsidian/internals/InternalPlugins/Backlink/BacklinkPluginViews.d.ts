@@ -5,6 +5,8 @@ import type {
 import type { BacklinkView } from './BacklinkView.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

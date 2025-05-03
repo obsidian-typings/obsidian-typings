@@ -8,6 +8,8 @@ import type { CommandPaletteOptions } from './CommandPaletteOptions.d.ts';
 import type { CommandPalettePlugin } from './CommandPalettePlugin.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

@@ -1,6 +1,8 @@
 import type { CanvasViewCanvasEdge } from './CanvasViewCanvasEdge.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

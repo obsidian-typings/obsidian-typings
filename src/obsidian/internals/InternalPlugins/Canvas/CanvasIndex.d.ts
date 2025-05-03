@@ -5,6 +5,8 @@ import type {
 import type { CanvasIndexEntry } from './CanvasIndexEntry.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

@@ -6,6 +6,8 @@ import type { GraphNode } from './GraphNode.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

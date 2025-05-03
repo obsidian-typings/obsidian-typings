@@ -10,6 +10,8 @@ import type { EditorPosition } from 'obsidian';
  *       methods from `BaseEditor`, *not* `Editor`.
  */
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

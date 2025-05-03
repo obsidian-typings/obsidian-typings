@@ -3,6 +3,8 @@
 import type { App } from 'obsidian';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

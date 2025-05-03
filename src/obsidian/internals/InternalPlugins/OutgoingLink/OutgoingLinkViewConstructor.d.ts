@@ -2,6 +2,8 @@ import type { OutgoingLinkView } from '../../InternalPlugins/OutgoingLink/Outgoi
 import type { TypedViewConstructor } from '../../Views/TypedViewConstructor.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

@@ -2,6 +2,8 @@ import type { VimStateVimInputState } from './VimStateVimInputState.d.ts';
 import type { VimStateVimLastMotion } from './VimStateVimLastMotion.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

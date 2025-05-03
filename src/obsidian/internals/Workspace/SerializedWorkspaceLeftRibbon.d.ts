@@ -3,6 +3,8 @@ import type {
 } from './SerializedWorkspaceLeftRibbonHiddenItemsRecord.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

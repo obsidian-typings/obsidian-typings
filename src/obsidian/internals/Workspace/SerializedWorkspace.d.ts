@@ -2,6 +2,8 @@ import type { LeafEntry } from '../LeafEntry.d.ts';
 import type { SerializedWorkspaceLeftRibbon } from './SerializedWorkspaceLeftRibbon.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

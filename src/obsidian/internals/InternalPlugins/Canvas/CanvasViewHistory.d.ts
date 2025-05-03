@@ -1,6 +1,8 @@
 import type { CanvasViewData } from './CanvasData.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

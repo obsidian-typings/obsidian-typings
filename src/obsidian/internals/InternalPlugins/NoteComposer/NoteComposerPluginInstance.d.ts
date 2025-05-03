@@ -12,6 +12,8 @@ import type { NoteComposerPlugin } from './NoteComposerPlugin.d.ts';
 import type { NoteComposerPluginOptions } from './NoteComposerPluginOptions.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

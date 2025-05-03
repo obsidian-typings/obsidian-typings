@@ -1,6 +1,8 @@
 import { InternalPluginName } from './InternalPluginName.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

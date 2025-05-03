@@ -2,6 +2,8 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { BrowserPlugin } from './BrowserPlugin.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

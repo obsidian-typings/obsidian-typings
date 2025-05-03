@@ -2,6 +2,8 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { CommandPalettePluginInstance } from './CommandPalettePluginInstance.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

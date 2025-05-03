@@ -3,6 +3,8 @@ import type { ViewUpdate } from '@codemirror/view';
 import type { MarkdownScrollableEditView } from './MarkdownScrollableEditView.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

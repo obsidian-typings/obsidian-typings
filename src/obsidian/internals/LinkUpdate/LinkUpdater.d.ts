@@ -5,6 +5,8 @@ import type {
 import type { LinkChangeUpdate } from './LinkChangeUpdate.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

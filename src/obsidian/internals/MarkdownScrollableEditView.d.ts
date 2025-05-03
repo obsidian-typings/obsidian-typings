@@ -5,6 +5,8 @@ import type { EditorSearchComponent } from './Components/EditorSearchComponent.d
 import type { MarkdownBaseView } from './MarkdownBaseView.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

@@ -1,6 +1,8 @@
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

@@ -3,6 +3,8 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { WordCountPlugin } from './WordCountPlugin.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

@@ -5,6 +5,8 @@ import type {
 import type { BookmarksView } from './BookmarksView.d.ts';
 
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */
