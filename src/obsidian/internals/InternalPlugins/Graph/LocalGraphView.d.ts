@@ -24,6 +24,7 @@ export interface LocalGraphView extends InfoFileView {
 
     /**
      * Requests a update if the changed file is the opened file.
+     *
      * @param file - The changed file.
      */
     onFileChanged(file: TFile): void;

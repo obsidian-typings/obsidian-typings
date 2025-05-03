@@ -69,6 +69,7 @@ export interface FileExplorerView extends View {
 
     /**
      * Is Executed after creating the file or folder and opens the view and/or starts the rename.
+     *
      * @param file - The created file.
      * @param newLeaf - Where to open the view for this file.
      */
@@ -76,6 +77,7 @@ export interface FileExplorerView extends View {
 
     /**
      * Used internally to attach drop handler to the tree root and folder items.
+     *
      * @param folder - Folder that's associated with the item.
      * @param el - Element of the tree root or folder item.
      */
@@ -86,6 +88,7 @@ export interface FileExplorerView extends View {
 
     /**
      * Creates an file or folder.
+     *
      * @param type - The type of file to create.
      * @param location - The location where to create the file.
      * @param newLeaf - Where to open the view for this file.
@@ -134,12 +137,14 @@ export interface FileExplorerView extends View {
 
     /**
      * Is called when on the new folder icon is clicked. Call createAbstractFile().
+     *
      * @param event - The MouseEvent which triggered this function.
      */
     onCreateNewFolderClick(event: MouseEvent): Promise<void>;
 
     /**
      * Is called when on the new note icon is clicked. Call createAbstractFile().
+     *
      * @param event - The MouseEvent which triggered this function.
      */
     onCreateNewNoteClick(event: MouseEvent): Promise<void>;
@@ -153,6 +158,7 @@ export interface FileExplorerView extends View {
 
     /**
      * Called when delete is requested.
+     *
      * @param event - The event triggered this function.
      */
     onDeleteSelectedFiles(event: unknown): unknown;
@@ -166,6 +172,7 @@ export interface FileExplorerView extends View {
     /**
      * Called when the mouse pointer moves away from an element.
      * Event: 'mouseout'.
+     *
      * @param event - The event triggered this function.
      * @param targetEl - The target Element.
      */
@@ -174,6 +181,7 @@ export interface FileExplorerView extends View {
     /**
      * Called when the mouse pointer is moved over an element. Updates the tooltip information.
      * Event: 'mouseover'.
+     *
      * @param event - The event triggered this function.
      * @param targetEl - The target Element.
      */
@@ -181,6 +189,7 @@ export interface FileExplorerView extends View {
 
     /**
      * Called when a file is opened. Brings the file to the front.
+     *
      * @param file - The opened file.
      */
     onFileOpen(file: TFile): void;
@@ -190,6 +199,7 @@ export interface FileExplorerView extends View {
 
     /**
      * Called when 'Enter' is pressed while rename. Accepts the rename.
+     *
      * @param event - The event triggered this function.
      */
     onKeyEnterInRename(event: KeyboardEvent): void;
@@ -201,6 +211,7 @@ export interface FileExplorerView extends View {
 
     /**
      * Called when the rename shortcut is pressed.
+     *
      * @param event - The event triggered this function.
      */
     onKeyRename(event: KeyboardEvent): void;
@@ -225,6 +236,7 @@ export interface FileExplorerView extends View {
 
     /**
      * Opens the context menu for the file item.
+     *
      * @param event - The event.
      * @param fileItemEl - The file item clicked on.
      */
@@ -240,6 +252,7 @@ export interface FileExplorerView extends View {
 
     /**
      * Updates the sort order and sort by it.
+     *
      * @param order - The sort order.
      */
     setSortOrder(order: unknown): void;

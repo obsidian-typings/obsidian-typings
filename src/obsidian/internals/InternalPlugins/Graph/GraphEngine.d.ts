@@ -80,6 +80,7 @@ export interface GraphEngine {
 
     /**
      * Sets the engine options.
+     *
      * @param options - New options. Undefined elements will not be considered.
      */
     setOptions(options: GraphPluginInstanceOptions | undefined): void;

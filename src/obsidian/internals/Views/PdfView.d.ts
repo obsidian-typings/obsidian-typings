@@ -21,6 +21,7 @@ export interface PdfView extends EditableFileView {
 
     /**
      * Is called when the vault has a 'modify' event. Reloads the file if the modified file is the file in this view.
+     *
      * @param file - The modified file.
      */
     onModify(file: TFile): void;

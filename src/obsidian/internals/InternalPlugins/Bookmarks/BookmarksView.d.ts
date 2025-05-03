@@ -55,18 +55,21 @@ export interface BookmarksView extends ItemView {
 
     /**
      * Called when delete is requested.
+     *
      * @param event - The event triggered this function.
      */
     onDeleteSelectedItems(event: unknown): unknown;
 
     /**
      * Called when a file is created.
+     *
      * @param file - The created file.
      */
     onFileCreate(file: TFile): void;
 
     /**
      * Called when a file is deleted.
+     *
      * @param file - The deleted file.
      */
     onFileDelete(file: TFile): void;
@@ -76,6 +79,7 @@ export interface BookmarksView extends ItemView {
 
     /**
      * Called when the rename shortcut is pressed.
+     *
      * @param event - The event triggered this function.
      */
     onRenameKey(event: KeyboardEvent): void;

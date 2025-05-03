@@ -197,6 +197,7 @@ interface InternalPlugins extends Events {
     // ...
     /**
      * Get an internal plugin by ID
+     *
      * @param id - ID of the plugin to get
      * @returns Plugin instance
      */

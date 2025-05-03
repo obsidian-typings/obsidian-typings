@@ -69,6 +69,7 @@ export interface SearchView extends View {
 
     /**
      * Sets the value of the search element.
+     *
      * @param value - The search string.
      */
     setQuery(value: string): void;

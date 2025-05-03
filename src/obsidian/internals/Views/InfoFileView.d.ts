@@ -13,6 +13,7 @@ import type {
 export interface InfoFileView extends FileView {
     /**
      * Called when a file is opened. Loads the file and requests a content update.
+     *
      * @param file - The opened file.
      */
     onFileOpen(file: TFile): void;
