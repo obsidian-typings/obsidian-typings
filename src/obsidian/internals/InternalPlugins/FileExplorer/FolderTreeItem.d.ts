@@ -4,8 +4,9 @@ import type { TreeNodeVChildren } from '../../Tree/TreeNodeVChildren.d.ts';
 import type { FileTreeItem } from './FileTreeItem.d.ts';
 import type { TreeCollapsibleItem } from '../../Tree/TreeCollapsibleItem.d.ts';
 
-/** @todo Documentation incomplete */
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

@@ -1,7 +1,8 @@
 import type { ObsidianTouchEventRegisterCallback } from './ObsidianTouchEventRegisterCallback.d.ts';
 
-/** @todo Documentation incomplete */
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

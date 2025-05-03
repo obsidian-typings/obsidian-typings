@@ -4,8 +4,9 @@ import type { TreeNodeInfo } from '../../Tree/TreeNodeInfo.d.ts';
 import type { TreeItem } from '../../Tree/TreeItem.d.ts';
 import type { FileTreeItemParent } from './FileTreeItemParent.d.ts';
 
-/** @todo Documentation incomplete */
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

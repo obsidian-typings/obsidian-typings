@@ -1,8 +1,9 @@
 import type { WorkspaceLeaf } from 'obsidian';
 import type { HoverLinkEventState } from './HoverLinkEventState.d.ts';
 
-/** @todo Documentation incomplete */
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

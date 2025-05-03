@@ -14,8 +14,9 @@ import type { FileTreeItem } from './FileTreeItem.d.ts';
 import type { FolderTreeItem } from './FolderTreeItem.d.ts';
 import type { FileExplorerViewSortOrder } from './FileExplorerViewSortOrder.d.ts';
 
-/** @todo Documentation incomplete */
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */
@@ -80,7 +81,7 @@ export interface FileExplorerView extends View {
      * Used internally to attach drop handler to the tree root and folder items.
      * @param folder - Folder that's associated with the item.
      * @param el - Element of the tree root or folder item.
-     * 
+     *
      * @internal
      */
 	attachDropHandler(folder: TFolder, el: HTMLElement): void;

@@ -6,8 +6,9 @@ import type { App } from 'obsidian';
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { FileExplorerPlugin } from './FileExplorerPlugin.d.ts';
 
-/** @todo Documentation incomplete */
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */

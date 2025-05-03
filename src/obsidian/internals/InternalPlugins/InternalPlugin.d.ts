@@ -12,8 +12,9 @@ import type { MobileFileInfo } from '../MobileFileInfo.d.ts';
 import type { InternalPlugins } from './InternalPlugins.d.ts';
 import type { RibbonItem } from './RibbonItem.d.ts';
 
-/** @todo Documentation incomplete */
 /**
+ * @todo Documentation incomplete
+ *
  * @public
  * @unofficial
  */
