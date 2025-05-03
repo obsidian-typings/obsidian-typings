@@ -1,10 +1,10 @@
-import type { TreeItem } from '../../../Tree/TreeItem.d.ts';
+import type { TreeCollapsibleItem } from '../../../Tree/TreeCollapsibleItem.d.ts';
 
 /**
  * @public
  * @unofficial
  */
-export interface GraphOptions extends TreeItem<unknown> {
+export interface GraphOptions extends TreeCollapsibleItem {
     /** @todo Documentation incomplete. */
     getOptions(e: unknown): unknown;
 

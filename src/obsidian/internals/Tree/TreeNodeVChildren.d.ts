@@ -1,16 +1,18 @@
+import type { TreeNode } from './TreeNode.d.ts';
+
 /**
  * @public
  * @unofficial
  */
-export interface TreeNodeVChildren<Item, Owner> {
+export interface TreeNodeVChildren<Item extends TreeNode, Owner extends TreeNode> {
     /** @todo Documentation incomplete. */
     _children: Item[];
-
-    /** @todo Documentation incomplete. */
-    children?: Item[];
-
+    
     /** @todo Documentation incomplete. */
     owner: Owner;
+
+    /** @todo Documentation incomplete. */
+    get children(): Item[];
 
     /** @todo Documentation incomplete. */
     addChild(item: Item): void;
