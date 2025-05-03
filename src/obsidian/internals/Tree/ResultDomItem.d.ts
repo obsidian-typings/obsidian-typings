@@ -1,15 +1,14 @@
 import type { App } from 'electron';
 import type { TFile } from 'obsidian';
-import type { ResultDomResult } from './ResultDomResult.d.ts';
 import type { ResultDom } from './ResultDom.d.ts';
+import type { ResultDomItemChild } from './ResultDomItemChild.d.ts';
+import type { ResultDomResult } from './ResultDomResult.d.ts';
+import type { TreeNode } from './TreeNode.d.ts';
 import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
-import type { TreeNode } from './TreeNode.d.ts';
-import type { ResultDomItemChild } from './ResultDomItemChild.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

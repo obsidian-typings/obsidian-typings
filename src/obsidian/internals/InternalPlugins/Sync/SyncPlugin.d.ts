@@ -3,7 +3,6 @@ import type { SyncPluginInstance } from './SyncPluginInstance.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

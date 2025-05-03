@@ -2,7 +2,6 @@ import type { PropertyInfo } from '../PropertyInfo.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

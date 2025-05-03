@@ -4,7 +4,6 @@ import type { FileRecoveryPlugin } from './FileRecoveryPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

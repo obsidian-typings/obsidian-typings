@@ -3,7 +3,6 @@ import type { SearchView } from './SearchView.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

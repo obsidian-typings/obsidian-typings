@@ -11,7 +11,6 @@ import type { EmbedVideoComponent } from './EmbedVideoComponent.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

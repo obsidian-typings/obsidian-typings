@@ -4,7 +4,6 @@ import type { SyncPlugin } from './SyncPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -9,7 +9,6 @@ import type { TreeRoot } from './TreeRoot.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

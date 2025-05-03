@@ -3,7 +3,6 @@ import type { WordCountPluginInstance } from './WordCountPluginInstance.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

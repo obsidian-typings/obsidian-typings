@@ -4,7 +4,6 @@ import type { AudioRecorderPlugin } from './AudioRecorderPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

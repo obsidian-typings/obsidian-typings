@@ -7,7 +7,6 @@ import type { FileExplorerPluginInstance } from './FileExplorerPluginInstance.d.
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

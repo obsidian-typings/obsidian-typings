@@ -2,7 +2,6 @@ import type { TableCellEditor } from './TableCellEditor.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

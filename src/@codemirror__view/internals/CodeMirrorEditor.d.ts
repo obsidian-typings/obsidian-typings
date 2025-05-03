@@ -19,7 +19,6 @@ import type { SetSelectionOptions } from './SetSelectionOptions.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -3,7 +3,6 @@ import type { TemplatesPluginInstance } from './TemplatesPluginInstance.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

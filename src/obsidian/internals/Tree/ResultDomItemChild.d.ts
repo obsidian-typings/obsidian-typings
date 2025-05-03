@@ -1,12 +1,11 @@
 import type { CachedMetadata } from 'obsidian';
-import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
-import type { TreeNode } from './TreeNode.d.ts';
-import type { ResultDomItem } from './ResultDomItem.d.ts';
 import type { ContentPosition } from './ContentPosition.d.ts';
+import type { ResultDomItem } from './ResultDomItem.d.ts';
+import type { TreeNode } from './TreeNode.d.ts';
+import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

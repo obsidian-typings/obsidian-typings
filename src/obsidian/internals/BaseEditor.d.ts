@@ -11,7 +11,6 @@ import type { EditorPosition } from 'obsidian';
  */
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

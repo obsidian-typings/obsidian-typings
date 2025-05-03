@@ -13,7 +13,6 @@ import type { NoteComposerPluginOptions } from './NoteComposerPluginOptions.d.ts
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

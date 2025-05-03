@@ -3,7 +3,6 @@ import type { DailyNotesPluginInstance } from './DailyNotesPluginInstance.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -2,7 +2,6 @@ import type { GraphColorGroup } from './GraphColorGroup.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

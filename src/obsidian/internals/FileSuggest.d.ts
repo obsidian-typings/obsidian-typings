@@ -3,7 +3,6 @@ import type { FileSuggestManager } from './FileSuggestManager.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

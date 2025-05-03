@@ -6,7 +6,6 @@ import type { CommandPalettePluginInstance } from './CommandPalettePluginInstanc
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

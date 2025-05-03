@@ -2,7 +2,6 @@ import type { PluginManifest } from 'obsidian';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

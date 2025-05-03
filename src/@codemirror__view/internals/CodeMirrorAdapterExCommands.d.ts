@@ -2,7 +2,6 @@ import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

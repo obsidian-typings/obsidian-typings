@@ -3,7 +3,6 @@ import type { TableCell } from './TableCell.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

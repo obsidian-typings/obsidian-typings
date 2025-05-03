@@ -2,7 +2,6 @@ import type { FileStats } from 'obsidian';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

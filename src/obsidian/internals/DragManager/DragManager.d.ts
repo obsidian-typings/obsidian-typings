@@ -10,7 +10,6 @@ import type { DropResult } from './DropResult.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

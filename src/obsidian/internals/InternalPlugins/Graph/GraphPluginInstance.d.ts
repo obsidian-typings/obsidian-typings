@@ -10,7 +10,6 @@ import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.d.
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

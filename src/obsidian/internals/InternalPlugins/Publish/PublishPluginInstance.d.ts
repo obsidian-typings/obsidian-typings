@@ -4,7 +4,6 @@ import type { PublishPlugin } from './PublishPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

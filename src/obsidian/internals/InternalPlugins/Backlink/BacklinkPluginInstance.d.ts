@@ -11,7 +11,6 @@ import type { BacklinkPluginInstanceOptions } from './BacklinkPluginInstanceOpti
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

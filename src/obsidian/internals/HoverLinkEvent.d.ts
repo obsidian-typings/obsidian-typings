@@ -3,7 +3,6 @@ import type { HoverLinkEventState } from './HoverLinkEventState.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

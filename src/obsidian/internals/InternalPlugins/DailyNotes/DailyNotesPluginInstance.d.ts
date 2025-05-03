@@ -9,7 +9,6 @@ import type { DailyNotesPlugin } from './DailyNotesPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

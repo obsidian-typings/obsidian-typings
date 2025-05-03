@@ -3,7 +3,6 @@ import type { RandomNotePluginInstance } from './RandomNotePluginInstance.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

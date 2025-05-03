@@ -57,18 +57,6 @@ declare module 'obsidian' {
         view: View;
 
         /**
-         * Returns `true` if this leaf is currently deferred because it is in the background.
-         * A deferred leaf will have a DeferredView as its view, instead of the View that
-         * it should normally have for its type (like MarkdownView for the `markdown` type).
-         *
-         * @returns Whether the leaf is deferred.
-         * @since 1.7.2
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link isDeferred} instead.
-         */
-        isDeferred__?(): boolean;
-
-        /**
          * Detach this leaf from its parent.
          *
          * @official
@@ -105,6 +93,18 @@ declare module 'obsidian' {
          * @official
          */
         getViewState(): ViewState;
+
+        /**
+         * Returns `true` if this leaf is currently deferred because it is in the background.
+         * A deferred leaf will have a DeferredView as its view, instead of the View that
+         * it should normally have for its type (like MarkdownView for the `markdown` type).
+         *
+         * @returns Whether the leaf is deferred.
+         * @since 1.7.2
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link isDeferred} instead.
+         */
+        isDeferred__?(): boolean;
 
         /**
          * If this view is currently deferred, load it and await that it has fully loaded.

@@ -3,7 +3,6 @@ import type { PagePreviewPluginInstance } from './PagePreviewPluginInstance.d.ts
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -3,7 +3,6 @@ import type { OutgoingLinkPluginInstance } from './OutgoingLinkPluginInstance.d.
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

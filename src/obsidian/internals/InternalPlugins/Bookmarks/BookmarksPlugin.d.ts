@@ -4,7 +4,6 @@ import type { BookmarksPluginViews } from './BookmarksPluginViews.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -8,7 +8,6 @@ import type { HotkeyManagerDefaultKeysRecord } from './HotkeyManagerDefaultKeysR
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

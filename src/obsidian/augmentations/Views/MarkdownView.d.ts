@@ -119,18 +119,6 @@ declare module 'obsidian' {
         sourceMode: MarkdownViewSourceMode;
 
         /**
-         * The associated file.
-         *
-         * @example
-         * ```ts
-         * console.log(markdownFileInfo.file);
-         * ```
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link file} instead.
-         */
-        file__?(): TFile | null;
-
-        /**
          * Add property to inline metadata editor or properties plugin.
          *
          * @deprecated - Removed in 1.6.0.
@@ -183,6 +171,18 @@ declare module 'obsidian' {
          * @unofficial
          */
         editProperty(unused: undefined): void;
+
+        /**
+         * The associated file.
+         *
+         * @example
+         * ```ts
+         * console.log(markdownFileInfo.file);
+         * ```
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link file} instead.
+         */
+        file__?(): TFile | null;
 
         /**
          * Focus on the metadata editor given property information.

@@ -3,7 +3,6 @@ import type { GlobalSearchPluginInstance } from './GlobalSearchPluginInstance.d.
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

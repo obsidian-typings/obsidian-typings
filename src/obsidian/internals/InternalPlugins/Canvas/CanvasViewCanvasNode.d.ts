@@ -10,7 +10,6 @@ import type { CanvasViewCanvasNodeUnknownData } from './CanvasViewCanvasNodeUnkn
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

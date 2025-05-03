@@ -3,7 +3,6 @@ import type { PdfExportSettings } from './PdfExportSettings.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -4,7 +4,6 @@ import type { WorkspacesPlugin } from './WorkspacesPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

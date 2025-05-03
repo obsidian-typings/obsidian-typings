@@ -4,7 +4,6 @@ import type { MarkdownScrollableEditView } from './MarkdownScrollableEditView.d.
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

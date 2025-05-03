@@ -2,7 +2,6 @@ import type { Fold } from './Fold.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -2,7 +2,6 @@ import type { Scope } from 'obsidian';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

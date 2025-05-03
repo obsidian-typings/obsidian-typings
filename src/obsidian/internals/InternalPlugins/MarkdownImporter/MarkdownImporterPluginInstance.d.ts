@@ -4,7 +4,6 @@ import type { MarkdownImporterPlugin } from './MarkdownImporterPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

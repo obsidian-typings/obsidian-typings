@@ -2,7 +2,6 @@ import type { HoverLinkSource } from 'obsidian';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

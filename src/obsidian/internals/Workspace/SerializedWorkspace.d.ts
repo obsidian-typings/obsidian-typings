@@ -3,7 +3,6 @@ import type { SerializedWorkspaceLeftRibbon } from './SerializedWorkspaceLeftRib
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

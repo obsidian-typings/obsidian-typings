@@ -2,7 +2,6 @@ import type { IconName } from 'obsidian';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

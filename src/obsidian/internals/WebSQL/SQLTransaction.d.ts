@@ -3,7 +3,6 @@ import type { SQLResultSet } from './SQLResultSet.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

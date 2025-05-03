@@ -4,7 +4,6 @@ import type { StateHistoryLeafHistory } from './StateHistoryLeafHistory.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

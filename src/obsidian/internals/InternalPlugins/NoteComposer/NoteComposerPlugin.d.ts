@@ -3,7 +3,6 @@ import type { NoteComposerPluginInstance } from './NoteComposerPluginInstance.d.
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

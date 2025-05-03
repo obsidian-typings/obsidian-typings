@@ -3,7 +3,6 @@ import type { BrowserPluginInstance } from './BrowserPluginInstance.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

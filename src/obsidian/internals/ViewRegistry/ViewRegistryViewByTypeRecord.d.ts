@@ -16,7 +16,6 @@ type Mapping = {
 };
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

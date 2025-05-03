@@ -6,7 +6,6 @@ import type { EmptyView } from './EmptyView.d.ts';
  */
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

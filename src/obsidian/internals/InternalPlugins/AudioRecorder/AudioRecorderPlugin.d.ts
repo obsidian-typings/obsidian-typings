@@ -3,7 +3,6 @@ import type { AudioRecorderPluginInstance } from './AudioRecorderPluginInstance.
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

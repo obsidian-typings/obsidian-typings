@@ -4,7 +4,6 @@ import type { SlidesPlugin } from './SlidesPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

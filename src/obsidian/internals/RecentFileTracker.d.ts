@@ -7,7 +7,6 @@ import type { GetRecentFilesOptions } from './GetRecentFilesOptions.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

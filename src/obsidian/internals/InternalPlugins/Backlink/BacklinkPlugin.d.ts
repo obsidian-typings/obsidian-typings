@@ -4,7 +4,6 @@ import type { BacklinkPluginViews } from './BacklinkPluginViews.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

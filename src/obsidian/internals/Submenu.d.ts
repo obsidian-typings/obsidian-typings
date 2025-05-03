@@ -1,6 +1,5 @@
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

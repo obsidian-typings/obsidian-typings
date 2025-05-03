@@ -17,7 +17,6 @@ import type { NodeInteractionLayer } from './NodeInteractionLayer.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

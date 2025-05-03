@@ -4,7 +4,6 @@ import type { OutlinePluginInstance } from './OutlinePluginInstance.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

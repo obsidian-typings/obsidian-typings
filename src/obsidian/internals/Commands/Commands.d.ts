@@ -7,7 +7,6 @@ import type { CommandsEditorCommandsRecord } from './CommandsEditorCommandsRecor
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

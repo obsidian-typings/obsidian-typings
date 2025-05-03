@@ -3,7 +3,6 @@ import type { SlashCommandPluginInstance } from './SlashCommandPluginInstance.d.
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

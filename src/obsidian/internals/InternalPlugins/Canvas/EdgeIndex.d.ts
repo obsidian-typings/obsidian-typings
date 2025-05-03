@@ -3,7 +3,6 @@ import type { EdgeIndexData } from './EdgeIndexData.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

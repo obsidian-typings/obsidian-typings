@@ -4,7 +4,6 @@ import type { PropertyRenderContext } from './PropertyRenderContext.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

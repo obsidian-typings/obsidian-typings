@@ -7,7 +7,6 @@ import type { EmbedRegistryEmbedByExtensionRecord } from './EmbedRegistryEmbedBy
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

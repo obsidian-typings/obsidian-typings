@@ -4,7 +4,6 @@ import type {
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

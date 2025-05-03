@@ -3,7 +3,6 @@ import type { AbstractFileTreeItem } from './AbstractFileTreeItem.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */
@@ -13,8 +12,7 @@ export interface FileTreeItem extends AbstractFileTreeItem<TFile> {
      * if it wasn't a Markdown file.
      */
     tagEl: HTMLElement | null;
-    /**
-     * @todo Documentation incomplete.
-     */
+
+    /** @todo Documentation incomplete. */
     isSupported(): boolean;
 }

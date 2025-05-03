@@ -4,7 +4,6 @@ import type { TagPanePlugin } from './TagPanePlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

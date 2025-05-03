@@ -3,7 +3,6 @@ import type { VimState } from './VimState.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

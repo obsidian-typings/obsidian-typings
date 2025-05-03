@@ -8,7 +8,6 @@ import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

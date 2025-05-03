@@ -11,7 +11,6 @@ import type { ViewRegistryViewByTypeRecord } from './ViewRegistryViewByTypeRecor
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

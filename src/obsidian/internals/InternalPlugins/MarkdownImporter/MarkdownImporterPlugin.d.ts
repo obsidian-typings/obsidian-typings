@@ -3,7 +3,6 @@ import type { MarkdownImporterPluginInstance } from './MarkdownImporterPluginIns
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

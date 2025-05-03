@@ -3,7 +3,6 @@ import type { CanvasEmbed } from './CanvasEmbed.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

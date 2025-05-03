@@ -2,7 +2,6 @@ import type { CapacitorFileEntry } from './CapacitorFileEntry.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

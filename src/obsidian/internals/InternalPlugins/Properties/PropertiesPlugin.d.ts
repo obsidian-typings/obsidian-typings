@@ -3,7 +3,6 @@ import type { PropertiesPluginInstance } from './PropertiesPluginInstance.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

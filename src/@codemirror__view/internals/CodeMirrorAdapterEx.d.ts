@@ -10,7 +10,6 @@ import type { VimEditor } from './Vim/VimEditor.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -3,7 +3,6 @@ import type { AudioView } from './AudioView.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

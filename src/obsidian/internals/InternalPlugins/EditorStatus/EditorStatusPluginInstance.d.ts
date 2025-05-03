@@ -4,7 +4,6 @@ import type { EditorStatusPlugin } from './EditorStatusPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

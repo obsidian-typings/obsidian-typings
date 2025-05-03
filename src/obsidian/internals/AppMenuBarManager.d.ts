@@ -8,7 +8,6 @@ import type { AppMenuBarManagerConstructor } from './AppMenuBarManagerConstructo
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

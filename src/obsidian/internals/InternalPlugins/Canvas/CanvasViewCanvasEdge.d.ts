@@ -7,7 +7,6 @@ import type { CanvasViewCanvasEdgePath } from './CanvasViewCanvasEdgePath.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

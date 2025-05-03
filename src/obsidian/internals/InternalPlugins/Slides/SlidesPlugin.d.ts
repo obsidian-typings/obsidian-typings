@@ -3,7 +3,6 @@ import type { SlidesPluginInstance } from './SlidesPluginInstance.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

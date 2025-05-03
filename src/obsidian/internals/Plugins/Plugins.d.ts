@@ -10,7 +10,6 @@ import type { PluginsPluginsRecord } from './PluginsPluginsRecord.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

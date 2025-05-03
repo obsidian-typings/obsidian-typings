@@ -3,7 +3,6 @@ import type { FileRecoveryPluginInstance } from './FileRecoveryPluginInstance.d.
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

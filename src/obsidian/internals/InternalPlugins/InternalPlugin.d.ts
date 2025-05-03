@@ -14,7 +14,6 @@ import type { RibbonItem } from './RibbonItem.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

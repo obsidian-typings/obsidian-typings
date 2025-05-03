@@ -2,7 +2,6 @@ import type { CanvasViewCanvasNodeBaseBaseBase } from './CanvasViewCanvasNodeBas
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

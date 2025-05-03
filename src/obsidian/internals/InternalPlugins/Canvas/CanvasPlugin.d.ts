@@ -3,7 +3,6 @@ import type { CanvasPluginInstance } from './CanvasPluginInstance.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

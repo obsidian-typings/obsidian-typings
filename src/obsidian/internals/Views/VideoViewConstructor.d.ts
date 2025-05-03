@@ -3,7 +3,6 @@ import type { VideoView } from './VideoView.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

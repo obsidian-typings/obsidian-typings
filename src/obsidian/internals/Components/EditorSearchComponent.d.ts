@@ -7,7 +7,6 @@ import type { AbstractSearchComponent } from './AbstractSearchComponent.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

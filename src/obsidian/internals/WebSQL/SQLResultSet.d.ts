@@ -2,7 +2,6 @@ import type { SQLResultSetRowList } from './SQLResultSetRowList.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -8,7 +8,6 @@ import type { FileExplorerPlugin } from './FileExplorerPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -48,18 +48,6 @@ declare module 'obsidian' {
         view: MarkdownView;
 
         /**
-         * Get the file associated with the edit view.
-         *
-         * @example
-         * ```ts
-         * console.log(markdownEditView.file);
-         * ```
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link file} instead.
-         */
-        file__?(): TFile;
-
-        /**
          * Apply the scroll position to the edit view.
          *
          * @example
@@ -103,6 +91,18 @@ declare module 'obsidian' {
          * @unofficial
          */
         destroy(): void;
+
+        /**
+         * Get the file associated with the edit view.
+         *
+         * @example
+         * ```ts
+         * console.log(markdownEditView.file);
+         * ```
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link file} instead.
+         */
+        file__?(): TFile;
 
         /**
          * Get the markdown content of the edit view.

@@ -4,7 +4,6 @@ import type { BacklinkComponent } from './BacklinkComponent.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

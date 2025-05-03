@@ -3,7 +3,6 @@ import type { TagPanePluginInstance } from './TagPanePluginInstance.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

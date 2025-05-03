@@ -12,7 +12,6 @@ import type { InstallThemeOptions } from './InstallThemeOptions.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

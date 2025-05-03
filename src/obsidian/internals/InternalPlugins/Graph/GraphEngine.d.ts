@@ -12,7 +12,6 @@ import type { GraphForceOptions } from './Options/GraphForceOptions.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

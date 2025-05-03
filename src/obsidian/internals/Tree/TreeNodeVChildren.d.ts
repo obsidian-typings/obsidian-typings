@@ -2,7 +2,6 @@ import type { TreeNode } from './TreeNode.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

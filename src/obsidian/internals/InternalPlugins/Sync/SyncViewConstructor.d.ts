@@ -4,7 +4,6 @@ import type { SyncView } from './SyncView.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -3,7 +3,6 @@ import type { SQLTransaction } from './SQLTransaction.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

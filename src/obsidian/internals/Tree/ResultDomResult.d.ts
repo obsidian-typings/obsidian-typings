@@ -3,7 +3,6 @@ import type { ResultProperty } from './ResultProperty.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -3,7 +3,6 @@ import type { EditorStatusPluginInstance } from './EditorStatusPluginInstance.d.
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

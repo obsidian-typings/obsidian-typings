@@ -4,7 +4,6 @@ import type { PropertiesPlugin } from './PropertiesPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

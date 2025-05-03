@@ -4,7 +4,6 @@ import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -2,7 +2,6 @@ import type { FileCacheEntry } from '../FileCacheEntry.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -4,7 +4,6 @@ import type { TemplatesPlugin } from './TemplatesPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

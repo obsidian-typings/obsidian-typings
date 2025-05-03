@@ -2,7 +2,6 @@ import type { RendererSection } from './RendererSection.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

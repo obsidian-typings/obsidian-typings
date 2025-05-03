@@ -4,7 +4,6 @@ import type { ZkPrefixerPlugin } from './ZkPrefixerPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

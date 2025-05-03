@@ -3,7 +3,6 @@ import type { SlashCommandPlugin } from './SlashCommandPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -4,7 +4,6 @@ import type { WordCountPlugin } from './WordCountPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

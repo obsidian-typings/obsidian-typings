@@ -10,7 +10,6 @@ import type { HeaderDom } from './HeaderDom.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

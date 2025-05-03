@@ -22,7 +22,6 @@ import type { BookmarksPlugin } from './BookmarksPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

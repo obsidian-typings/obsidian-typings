@@ -3,7 +3,6 @@ import type { ViewType } from '../../implementations/Constants/ViewType.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -4,7 +4,6 @@ import type { SwitcherPlugin } from './SwitcherPlugin.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

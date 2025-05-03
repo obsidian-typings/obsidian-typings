@@ -47,14 +47,6 @@ declare module 'obsidian' {
         view: MarkdownView;
 
         /**
-         * The file associated with the markdown preview view.
-         *
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link file} instead.
-         */
-        file__?(): TFile;
-
-        /**
          * @todo Documentation incomplete.
          * @unofficial
          */
@@ -93,6 +85,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         edit(e: unknown): unknown;
+
+        /**
+         * The file associated with the markdown preview view.
+         *
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link file} instead.
+         */
+        file__?(): TFile;
 
         /**
          * @todo Documentation incomplete.

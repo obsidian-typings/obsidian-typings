@@ -2,7 +2,6 @@ import type { ReferenceCache } from 'obsidian';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

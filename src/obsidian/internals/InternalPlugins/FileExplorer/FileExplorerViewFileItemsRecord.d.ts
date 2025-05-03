@@ -3,7 +3,6 @@ import type { FolderTreeItem } from './FolderTreeItem.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -3,7 +3,6 @@ import type { GraphPluginInstance } from './GraphPluginInstance.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

@@ -12,7 +12,6 @@ import type { InternalPluginsConfigRecord } from './InternalPluginsConfigRecord.
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

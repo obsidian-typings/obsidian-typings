@@ -9,7 +9,6 @@ import type { FoldInfo } from './FoldInfo.d.ts';
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */

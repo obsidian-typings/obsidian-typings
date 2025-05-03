@@ -11,7 +11,6 @@ import type { CanvasPluginInstanceOptions } from './CanvasPluginInstanceOptions.
 
 /**
  * @todo Documentation incomplete
- *
  * @public
  * @unofficial
  */
