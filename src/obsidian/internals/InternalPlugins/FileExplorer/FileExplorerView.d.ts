@@ -10,6 +10,7 @@ import type { Tree } from '../../Tree/Tree.d.ts';
 import type { WeakMapWrapper } from '../../WeakMapWrapper.d.ts';
 import type { FileExplorerViewFileItemsRecord } from './FileExplorerViewFileItemsRecord.d.ts';
 import type { FileTreeItem } from './FileTreeItem.d.ts';
+import type { FolderTreeItem } from './FolderTreeItem.d.ts';
 
 /** @todo Documentation incomplete */
 /**
@@ -30,7 +31,7 @@ export interface FileExplorerView extends View {
     /**
      * Tree view of files.
      */
-    tree: Tree<FileTreeItem>;
+    tree: Tree<FileTreeItem | FolderTreeItem>;
 
     /**
      * Try to rename the file.
