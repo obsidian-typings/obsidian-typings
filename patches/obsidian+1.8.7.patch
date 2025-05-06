@@ -1,10 +1,12 @@
 diff --git a/node_modules/obsidian/obsidian.d.ts b/node_modules/obsidian/obsidian.d.ts
-index 6b78a9f..a2f7270 100644
+index 6b78a9f..59081c3 100644
 --- a/node_modules/obsidian/obsidian.d.ts
 +++ b/node_modules/obsidian/obsidian.d.ts
-@@ -7,6 +7,9 @@ import { Extension, StateField } from '@codemirror/state';
+@@ -5,8 +5,10 @@
+ 
+ import { Extension, StateField } from '@codemirror/state';
  import { EditorView, ViewPlugin } from '@codemirror/view';
- import * as CodeMirror from 'codemirror';
+-import * as CodeMirror from 'codemirror';
  import * as Moment from 'moment';
 +import type { Mermaid } from 'mermaid' with { 'resolution-mode': 'import' };
 +import type { default as pdfjsLib } from 'pdfjs-dist';
@@ -12,7 +14,7 @@ index 6b78a9f..a2f7270 100644
  
  declare global {
      interface ObjectConstructor {
-@@ -2287,7 +2290,7 @@ export function loadMathJax(): Promise<void>;
+@@ -2287,7 +2289,7 @@ export function loadMathJax(): Promise<void>;
   * @see {@link https://mermaid.js.org/ Official Mermaid documentation}
   * @public
   */
@@ -21,7 +23,7 @@ index 6b78a9f..a2f7270 100644
  
  /**
   * Load PDF.js and return a promise to the global pdfjsLib object.
-@@ -2295,7 +2298,7 @@ export function loadMermaid(): Promise<any>;
+@@ -2295,7 +2297,7 @@ export function loadMermaid(): Promise<any>;
   * @see {@link https://mozilla.github.io/pdf.js/ Official PDF.js documentation}
   * @public
   */
@@ -30,7 +32,7 @@ index 6b78a9f..a2f7270 100644
  
  /**
   * Load Prism.js and return a promise to the global Prism object.
-@@ -2303,7 +2306,7 @@ export function loadPdfJs(): Promise<any>;
+@@ -2303,7 +2305,7 @@ export function loadPdfJs(): Promise<any>;
   * @see {@link https://prismjs.com/ Official Prism documentation}
   * @public
   */
@@ -39,3 +41,31 @@ index 6b78a9f..a2f7270 100644
  
  /**
   * Location within a Markdown document
+@@ -2545,7 +2547,7 @@ export abstract class MarkdownRenderer extends MarkdownRenderChild implements Ma
+     app: App;
+ 
+     /** @public */
+-    hoverPopover: HoverPopover;
++    hoverPopover: HoverPopover | null;
+ 
+     /** @public */
+     abstract get file(): TFile;
+@@ -5089,7 +5091,7 @@ export abstract class WorkspaceItem extends Events {
+ /**
+  * @public
+  */
+-export class WorkspaceLeaf extends WorkspaceItem {
++export class WorkspaceLeaf extends WorkspaceItem implements HoverParent {
+ 
+     /**
+      * The direct parent of the leaf.
+@@ -5110,6 +5112,9 @@ export class WorkspaceLeaf extends WorkspaceItem {
+      */
+     view: View;
+ 
++    /** @public */
++    hoverPopover: HoverPopover | null;
++
+     /**
+      * Open a file in this leaf.
+      *
