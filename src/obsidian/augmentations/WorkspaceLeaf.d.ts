@@ -4,7 +4,7 @@ declare module 'obsidian' {
     /**
      * Workspace leaf.
      */
-    interface WorkspaceLeaf extends WorkspaceItem {
+    interface WorkspaceLeaf extends WorkspaceItem, HoverParent {
         /**
          * @todo Documentation incomplete.
          * @unofficial

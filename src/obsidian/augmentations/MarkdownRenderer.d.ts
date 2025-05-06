@@ -17,7 +17,7 @@ declare module 'obsidian' {
          *
          * @official
          */
-        hoverPopover: HoverPopover;
+        hoverPopover: HoverPopover | null;
 
         /**
          * @todo Documentation incomplete.
