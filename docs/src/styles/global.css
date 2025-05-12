@@ -37,6 +37,18 @@
         --sl-color-asides-border: #5eb5bd;
         background-color: #416263;
     }
+
+    .starlight-aside--official {
+        --sl-color-asides-text-accent: #b5ffb6;
+        --sl-color-asides-border: #6fa85e;
+        background-color: #294820;
+    }
+
+    .starlight-aside--unofficial {
+        --sl-color-asides-text-accent: #ec95ff;
+        --sl-color-asides-border: #9731a3;
+        background-color: #41124a;
+    }
 }
 
 :root[data-theme='light'] {
@@ -67,6 +79,18 @@
         --sl-color-asides-text-accent: #0d9a99;
         --sl-color-asides-border: #21a6a5;
         background-color: #cdeded;
+    }
+
+    .starlight-aside--official {
+        --sl-color-asides-text-accent: #17aa19;
+        --sl-color-asides-border: #3e433b;
+        background-color: #dbf4d1;
+    }
+
+    .starlight-aside--unofficial {
+        --sl-color-asides-text-accent: #700588;
+        --sl-color-asides-border: #b456c1;
+        background-color: #f0d8f4;
     }
 }
 
@@ -108,6 +132,10 @@
     background-color: var(--sl-color-red-low);
     border-radius: 8px;
     border: unset;
+
+    .starlight-aside__content:has(hr) {
+        display: none;
+    }
 
     svg {
         width: var(--icon-size-med);

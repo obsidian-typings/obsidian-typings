@@ -1,7 +1,7 @@
 import { MarkdownPageEvent } from 'typedoc-plugin-markdown';
 
 export function load(app) {
-    const convertHeadings = ['Todo', 'Tutorial', 'Remark', 'Deprecated'];
+    const convertHeadings = ['Todo', 'Tutorial', 'Remark', 'Deprecated', "Unofficial", "Official"];
     const regexes = convertHeadings.map(heading => {
         return {
             type: heading.toLowerCase(),
