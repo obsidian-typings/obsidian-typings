@@ -34,12 +34,48 @@ that some features from the Chromium/Electron/Node.js updates are not listed her
 Links have been provided to the official changelogs where all changes can be found.
 :::
 
+**Minimum supported Obsidian installer version:** `0.14.5` (Electron v18) <br/>
+> This is the last version that will still receive Obsidian updates, as communicated by the developers.
+
+**Obsidian installer update notice:** `1.5.12` (Electron v28) <br/>
+> From this version onwards, Obsidian will display a notice to the user telling them upgrade
+> to the latest installer version.
+
+
 :::danger
 Users only sporadically update Obsidian's installer versions on desktop,
 these features will only be available for most users after a couple of months.
 
-Feel free to use these features in your personal plugins, themes and snippets.
+Feel free to use these features in personal plugins, themes and snippets,
+but be careful when using them in plugins that are published on the community plugins store.
 :::
+
+
+## [Obsidian 1.8.9](https://obsidian.md/changelog/2025-03-05-desktop-v1.8.9/) (2025/03/05)
+### [Electron v34](https://www.electronjs.org/blog/electron-34-0)&nbsp;(chromium&nbsp;[131](https://developer.chrome.com/blog/new-in-chrome-131/)&nbsp;+&nbsp;[132](https://developer.chrome.com/blog/new-in-chrome-132/))
+- <JS/> [`<dialog>` `toggle` and `beforetoggle` events](https://developer.mozilla.org/en-US/docs/Web/API/ToggleEvent): Detect when a dialog is shown or hidden
+- <JS/> [Capture video for a specific Element](https://developer.chrome.com/docs/web-platform/element-capture)
+- <CSS/> [Customize `<details>` and `<summary>` elements](https://developer.chrome.com/blog/styling-details)
+- <CSS/> [`@page` margin boxes](https://developer.chrome.com/blog/print-margins): Control the margins of printed pages
+- <CSS/> [`sideways-rl` and `sideways-lr` `writing-mode` rules](https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode#values): Determine the direction of text
+- <DevTools/> [Performance insights in Performance tab](https://developer.chrome.com/blog/new-in-devtools-131#insights)
+- <DevTools/> [Ignore anonymous `() => {}` functions in stack traces](https://developer.chrome.com/blog/new-in-devtools-131#ignore-list)
+- <DevTools/> [Real-time updates for CSS attributes in Elements tab](https://developer.chrome.com/blog/new-in-devtools-132#computed)
+
+## [Obsidian 1.8.3](https://obsidian.md/changelog/2025-01-30-desktop-v1.8.3/) (2025/01/30)
+### [Electron v33](https://www.electronjs.org/blog/electron-33-0)&nbsp;(chromium&nbsp;[129](https://developer.chrome.com/blog/new-in-chrome-129/)&nbsp;+&nbsp;[130](https://developer.chrome.com/blog/new-in-chrome-130/))
+- <JS/> [`.yield()`](https://developer.mozilla.org/en-US/docs/Web/API/Scheduler/yield): Temporarily yield long-running tasks to the event loop
+- <JS/> [`Intl.DurationFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DurationFormat): Format time durations in any language
+- <JS/> [Document PIP](https://developer.chrome.com/docs/web-platform/document-picture-in-picture): Allows PIP modes for any element, not just `<video>`
+- <HTML/> [Keyboard focusable scrollers](https://developer.chrome.com/blog/keyboard-focusable-scrollers)
+- <CSS/> [Animate intrinsic sizes](https://developer.chrome.com/docs/css-ui/animate-to-height-auto): Allow smooth animations for `min`, `max` and `fit-content` sizes
+- <CSS/> [Anchor position rule renames](https://developer.chrome.com/blog/new-in-chrome-129/#anchor-positioning): Some anchor-based CSS rules have been renamed
+- <CSS/> [`box-decoration-break`](https://developer.mozilla.org/en-US/docs/Web/CSS/box-decoration-break): Define how split-up elements should be rendered
+- <DevTools/> [Search for requests in `Network` tab](https://developer.chrome.com/blog/new-in-devtools-129#perf-network-search)
+- <DevTools/> [Stack traces for `performance.mark` and `.measure`](https://developer.chrome.com/blog/new-in-devtools-129#extension-stack-traces)
+- <DevTools/> [Force more pseudo-classes on elements](https://developer.chrome.com/blog/new-in-devtools-129#specific-element-states)
+- <DevTools/> [Scroll overflowed elements are marked with a badge](https://developer.chrome.com/blog/new-in-devtools-130#scroll-badge)
+- <DevTools/> [Find detached elements with only JS reference usign Memory snapshots](https://developer.chrome.com/blog/new-in-devtools-130#detached-elements)
 
 ## [Obsidian 1.7.5](https://obsidian.md/changelog/2024-11-04-desktop-v1.7.5/) (2024/11/04)
 ### [Electron v32](https://www.electronjs.org/blog/electron-32-0)&nbsp;(chromium&nbsp;[127](https://developer.chrome.com/blog/new-in-chrome-127/)&nbsp;+&nbsp;[128](https://developer.chrome.com/blog/new-in-chrome-128/))
@@ -172,6 +208,11 @@ Further, only the most important features will be listed (specifically CSS and J
  - <JS/> [`showPicker()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/showPicker): Programmatically open `<input>` elements
  - <JS/> [Multi-screen window placement API](https://developer.chrome.com/docs/capabilities/web-apis/window-management)
 - <CSS/> [`CSS Cascade Layers`](https://developer.chrome.com/blog/new-in-chrome-99/#css-cascade-layers): Control the order of CSS rules
+
+:::note
+Installer version `0.14.5` is, as of writing, the minimum supported installer version for the Obsidian app.
+:::
+
 
 ## [Obsidian 0.13.31](https://obsidian.md/changelog/2022-03-08-desktop-v0.13.31/) (2022/03/08)
 ### [Electron v17](https://www.electronjs.org/blog/electron-17-0)&nbsp;(chromium&nbsp;[97](https://developer.chrome.com/blog/new-in-chrome-97/)&nbsp;+&nbsp;[98](https://developer.chrome.com/blog/new-in-chrome-98/))
