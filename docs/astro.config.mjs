@@ -18,9 +18,9 @@ export default defineConfig({
                 baseUrl: 'https://github.com/Fevol/obsidian-typings/tree/main/docs/'
             },
             favicon: './favicon.png',
-            social: {
-                github: 'https://github.com/fevol/obsidian-typings'
-            },
+            social: [
+                {icon: "github", label: "Github", href: 'https://github.com/fevol/obsidian-typings'}
+            ],
             sidebar: [
                 {
                     label: 'Start Here',
@@ -73,6 +73,8 @@ export default defineConfig({
                         githubPages: false,
                         entryPointStrategy: 'expand',
                         excludeExternals: false,
+                        // FIXME: Temporary measure to bypass error from `fetch` definition not being found in Window's `blinkfetch: typeof fetch`
+                        skipErrorChecking: true,
                         // FIXME: Prevent Readme from being generated, as it creates invalid links
                         readme: 'none'
                     }
