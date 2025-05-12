@@ -79,6 +79,7 @@ declare global {
         /**
          * @todo Documentation incomplete.
          * @unofficial
+         * @hidden
          */
         blinkfetch: typeof fetch;
 
