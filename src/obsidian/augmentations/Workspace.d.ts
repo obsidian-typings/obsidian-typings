@@ -914,7 +914,7 @@ declare module 'obsidian' {
          */
         on(
             name: 'markdown-viewport-menu',
-            callback: (menu: Menu, view: MarkdownPreviewView, sectionName: string, menuItem: string) => unknown,
+            callback: (menu: Menu, view: MarkdownView, sectionName: string, menuItem: string) => unknown,
             ctx?: unknown
         ): EventRef;
 
