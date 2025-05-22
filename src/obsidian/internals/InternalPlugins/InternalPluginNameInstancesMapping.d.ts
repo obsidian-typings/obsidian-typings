@@ -2,7 +2,7 @@ import type { InternalPluginName } from '../../implementations/Constants/Interna
 import type { AudioRecorderPluginInstance } from './AudioRecorder/AudioRecorderPluginInstance.d.ts';
 import type { BacklinkPluginInstance } from './Backlink/BacklinkPluginInstance.d.ts';
 import type { BookmarksPluginInstance } from './Bookmarks/BookmarksPluginInstance.d.ts';
-import type { WebviewerPluginInstance } from './Webviewer/WebviewerPluginInstance.js';
+import type { WebviewerPluginInstance } from './Webviewer/WebviewerPluginInstance.d.ts';
 import type { CanvasPluginInstance } from './Canvas/CanvasPluginInstance.d.ts';
 import type { CommandPalettePluginInstance } from './CommandPalette/CommandPalettePluginInstance.d.ts';
 import type { DailyNotesPluginInstance } from './DailyNotes/DailyNotesPluginInstance.d.ts';

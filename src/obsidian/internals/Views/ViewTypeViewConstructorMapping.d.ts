@@ -1,8 +1,8 @@
 import type { ViewType } from '../../implementations/Constants/ViewType.ts';
 import type { BacklinkViewConstructor } from '../InternalPlugins/Backlink/BacklinkViewConstructor.d.ts';
 import type { BookmarksViewConstructor } from '../InternalPlugins/Bookmarks/BookmarksViewConstructor.d.ts';
-import type { WebviewerHistoryViewConstructor } from '../InternalPlugins/Webviewer/WebviewerHistoryViewConstructor.js';
-import type { WebviewerViewConstructor } from '../InternalPlugins/Webviewer/WebviewerViewConstructor.js';
+import type { WebviewerHistoryViewConstructor } from '../InternalPlugins/Webviewer/WebviewerHistoryViewConstructor.d.ts';
+import type { WebviewerViewConstructor } from '../InternalPlugins/Webviewer/WebviewerViewConstructor.d.ts';
 import type { CanvasViewConstructor } from '../InternalPlugins/Canvas/CanvasViewConstructor.d.ts';
 import type { FileExplorerViewConstructor } from '../InternalPlugins/FileExplorer/FileExplorerViewConstructor.d.ts';
 import type { SearchViewConstructor } from '../InternalPlugins/GlobalSearch/SearchViewConstructor.d.ts';
