@@ -55,6 +55,7 @@
     "homepage": "https://github.com/Fevol/obsidian-typings#readme",
     "dependencies": {
         "@capacitor/core": "^6.1.2",
+        "@codemirror/language": "^6.11.0",
         "@codemirror/search": "^6.5.10",
         "@codemirror/state": "^6.5.2",
         "@pixi/color": "7.2.4",
