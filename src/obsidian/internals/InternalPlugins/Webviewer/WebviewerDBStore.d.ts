@@ -17,7 +17,7 @@ export interface WebviewerDBStore {
     /**
      * Underlying database used to store history items and fav icons via IndexedDB.
      * 
-     * @remarks Use methods such as `addHistoryItem` etc. to interact with the stored history.
+     * @remark Use methods such as `addHistoryItem` etc. to interact with the stored history.
      */
     db: IDBDatabase;
 
