@@ -1,12 +1,12 @@
 import type { ItemView } from 'obsidian';
-import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
+import type { ViewType } from '../../../implementations/Constants/ViewType.ts';
 
 /**
  * @todo Documentation incomplete
  * @public
  * @unofficial
  */
-export interface BrowserView extends ItemView {
+export interface WebviewerView extends ItemView {
     /** @todo Documentation incomplete */
     closeSearch(): void;
 
@@ -50,7 +50,7 @@ export interface BrowserView extends ItemView {
     /**
      * Get the current view type.
      */
-    getViewType(): typeof ViewType.Browser;
+    getViewType(): typeof ViewType.Webviewer;
 
     /** @todo Documentation incomplete */
     hideAll(): void;

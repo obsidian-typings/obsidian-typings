@@ -26,7 +26,7 @@ declare module 'obsidian' {
          * @remark Can be null when Editor is not instantiated.
          * @unofficial
          */
-        get activeCm(): EditorView | null;
+        get activeCM(): EditorView | null;
 
         /**
          * Whether the editor is embedded in a table cell.

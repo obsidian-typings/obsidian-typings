@@ -11,8 +11,6 @@ export const ViewType = {
     Audio: 'audio',
     Backlink: InternalPluginName.Backlink,
     Bookmarks: InternalPluginName.Bookmarks,
-    Browser: 'browser',
-    BrowserHistory: 'browser-history',
     Canvas: InternalPluginName.Canvas,
     Empty: 'empty',
     FileExplorer: InternalPluginName.FileExplorer,
@@ -28,5 +26,7 @@ export const ViewType = {
     Search: 'search',
     Sync: 'sync',
     Tag: 'tag',
-    Video: 'video'
+    Video: 'video',
+    Webviewer: 'webviewer',
+    WebviewerHistory: 'webviewer-history'
 } as const;

@@ -2,7 +2,7 @@ import type { InternalPluginName } from '../../implementations/Constants/Interna
 import type { AudioRecorderPluginInstance } from './AudioRecorder/AudioRecorderPluginInstance.d.ts';
 import type { BacklinkPluginInstance } from './Backlink/BacklinkPluginInstance.d.ts';
 import type { BookmarksPluginInstance } from './Bookmarks/BookmarksPluginInstance.d.ts';
-import type { BrowserPluginInstance } from './Browser/BrowserPluginInstance.d.ts';
+import type { WebviewerPluginInstance } from './Webviewer/WebviewerPluginInstance.d.ts';
 import type { CanvasPluginInstance } from './Canvas/CanvasPluginInstance.d.ts';
 import type { CommandPalettePluginInstance } from './CommandPalette/CommandPalettePluginInstance.d.ts';
 import type { DailyNotesPluginInstance } from './DailyNotes/DailyNotesPluginInstance.d.ts';
@@ -39,7 +39,7 @@ export type InternalPluginNameInstancesMapping = {
     [InternalPluginName.AudioRecorder]: AudioRecorderPluginInstance;
     [InternalPluginName.Backlink]: BacklinkPluginInstance;
     [InternalPluginName.Bookmarks]: BookmarksPluginInstance;
-    [InternalPluginName.Browser]: BrowserPluginInstance;
+    [InternalPluginName.Webviewer]: WebviewerPluginInstance;
     [InternalPluginName.Canvas]: CanvasPluginInstance;
     [InternalPluginName.CommandPalette]: CommandPalettePluginInstance;
     [InternalPluginName.DailyNotes]: DailyNotesPluginInstance;
