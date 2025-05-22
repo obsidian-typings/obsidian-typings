@@ -18,10 +18,6 @@ export const InternalPluginName = {
      */
     Bookmarks: 'bookmarks',
     /**
-     * Plugin name in UI: Web viewer.
-     */
-    Browser: 'browser',
-    /**
      * Plugin name in UI: Canvas.
      */
     Canvas: 'canvas',
@@ -109,6 +105,10 @@ export const InternalPluginName = {
      * Plugin name in UI: Templates.
      */
     Templates: 'templates',
+    /**
+     * Plugin name in UI: Web viewer.
+     */
+    Webviewer: 'webviewer',
     /**
      * Plugin name in UI: Word count.
      */

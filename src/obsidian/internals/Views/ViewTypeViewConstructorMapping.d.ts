@@ -1,8 +1,8 @@
 import type { ViewType } from '../../implementations/Constants/ViewType.ts';
 import type { BacklinkViewConstructor } from '../InternalPlugins/Backlink/BacklinkViewConstructor.d.ts';
 import type { BookmarksViewConstructor } from '../InternalPlugins/Bookmarks/BookmarksViewConstructor.d.ts';
-import type { BrowserHistoryViewConstructor } from '../InternalPlugins/Browser/BrowserHistoryViewConstructor.d.ts';
-import type { BrowserViewConstructor } from '../InternalPlugins/Browser/BrowserViewConstructor.d.ts';
+import type { WebviewerHistoryViewConstructor } from '../InternalPlugins/Webviewer/WebviewerHistoryViewConstructor.js';
+import type { WebviewerViewConstructor } from '../InternalPlugins/Webviewer/WebviewerViewConstructor.js';
 import type { CanvasViewConstructor } from '../InternalPlugins/Canvas/CanvasViewConstructor.d.ts';
 import type { FileExplorerViewConstructor } from '../InternalPlugins/FileExplorer/FileExplorerViewConstructor.d.ts';
 import type { SearchViewConstructor } from '../InternalPlugins/GlobalSearch/SearchViewConstructor.d.ts';
@@ -33,8 +33,8 @@ export type ViewTypeViewConstructorMapping = {
     [ViewType.Audio]: AudioViewConstructor;
     [ViewType.Backlink]: BacklinkViewConstructor;
     [ViewType.Bookmarks]: BookmarksViewConstructor;
-    [ViewType.Browser]: BrowserViewConstructor;
-    [ViewType.BrowserHistory]: BrowserHistoryViewConstructor;
+    [ViewType.Webviewer]: WebviewerViewConstructor;
+    [ViewType.WebviewerHistory]: WebviewerHistoryViewConstructor;
     [ViewType.Canvas]: CanvasViewConstructor;
     [ViewType.Empty]: EmptyViewConstructor;
     [ViewType.FileExplorer]: FileExplorerViewConstructor;
