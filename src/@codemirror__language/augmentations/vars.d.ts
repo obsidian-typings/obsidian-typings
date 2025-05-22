@@ -1,5 +1,8 @@
 import '@codemirror/language';
-import type { Extension, Facet } from '@codemirror/state';
+import type {
+    Extension,
+    Facet
+} from '@codemirror/state';
 import type { NodeProp } from '@lezer/common';
 
 export {};
@@ -15,7 +18,7 @@ declare module '@codemirror/language' {
 
     /**
      * The `NodeProp` that holds the CSS class of corresponding line-mode token.
-     * 
+     *
      * @see https://github.com/lishid/cm-language/blob/main/src/stream-parser.ts
      * @remark This only exists and can only be used in Obsidian.
      * @unofficial
@@ -25,7 +28,7 @@ declare module '@codemirror/language' {
     /**
      * This extension installs a highlighter that highlights lines based on `lineClassNodeProp`
      * and `tokenClassNodeProp`.
-     * 
+     *
      * @see https://github.com/lishid/cm-language/blob/main/src/stream-parser.ts
      * @remark This only exists and can only be used in Obsidian.
      * @unofficial
@@ -34,7 +37,7 @@ declare module '@codemirror/language' {
 
     /**
      * The `NodeProp` that holds the CSS class of corresponding line-level token.
-     * 
+     *
      * @see https://github.com/lishid/cm-language/blob/main/src/stream-parser.ts
      * @remark This only exists and can only be used in Obsidian.
      * @unofficial

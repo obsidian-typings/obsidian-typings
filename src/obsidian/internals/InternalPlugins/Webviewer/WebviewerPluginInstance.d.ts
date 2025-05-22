@@ -24,7 +24,7 @@ export interface WebviewerPluginInstance extends InternalPluginInstance<Webviewe
     getSearchEngineUrl(searchQuery: string): string;
 
     /** @todo Documentation incomplete. */
-    handleOpenUrl(event: CustomEvent<{ url: string, newLeaf?: PaneType | boolean, active?: boolean }>): void;
+    handleOpenUrl(event: CustomEvent<{ url: string; newLeaf?: PaneType | boolean; active?: boolean }>): void;
 
     /** @todo Documentation incomplete. */
     openUrl(url: string, newLeaf?: PaneType | boolean, active?: boolean): void;

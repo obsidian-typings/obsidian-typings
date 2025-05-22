@@ -1,6 +1,6 @@
-import type { WebviewerView } from './WebviewerView.d.ts';
 import type { TypedViewConstructor } from '../../Views/TypedViewConstructor.d.ts';
 import type { WebviewerPluginInstance } from './WebviewerPluginInstance.d.ts';
+import type { WebviewerView } from './WebviewerView.d.ts';
 
 /**
  * @todo Documentation incomplete

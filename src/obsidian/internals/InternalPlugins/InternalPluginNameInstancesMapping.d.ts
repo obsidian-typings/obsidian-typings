@@ -2,7 +2,6 @@ import type { InternalPluginName } from '../../implementations/Constants/Interna
 import type { AudioRecorderPluginInstance } from './AudioRecorder/AudioRecorderPluginInstance.d.ts';
 import type { BacklinkPluginInstance } from './Backlink/BacklinkPluginInstance.d.ts';
 import type { BookmarksPluginInstance } from './Bookmarks/BookmarksPluginInstance.d.ts';
-import type { WebviewerPluginInstance } from './Webviewer/WebviewerPluginInstance.d.ts';
 import type { CanvasPluginInstance } from './Canvas/CanvasPluginInstance.d.ts';
 import type { CommandPalettePluginInstance } from './CommandPalette/CommandPalettePluginInstance.d.ts';
 import type { DailyNotesPluginInstance } from './DailyNotes/DailyNotesPluginInstance.d.ts';
@@ -25,6 +24,7 @@ import type { SwitcherPluginInstance } from './Switcher/SwitcherPluginInstance.d
 import type { SyncPluginInstance } from './Sync/SyncPluginInstance.d.ts';
 import type { TagPanePluginInstance } from './TagPane/TagPanePluginInstance.d.ts';
 import type { TemplatesPluginInstance } from './Templates/TemplatesPluginInstance.d.ts';
+import type { WebviewerPluginInstance } from './Webviewer/WebviewerPluginInstance.d.ts';
 import type { WordCountPluginInstance } from './WordCount/WordCountPluginInstance.d.ts';
 import type { WorkspacesPluginInstance } from './Workspaces/WorkspacesPluginInstance.d.ts';
 import type { ZkPrefixerPluginInstance } from './ZkPrefixer/ZkPrefixerPluginInstance.d.ts';

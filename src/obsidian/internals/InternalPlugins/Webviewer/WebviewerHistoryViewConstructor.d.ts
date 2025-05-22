@@ -1,5 +1,5 @@
-import type { WebviewerHistoryView } from './WebviewerHistoryView.d.ts';
 import type { TypedViewConstructor } from '../../Views/TypedViewConstructor.d.ts';
+import type { WebviewerHistoryView } from './WebviewerHistoryView.d.ts';
 import type { WebviewerPluginInstance } from './WebviewerPluginInstance.d.ts';
 
 /**

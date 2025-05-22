@@ -3,7 +3,7 @@ import type { WebviewerHistoryItem } from './WebviewerHistoryItem.d.ts';
 
 /**
  * Stores and manages all history items and cached fav icons.
- * 
+ *
  * @todo Documentation incomplete
  * @public
  * @unofficial
@@ -16,7 +16,7 @@ export interface WebviewerDBStore {
 
     /**
      * Underlying database used to store history items and fav icons via IndexedDB.
-     * 
+     *
      * @remark Use methods such as `addHistoryItem` etc. to interact with the stored history.
      */
     db: IDBDatabase;
@@ -31,9 +31,7 @@ export interface WebviewerDBStore {
      */
     clearHistoryItems(): Promise<void>;
 
-    /**
-     * @todo Documentation incomplete
-     */
+    /** @todo Documentation incomplete */
     connect(): Promise<void>;
 
     /**
@@ -44,11 +42,10 @@ export interface WebviewerDBStore {
     /**
      * Load stored icon in Base64 encoded string. If no stored icon available in the database,
      * it also stores the icon.
-     * 
+     *
      * @param domain - Domain name only, e.g. "obsidian.md".
      * @param source - Source url of the icon, e.g. "https://obsidian.md/favicon.ico".
      * Used as a fallback source if there is no icon strored with corresponding domain.
-     * 
      * @returns Icon in Base64 encoded string.
      */
     loadIcon(domain: string, source?: string): Promise<string | null>;
@@ -65,7 +62,7 @@ export interface WebviewerDBStore {
 
     /**
      * Store specific icon for the given domain name in Base64 string.
-     * 
+     *
      * @param domain - Domain name only, e.g. "obsidian.md".
      * @param source - Source url of the icon, e.g. "https://obsidian.md/favicon.ico".
      * @returns Icon in Base64 encoded string.

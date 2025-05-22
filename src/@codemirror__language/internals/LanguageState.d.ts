@@ -1,5 +1,8 @@
 import type { ParseContext } from '@codemirror/language';
-import type { EditorState, Transaction } from '@codemirror/state';
+import type {
+    EditorState,
+    Transaction
+} from '@codemirror/state';
 import type { Tree } from '@lezer/common';
 
 /**
@@ -19,13 +22,11 @@ export interface LanguageState {
      */
     tree: Tree;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     apply(tr: Transaction): LanguageState;
 }
 
-export namespace LanguageState {
+namespace LanguageState {
     /**
      * @todo Documentation incomplete.
      */

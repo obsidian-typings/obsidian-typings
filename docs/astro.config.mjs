@@ -19,7 +19,7 @@ export default defineConfig({
             },
             favicon: './favicon.png',
             social: [
-                {icon: "github", label: "Github", href: 'https://github.com/fevol/obsidian-typings'}
+                { icon: 'github', label: 'Github', href: 'https://github.com/fevol/obsidian-typings' }
             ],
             sidebar: [
                 {

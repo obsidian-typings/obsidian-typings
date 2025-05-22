@@ -1,5 +1,8 @@
 import type { Language } from '@codemirror/language';
-import type { StateEffect, StateField } from '@codemirror/state';
+import type {
+    StateEffect,
+    StateField
+} from '@codemirror/state';
 import type { LanguageState } from '../internals/LanguageState.d.ts';
 
 export {};

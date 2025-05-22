@@ -95,7 +95,6 @@ const typesSourceFile = project.addSourceFileAtPath('../src/obsidian/augmentatio
 // Import all required imports into the types source file
 for (const [moduleSpecifier, importedNames] of imports) {
     if (importedNames.size === 1 && importedNames.has('default')) {
-
     } else {
         typesSourceFile.addImportDeclaration({
             moduleSpecifier: moduleSpecifier,
