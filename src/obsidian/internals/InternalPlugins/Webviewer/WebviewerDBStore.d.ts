@@ -45,7 +45,7 @@ export interface WebviewerDBStore {
      *
      * @param domain - Domain name only, e.g. "obsidian.md".
      * @param source - Source url of the icon, e.g. "https://obsidian.md/favicon.ico".
-     * Used as a fallback source if there is no icon strored with corresponding domain.
+     * Used as a fallback source if there is no icon stored with corresponding domain.
      * @returns Icon in Base64 encoded string.
      */
     loadIcon(domain: string, source?: string): Promise<string | null>;

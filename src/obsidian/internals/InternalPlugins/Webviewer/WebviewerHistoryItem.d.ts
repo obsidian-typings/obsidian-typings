@@ -6,7 +6,7 @@
  */
 export interface WebviewerHistoryItem {
     /**
-     * Timpstamp when the URL was visited.
+     * Timestamp when the URL was visited.
      */
     accessTs: number;
 
