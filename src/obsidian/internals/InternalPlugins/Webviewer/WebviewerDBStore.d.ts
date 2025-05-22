@@ -51,7 +51,7 @@ export interface WebviewerDBStore {
     loadIcon(domain: string, source?: string): Promise<string | null>;
 
     /**
-     * Remove specific history item based on its {@link WebviewerHistoryItem.id id}.
+     * Remove specific history item based on its {@link WebviewerHistoryItem.id | id}.
      */
     removeHistoryItem(item: WebviewerHistoryItem): Promise<void>;
 

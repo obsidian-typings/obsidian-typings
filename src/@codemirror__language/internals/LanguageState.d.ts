@@ -9,6 +9,7 @@ import type { Tree } from '@lezer/common';
  * @see https://github.com/codemirror/language/blob/main/src/language.ts
  * @todo Documentation incomplete.
  * @unofficial
+ * @public
  */
 export interface LanguageState {
     /**
