@@ -1,5 +1,5 @@
 import type {
-    StateEffect,
+    StateEffectType,
     StateField
 } from '@codemirror/state';
 import type { LanguageState } from '../internals/LanguageState.d.ts';
@@ -21,7 +21,7 @@ declare module '@codemirror/language' {
          * @todo Documentation incomplete.
          * @unofficial
          */
-        const setState: StateEffect<LanguageState>;
+        const setState: StateEffectType<LanguageState>;
 
         /**
          * @todo Documentation incomplete.
