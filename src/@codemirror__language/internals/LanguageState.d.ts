@@ -25,10 +25,3 @@ export interface LanguageState {
     /** @todo Documentation incomplete. */
     apply(tr: Transaction): LanguageState;
 }
-
-namespace LanguageState {
-    /**
-     * @todo Documentation incomplete.
-     */
-    function init(state: EditorState): LanguageState;
-}

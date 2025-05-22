@@ -1,4 +1,3 @@
-import type { Language } from '@codemirror/language';
 import type {
     StateEffect,
     StateField
