@@ -4,7 +4,7 @@ import type { WebviewerHistoryItem } from './WebviewerHistoryItem.d.ts';
 /**
  * Stores and manages all history items and cached fav icons.
  *
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

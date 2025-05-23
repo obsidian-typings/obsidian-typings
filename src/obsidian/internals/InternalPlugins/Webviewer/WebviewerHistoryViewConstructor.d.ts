@@ -3,7 +3,7 @@ import type { WebviewerHistoryView } from './WebviewerHistoryView.d.ts';
 import type { WebviewerPluginInstance } from './WebviewerPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

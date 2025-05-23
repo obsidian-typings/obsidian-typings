@@ -3,7 +3,7 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { FileRecoveryPlugin } from './FileRecoveryPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

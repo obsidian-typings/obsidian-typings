@@ -10,7 +10,7 @@ import type { ViewRegistryTypeByExtensionRecord } from './ViewRegistryTypeByExte
 import type { ViewRegistryViewByTypeRecord } from './ViewRegistryViewByTypeRecord.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

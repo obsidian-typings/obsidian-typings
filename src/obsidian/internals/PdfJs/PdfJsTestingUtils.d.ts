@@ -1,7 +1,7 @@
 import type { HighlightOutliner } from './HighlightOutliner.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

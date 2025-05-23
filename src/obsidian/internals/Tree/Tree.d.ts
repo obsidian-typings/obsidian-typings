@@ -8,7 +8,7 @@ import type { TreeItem } from './TreeItem.d.ts';
 import type { TreeRoot } from './TreeRoot.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

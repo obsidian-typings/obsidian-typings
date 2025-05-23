@@ -1,7 +1,7 @@
 import type { VimState } from './VimState.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

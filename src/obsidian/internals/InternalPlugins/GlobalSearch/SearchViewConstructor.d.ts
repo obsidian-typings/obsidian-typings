@@ -2,7 +2,7 @@ import type { TypedViewConstructor } from '../../Views/TypedViewConstructor.d.ts
 import type { SearchView } from './SearchView.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

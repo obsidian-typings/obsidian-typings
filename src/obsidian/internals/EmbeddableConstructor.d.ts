@@ -5,7 +5,7 @@ import type {
 import type { EmbedContext } from './EmbedContext.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  *
  * @public
  * @unofficial

@@ -18,7 +18,7 @@ import type { SetBookmarkOptions } from './SetBookmarkOptions.d.ts';
 import type { SetSelectionOptions } from './SetSelectionOptions.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

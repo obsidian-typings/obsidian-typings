@@ -1,7 +1,7 @@
 import type { Outline } from './Outline.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

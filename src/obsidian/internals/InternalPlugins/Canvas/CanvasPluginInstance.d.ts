@@ -10,7 +10,7 @@ import type { CanvasPlugin } from './CanvasPlugin.d.ts';
 import type { CanvasPluginInstanceOptions } from './CanvasPluginInstanceOptions.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

@@ -2,7 +2,7 @@ import type { MarkdownView } from 'obsidian';
 import type { TypedViewConstructor } from './TypedViewConstructor.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

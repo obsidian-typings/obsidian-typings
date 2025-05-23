@@ -3,7 +3,7 @@ import type { FilePropertiesView } from './FilePropertiesView.d.ts';
 import type { PropertiesPluginInstance } from './PropertiesPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

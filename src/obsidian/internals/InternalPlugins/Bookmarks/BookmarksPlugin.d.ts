@@ -3,7 +3,7 @@ import type { BookmarksPluginInstance } from './BookmarksPluginInstance.d.ts';
 import type { BookmarksPluginViews } from './BookmarksPluginViews.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

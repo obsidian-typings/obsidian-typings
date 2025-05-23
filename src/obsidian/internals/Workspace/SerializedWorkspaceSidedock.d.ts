@@ -1,7 +1,7 @@
 import type { SerializedWorkspaceItem } from './SerializedWorkspaceItem.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

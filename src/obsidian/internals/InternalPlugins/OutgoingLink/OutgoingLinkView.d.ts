@@ -2,7 +2,7 @@ import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts'
 import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

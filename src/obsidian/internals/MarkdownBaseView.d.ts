@@ -19,7 +19,7 @@ import type { TableEditor } from './TableEditor.d.ts';
 import type { Token } from './Token.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

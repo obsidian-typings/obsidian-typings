@@ -6,7 +6,7 @@ import type { EmbeddableConstructor } from '../EmbeddableConstructor.d.ts';
 import type { EmbedRegistryEmbedByExtensionRecord } from './EmbedRegistryEmbedByExtensionRecord.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

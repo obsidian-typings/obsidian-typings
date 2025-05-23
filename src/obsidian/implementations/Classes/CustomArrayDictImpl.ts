@@ -1,7 +1,7 @@
 import type { CustomArrayDict } from '../../internals/Collections/CustomArrayDict.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  *
  * @public
  * @unofficial

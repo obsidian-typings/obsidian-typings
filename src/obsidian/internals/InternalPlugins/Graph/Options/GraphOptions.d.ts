@@ -1,7 +1,7 @@
 import type { TreeCollapsibleItem } from '../../../Tree/TreeCollapsibleItem.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

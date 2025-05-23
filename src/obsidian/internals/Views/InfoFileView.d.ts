@@ -5,7 +5,7 @@ import type {
 
 /** @todo This is probably not the right term */
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

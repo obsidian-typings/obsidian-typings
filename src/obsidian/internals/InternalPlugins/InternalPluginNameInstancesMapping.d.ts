@@ -32,7 +32,7 @@ import type { WorkspacesPluginInstance } from './Workspaces/WorkspacesPluginInst
 import type { ZkPrefixerPluginInstance } from './ZkPrefixer/ZkPrefixerPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  *
  * @public
  * @unofficial

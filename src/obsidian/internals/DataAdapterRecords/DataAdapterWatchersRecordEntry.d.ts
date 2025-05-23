@@ -1,7 +1,7 @@
 import type { FSWatcher } from 'node:fs';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

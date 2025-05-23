@@ -9,7 +9,7 @@ import type { CanvasViewCanvasNodeBase } from './CanvasViewCanvasNodeBase.d.ts';
 import type { CanvasViewCanvasNodeUnknownData } from './CanvasViewCanvasNodeUnknownData.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

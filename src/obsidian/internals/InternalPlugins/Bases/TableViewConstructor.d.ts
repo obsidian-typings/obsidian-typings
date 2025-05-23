@@ -3,7 +3,7 @@ import type { ConstructorBase } from '../../Constructors/ConstructorBase.d.ts';
 import type { TableView } from './TableView.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

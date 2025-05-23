@@ -5,7 +5,7 @@ import type {
 import type { GraphOptions } from './GraphOptions.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

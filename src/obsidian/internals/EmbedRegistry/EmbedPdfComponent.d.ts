@@ -1,7 +1,7 @@
 import type { Component } from 'obsidian';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

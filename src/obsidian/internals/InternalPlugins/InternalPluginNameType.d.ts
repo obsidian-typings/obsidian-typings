@@ -1,7 +1,7 @@
 import type { InternalPluginName } from '../../implementations/Constants/InternalPluginName.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  *
  * @public
  * @unofficial

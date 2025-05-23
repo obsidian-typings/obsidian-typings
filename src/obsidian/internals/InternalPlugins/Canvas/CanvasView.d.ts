@@ -7,7 +7,7 @@ import type { CanvasPluginInstance } from './CanvasPluginInstance.d.ts';
 import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

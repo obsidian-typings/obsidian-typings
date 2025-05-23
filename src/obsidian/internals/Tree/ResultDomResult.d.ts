@@ -2,7 +2,7 @@ import type { ContentPosition } from './ContentPosition.d.ts';
 import type { ResultProperty } from './ResultProperty.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

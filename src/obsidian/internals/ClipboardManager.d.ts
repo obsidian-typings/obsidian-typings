@@ -6,7 +6,7 @@ import type {
 import type { ImportedAttachments } from './ImportedAttachments.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

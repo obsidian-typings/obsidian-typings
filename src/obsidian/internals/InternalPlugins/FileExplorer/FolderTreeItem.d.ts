@@ -5,7 +5,7 @@ import type { AbstractFileTreeItem } from './AbstractFileTreeItem.d.ts';
 import type { FileTreeItem } from './FileTreeItem.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

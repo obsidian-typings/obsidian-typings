@@ -6,7 +6,7 @@ import type { SearchCursor } from '../SearchCursor.d.ts';
 import type { AbstractSearchComponent } from './AbstractSearchComponent.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

@@ -24,7 +24,7 @@ import type { TagView } from './TagView.d.ts';
 import type { VideoView } from './VideoView.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  *
  * @public
  * @unofficial

@@ -10,7 +10,7 @@ import type { BacklinkPlugin } from './BacklinkPlugin.d.ts';
 import type { BacklinkPluginInstanceOptions } from './BacklinkPluginInstanceOptions.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

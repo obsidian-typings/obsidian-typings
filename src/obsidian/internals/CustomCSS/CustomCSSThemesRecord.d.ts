@@ -1,7 +1,7 @@
 import type { ThemeManifest } from '../ThemeManifest.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

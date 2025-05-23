@@ -6,7 +6,7 @@ import type { ViewTypeType } from '../Views/ViewTypeType.d.ts';
 import type { ViewTypeViewMapping } from '../Views/ViewTypeViewMapping.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  *
  * @public
  * @unofficial
@@ -15,7 +15,7 @@ type Mapping = {
     [TViewType in ViewTypeType]: TypedViewCreator<ViewTypeViewMapping[TViewType]>;
 };
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

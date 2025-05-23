@@ -9,7 +9,7 @@ import type { ResultDom } from '../../Tree/ResultDom.d.ts';
 import type { HeaderDom } from './HeaderDom.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

@@ -3,7 +3,7 @@ import type { EditorPosition } from 'obsidian';
 import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

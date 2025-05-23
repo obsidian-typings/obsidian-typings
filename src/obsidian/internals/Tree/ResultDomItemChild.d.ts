@@ -5,7 +5,7 @@ import type { TreeNode } from './TreeNode.d.ts';
 import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

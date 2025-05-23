@@ -5,7 +5,7 @@ import type { GraphEngine } from './GraphEngine.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

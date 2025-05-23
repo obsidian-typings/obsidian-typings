@@ -11,7 +11,7 @@ import type { DownloadLegacyThemeOptions } from './DownloadLegacyThemeOptions.d.
 import type { InstallThemeOptions } from './InstallThemeOptions.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

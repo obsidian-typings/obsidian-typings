@@ -2,7 +2,7 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { FootnotesPlugin } from './FootnotesPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

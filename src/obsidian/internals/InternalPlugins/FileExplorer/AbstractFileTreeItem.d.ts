@@ -5,7 +5,7 @@ import type { FileExplorerView } from './FileExplorerView.d.ts';
 import type { FileTreeItemParent } from './FileTreeItemParent.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

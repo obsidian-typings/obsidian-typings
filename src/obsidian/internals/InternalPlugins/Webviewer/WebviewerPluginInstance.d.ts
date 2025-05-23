@@ -4,7 +4,7 @@ import type { WebviewerDBStore } from './WebviewerDBStore.d.ts';
 import type { WebviewerPlugin } from './WebviewerPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

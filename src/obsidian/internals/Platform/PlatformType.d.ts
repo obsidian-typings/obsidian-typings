@@ -1,7 +1,7 @@
 import type { Platform } from 'obsidian';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  *
  * @public
  * @unofficial

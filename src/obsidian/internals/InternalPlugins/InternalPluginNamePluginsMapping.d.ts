@@ -32,7 +32,7 @@ import type { WorkspacesPlugin } from './Workspaces/WorkspacesPlugin.d.ts';
 import type { ZkPrefixerPlugin } from './ZkPrefixer/ZkPrefixerPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  *
  * @public
  * @unofficial

@@ -1,7 +1,7 @@
 import type { BasesFunction } from '../BasesFunction.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

@@ -7,7 +7,7 @@ import type { HotkeyManagerCustomKeysRecord } from './HotkeyManagerCustomKeysRec
 import type { HotkeyManagerDefaultKeysRecord } from './HotkeyManagerDefaultKeysRecord.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

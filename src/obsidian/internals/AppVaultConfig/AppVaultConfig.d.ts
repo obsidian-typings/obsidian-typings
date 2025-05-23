@@ -2,7 +2,7 @@ import type { AppVaultConfigHotkeysRecord } from './AppVaultConfigHotkeysRecord.
 import type { PdfExportSettings } from './PdfExportSettings.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

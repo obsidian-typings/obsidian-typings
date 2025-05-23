@@ -2,7 +2,7 @@ import type { EdgeIndexBase } from './EdgeIndexBase.d.ts';
 import type { EdgeIndexData } from './EdgeIndexData.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

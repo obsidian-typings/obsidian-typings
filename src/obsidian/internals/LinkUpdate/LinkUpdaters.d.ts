@@ -2,7 +2,7 @@ import type { CanvasLinkUpdater } from './CanvasLinkUpdater.d.ts';
 import type { LinkUpdater } from './LinkUpdater.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

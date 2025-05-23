@@ -3,7 +3,7 @@ import type { BacklinkPluginInstance } from './BacklinkPluginInstance.d.ts';
 import type { BacklinkPluginViews } from './BacklinkPluginViews.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

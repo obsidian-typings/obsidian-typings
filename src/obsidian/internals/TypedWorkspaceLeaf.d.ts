@@ -5,7 +5,7 @@ import type {
 import type { MaybeDeferredView } from './Views/MaybeDeferredView.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

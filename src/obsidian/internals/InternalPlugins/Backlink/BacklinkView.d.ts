@@ -3,7 +3,7 @@ import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
 import type { BacklinkComponent } from './BacklinkComponent.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

@@ -2,7 +2,7 @@ import type { TableView } from './TableView.d.ts';
 import type { ViewFactory } from './ViewFactory.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

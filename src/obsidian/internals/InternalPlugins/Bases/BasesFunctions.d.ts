@@ -47,7 +47,7 @@ import type { UniqueFunction } from './Functions/UniqueFunction.d.ts';
 import type { YearFunction } from './Functions/YearFunction.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

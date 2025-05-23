@@ -7,7 +7,7 @@ import type {
 import type { AppMenuBarManagerConstructor } from './AppMenuBarManagerConstructor.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

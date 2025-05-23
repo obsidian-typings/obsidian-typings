@@ -2,7 +2,7 @@ import type { WorkspaceLeaf } from 'obsidian';
 import type { View } from 'obsidian';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  *
  * @public
  * @unofficial

@@ -1,7 +1,7 @@
 import type { Dimensions } from './Dimensions.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

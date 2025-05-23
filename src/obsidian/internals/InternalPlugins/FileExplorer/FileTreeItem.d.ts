@@ -2,7 +2,7 @@ import type { TFile } from 'obsidian';
 import type { AbstractFileTreeItem } from './AbstractFileTreeItem.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

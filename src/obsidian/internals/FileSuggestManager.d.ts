@@ -7,7 +7,7 @@ import type {
 import type { Runnable } from './Runnable.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

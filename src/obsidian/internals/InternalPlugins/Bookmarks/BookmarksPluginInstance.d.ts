@@ -21,7 +21,7 @@ import type { BookmarkItem } from './BookmarkItems/BookmarkItem.d.ts';
 import type { BookmarksPlugin } from './BookmarksPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

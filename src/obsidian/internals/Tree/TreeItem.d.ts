@@ -1,7 +1,7 @@
 import type { TreeNode } from './TreeNode.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

@@ -9,7 +9,7 @@ import type { VimApi } from './Vim/VimApi.d.ts';
 import type { VimEditor } from './Vim/VimEditor.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

@@ -9,7 +9,7 @@ import type { DragStartEvent } from './DragStartEvent.d.ts';
 import type { DropResult } from './DropResult.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */

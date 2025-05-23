@@ -6,7 +6,7 @@ import type {
 import type { HotkeysSettingTab } from './HotkeysSettingTab.d.ts';
 
 /**
- * @todo Documentation incomplete
+ * @todo Documentation incomplete.
  * @public
  * @unofficial
  */
