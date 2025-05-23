@@ -1,4 +1,4 @@
-import type { Outline } from './Outline.js';
+import type { Outline } from './Outline.d.ts';
 
 /**
  * @todo Documentation incomplete

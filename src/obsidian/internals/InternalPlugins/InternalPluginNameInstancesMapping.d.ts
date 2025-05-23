@@ -1,6 +1,7 @@
 import type { InternalPluginName } from '../../implementations/Constants/InternalPluginName.d.ts';
 import type { AudioRecorderPluginInstance } from './AudioRecorder/AudioRecorderPluginInstance.d.ts';
 import type { BacklinkPluginInstance } from './Backlink/BacklinkPluginInstance.d.ts';
+import type { BasesPluginInstance } from './Bases/BasesPluginInstance.d.ts';
 import type { BookmarksPluginInstance } from './Bookmarks/BookmarksPluginInstance.d.ts';
 import type { CanvasPluginInstance } from './Canvas/CanvasPluginInstance.d.ts';
 import type { CommandPalettePluginInstance } from './CommandPalette/CommandPalettePluginInstance.d.ts';
@@ -8,6 +9,7 @@ import type { DailyNotesPluginInstance } from './DailyNotes/DailyNotesPluginInst
 import type { EditorStatusPluginInstance } from './EditorStatus/EditorStatusPluginInstance.d.ts';
 import type { FileExplorerPluginInstance } from './FileExplorer/FileExplorerPluginInstance.d.ts';
 import type { FileRecoveryPluginInstance } from './FileRecovery/FileRecoveryPluginInstance.d.ts';
+import type { FootnotesPluginInstance } from './Footnotes/FootnotesPluginInstance.d.ts';
 import type { GlobalSearchPluginInstance } from './GlobalSearch/GlobalSearchPluginInstance.d.ts';
 import type { GraphPluginInstance } from './Graph/GraphPluginInstance.d.ts';
 import type { MarkdownImporterPluginInstance } from './MarkdownImporter/MarkdownImporterPluginInstance.d.ts';
@@ -38,6 +40,7 @@ import type { ZkPrefixerPluginInstance } from './ZkPrefixer/ZkPrefixerPluginInst
 export type InternalPluginNameInstancesMapping = {
     [InternalPluginName.AudioRecorder]: AudioRecorderPluginInstance;
     [InternalPluginName.Backlink]: BacklinkPluginInstance;
+    [InternalPluginName.Bases]: BasesPluginInstance;
     [InternalPluginName.Bookmarks]: BookmarksPluginInstance;
     [InternalPluginName.Webviewer]: WebviewerPluginInstance;
     [InternalPluginName.Canvas]: CanvasPluginInstance;
@@ -46,6 +49,7 @@ export type InternalPluginNameInstancesMapping = {
     [InternalPluginName.EditorStatus]: EditorStatusPluginInstance;
     [InternalPluginName.FileExplorer]: FileExplorerPluginInstance;
     [InternalPluginName.FileRecovery]: FileRecoveryPluginInstance;
+    [InternalPluginName.Footnotes]: FootnotesPluginInstance;
     [InternalPluginName.GlobalSearch]: GlobalSearchPluginInstance;
     [InternalPluginName.Graph]: GraphPluginInstance;
     [InternalPluginName.MarkdownImporter]: MarkdownImporterPluginInstance;

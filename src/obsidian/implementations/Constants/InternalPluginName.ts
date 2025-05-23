@@ -14,6 +14,10 @@ export const InternalPluginName = {
      */
     Backlink: 'backlink',
     /**
+     * Plugin name in UI: Bases.
+     */
+    Bases: 'bases',
+    /**
      * Plugin name in UI: Bookmarks.
      */
     Bookmarks: 'bookmarks',
@@ -41,6 +45,10 @@ export const InternalPluginName = {
      * Plugin name in UI: File recovery.
      */
     FileRecovery: 'file-recovery',
+    /**
+     * Plugin name in UI: Footnotes.
+     */
+    Footnotes: 'footnotes',
     /**
      * Plugin name in UI: Search.
      */

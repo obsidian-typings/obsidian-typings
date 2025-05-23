@@ -1,6 +1,7 @@
 import type { InternalPluginName } from '../../implementations/Constants/InternalPluginName.d.ts';
 import type { AudioRecorderPlugin } from './AudioRecorder/AudioRecorderPlugin.d.ts';
 import type { BacklinkPlugin } from './Backlink/BacklinkPlugin.d.ts';
+import type { BasesPlugin } from './Bases/BasesPlugin.d.ts';
 import type { BookmarksPlugin } from './Bookmarks/BookmarksPlugin.d.ts';
 import type { CanvasPlugin } from './Canvas/CanvasPlugin.d.ts';
 import type { CommandPalettePlugin } from './CommandPalette/CommandPalettePlugin.d.ts';
@@ -8,6 +9,7 @@ import type { DailyNotesPlugin } from './DailyNotes/DailyNotesPlugin.d.ts';
 import type { EditorStatusPlugin } from './EditorStatus/EditorStatusPlugin.d.ts';
 import type { FileExplorerPlugin } from './FileExplorer/FileExplorerPlugin.d.ts';
 import type { FileRecoveryPlugin } from './FileRecovery/FileRecoveryPlugin.d.ts';
+import type { FootnotesPlugin } from './Footnotes/FootnotesPlugin.d.ts';
 import type { GlobalSearchPlugin } from './GlobalSearch/GlobalSearchPlugin.d.ts';
 import type { GraphPlugin } from './Graph/GraphPlugin.d.ts';
 import type { MarkdownImporterPlugin } from './MarkdownImporter/MarkdownImporterPlugin.d.ts';
@@ -38,6 +40,7 @@ import type { ZkPrefixerPlugin } from './ZkPrefixer/ZkPrefixerPlugin.d.ts';
 export type InternalPluginNamePluginsMapping = {
     [InternalPluginName.AudioRecorder]: AudioRecorderPlugin;
     [InternalPluginName.Backlink]: BacklinkPlugin;
+    [InternalPluginName.Bases]: BasesPlugin;
     [InternalPluginName.Bookmarks]: BookmarksPlugin;
     [InternalPluginName.Webviewer]: WebviewerPlugin;
     [InternalPluginName.Canvas]: CanvasPlugin;
@@ -46,6 +49,7 @@ export type InternalPluginNamePluginsMapping = {
     [InternalPluginName.EditorStatus]: EditorStatusPlugin;
     [InternalPluginName.FileExplorer]: FileExplorerPlugin;
     [InternalPluginName.FileRecovery]: FileRecoveryPlugin;
+    [InternalPluginName.Footnotes]: FootnotesPlugin;
     [InternalPluginName.GlobalSearch]: GlobalSearchPlugin;
     [InternalPluginName.Graph]: GraphPlugin;
     [InternalPluginName.MarkdownImporter]: MarkdownImporterPlugin;

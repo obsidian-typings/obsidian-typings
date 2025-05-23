@@ -25,6 +25,7 @@ export const ViewType = {
     ReleaseNotes: 'release-notes',
     Search: 'search',
     Sync: 'sync',
+    Table: 'table',
     Tag: 'tag',
     Video: 'video',
     Webviewer: 'webviewer',

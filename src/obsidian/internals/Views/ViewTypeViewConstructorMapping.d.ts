@@ -1,5 +1,6 @@
 import type { ViewType } from '../../implementations/Constants/ViewType.ts';
 import type { BacklinkViewConstructor } from '../InternalPlugins/Backlink/BacklinkViewConstructor.d.ts';
+import type { TableViewConstructor } from '../InternalPlugins/Bases/TableViewConstructor.d.ts';
 import type { BookmarksViewConstructor } from '../InternalPlugins/Bookmarks/BookmarksViewConstructor.d.ts';
 import type { CanvasViewConstructor } from '../InternalPlugins/Canvas/CanvasViewConstructor.d.ts';
 import type { FileExplorerViewConstructor } from '../InternalPlugins/FileExplorer/FileExplorerViewConstructor.d.ts';
@@ -51,6 +52,7 @@ export type ViewTypeViewConstructorMapping = {
     [ViewType.ReleaseNotes]: ReleaseNotesViewConstructor;
     [ViewType.Search]: SearchViewConstructor;
     [ViewType.Sync]: SyncViewConstructor;
+    [ViewType.Table]: TableViewConstructor;
     [ViewType.Tag]: TagViewConstructor;
     [ViewType.Video]: VideoViewConstructor;
 };
