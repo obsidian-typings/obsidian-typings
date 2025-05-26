@@ -1,0 +1,14 @@
+diff --git a/node_modules/@pixi/events/lib/FederatedEvent.d.ts b/node_modules/@pixi/events/lib/FederatedEvent.d.ts
+index 14c2d6c..f54f0a0 100644
+--- a/node_modules/@pixi/events/lib/FederatedEvent.d.ts
++++ b/node_modules/@pixi/events/lib/FederatedEvent.d.ts
+@@ -144,4 +144,9 @@ export declare class FederatedEvent<N extends UIEvent | PixiTouch = UIEvent | Pi
+     readonly CAPTURING_PHASE = 1;
+     readonly AT_TARGET = 2;
+     readonly BUBBLING_PHASE = 3;
++
++    targetNode: Node | null;
++    win: Window;
++    doc: Document;
++    instanceOf<T>(type: { new(...data: any[]): T }): this is T;
+ }

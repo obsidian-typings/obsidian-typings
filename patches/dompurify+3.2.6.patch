@@ -1,9 +1,9 @@
 diff --git a/node_modules/dompurify/dist/purify.es.d.mts b/node_modules/dompurify/dist/purify.es.d.mts
-index d2c2692..aca031f 100644
+index cb34a34..ccf9715 100644
 --- a/node_modules/dompurify/dist/purify.es.d.mts
 +++ b/node_modules/dompurify/dist/purify.es.d.mts
 @@ -1,6 +1,6 @@
- /*! @license DOMPurify 3.2.5 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.2.5/LICENSE */
+ /*! @license DOMPurify 3.2.6 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.2.6/LICENSE */
  
 -import { TrustedTypePolicy, TrustedHTML, TrustedTypesWindow } from 'trusted-types/lib';
 +import type { TrustedTypePolicy, TrustedHTML, TrustedTypesWindow } from 'trusted-types/lib/index.d.ts';
