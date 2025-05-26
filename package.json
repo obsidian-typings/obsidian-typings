@@ -95,7 +95,8 @@
         "typescript": ">=4.8.0"
     },
     "overrides": {
-        "boolean": "npm:dry-uninstall"
+        "boolean": "npm:dry-uninstall",
+        "dompurify": "3.2.6"
     },
     "scripts": {
         "build": "npm-run-all build:clean build:compile build:generate-index build:bundle-types build:fix-bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:fix-implementations-bundle-types build:static build:extract-api",
