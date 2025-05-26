@@ -4,6 +4,7 @@
     "": {
       "name": "obsidian-typings",
       "dependencies": {
+        "@antfu/utils": "8.1.1",
         "@capacitor/core": "^6.1.2",
         "@codemirror/language": "^6.11.0",
         "@codemirror/search": "^6.5.10",
@@ -17,17 +18,16 @@
         "@types/node": "^18.17.0 || >=20.1.0",
         "@types/prismjs": "^1.26.5",
         "@types/turndown": "^5.0.5",
-        "dompurify": "^3.2.5",
+        "dompurify": "3.2.5",
         "electron": ">=1.6.10",
         "i18next": "^23.15.1",
         "mermaid": "^11.6.0",
         "moment": "^2.30.1",
-        "obsidian": "^1.8.7",
+        "obsidian": "1.8.7",
         "pdfjs-dist": "^5.1.91",
         "pixi.js": "7.2.4",
         "scrypt-js": "^3.0.1",
         "style-mod": "4.1.2",
-        "trusted-types": "^2.0.0",
       },
       "devDependencies": {
         "@microsoft/api-extractor": "^7.52.5",
@@ -1193,8 +1193,6 @@
     "tmp": ["tmp@0.0.33", "", { "dependencies": { "os-tmpdir": "~1.0.2" } }, "sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw=="],
 
     "to-regex-range": ["to-regex-range@5.0.1", "", { "dependencies": { "is-number": "^7.0.0" } }, "sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ=="],
-
-    "trusted-types": ["trusted-types@2.0.0", "", {}, "sha512-Eam+AUp6lg04YjmYkuLNhEJX+6ByocrKTpY/TtfRK/gV6OmxeN0OwkIasor28SUJ606snArpPLGtPMGbqdaaUA=="],
 
     "ts-dedent": ["ts-dedent@2.2.0", "", {}, "sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ=="],
 
