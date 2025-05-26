@@ -1,0 +1,27 @@
+diff --git a/node_modules/pixi.js/lib/events/FederatedEvent.d.ts b/node_modules/pixi.js/lib/events/FederatedEvent.d.ts
+index 9fe955e..f9a3b0e 100644
+--- a/node_modules/pixi.js/lib/events/FederatedEvent.d.ts
++++ b/node_modules/pixi.js/lib/events/FederatedEvent.d.ts
+@@ -148,4 +148,9 @@ export declare class FederatedEvent<N extends UIEvent | PixiTouch = UIEvent | Pi
+     readonly CAPTURING_PHASE = 1;
+     readonly AT_TARGET = 2;
+     readonly BUBBLING_PHASE = 3;
++
++    targetNode: Node | null;
++    win: Window;
++    doc: Document;
++    instanceOf<T>(type: { new(...data: any[]): T }): this is T;
+ }
+diff --git a/node_modules/pixi.js/lib/scene/text-bitmap/AbstractBitmapFont.d.ts b/node_modules/pixi.js/lib/scene/text-bitmap/AbstractBitmapFont.d.ts
+index 608ae1a..0443f2e 100644
+--- a/node_modules/pixi.js/lib/scene/text-bitmap/AbstractBitmapFont.d.ts
++++ b/node_modules/pixi.js/lib/scene/text-bitmap/AbstractBitmapFont.d.ts
+@@ -57,7 +57,7 @@ export interface BitmapFontData {
+     /** The name of the font face. */
+     fontFamily: string;
+     /** The range and type of the distance field for this font. */
+-    distanceField?: {
++    distanceField: {
+         /** Type of distance field */
+         type: 'sdf' | 'msdf' | 'none';
+         /** Range of the distance field in pixels */
