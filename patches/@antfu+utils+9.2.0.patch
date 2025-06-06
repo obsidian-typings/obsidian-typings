@@ -1,0 +1,13 @@
+diff --git a/node_modules/@antfu/utils/dist/index.d.mts b/node_modules/@antfu/utils/dist/index.d.mts
+index 1295556..89017a3 100644
+--- a/node_modules/@antfu/utils/dist/index.d.mts
++++ b/node_modules/@antfu/utils/dist/index.d.mts
+@@ -370,7 +370,7 @@ declare class PInstance<T = any> extends Promise<Awaited<T>[]> {
+     clear(): void;
+     then<TResult1 = Awaited<T>[], TResult2 = never>(onfulfilled?: ((value: Awaited<T>[]) => TResult1 | PromiseLike<TResult1>) | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | null): Promise<TResult1 | TResult2>;
+     catch(fn?: (err: unknown) => PromiseLike<any>): Promise<any>;
+-    finally(fn?: () => void): Promise<Awaited<T>[]>;
++    finally<U>(onfinally?: (() => U | PromiseLike<U>) | null | undefined): Promise<Awaited<T>[]>
+ }
+ /**
+  * Utility for managing multiple promises.
