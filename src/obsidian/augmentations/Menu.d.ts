@@ -332,4 +332,13 @@ declare module 'obsidian' {
          */
         unselect(): void;
     }
+
+    namespace Menu {
+        /**
+         * Get or create a menu from a mouse event.
+         *
+         * @unofficial
+         */
+        function forEvent(evt: MouseEvent): Menu;
+    }
 }
