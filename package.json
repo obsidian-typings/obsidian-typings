@@ -1,6 +1,6 @@
 {
     "name": "obsidian-typings",
-    "version": "3.9.6",
+    "version": "3.10.0",
     "description": "Extended type definitions for the Obsidian API (https://obsidian.md)",
     "main": "",
     "module": "",
