@@ -11,7 +11,8 @@ import type { GraphFilterOptions } from './Options/GraphFilterOptions.d.ts';
 import type { GraphForceOptions } from './Options/GraphForceOptions.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Engine of a graph view.
+ * 
  * @public
  * @unofficial
  */

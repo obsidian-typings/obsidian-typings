@@ -1,35 +1,37 @@
 import type {
     Container,
-    Graphics
+    Graphics,
+    Sprite
 } from 'pixi.js';
 import type { GraphNode } from './GraphNode.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a link in a graph view.
+ * 
  * @public
  * @unofficial
  */
 export interface GraphLink {
-    /** @todo Documentation incomplete. */
+    /** PixiJS element for the arrow, child of `GraphRenderer.hanger`. */
     arrow: Graphics | null;
 
-    /** @todo Documentation incomplete. */
-    line: Graphics | null;
+    /** PixiJS element for the line. */
+    line: Sprite | null;
 
-    /** @todo Documentation incomplete. */
+    /** Parent of `GraphLink.line`, child of `GraphRenderer.hanger`. */
     px: Container | null;
 
     /** @todo Documentation incomplete. */
     rendered: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** `GraphRenderer` managing this node. */
     renderer: GraphRenderer;
 
-    /** @todo Documentation incomplete. */
+    /** Source node of the link. */
     source: GraphNode;
 
-    /** @todo Documentation incomplete. */
+    /** Target node of the link. */
     target: GraphNode;
 
     /**
@@ -41,4 +43,9 @@ export interface GraphLink {
      * Initialize the link (line and arrow), and add them to the scene.
      */
     initGraphics(): void;
+
+    /**
+     * Render the link.
+     */
+    render(): void;
 }

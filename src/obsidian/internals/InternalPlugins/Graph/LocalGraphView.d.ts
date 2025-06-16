@@ -5,7 +5,8 @@ import type { GraphEngine } from './GraphEngine.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Obsidian view for a local graph.
+ * 
  * @public
  * @unofficial
  */

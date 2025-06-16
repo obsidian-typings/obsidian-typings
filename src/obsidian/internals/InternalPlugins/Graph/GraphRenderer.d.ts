@@ -22,67 +22,67 @@ import type { WorkerResults } from './WorkerResults.d.ts';
  * @unofficial
  */
 export interface GraphRenderer {
-    /** @todo Documentation incomplete. */
+    /** General colors of the elements in the graph view, computed from the app CSS. */
     colors: Record<GraphColor, GraphColorAttributes>;
 
-    /** @todo Documentation incomplete. */
+    /** `<div>` element containing the graph, with class `.view-content`. */
     containerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Node currently being dragged, if any. */
     dragNode: GraphNode | null;
 
-    /** @todo Documentation incomplete. */
+    /** Factor for the thickness of the links. */
     fLineSizeMult: number;
 
-    /** @todo Documentation incomplete. */
+    /** Factor for the size of the nodes. */
     fNodeSizeMult: number;
 
-    /** @todo Documentation incomplete. */
+    /** Indicates if arrows should be displayed. */
     fShowArrow: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Text fade threshold. */
     fTextShowMult: number;
 
-    /** @todo Documentation incomplete. */
+    /** Main container to which nodes, links and arrows are added. */
     hanger: Container;
 
-    /** @todo Documentation incomplete. */
+    /** Height of the graph view, in pixel. */
     height: number;
 
     /** @todo Documentation incomplete. */
     hidePowerTag: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Node currently being highlighted, if any. */
     highlightNode: GraphNode | null;
 
-    /** @todo Documentation incomplete. */
+    /** Number of idle frames. The simulation stops running at 60. */
     idleFrames: number;
 
-    /** @todo Documentation incomplete. */
+    /** `<iframe>` element in which the graph is rendered. */
     iframeEl: HTMLIFrameElement;
 
-    /** @todo Documentation incomplete. */
+    /** `<canvas>` element bound to the event system of `GraphRenderer.px` to capture events. */
     interactiveEl: HTMLCanvasElement;
 
     /** @todo Documentation incomplete. */
     keyboardActions: KeyboardActions;
 
-    /** @todo Documentation incomplete. */
+    /** List of links currently rendered. */
     links: GraphLink[];
 
-    /** @todo Documentation incomplete. */
-    mouseX: null;
+    /** Mouse x coordinate in the graph view. */
+    mouseX: number | null;
 
-    /** @todo Documentation incomplete. */
-    mouseY: null;
+    /** Mouse y coordinate in the graph view. */
+    mouseY: number | null;
 
-    /** @todo Documentation incomplete. */
+    /** Record of the nodes currently rendered, with `GraphNode.id` used as key. */
     nodeLookup: Record<string, GraphNode>;
 
-    /** @todo Documentation incomplete. */
+    /** List of nodes currenly rendered. */
     nodes: GraphNode[];
 
-    /** @todo Documentation incomplete. */
+    /** Scale of the nodes based on the zoom level of the graph view. */
     nodeScale: number;
 
     /** @todo Documentation incomplete. */
@@ -103,37 +103,37 @@ export interface GraphRenderer {
     /** @todo Documentation incomplete. */
     powerTag: PowerTag;
 
-    /** @todo Documentation incomplete. */
+    /** PixiJS application rendering everything. */
     px: Application;
 
-    /** @todo Documentation incomplete. */
+    /** Timer (request ID) associated to the requestAnimationFrame rendering the graph. */
     renderTimer: null | number;
 
-    /** @todo Documentation incomplete. */
+    /** Current zoom level of the graph view, interpolated between the previous one and the `targetScale`. */
     scale: number;
 
-    /** @todo Documentation incomplete. */
+    /** Target zoom level of the graph view. */
     targetScale: number;
 
-    /** @todo Documentation incomplete. */
+    /** Current alpha of the nodes names based on the graph scale. */
     textAlpha: number;
 
     /** @todo Documentation incomplete. */
     viewport: Coords;
 
-    /** @todo Documentation incomplete. */
+    /** Widt of the graph view, in pixel. */
     width: number;
 
-    /** @todo Documentation incomplete. */
+    /** Web Worker thread running the graph simulation. */
     worker: Worker;
 
     /** @todo Documentation incomplete. */
     workerResults: WorkerResults;
 
-    /** @todo Documentation incomplete. */
+    /** X coordinate of the zoom action. */
     zoomCenterX: number;
 
-    /** @todo Documentation incomplete. */
+    /** Y coordinate of the zoom action. */
     zoomCenterY: number;
 
     /**
@@ -144,19 +144,19 @@ export interface GraphRenderer {
     /** @todo Documentation incomplete. */
     destroy(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Destroy all the graphics of the graph. */
     destroyGraphics(): void;
 
     /** @todo Documentation incomplete. */
     getBackgroundScreenshot(): HTMLCanvasElement;
 
-    /** @todo Documentation incomplete. */
+    /** Returns the currently highlighted node, if any. */
     getHighlightNode(): GraphNode | null;
 
     /** @todo Documentation incomplete. */
     getTransparentScreenshot(): ICanvas;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize all the graphics of the graph. */
     initGraphics(): void;
 
     /** @todo Documentation incomplete. */

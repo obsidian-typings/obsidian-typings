@@ -1,14 +1,15 @@
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Interface used to represent a group of nodes set by the user.
+ * 
  * @public
  * @unofficial
  */
 export interface GraphColorGroup {
-    /** @todo Documentation incomplete. */
+    /** Color associated to the group. */
     color: GraphColorAttributes;
 
-    /** @todo Documentation incomplete. */
+    /** Query associated to the group. */
     query: string;
 }

@@ -5,56 +5,67 @@ import type {
 } from 'pixi.js';
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
+import type { GraphLink } from './GraphLink.js';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a node in the graph view.
+ * 
  * @public
  * @unofficial
  */
 export interface GraphNode {
-    /** @todo Documentation incomplete. */
+    /** PixiJS element for the circle, child of `GraphRenderer.hanger`. */
     circle: Graphics | null;
 
-    /** @todo Documentation incomplete. */
+    /** Computed color for the node. */
     color: GraphColorAttributes;
 
     /** @todo Documentation incomplete. */
-    forward: Record<string, GraphNode>;
+    fadeAlpha: number;
 
-    /** @todo Documentation incomplete. */
+    /** Indicates if the text needs to be re-rendered when the node is rendered. */
+    fontDirty: boolean;
+
+    /** Record of forward links. Keys are the id of the neighbor nodes. */
+    forward: Record<string, GraphLink>;
+
+    /** Forced x position when the node is dragged. */
     fx: number | null;
 
-    /** @todo Documentation incomplete. */
+    /** Forced y position when the node is dragged. */
     fy: number | null;
 
-    /** @todo Documentation incomplete. */
+    /** Colored circle added if the node is highlighted, child of `GraphNode.circle`. */
     highlight: Graphics | null;
 
-    /** @todo Documentation incomplete. */
+    /** ID of the node (path, tag, or name for non-existing files). */
     id: string;
+
+    /** Displacement of the text, changed when the node is hovered */
+    moveText: number;
 
     /** @todo Documentation incomplete. */
     rendered: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** `GraphRenderer` managing this node */
     renderer: GraphRenderer;
 
-    /** @todo Documentation incomplete. */
-    reverse: Record<string, GraphNode>;
+    /** Record of backward links. Keys are the id of the neighbor nodes. */
+    reverse: Record<string, GraphLink>;
 
-    /** @todo Documentation incomplete. */
+    /** PixiJS element for the name, child of `GraphNode.circle`. */
     text: Text | null;
 
-    /** @todo Documentation incomplete. */
+    /** Type of the node, can be of value `"tag"`, `"unresolved"`, `"attachment"`, or an empty string for markdown nodes. */
     type: string;
 
-    /** @todo Documentation incomplete. */
+    /** Weight of the node depending on the number of related nodes (forwards and backward). */
     weight: number;
 
-    /** @todo Documentation incomplete. */
+    /** X-axis position of the node in the graph */
     x: number;
 
-    /** @todo Documentation incomplete. */
+    /** Y-axis position of the node in the graph */
     y: number;
 
     /**
@@ -97,6 +108,11 @@ export interface GraphNode {
      * Initialize the node, text, listeners, and add them to the scene.
      */
     initGraphics(): void;
+
+    /**
+     * Method called when the node (circle) is clicked, trigger the context menu if it's a right click
+     */
+    onClick(e: MouseEvent): void;
 
     /**
      * Render the node.

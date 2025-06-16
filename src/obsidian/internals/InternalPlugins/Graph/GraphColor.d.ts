@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Available color types.
  *
  * @public
  * @unofficial
@@ -14,4 +14,5 @@ export type GraphColor =
     | 'fillTag'
     | 'fillUnresolved'
     | 'line'
-    | 'lineHighlight';
+    | 'lineHighlight'
+    | 'text';

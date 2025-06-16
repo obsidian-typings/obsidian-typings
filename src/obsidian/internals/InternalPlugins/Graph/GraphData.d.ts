@@ -1,15 +1,15 @@
-import type { GraphNode } from './GraphNode.d.ts';
+import type { GraphNodeData } from './GraphNodeData.js';
 
 /**
- * Graph data.
+ * Data selected to be rendered in the graph based on the current options.
  *
  * @public
  * @unofficial
  */
 export interface GraphData {
-    /** @todo Documentation incomplete. */
-    nodes: Record<string, GraphNode>;
+    /** Record of nodes selected to be rendered. Their IDs are used as keys. */
+    nodes: Record<string, GraphNodeData>;
 
-    /** @todo Documentation incomplete. */
-    weights: Record<string, number>;
+    /** Number of links. */
+    numLinks: number;
 }
