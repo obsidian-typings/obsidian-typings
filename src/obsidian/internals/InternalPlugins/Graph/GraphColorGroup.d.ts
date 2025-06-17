@@ -1,8 +1,8 @@
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 
 /**
- * Interface used to represent a group of nodes set by the user.
- * 
+ * Group of nodes set by the user.
+ *
  * @public
  * @unofficial
  */

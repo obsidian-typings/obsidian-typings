@@ -1,13 +1,13 @@
 /**
- * Interface for the colors used by the Graph plugin.
- * 
+ * Color attributes.
+ *
  * @public
  * @unofficial
  */
 export interface GraphColorAttributes {
-    /** Alpha. */
+    /** Alpha channel. */
     a: number;
 
-    /** Color stored as a int (`rgb = c.r << 16 | c.g << 8 | c.b` where channels are 8-bits unsigned integers). */
+    /** Color stored as an integer (`rgb = c.r << 16 | c.g << 8 | c.b` where channels are 8-bits unsigned integers). */
     rgb: number;
 }
