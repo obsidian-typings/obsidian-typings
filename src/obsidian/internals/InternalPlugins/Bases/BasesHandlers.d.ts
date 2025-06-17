@@ -7,8 +7,6 @@ import type { ViewFactory } from './ViewFactory.d.ts';
  * @unofficial
  */
 export interface BasesHandlers extends Record<string, ViewFactory> {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     table: ViewFactory<TableView>;
 }

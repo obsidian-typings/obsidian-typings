@@ -8,7 +8,7 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /**
  * Represents a link in a graph view.
- * 
+ *
  * @public
  * @unofficial
  */

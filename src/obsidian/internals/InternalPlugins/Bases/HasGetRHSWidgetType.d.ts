@@ -4,8 +4,6 @@
  * @unofficial
  */
 export interface HasGetRHSWidgetType {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     getRHSWidgetType(type: string): string;
 }

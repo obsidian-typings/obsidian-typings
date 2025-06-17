@@ -4,8 +4,6 @@
  * @unofficial
  */
 export interface HasGetDisplayName {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     getDisplayName(type: string): string;
 }

@@ -8,12 +8,12 @@ import type { GraphNode } from './GraphNode.d.ts';
  * @unofficial
  */
 export interface GraphNodeData {
-    /** Type of the node, can be of value `"tag"`, `"unresolved"`, `"attachment"`, or an empty string for markdown nodes. */
-    type: string;
+    /** Color of the node if it is part of a group */
+    color?: GraphColorAttributes;
 
     /** Record of forward neighbor nodes. */
     links: Record<string, boolean>;
 
-    /** Color of the node if it is part of a group */
-    color?: GraphColorAttributes;
+    /** Type of the node, can be of value `"tag"`, `"unresolved"`, `"attachment"`, or an empty string for markdown nodes. */
+    type: string;
 }

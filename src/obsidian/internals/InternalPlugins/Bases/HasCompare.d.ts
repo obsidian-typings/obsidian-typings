@@ -4,8 +4,6 @@
  * @unofficial
  */
 export interface HasCompare {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     compare(a: unknown, b: unknown): boolean;
 }

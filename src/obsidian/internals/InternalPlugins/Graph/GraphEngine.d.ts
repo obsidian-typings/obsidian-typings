@@ -12,7 +12,7 @@ import type { GraphForceOptions } from './Options/GraphForceOptions.d.ts';
 
 /**
  * Engine of a graph view.
- * 
+ *
  * @public
  * @unofficial
  */

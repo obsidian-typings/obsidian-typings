@@ -6,7 +6,7 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /**
  * Obsidian view for a local graph.
- * 
+ *
  * @public
  * @unofficial
  */

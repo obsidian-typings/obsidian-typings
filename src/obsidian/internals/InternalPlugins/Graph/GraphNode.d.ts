@@ -4,12 +4,12 @@ import type {
     TextStyle
 } from 'pixi.js';
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
-import type { GraphRenderer } from './GraphRenderer.d.ts';
 import type { GraphLink } from './GraphLink.js';
+import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /**
  * Represents a node in the graph view.
- * 
+ *
  * @public
  * @unofficial
  */
