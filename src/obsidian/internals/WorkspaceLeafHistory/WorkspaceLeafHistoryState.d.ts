@@ -1,18 +1,20 @@
+import type { IconName } from 'obsidian';
+
 /**
  * @todo Documentation incomplete.
  * @public
  * @unofficial
  */
-export interface DropResult {
+export interface WorkspaceLeafHistoryState {
     /** @todo Documentation incomplete. */
-    action: string | null;
+    eState: unknown;
 
     /** @todo Documentation incomplete. */
-    dropEffect: 'none' | 'copy' | 'link' | 'move';
+    icon: IconName;
 
     /** @todo Documentation incomplete. */
-    hoverClass?: string;
+    state: unknown;
 
     /** @todo Documentation incomplete. */
-    hoverEl?: HTMLElement | null;
+    title: string;
 }

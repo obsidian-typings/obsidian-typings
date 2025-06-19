@@ -39,7 +39,7 @@ declare module 'obsidian' {
          * The direct parent of the leaf.
          *
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link parent} instead.
+         * @deprecated - Added only for typing purposes. Use {@link WorkspaceItem.parent} instead.
          */
         parent__: WorkspaceParent;
 
@@ -60,6 +60,12 @@ declare module 'obsidian' {
          * @unofficial
          */
         workspace: Workspace;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        get parentSplit(): WorkspaceParent;
 
         /**
          * @todo Documentation incomplete.

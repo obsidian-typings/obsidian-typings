@@ -1,3 +1,8 @@
+import type { Draggable } from '../internals/DragManager/Draggable.d.ts';
+import type { DropResult } from '../internals/DragManager/DropResult.d.ts';
+import type { WorkspaceLeafHistory } from '../internals/WorkspaceLeafHistory/WorkspaceLeafHistory.d.ts';
+import type { WorkspaceLeafHistoryState } from '../internals/WorkspaceLeafHistory/WorkspaceLeafHistoryState.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -9,7 +14,25 @@ declare module 'obsidian' {
          * @todo Documentation incomplete.
          * @unofficial
          */
-        activeTime?: number;
+        activeTime: number;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        group: string | null;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        height: number;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        history: WorkspaceLeafHistory;
 
         /**
          * The hover popover associated with this leaf.
@@ -34,6 +57,24 @@ declare module 'obsidian' {
          * @todo Documentation incomplete.
          * @unofficial
          */
+        pinned: boolean;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        resizeObserver: ResizeObserver | null;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        tabHeaderCloseEl: HTMLDivElement | null;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
         tabHeaderEl: HTMLElement;
 
         /**
@@ -49,12 +90,54 @@ declare module 'obsidian' {
         tabHeaderInnerTitleEl: HTMLElement;
 
         /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        tabHeaderStatusContainerEl: HTMLDivElement | null;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        tabHeaderStatusLinkEl: HTMLDivElement | null;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        tabHeaderStatusPinEl: HTMLDivElement | null;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        type: 'leaf';
+
+        /**
          * The view associated with this leaf. Do not attempt to cast this to your
          * custom `View` without first checking `instanceof`.
          *
          * @official
          */
         view: View;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        width: number;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        working: boolean;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        canNavigate(): boolean;
 
         /**
          * Detach this leaf from its parent.
@@ -80,6 +163,12 @@ declare module 'obsidian' {
         getEphemeralState(): any;
 
         /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        getHistoryState(): WorkspaceLeafHistoryState;
+
+        /**
          * Get the icon of this leaf.
          *
          * @returns The icon of the leaf.
@@ -95,6 +184,18 @@ declare module 'obsidian' {
         getViewState(): ViewState;
 
         /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        handleDrop(event: DragEvent, draggable: Draggable, isOver: boolean): DropResult | null;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        highlight(): void;
+
+        /**
          * Returns `true` if this leaf is currently deferred because it is in the background.
          * A deferred leaf will have a DeferredView as its view, instead of the View that
          * it should normally have for its type (like MarkdownView for the `markdown` type).
@@ -105,6 +206,12 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link isDeferred} instead.
          */
         isDeferred__?(): boolean;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        isVisible(): boolean;
 
         /**
          * If this view is currently deferred, load it and await that it has fully loaded.
@@ -164,6 +271,12 @@ declare module 'obsidian' {
         on(name: 'pinned-change', callback: (pinned: boolean) => any, ctx?: any): EventRef;
 
         /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        onOpenTabHeaderMenu(evt: MouseEvent, parentEl: HTMLElement): void;
+
+        /**
          * Handle the resize event.
          *
          * @official
@@ -198,6 +311,18 @@ declare module 'obsidian' {
          * @unofficial
          */
         openLinkText(linktext: string, sourcePath: string, openViewState?: OpenViewState): Promise<void>;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        rebuildView(): Promise<void>;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        recordHistory(state: WorkspaceLeafHistoryState): void;
 
         /**
          * Set the vertical height a leaf may occupy if it is in a split. The height is not set directly, but.
@@ -259,5 +384,17 @@ declare module 'obsidian' {
          * @official
          */
         togglePinned(): void;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        unhighlight(): void;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        updateHeader(): void;
     }
 }

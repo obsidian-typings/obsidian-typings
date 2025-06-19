@@ -1,3 +1,6 @@
+import type { Draggable } from '../../internals/DragManager/Draggable.d.ts';
+import type { DropResult } from '../../internals/DragManager/DropResult.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -113,7 +116,7 @@ declare module 'obsidian' {
          * @todo Documentation incomplete.
          * @unofficial
          */
-        handleDrop(event: DragEvent, t: unknown, n: unknown): unknown;
+        handleDrop(event: DragEvent, draggable: Draggable, isOver: boolean): DropResult | null;
 
         /**
          * @todo Documentation incomplete.
