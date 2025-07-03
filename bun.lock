@@ -4,7 +4,7 @@
     "": {
       "name": "obsidian-typings",
       "dependencies": {
-        "@antfu/utils": "^9.2.0",
+        "@antfu/utils": "9.2.0",
         "@capacitor/core": "^6.2.1",
         "@codemirror/language": "^6.11.1",
         "@codemirror/search": "^6.5.11",
