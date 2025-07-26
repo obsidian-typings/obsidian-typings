@@ -1,5 +1,4 @@
 import type { Component } from 'obsidian';
-import type { PropertyEntryData } from './PropertyEntryData.d.ts';
 import type { PropertyRenderContext } from './PropertyRenderContext.d.ts';
 
 /**
@@ -7,11 +6,16 @@ import type { PropertyRenderContext } from './PropertyRenderContext.d.ts';
  * @public
  * @unofficial
  */
-export interface PropertyWidget<T> {
+export interface PropertyWidget {
     /**
      * Lucide-dev icon associated with the widget.
      */
     icon: string;
+
+    /**
+     * Returns the I18N name of the widget.
+     */
+    name: string;
 
     /**
      * Reserved keys for the widget.
@@ -24,22 +28,12 @@ export interface PropertyWidget<T> {
     type: string;
 
     /**
-     * Get the default value for the property widget.
-     */
-    default(): T;
-
-    /**
-     * Returns the I18N name of the widget.
-     */
-    name(): string;
-
-    /**
      * Render function for the widget on field container given context and data.
      */
-    render(containerEl: HTMLElement, data: PropertyEntryData<T>, context: PropertyRenderContext): Component | void;
+    render(containerEl: HTMLElement, value: unknown, context: PropertyRenderContext): Component | void;
 
     /**
      * Validate whether the input value to the widget is correct.
      */
-    validate(value: T): boolean;
+    validate(value: unknown): boolean;
 }
