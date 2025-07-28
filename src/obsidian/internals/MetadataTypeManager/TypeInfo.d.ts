@@ -7,8 +7,8 @@ import type { PropertyWidget } from '../PropertyWidget.d.ts';
  */
 export interface TypeInfo {
     /** @todo Documentation incomplete. */
-    expected: PropertyWidget;
+    expected: PropertyWidget<unknown>;
 
     /** @todo Documentation incomplete. */
-    inferred: PropertyWidget;
+    inferred: PropertyWidget<unknown>;
 }

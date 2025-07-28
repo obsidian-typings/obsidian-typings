@@ -7,5 +7,5 @@ import type { PropertyWidgetType } from '../PropertyWidgetType.d.ts';
  * @unofficial
  */
 export interface MetadataTypeManagerRegisteredTypeWidgetsRecord
-    extends Record<PropertyWidgetType, PropertyWidget>
+    extends Record<PropertyWidgetType, PropertyWidget<unknown>>
 {}
