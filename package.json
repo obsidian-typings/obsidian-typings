@@ -56,9 +56,9 @@
     "dependencies": {
         "@antfu/utils": "9.2.0",
         "@capacitor/core": "5.7.8",
-        "@codemirror/language": "6.0.0",
-        "@codemirror/search": "6.0.0",
-        "@codemirror/state": "6.0.0",
+        "@codemirror/language": "6.11.2",
+        "@codemirror/search": "6.5.11",
+        "@codemirror/state": "6.5.2",
         "@lezer/common": "1.2.3",
         "@pixi/color": "7.2.4",
         "@pixi/events": "7.2.4",
