@@ -1,11 +1,11 @@
 diff --git a/node_modules/@pixi/settings/lib/ICanvasRenderingContext2D.d.ts b/node_modules/@pixi/settings/lib/ICanvasRenderingContext2D.d.ts
-index 1149b3c..6d7f1ae 100644
+index e6fdae2..2b18ede 100644
 --- a/node_modules/@pixi/settings/lib/ICanvasRenderingContext2D.d.ts
 +++ b/node_modules/@pixi/settings/lib/ICanvasRenderingContext2D.d.ts
 @@ -8,6 +8,6 @@ export interface ICanvasRenderingContext2D extends CanvasState, CanvasTransform,
-     drawImage(image: CanvasImageSource | ICanvas | VideoFrame, dx: number, dy: number): void;
-     drawImage(image: CanvasImageSource | ICanvas | VideoFrame, dx: number, dy: number, dw: number, dh: number): void;
-     drawImage(image: CanvasImageSource | ICanvas | VideoFrame, sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number): void;
+     drawImage(image: CanvasImageSource | ICanvas, dx: number, dy: number): void;
+     drawImage(image: CanvasImageSource | ICanvas, dx: number, dy: number, dw: number, dh: number): void;
+     drawImage(image: CanvasImageSource | ICanvas, sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number): void;
 -    letterSpacing?: string;
 +    letterSpacing: string;
      textLetterSpacing?: string;
