@@ -145,7 +145,7 @@ declare module '@codemirror/state' {
         /**
          * Check whether the user replaces all search matches.
          * Usually dispatched when performing [`replaceAll`](https://codemirror.net/docs/ref/#commands.replaceAll) command.
-         * Included in `'input'` event.
+         * Included in `'input'` and `'input.replace'` events.
          * 
          * @remark Obsidian native editor search does not dispatch this event.
          * @unofficial
