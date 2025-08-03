@@ -4,6 +4,7 @@ import type {
     HoverPopover,
     MarkdownView
 } from 'obsidian';
+import type { FocusMode } from './FocusMode.d.ts';
 import type { MetadataEditorProperty } from './MetadataEditorProperty.d.ts';
 import type { PropertyEntryData } from './PropertyEntryData.d.ts';
 
@@ -121,7 +122,7 @@ export interface MetadataEditor extends Component {
     /**
      * Focus on property with value.
      */
-    focusValue(value: string, which: 'both' | 'end' | 'start'): void;
+    focusValue(value: string, mode: FocusMode): void;
 
     /**
      * Handle copy event on selection and serialize properties.

@@ -2,6 +2,7 @@ import type {
     App,
     Component
 } from 'obsidian';
+import type { FocusMode } from './FocusMode.d.ts';
 import type { MetadataEditor } from './MetadataEditor.d.ts';
 import type { MetadataEditorPropertyTypeInfo } from './MetadataEditorPropertyTypeInfo.d.ts';
 import type { MetadataWidget } from './MetadataWidget.d.ts';
@@ -81,7 +82,7 @@ export interface MetadataEditorProperty extends Component {
     /**
      * Focus on the value input element.
      */
-    focusValue(which?: 'both' | 'end' | 'start'): void;
+    focusValue(mode?: FocusMode): void;
 
     /**
      * Reveal the property menu on click event.
