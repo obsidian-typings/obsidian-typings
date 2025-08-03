@@ -67,5 +67,5 @@ export interface MetadataTypeManagerRegisteredTypeWidgetsRecord
     /**
      * @todo Documentation incomplete.
      */
-    text: PropertyWidget<string, TextPropertyWidgetComponent>;
+    text: PropertyWidget<null | string, TextPropertyWidgetComponent>;
 }
