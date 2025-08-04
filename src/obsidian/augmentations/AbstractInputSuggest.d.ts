@@ -9,11 +9,35 @@ declare module 'obsidian' {
      */
     interface AbstractInputSuggest<T> extends PopoverSuggest<T> {
         /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        lastRect: DOMRect;
+
+        /**
          * Limit to the number of elements rendered at once. Set to 0 to disable. Defaults to 100.
          *
          * @official
          */
         limit: number;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        selectCb?: (value: T, evt: MouseEvent | KeyboardEvent) => unknown;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        textInputEl: HTMLInputElement | HTMLDivElement;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        autoReposition(): void;
 
         /**
          * Accepts an `<input>` text box or a contenteditable div.
@@ -59,6 +83,18 @@ declare module 'obsidian' {
         getValue(): string;
 
         /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        onInputChange(): void;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        onInputFocus(): void;
+
+        /**
          * Registers a callback to handle when a suggestion is selected by the user.
          *
          * @param callback - The callback to handle when a suggestion is selected by the user.
@@ -71,7 +107,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        onSelect(callback: (value: T, evt: MouseEvent | KeyboardEvent) => any): this;
+        onSelect(callback: (value: T, evt: MouseEvent | KeyboardEvent) => unknown): this;
 
         /**
          * Sets the value into the input element.
@@ -84,5 +120,11 @@ declare module 'obsidian' {
          * @official
          */
         setValue(value: string): void;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        showSuggestions(suggestions: SearchResult[]): void;
     }
 }

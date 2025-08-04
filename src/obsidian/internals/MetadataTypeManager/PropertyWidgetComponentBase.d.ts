@@ -7,23 +7,15 @@ import type { FocusMode } from '../FocusMode.d.ts';
  * @unofficial
  */
 export interface PropertyWidgetComponentBase extends Component {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     containerEl: HTMLElement;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     type: string;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     focus(mode?: FocusMode): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     onFocus(mode: FocusMode): void;
 }

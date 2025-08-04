@@ -19,53 +19,33 @@ import type { TextPropertyWidgetComponent } from './TextPropertyWidgetComponent.
 export interface MetadataTypeManagerRegisteredTypeWidgetsRecord
     extends Record<PropertyWidgetType, PropertyWidget<unknown>>
 {
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     aliases: PropertyWidget<string | string[], AliasesPropertyWidgetComponent>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     checkbox: PropertyWidget<boolean | null, CheckboxPropertyWidgetComponent>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     date: PropertyWidget<moment.MomentInput, DatePropertyWidgetComponent>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     datetime: PropertyWidget<moment.MomentInput, DatetimePropertyWidgetComponent>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     file: PropertyWidget<string, FilePropertyWidgetComponent>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     folder: PropertyWidget<string, FolderPropertyWidgetComponent>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     multitext: PropertyWidget<string[], MultitextPropertyWidgetComponent>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     number: PropertyWidget<number, NumberPropertyWidgetComponent>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     tags: PropertyWidget<string[], TagsPropertyWidgetComponent>;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     text: PropertyWidget<null | string, TextPropertyWidgetComponent>;
 }

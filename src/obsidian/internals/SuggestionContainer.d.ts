@@ -62,6 +62,16 @@ export interface SuggestionContainer<T> {
     forceSetSelectedItem(index: number, event: Event): void;
 
     /**
+     * @todo Documentation incomplete.
+     */
+    getSelectedElement(): HTMLElement | null;
+
+    /**
+     * @todo Documentation incomplete.
+     */
+    getSelectedValue(): SearchResult | null;
+
+    /**
      * Move selected item to next suggestion.
      */
     moveDown(event: KeyboardEvent): boolean;

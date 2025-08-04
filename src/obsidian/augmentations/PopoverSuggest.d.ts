@@ -1,4 +1,5 @@
 import type { SuggestionContainer } from '../internals/SuggestionContainer.d.ts';
+import type { TextDirection } from '../internals/TextDirection.d.ts';
 
 export {};
 
@@ -35,7 +36,7 @@ declare module 'obsidian' {
          *
          * @unofficial
          */
-        suggestEl: HTMLElement;
+        suggestEl: HTMLDivElement;
 
         /**
          * Handles selection and rendering of the suggestions.
@@ -43,6 +44,12 @@ declare module 'obsidian' {
          * @unofficial
          */
         suggestions: SuggestionContainer<T>;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        autoDestroy?(): void;
 
         /**
          * Closes the popover.
@@ -60,6 +67,12 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
         constructor__(app: App, scope?: Scope): this;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        onEscapeKey(): void;
 
         /**
          * Opens the popover.
@@ -88,6 +101,12 @@ declare module 'obsidian' {
         renderSuggestion__(value: T, el: HTMLElement): void;
 
         /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        reposition(rect: DOMRect, textDirection?: TextDirection): void;
+
+        /**
          * Select the suggestion.
          *
          * @param value - The value to select.
@@ -105,5 +124,11 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link selectSuggestion} instead.
          */
         selectSuggestion__(value: T, evt: MouseEvent | KeyboardEvent): void;
+
+        /**
+         * @todo Documentation incomplete.
+         * @unofficial
+         */
+        setAutoDestroy(el: HTMLElement): void;
     }
 }
