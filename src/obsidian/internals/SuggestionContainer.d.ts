@@ -61,14 +61,10 @@ export interface SuggestionContainer<T> {
      */
     forceSetSelectedItem(index: number, event: Event): void;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     getSelectedElement(): HTMLElement | null;
 
-    /**
-     * @todo Documentation incomplete.
-     */
+    /** @todo Documentation incomplete. */
     getSelectedValue(): SearchResult | null;
 
     /**
