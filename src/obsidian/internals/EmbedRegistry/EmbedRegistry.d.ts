@@ -2,7 +2,7 @@ import type {
     Events,
     TFile
 } from 'obsidian';
-import type { EmbeddableConstructor } from '../EmbeddableConstructor.d.ts';
+import type { EmbedCreator } from './EmbedCreator.d.ts';
 import type { EmbedRegistryEmbedByExtensionRecord } from './EmbedRegistryEmbedByExtensionRecord.d.ts';
 
 /**
@@ -19,7 +19,7 @@ export interface EmbedRegistry extends Events {
     /**
      * Get the embed constructor for a specific file type.
      */
-    getEmbedCreator(file: TFile): EmbeddableConstructor | null;
+    getEmbedCreator(file: TFile): EmbedCreator | null;
 
     /**
      * Check whether a file extension has a registered embed constructor.
@@ -29,12 +29,12 @@ export interface EmbedRegistry extends Events {
     /**
      * Register an embed constructor for a specific file extension.
      */
-    registerExtension(extension: string, embedCreator: EmbeddableConstructor): void;
+    registerExtension(extension: string, embedCreator: EmbedCreator): void;
 
     /**
      * Register an embed constructor for a list of file extensions.
      */
-    registerExtensions(extensions: string[], embedCreator: EmbeddableConstructor): void;
+    registerExtensions(extensions: string[], embedCreator: EmbedCreator): void;
 
     /**
      * Unregister an embed constructor for a specific file extension.

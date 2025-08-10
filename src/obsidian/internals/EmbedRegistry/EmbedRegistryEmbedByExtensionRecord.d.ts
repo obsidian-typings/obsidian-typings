@@ -1,9 +1,9 @@
 import type { TFile } from 'obsidian';
 import type { FileExtension } from '../../implementations/Constants/FileExtension.ts';
-import type { EmbedContext } from '../EmbedContext.d.ts';
-import type { EmbeddableConstructor } from '../EmbeddableConstructor.d.ts';
 import type { EmbedAudioComponent } from './EmbedAudioComponent.d.ts';
 import type { EmbedCanvasComponent } from './EmbedCanvasComponent.d.ts';
+import type { EmbedContext } from './EmbedContext.d.ts';
+import type { EmbedCreator } from './EmbedCreator.d.ts';
 import type { EmbedImageComponent } from './EmbedImageComponent.d.ts';
 import type { EmbedMarkdownComponent } from './EmbedMarkdownComponent.d.ts';
 import type { EmbedPdfComponent } from './EmbedPdfComponent.d.ts';
@@ -14,7 +14,7 @@ import type { EmbedVideoComponent } from './EmbedVideoComponent.d.ts';
  * @public
  * @unofficial
  */
-export interface EmbedRegistryEmbedByExtensionRecord extends Record<string, EmbeddableConstructor> {
+export interface EmbedRegistryEmbedByExtensionRecord extends Record<string, EmbedCreator> {
     /** @todo Documentation incomplete. */
     [FileExtension._3gp]: (context: EmbedContext, file: TFile) => EmbedAudioComponent;
 

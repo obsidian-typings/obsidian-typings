@@ -1,8 +1,8 @@
-import type { Component } from 'obsidian';
+import type { EmbedComponent } from './EmbedComponent.d.ts';
 
 /**
  * @todo Documentation incomplete.
  * @public
  * @unofficial
  */
-export interface EmbedPdfComponent extends Component {}
+export interface EmbedPdfComponent extends EmbedComponent {}
