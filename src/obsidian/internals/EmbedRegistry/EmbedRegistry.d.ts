@@ -6,7 +6,8 @@ import type { EmbedCreator } from './EmbedCreator.d.ts';
 import type { EmbedRegistryEmbedByExtensionRecord } from './EmbedRegistryEmbedByExtensionRecord.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * A registry for embeddable files components.
+ *
  * @public
  * @unofficial
  */

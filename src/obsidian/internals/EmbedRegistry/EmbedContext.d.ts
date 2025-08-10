@@ -1,7 +1,8 @@
 import type { App } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * A context to configure embedding of a file.
+ *
  * @public
  * @unofficial
  */

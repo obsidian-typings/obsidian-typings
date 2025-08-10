@@ -1,7 +1,8 @@
 import type { EmbedComponent } from './EmbedComponent.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * A component that renders an embedded image file.
+ *
  * @public
  * @unofficial
  */
