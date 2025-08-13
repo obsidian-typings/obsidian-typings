@@ -1,5 +1,4 @@
 import type { DataAdapterFilesRecord } from '../internals/DataAdapterRecords/DataAdapterFilesRecord.d.ts';
-import type { FileSystemWatchHandler } from '../internals/FileSystemWatchHandler.d.ts';
 import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
 
 export {};
@@ -379,13 +378,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         update(normalizedPath: string): Promise<void>;
-
-        /**
-         * Add change watcher to path.
-         *
-         * @unofficial
-         */
-        watch(handler: FileSystemWatchHandler): Promise<void>;
 
         /**
          * Write to a plaintext file.
