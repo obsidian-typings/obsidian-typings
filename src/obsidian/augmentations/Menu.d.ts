@@ -30,11 +30,11 @@ declare module 'obsidian' {
         dom: HTMLElement;
 
         /**
-         * Items contained in the menu.
+         * Items and separators contained in the menu.
          *
          * @unofficial
          */
-        items: MenuItem[];
+        items: (MenuItem | MenuSeparator)[];
 
         /**
          * Parent menu of the current menu.
