@@ -1,4 +1,5 @@
 import type { DataAdapterFilesRecord } from '../internals/DataAdapterRecords/DataAdapterFilesRecord.d.ts';
+import type { FileSystemWatchHandler } from '../internals/FileSystemWatchHandler.d.ts';
 import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
 
 export {};
