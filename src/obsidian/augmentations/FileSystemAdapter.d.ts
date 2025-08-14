@@ -5,7 +5,6 @@ import * as fsPromises from 'node:fs/promises';
 import * as path from 'node:path';
 import type { Btime } from '../internals/Btime.d.ts';
 import type { DataAdapterWatchersRecord } from '../internals/DataAdapterRecords/DataAdapterWatchersRecord.d.ts';
-import type { FileSystemWatchHandler } from '../internals/FileSystemWatchHandler.d.ts';
 
 export {};
 
@@ -399,13 +398,6 @@ declare module 'obsidian' {
          * @official
          */
         trashSystem(normalizedPath: string): Promise<boolean>;
-
-        /**
-         * Add change watcher to path.
-         *
-         * @unofficial
-         */
-        watch(handler: FileSystemWatchHandler): Promise<void>;
 
         /**
          * Watch recursively for changes.

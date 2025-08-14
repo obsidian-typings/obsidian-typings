@@ -311,13 +311,6 @@ declare module 'obsidian' {
         update(normalizedPath: string): Promise<void>;
 
         /**
-         * Add change watcher to path.
-         *
-         * @unofficial
-         */
-        watch(normalizedPath: string): Promise<void>;
-
-        /**
          * Writes a file.
          *
          * @param normalizedPath - The path to write.

@@ -381,6 +381,13 @@ declare module 'obsidian' {
         update(normalizedPath: string): Promise<void>;
 
         /**
+         * Add change watcher to path.
+         *
+         * @unofficial
+         */
+        watch(handler: FileSystemWatchHandler): Promise<void>;
+
+        /**
          * Write to a plaintext file.
          * If the file exists its content will be overwritten, otherwise the file will be created.
          *
