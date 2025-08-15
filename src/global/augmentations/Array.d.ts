@@ -74,8 +74,6 @@ declare global {
          * arr.remove(4);
          * console.log(arr); // [1, 2, 3]
          * ```
-         * @remarks The original version had return type `this`.
-         * See bug: {@link https://forum.obsidian.md/t/bug-array-remove-definition/98101}.
          * @official
          */
         remove(target: T): void;
