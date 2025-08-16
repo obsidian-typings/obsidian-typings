@@ -14,11 +14,6 @@ export interface PropertyWidget<Value = unknown, ComponentType extends Component
     icon: string;
 
     /**
-     * Returns the I18N name of the widget.
-     */
-    name: string;
-
-    /**
      * Reserved keys for the widget.
      */
     reservedKeys?: string[];
@@ -33,6 +28,11 @@ export interface PropertyWidget<Value = unknown, ComponentType extends Component
      * @deprecated Removed in 1.9.0.
      */
     default(): Value;
+
+    /**
+     * Returns the I18N name of the widget.
+     */
+    name(): string;
 
     /**
      * Render function for the widget on field container given context and data.
