@@ -19,14 +19,18 @@ async function main(): Promise<void> {
   const branchSpec = validateRefName(environmentVariables.GITHUB_REF_NAME);
   const readmeTemplate = await readFile('./workflow-scripts/README.template.md', 'utf8');
   let readme = await readFile('README.md', 'utf8');
+  console.warn('original readme\n---\n\n', readme);
+
   const TODO_URL = 'https://obsidian.md/changelog/TODO-SET-CHANGELOG-URL';
   const changelogUrl = readme.match(/https:\/\/obsidian\.md\/changelog\/[^"]+/)?.[0] ?? TODO_URL;
+  console.warn('changelogUrl\n---\n\n', changelogUrl);
   let shouldUpdateReadme = changelogUrl === TODO_URL;
   if (readme !== fillReadmeTemplate(readmeTemplate, branchSpec, changelogUrl)) {
     if (!changelogUrl.includes(branchSpec.obsidianVersion)) {
       readme = fillReadmeTemplate(readmeTemplate, branchSpec, TODO_URL);
       shouldUpdateReadme = true;
     }
+    console.warn('updated readme\n---\n\n', readme);
     await writeFile('README.md', readme, 'utf8');
     execSync('git add README.md', { stdio: 'inherit' });
     execSync('git commit -m "chore: generate README.md from template"', { stdio: 'inherit' });
