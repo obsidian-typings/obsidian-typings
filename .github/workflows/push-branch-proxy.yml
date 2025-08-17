@@ -6,6 +6,6 @@ on:
             - "release/obsidian-public/*"
             - "release/obsidian-catalyst/*"
 jobs:
-  call-main:
+  main-workflow:
     uses: Fevol/obsidian-typings/.github/workflows/push-branch.yml@main
     secrets: inherit
