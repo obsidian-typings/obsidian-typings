@@ -81,7 +81,7 @@ For most cases, we recommend using the latest release.
       - `npm install --save-dev obsidian-typings`
     - Explicitly install latest `public` release:
       - `npm install --save-dev obsidian-typings@obsidian-public-latest`
-    - Install the latest **`catalyst` (`beta`)** release:
+    - Install the latest `catalyst` (`beta`) release:
       - `npm install --save-dev obsidian-typings@obsidian-catalyst-latest`
     - Install a specific release (should match `minAppVersion` in your plugin's `manifest.json`):
       - `npm install --save-dev obsidian-typings@obsidian-public-1.8.10`
