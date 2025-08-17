@@ -3,6 +3,8 @@ on:
   workflow_call:
 jobs:
   push-branch:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout pushed branch
