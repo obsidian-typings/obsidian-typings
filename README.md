@@ -1,6 +1,6 @@
 <center>
 
-# Obsidian Extended Typings
+# Obsidian Typings
 
 </center>
 
