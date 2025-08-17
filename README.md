@@ -46,14 +46,14 @@ Be aware that the typings currently only cover a subset of the full API: while m
 
 [Obsidian](https://obsidian.md) version comes in two channels:
 
-- `Stable` - versions available for everyone.
-- [`Catalyst`](https://help.obsidian.md/catalyst) - `beta` versions, available by subscription. It has early access to the newest features.
+- `public` - versions available for everyone.
+- [`catalyst`](https://help.obsidian.md/catalyst) - `beta` versions, available by subscription. It has early access to the newest features.
 
-In `obsidian-typings` team we aim to provide typings for latest `stable` and latest `catalyst` builds. The support for older versions will be limited.
+In `obsidian-typings` team we aim to provide typings for latest `public` and latest `catalyst` builds. The support for older versions will be limited.
 
-We keep typings for each `Obsidian` version in its own branch: `release/obsidian-stable/*` and `release/obsidian-catalyst/*`.
+We keep typings for each `Obsidian` version in its own branch: `release/obsidian-public/*` and `release/obsidian-catalyst/*`.
 
-- Branch with the latest **stable** release typings: [`release/obsidian-stable/1.8.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-stable/1.8.10)
+- Branch with the latest **public** release typings: [`release/obsidian-public/1.8.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.8.10)
 - Branch with the latest **catalyst** release typings: [`release/obsidian-catalyst/1.9.9`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-catalyst/1.9.9)
 
 ## Set-up
@@ -61,17 +61,17 @@ We keep typings for each `Obsidian` version in its own branch: `release/obsidian
 1. **Installation**
 
     - `npm install --save-dev obsidian-typings`
-      - Installs package for the latest `stable` release.
+      - Installs package for the latest `public` release.
       - Needed for most plugin developers.
       - Might not work properly for older versions matching `minAppVersion` in `manifest.json` of your plugin. In this case, you might need to use specific version. See below.
-    - `npm install --save-dev obsidian-typings@obsidian-stable-latest`
+    - `npm install --save-dev obsidian-typings@obsidian-public-latest`
       - Same as above, just explicit.
     - `npm install --save-dev obsidian-typings@obsidian-catalyst-latest`
       - Installs package for the latest `catalyst` release
       - Usually such plugin are published via `beta` plugin releases.
       - Might not work properly for older versions matching `minAppVersion` in `manifest.json` of your plugin. In this case, you might need to use specific version. See below.
-    - `npm install --save-dev obsidian-typings@obsidian-stable-1.8.10`
-      - Installs package for the specific `stable` release
+    - `npm install --save-dev obsidian-typings@obsidian-public-1.8.10`
+      - Installs package for the specific `public` release
       - Usually it has to match `minAppVersion` in `manifest.json` of your plugin.
     - `npm install --save-dev obsidian-typings@obsidian-catalyst-1.9.9`
       - Installs package for the specific `catalyst` release
