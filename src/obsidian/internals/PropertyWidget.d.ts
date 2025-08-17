@@ -25,7 +25,6 @@ export interface PropertyWidget<Value = unknown, ComponentType extends Component
 
     /**
      * Get the default value for the property widget.
-     * @deprecated Removed in 1.9.0.
      */
     default(): Value;
 
@@ -36,15 +35,8 @@ export interface PropertyWidget<Value = unknown, ComponentType extends Component
 
     /**
      * Render function for the widget on field container given context and data.
-     * @deprecated Removed in 1.9.0.
      */
     render(containerEl: HTMLElement, data: PropertyEntryData<Value>, context: PropertyRenderContext): ComponentType;
-
-    /**
-     * Render function for the widget on field container given context and data.
-     * @remarks Added in 1.9.0.
-     */
-    render(containerEl: HTMLElement, data: Value, context: PropertyRenderContext): ComponentType;
 
     /**
      * Validate whether the input value to the widget is correct.
