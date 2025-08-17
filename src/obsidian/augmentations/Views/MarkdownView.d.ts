@@ -119,15 +119,6 @@ declare module 'obsidian' {
         sourceMode: MarkdownViewSourceMode;
 
         /**
-         * Add property to inline metadata editor or properties plugin.
-         *
-         * @deprecated - Removed in 1.6.0.
-         * @remark Parameter is not used.
-         * @unofficial
-         */
-        addProperty(unused: undefined): void;
-
-        /**
          * Whether the editor can render properties according to the current mode and config.
          *
          * @unofficial

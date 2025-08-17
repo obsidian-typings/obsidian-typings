@@ -162,7 +162,7 @@ declare module 'obsidian' {
         onClose__?(): Promise<void>;
 
         /**
-         * @deprecated use `onPaneMenu` instead
+         * @deprecated use {@link onPaneMenu} instead
          * @unofficial
          */
         onHeaderMenu(e: unknown): void;

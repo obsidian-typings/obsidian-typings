@@ -71,12 +71,6 @@ declare module 'obsidian' {
         register(modifiers: Modifier[] | null, key: string | null, func: KeymapEventListener): KeymapEventHandler;
 
         /**
-         * @deprecated - Executes same functionality as `Scope.register`.
-         * @unofficial
-         */
-        registerKey(modifiers: Modifier[], key: string | null, func: KeymapEventListener): KeymapEventHandler;
-
-        /**
          * @todo Documentation incomplete.
          * @unofficial
          */

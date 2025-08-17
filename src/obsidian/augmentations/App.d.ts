@@ -116,8 +116,7 @@ declare module 'obsidian' {
         /**
          * Whether the application is currently running on mobile.
          *
-         * @deprecated Will be inaccessible in a future version, prefer using `Platform.isMobile`.
-         * @remark Prefer usage of `Platform.isMobile`.
+         * @remark Prefer usage of `{@link Platform.isMobile}`.
          * @remark Will be true if `app.emulateMobile()` was enabled.
          * @unofficial
          */
@@ -136,12 +135,6 @@ declare module 'obsidian' {
          * @official
          */
         lastEvent: UserEvent | null;
-
-        /**
-         * @deprecated Made inaccessible in 1.6.0, this object can be recreated using Notices
-         * @unofficial
-         */
-        loadProgress: LoadProgress;
 
         /**
          * Manages the gathering and updating of metadata for all files in the vault.
@@ -356,8 +349,7 @@ declare module 'obsidian' {
         /**
          * Get currently active spellcheck languages.
          *
-         * @deprecated Originally spellcheck languages were stored in app settings, languages are now stored.
-         *   in `localStorage.getItem(spellcheck-languages)`.
+         * @remark Originally spellcheck languages were stored in app settings, languages are now stored in `localStorage.getItem('spellcheck-languages')`.
          * @unofficial
          */
         getSpellcheckLanguages(): string[];

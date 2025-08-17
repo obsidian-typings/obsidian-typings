@@ -176,9 +176,6 @@ export interface AppVaultConfig {
      */
     rightToLeft?: false | boolean;
 
-    /** @deprecated Removed as of version 1.4.3 */
-    showFrontmatter?: false | boolean;
-
     /**
      * Editor \> Show indentation guides.
      */
@@ -218,12 +215,6 @@ export interface AppVaultConfig {
      * Editor \> Spellcheck.
      */
     spellcheck?: false | boolean;
-
-    /**
-     * @deprecated Deprecated.
-     * @todo .
-     */
-    spellcheckDictionary?: [] | string[];
 
     /**
      * Editor \> Spellcheck languages.

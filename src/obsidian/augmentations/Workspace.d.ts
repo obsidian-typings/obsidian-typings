@@ -351,7 +351,7 @@ declare module 'obsidian' {
         getActiveFileView(): FileView | null;
 
         /**
-         * @deprecated - Use `getActiveViewOfType` instead
+         * @deprecated - Use {@link getActiveViewOfType} instead
          * @unofficial
          */
         getActiveLeafOfViewType<T extends View>(type: Constructor<T>): T | null;
