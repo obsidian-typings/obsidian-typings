@@ -15,6 +15,8 @@ interface BranchSpec {
 }
 
 async function main(): Promise<void> {
+  configureGitUser();
+
   const environmentVariables = getEnvironmentVariables();
   validateRefName(environmentVariables.GITHUB_REF_NAME);
 
@@ -34,6 +36,11 @@ async function main(): Promise<void> {
   }
 
   await writeFile(join(__dirname, 'README.md'), readme);
+}
+
+function configureGitUser(): void {
+  execSync('git config user.name "github-actions[bot]"', { stdio: 'inherit' });
+  execSync('git config user.email "41898282+github-actions[bot]@users.noreply.github.com"', { stdio: 'inherit' });
 }
 
 function fillReadmeTemplate(readmeTemplate: string, branchSpec: BranchSpec, changelogUrl: string): string {
