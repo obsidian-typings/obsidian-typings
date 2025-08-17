@@ -14,7 +14,7 @@ jobs:
       - name: Checkout scripts from main branch
         run: |
           git fetch origin main
-          git restore --source=origin/main --worktree -- .github/scripts
+          git restore --source=origin/main --worktree -- ./workflow-scripts
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -25,6 +25,6 @@ jobs:
           bun-version: latest
       - name: Install script deps
         run: npm ci
-        working-directory: ./.github/scripts
+        working-directory: ./workflow-scripts
       - name: Run script
-        run: bun .github/scripts/push-branch.ts
+        run: bun ./workflow-scripts/push-branch.ts

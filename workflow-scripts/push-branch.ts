@@ -1,7 +1,5 @@
 import { config } from 'dotenv';
 import process from 'node:process';
-import { dirname, join } from 'node:path/posix';
-import { fileURLToPath } from 'node:url';
 import { readFile, writeFile } from 'node:fs/promises';
 import { execSync } from 'node:child_process';
 
@@ -15,12 +13,11 @@ interface BranchSpec {
 }
 
 async function main(): Promise<void> {
-  const __dirname = dirname(fileURLToPath(import.meta.url)).replace(/\\/g, '/');
   configureGitUser();
   const environmentVariables = getEnvironmentVariables();
 
   const branchSpec = validateRefName(environmentVariables.GITHUB_REF_NAME);
-  const readmeTemplate = await readFile(join(__dirname, 'README.template.md'), 'utf8');
+  const readmeTemplate = await readFile('./workflow-scripts/README.template.md', 'utf8');
   let readme = await readFile('README.md', 'utf8');
   const TODO_URL = 'https://obsidian.md/changelog/TODO-SET-CHANGELOG-URL';
   const changelogUrl = readme.match(/https:\/\/obsidian\.md\/changelog\/[^"]+/)?.[0] ?? TODO_URL;
