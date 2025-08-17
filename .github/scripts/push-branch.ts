@@ -1,2 +1,3 @@
-console.log('Hello, world!');
-console.log(process.cwd())
+import { execSync } from 'node:child_process';
+
+execSync('ls', { stdio: 'inherit' });
