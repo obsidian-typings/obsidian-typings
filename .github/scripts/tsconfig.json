@@ -23,6 +23,6 @@
     "verbatimModuleSyntax": true
   },
   "include": [
-    "./**/*.ts"
+    "./*.ts"
   ]
 }
