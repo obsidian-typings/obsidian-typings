@@ -1,5 +1,0 @@
-{
-    "main": "../dist/cjs/implementations.cjs",
-    "module": "../dist/esm/implementations.mjs",
-    "types": "../dist/cjs/implementations.d.cts"
-}
