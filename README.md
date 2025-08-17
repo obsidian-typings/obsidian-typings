@@ -1,6 +1,6 @@
 <center>
 
-# Obsidian Extended Typings
+# Obsidian Typings
 
 </center>
 
@@ -25,7 +25,7 @@
 
 <div align="center">
 <h4>
- <a href="https://fevol.github.io/obsidian-typings">WEBSITE</a>
+ <a href="https://fevol.github.io/obsidian-typings">DOCS</a>
  <span>&nbsp;·&nbsp;</span>
  <a href="https://fevol.github.io/obsidian-typings/resources/obsidian-typings-changelog">CHANGELOG</a>
  <span>&nbsp;·&nbsp;</span>
@@ -38,48 +38,60 @@
 
 ---
 
-This repository contains TypeScript typings for undocumented [Obsidian API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts) methods and variables, including additional descriptions and example uses.
 
-Be aware that the typings currently only cover a subset of the full API: while most of the `App` interface and its sub-interfaces are covered, this package does not yet provide typings for views like `Graph`, `Canvas`, ... — contributions for these would be very welcome!
+**Obsidian Typings** provides **TypeScript definitions** for Obsidian’s **undocumented and internal APIs**.
+
+It extends the official [Obsidian API](https://github.com/obsidianmd/obsidian-api/) with:
+- Additional type definitions for internal methods, properties, and plugins.
+- Explanations and usage examples to make undocumented parts easier to understand.
+- Helper utilities and interfaces for working with Obsidian’s internals in a safer, type-safe way.
+
+This package is designed for plugin developers who want to access Obsidian's internal APIs in a type-safe manner,
+while also keeping their code maintainable and less reliant on `@ts-ignore`'s.
+
+
+### ⚠️ Important Notes
+- This package is **not affiliated with, or endorsed by, the Obsidian team**.
+- It does **not** cover every aspect of the Obsidian API.
+- Typings are based on reverse engineering and may be **inaccurate or unstable**. They can change without notice in future releases.
+- Always **test thoroughly** and **add fallbacks** when using internal APIs.
 
 ## Git branching
 
-[Obsidian](https://obsidian.md) version comes in two channels:
+[Obsidian](https://obsidian.md) has two main release channels:
 
-- `public` - versions available for everyone.
-- [`catalyst`](https://help.obsidian.md/catalyst) - `beta` versions, available by subscription. It has early access to the newest features.
+- `public` - stable versions available to all users.
+- [`catalyst`](https://help.obsidian.md/catalyst)/`beta` - versions only available to users with a catalyst license, has early access to new features.
 
-In `obsidian-typings` team we aim to provide typings for latest `public` and latest `catalyst` builds. The support for older versions will be limited.
+Since the internal API can be changed between these channels, and your plugin may need to support users on both channels, this package provides typings for both.
 
-We keep typings for each `Obsidian` version in its own branch: `release/obsidian-public/*` and `release/obsidian-catalyst/*`.
 
-- Branch with the latest **public** release typings: [`release/obsidian-public/1.8.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.8.10)
-- Branch with the latest **catalyst** release typings: [`release/obsidian-catalyst/1.9.9`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-catalyst/1.9.9)
+As the internal API can change between these two channels, this package also exposes typings for both channels for convenience.
+
+Typings for each `Obsidian` version are kept in their own branches: namely `release/obsidian-public/*` and `release/obsidian-catalyst/*`:
+- Latest **public** release: [`release/obsidian-public/1.8.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.8.10)
+- Latest **catalyst** release: [`release/obsidian-catalyst/1.9.9`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-catalyst/1.9.9)
+
+Older versions of the package are available, but support for them is limited.
+For most cases, we recommend using the latest release.
+
 
 ## Set-up
 
-1. **Installation**
+1. **Install via npm**
 
-    - `npm install --save-dev obsidian-typings`
-      - Installs package for the latest `public` release.
-      - Needed for most plugin developers.
-      - Might not work properly for older versions matching `minAppVersion` in `manifest.json` of your plugin. In this case, you might need to use specific version. See below.
-    - `npm install --save-dev obsidian-typings@obsidian-public-latest`
-      - Same as above, just explicit.
-    - `npm install --save-dev obsidian-typings@obsidian-catalyst-latest`
-      - Installs package for the latest `catalyst` release
-      - Usually such plugin are published via `beta` plugin releases.
-      - Might not work properly for older versions matching `minAppVersion` in `manifest.json` of your plugin. In this case, you might need to use specific version. See below.
-    - `npm install --save-dev obsidian-typings@obsidian-public-1.8.10`
-      - Installs package for the specific `public` release
-      - Usually it has to match `minAppVersion` in `manifest.json` of your plugin.
-    - `npm install --save-dev obsidian-typings@obsidian-catalyst-1.9.9`
-      - Installs package for the specific `catalyst` release
-      - Usually it has to match `minAppVersion` in `manifest.json` of your plugin.
+    - Latest public release (recommended):
+      - `npm install --save-dev obsidian-typings`
+    - Explictly install latest **public** release:
+      - `npm install --save-dev obsidian-typings@obsidian-public-latest`
+    - Install the latest **catalyst** release (beta):
+      - `npm install --save-dev obsidian-typings@obsidian-catalyst-latest`
+    - Install a specific release (should match `minAppVersion` in your plugin’s `manifest.json`):
+      - `npm install --save-dev obsidian-typings@obsidian-public-1.8.10`
+      - `npm install --save-dev obsidian-typings@obsidian-catalyst-1.9.9`
 
-2. **Add `obsidian-typings` to `types` in `tsconfig.json`** (_recommended_) <span id="add-types-setting-to-tsconfig-json"></span>
-
-    If you want to have all overridden types of `obsidian-typings` available in your project without explicit imports, add the following to your `tsconfig.json`:
+2. Enable in tsconfig.json (recommended) <span id="add-types-setting-to-tsconfig-json"></span>
+Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all extended typings available globally without explicit importing them:
 
     ```json
     {
@@ -94,7 +106,7 @@ We keep typings for each `Obsidian` version in its own branch: `release/obsidian
 
 > [!WARNING]
 >
-> If you added the `types` field to your `tsconfig.json`, and `@types/some-package-name` does not get recognized anymore, you may need to re-add it to `types`:
+> If other `@types/*` packages stop being recognized after adding `obsidian-typings` to the `types`, you may need to re-add them to the `types` list.
 > ```json
 > {
 >     "compilerOptions": {
@@ -106,9 +118,13 @@ We keep typings for each `Obsidian` version in its own branch: `release/obsidian
 >     }
 > }
 
-3. **Explicit type importing**
+3. **Importing explicitly** (alternative)
 
-   If you prefer not to add `obsidian-typings` to your `types`, you can also add `import 'obsidian-typings';` to any project file.
+   Instead of adding `obsidian-typings` to your `types`, you can also import the package directly:
+
+    ```ts
+   import 'obsidian-typings';
+    ```
 
 ## Usage
 
@@ -120,13 +136,13 @@ To access types from the `obsidian` module, the import syntax does not change:
 import type { App } from 'obsidian';
 
 function printInternalPlugins(app: App): void {
-  console.log(app.internalPlugins);
+    console.log(app.internalPlugins);
 }
 ```
 
 ### `obsidian-typings` additional interfaces
 
-Additional interfaces added by this package (which do not exist in the official API), can be imported using:
+Additional interfaces added by this package (which do not exist in the official API), can be imported as:
 
 ```ts
 import type { InternalPlugins } from 'obsidian-typings';
@@ -144,18 +160,18 @@ import { InternalPluginName } from 'obsidian-typings/implementations';
 this.app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
 ```
 
-(The list of all available implementations can be found in the [implementations](https://github.com/Fevol/obsidian-typings/tree/main/src/obsidian/implementations) folder.)
+(The list of all available implementations can be found in the implementations folder.)
 
 ### Extend with your own typings
 
 If you need to extend the typings provided by this package, add the following to any `.d.ts` file in your project:
 
 ```ts
-export {}; // This is a very essential line. If you don't have any other top-level `import/export` statements, those typings will work not as expected.
+export {}; // This line is required. If you there aren't top-level `import/export` statements, your typings will work not as expected.
 declare module 'obsidian-typings' {
-  interface PluginsPluginsRecord {
-    myPlugin: MyPlugin;
-  }
+    interface PluginsPluginsRecord {
+        myPlugin: MyPlugin;
+    }
 }
 ```
 
@@ -173,22 +189,27 @@ Please be aware that there is a good reason why (some of) the functions and type
 -   There is a high risk of the code behaving unexpectedly if used improperly
 -   The function was never meant to be used
 
-Please use the functions and variables provided with caution. Be prepared to update your code if the API changes, and only use the functions if you are confident that you understand what they will do. Reference the [official API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts) first to see if your problem may be solved with a documented function, or search in the #plugin-dev channel of the Obsidian Discord server. Some functions will also contain `@remark` TSDoc tags that provide alternatives or better solutions.
+Please use the functions and variables provided by this package with caution.
+Be prepared to update your code if the API changes, and only use the functions if you are confident that you understand what they will do.
+Reference the [official API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts) first to see if your problem may be solved with a documented function, or search in the `#plugin-dev` channel of the Obsidian Discord server.
+Some functions will also contain `@remark` TSDoc tags that provide alternatives or better solutions.
 
-Furthermore, there is a very high chance that there are mistakes in the typings, despite best efforts. All types had to be deduced from either context, manually running the function, or from the minified app code. You _**should**_ verify that the code behaves as expected, both with regard to the expected (input/output)types, as well as what the function description promises.
+Furthermore, there is a very high chance that there are mistakes in the typings, despite best efforts.
+All types had to be deduced from context, manually running the function, or from the minified app code.
+Always verify that your code behaves as expected, both in terms of types and runtime behavior.
 
 With these scary disclaimers out of the way, hopefully these typings will help you in removing 90% of the `@ts-ignore`s you have in your codebase, or discover solutions that didn't seem possible before.
 
 ## Tags
 
-- `@remark` tags give some warnings about the inputs/outputs of the function, or provide better alternatives.
-- `@tutorial` gives additional information on how to use the function in your plugin.
+- `@remark` warnings, caveats, or suggested alternatives.
+- `@tutorial` extra guidance and examples.
 - `@official` comes from the [official API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
-- `@unofficial` comes from reverse-engineering.
+- `@unofficial` based on reverse engineering.
 
 ## Migration
 
-If you were using a `1.x.x` version of this package, you may need to follow the [Migration guide](https://github.com/Fevol/obsidian-typings/blob/main/MIGRATION.md) after updating to `2.0.0` or newer.
+If you were using a `1.x.x` version of this package, see the [Migration guide](https://github.com/Fevol/obsidian-typings/blob/main/MIGRATION.md) for upgrading to `2.0.0` or newer.
 
 
 ## Contributing
