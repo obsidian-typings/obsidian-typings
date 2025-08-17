@@ -2,12 +2,15 @@ name: Push Branch
 on:
   workflow_call:
 jobs:
-  example:
+  push-branch:
     runs-on: ubuntu-latest
     steps:
-      - name: Show ref info
-        run: |
-          echo "github.ref: ${{ github.ref }}"
-          echo "github.ref_name: ${{ github.ref_name }}"
-          echo "github.base_ref: ${{ github.base_ref }}"   # only for PRs
-          echo "github.head_ref: ${{ github.head_ref }}"   # only for PRs
+      - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with:
+          ref: 'main'
+          sparse-checkout: .github/scripts
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - run: npx bun .github/scripts/push-branch.ts
