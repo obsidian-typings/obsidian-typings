@@ -70,7 +70,7 @@ function validateRefName(refName: string): BranchSpec {
 }
 
 function getEnvironmentVariables(): EnvironmentVariables {
-  config();
+  config({ path: './workflow-scripts/.env' });
   const environmentVariables = process.env as Partial<EnvironmentVariables>;
   validateEnvironmentVariable(environmentVariables, 'GITHUB_REF_NAME');
 
