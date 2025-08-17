@@ -22,9 +22,9 @@ async function main(): Promise<void> {
   const branchSpec = validateRefName(environmentVariables.GITHUB_REF_NAME);
   const readmeTemplate = await readFile(join(__dirname, 'README.template.md'), 'utf8');
   let readme = await readFile('README.md', 'utf8');
-  const changelogUrl = readme.match(/https:\/\/obsidian\.md\/changelog\/[^"]+/)?.[0] ?? '';
   const TODO_URL = 'https://obsidian.md/changelog/TODO-SET-CHANGELOG-URL';
-  let shouldUpdateReadme = changelogUrl === '' || changelogUrl === TODO_URL;
+  const changelogUrl = readme.match(/https:\/\/obsidian\.md\/changelog\/[^"]+/)?.[0] ?? TODO_URL;
+  let shouldUpdateReadme = changelogUrl === TODO_URL;
   if (readme !== fillReadmeTemplate(readmeTemplate, branchSpec, changelogUrl)) {
     if (!changelogUrl.includes(branchSpec.obsidianVersion)) {
       readme = fillReadmeTemplate(readmeTemplate, branchSpec, TODO_URL);
