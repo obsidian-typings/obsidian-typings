@@ -15,4 +15,4 @@ docs/src/content/docs/api/namespaces/**/*
 
 /docs/.cache
 
-.github/scripts/
+/workflow-scripts
