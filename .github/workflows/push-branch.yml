@@ -13,4 +13,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-      - run: npx bun .github/scripts/push-branch.ts
+      - run: npx bun ./push-branch.ts
+        working-directory: ./.github/scripts
