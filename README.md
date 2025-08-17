@@ -77,7 +77,7 @@ For most cases, we recommend using the latest release.
 
 1. **Install via npm**
 
-    - Latest public release (recommended):
+    - Latest `public` release (recommended):
       - `npm install --save-dev obsidian-typings`
     - Explicitly install latest `public` release:
       - `npm install --save-dev obsidian-typings@obsidian-public-latest`
