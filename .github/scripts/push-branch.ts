@@ -15,27 +15,28 @@ interface BranchSpec {
 }
 
 async function main(): Promise<void> {
-  configureGitUser();
-
-  const environmentVariables = getEnvironmentVariables();
-  validateRefName(environmentVariables.GITHUB_REF_NAME);
-
   const __dirname = dirname(fileURLToPath(import.meta.url)).replace(/\\/g, '/');
+  configureGitUser();
+  const environmentVariables = getEnvironmentVariables();
 
   const branchSpec = validateRefName(environmentVariables.GITHUB_REF_NAME);
   const readmeTemplate = await readFile(join(__dirname, 'README.template.md'), 'utf8');
   let readme = await readFile('README.md', 'utf8');
-  const changelogUrl = readme.match(/https:\/\/obsidian\.md\/changelog\/[^"]+/)?.[1] ?? '';
+  const changelogUrl = readme.match(/https:\/\/obsidian\.md\/changelog\/[^"]+/)?.[0] ?? '';
+  const TODO_URL = 'https://obsidian.md/changelog/TODO-SET-CHANGELOG-URL';
+  let shouldUpdateReadme = changelogUrl === '' || changelogUrl === TODO_URL;
   if (readme !== fillReadmeTemplate(readmeTemplate, branchSpec, changelogUrl)) {
-    readme = fillReadmeTemplate(readmeTemplate, branchSpec, 'https://obsidian.md/changelog/TODO-SET-CHANGELOG-URL');
+    readme = fillReadmeTemplate(readmeTemplate, branchSpec, TODO_URL);
+    shouldUpdateReadme = true;
     await writeFile('README.md', readme, 'utf8');
     execSync('git add README.md', { stdio: 'inherit' });
     execSync('git commit -m "chore: generate README.md from template"', { stdio: 'inherit' });
     execSync('git push', { stdio: 'inherit' });
-    console.log('::warning file=README.md,line=8,col=14,endColumn=67,title=VALIDATION::Update the changelog URL');
   }
 
-  await writeFile(join(__dirname, 'README.md'), readme);
+  if (shouldUpdateReadme) {
+    console.log('::warning::Please update the changelog URL in the README.md file');
+  }
 }
 
 function configureGitUser(): void {
