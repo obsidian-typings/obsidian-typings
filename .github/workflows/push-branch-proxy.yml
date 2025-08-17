@@ -8,4 +8,6 @@ on:
 jobs:
   main-workflow:
     uses: Fevol/obsidian-typings/.github/workflows/push-branch.yml@main
+    permissions:
+      contents: write
     secrets: inherit
