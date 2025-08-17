@@ -9,7 +9,8 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@tsconfig/strictest": "^2.0.5"
+    "@tsconfig/strictest": "^2.0.5",
+    "dotenv": "^17.2.1"
   },
   "type": "module"
 }

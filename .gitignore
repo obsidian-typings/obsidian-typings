@@ -14,3 +14,5 @@ docs/src/content/docs/api/namespaces/**/*
 /src/full-types.d.ts
 
 /docs/.cache
+
+.github/scripts/.env
