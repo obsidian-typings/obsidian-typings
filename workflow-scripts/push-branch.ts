@@ -18,6 +18,7 @@ async function main(): Promise<void> {
 
   const branchSpec = validateRefName(environmentVariables.GITHUB_REF_NAME);
   const readmeTemplate = await readFile('./workflow-scripts/README.template.md', 'utf8');
+  console.warn('readmeTemplate\n---\n\n', readmeTemplate);
   let readme = await readFile('README.md', 'utf8');
   console.warn('original readme\n---\n\n', readme);
 
