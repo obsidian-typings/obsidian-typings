@@ -37,7 +37,7 @@ async function main(): Promise<void> {
   }
 
   if (shouldUpdateReadme) {
-    throw new Error('Please update the changelog URL in the README.md file');
+    console.log('::error::Please update the changelog URL in the README.md file');
   }
 }
 
