@@ -75,54 +75,54 @@ For most cases, we recommend using the latest release.
 
 ## Set-up
 
-1. **Install via npm**
+### 1. Install via `npm`
 
-    - Latest `public` release (recommended):
-      - `npm install --save-dev obsidian-typings`
-    - Explicitly install latest `public` release:
-      - `npm install --save-dev obsidian-typings@obsidian-public-latest`
-    - Install the latest `catalyst` (`beta`) release:
-      - `npm install --save-dev obsidian-typings@obsidian-catalyst-latest`
-    - Install a specific release (should match `minAppVersion` in your plugin's `manifest.json`):
-      - `npm install --save-dev obsidian-typings@obsidian-public-1.8.10`
-      - `npm install --save-dev obsidian-typings@obsidian-catalyst-1.9.9`
+- Latest `public` release (recommended):
+    - `npm install --save-dev obsidian-typings`
+- Explicitly install latest `public` release:
+    - `npm install --save-dev obsidian-typings@obsidian-public-latest`
+- Install the latest `catalyst` (`beta`) release:
+    - `npm install --save-dev obsidian-typings@obsidian-catalyst-latest`
+- Install a specific release (should match `minAppVersion` in your plugin's `manifest.json`):
+    - `npm install --save-dev obsidian-typings@obsidian-public-1.8.10`
+    - `npm install --save-dev obsidian-typings@obsidian-catalyst-1.9.9`
 
-2. Enable in tsconfig.json (recommended) <span id="add-types-setting-to-tsconfig-json"></span>
+### 2. Enable in `tsconfig.json` (recommended) <span id="add-types-setting-to-tsconfig-json"></span>
 
-    Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all extended typings available globally without explicit importing them:
+Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all extended typings available globally without explicit importing them:
 
-    ```json
-    {
-        "compilerOptions": {
-            "...": "...",
-            "types": [
-                "obsidian-typings"
-            ]
-        }
+```json
+{
+    "compilerOptions": {
+        "...": "...",
+        "types": [
+            "obsidian-typings"
+        ]
     }
-    ```
+}
+```
 
-    > [!WARNING]
-    >
-    > If other `@types/*` packages stop being recognized after adding `obsidian-typings` to the `types`, you may need to re-add them to the `types` list.
-    > ```json
-    > {
-    >     "compilerOptions": {
-    >         "...": "...",
-    >         "types": [
-    >             "obsidian-typings",
-    >             "some-package-name"
-    >         ]
-    >     }
-    > }
+> [!WARNING]
+>
+> If other `@types/*` packages stop being recognized after adding `obsidian-typings` to the `types`, you may need to re-add them to the `types` list.
+> ```json
+> {
+>     "compilerOptions": {
+>         "...": "...",
+>         "types": [
+>             "obsidian-typings",
+>             "some-package-name"
+>         ]
+>     }
+> }
 
-3. **Importing explicitly** (alternative)
+### 3. Importing explicitly (alternative)
 
-   Instead of adding `obsidian-typings` to your `types`, you can also import the package directly:
+Instead of adding `obsidian-typings` to your `types`, you can also import the package directly:
 
-    ```ts
-   import 'obsidian-typings';
-    ```
+```ts
+import 'obsidian-typings';
+```
 
 ## Usage
 
