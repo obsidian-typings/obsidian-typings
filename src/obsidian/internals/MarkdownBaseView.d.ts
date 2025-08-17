@@ -197,7 +197,7 @@ export interface MarkdownBaseView extends Component {
     /**
      * Execute context menu functionality on right mouse click.
      *
-     * @deprecated Use onContextMenu instead.
+     * @deprecated Use {@link onContextMenu} instead.
      */
     onMenu(event: MouseEvent): void;
 
