@@ -38,7 +38,6 @@
 
 ---
 
-
 **Obsidian Typings** provides **TypeScript definitions** for Obsidian’s **undocumented and internal APIs**.
 
 It extends the official [Obsidian API](https://github.com/obsidianmd/obsidian-api/) with:
@@ -47,34 +46,32 @@ It extends the official [Obsidian API](https://github.com/obsidianmd/obsidian-ap
 - Helper utilities and interfaces for working with Obsidian’s internals in a safer, type-safe way.
 
 This package is designed for plugin developers who want to access Obsidian's internal APIs in a type-safe manner,
-while also keeping their code maintainable and less reliant on `@ts-ignore`'s.
+while also keeping their code maintainable and less reliant on `@ts-ignore`/`@ts-expect-error`.
 
-
-### ⚠️ Important Notes
-- This package is **not affiliated with, or endorsed by, the Obsidian team**.
-- It does **not** cover every aspect of the Obsidian API.
-- Typings are based on reverse engineering and may be **inaccurate or unstable**. They can change without notice in future releases.
-- Always **test thoroughly** and **add fallbacks** when using internal APIs.
+> [!IMPORTANT]
+>
+> - This package is **not affiliated with, or endorsed by, the Obsidian team**.
+> - It does **not** cover every aspect of the Obsidian API.
+> - Typings are based on reverse engineering and may be **inaccurate or unstable**. They can change without notice in future releases.
+> - Always **test thoroughly** and **add fallbacks** when using internal APIs.
 
 ## Git branching
 
 [Obsidian](https://obsidian.md) has two main release channels:
 
 - `public` - stable versions available to all users.
-- [`catalyst`](https://help.obsidian.md/catalyst)/`beta` - versions only available to users with a catalyst license, has early access to new features.
+- [`catalyst`](https://help.obsidian.md/catalyst) (`beta`) - versions only available to users with a catalyst license, has early access to new features.
 
 Since the internal API can be changed between these channels, and your plugin may need to support users on both channels, this package provides typings for both.
-
 
 As the internal API can change between these two channels, this package also exposes typings for both channels for convenience.
 
 Typings for each `Obsidian` version are kept in their own branches: namely `release/obsidian-public/*` and `release/obsidian-catalyst/*`:
-- Latest **public** release: [`release/obsidian-public/1.8.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.8.10)
-- Latest **catalyst** release: [`release/obsidian-catalyst/1.9.9`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-catalyst/1.9.9)
+- Latest `public` release: [`release/obsidian-public/1.8.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.8.10)
+- Latest `catalyst` release: [`release/obsidian-catalyst/1.9.9`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-catalyst/1.9.9)
 
 Older versions of the package are available, but support for them is limited.
 For most cases, we recommend using the latest release.
-
 
 ## Set-up
 
@@ -82,16 +79,17 @@ For most cases, we recommend using the latest release.
 
     - Latest public release (recommended):
       - `npm install --save-dev obsidian-typings`
-    - Explictly install latest **public** release:
+    - Explicitly install latest `public` release:
       - `npm install --save-dev obsidian-typings@obsidian-public-latest`
-    - Install the latest **catalyst** release (beta):
+    - Install the latest **`catalyst` (`beta`)** release:
       - `npm install --save-dev obsidian-typings@obsidian-catalyst-latest`
-    - Install a specific release (should match `minAppVersion` in your plugin’s `manifest.json`):
+    - Install a specific release (should match `minAppVersion` in your plugin's `manifest.json`):
       - `npm install --save-dev obsidian-typings@obsidian-public-1.8.10`
       - `npm install --save-dev obsidian-typings@obsidian-catalyst-1.9.9`
 
 2. Enable in tsconfig.json (recommended) <span id="add-types-setting-to-tsconfig-json"></span>
-Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all extended typings available globally without explicit importing them:
+
+    Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all extended typings available globally without explicit importing them:
 
     ```json
     {
@@ -104,19 +102,19 @@ Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all 
     }
     ```
 
-> [!WARNING]
->
-> If other `@types/*` packages stop being recognized after adding `obsidian-typings` to the `types`, you may need to re-add them to the `types` list.
-> ```json
-> {
->     "compilerOptions": {
->         "...": "...",
->         "types": [
->             "obsidian-typings",
->             "some-package-name"
->         ]
->     }
-> }
+    > [!WARNING]
+    >
+    > If other `@types/*` packages stop being recognized after adding `obsidian-typings` to the `types`, you may need to re-add them to the `types` list.
+    > ```json
+    > {
+    >     "compilerOptions": {
+    >         "...": "...",
+    >         "types": [
+    >             "obsidian-typings",
+    >             "some-package-name"
+    >         ]
+    >     }
+    > }
 
 3. **Importing explicitly** (alternative)
 
