@@ -12,10 +12,23 @@ interface BranchSpec {
   channel: 'public' | 'catalyst';
 }
 
-async function main(): Promise<void> {
-  configureGitUser();
-  const environmentVariables = getEnvironmentVariables();
+function assertHeadMatches(target: string): void {
+  const head = resolveCommitHash("HEAD");
+  const want = resolveCommitHash(target);
+  if (head !== want) {
+    throw new Error(`HEAD ${head} does not match ${want} (${target})`);
+  }
+}
 
+function resolveCommitHash(target: string): string {
+  return execSync(`git rev-parse ${target}^{commit}`, { encoding: "utf8" }).trim();
+}
+
+async function main(): Promise<void> {
+  const environmentVariables = getEnvironmentVariables();
+  assertHeadMatches(environmentVariables.GITHUB_REF_NAME);
+
+  configureGitUser();
   const branchSpec = validateRefName(environmentVariables.GITHUB_REF_NAME);
   const readmeTemplate = await readFile('./workflow-scripts/README.template.md', 'utf8');
   console.warn('readmeTemplate\n---\n\n', readmeTemplate);
