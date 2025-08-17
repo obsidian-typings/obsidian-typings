@@ -42,11 +42,40 @@ This repository contains TypeScript typings for undocumented [Obsidian API](http
 
 Be aware that the typings currently only cover a subset of the full API: while most of the `App` interface and its sub-interfaces are covered, this package does not yet provide typings for views like `Graph`, `Canvas`, ... — contributions for these would be very welcome!
 
+## Git branching
+
+[Obsidian](https://obsidian.md) version comes in two channels:
+
+- `Stable` - versions available for everyone.
+- [`Catalyst`](https://help.obsidian.md/catalyst) - `beta` versions, available by subscription. It has early access to the newest features.
+
+In `obsidian-typings` team we aim to provide typings for latest `stable` and latest `catalyst` builds. The support for older versions will be limited.
+
+We keep typings for each `Obsidian` version in its own branch: `release/obsidian-stable/*` and `release/obsidian-catalyst/*`.
+
+- Branch with the latest **stable** release typings: [`release/obsidian-stable/1.8.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-stable/1.8.10)
+- Branch with the latest **catalyst** release typings: [`release/obsidian-catalyst/1.9.9`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-catalyst/1.9.9)
+
 ## Set-up
+
 1. **Installation**
 
-   _Install using_: `npm install --save-dev obsidian-typings`
-
+    - `npm install --save-dev obsidian-typings`
+      - Installs package for the latest `stable` release.
+      - Needed for most plugin developers.
+      - Might not work properly for older versions matching `minAppVersion` in `manifest.json` of your plugin. In this case, you might need to use specific version. See below.
+    - `npm install --save-dev obsidian-typings@obsidian-stable-latest`
+      - Same as above, just explicit.
+    - `npm install --save-dev obsidian-typings@obsidian-catalyst-latest`
+      - Installs package for the latest `catalyst` release
+      - Usually such plugin are published via `beta` plugin releases.
+      - Might not work properly for older versions matching `minAppVersion` in `manifest.json` of your plugin. In this case, you might need to use specific version. See below.
+    - `npm install --save-dev obsidian-typings@obsidian-stable-1.8.10`
+      - Installs package for the specific `stable` release
+      - Usually it has to match `minAppVersion` in `manifest.json` of your plugin.
+    - `npm install --save-dev obsidian-typings@obsidian-catalyst-1.9.9`
+      - Installs package for the specific `catalyst` release
+      - Usually it has to match `minAppVersion` in `manifest.json` of your plugin.
 
 2. **Add `obsidian-typings` to `types` in `tsconfig.json`** (_recommended_) <span id="add-types-setting-to-tsconfig-json"></span>
 
@@ -135,6 +164,8 @@ declare module 'obsidian-typings' {
 > [!WARNING]
 >
 > Make sure to read below section in detail before using these typings.
+>
+> Use at your own risk, verify that the code behaves as expected, and be prepared to update your code if the API changes.
 
 Please be aware that there is a good reason why (some of) the functions and types defined here are not included with the official API definitions:
 
@@ -148,17 +179,12 @@ Furthermore, there is a very high chance that there are mistakes in the typings,
 
 With these scary disclaimers out of the way, hopefully these typings will help you in removing 90% of the `@ts-ignore`s you have in your codebase, or discover solutions that didn't seem possible before.
 
-> [!NOTE]
->
-> **TL;DR:** Use at your own risk, verify that the code behaves as expected, and be prepared to update your code if the API changes.
->
-> `@remark` tags give some warnings about the inputs/outputs of the function, or provide better alternatives.
->
-> `@tutorial` gives additional information on how to use the function in your plugin.
->
-> `@official` comes from the [official API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
->
-> `@unofficial` comes from reverse-engineering.
+## Tags
+
+- `@remark` tags give some warnings about the inputs/outputs of the function, or provide better alternatives.
+- `@tutorial` gives additional information on how to use the function in your plugin.
+- `@official` comes from the [official API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
+- `@unofficial` comes from reverse-engineering.
 
 ## Migration
 

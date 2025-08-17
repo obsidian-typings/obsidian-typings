@@ -5,6 +5,10 @@
 Feel free to start typing any part of the Obsidian API that is not yet typed, or fixing/adding additional descriptions to existing typings.
 If you are unsure about anything, don't hesitate to open an issue.
 
+> [!WARNING]
+>
+> Please base your PR on the [branch](./README.md#git-branching) matching the Obsidian versions you confirmed your changes are valid.
+
 ### TSDoc
 
 Please use [TSDoc](https://tsdoc.org/) to document the typings. This will allow the documentation to be automatically generated
@@ -18,20 +22,18 @@ interface someObject {
      * Does something specific.
      *
      * @param val1 - Enables some functionality
+     * @returns Some explanation of what exactly is returned.
      *
      * @tutorial - Useful for implementing some features for your plugin
      * @remark Prefer using {@link someOtherMethod} instead
+     *
+     * @unofficial
      */
     someMethod(val1: boolean): number;
 }
 ```
 
-> [!NOTE]
-> `@remark` --- Alternatives that should be used instead, or warnings about the function.
->
-> `@tutorial` --- Short description on how the function could be used in your plugin.
->
-> `@deprecated` --- Method is deprecated in a particular version (can't be found in `app.js` anymore).
+See [docs](./README.md#tags) to understand the meaning of some used `TSDoc` tags.
 
 # Tutorial
 
