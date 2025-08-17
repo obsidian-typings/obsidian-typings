@@ -1,0 +1,13 @@
+name: Push Branch
+on:
+  workflow_call:
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show ref info
+        run: |
+          echo "github.ref: ${{ github.ref }}"
+          echo "github.ref_name: ${{ github.ref_name }}"
+          echo "github.base_ref: ${{ github.base_ref }}"   # only for PRs
+          echo "github.head_ref: ${{ github.head_ref }}"   # only for PRs
