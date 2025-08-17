@@ -26,8 +26,10 @@ async function main(): Promise<void> {
   const TODO_URL = 'https://obsidian.md/changelog/TODO-SET-CHANGELOG-URL';
   let shouldUpdateReadme = changelogUrl === '' || changelogUrl === TODO_URL;
   if (readme !== fillReadmeTemplate(readmeTemplate, branchSpec, changelogUrl)) {
-    readme = fillReadmeTemplate(readmeTemplate, branchSpec, TODO_URL);
-    shouldUpdateReadme = true;
+    if (!changelogUrl.includes(branchSpec.obsidianVersion)) {
+      readme = fillReadmeTemplate(readmeTemplate, branchSpec, TODO_URL);
+      shouldUpdateReadme = true;
+    }
     await writeFile('README.md', readme, 'utf8');
     execSync('git add README.md', { stdio: 'inherit' });
     execSync('git commit -m "chore: generate README.md from template"', { stdio: 'inherit' });
