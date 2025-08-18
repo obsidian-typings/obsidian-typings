@@ -1,10 +1,8 @@
-import type { Platform } from 'obsidian';
-
 /**
  * @public
  * @unofficial
  *
- * Due to limitations of TypeScript, we cannot extend the {@link Platform} constant directly.
+ * Due to limitations of TypeScript, we cannot extend the `Platform` constant directly.
  *
  * @example
  *
