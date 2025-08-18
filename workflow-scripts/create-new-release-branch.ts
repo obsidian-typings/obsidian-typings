@@ -46,7 +46,7 @@ await wrapCliTask(async () => {
   const latestBranch = generateBranchName({ channel: latestVersionChannel, obsidianVersion: latestVersion });
   const newBranch = generateBranchName({ channel: newVersionChannel, obsidianVersion: newVersion });
 
-  await exec(`git checkout -b "${latestBranch}" "${newBranch}"`);
+  await exec(`git checkout "${latestBranch}" -b "${newBranch}"`);
   await exec(`git push -u origin "${newBranch}"`);
   await generateReadme({ channel: newVersionChannel, obsidianVersion: newVersion });
 });
