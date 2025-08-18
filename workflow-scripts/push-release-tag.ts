@@ -67,6 +67,7 @@ await wrapCliTask(async () => {
 });
 
 async function releaseNpmPackage(zipFileName: string, tags: string[]): Promise<void> {
+  await exec('npm ci');
   await exec('npm run build');
   await exec(['npm', 'publish', '--tag', ...tags]);
   await exec('mkdir build');
