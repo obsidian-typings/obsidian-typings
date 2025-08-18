@@ -1,9 +1,6 @@
 import type { ParseContext } from '@codemirror/language';
-import type {
-    EditorState,
-    Transaction
-} from '@codemirror/state';
-import type { Tree } from '@lezer/common';
+import type { Transaction } from '@codemirror/state';
+import type { Tree as LezerTree } from '@lezer/common';
 
 /**
  * @see https://github.com/codemirror/language/blob/main/src/language.ts
@@ -21,7 +18,7 @@ export interface LanguageState {
     /**
      * The current tree. Immutable, because directly accessible from the editor state.
      */
-    tree: Tree;
+    tree: LezerTree;
 
     /** @todo Documentation incomplete. */
     apply(tr: Transaction): LanguageState;

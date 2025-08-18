@@ -1,14 +1,15 @@
+!scripts/postinstall.ts
 .editorconfig
 .github/
 CONTRIBUTING.md
 cspell.json
+docs/
 dprint.json
 dummy.ts
 images/
 MIGRATION.md
 scripts/*
-!scripts/postinstall.ts
 src/
-docs/
 tsconfig.implementations.json
 tsconfig.json
+workflow-scripts/

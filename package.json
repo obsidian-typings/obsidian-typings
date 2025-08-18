@@ -1,123 +1,123 @@
 {
-    "name": "obsidian-typings",
-    "version": "3.16.6",
-    "description": "Extended type definitions for the Obsidian API (https://obsidian.md)",
-    "main": "",
-    "module": "",
-    "types": "./dist/cjs/types.d.cts",
-    "exports": {
-        ".": {
-            "require": {
-                "types": "./dist/cjs/types.d.cts"
-            },
-            "import": {
-                "types": "./dist/esm/types.d.mts"
-            }
-        },
-        "./implementations": {
-            "require": {
-                "types": "./dist/cjs/implementations.d.cts",
-                "default": "./dist/cjs/implementations.cjs"
-            },
-            "import": {
-                "types": "./dist/esm/implementations.d.mts",
-                "default": "./dist/esm/implementations.mjs"
-            }
-        }
+  "name": "obsidian-typings",
+  "version": "4.10.0",
+  "description": "Extended type definitions for the Obsidian API (https://obsidian.md)",
+  "main": "",
+  "module": "",
+  "types": "./dist/cjs/types.d.cts",
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/cjs/types.d.cts"
+      },
+      "import": {
+        "types": "./dist/esm/types.d.mts"
+      }
     },
-    "type": "module",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Fevol/obsidian-typings.git"
-    },
-    "keywords": [
-        "obsdmd",
-        "obsidian",
-        "typings",
-        "API"
-    ],
-    "author": {
-        "name": "Fevol",
-        "url": "https://github.com/fevol",
-        "email": "fevolmail@gmail.com"
-    },
-    "contributors": [
-        {
-            "name": "Michael Naumov",
-            "url": "https://github.com/mnaoumov",
-            "email": "mnaoumov@gmail.com"
-        }
-    ],
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/Fevol/obsidian-typings/issues"
-    },
-    "homepage": "https://github.com/Fevol/obsidian-typings#readme",
-    "dependencies": {
-        "@antfu/utils": "9.2.0",
-        "@capacitor/core": "5.7.8",
-        "@codemirror/language": "6.11.2",
-        "@codemirror/search": "6.5.11",
-        "@codemirror/state": "6.5.2",
-        "@lezer/common": "1.2.3",
-        "@pixi/color": "7.2.4",
-        "@pixi/events": "7.2.4",
-        "@pixi/settings": "7.2.4",
-        "@types/css-font-loading-module": "0.0.14",
-        "@types/codemirror": "5.60.16",
-        "@types/dompurify": "3.0.1",
-        "@types/node": "^18.17.0 || >=20.1.0",
-        "@types/prismjs": "1.26.5",
-        "@types/turndown": "5.0.5",
-        "colord": "2.9.3",
-        "electron": ">=1.6.10",
-        "i18next": "25.2.1",
-        "mermaid": "11.4.1",
-        "moment": "2.29.4",
-        "obsidian": "1.8.7",
-        "pdfjs-dist": "5.3.31",
-        "pixi.js": "7.2.4",
-        "scrypt-js": "3.0.1",
-        "style-mod": "4.1.2"
-    },
-    "devDependencies": {
-        "@microsoft/api-extractor": "^7.52.8",
-        "@tsconfig/strictest": "^2.0.5",
-        "builtin-modules": "^5.0.0",
-        "cspell": "^9.1.2",
-        "dprint": "^0.50.1",
-        "dts-bundle-generator": "^9.5.1",
-        "esbuild": "^0.25.5",
-        "npm-run-all": "^4.1.5",
-        "patch-package": "^8.0.0",
-        "ts-morph": "^26.0.0"
-    },
-    "peerDependencies": {
-        "typescript": ">=4.8.0"
-    },
-    "overrides": {
-        "boolean": "npm:dry-uninstall",
-        "dompurify": "3.0.1"
-    },
-    "scripts": {
-        "build": "npm-run-all build:clean build:compile build:generate-index build:bundle-types build:fix-bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:fix-implementations-bundle-types build:static build:extract-api",
-        "build:clean": "bun run scripts/build-clean.ts",
-        "build:compile": "tsc --build --force",
-        "build:generate-index": "bun run scripts/build-generate-index.ts",
-        "build:bundle-types": "dts-bundle-generator ./src/index.d.ts --out-file ./dist/cjs/types.d.cts --inline-declare-global --inline-declare-externals --sort --no-check",
-        "build:fix-bundle-types": "bun run scripts/build-fix-bundle-types.ts",
-        "build:implementations": "bun run scripts/build-implementations.ts",
-        "build:implementations:generate-types": "tsc --project ./tsconfig.implementations.json",
-        "build:implementations:bundle-types": "dts-bundle-generator ./src/obsidian/implementations/index.ts --out-file ./dist/cjs/implementations.d.cts --sort --no-check",
-        "build:fix-implementations-bundle-types": "bun run scripts/build-fix-implementations-bundle-types.ts",
-        "build:static": "bun run scripts/build-static.ts",
-        "build:extract-api": "api-extractor run --local",
-        "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
-        "postinstall": "npx bun run scripts/postinstall.ts",
-        "release-beta": "bun run scripts/bump-version.ts beta",
-        "release-patch": "bun run scripts/bump-version.ts patch",
-        "release-minor": "bun run scripts/bump-version.ts minor",
-        "release-major": "bun run scripts/bump-version.ts major",
-        "spellcheck": "cspell . --no-progress"
+    "./implementations": {
+      "require": {
+        "types": "./dist/cjs/implementations.d.cts",
+        "default": "./dist/cjs/implementations.cjs"
+      },
+      "import": {
+        "types": "./dist/esm/implementations.d.mts",
+        "default": "./dist/esm/implementations.mjs"
+      }
     }
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fevol/obsidian-typings.git"
+  },
+  "keywords": [
+    "obsdmd",
+    "obsidian",
+    "typings",
+    "API"
+  ],
+  "author": {
+    "name": "Fevol",
+    "url": "https://github.com/fevol",
+    "email": "fevolmail@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Michael Naumov",
+      "url": "https://github.com/mnaoumov",
+      "email": "mnaoumov@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fevol/obsidian-typings/issues"
+  },
+  "homepage": "https://github.com/Fevol/obsidian-typings#readme",
+  "dependencies": {
+    "@antfu/utils": "9.2.0",
+    "@capacitor/core": "5.7.8",
+    "@codemirror/language": "6.11.2",
+    "@codemirror/search": "6.5.11",
+    "@codemirror/state": "6.5.2",
+    "@lezer/common": "1.2.3",
+    "@pixi/color": "7.2.4",
+    "@pixi/events": "7.2.4",
+    "@pixi/settings": "7.2.4",
+    "@types/codemirror": "5.60.16",
+    "@types/css-font-loading-module": "0.0.14",
+    "@types/dompurify": "3.0.1",
+    "@types/node": "^18.17.0 || >=20.1.0",
+    "@types/prismjs": "1.26.5",
+    "@types/turndown": "5.0.5",
+    "colord": "2.9.3",
+    "electron": ">=1.6.10",
+    "i18next": "25.2.1",
+    "mermaid": "11.4.1",
+    "moment": "2.29.4",
+    "obsidian": "1.8.7",
+    "pdfjs-dist": "5.3.31",
+    "pixi.js": "7.2.4",
+    "scrypt-js": "3.0.1",
+    "style-mod": "4.1.2"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.52.8",
+    "@tsconfig/strictest": "^2.0.5",
+    "builtin-modules": "^5.0.0",
+    "cspell": "^9.1.2",
+    "dprint": "^0.50.1",
+    "dts-bundle-generator": "^9.5.1",
+    "esbuild": "^0.25.5",
+    "npm-run-all": "^4.1.5",
+    "obsidian-dev-utils": "^33.1.0",
+    "patch-package": "^8.0.0",
+    "ts-morph": "^26.0.0"
+  },
+  "peerDependencies": {
+    "typescript": ">=4.8.0"
+  },
+  "overrides": {
+    "@antfu/utils": "9.2.0",
+    "boolean": "npm:dry-uninstall",
+    "dompurify": "3.0.1"
+  },
+  "scripts": {
+    "build": "npm-run-all build:clean build:compile build:generate-index build:bundle-types build:fix-bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:fix-implementations-bundle-types build:static build:extract-api",
+    "build:clean": "bun run scripts/build-clean.ts",
+    "build:compile": "tsc --build --force",
+    "build:generate-index": "bun run scripts/build-generate-index.ts",
+    "build:bundle-types": "dts-bundle-generator ./src/index.d.ts --out-file ./dist/cjs/types.d.cts --inline-declare-global --inline-declare-externals --sort --no-check",
+    "build:fix-bundle-types": "bun run scripts/build-fix-bundle-types.ts",
+    "build:implementations": "bun run scripts/build-implementations.ts",
+    "build:implementations:generate-types": "tsc --project ./tsconfig.implementations.json",
+    "build:implementations:bundle-types": "dts-bundle-generator ./src/obsidian/implementations/index.ts --out-file ./dist/cjs/implementations.d.cts --sort --no-check",
+    "build:fix-implementations-bundle-types": "bun run scripts/build-fix-implementations-bundle-types.ts",
+    "build:static": "bun run scripts/build-static.ts",
+    "build:extract-api": "api-extractor run --local",
+    "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
+    "postinstall": "npx bun run scripts/postinstall.ts",
+    "release": "bun run scripts/release.ts",
+    "release:beta": "bun run scripts/release-beta.ts",
+    "spellcheck": "cspell . --no-progress"
+  }
 }
