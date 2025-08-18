@@ -21,6 +21,9 @@
         "compilerMessageReporting": {
             "default": {
                 "logLevel": "warning"
+            },
+            "TS2411": {
+                "logLevel": "none"
             }
         },
         "extractorMessageReporting": {
