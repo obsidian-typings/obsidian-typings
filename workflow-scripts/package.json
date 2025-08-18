@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@tsconfig/strictest": "^2.0.5",
+    "@types/semver": "^7.7.0",
     "dotenv": "^17.2.1",
-    "obsidian-dev-utils": "^33.1.0"
+    "obsidian-dev-utils": "^33.1.0",
+    "semver": "^7.7.2"
   },
   "type": "module",
   "scripts": {
