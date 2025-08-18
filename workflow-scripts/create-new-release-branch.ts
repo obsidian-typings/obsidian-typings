@@ -4,7 +4,10 @@ import { compare } from 'semver';
 
 import { generateBranchName } from './modules/branchSpec.ts';
 import { checkout } from './modules/checkout.ts';
-import { generateReadme } from './modules/readmeGenerator.ts';
+import {
+  generateMainReadme,
+  generateReadme
+} from './modules/readmeGenerator.ts';
 import { getLatestVersion } from './modules/version.ts';
 
 await wrapCliTask(async () => {
@@ -51,4 +54,5 @@ await wrapCliTask(async () => {
   await exec(`git checkout -b "${newBranch}"`);
   await exec(`git push -u origin "${newBranch}"`);
   await generateReadme({ channel: newVersionChannel, obsidianVersion: newVersion });
+  await generateMainReadme();
 });

@@ -4,7 +4,11 @@ import {
   writeFile
 } from 'obsidian-dev-utils/ScriptUtils/NodeModules';
 
-import type { BranchSpec } from './branchSpec.ts';
+import {
+  type BranchSpec,
+  generateBranchName
+} from './branchSpec.ts';
+import { getLatestVersion } from './version.ts';
 
 export async function generateReadme(branchSpec: BranchSpec): Promise<boolean> {
   const readmeTemplate = await readFile('./workflow-scripts/README.template.md', 'utf8');
@@ -33,4 +37,31 @@ function fillReadmeTemplate(readmeTemplate: string, branchSpec: BranchSpec, chan
     .replaceAll('{{OBSIDIAN_VERSION}}', branchSpec.obsidianVersion)
     .replaceAll('{{CHANNEL}}', branchSpec.channel)
     .replaceAll('{{CHANGELOG_URL}}', changelogUrl);
+}
+
+export async function generateMainReadme(): Promise<void> {
+  await exec('git checkout main');
+
+  const readme = await readFile('README.md', 'utf8');
+  let updatedReadme = readme;
+
+  for (const channel of ['public', 'catalyst'] as const) {
+    const latestVersion = await getLatestVersion(channel);
+    const sourceRegExp = new RegExp(`\\n- Latest \`${channel}\` release: .*`, 'g');
+    updatedReadme = updatedReadme.replaceAll(sourceRegExp, generateMainReadmeLine({ channel, obsidianVersion: latestVersion }));
+  }
+
+  if (readme === updatedReadme) {
+    return;
+  }
+
+  await writeFile('README.md', updatedReadme, 'utf8');
+  await exec('git add README.md');
+  await exec('git commit -m "chore: update main README.md"');
+  await exec('git push');
+}
+
+function generateMainReadmeLine(branchSpec: BranchSpec): string {
+  const branchName = generateBranchName(branchSpec);
+  return `- Latest \`${branchSpec.channel}\` release: [\`${branchName}\`](https://github.com/Fevol/obsidian-typings/tree/${branchName})`;
 }
