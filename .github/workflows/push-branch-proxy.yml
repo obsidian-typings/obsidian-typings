@@ -3,11 +3,11 @@ on:
     workflow_dispatch:
     push:
         branches:
-            - "release/obsidian-public/*"
-            - "release/obsidian-catalyst/*"
+            - 'release/obsidian-public/*'
+            - 'release/obsidian-catalyst/*'
 jobs:
-  main-workflow:
-    uses: Fevol/obsidian-typings/.github/workflows/push-branch.yml@main
-    permissions:
-      contents: write
-    secrets: inherit
+    main-workflow:
+        uses: Fevol/obsidian-typings/.github/workflows/push-branch.yml@main
+        permissions:
+            contents: write
+        secrets: inherit

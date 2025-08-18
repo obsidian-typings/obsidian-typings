@@ -1,0 +1,12 @@
+name: Push Release Tag (Proxy)
+on:
+    workflow_dispatch:
+    push:
+        tags:
+            - 'release-candidate'
+jobs:
+    main-workflow:
+        uses: Fevol/obsidian-typings/.github/workflows/push-release-tag.yml@main
+        permissions:
+            contents: write
+        secrets: inherit
