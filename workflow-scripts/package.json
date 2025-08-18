@@ -10,7 +10,12 @@
   },
   "dependencies": {
     "@tsconfig/strictest": "^2.0.5",
-    "dotenv": "^17.2.1"
+    "dotenv": "^17.2.1",
+    "obsidian-dev-utils": "^33.1.0"
   },
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "format": "obsidian-dev-utils format",
+    "lint:fix": "obsidian-dev-utils lint:fix"
+  }
 }

@@ -1,15 +1,17 @@
 import { execSync } from 'node:child_process';
 
-async function main(): Promise<void> {
-  const target = process.argv[2];
+function main(): void {
+  // eslint-disable-next-line no-magic-numbers
+  const targetBranch = process.argv[2];
+  // eslint-disable-next-line no-magic-numbers
   const withScripts = process.argv[3] === '--with-scripts';
-  if (!target) {
-    throw new Error('Usage: bun ./workflow-scripts/checkout.ts <branch> [--with-scripts]');
+  if (!targetBranch) {
+    throw new Error('Usage: bun ./workflow-scripts/checkout.ts <targetBranch> [--with-scripts]');
   }
-  execSync(`git checkout "${target}"`, { stdio: 'inherit' });
+  execSync(`git checkout "${targetBranch}"`, { stdio: 'inherit' });
   if (withScripts) {
-    execSync(`git restore --source=main --worktree -- ./workflow-scripts`, { stdio: 'inherit' });
+    execSync('git restore --source=main --worktree -- ./workflow-scripts', { stdio: 'inherit' });
   }
 }
 
-await main();
+main();
