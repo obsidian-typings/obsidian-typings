@@ -39,3 +39,5 @@ jobs:
             dist/obsidian-typings.api.json
           token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: ${{ steps.run-script.outputs.isBeta == 'true' }}
+          tag_name: ${{ steps.run-script.outputs.tagName }}
+          name: ${{ steps.run-script.outputs.releaseName }}

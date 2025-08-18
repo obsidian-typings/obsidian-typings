@@ -48,7 +48,8 @@ await wrapCliTask(async () => {
   const zipFileName = `obsidian-typings-${nextVersion}-obsidian-${branchSpec.obsidianVersion}-${branchSpec.channel}.zip`;
   const tags = [];
   const suffix = isBeta ? '-beta' : '';
-  tags.push(`obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}${suffix}`);
+  const mainNpmTag = `obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}${suffix}`;
+  tags.push(mainNpmTag);
 
   const latestVersion = await getLatestVersion(branchSpec.channel);
 
@@ -60,10 +61,12 @@ await wrapCliTask(async () => {
   }
 
   await releaseNpmPackage(zipFileName, tags);
-  const githubOutput = process.env['GITHUB_OUTPUT'] ?? '';
-  if (githubOutput) {
-    await writeFile(githubOutput, `zipFileName=${zipFileName}\nisBeta=${String(isBeta)}`, 'utf-8');
-  }
+  await writeOutput({
+    isBeta,
+    releaseName: `${nextVersion} (${mainNpmTag})`,
+    tagName: nextVersion,
+    zipFileName
+  });
 });
 
 async function releaseNpmPackage(zipFileName: string, tags: string[]): Promise<void> {
@@ -120,4 +123,15 @@ async function updateNpmVersions(branchName: string, isBeta: boolean): Promise<s
   await exec('git push origin --follow-tags');
 
   return nextVersion;
+}
+
+async function writeOutput(obj: Record<string, unknown>): Promise<void> {
+  const githubOutput = process.env['GITHUB_OUTPUT'] ?? '';
+  if (!githubOutput) {
+    console.warn('GITHUB_OUTPUT is not set');
+    return;
+  }
+
+  const lines = Object.entries(obj).map(([key, value]) => `${key}=${String(value)}`);
+  await writeFile(githubOutput, lines.join('\n'), 'utf-8');
 }
