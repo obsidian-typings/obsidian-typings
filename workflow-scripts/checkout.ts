@@ -1,6 +1,7 @@
-import { execSync } from 'node:child_process';
+import { wrapCliTask } from 'obsidian-dev-utils/ScriptUtils/CliUtils';
+import { exec } from 'obsidian-dev-utils/ScriptUtils/Exec';
 
-function main(): void {
+await wrapCliTask(async () => {
   // eslint-disable-next-line no-magic-numbers
   const targetBranch = process.argv[2];
   // eslint-disable-next-line no-magic-numbers
@@ -8,10 +9,8 @@ function main(): void {
   if (!targetBranch) {
     throw new Error('Usage: bun ./workflow-scripts/checkout.ts <targetBranch> [--with-scripts]');
   }
-  execSync(`git checkout "${targetBranch}"`, { stdio: 'inherit' });
+  await exec(`git checkout "${targetBranch}"`);
   if (withScripts) {
-    execSync('git restore --source=main --worktree -- ./workflow-scripts', { stdio: 'inherit' });
+    await exec('git restore --source=main --worktree -- ./workflow-scripts');
   }
-}
-
-main();
+});
