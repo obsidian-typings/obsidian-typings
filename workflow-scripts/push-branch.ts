@@ -16,12 +16,13 @@ function assertHeadMatches(target: string): void {
   const head = resolveCommitHash("HEAD");
   const want = resolveCommitHash(target);
   if (head !== want) {
-    throw new Error(`HEAD ${head} does not match ${want} (${target})`);
+    const headBranch = execSync(`git name-rev --name-only HEAD`, { encoding: "utf8" }).trim();
+    throw new Error(`HEAD ${head} (${headBranch}) does not match ${want} (${target}. Consider using switch-branch.ts`);
   }
 }
 
 function resolveCommitHash(target: string): string {
-  return execSync(`git rev-parse ${target}^{commit}`, { encoding: "utf8" }).trim();
+  return execSync(`git rev-parse "${target}^{commit}"`, { encoding: "utf8" }).trim();
 }
 
 async function main(): Promise<void> {
