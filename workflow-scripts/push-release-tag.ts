@@ -69,7 +69,10 @@ await wrapCliTask(async () => {
 async function releaseNpmPackage(zipFileName: string, tags: string[]): Promise<void> {
   await exec('npm install');
   await exec('npm run build');
-  await exec(['npm', 'publish', '--tag', ...tags]);
+
+  const tagsWithRepeatedFlag = tags.flatMap((tag) => ['--tag', tag]);
+  await exec(['npm', 'publish', ...tagsWithRepeatedFlag]);
+
   await exec('mkdir build');
   await exec('cp -r dist build');
   await exec('cp README.md LICENSE CHANGELOG.md package.json build');
