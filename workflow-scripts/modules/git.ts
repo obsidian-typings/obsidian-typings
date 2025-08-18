@@ -24,6 +24,6 @@ async function resolveCommitHash(target: string): Promise<string> {
 
 export async function getBranchNames(rev: string): Promise<string[]> {
   const branchesStr = await exec(`git branch -r --points-at ${rev}`);
-  const branches = branchesStr.split('\n').map((branch) => branch.trim().replace('remotes/origin/', ''));
+  const branches = branchesStr.split('\n').map((branch) => branch.trim().replace('origin/', ''));
   return branches;
 }
