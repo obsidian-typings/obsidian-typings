@@ -116,6 +116,7 @@
         "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
         "postinstall": "npx bun run scripts/postinstall.ts",
         "release": "bun run scripts/release.ts",
+        "release:beta": "bun run scripts/release-beta.ts",
         "spellcheck": "cspell . --no-progress"
     }
 }
