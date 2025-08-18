@@ -17,7 +17,7 @@ function assertHeadMatches(target: string): void {
   const want = resolveCommitHash(target);
   if (head !== want) {
     const headBranch = execSync(`git name-rev --name-only HEAD`, { encoding: "utf8" }).trim();
-    throw new Error(`HEAD ${head} (${headBranch}) does not match ${want} (${target}. Consider using switch-branch.ts`);
+    throw new Error(`HEAD ${head} (${headBranch}) does not match ${want} (${target}.\nConsider using bun ./workflow-scripts/checkout.ts ${target} --with-scripts`);
   }
 }
 
