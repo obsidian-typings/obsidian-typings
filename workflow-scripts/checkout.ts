@@ -1,6 +1,8 @@
 import { wrapCliTask } from 'obsidian-dev-utils/ScriptUtils/CliUtils';
 import { exec } from 'obsidian-dev-utils/ScriptUtils/Exec';
-import { compare } from 'semver';
+
+import { generateBranchName } from './modules/branchSpec.ts';
+import { getLatestVersion } from './modules/version.ts';
 
 await wrapCliTask(async () => {
   // eslint-disable-next-line no-magic-numbers
@@ -11,35 +13,23 @@ await wrapCliTask(async () => {
     throw new Error('Usage: bun ./workflow-scripts/checkout.ts <targetBranch> [--with-scripts]');
   }
 
-  if (targetBranch.startsWith('obsidian-public/') || targetBranch.startsWith('obsidian-catalyst/')) {
-    targetBranch = `release/${targetBranch}`;
-  } else if (targetBranch.startsWith('public/') || targetBranch.startsWith('catalyst/')) {
-    targetBranch = `release/obsidian-${targetBranch}`;
+  const REG_EXP = /^(?:release\/)?(?:obsidian-)?(?<Channel>public|catalyst)\/(?<Version>\d+\.\d+\.\d+|latest)$/;
+  const match = REG_EXP.exec(targetBranch);
+  if (!match) {
+    throw new Error(`Invalid target branch: ${targetBranch}`);
   }
 
-  if (targetBranch === 'release/obsidian-public/latest') {
-    targetBranch = await getLatestVersion('release/obsidian-public');
+  const channel = (match.groups?.['Channel'] ?? 'public') as 'catalyst' | 'public';
+  let version = match.groups?.['Version'] ?? 'latest';
+
+  if (version === 'latest') {
+    version = await getLatestVersion(channel);
   }
 
-  if (targetBranch === 'release/obsidian-catalyst/latest') {
-    targetBranch = await getLatestVersion('release/obsidian-catalyst');
-  }
+  targetBranch = generateBranchName({ channel, obsidianVersion: version });
 
   await exec(`git checkout "${targetBranch}"`);
   if (withScripts) {
     await exec('git restore --source=main --worktree -- ./workflow-scripts');
   }
 });
-
-async function getLatestVersion(prefix: string): Promise<string> {
-  await exec('git fetch');
-  const remotePrefix = `origin/${prefix}/`;
-  const branches = await exec(`git branch --list --remote "${remotePrefix}*"`);
-  const versions = branches.split('\n').filter(Boolean).map((branch) => branch.trim().replace(remotePrefix, ''));
-  versions.sort((a, b) => compare(a, b));
-  const latestVersion = versions.at(-1);
-  if (!latestVersion) {
-    throw new Error(`No version found for ${prefix}`);
-  }
-  return `${prefix}/${latestVersion}`;
-}
