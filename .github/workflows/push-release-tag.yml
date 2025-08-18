@@ -24,7 +24,7 @@ jobs:
         with:
           bun-version: latest
       - name: Install script deps
-        run: npm install
+        run: npm ci
         working-directory: ./workflow-scripts
       - name: Run script
         id: run-script
