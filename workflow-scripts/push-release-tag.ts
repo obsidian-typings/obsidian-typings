@@ -48,8 +48,9 @@ await wrapCliTask(async () => {
   const zipFileName = `obsidian-typings-${nextVersion}-obsidian-${branchSpec.obsidianVersion}-${branchSpec.channel}.zip`;
   const tags: string[] = [];
   const suffix = isBeta ? '-beta' : '';
-  const mainNpmTag = `obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}${suffix}`;
-  tags.push(mainNpmTag);
+  const releaseDesc = `obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}${suffix}`;
+  const releaseNpmTag = releaseDesc.replaceAll('.', '-')
+  tags.push(releaseNpmTag);
 
   const latestVersion = await getLatestVersion(branchSpec.channel);
 
@@ -63,7 +64,7 @@ await wrapCliTask(async () => {
   await releaseNpmPackage(zipFileName, tags);
   await writeOutput({
     isBeta,
-    releaseName: `${nextVersion} (${mainNpmTag})`,
+    releaseName: `${nextVersion} (${releaseDesc})`,
     tagName: nextVersion,
     zipFileName
   });
