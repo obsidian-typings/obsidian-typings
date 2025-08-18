@@ -1,9 +1,9 @@
 name: Build Github Pages
-on:
-  workflow_dispatch:
-  push:
-      tags:
-          - '*'
+# on:
+#   workflow_dispatch:
+#   push:
+#       tags:
+#           - '*'
 jobs:
   build:
     runs-on: ubuntu-latest
