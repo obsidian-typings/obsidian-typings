@@ -76,19 +76,23 @@ async function releaseNpmPackage(zipFileName: string, tags: string[]): Promise<v
   await exec('cd ..');
 }
 
-async function updateNpmVersion(version: string): Promise<void> {
+async function updateNpmVersion(nextVersion: string): Promise<void> {
   await editPackageJson((packageJson) => {
-    packageJson.version = version;
+    packageJson.version = nextVersion;
   });
 
   await editPackageLockJson((packageLockJson) => {
-    packageLockJson.version = version;
+    packageLockJson.version = nextVersion;
 
     const defaultPackage = packageLockJson.packages?.[''];
     if (defaultPackage) {
-      defaultPackage.version = version;
+      defaultPackage.version = nextVersion;
     }
   });
+
+  await exec('git add package.json package-lock.json');
+  await commit(`chore(release): ${nextVersion}`);
+  await exec('git push');
 }
 
 async function updateNpmVersions(branchName: string, isBeta: boolean): Promise<string> {
@@ -104,14 +108,11 @@ async function updateNpmVersions(branchName: string, isBeta: boolean): Promise<s
 
   await updateNpmVersion(nextVersion);
 
-  await commit(`chore(release): ${nextVersion}`);
-  await exec('git push');
-
   await exec(`git checkout ${branchName}`);
   await updateNpmVersion(nextVersion);
-  await commit(`chore(release): ${nextVersion}`);
+
   await exec(`git tag -a ${nextVersion} -m ${nextVersion}`);
-  await exec('git push');
+  await exec('git push origin --follow-tags');
 
   return nextVersion;
 }
