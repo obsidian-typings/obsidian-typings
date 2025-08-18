@@ -18,6 +18,7 @@
   "type": "module",
   "scripts": {
     "checkout": "bun ./checkout.ts",
+    "create-new-release-branch": "bun ./create-new-release-branch.ts",
     "format": "obsidian-dev-utils format",
     "lint:fix": "obsidian-dev-utils lint:fix"
   }
