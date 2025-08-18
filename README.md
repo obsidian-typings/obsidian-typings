@@ -66,7 +66,10 @@ Since the internal API can be changed between these channels, and your plugin ma
 
 As the internal API can change between these two channels, this package also exposes typings for both channels for convenience.
 
-Typings for each `Obsidian` version are kept in their own branches: namely `release/obsidian-public/*` and `release/obsidian-catalyst/*`:- Latest `public` release: [`release/obsidian-public/1.9.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.9.10)- Latest `catalyst` release: [`release/obsidian-catalyst/1.9.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-catalyst/1.9.10)
+Typings for each `Obsidian` version are kept in their own branches: namely `release/obsidian-public/*` and `release/obsidian-catalyst/*`:
+
+- Latest `public` release: [`release/obsidian-public/1.9.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.9.10)
+- Latest `catalyst` release: [`release/obsidian-catalyst/1.9.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-catalyst/1.9.10)
 
 Older versions of the package are available, but support for them is limited.
 For most cases, we recommend using the latest release.
