@@ -10,6 +10,7 @@ import { inc } from 'semver';
 
 import { parseBranchSpec } from './modules/branchSpec.ts';
 import {
+  annotateTag,
   assertHeadMatches,
   commit,
   getBranchNames
@@ -111,7 +112,7 @@ async function updateNpmVersions(branchName: string, isBeta: boolean): Promise<s
   await exec(`git checkout ${branchName}`);
   await updateNpmVersion(nextVersion);
 
-  await exec(`git tag -a ${nextVersion} -m ${nextVersion}`);
+  await annotateTag(nextVersion, nextVersion);
   await exec('git push origin --follow-tags');
 
   return nextVersion;
