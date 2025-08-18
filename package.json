@@ -116,8 +116,8 @@
     "build:extract-api": "api-extractor run --local",
     "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
     "postinstall": "npx bun run scripts/postinstall.ts",
-    "release": "bun run scripts/release.ts",
-    "release:beta": "bun run scripts/release-beta.ts",
+    "release": "git show origin/main:workflow-scripts/release.ts | bun -",
+    "release:beta": "git show origin/main:workflow-scripts/release-beta.ts | bun -",
     "spellcheck": "cspell . --no-progress"
   }
 }
