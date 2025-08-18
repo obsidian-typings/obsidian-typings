@@ -8,7 +8,7 @@ export function parseBranchSpec(refName: string): BranchSpec {
   const match = REG_EXP.exec(refName);
   if (!match) {
     throw new Error(
-      `GITHUB_REF_NAME "${refName}" is not in the expected format. Expected format: "release/obsidian-public/x.y.z" or "release/obsidian-catalyst/x.y.z"`
+      `"${refName}" is not in the expected format. Expected format: "release/obsidian-public/x.y.z" or "release/obsidian-catalyst/x.y.z"`
     );
   }
 
