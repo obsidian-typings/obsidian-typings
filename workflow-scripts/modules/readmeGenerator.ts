@@ -12,8 +12,8 @@ import { commit } from './git.ts';
 import { getLatestVersion } from './version.ts';
 
 export async function generateReadme(branchSpec: BranchSpec): Promise<boolean> {
-  const readmeTemplate = await readFile('./workflow-scripts/README.template.md', 'utf8');
-  const readme = await readFile('README.md', 'utf8');
+  const readmeTemplate = await readFile('./workflow-scripts/README.template.md', 'utf-8');
+  const readme = await readFile('README.md', 'utf-8');
 
   const TODO_URL = 'https://obsidian.md/changelog/TODO-SET-CHANGELOG-URL';
   const changelogUrl = (/https:\/\/obsidian\.md\/changelog\/[^"]+/.exec(readme))?.[0] ?? TODO_URL;
@@ -24,7 +24,7 @@ export async function generateReadme(branchSpec: BranchSpec): Promise<boolean> {
       updatedReadme = fillReadmeTemplate(readmeTemplate, branchSpec, TODO_URL);
       shouldUpdateReadme = true;
     }
-    await writeFile('README.md', updatedReadme, 'utf8');
+    await writeFile('README.md', updatedReadme, 'utf-8');
     await exec('git add README.md');
     await commit('chore: generate README.md from template');
     await exec('git push');
@@ -43,7 +43,7 @@ function fillReadmeTemplate(readmeTemplate: string, branchSpec: BranchSpec, chan
 export async function generateMainReadme(): Promise<void> {
   await exec('git checkout main');
 
-  const readme = await readFile('README.md', 'utf8');
+  const readme = await readFile('README.md', 'utf-8');
   let updatedReadme = readme;
 
   for (const channel of ['public', 'catalyst'] as const) {
@@ -56,7 +56,7 @@ export async function generateMainReadme(): Promise<void> {
     return;
   }
 
-  await writeFile('README.md', updatedReadme, 'utf8');
+  await writeFile('README.md', updatedReadme, 'utf-8');
   await exec('git add README.md');
   await commit('chore: generate README.md from template');
   await exec('git push');

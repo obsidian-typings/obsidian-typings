@@ -27,4 +27,15 @@ jobs:
         run: npm ci
         working-directory: ./workflow-scripts
       - name: Run script
+        id: run-script
         run: bun ./workflow-scripts/push-release-tag.ts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build/obsidian-typings-${{ steps.run-script.outputs.zipFileName }}
+            dist/obsidian-typings.api.json
+          token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: ${{ steps.run-script.outputs.isBeta == 'true' }}

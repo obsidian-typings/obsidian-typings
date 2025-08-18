@@ -1,9 +1,9 @@
 import { config } from 'dotenv';
 import process from 'node:process';
 import { wrapCliTask } from 'obsidian-dev-utils/ScriptUtils/CliUtils';
-import { exec } from 'obsidian-dev-utils/ScriptUtils/Exec';
 
 import { parseBranchSpec } from './modules/branchSpec.ts';
+import { assertHeadMatches } from './modules/git.ts';
 import { generateReadme } from './modules/readmeGenerator.ts';
 
 interface EnvironmentVariables {
@@ -22,28 +22,12 @@ await wrapCliTask(async () => {
   }
 });
 
-async function assertHeadMatches(target: string): Promise<void> {
-  const head = await resolveCommitHash('HEAD');
-  const want = await resolveCommitHash(target);
-  if (head !== want) {
-    const headBranch = await exec('git name-rev --name-only HEAD');
-    throw new Error(
-      `HEAD ${head} (${headBranch}) does not match ${want} (${target}.\nConsider using bun ./workflow-scripts/checkout.ts ${target} --with-scripts`
-    );
-  }
-}
-
 function getEnvironmentVariables(): EnvironmentVariables {
   config({ path: './workflow-scripts/.env' });
   const environmentVariables = process.env as Partial<EnvironmentVariables>;
   validateEnvironmentVariable(environmentVariables, 'GITHUB_REF_NAME');
 
   return environmentVariables as EnvironmentVariables;
-}
-
-async function resolveCommitHash(target: string): Promise<string> {
-  const hash = await exec(`git rev-parse "${target}^{commit}"`);
-  return hash.trim();
 }
 
 function validateEnvironmentVariable(environmentVariables: Partial<EnvironmentVariables>, variableName: keyof EnvironmentVariables): void {
