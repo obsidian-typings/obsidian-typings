@@ -18,7 +18,7 @@ function main(): void {
 }
 
 function exec(command: string): string {
-  return execSync(command, { encoding: 'utf8' });
+  return execSync(command, { encoding: 'utf-8' });
 }
 
 main();
