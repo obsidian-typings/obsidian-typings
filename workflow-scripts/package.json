@@ -15,6 +15,7 @@
   },
   "type": "module",
   "scripts": {
+    "checkout": "bun ./checkout.ts",
     "format": "obsidian-dev-utils format",
     "lint:fix": "obsidian-dev-utils lint:fix"
   }
