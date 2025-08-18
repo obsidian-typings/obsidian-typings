@@ -12,3 +12,4 @@ scripts/*
 src/
 tsconfig.implementations.json
 tsconfig.json
+workflow-scripts/
