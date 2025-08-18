@@ -24,7 +24,6 @@ await wrapCliTask(async () => {
 
   const tagNames = (await exec('git tag --points-at HEAD')).split('\n').map((tag) => tag.trim());
 
-  console.warn('---+++---', tagNames);
   const isBeta = tagNames.includes(TAG_NAME_BETA);
 
   await exec(`git tag -d ${TAG_NAME}`);
@@ -36,7 +35,6 @@ await wrapCliTask(async () => {
   }
 
   const branchNames = await getBranchNames('HEAD');
-  console.warn('---+++---', branchNames);
   const branchName = branchNames[0];
 
   if (branchNames.length !== 1 || !branchName) {
@@ -44,7 +42,6 @@ await wrapCliTask(async () => {
   }
 
   const branchSpec = parseBranchSpec(branchName);
-  console.warn('---+++---', branchSpec);
 
   const nextVersion = await updateNpmVersions(branchName, isBeta);
   const zipFileName = `obsidian-typings-${nextVersion}-obsidian-${branchSpec.obsidianVersion}-${branchSpec.channel}.zip`;
