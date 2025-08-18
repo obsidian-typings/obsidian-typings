@@ -1,4 +1,4 @@
-name: Push Branch
+name: Push Branch (Proxy)
 on:
     workflow_dispatch:
     push:
