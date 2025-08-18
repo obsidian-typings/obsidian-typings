@@ -24,7 +24,7 @@ jobs:
         with:
           bun-version: latest
       - name: Install script deps
-        run: npm ci --include=dev
+        run: npm ci
         working-directory: ./workflow-scripts
       - name: Run script
         run: bun ./workflow-scripts/push-branch.ts
