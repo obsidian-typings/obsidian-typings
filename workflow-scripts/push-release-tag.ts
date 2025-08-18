@@ -68,7 +68,7 @@ await wrapCliTask(async () => {
 
 async function releaseNpmPackage(zipFileName: string, tags: string[]): Promise<void> {
   await exec('npm install');
-  await exec('npm run build');
+  await exec('bun run build');
 
   const tagsWithRepeatedFlag = tags.flatMap((tag) => ['--tag', tag]);
   await exec(['npm', 'publish', ...tagsWithRepeatedFlag]);
