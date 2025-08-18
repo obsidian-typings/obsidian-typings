@@ -3,6 +3,7 @@ import { exec } from 'obsidian-dev-utils/ScriptUtils/Exec';
 import { compare } from 'semver';
 
 import { generateBranchName } from './modules/branchSpec.ts';
+import { checkout } from './modules/checkout.ts';
 import { generateReadme } from './modules/readmeGenerator.ts';
 import { getLatestVersion } from './modules/version.ts';
 
@@ -46,7 +47,8 @@ await wrapCliTask(async () => {
   const latestBranch = generateBranchName({ channel: latestVersionChannel, obsidianVersion: latestVersion });
   const newBranch = generateBranchName({ channel: newVersionChannel, obsidianVersion: newVersion });
 
-  await exec(`git checkout "${latestBranch}" -b "${newBranch}"`);
+  await checkout(latestBranch, true);
+  await exec(`git checkout -b "${newBranch}"`);
   await exec(`git push -u origin "${newBranch}"`);
   await generateReadme({ channel: newVersionChannel, obsidianVersion: newVersion });
 });
