@@ -31,6 +31,7 @@
   "homepage": "https://github.com/Fevol/obsidian-typings#readme",
   "scripts": {
     "checkout": "bun ./workflow-scripts/checkout.ts",
-    "create-new-release-branch": "bun ./workflow-scripts/create-new-release-branch.ts"
+    "create-new-release-branch": "bun ./workflow-scripts/create-new-release-branch.ts",
+    "install-workflow-scripts": "npm install -C ./workflow-scripts"
   }
 }
