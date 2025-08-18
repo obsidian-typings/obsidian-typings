@@ -1,0 +1,32 @@
+{
+  "name": "obsidian-typings",
+  "version": "4.0.0",
+  "description": "Extended type definitions for the Obsidian API (https://obsidian.md)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fevol/obsidian-typings.git"
+  },
+  "keywords": [
+    "obsdmd",
+    "obsidian",
+    "typings",
+    "API"
+  ],
+  "author": {
+    "name": "Fevol",
+    "url": "https://github.com/fevol",
+    "email": "fevolmail@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Michael Naumov",
+      "url": "https://github.com/mnaoumov",
+      "email": "mnaoumov@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fevol/obsidian-typings/issues"
+  },
+  "homepage": "https://github.com/Fevol/obsidian-typings#readme"
+}
