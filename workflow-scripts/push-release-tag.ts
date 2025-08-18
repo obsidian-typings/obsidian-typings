@@ -73,7 +73,7 @@ async function releaseNpmPackage(zipFileName: string, tags: string[]): Promise<v
   await exec('npm install');
   await exec('bun run build');
 
-  await exec('npm publish --tag --published-latest');
+  await exec('npm publish --tag published-latest');
 
   for (const tag of tags) {
     await exec(['npm', 'dist-tag', 'add', 'obsidian-typings@published-latest', tag]);
