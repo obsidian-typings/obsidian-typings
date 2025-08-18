@@ -18,7 +18,7 @@ await wrapCliTask(async () => {
   const shouldUpdateReadme = await generateReadme(branchSpec);
   if (shouldUpdateReadme) {
     console.log('::error::Please update the changelog URL in the README.md file');
-    process.exit(1); // TODO: remove this
+    throw new Error('Execution failed');
   }
 });
 
