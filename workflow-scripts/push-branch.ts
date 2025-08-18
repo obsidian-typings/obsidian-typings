@@ -14,7 +14,6 @@ await wrapCliTask(async () => {
   const environmentVariables = getEnvironmentVariables();
   await assertHeadMatches(environmentVariables.GITHUB_REF_NAME);
 
-  await configureGitUser();
   const branchSpec = parseBranchSpec(environmentVariables.GITHUB_REF_NAME);
   const shouldUpdateReadme = await generateReadme(branchSpec);
   if (shouldUpdateReadme) {
@@ -32,11 +31,6 @@ async function assertHeadMatches(target: string): Promise<void> {
       `HEAD ${head} (${headBranch}) does not match ${want} (${target}.\nConsider using bun ./workflow-scripts/checkout.ts ${target} --with-scripts`
     );
   }
-}
-
-async function configureGitUser(): Promise<void> {
-  await exec('git config user.name "github-actions[bot]"');
-  await exec('git config user.email "41898282+github-actions[bot]@users.noreply.github.com"');
 }
 
 function getEnvironmentVariables(): EnvironmentVariables {

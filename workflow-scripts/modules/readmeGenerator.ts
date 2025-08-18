@@ -8,6 +8,7 @@ import {
   type BranchSpec,
   generateBranchName
 } from './branchSpec.ts';
+import { commit } from './git.ts';
 import { getLatestVersion } from './version.ts';
 
 export async function generateReadme(branchSpec: BranchSpec): Promise<boolean> {
@@ -25,7 +26,7 @@ export async function generateReadme(branchSpec: BranchSpec): Promise<boolean> {
     }
     await writeFile('README.md', updatedReadme, 'utf8');
     await exec('git add README.md');
-    await exec('git commit -m "chore: generate README.md from template"');
+    await commit('chore: generate README.md from template');
     await exec('git push');
   }
 
@@ -57,7 +58,7 @@ export async function generateMainReadme(): Promise<void> {
 
   await writeFile('README.md', updatedReadme, 'utf8');
   await exec('git add README.md');
-  await exec('git commit -m "chore: update main README.md"');
+  await commit('chore: generate README.md from template');
   await exec('git push');
 }
 
