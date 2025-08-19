@@ -60,7 +60,7 @@ while also keeping their code maintainable and less reliant on `@ts-ignore`/`@ts
 [Obsidian](https://obsidian.md) has two main release channels:
 
 - `public` - stable versions available to all users.
-- [`catalyst`](https://help.obsidian.md/catalyst) (`beta`) - versions only available to users with a catalyst license, has early access to new features.
+- [`catalyst`](https://help.obsidian.md/catalyst) (`beta`, `early access`) - versions only available to users with a catalyst license, has early access to new features.
 
 If you use internal APIs, you may need to support users on both channels.
 The availability or behavior of some APIs can differ between versions, which may lead to bugs or errors if these changes are not accounted for in your plugin.
