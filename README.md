@@ -135,9 +135,7 @@ To access types from the `obsidian` module, the import syntax does not change:
 ```ts
 import type { App } from 'obsidian';
 
-function printInternalPlugins(app: App): void {
-    console.log(app.internalPlugins);
-}
+console.log(app.internalPlugins);
 ```
 
 ### `obsidian-typings` additional interfaces
@@ -157,20 +155,24 @@ Additional helper functions/types/... added by this package can be used by impor
 ```ts
 import { InternalPluginName } from 'obsidian-typings/implementations';
 
+// If you forget the `/implementations` part:
+// import { InternalPluginName } from 'obsidian-typings';
+// You will not be able to use the runtime values and the code below will not compile.
+
 this.app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
 ```
 
-(The list of all available implementations can be found in the implementations folder.)
+The list of all available implementations can be found in the `src/obsidian/implementations` folder in the corresponding release branch ([example for `1.9.10 public`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.9.10/src/obsidian/implementations)).
 
 ### Extend with your own typings
 
 If you need to extend the typings provided by this package, add the following to any `.d.ts` file in your project:
 
 ```ts
-export {}; // This line is required. If you there aren't top-level `import/export` statements, your typings will work not as expected.
+export {}; // This line is required. If there are no top-level `import/export` statements, your typings will work not as expected.
 declare module 'obsidian-typings' {
     interface PluginsPluginsRecord {
-        myPlugin: MyPlugin;
+        ['my-plugin-id']: MyPlugin;
     }
 }
 ```
