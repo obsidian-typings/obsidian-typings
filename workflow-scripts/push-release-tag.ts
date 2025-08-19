@@ -64,6 +64,7 @@ await wrapCliTask(async () => {
     }
   }
 
+  exec(`git restore --source=origin/main --worktree -- ./README.md`);
   await releaseNpmPackage(nextVersion, zipFileName, tags);
   await writeOutput({
     isBeta,
