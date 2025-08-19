@@ -44,7 +44,11 @@ await wrapCliTask(async () => {
 
   const branchSpec = parseBranchSpec(branchName);
 
+  await exec('npm install');
+  await exec('bun run build');
+
   const nextVersion = await updateNpmVersions(branchName, isBeta);
+
   const zipFileName = `obsidian-typings-${nextVersion}-obsidian-${branchSpec.obsidianVersion}-${branchSpec.channel}.zip`;
   const tags: string[] = [];
   const suffix = isBeta ? '-beta' : '';
@@ -70,8 +74,6 @@ await wrapCliTask(async () => {
 });
 
 async function releaseNpmPackage(nextVersion: string, zipFileName: string, tags: string[]): Promise<void> {
-  await exec('npm install');
-  await exec('bun run build');
 
   await exec('npm publish --tag published-latest');
 
