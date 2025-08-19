@@ -200,7 +200,7 @@ Furthermore, there is a very high chance that there are mistakes in the typings,
 All types had to be deduced from context, manually running the function, or from the minified app code.
 Always verify that your code behaves as expected, both in terms of types and runtime behavior.
 
-With these scary disclaimers out of the way, hopefully these typings will help you in removing 90% of the `@ts-ignore`s you have in your codebase, or discover solutions that didn't seem possible before.
+With these scary disclaimers out of the way, hopefully these typings will help you in removing 90% of the `@ts-ignore`/`@ts-expect-error` you have in your codebase, or discover solutions that didn't seem possible before.
 
 ## Tags
 
