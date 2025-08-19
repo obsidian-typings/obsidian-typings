@@ -135,7 +135,7 @@ To access types from the `obsidian` module, the import syntax does not change:
 ```ts
 import type { App } from 'obsidian';
 
-console.log(app.internalPlugins);
+console.log(this.app.internalPlugins);
 ```
 
 ### `obsidian-typings` additional interfaces
