@@ -55,24 +55,25 @@ while also keeping their code maintainable and less reliant on `@ts-ignore`/`@ts
 > - Typings are based on reverse engineering and may be **inaccurate or unstable**. They can change without notice in future releases.
 > - Always **test thoroughly** and **add fallbacks** when using internal APIs.
 
-## Git branching
+## Versioning and Release Channels
 
 [Obsidian](https://obsidian.md) has two main release channels:
 
 - `public` - stable versions available to all users.
 - [`catalyst`](https://help.obsidian.md/catalyst) (`beta`) - versions only available to users with a catalyst license, has early access to new features.
 
-Since the internal API can be changed between these channels, and your plugin may need to support users on both channels, this package provides typings for both.
+If you use internal APIs, you may need to support users on both channels.
+The availability or behavior of some APIs can differ between versions, which may lead to bugs or errors if these changes are not accounted for in your plugin.
 
-As the internal API can change between these two channels, this package also exposes typings for both channels for convenience.
+To make it easier to adapt to these differences, this package provides typings for both channels.
 
-Typings for each `Obsidian` version are kept in their own branches: namely `release/obsidian-public/*` and `release/obsidian-catalyst/*`:
+Typings for each `Obsidian` version can be found in their own git branches: namely `release/obsidian-public/*` and `release/obsidian-catalyst/*`:
 
 - Latest `public` release: [`release/obsidian-public/1.9.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.9.10)
 - Latest `catalyst` release: [`release/obsidian-catalyst/1.9.10`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-catalyst/1.9.10)
 
 Older versions of the package are available, but support for them is limited.
-For most cases, we recommend using the latest release.
+In most cases, we recommend to always use the latest release.
 
 ## Set-up
 
