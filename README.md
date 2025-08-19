@@ -85,8 +85,8 @@ For most cases, we recommend using the latest release.
 - Install the latest `catalyst` (`beta`) release:
     - `npm install --save-dev obsidian-typings@obsidian-catalyst-latest`
 - Install a specific release (should match `minAppVersion` in your plugin's `manifest.json`):
-    - `npm install --save-dev obsidian-typings@obsidian-public-1-8-10`
-    - `npm install --save-dev obsidian-typings@obsidian-catalyst-1-9-9`
+    - `npm install --save-dev obsidian-typings@obsidian-public-1.8.10`
+    - `npm install --save-dev obsidian-typings@obsidian-catalyst-1.9.9`
 
 ### 2. Enable in `tsconfig.json` (recommended) <span id="add-types-setting-to-tsconfig-json"></span>
 
