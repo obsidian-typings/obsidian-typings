@@ -119,5 +119,15 @@
     "release": "git show origin/main:workflow-scripts/release.ts | bun -",
     "release:beta": "git show origin/main:workflow-scripts/release-beta.ts | bun -",
     "spellcheck": "cspell . --no-progress"
-  }
+  },
+  "files": [
+    "dist/",
+    "implementations/",
+    "patches/",
+    "scripts/postinstall.ts",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ]
 }
