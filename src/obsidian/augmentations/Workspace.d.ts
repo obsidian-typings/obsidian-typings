@@ -956,18 +956,42 @@ declare module 'obsidian' {
         on(name: 'quit', callback: (tasks: Tasks) => any, ctx?: any): EventRef;
 
         /**
-         * Called when user shares files on mobile
+         * Triggered when user shares files on mobile.
+         *
+         * @param name - Should be `'receive-files-menu'`.
+         * @param callback - The callback function.
+         * @param ctx - The context passed as `this` to the `callback` function.
+         * @returns The event reference.
+         *
+         * @example
+         * ```ts
+         * app.workspace.on('receive-files-menu', (menu, files) => {
+         *     console.log(menu, files);
+         * });
+         * ```
          *
          * @unofficial
          */
-        on(name: 'receive-files-menu', callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
+        on(name: 'receive-files-menu', callback: (menu: Menu, files: TFile[]) => void, ctx?: unknown): EventRef;
 
         /**
-         * Called when user shares text on mobile
+         * Triggered when user shares text on mobile.
+         *
+         * @param name - Should be `'receive-text-menu'`.
+         * @param callback - The callback function.
+         * @param ctx - The context passed as `this` to the `callback` function.
+         * @returns The event reference.
+         *
+         * @example
+         * ```ts
+         * app.workspace.on('receive-text-menu', (menu, text) => {
+         *     console.log(menu, text);
+         * });
+         * ```
          *
          * @unofficial
          */
-        on(name: 'receive-text-menu', callback: (menu: Menu, x: unknown) => void, ctx?: unknown): EventRef;
+        on(name: 'receive-text-menu', callback: (menu: Menu, text: string) => void, ctx?: unknown): EventRef;
 
         /**
          * Triggered when a `WorkspaceItem` is resized or the workspace layout has changed.
