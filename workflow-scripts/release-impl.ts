@@ -12,4 +12,5 @@ await wrapCliTask(async () => {
     }
 
     await exec('git push origin HEAD:refs/tags/release-candidate');
+    await exec('git push origin');
 });
