@@ -7,11 +7,9 @@ await wrapCliTask(async () => {
 
     const isBeta = process.argv[2] === 'beta';
 
-    await exec('git tag release-candidate -m release-candidate --force');
-
     if (isBeta) {
-        await exec('git tag release-candidate-beta -m release-candidate-beta --force');
+      await exec('git push origin HEAD:refs/tags/release-candidate-beta');
     }
 
-    await exec('git push origin --follow-tags');
+    await exec('git push origin HEAD:refs/tags/release-candidate');
 });
