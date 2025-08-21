@@ -110,7 +110,7 @@ async function updateNpmVersion(nextVersion: string): Promise<void> {
 }
 
 async function updateNpmVersions(branchName: string, isBeta: boolean): Promise<string> {
-  await exec('git checkout main');
+  await exec('git checkout main --force');
   const packageJson = await readPackageJson();
   if (!packageJson.version) {
     throw new Error('package.json version is not set');
@@ -122,7 +122,7 @@ async function updateNpmVersions(branchName: string, isBeta: boolean): Promise<s
 
   await updateNpmVersion(nextVersion);
 
-  await exec(`git checkout ${branchName}`);
+  await exec(`git checkout ${branchName} --force`);
   await updateNpmVersion(nextVersion);
 
   await annotateTag(nextVersion, nextVersion);
