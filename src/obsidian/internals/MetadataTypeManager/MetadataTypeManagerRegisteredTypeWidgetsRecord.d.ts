@@ -8,6 +8,7 @@ import type { FilePropertyWidgetComponent } from './FilePropertyWidgetComponent.
 import type { FolderPropertyWidgetComponent } from './FolderPropertyWidgetComponent.d.ts';
 import type { MultitextPropertyWidgetComponent } from './MultitextPropertyWidgetComponent.d.ts';
 import type { NumberPropertyWidgetComponent } from './NumberPropertyWidgetComponent.d.ts';
+import type { PropertyPropertyWidgetComponent } from './PropertyPropertyWidgetComponent.js';
 import type { TagsPropertyWidgetComponent } from './TagsPropertyWidgetComponent.d.ts';
 import type { TextPropertyWidgetComponent } from './TextPropertyWidgetComponent.d.ts';
 
@@ -46,7 +47,7 @@ export interface MetadataTypeManagerRegisteredTypeWidgetsRecord
     number: PropertyWidget<number, NumberPropertyWidgetComponent>;
 
     /** @todo Documentation incomplete. */
-    property: PropertyWidget<number, NumberPropertyWidgetComponent>;
+    property: PropertyWidget<string, PropertyPropertyWidgetComponent>;
 
     /** @todo Documentation incomplete. */
     tags: PropertyWidget<string[], TagsPropertyWidgetComponent>;
