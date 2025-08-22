@@ -1,4 +1,3 @@
-import type { Component } from 'obsidian';
 import type { FocusMode } from '../FocusMode.d.ts';
 
 /**
