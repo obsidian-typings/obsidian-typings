@@ -85,9 +85,7 @@ async function releaseNpmPackage(nextVersion: string, zipFileName: string, tags:
   await exec('mkdir build');
   await exec('cp -r dist build');
   await exec('cp README.md LICENSE CHANGELOG.md package.json build');
-  await exec('cd build');
-  await exec(`zip -r ${zipFileName} .`);
-  await exec('cd ..');
+  await exec(`zip -r ${zipFileName} .`, { cwd: 'build' });
 }
 
 async function updateNpmVersion(nextVersion: string): Promise<void> {
