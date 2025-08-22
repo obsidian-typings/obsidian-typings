@@ -17,8 +17,7 @@ import type { TextPropertyWidgetComponent } from './TextPropertyWidgetComponent.
  * @unofficial
  */
 export interface MetadataTypeManagerRegisteredTypeWidgetsRecord
-    extends Record<PropertyWidgetType, PropertyWidget<unknown>>
-{
+    extends Record<PropertyWidgetType, PropertyWidget<unknown>> {
     /** @todo Documentation incomplete. */
     aliases: PropertyWidget<string | string[], AliasesPropertyWidgetComponent>;
 
@@ -29,7 +28,10 @@ export interface MetadataTypeManagerRegisteredTypeWidgetsRecord
     date: PropertyWidget<moment.MomentInput, DatePropertyWidgetComponent>;
 
     /** @todo Documentation incomplete. */
-    datetime: PropertyWidget<moment.MomentInput, DatetimePropertyWidgetComponent>;
+    datetime: PropertyWidget<
+        moment.MomentInput,
+        DatetimePropertyWidgetComponent
+    >;
 
     /** @todo Documentation incomplete. */
     file: PropertyWidget<string, FilePropertyWidgetComponent>;
@@ -42,6 +44,9 @@ export interface MetadataTypeManagerRegisteredTypeWidgetsRecord
 
     /** @todo Documentation incomplete. */
     number: PropertyWidget<number, NumberPropertyWidgetComponent>;
+
+    /** @todo Documentation incomplete. */
+    property: PropertyWidget<number, NumberPropertyWidgetComponent>;
 
     /** @todo Documentation incomplete. */
     tags: PropertyWidget<string[], TagsPropertyWidgetComponent>;
