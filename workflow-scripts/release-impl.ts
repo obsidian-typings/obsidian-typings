@@ -4,6 +4,7 @@ import { checkGitRepoClean } from 'obsidian-dev-utils/ScriptUtils/version';
 
 await wrapCliTask(async () => {
     await checkGitRepoClean();
+    await exec('git push origin');
 
     const isBeta = process.argv[2] === 'beta';
 
@@ -12,5 +13,5 @@ await wrapCliTask(async () => {
     }
 
     await exec('git push origin HEAD:refs/tags/release-candidate');
-    await exec('git push origin');
+
 });
