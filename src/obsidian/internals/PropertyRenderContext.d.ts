@@ -18,11 +18,6 @@ export interface PropertyRenderContext {
     key: string;
 
     /**
-     * Reference to the metadata editor.
-     */
-    metadataEditor: MetadataEditor;
-
-    /**
      * Determine the source path of current context.
      */
     sourcePath: string;

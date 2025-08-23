@@ -1,4 +1,3 @@
-import type { Component } from 'obsidian';
 import type { FocusMode } from '../FocusMode.d.ts';
 
 /**
@@ -6,7 +5,7 @@ import type { FocusMode } from '../FocusMode.d.ts';
  * @public
  * @unofficial
  */
-export interface PropertyWidgetComponentBase extends Component {
+export interface PropertyWidgetComponentBase {
     /** @todo Documentation incomplete. */
     containerEl: HTMLElement;
 
