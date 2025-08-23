@@ -10,5 +10,5 @@ export interface PropertyWidgetEntry {
     name: string;
 
     /** @todo Documentation incomplete. */
-    type: PropertyWidgetType;
+    widget: PropertyWidgetType;
 }

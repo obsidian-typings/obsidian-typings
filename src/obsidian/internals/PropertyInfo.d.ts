@@ -7,7 +7,7 @@ export interface PropertyInfo {
     /**
      * Usage count of property.
      */
-    count: number;
+    occurrences: number;
 
     /**
      * Name of property.
@@ -17,5 +17,5 @@ export interface PropertyInfo {
     /**
      * Type of property.
      */
-    type: string;
+    widget: string;
 }

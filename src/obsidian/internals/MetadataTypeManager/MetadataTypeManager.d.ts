@@ -1,15 +1,9 @@
-import type {
-    App,
-    Debouncer,
-    Events
-} from 'obsidian';
+import type { App, Debouncer, Events } from 'obsidian';
 import type { PropertyInfo } from '../PropertyInfo.d.ts';
 import type { PropertyWidgetType } from '../PropertyWidgetType.d.ts';
 import type { GetTypeInfoOptions } from './GetTypeInfoOptions.d.ts';
 import type { MetadataTypeManagerPropertiesRecord } from './MetadataTypeManagerPropertiesRecord.d.ts';
-import type {
-    MetadataTypeManagerRegisteredTypeWidgetsRecord
-} from './MetadataTypeManagerRegisteredTypeWidgetsRecord.d.ts';
+import type { MetadataTypeManagerRegisteredTypeWidgetsRecord } from './MetadataTypeManagerRegisteredTypeWidgetsRecord.d.ts';
 import type { MetadataTypeManagerTypesRecord } from './MetadataTypeManagerTypesRecord.d.ts';
 import type { TypeInfo } from './TypeInfo.d.ts';
 
@@ -23,6 +17,16 @@ export interface MetadataTypeManager extends Events {
      * Reference to App.
      */
     app: App;
+
+    /**
+     * Associated widget types for each property.
+     */
+    assignedWidgets: MetadataTypeManagerTypesRecord;
+
+    /**
+     * Unix timestamp of the last save
+     */
+    lastSave: number;
 
     /** @todo Documentation incomplete. */
     onConfigFileChange: Debouncer<[], Promise<void>>;
@@ -38,11 +42,6 @@ export interface MetadataTypeManager extends Events {
     registeredTypeWidgets: MetadataTypeManagerRegisteredTypeWidgetsRecord;
 
     /**
-     * Associated widget types for each property.
-     */
-    types: MetadataTypeManagerTypesRecord;
-
-    /**
      * Get all registered properties of the vault.
      */
     getAllProperties(): Record<string, PropertyInfo>;
@@ -50,7 +49,7 @@ export interface MetadataTypeManager extends Events {
     /**
      * Get assigned widget type for property.
      */
-    getAssignedType(property: string): PropertyWidgetType | null;
+    getAssignedWidget(property: string): PropertyWidgetType | null;
 
     /**
      * Get info for property.
@@ -61,11 +60,6 @@ export interface MetadataTypeManager extends Events {
      * Get expected widget type for property and the one inferred from the property value.
      */
     getTypeInfo(options: GetTypeInfoOptions): TypeInfo;
-
-    /**
-     * Get all properties with an assigned widget type.
-     */
-    getTypes(): string[];
 
     /**
      * Load property types from config.
@@ -84,11 +78,6 @@ export interface MetadataTypeManager extends Events {
     save(): Promise<void>;
 
     /**
-     * Get all properties from metadata cache.
-     */
-    savePropertyInfo(): void;
-
-    /**
      * Set widget type for property.
      */
     setType(property: string, type: PropertyWidgetType): Promise<void>;
@@ -97,4 +86,9 @@ export interface MetadataTypeManager extends Events {
      * Unset widget type for property.
      */
     unsetType(property: string): Promise<void>;
+
+    /**
+     * Updates `this.properties` to match the MetadataCache
+     */
+    updatePropertyInfoCache(): void;
 }
