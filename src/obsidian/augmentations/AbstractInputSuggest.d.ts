@@ -25,12 +25,6 @@ declare module 'obsidian' {
          * @todo Documentation incomplete.
          * @unofficial
          */
-        selectCb?: (value: T, evt: MouseEvent | KeyboardEvent) => unknown;
-
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
         textInputEl: HTMLInputElement | HTMLDivElement;
 
         /**
@@ -108,6 +102,17 @@ declare module 'obsidian' {
          * @official
          */
         onSelect(callback: (value: T, evt: MouseEvent | KeyboardEvent) => unknown): this;
+
+        /**
+         * Callback for
+         *
+         * @param value - The value of the suggestion.
+         * @param evt - The event that occurred.
+         * @returns The result of the callback.
+         *
+         * @unofficial
+         */
+        selectCb?(value: T, evt: MouseEvent | KeyboardEvent): unknown;
 
         /**
          * Sets the value into the input element.

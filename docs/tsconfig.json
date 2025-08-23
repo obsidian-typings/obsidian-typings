@@ -1,12 +1,12 @@
 {
-    "extends": "../tsconfig.json",
-    "compilerOptions": {
-        "skipLibCheck": true,
-        "composite": true
-    },
-    "exclude": [
-        "node_modules",
-        "dist",
-        "obsidian-typings"
-    ]
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "composite": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "obsidian-typings"
+  ]
 }

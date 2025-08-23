@@ -1,4 +1,4 @@
-import type { GraphNodeData } from './GraphNodeData.js';
+import type { GraphNodeData } from './GraphNodeData.d.ts';
 
 /**
  * Data selected to be rendered in the graph based on the current options.

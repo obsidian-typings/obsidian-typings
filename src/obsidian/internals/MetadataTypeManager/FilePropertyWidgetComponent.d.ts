@@ -1,17 +1,15 @@
 import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Property widget component for files.
+ *
  * @public
  * @unofficial
  */
-export interface FilePropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** @todo Documentation incomplete. */
+export interface FilePropertyWidgetComponent extends PropertyWidgetComponentBase<string | null> {
+    /** The input element for the property widget. */
     inputEl: HTMLInputElement;
 
-    /** @todo Documentation incomplete. */
+    /** The type of the property widget. */
     type: 'file';
-
-    /** @todo Documentation incomplete. */
-    setValue(value: string | null): void;
 }

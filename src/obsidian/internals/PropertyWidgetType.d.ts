@@ -1,8 +1,5 @@
 /**
- * @todo Documentation incomplete.
- */
-/**
- * @todo Documentation incomplete.
+ * Property widget type.
  *
  * @public
  * @unofficial

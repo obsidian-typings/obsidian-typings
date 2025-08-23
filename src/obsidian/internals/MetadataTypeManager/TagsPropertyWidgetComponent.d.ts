@@ -2,17 +2,15 @@ import type { Multiselect } from './Multiselect.d.ts';
 import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Property widget component for tags.
+ *
  * @public
  * @unofficial
  */
-export interface TagsPropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** @todo Documentation incomplete. */
+export interface TagsPropertyWidgetComponent extends PropertyWidgetComponentBase<string[] | string> {
+    /** The multiselect component for the property widget. */
     multiselect: Multiselect;
 
-    /** @todo Documentation incomplete. */
+    /** The type of the property widget. */
     type: 'tags';
-
-    /** @todo Documentation incomplete. */
-    setValue(value: string[] | string): void;
 }

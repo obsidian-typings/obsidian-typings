@@ -264,9 +264,7 @@ function fixImport(declaration: ImportDeclaration, file: string): ImportDeclarat
     const fileExtension = getExtension(file);
     const isDeclarationFile = fileExtension === '.d.ts';
 
-    if (isDeclarationFile) {
-        moduleSpecifier = moduleSpecifier.replace('/(\.d)?\.ts$/', '.js');
-    }
+    declaration.setModuleSpecifier(moduleSpecifier.replace(/\.js$/, isDeclarationFile ? '.d.ts' : '.ts'));
 
     if (declaration.getNamespaceImport()) {
         declaration.removeNamespaceImport();

@@ -1,17 +1,15 @@
 import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Property widget component for checkboxes.
+ *
  * @public
  * @unofficial
  */
-export interface CheckboxPropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** @todo Documentation incomplete. */
+export interface CheckboxPropertyWidgetComponent extends PropertyWidgetComponentBase<boolean> {
+    /** The checkbox element for the property widget. */
     checkboxEl: HTMLInputElement;
 
-    /** @todo Documentation incomplete. */
+    /** The type of the property widget. */
     type: 'checkbox';
-
-    /** @todo Documentation incomplete. */
-    setValue(value: boolean | null): void;
 }

@@ -5,14 +5,14 @@
  */
 export interface PropertyInfo {
     /**
-     * Usage count of property.
-     */
-    occurrences: number;
-
-    /**
      * Name of property.
      */
     name: string;
+
+    /**
+     * Usage count of property.
+     */
+    occurrences: number;
 
     /**
      * Type of property.

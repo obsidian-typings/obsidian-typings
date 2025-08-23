@@ -2,47 +2,60 @@ import type { PropertyRenderContext } from '../PropertyRenderContext.d.ts';
 import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Property widget component for text.
+ *
  * @public
  * @unofficial
  */
-export interface TextPropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** @todo Documentation incomplete. */
+export interface TextPropertyWidgetComponent extends PropertyWidgetComponentBase<string> {
+    /** The render context for the property widget. */
     ctx: PropertyRenderContext;
 
-    /** @todo Documentation incomplete. */
+    /** The input element for the property widget. */
     inputEl: HTMLInputElement;
 
-    /** @todo Documentation incomplete. */
+    /** The link element for the property widget. */
     linkEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** The link text element for the property widget. */
     linkTextEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** The type of the property widget. */
     type: 'text';
 
-    /** @todo Documentation incomplete. */
+    /** The value of the property widget. */
     value: string;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Get the display text of the link from the property widget.
+     *
+     * @returns The display text.
+     */
     getDisplayText(): string;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Get the link text of the property widget.
+     *
+     * @returns The link text.
+     */
     getLinkText(): string;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Check if the property widget link has an alias.
+     *
+     * @returns Whether the property widget link has an alias.
+     */
     isAlias(): boolean;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Check if the property widget link is a wikilink.
+     *
+     * @returns Whether the property widget link is a wikilink.
+     */
     isWikilink(): boolean;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Render the property widget.
+     */
     render(): void;
-
-    /** @todo Documentation incomplete. */
-    setValue(value: string | null): void;
-
-    /** @todo Documentation incomplete. */
-    setValue(value: string | null): void;
 }

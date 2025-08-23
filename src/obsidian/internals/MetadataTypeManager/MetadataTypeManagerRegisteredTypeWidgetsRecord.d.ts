@@ -8,50 +8,52 @@ import type { FilePropertyWidgetComponent } from './FilePropertyWidgetComponent.
 import type { FolderPropertyWidgetComponent } from './FolderPropertyWidgetComponent.d.ts';
 import type { MultitextPropertyWidgetComponent } from './MultitextPropertyWidgetComponent.d.ts';
 import type { NumberPropertyWidgetComponent } from './NumberPropertyWidgetComponent.d.ts';
-import type { PropertyPropertyWidgetComponent } from './PropertyPropertyWidgetComponent.js';
+import type { PropertyPropertyWidgetComponent } from './PropertyPropertyWidgetComponent.d.ts';
 import type { TagsPropertyWidgetComponent } from './TagsPropertyWidgetComponent.d.ts';
 import type { TextPropertyWidgetComponent } from './TextPropertyWidgetComponent.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Registered type widgets.
+ *
  * @public
  * @unofficial
  */
 export interface MetadataTypeManagerRegisteredTypeWidgetsRecord
-    extends Record<PropertyWidgetType, PropertyWidget<unknown>> {
-    /** @todo Documentation incomplete. */
+    extends Record<PropertyWidgetType, PropertyWidget<unknown>>
+{
+    /** Property widget for aliases. */
     aliases: PropertyWidget<string | string[], AliasesPropertyWidgetComponent>;
 
-    /** @todo Documentation incomplete. */
-    checkbox: PropertyWidget<boolean | null, CheckboxPropertyWidgetComponent>;
+    /** Property widget for checkboxes. */
+    checkbox: PropertyWidget<boolean, CheckboxPropertyWidgetComponent>;
 
-    /** @todo Documentation incomplete. */
+    /** Property widget for dates. */
     date: PropertyWidget<moment.MomentInput, DatePropertyWidgetComponent>;
 
-    /** @todo Documentation incomplete. */
+    /** Property widget for datetimes. */
     datetime: PropertyWidget<
         moment.MomentInput,
         DatetimePropertyWidgetComponent
     >;
 
-    /** @todo Documentation incomplete. */
+    /** Property widget for files. */
     file: PropertyWidget<string, FilePropertyWidgetComponent>;
 
-    /** @todo Documentation incomplete. */
+    /** Property widget for folders. */
     folder: PropertyWidget<string, FolderPropertyWidgetComponent>;
 
-    /** @todo Documentation incomplete. */
-    multitext: PropertyWidget<string[], MultitextPropertyWidgetComponent>;
+    /** Property widget for multitexts. */
+    multitext: PropertyWidget<string[] | string, MultitextPropertyWidgetComponent>;
 
-    /** @todo Documentation incomplete. */
+    /** Property widget for numbers. */
     number: PropertyWidget<number, NumberPropertyWidgetComponent>;
 
-    /** @todo Documentation incomplete. */
+    /** Property widget for properties. */
     property: PropertyWidget<string, PropertyPropertyWidgetComponent>;
 
-    /** @todo Documentation incomplete. */
-    tags: PropertyWidget<string[], TagsPropertyWidgetComponent>;
+    /** Property widget for tags. */
+    tags: PropertyWidget<string[] | string, TagsPropertyWidgetComponent>;
 
-    /** @todo Documentation incomplete. */
-    text: PropertyWidget<null | string, TextPropertyWidgetComponent>;
+    /** Property widget for text. */
+    text: PropertyWidget<string, TextPropertyWidgetComponent>;
 }

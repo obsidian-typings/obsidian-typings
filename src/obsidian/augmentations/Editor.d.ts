@@ -1,6 +1,5 @@
 import type { EditorView } from '@codemirror/view';
 import type { Coords } from '../../@codemirror__view/internals/Coords.d.ts';
-import type { BaseEditor } from '../internals/BaseEditor.d.ts';
 import type { ClickableToken } from '../internals/ClickableToken.d.ts';
 import type { Fold } from '../internals/Fold.d.ts';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
@@ -12,7 +11,21 @@ declare module 'obsidian' {
     /**
      * A common interface that bridges the gap between CodeMirror 5 and CodeMirror 6.
      */
-    interface Editor extends BaseEditor {
+    interface Editor {
+        /**
+         * CodeMirror editor instance.
+         *
+         * @unofficial
+         */
+        cm: EditorView;
+
+        /**
+         * HTML instance the CM editor is attached to.
+         *
+         * @unofficial
+         */
+        containerEl: HTMLElement;
+
         /**
          * Linked Editor manager instance.
          *
@@ -47,6 +60,13 @@ declare module 'obsidian' {
         ): void;
 
         /**
+         * Clean-up function executed after indenting lists.
+         *
+         * @unofficial
+         */
+        afterIndent(): void;
+
+        /**
          * Blur the editor.
          *
          * @example
@@ -79,6 +99,13 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link exec} instead.
          */
         exec__(command: EditorCommandName): void;
+
+        /**
+         * Expand text.
+         *
+         * @unofficial
+         */
+        expandText(): void;
 
         /**
          * Focus the editor.
@@ -228,12 +255,56 @@ declare module 'obsidian' {
         hasHighlight(style?: string): boolean;
 
         /**
+         * Indents a list by one level.
+         *
+         * @unofficial
+         */
+        indentList(): void;
+
+        /**
          * Wraps current line around specified characters.
          *
          * @remark Was added in a recent Obsidian update (1.4.0 update cycle).
          * @unofficial
          */
         insertBlock(start: string, end: string): void;
+
+        /**
+         * Insert a template callout at the current cursor position.
+         *
+         * @unofficial
+         */
+        insertCallout(): void;
+
+        /**
+         * Insert a template code block at the current cursor position.
+         *
+         * @unofficial
+         */
+        insertCodeblock(): void;
+
+        /**
+         * Insert a markdown link at the current cursor position.
+         *
+         * @unofficial
+         */
+        insertLink(): void;
+
+        /**
+         * Insert a mathjax equation block at the current cursor position.
+         *
+         * @unofficial
+         */
+        insertMathJax(): void;
+
+        /**
+         * Insert specified text at the current cursor position.
+         *
+         * @param text - The text to insert.
+         * @remark Might be broken, inserts at the end of the document.
+         * @unofficial
+         */
+        insertText(text: string): void;
 
         /**
          * Get the index of the last line (0-indexed).
@@ -263,6 +334,20 @@ declare module 'obsidian' {
         listSelections__?(): EditorSelection[];
 
         /**
+         * Inserts a new line and continues a markdown bullet point list at the same level.
+         *
+         * @unofficial
+         */
+        newlineAndIndentContinueMarkdownList(): void;
+
+        /**
+         * Inserts a new line at the same indent level.
+         *
+         * @unofficial
+         */
+        newlineAndIndentOnly(): void;
+
+        /**
          * Convert an offset to a position.
          *
          * @param offset - The offset to convert.
@@ -282,9 +367,20 @@ declare module 'obsidian' {
          * @param x - The `x` coordinate.
          * @param y - The `y` coordinate.
          * @returns The closest character position to the specified coordinates.
+         *
          * @unofficial
          */
         posAtCoords(x: number, y: number): EditorPosition;
+
+        /**
+         * Get the character position at a mouse event.
+         *
+         * @param evt - The mouse event.
+         * @returns The character position at the mouse event.
+         *
+         * @unofficial
+         */
+        posAtMouse(evt: MouseEvent): EditorPosition;
 
         /**
          * Convert a position to an offset.
@@ -485,6 +581,27 @@ declare module 'obsidian' {
         somethingSelected(): boolean;
 
         /**
+         * Toggles blockquote syntax on paragraph under cursor.
+         *
+         * @unofficial
+         */
+        toggleBlockquote(): void;
+
+        /**
+         * Toggle bullet point list syntax on paragraph under cursor.
+         *
+         * @unofficial
+         */
+        toggleBulletList(): void;
+
+        /**
+         * Toggle checkbox syntax on paragraph under cursor.
+         *
+         * @unofficial
+         */
+        toggleCheckList(): void;
+
+        /**
          * Applies specified markdown syntax to selected text or word under cursor.
          *
          * @unofficial
@@ -492,6 +609,21 @@ declare module 'obsidian' {
         toggleMarkdownFormatting(
             syntax: 'bold' | 'italic' | 'strikethrough' | 'highlight' | 'code' | 'math' | 'comment'
         ): void;
+
+        /**
+         * Toggle numbered list syntax on paragraph under cursor.
+         *
+         * @unofficial
+         */
+        toggleNumberList(): void;
+
+        /**
+         * Convert word under cursor into a wikilink.
+         *
+         * @param embed - Whether to embed the link or not.
+         * @unofficial
+         */
+        triggerWikiLink(embed: boolean): void;
 
         /**
          * Undo the last action.
@@ -504,6 +636,13 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link undo} instead.
          */
         undo__?(): void;
+
+        /**
+         * Unindents a list by one level.
+         *
+         * @unofficial
+         */
+        unindentList(): void;
 
         /**
          * Get the word at a specific position.

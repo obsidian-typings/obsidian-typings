@@ -962,14 +962,12 @@ declare module 'obsidian' {
          * @param callback - The callback function.
          * @param ctx - The context passed as `this` to the `callback` function.
          * @returns The event reference.
-         *
          * @example
          * ```ts
          * app.workspace.on('receive-files-menu', (menu, files) => {
          *     console.log(menu, files);
          * });
          * ```
-         *
          * @unofficial
          */
         on(name: 'receive-files-menu', callback: (menu: Menu, files: TFile[]) => void, ctx?: unknown): EventRef;
@@ -981,14 +979,12 @@ declare module 'obsidian' {
          * @param callback - The callback function.
          * @param ctx - The context passed as `this` to the `callback` function.
          * @returns The event reference.
-         *
          * @example
          * ```ts
          * app.workspace.on('receive-text-menu', (menu, text) => {
          *     console.log(menu, text);
          * });
          * ```
-         *
          * @unofficial
          */
         on(name: 'receive-text-menu', callback: (menu: Menu, text: string) => void, ctx?: unknown): EventRef;

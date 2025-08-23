@@ -1,17 +1,18 @@
 import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Property widget component for numbers.
+ *
  * @public
  * @unofficial
  */
-export interface NumberPropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** @todo Documentation incomplete. */
+export interface NumberPropertyWidgetComponent extends PropertyWidgetComponentBase<number> {
+    /** The input element for the property widget. */
     inputEl: HTMLInputElement;
 
-    /** @todo Documentation incomplete. */
+    /** The type of the property widget. */
     type: 'number';
 
-    /** @todo Documentation incomplete. */
-    setValue(value: number | null): void;
+    /** Show the error message. */
+    showError(): void;
 }
