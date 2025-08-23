@@ -1,17 +1,15 @@
 import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Property widget component for folders.
+ *
  * @public
  * @unofficial
  */
-export interface FolderPropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** @todo Documentation incomplete. */
+export interface FolderPropertyWidgetComponent extends PropertyWidgetComponentBase<string> {
+    /** The input element for the property widget. */
     inputEl: HTMLInputElement;
 
-    /** @todo Documentation incomplete. */
+    /** The type of the property widget. */
     type: 'folder';
-
-    /** @todo Documentation incomplete. */
-    setValue(value: string | null): void;
 }

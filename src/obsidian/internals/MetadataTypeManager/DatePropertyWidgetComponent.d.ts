@@ -1,20 +1,16 @@
-import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.d.ts';
+import type moment from 'moment';
+import type { DatePropertyWidgetComponentBase } from './DatePropertyWidgetComponentBase.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Property widget component for dates.
+ *
  * @public
  * @unofficial
  */
-export interface DatePropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** @todo Documentation incomplete. */
-    inputEl: HTMLInputElement;
+export interface DatePropertyWidgetComponent extends DatePropertyWidgetComponentBase {
+    /** The button element for the property widget. */
+    buttonEl: HTMLDivElement | null;
 
-    /** @todo Documentation incomplete. */
+    /** The type of the property widget. */
     type: 'date';
-
-    /** @todo Documentation incomplete. */
-    parseDate(input: moment.MomentInput): string;
-
-    /** @todo Documentation incomplete. */
-    setValue(value: string | null): void;
 }

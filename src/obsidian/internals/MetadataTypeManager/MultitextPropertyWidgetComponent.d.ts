@@ -3,23 +3,21 @@ import type { Multiselect } from './Multiselect.d.ts';
 import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Property widget component for multiple texts.
+ *
  * @public
  * @unofficial
  */
-export interface MultitextPropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** @todo Documentation incomplete. */
+export interface MultitextPropertyWidgetComponent extends PropertyWidgetComponentBase<string[] | string> {
+    /** The hover popover for the property widget. */
     hoverPopover: HoverPopover | null;
 
-    /** @todo Documentation incomplete. */
+    /** The multiselect component for the property widget. */
     multiselect: Multiselect;
 
-    /** @todo Documentation incomplete. */
+    /** The type of the property widget. */
     type: 'multitext';
 
-    /** @todo Documentation incomplete. */
+    /** The values of the property widget. */
     valueSet: Set<string>;
-
-    /** @todo Documentation incomplete. */
-    setValue(value: string[] | string): void;
 }

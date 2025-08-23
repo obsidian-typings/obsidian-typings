@@ -4,23 +4,21 @@ import type { Multiselect } from './Multiselect.d.ts';
 import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Property widget component for aliases.
+ *
  * @public
  * @unofficial
  */
-export interface AliasesPropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** @todo Documentation incomplete. */
+export interface AliasesPropertyWidgetComponent extends PropertyWidgetComponentBase<string | string[]> {
+    /** The render context for the property widget. */
     ctx: PropertyRenderContext;
 
-    /** @todo Documentation incomplete. */
+    /** The hover popover for the property widget. */
     hoverPopover: HoverPopover | null;
 
-    /** @todo Documentation incomplete. */
+    /** The multiselect component for the property widget. */
     multiselect: Multiselect;
 
-    /** @todo Documentation incomplete. */
+    /** The type of the property widget. */
     type: 'aliases';
-
-    /** @todo Documentation incomplete. */
-    setValue(value: string | string[]): void;
 }

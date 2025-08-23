@@ -1,16 +1,15 @@
-import type { Component } from 'obsidian';
 import type { PropertyWidgetComponentBase } from './MetadataTypeManager/PropertyWidgetComponentBase.d.ts';
-import type { PropertyEntryData } from './PropertyEntryData.d.ts';
 import type { PropertyRenderContext } from './PropertyRenderContext.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Property widget.
+ *
  * @public
  * @unofficial
  */
 export interface PropertyWidget<
     Value = unknown,
-    ComponentType extends PropertyWidgetComponentBase = PropertyWidgetComponentBase
+    ComponentType extends PropertyWidgetComponentBase<Value> = PropertyWidgetComponentBase<Value>
 > {
     /**
      * Lucide-dev icon associated with the widget.
