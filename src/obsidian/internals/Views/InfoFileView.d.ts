@@ -3,9 +3,11 @@ import type {
     TFile
 } from 'obsidian';
 
-/** @todo This is probably not the right term */
 /**
- * @todo Documentation incomplete.
+ * Info file view.
+ *
+ * @remark This is probably not the right term.
+ *
  * @public
  * @unofficial
  */

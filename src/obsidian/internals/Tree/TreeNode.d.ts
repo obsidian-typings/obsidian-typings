@@ -1,10 +1,12 @@
-/** @todo Documentation incomplete. */
 /**
- * @todo Documentation incomplete.
+ * Tree node.
+ *
  * @public
  * @unofficial
  */
 export interface TreeNode {
-    /** @todo Documentation incomplete. */
+    /**
+     * The element of the tree node.
+     */
     el: HTMLElement;
 }
