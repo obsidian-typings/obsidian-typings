@@ -1,6 +1,7 @@
 import type { Mermaid } from 'mermaid';
 import type { default as pdfjsLib } from 'pdfjs-dist';
 import type { default as Prism } from 'prismjs';
+import type { QueryForFuzzySearch } from '../internals/QueryForFuzzySearch.d.ts';
 
 export {};
 
@@ -121,6 +122,17 @@ declare module 'obsidian' {
      * @official
      */
     function finishRenderMath(): Promise<void>;
+
+    /**
+     * Fuzzy search.
+     *
+     * @param queryForFuzzySearch - the query for fuzzy search.
+     * @param text - the text to search in.
+     * @returns the search result or `null` if the text does not match the query.
+     *
+     * @unofficial
+     */
+    function fuzzySearch(queryForFuzzySearch: QueryForFuzzySearch, text: string): SearchResult | null;
 
     /**
      * Combines all tags from frontmatter and note content into a single array.
@@ -489,6 +501,16 @@ declare module 'obsidian' {
      * @official
      */
     function prepareFuzzySearch(query: string): (text: string) => SearchResult | null;
+
+    /**
+     * Prepare a query for fuzzy search.
+     *
+     * @param query - the query.
+     * @returns the query for fuzzy search.
+     *
+     * @unofficial
+     */
+    function prepareQuery(query: string): QueryForFuzzySearch;
 
     /**
      * Construct a simple search callback that runs on a target string.
