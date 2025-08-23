@@ -137,7 +137,12 @@ export interface Multiselect {
      * @returns the multiselect.
      */
     setOptionContextmenuHandler(
-        onOptionContextmenu: (this: Multiselect, menu: Menu, value: string, ctx: MultiselectOptionContextMenuContext) => void
+        onOptionContextmenu: (
+            this: Multiselect,
+            menu: Menu,
+            value: string,
+            ctx: MultiselectOptionContextMenuContext
+        ) => void
     ): this;
 
     /**
