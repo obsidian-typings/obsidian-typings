@@ -4,7 +4,7 @@ import type {
     TextStyle
 } from 'pixi.js';
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
-import type { GraphLink } from './GraphLink.js';
+import type { GraphLink } from './GraphLink.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /**

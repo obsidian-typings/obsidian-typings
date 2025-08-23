@@ -8,7 +8,7 @@ import type { FilePropertyWidgetComponent } from './FilePropertyWidgetComponent.
 import type { FolderPropertyWidgetComponent } from './FolderPropertyWidgetComponent.d.ts';
 import type { MultitextPropertyWidgetComponent } from './MultitextPropertyWidgetComponent.d.ts';
 import type { NumberPropertyWidgetComponent } from './NumberPropertyWidgetComponent.d.ts';
-import type { PropertyPropertyWidgetComponent } from './PropertyPropertyWidgetComponent.js';
+import type { PropertyPropertyWidgetComponent } from './PropertyPropertyWidgetComponent.d.ts';
 import type { TagsPropertyWidgetComponent } from './TagsPropertyWidgetComponent.d.ts';
 import type { TextPropertyWidgetComponent } from './TextPropertyWidgetComponent.d.ts';
 
@@ -18,7 +18,8 @@ import type { TextPropertyWidgetComponent } from './TextPropertyWidgetComponent.
  * @unofficial
  */
 export interface MetadataTypeManagerRegisteredTypeWidgetsRecord
-    extends Record<PropertyWidgetType, PropertyWidget<unknown>> {
+    extends Record<PropertyWidgetType, PropertyWidget<unknown>>
+{
     /** @todo Documentation incomplete. */
     aliases: PropertyWidget<string | string[], AliasesPropertyWidgetComponent>;
 

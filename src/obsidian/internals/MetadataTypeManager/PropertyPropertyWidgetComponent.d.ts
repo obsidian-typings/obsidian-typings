@@ -5,8 +5,7 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @public
  * @unofficial
  */
-export interface PropertyPropertyWidgetComponent
-    extends PropertyWidgetComponentBase {
+export interface PropertyPropertyWidgetComponent extends PropertyWidgetComponentBase {
     /** @todo Documentation incomplete. */
     inputEl: HTMLInputElement;
 

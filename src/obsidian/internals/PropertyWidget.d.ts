@@ -1,7 +1,7 @@
 import type { Component } from 'obsidian';
+import type { PropertyWidgetComponentBase } from './MetadataTypeManager/PropertyWidgetComponentBase.d.ts';
 import type { PropertyEntryData } from './PropertyEntryData.d.ts';
 import type { PropertyRenderContext } from './PropertyRenderContext.d.ts';
-import type { PropertyWidgetComponentBase } from './MetadataTypeManager/PropertyWidgetComponentBase.js';
 
 /**
  * @todo Documentation incomplete.
@@ -35,11 +35,7 @@ export interface PropertyWidget<
     /**
      * Render function for the widget on field container given context and data.
      */
-    render(
-        containerEl: HTMLElement,
-        data: Value,
-        context: PropertyRenderContext
-    ): ComponentType;
+    render(containerEl: HTMLElement, data: Value, context: PropertyRenderContext): ComponentType;
 
     /**
      * Validate whether the input value to the widget is correct.

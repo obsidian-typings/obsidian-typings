@@ -27,7 +27,7 @@ import type { ElectronWindow } from '../../obsidian/internals/ElectronWindow.d.t
 import type { FrameDom } from '../../obsidian/internals/FrameDom.d.ts';
 import type { Localization } from '../../obsidian/internals/Localization.d.ts';
 import type { MathJax } from '../../obsidian/internals/MathJax/MathJax.d.ts';
-import type { PdfJsTestingUtils } from '../../obsidian/internals/PdfJs/PdfJsTestingUtils.js';
+import type { PdfJsTestingUtils } from '../../obsidian/internals/PdfJs/PdfJsTestingUtils.d.ts';
 import type { Database } from '../../obsidian/internals/WebSQL/Database.d.ts';
 
 export {};
