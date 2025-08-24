@@ -1,3 +1,4 @@
+import type { default as moment } from 'moment';
 import type { PropertyWidget } from '../PropertyWidget.d.ts';
 import type { PropertyWidgetType } from '../PropertyWidgetType.d.ts';
 import type { AliasesPropertyWidgetComponent } from './AliasesPropertyWidgetComponent.d.ts';
