@@ -1,4 +1,4 @@
-import type moment from 'moment';
+import type { default as moment } from 'moment';
 import type { HoverPopover } from 'obsidian';
 import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.d.ts';
 
