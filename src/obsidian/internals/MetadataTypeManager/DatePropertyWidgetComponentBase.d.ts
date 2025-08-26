@@ -8,7 +8,7 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @public
  * @unofficial
  */
-export interface DatePropertyWidgetComponentBase extends PropertyWidgetComponentBase<moment.MomentInput> {
+export interface DatePropertyWidgetComponentBase extends PropertyWidgetComponentBase {
     /** The date of the property widget. */
     date?: moment.Moment;
 

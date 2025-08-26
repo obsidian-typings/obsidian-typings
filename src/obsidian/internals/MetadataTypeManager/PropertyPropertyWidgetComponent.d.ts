@@ -7,7 +7,7 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @public
  * @unofficial
  */
-export interface PropertyPropertyWidgetComponent extends PropertyWidgetComponentBase<string> {
+export interface PropertyPropertyWidgetComponent extends PropertyWidgetComponentBase {
     /** The combobox component for the property widget. */
     combobox: PropertyPropertyWidgetComponentComboBox;
 

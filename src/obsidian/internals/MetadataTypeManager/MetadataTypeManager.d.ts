@@ -68,7 +68,7 @@ export interface MetadataTypeManager extends Events {
     /**
      * Get property widget.
      */
-    getWidget(type: string): PropertyWidget<unknown>;
+    getWidget(type: string): PropertyWidget;
 
     /**
      * Load property types from config.

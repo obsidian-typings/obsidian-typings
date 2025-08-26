@@ -9,7 +9,7 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @public
  * @unofficial
  */
-export interface AliasesPropertyWidgetComponent extends PropertyWidgetComponentBase<string | string[]> {
+export interface AliasesPropertyWidgetComponent extends PropertyWidgetComponentBase {
     /** The render context for the property widget. */
     ctx: PropertyRenderContext;
 

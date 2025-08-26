@@ -7,10 +7,7 @@ import type { PropertyRenderContext } from './PropertyRenderContext.d.ts';
  * @public
  * @unofficial
  */
-export interface PropertyWidget<
-    Value = unknown,
-    ComponentType extends PropertyWidgetComponentBase<Value> = PropertyWidgetComponentBase<Value>
-> {
+export interface PropertyWidget<ComponentType extends PropertyWidgetComponentBase = PropertyWidgetComponentBase> {
     /**
      * Lucide-dev icon associated with the widget.
      */
@@ -34,7 +31,7 @@ export interface PropertyWidget<
     /**
      * Render function for the widget on field container given context and data.
      */
-    render(containerEl: HTMLElement, data: Value | null, context: PropertyRenderContext): ComponentType;
+    render(containerEl: HTMLElement, data: unknown, context: PropertyRenderContext): ComponentType;
 
     /**
      * Validate whether the input value to the widget is correct.
