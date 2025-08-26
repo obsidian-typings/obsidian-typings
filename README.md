@@ -91,7 +91,7 @@ In most cases, we recommend to always use the latest release.
 
 > [!IMPORTANT]
 >
-> If you are installed library using `npm pkg set` approach, you will have to update it using `npm update obsidian-typings` command.
+> If you installed library using `npm pkg set` approach, you will have to update it using `npm update obsidian-typings` command.
 >
 > If you run `npm install obsidian-typings` instead, the most likely, the library will not get updated.
 
