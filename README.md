@@ -89,6 +89,12 @@ In most cases, we recommend to always use the latest release.
     - `npm pkg set "dependencies.obsidian-typings=obsidian-public-1.8.10" && npm install`
     - `npm pkg set "dependencies.obsidian-typings=obsidian-catalyst-1.9.9" && npm install`
 
+> [!IMPORTANT]
+>
+> If you are installed library using `npm pkg set` approach, you will have to update it using `npm update obsidian-typings` command.
+>
+> If you run `npm install obsidian-typings` instead, the most likely, the library will not get updated.
+
 ### 2. Enable in `tsconfig.json` (recommended) <span id="add-types-setting-to-tsconfig-json"></span>
 
 Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all extended typings available globally without explicit importing them:
