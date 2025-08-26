@@ -1,8 +1,11 @@
-import type { App, Debouncer, Events } from 'obsidian';
+import type {
+    App,
+    Debouncer,
+    Events
+} from 'obsidian';
 import type { PropertyInfo } from '../PropertyInfo.d.ts';
 import type { PropertyWidget } from '../PropertyWidget.d.ts';
 import type { PropertyWidgetType } from '../PropertyWidgetType.d.ts';
-import type { GetTypeInfoOptions } from './GetTypeInfoOptions.d.ts';
 import type { MetadataTypeManagerPropertiesRecord } from './MetadataTypeManagerPropertiesRecord.d.ts';
 import type { MetadataTypeManagerRegisteredTypeWidgetsRecord } from './MetadataTypeManagerRegisteredTypeWidgetsRecord.d.ts';
 import type { MetadataTypeManagerTypesRecord } from './MetadataTypeManagerTypesRecord.d.ts';
