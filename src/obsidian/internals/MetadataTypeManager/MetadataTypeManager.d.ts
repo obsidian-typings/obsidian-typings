@@ -6,11 +6,8 @@ import type {
 import type { PropertyInfo } from '../PropertyInfo.d.ts';
 import type { PropertyWidget } from '../PropertyWidget.d.ts';
 import type { PropertyWidgetType } from '../PropertyWidgetType.d.ts';
-import type { GetTypeInfoOptions } from './GetTypeInfoOptions.d.ts';
 import type { MetadataTypeManagerPropertiesRecord } from './MetadataTypeManagerPropertiesRecord.d.ts';
-import type {
-    MetadataTypeManagerRegisteredTypeWidgetsRecord
-} from './MetadataTypeManagerRegisteredTypeWidgetsRecord.d.ts';
+import type { MetadataTypeManagerRegisteredTypeWidgetsRecord } from './MetadataTypeManagerRegisteredTypeWidgetsRecord.d.ts';
 import type { MetadataTypeManagerTypesRecord } from './MetadataTypeManagerTypesRecord.d.ts';
 import type { TypeInfo } from './TypeInfo.d.ts';
 
@@ -66,7 +63,7 @@ export interface MetadataTypeManager extends Events {
     /**
      * Get expected widget type for property and the one inferred from the property value.
      */
-    getTypeInfo(options: GetTypeInfoOptions): TypeInfo;
+    getTypeInfo(property: string, value: unknown): TypeInfo;
 
     /**
      * Get property widget.

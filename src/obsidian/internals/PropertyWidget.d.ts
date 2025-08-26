@@ -34,7 +34,7 @@ export interface PropertyWidget<
     /**
      * Render function for the widget on field container given context and data.
      */
-    render(containerEl: HTMLElement, data: Value, context: PropertyRenderContext): ComponentType;
+    render(containerEl: HTMLElement, data: Value | null, context: PropertyRenderContext): ComponentType;
 
     /**
      * Validate whether the input value to the widget is correct.
