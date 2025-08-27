@@ -10,7 +10,7 @@ export interface BasesNote {
     /**
      * Data.
      */
-    data: unknown[];
+    data: Record<string, unknown>;
 
     /**
      * Get control.
