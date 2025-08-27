@@ -1,5 +1,6 @@
 import type { ViewType } from '../../implementations/Constants/ViewType.ts';
 import type { BacklinkViewConstructor } from '../InternalPlugins/Backlink/BacklinkViewConstructor.d.ts';
+import type { BasesViewConstructor } from '../InternalPlugins/Bases/BasesViewConstructor.d.ts';
 import type { TableViewConstructor } from '../InternalPlugins/Bases/TableViewConstructor.d.ts';
 import type { BookmarksViewConstructor } from '../InternalPlugins/Bookmarks/BookmarksViewConstructor.d.ts';
 import type { CanvasViewConstructor } from '../InternalPlugins/Canvas/CanvasViewConstructor.d.ts';
@@ -35,6 +36,7 @@ export type ViewTypeViewConstructorMapping = {
     [ViewType.AllProperties]: AllPropertiesViewConstructor;
     [ViewType.Audio]: AudioViewConstructor;
     [ViewType.Backlink]: BacklinkViewConstructor;
+    [ViewType.Bases]: BasesViewConstructor;
     [ViewType.Bookmarks]: BookmarksViewConstructor;
     [ViewType.Webviewer]: WebviewerViewConstructor;
     [ViewType.WebviewerHistory]: WebviewerHistoryViewConstructor;

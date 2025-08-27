@@ -1,6 +1,7 @@
 import type { MarkdownView } from 'obsidian';
 import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
 import type { BacklinkView } from '../InternalPlugins/Backlink/BacklinkView.d.ts';
+import type { BasesView } from '../InternalPlugins/Bases/BasesView.d.ts';
 import type { TableView } from '../InternalPlugins/Bases/TableView.d.ts';
 import type { BookmarksView } from '../InternalPlugins/Bookmarks/BookmarksView.d.ts';
 import type { CanvasView } from '../InternalPlugins/Canvas/CanvasView.d.ts';
@@ -33,6 +34,7 @@ export type ViewTypeViewMapping = {
     [ViewType.AllProperties]: AllPropertiesView;
     [ViewType.Audio]: AudioView;
     [ViewType.Backlink]: BacklinkView;
+    [ViewType.Bases]: BasesView;
     [ViewType.Bookmarks]: BookmarksView;
     [ViewType.Webviewer]: WebviewerView;
     [ViewType.WebviewerHistory]: WebviewerHistoryView;

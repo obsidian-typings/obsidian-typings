@@ -2,7 +2,7 @@ import type { BasesFunction } from '../BasesFunction.d.ts';
 import type { HasExtract } from '../HasExtract.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Function `Hour`.
  * @public
  * @unofficial
  */

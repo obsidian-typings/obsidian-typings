@@ -1,21 +1,32 @@
 /**
- * @todo Documentation incomplete.
+ * Bases function argument.
+ *
  * @public
  * @unofficial
  */
 export interface BasesFunctionArg {
-    /** @todo Documentation incomplete. */
+    /**
+     * Whether to include custom types.
+     */
     include_custom_types?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The name of the argument.
+     */
     name: string;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Whether the argument is optional.
+     */
     optional?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The types of the argument.
+     */
     type: string[];
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Whether the argument is variadic.
+     */
     variadic?: boolean;
 }

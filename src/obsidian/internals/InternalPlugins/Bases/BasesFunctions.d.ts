@@ -47,149 +47,244 @@ import type { UniqueFunction } from './Functions/UniqueFunction.d.ts';
 import type { YearFunction } from './Functions/YearFunction.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Bases functions.
+ *
  * @public
  * @unofficial
  */
 export interface BasesFunctions {
-    /** @todo Documentation incomplete. */
+    /**
+     * The not equal function.
+     */
     '!=': NotEqualFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The less than function.
+     */
     '<': LessFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The less than or equal to function.
+     */
     '<=': LessOrEqualFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The equal function.
+     */
     '==': EqualFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The greater than function.
+     */
     '>': GreaterFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The greater than or equal to function.
+     */
     '>=': GreaterOrEqualFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The absolute function.
+     */
     abs: AbsFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The ceiling function.
+     */
     ceil: CeilFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The concat function.
+     */
     concat: ConcatFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The contains function.
+     */
     contains: ContainsFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The contains all function.
+     */
     containsAll: ContainsAllFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The contains any function.
+     */
     containsAny: ContainsAnyFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The contains none function.
+     */
     containsNone: ContainsNoneFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The date after function.
+     */
     dateAfter: DateAfterFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The date before function.
+     */
     dateBefore: DateBeforeFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The date diff function.
+     */
     dateDiff: DateDiffFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The date equals function.
+     */
     dateEquals: DateEqualsFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The date modify function.
+     */
     dateModify: DateModifyFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The date not equals function.
+     */
     dateNotEquals: DateNotEqualsFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The date on or after function.
+     */
     dateOnOrAfter: DateOnOrAfterFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The date on or before function.
+     */
     dateOnOrBefore: DateOnOrBeforeFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The day function.
+     */
     day: DayFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The empty function.
+     */
     empty: EmptyFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The flat function.
+     */
     flat: FlatFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The floor function.
+     */
     floor: FloorFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The hour function.
+     */
     hour: HourFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The if function.
+     */
     if: IfFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The index function.
+     */
     index: IndexFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The in folder function.
+     */
     inFolder: InFolderFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The join function.
+     */
     join: JoinFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The length function.
+     */
     len: LenFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The links to function.
+     */
     linksTo: LinksToFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The minimum function.
+     */
     min: MinFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The minute function.
+     */
     minute: MinuteFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The month function.
+     */
     month: MonthFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The not function.
+     */
     not: NotFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The not contains function.
+     */
     notContains: NotContainsFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The not empty function.
+     */
     notEmpty: NotEmptyFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The now function.
+     */
     now: NowFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The round function.
+     */
     round: RoundFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The second function.
+     */
     second: SecondFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The slice function.
+     */
     slice: SliceFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The tagged with function.
+     */
     taggedWith: TaggedWithFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The title function.
+     */
     title: TitleFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The trim function.
+     */
     trim: TrimFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The unique function.
+     */
     unique: UniqueFunction;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The year function.
+     */
     year: YearFunction;
 }

@@ -1,9 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * Has get display name.
+ *
  * @public
  * @unofficial
  */
 export interface HasGetDisplayName {
-    /** @todo Documentation incomplete. */
+    /**
+     * Gets the display name.
+     */
     getDisplayName(type: string): string;
 }

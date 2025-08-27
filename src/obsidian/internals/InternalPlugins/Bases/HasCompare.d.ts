@@ -1,9 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * Has compare.
+ *
  * @public
  * @unofficial
  */
 export interface HasCompare {
-    /** @todo Documentation incomplete. */
+    /**
+     * Compares two values.
+     */
     compare(a: unknown, b: unknown): boolean;
 }

@@ -2,11 +2,14 @@ import type { View } from 'obsidian';
 import type { ViewType } from '../../../implementations/Constants/ViewType.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Table view.
+ *
  * @public
  * @unofficial
  */
 export interface TableView extends View {
-    /** @todo Documentation incomplete */
+    /**
+     * Get view type.
+     */
     getViewType(): typeof ViewType.Table;
 }

@@ -1,9 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * Has extract.
+ *
  * @public
  * @unofficial
  */
 export interface HasExtract {
-    /** @todo Documentation incomplete. */
+    /**
+     * Extracts a date.
+     */
     extract(date: Date): number;
 }

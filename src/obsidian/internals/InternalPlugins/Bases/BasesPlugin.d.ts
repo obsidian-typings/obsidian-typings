@@ -2,7 +2,8 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { BasesPluginInstance } from './BasesPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Bases plugin.
+ *
  * @public
  * @unofficial
  */

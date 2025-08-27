@@ -1,7 +1,8 @@
 import type { View } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * View factory.
+ *
  * @public
  * @unofficial
  */
