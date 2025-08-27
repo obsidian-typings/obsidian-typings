@@ -1,4 +1,5 @@
 import type { BasesFile } from './BasesFile.d.ts';
+import type { BasesNote } from './BasesNote.d.ts';
 
 /**
  * Bases local.
@@ -8,7 +9,12 @@ import type { BasesFile } from './BasesFile.d.ts';
  */
 export interface BasesLocal {
     /**
-     * Implicit file.
+     * Implicit.
      */
     implicit: BasesFile;
+
+    /**
+     * Note.
+     */
+    note: BasesNote;
 }
