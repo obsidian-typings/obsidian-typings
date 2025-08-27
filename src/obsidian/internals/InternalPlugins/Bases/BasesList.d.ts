@@ -1,5 +1,4 @@
 import type { BasesControl } from './BasesControl.d.ts';
-import type { BasesLink } from './BasesLink.d.ts';
 
 /**
  * Bases list.
