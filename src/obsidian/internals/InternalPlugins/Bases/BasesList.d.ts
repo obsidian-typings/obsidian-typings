@@ -10,7 +10,7 @@ export interface BasesList extends BasesControl {
     /**
      * The controls.
      */
-    data: BasesControl[];
+    data: Record<string, BasesControl>;
 
     /**
      * Gets a value by key.
