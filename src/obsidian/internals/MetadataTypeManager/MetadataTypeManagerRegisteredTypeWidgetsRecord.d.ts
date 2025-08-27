@@ -18,8 +18,7 @@ import type { TextPropertyWidgetComponent } from './TextPropertyWidgetComponent.
  * @public
  * @unofficial
  */
-export interface MetadataTypeManagerRegisteredTypeWidgetsRecord
-    extends Record<PropertyWidgetType, PropertyWidget> {
+export interface MetadataTypeManagerRegisteredTypeWidgetsRecord extends Record<PropertyWidgetType, PropertyWidget> {
     /** Property widget for aliases. */
     aliases: PropertyWidget<AliasesPropertyWidgetComponent>;
 

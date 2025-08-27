@@ -7,7 +7,6 @@ import type {
  * Info file view.
  *
  * @remark This is probably not the right term.
- *
  * @public
  * @unofficial
  */

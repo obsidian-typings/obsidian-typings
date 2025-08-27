@@ -109,7 +109,6 @@ declare module 'obsidian' {
          * @param value - The value of the suggestion.
          * @param evt - The event that occurred.
          * @returns The result of the callback.
-         *
          * @unofficial
          */
         selectCb?(value: T, evt: MouseEvent | KeyboardEvent): unknown;
