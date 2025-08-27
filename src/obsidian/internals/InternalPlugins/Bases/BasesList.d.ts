@@ -1,3 +1,4 @@
+import type { BasesControl } from './BasesControl.d.ts';
 import type { BasesLink } from './BasesLink.d.ts';
 
 /**
@@ -6,9 +7,17 @@ import type { BasesLink } from './BasesLink.d.ts';
  * @public
  * @unofficial
  */
-export interface BasesList {
+export interface BasesList extends BasesControl {
     /**
-     * The links.
+     * The controls.
      */
-    data: BasesLink[];
+    data: BasesControl[];
+
+    /**
+     * Gets a value by key.
+     *
+     * @param key - The key.
+     * @returns The value.
+     */
+    get(key: string): BasesControl;
 }

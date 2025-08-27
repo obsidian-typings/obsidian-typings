@@ -1,3 +1,4 @@
+import type { BasesControl } from './BasesControl.d.ts';
 import type { BasesList } from './BasesList.d.ts';
 
 /**
@@ -6,7 +7,7 @@ import type { BasesList } from './BasesList.d.ts';
  * @public
  * @unofficial
  */
-export interface BasesFile {
+export interface BasesFile extends BasesControl {
     /**
      * Gets the links.
      *

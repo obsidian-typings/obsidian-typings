@@ -6,6 +6,7 @@ import type {
 import type { BasesController } from './BasesController.d.ts';
 import type { BasesPluginInstance } from './BasesPluginInstance.d.ts';
 import type { BasesQuery } from './BasesQuery.d.ts';
+import type { ViewType } from '../../../implementations/Constants/ViewType.ts';
 
 /**
  * View for the `Bases` plugin.
@@ -33,6 +34,11 @@ export interface BasesView extends TextFileView {
      * The query for the view.
      */
     query: BasesQuery;
+
+    /**
+     * Get view type.
+     */
+    getViewType(): typeof ViewType.Bases;
 
     /**
      * Called when the layout of the view changes.
