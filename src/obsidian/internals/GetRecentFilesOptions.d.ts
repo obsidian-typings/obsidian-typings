@@ -1,21 +1,36 @@
 /**
- * @todo Documentation incomplete.
+ * Options for getting recent files.
  * @public
  * @unofficial
  */
 export interface GetRecentFilesOptions {
-    /** @todo Documentation incomplete. */
+    /**
+     * The maximum number of files to return.
+     */
     maxCount: number;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Whether to show canvas files.
+     */
     showCanvas: boolean;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Whether to show image files.
+     */
     showImages: boolean;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Whether to show markdown files.
+     */
     showMarkdown: boolean;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Whether to show non-attachments (canvas, base).
+     */
+    showNonAttachments: boolean;
+
+    /**
+     * Whether to show non-image attachments.
+     */
     showNonImageAttachments: boolean;
 }
