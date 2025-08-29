@@ -13,7 +13,7 @@ export interface BookmarkItem {
     /**
      * The items of the bookmark item.
      */
-    items: BookmarkItem[];
+    items?: BookmarkItem[];
 
     /**
      * The path of the bookmark item.
