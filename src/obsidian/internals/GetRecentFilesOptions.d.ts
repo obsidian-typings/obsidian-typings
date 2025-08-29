@@ -7,30 +7,30 @@ export interface GetRecentFilesOptions {
     /**
      * The maximum number of files to return.
      */
-    maxCount: number;
+    maxCount?: number;
 
     /**
      * Whether to show canvas files.
      */
-    showCanvas: boolean;
+    showCanvas?: boolean;
 
     /**
      * Whether to show image files.
      */
-    showImages: boolean;
+    showImages?: boolean;
 
     /**
      * Whether to show markdown files.
      */
-    showMarkdown: boolean;
+    showMarkdown?: boolean;
 
     /**
      * Whether to show non-attachments (canvas, base).
      */
-    showNonAttachments: boolean;
+    showNonAttachments?: boolean;
 
     /**
      * Whether to show non-image attachments.
      */
-    showNonImageAttachments: boolean;
+    showNonImageAttachments?: boolean;
 }
