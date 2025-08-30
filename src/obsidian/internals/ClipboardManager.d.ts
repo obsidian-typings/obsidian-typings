@@ -3,7 +3,7 @@ import type {
     MarkdownView,
     TAbstractFile
 } from 'obsidian';
-import type { ImportedAttachments } from './ImportedAttachments.d.ts';
+import type { ImportedAttachments } from './ImportedAttachment.d.ts';
 
 /**
  * @todo Documentation incomplete.

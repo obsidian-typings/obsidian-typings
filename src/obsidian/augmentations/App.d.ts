@@ -6,7 +6,7 @@ import type { DragManager } from '../internals/DragManager/DragManager.d.ts';
 import type { EmbedRegistry } from '../internals/EmbedRegistry/EmbedRegistry.d.ts';
 import type { FoldManager } from '../internals/FoldManager.d.ts';
 import type { HotkeyManager } from '../internals/HotkeyManager/HotkeyManager.d.ts';
-import type { ImportedAttachments } from '../internals/ImportedAttachments.d.ts';
+import type { ImportedAttachment } from '../internals/ImportedAttachment.d.ts';
 import type { InternalPlugins } from '../internals/InternalPlugins/InternalPlugins.d.ts';
 import type { MetadataTypeManager } from '../internals/MetadataTypeManager/MetadataTypeManager.d.ts';
 import type { MobileNavbar } from '../internals/MobileNavbar.d.ts';
@@ -365,9 +365,12 @@ declare module 'obsidian' {
         /**
          * Import attachments into specified folder.
          *
+         * @param attachmentsToImport - The attachments to import.
+         * @param folder - The folder to import the attachments to.
+         *
          * @unofficial
          */
-        importAttachments(imports: ImportedAttachments[], folder: TFolder | null): Promise<void>;
+        importAttachments(attachmentsToImport: ImportedAttachment[], folder: TFolder | null): Promise<void>;
 
         /**
          * Initialize the entire application using the provided FS adapter
