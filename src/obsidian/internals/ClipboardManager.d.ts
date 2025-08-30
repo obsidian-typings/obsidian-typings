@@ -3,7 +3,7 @@ import type {
     MarkdownView,
     TAbstractFile
 } from 'obsidian';
-import type { ImportedAttachments } from './ImportedAttachment.d.ts';
+import type { ImportedAttachment } from './ImportedAttachment.d.ts';
 
 /**
  * @todo Documentation incomplete.
@@ -61,7 +61,7 @@ export interface ClipboardManager {
     /**
      * Insert files from drop-event into the editor.
      */
-    insertFiles(files: ImportedAttachments[]): Promise<void>;
+    insertFiles(importedAttachments: ImportedAttachment[]): Promise<void>;
 
     /**
      * Save an attachment of specified name and extension to the vault.

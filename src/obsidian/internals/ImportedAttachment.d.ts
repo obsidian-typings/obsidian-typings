@@ -11,8 +11,8 @@ export interface ImportedAttachment {
     /** An attachment file extension. */
     extension: string;
 
-    /** An attachment file name with extension. */
-    filename: string;
+    /** An attachment file path. */
+    filepath: string;
 
     /** An attachment file name. */
     name: string;
