@@ -75,10 +75,11 @@ export interface Multiselect {
     /**
      * Find a duplicate in the multiselect.
      *
+     * @param value - the value that will be checked for being a duplicate
      * @param values - the values to find a duplicate in.
-     * @returns `true` if a duplicate was found, `false` otherwise.
+     * @returns the index of value if duplicate, otherwise -1
      */
-    findDuplicate?(this: Multiselect, values: string[]): boolean;
+    findDuplicate?(value: string, values: string[]): number;
 
     /**
      * Focus an element of the multiselect.
@@ -111,7 +112,7 @@ export interface Multiselect {
      * @param findDuplicate - the function to find a duplicate.
      * @returns the multiselect.
      */
-    preventDuplicates(findDuplicate: (this: Multiselect, values: string[]) => number): this;
+    preventDuplicates(findDuplicate: (value: string, values: string[]) => number): this;
 
     /**
      * Remove an element of the multiselect.
