@@ -75,9 +75,9 @@ export interface Multiselect {
     /**
      * Find a duplicate in the multiselect.
      *
-     * @param value - the value that will be checked for being a duplicate
+     * @param value - the value that will be checked for being a duplicate.
      * @param values - the values to find a duplicate in.
-     * @returns the index of value if duplicate, otherwise -1
+     * @returns the index of value if duplicate, otherwise `-1`.
      */
     findDuplicate?(value: string, values: string[]): number;
 
