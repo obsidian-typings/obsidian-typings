@@ -6,6 +6,22 @@ declare module 'obsidian' {
      */
     interface Command {
         /**
+         * Whether the editor command can be executed when the note is in preview mode.
+         *
+         * @remarks `Editor command` is the command with defined {@link editorCallback}/{@link editorCheckCallback}.
+         * @unofficial
+         */
+        allowPreview?: boolean;
+
+        /**
+         * Whether the editor command can be executed when the properties panel is shown.
+         *
+         * @remarks `Editor command` is the command with defined {@link editorCallback}/{@link editorCheckCallback}.
+         * @unofficial
+         */
+        allowProperties?: boolean;
+
+        /**
          * Simple callback, triggered globally.
          *
          * @example
@@ -174,5 +190,13 @@ declare module 'obsidian' {
          * @official
          */
         repeatable?: boolean;
+
+        /**
+         * Whether the non-editor command button can be shown on the mobile toolbar.
+         *
+         * @remarks `Non-editor command` is the command without {@link editorCallback}/{@link editorCheckCallback}.
+         * @unofficial
+         */
+        showOnMobileToolbar?: boolean;
     }
 }
