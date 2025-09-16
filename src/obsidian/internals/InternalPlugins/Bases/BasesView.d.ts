@@ -3,10 +3,10 @@ import type {
     TextFileView,
     TFile
 } from 'obsidian';
+import type { ViewType } from '../../../implementations/Constants/ViewType.ts';
 import type { BasesController } from './BasesController.d.ts';
 import type { BasesPluginInstance } from './BasesPluginInstance.d.ts';
 import type { BasesQuery } from './BasesQuery.d.ts';
-import type { ViewType } from '../../../implementations/Constants/ViewType.ts';
 
 /**
  * View for the `Bases` plugin.
