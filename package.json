@@ -1,6 +1,6 @@
 {
   "name": "obsidian-typings",
-  "version": "4.52.0",
+  "version": "4.53.0",
   "description": "Extended type definitions for the Obsidian API (https://obsidian.md)",
   "repository": {
     "type": "git",
