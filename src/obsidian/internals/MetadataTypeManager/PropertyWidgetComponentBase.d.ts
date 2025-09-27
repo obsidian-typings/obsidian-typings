@@ -6,7 +6,7 @@ import type { FocusMode } from '../FocusMode.d.ts';
  * @public
  * @unofficial
  */
-export interface PropertyWidgetComponentBase<Value = unknown> {
+export interface PropertyWidgetComponentBase {
     /** The container element for the property widget. */
     containerEl: HTMLElement;
 
@@ -32,5 +32,5 @@ export interface PropertyWidgetComponentBase<Value = unknown> {
      *
      * @param value - The value to set.
      */
-    setValue(value: Value | null): void;
+    setValue(value: unknown): void;
 }

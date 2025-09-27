@@ -7,7 +7,7 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @public
  * @unofficial
  */
-export interface TextPropertyWidgetComponent extends PropertyWidgetComponentBase<string> {
+export interface TextPropertyWidgetComponent extends PropertyWidgetComponentBase {
     /** The render context for the property widget. */
     ctx: PropertyRenderContext;
 

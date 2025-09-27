@@ -367,7 +367,6 @@ declare module 'obsidian' {
          * @param x - The `x` coordinate.
          * @param y - The `y` coordinate.
          * @returns The closest character position to the specified coordinates.
-         *
          * @unofficial
          */
         posAtCoords(x: number, y: number): EditorPosition;
@@ -377,7 +376,6 @@ declare module 'obsidian' {
          *
          * @param evt - The mouse event.
          * @returns The character position at the mouse event.
-         *
          * @unofficial
          */
         posAtMouse(evt: MouseEvent): EditorPosition;

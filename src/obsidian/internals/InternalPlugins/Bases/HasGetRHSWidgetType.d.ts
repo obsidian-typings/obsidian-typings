@@ -1,9 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * Has get RHS widget type.
+ *
  * @public
  * @unofficial
  */
 export interface HasGetRHSWidgetType {
-    /** @todo Documentation incomplete. */
+    /**
+     * Gets the RHS widget type.
+     */
     getRHSWidgetType(type: string): string;
 }

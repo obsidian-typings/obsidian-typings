@@ -6,7 +6,7 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @public
  * @unofficial
  */
-export interface NumberPropertyWidgetComponent extends PropertyWidgetComponentBase<number> {
+export interface NumberPropertyWidgetComponent extends PropertyWidgetComponentBase {
     /** The input element for the property widget. */
     inputEl: HTMLInputElement;
 

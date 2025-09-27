@@ -10,6 +10,7 @@ export const ViewType = {
     AllProperties: 'all-properties',
     Audio: 'audio',
     Backlink: InternalPluginName.Backlink,
+    Bases: InternalPluginName.Bases,
     Bookmarks: InternalPluginName.Bookmarks,
     Canvas: InternalPluginName.Canvas,
     Empty: 'empty',

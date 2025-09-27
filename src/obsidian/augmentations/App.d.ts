@@ -1,10 +1,3 @@
-import type {
-    FileManager,
-    Vault,
-    Workspace
-} from 'obsidian';
-import type { Scope } from 'obsidian';
-import type { Keymap } from 'obsidian';
 import type { AppMenuBarManager } from '../internals/AppMenuBarManager.d.ts';
 import type { AppSetting } from '../internals/AppSetting.d.ts';
 import type { Commands } from '../internals/Commands/Commands.d.ts';
@@ -13,15 +6,15 @@ import type { DragManager } from '../internals/DragManager/DragManager.d.ts';
 import type { EmbedRegistry } from '../internals/EmbedRegistry/EmbedRegistry.d.ts';
 import type { FoldManager } from '../internals/FoldManager.d.ts';
 import type { HotkeyManager } from '../internals/HotkeyManager/HotkeyManager.d.ts';
-import type { ImportedAttachments } from '../internals/ImportedAttachments.d.ts';
+import type { ImportedAttachment } from '../internals/ImportedAttachment.d.ts';
 import type { InternalPlugins } from '../internals/InternalPlugins/InternalPlugins.d.ts';
-import type { LoadProgress } from '../internals/LoadProgress.d.ts';
 import type { MetadataTypeManager } from '../internals/MetadataTypeManager/MetadataTypeManager.d.ts';
 import type { MobileNavbar } from '../internals/MobileNavbar.d.ts';
 import type { MobileTabSwitcher } from '../internals/MobileTabSwitcher.d.ts';
 import type { MobileToolbar } from '../internals/MobileToolbar.d.ts';
 import type { ObsidianDOM } from '../internals/ObsidianDOM.d.ts';
 import type { Plugins } from '../internals/Plugins/Plugins.d.ts';
+import type { RenderContext } from '../internals/RenderContext.d.ts';
 import type { ShareReceiver } from '../internals/ShareReceiver.d.ts';
 import type { StatusBar } from '../internals/StatusBar.d.ts';
 import type { ViewRegistry } from '../internals/ViewRegistry/ViewRegistry.d.ts';
@@ -192,6 +185,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         plugins: Plugins;
+
+        /**
+         * The render context.
+         *
+         * @unofficial
+         */
+        renderContext: RenderContext;
 
         /**
          * The scope object.
@@ -365,9 +365,12 @@ declare module 'obsidian' {
         /**
          * Import attachments into specified folder.
          *
+         * @param attachmentsToImport - The attachments to import.
+         * @param folder - The folder to import the attachments to.
+         *
          * @unofficial
          */
-        importAttachments(imports: ImportedAttachments[], folder: TFolder | null): Promise<void>;
+        importAttachments(attachmentsToImport: ImportedAttachment[], folder: TFolder | null): Promise<void>;
 
         /**
          * Initialize the entire application using the provided FS adapter

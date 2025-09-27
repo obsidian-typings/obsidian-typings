@@ -4,7 +4,7 @@ import type { HasGetDisplayName } from '../HasGetDisplayName.d.ts';
 import type { HasGetRHSWidgetType } from '../HasGetRHSWidgetType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Function `DateNotEquals`.
  * @public
  * @unofficial
  */

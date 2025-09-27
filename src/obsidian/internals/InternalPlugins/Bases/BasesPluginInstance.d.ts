@@ -15,53 +15,84 @@ import type { BasesPlugin } from './BasesPlugin.d.ts';
 import type { ViewFactory } from './ViewFactory.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Bases plugin instance.
+ *
  * @public
  * @unofficial
  */
 export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin> {
-    /** @todo Documentation incomplete. */
+    /**
+     * An Obsidian app instance.
+     */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Whether the default on.
+     */
     defaultOn: boolean;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The functions.
+     */
     functions: BasesFunctions;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The handlers.
+     */
     handlers: BasesHandlers;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Creates and embeds a base.
+     */
     createAndEmbedBase(editor: Editor): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Creates a new bases file.
+     */
     createNewBasesFile(location?: TFolder, filename?: string, contents?: string): Promise<TFile>;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Deregisters a function.
+     */
     deregisterFunction(name: string): void;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Deregisters a view.
+     */
     deregisterView(type: string): void;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Gets a function.
+     */
     getFunction(name: string): BasesFunction | null;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Gets the operator functions.
+     */
     getOperatorFunctions(): BasesFunction[];
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Gets a view factory.
+     */
     getViewFactory(type: string): ViewFactory | null;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Gets the view types.
+     */
     getViewTypes(): string[];
 
-    /** @todo Documentation incomplete. */
+    /**
+     * On file menu.
+     */
     onFileMenu(menu: Menu, file: TAbstractFile, source: string, leaf?: WorkspaceLeaf): void;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Registers a function.
+     */
     registerFunction(fn: BasesFunction): void;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Registers a view.
+     */
     registerView(type: string, viewFactory: ViewFactory): void;
 }

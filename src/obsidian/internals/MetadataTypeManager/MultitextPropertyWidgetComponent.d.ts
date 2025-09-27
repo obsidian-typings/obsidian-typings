@@ -8,7 +8,7 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @public
  * @unofficial
  */
-export interface MultitextPropertyWidgetComponent extends PropertyWidgetComponentBase<string[] | string> {
+export interface MultitextPropertyWidgetComponent extends PropertyWidgetComponentBase {
     /** The hover popover for the property widget. */
     hoverPopover: HoverPopover | null;
 

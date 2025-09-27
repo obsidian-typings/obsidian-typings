@@ -2,29 +2,44 @@ import type { App } from 'obsidian';
 import type { BasesFunctionArg } from './BasesFunctionArg.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Bases function.
+ *
  * @public
  * @unofficial
  */
 export interface BasesFunction {
-    /** @todo Documentation incomplete. */
+    /**
+     * An Obsidian app instance.
+     */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The arguments.
+     */
     args: BasesFunctionArg[];
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Whether the function is an operator.
+     */
     isOperator: boolean;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The name of the function.
+     */
     name: string;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The return type of the function.
+     */
     returnType: string;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Applies the function.
+     */
     apply(...args: unknown[]): unknown;
 
-    /** @todo Documentation incomplete */
+    /**
+     * Serializes the function.
+     */
     serialize(...args: unknown[]): string;
 }

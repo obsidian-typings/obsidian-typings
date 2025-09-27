@@ -56,7 +56,7 @@ export interface SuggestModalChooser<T, TModal> {
     setSelectedItem(index: number, evt: MouseEvent | KeyboardEvent): void;
 
     /** @todo Documentation incomplete. */
-    setSuggestions(values: T[]): void;
+    setSuggestions(values: T[] | null): void;
 
     /** @todo Documentation incomplete. */
     useSelectedItem(evt: MouseEvent | KeyboardEvent): void;

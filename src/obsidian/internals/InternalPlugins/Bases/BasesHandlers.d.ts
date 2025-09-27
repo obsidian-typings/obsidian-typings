@@ -2,11 +2,14 @@ import type { TableView } from './TableView.d.ts';
 import type { ViewFactory } from './ViewFactory.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Bases handlers.
+ *
  * @public
  * @unofficial
  */
 export interface BasesHandlers extends Record<string, ViewFactory> {
-    /** @todo Documentation incomplete. */
+    /**
+     * The table view factory.
+     */
     table: ViewFactory<TableView>;
 }
