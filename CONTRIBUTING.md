@@ -5,6 +5,16 @@
 Feel free to start typing any part of the Obsidian API that is not yet typed, or fixing/adding additional descriptions to existing typings.
 If you are unsure about anything, don't hesitate to open an issue.
 
+> [!WARNING]
+>
+> Please base your PR on the [branch](./README.md#git-branching) matching the Obsidian versions you confirmed your changes are valid.
+
+## Conventional Commits
+
+The project is using [Conventional Commits](https://www.conventionalcommits.org/). All commit messages are validated to follow the conventions.
+
+To get interactive prompt to simplify creating such commits, use `npm run commit` command.
+
 ### TSDoc
 
 Please use [TSDoc](https://tsdoc.org/) to document the typings. This will allow the documentation to be automatically generated
