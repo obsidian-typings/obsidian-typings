@@ -31,7 +31,17 @@
   "homepage": "https://github.com/Fevol/obsidian-typings#readme",
   "scripts": {
     "checkout": "bun ./workflow-scripts/checkout.ts",
+    "commit": "cz",
     "create-new-release-branch": "bun ./workflow-scripts/create-new-release-branch.ts",
-    "install-workflow-scripts": "npm install -C ./workflow-scripts"
+    "install-workflow-scripts": "npm install -C ./workflow-scripts",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.0.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@commitlint/types": "^20.0.0",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^9.1.7"
   }
 }
