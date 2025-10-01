@@ -13,6 +13,7 @@ declare module 'obsidian' {
      *
      * #baz
      * ```
+     * @since 0.9.7
      */
     interface TagCache extends CacheItem {
         /**

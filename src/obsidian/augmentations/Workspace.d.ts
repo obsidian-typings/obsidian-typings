@@ -22,6 +22,7 @@ import type { WorkspaceHoverLinkSourcesRecord } from '../internals/Workspace/Wor
 declare module 'obsidian' {
     /**
      * A workspace.
+     * @since 0.9.7
      */
     interface Workspace extends Events {
         /**
@@ -43,6 +44,7 @@ declare module 'obsidian' {
          * - If you need information about the current view, use {@link Workspace.getActiveViewOfType}.
          * - If you need to open a new file or navigate a view, use {@link Workspace.getLeaf}.
          * @official
+         * @since 0.9.7
          */
         activeLeaf: WorkspaceLeaf | null;
 
@@ -70,6 +72,7 @@ declare module 'obsidian' {
          * The container element of the workspace.
          *
          * @official
+         * @since 0.9.7
          */
         containerEl: HTMLElement;
 
@@ -122,6 +125,7 @@ declare module 'obsidian' {
          * To react to the layout becoming ready, use {@link Workspace.onLayoutReady}
          *
          * @official
+         * @since 0.9.7
          */
         layoutReady: boolean;
 
@@ -129,6 +133,7 @@ declare module 'obsidian' {
          * The left ribbon of the workspace.
          *
          * @official
+         * @since 0.9.7
          */
         leftRibbon: WorkspaceRibbon;
 
@@ -142,6 +147,7 @@ declare module 'obsidian' {
          * The left split of the workspace.
          *
          * @official
+         * @since 0.9.7
          */
         leftSplit: WorkspaceSidedock | WorkspaceMobileDrawer;
 
@@ -176,6 +182,7 @@ declare module 'obsidian' {
          * Save the state of the current workspace layout.
          *
          * @official
+         * @since 0.16.0
          */
         requestSaveLayout: Debouncer<[], Promise<void>>;
 
@@ -197,6 +204,7 @@ declare module 'obsidian' {
          * The right split of the workspace.
          *
          * @official
+         * @since 0.9.7
          */
         rightSplit: WorkspaceSidedock | WorkspaceMobileDrawer;
 
@@ -204,6 +212,7 @@ declare module 'obsidian' {
          * The root split of the workspace.
          *
          * @official
+         * @since 0.9.7
          */
         rootSplit: WorkspaceRoot;
 
@@ -241,6 +250,7 @@ declare module 'obsidian' {
          * @param workspace - The workspace to change the layout to.
          * @returns A promise that resolves when the layout is changed.
          * @official
+         * @since 0.9.7
          */
         changeLayout(workspace: any): Promise<void>;
 
@@ -259,6 +269,7 @@ declare module 'obsidian' {
          * @param before - Whether to create the leaf before the current leaf.
          * @returns The leaf that was created.
          * @official
+         * @since 0.9.7
          */
         createLeafBySplit(leaf: WorkspaceLeaf, direction?: SplitDirection, before?: boolean): WorkspaceLeaf;
 
@@ -269,6 +280,7 @@ declare module 'obsidian' {
          * @param index - The index to create the leaf in.
          * @returns The leaf that was created.
          * @official
+         * @since 0.9.11
          */
         createLeafInParent(parent: WorkspaceSplit, index: number): WorkspaceLeaf;
 
@@ -294,6 +306,7 @@ declare module 'obsidian' {
          *
          * @param viewType - The type of the view to remove.
          * @official
+         * @since 0.9.7
          */
         detachLeavesOfType(viewType: string): void;
 
@@ -305,6 +318,8 @@ declare module 'obsidian' {
          * @returns The promise that resolves to the leaf that was created.
          * @deprecated - Use the new form of this method instead
          * @official
+         * @since 0.13.8
+         * @since 1.1.0
          */
         duplicateLeaf(leaf: WorkspaceLeaf, direction?: SplitDirection): Promise<WorkspaceLeaf>;
 
@@ -331,6 +346,7 @@ declare module 'obsidian' {
          * @param options - The options to pass to the leaf.
          * @returns The promise that is resolved to the leaf that was created.
          * @official - Changed signature.
+         * @since 1.7.2
          */
         ensureSideLeaf(type: string, side: Side, options?: EnsureSideLeafOptions): Promise<WorkspaceLeaf>;
 
@@ -362,6 +378,7 @@ declare module 'obsidian' {
          * @param type - The type of the view to get.
          * @returns The active view of the given type or `null` if no view of the given type is active.
          * @official
+         * @since 0.9.16
          */
         getActiveViewOfType<T extends View>(type: Constructor<T>): T | null;
 
@@ -409,6 +426,7 @@ declare module 'obsidian' {
          * @param group - The id of the group to get the leaves from.
          * @returns The leaves that belong to the group.
          * @official
+         * @since 0.9.7
          */
         getGroupLeaves(group: string): WorkspaceLeaf[];
 
@@ -417,6 +435,7 @@ declare module 'obsidian' {
          *
          * @returns The filenames of the 10 most recently opened files.
          * @official
+         * @since 0.9.7
          */
         getLastOpenFiles(): string[];
 
@@ -425,6 +444,7 @@ declare module 'obsidian' {
          *
          * @returns The layout of the workspace.
          * @official
+         * @since 0.9.7
          */
         getLayout(): Record<string, unknown>;
 
@@ -434,6 +454,7 @@ declare module 'obsidian' {
          * If direction is `'horizontal'`, the leaf will appear below the current leaf.
          *
          * @official
+         * @since 0.16.0
          */
         getLeaf(newLeaf?: 'split', direction?: SplitDirection): WorkspaceLeaf;
 
@@ -460,6 +481,7 @@ declare module 'obsidian' {
          * @param id id of the leaf to retrieve.
          * @returns The leaf that was retrieved.
          * @official
+         * @since 1.5.1
          */
         getLeafById(id: string): WorkspaceLeaf | null;
 
@@ -469,6 +491,7 @@ declare module 'obsidian' {
          * @param viewType - The type of the view to get.
          * @returns The leaves of the given type.
          * @official
+         * @since 0.9.7
          */
         getLeavesOfType(viewType: string): WorkspaceLeaf[];
 
@@ -487,6 +510,7 @@ declare module 'obsidian' {
          * @param split - Should the existing split be split up?.
          * @returns The leaf that was created or `null` if the left sidebar is not open.
          * @official
+         * @since 0.9.7
          */
         getLeftLeaf(split: boolean): WorkspaceLeaf | null;
 
@@ -496,6 +520,7 @@ declare module 'obsidian' {
          * @param root - The root to get the most recently active leaf from. If a root is not provided, the `rootSplit` and leaves within pop-outs will be searched.
          * @returns The most recently active leaf.
          * @official
+         * @since 0.15.4
          */
         getMostRecentLeaf(root?: WorkspaceParent): WorkspaceLeaf | null;
 
@@ -512,6 +537,7 @@ declare module 'obsidian' {
          * @param split - Should the existing split be split up?.
          * @returns The leaf that was created or `null` if the right sidebar is not open.
          * @official
+         * @since 0.9.7
          */
         getRightLeaf(split: boolean): WorkspaceLeaf | null;
 
@@ -542,6 +568,7 @@ declare module 'obsidian' {
         /**
          * @todo Documentation incomplete.
          * @unofficial
+         * @since 0.12.10
          */
         handleLinkContextMenu(menu: Menu, linkText: string, sourcePath: string): void;
 
@@ -557,6 +584,7 @@ declare module 'obsidian' {
          *
          * @param callback - The callback to call for each leaf.
          * @official
+         * @since 0.9.7
          */
         iterateAllLeaves(callback: (leaf: WorkspaceLeaf) => any): void;
 
@@ -572,6 +600,7 @@ declare module 'obsidian' {
          *
          * @param callback - The callback to call for each leaf.
          * @official
+         * @since 0.9.7
          */
         iterateRootLeaves(callback: (leaf: WorkspaceLeaf) => any): void;
 
@@ -598,6 +627,7 @@ declare module 'obsidian' {
          * @returns The popout window that was created.
          * @throws Error if the app does not support popout windows (i.e. on mobile or if Electron version is too old).
          * @official
+         * @since 0.15.4
          */
         moveLeafToPopout(leaf: WorkspaceLeaf, data?: WorkspaceWindowInitData): WorkspaceWindow;
 
@@ -615,6 +645,16 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
+         * @since 0.10.9
+         * @since 0.9.20
+         * @since 0.15.3
+         * @since 0.9.12
+         * @since 1.4.10
+         * @since 1.5.1
+         * @since 1.1.0
+         * @since 1.1.1
+         * @since 0.10.2
          */
         on(name: 'active-leaf-change', callback: (leaf: WorkspaceLeaf | null) => any, ctx?: any): EventRef;
 
@@ -1107,6 +1147,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.11.0
          */
         onLayoutReady(callback: () => any): void;
 
@@ -1146,6 +1187,7 @@ declare module 'obsidian' {
          * app.workspace.openLinkText('foo', 'bar.md', 'tab');
          * ```
          * @official
+         * @since 0.16.0
          */
         openLinkText(
             linktext: string,
@@ -1169,6 +1211,7 @@ declare module 'obsidian' {
          * @param data - The data to pass to the popout window.
          * @returns The leaf that was created.
          * @official
+         * @since 0.15.4
          */
         openPopoutLeaf(data?: WorkspaceWindowInitData): WorkspaceLeaf;
 
@@ -1243,6 +1286,7 @@ declare module 'obsidian' {
          * @param leaf - The leaf to bring to the foreground.
          * @returns A promise that resolves when the leaf is brought to the foreground.
          * @official
+         * @since 1.7.2
          */
         revealLeaf(leaf: WorkspaceLeaf): Promise<void>;
 
@@ -1263,6 +1307,7 @@ declare module 'obsidian' {
          * app.workspace.setActiveLeaf(app.workspace.getLeaf(false), { focus: true });
          * ```
          * @official
+         * @since 0.16.3
          */
         setActiveLeaf(leaf: WorkspaceLeaf, params?: {
             /** @official */
@@ -1298,6 +1343,7 @@ declare module 'obsidian' {
          * @returns The leaf that was created.
          * @deprecated - You should use {@link Workspace.getLeaf|getLeaf(true)} instead which does the same thing.
          * @official
+         * @since 0.9.7
          */
         splitActiveLeaf(direction?: SplitDirection): WorkspaceLeaf;
 
@@ -1361,6 +1407,7 @@ declare module 'obsidian' {
          * It is fairly expensive, so it should not be called frequently.
          *
          * @official
+         * @since 0.13.21
          */
         updateOptions(): void;
 

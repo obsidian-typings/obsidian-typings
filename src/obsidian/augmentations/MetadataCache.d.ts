@@ -255,6 +255,7 @@ declare module 'obsidian' {
          * const cache = app.metadataCache.getCache('foo/bar.md');
          * ```
          * @official
+         * @since 0.14.5
          */
         getCache(path: string): CachedMetadata | null;
 
@@ -276,6 +277,7 @@ declare module 'obsidian' {
          * const cache = app.metadataCache.getFileCache(file);
          * ```
          * @official
+         * @since 0.9.21
          */
         getFileCache(file: TFile): CachedMetadata | null;
 
@@ -297,6 +299,7 @@ declare module 'obsidian' {
          * console.log(app.metadataCache.getFirstLinkpathDest('foo/bar', 'baz/qux.md'); // `TFile` with path: 'baz/foo/bar.md' or 'some/other/path/foo/bar.md'
          * ```
          * @official
+         * @since 0.12.5
          */
         getFirstLinkpathDest(linkpath: string, sourcePath: string): TFile | null;
 

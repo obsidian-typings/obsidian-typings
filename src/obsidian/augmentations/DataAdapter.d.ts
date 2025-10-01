@@ -336,6 +336,7 @@ declare module 'obsidian' {
          * console.log(await app.vault.adapter.stat('foo/bar.md'));
          * ```
          * @official
+         * @since 0.12.2
          */
         stat(normalizedPath: string): Promise<Stat | null>;
 

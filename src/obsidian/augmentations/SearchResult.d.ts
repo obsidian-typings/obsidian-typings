@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * A search result.
+     * @since 0.9.21
      */
     interface SearchResult {
         /**

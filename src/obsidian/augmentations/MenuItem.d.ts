@@ -172,6 +172,7 @@ declare module 'obsidian' {
          * menuItem.setIsLabel(true);
          * ```
          * @official
+         * @since 0.15.0
          */
         setIsLabel(isLabel: boolean): this;
 
@@ -220,6 +221,7 @@ declare module 'obsidian' {
          *
          * @param warning - Whether the menu item should be styled as a warning.
          * @unofficial
+         * @since 0.15.0
          */
         setWarning(warning: boolean): this;
     }

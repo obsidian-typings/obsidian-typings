@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * The trigger info for the suggestion
+     * @since 0.12.17
      */
     interface EditorSuggestTriggerInfo {
         /**

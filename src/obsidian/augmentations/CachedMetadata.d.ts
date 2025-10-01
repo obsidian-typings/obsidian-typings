@@ -43,6 +43,7 @@ declare module 'obsidian' {
          * ```
          *
          * @official
+         * @since 1.8.7
          */
         footnoteRefs?: FootnoteRefCache[];
 
@@ -60,6 +61,7 @@ declare module 'obsidian' {
          * ```
          *
          * @official
+         * @since 1.6.6
          */
         footnotes?: FootnoteCache[];
 
@@ -89,6 +91,7 @@ declare module 'obsidian' {
          * ```
          *
          * @official
+         * @since 1.4.0
          */
         frontmatterLinks?: FrontmatterLinkCache[];
 
@@ -104,6 +107,7 @@ declare module 'obsidian' {
          * ```
          *
          * @official
+         * @since 1.4.0
          */
         frontmatterPosition?: Pos;
 
@@ -161,6 +165,7 @@ declare module 'obsidian' {
          * ```
          *
          * @official
+         * @since 1.8.7
          */
         referenceLinks?: ReferenceLinkCache[];
 

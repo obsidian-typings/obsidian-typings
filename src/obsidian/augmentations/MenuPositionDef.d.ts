@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * A definition for the position of the menu.
+     * @since 1.1.0
      */
     interface MenuPositionDef {
         /**

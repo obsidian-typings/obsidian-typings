@@ -9,6 +9,7 @@ declare module 'obsidian' {
          * The classes of the tooltip.
          *
          * @official
+         * @since 1.8.7
          */
         classes?: string[];
 
@@ -16,6 +17,7 @@ declare module 'obsidian' {
          * The delay of showing the tooltip in milliseconds.
          *
          * @official
+         * @since 1.4.11
          */
         delay?: number;
 
@@ -23,6 +25,7 @@ declare module 'obsidian' {
          * The gap of the tooltip in pixels.
          *
          * @official
+         * @since 1.8.7
          */
         gap?: number;
 

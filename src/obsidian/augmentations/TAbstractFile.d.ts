@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * This can be either a {@link TFile} or a {@link TFolder}.
+     * @since 0.9.7
      */
     interface TAbstractFile {
         /**
@@ -16,6 +17,7 @@ declare module 'obsidian' {
          * The name of the file.
          *
          * @official
+         * @since 0.9.7
          */
         name: string;
 
@@ -23,6 +25,7 @@ declare module 'obsidian' {
          * The parent folder of the file.
          *
          * @official
+         * @since 0.9.7
          */
         parent: TFolder | null;
 
@@ -30,6 +33,7 @@ declare module 'obsidian' {
          * The path of the file.
          *
          * @official
+         * @since 0.9.7
          */
         path: string;
 
@@ -37,6 +41,7 @@ declare module 'obsidian' {
          * The vault.
          *
          * @official
+         * @since 0.9.7
          */
         vault: Vault;
 

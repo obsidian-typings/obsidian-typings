@@ -8,6 +8,7 @@ declare module 'obsidian' {
      * ```ts
      * const instruction: Instruction = { command: '↑↓', purpose: 'Navigate' };
      * ```
+     * @since 0.9.20
      */
     interface Instruction {
         /**
@@ -18,6 +19,7 @@ declare module 'obsidian' {
          * console.log(instruction.command); // ↑↓
          * ```
          * @official
+         * @since 0.9.20
          */
         command: string;
 
@@ -29,6 +31,7 @@ declare module 'obsidian' {
          * console.log(instruction.purpose); // Navigate
          * ```
          * @official
+         * @since 0.9.20
          */
         purpose: string;
     }

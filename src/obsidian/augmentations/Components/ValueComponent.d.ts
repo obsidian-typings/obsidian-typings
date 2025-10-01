@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * A value component.
+     * @since 0.9.7
      */
     interface ValueComponent<T> extends BaseComponent {
         /**
@@ -11,6 +12,7 @@ declare module 'obsidian' {
          * @returns The value of the component.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getValue} instead.
+         * @since 0.9.7
          */
         getValue__?(): T;
 
@@ -29,6 +31,7 @@ declare module 'obsidian' {
          * }, 'foo');
          * ```
          * @official
+         * @since 0.9.7
          */
         registerOptionListener(listeners: Record<string, (value?: T) => T>, key: string): this;
 
@@ -43,6 +46,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link setValue} instead.
+         * @since 0.9.7
          */
         setValue__(value: T): this;
     }

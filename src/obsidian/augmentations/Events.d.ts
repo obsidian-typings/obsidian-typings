@@ -3,6 +3,7 @@ import type { EventsEntry } from '../internals/EventsEntry.d.ts';
 declare module 'obsidian' {
     /**
      * Event emitter implementation
+     * @since 0.9.7
      */
     interface Events {
         /**
@@ -21,6 +22,7 @@ declare module 'obsidian' {
          * events.off('my-event', myListener);
          * ```
          * @official
+         * @since 0.9.7
          */
         off(name: string, callback: (...data: unknown[]) => unknown): void;
 
@@ -33,6 +35,7 @@ declare module 'obsidian' {
          * events.offref(myRef);
          * ```
          * @official
+         * @since 0.9.7
          */
         offref(ref: EventRef): void;
 
@@ -50,6 +53,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         on(name: string, callback: (...data: unknown[]) => unknown, ctx?: any): EventRef;
 
@@ -63,6 +67,7 @@ declare module 'obsidian' {
          * events.trigger('my-event', 'arg1', 'arg2');
          * ```
          * @official
+         * @since 0.9.7
          */
         trigger(name: string, ...data: unknown[]): void;
 
@@ -76,6 +81,7 @@ declare module 'obsidian' {
          * events.tryTrigger(myRef, ['arg1', 'arg2']);
          * ```
          * @official
+         * @since 0.9.7
          */
         tryTrigger(evt: EventRef, args: unknown[]): void;
     }

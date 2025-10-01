@@ -5,12 +5,14 @@ declare module 'obsidian' {
      * Component for a text input or text area.
      *
      * @typeParam T - The type of the input element.
+     * @since 0.9.21
      */
     interface AbstractTextComponent<T extends HTMLInputElement | HTMLTextAreaElement> extends ValueComponent<string> {
         /**
          * The input element.
          *
          * @official
+         * @since 0.9.7
          */
         inputEl: T;
 
@@ -36,6 +38,7 @@ declare module 'obsidian' {
          *
          * @returns The value of the input element.
          * @official
+         * @since 0.9.7
          */
         getValue(): string;
 
@@ -71,6 +74,7 @@ declare module 'obsidian' {
          * textComponent.setDisabled(true);
          * ```
          * @official
+         * @since 1.2.3
          */
         setDisabled(disabled: boolean): this;
 
@@ -97,6 +101,7 @@ declare module 'obsidian' {
          * textComponent.setValue('foo');
          * ```
          * @official
+         * @since 0.9.7
          */
         setValue(value: string): this;
     }

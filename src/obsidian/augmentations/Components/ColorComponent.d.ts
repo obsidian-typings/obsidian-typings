@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * Color picker component. Values are by default 6-digit hash-prefixed hex strings like `#000000`.
+     * @since 1.0.0
      */
     interface ColorComponent extends ValueComponent<string> {
         /**
@@ -34,6 +35,7 @@ declare module 'obsidian' {
          *
          * @returns The current value of the color picker.
          * @official
+         * @since 1.0.0
          */
         getValue(): HexString;
 
@@ -42,6 +44,7 @@ declare module 'obsidian' {
          *
          * @returns The current value of the color picker as an HSL object.
          * @official
+         * @since 1.0.0
          */
         getValueHsl(): HSL;
 
@@ -56,6 +59,7 @@ declare module 'obsidian' {
          *
          * @returns The current value of the color picker as an RGB object.
          * @official
+         * @since 1.0.0
          */
         getValueRgb(): RGB;
 
@@ -71,6 +75,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 1.0.0
          */
         onChange(callback: (value: string) => any): this;
 
@@ -83,6 +88,7 @@ declare module 'obsidian' {
          * colorPicker.setDisabled(true);
          * ```
          * @official
+         * @since 1.2.3
          */
         setDisabled(disabled: boolean): this;
 
@@ -96,6 +102,7 @@ declare module 'obsidian' {
          * colorPicker.setValue('#000000');
          * ```
          * @official
+         * @since 1.0.0
          */
         setValue(value: HexString): this;
 
@@ -109,6 +116,7 @@ declare module 'obsidian' {
          * colorPicker.setValueHsl({ h: 0, s: 0, l: 0 });
          * ```
          * @official
+         * @since 1.0.0
          */
         setValueHsl(hsl: HSL): this;
 
@@ -128,6 +136,7 @@ declare module 'obsidian' {
          * colorPicker.setValueRgb({ r: 0, g: 0, b: 0 });
          * ```
          * @official
+         * @since 1.0.0
          */
         setValueRgb(rgb: RGB): this;
     }

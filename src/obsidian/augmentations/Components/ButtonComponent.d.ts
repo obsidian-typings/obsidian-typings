@@ -3,12 +3,14 @@ export {};
 declare module 'obsidian' {
     /**
      * A button component.
+     * @since 0.9.7
      */
     interface ButtonComponent extends BaseComponent {
         /**
          * The HTML element representation of the button.
          *
          * @official
+         * @since 0.9.7
          */
         buttonEl: HTMLButtonElement;
 
@@ -41,6 +43,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.12.16
          */
         onClick(callback: (evt: MouseEvent) => any): this;
 
@@ -50,6 +53,7 @@ declare module 'obsidian' {
          *
          * @returns The button component.
          * @official
+         * @since 0.9.20
          */
         removeCta(): this;
 
@@ -63,6 +67,7 @@ declare module 'obsidian' {
          * button.setButtonText('My button');
          * ```
          * @official
+         * @since 0.9.7
          */
         setButtonText(name: string): this;
 
@@ -76,6 +81,7 @@ declare module 'obsidian' {
          * button.setClass('my-class');
          * ```
          * @official
+         * @since 0.9.7
          */
         setClass(cls: string): this;
 
@@ -88,6 +94,7 @@ declare module 'obsidian' {
          * @returns The button component.
          * @example `Check for updates` button in the `General` options settings.
          * @official
+         * @since 0.9.7
          */
         setCta(): this;
 
@@ -101,6 +108,7 @@ declare module 'obsidian' {
          * button.setDisabled(true);
          * ```
          * @official
+         * @since 1.2.3
          */
         setDisabled(disabled: boolean): this;
 
@@ -114,6 +122,7 @@ declare module 'obsidian' {
          * button.setIcon('dice');
          * ```
          * @official
+         * @since 1.1.0
          */
         setIcon(icon: IconName): this;
 
@@ -124,6 +133,7 @@ declare module 'obsidian' {
          * @param options - The options for the tooltip.
          * @returns The button component.
          * @official
+         * @since 1.1.0
          */
         setTooltip(tooltip: string, options?: TooltipOptions): this;
 
@@ -135,6 +145,7 @@ declare module 'obsidian' {
          * @example `Clear` button in the `File recovery` core plugin setting
          * @returns The button component.
          * @official
+         * @since 0.11.0
          */
         setWarning(): this;
     }

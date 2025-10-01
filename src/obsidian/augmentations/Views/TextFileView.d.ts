@@ -6,12 +6,14 @@ declare module 'obsidian' {
      *
      * Note that by default, this view only saves when it's closing. To implement auto-save, your editor should
      * call `this.requestSave()` when the content is changed.
+     * @since 0.10.12
      */
     interface TextFileView extends EditableFileView {
         /**
          * In-memory data.
          *
          * @official
+         * @since 0.10.12
          */
         data: string;
 
@@ -40,6 +42,7 @@ declare module 'obsidian' {
          * Debounced save in 2 seconds from now.
          *
          * @official
+         * @since 0.10.12
          */
         requestSave: () => void;
 
@@ -81,12 +84,14 @@ declare module 'obsidian' {
          *
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getViewData} instead.
+         * @since 0.10.12
          */
         getViewData__?(): string;
 
         /**
          * @todo Documentation incomplete.
          * @unofficial
+         * @since 0.10.12
          */
         loadFileInternal(file: TFile, clear: boolean): Promise<unknown>;
 
@@ -96,6 +101,7 @@ declare module 'obsidian' {
          * @param file - The file to load.
          * @returns The promise that resolves when the file is loaded.
          * @official
+         * @since 0.10.12
          */
         onLoadFile(file: TFile): Promise<void>;
 
@@ -113,6 +119,7 @@ declare module 'obsidian' {
          * @param file - The file to unload.
          * @returns The promise that resolves when the file is unloaded.
          * @official
+         * @since 0.10.12
          */
         onUnloadFile(file: TFile): Promise<void>;
 
@@ -122,6 +129,7 @@ declare module 'obsidian' {
          * @param clear - Whether to clear the file.
          * @returns The promise that resolves when the file is saved.
          * @official
+         * @since 0.10.12
          */
         save(clear?: boolean): Promise<void>;
 
@@ -152,6 +160,7 @@ declare module 'obsidian' {
          * @param clear - Whether to clear the file.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link setViewData} instead.
+         * @since 0.10.12
          */
         setViewData__(data: string, clear: boolean): void;
     }

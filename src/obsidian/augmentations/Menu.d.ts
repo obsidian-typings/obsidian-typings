@@ -288,6 +288,7 @@ declare module 'obsidian' {
          * menu.setUseNativeMenu(true);
          * ```
          * @official
+         * @since 0.16.0
          */
         setUseNativeMenu(useNativeMenu: boolean): this;
 
@@ -301,6 +302,7 @@ declare module 'obsidian' {
          * menu.showAtMouseEvent(evt);
          * ```
          * @official
+         * @since 0.12.6
          */
         showAtMouseEvent(evt: MouseEvent): this;
 
@@ -315,6 +317,7 @@ declare module 'obsidian' {
          * menu.showAtPosition({ x: 100, y: 100 });
          * ```
          * @official
+         * @since 1.1.0
          */
         showAtPosition(position: MenuPositionDef, doc?: Document): this;
 
@@ -339,6 +342,7 @@ declare module 'obsidian' {
          *
          * @official
          * @deprecated - Added only for typing purposes. Use {@link forEvent} instead.
+         * @since 1.6.0
          */
         function forEvent__(evt: MouseEvent): Menu;
     }

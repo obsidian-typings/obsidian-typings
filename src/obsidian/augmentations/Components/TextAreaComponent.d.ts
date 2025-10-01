@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * A text area component.
+     * @since 0.9.7
      */
     interface TextAreaComponent extends AbstractTextComponent<HTMLTextAreaElement> {
         /**

@@ -4,6 +4,7 @@ export {};
 declare module 'obsidian' {
     /**
      * Workspace split.
+     * @since 0.9.7
      */
     interface WorkspaceSplit extends WorkspaceParent {
         /**

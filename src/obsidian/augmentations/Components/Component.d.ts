@@ -37,6 +37,7 @@ declare module 'obsidian' {
          * component.addChild(childComponent);
          * ```
          * @official
+         * @since 0.12.0
          */
         addChild<T extends Component>(component: T): T;
 
@@ -44,6 +45,7 @@ declare module 'obsidian' {
          * Load this component and its children.
          *
          * @official
+         * @since 0.9.7
          */
         load(): void;
 
@@ -60,8 +62,18 @@ declare module 'obsidian' {
          * ```
          * @virtual
          * @official
+         * @since 0.9.7
          */
         onload(): void;
+
+        /**
+         * Override this to unload your component
+         *
+         * @virtual
+         * @official
+         * @since 0.9.7
+         */
+        onunload(): void;
 
         /**
          * Registers a callback to be called when unloading.
@@ -74,6 +86,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         register(cb: () => any): void;
 
@@ -92,6 +105,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.14.8
          */
         registerDomEvent<K extends keyof DocumentEventMap>(
             el: Document,
@@ -155,6 +169,7 @@ declare module 'obsidian' {
          * component.registerEvent(eventRef);
          * ```
          * @official
+         * @since 0.9.7
          */
         registerEvent(eventRef: EventRef): void;
 
@@ -171,6 +186,7 @@ declare module 'obsidian' {
          * }, 1000));
          * ```
          * @official
+         * @since 0.13.8
          */
         registerInterval(id: number): number;
 
@@ -191,6 +207,7 @@ declare module 'obsidian' {
          * component.removeChild(childComponent);
          * ```
          * @official
+         * @since 0.12.0
          */
         removeChild<T extends Component>(component: T): T;
 
@@ -207,6 +224,7 @@ declare module 'obsidian' {
          * ```
          * @virtual
          * @official
+         * @since 0.9.7
          */
         unload(): void;
     }

@@ -3,12 +3,14 @@ export {};
 declare module 'obsidian' {
     /**
      * Dropdown component
+     * @since 0.9.7
      */
     interface DropdownComponent extends ValueComponent<string> {
         /**
          * The HTML element representation of the dropdown.
          *
          * @official
+         * @since 0.9.7
          */
         selectEl: HTMLSelectElement;
 
@@ -23,6 +25,7 @@ declare module 'obsidian' {
          * dropdown.addOption('foo', 'bar');
          * ```
          * @official
+         * @since 0.9.7
          */
         addOption(value: string, display: string): this;
 
@@ -36,6 +39,7 @@ declare module 'obsidian' {
          * dropdown.addOptions({ foo: 'bar', baz: 'qux' });
          * ```
          * @official
+         * @since 0.9.7
          */
         addOptions(options: Record<string, string>): this;
 
@@ -61,6 +65,7 @@ declare module 'obsidian' {
          *
          * @returns The selected value of the dropdown.
          * @official
+         * @since 0.9.7
          */
         getValue(): string;
 
@@ -74,6 +79,7 @@ declare module 'obsidian' {
          * dropdown.onChange((value) => console.log(value));
          * ```
          * @official
+         * @since 0.9.7
          */
         onChange(callback: (value: string) => any): this;
 
@@ -87,6 +93,7 @@ declare module 'obsidian' {
          * dropdown.setDisabled(true);
          * ```
          * @official
+         * @since 1.2.3
          */
         setDisabled(disabled: boolean): this;
 
@@ -100,6 +107,7 @@ declare module 'obsidian' {
          * dropdown.setValue('foo');
          * ```
          * @official
+         * @since 0.9.7
          */
         setValue(value: string): this;
     }

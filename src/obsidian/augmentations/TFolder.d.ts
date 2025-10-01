@@ -3,12 +3,14 @@ export {};
 declare module 'obsidian' {
     /**
      * A folder.
+     * @since 0.9.7
      */
     interface TFolder extends TAbstractFile {
         /**
          * The children of the folder.
          *
          * @official
+         * @since 0.9.7
          */
         children: TAbstractFile[];
 
@@ -44,6 +46,7 @@ declare module 'obsidian' {
          *
          * @returns Whether the folder is the root folder.
          * @official
+         * @since 0.9.7
          */
         isRoot(): boolean;
     }

@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * Manages keymap lifecycle for different {@link Scope}s.
+     * @since 0.13.9
      */
     interface Keymap {
         /**
@@ -14,6 +15,7 @@ declare module 'obsidian' {
          * ```ts
          * keymap.popScope(new Scope());
          * @official
+         * @since 0.13.9
          */
         popScope(scope: Scope): void;
 
@@ -26,6 +28,7 @@ declare module 'obsidian' {
          * keymap.pushScope(new Scope());
          * ```
          * @official
+         * @since 0.13.9
          */
         pushScope(scope: Scope): void;
     }
@@ -48,6 +51,7 @@ declare module 'obsidian' {
          *
          * @official
          * @deprecated - Added only for typing purposes. Use {@link isModEvent} instead.
+         * @since 0.16.0
          */
         function isModEvent__(evt?: UserEvent | null): PaneType | boolean;
 
@@ -67,6 +71,7 @@ declare module 'obsidian' {
          *
          * @official
          * @deprecated - Added only for typing purposes. Use {@link isModifier} instead.
+         * @since 0.12.17
          */
         function isModifier__(evt: MouseEvent | TouchEvent | KeyboardEvent, modifier: Modifier): boolean;
     }

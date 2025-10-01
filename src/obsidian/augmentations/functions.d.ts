@@ -109,6 +109,7 @@ declare module 'obsidian' {
      * ```
      *
      * @official
+     * @since 1.8.7
      */
     function displayTooltip(
         newTargetEl: HTMLElement,
@@ -191,6 +192,7 @@ declare module 'obsidian' {
      * ```
      *
      * @official
+     * @since 1.5.7
      */
     function getFrontMatterInfo(content: string): FrontMatterInfo;
 
@@ -221,6 +223,7 @@ declare module 'obsidian' {
      * See {@link https://github.com/obsidianmd/obsidian-translations?tab=readme-ov-file#existing-languages} for list of options.
      *
      * @official
+     * @since 1.8.7
      */
     function getLanguage(): string;
 
@@ -608,6 +611,7 @@ declare module 'obsidian' {
      * ```
      *
      * @official
+     * @since 0.12.11
      */
     function request(request: RequestUrlParam | string): Promise<string>;
 
@@ -711,6 +715,7 @@ declare module 'obsidian' {
      * ```
      *
      * @official
+     * @since 1.4.4
      */
     function setTooltip(el: HTMLElement, tooltip: string, options?: TooltipOptions): void;
 

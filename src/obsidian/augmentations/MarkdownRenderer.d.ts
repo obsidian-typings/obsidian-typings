@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * A renderer for markdown.
+     * @since 0.9.7
      */
     interface MarkdownRenderer extends MarkdownRenderChild, MarkdownPreviewEvents, HoverParent {
         /**
@@ -126,6 +127,7 @@ declare module 'obsidian' {
          * @deprecated - use {@link MarkdownRenderer.render}
          * @official
          * @deprecated - Added only for typing purposes. Use {@link renderMarkdown} instead.
+         * @since 0.10.6
          */
         function renderMarkdown__(
             markdown: string,

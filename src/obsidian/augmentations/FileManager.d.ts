@@ -10,6 +10,7 @@ export {};
 declare module 'obsidian' {
     /**
      * Manage the creation, deletion and renaming of files from the UI.
+     * @since 0.9.7
      */
     interface FileManager {
         /**
@@ -121,6 +122,7 @@ declare module 'obsidian' {
          * console.log(app.fileManager.generateMarkdownLink(file, 'baz/qux.md', '#heading', 'Display text')); // [[bar#heading|Display text]]
          * ```
          * @official
+         * @since 0.12.0
          */
         generateMarkdownLink(file: TFile, sourcePath: string, subpath?: string, alias?: string): string;
 
@@ -144,6 +146,7 @@ declare module 'obsidian' {
          * console.log(await app.fileManager.getAvailablePathForAttachment('image.png'));
          * ```
          * @official
+         * @since 1.5.7
          */
         getAvailablePathForAttachment(filename: string, sourcePath?: string): Promise<string>;
 
@@ -169,6 +172,7 @@ declare module 'obsidian' {
          * console.log(app.fileManager.getNewFileParent('foo/bar.md', 'baz/qux.md'));
          * ```
          * @official
+         * @since 1.1.13
          */
         getNewFileParent(sourcePath: string, newFilePath?: string): TFolder;
 
@@ -217,6 +221,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 1.4.4
          */
         processFrontMatter(file: TFile, fn: (frontmatter: any) => void, options?: DataWriteOptions): Promise<void>;
 
@@ -224,6 +229,7 @@ declare module 'obsidian' {
          * Prompt the user to delete a file.
          *
          * @unofficial
+         * @since 0.15.0
          */
         promptForDeletion(file: TAbstractFile): Promise<void>;
 
@@ -274,6 +280,7 @@ declare module 'obsidian' {
          * await app.fileManager.renameFile(file, 'baz/qux.md');
          * ```
          * @official
+         * @since 0.11.0
          */
         renameFile(file: TAbstractFile, newPath: string): Promise<void>;
 
@@ -312,6 +319,7 @@ declare module 'obsidian' {
          * await app.fileManager.trashFile(file);
          * ```
          * @official
+         * @since 1.6.6
          */
         trashFile(file: TAbstractFile): Promise<void>;
 

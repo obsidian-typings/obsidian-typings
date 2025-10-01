@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * Represents a selection or caret in the editor
+     * @since 0.12.11
      */
     interface EditorSelectionOrCaret {
         /**
