@@ -337,8 +337,9 @@ declare module 'obsidian' {
         /**
          * Get or create a menu from a mouse event.
          *
-         * @unofficial
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link forEvent} instead.
          */
-        function forEvent(evt: MouseEvent): Menu;
+        function forEvent__(evt: MouseEvent): Menu;
     }
 }
