@@ -79,7 +79,7 @@ export interface GraphRenderer {
     /** Record of the nodes currently rendered, with `GraphNode.id` used as key. */
     nodeLookup: Record<string, GraphNode>;
 
-    /** List of nodes currenly rendered. */
+    /** List of nodes currently rendered. */
     nodes: GraphNode[];
 
     /** Scale of the nodes based on the zoom level of the graph view. */
@@ -121,7 +121,7 @@ export interface GraphRenderer {
     /** @todo Documentation incomplete. */
     viewport: Coords;
 
-    /** Widt of the graph view, in pixel. */
+    /** Width of the graph view, in pixel. */
     width: number;
 
     /** Web Worker thread running the graph simulation. */
