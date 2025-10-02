@@ -5,6 +5,10 @@
   ],
   "tagDefinitions": [
     {
+      "tagName": "@official",
+      "syntaxKind": "block"
+    },
+    {
       "tagName": "@remark",
       "syntaxKind": "block"
     },
@@ -17,19 +21,15 @@
       "syntaxKind": "block"
     },
     {
-      "tagName": "@official",
-      "syntaxKind": "block"
-    },
-    {
       "tagName": "@unofficial",
       "syntaxKind": "block"
     }
   ],
   "supportForTags": {
+    "@official": true,
     "@remark": true,
     "@todo": true,
     "@tutorial": true,
-    "@official": true,
     "@unofficial": true
   }
 }
