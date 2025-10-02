@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * Editable file view
+     * @since 0.9.7
      */
     interface EditableFileView extends FileView {
         /**

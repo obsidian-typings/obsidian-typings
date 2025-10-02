@@ -9,12 +9,14 @@ declare module 'obsidian' {
     /**
      * Work with files and folders stored inside a vault.
      * @see {@link https://docs.obsidian.md/Plugins/Vault}.
+     * @since 0.9.7
      */
     interface Vault extends Events {
         /**
          * The low-level adapter of the vault.
          *
          * @official
+         * @since 0.9.7
          */
         adapter: DataAdapter;
 
@@ -38,6 +40,7 @@ declare module 'obsidian' {
          * This value is typically `.obsidian` but it could be different.
          *
          * @official
+         * @since 0.11.1
          */
         configDir: string;
 
@@ -91,6 +94,7 @@ declare module 'obsidian' {
          * @param options - Write options.
          * @returns The promise that resolves when the text is appended.
          * @official
+         * @since 0.13.0
          */
         append(file: TFile, data: string, options?: DataWriteOptions): Promise<void>;
 
@@ -102,6 +106,7 @@ declare module 'obsidian' {
          * @param file - The file to read.
          * @returns The promise that resolves to the cached file content.
          * @official
+         * @since 0.9.7
          */
         cachedRead(file: TFile): Promise<string>;
 
@@ -126,6 +131,7 @@ declare module 'obsidian' {
          * @param newPath - Vault absolute path for the new copy.
          * @returns The promise that resolves to the new copy.
          * @official
+         * @since 1.8.7
          */
         copy<T extends TAbstractFile>(file: T, newPath: string): Promise<T>;
 
@@ -141,6 +147,7 @@ declare module 'obsidian' {
          * await vault.create('foo.md', 'bar');
          * ```
          * @official
+         * @since 0.9.7
          */
         create(path: string, data: string, options?: DataWriteOptions): Promise<TFile>;
 
@@ -157,6 +164,7 @@ declare module 'obsidian' {
          * await vault.createBinary('foo.png', new Uint8Array([1, 2, 3]).buffer);
          * ```
          * @official
+         * @since 0.9.7
          */
         createBinary(path: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<TFile>;
 
@@ -171,6 +179,7 @@ declare module 'obsidian' {
          * await vault.createFolder('foo');
          * ```
          * @official
+         * @since 1.4.0
          */
         createFolder(path: string): Promise<TFolder>;
 
@@ -181,6 +190,7 @@ declare module 'obsidian' {
          * @param force - Should attempt to delete folder even if it has hidden children.
          * @returns The promise that resolves when the file is deleted.
          * @official
+         * @since 0.9.7
          */
         delete(file: TAbstractFile, force?: boolean): Promise<void>;
 
@@ -218,6 +228,7 @@ declare module 'obsidian' {
          * console.log(vault.getAbstractFileByPath('non-existent-folder')); // null
          * ```
          * @official
+         * @since 0.11.11
          */
         getAbstractFileByPath(path: string): TAbstractFile | null;
 
@@ -234,6 +245,7 @@ declare module 'obsidian' {
          * @param includeRoot - Should the root folder (`/`) be returned.
          * @returns All folders in the vault.
          * @official
+         * @since 1.6.6
          */
         getAllFolders(includeRoot?: boolean): TFolder[];
 
@@ -242,6 +254,7 @@ declare module 'obsidian' {
          *
          * @returns All files and folders in the vault.
          * @official
+         * @since 0.9.7
          */
         getAllLoadedFiles(): TAbstractFile[];
 
@@ -294,6 +307,7 @@ declare module 'obsidian' {
          * console.log(vault.getFileByPath('non-existent-file.md')); // null
          * ```
          * @official
+         * @since 1.5.7
          */
         getFileByPath(path: string): TFile | null;
 
@@ -302,6 +316,7 @@ declare module 'obsidian' {
          *
          * @returns All files in the vault.
          * @official
+         * @since 0.9.7
          */
         getFiles(): TFile[];
 
@@ -316,6 +331,7 @@ declare module 'obsidian' {
          * console.log(vault.getFolderByPath('non-existent-folder')); // null
          * ```
          * @official
+         * @since 1.5.7
          */
         getFolderByPath(path: string): TFolder | null;
 
@@ -324,6 +340,7 @@ declare module 'obsidian' {
          *
          * @returns All Markdown files in the vault.
          * @official
+         * @since 0.9.7
          */
         getMarkdownFiles(): TFile[];
 
@@ -331,6 +348,7 @@ declare module 'obsidian' {
          * Gets the name of the vault.
          *
          * @official
+         * @since 0.9.7
          */
         getName(): string;
 
@@ -340,6 +358,7 @@ declare module 'obsidian' {
          * @param file - The file to get the resource path for.
          * @returns The resource path for the file.
          * @official
+         * @since 0.9.7
          */
         getResourcePath(file: TFile): string;
 
@@ -348,6 +367,7 @@ declare module 'obsidian' {
          *
          * @returns The root folder of the current vault.
          * @official
+         * @since 0.9.7
          */
         getRoot(): TFolder;
 
@@ -380,6 +400,7 @@ declare module 'obsidian' {
          * @param options - Write options.
          * @returns The promise that resolves when the file is modified.
          * @official
+         * @since 0.9.7
          */
         modify(file: TFile, data: string, options?: DataWriteOptions): Promise<void>;
 
@@ -391,6 +412,7 @@ declare module 'obsidian' {
          * @param options - Write options.
          * @returns The promise that resolves when the file is modified.
          * @official
+         * @since 0.9.7
          */
         modifyBinary(file: TFile, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
 
@@ -399,6 +421,7 @@ declare module 'obsidian' {
          *
          * @remark Does *not* trigger when a particular plugin's settings are changed, for that, you could monkey-patch the `saveSettings` method of a plugin instance.
          * @unofficial
+         * @since 0.9.7
          */
         on(name: 'config-changed', callback: (configKey: string) => void, ctx?: unknown): EventRef;
 
@@ -493,6 +516,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 1.1.0
          */
         process(file: TFile, fn: (data: string) => string, options?: DataWriteOptions): Promise<string>;
 
@@ -504,6 +528,7 @@ declare module 'obsidian' {
          * @param file - The file to read.
          * @returns The promise that resolves to the file content.
          * @official
+         * @since 0.9.7
          */
         read(file: TFile): Promise<string>;
 
@@ -513,6 +538,7 @@ declare module 'obsidian' {
          * @param file - The file to read.
          * @returns The promise that resolves to the binary file content.
          * @official
+         * @since 0.9.7
          */
         readBinary(file: TFile): Promise<ArrayBuffer>;
 
@@ -571,6 +597,7 @@ declare module 'obsidian' {
          * @param newPath - Vault absolute path to move file to.
          * @returns The promise that resolves when the file is renamed.
          * @official
+         * @since 0.9.11
          */
         rename(file: TAbstractFile, newPath: string): Promise<void>;
 
@@ -634,6 +661,7 @@ declare module 'obsidian' {
          * @param system - Set to `false` to use local trash by default.
          * @returns The promise that resolves when the file is trashed.
          * @official
+         * @since 0.9.7
          */
         trash(file: TAbstractFile, system: boolean): Promise<void>;
 
@@ -680,6 +708,7 @@ declare module 'obsidian' {
          *
          * @official
          * @deprecated - Added only for typing purposes. Use {@link recurseChildren} instead.
+         * @since 0.9.7
          */
         function recurseChildren__(root: TFolder, cb: (file: TAbstractFile) => any): void;
     }

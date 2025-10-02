@@ -87,6 +87,7 @@ declare module 'obsidian' {
          * Whether the modal should restore the selection when it is opened or closed.
          *
          * @official
+         * @since 0.9.16
          */
         shouldRestoreSelection: boolean;
 

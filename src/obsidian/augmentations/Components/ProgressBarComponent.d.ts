@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * A component that displays a progress bar.
+     * @since 1.4.4
      */
     interface ProgressBarComponent extends ValueComponent<number> {
         /**

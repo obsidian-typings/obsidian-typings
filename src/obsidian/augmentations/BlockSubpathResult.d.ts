@@ -8,6 +8,7 @@ declare module 'obsidian' {
      * ```ts
      * console.log(resolveSubpath(myNoteCache, '#^foo'));
      * ```
+     * @since 0.13.26
      */
     interface BlockSubpathResult extends SubpathResult {
         /**

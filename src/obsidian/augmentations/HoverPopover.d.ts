@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * A hover popover.
+     * @since 0.15.0
      */
     interface HoverPopover extends Component {
         /**

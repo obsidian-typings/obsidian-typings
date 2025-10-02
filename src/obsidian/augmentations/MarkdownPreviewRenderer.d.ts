@@ -3,6 +3,7 @@ import type { CodeBlockPostProcessorHandler } from '../internals/CodeBlockPostPr
 declare module 'obsidian' {
     /**
      * The renderer of the markdown preview.
+     * @since 0.9.7
      */
     interface MarkdownPreviewRenderer {}
 
@@ -23,6 +24,7 @@ declare module 'obsidian' {
          *
          * @official
          * @deprecated - Added only for typing purposes. Use {@link createCodeBlockPostProcessor} instead.
+         * @since 0.12.11
          */
         function createCodeBlockPostProcessor__(
             language: string,
@@ -37,6 +39,7 @@ declare module 'obsidian' {
          *
          * @official
          * @deprecated - Added only for typing purposes. Use {@link registerPostProcessor} instead.
+         * @since 0.10.12
          */
         function registerPostProcessor__(postProcessor: MarkdownPostProcessor, sortOrder?: number): void;
 
@@ -57,6 +60,7 @@ declare module 'obsidian' {
          *
          * @official
          * @deprecated - Added only for typing purposes. Use {@link unregisterPostProcessor} instead.
+         * @since 0.9.7
          */
         function unregisterPostProcessor__(postProcessor: MarkdownPostProcessor): void;
     }

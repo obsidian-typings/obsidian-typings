@@ -75,6 +75,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link blur} instead.
+         * @since 0.11.11
          */
         blur__?(): void;
 
@@ -97,6 +98,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link exec} instead.
+         * @since 0.12.2
          */
         exec__(command: EditorCommandName): void;
 
@@ -116,6 +118,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link focus} instead.
+         * @since 0.11.11
          */
         focus__?(): void;
 
@@ -160,6 +163,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getCursor} instead.
+         * @since 0.11.11
          */
         getCursor__(string?: 'from' | 'to' | 'head' | 'anchor'): EditorPosition;
 
@@ -168,6 +172,7 @@ declare module 'obsidian' {
          *
          * @returns The editor instance.
          * @official
+         * @since 0.11.11
          */
         getDoc(): this;
 
@@ -189,6 +194,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getLine} instead.
+         * @since 0.11.11
          */
         getLine__(line: number): string;
 
@@ -204,6 +210,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getRange} instead.
+         * @since 0.11.11
          */
         getRange__(from: EditorPosition, to: EditorPosition): string;
 
@@ -212,13 +219,9 @@ declare module 'obsidian' {
          *
          * @returns The scroll info.
          * @official
+         * @since 0.11.11
          */
-        getScrollInfo__?(): {
-            /** @official */
-            top: number;
-            /** @official */
-            left: number;
-        };
+        getScrollInfo__?(): CoordsLeftTop;
 
         /**
          * Get the selection.
@@ -226,6 +229,7 @@ declare module 'obsidian' {
          * @returns The selection.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getSelection} instead.
+         * @since 0.11.11
          */
         getSelection__?(): string;
 
@@ -235,6 +239,7 @@ declare module 'obsidian' {
          * @returns The content of the editor.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getValue} instead.
+         * @since 0.11.11
          */
         getValue__?(): string;
 
@@ -243,6 +248,7 @@ declare module 'obsidian' {
          *
          * @returns Whether the editor is focused.
          * @official
+         * @since 0.11.11
          */
         hasFocus__?(): boolean;
 
@@ -312,6 +318,7 @@ declare module 'obsidian' {
          * @returns The index of the last line.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link lastLine} instead.
+         * @since 0.11.11
          */
         lastLine__?(): number;
 
@@ -321,6 +328,7 @@ declare module 'obsidian' {
          * @returns The amount of lines in the document.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link lineCount} instead.
+         * @since 0.11.11
          */
         lineCount__?(): number;
 
@@ -330,6 +338,7 @@ declare module 'obsidian' {
          * @returns The list of selections.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link listSelections} instead.
+         * @since 0.11.11
          */
         listSelections__?(): EditorSelection[];
 
@@ -358,6 +367,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link offsetToPos} instead.
+         * @since 0.11.11
          */
         offsetToPos__(offset: number): EditorPosition;
 
@@ -391,6 +401,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link posToOffset} instead.
+         * @since 0.11.11
          */
         posToOffset__(pos: EditorPosition): number;
 
@@ -410,6 +421,7 @@ declare module 'obsidian' {
          * }, true);
          * ```
          * @official
+         * @since 0.13.26
          */
         processLines<T>(
             read: (line: number, lineText: string) => T | null,
@@ -426,6 +438,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link redo} instead.
+         * @since 0.11.11
          */
         redo__?(): void;
 
@@ -438,6 +451,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link refresh} instead.
+         * @since 0.11.11
          */
         refresh__?(): void;
 
@@ -461,8 +475,16 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link replaceRange} instead.
+         * @since 0.11.11
          */
         replaceRange__(replacement: string, from: EditorPosition, to?: EditorPosition, origin?: string): void;
+
+        /**
+         * @official
+         * @since 0.11.11
+         * @deprecated - Added only for typing purposes. Use {@link replaceSelection} instead.
+         */
+        replaceSelection__(replacement: string, origin?: string): void;
 
         /**
          * Scroll into view.
@@ -475,6 +497,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link scrollIntoView} instead.
+         * @since 0.13.0
          */
         scrollIntoView__(range: EditorRange, center?: boolean): void;
 
@@ -489,6 +512,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link scrollTo} instead.
+         * @since 0.11.11
          */
         scrollTo__(x?: number | null, y?: number | null): void;
 
@@ -510,6 +534,7 @@ declare module 'obsidian' {
          * editor.setCursor(12, 3);
          * ```
          * @official
+         * @since 0.11.11
          */
         setCursor(pos: EditorPosition | number, ch?: number): void;
 
@@ -523,6 +548,7 @@ declare module 'obsidian' {
          * editor.setLine(42, 'foo');
          * ```
          * @official
+         * @since 0.11.11
          */
         setLine(n: number, text: string): void;
 
@@ -537,6 +563,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link setSelection} instead.
+         * @since 0.11.11
          */
         setSelection__(anchor: EditorPosition, head?: EditorPosition): void;
 
@@ -554,6 +581,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link setSelections} instead.
+         * @since 0.12.11
          */
         setSelections__(ranges: EditorSelectionOrCaret[], main?: number): void;
 
@@ -567,6 +595,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link setValue} instead.
+         * @since 0.11.11
          */
         setValue__(content: string): void;
 
@@ -575,6 +604,7 @@ declare module 'obsidian' {
          *
          * @returns Whether there is a selection.
          * @official
+         * @since 0.11.11
          */
         somethingSelected(): boolean;
 
@@ -616,6 +646,13 @@ declare module 'obsidian' {
         toggleNumberList(): void;
 
         /**
+         * @official
+         * @since 0.13.0
+         * @deprecated - Added only for typing purposes. Use {@link transaction} instead.
+         */
+        transaction__(tx: EditorTransaction, origin?: string): void;
+
+        /**
          * Convert word under cursor into a wikilink.
          *
          * @param embed - Whether to embed the link or not.
@@ -632,6 +669,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link undo} instead.
+         * @since 0.11.11
          */
         undo__?(): void;
 
@@ -653,6 +691,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link wordAt} instead.
+         * @since 0.11.11
          */
         wordAt__(pos: EditorPosition): EditorRange | null;
     }

@@ -6,6 +6,7 @@ declare module 'obsidian' {
      * support.
      *
      * @typeParam T - The type of the suggestion items.
+     * @since 1.4.10
      */
     interface AbstractInputSuggest<T> extends PopoverSuggest<T> {
         /**
@@ -18,6 +19,7 @@ declare module 'obsidian' {
          * Limit to the number of elements rendered at once. Set to 0 to disable. Defaults to 100.
          *
          * @official
+         * @since 1.4.10
          */
         limit: number;
 
@@ -65,6 +67,7 @@ declare module 'obsidian' {
          * }
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getSuggestions} instead.
+         * @since 1.5.7
          */
         getSuggestions__(query: string): T[] | Promise<T[]>;
 
@@ -73,6 +76,7 @@ declare module 'obsidian' {
          *
          * @returns The value from the input element.
          * @official
+         * @since 1.4.10
          */
         getValue(): string;
 
@@ -100,11 +104,12 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 1.4.10
          */
         onSelect(callback: (value: T, evt: MouseEvent | KeyboardEvent) => unknown): this;
 
         /**
-         * Callback for
+         * Callback for selecting a suggestion.
          *
          * @param value - The value of the suggestion.
          * @param evt - The event that occurred.
@@ -112,6 +117,20 @@ declare module 'obsidian' {
          * @unofficial
          */
         selectCb?(value: T, evt: MouseEvent | KeyboardEvent): unknown;
+
+        /**
+         * Select a suggestion.
+         *
+         * @param value - The value of the suggestion.
+         * @param evt - The event that occurred.
+         * @example
+         * ```ts
+         * inputSuggest.selectSuggestion('foo', new MouseEvent('click'));
+         * ```
+         * @official
+         * @since 1.6.6
+         */
+        selectSuggestion(value: T, evt: MouseEvent | KeyboardEvent): void;
 
         /**
          * Sets the value into the input element.
@@ -122,6 +141,7 @@ declare module 'obsidian' {
          * inputSuggest.setValue('foo');
          * ```
          * @official
+         * @since 1.4.10
          */
         setValue(value: string): void;
 

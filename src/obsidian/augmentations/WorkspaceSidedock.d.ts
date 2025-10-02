@@ -3,6 +3,7 @@ import type { SerializedWorkspaceSidedock } from '../internals/Workspace/Seriali
 declare module 'obsidian' {
     /**
      * Workspace sidedock.
+     * @since 0.15.4
      */
     interface WorkspaceSidedock extends WorkspaceSplit {
         /**
@@ -27,6 +28,7 @@ declare module 'obsidian' {
          * Whether the sidedock is collapsed.
          *
          * @official
+         * @since 0.12.11
          */
         collapsed: boolean;
 
@@ -76,6 +78,7 @@ declare module 'obsidian' {
          * Collapse the sidedock.
          *
          * @official
+         * @since 0.12.11
          */
         collapse(): void;
 
@@ -83,6 +86,7 @@ declare module 'obsidian' {
          * Expand the sidedock.
          *
          * @official
+         * @since 0.12.11
          */
         expand(): void;
 
@@ -114,6 +118,7 @@ declare module 'obsidian' {
          * Toggle the sidedock.
          *
          * @official
+         * @since 0.12.11
          */
         toggle(): void;
     }

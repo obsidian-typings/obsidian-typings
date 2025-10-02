@@ -3,12 +3,14 @@ export {};
 declare module 'obsidian' {
     /**
      * Extra button component, for secondary actions.
+     * @since 0.9.7
      */
     interface ExtraButtonComponent extends BaseComponent {
         /**
          * The HTML element representation of the extra button.
          *
          * @official
+         * @since 0.9.7
          */
         extraSettingsEl: HTMLElement;
 
@@ -41,6 +43,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         onClick(callback: () => any): this;
 
@@ -54,6 +57,7 @@ declare module 'obsidian' {
          * extraButton.setDisabled(true);
          * ```
          * @official
+         * @since 1.2.3
          */
         setDisabled(disabled: boolean): this;
 
@@ -68,6 +72,7 @@ declare module 'obsidian' {
          * extraButton.setIcon('dice');
          * ```
          * @official
+         * @since 0.9.7
          */
         setIcon(icon: IconName): this;
 
@@ -82,6 +87,7 @@ declare module 'obsidian' {
          * extraButton.setTooltip('Tooltip text');
          * ```
          * @official
+         * @since 1.1.0
          */
         setTooltip(tooltip: string, options?: TooltipOptions): this;
     }

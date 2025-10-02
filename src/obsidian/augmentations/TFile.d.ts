@@ -3,12 +3,14 @@ export {};
 declare module 'obsidian' {
     /**
      * A file.
+     * @since 0.9.7
      */
     interface TFile extends TAbstractFile {
         /**
          * The basename of the file (name without extension).
          *
          * @official
+         * @since 0.9.7
          */
         basename: string;
 
@@ -16,6 +18,7 @@ declare module 'obsidian' {
          * The extension of the file.
          *
          * @official
+         * @since 0.9.7
          */
         extension: string;
 
@@ -37,6 +40,7 @@ declare module 'obsidian' {
          * The stats of the file.
          *
          * @official
+         * @since 0.9.7
          */
         stat: FileStats;
 

@@ -155,6 +155,7 @@ declare module 'obsidian' {
          * console.log('foo/bar.md'); // file:///C:/Users/John/Documents/ObsidianVault/foo/bar.md
          * ```
          * @official
+         * @since 0.14.3
          */
         getFilePath(normalizedPath: string): string;
 
@@ -356,6 +357,7 @@ declare module 'obsidian' {
          * console.log(await app.vault.adapter.stat('foo/bar.md'));
          * ```
          * @official
+         * @since 0.12.2
          */
         stat(normalizedPath: string): Promise<Stat | null>;
 

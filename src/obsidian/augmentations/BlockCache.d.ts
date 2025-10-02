@@ -7,6 +7,7 @@ declare module 'obsidian' {
      * ```markdown
      * foo ^bar
      * ```
+     * @since 0.11.13
      */
     interface BlockCache extends CacheItem {
         /**

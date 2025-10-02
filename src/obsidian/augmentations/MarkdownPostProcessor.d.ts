@@ -8,6 +8,7 @@ declare module 'obsidian' {
      *
      * If your post processor requires lifecycle management, for example, to clear an interval, kill a subprocess, etc when this element is
      * removed from the app, look into {@link MarkdownPostProcessorContext.addChild}
+     * @since 0.10.12
      */
     interface MarkdownPostProcessor {
         /**

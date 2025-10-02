@@ -3,12 +3,14 @@ export {};
 declare module 'obsidian' {
     /**
      * A setting.
+     * @since 0.9.7
      */
     interface Setting {
         /**
          * The components for the setting.
          *
          * @official
+         * @since 0.9.7
          */
         components: BaseComponent[];
 
@@ -16,6 +18,7 @@ declare module 'obsidian' {
          * The HTML element for the control.
          *
          * @official
+         * @since 0.9.7
          */
         controlEl: HTMLElement;
 
@@ -23,6 +26,7 @@ declare module 'obsidian' {
          * The HTML element for the description.
          *
          * @official
+         * @since 0.9.7
          */
         descEl: HTMLElement;
 
@@ -30,6 +34,7 @@ declare module 'obsidian' {
          * The HTML element for the info.
          *
          * @official
+         * @since 0.9.7
          */
         infoEl: HTMLElement;
 
@@ -37,6 +42,7 @@ declare module 'obsidian' {
          * The HTML element for the name.
          *
          * @official
+         * @since 0.9.7
          */
         nameEl: HTMLElement;
 
@@ -44,6 +50,7 @@ declare module 'obsidian' {
          * The HTML element for the setting.
          *
          * @official
+         * @since 0.9.7
          */
         settingEl: HTMLElement;
 
@@ -59,6 +66,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         addButton(cb: (component: ButtonComponent) => any): this;
 
@@ -104,6 +112,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.16
          */
         addExtraButton(cb: (component: ExtraButtonComponent) => any): this;
 
@@ -119,6 +128,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         addMomentFormat(cb: (component: MomentFormatComponent) => any): this;
 
@@ -149,6 +159,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.21
          */
         addSearch(cb: (component: SearchComponent) => any): this;
 
@@ -164,6 +175,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         addSlider(cb: (component: SliderComponent) => any): this;
 
@@ -179,6 +191,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         addText(cb: (component: TextComponent) => any): this;
 
@@ -194,6 +207,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         addTextArea(cb: (component: TextAreaComponent) => any): this;
 
@@ -209,6 +223,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         addToggle(cb: (component: ToggleComponent) => any): this;
 
@@ -221,6 +236,7 @@ declare module 'obsidian' {
          * setting.clear();
          * ```
          * @official
+         * @since 0.13.8
          */
         clear(): this;
 
@@ -243,6 +259,7 @@ declare module 'obsidian' {
          * setting.setClass('foo');
          * ```
          * @official
+         * @since 0.9.7
          */
         setClass(cls: string): this;
 
@@ -256,6 +273,7 @@ declare module 'obsidian' {
          * setting.setDesc('foo');
          * ```
          * @official
+         * @since 0.9.7
          */
         setDesc(desc: string | DocumentFragment): this;
 
@@ -269,6 +287,7 @@ declare module 'obsidian' {
          * setting.setDisabled(true);
          * ```
          * @official
+         * @since 1.2.3
          */
         setDisabled(disabled: boolean): this;
 
@@ -281,6 +300,7 @@ declare module 'obsidian' {
          * setting.setHeading();
          * ```
          * @official
+         * @since 0.9.16
          */
         setHeading(): this;
 
@@ -298,6 +318,7 @@ declare module 'obsidian' {
          * setting.setName(fragment);
          * ```
          * @official
+         * @since 0.12.16
          */
         setName(name: string | DocumentFragment): this;
 
@@ -318,6 +339,7 @@ declare module 'obsidian' {
          * setting.setTooltip('foo');
          * ```
          * @official
+         * @since 1.1.0
          */
         setTooltip(tooltip: string, options?: TooltipOptions): this;
 
@@ -341,6 +363,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.20
          */
         then(cb: (setting: this) => any): this;
     }

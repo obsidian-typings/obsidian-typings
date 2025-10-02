@@ -31,6 +31,7 @@ declare module 'obsidian' {
          * The text to display when there are no suggestions.
          *
          * @official
+         * @since 0.9.20
          */
         emptyStateText: string;
 
@@ -64,6 +65,7 @@ declare module 'obsidian' {
          * The result container element.
          *
          * @official
+         * @since 0.9.20
          */
         resultContainerEl: HTMLElement;
 
@@ -99,6 +101,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getSuggestions} instead.
+         * @since 1.5.7
          */
         getSuggestions__(query: string): T[] | Promise<T[]>;
 
@@ -116,6 +119,7 @@ declare module 'obsidian' {
          * }
          * @official
          * @deprecated - Added only for typing purposes. Use {@link onChooseSuggestion} instead.
+         * @since 1.5.7
          */
         onChooseSuggestion__(item: T, evt: MouseEvent | KeyboardEvent): void;
 
@@ -130,6 +134,7 @@ declare module 'obsidian' {
          *
          * @param callback - The callback to be called when there are no suggestions.
          * @official
+         * @since 0.9.20
          */
         onNoSuggestion(): void;
 
@@ -148,6 +153,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link renderSuggestion} instead.
+         * @since 1.5.7
          */
         renderSuggestion__(value: T, el: HTMLElement): void;
 
@@ -156,6 +162,7 @@ declare module 'obsidian' {
          *
          * @param evt - The event that triggered the selection.
          * @official
+         * @since 1.7.2
          */
         selectActiveSuggestion(evt: MouseEvent | KeyboardEvent): void;
 
@@ -165,6 +172,7 @@ declare module 'obsidian' {
          * @param value - The value of the suggestion.
          * @param evt - The event that triggered the selection.
          * @official
+         * @since 0.9.20
          */
         selectSuggestion(value: T, evt: MouseEvent | KeyboardEvent): void;
 
@@ -173,6 +181,7 @@ declare module 'obsidian' {
          *
          * @param instructions - The instructions.
          * @official
+         * @since 0.9.20
          */
         setInstructions(instructions: Instruction[]): void;
 
@@ -181,6 +190,7 @@ declare module 'obsidian' {
          *
          * @param placeholder - The placeholder text.
          * @official
+         * @since 0.9.20
          */
         setPlaceholder(placeholder: string): void;
 

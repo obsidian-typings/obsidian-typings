@@ -89,6 +89,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.12.2
          */
         editorCallback?: (editor: Editor, ctx: MarkdownView | MarkdownFileInfo) => any;
 
@@ -117,6 +118,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.12.2
          */
         editorCheckCallback?: (
             checking: boolean,

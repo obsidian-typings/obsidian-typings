@@ -42,6 +42,7 @@ declare module 'obsidian' {
          * debouncer.run();
          * ```
          * @official
+         * @since 1.4.4
          */
         run(): V | void;
     }

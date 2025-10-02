@@ -3,12 +3,14 @@ export {};
 declare module 'obsidian' {
     /**
      * A search component.
+     * @since 0.9.21
      */
     interface SearchComponent extends AbstractTextComponent<HTMLInputElement> {
         /**
          * The HTML element for the clear button.
          *
          * @official
+         * @since 0.9.21
          */
         clearButtonEl: HTMLElement;
 

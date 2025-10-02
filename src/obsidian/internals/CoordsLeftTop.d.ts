@@ -1,12 +1,22 @@
 /**
- * @todo Documentation incomplete.
+ * Left and top coordinates.
+ *
  * @public
  * @unofficial
+ * @since 0.11.11
  */
 export interface CoordsLeftTop {
-    /** @todo Documentation incomplete. */
+    /**
+     * Left coordinate
+     *
+     * @since 0.11.11
+     */
     left: number;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * Top coordinate
+     *
+     * @since 0.11.11
+     */
     top: number;
 }

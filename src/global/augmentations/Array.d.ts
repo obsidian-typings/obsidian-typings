@@ -32,6 +32,7 @@ declare global {
          * console.log([1, 2, 3, 2, 1].findLastIndex(x => x === 4)); // -1
          * ```
          * @official
+         * @since 1.4.4
          */
         findLastIndex(predicate: (value: T) => boolean): number;
 

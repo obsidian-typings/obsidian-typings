@@ -3,12 +3,14 @@ export {};
 declare module 'obsidian' {
     /**
      * The base class for all components.
+     * @since 0.10.3
      */
     interface BaseComponent {
         /**
          * Whether the component is disabled.
          *
          * @official
+         * @since 0.10.3
          */
         disabled: boolean;
 
@@ -22,6 +24,7 @@ declare module 'obsidian' {
          * component.setDisabled(true);
          * ```
          * @official
+         * @since 1.2.3
          */
         setDisabled(disabled: boolean): this;
 
@@ -37,6 +40,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         then(cb: (component: this) => any): this;
     }

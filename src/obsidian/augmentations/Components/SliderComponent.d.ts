@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * A slider component.
+     * @since 0.9.7
      */
     interface SliderComponent extends ValueComponent<number> {
         /**
@@ -34,6 +35,7 @@ declare module 'obsidian' {
          *
          * @returns The value of the slider.
          * @official
+         * @since 0.9.7
          */
         getValue(): number;
 
@@ -42,6 +44,7 @@ declare module 'obsidian' {
          *
          * @returns The pretty value of the slider.
          * @official
+         * @since 0.9.7
          */
         getValuePretty(): string;
 
@@ -57,6 +60,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         onChange(callback: (value: number) => any): this;
 
@@ -70,6 +74,7 @@ declare module 'obsidian' {
          * slider.setDisabled(true);
          * ```
          * @official
+         * @since 1.2.3
          */
         setDisabled(disabled: boolean): this;
 
@@ -78,6 +83,7 @@ declare module 'obsidian' {
          *
          * @returns The slider.
          * @official
+         * @since 0.9.7
          */
         setDynamicTooltip(): this;
 
@@ -91,6 +97,7 @@ declare module 'obsidian' {
          * slider.setInstant(true);
          * ```
          * @official
+         * @since 1.6.6
          */
         setInstant(instant: boolean): this;
 
@@ -106,6 +113,7 @@ declare module 'obsidian' {
          * slider.setLimits(0, 100, 1);
          * ```
          * @official
+         * @since 0.9.7
          */
         setLimits(min: number, max: number, step: number | 'any'): this;
 
@@ -119,6 +127,7 @@ declare module 'obsidian' {
          * slider.setValue(50);
          * ```
          * @official
+         * @since 0.9.7
          */
         setValue(value: number): this;
 
@@ -126,6 +135,7 @@ declare module 'obsidian' {
          * Show the tooltip of the slider.
          *
          * @official
+         * @since 0.9.7
          */
         showTooltip(): void;
     }

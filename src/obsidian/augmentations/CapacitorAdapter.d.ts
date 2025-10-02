@@ -9,6 +9,7 @@ declare module 'obsidian' {
      * Implementation of the vault adapter for mobile devices.
      *
      * `app.vault.adapter` returns an instance of `CapacitorAdapter` on mobile devices.
+     * @since 1.7.2
      */
     interface CapacitorAdapter extends DataAdapter {
         /**
@@ -29,6 +30,7 @@ declare module 'obsidian' {
          * await app.vault.adapter.append('foo/bar.md', 'baz');
          * ```
          * @official
+         * @since 1.7.2
          */
         append(normalizedPath: string, data: string, options?: DataWriteOptions): Promise<void>;
 
@@ -43,6 +45,7 @@ declare module 'obsidian' {
          * await app.vault.adapter.copy('foo/bar.md', 'baz/qux.md');
          * ```
          * @official
+         * @since 1.7.2
          */
         copy(normalizedPath: string, normalizedNewPath: string): Promise<void>;
 
@@ -57,6 +60,7 @@ declare module 'obsidian' {
          * console.log(await app.vault.adapter.exists('foo/bar.md'));
          * ```
          * @official
+         * @since 1.7.2
          */
         exists(normalizedPath: string, sensitive?: boolean): Promise<boolean>;
 
@@ -70,6 +74,7 @@ declare module 'obsidian' {
          * console.log(app.vault.adapter.getFullPath('foo/bar.md')) // /storage/emulated/0/path/to/vault/foo/bar.md
          * ```
          * @official
+         * @since 1.7.2
          */
         getFullPath(normalizedPath: string): string;
 
@@ -78,6 +83,7 @@ declare module 'obsidian' {
          *
          * @returns The name of the vault.
          * @official
+         * @since 1.7.2
          */
         getName(): string;
 
@@ -97,6 +103,7 @@ declare module 'obsidian' {
          * console.log(app.vault.adapter.getResourcePath('foo/bar.jpg'));
          * ```
          * @official
+         * @since 1.7.2
          */
         getResourcePath(normalizedPath: string): string;
 
@@ -110,6 +117,7 @@ declare module 'obsidian' {
          * console.log(await app.vault.adapter.list('foo'));
          * ```
          * @official
+         * @since 1.7.2
          */
         list(normalizedPath: string): Promise<ListedFiles>;
 
@@ -131,6 +139,7 @@ declare module 'obsidian' {
          * await app.vault.adapter.mkdir('foo');
          * ```
          * @official
+         * @since 1.7.2
          */
         mkdir(normalizedPath: string): Promise<void>;
 
@@ -160,6 +169,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 1.7.2
          */
         process(normalizedPath: string, fn: (data: string) => string, options?: DataWriteOptions): Promise<string>;
 
@@ -179,6 +189,7 @@ declare module 'obsidian' {
          * console.log(await app.vault.adapter.read('foo/bar.md'));
          * ```
          * @official
+         * @since 1.7.2
          */
         read(normalizedPath: string): Promise<string>;
 
@@ -192,6 +203,7 @@ declare module 'obsidian' {
          * console.log(await app.vault.adapter.readBinary('foo/bar.jpg'));
          * ```
          * @official
+         * @since 1.7.2
          */
         readBinary(normalizedPath: string): Promise<ArrayBuffer>;
 
@@ -215,6 +227,7 @@ declare module 'obsidian' {
          * await app.vault.adapter.remove('foo/bar.md');
          * ```
          * @official
+         * @since 1.7.2
          */
         remove(normalizedPath: string): Promise<void>;
 
@@ -235,6 +248,7 @@ declare module 'obsidian' {
          * await app.vault.adapter.rename('foo/bar.md', 'baz/qux.md');
          * ```
          * @official
+         * @since 1.7.2
          */
         rename(normalizedPath: string, normalizedNewPath: string): Promise<void>;
 
@@ -249,6 +263,7 @@ declare module 'obsidian' {
          * await app.vault.adapter.rmdir('foo', true);
          * ```
          * @official
+         * @since 1.7.2
          */
         rmdir(normalizedPath: string, recursive: boolean): Promise<void>;
 
@@ -262,6 +277,7 @@ declare module 'obsidian' {
          * console.log(await app.vault.adapter.stat('foo/bar.md'));
          * ```
          * @official
+         * @since 1.7.2
          */
         stat(normalizedPath: string): Promise<Stat | null>;
 
@@ -288,6 +304,7 @@ declare module 'obsidian' {
          * await app.vault.adapter.trashLocal('foo/bar.md');
          * ```
          * @official
+         * @since 1.7.2
          */
         trashLocal(normalizedPath: string): Promise<void>;
 
@@ -301,6 +318,7 @@ declare module 'obsidian' {
          * console.log(await app.vault.adapter.trashSystem('foo/bar.jpg'));
          * ```
          * @official
+         * @since 1.7.2
          */
         trashSystem(normalizedPath: string): Promise<boolean>;
 
@@ -322,6 +340,7 @@ declare module 'obsidian' {
          * await app.vault.adapter.write('foo/bar.md', 'baz');
          * ```
          * @official
+         * @since 1.7.2
          */
         write(normalizedPath: string, data: string, options?: DataWriteOptions): Promise<void>;
 
@@ -337,6 +356,7 @@ declare module 'obsidian' {
          * await app.vault.adapter.writeBinary('foo/bar.jpg', new Uint8Array([1, 2, 3]).buffer);
          * ```
          * @official
+         * @since 1.7.2
          */
         writeBinary(normalizedPath: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
     }

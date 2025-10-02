@@ -3,12 +3,14 @@ export {};
 declare module 'obsidian' {
     /**
      * Notification component. Use to present timely, high-value information.
+     * @since 0.9.7
      */
     interface Notice {
         /**
          * The container HTML element for the notice.
          *
          * @official
+         * @since 1.8.7
          */
         containerEl: HTMLElement;
 
@@ -16,6 +18,7 @@ declare module 'obsidian' {
          * The HTML element that represents the message of the notice.
          *
          * @official
+         * @since 1.8.7
          */
         messageEl: HTMLElement;
 
@@ -24,6 +27,7 @@ declare module 'obsidian' {
          *
          * @deprecated Use `messageEl` instead
          * @official
+         * @since 0.9.7
          */
         noticeEl: HTMLElement;
 
@@ -53,6 +57,7 @@ declare module 'obsidian' {
          * Hide the notice.
          *
          * @official
+         * @since 0.9.7
          */
         hide(): void;
 
@@ -70,6 +75,7 @@ declare module 'obsidian' {
          * notice.setMessage(fragment);
          * ```
          * @official
+         * @since 0.9.7
          */
         setMessage(message: string | DocumentFragment): this;
     }

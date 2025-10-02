@@ -3,6 +3,7 @@ import type { SerializedWorkspaceItem } from '../internals/Workspace/SerializedW
 declare module 'obsidian' {
     /**
      * Workspace item.
+     * @since 0.10.2
      */
     interface WorkspaceItem extends Events {
         /**
@@ -40,6 +41,7 @@ declare module 'obsidian' {
          *
          * @official
          * @deprecated - Added only for typing purposes. Use {@link WorkspaceItem.parent} instead.
+         * @since 1.6.6
          */
         parent__: WorkspaceParent;
 
@@ -79,6 +81,7 @@ declare module 'obsidian' {
          * - {@link WorkspaceWindow}
          *
          * @official
+         * @since 0.15.4
          */
         getContainer(): WorkspaceContainer;
 
@@ -92,6 +95,7 @@ declare module 'obsidian' {
          * Get the root item.
          *
          * @official
+         * @since 0.10.2
          */
         getRoot(): WorkspaceItem;
 

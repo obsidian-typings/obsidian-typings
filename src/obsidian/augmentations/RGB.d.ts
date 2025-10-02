@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * A color in RGB format.
+     * @since 0.16.0
      */
     interface RGB {
         /**

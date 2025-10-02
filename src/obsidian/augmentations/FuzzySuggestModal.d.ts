@@ -5,6 +5,7 @@ declare module 'obsidian' {
      * Suggest modal for fuzzy search.
      *
      * @typeParam T - The type of the item that was searched for.
+     * @since 0.9.20
      */
     interface FuzzySuggestModal<T> extends SuggestModal<FuzzyMatch<T>> {
         /**
@@ -21,6 +22,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getItems} instead.
+         * @since 0.9.20
          */
         getItems__?(): T[];
 
@@ -39,6 +41,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getItemText} instead.
+         * @since 0.9.20
          */
         getItemText__(item: T): string;
 
@@ -56,6 +59,7 @@ declare module 'obsidian' {
          * }
          * ```
          * @official
+         * @since 0.9.20
          */
         getSuggestions(query: string): FuzzyMatch<T>[];
 
@@ -74,6 +78,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link onChooseSuggestion} instead.
+         * @since 0.9.20
          */
         onChooseItem__(item: T, evt: MouseEvent | KeyboardEvent): void;
 
@@ -91,6 +96,7 @@ declare module 'obsidian' {
          * }
          * ```
          * @official
+         * @since 0.9.20
          */
         onChooseSuggestion(item: FuzzyMatch<T>, evt: MouseEvent | KeyboardEvent): void;
 
@@ -108,6 +114,7 @@ declare module 'obsidian' {
          * }
          * ```
          * @official
+         * @since 0.9.20
          */
         renderSuggestion(item: FuzzyMatch<T>, el: HTMLElement): void;
     }

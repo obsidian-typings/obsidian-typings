@@ -3,12 +3,14 @@ export {};
 declare module 'obsidian' {
     /**
      * A toggle component.
+     * @since 0.9.7
      */
     interface ToggleComponent extends ValueComponent<boolean> {
         /**
          * The HTML element that represents the toggle.
          *
          * @official
+         * @since 0.9.7
          */
         toggleEl: HTMLElement;
 
@@ -26,6 +28,7 @@ declare module 'obsidian' {
          * @param containerEl - The container element.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @since 0.9.7
          */
         constructor__(containerEl: HTMLElement): this;
 
@@ -34,6 +37,7 @@ declare module 'obsidian' {
          *
          * @returns The value of the toggle.
          * @official
+         * @since 0.9.7
          */
         getValue(): boolean;
 
@@ -49,6 +53,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         onChange(callback: (value: boolean) => any): this;
 
@@ -56,6 +61,7 @@ declare module 'obsidian' {
          * Handle the click event of the toggle.
          *
          * @official
+         * @since 0.9.7
          */
         onClick(): void;
 
@@ -69,6 +75,7 @@ declare module 'obsidian' {
          * toggle.setDisabled(true);
          * ```
          * @official
+         * @since 1.2.3
          */
         setDisabled(disabled: boolean): this;
 
@@ -79,6 +86,7 @@ declare module 'obsidian' {
          * @param options - The options for the tooltip.
          * @returns The toggle.
          * @official
+         * @since 1.1.1
          */
         setTooltip(tooltip: string, options?: TooltipOptions): this;
 
@@ -92,6 +100,7 @@ declare module 'obsidian' {
          * toggle.setValue(true);
          * ```
          * @official
+         * @since 0.9.7
          */
         setValue(on: boolean): this;
     }

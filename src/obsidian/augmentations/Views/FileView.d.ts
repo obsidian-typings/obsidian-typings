@@ -37,6 +37,7 @@ declare module 'obsidian' {
          * console.log(fileView.canAcceptExtension('md'));
          * ```
          * @official
+         * @since 0.9.7
          */
         canAcceptExtension(extension: string): boolean;
 
@@ -164,6 +165,7 @@ declare module 'obsidian' {
          * await fileView.setState({ foo: 'bar' }, { history: true });
          * ```
          * @official
+         * @since 0.9.7
          */
         setState(state: any, result: ViewStateResult): Promise<void>;
 

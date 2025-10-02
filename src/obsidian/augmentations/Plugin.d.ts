@@ -5,12 +5,14 @@ export {};
 declare module 'obsidian' {
     /**
      * Base class for all plugins.
+     * @since 0.9.7
      */
     interface Plugin extends Component {
         /**
          * The Obsidian app instance.
          *
          * @official
+         * @since 0.9.7
          */
         app: App;
 
@@ -18,6 +20,7 @@ declare module 'obsidian' {
          * The plugin manifest.
          *
          * @official
+         * @since 0.9.7
          */
         manifest: PluginManifest;
 
@@ -48,6 +51,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         addCommand(command: Command): Command;
 
@@ -65,6 +69,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         addRibbonIcon(icon: IconName, title: string, callback: (evt: MouseEvent) => any): HTMLElement;
 
@@ -77,6 +82,7 @@ declare module 'obsidian' {
          * plugin.addSettingTab(mySettingTab);
          * ```
          * @official
+         * @since 0.9.7
          */
         addSettingTab(settingTab: PluginSettingTab): void;
 
@@ -86,6 +92,7 @@ declare module 'obsidian' {
          * @see {@link https://docs.obsidian.md/Plugins/User+interface/Status+bar}.
          * @return HTMLElement - element to modify.
          * @official
+         * @since 0.9.7
          */
         addStatusBarItem(): HTMLElement;
 
@@ -105,6 +112,7 @@ declare module 'obsidian' {
          * @see {@link https://docs.obsidian.md/Plugins/User+interface/Settings}.
          * @returns The promise that resolves to the settings data.
          * @official
+         * @since 0.9.7
          */
         loadData(): Promise<any>;
 
@@ -117,6 +125,7 @@ declare module 'obsidian' {
          *
          * @returns The result is discarded. The result is discarded. Usually it's `void` or `Promise<void>`.
          * @official
+         * @since 1.5.7
          */
         onExternalSettingsChange?(): any;
 
@@ -124,6 +133,7 @@ declare module 'obsidian' {
          * Called when the plugin is loaded.
          *
          * @official
+         * @since 0.9.7
          */
         onload(): Promise<void> | void;
 
@@ -133,6 +143,7 @@ declare module 'obsidian' {
          * you can open it here.
          *
          * @official
+         * @since 1.7.2
          */
         onUserEnable(): void;
 
@@ -148,6 +159,7 @@ declare module 'obsidian' {
          * plugin.registerEditorExtension([myViewPlugin, myStateField]);
          * ```
          * @official
+         * @since 0.12.8
          */
         registerEditorExtension(extension: Extension): void;
 
@@ -160,6 +172,7 @@ declare module 'obsidian' {
          * plugin.registerEditorSuggest(myEditorSuggest);
          * ```
          * @official
+         * @since 0.12.7
          */
         registerEditorSuggest(editorSuggest: EditorSuggest<any>): void;
 
@@ -173,6 +186,7 @@ declare module 'obsidian' {
          * plugin.registerExtensions(['foo', 'bar'], 'baz');
          * ```
          * @official
+         * @since 0.9.7
          */
         registerExtensions(extensions: string[], viewType: string): void;
 
@@ -189,6 +203,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 1.1.0
          */
         registerHoverLinkSource(id: string, info: HoverLinkSource): void;
 
@@ -208,6 +223,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         registerMarkdownCodeBlockProcessor(
             language: string,
@@ -228,6 +244,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         registerMarkdownPostProcessor(postProcessor: MarkdownPostProcessor, sortOrder?: number): MarkdownPostProcessor;
 
@@ -244,6 +261,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.11.0
          */
         registerObsidianProtocolHandler(action: string, handler: ObsidianProtocolHandler): void;
 
@@ -259,6 +277,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         registerView(type: string, viewCreator: ViewCreator): void;
 
@@ -272,6 +291,7 @@ declare module 'obsidian' {
          * plugin.removeCommand('foo');
          * ```
          * @official
+         * @since 1.7.2
          */
         removeCommand(commandId: string): void;
 
@@ -286,6 +306,7 @@ declare module 'obsidian' {
          * await plugin.saveData({ foo: 'bar' });
          * ```
          * @official
+         * @since 0.9.7
          */
         saveData(data: any): Promise<void>;
     }

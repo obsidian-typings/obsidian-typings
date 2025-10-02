@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * A task manager.
+     * @since 0.10.2
      */
     interface Tasks {
         /**
@@ -10,6 +11,7 @@ declare module 'obsidian' {
          *
          * @param callback - The callback to add the task.
          * @official
+         * @since 0.10.2
          */
         add(callback: () => Promise<any>): void;
 
@@ -18,6 +20,7 @@ declare module 'obsidian' {
          *
          * @param promise - The promise to add.
          * @official
+         * @since 0.10.2
          */
         addPromise(promise: Promise<any>): void;
 
@@ -26,6 +29,7 @@ declare module 'obsidian' {
          *
          * @returns Whether the tasks are empty.
          * @official
+         * @since 0.10.2
          */
         isEmpty(): boolean;
 

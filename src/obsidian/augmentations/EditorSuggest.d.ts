@@ -5,6 +5,7 @@ declare module 'obsidian' {
      * Represents a autocomplete suggestion in the editor
      *
      * @typeParam T - The type of the suggestion items.
+     * @since 0.12.17
      */
     interface EditorSuggest<T> extends PopoverSuggest<T> {
         /**
@@ -12,6 +13,7 @@ declare module 'obsidian' {
          * This will be `null` any time the `EditorSuggest` is not supposed to run.
          *
          * @official
+         * @since 0.12.17
          */
         context: EditorSuggestContext | null;
 
@@ -19,6 +21,7 @@ declare module 'obsidian' {
          * Override this to use a different limit for suggestion items.
          *
          * @official
+         * @since 0.12.17
          */
         limit: number;
 
@@ -55,6 +58,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getSuggestions} instead.
+         * @since 0.12.17
          */
         getSuggestions__(context: EditorSuggestContext): T[] | Promise<T[]>;
 
@@ -84,6 +88,7 @@ declare module 'obsidian' {
          * ```
          * @official
          * @deprecated - Added only for typing purposes. Use {@link onTrigger} instead.
+         * @since 1.1.13
          */
         onTrigger__(cursor: EditorPosition, editor: Editor, file: TFile | null): EditorSuggestTriggerInfo | null;
 
@@ -96,6 +101,7 @@ declare module 'obsidian' {
          * suggest.setInstructions([{ command: '↑↓', purpose: 'Navigate' }]);
          * ```
          * @official
+         * @since 0.13.0
          */
         setInstructions(instructions: Instruction[]): void;
 

@@ -6,6 +6,7 @@ export {};
 declare module 'obsidian' {
     /**
      * A view that displays an item.
+     * @since 0.9.7
      */
     interface ItemView extends View {
         /**
@@ -100,6 +101,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 1.1.0
          */
         addAction(icon: IconName, title: string, callback: (evt: MouseEvent) => any): HTMLElement;
 

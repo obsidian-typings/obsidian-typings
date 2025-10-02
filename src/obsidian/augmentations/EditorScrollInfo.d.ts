@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
     /**
      * Scroll info for the editor
+     * @since 0.15.0
      */
     interface EditorScrollInfo {
         /**

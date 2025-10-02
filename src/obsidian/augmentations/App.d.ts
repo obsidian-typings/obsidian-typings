@@ -24,6 +24,7 @@ export {};
 declare module 'obsidian' {
     /**
      * The main app object.
+     * @since 0.9.7
      */
     interface App {
         /**
@@ -80,6 +81,7 @@ declare module 'obsidian' {
          * The file manager object.
          *
          * @official
+         * @since 0.11.0
          */
         fileManager: FileManager;
 
@@ -119,6 +121,7 @@ declare module 'obsidian' {
          * The keymap object.
          *
          * @official
+         * @since 0.9.7
          */
         keymap: Keymap;
 
@@ -126,6 +129,7 @@ declare module 'obsidian' {
          * The last known user interaction event, to help commands find out what modifier keys are pressed.
          *
          * @official
+         * @since 0.12.17
          */
         lastEvent: UserEvent | null;
 
@@ -134,6 +138,7 @@ declare module 'obsidian' {
          *
          * @tutorial Use for finding tags and backlinks for specific files, grabbing frontmatter properties, ...
          * @unofficial
+         * @since 0.9.7
          */
         metadataCache: MetadataCache;
 
@@ -197,6 +202,7 @@ declare module 'obsidian' {
          * The scope object.
          *
          * @official
+         * @since 0.9.7
          */
         scope: Scope;
 
@@ -239,6 +245,7 @@ declare module 'obsidian' {
          * @tutorial Use `app.vault.adapter` for accessing files outside the vault.
          * @remark Prefer using the regular `vault` whenever possible.
          * @official
+         * @since 0.9.7
          */
         vault: Vault;
 
@@ -257,6 +264,7 @@ declare module 'obsidian' {
          *
          * @tutorial Used for accessing the active editor leaf, grabbing references to your views, ...
          * @official
+         * @since 0.9.7
          */
         workspace: Workspace;
 
@@ -367,7 +375,6 @@ declare module 'obsidian' {
          *
          * @param attachmentsToImport - The attachments to import.
          * @param folder - The folder to import the attachments to.
-         *
          * @unofficial
          */
         importAttachments(attachmentsToImport: ImportedAttachment[], folder: TFolder | null): Promise<void>;
@@ -393,6 +400,7 @@ declare module 'obsidian' {
          * @remark This method is device *and* vault specific.
          * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault.
          * @official - Changed return type.
+         * @since 1.8.7
          */
         loadLocalStorage(key: string): null | unknown;
 
@@ -484,6 +492,7 @@ declare module 'obsidian' {
          * @remark This method is device *and* vault specific.
          * @tutorial Use load/saveLocalStorage for saving configuration data that needs to be unique to the current vault.
          * @official
+         * @since 1.8.7
          */
         saveLocalStorage(key: string, data: unknown | null): void;
 

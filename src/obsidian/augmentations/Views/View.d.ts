@@ -5,12 +5,14 @@ export {};
 declare module 'obsidian' {
     /**
      * Base class for all views.
+     * @since 0.9.7
      */
     interface View extends Component {
         /**
          * The Obsidian app instance.
          *
          * @official
+         * @since 0.9.7
          */
         app: App;
 
@@ -25,6 +27,7 @@ declare module 'obsidian' {
          * The container HTML element for the component.
          *
          * @official
+         * @since 0.9.7
          */
         containerEl: HTMLElement;
 
@@ -32,6 +35,7 @@ declare module 'obsidian' {
          * The icon of the view.
          *
          * @official
+         * @since 1.1.0
          */
         icon: IconName;
 
@@ -39,6 +43,7 @@ declare module 'obsidian' {
          * The leaf of the view.
          *
          * @official
+         * @since 0.9.7
          */
         leaf: WorkspaceLeaf;
 
@@ -50,6 +55,7 @@ declare module 'obsidian' {
          * (For example: Markdown editor view, Kanban view, PDF view, etc.)
          *
          * @official
+         * @since 0.15.1
          */
         navigation: boolean;
 
@@ -63,6 +69,7 @@ declare module 'obsidian' {
          * ```
          * @default `null`
          * @official
+         * @since 1.5.7
          */
         scope: Scope | null;
 
@@ -79,6 +86,7 @@ declare module 'obsidian' {
          * @param leaf - The leaf of the view.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @since 0.9.7
          */
         constructor__(leaf: WorkspaceLeaf): this;
 
@@ -88,6 +96,7 @@ declare module 'obsidian' {
          * @returns The display text of the view.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getDisplayText} instead.
+         * @since 0.9.7
          */
         getDisplayText__?(): string;
 
@@ -96,6 +105,7 @@ declare module 'obsidian' {
          *
          * @returns The ephemeral state of the view.
          * @official
+         * @since 0.9.7
          */
         getEphemeralState(): Record<string, unknown>;
 
@@ -104,6 +114,7 @@ declare module 'obsidian' {
          *
          * @returns The icon of the view.
          * @official
+         * @since 1.1.0
          */
         getIcon(): IconName;
 
@@ -119,6 +130,7 @@ declare module 'obsidian' {
          *
          * @returns The state of the view.
          * @official
+         * @since 0.9.7
          */
         getState(): Record<string, unknown>;
 
@@ -128,6 +140,7 @@ declare module 'obsidian' {
          * @returns The type of the view.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getViewType} instead.
+         * @since 0.9.7
          */
         getViewType__?(): string;
 
@@ -158,6 +171,7 @@ declare module 'obsidian' {
          * @returns A promise that resolves when the view is closed.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link onClose} instead.
+         * @since 0.9.7
          */
         onClose__?(): Promise<void>;
 
@@ -173,6 +187,7 @@ declare module 'obsidian' {
          * @returns A promise that resolves when the view is opened.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link onOpen} instead.
+         * @since 0.9.7
          */
         onOpen__?(): Promise<void>;
 
@@ -184,6 +199,7 @@ declare module 'obsidian' {
          * @param menu - The menu to populate.
          * @param source - The source of the menu.
          * @official
+         * @since 0.15.3
          */
         onPaneMenu(menu: Menu, source: 'more-options' | 'tab-header' | string): void;
 
@@ -191,6 +207,7 @@ declare module 'obsidian' {
          * Called when the size of this view is changed.
          *
          * @official
+         * @since 0.9.7
          */
         onResize(): void;
 
@@ -219,6 +236,7 @@ declare module 'obsidian' {
          * this.setEphemeralState({ foo: 'bar' });
          * ```
          * @official
+         * @since 0.9.7
          */
         setEphemeralState(state: unknown): void;
 
@@ -233,6 +251,7 @@ declare module 'obsidian' {
          * this.setState({ foo: 'bar' }, { history: true });
          * ```
          * @official
+         * @since 0.9.7
          */
         setState(state: unknown, result: ViewStateResult): Promise<void>;
     }

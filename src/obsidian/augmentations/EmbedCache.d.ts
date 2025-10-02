@@ -9,6 +9,7 @@ declare module 'obsidian' {
      * ![[wikilink|alias]]
      * ![alias](markdown-link)
      * ```
+     * @since 0.9.7
      */
     interface EmbedCache extends ReferenceCache {
     }

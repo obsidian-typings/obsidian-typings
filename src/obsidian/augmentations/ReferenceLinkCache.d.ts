@@ -9,6 +9,7 @@ declare module 'obsidian' {
      *
      * [google]: https://google.com
      * ```
+     * @since 1.8.7
      */
     interface ReferenceLinkCache extends CacheItem {
         /**
