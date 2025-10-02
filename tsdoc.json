@@ -13,6 +13,10 @@
       "syntaxKind": "block"
     },
     {
+      "tagName": "@since",
+      "syntaxKind": "block"
+    },
+    {
       "tagName": "@todo",
       "syntaxKind": "block"
     },
@@ -28,6 +32,7 @@
   "supportForTags": {
     "@official": true,
     "@remark": true,
+    "@since": true,
     "@todo": true,
     "@tutorial": true,
     "@unofficial": true
