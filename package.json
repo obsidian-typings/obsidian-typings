@@ -98,6 +98,7 @@
     "npm-run-all": "^4.1.5",
     "obsidian-dev-utils": "^42.6.3",
     "patch-package": "^8.0.1",
+    "semver": "^7.7.2",
     "ts-morph": "^27.0.0",
     "typescript": "^5.9.3"
   },

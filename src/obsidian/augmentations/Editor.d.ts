@@ -1,6 +1,7 @@
 import type { EditorView } from '@codemirror/view';
 import type { Coords } from '../../@codemirror__view/internals/Coords.d.ts';
 import type { ClickableToken } from '../internals/ClickableToken.d.ts';
+import type { CoordsLeftTop } from '../internals/CoordsLeftTop.d.ts';
 import type { Fold } from '../internals/Fold.d.ts';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
 import type { SearchCursor } from '../internals/SearchCursor.d.ts';
