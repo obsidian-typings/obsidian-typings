@@ -14,7 +14,6 @@ import type { MobileTabSwitcher } from '../internals/MobileTabSwitcher.d.ts';
 import type { MobileToolbar } from '../internals/MobileToolbar.d.ts';
 import type { ObsidianDOM } from '../internals/ObsidianDOM.d.ts';
 import type { Plugins } from '../internals/Plugins/Plugins.d.ts';
-import type { RenderContext } from '../internals/RenderContext.d.ts';
 import type { ShareReceiver } from '../internals/ShareReceiver.d.ts';
 import type { StatusBar } from '../internals/StatusBar.d.ts';
 import type { ViewRegistry } from '../internals/ViewRegistry/ViewRegistry.d.ts';
@@ -194,7 +193,8 @@ declare module 'obsidian' {
         /**
          * The render context.
          *
-         * @unofficial
+         * @official
+         * @since 1.10.0
          */
         renderContext: RenderContext;
 
@@ -385,6 +385,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         initializeWithAdapter(adapter: DataAdapter): Promise<void>;
+
+        /**
+         * Check if the application is in dark mode.
+         *
+         * @official
+         * @since 1.10.0
+         */
+        isDarkMode(): boolean;
 
         /**
          * @todo Documentation incomplete.

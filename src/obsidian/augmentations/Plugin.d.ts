@@ -148,6 +148,17 @@ declare module 'obsidian' {
         onUserEnable(): void;
 
         /**
+         * Register a Base view handler that can be used to render data from property queries.
+         *
+         * @param viewId - The id of the view to register.
+         * @param registration - The registration of the view to register.
+         * @returns false if bases are not enabled in this vault.
+         * @official
+         * @since 1.10.0
+         */
+        registerBasesView(viewId: string, registration: BasesViewRegistration): boolean;
+
+        /**
          * Registers a CodeMirror 6 extension.
          * To reconfigure cm6 extensions for a plugin on the fly, an array should be passed in, and modified dynamically.
          * Once this array is modified, calling {@link Workspace.updateOptions} will apply the changes.

@@ -479,6 +479,14 @@ declare module 'obsidian' {
     };
 
     /**
+     * Split a Bases property ID into constituent parts.
+     *
+     * @official
+     * @since 1.10.0
+     */
+    function parsePropertyId(propertyId: BasesPropertyId): BasesProperty;
+
+    /**
      * Parses a YAML string into an object.
      *
      * @param yaml - The YAML string to parse.

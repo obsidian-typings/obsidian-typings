@@ -1,4 +1,4 @@
-import type { RenderContext } from '../../RenderContext.d.ts';
+import type { RenderContext } from 'obsidian';
 
 /**
  * Bases control.

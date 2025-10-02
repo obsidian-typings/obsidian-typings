@@ -195,6 +195,22 @@ declare module 'obsidian' {
         setBackgroundOpacity(opacity: string): this;
 
         /**
+         * Set the callback to be called when the modal is closed.
+         *
+         * @param callback - The callback to be called when the modal is closed.
+         * @returns The modal instance.
+         * @example
+         * ```ts
+         * modal.setCloseCallback(() => {
+         *     console.log('Modal closed');
+         * });
+         * ```
+         * @official
+         * @since 1.10.0
+         */
+        setCloseCallback(callback: () => any): this;
+
+        /**
          * Set the content of the modal.
          *
          * @param content - The content of the modal.
