@@ -70,7 +70,7 @@ To make it easier to adapt to these differences, this package provides typings f
 Typings for each `Obsidian` version can be found in their own git branches: namely `release/obsidian-public/*` and `release/obsidian-catalyst/*`:
 
 - Latest `public` release: [`release/obsidian-public/1.9.14`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.9.14)
-- Latest `catalyst` release: [`release/obsidian-catalyst/1.10.1`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-catalyst/1.10.1)
+- Latest `catalyst` release: [`release/obsidian-catalyst/1.10.2`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-catalyst/1.10.2)
 
 Older versions of the package are available, but support for them is limited.
 In most cases, we recommend to always use the latest release.
