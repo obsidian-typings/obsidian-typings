@@ -353,7 +353,7 @@ declare module 'obsidian' {
         getName(): string;
 
         /**
-         * Returns an URI for the browser engine to use, for example to embed an image.
+         * Returns a URI for the browser engine to use, for example to embed an image.
          *
          * @param file - The file to get the resource path for.
          * @returns The resource path for the file.

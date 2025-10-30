@@ -38,7 +38,7 @@ declare module 'obsidian' {
         /**
          * A single character indicating the checked status of a task.
          * The space character `' '` is interpreted as an incomplete task.
-         * An other character is interpreted as completed task.
+         * Any other character is interpreted as completed task.
          * `undefined` if this item isn't a task.
          *
          * @official

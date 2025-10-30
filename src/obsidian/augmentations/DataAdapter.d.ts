@@ -137,7 +137,7 @@ declare module 'obsidian' {
         getRealPath(path: string): string;
 
         /**
-         * Returns an URI for the browser engine to use, for example to embed an image.
+         * Returns a URI for the browser engine to use, for example to embed an image.
          *
          * @param normalizedPath - path to file/folder, use {@link normalizePath} to normalize beforehand.
          * @returns A URI for the browser engine to use.

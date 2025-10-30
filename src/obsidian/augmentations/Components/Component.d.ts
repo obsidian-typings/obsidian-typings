@@ -91,7 +91,7 @@ declare module 'obsidian' {
         register(cb: () => any): void;
 
         /**
-         * Registers an DOM event to be detached when unloading.
+         * Registers a DOM event to be detached when unloading.
          *
          * @typeParam K - The type of the event to register.
          * @param el - The element to register the event on.
@@ -115,7 +115,7 @@ declare module 'obsidian' {
         ): void;
 
         /**
-         * Registers an DOM event to be detached when unloading.
+         * Registers a DOM event to be detached when unloading.
          *
          * @typeParam K - The type of the event to register.
          * @param el - The element to register the event on.
@@ -138,7 +138,7 @@ declare module 'obsidian' {
         ): void;
 
         /**
-         * Registers an DOM event to be detached when unloading.
+         * Registers a DOM event to be detached when unloading.
          *
          * @typeParam K - The type of the event to register.
          * @param el - The element to register the event on.

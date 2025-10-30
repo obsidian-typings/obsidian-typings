@@ -30,5 +30,15 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         type: 'group';
+
+        /**
+         * If provided, the group will be hidden if the function returns true.
+         *
+         * @param config - Read-only copy of the current view configuration.
+         * @returns `true` if the group should be hidden, `false` otherwise.
+         * @official
+         * @since 1.10.2
+         */
+        shouldHide?(config: BasesViewConfig): boolean;
     }
 }

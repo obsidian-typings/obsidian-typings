@@ -10,11 +10,14 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link ViewOption} instead.
      */
     type ViewOption__ =
-        | TextOption
-        | MultitextOption
+        | DropdownOption
+        | FileOption
+        | FolderOption
+        | FormulaOption
         | GroupOption
+        | MultitextOption
         | PropertyOption
-        | ToggleOption
         | SliderOption
-        | DropdownOption;
+        | TextOption
+        | ToggleOption;
 }

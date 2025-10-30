@@ -47,6 +47,20 @@ declare module 'obsidian' {
         getDisplayName(propertyId: BasesPropertyId): string;
 
         /**
+         * Retrieve a user-configured value from the config, evaluating it as a
+         * formula in the context of the current Base. For embedded bases, or bases
+         * in the sidebar, this means evaluating the formula against the currently
+         * active file.
+         *
+         * @param view - The view to evaluate the formula in the context of.
+         * @param key - The key to evaluate the formula for.
+         * @returns the {@link Value} result from evaluating the formula, or {@link NullValue} if the formula is invalid, or the key is not present.
+         * @official
+         * @since 1.10.2
+         */
+        getEvaluatedFormula(view: BasesView, key: string): Value;
+
+        /**
          * Ordered list of properties to display in this view.
          * In a table, these can be interpreted as the list of visible columns.
          * Order is configured by the user through the properties toolbar menu.

@@ -180,7 +180,7 @@ declare module 'obsidian' {
         getName(): string;
 
         /**
-         * Returns an URI for the browser engine to use, for example to embed an image.
+         * Returns a URI for the browser engine to use, for example to embed an image.
          *
          * @param normalizedPath - The path to get the resource path for.
          * @returns A URI for the browser engine to use.

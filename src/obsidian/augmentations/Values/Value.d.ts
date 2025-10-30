@@ -50,18 +50,25 @@ declare module 'obsidian' {
         renderTo(el: HTMLElement, ctx: RenderContext): void;
 
         /**
-             * Get the string representation of this Value.
-             *
-             * @returns The string representation of this Value.
-             * @since 1.10.0
-             * @deprecated - Added only for typing purposes. Use {@link Value.toString} instead.
-             *
-            @unofficial ERROR: Missing `@unofficial` or `@official` tag
-             */
+         * Get the string representation of this Value.
+         *
+         * @returns The string representation of this Value.
+         * @deprecated - Added only for typing purposes. Use {@link Value.toString} instead.
+         * @official
+         * @since 1.10.0
+         */
         toString__(): string;
     }
 
     namespace Value {
+        /**
+         * The type of the value.
+         *
+         * @official
+         * @since 1.10.0
+         * @deprecated - Added only for typing purposes. Use {@link Value.type} instead.
+         */
+        let type__: string;
         /**
          * Equals.
          *

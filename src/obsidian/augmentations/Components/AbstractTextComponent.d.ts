@@ -54,6 +54,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
+         * @since 0.9.7
          */
         onChange(callback: (value: string) => any): this;
 
@@ -61,6 +62,7 @@ declare module 'obsidian' {
          * Manually invokes the callback registered with `onChange`.
          *
          * @official
+         * @since 0.9.21
          */
         onChanged(): void;
 
@@ -88,6 +90,7 @@ declare module 'obsidian' {
          * textComponent.setPlaceholder('foo');
          * ```
          * @official
+         * @since 0.9.7
          */
         setPlaceholder(placeholder: string): this;
 

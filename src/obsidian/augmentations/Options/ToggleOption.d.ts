@@ -16,12 +16,11 @@ declare module 'obsidian' {
         default?: boolean;
 
         /**
-             * Type.
-             *
-             * @since 1.10.0
-             *
-            @unofficial ERROR: Missing `@unofficial` or `@official` tag
-             */
+         * Type.
+         *
+         * @official
+         * @since 1.10.0
+         */
         type: 'toggle';
     }
 }

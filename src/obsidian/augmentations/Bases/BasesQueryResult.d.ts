@@ -10,7 +10,7 @@ declare module 'obsidian' {
      */
     interface BasesQueryResult {
         /**
-         * A ungrouped version of the data, with user-configured sort and limit applied.
+         * An ungrouped version of the data, with user-configured sort and limit applied.
          * Where appropriate, views should support groupBy by using `groupedData` instead of this value.
          *
          * @official

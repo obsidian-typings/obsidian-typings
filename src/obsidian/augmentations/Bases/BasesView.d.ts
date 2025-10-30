@@ -58,6 +58,20 @@ declare module 'obsidian' {
         constructor__(controller: QueryController): this;
 
         /**
+         * Display the new note menu for a file with the provided filename and optionally a function to modify the frontmatter.
+         *
+         * @param baseFileName - The filename of the base file.
+         * @param frontmatterProcessor - A function to modify the frontmatter.
+         * @returns A promise that resolves when the file is created.
+         * @official
+         * @since 1.10.2
+         */
+        createFileForView(
+            baseFileName: string,
+            frontmatterProcessor?: (frontmatter: Frontmatter) => void
+        ): Promise<void>;
+
+        /**
          * Called when there is new data for the query. This view should rerender with the updated data.
          * @official
          * @since 1.10.0
