@@ -24,14 +24,6 @@ declare module 'obsidian' {
         items: Exclude<ViewOption, GroupOption>[];
 
         /**
-         * Type.
-         *
-         * @official
-         * @since 1.10.0
-         */
-        type: 'group';
-
-        /**
          * If provided, the group will be hidden if the function returns true.
          *
          * @param config - Read-only copy of the current view configuration.
@@ -39,6 +31,14 @@ declare module 'obsidian' {
          * @official
          * @since 1.10.2
          */
-        shouldHide?(config: BasesViewConfig): boolean;
+        shouldHide?: (config: BasesViewConfig) => boolean;
+
+        /**
+         * Type.
+         *
+         * @official
+         * @since 1.10.0
+         */
+        type: 'group';
     }
 }
