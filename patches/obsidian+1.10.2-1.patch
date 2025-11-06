@@ -1,5 +1,5 @@
 diff --git a/node_modules/obsidian/obsidian.d.ts b/node_modules/obsidian/obsidian.d.ts
-index caeee06..5e683eb 100644
+index 73bb249..7a65311 100644
 --- a/node_modules/obsidian/obsidian.d.ts
 +++ b/node_modules/obsidian/obsidian.d.ts
 @@ -6,6 +6,9 @@
@@ -12,7 +12,7 @@ index caeee06..5e683eb 100644
  
  declare global {
      interface ObjectConstructor {
-@@ -3265,7 +3268,7 @@ export function loadMathJax(): Promise<void>;
+@@ -3378,7 +3381,7 @@ export function loadMathJax(): Promise<void>;
   * @see {@link https://mermaid.js.org/ Official Mermaid documentation}
   * @public
   */
@@ -21,7 +21,7 @@ index caeee06..5e683eb 100644
  
  /**
   * Load PDF.js and return a promise to the global pdfjsLib object.
-@@ -3273,7 +3276,7 @@ export function loadMermaid(): Promise<any>;
+@@ -3386,7 +3389,7 @@ export function loadMermaid(): Promise<any>;
   * @see {@link https://mozilla.github.io/pdf.js/ Official PDF.js documentation}
   * @public
   */
@@ -30,7 +30,7 @@ index caeee06..5e683eb 100644
  
  /**
   * Load Prism.js and return a promise to the global Prism object.
-@@ -3281,7 +3284,7 @@ export function loadPdfJs(): Promise<any>;
+@@ -3394,7 +3397,7 @@ export function loadPdfJs(): Promise<any>;
   * @see {@link https://prismjs.com/ Official Prism documentation}
   * @public
   */
