@@ -9,7 +9,7 @@
         "@codemirror/language": "6.11.2",
         "@codemirror/search": "6.5.11",
         "@codemirror/state": "6.5.0",
-        "@codemirror/view": "6.38.1",
+        "@codemirror/view": "6.38.6",
         "@lezer/common": "1.2.3",
         "@pixi/color": "7.2.4",
         "@pixi/events": "7.2.4",
@@ -25,7 +25,7 @@
         "i18next": "25.2.1",
         "mermaid": "11.4.1",
         "moment": "2.29.4",
-        "obsidian": "1.10.0",
+        "obsidian": "1.10.3",
         "pdfjs-dist": "5.3.31",
         "pixi.js": "7.2.4",
         "scrypt-js": "3.0.1",
@@ -101,7 +101,7 @@
 
     "@codemirror/state": ["@codemirror/state@6.5.0", "", { "dependencies": { "@marijn/find-cluster-break": "^1.0.0" } }, "sha512-MwBHVK60IiIHDcoMet78lxt6iw5gJOGSbNbOIVBHWVXIH4/Nq1+GQgLLGgI1KlnN86WDXsPudVaqYHKBIx7Eyw=="],
 
-    "@codemirror/view": ["@codemirror/view@6.38.1", "", { "dependencies": { "@codemirror/state": "^6.5.0", "crelt": "^1.0.6", "style-mod": "^4.1.0", "w3c-keyname": "^2.2.4" } }, "sha512-RmTOkE7hRU3OVREqFVITWHz6ocgBjv08GoePscAakgVQfciA3SGCEk7mb9IzwW61cKKmlTpHXG6DUE5Ubx+MGQ=="],
+    "@codemirror/view": ["@codemirror/view@6.38.6", "", { "dependencies": { "@codemirror/state": "^6.5.0", "crelt": "^1.0.6", "style-mod": "^4.1.0", "w3c-keyname": "^2.2.4" } }, "sha512-qiS0z1bKs5WOvHIAC0Cybmv4AJSkAXgX5aD6Mqd2epSLlVJsQl8NG23jCVouIgkh4All/mrbdsf2UOLFnJw0tw=="],
 
     "@commitlint/cli": ["@commitlint/cli@20.1.0", "", { "dependencies": { "@commitlint/format": "^20.0.0", "@commitlint/lint": "^20.0.0", "@commitlint/load": "^20.1.0", "@commitlint/read": "^20.0.0", "@commitlint/types": "^20.0.0", "tinyexec": "^1.0.0", "yargs": "^17.0.0" }, "bin": { "commitlint": "./cli.js" } }, "sha512-pW5ujjrOovhq5RcYv5xCpb4GkZxkO2+GtOdBW2/qrr0Ll9tl3PX0aBBobGQl3mdZUbOBgwAexEQLeH6uxL0VYg=="],
 
@@ -1665,7 +1665,7 @@
 
     "object.assign": ["object.assign@4.1.5", "", { "dependencies": { "call-bind": "^1.0.5", "define-properties": "^1.2.1", "has-symbols": "^1.0.3", "object-keys": "^1.1.1" } }, "sha512-byy+U7gp+FVwmyzKPYhW2h5l3crpmGsxl7X2s8y43IgxvG4g3QZ6CffDtsNQy1WsmZpQbO+ybo0AlW7TY6DcBQ=="],
 
-    "obsidian": ["obsidian@1.10.0", "", { "dependencies": { "@types/codemirror": "5.60.8", "moment": "2.29.4" }, "peerDependencies": { "@codemirror/state": "6.5.0", "@codemirror/view": "6.38.1" } }, "sha512-F7hhnmGRQD1TanDPFT//LD3iKNUVd7N8sKL7flCCHRszfTxpDJ39j3T7LHbcGpyid906i6lD5oO+cnfLBzJMKw=="],
+    "obsidian": ["obsidian@1.10.3", "", { "dependencies": { "@types/codemirror": "5.60.8", "moment": "2.29.4" }, "peerDependencies": { "@codemirror/state": "6.5.0", "@codemirror/view": "6.38.6" } }, "sha512-VP+ZSxNMG7y6Z+sU9WqLvJAskCfkFrTz2kFHWmmzis+C+4+ELjk/sazwcTHrHXNZlgCeo8YOlM6SOrAFCynNew=="],
 
     "obsidian-dev-utils": ["obsidian-dev-utils@42.6.3", "", { "dependencies": { "@eslint-community/eslint-plugin-eslint-comments": "^4.5.0", "@eslint/js": "^9.36.0", "@guardian/eslint-plugin-tsdoc-required": "^0.1.3", "@lezer/common": "^1.2.3", "@stylistic/eslint-plugin": "^5.4.0", "@total-typescript/ts-reset": "^0.6.1", "@tsconfig/strictest": "^2.0.6", "@types/babel__core": "^7.20.5", "@types/doctrine": "^0.0.9", "@types/eslint": "^9.6.1", "@types/luxon": "^3.7.1", "@types/node": "^24.6.1", "@types/parsimmon": "^1.10.9", "@types/path-browserify": "^1.0.3", "@types/picomatch": "^4.0.2", "@types/pug": "^2.0.10", "@types/react": "^19.1.16", "@types/shell-quote": "^1.7.5", "@typescript-eslint/eslint-plugin": "^8.45.0", "@typescript-eslint/parser": "^8.45.0", "better-typescript-lib": "^2.12.0", "commander": "^14.0.1", "compare-versions": "^6.1.1", "cspell": "^9.2.1", "debug": "^4.4.3", "dotenv": "^17.2.3", "dprint": "^0.50.2", "enhanced-resolve": "^5.18.3", "esbuild": "^0.25.10", "esbuild-sass-plugin": "^3.3.1", "esbuild-svelte": "^0.9.3", "eslint": "^9.36.0", "eslint-import-resolver-typescript": "^4.4.4", "eslint-plugin-import-x": "^4.16.1", "eslint-plugin-jsdoc": "^60.7.0", "eslint-plugin-modules-newlines": "^0.0.7", "eslint-plugin-perfectionist": "^4.15.0", "eslint-plugin-tsdoc": "^0.4.0", "glob": "^11.0.3", "i18next": "^25.5.3", "jiti": "^2.6.1", "localforage": "^1.10.0", "lru-cache": "^11.2.2", "moment": "^2.30.1", "monkey-around": "^3.0.0", "npm-run-all": "^4.1.5", "obsidian": "latest", "obsidian-typings": "obsidian-public-latest", "path-browserify": "^1.0.1", "postcss": "^8.5.6", "postcss-modules": "^6.0.1", "preact": "^10.27.2", "react": "^19.1.1", "remark": "^15.0.1", "remark-parse": "^11.0.0", "remark-wiki-link": "^2.0.1", "sass": "^1.93.2", "shell-quote": "^1.8.3", "svelte-check": "^4.3.2", "svelte-preprocess": "^6.0.3", "tsx": "^4.20.6", "type-fest": "^5.0.1", "typescript": "^5.9.3", "typescript-eslint": "^8.45.0", "unist-util-visit": "^5.0.0" }, "bin": { "obsidian-dev-utils": "dist/bin/cli.cjs" } }, "sha512-Kq8tZ/sPvnfKcEp5dZZHUG3vgv96awqMcOYbKy+tortkxVCvqS1Fan8JkB8HpQ+lRnGKU9AORuGyhJnOJTE90A=="],
 
@@ -2313,6 +2313,8 @@
 
     "obsidian-dev-utils/moment": ["moment@2.30.1", "", {}, "sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how=="],
 
+    "obsidian-dev-utils/obsidian": ["obsidian@1.10.0", "", { "dependencies": { "@types/codemirror": "5.60.8", "moment": "2.29.4" }, "peerDependencies": { "@codemirror/state": "6.5.0", "@codemirror/view": "6.38.1" } }, "sha512-F7hhnmGRQD1TanDPFT//LD3iKNUVd7N8sKL7flCCHRszfTxpDJ39j3T7LHbcGpyid906i6lD5oO+cnfLBzJMKw=="],
+
     "obsidian-dev-utils/shell-quote": ["shell-quote@1.8.3", "", {}, "sha512-ObmnIF4hXNg1BqhnHmgbDETF8dLPCggZWBjkQfhZpbszZnYur5DUljTcCHii5LC3J5E0yeO/1LIMyH+UvHQgyw=="],
 
     "obsidian-typings/@codemirror/state": ["@codemirror/state@6.5.2", "", { "dependencies": { "@marijn/find-cluster-break": "^1.0.0" } }, "sha512-FVqsPqtPWKVVL3dPSxy8wEF/ymIEuVzF1PK3VbUgrxXpJUSHQWWZz4JMToquRxnkw+36LTamCZG2iua2Ptq0fA=="],
@@ -2470,6 +2472,8 @@
     "obsidian-dev-utils/@types/node/undici-types": ["undici-types@7.13.0", "", {}, "sha512-Ov2Rr9Sx+fRgagJ5AX0qvItZG/JKKoBRAVITs1zk7IqZGTJUwgUr7qoYBpWwakpWilTZFM98rG/AFRocu10iIQ=="],
 
     "obsidian-dev-utils/i18next/@babel/runtime": ["@babel/runtime@7.28.4", "", {}, "sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ=="],
+
+    "obsidian-dev-utils/obsidian/moment": ["moment@2.29.4", "", {}, "sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w=="],
 
     "obsidian-typings/@types/node/undici-types": ["undici-types@7.13.0", "", {}, "sha512-Ov2Rr9Sx+fRgagJ5AX0qvItZG/JKKoBRAVITs1zk7IqZGTJUwgUr7qoYBpWwakpWilTZFM98rG/AFRocu10iIQ=="],
 
