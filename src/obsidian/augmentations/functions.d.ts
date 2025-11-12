@@ -1,6 +1,3 @@
-import type { Mermaid } from 'mermaid';
-import type { default as pdfjsLib } from 'pdfjs-dist';
-import type { default as Prism } from 'prismjs';
 import type { QueryForFuzzySearch } from '../internals/QueryForFuzzySearch.d.ts';
 
 export {};
@@ -327,10 +324,18 @@ declare module 'obsidian' {
      *
      * @returns A promise that resolves to the global {@link Window.mermaid} object.
      *
+     * @remark For more specific return type, use:
+     *
+     * ```ts
+     * import { loadMermaid } from 'obsidian-typings/implementations';
+     *
+     * const mermaid = await loadMermaid();
+     * ```
+     *
      * @see {@link https://mermaid.js.org/ Official Mermaid documentation}.
-     * @official - Patched return type to be more specific.
+     * @official
      */
-    function loadMermaid(): Promise<Mermaid>;
+    function loadMermaid(): Promise<any>;
 
     /**
      * Load PDF.js and return a promise to the global pdfjsLib object.
@@ -338,10 +343,18 @@ declare module 'obsidian' {
      *
      * @returns A promise that resolves to the global {@link Window.pdfjsLib} object.
      *
+     * @remark For more specific return type, use:
+     *
+     * ```ts
+     * import { loadPdfJs } from 'obsidian-typings/implementations';
+     *
+     * const pdfjsLib = await loadPdfJs();
+     * ```
+     *
      * @see {@link https://mozilla.github.io/pdf.js/ Official PDF.js documentation}.
-     * @official - Patched return type to be more specific.
+     * @official
      */
-    function loadPdfJs(): Promise<typeof pdfjsLib>;
+    function loadPdfJs(): Promise<any>;
 
     /**
      * Load Prism.js and return a promise to the global Prism object.
@@ -349,10 +362,18 @@ declare module 'obsidian' {
      *
      * @returns A promise that resolves to the global {@link Window.Prism} object.
      *
+     * @remark For more specific return type, use:
+     *
+     * ```ts
+     * import { loadPrism } from 'obsidian-typings/implementations';
+     *
+     * const Prism = await loadPrism();
+     * ```
+     *
      * @see {@link https://prismjs.com/ Official Prism documentation}.
-     * @official - Patched return type to be more specific.
+     * @official
      */
-    function loadPrism(): Promise<typeof Prism>;
+    function loadPrism(): Promise<any>;
 
     /**
      * Normalizes a path replacing all invalid symbols.
