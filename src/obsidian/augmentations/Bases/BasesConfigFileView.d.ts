@@ -5,7 +5,7 @@ declare module 'obsidian' {
      * @todo Documentation incomplete.
      * @since 1.10.0
      */
-    export interface BasesConfigFileView {
+    interface BasesConfigFileView {
         /**
          * Additional filters, applied only to this view.
          *

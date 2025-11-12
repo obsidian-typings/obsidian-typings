@@ -6,7 +6,7 @@ declare module 'obsidian' {
      *
      * @since 1.10.0
      */
-    export interface BasesConfigFile {
+    interface BasesConfigFile {
         /**
          * @official
          * @since 1.10.0

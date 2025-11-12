@@ -6,7 +6,7 @@ declare module 'obsidian' {
      *
      * @since 1.10.0
      */
-    export interface BaseOption {
+    interface BaseOption {
         /**
          * Display name.
          *

@@ -4,6 +4,8 @@ declare module 'obsidian' {
     /**
      * @todo Documentation incomplete.
      * @since 1.10.0
+     *
+     * @deprecated - Added only for typing purposes. Use {@link BasesConfigFileFilter} instead.
      */
-    export type BasesConfigFileFilter = string | {} | {} | {};
+    type BasesConfigFileFilter__ = string | {} | {} | {};
 }

@@ -6,7 +6,7 @@ declare module 'obsidian' {
      *
      * @since 1.10.2
      */
-    export interface FolderOption extends BaseOption {
+    interface FolderOption extends BaseOption {
         /**
          * The default value of the option.
          *
