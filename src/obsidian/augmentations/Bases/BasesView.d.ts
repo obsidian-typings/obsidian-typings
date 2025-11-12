@@ -66,7 +66,7 @@ declare module 'obsidian' {
          * @official
          * @since 1.10.2
          */
-        createFileForView(baseFileName: string, frontmatterProcessor?: (frontmatter: any) => void): Promise<void>;
+        createFileForView(baseFileName?: string, frontmatterProcessor?: (frontmatter: any) => void): Promise<void>;
 
         /**
          * Called when there is new data for the query. This view should rerender with the updated data.

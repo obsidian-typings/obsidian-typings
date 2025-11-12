@@ -17,7 +17,8 @@ declare module 'obsidian' {
 
         /**
          * Get the value of the property.
-         * @throws Error if the property is a formula and cannot be evaluated.
+         * Note: Errors are returned as {@link ErrorValue}
+         *
          * @official
          * @since 1.10.0
          */
