@@ -15,8 +15,9 @@ await wrapCliTask(async () => {
   const newVersion = process.argv[2] ?? '';
   // eslint-disable-next-line no-magic-numbers
   const newVersionChannel = process.argv[3] as 'catalyst' | 'public' | undefined;
-  if (!newVersion || !newVersionChannel || !['catalyst', 'public'].includes(newVersionChannel)) {
-    throw new Error('Usage: bun ./workflow-scripts/create-new-release-branch.ts <newVersion> <public|catalyst>');
+  const changelogUrl = process.argv[4] ?? '';
+  if (!newVersion || !newVersionChannel || !['catalyst', 'public'].includes(newVersionChannel) || !changelogUrl) {
+    throw new Error('Usage: bun ./workflow-scripts/create-new-release-branch.ts <newVersion> <public|catalyst> <changelogUrl>');
   }
 
   const latestPublicVersion = await getLatestVersion('public');
@@ -53,6 +54,6 @@ await wrapCliTask(async () => {
   await checkout(latestBranch, true);
   await exec(`git checkout -b "${newBranch}"`);
   await exec(`git push -u origin "${newBranch}"`);
-  await generateReadme({ channel: newVersionChannel, obsidianVersion: newVersion });
+  await generateReadme({ channel: newVersionChannel, obsidianVersion: newVersion }, changelogUrl);
   await generateMainReadme();
 });
