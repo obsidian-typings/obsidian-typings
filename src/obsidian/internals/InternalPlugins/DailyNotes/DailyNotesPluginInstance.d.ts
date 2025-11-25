@@ -1,4 +1,4 @@
-import type { default as moment } from 'moment';
+import type { moment } from 'obsidian';
 import type {
     App,
     TFile

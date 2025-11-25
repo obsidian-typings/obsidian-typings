@@ -1,4 +1,3 @@
-import type moment from 'moment';
 import type { DatePropertyWidgetComponentBase } from './DatePropertyWidgetComponentBase.d.ts';
 
 /**
