@@ -3,7 +3,6 @@ import type {
     EditorView,
     ViewPlugin
 } from '@codemirror/view';
-import type { default as moment } from 'moment';
 import type { PlatformEx } from '../internals/PlatformEx.d.ts';
 
 export {};

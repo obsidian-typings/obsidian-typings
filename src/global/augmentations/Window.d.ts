@@ -7,7 +7,7 @@ import type { default as DOMPurify } from 'dompurify';
 import type * as electron from 'electron';
 import type { default as i18next } from 'i18next';
 import type { Mermaid } from 'mermaid';
-import type { default as moment } from 'moment';
+import type { moment } from 'obsidian';
 import type {
     App,
     Notice,
