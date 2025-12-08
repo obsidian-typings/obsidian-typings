@@ -141,7 +141,9 @@ To access types from the `obsidian` module, the import syntax does not change:
 ```ts
 import type { App } from 'obsidian';
 
-console.log(this.app.internalPlugins);
+function printInternalPlugins(app: App): void {
+  console.log(app.internalPlugins);
+}
 ```
 
 ### `obsidian-typings` additional interfaces
@@ -151,7 +153,9 @@ Additional interfaces added by this package (which do not exist in the official 
 ```ts
 import type { InternalPlugins } from 'obsidian-typings';
 
-const internalPlugins: InternalPlugins = this.app.internalPlugins;
+function getInternalPlugins(app: App): InternalPlugins {
+  return app.internalPlugins;
+}
 ```
 
 ### `obsidian-typings/implementations`
