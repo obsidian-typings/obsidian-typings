@@ -124,7 +124,7 @@
     "build:extract-api": "api-extractor run --local",
     "commit": "cz",
     "format": "bun run scripts/sort-interfaces.ts ./src/ && bun dprint fmt",
-    "postinstall": "npx bun run scripts/postinstall.ts",
+    "postinstall": "node scripts/postinstall.mjs",
     "prepare": "husky",
     "release": "git show origin/main:workflow-scripts/release.ts | bun -",
     "release:beta": "git show origin/main:workflow-scripts/release-beta.ts | bun -",

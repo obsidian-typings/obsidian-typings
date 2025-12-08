@@ -3,7 +3,17 @@ import {
     join,
     relative
 } from 'node:path/posix';
-import { cwd } from 'node:process';
+import {
+    cwd,
+    env
+} from 'node:process';
+
+const isGlobalInstall = env.npm_config_global === 'true';
+
+if (isGlobalInstall) {
+    console.log('Global install detected, skipping patch-package...');
+    process.exit(0);
+}
 
 let pkgDir = cwd().replace(/\\/g, '/');
 const patchDir = join(pkgDir, 'patches');
