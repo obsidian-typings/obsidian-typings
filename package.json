@@ -135,7 +135,7 @@
     "dist/",
     "implementations/",
     "patches/",
-    "scripts/postinstall.ts",
+    "scripts/postinstall.mjs",
     "CHANGELOG.md",
     "LICENSE",
     "README.md",
