@@ -71,7 +71,7 @@
     "@types/prismjs": "1.26.5",
     "@types/turndown": "5.0.5",
     "colord": "2.9.3",
-    "electron": ">=1.6.10",
+    "electron": "39.2.6",
     "i18next": "25.2.1",
     "mermaid": "11.4.1",
     "obsidian": "1.10.3",
