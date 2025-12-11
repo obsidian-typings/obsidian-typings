@@ -16,11 +16,20 @@ declare module 'obsidian' {
         app: App;
 
         /**
-         * Outermost HTML element on the setting tab.
+         * HTML element for the setting tab content.
          *
          * @official
          */
         containerEl: HTMLElement;
+
+        /**
+         * The icon to display in the settings sidebar.
+         *
+         * @public
+         * @official
+         * @since 1.11.0
+         */
+        icon: IconName;
 
         /**
          * Unique ID of the tab.

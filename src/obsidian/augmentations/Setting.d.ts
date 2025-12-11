@@ -86,6 +86,22 @@ declare module 'obsidian' {
         addColorPicker(cb: (component: ColorComponent) => any): this;
 
         /**
+         * Add a component to the setting.
+         *
+         * @param cb - The callback to add the component.
+         * @returns The setting.
+         * @example
+         * ```ts
+         * setting.addComponent((el) => {
+         *     return new TextComponent(el);
+         * });
+         * @public
+         * @official
+         * @since 1.11.0
+         */
+        addComponent<T extends BaseComponent>(cb: (el: HTMLElement) => T): this;
+
+        /**
          * Add a dropdown component to the setting.
          *
          * @param cb - The callback to add the dropdown component.
