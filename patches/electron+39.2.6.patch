@@ -1,0 +1,16 @@
+diff --git a/node_modules/electron/electron.d.ts b/node_modules/electron/electron.d.ts
+index b5f2fe2..bd34f93 100644
+--- a/node_modules/electron/electron.d.ts
++++ b/node_modules/electron/electron.d.ts
+@@ -25562,9 +25562,10 @@ interface Document {
+   createElement(tagName: 'webview'): Electron.WebviewTag;
+ }
+ 
++type _ElectronProcessBase = import('node:events').InternalEventEmitter<import('node:process').ProcessEventMap>;
+ 
+ declare namespace NodeJS {
+-  interface Process extends NodeJS.EventEmitter {
++  interface Process extends _ElectronProcessBase {
+ 
+     // Docs: https://electronjs.org/docs/api/process
+ 
