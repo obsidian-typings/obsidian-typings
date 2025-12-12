@@ -95,7 +95,6 @@ declare module 'obsidian' {
          * setting.addComponent((el) => {
          *     return new TextComponent(el);
          * });
-         * @public
          * @official
          * @since 1.11.0
          */

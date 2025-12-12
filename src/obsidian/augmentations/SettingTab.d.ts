@@ -25,7 +25,6 @@ declare module 'obsidian' {
         /**
          * The icon to display in the settings sidebar.
          *
-         * @public
          * @official
          * @since 1.11.0
          */

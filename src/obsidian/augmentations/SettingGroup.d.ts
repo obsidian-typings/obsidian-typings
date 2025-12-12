@@ -4,7 +4,6 @@ declare module 'obsidian' {
     /**
      * Setting group.
      *
-     * @public
      * @since 1.11.0
      */
     interface SettingGroup {
@@ -17,7 +16,6 @@ declare module 'obsidian' {
          * ```ts
          * settingGroup.addClass('foo');
          * ```
-         * @public
          * @official
          * @since 1.11.0
          */
@@ -34,7 +32,6 @@ declare module 'obsidian' {
          *     setting.setName('foo');
          * });
          * ```
-         * @public
          * @official
          * @since 1.11.0
          */
@@ -45,7 +42,6 @@ declare module 'obsidian' {
          *
          * @param containerEl - The container element.
          * @returns The setting group.
-         * @public
          * @official
          * @since 1.11.0
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
@@ -61,7 +57,6 @@ declare module 'obsidian' {
          * ```ts
          * settingGroup.setHeading('foo');
          * ```
-         * @public
          * @official
          * @since 1.11.0
          */
