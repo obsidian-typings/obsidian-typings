@@ -22,7 +22,7 @@ if (pkgDir.endsWith(relativePath)) {
     pkgDir = pkgDir.slice(0, -relativePath.length);
 }
 
-spawnSync('npx', ['patch-package', '--patch-dir', relative(pkgDir, patchDir)], {
+spawnSync(`npx patch-package --patch-dir "${relative(pkgDir, patchDir)}"`, {
     shell: true,
     stdio: 'inherit',
     cwd: pkgDir

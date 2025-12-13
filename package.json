@@ -78,7 +78,7 @@
     "pdfjs-dist": "5.3.31",
     "pixi.js": "7.2.4",
     "scrypt-js": "3.0.1",
-    "style-mod": "4.1.2"
+    "style-mod": "^4.1.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
@@ -96,7 +96,6 @@
     "esbuild": "^0.25.10",
     "husky": "^9.1.7",
     "npm-run-all": "^4.1.5",
-    "obsidian-dev-utils": "^42.6.3",
     "patch-package": "^8.0.1",
     "semver": "^7.7.2",
     "ts-morph": "^27.0.0",
