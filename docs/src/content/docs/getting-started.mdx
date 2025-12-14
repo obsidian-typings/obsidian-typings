@@ -56,7 +56,7 @@ import { PackageManagers } from 'starlight-package-managers'
         ```
         :::
 	3. **Explicit type importing** <br/>
-        If you prefer not to add `obsidian-typings` to your `types`, you can also add `import 'obsidian-typings';` to any project file.
+        If you prefer not to add `obsidian-typings` to your `types`, you can also add `import type {} from 'obsidian-typings';` to any project file.
 
     4. **Using `obsidian-typings/implementations`** <br/>
         Depending on how your project is set up, `import { X } from 'obsidian-typings/implementations';` may not work straight out of the box, e.g., if you have `"moduleResolution": "node"` or `"node10"` in your `tsconfig.json`. <br/><br/>

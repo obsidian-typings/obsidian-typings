@@ -129,7 +129,7 @@ Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all 
 Instead of adding `obsidian-typings` to your `types`, you can also import the package directly:
 
 ```ts
-import 'obsidian-typings';
+import type {} from 'obsidian-typings';
 ```
 
 ## Usage
