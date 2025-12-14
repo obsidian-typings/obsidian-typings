@@ -108,7 +108,8 @@
   "overrides": {
     "@antfu/utils": "9.2.0",
     "boolean": "npm:dry-uninstall",
-    "dompurify": "3.0.1"
+    "dompurify": "3.0.1",
+    "typescript": "$typescript"
   },
   "scripts": {
     "build": "npm-run-all build:clean build:compile build:generate-index build:bundle-types build:fix-bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:fix-implementations-bundle-types build:static build:extract-api",
