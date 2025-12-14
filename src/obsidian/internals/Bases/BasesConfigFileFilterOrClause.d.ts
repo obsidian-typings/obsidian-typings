@@ -20,6 +20,7 @@ export interface BasesConfigFileFilterOrClause {
      *         '*.txt',
      *     ],
      * }
+     * ```
      */
     or: BasesConfigFileFilter[];
 }

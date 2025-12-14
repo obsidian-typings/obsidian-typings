@@ -20,6 +20,7 @@ export interface BasesConfigFileFilterNotClause {
      *         '*.txt',
      *     ],
      * }
+     * ```
      */
     not: BasesConfigFileFilter[];
 }
