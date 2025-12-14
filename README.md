@@ -95,6 +95,12 @@ In most cases, we recommend to always use the latest release.
 >
 > If you run `npm install obsidian-typings` instead, the most likely, the library will not get updated.
 
+> [!WARNING]
+>
+> The package installs several libraries that trigger `npm audit` warnings.
+>
+> Those packages cannot be updated because they should match the exact versions Obsidian uses internally.
+
 ### 2. Enable in `tsconfig.json` (recommended) <span id="add-types-setting-to-tsconfig-json"></span>
 
 Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all extended typings available globally without explicit importing them:
