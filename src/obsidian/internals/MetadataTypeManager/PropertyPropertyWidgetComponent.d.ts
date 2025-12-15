@@ -16,4 +16,18 @@ export interface PropertyPropertyWidgetComponent extends PropertyWidgetComponent
 
     /** The type of the property widget. */
     type: 'property';
+
+    /**
+     * Handle focus event.
+     *
+     * @param mode - The focus mode.
+     */
+    onFocus(): void;
+
+    /**
+     * Set the value of the property widget.
+     *
+     * @param value - The value to set.
+     */
+    setValue(value: unknown): void;
 }

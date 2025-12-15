@@ -7,9 +7,6 @@ import type { FocusMode } from '../FocusMode.d.ts';
  * @unofficial
  */
 export interface PropertyWidgetComponentBase {
-    /** The container element for the property widget. */
-    containerEl: HTMLElement;
-
     /** The type of the property widget. */
     type: string;
 
@@ -19,18 +16,4 @@ export interface PropertyWidgetComponentBase {
      * @param mode - The focus mode.
      */
     focus(mode?: FocusMode): void;
-
-    /**
-     * Handle focus event.
-     *
-     * @param mode - The focus mode.
-     */
-    onFocus(mode: FocusMode): void;
-
-    /**
-     * Set the value of the property widget.
-     *
-     * @param value - The value to set.
-     */
-    setValue(value: unknown): void;
 }

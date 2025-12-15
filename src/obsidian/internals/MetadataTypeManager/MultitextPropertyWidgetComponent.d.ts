@@ -1,4 +1,3 @@
-import type { HoverPopover } from 'obsidian';
 import type { Multiselect } from './Multiselect.d.ts';
 import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.d.ts';
 
@@ -10,7 +9,7 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  */
 export interface MultitextPropertyWidgetComponent extends PropertyWidgetComponentBase {
     /** The hover popover for the property widget. */
-    hoverPopover: HoverPopover | null;
+    hoverPopover: null;
 
     /** The multiselect component for the property widget. */
     multiselect: Multiselect;
@@ -20,4 +19,18 @@ export interface MultitextPropertyWidgetComponent extends PropertyWidgetComponen
 
     /** The values of the property widget. */
     valueSet: Set<string>;
+
+    /**
+     * Handle focus event.
+     *
+     * @param mode - The focus mode.
+     */
+    onFocus(): void;
+
+    /**
+     * Set the value of the property widget.
+     *
+     * @param value - The value to set.
+     */
+    setValue(value: unknown): void;
 }
