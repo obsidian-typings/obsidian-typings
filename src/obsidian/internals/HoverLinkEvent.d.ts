@@ -1,30 +1,45 @@
-import type { WorkspaceLeaf } from 'obsidian';
+import type { HoverParent } from 'obsidian';
 import type { HoverLinkEventState } from './HoverLinkEventState.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Event triggered when a link is hovered.
+ *
  * @public
  * @unofficial
  */
 export interface HoverLinkEvent {
-    /** @todo Documentation incomplete. */
+    /**
+     * The mouse event.
+     */
     event: MouseEvent;
 
-    /** @todo Documentation incomplete. */
-    hoverParent: WorkspaceLeaf;
+    /**
+     * The hover parent.
+     */
+    hoverParent: HoverParent;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The link text.
+     */
     linktext: string;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The source of the event.
+     */
     source: 'search' | 'editor' | 'preview' | 'properties' | 'graph' | 'file-explorer' | 'hover-link';
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The source path.
+     */
     sourcePath?: string;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The state of the event.
+     */
     state?: HoverLinkEventState;
 
-    /** @todo Documentation incomplete. */
+    /**
+     * The target element.
+     */
     targetEl: HTMLElement | null;
 }
