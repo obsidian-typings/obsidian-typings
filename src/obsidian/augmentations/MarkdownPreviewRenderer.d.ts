@@ -1,4 +1,5 @@
 import type { CodeBlockPostProcessorHandler } from '../internals/CodeBlockPostProcessorHandler.d.ts';
+import type { RegisterDomEventsHandlers } from '../internals/RegisterDomEventsHandlers.d.ts';
 
 declare module 'obsidian' {
     /**
@@ -30,6 +31,21 @@ declare module 'obsidian' {
             language: string,
             handler: (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => Promise<any> | void
         ): (el: HTMLElement, ctx: MarkdownPostProcessorContext) => void;
+
+        /**
+         * Registers the DOM events.
+         *
+         * @param el - The element to register the events on.
+         * @param handlers - The handlers to register.
+         * @param childElFn - The function to determine if `childEl` belongs to the `el`.
+         *
+         * @unofficial
+         */
+        function registerDomEvents(
+            el: HTMLElement,
+            handlers: RegisterDomEventsHandlers,
+            childElFn?: (childEl: HTMLElement) => boolean
+        ): void;
 
         /**
          * Register a post processor.
