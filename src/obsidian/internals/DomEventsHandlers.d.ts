@@ -4,7 +4,7 @@
  * @public
  * @unofficial
  */
-export interface RegisterDomEventsHandlers {
+export interface DomEventsHandlers {
     /**
      * Handles the external link click event.
      *
