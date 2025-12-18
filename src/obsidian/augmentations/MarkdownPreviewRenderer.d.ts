@@ -1,5 +1,5 @@
 import type { CodeBlockPostProcessorHandler } from '../internals/CodeBlockPostProcessorHandler.d.ts';
-import type { RegisterDomEventsHandlers } from '../internals/RegisterDomEventsHandlers.d.ts';
+import type { DomEventsHandlers } from '../internals/DomEventsHandlers.d.ts';
 
 declare module 'obsidian' {
     /**
@@ -43,7 +43,7 @@ declare module 'obsidian' {
          */
         function registerDomEvents(
             el: HTMLElement,
-            handlers: RegisterDomEventsHandlers,
+            handlers: DomEventsHandlers,
             childElFn?: (childEl: HTMLElement) => boolean
         ): void;
 

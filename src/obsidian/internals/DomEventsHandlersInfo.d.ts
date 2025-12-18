@@ -2,12 +2,12 @@ import type { App } from 'electron';
 import type { HoverParent } from 'obsidian';
 
 /**
- * Information about the register dom events handlers.
+ * Information about the DOM events handlers.
  *
  * @public
  * @unofficial
  */
-export interface RegisterDomEventsHandlersInfo extends HoverParent {
+export interface DomEventsHandlersInfo extends HoverParent {
     /**
      * Obsidian app instance.
      */
