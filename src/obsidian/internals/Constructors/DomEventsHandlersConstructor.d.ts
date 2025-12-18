@@ -1,5 +1,5 @@
-import type { RegisterDomEventsHandlers } from '../DomEventsHandlers.d.ts';
-import type { RegisterDomEventsHandlersInfo } from '../DomEventsHandlersInfo.d.ts';
+import type { DomEventsHandlers } from '../DomEventsHandlers.d.ts';
+import type { DomEventsHandlersInfo } from '../DomEventsHandlersInfo.d.ts';
 import type { ConstructorBase } from './ConstructorBase.d.ts';
 
 /**
