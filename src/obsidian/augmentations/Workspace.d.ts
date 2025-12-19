@@ -319,7 +319,6 @@ declare module 'obsidian' {
          * @deprecated - Use the new form of this method instead
          * @official
          * @since 0.13.8
-         * @since 1.1.0
          */
         duplicateLeaf(leaf: WorkspaceLeaf, direction?: SplitDirection): Promise<WorkspaceLeaf>;
 
@@ -645,16 +644,7 @@ declare module 'obsidian' {
          * });
          * ```
          * @official
-         * @since 0.9.7
          * @since 0.10.9
-         * @since 0.9.20
-         * @since 0.15.3
-         * @since 0.9.12
-         * @since 1.4.10
-         * @since 1.5.1
-         * @since 1.1.0
-         * @since 1.1.1
-         * @since 0.10.2
          */
         on(name: 'active-leaf-change', callback: (leaf: WorkspaceLeaf | null) => any, ctx?: any): EventRef;
 
