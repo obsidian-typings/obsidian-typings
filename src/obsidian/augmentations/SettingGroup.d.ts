@@ -22,6 +22,27 @@ declare module 'obsidian' {
         addClass(cls: string): this;
 
         /**
+         * Add an extra button to the setting group.
+         *
+         * @param cb - the callback function.
+         * @returns the setting group.
+         * @official
+         * @since 1.11.0
+         */
+        addExtraButton(cb: (component: ExtraButtonComponent) => any): this;
+
+        /**
+         * Add a search input at the beginning of the setting group. Useful for filtering
+         * results or adding an input for quick entry.
+         *
+         * @param cb - the callback function.
+         * @returns the setting group.
+         * @official
+         * @since 1.11.0
+         */
+        addSearch(cb: (component: SearchComponent) => any): this;
+
+        /**
          * Add a setting to the setting group.
          *
          * @param cb - The callback to add the setting.

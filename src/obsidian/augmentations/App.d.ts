@@ -207,6 +207,15 @@ declare module 'obsidian' {
         scope: Scope;
 
         /**
+         * The secret storage.
+         *
+         * @public
+         * @since 1.11.4
+         * @unofficial ERROR: Missing `@unofficial` or `@official` tag
+         */
+        secretStorage: SecretStorage;
+
+        /**
          * Manages the settings modal and its tabs.
          *
          * @tutorial Can be used to open the settings modal to a specific tab, extend the settings modal functionality, ...

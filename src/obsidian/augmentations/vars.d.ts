@@ -56,7 +56,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link livePreviewState} instead.
      */
-    const livePreviewState__: ViewPlugin<LivePreviewStateType>;
+    const livePreviewState__: ViewPlugin<LivePreviewStateType, undefined>;
 
     /**
      * An instance of `Moment.js` library.

@@ -220,6 +220,7 @@ declare module 'obsidian' {
          * Add warning styling to the menu item.
          *
          * @param warning - Whether the menu item should be styled as a warning.
+         * If set to `true` the MenuItem's title and icon will become red. Or whatever color is applied to the class 'is-warning' by a theme.
          * @unofficial
          * @since 0.15.0
          */
