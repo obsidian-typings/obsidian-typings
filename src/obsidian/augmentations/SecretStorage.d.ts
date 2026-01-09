@@ -7,12 +7,6 @@ declare module 'obsidian' {
      */
     interface SecretStorage {
         /**
-         * @official
-         * @since 1.11.4
-         */
-        loadSecrets: unknown;
-
-        /**
          * Gets a secret from storage
          *
          * @param id - the secret ID
@@ -21,6 +15,15 @@ declare module 'obsidian' {
          * @since 1.11.4
          */
         getSecret(id: string): string | null;
+
+        /**
+         * Loads all secrets from storage
+         *
+         * @official
+         * @since 1.11.4
+         * @deprecated - Added only for typing purposes. Use {@link loadSecrets} instead.
+         */
+        loadSecrets__(): void;
 
         /**
          * Lists all secrets in storage
