@@ -6,7 +6,7 @@ declare module 'obsidian' {
      *
      * @since 1.10.0
      */
-    interface PropertyOption extends BaseOption {
+    interface BasesPropertyOption extends BasesOption {
         /**
          * Default value.
          *

@@ -2,18 +2,26 @@ export {};
 
 declare module 'obsidian' {
     /**
-     * Multitext option.
+     * Text option.
      *
      * @since 1.10.0
      */
-    interface MultitextOption extends BaseOption {
+    interface BasesTextOption extends BasesOption {
         /**
          * Default value.
          *
          * @official
          * @since 1.10.0
          */
-        default?: string[];
+        default?: string;
+
+        /**
+         * Placeholder.
+         *
+         * @official
+         * @since 1.10.0
+         */
+        placeholder?: string;
 
         /**
          * Type.
@@ -21,6 +29,6 @@ declare module 'obsidian' {
          * @official
          * @since 1.10.0
          */
-        type: 'multitext';
+        type: 'text';
     }
 }

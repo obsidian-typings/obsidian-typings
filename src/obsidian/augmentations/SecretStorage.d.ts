@@ -7,6 +7,14 @@ declare module 'obsidian' {
      */
     interface SecretStorage {
         /**
+         * Gets the last access timestamp for a secret key
+         * @param id The secret ID
+         * @returns Timestamp in milliseconds, or null if never accessed
+         * @official
+         */
+        getLastAccess(id: string): number | null;
+
+        /**
          * Gets a secret from storage
          *
          * @param id - the secret ID
@@ -15,15 +23,6 @@ declare module 'obsidian' {
          * @since 1.11.4
          */
         getSecret(id: string): string | null;
-
-        /**
-         * Loads all secrets from storage
-         *
-         * @official
-         * @since 1.11.4
-         * @deprecated - Added only for typing purposes. Use {@link loadSecrets} instead.
-         */
-        loadSecrets__(): void;
 
         /**
          * Lists all secrets in storage

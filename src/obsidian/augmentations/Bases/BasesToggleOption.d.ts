@@ -6,7 +6,7 @@ declare module 'obsidian' {
      *
      * @since 1.10.0
      */
-    interface ToggleOption extends BaseOption {
+    interface BasesToggleOption extends BasesOption {
         /**
          * Default value.
          *

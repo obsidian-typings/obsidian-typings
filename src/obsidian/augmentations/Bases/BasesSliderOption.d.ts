@@ -6,7 +6,7 @@ declare module 'obsidian' {
      *
      * @since 1.10.0
      */
-    interface SliderOption extends BaseOption {
+    interface BasesSliderOption extends BasesOption {
         /**
          * Default value.
          *
