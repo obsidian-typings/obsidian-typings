@@ -2,11 +2,11 @@ export {};
 
 declare module 'obsidian' {
     /**
-     * Base option.
+     * Bases option.
      *
      * @since 1.10.0
      */
-    interface BaseOption {
+    interface BasesOption {
         /**
          * Display name.
          *
@@ -31,7 +31,7 @@ declare module 'obsidian' {
          * @official
          * @since 1.10.2
          */
-        shouldHide?: (config: BasesViewConfig) => boolean;
+        shouldHide?: () => boolean;
 
         /**
          * Type

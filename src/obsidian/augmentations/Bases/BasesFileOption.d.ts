@@ -6,7 +6,7 @@ declare module 'obsidian' {
      *
      * @since 1.10.2
      */
-    interface FileOption extends BaseOption {
+    interface BasesFileOption extends BasesOption {
         /**
          * The default value of the option.
          *

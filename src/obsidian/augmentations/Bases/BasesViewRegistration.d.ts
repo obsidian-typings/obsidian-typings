@@ -37,6 +37,6 @@ declare module 'obsidian' {
          * @official
          * @since 1.10.0
          */
-        options?: () => ViewOption[];
+        options?: (config: BasesViewConfig) => BasesAllOptions[];
     }
 }

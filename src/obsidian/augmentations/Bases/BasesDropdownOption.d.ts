@@ -6,7 +6,7 @@ declare module 'obsidian' {
      *
      * @since 1.10.0
      */
-    interface DropdownOption extends BaseOption {
+    interface BasesDropdownOption extends BasesOption {
         /**
          * Default value.
          *

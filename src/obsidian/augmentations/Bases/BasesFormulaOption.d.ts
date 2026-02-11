@@ -6,7 +6,7 @@ declare module 'obsidian' {
      *
      * @since 1.10.2
      */
-    interface FormulaOption extends BaseOption {
+    interface BasesFormulaOption extends BasesOption {
         /**
          * The default value of the option.
          *
