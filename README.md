@@ -5,11 +5,11 @@
 </center>
 
 <div align="center">
-    <a href="https://github.com/obsidianmd/obsidian-releases/releases/tag/v1.11.7"><img src="https://img.shields.io/badge/Obsidian_version-1.11.7_public-blue?logo=obsidian" alt="Obsidian version: 1.11.7 public"></a>
+    <a href="https://obsidian.md/changelog/2026-02-05-desktop-v1.11.7/"><img src="https://img.shields.io/badge/Obsidian_version-1.11.7_public-blue?logo=obsidian" alt="Obsidian version: 1.11.7 public"></a>
     <a href="https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.11.7"><img src="https://img.shields.io/badge/Git_branch-release/obsidian--public/1.11.7-red?logo=git" alt="Git branch: release/obsidian-public/1.11.7"></a>
 </div>
 
-This branch contains the typings for Obsidian version [`1.11.7 public`](https://github.com/obsidianmd/obsidian-releases/releases/tag/v1.11.7).
+This branch contains the typings for Obsidian version [`1.11.7 public`](https://obsidian.md/changelog/2026-02-05-desktop-v1.11.7/).
 
 > [!WARNING]
 >
