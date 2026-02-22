@@ -159,6 +159,21 @@ declare module 'obsidian' {
         registerBasesView(viewId: string, registration: BasesViewRegistration): boolean;
 
         /**
+         * Register a CLI handler to handle a command from the CLI.
+         * Command IDs must be globally unique. Attempting to register a command that is already registered will throw an Error.
+         *
+         * Use the format `<plugin-id>` for your default command, and `<plugin-id>:<action>` for sub-commands and actions.
+         *
+         * @param command - The command ID that will be used. Use alphanumeric characters without spaces.
+         * @param description - The description text to provide in the help command, and in auto-completion prompts.
+         * @param flags - Command line flags that can be passed in.
+         * @param handler - The callback handler to handle a CLI invocation.
+         * @official
+         * @since 1.12.2
+         */
+        registerCliHandler(command: string, description: string, flags: CliFlags | null, handler: CliHandler): void;
+
+        /**
          * Registers a CodeMirror 6 extension.
          * To reconfigure cm6 extensions for a plugin on the fly, an array should be passed in, and modified dynamically.
          * Once this array is modified, calling {@link Workspace.updateOptions} will apply the changes.

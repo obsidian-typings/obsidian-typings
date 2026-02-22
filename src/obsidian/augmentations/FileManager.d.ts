@@ -226,12 +226,19 @@ declare module 'obsidian' {
         processFrontMatter(file: TFile, fn: (frontmatter: any) => void, options?: DataWriteOptions): Promise<void>;
 
         /**
-         * Prompt the user to delete a file.
+         * Prompt the user to confirm they want to delete the specified file or folder.
          *
-         * @unofficial
+         * @param file - the file or folder to delete.
+         * @returns A promise that resolves to `true` if the prompt was confirmed or `false` if it was canceled.
+         * @example
+         * ```ts
+         * const file = app.vault.getFileByPath('foo/bar.md');
+         * await app.fileManager.promptForDeletion(file);
+         * ```
+         * @official
          * @since 0.15.0
          */
-        promptForDeletion(file: TAbstractFile): Promise<void>;
+        promptForDeletion(file: TAbstractFile): Promise<boolean>;
 
         /**
          * Prompt the user to delete a file.
