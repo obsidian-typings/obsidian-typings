@@ -16,3 +16,5 @@ docs/src/content/docs/api/namespaces/**/*
 /docs/.cache
 
 /workflow-scripts/.env
+
+.claude/settings.local.json
