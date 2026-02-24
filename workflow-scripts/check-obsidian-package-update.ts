@@ -23,6 +23,11 @@ async function main(): Promise<void> {
   await exec(`git add package.json package-lock.json`);
   await commit(`chore: update obsidian API version to ${latestObsidianVersion}`);
   await exec(`npm run release`);
+
+  // NOTE: Manually invoke the workflow if running in GitHub Actions, because it's not be triggered automatically.
+  if (process.env['GITHUB_ACTIONS']) {
+    await exec(`gh workflow run push-release-tag-proxy.yml --ref ${latestBranch}`);
+  }
 }
 
 async function getLatestObsidianVersion(): Promise<string> {
