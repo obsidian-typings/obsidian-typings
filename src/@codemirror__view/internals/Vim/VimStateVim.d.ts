@@ -2,38 +2,38 @@ import type { VimStateVimInputState } from './VimStateVimInputState.d.ts';
 import type { VimStateVimLastMotion } from './VimStateVimLastMotion.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Core Vim state holding mode, input state, and edit history.
  * @public
  * @unofficial
  */
 export interface VimStateVim {
-    /** @todo Documentation incomplete. */
+    /** Current input state of the Vim command parser. */
     inputState: VimStateVimInputState;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the editor is currently in insert mode. */
     insertMode: false;
 
-    /** @todo Documentation incomplete. */
+    /** Repeat count for the current insert mode session. */
     insertModeRepeat: undefined;
 
-    /** @todo Documentation incomplete. */
+    /** The last edit action command that was executed. */
     lastEditActionCommand: undefined;
 
-    /** @todo Documentation incomplete. */
+    /** Input state snapshot of the last edit action. */
     lastEditInputState: undefined;
 
-    /** @todo Documentation incomplete. */
+    /** Last horizontal cursor position (column). */
     lastHPos: number;
 
-    /** @todo Documentation incomplete. */
+    /** Last horizontal cursor screen position. */
     lastHSPos: number;
 
-    /** @todo Documentation incomplete. */
+    /** The last motion that was executed. */
     lastMotion: VimStateVimLastMotion;
 
-    /** @todo Documentation incomplete. */
+    /** The last text that was pasted. */
     lastPastedText: null;
 
-    /** @todo Documentation incomplete. */
+    /** The last visual selection range. */
     lastSelection: null;
 }

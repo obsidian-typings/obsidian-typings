@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Represents a node (card) on a canvas.
  * @public
  * @unofficial
  */

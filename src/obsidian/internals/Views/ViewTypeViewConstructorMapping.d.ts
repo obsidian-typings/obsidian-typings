@@ -27,7 +27,7 @@ import type { TagViewConstructor } from './TagViewConstructor.d.ts';
 import type { VideoViewConstructor } from './VideoViewConstructor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Mapping from view type identifiers to their corresponding view constructor types.
  *
  * @public
  * @unofficial

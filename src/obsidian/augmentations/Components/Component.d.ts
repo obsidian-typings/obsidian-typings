@@ -191,7 +191,7 @@ declare module 'obsidian' {
         registerInterval(id: number): number;
 
         /**
-         * @todo Documentation incomplete.
+         * Register a scope keymap event handler to be removed on unload.
          * @unofficial
          */
         registerScopeEvent(keymapEventHandler: KeymapEventHandler): void;

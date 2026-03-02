@@ -3,14 +3,14 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { ZkPrefixerPlugin } from './ZkPrefixerPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for the Zettelkasten prefixer, prepending unique IDs to new note filenames.
  * @public
  * @unofficial
  */
 export interface ZkPrefixerPluginInstance extends InternalPluginInstance<ZkPrefixerPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the Zettelkasten prefixer plugin registration. */
     plugin: ZkPrefixerPlugin;
 }

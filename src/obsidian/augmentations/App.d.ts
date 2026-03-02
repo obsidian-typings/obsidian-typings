@@ -35,7 +35,7 @@ declare module 'obsidian' {
         appId: string;
 
         /**
-         * @todo Documentation incomplete.
+         * Manager for the application menu bar (desktop only).
          * @unofficial
          */
         appMenuBarManager: AppMenuBarManager;
@@ -64,7 +64,7 @@ declare module 'obsidian' {
         dom: ObsidianDOM;
 
         /**
-         * @todo Documentation incomplete.
+         * Manager for drag-and-drop operations within the app.
          * @unofficial
          */
         dragManager: DragManager;
@@ -85,7 +85,7 @@ declare module 'obsidian' {
         fileManager: FileManager;
 
         /**
-         * @todo Documentation incomplete.
+         * Manager for editor fold (collapse) state persistence.
          * @unofficial
          */
         foldManager: FoldManager;
@@ -150,19 +150,19 @@ declare module 'obsidian' {
         metadataTypeManager: MetadataTypeManager;
 
         /**
-         * @todo Documentation incomplete.
+         * Navigation bar for mobile devices, or null on desktop.
          * @unofficial
          */
         mobileNavbar: MobileNavbar | null;
 
         /**
-         * @todo Documentation incomplete.
+         * Tab switcher for mobile devices, or null on desktop.
          * @unofficial
          */
         mobileTabSwitcher: MobileTabSwitcher | null;
 
         /**
-         * @todo Documentation incomplete.
+         * Toolbar for mobile devices, or null on desktop.
          * @unofficial
          */
         mobileToolbar: MobileToolbar | null;
@@ -225,7 +225,7 @@ declare module 'obsidian' {
         setting: AppSetting;
 
         /**
-         * @todo Documentation incomplete.
+         * Handler for receiving shared content from external apps (mobile).
          * @unofficial
          */
         shareReceiver: ShareReceiver;
@@ -404,7 +404,7 @@ declare module 'obsidian' {
         isDarkMode(): boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Check whether Vim keybindings are enabled.
          * @unofficial
          */
         isVimEnabled(): boolean;
@@ -443,7 +443,7 @@ declare module 'obsidian' {
         nextFramePromise(callback: () => Promise<void>): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Register an event listener on the app.
          * @unofficial
          */
         on(): void;

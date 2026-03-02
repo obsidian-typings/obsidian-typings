@@ -1,23 +1,23 @@
 import type { Dimensions } from '../../Dimensions.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Configuration options for the canvas view.
  * @public
  * @unofficial
  */
 export interface CanvasViewConfig {
-    /** @todo Documentation incomplete. */
+    /** Default dimensions for newly created file nodes. */
     defaultFileNodeDimensions: Dimensions;
 
-    /** @todo Documentation incomplete. */
+    /** Default dimensions for newly created text nodes. */
     defaultTextNodeDimensions: Dimensions;
 
-    /** @todo Documentation incomplete. */
+    /** Minimum dimension (width or height) for container/group nodes. */
     minContainerDimension: number;
 
-    /** @todo Documentation incomplete. */
+    /** Distance threshold in pixels for snapping objects to each other. */
     objectSnapDistance: number;
 
-    /** @todo Documentation incomplete. */
+    /** Multiplier applied to zoom increments. */
     zoomMultiplier: number;
 }

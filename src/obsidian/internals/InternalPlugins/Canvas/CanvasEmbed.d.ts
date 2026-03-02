@@ -1,12 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * Represents an embedded file reference within a canvas node.
  * @public
  * @unofficial
  */
 export interface CanvasEmbed {
-    /** @todo Documentation incomplete. */
+    /** Path to the embedded file. */
     file: string;
 
-    /** @todo Documentation incomplete. */
+    /** Optional subpath within the file (e.g., heading or block reference). */
     subpath?: string;
 }

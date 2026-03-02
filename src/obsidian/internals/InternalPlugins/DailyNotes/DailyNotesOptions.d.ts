@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Configuration options for the daily notes plugin.
  * @public
  * @unofficial
  */

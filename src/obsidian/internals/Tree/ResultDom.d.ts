@@ -10,101 +10,101 @@ import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Container for search result DOM elements, managing the display of file search results.
  * @public
  * @unofficial
  */
 export interface ResultDom {
-    /** @todo Documentation incomplete. */
+    /** Reference to the App instance. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Debounced callback triggered when results change. */
     changed: Debouncer<[], unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Container element for child result items. */
     childrenEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Whether all result items are collapsed. */
     collapseAll: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Root element of the result DOM. */
     el: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Element displayed when there are no search results. */
     emptyStateEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Whether extra surrounding context is shown around matches. */
     extraContext: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Currently focused result item, or null if none. */
     focusedItem: null;
 
-    /** @todo Documentation incomplete. */
+    /** Virtual scrolling component for rendering visible results. */
     infinityScroll: InfinityScroll;
 
-    /** @todo Documentation incomplete. */
+    /** Layout information used by virtual scrolling. */
     info: TreeNodeInfo;
 
-    /** @todo Documentation incomplete. */
+    /** Spacer element used to maintain correct scroll height. */
     pusherEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Lookup map from file to its corresponding result DOM item. */
     resultDomLookup: Map<TFile, ResultDomItem>;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the empty state placeholder is currently displayed. */
     showingEmptyState: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Current sort order for search results. */
     sortOrder: string;
 
-    /** @todo Documentation incomplete. */
+    /** Virtual children manager for result items. */
     vChildren: TreeNodeVChildren<ResultDomItem, ResultDom>;
 
-    /** @todo Documentation incomplete. */
+    /** Whether a search operation is currently in progress. */
     working: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Add a search result for a file to the result DOM. */
     addResult(file: TFile, result: ResultDomResult, content: string, shouldShowTitle?: boolean): ResultDomItem;
 
-    /** @todo Documentation incomplete. */
+    /** Change which result item has focus. */
     changeFocusedItem(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Clear all search results from the DOM. */
     emptyResults(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the list of files with search results. */
     getFiles(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the total number of matches across all results. */
     getMatchCount(): number;
 
-    /** @todo Documentation incomplete. */
+    /** Get the result DOM item for a specific file. */
     getResult(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Callback invoked when the result set changes. */
     onChange(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle resize events and recalculate layout. */
     onResize(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Remove a search result from the DOM. */
     removeResult(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set whether all result items should be collapsed. */
     setCollapseAll(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set whether extra context is shown around matches. */
     setExtraContext(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set the focused result item. */
     setFocusedItem(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Show a loading indicator while search is in progress. */
     startLoader(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Hide the loading indicator when search completes. */
     stopLoader(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Toggle the collapsed state of a result item. */
     toggle(arg1: unknown, arg2: unknown): Promise<unknown>;
 }

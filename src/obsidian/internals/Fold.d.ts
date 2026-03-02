@@ -1,12 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * Represents a folded range in the editor.
  * @public
  * @unofficial
  */
 export interface Fold {
-    /** @todo Documentation incomplete. */
+    /** Start line of the fold. */
     from: number;
 
-    /** @todo Documentation incomplete. */
+    /** End line of the fold. */
     to: number;
 }

@@ -1,24 +1,24 @@
 /**
- * @todo Documentation incomplete.
+ * Information about the editor's scroll position and dimensions.
  * @public
  * @unofficial
  */
 export interface ScrollInfo {
-    /** @todo Documentation incomplete. */
+    /** Visible height of the scrollable area (viewport height). */
     clientHeight: number;
 
-    /** @todo Documentation incomplete. */
+    /** Visible width of the scrollable area (viewport width). */
     clientWidth: number;
 
-    /** @todo Documentation incomplete. */
+    /** Total scrollable height of the content. */
     height: number;
 
-    /** @todo Documentation incomplete. */
+    /** Horizontal scroll offset. */
     left: number;
 
-    /** @todo Documentation incomplete. */
+    /** Vertical scroll offset. */
     top: number;
 
-    /** @todo Documentation incomplete. */
+    /** Total scrollable width of the content. */
     width: number;
 }

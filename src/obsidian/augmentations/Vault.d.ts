@@ -209,7 +209,7 @@ declare module 'obsidian' {
         exists(path: string, isCaseSensitive?: boolean): Promise<boolean>;
 
         /**
-         * @todo Documentation incomplete.
+         * Generate and register files from an async generator.
          * @unofficial
          */
         generateFiles(e: AsyncGenerator<TFile>, t: boolean): Promise<void>;

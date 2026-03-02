@@ -146,7 +146,9 @@ declare module '@codemirror/state' {
         isUserEvent(event: 'input.replace'): boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Check whether the user starts a composition input sequence.
+         * Included in `'input'`, `'input.type'`, and `'input.type.compose'` events.
+         *
          * @unofficial
          */
         isUserEvent(event: 'input.type.compose.start'): boolean;
@@ -215,7 +217,8 @@ declare module '@codemirror/state' {
         isUserEvent(event: 'redo'): boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Check whether the transaction is triggered by a scroll action.
+         *
          * @unofficial
          */
         isUserEvent(event: 'scroll'): boolean;

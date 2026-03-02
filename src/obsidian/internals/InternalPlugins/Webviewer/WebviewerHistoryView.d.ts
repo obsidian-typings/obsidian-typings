@@ -2,7 +2,7 @@ import type { ItemView } from 'obsidian';
 import type { ViewType } from '../../../implementations/Constants/ViewType.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View that displays the web browser browsing history.
  * @public
  * @unofficial
  */
@@ -12,6 +12,6 @@ export interface WebviewerHistoryView extends ItemView {
      */
     getViewType(): typeof ViewType.WebviewerHistory;
 
-    /** @todo Documentation incomplete */
+    /** Refresh the browsing history list. */
     update(): Promise<unknown>;
 }

@@ -1,12 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * Represents a submenu entry in a context menu.
  * @public
  * @unofficial
  */
 export interface Submenu {
-    /** @todo Documentation incomplete. */
+    /** Icon identifier for the submenu item. */
     icon: string;
 
-    /** @todo Documentation incomplete. */
+    /** Display title for the submenu item. */
     title: string;
 }

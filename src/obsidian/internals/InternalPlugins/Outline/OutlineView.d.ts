@@ -7,18 +7,18 @@ import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts'
 import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View that displays the headings outline for the current file.
  * @public
  * @unofficial
  */
 export interface OutlineView extends InfoFileView {
-    /** @todo Documentation incomplete */
+    /** Create a DOM element for an outline heading item. */
     createItemDom(e: unknown): unknown;
 
-    /** @todo Documentation incomplete */
+    /** Filter the outline items based on the current search query. */
     filterSearchResults(): void;
 
-    /** @todo Documentation incomplete */
+    /** Find the heading that corresponds to the current cursor position. */
     findActiveHeading(e: unknown): unknown | undefined;
 
     /**
@@ -41,16 +41,16 @@ export interface OutlineView extends InfoFileView {
      */
     getViewType(): typeof ViewType.Outline;
 
-    /** @todo Documentation incomplete */
+    /** Handle the collapse/expand all toggle action. */
     handleCollapseAll(e: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle editor selection changes and highlight the active heading. */
     handleSelectionChange(): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle a file content change and refresh the outline. */
     onFileChanged(file: TFile): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle scroll events in the markdown editor and sync outline highlight. */
     onMarkdownScroll(e: unknown): void;
 
     /**
@@ -58,10 +58,10 @@ export interface OutlineView extends InfoFileView {
      */
     onToggleShowSearch(): void;
 
-    /** @todo Documentation incomplete */
+    /** Set which outline item is highlighted as active. */
     setHighlightedItem(e: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Set the visibility of the search filter. */
     setShowSearch(e: unknown): void;
 
     /**
@@ -69,7 +69,7 @@ export interface OutlineView extends InfoFileView {
      */
     showSearch(): void;
 
-    /** @todo Documentation incomplete */
+    /** Refresh the outline view with current headings. */
     update(): void;
 
     /**

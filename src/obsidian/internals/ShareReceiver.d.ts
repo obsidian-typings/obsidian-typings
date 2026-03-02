@@ -2,12 +2,12 @@ import type { App } from 'obsidian';
 import type { SharedFile } from './SharedFile.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Handler for receiving shared files and text from other apps on mobile.
  * @public
  * @unofficial
  */
 export interface ShareReceiver {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
     /**

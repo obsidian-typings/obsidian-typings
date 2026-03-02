@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { TagPanePluginInstance } from './TagPanePluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the tag browser sidebar feature.
  * @public
  * @unofficial
  */

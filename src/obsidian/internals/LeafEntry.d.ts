@@ -4,26 +4,26 @@ import type {
 } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Serialized representation of a workspace leaf or split for layout persistence.
  * @public
  * @unofficial
  */
 export interface LeafEntry {
-    /** @todo Documentation incomplete. */
+    /** Child leaf entries if this is a split container. */
     children?: LeafEntry[];
 
-    /** @todo Documentation incomplete. */
+    /** Split direction if this is a split container. */
     direction?: SplitDirection;
 
-    /** @todo Documentation incomplete. */
+    /** Unique identifier for the leaf. */
     id: string;
 
-    /** @todo Documentation incomplete. */
+    /** View state of the leaf. */
     state?: ViewState;
 
-    /** @todo Documentation incomplete. */
+    /** Type of the leaf entry (e.g. "leaf", "split", "tabs"). */
     type: string;
 
-    /** @todo Documentation incomplete. */
+    /** Width of the leaf in pixels, if applicable. */
     width?: number;
 }

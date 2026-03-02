@@ -5,12 +5,12 @@ import type {
 import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View for rendering and interacting with PDF files.
  * @public
  * @unofficial
  */
 export interface PdfView extends EditableFileView {
-    /** @todo Documentation incomplete. */
+    /** The PDF viewer component used to render the document. */
     viewer: unknown;
 
     /**

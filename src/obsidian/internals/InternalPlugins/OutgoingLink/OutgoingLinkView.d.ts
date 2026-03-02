@@ -2,7 +2,7 @@ import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts'
 import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View that displays outgoing links from the current file.
  * @public
  * @unofficial
  */
@@ -12,6 +12,6 @@ export interface OutgoingLinkView extends InfoFileView {
      */
     getViewType(): typeof ViewType.OutgoingLink;
 
-    /** @todo Documentation incomplete */
+    /** Refresh the outgoing links list. */
     update(): void;
 }

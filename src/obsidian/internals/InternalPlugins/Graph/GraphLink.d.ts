@@ -22,7 +22,7 @@ export interface GraphLink {
     /** Parent of `GraphLink.line`, child of `GraphRenderer.hanger`. */
     px: Container | null;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the link graphics have been rendered. */
     rendered: boolean;
 
     /** `GraphRenderer` managing this node. */

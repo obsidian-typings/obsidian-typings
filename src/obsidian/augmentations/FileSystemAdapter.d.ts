@@ -16,7 +16,7 @@ declare module 'obsidian' {
      */
     interface FileSystemAdapter extends DataAdapter {
         /**
-         * @todo Documentation incomplete.
+         * Handler for retrieving and setting birth time (creation time) of files.
          * @unofficial
          */
         btime: Btime;
@@ -71,7 +71,7 @@ declare module 'obsidian' {
         watcher: null;
 
         /**
-         * @todo Documentation incomplete.
+         * Record of active file system watchers by path.
          * @unofficial
          */
         watchers: DataAdapterWatchersRecord;
@@ -295,7 +295,7 @@ declare module 'obsidian' {
         reconcileFileCreation(normalizedPath: string, normalizedNewPath: string, stats: Stats): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Reconcile an internal file change between old and new paths.
          * @unofficial
          */
         reconcileFileInternal(normalizedPath: string, normalizedNewPath: string): Promise<void>;
@@ -342,7 +342,7 @@ declare module 'obsidian' {
         rmdir(normalizedPath: string, recursive: boolean): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Start watching a path for file system changes.
          * @unofficial
          */
         startWatchPath(normalizedPath: string): Promise<void>;
@@ -369,7 +369,7 @@ declare module 'obsidian' {
         stopWatchPath(normalizedPath: string): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Debounced handler triggered when file system events occur.
          * @unofficial
          */
         thingsHappening(): Debouncer<[], void>;

@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { RandomNotePluginInstance } from './RandomNotePluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the random note feature.
  * @public
  * @unofficial
  */

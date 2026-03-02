@@ -2,7 +2,7 @@ import type { TypedViewConstructor } from '../../Views/TypedViewConstructor.d.ts
 import type { AllPropertiesView } from './AllPropertiesView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Constructor interface for creating AllPropertiesView instances.
  * @public
  * @unofficial
  */

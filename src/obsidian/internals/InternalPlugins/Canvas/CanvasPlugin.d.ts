@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { CanvasPluginInstance } from './CanvasPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin definition for the Canvas feature.
  * @public
  * @unofficial
  */

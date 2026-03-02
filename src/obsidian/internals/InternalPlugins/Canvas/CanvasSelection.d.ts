@@ -2,29 +2,29 @@ import type { BBox } from './BBox.d.ts';
 import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Manages the visual selection state on the canvas, including selection bounds and resize handles.
  * @public
  * @unofficial
  */
 export interface CanvasSelection {
-    /** @todo Documentation incomplete. */
+    /** Bounding box encompassing all selected items. */
     bbox: BBox;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the parent canvas instance. */
     canvas: CanvasViewCanvas;
 
-    /** @todo Documentation incomplete. */
+    /** Array of resize handle elements around the selection. */
     resizerEls: HTMLDivElement[];
 
-    /** @todo Documentation incomplete. */
+    /** Element displaying the selection highlight rectangle. */
     selectionEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Hide the selection rectangle and handles. */
     hide(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle pointer down on a resize handle to start resizing the selection. */
     onResizePointerdown(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the selection rectangle to match the current selected items. */
     update(arg1: unknown): unknown;
 }

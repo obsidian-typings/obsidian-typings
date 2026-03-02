@@ -4,7 +4,6 @@ import type { WebviewerHistoryItem } from './WebviewerHistoryItem.d.ts';
 /**
  * Stores and manages all history items and cached fav icons.
  *
- * @todo Documentation incomplete.
  * @public
  * @unofficial
  */
@@ -31,7 +30,7 @@ export interface WebviewerDBStore {
      */
     clearHistoryItems(): Promise<void>;
 
-    /** @todo Documentation incomplete */
+    /** Open and initialize the IndexedDB connection. */
     connect(): Promise<void>;
 
     /**

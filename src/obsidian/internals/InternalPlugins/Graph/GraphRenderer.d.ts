@@ -17,7 +17,7 @@ import type { PowerTag } from './PowerTag.d.ts';
 import type { WorkerResults } from './WorkerResults.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Renderer for the graph view, managing PixiJS rendering, user interactions, and layout.
  * @public
  * @unofficial
  */
@@ -49,7 +49,7 @@ export interface GraphRenderer {
     /** Height of the graph view, in pixel. */
     height: number;
 
-    /** @todo Documentation incomplete. */
+    /** Whether to hide the power tag indicator in the graph view. */
     hidePowerTag: boolean;
 
     /** Node currently being highlighted, if any. */
@@ -64,7 +64,7 @@ export interface GraphRenderer {
     /** `<canvas>` element bound to the event system of `GraphRenderer.px` to capture events. */
     interactiveEl: HTMLCanvasElement;
 
-    /** @todo Documentation incomplete. */
+    /** Keyboard action bindings for graph interaction. */
     keyboardActions: KeyboardActions;
 
     /** List of links currently rendered. */
@@ -85,22 +85,22 @@ export interface GraphRenderer {
     /** Scale of the nodes based on the zoom level of the graph view. */
     nodeScale: number;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the user is currently panning the graph view. */
     panning: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Current pan velocity along the x axis. */
     panvX: number;
 
-    /** @todo Documentation incomplete. */
+    /** Current pan velocity along the y axis. */
     panvY: number;
 
-    /** @todo Documentation incomplete. */
+    /** Current pan offset along the x axis. */
     panX: number;
 
-    /** @todo Documentation incomplete. */
+    /** Current pan offset along the y axis. */
     panY: number;
 
-    /** @todo Documentation incomplete. */
+    /** Power tag configuration for the graph view. */
     powerTag: PowerTag;
 
     /** PixiJS application rendering everything. */
@@ -118,7 +118,7 @@ export interface GraphRenderer {
     /** Current alpha of the nodes names based on the graph scale. */
     textAlpha: number;
 
-    /** @todo Documentation incomplete. */
+    /** Current visible viewport bounds of the graph view. */
     viewport: Coords;
 
     /** Width of the graph view, in pixel. */
@@ -127,7 +127,7 @@ export interface GraphRenderer {
     /** Web Worker thread running the graph simulation. */
     worker: Worker;
 
-    /** @todo Documentation incomplete. */
+    /** Results received from the graph simulation worker. */
     workerResults: WorkerResults;
 
     /** X coordinate of the zoom action. */
@@ -141,90 +141,90 @@ export interface GraphRenderer {
      */
     changed(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Destroy the renderer and release all resources. */
     destroy(): void;
 
     /** Destroy all the graphics of the graph. */
     destroyGraphics(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Capture a screenshot of the graph with the background included. */
     getBackgroundScreenshot(): HTMLCanvasElement;
 
     /** Returns the currently highlighted node, if any. */
     getHighlightNode(): GraphNode | null;
 
-    /** @todo Documentation incomplete. */
+    /** Capture a screenshot of the graph with a transparent background. */
     getTransparentScreenshot(): ICanvas;
 
     /** Initialize all the graphics of the graph. */
     initGraphics(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Called when the graph iframe finishes loading. */
     onIframeLoad(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Called when the graph iframe is unloaded. */
     onIframeUnload(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle mouse movement over the graph view. */
     onMouseMove(evt: MouseEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a click on a graph node. */
     onNodeClick(evt: MouseEvent, id: string, type: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle hover over a graph node. */
     onNodeHover(evt: MouseEvent, id: string, type: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a right-click on a graph node. */
     onNodeRightClick(evt: MouseEvent, id: string, type: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the pointer leaving a graph node. */
     onNodeUnhover(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a pointer down event on the graph. */
     onPointerDown(renderer: GraphRenderer, evt: PointerEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the pointer leaving the graph view. */
     onPointerOut(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the pointer entering the graph view. */
     onPointerOver(renderer: GraphRenderer, evt: PointerEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a resize of the graph container. */
     onResize(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a wheel (scroll/zoom) event on the graph view. */
     onWheel(evt: WheelEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Queue a render frame to be executed on the next animation frame. */
     queueRender(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Callback invoked on each render frame. */
     renderCallback(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Reset the pan offset to the origin. */
     resetPan(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the graph data (nodes and links) to render. */
     setData(data: GraphData): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the force simulation parameters. */
     setForces(forces: GraphForces): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the pan offset to the given coordinates. */
     setPan(panX: number, panY: number): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the rendering options for the graph view. */
     setRenderOptions(options: GraphPluginInstanceOptions): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the zoom scale of the graph view. */
     setScale(scale: number): void;
 
-    /** @todo Documentation incomplete. */
+    /** Re-read CSS variables and update the graph colors accordingly. */
     testCSS(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Interpolate the current zoom level towards the target scale. */
     updateZoom(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Zoom the graph view to the given scale, centered on the given point. */
     zoomTo(scale: number, pointer: Point): void;
 }

@@ -15,7 +15,7 @@ import type { FileTreeItem } from './FileTreeItem.d.ts';
 import type { FolderTreeItem } from './FolderTreeItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View that renders the file explorer tree sidebar for navigating vault files and folders.
  * @public
  * @unofficial
  */
@@ -36,7 +36,7 @@ export interface FileExplorerView extends View {
      */
     lastDropTargetEl: HTMLElement | null;
 
-    /** @todo Documentation incomplete. */
+    /** Timeout ID for expanding a folder on mouseover during drag, or null. */
     mouseoverExpandTimeout: number | null;
 
     /**
@@ -80,7 +80,7 @@ export interface FileExplorerView extends View {
      */
     attachDropHandler(folder: TFolder, el: HTMLElement): void;
 
-    /** @todo Documentation incomplete */
+    /** Attach file-related event listeners to an element. */
     attachFileEvents(e: unknown): void;
 
     /**
@@ -92,16 +92,16 @@ export interface FileExplorerView extends View {
      */
     createAbstractFile(type: 'file' | 'folder', location: TFolder, newLeaf: PaneType | boolean): Promise<void>;
 
-    /** @todo Documentation incomplete */
+    /** Create a tree item DOM element for the given folder. */
     createFolderDom(folder: TFolder): unknown;
 
-    /** @todo Documentation incomplete */
+    /** Create a tree item DOM element for the given file. */
     createItemDom(file: TFile): unknown;
 
-    /** @todo Documentation incomplete */
+    /** Display an error message on a file tree item. */
     displayError(message: string, fileItem: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle dragging files from the file explorer. */
     dragFiles(event: DragEvent, t: unknown): unknown;
 
     /**
@@ -109,7 +109,7 @@ export interface FileExplorerView extends View {
      */
     exitRename(): void;
 
-    /** @todo Documentation incomplete */
+    /** Get the unique node identifier for a tree item. */
     getNodeId(e: unknown): unknown;
 
     /**
@@ -122,7 +122,7 @@ export interface FileExplorerView extends View {
      */
     getViewType(): typeof ViewType.FileExplorer;
 
-    /** @todo Documentation incomplete maybe FileTreeItem */
+    /** Check whether the given object is a file tree item. */
     isItem(item: unknown): boolean;
 
     /**
@@ -191,7 +191,7 @@ export interface FileExplorerView extends View {
      */
     onFileOpen(file: TFile): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle input events in the file rename text field. */
     onFileRenameInput(e: unknown): void;
 
     /**
@@ -244,7 +244,7 @@ export interface FileExplorerView extends View {
      */
     revealInFolder(file: TFile | TFolder): void;
 
-    /** @todo Documentation incomplete */
+    /** Set whether all folders are collapsed. */
     setIsAllCollapsed(e: unknown): void;
 
     /**
@@ -259,7 +259,7 @@ export interface FileExplorerView extends View {
      */
     sort(): void;
 
-    /** @todo Documentation incomplete */
+    /** Begin inline renaming of a file tree item. */
     startRenameFile(e: unknown): unknown;
 
     /**

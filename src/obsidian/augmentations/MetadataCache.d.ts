@@ -36,7 +36,7 @@ declare module 'obsidian' {
         app: App;
 
         /**
-         * @todo Documentation incomplete.
+         * Cache for block references in the vault.
          * @unofficial
          */
         blockCache: BlockCache;
@@ -49,7 +49,7 @@ declare module 'obsidian' {
         db: IDBDatabase;
 
         /**
-         * @todo Documentation incomplete.
+         * Debounced callback that fires when the metadata cache finishes processing.
          * @unofficial
          */
         didFinish: Debouncer<[], void>;
@@ -76,7 +76,7 @@ declare module 'obsidian' {
         inProgressTaskCount: number;
 
         /**
-         * @todo Documentation incomplete.
+         * Queue of files pending link resolution.
          * @unofficial
          */
         linkResolverQueue: ItemQueue<TFile | null> | null;
@@ -96,13 +96,13 @@ declare module 'obsidian' {
         onCleanCacheCallbacks: (() => void)[];
 
         /**
-         * @todo Documentation incomplete.
+         * Preload the metadata cache from the database.
          * @unofficial
          */
         preload: () => Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Promise that resolves when the preload is complete, or null if not started.
          * @unofficial
          */
         preloadPromise: Promise<void> | null;
@@ -131,19 +131,19 @@ declare module 'obsidian' {
         unresolvedLinks: Record<string, Record<string, number>>;
 
         /**
-         * @todo Documentation incomplete.
+         * Cache of paths checked against user ignore filters.
          * @unofficial
          */
         userIgnoreFilterCache: Record<string, boolean>;
 
         /**
-         * @todo Documentation incomplete.
+         * Compiled regular expressions for user-defined ignore filters.
          * @unofficial
          */
         userIgnoreFilters: RegExp[] | null;
 
         /**
-         * @todo Documentation incomplete.
+         * Raw string representation of user-defined ignore filters.
          * @unofficial
          */
         userIgnoreFiltersString: string;
@@ -156,25 +156,25 @@ declare module 'obsidian' {
         vault: Vault;
 
         /**
-         * @todo Documentation incomplete.
+         * Web Worker used for parsing metadata in the background.
          * @unofficial
          */
         worker: Worker;
 
         /**
-         * @todo Documentation incomplete.
+         * Resolve function for the current worker promise, or null if idle.
          * @unofficial
          */
         workerResolve: ((value: CachedMetadata | PromiseLike<CachedMetadata>) => void) | null;
 
         /**
-         * @todo Documentation incomplete.
+         * Queue for processing metadata computation tasks sequentially.
          * @unofficial
          */
         workQueue: PromisedQueue;
 
         /**
-         * @todo Documentation incomplete.
+         * Internal method to resolve link path destinations from an origin.
          * @unofficial
          */
         _getLinkpathDest(origin: string, path: string): TFile[];
@@ -187,7 +187,7 @@ declare module 'obsidian' {
         cleanupDeletedCache(): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Clear all metadata caches and reset state.
          * @unofficial
          */
         clear(): Promise<void>;
@@ -200,7 +200,7 @@ declare module 'obsidian' {
         computeFileMetadataAsync(file: TFile): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Compute metadata from raw file content asynchronously.
          * @unofficial
          */
         computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<CachedMetadata | undefined>;
@@ -376,7 +376,7 @@ declare module 'obsidian' {
         iterateReferences(callback: (path: string) => void): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Process the link resolver queue to resolve file links.
          * @unofficial
          */
         linkResolver(): void;
@@ -499,7 +499,7 @@ declare module 'obsidian' {
         onDelete(file: TAbstractFile): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a message received from the metadata parsing worker.
          * @unofficial
          */
         onReceiveMessageFromWorker(message: MetadataCacheWorkerMessage): void;

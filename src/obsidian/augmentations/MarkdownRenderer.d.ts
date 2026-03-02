@@ -21,7 +21,7 @@ declare module 'obsidian' {
         hoverPopover: HoverPopover | null;
 
         /**
-         * @todo Documentation incomplete.
+         * The file path associated with this renderer.
          * @unofficial
          */
         get path(): unknown;
@@ -35,49 +35,49 @@ declare module 'obsidian' {
         file__?(): TFile;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a checkbox click event in the rendered markdown.
          * @unofficial
          */
         onCheckboxClick(e: unknown, n: unknown, i: unknown): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a file change event for the rendered file.
          * @unofficial
          */
         onFileChange(e: unknown): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a fold state change in the rendered markdown.
          * @unofficial
          */
         onFoldChange(): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Called when the renderer is loaded.
          * @unofficial
          */
         onload(): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Called when the markdown rendering is complete.
          * @unofficial
          */
         onRenderComplete(): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a scroll event in the rendered markdown.
          * @unofficial
          */
         onScroll(): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Apply post-processing to the rendered markdown output.
          * @unofficial
          */
         postProcess(e: unknown, t: unknown, n: unknown): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Resolve internal links in the rendered markdown.
          * @unofficial
          */
         resolveLinks(e: unknown): unknown;

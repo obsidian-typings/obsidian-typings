@@ -7,18 +7,18 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { FileExplorerPlugin } from './FileExplorerPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for the file explorer, managing the file tree sidebar view.
  * @public
  * @unofficial
  */
 export interface FileExplorerPluginInstance extends InternalPluginInstance<FileExplorerPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is enabled by default. */
     defaultOn: true;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the file explorer plugin registration. */
     plugin: FileExplorerPlugin;
 
     /**

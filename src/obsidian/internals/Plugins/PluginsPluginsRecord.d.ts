@@ -1,7 +1,7 @@
 import type { Plugin } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Record mapping plugin IDs to their active plugin instances.
  * @public
  * @unofficial
  */

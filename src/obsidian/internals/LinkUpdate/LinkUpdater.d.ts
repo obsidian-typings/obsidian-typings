@@ -5,17 +5,17 @@ import type {
 import type { LinkChangeUpdate } from './LinkChangeUpdate.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Handler for updating links within a specific file type when files are renamed or moved.
  * @public
  * @unofficial
  */
 export interface LinkUpdater {
-    /** @todo Documentation incomplete. */
+    /** Apply a batch of link change updates to the given file. */
     applyUpdates(file: TFile, updates: LinkChangeUpdate[]): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Iterate over all references managed by this updater. */
     iterateReferences(callback: (path: string, reference: ReferenceCache) => void): void;
 
-    /** @todo Documentation incomplete. */
+    /** Rename a subpath reference (e.g. heading or block) within a file. */
     renameSubpath(file: TFile, oldSubpath: string, newSubpath: string): Promise<void>;
 }

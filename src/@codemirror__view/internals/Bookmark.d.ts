@@ -3,29 +3,29 @@ import type { EditorPosition } from 'obsidian';
 import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * A bookmark marking a specific position in the editor document that tracks changes.
  * @public
  * @unofficial
  */
 export interface Bookmark {
-    /** @todo Documentation incomplete. */
+    /** Association direction for the bookmark (-1 for left, 1 for right). */
     assoc: number;
 
-    /** @todo Documentation incomplete. */
+    /** The CodeMirror editor instance this bookmark belongs to. */
     cm: CodeMirrorEditor;
 
-    /** @todo Documentation incomplete. */
+    /** Unique identifier for this bookmark. */
     id: number;
 
-    /** @todo Documentation incomplete. */
+    /** Character offset of the bookmark within its line. */
     offset: number;
 
-    /** @todo Documentation incomplete. */
+    /** Remove this bookmark from the editor. */
     clear(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Find the current position of this bookmark, or null if cleared. */
     find(): EditorPosition | null;
 
-    /** @todo Documentation incomplete. */
+    /** Update the bookmark position in response to a document change. */
     update(changeDesc: ChangeDesc): void;
 }

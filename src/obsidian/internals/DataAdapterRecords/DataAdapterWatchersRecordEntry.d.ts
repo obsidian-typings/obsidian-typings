@@ -1,7 +1,7 @@
 import type { FSWatcher } from 'node:fs';
 
 /**
- * @todo Documentation incomplete.
+ * Entry for a file system watcher registered by the data adapter.
  * @public
  * @unofficial
  */

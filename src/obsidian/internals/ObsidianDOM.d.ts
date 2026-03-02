@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Core DOM elements of the Obsidian application layout.
  * @public
  * @unofficial
  */

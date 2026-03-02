@@ -19,7 +19,7 @@ import type { TableEditor } from './TableEditor.d.ts';
 import type { Token } from './Token.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Base interface for markdown editor views, providing CodeMirror integration and editing capabilities.
  * @public
  * @unofficial
  */

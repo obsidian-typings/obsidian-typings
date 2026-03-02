@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { ZkPrefixerPluginInstance } from './ZkPrefixerPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the Zettelkasten ID prefixer feature.
  * @public
  * @unofficial
  */

@@ -1,17 +1,17 @@
 import type { EditorPosition } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Information about a heading section in a note, including its text and position range.
  * @public
  * @unofficial
  */
 export interface HeadingInfo {
-    /** @todo Documentation incomplete. */
+    /** End position of the heading section in the editor. */
     end: EditorPosition;
 
-    /** @todo Documentation incomplete. */
+    /** The heading text content. */
     heading: string;
 
-    /** @todo Documentation incomplete. */
+    /** Start position of the heading section in the editor. */
     start: EditorPosition;
 }

@@ -1,30 +1,30 @@
 /**
- * @todo Documentation incomplete.
+ * User-configurable options for the Canvas plugin.
  * @public
  * @unofficial
  */
 export interface CanvasPluginInstanceOptions {
-    /** @todo Documentation incomplete. */
+    /** When to display card labels: always, on hover, or never. */
     cardLabelVisibility?: 'always' | 'hover' | 'never';
 
-    /** @todo Documentation incomplete. */
+    /** Default node type created when modifier-dragging onto the canvas. */
     defaultModDragBehavior?: 'card' | 'group' | 'media' | 'menu' | 'note' | 'webpage';
 
-    /** @todo Documentation incomplete. */
+    /** Default mouse wheel behavior: pan or zoom. */
     defaultWheelBehavior?: 'pan' | 'zoom';
 
-    /** @todo Documentation incomplete. */
+    /** Folder path for newly created files from the canvas. */
     newFileFolderPath?: string;
 
-    /** @todo Documentation incomplete. */
+    /** Where to create new files: vault root, current folder, or a specified folder. */
     newFileLocation?: 'root' | 'current' | 'folder';
 
-    /** @todo Documentation incomplete. */
+    /** Whether nodes snap to the grid when moved. */
     snapToGrid?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether nodes snap to other objects when moved. */
     snapToObjects?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Zoom level threshold for switching rendering detail levels. */
     zoomBreakpoint?: number;
 }

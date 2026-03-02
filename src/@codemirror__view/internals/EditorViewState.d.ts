@@ -1,9 +1,9 @@
 /**
- * @todo Documentation incomplete.
+ * Internal view state of the editor.
  * @public
  * @unofficial
  */
 export interface EditorViewState {
-    /** @todo Documentation incomplete. */
+    /** Whether the editor is currently in printing mode. */
     printing: boolean;
 }

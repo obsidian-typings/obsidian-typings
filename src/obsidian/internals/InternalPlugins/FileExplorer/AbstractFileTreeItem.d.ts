@@ -5,7 +5,7 @@ import type { FileExplorerView } from './FileExplorerView.d.ts';
 import type { FileTreeItemParent } from './FileTreeItemParent.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Base interface for file and folder tree items in the file explorer.
  * @public
  * @unofficial
  */
@@ -15,33 +15,33 @@ export interface AbstractFileTreeItem<T extends TAbstractFile> extends TreeItem 
      */
     file: T;
 
-    /** @todo Documentation incomplete. */
+    /** Tree node metadata and layout information. */
     info: TreeNodeInfo;
 
-    /** @todo Documentation incomplete. */
+    /** Parent tree item (folder or tree root). */
     parent: FileTreeItemParent;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this item has been rendered to the DOM. */
     rendered: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the file explorer view containing this item. */
     view: FileExplorerView;
 
-    /** @todo Documentation incomplete. */
+    /** Get the display title for this tree item. */
     getTitle(): string;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the full timestamp is shown for this item. */
     isFullTimeShown(): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Called when this item is rendered to the DOM. */
     onRender(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Begin inline renaming of this tree item. */
     startRename(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Cancel inline renaming of this tree item. */
     stopRename(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Refresh the displayed title of this tree item. */
     updateTitle(): void;
 }

@@ -1,12 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * Represents an error returned from a WebSQL database operation.
  * @public
  * @unofficial
  */
 export interface SQLError {
-    /** @todo Documentation incomplete. */
+    /** Numeric error code identifying the type of error. */
     code: number;
 
-    /** @todo Documentation incomplete. */
+    /** Human-readable error message. */
     message: string;
 }

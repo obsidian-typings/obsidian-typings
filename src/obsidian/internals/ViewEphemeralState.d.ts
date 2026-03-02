@@ -1,17 +1,17 @@
 import type { EditorRangeOrCaret } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Ephemeral state for a view, storing cursor position and focus information.
  * @public
  * @unofficial
  */
 export interface ViewEphemeralState {
-    /** @todo Documentation incomplete. */
+    /** Cursor position or selection range in the editor. */
     cursor?: EditorRangeOrCaret;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the view should receive focus. */
     focus: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the view should receive focus on mobile (may show keyboard). */
     focusOnMobile: boolean;
 }

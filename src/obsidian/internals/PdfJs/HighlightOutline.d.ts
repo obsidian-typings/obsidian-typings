@@ -1,21 +1,21 @@
 import type { Outline } from './Outline.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Outline representing a PDF text highlight annotation.
  * @public
  * @unofficial
  */
 export declare class HighlightOutline extends Outline {
-    /** @todo Documentation incomplete. */
+    /** Create a highlight outline from the given outlines, bounding box, and last point. */
     constructor(outlines: unknown, box: unknown, lastPoint: any);
 
-    /** @todo Documentation incomplete. */
+    /** The last point of the highlight used for directional calculations. */
     lastPoint: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** The bounding box of the highlight outline. */
     get box(): Object | null;
 
-    /** @todo Documentation incomplete. */
+    /** CSS class names applied when outlining this highlight. */
     get classNamesForOutlining(): string[];
 
     /**

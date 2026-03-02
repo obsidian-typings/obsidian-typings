@@ -2,7 +2,7 @@ import type { EditableFileView } from 'obsidian';
 import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View for rendering and playing audio files.
  * @public
  * @unofficial
  */

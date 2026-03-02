@@ -1,26 +1,26 @@
 import type { EditorPosition } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * A cursor for iterating over search matches in the editor document.
  * @public
  * @unofficial
  */
 export interface CodeMirrorEditorSearchCursor {
-    /** @todo Documentation incomplete. */
+    /** Find the next or previous match. Returns true if a match was found. */
     find(reverse?: boolean): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Find the next match. Returns true if a match was found. */
     findNext(): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Find the previous match. Returns true if a match was found. */
     findPrevious(): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Get the start position of the current match, or void if no match. */
     from(): EditorPosition | void;
 
-    /** @todo Documentation incomplete. */
+    /** Replace the current match with the given text. */
     replace(text: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Get the end position of the current match, or void if no match. */
     to(): EditorPosition | void;
 }

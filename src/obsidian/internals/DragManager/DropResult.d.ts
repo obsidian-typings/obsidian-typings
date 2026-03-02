@@ -1,18 +1,18 @@
 /**
- * @todo Documentation incomplete.
+ * Result returned from a drop handler indicating the outcome of a drop operation.
  * @public
  * @unofficial
  */
 export interface DropResult {
-    /** @todo Documentation incomplete. */
+    /** Action identifier describing what happened on drop (e.g. "link", "move"). */
     action: string | null;
 
-    /** @todo Documentation incomplete. */
+    /** The drop effect to apply to the drag event. */
     dropEffect: 'none' | 'copy' | 'link' | 'move';
 
-    /** @todo Documentation incomplete. */
+    /** CSS class to apply to the hover target element. */
     hoverClass?: string;
 
-    /** @todo Documentation incomplete. */
+    /** Element to highlight as the current drop target. */
     hoverEl?: HTMLElement | null;
 }

@@ -11,7 +11,7 @@ import type { DownloadLegacyThemeOptions } from './DownloadLegacyThemeOptions.d.
 import type { InstallThemeOptions } from './InstallThemeOptions.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Manager for custom CSS themes and snippets.
  * @public
  * @unofficial
  */
@@ -41,16 +41,16 @@ export interface CustomCSS extends Component {
      */
     oldThemes: string[];
 
-    /** @todo Documentation incomplete. */
+    /** Queue for sequential CSS processing operations. */
     queue: PromisedQueue;
 
-    /** @todo Documentation incomplete. */
+    /** Debounced function to reload CSS snippets. */
     requestLoadSnippets: Debouncer<[], void>;
 
-    /** @todo Documentation incomplete. */
+    /** Debounced function to reload the active theme. */
     requestLoadTheme: Debouncer<[], void>;
 
-    /** @todo Documentation incomplete. */
+    /** Debounced function to re-read available themes from disk. */
     requestReadThemes: Debouncer<[], void>;
 
     /**
@@ -70,10 +70,10 @@ export interface CustomCSS extends Component {
      */
     themes: CustomCSSThemesRecord;
 
-    /** @todo Documentation incomplete. */
+    /** Record of available theme updates. */
     updates: CustomCSSUpdatesRecord;
 
-    /** @todo Documentation incomplete. */
+    /** Bound callback for handling raw file change events for a theme. */
     boundRaw(themeName: string): void;
 
     /**
@@ -159,28 +159,28 @@ export interface CustomCSS extends Component {
      */
     isThemeInstalled(themeName: string): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Load and apply CSS from the given source. */
     loadCss(arg1: unknown): Promise<unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Load stored CustomCSS configuration data. */
     loadData(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Load and apply all enabled CSS snippets. */
     loadSnippets(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Load and apply a specific theme. */
     loadTheme(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Lifecycle hook called when the component is loaded. */
     onload(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle raw file system change events for a theme. */
     onRaw(themeName: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Read available CSS snippets from the snippets folder. */
     readSnippets(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Read available themes from the themes folder. */
     readThemes(): void;
 
     /**

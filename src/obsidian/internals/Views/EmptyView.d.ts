@@ -2,7 +2,7 @@ import type { ItemView } from 'obsidian';
 import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View displayed when a workspace leaf has no content or file open.
  * @public
  * @unofficial
  */

@@ -9,7 +9,7 @@ import type { MetadataEditorProperty } from './MetadataEditorProperty.d.ts';
 import type { PropertyEntryData } from './PropertyEntryData.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Editor component for managing frontmatter property fields in a markdown view.
  * @public
  * @unofficial
  */

@@ -1,7 +1,7 @@
 import type { HighlightOutline } from './HighlightOutline.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Generates outlines around highlighted regions in a PDF document.
  * @public
  * @unofficial
  */
@@ -21,6 +21,6 @@ export declare class HighlightOutliner {
      */
     constructor(boxes: Array<Object>, borderWidth?: number, innerMargin?: number, isLTR?: boolean);
 
-    /** @todo Documentation incomplete. */
+    /** Compute and return the highlight outlines for the given boxes. */
     getOutlines(): HighlightOutline;
 }

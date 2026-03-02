@@ -1,7 +1,7 @@
 import type { FileCacheEntry } from '../FileCacheEntry.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Record mapping file paths to their file cache entries (hash, mtime, size).
  * @public
  * @unofficial
  */

@@ -1,15 +1,15 @@
 /**
- * @todo Documentation incomplete.
+ * Configuration options for the note composer plugin.
  * @public
  * @unofficial
  */
 export interface NoteComposerPluginOptions {
-    /** @todo Documentation incomplete. */
+    /** Whether to prompt for confirmation before merging notes. */
     askBeforeMerging?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** What to leave in place of extracted content: a link, an embed, or nothing. */
     replacementText?: 'link' | 'embed' | 'none';
 
-    /** @todo Documentation incomplete. */
+    /** Path to the template file used when extracting content into a new note. */
     template?: string;
 }

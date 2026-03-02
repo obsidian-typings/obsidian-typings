@@ -1,9 +1,9 @@
 /**
- * @todo Documentation incomplete.
+ * Nested dictionary of localization strings for internationalization.
  * @public
  * @unofficial
  */
 export interface Localization {
-    /** @todo Documentation incomplete. */
+    /** Localized string value, or nested localization group. */
     [key: string]: string | Localization;
 }

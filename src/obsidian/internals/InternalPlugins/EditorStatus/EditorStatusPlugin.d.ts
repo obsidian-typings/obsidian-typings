@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { EditorStatusPluginInstance } from './EditorStatusPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the editor status bar feature.
  * @public
  * @unofficial
  */

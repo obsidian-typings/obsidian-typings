@@ -7,31 +7,31 @@ declare module 'obsidian' {
      */
     interface WorkspaceItem extends Events {
         /**
-         * @todo Documentation incomplete.
+         * Reference to the app instance.
          * @unofficial
          */
         app: App;
 
         /**
-         * @todo Documentation incomplete.
+         * The component managing the lifecycle of this workspace item.
          * @unofficial
          */
         component: Component;
 
         /**
-         * @todo Documentation incomplete.
+         * Container element for this workspace item.
          * @unofficial
          */
         containerEl: HTMLDivElement;
 
         /**
-         * @todo Documentation incomplete.
+         * The flex-grow dimension of this item within its parent split.
          * @unofficial
          */
         dimension: number | null;
 
         /**
-         * @todo Documentation incomplete.
+         * Unique identifier for this workspace item.
          * @unofficial
          */
         id: string;
@@ -46,31 +46,31 @@ declare module 'obsidian' {
         parent__: WorkspaceParent;
 
         /**
-         * @todo Documentation incomplete.
+         * The resize handle element used for adjusting item dimensions.
          * @unofficial
          */
         resizeHandleEl: HTMLHRElement;
 
         /**
-         * @todo Documentation incomplete.
+         * The type identifier for this workspace item (e.g. 'leaf', 'split', 'tabs').
          * @unofficial
          */
         type: string;
 
         /**
-         * @todo Documentation incomplete.
+         * Reference to the workspace this item belongs to.
          * @unofficial
          */
         workspace: Workspace;
 
         /**
-         * @todo Documentation incomplete.
+         * The parent split containing this item.
          * @unofficial
          */
         get parentSplit(): WorkspaceParent;
 
         /**
-         * @todo Documentation incomplete.
+         * Detach this item from its parent.
          * @unofficial
          */
         detach(): void;
@@ -86,7 +86,7 @@ declare module 'obsidian' {
         getContainer(): WorkspaceContainer;
 
         /**
-         * @todo Documentation incomplete.
+         * Get the icon name for this workspace item.
          * @unofficial
          */
         getIcon(): IconName;
@@ -100,25 +100,25 @@ declare module 'obsidian' {
         getRoot(): WorkspaceItem;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle the start of a resize operation on this item.
          * @unofficial
          */
         onResizeStart(evt: MouseEvent): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Serialize this workspace item's state for persistence.
          * @unofficial
          */
         serialize(): SerializedWorkspaceItem;
 
         /**
-         * @todo Documentation incomplete.
+         * Set the flex-grow dimension of this item within its parent split.
          * @unofficial
          */
         setDimension(dimension: number | null): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Set the parent split for this workspace item.
          * @unofficial
          */
         setParent(parent: WorkspaceParent): void;

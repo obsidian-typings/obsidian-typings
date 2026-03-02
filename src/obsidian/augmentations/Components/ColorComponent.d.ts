@@ -49,7 +49,7 @@ declare module 'obsidian' {
         getValueHsl(): HSL;
 
         /**
-         * @todo Documentation incomplete.
+         * Get the current color value as an integer.
          * @unofficial
          */
         getValueInt(): number;
@@ -121,7 +121,7 @@ declare module 'obsidian' {
         setValueHsl(hsl: HSL): this;
 
         /**
-         * @todo Documentation incomplete.
+         * Set the current color value from an integer.
          * @unofficial
          */
         setValueInt(value: number): this;

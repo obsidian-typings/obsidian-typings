@@ -1,7 +1,7 @@
 import type { TAbstractFile } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Record mapping file paths to their TAbstractFile instances in the vault.
  * @public
  * @unofficial
  */

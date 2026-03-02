@@ -11,24 +11,24 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  * @unofficial
  */
 export interface PowerTag {
-    /** @todo Documentation incomplete. */
+    /** Whether the power tag graphics have been rendered. */
     rendered: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Graph renderer managing this power tag. */
     renderer: GraphRenderer;
 
-    /** @todo Documentation incomplete. */
+    /** PixiJS text element displaying the tag label. */
     text: Text;
 
-    /** @todo Documentation incomplete. */
+    /** Destroy the power tag graphics and remove them from the scene. */
     clearGraphics(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Get the text style used for rendering the power tag label. */
     getTextStyle(): TextStyle;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize the power tag graphics and add them to the scene. */
     initGraphics(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Render the power tag. */
     render(): void;
 }

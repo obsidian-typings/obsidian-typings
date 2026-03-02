@@ -24,7 +24,7 @@ declare module 'obsidian' {
         editor?: Editor;
 
         /**
-         * @todo Documentation incomplete.
+         * The metadata (frontmatter/properties) editor for this file.
          * @unofficial
          */
         metadataEditor?: MetadataEditor;

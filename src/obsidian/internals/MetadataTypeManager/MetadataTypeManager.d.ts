@@ -14,7 +14,7 @@ import type { MetadataTypeManagerTypesRecord } from './MetadataTypeManagerTypesR
 import type { TypeInfo } from './TypeInfo.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Manager for frontmatter property types, handling registration and assignment of property widgets.
  * @public
  * @unofficial
  */
@@ -34,7 +34,7 @@ export interface MetadataTypeManager extends Events {
      */
     lastSave: number;
 
-    /** @todo Documentation incomplete. */
+    /** Debounced handler for property type config file changes on disk. */
     onConfigFileChange: Debouncer<[], Promise<void>>;
 
     /**
@@ -77,10 +77,10 @@ export interface MetadataTypeManager extends Events {
      */
     loadData(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Handle raw file system change events for the property type config. */
     onRaw(e: unknown): void;
 
-    /** @todo Documentation incomplete. */
+    /** Register event listeners for property type config file changes. */
     registerListeners(): void;
 
     /**

@@ -1,20 +1,20 @@
 import type { IconName } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * A single state entry in a workspace leaf's navigation history.
  * @public
  * @unofficial
  */
 export interface WorkspaceLeafHistoryState {
-    /** @todo Documentation incomplete. */
+    /** Ephemeral editor state (cursor position, scroll, etc.). */
     eState: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Icon associated with this history entry. */
     icon: IconName;
 
-    /** @todo Documentation incomplete. */
+    /** View state data for this history entry. */
     state: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Display title for this history entry. */
     title: string;
 }

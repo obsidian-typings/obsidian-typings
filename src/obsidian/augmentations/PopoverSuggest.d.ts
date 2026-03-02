@@ -46,7 +46,7 @@ declare module 'obsidian' {
         suggestions: SuggestionContainer<T>;
 
         /**
-         * @todo Documentation incomplete.
+         * Automatically destroy the popover when its associated element is removed.
          * @unofficial
          */
         autoDestroy?(): void;
@@ -69,7 +69,7 @@ declare module 'obsidian' {
         constructor__(app: App, scope?: Scope): this;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle the escape key to close the popover.
          * @unofficial
          */
         onEscapeKey(): void;
@@ -101,7 +101,7 @@ declare module 'obsidian' {
         renderSuggestion__(value: T, el: HTMLElement): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Reposition the popover relative to the given bounding rectangle.
          * @unofficial
          */
         reposition(rect: DOMRect, textDirection?: TextDirection): void;
@@ -126,7 +126,7 @@ declare module 'obsidian' {
         selectSuggestion__(value: T, evt: MouseEvent | KeyboardEvent): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Set the element that triggers automatic destruction of the popover when removed.
          * @unofficial
          */
         setAutoDestroy(el: HTMLElement): void;

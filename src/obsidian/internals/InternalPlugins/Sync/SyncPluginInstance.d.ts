@@ -3,14 +3,14 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { SyncPlugin } from './SyncPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for Obsidian Sync, managing cloud synchronization of vault data.
  * @public
  * @unofficial
  */
 export interface SyncPluginInstance extends InternalPluginInstance<SyncPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the sync plugin registration. */
     plugin: SyncPlugin;
 }

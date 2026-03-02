@@ -21,113 +21,113 @@ import type { BookmarkItem } from './BookmarkItems/BookmarkItem.d.ts';
 import type { BookmarksPlugin } from './BookmarksPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for bookmarks, managing bookmarked files, folders, URLs, searches, and graphs.
  * @public
  * @unofficial
  */
 export interface BookmarksPluginInstance extends InternalPluginInstance<BookmarksPlugin>, Events {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Weak map tracking bookmarked views and their indicator elements. */
     bookmarkedViews: WeakMap<View, HTMLElement>;
 
-    /** @todo Documentation incomplete. */
+    /** Lookup table mapping paths to bookmark items. */
     bookmarkLookup: Record<string, BookmarkItem>;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is enabled by default. */
     defaultOn: true;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the bookmark data has been successfully loaded and validated. */
     hasValidData: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** List of all bookmark items. */
     items: BookmarkItem[];
 
-    /** @todo Documentation incomplete. */
+    /** Debounced handler triggered when bookmark items change. */
     onItemsChanged: Debouncer<[boolean], void>;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the bookmarks plugin registration. */
     plugin: BookmarksPlugin;
 
-    /** @todo Documentation incomplete. */
+    /** Lookup table mapping URLs to bookmark items. */
     urlBookmarkLookup: Record<string, BookmarkItem>;
 
-    /** @todo Documentation incomplete. */
+    /** Internal handler called when bookmark items change. */
     _onItemsChanged(shouldSave: boolean): void;
 
-    /** @todo Documentation incomplete. */
+    /** Add a bookmark item, optionally to a specific parent instance. */
     addItem(item: BookmarkItem, instance?: BookmarksPluginInstance): void;
 
-    /** @todo Documentation incomplete. */
+    /** Open the edit dialog for a bookmark item. */
     editItem(item: BookmarkItem): void;
 
-    /** @todo Documentation incomplete. */
+    /** Find the bookmark item associated with a given file view. */
     findBookmarkByView(view: FileView): BookmarkItem | null | undefined;
 
-    /** @todo Documentation incomplete. */
+    /** Get a flat list of all bookmark items. */
     getBookmarks(): BookmarkItem[];
 
-    /** @todo Documentation incomplete. */
+    /** Get the display title for a bookmark item. */
     getItemTitle(item: BookmarkItem): string;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize the bookmarks view leaf. */
     initLeaf(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Load bookmark data from storage. */
     loadData(): Promise<boolean>;
 
-    /** @todo Documentation incomplete. */
+    /** Move a bookmark item to a new position within the list. */
     moveItem(item: BookmarkItem, instance: BookmarksPluginInstance | undefined, index: number): void;
 
-    /** @todo Documentation incomplete. */
+    /** Add bookmark-related items to the editor context menu. */
     onEditorMenu(menu: Menu, editor: Editor, info: MarkdownView | MarkdownFileInfo): void;
 
-    /** @todo Documentation incomplete. */
+    /** Called when the plugin is enabled. */
     onEnable(app: App, plugin: BookmarksPlugin): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Handle external settings file changes and reload configuration. */
     onExternalSettingsChange(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Add bookmark-related items to a file context menu. */
     onFileMenu(menu: Menu, files: TAbstractFile[], source: string, leaf?: WorkspaceLeaf): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a file rename and update affected bookmarks. */
     onFileRename(file: TFile, oldPath: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Add bookmark-related items to a multi-file context menu. */
     onFilesMenu(menu: Menu, files: TAbstractFile[], source: string, leaf?: WorkspaceLeaf): void;
 
-    /** @todo Documentation incomplete. */
+    /** Add bookmark-related items to a workspace leaf context menu. */
     onLeafMenu(menu: Menu, leaf: WorkspaceLeaf): void;
 
-    /** @todo Documentation incomplete. */
+    /** Add bookmark-related items to a search results context menu. */
     onSearchResultsMenu(menu: Menu, search: TypedWorkspaceLeaf<SearchView>): void;
 
-    /** @todo Documentation incomplete. */
+    /** Add bookmark-related items to a tab group context menu. */
     onTabGroupMenu(menu: Menu, tabsLeaf: WorkspaceTabs): void;
 
-    /** @todo Documentation incomplete. */
+    /** Called when the user enables the plugin. */
     onUserEnable(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Open a bookmark item in a new or existing leaf. */
     openBookmark(item: BookmarkItem, newLeaf: PaneType | boolean, newLeaf2?: PaneType | boolean): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Open a bookmark item in a specific workspace leaf. */
     openBookmarkInLeaf(item: BookmarkItem, leaf: WorkspaceLeaf, newLeaf?: PaneType | boolean): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Open multiple bookmark items at once. */
     openBookmarks(items: BookmarkItem[], newLeaf?: PaneType | boolean): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Rebuild the internal bookmark lookup caches. */
     rebuildBookmarkCache(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Remove a bookmark item from the list. */
     removeItem(item: BookmarkItem): void;
 
-    /** @todo Documentation incomplete. */
+    /** Persist the current bookmark data to storage. */
     saveData(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Update bookmark indicator icons on tab headers. */
     updateTabHeaders(): void;
 }

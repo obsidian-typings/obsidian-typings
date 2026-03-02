@@ -1,5 +1,3 @@
-/** @todo Documentation incomplete */
-
 import type {
     App,
     Debouncer
@@ -7,50 +5,50 @@ import type {
 import type { AppMenuBarManagerConstructor } from './AppMenuBarManagerConstructor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Manager for the application menu bar (native desktop menu).
  * @public
  * @unofficial
  */
 export interface AppMenuBarManager {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Constructor reference for the menu bar manager. */
     constructor: AppMenuBarManagerConstructor;
 
-    /** @todo Documentation incomplete. */
+    /** Debounced handler for workspace layout changes. */
     onLayoutChange: Debouncer<[], unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Debounced handler for window frame changes. */
     onWindowFrameChange: Debouncer<[], unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Debounced function to re-render the menu bar. */
     requestRender: Debouncer<[], unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Internal handler for layout change events. */
     _onLayoutChange(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Apply hotkey accelerators to menu items. */
     applyHotkeys(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Build the native menu bar structure. */
     buildMenu(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Convert a hotkey binding to a native accelerator string. */
     getAcceleratorFromHotkey(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Hide menu items for commands that are not registered. */
     hideUnregisteredCommands(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Render the menu bar. */
     render(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the share menu item state. */
     updateShareMenuItem(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the menu bar based on the current view state. */
     updateViewState(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the menu bar based on workspace changes. */
     updateWorkspace(): unknown;
 }

@@ -5,11 +5,11 @@ import type {
 import type { BookmarksView } from './BookmarksView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View creators registered by the bookmarks plugin.
  * @public
  * @unofficial
  */
 export interface BookmarksPluginViews extends Record<string, ViewCreator> {
-    /** @todo Documentation incomplete. */
+    /** Create a bookmarks view in the given workspace leaf. */
     bookmarks(left: WorkspaceLeaf): BookmarksView;
 }

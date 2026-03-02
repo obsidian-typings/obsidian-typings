@@ -1,18 +1,18 @@
 import type { TreeNode } from './TreeNode.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a single interactive item within a tree view UI component.
  * @public
  * @unofficial
  */
 export interface TreeItem extends TreeNode {
-    /** @todo Documentation incomplete */
+    /** Overlay element covering the tree item, used for visual effects. */
     coverEl: HTMLElement;
 
-    /** @todo Documentation incomplete */
+    /** Inner container element holding the tree item content. */
     innerEl: HTMLElement;
 
-    /** @todo Documentation incomplete */
+    /** The main element representing this tree item in the DOM. */
     selfEl: HTMLElement;
 
     /**

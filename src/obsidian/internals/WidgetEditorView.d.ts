@@ -8,7 +8,7 @@ import type { EmbeddedEditorView } from './EmbeddedEditorView.d.ts';
 import type { FoldInfo } from './FoldInfo.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Editable widget view for embedded file sections (headings, blocks) within the editor.
  * @public
  * @unofficial
  */

@@ -5,12 +5,12 @@
  * @unofficial
  */
 export interface WorkerResults {
-    /** @todo Documentation incomplete. */
+    /** Shared buffer containing node position data from the simulation worker. */
     buffer: SharedArrayBuffer;
 
-    /** @todo Documentation incomplete. */
+    /** Array of node identifiers corresponding to entries in the buffer. */
     id: number[];
 
-    /** @todo Documentation incomplete. */
+    /** Version counter for tracking simulation updates. */
     v?: number;
 }

@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Represents the user's Obsidian account information and license details.
  * @public
  * @unofficial
  */
@@ -14,13 +14,13 @@ export interface Account {
      */
     email: string;
 
-    /** @todo Documentation incomplete. */
+    /** Unix timestamp of the license expiry date. */
     expiry: number;
 
-    /** @todo Documentation incomplete. */
+    /** License key string. */
     key: string | undefined;
 
-    /** @todo Documentation incomplete. */
+    /** Validation status or hash for the license key. */
     keyValidation: string;
 
     /**
@@ -33,9 +33,9 @@ export interface Account {
      */
     name: string;
 
-    /** @todo Documentation incomplete. */
+    /** Number of seats available on the commercial license. */
     seats: number;
 
-    /** @todo Documentation incomplete. */
+    /** Authentication token for the account. */
     token: string;
 }

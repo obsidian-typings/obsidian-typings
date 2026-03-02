@@ -1,9 +1,9 @@
 /**
- * @todo Documentation incomplete.
+ * Options for setting a selection in the editor.
  * @public
  * @unofficial
  */
 export interface SetSelectionOptions {
-    /** @todo Documentation incomplete. */
+    /** The origin identifier for the selection change (e.g., user action or programmatic). */
     origin?: string;
 }

@@ -38,7 +38,7 @@ declare module 'obsidian' {
         ): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Start observing the popover element for size changes.
          * @unofficial
          */
         watchResize(): void;

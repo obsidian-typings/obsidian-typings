@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { GraphPluginInstance } from './GraphPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin that provides graph view functionality.
  * @public
  * @unofficial
  */

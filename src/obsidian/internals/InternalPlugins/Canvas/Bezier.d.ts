@@ -1,23 +1,23 @@
 import type { Point } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Bezier curve used for rendering canvas edge connections.
  * @public
  * @unofficial
  */
 export interface Bezier {
-    /** @todo Documentation incomplete. */
+    /** First control point of the Bezier curve. */
     cp1: Point;
 
-    /** @todo Documentation incomplete. */
+    /** Second control point of the Bezier curve. */
     cp2: Point;
 
-    /** @todo Documentation incomplete. */
+    /** Start point of the Bezier curve. */
     from: Point;
 
-    /** @todo Documentation incomplete. */
+    /** SVG path string representation of the Bezier curve. */
     path: string;
 
-    /** @todo Documentation incomplete. */
+    /** End point of the Bezier curve. */
     to: Point;
 }

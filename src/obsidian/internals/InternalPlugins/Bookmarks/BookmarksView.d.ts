@@ -5,15 +5,15 @@ import type {
 import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View that displays the bookmarks sidebar, showing all bookmarked items in a tree.
  * @public
  * @unofficial
  */
 export interface BookmarksView extends ItemView {
-    /** @todo Documentation incomplete */
+    /** Copy the selected bookmarks to the clipboard. */
     _copyToClipboard(e: unknown, t: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Get the currently active/selected bookmark items. */
     _getActiveBookmarks(): unknown[];
 
     /**
@@ -26,16 +26,16 @@ export interface BookmarksView extends ItemView {
      */
     attachDropHandler(): void;
 
-    /** @todo Documentation incomplete */
+    /** Create a new bookmark group. */
     createNewGroup(e: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Initiate a drag operation for the selected bookmarks. */
     dragSelectedBookmarks(e: unknown, t: unknown): unknown | null;
 
-    /** @todo Documentation incomplete */
+    /** Get the DOM element for a bookmark item. */
     getItemDom(e: unknown): unknown;
 
-    /** @todo Documentation incomplete */
+    /** Get the unique node identifier for a bookmark item. */
     getNodeId(e: unknown): string;
 
     /**
@@ -43,13 +43,13 @@ export interface BookmarksView extends ItemView {
      */
     getViewType(): typeof ViewType.Bookmarks;
 
-    /** @todo Documentation incomplete */
+    /** Handle the collapse/expand all toggle action. */
     handleCollapseAll(e: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Check whether the given object is a bookmark item. */
     isItem(item: unknown): boolean;
 
-    /** @todo Documentation incomplete */
+    /** Handle the context menu event on a bookmark item. */
     onContextMenu(event: unknown): void;
 
     /**
@@ -73,7 +73,7 @@ export interface BookmarksView extends ItemView {
      */
     onFileDelete(file: TFile): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle a file being opened and highlight corresponding bookmark. */
     onFileOpen(file: TFile): void;
 
     /**
@@ -83,6 +83,6 @@ export interface BookmarksView extends ItemView {
      */
     onRenameKey(event: KeyboardEvent): void;
 
-    /** @todo Documentation incomplete */
+    /** Refresh the bookmarks view. */
     update(): void;
 }

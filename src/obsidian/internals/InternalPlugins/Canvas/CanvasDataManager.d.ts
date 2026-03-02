@@ -1,26 +1,26 @@
 import type { App } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Manages saving, loading, and maintaining canvas local data on disk.
  * @public
  * @unofficial
  */
 export interface CanvasDataManager {
-    /** @todo Documentation incomplete. */
+    /** Reference to the Obsidian app instance. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a file deletion event and remove associated canvas data. */
     handleDelete(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a file rename event and update associated canvas data paths. */
     handleRename(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Load canvas data for the specified file. */
     load(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Remove stored canvas data for the specified file. */
     remove(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Save canvas data for the specified file. */
     save(arg1: unknown, arg2: unknown): unknown;
 }

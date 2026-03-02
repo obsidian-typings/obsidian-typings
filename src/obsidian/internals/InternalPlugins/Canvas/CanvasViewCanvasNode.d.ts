@@ -9,140 +9,140 @@ import type { CanvasViewCanvasNodeBase } from './CanvasViewCanvasNodeBase.d.ts';
 import type { CanvasViewCanvasNodeUnknownData } from './CanvasViewCanvasNodeUnknownData.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a node on the canvas with position, size, content, and connection capabilities.
  * @public
  * @unofficial
  */
 export interface CanvasViewCanvasNode extends CanvasViewCanvasNodeBase {
-    /** @todo Documentation incomplete. */
+    /** Whether this node should always remain loaded even when off-screen. */
     alwaysKeepLoaded: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the Obsidian app instance. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Aspect ratio of the node (width / height). */
     aspectRatio: number;
 
-    /** @todo Documentation incomplete. */
+    /** Bounding box of the node for spatial indexing. */
     bbox: BBox;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the parent canvas instance. */
     canvas: CanvasViewCanvas;
 
-    /** @todo Documentation incomplete. */
+    /** Child editor view for the node's content. */
     child: WidgetEditorView;
 
-    /** @todo Documentation incomplete. */
+    /** Color of the node (CSS color string or preset name). */
     color: string;
 
-    /** @todo Documentation incomplete. */
+    /** Outermost container element of the node. */
     containerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Overlay element that blocks interaction with content when not editing. */
     contentBlockerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Element containing the node's editable content. */
     contentEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the node has been destroyed. */
     destroyed: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the associated file, if this is a file node. */
     file: TFile;
 
-    /** @todo Documentation incomplete. */
+    /** Path to the associated file, if this is a file node. */
     filePath: string;
 
-    /** @todo Documentation incomplete. */
+    /** Height of the node in canvas units. */
     height: number;
 
-    /** @todo Documentation incomplete. */
+    /** Unique identifier for this node. */
     id: string;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the node has been initialized. */
     initialized: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the node's content is currently mounted in the DOM. */
     isContentMounted: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the node is currently in editing mode. */
     isEditing: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Main node element for rendering. */
     nodeEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Placeholder element shown while the node content is loading. */
     placeholderEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** The last rendered z-index value. */
     renderedZIndex: number;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the node needs to recalculate its size. */
     resizeDirty: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Subpath within the linked file (e.g., heading or block reference). */
     subpath: string;
 
-    /** @todo Documentation incomplete. */
+    /** Additional data properties not covered by known fields. */
     unknownData: CanvasViewCanvasNodeUnknownData;
 
-    /** @todo Documentation incomplete. */
+    /** Width of the node in canvas units. */
     width: number;
 
-    /** @todo Documentation incomplete. */
+    /** X coordinate of the node's top-left corner in canvas space. */
     x: number;
 
-    /** @todo Documentation incomplete. */
+    /** Y coordinate of the node's top-left corner in canvas space. */
     y: number;
 
-    /** @todo Documentation incomplete. */
+    /** Z-index stacking order of the node. */
     zIndex: number;
 
-    /** @todo Documentation incomplete. */
+    /** Remove focus from the node. */
     blur(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set focus on the node. */
     focus(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the serialized data for this node. */
     getData(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize the file association for a file-type node. */
     initFile(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize the node after construction. */
     initialize(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the node's file receiving focus. */
     onFileFocus(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle click events on the node's label. */
     onLabelClick(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle double-click events on the node's label. */
     onLabelDblClick(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle pointer down events on the node. */
     onPointerdown(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Render the node to the canvas. */
     render(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set the serialized data for this node. */
     setData(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set the file associated with this node. */
     setFile(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set the file path for this node. */
     setFilePath(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Show the context menu for this node. */
     showMenu(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the rendering breakpoint based on the node's current size. */
     updateBreakpoint(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the displayed label text of the node. */
     updateNodeLabel(arg1: unknown): unknown;
 }

@@ -3,14 +3,14 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { PagePreviewPlugin } from './PagePreviewPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for page preview, showing hover previews of linked notes.
  * @public
  * @unofficial
  */
 export interface PagePreviewPluginInstance extends InternalPluginInstance<PagePreviewPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is enabled by default. */
     defaultOn: true;
 }

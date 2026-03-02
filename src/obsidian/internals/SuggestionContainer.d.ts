@@ -4,7 +4,7 @@ import type {
 } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Container for displaying and navigating editor suggestion items.
  * @public
  * @unofficial
  */
@@ -61,10 +61,10 @@ export interface SuggestionContainer<T> {
      */
     forceSetSelectedItem(index: number, event: Event): void;
 
-    /** @todo Documentation incomplete. */
+    /** Get the DOM element of the currently selected suggestion. */
     getSelectedElement(): HTMLElement | null;
 
-    /** @todo Documentation incomplete. */
+    /** Get the data value of the currently selected suggestion. */
     getSelectedValue(): SearchResult | null;
 
     /**

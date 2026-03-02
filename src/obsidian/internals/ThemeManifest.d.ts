@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Manifest metadata for an installed theme.
  * @public
  * @unofficial
  */

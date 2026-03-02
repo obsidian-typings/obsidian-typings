@@ -2,23 +2,23 @@ import type { EdgeIndexBase } from './EdgeIndexBase.d.ts';
 import type { EdgeIndexData } from './EdgeIndexData.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Spatial index (R-tree) for efficient hit-testing and spatial queries on canvas edges and nodes.
  * @public
  * @unofficial
  */
 export interface EdgeIndex extends EdgeIndexBase {
-    /** @todo Documentation incomplete. */
+    /** Maximum number of entries per R-tree node before splitting. */
     _maxEntries: number;
 
-    /** @todo Documentation incomplete. */
+    /** Minimum number of entries per R-tree node before merging. */
     _minEntries: number;
 
-    /** @todo Documentation incomplete. */
+    /** Root data node of the R-tree. */
     data: EdgeIndexData;
 
-    /** @todo Documentation incomplete. */
+    /** Compare two items by their minimum X coordinate for sorting. */
     compareMinX(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Compare two items by their minimum Y coordinate for sorting. */
     compareMinY(arg1: unknown, arg2: unknown): unknown;
 }

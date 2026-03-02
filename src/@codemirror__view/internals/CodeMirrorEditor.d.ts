@@ -18,237 +18,237 @@ import type { SetBookmarkOptions } from './SetBookmarkOptions.d.ts';
 import type { SetSelectionOptions } from './SetSelectionOptions.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * CM5-compatible editor interface wrapping a CodeMirror 6 editor view.
  * @public
  * @unofficial
  */
 export interface CodeMirrorEditor {
-    /** @todo Documentation incomplete. */
+    /** Pending line handle changes to be processed. */
     $lineHandleChanges: LineHandleChange[] | undefined;
 
-    /** @todo Documentation incomplete. */
+    /** Add a search overlay to highlight matches in the editor. */
     addOverlay(options: AddOverlayOptions): SearchQuery | undefined;
 
-    /** @todo Documentation incomplete. */
+    /** Remove focus from the editor. */
     blur(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Get the pixel coordinates of a character position. */
     charCoords(pos: EditorPosition, mode: 'local' | 'page' | 'window' | 'div'): Coords;
 
-    /** @todo Documentation incomplete. */
+    /** Clip a position to be within the document bounds. */
     clipPos(pos: EditorPosition): EditorPosition;
 
-    /** @todo Documentation incomplete. */
+    /** Get the editor position corresponding to pixel coordinates. */
     coordsChar(coords: Coords, mode: 'local' | 'page' | 'window' | 'div'): EditorPosition;
 
-    /** @todo Documentation incomplete. */
+    /** Get the default height of a line of text in pixels. */
     defaultTextHeight(): number;
 
-    /** @todo Documentation incomplete. */
+    /** Destroy and clean up resources. */
     destroy(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Execute a named editor command. */
     execCommand(command: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Find the matching bracket for the bracket at the given position. */
     findMatchingBracket(pos: EditorPosition): MatchingBracket;
 
-    /** @todo Documentation incomplete. */
+    /** Find a position vertically relative to the given start position. */
     findPosV(start: EditorPosition, amount: number, unit: 'line' | 'page', goalColumn: number): EditorPosition;
 
-    /** @todo Documentation incomplete. */
+    /** Get the line number of the first line in the document. */
     firstLine(): number;
 
-    /** @todo Documentation incomplete. */
+    /** Focus the editor. */
     focus(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Fold the code block at the given line. */
     foldCode(line: number): void;
 
-    /** @todo Documentation incomplete. */
+    /** Execute a function for each selection in a multi-selection. */
     forEachSelection(fn: () => void): void;
 
-    /** @todo Documentation incomplete. */
+    /** Get the cursor position, optionally specifying which end of the selection. */
     getCursor(type?: 'head' | 'anchor' | 'start' | 'end'): EditorPosition;
 
-    /** @todo Documentation incomplete. */
+    /** Get the editor's input field element. */
     getInputField(): HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** Get the position of the last edit. */
     getLastEditEnd(): EditorPosition;
 
-    /** @todo Documentation incomplete. */
+    /** Get the text content of the given line number. */
     getLine(line: number): string;
 
-    /** @todo Documentation incomplete. */
+    /** Get a handle for the given line number. */
     getLineHandle(line: number): LineHandle;
 
-    /** @todo Documentation incomplete. */
+    /** Get the line number from a line handle, or null if the handle is invalid. */
     getLineNumber(handle: LineHandle): number | null;
 
-    /** @todo Documentation incomplete. */
+    /** Get the primary selection as anchor and head positions. */
     getMainSelection(): EditorSelection;
 
-    /** @todo Documentation incomplete. */
+    /** Get the current editor language mode. */
     getMode(): CodeMirrorEditorMode;
 
-    /** @todo Documentation incomplete. */
+    /** Get the value of an editor option. */
     getOption(option: string): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the text between two positions. */
     getRange(from: EditorPosition, to: EditorPosition): string;
 
-    /** @todo Documentation incomplete. */
+    /** Get information about the editor's scroll position and dimensions. */
     getScrollInfo(): ScrollInfo;
 
-    /** @todo Documentation incomplete. */
+    /** Get a search cursor for the given regular expression starting at the given position. */
     getSearchCursor(query: RegExp, pos: EditorPosition): CodeMirrorEditorSearchCursor;
 
-    /** @todo Documentation incomplete. */
+    /** Get the currently selected text. */
     getSelection(): string;
 
-    /** @todo Documentation incomplete. */
+    /** Get all selections as an array of strings. */
     getSelections(): string[];
 
-    /** @todo Documentation incomplete. */
+    /** Get the token type at the given position. */
     getTokenTypeAt(pos: EditorPosition): string;
 
-    /** @todo Documentation incomplete. */
+    /** Get the full text content of the document. */
     getValue(): string;
 
-    /** @todo Documentation incomplete. */
+    /** Get the outermost wrapper element of the editor. */
     getWrapperElement(): HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** Hard-wrap text according to the given options. */
     hardWrap(options: HardWrapOptions): void;
 
-    /** @todo Documentation incomplete. */
+    /** Decrease the indentation of the selection. */
     indentLess(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Indent the given line, optionally adding more indentation. */
     indentLine(line: number, more?: boolean): void;
 
-    /** @todo Documentation incomplete. */
+    /** Increase the indentation of the selection. */
     indentMore(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Convert an editor position to a character index within the document. */
     indexFromPos(pos: EditorPosition): number;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether the editor is in multi-selection mode. */
     isInMultiSelectMode(): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Get the line number of the last line in the document. */
     lastLine(): number;
 
-    /** @todo Documentation incomplete. */
+    /** Get the total number of lines in the document. */
     lineCount(): number;
 
-    /** @todo Documentation incomplete. */
+    /** Get all current selections as an array of anchor/head pairs. */
     listSelections(): Array<{
         anchor: EditorPosition;
         head: EditorPosition;
     }>;
 
-    /** @todo Documentation incomplete. */
+    /** Move a position by character in the given direction. */
     moveByChar(pos: EditorPosition, dir: 'left' | 'right', unit: number): EditorPosition;
 
-    /** @todo Documentation incomplete. */
+    /** Move the cursor horizontally by the given number of units. */
     moveH(dir: number, unit: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Remove an event listener from the editor. */
     off(event: string, listener: EventListenerOrEventListenerObject): void;
 
-    /** @todo Documentation incomplete. */
+    /** Add an event listener to the editor. */
     on(event: string, listener: EventListenerOrEventListenerObject): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle pre-operation-end cleanup. */
     onBeforeEndOperation(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a line handle change event. */
     onChange(lineHandleChange: LineHandleChange): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a selection change event. */
     onSelectionChange(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Open an interactive dialog in the editor. */
     openDialog(
         template: string,
         keyValidator: (keyValue: string) => boolean,
         options?: Partial<OpenDialogOptions>
     ): void;
 
-    /** @todo Documentation incomplete. */
+    /** Open a notification message in the editor. Returns a function to dismiss it. */
     openNotification(message: string, options?: OpenNotificationOptions): () => void;
 
-    /** @todo Documentation incomplete. */
+    /** Execute a function as a single operation, batching view updates. */
     operation<T>(fn: () => T): T;
 
-    /** @todo Documentation incomplete. */
+    /** Overwrite the current selection with the given text. */
     overWriteSelection(text: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Convert a character index to an editor position. */
     posFromIndex(index: number): EditorPosition;
 
-    /** @todo Documentation incomplete. */
+    /** Refresh the editor display. */
     refresh(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Release all tracked line handles. */
     releaseLineHandles(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Remove a search overlay from the editor. */
     removeOverlay(overlay?: SearchQuery): void;
 
-    /** @todo Documentation incomplete. */
+    /** Replace the text in the given range. */
     replaceRange(text: string, from: EditorPosition, to?: EditorPosition): void;
 
-    /** @todo Documentation incomplete. */
+    /** Replace the current selection with the given text. */
     replaceSelection(text: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Replace all selections with the corresponding texts. */
     replaceSelections(texts: string[]): void;
 
-    /** @todo Documentation incomplete. */
+    /** Scan for a bracket from the given position in the specified direction. */
     scanForBracket(from: EditorPosition, direction: number, style?: string): Bracket | null;
 
-    /** @todo Documentation incomplete. */
+    /** Get information about the editor's scroll position and dimensions. */
     scrollInfo(): ScrollInfo;
 
-    /** @todo Documentation incomplete. */
+    /** Scroll the given position into view with an optional margin. */
     scrollIntoView(pos?: EditorPosition, margin?: number): void;
 
-    /** @todo Documentation incomplete. */
+    /** Scroll the editor to the given coordinates. */
     scrollTo(x?: number, y?: number): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set a bookmark at the given position. */
     setBookmark(pos: EditorPosition, options?: SetBookmarkOptions): Bookmark;
 
-    /** @todo Documentation incomplete. */
+    /** Set the cursor position to the given line and character. */
     setCursor(line: number, ch: number): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the value of an editor option. */
     setOption(option: string, value: unknown): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the selection to the given anchor and head positions. */
     setSelection(anchor: EditorPosition, head: EditorPosition, options?: SetSelectionOptions): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set multiple selections, optionally specifying the primary selection index. */
     setSelections(selections: EditorSelection[], primaryIndex?: number): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the size of the editor in pixels. */
     setSize(width: number, height: number): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the full text content of the document. */
     setValue(content: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Emit a signal/event on the editor. */
     signal(event: string, ...args: unknown[]): void;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether there is an active selection. */
     somethingSelected(): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Toggle overwrite mode on or off. */
     toggleOverwrite(overwrite: boolean): void;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether the editor is in virtual selection mode. */
     virtualSelectionMode(): boolean;
 }

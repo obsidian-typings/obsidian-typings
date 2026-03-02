@@ -1,7 +1,7 @@
 import type { PluginManifest } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Record mapping plugin IDs to their manifest metadata.
  * @public
  * @unofficial
  */

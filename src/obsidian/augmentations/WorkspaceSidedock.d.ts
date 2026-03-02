@@ -7,19 +7,19 @@ declare module 'obsidian' {
      */
     interface WorkspaceSidedock extends WorkspaceSplit {
         /**
-         * @todo Documentation incomplete.
+         * Whether the sidedock allows only a single child tab group.
          * @unofficial
          */
         allowSingleChild: boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Whether the sidedock automatically manages its DOM elements.
          * @unofficial
          */
         autoManageDOM: boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Child tab groups within this sidedock.
          * @unofficial
          */
         children: WorkspaceTabs[];
@@ -33,43 +33,43 @@ declare module 'obsidian' {
         collapsed: boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Layout direction of the sidedock split.
          * @unofficial
          */
         direction: string;
 
         /**
-         * @todo Documentation incomplete.
+         * Element displayed when the sidedock has no content.
          * @unofficial
          */
         emptyStateEl: HTMLDivElement;
 
         /**
-         * @todo Documentation incomplete.
+         * Whether the sidedock is currently being resized.
          * @unofficial
          */
         isResizing: boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Original sizes of children before a resize operation.
          * @unofficial
          */
         originalSizes: null;
 
         /**
-         * @todo Documentation incomplete.
+         * Starting position of the current resize operation.
          * @unofficial
          */
         resizeStartPos: null;
 
         /**
-         * @todo Documentation incomplete.
+         * Which side of the workspace this sidedock is on (e.g. 'left' or 'right').
          * @unofficial
          */
         side: string;
 
         /**
-         * @todo Documentation incomplete.
+         * Width of the sidedock in pixels.
          * @unofficial
          */
         size: number;
@@ -91,25 +91,25 @@ declare module 'obsidian' {
         expand(): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle the start of a sidedock resize operation.
          * @unofficial
          */
         onSidedockResizeStart(evt: MouseEvent): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Recalculate the dimensions of child tab groups.
          * @unofficial
          */
         recomputeChildrenDimensions(): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Serialize the sidedock state for persistence.
          * @unofficial
          */
         serialize(): SerializedWorkspaceSidedock;
 
         /**
-         * @todo Documentation incomplete.
+         * Set the width of the sidedock in pixels.
          * @unofficial
          */
         setSize(size: number): void;

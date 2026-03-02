@@ -149,7 +149,7 @@ declare module 'obsidian' {
         onUnloadFile(file: TFile): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Render the breadcrumb navigation for this file view.
          * @unofficial
          */
         renderBreadcrumbs(): void;
@@ -170,7 +170,7 @@ declare module 'obsidian' {
         setState(state: any, result: ViewStateResult): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Synchronize the view state with the sync plugin.
          * @unofficial
          */
         syncState(e: boolean): Promise<unknown>;

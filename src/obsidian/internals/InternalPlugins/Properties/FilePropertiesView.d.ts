@@ -3,7 +3,7 @@ import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts'
 import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View that displays frontmatter properties for the current file.
  * @public
  * @unofficial
  */
@@ -25,10 +25,10 @@ export interface FilePropertiesView extends InfoFileView {
      */
     isSupportedFile(file: TFile): boolean;
 
-    /** @todo Documentation incomplete */
+    /** Handle a file content change and refresh properties. */
     onFileChange(file: TFile): Promise<unknown>;
 
-    /** @todo Documentation incomplete */
+    /** Handle a quick preview update for the file. */
     onQuickPreview(file: TFile, t: unknown): void;
 
     /**
@@ -38,21 +38,21 @@ export interface FilePropertiesView extends InfoFileView {
      */
     readSupportedFile(file: TFile): Promise<unknown>;
 
-    /** @todo Documentation incomplete */
+    /** Save the modified frontmatter data to the file. */
     saveFrontmatter(e: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Move focus to the next property field. */
     shiftFocusAfter(): void;
 
-    /** @todo Documentation incomplete */
+    /** Move focus to the previous property field. */
     shiftFocusBefore(): void;
 
-    /** @todo Documentation incomplete */
+    /** Refresh the file properties view. */
     update(): void;
 
-    /** @todo Documentation incomplete */
+    /** Update the empty state display when no properties exist. */
     updateEmptyState(): void;
 
-    /** @todo Documentation incomplete */
+    /** Update the frontmatter of a file with new property data. */
     updateFrontmatter(file: TFile, t: unknown): unknown;
 }

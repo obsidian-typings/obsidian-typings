@@ -3,11 +3,11 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { MarkdownImporterPlugin } from './MarkdownImporterPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for the Markdown importer, providing conversion from other formats to Markdown.
  * @public
  * @unofficial
  */
 export interface MarkdownImporterPluginInstance extends InternalPluginInstance<MarkdownImporterPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 }

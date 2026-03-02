@@ -71,68 +71,68 @@ declare global {
         app: App;
 
         /**
-         * @todo Documentation incomplete.
+         * Minified reference to `Object.hasOwnProperty`.
          * @unofficial
          */
         bl: typeof Object.hasOwnProperty;
 
         /**
-         * @todo Documentation incomplete.
+         * Native Blink engine fetch, used to bypass patched fetch implementations.
          * @unofficial
          * @hidden
          */
         blinkfetch: typeof fetch;
 
         /**
-         * @todo Documentation incomplete.
+         * Native Blink engine FormData constructor.
          * @unofficial
          */
         blinkFormData: typeof FormData;
 
         /**
-         * @todo Documentation incomplete.
+         * Native Blink engine Headers constructor.
          * @unofficial
          */
         blinkHeaders: typeof Headers;
 
         /**
-         * @todo Documentation incomplete.
+         * Native Blink engine Request constructor.
          * @unofficial
          */
         blinkRequest: typeof Request;
 
         /**
-         * @todo Documentation incomplete.
+         * Native Blink engine Response constructor.
          * @unofficial
          */
         blinkResponse: typeof Response;
 
         /**
-         * @todo Documentation incomplete.
+         * Capacitor runtime for accessing native device APIs on mobile.
          * @unofficial
          */
         Capacitor: typeof Capacitor;
 
         /**
-         * @todo Documentation incomplete.
+         * Registry of available Capacitor platform implementations.
          * @unofficial
          */
         CapacitorPlatforms: typeof CapacitorPlatforms;
 
         /**
-         * @todo Documentation incomplete.
+         * Minified reference to `Object.getOwnPropertyDescriptors`.
          * @unofficial
          */
         Cf: typeof Object.getOwnPropertyDescriptors;
 
         /**
-         * @todo Documentation incomplete.
+         * Global CodeMirror 5 instance.
          * @unofficial
          */
         CodeMirror: typeof CodeMirror;
 
         /**
-         * @todo Documentation incomplete.
+         * CodeMirror adapter providing CM5-compatible API over CM6.
          * @unofficial
          */
         CodeMirrorAdapter: CodeMirrorAdapterEx;
@@ -145,25 +145,25 @@ declare global {
         DOMPurify: typeof DOMPurify;
 
         /**
-         * @todo Documentation incomplete.
+         * Minified reference to `Object.propertyIsEnumerable`.
          * @unofficial
          */
         El: typeof Object.propertyIsEnumerable;
 
         /**
-         * @todo Documentation incomplete.
+         * Electron module for desktop platform APIs.
          * @unofficial
          */
         electron: typeof electron;
 
         /**
-         * @todo Documentation incomplete.
+         * Electron BrowserWindow instance for the current window.
          * @unofficial
          */
         electronWindow: ElectronWindow;
 
         /**
-         * @todo Documentation incomplete.
+         * DOM elements and helpers for the app frame/window chrome.
          * @unofficial
          */
         frameDom: FrameDom;
@@ -176,19 +176,19 @@ declare global {
         FS: CapacitorAdapterFsConstructor;
 
         /**
-         * @todo Documentation incomplete.
+         * Global i18next internationalization framework instance.
          * @unofficial
          */
         i18next: typeof i18next;
 
         /**
-         * @todo Documentation incomplete.
+         * MathJax instance for rendering mathematical notation.
          * @unofficial
          */
         MathJax?: MathJax;
 
         /**
-         * @todo Documentation incomplete.
+         * Mermaid library instance for rendering diagrams and charts.
          * @unofficial
          */
         mermaid?: Mermaid;
@@ -203,7 +203,7 @@ declare global {
         moment: typeof moment;
 
         /**
-         * @todo Documentation incomplete.
+         * Minified reference to `Object.getOwnPropertySymbols`.
          * @unofficial
          */
         mr: typeof Object.getOwnPropertySymbols;
@@ -223,31 +223,31 @@ declare global {
         OBS_ACT: ObsidianProtocolHandler;
 
         /**
-         * @todo Documentation incomplete.
+         * Default internationalization strings bundled with Obsidian.
          * @unofficial
          */
         OBSIDIAN_DEFAULT_I18N: Localization;
 
         /**
-         * @todo Documentation incomplete.
+         * PDF.js library for parsing and rendering PDF documents.
          * @unofficial
          */
         pdfjsLib: typeof pdfjsLib;
 
         /**
-         * @todo Documentation incomplete.
+         * Testing utilities for PDF.js.
          * @unofficial
          */
         pdfjsTestingUtils: PdfJsTestingUtils;
 
         /**
-         * @todo Documentation incomplete.
+         * PixiJS library for 2D rendering (used for canvas views).
          * @unofficial
          */
         PIXI: typeof PIXI;
 
         /**
-         * @todo Documentation incomplete.
+         * Prism.js syntax highlighting library instance.
          * @unofficial
          */
         Prism?: typeof Prism;
@@ -268,43 +268,43 @@ declare global {
         requestUrl: typeof requestUrl;
 
         /**
-         * @todo Documentation incomplete.
+         * Scrypt key derivation function library for password-based encryption.
          * @unofficial
          */
         scrypt: typeof scrypt;
 
         /**
-         * @todo Documentation incomplete.
+         * Minified reference to `Object.defineProperties`.
          * @unofficial
          */
         Sf: typeof Object.defineProperties;
 
         /**
-         * @todo Documentation incomplete.
+         * Temporary reference to the WebSQL database `changeVersion` method.
          * @unofficial
          */
         temp1: Database['changeVersion'];
 
         /**
-         * @todo Documentation incomplete.
+         * The style of the window title bar (e.g., "hidden", "default").
          * @unofficial
          */
         titlebarStyle: string;
 
         /**
-         * @todo Documentation incomplete.
+         * TurndownService for converting HTML to Markdown.
          * @unofficial
          */
         TurndownService: typeof TurndownService;
 
         /**
-         * @todo Documentation incomplete.
+         * Electron WebView tag for embedding external web content.
          * @unofficial
          */
         WebView: electron.WebviewTag;
 
         /**
-         * @todo Documentation incomplete.
+         * Minified reference to `Object.defineProperty`.
          * @unofficial
          */
         wf: typeof Object.defineProperty;
@@ -467,7 +467,7 @@ declare global {
         fishAll(selector: string): HTMLElement[];
 
         /**
-         * @todo Documentation incomplete.
+         * Apply global DOM enhancements and polyfills used by Obsidian.
          * @unofficial
          */
         globalEnhance(): void;
@@ -531,13 +531,13 @@ declare global {
         isBoolean(obj: any): obj is boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Minified helper to copy properties from source to target object.
          * @unofficial
          */
         li(target: object, source: object): object;
 
         /**
-         * @todo Documentation incomplete.
+         * Minified helper to pick specified properties from an object.
          * @unofficial
          */
         mo(target: object, propertyNames: string[]): object;
@@ -555,7 +555,7 @@ declare global {
         nextFrame(): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Open or create a WebSQL database.
          * @unofficial
          */
         openDatabase(
@@ -600,13 +600,13 @@ declare global {
         sleep(ms: number): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Minified helper to merge source properties into target object.
          * @unofficial
          */
         St(target: object, source: object | undefined): object;
 
         /**
-         * @todo Documentation incomplete.
+         * Minified helper to set a property on an object.
          * @unofficial
          */
         Tl(target: object, propertyName: string, propertyValue: unknown): unknown;

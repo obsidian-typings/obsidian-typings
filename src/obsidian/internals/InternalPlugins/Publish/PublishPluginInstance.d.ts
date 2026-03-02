@@ -3,14 +3,14 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { PublishPlugin } from './PublishPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for Obsidian Publish, managing cloud publishing of vault content.
  * @public
  * @unofficial
  */
 export interface PublishPluginInstance extends InternalPluginInstance<PublishPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the publish plugin registration. */
     plugin: PublishPlugin;
 }

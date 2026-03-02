@@ -1,9 +1,9 @@
 /**
- * @todo Documentation incomplete.
+ * Options for downloading a pre-v1.0.0 legacy theme.
  * @public
  * @unofficial
  */
 export interface DownloadLegacyThemeOptions {
-    /** @todo Documentation incomplete. */
+    /** GitHub repository identifier (e.g. "username/repo"). */
     repo: string;
 }

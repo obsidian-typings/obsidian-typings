@@ -2,7 +2,7 @@ import type { ImageView } from './ImageView.d.ts';
 import type { TypedViewConstructor } from './TypedViewConstructor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Constructor for creating ImageView instances.
  * @public
  * @unofficial
  */

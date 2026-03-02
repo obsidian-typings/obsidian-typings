@@ -1,63 +1,63 @@
 /**
- * @todo Documentation incomplete.
+ * Chooser component for a suggest modal, managing suggestion selection and navigation.
  * @public
  * @unofficial
  */
 export interface SuggestModalChooser<T, TModal> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the owning modal. */
     chooser: TModal;
 
-    /** @todo Documentation incomplete. */
+    /** Container element for the suggestion list. */
     containerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Number of suggestions visible at once. */
     numVisibleItems: number;
 
-    /** @todo Documentation incomplete. */
+    /** Height of each suggestion row in pixels. */
     rowHeight: number;
 
-    /** @todo Documentation incomplete. */
+    /** Index of the currently selected suggestion. */
     selectedItem: number;
 
-    /** @todo Documentation incomplete. */
+    /** DOM elements for each suggestion row. */
     suggestions: HTMLDivElement[];
 
-    /** @todo Documentation incomplete. */
+    /** Current suggestion values, or null if none. */
     values: T[] | null;
 
-    /** @todo Documentation incomplete. */
+    /** Display a message in the suggestion list. */
     addMessage(text: string | DocumentFragment): void;
 
-    /** @todo Documentation incomplete. */
+    /** Add a suggestion value to the list. */
     addSuggestion(value: T): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the selected item by index, forcing scroll into view. */
     forceSetSelectedItem(index: number, evt: MouseEvent | KeyboardEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Move selection to the next suggestion. */
     moveDown(evt: KeyboardEvent): false | void;
 
-    /** @todo Documentation incomplete. */
+    /** Move selection to the previous suggestion. */
     moveUp(evt: KeyboardEvent): false | void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle click on a suggestion element. */
     onSuggestionClick(evt: MouseEvent, suggestion: HTMLDivElement): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle mouseover on a suggestion element. */
     onSuggestionMouseover(evt: MouseEvent, suggestion: HTMLDivElement): void;
 
-    /** @todo Documentation incomplete. */
+    /** Move selection down by one page of visible items. */
     pageDown(evt: KeyboardEvent): false | void;
 
-    /** @todo Documentation incomplete. */
+    /** Move selection up by one page of visible items. */
     pageUp(evt: KeyboardEvent): false | void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the selected item by index. */
     setSelectedItem(index: number, evt: MouseEvent | KeyboardEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Replace all suggestions with new values. */
     setSuggestions(values: T[] | null): void;
 
-    /** @todo Documentation incomplete. */
+    /** Accept the currently selected suggestion. */
     useSelectedItem(evt: MouseEvent | KeyboardEvent): void;
 }

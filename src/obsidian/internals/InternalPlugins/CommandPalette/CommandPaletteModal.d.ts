@@ -5,14 +5,14 @@ import type {
 import type { CommandPalettePluginInstance } from './CommandPalettePluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Fuzzy suggest modal used by the command palette to search and execute commands.
  * @public
  * @unofficial
  */
 export interface CommandPaletteModal extends FuzzySuggestModal<Command> {
-    /** @todo Documentation incomplete. */
+    /** Cached list of available commands, or null if not yet populated. */
     commands: Command[] | null;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the command palette plugin instance. */
     plugin: CommandPalettePluginInstance;
 }

@@ -3,11 +3,11 @@ import type { BookmarksPluginInstance } from './BookmarksPluginInstance.d.ts';
 import type { BookmarksPluginViews } from './BookmarksPluginViews.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the bookmarks feature.
  * @public
  * @unofficial
  */
 export interface BookmarksPlugin extends InternalPlugin<BookmarksPluginInstance> {
-    /** @todo Documentation incomplete. */
+    /** View creators registered by the bookmarks plugin. */
     views: BookmarksPluginViews;
 }

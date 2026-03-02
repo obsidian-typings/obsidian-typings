@@ -1,11 +1,11 @@
 import type { ChangeDesc } from '@codemirror/state';
 
 /**
- * @todo Documentation incomplete.
+ * Describes a change applied to a line handle.
  * @public
  * @unofficial
  */
 export interface LineHandleChange {
-    /** @todo Documentation incomplete. */
+    /** The change description associated with this line handle update. */
     changes: ChangeDesc;
 }

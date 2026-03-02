@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Options for ensuring a side leaf exists in the workspace.
  * @public
  * @unofficial
  */

@@ -1,56 +1,56 @@
 import type { RendererSection } from './RendererSection.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Renderer for the reading/preview view, managing section-based markdown rendering.
  * @public
  * @unofficial
  */
 export interface ReadViewRenderer {
-    /** @todo Documentation incomplete. */
+    /** Whether to add bottom padding to the preview. */
     addBottomPadding: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Sections that are being rendered asynchronously. */
     asyncSections: unknown[];
 
-    /** @todo Documentation incomplete. */
+    /** Timestamp of the last render operation. */
     lastRender: number;
 
-    /** @todo Documentation incomplete. */
+    /** Last recorded scroll position. */
     lastScroll: number;
 
-    /** @todo Documentation incomplete. */
+    /** Text content from the last render. */
     lastText: string;
 
-    /** @todo Documentation incomplete. */
+    /** Container element for the rendered preview. */
     previewEl: HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** Element used to push content for scroll height calculation. */
     pusherEl: HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** Pool of recycled section elements for reuse. */
     recycledSections: unknown[];
 
-    /** @todo Documentation incomplete. */
+    /** Currently rendered section data. */
     rendered: unknown[];
 
-    /** @todo Documentation incomplete. */
+    /** All sections in the rendered document. */
     sections: RendererSection[];
 
-    /** @todo Documentation incomplete. */
+    /** Current text content being rendered. */
     text: string;
 
-    /** @todo Documentation incomplete. */
+    /** Clear all rendered sections and reset the renderer. */
     clear(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Parse the text content asynchronously into sections. */
     parseAsync(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Parse the text content synchronously into sections. */
     parseSync(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Queue a render update for the next animation frame. */
     queueRender(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the text content and trigger a re-render. */
     set(text: string): void;
 }

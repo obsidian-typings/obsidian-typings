@@ -1,14 +1,14 @@
 import type { TreeCollapsibleItem } from '../../../Tree/TreeCollapsibleItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Base interface for a collapsible graph options section in the settings panel.
  * @public
  * @unofficial
  */
 export interface GraphOptions extends TreeCollapsibleItem {
-    /** @todo Documentation incomplete. */
+    /** Get the current values of this options section. */
     getOptions(e: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Apply new values to this options section. */
     setOptions(e: unknown): unknown;
 }

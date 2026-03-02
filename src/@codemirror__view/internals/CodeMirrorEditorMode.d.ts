@@ -1,9 +1,9 @@
 /**
- * @todo Documentation incomplete.
+ * Describes the active editor language mode.
  * @public
  * @unofficial
  */
 export interface CodeMirrorEditorMode {
-    /** @todo Documentation incomplete. */
+    /** Name of the active language mode. */
     name: string;
 }

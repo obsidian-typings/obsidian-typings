@@ -5,7 +5,7 @@ import type { EditorSearchComponent } from './Components/EditorSearchComponent.d
 import type { MarkdownBaseView } from './MarkdownBaseView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Extended markdown editor view with scrolling, search, and CSS class management.
  * @public
  * @unofficial
  */

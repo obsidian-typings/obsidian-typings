@@ -5,11 +5,11 @@ import type {
 import type { BacklinkView } from './BacklinkView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View creators registered by the backlink plugin.
  * @public
  * @unofficial
  */
 export interface BacklinkPluginViews extends Record<string, ViewCreator> {
-    /** @todo Documentation incomplete. */
+    /** Create a backlink view in the given workspace leaf. */
     backlink(left: WorkspaceLeaf): BacklinkView;
 }

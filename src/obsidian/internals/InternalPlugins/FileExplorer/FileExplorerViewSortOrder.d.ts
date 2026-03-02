@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Available sort orders for the file explorer view.
  *
  * @public
  * @unofficial

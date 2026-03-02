@@ -2,27 +2,27 @@ export {};
 
 declare module 'i18next' {
     /**
-     * @todo Documentation incomplete.
+     * The language code that i18next is currently transitioning to, or undefined if no change is in progress.
      *
      * @unofficial
      */
     var isLanguageChangingTo: string | undefined;
 
     /**
-     * @todo Documentation incomplete.
+     * The logger instance used by i18next for debug and warning output.
      * @unofficial
      */
     var logger: unknown;
 
     /**
-     * @todo Documentation incomplete.
+     * Registered observers for i18next events and state changes.
      *
      * @unofficial
      */
     var observers: object;
 
     /**
-     * @todo Documentation incomplete.
+     * The translator instance responsible for resolving translation keys.
      *
      * @unofficial
      */

@@ -4,17 +4,17 @@ import type {
 } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * UI components for a single color group entry in the graph settings panel.
  * @public
  * @unofficial
  */
 export interface GraphColorGroupOptionsGroup {
-    /** @todo Documentation incomplete. */
+    /** Color picker component for selecting the group color. */
     color: ColorComponent;
 
-    /** @todo Documentation incomplete. */
+    /** Container element for this color group entry. */
     el: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Text input component for the search query that defines this group. */
     query: TextComponent;
 }

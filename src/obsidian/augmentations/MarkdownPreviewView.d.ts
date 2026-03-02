@@ -29,25 +29,25 @@ declare module 'obsidian' {
         renderer: ReadViewRenderer;
 
         /**
-         * @todo Documentation incomplete.
+         * Search instance for in-document search, or null if inactive.
          * @unofficial
          */
         search: null | unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * The subview type identifier (e.g. 'preview').
          * @unofficial
          */
         type: 'preview' | string;
 
         /**
-         * @todo Documentation incomplete.
+         * The parent MarkdownView containing this preview.
          * @unofficial
          */
         view: MarkdownView;
 
         /**
-         * @todo Documentation incomplete.
+         * Apply fold information to the preview.
          * @unofficial
          */
         applyFoldInfo(e: unknown): unknown;
@@ -64,7 +64,7 @@ declare module 'obsidian' {
         applyScroll(scroll: number): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Perform cleanup before the preview is unloaded.
          * @unofficial
          */
         beforeUnload(): unknown;
@@ -81,7 +81,7 @@ declare module 'obsidian' {
         clear(): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Switch to edit mode for the given element or selection.
          * @unofficial
          */
         edit(e: unknown): unknown;
@@ -95,7 +95,7 @@ declare module 'obsidian' {
         file__?(): TFile;
 
         /**
-         * @todo Documentation incomplete.
+         * Fold all foldable sections in the preview.
          * @unofficial
          */
         foldAll(): unknown;
@@ -108,13 +108,13 @@ declare module 'obsidian' {
         get(): string;
 
         /**
-         * @todo Documentation incomplete.
+         * Get the ephemeral state of the preview (e.g. scroll position).
          * @unofficial
          */
         getEphemeralState(e: unknown): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Get the current fold state information.
          * @unofficial
          */
         getFoldInfo(): unknown;
@@ -127,43 +127,43 @@ declare module 'obsidian' {
         getScroll(): number;
 
         /**
-         * @todo Documentation incomplete.
+         * Get the current text selection in the preview.
          * @unofficial
          */
         getSelection(): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Hide the preview view.
          * @unofficial
          */
         hide(): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a fold state change in the preview.
          * @unofficial
          */
         onFoldChange(): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Called when the preview view is loaded.
          * @unofficial
          */
         onload(): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a resize event on the preview view.
          * @unofficial
          */
         onResize(): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a scroll event on the preview view.
          * @unofficial
          */
         onScroll(): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Request an update of rendered links in the preview.
          * @unofficial
          */
         requestUpdateLinks(): unknown;
@@ -194,31 +194,31 @@ declare module 'obsidian' {
         set(data: string, clear: boolean): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Set the ephemeral state of the preview (e.g. scroll position).
          * @unofficial
          */
         setEphemeralState(e: unknown): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Show the preview view.
          * @unofficial
          */
         show(): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Show the in-document search bar.
          * @unofficial
          */
         showSearch(): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Unfold all folded sections in the preview.
          * @unofficial
          */
         unfoldAll(): unknown;
 
         /**
-         * @todo Documentation incomplete.
+         * Update the rendering options of the preview.
          * @unofficial
          */
         updateOptions(): unknown;

@@ -5,71 +5,71 @@ import type { TreeNode } from './TreeNode.d.ts';
 import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents an individual match segment within a search result item.
  * @public
  * @unofficial
  */
 export interface ResultDomItemChild extends TreeNode {
-    /** @todo Documentation incomplete. */
+    /** Cached metadata for the file containing this match. */
     cache: CachedMetadata;
 
-    /** @todo Documentation incomplete. */
+    /** Text content of the matched region. */
     content: string;
 
-    /** @todo Documentation incomplete. */
+    /** End offset of the match context within the document. */
     end: number;
 
-    /** @todo Documentation incomplete. */
+    /** Layout information used by virtual scrolling. */
     info: TreeNodeInfo;
 
-    /** @todo Documentation incomplete. */
+    /** Array of match positions within the content. */
     matches: ContentPosition[];
 
-    /** @todo Documentation incomplete. */
+    /** Callback to mutate the editor state when navigating to this match. */
     mutateEState: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Callback for custom rendering of match highlights. */
     onMatchRender: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Parent result item containing this match child. */
     parent: ResultDomItem;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the parent result item. */
     parentDom: ResultDomItem;
 
-    /** @todo Documentation incomplete. */
+    /** Element for the "show more context after" button. */
     showMoreAfterEl: HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** Element for the "show more context before" button. */
     showMoreBeforeEl: HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** Start offset of the match context within the document. */
     start: number;
 
-    /** @todo Documentation incomplete. */
+    /** Get the position of the next match. */
     getNextPos(arg1: unknown): number;
 
-    /** @todo Documentation incomplete. */
+    /** Get the position of the previous match. */
     getPrevPos(arg1: unknown): number;
 
-    /** @todo Documentation incomplete. */
+    /** Handle focus entering this match item. */
     onFocusEnter(event?: UIEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle focus leaving this match item. */
     onFocusExit(event?: UIEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle click on this match to navigate to it. */
     onResultClick(event: UIEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Render this match with optional surrounding text indicators. */
     render(hasTextBefore: boolean, hasTextAfter: boolean): void;
 
-    /** @todo Documentation incomplete. */
+    /** Expand the context to show more text after the match. */
     showMoreAfter(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Expand the context to show more text before the match. */
     showMoreBefore(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Toggle visibility of the "show more context" buttons. */
     toggleShowMoreContextButtons(): void;
 }

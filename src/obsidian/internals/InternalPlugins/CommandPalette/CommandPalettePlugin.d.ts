@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { CommandPalettePluginInstance } from './CommandPalettePluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the command palette feature.
  * @public
  * @unofficial
  */

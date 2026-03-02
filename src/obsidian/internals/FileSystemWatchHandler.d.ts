@@ -1,20 +1,20 @@
 import type { FileStats } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Callback interface for handling file system watch events.
  * @public
  * @unofficial
  */
 export interface FileSystemWatchHandler {
-    /** @todo Documentation incomplete. */
+    /** Handle raw, folder-created, folder-removed, or file-removed events. */
     (eventType: 'raw' | 'folder-created' | 'folder-removed' | 'file-removed', path: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle modified or file-created events with file stats. */
     (eventType: 'modified' | 'file-created', path: string, oldPath: undefined, stats: FileStats): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle file rename events with old and new paths. */
     (eventType: 'renamed', path: string, oldPath: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle watcher closed events. */
     (eventType: 'closed'): void;
 }

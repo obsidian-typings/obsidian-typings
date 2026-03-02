@@ -1,36 +1,36 @@
 /**
- * @todo Documentation incomplete.
+ * Extended rectangle representation for the canvas, providing both min/max and position/size properties.
  * @public
  * @unofficial
  */
 export interface CanvasRectEx {
-    /** @todo Documentation incomplete. */
+    /** Center X coordinate of the rectangle. */
     cx: number;
 
-    /** @todo Documentation incomplete. */
+    /** Center Y coordinate of the rectangle. */
     cy: number;
 
-    /** @todo Documentation incomplete. */
+    /** Height of the rectangle. */
     height: number;
 
-    /** @todo Documentation incomplete. */
+    /** Left edge X coordinate of the rectangle. */
     left: number;
 
-    /** @todo Documentation incomplete. */
+    /** Maximum X coordinate (right edge). */
     maxX: number;
 
-    /** @todo Documentation incomplete. */
+    /** Maximum Y coordinate (bottom edge). */
     maxY: number;
 
-    /** @todo Documentation incomplete. */
+    /** Minimum X coordinate (left edge). */
     minX: number;
 
-    /** @todo Documentation incomplete. */
+    /** Minimum Y coordinate (top edge). */
     minY: number;
 
-    /** @todo Documentation incomplete. */
+    /** Top edge Y coordinate of the rectangle. */
     top: number;
 
-    /** @todo Documentation incomplete. */
+    /** Width of the rectangle. */
     width: number;
 }

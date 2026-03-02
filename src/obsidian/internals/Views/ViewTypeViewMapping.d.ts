@@ -25,7 +25,7 @@ import type { TagView } from './TagView.d.ts';
 import type { VideoView } from './VideoView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Mapping from view type identifiers to their corresponding view instance types.
  *
  * @public
  * @unofficial

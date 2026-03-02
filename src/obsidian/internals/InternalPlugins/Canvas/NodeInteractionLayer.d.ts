@@ -1,23 +1,23 @@
 import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Layer that handles user interactions with canvas nodes, such as resizing and connecting.
  * @public
  * @unofficial
  */
 export interface NodeInteractionLayer {
-    /** @todo Documentation incomplete. */
+    /** Reference to the parent canvas instance. */
     canvas: CanvasViewCanvas;
 
-    /** @todo Documentation incomplete. */
+    /** HTML element used for rendering interaction handles. */
     interactionEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Currently targeted node for interaction, or null if none. */
     target: null;
 
-    /** @todo Documentation incomplete. */
+    /** Render the interaction handles for the current target node. */
     render(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set the target node for interaction. */
     setTarget(arg1: unknown): unknown;
 }

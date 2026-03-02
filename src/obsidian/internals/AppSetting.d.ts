@@ -6,7 +6,7 @@ import type {
 import type { HotkeysSettingTab } from './HotkeysSettingTab.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * The settings modal for the application, managing core and plugin setting tabs.
  * @public
  * @unofficial
  */
@@ -97,7 +97,7 @@ export interface AppSetting extends Modal {
      */
     openTab(tab: SettingTab): void;
 
-    /** @todo Documentation incomplete. */
+    /** Open the hotkeys setting tab by ID. */
     openTabById(id: 'hotkeys'): HotkeysSettingTab;
 
     /**

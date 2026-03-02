@@ -1,17 +1,17 @@
 import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Bookmark item representing a bookmarked file.
  * @public
  * @unofficial
  */
 export interface FileBookmarkItem extends BookmarkItem {
-    /** @todo Documentation incomplete. */
+    /** Vault-relative path to the bookmarked file. */
     path: string;
 
-    /** @todo Documentation incomplete. */
+    /** Subpath within the file (e.g. heading or block reference). */
     subpath: string;
 
-    /** @todo Documentation incomplete. */
+    /** Discriminator indicating this is a file bookmark. */
     type: 'file';
 }

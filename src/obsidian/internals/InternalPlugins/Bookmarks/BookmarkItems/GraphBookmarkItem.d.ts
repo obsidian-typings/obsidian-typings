@@ -2,17 +2,17 @@ import type { GraphPluginInstanceOptions } from '../../Graph/GraphPluginInstance
 import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Bookmark item representing a saved graph view configuration.
  * @public
  * @unofficial
  */
 export interface GraphBookmarkItem extends BookmarkItem {
-    /** @todo Documentation incomplete. */
+    /** Graph view options saved with this bookmark. */
     options: GraphPluginInstanceOptions;
 
-    /** @todo Documentation incomplete. */
+    /** Display title of this graph bookmark. */
     title: string;
 
-    /** @todo Documentation incomplete. */
+    /** Discriminator indicating this is a graph bookmark. */
     type: 'graph';
 }

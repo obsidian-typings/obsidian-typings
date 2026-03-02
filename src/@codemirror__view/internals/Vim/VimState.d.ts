@@ -1,17 +1,15 @@
-/** @todo Documentation incomplete */
-
 import type { VimStateVim } from './VimStateVim.d.ts';
 import type { VimStateVimPlugin } from './VimStateVimPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Top-level Vim state container for the editor.
  * @public
  * @unofficial
  */
 export interface VimState {
-    /** @todo Documentation incomplete. */
+    /** Core Vim mode and command state. */
     vim: VimStateVim;
 
-    /** @todo Documentation incomplete. */
+    /** Vim plugin state for tracking key events. */
     vimPlugin: VimStateVimPlugin;
 }

@@ -7,18 +7,18 @@ import type { CanvasPluginInstance } from './CanvasPluginInstance.d.ts';
 import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View for displaying and editing canvas files, extending TextFileView.
  * @public
  * @unofficial
  */
 export interface CanvasView extends TextFileView {
-    /** @todo Documentation incomplete. */
+    /** The canvas controller instance managing nodes, edges, and rendering. */
     canvas: CanvasViewCanvas;
 
-    /** @todo Documentation incomplete. */
+    /** Hover popover associated with this view, or null if none is active. */
     hoverPopover: null | HoverPopover;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the canvas plugin instance. */
     plugin: CanvasPluginInstance;
 
     /**

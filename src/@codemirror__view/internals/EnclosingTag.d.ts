@@ -1,14 +1,14 @@
 import type { EditorRangeEx } from './EditorRangeEx.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents an enclosing HTML/XML tag pair with open and close ranges.
  * @public
  * @unofficial
  */
 export interface EnclosingTag {
-    /** @todo Documentation incomplete. */
+    /** Range of the closing tag. */
     close: EditorRangeEx;
 
-    /** @todo Documentation incomplete. */
+    /** Range of the opening tag. */
     open: EditorRangeEx;
 }

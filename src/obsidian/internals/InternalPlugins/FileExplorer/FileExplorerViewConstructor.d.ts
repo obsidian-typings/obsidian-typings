@@ -2,7 +2,7 @@ import type { FileExplorerView } from '../../InternalPlugins/FileExplorer/FileEx
 import type { TypedViewConstructor } from '../../Views/TypedViewConstructor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Constructor interface for creating FileExplorerView instances.
  * @public
  * @unofficial
  */

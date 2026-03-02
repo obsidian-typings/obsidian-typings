@@ -7,7 +7,7 @@ import type { HotkeyManagerCustomKeysRecord } from './HotkeyManagerCustomKeysRec
 import type { HotkeyManagerDefaultKeysRecord } from './HotkeyManagerDefaultKeysRecord.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Manager for keyboard shortcut registration, storage, and triggering.
  * @public
  * @unofficial
  */
@@ -42,7 +42,7 @@ export interface HotkeyManager {
      */
     defaultKeys: HotkeyManagerDefaultKeysRecord;
 
-    /** @todo Documentation incomplete. */
+    /** Debounced handler for hotkey config file changes on disk. */
     onConfigFileChange: Debouncer<[], Promise<void>>;
 
     /**
@@ -77,7 +77,7 @@ export interface HotkeyManager {
      */
     load(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle raw file system change events for the hotkey config. */
     onRaw(e: unknown): void;
 
     /**
@@ -95,7 +95,7 @@ export interface HotkeyManager {
      */
     printHotkeyForCommand(commandId: string): string;
 
-    /** @todo Documentation incomplete. */
+    /** Register event listeners for hotkey config file changes. */
     registerListeners(): void;
 
     /**

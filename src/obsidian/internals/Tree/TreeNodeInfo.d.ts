@@ -1,33 +1,33 @@
 /**
- * @todo Documentation incomplete.
+ * Layout information for a tree node used by the virtual scrolling system.
  * @public
  * @unofficial
  */
 export interface TreeNodeInfo {
-    /** @todo Documentation incomplete. */
+    /** Left offset of child elements in pixels. */
     childLeft: number;
 
-    /** @todo Documentation incomplete. */
+    /** Left padding applied to child elements in pixels. */
     childLeftPadding: number;
 
-    /** @todo Documentation incomplete. */
+    /** Top offset of child elements in pixels. */
     childTop: number;
 
-    /** @todo Documentation incomplete. */
+    /** Whether layout dimensions have been computed. */
     computed: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Computed height of the node in pixels. */
     height: number;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the node is currently hidden from view. */
     hidden: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether there is a next sibling node. */
     next: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether a layout recomputation is queued. */
     queued: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Computed width of the node in pixels. */
     width: number;
 }

@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { GlobalSearchPluginInstance } from './GlobalSearchPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the global search feature.
  * @public
  * @unofficial
  */

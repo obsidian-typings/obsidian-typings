@@ -1,12 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * Information about the initial drag start event.
  * @public
  * @unofficial
  */
 export interface DragStartEvent {
-    /** @todo Documentation incomplete. */
+    /** The original drag event. */
     evt: DragEvent;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the dragged item has moved from its starting position. */
     moved: boolean;
 }

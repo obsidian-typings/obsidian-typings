@@ -4,20 +4,20 @@ import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Root node of a tree view that contains all top-level tree items.
  * @public
  * @unofficial
  */
 export interface TreeRoot<Item extends TreeItem> extends TreeNode {
-    /** @todo Documentation incomplete */
+    /** Container element for the root's child items. */
     childrenEl: HTMLElement;
 
-    /** @todo Documentation incomplete */
+    /** Layout information for the root node used by virtual scrolling. */
     info: TreeNodeInfo;
 
-    /** @todo Documentation incomplete */
+    /** Spacer element used to maintain correct scroll height for virtual scrolling. */
     pusherEl: HTMLElement;
 
-    /** @todo Documentation incomplete */
+    /** Virtual children manager for the root's child items. */
     vChildren: TreeNodeVChildren<Item, TreeRoot<Item>>;
 }

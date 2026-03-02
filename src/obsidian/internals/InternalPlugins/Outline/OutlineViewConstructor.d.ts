@@ -3,7 +3,7 @@ import type { TypedViewConstructor } from '../../Views/TypedViewConstructor.d.ts
 import type { OutlinePluginInstance } from './OutlinePluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Constructor interface for creating OutlineView instances.
  * @public
  * @unofficial
  */

@@ -1,14 +1,14 @@
 import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Bookmark item representing a bookmarked folder.
  * @public
  * @unofficial
  */
 export interface FolderBookmarkItem extends BookmarkItem {
-    /** @todo Documentation incomplete. */
+    /** Vault-relative path to the bookmarked folder. */
     path: string;
 
-    /** @todo Documentation incomplete. */
+    /** Discriminator indicating this is a folder bookmark. */
     type: 'folder';
 }

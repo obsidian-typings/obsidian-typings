@@ -5,7 +5,7 @@ import type {
 import type { PositionedReference } from '../PositionedReference.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a link that needs to be updated due to a file rename or move.
  * @public
  * @unofficial
  */

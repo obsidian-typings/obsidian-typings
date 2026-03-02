@@ -5,24 +5,24 @@
  * @unofficial
  */
 export interface KeyboardActions {
-    /** @todo Documentation incomplete. */
+    /** Whether the down arrow key is currently pressed. */
     down?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the left arrow key is currently pressed. */
     left?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the right arrow key is currently pressed. */
     right?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the shift key is currently pressed. */
     shift?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the up arrow key is currently pressed. */
     up?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the zoom-in key is currently pressed. */
     zoomin?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the zoom-out key is currently pressed. */
     zoomout?: boolean;
 }

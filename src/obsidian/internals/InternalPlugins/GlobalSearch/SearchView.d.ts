@@ -2,7 +2,7 @@ import type { View } from 'obsidian';
 import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View that displays the global search results pane.
  * @public
  * @unofficial
  */
@@ -17,28 +17,28 @@ export interface SearchView extends View {
      */
     getViewType(): typeof ViewType.Search;
 
-    /** @todo Documentation incomplete */
+    /** Handle the copy search results button click. */
     onCopyResultsClick(event: MouseEvent): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle the down arrow key when a search result is focused. */
     onKeyArrowDownInFocus(event: KeyboardEvent): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle the left arrow key when a search result is focused. */
     onKeyArrowLeftInFocus(event: KeyboardEvent): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle the right arrow key when a search result is focused. */
     onKeyArrowRightInFocus(event: KeyboardEvent): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle the up arrow key when a search result is focused. */
     onKeyArrowUpInFocus(event: KeyboardEvent): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle the enter key when a search result is focused. */
     onKeyEnterInFocus(event: KeyboardEvent): void;
 
-    /** @todo Documentation incomplete */
+    /** Show more context lines after a match. */
     onKeyShowMoreAfter(e: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Show more context lines before a match. */
     onKeyShowMoreBefore(e: unknown): void;
 
     /**
@@ -46,7 +46,7 @@ export interface SearchView extends View {
      */
     onTabHeaderClick(): void;
 
-    /** @todo Documentation incomplete */
+    /** Render search metadata information into the given parent element. */
     renderSearchInfo(e: unknown, parentEl: HTMLElement): void;
 
     /**
@@ -54,16 +54,16 @@ export interface SearchView extends View {
      */
     saveSearch(): void;
 
-    /** @todo Documentation incomplete */
+    /** Set whether all search results are collapsed. */
     setCollapseAll(e: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Toggle the search query explanation display. */
     setExplainSearch(e: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Set whether extra context lines are shown around matches. */
     setExtraContext(e: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Set whether the search is case-sensitive. */
     setMatchingCase(e: unknown): void;
 
     /**
@@ -73,7 +73,7 @@ export interface SearchView extends View {
      */
     setQuery(value: string): void;
 
-    /** @todo Documentation incomplete */
+    /** Set the sort order for search results. */
     setSortOrder(sortOrder: unknown): void;
 
     /**

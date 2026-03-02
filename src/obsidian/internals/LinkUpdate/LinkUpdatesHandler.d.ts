@@ -1,7 +1,7 @@
 import type { LinkUpdate } from './LinkUpdate.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Callback that processes a batch of link updates when files are renamed or moved.
  *
  * @public
  * @unofficial

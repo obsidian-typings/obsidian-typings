@@ -1,33 +1,33 @@
 /**
- * @todo Documentation incomplete.
+ * Tracks the current input state of the Vim command parser.
  * @public
  * @unofficial
  */
 export interface VimStateVimInputState {
-    /** @todo Documentation incomplete. */
+    /** Queue of pending changes to apply. */
     changeQueue: null;
 
-    /** @todo Documentation incomplete. */
+    /** Buffer of keys pressed for the current command sequence. */
     keyBuffer: [];
 
-    /** @todo Documentation incomplete. */
+    /** Current pending motion command. */
     motion: null;
 
-    /** @todo Documentation incomplete. */
+    /** Arguments for the current pending motion. */
     motionArgs: null;
 
-    /** @todo Documentation incomplete. */
+    /** Repeat count for the current motion. */
     motionRepeat: [];
 
-    /** @todo Documentation incomplete. */
+    /** Current pending operator command. */
     operator: null;
 
-    /** @todo Documentation incomplete. */
+    /** Arguments for the current pending operator. */
     operatorArgs: null;
 
-    /** @todo Documentation incomplete. */
+    /** Prefix repeat count for the current command. */
     prefixRepeat: [];
 
-    /** @todo Documentation incomplete. */
+    /** Name of the currently specified register. */
     registerName: null;
 }

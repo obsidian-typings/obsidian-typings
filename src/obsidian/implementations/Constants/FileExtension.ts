@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Constant mapping of file extension identifiers recognized and supported by Obsidian.
  *
  * @public
  * @unofficial

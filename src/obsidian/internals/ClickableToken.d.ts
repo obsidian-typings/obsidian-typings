@@ -1,20 +1,20 @@
 import type { EditorPosition } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a clickable token in the editor (e.g. link, tag).
  * @public
  * @unofficial
  */
 export interface ClickableToken {
-    /** @todo Documentation incomplete. */
+    /** End position of the token in the editor. */
     end: EditorPosition;
 
-    /** @todo Documentation incomplete. */
+    /** Start position of the token in the editor. */
     start: EditorPosition;
 
-    /** @todo Documentation incomplete. */
+    /** Text content of the token. */
     text: string;
 
-    /** @todo Documentation incomplete. */
+    /** Type of clickable token (e.g. "internal-link", "external-link", "tag"). */
     type: string;
 }

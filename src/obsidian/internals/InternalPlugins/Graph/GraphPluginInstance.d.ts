@@ -9,33 +9,33 @@ import type { GraphPlugin } from './GraphPlugin.d.ts';
 import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Instance of the graph internal plugin, managing graph views and options.
  * @public
  * @unofficial
  */
 export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the Obsidian app instance. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the graph plugin is enabled by default. */
     defaultOn: true;
 
-    /** @todo Documentation incomplete. */
+    /** User-configurable options for the graph plugin. */
     options: GraphPluginInstanceOptions;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the parent graph plugin. */
     plugin: GraphPlugin;
 
-    /** @todo Documentation incomplete. */
+    /** Reload options when settings are changed externally. */
     onExternalSettingsChange(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Add graph-related items to the file context menu. */
     onFileMenu(menu: Menu, file: TAbstractFile, source: string, leaf?: WorkspaceLeaf): void;
 
-    /** @todo Documentation incomplete. */
+    /** Open the global graph view. */
     openGraphView(newLeaf: boolean): void;
 
-    /** @todo Documentation incomplete. */
+    /** Open the local graph view for the current file. */
     openLocalGraph(checking: boolean): true | undefined;
 
     /**

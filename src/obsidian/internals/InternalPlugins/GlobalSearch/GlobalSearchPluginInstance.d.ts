@@ -3,17 +3,17 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { GlobalSearchPlugin } from './GlobalSearchPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for global search, providing vault-wide text search functionality.
  * @public
  * @unofficial
  */
 export interface GlobalSearchPluginInstance extends InternalPluginInstance<GlobalSearchPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is enabled by default. */
     defaultOn: true;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the global search plugin registration. */
     plugin: GlobalSearchPlugin;
 }

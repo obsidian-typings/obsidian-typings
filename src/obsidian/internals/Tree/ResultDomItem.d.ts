@@ -8,92 +8,92 @@ import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a single file's search result in the result DOM tree.
  * @public
  * @unofficial
  */
 export interface ResultDomItem extends TreeNode {
-    /** @todo Documentation incomplete. */
+    /** Reference to the App instance. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Container element for child match items. */
     childrenEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this result item is currently collapsed. */
     collapsed: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Element for the collapse/expand toggle. */
     collapseEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this result item can be collapsed. */
     collapsible: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Outer container element for this result item. */
     containerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Text content of the file associated with this result. */
     content: string;
 
-    /** @todo Documentation incomplete. */
+    /** Whether extra surrounding context is shown around matches. */
     extraContext: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** The file associated with this search result. */
     file: TFile;
 
-    /** @todo Documentation incomplete. */
+    /** Layout information used by virtual scrolling. */
     info: TreeNodeInfo;
 
-    /** @todo Documentation incomplete. */
+    /** Callback for custom match rendering, or null if not set. */
     onMatchRender: null;
 
-    /** @todo Documentation incomplete. */
+    /** Parent result DOM container. */
     parent: ResultDom;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the parent result DOM container. */
     parentDom: ResultDom;
 
-    /** @todo Documentation incomplete. */
+    /** Spacer element used to maintain correct scroll height. */
     pusherEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Search result data containing match positions. */
     result: ResultDomResult;
 
-    /** @todo Documentation incomplete. */
+    /** Whether matches are displayed as separate items. */
     separateMatches: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the file title is shown above matches. */
     showTitle: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Virtual children manager for match child items. */
     vChildren: TreeNodeVChildren<ResultDomItem, ResultDomItemChild>;
 
-    /** @todo Documentation incomplete. */
+    /** Get additional context positions surrounding a match. */
     getMatchExtraPositions(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Mark this result item as needing re-render. */
     invalidate(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle click on the collapse toggle. */
     onCollapseClick(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle click on a search result to navigate to it. */
     onResultClick(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle right-click context menu on a search result. */
     onResultContextMenu(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle mouseover on a search result for preview. */
     onResultMouseover(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Render the content matches for this result item. */
     renderContentMatches(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the collapsed state of this result item. */
     setCollapse(arg1: unknown, arg2: unknown): Promise<unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Set whether this result item can be collapsed. */
     setCollapsible(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set whether extra context is shown around matches. */
     setExtraContext(arg1: unknown): unknown;
 }

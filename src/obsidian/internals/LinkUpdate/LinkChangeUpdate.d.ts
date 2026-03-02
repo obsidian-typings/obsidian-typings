@@ -1,17 +1,17 @@
 import type { ReferenceCache } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Describes a single link change to apply when a file is renamed or moved.
  * @public
  * @unofficial
  */
 export interface LinkChangeUpdate {
-    /** @todo Documentation incomplete. */
+    /** New link text to replace the old reference with. */
     change: string;
 
-    /** @todo Documentation incomplete. */
+    /** The cached reference that needs to be updated. */
     reference: ReferenceCache;
 
-    /** @todo Documentation incomplete. */
+    /** Path of the file containing the link to update. */
     sourcePath: string;
 }

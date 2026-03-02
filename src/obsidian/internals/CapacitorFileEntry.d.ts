@@ -1,17 +1,17 @@
 import type { FileStats } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * File or directory entry from the Capacitor (mobile) file system.
  * @public
  * @unofficial
  */
 export interface CapacitorFileEntry extends Partial<FileStats> {
-    /** @todo Documentation incomplete. */
+    /** Name of the file or directory. */
     name: string;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this entry is a file or directory. */
     type: 'file' | 'directory';
 
-    /** @todo Documentation incomplete. */
+    /** URI of the file or directory. */
     uri: string;
 }

@@ -1,17 +1,17 @@
 import type { ContentPosition } from './ContentPosition.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a matched property within a search result.
  * @public
  * @unofficial
  */
 export interface ResultProperty {
-    /** @todo Documentation incomplete. */
+    /** Property key name that was matched. */
     key: string;
 
-    /** @todo Documentation incomplete. */
+    /** Position of the match within the content. */
     pos: ContentPosition;
 
-    /** @todo Documentation incomplete. */
+    /** Path of sub-keys for nested property matches. */
     subkey: (number | string)[];
 }

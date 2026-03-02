@@ -6,7 +6,7 @@ import type {
 import type { GetRecentFilesOptions } from './GetRecentFilesOptions.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Tracks recently opened files for quick access and navigation.
  * @public
  * @unofficial
  */
@@ -26,7 +26,7 @@ export interface RecentFileTracker {
      */
     workspace: Workspace;
 
-    /** @todo Documentation incomplete. */
+    /** Add a file to the recent files list. */
     collect(file: TFile): void;
 
     /**

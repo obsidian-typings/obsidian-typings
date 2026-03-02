@@ -13,7 +13,7 @@ declare module 'obsidian' {
      */
     interface CapacitorAdapter extends DataAdapter {
         /**
-         * @todo Documentation incomplete.
+         * Reference to the Capacitor file system API.
          * @unofficial
          */
         fs: CapacitorAdapterFs;
@@ -88,7 +88,7 @@ declare module 'obsidian' {
         getName(): string;
 
         /**
-         * @todo Documentation incomplete.
+         * Get the native device path for a normalized vault path.
          * @unofficial
          */
         getNativePath(normalizedPath: string): string;
@@ -144,13 +144,13 @@ declare module 'obsidian' {
         mkdir(normalizedPath: string): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a file change event for the given path.
          * @unofficial
          */
         onFileChange(normalizedPath: string): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Open a file using the native device handler.
          * @unofficial
          */
         open(normalizedPath: string): Promise<void>;
@@ -174,7 +174,7 @@ declare module 'obsidian' {
         process(normalizedPath: string, fn: (data: string) => string, options?: DataWriteOptions): Promise<string>;
 
         /**
-         * @todo Documentation incomplete.
+         * Quickly list files in a folder and add them to the file entry.
          * @unofficial
          */
         quickList(normalizedFolderPath: string, fileEntry: FileEntry): void;
@@ -208,7 +208,7 @@ declare module 'obsidian' {
         readBinary(normalizedPath: string): Promise<ArrayBuffer>;
 
         /**
-         * @todo Documentation incomplete.
+         * Reconcile a file creation event between old and new paths.
          * @unofficial
          */
         reconcileFileCreation(
@@ -232,7 +232,7 @@ declare module 'obsidian' {
         remove(normalizedPath: string): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Remove a file from the internal file listing and trigger events.
          * @unofficial
          */
         removeFile(normalizedPath: string): Promise<void>;
@@ -282,13 +282,13 @@ declare module 'obsidian' {
         stat(normalizedPath: string): Promise<Stat | null>;
 
         /**
-         * @todo Documentation incomplete.
+         * Stop watching for file system changes.
          * @unofficial
          */
         stopWatch(): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Test whether the file system is case-insensitive.
          * @unofficial
          */
         testInsensitive(): Promise<void>;
@@ -323,7 +323,7 @@ declare module 'obsidian' {
         trashSystem(normalizedPath: string): Promise<boolean>;
 
         /**
-         * @todo Documentation incomplete.
+         * Update the internal file listing for the given path.
          * @unofficial
          */
         update(normalizedPath: string): Promise<void>;

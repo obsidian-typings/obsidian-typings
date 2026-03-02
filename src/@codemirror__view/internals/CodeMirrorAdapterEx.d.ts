@@ -9,78 +9,78 @@ import type { VimApi } from './Vim/VimApi.d.ts';
 import type { VimEditor } from './Vim/VimEditor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Extended CodeMirror adapter providing CM5-compatible API over CM6.
  * @public
  * @unofficial
  */
 export interface CodeMirrorAdapterEx {
-    /** @todo Documentation incomplete. */
+    /** Construct a new CodeMirror editor instance from a Vim editor. */
     new(cm6: VimEditor): CodeMirrorEditor;
 
-    /** @todo Documentation incomplete. */
+    /** Built-in editor commands (undo, redo, indent, etc.). */
     commands: CodeMirrorAdapterExCommands;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the current platform is macOS. */
     isMac: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Map of key binding names to their handlers. */
     keyMap: Record<string, unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Map of key names to their handlers. */
     keys: Record<string, unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Constructor for creating editor position objects. */
     Pos: new(line: number, ch: number) => EditorPosition;
 
-    /** @todo Documentation incomplete. */
+    /** StringStream class for tokenizing input. */
     StringStream: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** The Vim API instance. */
     Vim: VimApi;
 
-    /** @todo Documentation incomplete. */
+    /** Add a CSS class to an HTML element. */
     addClass(element: HTMLElement, className: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Define a new editor option with a default value and change handler. */
     defineOption(option: string, defaultValue: unknown, handler: () => void): void;
 
-    /** @todo Documentation incomplete. */
+    /** Call preventDefault on the given event. */
     e_preventDefault(event: Event): void;
 
-    /** @todo Documentation incomplete. */
+    /** Stop propagation and prevent default on the given event. */
     e_stop(event: Event): void;
 
-    /** @todo Documentation incomplete. */
+    /** Find the enclosing HTML/XML tag at the given position. */
     findEnclosingTag(doc: CodeMirrorAdapterEx, pos: EditorPosition): EnclosingTag | undefined;
 
-    /** @todo Documentation incomplete. */
+    /** Find the matching HTML/XML tag at the given position. */
     findMatchingTag(doc: CodeMirrorAdapterEx, pos: EditorPosition): void;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether the given character is a word character. */
     isWordChar(char: string): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Get the key name string from a keyboard event. */
     keyName(event: KeyboardEvent): string;
 
-    /** @todo Documentation incomplete. */
+    /** Look up a key binding and invoke the callback with the associated action. */
     lookupKey(
         key: string,
         context: unknown,
         callback: (action: (codeMirrorAdapter: CodeMirrorAdapterEx) => boolean) => void
     ): void;
 
-    /** @todo Documentation incomplete. */
+    /** Remove an event listener. */
     off(event: string, listener: EventListenerOrEventListenerObject): void;
 
-    /** @todo Documentation incomplete. */
+    /** Add an event listener. */
     on(event: string, listener: EventListenerOrEventListenerObject): void;
 
-    /** @todo Documentation incomplete. */
+    /** Remove a CSS class from an HTML element. */
     rmClass(element: HTMLElement, className: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Emit a signal/event on the given target. */
     signal(target: unknown, type: string, ...values: unknown[]): void;
 
-    /** @todo Documentation incomplete. */
+    /** Convert a keyboard event to its Vim key representation. */
     vimKey(event: KeyboardEvent): string;
 }

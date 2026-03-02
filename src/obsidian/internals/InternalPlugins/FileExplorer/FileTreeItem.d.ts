@@ -2,7 +2,7 @@ import type { TFile } from 'obsidian';
 import type { AbstractFileTreeItem } from './AbstractFileTreeItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Tree item representing a file in the file explorer.
  * @public
  * @unofficial
  */
@@ -13,6 +13,6 @@ export interface FileTreeItem extends AbstractFileTreeItem<TFile> {
      */
     tagEl: HTMLElement | null;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether the file type is supported for opening. */
     isSupported(): boolean;
 }

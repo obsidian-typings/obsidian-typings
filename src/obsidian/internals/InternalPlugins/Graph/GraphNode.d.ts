@@ -20,7 +20,7 @@ export interface GraphNode {
     /** Computed color for the node. */
     color: GraphColorAttributes;
 
-    /** @todo Documentation incomplete. */
+    /** Current fade alpha value controlling the node's transparency during transitions. */
     fadeAlpha: number;
 
     /** Indicates if the text needs to be re-rendered when the node is rendered. */
@@ -44,7 +44,7 @@ export interface GraphNode {
     /** Displacement of the text, changed when the node is hovered */
     moveText: number;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the node graphics have been rendered. */
     rendered: boolean;
 
     /** `GraphRenderer` managing this node */

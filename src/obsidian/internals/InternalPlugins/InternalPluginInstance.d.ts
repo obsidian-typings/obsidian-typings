@@ -1,32 +1,32 @@
 import type { App } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Base interface for an internal plugin instance, providing lifecycle hooks and metadata.
  * @public
  * @unofficial
  */
 export interface InternalPluginInstance<InternalPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Human-readable description of this plugin. */
     description: string;
 
-    /** @todo Documentation incomplete. */
+    /** Unique identifier for this plugin. */
     id: string;
 
-    /** @todo Documentation incomplete. */
+    /** Human-readable display name of this plugin. */
     name: string;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize the plugin instance with app and plugin references. */
     init(app: App, plugin: InternalPlugin): void;
 
-    /** @todo Documentation incomplete. */
+    /** Called when the plugin is disabled. */
     onDisable?(app: App, plugin: InternalPlugin): void;
 
-    /** @todo Documentation incomplete. */
+    /** Called when the plugin is enabled. */
     onEnable?(app: App, plugin: InternalPlugin): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Called when the user manually disables the plugin. */
     onUserDisable?(app: App): void;
 
-    /** @todo Documentation incomplete. */
+    /** Called when the user manually enables the plugin. */
     onUserEnable?(app: App): void;
 }

@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { OutlinePluginInstance } from './OutlinePluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the document outline (table of contents) feature.
  * @public
  * @unofficial
  */

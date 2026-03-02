@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Constant mapping of internal (core) plugin name identifiers bundled with Obsidian.
  *
  * @public
  * @unofficial

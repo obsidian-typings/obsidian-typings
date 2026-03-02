@@ -21,25 +21,25 @@ declare module 'obsidian' {
         app: App;
 
         /**
-         * @todo Documentation incomplete.
+         * Mapping of file extensions to functions that determine the parent folder for new files.
          * @unofficial
          */
         fileParentCreatorByType: Record<string, (path: string) => TFolder>;
 
         /**
-         * @todo Documentation incomplete.
+         * Currently in-progress link update operations, or null if none.
          * @unofficial
          */
         inProgressUpdates: null | LinkUpdatesHandler[];
 
         /**
-         * @todo Documentation incomplete.
+         * Registered link updater strategies for different file types.
          * @unofficial
          */
         linkUpdaters: LinkUpdaters;
 
         /**
-         * @todo Documentation incomplete.
+         * Queue for processing link update operations sequentially.
          * @unofficial
          */
         updateQueue: PromisedQueue;
@@ -52,7 +52,7 @@ declare module 'obsidian' {
         vault: Vault;
 
         /**
-         * @todo Documentation incomplete.
+         * Check whether a file with the given extension can be created.
          * @unofficial
          */
         canCreateFileWithExt(extension: string): boolean;

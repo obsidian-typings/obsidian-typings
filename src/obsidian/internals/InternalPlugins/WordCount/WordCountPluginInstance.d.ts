@@ -3,17 +3,17 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { WordCountPlugin } from './WordCountPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for word count, displaying word and character counts in the status bar.
  * @public
  * @unofficial
  */
 export interface WordCountPluginInstance extends InternalPluginInstance<WordCountPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is enabled by default. */
     defaultOn: true;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the word count plugin registration. */
     plugin: WordCountPlugin;
 }

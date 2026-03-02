@@ -1,11 +1,11 @@
 import type { EditorRange } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Ephemeral state for the markdown edit view, storing cursor position.
  * @public
  * @unofficial
  */
 export interface MarkdownEditViewEphemeralState {
-    /** @todo Documentation incomplete. */
+    /** Current cursor selection range in the editor. */
     cursor: EditorRange;
 }

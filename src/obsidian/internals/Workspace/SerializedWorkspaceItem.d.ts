@@ -1,15 +1,15 @@
 /**
- * @todo Documentation incomplete.
+ * Serialized representation of a single workspace item (leaf, split, or tab group).
  * @public
  * @unofficial
  */
 export interface SerializedWorkspaceItem {
-    /** @todo Documentation incomplete. */
+    /** Size dimension of the workspace item (width or height depending on split direction). */
     dimension?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Unique identifier of the workspace item. */
     id: string;
 
-    /** @todo Documentation incomplete. */
+    /** Type of the workspace item (e.g., 'split', 'tabs', 'leaf'). */
     type: string;
 }

@@ -3,17 +3,17 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { TagPanePlugin } from './TagPanePlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for the tag pane, displaying a browsable list of tags in the sidebar.
  * @public
  * @unofficial
  */
 export interface TagPanePluginInstance extends InternalPluginInstance<TagPanePlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is enabled by default. */
     defaultOn: true;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the tag pane plugin registration. */
     plugin: TagPanePlugin;
 }

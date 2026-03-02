@@ -2,80 +2,80 @@ import type { FileExtension } from '../../implementations/Constants/FileExtensio
 import type { ViewType } from '../../implementations/Constants/ViewType.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Record mapping file extensions to their default view types.
  * @public
  * @unofficial
  */
 export interface ViewRegistryTypeByExtensionRecord extends Record<string, string> {
-    /** @todo Documentation incomplete. */
+    /** Maps .3gp files to the audio view. */
     [FileExtension._3gp]: typeof ViewType.Audio;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .avif files to the image view. */
     [FileExtension.avif]: typeof ViewType.Image;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .bmp files to the image view. */
     [FileExtension.bmp]: typeof ViewType.Image;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .canvas files to the canvas view. */
     [FileExtension.canvas]: typeof ViewType.Canvas;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .flac files to the audio view. */
     [FileExtension.flac]: typeof ViewType.Audio;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .gif files to the image view. */
     [FileExtension.gif]: typeof ViewType.Image;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .jpeg files to the image view. */
     [FileExtension.jpeg]: typeof ViewType.Image;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .jpg files to the image view. */
     [FileExtension.jpg]: typeof ViewType.Image;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .m4a files to the audio view. */
     [FileExtension.m4a]: typeof ViewType.Audio;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .md files to the markdown view. */
     [FileExtension.md]: typeof ViewType.Markdown;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .mkv files to the video view. */
     [FileExtension.mkv]: typeof ViewType.Video;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .mov files to the video view. */
     [FileExtension.mov]: typeof ViewType.Video;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .mp3 files to the audio view. */
     [FileExtension.mp3]: typeof ViewType.Audio;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .mp4 files to the video view. */
     [FileExtension.mp4]: typeof ViewType.Video;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .oga files to the audio view. */
     [FileExtension.oga]: typeof ViewType.Audio;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .ogg files to the audio view. */
     [FileExtension.ogg]: typeof ViewType.Audio;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .ogv files to the video view. */
     [FileExtension.ogv]: typeof ViewType.Video;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .opus files to the audio view. */
     [FileExtension.opus]: typeof ViewType.Audio;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .pdf files to the PDF view. */
     [FileExtension.pdf]: typeof ViewType.Pdf;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .png files to the image view. */
     [FileExtension.png]: typeof ViewType.Image;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .svg files to the image view. */
     [FileExtension.svg]: typeof ViewType.Image;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .wav files to the audio view. */
     [FileExtension.wav]: typeof ViewType.Audio;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .webm files to the video view. */
     [FileExtension.webm]: typeof ViewType.Video;
 
-    /** @todo Documentation incomplete. */
+    /** Maps .webp files to the image view. */
     [FileExtension.webp]: typeof ViewType.Image;
 }

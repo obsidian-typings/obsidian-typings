@@ -1,11 +1,11 @@
 import type { EditorPosition } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Result of a matching bracket search.
  * @public
  * @unofficial
  */
 export interface MatchingBracket {
-    /** @todo Documentation incomplete. */
+    /** Position of the matching bracket, if found. */
     to?: EditorPosition;
 }

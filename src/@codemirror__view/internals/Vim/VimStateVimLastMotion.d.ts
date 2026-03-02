@@ -1,9 +1,9 @@
 /**
- * @todo Documentation incomplete.
+ * Represents the last motion executed in Vim mode.
  * @public
  * @unofficial
  */
 export interface VimStateVimLastMotion {
-    /** @todo Documentation incomplete. */
+    /** Name of the last executed motion. */
     name?: string;
 }

@@ -1,29 +1,29 @@
 import type { CanvasViewCanvasNodeBaseBaseBase } from './CanvasViewCanvasNodeBaseBaseBase.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Intermediate base interface for canvas nodes, adding lifecycle and content mounting methods.
  * @public
  * @unofficial
  */
 export interface CanvasViewCanvasNodeBaseBase extends CanvasViewCanvasNodeBaseBaseBase {
-    /** @todo Documentation incomplete. */
+    /** Attach the node to the canvas DOM. */
     attach(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Detach the node from the canvas DOM. */
     detach(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize the node after construction. */
     initialize(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Mount the node's content into the content container. */
     mountContent(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Perform cleanup before detaching the node. */
     preDetach(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Unmount the node's content from the content container. */
     unmountContent(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the rendering breakpoint based on the node's current size. */
     updateBreakpoint(arg1: unknown): unknown;
 }

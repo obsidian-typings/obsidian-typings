@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { PagePreviewPluginInstance } from './PagePreviewPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the page preview (hover preview) feature.
  * @public
  * @unofficial
  */

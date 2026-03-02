@@ -1,7 +1,7 @@
 import type { FileEntry } from '../FileEntry.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Record mapping file paths to their file entry metadata in the data adapter.
  * @public
  * @unofficial
  */

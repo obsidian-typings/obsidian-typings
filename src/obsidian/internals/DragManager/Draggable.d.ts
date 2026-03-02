@@ -1,32 +1,32 @@
 import type { TAbstractFile } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a draggable item in the drag-and-drop system.
  * @public
  * @unofficial
  */
 export interface Draggable {
-    /** @todo Documentation incomplete. */
+    /** Single file being dragged, if applicable. */
     file?: TAbstractFile;
 
-    /** @todo Documentation incomplete. */
+    /** Multiple files being dragged, if applicable. */
     files?: TAbstractFile[];
 
-    /** @todo Documentation incomplete. */
+    /** Icon identifier for the drag ghost element. */
     icon: string;
 
-    /** @todo Documentation incomplete. */
+    /** Link text for link-type drags. */
     linktext?: string;
 
-    /** @todo Documentation incomplete. */
+    /** Source component that initiated the drag. */
     source?: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Path of the source file for link resolution. */
     sourcePath?: string;
 
-    /** @todo Documentation incomplete. */
+    /** Display title shown on the drag ghost element. */
     title: string;
 
-    /** @todo Documentation incomplete. */
+    /** Type of draggable (e.g. "file", "folder", "link"). */
     type: string;
 }

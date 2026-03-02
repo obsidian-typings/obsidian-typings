@@ -13,19 +13,19 @@
  * ```
  */
 export interface PlatformEx {
-    /** @todo Documentation incomplete. */
+    /** Whether the platform supports displaying the sidebar ribbon. */
     canDisplayRibbon: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the platform supports exporting to PDF. */
     canExportPdf: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the platform supports popping out windows. */
     canPopoutWindow: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the platform supports splitting panes. */
     canSplit: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the platform supports stacking tabs. */
     canStackTabs: boolean;
 
     /**
@@ -113,13 +113,13 @@ export interface PlatformEx {
      */
     isWin: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Height of the mobile device screen in pixels. */
     mobileDeviceHeight: number;
 
-    /** @todo Documentation incomplete. */
+    /** Height of the software keyboard in pixels on mobile. */
     mobileKeyboardHeight: number;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the software keyboard is currently visible on mobile. */
     mobileSoftKeyboardVisible: boolean;
 
     /**

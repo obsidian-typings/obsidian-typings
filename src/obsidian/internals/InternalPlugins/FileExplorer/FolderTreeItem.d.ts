@@ -5,15 +5,15 @@ import type { AbstractFileTreeItem } from './AbstractFileTreeItem.d.ts';
 import type { FileTreeItem } from './FileTreeItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Tree item representing a folder in the file explorer, supporting collapse and child items.
  * @public
  * @unofficial
  */
 export interface FolderTreeItem extends AbstractFileTreeItem<TFile>, TreeCollapsibleItem {
-    /** @todo Documentation incomplete. */
+    /** Spacer element used for indentation in the tree. */
     pusherEl: HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** Virtual children container managing child file and folder tree items. */
     vChildren: TreeNodeVChildren<FolderTreeItem | FileTreeItem, FolderTreeItem>;
 
     /**

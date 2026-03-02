@@ -1,39 +1,39 @@
 /**
- * @todo Documentation incomplete.
+ * Backing storage for an ItemQueue, providing queue operations on an array.
  * @public
  * @unofficial
  */
 export interface ItemQueueItems<T> {
-    /** @todo Documentation incomplete. */
+    /** Number of items in the queue. */
     length: number;
 
-    /** @todo Documentation incomplete. */
+    /** Index offset for the next dequeue operation. */
     offset: number;
 
-    /** @todo Documentation incomplete. */
+    /** Internal array holding queued items. */
     queue: T[];
 
-    /** @todo Documentation incomplete. */
+    /** Remove all items from the queue. */
     clear(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Remove and return the next item from the front of the queue. */
     dequeue(): T | undefined;
 
-    /** @todo Documentation incomplete. */
+    /** Add an item to the end of the queue. */
     enqueue(item: T): void;
 
-    /** @todo Documentation incomplete. */
+    /** Add multiple items to the end of the queue. */
     enqueueArray(items: T[]): void;
 
-    /** @todo Documentation incomplete. */
+    /** Get all items currently in the queue. */
     get(): T[];
 
-    /** @todo Documentation incomplete. */
+    /** Whether the queue has no items. */
     isEmpty(): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Return the next item without removing it. */
     peek(): T | undefined;
 
-    /** @todo Documentation incomplete. */
+    /** Remove a specific item from the queue. */
     remove(item: T): void;
 }

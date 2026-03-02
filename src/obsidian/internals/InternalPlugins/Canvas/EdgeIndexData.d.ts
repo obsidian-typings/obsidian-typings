@@ -2,17 +2,17 @@ import type { BBox } from './BBox.d.ts';
 import type { CanvasViewCanvasEdge } from './CanvasViewCanvasEdge.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Node in the spatial index (R-tree) for canvas edges.
  * @public
  * @unofficial
  */
 export interface EdgeIndexData extends BBox {
-    /** @todo Documentation incomplete. */
+    /** Child edges contained in this index node. */
     children: CanvasViewCanvasEdge[];
 
-    /** @todo Documentation incomplete. */
+    /** Height of the subtree rooted at this node. */
     height: number;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this is a leaf node in the index. */
     leaf: boolean;
 }

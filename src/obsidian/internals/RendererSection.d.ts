@@ -1,15 +1,15 @@
 /**
- * @todo Documentation incomplete.
+ * A section of the read view renderer representing a block of rendered content.
  * @public
  * @unofficial
  */
 export interface RendererSection {
-    /** @todo Documentation incomplete. */
+    /** DOM element for this section. */
     el: HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** Raw HTML content for this section. */
     html: string;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this section has been rendered to the DOM. */
     rendered: boolean;
 }

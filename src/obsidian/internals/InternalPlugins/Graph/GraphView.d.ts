@@ -10,10 +10,10 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  * @unofficial
  */
 export interface GraphView extends ItemView {
-    /** @todo Documentation incomplete. */
+    /** Graph engine powering the global graph simulation. */
     dataEngine: GraphEngine;
 
-    /** @todo Documentation incomplete. */
+    /** Renderer responsible for drawing the global graph. */
     renderer: GraphRenderer;
 
     /**

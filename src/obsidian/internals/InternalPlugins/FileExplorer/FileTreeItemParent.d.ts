@@ -3,7 +3,7 @@ import type { FileTreeItem } from './FileTreeItem.d.ts';
 import type { FolderTreeItem } from './FolderTreeItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Parent type for file tree items: either a folder or the tree root.
  *
  * @public
  * @unofficial

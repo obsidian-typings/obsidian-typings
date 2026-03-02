@@ -115,31 +115,31 @@ declare module 'obsidian' {
         constructor__(leaf: WorkspaceLeaf): this;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a drop event on this view.
          * @unofficial
          */
         handleDrop(event: DragEvent, draggable: Draggable, isOver: boolean): DropResult | null;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a linked group change event.
          * @unofficial
          */
         onGroupChange(): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle the 'more options' button click event.
          * @unofficial
          */
         onMoreOptions(event: Event): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle the 'more options' context menu event.
          * @unofficial
          */
         onMoreOptionsMenu(e: unknown): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Update the state of the back/forward navigation buttons.
          * @unofficial
          */
         updateNavButtons(): void;

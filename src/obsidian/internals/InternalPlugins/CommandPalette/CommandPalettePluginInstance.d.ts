@@ -8,41 +8,41 @@ import type { CommandPaletteOptions } from './CommandPaletteOptions.d.ts';
 import type { CommandPalettePlugin } from './CommandPalettePlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for the command palette, providing the fuzzy command search modal.
  * @public
  * @unofficial
  */
 export interface CommandPalettePluginInstance extends InternalPluginInstance<CommandPalettePlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is enabled by default. */
     defaultOn: true;
 
-    /** @todo Documentation incomplete. */
+    /** The command palette fuzzy suggest modal. */
     modal: CommandPaletteModal;
 
-    /** @todo Documentation incomplete. */
+    /** Configuration options for the command palette. */
     options: CommandPaletteOptions;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the command palette plugin registration. */
     plugin: CommandPalettePlugin;
 
-    /** @todo Documentation incomplete. */
+    /** List of recently used command IDs. */
     recentCommands: string[];
 
-    /** @todo Documentation incomplete. */
+    /** Get the list of available commands for the palette. */
     getCommands(): Command[];
 
-    /** @todo Documentation incomplete. */
+    /** Handle external settings file changes and reload configuration. */
     onExternalSettingsChange(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Called when the command palette is opened. */
     onOpen(): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Callback invoked to open the command palette. */
     openCallback(): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Save the command palette settings. */
     saveSettings(plugin: CommandPalettePlugin): void;
 }

@@ -1,15 +1,15 @@
 /**
- * @todo Documentation incomplete.
+ * Options for focusing a specific property or heading in the metadata editor.
  * @public
  * @unofficial
  */
 export interface FocusMetadataOptions {
-    /** @todo Documentation incomplete. */
+    /** Whether to focus the metadata heading element. */
     focusHeading: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Index of the property to focus on. */
     propertyIdx?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Key of the property to focus on. */
     propertyKey?: string;
 }

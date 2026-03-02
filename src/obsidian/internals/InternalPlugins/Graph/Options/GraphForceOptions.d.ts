@@ -1,7 +1,7 @@
 import type { GraphOptions } from './GraphOptions.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Options section for graph force simulation parameters such as repel, link, and center forces.
  * @public
  * @unofficial
  */

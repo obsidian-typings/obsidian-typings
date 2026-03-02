@@ -1,14 +1,14 @@
 import type { EditorSuggest } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Extended editor suggest interface for managing editor suggestion providers.
  * @public
  * @unofficial
  */
 export interface EditorSuggestEx {
-    /** @todo Documentation incomplete. */
+    /** Currently active and rendered editor suggestion popup. */
     currentSuggest?: EditorSuggest<unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Registered editor suggestion providers. */
     suggests: EditorSuggest<unknown>[];
 }

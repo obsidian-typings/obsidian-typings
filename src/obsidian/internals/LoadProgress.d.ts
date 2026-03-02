@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Represents a loading progress indicator.
  * @public
  * @unofficial
  */

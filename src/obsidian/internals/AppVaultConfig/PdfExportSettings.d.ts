@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Settings for PDF export configuration.
  * @public
  * @unofficial
  */

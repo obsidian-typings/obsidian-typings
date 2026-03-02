@@ -2,7 +2,7 @@ export {};
 
 declare module 'obsidian' {
     /**
-     * @todo Documentation incomplete.
+     * Configuration for a single view in a Bases config file.
      * @since 1.10.0
      */
     interface BasesConfigFileView {

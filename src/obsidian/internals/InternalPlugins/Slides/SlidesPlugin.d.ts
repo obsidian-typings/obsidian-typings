@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { SlidesPluginInstance } from './SlidesPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the slides (presentation mode) feature.
  * @public
  * @unofficial
  */

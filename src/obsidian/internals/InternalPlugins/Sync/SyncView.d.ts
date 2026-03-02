@@ -2,11 +2,11 @@ import type { View } from 'obsidian';
 import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View that displays the Obsidian Sync status and settings.
  * @public
  * @unofficial
  */
 export interface SyncView extends View {
-    /** @todo Documentation incomplete. */
+    /** Get the current view type. */
     getViewType(): typeof ViewType.Sync;
 }

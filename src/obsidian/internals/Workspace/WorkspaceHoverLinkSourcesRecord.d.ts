@@ -1,7 +1,7 @@
 import type { HoverLinkSource } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Record mapping source identifiers to their hover link source configurations.
  * @public
  * @unofficial
  */

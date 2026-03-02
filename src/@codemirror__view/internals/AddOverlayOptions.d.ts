@@ -1,9 +1,9 @@
 /**
- * @todo Documentation incomplete.
+ * Options for adding a search overlay to the editor.
  * @public
  * @unofficial
  */
 export interface AddOverlayOptions {
-    /** @todo Documentation incomplete. */
+    /** Regular expression pattern to highlight in the editor. */
     query: RegExp;
 }

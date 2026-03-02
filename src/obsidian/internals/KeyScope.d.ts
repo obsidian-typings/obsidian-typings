@@ -1,7 +1,7 @@
 import type { Scope } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * A registered keyboard shortcut interceptor within a scope.
  * @public
  * @unofficial
  */

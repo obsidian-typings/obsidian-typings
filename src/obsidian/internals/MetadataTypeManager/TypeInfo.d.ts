@@ -1,14 +1,14 @@
 import type { PropertyWidget } from '../PropertyWidget.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Information about a property's expected and inferred widget types.
  * @public
  * @unofficial
  */
 export interface TypeInfo {
-    /** @todo Documentation incomplete. */
+    /** The explicitly assigned property widget type. */
     expected: PropertyWidget;
 
-    /** @todo Documentation incomplete. */
+    /** The property widget type inferred from the value. */
     inferred: PropertyWidget;
 }

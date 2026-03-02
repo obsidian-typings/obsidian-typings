@@ -9,173 +9,173 @@ import type { ResultDom } from '../../Tree/ResultDom.d.ts';
 import type { HeaderDom } from './HeaderDom.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Main UI component that renders backlinks and unlinked mentions for a file.
  * @public
  * @unofficial
  */
 export interface BacklinkComponent extends Component {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the backlink section is collapsed. */
     backlinkCollapsed: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Element displaying the count of backlinks. */
     backlinkCountEl: HTMLSpanElement;
 
-    /** @todo Documentation incomplete. */
+    /** DOM tree rendering backlink search results. */
     backlinkDom: ResultDom;
 
-    /** @todo Documentation incomplete. */
+    /** File for which backlinks are currently displayed. */
     backlinkFile: TFile | null;
 
-    /** @todo Documentation incomplete. */
+    /** Header element for the backlinks section. */
     backlinkHeaderEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Queue of files to process for backlink computation. */
     backlinkQueue: ItemQueue<TFile> | null;
 
-    /** @todo Documentation incomplete. */
+    /** Whether all result items are collapsed. */
     collapseAll: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Button element to toggle collapse all results. */
     collapseAllButtonEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Whether extra context lines are shown around matches. */
     extraContext: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Button element to toggle extra context display. */
     extraContextButtonEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** The file whose backlinks are being shown. */
     file: TFile | null;
 
-    /** @todo Documentation incomplete. */
+    /** Header DOM for navigation buttons and sort controls. */
     headerDom: HeaderDom;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the search filter is currently visible. */
     isShowingSearch: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Search input component for filtering results. */
     searchComponent: SearchComponent;
 
-    /** @todo Documentation incomplete. */
+    /** Current search query string. */
     searchQuery: null;
 
-    /** @todo Documentation incomplete. */
+    /** Button element to toggle the search filter visibility. */
     showSearchButtonEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Current sort order for results. */
     sortOrder: string;
 
-    /** @todo Documentation incomplete. */
+    /** Placement direction for tooltips. */
     tooltipPlacement: string;
 
-    /** @todo Documentation incomplete. */
+    /** Comma-separated aliases used for unlinked mention matching. */
     unlinkedAliases: string;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the unlinked mentions section is collapsed. */
     unlinkedCollapsed: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Element displaying the count of unlinked mentions. */
     unlinkedCountEl: HTMLSpanElement;
 
-    /** @todo Documentation incomplete. */
+    /** DOM tree rendering unlinked mention search results. */
     unlinkedDom: ResultDom;
 
-    /** @todo Documentation incomplete. */
+    /** File for which unlinked mentions are being computed. */
     unlinkedFile: null;
 
-    /** @todo Documentation incomplete. */
+    /** Header element for the unlinked mentions section. */
     unlinkedHeaderEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Queue of files to process for unlinked mention computation. */
     unlinkedQueue: null;
 
-    /** @todo Documentation incomplete. */
+    /** Add a link from an unlinked mention to the target file. */
     addLinkFunction(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the current state of the backlink component. */
     getState(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a file content change event. */
     onFileChanged(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a file deletion event. */
     onFileDeleted(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a file rename event. */
     onFileRename(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Lifecycle hook called when the component is loaded. */
     onload(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a metadata cache change event. */
     onMetadataChanged(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the component being resized. */
     onResize(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the collapse all toggle button click. */
     onToggleCollapseClick(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the extra context toggle button click. */
     onToggleMoreContextClick(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the show search toggle button click. */
     onToggleShowSearch(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Check if a result passes the current search filter. */
     passSearchFilter(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Recompute backlinks for the given file. */
     recomputeBacklink(backlinkFile: TFile | null): void;
 
-    /** @todo Documentation incomplete. */
+    /** Recompute unlinked mentions for the current file. */
     recomputeUnlinked(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set whether the backlink section is collapsed. */
     setBacklinkCollapsed(arg1: unknown, arg2: unknown): Promise<unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Set whether all results are collapsed. */
     setCollapseAll(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set whether extra context lines are shown. */
     setExtraContext(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set the collapsed state of a specific section. */
     setSectionCollapsed(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): Promise<unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Set the visibility of the search filter. */
     setShowSearch(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set the sort order for results. */
     setSortOrder(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Restore the component from a saved state. */
     setState(arg1: unknown): Promise<unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Set whether the unlinked mentions section is collapsed. */
     setUnlinkedCollapsed(arg1: unknown, arg2: unknown): Promise<unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Cancel the current backlink search computation. */
     stopBacklinkSearch(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Cancel the current unlinked mentions search computation. */
     stopUnlinkedSearch(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Toggle the collapsed state of the backlinks section. */
     toggleBacklinkCollapsed(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Toggle the collapsed state of the unlinked mentions section. */
     toggleUnlinkedCollapsed(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Refresh both backlink and unlinked mention results. */
     update(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the tooltip text of a section header. */
     updateHeaderTooltip(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Refresh the search filter and recompute filtered results. */
     updateSearch(): unknown;
 }

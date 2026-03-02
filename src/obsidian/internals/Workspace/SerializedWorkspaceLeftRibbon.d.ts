@@ -3,11 +3,11 @@ import type {
 } from './SerializedWorkspaceLeftRibbonHiddenItemsRecord.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Serialized representation of the left ribbon bar state.
  * @public
  * @unofficial
  */
 export interface SerializedWorkspaceLeftRibbon {
-    /** @todo Documentation incomplete. */
+    /** Record of ribbon items and whether they are hidden. */
     hiddenItems: SerializedWorkspaceLeftRibbonHiddenItemsRecord;
 }

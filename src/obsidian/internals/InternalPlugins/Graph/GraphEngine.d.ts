@@ -17,55 +17,55 @@ import type { GraphForceOptions } from './Options/GraphForceOptions.d.ts';
  * @unofficial
  */
 export interface GraphEngine {
-    /** @todo Documentation incomplete. */
+    /** Reference to the Obsidian app instance. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** UI controls for configuring color group options. */
     colorGroupOptions: GraphColorGroupOptions;
 
-    /** @todo Documentation incomplete. */
+    /** Container element for the graph settings controls panel. */
     controlsEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Path of the currently focused file in the local graph. */
     currentFocusFile: string;
 
-    /** @todo Documentation incomplete. */
+    /** UI controls for configuring display options. */
     displayOptions: GraphDisplayOptions;
 
-    /** @todo Documentation incomplete. */
+    /** Filter determining which files are included in the graph. */
     fileFilter: GraphFileFilter;
 
-    /** @todo Documentation incomplete. */
+    /** UI controls for configuring filter options. */
     filterOptions: GraphFilterOptions;
 
-    /** @todo Documentation incomplete. */
+    /** UI controls for configuring force simulation options. */
     forceOptions: GraphForceOptions;
 
-    /** @todo Documentation incomplete. */
+    /** Whether any search filter is currently active. */
     hasFilter: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Hover popover displayed when hovering over a node. */
     hoverPopover: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Last link that was hovered over. */
     lastHoverLink: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Current graph plugin options applied to this engine. */
     options: GraphPluginInstanceOptions;
 
-    /** @todo Documentation incomplete. */
+    /** Current animation progression value for graph transitions. */
     progression: number;
 
-    /** @todo Documentation incomplete. */
+    /** Speed of the animation progression. */
     progressionSpeed: number;
 
-    /** @todo Documentation incomplete. */
+    /** Renderer responsible for drawing the graph. */
     renderer: GraphRenderer;
 
-    /** @todo Documentation incomplete. */
+    /** Active color group search queries for node coloring. */
     searchQueries: GraphColorGroup[];
 
-    /** @todo Documentation incomplete. */
+    /** The view (local or global) that owns this engine. */
     view: LocalGraphView | GraphView;
 
     /**

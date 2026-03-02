@@ -9,7 +9,7 @@ import type {
 import type { IFramedMarkdownEditor } from './IFramedMarkdownEditor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View for an embedded markdown editor, supporting preview and edit modes.
  * @public
  * @unofficial
  */

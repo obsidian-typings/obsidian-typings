@@ -1,50 +1,50 @@
 import type { ExtendedMetrics } from './ExtendedMetrics.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * MathJax library interface for rendering LaTeX math expressions.
  * @public
  * @unofficial
  */
 export interface MathJax {
-    /** @todo Documentation incomplete. */
+    /** MathJax configuration object. */
     config: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** MathJax component loader. */
     loader: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** MathJax runtime options. */
     options: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** MathJax library version string. */
     version: string;
 
-    /** @todo Documentation incomplete. */
+    /** Get the CHTML stylesheet element for MathJax-rendered content. */
     chtmlStylesheet(): HTMLStyleElement;
 
-    /** @todo Documentation incomplete. */
+    /** Get font metrics for a given DOM node, used for scaling math output. */
     getMetricsFor(node: HTMLElement, display?: boolean): ExtendedMetrics;
 
-    /** @todo Documentation incomplete. */
+    /** Convert a TeX string to a CHTML (HTML) element synchronously. */
     tex2chtml(math: string, options?: Record<string, unknown>): HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** Convert a TeX string to a CHTML (HTML) element asynchronously. */
     tex2chtmlPromise(math: string, options?: Record<string, unknown>): Promise<HTMLElement>;
 
-    /** @todo Documentation incomplete. */
+    /** Convert a TeX string to MathML markup synchronously. */
     tex2mml(math: string, options?: Record<string, unknown>): string;
 
-    /** @todo Documentation incomplete. */
+    /** Convert a TeX string to MathML markup asynchronously. */
     tex2mmlPromise(math: string, options?: Record<string, unknown>): Promise<string>;
 
-    /** @todo Documentation incomplete. */
+    /** Reset the TeX input jax, clearing equation numbering and labels. */
     texReset(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Typeset math expressions in the given elements synchronously. */
     typeset(elements?: unknown[] | null): void;
 
-    /** @todo Documentation incomplete. */
+    /** Clear typeset math from the given elements. */
     typesetClear(elements?: unknown[] | null): void;
 
-    /** @todo Documentation incomplete. */
+    /** Typeset math expressions in the given elements asynchronously. */
     typesetPromise(elements?: unknown[] | null): Promise<void>;
 }

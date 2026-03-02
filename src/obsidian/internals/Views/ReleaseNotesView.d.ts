@@ -2,7 +2,7 @@ import type { ItemView } from 'obsidian';
 import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View for displaying Obsidian release notes.
  * @public
  * @unofficial
  */
@@ -24,6 +24,6 @@ export interface ReleaseNotesView extends ItemView {
      */
     render(): Promise<unknown>;
 
-    /** @todo Documentation incomplete */
+    /** Display the patch notes for a specific version. */
     showPatchNotes(e: unknown, version: string): Promise<unknown>;
 }

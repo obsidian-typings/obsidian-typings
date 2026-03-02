@@ -1,12 +1,12 @@
 import type { TreeItem } from './TreeItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * A tree item that can be collapsed to hide its children.
  * @public
  * @unofficial
  */
 export interface TreeCollapsibleItem extends TreeItem {
-    /** @todo Documentation incomplete. */
+    /** Container element for the child items of this collapsible node. */
     childrenEl: HTMLElement;
 
     /**
@@ -14,7 +14,7 @@ export interface TreeCollapsibleItem extends TreeItem {
      */
     collapsed: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Element for the collapse/expand toggle indicator, or null if not rendered. */
     collapseEl: HTMLElement | null;
 
     /**
@@ -50,7 +50,6 @@ export interface TreeCollapsibleItem extends TreeItem {
      * Update the tree item's cover element.
      *
      * @param animate - If set to true, will animate on collapse.
-     * @todo Documentation incomplete.
      */
     updateCollapsed(animate?: boolean): Promise<undefined>;
 }

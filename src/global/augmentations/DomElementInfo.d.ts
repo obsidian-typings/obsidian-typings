@@ -6,7 +6,7 @@ declare global {
      */
     interface DomElementInfo {
         /**
-         * @todo Documentation incomplete.
+         * Event listener to attach, keyed by event name prefixed with "on" (e.g., `onclick`, `onmousedown`).
          * @unofficial
          */
         [eventName: `on${string}`]: EventListenerOrEventListenerObject;

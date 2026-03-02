@@ -12,19 +12,19 @@ declare module '@codemirror/view' {
      */
     interface EditorView {
         /**
-         * @todo Documentation incomplete.
+         * The Vim editor instance attached to this view, if Vim mode is enabled.
          * @unofficial
          */
         cm?: VimEditor;
 
         /**
-         * @todo Documentation incomplete.
+         * Internal view state tracking properties like printing mode.
          * @unofficial
          */
         viewState: EditorViewState;
 
         /**
-         * @todo Documentation incomplete.
+         * Request a layout measurement pass on the editor.
          * @unofficial
          */
         measure(): void;

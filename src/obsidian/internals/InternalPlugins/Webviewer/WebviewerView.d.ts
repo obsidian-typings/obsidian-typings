@@ -2,33 +2,33 @@ import type { ItemView } from 'obsidian';
 import type { ViewType } from '../../../implementations/Constants/ViewType.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View that renders an embedded web browser for browsing web pages within Obsidian.
  * @public
  * @unofficial
  */
 export interface WebviewerView extends ItemView {
-    /** @todo Documentation incomplete */
+    /** Close the in-page search bar. */
     closeSearch(): void;
 
-    /** @todo Documentation incomplete */
+    /** Finalize and commit the current page load. */
     commitPageLoad(): unknown;
 
-    /** @todo Documentation incomplete */
+    /** Configure the web contents settings for the webview. */
     configureWebContents(): void;
 
-    /** @todo Documentation incomplete */
+    /** Build context menu items for an image element. */
     contextMenuItemsForImg(e: unknown): unknown;
 
-    /** @todo Documentation incomplete */
+    /** Build context menu items for a link element. */
     contextMenuItemsForLink(e: unknown, t: unknown): unknown;
 
-    /** @todo Documentation incomplete */
+    /** Build context menu items for selected text. */
     contextMenuItemsForSelection(e: unknown, t: unknown): unknown;
 
-    /** @todo Documentation incomplete */
+    /** Display a blank page in the webview. */
     displayBlank(): void;
 
-    /** @todo Documentation incomplete */
+    /** Display a context menu at the given position. */
     displayContextMenu(e: unknown): void;
 
     /**
@@ -36,7 +36,7 @@ export interface WebviewerView extends ItemView {
      */
     displayErrorView(): void;
 
-    /** @todo Documentation incomplete */
+    /** Display the page content in reader mode. */
     displayReaderView(): Promise<unknown>;
 
     /**
@@ -44,7 +44,7 @@ export interface WebviewerView extends ItemView {
      */
     displayWebView(): void;
 
-    /** @todo Documentation incomplete */
+    /** Get the parsed content for reader mode. */
     getReaderModeContent(): Promise<unknown>;
 
     /**
@@ -52,7 +52,7 @@ export interface WebviewerView extends ItemView {
      */
     getViewType(): typeof ViewType.Webviewer;
 
-    /** @todo Documentation incomplete */
+    /** Hide all view content (webview, reader, error). */
     hideAll(): void;
 
     /**
@@ -60,64 +60,64 @@ export interface WebviewerView extends ItemView {
      */
     instantiateWebView(): void;
 
-    /** @todo Documentation incomplete */
+    /** Navigate the webview to a URL. */
     navigate(e: unknown, t: unknown): unknown;
 
-    /** @todo Documentation incomplete */
+    /** Handle a checkbox click in reader mode. */
     onCheckboxClick(e: unknown, t: unknown, n: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle a click on an external link. */
     onExternalLinkClick(e: unknown, t: unknown, n: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle a right-click on an external link. */
     onExternalLinkRightClick(e: unknown, t: unknown, n: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle a fold/collapse state change in reader mode. */
     onFoldChange(): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle a click on an internal (vault) link. */
     onInternalLinkClick(e: unknown, t: unknown, n: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle dragging an internal link. */
     onInternalLinkDrag(e: unknown, t: unknown, n: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle mouseover on an internal link for preview. */
     onInternalLinkMouseover(e: unknown, t: unknown, n: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle a right-click on an internal link. */
     onInternalLinkRightClick(e: unknown, t: unknown, n: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle a context menu event in reader mode. */
     onReaderModeContextMenu(e: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Called when the reader mode rendering is complete. */
     onRenderComplete(): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle scroll events in the webview. */
     onScroll(): void;
 
-    /** @todo Documentation incomplete */
+    /** Handle a click on a tag in reader mode. */
     onTagClick(e: unknown, t: unknown, n: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Post-process rendered content in reader mode. */
     postProcess(e: unknown, t: unknown, n: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Push the current page to the view navigation history stack. */
     pushViewStackHistory(e: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Report a page load event to the history database. */
     reportPageLoad(url: string, title: string, navigate: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Save the current page content as a Markdown file. */
     saveAsMarkdown(): Promise<unknown>;
 
-    /** @todo Documentation incomplete */
+    /** Select the appropriate favicon for the current page. */
     selectFavicon(e: unknown): unknown;
 
-    /** @todo Documentation incomplete */
+    /** Set the favicon for the current page. */
     setFavicon(e: unknown): unknown;
 
-    /** @todo Documentation incomplete */
+    /** Show the in-page search bar. */
     showSearch(): void;
 
     /**

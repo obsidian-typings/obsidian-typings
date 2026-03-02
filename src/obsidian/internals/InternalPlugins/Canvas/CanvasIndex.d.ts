@@ -5,68 +5,68 @@ import type {
 import type { CanvasIndexEntry } from './CanvasIndexEntry.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Index that tracks and resolves links, embeds, and metadata across all canvas files.
  * @public
  * @unofficial
  */
 export interface CanvasIndex extends Component {
-    /** @todo Documentation incomplete. */
+    /** Reference to the Obsidian app instance. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Queue of files waiting to be processed by the indexer. */
     fileQueue: unknown[];
 
-    /** @todo Documentation incomplete. */
+    /** Current animation frame request, or null when idle. */
     frame: null;
 
-    /** @todo Documentation incomplete. */
+    /** Index of canvas entries keyed by file path. */
     index: Record<string, CanvasIndexEntry>;
 
-    /** @todo Documentation incomplete. */
+    /** Weak map tracking reference node IDs for canvas files. */
     refNodeIds: WeakMap<object, unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether a file can be processed by the canvas indexer. */
     canProcess(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the index entry for the specified file. */
     get(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get all index entries. */
     getAll(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the index entry for the specified file path. */
     getForPath(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a file creation event. */
     onCreate(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a file deletion event. */
     onDelete(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize the index when the component loads. */
     onload(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a file modification event. */
     onModify(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a file rename event. */
     onRename(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Clean up the index when the component unloads. */
     onunload(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Parse canvas text content and extract metadata. */
     parseText(arg1: unknown): Promise<unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Process a single canvas file and update the index. */
     process(arg1: unknown): Promise<unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Add a file to the processing queue. */
     queue(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Request an animation frame to process queued files. */
     requestFrame(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Run the indexer to process all queued files. */
     run(): Promise<unknown>;
 }

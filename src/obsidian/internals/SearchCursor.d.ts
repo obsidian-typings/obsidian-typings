@@ -1,7 +1,7 @@
 import type { EditorRange } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Cursor for navigating through search results in the editor.
  * @public
  * @unofficial
  */

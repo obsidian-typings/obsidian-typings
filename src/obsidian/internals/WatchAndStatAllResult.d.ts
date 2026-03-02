@@ -1,11 +1,11 @@
 import type { CapacitorFileEntry } from './CapacitorFileEntry.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Result from watching and stating all files in a directory on Capacitor.
  * @public
  * @unofficial
  */
 export interface WatchAndStatAllResult {
-    /** @todo Documentation incomplete. */
+    /** File entries found in the watched directory. */
     children: CapacitorFileEntry[];
 }

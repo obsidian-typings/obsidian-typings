@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Editor for managing markdown tables.
  * @public
  * @unofficial
  */

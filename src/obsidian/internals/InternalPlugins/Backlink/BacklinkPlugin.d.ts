@@ -3,11 +3,11 @@ import type { BacklinkPluginInstance } from './BacklinkPluginInstance.d.ts';
 import type { BacklinkPluginViews } from './BacklinkPluginViews.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the backlinks feature.
  * @public
  * @unofficial
  */
 export interface BacklinkPlugin extends InternalPlugin<BacklinkPluginInstance> {
-    /** @todo Documentation incomplete. */
+    /** View creators registered by the backlink plugin. */
     views: BacklinkPluginViews;
 }

@@ -2,26 +2,26 @@ import type { CanvasSelection } from './CanvasSelection.d.ts';
 import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Context menu and toolbar displayed on the canvas for node/edge actions.
  * @public
  * @unofficial
  */
 export interface CanvasMenu {
-    /** @todo Documentation incomplete. */
+    /** Reference to the parent canvas instance. */
     canvas: CanvasViewCanvas;
 
-    /** @todo Documentation incomplete. */
+    /** Outer container element for the menu. */
     containerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Element containing the menu buttons and controls. */
     menuEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the current canvas selection. */
     selection: CanvasSelection;
 
-    /** @todo Documentation incomplete. */
+    /** Render the menu for the given selection or context. */
     render(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the menu's z-index to stay above the selected items. */
     updateZIndex(arg1: unknown): unknown;
 }

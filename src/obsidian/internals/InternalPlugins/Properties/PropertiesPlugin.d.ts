@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { PropertiesPluginInstance } from './PropertiesPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the properties (frontmatter metadata) feature.
  * @public
  * @unofficial
  */

@@ -1,7 +1,7 @@
 import type { GraphOptions } from './GraphOptions.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Options section for graph display settings such as node size, line thickness, and arrows.
  * @public
  * @unofficial
  */

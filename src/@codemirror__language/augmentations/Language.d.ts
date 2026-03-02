@@ -18,13 +18,13 @@ declare module '@codemirror/language' {
      */
     namespace Language {
         /**
-         * @todo Documentation incomplete.
+         * State effect type used to replace the current language state.
          * @unofficial
          */
         const setState: StateEffectType<LanguageState>;
 
         /**
-         * @todo Documentation incomplete.
+         * State field holding the current language parse state and tree.
          * @unofficial
          */
         const state: StateField<LanguageState>;

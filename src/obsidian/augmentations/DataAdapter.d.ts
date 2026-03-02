@@ -32,7 +32,7 @@ declare module 'obsidian' {
         handler: FileSystemWatchHandler | null;
 
         /**
-         * @todo Documentation incomplete.
+         * Whether the file system is case-insensitive.
          * @unofficial
          */
         insensitive: boolean;
@@ -183,7 +183,7 @@ declare module 'obsidian' {
         mkdir(normalizedPath: string): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a file change event for the given path.
          * @unofficial
          */
         onFileChange(normalizedPath: string | null): void;
@@ -262,19 +262,19 @@ declare module 'obsidian' {
         ): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Reconcile a folder creation between old and new paths.
          * @unofficial
          */
         reconcileFolderCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Reconcile changes to an internal (config) file.
          * @unofficial
          */
         reconcileInternalFile(normalizedPath: string): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Reconcile a symbolic link creation between old and new paths.
          * @unofficial
          */
         reconcileSymbolicLinkCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;

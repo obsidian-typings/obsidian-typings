@@ -1,12 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * Base type representing a constructor function that creates instances of the given type.
  * @public
  * @unofficial
  */
 export interface ConstructorBase<Args extends unknown[], Instance> {
-    /** @todo Documentation incomplete. */
+    /** Construct a new instance with the given arguments. */
     new(...args: Args): Instance;
 
-    /** @todo Documentation incomplete. */
+    /** Prototype of the constructed instances. */
     prototype: Instance;
 }

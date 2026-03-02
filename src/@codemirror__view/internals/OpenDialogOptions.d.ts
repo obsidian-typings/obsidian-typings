@@ -1,33 +1,33 @@
 /**
- * @todo Documentation incomplete.
+ * Options for opening an interactive dialog in the editor (e.g., Vim command line).
  * @public
  * @unofficial
  */
 export interface OpenDialogOptions {
-    /** @todo Documentation incomplete. */
+    /** Whether to display the dialog at the bottom of the editor. */
     bottom: number;
 
-    /** @todo Documentation incomplete. */
+    /** Whether to close the dialog when it loses focus. */
     closeOnBlur: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether to close the dialog when the Enter key is pressed. */
     closeOnEnter: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether to select the input value when the dialog opens. */
     selectValueOnOpen: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Initial value for the dialog input. */
     value: string;
 
-    /** @todo Documentation incomplete. */
+    /** Callback invoked when the dialog is closed. */
     onClose(div: HTMLDivElement): void;
 
-    /** @todo Documentation incomplete. */
+    /** Callback invoked when the dialog input value changes. */
     onInput(e: KeyboardEvent, value: string, callback: (value: unknown) => void): void;
 
-    /** @todo Documentation incomplete. */
+    /** Callback invoked when a key is pressed down in the dialog. */
     onKeyDown(e: KeyboardEvent, value: string, callback: (value: unknown) => void): void;
 
-    /** @todo Documentation incomplete. */
+    /** Callback invoked when a key is released in the dialog. */
     onKeyUp(e: KeyboardEvent, value: string, callback: (value: unknown) => void): void;
 }

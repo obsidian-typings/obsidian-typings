@@ -1,7 +1,7 @@
 import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Union type of all built-in view type string identifiers.
  *
  * @public
  * @unofficial

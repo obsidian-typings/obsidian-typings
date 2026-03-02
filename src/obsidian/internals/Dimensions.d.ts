@@ -1,12 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * Width and height dimensions.
  * @public
  * @unofficial
  */
 export interface Dimensions {
-    /** @todo Documentation incomplete. */
+    /** The height. */
     height: number;
 
-    /** @todo Documentation incomplete. */
+    /** The width. */
     width: number;
 }

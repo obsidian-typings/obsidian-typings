@@ -2,38 +2,38 @@ import type { Runnable } from '../Runnable.d.ts';
 import type { ItemQueueItems } from './ItemQueueItems.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * An async item queue that supports generator-based consumption.
  * @public
  * @unofficial
  */
 export interface ItemQueue<T> {
-    /** @todo Documentation incomplete. */
+    /** Backing storage for the queue items. */
     items: ItemQueueItems<T>;
 
-    /** @todo Documentation incomplete. */
+    /** Promise resolvers for awaiting the next item. */
     promise: PromiseWithResolvers<T> | null;
 
-    /** @todo Documentation incomplete. */
+    /** Runnable controlling the queue's start/stop lifecycle. */
     runnable: Runnable;
 
-    /** @todo Documentation incomplete. */
+    /** Add a single item to the queue. */
     add(item: T): void;
 
-    /** @todo Documentation incomplete. */
+    /** Add multiple items to the queue. */
     addList(items: T[]): void;
 
-    /** @todo Documentation incomplete. */
+    /** Cancel the queue and stop processing. */
     cancel(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Remove all items from the queue. */
     clear(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Return an async generator that yields items as they are enqueued. */
     generator(): AsyncGenerator<T>;
 
-    /** @todo Documentation incomplete. */
+    /** Notify the queue that a new item is available for consumption. */
     notify(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Remove a specific item from the queue. */
     remove(item: T): void;
 }

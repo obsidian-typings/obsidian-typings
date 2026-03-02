@@ -1,18 +1,18 @@
 /**
- * @todo Documentation incomplete.
+ * Axis-aligned bounding box.
  * @public
  * @unofficial
  */
 export interface BBox {
-    /** @todo Documentation incomplete. */
+    /** Maximum x coordinate (right edge). */
     maxX: number;
 
-    /** @todo Documentation incomplete. */
+    /** Maximum y coordinate (bottom edge). */
     maxY: number;
 
-    /** @todo Documentation incomplete. */
+    /** Minimum x coordinate (left edge). */
     minX: number;
 
-    /** @todo Documentation incomplete. */
+    /** Minimum y coordinate (top edge). */
     minY: number;
 }

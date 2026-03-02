@@ -25,13 +25,13 @@ declare module 'obsidian' {
         manifest: PluginManifest;
 
         /**
-         * @todo Documentation incomplete.
+         * Debounced handler for config file changes.
          * @unofficial
          */
         onConfigFileChange: Debouncer<[], Promise<void>>;
 
         /**
-         * @todo Documentation incomplete.
+         * Internal handler invoked when the plugin's config file changes on disk.
          * @unofficial
          */
         _onConfigFileChange(): Promise<void>;

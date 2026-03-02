@@ -1,9 +1,9 @@
 /**
- * @todo Documentation incomplete.
+ * Vim plugin state tracking the last keydown event.
  * @public
  * @unofficial
  */
 export interface VimStateVimPlugin {
-    /** @todo Documentation incomplete. */
+    /** The last keydown event key string. */
     lastKeydown: string;
 }

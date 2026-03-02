@@ -1,15 +1,15 @@
 /**
- * @todo Documentation incomplete.
+ * Represents a captured text selection within a window.
  * @public
  * @unofficial
  */
 export interface WindowSelection {
-    /** @todo Documentation incomplete. */
+    /** Element that has focus within the selection. */
     focusEl: HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** The selected range. */
     range: Range;
 
-    /** @todo Documentation incomplete. */
+    /** Window in which the selection exists. */
     win: Window;
 }

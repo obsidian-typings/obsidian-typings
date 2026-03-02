@@ -18,7 +18,7 @@ declare module 'obsidian' {
         app: App;
 
         /**
-         * @todo Documentation incomplete.
+         * Internal cache data for block references.
          * @unofficial
          */
         cache: unknown;

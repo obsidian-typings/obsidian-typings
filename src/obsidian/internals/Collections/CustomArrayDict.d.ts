@@ -1,33 +1,33 @@
 /**
- * @todo Documentation incomplete.
+ * A dictionary mapping string keys to arrays of values.
  * @public
  * @unofficial
  */
 export interface CustomArrayDict<T> {
-    /** @todo Documentation incomplete. */
+    /** Internal map storing key-to-array mappings. */
     data: Map<string, T[]>;
 
-    /** @todo Documentation incomplete. */
+    /** Add a value to the array associated with the given key. */
     add(key: string, value: T): void;
 
-    /** @todo Documentation incomplete. */
+    /** Remove all values for the given key. */
     clear(key: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Remove all keys and their values. */
     clearAll(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether the array for the given key contains the specified value. */
     contains(key: string, value: T): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Get the total number of values across all keys. */
     count(): number;
 
-    /** @todo Documentation incomplete. */
+    /** Get the array of values for the given key, or null if not found. */
     get(key: string): T[] | null;
 
-    /** @todo Documentation incomplete. */
+    /** Get all keys in the dictionary. */
     keys(): string[];
 
-    /** @todo Documentation incomplete. */
+    /** Remove a specific value from the array associated with the given key. */
     remove(key: string, value: T): void;
 }

@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { SwitcherPluginInstance } from './SwitcherPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the quick switcher feature.
  * @public
  * @unofficial
  */

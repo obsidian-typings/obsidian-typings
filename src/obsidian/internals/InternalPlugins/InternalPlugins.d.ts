@@ -11,7 +11,7 @@ import type { InternalPluginNameType } from './InternalPluginNameType.d.ts';
 import type { InternalPluginsConfigRecord } from './InternalPluginsConfigRecord.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Manager for all internal (core) plugins, handling registration, enabling, and configuration.
  * @public
  * @unofficial
  */
@@ -62,10 +62,10 @@ export interface InternalPlugins extends Events {
      */
     getPluginById<ID extends InternalPluginNameType>(id: ID): InternalPluginNamePluginsMapping[ID] | null;
 
-    /** @todo Documentation incomplete. */
+    /** Load and register an internal plugin instance. */
     loadPlugin<Instance extends InternalPluginInstance<unknown>>(internalPluginInstance: Instance): Instance;
 
-    /** @todo Documentation incomplete. */
+    /** Handle raw file change events for the config path. */
     onRaw(configPath: string): void;
 
     /**

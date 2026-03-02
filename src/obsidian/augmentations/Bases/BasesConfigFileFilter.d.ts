@@ -4,7 +4,7 @@ import type { BasesConfigFileFilterOrClause } from '../../internals/Bases/BasesC
 
 declare module 'obsidian' {
     /**
-     * @todo Documentation incomplete.
+     * A filter clause used in Bases config files, supporting AND, OR, NOT, and string conditions.
      * @since 1.10.0
      *
      * @deprecated - Added only for typing purposes. Use {@link BasesConfigFileFilter} instead.

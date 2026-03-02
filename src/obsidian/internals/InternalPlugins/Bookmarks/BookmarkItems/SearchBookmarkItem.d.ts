@@ -1,14 +1,14 @@
 import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Bookmark item representing a saved search query.
  * @public
  * @unofficial
  */
 export interface SearchBookmarkItem extends BookmarkItem {
-    /** @todo Documentation incomplete. */
+    /** The saved search query string. */
     query: string;
 
-    /** @todo Documentation incomplete. */
+    /** Discriminator indicating this is a search bookmark. */
     type: 'search';
 }

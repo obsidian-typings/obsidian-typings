@@ -1,7 +1,7 @@
 import type { PropertyWidgetEntry } from '../PropertyWidgetEntry.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Record mapping property names to their assigned widget entries.
  * @public
  * @unofficial
  */

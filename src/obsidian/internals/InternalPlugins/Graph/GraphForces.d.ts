@@ -5,15 +5,15 @@
  * @unofficial
  */
 export interface GraphForces {
-    /** @todo Documentation incomplete. */
+    /** Strength of the force pulling nodes toward the center of the graph. */
     centerStrength?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Ideal distance between linked nodes. */
     linkDistance?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Strength of the attractive force between linked nodes. */
     linkStrength?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Strength of the repulsive force pushing nodes apart. */
     repelStrength?: number;
 }

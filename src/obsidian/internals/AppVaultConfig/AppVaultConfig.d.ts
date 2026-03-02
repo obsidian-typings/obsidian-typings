@@ -2,7 +2,7 @@ import type { AppVaultConfigHotkeysRecord } from './AppVaultConfigHotkeysRecord.
 import type { PdfExportSettings } from './PdfExportSettings.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Vault-level configuration settings stored in the `.obsidian` config folder.
  * @public
  * @unofficial
  */
@@ -69,7 +69,7 @@ export interface AppVaultConfig {
      */
     defaultViewMode?: 'source' | 'preview';
 
-    /** @todo Documentation incomplete. */
+    /** Whether Emacs-style keybindings are enabled. */
     emacsyKeys?: true | boolean;
 
     /**
@@ -77,7 +77,7 @@ export interface AppVaultConfig {
      */
     enabledCssSnippets?: string[];
 
-    /** @todo Documentation incomplete. */
+    /** Sort order for files in the file explorer. */
     fileSortOrder?: 'alphabetical';
 
     /**
@@ -112,7 +112,7 @@ export interface AppVaultConfig {
      */
     legacyEditor?: false | boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether live preview mode is enabled in the editor. */
     livePreview?: true | boolean;
 
     /**
@@ -120,7 +120,7 @@ export interface AppVaultConfig {
      */
     mobilePullAction?: 'command-palette:open' | string;
 
-    /** @todo Documentation incomplete. */
+    /** Command ID for the mobile quick ribbon action item. */
     mobileQuickRibbonItem?: '' | string;
 
     /**
@@ -128,7 +128,7 @@ export interface AppVaultConfig {
      */
     mobileToolbarCommands?: string[];
 
-    /** @todo Documentation incomplete. */
+    /** Appearance > Monospace font. */
     monospaceFontFamily?: '' | string;
 
     /**

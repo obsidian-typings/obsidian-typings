@@ -1,80 +1,80 @@
 import type { GraphColorGroup } from './GraphColorGroup.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * User-configurable options for the graph plugin, persisted in graph.json.
  * @public
  * @unofficial
  */
 export interface GraphPluginInstanceOptions {
-    /** @todo Documentation incomplete. */
+    /** Whether the color groups section is collapsed in the settings panel. */
     'collapse-color-groups'?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the display section is collapsed in the settings panel. */
     'collapse-display'?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the filter section is collapsed in the settings panel. */
     'collapse-filter'?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the forces section is collapsed in the settings panel. */
     'collapse-forces'?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Strength of the centering force pulling nodes toward the graph center. */
     centerStrength?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the graph settings panel is closed. */
     close?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** User-defined color groups for visually grouping nodes by search query. */
     colorGroups?: GraphColorGroup[];
 
-    /** @todo Documentation incomplete. */
+    /** Whether to hide unresolved (non-existing) linked notes from the graph. */
     hideUnresolved?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Multiplier for the thickness of link lines. */
     lineSizeMultiplier?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Ideal distance between linked nodes in the force simulation. */
     linkDistance?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Strength of the attractive force between linked nodes. */
     linkStrength?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Whether to show backlinks in the local graph. */
     localBacklinks?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether to show forward links in the local graph. */
     localForelinks?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether to show links between neighbor nodes in the local graph. */
     localInterlinks?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Number of link hops to traverse from the current note in the local graph. */
     localJumps?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Multiplier for the size of nodes. */
     nodeSizeMultiplier?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Strength of the repulsive force pushing nodes apart. */
     repelStrength?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Zoom scale level of the graph view. */
     scale?: number;
 
-    /** @todo Documentation incomplete. */
+    /** Search query used to filter which files appear in the graph. */
     search?: string;
 
-    /** @todo Documentation incomplete. */
+    /** Whether to display directional arrows on links. */
     showArrow?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether to display attachment files in the graph. */
     showAttachments?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether to display orphan notes (notes with no links) in the graph. */
     showOrphans?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether to display tags as nodes in the graph. */
     showTags?: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Multiplier controlling the distance at which node labels begin to fade. */
     textFadeMultiplier?: number;
 }

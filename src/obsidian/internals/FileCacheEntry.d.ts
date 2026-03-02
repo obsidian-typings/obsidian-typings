@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Cache entry storing file hash, modification time, and size.
  * @public
  * @unofficial
  */

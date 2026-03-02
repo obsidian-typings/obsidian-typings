@@ -3,17 +3,17 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { OutlinePlugin } from './OutlinePlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for the outline, displaying headings for the current file.
  * @public
  * @unofficial
  */
 export interface OutlinePluginInstance extends InternalPluginInstance<OutlinePlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is enabled by default. */
     defaultOn: true;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the outline plugin registration. */
     plugin: OutlinePlugin;
 }

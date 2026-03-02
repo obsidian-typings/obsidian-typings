@@ -89,7 +89,7 @@ declare module 'obsidian' {
         getViewData__?(): string;
 
         /**
-         * @todo Documentation incomplete.
+         * Load a file into the editor, optionally clearing existing content.
          * @unofficial
          * @since 0.10.12
          */

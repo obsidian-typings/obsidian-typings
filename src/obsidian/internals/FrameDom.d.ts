@@ -1,33 +1,33 @@
 /**
- * @todo Documentation incomplete.
+ * DOM elements for the custom window frame (title bar) on desktop.
  * @public
  * @unofficial
  */
 export interface FrameDom {
-    /** @todo Documentation incomplete. */
+    /** Reference to the Electron browser window. */
     eWin: Electron.BrowserWindow;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the current platform is macOS. */
     isMac: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Container for window control buttons on the left side. */
     leftButtonContainerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** The title bar element. */
     titleBarEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Inner container of the title bar. */
     titleBarInnerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Element displaying the title bar text. */
     titleBarTextEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the window object. */
     win: Window;
 
-    /** @todo Documentation incomplete. */
+    /** Update the window status indicators in the title bar. */
     updateStatus(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Update the displayed title in the title bar. */
     updateTitle(): void;
 }

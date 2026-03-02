@@ -6,7 +6,7 @@ import type {
 import type { ImportedAttachment } from './ImportedAttachment.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Manager for clipboard operations in the markdown editor, handling paste, drag, and drop.
  * @public
  * @unofficial
  */

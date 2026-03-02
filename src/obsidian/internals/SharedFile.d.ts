@@ -1,12 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * Represents a file shared to Obsidian from another app on mobile.
  * @public
  * @unofficial
  */
 export interface SharedFile {
-    /** @todo Documentation incomplete. */
+    /** Name of the shared file. */
     name: string;
 
-    /** @todo Documentation incomplete. */
+    /** URI of the shared file. */
     uri: string;
 }

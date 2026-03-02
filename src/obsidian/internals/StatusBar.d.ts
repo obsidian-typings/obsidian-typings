@@ -1,14 +1,14 @@
 import type { App } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * The status bar displayed at the bottom of the application window.
  * @public
  * @unofficial
  */
 export interface StatusBar {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Container element for the status bar. */
     containerEl: HTMLElement;
 }

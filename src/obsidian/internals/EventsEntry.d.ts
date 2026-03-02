@@ -1,20 +1,20 @@
 import type { Events } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * An entry representing a registered event handler.
  * @public
  * @unofficial
  */
 export interface EventsEntry {
-    /** @todo Documentation incomplete. */
+    /** Context (`this` value) for the event handler callback. */
     ctx: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Events object this handler is registered on. */
     e: Events;
 
-    /** @todo Documentation incomplete. */
+    /** Event name this handler listens for. */
     name: string;
 
-    /** @todo Documentation incomplete. */
+    /** Event handler callback function. */
     fn(...data: unknown[]): unknown;
 }

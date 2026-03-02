@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Represents a connection (edge) between two nodes on a canvas.
  * @public
  * @unofficial
  */

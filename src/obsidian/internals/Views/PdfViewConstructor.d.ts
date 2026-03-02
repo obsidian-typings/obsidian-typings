@@ -2,7 +2,7 @@ import type { PdfView } from './PdfView.d.ts';
 import type { TypedViewConstructor } from './TypedViewConstructor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Constructor for creating PdfView instances.
  * @public
  * @unofficial
  */

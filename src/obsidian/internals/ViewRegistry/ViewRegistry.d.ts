@@ -10,7 +10,7 @@ import type { ViewRegistryTypeByExtensionRecord } from './ViewRegistryTypeByExte
 import type { ViewRegistryViewByTypeRecord } from './ViewRegistryViewByTypeRecord.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Registry that maps view types to their constructors and file extensions to view types.
  * @public
  * @unofficial
  */
@@ -32,7 +32,7 @@ export interface ViewRegistry extends Events {
      */
     getTypeByExtension(extension: string): string | undefined;
 
-    /** @todo Documentation incomplete. */
+    /** Get the view creator function associated with a view type. */
     getViewCreatorByType(type: string): ViewCreator | undefined;
 
     /**

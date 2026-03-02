@@ -5,14 +5,14 @@ import type {
 import type { GraphOptions } from './GraphOptions.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Options section for graph filter settings controlling which files appear in the graph.
  * @public
  * @unofficial
  */
 export interface GraphFilterOptions extends GraphOptions {
-    /** @todo Documentation incomplete. */
+    /** Search input component for filtering graph nodes by query. */
     search: SearchComponent;
 
-    /** @todo Documentation incomplete. */
+    /** Setting element containing the search input. */
     searchSetting: Setting;
 }

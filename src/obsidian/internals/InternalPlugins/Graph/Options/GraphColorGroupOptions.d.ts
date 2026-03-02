@@ -2,11 +2,11 @@ import type { GraphColorGroupOptionsGroup as GraphColorGroupOptionsGroup } from 
 import type { GraphOptions } from './GraphOptions.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Options section for managing color groups that visually categorize graph nodes.
  * @public
  * @unofficial
  */
 export interface GraphColorGroupOptions extends GraphOptions {
-    /** @todo Documentation incomplete. */
+    /** List of UI groups, each representing a user-defined color group entry. */
     groups: GraphColorGroupOptionsGroup[];
 }

@@ -1,26 +1,26 @@
 import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Built-in editor commands available through the CodeMirror adapter.
  * @public
  * @unofficial
  */
 export interface CodeMirrorAdapterExCommands {
-    /** @todo Documentation incomplete. */
+    /** Move the cursor one character to the left. */
     cursorCharLeft(editor: CodeMirrorEditor): void;
 
-    /** @todo Documentation incomplete. */
+    /** Auto-indent the current line or selection. */
     indentAuto(editor: CodeMirrorEditor): void;
 
-    /** @todo Documentation incomplete. */
+    /** Insert a new line and auto-indent. */
     newlineAndIndent(editor: CodeMirrorEditor): void;
 
-    /** @todo Documentation incomplete. */
+    /** Insert a new line before the current line and auto-indent. */
     newlineAndIndentBefore(editor: CodeMirrorEditor): void;
 
-    /** @todo Documentation incomplete. */
+    /** Redo the last undone change. */
     redo(editor: CodeMirrorEditor): void;
 
-    /** @todo Documentation incomplete. */
+    /** Undo the last change. */
     undo(editor: CodeMirrorEditor): void;
 }

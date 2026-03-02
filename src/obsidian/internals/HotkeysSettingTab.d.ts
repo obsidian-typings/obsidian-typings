@@ -4,14 +4,14 @@ import type {
 } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Setting tab for viewing and editing keyboard hotkeys.
  * @public
  * @unofficial
  */
 export interface HotkeysSettingTab extends SettingTab {
-    /** @todo Documentation incomplete. */
+    /** Search component for filtering hotkeys by name. */
     searchComponent: SearchComponent;
 
-    /** @todo Documentation incomplete. */
+    /** Update visibility of hotkey entries based on the current search filter. */
     updateHotkeyVisibility(): void;
 }

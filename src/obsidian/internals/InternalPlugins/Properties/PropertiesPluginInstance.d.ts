@@ -3,17 +3,17 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { PropertiesPlugin } from './PropertiesPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for properties, managing frontmatter metadata views.
  * @public
  * @unofficial
  */
 export interface PropertiesPluginInstance extends InternalPluginInstance<PropertiesPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is enabled by default. */
     defaultOn: false;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the properties plugin registration. */
     plugin: PropertiesPlugin;
 }

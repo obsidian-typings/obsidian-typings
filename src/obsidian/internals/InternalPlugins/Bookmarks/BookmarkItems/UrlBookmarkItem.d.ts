@@ -1,17 +1,17 @@
 import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Bookmark item representing a bookmarked URL.
  * @public
  * @unofficial
  */
 export interface UrlBookmarkItem extends BookmarkItem {
-    /** @todo Documentation incomplete. */
+    /** Display title of this URL bookmark. */
     title: string;
 
-    /** @todo Documentation incomplete. */
+    /** Discriminator indicating this is a URL bookmark. */
     type: 'url';
 
-    /** @todo Documentation incomplete. */
+    /** The bookmarked URL. */
     url: string;
 }

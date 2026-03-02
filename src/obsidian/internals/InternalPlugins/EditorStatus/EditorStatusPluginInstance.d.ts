@@ -3,20 +3,20 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { EditorStatusPlugin } from './EditorStatusPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for editor status, displaying editor information in the status bar.
  * @public
  * @unofficial
  */
 export interface EditorStatusPluginInstance extends InternalPluginInstance<EditorStatusPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is enabled by default. */
     defaultOn: true;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is hidden from the plugin list in settings. */
     hiddenFromList: true;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the editor status plugin registration. */
     plugin: EditorStatusPlugin;
 }

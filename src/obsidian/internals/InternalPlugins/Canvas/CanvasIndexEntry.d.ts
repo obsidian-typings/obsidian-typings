@@ -2,14 +2,14 @@ import type { CachedMetadata } from 'obsidian';
 import type { CanvasEmbed } from './CanvasEmbed.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a single entry in the canvas index, containing cached metadata and embeds for a canvas file.
  * @public
  * @unofficial
  */
 export interface CanvasIndexEntry {
-    /** @todo Documentation incomplete. */
+    /** Cached metadata for each node in the canvas, keyed by node ID. */
     caches: Record<string, CachedMetadata>;
 
-    /** @todo Documentation incomplete. */
+    /** List of embedded file references within the canvas. */
     embeds: CanvasEmbed[];
 }

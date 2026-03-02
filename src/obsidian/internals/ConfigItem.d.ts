@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Union type of all valid configuration item keys in the vault config.
  *
  * @public
  * @unofficial

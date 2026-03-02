@@ -1,4 +1,4 @@
-/** @todo Documentation incomplete */
+/** Augmentations for the WorkspaceSplit interface. */
 export {};
 
 declare module 'obsidian' {

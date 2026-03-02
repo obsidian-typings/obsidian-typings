@@ -2,7 +2,7 @@ import type { TypedViewConstructor } from '../Views/TypedViewConstructor.d.ts';
 import type { AudioView } from './AudioView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Constructor for creating AudioView instances.
  * @public
  * @unofficial
  */

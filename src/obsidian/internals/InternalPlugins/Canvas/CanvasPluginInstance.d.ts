@@ -10,35 +10,35 @@ import type { CanvasPlugin } from './CanvasPlugin.d.ts';
 import type { CanvasPluginInstanceOptions } from './CanvasPluginInstanceOptions.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for the Canvas internal plugin, managing canvas indexing, data, and rename operations.
  * @public
  * @unofficial
  */
 export interface CanvasPluginInstance extends InternalPluginInstance<CanvasPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the Obsidian app instance. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is enabled by default. */
     defaultOn: true;
 
-    /** @todo Documentation incomplete. */
+    /** Index for resolving links and embeds within canvas files. */
     index: CanvasIndex;
 
-    /** @todo Documentation incomplete. */
+    /** Manager for loading, saving, and handling canvas local data. */
     localDataManager: CanvasDataManager;
 
-    /** @todo Documentation incomplete. */
+    /** User-configurable options for the canvas plugin. */
     options: CanvasPluginInstanceOptions;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the parent canvas plugin. */
     plugin: CanvasPlugin;
 
-    /** @todo Documentation incomplete. */
+    /** Queue for processing file rename operations sequentially. */
     renameQueue: PromisedQueue;
 
-    /** @todo Documentation incomplete. */
+    /** Pending rename operations to be processed. */
     renames: unknown[];
 
-    /** @todo Documentation incomplete. */
+    /** Debounced function to process pending rename operations. */
     requestProcessRename: Debouncer<[], unknown>;
 }

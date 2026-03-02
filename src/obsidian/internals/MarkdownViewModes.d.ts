@@ -4,14 +4,14 @@ import type {
 } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Available view modes for a markdown view.
  * @public
  * @unofficial
  */
 export interface MarkdownViewModes {
-    /** @todo Documentation incomplete. */
+    /** Reading/preview mode renderer. */
     preview: MarkdownPreviewView;
 
-    /** @todo Documentation incomplete. */
+    /** Source/edit mode renderer. */
     source: MarkdownEditView;
 }

@@ -1,21 +1,21 @@
 /**
- * @todo Documentation incomplete.
+ * A map where each key is associated with a set of values.
  * @public
  * @unofficial
  */
 export interface MapOfSets<Key, Value> {
-    /** @todo Documentation incomplete. */
+    /** Internal map storing key-to-set mappings. */
     data: Map<Key, Set<Value>>;
 
-    /** @todo Documentation incomplete. */
+    /** Add a value to the set associated with the given key. */
     add(key: Key, value: Value): void;
 
-    /** @todo Documentation incomplete. */
+    /** Remove a value from the set associated with the given key. */
     delete(key: Key, value: Value): void;
 
-    /** @todo Documentation incomplete. */
+    /** Get the set of values for the given key, or null if not found. */
     get(key: Key): Set<Value> | null;
 
-    /** @todo Documentation incomplete. */
+    /** Get the values for the given key as an array. */
     getArray(key: Key): Value[];
 }

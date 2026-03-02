@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { AudioRecorderPluginInstance } from './AudioRecorderPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the audio recorder feature.
  * @public
  * @unofficial
  */

@@ -1,18 +1,18 @@
 /**
- * @todo Documentation incomplete.
+ * Represents a bounding rectangle with top, bottom, left, and right coordinates.
  * @public
  * @unofficial
  */
 export interface Coords {
-    /** @todo Documentation incomplete. */
+    /** Bottom edge coordinate. */
     bottom: number;
 
-    /** @todo Documentation incomplete. */
+    /** Left edge coordinate. */
     left: number;
 
-    /** @todo Documentation incomplete. */
+    /** Right edge coordinate. */
     right: number;
 
-    /** @todo Documentation incomplete. */
+    /** Top edge coordinate. */
     top: number;
 }

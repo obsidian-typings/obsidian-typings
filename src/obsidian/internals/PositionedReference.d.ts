@@ -4,7 +4,7 @@ import type {
 } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * A reference with position information in the source file.
  * @public
  * @unofficial
  */

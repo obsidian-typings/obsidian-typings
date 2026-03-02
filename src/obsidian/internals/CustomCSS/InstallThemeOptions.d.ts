@@ -1,15 +1,15 @@
 /**
- * @todo Documentation incomplete.
+ * Options for installing a theme from a repository.
  * @public
  * @unofficial
  */
 export interface InstallThemeOptions {
-    /** @todo Documentation incomplete. */
+    /** Author of the theme. */
     author: string;
 
-    /** @todo Documentation incomplete. */
+    /** Display name of the theme. */
     name: string;
 
-    /** @todo Documentation incomplete. */
+    /** GitHub repository identifier (e.g. "username/repo"). */
     repo: string;
 }

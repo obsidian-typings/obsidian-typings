@@ -4,53 +4,53 @@ import type {
 } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Tab switcher component for navigating between open tabs on mobile.
  * @public
  * @unofficial
  */
 export interface MobileTabSwitcher {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Directory path for cached tab previews. */
     cacheDir: string;
 
-    /** @todo Documentation incomplete. */
+    /** Container element for the tab switcher. */
     containerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Inner scrollable element containing tab previews. */
     innerScrollEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the tab switcher is currently visible. */
     isVisible: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Debounced function to re-render the tab switcher. */
     requestRender: Debouncer<[], void>;
 
-    /** @todo Documentation incomplete. */
+    /** Scroll container element. */
     scrollEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Weak map caching tab preview images by leaf reference. */
     tabPreviewLookup: WeakMap<object, unknown>;
 
-    /** @todo Documentation incomplete. */
+    /** Close the currently selected tab. */
     close(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Hide the tab switcher UI. */
     hide(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle workspace layout changes by updating the tab list. */
     onLayoutChange(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Render the tab switcher content. */
     render(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set up the directory for caching tab preview images. */
     setupCacheDir(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Show the tab switcher UI. */
     show(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Display the tab management context menu. */
     showTabManagementMenu(e: MouseEvent): void;
 }

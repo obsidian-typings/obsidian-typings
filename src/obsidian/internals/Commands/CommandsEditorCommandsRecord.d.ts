@@ -1,7 +1,7 @@
 import type { Command } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Record mapping command IDs to Command objects with editor callbacks.
  * @public
  * @unofficial
  */

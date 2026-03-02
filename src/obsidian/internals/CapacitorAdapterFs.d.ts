@@ -2,83 +2,83 @@ import type { CapacitorFileEntry } from './CapacitorFileEntry.d.ts';
 import type { WatchAndStatAllResult } from './WatchAndStatAllResult.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * File system adapter for Capacitor (mobile) platform.
  * @public
  * @unofficial
  */
 export interface CapacitorAdapterFs {
-    /** @todo Documentation incomplete. */
+    /** Base directory path for the file system, or null if not initialized. */
     dir: string | null;
 
-    /** @todo Documentation incomplete. */
+    /** Base URI for the file system. */
     uri: string;
 
-    /** @todo Documentation incomplete. */
+    /** Append text data to a file. */
     append(realPath: string, data: string): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Copy a file to a new path. */
     copy(realPath: string, newRealPath: string): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Delete a file at the given path. */
     delete(realPath: string): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether a file exists at the given path. */
     exists(realPath: string): Promise<boolean>;
 
-    /** @todo Documentation incomplete. */
+    /** Get the native platform URI for a file path. */
     getNativeUri(realPath: string): string;
 
-    /** @todo Documentation incomplete. */
+    /** Get the URI for a file path. */
     getUri(realPath: string): string;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize the file system adapter. */
     init(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Create a directory at the given path. */
     mkdir(realPath: string): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Open a file using the native platform handler. */
     open(realPath: string): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Read a file as text. */
     read(realPath: string): Promise<string>;
 
-    /** @todo Documentation incomplete. */
+    /** Read a file as binary data. */
     readBinary(realPath: string): Promise<ArrayBuffer>;
 
-    /** @todo Documentation incomplete. */
+    /** List entries in a directory. */
     readdir(realPath: string): Promise<CapacitorFileEntry[]>;
 
-    /** @todo Documentation incomplete. */
+    /** Rename or move a file to a new path. */
     rename(realPath: string, newRealPath: string): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Remove a directory. */
     rmdir(realPath: string): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Set the creation and modification times for a file. */
     setTimes(realPath: string, ctime: number, mtime: number): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Get file statistics for the given path. */
     stat(realPath: string): Promise<CapacitorFileEntry>;
 
-    /** @todo Documentation incomplete. */
+    /** Move a file to the system trash. */
     trash(realPath: string): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Verify and download an iCloud file if it is not yet available locally. */
     verifyIcloud(realPath: string): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Start watching a path for file system changes. */
     watch(realPath: string): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Watch a path and return stat information for all contained files. */
     watchAndStatAll(realPath: string): Promise<WatchAndStatAllResult>;
 
-    /** @todo Documentation incomplete. */
+    /** Write text data to a file. */
     write(realPath: string, data: string): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Write binary data to a file. */
     writeBinary(realPath: string, data: ArrayBuffer): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Write binary data to a file using the internal storage path. */
     writeBinaryInternal(realPath: string, data: ArrayBuffer): Promise<void>;
 }

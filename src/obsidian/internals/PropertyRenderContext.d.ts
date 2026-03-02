@@ -2,7 +2,7 @@ import type { App } from 'obsidian';
 import type { MetadataEditor } from './MetadataEditor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Context provided to property widgets for rendering and interaction.
  * @public
  * @unofficial
  */

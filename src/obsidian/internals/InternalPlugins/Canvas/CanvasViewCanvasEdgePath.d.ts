@@ -1,12 +1,12 @@
 /**
- * @todo Documentation incomplete.
+ * SVG path elements for rendering a canvas edge, with separate paths for display and interaction.
  * @public
  * @unofficial
  */
 export interface CanvasViewCanvasEdgePath {
-    /** @todo Documentation incomplete. */
+    /** SVG path element used for the visible edge rendering. */
     display: SVGPathElement;
 
-    /** @todo Documentation incomplete. */
+    /** SVG path element used as a wider invisible hit area for interaction. */
     interaction: SVGPathElement;
 }

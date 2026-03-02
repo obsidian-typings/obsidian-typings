@@ -1,15 +1,15 @@
 /**
- * @todo Documentation incomplete.
+ * Base data shared by all canvas node types.
  * @public
  * @unofficial
  */
 export interface CanvasViewCanvasNodeUnknownData {
-    /** @todo Documentation incomplete. */
+    /** Path to the associated file. */
     file: string;
 
-    /** @todo Documentation incomplete. */
+    /** Unique identifier of the node. */
     id: string;
 
-    /** @todo Documentation incomplete. */
+    /** Type of the canvas node (e.g. "text", "file", "link", "group"). */
     type: string;
 }

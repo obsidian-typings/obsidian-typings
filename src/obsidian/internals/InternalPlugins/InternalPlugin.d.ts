@@ -13,89 +13,89 @@ import type { InternalPlugins } from './InternalPlugins.d.ts';
 import type { RibbonItem } from './RibbonItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Base interface for an internal plugin registration, managing lifecycle, commands, and views.
  * @public
  * @unofficial
  */
 export interface InternalPlugin<InternalPluginInstance> extends Component {
-    /** @todo Documentation incomplete. */
+    /** Button elements added by this plugin. */
     addedButtonEls: HTMLDivElement[];
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Commands registered by this plugin. */
     commands: Command[];
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is currently enabled. */
     enabled: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin has a status bar item. */
     hasStatusBarItem: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** The plugin instance containing the actual logic. */
     instance: InternalPluginInstance;
 
-    /** @todo Documentation incomplete. */
+    /** Timestamp of the last settings save. */
     lastSave: number;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the internal plugins manager. */
     manager: InternalPlugins;
 
-    /** @todo Documentation incomplete. */
+    /** Mobile file info renderers registered by this plugin. */
     mobileFileInfo: MobileFileInfo[];
 
-    /** @todo Documentation incomplete. */
+    /** Debounced handler for config file changes. */
     onConfigFileChange: Debouncer<[], Promise<void>>;
 
-    /** @todo Documentation incomplete. */
+    /** Ribbon items registered by this plugin. */
     ribbonItems: RibbonItem[];
 
-    /** @todo Documentation incomplete. */
+    /** Status bar element for this plugin, or null if none. */
     statusBarEl: HTMLDivElement | null;
 
-    /** @todo Documentation incomplete. */
+    /** View creators registered by this plugin, keyed by view type. */
     views: Record<string, ViewCreator>;
 
-    /** @todo Documentation incomplete. */
+    /** Add a settings tab for this plugin. */
     addSettingTab(settingTab: PluginSettingTab): void;
 
-    /** @todo Documentation incomplete. */
+    /** Delete persisted data for this plugin. */
     deleteData(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Disable this plugin. */
     disable(isDisabledByUser?: boolean): void;
 
-    /** @todo Documentation incomplete. */
+    /** Enable this plugin. */
     enable(isEnabledByUser?: boolean): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Get the last modified time of the plugin config file. */
     getModifiedTime(): Promise<number | undefined>;
 
-    /** @todo Documentation incomplete. */
+    /** Handle changes to the plugin config file. */
     handleConfigFileChange(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize this plugin. */
     init(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Load persisted data for this plugin. */
     loadData(): Promise<object | null>;
 
-    /** @todo Documentation incomplete. */
+    /** Register a global command for this plugin. */
     registerGlobalCommand(command: Command): void;
 
-    /** @todo Documentation incomplete. */
+    /** Register a mobile file info renderer callback. */
     registerMobileFileInfo(renderCallback: (el: HTMLElement) => void): void;
 
-    /** @todo Documentation incomplete. */
+    /** Register a ribbon item button for this plugin. */
     registerRibbonItem(title: string, icon: IconName, callback: () => Promise<void>): void;
 
-    /** @todo Documentation incomplete. */
+    /** Register a status bar item for this plugin. */
     registerStatusBarItem(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Register a view type with its creator function. */
     registerViewType(type: string, creator: ViewCreator): void;
 
-    /** @todo Documentation incomplete. */
+    /** Save data for this plugin. */
     saveData(data: object): Promise<void>;
 }

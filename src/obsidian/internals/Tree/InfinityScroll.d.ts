@@ -1,75 +1,75 @@
 /**
- * @todo Documentation incomplete.
+ * Virtual scrolling component that renders only visible items in large lists for performance.
  * @public
  * @unofficial
  */
 export interface InfinityScroll {
-    /** @todo Documentation incomplete. */
+    /** Current visible height of the scroll container. */
     height: number;
 
-    /** @todo Documentation incomplete. */
+    /** Last recorded scroll position. */
     lastScroll: number;
 
-    /** @todo Documentation incomplete. */
+    /** Queued computation task, or null if none is pending. */
     queued: unknown | null;
 
-    /** @todo Documentation incomplete. */
+    /** Number of items to render per block. */
     renderBlockSize: number;
 
-    /** @todo Documentation incomplete. */
+    /** Root element of the virtual scroll container. */
     rootEl: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Scrollable element that handles scroll events. */
     scrollEl: HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the width should be explicitly set on items. */
     setWidth: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Current visible width of the scroll container. */
     width: number;
 
-    /** @todo Documentation incomplete. */
+    /** Internal method to perform layout calculations. */
     _layout(x: unknown, y: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Internal method to measure element dimensions. */
     _measure(x: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Internal method to precompute layout information. */
     _precompute(x: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Compute visible items and update the virtual display. */
     compute(x: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Find the top position of an element within the scroll container. */
     findElementTop(x: unknown, y: unknown, z: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the top offset of the root element. */
     getRootTop(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Invalidate the cached layout for specific items. */
     invalidate(x: unknown, y: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Invalidate all cached layout information. */
     invalidateAll(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Measure dimensions for the given elements. */
     measure(x: unknown, y: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle resize events and recalculate layout. */
     onResize(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle scroll events and update the virtual display. */
     onScroll(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Queue a deferred computation of visible items. */
     queueCompute(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Scroll the container to bring the specified element into view. */
     scrollIntoView(x: unknown, y: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the virtual scroll state with new parameters. */
     update(x: unknown, y: unknown, z: unknown, u: unknown, v: unknown, w: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the virtual display to reflect current scroll position. */
     updateVirtualDisplay(x: unknown): unknown;
 }

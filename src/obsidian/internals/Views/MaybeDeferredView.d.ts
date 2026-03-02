@@ -2,7 +2,7 @@ import type { View } from 'obsidian';
 import type { DeferredView } from './DeferredView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Union type representing a view that may be either fully loaded or a deferred placeholder.
  *
  * @public
  * @unofficial

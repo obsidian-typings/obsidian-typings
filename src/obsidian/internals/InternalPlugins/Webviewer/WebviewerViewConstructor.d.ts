@@ -3,7 +3,7 @@ import type { WebviewerPluginInstance } from './WebviewerPluginInstance.d.ts';
 import type { WebviewerView } from './WebviewerView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Constructor interface for creating WebviewerView instances.
  * @public
  * @unofficial
  */

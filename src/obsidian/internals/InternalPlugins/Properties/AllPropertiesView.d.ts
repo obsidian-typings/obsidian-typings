@@ -2,7 +2,7 @@ import type { ItemView } from 'obsidian';
 import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View that displays all properties (frontmatter keys) across the vault.
  * @public
  * @unofficial
  */
@@ -27,7 +27,7 @@ export interface AllPropertiesView extends ItemView {
      */
     getViewType(): typeof ViewType.AllProperties;
 
-    /** @todo Documentation incomplete */
+    /** Check whether the given object is a property item. */
     isItem(e: unknown): boolean;
 
     /**
@@ -49,7 +49,7 @@ export interface AllPropertiesView extends ItemView {
      */
     onToggleShowSearch(): void;
 
-    /** @todo Documentation incomplete */
+    /** Set the visibility of the search filter. */
     setShowSearch(e: boolean): void;
 
     /**
@@ -64,10 +64,10 @@ export interface AllPropertiesView extends ItemView {
      */
     showSearch(): void;
 
-    /** @todo Documentation incomplete */
+    /** Begin inline renaming of a property. */
     startRename(e: unknown): Promise<unknown>;
 
-    /** @todo Documentation incomplete */
+    /** Refresh the properties list. */
     update(): void;
 
     /**

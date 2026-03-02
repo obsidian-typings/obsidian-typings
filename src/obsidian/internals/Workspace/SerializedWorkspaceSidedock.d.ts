@@ -1,14 +1,14 @@
 import type { SerializedWorkspaceItem } from './SerializedWorkspaceItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Serialized representation of a workspace sidedock (left or right sidebar).
  * @public
  * @unofficial
  */
 export interface SerializedWorkspaceSidedock extends SerializedWorkspaceItem {
-    /** @todo Documentation incomplete. */
+    /** Whether the sidedock is collapsed. */
     collapsed: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Width of the sidedock in pixels. */
     width: number;
 }

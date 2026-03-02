@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Record mapping theme names to their available update information.
  * @public
  * @unofficial
  */

@@ -3,14 +3,14 @@ import type { CanvasPluginInstance } from '../InternalPlugins/Canvas/CanvasPlugi
 import type { LinkUpdater } from './LinkUpdater.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Link updater for canvas files, handling link updates when files are renamed or moved.
  * @public
  * @unofficial
  */
 export interface CanvasLinkUpdater extends LinkUpdater {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Canvas plugin instance used to access canvas data. */
     canvas: CanvasPluginInstance;
 }

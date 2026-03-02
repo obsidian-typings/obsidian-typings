@@ -64,7 +64,7 @@ declare module 'obsidian' {
         app: App;
 
         /**
-         * @todo Documentation incomplete.
+         * Backlink in document plugin instance, if enabled.
          * @unofficial
          */
         backlinkInDocument?: unknown;
@@ -85,19 +85,19 @@ declare module 'obsidian' {
         editorExtensions: Extension[];
 
         /**
-         * @todo Documentation incomplete.
+         * The global editor suggest manager for live autocomplete.
          * @unofficial
          */
         editorSuggest: EditorSuggestEx;
 
         /**
-         * @todo Documentation incomplete.
+         * The workspace split that contains popout (floating) windows.
          * @unofficial
          */
         floatingSplit: WorkspaceSplit;
 
         /**
-         * @todo Documentation incomplete.
+         * Registered sources for hover link previews.
          * @unofficial
          */
         hoverLinkSources: WorkspaceHoverLinkSourcesRecord;
@@ -110,13 +110,13 @@ declare module 'obsidian' {
         lastActiveFile: TFile;
 
         /**
-         * @todo Documentation incomplete.
+         * Whether the last active tab group had stacked tabs enabled.
          * @unofficial
          */
         lastTabGroupStacked: boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Queue of layout items pending initialization.
          * @unofficial
          */
         layoutItemQueue: unknown[];
@@ -139,7 +139,7 @@ declare module 'obsidian' {
         leftRibbon: WorkspaceRibbon;
 
         /**
-         * @todo Documentation incomplete.
+         * Button element for toggling the left sidebar.
          * @unofficial
          */
         leftSidebarToggleButtonEl: HTMLElement;
@@ -160,7 +160,7 @@ declare module 'obsidian' {
         mobileFileInfos: unknown[];
 
         /**
-         * @todo Documentation incomplete.
+         * Callbacks queued to run when the layout is ready.
          * @unofficial
          */
         onLayoutReadyCallbacks?: unknown;
@@ -196,7 +196,7 @@ declare module 'obsidian' {
         rightRibbon: WorkspaceRibbon;
 
         /**
-         * @todo Documentation incomplete.
+         * Button element for toggling the right sidebar.
          * @unofficial
          */
         rightSidebarToggleButtonEl: HTMLElement;
@@ -560,13 +560,13 @@ declare module 'obsidian' {
         getUnpinnedLeaf(): WorkspaceLeaf;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle the context menu for an external URL link.
          * @unofficial
          */
         handleExternalLinkContextMenu(menu: Menu, linkText: string): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle the context menu for an internal link.
          * @unofficial
          * @since 0.12.10
          */
@@ -1143,25 +1143,25 @@ declare module 'obsidian' {
         onLayoutReady(callback: () => any): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Trigger the link context menu event with the given arguments.
          * @unofficial
          */
         onLinkContextMenu(args: unknown[]): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Trigger the quick preview event with the given arguments.
          * @unofficial
          */
         onQuickPreview(args: unknown[]): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a resize event on the workspace.
          * @unofficial
          */
         onResize(): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle the start of a link drag operation from a leaf.
          * @unofficial
          */
         onStartLink(leaf: WorkspaceLeaf): void;
@@ -1371,7 +1371,7 @@ declare module 'obsidian' {
         unregisterObsidianProtocolHandler(protocol: string): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Update the frameless window chrome (title bar) display.
          * @unofficial
          */
         updateFrameless(): void;

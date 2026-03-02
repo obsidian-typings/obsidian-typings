@@ -1,7 +1,7 @@
 import type { InternalPluginNameType } from './InternalPluginNameType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Record mapping internal plugin names to their enabled/disabled state.
  * @public
  * @unofficial
  */

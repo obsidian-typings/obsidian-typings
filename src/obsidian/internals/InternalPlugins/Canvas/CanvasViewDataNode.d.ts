@@ -1,23 +1,23 @@
 import type { CanvasViewCanvasNodeUnknownData } from './CanvasViewCanvasNodeUnknownData.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Serialized data for a canvas node.
  * @public
  * @unofficial
  */
 export interface CanvasViewDataNode extends CanvasViewCanvasNodeUnknownData {
-    /** @todo Documentation incomplete. */
+    /** Height of the node in pixels. */
     height: number;
 
-    /** @todo Documentation incomplete. */
+    /** Subpath within the file (e.g. heading or block reference). */
     subpath?: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Width of the node in pixels. */
     width: number;
 
-    /** @todo Documentation incomplete. */
+    /** X position of the node on the canvas. */
     x: number;
 
-    /** @todo Documentation incomplete. */
+    /** Y position of the node on the canvas. */
     y: number;
 }

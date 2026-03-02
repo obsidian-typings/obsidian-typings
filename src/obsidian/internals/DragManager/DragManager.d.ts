@@ -9,105 +9,105 @@ import type { DragStartEvent } from './DragStartEvent.d.ts';
 import type { DropResult } from './DropResult.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Manager for drag-and-drop operations throughout the application.
  * @public
  * @unofficial
  */
 export interface DragManager {
-    /** @todo Documentation incomplete. */
+    /** Element displaying the current drop action label. */
     actionEl: HTMLElement | null;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Currently active draggable item. */
     draggable: Draggable | null;
 
-    /** @todo Documentation incomplete. */
+    /** Information about the initial drag start event. */
     dragStart: DragStartEvent | null;
 
-    /** @todo Documentation incomplete. */
+    /** Ghost element shown while dragging. */
     ghostEl: HTMLElement | null;
 
-    /** @todo Documentation incomplete. */
+    /** CSS class currently applied to the hover target. */
     hoverClass: string;
 
-    /** @todo Documentation incomplete. */
+    /** Element currently being hovered over during drag. */
     hoverEl: HTMLElement | null;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the drag-over event has been handled by a drop target. */
     isDragOverHandled: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Overlay element shown during drag operations to indicate drop zones. */
     overlayEl: HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the overlay should be hidden on the next update. */
     shouldHideOverlay: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** CSS class applied to the source elements during drag. */
     sourceClass: string;
 
-    /** @todo Documentation incomplete. */
+    /** Elements from which the drag originated. */
     sourceEls: HTMLElement[] | null;
 
-    /** @todo Documentation incomplete. */
+    /** Start a drag operation for a single file. */
     dragFile(event: DragEvent, file: TFile, source?: unknown): Draggable;
 
-    /** @todo Documentation incomplete. */
+    /** Start a drag operation for multiple files. */
     dragFiles(event: DragEvent, files: TAbstractFile[], source?: unknown): Draggable | null;
 
-    /** @todo Documentation incomplete. */
+    /** Start a drag operation for a folder. */
     dragFolder(event: DragEvent, folder: TFolder, source?: unknown): Draggable;
 
-    /** @todo Documentation incomplete. */
+    /** Start a drag operation for a link. */
     dragLink(event: DragEvent, linkText: string, sourcePath: string, title?: string, source?: unknown): Draggable;
 
-    /** @todo Documentation incomplete. */
+    /** Register an element as a drag source with a callback to produce a draggable. */
     handleDrag(el: HTMLElement, draggableGetter: (event: DragEvent) => Draggable | null): void;
 
-    /** @todo Documentation incomplete. */
+    /** Register an element as a drop target with a handler callback. */
     handleDrop(
         el: HTMLElement,
         dropHandler: (event: DragEvent, draggable: Draggable, isOver: boolean) => DropResult | null,
         draggable?: boolean
     ): void;
 
-    /** @todo Documentation incomplete. */
+    /** Hide the drop zone overlay. */
     hideOverlay(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the end of a drag operation, cleaning up state. */
     onDragEnd(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the drag-leave event on a drop target. */
     onDragLeave(event: DragEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the drag-over event to update hover state. */
     onDragOver(event: DragEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the first drag-over event when entering a drop zone. */
     onDragOverFirst(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle the start of a drag operation with a draggable item. */
     onDragStart(event: DragEvent, draggable: Draggable): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a global drag start event. */
     onDragStartGlobal(event: DragEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle touch end event for mobile drag operations. */
     onTouchEnd(event: TouchEvent): void;
 
-    /** @todo Documentation incomplete. */
+    /** Remove the drop zone overlay element from the DOM. */
     removeOverlay(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Set the current drop action label. */
     setAction(action: string | null): void;
 
-    /** @todo Documentation incomplete. */
+    /** Show the drop zone overlay at the specified position. */
     showOverlay(doc: Document, rect: DOMRect): void;
 
-    /** @todo Documentation incomplete. */
+    /** Update the hover target element and its CSS class. */
     updateHover(hoverEl: HTMLElement | null, hoverClass: string): void;
 
-    /** @todo Documentation incomplete. */
+    /** Update the drag source elements and their CSS class. */
     updateSource(sourceEls: HTMLElement[] | null, sourceClass: string): void;
 }

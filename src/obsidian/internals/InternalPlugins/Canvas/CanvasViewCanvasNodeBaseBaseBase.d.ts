@@ -1,108 +1,108 @@
 /**
- * @todo Documentation incomplete.
+ * Lowest-level base interface for canvas nodes, providing core properties and interaction methods.
  * @public
  * @unofficial
  */
 export interface CanvasViewCanvasNodeBaseBaseBase {
-    /** @todo Documentation incomplete. */
+    /** Whether the node is currently attached to the canvas DOM. */
     isAttached?: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the node currently has focus. */
     isFocused?: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Bounding rectangle of the node. */
     rect: CanvasRect;
 
-    /** @todo Documentation incomplete. */
+    /** Attach the node to the canvas DOM. */
     attach(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Remove focus from the node. */
     blur(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Deselect the node. */
     deselect(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Destroy the node and release its resources. */
     destroy(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Detach the node from the canvas DOM. */
     detach(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set focus on the node. */
     focus(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the bounding box of the node. */
     getBBox(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get all files connected to this node via edges. */
     getConnectedFiles(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the serialized data for this node. */
     getData(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize the node after construction. */
     initialize(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether this node supports editing. */
     isEditable(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Move and resize the node to the specified bounds. */
     moveAndResize(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Move the node to the specified position. */
     moveTo(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle click events on the node. */
     onClick(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle pointer down on a connection handle to start edge creation. */
     onConnectionPointerdown(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle context menu events on the node. */
     onContextMenu(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle pointer down events on the node. */
     onPointerdown(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle double-click on a resize handle to auto-size the node. */
     onResizeDblclick(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle pointer down on a resize handle to start resizing. */
     onResizePointerdown(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Perform cleanup before detaching the node. */
     preDetach(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Render the node to the canvas. */
     render(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Render the node's z-index CSS property. */
     renderZIndex(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Resize the node to the specified dimensions. */
     resize(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Mark the node as selected. */
     select(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set the color of the node. */
     setColor(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set the serialized data for this node. */
     setData(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set whether the node is in editing mode. */
     setIsEditing(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Show the context menu for this node. */
     showMenu(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Enter editing mode for the node's content. */
     startEditing(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the rendering breakpoint based on the node's current size. */
     updateBreakpoint(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the z-index of the node in the stacking order. */
     updateZIndex(): unknown;
 }

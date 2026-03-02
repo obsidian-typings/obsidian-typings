@@ -1,7 +1,7 @@
 import type { InternalPluginName } from '../../implementations/Constants/InternalPluginName.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Union type of all internal plugin name string literals.
  *
  * @public
  * @unofficial

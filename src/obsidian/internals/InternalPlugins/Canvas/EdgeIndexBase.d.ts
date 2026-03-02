@@ -1,17 +1,17 @@
 import type { EdgeIndexBaseBase } from './EdgeIndexBaseBase.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Base interface for the spatial edge index, extending the R-tree with custom insert/remove behavior.
  * @public
  * @unofficial
  */
 export interface EdgeIndexBase extends EdgeIndexBaseBase {
-    /** @todo Documentation incomplete. */
+    /** Insert an item into the spatial index. */
     insert(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Remove an item from the spatial index. */
     remove(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Convert an item to its bounding box representation. */
     toBBox(arg1: unknown): unknown;
 }

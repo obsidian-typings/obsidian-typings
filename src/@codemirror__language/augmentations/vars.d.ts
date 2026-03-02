@@ -9,8 +9,9 @@ export {};
 
 declare module '@codemirror/language' {
     /**
+     * A facet that specifies token types for which spellcheck should be ignored.
+     *
      * @see https://github.com/lishid/cm-language/blob/main/src/stream-parser.ts
-     * @todo Documentation incomplete.
      * @remark This only exists and can only be used in Obsidian.
      * @unofficial
      */

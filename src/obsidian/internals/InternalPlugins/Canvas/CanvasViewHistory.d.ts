@@ -1,38 +1,38 @@
 import type { CanvasViewData } from './CanvasData.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Manages undo/redo history for canvas state changes.
  * @public
  * @unofficial
  */
 export interface CanvasViewHistory {
-    /** @todo Documentation incomplete. */
+    /** Index of the current state in the history stack. */
     current: number;
 
-    /** @todo Documentation incomplete. */
+    /** Array of historical canvas states. */
     data: CanvasViewData[];
 
-    /** @todo Documentation incomplete. */
+    /** Maximum number of history entries to retain. */
     max: number;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether a redo operation is available. */
     canRedo(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether an undo operation is available. */
     canUndo(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Clear all history entries. */
     clear(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Push a new state onto the history stack. */
     push(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Redo the last undone action and return the restored state. */
     redo(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Replace the current history entry with a new state. */
     replace(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Undo the last action and return the previous state. */
     undo(): unknown;
 }

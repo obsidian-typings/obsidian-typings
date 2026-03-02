@@ -1,7 +1,7 @@
 import type { FileStats } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a file or folder entry in the data adapter's file listing.
  * @public
  * @unofficial
  */

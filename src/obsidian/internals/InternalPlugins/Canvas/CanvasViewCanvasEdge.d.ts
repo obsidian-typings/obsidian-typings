@@ -6,125 +6,125 @@ import type { CanvasViewCanvasEdgeLink } from './CanvasViewCanvasEdgeLink.d.ts';
 import type { CanvasViewCanvasEdgePath } from './CanvasViewCanvasEdgePath.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a connection (edge) between two nodes on the canvas.
  * @public
  * @unofficial
  */
 export interface CanvasViewCanvasEdge {
-    /** @todo Documentation incomplete. */
+    /** Bounding box of the edge for spatial indexing. */
     bbox: BBox;
 
-    /** @todo Documentation incomplete. */
+    /** Bezier curve data used for rendering the edge path. */
     bezier: Bezier;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the parent canvas instance. */
     canvas: CanvasViewCanvas;
 
-    /** @todo Documentation incomplete. */
+    /** Color of the edge line (CSS color string or preset name). */
     color: string;
 
-    /** @todo Documentation incomplete. */
+    /** Link information for the source endpoint of the edge. */
     from: CanvasViewCanvasEdgeLink;
 
-    /** @todo Documentation incomplete. */
+    /** Line end marker at the source endpoint, or null if none. */
     fromLineEnd: CanvasViewCanvasEdgeLineEnd | null;
 
-    /** @todo Documentation incomplete. */
+    /** Unique identifier for this edge. */
     id: string;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the edge has been initialized. */
     initialized: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Whether the edge is currently attached to the canvas DOM. */
     isAttached?: unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Text label displayed on the edge. */
     label: string;
 
-    /** @todo Documentation incomplete. */
+    /** SVG group element containing the line end markers. */
     lineEndGroupEl: SVGGElement;
 
-    /** @todo Documentation incomplete. */
+    /** SVG group element containing the edge line paths. */
     lineGroupEl: SVGGElement;
 
-    /** @todo Documentation incomplete. */
+    /** SVG path elements for the edge (display and interaction). */
     path: CanvasViewCanvasEdgePath;
 
-    /** @todo Documentation incomplete. */
+    /** Link information for the target endpoint of the edge. */
     to: CanvasViewCanvasEdgeLink;
 
-    /** @todo Documentation incomplete. */
+    /** Line end marker at the target endpoint, or null if none. */
     toLineEnd: CanvasViewCanvasEdgeLineEnd | null;
 
-    /** @todo Documentation incomplete. */
+    /** Additional data properties not covered by known fields. */
     unknownData: Object;
 
-    /** @todo Documentation incomplete. */
+    /** Attach the edge to the canvas DOM. */
     attach(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Remove focus from the edge. */
     blur(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Create a line end marker element for the specified end type. */
     createEdgeEnd(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Deselect the edge. */
     deselect(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Destroy the edge and release its resources. */
     destroy(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Detach the edge from the canvas DOM. */
     detach(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Open an inline editor for the edge's label. */
     editLabel(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set focus on the edge. */
     focus(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the bounding box of the edge. */
     getBBox(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the center point of the edge path. */
     getCenter(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Get the serialized data for this edge. */
     getData(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize the edge after construction. */
     initialize(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle click events on the edge. */
     onClick(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle pointer down on a connection point to start re-routing. */
     onConnectionPointerdown(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Handle context menu events on the edge. */
     onContextMenu(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Render the edge to the canvas. */
     render(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Mark the edge as selected. */
     select(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set the color of the edge. */
     setColor(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set the serialized data for this edge. */
     setData(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Set the text label of the edge. */
     setLabel(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Show the context menu for this edge. */
     showMenu(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Update the edge after its connected nodes have moved. */
     update(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Recalculate and update the SVG path of the edge. */
     updatePath(): unknown;
 }

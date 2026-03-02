@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { WebviewerPluginInstance } from './WebviewerPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the embedded web browser feature.
  * @public
  * @unofficial
  */

@@ -3,7 +3,7 @@ import type { TypedViewConstructor } from '../../Views/TypedViewConstructor.d.ts
 import type { CanvasPluginInstance } from './CanvasPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Constructor interface for creating CanvasView instances.
  * @public
  * @unofficial
  */

@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { SlashCommandPluginInstance } from './SlashCommandPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the slash command suggestions feature.
  * @public
  * @unofficial
  */

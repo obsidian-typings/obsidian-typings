@@ -3,44 +3,44 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { AudioRecorderPlugin } from './AudioRecorderPlugin.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for the audio recorder, providing methods to record and save audio clips.
  * @public
  * @unofficial
  */
 export interface AudioRecorderPluginInstance extends InternalPluginInstance<AudioRecorderPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** File extension used for saved audio recordings. */
     extension: string;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the audio recorder plugin registration. */
     plugin: AudioRecorderPlugin;
 
-    /** @todo Documentation incomplete. */
+    /** Active MediaRecorder instance, or null when not recording. */
     recorder: MediaRecorder | null;
 
-    /** @todo Documentation incomplete. */
+    /** Whether audio is currently being recorded. */
     recording: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Check if the user has granted microphone permission. */
     checkPermission(): Promise<boolean>;
 
-    /** @todo Documentation incomplete. */
+    /** Initiate the audio recording flow. */
     onRecordAudio(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Start a new audio recording session. */
     onStartRecording(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Stop the current audio recording session. */
     onStopRecording(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Save the recorded audio buffer to a file in the vault. */
     saveRecording(audioBuffer: ArrayBuffer): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Display a recording status message or error to the user. */
     showRecordingMessage(message: string, isError: boolean): void;
 
-    /** @todo Documentation incomplete. */
+    /** Begin recording audio from the given media stream. */
     startRecording(stream: MediaStream): void;
 }

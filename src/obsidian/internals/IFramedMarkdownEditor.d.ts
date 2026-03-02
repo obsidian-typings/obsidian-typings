@@ -3,7 +3,7 @@ import type { ViewUpdate } from '@codemirror/view';
 import type { MarkdownScrollableEditView } from './MarkdownScrollableEditView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * A markdown editor that runs inside an iframe, used for embedded editable views.
  * @public
  * @unofficial
  */

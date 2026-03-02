@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Navigation bar component for the mobile interface.
  * @public
  * @unofficial
  */

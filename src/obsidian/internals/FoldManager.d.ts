@@ -1,28 +1,26 @@
-/** @todo Documentation incomplete */
-
 import type { App } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Manager for persisting and restoring editor fold states.
  * @public
  * @unofficial
  */
 export interface FoldManager {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Remove stale fold data from the cache. */
     cleanup(): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Load fold state for the given file or view. */
     load(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Load fold state from a specific path. */
     loadPath(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Save fold state for the given file or view. */
     save(arg1: unknown, arg2: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Save fold state to a specific path. */
     savePath(arg1: unknown, arg2: unknown): unknown;
 }

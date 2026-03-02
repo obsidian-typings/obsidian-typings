@@ -1,36 +1,36 @@
 /**
- * @todo Documentation incomplete.
+ * A controllable task with start, stop, and cancel lifecycle.
  * @public
  * @unofficial
  */
 export interface Runnable {
-    /** @todo Documentation incomplete. */
+    /** Whether the runnable has been cancelled. */
     cancelled: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Callback invoked when the runnable is cancelled. */
     onCancel: null | (() => void);
 
-    /** @todo Documentation incomplete. */
+    /** Callback invoked when the runnable starts. */
     onStart: null | (() => void);
 
-    /** @todo Documentation incomplete. */
+    /** Callback invoked when the runnable stops. */
     onStop: null | (() => void);
 
-    /** @todo Documentation incomplete. */
+    /** Whether the runnable is currently running. */
     running: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Cancel the runnable. */
     cancel(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether the runnable has been cancelled. */
     isCancelled(): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Check whether the runnable is currently running. */
     isRunning(): boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Start the runnable. */
     start(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Stop the runnable. */
     stop(): void;
 }

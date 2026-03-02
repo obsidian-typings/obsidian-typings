@@ -30,7 +30,7 @@ declare module 'obsidian' {
         parent: Scope | undefined;
 
         /**
-         * @todo Documentation incomplete.
+         * Container element that constrains tab-key focus cycling.
          * @unofficial
          */
         tabFocusContainerEl: HTMLElement | null;
@@ -71,7 +71,7 @@ declare module 'obsidian' {
         register(modifiers: Modifier[] | null, key: string | null, func: KeymapEventListener): KeymapEventHandler;
 
         /**
-         * @todo Documentation incomplete.
+         * Set the container element for constraining tab-key focus cycling.
          * @unofficial
          */
         setTabFocusContainer(container: HTMLElement): void;

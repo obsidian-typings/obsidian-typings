@@ -2,12 +2,12 @@ import type { View } from 'obsidian';
 import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View for browsing and navigating tags in the vault.
  * @public
  * @unofficial
  */
 export interface TagView extends View {
-    /** @todo Documentation incomplete */
+    /** Get the identifier of a tag tree node. */
     getNodeId(e: unknown): unknown;
 
     /**
@@ -15,16 +15,16 @@ export interface TagView extends View {
      */
     getViewType(): typeof ViewType.Tag;
 
-    /** @todo Documentation incomplete */
+    /** Check whether the given item is a valid tag view item. */
     isItem(item: unknown): boolean;
 
-    /** @todo Documentation incomplete */
+    /** Handle pressing Enter on the currently focused tag item. */
     onKeyEnterInFocus(event: KeyboardEvent): void;
 
-    /** @todo Documentation incomplete */
+    /** Set whether all tag groups are collapsed. */
     setIsAllCollapsed(e: unknown): void;
 
-    /** @todo Documentation incomplete */
+    /** Set whether tags should be displayed in a nested hierarchy. */
     setUseHierarchy(e: unknown): void;
 
     /**

@@ -2,7 +2,7 @@ import type { WorkspaceLeaf } from 'obsidian';
 import type { View } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Factory function type that creates a typed view instance for a given workspace leaf.
  *
  * @public
  * @unofficial

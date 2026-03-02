@@ -1,23 +1,23 @@
 import type { IconName } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a button item in the sidebar ribbon.
  * @public
  * @unofficial
  */
 export interface RibbonItem {
-    /** @todo Documentation incomplete. */
+    /** Whether this ribbon item is hidden. */
     hidden: boolean;
 
-    /** @todo Documentation incomplete. */
+    /** Icon name displayed for this ribbon item. */
     icon: IconName;
 
-    /** @todo Documentation incomplete. */
+    /** Unique identifier for this ribbon item. */
     id: string;
 
-    /** @todo Documentation incomplete. */
+    /** Tooltip title displayed on hover. */
     title: string;
 
-    /** @todo Documentation incomplete. */
+    /** Callback invoked when this ribbon item is clicked. */
     callback(): Promise<void>;
 }

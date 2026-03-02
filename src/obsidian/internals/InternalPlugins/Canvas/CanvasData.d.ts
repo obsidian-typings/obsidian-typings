@@ -2,14 +2,14 @@ import type { CanvasViewDataEdge } from './CanvasViewDataEdge.d.ts';
 import type { CanvasViewDataNode } from './CanvasViewDataNode.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Serialized canvas data containing all nodes and edges.
  * @public
  * @unofficial
  */
 export interface CanvasViewData {
-    /** @todo Documentation incomplete. */
+    /** Array of serialized edge data for all connections in the canvas. */
     edges: CanvasViewDataEdge[];
 
-    /** @todo Documentation incomplete. */
+    /** Array of serialized node data for all nodes in the canvas. */
     nodes: CanvasViewDataNode[];
 }

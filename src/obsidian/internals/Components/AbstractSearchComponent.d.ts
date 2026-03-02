@@ -4,7 +4,7 @@ import type {
 } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Base interface for search components providing find-and-replace UI.
  * @public
  * @unofficial
  */

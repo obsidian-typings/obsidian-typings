@@ -3,38 +3,38 @@ import type { SerializedWorkspaceLeafHistory } from './SerializedWorkspaceLeafHi
 import type { WorkspaceLeafHistoryState } from './WorkspaceLeafHistoryState.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Navigation history for a workspace leaf, supporting back/forward navigation.
  * @public
  * @unofficial
  */
 export interface WorkspaceLeafHistory {
-    /** @todo Documentation incomplete. */
+    /** List of previous navigation states. */
     backHistory: WorkspaceLeafHistoryState[];
 
-    /** @todo Documentation incomplete. */
+    /** List of forward navigation states (after going back). */
     forwardHistory: WorkspaceLeafHistoryState[];
 
-    /** @todo Documentation incomplete. */
+    /** The workspace leaf that owns this history. */
     owner: WorkspaceLeaf;
 
-    /** @todo Documentation incomplete. */
+    /** Navigate back to the previous state. */
     back(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Restore history from a serialized representation. */
     deserialize(e: SerializedWorkspaceLeafHistory): void;
 
-    /** @todo Documentation incomplete. */
+    /** Navigate forward to the next state. */
     forward(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Navigate by the given number of steps (negative for back, positive for forward). */
     go(step: number): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Push a new state onto the back history stack. */
     pushState(state: WorkspaceLeafHistoryState): void;
 
-    /** @todo Documentation incomplete. */
+    /** Serialize the history for persistence. */
     serialize(): SerializedWorkspaceLeafHistory;
 
-    /** @todo Documentation incomplete. */
+    /** Update the current state in the history. */
     updateState(state: WorkspaceLeafHistoryState): Promise<void>;
 }

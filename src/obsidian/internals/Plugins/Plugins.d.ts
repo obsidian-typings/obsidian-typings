@@ -9,7 +9,7 @@ import type { PluginsManifestsRecord } from './PluginsManifestsRecord.d.ts';
 import type { PluginsPluginsRecord } from './PluginsPluginsRecord.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Manager for community plugins, handling installation, enabling, and lifecycle.
  * @public
  * @unofficial
  */
@@ -43,7 +43,7 @@ export interface Plugins {
      */
     plugins: PluginsPluginsRecord;
 
-    /** @todo Documentation incomplete. */
+    /** Debounced function to save the plugin configuration. */
     requestSaveConfig: Debouncer<[], Promise<void>>;
 
     /**
@@ -126,7 +126,7 @@ export interface Plugins {
      */
     loadPlugin(id: string): Promise<Plugin>;
 
-    /** @todo Documentation incomplete. */
+    /** Handle raw file system change events for plugin config files. */
     onRaw(e: unknown): void;
 
     /**

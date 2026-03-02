@@ -1,21 +1,21 @@
 /**
- * @todo Documentation incomplete.
+ * Serialized data representation of an edge (connection) between two nodes in the canvas.
  * @public
  * @unofficial
  */
 export interface CanvasViewDataEdge {
-    /** @todo Documentation incomplete. */
+    /** ID of the source node. */
     fromNode: string;
 
-    /** @todo Documentation incomplete. */
+    /** Side of the source node where the edge originates (e.g., 'top', 'bottom', 'left', 'right'). */
     fromSide: string;
 
-    /** @todo Documentation incomplete. */
+    /** Unique identifier for this edge. */
     id: string;
 
-    /** @todo Documentation incomplete. */
+    /** ID of the target node. */
     toNode: string;
 
-    /** @todo Documentation incomplete. */
+    /** Side of the target node where the edge terminates (e.g., 'top', 'bottom', 'left', 'right'). */
     toSide: string;
 }

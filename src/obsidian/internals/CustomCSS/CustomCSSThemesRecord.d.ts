@@ -1,7 +1,7 @@
 import type { ThemeManifest } from '../ThemeManifest.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Record mapping theme names to their manifest metadata.
  * @public
  * @unofficial
  */

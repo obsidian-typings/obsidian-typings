@@ -3,7 +3,7 @@ import type { StateHistoryEphemeralState } from './StateHistoryEphemeralState.d.
 import type { StateHistoryLeafHistory } from './StateHistoryLeafHistory.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Captured state of a workspace leaf for history navigation.
  * @public
  * @unofficial
  */

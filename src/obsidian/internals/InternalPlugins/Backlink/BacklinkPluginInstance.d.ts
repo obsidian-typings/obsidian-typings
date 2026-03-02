@@ -10,53 +10,53 @@ import type { BacklinkPlugin } from './BacklinkPlugin.d.ts';
 import type { BacklinkPluginInstanceOptions } from './BacklinkPluginInstanceOptions.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Plugin instance for backlinks, managing backlink view lifecycle and file event handling.
  * @public
  * @unofficial
  */
 export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkPlugin> {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Whether this plugin is enabled by default. */
     defaultOn: true;
 
-    /** @todo Documentation incomplete. */
+    /** The currently tracked file for backlinks. */
     file?: TFile | null;
 
-    /** @todo Documentation incomplete. */
+    /** Configuration options for the backlink plugin. */
     options: BacklinkPluginInstanceOptions;
 
-    /** @todo Documentation incomplete. */
+    /** Reference to the backlink plugin registration. */
     plugin: BacklinkPlugin;
 
-    /** @todo Documentation incomplete. */
+    /** Initialize the backlink view leaf. */
     initLeaf(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Called when the plugin is enabled. */
     onEnable(app: App, plugin: BacklinkPlugin): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Handle external settings file changes and reload configuration. */
     onExternalSettingsChange(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
+    /** Add backlink-related items to a file context menu. */
     onFileMenu(menu: Menu, file: TAbstractFile, source: string, leaf?: WorkspaceLeaf): void;
 
-    /** @todo Documentation incomplete. */
+    /** Handle a file being opened and update backlink tracking. */
     onFileOpen(file: TAbstractFile): void;
 
-    /** @todo Documentation incomplete. */
+    /** Called when the user disables the plugin. */
     onUserDisable(app: App): void;
 
-    /** @todo Documentation incomplete. */
+    /** Called when the user enables the plugin. */
     onUserEnable(): void;
 
-    /** @todo Documentation incomplete. */
+    /** Open the backlinks pane for the currently active file. */
     openBacklinksForActiveFile(skipSplit: boolean): boolean | undefined;
 
-    /** @todo Documentation incomplete. */
+    /** Toggle the inline backlinks display within the document view. */
     toggleBacklinksInDocument(skip: boolean): boolean | undefined;
 
-    /** @todo Documentation incomplete. */
+    /** Refresh the backlink results for the current file. */
     updateBacklinks(): void;
 }

@@ -5,7 +5,7 @@ import type {
 import type { MarkdownBaseView } from './MarkdownBaseView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Manager for editor suggestion popups providing autocompletion in the editor.
  * @public
  * @unofficial
  */

@@ -1,38 +1,38 @@
 import type { ObsidianTouchEventRegisterCallback } from './ObsidianTouchEventRegisterCallback.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a touch event processed by Obsidian's gesture system.
  * @public
  * @unofficial
  */
 export interface ObsidianTouchEvent {
-    /** @todo Documentation incomplete. */
+    /** Primary axis of the touch gesture. */
     direction: 'x' | 'y';
 
-    /** @todo Documentation incomplete. */
+    /** The underlying browser touch event. */
     evt: TouchEvent;
 
-    /** @todo Documentation incomplete. */
+    /** Number of touch points in the gesture. */
     points: number;
 
-    /** @todo Documentation incomplete. */
+    /** Callbacks for managing the touch gesture lifecycle. */
     registerCallback: ObsidianTouchEventRegisterCallback;
 
-    /** @todo Documentation incomplete. */
+    /** Starting X coordinate of the touch. */
     startX: number;
 
-    /** @todo Documentation incomplete. */
+    /** Starting Y coordinate of the touch. */
     startY: number;
 
-    /** @todo Documentation incomplete. */
+    /** Element that the touch event targets. */
     targetEl: HTMLElement;
 
-    /** @todo Documentation incomplete. */
+    /** The primary Touch object from the event. */
     touch: Touch;
 
-    /** @todo Documentation incomplete. */
+    /** Current X coordinate of the touch. */
     x: number;
 
-    /** @todo Documentation incomplete. */
+    /** Current Y coordinate of the touch. */
     y: number;
 }

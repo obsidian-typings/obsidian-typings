@@ -3,12 +3,12 @@ import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
 import type { BacklinkComponent } from './BacklinkComponent.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View that displays backlinks to the current file.
  * @public
  * @unofficial
  */
 export interface BacklinkView extends InfoFileView {
-    /** @todo Documentation incomplete. */
+    /** The backlink component rendering linked and unlinked mentions. */
     backlink: BacklinkComponent;
 
     /**
@@ -21,6 +21,6 @@ export interface BacklinkView extends InfoFileView {
      */
     showSearch(): void;
 
-    /** @todo Documentation incomplete */
+    /** Refresh the backlink results. */
     update(): void;
 }

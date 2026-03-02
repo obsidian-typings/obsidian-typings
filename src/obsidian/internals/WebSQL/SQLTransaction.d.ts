@@ -2,12 +2,12 @@ import type { SQLError } from './SQLError.d.ts';
 import type { SQLResultSet } from './SQLResultSet.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a SQL transaction for executing queries against a WebSQL database.
  * @public
  * @unofficial
  */
 export interface SQLTransaction {
-    /** @todo Documentation incomplete. */
+    /** Execute a SQL statement within this transaction. */
     executeSql(
         sqlStatement: string,
         arguments?: unknown[],

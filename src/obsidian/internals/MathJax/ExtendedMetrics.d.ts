@@ -1,24 +1,24 @@
 /**
- * @todo Documentation incomplete.
+ * Font metrics used by MathJax for scaling and positioning math output.
  * @public
  * @unofficial
  */
 export interface ExtendedMetrics {
-    /** @todo Documentation incomplete. */
+    /** Width of the container element in pixels. */
     containerWidth: number;
 
-    /** @todo Documentation incomplete. */
+    /** Size of 1em in pixels for the current font. */
     em: number;
 
-    /** @todo Documentation incomplete. */
+    /** Size of 1ex in pixels for the current font. */
     ex: number;
 
-    /** @todo Documentation incomplete. */
+    /** CSS font family string. */
     family: string;
 
-    /** @todo Documentation incomplete. */
+    /** Available line width for the math output in pixels. */
     lineWidth: number;
 
-    /** @todo Documentation incomplete. */
+    /** Scale factor for the math output relative to the surrounding text. */
     scale: number;
 }

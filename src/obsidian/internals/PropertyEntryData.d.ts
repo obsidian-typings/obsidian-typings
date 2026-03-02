@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Data for a single frontmatter property entry.
  * @public
  * @unofficial
  */

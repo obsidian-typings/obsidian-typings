@@ -11,25 +11,25 @@ declare module 'obsidian' {
      */
     interface WorkspaceLeaf extends WorkspaceItem, HoverParent {
         /**
-         * @todo Documentation incomplete.
+         * Timestamp of when this leaf was last activated.
          * @unofficial
          */
         activeTime: number;
 
         /**
-         * @todo Documentation incomplete.
+         * The linked group this leaf belongs to, or null if ungrouped.
          * @unofficial
          */
         group: string | null;
 
         /**
-         * @todo Documentation incomplete.
+         * Current height of the leaf in pixels.
          * @unofficial
          */
         height: number;
 
         /**
-         * @todo Documentation incomplete.
+         * Navigation history for this leaf (back/forward).
          * @unofficial
          */
         history: WorkspaceLeafHistory;
@@ -54,61 +54,61 @@ declare module 'obsidian' {
         parent: WorkspaceTabs | WorkspaceMobileDrawer;
 
         /**
-         * @todo Documentation incomplete.
+         * Whether this leaf is pinned (prevented from being navigated away).
          * @unofficial
          */
         pinned: boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Observer that tracks size changes of this leaf.
          * @unofficial
          */
         resizeObserver: ResizeObserver | null;
 
         /**
-         * @todo Documentation incomplete.
+         * Close button element in the tab header.
          * @unofficial
          */
         tabHeaderCloseEl: HTMLDivElement | null;
 
         /**
-         * @todo Documentation incomplete.
+         * The tab header element for this leaf.
          * @unofficial
          */
         tabHeaderEl: HTMLElement;
 
         /**
-         * @todo Documentation incomplete.
+         * Icon element inside the tab header.
          * @unofficial
          */
         tabHeaderInnerIconEl: HTMLElement;
 
         /**
-         * @todo Documentation incomplete.
+         * Title element inside the tab header.
          * @unofficial
          */
         tabHeaderInnerTitleEl: HTMLElement;
 
         /**
-         * @todo Documentation incomplete.
+         * Container element for tab header status indicators.
          * @unofficial
          */
         tabHeaderStatusContainerEl: HTMLDivElement | null;
 
         /**
-         * @todo Documentation incomplete.
+         * Status element indicating linked group membership in the tab header.
          * @unofficial
          */
         tabHeaderStatusLinkEl: HTMLDivElement | null;
 
         /**
-         * @todo Documentation incomplete.
+         * Status element indicating pinned state in the tab header.
          * @unofficial
          */
         tabHeaderStatusPinEl: HTMLDivElement | null;
 
         /**
-         * @todo Documentation incomplete.
+         * The workspace item type identifier for this leaf.
          * @unofficial
          */
         type: 'leaf';
@@ -122,19 +122,19 @@ declare module 'obsidian' {
         view: View;
 
         /**
-         * @todo Documentation incomplete.
+         * Current width of the leaf in pixels.
          * @unofficial
          */
         width: number;
 
         /**
-         * @todo Documentation incomplete.
+         * Whether this leaf is currently loading or processing.
          * @unofficial
          */
         working: boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Check whether this leaf can be navigated to a different view.
          * @unofficial
          */
         canNavigate(): boolean;
@@ -163,7 +163,7 @@ declare module 'obsidian' {
         getEphemeralState(): any;
 
         /**
-         * @todo Documentation incomplete.
+         * Get the current navigation history state of this leaf.
          * @unofficial
          */
         getHistoryState(): WorkspaceLeafHistoryState;
@@ -184,13 +184,13 @@ declare module 'obsidian' {
         getViewState(): ViewState;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle a drop event on this leaf.
          * @unofficial
          */
         handleDrop(event: DragEvent, draggable: Draggable, isOver: boolean): DropResult | null;
 
         /**
-         * @todo Documentation incomplete.
+         * Highlight this leaf's tab header.
          * @unofficial
          */
         highlight(): void;
@@ -208,7 +208,7 @@ declare module 'obsidian' {
         isDeferred__?(): boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Check whether this leaf is currently visible in the workspace.
          * @unofficial
          */
         isVisible(): boolean;
@@ -271,7 +271,7 @@ declare module 'obsidian' {
         on(name: 'pinned-change', callback: (pinned: boolean) => any, ctx?: any): EventRef;
 
         /**
-         * @todo Documentation incomplete.
+         * Handle opening the context menu on this leaf's tab header.
          * @unofficial
          */
         onOpenTabHeaderMenu(evt: MouseEvent, parentEl: HTMLElement): void;
@@ -313,13 +313,13 @@ declare module 'obsidian' {
         openLinkText(linktext: string, sourcePath: string, openViewState?: OpenViewState): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Rebuild the view associated with this leaf.
          * @unofficial
          */
         rebuildView(): Promise<void>;
 
         /**
-         * @todo Documentation incomplete.
+         * Record a state entry in this leaf's navigation history.
          * @unofficial
          */
         recordHistory(state: WorkspaceLeafHistoryState): void;
@@ -386,13 +386,13 @@ declare module 'obsidian' {
         togglePinned(): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Remove highlight from this leaf's tab header.
          * @unofficial
          */
         unhighlight(): void;
 
         /**
-         * @todo Documentation incomplete.
+         * Update the tab header display (icon, title, status indicators).
          * @unofficial
          */
         updateHeader(): void;

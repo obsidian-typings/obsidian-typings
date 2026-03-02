@@ -1,17 +1,17 @@
 import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Bookmark item representing a group that contains other bookmark items.
  * @public
  * @unofficial
  */
 export interface GroupBookmarkItem extends BookmarkItem {
-    /** @todo Documentation incomplete. */
+    /** Child bookmark items contained in this group. */
     items: BookmarkItem[];
 
-    /** @todo Documentation incomplete. */
+    /** Display title of this bookmark group. */
     title: string;
 
-    /** @todo Documentation incomplete. */
+    /** Discriminator indicating this is a group bookmark. */
     type: 'group';
 }

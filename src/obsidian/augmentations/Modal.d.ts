@@ -50,7 +50,7 @@ declare module 'obsidian' {
         dimBackground: boolean;
 
         /**
-         * @todo Documentation incomplete.
+         * Header element of the modal dialog.
          * @unofficial
          */
         headerEl: HTMLDivElement;

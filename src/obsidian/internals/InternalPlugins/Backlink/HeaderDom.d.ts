@@ -1,23 +1,23 @@
 import type { App } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Renders navigation buttons and sort controls for a section header in the backlink view.
  * @public
  * @unofficial
  */
 export interface HeaderDom {
-    /** @todo Documentation incomplete. */
+    /** Reference to the app. */
     app: App;
 
-    /** @todo Documentation incomplete. */
+    /** Container element for navigation buttons. */
     navButtonsEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Container element for the navigation header. */
     navHeaderEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
+    /** Add a navigation button to the header. */
     addNavButton(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
+    /** Add a sort button to the header. */
     addSortButton(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): unknown;
 }

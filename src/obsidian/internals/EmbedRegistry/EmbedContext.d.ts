@@ -42,6 +42,6 @@ export interface EmbedContext {
      */
     sourcePath?: string;
 
-    /** @todo Documentation incomplete. */
+    /** Serialized state to restore for the embed. */
     state?: unknown;
 }

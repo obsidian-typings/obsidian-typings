@@ -1,7 +1,7 @@
 import { InternalPluginName } from './InternalPluginName.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Constant mapping of view type identifiers used to open and manage different leaf views in Obsidian.
  *
  * @public
  * @unofficial

@@ -2,7 +2,7 @@ import type { InternalPlugin } from '../InternalPlugin.d.ts';
 import type { FileRecoveryPluginInstance } from './FileRecoveryPluginInstance.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Internal plugin registration for the file recovery/snapshots feature.
  * @public
  * @unofficial
  */
