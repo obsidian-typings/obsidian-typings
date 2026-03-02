@@ -26,6 +26,14 @@ export interface LinkUpdater {
     iterateReferences(callback: (path: string, reference: ReferenceCache) => void): void;
 
     /**
+     * Iterate over all references managed by this updater for a specific file.
+     *
+     * @param path - Path of the file to iterate references for.
+     * @param callback - Callback invoked for each reference.
+     */
+    iterateReferencesForFile(path: string, callback: (reference: ReferenceCache) => void): void;
+
+    /**
      * Rename a subpath reference (e.g. heading or block) within a file.
      *
      * @param file - File containing the subpath.
