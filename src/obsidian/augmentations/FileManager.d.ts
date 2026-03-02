@@ -1,6 +1,5 @@
 import type { LinkChangeUpdate } from '../internals/LinkUpdate/LinkChangeUpdate.d.ts';
 import type { LinkUpdate } from '../internals/LinkUpdate/LinkUpdate.d.ts';
-import type { LinkUpdaters } from '../internals/LinkUpdate/LinkUpdaters.d.ts';
 import type { LinkUpdatesHandler } from '../internals/LinkUpdate/LinkUpdatesHandler.d.ts';
 import type { PositionedReference } from '../internals/PositionedReference.d.ts';
 import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
@@ -31,12 +30,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         inProgressUpdates: null | LinkUpdatesHandler[];
-
-        /**
-         * Registered link updater strategies for different file types.
-         * @unofficial
-         */
-        linkUpdaters: LinkUpdaters;
 
         /**
          * Queue for processing link update operations sequentially.

@@ -2,6 +2,7 @@ import type { CustomArrayDict } from '../internals/Collections/CustomArrayDict.d
 import type { ItemQueue } from '../internals/Collections/ItemQueue.d.ts';
 import type { FileCacheEntry } from '../internals/FileCacheEntry.d.ts';
 import type { LinkSuggestion } from '../internals/LinkSuggestion.d.ts';
+import type { LinkUpdaters } from '../internals/LinkUpdate/LinkUpdaters.d.ts';
 import type { MetadataCacheFileCacheRecord } from '../internals/MetadataCacheRecords/MetadataCacheFileCacheRecord.d.ts';
 import type {
     MetadataCacheMetadataCacheRecord
@@ -80,6 +81,12 @@ declare module 'obsidian' {
          * @unofficial
          */
         linkResolverQueue: ItemQueue<TFile | null> | null;
+
+        /**
+         * Registered link updater strategies for different file types.
+         * @unofficial
+         */
+        linkUpdaters: LinkUpdaters;
 
         /**
          * File hash to metadata cache entry mapping
