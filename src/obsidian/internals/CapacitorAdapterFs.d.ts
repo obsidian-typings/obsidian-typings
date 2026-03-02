@@ -1,4 +1,5 @@
 import type { CapacitorFileEntry } from './CapacitorFileEntry.d.ts';
+import type { WatchAndStatAllResult } from './WatchAndStatAllResult.d.ts';
 
 /**
  * @todo Documentation incomplete.
@@ -70,7 +71,7 @@ export interface CapacitorAdapterFs {
     watch(realPath: string): Promise<void>;
 
     /** @todo Documentation incomplete. */
-    watchAndStatAll(realPath: string): Promise<{ children: CapacitorFileEntry[] }>;
+    watchAndStatAll(realPath: string): Promise<WatchAndStatAllResult>;
 
     /** @todo Documentation incomplete. */
     write(realPath: string, data: string): Promise<void>;

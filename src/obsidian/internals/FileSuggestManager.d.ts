@@ -1,13 +1,15 @@
 import type {
     App,
     BlockCache,
+    Instruction,
     SearchResult,
     TFile
 } from 'obsidian';
+import type { FileSuggestion } from './FileSuggestion.d.ts';
 import type { Runnable } from './Runnable.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * File suggest manager.
  * @public
  * @unofficial
  */
@@ -20,7 +22,7 @@ export interface FileSuggestManager {
     /**
      * Selection of files and their paths that can be matched to.
      */
-    fileSuggestions: null | { file: TFile | null; path: string }[];
+    fileSuggestions: null | FileSuggestion[];
 
     /**
      * Whether search should be vault-wide rather than scoped to current file.
@@ -70,7 +72,7 @@ export interface FileSuggestManager {
     /**
      * Generate instructions for specific actions in suggestion manager (e.g. accept, select, ...).
      */
-    getInstructions(): [{ command: 'string'; purpose: 'string' }];
+    getInstructions(): [Instruction];
 
     /**
      * Determine the source path of current context.

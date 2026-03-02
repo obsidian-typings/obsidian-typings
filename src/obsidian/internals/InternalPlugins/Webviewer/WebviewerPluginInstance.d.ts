@@ -1,6 +1,7 @@
 import type { PaneType } from 'obsidian';
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { WebviewerDBStore } from './WebviewerDBStore.d.ts';
+import type { WebviewerOpenUrlEventDetail } from './WebviewerOpenUrlEventDetail.d.ts';
 import type { WebviewerPlugin } from './WebviewerPlugin.d.ts';
 
 /**
@@ -24,7 +25,7 @@ export interface WebviewerPluginInstance extends InternalPluginInstance<Webviewe
     getSearchEngineUrl(searchQuery: string): string;
 
     /** @todo Documentation incomplete. */
-    handleOpenUrl(event: CustomEvent<{ url: string; newLeaf?: PaneType | boolean; active?: boolean }>): void;
+    handleOpenUrl(event: CustomEvent<WebviewerOpenUrlEventDetail>): void;
 
     /** @todo Documentation incomplete. */
     openUrl(url: string, newLeaf?: PaneType | boolean, active?: boolean): void;

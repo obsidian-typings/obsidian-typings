@@ -1,3 +1,4 @@
+import type { ParsedLinktext } from '../internals/ParsedLinktext.d.ts';
 import type { QueryForFuzzySearch } from '../internals/QueryForFuzzySearch.d.ts';
 
 export {};
@@ -488,16 +489,7 @@ declare module 'obsidian' {
      *
      * @official
      */
-    function parseLinktext(linktext: string): {
-        /**
-         * @official
-         */
-        path: string;
-        /**
-         * @official
-         */
-        subpath: string;
-    };
+    function parseLinktext(linktext: string): ParsedLinktext;
 
     /**
      * Split a Bases property ID into constituent parts.

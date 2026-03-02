@@ -17,6 +17,7 @@ import type { TypedWorkspaceLeaf } from '../internals/TypedWorkspaceLeaf.d.ts';
 import type { ViewTypeType } from '../internals/Views/ViewTypeType.d.ts';
 import type { ViewTypeViewMapping } from '../internals/Views/ViewTypeViewMapping.d.ts';
 import type { SerializedWorkspace } from '../internals/Workspace/SerializedWorkspace.d.ts';
+import type { SetActiveLeafParams } from '../internals/Workspace/SetActiveLeafParams.d.ts';
 import type { WorkspaceHoverLinkSourcesRecord } from '../internals/Workspace/WorkspaceHoverLinkSourcesRecord.d.ts';
 
 declare module 'obsidian' {
@@ -1299,10 +1300,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.16.3
          */
-        setActiveLeaf(leaf: WorkspaceLeaf, params?: {
-            /** @official */
-            focus?: boolean;
-        }): void;
+        setActiveLeaf(leaf: WorkspaceLeaf, params?: SetActiveLeafParams): void;
 
         /**
          * Sets the active leaf.

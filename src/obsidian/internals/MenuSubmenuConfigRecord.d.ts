@@ -1,6 +1,8 @@
+import type { Submenu } from './Submenu.d.ts';
+
 /**
- * @todo Documentation incomplete.
+ * Menu submenu configuration record.
  * @public
  * @unofficial
  */
-export interface MenuSubmenuConfigRecord extends Record<string, { title: string; icon: string }> {}
+export interface MenuSubmenuConfigRecord extends Record<string, Submenu> {}
