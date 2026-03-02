@@ -1,5 +1,7 @@
 /**
  * Data for a single frontmatter property entry.
+ *
+ * @typeParam T - The type of the property value.
  * @public
  * @unofficial
  */

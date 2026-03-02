@@ -49,7 +49,7 @@ declare module 'obsidian' {
         /**
          * Shows/hides the component.
          *
-         * @param visible Whether the setting should be visible.
+         * @param visible - Whether the setting should be visible.
          * @returns The component.
          * @unofficial
          */

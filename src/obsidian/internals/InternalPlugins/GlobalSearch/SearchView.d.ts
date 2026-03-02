@@ -9,6 +9,8 @@ import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts'
 export interface SearchView extends View {
     /**
      * Returns the value of the search element.
+     *
+     * @returns The current search query string.
      */
     getQuery(): string;
 
@@ -17,28 +19,60 @@ export interface SearchView extends View {
      */
     getViewType(): typeof ViewType.Search;
 
-    /** Handle the copy search results button click. */
+    /**
+     * Handle the copy search results button click.
+     *
+     * @param event - The mouse click event.
+     */
     onCopyResultsClick(event: MouseEvent): void;
 
-    /** Handle the down arrow key when a search result is focused. */
+    /**
+     * Handle the down arrow key when a search result is focused.
+     *
+     * @param event - The keyboard event.
+     */
     onKeyArrowDownInFocus(event: KeyboardEvent): void;
 
-    /** Handle the left arrow key when a search result is focused. */
+    /**
+     * Handle the left arrow key when a search result is focused.
+     *
+     * @param event - The keyboard event.
+     */
     onKeyArrowLeftInFocus(event: KeyboardEvent): void;
 
-    /** Handle the right arrow key when a search result is focused. */
+    /**
+     * Handle the right arrow key when a search result is focused.
+     *
+     * @param event - The keyboard event.
+     */
     onKeyArrowRightInFocus(event: KeyboardEvent): void;
 
-    /** Handle the up arrow key when a search result is focused. */
+    /**
+     * Handle the up arrow key when a search result is focused.
+     *
+     * @param event - The keyboard event.
+     */
     onKeyArrowUpInFocus(event: KeyboardEvent): void;
 
-    /** Handle the enter key when a search result is focused. */
+    /**
+     * Handle the enter key when a search result is focused.
+     *
+     * @param event - The keyboard event.
+     */
     onKeyEnterInFocus(event: KeyboardEvent): void;
 
-    /** Show more context lines after a match. */
+    /**
+     * Show more context lines after a match.
+     *
+     * @param e - The keyboard event.
+     */
     onKeyShowMoreAfter(e: unknown): void;
 
-    /** Show more context lines before a match. */
+    /**
+     * Show more context lines before a match.
+     *
+     * @param e - The keyboard event.
+     */
     onKeyShowMoreBefore(e: unknown): void;
 
     /**
@@ -46,7 +80,12 @@ export interface SearchView extends View {
      */
     onTabHeaderClick(): void;
 
-    /** Render search metadata information into the given parent element. */
+    /**
+     * Render search metadata information into the given parent element.
+     *
+     * @param e - The search metadata to render.
+     * @param parentEl - The parent element to render into.
+     */
     renderSearchInfo(e: unknown, parentEl: HTMLElement): void;
 
     /**
@@ -54,16 +93,32 @@ export interface SearchView extends View {
      */
     saveSearch(): void;
 
-    /** Set whether all search results are collapsed. */
+    /**
+     * Set whether all search results are collapsed.
+     *
+     * @param e - Whether to collapse all results.
+     */
     setCollapseAll(e: unknown): void;
 
-    /** Toggle the search query explanation display. */
+    /**
+     * Toggle the search query explanation display.
+     *
+     * @param e - Whether to show the query explanation.
+     */
     setExplainSearch(e: unknown): void;
 
-    /** Set whether extra context lines are shown around matches. */
+    /**
+     * Set whether extra context lines are shown around matches.
+     *
+     * @param e - Whether to show extra context.
+     */
     setExtraContext(e: unknown): void;
 
-    /** Set whether the search is case-sensitive. */
+    /**
+     * Set whether the search is case-sensitive.
+     *
+     * @param e - Whether to match case.
+     */
     setMatchingCase(e: unknown): void;
 
     /**
@@ -73,7 +128,11 @@ export interface SearchView extends View {
      */
     setQuery(value: string): void;
 
-    /** Set the sort order for search results. */
+    /**
+     * Set the sort order for search results.
+     *
+     * @param sortOrder - The sort order to apply.
+     */
     setSortOrder(sortOrder: unknown): void;
 
     /**

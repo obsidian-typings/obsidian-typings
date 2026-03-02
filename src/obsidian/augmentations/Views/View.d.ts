@@ -49,9 +49,9 @@ declare module 'obsidian' {
 
         /**
          * Whether or not the view is intended for navigation.
-         * If your view is a static view that is not intended to be navigated away, set this to false.
+         * If your view is a static view that is not intended to be navigated away, set this to `false`.
          * (For example: File explorer, calendar, etc.)
-         * If your view opens a file or can be otherwise navigated, set this to true.
+         * If your view opens a file or can be otherwise navigated, set this to `true`.
          * (For example: Markdown editor view, Kanban view, PDF view, etc.)
          *
          * @official
@@ -121,6 +121,7 @@ declare module 'obsidian' {
         /**
          * Returns the placement of the tooltip.
          *
+         * @returns The tooltip placement direction.
          * @unofficial
          */
         getSideTooltipPlacement(): 'left' | 'right' | undefined;
@@ -147,6 +148,7 @@ declare module 'obsidian' {
         /**
          * Handle copy event on metadata editor and serialize properties.
          *
+         * @param event - The clipboard event.
          * @unofficial
          */
         handleCopy(event: ClipboardEvent): void;
@@ -154,6 +156,7 @@ declare module 'obsidian' {
         /**
          * Handle cut event on metadata editor and serialize and remove properties.
          *
+         * @param event - The clipboard event.
          * @unofficial
          */
         handleCut(event: ClipboardEvent): void;
@@ -161,6 +164,7 @@ declare module 'obsidian' {
         /**
          * Handle paste event of properties on metadata editor.
          *
+         * @param event - The clipboard event.
          * @unofficial
          */
         handlePaste(event: ClipboardEvent): void;
@@ -176,6 +180,7 @@ declare module 'obsidian' {
         onClose__?(): Promise<void>;
 
         /**
+         * @param e - The menu event.
          * @deprecated use {@link onPaneMenu} instead
          * @unofficial
          */
@@ -214,7 +219,7 @@ declare module 'obsidian' {
         /**
          * Adds the menu items to the menu.
          *
-         * @param menu the menu to fill.
+         * @param menu - The menu to fill.
          * @unofficial
          */
         onTabMenu(menu: Menu): void;
@@ -222,7 +227,7 @@ declare module 'obsidian' {
         /**
          * Opens the view.
          *
-         * @param parentEl The node the view get attached to.
+         * @param parentEl - The node the view gets attached to.
          * @unofficial
          */
         open(parentEl: Node): Promise<void>;

@@ -111,7 +111,7 @@ declare module 'obsidian' {
          * Whether the application is currently running on mobile.
          *
          * @remark Prefer usage of `{@link Platform.isMobile}`.
-         * @remark Will be true if `app.emulateMobile()` was enabled.
+         * @remark Will be `true` if `app.emulateMobile()` was enabled.
          * @unofficial
          */
         isMobile: boolean;
@@ -150,19 +150,19 @@ declare module 'obsidian' {
         metadataTypeManager: MetadataTypeManager;
 
         /**
-         * Navigation bar for mobile devices, or null on desktop.
+         * Navigation bar for mobile devices, or `null` on desktop.
          * @unofficial
          */
         mobileNavbar: MobileNavbar | null;
 
         /**
-         * Tab switcher for mobile devices, or null on desktop.
+         * Tab switcher for mobile devices, or `null` on desktop.
          * @unofficial
          */
         mobileTabSwitcher: MobileTabSwitcher | null;
 
         /**
-         * Toolbar for mobile devices, or null on desktop.
+         * Toolbar for mobile devices, or `null` on desktop.
          * @unofficial
          */
         mobileToolbar: MobileToolbar | null;
@@ -280,6 +280,7 @@ declare module 'obsidian' {
         /**
          * Sets the accent color of the application (light/dark mode).
          *
+         * @param theme - The theme to set.
          * @unofficial
          */
         changeTheme(theme: 'moonstone' | 'obsidian'): void;
@@ -310,6 +311,7 @@ declare module 'obsidian' {
         /**
          * Restarts Obsidian and renders workspace in mobile mode.
          *
+         * @param emulate - Whether to enable or disable mobile emulation.
          * @tutorial Very useful for testing the rendering of your plugin on mobile devices.
          * @unofficial
          */
@@ -343,6 +345,7 @@ declare module 'obsidian' {
         /**
          * Get the accent color of the application.
          *
+         * @returns The accent color string.
          * @remark Often a better alternative than `app.vault.getConfig('accentColor')` as it returns an empty string if no accent color was set.
          * @unofficial
          */
@@ -351,6 +354,7 @@ declare module 'obsidian' {
         /**
          * Get the current title of the application.
          *
+         * @returns The application title.
          * @remark The title is based on the currently active leaf.
          * @unofficial
          */
@@ -359,6 +363,8 @@ declare module 'obsidian' {
         /**
          * Get the URI for opening specified file in Obsidian.
          *
+         * @param file - The file to generate URI for.
+         * @returns The Obsidian URI for the file.
          * @unofficial
          */
         getObsidianUrl(file: TFile): string;
@@ -366,6 +372,7 @@ declare module 'obsidian' {
         /**
          * Get currently active spellcheck languages.
          *
+         * @returns The active spellcheck languages.
          * @remark Originally spellcheck languages were stored in app settings, languages are now stored in `localStorage.getItem('spellcheck-languages')`.
          * @unofficial
          */
@@ -374,6 +381,7 @@ declare module 'obsidian' {
         /**
          * Get the current color scheme of the application.
          *
+         * @returns The current theme.
          * @remark Identical to `app.vault.getConfig('theme')`.
          * @unofficial
          */
@@ -391,6 +399,7 @@ declare module 'obsidian' {
         /**
          * Initialize the entire application using the provided FS adapter
          *
+         * @param adapter - The data adapter to use.
          * @unofficial
          */
         initializeWithAdapter(adapter: DataAdapter): Promise<void>;
@@ -405,6 +414,8 @@ declare module 'obsidian' {
 
         /**
          * Check whether Vim keybindings are enabled.
+         *
+         * @returns Whether Vim mode is enabled.
          * @unofficial
          */
         isVimEnabled(): boolean;
@@ -424,6 +435,7 @@ declare module 'obsidian' {
         /**
          * Add callback to execute on next frame
          *
+         * @param callback - The callback to execute.
          * @unofficial
          */
         nextFrame(callback: () => void): void;
@@ -431,6 +443,7 @@ declare module 'obsidian' {
         /**
          * Add callback to execute on next frame, and remove after execution
          *
+         * @param callback - The callback to execute once.
          * @unofficial
          */
         nextFrameOnceCallback(callback: () => void): void;
@@ -438,6 +451,7 @@ declare module 'obsidian' {
         /**
          * Add callback to execute on next frame with promise
          *
+         * @param callback - The async callback to execute.
          * @unofficial
          */
         nextFramePromise(callback: () => Promise<void>): Promise<void>;
@@ -451,6 +465,7 @@ declare module 'obsidian' {
         /**
          * Execute all logged callback (called when next frame is loaded)
          *
+         * @param callback - The callback to execute.
          * @unofficial
          */
         onNextFrame(callback: () => void): void;
@@ -472,6 +487,7 @@ declare module 'obsidian' {
         /**
          * Open the file with OS defined default file browser application.
          *
+         * @param path - The path to the file.
          * @unofficial
          */
         openWithDefaultApp(path: string): void;
@@ -493,6 +509,10 @@ declare module 'obsidian' {
         /**
          * Save attachment at default attachments location
          *
+         * @param name - The attachment name.
+         * @param extension - The file extension.
+         * @param data - The binary content.
+         * @returns A promise that resolves to the saved file.
          * @unofficial
          */
         saveAttachment(name: string, extension: string, data: ArrayBuffer): Promise<TFile>;
@@ -516,6 +536,7 @@ declare module 'obsidian' {
         /**
          * Set the accent color of the application.
          *
+         * @param color - The accent color to set.
          * @remark Also updates the CSS `--accent` variables.
          * @unofficial
          */
@@ -524,6 +545,7 @@ declare module 'obsidian' {
         /**
          * Set the path where attachments should be stored.
          *
+         * @param path - The path for the attachment folder.
          * @unofficial
          */
         setAttachmentFolder(path: string): void;
@@ -531,6 +553,7 @@ declare module 'obsidian' {
         /**
          * Set the spellcheck languages.
          *
+         * @param languages - The spellcheck languages to set.
          * @unofficial
          */
         setSpellcheckLanguages(languages: string[]): void;
@@ -538,6 +561,7 @@ declare module 'obsidian' {
         /**
          * Set the current color scheme of the application and reload the CSS.
          *
+         * @param theme - The theme to set.
          * @unofficial
          */
         setTheme(theme: 'moonstone' | 'obsidian'): void;
@@ -545,6 +569,7 @@ declare module 'obsidian' {
         /**
          * Open the OS file picker at path location.
          *
+         * @param path - The path to show.
          * @unofficial
          */
         showInFolder(path: string): void;
@@ -611,6 +636,8 @@ declare module 'obsidian' {
         /**
          * Get the override config directory for the given app ID.
          *
+         * @param appId - The app ID.
+         * @returns The override config directory or `null`.
          * @unofficial
          */
         function getOverrideConfigDir(appId: string): string | null;

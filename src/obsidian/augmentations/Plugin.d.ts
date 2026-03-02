@@ -152,7 +152,7 @@ declare module 'obsidian' {
          *
          * @param viewId - The id of the view to register.
          * @param registration - The registration of the view to register.
-         * @returns false if bases are not enabled in this vault.
+         * @returns `false` if bases are not enabled in this vault.
          * @official
          * @since 1.10.0
          */

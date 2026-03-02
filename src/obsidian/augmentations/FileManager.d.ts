@@ -27,7 +27,7 @@ declare module 'obsidian' {
         fileParentCreatorByType: Record<string, (path: string) => TFolder>;
 
         /**
-         * Currently in-progress link update operations, or null if none.
+         * Currently in-progress link update operations, or `null` if none.
          * @unofficial
          */
         inProgressUpdates: null | LinkUpdatesHandler[];
@@ -53,6 +53,9 @@ declare module 'obsidian' {
 
         /**
          * Check whether a file with the given extension can be created.
+         *
+         * @param extension - The file extension to check.
+         * @returns Whether a file with the given extension can be created.
          * @unofficial
          */
         canCreateFileWithExt(extension: string): boolean;
@@ -88,6 +91,10 @@ declare module 'obsidian' {
         /**
          * Creates a new Markdown file in the vault at specified location.
          *
+         * @param location - Location to create the file in.
+         * @param filename - Name of the file to create.
+         * @param contents - Contents of the file to create.
+         * @returns A promise that resolves to the new file.
          * @unofficial
          */
         createNewMarkdownFile(location: TFolder, filename: string, contents: string): Promise<TFile>;
@@ -104,6 +111,7 @@ declare module 'obsidian' {
         /**
          * Download attachments for note.
          *
+         * @param file - The file to download attachments for.
          * @unofficial
          */
         downloadAttachmentsForNote(file: TFile): Promise<void>;
@@ -129,6 +137,7 @@ declare module 'obsidian' {
         /**
          * Always returns an empty array.
          *
+         * @returns An empty array.
          * @unofficial
          */
         getAllLinkResolutions(): [];
@@ -179,6 +188,9 @@ declare module 'obsidian' {
         /**
          * Insert text into a file.
          *
+         * @param file - The file to insert into.
+         * @param text - The text to insert.
+         * @param position - Where to insert the text.
          * @unofficial
          */
         insertIntoFile(file: TFile, text: string, position?: 'append' | 'prepend'): Promise<void>;
@@ -228,6 +240,7 @@ declare module 'obsidian' {
         /**
          * Prompt the user to delete a file.
          *
+         * @param file - The file or folder to delete.
          * @unofficial
          * @since 0.15.0
          */
@@ -236,6 +249,7 @@ declare module 'obsidian' {
         /**
          * Prompt the user to delete a file.
          *
+         * @param file - The file to delete.
          * @unofficial
          */
         promptForFileDeletion(file: TFile): Promise<void>;
@@ -243,6 +257,7 @@ declare module 'obsidian' {
         /**
          * Prompt the user to rename a file.
          *
+         * @param file - The file to rename.
          * @unofficial
          */
         promptForFileRename(file: TFile): Promise<void>;
@@ -250,6 +265,7 @@ declare module 'obsidian' {
         /**
          * Prompt the user to delete a folder.
          *
+         * @param folder - The folder to delete.
          * @unofficial
          */
         promptForFolderDeletion(folder: TFolder): Promise<void>;
@@ -257,6 +273,8 @@ declare module 'obsidian' {
         /**
          * Prompt the user to download an image.
          *
+         * @param urls - The URLs of the images to download.
+         * @returns A promise that resolves to a mapping of URL to file, or `null`/`undefined`.
          * @unofficial
          */
         promptForImageDownload(urls: string[]): Promise<undefined | null | Record<string, TFile>>;
@@ -264,6 +282,8 @@ declare module 'obsidian' {
         /**
          * Register an extension to be the parent for a specific file type.
          *
+         * @param extension - The file extension.
+         * @param location - The folder to use as parent.
          * @unofficial
          */
         registerFileParentCreator(extension: string, location: TFolder): void;
@@ -287,6 +307,8 @@ declare module 'obsidian' {
         /**
          * Rename's a property for all notes currently that have the old key.
          *
+         * @param oldKey - The old property key.
+         * @param newKey - The new property key.
          * @remark The current property type is maintained.
          * @remark Is case sensitive, despite Obsidian *typically* ignoring case for property names.
          * @unofficial
@@ -296,6 +318,7 @@ declare module 'obsidian' {
         /**
          * Run async link update.
          *
+         * @param linkUpdatesHandler - The link updates handler.
          * @unofficial
          */
         runAsyncLinkUpdate(linkUpdatesHandler: LinkUpdatesHandler): Promise<void>;
@@ -303,6 +326,8 @@ declare module 'obsidian' {
         /**
          * Store text file backup.
          *
+         * @param path - The path of the file to back up.
+         * @param data - The file content to store.
          * @unofficial
          */
         storeTextFileBackup(path: string, data: string): void;
@@ -326,6 +351,7 @@ declare module 'obsidian' {
         /**
          * Unregister extension as root input directory for file type.
          *
+         * @param extension - The file extension to unregister.
          * @unofficial
          */
         unregisterFileCreator(extension: string): void;
@@ -333,6 +359,7 @@ declare module 'obsidian' {
         /**
          * Update all links.
          *
+         * @param links - The link updates to apply.
          * @unofficial
          */
         updateAllLinks(links: LinkUpdate[]): Promise<void>;
@@ -340,6 +367,7 @@ declare module 'obsidian' {
         /**
          * Update internal links.
          *
+         * @param data - Map of path to link change updates.
          * @unofficial
          */
         updateInternalLinks(data: Map<string, LinkChangeUpdate>): Promise<void>;

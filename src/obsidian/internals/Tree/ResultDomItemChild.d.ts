@@ -46,22 +46,47 @@ export interface ResultDomItemChild extends TreeNode {
     /** Start offset of the match context within the document. */
     start: number;
 
-    /** Get the position of the next match. */
+    /**
+     * Get the position of the next match.
+     *
+     * @returns The next match position.
+     */
     getNextPos(arg1: unknown): number;
 
-    /** Get the position of the previous match. */
+    /**
+     * Get the position of the previous match.
+     *
+     * @returns The previous match position.
+     */
     getPrevPos(arg1: unknown): number;
 
-    /** Handle focus entering this match item. */
+    /**
+     * Handle focus entering this match item.
+     *
+     * @param event - The UI event that triggered focus.
+     */
     onFocusEnter(event?: UIEvent): void;
 
-    /** Handle focus leaving this match item. */
+    /**
+     * Handle focus leaving this match item.
+     *
+     * @param event - The UI event that triggered focus exit.
+     */
     onFocusExit(event?: UIEvent): void;
 
-    /** Handle click on this match to navigate to it. */
+    /**
+     * Handle click on this match to navigate to it.
+     *
+     * @param event - The UI event that triggered the click.
+     */
     onResultClick(event: UIEvent): void;
 
-    /** Render this match with optional surrounding text indicators. */
+    /**
+     * Render this match with optional surrounding text indicators.
+     *
+     * @param hasTextBefore - Whether there is text before this match.
+     * @param hasTextAfter - Whether there is text after this match.
+     */
     render(hasTextBefore: boolean, hasTextAfter: boolean): void;
 
     /** Expand the context to show more text after the match. */

@@ -19,12 +19,24 @@ export interface CanvasSelection {
     /** Element displaying the selection highlight rectangle. */
     selectionEl: HTMLDivElement;
 
-    /** Hide the selection rectangle and handles. */
+    /**
+     * Hide the selection rectangle and handles.
+     *
+     * @returns The result of hiding the selection.
+     */
     hide(): unknown;
 
-    /** Handle pointer down on a resize handle to start resizing the selection. */
+    /**
+     * Handle pointer down on a resize handle to start resizing the selection.
+     *
+     * @returns The result of handling the resize pointer down.
+     */
     onResizePointerdown(arg1: unknown, arg2: unknown): unknown;
 
-    /** Update the selection rectangle to match the current selected items. */
+    /**
+     * Update the selection rectangle to match the current selected items.
+     *
+     * @returns The result of updating the selection.
+     */
     update(arg1: unknown): unknown;
 }

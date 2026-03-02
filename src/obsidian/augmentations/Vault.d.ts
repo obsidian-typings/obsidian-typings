@@ -66,7 +66,7 @@ declare module 'obsidian' {
         onChange: FileSystemWatchHandler;
 
         /**
-         * Debounced function for saving config
+         * Debounced function for saving config.
          *
          * @unofficial
          */
@@ -82,6 +82,7 @@ declare module 'obsidian' {
         /**
          * Add file as child/parent to respective folders
          *
+         * @param file - The file to add.
          * @unofficial
          */
         addChild(file: TAbstractFile): void;
@@ -113,6 +114,9 @@ declare module 'obsidian' {
         /**
          * Check whether new file path is available
          *
+         * @param file - The file to check.
+         * @param newPath - The new path to check.
+         * @returns Whether the new path is available.
          * @unofficial
          */
         checkForDuplicate(file: TAbstractFile, newPath: string): boolean;
@@ -120,6 +124,8 @@ declare module 'obsidian' {
         /**
          * Check whether path has valid formatting (no dots/spaces at end, ...)
          *
+         * @param path - The path to check.
+         * @returns Whether the path has valid formatting.
          * @unofficial
          */
         checkPath(path: string): boolean;
@@ -197,6 +203,7 @@ declare module 'obsidian' {
         /**
          * Remove a vault config file
          *
+         * @param configFile - The config file to delete.
          * @unofficial
          */
         deleteConfigJson(configFile: string): Promise<void>;
@@ -204,6 +211,9 @@ declare module 'obsidian' {
         /**
          * Check whether a path exists in the vault.
          *
+         * @param path - The path to check.
+         * @param isCaseSensitive - Whether the check should be case sensitive.
+         * @returns Whether the path exists.
          * @unofficial
          */
         exists(path: string, isCaseSensitive?: boolean): Promise<boolean>;
@@ -235,6 +245,8 @@ declare module 'obsidian' {
         /**
          * Get an abstract file by path, insensitive to case.
          *
+         * @param path - The path to the file or folder.
+         * @returns The abstract file, or `null` if not found.
          * @unofficial
          */
         getAbstractFileByPathInsensitive(path: string): TAbstractFile | null;
@@ -261,6 +273,9 @@ declare module 'obsidian' {
         /**
          * Get path for file that does not conflict with other existing files
          *
+         * @param path - The desired path.
+         * @param extension - The file extension.
+         * @returns An available path that does not conflict with existing files.
          * @unofficial
          */
         getAvailablePath(path: string, extension: string): string;
@@ -268,6 +283,10 @@ declare module 'obsidian' {
         /**
          * Get path for attachment that does not conflict with other existing files
          *
+         * @param filename - The desired filename.
+         * @param extension - The file extension.
+         * @param file - The file associated with the attachment, or `null`.
+         * @returns An available path for the attachment.
          * @unofficial
          */
         getAvailablePathForAttachments(filename: string, extension: string, file: TFile | null): Promise<string>;
@@ -276,6 +295,7 @@ declare module 'obsidian' {
          * Get value from config by key.
          *
          * @param string Key of config value.
+         * @returns The config value.
          * @remark Default value will be selected if config value was not manually changed.
          * @unofficial
          */
@@ -284,6 +304,8 @@ declare module 'obsidian' {
         /**
          * Get path to config file (relative to vault root).
          *
+         * @param configFile - The config file name.
+         * @returns The path to the config file.
          * @unofficial
          */
         getConfigFile(configFile: string): string;
@@ -292,6 +314,7 @@ declare module 'obsidian' {
          * Get direct parent of file.
          *
          * @param file File to get parent of.
+         * @returns The direct parent folder, or `null` if none.
          * @unofficial
          */
         getDirectParent(file: TAbstractFile): TFolder | null;
@@ -347,6 +370,7 @@ declare module 'obsidian' {
         /**
          * Gets the name of the vault.
          *
+         * @returns The name of the vault.
          * @official
          * @since 0.9.7
          */
@@ -374,6 +398,7 @@ declare module 'obsidian' {
         /**
          * Check whether files map cache is empty
          *
+         * @returns Whether the files map cache is empty.
          * @unofficial
          */
         isEmpty(): boolean;
@@ -381,6 +406,8 @@ declare module 'obsidian' {
         /**
          * Iterate over the files and read them
          *
+         * @param files - The files to iterate over.
+         * @param cachedRead - Whether to use cached reads.
          * @unofficial
          */
         iterateFiles(files: TFile[], cachedRead: boolean): void;
@@ -419,6 +446,10 @@ declare module 'obsidian' {
         /**
          * Called whenever any of Obsidian's settings are changed.
          *
+         * @param name - Should be `'config-changed'`.
+         * @param callback - The callback function.
+         * @param ctx - The context passed as `this` to the `callback` function.
+         * @returns The event reference.
          * @remark Does *not* trigger when a particular plugin's settings are changed, for that, you could monkey-patch the `saveSettings` method of a plugin instance.
          * @unofficial
          * @since 0.9.7
@@ -481,6 +512,10 @@ declare module 'obsidian' {
         /**
          * Triggered whenever a file gets loaded internally
          *
+         * @param name - Should be `'raw'`.
+         * @param callback - The callback function.
+         * @param ctx - The context passed as `this` to the `callback` function.
+         * @returns The event reference.
          * @unofficial
          */
         on(name: 'raw', callback: (path: string) => void, ctx?: unknown): EventRef;
@@ -546,6 +581,7 @@ declare module 'obsidian' {
          * Read a config file from the vault and parse it as JSON.
          *
          * @param config Name of config file.
+         * @returns The parsed JSON object, or `null` if not found.
          * @unofficial
          */
         readConfigJson(config: string): Promise<null | object>;
@@ -554,6 +590,7 @@ declare module 'obsidian' {
          * Read a config file (full path) from the vault and parse it as JSON.
          *
          * @param path Full path to config file.
+         * @returns The parsed JSON object, or `null` if not found.
          * @unofficial
          */
         readJson(path: string): Promise<null | object>;
@@ -562,6 +599,7 @@ declare module 'obsidian' {
          * Read a plugin config file (full path relative to vault root) from the vault and parse it as JSON.
          *
          * @param path Full path to plugin config file.
+         * @returns The parsed JSON object, or `null` if not found.
          * @unofficial
          */
         readPluginData(path: string): Promise<null | object>;
@@ -570,6 +608,7 @@ declare module 'obsidian' {
          * Read a file from the vault as a string.
          *
          * @param path Path to file.
+         * @returns A promise that resolves to the file content.
          * @unofficial
          */
         readRaw(path: string): Promise<string>;
@@ -605,6 +644,7 @@ declare module 'obsidian' {
          * Get the file by absolute path.
          *
          * @param path Path to file.
+         * @returns The abstract file, or `null` if not found.
          * @unofficial
          */
         resolveFilePath(path: string): TAbstractFile | null;
@@ -612,6 +652,8 @@ declare module 'obsidian' {
         /**
          * Get the file by Obsidian URL
          *
+         * @param url - The Obsidian URL.
+         * @returns The abstract file, or `null` if not found.
          * @unofficial
          */
         resolveFileUrl(url: string): TAbstractFile | null;
@@ -643,6 +685,7 @@ declare module 'obsidian' {
         /**
          * Set file cache limit
          *
+         * @param limit - The cache limit in bytes.
          * @unofficial
          */
         setFileCacheLimit(limit: number): void;
@@ -687,6 +730,8 @@ declare module 'obsidian' {
         /**
          * Write a plugin config file (path relative to vault root) to disk.
          *
+         * @param path - Path relative to vault root.
+         * @param data - Data to write.
          * @unofficial
          */
         writePluginData(path: string, data: object): Promise<void>;

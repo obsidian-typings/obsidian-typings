@@ -3,6 +3,8 @@ export {};
 declare module 'obsidian' {
     /**
      * A value component.
+     *
+     * @typeParam T - The type of the value.
      * @since 0.9.7
      */
     interface ValueComponent<T> extends BaseComponent {

@@ -15,6 +15,8 @@ export interface PdfView extends EditableFileView {
 
     /**
      * Get the current view type.
+     *
+     * @returns The view type identifier.
      */
     getViewType(): typeof ViewType.Pdf;
 

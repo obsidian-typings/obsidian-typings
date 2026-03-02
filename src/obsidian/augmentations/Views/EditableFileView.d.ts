@@ -27,8 +27,8 @@ declare module 'obsidian' {
          *
          * Event type: 'input'.
          *
+         * @param titleEl - The title element of the view.
          * @unofficial
-         * @param titleEl The titleEl of the view.
          */
         onTitleChange(titleEl: HTMLElement): void;
 
@@ -46,7 +46,7 @@ declare module 'obsidian' {
          *
          * Event type: 'keydown'.
          *
-         * @param event The KeyboardEvent which triggered this function.
+         * @param event - The keyboard event which triggered this function.
          * @unofficial
          */
         onTitleKeydown(event: KeyboardEvent): void;
@@ -56,8 +56,8 @@ declare module 'obsidian' {
          *
          * Event type: 'paste'.
          *
-         * @param titleEl The titleEl of the view.
-         * @param event The ClipboardEvent which triggered this function.
+         * @param titleEl - The title element of the view.
+         * @param event - The clipboard event which triggered this function.
          * @unofficial
          */
         onTitlePaste(titleEl: HTMLElement, event: ClipboardEvent): void;
@@ -65,7 +65,7 @@ declare module 'obsidian' {
         /**
          * Updates the file to match the updated title.
          *
-         * @param titleEl The current titleEl.
+         * @param titleEl - The current title element.
          * @unofficial
          */
         saveTitle(titleEl: HTMLElement): Promise<void>;

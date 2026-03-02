@@ -17,7 +17,7 @@ declare module 'obsidian' {
         activeTime: number;
 
         /**
-         * The linked group this leaf belongs to, or null if ungrouped.
+         * The linked group this leaf belongs to, or `null` if ungrouped.
          * @unofficial
          */
         group: string | null;
@@ -135,6 +135,8 @@ declare module 'obsidian' {
 
         /**
          * Check whether this leaf can be navigated to a different view.
+         *
+         * @returns Whether the leaf can be navigated.
          * @unofficial
          */
         canNavigate(): boolean;
@@ -164,6 +166,8 @@ declare module 'obsidian' {
 
         /**
          * Get the current navigation history state of this leaf.
+         *
+         * @returns The current history state.
          * @unofficial
          */
         getHistoryState(): WorkspaceLeafHistoryState;
@@ -179,12 +183,18 @@ declare module 'obsidian' {
         /**
          * Get the view state of this leaf.
          *
+         * @returns The view state of the leaf.
          * @official
          */
         getViewState(): ViewState;
 
         /**
          * Handle a drop event on this leaf.
+         *
+         * @param event - The drag event.
+         * @param draggable - The draggable item.
+         * @param isOver - Whether the drag is over this leaf.
+         * @returns The drop result, or `null` if not handled.
          * @unofficial
          */
         handleDrop(event: DragEvent, draggable: Draggable, isOver: boolean): DropResult | null;

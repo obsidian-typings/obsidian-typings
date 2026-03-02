@@ -13,6 +13,8 @@ export interface BacklinkView extends InfoFileView {
 
     /**
      * Get the current view type.
+     *
+     * @returns The backlink view type.
      */
     getViewType(): typeof ViewType.Backlink;
 

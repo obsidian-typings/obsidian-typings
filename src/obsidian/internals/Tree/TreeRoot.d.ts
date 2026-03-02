@@ -5,6 +5,8 @@ import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
 
 /**
  * Root node of a tree view that contains all top-level tree items.
+ *
+ * @typeParam Item - The type of the tree items.
  * @public
  * @unofficial
  */

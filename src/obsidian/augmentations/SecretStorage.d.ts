@@ -9,7 +9,7 @@ declare module 'obsidian' {
         /**
          * Gets the last access timestamp for a secret key
          * @param id The secret ID
-         * @returns Timestamp in milliseconds, or null if never accessed
+         * @returns Timestamp in milliseconds, or `null` if never accessed
          * @official
          */
         getLastAccess(id: string): number | null;
@@ -18,7 +18,7 @@ declare module 'obsidian' {
          * Gets a secret from storage
          *
          * @param id - the secret ID
-         * @returns the secret value or null if not found
+         * @returns the secret value or `null` if not found
          * @official
          * @since 1.11.4
          */

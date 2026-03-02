@@ -10,14 +10,25 @@ import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts'
  * @unofficial
  */
 export interface BookmarksView extends ItemView {
-    /** Copy the selected bookmarks to the clipboard. */
+    /**
+     * Copy the selected bookmarks to the clipboard.
+     *
+     * @param e - The copy event or context.
+     * @param t - The target bookmark items.
+     */
     _copyToClipboard(e: unknown, t: unknown): void;
 
-    /** Get the currently active/selected bookmark items. */
+    /**
+     * Get the currently active/selected bookmark items.
+     *
+     * @returns The active bookmark items.
+     */
     _getActiveBookmarks(): unknown[];
 
     /**
      * Attaches the handleDrag of DragManager.
+     *
+     * @param e - The element to attach the drag handler to.
      */
     attachDragHandler(e: unknown): void;
 
@@ -26,16 +37,36 @@ export interface BookmarksView extends ItemView {
      */
     attachDropHandler(): void;
 
-    /** Create a new bookmark group. */
+    /**
+     * Create a new bookmark group.
+     *
+     * @param e - The event or context for group creation.
+     */
     createNewGroup(e: unknown): void;
 
-    /** Initiate a drag operation for the selected bookmarks. */
+    /**
+     * Initiate a drag operation for the selected bookmarks.
+     *
+     * @param e - The drag event.
+     * @param t - The drag target information.
+     * @returns The drag data, or null.
+     */
     dragSelectedBookmarks(e: unknown, t: unknown): unknown | null;
 
-    /** Get the DOM element for a bookmark item. */
+    /**
+     * Get the DOM element for a bookmark item.
+     *
+     * @param e - The bookmark item.
+     * @returns The DOM element for the item.
+     */
     getItemDom(e: unknown): unknown;
 
-    /** Get the unique node identifier for a bookmark item. */
+    /**
+     * Get the unique node identifier for a bookmark item.
+     *
+     * @param e - The bookmark item.
+     * @returns The node identifier string.
+     */
     getNodeId(e: unknown): string;
 
     /**
@@ -43,13 +74,26 @@ export interface BookmarksView extends ItemView {
      */
     getViewType(): typeof ViewType.Bookmarks;
 
-    /** Handle the collapse/expand all toggle action. */
+    /**
+     * Handle the collapse/expand all toggle action.
+     *
+     * @param e - Whether to collapse all.
+     */
     handleCollapseAll(e: unknown): void;
 
-    /** Check whether the given object is a bookmark item. */
+    /**
+     * Check whether the given object is a bookmark item.
+     *
+     * @param item - The object to check.
+     * @returns Whether the object is a bookmark item.
+     */
     isItem(item: unknown): boolean;
 
-    /** Handle the context menu event on a bookmark item. */
+    /**
+     * Handle the context menu event on a bookmark item.
+     *
+     * @param event - The context menu event.
+     */
     onContextMenu(event: unknown): void;
 
     /**
@@ -73,7 +117,11 @@ export interface BookmarksView extends ItemView {
      */
     onFileDelete(file: TFile): void;
 
-    /** Handle a file being opened and highlight corresponding bookmark. */
+    /**
+     * Handle a file being opened and highlight corresponding bookmark.
+     *
+     * @param file - The opened file.
+     */
     onFileOpen(file: TFile): void;
 
     /**

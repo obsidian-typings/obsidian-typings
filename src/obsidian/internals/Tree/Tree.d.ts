@@ -9,6 +9,8 @@ import type { TreeRoot } from './TreeRoot.d.ts';
 
 /**
  * Hierarchical tree view UI component used for file explorers, search results, and similar views.
+ *
+ * @typeParam T - The type of tree item managed by this tree.
  * @public
  * @unofficial
  */
@@ -40,6 +42,8 @@ export interface Tree<T extends TreeItem> {
 
     /**
      * Handle renaming of focused item.
+     *
+     * @param event - The keyboard event that triggered the rename.
      */
     handleRenameFocusedItem: (event: KeyboardEvent) => void;
 
@@ -90,6 +94,8 @@ export interface Tree<T extends TreeItem> {
 
     /**
      * Change the focused item to the next item in specified direction.
+     *
+     * @param direction - The direction to move focus.
      */
     changeFocusedItem(direction: 'forwards' | 'backwards'): void;
 
@@ -100,26 +106,38 @@ export interface Tree<T extends TreeItem> {
 
     /**
      * Mark tree item as deselected.
+     *
+     * @param node - The tree item to deselect.
      */
     deselectItem(node: T): void;
 
     /**
      * Get the local storage key for the saved tree view folds.
+     *
+     * @returns The local storage key string.
      */
     getFoldKey(): string;
 
     /**
      * Gets the ID of a tree item given its Node.
+     *
+     * @param node - The tree item to get the ID for.
+     * @returns The node ID, or `undefined` if not found.
      */
     getNodeId(node: T): string | undefined;
 
     /**
      * Handle deletion of selected nodes.
+     *
+     * @param event - The keyboard event that triggered the deletion.
      */
     handleDeleteSelectedItems(event: KeyboardEvent): Promise<void>;
 
     /**
      * Handle selection of tree item via keyboard event.
+     *
+     * @param event - The mouse event that triggered the selection.
+     * @param node - The tree item being selected.
      */
     handleItemSelection(event: MouseEvent, node: T): void;
 
@@ -130,6 +148,9 @@ export interface Tree<T extends TreeItem> {
 
     /**
      * Check whether item is a valid tree item.
+     *
+     * @param node - The item to check.
+     * @returns Whether the item is a valid tree item.
      */
     isItem(node: T | undefined): boolean;
 
@@ -140,26 +161,36 @@ export interface Tree<T extends TreeItem> {
 
     /**
      * Handle keyboard event for moving/selecting tree item below.
+     *
+     * @param event - The keyboard event.
      */
     onKeyArrowDown(event: KeyboardEvent): void;
 
     /**
      * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding).
+     *
+     * @param event - The keyboard event.
      */
     onKeyArrowLeft(event: KeyboardEvent): void;
 
     /**
      * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding).
+     *
+     * @param event - The keyboard event.
      */
     onKeyArrowRight(event: KeyboardEvent): void;
 
     /**
      * Handle keyboard event for moving/selecting tree item above.
+     *
+     * @param event - The keyboard event.
      */
     onKeyArrowUp(event: KeyboardEvent): void;
 
     /**
      * Handle keyboard event for opening tree item.
+     *
+     * @param event - The keyboard event.
      */
     onKeyOpen(event: KeyboardEvent): void;
 
@@ -175,16 +206,23 @@ export interface Tree<T extends TreeItem> {
 
     /**
      * Mark tree item as selected.
+     *
+     * @param node - The tree item to select.
      */
     selectItem(node: T): void;
 
     /**
      * Set all items in the tree view to be collapsed or expanded.
+     *
+     * @param collapse - Whether to collapse all items.
      */
     setCollapseAll(collapse: boolean): void;
 
     /**
      * Set the focused item in the tree view.
+     *
+     * @param node - The tree item to focus.
+     * @param scrollIntoView - Whether to scroll the item into view.
      */
     setFocusedItem(node: T, scrollIntoView?: boolean): void;
 

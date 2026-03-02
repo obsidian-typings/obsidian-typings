@@ -20,6 +20,12 @@ declare module 'obsidian' {
 
         /**
          * Applies a summary function to a single property over a set of entries.
+         *
+         * @param queryController - The query controller to use.
+         * @param entries - The entries to summarize.
+         * @param prop - The property to summarize.
+         * @param summaryKey - The key identifying the summary function.
+         * @returns The computed summary value.
          * @official
          * @since 1.10.0
          */
@@ -33,6 +39,8 @@ declare module 'obsidian' {
         /**
          * The data to be rendered, grouped according to the groupBy config.
          * If there is no groupBy configured, returns a single group with an empty key.
+         *
+         * @returns The grouped entry data.
          * @official
          * @since 1.10.0
          * @deprecated - Added only for typing purposes. Use {@link groupedData} instead.
@@ -41,6 +49,8 @@ declare module 'obsidian' {
 
         /**
          * Visible properties defined by the user.
+         *
+         * @returns The visible property identifiers.
          * @official
          * @since 1.10.0
          * @deprecated - Added only for typing purposes. Use {@link properties} instead.

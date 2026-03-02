@@ -147,13 +147,25 @@ export interface GraphRenderer {
     /** Destroy all the graphics of the graph. */
     destroyGraphics(): void;
 
-    /** Capture a screenshot of the graph with the background included. */
+    /**
+     * Capture a screenshot of the graph with the background included.
+     *
+     * @returns The canvas element containing the screenshot.
+     */
     getBackgroundScreenshot(): HTMLCanvasElement;
 
-    /** Returns the currently highlighted node, if any. */
+    /**
+     * Returns the currently highlighted node, if any.
+     *
+     * @returns The highlighted node, or `null` if none.
+     */
     getHighlightNode(): GraphNode | null;
 
-    /** Capture a screenshot of the graph with a transparent background. */
+    /**
+     * Capture a screenshot of the graph with a transparent background.
+     *
+     * @returns The canvas containing the screenshot.
+     */
     getTransparentScreenshot(): ICanvas;
 
     /** Initialize all the graphics of the graph. */
@@ -165,34 +177,70 @@ export interface GraphRenderer {
     /** Called when the graph iframe is unloaded. */
     onIframeUnload(): void;
 
-    /** Handle mouse movement over the graph view. */
+    /**
+     * Handle mouse movement over the graph view.
+     *
+     * @param evt - The mouse event.
+     */
     onMouseMove(evt: MouseEvent): void;
 
-    /** Handle a click on a graph node. */
+    /**
+     * Handle a click on a graph node.
+     *
+     * @param evt - The mouse event.
+     * @param id - The identifier of the clicked node.
+     * @param type - The type of the clicked node.
+     */
     onNodeClick(evt: MouseEvent, id: string, type: string): void;
 
-    /** Handle hover over a graph node. */
+    /**
+     * Handle hover over a graph node.
+     *
+     * @param evt - The mouse event.
+     * @param id - The identifier of the hovered node.
+     * @param type - The type of the hovered node.
+     */
     onNodeHover(evt: MouseEvent, id: string, type: string): void;
 
-    /** Handle a right-click on a graph node. */
+    /**
+     * Handle a right-click on a graph node.
+     *
+     * @param evt - The mouse event.
+     * @param id - The identifier of the right-clicked node.
+     * @param type - The type of the right-clicked node.
+     */
     onNodeRightClick(evt: MouseEvent, id: string, type: string): void;
 
     /** Handle the pointer leaving a graph node. */
     onNodeUnhover(): void;
 
-    /** Handle a pointer down event on the graph. */
+    /**
+     * Handle a pointer down event on the graph.
+     *
+     * @param renderer - The graph renderer instance.
+     * @param evt - The pointer event.
+     */
     onPointerDown(renderer: GraphRenderer, evt: PointerEvent): void;
 
     /** Handle the pointer leaving the graph view. */
     onPointerOut(): void;
 
-    /** Handle the pointer entering the graph view. */
+    /**
+     * Handle the pointer entering the graph view.
+     *
+     * @param renderer - The graph renderer instance.
+     * @param evt - The pointer event.
+     */
     onPointerOver(renderer: GraphRenderer, evt: PointerEvent): void;
 
     /** Handle a resize of the graph container. */
     onResize(): void;
 
-    /** Handle a wheel (scroll/zoom) event on the graph view. */
+    /**
+     * Handle a wheel (scroll/zoom) event on the graph view.
+     *
+     * @param evt - The wheel event.
+     */
     onWheel(evt: WheelEvent): void;
 
     /** Queue a render frame to be executed on the next animation frame. */
@@ -204,19 +252,40 @@ export interface GraphRenderer {
     /** Reset the pan offset to the origin. */
     resetPan(): void;
 
-    /** Set the graph data (nodes and links) to render. */
+    /**
+     * Set the graph data (nodes and links) to render.
+     *
+     * @param data - The graph data containing nodes and links.
+     */
     setData(data: GraphData): void;
 
-    /** Set the force simulation parameters. */
+    /**
+     * Set the force simulation parameters.
+     *
+     * @param forces - The force simulation parameters.
+     */
     setForces(forces: GraphForces): void;
 
-    /** Set the pan offset to the given coordinates. */
+    /**
+     * Set the pan offset to the given coordinates.
+     *
+     * @param panX - The pan offset along the x axis.
+     * @param panY - The pan offset along the y axis.
+     */
     setPan(panX: number, panY: number): void;
 
-    /** Set the rendering options for the graph view. */
+    /**
+     * Set the rendering options for the graph view.
+     *
+     * @param options - The graph plugin instance options.
+     */
     setRenderOptions(options: GraphPluginInstanceOptions): void;
 
-    /** Set the zoom scale of the graph view. */
+    /**
+     * Set the zoom scale of the graph view.
+     *
+     * @param scale - The zoom scale level.
+     */
     setScale(scale: number): void;
 
     /** Re-read CSS variables and update the graph colors accordingly. */
@@ -225,6 +294,11 @@ export interface GraphRenderer {
     /** Interpolate the current zoom level towards the target scale. */
     updateZoom(): void;
 
-    /** Zoom the graph view to the given scale, centered on the given point. */
+    /**
+     * Zoom the graph view to the given scale, centered on the given point.
+     *
+     * @param scale - The target zoom scale.
+     * @param pointer - The point to center the zoom on.
+     */
     zoomTo(scale: number, pointer: Point): void;
 }

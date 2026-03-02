@@ -10,7 +10,7 @@ export interface PdfExportSettings {
     downscalePercent: number;
 
     /**
-     * Default: false.
+     * Default: `false`.
      */
     landscape: boolean;
 

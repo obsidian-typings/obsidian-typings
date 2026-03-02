@@ -512,6 +512,8 @@ declare global {
          *  8. Set up Vim to work as a keymap for CodeMirror.
          *  9. Ex command implementations.
          *
+         * @param CodeMirror - The CodeMirror adapter instance.
+         * @returns The Vim API instance.
          * @unofficial
          */
         initVimMode(CodeMirror: CodeMirrorAdapterEx): VimApi;
@@ -532,12 +534,20 @@ declare global {
 
         /**
          * Minified helper to copy properties from source to target object.
+         *
+         * @param target - The target object to copy properties to.
+         * @param source - The source object to copy properties from.
+         * @returns The target object with copied properties.
          * @unofficial
          */
         li(target: object, source: object): object;
 
         /**
          * Minified helper to pick specified properties from an object.
+         *
+         * @param target - The source object to pick properties from.
+         * @param propertyNames - The names of the properties to pick.
+         * @returns A new object with only the specified properties.
          * @unofficial
          */
         mo(target: object, propertyNames: string[]): object;
@@ -556,6 +566,13 @@ declare global {
 
         /**
          * Open or create a WebSQL database.
+         *
+         * @param name - The name of the database.
+         * @param version - The version of the database.
+         * @param displayName - The display name of the database.
+         * @param estimatedSize - The estimated size of the database in bytes.
+         * @param creationCallback - Optional callback invoked when the database is created.
+         * @returns The opened or created database.
          * @unofficial
          */
         openDatabase(
@@ -601,12 +618,21 @@ declare global {
 
         /**
          * Minified helper to merge source properties into target object.
+         *
+         * @param target - The target object to merge properties into.
+         * @param source - The source object to merge properties from.
+         * @returns The target object with merged properties.
          * @unofficial
          */
         St(target: object, source: object | undefined): object;
 
         /**
          * Minified helper to set a property on an object.
+         *
+         * @param target - The object to set the property on.
+         * @param propertyName - The name of the property.
+         * @param propertyValue - The value to set.
+         * @returns The set property value.
          * @unofficial
          */
         Tl(target: object, propertyName: string, propertyValue: unknown): unknown;

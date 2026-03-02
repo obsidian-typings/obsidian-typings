@@ -15,6 +15,11 @@ export interface EventsEntry {
     /** Event name this handler listens for. */
     name: string;
 
-    /** Event handler callback function. */
+    /**
+     * Event handler callback function.
+     *
+     * @param data - The event data arguments.
+     * @returns The result of the event handler.
+     */
     fn(...data: unknown[]): unknown;
 }

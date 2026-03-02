@@ -69,6 +69,7 @@ declare module 'obsidian' {
         /**
          * Get view state for sync plugin.
          *
+         * @returns The sync view state.
          * @unofficial
          */
         getSyncViewState(): unknown;
@@ -76,7 +77,8 @@ declare module 'obsidian' {
         /**
          * Loads the file with the onLoadFile function.
          *
-         * @param file The File to load.
+         * @param file - The file to load.
+         * @returns A promise that resolves when the file is loaded.
          * @unofficial
          */
         loadFile(file: TFile): Promise<unknown>;
@@ -84,7 +86,7 @@ declare module 'obsidian' {
         /**
          * Updates the view if it contains the deleted file.
          *
-         * @param file The file that is deleted.
+         * @param file - The file that was deleted.
          * @unofficial
          */
         onDelete(file: TFile): Promise<void>;
@@ -171,6 +173,9 @@ declare module 'obsidian' {
 
         /**
          * Synchronize the view state with the sync plugin.
+         *
+         * @param e - Whether to enable sync state.
+         * @returns A promise that resolves when the state is synchronized.
          * @unofficial
          */
         syncState(e: boolean): Promise<unknown>;

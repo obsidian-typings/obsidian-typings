@@ -29,13 +29,29 @@ export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin>
     /** Reload options when settings are changed externally. */
     onExternalSettingsChange(): Promise<void>;
 
-    /** Add graph-related items to the file context menu. */
+    /**
+     * Add graph-related items to the file context menu.
+     *
+     * @param menu - The context menu to add items to.
+     * @param file - The file associated with the menu.
+     * @param source - The source of the menu event.
+     * @param leaf - The workspace leaf, if available.
+     */
     onFileMenu(menu: Menu, file: TAbstractFile, source: string, leaf?: WorkspaceLeaf): void;
 
-    /** Open the global graph view. */
+    /**
+     * Open the global graph view.
+     *
+     * @param newLeaf - Whether to open the graph in a new leaf.
+     */
     openGraphView(newLeaf: boolean): void;
 
-    /** Open the local graph view for the current file. */
+    /**
+     * Open the local graph view for the current file.
+     *
+     * @param checking - Whether to only check if the command can be executed.
+     * @returns `true` if the command can be executed, or `undefined`.
+     */
     openLocalGraph(checking: boolean): true | undefined;
 
     /**

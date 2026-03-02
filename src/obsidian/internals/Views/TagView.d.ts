@@ -7,24 +7,48 @@ import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
  * @unofficial
  */
 export interface TagView extends View {
-    /** Get the identifier of a tag tree node. */
+    /**
+     * Get the identifier of a tag tree node.
+     *
+     * @param e - The tag tree node.
+     * @returns The node identifier.
+     */
     getNodeId(e: unknown): unknown;
 
     /**
      * Get the current view type.
+     *
+     * @returns The view type identifier.
      */
     getViewType(): typeof ViewType.Tag;
 
-    /** Check whether the given item is a valid tag view item. */
+    /**
+     * Check whether the given item is a valid tag view item.
+     *
+     * @param item - The item to check.
+     * @returns Whether the item is a valid tag view item.
+     */
     isItem(item: unknown): boolean;
 
-    /** Handle pressing Enter on the currently focused tag item. */
+    /**
+     * Handle pressing Enter on the currently focused tag item.
+     *
+     * @param event - The keyboard event.
+     */
     onKeyEnterInFocus(event: KeyboardEvent): void;
 
-    /** Set whether all tag groups are collapsed. */
+    /**
+     * Set whether all tag groups are collapsed.
+     *
+     * @param e - Whether all groups should be collapsed.
+     */
     setIsAllCollapsed(e: unknown): void;
 
-    /** Set whether tags should be displayed in a nested hierarchy. */
+    /**
+     * Set whether tags should be displayed in a nested hierarchy.
+     *
+     * @param e - Whether to use hierarchy.
+     */
     setUseHierarchy(e: unknown): void;
 
     /**

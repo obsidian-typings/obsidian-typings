@@ -19,15 +19,37 @@ export interface OpenDialogOptions {
     /** Initial value for the dialog input. */
     value: string;
 
-    /** Callback invoked when the dialog is closed. */
+    /**
+     * Callback invoked when the dialog is closed.
+     *
+     * @param div - The dialog container element.
+     */
     onClose(div: HTMLDivElement): void;
 
-    /** Callback invoked when the dialog input value changes. */
+    /**
+     * Callback invoked when the dialog input value changes.
+     *
+     * @param e - The keyboard event.
+     * @param value - The current input value.
+     * @param callback - The callback to invoke with the result.
+     */
     onInput(e: KeyboardEvent, value: string, callback: (value: unknown) => void): void;
 
-    /** Callback invoked when a key is pressed down in the dialog. */
+    /**
+     * Callback invoked when a key is pressed down in the dialog.
+     *
+     * @param e - The keyboard event.
+     * @param value - The current input value.
+     * @param callback - The callback to invoke with the result.
+     */
     onKeyDown(e: KeyboardEvent, value: string, callback: (value: unknown) => void): void;
 
-    /** Callback invoked when a key is released in the dialog. */
+    /**
+     * Callback invoked when a key is released in the dialog.
+     *
+     * @param e - The keyboard event.
+     * @param value - The current input value.
+     * @param callback - The callback to invoke with the result.
+     */
     onKeyUp(e: KeyboardEvent, value: string, callback: (value: unknown) => void): void;
 }

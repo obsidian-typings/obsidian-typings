@@ -81,11 +81,15 @@ export interface MetadataEditorProperty extends Component {
 
     /**
      * Focus on the value input element.
+     *
+     * @param mode - Focus mode.
      */
     focusValue(mode?: FocusMode): void;
 
     /**
      * Reveal the property menu on click event.
+     *
+     * @param event - The mouse event.
      */
     handleItemClick(event: MouseEvent): void;
 
@@ -95,12 +99,17 @@ export interface MetadataEditorProperty extends Component {
     handlePropertyBlur(): void;
 
     /**
-     * Update key of property and saves, returns false if error.
+     * Update key of property and saves, returns `false` if error.
+     *
+     * @param key - New key value.
+     * @returns Whether the update succeeded.
      */
     handleUpdateKey(key: string): boolean;
 
     /**
      * Update value of property and saves.
+     *
+     * @param value - New value.
      */
     handleUpdateValue(value: unknown): void;
 
@@ -111,16 +120,24 @@ export interface MetadataEditorProperty extends Component {
 
     /**
      * Render property widget based on type.
+     *
+     * @param entry - Property entry data.
+     * @param check_errors - Whether to check for errors.
+     * @param use_expected_type - Whether to use the expected type.
      */
     renderProperty(entry: PropertyEntryData<unknown>, check_errors?: boolean, use_expected_type?: boolean): void;
 
     /**
      * Set the selected class of property.
+     *
+     * @param selected - Whether to select or deselect.
      */
     setSelected(selected: boolean): void;
 
     /**
      * Reveal property selection menu at mouse event.
+     *
+     * @param event - The mouse event.
      */
     showPropertyMenu(event: MouseEvent): void;
 }

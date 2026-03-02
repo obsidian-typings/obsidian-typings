@@ -24,6 +24,8 @@ declare module 'obsidian' {
         /**
          * Adds a decorator to the right side of the search component.
          *
+         * @param decoratorFn - The function that creates the decorator element.
+         * @returns The search component.
          * @unofficial
          */
         addRightDecorator(decoratorFn: (containerEl: HTMLElement) => void): this;
@@ -47,6 +49,8 @@ declare module 'obsidian' {
         /**
          * Adds a class to the search component.
          *
+         * @param cls - The CSS class to add.
+         * @returns The search component.
          * @unofficial
          */
         setClass(cls: string): this;

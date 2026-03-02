@@ -24,32 +24,37 @@ export interface TreeCollapsibleItem extends TreeItem {
 
     /**
      * Execute collapse functionality on mouse click.
+     *
+     * @param event - The mouse click event.
      */
     onCollapseClick(event: MouseEvent): void;
 
     /**
      * Set collapsed state of tree item.
      *
-     * @param animate - If set to true, will animate on collapse.
+     * @param value - Whether the item should be collapsed.
+     * @param animate - If set to `true`, will animate on collapse.
      */
     setCollapsed(value: boolean, animate?: boolean): Promise<undefined>;
 
     /**
      * Set collapsible state of tree item.
+     *
+     * @param value - Whether the item should be collapsible.
      */
     setCollapsible(value: boolean): void;
 
     /**
      * Toggle collapsed state of tree item.
      *
-     * @param animate - If set to true, will animate on collapse.
+     * @param animate - If set to `true`, will animate on collapse.
      */
     toggleCollapsed(animate?: boolean): Promise<undefined>;
 
     /**
      * Update the tree item's cover element.
      *
-     * @param animate - If set to true, will animate on collapse.
+     * @param animate - If set to `true`, will animate on collapse.
      */
     updateCollapsed(animate?: boolean): Promise<undefined>;
 }

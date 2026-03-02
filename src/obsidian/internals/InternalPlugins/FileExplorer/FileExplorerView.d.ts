@@ -80,7 +80,11 @@ export interface FileExplorerView extends View {
      */
     attachDropHandler(folder: TFolder, el: HTMLElement): void;
 
-    /** Attach file-related event listeners to an element. */
+    /**
+     * Attach file-related event listeners to an element.
+     *
+     * @param e - The element to attach events to.
+     */
     attachFileEvents(e: unknown): void;
 
     /**
@@ -92,16 +96,37 @@ export interface FileExplorerView extends View {
      */
     createAbstractFile(type: 'file' | 'folder', location: TFolder, newLeaf: PaneType | boolean): Promise<void>;
 
-    /** Create a tree item DOM element for the given folder. */
+    /**
+     * Create a tree item DOM element for the given folder.
+     *
+     * @param folder - The folder to create a tree item for.
+     * @returns The created folder tree item.
+     */
     createFolderDom(folder: TFolder): unknown;
 
-    /** Create a tree item DOM element for the given file. */
+    /**
+     * Create a tree item DOM element for the given file.
+     *
+     * @param file - The file to create a tree item for.
+     * @returns The created file tree item.
+     */
     createItemDom(file: TFile): unknown;
 
-    /** Display an error message on a file tree item. */
+    /**
+     * Display an error message on a file tree item.
+     *
+     * @param message - The error message to display.
+     * @param fileItem - The file tree item to display the error on.
+     */
     displayError(message: string, fileItem: unknown): void;
 
-    /** Handle dragging files from the file explorer. */
+    /**
+     * Handle dragging files from the file explorer.
+     *
+     * @param event - The drag event.
+     * @param t - The drag target information.
+     * @returns The drag result.
+     */
     dragFiles(event: DragEvent, t: unknown): unknown;
 
     /**
@@ -109,11 +134,19 @@ export interface FileExplorerView extends View {
      */
     exitRename(): void;
 
-    /** Get the unique node identifier for a tree item. */
+    /**
+     * Get the unique node identifier for a tree item.
+     *
+     * @param e - The tree item.
+     * @returns The node identifier.
+     */
     getNodeId(e: unknown): unknown;
 
     /**
      * Get a sorted list of the tree items for a specific folder).
+     *
+     * @param folder - The folder to get sorted items for.
+     * @returns The sorted file tree items.
      */
     getSortedFolderItems(folder: TFolder): FileTreeItem[];
 
@@ -122,7 +155,12 @@ export interface FileExplorerView extends View {
      */
     getViewType(): typeof ViewType.FileExplorer;
 
-    /** Check whether the given object is a file tree item. */
+    /**
+     * Check whether the given object is a file tree item.
+     *
+     * @param item - The object to check.
+     * @returns Whether the object is a file tree item.
+     */
     isItem(item: unknown): boolean;
 
     /**
@@ -191,7 +229,11 @@ export interface FileExplorerView extends View {
      */
     onFileOpen(file: TFile): void;
 
-    /** Handle input events in the file rename text field. */
+    /**
+     * Handle input events in the file rename text field.
+     *
+     * @param e - The input event.
+     */
     onFileRenameInput(e: unknown): void;
 
     /**
@@ -241,10 +283,16 @@ export interface FileExplorerView extends View {
 
     /**
      * Reveal a file or folder in the file tree.
+     *
+     * @param file - The file or folder to reveal.
      */
     revealInFolder(file: TFile | TFolder): void;
 
-    /** Set whether all folders are collapsed. */
+    /**
+     * Set whether all folders are collapsed.
+     *
+     * @param e - Whether to collapse all folders.
+     */
     setIsAllCollapsed(e: unknown): void;
 
     /**
@@ -259,7 +307,12 @@ export interface FileExplorerView extends View {
      */
     sort(): void;
 
-    /** Begin inline renaming of a file tree item. */
+    /**
+     * Begin inline renaming of a file tree item.
+     *
+     * @param e - The file tree item to rename.
+     * @returns The rename result.
+     */
     startRenameFile(e: unknown): unknown;
 
     /**

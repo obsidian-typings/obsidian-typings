@@ -6,6 +6,8 @@ import type { MaybeDeferredView } from './Views/MaybeDeferredView.d.ts';
 
 /**
  * A workspace leaf with a strongly typed view.
+ *
+ * @typeParam TView - The type of the view.
  * @public
  * @unofficial
  */

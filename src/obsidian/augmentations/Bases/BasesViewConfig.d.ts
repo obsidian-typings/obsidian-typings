@@ -19,6 +19,8 @@ declare module 'obsidian' {
         /**
          * Retrieve the user-configured value of options exposed in `BasesViewRegistration.options`.
          *
+         * @param key - The option key to retrieve.
+         * @returns The configured value for the key.
          * @official
          * @since 1.10.0
          */
@@ -41,6 +43,8 @@ declare module 'obsidian' {
          * File properties may have a default name that is returned, otherwise the name with the property
          * type prefix removed is returned.
          *
+         * @param propertyId - The property identifier to get the display name for.
+         * @returns The display name of the property.
          * @official
          * @since 1.10.0
          */
@@ -78,6 +82,7 @@ declare module 'obsidian' {
          *
          * Note that data from {@link BasesQueryResult} will be presorted.
          *
+         * @returns The array of sort configurations.
          * @official
          * @since 1.10.0
          */

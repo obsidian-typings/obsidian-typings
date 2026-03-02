@@ -11,6 +11,7 @@ export interface DomEventsHandlers {
      * @param evt - The mouse event.
      * @param targetEl - The target element.
      * @param linkText - The link text.
+     * @returns The result of handling the click.
      */
     onExternalLinkClick(evt: MouseEvent, targetEl: HTMLElement, linkText: string): unknown;
 
@@ -20,6 +21,7 @@ export interface DomEventsHandlers {
      * @param evt - The mouse event.
      * @param targetEl - The target element.
      * @param linkText - The link text.
+     * @returns The result of handling the right click.
      */
     onExternalLinkRightClick(evt: MouseEvent, targetEl: HTMLElement, linkText: string): unknown;
 
@@ -29,6 +31,7 @@ export interface DomEventsHandlers {
      * @param evt - The mouse event.
      * @param targetEl - The target element.
      * @param linkText - The link text.
+     * @returns The result of handling the click.
      */
     onInternalLinkClick(evt: MouseEvent, targetEl: HTMLElement, linkText: string): unknown;
 
@@ -39,6 +42,7 @@ export interface DomEventsHandlers {
      * @param targetEl - The target element.
      * @param linkText - The link text.
      * @param title - The title.
+     * @returns The result of handling the drag.
      */
     onInternalLinkDrag(evt: MouseEvent, targetEl: HTMLElement, linkText: string, title?: string): unknown;
 
@@ -48,6 +52,7 @@ export interface DomEventsHandlers {
      * @param evt - The mouse event.
      * @param targetEl - The target element.
      * @param linkText - The link text.
+     * @returns The result of handling the mouseover.
      */
     onInternalLinkMouseover(evt: MouseEvent, targetEl: HTMLElement, linkText: string): unknown;
 
@@ -57,6 +62,7 @@ export interface DomEventsHandlers {
      * @param evt - The mouse event.
      * @param targetEl - The target element.
      * @param linkText - The link text.
+     * @returns The result of handling the right click.
      */
     onInternalLinkRightClick(evt: MouseEvent, targetEl: HTMLElement, linkText: string): unknown;
 
@@ -66,6 +72,7 @@ export interface DomEventsHandlers {
      * @param evt - The mouse event.
      * @param targetEl - The target element.
      * @param linkText - The link text.
+     * @returns The result of handling the tag click.
      */
     onTagClick(evt: MouseEvent, targetEl: HTMLElement, tag: string): unknown;
 }

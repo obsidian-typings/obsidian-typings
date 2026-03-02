@@ -22,6 +22,9 @@ export interface WebviewerDBStore {
 
     /**
      * Add a history item to the database.
+     *
+     * @param url - The URL of the history item.
+     * @param title - Optional title for the history item.
      */
     addHistoryItem(url: string, title?: string): Promise<void>;
 
@@ -35,6 +38,8 @@ export interface WebviewerDBStore {
 
     /**
      * Get all history items.
+     *
+     * @returns All stored history items.
      */
     getHistoryItems(): Promise<WebviewerHistoryItem[]>;
 
@@ -51,11 +56,17 @@ export interface WebviewerDBStore {
 
     /**
      * Remove specific history item based on its {@link WebviewerHistoryItem.id | id}.
+     *
+     * @param item - The history item to remove.
      */
     removeHistoryItem(item: WebviewerHistoryItem): Promise<void>;
 
     /**
      * Add a fav icon to the element.
+     *
+     * @param el - The element to add the icon to.
+     * @param url - The URL to get the icon for.
+     * @param source - Optional source URL for the icon.
      */
     setIcon(el: HTMLElement, url: string, source?: string): Promise<void>;
 

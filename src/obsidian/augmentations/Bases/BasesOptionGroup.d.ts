@@ -4,6 +4,7 @@ declare module 'obsidian' {
     /**
      * Collapsible container for other ViewOptions.
      *
+     * @typeParam T - The type of the options in the group.
      * @since 1.10.0
      */
     export interface BasesOptionGroup<T extends BasesOption> {
@@ -22,7 +23,7 @@ declare module 'obsidian' {
         items: T[];
 
         /**
-         * If provided, the group will be hidden if the function returns true.
+         * If provided, the group will be hidden if the function returns `true`.
          *
          * @public
          * @since 1.10.2

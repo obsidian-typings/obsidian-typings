@@ -9,6 +9,8 @@ import type { ViewType } from '../../implementations/Constants/ViewType.d.ts';
 export interface AudioView extends EditableFileView {
     /**
      * Get the current view type.
+     *
+     * @returns The view type identifier.
      */
     getViewType(): typeof ViewType.Audio;
 }

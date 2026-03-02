@@ -50,6 +50,8 @@ declare module 'obsidian' {
 
         /**
          * Get the current color value as an integer.
+         *
+         * @returns The current color value as an integer.
          * @unofficial
          */
         getValueInt(): number;
@@ -83,6 +85,7 @@ declare module 'obsidian' {
          * Disable the color picker.
          *
          * @param disabled - Whether to disable the color picker.
+         * @returns The color picker.
          * @example
          * ```ts
          * colorPicker.setDisabled(true);
@@ -122,6 +125,9 @@ declare module 'obsidian' {
 
         /**
          * Set the current color value from an integer.
+         *
+         * @param value - The integer color value to set.
+         * @returns The color picker.
          * @unofficial
          */
         setValueInt(value: number): this;

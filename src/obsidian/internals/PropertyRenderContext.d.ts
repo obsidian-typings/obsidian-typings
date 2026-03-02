@@ -29,6 +29,8 @@ export interface PropertyRenderContext {
 
     /**
      * Callback called on property value change.
+     *
+     * @param value - The new property value.
      */
     onChange(value: unknown): void;
 }

@@ -18,6 +18,8 @@ export interface GraphView extends ItemView {
 
     /**
      * Get the current view type.
+     *
+     * @returns The graph view type.
      */
     getViewType(): typeof ViewType.Graph;
 

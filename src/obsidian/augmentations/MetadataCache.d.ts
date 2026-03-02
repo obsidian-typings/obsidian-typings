@@ -102,7 +102,7 @@ declare module 'obsidian' {
         preload: () => Promise<void>;
 
         /**
-         * Promise that resolves when the preload is complete, or null if not started.
+         * Promise that resolves when the preload is complete, or `null` if not started.
          * @unofficial
          */
         preloadPromise: Promise<void> | null;
@@ -162,7 +162,7 @@ declare module 'obsidian' {
         worker: Worker;
 
         /**
-         * Resolve function for the current worker promise, or null if idle.
+         * Resolve function for the current worker promise, or `null` if idle.
          * @unofficial
          */
         workerResolve: ((value: CachedMetadata | PromiseLike<CachedMetadata>) => void) | null;
@@ -175,12 +175,16 @@ declare module 'obsidian' {
 
         /**
          * Internal method to resolve link path destinations from an origin.
+         *
+         * @param origin - The origin path.
+         * @param path - The link path to resolve.
+         * @returns The matching files.
          * @unofficial
          */
         _getLinkpathDest(origin: string, path: string): TFile[];
 
         /**
-         * Clear all caches to null values
+         * Clear all caches to `null` values
          *
          * @unofficial
          */
@@ -195,12 +199,16 @@ declare module 'obsidian' {
         /**
          * Called by initialize()
          *
+         * @param file - The file to compute metadata for.
          * @unofficial
          */
         computeFileMetadataAsync(file: TFile): Promise<void>;
 
         /**
          * Compute metadata from raw file content asynchronously.
+         *
+         * @param arrayBuffer - The raw file content.
+         * @returns A promise that resolves to the computed metadata, or `undefined`.
          * @unofficial
          */
         computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<CachedMetadata | undefined>;
@@ -208,6 +216,7 @@ declare module 'obsidian' {
         /**
          * Remove all entries that contain deleted path
          *
+         * @param path - The path to remove entries for.
          * @unofficial
          */
         deletePath(path: string): void;
@@ -234,6 +243,7 @@ declare module 'obsidian' {
         /**
          * Get all property infos of the vault.
          *
+         * @returns A record of property name to property info.
          * @unofficial
          */
         getAllPropertyInfos(): Record<string, PropertyInfo>;
@@ -241,6 +251,8 @@ declare module 'obsidian' {
         /**
          * Get all backlink information for a file.
          *
+         * @param file - The file to get backlinks for.
+         * @returns The backlinks for the file.
          * @unofficial
          */
         getBacklinksForFile(file: TFile): CustomArrayDict<Reference>;
@@ -262,6 +274,7 @@ declare module 'obsidian' {
         /**
          * Get paths of all files cached in the vault.
          *
+         * @returns The paths of all cached files.
          * @unofficial
          */
         getCachedFiles(): string[];
@@ -284,6 +297,8 @@ declare module 'obsidian' {
         /**
          * Get an entry from the file cache.
          *
+         * @param path - The path to get the file info for.
+         * @returns The file cache entry or `undefined`.
          * @unofficial
          */
         getFileInfo(path: string): FileCacheEntry | undefined;
@@ -296,7 +311,7 @@ declare module 'obsidian' {
          * @returns The best match for the linkpath or `null` if the linkpath is not found.
          * @example
          * ```ts
-         * console.log(app.metadataCache.getFirstLinkpathDest('foo/bar', 'baz/qux.md'); // `TFile` with path: 'baz/foo/bar.md' or 'some/other/path/foo/bar.md'
+         * console.log(app.metadataCache.getFirstLinkpathDest('foo/bar', 'baz/qux.md'); // TFile with path: 'baz/foo/bar.md' or 'some/other/path/foo/bar.md'
          * ```
          * @official
          * @since 0.12.5
@@ -306,6 +321,8 @@ declare module 'obsidian' {
         /**
          * Get property values for frontmatter property key.
          *
+         * @param key - The frontmatter property key.
+         * @returns The property values for the key.
          * @unofficial
          */
         getFrontmatterPropertyValuesForKey(key: string): string[];
@@ -313,6 +330,9 @@ declare module 'obsidian' {
         /**
          * Get destination of link path.
          *
+         * @param origin - The origin path.
+         * @param path - The link path.
+         * @returns The matching destination files.
          * @unofficial
          */
         getLinkpathDest(origin: string, path: string): TFile[];
@@ -320,6 +340,7 @@ declare module 'obsidian' {
         /**
          * Get all links within the vault per file.
          *
+         * @returns A record of file path to references.
          * @unofficial
          */
         getLinks(): Record<string, Reference[]>;
@@ -329,6 +350,7 @@ declare module 'obsidian' {
          *
          * If the note has multiple aliases, it will be returned multiple times for each alias.
          *
+         * @returns The link suggestions.
          * @unofficial
          */
         getLinkSuggestions(): LinkSuggestion[];
@@ -336,6 +358,7 @@ declare module 'obsidian' {
         /**
          * Get all tags within the vault and their usage count.
          *
+         * @returns A record of tag to usage count.
          * @unofficial
          */
         getTags(): Record<string, number>;
@@ -350,6 +373,7 @@ declare module 'obsidian' {
         /**
          * Check whether there are no cache tasks in progress
          *
+         * @returns Whether the cache is clean.
          * @unofficial
          */
         isCacheClean(): boolean;
@@ -357,6 +381,8 @@ declare module 'obsidian' {
         /**
          * Check whether file can support metadata (by checking extension support)
          *
+         * @param file - The file to check.
+         * @returns Whether the file is supported.
          * @unofficial
          */
         isSupportedFile(file: TFile): boolean;
@@ -364,6 +390,8 @@ declare module 'obsidian' {
         /**
          * Check whether string is part of the user ignore filters
          *
+         * @param path - The path to check.
+         * @returns Whether the path is ignored.
          * @unofficial
          */
         isUserIgnored(path: string): boolean;
@@ -371,6 +399,7 @@ declare module 'obsidian' {
         /**
          * Iterate over all link references in the vault with callback.
          *
+         * @param callback - The callback to execute for each reference path.
          * @unofficial
          */
         iterateReferences(callback: (path: string) => void): void;
@@ -472,6 +501,7 @@ declare module 'obsidian' {
         /**
          * Execute onCleanCache callbacks if cache is clean
          *
+         * @param onCleanCacheCallback - The callback to execute when the cache is clean.
          * @unofficial
          * @unofficial
          */
@@ -480,6 +510,7 @@ declare module 'obsidian' {
         /**
          * On creation of the cache: update metadata cache
          *
+         * @param file - The created file.
          * @unofficial
          */
         onCreate(file: TAbstractFile): void;
@@ -487,6 +518,7 @@ declare module 'obsidian' {
         /**
          * On creation or modification of the cache: update metadata cache
          *
+         * @param file - The created or modified file.
          * @unofficial
          */
         onCreateOrModify(file: TAbstractFile): void;
@@ -494,12 +526,15 @@ declare module 'obsidian' {
         /**
          * On deletion of the cache: update metadata cache
          *
+         * @param file - The deleted file.
          * @unofficial
          */
         onDelete(file: TAbstractFile): void;
 
         /**
          * Handle a message received from the metadata parsing worker.
+         *
+         * @param message - The worker message.
          * @unofficial
          */
         onReceiveMessageFromWorker(message: MetadataCacheWorkerMessage): void;
@@ -507,6 +542,8 @@ declare module 'obsidian' {
         /**
          * On rename of the cache: update metadata cache
          *
+         * @param file - The renamed file.
+         * @param oldPath - The previous path of the file.
          * @unofficial
          */
         onRename(file: TAbstractFile, oldPath: string): void;
@@ -514,6 +551,7 @@ declare module 'obsidian' {
         /**
          * Check editor for unresolved links and mark these as unresolved
          *
+         * @param path - The file path to resolve links for.
          * @unofficial
          */
         resolveLinks(path: string): void;
@@ -521,6 +559,8 @@ declare module 'obsidian' {
         /**
          * Update file cache entry and sync to indexedDB
          *
+         * @param path - The file path.
+         * @param entry - The file cache entry to save.
          * @unofficial
          */
         saveFileCache(path: string, entry: FileCacheEntry): void;
@@ -528,6 +568,8 @@ declare module 'obsidian' {
         /**
          * Update metadata cache entry and sync to indexedDB
          *
+         * @param hash - The file hash.
+         * @param entry - The metadata cache entry to save.
          * @unofficial
          */
         saveMetaCache(hash: string, entry: CachedMetadata): void;
@@ -542,6 +584,7 @@ declare module 'obsidian' {
         /**
          * Re-resolve all links for changed path
          *
+         * @param path - The changed path.
          * @unofficial
          */
         updateRelatedLinks(path: string): void;
@@ -563,6 +606,8 @@ declare module 'obsidian' {
         /**
          * Send message to worker to update metadata cache
          *
+         * @param arrayBuffer - The raw file content to process.
+         * @returns A promise that resolves to the computed metadata.
          * @unofficial
          */
         work(arrayBuffer: ArrayBuffer): Promise<CachedMetadata>;

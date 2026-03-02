@@ -23,7 +23,11 @@ export interface PowerTag {
     /** Destroy the power tag graphics and remove them from the scene. */
     clearGraphics(): void;
 
-    /** Get the text style used for rendering the power tag label. */
+    /**
+     * Get the text style used for rendering the power tag label.
+     *
+     * @returns The text style of the power tag.
+     */
     getTextStyle(): TextStyle;
 
     /** Initialize the power tag graphics and add them to the scene. */

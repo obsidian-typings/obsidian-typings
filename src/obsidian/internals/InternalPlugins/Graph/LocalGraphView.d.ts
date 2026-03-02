@@ -19,6 +19,8 @@ export interface LocalGraphView extends InfoFileView {
 
     /**
      * Get the current view type.
+     *
+     * @returns The local graph view type.
      */
     getViewType(): typeof ViewType.LocalGraph;
 

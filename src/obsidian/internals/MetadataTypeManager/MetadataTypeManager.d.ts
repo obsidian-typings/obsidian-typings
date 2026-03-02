@@ -49,26 +49,41 @@ export interface MetadataTypeManager extends Events {
 
     /**
      * Get all registered properties of the vault.
+     *
+     * @returns Record of property names to their info.
      */
     getAllProperties(): Record<string, PropertyInfo>;
 
     /**
      * Get assigned widget type for property.
+     *
+     * @param property - Property name.
+     * @returns The assigned widget type, or null.
      */
     getAssignedWidget(property: string): PropertyWidgetType | null;
 
     /**
      * Get info for property.
+     *
+     * @param property - Property name.
+     * @returns Information about the property.
      */
     getPropertyInfo(property: string): PropertyInfo;
 
     /**
      * Get expected widget type for property and the one inferred from the property value.
+     *
+     * @param property - Property name.
+     * @param value - Property value.
+     * @returns Type information for the property.
      */
     getTypeInfo(property: string, value: unknown): TypeInfo;
 
     /**
      * Get property widget.
+     *
+     * @param type - Widget type name.
+     * @returns The property widget.
      */
     getWidget(type: string): PropertyWidget;
 
@@ -90,11 +105,16 @@ export interface MetadataTypeManager extends Events {
 
     /**
      * Set widget type for property.
+     *
+     * @param property - Property name.
+     * @param type - Widget type to assign.
      */
     setType(property: string, type: PropertyWidgetType): Promise<void>;
 
     /**
      * Unset widget type for property.
+     *
+     * @param property - Property name.
      */
     unsetType(property: string): Promise<void>;
 

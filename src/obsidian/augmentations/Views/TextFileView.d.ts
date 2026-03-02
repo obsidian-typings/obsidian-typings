@@ -90,6 +90,10 @@ declare module 'obsidian' {
 
         /**
          * Load a file into the editor, optionally clearing existing content.
+         *
+         * @param file - The file to load.
+         * @param clear - Whether to clear the existing content before loading.
+         * @returns A promise that resolves when the file is loaded.
          * @unofficial
          * @since 0.10.12
          */
@@ -108,7 +112,7 @@ declare module 'obsidian' {
         /**
          * Is called when the vault has a 'modify' event. Reloads the file if the view is currently not saving the file and the modified file is the file in this view.
          *
-         * @param file The modified file.
+         * @param file - The modified file.
          * @unofficial
          */
         onModify(file: TFile): void;
@@ -134,7 +138,7 @@ declare module 'obsidian' {
         save(clear?: boolean): Promise<void>;
 
         /**
-         * If any changes(dirty = true) in the file forces the file to save.
+         * If any changes(dirty = `true`) in the file forces the file to save.
          *
          * @unofficial
          */
@@ -143,8 +147,8 @@ declare module 'obsidian' {
         /**
          * Set the data to the editor. This is used to load the file contents.
          *
-         * @param data The new data.
-         * @param clear If clear is set, then it means we're opening a completely different file. In that case, you should call clear(), or implement a slightly more efficient clearing mechanism given the new data to be set.
+         * @param data - The new data.
+         * @param clear - If clear is set, then it means we're opening a completely different file. In that case, you should call clear(), or implement a slightly more efficient clearing mechanism given the new data to be set.
          * @unofficial
          */
         setData(data: string, clear: boolean): void;

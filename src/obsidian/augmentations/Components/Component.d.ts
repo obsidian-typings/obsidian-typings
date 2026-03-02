@@ -192,6 +192,8 @@ declare module 'obsidian' {
 
         /**
          * Register a scope keymap event handler to be removed on unload.
+         *
+         * @param keymapEventHandler - The keymap event handler to register.
          * @unofficial
          */
         registerScopeEvent(keymapEventHandler: KeymapEventHandler): void;

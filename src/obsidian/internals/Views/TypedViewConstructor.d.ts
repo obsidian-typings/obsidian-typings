@@ -7,6 +7,8 @@ import type { ConstructorBase } from '../Constructors/ConstructorBase.d.ts';
 /**
  * A constructor for a view that is typed to a specific view type.
  *
+ * @typeParam TView - The type of the view.
+ * @typeParam Args - The constructor argument types.
  * @public
  * @unofficial
  */

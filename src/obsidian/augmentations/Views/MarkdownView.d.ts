@@ -121,6 +121,7 @@ declare module 'obsidian' {
         /**
          * Whether the editor can render properties according to the current mode and config.
          *
+         * @returns Whether properties can be shown.
          * @unofficial
          */
         canShowProperties(): boolean;
@@ -128,6 +129,7 @@ declare module 'obsidian' {
         /**
          * Whether the editor can toggle backlinks according to current mode.
          *
+         * @returns Whether backlinks can be toggled.
          * @unofficial
          */
         canToggleBacklinks(): boolean;
@@ -142,6 +144,7 @@ declare module 'obsidian' {
         /**
          * Collapse the properties editor.
          *
+         * @param collapse - Whether to collapse the properties.
          * @unofficial
          */
         collapseProperties(collapse: boolean): void;
@@ -158,10 +161,11 @@ declare module 'obsidian' {
         /**
          * Edit the focused property in the metadata editor.
          *
+         * @param _unused - Unused parameter.
          * @remark Parameter is not used.
          * @unofficial
          */
-        editProperty(unused: undefined): void;
+        editProperty(_unused: undefined): void;
 
         /**
          * The associated file.
@@ -178,6 +182,7 @@ declare module 'obsidian' {
         /**
          * Focus on the metadata editor given property information.
          *
+         * @param focus - Options for which property to focus.
          * @unofficial
          */
         focusMetadata(focus?: FocusMetadataOptions): void;
@@ -185,6 +190,7 @@ declare module 'obsidian' {
         /**
          * Gets the ephemeral (non-persistent) state of the editor.
          *
+         * @returns The ephemeral state.
          * @unofficial
          */
         getEphemeralState(): MarkdownViewEphemeralState;
@@ -192,6 +198,7 @@ declare module 'obsidian' {
         /**
          * Get the file attached to the view.
          *
+         * @returns The file or `null`.
          * @unofficial
          */
         getFile(): TFile | null;
@@ -199,6 +206,7 @@ declare module 'obsidian' {
         /**
          * Get the hover source of the editor.
          *
+         * @returns The hover source string.
          * @unofficial
          */
         getHoverSource(): string;
@@ -214,6 +222,7 @@ declare module 'obsidian' {
         /**
          * Get selection of current mode.
          *
+         * @returns The selected text.
          * @unofficial
          */
         getSelection(): string;
@@ -237,6 +246,7 @@ declare module 'obsidian' {
         /**
          * Validate correctness of frontmatter and update metadata editor.
          *
+         * @param data - The file data containing frontmatter.
          * @unofficial
          */
         loadFrontmatter(data: string): void;
@@ -244,6 +254,7 @@ declare module 'obsidian' {
         /**
          * Whether the metadata editor has focus.
          *
+         * @returns Whether the metadata editor is focused.
          * @unofficial
          */
         metadataHasFocus(): boolean;
@@ -258,6 +269,8 @@ declare module 'obsidian' {
         /**
          * Update editor on external data change (from sync plugin).
          *
+         * @param file - The file that changed.
+         * @param data - The new file data.
          * @unofficial
          */
         onExternalDataChange(file: TFile, data: string): void;
@@ -300,6 +313,7 @@ declare module 'obsidian' {
         /**
          * On mod click, opens editor of opposite mode in split view to right.
          *
+         * @param event - The keyboard or mouse event.
          * @unofficial
          */
         onSwitchView(event: KeyboardEvent | MouseEvent): Promise<void>;
@@ -321,6 +335,8 @@ declare module 'obsidian' {
         /**
          * Register editor mode component to view.
          *
+         * @param mode - The markdown subview mode to register.
+         * @returns The registered mode.
          * @unofficial
          */
         registerMode(mode: MarkdownSubView): MarkdownSubView;
@@ -328,6 +344,7 @@ declare module 'obsidian' {
         /**
          * Save the frontmatter of the file.
          *
+         * @param properties - The frontmatter properties to save.
          * @unofficial
          */
         saveFrontmatter(properties: Record<string, any>): void;
@@ -335,6 +352,7 @@ declare module 'obsidian' {
         /**
          * Set the mode of the editor.
          *
+         * @param component - The markdown subview mode to set.
          * @unofficial
          */
         setMode(component: MarkdownSubView): Promise<void>;
@@ -404,6 +422,8 @@ declare module 'obsidian' {
         /**
          * Execute functionality of token (open external link, open internal link in leaf, ...).
          *
+         * @param token - The token to trigger.
+         * @param new_leaf - Whether to open in a new leaf.
          * @unofficial
          */
         triggerClickableToken(token: Token, new_leaf: boolean): void;

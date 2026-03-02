@@ -42,7 +42,7 @@ export interface EditorSearchComponent extends AbstractSearchComponent {
     findNext(): void;
 
     /**
-     * Replace cursor with replacement string if not null and moves to next search result.
+     * Replace cursor with replacement string if not `null` and moves to next search result.
      */
     findNextOrReplace(): void;
 
@@ -59,17 +59,22 @@ export interface EditorSearchComponent extends AbstractSearchComponent {
     /**
      * Add highlights for specified ranges.
      *
+     * @param ranges - The editor ranges to highlight.
      * @remark Invokes editor.addHighlights.
      */
     highlight(ranges: EditorRange[]): void;
 
     /**
      * Highlights all matches if search element focused.
+     *
+     * @param e - The keyboard event that triggered the action.
      */
     onAltEnter(e?: KeyboardEvent): void;
 
     /**
      * Replace all search results with specified text if replace mode and replacement element is focused.
+     *
+     * @param e - The keyboard event that triggered the action.
      */
     onModAltEnter(e?: KeyboardEvent): void;
 
@@ -95,6 +100,8 @@ export interface EditorSearchComponent extends AbstractSearchComponent {
 
     /**
      * Reveal the search (and replace) component.
+     *
+     * @param replace - Whether to show the replace input.
      */
     show(replace: boolean): void;
 }

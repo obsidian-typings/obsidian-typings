@@ -73,7 +73,11 @@ export interface CustomCSS extends Component {
     /** Record of available theme updates. */
     updates: CustomCSSUpdatesRecord;
 
-    /** Bound callback for handling raw file change events for a theme. */
+    /**
+     * Bound callback for handling raw file change events for a theme.
+     *
+     * @param themeName - Name of the theme.
+     */
     boundRaw(themeName: string): void;
 
     /**
@@ -96,6 +100,7 @@ export interface CustomCSS extends Component {
     /**
      * Fetch legacy theme CSS using the pre-v1.0.0 theme download pipeline.
      *
+     * @param options - Options for downloading the legacy theme.
      * @returns String obsidian.css contents.
      */
     downloadLegacyTheme(options: DownloadLegacyThemeOptions): Promise<string>;
@@ -108,6 +113,8 @@ export interface CustomCSS extends Component {
     /**
      * Fetch a theme's manifest using repository URL.
      *
+     * @param repoUrl - Repository URL (e.g. `username/repo`).
+     * @returns The theme manifest.
      * @remark Do **not** include github prefix, only `username/repo`.
      */
     getManifest(repoUrl: string): Promise<ThemeManifest>;
@@ -115,29 +122,37 @@ export interface CustomCSS extends Component {
     /**
      * Convert snippet name to its corresponding filepath (relative to vault root).
      *
+     * @param snippetName - Name of the snippet.
      * @returns String `.obsidian/snippets/${snippetName}.css`.
      */
     getSnippetPath(snippetName: string): string;
 
     /**
      * Returns the folder path where snippets are stored (relative to vault root).
+     *
+     * @returns Path to the snippets folder.
      */
     getSnippetsFolder(): string;
 
     /**
      * Returns the folder path where themes are stored (relative to vault root).
+     *
+     * @returns Path to the themes folder.
      */
     getThemeFolder(): string;
 
     /**
      * Convert theme name to its corresponding filepath (relative to vault root).
      *
+     * @param themeName - Name of the theme.
      * @returns String `.obsidian/themes/${themeName}/theme.css`.
      */
     getThemePath(themeName: string): string;
 
     /**
      * Returns whether there are themes that can be updated.
+     *
+     * @returns Whether any themes have available updates.
      */
     hasUpdates(): boolean;
 
@@ -145,17 +160,24 @@ export interface CustomCSS extends Component {
      * Install a legacy theme using the pre-v1.0.0 theme download pipeline<br> Will create a corresponding.
      * dummy manifest for the theme.
      *
+     * @param options - Options for installing the theme.
      * @remark Name will be used as the folder name for the theme.
      */
     installLegacyTheme(options: InstallThemeOptions): Promise<void>;
 
     /**
      * Install a theme using the regular theme download pipeline.
+     *
+     * @param options - Options for installing the theme.
+     * @param version - Version to install.
      */
     installTheme(options: InstallThemeOptions, version: string): Promise<void>;
 
     /**
      * Check whether a specific theme is installed by theme name.
+     *
+     * @param themeName - Name of the theme.
+     * @returns Whether the theme is installed.
      */
     isThemeInstalled(themeName: string): boolean;
 
@@ -174,7 +196,11 @@ export interface CustomCSS extends Component {
     /** Lifecycle hook called when the component is loaded. */
     onload(): void;
 
-    /** Handle raw file system change events for a theme. */
+    /**
+     * Handle raw file system change events for a theme.
+     *
+     * @param themeName - Name of the theme that changed.
+     */
     onRaw(themeName: string): void;
 
     /** Read available CSS snippets from the snippets folder. */
@@ -185,21 +211,30 @@ export interface CustomCSS extends Component {
 
     /**
      * Remove a theme by theme name.
+     *
+     * @param themeName - Name of the theme to remove.
      */
     removeTheme(themeName: string): Promise<void>;
 
     /**
      * Set the activation status of a snippet by snippet name.
+     *
+     * @param snippetName - Name of the snippet.
+     * @param enabled - Whether the snippet should be enabled.
      */
     setCssEnabledStatus(snippetName: string, enabled: boolean): void;
 
     /**
      * Set the active theme by theme name.
+     *
+     * @param themeName - Name of the theme to activate.
      */
     setTheme(themeName: string): void;
 
     /**
      * Set the translucency of application background.
+     *
+     * @param translucency - Whether translucency should be enabled.
      */
     setTranslucency(translucency: boolean): void;
 }

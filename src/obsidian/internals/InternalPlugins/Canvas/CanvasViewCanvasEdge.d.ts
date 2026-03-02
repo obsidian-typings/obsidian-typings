@@ -59,72 +59,164 @@ export interface CanvasViewCanvasEdge {
     /** Additional data properties not covered by known fields. */
     unknownData: Object;
 
-    /** Attach the edge to the canvas DOM. */
+    /**
+     * Attach the edge to the canvas DOM.
+     *
+     * @returns The result of attaching the edge.
+     */
     attach(): unknown;
 
-    /** Remove focus from the edge. */
+    /**
+     * Remove focus from the edge.
+     *
+     * @returns The result of removing focus.
+     */
     blur(): unknown;
 
-    /** Create a line end marker element for the specified end type. */
+    /**
+     * Create a line end marker element for the specified end type.
+     *
+     * @returns The created edge end element.
+     */
     createEdgeEnd(arg1: unknown): unknown;
 
-    /** Deselect the edge. */
+    /**
+     * Deselect the edge.
+     *
+     * @returns The result of deselecting the edge.
+     */
     deselect(): unknown;
 
-    /** Destroy the edge and release its resources. */
+    /**
+     * Destroy the edge and release its resources.
+     *
+     * @returns The result of destroying the edge.
+     */
     destroy(): unknown;
 
-    /** Detach the edge from the canvas DOM. */
+    /**
+     * Detach the edge from the canvas DOM.
+     *
+     * @returns The result of detaching the edge.
+     */
     detach(): unknown;
 
-    /** Open an inline editor for the edge's label. */
+    /**
+     * Open an inline editor for the edge's label.
+     *
+     * @returns The result of opening the label editor.
+     */
     editLabel(): unknown;
 
-    /** Set focus on the edge. */
+    /**
+     * Set focus on the edge.
+     *
+     * @returns The result of focusing the edge.
+     */
     focus(): unknown;
 
-    /** Get the bounding box of the edge. */
+    /**
+     * Get the bounding box of the edge.
+     *
+     * @returns The bounding box.
+     */
     getBBox(): unknown;
 
-    /** Get the center point of the edge path. */
+    /**
+     * Get the center point of the edge path.
+     *
+     * @returns The center point.
+     */
     getCenter(): unknown;
 
-    /** Get the serialized data for this edge. */
+    /**
+     * Get the serialized data for this edge.
+     *
+     * @returns The edge data.
+     */
     getData(): unknown;
 
-    /** Initialize the edge after construction. */
+    /**
+     * Initialize the edge after construction.
+     *
+     * @returns The result of initializing the edge.
+     */
     initialize(): unknown;
 
-    /** Handle click events on the edge. */
+    /**
+     * Handle click events on the edge.
+     *
+     * @returns The result of handling the click.
+     */
     onClick(arg1: unknown): unknown;
 
-    /** Handle pointer down on a connection point to start re-routing. */
+    /**
+     * Handle pointer down on a connection point to start re-routing.
+     *
+     * @returns The result of handling the connection pointer down.
+     */
     onConnectionPointerdown(arg1: unknown): unknown;
 
-    /** Handle context menu events on the edge. */
+    /**
+     * Handle context menu events on the edge.
+     *
+     * @returns The result of handling the context menu.
+     */
     onContextMenu(arg1: unknown): unknown;
 
-    /** Render the edge to the canvas. */
+    /**
+     * Render the edge to the canvas.
+     *
+     * @returns The result of rendering the edge.
+     */
     render(): unknown;
 
-    /** Mark the edge as selected. */
+    /**
+     * Mark the edge as selected.
+     *
+     * @returns The result of selecting the edge.
+     */
     select(): unknown;
 
-    /** Set the color of the edge. */
+    /**
+     * Set the color of the edge.
+     *
+     * @returns The result of setting the color.
+     */
     setColor(arg1: unknown, arg2: unknown): unknown;
 
-    /** Set the serialized data for this edge. */
+    /**
+     * Set the serialized data for this edge.
+     *
+     * @returns The result of setting the data.
+     */
     setData(arg1: unknown): unknown;
 
-    /** Set the text label of the edge. */
+    /**
+     * Set the text label of the edge.
+     *
+     * @returns The result of setting the label.
+     */
     setLabel(arg1: unknown): unknown;
 
-    /** Show the context menu for this edge. */
+    /**
+     * Show the context menu for this edge.
+     *
+     * @returns The result of showing the menu.
+     */
     showMenu(arg1: unknown, arg2: unknown): unknown;
 
-    /** Update the edge after its connected nodes have moved. */
+    /**
+     * Update the edge after its connected nodes have moved.
+     *
+     * @returns The result of updating the edge.
+     */
     update(arg1: unknown, arg2: unknown): unknown;
 
-    /** Recalculate and update the SVG path of the edge. */
+    /**
+     * Recalculate and update the SVG path of the edge.
+     *
+     * @returns The result of updating the path.
+     */
     updatePath(): unknown;
 }

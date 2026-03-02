@@ -75,16 +75,23 @@ export interface WidgetEditorView extends EmbeddedEditorView {
 
     /**
      * Push/pop current scope.
+     *
+     * @param scope - Scope to apply.
      */
     applyScope(scope: Scope): void;
 
     /**
      * Get the current folds of the editor.
+     *
+     * @returns Current fold information, or null.
      */
     getFoldInfo(): null | FoldInfo;
 
     /**
      * Splice incoming data at according to subpath for correct reference, then update heading and render.
+     *
+     * @param data - File contents.
+     * @param cache - Cached metadata for the file.
      */
     loadContents(data: string, cache: CachedMetadata): void;
 
@@ -95,16 +102,26 @@ export interface WidgetEditorView extends EmbeddedEditorView {
 
     /**
      * Load file and check if data is different from last saved data, then loads contents.
+     *
+     * @param data - File contents.
+     * @param cache - Cached metadata for the file.
      */
     loadFileInternal(data: string, cache?: CachedMetadata): void;
 
     /**
      * Update representation on file finished updating.
+     *
+     * @param file - The changed file.
+     * @param data - New file contents.
+     * @param cache - Updated cached metadata.
      */
     onFileChanged(file: TFile, data: string, cache: CachedMetadata): void;
 
     /**
      * Update representation on file rename.
+     *
+     * @param file - The renamed file.
+     * @param oldPath - Previous file path.
      */
     onFileRename(file: TAbstractFile, oldPath: string): void;
 
@@ -120,16 +137,23 @@ export interface WidgetEditorView extends EmbeddedEditorView {
 
     /**
      * On change of editor title element.
+     *
+     * @param element - The title element.
      */
     onTitleChange(element: HTMLElement): void;
 
     /**
      * On keypress on editor title element.
+     *
+     * @param event - The keyboard event.
      */
     onTitleKeydown(event: KeyboardEvent): void;
 
     /**
      * On pasting on editor title element.
+     *
+     * @param element - The title element.
+     * @param event - The clipboard event.
      */
     onTitlePaste(element: HTMLElement, event: ClipboardEvent): void;
 
@@ -140,16 +164,23 @@ export interface WidgetEditorView extends EmbeddedEditorView {
 
     /**
      * Save changes made in editable widget.
+     *
+     * @param data - Data to save.
+     * @param delayed - Whether to delay the save.
      */
     save(data: string, delayed?: boolean): Promise<void>;
 
     /**
      * On blur widget, save title.
+     *
+     * @param element - The title element.
      */
     saveTitle(element: HTMLElement): void;
 
     /**
      * Show preview of widget.
+     *
+     * @param show - Whether to show or hide the preview.
      */
     showPreview(show?: boolean): void;
 }

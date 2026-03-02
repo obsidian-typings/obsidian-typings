@@ -87,6 +87,7 @@ export interface AppSetting extends Modal {
      * Check whether tab is a plugin tab.
      *
      * @param tab - Tab to check.
+     * @returns Whether the tab is a plugin setting tab.
      */
     isPluginSettingTab(tab: SettingTab): boolean;
 
@@ -97,13 +98,19 @@ export interface AppSetting extends Modal {
      */
     openTab(tab: SettingTab): void;
 
-    /** Open the hotkeys setting tab by ID. */
+    /**
+     * Open the hotkeys setting tab by ID.
+     *
+     * @param id - The hotkeys tab ID.
+     * @returns The hotkeys setting tab.
+     */
     openTabById(id: 'hotkeys'): HotkeysSettingTab;
 
     /**
      * Open a specific tab by ID.
      *
      * @param id - ID of the tab to open.
+     * @returns The opened setting tab.
      */
     openTabById(id: string): SettingTab;
 

@@ -19,6 +19,8 @@ declare module 'obsidian' {
          * Get the value of the property.
          * Note: Errors are returned as {@link ErrorValue}
          *
+         * @param propertyId - The property identifier to get the value for.
+         * @returns The value of the property, or `null`.
          * @official
          * @since 1.10.0
          */

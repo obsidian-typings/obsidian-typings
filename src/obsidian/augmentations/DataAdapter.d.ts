@@ -120,6 +120,7 @@ declare module 'obsidian' {
         /**
          * Gets the name of the vault.
          *
+         * @returns The name of the vault.
          * @official
          */
         getName(): string;
@@ -165,6 +166,7 @@ declare module 'obsidian' {
         /**
          * Generates `this.files` for specific directory of the vault
          *
+         * @param normalizedPath - The path to list recursively.
          * @unofficial
          */
         listRecursive(normalizedPath: string): Promise<void>;
@@ -184,6 +186,8 @@ declare module 'obsidian' {
 
         /**
          * Handle a file change event for the given path.
+         *
+         * @param normalizedPath - The path that changed.
          * @unofficial
          */
         onFileChange(normalizedPath: string | null): void;
@@ -263,18 +267,26 @@ declare module 'obsidian' {
 
         /**
          * Reconcile a folder creation between old and new paths.
+         *
+         * @param normalizedPath - The original path.
+         * @param normalizedNewPath - The new path.
          * @unofficial
          */
         reconcileFolderCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
 
         /**
          * Reconcile changes to an internal (config) file.
+         *
+         * @param normalizedPath - The path to the internal file.
          * @unofficial
          */
         reconcileInternalFile(normalizedPath: string): Promise<void>;
 
         /**
          * Reconcile a symbolic link creation between old and new paths.
+         *
+         * @param normalizedPath - The original path.
+         * @param normalizedNewPath - The new path.
          * @unofficial
          */
         reconcileSymbolicLinkCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
@@ -295,6 +307,7 @@ declare module 'obsidian' {
         /**
          * Remove file from files listing and trigger deletion event.
          *
+         * @param normalizedPath - The path of the file to remove.
          * @unofficial
          */
         removeFile(normalizedPath: string): void;
@@ -318,6 +331,7 @@ declare module 'obsidian' {
          *
          * @param normalizedPath - path to folder, use {@link normalizePath} to normalize beforehand.
          * @param recursive - If `true`, delete folders under this folder recursively, if `false` the folder needs to be empty.
+         * @returns A promise that resolves when the directory is removed.
          * @example
          * ```ts
          * await app.vault.adapter.rmdir('foo', true);
@@ -377,6 +391,7 @@ declare module 'obsidian' {
         /**
          * Set whether OS is insensitive to case.
          *
+         * @param normalizedPath - The path to update.
          * @unofficial
          */
         update(normalizedPath: string): Promise<void>;
@@ -384,6 +399,7 @@ declare module 'obsidian' {
         /**
          * Add change watcher to path.
          *
+         * @param handler - The handler for file system changes.
          * @unofficial
          */
         watch(handler: FileSystemWatchHandler): Promise<void>;

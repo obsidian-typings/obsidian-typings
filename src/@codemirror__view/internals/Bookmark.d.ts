@@ -23,9 +23,17 @@ export interface Bookmark {
     /** Remove this bookmark from the editor. */
     clear(): void;
 
-    /** Find the current position of this bookmark, or null if cleared. */
+    /**
+     * Find the current position of this bookmark, or null if cleared.
+     *
+     * @returns The current position, or null if the bookmark has been cleared.
+     */
     find(): EditorPosition | null;
 
-    /** Update the bookmark position in response to a document change. */
+    /**
+     * Update the bookmark position in response to a document change.
+     *
+     * @param changeDesc - The change description to apply.
+     */
     update(changeDesc: ChangeDesc): void;
 }

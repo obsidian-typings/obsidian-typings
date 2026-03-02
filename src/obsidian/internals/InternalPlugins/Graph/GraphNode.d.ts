@@ -111,6 +111,8 @@ export interface GraphNode {
 
     /**
      * Method called when the node (circle) is clicked, trigger the context menu if it's a right click
+     *
+     * @param e - The mouse event.
      */
     onClick(e: MouseEvent): void;
 

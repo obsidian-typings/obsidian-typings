@@ -10,6 +10,11 @@ import type { BacklinkView } from './BacklinkView.d.ts';
  * @unofficial
  */
 export interface BacklinkPluginViews extends Record<string, ViewCreator> {
-    /** Create a backlink view in the given workspace leaf. */
+    /**
+     * Create a backlink view in the given workspace leaf.
+     *
+     * @param left - The workspace leaf to create the view in.
+     * @returns The created backlink view.
+     */
     backlink(left: WorkspaceLeaf): BacklinkView;
 }

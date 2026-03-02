@@ -38,7 +38,7 @@ declare module 'obsidian' {
          * Indicates the currently focused leaf, if one exists.
          *
          * Please avoid using `activeLeaf` directly, especially without checking whether
-         * `activeLeaf` is null.
+         * `activeLeaf` is `null`.
          *
          * @deprecated The use of this field is discouraged.
          * The recommended alternatives are:
@@ -241,6 +241,7 @@ declare module 'obsidian' {
         /**
          * Add file to mobile file info
          *
+         * @param file - The file info to add.
          * @unofficial
          */
         addMobileFileInfo(file: unknown): void;
@@ -289,6 +290,7 @@ declare module 'obsidian' {
          * Create a leaf in the selected tab group or last used tab group.
          *
          * @param tabs Tab group to create leaf in.
+         * @returns The leaf that was created.
          * @unofficial
          */
         createLeafInTabGroup(tabs?: WorkspaceTabs): WorkspaceLeaf;
@@ -298,6 +300,7 @@ declare module 'obsidian' {
          *
          * @param leaf - Leaf entry to deserialize.
          * @param ribbon - Whether the leaf belongs to the left or right ribbon.
+         * @returns A promise that resolves to the deserialized leaf.
          * @unofficial
          */
         deserializeLayout(leaf: LeafEntry, ribbon?: 'left' | 'right'): Promise<WorkspaceLeaf>;
@@ -362,11 +365,14 @@ declare module 'obsidian' {
         /**
          * Get active file view if exists.
          *
+         * @returns The active file view or `null`.
          * @unofficial
          */
         getActiveFileView(): FileView | null;
 
         /**
+         * @param type - The type of the view to get.
+         * @returns The active leaf of the given type or `null`.
          * @deprecated - Use {@link getActiveViewOfType} instead
          * @unofficial
          */
@@ -385,6 +391,9 @@ declare module 'obsidian' {
         /**
          * Get adjacent leaf in specified direction.
          *
+         * @param leaf - The reference leaf.
+         * @param direction - The direction to search.
+         * @returns The adjacent leaf or `null` if none found.
          * @remark Potentially does not work.
          * @unofficial
          */
@@ -396,6 +405,11 @@ declare module 'obsidian' {
         /**
          * Get the direction where the leaf should be dropped on dragevent
          *
+         * @param e - The drag event.
+         * @param rect - The bounding rectangle of the drop target.
+         * @param directions - Allowed drop directions.
+         * @param leaf - The leaf being dropped.
+         * @returns The drop direction.
          * @unofficial
          */
         getDropDirection(
@@ -409,6 +423,7 @@ declare module 'obsidian' {
          * Get the leaf where the leaf should be dropped on dragevent.
          *
          * @param e Drag event.
+         * @returns The leaf at the drop location or `null`.
          * @unofficial
          */
         getDropLocation(e: DragEvent): WorkspaceLeaf | null;
@@ -416,6 +431,7 @@ declare module 'obsidian' {
         /**
          * Get the workspace split for the currently focused container.
          *
+         * @returns The focused workspace split.
          * @unofficial
          */
         getFocusedContainer(): WorkspaceSplit;
@@ -527,6 +543,8 @@ declare module 'obsidian' {
         /**
          * Get n last opened files of type (defaults to 10).
          *
+         * @param options - Options for filtering recent files.
+         * @returns The filenames of recently opened files.
          * @unofficial
          */
         getRecentFiles(options?: GetRecentFilesOptions): string[];
@@ -546,6 +564,7 @@ declare module 'obsidian' {
          *
          * @param sideRibbon Side ribbon to get leaf from.
          * @param split Whether to split the leaf if it does not exist.
+         * @returns The side leaf.
          * @unofficial
          */
         getSideLeaf(sideRibbon: WorkspaceSidedock | WorkspaceMobileDrawer, split: boolean): WorkspaceLeaf;
@@ -561,12 +580,19 @@ declare module 'obsidian' {
 
         /**
          * Handle the context menu for an external URL link.
+         *
+         * @param menu - The context menu.
+         * @param linkText - The URL link text.
          * @unofficial
          */
         handleExternalLinkContextMenu(menu: Menu, linkText: string): void;
 
         /**
          * Handle the context menu for an internal link.
+         *
+         * @param menu - The context menu.
+         * @param linkText - The internal link text.
+         * @param sourcePath - The source path of the link.
          * @unofficial
          * @since 0.12.10
          */
@@ -575,6 +601,8 @@ declare module 'obsidian' {
         /**
          * Check if leaf has been attached to the workspace
          *
+         * @param leaf - The leaf to check.
+         * @returns Whether the leaf is attached.
          * @unofficial
          */
         isAttached(leaf?: WorkspaceLeaf): boolean;
@@ -591,6 +619,8 @@ declare module 'obsidian' {
         /**
          * Iterate the leaves of a split.
          *
+         * @param split - The split to iterate.
+         * @param callback - The callback to call for each leaf.
          * @unofficial
          */
         iterateLeaves(split: WorkspaceSplit, callback: (leaf: WorkspaceLeaf) => unknown): void;
@@ -607,6 +637,9 @@ declare module 'obsidian' {
         /**
          * Iterate the tabs of a split till meeting a condition.
          *
+         * @param tabs - The split(s) to iterate.
+         * @param cb - The callback to call for each leaf. Return `true` to stop.
+         * @returns Whether the iteration was stopped early.
          * @unofficial
          */
         iterateTabs(tabs: WorkspaceSplit | WorkspaceSplit[], cb: (leaf: WorkspaceLeaf) => boolean): boolean;
@@ -1115,6 +1148,8 @@ declare module 'obsidian' {
         /**
          * Handles drag event on leaf
          *
+         * @param e - The drag event.
+         * @param leaf - The leaf being dragged.
          * @unofficial
          */
         onDragLeaf(e: DragEvent, leaf: WorkspaceLeaf): void;
@@ -1122,6 +1157,7 @@ declare module 'obsidian' {
         /**
          * Handles layout change and saves layout to disk
          *
+         * @param leaf - The leaf that changed, if any.
          * @unofficial
          */
         onLayoutChange(leaf?: WorkspaceLeaf): void;
@@ -1144,12 +1180,16 @@ declare module 'obsidian' {
 
         /**
          * Trigger the link context menu event with the given arguments.
+         *
+         * @param args - The arguments to pass to the event.
          * @unofficial
          */
         onLinkContextMenu(args: unknown[]): void;
 
         /**
          * Trigger the quick preview event with the given arguments.
+         *
+         * @param args - The arguments to pass to the event.
          * @unofficial
          */
         onQuickPreview(args: unknown[]): void;
@@ -1162,6 +1202,8 @@ declare module 'obsidian' {
 
         /**
          * Handle the start of a link drag operation from a leaf.
+         *
+         * @param leaf - The leaf where the drag started.
          * @unofficial
          */
         onStartLink(leaf: WorkspaceLeaf): void;
@@ -1190,6 +1232,8 @@ declare module 'obsidian' {
         /**
          * Open a leaf in a popup window.
          *
+         * @param data - The data to pass to the popout window.
+         * @returns The popout window that was created.
          * @remark Prefer usage of `app.workspace.openPopoutLeaf`.
          * @unofficial
          */
@@ -1209,6 +1253,9 @@ declare module 'obsidian' {
         /**
          * Push leaf change to history
          *
+         * @param leaf - The leaf to push.
+         * @param parentID - The parent ID.
+         * @param rootID - The root ID.
          * @unofficial
          */
         pushUndoHistory(leaf: WorkspaceLeaf, parentID: string, rootID: string): void;
@@ -1216,6 +1263,9 @@ declare module 'obsidian' {
         /**
          * Get drag event target location
          *
+         * @param e - The drag event.
+         * @param leaf - The leaf being dragged.
+         * @returns The target tab group or `null`.
          * @unofficial
          */
         recursiveGetTarget(e: DragEvent, leaf: WorkspaceLeaf): WorkspaceTabs | null;
@@ -1223,6 +1273,7 @@ declare module 'obsidian' {
         /**
          * Register a CodeMirror editor extension.
          *
+         * @param extension - The extension to register.
          * @remark Prefer registering the extension via the Plugin class.
          * @unofficial
          */
@@ -1231,6 +1282,8 @@ declare module 'obsidian' {
         /**
          * Registers hover link source
          *
+         * @param key - The key for the hover link source.
+         * @param source - The hover link source to register.
          * @unofficial
          */
         registerHoverLinkSource(key: string, source: HoverLinkSource): void;
@@ -1238,6 +1291,8 @@ declare module 'obsidian' {
         /**
          * Registers Obsidian protocol handler
          *
+         * @param protocol - The protocol to register.
+         * @param handler - The handler for the protocol.
          * @unofficial
          */
         registerObsidianProtocolHandler(protocol: string, handler: ObsidianProtocolHandler): void;
@@ -1320,6 +1375,7 @@ declare module 'obsidian' {
         /**
          * Use deserialized layout data to reconstruct the workspace
          *
+         * @param data - The serialized workspace data.
          * @unofficial
          */
         setLayout(data: SerializedWorkspace): Promise<void>;
@@ -1338,6 +1394,10 @@ declare module 'obsidian' {
         /**
          * Split leaves in specified direction
          *
+         * @param leaf - The leaf to split.
+         * @param newLeaf - The new leaf to insert.
+         * @param direction - The split direction.
+         * @param before - Whether to insert before the current leaf.
          * @unofficial
          */
         splitLeaf(leaf: WorkspaceLeaf, newLeaf: WorkspaceLeaf, direction?: SplitDirection, before?: boolean): void;
@@ -1345,6 +1405,9 @@ declare module 'obsidian' {
         /**
          * Split provided leaf, or active leaf if none provided.
          *
+         * @param leaf - The leaf to split, or `undefined` for active leaf.
+         * @param direction - The split direction.
+         * @returns The newly created leaf.
          * @unofficial
          */
         splitLeafOrActive(leaf?: WorkspaceLeaf, direction?: SplitDirection): WorkspaceLeaf;
@@ -1352,6 +1415,7 @@ declare module 'obsidian' {
         /**
          * Unregister a CodeMirror editor extension
          *
+         * @param extension - The extension to unregister.
          * @unofficial
          */
         unregisterEditorExtension(extension: Extension): void;
@@ -1359,6 +1423,7 @@ declare module 'obsidian' {
         /**
          * Unregister hover link source
          *
+         * @param key - The key for the hover link source to unregister.
          * @unofficial
          */
         unregisterHoverLinkSource(key: string): void;
@@ -1366,6 +1431,7 @@ declare module 'obsidian' {
         /**
          * Unregister Obsidian protocol handler
          *
+         * @param protocol - The protocol to unregister.
          * @unofficial
          */
         unregisterObsidianProtocolHandler(protocol: string): void;

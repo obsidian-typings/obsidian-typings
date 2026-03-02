@@ -16,9 +16,17 @@ export interface EdgeIndex extends EdgeIndexBase {
     /** Root data node of the R-tree. */
     data: EdgeIndexData;
 
-    /** Compare two items by their minimum X coordinate for sorting. */
+    /**
+     * Compare two items by their minimum X coordinate for sorting.
+     *
+     * @returns The comparison result.
+     */
     compareMinX(arg1: unknown, arg2: unknown): unknown;
 
-    /** Compare two items by their minimum Y coordinate for sorting. */
+    /**
+     * Compare two items by their minimum Y coordinate for sorting.
+     *
+     * @returns The comparison result.
+     */
     compareMinY(arg1: unknown, arg2: unknown): unknown;
 }

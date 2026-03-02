@@ -37,7 +37,7 @@ declare module 'obsidian' {
         /**
          * Currently active CM instance.
          *
-         * @remark Can be null when Editor is not instantiated.
+         * @remark Can be `null` when Editor is not instantiated.
          * @unofficial
          */
         get activeCM(): EditorView | null;
@@ -51,6 +51,10 @@ declare module 'obsidian' {
         /**
          * Make ranges of text highlighted within the editor given specified class (style).
          *
+         * @param ranges - The ranges to highlight.
+         * @param style - The highlight style class.
+         * @param remove_previous - Whether to remove previous highlights.
+         * @param range - The editor selection range.
          * @unofficial
          */
         addHighlights(
@@ -85,6 +89,7 @@ declare module 'obsidian' {
          *
          * @param pos Editor position.
          * @param relative_to_editor Relative to the editor or the application window.
+         * @returns The screen coordinates.
          * @unofficial
          */
         coordsAtPos(pos: EditorPosition, relative_to_editor: boolean): Coords;
@@ -142,6 +147,7 @@ declare module 'obsidian' {
         /**
          * Get all ranges that can be folded away in the editor.
          *
+         * @returns The foldable ranges.
          * @unofficial
          */
         getAllFoldableLines(): Fold[];
@@ -149,6 +155,8 @@ declare module 'obsidian' {
         /**
          * Get a clickable link - if it exists - at specified position.
          *
+         * @param pos - The position to check.
+         * @returns The clickable token or `null`.
          * @unofficial
          */
         getClickableTokenAt(pos: EditorPosition): ClickableToken | null;
@@ -180,6 +188,7 @@ declare module 'obsidian' {
         /**
          * Get all blocks that were folded by their starting character position.
          *
+         * @returns A set of fold starting offsets.
          * @unofficial
          */
         getFoldOffsets(): Set<number>;
@@ -256,6 +265,8 @@ declare module 'obsidian' {
         /**
          * Checks whether the editor has a highlight of specified class.
          *
+         * @param style - The highlight style class to check for.
+         * @returns Whether the editor has the specified highlight.
          * @remark If no style is specified, checks whether the editor has unknown highlights.
          * @unofficial
          */
@@ -271,6 +282,8 @@ declare module 'obsidian' {
         /**
          * Wraps current line around specified characters.
          *
+         * @param start - The starting wrapper string.
+         * @param end - The ending wrapper string.
          * @remark Was added in a recent Obsidian update (1.4.0 update cycle).
          * @unofficial
          */
@@ -459,6 +472,7 @@ declare module 'obsidian' {
         /**
          * Removes all highlights of specified class.
          *
+         * @param style - The highlight style class to remove.
          * @unofficial
          */
         removeHighlights(style: string): void;
@@ -520,6 +534,8 @@ declare module 'obsidian' {
         /**
          * Adds a search cursor to the editor.
          *
+         * @param searchString - The string to search for.
+         * @returns The search cursor.
          * @unofficial
          */
         searchCursor(searchString: string): SearchCursor;
@@ -633,6 +649,7 @@ declare module 'obsidian' {
         /**
          * Applies specified markdown syntax to selected text or word under cursor.
          *
+         * @param syntax - The markdown syntax to apply.
          * @unofficial
          */
         toggleMarkdownFormatting(

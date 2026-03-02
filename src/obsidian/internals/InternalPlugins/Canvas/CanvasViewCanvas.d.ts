@@ -207,312 +207,724 @@ export interface CanvasViewCanvas {
     /** Whether a zoom-to-fit operation is queued for the next frame. */
     zoomToFitQueued: boolean;
 
-    /** Add an edge to the canvas. */
+    /**
+     * Add an edge to the canvas.
+     *
+     * @returns The added edge.
+     */
     addEdge(arg1: unknown): unknown;
 
-    /** Add a node to the canvas. */
+    /**
+     * Add a node to the canvas.
+     *
+     * @returns The added node.
+     */
     addNode(arg1: unknown): unknown;
 
-    /** Apply a history state to restore the canvas to a previous state. */
+    /**
+     * Apply a history state to restore the canvas to a previous state.
+     *
+     * @returns The result of applying the history state.
+     */
     applyHistory(arg1: unknown): unknown;
 
-    /** Cancel the current pending animation frame. */
+    /**
+     * Cancel the current pending animation frame.
+     *
+     * @returns The result of canceling the frame.
+     */
     cancelFrame(): unknown;
 
-    /** Check whether snapping is currently possible for the given context. */
+    /**
+     * Check whether snapping is currently possible for the given context.
+     *
+     * @returns Whether snapping is possible.
+     */
     canSnap(arg1: unknown): unknown;
 
-    /** Remove all nodes and edges from the canvas. */
+    /**
+     * Remove all nodes and edges from the canvas.
+     *
+     * @returns The result of clearing the canvas.
+     */
     clear(): unknown;
 
-    /** Clear all active snap point guides. */
+    /**
+     * Clear all active snap point guides.
+     *
+     * @returns The result of clearing snap points.
+     */
     clearSnapPoints(): unknown;
 
-    /** Clone canvas data, creating duplicates of the specified items at the given offset. */
+    /**
+     * Clone canvas data, creating duplicates of the specified items at the given offset.
+     *
+     * @returns The cloned canvas data.
+     */
     cloneData(arg1: unknown, arg2: unknown): unknown;
 
-    /** Create a new file-type node on the canvas. */
+    /**
+     * Create a new file-type node on the canvas.
+     *
+     * @returns The created file node.
+     */
     createFileNode(arg1: unknown): unknown;
 
-    /** Create multiple file-type nodes on the canvas. */
+    /**
+     * Create multiple file-type nodes on the canvas.
+     *
+     * @returns The created file nodes.
+     */
     createFileNodes(arg1: unknown, arg2: unknown): unknown;
 
-    /** Create a new group node on the canvas. */
+    /**
+     * Create a new group node on the canvas.
+     *
+     * @returns The created group node.
+     */
     createGroupNode(arg1: unknown): unknown;
 
-    /** Create a new link/URL node on the canvas. */
+    /**
+     * Create a new link/URL node on the canvas.
+     *
+     * @returns The created link node.
+     */
     createLinkNode(arg1: unknown): unknown;
 
-    /** Create a placeholder node for drag-and-drop operations. */
+    /**
+     * Create a placeholder node for drag-and-drop operations.
+     *
+     * @returns The created placeholder node.
+     */
     createPlaceholder(): unknown;
 
-    /** Create a new text node on the canvas. */
+    /**
+     * Create a new text node on the canvas.
+     *
+     * @returns The created text node.
+     */
     createTextNode(arg1: unknown): unknown;
 
-    /** Delete all currently selected nodes and edges. */
+    /**
+     * Delete all currently selected nodes and edges.
+     *
+     * @returns The result of deleting the selection.
+     */
     deleteSelection(): unknown;
 
-    /** Remove an item from the current selection. */
+    /**
+     * Remove an item from the current selection.
+     *
+     * @returns The result of deselecting the item.
+     */
     deselect(arg1: unknown): unknown;
 
-    /** Clear the entire selection. */
+    /**
+     * Clear the entire selection.
+     *
+     * @returns The result of clearing the selection.
+     */
     deselectAll(): unknown;
 
-    /** Convert a canvas position to DOM pixel coordinates. */
+    /**
+     * Convert a canvas position to DOM pixel coordinates.
+     *
+     * @returns The DOM pixel coordinates.
+     */
     domFromPos(arg1: unknown): unknown;
 
-    /** Convert client (screen) coordinates to DOM pixel coordinates. */
+    /**
+     * Convert client (screen) coordinates to DOM pixel coordinates.
+     *
+     * @returns The DOM pixel coordinates.
+     */
     domPosFromClient(arg1: unknown): unknown;
 
-    /** Convert a DOM event's position to DOM pixel coordinates. */
+    /**
+     * Convert a DOM event's position to DOM pixel coordinates.
+     *
+     * @returns The DOM pixel coordinates.
+     */
     domPosFromEvt(arg1: unknown): unknown;
 
-    /** Handle dragging a temporary node during creation. */
+    /**
+     * Handle dragging a temporary node during creation.
+     *
+     * @returns The result of dragging the temporary node.
+     */
     dragTempNode(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-    /** Stop rendering snap point guide lines. */
+    /**
+     * Stop rendering snap point guide lines.
+     *
+     * @returns The result of ending snap point rendering.
+     */
     endSnapPointRendering(): unknown;
 
-    /** Generate a high-definition image of the canvas. */
+    /**
+     * Generate a high-definition image of the canvas.
+     *
+     * @returns The generated HD image.
+     */
     generateHDImage(): Promise<unknown>;
 
-    /** Get all nodes that contain the specified bounding box or point. */
+    /**
+     * Get all nodes that contain the specified bounding box or point.
+     *
+     * @returns The containing nodes.
+     */
     getContainingNodes(arg1: unknown): unknown;
 
-    /** Get the serialized canvas data. */
+    /**
+     * Get the serialized canvas data.
+     *
+     * @returns The canvas data.
+     */
     getData(): unknown;
 
-    /** Get all edges connected to the specified node. */
+    /**
+     * Get all edges connected to the specified node.
+     *
+     * @returns The edges connected to the node.
+     */
     getEdgesForNode(arg1: unknown): unknown;
 
-    /** Get all edges that intersect the specified bounding box. */
+    /**
+     * Get all edges that intersect the specified bounding box.
+     *
+     * @returns The intersecting edges.
+     */
     getIntersectingEdges(arg1: unknown): unknown;
 
-    /** Get all nodes that intersect the specified bounding box. */
+    /**
+     * Get all nodes that intersect the specified bounding box.
+     *
+     * @returns The intersecting nodes.
+     */
     getIntersectingNodes(arg1: unknown): unknown;
 
-    /** Get serialized data for the current selection. */
+    /**
+     * Get serialized data for the current selection.
+     *
+     * @returns The selection data.
+     */
     getSelectionData(arg1: unknown): unknown;
 
-    /** Calculate snap alignment guides for the given position and dimensions. */
+    /**
+     * Calculate snap alignment guides for the given position and dimensions.
+     *
+     * @returns The snap alignment data.
+     */
     getSnapping(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): unknown;
 
-    /** Get the current viewport state (position, zoom). */
+    /**
+     * Get the current viewport state (position, zoom).
+     *
+     * @returns The viewport state.
+     */
     getState(): unknown;
 
-    /** Get the bounding box of the current viewport in canvas coordinates. */
+    /**
+     * Get the bounding box of the current viewport in canvas coordinates.
+     *
+     * @returns The viewport bounding box.
+     */
     getViewportBBox(): unknown;
 
-    /** Get all nodes currently visible within the viewport. */
+    /**
+     * Get all nodes currently visible within the viewport.
+     *
+     * @returns The viewport nodes.
+     */
     getViewportNodes(arg1: unknown): unknown;
 
-    /** Get the next available z-index value. */
+    /**
+     * Get the next available z-index value.
+     *
+     * @returns The next z-index value.
+     */
     getZIndex(): unknown;
 
-    /** Handle a copy event for the current selection. */
+    /**
+     * Handle a copy event for the current selection.
+     *
+     * @returns The result of handling the copy event.
+     */
     handleCopy(arg1: unknown): unknown;
 
-    /** Handle a cut event for the current selection. */
+    /**
+     * Handle a cut event for the current selection.
+     *
+     * @returns The result of handling the cut event.
+     */
     handleCut(arg1: unknown): unknown;
 
-    /** Handle drag-to-select (rubber band selection) interaction. */
+    /**
+     * Handle drag-to-select (rubber band selection) interaction.
+     *
+     * @returns The result of handling the drag-to-select.
+     */
     handleDragToSelect(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-    /** Handle drag interaction with viewport panning. */
+    /**
+     * Handle drag interaction with viewport panning.
+     *
+     * @returns The result of handling the drag with pan.
+     */
     handleDragWithPan(arg1: unknown, arg2: unknown): unknown;
 
-    /** Handle pointer down event on the mover element. */
+    /**
+     * Handle pointer down event on the mover element.
+     *
+     * @returns The result of handling the pointer down.
+     */
     handleMoverPointerdown(arg1: unknown): unknown;
 
-    /** Handle a paste event to add items to the canvas. */
+    /**
+     * Handle a paste event to add items to the canvas.
+     *
+     * @returns The result of handling the paste event.
+     */
     handlePaste(arg1: unknown): unknown;
 
-    /** Handle dragging the current selection. */
+    /**
+     * Handle dragging the current selection.
+     *
+     * @returns The result of handling the selection drag.
+     */
     handleSelectionDrag(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-    /** Test whether a point hits a specific node. */
+    /**
+     * Test whether a point hits a specific node.
+     *
+     * @returns Whether the point hits the node.
+     */
     hitTestNode(arg1: unknown, arg2: unknown): unknown;
 
-    /** Import canvas data from an external source. */
+    /**
+     * Import canvas data from an external source.
+     *
+     * @returns The result of importing the data.
+     */
     importData(arg1: unknown, arg2: unknown): unknown;
 
-    /** Perform a hit test for interactive elements at the given position. */
+    /**
+     * Perform a hit test for interactive elements at the given position.
+     *
+     * @returns The hit interactive element, if any.
+     */
     interactionHitTest(arg1: unknown): unknown;
 
-    /** Load and initialize the canvas from saved data. */
+    /**
+     * Load and initialize the canvas from saved data.
+     *
+     * @returns The result of loading the canvas.
+     */
     load(): unknown;
 
-    /** Mark an item as dirty (needing to be saved). */
+    /**
+     * Mark an item as dirty (needing to be saved).
+     *
+     * @returns The result of marking the item as dirty.
+     */
     markDirty(arg1: unknown): unknown;
 
-    /** Mark an item as having been moved (needing re-indexing). */
+    /**
+     * Mark an item as having been moved (needing re-indexing).
+     *
+     * @returns The result of marking the item as moved.
+     */
     markMoved(arg1: unknown): unknown;
 
-    /** Mark the viewport as changed, triggering a re-render. */
+    /**
+     * Mark the viewport as changed, triggering a re-render.
+     *
+     * @returns The result of marking the viewport as changed.
+     */
     markViewportChanged(): unknown;
 
-    /** Nudge the current selection by the specified offset. */
+    /**
+     * Nudge the current selection by the specified offset.
+     *
+     * @returns The result of nudging the selection.
+     */
     nudgeSelection(arg1: unknown, arg2: unknown): unknown;
 
-    /** Handle context menu event on the canvas background. */
+    /**
+     * Handle context menu event on the canvas background.
+     *
+     * @returns The result of handling the context menu event.
+     */
     onContextMenu(arg1: unknown): unknown;
 
-    /** Handle double-click event on the canvas. */
+    /**
+     * Handle double-click event on the canvas.
+     *
+     * @returns The result of handling the double-click.
+     */
     onDoubleClick(arg1: unknown): unknown;
 
-    /** Handle global keydown events. */
+    /**
+     * Handle global keydown events.
+     *
+     * @returns The result of handling the keydown event.
+     */
     onGlobalKeydown(arg1: unknown): unknown;
 
-    /** Handle global keyup events. */
+    /**
+     * Handle global keyup events.
+     *
+     * @returns The result of handling the keyup event.
+     */
     onGlobalKeyup(arg1: unknown): unknown;
 
-    /** Handle keydown events on the canvas. */
+    /**
+     * Handle keydown events on the canvas.
+     *
+     * @returns The result of handling the keydown event.
+     */
     onKeydown(arg1: unknown): unknown;
 
-    /** Handle pointer down events on the canvas. */
+    /**
+     * Handle pointer down events on the canvas.
+     *
+     * @returns The result of handling the pointer down event.
+     */
     onPointerdown(arg1: unknown): unknown;
 
-    /** Handle pointer move events on the canvas. */
+    /**
+     * Handle pointer move events on the canvas.
+     *
+     * @returns The result of handling the pointer move event.
+     */
     onPointermove(arg1: unknown): unknown;
 
-    /** Handle priority pointer down events (processed before other handlers). */
+    /**
+     * Handle priority pointer down events (processed before other handlers).
+     *
+     * @returns The result of handling the priority pointer down event.
+     */
     onPriorityPointerdown(arg1: unknown): unknown;
 
-    /** Handle canvas container resize events. */
+    /**
+     * Handle canvas container resize events.
+     *
+     * @returns The result of handling the resize event.
+     */
     onResize(): unknown;
 
-    /** Handle context menu event on the current selection. */
+    /**
+     * Handle context menu event on the current selection.
+     *
+     * @returns The result of handling the selection context menu.
+     */
     onSelectionContextMenu(arg1: unknown): unknown;
 
-    /** Handle touch start events on the canvas. */
+    /**
+     * Handle touch start events on the canvas.
+     *
+     * @returns The result of handling the touch event.
+     */
     onTouchdown(arg1: unknown): unknown;
 
-    /** Handle mouse wheel events for zooming or panning. */
+    /**
+     * Handle mouse wheel events for zooming or panning.
+     *
+     * @returns The result of handling the wheel event.
+     */
     onWheel(arg1: unknown): unknown;
 
-    /** Override the current history entry with the latest state. */
+    /**
+     * Override the current history entry with the latest state.
+     *
+     * @returns The result of overriding the history.
+     */
     overrideHistory(): unknown;
 
-    /** Pan the viewport by the specified delta. */
+    /**
+     * Pan the viewport by the specified delta.
+     *
+     * @returns The result of panning the viewport.
+     */
     panBy(arg1: unknown, arg2: unknown): unknown;
 
-    /** Pan the viewport so the specified bounding box is visible. */
+    /**
+     * Pan the viewport so the specified bounding box is visible.
+     *
+     * @returns The result of panning into view.
+     */
     panIntoView(arg1: unknown, arg2: unknown): unknown;
 
-    /** Pan the viewport to the specified position. */
+    /**
+     * Pan the viewport to the specified position.
+     *
+     * @returns The result of panning the viewport.
+     */
     panTo(arg1: unknown, arg2: unknown): unknown;
 
-    /** Get the center position of the current viewport. */
+    /**
+     * Get the center position of the current viewport.
+     *
+     * @returns The center position of the viewport.
+     */
     posCenter(): unknown;
 
-    /** Convert client (screen) coordinates to canvas coordinates. */
+    /**
+     * Convert client (screen) coordinates to canvas coordinates.
+     *
+     * @returns The canvas coordinates.
+     */
     posFromClient(arg1: unknown): unknown;
 
-    /** Convert DOM pixel coordinates to canvas coordinates. */
+    /**
+     * Convert DOM pixel coordinates to canvas coordinates.
+     *
+     * @returns The canvas coordinates.
+     */
     posFromDom(arg1: unknown): unknown;
 
-    /** Convert a DOM event's position to canvas coordinates. */
+    /**
+     * Convert a DOM event's position to canvas coordinates.
+     *
+     * @returns The canvas coordinates.
+     */
     posFromEvt(arg1: unknown): unknown;
 
-    /** Check whether a position is within the current viewport. */
+    /**
+     * Check whether a position is within the current viewport.
+     *
+     * @returns Whether the position is in the viewport.
+     */
     posInViewport(arg1: unknown): unknown;
 
-    /** Push the current canvas state onto the undo history stack. */
+    /**
+     * Push the current canvas state onto the undo history stack.
+     *
+     * @returns The result of pushing the history state.
+     */
     pushHistory(arg1: unknown): unknown;
 
-    /** Redo the last undone action. */
+    /**
+     * Redo the last undone action.
+     *
+     * @returns The result of the redo operation.
+     */
     redo(): unknown;
 
-    /** Remove an edge from the canvas. */
+    /**
+     * Remove an edge from the canvas.
+     *
+     * @returns The result of removing the edge.
+     */
     removeEdge(arg1: unknown): unknown;
 
-    /** Remove a node from the canvas. */
+    /**
+     * Remove a node from the canvas.
+     *
+     * @returns The result of removing the node.
+     */
     removeNode(arg1: unknown): unknown;
 
-    /** Render snap point guide lines for alignment. */
+    /**
+     * Render snap point guide lines for alignment.
+     *
+     * @returns The result of rendering snap points.
+     */
     renderSnapPoints(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): unknown;
 
-    /** Request an animation frame for rendering. */
+    /**
+     * Request an animation frame for rendering.
+     *
+     * @returns The animation frame request ID.
+     */
     requestFrame(arg1: unknown): unknown;
 
-    /** Request saving the canvas data to disk. */
+    /**
+     * Request saving the canvas data to disk.
+     *
+     * @returns The result of requesting save.
+     */
     requestSave(arg1: unknown): unknown;
 
-    /** Force a re-render of all items in the viewport. */
+    /**
+     * Force a re-render of all items in the viewport.
+     *
+     * @returns The result of re-rendering the viewport.
+     */
     rerenderViewport(): unknown;
 
-    /** Add an item to the current selection. */
+    /**
+     * Add an item to the current selection.
+     *
+     * @returns The result of selecting the item.
+     */
     select(arg1: unknown): unknown;
 
-    /** Select all nodes and edges on the canvas. */
+    /**
+     * Select all nodes and edges on the canvas.
+     *
+     * @returns The result of selecting all items.
+     */
     selectAll(arg1: unknown): unknown;
 
-    /** Select only the specified item, deselecting everything else. */
+    /**
+     * Select only the specified item, deselecting everything else.
+     *
+     * @returns The result of selecting only the item.
+     */
     selectOnly(arg1: unknown): unknown;
 
-    /** Set the canvas data, replacing existing nodes and edges. */
+    /**
+     * Set the canvas data, replacing existing nodes and edges.
+     *
+     * @returns The result of setting the data.
+     */
     setData(arg1: unknown): unknown;
 
-    /** Set the dragging state of the canvas. */
+    /**
+     * Set the dragging state of the canvas.
+     *
+     * @returns The result of setting the dragging state.
+     */
     setDragging(arg1: unknown): unknown;
 
-    /** Set the read-only state of the canvas. */
+    /**
+     * Set the read-only state of the canvas.
+     *
+     * @returns The result of setting the read-only state.
+     */
     setReadonly(arg1: unknown): unknown;
 
-    /** Set the viewport state (position, zoom). */
+    /**
+     * Set the viewport state (position, zoom).
+     *
+     * @returns The result of setting the state.
+     */
     setState(arg1: unknown): unknown;
 
-    /** Set the viewport position and zoom level. */
+    /**
+     * Set the viewport position and zoom level.
+     *
+     * @returns The result of setting the viewport.
+     */
     setViewport(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-    /** Show the node creation menu at the specified position. */
+    /**
+     * Show the node creation menu at the specified position.
+     *
+     * @returns The result of showing the creation menu.
+     */
     showCreationMenu(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-    /** Show the quick settings menu for canvas options. */
+    /**
+     * Show the quick settings menu for canvas options.
+     *
+     * @returns The result of showing the quick settings menu.
+     */
     showQuickSettingsMenu(arg1: unknown): unknown;
 
-    /** Perform a smart zoom operation (toggle between zoom levels). */
+    /**
+     * Perform a smart zoom operation (toggle between zoom levels).
+     *
+     * @returns The result of the smart zoom.
+     */
     smartZoom(arg1: unknown): unknown;
 
-    /** Capture a screenshot of the canvas. */
+    /**
+     * Capture a screenshot of the canvas.
+     *
+     * @returns The captured screenshot.
+     */
     takeScreenshot(arg1: unknown, arg2: unknown): Promise<unknown>;
 
-    /** Toggle grid snapping on or off. */
+    /**
+     * Toggle grid snapping on or off.
+     *
+     * @returns The result of toggling grid snapping.
+     */
     toggleGridSnapping(arg1: unknown): unknown;
 
-    /** Toggle object-to-object snapping on or off. */
+    /**
+     * Toggle object-to-object snapping on or off.
+     *
+     * @returns The result of toggling object snapping.
+     */
     toggleObjectSnapping(arg1: unknown): unknown;
 
-    /** Toggle the selection state of an item. */
+    /**
+     * Toggle the selection state of an item.
+     *
+     * @returns The result of toggling the selection.
+     */
     toggleSelect(arg1: unknown): unknown;
 
-    /** Undo the last action. */
+    /**
+     * Undo the last action.
+     *
+     * @returns The result of the undo operation.
+     */
     undo(): unknown;
 
-    /** Unload and clean up the canvas resources. */
+    /**
+     * Unload and clean up the canvas resources.
+     *
+     * @returns The result of unloading the canvas.
+     */
     unload(): unknown;
 
-    /** Update the file open state for workspace tracking. */
+    /**
+     * Update the file open state for workspace tracking.
+     *
+     * @returns The result of updating the file open state.
+     */
     updateFileOpen(arg1: unknown): unknown;
 
-    /** Update the undo/redo button enabled states. */
+    /**
+     * Update the undo/redo button enabled states.
+     *
+     * @returns The result of updating the history UI.
+     */
     updateHistoryUI(): unknown;
 
-    /** Update the visual state of the current selection. */
+    /**
+     * Update the visual state of the current selection.
+     *
+     * @returns The result of updating the selection.
+     */
     updateSelection(arg1: unknown): unknown;
 
-    /** Virtualize off-screen nodes to improve performance. */
+    /**
+     * Virtualize off-screen nodes to improve performance.
+     *
+     * @returns The result of virtualizing nodes.
+     */
     virtualize(): unknown;
 
-    /** Zoom the viewport by a delta amount at the specified center point. */
+    /**
+     * Zoom the viewport by a delta amount at the specified center point.
+     *
+     * @returns The result of zooming.
+     */
     zoomBy(arg1: unknown, arg2: unknown): unknown;
 
-    /** Zoom the viewport to fit the specified bounding box. */
+    /**
+     * Zoom the viewport to fit the specified bounding box.
+     *
+     * @returns The result of zooming to the bounding box.
+     */
     zoomToBbox(arg1: unknown): unknown;
 
-    /** Zoom the viewport to fit all canvas content. */
+    /**
+     * Zoom the viewport to fit all canvas content.
+     *
+     * @returns The result of zooming to fit.
+     */
     zoomToFit(): unknown;
 
-    /** Zoom the viewport to fit the current selection. */
+    /**
+     * Zoom the viewport to fit the current selection.
+     *
+     * @returns The result of zooming to the selection.
+     */
     zoomToSelection(): unknown;
 }

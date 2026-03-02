@@ -95,61 +95,129 @@ export interface BacklinkComponent extends Component {
     /** Add a link from an unlinked mention to the target file. */
     addLinkFunction(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-    /** Get the current state of the backlink component. */
+    /**
+     * Get the current state of the backlink component.
+     *
+     * @returns The current state.
+     */
     getState(): unknown;
 
-    /** Handle a file content change event. */
+    /**
+     * Handle a file content change event.
+     *
+     * @returns The handler result.
+     */
     onFileChanged(arg1: unknown): unknown;
 
-    /** Handle a file deletion event. */
+    /**
+     * Handle a file deletion event.
+     *
+     * @returns The handler result.
+     */
     onFileDeleted(arg1: unknown): unknown;
 
-    /** Handle a file rename event. */
+    /**
+     * Handle a file rename event.
+     *
+     * @returns The handler result.
+     */
     onFileRename(arg1: unknown): unknown;
 
-    /** Lifecycle hook called when the component is loaded. */
+    /**
+     * Lifecycle hook called when the component is loaded.
+     *
+     * @returns The load result.
+     */
     onload(): unknown;
 
-    /** Handle a metadata cache change event. */
+    /**
+     * Handle a metadata cache change event.
+     *
+     * @returns The handler result.
+     */
     onMetadataChanged(arg1: unknown): unknown;
 
-    /** Handle the component being resized. */
+    /**
+     * Handle the component being resized.
+     *
+     * @returns The handler result.
+     */
     onResize(): unknown;
 
-    /** Handle the collapse all toggle button click. */
+    /**
+     * Handle the collapse all toggle button click.
+     *
+     * @returns The handler result.
+     */
     onToggleCollapseClick(): unknown;
 
-    /** Handle the extra context toggle button click. */
+    /**
+     * Handle the extra context toggle button click.
+     *
+     * @returns The handler result.
+     */
     onToggleMoreContextClick(): unknown;
 
-    /** Handle the show search toggle button click. */
+    /**
+     * Handle the show search toggle button click.
+     *
+     * @returns The handler result.
+     */
     onToggleShowSearch(): unknown;
 
-    /** Check if a result passes the current search filter. */
+    /**
+     * Check if a result passes the current search filter.
+     *
+     * @returns Whether the result passes the filter.
+     */
     passSearchFilter(arg1: unknown, arg2: unknown): unknown;
 
-    /** Recompute backlinks for the given file. */
+    /**
+     * Recompute backlinks for the given file.
+     *
+     * @param backlinkFile - The file to recompute backlinks for, or null.
+     */
     recomputeBacklink(backlinkFile: TFile | null): void;
 
-    /** Recompute unlinked mentions for the current file. */
+    /**
+     * Recompute unlinked mentions for the current file.
+     *
+     * @returns The recomputation result.
+     */
     recomputeUnlinked(arg1: unknown): unknown;
 
     /** Set whether the backlink section is collapsed. */
     setBacklinkCollapsed(arg1: unknown, arg2: unknown): Promise<unknown>;
 
-    /** Set whether all results are collapsed. */
+    /**
+     * Set whether all results are collapsed.
+     *
+     * @returns The result of setting collapse state.
+     */
     setCollapseAll(arg1: unknown): unknown;
 
-    /** Set whether extra context lines are shown. */
+    /**
+     * Set whether extra context lines are shown.
+     *
+     * @returns The result of setting extra context.
+     */
     setExtraContext(arg1: unknown): unknown;
 
     /** Set the collapsed state of a specific section. */
     setSectionCollapsed(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): Promise<unknown>;
 
-    /** Set the visibility of the search filter. */
+    /**
+     * Set the visibility of the search filter.
+     *
+     * @returns The result of toggling search visibility.
+     */
     setShowSearch(arg1: unknown): unknown;
 
-    /** Set the sort order for results. */
+    /**
+     * Set the sort order for results.
+     *
+     * @returns The result of setting sort order.
+     */
     setSortOrder(arg1: unknown): unknown;
 
     /** Restore the component from a saved state. */
@@ -161,21 +229,41 @@ export interface BacklinkComponent extends Component {
     /** Cancel the current backlink search computation. */
     stopBacklinkSearch(): void;
 
-    /** Cancel the current unlinked mentions search computation. */
+    /**
+     * Cancel the current unlinked mentions search computation.
+     *
+     * @returns The cancellation result.
+     */
     stopUnlinkedSearch(): unknown;
 
-    /** Toggle the collapsed state of the backlinks section. */
+    /**
+     * Toggle the collapsed state of the backlinks section.
+     *
+     * @returns The toggle result.
+     */
     toggleBacklinkCollapsed(): unknown;
 
-    /** Toggle the collapsed state of the unlinked mentions section. */
+    /**
+     * Toggle the collapsed state of the unlinked mentions section.
+     *
+     * @returns The toggle result.
+     */
     toggleUnlinkedCollapsed(): unknown;
 
-    /** Refresh both backlink and unlinked mention results. */
+    /**
+     * Refresh both backlink and unlinked mention results.
+     *
+     * @returns The update result.
+     */
     update(): unknown;
 
     /** Update the tooltip text of a section header. */
     updateHeaderTooltip(arg1: unknown, arg2: unknown): unknown;
 
-    /** Refresh the search filter and recompute filtered results. */
+    /**
+     * Refresh the search filter and recompute filtered results.
+     *
+     * @returns The update result.
+     */
     updateSearch(): unknown;
 }

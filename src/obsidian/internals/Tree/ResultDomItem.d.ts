@@ -67,22 +67,46 @@ export interface ResultDomItem extends TreeNode {
     /** Virtual children manager for match child items. */
     vChildren: TreeNodeVChildren<ResultDomItem, ResultDomItemChild>;
 
-    /** Get additional context positions surrounding a match. */
+    /**
+     * Get additional context positions surrounding a match.
+     *
+     * @returns The extra context positions.
+     */
     getMatchExtraPositions(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-    /** Mark this result item as needing re-render. */
+    /**
+     * Mark this result item as needing re-render.
+     *
+     * @returns The result of the invalidation.
+     */
     invalidate(): unknown;
 
-    /** Handle click on the collapse toggle. */
+    /**
+     * Handle click on the collapse toggle.
+     *
+     * @returns The result of the click handler.
+     */
     onCollapseClick(arg1: unknown): unknown;
 
-    /** Handle click on a search result to navigate to it. */
+    /**
+     * Handle click on a search result to navigate to it.
+     *
+     * @returns The result of the click handler.
+     */
     onResultClick(arg1: unknown): unknown;
 
-    /** Handle right-click context menu on a search result. */
+    /**
+     * Handle right-click context menu on a search result.
+     *
+     * @returns The result of the context menu handler.
+     */
     onResultContextMenu(arg1: unknown): unknown;
 
-    /** Handle mouseover on a search result for preview. */
+    /**
+     * Handle mouseover on a search result for preview.
+     *
+     * @returns The result of the mouseover handler.
+     */
     onResultMouseover(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
     /** Render the content matches for this result item. */
@@ -91,9 +115,17 @@ export interface ResultDomItem extends TreeNode {
     /** Set the collapsed state of this result item. */
     setCollapse(arg1: unknown, arg2: unknown): Promise<unknown>;
 
-    /** Set whether this result item can be collapsed. */
+    /**
+     * Set whether this result item can be collapsed.
+     *
+     * @returns The result of setting the collapsible state.
+     */
     setCollapsible(arg1: unknown): unknown;
 
-    /** Set whether extra context is shown around matches. */
+    /**
+     * Set whether extra context is shown around matches.
+     *
+     * @returns The result of setting extra context.
+     */
     setExtraContext(arg1: unknown): unknown;
 }

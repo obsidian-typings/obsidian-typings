@@ -10,7 +10,7 @@ declare module '@codemirror/view' {
      */
     interface WidgetType {
         /**
-         * Setting this to true causes widgets to never be reused. The default
+         * Setting this to `true` causes widgets to never be reused. The default
          * implementation just returns `false`.
          *
          * @see https://github.com/lishid/cm-view/blob/main/src/decoration.ts
@@ -22,10 +22,12 @@ declare module '@codemirror/view' {
         /**
          * Called when a previous DOM element created by a widget of the
          * same type is about to be reused. Equivalent to `updateDOM`, but
-         * for when `eq` returns true.
+         * for when `eq` returns `true`.
          *
          * Can be used as widget ownership transfer.
          *
+         * @param dom - The DOM element being reused.
+         * @param widget - The widget that previously owned the DOM element.
          * @see https://github.com/lishid/cm-view/blob/main/src/decoration.ts
          * @remark This only exists and can only be used in Obsidian.
          * @unofficial

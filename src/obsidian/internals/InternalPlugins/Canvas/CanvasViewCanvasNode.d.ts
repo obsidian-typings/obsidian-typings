@@ -98,51 +98,115 @@ export interface CanvasViewCanvasNode extends CanvasViewCanvasNodeBase {
     /** Z-index stacking order of the node. */
     zIndex: number;
 
-    /** Remove focus from the node. */
+    /**
+     * Remove focus from the node.
+     *
+     * @returns The result of removing focus.
+     */
     blur(): unknown;
 
-    /** Set focus on the node. */
+    /**
+     * Set focus on the node.
+     *
+     * @returns The result of focusing the node.
+     */
     focus(): unknown;
 
-    /** Get the serialized data for this node. */
+    /**
+     * Get the serialized data for this node.
+     *
+     * @returns The node data.
+     */
     getData(): unknown;
 
-    /** Initialize the file association for a file-type node. */
+    /**
+     * Initialize the file association for a file-type node.
+     *
+     * @returns The result of initializing the file.
+     */
     initFile(): unknown;
 
-    /** Initialize the node after construction. */
+    /**
+     * Initialize the node after construction.
+     *
+     * @returns The result of initializing the node.
+     */
     initialize(): unknown;
 
-    /** Handle the node's file receiving focus. */
+    /**
+     * Handle the node's file receiving focus.
+     *
+     * @returns The result of handling the file focus.
+     */
     onFileFocus(): unknown;
 
-    /** Handle click events on the node's label. */
+    /**
+     * Handle click events on the node's label.
+     *
+     * @returns The result of handling the label click.
+     */
     onLabelClick(arg1: unknown): unknown;
 
-    /** Handle double-click events on the node's label. */
+    /**
+     * Handle double-click events on the node's label.
+     *
+     * @returns The result of handling the label double-click.
+     */
     onLabelDblClick(arg1: unknown): unknown;
 
-    /** Handle pointer down events on the node. */
+    /**
+     * Handle pointer down events on the node.
+     *
+     * @returns The result of handling the pointer down.
+     */
     onPointerdown(arg1: unknown): unknown;
 
-    /** Render the node to the canvas. */
+    /**
+     * Render the node to the canvas.
+     *
+     * @returns The result of rendering the node.
+     */
     render(): unknown;
 
-    /** Set the serialized data for this node. */
+    /**
+     * Set the serialized data for this node.
+     *
+     * @returns The result of setting the data.
+     */
     setData(arg1: unknown): unknown;
 
-    /** Set the file associated with this node. */
+    /**
+     * Set the file associated with this node.
+     *
+     * @returns The result of setting the file.
+     */
     setFile(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-    /** Set the file path for this node. */
+    /**
+     * Set the file path for this node.
+     *
+     * @returns The result of setting the file path.
+     */
     setFilePath(arg1: unknown, arg2: unknown): unknown;
 
-    /** Show the context menu for this node. */
+    /**
+     * Show the context menu for this node.
+     *
+     * @returns The result of showing the menu.
+     */
     showMenu(arg1: unknown): unknown;
 
-    /** Update the rendering breakpoint based on the node's current size. */
+    /**
+     * Update the rendering breakpoint based on the node's current size.
+     *
+     * @returns The result of updating the breakpoint.
+     */
     updateBreakpoint(arg1: unknown): unknown;
 
-    /** Update the displayed label text of the node. */
+    /**
+     * Update the displayed label text of the node.
+     *
+     * @returns The result of updating the node label.
+     */
     updateNodeLabel(arg1: unknown): unknown;
 }

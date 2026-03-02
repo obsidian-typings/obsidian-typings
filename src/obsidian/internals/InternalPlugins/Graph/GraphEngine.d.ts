@@ -70,6 +70,8 @@ export interface GraphEngine {
 
     /**
      * Gets the engine options.
+     *
+     * @returns The current graph plugin instance options.
      */
     getOptions(): GraphPluginInstanceOptions;
 

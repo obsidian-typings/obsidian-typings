@@ -103,6 +103,8 @@ declare module 'obsidian' {
         /**
          * Add a section to the menu.
          *
+         * @param items - The section names to add.
+         * @returns The menu instance.
          * @unofficial
          */
         addSections(items: string[]): this;
@@ -156,6 +158,8 @@ declare module 'obsidian' {
         /**
          * Check whether the clicked element is inside the menu.
          *
+         * @param e - The element to check.
+         * @returns Whether the element is inside the menu.
          * @unofficial
          */
         isInside(e: HTMLElement): boolean;
@@ -164,6 +168,7 @@ declare module 'obsidian' {
          * Move selection to the next item in the menu.
          *
          * @param e - Keyboard event.
+         * @returns Whether the event was handled.
          * @unofficial
          */
         onArrowDown(e: KeyboardEvent): boolean;
@@ -171,6 +176,8 @@ declare module 'obsidian' {
         /**
          * Move selection out of the submenu.
          *
+         * @param e - Keyboard event.
+         * @returns Whether the event was handled.
          * @unofficial
          */
         onArrowLeft(e: KeyboardEvent): boolean;
@@ -178,6 +185,8 @@ declare module 'obsidian' {
         /**
          * Move selection into the submenu.
          *
+         * @param e - Keyboard event.
+         * @returns Whether the event was handled.
          * @unofficial
          */
         onArrowRight(e: KeyboardEvent): boolean;
@@ -186,6 +195,7 @@ declare module 'obsidian' {
          * Move selection to the previous item in the menu.
          *
          * @param e - Keyboard event.
+         * @returns Whether the event was handled.
          * @unofficial
          */
         onArrowUp(e: KeyboardEvent): boolean;
@@ -194,6 +204,7 @@ declare module 'obsidian' {
          * Execute selected menu item (does nothing if item is submenu).
          *
          * @param e - Keyboard event.
+         * @returns Whether the event was handled.
          * @unofficial
          */
         onEnter(e: KeyboardEvent): boolean;
@@ -225,6 +236,7 @@ declare module 'obsidian' {
          * Opens submenu if mouse is hovering over item with submenu.
          *
          * @param e - Mouse event.
+         * @returns Whether the event was handled.
          * @unofficial
          */
         onMouseOver(e: MouseEvent): boolean;
@@ -264,6 +276,7 @@ declare module 'obsidian' {
          * Set the parent element of the menu (i.e. for workspace leaf context menu).
          *
          * @param el - Element to set as parent.
+         * @returns The menu instance.
          * @unofficial
          */
         setParentElement(el: HTMLElement): this;
@@ -273,6 +286,7 @@ declare module 'obsidian' {
          *
          * @param section - Section to add.
          * @param submenu - Submenu to add.
+         * @returns The menu instance.
          * @unofficial
          */
         setSectionSubmenu(section: string, submenu: Submenu): this;
@@ -340,6 +354,8 @@ declare module 'obsidian' {
         /**
          * Get or create a menu from a mouse event.
          *
+         * @param evt - The mouse event.
+         * @returns The menu instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link forEvent} instead.
          * @since 1.6.0

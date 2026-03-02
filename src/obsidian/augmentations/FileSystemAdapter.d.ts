@@ -141,6 +141,7 @@ declare module 'obsidian' {
         /**
          * Get the absolute path to the vault.
          *
+         * @returns The absolute path to the vault.
          * @official
          */
         getBasePath(): string;
@@ -175,6 +176,7 @@ declare module 'obsidian' {
         /**
          * Get the name of the vault.
          *
+         * @returns The name of the vault.
          * @official
          */
         getName(): string;
@@ -296,6 +298,9 @@ declare module 'obsidian' {
 
         /**
          * Reconcile an internal file change between old and new paths.
+         *
+         * @param normalizedPath - The original path.
+         * @param normalizedNewPath - The new path.
          * @unofficial
          */
         reconcileFileInternal(normalizedPath: string, normalizedNewPath: string): Promise<void>;
@@ -343,6 +348,8 @@ declare module 'obsidian' {
 
         /**
          * Start watching a path for file system changes.
+         *
+         * @param normalizedPath - The path to watch.
          * @unofficial
          */
         startWatchPath(normalizedPath: string): Promise<void>;
@@ -364,12 +371,15 @@ declare module 'obsidian' {
         /**
          * Remove listener on specific path.
          *
+         * @param normalizedPath - The path to stop watching.
          * @unofficial
          */
         stopWatchPath(normalizedPath: string): void;
 
         /**
          * Debounced handler triggered when file system events occur.
+         *
+         * @returns The debounced handler.
          * @unofficial
          */
         thingsHappening(): Debouncer<[], void>;
@@ -404,6 +414,7 @@ declare module 'obsidian' {
         /**
          * Watch recursively for changes.
          *
+         * @param normalizedPath - The path to watch recursively.
          * @unofficial
          */
         watchHiddenRecursive(normalizedPath: string): Promise<void>;

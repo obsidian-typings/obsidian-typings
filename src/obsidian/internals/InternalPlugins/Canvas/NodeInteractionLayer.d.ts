@@ -15,9 +15,17 @@ export interface NodeInteractionLayer {
     /** Currently targeted node for interaction, or null if none. */
     target: null;
 
-    /** Render the interaction handles for the current target node. */
+    /**
+     * Render the interaction handles for the current target node.
+     *
+     * @returns The result of rendering the interaction handles.
+     */
     render(): unknown;
 
-    /** Set the target node for interaction. */
+    /**
+     * Set the target node for interaction.
+     *
+     * @returns The result of setting the target.
+     */
     setTarget(arg1: unknown): unknown;
 }

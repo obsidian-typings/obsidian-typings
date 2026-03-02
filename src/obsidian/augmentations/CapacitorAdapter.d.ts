@@ -89,6 +89,9 @@ declare module 'obsidian' {
 
         /**
          * Get the native device path for a normalized vault path.
+         *
+         * @param normalizedPath - The normalized vault path.
+         * @returns The native device path.
          * @unofficial
          */
         getNativePath(normalizedPath: string): string;
@@ -125,6 +128,7 @@ declare module 'obsidian' {
          * Helper function for `listRecursive` reads children of directory.
          *
          * @param normalizedPath Path to directory.
+         * @param child - The file entry child.
          * @unofficial
          */
         listRecursiveChild(normalizedPath: string, child: FileEntry): Promise<void>;
@@ -145,12 +149,16 @@ declare module 'obsidian' {
 
         /**
          * Handle a file change event for the given path.
+         *
+         * @param normalizedPath - The path that changed.
          * @unofficial
          */
         onFileChange(normalizedPath: string): void;
 
         /**
          * Open a file using the native device handler.
+         *
+         * @param normalizedPath - The path to the file to open.
          * @unofficial
          */
         open(normalizedPath: string): Promise<void>;
@@ -175,6 +183,9 @@ declare module 'obsidian' {
 
         /**
          * Quickly list files in a folder and add them to the file entry.
+         *
+         * @param normalizedFolderPath - The folder path.
+         * @param fileEntry - The file entry to populate.
          * @unofficial
          */
         quickList(normalizedFolderPath: string, fileEntry: FileEntry): void;
@@ -209,6 +220,10 @@ declare module 'obsidian' {
 
         /**
          * Reconcile a file creation event between old and new paths.
+         *
+         * @param normalizedPath - The original path.
+         * @param normalizedNewPath - The new path.
+         * @param fileEntry - The capacitor file entry.
          * @unofficial
          */
         reconcileFileCreation(
@@ -233,6 +248,8 @@ declare module 'obsidian' {
 
         /**
          * Remove a file from the internal file listing and trigger events.
+         *
+         * @param normalizedPath - The path of the file to remove.
          * @unofficial
          */
         removeFile(normalizedPath: string): Promise<void>;
@@ -324,6 +341,8 @@ declare module 'obsidian' {
 
         /**
          * Update the internal file listing for the given path.
+         *
+         * @param normalizedPath - The path to update.
          * @unofficial
          */
         update(normalizedPath: string): Promise<void>;

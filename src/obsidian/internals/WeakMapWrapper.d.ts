@@ -1,5 +1,8 @@
 /**
  * Wrapper around a WeakMap providing the same interface with an inner map reference.
+ *
+ * @typeParam K - The key type.
+ * @typeParam V - The value type.
  * @public
  * @unofficial
  */

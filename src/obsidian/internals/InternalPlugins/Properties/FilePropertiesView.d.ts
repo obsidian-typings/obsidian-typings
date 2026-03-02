@@ -10,6 +10,8 @@ import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
 export interface FilePropertiesView extends InfoFileView {
     /**
      * Returns the file.
+     *
+     * @returns The current file.
      */
     getFile(): TFile;
 
@@ -25,10 +27,20 @@ export interface FilePropertiesView extends InfoFileView {
      */
     isSupportedFile(file: TFile): boolean;
 
-    /** Handle a file content change and refresh properties. */
+    /**
+     * Handle a file content change and refresh properties.
+     *
+     * @param file - The changed file.
+     * @returns Resolves when the properties are refreshed.
+     */
     onFileChange(file: TFile): Promise<unknown>;
 
-    /** Handle a quick preview update for the file. */
+    /**
+     * Handle a quick preview update for the file.
+     *
+     * @param file - The file being previewed.
+     * @param t - The preview data.
+     */
     onQuickPreview(file: TFile, t: unknown): void;
 
     /**
@@ -38,7 +50,11 @@ export interface FilePropertiesView extends InfoFileView {
      */
     readSupportedFile(file: TFile): Promise<unknown>;
 
-    /** Save the modified frontmatter data to the file. */
+    /**
+     * Save the modified frontmatter data to the file.
+     *
+     * @param e - The frontmatter data to save.
+     */
     saveFrontmatter(e: unknown): void;
 
     /** Move focus to the next property field. */
@@ -53,6 +69,12 @@ export interface FilePropertiesView extends InfoFileView {
     /** Update the empty state display when no properties exist. */
     updateEmptyState(): void;
 
-    /** Update the frontmatter of a file with new property data. */
+    /**
+     * Update the frontmatter of a file with new property data.
+     *
+     * @param file - The file to update.
+     * @param t - The new property data.
+     * @returns The update result.
+     */
     updateFrontmatter(file: TFile, t: unknown): unknown;
 }

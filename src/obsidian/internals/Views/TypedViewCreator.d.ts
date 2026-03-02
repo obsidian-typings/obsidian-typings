@@ -4,6 +4,7 @@ import type { View } from 'obsidian';
 /**
  * Factory function type that creates a typed view instance for a given workspace leaf.
  *
+ * @typeParam TView - The type of the view.
  * @public
  * @unofficial
  */

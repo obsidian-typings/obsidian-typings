@@ -22,10 +22,18 @@ export interface Runnable {
     /** Cancel the runnable. */
     cancel(): void;
 
-    /** Check whether the runnable has been cancelled. */
+    /**
+     * Check whether the runnable has been cancelled.
+     *
+     * @returns Whether the runnable has been cancelled.
+     */
     isCancelled(): boolean;
 
-    /** Check whether the runnable is currently running. */
+    /**
+     * Check whether the runnable is currently running.
+     *
+     * @returns Whether the runnable is currently running.
+     */
     isRunning(): boolean;
 
     /** Start the runnable. */

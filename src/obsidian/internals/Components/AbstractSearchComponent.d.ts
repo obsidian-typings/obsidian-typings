@@ -46,21 +46,29 @@ export interface AbstractSearchComponent {
 
     /**
      * Returns the current search query.
+     *
+     * @returns The current search query string.
      */
     getQuery(): string;
 
     /**
      * Switch to the next inputElement.
+     *
+     * @param event - The keyboard event that triggered the input switch.
      */
     goToNextInput(event: KeyboardEvent): unknown;
 
     /**
      * Invokes findNextOrReplace.
+     *
+     * @param event - The keyboard event that triggered the action.
      */
     onEnter(event: KeyboardEvent): unknown;
 
     /**
      * Invokes findPrevious.
+     *
+     * @param event - The keyboard event that triggered the action.
      */
     onShiftEnter(event: KeyboardEvent): unknown;
 }

@@ -42,6 +42,7 @@ declare global {
          *
          * Exception: Does not work on `<body>` and `<html>`, or on elements with `position: fixed`.
          *
+         * @returns `true` if the element is shown, `false` otherwise.
          * @example
          * ```ts
          * const element = document.body.createEl('p');
@@ -125,7 +126,7 @@ declare global {
          * Adds an event listener to the element when it is inserted into the DOM.
          *
          * @param listener - the callback to call when this node is inserted into the DOM.
-         * @param once - if true, this will only fire once and then unhook itself.
+         * @param once - if `true`, this will only fire once and then unhook itself.
          * @returns destroy - a function to remove the event handler to avoid memory leaks.
          * @example
          * ```ts

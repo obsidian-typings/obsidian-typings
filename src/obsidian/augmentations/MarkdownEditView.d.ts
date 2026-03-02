@@ -50,6 +50,7 @@ declare module 'obsidian' {
         /**
          * Apply the scroll position to the edit view.
          *
+         * @param scroll - The scroll position to apply.
          * @example
          * ```ts
          * markdownEditView.applyScroll(100);
@@ -107,6 +108,7 @@ declare module 'obsidian' {
         /**
          * Get the markdown content of the edit view.
          *
+         * @returns The markdown content.
          * @official
          */
         get(): string;
@@ -114,6 +116,7 @@ declare module 'obsidian' {
         /**
          * Constructs extensions for the editor based on user settings.
          *
+         * @returns The dynamic editor extensions.
          * @remark Creates extension for properties rendering.
          * @unofficial
          */
@@ -122,6 +125,8 @@ declare module 'obsidian' {
         /**
          * Gets the ephemeral (non-persistent) state of the editor.
          *
+         * @param state - The state to get ephemeral state from.
+         * @returns The ephemeral state.
          * @unofficial
          */
         getEphemeralState(state: unknown): MarkdownEditViewEphemeralState;
@@ -129,6 +134,7 @@ declare module 'obsidian' {
         /**
          * Get the current folds of the editor.
          *
+         * @returns The fold info or `null`.
          * @unofficial
          */
         getFoldInfo(): null | FoldInfo;
@@ -136,6 +142,7 @@ declare module 'obsidian' {
         /**
          * Get the scroll position of the edit view.
          *
+         * @returns The scroll position.
          * @official
          */
         getScroll(): number;
@@ -143,6 +150,7 @@ declare module 'obsidian' {
         /**
          * Get the selection of the edit view.
          *
+         * @returns The selected text.
          * @official
          */
         getSelection(): string;
@@ -150,6 +158,10 @@ declare module 'obsidian' {
         /**
          * Add highlights for specified ranges.
          *
+         * @param ranges - The ranges to highlight.
+         * @param style - The highlight style class.
+         * @param remove_previous - Whether to remove previous highlights.
+         * @param range - The editor selection range.
          * @remark Only ranges parameter is used.
          * @unofficial
          */
@@ -163,6 +175,8 @@ declare module 'obsidian' {
         /**
          * Execute functionality on CM editor state update.
          *
+         * @param update - The CodeMirror view update.
+         * @param changed - Whether the document changed.
          * @unofficial
          */
         onUpdate(update: ViewUpdate, changed: boolean): void;
@@ -197,6 +211,7 @@ declare module 'obsidian' {
         /**
          * Set the ephemeral (non-persistent) state of the editor.
          *
+         * @param state - The ephemeral state to set.
          * @unofficial
          */
         setEphemeralState(state: unknown): void;
@@ -204,6 +219,7 @@ declare module 'obsidian' {
         /**
          * Set highlight of any search match.
          *
+         * @param match - The match to highlight.
          * @unofficial
          */
         setHighlight(match: SetHighlightMatch): void;
@@ -211,6 +227,7 @@ declare module 'obsidian' {
         /**
          * Set the state of the editor (applies selections, scrolls, ...).
          *
+         * @param state - The state to apply.
          * @unofficial
          */
         setState(state: unknown): void;
@@ -225,6 +242,7 @@ declare module 'obsidian' {
         /**
          * Update the bottom padding of the CodeMirror contentdom (based on backlinksEl).
          *
+         * @param height - The padding height in pixels.
          * @unofficial
          */
         updateBottomPadding(height: number): void;

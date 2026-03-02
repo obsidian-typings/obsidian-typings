@@ -4,6 +4,10 @@
  * @unofficial
  */
 export interface AppMenuBarManagerConstructor {
-    /** Update the state of native menu items. */
+    /**
+     * Update the state of native menu items.
+     *
+     * @returns The result of updating menu items.
+     */
     updateMenuItems(arg1: unknown, arg2: unknown): unknown;
 }

@@ -10,12 +10,27 @@ import type { LinkChangeUpdate } from './LinkChangeUpdate.d.ts';
  * @unofficial
  */
 export interface LinkUpdater {
-    /** Apply a batch of link change updates to the given file. */
+    /**
+     * Apply a batch of link change updates to the given file.
+     *
+     * @param file - File to update.
+     * @param updates - Link change updates to apply.
+     */
     applyUpdates(file: TFile, updates: LinkChangeUpdate[]): Promise<void>;
 
-    /** Iterate over all references managed by this updater. */
+    /**
+     * Iterate over all references managed by this updater.
+     *
+     * @param callback - Callback invoked for each reference.
+     */
     iterateReferences(callback: (path: string, reference: ReferenceCache) => void): void;
 
-    /** Rename a subpath reference (e.g. heading or block) within a file. */
+    /**
+     * Rename a subpath reference (e.g. heading or block) within a file.
+     *
+     * @param file - File containing the subpath.
+     * @param oldSubpath - Previous subpath.
+     * @param newSubpath - New subpath.
+     */
     renameSubpath(file: TFile, oldSubpath: string, newSubpath: string): Promise<void>;
 }

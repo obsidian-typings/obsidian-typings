@@ -26,6 +26,7 @@ export interface IFramedMarkdownEditor extends MarkdownScrollableEditView {
     /**
      * Constructs extensions for the editor based on user settings.
      *
+     * @returns Array of dynamic CodeMirror extensions.
      * @remark Creates extension for overriding escape keymap to showPreview.
      */
     getDynamicExtensions(): Extension[];
@@ -42,6 +43,9 @@ export interface IFramedMarkdownEditor extends MarkdownScrollableEditView {
 
     /**
      * Execute functionality on CM editor state update.
+     *
+     * @param update - The CodeMirror view update.
+     * @param changed - Whether the document content changed.
      */
     onUpdate(update: ViewUpdate, changed: boolean): void;
 }

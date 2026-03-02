@@ -37,12 +37,15 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
 
     /**
      * Set the scroll count of the editor scrollbar.
+     *
+     * @param scroll - Scroll position to apply.
      */
     applyScroll(scroll: number): void;
 
     /**
      * Constructs local (always active) extensions for the editor.
      *
+     * @returns Array of CodeMirror extensions.
      * @remark Creates extensions for list indentation, tab indentations.
      */
     buildLocalExtensions(): Extension[];
@@ -55,6 +58,7 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
     /**
      * Constructs extensions for the editor based on user settings.
      *
+     * @returns Array of dynamic CodeMirror extensions.
      * @remark Creates toggleable extensions for showing line numbers, indentation guides,.
      *          folding, brackets pairing and properties rendering.
      */
@@ -62,6 +66,8 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
 
     /**
      * Get the current scroll count of the editor scrollbar.
+     *
+     * @returns Current scroll position.
      */
     getScroll(): number;
 
@@ -92,16 +98,23 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
 
     /**
      * Execute functionality on CM editor state update.
+     *
+     * @param update - The CodeMirror view update.
+     * @param changed - Whether the document content changed.
      */
     onUpdate(update: ViewUpdate, changed: boolean): void;
 
     /**
      * Close editor suggest and removes highlights on click.
+     *
+     * @param event - The mouse event.
      */
     onViewClick(event?: MouseEvent): void;
 
     /**
      * Add classes to the editor, functions as a toggle.
+     *
+     * @param classes - CSS classes to apply.
      */
     setCssClass(classes: string[]): void;
 
@@ -112,11 +125,15 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
 
     /**
      * Reveal the search (and replace) component.
+     *
+     * @param replace - Whether to show the replace input.
      */
     showSearch(replace: boolean): void;
 
     /**
      * Update the bottom padding of the CodeMirror contentdom.
+     *
+     * @param height - Height of the bottom padding in pixels.
      */
     updateBottomPadding(height: number): void;
 }

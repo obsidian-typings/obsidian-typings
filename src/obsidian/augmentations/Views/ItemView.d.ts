@@ -116,6 +116,11 @@ declare module 'obsidian' {
 
         /**
          * Handle a drop event on this view.
+         *
+         * @param event - The drag event.
+         * @param draggable - The draggable object being dropped.
+         * @param isOver - Whether the draggable is over the view.
+         * @returns The drop result, or `null` if the drop was not handled.
          * @unofficial
          */
         handleDrop(event: DragEvent, draggable: Draggable, isOver: boolean): DropResult | null;
@@ -128,12 +133,16 @@ declare module 'obsidian' {
 
         /**
          * Handle the 'more options' button click event.
+         *
+         * @param event - The event that triggered the action.
          * @unofficial
          */
         onMoreOptions(event: Event): void;
 
         /**
          * Handle the 'more options' context menu event.
+         *
+         * @param e - The context menu event.
          * @unofficial
          */
         onMoreOptionsMenu(e: unknown): void;

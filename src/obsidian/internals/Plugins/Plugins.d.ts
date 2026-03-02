@@ -63,31 +63,44 @@ export interface Plugins {
 
     /**
      * Unload a plugin by ID.
+     *
+     * @param id - Plugin ID.
      */
     disablePlugin(id: string): Promise<void>;
 
     /**
      * Unload a plugin by ID and save config for persistence.
+     *
+     * @param id - Plugin ID.
      */
     disablePluginAndSave(id: string): Promise<void>;
 
     /**
      * Enable a plugin by ID.
+     *
+     * @param id - Plugin ID.
      */
     enablePlugin(id: string): Promise<void>;
 
     /**
      * Enable a plugin by ID and save config for persistence.
+     *
+     * @param id - Plugin ID.
      */
     enablePluginAndSave(id: string): Promise<void>;
 
     /**
      * Get a plugin by ID.
+     *
+     * @param id - Plugin ID.
+     * @returns The plugin instance or null if not found.
      */
     getPlugin(id: string): Plugin | null;
 
     /**
      * Get the folder where plugins are stored.
+     *
+     * @returns Path to the plugins folder.
      */
     getPluginFolder(): string;
 
@@ -98,21 +111,32 @@ export interface Plugins {
 
     /**
      * Install a plugin from a given URL.
+     *
+     * @param repo - Repository identifier.
+     * @param version - Version to install.
+     * @param manifest - Plugin manifest data.
      */
     installPlugin(repo: string, version: string, manifest: PluginManifest): Promise<void>;
 
     /**
      * Check whether a plugin is deprecated.
+     *
+     * @param id - Plugin ID.
+     * @returns Whether the plugin is deprecated.
      */
     isDeprecated(id: string): boolean;
 
     /**
      * Check whether community plugins are enabled.
+     *
+     * @returns Whether community plugins are enabled.
      */
     isEnabled(): boolean;
 
     /**
      * Load a specific plugin's manifest by its folder path.
+     *
+     * @param path - Folder path containing the manifest.
      */
     loadManifest(path: string): Promise<void>;
 
@@ -123,6 +147,9 @@ export interface Plugins {
 
     /**
      * Load a plugin by its ID.
+     *
+     * @param id - Plugin ID.
+     * @returns The loaded plugin instance.
      */
     loadPlugin(id: string): Promise<Plugin>;
 
@@ -136,16 +163,22 @@ export interface Plugins {
 
     /**
      * Toggle whether community plugins are enabled.
+     *
+     * @param enabled - Whether to enable community plugins.
      */
     setEnable(enabled: boolean): Promise<void>;
 
     /**
      * Uninstall a plugin by ID.
+     *
+     * @param id - Plugin ID.
      */
     uninstallPlugin(id: string): Promise<void>;
 
     /**
      * Unload a plugin by ID.
+     *
+     * @param id - Plugin ID.
      */
     unloadPlugin(id: string): Promise<void>;
 }

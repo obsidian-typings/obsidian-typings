@@ -51,6 +51,10 @@ export interface MobileTabSwitcher {
     /** Show the tab switcher UI. */
     show(): Promise<void>;
 
-    /** Display the tab management context menu. */
+    /**
+     * Display the tab management context menu.
+     *
+     * @param e - The mouse event.
+     */
     showTabManagementMenu(e: MouseEvent): void;
 }

@@ -51,6 +51,10 @@ export interface ReadViewRenderer {
     /** Queue a render update for the next animation frame. */
     queueRender(): void;
 
-    /** Set the text content and trigger a re-render. */
+    /**
+     * Set the text content and trigger a re-render.
+     *
+     * @param text - The text content to render.
+     */
     set(text: string): void;
 }

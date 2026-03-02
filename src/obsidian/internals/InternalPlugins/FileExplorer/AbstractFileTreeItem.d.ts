@@ -6,6 +6,8 @@ import type { FileTreeItemParent } from './FileTreeItemParent.d.ts';
 
 /**
  * Base interface for file and folder tree items in the file explorer.
+ *
+ * @typeParam T - The type of the abstract file.
  * @public
  * @unofficial
  */

@@ -32,7 +32,7 @@ export interface EmbeddedEditorView extends Component {
     /**
      * Whether the editor may be edited.
      *
-     * @remark Fun fact, setting this to true and calling showEditor() for embedded MD views, allows them to be edited.
+     * @remark Fun fact, setting this to `true` and calling showEditor() for embedded MD views, allows them to be edited.
      *          Though the experience is a little buggy.
      */
     editable: boolean;
@@ -99,11 +99,15 @@ export interface EmbeddedEditorView extends Component {
 
     /**
      * Destroy edit component editor and save contents if specified.
+     *
+     * @param save - Whether to save before destroying.
      */
     destroyEditor(save?: boolean): void;
 
     /**
      * Gets currently active mode (editMode returns 'source').
+     *
+     * @returns The current view mode.
      */
     getMode(): 'source' | 'preview';
 
@@ -134,11 +138,17 @@ export interface EmbeddedEditorView extends Component {
 
     /**
      * Set file contents.
+     *
+     * @param data - Content to save.
+     * @param save - Whether to persist to disk.
      */
     save(data: string, save?: boolean): void;
 
     /**
      * Set the state of the editor.
+     *
+     * @param data - Document content to set.
+     * @param clear - Whether to clear existing state.
      */
     set(data: string, clear: boolean): void;
 
@@ -149,11 +159,15 @@ export interface EmbeddedEditorView extends Component {
 
     /**
      * Reveal preview mode and destroy editor, save if specified.
+     *
+     * @param save - Whether to save before switching to preview.
      */
     showPreview(save?: boolean): void;
 
     /**
      * Reveal search component in file renderer component.
+     *
+     * @param replace - Whether to show the replace input.
      */
     showSearch(replace?: boolean): void;
 

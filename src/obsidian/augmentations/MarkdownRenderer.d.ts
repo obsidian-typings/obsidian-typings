@@ -22,6 +22,8 @@ declare module 'obsidian' {
 
         /**
          * The file path associated with this renderer.
+         *
+         * @returns The file path.
          * @unofficial
          */
         get path(): unknown;
@@ -36,18 +38,24 @@ declare module 'obsidian' {
 
         /**
          * Handle a checkbox click event in the rendered markdown.
+         *
+         * @returns The result of the checkbox click handling.
          * @unofficial
          */
         onCheckboxClick(e: unknown, n: unknown, i: unknown): unknown;
 
         /**
          * Handle a file change event for the rendered file.
+         *
+         * @returns The result of the file change handling.
          * @unofficial
          */
         onFileChange(e: unknown): unknown;
 
         /**
          * Handle a fold state change in the rendered markdown.
+         *
+         * @returns The result of the fold change handling.
          * @unofficial
          */
         onFoldChange(): unknown;
@@ -60,24 +68,32 @@ declare module 'obsidian' {
 
         /**
          * Called when the markdown rendering is complete.
+         *
+         * @returns The result of the render completion handling.
          * @unofficial
          */
         onRenderComplete(): unknown;
 
         /**
          * Handle a scroll event in the rendered markdown.
+         *
+         * @returns The result of the scroll handling.
          * @unofficial
          */
         onScroll(): unknown;
 
         /**
          * Apply post-processing to the rendered markdown output.
+         *
+         * @returns The result of the post-processing.
          * @unofficial
          */
         postProcess(e: unknown, t: unknown, n: unknown): unknown;
 
         /**
          * Resolve internal links in the rendered markdown.
+         *
+         * @returns The result of the link resolution.
          * @unofficial
          */
         resolveLinks(e: unknown): unknown;

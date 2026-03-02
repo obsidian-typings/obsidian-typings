@@ -23,11 +23,15 @@ export interface CanvasView extends TextFileView {
 
     /**
      * Loads the local data of the canvas.
+     *
+     * @returns The local canvas data.
      */
     getLocalData(): unknown;
 
     /**
      * Get the current view type.
+     *
+     * @returns The view type.
      */
     getViewType(): typeof ViewType.Canvas;
 

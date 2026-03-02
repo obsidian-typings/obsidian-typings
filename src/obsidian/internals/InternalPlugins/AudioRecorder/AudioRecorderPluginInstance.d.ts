@@ -23,7 +23,11 @@ export interface AudioRecorderPluginInstance extends InternalPluginInstance<Audi
     /** Whether audio is currently being recorded. */
     recording: boolean;
 
-    /** Check if the user has granted microphone permission. */
+    /**
+     * Check if the user has granted microphone permission.
+     *
+     * @returns Whether microphone permission is granted.
+     */
     checkPermission(): Promise<boolean>;
 
     /** Initiate the audio recording flow. */
@@ -35,12 +39,25 @@ export interface AudioRecorderPluginInstance extends InternalPluginInstance<Audi
     /** Stop the current audio recording session. */
     onStopRecording(): void;
 
-    /** Save the recorded audio buffer to a file in the vault. */
+    /**
+     * Save the recorded audio buffer to a file in the vault.
+     *
+     * @param audioBuffer - The recorded audio data.
+     */
     saveRecording(audioBuffer: ArrayBuffer): Promise<void>;
 
-    /** Display a recording status message or error to the user. */
+    /**
+     * Display a recording status message or error to the user.
+     *
+     * @param message - The message to display.
+     * @param isError - Whether the message is an error.
+     */
     showRecordingMessage(message: string, isError: boolean): void;
 
-    /** Begin recording audio from the given media stream. */
+    /**
+     * Begin recording audio from the given media stream.
+     *
+     * @param stream - The media stream to record from.
+     */
     startRecording(stream: MediaStream): void;
 }

@@ -26,41 +26,62 @@ export interface RecentFileTracker {
      */
     workspace: Workspace;
 
-    /** Add a file to the recent files list. */
+    /**
+     * Add a file to the recent files list.
+     *
+     * @param file - File to add.
+     */
     collect(file: TFile): void;
 
     /**
      * Returns the last 10 opened files.
+     *
+     * @returns Array of file paths.
      */
     getLastOpenFiles(): string[];
 
     /**
      * Get last n files of type (defaults to 10).
+     *
+     * @param options - Options for filtering recent files.
+     * @returns Array of file paths.
      */
     getRecentFiles(options?: GetRecentFilesOptions): string[];
 
     /**
      * Set the last opened files.
+     *
+     * @param savedFiles - Array of file paths to load.
      */
     load(savedFiles: string[]): void;
 
     /**
      * On file create, save file to last opened files.
+     *
+     * @param file - The created file.
      */
     onFileCreated(file: TFile): void;
 
     /**
      * On file open, save file to last opened files.
+     *
+     * @param prevFile - Previously opened file.
+     * @param file - Newly opened file.
      */
     onFileOpen(prevFile: TFile, file: TFile): void;
 
     /**
      * On file rename, update file path in last opened files.
+     *
+     * @param file - The renamed file.
+     * @param oldPath - Previous file path.
      */
     onRename(file: TFile, oldPath: string): void;
 
     /**
      * Get last opened files.
+     *
+     * @returns Array of file paths.
      */
     serialize(): string[];
 }

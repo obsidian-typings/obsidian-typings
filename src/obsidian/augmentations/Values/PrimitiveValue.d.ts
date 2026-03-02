@@ -4,6 +4,7 @@ declare module 'obsidian' {
     /**
      * Base type for {@link Values} which wrap a single primitive.
      *
+     * @typeParam T - The type of the wrapped primitive value.
      * @since 1.10.0
      */
     interface PrimitiveValue<T> extends NotNullValue {

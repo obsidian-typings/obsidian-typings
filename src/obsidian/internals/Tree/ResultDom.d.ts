@@ -63,46 +63,106 @@ export interface ResultDom {
     /** Whether a search operation is currently in progress. */
     working: boolean;
 
-    /** Add a search result for a file to the result DOM. */
+    /**
+     * Add a search result for a file to the result DOM.
+     *
+     * @param file - The file to add a result for.
+     * @param result - The search result data.
+     * @param content - The text content of the file.
+     * @param shouldShowTitle - Whether to show the file title.
+     * @returns The created result DOM item.
+     */
     addResult(file: TFile, result: ResultDomResult, content: string, shouldShowTitle?: boolean): ResultDomItem;
 
-    /** Change which result item has focus. */
+    /**
+     * Change which result item has focus.
+     *
+     * @returns The result of changing the focused item.
+     */
     changeFocusedItem(arg1: unknown): unknown;
 
-    /** Clear all search results from the DOM. */
+    /**
+     * Clear all search results from the DOM.
+     *
+     * @returns The result of clearing.
+     */
     emptyResults(): unknown;
 
-    /** Get the list of files with search results. */
+    /**
+     * Get the list of files with search results.
+     *
+     * @returns The list of files with results.
+     */
     getFiles(): unknown;
 
-    /** Get the total number of matches across all results. */
+    /**
+     * Get the total number of matches across all results.
+     *
+     * @returns The total match count.
+     */
     getMatchCount(): number;
 
-    /** Get the result DOM item for a specific file. */
+    /**
+     * Get the result DOM item for a specific file.
+     *
+     * @returns The result DOM item.
+     */
     getResult(arg1: unknown): unknown;
 
-    /** Callback invoked when the result set changes. */
+    /**
+     * Callback invoked when the result set changes.
+     *
+     * @returns The result of the change handler.
+     */
     onChange(): unknown;
 
-    /** Handle resize events and recalculate layout. */
+    /**
+     * Handle resize events and recalculate layout.
+     *
+     * @returns The result of the resize handler.
+     */
     onResize(): unknown;
 
-    /** Remove a search result from the DOM. */
+    /**
+     * Remove a search result from the DOM.
+     *
+     * @returns The result of the removal.
+     */
     removeResult(arg1: unknown): unknown;
 
-    /** Set whether all result items should be collapsed. */
+    /**
+     * Set whether all result items should be collapsed.
+     *
+     * @returns The result of setting collapse state.
+     */
     setCollapseAll(arg1: unknown): unknown;
 
-    /** Set whether extra context is shown around matches. */
+    /**
+     * Set whether extra context is shown around matches.
+     *
+     * @returns The result of setting extra context.
+     */
     setExtraContext(arg1: unknown): unknown;
 
-    /** Set the focused result item. */
+    /**
+     * Set the focused result item.
+     *
+     * @returns The result of setting the focused item.
+     */
     setFocusedItem(arg1: unknown): unknown;
 
-    /** Show a loading indicator while search is in progress. */
+    /**
+     * Show a loading indicator while search is in progress.
+     *
+     * @returns The result of starting the loader.
+     */
     startLoader(): unknown;
 
-    /** Hide the loading indicator when search completes. */
+    /**
+     * Hide the loading indicator when search completes.
+     *
+     * @returns The result of stopping the loader.
+     */
     stopLoader(): unknown;
 
     /** Toggle the collapsed state of a result item. */
