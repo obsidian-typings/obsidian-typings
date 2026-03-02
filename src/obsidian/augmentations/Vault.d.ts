@@ -100,6 +100,22 @@ declare module 'obsidian' {
         append(file: TFile, data: string, options?: DataWriteOptions): Promise<void>;
 
         /**
+         * Add data to the end of a binary file inside the vault.
+         *
+         * @param normalizedPath - Path to file, use {@link normalizePath} to normalize beforehand.
+         * @param data - The data to append.
+         * @param options - (Optional) options
+         * @returns A promise that resolves when the file is appended.
+         * @example
+         * ```ts
+         * await app.vault.adapter.appendBinary('foo/bar.md', new Uint8Array([1, 2, 3]).buffer);
+         * ```
+         * @official
+         * @since 1.12.3
+         */
+        appendBinary(normalizedPath: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
+
+        /**
          * Read the content of a plaintext file stored inside the vault.
          * Use this if you only want to display the content to the user.
          * If you want to modify the file content afterward use {@link Vault.read}

@@ -72,7 +72,7 @@ declare module 'obsidian' {
      * @typeParam V - The type of the return value of the function to debounce.
      * @param cb - The function to call.
      * @param timeout - The timeout to wait, in milliseconds.
-     * @param resetTimer - Whether to reset the timeout when the debouncer is called again.
+     * @param resetTimer - Whether to reset the timeout when the debounce function is called again.
      * @returns a debounced function that takes the same parameter as the original function.
      *
      * @example

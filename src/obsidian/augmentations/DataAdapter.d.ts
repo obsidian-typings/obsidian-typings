@@ -70,6 +70,22 @@ declare module 'obsidian' {
         append(normalizedPath: string, data: string, options?: DataWriteOptions): Promise<void>;
 
         /**
+         * Add data to the end of a binary file.
+         *
+         * @param normalizedPath - Path to file, use {@link normalizePath} to normalize beforehand.
+         * @param data - The data to append.
+         * @param options - (Optional) options
+         * @returns A promise that resolves when the file is appended.
+         * @example
+         * ```ts
+         * await app.vault.adapter.appendBinary('foo/bar.md', new Uint8Array([1, 2, 3]).buffer);
+         * ```
+         * @official
+         * @since 1.12.3
+         */
+        appendBinary(normalizedPath: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
+
+        /**
          * Create a copy of a file.
          * This will fail if there is already a file at `normalizedNewPath`.
          *

@@ -8,6 +8,48 @@ declare module 'obsidian' {
      */
     interface SettingGroup {
         /**
+         * The components of the setting group.
+         *
+         * @unofficial
+         */
+        components: BaseComponent[];
+
+        /**
+         * The control element of the setting group.
+         *
+         * @unofficial
+         */
+        controlEl: HTMLDivElement;
+
+        /**
+         * The group element of the setting group.
+         *
+         * @unofficial
+         */
+        groupEl: HTMLDivElement;
+
+        /**
+         * The header element of the setting group.
+         *
+         * @unofficial
+         */
+        headerEl: HTMLDivElement;
+
+        /**
+         * The header inner element of the setting group.
+         *
+         * @unofficial
+         */
+        headerInnerEl: HTMLDivElement;
+
+        /**
+         * The list element of the setting group.
+         *
+         * @unofficial
+         */
+        listEl: HTMLDivElement;
+
+        /**
          * Add a CSS class to the setting group.
          *
          * @param cls - The CSS class to add.
