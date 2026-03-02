@@ -1,4 +1,4 @@
-import type { Dimensions } from './Dimensions.d.ts';
+import type { Dimensions } from '../../Dimensions.d.ts';
 
 /**
  * @todo Documentation incomplete.

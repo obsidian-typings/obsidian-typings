@@ -1,4 +1,4 @@
-import type { WorkspaceWindowInitDataSize } from '../internals/Workspace/WorkspaceWindowInitDataSize.d.ts';
+import type { Dimensions } from '../internals/Dimensions.d.ts';
 
 export {};
 
@@ -9,7 +9,7 @@ declare module 'obsidian' {
          *
          * @official
          */
-        size?: WorkspaceWindowInitDataSize;
+        size?: Dimensions;
 
         /**
          * The x position.

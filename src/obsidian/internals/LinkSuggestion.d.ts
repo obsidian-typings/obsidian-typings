@@ -1,24 +1,13 @@
-import type { TFile } from 'obsidian';
+import type { FileSuggestion } from './FileSuggestion.d.ts';
 
 /**
  * @public
  * @unofficial
  * Suggestion for a link to a file.
  */
-export interface LinkSuggestion {
+export interface LinkSuggestion extends FileSuggestion {
     /**
      * Resolved link note alias.
      */
     alias?: string;
-
-    /**
-     * File that is suggested. `null` if the link cannot be resolved.
-     */
-    file: TFile | null;
-
-    /**
-     * Path to the file if the link can be resolved.
-     * Link text if the link cannot be resolved.
-     */
-    path: string;
 }

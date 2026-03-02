@@ -1,10 +1,10 @@
+import type { Point } from 'obsidian';
 import type {
     Application,
     Container,
     ICanvas
 } from 'pixi.js';
 import type { Coords } from '../../../../@codemirror__view/internals/Coords.d.ts';
-import type { Pointer } from '../../Pointer.d.ts';
 import type { GraphColor } from './GraphColor.d.ts';
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 import type { GraphData } from './GraphData.d.ts';
@@ -226,5 +226,5 @@ export interface GraphRenderer {
     updateZoom(): void;
 
     /** @todo Documentation incomplete. */
-    zoomTo(scale: number, pointer: Pointer): void;
+    zoomTo(scale: number, pointer: Point): void;
 }

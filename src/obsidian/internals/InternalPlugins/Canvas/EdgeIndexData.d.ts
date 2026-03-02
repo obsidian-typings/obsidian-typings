@@ -1,3 +1,4 @@
+import type { BBox } from './BBox.d.ts';
 import type { CanvasViewCanvasEdge } from './CanvasViewCanvasEdge.d.ts';
 
 /**
@@ -5,7 +6,7 @@ import type { CanvasViewCanvasEdge } from './CanvasViewCanvasEdge.d.ts';
  * @public
  * @unofficial
  */
-export interface EdgeIndexData {
+export interface EdgeIndexData extends BBox {
     /** @todo Documentation incomplete. */
     children: CanvasViewCanvasEdge[];
 
@@ -14,16 +15,4 @@ export interface EdgeIndexData {
 
     /** @todo Documentation incomplete. */
     leaf: boolean;
-
-    /** @todo Documentation incomplete. */
-    maxX: number;
-
-    /** @todo Documentation incomplete. */
-    maxY: number;
-
-    /** @todo Documentation incomplete. */
-    minX: number;
-
-    /** @todo Documentation incomplete. */
-    minY: number;
 }

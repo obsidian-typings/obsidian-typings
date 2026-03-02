@@ -4,7 +4,7 @@ import type {
 } from 'obsidian';
 import type { FocusMode } from './FocusMode.d.ts';
 import type { MetadataEditor } from './MetadataEditor.d.ts';
-import type { MetadataEditorPropertyTypeInfo } from './MetadataEditorPropertyTypeInfo.d.ts';
+import type { TypeInfo } from './MetadataTypeManager/TypeInfo.d.ts';
 import type { MetadataWidget } from './MetadataWidget.d.ts';
 import type { PropertyEntryData } from './PropertyEntryData.d.ts';
 
@@ -57,7 +57,7 @@ export interface MetadataEditorProperty extends Component {
     /**
      * Info about the inferred and expected property widget given key-value pair.
      */
-    typeInfo: MetadataEditorPropertyTypeInfo;
+    typeInfo: TypeInfo;
 
     /**
      * Element that contains the value input or widget.

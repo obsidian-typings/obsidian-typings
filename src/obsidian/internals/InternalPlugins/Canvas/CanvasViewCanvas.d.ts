@@ -1,9 +1,9 @@
 import type {
     App,
-    Debouncer
+    Debouncer,
+    Point
 } from 'obsidian';
 import type { MapOfSets } from '../../Collections/MapOfSets.d.ts';
-import type { Pointer } from '../../Pointer.d.ts';
 import type { CanvasViewData } from './CanvasData.d.ts';
 import type { CanvasMenu } from './CanvasMenu.d.ts';
 import type { CanvasRectEx } from './CanvasRectEx.d.ts';
@@ -121,7 +121,7 @@ export interface CanvasViewCanvas {
     pauseAnimation: number;
 
     /** @todo Documentation incomplete. */
-    pointer: Pointer;
+    pointer: Point;
 
     /** @todo Documentation incomplete. */
     pointerFrame: number;

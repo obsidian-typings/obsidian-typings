@@ -1,4 +1,4 @@
-import type { Pointer } from '../../Pointer.d.ts';
+import type { Point } from 'obsidian';
 
 /**
  * @todo Documentation incomplete.
@@ -7,17 +7,17 @@ import type { Pointer } from '../../Pointer.d.ts';
  */
 export interface Bezier {
     /** @todo Documentation incomplete. */
-    cp1: Pointer;
+    cp1: Point;
 
     /** @todo Documentation incomplete. */
-    cp2: Pointer;
+    cp2: Point;
 
     /** @todo Documentation incomplete. */
-    from: Pointer;
+    from: Point;
 
     /** @todo Documentation incomplete. */
     path: string;
 
     /** @todo Documentation incomplete. */
-    to: Pointer;
+    to: Point;
 }
