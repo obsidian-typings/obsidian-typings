@@ -63,6 +63,7 @@ declare module 'obsidian' {
          *
          * @param app - The Obsidian app instance.
          * @param scope - The scope for the keymaps.
+         * @returns The popover suggest instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
@@ -102,6 +103,9 @@ declare module 'obsidian' {
 
         /**
          * Reposition the popover relative to the given bounding rectangle.
+         *
+         * @param rect - The bounding rectangle to position relative to.
+         * @param textDirection - The text direction for positioning.
          * @unofficial
          */
         reposition(rect: DOMRect, textDirection?: TextDirection): void;
@@ -127,6 +131,8 @@ declare module 'obsidian' {
 
         /**
          * Set the element that triggers automatic destruction of the popover when removed.
+         *
+         * @param el - The element to watch for removal.
          * @unofficial
          */
         setAutoDestroy(el: HTMLElement): void;

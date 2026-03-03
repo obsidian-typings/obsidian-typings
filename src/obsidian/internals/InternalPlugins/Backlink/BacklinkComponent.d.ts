@@ -92,7 +92,11 @@ export interface BacklinkComponent extends Component {
     /** Queue of files to process for unlinked mention computation. */
     unlinkedQueue: null;
 
-    /** Add a link from an unlinked mention to the target file. */
+    /**
+     * Add a link from an unlinked mention to the target file.
+     *
+     * @returns The result of adding the link.
+     */
     addLinkFunction(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
     /**
@@ -186,7 +190,11 @@ export interface BacklinkComponent extends Component {
      */
     recomputeUnlinked(arg1: unknown): unknown;
 
-    /** Set whether the backlink section is collapsed. */
+    /**
+     * Set whether the backlink section is collapsed.
+     *
+     * @returns The result of setting backlink collapsed state.
+     */
     setBacklinkCollapsed(arg1: unknown, arg2: unknown): Promise<unknown>;
 
     /**
@@ -203,7 +211,11 @@ export interface BacklinkComponent extends Component {
      */
     setExtraContext(arg1: unknown): unknown;
 
-    /** Set the collapsed state of a specific section. */
+    /**
+     * Set the collapsed state of a specific section.
+     *
+     * @returns The result of setting the section collapsed state.
+     */
     setSectionCollapsed(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): Promise<unknown>;
 
     /**
@@ -220,10 +232,18 @@ export interface BacklinkComponent extends Component {
      */
     setSortOrder(arg1: unknown): unknown;
 
-    /** Restore the component from a saved state. */
+    /**
+     * Restore the component from a saved state.
+     *
+     * @returns The result of restoring the state.
+     */
     setState(arg1: unknown): Promise<unknown>;
 
-    /** Set whether the unlinked mentions section is collapsed. */
+    /**
+     * Set whether the unlinked mentions section is collapsed.
+     *
+     * @returns The result of setting unlinked collapsed state.
+     */
     setUnlinkedCollapsed(arg1: unknown, arg2: unknown): Promise<unknown>;
 
     /** Cancel the current backlink search computation. */
@@ -257,7 +277,11 @@ export interface BacklinkComponent extends Component {
      */
     update(): unknown;
 
-    /** Update the tooltip text of a section header. */
+    /**
+     * Update the tooltip text of a section header.
+     *
+     * @returns The result of updating the header tooltip.
+     */
     updateHeaderTooltip(arg1: unknown, arg2: unknown): unknown;
 
     /**

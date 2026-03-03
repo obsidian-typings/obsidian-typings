@@ -183,6 +183,7 @@ declare module 'obsidian' {
          * Generates `this.files` for specific directory of the vault
          *
          * @param normalizedPath - The path to list recursively.
+         * @returns A promise that resolves when the recursive listing is complete.
          * @unofficial
          */
         listRecursive(normalizedPath: string): Promise<void>;
@@ -286,6 +287,7 @@ declare module 'obsidian' {
          *
          * @param normalizedPath - The original path.
          * @param normalizedNewPath - The new path.
+         * @returns A promise that resolves when the folder creation is reconciled.
          * @unofficial
          */
         reconcileFolderCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
@@ -294,6 +296,7 @@ declare module 'obsidian' {
          * Reconcile changes to an internal (config) file.
          *
          * @param normalizedPath - The path to the internal file.
+         * @returns A promise that resolves when the internal file is reconciled.
          * @unofficial
          */
         reconcileInternalFile(normalizedPath: string): Promise<void>;
@@ -303,6 +306,7 @@ declare module 'obsidian' {
          *
          * @param normalizedPath - The original path.
          * @param normalizedNewPath - The new path.
+         * @returns A promise that resolves when the symbolic link creation is reconciled.
          * @unofficial
          */
         reconcileSymbolicLinkCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
@@ -408,6 +412,7 @@ declare module 'obsidian' {
          * Set whether OS is insensitive to case.
          *
          * @param normalizedPath - The path to update.
+         * @returns A promise that resolves when the update is complete.
          * @unofficial
          */
         update(normalizedPath: string): Promise<void>;
@@ -416,6 +421,7 @@ declare module 'obsidian' {
          * Add change watcher to path.
          *
          * @param handler - The handler for file system changes.
+         * @returns A promise that resolves when the watcher is registered.
          * @unofficial
          */
         watch(handler: FileSystemWatchHandler): Promise<void>;

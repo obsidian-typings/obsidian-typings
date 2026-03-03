@@ -37,6 +37,7 @@ declare module 'obsidian' {
          * @param message - The message to be displayed, can either be a simple string or a {@link DocumentFragment}.
          * @param duration - Time in milliseconds to show the notice for. If this is `0`, the
          * `Notice` will stay visible until the user manually dismisses it.
+         * @returns The notice instance.
          * @example
          * ```ts
          * new Notice('foo');

@@ -112,7 +112,11 @@ export interface ResultDomItem extends TreeNode {
     /** Render the content matches for this result item. */
     renderContentMatches(): void;
 
-    /** Set the collapsed state of this result item. */
+    /**
+     * Set the collapsed state of this result item.
+     *
+     * @returns Resolves when the collapse state has been applied.
+     */
     setCollapse(arg1: unknown, arg2: unknown): Promise<unknown>;
 
     /**

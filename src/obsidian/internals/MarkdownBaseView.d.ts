@@ -103,16 +103,22 @@ export interface MarkdownBaseView extends Component {
 
     /**
      * Currently active CM instance (table cell CM or main CM).
+     *
+     * @returns The active CodeMirror editor view.
      */
     get activeCM(): EditorView;
 
     /**
      * Returns attached file of the owner instance.
+     *
+     * @returns The attached file, or null.
      */
     get file(): TFile | null;
 
     /**
      * Returns path of the attached file.
+     *
+     * @returns The file path.
      */
     get path(): string;
 
@@ -152,10 +158,10 @@ export interface MarkdownBaseView extends Component {
      * Edit a specified table cell, creating a table cell editor.
      *
      * @param cell - Table editor owning the cell.
-     * @param new_cell - Table cell to edit.
+     * @param newCell - Table cell to edit.
      * @returns The created table cell editor.
      */
-    editTableCell(cell: TableEditor, new_cell: TableCell): TableCellEditor;
+    editTableCell(cell: TableEditor, newCell: TableCell): TableCellEditor;
 
     /**
      * Get the current editor document as a string.
@@ -180,7 +186,7 @@ export interface MarkdownBaseView extends Component {
     getFoldInfo(): null | FoldInfo;
 
     /**
-     * Builds all local extensions and assigns to this.localExtensions.
+     * Builds all local extensions and assigns to `this.localExtensions`.
      *
      * @returns The local extensions.
      * @remark Will build extensions if they were not already built.
@@ -192,6 +198,7 @@ export interface MarkdownBaseView extends Component {
      *
      * @param event - The pointer event.
      * @param x - Whether the context menu was triggered by keyboard.
+     * @returns A promise that resolves when the context menu is handled.
      */
     onContextMenu(event: PointerEvent, x: boolean): Promise<void>;
 
@@ -248,9 +255,9 @@ export interface MarkdownBaseView extends Component {
     /**
      * Move the editor into the new container.
      *
-     * @param new_container - New container element for the editor.
+     * @param newContainer - New container element for the editor.
      */
-    reparent(new_container: HTMLElement): void;
+    reparent(newContainer: HTMLElement): void;
 
     /**
      * Bodge to reset the syntax highlighting.
@@ -286,9 +293,9 @@ export interface MarkdownBaseView extends Component {
      * Execute functionality of token (open external link, open internal link in leaf, ...).
      *
      * @param token - The clickable token.
-     * @param new_leaf - Whether to open in a new leaf.
+     * @param newLeaf - Whether to open in a new leaf.
      */
-    triggerClickableToken(token: Token, new_leaf: boolean): void;
+    triggerClickableToken(token: Token, newLeaf: boolean): void;
 
     /**
      * Callback for onUpdate functionality added as an extension.

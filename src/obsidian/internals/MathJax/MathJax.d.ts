@@ -73,12 +73,25 @@ export interface MathJax {
     /** Reset the TeX input jax, clearing equation numbering and labels. */
     texReset(): void;
 
-    /** Typeset math expressions in the given elements synchronously. */
+    /**
+     * Typeset math expressions in the given elements synchronously.
+     *
+     * @param elements - The elements to typeset.
+     */
     typeset(elements?: unknown[] | null): void;
 
-    /** Clear typeset math from the given elements. */
+    /**
+     * Clear typeset math from the given elements.
+     *
+     * @param elements - The elements to clear.
+     */
     typesetClear(elements?: unknown[] | null): void;
 
-    /** Typeset math expressions in the given elements asynchronously. */
+    /**
+     * Typeset math expressions in the given elements asynchronously.
+     *
+     * @param elements - The elements to typeset.
+     * @returns A promise that resolves when typesetting is complete.
+     */
     typesetPromise(elements?: unknown[] | null): Promise<void>;
 }

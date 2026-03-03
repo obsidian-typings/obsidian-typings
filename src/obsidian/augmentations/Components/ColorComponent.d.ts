@@ -25,6 +25,7 @@ declare module 'obsidian' {
          * Create a new color picker component.
          *
          * @param containerEl - The container element.
+         * @returns The color component instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */

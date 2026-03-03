@@ -20,6 +20,11 @@ export interface LanguageState {
      */
     tree: LezerTree;
 
-    /** Apply a transaction to produce an updated language state. */
+    /**
+     * Apply a transaction to produce an updated language state.
+     *
+     * @param tr - The transaction to apply.
+     * @returns The updated language state.
+     */
     apply(tr: Transaction): LanguageState;
 }

@@ -30,10 +30,18 @@ export interface AudioRecorderPluginInstance extends InternalPluginInstance<Audi
      */
     checkPermission(): Promise<boolean>;
 
-    /** Initiate the audio recording flow. */
+    /**
+     * Initiate the audio recording flow.
+     *
+     * @returns A promise that resolves when the recording flow completes.
+     */
     onRecordAudio(): Promise<void>;
 
-    /** Start a new audio recording session. */
+    /**
+     * Start a new audio recording session.
+     *
+     * @returns A promise that resolves when recording has started.
+     */
     onStartRecording(): Promise<void>;
 
     /** Stop the current audio recording session. */
@@ -43,6 +51,7 @@ export interface AudioRecorderPluginInstance extends InternalPluginInstance<Audi
      * Save the recorded audio buffer to a file in the vault.
      *
      * @param audioBuffer - The recorded audio data.
+     * @returns A promise that resolves when the recording is saved.
      */
     saveRecording(audioBuffer: ArrayBuffer): Promise<void>;
 

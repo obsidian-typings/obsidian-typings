@@ -55,6 +55,7 @@ export interface AbstractSearchComponent {
      * Switch to the next inputElement.
      *
      * @param event - The keyboard event that triggered the input switch.
+     * @returns The result of switching to the next input.
      */
     goToNextInput(event: KeyboardEvent): unknown;
 
@@ -62,6 +63,7 @@ export interface AbstractSearchComponent {
      * Invokes findNextOrReplace.
      *
      * @param event - The keyboard event that triggered the action.
+     * @returns The result of the enter action.
      */
     onEnter(event: KeyboardEvent): unknown;
 
@@ -69,6 +71,7 @@ export interface AbstractSearchComponent {
      * Invokes findPrevious.
      *
      * @param event - The keyboard event that triggered the action.
+     * @returns The result of the shift-enter action.
      */
     onShiftEnter(event: KeyboardEvent): unknown;
 }

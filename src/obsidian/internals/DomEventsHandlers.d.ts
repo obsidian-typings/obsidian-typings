@@ -71,7 +71,7 @@ export interface DomEventsHandlers {
      *
      * @param evt - The mouse event.
      * @param targetEl - The target element.
-     * @param linkText - The link text.
+     * @param tag - The tag text.
      * @returns The result of handling the tag click.
      */
     onTagClick(evt: MouseEvent, targetEl: HTMLElement, tag: string): unknown;

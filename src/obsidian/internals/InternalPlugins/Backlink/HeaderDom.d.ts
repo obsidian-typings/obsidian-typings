@@ -15,9 +15,17 @@ export interface HeaderDom {
     /** Container element for the navigation header. */
     navHeaderEl: HTMLDivElement;
 
-    /** Add a navigation button to the header. */
+    /**
+     * Add a navigation button to the header.
+     *
+     * @returns The created navigation button element.
+     */
     addNavButton(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): unknown;
 
-    /** Add a sort button to the header. */
+    /**
+     * Add a sort button to the header.
+     *
+     * @returns The created sort button element.
+     */
     addSortButton(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): unknown;
 }

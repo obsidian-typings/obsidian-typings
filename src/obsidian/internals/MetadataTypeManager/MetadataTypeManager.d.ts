@@ -89,10 +89,17 @@ export interface MetadataTypeManager extends Events {
 
     /**
      * Load property types from config.
+     *
+     * @returns A promise that resolves when the property types are loaded.
      */
     loadData(): Promise<void>;
 
-    /** Handle raw file system change events for the property type config. */
+    /**
+     * Handle raw file system change events for the property type config.
+     *
+     * @param e - The raw file system change event.
+     * @unofficial
+     */
     onRaw(e: unknown): void;
 
     /** Register event listeners for property type config file changes. */
@@ -100,6 +107,8 @@ export interface MetadataTypeManager extends Events {
 
     /**
      * Save property types to config.
+     *
+     * @returns A promise that resolves when the property types are saved.
      */
     save(): Promise<void>;
 
@@ -108,6 +117,7 @@ export interface MetadataTypeManager extends Events {
      *
      * @param property - Property name.
      * @param type - Widget type to assign.
+     * @returns A promise that resolves when the widget type is set.
      */
     setType(property: string, type: PropertyWidgetType): Promise<void>;
 
@@ -115,6 +125,7 @@ export interface MetadataTypeManager extends Events {
      * Unset widget type for property.
      *
      * @param property - Property name.
+     * @returns A promise that resolves when the widget type is unset.
      */
     unsetType(property: string): Promise<void>;
 

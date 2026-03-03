@@ -9,6 +9,8 @@ import type { InfoFileView } from '../../Views/InfoFileView.d.ts';
 export interface OutgoingLinkView extends InfoFileView {
     /**
      * Get the current view type.
+     *
+     * @returns The outgoing link view type.
      */
     getViewType(): typeof ViewType.OutgoingLink;
 

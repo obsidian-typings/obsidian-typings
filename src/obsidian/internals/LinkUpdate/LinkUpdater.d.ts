@@ -15,6 +15,7 @@ export interface LinkUpdater {
      *
      * @param file - File to update.
      * @param updates - Link change updates to apply.
+     * @returns A promise that resolves when the updates have been applied.
      */
     applyUpdates(file: TFile, updates: LinkChangeUpdate[]): Promise<void>;
 
@@ -39,6 +40,7 @@ export interface LinkUpdater {
      * @param file - File containing the subpath.
      * @param oldSubpath - Previous subpath.
      * @param newSubpath - New subpath.
+     * @returns A promise that resolves when the subpath has been renamed.
      */
     renameSubpath(file: TFile, oldSubpath: string, newSubpath: string): Promise<void>;
 }

@@ -10,6 +10,12 @@ import type { BookmarksView } from './BookmarksView.d.ts';
  * @unofficial
  */
 export interface BookmarksPluginViews extends Record<string, ViewCreator> {
-    /** Create a bookmarks view in the given workspace leaf. */
+    /**
+     * Create a bookmarks view in the given workspace leaf.
+     *
+     * @param left - The workspace leaf to create the bookmarks view in.
+     * @returns The created bookmarks view.
+     * @unofficial
+     */
     bookmarks(left: WorkspaceLeaf): BookmarksView;
 }

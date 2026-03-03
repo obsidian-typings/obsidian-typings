@@ -55,6 +55,7 @@ declare module 'obsidian' {
          * Create a dropdown component.
          *
          * @param containerEl - The container element.
+         * @returns The dropdown component instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */

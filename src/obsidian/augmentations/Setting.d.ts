@@ -259,6 +259,7 @@ declare module 'obsidian' {
          * Create a new setting.
          *
          * @param containerEl - The container element.
+         * @returns The setting instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
@@ -340,6 +341,7 @@ declare module 'obsidian' {
         /**
          * Hide the info section of the setting.
          *
+         * @returns The setting instance.
          * @unofficial
          */
         setNoInfo(): this;
@@ -348,6 +350,7 @@ declare module 'obsidian' {
          * Set the tooltip of the setting.
          *
          * @param tooltip - The tooltip of the setting.
+         * @param options - The tooltip options.
          * @returns The setting.
          * @example
          * ```ts
@@ -362,6 +365,7 @@ declare module 'obsidian' {
          * Shows/hides the setting.
          *
          * @param visible Whether the setting should be visible.
+         * @returns The setting instance.
          * @unofficial
          */
         setVisibility(visible: boolean): this;

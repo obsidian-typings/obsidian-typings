@@ -38,11 +38,15 @@ export interface SuggestionContainer<T> {
 
     /**
      * Amount of suggestions that can be displayed at once within containerEl.
+     *
+     * @returns The number of visible items.
      */
     get numVisibleItems(): number;
 
     /**
      * Height in pixels of the selected item.
+     *
+     * @returns The row height in pixels.
      */
     get rowHeight(): number;
 

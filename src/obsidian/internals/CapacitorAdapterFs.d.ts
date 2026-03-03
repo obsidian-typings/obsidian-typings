@@ -18,6 +18,7 @@ export interface CapacitorAdapterFs {
      *
      * @param realPath - Real file system path.
      * @param data - Text data to append.
+     * @returns A promise that resolves when the data is appended.
      */
     append(realPath: string, data: string): Promise<void>;
 
@@ -26,6 +27,7 @@ export interface CapacitorAdapterFs {
      *
      * @param realPath - Source file path.
      * @param newRealPath - Destination file path.
+     * @returns A promise that resolves when the file is copied.
      */
     copy(realPath: string, newRealPath: string): Promise<void>;
 
@@ -33,6 +35,7 @@ export interface CapacitorAdapterFs {
      * Delete a file at the given path.
      *
      * @param realPath - File path to delete.
+     * @returns A promise that resolves when the file is deleted.
      */
     delete(realPath: string): Promise<void>;
 
@@ -60,13 +63,18 @@ export interface CapacitorAdapterFs {
      */
     getUri(realPath: string): string;
 
-    /** Initialize the file system adapter. */
+    /**
+     * Initialize the file system adapter.
+     *
+     * @returns A promise that resolves when the adapter is initialized.
+     */
     init(): Promise<void>;
 
     /**
      * Create a directory at the given path.
      *
      * @param realPath - Directory path to create.
+     * @returns A promise that resolves when the directory is created.
      */
     mkdir(realPath: string): Promise<void>;
 
@@ -74,6 +82,7 @@ export interface CapacitorAdapterFs {
      * Open a file using the native platform handler.
      *
      * @param realPath - File path to open.
+     * @returns A promise that resolves when the file is opened.
      */
     open(realPath: string): Promise<void>;
 
@@ -106,6 +115,7 @@ export interface CapacitorAdapterFs {
      *
      * @param realPath - Current file path.
      * @param newRealPath - New file path.
+     * @returns A promise that resolves when the file is renamed.
      */
     rename(realPath: string, newRealPath: string): Promise<void>;
 
@@ -113,6 +123,7 @@ export interface CapacitorAdapterFs {
      * Remove a directory.
      *
      * @param realPath - Directory path to remove.
+     * @returns A promise that resolves when the directory is removed.
      */
     rmdir(realPath: string): Promise<void>;
 
@@ -122,6 +133,7 @@ export interface CapacitorAdapterFs {
      * @param realPath - File path.
      * @param ctime - Creation time in milliseconds.
      * @param mtime - Modification time in milliseconds.
+     * @returns A promise that resolves when the times are set.
      */
     setTimes(realPath: string, ctime: number, mtime: number): Promise<void>;
 
@@ -137,6 +149,7 @@ export interface CapacitorAdapterFs {
      * Move a file to the system trash.
      *
      * @param realPath - File path to trash.
+     * @returns A promise that resolves when the file is trashed.
      */
     trash(realPath: string): Promise<void>;
 
@@ -144,6 +157,7 @@ export interface CapacitorAdapterFs {
      * Verify and download an iCloud file if it is not yet available locally.
      *
      * @param realPath - File path to verify.
+     * @returns A promise that resolves when the iCloud file is verified.
      */
     verifyIcloud(realPath: string): Promise<void>;
 
@@ -151,6 +165,7 @@ export interface CapacitorAdapterFs {
      * Start watching a path for file system changes.
      *
      * @param realPath - Path to watch.
+     * @returns A promise that resolves when the watcher is started.
      */
     watch(realPath: string): Promise<void>;
 
@@ -167,6 +182,7 @@ export interface CapacitorAdapterFs {
      *
      * @param realPath - File path to write to.
      * @param data - Text data to write.
+     * @returns A promise that resolves when the file is written.
      */
     write(realPath: string, data: string): Promise<void>;
 
@@ -175,6 +191,7 @@ export interface CapacitorAdapterFs {
      *
      * @param realPath - File path to write to.
      * @param data - Binary data to write.
+     * @returns A promise that resolves when the file is written.
      */
     writeBinary(realPath: string, data: ArrayBuffer): Promise<void>;
 
@@ -183,6 +200,7 @@ export interface CapacitorAdapterFs {
      *
      * @param realPath - File path to write to.
      * @param data - Binary data to write.
+     * @returns A promise that resolves when the file is written.
      */
     writeBinaryInternal(realPath: string, data: ArrayBuffer): Promise<void>;
 }

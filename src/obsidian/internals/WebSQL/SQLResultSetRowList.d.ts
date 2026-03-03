@@ -7,6 +7,12 @@ export interface SQLResultSetRowList {
     /** Number of rows in the result set. */
     length: number;
 
-    /** Get a row by its index in the result set. */
+    /**
+     * Get a row by its index in the result set.
+     *
+     * @param index - The index of the row to retrieve.
+     * @returns The row at the specified index.
+     * @unofficial
+     */
     item(index: number): unknown;
 }

@@ -51,17 +51,28 @@ export interface PropertyPropertyWidgetComponentComboBox
     /** Attach the DOM of the combobox. */
     attachDom(): void;
 
-    /** Detach the DOM of the combobox. */
+    /**
+     * Detach the DOM of the combobox.
+     *
+     * @returns A promise that resolves when the DOM is detached.
+     */
     detachDom(): Promise<void>;
 
     /** Focus the combobox. */
     focus(): void;
 
-    /** Get the items of the combobox. */
+    /**
+     * Get the items of the combobox.
+     *
+     * @returns The combobox items.
+     */
     getItems(): PropertyPropertyWidgetComponentComboBoxItem[];
 
     /**
      * Callback for `getSuggestions`.
+     *
+     * @param query - The search query string.
+     * @returns The matching search results.
      */
     getSuggestions(query: string): SearchResult[];
 
@@ -143,7 +154,11 @@ export interface PropertyPropertyWidgetComponentComboBox
      */
     setValueById(id: string): this;
 
-    /** Toggle the combobox. */
+    /**
+     * Toggle the combobox.
+     *
+     * @returns The result of toggling the combobox.
+     */
     toggle(): unknown;
 
     /**

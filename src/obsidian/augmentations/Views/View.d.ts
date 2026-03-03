@@ -76,6 +76,7 @@ declare module 'obsidian' {
         /**
          * Closes the view.
          *
+         * @returns A promise that resolves when the view is closed.
          * @unofficial
          */
         close(): Promise<void>;
@@ -84,6 +85,7 @@ declare module 'obsidian' {
          * Creates a new view.
          *
          * @param leaf - The leaf of the view.
+         * @returns The view instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          * @since 0.9.7
@@ -228,6 +230,7 @@ declare module 'obsidian' {
          * Opens the view.
          *
          * @param parentEl - The node the view gets attached to.
+         * @returns A promise that resolves when the view is opened.
          * @unofficial
          */
         open(parentEl: Node): Promise<void>;

@@ -31,7 +31,11 @@ export interface Multiselect {
      */
     _createElement(value: string): string | null;
 
-    /** Create a new input element for the multiselect. */
+    /**
+     * Create a new input element for the multiselect.
+     *
+     * @returns The created input element.
+     */
     _createInputEl(): HTMLDivElement;
 
     /**
@@ -118,6 +122,7 @@ export interface Multiselect {
      * Remove an element of the multiselect.
      *
      * @param index - the index of the element.
+     * @param shouldFocus - Whether to focus the next element after removal.
      */
     removeElement(index: number, shouldFocus?: boolean): void;
 

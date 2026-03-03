@@ -117,6 +117,7 @@ declare module 'obsidian' {
          * Calls `setChecked`, prefer usage of that function instead.
          *
          * @param active - Whether the menu item should be checked.
+         * @returns The menu item instance.
          * @deprecated
          * @unofficial
          */
@@ -194,6 +195,7 @@ declare module 'obsidian' {
         /**
          * Create a submenu on the menu item.
          *
+         * @returns The created submenu.
          * @tutorial Creates the foldable menus with more options as seen when you right-click in the editor (e.g. 'Insert', 'Format', ...).
          * @unofficial
          */
@@ -221,6 +223,7 @@ declare module 'obsidian' {
          *
          * @param warning - Whether the menu item should be styled as a warning.
          * If set to `true` the MenuItem's title and icon will become red. Or whatever color is applied to the class 'is-warning' by a theme.
+         * @returns The menu item instance.
          * @unofficial
          * @since 0.15.0
          */

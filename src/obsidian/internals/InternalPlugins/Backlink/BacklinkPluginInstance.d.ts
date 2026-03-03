@@ -38,10 +38,15 @@ export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkP
      *
      * @param app - The app instance.
      * @param plugin - The backlink plugin registration.
+     * @returns A promise that resolves when the plugin is enabled.
      */
     onEnable(app: App, plugin: BacklinkPlugin): Promise<void>;
 
-    /** Handle external settings file changes and reload configuration. */
+    /**
+     * Handle external settings file changes and reload configuration.
+     *
+     * @returns A promise that resolves when the settings are reloaded.
+     */
     onExternalSettingsChange(): Promise<void>;
 
     /**

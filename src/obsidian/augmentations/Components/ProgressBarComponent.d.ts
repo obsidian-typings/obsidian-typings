@@ -24,6 +24,7 @@ declare module 'obsidian' {
          * Creates a new ProgressBarComponent.
          *
          * @param containerEl - The container element.
+         * @returns The progress bar component instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */

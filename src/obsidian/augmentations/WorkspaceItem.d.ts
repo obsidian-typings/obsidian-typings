@@ -65,6 +65,8 @@ declare module 'obsidian' {
 
         /**
          * The parent split containing this item.
+         *
+         * @returns The parent workspace container.
          * @unofficial
          */
         get parentSplit(): WorkspaceParent;
@@ -80,6 +82,7 @@ declare module 'obsidian' {
          * - {@link WorkspaceRoot}
          * - {@link WorkspaceWindow}
          *
+         * @returns The root container parent item.
          * @official
          * @since 0.15.4
          */
@@ -87,6 +90,8 @@ declare module 'obsidian' {
 
         /**
          * Get the icon name for this workspace item.
+         *
+         * @returns The icon name for this workspace item.
          * @unofficial
          */
         getIcon(): IconName;
@@ -94,6 +99,7 @@ declare module 'obsidian' {
         /**
          * Get the root item.
          *
+         * @returns The root workspace item.
          * @official
          * @since 0.10.2
          */
@@ -101,24 +107,32 @@ declare module 'obsidian' {
 
         /**
          * Handle the start of a resize operation on this item.
+         *
+         * @param evt - The mouse event that started the resize.
          * @unofficial
          */
         onResizeStart(evt: MouseEvent): void;
 
         /**
          * Serialize this workspace item's state for persistence.
+         *
+         * @returns The serialized workspace item state.
          * @unofficial
          */
         serialize(): SerializedWorkspaceItem;
 
         /**
          * Set the flex-grow dimension of this item within its parent split.
+         *
+         * @param dimension - The flex-grow value, or `null` to reset.
          * @unofficial
          */
         setDimension(dimension: number | null): void;
 
         /**
          * Set the parent split for this workspace item.
+         *
+         * @param parent - The parent workspace container.
          * @unofficial
          */
         setParent(parent: WorkspaceParent): void;

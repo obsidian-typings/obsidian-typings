@@ -15,7 +15,11 @@ export interface TreeNodeVChildren<Item extends TreeNode, Owner extends TreeNode
     /** The tree node that owns these children. */
     owner: Owner;
 
-    /** Get the array of child items. */
+    /**
+     * Get the array of child items.
+     *
+     * @returns The child items.
+     */
     get children(): Item[];
 
     /**

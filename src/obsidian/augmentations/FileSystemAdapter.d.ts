@@ -112,6 +112,7 @@ declare module 'obsidian' {
          *
          * @param normalizedPath Path to file.
          * @param options Data write options.
+         * @returns A promise that resolves when the write options are applied.
          * @unofficial
          */
         applyWriteOptions(normalizedPath: string, options: DataWriteOptions): Promise<void>;
@@ -233,6 +234,7 @@ declare module 'obsidian' {
         /**
          * Generates `this.files` from the file system.
          *
+         * @returns A promise that resolves when the file listing is generated.
          * @unofficial
          */
         listAll(): Promise<void>;
@@ -242,6 +244,7 @@ declare module 'obsidian' {
          *
          * @param normalizedPath Path to directory.
          * @param child File entry.
+         * @returns A promise that resolves when the child is listed.
          * @unofficial
          */
         listRecursiveChild(normalizedPath: string, child: string): Promise<void>;
@@ -308,6 +311,7 @@ declare module 'obsidian' {
          * @param normalizedPath - Path to file.
          * @param normalizedNewPath - Path to new file.
          * @param stats - Stats object.
+         * @returns A promise that resolves when the file creation is reconciled.
          * @unofficial
          */
         reconcileFileCreation(normalizedPath: string, normalizedNewPath: string, stats: Stats): Promise<void>;
@@ -317,6 +321,7 @@ declare module 'obsidian' {
          *
          * @param normalizedPath - The original path.
          * @param normalizedNewPath - The new path.
+         * @returns A promise that resolves when the internal file change is reconciled.
          * @unofficial
          */
         reconcileFileInternal(normalizedPath: string, normalizedNewPath: string): Promise<void>;
@@ -366,6 +371,7 @@ declare module 'obsidian' {
          * Start watching a path for file system changes.
          *
          * @param normalizedPath - The path to watch.
+         * @returns A promise that resolves when the watcher is started.
          * @unofficial
          */
         startWatchPath(normalizedPath: string): Promise<void>;
@@ -431,6 +437,7 @@ declare module 'obsidian' {
          * Watch recursively for changes.
          *
          * @param normalizedPath - The path to watch recursively.
+         * @returns A promise that resolves when the recursive watcher is started.
          * @unofficial
          */
         watchHiddenRecursive(normalizedPath: string): Promise<void>;

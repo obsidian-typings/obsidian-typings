@@ -26,6 +26,7 @@ declare module 'obsidian' {
          * The constructor for the button component.
          *
          * @param containerEl - The container element.
+         * @returns The button component instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */

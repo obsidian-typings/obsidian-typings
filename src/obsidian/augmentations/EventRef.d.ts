@@ -29,6 +29,7 @@ declare module 'obsidian' {
         /**
          * Function to be called on event trigger on the events object.
          *
+         * @param arg - The event arguments.
          * @unofficial
          */
         fn(...arg: unknown[]): void;

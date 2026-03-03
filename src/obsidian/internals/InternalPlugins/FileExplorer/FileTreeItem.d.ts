@@ -13,6 +13,10 @@ export interface FileTreeItem extends AbstractFileTreeItem<TFile> {
      */
     tagEl: HTMLElement | null;
 
-    /** Check whether the file type is supported for opening. */
+    /**
+     * Check whether the file type is supported for opening.
+     *
+     * @returns Whether the file type is supported.
+     */
     isSupported(): boolean;
 }

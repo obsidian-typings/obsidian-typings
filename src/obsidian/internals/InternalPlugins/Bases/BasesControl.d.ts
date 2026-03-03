@@ -11,7 +11,7 @@ export interface BasesControl {
      * Render to.
      *
      * @param containerEl - The container element.
-     * @param t - The data to render.
+     * @param renderContext - The render context.
      */
     renderTo(containerEl: HTMLElement, renderContext: RenderContext): void;
 }

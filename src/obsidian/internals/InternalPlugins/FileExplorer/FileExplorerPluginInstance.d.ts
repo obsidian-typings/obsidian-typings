@@ -24,6 +24,9 @@ export interface FileExplorerPluginInstance extends InternalPluginInstance<FileE
     /**
      * Reveals a file or folder in the file explorer view, opens the view if it is not already.
      * open/visible.
+     *
+     * @param item - The file or folder to reveal.
+     * @unofficial
      */
     revealInFolder(item: TFile | TFolder): void;
 }

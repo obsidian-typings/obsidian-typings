@@ -25,15 +25,22 @@ export interface WebviewerDBStore {
      *
      * @param url - The URL of the history item.
      * @param title - Optional title for the history item.
+     * @returns A promise that resolves when the history item is added.
      */
     addHistoryItem(url: string, title?: string): Promise<void>;
 
     /**
      * Clear all history items.
+     *
+     * @returns A promise that resolves when all history items are cleared.
      */
     clearHistoryItems(): Promise<void>;
 
-    /** Open and initialize the IndexedDB connection. */
+    /**
+     * Open and initialize the IndexedDB connection.
+     *
+     * @returns A promise that resolves when the connection is established.
+     */
     connect(): Promise<void>;
 
     /**
@@ -58,6 +65,7 @@ export interface WebviewerDBStore {
      * Remove specific history item based on its {@link WebviewerHistoryItem.id | id}.
      *
      * @param item - The history item to remove.
+     * @returns A promise that resolves when the history item is removed.
      */
     removeHistoryItem(item: WebviewerHistoryItem): Promise<void>;
 
@@ -67,6 +75,7 @@ export interface WebviewerDBStore {
      * @param el - The element to add the icon to.
      * @param url - The URL to get the icon for.
      * @param source - Optional source URL for the icon.
+     * @returns A promise that resolves when the icon is set on the element.
      */
     setIcon(el: HTMLElement, url: string, source?: string): Promise<void>;
 

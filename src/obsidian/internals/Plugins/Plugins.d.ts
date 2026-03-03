@@ -53,11 +53,15 @@ export interface Plugins {
 
     /**
      * Check online list for deprecated plugins to automatically disable.
+     *
+     * @returns A promise that resolves when the deprecation check is complete.
      */
     checkForDeprecations(): Promise<void>;
 
     /**
      * Check for plugin updates.
+     *
+     * @returns A promise that resolves when the update check is complete.
      */
     checkForUpdates(): Promise<void>;
 
@@ -65,6 +69,7 @@ export interface Plugins {
      * Unload a plugin by ID.
      *
      * @param id - Plugin ID.
+     * @returns A promise that resolves when the plugin is disabled.
      */
     disablePlugin(id: string): Promise<void>;
 
@@ -72,6 +77,7 @@ export interface Plugins {
      * Unload a plugin by ID and save config for persistence.
      *
      * @param id - Plugin ID.
+     * @returns A promise that resolves when the plugin is disabled and the config is saved.
      */
     disablePluginAndSave(id: string): Promise<void>;
 
@@ -79,6 +85,7 @@ export interface Plugins {
      * Enable a plugin by ID.
      *
      * @param id - Plugin ID.
+     * @returns A promise that resolves when the plugin is enabled.
      */
     enablePlugin(id: string): Promise<void>;
 
@@ -86,6 +93,7 @@ export interface Plugins {
      * Enable a plugin by ID and save config for persistence.
      *
      * @param id - Plugin ID.
+     * @returns A promise that resolves when the plugin is enabled and the config is saved.
      */
     enablePluginAndSave(id: string): Promise<void>;
 
@@ -106,6 +114,8 @@ export interface Plugins {
 
     /**
      * Load plugin manifests and enable plugins from config.
+     *
+     * @returns A promise that resolves when initialization is complete.
      */
     initialize(): Promise<void>;
 
@@ -115,6 +125,7 @@ export interface Plugins {
      * @param repo - Repository identifier.
      * @param version - Version to install.
      * @param manifest - Plugin manifest data.
+     * @returns A promise that resolves when the plugin is installed.
      */
     installPlugin(repo: string, version: string, manifest: PluginManifest): Promise<void>;
 
@@ -137,11 +148,14 @@ export interface Plugins {
      * Load a specific plugin's manifest by its folder path.
      *
      * @param path - Folder path containing the manifest.
+     * @returns A promise that resolves when the manifest is loaded.
      */
     loadManifest(path: string): Promise<void>;
 
     /**
      * Load all plugin manifests from plugin folder.
+     *
+     * @returns A promise that resolves when all manifests are loaded.
      */
     loadManifests(): Promise<void>;
 
@@ -153,11 +167,18 @@ export interface Plugins {
      */
     loadPlugin(id: string): Promise<Plugin>;
 
-    /** Handle raw file system change events for plugin config files. */
+    /**
+     * Handle raw file system change events for plugin config files.
+     *
+     * @param e - The raw file system change event.
+     * @unofficial
+     */
     onRaw(e: unknown): void;
 
     /**
      * - Save current plugin configs.
+     *
+     * @returns A promise that resolves when the config is saved.
      */
     saveConfig(): Promise<void>;
 
@@ -165,6 +186,7 @@ export interface Plugins {
      * Toggle whether community plugins are enabled.
      *
      * @param enabled - Whether to enable community plugins.
+     * @returns A promise that resolves when the setting is applied.
      */
     setEnable(enabled: boolean): Promise<void>;
 
@@ -172,6 +194,7 @@ export interface Plugins {
      * Uninstall a plugin by ID.
      *
      * @param id - Plugin ID.
+     * @returns A promise that resolves when the plugin is uninstalled.
      */
     uninstallPlugin(id: string): Promise<void>;
 
@@ -179,6 +202,7 @@ export interface Plugins {
      * Unload a plugin by ID.
      *
      * @param id - Plugin ID.
+     * @returns A promise that resolves when the plugin is unloaded.
      */
     unloadPlugin(id: string): Promise<void>;
 }

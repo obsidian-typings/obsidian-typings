@@ -12,10 +12,18 @@ export declare class HighlightOutline extends Outline {
     /** The last point of the highlight used for directional calculations. */
     lastPoint: unknown;
 
-    /** The bounding box of the highlight outline. */
+    /**
+     * The bounding box of the highlight outline.
+     *
+     * @returns The bounding box, or null.
+     */
     get box(): Object | null;
 
-    /** CSS class names applied when outlining this highlight. */
+    /**
+     * CSS class names applied when outlining this highlight.
+     *
+     * @returns The class names for outlining.
+     */
     get classNamesForOutlining(): string[];
 
     /**

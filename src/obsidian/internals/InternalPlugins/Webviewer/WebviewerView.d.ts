@@ -82,6 +82,8 @@ export interface WebviewerView extends ItemView {
 
     /**
      * Get the current view type.
+     *
+     * @returns The webviewer view type.
      */
     getViewType(): typeof ViewType.Webviewer;
 

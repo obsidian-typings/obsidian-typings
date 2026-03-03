@@ -26,6 +26,7 @@ declare module 'obsidian' {
          * Create a new toggle component.
          *
          * @param containerEl - The container element.
+         * @returns The toggle component instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          * @since 0.9.7

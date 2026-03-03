@@ -97,6 +97,8 @@ export interface WidgetEditorView extends EmbeddedEditorView {
 
     /**
      * Load file from cache based on stored path.
+     *
+     * @returns A promise that resolves when the file has been loaded.
      */
     loadFile(): Promise<void>;
 
@@ -167,6 +169,7 @@ export interface WidgetEditorView extends EmbeddedEditorView {
      *
      * @param data - Data to save.
      * @param delayed - Whether to delay the save.
+     * @returns A promise that resolves when the data has been saved.
      */
     save(data: string, delayed?: boolean): Promise<void>;
 

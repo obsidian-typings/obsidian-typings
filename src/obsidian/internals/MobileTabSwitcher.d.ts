@@ -45,10 +45,18 @@ export interface MobileTabSwitcher {
     /** Render the tab switcher content. */
     render(): void;
 
-    /** Set up the directory for caching tab preview images. */
+    /**
+     * Set up the directory for caching tab preview images.
+     *
+     * @returns A promise that resolves when the cache directory has been set up.
+     */
     setupCacheDir(): Promise<void>;
 
-    /** Show the tab switcher UI. */
+    /**
+     * Show the tab switcher UI.
+     *
+     * @returns A promise that resolves when the tab switcher is shown.
+     */
     show(): Promise<void>;
 
     /**

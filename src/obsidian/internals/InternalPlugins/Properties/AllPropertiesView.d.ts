@@ -9,6 +9,8 @@ import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts'
 export interface AllPropertiesView extends ItemView {
     /**
      * Try to rename the file.
+     *
+     * @returns A promise that resolves when the rename is complete.
      */
     acceptRename(): Promise<void>;
 
@@ -24,10 +26,17 @@ export interface AllPropertiesView extends ItemView {
 
     /**
      * Get the current view type.
+     *
+     * @returns The all properties view type.
      */
     getViewType(): typeof ViewType.AllProperties;
 
-    /** Check whether the given object is a property item. */
+    /**
+     * Check whether the given object is a property item.
+     *
+     * @param e - The object to check.
+     * @returns Whether the object is a property item.
+     */
     isItem(e: unknown): boolean;
 
     /**
@@ -49,7 +58,11 @@ export interface AllPropertiesView extends ItemView {
      */
     onToggleShowSearch(): void;
 
-    /** Set the visibility of the search filter. */
+    /**
+     * Set the visibility of the search filter.
+     *
+     * @param e - Whether to show the search filter.
+     */
     setShowSearch(e: boolean): void;
 
     /**
@@ -64,7 +77,12 @@ export interface AllPropertiesView extends ItemView {
      */
     showSearch(): void;
 
-    /** Begin inline renaming of a property. */
+    /**
+     * Begin inline renaming of a property.
+     *
+     * @param e - The property item to rename.
+     * @returns The result of the rename operation.
+     */
     startRename(e: unknown): Promise<unknown>;
 
     /** Refresh the properties list. */

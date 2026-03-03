@@ -58,6 +58,7 @@ declare module 'obsidian' {
          *
          * @param path - Path to the file to create (missing folders will be created).
          * @param location - Where to open the view containing the new file.
+         * @returns A promise that resolves when the file is created and opened.
          * @unofficial
          */
         createAndOpenMarkdownFile(path: string, location: PaneType): Promise<void>;
@@ -69,6 +70,7 @@ declare module 'obsidian' {
          * @param filename - Name of the file to create, defaults to 'Untitled' (incremented if file already exists).
          * @param extension - Extension of the file to create, defaults to 'md'.
          * @param contents - Contents of the file to create, defaults to empty string.
+         * @returns A promise that resolves to the newly created file.
          * @unofficial
          */
         createNewFile(location?: TFolder, filename?: string, extension?: string, contents?: string): Promise<TFile>;
@@ -77,6 +79,7 @@ declare module 'obsidian' {
          * Creates a new untitled folder in the vault at specified location.
          *
          * @param location - Location to create the folder in, defaults to root.
+         * @returns A promise that resolves to the newly created folder.
          * @unofficial
          */
         createNewFolder(location: TFolder): Promise<TFolder>;
@@ -97,6 +100,7 @@ declare module 'obsidian' {
          *
          * @param filename - Name of the file to create.
          * @param path - Path to where the file should be created.
+         * @returns A promise that resolves to the newly created Markdown file.
          * @unofficial
          */
         createNewMarkdownFileFromLinktext(filename: string, path: string): Promise<TFile>;
@@ -105,6 +109,7 @@ declare module 'obsidian' {
          * Download attachments for note.
          *
          * @param file - The file to download attachments for.
+         * @returns A promise that resolves when the attachments are downloaded.
          * @unofficial
          */
         downloadAttachmentsForNote(file: TFile): Promise<void>;
@@ -156,6 +161,7 @@ declare module 'obsidian' {
          * Gets the folder that new markdown files should be saved to, based on the current settings.
          *
          * @param path - The path of the current opened/focused file, used when the user wants new files to be created in the same folder as the current file.
+         * @returns The folder that new markdown files should be saved to.
          * @unofficial
          */
         getMarkdownNewFileParent(path: string): TFolder;
@@ -184,6 +190,7 @@ declare module 'obsidian' {
          * @param file - The file to insert into.
          * @param text - The text to insert.
          * @param position - Where to insert the text.
+         * @returns A promise that resolves when the text is inserted.
          * @unofficial
          */
         insertIntoFile(file: TFile, text: string, position?: 'append' | 'prepend'): Promise<void>;
@@ -203,6 +210,7 @@ declare module 'obsidian' {
          * @param otherFile - File to merge from.
          * @param override - If not empty, will override the contents of the file with this string.
          * @param atStart - Whether to insert text at the start or end of the file.
+         * @returns A promise that resolves when the files are merged.
          * @unofficial
          */
         mergeFile(file: TFile, otherFile: TFile, override: string, atStart: boolean): Promise<void>;
@@ -216,6 +224,7 @@ declare module 'obsidian' {
          * @param file - the file to be modified. Must be a Markdown file.
          * @param fn - a callback function which mutates the frontmatter object synchronously.
          * @param options - write options.
+         * @returns A promise that resolves when the frontmatter is processed and saved.
          * @throws YAMLParseError if the YAML parsing fails.
          * @throws any errors that your callback function throws.
          * @example
@@ -249,6 +258,7 @@ declare module 'obsidian' {
          * Prompt the user to delete a file.
          *
          * @param file - The file to delete.
+         * @returns A promise that resolves when the deletion prompt is handled.
          * @unofficial
          */
         promptForFileDeletion(file: TFile): Promise<void>;
@@ -257,6 +267,7 @@ declare module 'obsidian' {
          * Prompt the user to rename a file.
          *
          * @param file - The file to rename.
+         * @returns A promise that resolves when the rename prompt is handled.
          * @unofficial
          */
         promptForFileRename(file: TFile): Promise<void>;
@@ -265,6 +276,7 @@ declare module 'obsidian' {
          * Prompt the user to delete a folder.
          *
          * @param folder - The folder to delete.
+         * @returns A promise that resolves when the deletion prompt is handled.
          * @unofficial
          */
         promptForFolderDeletion(folder: TFolder): Promise<void>;
@@ -308,6 +320,7 @@ declare module 'obsidian' {
          *
          * @param oldKey - The old property key.
          * @param newKey - The new property key.
+         * @returns A promise that resolves when the property is renamed across all notes.
          * @remark The current property type is maintained.
          * @remark Is case sensitive, despite Obsidian *typically* ignoring case for property names.
          * @unofficial
@@ -318,6 +331,7 @@ declare module 'obsidian' {
          * Run async link update.
          *
          * @param linkUpdatesHandler - The link updates handler.
+         * @returns A promise that resolves when the link update is complete.
          * @unofficial
          */
         runAsyncLinkUpdate(linkUpdatesHandler: LinkUpdatesHandler): Promise<void>;
@@ -359,6 +373,7 @@ declare module 'obsidian' {
          * Update all links.
          *
          * @param links - The link updates to apply.
+         * @returns A promise that resolves when all links are updated.
          * @unofficial
          */
         updateAllLinks(links: LinkUpdate[]): Promise<void>;
@@ -367,6 +382,7 @@ declare module 'obsidian' {
          * Update internal links.
          *
          * @param data - Map of path to link change updates.
+         * @returns A promise that resolves when the internal links are updated.
          * @unofficial
          */
         updateInternalLinks(data: Map<string, LinkChangeUpdate>): Promise<void>;

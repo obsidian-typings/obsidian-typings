@@ -259,6 +259,7 @@ declare module 'obsidian' {
         /**
          * Clear layout of workspace and destruct all leaves
          *
+         * @returns A promise that resolves when the layout is cleared.
          * @unofficial
          */
         clearLayout(): Promise<void>;
@@ -469,6 +470,8 @@ declare module 'obsidian' {
          * If direction is `'vertical'`, the leaf will appear to the right.
          * If direction is `'horizontal'`, the leaf will appear below the current leaf.
          *
+         * @param newLeaf - Should be `'split'` to create a new split leaf.
+         * @param direction - The direction to split the leaf in.
          * @official
          * @since 0.16.0
          */
@@ -514,6 +517,8 @@ declare module 'obsidian' {
         /**
          * Get leaves of a specific view type.
          *
+         * @param viewType - The view type to get leaves for.
+         * @returns The leaves matching the given view type.
          * @unofficial
          */
         getLeavesOfType<TViewType extends ViewTypeType>(
@@ -647,6 +652,7 @@ declare module 'obsidian' {
         /**
          * Load workspace from disk and initialize
          *
+         * @returns A promise that resolves when the layout is loaded.
          * @unofficial
          */
         loadLayout(): Promise<void>;
@@ -1215,6 +1221,7 @@ declare module 'obsidian' {
          * @param sourcePath - The source path to open.
          * @param newLeaf - The type of the leaf to open.
          * @param openViewState - The view state to open.
+         * @returns A promise that resolves when the link is opened.
          * @example
          * ```ts
          * app.workspace.openLinkText('foo', 'bar.md', 'tab');
@@ -1339,6 +1346,7 @@ declare module 'obsidian' {
         /**
          * Save workspace layout to disk.
          *
+         * @returns A promise that resolves when the layout is saved.
          * @unofficial
          */
         saveLayout(): Promise<void>;
@@ -1376,6 +1384,7 @@ declare module 'obsidian' {
          * Use deserialized layout data to reconstruct the workspace
          *
          * @param data - The serialized workspace data.
+         * @returns A promise that resolves when the layout is reconstructed.
          * @unofficial
          */
         setLayout(data: SerializedWorkspace): Promise<void>;

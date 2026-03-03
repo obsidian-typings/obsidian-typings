@@ -82,6 +82,7 @@ declare module 'obsidian' {
         /**
          * Gets the data from the editor. This will be called to save the editor contents to the file.
          *
+         * @returns The editor data as a string.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link getViewData} instead.
          * @since 0.10.12

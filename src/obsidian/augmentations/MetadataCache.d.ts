@@ -199,6 +199,8 @@ declare module 'obsidian' {
 
         /**
          * Clear all metadata caches and reset state.
+         *
+         * @returns A promise that resolves when all caches are cleared.
          * @unofficial
          */
         clear(): Promise<void>;
@@ -207,6 +209,7 @@ declare module 'obsidian' {
          * Called by initialize()
          *
          * @param file - The file to compute metadata for.
+         * @returns A promise that resolves when the metadata is computed.
          * @unofficial
          */
         computeFileMetadataAsync(file: TFile): Promise<void>;
@@ -373,6 +376,7 @@ declare module 'obsidian' {
         /**
          * Initialize Database connection and load up caches
          *
+         * @returns A promise that resolves when initialization is complete.
          * @unofficial
          */
         initialize(): Promise<void>;
@@ -458,6 +462,7 @@ declare module 'obsidian' {
         /**
          * Called whenever the metadatacache has finished updating.
          *
+         * @returns The event reference.
          * @unofficial
          */
         on(name: 'finished', callback: () => void): EventRef;
@@ -466,6 +471,7 @@ declare module 'obsidian' {
          * Called whenever the metadatacache is fully loaded in.
          *
          * @remark 'finished' is also emitted when the cache is initialized.
+         * @returns The event reference.
          * @unofficial
          */
         on(name: 'initialized', callback: () => void): EventRef;

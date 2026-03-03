@@ -37,6 +37,8 @@ export interface BasesView extends TextFileView {
 
     /**
      * Get view type.
+     *
+     * @returns The bases view type.
      */
     getViewType(): typeof ViewType.Bases;
 
@@ -52,11 +54,15 @@ export interface BasesView extends TextFileView {
 
     /**
      * Receives the sync state.
+     *
+     * @param fileView - The file view to receive the sync state from.
      */
     receiveSyncState(fileView: FileView): void;
 
     /**
      * Saves the query.
+     *
+     * @param query - The query to save.
      */
     saveQuery(query: BasesQuery): void;
 

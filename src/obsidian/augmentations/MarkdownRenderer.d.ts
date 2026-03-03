@@ -39,6 +39,9 @@ declare module 'obsidian' {
         /**
          * Handle a checkbox click event in the rendered markdown.
          *
+         * @param e - The checkbox click event.
+         * @param n - The line number of the checkbox.
+         * @param i - The index of the checkbox.
          * @returns The result of the checkbox click handling.
          * @unofficial
          */
@@ -47,6 +50,7 @@ declare module 'obsidian' {
         /**
          * Handle a file change event for the rendered file.
          *
+         * @param e - The file change event.
          * @returns The result of the file change handling.
          * @unofficial
          */
@@ -85,6 +89,9 @@ declare module 'obsidian' {
         /**
          * Apply post-processing to the rendered markdown output.
          *
+         * @param e - The element to post-process.
+         * @param t - The rendering context.
+         * @param n - The node associated with the element.
          * @returns The result of the post-processing.
          * @unofficial
          */
@@ -93,6 +100,7 @@ declare module 'obsidian' {
         /**
          * Resolve internal links in the rendered markdown.
          *
+         * @param e - The element containing links to resolve.
          * @returns The result of the link resolution.
          * @unofficial
          */

@@ -122,10 +122,10 @@ export interface MetadataEditorProperty extends Component {
      * Render property widget based on type.
      *
      * @param entry - Property entry data.
-     * @param check_errors - Whether to check for errors.
-     * @param use_expected_type - Whether to use the expected type.
+     * @param checkErrors - Whether to check for errors.
+     * @param useExpectedType - Whether to use the expected type.
      */
-    renderProperty(entry: PropertyEntryData<unknown>, check_errors?: boolean, use_expected_type?: boolean): void;
+    renderProperty(entry: PropertyEntryData<unknown>, checkErrors?: boolean, useExpectedType?: boolean): void;
 
     /**
      * Set the selected class of property.

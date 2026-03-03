@@ -17,6 +17,8 @@ export interface FilePropertiesView extends InfoFileView {
 
     /**
      * Get the current view type.
+     *
+     * @returns The file properties view type.
      */
     getViewType(): typeof ViewType.FileProperties;
 
@@ -24,6 +26,7 @@ export interface FilePropertiesView extends InfoFileView {
      * Checks the file is an markdown file.
      *
      * @param file - The file to check.
+     * @returns Whether the file is a supported markdown file.
      */
     isSupportedFile(file: TFile): boolean;
 
@@ -47,6 +50,7 @@ export interface FilePropertiesView extends InfoFileView {
      * Reads the file if it is supported.
      *
      * @param file - The file to read.
+     * @returns A promise that resolves with the file contents.
      */
     readSupportedFile(file: TFile): Promise<unknown>;
 

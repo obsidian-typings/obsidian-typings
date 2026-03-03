@@ -20,6 +20,7 @@ declare module 'obsidian' {
         /**
          * Get the markdown content.
          *
+         * @returns The markdown content.
          * @official
          */
         get(): string;
@@ -27,6 +28,7 @@ declare module 'obsidian' {
         /**
          * Get the scroll position.
          *
+         * @returns The scroll position.
          * @official
          */
         getScroll(): number;

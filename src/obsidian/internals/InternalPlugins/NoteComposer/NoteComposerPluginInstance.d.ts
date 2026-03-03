@@ -69,7 +69,11 @@ export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteC
      */
     onEditorMenu(menu: Menu, editor: Editor, info: MarkdownView | MarkdownFileInfo): void;
 
-    /** Handle external settings file changes and reload configuration. */
+    /**
+     * Handle external settings file changes and reload configuration.
+     *
+     * @returns A promise that resolves when the settings are reloaded.
+     */
     onExternalSettingsChange(): Promise<void>;
 
     /**

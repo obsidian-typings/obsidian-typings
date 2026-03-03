@@ -73,6 +73,7 @@ export interface ClipboardManager {
      *
      * @param file - File to embed.
      * @param replace - Whether to replace the current selection.
+     * @returns A promise that resolves when the embed is inserted.
      */
     insertAttachmentEmbed(file: TAbstractFile, replace: boolean): Promise<void>;
 
@@ -80,6 +81,7 @@ export interface ClipboardManager {
      * Insert files from drop-event into the editor.
      *
      * @param importedAttachments - Attachments to insert.
+     * @returns A promise that resolves when all files are inserted.
      */
     insertFiles(importedAttachments: ImportedAttachment[]): Promise<void>;
 
@@ -90,6 +92,7 @@ export interface ClipboardManager {
      * @param extension - File extension.
      * @param data - Binary data of the attachment.
      * @param replace - Whether to replace the current selection.
+     * @returns A promise that resolves when the attachment is saved.
      * @remark Invokes insertAttachmentEmbed.
      */
     saveAttachment(name: string, extension: string, data: ArrayBuffer, replace: boolean): Promise<void>;

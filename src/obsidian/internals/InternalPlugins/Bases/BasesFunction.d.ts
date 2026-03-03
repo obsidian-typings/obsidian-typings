@@ -35,11 +35,17 @@ export interface BasesFunction {
 
     /**
      * Applies the function.
+     *
+     * @param args - The arguments to apply.
+     * @returns The result of applying the function.
      */
     apply(...args: unknown[]): unknown;
 
     /**
      * Serializes the function.
+     *
+     * @param args - The arguments to serialize.
+     * @returns The serialized function string.
      */
     serialize(...args: unknown[]): string;
 }

@@ -18,6 +18,10 @@ export interface RibbonItem {
     /** Tooltip title displayed on hover. */
     title: string;
 
-    /** Callback invoked when this ribbon item is clicked. */
+    /**
+     * Callback invoked when this ribbon item is clicked.
+     *
+     * @returns A promise that resolves when the callback completes.
+     */
     callback(): Promise<void>;
 }

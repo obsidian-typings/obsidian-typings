@@ -42,6 +42,7 @@ export interface Commands {
      * Execute a command by reference.
      *
      * @param command - Command to execute.
+     * @returns Whether the command was successfully executed.
      */
     executeCommand(command: Command): boolean;
 
@@ -49,6 +50,7 @@ export interface Commands {
      * Execute a command by ID.
      *
      * @param commandId - ID of command to execute.
+     * @returns Whether the command was successfully executed.
      */
     executeCommandById(commandId: string): boolean;
 
@@ -56,11 +58,14 @@ export interface Commands {
      * Find a command by ID.
      *
      * @param commandId - ID of command to find.
+     * @returns The command, or undefined if not found.
      */
     findCommand(commandId: string): Command | undefined;
 
     /**
      * Lists **all** commands, both with and without editor callback.
+     *
+     * @returns All registered commands.
      */
     listCommands(): Command[];
 

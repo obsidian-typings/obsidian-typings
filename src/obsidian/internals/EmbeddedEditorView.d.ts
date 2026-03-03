@@ -84,16 +84,22 @@ export interface EmbeddedEditorView extends Component {
 
     /**
      * Get the preview editor, if exists.
+     *
+     * @returns The iframed markdown editor, or null.
      */
     get editor(): IFramedMarkdownEditor | null;
 
     /**
      * Get the path to the file, if any file registered.
+     *
+     * @returns The file path.
      */
     get path(): string;
 
     /**
      * Get the scroll of the file renderer component.
+     *
+     * @returns The scroll position.
      */
     get scroll(): unknown;
 

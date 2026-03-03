@@ -67,6 +67,7 @@ declare module 'obsidian' {
         /**
          * Removes the file from the cache if its content length greater than `app.vault.cacheLimit`.
          *
+         * @returns The result of the cache limit update.
          * @unofficial
          */
         updateCacheLimit(): unknown;

@@ -9,9 +9,15 @@ import type { ViewType } from '../../../implementations/Constants/ViewType.ts';
 export interface WebviewerHistoryView extends ItemView {
     /**
      * Get the current view type.
+     *
+     * @returns The webviewer history view type.
      */
     getViewType(): typeof ViewType.WebviewerHistory;
 
-    /** Refresh the browsing history list. */
+    /**
+     * Refresh the browsing history list.
+     *
+     * @returns The result of refreshing the history.
+     */
     update(): Promise<unknown>;
 }

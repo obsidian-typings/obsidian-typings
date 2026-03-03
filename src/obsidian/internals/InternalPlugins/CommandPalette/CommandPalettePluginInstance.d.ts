@@ -31,18 +31,39 @@ export interface CommandPalettePluginInstance extends InternalPluginInstance<Com
     /** List of recently used command IDs. */
     recentCommands: string[];
 
-    /** Get the list of available commands for the palette. */
+    /**
+     * Get the list of available commands for the palette.
+     *
+     * @returns The available commands.
+     */
     getCommands(): Command[];
 
-    /** Handle external settings file changes and reload configuration. */
+    /**
+     * Handle external settings file changes and reload configuration.
+     *
+     * @returns A promise that resolves when the settings are reloaded.
+     */
     onExternalSettingsChange(): Promise<void>;
 
-    /** Called when the command palette is opened. */
+    /**
+     * Called when the command palette is opened.
+     *
+     * @returns Whether the command palette was successfully opened.
+     */
     onOpen(): boolean;
 
-    /** Callback invoked to open the command palette. */
+    /**
+     * Callback invoked to open the command palette.
+     *
+     * @returns Whether the callback was successfully executed.
+     */
     openCallback(): boolean;
 
-    /** Save the command palette settings. */
+    /**
+     * Save the command palette settings.
+     *
+     * @param plugin - The command palette plugin to save settings for.
+     * @unofficial
+     */
     saveSettings(plugin: CommandPalettePlugin): void;
 }

@@ -392,6 +392,7 @@ declare module 'obsidian' {
          *
          * @param attachmentsToImport - The attachments to import.
          * @param folder - The folder to import the attachments to.
+         * @returns A promise that resolves when all attachments are imported.
          * @unofficial
          */
         importAttachments(attachmentsToImport: ImportedAttachment[], folder: TFolder | null): Promise<void>;
@@ -400,6 +401,7 @@ declare module 'obsidian' {
          * Initialize the entire application using the provided FS adapter
          *
          * @param adapter - The data adapter to use.
+         * @returns A promise that resolves when the application is initialized.
          * @unofficial
          */
         initializeWithAdapter(adapter: DataAdapter): Promise<void>;
@@ -407,6 +409,7 @@ declare module 'obsidian' {
         /**
          * Check if the application is in dark mode.
          *
+         * @returns Whether the application is in dark mode.
          * @official
          * @since 1.10.0
          */
@@ -452,6 +455,7 @@ declare module 'obsidian' {
          * Add callback to execute on next frame with promise
          *
          * @param callback - The async callback to execute.
+         * @returns A promise that resolves when the callback completes on the next frame.
          * @unofficial
          */
         nextFramePromise(callback: () => Promise<void>): Promise<void>;

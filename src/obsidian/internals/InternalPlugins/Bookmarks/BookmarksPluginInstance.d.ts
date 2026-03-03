@@ -131,10 +131,15 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
      *
      * @param app - The app instance.
      * @param plugin - The bookmarks plugin registration.
+     * @returns A promise that resolves when the plugin is enabled.
      */
     onEnable(app: App, plugin: BookmarksPlugin): Promise<void>;
 
-    /** Handle external settings file changes and reload configuration. */
+    /**
+     * Handle external settings file changes and reload configuration.
+     *
+     * @returns A promise that resolves when the settings are reloaded.
+     */
     onExternalSettingsChange(): Promise<void>;
 
     /**
@@ -198,6 +203,7 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
      * @param item - The bookmark item to open.
      * @param newLeaf - Where to open the bookmark.
      * @param newLeaf2 - Optional secondary pane type.
+     * @returns A promise that resolves when the bookmark is opened.
      */
     openBookmark(item: BookmarkItem, newLeaf: PaneType | boolean, newLeaf2?: PaneType | boolean): Promise<void>;
 
@@ -207,6 +213,7 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
      * @param item - The bookmark item to open.
      * @param leaf - The target workspace leaf.
      * @param newLeaf - Optional pane type override.
+     * @returns A promise that resolves when the bookmark is opened in the leaf.
      */
     openBookmarkInLeaf(item: BookmarkItem, leaf: WorkspaceLeaf, newLeaf?: PaneType | boolean): Promise<void>;
 
@@ -215,6 +222,7 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
      *
      * @param items - The bookmark items to open.
      * @param newLeaf - Optional pane type for opening.
+     * @returns A promise that resolves when all bookmarks are opened.
      */
     openBookmarks(items: BookmarkItem[], newLeaf?: PaneType | boolean): Promise<void>;
 

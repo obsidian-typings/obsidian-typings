@@ -45,6 +45,7 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
      * Creates and embeds a base.
      *
      * @param editor - The editor to embed the base into.
+     * @returns A promise that resolves when the base is created and embedded.
      */
     createAndEmbedBase(editor: Editor): Promise<void>;
 

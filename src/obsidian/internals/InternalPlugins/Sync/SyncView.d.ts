@@ -7,6 +7,10 @@ import type { ViewType } from '../../../implementations/Constants/ViewType.d.ts'
  * @unofficial
  */
 export interface SyncView extends View {
-    /** Get the current view type. */
+    /**
+     * Get the current view type.
+     *
+     * @returns The sync view type.
+     */
     getViewType(): typeof ViewType.Sync;
 }

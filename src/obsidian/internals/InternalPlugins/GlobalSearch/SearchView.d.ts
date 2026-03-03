@@ -16,6 +16,8 @@ export interface SearchView extends View {
 
     /**
      * Get the current view type.
+     *
+     * @returns The search view type.
      */
     getViewType(): typeof ViewType.Search;
 

@@ -12,6 +12,7 @@ declare module 'obsidian' {
          *
          * @param app - The Obsidian app instance.
          * @param plugin - The plugin instance.
+         * @returns The plugin setting tab instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */

@@ -37,6 +37,7 @@ declare module 'obsidian' {
         /**
          * Currently active CM instance.
          *
+         * @returns The active CodeMirror editor view, or `null` when the editor is not instantiated.
          * @remark Can be `null` when Editor is not instantiated.
          * @unofficial
          */
@@ -44,6 +45,8 @@ declare module 'obsidian' {
 
         /**
          * Whether the editor is embedded in a table cell.
+         *
+         * @returns Whether the editor is embedded in a table cell.
          * @unofficial
          */
         get inTableCell(): boolean;
@@ -53,14 +56,14 @@ declare module 'obsidian' {
          *
          * @param ranges - The ranges to highlight.
          * @param style - The highlight style class.
-         * @param remove_previous - Whether to remove previous highlights.
+         * @param removePrevious - Whether to remove previous highlights.
          * @param range - The editor selection range.
          * @unofficial
          */
         addHighlights(
             ranges: EditorRange[],
             style: 'is-flashing' | 'obsidian-search-match-highlight',
-            remove_previous: boolean,
+            removePrevious: boolean,
             range?: EditorSelection
         ): void;
 
@@ -88,11 +91,11 @@ declare module 'obsidian' {
          * Convert editor position to screen position.
          *
          * @param pos Editor position.
-         * @param relative_to_editor Relative to the editor or the application window.
+         * @param relativeToEditor - Relative to the editor or the application window.
          * @returns The screen coordinates.
          * @unofficial
          */
-        coordsAtPos(pos: EditorPosition, relative_to_editor: boolean): Coords;
+        coordsAtPos(pos: EditorPosition, relativeToEditor: boolean): Coords;
 
         /**
          * Execute a command.
@@ -495,6 +498,8 @@ declare module 'obsidian' {
         replaceRange__(replacement: string, from: EditorPosition, to?: EditorPosition, origin?: string): void;
 
         /**
+         * @param replacement - The replacement text.
+         * @param origin - The user event that triggered the replacement.
          * @official
          * @since 0.11.11
          * @deprecated - Added only for typing purposes. Use {@link replaceSelection} instead.
@@ -664,6 +669,8 @@ declare module 'obsidian' {
         toggleNumberList(): void;
 
         /**
+         * @param tx - The editor transaction to apply.
+         * @param origin - The user event that triggered the transaction.
          * @official
          * @since 0.13.0
          * @deprecated - Added only for typing purposes. Use {@link transaction} instead.

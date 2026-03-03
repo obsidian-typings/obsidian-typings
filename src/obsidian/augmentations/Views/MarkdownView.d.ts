@@ -153,6 +153,7 @@ declare module 'obsidian' {
          * Create a new markdown view.
          *
          * @param leaf - The workspace leaf to attach the markdown view to.
+         * @returns The markdown view instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
@@ -170,6 +171,7 @@ declare module 'obsidian' {
         /**
          * The associated file.
          *
+         * @returns The associated file or `null`.
          * @example
          * ```ts
          * console.log(markdownFileInfo.file);
@@ -278,6 +280,7 @@ declare module 'obsidian' {
         /**
          * On blur of inline title, save new filename.
          *
+         * @returns A promise that resolves when the new filename is saved.
          * @unofficial
          */
         onInlineTitleBlur(): Promise<void>;
@@ -314,6 +317,7 @@ declare module 'obsidian' {
          * On mod click, opens editor of opposite mode in split view to right.
          *
          * @param event - The keyboard or mouse event.
+         * @returns A promise that resolves when the view is switched.
          * @unofficial
          */
         onSwitchView(event: KeyboardEvent | MouseEvent): Promise<void>;
@@ -353,6 +357,7 @@ declare module 'obsidian' {
          * Set the mode of the editor.
          *
          * @param component - The markdown subview mode to set.
+         * @returns A promise that resolves when the mode is set.
          * @unofficial
          */
         setMode(component: MarkdownSubView): Promise<void>;
@@ -401,6 +406,7 @@ declare module 'obsidian' {
         /**
          * Toggle backlinks on editor.
          *
+         * @returns A promise that resolves when backlinks are toggled.
          * @unofficial
          */
         toggleBacklinks(): Promise<void>;
@@ -423,10 +429,10 @@ declare module 'obsidian' {
          * Execute functionality of token (open external link, open internal link in leaf, ...).
          *
          * @param token - The token to trigger.
-         * @param new_leaf - Whether to open in a new leaf.
+         * @param newLeaf - Whether to open in a new leaf.
          * @unofficial
          */
-        triggerClickableToken(token: Token, new_leaf: boolean): void;
+        triggerClickableToken(token: Token, newLeaf: boolean): void;
 
         /**
          * Undo action of source mode editor.

@@ -108,6 +108,7 @@ declare module 'obsidian' {
         /**
          * Performed when animation is complete
          *
+         * @returns A promise that resolves when the close animation finishes.
          * @unofficial
          */
         animateClose(): Promise<void>;
@@ -115,6 +116,7 @@ declare module 'obsidian' {
         /**
          * Performed when animation is started
          *
+         * @returns A promise that resolves when the open animation finishes.
          * @unofficial
          */
         animateOpen(): Promise<void>;
@@ -130,6 +132,7 @@ declare module 'obsidian' {
          * Create a new modal.
          *
          * @param app - The Obsidian app instance.
+         * @returns The modal instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
@@ -190,6 +193,7 @@ declare module 'obsidian' {
          * Set the background opacity of the dimmed background.
          *
          * @param opacity Opacity percentage.
+         * @returns The modal instance.
          * @unofficial
          */
         setBackgroundOpacity(opacity: string): this;
@@ -231,6 +235,7 @@ declare module 'obsidian' {
          * Set whether the background should be dimmed.
          *
          * @param dim Whether the background should be dimmed.
+         * @returns The modal instance.
          * @unofficial
          */
         setDimBackground(dim: boolean): this;

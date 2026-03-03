@@ -10,6 +10,7 @@ declare module 'obsidian' {
          * Create a new text component.
          *
          * @param containerEl - The container element.
+         * @returns The text component instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */

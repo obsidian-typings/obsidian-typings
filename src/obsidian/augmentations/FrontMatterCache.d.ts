@@ -16,6 +16,8 @@ declare module 'obsidian' {
         /**
          * The key-value pairs in the frontmatter.
          *
+         * @param key - The frontmatter key to look up.
+         * @returns The value associated with the key.
          * @example
          * ```ts
          * console.log(frontmatterCache['key1']); // value1

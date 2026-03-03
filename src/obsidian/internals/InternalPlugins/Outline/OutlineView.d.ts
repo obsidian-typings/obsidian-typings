@@ -54,6 +54,8 @@ export interface OutlineView extends InfoFileView {
 
     /**
      * Get the current view type.
+     *
+     * @returns The outline view type.
      */
     getViewType(): typeof ViewType.Outline;
 

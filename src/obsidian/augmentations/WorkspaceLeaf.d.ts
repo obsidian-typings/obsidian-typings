@@ -219,6 +219,8 @@ declare module 'obsidian' {
 
         /**
          * Check whether this leaf is currently visible in the workspace.
+         *
+         * @returns Whether the leaf is visible.
          * @unofficial
          */
         isVisible(): boolean;
@@ -252,6 +254,10 @@ declare module 'obsidian' {
         /**
          * Triggers when the leaf's history gets updated (e.g. when new file is opened, or moving through history).
          *
+         * @param name - Should be `'history-change'`.
+         * @param callback - The callback function.
+         * @param ctx - The context passed as `this` to the `callback` function.
+         * @returns The event reference.
          * @unofficial
          */
         on(name: 'history-change', callback: () => void, ctx?: unknown): EventRef;
@@ -259,6 +265,10 @@ declare module 'obsidian' {
         /**
          * Triggers when context menu action is executed on the leaf.
          *
+         * @param name - Should be `'leaf-menu'`.
+         * @param callback - The callback function.
+         * @param ctx - The context passed as `this` to the `callback` function.
+         * @returns The event reference.
          * @unofficial
          */
         on(name: 'leaf-menu', callback: (menu: Menu, leaf: WorkspaceLeaf) => void, ctx?: unknown): EventRef;
@@ -282,6 +292,9 @@ declare module 'obsidian' {
 
         /**
          * Handle opening the context menu on this leaf's tab header.
+         *
+         * @param evt - The mouse event that triggered the context menu.
+         * @param parentEl - The parent element of the tab header.
          * @unofficial
          */
         onOpenTabHeaderMenu(evt: MouseEvent, parentEl: HTMLElement): void;
@@ -318,18 +331,23 @@ declare module 'obsidian' {
          * @param linktext - The link text to open.
          * @param sourcePath - The path of the source file.
          * @param openViewState - The view state to open the link in.
+         * @returns A promise that resolves when the link is opened.
          * @unofficial
          */
         openLinkText(linktext: string, sourcePath: string, openViewState?: OpenViewState): Promise<void>;
 
         /**
          * Rebuild the view associated with this leaf.
+         *
+         * @returns A promise that resolves when the view is rebuilt.
          * @unofficial
          */
         rebuildView(): Promise<void>;
 
         /**
          * Record a state entry in this leaf's navigation history.
+         *
+         * @param state - The history state to record.
          * @unofficial
          */
         recordHistory(state: WorkspaceLeafHistoryState): void;
@@ -364,9 +382,9 @@ declare module 'obsidian' {
         setGroup(group: string): void;
 
         /**
-         * Set the group of this leaf.
+         * Set another leaf as a group member of this leaf.
          *
-         * @param group - The group to set.
+         * @param other - The other leaf to add to the group.
          * @official
          */
         setGroupMember(other: WorkspaceLeaf): void;
@@ -384,6 +402,7 @@ declare module 'obsidian' {
          *
          * @param viewState - The view state to set.
          * @param eState - The ephemeral state to set.
+         * @returns A promise that resolves when the view state is applied.
          * @official
          */
         setViewState(viewState: ViewState, eState?: any): Promise<void>;

@@ -129,7 +129,7 @@ export interface FileSuggestManager {
      * @param block - Block cache entry to match against.
      * @param sourcePath - Source path for link resolution.
      * @param content - Content of the block.
-     * @param text_parts - Search fragments to match.
+     * @param textParts - Search fragments to match.
      * @returns Search result if matched, or null.
      */
     matchBlock(
@@ -138,6 +138,6 @@ export interface FileSuggestManager {
         block: BlockCache,
         sourcePath: null | string,
         content: string,
-        text_parts: string[]
+        textParts: string[]
     ): SearchResult | null;
 }

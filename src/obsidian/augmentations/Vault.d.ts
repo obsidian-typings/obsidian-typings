@@ -220,6 +220,7 @@ declare module 'obsidian' {
          * Remove a vault config file
          *
          * @param configFile - The config file to delete.
+         * @returns A promise that resolves when the config file is deleted.
          * @unofficial
          */
         deleteConfigJson(configFile: string): Promise<void>;
@@ -236,6 +237,10 @@ declare module 'obsidian' {
 
         /**
          * Generate and register files from an async generator.
+         *
+         * @param e - The async generator that yields files.
+         * @param t - Whether to trigger create events for the files.
+         * @returns A promise that resolves when all files are generated and registered.
          * @unofficial
          */
         generateFiles(e: AsyncGenerator<TFile>, t: boolean): Promise<void>;
@@ -431,6 +436,7 @@ declare module 'obsidian' {
         /**
          * Load vault adapter
          *
+         * @returns A promise that resolves when the vault adapter is loaded.
          * @unofficial
          */
         load(): Promise<void>;
@@ -677,6 +683,7 @@ declare module 'obsidian' {
         /**
          * Save app and appearance configs to disk
          *
+         * @returns A promise that resolves when the configs are saved.
          * @unofficial
          */
         saveConfig(): Promise<void>;
@@ -709,6 +716,7 @@ declare module 'obsidian' {
         /**
          * Load all config files into memory
          *
+         * @returns A promise that resolves when all config files are loaded.
          * @unofficial
          */
         setupConfig(): Promise<void>;
@@ -729,6 +737,7 @@ declare module 'obsidian' {
          *
          * @param config Name of config file.
          * @param data Data to write.
+         * @returns A promise that resolves when the config file is written.
          * @unofficial
          */
         writeConfigJson(config: string, data: object): Promise<void>;
@@ -739,6 +748,7 @@ declare module 'obsidian' {
          * @param path Full path to config file.
          * @param data Data to write.
          * @param pretty Whether to insert tabs or spaces.
+         * @returns A promise that resolves when the JSON file is written.
          * @unofficial
          */
         writeJson(path: string, data: object, pretty?: boolean): Promise<void>;
@@ -748,6 +758,7 @@ declare module 'obsidian' {
          *
          * @param path - Path relative to vault root.
          * @param data - Data to write.
+         * @returns A promise that resolves when the plugin data is written.
          * @unofficial
          */
         writePluginData(path: string, data: object): Promise<void>;

@@ -66,7 +66,11 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
      */
     addSettingTab(settingTab: PluginSettingTab): void;
 
-    /** Delete persisted data for this plugin. */
+    /**
+     * Delete persisted data for this plugin.
+     *
+     * @returns A promise that resolves when the data is deleted.
+     */
     deleteData(): Promise<void>;
 
     /**
@@ -80,6 +84,7 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
      * Enable this plugin.
      *
      * @param isEnabledByUser - Whether the user manually enabled the plugin.
+     * @returns A promise that resolves when the plugin is enabled.
      */
     enable(isEnabledByUser?: boolean): Promise<void>;
 
@@ -90,7 +95,11 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
      */
     getModifiedTime(): Promise<number | undefined>;
 
-    /** Handle changes to the plugin config file. */
+    /**
+     * Handle changes to the plugin config file.
+     *
+     * @returns A promise that resolves when the config change is processed.
+     */
     handleConfigFileChange(): Promise<void>;
 
     /** Initialize this plugin. */
@@ -141,6 +150,7 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
      * Save data for this plugin.
      *
      * @param data - The data object to persist.
+     * @returns A promise that resolves when the data is saved.
      */
     saveData(data: object): Promise<void>;
 }

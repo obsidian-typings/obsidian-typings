@@ -26,6 +26,7 @@ declare module 'obsidian' {
          * Create a new ExtraButtonComponent.
          *
          * @param containerEl - The container element.
+         * @returns The extra button component instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */

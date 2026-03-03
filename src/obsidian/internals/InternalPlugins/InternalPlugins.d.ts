@@ -40,6 +40,8 @@ export interface InternalPlugins extends Events {
 
     /**
      * - Load plugin configs and enable plugins.
+     *
+     * @returns A promise that resolves when all plugins are enabled.
      */
     enable(): Promise<void>;
 
@@ -83,6 +85,8 @@ export interface InternalPlugins extends Events {
 
     /**
      * - Save current plugin configs.
+     *
+     * @returns A promise that resolves when the config is saved.
      */
     saveConfig(): Promise<void>;
 }

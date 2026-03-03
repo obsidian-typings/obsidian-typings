@@ -145,6 +145,7 @@ declare module 'obsidian' {
          *
          * @param normalizedPath Path to directory.
          * @param child - The file entry child.
+         * @returns A promise that resolves when the child is listed.
          * @unofficial
          */
         listRecursiveChild(normalizedPath: string, child: FileEntry): Promise<void>;
@@ -175,6 +176,7 @@ declare module 'obsidian' {
          * Open a file using the native device handler.
          *
          * @param normalizedPath - The path to the file to open.
+         * @returns A promise that resolves when the file is opened.
          * @unofficial
          */
         open(normalizedPath: string): Promise<void>;
@@ -240,6 +242,7 @@ declare module 'obsidian' {
          * @param normalizedPath - The original path.
          * @param normalizedNewPath - The new path.
          * @param fileEntry - The capacitor file entry.
+         * @returns A promise that resolves when the file creation is reconciled.
          * @unofficial
          */
         reconcileFileCreation(
@@ -266,6 +269,7 @@ declare module 'obsidian' {
          * Remove a file from the internal file listing and trigger events.
          *
          * @param normalizedPath - The path of the file to remove.
+         * @returns A promise that resolves when the file is removed from the listing.
          * @unofficial
          */
         removeFile(normalizedPath: string): Promise<void>;
@@ -316,12 +320,16 @@ declare module 'obsidian' {
 
         /**
          * Stop watching for file system changes.
+         *
+         * @returns A promise that resolves when the watcher is stopped.
          * @unofficial
          */
         stopWatch(): Promise<void>;
 
         /**
          * Test whether the file system is case-insensitive.
+         *
+         * @returns A promise that resolves when the case-sensitivity test is complete.
          * @unofficial
          */
         testInsensitive(): Promise<void>;
@@ -359,6 +367,7 @@ declare module 'obsidian' {
          * Update the internal file listing for the given path.
          *
          * @param normalizedPath - The path to update.
+         * @returns A promise that resolves when the file listing is updated.
          * @unofficial
          */
         update(normalizedPath: string): Promise<void>;

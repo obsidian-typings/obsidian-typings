@@ -32,6 +32,8 @@ declare module 'obsidian' {
 
         /**
          * Internal handler invoked when the plugin's config file changes on disk.
+         *
+         * @returns A promise that resolves when the config file change is handled.
          * @unofficial
          */
         _onConfigFileChange(): Promise<void>;
@@ -90,7 +92,7 @@ declare module 'obsidian' {
          * Adds a status bar item to the bottom of the app.
          * Not available on mobile.
          * @see {@link https://docs.obsidian.md/Plugins/User+interface/Status+bar}.
-         * @return HTMLElement - element to modify.
+         * @returns The HTMLElement for the status bar item.
          * @official
          * @since 0.9.7
          */
@@ -101,6 +103,7 @@ declare module 'obsidian' {
          *
          * @param app - The Obsidian app instance.
          * @param manifest - The plugin manifest.
+         * @returns The plugin instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
@@ -132,6 +135,7 @@ declare module 'obsidian' {
         /**
          * Called when the plugin is loaded.
          *
+         * @returns A promise that resolves when the plugin is loaded, or nothing.
          * @official
          * @since 0.9.7
          */

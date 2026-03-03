@@ -8,7 +8,7 @@ export interface BasesFunctionArg {
     /**
      * Whether to include custom types.
      */
-    include_custom_types?: boolean;
+    includeCustomTypes?: boolean;
 
     /**
      * The name of the argument.

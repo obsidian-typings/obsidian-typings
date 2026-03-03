@@ -17,24 +17,54 @@ export interface WorkspaceLeafHistory {
     /** The workspace leaf that owns this history. */
     owner: WorkspaceLeaf;
 
-    /** Navigate back to the previous state. */
+    /**
+     * Navigate back to the previous state.
+     *
+     * @returns A promise that resolves when navigation is complete.
+     */
     back(): Promise<void>;
 
-    /** Restore history from a serialized representation. */
+    /**
+     * Restore history from a serialized representation.
+     *
+     * @param e - The serialized history data.
+     */
     deserialize(e: SerializedWorkspaceLeafHistory): void;
 
-    /** Navigate forward to the next state. */
+    /**
+     * Navigate forward to the next state.
+     *
+     * @returns A promise that resolves when navigation is complete.
+     */
     forward(): Promise<void>;
 
-    /** Navigate by the given number of steps (negative for back, positive for forward). */
+    /**
+     * Navigate by the given number of steps (negative for back, positive for forward).
+     *
+     * @param step - The number of steps to navigate.
+     * @returns A promise that resolves when navigation is complete.
+     */
     go(step: number): Promise<void>;
 
-    /** Push a new state onto the back history stack. */
+    /**
+     * Push a new state onto the back history stack.
+     *
+     * @param state - The history state to push.
+     */
     pushState(state: WorkspaceLeafHistoryState): void;
 
-    /** Serialize the history for persistence. */
+    /**
+     * Serialize the history for persistence.
+     *
+     * @returns The serialized history data.
+     */
     serialize(): SerializedWorkspaceLeafHistory;
 
-    /** Update the current state in the history. */
+    /**
+     * Update the current state in the history.
+     *
+     * @param state - The history state to update with.
+     * @returns A promise that resolves when the state is updated.
+     */
     updateState(state: WorkspaceLeafHistoryState): Promise<void>;
 }

@@ -29,10 +29,18 @@ export interface AbstractFileTreeItem<T extends TAbstractFile> extends TreeItem 
     /** Reference to the file explorer view containing this item. */
     view: FileExplorerView;
 
-    /** Get the display title for this tree item. */
+    /**
+     * Get the display title for this tree item.
+     *
+     * @returns The display title.
+     */
     getTitle(): string;
 
-    /** Whether the full timestamp is shown for this item. */
+    /**
+     * Whether the full timestamp is shown for this item.
+     *
+     * @returns Whether the full timestamp is shown.
+     */
     isFullTimeShown(): boolean;
 
     /** Called when this item is rendered to the DOM. */

@@ -45,6 +45,7 @@ declare module 'obsidian' {
          * Create a new file view.
          *
          * @param leaf - The workspace leaf to create the file view in.
+         * @returns The file view instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
@@ -87,6 +88,7 @@ declare module 'obsidian' {
          * Updates the view if it contains the deleted file.
          *
          * @param file - The file that was deleted.
+         * @returns A promise that resolves when the view is updated.
          * @unofficial
          */
         onDelete(file: TFile): Promise<void>;

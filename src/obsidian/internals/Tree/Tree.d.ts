@@ -89,6 +89,8 @@ export interface Tree<T extends TreeItem> {
 
     /**
      * Root item of the tree view.
+     *
+     * @returns The root tree item.
      */
     get root(): TreeRoot<T>;
 
@@ -130,6 +132,7 @@ export interface Tree<T extends TreeItem> {
      * Handle deletion of selected nodes.
      *
      * @param event - The keyboard event that triggered the deletion.
+     * @returns A promise that resolves when the selected items are deleted.
      */
     handleDeleteSelectedItems(event: KeyboardEvent): Promise<void>;
 

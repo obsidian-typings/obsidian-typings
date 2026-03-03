@@ -61,6 +61,8 @@ export interface FileExplorerView extends View {
 
     /**
      * Try to rename the file.
+     *
+     * @returns A promise that resolves when the rename is accepted.
      */
     acceptRename(): Promise<void>;
 
@@ -69,6 +71,7 @@ export interface FileExplorerView extends View {
      *
      * @param file - The created file.
      * @param newLeaf - Where to open the view for this file.
+     * @returns A promise that resolves when the file is opened and/or rename is started.
      */
     afterCreate(file: TFile, newLeaf: PaneType | boolean): Promise<void>;
 
@@ -93,6 +96,7 @@ export interface FileExplorerView extends View {
      * @param type - The type of file to create.
      * @param location - The location where to create the file.
      * @param newLeaf - Where to open the view for this file.
+     * @returns A promise that resolves when the file or folder is created.
      */
     createAbstractFile(type: 'file' | 'folder', location: TFolder, newLeaf: PaneType | boolean): Promise<void>;
 
@@ -152,6 +156,8 @@ export interface FileExplorerView extends View {
 
     /**
      * Get the current view type.
+     *
+     * @returns The file explorer view type.
      */
     getViewType(): typeof ViewType.FileExplorer;
 
@@ -174,6 +180,7 @@ export interface FileExplorerView extends View {
      * Is called when on the new folder icon is clicked. Call createAbstractFile().
      *
      * @param event - The MouseEvent which triggered this function.
+     * @returns A promise that resolves when the folder is created.
      */
     onCreateNewFolderClick(event: MouseEvent): Promise<void>;
 
@@ -181,6 +188,7 @@ export interface FileExplorerView extends View {
      * Is called when on the new note icon is clicked. Call createAbstractFile().
      *
      * @param event - The MouseEvent which triggered this function.
+     * @returns A promise that resolves when the note is created.
      */
     onCreateNewNoteClick(event: MouseEvent): Promise<void>;
 
@@ -195,6 +203,7 @@ export interface FileExplorerView extends View {
      * Called when delete is requested.
      *
      * @param event - The event triggered this function.
+     * @returns The result of the delete operation.
      */
     onDeleteSelectedFiles(event: unknown): unknown;
 

@@ -39,6 +39,7 @@ declare module 'obsidian' {
          * Create a new scope.
          *
          * @param parent - The parent scope.
+         * @returns The scope instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
@@ -49,6 +50,7 @@ declare module 'obsidian' {
          *
          * @param event - Keyboard event.
          * @param keypress - Pressed key information.
+         * @returns The result of the key handler execution.
          * @unofficial
          */
         handleKey(event: KeyboardEvent, keypress: KeymapInfo): unknown;
@@ -72,6 +74,8 @@ declare module 'obsidian' {
 
         /**
          * Set the container element for constraining tab-key focus cycling.
+         *
+         * @param container - The container element to constrain tab focus within.
          * @unofficial
          */
         setTabFocusContainer(container: HTMLElement): void;

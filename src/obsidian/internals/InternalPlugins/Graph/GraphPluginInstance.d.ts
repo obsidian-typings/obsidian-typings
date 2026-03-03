@@ -26,7 +26,11 @@ export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin>
     /** Reference to the parent graph plugin. */
     plugin: GraphPlugin;
 
-    /** Reload options when settings are changed externally. */
+    /**
+     * Reload options when settings are changed externally.
+     *
+     * @returns A promise that resolves when the settings are reloaded.
+     */
     onExternalSettingsChange(): Promise<void>;
 
     /**

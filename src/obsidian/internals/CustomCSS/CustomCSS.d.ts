@@ -161,6 +161,7 @@ export interface CustomCSS extends Component {
      * dummy manifest for the theme.
      *
      * @param options - Options for installing the theme.
+     * @returns A promise that resolves when the legacy theme is installed.
      * @remark Name will be used as the folder name for the theme.
      */
     installLegacyTheme(options: InstallThemeOptions): Promise<void>;
@@ -170,6 +171,7 @@ export interface CustomCSS extends Component {
      *
      * @param options - Options for installing the theme.
      * @param version - Version to install.
+     * @returns A promise that resolves when the theme is installed.
      */
     installTheme(options: InstallThemeOptions, version: string): Promise<void>;
 
@@ -181,16 +183,32 @@ export interface CustomCSS extends Component {
      */
     isThemeInstalled(themeName: string): boolean;
 
-    /** Load and apply CSS from the given source. */
+    /**
+     * Load and apply CSS from the given source.
+     *
+     * @returns The result of loading CSS.
+     */
     loadCss(arg1: unknown): Promise<unknown>;
 
-    /** Load stored CustomCSS configuration data. */
+    /**
+     * Load stored CustomCSS configuration data.
+     *
+     * @returns The loaded configuration data.
+     */
     loadData(): unknown;
 
-    /** Load and apply all enabled CSS snippets. */
+    /**
+     * Load and apply all enabled CSS snippets.
+     *
+     * @returns The result of loading snippets.
+     */
     loadSnippets(): unknown;
 
-    /** Load and apply a specific theme. */
+    /**
+     * Load and apply a specific theme.
+     *
+     * @returns The result of loading the theme.
+     */
     loadTheme(arg1: unknown): unknown;
 
     /** Lifecycle hook called when the component is loaded. */
@@ -213,6 +231,7 @@ export interface CustomCSS extends Component {
      * Remove a theme by theme name.
      *
      * @param themeName - Name of the theme to remove.
+     * @returns A promise that resolves when the theme is removed.
      */
     removeTheme(themeName: string): Promise<void>;
 

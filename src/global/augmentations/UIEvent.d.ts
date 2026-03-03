@@ -29,6 +29,7 @@ declare global {
          *
          * @typeParam T - The type to check.
          * @param type - The type to check.
+         * @param data - The constructor arguments.
          * @returns Whether the event is an instance of the type.
          * @example
          * ```ts

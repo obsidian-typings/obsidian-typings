@@ -165,6 +165,10 @@ export interface ResultDom {
      */
     stopLoader(): unknown;
 
-    /** Toggle the collapsed state of a result item. */
+    /**
+     * Toggle the collapsed state of a result item.
+     *
+     * @returns The result of toggling the collapse state.
+     */
     toggle(arg1: unknown, arg2: unknown): Promise<unknown>;
 }

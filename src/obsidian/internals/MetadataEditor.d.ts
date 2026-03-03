@@ -210,10 +210,10 @@ export interface MetadataEditor extends Component {
      * Remove specified properties from the metadata editor and save, and reset focus if specified.
      *
      * @param properties - Properties to remove.
-     * @param reset_focus - Whether to reset focus after removal.
+     * @param resetFocus - Whether to reset focus after removal.
      * @returns The result of the removal operation.
      */
-    removeProperties(properties: MetadataEditorProperty[], reset_focus?: boolean): unknown;
+    removeProperties(properties: MetadataEditorProperty[], resetFocus?: boolean): unknown;
 
     /**
      * Reorder the entry to specified index position and save.

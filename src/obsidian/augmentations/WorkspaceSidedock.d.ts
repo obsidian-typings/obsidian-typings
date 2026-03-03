@@ -92,6 +92,8 @@ declare module 'obsidian' {
 
         /**
          * Handle the start of a sidedock resize operation.
+         *
+         * @param evt - The mouse event that initiated the resize.
          * @unofficial
          */
         onSidedockResizeStart(evt: MouseEvent): void;
@@ -104,12 +106,16 @@ declare module 'obsidian' {
 
         /**
          * Serialize the sidedock state for persistence.
+         *
+         * @returns The serialized sidedock state.
          * @unofficial
          */
         serialize(): SerializedWorkspaceSidedock;
 
         /**
          * Set the width of the sidedock in pixels.
+         *
+         * @param size - The width in pixels.
          * @unofficial
          */
         setSize(size: number): void;

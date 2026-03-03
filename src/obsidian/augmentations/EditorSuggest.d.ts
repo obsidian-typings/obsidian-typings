@@ -29,6 +29,7 @@ declare module 'obsidian' {
          * Create a new EditorSuggest.
          *
          * @param app - The app instance.
+         * @returns The editor suggest instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
@@ -108,6 +109,7 @@ declare module 'obsidian' {
         /**
          * Show suggestions.
          *
+         * @param results - The search results to display as suggestions.
          * @unofficial
          */
         showSuggestions(results: SearchResult[]): void;

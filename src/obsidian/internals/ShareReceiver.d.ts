@@ -14,6 +14,7 @@ export interface ShareReceiver {
      * Handles shared files.
      *
      * @param files - Shared files.
+     * @returns A promise that resolves when the shared files are handled.
      */
     handleShareFiles(files: SharedFile[]): Promise<void>;
 
@@ -21,6 +22,7 @@ export interface ShareReceiver {
      * Handles shared text.
      *
      * @param text - Shared text.
+     * @returns A promise that resolves when the shared text is handled.
      */
     handleShareText(text: string): Promise<void>;
 
@@ -28,6 +30,7 @@ export interface ShareReceiver {
      * Imports shared files.
      *
      * @param files - Shared files.
+     * @returns A promise that resolves when the files are imported.
      */
     importFiles(files: SharedFile[]): Promise<void>;
 

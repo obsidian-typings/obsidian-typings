@@ -49,6 +49,7 @@ declare module 'obsidian' {
         /**
          * Apply fold information to the preview.
          *
+         * @param e - The fold information to apply.
          * @returns The result of applying fold information.
          * @unofficial
          */
@@ -88,6 +89,7 @@ declare module 'obsidian' {
         /**
          * Switch to edit mode for the given element or selection.
          *
+         * @param e - The element or selection to edit.
          * @returns The result of switching to edit mode.
          * @unofficial
          */
@@ -120,6 +122,7 @@ declare module 'obsidian' {
         /**
          * Get the ephemeral state of the preview (e.g. scroll position).
          *
+         * @param e - The state context.
          * @returns The ephemeral state.
          * @unofficial
          */
@@ -221,6 +224,7 @@ declare module 'obsidian' {
         /**
          * Set the ephemeral state of the preview (e.g. scroll position).
          *
+         * @param e - The ephemeral state to set.
          * @returns The result of setting the ephemeral state.
          * @unofficial
          */

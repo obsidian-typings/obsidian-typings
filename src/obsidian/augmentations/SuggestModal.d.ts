@@ -73,6 +73,7 @@ declare module 'obsidian' {
          * Create a suggest modal.
          *
          * @param app - The Obsidian app instance .
+         * @returns The suggest modal instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */

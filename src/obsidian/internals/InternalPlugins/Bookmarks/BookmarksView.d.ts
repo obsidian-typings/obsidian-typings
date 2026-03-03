@@ -71,6 +71,8 @@ export interface BookmarksView extends ItemView {
 
     /**
      * Get the current view type.
+     *
+     * @returns The bookmarks view type.
      */
     getViewType(): typeof ViewType.Bookmarks;
 
@@ -100,6 +102,7 @@ export interface BookmarksView extends ItemView {
      * Called when delete is requested.
      *
      * @param event - The event triggered this function.
+     * @returns The result of the delete operation.
      */
     onDeleteSelectedItems(event: unknown): unknown;
 

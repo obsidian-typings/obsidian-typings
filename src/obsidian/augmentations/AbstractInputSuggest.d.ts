@@ -40,6 +40,7 @@ declare module 'obsidian' {
          *
          * @param app - The app instance.
          * @param textInputEl - The text input element.
+         * @returns The abstract input suggest instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
@@ -147,6 +148,8 @@ declare module 'obsidian' {
 
         /**
          * Display the given search results as suggestions.
+         *
+         * @param suggestions - The search results to display.
          * @unofficial
          */
         showSuggestions(suggestions: SearchResult[]): void;

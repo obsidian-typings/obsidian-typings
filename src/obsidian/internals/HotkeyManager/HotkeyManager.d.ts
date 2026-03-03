@@ -62,6 +62,7 @@ export interface HotkeyManager {
      * Get hotkey associated with command ID.
      *
      * @param command - Command ID to get hotkey for.
+     * @returns The default hotkeys for the command.
      */
     getDefaultHotkeys(command: string): KeymapInfo[];
 
@@ -69,6 +70,7 @@ export interface HotkeyManager {
      * Get hotkey associated with command ID.
      *
      * @param command - Command ID to get hotkey for.
+     * @returns The hotkeys for the command.
      */
     getHotkeys(command: string): KeymapInfo[];
 
@@ -77,7 +79,11 @@ export interface HotkeyManager {
      */
     load(): void;
 
-    /** Handle raw file system change events for the hotkey config. */
+    /**
+     * Handle raw file system change events for the hotkey config.
+     *
+     * @param e - The file system change event.
+     */
     onRaw(e: unknown): void;
 
     /**
@@ -85,6 +91,7 @@ export interface HotkeyManager {
      *
      * @param event - Keyboard event to trigger command with.
      * @param keypress - Pressed key information.
+     * @returns Whether a command was triggered.
      */
     onTrigger(event: KeyboardEvent, keypress: KeymapInfo): boolean;
 
@@ -92,6 +99,7 @@ export interface HotkeyManager {
      * Pretty-print hotkey of a command.
      *
      * @param commandId - Command ID to print hotkey for.
+     * @returns The formatted hotkey string.
      */
     printHotkeyForCommand(commandId: string): string;
 

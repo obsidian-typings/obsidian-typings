@@ -21,6 +21,10 @@ export declare class HighlightOutliner {
      */
     constructor(boxes: Array<Object>, borderWidth?: number, innerMargin?: number, isLTR?: boolean);
 
-    /** Compute and return the highlight outlines for the given boxes. */
+    /**
+     * Compute and return the highlight outlines for the given boxes.
+     *
+     * @returns The computed highlight outlines.
+     */
     getOutlines(): HighlightOutline;
 }

@@ -81,6 +81,7 @@ declare module 'obsidian' {
          * Create a new markdown edit view.
          *
          * @param view - The markdown view.
+         * @returns The markdown edit view instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
@@ -160,7 +161,7 @@ declare module 'obsidian' {
          *
          * @param ranges - The ranges to highlight.
          * @param style - The highlight style class.
-         * @param remove_previous - Whether to remove previous highlights.
+         * @param removePrevious - Whether to remove previous highlights.
          * @param range - The editor selection range.
          * @remark Only ranges parameter is used.
          * @unofficial
@@ -168,7 +169,7 @@ declare module 'obsidian' {
         highlightSearchMatches(
             ranges: EditorRange[],
             style?: 'is-flashing' | 'obsidian-search-match-highlight',
-            remove_previous?: boolean,
+            removePrevious?: boolean,
             range?: EditorSelection
         ): void;
 
@@ -191,6 +192,7 @@ declare module 'obsidian' {
         /**
          * Debounced onMarkdownFold of view.
          *
+         * @returns The result of the debounced fold save operation.
          * @unofficial
          */
         requestSaveFolds(): unknown;

@@ -109,6 +109,7 @@ declare module 'obsidian' {
          * Create a new item view.
          *
          * @param leaf - The workspace leaf to create the item view in.
+         * @returns The item view instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */

@@ -18,6 +18,7 @@ declare module 'obsidian' {
          *
          * Event type: 'blur'.
          *
+         * @returns A promise that resolves when the blur handling is complete.
          * @unofficial
          */
         onTitleBlur(): Promise<void>;
@@ -66,6 +67,7 @@ declare module 'obsidian' {
          * Updates the file to match the updated title.
          *
          * @param titleEl - The current title element.
+         * @returns A promise that resolves when the title is saved.
          * @unofficial
          */
         saveTitle(titleEl: HTMLElement): Promise<void>;

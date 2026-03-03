@@ -19,6 +19,7 @@ declare module 'obsidian' {
          * It should be a child of the Markdown preview sections, and when it's no longer attached
          * (for example, when it is replaced with a new version because the user edited the Markdown source code),
          * this component will be unloaded.
+         * @returns The markdown render child instance.
          * @official
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */

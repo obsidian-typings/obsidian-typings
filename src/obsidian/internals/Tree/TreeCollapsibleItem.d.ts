@@ -34,6 +34,7 @@ export interface TreeCollapsibleItem extends TreeItem {
      *
      * @param value - Whether the item should be collapsed.
      * @param animate - If set to `true`, will animate on collapse.
+     * @returns Resolves when the collapse state has been applied.
      */
     setCollapsed(value: boolean, animate?: boolean): Promise<undefined>;
 
@@ -48,6 +49,7 @@ export interface TreeCollapsibleItem extends TreeItem {
      * Toggle collapsed state of tree item.
      *
      * @param animate - If set to `true`, will animate on collapse.
+     * @returns Resolves when the collapse state has been toggled.
      */
     toggleCollapsed(animate?: boolean): Promise<undefined>;
 
@@ -55,6 +57,7 @@ export interface TreeCollapsibleItem extends TreeItem {
      * Update the tree item's cover element.
      *
      * @param animate - If set to `true`, will animate on collapse.
+     * @returns Resolves when the cover element has been updated.
      */
     updateCollapsed(animate?: boolean): Promise<undefined>;
 }
