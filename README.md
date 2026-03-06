@@ -216,6 +216,14 @@ Furthermore, there is a very high chance that there are mistakes in the typings,
 All types had to be deduced from context, manually running the function, or from the minified app code.
 Always verify that your code behaves as expected, both in terms of types and runtime behavior.
 
+> [!WARNING]
+>
+> While the typings themselves were hand-written by the package maintainers and contributors, the majority of the `@tsdoc` documentation has been minimally completed using generative AI and may be inaccurate.
+
+> [!TIP]
+>
+> If you find any issues with the typings or documentation, please feel free to [open an issue](https://github.com/Fevol/obsidian-typings/issues) or submit a pull request.
+
 With these scary disclaimers out of the way, hopefully these typings will help you in removing 90% of the `@ts-ignore`/`@ts-expect-error` you have in your codebase, or discover solutions that didn't seem possible before.
 
 ## Tags
