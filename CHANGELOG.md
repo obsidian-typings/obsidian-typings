@@ -1,5 +1,95 @@
 # CHANGELOG
 
+## 4.110.0 (obsidian-public-1.12.4)
+
+- docs: add more tsdocs
+
+## 4.109.0 (obsidian-public-1.12.4)
+
+- feat: iterateReferencesForFile
+
+## 4.108.0 (obsidian-public-1.12.4)
+
+- feat: get unmerged changes
+- feat: update API changes
+
+## 4.107.0 (obsidian-public-1.12.4)
+
+- feat: extract anonymous types
+- refactor: remove duplicated interfaces
+- fix: move link updaters
+
+## 4.106.0 (obsidian-public-1.12.4)
+
+## 4.105.0 (obsidian-public-1.11.7)
+
+- feat: update API changes
+- feat: add internals of SettingGroup
+- feat: update obsidian API to 1.12.2
+
+## 4.104.0 (obsidian-catalyst-1.12.4)
+
+## 4.103.0 (obsidian-catalyst-1.12.3)
+
+## 4.102.0 (obsidian-catalyst-1.12.2)
+
+## 4.101.0 (obsidian-public-1.11.7)
+
+## 4.100.0 (obsidian-public-1.11.7)
+
+- feat: update obsidian API to 1.12.2
+
+## 4.99.0 (obsidian-public-1.11.7)
+
+- feat: add internals of SettingGroup
+
+## 4.98.0 (obsidian-public-1.11.7)
+
+## 4.97.0 (obsidian-catalyst-1.12.0)
+
+- feat: update 1.12.0 API changes
+
+## 4.96.0 (obsidian-catalyst-1.12.0)
+
+## 4.95.0 (obsidian-catalyst-1.11.7)
+
+## 4.94.0 (obsidian-catalyst-1.11.6)
+
+## 4.93.0 (obsidian-public-1.11.4)
+
+- feat: add internals of SettingGroup
+
+## 4.92.0 (obsidian-public-1.11.4)
+
+## 4.91.0 (obsidian-catalyst-1.11.4)
+
+- feat: update API to 1.11.0
+- feat: update widget components
+- feat: add public API changes
+- fix: wrong SecretStorage.loadSecrets type
+
+## 4.90.0 (obsidian-public-1.10.6)
+
+## 4.89.0 (obsidian-catalyst-1.11.4)
+
+- feat: add public API changes
+
+## 4.88.0 (obsidian-catalyst-1.11.1)
+
+- feat: update API to 1.11.0
+- feat: update widget components
+
+## 4.87.0 (obsidian-public-1.10.6)
+
+## 4.86.0 (obsidian-catalyst-1.11.1)
+
+- feat: update API to 1.11.0
+- feat: update widget components
+
+## 4.85.0 (obsidian-public-1.10.6)
+
+- feat: rename DomEventsHandlers
+
 ## 4.84.0 (obsidian-catalyst-1.11.1)
 
 ## 4.83.0 (obsidian-catalyst-1.10.6)
