@@ -232,7 +232,7 @@ declare global {
          * PDF.js library for parsing and rendering PDF documents.
          * @unofficial
          */
-        pdfjsLib: typeof pdfjsLib;
+        pdfjsLib?: typeof pdfjsLib;
 
         /**
          * Testing utilities for PDF.js.
@@ -543,11 +543,11 @@ declare global {
         li(target: object, source: object): object;
 
         /**
-         * Minified helper to pick specified properties from an object.
+         * Minified helper to omit specified properties from an object.
          *
-         * @param target - The source object to pick properties from.
-         * @param propertyNames - The names of the properties to pick.
-         * @returns A new object with only the specified properties.
+         * @param target - The source object to omit properties from.
+         * @param propertyNames - The names of the properties to exclude.
+         * @returns A new object without the specified properties.
          * @unofficial
          */
         mo(target: object, propertyNames: string[]): object;
