@@ -124,6 +124,7 @@ declare module 'obsidian' {
          * @param basePath - The basePath.
          * @returns The new instance.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(basePath: string): this;
 

@@ -221,6 +221,7 @@ declare module 'obsidian' {
          * @param vault - The vault.
          * @returns The new instance.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(app: App, vault: Vault): this;
 

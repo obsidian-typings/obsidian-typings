@@ -89,6 +89,7 @@ declare module 'obsidian' {
          * To extract the constructor type, use `ExtractConstructor<View>`.
          * @official
          * @since 0.9.7
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(leaf: WorkspaceLeaf): this;
 

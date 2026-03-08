@@ -135,6 +135,7 @@ declare module 'obsidian' {
          * @param app - The Obsidian app instance.
          * @returns The modal instance.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(app: App): this;
 

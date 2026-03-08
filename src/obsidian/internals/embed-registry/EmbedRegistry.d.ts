@@ -20,6 +20,7 @@ export interface EmbedRegistry extends Events {
     /**
      * Constructor.
      *
+     * @deprecated - Added only for typing purposes.
      */
     constructor__(): this;
 

@@ -51,6 +51,7 @@ declare module 'obsidian' {
          * new Notice('qux', 0); // will stay visible until the user manually dismisses it
          * ```
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(message: string | DocumentFragment, duration?: number): this;
 

@@ -23,6 +23,7 @@ declare module 'obsidian' {
          * @returns The new instance.
          * To get the constructor, use `getBasesEntryConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(ctx: unknown, file: TFile): this;
     

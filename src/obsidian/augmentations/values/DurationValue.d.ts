@@ -24,6 +24,7 @@ declare module 'obsidian' {
          * Constructor.
          *
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(): this;
 

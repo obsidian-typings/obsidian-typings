@@ -29,6 +29,7 @@ declare module 'obsidian' {
          * @returns The extra button component instance.
          * To get the constructor, use `getExtraButtonComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(containerEl: HTMLElement): this;
 

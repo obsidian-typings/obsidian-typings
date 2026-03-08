@@ -32,6 +32,7 @@ declare module 'obsidian' {
          * @returns The editor suggest instance.
          * To extract the constructor type, use `ExtractConstructor<EditorSuggest>`.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(app: App): this;
 

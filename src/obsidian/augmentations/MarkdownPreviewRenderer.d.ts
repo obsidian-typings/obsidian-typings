@@ -18,6 +18,7 @@ declare module 'obsidian' {
          * @returns The new instance.
          * To get the constructor, use `getMarkdownPreviewRendererConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(owner: unknown, containerEl: HTMLElement, parentEl: HTMLElement, workerPath: unknown, observeInsertion?: boolean): this;
 }

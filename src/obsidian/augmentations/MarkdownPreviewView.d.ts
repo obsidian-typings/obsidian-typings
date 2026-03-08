@@ -93,6 +93,7 @@ declare module 'obsidian' {
          * @param containerEl - The containerEl.
          * @returns The new instance.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(containerEl: HTMLElement): this;
 

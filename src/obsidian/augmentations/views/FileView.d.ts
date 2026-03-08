@@ -48,6 +48,7 @@ declare module 'obsidian' {
          * @param leaf - The workspace leaf to create the file view in.
          * @returns The file view instance.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(leaf: WorkspaceLeaf): this;
 

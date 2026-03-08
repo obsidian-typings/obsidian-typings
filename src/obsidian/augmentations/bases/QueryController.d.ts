@@ -19,6 +19,7 @@ declare module 'obsidian' {
          * @returns The new instance.
          * To get the constructor, use `getQueryControllerConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(app: App, plugin: unknown, viewHeaderEl: HTMLElement, currentFile?: TFile | null): this;
 }

@@ -30,6 +30,7 @@ declare module 'obsidian' {
          * To get the constructor, use `getToggleComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @since 0.9.7
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(containerEl: HTMLElement): this;
 

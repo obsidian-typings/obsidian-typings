@@ -42,6 +42,7 @@ declare module 'obsidian' {
          * @returns The scope instance.
          * To get the constructor, use `getScopeConstructor()` from `obsidian-typings/implementations`.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(parent?: Scope): this;
 

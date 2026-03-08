@@ -15,6 +15,7 @@ declare module 'obsidian' {
          * To get the constructor, use `getTagValueConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @since 1.10.0
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(value: string): this;
     }

@@ -40,6 +40,7 @@ export interface RecentFileTracker {
      * @param vault - The vault.
      * @returns The new instance.
      * To get the constructor, use `getRecentFileTrackerConstructor()` from `obsidian-typings/implementations`.
+     * @deprecated - Added only for typing purposes.
      */
     constructor__(workspace: Workspace, vault: Vault): this;
 

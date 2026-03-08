@@ -58,6 +58,7 @@ declare module 'obsidian' {
          * @param fs - The fs.
          * @returns The new instance.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(basePath: string, fs: CapacitorAdapterFs): this;
 

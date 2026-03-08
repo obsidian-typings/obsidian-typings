@@ -30,6 +30,7 @@ export interface WorkspaceLeafHistory {
      *
      * @param owner - The owner.
      * @returns The new instance.
+     * @deprecated - Added only for typing purposes.
      */
     constructor__(owner: WorkspaceLeaf): this;
 

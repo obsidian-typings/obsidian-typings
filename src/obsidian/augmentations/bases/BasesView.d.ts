@@ -54,6 +54,7 @@ declare module 'obsidian' {
          * To extract the constructor type, use `ExtractConstructor<BasesView>`.
          * @official
          * @since 1.10.0
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(controller: QueryController): this;
 

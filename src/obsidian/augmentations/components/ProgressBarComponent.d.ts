@@ -27,6 +27,7 @@ declare module 'obsidian' {
          * @returns The progress bar component instance.
          * To get the constructor, use `getProgressBarComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(containerEl: HTMLElement): this;
 

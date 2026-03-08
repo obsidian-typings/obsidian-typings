@@ -137,6 +137,7 @@ declare module 'obsidian' {
          * Create a new menu.
          *
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(): this;
 

@@ -16,6 +16,7 @@ declare module 'obsidian' {
          * To get the constructor, use `getSecretComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @since 1.11.1
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(app: App, containerEl: HTMLElement): this;
 

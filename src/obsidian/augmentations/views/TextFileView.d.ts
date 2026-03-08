@@ -67,6 +67,7 @@ declare module 'obsidian' {
          *
          * @param leaf - The leaf to create the view in.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(leaf: WorkspaceLeaf): this;
 

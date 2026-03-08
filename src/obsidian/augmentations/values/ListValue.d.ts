@@ -23,6 +23,7 @@ declare module 'obsidian' {
          * @returns The new ListValue.
          * @official
          * @since 1.10.0
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(value: (unknown | Value)[]): this;
 

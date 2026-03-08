@@ -28,6 +28,7 @@ declare module 'obsidian' {
          * @param waitTime - The wait time of the hover popover.
          * @param staticPos - The static position of the hover popover.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(
             parent: HoverParent,

@@ -29,6 +29,7 @@ declare module 'obsidian' {
          * @returns The new instance.
          * To get the constructor, use `getWorkspaceRootConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(workspace: Workspace, direction: string, id?: string): this;
 }

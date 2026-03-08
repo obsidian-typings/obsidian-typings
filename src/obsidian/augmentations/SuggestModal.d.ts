@@ -76,6 +76,7 @@ declare module 'obsidian' {
          * @returns The suggest modal instance.
          * To extract the constructor type, use `ExtractConstructor<SuggestModal>`.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(app: App): this;
 

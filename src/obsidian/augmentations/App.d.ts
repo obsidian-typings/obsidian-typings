@@ -306,6 +306,7 @@ declare module 'obsidian' {
          * @returns The new instance.
          * To get the constructor, use `getAppConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(adapter: DataAdapter, appId: string): this;
 

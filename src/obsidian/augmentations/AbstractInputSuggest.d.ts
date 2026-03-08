@@ -43,6 +43,7 @@ declare module 'obsidian' {
          * @returns The abstract input suggest instance.
          * To extract the constructor type, use `ExtractConstructor<AbstractInputSuggest>`.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor2__(app: App, textInputEl: HTMLInputElement | HTMLDivElement): this;
 

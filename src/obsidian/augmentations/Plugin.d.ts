@@ -106,6 +106,7 @@ declare module 'obsidian' {
          * @param manifest - The plugin manifest.
          * @returns The plugin instance.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(app: App, manifest: PluginManifest): this;
 

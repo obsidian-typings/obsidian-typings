@@ -77,6 +77,7 @@ export interface Plugins {
      *
      * @param app - The app.
      * @returns The new instance.
+     * @deprecated - Added only for typing purposes.
      */
     constructor__(app: App): this;
 

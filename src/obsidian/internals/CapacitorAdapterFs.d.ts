@@ -28,6 +28,7 @@ export interface CapacitorAdapterFs {
      *
      * @param dir - The dir.
      * @returns The new instance.
+     * @deprecated - Added only for typing purposes.
      */
     constructor__(dir: string): this;
 

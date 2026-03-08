@@ -16,6 +16,7 @@ declare module 'obsidian' {
          * To extract the constructor type, use `ExtractConstructor<PrimitiveValue>`.
          * @official
          * @since 1.10.0
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(value: T): this;
 

@@ -60,6 +60,7 @@ declare module 'obsidian' {
          * @param app - The app.
          * @returns The new instance.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(app: App): this;
 

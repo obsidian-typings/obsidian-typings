@@ -108,6 +108,7 @@ declare module 'obsidian' {
          * @returns The setting group.
          * @official
          * @since 1.11.0
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(containerEl: HTMLElement): this;
 

@@ -44,6 +44,7 @@ export interface InternalPlugins extends Events {
      * @param app - The app.
      * @returns The new instance.
      * To get the constructor, use `getInternalPluginsConstructor()` from `obsidian-typings/implementations`.
+     * @deprecated - Added only for typing purposes.
      */
     constructor__(app: App): this;
 

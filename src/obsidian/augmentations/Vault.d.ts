@@ -153,6 +153,7 @@ declare module 'obsidian' {
          * @param adapter - The adapter.
          * @returns The new instance.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(adapter: DataAdapter): this;
 

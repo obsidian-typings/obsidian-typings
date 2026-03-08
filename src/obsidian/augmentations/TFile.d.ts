@@ -60,6 +60,7 @@ declare module 'obsidian' {
          * @returns The new instance.
          * To get the constructor, use `getTFileConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(vault: Vault, path: string): this;
 

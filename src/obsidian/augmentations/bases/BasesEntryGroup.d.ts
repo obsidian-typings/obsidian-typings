@@ -33,6 +33,7 @@ declare module 'obsidian' {
          * @returns The new instance.
          * To get the constructor, use `getBasesEntryGroupConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(entries: BasesEntry[], key: unknown): this;
     

@@ -66,6 +66,7 @@ declare module 'obsidian' {
          * @returns The popover suggest instance.
          * To extract the constructor type, use `ExtractConstructor<PopoverSuggest>`.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(app: App, scope?: Scope): this;
 

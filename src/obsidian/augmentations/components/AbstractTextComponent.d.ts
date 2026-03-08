@@ -31,6 +31,7 @@ declare module 'obsidian' {
          * @returns The text component instance.
          * To get the constructor, use `getAbstractTextComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
+         * @deprecated - Added only for typing purposes.
          */
         constructor__(inputEl: T): this;
 
