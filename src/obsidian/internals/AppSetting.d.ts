@@ -41,6 +41,9 @@ export interface AppSetting extends Modal {
      */
     corePluginTabHeaderGroup: HTMLElement;
 
+    /** Feedback banner element. */
+    feedbackBanner: unknown;
+
     /**
      * Previously opened tab ID.
      */

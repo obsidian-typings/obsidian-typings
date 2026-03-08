@@ -11,4 +11,11 @@ export interface StatusBar {
 
     /** Container element for the status bar. */
     containerEl: HTMLElement;
+
+    /**
+     * Register a new status bar item element.
+     *
+     * @returns The newly created status bar item element.
+     */
+    registerStatusBarItem(): HTMLElement;
 }

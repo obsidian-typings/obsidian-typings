@@ -1,4 +1,5 @@
 import type { AppMenuBarManager } from '../internals/AppMenuBarManager.d.ts';
+import type { Cli } from '../internals/Cli.d.ts';
 import type { AppSetting } from '../internals/AppSetting.d.ts';
 import type { Commands } from '../internals/Commands/Commands.d.ts';
 import type { CustomCSS } from '../internals/CustomCSS/CustomCSS.d.ts';
@@ -47,6 +48,12 @@ declare module 'obsidian' {
          * @unofficial
          */
         commands: Commands;
+
+        /**
+         * CLI handler for the app.
+         * @unofficial
+         */
+        cli: Cli;
 
         /**
          * Custom CSS (snippets/themes) applied to the application.
@@ -166,6 +173,12 @@ declare module 'obsidian' {
          * @unofficial
          */
         mobileToolbar: MobileToolbar | null;
+
+        /**
+         * Quick actions for mobile, null on desktop.
+         * @unofficial
+         */
+        mobileQuickActions: unknown | null;
 
         /**
          * Events to execute on the next frame
@@ -330,7 +343,7 @@ declare module 'obsidian' {
          * @param element Element to fix links in.
          * @unofficial
          */
-        fixFileLinks(element: HTMLElement): void;
+        fixFileLinks(element: HTMLElement, context?: unknown): void;
 
         /**
          * Applies an obfuscation font to all text characters in the vault.
@@ -358,7 +371,7 @@ declare module 'obsidian' {
          * @remark The title is based on the currently active leaf.
          * @unofficial
          */
-        getAppTitle(): string;
+        getAppTitle(leaf?: unknown): string;
 
         /**
          * Get the URI for opening specified file in Obsidian.
@@ -386,6 +399,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         getTheme(): 'moonstone' | 'obsidian';
+
+        /**
+         * Get webview partition identifier.
+         *
+         * @returns The webview partition identifier.
+         * @unofficial
+         */
+        getWebviewPartition(): string;
 
         /**
          * Import attachments into specified folder.
@@ -452,19 +473,18 @@ declare module 'obsidian' {
         nextFrameOnceCallback(callback: () => void): void;
 
         /**
-         * Add callback to execute on next frame with promise
-         *
-         * @param callback - The async callback to execute.
-         * @returns A promise that resolves when the callback completes on the next frame.
-         * @unofficial
-         */
-        nextFramePromise(callback: () => Promise<void>): Promise<void>;
-
-        /**
          * Register an event listener on the app.
          * @unofficial
          */
         on(): void;
+
+        /**
+         * Called when app config changes.
+         *
+         * @param configKey - The configuration key that changed.
+         * @unofficial
+         */
+        onConfigChanged(configKey: string): void;
 
         /**
          * Execute all logged callback (called when next frame is loaded)
@@ -486,7 +506,7 @@ declare module 'obsidian' {
          *
          * @unofficial
          */
-        openVaultChooser(): void;
+        openVaultChooser(callback?: unknown): void;
 
         /**
          * Open the file with OS defined default file browser application.
@@ -509,6 +529,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         registerQuitHook(): void;
+
+        /**
+         * Run the vault opening behavior.
+         *
+         * @param behavior - The opening behavior to run.
+         * @unofficial
+         */
+        runOpeningBehavior(behavior: unknown): void;
 
         /**
          * Save attachment at default attachments location
@@ -545,14 +573,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         setAccentColor(color: string): void;
-
-        /**
-         * Set the path where attachments should be stored.
-         *
-         * @param path - The path for the attachment folder.
-         * @unofficial
-         */
-        setAttachmentFolder(path: string): void;
 
         /**
          * Set the spellcheck languages.
@@ -594,6 +614,20 @@ declare module 'obsidian' {
         updateAccentColor(): void;
 
         /**
+         * Update auto full screen display.
+         *
+         * @unofficial
+         */
+        updateAutoFullScreenDisplay(): void;
+
+        /**
+         * Update floating navigation display.
+         *
+         * @unofficial
+         */
+        updateFloatingNavigationDisplay(): void;
+
+        /**
          * Update the font family of the application and reloads the CSS.
          *
          * @unofficial
@@ -615,6 +649,14 @@ declare module 'obsidian' {
         updateInlineTitleDisplay(): void;
 
         /**
+         * Update mobile frame theme.
+         *
+         * @param theme - The theme to update.
+         * @unofficial
+         */
+        updateMobileFrameTheme(theme: unknown): void;
+
+        /**
          * Update the ribbon display.
          *
          * @unofficial
@@ -622,11 +664,25 @@ declare module 'obsidian' {
         updateRibbonDisplay(): void;
 
         /**
+         * Update tab size setting.
+         *
+         * @unofficial
+         */
+        updateTabSize(): void;
+
+        /**
          * Update the color scheme of the application and reloads the CSS.
          *
          * @unofficial
          */
         updateTheme(): void;
+
+        /**
+         * Update native menu usage.
+         *
+         * @unofficial
+         */
+        updateUseNativeMenu(): void;
 
         /**
          * Update the view header display in notes.

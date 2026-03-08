@@ -23,13 +23,6 @@ declare module 'obsidian' {
      */
     interface MetadataCache extends Events {
         /**
-         * Called by preload() which is in turn called by initialize()
-         *
-         * @unofficial
-         */
-        _preload: () => Promise<void>;
-
-        /**
          * Reference to App.
          *
          * @unofficial
@@ -123,6 +116,12 @@ declare module 'obsidian' {
         resolvedLinks: Record<string, Record<string, number>>;
 
         /**
+         * Debounced function for saving caches to the database.
+         * @unofficial
+         */
+        transactionSave: Debouncer<[], void>;
+
+        /**
          * Mapping of filename to collection of files that share the same name
          *
          * @unofficial
@@ -181,21 +180,18 @@ declare module 'obsidian' {
         workQueue: PromisedQueue;
 
         /**
-         * Internal method to resolve link path destinations from an origin.
-         *
-         * @param origin - The origin path.
-         * @param path - The link path to resolve.
-         * @returns The matching files.
-         * @unofficial
-         */
-        _getLinkpathDest(origin: string, path: string): TFile[];
-
-        /**
          * Clear all caches to `null` values
          *
          * @unofficial
          */
         cleanupDeletedCache(): void;
+
+        /**
+         * Execute onCleanCache callbacks if cache is clean.
+         *
+         * @unofficial
+         */
+        checkCleanCache(): void;
 
         /**
          * Clear all metadata caches and reset state.
@@ -399,6 +395,16 @@ declare module 'obsidian' {
         isSupportedFile(file: TFile): boolean;
 
         /**
+         * Check whether a link is unresolved.
+         *
+         * @param linkpath - The link path to check.
+         * @param sourcePath - The source path from which the link originates.
+         * @returns Whether the link is unresolved.
+         * @unofficial
+         */
+        isUnresolved(linkpath: string, sourcePath: string): boolean;
+
+        /**
          * Check whether string is part of the user ignore filters
          *
          * @param path - The path to check.
@@ -413,7 +419,16 @@ declare module 'obsidian' {
          * @param callback - The callback to execute for each reference path.
          * @unofficial
          */
-        iterateReferences(callback: (path: string) => void): void;
+        iterateAllRefs(callback: (path: string) => void): void;
+
+        /**
+         * Iterate over all references for a specific file.
+         *
+         * @param path - The file path to iterate references for.
+         * @param callback - The callback to execute for each reference.
+         * @unofficial
+         */
+        iterateRefsForFile(path: string, callback: (reference: ReferenceCache) => void): void;
 
         /**
          * Process the link resolver queue to resolve file links.
@@ -521,20 +536,20 @@ declare module 'obsidian' {
         onCleanCache(onCleanCacheCallback: () => void): void;
 
         /**
+         * Handle a configuration change event.
+         *
+         * @param configKey - The configuration key that changed.
+         * @unofficial
+         */
+        onConfigChanged(configKey: string): void;
+
+        /**
          * On creation of the cache: update metadata cache
          *
          * @param file - The created file.
          * @unofficial
          */
         onCreate(file: TAbstractFile): void;
-
-        /**
-         * On creation or modification of the cache: update metadata cache
-         *
-         * @param file - The created or modified file.
-         * @unofficial
-         */
-        onCreateOrModify(file: TAbstractFile): void;
 
         /**
          * On deletion of the cache: update metadata cache
@@ -560,6 +575,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         onRename(file: TAbstractFile, oldPath: string): void;
+
+        /**
+         * Queue a file for link resolution.
+         *
+         * @param file - The file to queue for link resolution, or `null`.
+         * @unofficial
+         */
+        queueFileForLinkResolution(file: TFile | null): void;
 
         /**
          * Check editor for unresolved links and mark these as unresolved

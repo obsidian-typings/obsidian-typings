@@ -19,12 +19,18 @@ export interface Plugins {
      */
     app: App;
 
+    /** Whether automatic update checking is enabled. */
+    autoCheckForUpdates: boolean;
+
     /**
      * Set of enabled plugin IDs.
      *
      * @remark The plugin ids aren't guaranteed to be either active (in `app.plugins.plugins`) or installed (in `app.plugins.manifests`).
      */
     enabledPlugins: Set<string>;
+
+    /** Timestamp of the last update check. */
+    lastUpdateCheck: number;
 
     /**
      * Plugin ID that is currently being enabled.
@@ -63,7 +69,7 @@ export interface Plugins {
      *
      * @returns A promise that resolves when the update check is complete.
      */
-    checkForUpdates(): Promise<void>;
+    checkForUpdates(showNotice?: boolean): Promise<void>;
 
     /**
      * Unload a plugin by ID.
@@ -181,6 +187,9 @@ export interface Plugins {
      * @returns A promise that resolves when the config is saved.
      */
     saveConfig(): Promise<void>;
+
+    /** Set whether automatic update checking is enabled. */
+    setAutomaticUpdateCheck(enabled: boolean): void;
 
     /**
      * Toggle whether community plugins are enabled.

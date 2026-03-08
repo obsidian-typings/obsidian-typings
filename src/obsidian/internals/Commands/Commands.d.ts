@@ -44,7 +44,7 @@ export interface Commands {
      * @param command - Command to execute.
      * @returns Whether the command was successfully executed.
      */
-    executeCommand(command: Command): boolean;
+    executeCommand(command: Command, event?: Event): boolean;
 
     /**
      * Execute a command by ID.
@@ -52,7 +52,7 @@ export interface Commands {
      * @param commandId - ID of command to execute.
      * @returns Whether the command was successfully executed.
      */
-    executeCommandById(commandId: string): boolean;
+    executeCommandById(commandId: string, event?: Event): boolean;
 
     /**
      * Find a command by ID.

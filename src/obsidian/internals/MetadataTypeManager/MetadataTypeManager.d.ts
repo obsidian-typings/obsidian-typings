@@ -87,6 +87,9 @@ export interface MetadataTypeManager extends Events {
      */
     getWidget(type: string): PropertyWidget;
 
+    /** Load metadata type configuration. */
+    load(): Promise<void>;
+
     /**
      * Load property types from config.
      *

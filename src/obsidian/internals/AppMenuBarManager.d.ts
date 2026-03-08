@@ -16,8 +16,8 @@ export interface AppMenuBarManager {
     /** Constructor reference for the menu bar manager. */
     constructor: AppMenuBarManagerConstructor;
 
-    /** Debounced handler for workspace layout changes. */
-    onLayoutChange: Debouncer<[], unknown>;
+    /** Debounced handler for file open events. */
+    onFileOpen: Debouncer<[], unknown>;
 
     /** Debounced handler for window frame changes. */
     onWindowFrameChange: Debouncer<[], unknown>;
@@ -25,12 +25,8 @@ export interface AppMenuBarManager {
     /** Debounced function to re-render the menu bar. */
     requestRender: Debouncer<[], unknown>;
 
-    /**
-     * Internal handler for layout change events.
-     *
-     * @returns The result of the layout change handling.
-     */
-    _onLayoutChange(): unknown;
+    /** Internal handler for file open events. */
+    _onFileOpen(): void;
 
     /**
      * Apply hotkey accelerators to menu items.
@@ -69,10 +65,8 @@ export interface AppMenuBarManager {
 
     /**
      * Update the share menu item state.
-     *
-     * @returns The result of updating the share menu item.
      */
-    updateShareMenuItem(arg1: unknown): unknown;
+    updateShareMenuItem(): void;
 
     /**
      * Update the menu bar based on the current view state.

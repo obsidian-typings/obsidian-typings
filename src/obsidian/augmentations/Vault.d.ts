@@ -737,10 +737,11 @@ declare module 'obsidian' {
          *
          * @param config Name of config file.
          * @param data Data to write.
+         * @param pretty Whether to insert tabs or spaces.
          * @returns A promise that resolves when the config file is written.
          * @unofficial
          */
-        writeConfigJson(config: string, data: object): Promise<void>;
+        writeConfigJson(config: string, data: object, pretty?: boolean): Promise<void>;
 
         /**
          * Write a config file (full path) to disk.
@@ -758,10 +759,11 @@ declare module 'obsidian' {
          *
          * @param path - Path relative to vault root.
          * @param data - Data to write.
+         * @param pretty - Whether to insert tabs or spaces.
          * @returns A promise that resolves when the plugin data is written.
          * @unofficial
          */
-        writePluginData(path: string, data: object): Promise<void>;
+        writePluginData(path: string, data: object, pretty?: boolean): Promise<void>;
     }
 
     namespace Vault {

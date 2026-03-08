@@ -27,6 +27,13 @@ declare module 'obsidian' {
      */
     interface Workspace extends Events {
         /**
+         * Internal reference to the active editor.
+         *
+         * @unofficial
+         */
+        _activeEditor: MarkdownFileInfo | null;
+
+        /**
          * A component managing the current editor.
          * This can be `null` if the active view has no editor.
          *
@@ -103,6 +110,13 @@ declare module 'obsidian' {
         hoverLinkSources: WorkspaceHoverLinkSourcesRecord;
 
         /**
+         * Handler for x-callback-url actions.
+         *
+         * @unofficial
+         */
+        handleXCallback: unknown;
+
+        /**
          * Last opened file in the vault.
          *
          * @unofficial
@@ -164,6 +178,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         onLayoutReadyCallbacks?: unknown;
+
+        /**
+         * Registered operator function configurations.
+         *
+         * @unofficial
+         */
+        operatorFuncConfigs: Map<string, unknown>;
 
         /**
          * Protocol handlers registered on the workspace.
@@ -245,6 +266,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         addMobileFileInfo(file: unknown): void;
+
+        /**
+         * Add a file to the recent files list.
+         *
+         * @param file - The file to add to recent files.
+         * @unofficial
+         */
+        addRecentFile(file: TFile): void;
 
         /**
          * Change the layout of the workspace.
@@ -353,6 +382,14 @@ declare module 'obsidian' {
          * @since 1.7.2
          */
         ensureSideLeaf(type: string, side: Side, options?: EnsureSideLeafOptions): Promise<WorkspaceLeaf>;
+
+        /**
+         * Focus on a specific leaf.
+         *
+         * @param leaf - The leaf to focus.
+         * @unofficial
+         */
+        focusLeaf(leaf: WorkspaceLeaf): void;
 
         /**
          * Returns the file for the current view if it's a `FileView`.
@@ -601,7 +638,15 @@ declare module 'obsidian' {
          * @unofficial
          * @since 0.12.10
          */
-        handleLinkContextMenu(menu: Menu, linkText: string, sourcePath: string): void;
+        handleLinkContextMenu(menu: Menu, linkText: string, sourcePath: string, leaf?: WorkspaceLeaf): void;
+
+        /**
+         * Check if there is any undo history available.
+         *
+         * @returns Whether there is undo history.
+         * @unofficial
+         */
+        hasUndoHistory(): boolean;
 
         /**
          * Check if leaf has been attached to the workspace
@@ -613,6 +658,15 @@ declare module 'obsidian' {
         isAttached(leaf?: WorkspaceLeaf): boolean;
 
         /**
+         * Check if a leaf is in the sidebar.
+         *
+         * @param leaf - The leaf to check.
+         * @returns Whether the leaf is in the sidebar.
+         * @unofficial
+         */
+        isInSidebar(leaf: WorkspaceLeaf): boolean;
+
+        /**
          * Iterate through all leaves, including main area leaves, floating leaves, and sidebar leaves.
          *
          * @param callback - The callback to call for each leaf.
@@ -620,6 +674,14 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         iterateAllLeaves(callback: (leaf: WorkspaceLeaf) => any): void;
+
+        /**
+         * Iterate through all CodeMirror instances in the workspace.
+         *
+         * @param callback - The callback to call for each CodeMirror instance.
+         * @unofficial
+         */
+        iterateCodeMirrors(callback: (cm: unknown) => unknown): void;
 
         /**
          * Iterate the leaves of a split.
@@ -1185,20 +1247,13 @@ declare module 'obsidian' {
         onLayoutReady(callback: () => any): void;
 
         /**
-         * Trigger the link context menu event with the given arguments.
-         *
-         * @param args - The arguments to pass to the event.
-         * @unofficial
-         */
-        onLinkContextMenu(args: unknown[]): void;
-
-        /**
          * Trigger the quick preview event with the given arguments.
          *
-         * @param args - The arguments to pass to the event.
+         * @param file - The file to preview.
+         * @param data - The data to preview.
          * @unofficial
          */
-        onQuickPreview(args: unknown[]): void;
+        onQuickPreview(file: TFile, data: string): void;
 
         /**
          * Handle a resize event on the workspace.
@@ -1268,6 +1323,14 @@ declare module 'obsidian' {
         pushUndoHistory(leaf: WorkspaceLeaf, parentID: string, rootID: string): void;
 
         /**
+         * Read workspace layout data from disk.
+         *
+         * @returns A promise that resolves to the workspace data.
+         * @unofficial
+         */
+        readWorkspaceFile(): Promise<unknown>;
+
+        /**
          * Get drag event target location
          *
          * @param e - The drag event.
@@ -1305,6 +1368,15 @@ declare module 'obsidian' {
         registerObsidianProtocolHandler(protocol: string, handler: ObsidianProtocolHandler): void;
 
         /**
+         * Register operator function configurations.
+         *
+         * @param id - The identifier for the operator func configs.
+         * @param configs - The configurations to register.
+         * @unofficial
+         */
+        registerOperatorFuncConfigs(id: string, configs: unknown): void;
+
+        /**
          * Constructs hook for receiving URI actions
          *
          * @unofficial
@@ -1317,6 +1389,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         requestActiveLeafEvents(): void;
+
+        /**
+         * Request execution of layout change events.
+         *
+         * @unofficial
+         */
+        requestLayoutChangeEvents(): void;
 
         /**
          * Request execution of resize event
@@ -1441,9 +1520,26 @@ declare module 'obsidian' {
          * Unregister Obsidian protocol handler
          *
          * @param protocol - The protocol to unregister.
+         * @param handler - The handler to unregister.
          * @unofficial
          */
-        unregisterObsidianProtocolHandler(protocol: string): void;
+        unregisterObsidianProtocolHandler(protocol: string, handler: ObsidianProtocolHandler): void;
+
+        /**
+         * Unregister operator function configurations.
+         *
+         * @param id - The identifier for the operator func configs to unregister.
+         * @unofficial
+         */
+        unregisterOperatorFuncConfigs(id: string): void;
+
+        /**
+         * Unset the active editor.
+         *
+         * @param editor - The editor to unset.
+         * @unofficial
+         */
+        unsetActiveEditor(editor: MarkdownFileInfo): void;
 
         /**
          * Update the frameless window chrome (title bar) display.

@@ -44,6 +44,9 @@ export interface CustomCSS extends Component {
     /** Queue for sequential CSS processing operations. */
     queue: PromisedQueue;
 
+    /** Main style element for the active theme. */
+    styleEl: HTMLStyleElement;
+
     /** Debounced function to reload CSS snippets. */
     requestLoadSnippets: Debouncer<[], void>;
 
@@ -79,6 +82,9 @@ export interface CustomCSS extends Component {
      * @param themeName - Name of the theme.
      */
     boundRaw(themeName: string): void;
+
+    /** Check whether the current theme is dark mode. */
+    isDarkMode(): boolean;
 
     /**
      * Check whether a specific theme can be updated.
@@ -183,6 +189,9 @@ export interface CustomCSS extends Component {
      */
     isThemeInstalled(themeName: string): boolean;
 
+    /** Reload the active theme CSS. */
+    reloadTheme(): void;
+
     /**
      * Load and apply CSS from the given source.
      *
@@ -222,10 +231,10 @@ export interface CustomCSS extends Component {
     onRaw(themeName: string): void;
 
     /** Read available CSS snippets from the snippets folder. */
-    readSnippets(): void;
+    readSnippets(snippets?: unknown): void;
 
     /** Read available themes from the themes folder. */
-    readThemes(): void;
+    readThemes(themes?: unknown): void;
 
     /**
      * Remove a theme by theme name.
