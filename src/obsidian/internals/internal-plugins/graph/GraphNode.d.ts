@@ -17,6 +17,11 @@ export interface GraphNode {
     /** PixiJS element for the circle, child of `GraphRenderer.hanger`. */
     circle: Graphics | null;
 
+    /**
+     * Destroy the graphics and its children, and remove them from the scene.
+     */
+    clearGraphics(): void;
+
     /** Computed color for the node. */
     color: GraphColorAttributes;
 
@@ -34,44 +39,6 @@ export interface GraphNode {
 
     /** Forced y position when the node is dragged. */
     fy: number | null;
-
-    /** Colored circle added if the node is highlighted, child of `GraphNode.circle`. */
-    highlight: Graphics | null;
-
-    /** ID of the node (path, tag, or name for non-existing files). */
-    id: string;
-
-    /** Displacement of the text, changed when the node is hovered */
-    moveText: number;
-
-    /** Whether the node graphics have been rendered. */
-    rendered: boolean;
-
-    /** `GraphRenderer` managing this node */
-    renderer: GraphRenderer;
-
-    /** Record of backward links. Keys are the id of the neighbor nodes. */
-    reverse: Record<string, GraphLink>;
-
-    /** PixiJS element for the name, child of `GraphNode.circle`. */
-    text: Text | null;
-
-    /** Type of the node, can be of value `"tag"`, `"unresolved"`, `"attachment"`, or an empty string for markdown nodes. */
-    type: string;
-
-    /** Weight of the node depending on the number of related nodes (forwards and backward). */
-    weight: number;
-
-    /** X-axis position of the node in the graph */
-    x: number;
-
-    /** Y-axis position of the node in the graph */
-    y: number;
-
-    /**
-     * Destroy the graphics and its children, and remove them from the scene.
-     */
-    clearGraphics(): void;
 
     /**
      * Get the displayed text associated to the node.
@@ -104,10 +71,19 @@ export interface GraphNode {
      */
     getTextStyle(): TextStyle;
 
+    /** Colored circle added if the node is highlighted, child of `GraphNode.circle`. */
+    highlight: Graphics | null;
+
+    /** ID of the node (path, tag, or name for non-existing files). */
+    id: string;
+
     /**
      * Initialize the node, text, listeners, and add them to the scene.
      */
     initGraphics(): void;
+
+    /** Displacement of the text, changed when the node is hovered */
+    moveText: number;
 
     /**
      * Method called when the node (circle) is clicked, trigger the context menu if it's a right click
@@ -120,4 +96,28 @@ export interface GraphNode {
      * Render the node.
      */
     render(): void;
+
+    /** Whether the node graphics have been rendered. */
+    rendered: boolean;
+
+    /** `GraphRenderer` managing this node */
+    renderer: GraphRenderer;
+
+    /** Record of backward links. Keys are the id of the neighbor nodes. */
+    reverse: Record<string, GraphLink>;
+
+    /** PixiJS element for the name, child of `GraphNode.circle`. */
+    text: Text | null;
+
+    /** Type of the node, can be of value `"tag"`, `"unresolved"`, `"attachment"`, or an empty string for markdown nodes. */
+    type: string;
+
+    /** Weight of the node depending on the number of related nodes (forwards and backward). */
+    weight: number;
+
+    /** X-axis position of the node in the graph */
+    x: number;
+
+    /** Y-axis position of the node in the graph */
+    y: number;
 }

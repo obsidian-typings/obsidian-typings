@@ -12,8 +12,12 @@ export interface TreeNodeVChildren<Item extends TreeNode, Owner extends TreeNode
     /** Internal array of child items. */
     _children: Item[];
 
-    /** The tree node that owns these children. */
-    owner: Owner;
+    /**
+     * Add a child item to this node.
+     *
+     * @param item - The child item to add.
+     */
+    addChild(item: Item): void;
 
     /**
      * Get the array of child items.
@@ -21,13 +25,6 @@ export interface TreeNodeVChildren<Item extends TreeNode, Owner extends TreeNode
      * @returns The child items.
      */
     get children(): Item[];
-
-    /**
-     * Add a child item to this node.
-     *
-     * @param item - The child item to add.
-     */
-    addChild(item: Item): void;
 
     /** Remove all children from this node. */
     clear(): void;
@@ -52,6 +49,9 @@ export interface TreeNodeVChildren<Item extends TreeNode, Owner extends TreeNode
      * @returns The last child item, or `undefined`.
      */
     last(): Item | undefined;
+
+    /** The tree node that owns these children. */
+    owner: Owner;
 
     /**
      * Remove a specific child item from this node.

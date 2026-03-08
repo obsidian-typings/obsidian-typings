@@ -27,21 +27,6 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
     app: App;
 
     /**
-     * Whether the default on.
-     */
-    defaultOn: boolean;
-
-    /**
-     * The functions.
-     */
-    functions: BasesFunctions;
-
-    /**
-     * The handlers.
-     */
-    handlers: BasesHandlers;
-
-    /**
      * Creates and embeds a base.
      *
      * @param editor - The editor to embed the base into.
@@ -60,6 +45,11 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
     createNewBasesFile(location?: TFolder, filename?: string, contents?: string): Promise<TFile>;
 
     /**
+     * Whether the default on.
+     */
+    defaultOn: boolean;
+
+    /**
      * Deregisters a function.
      *
      * @param name - The name of the function to deregister.
@@ -72,6 +62,11 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
      * @param type - The view type to deregister.
      */
     deregisterView(type: string): void;
+
+    /**
+     * The functions.
+     */
+    functions: BasesFunctions;
 
     /**
      * Gets a function.
@@ -102,6 +97,11 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
      * @returns The list of registered view type strings.
      */
     getViewTypes(): string[];
+
+    /**
+     * The handlers.
+     */
+    handlers: BasesHandlers;
 
     /**
      * On file menu.

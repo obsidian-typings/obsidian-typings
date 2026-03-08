@@ -8,45 +8,6 @@ declare module 'obsidian' {
      */
     interface MarkdownPreviewView extends MarkdownRenderer, MarkdownSubView, MarkdownPreviewEvents {
         /**
-         * The container element of the markdown preview view.
-         *
-         * @official
-         */
-        containerEl: HTMLElement;
-
-        /**
-         * Unique identifier for the rendered element.
-         *
-         * @unofficial
-         */
-        docId: string;
-
-        /**
-         * HTML renderer for the Markdown.
-         *
-         * @unofficial
-         */
-        renderer: ReadViewRenderer;
-
-        /**
-         * Search instance for in-document search, or `null` if inactive.
-         * @unofficial
-         */
-        search: null | unknown;
-
-        /**
-         * The subview type identifier (e.g. 'preview').
-         * @unofficial
-         */
-        type: 'preview' | string;
-
-        /**
-         * The parent MarkdownView containing this preview.
-         * @unofficial
-         */
-        view: MarkdownView;
-
-        /**
          * Apply fold information to the preview.
          *
          * @param e - The fold information to apply.
@@ -85,6 +46,20 @@ declare module 'obsidian' {
          * @official
          */
         clear(): void;
+
+        /**
+         * The container element of the markdown preview view.
+         *
+         * @official
+         */
+        containerEl: HTMLElement;
+
+        /**
+         * Unique identifier for the rendered element.
+         *
+         * @unofficial
+         */
+        docId: string;
 
         /**
          * Switch to edit mode for the given element or selection.
@@ -189,6 +164,13 @@ declare module 'obsidian' {
         onScroll(): unknown;
 
         /**
+         * HTML renderer for the Markdown.
+         *
+         * @unofficial
+         */
+        renderer: ReadViewRenderer;
+
+        /**
          * Request an update of rendered links in the preview.
          *
          * @returns The result of the link update request.
@@ -207,6 +189,12 @@ declare module 'obsidian' {
          * @official
          */
         rerender(full?: boolean): void;
+
+        /**
+         * Search instance for in-document search, or `null` if inactive.
+         * @unofficial
+         */
+        search: null | unknown;
 
         /**
          * Set the markdown content of the markdown preview view.
@@ -245,6 +233,12 @@ declare module 'obsidian' {
         showSearch(): unknown;
 
         /**
+         * The subview type identifier (e.g. 'preview').
+         * @unofficial
+         */
+        type: 'preview' | string;
+
+        /**
          * Unfold all folded sections in the preview.
          *
          * @returns The result of unfolding all sections.
@@ -259,5 +253,11 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateOptions(): unknown;
+
+        /**
+         * The parent MarkdownView containing this preview.
+         * @unofficial
+         */
+        view: MarkdownView;
     }
 }

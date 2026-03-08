@@ -7,9 +7,6 @@
  * @unofficial
  */
 export interface MapOfSets<Key, Value> {
-    /** Internal map storing key-to-set mappings. */
-    data: Map<Key, Set<Value>>;
-
     /**
      * Add a value to the set associated with the given key.
      *
@@ -17,6 +14,9 @@ export interface MapOfSets<Key, Value> {
      * @param value - The value to add.
      */
     add(key: Key, value: Value): void;
+
+    /** Internal map storing key-to-set mappings. */
+    data: Map<Key, Set<Value>>;
 
     /**
      * Remove a value from the set associated with the given key.

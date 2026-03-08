@@ -63,6 +63,40 @@ declare global {
         activeWindow: Window;
 
         /**
+         * Sends an AJAX request.
+         *
+         * @param options - The options for the AJAX request.
+         * @example
+         * ```ts
+         * ajax({
+         *     url: 'https://example.com',
+         *     success: (response) => {
+         *         console.log(response);
+         *     },
+         *     error: (error) => {
+         *         console.error(error);
+         *     }
+         * });
+         * ```
+         * @official
+         */
+        ajax(options: AjaxOptions): void;
+
+        /**
+         * Sends an AJAX request and returns a promise.
+         *
+         * @param options - The options for the AJAX request.
+         * @returns A promise that resolves to the response.
+         * @example
+         * ```ts
+         * const response = await ajaxPromise({ url: 'https://example.com' });
+         * console.log(response);
+         * ```
+         * @official
+         */
+        ajaxPromise(options: AjaxOptions): Promise<any>;
+
+        /**
          * Global reference to the app.
          *
          * @unofficial
@@ -136,212 +170,6 @@ declare global {
          * @unofficial
          */
         CodeMirrorAdapter: CodeMirrorAdapterEx;
-
-        /**
-         * DOMPurify is a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG.
-         *
-         * @unofficial
-         */
-        DOMPurify: typeof DOMPurify;
-
-        /**
-         * Minified reference to `Object.propertyIsEnumerable`.
-         * @unofficial
-         */
-        El: typeof Object.propertyIsEnumerable;
-
-        /**
-         * Electron module for desktop platform APIs.
-         * @unofficial
-         */
-        electron: typeof electron;
-
-        /**
-         * Electron BrowserWindow instance for the current window.
-         * @unofficial
-         */
-        electronWindow: ElectronWindow;
-
-        /**
-         * DOM elements and helpers for the app frame/window chrome.
-         * @unofficial
-         */
-        frameDom: FrameDom;
-
-        /**
-         * Constructor for the Capacitor file system adapter.
-         *
-         * @unofficial
-         */
-        FS: CapacitorAdapterFsConstructor;
-
-        /**
-         * Global i18next internationalization framework instance.
-         * @unofficial
-         */
-        i18next: typeof i18next;
-
-        /**
-         * MathJax instance for rendering mathematical notation.
-         * @unofficial
-         */
-        MathJax?: MathJax;
-
-        /**
-         * Mermaid library instance for rendering diagrams and charts.
-         * @unofficial
-         */
-        mermaid?: Mermaid;
-
-        /**
-         * Parse, validate, manipulate, and display dates in javascript.
-         *
-         * @unofficial
-         *
-         * Commented out because the global variable is already declared in the `moment` package.
-         */
-        moment: typeof moment;
-
-        /**
-         * Minified reference to `Object.getOwnPropertySymbols`.
-         * @unofficial
-         */
-        mr: typeof Object.getOwnPropertySymbols;
-
-        /**
-         * Notification component. Use to present timely, high-value information.
-         *
-         * @unofficial
-         */
-        Notice: typeof Notice;
-
-        /**
-         * Invoke obsidian protocol action.
-         *
-         * @unofficial
-         */
-        OBS_ACT: ObsidianProtocolHandler;
-
-        /**
-         * Default internationalization strings bundled with Obsidian.
-         * @unofficial
-         */
-        OBSIDIAN_DEFAULT_I18N: Localization;
-
-        /**
-         * PDF.js library for parsing and rendering PDF documents.
-         * @unofficial
-         */
-        pdfjsLib?: typeof pdfjsLib;
-
-        /**
-         * Testing utilities for PDF.js.
-         * @unofficial
-         */
-        pdfjsTestingUtils: PdfJsTestingUtils;
-
-        /**
-         * PixiJS library for 2D rendering (used for canvas views).
-         * @unofficial
-         */
-        PIXI: typeof PIXI;
-
-        /**
-         * Prism.js syntax highlighting library instance.
-         * @unofficial
-         */
-        Prism?: typeof Prism;
-
-        /**
-         * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
-         *
-         * Returns the text value of the response.
-         * @unofficial
-         */
-        request: typeof request;
-
-        /**
-         * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
-         *
-         * @unofficial
-         */
-        requestUrl: typeof requestUrl;
-
-        /**
-         * Scrypt key derivation function library for password-based encryption.
-         * @unofficial
-         */
-        scrypt: typeof scrypt;
-
-        /**
-         * Minified reference to `Object.defineProperties`.
-         * @unofficial
-         */
-        Sf: typeof Object.defineProperties;
-
-        /**
-         * Temporary reference to the WebSQL database `changeVersion` method.
-         * @unofficial
-         */
-        temp1: Database['changeVersion'];
-
-        /**
-         * The style of the window title bar (e.g., "hidden", "default").
-         * @unofficial
-         */
-        titlebarStyle: string;
-
-        /**
-         * TurndownService for converting HTML to Markdown.
-         * @unofficial
-         */
-        TurndownService: typeof TurndownService;
-
-        /**
-         * Electron WebView tag for embedding external web content.
-         * @unofficial
-         */
-        WebView: electron.WebviewTag;
-
-        /**
-         * Minified reference to `Object.defineProperty`.
-         * @unofficial
-         */
-        wf: typeof Object.defineProperty;
-
-        /**
-         * Sends an AJAX request.
-         *
-         * @param options - The options for the AJAX request.
-         * @example
-         * ```ts
-         * ajax({
-         *     url: 'https://example.com',
-         *     success: (response) => {
-         *         console.log(response);
-         *     },
-         *     error: (error) => {
-         *         console.error(error);
-         *     }
-         * });
-         * ```
-         * @official
-         */
-        ajax(options: AjaxOptions): void;
-
-        /**
-         * Sends an AJAX request and returns a promise.
-         *
-         * @param options - The options for the AJAX request.
-         * @returns A promise that resolves to the response.
-         * @example
-         * ```ts
-         * const response = await ajaxPromise({ url: 'https://example.com' });
-         * console.log(response);
-         * ```
-         * @official
-         */
-        ajaxPromise(options: AjaxOptions): Promise<any>;
 
         /**
          * Creates a new `<div>` element.
@@ -434,6 +262,31 @@ declare global {
         ): SVGElementTagNameMap[K];
 
         /**
+         * DOMPurify is a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG.
+         *
+         * @unofficial
+         */
+        DOMPurify: typeof DOMPurify;
+
+        /**
+         * Minified reference to `Object.propertyIsEnumerable`.
+         * @unofficial
+         */
+        El: typeof Object.propertyIsEnumerable;
+
+        /**
+         * Electron module for desktop platform APIs.
+         * @unofficial
+         */
+        electron: typeof electron;
+
+        /**
+         * Electron BrowserWindow instance for the current window.
+         * @unofficial
+         */
+        electronWindow: ElectronWindow;
+
+        /**
          * Finds the first element that matches the selector.
          *
          * @param selector - The selector to find the element with.
@@ -467,10 +320,29 @@ declare global {
         fishAll(selector: string): HTMLElement[];
 
         /**
+         * DOM elements and helpers for the app frame/window chrome.
+         * @unofficial
+         */
+        frameDom: FrameDom;
+
+        /**
+         * Constructor for the Capacitor file system adapter.
+         *
+         * @unofficial
+         */
+        FS: CapacitorAdapterFsConstructor;
+
+        /**
          * Apply global DOM enhancements and polyfills used by Obsidian.
          * @unofficial
          */
         globalEnhance(): void;
+
+        /**
+         * Global i18next internationalization framework instance.
+         * @unofficial
+         */
+        i18next: typeof i18next;
 
         /**
          * vim.js based on https://github.com/codemirror/CodeMirror/commit/793c9e65e09ec7fba3f4f5aaf366b3d36e1a709e (2021-12-04)
@@ -543,6 +415,18 @@ declare global {
         li(target: object, source: object): object;
 
         /**
+         * MathJax instance for rendering mathematical notation.
+         * @unofficial
+         */
+        MathJax?: MathJax;
+
+        /**
+         * Mermaid library instance for rendering diagrams and charts.
+         * @unofficial
+         */
+        mermaid?: Mermaid;
+
+        /**
          * Minified helper to omit specified properties from an object.
          *
          * @param target - The source object to omit properties from.
@@ -551,6 +435,21 @@ declare global {
          * @unofficial
          */
         mo(target: object, propertyNames: string[]): object;
+
+        /**
+         * Parse, validate, manipulate, and display dates in javascript.
+         *
+         * @unofficial
+         *
+         * Commented out because the global variable is already declared in the `moment` package.
+         */
+        moment: typeof moment;
+
+        /**
+         * Minified reference to `Object.getOwnPropertySymbols`.
+         * @unofficial
+         */
+        mr: typeof Object.getOwnPropertySymbols;
 
         /**
          * Waits for the next frame.
@@ -563,6 +462,26 @@ declare global {
          * @official
          */
         nextFrame(): Promise<void>;
+
+        /**
+         * Notification component. Use to present timely, high-value information.
+         *
+         * @unofficial
+         */
+        Notice: typeof Notice;
+
+        /**
+         * Invoke obsidian protocol action.
+         *
+         * @unofficial
+         */
+        OBS_ACT: ObsidianProtocolHandler;
+
+        /**
+         * Default internationalization strings bundled with Obsidian.
+         * @unofficial
+         */
+        OBSIDIAN_DEFAULT_I18N: Localization;
 
         /**
          * Open or create a WebSQL database.
@@ -584,6 +503,30 @@ declare global {
         ): Database;
 
         /**
+         * PDF.js library for parsing and rendering PDF documents.
+         * @unofficial
+         */
+        pdfjsLib?: typeof pdfjsLib;
+
+        /**
+         * Testing utilities for PDF.js.
+         * @unofficial
+         */
+        pdfjsTestingUtils: PdfJsTestingUtils;
+
+        /**
+         * PixiJS library for 2D rendering (used for canvas views).
+         * @unofficial
+         */
+        PIXI: typeof PIXI;
+
+        /**
+         * Prism.js syntax highlighting library instance.
+         * @unofficial
+         */
+        Prism?: typeof Prism;
+
+        /**
          * Executes a function when the DOM is ready.
          *
          * @param fn - The function to execute when the DOM is ready.
@@ -597,11 +540,38 @@ declare global {
         ready(fn: () => any): void;
 
         /**
+         * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
+         *
+         * Returns the text value of the response.
+         * @unofficial
+         */
+        request: typeof request;
+
+        /**
+         * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
+         *
+         * @unofficial
+         */
+        requestUrl: typeof requestUrl;
+
+        /**
+         * Scrypt key derivation function library for password-based encryption.
+         * @unofficial
+         */
+        scrypt: typeof scrypt;
+
+        /**
          * Select a language file location.
          *
          * @unofficial
          */
         selectLanguageFileLocation(): void;
+
+        /**
+         * Minified reference to `Object.defineProperties`.
+         * @unofficial
+         */
+        Sf: typeof Object.defineProperties;
 
         /**
          * Sleeps for a given number of milliseconds.
@@ -627,6 +597,18 @@ declare global {
         St(target: object, source: object | undefined): object;
 
         /**
+         * Temporary reference to the WebSQL database `changeVersion` method.
+         * @unofficial
+         */
+        temp1: Database['changeVersion'];
+
+        /**
+         * The style of the window title bar (e.g., "hidden", "default").
+         * @unofficial
+         */
+        titlebarStyle: string;
+
+        /**
          * Minified helper to set a property on an object.
          *
          * @param target - The object to set the property on.
@@ -636,5 +618,23 @@ declare global {
          * @unofficial
          */
         Tl(target: object, propertyName: string, propertyValue: unknown): unknown;
+
+        /**
+         * TurndownService for converting HTML to Markdown.
+         * @unofficial
+         */
+        TurndownService: typeof TurndownService;
+
+        /**
+         * Electron WebView tag for embedding external web content.
+         * @unofficial
+         */
+        WebView: electron.WebviewTag;
+
+        /**
+         * Minified reference to `Object.defineProperty`.
+         * @unofficial
+         */
+        wf: typeof Object.defineProperty;
     }
 }

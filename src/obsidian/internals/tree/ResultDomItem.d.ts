@@ -40,39 +40,15 @@ export interface ResultDomItem extends TreeNode {
     /** The file associated with this search result. */
     file: TFile;
 
-    /** Layout information used by virtual scrolling. */
-    info: TreeNodeInfo;
-
-    /** Callback for custom match rendering, or `null` if not set. */
-    onMatchRender: null;
-
-    /** Parent result DOM container. */
-    parent: ResultDom;
-
-    /** Reference to the parent result DOM container. */
-    parentDom: ResultDom;
-
-    /** Spacer element used to maintain correct scroll height. */
-    pusherEl: HTMLDivElement;
-
-    /** Search result data containing match positions. */
-    result: ResultDomResult;
-
-    /** Whether matches are displayed as separate items. */
-    separateMatches: boolean;
-
-    /** Whether the file title is shown above matches. */
-    showTitle: boolean;
-
-    /** Virtual children manager for match child items. */
-    vChildren: TreeNodeVChildren<ResultDomItem, ResultDomItemChild>;
-
     /**
      * Get additional context positions surrounding a match.
      *
      * @returns The extra context positions.
      */
     getMatchExtraPositions(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
+
+    /** Layout information used by virtual scrolling. */
+    info: TreeNodeInfo;
 
     /**
      * Mark this result item as needing re-render.
@@ -87,6 +63,9 @@ export interface ResultDomItem extends TreeNode {
      * @returns The result of the click handler.
      */
     onCollapseClick(arg1: unknown): unknown;
+
+    /** Callback for custom match rendering, or `null` if not set. */
+    onMatchRender: null;
 
     /**
      * Handle click on a search result to navigate to it.
@@ -109,8 +88,23 @@ export interface ResultDomItem extends TreeNode {
      */
     onResultMouseover(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
+    /** Parent result DOM container. */
+    parent: ResultDom;
+
+    /** Reference to the parent result DOM container. */
+    parentDom: ResultDom;
+
+    /** Spacer element used to maintain correct scroll height. */
+    pusherEl: HTMLDivElement;
+
     /** Render the content matches for this result item. */
     renderContentMatches(): void;
+
+    /** Search result data containing match positions. */
+    result: ResultDomResult;
+
+    /** Whether matches are displayed as separate items. */
+    separateMatches: boolean;
 
     /**
      * Set the collapsed state of this result item.
@@ -132,4 +126,10 @@ export interface ResultDomItem extends TreeNode {
      * @returns The result of setting extra context.
      */
     setExtraContext(arg1: unknown): unknown;
+
+    /** Whether the file title is shown above matches. */
+    showTitle: boolean;
+
+    /** Virtual children manager for match child items. */
+    vChildren: TreeNodeVChildren<ResultDomItem, ResultDomItemChild>;
 }

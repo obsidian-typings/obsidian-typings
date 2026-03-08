@@ -14,27 +14,19 @@ declare module 'obsidian' {
         app: App;
 
         /**
-         * The hover popover of the markdown renderer.
-         *
-         * @official
-         */
-        hoverPopover: HoverPopover | null;
-
-        /**
-         * The file path associated with this renderer.
-         *
-         * @returns The file path.
-         * @unofficial
-         */
-        get path(): unknown;
-
-        /**
          * The file of the markdown renderer.
          *
          * @official
          * @deprecated - Added only for typing purposes. Use {@link file} instead.
          */
         file__?(): TFile;
+
+        /**
+         * The hover popover of the markdown renderer.
+         *
+         * @official
+         */
+        hoverPopover: HoverPopover | null;
 
         /**
          * Handle a checkbox click event in the rendered markdown.
@@ -85,6 +77,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         onScroll(): unknown;
+
+        /**
+         * The file path associated with this renderer.
+         *
+         * @returns The file path.
+         * @unofficial
+         */
+        get path(): unknown;
 
         /**
          * Apply post-processing to the rendered markdown output.

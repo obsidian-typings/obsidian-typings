@@ -8,21 +8,6 @@ import type { BasesQuery } from './BasesQuery.d.ts';
  */
 export interface BasesProperty {
     /**
-     * The property ID.
-     */
-    propertyId: string;
-
-    /**
-     * The query.
-     */
-    query: BasesQuery;
-
-    /**
-     * The unrecognized data.
-     */
-    unrecognizedData: object;
-
-    /**
      * Gets the display name.
      *
      * @returns The display name.
@@ -38,6 +23,16 @@ export interface BasesProperty {
     migrateDisplayName(getDisplayName: string): string;
 
     /**
+     * The property ID.
+     */
+    propertyId: string;
+
+    /**
+     * The query.
+     */
+    query: BasesQuery;
+
+    /**
      * Serializes the property.
      *
      * @returns The serialized property data.
@@ -50,4 +45,9 @@ export interface BasesProperty {
      * @param displayName - The display name to set.
      */
     setDisplayName(displayName: string): void;
+
+    /**
+     * The unrecognized data.
+     */
+    unrecognizedData: object;
 }

@@ -7,20 +7,20 @@ declare module 'obsidian' {
      */
     interface MomentFormatComponent extends TextComponent {
         /**
-         * The HTML element that represents the sample value.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        sampleEl: HTMLElement;
-
-        /**
          * Called when the value of the component changes.
          *
          * @official
          * @since 0.9.7
          */
         onChanged(): void;
+
+        /**
+         * The HTML element that represents the sample value.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        sampleEl: HTMLElement;
 
         /**
          * Sets the default format when input is cleared. Also used for placeholder.

@@ -6,15 +6,6 @@
  * @unofficial
  */
 export interface ItemQueueItems<T> {
-    /** Number of items in the queue. */
-    length: number;
-
-    /** Index offset for the next dequeue operation. */
-    offset: number;
-
-    /** Internal array holding queued items. */
-    queue: T[];
-
     /** Remove all items from the queue. */
     clear(): void;
 
@@ -53,12 +44,21 @@ export interface ItemQueueItems<T> {
      */
     isEmpty(): boolean;
 
+    /** Number of items in the queue. */
+    length: number;
+
+    /** Index offset for the next dequeue operation. */
+    offset: number;
+
     /**
      * Return the next item without removing it.
      *
      * @returns The next item, or `undefined` if empty.
      */
     peek(): T | undefined;
+
+    /** Internal array holding queued items. */
+    queue: T[];
 
     /**
      * Remove a specific item from the queue.

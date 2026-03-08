@@ -1,4 +1,4 @@
-import type { ViewType } from '../../implementations/constants/ViewType.ts';
+import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 import type { BacklinkViewConstructor } from '../internal-plugins/backlink/BacklinkViewConstructor.d.ts';
 import type { BasesViewConstructor } from '../internal-plugins/bases/BasesViewConstructor.d.ts';
 import type { TableViewConstructor } from '../internal-plugins/bases/TableViewConstructor.d.ts';

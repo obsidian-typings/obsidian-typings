@@ -11,19 +11,6 @@ import type { MarkdownBaseView } from './MarkdownBaseView.d.ts';
  */
 export interface EditorSuggests {
     /**
-     * Currently active and rendered editor suggestion popup.
-     */
-    currentSuggest: null | EditorSuggest<unknown>;
-
-    /**
-     * Registered editor suggestions.
-     *
-     * @remark Used for providing autocompletions for specific strings.
-     * @tutorial Reference official documentation under EditorSuggest<T> for usage.
-     */
-    suggests: EditorSuggest<unknown>[];
-
-    /**
      * Add a new editor suggestion to the list of registered suggestion providers.
      *
      * @param suggest - Suggestion provider to add.
@@ -34,6 +21,11 @@ export interface EditorSuggests {
      * Close the currently active editor suggestion popup.
      */
     close(): void;
+
+    /**
+     * Currently active and rendered editor suggestion popup.
+     */
+    currentSuggest: null | EditorSuggest<unknown>;
 
     /**
      * Whether there is a editor suggestion popup active and visible.
@@ -60,6 +52,14 @@ export interface EditorSuggests {
      * @param suggest - Suggestion provider to activate.
      */
     setCurrentSuggest(suggest: EditorSuggest<unknown>): void;
+
+    /**
+     * Registered editor suggestions.
+     *
+     * @remark Used for providing autocompletions for specific strings.
+     * @tutorial Reference official documentation under EditorSuggest<T> for usage.
+     */
+    suggests: EditorSuggest<unknown>[];
 
     /**
      * Run check on focused editor to see whether a suggestion should be triggered and rendered.

@@ -15,16 +15,6 @@ export interface PropertyWidget<ComponentType extends PropertyWidgetComponentBas
     icon: string;
 
     /**
-     * Reserved keys for the widget.
-     */
-    reservedKeys?: string[];
-
-    /**
-     * Identifier for the widget.
-     */
-    type: string;
-
-    /**
      * Returns the I18N name of the widget.
      *
      * @returns The localized name of the widget.
@@ -40,6 +30,16 @@ export interface PropertyWidget<ComponentType extends PropertyWidgetComponentBas
      * @returns The rendered widget component.
      */
     render(containerEl: HTMLElement, data: unknown, context: PropertyRenderContext): ComponentType;
+
+    /**
+     * Reserved keys for the widget.
+     */
+    reservedKeys?: string[];
+
+    /**
+     * Identifier for the widget.
+     */
+    type: string;
 
     /**
      * Validate whether the input value to the widget is correct.

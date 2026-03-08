@@ -6,24 +6,6 @@ declare global {
      */
     interface Node {
         /**
-         * Global window object.
-         * @official
-         */
-        constructorWin: Window;
-
-        /**
-         * The document this node belongs to, or the global document.
-         * @official
-         */
-        doc: Document;
-
-        /**
-         * The window object this node belongs to, or the global window.
-         * @official
-         */
-        win: Window;
-
-        /**
          * Appends a text node to the node.
          *
          * @param val - The text to append.
@@ -37,6 +19,12 @@ declare global {
          * @official
          */
         appendText(val: string): void;
+
+        /**
+         * Global window object.
+         * @official
+         */
+        constructorWin: Window;
 
         /**
          * Creates a new `<div>` element.
@@ -128,6 +116,12 @@ declare global {
         detach(): void;
 
         /**
+         * The document this node belongs to, or the global document.
+         * @official
+         */
+        doc: Document;
+
+        /**
          * Empties the node.
          *
          * @example
@@ -208,5 +202,11 @@ declare global {
          * @official
          */
         setChildrenInPlace(children: Node[]): void;
+
+        /**
+         * The window object this node belongs to, or the global window.
+         * @official
+         */
+        win: Window;
     }
 }

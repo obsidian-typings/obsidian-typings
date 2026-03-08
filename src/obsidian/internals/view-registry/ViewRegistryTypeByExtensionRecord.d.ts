@@ -1,5 +1,5 @@
-import type { FileExtension } from '../../implementations/constants/FileExtension.ts';
-import type { ViewType } from '../../implementations/constants/ViewType.ts';
+import type { FileExtension } from '../../implementations/constants/FileExtension.d.ts';
+import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 
 /**
  * Record mapping file extensions to their default view types.

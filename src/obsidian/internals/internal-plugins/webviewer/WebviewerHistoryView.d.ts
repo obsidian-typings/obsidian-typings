@@ -1,5 +1,5 @@
 import type { ItemView } from 'obsidian';
-import type { ViewType } from '../../../implementations/constants/ViewType.ts';
+import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 
 /**
  * View that displays the web browser browsing history.

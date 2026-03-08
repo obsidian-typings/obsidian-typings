@@ -14,12 +14,6 @@ export interface MultitextPropertyWidgetComponent extends PropertyWidgetComponen
     /** The multiselect component for the property widget. */
     multiselect: Multiselect;
 
-    /** The type of the property widget. */
-    type: 'multitext';
-
-    /** The values of the property widget. */
-    valueSet: Set<string>;
-
     /**
      * Handle focus event.
      *
@@ -33,4 +27,10 @@ export interface MultitextPropertyWidgetComponent extends PropertyWidgetComponen
      * @param value - The value to set.
      */
     setValue(value: unknown): void;
+
+    /** The type of the property widget. */
+    type: 'multitext';
+
+    /** The values of the property widget. */
+    valueSet: Set<string>;
 }

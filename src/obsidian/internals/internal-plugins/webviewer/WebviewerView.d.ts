@@ -1,5 +1,5 @@
 import type { ItemView } from 'obsidian';
-import type { ViewType } from '../../../implementations/constants/ViewType.ts';
+import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 
 /**
  * View that renders an embedded web browser for browsing web pages within Obsidian.

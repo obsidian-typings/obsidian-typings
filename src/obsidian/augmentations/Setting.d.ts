@@ -7,54 +7,6 @@ declare module 'obsidian' {
      */
     interface Setting {
         /**
-         * The components for the setting.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        components: BaseComponent[];
-
-        /**
-         * The HTML element for the control.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        controlEl: HTMLElement;
-
-        /**
-         * The HTML element for the description.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        descEl: HTMLElement;
-
-        /**
-         * The HTML element for the info.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        infoEl: HTMLElement;
-
-        /**
-         * The HTML element for the name.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        nameEl: HTMLElement;
-
-        /**
-         * The HTML element for the setting.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        settingEl: HTMLElement;
-
-        /**
          * Add a button to the setting.
          *
          * @param cb - The callback to add the button.
@@ -256,6 +208,14 @@ declare module 'obsidian' {
         clear(): this;
 
         /**
+         * The components for the setting.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        components: BaseComponent[];
+
+        /**
          * Create a new setting.
          *
          * @param containerEl - The container element.
@@ -264,6 +224,38 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
         constructor__(containerEl: HTMLElement): this;
+
+        /**
+         * The HTML element for the control.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        controlEl: HTMLElement;
+
+        /**
+         * The HTML element for the description.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        descEl: HTMLElement;
+
+        /**
+         * The HTML element for the info.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        infoEl: HTMLElement;
+
+        /**
+         * The HTML element for the name.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        nameEl: HTMLElement;
 
         /**
          * Set the class of the setting.
@@ -345,6 +337,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         setNoInfo(): this;
+
+        /**
+         * The HTML element for the setting.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        settingEl: HTMLElement;
 
         /**
          * Set the tooltip of the setting.

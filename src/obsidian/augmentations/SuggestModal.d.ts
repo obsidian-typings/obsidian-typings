@@ -22,6 +22,16 @@ declare module 'obsidian' {
         clearButtonEl: HTMLDivElement;
 
         /**
+         * Create a suggest modal.
+         *
+         * @param app - The Obsidian app instance .
+         * @returns The suggest modal instance.
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         */
+        constructor__(app: App): this;
+
+        /**
          * Call-to-action element displayed in the modal.
          * @unofficial
          */
@@ -34,50 +44,6 @@ declare module 'obsidian' {
          * @since 0.9.20
          */
         emptyStateText: string;
-
-        /**
-         * The input element.
-         *
-         * @official
-         */
-        inputEl: HTMLInputElement;
-
-        /**
-         * Element displaying keyboard shortcut instructions.
-         * @unofficial
-         */
-        instructionsEl: HTMLDivElement;
-
-        /**
-         * Whether the suggest modal is currently open.
-         * @unofficial
-         */
-        isOpen: boolean;
-
-        /**
-         * The limit of the number of suggestions.
-         *
-         * @official
-         */
-        limit: number;
-
-        /**
-         * The result container element.
-         *
-         * @official
-         * @since 0.9.20
-         */
-        resultContainerEl: HTMLElement;
-
-        /**
-         * Create a suggest modal.
-         *
-         * @param app - The Obsidian app instance .
-         * @returns The suggest modal instance.
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
-         */
-        constructor__(app: App): this;
 
         /**
          * Get the suggestions.
@@ -105,6 +71,32 @@ declare module 'obsidian' {
          * @since 1.5.7
          */
         getSuggestions__(query: string): T[] | Promise<T[]>;
+
+        /**
+         * The input element.
+         *
+         * @official
+         */
+        inputEl: HTMLInputElement;
+
+        /**
+         * Element displaying keyboard shortcut instructions.
+         * @unofficial
+         */
+        instructionsEl: HTMLDivElement;
+
+        /**
+         * Whether the suggest modal is currently open.
+         * @unofficial
+         */
+        isOpen: boolean;
+
+        /**
+         * The limit of the number of suggestions.
+         *
+         * @official
+         */
+        limit: number;
 
         /**
          * Choose a suggestion.
@@ -157,6 +149,14 @@ declare module 'obsidian' {
          * @since 1.5.7
          */
         renderSuggestion__(value: T, el: HTMLElement): void;
+
+        /**
+         * The result container element.
+         *
+         * @official
+         * @since 0.9.20
+         */
+        resultContainerEl: HTMLElement;
 
         /**
          * Select the active suggestion.

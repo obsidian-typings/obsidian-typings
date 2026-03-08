@@ -23,41 +23,6 @@ export interface Plugins {
     autoCheckForUpdates: boolean;
 
     /**
-     * Set of enabled plugin IDs.
-     *
-     * @remark The plugin ids aren't guaranteed to be either active (in `app.plugins.plugins`) or installed (in `app.plugins.manifests`).
-     */
-    enabledPlugins: Set<string>;
-
-    /** Timestamp of the last update check. */
-    lastUpdateCheck: number;
-
-    /**
-     * Plugin ID that is currently being enabled.
-     */
-    loadingPluginId: string | null;
-
-    /**
-     * Manifests of all the plugins that are installed.
-     */
-    manifests: PluginsManifestsRecord;
-
-    /**
-     * Mapping of plugin ID to active plugin instance.
-     *
-     * @remark Prefer usage of getPlugin to access a plugin.
-     */
-    plugins: PluginsPluginsRecord;
-
-    /** Debounced function to save the plugin configuration. */
-    requestSaveConfig: Debouncer<[], Promise<void>>;
-
-    /**
-     * Mapping of plugin ID to available updates.
-     */
-    updates: Map<string, PluginUpdateManifest>;
-
-    /**
      * Check online list for deprecated plugins to automatically disable.
      *
      * @returns A promise that resolves when the deprecation check is complete.
@@ -86,6 +51,13 @@ export interface Plugins {
      * @returns A promise that resolves when the plugin is disabled and the config is saved.
      */
     disablePluginAndSave(id: string): Promise<void>;
+
+    /**
+     * Set of enabled plugin IDs.
+     *
+     * @remark The plugin ids aren't guaranteed to be either active (in `app.plugins.plugins`) or installed (in `app.plugins.manifests`).
+     */
+    enabledPlugins: Set<string>;
 
     /**
      * Enable a plugin by ID.
@@ -150,6 +122,14 @@ export interface Plugins {
      */
     isEnabled(): boolean;
 
+    /** Timestamp of the last update check. */
+    lastUpdateCheck: number;
+
+    /**
+     * Plugin ID that is currently being enabled.
+     */
+    loadingPluginId: string | null;
+
     /**
      * Load a specific plugin's manifest by its folder path.
      *
@@ -174,11 +154,26 @@ export interface Plugins {
     loadPlugin(id: string): Promise<Plugin>;
 
     /**
+     * Manifests of all the plugins that are installed.
+     */
+    manifests: PluginsManifestsRecord;
+
+    /**
      * Handle raw file system change events for plugin config files.
      *
      * @param e - The raw file system change event.
      */
     onRaw(e: unknown): void;
+
+    /**
+     * Mapping of plugin ID to active plugin instance.
+     *
+     * @remark Prefer usage of getPlugin to access a plugin.
+     */
+    plugins: PluginsPluginsRecord;
+
+    /** Debounced function to save the plugin configuration. */
+    requestSaveConfig: Debouncer<[], Promise<void>>;
 
     /**
      * - Save current plugin configs.
@@ -213,4 +208,9 @@ export interface Plugins {
      * @returns A promise that resolves when the plugin is unloaded.
      */
     unloadPlugin(id: string): Promise<void>;
+
+    /**
+     * Mapping of plugin ID to available updates.
+     */
+    updates: Map<string, PluginUpdateManifest>;
 }

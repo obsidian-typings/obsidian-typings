@@ -25,6 +25,14 @@ declare module 'obsidian' {
         children: WorkspaceTabs[];
 
         /**
+         * Collapse the sidedock.
+         *
+         * @official
+         * @since 0.12.11
+         */
+        collapse(): void;
+
+        /**
          * Whether the sidedock is collapsed.
          *
          * @official
@@ -45,50 +53,18 @@ declare module 'obsidian' {
         emptyStateEl: HTMLDivElement;
 
         /**
-         * Whether the sidedock is currently being resized.
-         * @unofficial
-         */
-        isResizing: boolean;
-
-        /**
-         * Original sizes of children before a resize operation.
-         * @unofficial
-         */
-        originalSizes: null;
-
-        /**
-         * Starting position of the current resize operation.
-         * @unofficial
-         */
-        resizeStartPos: null;
-
-        /**
-         * Which side of the workspace this sidedock is on (e.g. 'left' or 'right').
-         * @unofficial
-         */
-        side: string;
-
-        /**
-         * Width of the sidedock in pixels.
-         * @unofficial
-         */
-        size: number;
-
-        /**
-         * Collapse the sidedock.
-         *
-         * @official
-         * @since 0.12.11
-         */
-        collapse(): void;
-
-        /**
          * Expand the sidedock.
          *
          * @official
          * @since 0.12.11
          */
         expand(): void;
+
+        /**
+         * Whether the sidedock is currently being resized.
+         * @unofficial
+         */
+        isResizing: boolean;
 
         /**
          * Handle the start of a sidedock resize operation.
@@ -99,10 +75,22 @@ declare module 'obsidian' {
         onSidedockResizeStart(evt: MouseEvent): void;
 
         /**
+         * Original sizes of children before a resize operation.
+         * @unofficial
+         */
+        originalSizes: null;
+
+        /**
          * Recalculate the dimensions of child tab groups.
          * @unofficial
          */
         recomputeChildrenDimensions(): void;
+
+        /**
+         * Starting position of the current resize operation.
+         * @unofficial
+         */
+        resizeStartPos: null;
 
         /**
          * Serialize the sidedock state for persistence.
@@ -119,6 +107,18 @@ declare module 'obsidian' {
          * @unofficial
          */
         setSize(size: number): void;
+
+        /**
+         * Which side of the workspace this sidedock is on (e.g. 'left' or 'right').
+         * @unofficial
+         */
+        side: string;
+
+        /**
+         * Width of the sidedock in pixels.
+         * @unofficial
+         */
+        size: number;
 
         /**
          * Toggle the sidedock.

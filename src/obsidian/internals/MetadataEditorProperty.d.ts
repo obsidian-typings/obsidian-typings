@@ -30,46 +30,6 @@ export interface MetadataEditorProperty extends Component {
     entry: PropertyEntryData<unknown>;
 
     /**
-     * Icon element of the property.
-     */
-    iconEl: HTMLSpanElement;
-
-    /**
-     * Key value of the property.
-     */
-    keyEl: HTMLElement;
-
-    /**
-     * Input field for key value of the property.
-     */
-    keyInputEl: HTMLInputElement;
-
-    /**
-     * Metadata editor the property is attached to.
-     */
-    metadataEditor: MetadataEditor;
-
-    /**
-     * Widget that handles user input for this property widget type.
-     */
-    rendered: MetadataWidget | null;
-
-    /**
-     * Info about the inferred and expected property widget given key-value pair.
-     */
-    typeInfo: TypeInfo;
-
-    /**
-     * Element that contains the value input or widget.
-     */
-    valueEl: HTMLElement;
-
-    /**
-     * Element containing the displayed warning on malformed property field.
-     */
-    warningEl: HTMLElement;
-
-    /**
      * Focus on the key input element.
      */
     focusKey(): void;
@@ -114,9 +74,34 @@ export interface MetadataEditorProperty extends Component {
     handleUpdateValue(value: unknown): void;
 
     /**
+     * Icon element of the property.
+     */
+    iconEl: HTMLSpanElement;
+
+    /**
+     * Key value of the property.
+     */
+    keyEl: HTMLElement;
+
+    /**
+     * Input field for key value of the property.
+     */
+    keyInputEl: HTMLInputElement;
+
+    /**
+     * Metadata editor the property is attached to.
+     */
+    metadataEditor: MetadataEditor;
+
+    /**
      * Loads as draggable property element.
      */
     onload(): void;
+
+    /**
+     * Widget that handles user input for this property widget type.
+     */
+    rendered: MetadataWidget | null;
 
     /**
      * Render property widget based on type.
@@ -140,4 +125,19 @@ export interface MetadataEditorProperty extends Component {
      * @param event - The mouse event.
      */
     showPropertyMenu(event: MouseEvent): void;
+
+    /**
+     * Info about the inferred and expected property widget given key-value pair.
+     */
+    typeInfo: TypeInfo;
+
+    /**
+     * Element that contains the value input or widget.
+     */
+    valueEl: HTMLElement;
+
+    /**
+     * Element containing the displayed warning on malformed property field.
+     */
+    warningEl: HTMLElement;
 }

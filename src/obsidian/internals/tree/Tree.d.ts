@@ -26,9 +26,28 @@ export interface Tree<T extends TreeItem> {
     app: App;
 
     /**
+     * Change the focused item to the next item in specified direction.
+     *
+     * @param direction - The direction to move focus.
+     */
+    changeFocusedItem(direction: 'forwards' | 'backwards'): void;
+
+    /**
+     * Unselect all selected items in the tree view.
+     */
+    clearSelectedDoms(): void;
+
+    /**
      * Container element of the tree view.
      */
     containerEl: HTMLElement;
+
+    /**
+     * Mark tree item as deselected.
+     *
+     * @param node - The tree item to deselect.
+     */
+    deselectItem(node: T): void;
 
     /**
      * Currently focused item in tree view.
@@ -36,9 +55,40 @@ export interface Tree<T extends TreeItem> {
     focusedItem: T | null;
 
     /**
+     * Get the local storage key for the saved tree view folds.
+     *
+     * @returns The local storage key string.
+     */
+    getFoldKey(): string;
+
+    /**
+     * Gets the ID of a tree item given its Node.
+     *
+     * @param node - The tree item to get the ID for.
+     * @returns The node ID, or `undefined` if not found.
+     */
+    getNodeId(node: T): string | undefined;
+
+    /**
      * Handle collapsing of all nodes.
      */
     handleCollapseAll: () => void;
+
+    /**
+     * Handle deletion of selected nodes.
+     *
+     * @param event - The keyboard event that triggered the deletion.
+     * @returns A promise that resolves when the selected items are deleted.
+     */
+    handleDeleteSelectedItems(event: KeyboardEvent): Promise<void>;
+
+    /**
+     * Handle selection of tree item via keyboard event.
+     *
+     * @param event - The mouse event that triggered the selection.
+     * @param node - The tree item being selected.
+     */
+    handleItemSelection(event: MouseEvent, node: T): void;
 
     /**
      * Handle renaming of focused item.
@@ -58,96 +108,14 @@ export interface Tree<T extends TreeItem> {
     infinityScroll: InfinityScroll;
 
     /**
-     * Whether all items in the tree are collapsed.
-     */
-    isAllCollapsed: boolean;
-
-    /**
-     * Whether tree items should default to collapsed state.
-     */
-    prefersCollapsed: boolean;
-
-    /**
-     * Request saving of the current fold states.
-     */
-    requestSaveFolds: () => void;
-
-    /**
-     * Key scope for tree view.
-     */
-    scope: Scope;
-
-    /**
-     * Currently selected items in tree view.
-     */
-    selectedDoms: Set<T>;
-
-    /**
-     * The view the tree is associated with.
-     */
-    view: View;
-
-    /**
-     * Root item of the tree view.
-     *
-     * @returns The root tree item.
-     */
-    get root(): TreeRoot<T>;
-
-    /**
-     * Change the focused item to the next item in specified direction.
-     *
-     * @param direction - The direction to move focus.
-     */
-    changeFocusedItem(direction: 'forwards' | 'backwards'): void;
-
-    /**
-     * Unselect all selected items in the tree view.
-     */
-    clearSelectedDoms(): void;
-
-    /**
-     * Mark tree item as deselected.
-     *
-     * @param node - The tree item to deselect.
-     */
-    deselectItem(node: T): void;
-
-    /**
-     * Get the local storage key for the saved tree view folds.
-     *
-     * @returns The local storage key string.
-     */
-    getFoldKey(): string;
-
-    /**
-     * Gets the ID of a tree item given its Node.
-     *
-     * @param node - The tree item to get the ID for.
-     * @returns The node ID, or `undefined` if not found.
-     */
-    getNodeId(node: T): string | undefined;
-
-    /**
-     * Handle deletion of selected nodes.
-     *
-     * @param event - The keyboard event that triggered the deletion.
-     * @returns A promise that resolves when the selected items are deleted.
-     */
-    handleDeleteSelectedItems(event: KeyboardEvent): Promise<void>;
-
-    /**
-     * Handle selection of tree item via keyboard event.
-     *
-     * @param event - The mouse event that triggered the selection.
-     * @param node - The tree item being selected.
-     */
-    handleItemSelection(event: MouseEvent, node: T): void;
-
-    /**
      * Registers all keyboard actions to the tree view keyscope.
      */
     initializeKeyboardNav(): void;
+
+    /**
+     * Whether all items in the tree are collapsed.
+     */
+    isAllCollapsed: boolean;
 
     /**
      * Check whether item is a valid tree item.
@@ -203,9 +171,36 @@ export interface Tree<T extends TreeItem> {
     onResize(): void;
 
     /**
+     * Whether tree items should default to collapsed state.
+     */
+    prefersCollapsed: boolean;
+
+    /**
+     * Request saving of the current fold states.
+     */
+    requestSaveFolds: () => void;
+
+    /**
+     * Root item of the tree view.
+     *
+     * @returns The root tree item.
+     */
+    get root(): TreeRoot<T>;
+
+    /**
      * Save the current fold states of the tree view to local storage.
      */
     saveFolds(): void;
+
+    /**
+     * Key scope for tree view.
+     */
+    scope: Scope;
+
+    /**
+     * Currently selected items in tree view.
+     */
+    selectedDoms: Set<T>;
 
     /**
      * Mark tree item as selected.
@@ -233,4 +228,9 @@ export interface Tree<T extends TreeItem> {
      * (Un)Collapse all items in the tree view.
      */
     toggleCollapseAll(): void;
+
+    /**
+     * The view the tree is associated with.
+     */
+    view: View;
 }

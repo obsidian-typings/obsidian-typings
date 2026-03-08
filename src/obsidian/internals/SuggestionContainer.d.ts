@@ -12,45 +12,6 @@ import type {
  */
 export interface SuggestionContainer<T> {
     /**
-     * Which suggestions should be picked from.
-     */
-    chooser: EditorSuggest<T>;
-
-    /**
-     * Pop-up element that displays the suggestions.
-     */
-    containerEl: HTMLElement;
-
-    /**
-     * The currently focused item.
-     */
-    selectedItem: number;
-
-    /**
-     * List of all possible suggestions as elements.
-     */
-    suggestions: HTMLElement[];
-
-    /**
-     * List of all possible suggestions as data.
-     */
-    values: SearchResult[];
-
-    /**
-     * Amount of suggestions that can be displayed at once within containerEl.
-     *
-     * @returns The number of visible items.
-     */
-    get numVisibleItems(): number;
-
-    /**
-     * Height in pixels of the selected item.
-     *
-     * @returns The row height in pixels.
-     */
-    get rowHeight(): number;
-
-    /**
      * Add an empty message with provided text.
      *
      * @param text - Message text to display.
@@ -64,6 +25,16 @@ export interface SuggestionContainer<T> {
      * @param suggestion - Suggestion to add.
      */
     addSuggestion(suggestion: SearchResult): void;
+
+    /**
+     * Which suggestions should be picked from.
+     */
+    chooser: EditorSuggest<T>;
+
+    /**
+     * Pop-up element that displays the suggestions.
+     */
+    containerEl: HTMLElement;
 
     /**
      * Set selected item to one specified by index, if keyboard navigation, force scroll into view.
@@ -105,6 +76,13 @@ export interface SuggestionContainer<T> {
     moveUp(event: KeyboardEvent): boolean;
 
     /**
+     * Amount of suggestions that can be displayed at once within containerEl.
+     *
+     * @returns The number of visible items.
+     */
+    get numVisibleItems(): number;
+
+    /**
      * Process click on suggestion item.
      *
      * @param event - The mouse event.
@@ -138,6 +116,18 @@ export interface SuggestionContainer<T> {
     pageUp(event: KeyboardEvent): boolean;
 
     /**
+     * Height in pixels of the selected item.
+     *
+     * @returns The row height in pixels.
+     */
+    get rowHeight(): number;
+
+    /**
+     * The currently focused item.
+     */
+    selectedItem: number;
+
+    /**
      * Set selected item to one specified by index, invokes forceSetSelectedItem.
      *
      * @param index - Index of the item to select.
@@ -153,10 +143,20 @@ export interface SuggestionContainer<T> {
     setSuggestions(suggestions: SearchResult[]): void;
 
     /**
+     * List of all possible suggestions as elements.
+     */
+    suggestions: HTMLElement[];
+
+    /**
      * Use currently selected suggestion as the accepted one.
      *
      * @param event - The triggering event.
      * @returns Whether a suggestion was accepted.
      */
     useSelectedItem(event: Event): boolean;
+
+    /**
+     * List of all possible suggestions as data.
+     */
+    values: SearchResult[];
 }

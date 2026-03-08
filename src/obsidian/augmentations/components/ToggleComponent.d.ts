@@ -7,14 +7,6 @@ declare module 'obsidian' {
      */
     interface ToggleComponent extends ValueComponent<boolean> {
         /**
-         * The HTML element that represents the toggle.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        toggleEl: HTMLElement;
-
-        /**
          * The function that's called after changing the value of the component.
          *
          * @remark Using `ToggleComponent.onChange(callback)` assigns the callback to this method.
@@ -104,5 +96,13 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         setValue(on: boolean): this;
+
+        /**
+         * The HTML element that represents the toggle.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        toggleEl: HTMLElement;
     }
 }

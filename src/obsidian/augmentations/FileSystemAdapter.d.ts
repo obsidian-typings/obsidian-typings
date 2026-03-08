@@ -16,67 +16,6 @@ declare module 'obsidian' {
      */
     interface FileSystemAdapter extends DataAdapter {
         /**
-         * Handler for retrieving and setting birth time (creation time) of files.
-         * @unofficial
-         */
-        btime: Btime;
-
-        /**
-         * Reference to node fs module.
-         *
-         * @unofficial
-         */
-        fs: typeof fs;
-
-        /**
-         * Reference to node fs:promises module.
-         *
-         * @unofficial
-         */
-        fsPromises: typeof fsPromises;
-
-        /**
-         * Reference to electron ipcRenderer module.
-         *
-         * @unofficial
-         */
-        ipcRenderer?: IpcRenderer;
-
-        /**
-         * Kill last action.
-         *
-         * @unofficial
-         */
-        killLastAction: null | ((e: Error) => void);
-
-        /**
-         * Reference to node path module.
-         *
-         * @unofficial
-         */
-        path: typeof path;
-
-        /**
-         * Reference to node URL module.
-         *
-         * @unofficial
-         */
-        url: typeof URL;
-
-        /**
-         * Seems to always be `null` and unused.
-         *
-         * @unofficial
-         */
-        watcher: null;
-
-        /**
-         * Record of active file system watchers by path.
-         * @unofficial
-         */
-        watchers: DataAdapterWatchersRecord;
-
-        /**
          * Appends data to a file.
          *
          * @param normalizedPath - The path to append.
@@ -118,6 +57,12 @@ declare module 'obsidian' {
         applyWriteOptions(normalizedPath: string, options: DataWriteOptions): Promise<void>;
 
         /**
+         * Handler for retrieving and setting birth time (creation time) of files.
+         * @unofficial
+         */
+        btime: Btime;
+
+        /**
          * Copies a file.
          *
          * @param normalizedPath - The path to copy.
@@ -154,6 +99,20 @@ declare module 'obsidian' {
          * @official
          */
         exists(normalizedPath: string, sensitive?: boolean): Promise<boolean>;
+
+        /**
+         * Reference to node fs module.
+         *
+         * @unofficial
+         */
+        fs: typeof fs;
+
+        /**
+         * Reference to node fs:promises module.
+         *
+         * @unofficial
+         */
+        fsPromises: typeof fsPromises;
 
         /**
          * Get the absolute path to the vault.
@@ -212,11 +171,25 @@ declare module 'obsidian' {
         getResourcePath(normalizedPath: string): string;
 
         /**
+         * Reference to electron ipcRenderer module.
+         *
+         * @unofficial
+         */
+        ipcRenderer?: IpcRenderer;
+
+        /**
          * Kill file system action due to timeout.
          *
          * @unofficial
          */
         kill(): void;
+
+        /**
+         * Kill last action.
+         *
+         * @unofficial
+         */
+        killLastAction: null | ((e: Error) => void);
 
         /**
          * Lists all files and folders inside a folder.
@@ -261,6 +234,13 @@ declare module 'obsidian' {
          * @official
          */
         mkdir(normalizedPath: string): Promise<void>;
+
+        /**
+         * Reference to node path module.
+         *
+         * @unofficial
+         */
+        path: typeof path;
 
         /**
          * Atomically read, modify, and save the contents of a plaintext file.
@@ -432,6 +412,26 @@ declare module 'obsidian' {
          * @official
          */
         trashSystem(normalizedPath: string): Promise<boolean>;
+
+        /**
+         * Reference to node URL module.
+         *
+         * @unofficial
+         */
+        url: typeof URL;
+
+        /**
+         * Seems to always be `null` and unused.
+         *
+         * @unofficial
+         */
+        watcher: null;
+
+        /**
+         * Record of active file system watchers by path.
+         * @unofficial
+         */
+        watchers: DataAdapterWatchersRecord;
 
         /**
          * Watch recursively for changes.

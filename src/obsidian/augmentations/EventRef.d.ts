@@ -20,18 +20,18 @@ declare module 'obsidian' {
         e: Events;
 
         /**
-         * Event name the event was registered on.
-         *
-         * @unofficial
-         */
-        name: string;
-
-        /**
          * Function to be called on event trigger on the events object.
          *
          * @param arg - The event arguments.
          * @unofficial
          */
         fn(...arg: unknown[]): void;
+
+        /**
+         * Event name the event was registered on.
+         *
+         * @unofficial
+         */
+        name: string;
     }
 }

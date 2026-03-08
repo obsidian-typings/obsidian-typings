@@ -12,6 +12,13 @@ import type { CommandsEditorCommandsRecord } from './CommandsEditorCommandsRecor
  */
 export interface Commands {
     /**
+     * Add a command to the command registry.
+     *
+     * @param command - Command to add.
+     */
+    addCommand(command: Command): void;
+
+    /**
      * Reference to App.
      */
     app: App;
@@ -30,13 +37,6 @@ export interface Commands {
      * @example `editor:fold-all` or `command-palette:open`.
      */
     editorCommands: CommandsEditorCommandsRecord;
-
-    /**
-     * Add a command to the command registry.
-     *
-     * @param command - Command to add.
-     */
-    addCommand(command: Command): void;
 
     /**
      * Execute a command by reference.

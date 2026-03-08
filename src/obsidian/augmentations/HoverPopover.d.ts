@@ -7,20 +7,6 @@ declare module 'obsidian' {
      */
     interface HoverPopover extends Component {
         /**
-         * The HTML element representation of the hover popover.
-         *
-         * @official
-         */
-        hoverEl: HTMLElement;
-
-        /**
-         * The state of the hover popover.
-         *
-         * @official
-         */
-        state: PopoverState;
-
-        /**
          * Create a new hover popover.
          *
          * @param parent - The parent of the hover popover.
@@ -36,6 +22,20 @@ declare module 'obsidian' {
             waitTime?: number,
             staticPos?: Point | null
         ): void;
+
+        /**
+         * The HTML element representation of the hover popover.
+         *
+         * @official
+         */
+        hoverEl: HTMLElement;
+
+        /**
+         * The state of the hover popover.
+         *
+         * @official
+         */
+        state: PopoverState;
 
         /**
          * Start observing the popover element for size changes.

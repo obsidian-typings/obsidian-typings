@@ -12,9 +12,6 @@ export interface EventsEntry {
     /** Events object this handler is registered on. */
     e: Events;
 
-    /** Event name this handler listens for. */
-    name: string;
-
     /**
      * Event handler callback function.
      *
@@ -22,4 +19,7 @@ export interface EventsEntry {
      * @returns The result of the event handler.
      */
     fn(...data: unknown[]): unknown;
+
+    /** Event name this handler listens for. */
+    name: string;
 }

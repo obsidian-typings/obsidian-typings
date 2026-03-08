@@ -16,16 +16,6 @@ import type { ViewRegistryViewByTypeRecord } from './ViewRegistryViewByTypeRecor
  */
 export interface ViewRegistry extends Events {
     /**
-     * Mapping of file extensions to view type.
-     */
-    typeByExtension: ViewRegistryTypeByExtensionRecord;
-
-    /**
-     * Mapping of view type to view constructor.
-     */
-    viewByType: ViewRegistryViewByTypeRecord;
-
-    /**
      * Get the view type associated with a file extension.
      *
      * @param extension - File extension.
@@ -113,6 +103,11 @@ export interface ViewRegistry extends Events {
     registerViewWithExtensions(extensions: string[], type: string, viewCreator: ViewCreator): void;
 
     /**
+     * Mapping of file extensions to view type.
+     */
+    typeByExtension: ViewRegistryTypeByExtensionRecord;
+
+    /**
      * Unregister extensions for a view type.
      *
      * @param extension - The file extensions to unregister.
@@ -125,4 +120,9 @@ export interface ViewRegistry extends Events {
      * @param type - The view type identifier to unregister.
      */
     unregisterView(type: string): void;
+
+    /**
+     * Mapping of view type to view constructor.
+     */
+    viewByType: ViewRegistryViewByTypeRecord;
 }

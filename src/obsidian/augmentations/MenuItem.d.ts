@@ -6,6 +6,13 @@ declare module 'obsidian' {
      */
     interface MenuItem {
         /**
+         * The callback that is executed when the menu item is clicked.
+         *
+         * @unofficial
+         */
+        callback?(): void;
+
+        /**
          * Whether the menu item is checked.
          *
          * @unofficial
@@ -18,6 +25,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         checkIconEl?: HTMLElement;
+
+        /**
+         * Private constructor. Use {@link Menu.addItem} instead.
+         *
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         */
+        constructor__?(): this;
 
         /**
          * Whether the menu item is disabled.
@@ -34,6 +49,14 @@ declare module 'obsidian' {
         dom: HTMLElement;
 
         /**
+         * Executes the callback of the onClick event (if not disabled).
+         *
+         * @param e - Mouse or keyboard event.
+         * @unofficial
+         */
+        handleEvent(e: MouseEvent | KeyboardEvent): void;
+
+        /**
          * Icon element of the menu item.
          *
          * @unofficial
@@ -46,50 +69,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         menu: Menu;
-
-        /**
-         * The section the item belongs to.
-         *
-         * @unofficial
-         */
-        section: string;
-
-        /**
-         * The submenu that is attached to the item.
-         *
-         * @unofficial
-         */
-        submenu: Menu | null;
-
-        /**
-         * Title of the menu item.
-         *
-         * @unofficial
-         */
-        titleEl: HTMLElement;
-
-        /**
-         * The callback that is executed when the menu item is clicked.
-         *
-         * @unofficial
-         */
-        callback?(): void;
-
-        /**
-         * Private constructor. Use {@link Menu.addItem} instead.
-         *
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
-         */
-        constructor__?(): this;
-
-        /**
-         * Executes the callback of the onClick event (if not disabled).
-         *
-         * @param e - Mouse or keyboard event.
-         * @unofficial
-         */
-        handleEvent(e: MouseEvent | KeyboardEvent): void;
 
         /**
          * Set the callback function to be called when the menu item is clicked.
@@ -112,6 +91,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         removeIcon(): void;
+
+        /**
+         * The section the item belongs to.
+         *
+         * @unofficial
+         */
+        section: string;
 
         /**
          * Calls `setChecked`, prefer usage of that function instead.
@@ -228,5 +214,19 @@ declare module 'obsidian' {
          * @since 0.15.0
          */
         setWarning(warning: boolean): this;
+
+        /**
+         * The submenu that is attached to the item.
+         *
+         * @unofficial
+         */
+        submenu: Menu | null;
+
+        /**
+         * Title of the menu item.
+         *
+         * @unofficial
+         */
+        titleEl: HTMLElement;
     }
 }

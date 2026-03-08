@@ -12,15 +12,15 @@ export interface TreeItem extends TreeNode {
     /** Inner container element holding the tree item content. */
     innerEl: HTMLElement;
 
-    /** The main element representing this tree item in the DOM. */
-    selfEl: HTMLElement;
-
     /**
      * Execute item functionality on clicking tree item.
      *
      * @param event - The mouse click event.
      */
     onSelfClick(event: MouseEvent): void;
+
+    /** The main element representing this tree item in the DOM. */
+    selfEl: HTMLElement;
 
     /**
      * Set clickable state of tree item.

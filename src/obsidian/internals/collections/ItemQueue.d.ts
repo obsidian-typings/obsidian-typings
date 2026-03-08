@@ -9,15 +9,6 @@ import type { ItemQueueItems } from './ItemQueueItems.d.ts';
  * @unofficial
  */
 export interface ItemQueue<T> {
-    /** Backing storage for the queue items. */
-    items: ItemQueueItems<T>;
-
-    /** Promise resolvers for awaiting the next item. */
-    promise: PromiseWithResolvers<T> | null;
-
-    /** Runnable controlling the queue's start/stop lifecycle. */
-    runnable: Runnable;
-
     /**
      * Add a single item to the queue.
      *
@@ -45,8 +36,14 @@ export interface ItemQueue<T> {
      */
     generator(): AsyncGenerator<T>;
 
+    /** Backing storage for the queue items. */
+    items: ItemQueueItems<T>;
+
     /** Notify the queue that a new item is available for consumption. */
     notify(): void;
+
+    /** Promise resolvers for awaiting the next item. */
+    promise: PromiseWithResolvers<T> | null;
 
     /**
      * Remove a specific item from the queue.
@@ -54,4 +51,7 @@ export interface ItemQueue<T> {
      * @param item - Item to remove.
      */
     remove(item: T): void;
+
+    /** Runnable controlling the queue's start/stop lifecycle. */
+    runnable: Runnable;
 }

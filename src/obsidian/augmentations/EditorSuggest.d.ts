@@ -9,23 +9,6 @@ declare module 'obsidian' {
      */
     interface EditorSuggest<T> extends PopoverSuggest<T> {
         /**
-         * Current suggestion context, containing the result of `onTrigger`.
-         * This will be `null` any time the `EditorSuggest` is not supposed to run.
-         *
-         * @official
-         * @since 0.12.17
-         */
-        context: EditorSuggestContext | null;
-
-        /**
-         * Override this to use a different limit for suggestion items.
-         *
-         * @official
-         * @since 0.12.17
-         */
-        limit: number;
-
-        /**
          * Create a new EditorSuggest.
          *
          * @param app - The app instance.
@@ -34,6 +17,15 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
         constructor__(app: App): this;
+
+        /**
+         * Current suggestion context, containing the result of `onTrigger`.
+         * This will be `null` any time the `EditorSuggest` is not supposed to run.
+         *
+         * @official
+         * @since 0.12.17
+         */
+        context: EditorSuggestContext | null;
 
         /**
          * Generate suggestion items based on this context. Can be async, but preferably sync.
@@ -62,6 +54,14 @@ declare module 'obsidian' {
          * @since 0.12.17
          */
         getSuggestions__(context: EditorSuggestContext): T[] | Promise<T[]>;
+
+        /**
+         * Override this to use a different limit for suggestion items.
+         *
+         * @official
+         * @since 0.12.17
+         */
+        limit: number;
 
         /**
          * Based on the editor line and cursor position, determine if this EditorSuggest should be triggered at this moment.

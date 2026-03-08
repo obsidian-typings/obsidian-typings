@@ -18,14 +18,6 @@ declare module 'obsidian' {
         entries: BasesEntry[];
 
         /**
-         * The value of the groupBy key for this entry group.
-         *
-         * @official
-         * @since 1.10.0
-         */
-        key?: Value;
-
-        /**
          * Whether this entry group has a non-null key.
          *
          * @returns `true` iff this entry group has a non-null key.
@@ -33,5 +25,13 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         hasKey(): boolean;
+
+        /**
+         * The value of the groupBy key for this entry group.
+         *
+         * @official
+         * @since 1.10.0
+         */
+        key?: Value;
     }
 }

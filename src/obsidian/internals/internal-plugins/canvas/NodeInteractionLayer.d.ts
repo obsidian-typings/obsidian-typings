@@ -12,9 +12,6 @@ export interface NodeInteractionLayer {
     /** HTML element used for rendering interaction handles. */
     interactionEl: HTMLDivElement;
 
-    /** Currently targeted node for interaction, or `null` if none. */
-    target: null;
-
     /**
      * Render the interaction handles for the current target node.
      *
@@ -28,4 +25,7 @@ export interface NodeInteractionLayer {
      * @returns The result of setting the target.
      */
     setTarget(arg1: unknown): unknown;
+
+    /** Currently targeted node for interaction, or `null` if none. */
+    target: null;
 }

@@ -4,30 +4,6 @@
  * @unofficial
  */
 export interface InfinityScroll {
-    /** Current visible height of the scroll container. */
-    height: number;
-
-    /** Last recorded scroll position. */
-    lastScroll: number;
-
-    /** Queued computation task, or `null` if none is pending. */
-    queued: unknown | null;
-
-    /** Number of items to render per block. */
-    renderBlockSize: number;
-
-    /** Root element of the virtual scroll container. */
-    rootEl: unknown;
-
-    /** Scrollable element that handles scroll events. */
-    scrollEl: HTMLElement;
-
-    /** Whether the width should be explicitly set on items. */
-    setWidth: boolean;
-
-    /** Current visible width of the scroll container. */
-    width: number;
-
     /**
      * Internal method to perform layout calculations.
      *
@@ -78,6 +54,9 @@ export interface InfinityScroll {
      */
     getRootTop(): unknown;
 
+    /** Current visible height of the scroll container. */
+    height: number;
+
     /**
      * Invalidate the cached layout for specific items.
      *
@@ -93,6 +72,9 @@ export interface InfinityScroll {
      * @returns The invalidation result.
      */
     invalidateAll(): unknown;
+
+    /** Last recorded scroll position. */
+    lastScroll: number;
 
     /**
      * Measure dimensions for the given elements.
@@ -124,6 +106,18 @@ export interface InfinityScroll {
      */
     queueCompute(): unknown;
 
+    /** Queued computation task, or `null` if none is pending. */
+    queued: unknown | null;
+
+    /** Number of items to render per block. */
+    renderBlockSize: number;
+
+    /** Root element of the virtual scroll container. */
+    rootEl: unknown;
+
+    /** Scrollable element that handles scroll events. */
+    scrollEl: HTMLElement;
+
     /**
      * Scroll the container to bring the specified element into view.
      *
@@ -132,6 +126,9 @@ export interface InfinityScroll {
      * @returns The scroll result.
      */
     scrollIntoView(x: unknown, y: unknown): unknown;
+
+    /** Whether the width should be explicitly set on items. */
+    setWidth: boolean;
 
     /**
      * Update the virtual scroll state with new parameters.
@@ -153,4 +150,7 @@ export interface InfinityScroll {
      * @returns The display update result.
      */
     updateVirtualDisplay(x: unknown): unknown;
+
+    /** Current visible width of the scroll container. */
+    width: number;
 }

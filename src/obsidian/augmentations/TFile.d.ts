@@ -15,12 +15,32 @@ declare module 'obsidian' {
         basename: string;
 
         /**
+         * Caches file's content, that can be retrieved via `await app.vault.cachedRead(file)`.
+         *
+         * @param content The content to cache. If `null`, the cache is cleared.
+         * @unofficial
+         */
+        cache(content: string | null): void;
+
+        /**
          * The extension of the file.
          *
          * @official
          * @since 0.9.7
          */
         extension: string;
+
+        /**
+         * Gets the short name of the file.
+         *
+         * For `a/b/c.md`, it returns `c`.
+         *
+         * For `a/b/c.any-other-extension` it returns `c.any-other-extension`.
+         *
+         * @returns The short name of the file.
+         * @unofficial
+         */
+        getShortName(): string;
 
         /**
          * The name of the file (with extension).
@@ -43,26 +63,6 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         stat: FileStats;
-
-        /**
-         * Caches file's content, that can be retrieved via `await app.vault.cachedRead(file)`.
-         *
-         * @param content The content to cache. If `null`, the cache is cleared.
-         * @unofficial
-         */
-        cache(content: string | null): void;
-
-        /**
-         * Gets the short name of the file.
-         *
-         * For `a/b/c.md`, it returns `c`.
-         *
-         * For `a/b/c.any-other-extension` it returns `c.any-other-extension`.
-         *
-         * @returns The short name of the file.
-         * @unofficial
-         */
-        getShortName(): string;
 
         /**
          * Removes the file from the cache if its content length greater than `app.vault.cacheLimit`.

@@ -13,9 +13,6 @@ export interface GraphView extends ItemView {
     /** Graph engine powering the global graph simulation. */
     dataEngine: GraphEngine;
 
-    /** Renderer responsible for drawing the global graph. */
-    renderer: GraphRenderer;
-
     /**
      * Get the current view type.
      *
@@ -27,6 +24,9 @@ export interface GraphView extends ItemView {
      * Updates the options from the plugin when changed in view.
      */
     onOptionsChange(): void;
+
+    /** Renderer responsible for drawing the global graph. */
+    renderer: GraphRenderer;
 
     /**
      * Renders the graph.

@@ -6,13 +6,6 @@ declare module 'obsidian' {
      */
     interface MarkdownRenderChild extends Component {
         /**
-         * The container element of the markdown render child.
-         *
-         * @official
-         */
-        containerEl: HTMLElement;
-
-        /**
          * Create a new markdown render child.
          *
          * @param containerEl - This HTMLElement will be used to test whether this component is still alive.
@@ -24,5 +17,12 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
         constructor__(containerEl: HTMLElement): this;
+
+        /**
+         * The container element of the markdown render child.
+         *
+         * @official
+         */
+        containerEl: HTMLElement;
     }
 }

@@ -21,9 +21,6 @@ export interface AliasesPropertyWidgetComponent extends PropertyWidgetComponentB
     /** The multiselect component for the property widget. */
     multiselect: Multiselect;
 
-    /** The type of the property widget. */
-    type: 'aliases';
-
     /**
      * Handle focus event.
      *
@@ -37,4 +34,7 @@ export interface AliasesPropertyWidgetComponent extends PropertyWidgetComponentB
      * @param value - The value to set.
      */
     setValue(value: unknown): void;
+
+    /** The type of the property widget. */
+    type: 'aliases';
 }

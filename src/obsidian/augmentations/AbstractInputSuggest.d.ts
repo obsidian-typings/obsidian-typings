@@ -10,26 +10,6 @@ declare module 'obsidian' {
      */
     interface AbstractInputSuggest<T> extends PopoverSuggest<T> {
         /**
-         * The last bounding rectangle used for positioning the suggestion popover.
-         * @unofficial
-         */
-        lastRect: DOMRect;
-
-        /**
-         * Limit to the number of elements rendered at once. Set to 0 to disable. Defaults to 100.
-         *
-         * @official
-         * @since 1.4.10
-         */
-        limit: number;
-
-        /**
-         * The text input element this suggest is attached to.
-         * @unofficial
-         */
-        textInputEl: HTMLInputElement | HTMLDivElement;
-
-        /**
          * Automatically reposition the suggestion popover based on the input element.
          * @unofficial
          */
@@ -80,6 +60,20 @@ declare module 'obsidian' {
          * @since 1.4.10
          */
         getValue(): string;
+
+        /**
+         * The last bounding rectangle used for positioning the suggestion popover.
+         * @unofficial
+         */
+        lastRect: DOMRect;
+
+        /**
+         * Limit to the number of elements rendered at once. Set to 0 to disable. Defaults to 100.
+         *
+         * @official
+         * @since 1.4.10
+         */
+        limit: number;
 
         /**
          * Handle changes to the input element's value.
@@ -153,5 +147,11 @@ declare module 'obsidian' {
          * @unofficial
          */
         showSuggestions(suggestions: SearchResult[]): void;
+
+        /**
+         * The text input element this suggest is attached to.
+         * @unofficial
+         */
+        textInputEl: HTMLInputElement | HTMLDivElement;
     }
 }

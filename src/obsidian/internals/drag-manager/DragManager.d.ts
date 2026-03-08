@@ -20,36 +20,6 @@ export interface DragManager {
     /** Reference to the app. */
     app: App;
 
-    /** Currently active draggable item. */
-    draggable: Draggable | null;
-
-    /** Information about the initial drag start event. */
-    dragStart: DragStartEvent | null;
-
-    /** Ghost element shown while dragging. */
-    ghostEl: HTMLElement | null;
-
-    /** CSS class currently applied to the hover target. */
-    hoverClass: string;
-
-    /** Element currently being hovered over during drag. */
-    hoverEl: HTMLElement | null;
-
-    /** Whether the drag-over event has been handled by a drop target. */
-    isDragOverHandled: boolean;
-
-    /** Overlay element shown during drag operations to indicate drop zones. */
-    overlayEl: HTMLElement;
-
-    /** Whether the overlay should be hidden on the next update. */
-    shouldHideOverlay: boolean;
-
-    /** CSS class applied to the source elements during drag. */
-    sourceClass: string;
-
-    /** Elements from which the drag originated. */
-    sourceEls: HTMLElement[] | null;
-
     /**
      * Start a drag operation for a single file.
      *
@@ -80,6 +50,9 @@ export interface DragManager {
      */
     dragFolder(event: DragEvent, folder: TFolder, source?: unknown): Draggable;
 
+    /** Currently active draggable item. */
+    draggable: Draggable | null;
+
     /**
      * Start a drag operation for a link.
      *
@@ -91,6 +64,12 @@ export interface DragManager {
      * @returns The created draggable item.
      */
     dragLink(event: DragEvent, linkText: string, sourcePath: string, title?: string, source?: unknown): Draggable;
+
+    /** Information about the initial drag start event. */
+    dragStart: DragStartEvent | null;
+
+    /** Ghost element shown while dragging. */
+    ghostEl: HTMLElement | null;
 
     /**
      * Register an element as a drag source with a callback to produce a draggable.
@@ -115,6 +94,15 @@ export interface DragManager {
 
     /** Hide the drop zone overlay. */
     hideOverlay(): void;
+
+    /** CSS class currently applied to the hover target. */
+    hoverClass: string;
+
+    /** Element currently being hovered over during drag. */
+    hoverEl: HTMLElement | null;
+
+    /** Whether the drag-over event has been handled by a drop target. */
+    isDragOverHandled: boolean;
 
     /** Handle the end of a drag operation, cleaning up state. */
     onDragEnd(): void;
@@ -158,6 +146,9 @@ export interface DragManager {
      */
     onTouchEnd(event: TouchEvent): void;
 
+    /** Overlay element shown during drag operations to indicate drop zones. */
+    overlayEl: HTMLElement;
+
     /** Remove the drop zone overlay element from the DOM. */
     removeOverlay(): void;
 
@@ -168,6 +159,9 @@ export interface DragManager {
      */
     setAction(action: string | null): void;
 
+    /** Whether the overlay should be hidden on the next update. */
+    shouldHideOverlay: boolean;
+
     /**
      * Show the drop zone overlay at the specified position.
      *
@@ -175,6 +169,12 @@ export interface DragManager {
      * @param rect - Rectangle defining the overlay position.
      */
     showOverlay(doc: Document, rect: DOMRect): void;
+
+    /** CSS class applied to the source elements during drag. */
+    sourceClass: string;
+
+    /** Elements from which the drag originated. */
+    sourceEls: HTMLElement[] | null;
 
     /**
      * Update the hover target element and its CSS class.

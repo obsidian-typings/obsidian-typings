@@ -9,18 +9,6 @@ import type { WebviewerHistoryItem } from './WebviewerHistoryItem.d.ts';
  */
 export interface WebviewerDBStore {
     /**
-     * Reference to App.
-     */
-    app: App;
-
-    /**
-     * Underlying database used to store history items and fav icons via IndexedDB.
-     *
-     * @remark Use methods such as `addHistoryItem` etc. to interact with the stored history.
-     */
-    db: IDBDatabase;
-
-    /**
      * Add a history item to the database.
      *
      * @param url - The URL of the history item.
@@ -28,6 +16,11 @@ export interface WebviewerDBStore {
      * @returns A promise that resolves when the history item is added.
      */
     addHistoryItem(url: string, title?: string): Promise<void>;
+
+    /**
+     * Reference to App.
+     */
+    app: App;
 
     /**
      * Clear all history items.
@@ -42,6 +35,13 @@ export interface WebviewerDBStore {
      * @returns A promise that resolves when the connection is established.
      */
     connect(): Promise<void>;
+
+    /**
+     * Underlying database used to store history items and fav icons via IndexedDB.
+     *
+     * @remark Use methods such as `addHistoryItem` etc. to interact with the stored history.
+     */
+    db: IDBDatabase;
 
     /**
      * Get all history items.

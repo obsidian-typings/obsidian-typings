@@ -19,12 +19,6 @@ export interface DailyNotesPluginInstance extends InternalPluginInstance<DailyNo
     /** Whether this plugin is enabled by default. */
     defaultOn: true;
 
-    /** Configuration options for daily notes. */
-    options: DailyNotesOptions;
-
-    /** Reference to the daily notes plugin registration. */
-    plugin: DailyNotesPlugin;
-
     /**
      * Get the date timestamp from the currently open file name, or `null` if not a daily note.
      *
@@ -84,4 +78,10 @@ export interface DailyNotesPluginInstance extends InternalPluginInstance<DailyNo
      * @returns A promise that resolves when the daily note is opened.
      */
     onOpenDailyNote(evt: Event): Promise<void>;
+
+    /** Configuration options for daily notes. */
+    options: DailyNotesOptions;
+
+    /** Reference to the daily notes plugin registration. */
+    plugin: DailyNotesPlugin;
 }

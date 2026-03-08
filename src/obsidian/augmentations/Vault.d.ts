@@ -21,65 +21,6 @@ declare module 'obsidian' {
         adapter: DataAdapter;
 
         /**
-         * Max size of the cache in bytes
-         *
-         * @unofficial
-         */
-        cacheLimit: number;
-
-        /**
-         * Object containing all config settings for the vault (editor, appearance, ... settings).
-         *
-         * @remark Prefer usage of `app.vault.getConfig(key)` to get settings, config does not contain settings that were not changed from their default value.
-         * @unofficial
-         */
-        config: AppVaultConfig;
-
-        /**
-         * Gets the path to the config folder.
-         * This value is typically `.obsidian` but it could be different.
-         *
-         * @official
-         * @since 0.11.1
-         */
-        configDir: string;
-
-        /**
-         * Timestamp of the last config change
-         *
-         * @unofficial
-         */
-        configTs: number;
-
-        /**
-         * Mapping of path to Obsidian folder or file structure
-         *
-         * @unofficial
-         */
-        fileMap: VaultFileMapRecord;
-
-        /**
-         * Listener for all events on the vault
-         *
-         * @unofficial
-         */
-        onChange: FileSystemWatchHandler;
-
-        /**
-         * Debounced function for saving config.
-         *
-         * @unofficial
-         */
-        requestSaveConfig: Debouncer<[], Promise<void>>;
-
-        /**
-         * The same TFolder object as `.fileMap["/"]`
-         *
-         * @unofficial
-         */
-        root: TFolder;
-
-        /**
          * Add file as child/parent to respective folders
          *
          * @param file - The file to add.
@@ -128,6 +69,13 @@ declare module 'obsidian' {
         cachedRead(file: TFile): Promise<string>;
 
         /**
+         * Max size of the cache in bytes
+         *
+         * @unofficial
+         */
+        cacheLimit: number;
+
+        /**
          * Check whether new file path is available
          *
          * @param file - The file to check.
@@ -145,6 +93,30 @@ declare module 'obsidian' {
          * @unofficial
          */
         checkPath(path: string): boolean;
+
+        /**
+         * Object containing all config settings for the vault (editor, appearance, ... settings).
+         *
+         * @remark Prefer usage of `app.vault.getConfig(key)` to get settings, config does not contain settings that were not changed from their default value.
+         * @unofficial
+         */
+        config: AppVaultConfig;
+
+        /**
+         * Gets the path to the config folder.
+         * This value is typically `.obsidian` but it could be different.
+         *
+         * @official
+         * @since 0.11.1
+         */
+        configDir: string;
+
+        /**
+         * Timestamp of the last config change
+         *
+         * @unofficial
+         */
+        configTs: number;
 
         /**
          * Create a copy of a file or folder.
@@ -234,6 +206,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         exists(path: string, isCaseSensitive?: boolean): Promise<boolean>;
+
+        /**
+         * Mapping of path to Obsidian folder or file structure
+         *
+         * @unofficial
+         */
+        fileMap: VaultFileMapRecord;
 
         /**
          * Generate and register files from an async generator.
@@ -560,6 +539,13 @@ declare module 'obsidian' {
         on(name: 'rename', callback: (file: TAbstractFile, oldPath: string) => any, ctx?: any): EventRef;
 
         /**
+         * Listener for all events on the vault
+         *
+         * @unofficial
+         */
+        onChange: FileSystemWatchHandler;
+
+        /**
          * Atomically read, modify, and save the contents of a note.
          *
          * @param file - The file to be read and modified.
@@ -663,6 +649,13 @@ declare module 'obsidian' {
         rename(file: TAbstractFile, newPath: string): Promise<void>;
 
         /**
+         * Debounced function for saving config.
+         *
+         * @unofficial
+         */
+        requestSaveConfig: Debouncer<[], Promise<void>>;
+
+        /**
          * Get the file by absolute path.
          *
          * @param path Path to file.
@@ -679,6 +672,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         resolveFileUrl(url: string): TAbstractFile | null;
+
+        /**
+         * The same TFolder object as `.fileMap["/"]`
+         *
+         * @unofficial
+         */
+        root: TFolder;
 
         /**
          * Save app and appearance configs to disk

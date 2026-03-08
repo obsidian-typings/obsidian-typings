@@ -25,6 +25,13 @@ export interface EmbeddedEditorView extends Component {
     containerEl: HTMLElement;
 
     /**
+     * Destroy edit component editor and save contents if specified.
+     *
+     * @param save - Whether to save before destroying.
+     */
+    destroyEditor(save?: boolean): void;
+
+    /**
      * Whether the view is currently saving.
      */
     dirty: boolean;
@@ -43,6 +50,13 @@ export interface EmbeddedEditorView extends Component {
     editMode?: IFramedMarkdownEditor | undefined;
 
     /**
+     * Get the preview editor, if exists.
+     *
+     * @returns The iframed markdown editor, or `null`.
+     */
+    get editor(): IFramedMarkdownEditor | null;
+
+    /**
      * Container in which the editor is embedded.
      */
     editorEl: HTMLElement;
@@ -53,69 +67,16 @@ export interface EmbeddedEditorView extends Component {
     file: null | TFile;
 
     /**
-     * Hover element container.
-     */
-    hoverPopover: null | HoverPopover;
-
-    /**
-     * Element containing the preview for the embedded markdown.
-     */
-    previewEl: HTMLElement;
-
-    /**
-     * Preview component of the view.
-     */
-    previewMode: MarkdownPreviewView;
-
-    /**
-     * Current state of the editor.
-     */
-    state: unknown;
-
-    /**
-     * Text contents being embedded.
-     */
-    text: string;
-
-    /**
-     * Whether the view renders contents using an iFrame.
-     */
-    useIframe: boolean;
-
-    /**
-     * Get the preview editor, if exists.
-     *
-     * @returns The iframed markdown editor, or `null`.
-     */
-    get editor(): IFramedMarkdownEditor | null;
-
-    /**
-     * Get the path to the file, if any file registered.
-     *
-     * @returns The file path.
-     */
-    get path(): string;
-
-    /**
-     * Get the scroll of the file renderer component.
-     *
-     * @returns The scroll position.
-     */
-    get scroll(): unknown;
-
-    /**
-     * Destroy edit component editor and save contents if specified.
-     *
-     * @param save - Whether to save before destroying.
-     */
-    destroyEditor(save?: boolean): void;
-
-    /**
      * Gets currently active mode (editMode returns 'source').
      *
      * @returns The current view mode.
      */
     getMode(): 'source' | 'preview';
+
+    /**
+     * Hover element container.
+     */
+    hoverPopover: null | HoverPopover;
 
     /**
      * On load of editor, show preview.
@@ -131,6 +92,23 @@ export interface EmbeddedEditorView extends Component {
      * On unload of editor, destroy editor and unset workspace activeEditor.
      */
     onunload(): void;
+
+    /**
+     * Get the path to the file, if any file registered.
+     *
+     * @returns The file path.
+     */
+    get path(): string;
+
+    /**
+     * Element containing the preview for the embedded markdown.
+     */
+    previewEl: HTMLElement;
+
+    /**
+     * Preview component of the view.
+     */
+    previewMode: MarkdownPreviewView;
 
     /**
      * Debounced save of contents.
@@ -149,6 +127,13 @@ export interface EmbeddedEditorView extends Component {
      * @param save - Whether to persist to disk.
      */
     save(data: string, save?: boolean): void;
+
+    /**
+     * Get the scroll of the file renderer component.
+     *
+     * @returns The scroll position.
+     */
+    get scroll(): unknown;
 
     /**
      * Set the state of the editor.
@@ -178,7 +163,22 @@ export interface EmbeddedEditorView extends Component {
     showSearch(replace?: boolean): void;
 
     /**
+     * Current state of the editor.
+     */
+    state: unknown;
+
+    /**
+     * Text contents being embedded.
+     */
+    text: string;
+
+    /**
      * Toggle between edit and preview mode.
      */
     toggleMode(): void;
+
+    /**
+     * Whether the view renders contents using an iFrame.
+     */
+    useIframe: boolean;
 }

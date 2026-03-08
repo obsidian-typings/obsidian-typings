@@ -22,69 +22,11 @@ export interface CustomCSS extends Component {
     app: App;
 
     /**
-     * Cache of CSS snippet filepath (relative to vault root) to CSS snippet contents.
-     */
-    csscache: Map<string, string>;
-
-    /**
-     * Set of enabled snippet, given by filenames.
-     */
-    enabledSnippets: Set<string>;
-
-    /**
-     * Contains references to Style elements containing custom CSS snippets.
-     */
-    extraStyleEls: HTMLStyleElement[];
-
-    /**
-     * List of theme names not fully updated to post v1.0.0 theme guidelines.
-     */
-    oldThemes: string[];
-
-    /** Queue for sequential CSS processing operations. */
-    queue: PromisedQueue;
-
-    /** Main style element for the active theme. */
-    styleEl: HTMLStyleElement;
-
-    /** Debounced function to reload CSS snippets. */
-    requestLoadSnippets: Debouncer<[], void>;
-
-    /** Debounced function to reload the active theme. */
-    requestLoadTheme: Debouncer<[], void>;
-
-    /** Debounced function to re-read available themes from disk. */
-    requestReadThemes: Debouncer<[], void>;
-
-    /**
-     * List of snippets detected by Obsidian, given by their filenames.
-     */
-    snippets: string[];
-
-    /**
-     * Currently active theme, given by its name.
-     *
-     * @remark is the default Obsidian theme.
-     */
-    theme: '' | string;
-
-    /**
-     * Mapping of theme names to their manifest.
-     */
-    themes: CustomCSSThemesRecord;
-
-    /** Record of available theme updates. */
-    updates: CustomCSSUpdatesRecord;
-
-    /**
      * Bound callback for handling raw file change events for a theme.
      *
      * @param themeName - Name of the theme.
      */
     boundRaw(themeName: string): void;
-
-    /** Check whether the current theme is dark mode. */
-    isDarkMode(): boolean;
 
     /**
      * Check whether a specific theme can be updated.
@@ -97,6 +39,11 @@ export interface CustomCSS extends Component {
      * Check all themes for updates.
      */
     checkForUpdates(): void;
+
+    /**
+     * Cache of CSS snippet filepath (relative to vault root) to CSS snippet contents.
+     */
+    csscache: Map<string, string>;
 
     /**
      * Disable translucency of application background.
@@ -112,9 +59,19 @@ export interface CustomCSS extends Component {
     downloadLegacyTheme(options: DownloadLegacyThemeOptions): Promise<string>;
 
     /**
+     * Set of enabled snippet, given by filenames.
+     */
+    enabledSnippets: Set<string>;
+
+    /**
      * Enable translucency of application background.
      */
     enableTranslucency(): void;
+
+    /**
+     * Contains references to Style elements containing custom CSS snippets.
+     */
+    extraStyleEls: HTMLStyleElement[];
 
     /**
      * Fetch a theme's manifest using repository URL.
@@ -181,6 +138,9 @@ export interface CustomCSS extends Component {
      */
     installTheme(options: InstallThemeOptions, version: string): Promise<void>;
 
+    /** Check whether the current theme is dark mode. */
+    isDarkMode(): boolean;
+
     /**
      * Check whether a specific theme is installed by theme name.
      *
@@ -188,9 +148,6 @@ export interface CustomCSS extends Component {
      * @returns Whether the theme is installed.
      */
     isThemeInstalled(themeName: string): boolean;
-
-    /** Reload the active theme CSS. */
-    reloadTheme(): void;
 
     /**
      * Load and apply CSS from the given source.
@@ -220,6 +177,11 @@ export interface CustomCSS extends Component {
      */
     loadTheme(arg1: unknown): unknown;
 
+    /**
+     * List of theme names not fully updated to post v1.0.0 theme guidelines.
+     */
+    oldThemes: string[];
+
     /** Lifecycle hook called when the component is loaded. */
     onload(): void;
 
@@ -229,6 +191,9 @@ export interface CustomCSS extends Component {
      * @param themeName - Name of the theme that changed.
      */
     onRaw(themeName: string): void;
+
+    /** Queue for sequential CSS processing operations. */
+    queue: PromisedQueue;
 
     /**
      * Read available CSS snippets from the snippets folder.
@@ -244,6 +209,9 @@ export interface CustomCSS extends Component {
      */
     readThemes(reload?: boolean): void;
 
+    /** Reload the active theme CSS. */
+    reloadTheme(): void;
+
     /**
      * Remove a theme by theme name.
      *
@@ -251,6 +219,15 @@ export interface CustomCSS extends Component {
      * @returns A promise that resolves when the theme is removed.
      */
     removeTheme(themeName: string): Promise<void>;
+
+    /** Debounced function to reload CSS snippets. */
+    requestLoadSnippets: Debouncer<[], void>;
+
+    /** Debounced function to reload the active theme. */
+    requestLoadTheme: Debouncer<[], void>;
+
+    /** Debounced function to re-read available themes from disk. */
+    requestReadThemes: Debouncer<[], void>;
 
     /**
      * Set the activation status of a snippet by snippet name.
@@ -273,4 +250,27 @@ export interface CustomCSS extends Component {
      * @param translucency - Whether translucency should be enabled.
      */
     setTranslucency(translucency: boolean): void;
+
+    /**
+     * List of snippets detected by Obsidian, given by their filenames.
+     */
+    snippets: string[];
+
+    /** Main style element for the active theme. */
+    styleEl: HTMLStyleElement;
+
+    /**
+     * Currently active theme, given by its name.
+     *
+     * @remark is the default Obsidian theme.
+     */
+    theme: '' | string;
+
+    /**
+     * Mapping of theme names to their manifest.
+     */
+    themes: CustomCSSThemesRecord;
+
+    /** Record of available theme updates. */
+    updates: CustomCSSUpdatesRecord;
 }

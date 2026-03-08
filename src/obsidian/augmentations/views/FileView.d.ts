@@ -13,21 +13,6 @@ declare module 'obsidian' {
         allowNoFile: boolean;
 
         /**
-         * The file that is currently being viewed.
-         *
-         * @official
-         */
-        file: TFile | null;
-
-        /**
-         * Whether the file view can be navigated (`true` by default).
-         *
-         * @inheritDoc
-         * @official
-         */
-        navigation: boolean;
-
-        /**
          * Whether the file view can accept an extension.
          *
          * @param extension - The extension to check.
@@ -50,6 +35,13 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
         constructor__(leaf: WorkspaceLeaf): this;
+
+        /**
+         * The file that is currently being viewed.
+         *
+         * @official
+         */
+        file: TFile | null;
 
         /**
          * Get the display text for the file view.
@@ -83,6 +75,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         loadFile(file: TFile): Promise<unknown>;
+
+        /**
+         * Whether the file view can be navigated (`true` by default).
+         *
+         * @inheritDoc
+         * @official
+         */
+        navigation: boolean;
 
         /**
          * Updates the view if it contains the deleted file.

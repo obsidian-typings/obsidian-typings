@@ -6,6 +6,13 @@ import type { IconName } from 'obsidian';
  * @unofficial
  */
 export interface RibbonItem {
+    /**
+     * Callback invoked when this ribbon item is clicked.
+     *
+     * @returns A promise that resolves when the callback completes.
+     */
+    callback(): Promise<void>;
+
     /** Whether this ribbon item is hidden. */
     hidden: boolean;
 
@@ -17,11 +24,4 @@ export interface RibbonItem {
 
     /** Tooltip title displayed on hover. */
     title: string;
-
-    /**
-     * Callback invoked when this ribbon item is clicked.
-     *
-     * @returns A promise that resolves when the callback completes.
-     */
-    callback(): Promise<void>;
 }

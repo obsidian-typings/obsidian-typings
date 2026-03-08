@@ -17,69 +17,19 @@ declare module 'obsidian' {
         app: App;
 
         /**
-         * Whether the leaf may close the view.
-         *
-         * @unofficial
-         */
-        closeable: boolean;
-
-        /**
-         * The container HTML element for the component.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        containerEl: HTMLElement;
-
-        /**
-         * The icon of the view.
-         *
-         * @official
-         * @since 1.1.0
-         */
-        icon: IconName;
-
-        /**
-         * The leaf of the view.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        leaf: WorkspaceLeaf;
-
-        /**
-         * Whether or not the view is intended for navigation.
-         * If your view is a static view that is not intended to be navigated away, set this to `false`.
-         * (For example: File explorer, calendar, etc.)
-         * If your view opens a file or can be otherwise navigated, set this to `true`.
-         * (For example: Markdown editor view, Kanban view, PDF view, etc.)
-         *
-         * @official
-         * @since 0.15.1
-         */
-        navigation: boolean;
-
-        /**
-         * Assign an optional scope to your view to register hotkeys for when the view.
-         * is in focus.
-         *
-         * @example
-         * ```ts
-         * this.scope = new Scope(this.app.scope);
-         * ```
-         * @default `null`
-         * @official
-         * @since 1.5.7
-         */
-        scope: Scope | null;
-
-        /**
          * Closes the view.
          *
          * @returns A promise that resolves when the view is closed.
          * @unofficial
          */
         close(): Promise<void>;
+
+        /**
+         * Whether the leaf may close the view.
+         *
+         * @unofficial
+         */
+        closeable: boolean;
 
         /**
          * Creates a new view.
@@ -91,6 +41,14 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         constructor__(leaf: WorkspaceLeaf): this;
+
+        /**
+         * The container HTML element for the component.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        containerEl: HTMLElement;
 
         /**
          * Get the display text of the view.
@@ -172,6 +130,34 @@ declare module 'obsidian' {
         handlePaste(event: ClipboardEvent): void;
 
         /**
+         * The icon of the view.
+         *
+         * @official
+         * @since 1.1.0
+         */
+        icon: IconName;
+
+        /**
+         * The leaf of the view.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        leaf: WorkspaceLeaf;
+
+        /**
+         * Whether or not the view is intended for navigation.
+         * If your view is a static view that is not intended to be navigated away, set this to `false`.
+         * (For example: File explorer, calendar, etc.)
+         * If your view opens a file or can be otherwise navigated, set this to `true`.
+         * (For example: Markdown editor view, Kanban view, PDF view, etc.)
+         *
+         * @official
+         * @since 0.15.1
+         */
+        navigation: boolean;
+
+        /**
          * Called when the view is closed.
          *
          * @returns A promise that resolves when the view is closed.
@@ -234,6 +220,20 @@ declare module 'obsidian' {
          * @unofficial
          */
         open(parentEl: Node): Promise<void>;
+
+        /**
+         * Assign an optional scope to your view to register hotkeys for when the view.
+         * is in focus.
+         *
+         * @example
+         * ```ts
+         * this.scope = new Scope(this.app.scope);
+         * ```
+         * @default `null`
+         * @official
+         * @since 1.5.7
+         */
+        scope: Scope | null;
 
         /**
          * Set the ephemeral state of the view.

@@ -11,9 +11,6 @@ export interface TagsPropertyWidgetComponent extends PropertyWidgetComponentBase
     /** The multiselect component for the property widget. */
     multiselect: Multiselect;
 
-    /** The type of the property widget. */
-    type: 'tags';
-
     /**
      * Handle focus event.
      *
@@ -27,4 +24,7 @@ export interface TagsPropertyWidgetComponent extends PropertyWidgetComponentBase
      * @param value - The value to set.
      */
     setValue(value: unknown): void;
+
+    /** The type of the property widget. */
+    type: 'tags';
 }

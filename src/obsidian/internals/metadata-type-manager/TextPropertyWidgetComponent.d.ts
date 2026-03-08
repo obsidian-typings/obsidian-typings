@@ -14,22 +14,11 @@ export interface TextPropertyWidgetComponent extends PropertyWidgetComponentBase
     /** The render context for the property widget. */
     ctx: PropertyRenderContext;
 
-    /** The input element for the property widget. */
-    inputEl: HTMLInputElement;
-
     /** The hover popover for the property widget. */
     hoverPopover: null;
 
-    /** The type of the property widget. */
-    type: 'text';
-
-    /** The value of the property widget. */
-    value: string;
-
-    /**
-     * Render the property widget.
-     */
-    render(): void;
+    /** The input element for the property widget. */
+    inputEl: HTMLInputElement;
 
     /**
      * Handle focus event.
@@ -39,9 +28,20 @@ export interface TextPropertyWidgetComponent extends PropertyWidgetComponentBase
     onFocus(): void;
 
     /**
+     * Render the property widget.
+     */
+    render(): void;
+
+    /**
      * Set the value of the property widget.
      *
      * @param value - The value to set.
      */
     setValue(value: unknown): void;
+
+    /** The type of the property widget. */
+    type: 'text';
+
+    /** The value of the property widget. */
+    value: string;
 }

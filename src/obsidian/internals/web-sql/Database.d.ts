@@ -7,9 +7,6 @@ import type { SQLTransaction } from './SQLTransaction.d.ts';
  * @unofficial
  */
 export interface Database {
-    /** Current version string of the database schema. */
-    version: string;
-
     /** Change the database version, optionally running a migration transaction. */
     changeVersion(
         oldVersion: string,
@@ -32,4 +29,7 @@ export interface Database {
         errorCallback?: (error: SQLError) => void,
         successCallback?: () => void
     ): void;
+
+    /** Current version string of the database schema. */
+    version: string;
 }

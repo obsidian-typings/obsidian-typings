@@ -15,6 +15,19 @@ import type { PropertyEntryData } from './PropertyEntryData.d.ts';
  */
 export interface MetadataEditor extends Component {
     /**
+     * Convert given properties to a serialized object and store in clipboard as obsidian/properties.
+     *
+     * @param event - The clipboard event.
+     * @param properties - Properties to copy.
+     */
+    _copyToClipboard(event: ClipboardEvent, properties: MetadataEditorProperty[]): void;
+
+    /**
+     * Uncollapse editor if collapsed and create a new property row.
+     */
+    addProperty(): void;
+
+    /**
      * Button element for adding a new property.
      */
     addPropertyButtonEl: HTMLButtonElement;
@@ -23,6 +36,16 @@ export interface MetadataEditor extends Component {
      * Reference to the app.
      */
     app: App;
+
+    /**
+     * Clear all properties.
+     */
+    clear(): void;
+
+    /**
+     * Unselect all lines.
+     */
+    clearSelection(): void;
 
     /**
      * Whether the frontmatter editor is collapsed.
@@ -43,69 +66,6 @@ export interface MetadataEditor extends Component {
      * The currently focused property.
      */
     focusedLine: null | MetadataEditorProperty;
-
-    /**
-     * Fold button for folding away the frontmatter editor on hovering over headingEl.
-     */
-    foldEl: HTMLElement;
-
-    /**
-     * Heading element for the metadata editor.
-     */
-    headingEl: HTMLElement;
-
-    /**
-     * Hover element container.
-     */
-    hoverPopover: null | HoverPopover;
-
-    /**
-     * Owner of the metadata editor.
-     */
-    owner: MarkdownView;
-
-    /**
-     * All properties existing in the metadata editor.
-     */
-    properties: PropertyEntryData<unknown>[];
-
-    /**
-     * Element containing all property elements.
-     */
-    propertyListEl: HTMLElement;
-
-    /**
-     * List of all property field editors.
-     */
-    rendered: MetadataEditorProperty[];
-
-    /**
-     * Set of all selected property editors.
-     */
-    selectedLines: Set<MetadataEditorProperty>;
-
-    /**
-     * Convert given properties to a serialized object and store in clipboard as obsidian/properties.
-     *
-     * @param event - The clipboard event.
-     * @param properties - Properties to copy.
-     */
-    _copyToClipboard(event: ClipboardEvent, properties: MetadataEditorProperty[]): void;
-
-    /**
-     * Uncollapse editor if collapsed and create a new property row.
-     */
-    addProperty(): void;
-
-    /**
-     * Clear all properties.
-     */
-    clear(): void;
-
-    /**
-     * Unselect all lines.
-     */
-    clearSelection(): void;
 
     /**
      * Focus on property field with given key.
@@ -135,6 +95,11 @@ export interface MetadataEditor extends Component {
      * @param mode - Focus mode.
      */
     focusValue(value: string, mode: FocusMode): void;
+
+    /**
+     * Fold button for folding away the frontmatter editor on hovering over headingEl.
+     */
+    foldEl: HTMLElement;
 
     /**
      * Handle copy event on selection and serialize properties.
@@ -188,6 +153,16 @@ export interface MetadataEditor extends Component {
     hasPropertyFocused(): boolean;
 
     /**
+     * Heading element for the metadata editor.
+     */
+    headingEl: HTMLElement;
+
+    /**
+     * Hover element container.
+     */
+    hoverPopover: null | HoverPopover;
+
+    /**
      * Add new properties to the metadata editor and save.
      *
      * @param properties - Properties to insert.
@@ -207,6 +182,21 @@ export interface MetadataEditor extends Component {
     onMetadataTypeChange(property: MetadataEditorProperty): void;
 
     /**
+     * Owner of the metadata editor.
+     */
+    owner: MarkdownView;
+
+    /**
+     * All properties existing in the metadata editor.
+     */
+    properties: PropertyEntryData<unknown>[];
+
+    /**
+     * Element containing all property elements.
+     */
+    propertyListEl: HTMLElement;
+
+    /**
      * Remove specified properties from the metadata editor and save, and reset focus if specified.
      *
      * @param properties - Properties to remove.
@@ -214,6 +204,11 @@ export interface MetadataEditor extends Component {
      * @returns The result of the removal operation.
      */
     removeProperties(properties: MetadataEditorProperty[], resetFocus?: boolean): unknown;
+
+    /**
+     * List of all property field editors.
+     */
+    rendered: MetadataEditorProperty[];
 
     /**
      * Reorder the entry to specified index position and save.
@@ -233,6 +228,11 @@ export interface MetadataEditor extends Component {
      * Select all property fields.
      */
     selectAll(): void;
+
+    /**
+     * Set of all selected property editors.
+     */
+    selectedLines: Set<MetadataEditorProperty>;
 
     /**
      * Mark specified property as selected.

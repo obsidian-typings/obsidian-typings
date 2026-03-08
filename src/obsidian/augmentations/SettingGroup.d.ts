@@ -8,48 +8,6 @@ declare module 'obsidian' {
      */
     interface SettingGroup {
         /**
-         * The components of the setting group.
-         *
-         * @unofficial
-         */
-        components: BaseComponent[];
-
-        /**
-         * The control element of the setting group.
-         *
-         * @unofficial
-         */
-        controlEl: HTMLDivElement;
-
-        /**
-         * The group element of the setting group.
-         *
-         * @unofficial
-         */
-        groupEl: HTMLDivElement;
-
-        /**
-         * The header element of the setting group.
-         *
-         * @unofficial
-         */
-        headerEl: HTMLDivElement;
-
-        /**
-         * The header inner element of the setting group.
-         *
-         * @unofficial
-         */
-        headerInnerEl: HTMLDivElement;
-
-        /**
-         * The list element of the setting group.
-         *
-         * @unofficial
-         */
-        listEl: HTMLDivElement;
-
-        /**
          * Add a CSS class to the setting group.
          *
          * @param cls - The CSS class to add.
@@ -101,6 +59,13 @@ declare module 'obsidian' {
         addSetting(cb: (setting: Setting) => void): this;
 
         /**
+         * The components of the setting group.
+         *
+         * @unofficial
+         */
+        components: BaseComponent[];
+
+        /**
          * Create a new setting group.
          *
          * @param containerEl - The container element.
@@ -110,6 +75,41 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
         constructor__(containerEl: HTMLElement): this;
+
+        /**
+         * The control element of the setting group.
+         *
+         * @unofficial
+         */
+        controlEl: HTMLDivElement;
+
+        /**
+         * The group element of the setting group.
+         *
+         * @unofficial
+         */
+        groupEl: HTMLDivElement;
+
+        /**
+         * The header element of the setting group.
+         *
+         * @unofficial
+         */
+        headerEl: HTMLDivElement;
+
+        /**
+         * The header inner element of the setting group.
+         *
+         * @unofficial
+         */
+        headerInnerEl: HTMLDivElement;
+
+        /**
+         * The list element of the setting group.
+         *
+         * @unofficial
+         */
+        listEl: HTMLDivElement;
 
         /**
          * Set the heading of the setting group.

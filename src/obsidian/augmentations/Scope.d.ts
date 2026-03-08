@@ -16,26 +16,6 @@ declare module 'obsidian' {
         cb: (() => boolean) | undefined;
 
         /**
-         * Overridden keys that exist in this scope.
-         *
-         * @unofficial
-         */
-        keys: KeyScope[];
-
-        /**
-         * Scope that this scope is a child of
-         *
-         * @unofficial
-         */
-        parent: Scope | undefined;
-
-        /**
-         * Container element that constrains tab-key focus cycling.
-         * @unofficial
-         */
-        tabFocusContainerEl: HTMLElement | null;
-
-        /**
          * Create a new scope.
          *
          * @param parent - The parent scope.
@@ -54,6 +34,20 @@ declare module 'obsidian' {
          * @unofficial
          */
         handleKey(event: KeyboardEvent, keypress: KeymapInfo): unknown;
+
+        /**
+         * Overridden keys that exist in this scope.
+         *
+         * @unofficial
+         */
+        keys: KeyScope[];
+
+        /**
+         * Scope that this scope is a child of
+         *
+         * @unofficial
+         */
+        parent: Scope | undefined;
 
         /**
          * Add a keymap event handler to this scope.
@@ -79,6 +73,12 @@ declare module 'obsidian' {
          * @unofficial
          */
         setTabFocusContainer(container: HTMLElement): void;
+
+        /**
+         * Container element that constrains tab-key focus cycling.
+         * @unofficial
+         */
+        tabFocusContainerEl: HTMLElement | null;
 
         /**
          * Remove an existing keymap event handler.

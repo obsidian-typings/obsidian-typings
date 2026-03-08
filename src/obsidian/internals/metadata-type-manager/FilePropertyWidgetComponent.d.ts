@@ -10,9 +10,6 @@ export interface FilePropertyWidgetComponent extends PropertyWidgetComponentBase
     /** The input element for the property widget. */
     inputEl: HTMLInputElement;
 
-    /** The type of the property widget. */
-    type: 'file';
-
     /**
      * Handle focus event.
      *
@@ -26,4 +23,7 @@ export interface FilePropertyWidgetComponent extends PropertyWidgetComponentBase
      * @param value - The value to set.
      */
     setValue(value: unknown): void;
+
+    /** The type of the property widget. */
+    type: 'file';
 }

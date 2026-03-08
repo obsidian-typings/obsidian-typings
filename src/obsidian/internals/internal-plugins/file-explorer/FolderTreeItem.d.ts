@@ -13,11 +13,11 @@ export interface FolderTreeItem extends AbstractFileTreeItem<TFile>, TreeCollaps
     /** Spacer element used for indentation in the tree. */
     pusherEl: HTMLElement;
 
-    /** Virtual children container managing child file and folder tree items. */
-    vChildren: TreeNodeVChildren<FolderTreeItem | FileTreeItem, FolderTreeItem>;
-
     /**
      * Sort file items inside by current sort order.
      */
     sort(): void;
+
+    /** Virtual children container managing child file and folder tree items. */
+    vChildren: TreeNodeVChildren<FolderTreeItem | FileTreeItem, FolderTreeItem>;
 }

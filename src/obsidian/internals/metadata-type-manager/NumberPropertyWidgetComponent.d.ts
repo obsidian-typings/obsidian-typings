@@ -10,12 +10,6 @@ export interface NumberPropertyWidgetComponent extends PropertyWidgetComponentBa
     /** The input element for the property widget. */
     inputEl: HTMLInputElement;
 
-    /** The type of the property widget. */
-    type: 'number';
-
-    /** Show the error message. */
-    showError(): void;
-
     /**
      * Handle focus event.
      *
@@ -29,4 +23,10 @@ export interface NumberPropertyWidgetComponent extends PropertyWidgetComponentBa
      * @param value - The value to set.
      */
     setValue(value: unknown): void;
+
+    /** Show the error message. */
+    showError(): void;
+
+    /** The type of the property widget. */
+    type: 'number';
 }

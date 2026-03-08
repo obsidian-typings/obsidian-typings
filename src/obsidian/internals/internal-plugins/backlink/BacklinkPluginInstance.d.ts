@@ -24,12 +24,6 @@ export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkP
     /** The currently tracked file for backlinks. */
     file?: TFile | null;
 
-    /** Configuration options for the backlink plugin. */
-    options: BacklinkPluginInstanceOptions;
-
-    /** Reference to the backlink plugin registration. */
-    plugin: BacklinkPlugin;
-
     /** Initialize the backlink view leaf. */
     initLeaf(): void;
 
@@ -83,6 +77,12 @@ export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkP
      * @returns Whether the operation succeeded, or `undefined`.
      */
     openBacklinksForActiveFile(skipSplit: boolean): boolean | undefined;
+
+    /** Configuration options for the backlink plugin. */
+    options: BacklinkPluginInstanceOptions;
+
+    /** Reference to the backlink plugin registration. */
+    plugin: BacklinkPlugin;
 
     /**
      * Toggle the inline backlinks display within the document view.

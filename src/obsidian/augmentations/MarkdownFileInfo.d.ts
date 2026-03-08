@@ -24,12 +24,6 @@ declare module 'obsidian' {
         editor?: Editor;
 
         /**
-         * The metadata (frontmatter/properties) editor for this file.
-         * @unofficial
-         */
-        metadataEditor?: MetadataEditor;
-
-        /**
          * The associated file.
          *
          * @example
@@ -40,5 +34,11 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link file} instead.
          */
         file__?(): TFile | null;
+
+        /**
+         * The metadata (frontmatter/properties) editor for this file.
+         * @unofficial
+         */
+        metadataEditor?: MetadataEditor;
     }
 }

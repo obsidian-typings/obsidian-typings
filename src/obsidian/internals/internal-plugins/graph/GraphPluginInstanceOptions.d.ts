@@ -6,6 +6,12 @@ import type { GraphColorGroup } from './GraphColorGroup.d.ts';
  * @unofficial
  */
 export interface GraphPluginInstanceOptions {
+    /** Strength of the centering force pulling nodes toward the graph center. */
+    centerStrength?: number;
+
+    /** Whether the graph settings panel is closed. */
+    close?: boolean;
+
     /** Whether the color groups section is collapsed in the settings panel. */
     'collapse-color-groups'?: boolean;
 
@@ -17,12 +23,6 @@ export interface GraphPluginInstanceOptions {
 
     /** Whether the forces section is collapsed in the settings panel. */
     'collapse-forces'?: boolean;
-
-    /** Strength of the centering force pulling nodes toward the graph center. */
-    centerStrength?: number;
-
-    /** Whether the graph settings panel is closed. */
-    close?: boolean;
 
     /** User-defined color groups for visually grouping nodes by search query. */
     colorGroups?: GraphColorGroup[];

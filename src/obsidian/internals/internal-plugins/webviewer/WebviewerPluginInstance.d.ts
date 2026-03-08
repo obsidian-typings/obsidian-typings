@@ -18,9 +18,6 @@ export interface WebviewerPluginInstance extends InternalPluginInstance<Webviewe
     /** Whether this plugin is enabled by default. */
     defaultOn: false;
 
-    /** URLs that are pending to be added to the ignore list. */
-    pendingIgnoredURLs: string[];
-
     /**
      * Build a search engine URL for the given search query.
      *
@@ -51,6 +48,9 @@ export interface WebviewerPluginInstance extends InternalPluginInstance<Webviewe
      * @param url - The URL to open externally.
      */
     openUrlExternally(url: string): void;
+
+    /** URLs that are pending to be added to the ignore list. */
+    pendingIgnoredURLs: string[];
 
     /** Update the current browsing session state. */
     updateSession(): void;

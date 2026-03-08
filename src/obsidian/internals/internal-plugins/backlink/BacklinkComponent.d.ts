@@ -14,6 +14,13 @@ import type { HeaderDom } from './HeaderDom.d.ts';
  * @unofficial
  */
 export interface BacklinkComponent extends Component {
+    /**
+     * Add a link from an unlinked mention to the target file.
+     *
+     * @returns The result of adding the link.
+     */
+    addLinkFunction(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
+
     /** Reference to the app. */
     app: App;
 
@@ -50,61 +57,18 @@ export interface BacklinkComponent extends Component {
     /** The file whose backlinks are being shown. */
     file: TFile | null;
 
-    /** Header DOM for navigation buttons and sort controls. */
-    headerDom: HeaderDom;
-
-    /** Whether the search filter is currently visible. */
-    isShowingSearch: boolean;
-
-    /** Search input component for filtering results. */
-    searchComponent: SearchComponent;
-
-    /** Current search query string. */
-    searchQuery: null;
-
-    /** Button element to toggle the search filter visibility. */
-    showSearchButtonEl: HTMLDivElement;
-
-    /** Current sort order for results. */
-    sortOrder: string;
-
-    /** Placement direction for tooltips. */
-    tooltipPlacement: string;
-
-    /** Comma-separated aliases used for unlinked mention matching. */
-    unlinkedAliases: string;
-
-    /** Whether the unlinked mentions section is collapsed. */
-    unlinkedCollapsed: boolean;
-
-    /** Element displaying the count of unlinked mentions. */
-    unlinkedCountEl: HTMLSpanElement;
-
-    /** DOM tree rendering unlinked mention search results. */
-    unlinkedDom: ResultDom;
-
-    /** File for which unlinked mentions are being computed. */
-    unlinkedFile: null;
-
-    /** Header element for the unlinked mentions section. */
-    unlinkedHeaderEl: HTMLDivElement;
-
-    /** Queue of files to process for unlinked mention computation. */
-    unlinkedQueue: null;
-
-    /**
-     * Add a link from an unlinked mention to the target file.
-     *
-     * @returns The result of adding the link.
-     */
-    addLinkFunction(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
-
     /**
      * Get the current state of the backlink component.
      *
      * @returns The current state.
      */
     getState(): unknown;
+
+    /** Header DOM for navigation buttons and sort controls. */
+    headerDom: HeaderDom;
+
+    /** Whether the search filter is currently visible. */
+    isShowingSearch: boolean;
 
     /**
      * Handle a file content change event.
@@ -190,6 +154,12 @@ export interface BacklinkComponent extends Component {
      */
     recomputeUnlinked(arg1: unknown): unknown;
 
+    /** Search input component for filtering results. */
+    searchComponent: SearchComponent;
+
+    /** Current search query string. */
+    searchQuery: null;
+
     /**
      * Set whether the backlink section is collapsed.
      *
@@ -246,6 +216,12 @@ export interface BacklinkComponent extends Component {
      */
     setUnlinkedCollapsed(arg1: unknown, arg2: unknown): Promise<unknown>;
 
+    /** Button element to toggle the search filter visibility. */
+    showSearchButtonEl: HTMLDivElement;
+
+    /** Current sort order for results. */
+    sortOrder: string;
+
     /** Cancel the current backlink search computation. */
     stopBacklinkSearch(): void;
 
@@ -269,6 +245,30 @@ export interface BacklinkComponent extends Component {
      * @returns The toggle result.
      */
     toggleUnlinkedCollapsed(): unknown;
+
+    /** Placement direction for tooltips. */
+    tooltipPlacement: string;
+
+    /** Comma-separated aliases used for unlinked mention matching. */
+    unlinkedAliases: string;
+
+    /** Whether the unlinked mentions section is collapsed. */
+    unlinkedCollapsed: boolean;
+
+    /** Element displaying the count of unlinked mentions. */
+    unlinkedCountEl: HTMLSpanElement;
+
+    /** DOM tree rendering unlinked mention search results. */
+    unlinkedDom: ResultDom;
+
+    /** File for which unlinked mentions are being computed. */
+    unlinkedFile: null;
+
+    /** Header element for the unlinked mentions section. */
+    unlinkedHeaderEl: HTMLDivElement;
+
+    /** Queue of files to process for unlinked mention computation. */
+    unlinkedQueue: null;
 
     /**
      * Refresh both backlink and unlinked mention results.

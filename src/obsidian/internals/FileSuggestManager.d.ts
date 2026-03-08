@@ -25,21 +25,6 @@ export interface FileSuggestManager {
     fileSuggestions: null | FileSuggestion[];
 
     /**
-     * Whether search should be vault-wide rather than scoped to current file.
-     */
-    global: boolean;
-
-    /**
-     * Type of suggestions that should be provided.
-     */
-    mode: 'file' | 'heading' | 'block' | 'display' | string;
-
-    /**
-     * Executor of the search.
-     */
-    runnable: null | Runnable;
-
-    /**
      * Get suggestions for block query.
      *
      * @param runner - Runnable controlling the search lifecycle.
@@ -122,6 +107,11 @@ export interface FileSuggestManager {
     getSuggestionsAsync(runner: Runnable, text: string): Promise<SearchResult[]>;
 
     /**
+     * Whether search should be vault-wide rather than scoped to current file.
+     */
+    global: boolean;
+
+    /**
      * Match search fragments to a block.
      *
      * @param path - Path of the file.
@@ -140,4 +130,14 @@ export interface FileSuggestManager {
         content: string,
         textParts: string[]
     ): SearchResult | null;
+
+    /**
+     * Type of suggestions that should be provided.
+     */
+    mode: 'file' | 'heading' | 'block' | 'display' | string;
+
+    /**
+     * Executor of the search.
+     */
+    runnable: null | Runnable;
 }

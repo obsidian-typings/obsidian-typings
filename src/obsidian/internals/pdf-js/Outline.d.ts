@@ -8,21 +8,6 @@ export declare class Outline {
     static PRECISION: number;
 
     /**
-     * The bounding box of the outline.
-     *
-     * @returns The bounding box of the outline.
-     */
-    get box(): Object | null;
-
-    /**
-     * Serialize the outline into the PDF page coordinate system.
-     *
-     * @param bbox - The bounding box as bottom-left and top-right coordinates.
-     * @param rotation - The page rotation in degrees.
-     */
-    serialize(bbox: [blX: string, blY: string, trX: string, trY: string], rotation: number): void;
-
-    /**
      * Normalize a point relative to the page with the given rotation.
      *
      * @returns The normalized point coordinates.
@@ -64,11 +49,26 @@ export declare class Outline {
     static _translate(src: unknown, tx: unknown, ty: unknown, dest: unknown): unknown;
 
     /**
+     * The bounding box of the outline.
+     *
+     * @returns The bounding box of the outline.
+     */
+    get box(): Object | null;
+
+    /**
      * Create cubic bezier control points between two endpoints.
      *
      * @returns The bezier control point coordinates.
      */
     static createBezierPoints(x1: unknown, y1: unknown, x2: unknown, y2: unknown, x3: unknown, y3: unknown): number[];
+
+    /**
+     * Serialize the outline into the PDF page coordinate system.
+     *
+     * @param bbox - The bounding box as bottom-left and top-right coordinates.
+     * @param rotation - The page rotation in degrees.
+     */
+    serialize(bbox: [blX: string, blY: string, trX: string, trY: string], rotation: number): void;
 
     /**
      * Round a number to the configured SVG precision.

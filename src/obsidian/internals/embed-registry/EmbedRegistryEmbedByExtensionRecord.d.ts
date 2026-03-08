@@ -1,5 +1,5 @@
 import type { TFile } from 'obsidian';
-import type { FileExtension } from '../../implementations/constants/FileExtension.ts';
+import type { FileExtension } from '../../implementations/constants/FileExtension.d.ts';
 import type { EmbedAudioComponent } from './EmbedAudioComponent.d.ts';
 import type { EmbedCanvasComponent } from './EmbedCanvasComponent.d.ts';
 import type { EmbedContext } from './EmbedContext.d.ts';

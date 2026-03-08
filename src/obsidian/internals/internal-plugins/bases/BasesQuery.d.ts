@@ -11,31 +11,16 @@ import type { BasesSubView } from './BasesSubView.d.ts';
  */
 export interface BasesQuery {
     /**
-     * The formulas.
-     */
-    formulas: Record<string, BasesFormula>;
-
-    /**
-     * The properties.
-     */
-    properties: Record<string, BasesProperty>;
-
-    /**
-     * The unrecognized data.
-     */
-    unrecognizedData: object;
-
-    /**
-     * The views.
-     */
-    views: BasesSubView[];
-
-    /**
      * Clones the query.
      *
      * @returns The cloned query.
      */
     clone(): this;
+
+    /**
+     * The formulas.
+     */
+    formulas: Record<string, BasesFormula>;
 
     /**
      * Gets the property config.
@@ -59,6 +44,11 @@ export interface BasesQuery {
      * @returns The view configuration.
      */
     getViewConfig(key: string): unknown;
+
+    /**
+     * The properties.
+     */
+    properties: Record<string, BasesProperty>;
 
     /**
      * Removes a formula.
@@ -100,4 +90,14 @@ export interface BasesQuery {
      * @param filters - The filters to set.
      */
     setViewFilters(key: string, filters: BasesFilter): void;
+
+    /**
+     * The unrecognized data.
+     */
+    unrecognizedData: object;
+
+    /**
+     * The views.
+     */
+    views: BasesSubView[];
 }

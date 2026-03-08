@@ -9,83 +9,6 @@ declare module 'obsidian' {
      */
     interface Menu extends Component, CloseableComponent {
         /**
-         * Background for the suggestion menu.
-         *
-         * @unofficial
-         */
-        bgEl: HTMLElement;
-
-        /**
-         * The currently active submenu, if any.
-         *
-         * @unofficial
-         */
-        currentSubmenu?: Menu;
-
-        /**
-         * DOM element of the menu.
-         *
-         * @unofficial
-         */
-        dom: HTMLElement;
-
-        /**
-         * Items and separators contained in the menu.
-         *
-         * @unofficial
-         */
-        items: (MenuItem | MenuSeparator)[];
-
-        /**
-         * Parent menu of the current menu.
-         *
-         * @unofficial
-         */
-        parentMenu: Menu | null;
-
-        /**
-         * Scope in which the menu is active.
-         *
-         * @unofficial
-         */
-        scope: Scope;
-
-        /**
-         * Sections within the menu.
-         *
-         * @unofficial
-         */
-        sections: string[];
-
-        /**
-         * Which menuitem is currently selected.
-         *
-         * @unofficial
-         */
-        selected: number;
-
-        /**
-         * Configurations for the submenu configs.
-         *
-         * @unofficial
-         */
-        submenuConfig: MenuSubmenuConfigRecord;
-
-        /**
-         * Whether the submenu is currently unloading.
-         *
-         * @unofficial
-         */
-        unloading: boolean;
-
-        /**
-         * Whether the menu is rendered in native mode.
-         *
-         * @unofficial
-         */
-        useNativeMenu: boolean;
-
-        /**
          * Adds a menu item. Only works when menu is not shown yet.
          *
          * @param cb - The callback function.
@@ -118,6 +41,13 @@ declare module 'obsidian' {
         addSeparator(): this;
 
         /**
+         * Background for the suggestion menu.
+         *
+         * @unofficial
+         */
+        bgEl: HTMLElement;
+
+        /**
          * Close the menu.
          *
          * @returns The menu instance.
@@ -139,6 +69,20 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
         constructor__?(): this;
+
+        /**
+         * The currently active submenu, if any.
+         *
+         * @unofficial
+         */
+        currentSubmenu?: Menu;
+
+        /**
+         * DOM element of the menu.
+         *
+         * @unofficial
+         */
+        dom: HTMLElement;
 
         /**
          * Hide the menu.
@@ -163,6 +107,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         isInside(e: HTMLElement): boolean;
+
+        /**
+         * Items and separators contained in the menu.
+         *
+         * @unofficial
+         */
+        items: (MenuItem | MenuSeparator)[];
 
         /**
          * Move selection to the next item in the menu.
@@ -257,12 +208,40 @@ declare module 'obsidian' {
         openSubmenuSoon(): void;
 
         /**
+         * Parent menu of the current menu.
+         *
+         * @unofficial
+         */
+        parentMenu: Menu | null;
+
+        /**
+         * Scope in which the menu is active.
+         *
+         * @unofficial
+         */
+        scope: Scope;
+
+        /**
+         * Sections within the menu.
+         *
+         * @unofficial
+         */
+        sections: string[];
+
+        /**
          * Select the item at the specified index (after either hovering or arrowing over it).
          *
          * @param index - Index of the item to select.
          * @unofficial
          */
         select(index: number): void;
+
+        /**
+         * Which menuitem is currently selected.
+         *
+         * @unofficial
+         */
+        selected: number;
 
         /**
          * Set the menu to not use an icon.
@@ -343,11 +322,32 @@ declare module 'obsidian' {
         sort(): void;
 
         /**
+         * Configurations for the submenu configs.
+         *
+         * @unofficial
+         */
+        submenuConfig: MenuSubmenuConfigRecord;
+
+        /**
+         * Whether the submenu is currently unloading.
+         *
+         * @unofficial
+         */
+        unloading: boolean;
+
+        /**
          * Unselect the currently selected item and closes the submenu.
          *
          * @unofficial
          */
         unselect(): void;
+
+        /**
+         * Whether the menu is rendered in native mode.
+         *
+         * @unofficial
+         */
+        useNativeMenu: boolean;
     }
 
     namespace Menu {

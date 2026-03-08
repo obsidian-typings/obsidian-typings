@@ -42,12 +42,12 @@ declare module 'obsidian' {
         appMenuBarManager: AppMenuBarManager;
 
         /**
-         * Contains all registered commands.
+         * Sets the accent color of the application (light/dark mode).
          *
-         * @tutorial Can be used to manually invoke the functionality of a specific command.
+         * @param theme - The theme to set.
          * @unofficial
          */
-        commands: Commands;
+        changeTheme(theme: 'moonstone' | 'obsidian'): void;
 
         /**
          * CLI handler for the app.
@@ -56,12 +56,43 @@ declare module 'obsidian' {
         cli: Cli;
 
         /**
+         * Contains all registered commands.
+         *
+         * @tutorial Can be used to manually invoke the functionality of a specific command.
+         * @unofficial
+         */
+        commands: Commands;
+
+        /**
+         * Copies Obsidian URI of given file to clipboard.
+         *
+         * @param file File to generate URI for.
+         * @unofficial
+         */
+        copyObsidianUrl(file: TFile): void;
+
+        /**
          * Custom CSS (snippets/themes) applied to the application.
          *
          * @tutorial Can be used to view which snippets are enabled or available, or inspect loaded-in theme manifests.
          * @unofficial
          */
         customCss: CustomCSS;
+
+        /**
+         * Toggles debug mode.
+         *
+         * @param isEnabled Whether to enable or disable debug mode.
+         * @unofficial
+         */
+        debugMode(isEnabled: boolean): void;
+
+        /**
+         * Disables all CSS transitions in the vault (until manually re-enabled).
+         *
+         * @unofficial
+         */
+        disableCssTransition(): void;
 
         /**
          * References to important DOM elements of the application.
@@ -84,244 +115,6 @@ declare module 'obsidian' {
         embedRegistry: EmbedRegistry;
 
         /**
-         * The file manager object.
-         *
-         * @official
-         * @since 0.11.0
-         */
-        fileManager: FileManager;
-
-        /**
-         * Manager for editor fold (collapse) state persistence.
-         * @unofficial
-         */
-        foldManager: FoldManager;
-
-        /**
-         * Manages global hotkeys.
-         *
-         * @tutorial Can be used for manually invoking a command, or finding which hotkey is assigned to a specific key input.
-         * @remark This should not be used for adding hotkeys to your custom commands, this can easily be done via the official API.
-         * @unofficial
-         */
-        hotkeyManager: HotkeyManager;
-
-        /**
-         * Manager of internal 'core' plugins.
-         *
-         * @tutorial Can be used to check whether a specific internal plugin is enabled, or grab specific parts from its config for simplifying your own plugin's settings.
-         * @unofficial
-         */
-        internalPlugins: InternalPlugins;
-
-        /**
-         * Whether the application is currently running on mobile.
-         *
-         * @remark Prefer usage of `{@link Platform.isMobile}`.
-         * @remark Will be `true` if `app.emulateMobile()` was enabled.
-         * @unofficial
-         */
-        isMobile: boolean;
-
-        /**
-         * The keymap object.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        keymap: Keymap;
-
-        /**
-         * The last known user interaction event, to help commands find out what modifier keys are pressed.
-         *
-         * @official
-         * @since 0.12.17
-         */
-        lastEvent: UserEvent | null;
-
-        /**
-         * Manages the gathering and updating of metadata for all files in the vault.
-         *
-         * @tutorial Use for finding tags and backlinks for specific files, grabbing frontmatter properties, ...
-         * @unofficial
-         * @since 0.9.7
-         */
-        metadataCache: MetadataCache;
-
-        /**
-         * Manages the frontmatter properties of the vault and the rendering of the properties.
-         *
-         * @tutorial Fetching properties used in all frontmatter fields, may potentially be used for adding custom frontmatter widgets.
-         * @unofficial
-         */
-        metadataTypeManager: MetadataTypeManager;
-
-        /**
-         * Navigation bar for mobile devices, or `null` on desktop.
-         * @unofficial
-         */
-        mobileNavbar: MobileNavbar | null;
-
-        /**
-         * Tab switcher for mobile devices, or `null` on desktop.
-         * @unofficial
-         */
-        mobileTabSwitcher: MobileTabSwitcher | null;
-
-        /**
-         * Toolbar for mobile devices, or `null` on desktop.
-         * @unofficial
-         */
-        mobileToolbar: MobileToolbar | null;
-
-        /**
-         * Quick actions for mobile, `null` on desktop.
-         * @unofficial
-         */
-        mobileQuickActions: unknown;
-
-        /**
-         * Events to execute on the next frame
-         *
-         * @unofficial
-         */
-        nextFrameEvents: (() => void)[];
-
-        /**
-         * Timer for the next frame
-         *
-         * @unofficial
-         */
-        nextFrameTimer: number | null;
-
-        /**
-         * Manages loading and enabling of community (non-core) plugins.
-         *
-         * @tutorial Can be used to communicate with other plugins, custom plugin management, ...
-         * @remark Be careful when overriding loading logic, as this may result in other plugins not loading.
-         * @unofficial
-         */
-        plugins: Plugins;
-
-        /**
-         * The render context.
-         *
-         * @official
-         * @since 1.10.0
-         */
-        renderContext: RenderContext;
-
-        /**
-         * The scope object.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        scope: Scope;
-
-        /**
-         * The secret storage.
-         *
-         * @public
-         * @since 1.11.4
-         * @unofficial ERROR: Missing `@unofficial` or `@official` tag
-         */
-        secretStorage: SecretStorage;
-
-        /**
-         * Manages the settings modal and its tabs.
-         *
-         * @tutorial Can be used to open the settings modal to a specific tab, extend the settings modal functionality, ...
-         * @remark Do not use this to get settings values from other plugins, it is better to do this via `app.plugins.getPlugin(ID)?.settings` (check how the plugin stores its settings).
-         * @unofficial
-         */
-        setting: AppSetting;
-
-        /**
-         * Handler for receiving shared content from external apps (mobile).
-         * @unofficial
-         */
-        shareReceiver: ShareReceiver;
-
-        /**
-         * Status bar of the application
-         *
-         * @unofficial
-         */
-        statusBar: StatusBar;
-
-        /**
-         * Name of the vault with version suffix.
-         *
-         * @remark Formatted as 'NAME - Obsidian vX.Y.Z'.
-         * @unofficial
-         */
-        title: string;
-
-        /**
-         * The vault object.
-         *
-         * Manages all file operations for the vault, contains hooks for file changes, and an adapter for low-level file system operations.
-         *
-         * @tutorial Used for creating your own files and folders, renaming, ...
-         * @tutorial Use `app.vault.adapter` for accessing files outside the vault.
-         * @remark Prefer using the regular `vault` whenever possible.
-         * @official
-         * @since 0.9.7
-         */
-        vault: Vault;
-
-        /**
-         * Manages the construction of appropriate views when opening a file of a certain type.
-         *
-         * @remark Prefer usage of view registration via the Plugin class.
-         * @unofficial
-         */
-        viewRegistry: ViewRegistry;
-
-        /**
-         * The workspace object.
-         *
-         * Manages the workspace layout, construction, rendering and manipulation of leaves.
-         *
-         * @tutorial Used for accessing the active editor leaf, grabbing references to your views, ...
-         * @official
-         * @since 0.9.7
-         */
-        workspace: Workspace;
-
-        /**
-         * Sets the accent color of the application (light/dark mode).
-         *
-         * @param theme - The theme to set.
-         * @unofficial
-         */
-        changeTheme(theme: 'moonstone' | 'obsidian'): void;
-
-        /**
-         * Copies Obsidian URI of given file to clipboard.
-         *
-         * @param file File to generate URI for.
-         * @unofficial
-         */
-        copyObsidianUrl(file: TFile): void;
-
-        /**
-         * Toggles debug mode.
-         *
-         * @param isEnabled Whether to enable or disable debug mode.
-         * @unofficial
-         */
-        debugMode(isEnabled: boolean): void;
-
-        /**
-         * Disables all CSS transitions in the vault (until manually re-enabled).
-         *
-         * @unofficial
-         */
-        disableCssTransition(): void;
-
-        /**
          * Restarts Obsidian and renders workspace in mobile mode.
          *
          * @param emulate - Whether to enable or disable mobile emulation.
@@ -338,6 +131,14 @@ declare module 'obsidian' {
         enableCssTransition(): void;
 
         /**
+         * The file manager object.
+         *
+         * @official
+         * @since 0.11.0
+         */
+        fileManager: FileManager;
+
+        /**
          * Manually fix all file links pointing towards image/audio/video resources in element.
          *
          * @param element - Element to fix links in.
@@ -345,6 +146,12 @@ declare module 'obsidian' {
          * @unofficial
          */
         fixFileLinks(element: HTMLElement, sourcePath: string): void;
+
+        /**
+         * Manager for editor fold (collapse) state persistence.
+         * @unofficial
+         */
+        foldManager: FoldManager;
 
         /**
          * Applies an obfuscation font to all text characters in the vault.
@@ -411,6 +218,15 @@ declare module 'obsidian' {
         getWebviewPartition(): string;
 
         /**
+         * Manages global hotkeys.
+         *
+         * @tutorial Can be used for manually invoking a command, or finding which hotkey is assigned to a specific key input.
+         * @remark This should not be used for adding hotkeys to your custom commands, this can easily be done via the official API.
+         * @unofficial
+         */
+        hotkeyManager: HotkeyManager;
+
+        /**
          * Import attachments into specified folder.
          *
          * @param attachmentsToImport - The attachments to import.
@@ -430,6 +246,14 @@ declare module 'obsidian' {
         initializeWithAdapter(adapter: DataAdapter): Promise<void>;
 
         /**
+         * Manager of internal 'core' plugins.
+         *
+         * @tutorial Can be used to check whether a specific internal plugin is enabled, or grab specific parts from its config for simplifying your own plugin's settings.
+         * @unofficial
+         */
+        internalPlugins: InternalPlugins;
+
+        /**
          * Check if the application is in dark mode.
          *
          * @returns Whether the application is in dark mode.
@@ -439,12 +263,37 @@ declare module 'obsidian' {
         isDarkMode(): boolean;
 
         /**
+         * Whether the application is currently running on mobile.
+         *
+         * @remark Prefer usage of `{@link Platform.isMobile}`.
+         * @remark Will be `true` if `app.emulateMobile()` was enabled.
+         * @unofficial
+         */
+        isMobile: boolean;
+
+        /**
          * Check whether Vim keybindings are enabled.
          *
          * @returns Whether Vim mode is enabled.
          * @unofficial
          */
         isVimEnabled(): boolean;
+
+        /**
+         * The keymap object.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        keymap: Keymap;
+
+        /**
+         * The last known user interaction event, to help commands find out what modifier keys are pressed.
+         *
+         * @official
+         * @since 0.12.17
+         */
+        lastEvent: UserEvent | null;
 
         /**
          * Retrieve value from `localStorage` for this vault.
@@ -459,6 +308,47 @@ declare module 'obsidian' {
         loadLocalStorage(key: string): null | unknown;
 
         /**
+         * Manages the gathering and updating of metadata for all files in the vault.
+         *
+         * @tutorial Use for finding tags and backlinks for specific files, grabbing frontmatter properties, ...
+         * @unofficial
+         * @since 0.9.7
+         */
+        metadataCache: MetadataCache;
+
+        /**
+         * Manages the frontmatter properties of the vault and the rendering of the properties.
+         *
+         * @tutorial Fetching properties used in all frontmatter fields, may potentially be used for adding custom frontmatter widgets.
+         * @unofficial
+         */
+        metadataTypeManager: MetadataTypeManager;
+
+        /**
+         * Navigation bar for mobile devices, or `null` on desktop.
+         * @unofficial
+         */
+        mobileNavbar: MobileNavbar | null;
+
+        /**
+         * Quick actions for mobile, `null` on desktop.
+         * @unofficial
+         */
+        mobileQuickActions: unknown;
+
+        /**
+         * Tab switcher for mobile devices, or `null` on desktop.
+         * @unofficial
+         */
+        mobileTabSwitcher: MobileTabSwitcher | null;
+
+        /**
+         * Toolbar for mobile devices, or `null` on desktop.
+         * @unofficial
+         */
+        mobileToolbar: MobileToolbar | null;
+
+        /**
          * Add callback to execute on next frame
          *
          * @param callback - The callback to execute.
@@ -467,12 +357,26 @@ declare module 'obsidian' {
         nextFrame(callback: () => void): void;
 
         /**
+         * Events to execute on the next frame
+         *
+         * @unofficial
+         */
+        nextFrameEvents: (() => void)[];
+
+        /**
          * Add callback to execute on next frame, and remove after execution
          *
          * @param callback - The callback to execute once.
          * @unofficial
          */
         nextFrameOnceCallback(callback: () => void): void;
+
+        /**
+         * Timer for the next frame
+         *
+         * @unofficial
+         */
+        nextFrameTimer: number | null;
 
         /**
          * Register an event listener on the app.
@@ -520,6 +424,15 @@ declare module 'obsidian' {
         openWithDefaultApp(path: string): void;
 
         /**
+         * Manages loading and enabling of community (non-core) plugins.
+         *
+         * @tutorial Can be used to communicate with other plugins, custom plugin management, ...
+         * @remark Be careful when overriding loading logic, as this may result in other plugins not loading.
+         * @unofficial
+         */
+        plugins: Plugins;
+
+        /**
          * Register all basic application commands
          *
          * @unofficial
@@ -532,6 +445,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         registerQuitHook(): void;
+
+        /**
+         * The render context.
+         *
+         * @official
+         * @since 1.10.0
+         */
+        renderContext: RenderContext;
 
         /**
          * Run the vault opening behavior.
@@ -569,6 +490,23 @@ declare module 'obsidian' {
         saveLocalStorage(key: string, data: unknown | null): void;
 
         /**
+         * The scope object.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        scope: Scope;
+
+        /**
+         * The secret storage.
+         *
+         * @public
+         * @since 1.11.4
+         * @unofficial ERROR: Missing `@unofficial` or `@official` tag
+         */
+        secretStorage: SecretStorage;
+
+        /**
          * Set the accent color of the application.
          *
          * @param color - The accent color to set.
@@ -594,6 +532,21 @@ declare module 'obsidian' {
         setTheme(theme: 'moonstone' | 'obsidian'): void;
 
         /**
+         * Manages the settings modal and its tabs.
+         *
+         * @tutorial Can be used to open the settings modal to a specific tab, extend the settings modal functionality, ...
+         * @remark Do not use this to get settings values from other plugins, it is better to do this via `app.plugins.getPlugin(ID)?.settings` (check how the plugin stores its settings).
+         * @unofficial
+         */
+        setting: AppSetting;
+
+        /**
+         * Handler for receiving shared content from external apps (mobile).
+         * @unofficial
+         */
+        shareReceiver: ShareReceiver;
+
+        /**
          * Open the OS file picker at path location.
          *
          * @param path - The path to show.
@@ -608,6 +561,21 @@ declare module 'obsidian' {
          * @unofficial
          */
         showReleaseNotes(version?: string): void;
+
+        /**
+         * Status bar of the application
+         *
+         * @unofficial
+         */
+        statusBar: StatusBar;
+
+        /**
+         * Name of the vault with version suffix.
+         *
+         * @remark Formatted as 'NAME - Obsidian vX.Y.Z'.
+         * @unofficial
+         */
+        title: string;
 
         /**
          * Updates the accent color and reloads the CSS.
@@ -693,6 +661,38 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateViewHeaderDisplay(): void;
+
+        /**
+         * The vault object.
+         *
+         * Manages all file operations for the vault, contains hooks for file changes, and an adapter for low-level file system operations.
+         *
+         * @tutorial Used for creating your own files and folders, renaming, ...
+         * @tutorial Use `app.vault.adapter` for accessing files outside the vault.
+         * @remark Prefer using the regular `vault` whenever possible.
+         * @official
+         * @since 0.9.7
+         */
+        vault: Vault;
+
+        /**
+         * Manages the construction of appropriate views when opening a file of a certain type.
+         *
+         * @remark Prefer usage of view registration via the Plugin class.
+         * @unofficial
+         */
+        viewRegistry: ViewRegistry;
+
+        /**
+         * The workspace object.
+         *
+         * Manages the workspace layout, construction, rendering and manipulation of leaves.
+         *
+         * @tutorial Used for accessing the active editor leaf, grabbing references to your views, ...
+         * @official
+         * @since 0.9.7
+         */
+        workspace: Workspace;
     }
 
     namespace App {

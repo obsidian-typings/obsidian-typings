@@ -14,9 +14,6 @@ export interface LocalGraphView extends InfoFileView {
     /** Graph engine powering the local graph simulation. */
     engine: GraphEngine;
 
-    /** Renderer responsible for drawing the local graph. */
-    renderer: GraphRenderer;
-
     /**
      * Get the current view type.
      *
@@ -35,6 +32,9 @@ export interface LocalGraphView extends InfoFileView {
      * Updates the options from the plugin when changed in view.
      */
     onOptionsChange(): void;
+
+    /** Renderer responsible for drawing the local graph. */
+    renderer: GraphRenderer;
 
     /**
      * Renders the graph.

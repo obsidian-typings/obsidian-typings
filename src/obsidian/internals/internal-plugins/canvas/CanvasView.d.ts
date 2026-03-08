@@ -15,12 +15,6 @@ export interface CanvasView extends TextFileView {
     /** The canvas controller instance managing nodes, edges, and rendering. */
     canvas: CanvasViewCanvas;
 
-    /** Hover popover associated with this view, or `null` if none is active. */
-    hoverPopover: null | HoverPopover;
-
-    /** Reference to the canvas plugin instance. */
-    plugin: CanvasPluginInstance;
-
     /**
      * Loads the local data of the canvas.
      *
@@ -34,6 +28,12 @@ export interface CanvasView extends TextFileView {
      * @returns The view type.
      */
     getViewType(): typeof ViewType.Canvas;
+
+    /** Hover popover associated with this view, or `null` if none is active. */
+    hoverPopover: null | HoverPopover;
+
+    /** Reference to the canvas plugin instance. */
+    plugin: CanvasPluginInstance;
 
     /**
      * Saves the local data of the canvas.

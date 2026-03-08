@@ -7,6 +7,11 @@ import type { Scope } from 'obsidian';
  */
 export interface KeyScope {
     /**
+     * Callback of function to execute when key is pressed.
+     */
+    func(): void;
+
+    /**
      * Key to match.
      */
     key: string | null;
@@ -20,9 +25,4 @@ export interface KeyScope {
      * Scope where the key interceptor is registered.
      */
     scope: Scope;
-
-    /**
-     * Callback of function to execute when key is pressed.
-     */
-    func(): void;
 }

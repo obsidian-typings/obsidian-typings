@@ -3,7 +3,7 @@ import type {
     TextFileView,
     TFile
 } from 'obsidian';
-import type { ViewType } from '../../../implementations/constants/ViewType.ts';
+import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { BasesController } from './BasesController.d.ts';
 import type { BasesPluginInstance } from './BasesPluginInstance.d.ts';
 import type { BasesQuery } from './BasesQuery.d.ts';
@@ -21,26 +21,16 @@ export interface BasesView extends TextFileView {
     controller: BasesController;
 
     /**
-     * The last data of the view.
-     */
-    lastData: string;
-
-    /**
-     * Bases plugin.
-     */
-    plugin: BasesPluginInstance;
-
-    /**
-     * The query for the view.
-     */
-    query: BasesQuery;
-
-    /**
      * Get view type.
      *
      * @returns The bases view type.
      */
     getViewType(): typeof ViewType.Bases;
+
+    /**
+     * The last data of the view.
+     */
+    lastData: string;
 
     /**
      * Called when the layout of the view changes.
@@ -51,6 +41,16 @@ export interface BasesView extends TextFileView {
      * Called when the view changes.
      */
     onViewChanged(): void;
+
+    /**
+     * Bases plugin.
+     */
+    plugin: BasesPluginInstance;
+
+    /**
+     * The query for the view.
+     */
+    query: BasesQuery;
 
     /**
      * Receives the sync state.

@@ -41,6 +41,13 @@ export interface GraphEngine {
     /** UI controls for configuring force simulation options. */
     forceOptions: GraphForceOptions;
 
+    /**
+     * Gets the engine options.
+     *
+     * @returns The current graph plugin instance options.
+     */
+    getOptions(): GraphPluginInstanceOptions;
+
     /** Whether any search filter is currently active. */
     hasFilter: boolean;
 
@@ -59,26 +66,16 @@ export interface GraphEngine {
     /** Speed of the animation progression. */
     progressionSpeed: number;
 
+    /**
+     * Rerenders the graph.
+     */
+    render(): void;
+
     /** Renderer responsible for drawing the graph. */
     renderer: GraphRenderer;
 
     /** Active color group search queries for node coloring. */
     searchQueries: GraphColorGroup[];
-
-    /** The view (local or global) that owns this engine. */
-    view: LocalGraphView | GraphView;
-
-    /**
-     * Gets the engine options.
-     *
-     * @returns The current graph plugin instance options.
-     */
-    getOptions(): GraphPluginInstanceOptions;
-
-    /**
-     * Rerenders the graph.
-     */
-    render(): void;
 
     /**
      * Sets the engine options.
@@ -91,4 +88,7 @@ export interface GraphEngine {
      * Updates the engine after the search filter has changed.
      */
     updateSearch(): void;
+
+    /** The view (local or global) that owns this engine. */
+    view: LocalGraphView | GraphView;
 }

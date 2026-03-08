@@ -19,6 +19,13 @@ export interface WidgetEditorView extends EmbeddedEditorView {
     after: string;
 
     /**
+     * Push/pop current scope.
+     *
+     * @param scope - Scope to apply.
+     */
+    applyScope(scope: Scope): void;
+
+    /**
      * Data before reference.
      */
     before: string;
@@ -32,6 +39,13 @@ export interface WidgetEditorView extends EmbeddedEditorView {
      * File being currently renamed.
      */
     fileBeingRenamed: null | TFile;
+
+    /**
+     * Get the current folds of the editor.
+     *
+     * @returns Current fold information, or `null`.
+     */
+    getFoldInfo(): null | FoldInfo;
 
     /**
      * Current heading.
@@ -52,40 +66,6 @@ export interface WidgetEditorView extends EmbeddedEditorView {
      * Full inline content string.
      */
     lastSavedData: null | string;
-
-    /**
-     * Whether embedding should be saved twice on save.
-     */
-    saveAgain: boolean;
-
-    /**
-     * Whether the widget is currently saving.
-     */
-    saving: boolean;
-
-    /**
-     * Subpath reference of the path.
-     */
-    subpath: string;
-
-    /**
-     * Whether the subpath was not found in the cache.
-     */
-    subpathNotFound: boolean;
-
-    /**
-     * Push/pop current scope.
-     *
-     * @param scope - Scope to apply.
-     */
-    applyScope(scope: Scope): void;
-
-    /**
-     * Get the current folds of the editor.
-     *
-     * @returns Current fold information, or `null`.
-     */
-    getFoldInfo(): null | FoldInfo;
 
     /**
      * Splice incoming data at according to subpath for correct reference, then update heading and render.
@@ -174,6 +154,11 @@ export interface WidgetEditorView extends EmbeddedEditorView {
     save(data: string, delayed?: boolean): Promise<void>;
 
     /**
+     * Whether embedding should be saved twice on save.
+     */
+    saveAgain: boolean;
+
+    /**
      * On blur widget, save title.
      *
      * @param element - The title element.
@@ -181,9 +166,24 @@ export interface WidgetEditorView extends EmbeddedEditorView {
     saveTitle(element: HTMLElement): void;
 
     /**
+     * Whether the widget is currently saving.
+     */
+    saving: boolean;
+
+    /**
      * Show preview of widget.
      *
      * @param show - Whether to show or hide the preview.
      */
     showPreview(show?: boolean): void;
+
+    /**
+     * Subpath reference of the path.
+     */
+    subpath: string;
+
+    /**
+     * Whether the subpath was not found in the cache.
+     */
+    subpathNotFound: boolean;
 }

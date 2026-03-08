@@ -22,33 +22,6 @@ export interface CodeMirrorAdapterEx {
      */
     new(cm6: VimEditor): CodeMirrorEditor;
 
-    /** Built-in editor commands (undo, redo, indent, etc.). */
-    commands: CodeMirrorAdapterExCommands;
-
-    /** Whether the current platform is macOS. */
-    isMac: boolean;
-
-    /** Map of key binding names to their handlers. */
-    keyMap: Record<string, unknown>;
-
-    /** Map of key names to their handlers. */
-    keys: Record<string, unknown>;
-
-    /**
-     * Constructor for creating editor position objects.
-     *
-     * @param line - The line number.
-     * @param ch - The character offset.
-     * @returns The created editor position.
-     */
-    Pos: new(line: number, ch: number) => EditorPosition;
-
-    /** StringStream class for tokenizing input. */
-    StringStream: unknown;
-
-    /** The Vim API instance. */
-    Vim: VimApi;
-
     /**
      * Add a CSS class to an HTML element.
      *
@@ -56,6 +29,9 @@ export interface CodeMirrorAdapterEx {
      * @param className - The CSS class name to add.
      */
     addClass(element: HTMLElement, className: string): void;
+
+    /** Built-in editor commands (undo, redo, indent, etc.). */
+    commands: CodeMirrorAdapterExCommands;
 
     /**
      * Define a new editor option with a default value and change handler.
@@ -97,6 +73,9 @@ export interface CodeMirrorAdapterEx {
      */
     findMatchingTag(doc: CodeMirrorAdapterEx, pos: EditorPosition): void;
 
+    /** Whether the current platform is macOS. */
+    isMac: boolean;
+
     /**
      * Check whether the given character is a word character.
      *
@@ -105,6 +84,9 @@ export interface CodeMirrorAdapterEx {
      */
     isWordChar(char: string): boolean;
 
+    /** Map of key binding names to their handlers. */
+    keyMap: Record<string, unknown>;
+
     /**
      * Get the key name string from a keyboard event.
      *
@@ -112,6 +94,9 @@ export interface CodeMirrorAdapterEx {
      * @returns The key name string.
      */
     keyName(event: KeyboardEvent): string;
+
+    /** Map of key names to their handlers. */
+    keys: Record<string, unknown>;
 
     /**
      * Look up a key binding and invoke the callback with the associated action.
@@ -143,6 +128,15 @@ export interface CodeMirrorAdapterEx {
     on(event: string, listener: EventListenerOrEventListenerObject): void;
 
     /**
+     * Constructor for creating editor position objects.
+     *
+     * @param line - The line number.
+     * @param ch - The character offset.
+     * @returns The created editor position.
+     */
+    Pos: new(line: number, ch: number) => EditorPosition;
+
+    /**
      * Remove a CSS class from an HTML element.
      *
      * @param element - The HTML element to remove the class from.
@@ -158,6 +152,12 @@ export interface CodeMirrorAdapterEx {
      * @param values - Additional values to pass to the signal handlers.
      */
     signal(target: unknown, type: string, ...values: unknown[]): void;
+
+    /** StringStream class for tokenizing input. */
+    StringStream: unknown;
+
+    /** The Vim API instance. */
+    Vim: VimApi;
 
     /**
      * Convert a keyboard event to its Vim key representation.

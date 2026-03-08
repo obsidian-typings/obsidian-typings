@@ -7,20 +7,6 @@ declare module 'obsidian' {
      */
     interface ProgressBarComponent extends ValueComponent<number> {
         /**
-         * Access the "line" element which is a child of the progressBar element.
-         *
-         * @unofficial
-         */
-        lineEl: HTMLDivElement;
-
-        /**
-         * Access the "bar" element.
-         *
-         * @unofficial
-         */
-        progressBar: HTMLDivElement;
-
-        /**
          * Creates a new ProgressBarComponent.
          *
          * @param containerEl - The container element.
@@ -37,6 +23,20 @@ declare module 'obsidian' {
          * @official
          */
         getValue(): number;
+
+        /**
+         * Access the "line" element which is a child of the progressBar element.
+         *
+         * @unofficial
+         */
+        lineEl: HTMLDivElement;
+
+        /**
+         * Access the "bar" element.
+         *
+         * @unofficial
+         */
+        progressBar: HTMLDivElement;
 
         /**
          * Set the current value of the progress bar.

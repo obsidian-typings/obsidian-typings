@@ -25,57 +25,16 @@ declare module 'obsidian' {
         containerEl: HTMLDivElement;
 
         /**
-         * The flex-grow dimension of this item within its parent split.
-         * @unofficial
-         */
-        dimension: number | null;
-
-        /**
-         * Unique identifier for this workspace item.
-         * @unofficial
-         */
-        id: string;
-
-        /**
-         * The direct parent of the leaf.
-         *
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link WorkspaceItem.parent} instead.
-         * @since 1.6.6
-         */
-        parent__: WorkspaceParent;
-
-        /**
-         * The resize handle element used for adjusting item dimensions.
-         * @unofficial
-         */
-        resizeHandleEl: HTMLHRElement;
-
-        /**
-         * The type identifier for this workspace item (e.g. 'leaf', 'split', 'tabs').
-         * @unofficial
-         */
-        type: string;
-
-        /**
-         * Reference to the workspace this item belongs to.
-         * @unofficial
-         */
-        workspace: Workspace;
-
-        /**
-         * The parent split containing this item.
-         *
-         * @returns The parent workspace container.
-         * @unofficial
-         */
-        get parentSplit(): WorkspaceParent;
-
-        /**
          * Detach this item from its parent.
          * @unofficial
          */
         detach(): void;
+
+        /**
+         * The flex-grow dimension of this item within its parent split.
+         * @unofficial
+         */
+        dimension: number | null;
 
         /**
          * Get the root container parent item, which can be one of:.
@@ -106,12 +65,41 @@ declare module 'obsidian' {
         getRoot(): WorkspaceItem;
 
         /**
+         * Unique identifier for this workspace item.
+         * @unofficial
+         */
+        id: string;
+
+        /**
          * Handle the start of a resize operation on this item.
          *
          * @param evt - The mouse event that started the resize.
          * @unofficial
          */
         onResizeStart(evt: MouseEvent): void;
+
+        /**
+         * The direct parent of the leaf.
+         *
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link WorkspaceItem.parent} instead.
+         * @since 1.6.6
+         */
+        parent__: WorkspaceParent;
+
+        /**
+         * The parent split containing this item.
+         *
+         * @returns The parent workspace container.
+         * @unofficial
+         */
+        get parentSplit(): WorkspaceParent;
+
+        /**
+         * The resize handle element used for adjusting item dimensions.
+         * @unofficial
+         */
+        resizeHandleEl: HTMLHRElement;
 
         /**
          * Serialize this workspace item's state for persistence.
@@ -136,5 +124,17 @@ declare module 'obsidian' {
          * @unofficial
          */
         setParent(parent: WorkspaceParent): void;
+
+        /**
+         * The type identifier for this workspace item (e.g. 'leaf', 'split', 'tabs').
+         * @unofficial
+         */
+        type: string;
+
+        /**
+         * Reference to the workspace this item belongs to.
+         * @unofficial
+         */
+        workspace: Workspace;
     }
 }

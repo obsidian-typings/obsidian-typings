@@ -9,21 +9,6 @@ import type { SerializedBasesSubView } from './SerializedBasesSubView.d.ts';
  */
 export interface BasesSubView {
     /**
-     * The name.
-     */
-    name: string;
-
-    /**
-     * The query.
-     */
-    query: BasesQuery;
-
-    /**
-     * The type.
-     */
-    type: string;
-
-    /**
      * Clones the sub view.
      *
      * @param name - The name for the cloned sub view.
@@ -88,6 +73,16 @@ export interface BasesSubView {
     getViewName(): string;
 
     /**
+     * The name.
+     */
+    name: string;
+
+    /**
+     * The query.
+     */
+    query: BasesQuery;
+
+    /**
      * Serializes the sub view.
      *
      * @returns The serialized sub view.
@@ -121,4 +116,9 @@ export interface BasesSubView {
      * @returns The set result.
      */
     setSortProperty(arg1: unknown, arg2: unknown): unknown;
+
+    /**
+     * The type.
+     */
+    type: string;
 }

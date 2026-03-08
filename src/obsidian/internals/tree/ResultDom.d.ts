@@ -15,54 +15,6 @@ import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
  * @unofficial
  */
 export interface ResultDom {
-    /** Reference to the App instance. */
-    app: App;
-
-    /** Debounced callback triggered when results change. */
-    changed: Debouncer<[], unknown>;
-
-    /** Container element for child result items. */
-    childrenEl: HTMLDivElement;
-
-    /** Whether all result items are collapsed. */
-    collapseAll: boolean;
-
-    /** Root element of the result DOM. */
-    el: HTMLDivElement;
-
-    /** Element displayed when there are no search results. */
-    emptyStateEl: HTMLDivElement;
-
-    /** Whether extra surrounding context is shown around matches. */
-    extraContext: boolean;
-
-    /** Currently focused result item, or `null` if none. */
-    focusedItem: null;
-
-    /** Virtual scrolling component for rendering visible results. */
-    infinityScroll: InfinityScroll;
-
-    /** Layout information used by virtual scrolling. */
-    info: TreeNodeInfo;
-
-    /** Spacer element used to maintain correct scroll height. */
-    pusherEl: HTMLDivElement;
-
-    /** Lookup map from file to its corresponding result DOM item. */
-    resultDomLookup: Map<TFile, ResultDomItem>;
-
-    /** Whether the empty state placeholder is currently displayed. */
-    showingEmptyState: boolean;
-
-    /** Current sort order for search results. */
-    sortOrder: string;
-
-    /** Virtual children manager for result items. */
-    vChildren: TreeNodeVChildren<ResultDomItem, ResultDom>;
-
-    /** Whether a search operation is currently in progress. */
-    working: boolean;
-
     /**
      * Add a search result for a file to the result DOM.
      *
@@ -74,6 +26,12 @@ export interface ResultDom {
      */
     addResult(file: TFile, result: ResultDomResult, content: string, shouldShowTitle?: boolean): ResultDomItem;
 
+    /** Reference to the App instance. */
+    app: App;
+
+    /** Debounced callback triggered when results change. */
+    changed: Debouncer<[], unknown>;
+
     /**
      * Change which result item has focus.
      *
@@ -81,12 +39,30 @@ export interface ResultDom {
      */
     changeFocusedItem(arg1: unknown): unknown;
 
+    /** Container element for child result items. */
+    childrenEl: HTMLDivElement;
+
+    /** Whether all result items are collapsed. */
+    collapseAll: boolean;
+
+    /** Root element of the result DOM. */
+    el: HTMLDivElement;
+
     /**
      * Clear all search results from the DOM.
      *
      * @returns The result of clearing.
      */
     emptyResults(): unknown;
+
+    /** Element displayed when there are no search results. */
+    emptyStateEl: HTMLDivElement;
+
+    /** Whether extra surrounding context is shown around matches. */
+    extraContext: boolean;
+
+    /** Currently focused result item, or `null` if none. */
+    focusedItem: null;
 
     /**
      * Get the list of files with search results.
@@ -109,6 +85,12 @@ export interface ResultDom {
      */
     getResult(arg1: unknown): unknown;
 
+    /** Virtual scrolling component for rendering visible results. */
+    infinityScroll: InfinityScroll;
+
+    /** Layout information used by virtual scrolling. */
+    info: TreeNodeInfo;
+
     /**
      * Callback invoked when the result set changes.
      *
@@ -123,12 +105,18 @@ export interface ResultDom {
      */
     onResize(): unknown;
 
+    /** Spacer element used to maintain correct scroll height. */
+    pusherEl: HTMLDivElement;
+
     /**
      * Remove a search result from the DOM.
      *
      * @returns The result of the removal.
      */
     removeResult(arg1: unknown): unknown;
+
+    /** Lookup map from file to its corresponding result DOM item. */
+    resultDomLookup: Map<TFile, ResultDomItem>;
 
     /**
      * Set whether all result items should be collapsed.
@@ -151,6 +139,12 @@ export interface ResultDom {
      */
     setFocusedItem(arg1: unknown): unknown;
 
+    /** Whether the empty state placeholder is currently displayed. */
+    showingEmptyState: boolean;
+
+    /** Current sort order for search results. */
+    sortOrder: string;
+
     /**
      * Show a loading indicator while search is in progress.
      *
@@ -171,4 +165,10 @@ export interface ResultDom {
      * @returns The result of toggling the collapse state.
      */
     toggle(arg1: unknown, arg2: unknown): Promise<unknown>;
+
+    /** Virtual children manager for result items. */
+    vChildren: TreeNodeVChildren<ResultDomItem, ResultDom>;
+
+    /** Whether a search operation is currently in progress. */
+    working: boolean;
 }

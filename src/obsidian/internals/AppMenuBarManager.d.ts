@@ -10,23 +10,11 @@ import type { AppMenuBarManagerConstructor } from './constructors/internals/AppM
  * @unofficial
  */
 export interface AppMenuBarManager {
-    /** Reference to the app. */
-    app: App;
-
-    /** Constructor reference for the menu bar manager. */
-    constructor: AppMenuBarManagerConstructor;
-
-    /** Debounced handler for file open events. */
-    onFileOpen: Debouncer<[], unknown>;
-
-    /** Debounced handler for window frame changes. */
-    onWindowFrameChange: Debouncer<[], unknown>;
-
-    /** Debounced function to re-render the menu bar. */
-    requestRender: Debouncer<[], unknown>;
-
     /** Internal handler for file open events. */
     _onFileOpen(): void;
+
+    /** Reference to the app. */
+    app: App;
 
     /**
      * Apply hotkey accelerators to menu items.
@@ -42,6 +30,9 @@ export interface AppMenuBarManager {
      */
     buildMenu(): unknown;
 
+    /** Constructor reference for the menu bar manager. */
+    constructor: AppMenuBarManagerConstructor;
+
     /**
      * Convert a hotkey binding to a native accelerator string.
      *
@@ -56,12 +47,21 @@ export interface AppMenuBarManager {
      */
     hideUnregisteredCommands(arg1: unknown): unknown;
 
+    /** Debounced handler for file open events. */
+    onFileOpen: Debouncer<[], unknown>;
+
+    /** Debounced handler for window frame changes. */
+    onWindowFrameChange: Debouncer<[], unknown>;
+
     /**
      * Render the menu bar.
      *
      * @returns The result of the render operation.
      */
     render(): unknown;
+
+    /** Debounced function to re-render the menu bar. */
+    requestRender: Debouncer<[], unknown>;
 
     /**
      * Update the share menu item state.

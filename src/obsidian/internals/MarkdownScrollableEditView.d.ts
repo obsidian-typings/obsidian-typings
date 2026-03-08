@@ -11,31 +11,6 @@ import type { MarkdownBaseView } from './MarkdownBaseView.d.ts';
  */
 export interface MarkdownScrollableEditView extends MarkdownBaseView {
     /**
-     * List of CSS classes applied to the editor.
-     */
-    cssClasses: [];
-
-    /**
-     * Whether the editor is currently scrolling.
-     */
-    isScrolling: boolean;
-
-    /**
-     * Scope for the search component, if exists.
-     */
-    scope: Scope | undefined;
-
-    /**
-     * Search component for the editor, provides highlight and search functionality.
-     */
-    search: EditorSearchComponent;
-
-    /**
-     * Container for the editor, handles editor size.
-     */
-    sizerEl: HTMLElement;
-
-    /**
      * Set the scroll count of the editor scrollbar.
      *
      * @param scroll - Scroll position to apply.
@@ -49,6 +24,11 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
      * @remark Creates extensions for list indentation, tab indentations.
      */
     buildLocalExtensions(): Extension[];
+
+    /**
+     * List of CSS classes applied to the editor.
+     */
+    cssClasses: [];
 
     /**
      * Focus the editor (and for mobile: render keyboard).
@@ -82,6 +62,11 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
     hide(): void;
 
     /**
+     * Whether the editor is currently scrolling.
+     */
+    isScrolling: boolean;
+
+    /**
      * Clear editor cache and refreshes editor on app css change.
      */
     onCssChange(): void;
@@ -112,6 +97,16 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
     onViewClick(event?: MouseEvent): void;
 
     /**
+     * Scope for the search component, if exists.
+     */
+    scope: Scope | undefined;
+
+    /**
+     * Search component for the editor, provides highlight and search functionality.
+     */
+    search: EditorSearchComponent;
+
+    /**
      * Add classes to the editor, functions as a toggle.
      *
      * @param classes - CSS classes to apply.
@@ -129,6 +124,11 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
      * @param replace - Whether to show the replace input.
      */
     showSearch(replace: boolean): void;
+
+    /**
+     * Container for the editor, handles editor size.
+     */
+    sizerEl: HTMLElement;
 
     /**
      * Update the bottom padding of the CodeMirror contentdom.

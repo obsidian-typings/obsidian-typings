@@ -14,6 +14,15 @@ declare module 'obsidian' {
         deleted: boolean;
 
         /**
+         * Gets the path after renaming the file or folder.
+         *
+         * @param newName The new name of the file or folder.
+         * @returns The new path of the file or folder.
+         * @unofficial
+         */
+        getNewPathAfterRename(newName: string): string;
+
+        /**
          * The name of the file.
          *
          * @official
@@ -38,23 +47,6 @@ declare module 'obsidian' {
         path: string;
 
         /**
-         * The vault.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        vault: Vault;
-
-        /**
-         * Gets the path after renaming the file or folder.
-         *
-         * @param newName The new name of the file or folder.
-         * @returns The new path of the file or folder.
-         * @unofficial
-         */
-        getNewPathAfterRename(newName: string): string;
-
-        /**
          * @unofficial
          *
          * Sets the path of the file or folder.
@@ -62,5 +54,13 @@ declare module 'obsidian' {
          * @unofficial
          */
         setPath(path: string): void;
+
+        /**
+         * The vault.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        vault: Vault;
     }
 }

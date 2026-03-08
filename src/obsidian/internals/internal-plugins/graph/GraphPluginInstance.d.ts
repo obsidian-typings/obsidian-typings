@@ -20,12 +20,6 @@ export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin>
     /** Whether the graph plugin is enabled by default. */
     defaultOn: true;
 
-    /** User-configurable options for the graph plugin. */
-    options: GraphPluginInstanceOptions;
-
-    /** Reference to the parent graph plugin. */
-    plugin: GraphPlugin;
-
     /**
      * Reload options when settings are changed externally.
      *
@@ -57,6 +51,12 @@ export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin>
      * @returns `true` if the command can be executed, or `undefined`.
      */
     openLocalGraph(checking: boolean): true | undefined;
+
+    /** User-configurable options for the graph plugin. */
+    options: GraphPluginInstanceOptions;
+
+    /** Reference to the parent graph plugin. */
+    plugin: GraphPlugin;
 
     /**
      * Saves the options in graph.json.

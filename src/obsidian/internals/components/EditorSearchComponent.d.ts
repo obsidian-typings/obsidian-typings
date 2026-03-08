@@ -12,6 +12,11 @@ import type { AbstractSearchComponent } from './AbstractSearchComponent.d.ts';
  */
 export interface EditorSearchComponent extends AbstractSearchComponent {
     /**
+     * Remove all highlights from editor.
+     */
+    clear(): void;
+
+    /**
      * Search cursor for editor, handles search and replace functionality for editor.
      */
     cursor: null | SearchCursor;
@@ -20,21 +25,6 @@ export interface EditorSearchComponent extends AbstractSearchComponent {
      * Linked editor for search component.
      */
     editor: Editor;
-
-    /**
-     * Whether search component is currently rendering.
-     */
-    isActive: boolean;
-
-    /**
-     * Whether search component is replacing text (includes 'Replace' input field).
-     */
-    isReplace: boolean;
-
-    /**
-     * Remove all highlights from editor.
-     */
-    clear(): void;
 
     /**
      * Find next search results from cursor and highlights it.
@@ -63,6 +53,16 @@ export interface EditorSearchComponent extends AbstractSearchComponent {
      * @remark Invokes editor.addHighlights.
      */
     highlight(ranges: EditorRange[]): void;
+
+    /**
+     * Whether search component is currently rendering.
+     */
+    isActive: boolean;
+
+    /**
+     * Whether search component is replacing text (includes 'Replace' input field).
+     */
+    isReplace: boolean;
 
     /**
      * Highlights all matches if search element focused.

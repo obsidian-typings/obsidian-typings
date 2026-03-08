@@ -30,24 +30,6 @@ export interface MetadataTypeManager extends Events {
     assignedWidgets: MetadataTypeManagerTypesRecord;
 
     /**
-     * Unix timestamp of the last save
-     */
-    lastSave: number;
-
-    /** Debounced handler for property type config file changes on disk. */
-    onConfigFileChange: Debouncer<[], Promise<void>>;
-
-    /**
-     * Registered properties of the vault.
-     */
-    properties: MetadataTypeManagerPropertiesRecord;
-
-    /**
-     * Registered type widgets.
-     */
-    registeredTypeWidgets: MetadataTypeManagerRegisteredTypeWidgetsRecord;
-
-    /**
      * Get all registered properties of the vault.
      *
      * @returns Record of property names to their info.
@@ -87,6 +69,11 @@ export interface MetadataTypeManager extends Events {
      */
     getWidget(type: string): PropertyWidget;
 
+    /**
+     * Unix timestamp of the last save
+     */
+    lastSave: number;
+
     /** Load metadata type configuration. */
     load(): Promise<void>;
 
@@ -97,12 +84,25 @@ export interface MetadataTypeManager extends Events {
      */
     loadData(): Promise<void>;
 
+    /** Debounced handler for property type config file changes on disk. */
+    onConfigFileChange: Debouncer<[], Promise<void>>;
+
     /**
      * Handle raw file system change events for the property type config.
      *
      * @param e - The raw file system change event.
      */
     onRaw(e: unknown): void;
+
+    /**
+     * Registered properties of the vault.
+     */
+    properties: MetadataTypeManagerPropertiesRecord;
+
+    /**
+     * Registered type widgets.
+     */
+    registeredTypeWidgets: MetadataTypeManagerRegisteredTypeWidgetsRecord;
 
     /** Register event listeners for property type config file changes. */
     registerListeners(): void;

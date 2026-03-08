@@ -17,11 +17,6 @@ export interface ClipboardManager {
     app: App;
 
     /**
-     * Reference to the Editor View.
-     */
-    info: MarkdownView;
-
-    /**
      * Get current path of editor view for determining storage location embed.
      *
      * @returns Current editor view path.
@@ -67,6 +62,11 @@ export interface ClipboardManager {
      * @returns Whether the paste was handled.
      */
     handlePaste(event: ClipboardEvent): boolean;
+
+    /**
+     * Reference to the Editor View.
+     */
+    info: MarkdownView;
 
     /**
      * Insert single file as embed into the editor.

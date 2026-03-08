@@ -7,20 +7,6 @@ declare module 'obsidian' {
      */
     interface WorkspaceMobileDrawer extends WorkspaceParent {
         /**
-         * Whether the mobile drawer is collapsed.
-         *
-         * @official
-         */
-        collapsed: boolean;
-
-        /**
-         * The parent of the mobile drawer.
-         *
-         * @official
-         */
-        parent: WorkspaceParent;
-
-        /**
          * Collapse the mobile drawer.
          *
          * @official
@@ -28,11 +14,25 @@ declare module 'obsidian' {
         collapse(): void;
 
         /**
+         * Whether the mobile drawer is collapsed.
+         *
+         * @official
+         */
+        collapsed: boolean;
+
+        /**
          * Expand the mobile drawer.
          *
          * @official
          */
         expand(): void;
+
+        /**
+         * The parent of the mobile drawer.
+         *
+         * @official
+         */
+        parent: WorkspaceParent;
 
         /**
          * Toggle the mobile drawer.

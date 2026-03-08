@@ -15,9 +15,6 @@ export interface Cli {
     /** Reference to the app. */
     app: App;
 
-    /** Registered CLI command handlers. */
-    handlers: Map<string, CliHandlerEntry>;
-
     /**
      * Format tree nodes as an ASCII tree.
      *
@@ -56,6 +53,9 @@ export interface Cli {
      * @returns The formatted table string.
      */
     formatTable(headers: string[], rows: string[][], format: 'json' | 'csv' | 'tsv'): string;
+
+    /** Registered CLI command handlers. */
+    handlers: Map<string, CliHandlerEntry>;
 
     /**
      * Initialize the CLI handler, registering the global `handleCli` function.

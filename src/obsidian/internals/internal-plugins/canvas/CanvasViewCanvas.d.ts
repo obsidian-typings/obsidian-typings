@@ -21,192 +21,6 @@ import type { NodeInteractionLayer } from './NodeInteractionLayer.d.ts';
  * @unofficial
  */
 export interface CanvasViewCanvas {
-    /** Reference to the Obsidian app instance. */
-    app: App;
-
-    /** SVG pattern element used for rendering the canvas background grid. */
-    backgroundPatternEl: SVGPatternElement;
-
-    /** Container element for canvas control buttons (zoom, undo/redo, etc.). */
-    canvasControlsEl: HTMLDivElement;
-
-    /** Main canvas container element. */
-    canvasEl: HTMLDivElement;
-
-    /** Extended rectangle representing the canvas bounds. */
-    canvasRect: CanvasRectEx;
-
-    /** Container element for the card creation menu. */
-    cardMenuEl: HTMLDivElement;
-
-    /** Configuration settings for the canvas view. */
-    config: CanvasViewConfig;
-
-    /** Serialized canvas data containing nodes and edges. */
-    data: CanvasViewData;
-
-    /** Set of items that have been modified and need saving. */
-    dirty: Set<unknown>;
-
-    /** SVG container element for edge lines. */
-    edgeContainerEl: SVGElement;
-
-    /** SVG container element for edge endpoint markers. */
-    edgeEndContainerEl: SVGElement;
-
-    /** Mapping of edges to their source nodes. */
-    edgeFrom: MapOfSets<CanvasViewCanvasEdge, CanvasViewCanvasNode>;
-
-    /** Spatial index (R-tree) for efficient edge hit-testing. */
-    edgeIndex: EdgeIndex;
-
-    /** Map of all edges on the canvas, keyed by edge ID. */
-    edges: Map<string, CanvasViewCanvasEdge>;
-
-    /** Mapping of edges to their target nodes. */
-    edgeTo: MapOfSets<CanvasViewCanvasEdge, CanvasViewCanvasNode>;
-
-    /** Whether to finish the current viewport animation on the next frame. */
-    finishViewportAnimation: boolean;
-
-    /** Current animation frame request ID. */
-    frame: number;
-
-    /** Animation frame window reference, null when not animating. */
-    frameWin: null;
-
-    /** Spacing between grid lines in pixels. */
-    gridSpacing: number;
-
-    /** Undo/redo history manager for canvas state. */
-    history: CanvasViewHistory;
-
-    /** Whether the user is currently dragging on the canvas. */
-    isDragging: boolean;
-
-    /** Whether the spacebar is currently held (for pan mode). */
-    isHoldingSpace: boolean;
-
-    /** Map of currently pressed keyboard keys. */
-    keys: Object;
-
-    /** Set of edges that were visible in the viewport on the last render frame. */
-    lastEdgesInViewport: Set<CanvasViewCanvasEdge>;
-
-    /** Set of nodes that were visible in the viewport on the last render frame. */
-    lastNodesInViewport: Set<CanvasViewCanvasNode>;
-
-    /** Context menu and toolbar for the canvas. */
-    menu: CanvasMenu;
-
-    /** Set of items that have been moved and need re-indexing. */
-    moved: Set<unknown>;
-
-    /** Element used for dragging/moving the canvas viewport. */
-    moverEl: HTMLDivElement;
-
-    /** Spatial index (R-tree) for efficient node hit-testing. */
-    nodeIndex: EdgeIndex;
-
-    /** Layer handling user interactions with nodes (resize, connect, etc.). */
-    nodeInteractionLayer: NodeInteractionLayer;
-
-    /** Map of all nodes on the canvas, keyed by node ID. */
-    nodes: Map<string, CanvasViewCanvasNode>;
-
-    /** Optional configuration options for the canvas. */
-    options?: unknown;
-
-    /** Counter for pausing animation frames. */
-    pauseAnimation: number;
-
-    /** Current pointer position in canvas coordinates. */
-    pointer: Point;
-
-    /** Animation frame request ID for pointer tracking. */
-    pointerFrame: number;
-
-    /** Pointer frame window reference, null when not tracking. */
-    pointerFrameWin: null;
-
-    /** Button element for opening the quick settings menu. */
-    quickSettingsButton: HTMLDivElement;
-
-    /** Whether the canvas is in read-only mode. */
-    readonly: boolean;
-
-    /** Button element for the redo action. */
-    redoBtnEl: HTMLDivElement;
-
-    /** Debounced function to push the current state to history. */
-    requestPushHistory: Debouncer<[], unknown>;
-
-    /** Debounced function to update the file open state. */
-    requestUpdateFileOpen: Debouncer<[], unknown>;
-
-    /** Current zoom scale factor of the canvas viewport. */
-    scale: number;
-
-    /** Whether the canvas is currently being screenshotted. */
-    screenshotting: boolean;
-
-    /** Set of currently selected nodes and edges. */
-    selection: Set<Selection>;
-
-    /** Whether the selection has changed since the last update. */
-    selectionChanged: boolean;
-
-    /** Distance threshold for snapping behavior. */
-    snapDistance?: unknown;
-
-    /** Previously stale selection, null when selection is current. */
-    staleSelection: null;
-
-    /** Target X translation for viewport animation. */
-    tx: number;
-
-    /** Target Y translation for viewport animation. */
-    ty: number;
-
-    /** Target zoom level for viewport animation. */
-    tZoom: number;
-
-    /** Button element for the undo action. */
-    undoBtnEl: HTMLDivElement;
-
-    /** Reference to the parent CanvasView. */
-    view: CanvasView;
-
-    /** Whether the viewport has changed since the last render frame. */
-    viewportChanged: boolean;
-
-    /** Whether the canvas was animating on the previous frame. */
-    wasAnimating: boolean;
-
-    /** Outermost wrapper element for the canvas. */
-    wrapperEl: HTMLDivElement;
-
-    /** Current X offset of the viewport in canvas coordinates. */
-    x: number;
-
-    /** Current Y offset of the viewport in canvas coordinates. */
-    y: number;
-
-    /** Counter for assigning z-index values to nodes. */
-    zIndexCounter: number;
-
-    /** Current zoom level of the viewport. */
-    zoom: number;
-
-    /** Zoom level threshold for switching rendering detail levels. */
-    zoomBreakpoint?: unknown;
-
-    /** Center point for zoom operations, null when not zooming. */
-    zoomCenter: null;
-
-    /** Whether a zoom-to-fit operation is queued for the next frame. */
-    zoomToFitQueued: boolean;
-
     /**
      * Add an edge to the canvas.
      *
@@ -221,12 +35,18 @@ export interface CanvasViewCanvas {
      */
     addNode(arg1: unknown): unknown;
 
+    /** Reference to the Obsidian app instance. */
+    app: App;
+
     /**
      * Apply a history state to restore the canvas to a previous state.
      *
      * @returns The result of applying the history state.
      */
     applyHistory(arg1: unknown): unknown;
+
+    /** SVG pattern element used for rendering the canvas background grid. */
+    backgroundPatternEl: SVGPatternElement;
 
     /**
      * Cancel the current pending animation frame.
@@ -241,6 +61,18 @@ export interface CanvasViewCanvas {
      * @returns Whether snapping is possible.
      */
     canSnap(arg1: unknown): unknown;
+
+    /** Container element for canvas control buttons (zoom, undo/redo, etc.). */
+    canvasControlsEl: HTMLDivElement;
+
+    /** Main canvas container element. */
+    canvasEl: HTMLDivElement;
+
+    /** Extended rectangle representing the canvas bounds. */
+    canvasRect: CanvasRectEx;
+
+    /** Container element for the card creation menu. */
+    cardMenuEl: HTMLDivElement;
 
     /**
      * Remove all nodes and edges from the canvas.
@@ -262,6 +94,9 @@ export interface CanvasViewCanvas {
      * @returns The cloned canvas data.
      */
     cloneData(arg1: unknown, arg2: unknown): unknown;
+
+    /** Configuration settings for the canvas view. */
+    config: CanvasViewConfig;
 
     /**
      * Create a new file-type node on the canvas.
@@ -305,6 +140,9 @@ export interface CanvasViewCanvas {
      */
     createTextNode(arg1: unknown): unknown;
 
+    /** Serialized canvas data containing nodes and edges. */
+    data: CanvasViewData;
+
     /**
      * Delete all currently selected nodes and edges.
      *
@@ -325,6 +163,9 @@ export interface CanvasViewCanvas {
      * @returns The result of clearing the selection.
      */
     deselectAll(): unknown;
+
+    /** Set of items that have been modified and need saving. */
+    dirty: Set<unknown>;
 
     /**
      * Convert a canvas position to DOM pixel coordinates.
@@ -354,12 +195,39 @@ export interface CanvasViewCanvas {
      */
     dragTempNode(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
+    /** SVG container element for edge lines. */
+    edgeContainerEl: SVGElement;
+
+    /** SVG container element for edge endpoint markers. */
+    edgeEndContainerEl: SVGElement;
+
+    /** Mapping of edges to their source nodes. */
+    edgeFrom: MapOfSets<CanvasViewCanvasEdge, CanvasViewCanvasNode>;
+
+    /** Spatial index (R-tree) for efficient edge hit-testing. */
+    edgeIndex: EdgeIndex;
+
+    /** Map of all edges on the canvas, keyed by edge ID. */
+    edges: Map<string, CanvasViewCanvasEdge>;
+
+    /** Mapping of edges to their target nodes. */
+    edgeTo: MapOfSets<CanvasViewCanvasEdge, CanvasViewCanvasNode>;
+
     /**
      * Stop rendering snap point guide lines.
      *
      * @returns The result of ending snap point rendering.
      */
     endSnapPointRendering(): unknown;
+
+    /** Whether to finish the current viewport animation on the next frame. */
+    finishViewportAnimation: boolean;
+
+    /** Current animation frame request ID. */
+    frame: number;
+
+    /** Animation frame window reference, null when not animating. */
+    frameWin: null;
 
     /**
      * Generate a high-definition image of the canvas.
@@ -445,6 +313,9 @@ export interface CanvasViewCanvas {
      */
     getZIndex(): unknown;
 
+    /** Spacing between grid lines in pixels. */
+    gridSpacing: number;
+
     /**
      * Handle a copy event for the current selection.
      *
@@ -494,6 +365,9 @@ export interface CanvasViewCanvas {
      */
     handleSelectionDrag(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
+    /** Undo/redo history manager for canvas state. */
+    history: CanvasViewHistory;
+
     /**
      * Test whether a point hits a specific node.
      *
@@ -514,6 +388,21 @@ export interface CanvasViewCanvas {
      * @returns The hit interactive element, if any.
      */
     interactionHitTest(arg1: unknown): unknown;
+
+    /** Whether the user is currently dragging on the canvas. */
+    isDragging: boolean;
+
+    /** Whether the spacebar is currently held (for pan mode). */
+    isHoldingSpace: boolean;
+
+    /** Map of currently pressed keyboard keys. */
+    keys: Object;
+
+    /** Set of edges that were visible in the viewport on the last render frame. */
+    lastEdgesInViewport: Set<CanvasViewCanvasEdge>;
+
+    /** Set of nodes that were visible in the viewport on the last render frame. */
+    lastNodesInViewport: Set<CanvasViewCanvasNode>;
 
     /**
      * Load and initialize the canvas from saved data.
@@ -542,6 +431,24 @@ export interface CanvasViewCanvas {
      * @returns The result of marking the viewport as changed.
      */
     markViewportChanged(): unknown;
+
+    /** Context menu and toolbar for the canvas. */
+    menu: CanvasMenu;
+
+    /** Set of items that have been moved and need re-indexing. */
+    moved: Set<unknown>;
+
+    /** Element used for dragging/moving the canvas viewport. */
+    moverEl: HTMLDivElement;
+
+    /** Spatial index (R-tree) for efficient node hit-testing. */
+    nodeIndex: EdgeIndex;
+
+    /** Layer handling user interactions with nodes (resize, connect, etc.). */
+    nodeInteractionLayer: NodeInteractionLayer;
+
+    /** Map of all nodes on the canvas, keyed by node ID. */
+    nodes: Map<string, CanvasViewCanvasNode>;
 
     /**
      * Nudge the current selection by the specified offset.
@@ -634,6 +541,9 @@ export interface CanvasViewCanvas {
      */
     onWheel(arg1: unknown): unknown;
 
+    /** Optional configuration options for the canvas. */
+    options?: unknown;
+
     /**
      * Override the current history entry with the latest state.
      *
@@ -661,6 +571,18 @@ export interface CanvasViewCanvas {
      * @returns The result of panning the viewport.
      */
     panTo(arg1: unknown, arg2: unknown): unknown;
+
+    /** Counter for pausing animation frames. */
+    pauseAnimation: number;
+
+    /** Current pointer position in canvas coordinates. */
+    pointer: Point;
+
+    /** Animation frame request ID for pointer tracking. */
+    pointerFrame: number;
+
+    /** Pointer frame window reference, null when not tracking. */
+    pointerFrameWin: null;
 
     /**
      * Get the center position of the current viewport.
@@ -704,12 +626,21 @@ export interface CanvasViewCanvas {
      */
     pushHistory(arg1: unknown): unknown;
 
+    /** Button element for opening the quick settings menu. */
+    quickSettingsButton: HTMLDivElement;
+
+    /** Whether the canvas is in read-only mode. */
+    readonly: boolean;
+
     /**
      * Redo the last undone action.
      *
      * @returns The result of the redo operation.
      */
     redo(): unknown;
+
+    /** Button element for the redo action. */
+    redoBtnEl: HTMLDivElement;
 
     /**
      * Remove an edge from the canvas.
@@ -739,6 +670,9 @@ export interface CanvasViewCanvas {
      */
     requestFrame(arg1: unknown): unknown;
 
+    /** Debounced function to push the current state to history. */
+    requestPushHistory: Debouncer<[], unknown>;
+
     /**
      * Request saving the canvas data to disk.
      *
@@ -746,12 +680,21 @@ export interface CanvasViewCanvas {
      */
     requestSave(arg1: unknown): unknown;
 
+    /** Debounced function to update the file open state. */
+    requestUpdateFileOpen: Debouncer<[], unknown>;
+
     /**
      * Force a re-render of all items in the viewport.
      *
      * @returns The result of re-rendering the viewport.
      */
     rerenderViewport(): unknown;
+
+    /** Current zoom scale factor of the canvas viewport. */
+    scale: number;
+
+    /** Whether the canvas is currently being screenshotted. */
+    screenshotting: boolean;
 
     /**
      * Add an item to the current selection.
@@ -766,6 +709,12 @@ export interface CanvasViewCanvas {
      * @returns The result of selecting all items.
      */
     selectAll(arg1: unknown): unknown;
+
+    /** Set of currently selected nodes and edges. */
+    selection: Set<Selection>;
+
+    /** Whether the selection has changed since the last update. */
+    selectionChanged: boolean;
 
     /**
      * Select only the specified item, deselecting everything else.
@@ -830,6 +779,12 @@ export interface CanvasViewCanvas {
      */
     smartZoom(arg1: unknown): unknown;
 
+    /** Distance threshold for snapping behavior. */
+    snapDistance?: unknown;
+
+    /** Previously stale selection, null when selection is current. */
+    staleSelection: null;
+
     /**
      * Capture a screenshot of the canvas.
      *
@@ -858,12 +813,24 @@ export interface CanvasViewCanvas {
      */
     toggleSelect(arg1: unknown): unknown;
 
+    /** Target X translation for viewport animation. */
+    tx: number;
+
+    /** Target Y translation for viewport animation. */
+    ty: number;
+
+    /** Target zoom level for viewport animation. */
+    tZoom: number;
+
     /**
      * Undo the last action.
      *
      * @returns The result of the undo operation.
      */
     undo(): unknown;
+
+    /** Button element for the undo action. */
+    undoBtnEl: HTMLDivElement;
 
     /**
      * Unload and clean up the canvas resources.
@@ -893,6 +860,12 @@ export interface CanvasViewCanvas {
      */
     updateSelection(arg1: unknown): unknown;
 
+    /** Reference to the parent CanvasView. */
+    view: CanvasView;
+
+    /** Whether the viewport has changed since the last render frame. */
+    viewportChanged: boolean;
+
     /**
      * Virtualize off-screen nodes to improve performance.
      *
@@ -900,12 +873,36 @@ export interface CanvasViewCanvas {
      */
     virtualize(): unknown;
 
+    /** Whether the canvas was animating on the previous frame. */
+    wasAnimating: boolean;
+
+    /** Outermost wrapper element for the canvas. */
+    wrapperEl: HTMLDivElement;
+
+    /** Current X offset of the viewport in canvas coordinates. */
+    x: number;
+
+    /** Current Y offset of the viewport in canvas coordinates. */
+    y: number;
+
+    /** Counter for assigning z-index values to nodes. */
+    zIndexCounter: number;
+
+    /** Current zoom level of the viewport. */
+    zoom: number;
+
+    /** Zoom level threshold for switching rendering detail levels. */
+    zoomBreakpoint?: unknown;
+
     /**
      * Zoom the viewport by a delta amount at the specified center point.
      *
      * @returns The result of zooming.
      */
     zoomBy(arg1: unknown, arg2: unknown): unknown;
+
+    /** Center point for zoom operations, null when not zooming. */
+    zoomCenter: null;
 
     /**
      * Zoom the viewport to fit the specified bounding box.
@@ -920,6 +917,9 @@ export interface CanvasViewCanvas {
      * @returns The result of zooming to fit.
      */
     zoomToFit(): unknown;
+
+    /** Whether a zoom-to-fit operation is queued for the next frame. */
+    zoomToFitQueued: boolean;
 
     /**
      * Zoom the viewport to fit the current selection.
