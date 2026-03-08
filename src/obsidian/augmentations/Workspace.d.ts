@@ -682,10 +682,10 @@ declare module 'obsidian' {
         /**
          * Iterate through all CodeMirror instances in the workspace.
          *
-         * @param callback - The callback to call for each CodeMirror instance.
+         * @param _unused - Unused. The method body is empty at runtime.
          * @unofficial
          */
-        iterateCodeMirrors(callback: (cm: unknown) => void): void;
+        iterateCodeMirrors(_unused: (arg: unknown) => void): void;
 
         /**
          * Iterate the leaves of a split.
