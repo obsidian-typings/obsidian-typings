@@ -1,0 +1,16 @@
+import {
+    WorkspaceLeaf
+} from 'obsidian';
+import type { WorkspaceLeafConstructor } from '../../../internals/Constructors/augmentations/WorkspaceLeafConstructor.ts';
+
+/**
+ * Get the WorkspaceLeaf constructor.
+ *
+ * @returns The WorkspaceLeaf constructor.
+ *
+ * @public
+ * @unofficial
+ */
+export function getWorkspaceLeafConstructor(): WorkspaceLeafConstructor {
+    return WorkspaceLeaf as WorkspaceLeafConstructor;
+}
