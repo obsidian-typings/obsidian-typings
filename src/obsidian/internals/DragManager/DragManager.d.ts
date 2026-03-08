@@ -66,7 +66,7 @@ export interface DragManager {
      * @param event - The originating drag event.
      * @param files - Files to drag.
      * @param source - Source component initiating the drag.
-     * @returns The created draggable item, or null.
+     * @returns The created draggable item, or `null`.
      */
     dragFiles(event: DragEvent, files: TAbstractFile[], source?: unknown): Draggable | null;
 
@@ -164,7 +164,7 @@ export interface DragManager {
     /**
      * Set the current drop action label.
      *
-     * @param action - Action label text, or null to clear.
+     * @param action - Action label text, or `null` to clear.
      */
     setAction(action: string | null): void;
 
@@ -179,7 +179,7 @@ export interface DragManager {
     /**
      * Update the hover target element and its CSS class.
      *
-     * @param hoverEl - Element to highlight as hover target, or null.
+     * @param hoverEl - Element to highlight as hover target, or `null`.
      * @param hoverClass - CSS class to apply to the hover element.
      */
     updateHover(hoverEl: HTMLElement | null, hoverClass: string): void;
@@ -187,7 +187,7 @@ export interface DragManager {
     /**
      * Update the drag source elements and their CSS class.
      *
-     * @param sourceEls - Source elements, or null.
+     * @param sourceEls - Source elements, or `null`.
      * @param sourceClass - CSS class to apply to source elements.
      */
     updateSource(sourceEls: HTMLElement[] | null, sourceClass: string): void;

@@ -175,7 +175,7 @@ declare module 'obsidian' {
         mobileToolbar: MobileToolbar | null;
 
         /**
-         * Quick actions for mobile, null on desktop.
+         * Quick actions for mobile, `null` on desktop.
          * @unofficial
          */
         mobileQuickActions: unknown;

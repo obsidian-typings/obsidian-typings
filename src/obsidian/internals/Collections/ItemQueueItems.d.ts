@@ -21,7 +21,7 @@ export interface ItemQueueItems<T> {
     /**
      * Remove and return the next item from the front of the queue.
      *
-     * @returns The dequeued item, or undefined if empty.
+     * @returns The dequeued item, or `undefined` if empty.
      */
     dequeue(): T | undefined;
 
@@ -56,7 +56,7 @@ export interface ItemQueueItems<T> {
     /**
      * Return the next item without removing it.
      *
-     * @returns The next item, or undefined if empty.
+     * @returns The next item, or `undefined` if empty.
      */
     peek(): T | undefined;
 

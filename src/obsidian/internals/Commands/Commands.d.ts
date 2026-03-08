@@ -24,8 +24,8 @@ export interface Commands {
     commands: CommandsCommandsRecord;
 
     /**
-     * Commands *with* editor callback, will only be available when editor is active and callback returns.
-     * true.
+     * Commands *with* editor callback, will only be available when editor is active and callback returns
+     * `true`.
      *
      * @example `editor:fold-all` or `command-palette:open`.
      */
@@ -58,7 +58,7 @@ export interface Commands {
      * Find a command by ID.
      *
      * @param commandId - ID of command to find.
-     * @returns The command, or undefined if not found.
+     * @returns The command, or `undefined` if not found.
      */
     findCommand(commandId: string): Command | undefined;
 

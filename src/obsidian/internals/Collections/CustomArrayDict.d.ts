@@ -44,10 +44,10 @@ export interface CustomArrayDict<T> {
     count(): number;
 
     /**
-     * Get the array of values for the given key, or null if not found.
+     * Get the array of values for the given key, or `null` if not found.
      *
      * @param key - The key.
-     * @returns Array of values, or null.
+     * @returns Array of values, or `null`.
      */
     get(key: string): T[] | null;
 
