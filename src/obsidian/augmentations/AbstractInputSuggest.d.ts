@@ -44,7 +44,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use `ExtractConstructor<AbstractInputSuggest>` or `getAbstractInputSuggestConstructor()` instead.
          */
-        constructor__2(app: App, textInputEl: HTMLInputElement | HTMLDivElement): this;
+        constructor2__(app: App, textInputEl: HTMLInputElement | HTMLDivElement): this;
 
         /**
          * Gets the suggestions for the input element.

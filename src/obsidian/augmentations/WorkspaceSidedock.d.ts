@@ -93,7 +93,7 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes. Use `ExtractConstructor<WorkspaceSidedock>` or `getWorkspaceSidedockConstructor()` instead.
          */
-        constructor__2(workspace: Workspace, direction: string, side: string, id?: string): this;
+        constructor2__(workspace: Workspace, direction: string, side: string, id?: string): this;
 
         /**
          * Expand the sidedock.

@@ -30,6 +30,6 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes. Use `ExtractConstructor<WorkspaceWindow>` or `getWorkspaceWindowConstructor()` instead.
          */
-        constructor__2(workspace: Workspace, id?: string, size?: Record<string, number>): this;
+        constructor2__(workspace: Workspace, id?: string, size?: Record<string, number>): this;
 }
 }
