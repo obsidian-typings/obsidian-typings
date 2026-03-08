@@ -12,7 +12,7 @@ export interface NodeInteractionLayer {
     /** HTML element used for rendering interaction handles. */
     interactionEl: HTMLDivElement;
 
-    /** Currently targeted node for interaction, or null if none. */
+    /** Currently targeted node for interaction, or `null` if none. */
     target: null;
 
     /**

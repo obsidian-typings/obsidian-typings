@@ -32,7 +32,7 @@ export interface ClipboardManager {
      * Process incoming data (image, text, url, html).
      *
      * @param data - The data transfer object.
-     * @returns Null or a promise for async HTML processing.
+     * @returns `null` or a promise for async HTML processing.
      * @remark When processing HTML, function will be async.
      */
     handleDataTransfer(data: DataTransfer): null | Promise<void>;
@@ -56,7 +56,7 @@ export interface ClipboardManager {
      * Process a drop event into the editor.
      *
      * @param event - The drag event.
-     * @returns The inserted text, or null.
+     * @returns The inserted text, or `null`.
      */
     handleDropIntoEditor(event: DragEvent): null | string;
 

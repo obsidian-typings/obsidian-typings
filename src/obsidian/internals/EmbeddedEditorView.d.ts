@@ -85,7 +85,7 @@ export interface EmbeddedEditorView extends Component {
     /**
      * Get the preview editor, if exists.
      *
-     * @returns The iframed markdown editor, or null.
+     * @returns The iframed markdown editor, or `null`.
      */
     get editor(): IFramedMarkdownEditor | null;
 

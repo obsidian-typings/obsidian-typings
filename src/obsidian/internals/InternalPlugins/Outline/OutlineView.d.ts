@@ -27,14 +27,14 @@ export interface OutlineView extends InfoFileView {
      * Find the heading that corresponds to the current cursor position.
      *
      * @param e - The cursor position or context.
-     * @returns The active heading, or undefined if none found.
+     * @returns The active heading, or `undefined` if none found.
      */
     findActiveHeading(e: unknown): unknown | undefined;
 
     /**
      * Finds the active leaf.
      *
-     * @returns The corresponding workspace leaf, or null.
+     * @returns The corresponding workspace leaf, or `null`.
      */
     findCorrespondingLeaf(): WorkspaceLeaf | null;
 
@@ -48,7 +48,7 @@ export interface OutlineView extends InfoFileView {
     /**
      * Finds the view to the active leaf.
      *
-     * @returns The owner view, or null.
+     * @returns The owner view, or `null`.
      */
     getOwner(): View | null;
 

@@ -36,7 +36,7 @@ export interface FileExplorerView extends View {
      */
     lastDropTargetEl: HTMLElement | null;
 
-    /** Timeout ID for expanding a folder on mouseover during drag, or null. */
+    /** Timeout ID for expanding a folder on mouseover during drag, or `null`. */
     mouseoverExpandTimeout: number | null;
 
     /**

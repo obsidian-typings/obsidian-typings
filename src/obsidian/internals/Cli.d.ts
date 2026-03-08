@@ -60,7 +60,7 @@ export interface Cli {
      * Try to resolve a file path from CLI input.
      *
      * @param path - The path to resolve.
-     * @returns The resolved file, or null.
+     * @returns The resolved file, or `null`.
      */
     tryResolveFile(path: string): unknown;
 

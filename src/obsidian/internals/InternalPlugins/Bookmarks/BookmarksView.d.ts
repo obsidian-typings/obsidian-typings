@@ -49,7 +49,7 @@ export interface BookmarksView extends ItemView {
      *
      * @param e - The drag event.
      * @param t - The drag target information.
-     * @returns The drag data, or null.
+     * @returns The drag data, or `null`.
      */
     dragSelectedBookmarks(e: unknown, t: unknown): unknown | null;
 

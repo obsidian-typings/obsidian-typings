@@ -107,7 +107,7 @@ export interface Plugins {
      * Get a plugin by ID.
      *
      * @param id - Plugin ID.
-     * @returns The plugin instance or null if not found.
+     * @returns The plugin instance or `null` if not found.
      */
     getPlugin(id: string): Plugin | null;
 

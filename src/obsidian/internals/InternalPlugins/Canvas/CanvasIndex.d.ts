@@ -16,7 +16,7 @@ export interface CanvasIndex extends Component {
     /** Queue of files waiting to be processed by the indexer. */
     fileQueue: unknown[];
 
-    /** Current animation frame request, or null when idle. */
+    /** Current animation frame request, or `null` when idle. */
     frame: null;
 
     /** Index of canvas entries keyed by file path. */

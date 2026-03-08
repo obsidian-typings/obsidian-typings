@@ -26,7 +26,7 @@ export interface CanvasViewCanvasEdge {
     /** Link information for the source endpoint of the edge. */
     from: CanvasViewCanvasEdgeLink;
 
-    /** Line end marker at the source endpoint, or null if none. */
+    /** Line end marker at the source endpoint, or `null` if none. */
     fromLineEnd: CanvasViewCanvasEdgeLineEnd | null;
 
     /** Unique identifier for this edge. */
@@ -53,7 +53,7 @@ export interface CanvasViewCanvasEdge {
     /** Link information for the target endpoint of the edge. */
     to: CanvasViewCanvasEdgeLink;
 
-    /** Line end marker at the target endpoint, or null if none. */
+    /** Line end marker at the target endpoint, or `null` if none. */
     toLineEnd: CanvasViewCanvasEdgeLineEnd | null;
 
     /** Additional data properties not covered by known fields. */

@@ -33,9 +33,9 @@ export interface TreeNodeVChildren<Item extends TreeNode, Owner extends TreeNode
     clear(): void;
 
     /**
-     * Get the first child item, or undefined if there are no children.
+     * Get the first child item, or `undefined` if there are no children.
      *
-     * @returns The first child item, or undefined.
+     * @returns The first child item, or `undefined`.
      */
     first(): Item | undefined;
 
@@ -47,9 +47,9 @@ export interface TreeNodeVChildren<Item extends TreeNode, Owner extends TreeNode
     hasChildren(): boolean;
 
     /**
-     * Get the last child item, or undefined if there are no children.
+     * Get the last child item, or `undefined` if there are no children.
      *
-     * @returns The last child item, or undefined.
+     * @returns The last child item, or `undefined`.
      */
     last(): Item | undefined;
 

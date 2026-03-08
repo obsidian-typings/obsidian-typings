@@ -10,7 +10,7 @@ export interface InfinityScroll {
     /** Last recorded scroll position. */
     lastScroll: number;
 
-    /** Queued computation task, or null if none is pending. */
+    /** Queued computation task, or `null` if none is pending. */
     queued: unknown | null;
 
     /** Number of items to render per block. */

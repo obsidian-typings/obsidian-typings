@@ -77,7 +77,7 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
      * Gets a function.
      *
      * @param name - The name of the function to get.
-     * @returns The function, or null if not found.
+     * @returns The function, or `null` if not found.
      */
     getFunction(name: string): BasesFunction | null;
 
@@ -92,7 +92,7 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
      * Gets a view factory.
      *
      * @param type - The view type to get the factory for.
-     * @returns The view factory, or null if not found.
+     * @returns The view factory, or `null` if not found.
      */
     getViewFactory(type: string): ViewFactory | null;
 

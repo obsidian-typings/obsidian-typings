@@ -206,14 +206,14 @@ export interface BasesController extends Component {
      * Gets the active bases view of a given type.
      *
      * @param viewType - The view type to search for.
-     * @returns The active view of the given type, or null.
+     * @returns The active view of the given type, or `null`.
      */
     getActiveBasesViewOfType(viewType: string): View | null;
 
     /**
      * Gets the current file.
      *
-     * @returns The current file, or null.
+     * @returns The current file, or `null`.
      */
     getCurrentFile(): TFile | null;
 

@@ -43,7 +43,7 @@ export interface ResultDomItem extends TreeNode {
     /** Layout information used by virtual scrolling. */
     info: TreeNodeInfo;
 
-    /** Callback for custom match rendering, or null if not set. */
+    /** Callback for custom match rendering, or `null` if not set. */
     onMatchRender: null;
 
     /** Parent result DOM container. */

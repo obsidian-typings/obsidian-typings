@@ -58,7 +58,7 @@ export interface MetadataTypeManager extends Events {
      * Get assigned widget type for property.
      *
      * @param property - Property name.
-     * @returns The assigned widget type, or null.
+     * @returns The assigned widget type, or `null`.
      */
     getAssignedWidget(property: string): PropertyWidgetType | null;
 

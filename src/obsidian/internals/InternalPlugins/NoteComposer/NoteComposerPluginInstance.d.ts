@@ -56,7 +56,7 @@ export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteC
      * @param file - The source file.
      * @param editor - The active editor.
      * @param line - The line number of the heading.
-     * @returns The heading info, or null if no heading found.
+     * @returns The heading info, or `null` if no heading found.
      */
     getSelectionUnderHeading(file: TFile, editor: Editor, line: number): HeadingInfo | null;
 

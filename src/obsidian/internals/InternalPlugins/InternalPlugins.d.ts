@@ -49,7 +49,7 @@ export interface InternalPlugins extends Events {
      * Get an enabled internal plugin by ID.
      *
      * @param id - ID of the plugin to get.
-     * @returns The plugin instance, or null if not enabled.
+     * @returns The plugin instance, or `null` if not enabled.
      */
     getEnabledPluginById<ID extends InternalPluginNameType>(id: ID): InternalPluginNameInstancesMapping[ID] | null;
 
@@ -64,7 +64,7 @@ export interface InternalPlugins extends Events {
      * Get an internal plugin by ID.
      *
      * @param id - ID of the plugin to get.
-     * @returns The internal plugin, or null if not found.
+     * @returns The internal plugin, or `null` if not found.
      */
     getPluginById<ID extends InternalPluginNameType>(id: ID): InternalPluginNamePluginsMapping[ID] | null;
 

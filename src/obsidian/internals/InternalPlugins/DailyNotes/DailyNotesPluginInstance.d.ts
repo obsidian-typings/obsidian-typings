@@ -26,9 +26,9 @@ export interface DailyNotesPluginInstance extends InternalPluginInstance<DailyNo
     plugin: DailyNotesPlugin;
 
     /**
-     * Get the date timestamp from the currently open file name, or null if not a daily note.
+     * Get the date timestamp from the currently open file name, or `null` if not a daily note.
      *
-     * @returns The date timestamp, or null.
+     * @returns The date timestamp, or `null`.
      */
     getCurrentFileDateTimestamp(): null | number;
 
@@ -36,7 +36,7 @@ export interface DailyNotesPluginInstance extends InternalPluginInstance<DailyNo
      * Get or create the daily note for the given date.
      *
      * @param date - The moment date to get the daily note for.
-     * @returns The daily note file, or null/undefined.
+     * @returns The daily note file, or `null`/`undefined`.
      */
     getDailyNote(date: typeof moment): Promise<TFile | null | undefined>;
 

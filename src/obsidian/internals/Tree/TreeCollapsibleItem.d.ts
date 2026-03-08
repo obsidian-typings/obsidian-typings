@@ -14,7 +14,7 @@ export interface TreeCollapsibleItem extends TreeItem {
      */
     collapsed: boolean;
 
-    /** Element for the collapse/expand toggle indicator, or null if not rendered. */
+    /** Element for the collapse/expand toggle indicator, or `null` if not rendered. */
     collapseEl: HTMLElement | null;
 
     /**

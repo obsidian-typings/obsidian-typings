@@ -15,7 +15,7 @@ export interface CanvasView extends TextFileView {
     /** The canvas controller instance managing nodes, edges, and rendering. */
     canvas: CanvasViewCanvas;
 
-    /** Hover popover associated with this view, or null if none is active. */
+    /** Hover popover associated with this view, or `null` if none is active. */
     hoverPopover: null | HoverPopover;
 
     /** Reference to the canvas plugin instance. */

@@ -53,7 +53,7 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
     /** Ribbon items registered by this plugin. */
     ribbonItems: RibbonItem[];
 
-    /** Status bar element for this plugin, or null if none. */
+    /** Status bar element for this plugin, or `null` if none. */
     statusBarEl: HTMLDivElement | null;
 
     /** View creators registered by this plugin, keyed by view type. */
@@ -91,7 +91,7 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
     /**
      * Get the last modified time of the plugin config file.
      *
-     * @returns The modification timestamp, or undefined.
+     * @returns The modification timestamp, or `undefined`.
      */
     getModifiedTime(): Promise<number | undefined>;
 
@@ -108,7 +108,7 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
     /**
      * Load persisted data for this plugin.
      *
-     * @returns The loaded data, or null if none exists.
+     * @returns The loaded data, or `null` if none exists.
      */
     loadData(): Promise<object | null>;
 

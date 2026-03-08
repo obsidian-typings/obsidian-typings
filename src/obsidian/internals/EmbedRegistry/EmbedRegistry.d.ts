@@ -21,7 +21,7 @@ export interface EmbedRegistry extends Events {
      * Get the embed constructor for a specific file type.
      *
      * @param file - File to get the embed creator for.
-     * @returns The embed creator, or null if none registered.
+     * @returns The embed creator, or `null` if none registered.
      */
     getEmbedCreator(file: TFile): EmbedCreator | null;
 

@@ -179,7 +179,7 @@ export interface BacklinkComponent extends Component {
     /**
      * Recompute backlinks for the given file.
      *
-     * @param backlinkFile - The file to recompute backlinks for, or null.
+     * @param backlinkFile - The file to recompute backlinks for, or `null`.
      */
     recomputeBacklink(backlinkFile: TFile | null): void;
 

@@ -36,7 +36,7 @@ export interface ResultDom {
     /** Whether extra surrounding context is shown around matches. */
     extraContext: boolean;
 
-    /** Currently focused result item, or null if none. */
+    /** Currently focused result item, or `null` if none. */
     focusedItem: null;
 
     /** Virtual scrolling component for rendering visible results. */

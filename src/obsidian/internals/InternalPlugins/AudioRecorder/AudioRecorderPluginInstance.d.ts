@@ -17,7 +17,7 @@ export interface AudioRecorderPluginInstance extends InternalPluginInstance<Audi
     /** Reference to the audio recorder plugin registration. */
     plugin: AudioRecorderPlugin;
 
-    /** Active MediaRecorder instance, or null when not recording. */
+    /** Active MediaRecorder instance, or `null` when not recording. */
     recorder: MediaRecorder | null;
 
     /** Whether audio is currently being recorded. */

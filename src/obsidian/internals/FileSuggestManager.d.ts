@@ -107,7 +107,7 @@ export interface FileSuggestManager {
     /**
      * Determine the source path of current context.
      *
-     * @returns Source path string, or null.
+     * @returns Source path string, or `null`.
      */
     getSourcePath(): null | string;
 
@@ -130,7 +130,7 @@ export interface FileSuggestManager {
      * @param sourcePath - Source path for link resolution.
      * @param content - Content of the block.
      * @param textParts - Search fragments to match.
-     * @returns Search result if matched, or null.
+     * @returns Search result if matched, or `null`.
      */
     matchBlock(
         path: string,

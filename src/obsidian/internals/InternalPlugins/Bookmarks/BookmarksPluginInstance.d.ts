@@ -79,7 +79,7 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
      * Find the bookmark item associated with a given file view.
      *
      * @param view - The file view to find the bookmark for.
-     * @returns The matching bookmark item, or null/undefined if not found.
+     * @returns The matching bookmark item, or `null`/`undefined` if not found.
      */
     findBookmarkByView(view: FileView): BookmarkItem | null | undefined;
 
@@ -112,7 +112,7 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
      * Move a bookmark item to a new position within the list.
      *
      * @param item - The bookmark item to move.
-     * @param instance - The target parent plugin instance, or undefined for root.
+     * @param instance - The target parent plugin instance, or `undefined` for root.
      * @param index - The target index position.
      */
     moveItem(item: BookmarkItem, instance: BookmarksPluginInstance | undefined, index: number): void;

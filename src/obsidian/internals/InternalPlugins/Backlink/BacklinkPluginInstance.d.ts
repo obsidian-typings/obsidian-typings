@@ -80,7 +80,7 @@ export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkP
      * Open the backlinks pane for the currently active file.
      *
      * @param skipSplit - Whether to skip splitting the pane.
-     * @returns Whether the operation succeeded, or undefined.
+     * @returns Whether the operation succeeded, or `undefined`.
      */
     openBacklinksForActiveFile(skipSplit: boolean): boolean | undefined;
 
@@ -88,7 +88,7 @@ export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkP
      * Toggle the inline backlinks display within the document view.
      *
      * @param skip - Whether to skip the toggle action.
-     * @returns Whether the operation succeeded, or undefined.
+     * @returns Whether the operation succeeded, or `undefined`.
      */
     toggleBacklinksInDocument(skip: boolean): boolean | undefined;
 

@@ -7,7 +7,7 @@ import type { WatchAndStatAllResult } from './WatchAndStatAllResult.d.ts';
  * @unofficial
  */
 export interface CapacitorAdapterFs {
-    /** Base directory path for the file system, or null if not initialized. */
+    /** Base directory path for the file system, or `null` if not initialized. */
     dir: string | null;
 
     /** Base URI for the file system. */

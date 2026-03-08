@@ -340,10 +340,11 @@ declare module 'obsidian' {
         /**
          * Manually fix all file links pointing towards image/audio/video resources in element.
          *
-         * @param element Element to fix links in.
+         * @param element - Element to fix links in.
+         * @param sourcePath - Source path used to resolve relative links via {@link MetadataCache.getFirstLinkpathDest}.
          * @unofficial
          */
-        fixFileLinks(element: HTMLElement, context?: unknown): void;
+        fixFileLinks(element: HTMLElement, sourcePath: string): void;
 
         /**
          * Applies an obfuscation font to all text characters in the vault.
