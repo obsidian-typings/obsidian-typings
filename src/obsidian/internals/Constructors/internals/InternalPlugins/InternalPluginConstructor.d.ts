@@ -1,7 +1,7 @@
 import type { App } from 'obsidian';
-import type { InternalPlugin } from '../InternalPlugins/InternalPlugin.d.ts';
-import type { InternalPlugins } from '../InternalPlugins/InternalPlugins.d.ts';
-import type { ConstructorBase } from './ConstructorBase.d.ts';
+import type { InternalPlugin } from '../../../InternalPlugins/InternalPlugin.d.ts';
+import type { InternalPlugins } from '../../../InternalPlugins/InternalPlugins.d.ts';
+import type { ConstructorBase } from '../../ConstructorBase.d.ts';
 
 /**
  * The InternalPlugin constructor.

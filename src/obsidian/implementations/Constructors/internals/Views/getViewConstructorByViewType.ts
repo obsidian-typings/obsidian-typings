@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
-import type { ViewTypeType } from '../../internals/Views/ViewTypeType.d.ts';
-import type { ViewTypeViewConstructorMapping } from '../../internals/Views/ViewTypeViewConstructorMapping.d.ts';
+import type { ViewTypeType } from '../../../../internals/Views/ViewTypeType.d.ts';
+import type { ViewTypeViewConstructorMapping } from '../../../../internals/Views/ViewTypeViewConstructorMapping.d.ts';
 
 /**
  * Get the view constructor by view type.

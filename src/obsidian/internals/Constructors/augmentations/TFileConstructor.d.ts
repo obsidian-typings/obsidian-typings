@@ -2,7 +2,7 @@ import type {
     TFile,
     Vault
 } from 'obsidian';
-import type { ConstructorBase } from './ConstructorBase.d.ts';
+import type { ConstructorBase } from '../ConstructorBase.d.ts';
 
 /**
  * The TFile constructor.

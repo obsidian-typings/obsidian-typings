@@ -1,7 +1,7 @@
 import {
     App
 } from 'obsidian';
-import type { AppConstructor } from '../../internals/Constructors/AppConstructor.ts';
+import type { AppConstructor } from '../../../internals/Constructors/augmentations/AppConstructor.ts';
 
 /**
  * Get the App constructor.

@@ -2,7 +2,7 @@ import type {
     App,
     DataAdapter
 } from 'obsidian';
-import type { ConstructorBase } from './ConstructorBase.d.ts';
+import type { ConstructorBase } from '../ConstructorBase.d.ts';
 
 /**
  * The App constructor.
