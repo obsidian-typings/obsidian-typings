@@ -12,5 +12,5 @@ import type { WorkspaceMobileDrawerConstructor } from '../../../internals/Constr
  * @unofficial
  */
 export function getWorkspaceMobileDrawerConstructor(): WorkspaceMobileDrawerConstructor {
-    return WorkspaceMobileDrawer as unknown as WorkspaceMobileDrawerConstructor;
+    return WorkspaceMobileDrawer as WorkspaceMobileDrawerConstructor;
 }

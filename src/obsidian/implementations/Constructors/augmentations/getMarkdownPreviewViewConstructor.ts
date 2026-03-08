@@ -12,5 +12,5 @@ import type { MarkdownPreviewViewConstructor } from '../../../internals/Construc
  * @unofficial
  */
 export function getMarkdownPreviewViewConstructor(): MarkdownPreviewViewConstructor {
-    return MarkdownPreviewView as unknown as MarkdownPreviewViewConstructor;
+    return MarkdownPreviewView as MarkdownPreviewViewConstructor;
 }

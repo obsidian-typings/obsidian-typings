@@ -1,7 +1,4 @@
-import type {
-    MarkdownPreviewView,
-    MarkdownView
-} from 'obsidian';
+import type { MarkdownPreviewView } from 'obsidian';
 import type { ConstructorBase } from '../ConstructorBase.d.ts';
 
 /**
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface MarkdownPreviewViewConstructor extends ConstructorBase<[view: MarkdownView], MarkdownPreviewView> {}
+export interface MarkdownPreviewViewConstructor extends ConstructorBase<[containerEl: HTMLElement], MarkdownPreviewView> {}

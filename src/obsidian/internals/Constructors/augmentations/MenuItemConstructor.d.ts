@@ -1,7 +1,4 @@
-import type {
-    Menu,
-    MenuItem
-} from 'obsidian';
+import type { MenuItem } from 'obsidian';
 import type { ConstructorBase } from '../ConstructorBase.d.ts';
 
 /**
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface MenuItemConstructor extends ConstructorBase<[menu: Menu], MenuItem> {}
+export interface MenuItemConstructor extends ConstructorBase<[menu: unknown], MenuItem> {}

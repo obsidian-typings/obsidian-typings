@@ -12,5 +12,5 @@ import type { MarkdownEditViewConstructor } from '../../../internals/Constructor
  * @unofficial
  */
 export function getMarkdownEditViewConstructor(): MarkdownEditViewConstructor {
-    return MarkdownEditView as unknown as MarkdownEditViewConstructor;
+    return MarkdownEditView as MarkdownEditViewConstructor;
 }

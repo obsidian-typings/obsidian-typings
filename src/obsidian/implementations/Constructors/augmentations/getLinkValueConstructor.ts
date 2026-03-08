@@ -12,5 +12,5 @@ import type { LinkValueConstructor } from '../../../internals/Constructors/augme
  * @unofficial
  */
 export function getLinkValueConstructor(): LinkValueConstructor {
-    return LinkValue as unknown as LinkValueConstructor;
+    return LinkValue as LinkValueConstructor;
 }

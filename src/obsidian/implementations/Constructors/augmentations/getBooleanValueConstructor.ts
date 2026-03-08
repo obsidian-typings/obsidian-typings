@@ -12,5 +12,5 @@ import type { BooleanValueConstructor } from '../../../internals/Constructors/au
  * @unofficial
  */
 export function getBooleanValueConstructor(): BooleanValueConstructor {
-    return BooleanValue as unknown as BooleanValueConstructor;
+    return BooleanValue as BooleanValueConstructor;
 }

@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface IconValueConstructor extends ConstructorBase<[], IconValue> {}
+export interface IconValueConstructor extends ConstructorBase<[value: string], IconValue> {}

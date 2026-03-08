@@ -12,5 +12,5 @@ import type { TasksConstructor } from '../../../internals/Constructors/augmentat
  * @unofficial
  */
 export function getTasksConstructor(): TasksConstructor {
-    return Tasks as unknown as TasksConstructor;
+    return Tasks as TasksConstructor;
 }

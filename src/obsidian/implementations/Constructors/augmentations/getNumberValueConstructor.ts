@@ -12,5 +12,5 @@ import type { NumberValueConstructor } from '../../../internals/Constructors/aug
  * @unofficial
  */
 export function getNumberValueConstructor(): NumberValueConstructor {
-    return NumberValue as unknown as NumberValueConstructor;
+    return NumberValue as NumberValueConstructor;
 }

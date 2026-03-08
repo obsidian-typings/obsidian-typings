@@ -1,7 +1,4 @@
-import type {
-    ImageValue,
-    WorkspaceLeaf
-} from 'obsidian';
+import type { ImageValue } from 'obsidian';
 import type { ConstructorBase } from '../ConstructorBase.d.ts';
 
 /**
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface ImageValueConstructor extends ConstructorBase<[leaf: WorkspaceLeaf], ImageValue> {}
+export interface ImageValueConstructor extends ConstructorBase<[value: string], ImageValue> {}

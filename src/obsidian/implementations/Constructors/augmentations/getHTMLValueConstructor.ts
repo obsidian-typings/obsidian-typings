@@ -12,5 +12,5 @@ import type { HTMLValueConstructor } from '../../../internals/Constructors/augme
  * @unofficial
  */
 export function getHTMLValueConstructor(): HTMLValueConstructor {
-    return HTMLValue as unknown as HTMLValueConstructor;
+    return HTMLValue as HTMLValueConstructor;
 }

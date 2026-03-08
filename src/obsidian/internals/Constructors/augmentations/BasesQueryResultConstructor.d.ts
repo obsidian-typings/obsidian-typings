@@ -1,7 +1,4 @@
-import type {
-    BasesQueryResult,
-    QueryController
-} from 'obsidian';
+import type { BasesQueryResult } from 'obsidian';
 import type { ConstructorBase } from '../ConstructorBase.d.ts';
 
 /**
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface BasesQueryResultConstructor extends ConstructorBase<[controller: QueryController], BasesQueryResult> {}
+export interface BasesQueryResultConstructor extends ConstructorBase<[], BasesQueryResult> {}

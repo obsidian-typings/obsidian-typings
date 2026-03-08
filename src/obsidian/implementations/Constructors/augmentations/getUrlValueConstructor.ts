@@ -12,5 +12,5 @@ import type { UrlValueConstructor } from '../../../internals/Constructors/augmen
  * @unofficial
  */
 export function getUrlValueConstructor(): UrlValueConstructor {
-    return UrlValue as unknown as UrlValueConstructor;
+    return UrlValue as UrlValueConstructor;
 }

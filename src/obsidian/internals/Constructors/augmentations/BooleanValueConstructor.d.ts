@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface BooleanValueConstructor extends ConstructorBase<[], BooleanValue> {}
+export interface BooleanValueConstructor extends ConstructorBase<[value: boolean], BooleanValue> {}

@@ -12,5 +12,5 @@ import type { IconValueConstructor } from '../../../internals/Constructors/augme
  * @unofficial
  */
 export function getIconValueConstructor(): IconValueConstructor {
-    return IconValue as unknown as IconValueConstructor;
+    return IconValue as IconValueConstructor;
 }

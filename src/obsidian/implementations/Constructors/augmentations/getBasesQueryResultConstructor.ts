@@ -12,5 +12,5 @@ import type { BasesQueryResultConstructor } from '../../../internals/Constructor
  * @unofficial
  */
 export function getBasesQueryResultConstructor(): BasesQueryResultConstructor {
-    return BasesQueryResult as unknown as BasesQueryResultConstructor;
+    return BasesQueryResult as BasesQueryResultConstructor;
 }

@@ -12,5 +12,5 @@ import type { ImageValueConstructor } from '../../../internals/Constructors/augm
  * @unofficial
  */
 export function getImageValueConstructor(): ImageValueConstructor {
-    return ImageValue as unknown as ImageValueConstructor;
+    return ImageValue as ImageValueConstructor;
 }

@@ -12,5 +12,5 @@ import type { StringValueConstructor } from '../../../internals/Constructors/aug
  * @unofficial
  */
 export function getStringValueConstructor(): StringValueConstructor {
-    return StringValue as unknown as StringValueConstructor;
+    return StringValue as StringValueConstructor;
 }
