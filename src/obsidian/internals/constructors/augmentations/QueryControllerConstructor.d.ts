@@ -1,9 +1,5 @@
-import type {
-    App,
-    QueryController,
-    TFile
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { QueryController } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The QueryController constructor.
@@ -11,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface QueryControllerConstructor extends ConstructorBase<[app: App, plugin: unknown, viewHeaderEl: HTMLElement, currentFile?: TFile | null], QueryController> {}
+export type QueryControllerConstructor = ExtractConstructor<QueryController>;

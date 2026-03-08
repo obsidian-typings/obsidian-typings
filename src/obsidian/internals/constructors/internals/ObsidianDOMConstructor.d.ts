@@ -1,5 +1,5 @@
 import type { ObsidianDOM } from '../../ObsidianDOM.d.ts';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The ObsidianDOM constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface ObsidianDOMConstructor extends ConstructorBase<[containerEl: HTMLElement], ObsidianDOM> {}
+export type ObsidianDOMConstructor = ExtractConstructor<ObsidianDOM>;

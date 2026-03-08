@@ -1,8 +1,5 @@
-import type {
-    App,
-    SecretStorage
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { SecretStorage } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The SecretStorage constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface SecretStorageConstructor extends ConstructorBase<[app: App], SecretStorage> {}
+export type SecretStorageConstructor = ExtractConstructor<SecretStorage>;

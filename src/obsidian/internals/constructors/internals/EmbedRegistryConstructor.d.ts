@@ -1,5 +1,5 @@
 import type { EmbedRegistry } from '../../embed-registry/EmbedRegistry.d.ts';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The EmbedRegistry constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface EmbedRegistryConstructor extends ConstructorBase<[], EmbedRegistry> {}
+export type EmbedRegistryConstructor = ExtractConstructor<EmbedRegistry>;

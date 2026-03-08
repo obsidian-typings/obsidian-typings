@@ -1,5 +1,5 @@
 import type { ProgressBarComponent } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The ProgressBarComponent constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface ProgressBarComponentConstructor extends ConstructorBase<[containerEl: HTMLElement], ProgressBarComponent> {}
+export type ProgressBarComponentConstructor = ExtractConstructor<ProgressBarComponent>;

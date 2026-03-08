@@ -1,6 +1,5 @@
 import type { DomEventsHandlers } from '../../DomEventsHandlers.d.ts';
-import type { DomEventsHandlersInfo } from '../../DomEventsHandlersInfo.d.ts';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The DomEventsHandlers constructor.
@@ -8,6 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface DomEventsHandlersConstructor
-    extends ConstructorBase<[info: DomEventsHandlersInfo], DomEventsHandlers>
-{}
+export type DomEventsHandlersConstructor = ExtractConstructor<DomEventsHandlers>;

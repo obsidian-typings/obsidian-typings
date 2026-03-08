@@ -1,5 +1,5 @@
 import type { BasesViewConfig } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The BasesViewConfig constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface BasesViewConfigConstructor extends ConstructorBase<[query: string, type: string, name: string], BasesViewConfig> {}
+export type BasesViewConfigConstructor = ExtractConstructor<BasesViewConfig>;

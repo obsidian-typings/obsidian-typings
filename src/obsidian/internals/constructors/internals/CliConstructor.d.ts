@@ -1,6 +1,5 @@
-import type { App } from 'obsidian';
 import type { Cli } from '../../cli/Cli.d.ts';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The Cli constructor.
@@ -8,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface CliConstructor extends ConstructorBase<[app: App], Cli> {}
+export type CliConstructor = ExtractConstructor<Cli>;

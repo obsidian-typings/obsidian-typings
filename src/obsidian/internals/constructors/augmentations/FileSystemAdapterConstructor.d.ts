@@ -1,5 +1,5 @@
 import type { FileSystemAdapter } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The FileSystemAdapter constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface FileSystemAdapterConstructor extends ConstructorBase<[basePath: string], FileSystemAdapter> {}
+export type FileSystemAdapterConstructor = ExtractConstructor<FileSystemAdapter>;

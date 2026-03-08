@@ -1,8 +1,5 @@
-import type {
-    TFile,
-    Vault
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { TFile } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The TFile constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface TFileConstructor extends ConstructorBase<[vault: Vault, path: string], TFile> {}
+export type TFileConstructor = ExtractConstructor<TFile>;

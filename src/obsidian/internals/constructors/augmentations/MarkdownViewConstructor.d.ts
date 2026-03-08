@@ -1,8 +1,5 @@
-import type {
-    MarkdownView,
-    WorkspaceLeaf
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { MarkdownView } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The MarkdownView constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface MarkdownViewConstructor extends ConstructorBase<[leaf: WorkspaceLeaf], MarkdownView> {}
+export type MarkdownViewConstructor = ExtractConstructor<MarkdownView>;

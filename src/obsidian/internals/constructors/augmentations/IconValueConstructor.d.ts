@@ -1,5 +1,5 @@
 import type { IconValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The IconValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface IconValueConstructor extends ConstructorBase<[value: string], IconValue> {}
+export type IconValueConstructor = ExtractConstructor<IconValue>;

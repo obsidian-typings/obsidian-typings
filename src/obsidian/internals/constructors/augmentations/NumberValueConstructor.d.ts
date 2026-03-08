@@ -1,5 +1,5 @@
 import type { NumberValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The NumberValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface NumberValueConstructor extends ConstructorBase<[value: number], NumberValue> {}
+export type NumberValueConstructor = ExtractConstructor<NumberValue>;

@@ -1,9 +1,5 @@
-import type {
-    HoverParent,
-    HoverPopover,
-    Point
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { HoverPopover } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The HoverPopover constructor.
@@ -11,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface HoverPopoverConstructor extends ConstructorBase<[parent: HoverParent, targetEl: HTMLElement | null, waitTime?: number, staticPos?: Point | null], HoverPopover> {}
+export type HoverPopoverConstructor = ExtractConstructor<HoverPopover>;

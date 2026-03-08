@@ -1,5 +1,5 @@
 import type { BooleanValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The BooleanValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface BooleanValueConstructor extends ConstructorBase<[value: boolean], BooleanValue> {}
+export type BooleanValueConstructor = ExtractConstructor<BooleanValue>;

@@ -1,8 +1,5 @@
-import type {
-    Workspace,
-    WorkspaceSplit
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { WorkspaceSplit } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The WorkspaceSplit constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface WorkspaceSplitConstructor extends ConstructorBase<[workspace: Workspace, direction: string, id?: string], WorkspaceSplit> {}
+export type WorkspaceSplitConstructor = ExtractConstructor<WorkspaceSplit>;

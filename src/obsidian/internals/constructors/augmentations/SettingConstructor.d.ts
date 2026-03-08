@@ -1,5 +1,5 @@
 import type { Setting } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The Setting constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface SettingConstructor extends ConstructorBase<[containerEl: HTMLElement], Setting> {}
+export type SettingConstructor = ExtractConstructor<Setting>;

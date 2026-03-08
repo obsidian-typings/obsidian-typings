@@ -1,8 +1,5 @@
-import type {
-    App,
-    FileManager
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { FileManager } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The FileManager constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface FileManagerConstructor extends ConstructorBase<[app: App], FileManager> {}
+export type FileManagerConstructor = ExtractConstructor<FileManager>;

@@ -1,6 +1,5 @@
-import type { App } from 'obsidian';
 import type { InternalPlugins } from '../../../internal-plugins/InternalPlugins.d.ts';
-import type { ConstructorBase } from '../../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../../ExtractConstructor.d.ts';
 
 /**
  * The InternalPlugins constructor.
@@ -8,4 +7,4 @@ import type { ConstructorBase } from '../../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface InternalPluginsConstructor extends ConstructorBase<[app: App], InternalPlugins> {}
+export type InternalPluginsConstructor = ExtractConstructor<InternalPlugins>;

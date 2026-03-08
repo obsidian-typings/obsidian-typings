@@ -1,5 +1,5 @@
 import type { ViewRegistry } from '../../view-registry/ViewRegistry.d.ts';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The ViewRegistry constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface ViewRegistryConstructor extends ConstructorBase<[], ViewRegistry> {}
+export type ViewRegistryConstructor = ExtractConstructor<ViewRegistry>;

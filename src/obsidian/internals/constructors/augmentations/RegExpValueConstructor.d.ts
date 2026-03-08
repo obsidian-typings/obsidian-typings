@@ -1,5 +1,5 @@
 import type { RegExpValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The RegExpValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface RegExpValueConstructor extends ConstructorBase<[], RegExpValue> {}
+export type RegExpValueConstructor = ExtractConstructor<RegExpValue>;

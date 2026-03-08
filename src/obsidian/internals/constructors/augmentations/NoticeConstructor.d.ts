@@ -1,5 +1,5 @@
 import type { Notice } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The Notice constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface NoticeConstructor extends ConstructorBase<[message: string | DocumentFragment, duration?: number], Notice> {}
+export type NoticeConstructor = ExtractConstructor<Notice>;

@@ -1,5 +1,5 @@
 import type { ColorComponent } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The ColorComponent constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface ColorComponentConstructor extends ConstructorBase<[containerEl: HTMLElement], ColorComponent> {}
+export type ColorComponentConstructor = ExtractConstructor<ColorComponent>;

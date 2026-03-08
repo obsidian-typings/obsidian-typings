@@ -1,5 +1,5 @@
 import type { CapacitorAdapterFs } from '../../CapacitorAdapterFs.d.ts';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The CapacitorAdapterFs constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface CapacitorAdapterFsConstructor extends ConstructorBase<[dir: string], CapacitorAdapterFs> {}
+export type CapacitorAdapterFsConstructor = ExtractConstructor<CapacitorAdapterFs>;

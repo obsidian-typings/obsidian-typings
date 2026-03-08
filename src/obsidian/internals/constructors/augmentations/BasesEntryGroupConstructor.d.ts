@@ -1,8 +1,5 @@
-import type {
-    BasesEntry,
-    BasesEntryGroup
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { BasesEntryGroup } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The BasesEntryGroup constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface BasesEntryGroupConstructor extends ConstructorBase<[entries: BasesEntry[], key: unknown], BasesEntryGroup> {}
+export type BasesEntryGroupConstructor = ExtractConstructor<BasesEntryGroup>;

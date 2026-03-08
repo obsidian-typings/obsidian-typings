@@ -1,5 +1,5 @@
 import type { ExtraButtonComponent } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The ExtraButtonComponent constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface ExtraButtonComponentConstructor extends ConstructorBase<[containerEl: HTMLElement], ExtraButtonComponent> {}
+export type ExtraButtonComponentConstructor = ExtractConstructor<ExtraButtonComponent>;

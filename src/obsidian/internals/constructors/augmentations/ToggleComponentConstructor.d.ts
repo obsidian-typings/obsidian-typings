@@ -1,5 +1,5 @@
 import type { ToggleComponent } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The ToggleComponent constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface ToggleComponentConstructor extends ConstructorBase<[containerEl: HTMLElement], ToggleComponent> {}
+export type ToggleComponentConstructor = ExtractConstructor<ToggleComponent>;

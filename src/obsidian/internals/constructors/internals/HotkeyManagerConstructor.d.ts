@@ -1,6 +1,5 @@
-import type { App } from 'obsidian';
 import type { HotkeyManager } from '../../hotkey-manager/HotkeyManager.d.ts';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The HotkeyManager constructor.
@@ -8,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface HotkeyManagerConstructor extends ConstructorBase<[app: App], HotkeyManager> {}
+export type HotkeyManagerConstructor = ExtractConstructor<HotkeyManager>;

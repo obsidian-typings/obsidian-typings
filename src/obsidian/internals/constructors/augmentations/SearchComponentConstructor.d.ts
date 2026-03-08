@@ -1,5 +1,5 @@
 import type { SearchComponent } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The SearchComponent constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface SearchComponentConstructor extends ConstructorBase<[containerEl: HTMLElement], SearchComponent> {}
+export type SearchComponentConstructor = ExtractConstructor<SearchComponent>;

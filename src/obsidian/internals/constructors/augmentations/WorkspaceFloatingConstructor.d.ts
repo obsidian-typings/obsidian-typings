@@ -1,5 +1,5 @@
 import type { WorkspaceFloating } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The WorkspaceFloating constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface WorkspaceFloatingConstructor extends ConstructorBase<[], WorkspaceFloating> {}
+export type WorkspaceFloatingConstructor = ExtractConstructor<WorkspaceFloating>;

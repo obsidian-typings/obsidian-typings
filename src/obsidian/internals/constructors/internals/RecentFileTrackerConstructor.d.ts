@@ -1,9 +1,5 @@
-import type {
-    Vault,
-    Workspace
-} from 'obsidian';
 import type { RecentFileTracker } from '../../RecentFileTracker.d.ts';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The RecentFileTracker constructor.
@@ -11,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface RecentFileTrackerConstructor extends ConstructorBase<[workspace: Workspace, vault: Vault], RecentFileTracker> {}
+export type RecentFileTrackerConstructor = ExtractConstructor<RecentFileTracker>;

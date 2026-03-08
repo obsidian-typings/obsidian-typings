@@ -1,5 +1,5 @@
 import type { AbstractTextComponent } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The AbstractTextComponent constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface AbstractTextComponentConstructor extends ConstructorBase<[inputEl: HTMLInputElement | HTMLTextAreaElement], AbstractTextComponent<HTMLInputElement | HTMLTextAreaElement>> {}
+export type AbstractTextComponentConstructor = ExtractConstructor<AbstractTextComponent<HTMLInputElement | HTMLTextAreaElement>>;

@@ -1,5 +1,5 @@
 import type { NullValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The NullValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface NullValueConstructor extends ConstructorBase<[], NullValue> {}
+export type NullValueConstructor = ExtractConstructor<NullValue>;

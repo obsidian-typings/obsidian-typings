@@ -1,5 +1,5 @@
 import type { BasesQueryResult } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The BasesQueryResult constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface BasesQueryResultConstructor extends ConstructorBase<[], BasesQueryResult> {}
+export type BasesQueryResultConstructor = ExtractConstructor<BasesQueryResult>;

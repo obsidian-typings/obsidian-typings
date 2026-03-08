@@ -1,5 +1,5 @@
 import type { MomentFormatComponent } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The MomentFormatComponent constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface MomentFormatComponentConstructor extends ConstructorBase<[], MomentFormatComponent> {}
+export type MomentFormatComponentConstructor = ExtractConstructor<MomentFormatComponent>;

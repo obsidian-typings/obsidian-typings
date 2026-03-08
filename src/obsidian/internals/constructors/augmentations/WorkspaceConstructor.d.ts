@@ -1,8 +1,5 @@
-import type {
-    App,
-    Workspace
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { Workspace } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The Workspace constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface WorkspaceConstructor extends ConstructorBase<[app: App, containerEl: HTMLElement], Workspace> {}
+export type WorkspaceConstructor = ExtractConstructor<Workspace>;

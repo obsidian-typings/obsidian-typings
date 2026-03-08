@@ -1,9 +1,5 @@
-import type {
-    App,
-    MetadataCache,
-    Vault
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { MetadataCache } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The MetadataCache constructor.
@@ -11,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface MetadataCacheConstructor extends ConstructorBase<[app: App, vault: Vault], MetadataCache> {}
+export type MetadataCacheConstructor = ExtractConstructor<MetadataCache>;

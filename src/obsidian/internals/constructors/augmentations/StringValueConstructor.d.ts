@@ -1,5 +1,5 @@
 import type { StringValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The StringValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface StringValueConstructor extends ConstructorBase<[value: string], StringValue> {}
+export type StringValueConstructor = ExtractConstructor<StringValue>;

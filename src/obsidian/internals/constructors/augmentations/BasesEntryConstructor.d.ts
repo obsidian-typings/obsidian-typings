@@ -1,8 +1,5 @@
-import type {
-    BasesEntry,
-    TFile
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { BasesEntry } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The BasesEntry constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface BasesEntryConstructor extends ConstructorBase<[ctx: unknown, file: TFile], BasesEntry> {}
+export type BasesEntryConstructor = ExtractConstructor<BasesEntry>;

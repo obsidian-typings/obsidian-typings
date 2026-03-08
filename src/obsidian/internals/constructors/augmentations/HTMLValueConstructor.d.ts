@@ -1,5 +1,5 @@
 import type { HTMLValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The HTMLValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface HTMLValueConstructor extends ConstructorBase<[value: string], HTMLValue> {}
+export type HTMLValueConstructor = ExtractConstructor<HTMLValue>;

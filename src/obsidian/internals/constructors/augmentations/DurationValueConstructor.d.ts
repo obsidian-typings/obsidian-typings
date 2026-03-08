@@ -1,5 +1,5 @@
 import type { DurationValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The DurationValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface DurationValueConstructor extends ConstructorBase<[], DurationValue> {}
+export type DurationValueConstructor = ExtractConstructor<DurationValue>;

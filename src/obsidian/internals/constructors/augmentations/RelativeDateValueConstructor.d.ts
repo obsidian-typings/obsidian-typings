@@ -1,5 +1,5 @@
 import type { RelativeDateValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The RelativeDateValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface RelativeDateValueConstructor extends ConstructorBase<[], RelativeDateValue> {}
+export type RelativeDateValueConstructor = ExtractConstructor<RelativeDateValue>;

@@ -1,5 +1,5 @@
 import type { MenuItem } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The MenuItem constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface MenuItemConstructor extends ConstructorBase<[menu: unknown], MenuItem> {}
+export type MenuItemConstructor = ExtractConstructor<MenuItem>;

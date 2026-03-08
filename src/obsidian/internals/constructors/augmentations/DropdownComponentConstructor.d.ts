@@ -1,5 +1,5 @@
 import type { DropdownComponent } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The DropdownComponent constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface DropdownComponentConstructor extends ConstructorBase<[containerEl: HTMLElement], DropdownComponent> {}
+export type DropdownComponentConstructor = ExtractConstructor<DropdownComponent>;

@@ -1,6 +1,5 @@
-import type { App } from 'obsidian';
 import type { CustomCSS } from '../../custom-css/CustomCSS.d.ts';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The CustomCSS constructor.
@@ -8,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface CustomCSSConstructor extends ConstructorBase<[app: App], CustomCSS> {}
+export type CustomCSSConstructor = ExtractConstructor<CustomCSS>;

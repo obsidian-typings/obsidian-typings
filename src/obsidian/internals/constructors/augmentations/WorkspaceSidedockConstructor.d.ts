@@ -1,8 +1,5 @@
-import type {
-    Workspace,
-    WorkspaceSidedock
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { WorkspaceSidedock } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The WorkspaceSidedock constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface WorkspaceSidedockConstructor extends ConstructorBase<[workspace: Workspace, direction: string, side: string, id?: string], WorkspaceSidedock> {}
+export type WorkspaceSidedockConstructor = ExtractConstructor<WorkspaceSidedock>;

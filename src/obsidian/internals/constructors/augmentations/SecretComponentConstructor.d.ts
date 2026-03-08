@@ -1,8 +1,5 @@
-import type {
-    App,
-    SecretComponent
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { SecretComponent } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The SecretComponent constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface SecretComponentConstructor extends ConstructorBase<[app: App, containerEl: HTMLElement], SecretComponent> {}
+export type SecretComponentConstructor = ExtractConstructor<SecretComponent>;

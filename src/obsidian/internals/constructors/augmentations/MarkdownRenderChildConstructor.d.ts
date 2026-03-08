@@ -1,5 +1,5 @@
 import type { MarkdownRenderChild } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The MarkdownRenderChild constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface MarkdownRenderChildConstructor extends ConstructorBase<[containerEl: HTMLElement], MarkdownRenderChild> {}
+export type MarkdownRenderChildConstructor = ExtractConstructor<MarkdownRenderChild>;

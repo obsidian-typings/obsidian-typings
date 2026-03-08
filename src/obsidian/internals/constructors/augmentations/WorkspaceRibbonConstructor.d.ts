@@ -1,8 +1,5 @@
-import type {
-    Workspace,
-    WorkspaceRibbon
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { WorkspaceRibbon } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The WorkspaceRibbon constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface WorkspaceRibbonConstructor extends ConstructorBase<[workspace: Workspace, side: string], WorkspaceRibbon> {}
+export type WorkspaceRibbonConstructor = ExtractConstructor<WorkspaceRibbon>;

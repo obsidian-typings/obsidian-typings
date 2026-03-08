@@ -1,8 +1,5 @@
-import type {
-    App,
-    RenderContext
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { RenderContext } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The RenderContext constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface RenderContextConstructor extends ConstructorBase<[app: App], RenderContext> {}
+export type RenderContextConstructor = ExtractConstructor<RenderContext>;

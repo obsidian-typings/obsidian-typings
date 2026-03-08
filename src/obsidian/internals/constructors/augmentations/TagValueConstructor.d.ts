@@ -1,5 +1,5 @@
 import type { TagValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The TagValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface TagValueConstructor extends ConstructorBase<[value: string], TagValue> {}
+export type TagValueConstructor = ExtractConstructor<TagValue>;

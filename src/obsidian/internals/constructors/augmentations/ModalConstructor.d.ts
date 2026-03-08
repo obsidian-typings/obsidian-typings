@@ -1,8 +1,5 @@
-import type {
-    App,
-    Modal
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { Modal } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The Modal constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface ModalConstructor extends ConstructorBase<[app: App], Modal> {}
+export type ModalConstructor = ExtractConstructor<Modal>;

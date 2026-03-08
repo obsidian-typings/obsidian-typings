@@ -1,5 +1,5 @@
 import type { DateValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The DateValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface DateValueConstructor extends ConstructorBase<[], DateValue> {}
+export type DateValueConstructor = ExtractConstructor<DateValue>;

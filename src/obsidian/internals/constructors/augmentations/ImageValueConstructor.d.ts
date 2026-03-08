@@ -1,5 +1,5 @@
 import type { ImageValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The ImageValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface ImageValueConstructor extends ConstructorBase<[value: string], ImageValue> {}
+export type ImageValueConstructor = ExtractConstructor<ImageValue>;

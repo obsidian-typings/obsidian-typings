@@ -1,5 +1,5 @@
 import type { TextAreaComponent } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The TextAreaComponent constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface TextAreaComponentConstructor extends ConstructorBase<[containerEl: HTMLElement], TextAreaComponent> {}
+export type TextAreaComponentConstructor = ExtractConstructor<TextAreaComponent>;

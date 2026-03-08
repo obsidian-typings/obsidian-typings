@@ -1,8 +1,5 @@
-import type {
-    FileValue,
-    WorkspaceLeaf
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { FileValue } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The FileValue constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface FileValueConstructor extends ConstructorBase<[leaf: WorkspaceLeaf], FileValue> {}
+export type FileValueConstructor = ExtractConstructor<FileValue>;

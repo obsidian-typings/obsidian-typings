@@ -1,5 +1,5 @@
 import type { TextComponent } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The TextComponent constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface TextComponentConstructor extends ConstructorBase<[containerEl: HTMLElement], TextComponent> {}
+export type TextComponentConstructor = ExtractConstructor<TextComponent>;

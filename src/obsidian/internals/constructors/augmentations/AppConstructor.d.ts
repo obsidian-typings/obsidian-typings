@@ -1,8 +1,5 @@
-import type {
-    App,
-    DataAdapter
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { App } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The App constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface AppConstructor extends ConstructorBase<[adapter: DataAdapter, appId: string], App> {}
+export type AppConstructor = ExtractConstructor<App>;

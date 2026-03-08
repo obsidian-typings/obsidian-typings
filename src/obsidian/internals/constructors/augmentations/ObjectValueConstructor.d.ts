@@ -1,5 +1,5 @@
 import type { ObjectValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The ObjectValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface ObjectValueConstructor extends ConstructorBase<[], ObjectValue> {}
+export type ObjectValueConstructor = ExtractConstructor<ObjectValue>;

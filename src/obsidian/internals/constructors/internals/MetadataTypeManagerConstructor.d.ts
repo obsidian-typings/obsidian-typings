@@ -1,6 +1,5 @@
-import type { App } from 'obsidian';
 import type { MetadataTypeManager } from '../../metadata-type-manager/MetadataTypeManager.d.ts';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The MetadataTypeManager constructor.
@@ -8,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface MetadataTypeManagerConstructor extends ConstructorBase<[app: App], MetadataTypeManager> {}
+export type MetadataTypeManagerConstructor = ExtractConstructor<MetadataTypeManager>;

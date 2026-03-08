@@ -1,6 +1,5 @@
-import type { App } from 'obsidian';
 import type { Plugins } from '../../plugins/Plugins.d.ts';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The Plugins constructor.
@@ -8,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface PluginsConstructor extends ConstructorBase<[app: App], Plugins> {}
+export type PluginsConstructor = ExtractConstructor<Plugins>;

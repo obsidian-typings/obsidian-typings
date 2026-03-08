@@ -1,8 +1,5 @@
-import type {
-    ListValue,
-    Value
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ListValue } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The ListValue constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface ListValueConstructor extends ConstructorBase<[value: (unknown | Value)[]], ListValue> {}
+export type ListValueConstructor = ExtractConstructor<ListValue>;

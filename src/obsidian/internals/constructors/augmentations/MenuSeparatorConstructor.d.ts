@@ -1,8 +1,5 @@
-import type {
-    Menu,
-    MenuSeparator
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { MenuSeparator } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The MenuSeparator constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface MenuSeparatorConstructor extends ConstructorBase<[menu: Menu], MenuSeparator> {}
+export type MenuSeparatorConstructor = ExtractConstructor<MenuSeparator>;

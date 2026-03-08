@@ -1,5 +1,5 @@
 import type { UrlValue } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The UrlValue constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface UrlValueConstructor extends ConstructorBase<[value: string], UrlValue> {}
+export type UrlValueConstructor = ExtractConstructor<UrlValue>;

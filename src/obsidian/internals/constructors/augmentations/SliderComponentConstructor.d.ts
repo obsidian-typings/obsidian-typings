@@ -1,5 +1,5 @@
 import type { SliderComponent } from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The SliderComponent constructor.
@@ -7,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface SliderComponentConstructor extends ConstructorBase<[containerEl: HTMLElement], SliderComponent> {}
+export type SliderComponentConstructor = ExtractConstructor<SliderComponent>;

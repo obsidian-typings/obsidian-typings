@@ -1,8 +1,5 @@
-import type {
-    DataAdapter,
-    Vault
-} from 'obsidian';
-import type { ConstructorBase } from '../ConstructorBase.d.ts';
+import type { Vault } from 'obsidian';
+import type { ExtractConstructor } from '../ExtractConstructor.d.ts';
 
 /**
  * The Vault constructor.
@@ -10,4 +7,4 @@ import type { ConstructorBase } from '../ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export interface VaultConstructor extends ConstructorBase<[adapter: DataAdapter], Vault> {}
+export type VaultConstructor = ExtractConstructor<Vault>;
