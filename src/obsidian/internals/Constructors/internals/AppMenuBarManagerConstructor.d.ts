@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
-import type { AppMenuBarManager } from './AppMenuBarManager.d.ts';
-import type { ConstructorBase } from './Constructors/ConstructorBase.d.ts';
+import type { AppMenuBarManager } from '../../AppMenuBarManager.d.ts';
+import type { ConstructorBase } from '../ConstructorBase.d.ts';
 
 /**
  * The AppMenuBarManager constructor.
