@@ -13,5 +13,5 @@ export interface CliHandlerEntry {
     flags?: Record<string, CliFlag>;
 
     /** The handler function. */
-    handler: (...args: unknown[]) => unknown;
+    handler(...args: unknown[]): unknown;
 }
