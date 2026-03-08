@@ -1,3 +1,5 @@
+import type { getListValueConstructor } from '../../implementations/constructors/augmentations/getListValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

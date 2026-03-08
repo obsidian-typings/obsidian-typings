@@ -1,3 +1,4 @@
+import type { getFileManagerConstructor } from '../implementations/constructors/augmentations/getFileManagerConstructor.d.ts';
 import type { LinkChangeUpdate } from '../internals/link-update/LinkChangeUpdate.d.ts';
 import type { LinkUpdate } from '../internals/link-update/LinkUpdate.d.ts';
 import type { LinkUpdatesHandler } from '../internals/link-update/LinkUpdatesHandler.d.ts';

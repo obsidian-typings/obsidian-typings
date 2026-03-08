@@ -1,3 +1,5 @@
+import type { getTFileConstructor } from '../implementations/constructors/augmentations/getTFileConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

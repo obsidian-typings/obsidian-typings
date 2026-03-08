@@ -1,3 +1,5 @@
+import type { getKeymapConstructor } from '../implementations/constructors/augmentations/getKeymapConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

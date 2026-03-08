@@ -1,3 +1,5 @@
+import type { getHoverPopoverConstructor } from '../implementations/constructors/augmentations/getHoverPopoverConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

@@ -1,3 +1,5 @@
+import type { getFileValueConstructor } from '../../implementations/constructors/augmentations/getFileValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

@@ -3,6 +3,7 @@ import type {
     Vault,
     Workspace
 } from 'obsidian';
+import type { getRecentFileTrackerConstructor } from '../implementations/constructors/internals/getRecentFileTrackerConstructor.d.ts';
 import type { GetRecentFilesOptions } from './GetRecentFilesOptions.d.ts';
 
 /**

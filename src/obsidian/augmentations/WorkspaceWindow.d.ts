@@ -1,3 +1,5 @@
+import type { getWorkspaceWindowConstructor } from '../implementations/constructors/augmentations/getWorkspaceWindowConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

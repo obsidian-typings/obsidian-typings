@@ -3,6 +3,7 @@ import type {
     Debouncer,
     Events
 } from 'obsidian';
+import type { getMetadataTypeManagerConstructor } from '../../implementations/constructors/internals/getMetadataTypeManagerConstructor.d.ts';
 import type { PropertyInfo } from '../PropertyInfo.d.ts';
 import type { PropertyWidget } from '../PropertyWidget.d.ts';
 import type { PropertyWidgetType } from '../PropertyWidgetType.d.ts';

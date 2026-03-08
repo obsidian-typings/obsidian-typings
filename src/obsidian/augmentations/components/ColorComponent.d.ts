@@ -1,3 +1,5 @@
+import type { getColorComponentConstructor } from '../../implementations/constructors/augmentations/getColorComponentConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

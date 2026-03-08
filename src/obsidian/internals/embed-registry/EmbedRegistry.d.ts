@@ -2,6 +2,7 @@ import type {
     Events,
     TFile
 } from 'obsidian';
+import type { getEmbedRegistryConstructor } from '../../implementations/constructors/internals/getEmbedRegistryConstructor.d.ts';
 import type { EmbedCreator } from './EmbedCreator.d.ts';
 import type { EmbedRegistryEmbedByExtensionRecord } from './EmbedRegistryEmbedByExtensionRecord.d.ts';
 

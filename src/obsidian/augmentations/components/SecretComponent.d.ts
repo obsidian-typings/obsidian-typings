@@ -1,3 +1,5 @@
+import type { getSecretComponentConstructor } from '../../implementations/constructors/augmentations/getSecretComponentConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

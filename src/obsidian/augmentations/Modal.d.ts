@@ -1,3 +1,4 @@
+import type { getModalConstructor } from '../implementations/constructors/augmentations/getModalConstructor.d.ts';
 import type { WindowSelection } from '../internals/WindowSelection.d.ts';
 
 export {};

@@ -1,3 +1,5 @@
+import type { getMenuItemConstructor } from '../implementations/constructors/augmentations/getMenuItemConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

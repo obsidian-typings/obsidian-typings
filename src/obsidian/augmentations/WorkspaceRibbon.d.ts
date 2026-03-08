@@ -1,3 +1,5 @@
+import type { getWorkspaceRibbonConstructor } from '../implementations/constructors/augmentations/getWorkspaceRibbonConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

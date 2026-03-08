@@ -1,3 +1,5 @@
+import type { getQueryControllerConstructor } from '../../implementations/constructors/augmentations/getQueryControllerConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

@@ -1,3 +1,5 @@
+import type { getDateValueConstructor } from '../../implementations/constructors/augmentations/getDateValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

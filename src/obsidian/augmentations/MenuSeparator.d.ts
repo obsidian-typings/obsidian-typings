@@ -1,3 +1,5 @@
+import type { getMenuSeparatorConstructor } from '../implementations/constructors/augmentations/getMenuSeparatorConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

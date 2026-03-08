@@ -1,3 +1,5 @@
+import type { getDurationValueConstructor } from '../../implementations/constructors/augmentations/getDurationValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

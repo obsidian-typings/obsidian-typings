@@ -1,3 +1,5 @@
+import type { getUrlValueConstructor } from '../../implementations/constructors/augmentations/getUrlValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

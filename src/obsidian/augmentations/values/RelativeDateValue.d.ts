@@ -1,3 +1,5 @@
+import type { getRelativeDateValueConstructor } from '../../implementations/constructors/augmentations/getRelativeDateValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

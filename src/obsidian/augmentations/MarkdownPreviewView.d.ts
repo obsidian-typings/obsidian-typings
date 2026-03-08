@@ -1,3 +1,4 @@
+import type { getMarkdownPreviewViewConstructor } from '../implementations/constructors/augmentations/getMarkdownPreviewViewConstructor.d.ts';
 import type { ReadViewRenderer } from '../internals/ReadViewRenderer.d.ts';
 
 export {};

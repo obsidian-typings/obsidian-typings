@@ -1,3 +1,5 @@
+import type { getSliderComponentConstructor } from '../../implementations/constructors/augmentations/getSliderComponentConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

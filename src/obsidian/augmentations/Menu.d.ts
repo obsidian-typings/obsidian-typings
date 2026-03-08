@@ -1,3 +1,4 @@
+import type { getMenuConstructor } from '../implementations/constructors/augmentations/getMenuConstructor.d.ts';
 import type { MenuSubmenuConfigRecord } from '../internals/MenuSubmenuConfigRecord.d.ts';
 import type { Submenu } from '../internals/Submenu.d.ts';
 

@@ -1,3 +1,5 @@
+import type { getRenderContextConstructor } from '../implementations/constructors/augmentations/getRenderContextConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

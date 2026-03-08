@@ -1,3 +1,5 @@
+import type { getStringValueConstructor } from '../../implementations/constructors/augmentations/getStringValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

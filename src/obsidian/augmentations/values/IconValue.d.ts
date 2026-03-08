@@ -1,3 +1,5 @@
+import type { getIconValueConstructor } from '../../implementations/constructors/augmentations/getIconValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

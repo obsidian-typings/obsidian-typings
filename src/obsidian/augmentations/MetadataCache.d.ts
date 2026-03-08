@@ -1,3 +1,4 @@
+import type { getMetadataCacheConstructor } from '../implementations/constructors/augmentations/getMetadataCacheConstructor.d.ts';
 import type { CustomArrayDict } from '../internals/collections/CustomArrayDict.d.ts';
 import type { ItemQueue } from '../internals/collections/ItemQueue.d.ts';
 import type { FileCacheEntry } from '../internals/FileCacheEntry.d.ts';

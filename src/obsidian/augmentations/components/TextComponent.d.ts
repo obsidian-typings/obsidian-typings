@@ -1,3 +1,5 @@
+import type { getTextComponentConstructor } from '../../implementations/constructors/augmentations/getTextComponentConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

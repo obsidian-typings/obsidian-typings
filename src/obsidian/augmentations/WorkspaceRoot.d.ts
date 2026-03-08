@@ -1,3 +1,5 @@
+import type { getWorkspaceRootConstructor } from '../implementations/constructors/augmentations/getWorkspaceRootConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

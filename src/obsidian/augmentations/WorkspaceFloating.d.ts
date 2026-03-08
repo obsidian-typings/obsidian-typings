@@ -1,3 +1,5 @@
+import type { getWorkspaceFloatingConstructor } from '../implementations/constructors/augmentations/getWorkspaceFloatingConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

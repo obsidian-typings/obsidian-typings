@@ -1,3 +1,5 @@
+import type { getHTMLValueConstructor } from '../../implementations/constructors/augmentations/getHTMLValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

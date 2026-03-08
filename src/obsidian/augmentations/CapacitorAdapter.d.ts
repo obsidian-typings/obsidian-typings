@@ -1,3 +1,4 @@
+import type { getCapacitorAdapterConstructor } from '../implementations/constructors/augmentations/getCapacitorAdapterConstructor.d.ts';
 import type { CapacitorAdapterFs } from '../internals/CapacitorAdapterFs.d.ts';
 import type { CapacitorFileEntry } from '../internals/CapacitorFileEntry.d.ts';
 import type { FileEntry } from '../internals/FileEntry.d.ts';

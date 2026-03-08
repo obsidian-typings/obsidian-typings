@@ -1,3 +1,4 @@
+import type { getWorkspaceConstructor } from '../implementations/constructors/augmentations/getWorkspaceConstructor.d.ts';
 import type { Extension } from '@codemirror/state';
 import type { Constructor } from 'obsidian';
 import type { CanvasConnection } from '../internals/CanvasConnection.d.ts';

@@ -8,6 +8,7 @@ import type {
     PluginSettingTab,
     ViewCreator
 } from 'obsidian';
+import type { getInternalPluginConstructor } from '../../implementations/constructors/internals/internal-plugins/getInternalPluginConstructor.d.ts';
 import type { MobileFileInfo } from '../MobileFileInfo.d.ts';
 import type { InternalPlugins } from './InternalPlugins.d.ts';
 import type { RibbonItem } from './RibbonItem.d.ts';

@@ -1,4 +1,6 @@
 /** Augmentations for the WorkspaceSplit interface. */
+import type { getWorkspaceSplitConstructor } from '../implementations/constructors/augmentations/getWorkspaceSplitConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

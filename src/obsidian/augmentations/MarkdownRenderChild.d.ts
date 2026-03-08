@@ -1,3 +1,5 @@
+import type { getMarkdownRenderChildConstructor } from '../implementations/constructors/augmentations/getMarkdownRenderChildConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

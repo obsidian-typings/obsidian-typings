@@ -1,3 +1,5 @@
+import type { getMomentFormatComponentConstructor } from '../../implementations/constructors/augmentations/getMomentFormatComponentConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

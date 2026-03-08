@@ -1,3 +1,5 @@
+import type { getNullValueConstructor } from '../../implementations/constructors/augmentations/getNullValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

@@ -1,3 +1,4 @@
+import type { getWorkspaceLeafConstructor } from '../implementations/constructors/augmentations/getWorkspaceLeafConstructor.d.ts';
 import type { Draggable } from '../internals/drag-manager/Draggable.d.ts';
 import type { DropResult } from '../internals/drag-manager/DropResult.d.ts';
 import type { WorkspaceLeafHistory } from '../internals/workspace-leaf-history/WorkspaceLeafHistory.d.ts';

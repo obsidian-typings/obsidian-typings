@@ -1,3 +1,5 @@
+import type { getNoticeConstructor } from '../implementations/constructors/augmentations/getNoticeConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

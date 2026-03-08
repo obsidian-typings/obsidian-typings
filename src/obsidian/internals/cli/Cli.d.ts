@@ -3,6 +3,7 @@ import type {
     CliFlag,
     TFile
 } from 'obsidian';
+import type { getCliConstructor } from '../../implementations/constructors/internals/getCliConstructor.d.ts';
 import type { CliHandlerEntry } from './CliHandlerEntry.d.ts';
 import type { CliTreeNode } from './CliTreeNode.d.ts';
 

@@ -1,3 +1,4 @@
+import type { getFileSystemAdapterConstructor } from '../implementations/constructors/augmentations/getFileSystemAdapterConstructor.d.ts';
 import type { IpcRenderer } from 'electron';
 import * as fs from 'node:fs';
 import type { Stats } from 'node:fs';

@@ -1,3 +1,5 @@
+import type { getDropdownComponentConstructor } from '../../implementations/constructors/augmentations/getDropdownComponentConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

@@ -1,3 +1,5 @@
+import type { getToggleComponentConstructor } from '../../implementations/constructors/augmentations/getToggleComponentConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

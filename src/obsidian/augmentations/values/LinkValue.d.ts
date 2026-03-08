@@ -1,3 +1,5 @@
+import type { getLinkValueConstructor } from '../../implementations/constructors/augmentations/getLinkValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

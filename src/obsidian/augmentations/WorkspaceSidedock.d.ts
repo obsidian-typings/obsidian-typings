@@ -1,3 +1,4 @@
+import type { getWorkspaceSidedockConstructor } from '../implementations/constructors/augmentations/getWorkspaceSidedockConstructor.d.ts';
 import type { SerializedWorkspaceSidedock } from '../internals/workspace/SerializedWorkspaceSidedock.d.ts';
 
 declare module 'obsidian' {

@@ -1,3 +1,5 @@
+import type { getTagValueConstructor } from '../../implementations/constructors/augmentations/getTagValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

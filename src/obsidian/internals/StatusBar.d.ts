@@ -1,4 +1,5 @@
 import type { App } from 'obsidian';
+import type { getStatusBarConstructor } from '../implementations/constructors/internals/getStatusBarConstructor.d.ts';
 
 /**
  * The status bar displayed at the bottom of the application window.

@@ -1,3 +1,5 @@
+import type { getImageValueConstructor } from '../../implementations/constructors/augmentations/getImageValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

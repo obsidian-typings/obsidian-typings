@@ -1,3 +1,5 @@
+import type { getBooleanValueConstructor } from '../../implementations/constructors/augmentations/getBooleanValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

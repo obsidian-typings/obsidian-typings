@@ -1,3 +1,5 @@
+import type { getProgressBarComponentConstructor } from '../../implementations/constructors/augmentations/getProgressBarComponentConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

@@ -1,3 +1,5 @@
+import type { getSettingGroupConstructor } from '../implementations/constructors/augmentations/getSettingGroupConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

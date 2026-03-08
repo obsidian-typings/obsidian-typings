@@ -1,3 +1,5 @@
+import type { getButtonComponentConstructor } from '../../implementations/constructors/augmentations/getButtonComponentConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

@@ -1,3 +1,4 @@
+import type { getScopeConstructor } from '../implementations/constructors/augmentations/getScopeConstructor.d.ts';
 import type { KeyScope } from '../internals/KeyScope.d.ts';
 
 export {};

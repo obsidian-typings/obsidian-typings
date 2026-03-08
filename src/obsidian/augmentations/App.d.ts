@@ -1,3 +1,4 @@
+import type { getAppConstructor } from '../implementations/constructors/augmentations/getAppConstructor.d.ts';
 import type { AppMenuBarManager } from '../internals/AppMenuBarManager.d.ts';
 import type { Cli } from '../internals/cli/Cli.d.ts';
 import type { AppSetting } from '../internals/AppSetting.d.ts';

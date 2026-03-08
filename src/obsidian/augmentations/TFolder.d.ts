@@ -1,3 +1,5 @@
+import type { getTFolderConstructor } from '../implementations/constructors/augmentations/getTFolderConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

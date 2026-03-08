@@ -1,3 +1,5 @@
+import type { getBasesViewConfigConstructor } from '../../implementations/constructors/augmentations/getBasesViewConfigConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

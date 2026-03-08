@@ -1,3 +1,5 @@
+import type { getBasesEntryGroupConstructor } from '../../implementations/constructors/augmentations/getBasesEntryGroupConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

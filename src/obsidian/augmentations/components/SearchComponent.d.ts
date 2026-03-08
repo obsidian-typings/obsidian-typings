@@ -1,3 +1,5 @@
+import type { getSearchComponentConstructor } from '../../implementations/constructors/augmentations/getSearchComponentConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

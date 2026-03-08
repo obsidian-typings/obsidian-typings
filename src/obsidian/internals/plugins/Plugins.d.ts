@@ -4,6 +4,7 @@ import type {
     Plugin,
     PluginManifest
 } from 'obsidian';
+import type { getPluginsConstructor } from '../../implementations/constructors/internals/getPluginsConstructor.d.ts';
 import type { PluginUpdateManifest } from '../PluginUpdateManifest.d.ts';
 import type { PluginsManifestsRecord } from './PluginsManifestsRecord.d.ts';
 import type { PluginsPluginsRecord } from './PluginsPluginsRecord.d.ts';

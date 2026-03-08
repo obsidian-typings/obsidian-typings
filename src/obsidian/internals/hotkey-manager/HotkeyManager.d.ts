@@ -3,6 +3,7 @@ import type {
     Debouncer,
     KeymapInfo
 } from 'obsidian';
+import type { getHotkeyManagerConstructor } from '../../implementations/constructors/internals/getHotkeyManagerConstructor.d.ts';
 import type { HotkeyManagerDefaultKeysRecord } from './HotkeyManagerDefaultKeysRecord.d.ts';
 
 /**

@@ -1,3 +1,4 @@
+import type { getMarkdownPreviewRendererConstructor } from '../implementations/constructors/augmentations/getMarkdownPreviewRendererConstructor.d.ts';
 import type { CodeBlockPostProcessorHandler } from '../internals/CodeBlockPostProcessorHandler.d.ts';
 import type { DomEventsHandlers } from '../internals/DomEventsHandlers.d.ts';
 

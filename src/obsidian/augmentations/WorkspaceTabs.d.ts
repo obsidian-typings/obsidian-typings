@@ -1,3 +1,5 @@
+import type { getWorkspaceTabsConstructor } from '../implementations/constructors/augmentations/getWorkspaceTabsConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

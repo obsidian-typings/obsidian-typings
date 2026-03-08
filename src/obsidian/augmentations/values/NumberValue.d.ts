@@ -1,3 +1,5 @@
+import type { getNumberValueConstructor } from '../../implementations/constructors/augmentations/getNumberValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

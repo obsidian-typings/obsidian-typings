@@ -1,3 +1,5 @@
+import type { getBasesQueryResultConstructor } from '../../implementations/constructors/augmentations/getBasesQueryResultConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {

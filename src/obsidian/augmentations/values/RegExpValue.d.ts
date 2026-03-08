@@ -1,3 +1,5 @@
+import type { getRegExpValueConstructor } from '../../implementations/constructors/augmentations/getRegExpValueConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
