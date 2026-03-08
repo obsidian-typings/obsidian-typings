@@ -1,9 +1,13 @@
+import type { App } from 'obsidian';
+import type { AppMenuBarManager } from './AppMenuBarManager.d.ts';
+import type { ConstructorBase } from './Constructors/ConstructorBase.d.ts';
+
 /**
- * Static methods on the AppMenuBarManager constructor.
+ * The AppMenuBarManager constructor.
  * @public
  * @unofficial
  */
-export interface AppMenuBarManagerConstructor {
+export interface AppMenuBarManagerConstructor extends ConstructorBase<[app: App], AppMenuBarManager> {
     /**
      * Update the state of native menu items.
      *
