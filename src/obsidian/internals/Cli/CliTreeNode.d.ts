@@ -4,9 +4,9 @@
  * @unofficial
  */
 export interface CliTreeNode {
-    /** Label text for this tree node. */
-    label: string;
-
     /** Child nodes. */
     children?: CliTreeNode[];
+
+    /** Label text for this tree node. */
+    label: string;
 }

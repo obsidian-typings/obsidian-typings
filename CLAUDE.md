@@ -35,3 +35,5 @@ These are standalone exported interfaces for Obsidian's internal objects.
 - Simple methods with no parameters can use short single-line TSDoc.
 - `@param` format: `@param name - Description.`
 - HTML element variables are suffixed with `El` (e.g., `containerEl`, `styleEl`).
+- Prefer method syntax `method(args): returnType` over property-with-function syntax `prop: (args) => returnType` when applicable.
+- Inside interfaces, fields (properties) go first in alphabetical order, then methods in alphabetical order.
