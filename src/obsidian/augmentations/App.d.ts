@@ -178,7 +178,7 @@ declare module 'obsidian' {
          * Quick actions for mobile, null on desktop.
          * @unofficial
          */
-        mobileQuickActions: unknown | null;
+        mobileQuickActions: unknown;
 
         /**
          * Events to execute on the next frame
