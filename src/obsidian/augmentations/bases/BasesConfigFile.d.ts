@@ -34,6 +34,7 @@ declare module 'obsidian' {
          * @official
          * @since 1.10.0
          */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
         properties?: Record<string, Record<string, any>>;
 
         /**

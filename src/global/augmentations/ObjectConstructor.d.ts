@@ -25,7 +25,7 @@ declare global {
                 [key: string]: T;
             },
             callback: (value: T, key?: string) => boolean | void,
-            context?: any
+            context?: unknown
         ): boolean;
 
         /**
@@ -40,6 +40,7 @@ declare global {
          * ```
          * @official
          */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
         isEmpty(object: Record<string, any>): boolean;
     }
 }

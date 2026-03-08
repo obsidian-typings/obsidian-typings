@@ -80,7 +80,7 @@ declare module 'obsidian' {
          * @official
          * @since 1.0.0
          */
-        onChange(callback: (value: string) => any): this;
+        onChange(callback: (value: string) => unknown): this;
 
         /**
          * Disable the color picker.

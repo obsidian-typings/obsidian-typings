@@ -276,7 +276,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        changeLayout(workspace: any): Promise<void>;
+        changeLayout(workspace: unknown): Promise<void>;
 
         /**
          * Clear layout of workspace and destruct all leaves
@@ -677,7 +677,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        iterateAllLeaves(callback: (leaf: WorkspaceLeaf) => any): void;
+        iterateAllLeaves(callback: (leaf: WorkspaceLeaf) => unknown): void;
 
         /**
          * Iterate through all CodeMirror instances in the workspace.
@@ -703,7 +703,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        iterateRootLeaves(callback: (leaf: WorkspaceLeaf) => any): void;
+        iterateRootLeaves(callback: (leaf: WorkspaceLeaf) => unknown): void;
 
         /**
          * Iterate the tabs of a split till meeting a condition.
@@ -752,7 +752,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.10.9
          */
-        on(name: 'active-leaf-change', callback: (leaf: WorkspaceLeaf | null) => any, ctx?: any): EventRef;
+        on(name: 'active-leaf-change', callback: (leaf: WorkspaceLeaf | null) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Triggers when the browser history is updated.
@@ -819,7 +819,7 @@ declare module 'obsidian' {
          * });
          * @official
          */
-        on(name: 'css-change', callback: () => any, ctx?: any): EventRef;
+        on(name: 'css-change', callback: () => unknown, ctx?: unknown): EventRef;
 
         /**
          * Triggered when changes to an editor has been applied, either programmatically or from a user event.
@@ -838,8 +838,8 @@ declare module 'obsidian' {
          */
         on(
             name: 'editor-change',
-            callback: (editor: Editor, info: MarkdownView | MarkdownFileInfo) => any,
-            ctx?: any
+            callback: (editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
+            ctx?: unknown
         ): EventRef;
 
         /**
@@ -861,8 +861,8 @@ declare module 'obsidian' {
          */
         on(
             name: 'editor-drop',
-            callback: (evt: DragEvent, editor: Editor, info: MarkdownView | MarkdownFileInfo) => any,
-            ctx?: any
+            callback: (evt: DragEvent, editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
+            ctx?: unknown
         ): EventRef;
 
         /**
@@ -882,8 +882,8 @@ declare module 'obsidian' {
          */
         on(
             name: 'editor-menu',
-            callback: (menu: Menu, editor: Editor, info: MarkdownView | MarkdownFileInfo) => any,
-            ctx?: any
+            callback: (menu: Menu, editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
+            ctx?: unknown
         ): EventRef;
 
         /**
@@ -905,8 +905,8 @@ declare module 'obsidian' {
          */
         on(
             name: 'editor-paste',
-            callback: (evt: ClipboardEvent, editor: Editor, info: MarkdownView | MarkdownFileInfo) => any,
-            ctx?: any
+            callback: (evt: ClipboardEvent, editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
+            ctx?: unknown
         ): EventRef;
 
         /**
@@ -941,8 +941,8 @@ declare module 'obsidian' {
          */
         on(
             name: 'file-menu',
-            callback: (menu: Menu, file: TAbstractFile, source: string, leaf?: WorkspaceLeaf) => any,
-            ctx?: any
+            callback: (menu: Menu, file: TAbstractFile, source: string, leaf?: WorkspaceLeaf) => unknown,
+            ctx?: unknown
         ): EventRef;
 
         /**
@@ -961,7 +961,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'file-open', callback: (file: TFile | null) => any, ctx?: any): EventRef;
+        on(name: 'file-open', callback: (file: TFile | null) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Triggered when the user opens the context menu with multiple files selected in the File Explorer.
@@ -980,8 +980,8 @@ declare module 'obsidian' {
          */
         on(
             name: 'files-menu',
-            callback: (menu: Menu, files: TAbstractFile[], source: string, leaf?: WorkspaceLeaf) => any,
-            ctx?: any
+            callback: (menu: Menu, files: TAbstractFile[], source: string, leaf?: WorkspaceLeaf) => unknown,
+            ctx?: unknown
         ): EventRef;
 
         /**
@@ -1007,7 +1007,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'layout-change', callback: () => any, ctx?: any): EventRef;
+        on(name: 'layout-change', callback: () => unknown, ctx?: unknown): EventRef;
 
         /**
          * Triggers when workspace layout is loaded.
@@ -1070,7 +1070,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'quick-preview', callback: (file: TFile, data: string) => any, ctx?: any): EventRef;
+        on(name: 'quick-preview', callback: (file: TFile, data: string) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Triggered when the app is about to quit.
@@ -1089,7 +1089,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'quit', callback: (tasks: Tasks) => any, ctx?: any): EventRef;
+        on(name: 'quit', callback: (tasks: Tasks) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Triggered when user shares files on mobile.
@@ -1140,7 +1140,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'resize', callback: () => any, ctx?: any): EventRef;
+        on(name: 'resize', callback: () => unknown, ctx?: unknown): EventRef;
 
         /**
          * Triggers when user clicks on 'N results' button in search view.
@@ -1182,7 +1182,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'url-menu', callback: (menu: Menu, url: string) => any, ctx?: any): EventRef;
+        on(name: 'url-menu', callback: (menu: Menu, url: string) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Triggered when a popout window is closed.
@@ -1199,7 +1199,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'window-close', callback: (win: WorkspaceWindow, window: Window) => any, ctx?: any): EventRef;
+        on(name: 'window-close', callback: (win: WorkspaceWindow, window: Window) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Triggered when a new popout window is created.
@@ -1215,7 +1215,7 @@ declare module 'obsidian' {
          * });
          * @official
          */
-        on(name: 'window-open', callback: (win: WorkspaceWindow, window: Window) => any, ctx?: any): EventRef;
+        on(name: 'window-open', callback: (win: WorkspaceWindow, window: Window) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Handles drag event on leaf
@@ -1248,7 +1248,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.11.0
          */
-        onLayoutReady(callback: () => any): void;
+        onLayoutReady(callback: () => unknown): void;
 
         /**
          * Trigger the quick preview event with the given arguments.

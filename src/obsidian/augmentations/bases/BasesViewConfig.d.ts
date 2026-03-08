@@ -97,6 +97,6 @@ declare module 'obsidian' {
          * @official
          * @since 1.10.0
          */
-        set(key: string, value: any | null): void;
+        set(key: string, value: unknown | null): void;
     }
 }

@@ -68,7 +68,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        addButton(cb: (component: ButtonComponent) => any): this;
+        addButton(cb: (component: ButtonComponent) => unknown): this;
 
         /**
          * Add a color picker component to the setting.
@@ -83,7 +83,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        addColorPicker(cb: (component: ColorComponent) => any): this;
+        addColorPicker(cb: (component: ColorComponent) => unknown): this;
 
         /**
          * Add a component to the setting.
@@ -113,7 +113,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        addDropdown(cb: (component: DropdownComponent) => any): this;
+        addDropdown(cb: (component: DropdownComponent) => unknown): this;
 
         /**
          * Add an extra button to the setting.
@@ -129,7 +129,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.16
          */
-        addExtraButton(cb: (component: ExtraButtonComponent) => any): this;
+        addExtraButton(cb: (component: ExtraButtonComponent) => unknown): this;
 
         /**
          * Add a moment format component to the setting.
@@ -145,7 +145,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        addMomentFormat(cb: (component: MomentFormatComponent) => any): this;
+        addMomentFormat(cb: (component: MomentFormatComponent) => unknown): this;
 
         /**
          * Add a progress bar component to the setting.
@@ -160,7 +160,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        addProgressBar(cb: (component: ProgressBarComponent) => any): this;
+        addProgressBar(cb: (component: ProgressBarComponent) => unknown): this;
 
         /**
          * Add a search component to the setting.
@@ -176,7 +176,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.21
          */
-        addSearch(cb: (component: SearchComponent) => any): this;
+        addSearch(cb: (component: SearchComponent) => unknown): this;
 
         /**
          * Add a slider component to the setting.
@@ -192,7 +192,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        addSlider(cb: (component: SliderComponent) => any): this;
+        addSlider(cb: (component: SliderComponent) => unknown): this;
 
         /**
          * Add a text component to the setting.
@@ -208,7 +208,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        addText(cb: (component: TextComponent) => any): this;
+        addText(cb: (component: TextComponent) => unknown): this;
 
         /**
          * Add a text area component to the setting.
@@ -224,7 +224,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        addTextArea(cb: (component: TextAreaComponent) => any): this;
+        addTextArea(cb: (component: TextAreaComponent) => unknown): this;
 
         /**
          * Add a toggle to the setting.
@@ -240,7 +240,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        addToggle(cb: (component: ToggleComponent) => any): this;
+        addToggle(cb: (component: ToggleComponent) => unknown): this;
 
         /**
          * Clear the setting.
@@ -384,6 +384,6 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.20
          */
-        then(cb: (setting: this) => any): this;
+        then(cb: (setting: this) => unknown): this;
     }
 }

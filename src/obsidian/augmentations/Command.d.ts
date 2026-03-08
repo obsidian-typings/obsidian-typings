@@ -111,6 +111,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
         callback?: () => any;
 
         /**
@@ -166,6 +167,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.12.2
          */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
         editorCallback?: (editor: Editor, ctx: MarkdownView | MarkdownFileInfo) => any;
 
         /**

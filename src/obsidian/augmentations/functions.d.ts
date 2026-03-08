@@ -336,6 +336,7 @@ declare module 'obsidian' {
      * @see {@link https://mermaid.js.org/ Official Mermaid documentation}.
      * @official
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
     function loadMermaid(): Promise<any>;
 
     /**
@@ -355,6 +356,7 @@ declare module 'obsidian' {
      * @see {@link https://mozilla.github.io/pdf.js/ Official PDF.js documentation}.
      * @official
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
     function loadPdfJs(): Promise<any>;
 
     /**
@@ -374,6 +376,7 @@ declare module 'obsidian' {
      * @see {@link https://prismjs.com/ Official Prism documentation}.
      * @official
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
     function loadPrism(): Promise<any>;
 
     /**
@@ -412,7 +415,7 @@ declare module 'obsidian' {
      *
      * @official
      */
-    function parseFrontMatterAliases(frontmatter: any | null): string[] | null;
+    function parseFrontMatterAliases(frontmatter: unknown | null): string[] | null;
 
     /**
      * Parses a frontmatter entry from the frontmatter object.
@@ -429,7 +432,7 @@ declare module 'obsidian' {
      *
      * @official
      */
-    function parseFrontMatterEntry(frontmatter: any | null, key: string | RegExp): any | null;
+    function parseFrontMatterEntry(frontmatter: unknown | null, key: string | RegExp): unknown | null;
 
     /**
      * Parses a frontmatter string array from the frontmatter object.
@@ -453,7 +456,7 @@ declare module 'obsidian' {
      * @official
      */
     function parseFrontMatterStringArray(
-        frontmatter: any | null,
+        frontmatter: unknown | null,
         key: string | RegExp,
         nospaces?: boolean
     ): string[] | null;
@@ -473,7 +476,7 @@ declare module 'obsidian' {
      *
      * @official
      */
-    function parseFrontMatterTags(frontmatter: any | null): string[] | null;
+    function parseFrontMatterTags(frontmatter: unknown | null): string[] | null;
 
     /**
      * Parses the linktext of a wikilink into its component parts.
@@ -512,7 +515,7 @@ declare module 'obsidian' {
      *
      * @official
      */
-    function parseYaml(yaml: string): any;
+    function parseYaml(yaml: string): unknown;
 
     /**
      * Construct a fuzzy search callback that runs on a target string.
@@ -767,7 +770,7 @@ declare module 'obsidian' {
      *
      * @official
      */
-    function stringifyYaml(obj: any): string;
+    function stringifyYaml(obj: unknown): string;
 
     /**
      * Normalizes headings for link matching by stripping out special characters and shrinking consecutive spaces.

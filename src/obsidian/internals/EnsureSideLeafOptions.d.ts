@@ -14,5 +14,5 @@ export interface EnsureSideLeafOptions {
     split?: boolean;
 
     /** @official */
-    state?: any;
+    state?: unknown;
 }

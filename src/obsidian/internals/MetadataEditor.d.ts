@@ -192,7 +192,7 @@ export interface MetadataEditor extends Component {
      *
      * @param properties - Properties to insert.
      */
-    insertProperties(properties: Record<string, any>): void;
+    insertProperties(properties: Record<string, unknown>): void;
 
     /**
      * On loading of the metadata editor, register on metadata type change event.
@@ -247,7 +247,7 @@ export interface MetadataEditor extends Component {
      *
      * @returns Serialized properties object.
      */
-    serialize(): Record<string, any>;
+    serialize(): Record<string, unknown>;
 
     /**
      * Sets frontmatter as collapsed or uncollapsed.
@@ -269,7 +269,7 @@ export interface MetadataEditor extends Component {
      *
      * @param data - Properties data to synchronize with.
      */
-    synchronize(data: Record<string, any>): void;
+    synchronize(data: Record<string, unknown>): void;
 
     /**
      * Toggle collapsed state of the metadata editor.

@@ -7,5 +7,6 @@ declare module 'obsidian' {
      *
      * @deprecated - Added only for typing purposes. Use {@link KeymapEventListener} instead.
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
     type KeymapEventListener__ = (evt: KeyboardEvent, ctx: KeymapContext) => false | any;
 }

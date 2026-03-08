@@ -55,7 +55,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        on(name: string, callback: (...data: unknown[]) => unknown, ctx?: any): EventRef;
+        on(name: string, callback: (...data: unknown[]) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Trigger an event, executing all the listeners in order even if some of them throw an error.

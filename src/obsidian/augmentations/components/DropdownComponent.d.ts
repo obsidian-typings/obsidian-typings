@@ -82,7 +82,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        onChange(callback: (value: string) => any): this;
+        onChange(callback: (value: string) => unknown): this;
 
         /**
          * Set the disabled state of the dropdown.

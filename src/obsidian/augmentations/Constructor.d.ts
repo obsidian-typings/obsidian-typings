@@ -17,5 +17,5 @@ declare module 'obsidian' {
      *
      * @deprecated - Added only for typing purposes. Use {@link Constructor} instead.
      */
-    type Constructor__<T> = abstract new(...args: any[]) => T;
+    type Constructor__<T> = abstract new(...args: unknown[]) => T;
 }

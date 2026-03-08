@@ -46,7 +46,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        onClick(callback: () => any): this;
+        onClick(callback: () => unknown): this;
 
         /**
          * Set the disabled state of the extra button.

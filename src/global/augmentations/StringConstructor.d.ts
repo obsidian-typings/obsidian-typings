@@ -17,6 +17,6 @@ declare global {
          * ```
          * @official
          */
-        isString(obj: any): obj is string;
+        isString(obj: unknown): obj is string;
     }
 }

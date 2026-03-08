@@ -212,7 +212,7 @@ declare module 'obsidian' {
          * @official
          * @since 1.10.0
          */
-        setCloseCallback(callback: () => any): this;
+        setCloseCallback(callback: () => unknown): this;
 
         /**
          * Set the content of the modal.

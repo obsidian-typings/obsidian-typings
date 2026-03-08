@@ -448,7 +448,7 @@ declare module 'obsidian' {
          * You must hook the {@link Vault.on | Vault.on(name: 'rename')} event for those.
          * @official
          */
-        on(name: 'changed', callback: (file: TFile, data: string, cache: CachedMetadata) => any, ctx?: any): EventRef;
+        on(name: 'changed', callback: (file: TFile, data: string, cache: CachedMetadata) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Called when a file has been deleted. A best-effort previous version of the cached metadata is presented,.
@@ -466,7 +466,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'deleted', callback: (file: TFile, prevCache: CachedMetadata | null) => any, ctx?: any): EventRef;
+        on(name: 'deleted', callback: (file: TFile, prevCache: CachedMetadata | null) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Called whenever the metadatacache has finished updating.
@@ -501,7 +501,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'resolve', callback: (file: TFile) => any, ctx?: any): EventRef;
+        on(name: 'resolve', callback: (file: TFile) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Called when all files has been resolved. This will be fired each time files get modified after the initial load.
@@ -518,7 +518,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'resolved', callback: () => any, ctx?: any): EventRef;
+        on(name: 'resolved', callback: () => unknown, ctx?: unknown): EventRef;
 
         /**
          * Execute onCleanCache callbacks if cache is clean

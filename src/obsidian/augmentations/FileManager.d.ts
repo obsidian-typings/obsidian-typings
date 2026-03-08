@@ -237,7 +237,7 @@ declare module 'obsidian' {
          * @official
          * @since 1.4.4
          */
-        processFrontMatter(file: TFile, fn: (frontmatter: any) => void, options?: DataWriteOptions): Promise<void>;
+        processFrontMatter(file: TFile, fn: (frontmatter: unknown) => void, options?: DataWriteOptions): Promise<void>;
 
         /**
          * Prompt the user to confirm they want to delete the specified file or folder.

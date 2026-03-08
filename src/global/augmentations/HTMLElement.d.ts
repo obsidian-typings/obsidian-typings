@@ -73,7 +73,7 @@ declare global {
             this: HTMLElement,
             type: K,
             selector: string,
-            listener: (this: HTMLElement, ev: HTMLElementEventMap[K], delegateTarget: HTMLElement) => any,
+            listener: (this: HTMLElement, ev: HTMLElementEventMap[K], delegateTarget: HTMLElement) => unknown,
             options?: boolean | AddEventListenerOptions
         ): void;
 
@@ -98,7 +98,7 @@ declare global {
             this: HTMLElement,
             type: K,
             selector: string,
-            listener: (this: HTMLElement, ev: HTMLElementEventMap[K], delegateTarget: HTMLElement) => any,
+            listener: (this: HTMLElement, ev: HTMLElementEventMap[K], delegateTarget: HTMLElement) => unknown,
             options?: boolean | AddEventListenerOptions
         ): void;
 
@@ -118,7 +118,7 @@ declare global {
          */
         onClickEvent(
             this: HTMLElement,
-            listener: (this: HTMLElement, ev: MouseEvent) => any,
+            listener: (this: HTMLElement, ev: MouseEvent) => unknown,
             options?: boolean | AddEventListenerOptions
         ): void;
 
@@ -136,7 +136,7 @@ declare global {
          * ```
          * @official
          */
-        onNodeInserted(this: HTMLElement, listener: () => any, once?: boolean): () => void;
+        onNodeInserted(this: HTMLElement, listener: () => unknown, once?: boolean): () => void;
 
         /**
          * Adds an event listener to the element when it is migrated to another window.
@@ -150,7 +150,7 @@ declare global {
          * });
          * @official
          */
-        onWindowMigrated(this: HTMLElement, listener: (win: Window) => any): () => void;
+        onWindowMigrated(this: HTMLElement, listener: (win: Window) => unknown): () => void;
 
         /**
          * Sets the CSS properties of the element.

@@ -10,7 +10,7 @@ export declare class HighlightOutline extends Outline {
     lastPoint: unknown;
 
     /** Create a highlight outline from the given outlines, bounding box, and last point. */
-    constructor(outlines: unknown, box: unknown, lastPoint: any);
+    constructor(outlines: unknown, box: unknown, lastPoint: unknown);
 
     /**
      * The bounding box of the highlight outline.

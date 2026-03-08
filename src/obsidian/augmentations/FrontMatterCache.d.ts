@@ -26,6 +26,6 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes. Use `this[key]` instead.
          */
-        index__(key: string): any;
+        index__(key: string): unknown;
     }
 }

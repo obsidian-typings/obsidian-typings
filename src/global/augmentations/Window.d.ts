@@ -341,6 +341,7 @@ declare global {
          * ```
          * @official
          */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
         ajaxPromise(options: AjaxOptions): Promise<any>;
 
         /**
@@ -530,7 +531,7 @@ declare global {
          * ```
          * @official
          */
-        isBoolean(obj: any): obj is boolean;
+        isBoolean(obj: unknown): obj is boolean;
 
         /**
          * Minified helper to copy properties from source to target object.
@@ -594,7 +595,7 @@ declare global {
          * });
          * @official
          */
-        ready(fn: () => any): void;
+        ready(fn: () => unknown): void;
 
         /**
          * Select a language file location.

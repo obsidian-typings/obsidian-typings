@@ -63,7 +63,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        onChange(callback: (value: number) => any): this;
+        onChange(callback: (value: number) => unknown): this;
 
         /**
          * Disable the slider.

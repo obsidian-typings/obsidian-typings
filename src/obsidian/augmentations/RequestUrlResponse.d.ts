@@ -28,6 +28,7 @@ declare module 'obsidian' {
          *
          * @official
          */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
         json: any;
 
         /**

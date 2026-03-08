@@ -162,7 +162,7 @@ declare module 'obsidian' {
          * @returns The ephemeral state of the leaf.
          * @official
          */
-        getEphemeralState(): any;
+        getEphemeralState(): unknown;
 
         /**
          * Get the current navigation history state of this leaf.
@@ -249,7 +249,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'group-change', callback: (group: string) => any, ctx?: any): EventRef;
+        on(name: 'group-change', callback: (group: string) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Triggers when the leaf's history gets updated (e.g. when new file is opened, or moving through history).
@@ -288,7 +288,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'pinned-change', callback: (pinned: boolean) => any, ctx?: any): EventRef;
+        on(name: 'pinned-change', callback: (pinned: boolean) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Handle opening the context menu on this leaf's tab header.
@@ -371,7 +371,7 @@ declare module 'obsidian' {
          * @param state - The ephemeral state to set.
          * @official
          */
-        setEphemeralState(state: any): void;
+        setEphemeralState(state: unknown): void;
 
         /**
          * Set the group of this leaf.
@@ -405,7 +405,7 @@ declare module 'obsidian' {
          * @returns A promise that resolves when the view state is applied.
          * @official
          */
-        setViewState(viewState: ViewState, eState?: any): Promise<void>;
+        setViewState(viewState: ViewState, eState?: unknown): Promise<void>;
 
         /**
          * Toggle the pinned state of this leaf.

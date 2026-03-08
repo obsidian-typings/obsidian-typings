@@ -46,7 +46,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.12.16
          */
-        onClick(callback: (evt: MouseEvent) => any): this;
+        onClick(callback: (evt: MouseEvent) => unknown): this;
 
         /**
          * Removes the call to action style from the button component.

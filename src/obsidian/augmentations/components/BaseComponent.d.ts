@@ -42,6 +42,6 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        then(cb: (component: this) => any): this;
+        then(cb: (component: this) => unknown): this;
     }
 }

@@ -29,6 +29,7 @@ declare module 'obsidian' {
          */
         function createCodeBlockPostProcessor__(
             language: string,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
             handler: (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => Promise<any> | void
         ): (el: HTMLElement, ctx: MarkdownPostProcessorContext) => void;
 

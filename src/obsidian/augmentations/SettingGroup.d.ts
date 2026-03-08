@@ -71,7 +71,7 @@ declare module 'obsidian' {
          * @official
          * @since 1.11.0
          */
-        addExtraButton(cb: (component: ExtraButtonComponent) => any): this;
+        addExtraButton(cb: (component: ExtraButtonComponent) => unknown): this;
 
         /**
          * Add a search input at the beginning of the setting group. Useful for filtering
@@ -82,7 +82,7 @@ declare module 'obsidian' {
          * @official
          * @since 1.11.0
          */
-        addSearch(cb: (component: SearchComponent) => any): this;
+        addSearch(cb: (component: SearchComponent) => unknown): this;
 
         /**
          * Add a setting to the setting group.

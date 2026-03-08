@@ -98,7 +98,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        addItem(cb: (item: MenuItem) => any): this;
+        addItem(cb: (item: MenuItem) => unknown): this;
 
         /**
          * Add a section to the menu.
@@ -222,7 +222,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        onHide(callback: () => any): void;
+        onHide(callback: () => unknown): void;
 
         /**
          * Preemptively closes the menu if click is registered on menu item.

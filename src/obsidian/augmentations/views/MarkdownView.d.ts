@@ -351,7 +351,7 @@ declare module 'obsidian' {
          * @param properties - The frontmatter properties to save.
          * @unofficial
          */
-        saveFrontmatter(properties: Record<string, any>): void;
+        saveFrontmatter(properties: Record<string, unknown>): void;
 
         /**
          * Set the mode of the editor.

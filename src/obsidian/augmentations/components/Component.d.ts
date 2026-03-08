@@ -88,7 +88,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        register(cb: () => any): void;
+        register(cb: () => unknown): void;
 
         /**
          * Registers a DOM event to be detached when unloading.
@@ -110,7 +110,7 @@ declare module 'obsidian' {
         registerDomEvent<K extends keyof DocumentEventMap>(
             el: Document,
             type: K,
-            callback: (this: HTMLElement, ev: DocumentEventMap[K]) => any,
+            callback: (this: HTMLElement, ev: DocumentEventMap[K]) => unknown,
             options?: boolean | AddEventListenerOptions
         ): void;
 
@@ -133,7 +133,7 @@ declare module 'obsidian' {
         registerDomEvent<K extends keyof HTMLElementEventMap>(
             el: HTMLElement,
             type: K,
-            callback: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any,
+            callback: (this: HTMLElement, ev: HTMLElementEventMap[K]) => unknown,
             options?: boolean | AddEventListenerOptions
         ): void;
 
@@ -156,7 +156,7 @@ declare module 'obsidian' {
         registerDomEvent<K extends keyof WindowEventMap>(
             el: Window,
             type: K,
-            callback: (this: HTMLElement, ev: WindowEventMap[K]) => any,
+            callback: (this: HTMLElement, ev: WindowEventMap[K]) => unknown,
             options?: boolean | AddEventListenerOptions
         ): void;
 

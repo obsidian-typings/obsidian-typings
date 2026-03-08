@@ -104,7 +104,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        onClick(callback: (evt: MouseEvent | KeyboardEvent) => any): this;
+        onClick(callback: (evt: MouseEvent | KeyboardEvent) => unknown): this;
 
         /**
          * Remove the icon element from the menu item.

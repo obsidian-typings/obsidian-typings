@@ -57,7 +57,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        onChange(callback: (value: string) => any): this;
+        onChange(callback: (value: string) => unknown): this;
 
         /**
          * Manually invokes the callback registered with `onChange`.

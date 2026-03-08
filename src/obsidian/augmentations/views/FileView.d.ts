@@ -171,7 +171,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        setState(state: any, result: ViewStateResult): Promise<void>;
+        setState(state: unknown, result: ViewStateResult): Promise<void>;
 
         /**
          * Synchronize the view state with the sync plugin.

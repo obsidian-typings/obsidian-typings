@@ -56,7 +56,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        onChange(callback: (value: boolean) => any): this;
+        onChange(callback: (value: boolean) => unknown): this;
 
         /**
          * Handle the click event of the toggle.

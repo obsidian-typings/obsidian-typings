@@ -45,12 +45,14 @@ declare global {
          * The error callback of the AJAX request.
          * @official
          */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
         error?: (error: any, req: XMLHttpRequest) => any;
 
         /**
          * The success callback of the AJAX request.
          * @official
          */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
         success?: (response: any, req: XMLHttpRequest) => any;
     }
 }

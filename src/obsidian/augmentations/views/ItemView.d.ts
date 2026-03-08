@@ -103,7 +103,7 @@ declare module 'obsidian' {
          * @official
          * @since 1.1.0
          */
-        addAction(icon: IconName, title: string, callback: (evt: MouseEvent) => any): HTMLElement;
+        addAction(icon: IconName, title: string, callback: (evt: MouseEvent) => unknown): HTMLElement;
 
         /**
          * Create a new item view.

@@ -21,6 +21,6 @@ declare global {
          * @remarks Regarding `NaN` see: {@link https://forum.obsidian.md/t/bug-number-isnumber-definition/98104}.
          * @official
          */
-        isNumber(obj: any): obj is number;
+        isNumber(obj: unknown): obj is number;
     }
 }

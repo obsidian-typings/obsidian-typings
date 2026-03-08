@@ -73,7 +73,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        addRibbonIcon(icon: IconName, title: string, callback: (evt: MouseEvent) => any): HTMLElement;
+        addRibbonIcon(icon: IconName, title: string, callback: (evt: MouseEvent) => unknown): HTMLElement;
 
         /**
          * Register a settings tab, which allows users to change settings.
@@ -117,6 +117,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
         loadData(): Promise<any>;
 
         /**
@@ -130,7 +131,7 @@ declare module 'obsidian' {
          * @official
          * @since 1.5.7
          */
-        onExternalSettingsChange?(): any;
+        onExternalSettingsChange?(): unknown;
 
         /**
          * Called when the plugin is loaded.
@@ -204,6 +205,7 @@ declare module 'obsidian' {
          * @official
          * @since 0.12.7
          */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
         registerEditorSuggest(editorSuggest: EditorSuggest<any>): void;
 
         /**
@@ -257,6 +259,7 @@ declare module 'obsidian' {
          */
         registerMarkdownCodeBlockProcessor(
             language: string,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
             handler: (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => Promise<any> | void,
             sortOrder?: number
         ): MarkdownPostProcessor;
@@ -338,6 +341,6 @@ declare module 'obsidian' {
          * @official
          * @since 0.9.7
          */
-        saveData(data: any): Promise<void>;
+        saveData(data: unknown): Promise<void>;
     }
 }

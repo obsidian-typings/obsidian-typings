@@ -32,7 +32,7 @@ declare global {
             this: Document,
             type: K,
             selector: string,
-            listener: (this: Document, ev: DocumentEventMap[K], delegateTarget: HTMLElement) => any,
+            listener: (this: Document, ev: DocumentEventMap[K], delegateTarget: HTMLElement) => unknown,
             options?: boolean | AddEventListenerOptions
         ): void;
 
@@ -57,7 +57,7 @@ declare global {
             this: Document,
             type: K,
             selector: string,
-            listener: (this: Document, ev: DocumentEventMap[K], delegateTarget: HTMLElement) => any,
+            listener: (this: Document, ev: DocumentEventMap[K], delegateTarget: HTMLElement) => unknown,
             options?: boolean | AddEventListenerOptions
         ): void;
     }

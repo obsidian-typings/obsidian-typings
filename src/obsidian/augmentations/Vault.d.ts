@@ -495,7 +495,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'create', callback: (file: TAbstractFile) => any, ctx?: any): EventRef;
+        on(name: 'create', callback: (file: TAbstractFile) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Called when a file is deleted.
@@ -512,7 +512,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'delete', callback: (file: TAbstractFile) => any, ctx?: any): EventRef;
+        on(name: 'delete', callback: (file: TAbstractFile) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Called when a file is modified.
@@ -529,7 +529,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'modify', callback: (file: TAbstractFile) => any, ctx?: any): EventRef;
+        on(name: 'modify', callback: (file: TAbstractFile) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Triggered whenever a file gets loaded internally
@@ -557,7 +557,7 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'rename', callback: (file: TAbstractFile, oldPath: string) => any, ctx?: any): EventRef;
+        on(name: 'rename', callback: (file: TAbstractFile, oldPath: string) => unknown, ctx?: unknown): EventRef;
 
         /**
          * Atomically read, modify, and save the contents of a note.
@@ -784,6 +784,6 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link recurseChildren} instead.
          * @since 0.9.7
          */
-        function recurseChildren__(root: TFolder, cb: (file: TAbstractFile) => any): void;
+        function recurseChildren__(root: TFolder, cb: (file: TAbstractFile) => unknown): void;
     }
 }

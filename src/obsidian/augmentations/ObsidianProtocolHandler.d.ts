@@ -9,5 +9,5 @@ declare module 'obsidian' {
      *
      * @deprecated - Added only for typing purposes. Use {@link ObsidianProtocolHandler} instead.
      */
-    type ObsidianProtocolHandler__ = (params: ObsidianProtocolData) => any;
+    type ObsidianProtocolHandler__ = (params: ObsidianProtocolData) => unknown;
 }
