@@ -1,5 +1,5 @@
 import type { AppMenuBarManager } from '../internals/AppMenuBarManager.d.ts';
-import type { Cli } from '../internals/Cli.d.ts';
+import type { Cli } from '../internals/Cli/Cli.d.ts';
 import type { AppSetting } from '../internals/AppSetting.d.ts';
 import type { Commands } from '../internals/Commands/Commands.d.ts';
 import type { CustomCSS } from '../internals/CustomCSS/CustomCSS.d.ts';

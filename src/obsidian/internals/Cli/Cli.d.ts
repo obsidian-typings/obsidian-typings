@@ -3,27 +3,8 @@ import type {
     CliFlag,
     TFile
 } from 'obsidian';
-
-/** A node in a CLI ASCII tree. */
-export interface CliTreeNode {
-    /** Label text for this tree node. */
-    label: string;
-
-    /** Child nodes. */
-    children?: CliTreeNode[];
-}
-
-/** Entry stored in the CLI handlers map. */
-export interface CliHandlerEntry {
-    /** The handler function. */
-    handler: (...args: unknown[]) => unknown;
-
-    /** Description shown in help. */
-    description: string;
-
-    /** Flags accepted by this handler. */
-    flags?: Record<string, CliFlag>;
-}
+import type { CliHandlerEntry } from './CliHandlerEntry.d.ts';
+import type { CliTreeNode } from './CliTreeNode.d.ts';
 
 /**
  * Command-line interface handler for Obsidian.
