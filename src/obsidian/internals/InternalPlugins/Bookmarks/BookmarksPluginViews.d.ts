@@ -15,7 +15,6 @@ export interface BookmarksPluginViews extends Record<string, ViewCreator> {
      *
      * @param left - The workspace leaf to create the bookmarks view in.
      * @returns The created bookmarks view.
-     * @unofficial
      */
     bookmarks(left: WorkspaceLeaf): BookmarksView;
 }

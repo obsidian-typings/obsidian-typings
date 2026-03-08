@@ -12,7 +12,6 @@ export interface SQLResultSetRowList {
      *
      * @param index - The index of the row to retrieve.
      * @returns The row at the specified index.
-     * @unofficial
      */
     item(index: number): unknown;
 }

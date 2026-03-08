@@ -101,7 +101,6 @@ export interface MetadataTypeManager extends Events {
      * Handle raw file system change events for the property type config.
      *
      * @param e - The raw file system change event.
-     * @unofficial
      */
     onRaw(e: unknown): void;
 

@@ -19,7 +19,6 @@ These are standalone exported interfaces for Obsidian's internal objects.
 - Use plain `export interface` — no `declare module` or `export {}`.
 - Interface-level TSDoc has both `@public` and `@unofficial` tags.
 - Individual members do NOT repeat `@unofficial` (the interface-level tag covers them).
-- Exception: add `@unofficial` on a specific member only when it needs extra emphasis.
 
 ### File Organization
 

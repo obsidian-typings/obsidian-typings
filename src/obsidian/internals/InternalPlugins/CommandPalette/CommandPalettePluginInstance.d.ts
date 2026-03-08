@@ -63,7 +63,6 @@ export interface CommandPalettePluginInstance extends InternalPluginInstance<Com
      * Save the command palette settings.
      *
      * @param plugin - The command palette plugin to save settings for.
-     * @unofficial
      */
     saveSettings(plugin: CommandPalettePlugin): void;
 }

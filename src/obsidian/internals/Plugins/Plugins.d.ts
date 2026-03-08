@@ -177,7 +177,6 @@ export interface Plugins {
      * Handle raw file system change events for plugin config files.
      *
      * @param e - The raw file system change event.
-     * @unofficial
      */
     onRaw(e: unknown): void;
 
