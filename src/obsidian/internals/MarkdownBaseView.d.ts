@@ -111,7 +111,7 @@ export interface MarkdownBaseView extends Component {
     /**
      * Returns attached file of the owner instance.
      *
-     * @returns The attached file, or null.
+     * @returns The attached file, or `null`.
      */
     get file(): TFile | null;
 
@@ -181,7 +181,7 @@ export interface MarkdownBaseView extends Component {
     /**
      * Get the current folds of the editor.
      *
-     * @returns Current fold information, or null.
+     * @returns Current fold information, or `null`.
      */
     getFoldInfo(): null | FoldInfo;
 

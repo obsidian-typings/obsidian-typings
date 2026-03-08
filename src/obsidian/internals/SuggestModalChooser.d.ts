@@ -25,7 +25,7 @@ export interface SuggestModalChooser<T, TModal> {
     /** DOM elements for each suggestion row. */
     suggestions: HTMLDivElement[];
 
-    /** Current suggestion values, or null if none. */
+    /** Current suggestion values, or `null` if none. */
     values: T[] | null;
 
     /**
@@ -109,7 +109,7 @@ export interface SuggestModalChooser<T, TModal> {
     /**
      * Replace all suggestions with new values.
      *
-     * @param values - Suggestion values to display, or null.
+     * @param values - Suggestion values to display, or `null`.
      */
     setSuggestions(values: T[] | null): void;
 

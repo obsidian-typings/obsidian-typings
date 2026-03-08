@@ -15,7 +15,7 @@ declare module 'obsidian' {
         description: string;
 
         /**
-         * Whether this flag is required (default: false)
+         * Whether this flag is required (default: `false`)
          * @official
          * @since 1.12.2
          */

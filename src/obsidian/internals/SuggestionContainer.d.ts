@@ -77,14 +77,14 @@ export interface SuggestionContainer<T> {
     /**
      * Get the DOM element of the currently selected suggestion.
      *
-     * @returns The selected element, or null.
+     * @returns The selected element, or `null`.
      */
     getSelectedElement(): HTMLElement | null;
 
     /**
      * Get the data value of the currently selected suggestion.
      *
-     * @returns The selected suggestion data, or null.
+     * @returns The selected suggestion data, or `null`.
      */
     getSelectedValue(): SearchResult | null;
 

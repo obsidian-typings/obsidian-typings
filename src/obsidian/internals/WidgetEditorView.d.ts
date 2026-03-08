@@ -83,7 +83,7 @@ export interface WidgetEditorView extends EmbeddedEditorView {
     /**
      * Get the current folds of the editor.
      *
-     * @returns Current fold information, or null.
+     * @returns Current fold information, or `null`.
      */
     getFoldInfo(): null | FoldInfo;
 
