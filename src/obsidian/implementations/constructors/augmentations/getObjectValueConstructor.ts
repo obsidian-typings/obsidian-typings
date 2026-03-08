@@ -1,7 +1,7 @@
 import {
     ObjectValue
 } from 'obsidian';
-import type { ObjectValueConstructor } from '../../../internals/constructors/augmentations/ObjectValueConstructor.ts';
+import type { ObjectValueConstructor } from '../../../internals/constructors/augmentations/ObjectValueConstructor.d.ts';
 
 /**
  * Get the ObjectValue constructor.

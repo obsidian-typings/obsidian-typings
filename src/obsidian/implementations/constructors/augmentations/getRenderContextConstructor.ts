@@ -1,7 +1,7 @@
 import {
     RenderContext
 } from 'obsidian';
-import type { RenderContextConstructor } from '../../../internals/constructors/augmentations/RenderContextConstructor.ts';
+import type { RenderContextConstructor } from '../../../internals/constructors/augmentations/RenderContextConstructor.d.ts';
 
 /**
  * Get the RenderContext constructor.

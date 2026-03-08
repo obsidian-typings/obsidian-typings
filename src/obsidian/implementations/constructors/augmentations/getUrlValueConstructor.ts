@@ -1,7 +1,7 @@
 import {
     UrlValue
 } from 'obsidian';
-import type { UrlValueConstructor } from '../../../internals/constructors/augmentations/UrlValueConstructor.ts';
+import type { UrlValueConstructor } from '../../../internals/constructors/augmentations/UrlValueConstructor.d.ts';
 
 /**
  * Get the UrlValue constructor.

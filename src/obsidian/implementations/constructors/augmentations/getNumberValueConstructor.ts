@@ -1,7 +1,7 @@
 import {
     NumberValue
 } from 'obsidian';
-import type { NumberValueConstructor } from '../../../internals/constructors/augmentations/NumberValueConstructor.ts';
+import type { NumberValueConstructor } from '../../../internals/constructors/augmentations/NumberValueConstructor.d.ts';
 
 /**
  * Get the NumberValue constructor.

@@ -1,7 +1,7 @@
 import {
     MetadataCache
 } from 'obsidian';
-import type { MetadataCacheConstructor } from '../../../internals/constructors/augmentations/MetadataCacheConstructor.ts';
+import type { MetadataCacheConstructor } from '../../../internals/constructors/augmentations/MetadataCacheConstructor.d.ts';
 
 /**
  * Get the MetadataCache constructor.

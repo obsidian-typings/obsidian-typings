@@ -1,7 +1,7 @@
 import {
     DropdownComponent
 } from 'obsidian';
-import type { DropdownComponentConstructor } from '../../../internals/constructors/augmentations/DropdownComponentConstructor.ts';
+import type { DropdownComponentConstructor } from '../../../internals/constructors/augmentations/DropdownComponentConstructor.d.ts';
 
 /**
  * Get the DropdownComponent constructor.

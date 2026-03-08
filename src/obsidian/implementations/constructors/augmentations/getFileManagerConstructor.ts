@@ -1,7 +1,7 @@
 import {
     FileManager
 } from 'obsidian';
-import type { FileManagerConstructor } from '../../../internals/constructors/augmentations/FileManagerConstructor.ts';
+import type { FileManagerConstructor } from '../../../internals/constructors/augmentations/FileManagerConstructor.d.ts';
 
 /**
  * Get the FileManager constructor.

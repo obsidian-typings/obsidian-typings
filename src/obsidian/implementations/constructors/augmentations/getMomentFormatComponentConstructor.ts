@@ -1,7 +1,7 @@
 import {
     MomentFormatComponent
 } from 'obsidian';
-import type { MomentFormatComponentConstructor } from '../../../internals/constructors/augmentations/MomentFormatComponentConstructor.ts';
+import type { MomentFormatComponentConstructor } from '../../../internals/constructors/augmentations/MomentFormatComponentConstructor.d.ts';
 
 /**
  * Get the MomentFormatComponent constructor.

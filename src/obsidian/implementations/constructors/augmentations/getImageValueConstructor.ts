@@ -1,7 +1,7 @@
 import {
     ImageValue
 } from 'obsidian';
-import type { ImageValueConstructor } from '../../../internals/constructors/augmentations/ImageValueConstructor.ts';
+import type { ImageValueConstructor } from '../../../internals/constructors/augmentations/ImageValueConstructor.d.ts';
 
 /**
  * Get the ImageValue constructor.

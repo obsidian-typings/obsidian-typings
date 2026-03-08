@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { EmbedRegistryConstructor } from '../../../internals/constructors/internals/EmbedRegistryConstructor.ts';
+import type { EmbedRegistryConstructor } from '../../../internals/constructors/internals/EmbedRegistryConstructor.d.ts';
 
 /**
  * Get the EmbedRegistry constructor.

@@ -1,7 +1,7 @@
 import {
     Keymap
 } from 'obsidian';
-import type { KeymapConstructor } from '../../../internals/constructors/augmentations/KeymapConstructor.ts';
+import type { KeymapConstructor } from '../../../internals/constructors/augmentations/KeymapConstructor.d.ts';
 
 /**
  * Get the Keymap constructor.

@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { RecentFileTrackerConstructor } from '../../../internals/constructors/internals/RecentFileTrackerConstructor.ts';
+import type { RecentFileTrackerConstructor } from '../../../internals/constructors/internals/RecentFileTrackerConstructor.d.ts';
 
 /**
  * Get the RecentFileTracker constructor.

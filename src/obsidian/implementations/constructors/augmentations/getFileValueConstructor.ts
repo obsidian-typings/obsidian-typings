@@ -1,7 +1,7 @@
 import {
     FileValue
 } from 'obsidian';
-import type { FileValueConstructor } from '../../../internals/constructors/augmentations/FileValueConstructor.ts';
+import type { FileValueConstructor } from '../../../internals/constructors/augmentations/FileValueConstructor.d.ts';
 
 /**
  * Get the FileValue constructor.

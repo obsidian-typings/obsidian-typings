@@ -1,7 +1,7 @@
 import {
     DateValue
 } from 'obsidian';
-import type { DateValueConstructor } from '../../../internals/constructors/augmentations/DateValueConstructor.ts';
+import type { DateValueConstructor } from '../../../internals/constructors/augmentations/DateValueConstructor.d.ts';
 
 /**
  * Get the DateValue constructor.

@@ -1,7 +1,7 @@
 import {
     Setting
 } from 'obsidian';
-import type { SettingConstructor } from '../../../internals/constructors/augmentations/SettingConstructor.ts';
+import type { SettingConstructor } from '../../../internals/constructors/augmentations/SettingConstructor.d.ts';
 
 /**
  * Get the Setting constructor.

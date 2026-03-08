@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { HotkeyManagerConstructor } from '../../../internals/constructors/internals/HotkeyManagerConstructor.ts';
+import type { HotkeyManagerConstructor } from '../../../internals/constructors/internals/HotkeyManagerConstructor.d.ts';
 
 /**
  * Get the HotkeyManager constructor.

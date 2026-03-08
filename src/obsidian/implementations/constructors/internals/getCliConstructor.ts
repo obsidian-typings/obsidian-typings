@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { CliConstructor } from '../../../internals/constructors/internals/CliConstructor.ts';
+import type { CliConstructor } from '../../../internals/constructors/internals/CliConstructor.d.ts';
 
 /**
  * Get the Cli constructor.

@@ -1,7 +1,7 @@
 import {
     Scope
 } from 'obsidian';
-import type { ScopeConstructor } from '../../../internals/constructors/augmentations/ScopeConstructor.ts';
+import type { ScopeConstructor } from '../../../internals/constructors/augmentations/ScopeConstructor.d.ts';
 
 /**
  * Get the Scope constructor.

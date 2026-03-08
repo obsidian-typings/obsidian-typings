@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { ViewRegistryConstructor } from '../../../internals/constructors/internals/ViewRegistryConstructor.ts';
+import type { ViewRegistryConstructor } from '../../../internals/constructors/internals/ViewRegistryConstructor.d.ts';
 
 /**
  * Get the ViewRegistry constructor.

@@ -1,7 +1,7 @@
 import {
     HoverPopover
 } from 'obsidian';
-import type { HoverPopoverConstructor } from '../../../internals/constructors/augmentations/HoverPopoverConstructor.ts';
+import type { HoverPopoverConstructor } from '../../../internals/constructors/augmentations/HoverPopoverConstructor.d.ts';
 
 /**
  * Get the HoverPopover constructor.

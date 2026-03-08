@@ -1,7 +1,7 @@
 import {
     SecretComponent
 } from 'obsidian';
-import type { SecretComponentConstructor } from '../../../internals/constructors/augmentations/SecretComponentConstructor.ts';
+import type { SecretComponentConstructor } from '../../../internals/constructors/augmentations/SecretComponentConstructor.d.ts';
 
 /**
  * Get the SecretComponent constructor.

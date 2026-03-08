@@ -1,7 +1,7 @@
 import {
     BasesViewConfig
 } from 'obsidian';
-import type { BasesViewConfigConstructor } from '../../../internals/constructors/augmentations/BasesViewConfigConstructor.ts';
+import type { BasesViewConfigConstructor } from '../../../internals/constructors/augmentations/BasesViewConfigConstructor.d.ts';
 
 /**
  * Get the BasesViewConfig constructor.

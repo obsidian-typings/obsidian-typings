@@ -1,7 +1,7 @@
 import {
     ColorComponent
 } from 'obsidian';
-import type { ColorComponentConstructor } from '../../../internals/constructors/augmentations/ColorComponentConstructor.ts';
+import type { ColorComponentConstructor } from '../../../internals/constructors/augmentations/ColorComponentConstructor.d.ts';
 
 /**
  * Get the ColorComponent constructor.

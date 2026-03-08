@@ -1,7 +1,7 @@
 import {
     LinkValue
 } from 'obsidian';
-import type { LinkValueConstructor } from '../../../internals/constructors/augmentations/LinkValueConstructor.ts';
+import type { LinkValueConstructor } from '../../../internals/constructors/augmentations/LinkValueConstructor.d.ts';
 
 /**
  * Get the LinkValue constructor.

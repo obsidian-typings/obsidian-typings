@@ -1,7 +1,7 @@
 import {
     ButtonComponent
 } from 'obsidian';
-import type { ButtonComponentConstructor } from '../../../internals/constructors/augmentations/ButtonComponentConstructor.ts';
+import type { ButtonComponentConstructor } from '../../../internals/constructors/augmentations/ButtonComponentConstructor.d.ts';
 
 /**
  * Get the ButtonComponent constructor.

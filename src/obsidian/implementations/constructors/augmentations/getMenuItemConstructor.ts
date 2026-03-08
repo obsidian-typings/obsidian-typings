@@ -1,7 +1,7 @@
 import {
     MenuItem
 } from 'obsidian';
-import type { MenuItemConstructor } from '../../../internals/constructors/augmentations/MenuItemConstructor.ts';
+import type { MenuItemConstructor } from '../../../internals/constructors/augmentations/MenuItemConstructor.d.ts';
 
 /**
  * Get the MenuItem constructor.

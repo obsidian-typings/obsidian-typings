@@ -1,7 +1,7 @@
 import {
     MarkdownView
 } from 'obsidian';
-import type { MarkdownViewConstructor } from '../../../internals/constructors/augmentations/MarkdownViewConstructor.ts';
+import type { MarkdownViewConstructor } from '../../../internals/constructors/augmentations/MarkdownViewConstructor.d.ts';
 
 /**
  * Get the MarkdownView constructor.

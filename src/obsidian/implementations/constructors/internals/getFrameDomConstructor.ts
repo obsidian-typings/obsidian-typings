@@ -1,4 +1,4 @@
-import type { FrameDomConstructor } from '../../../internals/constructors/internals/FrameDomConstructor.ts';
+import type { FrameDomConstructor } from '../../../internals/constructors/internals/FrameDomConstructor.d.ts';
 
 /**
  * Get the FrameDom constructor.

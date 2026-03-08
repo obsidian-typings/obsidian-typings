@@ -1,7 +1,7 @@
 import {
     RegExpValue
 } from 'obsidian';
-import type { RegExpValueConstructor } from '../../../internals/constructors/augmentations/RegExpValueConstructor.ts';
+import type { RegExpValueConstructor } from '../../../internals/constructors/augmentations/RegExpValueConstructor.d.ts';
 
 /**
  * Get the RegExpValue constructor.

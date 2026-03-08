@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { DragManagerConstructor } from '../../../internals/constructors/internals/DragManagerConstructor.ts';
+import type { DragManagerConstructor } from '../../../internals/constructors/internals/DragManagerConstructor.d.ts';
 
 /**
  * Get the DragManager constructor.

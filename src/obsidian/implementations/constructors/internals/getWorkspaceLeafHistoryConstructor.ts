@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { WorkspaceLeafHistoryConstructor } from '../../../internals/constructors/internals/WorkspaceLeafHistoryConstructor.ts';
+import type { WorkspaceLeafHistoryConstructor } from '../../../internals/constructors/internals/WorkspaceLeafHistoryConstructor.d.ts';
 
 /**
  * Get the WorkspaceLeafHistory constructor.

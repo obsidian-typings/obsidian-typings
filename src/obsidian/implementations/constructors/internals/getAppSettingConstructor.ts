@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { AppSettingConstructor } from '../../../internals/constructors/internals/AppSettingConstructor.ts';
+import type { AppSettingConstructor } from '../../../internals/constructors/internals/AppSettingConstructor.d.ts';
 
 /**
  * Get the AppSetting constructor.

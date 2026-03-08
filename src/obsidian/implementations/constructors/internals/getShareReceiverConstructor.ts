@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { ShareReceiverConstructor } from '../../../internals/constructors/internals/ShareReceiverConstructor.ts';
+import type { ShareReceiverConstructor } from '../../../internals/constructors/internals/ShareReceiverConstructor.d.ts';
 
 /**
  * Get the ShareReceiver constructor.

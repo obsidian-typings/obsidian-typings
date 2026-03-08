@@ -1,7 +1,7 @@
 import {
     MarkdownPreviewRenderer
 } from 'obsidian';
-import type { MarkdownPreviewRendererConstructor } from '../../../internals/constructors/augmentations/MarkdownPreviewRendererConstructor.ts';
+import type { MarkdownPreviewRendererConstructor } from '../../../internals/constructors/augmentations/MarkdownPreviewRendererConstructor.d.ts';
 
 /**
  * Get the MarkdownPreviewRenderer constructor.

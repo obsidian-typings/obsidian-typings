@@ -1,7 +1,7 @@
 import {
     MenuSeparator
 } from 'obsidian';
-import type { MenuSeparatorConstructor } from '../../../internals/constructors/augmentations/MenuSeparatorConstructor.ts';
+import type { MenuSeparatorConstructor } from '../../../internals/constructors/augmentations/MenuSeparatorConstructor.d.ts';
 
 /**
  * Get the MenuSeparator constructor.

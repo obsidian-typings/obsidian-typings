@@ -1,7 +1,7 @@
 import {
     WorkspaceTabs
 } from 'obsidian';
-import type { WorkspaceTabsConstructor } from '../../../internals/constructors/augmentations/WorkspaceTabsConstructor.ts';
+import type { WorkspaceTabsConstructor } from '../../../internals/constructors/augmentations/WorkspaceTabsConstructor.d.ts';
 
 /**
  * Get the WorkspaceTabs constructor.

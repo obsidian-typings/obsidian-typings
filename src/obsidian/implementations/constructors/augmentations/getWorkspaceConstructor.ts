@@ -1,7 +1,7 @@
 import {
     Workspace
 } from 'obsidian';
-import type { WorkspaceConstructor } from '../../../internals/constructors/augmentations/WorkspaceConstructor.ts';
+import type { WorkspaceConstructor } from '../../../internals/constructors/augmentations/WorkspaceConstructor.d.ts';
 
 /**
  * Get the Workspace constructor.

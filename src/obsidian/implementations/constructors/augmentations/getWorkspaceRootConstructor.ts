@@ -1,7 +1,7 @@
 import {
     WorkspaceRoot
 } from 'obsidian';
-import type { WorkspaceRootConstructor } from '../../../internals/constructors/augmentations/WorkspaceRootConstructor.ts';
+import type { WorkspaceRootConstructor } from '../../../internals/constructors/augmentations/WorkspaceRootConstructor.d.ts';
 
 /**
  * Get the WorkspaceRoot constructor.

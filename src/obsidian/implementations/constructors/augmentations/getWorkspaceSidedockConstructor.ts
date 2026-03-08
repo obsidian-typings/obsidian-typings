@@ -1,7 +1,7 @@
 import {
     WorkspaceSidedock
 } from 'obsidian';
-import type { WorkspaceSidedockConstructor } from '../../../internals/constructors/augmentations/WorkspaceSidedockConstructor.ts';
+import type { WorkspaceSidedockConstructor } from '../../../internals/constructors/augmentations/WorkspaceSidedockConstructor.d.ts';
 
 /**
  * Get the WorkspaceSidedock constructor.

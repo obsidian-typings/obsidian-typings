@@ -1,7 +1,7 @@
 import {
     TFolder
 } from 'obsidian';
-import type { TFolderConstructor } from '../../../internals/constructors/augmentations/TFolderConstructor.ts';
+import type { TFolderConstructor } from '../../../internals/constructors/augmentations/TFolderConstructor.d.ts';
 
 /**
  * Get the TFolder constructor.

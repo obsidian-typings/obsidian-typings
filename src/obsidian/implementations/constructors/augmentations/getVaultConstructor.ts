@@ -1,7 +1,7 @@
 import {
     Vault
 } from 'obsidian';
-import type { VaultConstructor } from '../../../internals/constructors/augmentations/VaultConstructor.ts';
+import type { VaultConstructor } from '../../../internals/constructors/augmentations/VaultConstructor.d.ts';
 
 /**
  * Get the Vault constructor.

@@ -1,7 +1,7 @@
 import {
     WorkspaceWindow
 } from 'obsidian';
-import type { WorkspaceWindowConstructor } from '../../../internals/constructors/augmentations/WorkspaceWindowConstructor.ts';
+import type { WorkspaceWindowConstructor } from '../../../internals/constructors/augmentations/WorkspaceWindowConstructor.d.ts';
 
 /**
  * Get the WorkspaceWindow constructor.

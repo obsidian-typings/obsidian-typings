@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { MetadataTypeManagerConstructor } from '../../../internals/constructors/internals/MetadataTypeManagerConstructor.ts';
+import type { MetadataTypeManagerConstructor } from '../../../internals/constructors/internals/MetadataTypeManagerConstructor.d.ts';
 
 /**
  * Get the MetadataTypeManager constructor.

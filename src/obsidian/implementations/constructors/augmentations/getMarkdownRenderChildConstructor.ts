@@ -1,7 +1,7 @@
 import {
     MarkdownRenderChild
 } from 'obsidian';
-import type { MarkdownRenderChildConstructor } from '../../../internals/constructors/augmentations/MarkdownRenderChildConstructor.ts';
+import type { MarkdownRenderChildConstructor } from '../../../internals/constructors/augmentations/MarkdownRenderChildConstructor.d.ts';
 
 /**
  * Get the MarkdownRenderChild constructor.

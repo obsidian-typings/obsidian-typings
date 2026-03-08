@@ -1,7 +1,7 @@
 import {
     StringValue
 } from 'obsidian';
-import type { StringValueConstructor } from '../../../internals/constructors/augmentations/StringValueConstructor.ts';
+import type { StringValueConstructor } from '../../../internals/constructors/augmentations/StringValueConstructor.d.ts';
 
 /**
  * Get the StringValue constructor.

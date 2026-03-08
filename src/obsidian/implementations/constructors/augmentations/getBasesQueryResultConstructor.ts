@@ -1,7 +1,7 @@
 import {
     BasesQueryResult
 } from 'obsidian';
-import type { BasesQueryResultConstructor } from '../../../internals/constructors/augmentations/BasesQueryResultConstructor.ts';
+import type { BasesQueryResultConstructor } from '../../../internals/constructors/augmentations/BasesQueryResultConstructor.d.ts';
 
 /**
  * Get the BasesQueryResult constructor.

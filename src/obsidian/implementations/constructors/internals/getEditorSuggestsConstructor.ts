@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { EditorSuggestsConstructor } from '../../../internals/constructors/internals/EditorSuggestsConstructor.ts';
+import type { EditorSuggestsConstructor } from '../../../internals/constructors/internals/EditorSuggestsConstructor.d.ts';
 
 /**
  * Get the EditorSuggests constructor.

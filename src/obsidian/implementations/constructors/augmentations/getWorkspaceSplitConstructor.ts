@@ -1,7 +1,7 @@
 import {
     WorkspaceSplit
 } from 'obsidian';
-import type { WorkspaceSplitConstructor } from '../../../internals/constructors/augmentations/WorkspaceSplitConstructor.ts';
+import type { WorkspaceSplitConstructor } from '../../../internals/constructors/augmentations/WorkspaceSplitConstructor.d.ts';
 
 /**
  * Get the WorkspaceSplit constructor.

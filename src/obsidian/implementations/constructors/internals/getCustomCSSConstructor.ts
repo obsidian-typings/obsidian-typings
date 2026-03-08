@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { CustomCSSConstructor } from '../../../internals/constructors/internals/CustomCSSConstructor.ts';
+import type { CustomCSSConstructor } from '../../../internals/constructors/internals/CustomCSSConstructor.d.ts';
 
 /**
  * Get the CustomCSS constructor.

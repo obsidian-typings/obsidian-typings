@@ -1,7 +1,7 @@
 import {
     TextComponent
 } from 'obsidian';
-import type { TextComponentConstructor } from '../../../internals/constructors/augmentations/TextComponentConstructor.ts';
+import type { TextComponentConstructor } from '../../../internals/constructors/augmentations/TextComponentConstructor.d.ts';
 
 /**
  * Get the TextComponent constructor.

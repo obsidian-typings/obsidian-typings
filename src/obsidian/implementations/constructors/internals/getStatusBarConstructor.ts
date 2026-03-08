@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { StatusBarConstructor } from '../../../internals/constructors/internals/StatusBarConstructor.ts';
+import type { StatusBarConstructor } from '../../../internals/constructors/internals/StatusBarConstructor.d.ts';
 
 /**
  * Get the StatusBar constructor.

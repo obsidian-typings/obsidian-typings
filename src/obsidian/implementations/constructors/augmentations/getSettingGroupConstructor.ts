@@ -1,7 +1,7 @@
 import {
     SettingGroup
 } from 'obsidian';
-import type { SettingGroupConstructor } from '../../../internals/constructors/augmentations/SettingGroupConstructor.ts';
+import type { SettingGroupConstructor } from '../../../internals/constructors/augmentations/SettingGroupConstructor.d.ts';
 
 /**
  * Get the SettingGroup constructor.

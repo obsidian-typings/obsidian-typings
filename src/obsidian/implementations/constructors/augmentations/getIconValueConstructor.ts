@@ -1,7 +1,7 @@
 import {
     IconValue
 } from 'obsidian';
-import type { IconValueConstructor } from '../../../internals/constructors/augmentations/IconValueConstructor.ts';
+import type { IconValueConstructor } from '../../../internals/constructors/augmentations/IconValueConstructor.d.ts';
 
 /**
  * Get the IconValue constructor.

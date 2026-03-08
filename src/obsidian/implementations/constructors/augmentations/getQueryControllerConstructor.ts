@@ -1,7 +1,7 @@
 import {
     QueryController
 } from 'obsidian';
-import type { QueryControllerConstructor } from '../../../internals/constructors/augmentations/QueryControllerConstructor.ts';
+import type { QueryControllerConstructor } from '../../../internals/constructors/augmentations/QueryControllerConstructor.d.ts';
 
 /**
  * Get the QueryController constructor.

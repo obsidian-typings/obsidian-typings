@@ -1,7 +1,7 @@
 import {
     TagValue
 } from 'obsidian';
-import type { TagValueConstructor } from '../../../internals/constructors/augmentations/TagValueConstructor.ts';
+import type { TagValueConstructor } from '../../../internals/constructors/augmentations/TagValueConstructor.d.ts';
 
 /**
  * Get the TagValue constructor.

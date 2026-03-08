@@ -1,7 +1,7 @@
 import {
     NullValue
 } from 'obsidian';
-import type { NullValueConstructor } from '../../../internals/constructors/augmentations/NullValueConstructor.ts';
+import type { NullValueConstructor } from '../../../internals/constructors/augmentations/NullValueConstructor.d.ts';
 
 /**
  * Get the NullValue constructor.

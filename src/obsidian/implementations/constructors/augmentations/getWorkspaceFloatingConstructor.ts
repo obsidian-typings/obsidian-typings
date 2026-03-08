@@ -1,7 +1,7 @@
 import {
     WorkspaceFloating
 } from 'obsidian';
-import type { WorkspaceFloatingConstructor } from '../../../internals/constructors/augmentations/WorkspaceFloatingConstructor.ts';
+import type { WorkspaceFloatingConstructor } from '../../../internals/constructors/augmentations/WorkspaceFloatingConstructor.d.ts';
 
 /**
  * Get the WorkspaceFloating constructor.

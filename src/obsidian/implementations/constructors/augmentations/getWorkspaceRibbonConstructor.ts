@@ -1,7 +1,7 @@
 import {
     WorkspaceRibbon
 } from 'obsidian';
-import type { WorkspaceRibbonConstructor } from '../../../internals/constructors/augmentations/WorkspaceRibbonConstructor.ts';
+import type { WorkspaceRibbonConstructor } from '../../../internals/constructors/augmentations/WorkspaceRibbonConstructor.d.ts';
 
 /**
  * Get the WorkspaceRibbon constructor.

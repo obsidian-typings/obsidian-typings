@@ -1,7 +1,7 @@
 import {
     ProgressBarComponent
 } from 'obsidian';
-import type { ProgressBarComponentConstructor } from '../../../internals/constructors/augmentations/ProgressBarComponentConstructor.ts';
+import type { ProgressBarComponentConstructor } from '../../../internals/constructors/augmentations/ProgressBarComponentConstructor.d.ts';
 
 /**
  * Get the ProgressBarComponent constructor.

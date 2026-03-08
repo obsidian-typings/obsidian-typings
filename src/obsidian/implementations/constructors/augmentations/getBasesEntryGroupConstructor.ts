@@ -1,7 +1,7 @@
 import {
     BasesEntryGroup
 } from 'obsidian';
-import type { BasesEntryGroupConstructor } from '../../../internals/constructors/augmentations/BasesEntryGroupConstructor.ts';
+import type { BasesEntryGroupConstructor } from '../../../internals/constructors/augmentations/BasesEntryGroupConstructor.d.ts';
 
 /**
  * Get the BasesEntryGroup constructor.

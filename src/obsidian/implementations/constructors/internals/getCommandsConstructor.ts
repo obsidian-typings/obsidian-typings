@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { CommandsConstructor } from '../../../internals/constructors/internals/CommandsConstructor.ts';
+import type { CommandsConstructor } from '../../../internals/constructors/internals/CommandsConstructor.d.ts';
 
 /**
  * Get the Commands constructor.

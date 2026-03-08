@@ -1,7 +1,7 @@
 import {
     AbstractTextComponent
 } from 'obsidian';
-import type { AbstractTextComponentConstructor } from '../../../internals/constructors/augmentations/AbstractTextComponentConstructor.ts';
+import type { AbstractTextComponentConstructor } from '../../../internals/constructors/augmentations/AbstractTextComponentConstructor.d.ts';
 
 /**
  * Get the AbstractTextComponent constructor.

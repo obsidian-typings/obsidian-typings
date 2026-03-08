@@ -1,7 +1,7 @@
 import {
     DurationValue
 } from 'obsidian';
-import type { DurationValueConstructor } from '../../../internals/constructors/augmentations/DurationValueConstructor.ts';
+import type { DurationValueConstructor } from '../../../internals/constructors/augmentations/DurationValueConstructor.d.ts';
 
 /**
  * Get the DurationValue constructor.

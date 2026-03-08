@@ -1,7 +1,7 @@
 import {
     TextAreaComponent
 } from 'obsidian';
-import type { TextAreaComponentConstructor } from '../../../internals/constructors/augmentations/TextAreaComponentConstructor.ts';
+import type { TextAreaComponentConstructor } from '../../../internals/constructors/augmentations/TextAreaComponentConstructor.d.ts';
 
 /**
  * Get the TextAreaComponent constructor.

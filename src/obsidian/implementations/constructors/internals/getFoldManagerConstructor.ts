@@ -1,5 +1,5 @@
 import type { App } from 'obsidian';
-import type { FoldManagerConstructor } from '../../../internals/constructors/internals/FoldManagerConstructor.ts';
+import type { FoldManagerConstructor } from '../../../internals/constructors/internals/FoldManagerConstructor.d.ts';
 
 /**
  * Get the FoldManager constructor.

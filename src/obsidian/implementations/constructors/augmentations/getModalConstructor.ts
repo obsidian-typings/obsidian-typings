@@ -1,7 +1,7 @@
 import {
     Modal
 } from 'obsidian';
-import type { ModalConstructor } from '../../../internals/constructors/augmentations/ModalConstructor.ts';
+import type { ModalConstructor } from '../../../internals/constructors/augmentations/ModalConstructor.d.ts';
 
 /**
  * Get the Modal constructor.

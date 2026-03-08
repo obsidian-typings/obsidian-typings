@@ -1,7 +1,7 @@
 import {
     HTMLValue
 } from 'obsidian';
-import type { HTMLValueConstructor } from '../../../internals/constructors/augmentations/HTMLValueConstructor.ts';
+import type { HTMLValueConstructor } from '../../../internals/constructors/augmentations/HTMLValueConstructor.d.ts';
 
 /**
  * Get the HTMLValue constructor.
