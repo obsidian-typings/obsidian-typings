@@ -147,6 +147,16 @@ declare module 'obsidian' {
         checkPath(path: string): boolean;
 
         /**
+         * Constructor.
+         *
+         * @param adapter - The adapter.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Vault>` or `getVaultConstructor()` instead.
+         */
+        constructor__(adapter: DataAdapter): this;
+
+        /**
          * Create a copy of a file or folder.
          *
          * @param file - The file or folder.
@@ -753,7 +763,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         writeJson(path: string, data: object, pretty?: boolean): Promise<void>;
-
+    
         /**
          * Write a plugin config file (path relative to vault root) to disk.
          *
@@ -764,7 +774,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         writePluginData(path: string, data: object, pretty?: boolean): Promise<void>;
-    }
+}
 
     namespace Vault {
         /**

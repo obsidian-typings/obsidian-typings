@@ -39,6 +39,15 @@ export interface InternalPlugins extends Events {
     requestSaveConfig: Debouncer<[], Promise<void>>;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<InternalPlugins>` or `getInternalPluginsConstructor()` instead.
+     */
+    constructor__(app: App): this;
+
+    /**
      * - Load plugin configs and enable plugins.
      *
      * @returns A promise that resolves when all plugins are enabled.

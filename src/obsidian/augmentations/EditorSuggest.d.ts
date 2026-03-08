@@ -31,7 +31,7 @@ declare module 'obsidian' {
          * @param app - The app instance.
          * @returns The editor suggest instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<EditorSuggest>` or `getEditorSuggestConstructor()` instead.
          */
         constructor__(app: App): this;
 

@@ -1,7 +1,7 @@
 import {
     UrlValue
 } from 'obsidian';
-import type { UrlValueConstructor } from '../../../internals/constructors/augmentations/UrlValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the UrlValue constructor.
@@ -11,6 +11,6 @@ import type { UrlValueConstructor } from '../../../internals/constructors/augmen
  * @public
  * @unofficial
  */
-export function getUrlValueConstructor(): UrlValueConstructor {
-    return UrlValue as UrlValueConstructor;
+export function getUrlValueConstructor(): ExtractConstructor<UrlValue> {
+    return UrlValue as ExtractConstructor<UrlValue>;
 }

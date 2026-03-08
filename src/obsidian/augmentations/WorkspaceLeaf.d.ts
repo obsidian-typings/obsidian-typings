@@ -142,6 +142,17 @@ declare module 'obsidian' {
         canNavigate(): boolean;
 
         /**
+         * Constructor.
+         *
+         * @param app - The app.
+         * @param id - The id.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<WorkspaceLeaf>` or `getWorkspaceLeafConstructor()` instead.
+         */
+        constructor__(app: App, id?: string): this;
+
+        /**
          * Detach this leaf from its parent.
          *
          * @official
@@ -419,11 +430,11 @@ declare module 'obsidian' {
          * @unofficial
          */
         unhighlight(): void;
-
+    
         /**
          * Update the tab header display (icon, title, status indicators).
          * @unofficial
          */
         updateHeader(): void;
-    }
+}
 }

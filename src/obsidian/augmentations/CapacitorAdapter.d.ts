@@ -51,6 +51,17 @@ declare module 'obsidian' {
         appendBinary(normalizedPath: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
 
         /**
+         * Constructor.
+         *
+         * @param basePath - The basePath.
+         * @param fs - The fs.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<CapacitorAdapter>` or `getCapacitorAdapterConstructor()` instead.
+         */
+        constructor__(basePath: string, fs: CapacitorAdapterFs): this;
+
+        /**
          * Copies a file.
          *
          * @param normalizedPath - The path to copy.
@@ -387,7 +398,7 @@ declare module 'obsidian' {
          * @since 1.7.2
          */
         write(normalizedPath: string, data: string, options?: DataWriteOptions): Promise<void>;
-
+    
         /**
          * Writes a file as a binary buffer.
          *
@@ -403,5 +414,5 @@ declare module 'obsidian' {
          * @since 1.7.2
          */
         writeBinary(normalizedPath: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
-    }
+}
 }

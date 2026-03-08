@@ -83,6 +83,19 @@ declare module 'obsidian' {
         collapse(): void;
 
         /**
+         * Constructor.
+         *
+         * @param workspace - The workspace.
+         * @param direction - The direction.
+         * @param side - The side.
+         * @param id - The id.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<WorkspaceSidedock>` or `getWorkspaceSidedockConstructor()` instead.
+         */
+        constructor__2(workspace: Workspace, direction: string, side: string, id?: string): this;
+
+        /**
          * Expand the sidedock.
          *
          * @official
@@ -119,7 +132,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         setSize(size: number): void;
-
+    
         /**
          * Toggle the sidedock.
          *
@@ -127,5 +140,5 @@ declare module 'obsidian' {
          * @since 0.12.11
          */
         toggle(): void;
-    }
+}
 }

@@ -53,7 +53,7 @@ declare module 'obsidian' {
          * @returns The new BasesView.
          * @official
          * @since 1.10.0
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<BasesView>` or `getBasesViewConstructor()` instead.
          */
         constructor__(controller: QueryController): this;
 

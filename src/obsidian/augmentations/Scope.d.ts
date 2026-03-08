@@ -41,7 +41,7 @@ declare module 'obsidian' {
          * @param parent - The parent scope.
          * @returns The scope instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Scope>` or `getScopeConstructor()` instead.
          */
         constructor__(parent?: Scope): this;
 

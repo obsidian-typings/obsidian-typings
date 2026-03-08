@@ -1,7 +1,7 @@
 import {
     BasesViewConfig
 } from 'obsidian';
-import type { BasesViewConfigConstructor } from '../../../internals/constructors/augmentations/BasesViewConfigConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the BasesViewConfig constructor.
@@ -11,6 +11,6 @@ import type { BasesViewConfigConstructor } from '../../../internals/constructors
  * @public
  * @unofficial
  */
-export function getBasesViewConfigConstructor(): BasesViewConfigConstructor {
-    return BasesViewConfig as BasesViewConfigConstructor;
+export function getBasesViewConfigConstructor(): ExtractConstructor<BasesViewConfig> {
+    return BasesViewConfig as ExtractConstructor<BasesViewConfig>;
 }

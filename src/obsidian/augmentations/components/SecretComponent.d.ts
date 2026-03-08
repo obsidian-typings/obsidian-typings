@@ -15,7 +15,7 @@ declare module 'obsidian' {
          * @returns the secret component instance.
          * @official
          * @since 1.11.1
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<SecretComponent>` or `getSecretComponentConstructor()` instead.
          */
         constructor__(app: App, containerEl: HTMLElement): this;
 

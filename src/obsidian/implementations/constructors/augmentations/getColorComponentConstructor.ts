@@ -1,7 +1,7 @@
 import {
     ColorComponent
 } from 'obsidian';
-import type { ColorComponentConstructor } from '../../../internals/constructors/augmentations/ColorComponentConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the ColorComponent constructor.
@@ -11,6 +11,6 @@ import type { ColorComponentConstructor } from '../../../internals/constructors/
  * @public
  * @unofficial
  */
-export function getColorComponentConstructor(): ColorComponentConstructor {
-    return ColorComponent as ColorComponentConstructor;
+export function getColorComponentConstructor(): ExtractConstructor<ColorComponent> {
+    return ColorComponent as ExtractConstructor<ColorComponent>;
 }

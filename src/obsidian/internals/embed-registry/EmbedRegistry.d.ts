@@ -18,6 +18,13 @@ export interface EmbedRegistry extends Events {
     embedByExtension: EmbedRegistryEmbedByExtensionRecord;
 
     /**
+     * Constructor.
+     *
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<EmbedRegistry>` or `getEmbedRegistryConstructor()` instead.
+     */
+    constructor__(): this;
+
+    /**
      * Get the embed constructor for a specific file type.
      *
      * @param file - File to get the embed creator for.

@@ -1,7 +1,7 @@
 import {
     CapacitorAdapter
 } from 'obsidian';
-import type { CapacitorAdapterConstructor } from '../../../internals/constructors/augmentations/CapacitorAdapterConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the CapacitorAdapter constructor.
@@ -11,6 +11,6 @@ import type { CapacitorAdapterConstructor } from '../../../internals/constructor
  * @public
  * @unofficial
  */
-export function getCapacitorAdapterConstructor(): CapacitorAdapterConstructor {
-    return CapacitorAdapter as CapacitorAdapterConstructor;
+export function getCapacitorAdapterConstructor(): ExtractConstructor<CapacitorAdapter> {
+    return CapacitorAdapter as ExtractConstructor<CapacitorAdapter>;
 }

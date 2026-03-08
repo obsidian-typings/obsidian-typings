@@ -1,7 +1,7 @@
 import {
     Setting
 } from 'obsidian';
-import type { SettingConstructor } from '../../../internals/constructors/augmentations/SettingConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the Setting constructor.
@@ -11,6 +11,6 @@ import type { SettingConstructor } from '../../../internals/constructors/augment
  * @public
  * @unofficial
  */
-export function getSettingConstructor(): SettingConstructor {
-    return Setting as SettingConstructor;
+export function getSettingConstructor(): ExtractConstructor<Setting> {
+    return Setting as ExtractConstructor<Setting>;
 }

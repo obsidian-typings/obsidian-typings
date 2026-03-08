@@ -19,5 +19,17 @@ declare module 'obsidian' {
          * @official
          */
         win: Window;
-    }
+    
+        /**
+         * Constructor.
+         *
+         * @param workspace - The workspace.
+         * @param id - The id.
+         * @param size - The size.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<WorkspaceWindow>` or `getWorkspaceWindowConstructor()` instead.
+         */
+        constructor__2(workspace: Workspace, id?: string, size?: Record<string, number>): this;
+}
 }

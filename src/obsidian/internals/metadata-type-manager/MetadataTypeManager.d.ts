@@ -48,6 +48,15 @@ export interface MetadataTypeManager extends Events {
     registeredTypeWidgets: MetadataTypeManagerRegisteredTypeWidgetsRecord;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MetadataTypeManager>` or `getMetadataTypeManagerConstructor()` instead.
+     */
+    constructor__(app: App): this;
+
+    /**
      * Get all registered properties of the vault.
      *
      * @returns Record of property names to their info.

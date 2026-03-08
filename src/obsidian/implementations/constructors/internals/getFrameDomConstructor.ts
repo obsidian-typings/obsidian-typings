@@ -1,4 +1,5 @@
-import type { FrameDomConstructor } from '../../../internals/constructors/internals/FrameDomConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
+import type { FrameDom } from '../../../internals/FrameDom.d.ts';
 
 /**
  * Get the FrameDom constructor.
@@ -8,6 +9,6 @@ import type { FrameDomConstructor } from '../../../internals/constructors/intern
  * @public
  * @unofficial
  */
-export function getFrameDomConstructor(): FrameDomConstructor {
-    return window.frameDom.constructor as FrameDomConstructor;
+export function getFrameDomConstructor(): ExtractConstructor<FrameDom> {
+    return window.frameDom.constructor as ExtractConstructor<FrameDom>;
 }

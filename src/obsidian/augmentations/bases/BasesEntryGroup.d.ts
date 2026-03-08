@@ -26,6 +26,17 @@ declare module 'obsidian' {
         key?: Value;
 
         /**
+         * Constructor.
+         *
+         * @param entries - The entries.
+         * @param key - The key.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<BasesEntryGroup>` or `getBasesEntryGroupConstructor()` instead.
+         */
+        constructor__(entries: BasesEntry[], key: unknown): this;
+    
+        /**
          * Whether this entry group has a non-null key.
          *
          * @returns `true` iff this entry group has a non-null key.
@@ -33,5 +44,5 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         hasKey(): boolean;
-    }
+}
 }

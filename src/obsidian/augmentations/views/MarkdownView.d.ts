@@ -155,7 +155,7 @@ declare module 'obsidian' {
          * @param leaf - The workspace leaf to attach the markdown view to.
          * @returns The markdown view instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MarkdownView>` or `getMarkdownViewConstructor()` instead.
          */
         constructor__(leaf: WorkspaceLeaf): this;
 

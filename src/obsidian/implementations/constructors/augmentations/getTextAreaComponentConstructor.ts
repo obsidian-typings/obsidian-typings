@@ -1,7 +1,7 @@
 import {
     TextAreaComponent
 } from 'obsidian';
-import type { TextAreaComponentConstructor } from '../../../internals/constructors/augmentations/TextAreaComponentConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the TextAreaComponent constructor.
@@ -11,6 +11,6 @@ import type { TextAreaComponentConstructor } from '../../../internals/constructo
  * @public
  * @unofficial
  */
-export function getTextAreaComponentConstructor(): TextAreaComponentConstructor {
-    return TextAreaComponent as TextAreaComponentConstructor;
+export function getTextAreaComponentConstructor(): ExtractConstructor<TextAreaComponent> {
+    return TextAreaComponent as ExtractConstructor<TextAreaComponent>;
 }

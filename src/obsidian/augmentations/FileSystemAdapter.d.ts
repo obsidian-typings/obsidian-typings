@@ -118,6 +118,16 @@ declare module 'obsidian' {
         applyWriteOptions(normalizedPath: string, options: DataWriteOptions): Promise<void>;
 
         /**
+         * Constructor.
+         *
+         * @param basePath - The basePath.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<FileSystemAdapter>` or `getFileSystemAdapterConstructor()` instead.
+         */
+        constructor__(basePath: string): this;
+
+        /**
          * Copies a file.
          *
          * @param normalizedPath - The path to copy.
@@ -456,7 +466,7 @@ declare module 'obsidian' {
          * @official
          */
         write(normalizedPath: string, data: string, options?: DataWriteOptions): Promise<void>;
-
+    
         /**
          * Writes a file as a binary buffer.
          *
@@ -471,7 +481,7 @@ declare module 'obsidian' {
          * @official
          */
         writeBinary(normalizedPath: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
-    }
+}
 
     namespace FileSystemAdapter {
         /**

@@ -23,6 +23,15 @@ export interface CapacitorAdapterFs {
     append(realPath: string, data: string): Promise<void>;
 
     /**
+     * Constructor.
+     *
+     * @param dir - The dir.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<CapacitorAdapterFs>` or `getCapacitorAdapterFsConstructor()` instead.
+     */
+    constructor__(dir: string): this;
+
+    /**
      * Copy a file to a new path.
      *
      * @param realPath - Source file path.

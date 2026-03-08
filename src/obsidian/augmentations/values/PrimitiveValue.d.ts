@@ -15,7 +15,7 @@ declare module 'obsidian' {
          * @returns The new PrimitiveValue.
          * @official
          * @since 1.10.0
-         * @deprecated - Added only for typing purposes. Use {@link PrimitiveValue.constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<PrimitiveValue>` or `getPrimitiveValueConstructor()` instead.
          */
         constructor__(value: T): this;
 

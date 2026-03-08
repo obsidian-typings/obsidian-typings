@@ -21,7 +21,7 @@ declare module 'obsidian' {
          * this component will be unloaded.
          * @returns The markdown render child instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MarkdownRenderChild>` or `getMarkdownRenderChildConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
     }

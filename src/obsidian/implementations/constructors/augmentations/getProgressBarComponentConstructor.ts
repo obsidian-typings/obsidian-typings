@@ -1,7 +1,7 @@
 import {
     ProgressBarComponent
 } from 'obsidian';
-import type { ProgressBarComponentConstructor } from '../../../internals/constructors/augmentations/ProgressBarComponentConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the ProgressBarComponent constructor.
@@ -11,6 +11,6 @@ import type { ProgressBarComponentConstructor } from '../../../internals/constru
  * @public
  * @unofficial
  */
-export function getProgressBarComponentConstructor(): ProgressBarComponentConstructor {
-    return ProgressBarComponent as ProgressBarComponentConstructor;
+export function getProgressBarComponentConstructor(): ExtractConstructor<ProgressBarComponent> {
+    return ProgressBarComponent as ExtractConstructor<ProgressBarComponent>;
 }

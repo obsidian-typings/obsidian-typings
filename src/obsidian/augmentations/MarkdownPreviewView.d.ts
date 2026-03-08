@@ -87,6 +87,16 @@ declare module 'obsidian' {
         clear(): void;
 
         /**
+         * Constructor.
+         *
+         * @param containerEl - The containerEl.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MarkdownPreviewView>` or `getMarkdownPreviewViewConstructor()` instead.
+         */
+        constructor__(containerEl: HTMLElement): this;
+
+        /**
          * Switch to edit mode for the given element or selection.
          *
          * @param e - The element or selection to edit.
@@ -251,7 +261,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         unfoldAll(): unknown;
-
+    
         /**
          * Update the rendering options of the preview.
          *
@@ -259,5 +269,5 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateOptions(): unknown;
-    }
+}
 }

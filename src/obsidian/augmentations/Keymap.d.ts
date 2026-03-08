@@ -7,6 +7,14 @@ declare module 'obsidian' {
      */
     interface Keymap {
         /**
+         * Constructor.
+         *
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Keymap>` or `getKeymapConstructor()` instead.
+         */
+        constructor__(): this;
+
+        /**
          * Remove a scope from the scope stack.
          * If the given scope is active, the next scope in the stack will be made active.
          *
@@ -18,7 +26,7 @@ declare module 'obsidian' {
          * @since 0.13.9
          */
         popScope(scope: Scope): void;
-
+    
         /**
          * Push a scope onto the scope stack, setting it as the active scope to handle all key events.
          *
@@ -31,7 +39,7 @@ declare module 'obsidian' {
          * @since 0.13.9
          */
         pushScope(scope: Scope): void;
-    }
+}
 
     namespace Keymap {
         /**

@@ -36,7 +36,7 @@ declare module 'obsidian' {
          * @param containerEl - The container element.
          * @returns The search component instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<SearchComponent>` or `getSearchComponentConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
 

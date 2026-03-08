@@ -16,6 +16,17 @@ declare module 'obsidian' {
         file: TFile;
 
         /**
+         * Constructor.
+         *
+         * @param ctx - The ctx.
+         * @param file - The file.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<BasesEntry>` or `getBasesEntryConstructor()` instead.
+         */
+        constructor__(ctx: unknown, file: TFile): this;
+    
+        /**
          * Get the value of the property.
          * Note: Errors are returned as {@link ErrorValue}
          *
@@ -25,5 +36,5 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         getValue(propertyId: BasesPropertyId): Value | null;
-    }
+}
 }

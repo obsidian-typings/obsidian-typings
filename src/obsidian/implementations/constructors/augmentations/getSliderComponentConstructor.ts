@@ -1,7 +1,7 @@
 import {
     SliderComponent
 } from 'obsidian';
-import type { SliderComponentConstructor } from '../../../internals/constructors/augmentations/SliderComponentConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the SliderComponent constructor.
@@ -11,6 +11,6 @@ import type { SliderComponentConstructor } from '../../../internals/constructors
  * @public
  * @unofficial
  */
-export function getSliderComponentConstructor(): SliderComponentConstructor {
-    return SliderComponent as SliderComponentConstructor;
+export function getSliderComponentConstructor(): ExtractConstructor<SliderComponent> {
+    return SliderComponent as ExtractConstructor<SliderComponent>;
 }

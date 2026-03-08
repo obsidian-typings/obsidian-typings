@@ -30,7 +30,7 @@ declare module 'obsidian' {
          * @param inputEl - The input element.
          * @returns The text component instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<AbstractTextComponent>` or `getAbstractTextComponentConstructor()` instead.
          */
         constructor__(inputEl: T): this;
 

@@ -28,14 +28,14 @@ declare module 'obsidian' {
          * @param waitTime - The wait time of the hover popover.
          * @param staticPos - The static position of the hover popover.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<HoverPopover>` or `getHoverPopoverConstructor()` instead.
          */
         constructor__(
             parent: HoverParent,
             targetEl: HTMLElement | null,
             waitTime?: number,
             staticPos?: Point | null
-        ): void;
+        ): this;
 
         /**
          * Start observing the popover element for size changes.

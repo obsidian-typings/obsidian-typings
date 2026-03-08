@@ -6,7 +6,21 @@ declare module 'obsidian' {
      * The renderer of the markdown preview.
      * @since 0.9.7
      */
-    interface MarkdownPreviewRenderer {}
+    interface MarkdownPreviewRenderer {
+        /**
+         * Constructor.
+         *
+         * @param owner - The owner.
+         * @param containerEl - The containerEl.
+         * @param parentEl - The parentEl.
+         * @param workerPath - The workerPath.
+         * @param observeInsertion - The observeInsertion.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MarkdownPreviewRenderer>` or `getMarkdownPreviewRendererConstructor()` instead.
+         */
+        constructor__(owner: unknown, containerEl: HTMLElement, parentEl: HTMLElement, workerPath: unknown, observeInsertion?: boolean): this;
+}
 
     namespace MarkdownPreviewRenderer {
         /**

@@ -23,4 +23,13 @@ export interface ObsidianDOM {
      * Child of `horizontalMainContainerEl` containing the workspace DOM.
      */
     workspaceEl: HTMLElement;
+
+    /**
+     * Constructor.
+     *
+     * @param containerEl - The containerEl.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ObsidianDOM>` or `getObsidianDOMConstructor()` instead.
+     */
+    constructor__(containerEl: HTMLElement): this;
 }

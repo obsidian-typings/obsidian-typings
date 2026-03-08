@@ -8,5 +8,13 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     interface RelativeDateValue extends DateValue {
-    }
+    
+        /**
+         * Constructor.
+         *
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<RelativeDateValue>` or `getRelativeDateValueConstructor()` instead.
+         */
+        constructor__(): this;
+}
 }

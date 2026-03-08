@@ -1,7 +1,7 @@
 import {
     AbstractTextComponent
 } from 'obsidian';
-import type { AbstractTextComponentConstructor } from '../../../internals/constructors/augmentations/AbstractTextComponentConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the AbstractTextComponent constructor.
@@ -11,6 +11,6 @@ import type { AbstractTextComponentConstructor } from '../../../internals/constr
  * @public
  * @unofficial
  */
-export function getAbstractTextComponentConstructor(): AbstractTextComponentConstructor {
-    return AbstractTextComponent as AbstractTextComponentConstructor;
+export function getAbstractTextComponentConstructor(): ExtractConstructor<AbstractTextComponent<HTMLInputElement | HTMLTextAreaElement>> {
+    return AbstractTextComponent as ExtractConstructor<AbstractTextComponent<HTMLInputElement | HTMLTextAreaElement>>;
 }

@@ -1,5 +1,6 @@
 import type { App } from 'obsidian';
-import type { FoldManagerConstructor } from '../../../internals/constructors/internals/FoldManagerConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
+import type { FoldManager } from '../../../internals/FoldManager.d.ts';
 
 /**
  * Get the FoldManager constructor.
@@ -10,6 +11,6 @@ import type { FoldManagerConstructor } from '../../../internals/constructors/int
  * @public
  * @unofficial
  */
-export function getFoldManagerConstructor(app: App): FoldManagerConstructor {
-    return app.foldManager.constructor as FoldManagerConstructor;
+export function getFoldManagerConstructor(app: App): ExtractConstructor<FoldManager> {
+    return app.foldManager.constructor as ExtractConstructor<FoldManager>;
 }

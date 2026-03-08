@@ -25,6 +25,16 @@ export interface FrameDom {
     /** Reference to the window object. */
     win: Window;
 
+    /**
+     * Constructor.
+     *
+     * @param electronWindow - The electronWindow.
+     * @param win - The win.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<FrameDom>` or `getFrameDomConstructor()` instead.
+     */
+    constructor__(electronWindow: Electron.BrowserWindow, win: Window): this;
+
     /** Update the window status indicators in the title bar. */
     updateStatus(): void;
 

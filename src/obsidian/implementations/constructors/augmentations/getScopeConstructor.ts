@@ -1,7 +1,7 @@
 import {
     Scope
 } from 'obsidian';
-import type { ScopeConstructor } from '../../../internals/constructors/augmentations/ScopeConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the Scope constructor.
@@ -11,6 +11,6 @@ import type { ScopeConstructor } from '../../../internals/constructors/augmentat
  * @public
  * @unofficial
  */
-export function getScopeConstructor(): ScopeConstructor {
-    return Scope as ScopeConstructor;
+export function getScopeConstructor(): ExtractConstructor<Scope> {
+    return Scope as ExtractConstructor<Scope>;
 }

@@ -7,7 +7,17 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     interface StringValue extends PrimitiveValue<string> {
-    }
+    
+        /**
+         * Constructor.
+         *
+         * @param value - The value.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<StringValue>` or `getStringValueConstructor()` instead.
+         */
+        constructor__(value: string): this;
+}
 
     namespace StringValue {
         /**

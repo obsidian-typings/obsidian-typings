@@ -15,6 +15,17 @@ declare module 'obsidian' {
         children: TAbstractFile[];
 
         /**
+         * Constructor.
+         *
+         * @param vault - The vault.
+         * @param path - The path.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<TFolder>` or `getTFolderConstructor()` instead.
+         */
+        constructor__(vault: Vault, path: string): this;
+
+        /**
          * Gets the count of files in the folder.
          *
          * @returns The number of files in the folder.
@@ -40,7 +51,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         getParentPrefix(): string;
-
+    
         /**
          * Check if the folder is the root folder.
          *
@@ -49,5 +60,5 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         isRoot(): boolean;
-    }
+}
 }

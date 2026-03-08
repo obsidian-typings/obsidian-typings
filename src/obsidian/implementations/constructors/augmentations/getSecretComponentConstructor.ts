@@ -1,7 +1,7 @@
 import {
     SecretComponent
 } from 'obsidian';
-import type { SecretComponentConstructor } from '../../../internals/constructors/augmentations/SecretComponentConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the SecretComponent constructor.
@@ -11,6 +11,6 @@ import type { SecretComponentConstructor } from '../../../internals/constructors
  * @public
  * @unofficial
  */
-export function getSecretComponentConstructor(): SecretComponentConstructor {
-    return SecretComponent as SecretComponentConstructor;
+export function getSecretComponentConstructor(): ExtractConstructor<SecretComponent> {
+    return SecretComponent as ExtractConstructor<SecretComponent>;
 }

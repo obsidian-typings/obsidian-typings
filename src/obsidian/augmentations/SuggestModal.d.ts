@@ -75,7 +75,7 @@ declare module 'obsidian' {
          * @param app - The Obsidian app instance .
          * @returns The suggest modal instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<SuggestModal>` or `getSuggestModalConstructor()` instead.
          */
         constructor__(app: App): this;
 

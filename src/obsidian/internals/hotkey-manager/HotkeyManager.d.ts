@@ -53,6 +53,15 @@ export interface HotkeyManager {
     bake(): void;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<HotkeyManager>` or `getHotkeyManagerConstructor()` instead.
+     */
+    constructor__(app: App): this;
+
+    /**
      * Get hotkey associated with command ID.
      *
      * @param command - Command ID to get hotkey for.

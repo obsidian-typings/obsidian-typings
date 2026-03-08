@@ -1,7 +1,7 @@
 import {
     LinkValue
 } from 'obsidian';
-import type { LinkValueConstructor } from '../../../internals/constructors/augmentations/LinkValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the LinkValue constructor.
@@ -11,6 +11,6 @@ import type { LinkValueConstructor } from '../../../internals/constructors/augme
  * @public
  * @unofficial
  */
-export function getLinkValueConstructor(): LinkValueConstructor {
-    return LinkValue as LinkValueConstructor;
+export function getLinkValueConstructor(): ExtractConstructor<LinkValue> {
+    return LinkValue as ExtractConstructor<LinkValue>;
 }

@@ -15,6 +15,14 @@ declare module 'obsidian' {
         sampleEl: HTMLElement;
 
         /**
+         * Constructor.
+         *
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MomentFormatComponent>` or `getMomentFormatComponentConstructor()` instead.
+         */
+        constructor__(): this;
+
+        /**
          * Called when the value of the component changes.
          *
          * @official
@@ -63,7 +71,7 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         setValue(value: string): this;
-
+    
         /**
          * Updates the sample value.
          *
@@ -71,5 +79,5 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         updateSample(): void;
-    }
+}
 }

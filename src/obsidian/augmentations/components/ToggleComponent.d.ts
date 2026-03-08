@@ -28,7 +28,7 @@ declare module 'obsidian' {
          * @param containerEl - The container element.
          * @returns The toggle component instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ToggleComponent>` or `getToggleComponentConstructor()` instead.
          * @since 0.9.7
          */
         constructor__(containerEl: HTMLElement): this;

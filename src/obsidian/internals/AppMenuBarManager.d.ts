@@ -43,6 +43,15 @@ export interface AppMenuBarManager {
     buildMenu(): unknown;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<AppMenuBarManager>` or `getAppMenuBarManagerConstructor()` instead.
+     */
+    constructor__(app: App): this;
+
+    /**
      * Convert a hotkey binding to a native accelerator string.
      *
      * @returns The native accelerator string.

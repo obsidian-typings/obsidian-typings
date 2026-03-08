@@ -1,7 +1,7 @@
 import {
     QueryController
 } from 'obsidian';
-import type { QueryControllerConstructor } from '../../../internals/constructors/augmentations/QueryControllerConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the QueryController constructor.
@@ -11,6 +11,6 @@ import type { QueryControllerConstructor } from '../../../internals/constructors
  * @public
  * @unofficial
  */
-export function getQueryControllerConstructor(): QueryControllerConstructor {
-    return QueryController as QueryControllerConstructor;
+export function getQueryControllerConstructor(): ExtractConstructor<QueryController> {
+    return QueryController as ExtractConstructor<QueryController>;
 }

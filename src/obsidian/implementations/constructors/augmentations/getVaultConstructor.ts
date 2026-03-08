@@ -1,7 +1,7 @@
 import {
     Vault
 } from 'obsidian';
-import type { VaultConstructor } from '../../../internals/constructors/augmentations/VaultConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the Vault constructor.
@@ -11,6 +11,6 @@ import type { VaultConstructor } from '../../../internals/constructors/augmentat
  * @public
  * @unofficial
  */
-export function getVaultConstructor(): VaultConstructor {
-    return Vault as VaultConstructor;
+export function getVaultConstructor(): ExtractConstructor<Vault> {
+    return Vault as ExtractConstructor<Vault>;
 }

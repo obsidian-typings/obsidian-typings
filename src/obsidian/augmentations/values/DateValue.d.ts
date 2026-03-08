@@ -8,6 +8,14 @@ declare module 'obsidian' {
      */
     interface DateValue extends NotNullValue {
         /**
+         * Constructor.
+         *
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<DateValue>` or `getDateValueConstructor()` instead.
+         */
+        constructor__(): this;
+
+        /**
          * Returns a new DateValue with any time portion in this DateValue removed.
          *
          * @returns a new DateValue with any time portion in this DateValue removed.
@@ -33,7 +41,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         relative(): string;
-
+    
         /**
          * String representation of this DateValue.
          *
@@ -42,7 +50,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         toString(): string;
-    }
+}
 
     namespace DateValue {
         /**

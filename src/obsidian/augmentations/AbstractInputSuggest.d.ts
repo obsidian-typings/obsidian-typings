@@ -42,7 +42,7 @@ declare module 'obsidian' {
          * @param textInputEl - The text input element.
          * @returns The abstract input suggest instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<AbstractInputSuggest>` or `getAbstractInputSuggestConstructor()` instead.
          */
         constructor__2(app: App, textInputEl: HTMLInputElement | HTMLDivElement): this;
 

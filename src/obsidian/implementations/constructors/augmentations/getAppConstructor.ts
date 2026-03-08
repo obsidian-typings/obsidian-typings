@@ -1,7 +1,7 @@
 import {
     App
 } from 'obsidian';
-import type { AppConstructor } from '../../../internals/constructors/augmentations/AppConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the App constructor.
@@ -11,6 +11,6 @@ import type { AppConstructor } from '../../../internals/constructors/augmentatio
  * @public
  * @unofficial
  */
-export function getAppConstructor(): AppConstructor {
-    return App as AppConstructor;
+export function getAppConstructor(): ExtractConstructor<App> {
+    return App as ExtractConstructor<App>;
 }

@@ -14,7 +14,7 @@ declare module 'obsidian' {
          * @returns The new TagValue.
          * @official
          * @since 1.10.0
-         * @deprecated - Added only for typing purposes. Use {@link TagValue.constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<TagValue>` or `getTagValueConstructor()` instead.
          */
         constructor__(value: string): this;
     }

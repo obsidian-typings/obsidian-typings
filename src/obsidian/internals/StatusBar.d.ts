@@ -13,6 +13,16 @@ export interface StatusBar {
     containerEl: HTMLElement;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @param containerEl - The containerEl.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<StatusBar>` or `getStatusBarConstructor()` instead.
+     */
+    constructor__(app: App, containerEl: HTMLElement): this;
+
+    /**
      * Register a new status bar item element.
      *
      * @returns The newly created status bar item element.

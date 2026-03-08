@@ -1,7 +1,7 @@
 import {
     TFile
 } from 'obsidian';
-import type { TFileConstructor } from '../../../internals/constructors/augmentations/TFileConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the TFile constructor.
@@ -11,6 +11,6 @@ import type { TFileConstructor } from '../../../internals/constructors/augmentat
  * @public
  * @unofficial
  */
-export function getTFileConstructor(): TFileConstructor {
-    return TFile as TFileConstructor;
+export function getTFileConstructor(): ExtractConstructor<TFile> {
+    return TFile as ExtractConstructor<TFile>;
 }

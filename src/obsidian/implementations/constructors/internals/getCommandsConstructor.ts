@@ -1,5 +1,6 @@
 import type { App } from 'obsidian';
-import type { CommandsConstructor } from '../../../internals/constructors/internals/CommandsConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
+import type { Commands } from '../../../internals/commands/Commands.d.ts';
 
 /**
  * Get the Commands constructor.
@@ -10,6 +11,6 @@ import type { CommandsConstructor } from '../../../internals/constructors/intern
  * @public
  * @unofficial
  */
-export function getCommandsConstructor(app: App): CommandsConstructor {
-    return app.commands.constructor as CommandsConstructor;
+export function getCommandsConstructor(app: App): ExtractConstructor<Commands> {
+    return app.commands.constructor as ExtractConstructor<Commands>;
 }

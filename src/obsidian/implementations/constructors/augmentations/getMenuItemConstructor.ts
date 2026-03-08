@@ -1,7 +1,7 @@
 import {
     MenuItem
 } from 'obsidian';
-import type { MenuItemConstructor } from '../../../internals/constructors/augmentations/MenuItemConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the MenuItem constructor.
@@ -11,6 +11,6 @@ import type { MenuItemConstructor } from '../../../internals/constructors/augmen
  * @public
  * @unofficial
  */
-export function getMenuItemConstructor(): MenuItemConstructor {
-    return MenuItem as unknown as MenuItemConstructor;
+export function getMenuItemConstructor(): ExtractConstructor<MenuItem> {
+    return MenuItem as unknown as ExtractConstructor<MenuItem>;
 }

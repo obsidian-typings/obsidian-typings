@@ -1,7 +1,7 @@
 import {
     RelativeDateValue
 } from 'obsidian';
-import type { RelativeDateValueConstructor } from '../../../internals/constructors/augmentations/RelativeDateValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the RelativeDateValue constructor.
@@ -11,6 +11,6 @@ import type { RelativeDateValueConstructor } from '../../../internals/constructo
  * @public
  * @unofficial
  */
-export function getRelativeDateValueConstructor(): RelativeDateValueConstructor {
-    return RelativeDateValue as RelativeDateValueConstructor;
+export function getRelativeDateValueConstructor(): ExtractConstructor<RelativeDateValue> {
+    return RelativeDateValue as ExtractConstructor<RelativeDateValue>;
 }

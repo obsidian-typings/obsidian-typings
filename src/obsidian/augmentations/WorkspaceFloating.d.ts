@@ -13,5 +13,13 @@ declare module 'obsidian' {
          * @since 0.15.2
          */
         parent: WorkspaceParent;
-    }
+    
+        /**
+         * Constructor.
+         *
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<WorkspaceFloating>` or `getWorkspaceFloatingConstructor()` instead.
+         */
+        constructor__(): this;
+}
 }

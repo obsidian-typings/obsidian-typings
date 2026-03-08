@@ -1,7 +1,7 @@
 import {
     RegExpValue
 } from 'obsidian';
-import type { RegExpValueConstructor } from '../../../internals/constructors/augmentations/RegExpValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the RegExpValue constructor.
@@ -11,6 +11,6 @@ import type { RegExpValueConstructor } from '../../../internals/constructors/aug
  * @public
  * @unofficial
  */
-export function getRegExpValueConstructor(): RegExpValueConstructor {
-    return RegExpValue as RegExpValueConstructor;
+export function getRegExpValueConstructor(): ExtractConstructor<RegExpValue> {
+    return RegExpValue as ExtractConstructor<RegExpValue>;
 }

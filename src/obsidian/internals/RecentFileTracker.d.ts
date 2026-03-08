@@ -34,6 +34,16 @@ export interface RecentFileTracker {
     collect(file: TFile): void;
 
     /**
+     * Constructor.
+     *
+     * @param workspace - The workspace.
+     * @param vault - The vault.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<RecentFileTracker>` or `getRecentFileTrackerConstructor()` instead.
+     */
+    constructor__(workspace: Workspace, vault: Vault): this;
+
+    /**
      * Returns the last 10 opened files.
      *
      * @returns Array of file paths.

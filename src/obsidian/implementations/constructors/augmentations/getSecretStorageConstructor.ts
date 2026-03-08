@@ -1,7 +1,7 @@
 import {
     SecretStorage
 } from 'obsidian';
-import type { SecretStorageConstructor } from '../../../internals/constructors/augmentations/SecretStorageConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the SecretStorage constructor.
@@ -11,6 +11,6 @@ import type { SecretStorageConstructor } from '../../../internals/constructors/a
  * @public
  * @unofficial
  */
-export function getSecretStorageConstructor(): SecretStorageConstructor {
-    return SecretStorage as SecretStorageConstructor;
+export function getSecretStorageConstructor(): ExtractConstructor<SecretStorage> {
+    return SecretStorage as ExtractConstructor<SecretStorage>;
 }

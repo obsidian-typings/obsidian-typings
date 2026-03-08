@@ -28,7 +28,7 @@ declare module 'obsidian' {
          * @param containerEl - The container element.
          * @returns The button component instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ButtonComponent>` or `getButtonComponentConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
 

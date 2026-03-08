@@ -83,7 +83,7 @@ declare module 'obsidian' {
          * @param view - The markdown view.
          * @returns The markdown edit view instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MarkdownEditView>` or `getMarkdownEditViewConstructor()` instead.
          */
         constructor__(view: MarkdownView): this;
 

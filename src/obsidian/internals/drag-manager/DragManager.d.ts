@@ -51,6 +51,15 @@ export interface DragManager {
     sourceEls: HTMLElement[] | null;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<DragManager>` or `getDragManagerConstructor()` instead.
+     */
+    constructor__(app: App): this;
+
+    /**
      * Start a drag operation for a single file.
      *
      * @param event - The originating drag event.

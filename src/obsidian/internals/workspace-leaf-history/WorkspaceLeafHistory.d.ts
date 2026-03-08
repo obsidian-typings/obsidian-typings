@@ -25,6 +25,15 @@ export interface WorkspaceLeafHistory {
     back(): Promise<void>;
 
     /**
+     * Constructor.
+     *
+     * @param owner - The owner.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<WorkspaceLeafHistory>` or `getWorkspaceLeafHistoryConstructor()` instead.
+     */
+    constructor__(owner: WorkspaceLeaf): this;
+
+    /**
      * Restore history from a serialized representation.
      *
      * @param e - The serialized history data.

@@ -1,5 +1,6 @@
 import type { App } from 'obsidian';
-import type { CustomCSSConstructor } from '../../../internals/constructors/internals/CustomCSSConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
+import type { CustomCSS } from '../../../internals/custom-css/CustomCSS.d.ts';
 
 /**
  * Get the CustomCSS constructor.
@@ -10,6 +11,6 @@ import type { CustomCSSConstructor } from '../../../internals/constructors/inter
  * @public
  * @unofficial
  */
-export function getCustomCSSConstructor(app: App): CustomCSSConstructor {
-    return app.customCss.constructor as CustomCSSConstructor;
+export function getCustomCSSConstructor(app: App): ExtractConstructor<CustomCSS> {
+    return app.customCss.constructor as ExtractConstructor<CustomCSS>;
 }

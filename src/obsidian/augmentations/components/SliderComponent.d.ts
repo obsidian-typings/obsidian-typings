@@ -27,7 +27,7 @@ declare module 'obsidian' {
          * @param containerEl - The container element.
          * @returns The slider component instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<SliderComponent>` or `getSliderComponentConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
 

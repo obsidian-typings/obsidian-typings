@@ -1,7 +1,7 @@
 import {
     StringValue
 } from 'obsidian';
-import type { StringValueConstructor } from '../../../internals/constructors/augmentations/StringValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the StringValue constructor.
@@ -11,6 +11,6 @@ import type { StringValueConstructor } from '../../../internals/constructors/aug
  * @public
  * @unofficial
  */
-export function getStringValueConstructor(): StringValueConstructor {
-    return StringValue as StringValueConstructor;
+export function getStringValueConstructor(): ExtractConstructor<StringValue> {
+    return StringValue as ExtractConstructor<StringValue>;
 }

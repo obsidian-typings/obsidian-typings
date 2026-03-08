@@ -50,7 +50,7 @@ declare module 'obsidian' {
          * new Notice('qux', 0); // will stay visible until the user manually dismisses it
          * ```
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Notice>` or `getNoticeConstructor()` instead.
          */
         constructor__(message: string | DocumentFragment, duration?: number): this;
 

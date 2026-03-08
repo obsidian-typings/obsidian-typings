@@ -1,7 +1,7 @@
 import {
     IconValue
 } from 'obsidian';
-import type { IconValueConstructor } from '../../../internals/constructors/augmentations/IconValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the IconValue constructor.
@@ -11,6 +11,6 @@ import type { IconValueConstructor } from '../../../internals/constructors/augme
  * @public
  * @unofficial
  */
-export function getIconValueConstructor(): IconValueConstructor {
-    return IconValue as IconValueConstructor;
+export function getIconValueConstructor(): ExtractConstructor<IconValue> {
+    return IconValue as ExtractConstructor<IconValue>;
 }

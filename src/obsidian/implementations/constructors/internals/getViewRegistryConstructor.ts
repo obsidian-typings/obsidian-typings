@@ -1,5 +1,6 @@
 import type { App } from 'obsidian';
-import type { ViewRegistryConstructor } from '../../../internals/constructors/internals/ViewRegistryConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
+import type { ViewRegistry } from '../../../internals/view-registry/ViewRegistry.d.ts';
 
 /**
  * Get the ViewRegistry constructor.
@@ -10,6 +11,6 @@ import type { ViewRegistryConstructor } from '../../../internals/constructors/in
  * @public
  * @unofficial
  */
-export function getViewRegistryConstructor(app: App): ViewRegistryConstructor {
-    return app.viewRegistry.constructor as ViewRegistryConstructor;
+export function getViewRegistryConstructor(app: App): ExtractConstructor<ViewRegistry> {
+    return app.viewRegistry.constructor as ExtractConstructor<ViewRegistry>;
 }

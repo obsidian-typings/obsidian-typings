@@ -1,3 +1,5 @@
+import type { DomEventsHandlersInfo } from './DomEventsHandlersInfo.d.ts';
+
 /**
  * The handlers for the DOM events.
  *
@@ -5,6 +7,15 @@
  * @unofficial
  */
 export interface DomEventsHandlers {
+    /**
+     * Constructor.
+     *
+     * @param info - The info.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<DomEventsHandlers>` or `getDomEventsHandlersConstructor()` instead.
+     */
+    constructor__(info: DomEventsHandlersInfo): this;
+
     /**
      * Handles the external link click event.
      *

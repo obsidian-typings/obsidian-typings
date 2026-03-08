@@ -1,5 +1,6 @@
 import type { App } from 'obsidian';
-import type { WorkspaceLeafHistoryConstructor } from '../../../internals/constructors/internals/WorkspaceLeafHistoryConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
+import type { WorkspaceLeafHistory } from '../../../internals/workspace-leaf-history/WorkspaceLeafHistory.d.ts';
 
 /**
  * Get the WorkspaceLeafHistory constructor.
@@ -10,10 +11,10 @@ import type { WorkspaceLeafHistoryConstructor } from '../../../internals/constru
  * @public
  * @unofficial
  */
-export function getWorkspaceLeafHistoryConstructor(app: App): WorkspaceLeafHistoryConstructor {
+export function getWorkspaceLeafHistoryConstructor(app: App): ExtractConstructor<WorkspaceLeafHistory> {
     const leaf = app.workspace.getMostRecentLeaf();
     if (!leaf) {
         throw new Error('No workspace leaf available to extract WorkspaceLeafHistory constructor');
     }
-    return leaf.history.constructor as WorkspaceLeafHistoryConstructor;
+    return leaf.history.constructor as ExtractConstructor<WorkspaceLeafHistory>;
 }

@@ -111,7 +111,7 @@ declare module 'obsidian' {
          * @param leaf - The workspace leaf to create the item view in.
          * @returns The item view instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ItemView>` or `getItemViewConstructor()` instead.
          */
         constructor__(leaf: WorkspaceLeaf): this;
 

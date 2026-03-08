@@ -299,6 +299,17 @@ declare module 'obsidian' {
         changeTheme(theme: 'moonstone' | 'obsidian'): void;
 
         /**
+         * Constructor.
+         *
+         * @param adapter - The adapter.
+         * @param appId - The appId.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<App>` or `getAppConstructor()` instead.
+         */
+        constructor__(adapter: DataAdapter, appId: string): this;
+
+        /**
          * Copies Obsidian URI of given file to clipboard.
          *
          * @param file File to generate URI for.
@@ -686,14 +697,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateUseNativeMenu(): void;
-
+    
         /**
          * Update the view header display in notes.
          *
          * @unofficial
          */
         updateViewHeaderDisplay(): void;
-    }
+}
 
     namespace App {
         /**

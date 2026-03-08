@@ -53,6 +53,17 @@ declare module 'obsidian' {
         cache(content: string | null): void;
 
         /**
+         * Constructor.
+         *
+         * @param vault - The vault.
+         * @param path - The path.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<TFile>` or `getTFileConstructor()` instead.
+         */
+        constructor__(vault: Vault, path: string): this;
+
+        /**
          * Gets the short name of the file.
          *
          * For `a/b/c.md`, it returns `c`.
@@ -63,7 +74,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         getShortName(): string;
-
+    
         /**
          * Removes the file from the cache if its content length greater than `app.vault.cacheLimit`.
          *
@@ -71,5 +82,5 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateCacheLimit(): unknown;
-    }
+}
 }

@@ -1,7 +1,7 @@
 import {
     WorkspaceRibbon
 } from 'obsidian';
-import type { WorkspaceRibbonConstructor } from '../../../internals/constructors/augmentations/WorkspaceRibbonConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the WorkspaceRibbon constructor.
@@ -11,6 +11,6 @@ import type { WorkspaceRibbonConstructor } from '../../../internals/constructors
  * @public
  * @unofficial
  */
-export function getWorkspaceRibbonConstructor(): WorkspaceRibbonConstructor {
-    return WorkspaceRibbon as WorkspaceRibbonConstructor;
+export function getWorkspaceRibbonConstructor(): ExtractConstructor<WorkspaceRibbon> {
+    return WorkspaceRibbon as ExtractConstructor<WorkspaceRibbon>;
 }

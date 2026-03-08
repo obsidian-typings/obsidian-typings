@@ -72,6 +72,15 @@ export interface Plugins {
     checkForUpdates(showNotice?: boolean): Promise<void>;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Plugins>` or `getPluginsConstructor()` instead.
+     */
+    constructor__(app: App): this;
+
+    /**
      * Unload a plugin by ID.
      *
      * @param id - Plugin ID.

@@ -9,6 +9,14 @@ declare module 'obsidian' {
      */
     interface NullValue extends Value {
         /**
+         * Constructor.
+         *
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<NullValue>` or `getNullValueConstructor()` instead.
+         */
+        constructor__(): this;
+
+        /**
          * Returns a boolean indicating whether this NullValue is truthy.
          *
          * @returns A boolean indicating whether this NullValue is truthy.
@@ -16,7 +24,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         isTruthy(): boolean;
-
+    
         /**
          * Get the string representation of this NullValue.
          *
@@ -25,7 +33,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         toString(): string;
-    }
+}
 
     namespace NullValue {
         /**

@@ -107,7 +107,7 @@ declare module 'obsidian' {
          * @returns The setting group.
          * @official
          * @since 1.11.0
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<SettingGroup>` or `getSettingGroupConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
 

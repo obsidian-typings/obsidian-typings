@@ -1,4 +1,5 @@
 import type {
+    App,
     CloseableComponent,
     Modal,
     SettingTab
@@ -85,6 +86,15 @@ export interface AppSetting extends Modal {
      * Closes the currently active tab.
      */
     closeActiveTab(): void;
+
+    /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<AppSetting>` or `getAppSettingConstructor()` instead.
+     */
+    constructor__(app: App): this;
 
     /**
      * Check whether tab is a plugin tab.

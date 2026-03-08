@@ -1,7 +1,7 @@
 import {
     BasesEntry
 } from 'obsidian';
-import type { BasesEntryConstructor } from '../../../internals/constructors/augmentations/BasesEntryConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the BasesEntry constructor.
@@ -11,6 +11,6 @@ import type { BasesEntryConstructor } from '../../../internals/constructors/augm
  * @public
  * @unofficial
  */
-export function getBasesEntryConstructor(): BasesEntryConstructor {
-    return BasesEntry as BasesEntryConstructor;
+export function getBasesEntryConstructor(): ExtractConstructor<BasesEntry> {
+    return BasesEntry as ExtractConstructor<BasesEntry>;
 }

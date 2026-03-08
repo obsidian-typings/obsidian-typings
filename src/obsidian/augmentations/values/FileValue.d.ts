@@ -8,6 +8,16 @@ declare module 'obsidian' {
      */
     interface FileValue extends NotNullValue {
         /**
+         * Constructor.
+         *
+         * @param leaf - The leaf.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<FileValue>` or `getFileValueConstructor()` instead.
+         */
+        constructor__(leaf: WorkspaceLeaf): this;
+
+        /**
          * Returns a boolean indicating whether this FileValue is truthy.
          *
          * @returns A boolean indicating whether this FileValue is truthy.
@@ -15,7 +25,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         isTruthy(): boolean;
-
+    
         /**
          * String representation of this FileValue.
          *
@@ -24,5 +34,5 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         toString(): string;
-    }
+}
 }

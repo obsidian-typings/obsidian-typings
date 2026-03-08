@@ -1,7 +1,7 @@
 import {
     ListValue
 } from 'obsidian';
-import type { ListValueConstructor } from '../../../internals/constructors/augmentations/ListValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the ListValue constructor.
@@ -11,6 +11,6 @@ import type { ListValueConstructor } from '../../../internals/constructors/augme
  * @public
  * @unofficial
  */
-export function getListValueConstructor(): ListValueConstructor {
-    return ListValue as ListValueConstructor;
+export function getListValueConstructor(): ExtractConstructor<ListValue> {
+    return ListValue as ExtractConstructor<ListValue>;
 }

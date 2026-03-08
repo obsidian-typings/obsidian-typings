@@ -1,7 +1,7 @@
 import {
     ImageValue
 } from 'obsidian';
-import type { ImageValueConstructor } from '../../../internals/constructors/augmentations/ImageValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the ImageValue constructor.
@@ -11,6 +11,6 @@ import type { ImageValueConstructor } from '../../../internals/constructors/augm
  * @public
  * @unofficial
  */
-export function getImageValueConstructor(): ImageValueConstructor {
-    return ImageValue as ImageValueConstructor;
+export function getImageValueConstructor(): ExtractConstructor<ImageValue> {
+    return ImageValue as ExtractConstructor<ImageValue>;
 }

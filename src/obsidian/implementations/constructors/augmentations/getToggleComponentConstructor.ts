@@ -1,7 +1,7 @@
 import {
     ToggleComponent
 } from 'obsidian';
-import type { ToggleComponentConstructor } from '../../../internals/constructors/augmentations/ToggleComponentConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the ToggleComponent constructor.
@@ -11,6 +11,6 @@ import type { ToggleComponentConstructor } from '../../../internals/constructors
  * @public
  * @unofficial
  */
-export function getToggleComponentConstructor(): ToggleComponentConstructor {
-    return ToggleComponent as ToggleComponentConstructor;
+export function getToggleComponentConstructor(): ExtractConstructor<ToggleComponent> {
+    return ToggleComponent as ExtractConstructor<ToggleComponent>;
 }

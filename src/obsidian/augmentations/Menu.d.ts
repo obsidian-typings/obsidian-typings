@@ -136,9 +136,9 @@ declare module 'obsidian' {
          * Create a new menu.
          *
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Menu>` or `getMenuConstructor()` instead.
          */
-        constructor__?(): this;
+        constructor__(): this;
 
         /**
          * Hide the menu.

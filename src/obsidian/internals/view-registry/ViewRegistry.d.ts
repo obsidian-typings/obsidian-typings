@@ -26,6 +26,13 @@ export interface ViewRegistry extends Events {
     viewByType: ViewRegistryViewByTypeRecord;
 
     /**
+     * Constructor.
+     *
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ViewRegistry>` or `getViewRegistryConstructor()` instead.
+     */
+    constructor__(): this;
+
+    /**
      * Get the view type associated with a file extension.
      *
      * @param extension - File extension.

@@ -1,7 +1,7 @@
 import {
     NullValue
 } from 'obsidian';
-import type { NullValueConstructor } from '../../../internals/constructors/augmentations/NullValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the NullValue constructor.
@@ -11,6 +11,6 @@ import type { NullValueConstructor } from '../../../internals/constructors/augme
  * @public
  * @unofficial
  */
-export function getNullValueConstructor(): NullValueConstructor {
-    return NullValue as NullValueConstructor;
+export function getNullValueConstructor(): ExtractConstructor<NullValue> {
+    return NullValue as ExtractConstructor<NullValue>;
 }

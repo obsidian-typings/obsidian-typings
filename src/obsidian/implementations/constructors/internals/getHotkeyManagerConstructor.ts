@@ -1,5 +1,6 @@
 import type { App } from 'obsidian';
-import type { HotkeyManagerConstructor } from '../../../internals/constructors/internals/HotkeyManagerConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
+import type { HotkeyManager } from '../../../internals/hotkey-manager/HotkeyManager.d.ts';
 
 /**
  * Get the HotkeyManager constructor.
@@ -10,6 +11,6 @@ import type { HotkeyManagerConstructor } from '../../../internals/constructors/i
  * @public
  * @unofficial
  */
-export function getHotkeyManagerConstructor(app: App): HotkeyManagerConstructor {
-    return app.hotkeyManager.constructor as HotkeyManagerConstructor;
+export function getHotkeyManagerConstructor(app: App): ExtractConstructor<HotkeyManager> {
+    return app.hotkeyManager.constructor as ExtractConstructor<HotkeyManager>;
 }

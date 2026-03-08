@@ -19,6 +19,15 @@ export interface Cli {
     handlers: Map<string, CliHandlerEntry>;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Cli>` or `getCliConstructor()` instead.
+     */
+    constructor__(app: App): this;
+
+    /**
      * Format tree nodes as an ASCII tree.
      *
      * @param nodes - The tree nodes to format.

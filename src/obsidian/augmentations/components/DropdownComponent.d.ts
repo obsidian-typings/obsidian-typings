@@ -57,7 +57,7 @@ declare module 'obsidian' {
          * @param containerEl - The container element.
          * @returns The dropdown component instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<DropdownComponent>` or `getDropdownComponentConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
 

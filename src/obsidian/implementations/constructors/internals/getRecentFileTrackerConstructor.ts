@@ -1,5 +1,6 @@
 import type { App } from 'obsidian';
-import type { RecentFileTrackerConstructor } from '../../../internals/constructors/internals/RecentFileTrackerConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
+import type { RecentFileTracker } from '../../../internals/RecentFileTracker.d.ts';
 
 /**
  * Get the RecentFileTracker constructor.
@@ -10,6 +11,6 @@ import type { RecentFileTrackerConstructor } from '../../../internals/constructo
  * @public
  * @unofficial
  */
-export function getRecentFileTrackerConstructor(app: App): RecentFileTrackerConstructor {
-    return app.workspace.recentFileTracker.constructor as RecentFileTrackerConstructor;
+export function getRecentFileTrackerConstructor(app: App): ExtractConstructor<RecentFileTracker> {
+    return app.workspace.recentFileTracker.constructor as ExtractConstructor<RecentFileTracker>;
 }

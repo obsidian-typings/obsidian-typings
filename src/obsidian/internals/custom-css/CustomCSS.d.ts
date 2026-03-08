@@ -96,6 +96,15 @@ export interface CustomCSS extends Component {
     checkForUpdates(): void;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<CustomCSS>` or `getCustomCSSConstructor()` instead.
+     */
+    constructor__(app: App): this;
+
+    /**
      * Disable translucency of application background.
      */
     disableTranslucency(): void;

@@ -1,5 +1,6 @@
 import type { App } from 'obsidian';
-import type { EditorSuggestsConstructor } from '../../../internals/constructors/internals/EditorSuggestsConstructor.d.ts';
+import type { EditorSuggests } from '../../../internals/EditorSuggests.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the EditorSuggests constructor.
@@ -10,6 +11,6 @@ import type { EditorSuggestsConstructor } from '../../../internals/constructors/
  * @public
  * @unofficial
  */
-export function getEditorSuggestsConstructor(app: App): EditorSuggestsConstructor {
-    return app.workspace.editorSuggest.constructor as EditorSuggestsConstructor;
+export function getEditorSuggestsConstructor(app: App): ExtractConstructor<EditorSuggests> {
+    return app.workspace.editorSuggest.constructor as ExtractConstructor<EditorSuggests>;
 }

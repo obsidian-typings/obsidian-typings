@@ -1,7 +1,7 @@
 import {
     WorkspaceLeaf
 } from 'obsidian';
-import type { WorkspaceLeafConstructor } from '../../../internals/constructors/augmentations/WorkspaceLeafConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the WorkspaceLeaf constructor.
@@ -11,6 +11,6 @@ import type { WorkspaceLeafConstructor } from '../../../internals/constructors/a
  * @public
  * @unofficial
  */
-export function getWorkspaceLeafConstructor(): WorkspaceLeafConstructor {
-    return WorkspaceLeaf as WorkspaceLeafConstructor;
+export function getWorkspaceLeafConstructor(): ExtractConstructor<WorkspaceLeaf> {
+    return WorkspaceLeaf as ExtractConstructor<WorkspaceLeaf>;
 }

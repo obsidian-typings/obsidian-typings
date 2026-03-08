@@ -8,6 +8,14 @@ declare module 'obsidian' {
      */
     interface ObjectValue extends NotNullValue {
         /**
+         * Constructor.
+         *
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ObjectValue>` or `getObjectValueConstructor()` instead.
+         */
+        constructor__(): this;
+
+        /**
          * Get the {@link Value} associated with the provided key, or {@link NullValue}.
          * If the referenced property in the object is not a Value, it will be wrapped before returning.
          *
@@ -35,7 +43,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         isTruthy(): boolean;
-
+    
         /**
          * Get the string representation of this ObjectValue.
          *
@@ -44,7 +52,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         toString(): string;
-    }
+}
 
     namespace ObjectValue {
         /**

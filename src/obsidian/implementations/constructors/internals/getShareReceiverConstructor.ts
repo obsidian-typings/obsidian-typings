@@ -1,5 +1,6 @@
 import type { App } from 'obsidian';
-import type { ShareReceiverConstructor } from '../../../internals/constructors/internals/ShareReceiverConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
+import type { ShareReceiver } from '../../../internals/ShareReceiver.d.ts';
 
 /**
  * Get the ShareReceiver constructor.
@@ -10,6 +11,6 @@ import type { ShareReceiverConstructor } from '../../../internals/constructors/i
  * @public
  * @unofficial
  */
-export function getShareReceiverConstructor(app: App): ShareReceiverConstructor {
-    return app.shareReceiver.constructor as ShareReceiverConstructor;
+export function getShareReceiverConstructor(app: App): ExtractConstructor<ShareReceiver> {
+    return app.shareReceiver.constructor as ExtractConstructor<ShareReceiver>;
 }

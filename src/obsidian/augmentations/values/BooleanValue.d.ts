@@ -7,7 +7,17 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     interface BooleanValue extends PrimitiveValue<boolean> {
-    }
+    
+        /**
+         * Constructor.
+         *
+         * @param value - The value.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<BooleanValue>` or `getBooleanValueConstructor()` instead.
+         */
+        constructor__(value: boolean): this;
+}
 
     namespace BooleanValue {
         /**

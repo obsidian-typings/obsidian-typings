@@ -11,6 +11,15 @@ export interface ShareReceiver {
     app: App;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ShareReceiver>` or `getShareReceiverConstructor()` instead.
+     */
+    constructor__(app: App): this;
+
+    /**
      * Handles shared files.
      *
      * @param files - Shared files.

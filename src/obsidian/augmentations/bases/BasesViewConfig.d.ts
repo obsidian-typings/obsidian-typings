@@ -17,6 +17,18 @@ declare module 'obsidian' {
         name: string;
 
         /**
+         * Constructor.
+         *
+         * @param query - The query.
+         * @param type - The type.
+         * @param name - The name.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<BasesViewConfig>` or `getBasesViewConfigConstructor()` instead.
+         */
+        constructor__(query: string, type: string, name: string): this;
+
+        /**
          * Retrieve the user-configured value of options exposed in `BasesViewRegistration.options`.
          *
          * @param key - The option key to retrieve.
@@ -87,7 +99,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         getSort(): BasesSortConfig[];
-
+    
         /**
          * Store configuration data for the view. Views should prefer `BasesViewRegistration.options`
          * to allow users to configure options where appropriate.
@@ -98,5 +110,5 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         set(key: string, value: unknown | null): void;
-    }
+}
 }

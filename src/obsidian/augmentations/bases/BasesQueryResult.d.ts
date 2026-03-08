@@ -19,6 +19,14 @@ declare module 'obsidian' {
         data: BasesEntry[];
 
         /**
+         * Constructor.
+         *
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<BasesQueryResult>` or `getBasesQueryResultConstructor()` instead.
+         */
+        constructor__(): this;
+
+        /**
          * Applies a summary function to a single property over a set of entries.
          *
          * @param queryController - The query controller to use.
@@ -46,7 +54,7 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link groupedData} instead.
          */
         groupedData__(): BasesEntryGroup[];
-
+    
         /**
          * Visible properties defined by the user.
          *
@@ -56,5 +64,5 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link properties} instead.
          */
         properties__(): BasesPropertyId[];
-    }
+}
 }

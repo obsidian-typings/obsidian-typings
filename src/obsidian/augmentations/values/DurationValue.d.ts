@@ -20,6 +20,14 @@ declare module 'obsidian' {
         addToDate(value: DateValue, subtract?: boolean): DateValue;
 
         /**
+         * Constructor.
+         *
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<DurationValue>` or `getDurationValueConstructor()` instead.
+         */
+        constructor__(): this;
+
+        /**
          * Convert this duration into milliseconds.
          *
          * @returns The duration in milliseconds.
@@ -36,7 +44,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         isTruthy(): boolean;
-
+    
         /**
          * String representation of this DurationValue.
          *
@@ -45,7 +53,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         toString(): string;
-    }
+}
 
     namespace DurationValue {
         /**

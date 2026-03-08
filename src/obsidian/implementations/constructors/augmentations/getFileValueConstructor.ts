@@ -1,7 +1,7 @@
 import {
     FileValue
 } from 'obsidian';
-import type { FileValueConstructor } from '../../../internals/constructors/augmentations/FileValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the FileValue constructor.
@@ -11,6 +11,6 @@ import type { FileValueConstructor } from '../../../internals/constructors/augme
  * @public
  * @unofficial
  */
-export function getFileValueConstructor(): FileValueConstructor {
-    return FileValue as FileValueConstructor;
+export function getFileValueConstructor(): ExtractConstructor<FileValue> {
+    return FileValue as ExtractConstructor<FileValue>;
 }

@@ -1,5 +1,6 @@
 import type { App } from 'obsidian';
-import type { DragManagerConstructor } from '../../../internals/constructors/internals/DragManagerConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
+import type { DragManager } from '../../../internals/drag-manager/DragManager.d.ts';
 
 /**
  * Get the DragManager constructor.
@@ -10,6 +11,6 @@ import type { DragManagerConstructor } from '../../../internals/constructors/int
  * @public
  * @unofficial
  */
-export function getDragManagerConstructor(app: App): DragManagerConstructor {
-    return app.dragManager.constructor as DragManagerConstructor;
+export function getDragManagerConstructor(app: App): ExtractConstructor<DragManager> {
+    return app.dragManager.constructor as ExtractConstructor<DragManager>;
 }

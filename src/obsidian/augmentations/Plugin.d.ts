@@ -105,7 +105,7 @@ declare module 'obsidian' {
          * @param manifest - The plugin manifest.
          * @returns The plugin instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Plugin>` or `getPluginConstructor()` instead.
          */
         constructor__(app: App, manifest: PluginManifest): this;
 

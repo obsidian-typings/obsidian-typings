@@ -7,7 +7,17 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     interface LinkValue extends StringValue {
-    }
+    
+        /**
+         * Constructor.
+         *
+         * @param value - The value.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<LinkValue>` or `getLinkValueConstructor()` instead.
+         */
+        constructor__(value: string): this;
+}
 
     namespace LinkValue {
         /**

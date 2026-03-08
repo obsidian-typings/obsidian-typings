@@ -54,6 +54,16 @@ declare module 'obsidian' {
         canCreateFileWithExt(extension: string): boolean;
 
         /**
+         * Constructor.
+         *
+         * @param app - The app.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<FileManager>` or `getFileManagerConstructor()` instead.
+         */
+        constructor__(app: App): this;
+
+        /**
          * Creates a new Markdown file in specified location and opens it in a new view.
          *
          * @param path - Path to the file to create (missing folders will be created).
@@ -377,7 +387,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateAllLinks(links: LinkUpdate[]): Promise<void>;
-
+    
         /**
          * Update internal links.
          *
@@ -386,5 +396,5 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateInternalLinks(data: Map<string, LinkChangeUpdate>): Promise<void>;
-    }
+}
 }

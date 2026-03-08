@@ -39,6 +39,15 @@ export interface Commands {
     addCommand(command: Command): void;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Commands>` or `getCommandsConstructor()` instead.
+     */
+    constructor__(app: App): this;
+
+    /**
      * Execute a command by reference.
      *
      * @param command - Command to execute.

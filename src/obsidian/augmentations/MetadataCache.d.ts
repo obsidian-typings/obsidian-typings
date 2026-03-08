@@ -214,6 +214,17 @@ declare module 'obsidian' {
         computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<CachedMetadata | undefined>;
 
         /**
+         * Constructor.
+         *
+         * @param app - The app.
+         * @param vault - The vault.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MetadataCache>` or `getMetadataCacheConstructor()` instead.
+         */
+        constructor__(app: App, vault: Vault): this;
+
+        /**
          * Remove all entries that contain deleted path
          *
          * @param path - The path to remove entries for.
@@ -638,7 +649,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         watchVaultChanges(): void;
-
+    
         /**
          * Send message to worker to update metadata cache
          *
@@ -647,5 +658,5 @@ declare module 'obsidian' {
          * @unofficial
          */
         work(arrayBuffer: ArrayBuffer): Promise<CachedMetadata>;
-    }
+}
 }

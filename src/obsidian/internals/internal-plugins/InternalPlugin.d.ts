@@ -67,6 +67,17 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
     addSettingTab(settingTab: PluginSettingTab): void;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @param instance - The instance.
+     * @param internalPlugins - The internalPlugins.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<InternalPlugin>` or `getInternalPluginConstructor()` instead.
+     */
+    constructor__(app: App, instance: InternalPluginInstance, internalPlugins: InternalPlugins): this;
+
+    /**
      * Delete persisted data for this plugin.
      *
      * @returns A promise that resolves when the data is deleted.

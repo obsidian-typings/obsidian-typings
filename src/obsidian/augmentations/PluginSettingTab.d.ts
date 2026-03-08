@@ -14,7 +14,7 @@ declare module 'obsidian' {
          * @param plugin - The plugin instance.
          * @returns The plugin setting tab instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<PluginSettingTab>` or `getPluginSettingTabConstructor()` instead.
          */
         constructor__(app: App, plugin: Plugin): this;
     }

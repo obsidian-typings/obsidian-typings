@@ -27,7 +27,7 @@ declare module 'obsidian' {
          * @param containerEl - The container element.
          * @returns The color component instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ColorComponent>` or `getColorComponentConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
 

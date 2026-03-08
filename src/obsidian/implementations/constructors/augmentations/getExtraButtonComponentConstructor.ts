@@ -1,7 +1,7 @@
 import {
     ExtraButtonComponent
 } from 'obsidian';
-import type { ExtraButtonComponentConstructor } from '../../../internals/constructors/augmentations/ExtraButtonComponentConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the ExtraButtonComponent constructor.
@@ -11,6 +11,6 @@ import type { ExtraButtonComponentConstructor } from '../../../internals/constru
  * @public
  * @unofficial
  */
-export function getExtraButtonComponentConstructor(): ExtraButtonComponentConstructor {
-    return ExtraButtonComponent as ExtraButtonComponentConstructor;
+export function getExtraButtonComponentConstructor(): ExtractConstructor<ExtraButtonComponent> {
+    return ExtraButtonComponent as ExtractConstructor<ExtraButtonComponent>;
 }

@@ -134,7 +134,7 @@ declare module 'obsidian' {
          * @param app - The Obsidian app instance.
          * @returns The modal instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Modal>` or `getModalConstructor()` instead.
          */
         constructor__(app: App): this;
 

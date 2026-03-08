@@ -76,12 +76,14 @@ declare module 'obsidian' {
         callback?(): void;
 
         /**
-         * Private constructor. Use {@link Menu.addItem} instead.
+         * Constructor.
          *
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @param menu - The menu.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MenuItem>` or `getMenuItemConstructor()` instead.
          */
-        constructor__?(): this;
+        constructor__(menu: unknown): this;
 
         /**
          * Executes the callback of the onClick event (if not disabled).

@@ -1,4 +1,5 @@
 import type {
+    App,
     EditorSuggest,
     TFile
 } from 'obsidian';
@@ -34,6 +35,15 @@ export interface EditorSuggests {
      * Close the currently active editor suggestion popup.
      */
     close(): void;
+
+    /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<EditorSuggests>` or `getEditorSuggestsConstructor()` instead.
+     */
+    constructor__(app: App): this;
 
     /**
      * Whether there is a editor suggestion popup active and visible.

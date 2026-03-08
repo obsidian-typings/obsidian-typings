@@ -1,7 +1,7 @@
 import {
     HTMLValue
 } from 'obsidian';
-import type { HTMLValueConstructor } from '../../../internals/constructors/augmentations/HTMLValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the HTMLValue constructor.
@@ -11,6 +11,6 @@ import type { HTMLValueConstructor } from '../../../internals/constructors/augme
  * @public
  * @unofficial
  */
-export function getHTMLValueConstructor(): HTMLValueConstructor {
-    return HTMLValue as HTMLValueConstructor;
+export function getHTMLValueConstructor(): ExtractConstructor<HTMLValue> {
+    return HTMLValue as ExtractConstructor<HTMLValue>;
 }

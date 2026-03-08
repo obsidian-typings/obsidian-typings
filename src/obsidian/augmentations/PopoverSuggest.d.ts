@@ -65,7 +65,7 @@ declare module 'obsidian' {
          * @param scope - The scope for the keymaps.
          * @returns The popover suggest instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<PopoverSuggest>` or `getPopoverSuggestConstructor()` instead.
          */
         constructor__(app: App, scope?: Scope): this;
 

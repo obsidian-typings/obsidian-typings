@@ -287,6 +287,17 @@ declare module 'obsidian' {
         clearLayout(): Promise<void>;
 
         /**
+         * Constructor.
+         *
+         * @param app - The app.
+         * @param containerEl - The containerEl.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Workspace>` or `getWorkspaceConstructor()` instead.
+         */
+        constructor__(app: App, containerEl: HTMLElement): this;
+
+        /**
          * Create a leaf by a split.
          *
          * @param leaf - The leaf to create the leaf by.
@@ -1573,7 +1584,7 @@ declare module 'obsidian' {
          * @since 0.13.21
          */
         updateOptions(): void;
-
+    
         /**
          * Update the internal title of the application.
          *
@@ -1581,5 +1592,5 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateTitle(): void;
-    }
+}
 }

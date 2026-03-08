@@ -67,7 +67,7 @@ declare module 'obsidian' {
          *
          * @param leaf - The leaf to create the view in.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<TextFileView>` or `getTextFileViewConstructor()` instead.
          */
         constructor__(leaf: WorkspaceLeaf): this;
 

@@ -1,7 +1,7 @@
 import {
     WorkspaceFloating
 } from 'obsidian';
-import type { WorkspaceFloatingConstructor } from '../../../internals/constructors/augmentations/WorkspaceFloatingConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the WorkspaceFloating constructor.
@@ -11,6 +11,6 @@ import type { WorkspaceFloatingConstructor } from '../../../internals/constructo
  * @public
  * @unofficial
  */
-export function getWorkspaceFloatingConstructor(): WorkspaceFloatingConstructor {
-    return WorkspaceFloating as WorkspaceFloatingConstructor;
+export function getWorkspaceFloatingConstructor(): ExtractConstructor<WorkspaceFloating> {
+    return WorkspaceFloating as ExtractConstructor<WorkspaceFloating>;
 }

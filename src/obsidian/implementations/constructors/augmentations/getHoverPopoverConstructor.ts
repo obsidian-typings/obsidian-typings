@@ -1,7 +1,7 @@
 import {
     HoverPopover
 } from 'obsidian';
-import type { HoverPopoverConstructor } from '../../../internals/constructors/augmentations/HoverPopoverConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the HoverPopover constructor.
@@ -11,6 +11,6 @@ import type { HoverPopoverConstructor } from '../../../internals/constructors/au
  * @public
  * @unofficial
  */
-export function getHoverPopoverConstructor(): HoverPopoverConstructor {
-    return HoverPopover as HoverPopoverConstructor;
+export function getHoverPopoverConstructor(): ExtractConstructor<HoverPopover> {
+    return HoverPopover as ExtractConstructor<HoverPopover>;
 }

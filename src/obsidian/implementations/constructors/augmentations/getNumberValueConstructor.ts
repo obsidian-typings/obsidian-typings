@@ -1,7 +1,7 @@
 import {
     NumberValue
 } from 'obsidian';
-import type { NumberValueConstructor } from '../../../internals/constructors/augmentations/NumberValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the NumberValue constructor.
@@ -11,6 +11,6 @@ import type { NumberValueConstructor } from '../../../internals/constructors/aug
  * @public
  * @unofficial
  */
-export function getNumberValueConstructor(): NumberValueConstructor {
-    return NumberValue as NumberValueConstructor;
+export function getNumberValueConstructor(): ExtractConstructor<NumberValue> {
+    return NumberValue as ExtractConstructor<NumberValue>;
 }

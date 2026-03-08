@@ -1,7 +1,7 @@
 import {
     FileSystemAdapter
 } from 'obsidian';
-import type { FileSystemAdapterConstructor } from '../../../internals/constructors/augmentations/FileSystemAdapterConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the FileSystemAdapter constructor.
@@ -11,6 +11,6 @@ import type { FileSystemAdapterConstructor } from '../../../internals/constructo
  * @public
  * @unofficial
  */
-export function getFileSystemAdapterConstructor(): FileSystemAdapterConstructor {
-    return FileSystemAdapter as FileSystemAdapterConstructor;
+export function getFileSystemAdapterConstructor(): ExtractConstructor<FileSystemAdapter> {
+    return FileSystemAdapter as ExtractConstructor<FileSystemAdapter>;
 }

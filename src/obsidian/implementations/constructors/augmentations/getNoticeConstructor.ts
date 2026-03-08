@@ -1,7 +1,7 @@
 import {
     Notice
 } from 'obsidian';
-import type { NoticeConstructor } from '../../../internals/constructors/augmentations/NoticeConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the Notice constructor.
@@ -11,6 +11,6 @@ import type { NoticeConstructor } from '../../../internals/constructors/augmenta
  * @public
  * @unofficial
  */
-export function getNoticeConstructor(): NoticeConstructor {
-    return Notice as NoticeConstructor;
+export function getNoticeConstructor(): ExtractConstructor<Notice> {
+    return Notice as ExtractConstructor<Notice>;
 }

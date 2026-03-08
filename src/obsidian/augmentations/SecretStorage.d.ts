@@ -7,6 +7,16 @@ declare module 'obsidian' {
      */
     interface SecretStorage {
         /**
+         * Constructor.
+         *
+         * @param app - The app.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<SecretStorage>` or `getSecretStorageConstructor()` instead.
+         */
+        constructor__(app: App): this;
+
+        /**
          * Gets a secret from storage
          *
          * @param id - the secret ID
@@ -24,7 +34,7 @@ declare module 'obsidian' {
          * @since 1.11.4
          */
         listSecrets(): string[];
-
+    
         /**
          * Sets a secret in the storage.
          *
@@ -35,5 +45,5 @@ declare module 'obsidian' {
          * @since 1.11.4
          */
         setSecret(id: string, secret: string): void;
-    }
+}
 }

@@ -87,7 +87,7 @@ declare module 'obsidian' {
          * @param leaf - The leaf of the view.
          * @returns The view instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<View>` or `getViewConstructor()` instead.
          * @since 0.9.7
          */
         constructor__(leaf: WorkspaceLeaf): this;

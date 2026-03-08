@@ -1,7 +1,7 @@
 import {
     FileManager
 } from 'obsidian';
-import type { FileManagerConstructor } from '../../../internals/constructors/augmentations/FileManagerConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the FileManager constructor.
@@ -11,6 +11,6 @@ import type { FileManagerConstructor } from '../../../internals/constructors/aug
  * @public
  * @unofficial
  */
-export function getFileManagerConstructor(): FileManagerConstructor {
-    return FileManager as FileManagerConstructor;
+export function getFileManagerConstructor(): ExtractConstructor<FileManager> {
+    return FileManager as ExtractConstructor<FileManager>;
 }

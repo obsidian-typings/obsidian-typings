@@ -17,6 +17,15 @@ export interface FoldManager {
     cleanup(): unknown;
 
     /**
+     * Constructor.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<FoldManager>` or `getFoldManagerConstructor()` instead.
+     */
+    constructor__(app: App): this;
+
+    /**
      * Load fold state for the given file or view.
      *
      * @returns The loaded fold state.

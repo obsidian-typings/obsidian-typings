@@ -1,7 +1,7 @@
 import {
     MenuSeparator
 } from 'obsidian';
-import type { MenuSeparatorConstructor } from '../../../internals/constructors/augmentations/MenuSeparatorConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the MenuSeparator constructor.
@@ -11,6 +11,6 @@ import type { MenuSeparatorConstructor } from '../../../internals/constructors/a
  * @public
  * @unofficial
  */
-export function getMenuSeparatorConstructor(): MenuSeparatorConstructor {
-    return MenuSeparator as MenuSeparatorConstructor;
+export function getMenuSeparatorConstructor(): ExtractConstructor<MenuSeparator> {
+    return MenuSeparator as ExtractConstructor<MenuSeparator>;
 }

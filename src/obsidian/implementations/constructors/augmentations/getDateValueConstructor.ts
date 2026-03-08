@@ -1,7 +1,7 @@
 import {
     DateValue
 } from 'obsidian';
-import type { DateValueConstructor } from '../../../internals/constructors/augmentations/DateValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the DateValue constructor.
@@ -11,6 +11,6 @@ import type { DateValueConstructor } from '../../../internals/constructors/augme
  * @public
  * @unofficial
  */
-export function getDateValueConstructor(): DateValueConstructor {
-    return DateValue as DateValueConstructor;
+export function getDateValueConstructor(): ExtractConstructor<DateValue> {
+    return DateValue as ExtractConstructor<DateValue>;
 }

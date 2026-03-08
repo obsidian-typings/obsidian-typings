@@ -8,6 +8,14 @@ declare module 'obsidian' {
      */
     interface RegExpValue extends NotNullValue {
         /**
+         * Constructor.
+         *
+         * @unofficial
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<RegExpValue>` or `getRegExpValueConstructor()` instead.
+         */
+        constructor__(): this;
+
+        /**
          * Returns a boolean indicating whether this RegExpValue is truthy.
          *
          * @returns A boolean indicating whether this RegExpValue is truthy.
@@ -15,7 +23,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         isTruthy(): boolean;
-
+    
         /**
          * Get the string representation of this RegExpValue.
          *
@@ -24,5 +32,5 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         toString(): string;
-    }
+}
 }

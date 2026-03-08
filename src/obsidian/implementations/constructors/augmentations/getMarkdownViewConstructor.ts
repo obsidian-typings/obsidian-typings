@@ -1,7 +1,7 @@
 import {
     MarkdownView
 } from 'obsidian';
-import type { MarkdownViewConstructor } from '../../../internals/constructors/augmentations/MarkdownViewConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the MarkdownView constructor.
@@ -11,6 +11,6 @@ import type { MarkdownViewConstructor } from '../../../internals/constructors/au
  * @public
  * @unofficial
  */
-export function getMarkdownViewConstructor(): MarkdownViewConstructor {
-    return MarkdownView as MarkdownViewConstructor;
+export function getMarkdownViewConstructor(): ExtractConstructor<MarkdownView> {
+    return MarkdownView as ExtractConstructor<MarkdownView>;
 }

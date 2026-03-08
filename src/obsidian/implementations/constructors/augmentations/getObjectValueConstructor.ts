@@ -1,7 +1,7 @@
 import {
     ObjectValue
 } from 'obsidian';
-import type { ObjectValueConstructor } from '../../../internals/constructors/augmentations/ObjectValueConstructor.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the ObjectValue constructor.
@@ -11,6 +11,6 @@ import type { ObjectValueConstructor } from '../../../internals/constructors/aug
  * @public
  * @unofficial
  */
-export function getObjectValueConstructor(): ObjectValueConstructor {
-    return ObjectValue as ObjectValueConstructor;
+export function getObjectValueConstructor(): ExtractConstructor<ObjectValue> {
+    return ObjectValue as ExtractConstructor<ObjectValue>;
 }

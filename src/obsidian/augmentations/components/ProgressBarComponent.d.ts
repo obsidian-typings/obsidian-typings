@@ -26,7 +26,7 @@ declare module 'obsidian' {
          * @param containerEl - The container element.
          * @returns The progress bar component instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ProgressBarComponent>` or `getProgressBarComponentConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
 
