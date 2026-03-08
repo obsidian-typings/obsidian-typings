@@ -368,11 +368,12 @@ declare module 'obsidian' {
         /**
          * Get the current title of the application.
          *
+         * @param title - Optional prefix to prepend to the app title (e.g. active file name).
          * @returns The application title.
          * @remark The title is based on the currently active leaf.
          * @unofficial
          */
-        getAppTitle(leaf?: unknown): string;
+        getAppTitle(title?: string): string;
 
         /**
          * Get the URI for opening specified file in Obsidian.
@@ -505,9 +506,10 @@ declare module 'obsidian' {
         /**
          * Open the vault picker.
          *
+         * @param closeWindow - Whether to close the current vault window after opening the chooser (desktop only).
          * @unofficial
          */
-        openVaultChooser(callback?: unknown): void;
+        openVaultChooser(closeWindow?: boolean): void;
 
         /**
          * Open the file with OS defined default file browser application.
@@ -537,7 +539,7 @@ declare module 'obsidian' {
          * @param behavior - The opening behavior to run.
          * @unofficial
          */
-        runOpeningBehavior(behavior: unknown): void;
+        runOpeningBehavior(behavior: string): void;
 
         /**
          * Save attachment at default attachments location
@@ -652,10 +654,10 @@ declare module 'obsidian' {
         /**
          * Update mobile frame theme.
          *
-         * @param theme - The theme to update.
+         * @param isDark - Whether to use the dark theme.
          * @unofficial
          */
-        updateMobileFrameTheme(theme: unknown): void;
+        updateMobileFrameTheme(isDark: boolean): void;
 
         /**
          * Update the ribbon display.

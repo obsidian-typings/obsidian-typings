@@ -230,11 +230,19 @@ export interface CustomCSS extends Component {
      */
     onRaw(themeName: string): void;
 
-    /** Read available CSS snippets from the snippets folder. */
-    readSnippets(snippets?: unknown): void;
+    /**
+     * Read available CSS snippets from the snippets folder.
+     *
+     * @param reload - Whether to reload snippets after reading.
+     */
+    readSnippets(reload?: boolean): void;
 
-    /** Read available themes from the themes folder. */
-    readThemes(themes?: unknown): void;
+    /**
+     * Read available themes from the themes folder.
+     *
+     * @param reload - Whether to reload themes after reading.
+     */
+    readThemes(reload?: boolean): void;
 
     /**
      * Remove a theme by theme name.

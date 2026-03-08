@@ -1,4 +1,29 @@
-import type { App } from 'obsidian';
+import type {
+    App,
+    CliFlag,
+    TFile
+} from 'obsidian';
+
+/** A node in a CLI ASCII tree. */
+export interface CliTreeNode {
+    /** Label text for this tree node. */
+    label: string;
+
+    /** Child nodes. */
+    children?: CliTreeNode[];
+}
+
+/** Entry stored in the CLI handlers map. */
+export interface CliHandlerEntry {
+    /** The handler function. */
+    handler: (...args: unknown[]) => unknown;
+
+    /** Description shown in help. */
+    description: string;
+
+    /** Flags accepted by this handler. */
+    flags?: Record<string, CliFlag>;
+}
 
 /**
  * Command-line interface handler for Obsidian.
@@ -10,64 +35,81 @@ export interface Cli {
     app: App;
 
     /** Registered CLI command handlers. */
-    handlers: Map<string, unknown>;
+    handlers: Map<string, CliHandlerEntry>;
 
     /**
-     * Format data as an ASCII tree.
+     * Format tree nodes as an ASCII tree.
      *
-     * @param data - The data to format.
+     * @param nodes - The tree nodes to format.
+     * @param prefix - The indentation prefix for nested nodes.
      * @returns The formatted ASCII tree string.
      */
-    formatAsciiTree(data: unknown): string;
+    formatAsciiTree(nodes: CliTreeNode[], prefix?: string): string;
 
     /**
-     * Format data as an ASCII tree with a root node.
+     * Format a root label and child nodes as an ASCII tree.
      *
-     * @param data - The data to format.
+     * @param root - The root label.
+     * @param children - The child tree nodes.
      * @returns The formatted ASCII tree string with root.
      */
-    formatAsciiTreeWithRoot(data: unknown): string;
+    formatAsciiTreeWithRoot(root: string, children: CliTreeNode[]): string;
 
     /**
-     * Format data as a diff output.
+     * Format two strings as a unified diff.
      *
-     * @param data - The data to format.
+     * @param oldText - The original text.
+     * @param newText - The modified text.
+     * @param oldName - The label for the original text.
+     * @param newName - The label for the modified text.
      * @returns The formatted diff string.
      */
-    formatDiff(data: unknown): string;
+    formatDiff(oldText: string, newText: string, oldName: string, newName: string): string;
 
     /**
-     * Format data as a table.
+     * Format data as a table in JSON, CSV, or TSV format.
      *
-     * @param data - The data to format.
+     * @param headers - Column header names.
+     * @param rows - Row data as arrays of strings.
+     * @param format - Output format.
      * @returns The formatted table string.
      */
-    formatTable(data: unknown): string;
+    formatTable(headers: string[], rows: string[][], format: 'json' | 'csv' | 'tsv'): string;
 
     /**
-     * Initialize the CLI handler.
+     * Initialize the CLI handler, registering the global `handleCli` function.
      */
     init(): void;
 
     /**
      * Register a CLI command handler.
      *
-     * @param handler - The handler to register.
+     * @param id - The command identifier.
+     * @param description - Description shown in help.
+     * @param flags - Flags accepted by this command, or `null` for none.
+     * @param handler - The handler function.
      */
-    registerHandler(handler: unknown): void;
+    registerHandler(
+        id: string,
+        description: string,
+        flags: Record<string, CliFlag> | null,
+        handler: (...args: unknown[]) => unknown
+    ): void;
 
     /**
-     * Try to resolve a file path from CLI input.
+     * Try to resolve a file from CLI input parameters.
      *
-     * @param path - The path to resolve.
-     * @returns The resolved file, or `null`.
+     * @param params - Object with optional `path` or `file` properties.
+     * @param requireFile - Whether a file is required (throws if not found when `true`).
+     * @returns The resolved file.
      */
-    tryResolveFile(path: string): unknown;
+    tryResolveFile(params: { path?: string; file?: string }, requireFile?: boolean): TFile;
 
     /**
      * Unregister a CLI command handler.
      *
-     * @param id - The handler ID to unregister.
+     * @param id - The command identifier to unregister.
+     * @param handler - Optional handler function to match before unregistering.
      */
-    unregisterHandler(id: string): void;
+    unregisterHandler(id: string, handler?: (...args: unknown[]) => unknown): void;
 }

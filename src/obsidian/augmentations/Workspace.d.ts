@@ -112,9 +112,12 @@ declare module 'obsidian' {
         /**
          * Handler for x-callback-url actions.
          *
+         * @param params - The URL parameters from the x-callback-url.
+         * @param file - The file associated with the callback.
+         * @returns Whether the callback was handled.
          * @unofficial
          */
-        handleXCallback: unknown;
+        handleXCallback(params: Record<string, string>, file: TFile): boolean;
 
         /**
          * Last opened file in the vault.
@@ -184,7 +187,7 @@ declare module 'obsidian' {
          *
          * @unofficial
          */
-        operatorFuncConfigs: Map<string, unknown>;
+        operatorFuncConfigs: Record<string, unknown>;
 
         /**
          * Protocol handlers registered on the workspace.
@@ -635,6 +638,7 @@ declare module 'obsidian' {
          * @param menu - The context menu.
          * @param linkText - The internal link text.
          * @param sourcePath - The source path of the link.
+         * @param leaf - The leaf to add context actions for.
          * @unofficial
          * @since 0.12.10
          */
@@ -681,7 +685,7 @@ declare module 'obsidian' {
          * @param callback - The callback to call for each CodeMirror instance.
          * @unofficial
          */
-        iterateCodeMirrors(callback: (cm: unknown) => unknown): void;
+        iterateCodeMirrors(callback: (cm: unknown) => void): void;
 
         /**
          * Iterate the leaves of a split.
@@ -1328,7 +1332,7 @@ declare module 'obsidian' {
          * @returns A promise that resolves to the workspace data.
          * @unofficial
          */
-        readWorkspaceFile(): Promise<unknown>;
+        readWorkspaceFile(): Promise<SerializedWorkspace>;
 
         /**
          * Get drag event target location
