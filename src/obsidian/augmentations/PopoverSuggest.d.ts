@@ -18,6 +18,34 @@ declare module 'obsidian' {
         app: App;
 
         /**
+         * Whether the suggestion popup is currently open and visible.
+         *
+         * @unofficial
+         */
+        isOpen: boolean;
+
+        /**
+         * The scope for the keymaps.
+         *
+         * @official
+         */
+        scope: Scope;
+
+        /**
+         * Suggestion container element.
+         *
+         * @unofficial
+         */
+        suggestEl: HTMLDivElement;
+
+        /**
+         * Handles selection and rendering of the suggestions.
+         *
+         * @unofficial
+         */
+        suggestions: SuggestionContainer<T>;
+
+        /**
          * Automatically destroy the popover when its associated element is removed.
          * @unofficial
          */
@@ -40,13 +68,6 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
         constructor__(app: App, scope?: Scope): this;
-
-        /**
-         * Whether the suggestion popup is currently open and visible.
-         *
-         * @unofficial
-         */
-        isOpen: boolean;
 
         /**
          * Handle the escape key to close the popover.
@@ -90,13 +111,6 @@ declare module 'obsidian' {
         reposition(rect: DOMRect, textDirection?: TextDirection): void;
 
         /**
-         * The scope for the keymaps.
-         *
-         * @official
-         */
-        scope: Scope;
-
-        /**
          * Select the suggestion.
          *
          * @param value - The value to select.
@@ -122,19 +136,5 @@ declare module 'obsidian' {
          * @unofficial
          */
         setAutoDestroy(el: HTMLElement): void;
-
-        /**
-         * Suggestion container element.
-         *
-         * @unofficial
-         */
-        suggestEl: HTMLDivElement;
-
-        /**
-         * Handles selection and rendering of the suggestions.
-         *
-         * @unofficial
-         */
-        suggestions: SuggestionContainer<T>;
     }
 }

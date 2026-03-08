@@ -32,9 +32,10 @@ export const eslintConfig: Linter.Config[] = [
             perfectionist: perfectionist
         },
         rules: {
-            // Sort interface members alphabetically.
-            // No groups — perfectionist classifies getters as methods, but they should be with properties.
+            // Sort interface members: properties first (alphabetical), then methods (alphabetical).
+            // Note: perfectionist classifies getters as methods — accepted limitation.
             'perfectionist/sort-interfaces': ['error', {
+                groups: ['property', 'method'],
                 order: 'asc',
                 type: 'alphabetical'
             }],

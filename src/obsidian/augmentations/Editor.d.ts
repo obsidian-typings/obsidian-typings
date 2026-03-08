@@ -14,6 +14,27 @@ declare module 'obsidian' {
      */
     interface Editor {
         /**
+         * CodeMirror editor instance.
+         *
+         * @unofficial
+         */
+        cm: EditorView;
+
+        /**
+         * HTML instance the CM editor is attached to.
+         *
+         * @unofficial
+         */
+        containerEl: HTMLElement;
+
+        /**
+         * Linked Editor manager instance.
+         *
+         * @unofficial
+         */
+        editorComponent: undefined | MarkdownScrollableEditView;
+
+        /**
          * Currently active CM instance.
          *
          * @returns The active CodeMirror editor view, or `null` when the editor is not instantiated.
@@ -59,20 +80,6 @@ declare module 'obsidian' {
         blur__?(): void;
 
         /**
-         * CodeMirror editor instance.
-         *
-         * @unofficial
-         */
-        cm: EditorView;
-
-        /**
-         * HTML instance the CM editor is attached to.
-         *
-         * @unofficial
-         */
-        containerEl: HTMLElement;
-
-        /**
          * Convert editor position to screen position.
          *
          * @param pos Editor position.
@@ -81,13 +88,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         coordsAtPos(pos: EditorPosition, relativeToEditor: boolean): Coords;
-
-        /**
-         * Linked Editor manager instance.
-         *
-         * @unofficial
-         */
-        editorComponent: undefined | MarkdownScrollableEditView;
 
         /**
          * Execute a command.

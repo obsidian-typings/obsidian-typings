@@ -22,12 +22,12 @@ export interface FrameDom {
     /** Element displaying the title bar text. */
     titleBarTextEl: HTMLDivElement;
 
+    /** Reference to the window object. */
+    win: Window;
+
     /** Update the window status indicators in the title bar. */
     updateStatus(): void;
 
     /** Update the displayed title in the title bar. */
     updateTitle(): void;
-
-    /** Reference to the window object. */
-    win: Window;
 }

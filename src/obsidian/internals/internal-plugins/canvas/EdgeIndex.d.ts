@@ -13,6 +13,9 @@ export interface EdgeIndex extends EdgeIndexBase {
     /** Minimum number of entries per R-tree node before merging. */
     _minEntries: number;
 
+    /** Root data node of the R-tree. */
+    data: EdgeIndexData;
+
     /**
      * Compare two items by their minimum X coordinate for sorting.
      *
@@ -26,7 +29,4 @@ export interface EdgeIndex extends EdgeIndexBase {
      * @returns The comparison result.
      */
     compareMinY(arg1: unknown, arg2: unknown): unknown;
-
-    /** Root data node of the R-tree. */
-    data: EdgeIndexData;
 }

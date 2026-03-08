@@ -9,6 +9,14 @@ declare module 'obsidian' {
      */
     interface BasesViewConfig {
         /**
+         * User-friendly name for this view.
+         *
+         * @official
+         * @since 1.10.0
+         */
+        name: string;
+
+        /**
          * Retrieve the user-configured value of options exposed in `BasesViewRegistration.options`.
          *
          * @param key - The option key to retrieve.
@@ -79,14 +87,6 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         getSort(): BasesSortConfig[];
-
-        /**
-         * User-friendly name for this view.
-         *
-         * @official
-         * @since 1.10.0
-         */
-        name: string;
 
         /**
          * Store configuration data for the view. Views should prefer `BasesViewRegistration.options`

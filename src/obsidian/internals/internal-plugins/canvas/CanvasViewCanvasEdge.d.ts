@@ -11,6 +11,54 @@ import type { CanvasViewCanvasEdgePath } from './CanvasViewCanvasEdgePath.d.ts';
  * @unofficial
  */
 export interface CanvasViewCanvasEdge {
+    /** Bounding box of the edge for spatial indexing. */
+    bbox: BBox;
+
+    /** Bezier curve data used for rendering the edge path. */
+    bezier: Bezier;
+
+    /** Reference to the parent canvas instance. */
+    canvas: CanvasViewCanvas;
+
+    /** Color of the edge line (CSS color string or preset name). */
+    color: string;
+
+    /** Link information for the source endpoint of the edge. */
+    from: CanvasViewCanvasEdgeLink;
+
+    /** Line end marker at the source endpoint, or `null` if none. */
+    fromLineEnd: CanvasViewCanvasEdgeLineEnd | null;
+
+    /** Unique identifier for this edge. */
+    id: string;
+
+    /** Whether the edge has been initialized. */
+    initialized: boolean;
+
+    /** Whether the edge is currently attached to the canvas DOM. */
+    isAttached?: unknown;
+
+    /** Text label displayed on the edge. */
+    label: string;
+
+    /** SVG group element containing the line end markers. */
+    lineEndGroupEl: SVGGElement;
+
+    /** SVG group element containing the edge line paths. */
+    lineGroupEl: SVGGElement;
+
+    /** SVG path elements for the edge (display and interaction). */
+    path: CanvasViewCanvasEdgePath;
+
+    /** Link information for the target endpoint of the edge. */
+    to: CanvasViewCanvasEdgeLink;
+
+    /** Line end marker at the target endpoint, or `null` if none. */
+    toLineEnd: CanvasViewCanvasEdgeLineEnd | null;
+
+    /** Additional data properties not covered by known fields. */
+    unknownData: Object;
+
     /**
      * Attach the edge to the canvas DOM.
      *
@@ -18,24 +66,12 @@ export interface CanvasViewCanvasEdge {
      */
     attach(): unknown;
 
-    /** Bounding box of the edge for spatial indexing. */
-    bbox: BBox;
-
-    /** Bezier curve data used for rendering the edge path. */
-    bezier: Bezier;
-
     /**
      * Remove focus from the edge.
      *
      * @returns The result of removing focus.
      */
     blur(): unknown;
-
-    /** Reference to the parent canvas instance. */
-    canvas: CanvasViewCanvas;
-
-    /** Color of the edge line (CSS color string or preset name). */
-    color: string;
 
     /**
      * Create a line end marker element for the specified end type.
@@ -79,12 +115,6 @@ export interface CanvasViewCanvasEdge {
      */
     focus(): unknown;
 
-    /** Link information for the source endpoint of the edge. */
-    from: CanvasViewCanvasEdgeLink;
-
-    /** Line end marker at the source endpoint, or `null` if none. */
-    fromLineEnd: CanvasViewCanvasEdgeLineEnd | null;
-
     /**
      * Get the bounding box of the edge.
      *
@@ -106,30 +136,12 @@ export interface CanvasViewCanvasEdge {
      */
     getData(): unknown;
 
-    /** Unique identifier for this edge. */
-    id: string;
-
     /**
      * Initialize the edge after construction.
      *
      * @returns The result of initializing the edge.
      */
     initialize(): unknown;
-
-    /** Whether the edge has been initialized. */
-    initialized: boolean;
-
-    /** Whether the edge is currently attached to the canvas DOM. */
-    isAttached?: unknown;
-
-    /** Text label displayed on the edge. */
-    label: string;
-
-    /** SVG group element containing the line end markers. */
-    lineEndGroupEl: SVGGElement;
-
-    /** SVG group element containing the edge line paths. */
-    lineGroupEl: SVGGElement;
 
     /**
      * Handle click events on the edge.
@@ -151,9 +163,6 @@ export interface CanvasViewCanvasEdge {
      * @returns The result of handling the context menu.
      */
     onContextMenu(arg1: unknown): unknown;
-
-    /** SVG path elements for the edge (display and interaction). */
-    path: CanvasViewCanvasEdgePath;
 
     /**
      * Render the edge to the canvas.
@@ -196,15 +205,6 @@ export interface CanvasViewCanvasEdge {
      * @returns The result of showing the menu.
      */
     showMenu(arg1: unknown, arg2: unknown): unknown;
-
-    /** Link information for the target endpoint of the edge. */
-    to: CanvasViewCanvasEdgeLink;
-
-    /** Line end marker at the target endpoint, or `null` if none. */
-    toLineEnd: CanvasViewCanvasEdgeLineEnd | null;
-
-    /** Additional data properties not covered by known fields. */
-    unknownData: Object;
 
     /**
      * Update the edge after its connected nodes have moved.

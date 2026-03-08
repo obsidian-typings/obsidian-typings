@@ -19,15 +19,24 @@ export interface CommandPalettePluginInstance extends InternalPluginInstance<Com
     /** Whether this plugin is enabled by default. */
     defaultOn: true;
 
+    /** The command palette fuzzy suggest modal. */
+    modal: CommandPaletteModal;
+
+    /** Configuration options for the command palette. */
+    options: CommandPaletteOptions;
+
+    /** Reference to the command palette plugin registration. */
+    plugin: CommandPalettePlugin;
+
+    /** List of recently used command IDs. */
+    recentCommands: string[];
+
     /**
      * Get the list of available commands for the palette.
      *
      * @returns The available commands.
      */
     getCommands(): Command[];
-
-    /** The command palette fuzzy suggest modal. */
-    modal: CommandPaletteModal;
 
     /**
      * Handle external settings file changes and reload configuration.
@@ -49,15 +58,6 @@ export interface CommandPalettePluginInstance extends InternalPluginInstance<Com
      * @returns Whether the callback was successfully executed.
      */
     openCallback(): boolean;
-
-    /** Configuration options for the command palette. */
-    options: CommandPaletteOptions;
-
-    /** Reference to the command palette plugin registration. */
-    plugin: CommandPalettePlugin;
-
-    /** List of recently used command IDs. */
-    recentCommands: string[];
 
     /**
      * Save the command palette settings.

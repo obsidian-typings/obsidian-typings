@@ -7,6 +7,21 @@ declare module 'obsidian' {
      */
     interface SearchComponent extends AbstractTextComponent<HTMLInputElement> {
         /**
+         * The HTML element for the clear button.
+         *
+         * @official
+         * @since 0.9.21
+         */
+        clearButtonEl: HTMLElement;
+
+        /**
+         * The containing element for the component's `clearButtonEl` and `inputEl`.
+         *
+         * @unofficial
+         */
+        containerEl: HTMLElement;
+
+        /**
          * Adds a decorator to the right side of the search component.
          *
          * @param decoratorFn - The function that creates the decorator element.
@@ -14,14 +29,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         addRightDecorator(decoratorFn: (containerEl: HTMLElement) => void): this;
-
-        /**
-         * The HTML element for the clear button.
-         *
-         * @official
-         * @since 0.9.21
-         */
-        clearButtonEl: HTMLElement;
 
         /**
          * Create a new search component.
@@ -32,13 +39,6 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
         constructor__(containerEl: HTMLElement): this;
-
-        /**
-         * The containing element for the component's `clearButtonEl` and `inputEl`.
-         *
-         * @unofficial
-         */
-        containerEl: HTMLElement;
 
         /**
          * Called when the search component's value changes.

@@ -14,19 +14,19 @@ declare module 'obsidian' {
         app: App;
 
         /**
+         * The hover popover of the markdown renderer.
+         *
+         * @official
+         */
+        hoverPopover: HoverPopover | null;
+
+        /**
          * The file of the markdown renderer.
          *
          * @official
          * @deprecated - Added only for typing purposes. Use {@link file} instead.
          */
         file__?(): TFile;
-
-        /**
-         * The hover popover of the markdown renderer.
-         *
-         * @official
-         */
-        hoverPopover: HoverPopover | null;
 
         /**
          * Handle a checkbox click event in the rendered markdown.

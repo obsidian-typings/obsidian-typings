@@ -22,6 +22,81 @@ declare module 'obsidian' {
         allowProperties?: boolean;
 
         /**
+         * Sets the default hotkey. It is recommended for plugins to avoid setting default hotkeys if possible,.
+         * to avoid conflicting hotkeys with one that's set by the user, even though customized hotkeys have higher priority.
+         *
+         * @example
+         * ```ts
+         * this.addCommand({
+         *   id: 'example-command',
+         *   name: 'Example command',
+         *   // WARNING: as per comment above, it's not recommended to set default hotkeys
+         *   // this example is just for syntax demonstration purposes, not the recommended way to do it
+         *   hotkeys: [{
+         *     modifiers: ['Mod', 'Shift'],
+         *     key: 'l',
+         *   }],
+         * });
+         * ```
+         * @official
+         */
+        hotkeys?: Hotkey[];
+
+        /**
+         * Icon ID to be used in the toolbar.
+         *
+         * See {@link https://docs.obsidian.md/Plugins/User+interface/Icons} for available icons and how to add your own.
+         *
+         * @example
+         * ```ts
+         * const command: Command = {
+         *   id: 'example-command',
+         *   name: 'Example command',
+         *   icon: 'dice',
+         * };
+         * ```
+         * @official
+         */
+        icon?: IconName;
+
+        /**
+         * Globally unique ID to identify this command.
+         *
+         * @official
+         */
+        id: string;
+
+        /**
+         * Whether the command is only available on mobile.
+         *
+         * @official
+         */
+        mobileOnly?: boolean;
+
+        /**
+         * Human friendly name for searching.
+         *
+         * @official
+         */
+        name: string;
+
+        /**
+         * Whether holding the hotkey should repeatedly trigger this command.
+         *
+         * @defaultValue false.
+         * @official
+         */
+        repeatable?: boolean;
+
+        /**
+         * Whether the non-editor command button can be shown on the mobile toolbar.
+         *
+         * @remarks `Non-editor command` is the command without {@link editorCallback}/{@link editorCheckCallback}.
+         * @unofficial
+         */
+        showOnMobileToolbar?: boolean;
+
+        /**
          * Simple callback, triggered globally.
          *
          * @example
@@ -125,80 +200,5 @@ declare module 'obsidian' {
             editor: Editor,
             ctx: MarkdownView | MarkdownFileInfo
         ) => boolean | void;
-
-        /**
-         * Sets the default hotkey. It is recommended for plugins to avoid setting default hotkeys if possible,.
-         * to avoid conflicting hotkeys with one that's set by the user, even though customized hotkeys have higher priority.
-         *
-         * @example
-         * ```ts
-         * this.addCommand({
-         *   id: 'example-command',
-         *   name: 'Example command',
-         *   // WARNING: as per comment above, it's not recommended to set default hotkeys
-         *   // this example is just for syntax demonstration purposes, not the recommended way to do it
-         *   hotkeys: [{
-         *     modifiers: ['Mod', 'Shift'],
-         *     key: 'l',
-         *   }],
-         * });
-         * ```
-         * @official
-         */
-        hotkeys?: Hotkey[];
-
-        /**
-         * Icon ID to be used in the toolbar.
-         *
-         * See {@link https://docs.obsidian.md/Plugins/User+interface/Icons} for available icons and how to add your own.
-         *
-         * @example
-         * ```ts
-         * const command: Command = {
-         *   id: 'example-command',
-         *   name: 'Example command',
-         *   icon: 'dice',
-         * };
-         * ```
-         * @official
-         */
-        icon?: IconName;
-
-        /**
-         * Globally unique ID to identify this command.
-         *
-         * @official
-         */
-        id: string;
-
-        /**
-         * Whether the command is only available on mobile.
-         *
-         * @official
-         */
-        mobileOnly?: boolean;
-
-        /**
-         * Human friendly name for searching.
-         *
-         * @official
-         */
-        name: string;
-
-        /**
-         * Whether holding the hotkey should repeatedly trigger this command.
-         *
-         * @defaultValue false.
-         * @official
-         */
-        repeatable?: boolean;
-
-        /**
-         * Whether the non-editor command button can be shown on the mobile toolbar.
-         *
-         * @remarks `Non-editor command` is the command without {@link editorCallback}/{@link editorCheckCallback}.
-         * @unofficial
-         */
-        showOnMobileToolbar?: boolean;
     }
 }

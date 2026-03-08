@@ -12,6 +12,21 @@ import type { GetRecentFilesOptions } from './GetRecentFilesOptions.d.ts';
  */
 export interface RecentFileTracker {
     /**
+     * List of last opened file paths, limited to 50.
+     */
+    lastOpenFiles: string[];
+
+    /**
+     * Reference to Vault.
+     */
+    vault: Vault;
+
+    /**
+     * Reference to Workspace.
+     */
+    workspace: Workspace;
+
+    /**
      * Add a file to the recent files list.
      *
      * @param file - File to add.
@@ -32,11 +47,6 @@ export interface RecentFileTracker {
      * @returns Array of file paths.
      */
     getRecentFiles(options?: GetRecentFilesOptions): string[];
-
-    /**
-     * List of last opened file paths, limited to 50.
-     */
-    lastOpenFiles: string[];
 
     /**
      * Set the last opened files.
@@ -74,14 +84,4 @@ export interface RecentFileTracker {
      * @returns Array of file paths.
      */
     serialize(): string[];
-
-    /**
-     * Reference to Vault.
-     */
-    vault: Vault;
-
-    /**
-     * Reference to Workspace.
-     */
-    workspace: Workspace;
 }

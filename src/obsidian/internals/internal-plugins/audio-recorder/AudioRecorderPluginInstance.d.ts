@@ -11,15 +11,24 @@ export interface AudioRecorderPluginInstance extends InternalPluginInstance<Audi
     /** Reference to the app. */
     app: App;
 
+    /** File extension used for saved audio recordings. */
+    extension: string;
+
+    /** Reference to the audio recorder plugin registration. */
+    plugin: AudioRecorderPlugin;
+
+    /** Active MediaRecorder instance, or `null` when not recording. */
+    recorder: MediaRecorder | null;
+
+    /** Whether audio is currently being recorded. */
+    recording: boolean;
+
     /**
      * Check if the user has granted microphone permission.
      *
      * @returns Whether microphone permission is granted.
      */
     checkPermission(): Promise<boolean>;
-
-    /** File extension used for saved audio recordings. */
-    extension: string;
 
     /**
      * Initiate the audio recording flow.
@@ -37,15 +46,6 @@ export interface AudioRecorderPluginInstance extends InternalPluginInstance<Audi
 
     /** Stop the current audio recording session. */
     onStopRecording(): void;
-
-    /** Reference to the audio recorder plugin registration. */
-    plugin: AudioRecorderPlugin;
-
-    /** Active MediaRecorder instance, or `null` when not recording. */
-    recorder: MediaRecorder | null;
-
-    /** Whether audio is currently being recorded. */
-    recording: boolean;
 
     /**
      * Save the recorded audio buffer to a file in the vault.

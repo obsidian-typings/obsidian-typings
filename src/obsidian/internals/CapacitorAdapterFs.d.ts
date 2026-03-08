@@ -7,6 +7,12 @@ import type { WatchAndStatAllResult } from './WatchAndStatAllResult.d.ts';
  * @unofficial
  */
 export interface CapacitorAdapterFs {
+    /** Base directory path for the file system, or `null` if not initialized. */
+    dir: string | null;
+
+    /** Base URI for the file system. */
+    uri: string;
+
     /**
      * Append text data to a file.
      *
@@ -32,9 +38,6 @@ export interface CapacitorAdapterFs {
      * @returns A promise that resolves when the file is deleted.
      */
     delete(realPath: string): Promise<void>;
-
-    /** Base directory path for the file system, or `null` if not initialized. */
-    dir: string | null;
 
     /**
      * Check whether a file exists at the given path.
@@ -149,9 +152,6 @@ export interface CapacitorAdapterFs {
      * @returns A promise that resolves when the file is trashed.
      */
     trash(realPath: string): Promise<void>;
-
-    /** Base URI for the file system. */
-    uri: string;
 
     /**
      * Verify and download an iCloud file if it is not yet available locally.

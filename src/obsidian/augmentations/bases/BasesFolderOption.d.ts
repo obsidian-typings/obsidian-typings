@@ -16,16 +16,6 @@ declare module 'obsidian' {
         default?: string;
 
         /**
-         * Filter the folders to be displayed in the folder picker.
-         *
-         * @param folder - The folder to filter.
-         * @returns `true` if the folder should be displayed, `false` otherwise.
-         * @official
-         * @since 1.10.2
-         */
-        filter?: (folder: TFolder) => boolean;
-
-        /**
          * The placeholder of the option.
          *
          * @official
@@ -40,5 +30,15 @@ declare module 'obsidian' {
          * @since 1.10.2
          */
         type: 'folder';
+
+        /**
+         * Filter the folders to be displayed in the folder picker.
+         *
+         * @param folder - The folder to filter.
+         * @returns `true` if the folder should be displayed, `false` otherwise.
+         * @official
+         * @since 1.10.2
+         */
+        filter?: (folder: TFolder) => boolean;
     }
 }

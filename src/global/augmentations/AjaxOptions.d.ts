@@ -12,12 +12,6 @@ declare global {
         data?: object | string | ArrayBuffer;
 
         /**
-         * The error callback of the AJAX request.
-         * @official
-         */
-        error?: (error: any, req: XMLHttpRequest) => any;
-
-        /**
          * The headers of the AJAX request.
          * @official
          */
@@ -36,12 +30,6 @@ declare global {
         req?: XMLHttpRequest;
 
         /**
-         * The success callback of the AJAX request.
-         * @official
-         */
-        success?: (response: any, req: XMLHttpRequest) => any;
-
-        /**
          * The URL of the AJAX request.
          * @official
          */
@@ -52,5 +40,17 @@ declare global {
          * @official
          */
         withCredentials?: boolean;
+
+        /**
+         * The error callback of the AJAX request.
+         * @official
+         */
+        error?: (error: any, req: XMLHttpRequest) => any;
+
+        /**
+         * The success callback of the AJAX request.
+         * @official
+         */
+        success?: (response: any, req: XMLHttpRequest) => any;
     }
 }

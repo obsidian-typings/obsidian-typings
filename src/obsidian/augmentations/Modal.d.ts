@@ -8,22 +8,6 @@ declare module 'obsidian' {
      */
     interface Modal extends CloseableComponent {
         /**
-         * Performed when animation is complete
-         *
-         * @returns A promise that resolves when the close animation finishes.
-         * @unofficial
-         */
-        animateClose(): Promise<void>;
-
-        /**
-         * Performed when animation is started
-         *
-         * @returns A promise that resolves when the open animation finishes.
-         * @unofficial
-         */
-        animateOpen(): Promise<void>;
-
-        /**
          * The Obsidian app instance.
          *
          * @official
@@ -43,23 +27,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         bgOpacity: string;
-
-        /**
-         * Close the modal.
-         *
-         * @official
-         */
-        close(): void;
-
-        /**
-         * Create a new modal.
-         *
-         * @param app - The Obsidian app instance.
-         * @returns The modal instance.
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
-         */
-        constructor__(app: App): this;
 
         /**
          * The container HTML element for the modal.
@@ -94,6 +61,82 @@ declare module 'obsidian' {
          * @official
          */
         modalEl: HTMLElement;
+
+        /**
+         * The scope for the keymaps.
+         *
+         * @official
+         */
+        scope: Scope;
+
+        /**
+         * Selection logic handler
+         *
+         * @unofficial
+         */
+        selection: WindowSelection | null;
+
+        /**
+         * Whether the modal should animate
+         *
+         * @unofficial
+         */
+        shouldAnimate: boolean;
+
+        /**
+         * Whether the modal should restore the selection when it is opened or closed.
+         *
+         * @official
+         * @since 0.9.16
+         */
+        shouldRestoreSelection: boolean;
+
+        /**
+         * The HTML element that represents the title of the modal.
+         *
+         * @official
+         */
+        titleEl: HTMLElement;
+
+        /**
+         * Reference to the global Window object.
+         *
+         * @unofficial
+         */
+        win: Window | null;
+
+        /**
+         * Performed when animation is complete
+         *
+         * @returns A promise that resolves when the close animation finishes.
+         * @unofficial
+         */
+        animateClose(): Promise<void>;
+
+        /**
+         * Performed when animation is started
+         *
+         * @returns A promise that resolves when the open animation finishes.
+         * @unofficial
+         */
+        animateOpen(): Promise<void>;
+
+        /**
+         * Close the modal.
+         *
+         * @official
+         */
+        close(): void;
+
+        /**
+         * Create a new modal.
+         *
+         * @param app - The Obsidian app instance.
+         * @returns The modal instance.
+         * @official
+         * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
+         */
+        constructor__(app: App): this;
 
         /**
          * Called when the modal is closed.
@@ -145,20 +188,6 @@ declare module 'obsidian' {
          * @official
          */
         open(): void;
-
-        /**
-         * The scope for the keymaps.
-         *
-         * @official
-         */
-        scope: Scope;
-
-        /**
-         * Selection logic handler
-         *
-         * @unofficial
-         */
-        selection: WindowSelection | null;
 
         /**
          * Set the background opacity of the dimmed background.
@@ -223,34 +252,5 @@ declare module 'obsidian' {
          * @official
          */
         setTitle(title: string): this;
-
-        /**
-         * Whether the modal should animate
-         *
-         * @unofficial
-         */
-        shouldAnimate: boolean;
-
-        /**
-         * Whether the modal should restore the selection when it is opened or closed.
-         *
-         * @official
-         * @since 0.9.16
-         */
-        shouldRestoreSelection: boolean;
-
-        /**
-         * The HTML element that represents the title of the modal.
-         *
-         * @official
-         */
-        titleEl: HTMLElement;
-
-        /**
-         * Reference to the global Window object.
-         *
-         * @unofficial
-         */
-        win: Window | null;
     }
 }

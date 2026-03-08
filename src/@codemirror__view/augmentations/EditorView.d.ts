@@ -18,15 +18,15 @@ declare module '@codemirror/view' {
         cm?: VimEditor;
 
         /**
-         * Request a layout measurement pass on the editor.
-         * @unofficial
-         */
-        measure(): void;
-
-        /**
          * Internal view state tracking properties like printing mode.
          * @unofficial
          */
         viewState: EditorViewState;
+
+        /**
+         * Request a layout measurement pass on the editor.
+         * @unofficial
+         */
+        measure(): void;
     }
 }

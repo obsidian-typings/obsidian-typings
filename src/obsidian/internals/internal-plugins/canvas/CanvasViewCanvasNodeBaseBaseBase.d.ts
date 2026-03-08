@@ -4,6 +4,15 @@
  * @unofficial
  */
 export interface CanvasViewCanvasNodeBaseBaseBase {
+    /** Whether the node is currently attached to the canvas DOM. */
+    isAttached?: unknown;
+
+    /** Whether the node currently has focus. */
+    isFocused?: unknown;
+
+    /** Bounding rectangle of the node. */
+    rect: CanvasRect;
+
     /**
      * Attach the node to the canvas DOM.
      *
@@ -74,18 +83,12 @@ export interface CanvasViewCanvasNodeBaseBaseBase {
      */
     initialize(): unknown;
 
-    /** Whether the node is currently attached to the canvas DOM. */
-    isAttached?: unknown;
-
     /**
      * Check whether this node supports editing.
      *
      * @returns Whether the node is editable.
      */
     isEditable(): unknown;
-
-    /** Whether the node currently has focus. */
-    isFocused?: unknown;
 
     /**
      * Move and resize the node to the specified bounds.
@@ -149,9 +152,6 @@ export interface CanvasViewCanvasNodeBaseBaseBase {
      * @returns The result of pre-detach cleanup.
      */
     preDetach(): unknown;
-
-    /** Bounding rectangle of the node. */
-    rect: CanvasRect;
 
     /**
      * Render the node to the canvas.

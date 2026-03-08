@@ -12,6 +12,18 @@ declare global {
         doc: Document;
 
         /**
+         * The target node of the event.
+         * @official
+         */
+        targetNode: Node | null;
+
+        /**
+         * The window of the event.
+         * @official
+         */
+        win: Window;
+
+        /**
          * Cross-window capable instanceof check, a drop-in replacement.
          * for instanceof checks on UIEvents.
          *
@@ -30,17 +42,5 @@ declare global {
         instanceOf<T>(type: {
             new(...data: any[]): T;
         }): this is T;
-
-        /**
-         * The target node of the event.
-         * @official
-         */
-        targetNode: Node | null;
-
-        /**
-         * The window of the event.
-         * @official
-         */
-        win: Window;
     }
 }

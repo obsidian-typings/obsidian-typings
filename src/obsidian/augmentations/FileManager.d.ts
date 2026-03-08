@@ -20,6 +20,31 @@ declare module 'obsidian' {
         app: App;
 
         /**
+         * Mapping of file extensions to functions that determine the parent folder for new files.
+         * @unofficial
+         */
+        fileParentCreatorByType: Record<string, (path: string) => TFolder>;
+
+        /**
+         * Currently in-progress link update operations, or `null` if none.
+         * @unofficial
+         */
+        inProgressUpdates: null | LinkUpdatesHandler[];
+
+        /**
+         * Queue for processing link update operations sequentially.
+         * @unofficial
+         */
+        updateQueue: PromisedQueue;
+
+        /**
+         * Reference to Vault.
+         *
+         * @unofficial
+         */
+        vault: Vault;
+
+        /**
          * Check whether a file with the given extension can be created.
          *
          * @param extension - The file extension to check.
@@ -90,12 +115,6 @@ declare module 'obsidian' {
         downloadAttachmentsForNote(file: TFile): Promise<void>;
 
         /**
-         * Mapping of file extensions to functions that determine the parent folder for new files.
-         * @unofficial
-         */
-        fileParentCreatorByType: Record<string, (path: string) => TFolder>;
-
-        /**
          * Generate a Markdown link based on the user's preferences.
          *
          * @param file - the file to link to.
@@ -164,12 +183,6 @@ declare module 'obsidian' {
          * @since 1.1.13
          */
         getNewFileParent(sourcePath: string, newFilePath?: string): TFolder;
-
-        /**
-         * Currently in-progress link update operations, or `null` if none.
-         * @unofficial
-         */
-        inProgressUpdates: null | LinkUpdatesHandler[];
 
         /**
          * Insert text into a file.
@@ -373,18 +386,5 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateInternalLinks(data: Map<string, LinkChangeUpdate>): Promise<void>;
-
-        /**
-         * Queue for processing link update operations sequentially.
-         * @unofficial
-         */
-        updateQueue: PromisedQueue;
-
-        /**
-         * Reference to Vault.
-         *
-         * @unofficial
-         */
-        vault: Vault;
     }
 }

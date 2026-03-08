@@ -6,6 +6,9 @@
  * @unofficial
  */
 export interface CustomArrayDict<T> {
+    /** Internal map storing key-to-array mappings. */
+    data: Map<string, T[]>;
+
     /**
      * Add a value to the array associated with the given key.
      *
@@ -39,9 +42,6 @@ export interface CustomArrayDict<T> {
      * @returns Total value count.
      */
     count(): number;
-
-    /** Internal map storing key-to-array mappings. */
-    data: Map<string, T[]>;
 
     /**
      * Get the array of values for the given key, or `null` if not found.

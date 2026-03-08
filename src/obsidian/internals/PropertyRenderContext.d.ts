@@ -13,14 +13,19 @@ export interface PropertyRenderContext {
     app: App;
 
     /**
-     * Callback called on property field unfocus.
-     */
-    blur(): void;
-
-    /**
      * Key of the property field.
      */
     key: string;
+
+    /**
+     * Determine the source path of current context.
+     */
+    sourcePath: string;
+
+    /**
+     * Callback called on property field unfocus.
+     */
+    blur(): void;
 
     /**
      * Callback called on property value change.
@@ -28,9 +33,4 @@ export interface PropertyRenderContext {
      * @param value - The new property value.
      */
     onChange(value: unknown): void;
-
-    /**
-     * Determine the source path of current context.
-     */
-    sourcePath: string;
 }

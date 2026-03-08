@@ -12,6 +12,9 @@ export interface TreeNodeVChildren<Item extends TreeNode, Owner extends TreeNode
     /** Internal array of child items. */
     _children: Item[];
 
+    /** The tree node that owns these children. */
+    owner: Owner;
+
     /**
      * Add a child item to this node.
      *
@@ -49,9 +52,6 @@ export interface TreeNodeVChildren<Item extends TreeNode, Owner extends TreeNode
      * @returns The last child item, or `undefined`.
      */
     last(): Item | undefined;
-
-    /** The tree node that owns these children. */
-    owner: Owner;
 
     /**
      * Remove a specific child item from this node.

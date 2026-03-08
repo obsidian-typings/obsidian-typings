@@ -7,6 +7,14 @@ declare module 'obsidian' {
      */
     interface ExtraButtonComponent extends BaseComponent {
         /**
+         * The HTML element representation of the extra button.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        extraSettingsEl: HTMLElement;
+
+        /**
          * The function that's called after clicking the button.
          *
          * @remark Using `ExtraButtonComponent.onClick(callback)` assigns the callback to this method.
@@ -23,14 +31,6 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
         constructor__(containerEl: HTMLElement): this;
-
-        /**
-         * The HTML element representation of the extra button.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        extraSettingsEl: HTMLElement;
 
         /**
          * Set the click callback of the extra button.

@@ -7,6 +7,27 @@
  * @unofficial
  */
 export interface SuggestModalChooser<T, TModal> {
+    /** Reference to the owning modal. */
+    chooser: TModal;
+
+    /** Container element for the suggestion list. */
+    containerEl: HTMLDivElement;
+
+    /** Number of suggestions visible at once. */
+    numVisibleItems: number;
+
+    /** Height of each suggestion row in pixels. */
+    rowHeight: number;
+
+    /** Index of the currently selected suggestion. */
+    selectedItem: number;
+
+    /** DOM elements for each suggestion row. */
+    suggestions: HTMLDivElement[];
+
+    /** Current suggestion values, or `null` if none. */
+    values: T[] | null;
+
     /**
      * Display a message in the suggestion list.
      *
@@ -20,12 +41,6 @@ export interface SuggestModalChooser<T, TModal> {
      * @param value - Suggestion value to add.
      */
     addSuggestion(value: T): void;
-
-    /** Reference to the owning modal. */
-    chooser: TModal;
-
-    /** Container element for the suggestion list. */
-    containerEl: HTMLDivElement;
 
     /**
      * Set the selected item by index, forcing scroll into view.
@@ -50,9 +65,6 @@ export interface SuggestModalChooser<T, TModal> {
      * @returns False if already at the start, void otherwise.
      */
     moveUp(evt: KeyboardEvent): false | void;
-
-    /** Number of suggestions visible at once. */
-    numVisibleItems: number;
 
     /**
      * Handle click on a suggestion element.
@@ -86,12 +98,6 @@ export interface SuggestModalChooser<T, TModal> {
      */
     pageUp(evt: KeyboardEvent): false | void;
 
-    /** Height of each suggestion row in pixels. */
-    rowHeight: number;
-
-    /** Index of the currently selected suggestion. */
-    selectedItem: number;
-
     /**
      * Set the selected item by index.
      *
@@ -107,16 +113,10 @@ export interface SuggestModalChooser<T, TModal> {
      */
     setSuggestions(values: T[] | null): void;
 
-    /** DOM elements for each suggestion row. */
-    suggestions: HTMLDivElement[];
-
     /**
      * Accept the currently selected suggestion.
      *
      * @param evt - The triggering event.
      */
     useSelectedItem(evt: MouseEvent | KeyboardEvent): void;
-
-    /** Current suggestion values, or `null` if none. */
-    values: T[] | null;
 }

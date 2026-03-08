@@ -20,6 +20,34 @@ declare module 'obsidian' {
         app: App;
 
         /**
+         * The hover popover.
+         *
+         * @official
+         */
+        hoverPopover: HoverPopover;
+
+        /**
+         * Frontmatter editor extension for the editor.
+         *
+         * @unofficial
+         */
+        propertiesExtension: Extension[];
+
+        /**
+         * Editing mode of the editor.
+         *
+         * @unofficial
+         */
+        type: 'source';
+
+        /**
+         * View the source view editor is attached to.
+         *
+         * @unofficial
+         */
+        view: MarkdownView;
+
+        /**
          * Apply the scroll position to the edit view.
          *
          * @param scroll - The scroll position to apply.
@@ -146,13 +174,6 @@ declare module 'obsidian' {
         ): void;
 
         /**
-         * The hover popover.
-         *
-         * @official
-         */
-        hoverPopover: HoverPopover;
-
-        /**
          * Execute functionality on CM editor state update.
          *
          * @param update - The CodeMirror view update.
@@ -160,13 +181,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         onUpdate(update: ViewUpdate, changed: boolean): void;
-
-        /**
-         * Frontmatter editor extension for the editor.
-         *
-         * @unofficial
-         */
-        propertiesExtension: Extension[];
 
         /**
          * Debounced onInternalDataChange of view.
@@ -228,13 +242,6 @@ declare module 'obsidian' {
         show(): void;
 
         /**
-         * Editing mode of the editor.
-         *
-         * @unofficial
-         */
-        type: 'source';
-
-        /**
          * Update the bottom padding of the CodeMirror contentdom (based on backlinksEl).
          *
          * @param height - The padding height in pixels.
@@ -248,12 +255,5 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateOptions(): void;
-
-        /**
-         * View the source view editor is attached to.
-         *
-         * @unofficial
-         */
-        view: MarkdownView;
     }
 }

@@ -10,6 +10,9 @@ import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
  * @unofficial
  */
 export interface PdfView extends EditableFileView {
+    /** The PDF viewer component used to render the document. */
+    viewer: unknown;
+
     /**
      * Get the current view type.
      *
@@ -28,7 +31,4 @@ export interface PdfView extends EditableFileView {
      * Shows the search.
      */
     showSearch(): void;
-
-    /** The PDF viewer component used to render the document. */
-    viewer: unknown;
 }

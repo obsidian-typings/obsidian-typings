@@ -10,6 +10,9 @@ export interface CheckboxPropertyWidgetComponent extends PropertyWidgetComponent
     /** The checkbox element for the property widget. */
     checkboxEl: HTMLInputElement;
 
+    /** The type of the property widget. */
+    type: 'checkbox';
+
     /**
      * Handle focus event.
      *
@@ -23,7 +26,4 @@ export interface CheckboxPropertyWidgetComponent extends PropertyWidgetComponent
      * @param value - The value to set.
      */
     setValue(value: unknown): void;
-
-    /** The type of the property widget. */
-    type: 'checkbox';
 }

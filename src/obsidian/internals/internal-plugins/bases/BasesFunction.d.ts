@@ -14,14 +14,6 @@ export interface BasesFunction {
     app: App;
 
     /**
-     * Applies the function.
-     *
-     * @param args - The arguments to apply.
-     * @returns The result of applying the function.
-     */
-    apply(...args: unknown[]): unknown;
-
-    /**
      * The arguments.
      */
     args: BasesFunctionArg[];
@@ -40,6 +32,14 @@ export interface BasesFunction {
      * The return type of the function.
      */
     returnType: string;
+
+    /**
+     * Applies the function.
+     *
+     * @param args - The arguments to apply.
+     * @returns The result of applying the function.
+     */
+    apply(...args: unknown[]): unknown;
 
     /**
      * Serializes the function.

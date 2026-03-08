@@ -24,6 +24,13 @@ declare module 'obsidian' {
         key: string;
 
         /**
+         * Type
+         * @official
+         * @since 1.10.0
+         */
+        type: string;
+
+        /**
          * If provided, the option will be hidden if the function returns `true`.
          *
          * @param config - Read-only copy of the current view configuration.
@@ -32,12 +39,5 @@ declare module 'obsidian' {
          * @since 1.10.2
          */
         shouldHide?: () => boolean;
-
-        /**
-         * Type
-         * @official
-         * @since 1.10.0
-         */
-        type: string;
     }
 }

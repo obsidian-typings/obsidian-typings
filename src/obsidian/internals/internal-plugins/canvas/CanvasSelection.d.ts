@@ -13,6 +13,12 @@ export interface CanvasSelection {
     /** Reference to the parent canvas instance. */
     canvas: CanvasViewCanvas;
 
+    /** Array of resize handle elements around the selection. */
+    resizerEls: HTMLDivElement[];
+
+    /** Element displaying the selection highlight rectangle. */
+    selectionEl: HTMLDivElement;
+
     /**
      * Hide the selection rectangle and handles.
      *
@@ -26,12 +32,6 @@ export interface CanvasSelection {
      * @returns The result of handling the resize pointer down.
      */
     onResizePointerdown(arg1: unknown, arg2: unknown): unknown;
-
-    /** Array of resize handle elements around the selection. */
-    resizerEls: HTMLDivElement[];
-
-    /** Element displaying the selection highlight rectangle. */
-    selectionEl: HTMLDivElement;
 
     /**
      * Update the selection rectangle to match the current selected items.

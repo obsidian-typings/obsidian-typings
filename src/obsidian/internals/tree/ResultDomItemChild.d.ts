@@ -19,6 +19,33 @@ export interface ResultDomItemChild extends TreeNode {
     /** End offset of the match context within the document. */
     end: number;
 
+    /** Layout information used by virtual scrolling. */
+    info: TreeNodeInfo;
+
+    /** Array of match positions within the content. */
+    matches: ContentPosition[];
+
+    /** Callback to mutate the editor state when navigating to this match. */
+    mutateEState: unknown;
+
+    /** Callback for custom rendering of match highlights. */
+    onMatchRender: unknown;
+
+    /** Parent result item containing this match child. */
+    parent: ResultDomItem;
+
+    /** Reference to the parent result item. */
+    parentDom: ResultDomItem;
+
+    /** Element for the "show more context after" button. */
+    showMoreAfterEl: HTMLElement;
+
+    /** Element for the "show more context before" button. */
+    showMoreBeforeEl: HTMLElement;
+
+    /** Start offset of the match context within the document. */
+    start: number;
+
     /**
      * Get the position of the next match.
      *
@@ -32,15 +59,6 @@ export interface ResultDomItemChild extends TreeNode {
      * @returns The previous match position.
      */
     getPrevPos(arg1: unknown): number;
-
-    /** Layout information used by virtual scrolling. */
-    info: TreeNodeInfo;
-
-    /** Array of match positions within the content. */
-    matches: ContentPosition[];
-
-    /** Callback to mutate the editor state when navigating to this match. */
-    mutateEState: unknown;
 
     /**
      * Handle focus entering this match item.
@@ -56,21 +74,12 @@ export interface ResultDomItemChild extends TreeNode {
      */
     onFocusExit(event?: UIEvent): void;
 
-    /** Callback for custom rendering of match highlights. */
-    onMatchRender: unknown;
-
     /**
      * Handle click on this match to navigate to it.
      *
      * @param event - The UI event that triggered the click.
      */
     onResultClick(event: UIEvent): void;
-
-    /** Parent result item containing this match child. */
-    parent: ResultDomItem;
-
-    /** Reference to the parent result item. */
-    parentDom: ResultDomItem;
 
     /**
      * Render this match with optional surrounding text indicators.
@@ -83,17 +92,8 @@ export interface ResultDomItemChild extends TreeNode {
     /** Expand the context to show more text after the match. */
     showMoreAfter(): void;
 
-    /** Element for the "show more context after" button. */
-    showMoreAfterEl: HTMLElement;
-
     /** Expand the context to show more text before the match. */
     showMoreBefore(): void;
-
-    /** Element for the "show more context before" button. */
-    showMoreBeforeEl: HTMLElement;
-
-    /** Start offset of the match context within the document. */
-    start: number;
 
     /** Toggle visibility of the "show more context" buttons. */
     toggleShowMoreContextButtons(): void;

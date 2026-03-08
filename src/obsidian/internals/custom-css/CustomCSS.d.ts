@@ -22,6 +22,61 @@ export interface CustomCSS extends Component {
     app: App;
 
     /**
+     * Cache of CSS snippet filepath (relative to vault root) to CSS snippet contents.
+     */
+    csscache: Map<string, string>;
+
+    /**
+     * Set of enabled snippet, given by filenames.
+     */
+    enabledSnippets: Set<string>;
+
+    /**
+     * Contains references to Style elements containing custom CSS snippets.
+     */
+    extraStyleEls: HTMLStyleElement[];
+
+    /**
+     * List of theme names not fully updated to post v1.0.0 theme guidelines.
+     */
+    oldThemes: string[];
+
+    /** Queue for sequential CSS processing operations. */
+    queue: PromisedQueue;
+
+    /** Debounced function to reload CSS snippets. */
+    requestLoadSnippets: Debouncer<[], void>;
+
+    /** Debounced function to reload the active theme. */
+    requestLoadTheme: Debouncer<[], void>;
+
+    /** Debounced function to re-read available themes from disk. */
+    requestReadThemes: Debouncer<[], void>;
+
+    /**
+     * List of snippets detected by Obsidian, given by their filenames.
+     */
+    snippets: string[];
+
+    /** Main style element for the active theme. */
+    styleEl: HTMLStyleElement;
+
+    /**
+     * Currently active theme, given by its name.
+     *
+     * @remark is the default Obsidian theme.
+     */
+    theme: '' | string;
+
+    /**
+     * Mapping of theme names to their manifest.
+     */
+    themes: CustomCSSThemesRecord;
+
+    /** Record of available theme updates. */
+    updates: CustomCSSUpdatesRecord;
+
+    /**
      * Bound callback for handling raw file change events for a theme.
      *
      * @param themeName - Name of the theme.
@@ -41,11 +96,6 @@ export interface CustomCSS extends Component {
     checkForUpdates(): void;
 
     /**
-     * Cache of CSS snippet filepath (relative to vault root) to CSS snippet contents.
-     */
-    csscache: Map<string, string>;
-
-    /**
      * Disable translucency of application background.
      */
     disableTranslucency(): void;
@@ -59,19 +109,9 @@ export interface CustomCSS extends Component {
     downloadLegacyTheme(options: DownloadLegacyThemeOptions): Promise<string>;
 
     /**
-     * Set of enabled snippet, given by filenames.
-     */
-    enabledSnippets: Set<string>;
-
-    /**
      * Enable translucency of application background.
      */
     enableTranslucency(): void;
-
-    /**
-     * Contains references to Style elements containing custom CSS snippets.
-     */
-    extraStyleEls: HTMLStyleElement[];
 
     /**
      * Fetch a theme's manifest using repository URL.
@@ -177,11 +217,6 @@ export interface CustomCSS extends Component {
      */
     loadTheme(arg1: unknown): unknown;
 
-    /**
-     * List of theme names not fully updated to post v1.0.0 theme guidelines.
-     */
-    oldThemes: string[];
-
     /** Lifecycle hook called when the component is loaded. */
     onload(): void;
 
@@ -191,9 +226,6 @@ export interface CustomCSS extends Component {
      * @param themeName - Name of the theme that changed.
      */
     onRaw(themeName: string): void;
-
-    /** Queue for sequential CSS processing operations. */
-    queue: PromisedQueue;
 
     /**
      * Read available CSS snippets from the snippets folder.
@@ -220,15 +252,6 @@ export interface CustomCSS extends Component {
      */
     removeTheme(themeName: string): Promise<void>;
 
-    /** Debounced function to reload CSS snippets. */
-    requestLoadSnippets: Debouncer<[], void>;
-
-    /** Debounced function to reload the active theme. */
-    requestLoadTheme: Debouncer<[], void>;
-
-    /** Debounced function to re-read available themes from disk. */
-    requestReadThemes: Debouncer<[], void>;
-
     /**
      * Set the activation status of a snippet by snippet name.
      *
@@ -250,27 +273,4 @@ export interface CustomCSS extends Component {
      * @param translucency - Whether translucency should be enabled.
      */
     setTranslucency(translucency: boolean): void;
-
-    /**
-     * List of snippets detected by Obsidian, given by their filenames.
-     */
-    snippets: string[];
-
-    /** Main style element for the active theme. */
-    styleEl: HTMLStyleElement;
-
-    /**
-     * Currently active theme, given by its name.
-     *
-     * @remark is the default Obsidian theme.
-     */
-    theme: '' | string;
-
-    /**
-     * Mapping of theme names to their manifest.
-     */
-    themes: CustomCSSThemesRecord;
-
-    /** Record of available theme updates. */
-    updates: CustomCSSUpdatesRecord;
 }

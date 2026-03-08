@@ -9,6 +9,14 @@ declare module 'obsidian' {
      */
     interface AbstractTextComponent<T extends HTMLInputElement | HTMLTextAreaElement> extends ValueComponent<string> {
         /**
+         * The input element.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        inputEl: T;
+
+        /**
          * The function that's called after changing the value of the component.
          *
          * @remark Using `AbstractTextComponent.onChange(callback)` assigns the callback to this method.
@@ -34,14 +42,6 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         getValue(): string;
-
-        /**
-         * The input element.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        inputEl: T;
 
         /**
          * Sets the callback to handle when the value of the input element changes.

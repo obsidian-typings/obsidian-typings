@@ -10,6 +10,49 @@ declare module 'obsidian' {
      */
     interface TextFileView extends EditableFileView {
         /**
+         * In-memory data.
+         *
+         * @official
+         * @since 0.10.12
+         */
+        data: string;
+
+        /**
+         * Whether current file is dirty (different from saved contents).
+         *
+         * @unofficial
+         */
+        dirty: boolean;
+
+        /**
+         * Whether editor should be rendered as plaintext.
+         *
+         * @unofficial
+         */
+        isPlaintext: boolean;
+
+        /**
+         * The data that was last saved.
+         *
+         * @unofficial
+         */
+        lastSavedData: null | string;
+
+        /**
+         * Whether on saving, the file should be saved again (for dirtiness checks).
+         *
+         * @unofficial
+         */
+        saveAgain: boolean;
+
+        /**
+         * Whether the file is currently saving.
+         *
+         * @unofficial
+         */
+        saving: boolean;
+
+        /**
          * Clear the editor. This is usually called when we're about to open a completely.
          * different file, so it's best to clear any editor states like undo-redo history,
          * and any caches/indexes associated with the previous file contents.
@@ -29,21 +72,6 @@ declare module 'obsidian' {
         constructor__(leaf: WorkspaceLeaf): this;
 
         /**
-         * In-memory data.
-         *
-         * @official
-         * @since 0.10.12
-         */
-        data: string;
-
-        /**
-         * Whether current file is dirty (different from saved contents).
-         *
-         * @unofficial
-         */
-        dirty: boolean;
-
-        /**
          * Gets the data from the editor. This will be called to save the editor contents to the file.
          *
          * @returns The editor data as a string.
@@ -52,20 +80,6 @@ declare module 'obsidian' {
          * @since 0.10.12
          */
         getViewData__?(): string;
-
-        /**
-         * Whether editor should be rendered as plaintext.
-         *
-         * @unofficial
-         */
-        isPlaintext: boolean;
-
-        /**
-         * The data that was last saved.
-         *
-         * @unofficial
-         */
-        lastSavedData: null | string;
 
         /**
          * Load a file into the editor, optionally clearing existing content.
@@ -125,25 +139,11 @@ declare module 'obsidian' {
         save(clear?: boolean): Promise<void>;
 
         /**
-         * Whether on saving, the file should be saved again (for dirtiness checks).
-         *
-         * @unofficial
-         */
-        saveAgain: boolean;
-
-        /**
          * If any changes(dirty = `true`) in the file forces the file to save.
          *
          * @unofficial
          */
         saveImmediately(): void;
-
-        /**
-         * Whether the file is currently saving.
-         *
-         * @unofficial
-         */
-        saving: boolean;
 
         /**
          * Set the data to the editor. This is used to load the file contents.

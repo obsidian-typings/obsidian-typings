@@ -10,6 +10,9 @@ export interface FolderPropertyWidgetComponent extends PropertyWidgetComponentBa
     /** The input element for the property widget. */
     inputEl: HTMLInputElement;
 
+    /** The type of the property widget. */
+    type: 'folder';
+
     /**
      * Handle focus event.
      *
@@ -23,7 +26,4 @@ export interface FolderPropertyWidgetComponent extends PropertyWidgetComponentBa
      * @param value - The value to set.
      */
     setValue(value: unknown): void;
-
-    /** The type of the property widget. */
-    type: 'folder';
 }

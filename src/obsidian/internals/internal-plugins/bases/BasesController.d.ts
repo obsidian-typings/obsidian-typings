@@ -28,17 +28,147 @@ import type { EditorLanguageSupport } from './EditorLanguageSupport.d.ts';
  */
 export interface BasesController extends Component {
     /**
+     * The Obsidian app instance.
+     */
+    app: App;
+
+    /**
+     * The context of the view controller.
+     */
+    ctx: BasesContext;
+
+    /**
+     * The current file.
+     */
+    currentFile: TFile | null;
+
+    /**
+     * The current error.
+     */
+    error: string | null;
+
+    /**
+     * The error element.
+     */
+    errorEl: HTMLDivElement;
+
+    /**
+     * The errors.
+     */
+    errors: Set<string>;
+
+    /**
+     * The events.
+     */
+    events: Events;
+
+    /**
+     * The filter menu.
+     */
+    filterMenu: BasesFilterMenu;
+
+    /**
+     * Whether the initial scan has been completed.
+     */
+    initialScan: boolean;
+
+    /**
+     * The mock context.
+     */
+    mockContext: BasesMockContext;
+
+    /**
+     * The new item menu.
+     */
+    newItemMenu: BasesNewItemMenu;
+
+    /**
+     * The plugin instance.
+     */
+    plugin: BasesPluginInstance;
+
+    /**
+     * The property menu.
+     */
+    propertyMenu: BasesPropertyMenu;
+
+    /**
+     * The query.
+     */
+    query: BasesQuery | null;
+
+    /**
+     * The query state.
+     */
+    queryState: string;
+
+    /**
+     * The queue.
+     */
+    queue: PromisedQueue;
+
+    /**
+     * The relevant properties.
+     */
+    relevantProperties: Set<string>;
+
+    /**
+     * The request to notify the view.
+     */
+    requestNotifyView: Debouncer<[], void>;
+
+    /**
+     * The results.
+     */
+    results: Map<unknown, unknown>;
+
+    /**
+     * The results menu.
+     */
+    resultsMenu: BasesResultsMenu;
+
+    /**
+     * The sort menu.
+     */
+    sortMenu: BasesSortMenu;
+
+    /**
+     * The view.
+     */
+    view: View;
+
+    /**
+     * The view container element.
+     */
+    viewContainerEl: HTMLDivElement;
+
+    /**
+     * The view states.
+     */
+    viewEstates: Record<string, unknown>;
+
+    /**
+     * The view header element.
+     */
+    viewHeaderEl: HTMLDivElement;
+
+    /**
+     * The view menu.
+     */
+    viewMenu: BasesViewMenu;
+
+    /**
+     * The view name.
+     */
+    viewName: string;
+
+    /**
      * Adds a result to the results.
      *
      * @param result - The result to add.
      * @returns The add result.
      */
     addResult(result: unknown, arg2: unknown): unknown;
-
-    /**
-     * The Obsidian app instance.
-     */
-    app: App;
 
     /**
      * Builds the bases context.
@@ -59,16 +189,6 @@ export interface BasesController extends Component {
     clearError(): void;
 
     /**
-     * The context of the view controller.
-     */
-    ctx: BasesContext;
-
-    /**
-     * The current file.
-     */
-    currentFile: TFile | null;
-
-    /**
      * Displays an error.
      *
      * @param error - The error message to display.
@@ -76,36 +196,11 @@ export interface BasesController extends Component {
     displayError(error: string, arg2: unknown): void;
 
     /**
-     * The current error.
-     */
-    error: string | null;
-
-    /**
-     * The error element.
-     */
-    errorEl: HTMLDivElement;
-
-    /**
-     * The errors.
-     */
-    errors: Set<string>;
-
-    /**
      * Evaluates the relevant properties.
      *
      * @param relevantProperties - The property names to evaluate.
      */
     evaluateRelevantProperties(relevantProperties: string[]): void;
-
-    /**
-     * The events.
-     */
-    events: Events;
-
-    /**
-     * The filter menu.
-     */
-    filterMenu: BasesFilterMenu;
 
     /**
      * Gets the active bases view of a given type.
@@ -173,21 +268,6 @@ export interface BasesController extends Component {
     getWidgetForIdent(type: string): string;
 
     /**
-     * Whether the initial scan has been completed.
-     */
-    initialScan: boolean;
-
-    /**
-     * The mock context.
-     */
-    mockContext: BasesMockContext;
-
-    /**
-     * The new item menu.
-     */
-    newItemMenu: BasesNewItemMenu;
-
-    /**
      * Notifies the view.
      */
     notifyView(): void;
@@ -205,39 +285,9 @@ export interface BasesController extends Component {
     onResize(): void;
 
     /**
-     * The plugin instance.
-     */
-    plugin: BasesPluginInstance;
-
-    /**
      * Prompt for add view.
      */
     promptForAddView(): void;
-
-    /**
-     * The property menu.
-     */
-    propertyMenu: BasesPropertyMenu;
-
-    /**
-     * The query.
-     */
-    query: BasesQuery | null;
-
-    /**
-     * The query state.
-     */
-    queryState: string;
-
-    /**
-     * The queue.
-     */
-    queue: PromisedQueue;
-
-    /**
-     * The relevant properties.
-     */
-    relevantProperties: Set<string>;
 
     /**
      * Removes a result.
@@ -245,21 +295,6 @@ export interface BasesController extends Component {
      * @returns The removal result.
      */
     removeResult(arg1: unknown): unknown;
-
-    /**
-     * The request to notify the view.
-     */
-    requestNotifyView: Debouncer<[], void>;
-
-    /**
-     * The results.
-     */
-    results: Map<unknown, unknown>;
-
-    /**
-     * The results menu.
-     */
-    resultsMenu: BasesResultsMenu;
 
     /**
      * Runs a query.
@@ -289,11 +324,6 @@ export interface BasesController extends Component {
     setQueryAndView(queryOrError: BasesQuery | Error, viewName: string): void;
 
     /**
-     * The sort menu.
-     */
-    sortMenu: BasesSortMenu;
-
-    /**
      * Starts the loader.
      */
     startLoader(): void;
@@ -314,34 +344,4 @@ export interface BasesController extends Component {
      * @param file - The file to set as current.
      */
     updateCurrentFile(file: TFile): void;
-
-    /**
-     * The view.
-     */
-    view: View;
-
-    /**
-     * The view container element.
-     */
-    viewContainerEl: HTMLDivElement;
-
-    /**
-     * The view states.
-     */
-    viewEstates: Record<string, unknown>;
-
-    /**
-     * The view header element.
-     */
-    viewHeaderEl: HTMLDivElement;
-
-    /**
-     * The view menu.
-     */
-    viewMenu: BasesViewMenu;
-
-    /**
-     * The view name.
-     */
-    viewName: string;
 }

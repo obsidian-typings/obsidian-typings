@@ -23,6 +23,13 @@ declare module 'obsidian' {
         items: T[];
 
         /**
+         * @public
+         * @since 1.10.0
+         * @unofficial ERROR: Missing `@unofficial` or `@official` tag
+         */
+        type: 'group';
+
+        /**
          * If provided, the group will be hidden if the function returns `true`.
          *
          * @public
@@ -31,12 +38,5 @@ declare module 'obsidian' {
          * @unofficial ERROR: Missing `@unofficial` or `@official` tag
          */
         shouldHide?: () => boolean;
-
-        /**
-         * @public
-         * @since 1.10.0
-         * @unofficial ERROR: Missing `@unofficial` or `@official` tag
-         */
-        type: 'group';
     }
 }

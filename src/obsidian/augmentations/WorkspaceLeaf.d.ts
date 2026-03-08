@@ -17,6 +17,123 @@ declare module 'obsidian' {
         activeTime: number;
 
         /**
+         * The linked group this leaf belongs to, or `null` if ungrouped.
+         * @unofficial
+         */
+        group: string | null;
+
+        /**
+         * Current height of the leaf in pixels.
+         * @unofficial
+         */
+        height: number;
+
+        /**
+         * Navigation history for this leaf (back/forward).
+         * @unofficial
+         */
+        history: WorkspaceLeafHistory;
+
+        /**
+         * The hover popover associated with this leaf.
+         *
+         * @official
+         */
+        hoverPopover: HoverPopover | null;
+
+        /**
+         * The direct parent of the leaf.
+         *
+         * On desktop, a leaf is always a child of a `WorkspaceTabs` component.
+         * On mobile, a leaf might be a child of a `WorkspaceMobileDrawer`.
+         * Perform an `instanceof` check before making an assumption about the
+         * `parent`.
+         *
+         * @official
+         */
+        parent: WorkspaceTabs | WorkspaceMobileDrawer;
+
+        /**
+         * Whether this leaf is pinned (prevented from being navigated away).
+         * @unofficial
+         */
+        pinned: boolean;
+
+        /**
+         * Observer that tracks size changes of this leaf.
+         * @unofficial
+         */
+        resizeObserver: ResizeObserver | null;
+
+        /**
+         * Close button element in the tab header.
+         * @unofficial
+         */
+        tabHeaderCloseEl: HTMLDivElement | null;
+
+        /**
+         * The tab header element for this leaf.
+         * @unofficial
+         */
+        tabHeaderEl: HTMLElement;
+
+        /**
+         * Icon element inside the tab header.
+         * @unofficial
+         */
+        tabHeaderInnerIconEl: HTMLElement;
+
+        /**
+         * Title element inside the tab header.
+         * @unofficial
+         */
+        tabHeaderInnerTitleEl: HTMLElement;
+
+        /**
+         * Container element for tab header status indicators.
+         * @unofficial
+         */
+        tabHeaderStatusContainerEl: HTMLDivElement | null;
+
+        /**
+         * Status element indicating linked group membership in the tab header.
+         * @unofficial
+         */
+        tabHeaderStatusLinkEl: HTMLDivElement | null;
+
+        /**
+         * Status element indicating pinned state in the tab header.
+         * @unofficial
+         */
+        tabHeaderStatusPinEl: HTMLDivElement | null;
+
+        /**
+         * The workspace item type identifier for this leaf.
+         * @unofficial
+         */
+        type: 'leaf';
+
+        /**
+         * The view associated with this leaf. Do not attempt to cast this to your
+         * custom `View` without first checking `instanceof`.
+         *
+         * @official
+         */
+        view: View;
+
+        /**
+         * Current width of the leaf in pixels.
+         * @unofficial
+         */
+        width: number;
+
+        /**
+         * Whether this leaf is currently loading or processing.
+         * @unofficial
+         */
+        working: boolean;
+
+        /**
          * Check whether this leaf can be navigated to a different view.
          *
          * @returns Whether the leaf can be navigated.
@@ -72,12 +189,6 @@ declare module 'obsidian' {
         getViewState(): ViewState;
 
         /**
-         * The linked group this leaf belongs to, or `null` if ungrouped.
-         * @unofficial
-         */
-        group: string | null;
-
-        /**
          * Handle a drop event on this leaf.
          *
          * @param event - The drag event.
@@ -89,29 +200,10 @@ declare module 'obsidian' {
         handleDrop(event: DragEvent, draggable: Draggable, isOver: boolean): DropResult | null;
 
         /**
-         * Current height of the leaf in pixels.
-         * @unofficial
-         */
-        height: number;
-
-        /**
          * Highlight this leaf's tab header.
          * @unofficial
          */
         highlight(): void;
-
-        /**
-         * Navigation history for this leaf (back/forward).
-         * @unofficial
-         */
-        history: WorkspaceLeafHistory;
-
-        /**
-         * The hover popover associated with this leaf.
-         *
-         * @official
-         */
-        hoverPopover: HoverPopover | null;
 
         /**
          * Returns `true` if this leaf is currently deferred because it is in the background.
@@ -245,24 +337,6 @@ declare module 'obsidian' {
         openLinkText(linktext: string, sourcePath: string, openViewState?: OpenViewState): Promise<void>;
 
         /**
-         * The direct parent of the leaf.
-         *
-         * On desktop, a leaf is always a child of a `WorkspaceTabs` component.
-         * On mobile, a leaf might be a child of a `WorkspaceMobileDrawer`.
-         * Perform an `instanceof` check before making an assumption about the
-         * `parent`.
-         *
-         * @official
-         */
-        parent: WorkspaceTabs | WorkspaceMobileDrawer;
-
-        /**
-         * Whether this leaf is pinned (prevented from being navigated away).
-         * @unofficial
-         */
-        pinned: boolean;
-
-        /**
          * Rebuild the view associated with this leaf.
          *
          * @returns A promise that resolves when the view is rebuilt.
@@ -277,12 +351,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         recordHistory(state: WorkspaceLeafHistoryState): void;
-
-        /**
-         * Observer that tracks size changes of this leaf.
-         * @unofficial
-         */
-        resizeObserver: ResizeObserver | null;
 
         /**
          * Set the vertical height a leaf may occupy if it is in a split. The height is not set directly, but.
@@ -340,59 +408,11 @@ declare module 'obsidian' {
         setViewState(viewState: ViewState, eState?: any): Promise<void>;
 
         /**
-         * Close button element in the tab header.
-         * @unofficial
-         */
-        tabHeaderCloseEl: HTMLDivElement | null;
-
-        /**
-         * The tab header element for this leaf.
-         * @unofficial
-         */
-        tabHeaderEl: HTMLElement;
-
-        /**
-         * Icon element inside the tab header.
-         * @unofficial
-         */
-        tabHeaderInnerIconEl: HTMLElement;
-
-        /**
-         * Title element inside the tab header.
-         * @unofficial
-         */
-        tabHeaderInnerTitleEl: HTMLElement;
-
-        /**
-         * Container element for tab header status indicators.
-         * @unofficial
-         */
-        tabHeaderStatusContainerEl: HTMLDivElement | null;
-
-        /**
-         * Status element indicating linked group membership in the tab header.
-         * @unofficial
-         */
-        tabHeaderStatusLinkEl: HTMLDivElement | null;
-
-        /**
-         * Status element indicating pinned state in the tab header.
-         * @unofficial
-         */
-        tabHeaderStatusPinEl: HTMLDivElement | null;
-
-        /**
          * Toggle the pinned state of this leaf.
          *
          * @official
          */
         togglePinned(): void;
-
-        /**
-         * The workspace item type identifier for this leaf.
-         * @unofficial
-         */
-        type: 'leaf';
 
         /**
          * Remove highlight from this leaf's tab header.
@@ -405,25 +425,5 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateHeader(): void;
-
-        /**
-         * The view associated with this leaf. Do not attempt to cast this to your
-         * custom `View` without first checking `instanceof`.
-         *
-         * @official
-         */
-        view: View;
-
-        /**
-         * Current width of the leaf in pixels.
-         * @unofficial
-         */
-        width: number;
-
-        /**
-         * Whether this leaf is currently loading or processing.
-         * @unofficial
-         */
-        working: boolean;
     }
 }

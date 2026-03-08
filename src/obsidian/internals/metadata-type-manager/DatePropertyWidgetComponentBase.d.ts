@@ -8,6 +8,21 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface DatePropertyWidgetComponentBase extends PropertyWidgetComponentBase {
+    /** The date of the property widget. */
+    date?: moment.Moment;
+
+    /** Whether the property widget is dirty. */
+    dirty: boolean;
+
+    /** The hover popup for the property widget. */
+    hoverPopup: HoverPopover | null;
+
+    /** The input element for the property widget. */
+    inputEl: HTMLInputElement;
+
+    /** The value of the property widget. */
+    value: string;
+
     /**
      * Build the input element for the property widget.
      *
@@ -15,12 +30,6 @@ export interface DatePropertyWidgetComponentBase extends PropertyWidgetComponent
      * @returns The input element.
      */
     buildInput(parentEl: HTMLElement): HTMLInputElement;
-
-    /** The date of the property widget. */
-    date?: moment.Moment;
-
-    /** Whether the property widget is dirty. */
-    dirty: boolean;
 
     /**
      * Format the date input.
@@ -30,12 +39,6 @@ export interface DatePropertyWidgetComponentBase extends PropertyWidgetComponent
      */
     format(input: moment.Moment): string;
 
-    /** The hover popup for the property widget. */
-    hoverPopup: HoverPopover | null;
-
-    /** The input element for the property widget. */
-    inputEl: HTMLInputElement;
-
     /**
      * Parse the date input.
      *
@@ -43,7 +46,4 @@ export interface DatePropertyWidgetComponentBase extends PropertyWidgetComponent
      * @returns The parsed date.
      */
     parse(input: moment.MomentInput): void;
-
-    /** The value of the property widget. */
-    value: string;
 }

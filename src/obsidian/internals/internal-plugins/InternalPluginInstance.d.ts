@@ -14,6 +14,9 @@ export interface InternalPluginInstance<InternalPlugin> {
     /** Unique identifier for this plugin. */
     id: string;
 
+    /** Human-readable display name of this plugin. */
+    name: string;
+
     /**
      * Initialize the plugin instance with app and plugin references.
      *
@@ -21,9 +24,6 @@ export interface InternalPluginInstance<InternalPlugin> {
      * @param plugin - The internal plugin registration.
      */
     init(app: App, plugin: InternalPlugin): void;
-
-    /** Human-readable display name of this plugin. */
-    name: string;
 
     /**
      * Called when the plugin is disabled.

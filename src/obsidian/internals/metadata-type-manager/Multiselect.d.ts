@@ -8,6 +8,21 @@ import type { MultiselectOptionContextMenuContext } from './MultiselectOptionCon
  * @unofficial
  */
 export interface Multiselect {
+    /** The elements of the multiselect. */
+    elements: HTMLDivElement[];
+
+    /** The input element of the multiselect. */
+    inputEl: HTMLDivElement;
+
+    /** The text of the input element of the multiselect. */
+    readonly inputText: string;
+
+    /** The root element of the multiselect. */
+    rootEl: HTMLDivElement;
+
+    /** The values of the multiselect. */
+    values: string[];
+
     /**
      * Create a new element for the multiselect.
      *
@@ -61,9 +76,6 @@ export interface Multiselect {
      */
     editElement(index: number): void;
 
-    /** The elements of the multiselect. */
-    elements: HTMLDivElement[];
-
     /**
      * Find a duplicate in the multiselect.
      *
@@ -79,12 +91,6 @@ export interface Multiselect {
      * @param index - the index of the element.
      */
     focusElement(index: number): void;
-
-    /** The input element of the multiselect. */
-    inputEl: HTMLDivElement;
-
-    /** The text of the input element of the multiselect. */
-    readonly inputText: string;
 
     /**
      * Handle the change event of the multiselect.
@@ -122,9 +128,6 @@ export interface Multiselect {
 
     /** Render the values of the multiselect. */
     renderValues(): void;
-
-    /** The root element of the multiselect. */
-    rootEl: HTMLDivElement;
 
     /**
      * Set the text of the input element of the multiselect.
@@ -192,7 +195,4 @@ export interface Multiselect {
 
     /** Trigger the change event of the multiselect. */
     triggerChange(): void;
-
-    /** The values of the multiselect. */
-    values: string[];
 }

@@ -14,6 +14,9 @@ export interface PropertyPropertyWidgetComponent extends PropertyWidgetComponent
     /** The input element for the property widget. */
     inputEl: HTMLInputElement;
 
+    /** The type of the property widget. */
+    type: 'property';
+
     /**
      * Handle focus event.
      *
@@ -27,7 +30,4 @@ export interface PropertyPropertyWidgetComponent extends PropertyWidgetComponent
      * @param value - The value to set.
      */
     setValue(value: unknown): void;
-
-    /** The type of the property widget. */
-    type: 'property';
 }

@@ -12,9 +12,6 @@ export interface ReadViewRenderer {
     /** Sections that are being rendered asynchronously. */
     asyncSections: unknown[];
 
-    /** Clear all rendered sections and reset the renderer. */
-    clear(): void;
-
     /** Timestamp of the last render operation. */
     lastRender: number;
 
@@ -24,20 +21,11 @@ export interface ReadViewRenderer {
     /** Text content from the last render. */
     lastText: string;
 
-    /** Parse the text content asynchronously into sections. */
-    parseAsync(): void;
-
-    /** Parse the text content synchronously into sections. */
-    parseSync(): void;
-
     /** Container element for the rendered preview. */
     previewEl: HTMLElement;
 
     /** Element used to push content for scroll height calculation. */
     pusherEl: HTMLElement;
-
-    /** Queue a render update for the next animation frame. */
-    queueRender(): void;
 
     /** Pool of recycled section elements for reuse. */
     recycledSections: unknown[];
@@ -48,13 +36,25 @@ export interface ReadViewRenderer {
     /** All sections in the rendered document. */
     sections: RendererSection[];
 
+    /** Current text content being rendered. */
+    text: string;
+
+    /** Clear all rendered sections and reset the renderer. */
+    clear(): void;
+
+    /** Parse the text content asynchronously into sections. */
+    parseAsync(): void;
+
+    /** Parse the text content synchronously into sections. */
+    parseSync(): void;
+
+    /** Queue a render update for the next animation frame. */
+    queueRender(): void;
+
     /**
      * Set the text content and trigger a re-render.
      *
      * @param text - The text content to render.
      */
     set(text: string): void;
-
-    /** Current text content being rendered. */
-    text: string;
 }

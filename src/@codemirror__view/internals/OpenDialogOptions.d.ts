@@ -13,6 +13,12 @@ export interface OpenDialogOptions {
     /** Whether to close the dialog when the Enter key is pressed. */
     closeOnEnter: boolean;
 
+    /** Whether to select the input value when the dialog opens. */
+    selectValueOnOpen: boolean;
+
+    /** Initial value for the dialog input. */
+    value: string;
+
     /**
      * Callback invoked when the dialog is closed.
      *
@@ -46,10 +52,4 @@ export interface OpenDialogOptions {
      * @param callback - The callback to invoke with the result.
      */
     onKeyUp(e: KeyboardEvent, value: string, callback: (value: unknown) => void): void;
-
-    /** Whether to select the input value when the dialog opens. */
-    selectValueOnOpen: boolean;
-
-    /** Initial value for the dialog input. */
-    value: string;
 }

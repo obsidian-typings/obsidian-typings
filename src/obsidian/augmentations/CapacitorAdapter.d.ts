@@ -13,6 +13,12 @@ declare module 'obsidian' {
      */
     interface CapacitorAdapter extends DataAdapter {
         /**
+         * Reference to the Capacitor file system API.
+         * @unofficial
+         */
+        fs: CapacitorAdapterFs;
+
+        /**
          * Appends data to a file.
          *
          * @param normalizedPath - The path to append.
@@ -73,12 +79,6 @@ declare module 'obsidian' {
          * @since 1.7.2
          */
         exists(normalizedPath: string, sensitive?: boolean): Promise<boolean>;
-
-        /**
-         * Reference to the Capacitor file system API.
-         * @unofficial
-         */
-        fs: CapacitorAdapterFs;
 
         /**
          * Gets the full path for a file.

@@ -20,6 +20,31 @@ export interface AbstractSearchComponent {
     containerEl: HTMLElement;
 
     /**
+     * Container for the replacement input field.
+     */
+    replaceInputEl: HTMLInputElement;
+
+    /**
+     * Keyscope for search component.
+     */
+    scope: Scope;
+
+    /**
+     * Container for all the action buttons.
+     */
+    searchButtonContainerEl: HTMLElement;
+
+    /**
+     * Container for the search component itself.
+     */
+    searchContainerEl: HTMLElement;
+
+    /**
+     * Container for the search input field.
+     */
+    searchInputEl: HTMLInputElement;
+
+    /**
      * Returns the current search query.
      *
      * @returns The current search query string.
@@ -49,29 +74,4 @@ export interface AbstractSearchComponent {
      * @returns The result of the shift-enter action.
      */
     onShiftEnter(event: KeyboardEvent): unknown;
-
-    /**
-     * Container for the replacement input field.
-     */
-    replaceInputEl: HTMLInputElement;
-
-    /**
-     * Keyscope for search component.
-     */
-    scope: Scope;
-
-    /**
-     * Container for all the action buttons.
-     */
-    searchButtonContainerEl: HTMLElement;
-
-    /**
-     * Container for the search component itself.
-     */
-    searchContainerEl: HTMLElement;
-
-    /**
-     * Container for the search input field.
-     */
-    searchInputEl: HTMLInputElement;
 }

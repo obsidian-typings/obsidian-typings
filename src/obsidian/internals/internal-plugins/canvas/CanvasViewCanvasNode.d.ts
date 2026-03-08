@@ -26,13 +26,6 @@ export interface CanvasViewCanvasNode extends CanvasViewCanvasNodeBase {
     /** Bounding box of the node for spatial indexing. */
     bbox: BBox;
 
-    /**
-     * Remove focus from the node.
-     *
-     * @returns The result of removing focus.
-     */
-    blur(): unknown;
-
     /** Reference to the parent canvas instance. */
     canvas: CanvasViewCanvas;
 
@@ -60,6 +53,58 @@ export interface CanvasViewCanvasNode extends CanvasViewCanvasNodeBase {
     /** Path to the associated file, if this is a file node. */
     filePath: string;
 
+    /** Height of the node in canvas units. */
+    height: number;
+
+    /** Unique identifier for this node. */
+    id: string;
+
+    /** Whether the node has been initialized. */
+    initialized: boolean;
+
+    /** Whether the node's content is currently mounted in the DOM. */
+    isContentMounted: boolean;
+
+    /** Whether the node is currently in editing mode. */
+    isEditing: boolean;
+
+    /** Main node element for rendering. */
+    nodeEl: HTMLDivElement;
+
+    /** Placeholder element shown while the node content is loading. */
+    placeholderEl: HTMLDivElement;
+
+    /** The last rendered z-index value. */
+    renderedZIndex: number;
+
+    /** Whether the node needs to recalculate its size. */
+    resizeDirty: boolean;
+
+    /** Subpath within the linked file (e.g., heading or block reference). */
+    subpath: string;
+
+    /** Additional data properties not covered by known fields. */
+    unknownData: CanvasViewCanvasNodeUnknownData;
+
+    /** Width of the node in canvas units. */
+    width: number;
+
+    /** X coordinate of the node's top-left corner in canvas space. */
+    x: number;
+
+    /** Y coordinate of the node's top-left corner in canvas space. */
+    y: number;
+
+    /** Z-index stacking order of the node. */
+    zIndex: number;
+
+    /**
+     * Remove focus from the node.
+     *
+     * @returns The result of removing focus.
+     */
+    blur(): unknown;
+
     /**
      * Set focus on the node.
      *
@@ -74,12 +119,6 @@ export interface CanvasViewCanvasNode extends CanvasViewCanvasNodeBase {
      */
     getData(): unknown;
 
-    /** Height of the node in canvas units. */
-    height: number;
-
-    /** Unique identifier for this node. */
-    id: string;
-
     /**
      * Initialize the file association for a file-type node.
      *
@@ -93,18 +132,6 @@ export interface CanvasViewCanvasNode extends CanvasViewCanvasNodeBase {
      * @returns The result of initializing the node.
      */
     initialize(): unknown;
-
-    /** Whether the node has been initialized. */
-    initialized: boolean;
-
-    /** Whether the node's content is currently mounted in the DOM. */
-    isContentMounted: boolean;
-
-    /** Whether the node is currently in editing mode. */
-    isEditing: boolean;
-
-    /** Main node element for rendering. */
-    nodeEl: HTMLDivElement;
 
     /**
      * Handle the node's file receiving focus.
@@ -134,21 +161,12 @@ export interface CanvasViewCanvasNode extends CanvasViewCanvasNodeBase {
      */
     onPointerdown(arg1: unknown): unknown;
 
-    /** Placeholder element shown while the node content is loading. */
-    placeholderEl: HTMLDivElement;
-
     /**
      * Render the node to the canvas.
      *
      * @returns The result of rendering the node.
      */
     render(): unknown;
-
-    /** The last rendered z-index value. */
-    renderedZIndex: number;
-
-    /** Whether the node needs to recalculate its size. */
-    resizeDirty: boolean;
 
     /**
      * Set the serialized data for this node.
@@ -178,12 +196,6 @@ export interface CanvasViewCanvasNode extends CanvasViewCanvasNodeBase {
      */
     showMenu(arg1: unknown): unknown;
 
-    /** Subpath within the linked file (e.g., heading or block reference). */
-    subpath: string;
-
-    /** Additional data properties not covered by known fields. */
-    unknownData: CanvasViewCanvasNodeUnknownData;
-
     /**
      * Update the rendering breakpoint based on the node's current size.
      *
@@ -197,16 +209,4 @@ export interface CanvasViewCanvasNode extends CanvasViewCanvasNodeBase {
      * @returns The result of updating the node label.
      */
     updateNodeLabel(arg1: unknown): unknown;
-
-    /** Width of the node in canvas units. */
-    width: number;
-
-    /** X coordinate of the node's top-left corner in canvas space. */
-    x: number;
-
-    /** Y coordinate of the node's top-left corner in canvas space. */
-    y: number;
-
-    /** Z-index stacking order of the node. */
-    zIndex: number;
 }

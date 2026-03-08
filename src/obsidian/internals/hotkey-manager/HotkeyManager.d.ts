@@ -12,22 +12,9 @@ import type { HotkeyManagerDefaultKeysRecord } from './HotkeyManagerDefaultKeysR
  */
 export interface HotkeyManager {
     /**
-     * Add a hotkey to the default hotkeys.
-     *
-     * @param command - Command ID to add hotkey to.
-     * @param keys - Hotkeys to add.
-     */
-    addDefaultHotkeys(command: string, keys: KeymapInfo[]): void;
-
-    /**
      * Reference to App.
      */
     app: App;
-
-    /**
-     * Bake hotkeys (create mapping of pressed key to command ID).
-     */
-    bake(): void;
 
     /**
      * Whether hotkeys have been baked (checks completed).
@@ -49,6 +36,22 @@ export interface HotkeyManager {
      */
     defaultKeys: HotkeyManagerDefaultKeysRecord;
 
+    /** Debounced handler for hotkey config file changes on disk. */
+    onConfigFileChange: Debouncer<[], Promise<void>>;
+
+    /**
+     * Add a hotkey to the default hotkeys.
+     *
+     * @param command - Command ID to add hotkey to.
+     * @param keys - Hotkeys to add.
+     */
+    addDefaultHotkeys(command: string, keys: KeymapInfo[]): void;
+
+    /**
+     * Bake hotkeys (create mapping of pressed key to command ID).
+     */
+    bake(): void;
+
     /**
      * Get hotkey associated with command ID.
      *
@@ -69,9 +72,6 @@ export interface HotkeyManager {
      * Load hotkeys from storage.
      */
     load(): void;
-
-    /** Debounced handler for hotkey config file changes on disk. */
-    onConfigFileChange: Debouncer<[], Promise<void>>;
 
     /**
      * Handle raw file system change events for the hotkey config.

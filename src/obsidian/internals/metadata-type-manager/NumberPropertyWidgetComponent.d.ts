@@ -10,6 +10,9 @@ export interface NumberPropertyWidgetComponent extends PropertyWidgetComponentBa
     /** The input element for the property widget. */
     inputEl: HTMLInputElement;
 
+    /** The type of the property widget. */
+    type: 'number';
+
     /**
      * Handle focus event.
      *
@@ -26,7 +29,4 @@ export interface NumberPropertyWidgetComponent extends PropertyWidgetComponentBa
 
     /** Show the error message. */
     showError(): void;
-
-    /** The type of the property widget. */
-    type: 'number';
 }

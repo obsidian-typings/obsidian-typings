@@ -22,22 +22,11 @@ import type { WorkerResults } from './WorkerResults.d.ts';
  * @unofficial
  */
 export interface GraphRenderer {
-    /**
-     * Specify that the renderer has changed and needs to be rendered again.
-     */
-    changed(): void;
-
     /** General colors of the elements in the graph view, computed from the app CSS. */
     colors: Record<GraphColor, GraphColorAttributes>;
 
     /** `<div>` element containing the graph, with class `.view-content`. */
     containerEl: HTMLDivElement;
-
-    /** Destroy the renderer and release all resources. */
-    destroy(): void;
-
-    /** Destroy all the graphics of the graph. */
-    destroyGraphics(): void;
 
     /** Node currently being dragged, if any. */
     dragNode: GraphNode | null;
@@ -53,27 +42,6 @@ export interface GraphRenderer {
 
     /** Text fade threshold. */
     fTextShowMult: number;
-
-    /**
-     * Capture a screenshot of the graph with the background included.
-     *
-     * @returns The canvas element containing the screenshot.
-     */
-    getBackgroundScreenshot(): HTMLCanvasElement;
-
-    /**
-     * Returns the currently highlighted node, if any.
-     *
-     * @returns The highlighted node, or `null` if none.
-     */
-    getHighlightNode(): GraphNode | null;
-
-    /**
-     * Capture a screenshot of the graph with a transparent background.
-     *
-     * @returns The canvas containing the screenshot.
-     */
-    getTransparentScreenshot(): ICanvas;
 
     /** Main container to which nodes, links and arrows are added. */
     hanger: Container;
@@ -92,9 +60,6 @@ export interface GraphRenderer {
 
     /** `<iframe>` element in which the graph is rendered. */
     iframeEl: HTMLIFrameElement;
-
-    /** Initialize all the graphics of the graph. */
-    initGraphics(): void;
 
     /** `<canvas>` element bound to the event system of `GraphRenderer.px` to capture events. */
     interactiveEl: HTMLCanvasElement;
@@ -119,6 +84,92 @@ export interface GraphRenderer {
 
     /** Scale of the nodes based on the zoom level of the graph view. */
     nodeScale: number;
+
+    /** Whether the user is currently panning the graph view. */
+    panning: boolean;
+
+    /** Current pan velocity along the x axis. */
+    panvX: number;
+
+    /** Current pan velocity along the y axis. */
+    panvY: number;
+
+    /** Current pan offset along the x axis. */
+    panX: number;
+
+    /** Current pan offset along the y axis. */
+    panY: number;
+
+    /** Power tag configuration for the graph view. */
+    powerTag: PowerTag;
+
+    /** PixiJS application rendering everything. */
+    px: Application;
+
+    /** Timer (request ID) associated to the requestAnimationFrame rendering the graph. */
+    renderTimer: null | number;
+
+    /** Current zoom level of the graph view, interpolated between the previous one and the `targetScale`. */
+    scale: number;
+
+    /** Target zoom level of the graph view. */
+    targetScale: number;
+
+    /** Current alpha of the nodes names based on the graph scale. */
+    textAlpha: number;
+
+    /** Current visible viewport bounds of the graph view. */
+    viewport: Coords;
+
+    /** Width of the graph view, in pixel. */
+    width: number;
+
+    /** Web Worker thread running the graph simulation. */
+    worker: Worker;
+
+    /** Results received from the graph simulation worker. */
+    workerResults: WorkerResults;
+
+    /** X coordinate of the zoom action. */
+    zoomCenterX: number;
+
+    /** Y coordinate of the zoom action. */
+    zoomCenterY: number;
+
+    /**
+     * Specify that the renderer has changed and needs to be rendered again.
+     */
+    changed(): void;
+
+    /** Destroy the renderer and release all resources. */
+    destroy(): void;
+
+    /** Destroy all the graphics of the graph. */
+    destroyGraphics(): void;
+
+    /**
+     * Capture a screenshot of the graph with the background included.
+     *
+     * @returns The canvas element containing the screenshot.
+     */
+    getBackgroundScreenshot(): HTMLCanvasElement;
+
+    /**
+     * Returns the currently highlighted node, if any.
+     *
+     * @returns The highlighted node, or `null` if none.
+     */
+    getHighlightNode(): GraphNode | null;
+
+    /**
+     * Capture a screenshot of the graph with a transparent background.
+     *
+     * @returns The canvas containing the screenshot.
+     */
+    getTransparentScreenshot(): ICanvas;
+
+    /** Initialize all the graphics of the graph. */
+    initGraphics(): void;
 
     /** Called when the graph iframe finishes loading. */
     onIframeLoad(): void;
@@ -192,41 +243,14 @@ export interface GraphRenderer {
      */
     onWheel(evt: WheelEvent): void;
 
-    /** Whether the user is currently panning the graph view. */
-    panning: boolean;
-
-    /** Current pan velocity along the x axis. */
-    panvX: number;
-
-    /** Current pan velocity along the y axis. */
-    panvY: number;
-
-    /** Current pan offset along the x axis. */
-    panX: number;
-
-    /** Current pan offset along the y axis. */
-    panY: number;
-
-    /** Power tag configuration for the graph view. */
-    powerTag: PowerTag;
-
-    /** PixiJS application rendering everything. */
-    px: Application;
-
     /** Queue a render frame to be executed on the next animation frame. */
     queueRender(): void;
 
     /** Callback invoked on each render frame. */
     renderCallback(): void;
 
-    /** Timer (request ID) associated to the requestAnimationFrame rendering the graph. */
-    renderTimer: null | number;
-
     /** Reset the pan offset to the origin. */
     resetPan(): void;
-
-    /** Current zoom level of the graph view, interpolated between the previous one and the `targetScale`. */
-    scale: number;
 
     /**
      * Set the graph data (nodes and links) to render.
@@ -264,35 +288,11 @@ export interface GraphRenderer {
      */
     setScale(scale: number): void;
 
-    /** Target zoom level of the graph view. */
-    targetScale: number;
-
     /** Re-read CSS variables and update the graph colors accordingly. */
     testCSS(): void;
 
-    /** Current alpha of the nodes names based on the graph scale. */
-    textAlpha: number;
-
     /** Interpolate the current zoom level towards the target scale. */
     updateZoom(): void;
-
-    /** Current visible viewport bounds of the graph view. */
-    viewport: Coords;
-
-    /** Width of the graph view, in pixel. */
-    width: number;
-
-    /** Web Worker thread running the graph simulation. */
-    worker: Worker;
-
-    /** Results received from the graph simulation worker. */
-    workerResults: WorkerResults;
-
-    /** X coordinate of the zoom action. */
-    zoomCenterX: number;
-
-    /** Y coordinate of the zoom action. */
-    zoomCenterY: number;
 
     /**
      * Zoom the graph view to the given scale, centered on the given point.

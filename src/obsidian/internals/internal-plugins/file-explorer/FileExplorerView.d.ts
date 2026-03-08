@@ -21,6 +21,45 @@ import type { FolderTreeItem } from './FolderTreeItem.d.ts';
  */
 export interface FileExplorerView extends View {
     /**
+     * Mapping of file path to tree item.
+     */
+    fileItems: FileExplorerViewFileItemsRecord;
+
+    /**
+     * Mapping of tree self element to abstract file.
+     */
+    files: WeakMapWrapper<HTMLElement, TAbstractFile>;
+
+    /**
+     * Last dragged over folder item element.
+     * `null` when there is no folder item being dragged over.
+     */
+    lastDropTargetEl: HTMLElement | null;
+
+    /** Timeout ID for expanding a folder on mouseover during drag, or `null`. */
+    mouseoverExpandTimeout: number | null;
+
+    /**
+     * Indicate ready state of the view.
+     */
+    ready: boolean;
+
+    /**
+     * Try to sort tree items.
+     */
+    requestSort: Debouncer<[], void>;
+
+    /**
+     * Current sort order of file tree items.
+     */
+    sortOrder: FileExplorerViewSortOrder;
+
+    /**
+     * Tree view of files.
+     */
+    tree: Tree<FileTreeItem | FolderTreeItem>;
+
+    /**
      * Try to rename the file.
      *
      * @returns A promise that resolves when the rename is accepted.
@@ -100,16 +139,6 @@ export interface FileExplorerView extends View {
     exitRename(): void;
 
     /**
-     * Mapping of file path to tree item.
-     */
-    fileItems: FileExplorerViewFileItemsRecord;
-
-    /**
-     * Mapping of tree self element to abstract file.
-     */
-    files: WeakMapWrapper<HTMLElement, TAbstractFile>;
-
-    /**
      * Get the unique node identifier for a tree item.
      *
      * @param e - The tree item.
@@ -139,15 +168,6 @@ export interface FileExplorerView extends View {
      * @returns Whether the object is a file tree item.
      */
     isItem(item: unknown): boolean;
-
-    /**
-     * Last dragged over folder item element.
-     * `null` when there is no folder item being dragged over.
-     */
-    lastDropTargetEl: HTMLElement | null;
-
-    /** Timeout ID for expanding a folder on mouseover during drag, or `null`. */
-    mouseoverExpandTimeout: number | null;
 
     /**
      * Is called when a new file is created in vault. Updates the file tree.
@@ -271,16 +291,6 @@ export interface FileExplorerView extends View {
     openFileContextMenu(event: Event, fileItemEl: HTMLElement): void;
 
     /**
-     * Indicate ready state of the view.
-     */
-    ready: boolean;
-
-    /**
-     * Try to sort tree items.
-     */
-    requestSort: Debouncer<[], void>;
-
-    /**
      * Reveal a file or folder in the file tree.
      *
      * @param file - The file or folder to reveal.
@@ -307,22 +317,12 @@ export interface FileExplorerView extends View {
     sort(): void;
 
     /**
-     * Current sort order of file tree items.
-     */
-    sortOrder: FileExplorerViewSortOrder;
-
-    /**
      * Begin inline renaming of a file tree item.
      *
      * @param e - The file tree item to rename.
      * @returns The rename result.
      */
     startRenameFile(e: unknown): unknown;
-
-    /**
-     * Tree view of files.
-     */
-    tree: Tree<FileTreeItem | FolderTreeItem>;
 
     /**
      * Reloads the config from vault and update all items.

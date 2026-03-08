@@ -7,6 +7,9 @@ import type { VimState } from './VimState.d.ts';
  * @unofficial
  */
 export interface VimApi {
+    /** Whether to suppress error logging from the Vim layer. */
+    suppressErrorLogging: boolean;
+
     /**
      * Register an internal key mapping command.
      *
@@ -252,9 +255,6 @@ export interface VimApi {
      * @returns The result of setting the option.
      */
     setOption(name: unknown, value: unknown, cm: unknown, cfg: unknown): unknown;
-
-    /** Whether to suppress error logging from the Vim layer. */
-    suppressErrorLogging: boolean;
 
     /**
      * Remove a key mapping for lhs in the given context.

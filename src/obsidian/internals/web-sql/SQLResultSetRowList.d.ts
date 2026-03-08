@@ -4,6 +4,9 @@
  * @unofficial
  */
 export interface SQLResultSetRowList {
+    /** Number of rows in the result set. */
+    length: number;
+
     /**
      * Get a row by its index in the result set.
      *
@@ -11,7 +14,4 @@ export interface SQLResultSetRowList {
      * @returns The row at the specified index.
      */
     item(index: number): unknown;
-
-    /** Number of rows in the result set. */
-    length: number;
 }

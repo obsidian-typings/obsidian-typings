@@ -8,15 +8,21 @@ import type { WorkspaceLeafHistoryState } from './WorkspaceLeafHistoryState.d.ts
  * @unofficial
  */
 export interface WorkspaceLeafHistory {
+    /** List of previous navigation states. */
+    backHistory: WorkspaceLeafHistoryState[];
+
+    /** List of forward navigation states (after going back). */
+    forwardHistory: WorkspaceLeafHistoryState[];
+
+    /** The workspace leaf that owns this history. */
+    owner: WorkspaceLeaf;
+
     /**
      * Navigate back to the previous state.
      *
      * @returns A promise that resolves when navigation is complete.
      */
     back(): Promise<void>;
-
-    /** List of previous navigation states. */
-    backHistory: WorkspaceLeafHistoryState[];
 
     /**
      * Restore history from a serialized representation.
@@ -32,9 +38,6 @@ export interface WorkspaceLeafHistory {
      */
     forward(): Promise<void>;
 
-    /** List of forward navigation states (after going back). */
-    forwardHistory: WorkspaceLeafHistoryState[];
-
     /**
      * Navigate by the given number of steps (negative for back, positive for forward).
      *
@@ -42,9 +45,6 @@ export interface WorkspaceLeafHistory {
      * @returns A promise that resolves when navigation is complete.
      */
     go(step: number): Promise<void>;
-
-    /** The workspace leaf that owns this history. */
-    owner: WorkspaceLeaf;
 
     /**
      * Push a new state onto the back history stack.

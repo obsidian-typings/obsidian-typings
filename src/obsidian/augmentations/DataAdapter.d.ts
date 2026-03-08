@@ -11,6 +11,40 @@ declare module 'obsidian' {
      */
     interface DataAdapter extends PromisedQueue {
         /**
+         * Base OS path for the vault (e.g. /home/user/vault, or C:\Users\user\documents\vault).
+         *
+         * @unofficial
+         */
+        basePath: string;
+
+        /**
+         * Mapping of file/folder path to vault entry, includes non-MD files.
+         *
+         * @unofficial
+         */
+        files: DataAdapterFilesRecord;
+
+        /**
+         * Handles vault events.
+         *
+         * @unofficial
+         */
+        handler: FileSystemWatchHandler | null;
+
+        /**
+         * Whether the file system is case-insensitive.
+         * @unofficial
+         */
+        insensitive: boolean;
+
+        /**
+         * Triggers handler for vault events.
+         *
+         * @unofficial
+         */
+        trigger: FileSystemWatchHandler;
+
+        /**
          * Check if a file exists.
          *
          * @param fullPath Full path to the file.
@@ -52,13 +86,6 @@ declare module 'obsidian' {
         appendBinary(normalizedPath: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
 
         /**
-         * Base OS path for the vault (e.g. /home/user/vault, or C:\Users\user\documents\vault).
-         *
-         * @unofficial
-         */
-        basePath: string;
-
-        /**
          * Create a copy of a file.
          * This will fail if there is already a file at `normalizedNewPath`.
          *
@@ -87,13 +114,6 @@ declare module 'obsidian' {
          * @official
          */
         exists(normalizedPath: string, sensitive?: boolean): Promise<boolean>;
-
-        /**
-         * Mapping of file/folder path to vault entry, includes non-MD files.
-         *
-         * @unofficial
-         */
-        files: DataAdapterFilesRecord;
 
         /**
          * Get canonical full path of file.
@@ -145,19 +165,6 @@ declare module 'obsidian' {
          * @official
          */
         getResourcePath(normalizedPath: string): string;
-
-        /**
-         * Handles vault events.
-         *
-         * @unofficial
-         */
-        handler: FileSystemWatchHandler | null;
-
-        /**
-         * Whether the file system is case-insensitive.
-         * @unofficial
-         */
-        insensitive: boolean;
 
         /**
          * Retrieve a list of all files and folders inside the given folder, non-recursive.
@@ -400,13 +407,6 @@ declare module 'obsidian' {
          * @official
          */
         trashSystem(normalizedPath: string): Promise<boolean>;
-
-        /**
-         * Triggers handler for vault events.
-         *
-         * @unofficial
-         */
-        trigger: FileSystemWatchHandler;
 
         /**
          * Set whether OS is insensitive to case.

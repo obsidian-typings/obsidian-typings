@@ -21,26 +21,9 @@ export interface BasesView extends TextFileView {
     controller: BasesController;
 
     /**
-     * Get view type.
-     *
-     * @returns The bases view type.
-     */
-    getViewType(): typeof ViewType.Bases;
-
-    /**
      * The last data of the view.
      */
     lastData: string;
-
-    /**
-     * Called when the layout of the view changes.
-     */
-    onLayoutChange(): void;
-
-    /**
-     * Called when the view changes.
-     */
-    onViewChanged(): void;
 
     /**
      * Bases plugin.
@@ -51,6 +34,23 @@ export interface BasesView extends TextFileView {
      * The query for the view.
      */
     query: BasesQuery;
+
+    /**
+     * Get view type.
+     *
+     * @returns The bases view type.
+     */
+    getViewType(): typeof ViewType.Bases;
+
+    /**
+     * Called when the layout of the view changes.
+     */
+    onLayoutChange(): void;
+
+    /**
+     * Called when the view changes.
+     */
+    onViewChanged(): void;
 
     /**
      * Receives the sync state.

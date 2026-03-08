@@ -57,18 +57,200 @@ declare module 'obsidian' {
         activeLeaf: WorkspaceLeaf | null;
 
         /**
-         * Change active leaf and trigger leaf change event
-         *
-         * @unofficial
-         */
-        activeLeafEvents(): void;
-
-        /**
          * Currently active tab group.
          *
          * @unofficial
          */
         activeTabGroup: WorkspaceTabs;
+
+        /**
+         * Reference to App.
+         *
+         * @unofficial
+         */
+        app: App;
+
+        /**
+         * Backlink in document plugin instance, if enabled.
+         * @unofficial
+         */
+        backlinkInDocument?: unknown;
+
+        /**
+         * The container element of the workspace.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        containerEl: HTMLElement;
+
+        /**
+         * Registered CodeMirror editor extensions, to be applied to all CM instances.
+         *
+         * @unofficial
+         */
+        editorExtensions: Extension[];
+
+        /**
+         * The global editor suggest manager for live autocomplete.
+         * @unofficial
+         */
+        editorSuggest: EditorSuggestEx;
+
+        /**
+         * The workspace split that contains popout (floating) windows.
+         * @unofficial
+         */
+        floatingSplit: WorkspaceSplit;
+
+        /**
+         * Registered sources for hover link previews.
+         * @unofficial
+         */
+        hoverLinkSources: WorkspaceHoverLinkSourcesRecord;
+
+        /**
+         * Last opened file in the vault.
+         *
+         * @unofficial
+         */
+        lastActiveFile: TFile;
+
+        /**
+         * Whether the last active tab group had stacked tabs enabled.
+         * @unofficial
+         */
+        lastTabGroupStacked: boolean;
+
+        /**
+         * Queue of layout items pending initialization.
+         * @unofficial
+         */
+        layoutItemQueue: unknown[];
+
+        /**
+         * Whether the layout of the app has been successfully initialized.
+         * To react to the layout becoming ready, use {@link Workspace.onLayoutReady}
+         *
+         * @official
+         * @since 0.9.7
+         */
+        layoutReady: boolean;
+
+        /**
+         * The left ribbon of the workspace.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        leftRibbon: WorkspaceRibbon;
+
+        /**
+         * Button element for toggling the left sidebar.
+         * @unofficial
+         */
+        leftSidebarToggleButtonEl: HTMLElement;
+
+        /**
+         * The left split of the workspace.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        leftSplit: WorkspaceSidedock | WorkspaceMobileDrawer;
+
+        /**
+         * Array of renderCallbacks
+         *
+         * @unofficial
+         */
+        mobileFileInfos: unknown[];
+
+        /**
+         * Callbacks queued to run when the layout is ready.
+         * @unofficial
+         */
+        onLayoutReadyCallbacks?: unknown;
+
+        /**
+         * Registered operator function configurations.
+         *
+         * @unofficial
+         */
+        operatorFuncConfigs: Record<string, unknown>;
+
+        /**
+         * Protocol handlers registered on the workspace.
+         *
+         * @unofficial
+         */
+        protocolHandlers: Map<string, ObsidianProtocolHandler>;
+
+        /**
+         * Tracks last opened files in the vault.
+         *
+         * @unofficial
+         */
+        recentFileTracker: RecentFileTracker;
+
+        /**
+         * Save the state of the current workspace layout.
+         *
+         * @official
+         * @since 0.16.0
+         */
+        requestSaveLayout: Debouncer<[], Promise<void>>;
+
+        /**
+         * The right ribbon of the workspace.
+         *
+         * @deprecated No longer used
+         * @official
+         */
+        rightRibbon: WorkspaceRibbon;
+
+        /**
+         * Button element for toggling the right sidebar.
+         * @unofficial
+         */
+        rightSidebarToggleButtonEl: HTMLElement;
+
+        /**
+         * The right split of the workspace.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        rightSplit: WorkspaceSidedock | WorkspaceMobileDrawer;
+
+        /**
+         * The root split of the workspace.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        rootSplit: WorkspaceRoot;
+
+        /**
+         * Keyscope registered to the vault
+         *
+         * @unofficial
+         */
+        scope: Scope;
+
+        /**
+         * List of states that were closed and may be reopened.
+         *
+         * @unofficial
+         */
+        undoHistory: StateHistory[];
+
+        /**
+         * Change active leaf and trigger leaf change event
+         *
+         * @unofficial
+         */
+        activeLeafEvents(): void;
 
         /**
          * Add file to mobile file info
@@ -87,19 +269,6 @@ declare module 'obsidian' {
         addRecentFile(file: TFile): void;
 
         /**
-         * Reference to App.
-         *
-         * @unofficial
-         */
-        app: App;
-
-        /**
-         * Backlink in document plugin instance, if enabled.
-         * @unofficial
-         */
-        backlinkInDocument?: unknown;
-
-        /**
          * Change the layout of the workspace.
          *
          * @param workspace - The workspace to change the layout to.
@@ -116,14 +285,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         clearLayout(): Promise<void>;
-
-        /**
-         * The container element of the workspace.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        containerEl: HTMLElement;
 
         /**
          * Create a leaf by a split.
@@ -204,19 +365,6 @@ declare module 'obsidian' {
         ): Promise<WorkspaceLeaf>;
 
         /**
-         * Registered CodeMirror editor extensions, to be applied to all CM instances.
-         *
-         * @unofficial
-         */
-        editorExtensions: Extension[];
-
-        /**
-         * The global editor suggest manager for live autocomplete.
-         * @unofficial
-         */
-        editorSuggest: EditorSuggestEx;
-
-        /**
          * Get side leaf or create one if one does not exist.
          *
          * @param type - The type of the leaf to get or create.
@@ -227,12 +375,6 @@ declare module 'obsidian' {
          * @since 1.7.2
          */
         ensureSideLeaf(type: string, side: Side, options?: EnsureSideLeafOptions): Promise<WorkspaceLeaf>;
-
-        /**
-         * The workspace split that contains popout (floating) windows.
-         * @unofficial
-         */
-        floatingSplit: WorkspaceSplit;
 
         /**
          * Focus on a specific leaf.
@@ -511,12 +653,6 @@ declare module 'obsidian' {
         hasUndoHistory(): boolean;
 
         /**
-         * Registered sources for hover link previews.
-         * @unofficial
-         */
-        hoverLinkSources: WorkspaceHoverLinkSourcesRecord;
-
-        /**
          * Check if leaf has been attached to the workspace
          *
          * @param leaf - The leaf to check.
@@ -580,69 +716,12 @@ declare module 'obsidian' {
         iterateTabs(tabs: WorkspaceSplit | WorkspaceSplit[], cb: (leaf: WorkspaceLeaf) => boolean): boolean;
 
         /**
-         * Last opened file in the vault.
-         *
-         * @unofficial
-         */
-        lastActiveFile: TFile;
-
-        /**
-         * Whether the last active tab group had stacked tabs enabled.
-         * @unofficial
-         */
-        lastTabGroupStacked: boolean;
-
-        /**
-         * Queue of layout items pending initialization.
-         * @unofficial
-         */
-        layoutItemQueue: unknown[];
-
-        /**
-         * Whether the layout of the app has been successfully initialized.
-         * To react to the layout becoming ready, use {@link Workspace.onLayoutReady}
-         *
-         * @official
-         * @since 0.9.7
-         */
-        layoutReady: boolean;
-
-        /**
-         * The left ribbon of the workspace.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        leftRibbon: WorkspaceRibbon;
-
-        /**
-         * Button element for toggling the left sidebar.
-         * @unofficial
-         */
-        leftSidebarToggleButtonEl: HTMLElement;
-
-        /**
-         * The left split of the workspace.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        leftSplit: WorkspaceSidedock | WorkspaceMobileDrawer;
-
-        /**
          * Load workspace from disk and initialize
          *
          * @returns A promise that resolves when the layout is loaded.
          * @unofficial
          */
         loadLayout(): Promise<void>;
-
-        /**
-         * Array of renderCallbacks
-         *
-         * @unofficial
-         */
-        mobileFileInfos: unknown[];
 
         /**
          * Migrates this leaf to a new popout window.
@@ -1172,12 +1251,6 @@ declare module 'obsidian' {
         onLayoutReady(callback: () => any): void;
 
         /**
-         * Callbacks queued to run when the layout is ready.
-         * @unofficial
-         */
-        onLayoutReadyCallbacks?: unknown;
-
-        /**
          * Trigger the quick preview event with the given arguments.
          *
          * @param file - The file to preview.
@@ -1244,20 +1317,6 @@ declare module 'obsidian' {
         openPopoutLeaf(data?: WorkspaceWindowInitData): WorkspaceLeaf;
 
         /**
-         * Registered operator function configurations.
-         *
-         * @unofficial
-         */
-        operatorFuncConfigs: Record<string, unknown>;
-
-        /**
-         * Protocol handlers registered on the workspace.
-         *
-         * @unofficial
-         */
-        protocolHandlers: Map<string, ObsidianProtocolHandler>;
-
-        /**
          * Push leaf change to history
          *
          * @param leaf - The leaf to push.
@@ -1274,13 +1333,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         readWorkspaceFile(): Promise<SerializedWorkspace>;
-
-        /**
-         * Tracks last opened files in the vault.
-         *
-         * @unofficial
-         */
-        recentFileTracker: RecentFileTracker;
 
         /**
          * Get drag event target location
@@ -1357,14 +1409,6 @@ declare module 'obsidian' {
         requestResize(): void;
 
         /**
-         * Save the state of the current workspace layout.
-         *
-         * @official
-         * @since 0.16.0
-         */
-        requestSaveLayout: Debouncer<[], Promise<void>>;
-
-        /**
          * Request execution of layout update event
          *
          * @unofficial
@@ -1383,49 +1427,12 @@ declare module 'obsidian' {
         revealLeaf(leaf: WorkspaceLeaf): Promise<void>;
 
         /**
-         * The right ribbon of the workspace.
-         *
-         * @deprecated No longer used
-         * @official
-         */
-        rightRibbon: WorkspaceRibbon;
-
-        /**
-         * Button element for toggling the right sidebar.
-         * @unofficial
-         */
-        rightSidebarToggleButtonEl: HTMLElement;
-
-        /**
-         * The right split of the workspace.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        rightSplit: WorkspaceSidedock | WorkspaceMobileDrawer;
-
-        /**
-         * The root split of the workspace.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        rootSplit: WorkspaceRoot;
-
-        /**
          * Save workspace layout to disk.
          *
          * @returns A promise that resolves when the layout is saved.
          * @unofficial
          */
         saveLayout(): Promise<void>;
-
-        /**
-         * Keyscope registered to the vault
-         *
-         * @unofficial
-         */
-        scope: Scope;
 
         /**
          * Sets the active leaf.
@@ -1496,13 +1503,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         splitLeafOrActive(leaf?: WorkspaceLeaf, direction?: SplitDirection): WorkspaceLeaf;
-
-        /**
-         * List of states that were closed and may be reopened.
-         *
-         * @unofficial
-         */
-        undoHistory: StateHistory[];
 
         /**
          * Unregister a CodeMirror editor extension

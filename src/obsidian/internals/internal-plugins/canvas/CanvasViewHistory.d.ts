@@ -6,6 +6,15 @@ import type { CanvasViewData } from './CanvasData.d.ts';
  * @unofficial
  */
 export interface CanvasViewHistory {
+    /** Index of the current state in the history stack. */
+    current: number;
+
+    /** Array of historical canvas states. */
+    data: CanvasViewData[];
+
+    /** Maximum number of history entries to retain. */
+    max: number;
+
     /**
      * Check whether a redo operation is available.
      *
@@ -26,15 +35,6 @@ export interface CanvasViewHistory {
      * @returns The result of clearing the history.
      */
     clear(): unknown;
-
-    /** Index of the current state in the history stack. */
-    current: number;
-
-    /** Array of historical canvas states. */
-    data: CanvasViewData[];
-
-    /** Maximum number of history entries to retain. */
-    max: number;
 
     /**
      * Push a new state onto the history stack.

@@ -7,6 +7,13 @@ declare module 'obsidian' {
      */
     interface SliderComponent extends ValueComponent<number> {
         /**
+         * The HTML element that represents the slider.
+         *
+         * @official
+         */
+        sliderEl: HTMLInputElement;
+
+        /**
          * The function that's called after changing the value of the component.
          *
          * @remark Using `SliderComponent.onChange(callback)` assigns the callback to this method.
@@ -132,12 +139,5 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         showTooltip(): void;
-
-        /**
-         * The HTML element that represents the slider.
-         *
-         * @official
-         */
-        sliderEl: HTMLInputElement;
     }
 }

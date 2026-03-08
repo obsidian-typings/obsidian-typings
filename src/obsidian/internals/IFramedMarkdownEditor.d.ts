@@ -14,6 +14,11 @@ export interface IFramedMarkdownEditor extends MarkdownScrollableEditView {
     cleanup: null | (() => void);
 
     /**
+     * Element where the editor is embedded into.
+     */
+    iframeEl: null | HTMLIFrameElement;
+
+    /**
      * Executes cleanup function if exists.
      */
     cleanupIframe(): void;
@@ -25,11 +30,6 @@ export interface IFramedMarkdownEditor extends MarkdownScrollableEditView {
      * @remark Creates extension for overriding escape keymap to showPreview.
      */
     getDynamicExtensions(): Extension[];
-
-    /**
-     * Element where the editor is embedded into.
-     */
-    iframeEl: null | HTMLIFrameElement;
 
     /**
      * Loads the iframe element and prepare cleanup function.

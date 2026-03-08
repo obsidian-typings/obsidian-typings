@@ -20,6 +20,12 @@ export interface TextPropertyWidgetComponent extends PropertyWidgetComponentBase
     /** The input element for the property widget. */
     inputEl: HTMLInputElement;
 
+    /** The type of the property widget. */
+    type: 'text';
+
+    /** The value of the property widget. */
+    value: string;
+
     /**
      * Handle focus event.
      *
@@ -38,10 +44,4 @@ export interface TextPropertyWidgetComponent extends PropertyWidgetComponentBase
      * @param value - The value to set.
      */
     setValue(value: unknown): void;
-
-    /** The type of the property widget. */
-    type: 'text';
-
-    /** The value of the property widget. */
-    value: string;
 }

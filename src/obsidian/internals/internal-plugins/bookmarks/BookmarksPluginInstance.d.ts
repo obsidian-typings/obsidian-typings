@@ -26,6 +26,33 @@ import type { BookmarksPlugin } from './BookmarksPlugin.d.ts';
  * @unofficial
  */
 export interface BookmarksPluginInstance extends InternalPluginInstance<BookmarksPlugin>, Events {
+    /** Reference to the app. */
+    app: App;
+
+    /** Weak map tracking bookmarked views and their indicator elements. */
+    bookmarkedViews: WeakMap<View, HTMLElement>;
+
+    /** Lookup table mapping paths to bookmark items. */
+    bookmarkLookup: Record<string, BookmarkItem>;
+
+    /** Whether this plugin is enabled by default. */
+    defaultOn: true;
+
+    /** Whether the bookmark data has been successfully loaded and validated. */
+    hasValidData: boolean;
+
+    /** List of all bookmark items. */
+    items: BookmarkItem[];
+
+    /** Debounced handler triggered when bookmark items change. */
+    onItemsChanged: Debouncer<[boolean], void>;
+
+    /** Reference to the bookmarks plugin registration. */
+    plugin: BookmarksPlugin;
+
+    /** Lookup table mapping URLs to bookmark items. */
+    urlBookmarkLookup: Record<string, BookmarkItem>;
+
     /**
      * Internal handler called when bookmark items change.
      *
@@ -40,18 +67,6 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
      * @param instance - Optional parent plugin instance for group placement.
      */
     addItem(item: BookmarkItem, instance?: BookmarksPluginInstance): void;
-
-    /** Reference to the app. */
-    app: App;
-
-    /** Weak map tracking bookmarked views and their indicator elements. */
-    bookmarkedViews: WeakMap<View, HTMLElement>;
-
-    /** Lookup table mapping paths to bookmark items. */
-    bookmarkLookup: Record<string, BookmarkItem>;
-
-    /** Whether this plugin is enabled by default. */
-    defaultOn: true;
 
     /**
      * Open the edit dialog for a bookmark item.
@@ -83,14 +98,8 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
      */
     getItemTitle(item: BookmarkItem): string;
 
-    /** Whether the bookmark data has been successfully loaded and validated. */
-    hasValidData: boolean;
-
     /** Initialize the bookmarks view leaf. */
     initLeaf(): void;
-
-    /** List of all bookmark items. */
-    items: BookmarkItem[];
 
     /**
      * Load bookmark data from storage.
@@ -161,9 +170,6 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
      */
     onFilesMenu(menu: Menu, files: TAbstractFile[], source: string, leaf?: WorkspaceLeaf): void;
 
-    /** Debounced handler triggered when bookmark items change. */
-    onItemsChanged: Debouncer<[boolean], void>;
-
     /**
      * Add bookmark-related items to a workspace leaf context menu.
      *
@@ -220,9 +226,6 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
      */
     openBookmarks(items: BookmarkItem[], newLeaf?: PaneType | boolean): Promise<void>;
 
-    /** Reference to the bookmarks plugin registration. */
-    plugin: BookmarksPlugin;
-
     /** Rebuild the internal bookmark lookup caches. */
     rebuildBookmarkCache(): void;
 
@@ -238,7 +241,4 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
 
     /** Update bookmark indicator icons on tab headers. */
     updateTabHeaders(): void;
-
-    /** Lookup table mapping URLs to bookmark items. */
-    urlBookmarkLookup: Record<string, BookmarkItem>;
 }

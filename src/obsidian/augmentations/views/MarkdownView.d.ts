@@ -29,6 +29,96 @@ declare module 'obsidian' {
         backlinksEl: HTMLElement;
 
         /**
+         * The current mode of the markdown view.
+         *
+         * @official
+         */
+        currentMode: MarkdownSubView;
+
+        /**
+         * Editor component of the view.
+         *
+         * @unofficial
+         */
+        editMode: MarkdownEditView;
+
+        /**
+         * The editor of the markdown view.
+         *
+         * @official
+         */
+        editor: Editor;
+
+        /**
+         * The hover popover of the markdown view.
+         *
+         * @official
+         */
+        hoverPopover: HoverPopover | null;
+
+        /**
+         * Editable title element of the view.
+         *
+         * @unofficial
+         */
+        inlineTitleEl: HTMLElement;
+
+        /**
+         * Frontmatter editor of the editor.
+         *
+         * @unofficial
+         */
+        metadataEditor: MetadataEditor;
+
+        /**
+         * Button for switching between different modes of the view.
+         *
+         * @unofficial
+         */
+        modeButtonEl: HTMLAnchorElement;
+
+        /**
+         * The registered modes of the view.
+         *
+         * @unofficial
+         */
+        modes: MarkdownViewModes;
+
+        /**
+         * The preview mode of the markdown view.
+         *
+         * @official
+         */
+        previewMode: MarkdownPreviewView;
+
+        /**
+         * File frontmatter as a raw string.
+         *
+         * @unofficial
+         */
+        rawFrontmatter: string;
+
+        /**
+         * Current scroll position of the editor.
+         *
+         * @unofficial
+         */
+        scroll: null | number;
+
+        /**
+         * Whether to show backlinks in the editor.
+         *
+         * @unofficial
+         */
+        showBacklinks: boolean;
+
+        /**
+         * @deprecated - CM5 Editor
+         * @unofficial
+         */
+        sourceMode: MarkdownViewSourceMode;
+
+        /**
          * Whether the editor can render properties according to the current mode and config.
          *
          * @returns Whether properties can be shown.
@@ -68,27 +158,6 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link constructor} instead.
          */
         constructor__(leaf: WorkspaceLeaf): this;
-
-        /**
-         * The current mode of the markdown view.
-         *
-         * @official
-         */
-        currentMode: MarkdownSubView;
-
-        /**
-         * Editor component of the view.
-         *
-         * @unofficial
-         */
-        editMode: MarkdownEditView;
-
-        /**
-         * The editor of the markdown view.
-         *
-         * @official
-         */
-        editor: Editor;
 
         /**
          * Edit the focused property in the metadata editor.
@@ -177,20 +246,6 @@ declare module 'obsidian' {
         getViewType(): typeof ViewType.Markdown;
 
         /**
-         * The hover popover of the markdown view.
-         *
-         * @official
-         */
-        hoverPopover: HoverPopover | null;
-
-        /**
-         * Editable title element of the view.
-         *
-         * @unofficial
-         */
-        inlineTitleEl: HTMLElement;
-
-        /**
          * Validate correctness of frontmatter and update metadata editor.
          *
          * @param data - The file data containing frontmatter.
@@ -199,33 +254,12 @@ declare module 'obsidian' {
         loadFrontmatter(data: string): void;
 
         /**
-         * Frontmatter editor of the editor.
-         *
-         * @unofficial
-         */
-        metadataEditor: MetadataEditor;
-
-        /**
          * Whether the metadata editor has focus.
          *
          * @returns Whether the metadata editor is focused.
          * @unofficial
          */
         metadataHasFocus(): boolean;
-
-        /**
-         * Button for switching between different modes of the view.
-         *
-         * @unofficial
-         */
-        modeButtonEl: HTMLAnchorElement;
-
-        /**
-         * The registered modes of the view.
-         *
-         * @unofficial
-         */
-        modes: MarkdownViewModes;
 
         /**
          * On app css change, update source mode editor.
@@ -289,25 +323,11 @@ declare module 'obsidian' {
         onSwitchView(event: KeyboardEvent | MouseEvent): Promise<void>;
 
         /**
-         * The preview mode of the markdown view.
-         *
-         * @official
-         */
-        previewMode: MarkdownPreviewView;
-
-        /**
          * Opens PDF modal for exporting PDF of the current file.
          *
          * @unofficial
          */
         printToPdf(): void;
-
-        /**
-         * File frontmatter as a raw string.
-         *
-         * @unofficial
-         */
-        rawFrontmatter: string;
 
         /**
          * Redo action of source mode editor.
@@ -332,13 +352,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         saveFrontmatter(properties: Record<string, any>): void;
-
-        /**
-         * Current scroll position of the editor.
-         *
-         * @unofficial
-         */
-        scroll: null | number;
 
         /**
          * Set the mode of the editor.
@@ -377,13 +390,6 @@ declare module 'obsidian' {
         shiftFocusBefore(): void;
 
         /**
-         * Whether to show backlinks in the editor.
-         *
-         * @unofficial
-         */
-        showBacklinks: boolean;
-
-        /**
          * Show the search modal.
          *
          * @param replace - Whether to perform a search & replace.
@@ -396,12 +402,6 @@ declare module 'obsidian' {
          * @official
          */
         showSearch(replace?: boolean): void;
-
-        /**
-         * @deprecated - CM5 Editor
-         * @unofficial
-         */
-        sourceMode: MarkdownViewSourceMode;
 
         /**
          * Toggle backlinks on editor.

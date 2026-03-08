@@ -16,16 +16,6 @@ declare module 'obsidian' {
         default?: string;
 
         /**
-         * If provided, only properties which pass the filter will be included for selection in the property dropdown.
-         *
-         * @param prop - The property to filter.
-         * @returns A boolean indicating whether the property should be included.
-         * @official
-         * @since 1.10.0
-         */
-        filter?: (prop: BasesPropertyId) => boolean;
-
-        /**
          * Placeholder.
          *
          * @official
@@ -40,5 +30,15 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         type: 'property';
+
+        /**
+         * If provided, only properties which pass the filter will be included for selection in the property dropdown.
+         *
+         * @param prop - The property to filter.
+         * @returns A boolean indicating whether the property should be included.
+         * @official
+         * @since 1.10.0
+         */
+        filter?: (prop: BasesPropertyId) => boolean;
     }
 }

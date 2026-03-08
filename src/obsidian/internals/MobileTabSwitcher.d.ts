@@ -15,14 +15,8 @@ export interface MobileTabSwitcher {
     /** Directory path for cached tab previews. */
     cacheDir: string;
 
-    /** Close the currently selected tab. */
-    close(): void;
-
     /** Container element for the tab switcher. */
     containerEl: HTMLDivElement;
-
-    /** Hide the tab switcher UI. */
-    hide(): void;
 
     /** Inner scrollable element containing tab previews. */
     innerScrollEl: HTMLDivElement;
@@ -30,17 +24,26 @@ export interface MobileTabSwitcher {
     /** Whether the tab switcher is currently visible. */
     isVisible: boolean;
 
-    /** Handle workspace layout changes by updating the tab list. */
-    onLayoutChange(): void;
-
-    /** Render the tab switcher content. */
-    render(): void;
-
     /** Debounced function to re-render the tab switcher. */
     requestRender: Debouncer<[], void>;
 
     /** Scroll container element. */
     scrollEl: HTMLDivElement;
+
+    /** Weak map caching tab preview images by leaf reference. */
+    tabPreviewLookup: WeakMap<object, unknown>;
+
+    /** Close the currently selected tab. */
+    close(): void;
+
+    /** Hide the tab switcher UI. */
+    hide(): void;
+
+    /** Handle workspace layout changes by updating the tab list. */
+    onLayoutChange(): void;
+
+    /** Render the tab switcher content. */
+    render(): void;
 
     /**
      * Set up the directory for caching tab preview images.
@@ -62,7 +65,4 @@ export interface MobileTabSwitcher {
      * @param e - The mouse event.
      */
     showTabManagementMenu(e: MouseEvent): void;
-
-    /** Weak map caching tab preview images by leaf reference. */
-    tabPreviewLookup: WeakMap<object, unknown>;
 }

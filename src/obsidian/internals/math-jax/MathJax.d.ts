@@ -6,15 +6,24 @@ import type { ExtendedMetrics } from './ExtendedMetrics.d.ts';
  * @unofficial
  */
 export interface MathJax {
+    /** MathJax configuration object. */
+    config: unknown;
+
+    /** MathJax component loader. */
+    loader: unknown;
+
+    /** MathJax runtime options. */
+    options: unknown;
+
+    /** MathJax library version string. */
+    version: string;
+
     /**
      * Get the CHTML stylesheet element for MathJax-rendered content.
      *
      * @returns The stylesheet element.
      */
     chtmlStylesheet(): HTMLStyleElement;
-
-    /** MathJax configuration object. */
-    config: unknown;
 
     /**
      * Get font metrics for a given DOM node, used for scaling math output.
@@ -24,12 +33,6 @@ export interface MathJax {
      * @returns Font metrics for the node.
      */
     getMetricsFor(node: HTMLElement, display?: boolean): ExtendedMetrics;
-
-    /** MathJax component loader. */
-    loader: unknown;
-
-    /** MathJax runtime options. */
-    options: unknown;
 
     /**
      * Convert a TeX string to a CHTML (HTML) element synchronously.
@@ -91,7 +94,4 @@ export interface MathJax {
      * @returns A promise that resolves when typesetting is complete.
      */
     typesetPromise(elements?: unknown[] | null): Promise<void>;
-
-    /** MathJax library version string. */
-    version: string;
 }

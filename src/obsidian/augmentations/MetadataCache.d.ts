@@ -36,6 +36,144 @@ declare module 'obsidian' {
         blockCache: BlockCache;
 
         /**
+         * IndexedDB database
+         *
+         * @unofficial
+         */
+        db: IDBDatabase;
+
+        /**
+         * Debounced callback that fires when the metadata cache finishes processing.
+         * @unofficial
+         */
+        didFinish: Debouncer<[], void>;
+
+        /**
+         * File contents cache
+         *
+         * @unofficial
+         */
+        fileCache: MetadataCacheFileCacheRecord;
+
+        /**
+         * Whether the cache is fully loaded
+         *
+         * @unofficial
+         */
+        initialized: boolean;
+
+        /**
+         * Amount of tasks currently in progress
+         *
+         * @unofficial
+         */
+        inProgressTaskCount: number;
+
+        /**
+         * Queue of files pending link resolution.
+         * @unofficial
+         */
+        linkResolverQueue: ItemQueue<TFile | null> | null;
+
+        /**
+         * Registered link updater strategies for different file types.
+         * @unofficial
+         */
+        linkUpdaters: LinkUpdaters;
+
+        /**
+         * File hash to metadata cache entry mapping
+         *
+         * @unofficial
+         */
+        metadataCache: MetadataCacheMetadataCacheRecord;
+
+        /**
+         * Callbacks to execute on cache clean
+         *
+         * @unofficial
+         */
+        onCleanCacheCallbacks: (() => void)[];
+
+        /**
+         * Promise that resolves when the preload is complete, or `null` if not started.
+         * @unofficial
+         */
+        preloadPromise: Promise<void> | null;
+
+        /**
+         * Contains all resolved links. This object maps each source file's path to an object of destination file paths with the link count.
+         * Source and destination paths are all vault absolute paths that comes from `TFile.path` and can be used with `Vault.getAbstractFileByPath(path)`.
+         *
+         * @official
+         */
+        resolvedLinks: Record<string, Record<string, number>>;
+
+        /**
+         * Debounced function for saving caches to the database.
+         * @unofficial
+         */
+        transactionSave: Debouncer<[], void>;
+
+        /**
+         * Mapping of filename to collection of files that share the same name
+         *
+         * @unofficial
+         */
+        uniqueFileLookup: CustomArrayDict<TFile>;
+
+        /**
+         * Contains all unresolved links. This object maps each source file to an object of unknown destinations with count.
+         * Source paths are all vault absolute paths, similar to {@link resolvedLinks}.
+         *
+         * @official
+         */
+        unresolvedLinks: Record<string, Record<string, number>>;
+
+        /**
+         * Cache of paths checked against user ignore filters.
+         * @unofficial
+         */
+        userIgnoreFilterCache: Record<string, boolean>;
+
+        /**
+         * Compiled regular expressions for user-defined ignore filters.
+         * @unofficial
+         */
+        userIgnoreFilters: RegExp[] | null;
+
+        /**
+         * Raw string representation of user-defined ignore filters.
+         * @unofficial
+         */
+        userIgnoreFiltersString: string;
+
+        /**
+         * Reference to Vault.
+         *
+         * @unofficial
+         */
+        vault: Vault;
+
+        /**
+         * Web Worker used for parsing metadata in the background.
+         * @unofficial
+         */
+        worker: Worker;
+
+        /**
+         * Resolve function for the current worker promise, or `null` if idle.
+         * @unofficial
+         */
+        workerResolve: ((value: CachedMetadata | PromiseLike<CachedMetadata>) => void) | null;
+
+        /**
+         * Queue for processing metadata computation tasks sequentially.
+         * @unofficial
+         */
+        workQueue: PromisedQueue;
+
+        /**
          * Execute onCleanCache callbacks if cache is clean.
          *
          * @unofficial
@@ -76,32 +214,12 @@ declare module 'obsidian' {
         computeMetadataAsync(arrayBuffer: ArrayBuffer): Promise<CachedMetadata | undefined>;
 
         /**
-         * IndexedDB database
-         *
-         * @unofficial
-         */
-        db: IDBDatabase;
-
-        /**
          * Remove all entries that contain deleted path
          *
          * @param path - The path to remove entries for.
          * @unofficial
          */
         deletePath(path: string): void;
-
-        /**
-         * Debounced callback that fires when the metadata cache finishes processing.
-         * @unofficial
-         */
-        didFinish: Debouncer<[], void>;
-
-        /**
-         * File contents cache
-         *
-         * @unofficial
-         */
-        fileCache: MetadataCacheFileCacheRecord;
 
         /**
          * Generates a linktext for a file.
@@ -254,20 +372,6 @@ declare module 'obsidian' {
         initialize(): Promise<void>;
 
         /**
-         * Whether the cache is fully loaded
-         *
-         * @unofficial
-         */
-        initialized: boolean;
-
-        /**
-         * Amount of tasks currently in progress
-         *
-         * @unofficial
-         */
-        inProgressTaskCount: number;
-
-        /**
          * Check whether there are no cache tasks in progress
          *
          * @returns Whether the cache is clean.
@@ -325,25 +429,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         linkResolver(): void;
-
-        /**
-         * Queue of files pending link resolution.
-         * @unofficial
-         */
-        linkResolverQueue: ItemQueue<TFile | null> | null;
-
-        /**
-         * Registered link updater strategies for different file types.
-         * @unofficial
-         */
-        linkUpdaters: LinkUpdaters;
-
-        /**
-         * File hash to metadata cache entry mapping
-         *
-         * @unofficial
-         */
-        metadataCache: MetadataCacheMetadataCacheRecord;
 
         /**
          * Called when a file has been indexed, and its (updated) cache is now available.
@@ -445,13 +530,6 @@ declare module 'obsidian' {
         onCleanCache(onCleanCacheCallback: () => void): void;
 
         /**
-         * Callbacks to execute on cache clean
-         *
-         * @unofficial
-         */
-        onCleanCacheCallbacks: (() => void)[];
-
-        /**
          * Handle a configuration change event.
          *
          * @param configKey - The configuration key that changed.
@@ -499,26 +577,12 @@ declare module 'obsidian' {
         preload: () => Promise<void>;
 
         /**
-         * Promise that resolves when the preload is complete, or `null` if not started.
-         * @unofficial
-         */
-        preloadPromise: Promise<void> | null;
-
-        /**
          * Queue a file for link resolution.
          *
          * @param file - The file to queue for link resolution, or `null`.
          * @unofficial
          */
         queueFileForLinkResolution(file: TFile | null): void;
-
-        /**
-         * Contains all resolved links. This object maps each source file's path to an object of destination file paths with the link count.
-         * Source and destination paths are all vault absolute paths that comes from `TFile.path` and can be used with `Vault.getAbstractFileByPath(path)`.
-         *
-         * @official
-         */
-        resolvedLinks: Record<string, Record<string, number>>;
 
         /**
          * Check editor for unresolved links and mark these as unresolved
@@ -554,27 +618,6 @@ declare module 'obsidian' {
         showIndexingNotice(): void;
 
         /**
-         * Debounced function for saving caches to the database.
-         * @unofficial
-         */
-        transactionSave: Debouncer<[], void>;
-
-        /**
-         * Mapping of filename to collection of files that share the same name
-         *
-         * @unofficial
-         */
-        uniqueFileLookup: CustomArrayDict<TFile>;
-
-        /**
-         * Contains all unresolved links. This object maps each source file to an object of unknown destinations with count.
-         * Source paths are all vault absolute paths, similar to {@link resolvedLinks}.
-         *
-         * @official
-         */
-        unresolvedLinks: Record<string, Record<string, number>>;
-
-        /**
          * Re-resolve all links for changed path
          *
          * @param path - The changed path.
@@ -588,31 +631,6 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateUserIgnoreFilters(): void;
-
-        /**
-         * Cache of paths checked against user ignore filters.
-         * @unofficial
-         */
-        userIgnoreFilterCache: Record<string, boolean>;
-
-        /**
-         * Compiled regular expressions for user-defined ignore filters.
-         * @unofficial
-         */
-        userIgnoreFilters: RegExp[] | null;
-
-        /**
-         * Raw string representation of user-defined ignore filters.
-         * @unofficial
-         */
-        userIgnoreFiltersString: string;
-
-        /**
-         * Reference to Vault.
-         *
-         * @unofficial
-         */
-        vault: Vault;
 
         /**
          * Bind actions to listeners on vault
@@ -629,23 +647,5 @@ declare module 'obsidian' {
          * @unofficial
          */
         work(arrayBuffer: ArrayBuffer): Promise<CachedMetadata>;
-
-        /**
-         * Web Worker used for parsing metadata in the background.
-         * @unofficial
-         */
-        worker: Worker;
-
-        /**
-         * Resolve function for the current worker promise, or `null` if idle.
-         * @unofficial
-         */
-        workerResolve: ((value: CachedMetadata | PromiseLike<CachedMetadata>) => void) | null;
-
-        /**
-         * Queue for processing metadata computation tasks sequentially.
-         * @unofficial
-         */
-        workQueue: PromisedQueue;
     }
 }

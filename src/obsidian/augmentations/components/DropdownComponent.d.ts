@@ -7,6 +7,14 @@ declare module 'obsidian' {
      */
     interface DropdownComponent extends ValueComponent<string> {
         /**
+         * The HTML element representation of the dropdown.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        selectEl: HTMLSelectElement;
+
+        /**
          * Add an option to the dropdown.
          *
          * @param value - The value of the option.
@@ -75,14 +83,6 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         onChange(callback: (value: string) => any): this;
-
-        /**
-         * The HTML element representation of the dropdown.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        selectEl: HTMLSelectElement;
 
         /**
          * Set the disabled state of the dropdown.

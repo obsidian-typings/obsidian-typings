@@ -14,17 +14,6 @@ declare global {
         };
 
         /**
-         * Hides the element using css `display` property.
-         *
-         * @example
-         * ```ts
-         * document.body.hide();
-         * ```
-         * @official
-         */
-        hide(): void;
-
-        /**
          * Get the inner height of this element without padding.
          * @official
          */
@@ -35,6 +24,17 @@ declare global {
          * @official
          */
         readonly innerWidth: number;
+
+        /**
+         * Hides the element using css `display` property.
+         *
+         * @example
+         * ```ts
+         * document.body.hide();
+         * ```
+         * @official
+         */
+        hide(): void;
 
         /**
          * Returns whether this element is shown, when the element is attached to the DOM and.

@@ -25,41 +25,14 @@ import type { Token } from './Token.d.ts';
  */
 export interface MarkdownBaseView extends Component {
     /**
-     * Currently active CM instance (table cell CM or main CM).
-     *
-     * @returns The active CodeMirror editor view.
-     */
-    get activeCM(): EditorView;
-
-    /**
      * Reference to the app.
      */
     app: App;
 
     /**
-     * Apply fold history to editor.
-     *
-     * @param info - Fold information to apply.
-     */
-    applyFoldInfo(info: FoldInfo): void;
-
-    /**
-     * Constructs local (always active) extensions for the editor.
-     *
-     * @returns Array of CodeMirror extensions.
-     * @remark Creates extensions for handling dom events, editor info state fields, update listener, suggestions.
-     */
-    buildLocalExtensions(): Extension[];
-
-    /**
      * Callback to clear all elements.
      */
     cleanupLivePreview: null | (() => void);
-
-    /**
-     * Cleanup live preview, remove and then re-add all editor extensions.
-     */
-    clear(): void;
 
     /**
      * Manager that handles pasting text, html and images into the editor.
@@ -87,18 +60,6 @@ export interface MarkdownBaseView extends Component {
     cursorPopupEl: HTMLElement | null;
 
     /**
-     * Clean up live preview, remove all extensions, destroy editor.
-     */
-    destroy(): void;
-
-    /**
-     * Removes specified tablecell.
-     *
-     * @param cell - Table cell editor to destroy.
-     */
-    destroyTableCell(cell?: TableCellEditor): void;
-
-    /**
      * Obsidian editor instance.
      *
      * @remark Handles formatting, table creation, highlight adding, etc.
@@ -114,6 +75,70 @@ export interface MarkdownBaseView extends Component {
      * Editor suggester for autocompleting files, links, aliases, etc.
      */
     editorSuggest: EditorSuggests;
+
+    /**
+     * The CodeMirror plugins that handle the rendering of, and interaction with Obsidian's Markdown.
+     */
+    livePreviewPlugin: Extension[];
+
+    /**
+     * Local (always active) extensions for the editor.
+     */
+    localExtensions: Extension[];
+
+    /**
+     * Controller of the editor view.
+     */
+    owner: MarkdownFileInfo;
+
+    /**
+     * Whether live preview rendering is disabled.
+     */
+    sourceMode: boolean;
+
+    /**
+     * Reference to editor attached to table cell, if any.
+     */
+    tableCell: null | TableCellEditor;
+
+    /**
+     * Currently active CM instance (table cell CM or main CM).
+     *
+     * @returns The active CodeMirror editor view.
+     */
+    get activeCM(): EditorView;
+
+    /**
+     * Apply fold history to editor.
+     *
+     * @param info - Fold information to apply.
+     */
+    applyFoldInfo(info: FoldInfo): void;
+
+    /**
+     * Constructs local (always active) extensions for the editor.
+     *
+     * @returns Array of CodeMirror extensions.
+     * @remark Creates extensions for handling dom events, editor info state fields, update listener, suggestions.
+     */
+    buildLocalExtensions(): Extension[];
+
+    /**
+     * Cleanup live preview, remove and then re-add all editor extensions.
+     */
+    clear(): void;
+
+    /**
+     * Clean up live preview, remove all extensions, destroy editor.
+     */
+    destroy(): void;
+
+    /**
+     * Removes specified tablecell.
+     *
+     * @param cell - Table cell editor to destroy.
+     */
+    destroyTableCell(cell?: TableCellEditor): void;
 
     /**
      * Edit a specified table cell, creating a table cell editor.
@@ -160,16 +185,6 @@ export interface MarkdownBaseView extends Component {
      * @remark Will build extensions if they were not already built.
      */
     getLocalExtensions(): unknown;
-
-    /**
-     * The CodeMirror plugins that handle the rendering of, and interaction with Obsidian's Markdown.
-     */
-    livePreviewPlugin: Extension[];
-
-    /**
-     * Local (always active) extensions for the editor.
-     */
-    localExtensions: Extension[];
 
     /**
      * Creates menu on right mouse click.
@@ -226,11 +241,6 @@ export interface MarkdownBaseView extends Component {
     onUpdate(update: ViewUpdate, changed: boolean): void;
 
     /**
-     * Controller of the editor view.
-     */
-    owner: MarkdownFileInfo;
-
-    /**
      * Returns path of the attached file.
      *
      * @returns The file path.
@@ -268,16 +278,6 @@ export interface MarkdownBaseView extends Component {
      * @param clear - Whether to clear existing state.
      */
     set(data: string, clear: boolean): void;
-
-    /**
-     * Whether live preview rendering is disabled.
-     */
-    sourceMode: boolean;
-
-    /**
-     * Reference to editor attached to table cell, if any.
-     */
-    tableCell: null | TableCellEditor;
 
     /**
      * Enables/disables frontmatter folding.

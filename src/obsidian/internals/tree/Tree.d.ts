@@ -26,6 +26,51 @@ export interface Tree<T extends TreeItem> {
     app: App;
 
     /**
+     * Container element of the tree view.
+     */
+    containerEl: HTMLElement;
+
+    /**
+     * Currently focused item in tree view.
+     */
+    focusedItem: T | null;
+
+    /**
+     * ID of the view the tree is associated with.
+     */
+    id: string;
+
+    /**
+     * Facilitates rendering of tree view.
+     */
+    infinityScroll: InfinityScroll;
+
+    /**
+     * Whether all items in the tree are collapsed.
+     */
+    isAllCollapsed: boolean;
+
+    /**
+     * Whether tree items should default to collapsed state.
+     */
+    prefersCollapsed: boolean;
+
+    /**
+     * Key scope for tree view.
+     */
+    scope: Scope;
+
+    /**
+     * Currently selected items in tree view.
+     */
+    selectedDoms: Set<T>;
+
+    /**
+     * The view the tree is associated with.
+     */
+    view: View;
+
+    /**
      * Change the focused item to the next item in specified direction.
      *
      * @param direction - The direction to move focus.
@@ -38,21 +83,11 @@ export interface Tree<T extends TreeItem> {
     clearSelectedDoms(): void;
 
     /**
-     * Container element of the tree view.
-     */
-    containerEl: HTMLElement;
-
-    /**
      * Mark tree item as deselected.
      *
      * @param node - The tree item to deselect.
      */
     deselectItem(node: T): void;
-
-    /**
-     * Currently focused item in tree view.
-     */
-    focusedItem: T | null;
 
     /**
      * Get the local storage key for the saved tree view folds.
@@ -98,24 +133,9 @@ export interface Tree<T extends TreeItem> {
     handleRenameFocusedItem: (event: KeyboardEvent) => void;
 
     /**
-     * ID of the view the tree is associated with.
-     */
-    id: string;
-
-    /**
-     * Facilitates rendering of tree view.
-     */
-    infinityScroll: InfinityScroll;
-
-    /**
      * Registers all keyboard actions to the tree view keyscope.
      */
     initializeKeyboardNav(): void;
-
-    /**
-     * Whether all items in the tree are collapsed.
-     */
-    isAllCollapsed: boolean;
 
     /**
      * Check whether item is a valid tree item.
@@ -171,11 +191,6 @@ export interface Tree<T extends TreeItem> {
     onResize(): void;
 
     /**
-     * Whether tree items should default to collapsed state.
-     */
-    prefersCollapsed: boolean;
-
-    /**
      * Request saving of the current fold states.
      */
     requestSaveFolds: () => void;
@@ -191,16 +206,6 @@ export interface Tree<T extends TreeItem> {
      * Save the current fold states of the tree view to local storage.
      */
     saveFolds(): void;
-
-    /**
-     * Key scope for tree view.
-     */
-    scope: Scope;
-
-    /**
-     * Currently selected items in tree view.
-     */
-    selectedDoms: Set<T>;
 
     /**
      * Mark tree item as selected.
@@ -228,9 +233,4 @@ export interface Tree<T extends TreeItem> {
      * (Un)Collapse all items in the tree view.
      */
     toggleCollapseAll(): void;
-
-    /**
-     * The view the tree is associated with.
-     */
-    view: View;
 }

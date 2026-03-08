@@ -10,14 +10,6 @@ import type { Tree as LezerTree } from '@lezer/common';
  */
 export interface LanguageState {
     /**
-     * Apply a transaction to produce an updated language state.
-     *
-     * @param tr - The transaction to apply.
-     * @returns The updated language state.
-     */
-    apply(tr: Transaction): LanguageState;
-
-    /**
      * A mutable parse state that is used to preserve work done during
      * the lifetime of a state when moving to the next state.
      */
@@ -27,4 +19,12 @@ export interface LanguageState {
      * The current tree. Immutable, because directly accessible from the editor state.
      */
     tree: LezerTree;
+
+    /**
+     * Apply a transaction to produce an updated language state.
+     *
+     * @param tr - The transaction to apply.
+     * @returns The updated language state.
+     */
+    apply(tr: Transaction): LanguageState;
 }

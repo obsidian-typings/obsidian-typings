@@ -23,18 +23,48 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
     /** Button elements added by this plugin. */
     addedButtonEls: HTMLDivElement[];
 
+    /** Reference to the app. */
+    app: App;
+
+    /** Commands registered by this plugin. */
+    commands: Command[];
+
+    /** Whether this plugin is currently enabled. */
+    enabled: boolean;
+
+    /** Whether this plugin has a status bar item. */
+    hasStatusBarItem: boolean;
+
+    /** The plugin instance containing the actual logic. */
+    instance: InternalPluginInstance;
+
+    /** Timestamp of the last settings save. */
+    lastSave: number;
+
+    /** Reference to the internal plugins manager. */
+    manager: InternalPlugins;
+
+    /** Mobile file info renderers registered by this plugin. */
+    mobileFileInfo: MobileFileInfo[];
+
+    /** Debounced handler for config file changes. */
+    onConfigFileChange: Debouncer<[], Promise<void>>;
+
+    /** Ribbon items registered by this plugin. */
+    ribbonItems: RibbonItem[];
+
+    /** Status bar element for this plugin, or `null` if none. */
+    statusBarEl: HTMLDivElement | null;
+
+    /** View creators registered by this plugin, keyed by view type. */
+    views: Record<string, ViewCreator>;
+
     /**
      * Add a settings tab for this plugin.
      *
      * @param settingTab - The settings tab to add.
      */
     addSettingTab(settingTab: PluginSettingTab): void;
-
-    /** Reference to the app. */
-    app: App;
-
-    /** Commands registered by this plugin. */
-    commands: Command[];
 
     /**
      * Delete persisted data for this plugin.
@@ -58,9 +88,6 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
      */
     enable(isEnabledByUser?: boolean): Promise<void>;
 
-    /** Whether this plugin is currently enabled. */
-    enabled: boolean;
-
     /**
      * Get the last modified time of the plugin config file.
      *
@@ -75,17 +102,8 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
      */
     handleConfigFileChange(): Promise<void>;
 
-    /** Whether this plugin has a status bar item. */
-    hasStatusBarItem: boolean;
-
     /** Initialize this plugin. */
     init(): void;
-
-    /** The plugin instance containing the actual logic. */
-    instance: InternalPluginInstance;
-
-    /** Timestamp of the last settings save. */
-    lastSave: number;
 
     /**
      * Load persisted data for this plugin.
@@ -93,15 +111,6 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
      * @returns The loaded data, or `null` if none exists.
      */
     loadData(): Promise<object | null>;
-
-    /** Reference to the internal plugins manager. */
-    manager: InternalPlugins;
-
-    /** Mobile file info renderers registered by this plugin. */
-    mobileFileInfo: MobileFileInfo[];
-
-    /** Debounced handler for config file changes. */
-    onConfigFileChange: Debouncer<[], Promise<void>>;
 
     /**
      * Register a global command for this plugin.
@@ -137,9 +146,6 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
      */
     registerViewType(type: string, creator: ViewCreator): void;
 
-    /** Ribbon items registered by this plugin. */
-    ribbonItems: RibbonItem[];
-
     /**
      * Save data for this plugin.
      *
@@ -147,10 +153,4 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
      * @returns A promise that resolves when the data is saved.
      */
     saveData(data: object): Promise<void>;
-
-    /** Status bar element for this plugin, or `null` if none. */
-    statusBarEl: HTMLDivElement | null;
-
-    /** View creators registered by this plugin, keyed by view type. */
-    views: Record<string, ViewCreator>;
 }

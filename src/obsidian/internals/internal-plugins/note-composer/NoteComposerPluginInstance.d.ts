@@ -20,6 +20,15 @@ export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteC
     /** Reference to the app. */
     app: App;
 
+    /** Whether this plugin is enabled by default. */
+    defaultOn: true;
+
+    /** Configuration options for the note composer. */
+    options: NoteComposerPluginOptions;
+
+    /** Reference to the note composer plugin registration. */
+    pluginInstance: NoteComposerPlugin;
+
     /**
      * Apply a template to content, substituting title placeholders.
      *
@@ -29,9 +38,6 @@ export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteC
      * @returns The processed content with substitutions applied.
      */
     applyTemplate(content: string, fromTitle: string, newTitle: string): Promise<string>;
-
-    /** Whether this plugin is enabled by default. */
-    defaultOn: true;
 
     /**
      * Extract the content under a heading into a new note.
@@ -78,10 +84,4 @@ export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteC
      * @param source - The source of the context menu event.
      */
     onFileMenu(menu: Menu, file: TFile, source: string): void;
-
-    /** Configuration options for the note composer. */
-    options: NoteComposerPluginOptions;
-
-    /** Reference to the note composer plugin registration. */
-    pluginInstance: NoteComposerPlugin;
 }

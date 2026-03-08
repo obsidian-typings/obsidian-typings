@@ -9,6 +9,28 @@ declare module 'obsidian' {
      */
     interface Plugin extends Component {
         /**
+         * The Obsidian app instance.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        app: App;
+
+        /**
+         * The plugin manifest.
+         *
+         * @official
+         * @since 0.9.7
+         */
+        manifest: PluginManifest;
+
+        /**
+         * Debounced handler for config file changes.
+         * @unofficial
+         */
+        onConfigFileChange: Debouncer<[], Promise<void>>;
+
+        /**
          * Internal handler invoked when the plugin's config file changes on disk.
          *
          * @returns A promise that resolves when the config file change is handled.
@@ -77,14 +99,6 @@ declare module 'obsidian' {
         addStatusBarItem(): HTMLElement;
 
         /**
-         * The Obsidian app instance.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        app: App;
-
-        /**
          * The constructor for the plugin.
          *
          * @param app - The Obsidian app instance.
@@ -104,20 +118,6 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         loadData(): Promise<any>;
-
-        /**
-         * The plugin manifest.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        manifest: PluginManifest;
-
-        /**
-         * Debounced handler for config file changes.
-         * @unofficial
-         */
-        onConfigFileChange: Debouncer<[], Promise<void>>;
 
         /**
          * Called when the `data.json` file is modified on disk externally from Obsidian.

@@ -13,18 +13,24 @@ export interface CanvasIndex extends Component {
     /** Reference to the Obsidian app instance. */
     app: App;
 
+    /** Queue of files waiting to be processed by the indexer. */
+    fileQueue: unknown[];
+
+    /** Current animation frame request, or `null` when idle. */
+    frame: null;
+
+    /** Index of canvas entries keyed by file path. */
+    index: Record<string, CanvasIndexEntry>;
+
+    /** Weak map tracking reference node IDs for canvas files. */
+    refNodeIds: WeakMap<object, unknown>;
+
     /**
      * Check whether a file can be processed by the canvas indexer.
      *
      * @returns Whether the file can be processed.
      */
     canProcess(arg1: unknown): unknown;
-
-    /** Queue of files waiting to be processed by the indexer. */
-    fileQueue: unknown[];
-
-    /** Current animation frame request, or `null` when idle. */
-    frame: null;
 
     /**
      * Get the index entry for the specified file.
@@ -46,9 +52,6 @@ export interface CanvasIndex extends Component {
      * @returns The index entry.
      */
     getForPath(arg1: unknown): unknown;
-
-    /** Index of canvas entries keyed by file path. */
-    index: Record<string, CanvasIndexEntry>;
 
     /**
      * Handle a file creation event.
@@ -112,9 +115,6 @@ export interface CanvasIndex extends Component {
      * @returns The result of queuing the file.
      */
     queue(arg1: unknown): unknown;
-
-    /** Weak map tracking reference node IDs for canvas files. */
-    refNodeIds: WeakMap<object, unknown>;
 
     /**
      * Request an animation frame to process queued files.

@@ -6,12 +6,6 @@ declare global {
      */
     interface DomElementInfo {
         /**
-         * Event listener to attach, keyed by event name prefixed with "on" (e.g., `onclick`, `onmousedown`).
-         * @unofficial
-         */
-        [eventName: `on${string}`]: EventListenerOrEventListenerObject;
-
-        /**
          * HTML attributes to be added.
          *
          * @example
@@ -127,5 +121,11 @@ declare global {
          * @official
          */
         value?: string;
+
+        /**
+         * Event listener to attach, keyed by event name prefixed with "on" (e.g., `onclick`, `onmousedown`).
+         * @unofficial
+         */
+        [eventName: `on${string}`]: EventListenerOrEventListenerObject;
     }
 }

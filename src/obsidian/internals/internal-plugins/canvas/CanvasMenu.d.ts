@@ -16,15 +16,15 @@ export interface CanvasMenu {
     /** Element containing the menu buttons and controls. */
     menuEl: HTMLDivElement;
 
+    /** Reference to the current canvas selection. */
+    selection: CanvasSelection;
+
     /**
      * Render the menu for the given selection or context.
      *
      * @returns The result of rendering the menu.
      */
     render(arg1: unknown): unknown;
-
-    /** Reference to the current canvas selection. */
-    selection: CanvasSelection;
 
     /**
      * Update the menu's z-index to stay above the selected items.

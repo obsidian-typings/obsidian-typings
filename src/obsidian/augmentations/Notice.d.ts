@@ -7,6 +7,31 @@ declare module 'obsidian' {
      */
     interface Notice {
         /**
+         * The container HTML element for the notice.
+         *
+         * @official
+         * @since 1.8.7
+         */
+        containerEl: HTMLElement;
+
+        /**
+         * The HTML element that represents the message of the notice.
+         *
+         * @official
+         * @since 1.8.7
+         */
+        messageEl: HTMLElement;
+
+        /**
+         * The HTML element that represents the notice.
+         *
+         * @deprecated Use `messageEl` instead
+         * @official
+         * @since 0.9.7
+         */
+        noticeEl: HTMLElement;
+
+        /**
          * Creates a new notice.
          *
          * @param message - The message to be displayed, can either be a simple string or a {@link DocumentFragment}.
@@ -30,37 +55,12 @@ declare module 'obsidian' {
         constructor__(message: string | DocumentFragment, duration?: number): this;
 
         /**
-         * The container HTML element for the notice.
-         *
-         * @official
-         * @since 1.8.7
-         */
-        containerEl: HTMLElement;
-
-        /**
          * Hide the notice.
          *
          * @official
          * @since 0.9.7
          */
         hide(): void;
-
-        /**
-         * The HTML element that represents the message of the notice.
-         *
-         * @official
-         * @since 1.8.7
-         */
-        messageEl: HTMLElement;
-
-        /**
-         * The HTML element that represents the notice.
-         *
-         * @deprecated Use `messageEl` instead
-         * @official
-         * @since 0.9.7
-         */
-        noticeEl: HTMLElement;
 
         /**
          * Change the message of this notice.

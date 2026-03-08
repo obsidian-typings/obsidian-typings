@@ -17,6 +17,27 @@ export interface PropertyPropertyWidgetComponentComboBox
     /** The items of the combobox. */
     _items: PropertyPropertyWidgetComponentComboBoxItem[];
 
+    /** The background element of the combobox. */
+    bgEl: HTMLDivElement;
+
+    /** The button element of the combobox. */
+    buttonEl: HTMLDivElement;
+
+    /** Whether the combobox is clearable. */
+    clearable: boolean;
+
+    /** The icon element of the combobox. */
+    iconEl: HTMLDivElement;
+
+    /** The label element of the combobox. */
+    labelEl: HTMLDivElement;
+
+    /** The search component of the combobox. */
+    searchComponent: SearchComponent;
+
+    /** The current value of the combobox. */
+    value: PropertyPropertyWidgetComponentComboBoxItem | null;
+
     /**
      * Callback for `onClose`.
      */
@@ -29,15 +50,6 @@ export interface PropertyPropertyWidgetComponentComboBox
 
     /** Attach the DOM of the combobox. */
     attachDom(): void;
-
-    /** The background element of the combobox. */
-    bgEl: HTMLDivElement;
-
-    /** The button element of the combobox. */
-    buttonEl: HTMLDivElement;
-
-    /** Whether the combobox is clearable. */
-    clearable: boolean;
 
     /**
      * Detach the DOM of the combobox.
@@ -63,12 +75,6 @@ export interface PropertyPropertyWidgetComponentComboBox
      * @returns The matching search results.
      */
     getSuggestions(query: string): SearchResult[];
-
-    /** The icon element of the combobox. */
-    iconEl: HTMLDivElement;
-
-    /** The label element of the combobox. */
-    labelEl: HTMLDivElement;
 
     /**
      * Register a callback for `close` event.
@@ -100,9 +106,6 @@ export interface PropertyPropertyWidgetComponentComboBox
 
     /** Render the label of the combobox. */
     renderLabel(): void;
-
-    /** The search component of the combobox. */
-    searchComponent: SearchComponent;
 
     /**
      * Callback for `onSelect`.
@@ -165,7 +168,4 @@ export interface PropertyPropertyWidgetComponentComboBox
      * @returns the combobox.
      */
     updateValue(value: PropertyPropertyWidgetComponentComboBoxItem): this;
-
-    /** The current value of the combobox. */
-    value: PropertyPropertyWidgetComponentComboBoxItem | null;
 }

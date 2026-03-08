@@ -27,6 +27,18 @@ export interface InternalPlugins extends Events {
     config: InternalPluginsConfigRecord;
 
     /**
+     * Plugin configs for internal plugins.
+     *
+     * @remark Prefer usage of getPluginById to access a plugin.
+     */
+    plugins: InternalPluginNamePluginsMapping;
+
+    /**
+     * Request save of plugin configs.
+     */
+    requestSaveConfig: Debouncer<[], Promise<void>>;
+
+    /**
      * - Load plugin configs and enable plugins.
      *
      * @returns A promise that resolves when all plugins are enabled.
@@ -70,18 +82,6 @@ export interface InternalPlugins extends Events {
      * @param configPath - The path of the changed config file.
      */
     onRaw(configPath: string): void;
-
-    /**
-     * Plugin configs for internal plugins.
-     *
-     * @remark Prefer usage of getPluginById to access a plugin.
-     */
-    plugins: InternalPluginNamePluginsMapping;
-
-    /**
-     * Request save of plugin configs.
-     */
-    requestSaveConfig: Debouncer<[], Promise<void>>;
 
     /**
      * - Save current plugin configs.
