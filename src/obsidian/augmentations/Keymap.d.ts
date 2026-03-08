@@ -10,7 +10,6 @@ declare module 'obsidian' {
          * Constructor.
          *
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Keymap>` or `getKeymapConstructor()` instead.
          */
         constructor__(): this;
 

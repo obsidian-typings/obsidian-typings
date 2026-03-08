@@ -11,7 +11,6 @@ declare module 'obsidian' {
          * Constructor.
          *
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<DateValue>` or `getDateValueConstructor()` instead.
          */
         constructor__(): this;
 

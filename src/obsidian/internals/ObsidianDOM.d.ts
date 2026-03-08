@@ -29,7 +29,7 @@ export interface ObsidianDOM {
      *
      * @param containerEl - The containerEl.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ObsidianDOM>` or `getObsidianDOMConstructor()` instead.
+     * To get the constructor, use `getObsidianDOMConstructor()` from `obsidian-typings/implementations`.
      */
     constructor__(containerEl: HTMLElement): this;
 }

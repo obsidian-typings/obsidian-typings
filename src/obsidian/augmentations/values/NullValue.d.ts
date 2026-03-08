@@ -12,7 +12,6 @@ declare module 'obsidian' {
          * Constructor.
          *
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<NullValue>` or `getNullValueConstructor()` instead.
          */
         constructor__(): this;
 

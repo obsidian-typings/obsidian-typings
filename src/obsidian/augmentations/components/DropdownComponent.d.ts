@@ -20,6 +20,7 @@ declare module 'obsidian' {
          * @param value - The value of the option.
          * @param display - The display of the option.
          * @returns The dropdown component.
+         * To get the constructor, use `getDropdownComponentConstructor()` from `obsidian-typings/implementations`.
          * @example
          * ```ts
          * dropdown.addOption('foo', 'bar');
@@ -57,7 +58,6 @@ declare module 'obsidian' {
          * @param containerEl - The container element.
          * @returns The dropdown component instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<DropdownComponent>` or `getDropdownComponentConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
 

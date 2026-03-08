@@ -14,6 +14,7 @@ declare module 'obsidian' {
          * @param value - The DateValue to modify.
          * @param subtract - Whether to subtract the duration from the DateValue.
          * @returns The modified DateValue.
+         * To get the constructor, use `getDurationValueConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @since 1.10.0
          */
@@ -23,7 +24,6 @@ declare module 'obsidian' {
          * Constructor.
          *
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<DurationValue>` or `getDurationValueConstructor()` instead.
          */
         constructor__(): this;
 

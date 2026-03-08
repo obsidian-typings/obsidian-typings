@@ -13,8 +13,8 @@ declare module 'obsidian' {
          * @param app - The Obsidian app instance.
          * @param plugin - The plugin instance.
          * @returns The plugin setting tab instance.
+         * To extract the constructor type, use `ExtractConstructor<PluginSettingTab>`.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<PluginSettingTab>` or `getPluginSettingTabConstructor()` instead.
          */
         constructor__(app: App, plugin: Plugin): this;
     }

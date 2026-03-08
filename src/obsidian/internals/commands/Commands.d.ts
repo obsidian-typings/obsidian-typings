@@ -43,7 +43,7 @@ export interface Commands {
      *
      * @param app - The app.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Commands>` or `getCommandsConstructor()` instead.
+     * To get the constructor, use `getCommandsConstructor()` from `obsidian-typings/implementations`.
      */
     constructor__(app: App): this;
 

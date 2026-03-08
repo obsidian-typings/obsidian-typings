@@ -49,6 +49,7 @@ declare module 'obsidian' {
          *
          * @param extension - The file extension to check.
          * @returns Whether a file with the given extension can be created.
+         * To get the constructor, use `getFileManagerConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          */
         canCreateFileWithExt(extension: string): boolean;
@@ -59,7 +60,6 @@ declare module 'obsidian' {
          * @param app - The app.
          * @returns The new instance.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<FileManager>` or `getFileManagerConstructor()` instead.
          */
         constructor__(app: App): this;
 

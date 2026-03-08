@@ -54,6 +54,7 @@ declare module 'obsidian' {
          *
          * @param cls - The CSS class to add.
          * @returns The setting group.
+         * To get the constructor, use `getSettingGroupConstructor()` from `obsidian-typings/implementations`.
          * @example
          * ```ts
          * settingGroup.addClass('foo');
@@ -107,7 +108,6 @@ declare module 'obsidian' {
          * @returns The setting group.
          * @official
          * @since 1.11.0
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<SettingGroup>` or `getSettingGroupConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
 

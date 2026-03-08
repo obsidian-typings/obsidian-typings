@@ -92,7 +92,7 @@ export interface AppSetting extends Modal {
      *
      * @param app - The app.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<AppSetting>` or `getAppSettingConstructor()` instead.
+     * To get the constructor, use `getAppSettingConstructor()` from `obsidian-typings/implementations`.
      */
     constructor__(app: App): this;
 

@@ -122,6 +122,7 @@ declare module 'obsidian' {
          * Whether the editor can render properties according to the current mode and config.
          *
          * @returns Whether properties can be shown.
+         * To get the constructor, use `getMarkdownViewConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          */
         canShowProperties(): boolean;
@@ -155,7 +156,6 @@ declare module 'obsidian' {
          * @param leaf - The workspace leaf to attach the markdown view to.
          * @returns The markdown view instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MarkdownView>` or `getMarkdownViewConstructor()` instead.
          */
         constructor__(leaf: WorkspaceLeaf): this;
 

@@ -23,8 +23,8 @@ declare module 'obsidian' {
          * @param type - The type.
          * @param name - The name.
          * @returns The new instance.
+         * To get the constructor, use `getBasesViewConfigConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<BasesViewConfig>` or `getBasesViewConfigConstructor()` instead.
          */
         constructor__(query: string, type: string, name: string): this;
 

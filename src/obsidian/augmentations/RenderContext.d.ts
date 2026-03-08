@@ -20,8 +20,8 @@ declare module 'obsidian' {
          *
          * @param app - The app.
          * @returns The new instance.
+         * To get the constructor, use `getRenderContextConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<RenderContext>` or `getRenderContextConstructor()` instead.
          */
         constructor__(app: App): this;
 }

@@ -90,8 +90,8 @@ declare module 'obsidian' {
          * @param side - The side.
          * @param id - The id.
          * @returns The new instance.
+         * To get the constructor, use `getWorkspaceSidedockConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<WorkspaceSidedock>` or `getWorkspaceSidedockConstructor()` instead.
          */
         constructor2__(workspace: Workspace, direction: string, side: string, id?: string): this;
 

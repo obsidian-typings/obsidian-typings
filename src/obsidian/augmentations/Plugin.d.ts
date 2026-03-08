@@ -34,6 +34,7 @@ declare module 'obsidian' {
          * Internal handler invoked when the plugin's config file changes on disk.
          *
          * @returns A promise that resolves when the config file change is handled.
+         * To extract the constructor type, use `ExtractConstructor<Plugin>`.
          * @unofficial
          */
         _onConfigFileChange(): Promise<void>;
@@ -105,7 +106,6 @@ declare module 'obsidian' {
          * @param manifest - The plugin manifest.
          * @returns The plugin instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Plugin>` or `getPluginConstructor()` instead.
          */
         constructor__(app: App, manifest: PluginManifest): this;
 

@@ -13,8 +13,8 @@ declare module 'obsidian' {
          *
          * @param value - The value.
          * @returns The new instance.
+         * To get the constructor, use `getBooleanValueConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<BooleanValue>` or `getBooleanValueConstructor()` instead.
          */
         constructor__(value: boolean): this;
 }

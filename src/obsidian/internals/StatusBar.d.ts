@@ -18,7 +18,7 @@ export interface StatusBar {
      * @param app - The app.
      * @param containerEl - The containerEl.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<StatusBar>` or `getStatusBarConstructor()` instead.
+     * To get the constructor, use `getStatusBarConstructor()` from `obsidian-typings/implementations`.
      */
     constructor__(app: App, containerEl: HTMLElement): this;
 

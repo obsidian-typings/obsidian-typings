@@ -21,8 +21,8 @@ declare module 'obsidian' {
          * @param ctx - The ctx.
          * @param file - The file.
          * @returns The new instance.
+         * To get the constructor, use `getBasesEntryConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<BasesEntry>` or `getBasesEntryConstructor()` instead.
          */
         constructor__(ctx: unknown, file: TFile): this;
     

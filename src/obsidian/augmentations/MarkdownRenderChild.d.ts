@@ -20,8 +20,8 @@ declare module 'obsidian' {
          * (for example, when it is replaced with a new version because the user edited the Markdown source code),
          * this component will be unloaded.
          * @returns The markdown render child instance.
+         * To get the constructor, use `getMarkdownRenderChildConstructor()` from `obsidian-typings/implementations`.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MarkdownRenderChild>` or `getMarkdownRenderChildConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
     }

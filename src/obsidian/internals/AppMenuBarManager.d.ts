@@ -32,6 +32,7 @@ export interface AppMenuBarManager {
      * Apply hotkey accelerators to menu items.
      *
      * @returns The result of applying hotkeys.
+     * To get the constructor, use `getAppMenuBarManagerConstructor()` from `obsidian-typings/implementations`.
      */
     applyHotkeys(arg1: unknown): unknown;
 
@@ -47,7 +48,6 @@ export interface AppMenuBarManager {
      *
      * @param app - The app.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<AppMenuBarManager>` or `getAppMenuBarManagerConstructor()` instead.
      */
     constructor__(app: App): this;
 

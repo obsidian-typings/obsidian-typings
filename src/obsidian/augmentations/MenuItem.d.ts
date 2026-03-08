@@ -80,8 +80,8 @@ declare module 'obsidian' {
          *
          * @param menu - The menu.
          * @returns The new instance.
+         * To get the constructor, use `getMenuItemConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MenuItem>` or `getMenuItemConstructor()` instead.
          */
         constructor__(menu: unknown): this;
 

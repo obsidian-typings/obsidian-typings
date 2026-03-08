@@ -13,9 +13,9 @@ declare module 'obsidian' {
          * @param app - the application instance.
          * @param containerEl - the container element.
          * @returns the secret component instance.
+         * To get the constructor, use `getSecretComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @since 1.11.1
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<SecretComponent>` or `getSecretComponentConstructor()` instead.
          */
         constructor__(app: App, containerEl: HTMLElement): this;
 

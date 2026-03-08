@@ -29,8 +29,8 @@ declare module 'obsidian' {
          *
          * @param inputEl - The input element.
          * @returns The text component instance.
+         * To get the constructor, use `getAbstractTextComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<AbstractTextComponent>` or `getAbstractTextComponentConstructor()` instead.
          */
         constructor__(inputEl: T): this;
 

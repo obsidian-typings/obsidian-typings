@@ -51,6 +51,7 @@ declare module 'obsidian' {
          *
          * @param e - The fold information to apply.
          * @returns The result of applying fold information.
+         * To get the constructor, use `getMarkdownPreviewViewConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          */
         applyFoldInfo(e: unknown): unknown;
@@ -92,7 +93,6 @@ declare module 'obsidian' {
          * @param containerEl - The containerEl.
          * @returns The new instance.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MarkdownPreviewView>` or `getMarkdownPreviewViewConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
 

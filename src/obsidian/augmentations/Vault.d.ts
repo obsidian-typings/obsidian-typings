@@ -94,6 +94,7 @@ declare module 'obsidian' {
          * @param data - The text to append.
          * @param options - Write options.
          * @returns The promise that resolves when the text is appended.
+         * To get the constructor, use `getVaultConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @since 0.13.0
          */
@@ -152,7 +153,6 @@ declare module 'obsidian' {
          * @param adapter - The adapter.
          * @returns The new instance.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Vault>` or `getVaultConstructor()` instead.
          */
         constructor__(adapter: DataAdapter): this;
 

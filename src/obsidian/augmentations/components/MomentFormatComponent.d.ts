@@ -18,7 +18,6 @@ declare module 'obsidian' {
          * Constructor.
          *
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MomentFormatComponent>` or `getMomentFormatComponentConstructor()` instead.
          */
         constructor__(): this;
 

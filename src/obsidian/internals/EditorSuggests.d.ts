@@ -41,7 +41,7 @@ export interface EditorSuggests {
      *
      * @param app - The app.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<EditorSuggests>` or `getEditorSuggestsConstructor()` instead.
+     * To get the constructor, use `getEditorSuggestsConstructor()` from `obsidian-typings/implementations`.
      */
     constructor__(app: App): this;
 

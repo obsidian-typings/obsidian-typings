@@ -13,8 +13,8 @@ declare module 'obsidian' {
          *
          * @param value - The value.
          * @returns The new instance.
+         * To get the constructor, use `getLinkValueConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<LinkValue>` or `getLinkValueConstructor()` instead.
          */
         constructor__(value: string): this;
 }

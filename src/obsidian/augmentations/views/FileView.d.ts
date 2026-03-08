@@ -32,6 +32,7 @@ declare module 'obsidian' {
          *
          * @param extension - The extension to check.
          * @returns Whether the file view can accept the extension.
+         * To extract the constructor type, use `ExtractConstructor<FileView>`.
          * @example
          * ```ts
          * console.log(fileView.canAcceptExtension('md'));
@@ -47,7 +48,6 @@ declare module 'obsidian' {
          * @param leaf - The workspace leaf to create the file view in.
          * @returns The file view instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<FileView>` or `getFileViewConstructor()` instead.
          */
         constructor__(leaf: WorkspaceLeaf): this;
 

@@ -21,8 +21,8 @@ declare module 'obsidian' {
          * @param direction - The direction.
          * @param id - The id.
          * @returns The new instance.
+         * To get the constructor, use `getWorkspaceSplitConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<WorkspaceSplit>` or `getWorkspaceSplitConstructor()` instead.
          */
         constructor__(workspace: Workspace, direction: string, id?: string): this;
     }

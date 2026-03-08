@@ -17,8 +17,8 @@ declare module 'obsidian' {
          * @param viewHeaderEl - The viewHeaderEl.
          * @param currentFile - The currentFile.
          * @returns The new instance.
+         * To get the constructor, use `getQueryControllerConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<QueryController>` or `getQueryControllerConstructor()` instead.
          */
         constructor__(app: App, plugin: unknown, viewHeaderEl: HTMLElement, currentFile?: TFile | null): this;
 }

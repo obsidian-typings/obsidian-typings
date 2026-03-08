@@ -64,8 +64,8 @@ declare module 'obsidian' {
          * @param app - The Obsidian app instance.
          * @param scope - The scope for the keymaps.
          * @returns The popover suggest instance.
+         * To extract the constructor type, use `ExtractConstructor<PopoverSuggest>`.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<PopoverSuggest>` or `getPopoverSuggestConstructor()` instead.
          */
         constructor__(app: App, scope?: Scope): this;
 

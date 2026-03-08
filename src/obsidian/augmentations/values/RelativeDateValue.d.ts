@@ -13,7 +13,6 @@ declare module 'obsidian' {
          * Constructor.
          *
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<RelativeDateValue>` or `getRelativeDateValueConstructor()` instead.
          */
         constructor__(): this;
 }

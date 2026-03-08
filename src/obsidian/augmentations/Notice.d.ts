@@ -38,6 +38,7 @@ declare module 'obsidian' {
          * @param duration - Time in milliseconds to show the notice for. If this is `0`, the
          * `Notice` will stay visible until the user manually dismisses it.
          * @returns The notice instance.
+         * To get the constructor, use `getNoticeConstructor()` from `obsidian-typings/implementations`.
          * @example
          * ```ts
          * new Notice('foo');
@@ -50,7 +51,6 @@ declare module 'obsidian' {
          * new Notice('qux', 0); // will stay visible until the user manually dismisses it
          * ```
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Notice>` or `getNoticeConstructor()` instead.
          */
         constructor__(message: string | DocumentFragment, duration?: number): this;
 

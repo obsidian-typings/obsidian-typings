@@ -13,6 +13,7 @@ export interface FoldManager {
      * Remove stale fold data from the cache.
      *
      * @returns The result of the cleanup operation.
+     * To get the constructor, use `getFoldManagerConstructor()` from `obsidian-typings/implementations`.
      */
     cleanup(): unknown;
 
@@ -21,7 +22,6 @@ export interface FoldManager {
      *
      * @param app - The app.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<FoldManager>` or `getFoldManagerConstructor()` instead.
      */
     constructor__(app: App): this;
 

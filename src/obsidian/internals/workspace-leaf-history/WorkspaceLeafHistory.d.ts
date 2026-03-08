@@ -21,6 +21,7 @@ export interface WorkspaceLeafHistory {
      * Navigate back to the previous state.
      *
      * @returns A promise that resolves when navigation is complete.
+     * To get the constructor, use `getWorkspaceLeafHistoryConstructor()` from `obsidian-typings/implementations`.
      */
     back(): Promise<void>;
 
@@ -29,7 +30,6 @@ export interface WorkspaceLeafHistory {
      *
      * @param owner - The owner.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<WorkspaceLeafHistory>` or `getWorkspaceLeafHistoryConstructor()` instead.
      */
     constructor__(owner: WorkspaceLeaf): this;
 

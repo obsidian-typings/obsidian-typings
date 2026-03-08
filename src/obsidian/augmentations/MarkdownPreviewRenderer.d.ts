@@ -16,8 +16,8 @@ declare module 'obsidian' {
          * @param workerPath - The workerPath.
          * @param observeInsertion - The observeInsertion.
          * @returns The new instance.
+         * To get the constructor, use `getMarkdownPreviewRendererConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MarkdownPreviewRenderer>` or `getMarkdownPreviewRendererConstructor()` instead.
          */
         constructor__(owner: unknown, containerEl: HTMLElement, parentEl: HTMLElement, workerPath: unknown, observeInsertion?: boolean): this;
 }

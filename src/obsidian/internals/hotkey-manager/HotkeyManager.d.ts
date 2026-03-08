@@ -57,7 +57,7 @@ export interface HotkeyManager {
      *
      * @param app - The app.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<HotkeyManager>` or `getHotkeyManagerConstructor()` instead.
+     * To get the constructor, use `getHotkeyManagerConstructor()` from `obsidian-typings/implementations`.
      */
     constructor__(app: App): this;
 

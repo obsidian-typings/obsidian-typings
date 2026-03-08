@@ -19,6 +19,7 @@ export interface CapacitorAdapterFs {
      * @param realPath - Real file system path.
      * @param data - Text data to append.
      * @returns A promise that resolves when the data is appended.
+     * To extract the constructor type, use `ExtractConstructor<CapacitorAdapterFs>`.
      */
     append(realPath: string, data: string): Promise<void>;
 
@@ -27,7 +28,6 @@ export interface CapacitorAdapterFs {
      *
      * @param dir - The dir.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<CapacitorAdapterFs>` or `getCapacitorAdapterFsConstructor()` instead.
      */
     constructor__(dir: string): this;
 

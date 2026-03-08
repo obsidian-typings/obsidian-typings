@@ -11,8 +11,8 @@ declare module 'obsidian' {
          *
          * @param app - The app.
          * @returns The new instance.
+         * To get the constructor, use `getSecretStorageConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<SecretStorage>` or `getSecretStorageConstructor()` instead.
          */
         constructor__(app: App): this;
 

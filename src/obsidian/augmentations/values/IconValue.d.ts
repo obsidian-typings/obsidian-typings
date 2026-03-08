@@ -13,8 +13,8 @@ declare module 'obsidian' {
          *
          * @param value - The value.
          * @returns The new instance.
+         * To get the constructor, use `getIconValueConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<IconValue>` or `getIconValueConstructor()` instead.
          */
         constructor__(value: string): this;
 }

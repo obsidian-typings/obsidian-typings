@@ -12,9 +12,9 @@ declare module 'obsidian' {
          *
          * @param value - The value to wrap.
          * @returns The new TagValue.
+         * To get the constructor, use `getTagValueConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @since 1.10.0
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<TagValue>` or `getTagValueConstructor()` instead.
          */
         constructor__(value: string): this;
     }

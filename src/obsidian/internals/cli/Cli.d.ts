@@ -23,7 +23,7 @@ export interface Cli {
      *
      * @param app - The app.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Cli>` or `getCliConstructor()` instead.
+     * To get the constructor, use `getCliConstructor()` from `obsidian-typings/implementations`.
      */
     constructor__(app: App): this;
 

@@ -31,7 +31,7 @@ export interface FrameDom {
      * @param electronWindow - The electronWindow.
      * @param win - The win.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<FrameDom>` or `getFrameDomConstructor()` instead.
+     * To get the constructor, use `getFrameDomConstructor()` from `obsidian-typings/implementations`.
      */
     constructor__(electronWindow: Electron.BrowserWindow, win: Window): this;
 

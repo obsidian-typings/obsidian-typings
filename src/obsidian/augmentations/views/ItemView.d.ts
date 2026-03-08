@@ -94,6 +94,7 @@ declare module 'obsidian' {
          * @param title - The title of the action.
          * @param callback - The callback to call when the action is clicked.
          * @returns The DOM element of the action.
+         * To extract the constructor type, use `ExtractConstructor<ItemView>`.
          * @example
          * ```ts
          * const action = itemView.addAction('dice', 'foo', () => {
@@ -111,7 +112,6 @@ declare module 'obsidian' {
          * @param leaf - The workspace leaf to create the item view in.
          * @returns The item view instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ItemView>` or `getItemViewConstructor()` instead.
          */
         constructor__(leaf: WorkspaceLeaf): this;
 

@@ -55,7 +55,7 @@ export interface DragManager {
      *
      * @param app - The app.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<DragManager>` or `getDragManagerConstructor()` instead.
+     * To get the constructor, use `getDragManagerConstructor()` from `obsidian-typings/implementations`.
      */
     constructor__(app: App): this;
 

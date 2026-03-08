@@ -59,6 +59,7 @@ declare module 'obsidian' {
          *
          * @param cb - The callback to add the button.
          * @returns The setting.
+         * To get the constructor, use `getSettingConstructor()` from `obsidian-typings/implementations`.
          * @example
          * ```ts
          * setting.addButton((button) => {
@@ -261,7 +262,6 @@ declare module 'obsidian' {
          * @param containerEl - The container element.
          * @returns The setting instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Setting>` or `getSettingConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
 

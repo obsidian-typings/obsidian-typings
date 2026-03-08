@@ -12,8 +12,8 @@ declare module 'obsidian' {
          *
          * @param leaf - The leaf.
          * @returns The new instance.
+         * To get the constructor, use `getFileValueConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<FileValue>` or `getFileValueConstructor()` instead.
          */
         constructor__(leaf: WorkspaceLeaf): this;
 

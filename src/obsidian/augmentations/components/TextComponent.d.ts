@@ -11,8 +11,8 @@ declare module 'obsidian' {
          *
          * @param containerEl - The container element.
          * @returns The text component instance.
+         * To get the constructor, use `getTextComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<TextComponent>` or `getTextComponentConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
     }

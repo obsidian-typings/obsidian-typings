@@ -25,6 +25,7 @@ declare module 'obsidian' {
          * @param data - The data to append.
          * @param options - The options to append.
          * @returns A promise that resolves when the file is appended.
+         * To get the constructor, use `getCapacitorAdapterConstructor()` from `obsidian-typings/implementations`.
          * @example
          * ```ts
          * await app.vault.adapter.append('foo/bar.md', 'baz');
@@ -57,7 +58,6 @@ declare module 'obsidian' {
          * @param fs - The fs.
          * @returns The new instance.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<CapacitorAdapter>` or `getCapacitorAdapterConstructor()` instead.
          */
         constructor__(basePath: string, fs: CapacitorAdapterFs): this;
 

@@ -22,7 +22,6 @@ declare module 'obsidian' {
          * Constructor.
          *
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<BasesQueryResult>` or `getBasesQueryResultConstructor()` instead.
          */
         constructor__(): this;
 

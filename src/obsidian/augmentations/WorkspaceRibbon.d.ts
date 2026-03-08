@@ -12,8 +12,8 @@ declare module 'obsidian' {
          * @param workspace - The workspace.
          * @param side - The side.
          * @returns The new instance.
+         * To get the constructor, use `getWorkspaceRibbonConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<WorkspaceRibbon>` or `getWorkspaceRibbonConstructor()` instead.
          */
         constructor__(workspace: Workspace, side: string): this;
 }

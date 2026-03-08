@@ -52,7 +52,7 @@ export interface MetadataTypeManager extends Events {
      *
      * @param app - The app.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<MetadataTypeManager>` or `getMetadataTypeManagerConstructor()` instead.
+     * To get the constructor, use `getMetadataTypeManagerConstructor()` from `obsidian-typings/implementations`.
      */
     constructor__(app: App): this;
 

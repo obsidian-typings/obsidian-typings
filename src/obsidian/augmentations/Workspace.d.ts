@@ -273,6 +273,7 @@ declare module 'obsidian' {
          *
          * @param workspace - The workspace to change the layout to.
          * @returns A promise that resolves when the layout is changed.
+         * To get the constructor, use `getWorkspaceConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @since 0.9.7
          */
@@ -293,7 +294,6 @@ declare module 'obsidian' {
          * @param containerEl - The containerEl.
          * @returns The new instance.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Workspace>` or `getWorkspaceConstructor()` instead.
          */
         constructor__(app: App, containerEl: HTMLElement): this;
 

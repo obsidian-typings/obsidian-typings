@@ -100,7 +100,7 @@ export interface CustomCSS extends Component {
      *
      * @param app - The app.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<CustomCSS>` or `getCustomCSSConstructor()` instead.
+     * To get the constructor, use `getCustomCSSConstructor()` from `obsidian-typings/implementations`.
      */
     constructor__(app: App): this;
 

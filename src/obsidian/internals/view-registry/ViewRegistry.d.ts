@@ -28,7 +28,6 @@ export interface ViewRegistry extends Events {
     /**
      * Constructor.
      *
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ViewRegistry>` or `getViewRegistryConstructor()` instead.
      */
     constructor__(): this;
 

@@ -109,6 +109,7 @@ declare module 'obsidian' {
          * Performed when animation is complete
          *
          * @returns A promise that resolves when the close animation finishes.
+         * To get the constructor, use `getModalConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          */
         animateClose(): Promise<void>;
@@ -134,7 +135,6 @@ declare module 'obsidian' {
          * @param app - The Obsidian app instance.
          * @returns The modal instance.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<Modal>` or `getModalConstructor()` instead.
          */
         constructor__(app: App): this;
 

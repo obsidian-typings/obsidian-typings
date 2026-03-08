@@ -26,8 +26,8 @@ declare module 'obsidian' {
          *
          * @param containerEl - The container element.
          * @returns The color component instance.
+         * To get the constructor, use `getColorComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ColorComponent>` or `getColorComponentConstructor()` instead.
          */
         constructor__(containerEl: HTMLElement): this;
 

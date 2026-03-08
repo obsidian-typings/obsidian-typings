@@ -27,8 +27,8 @@ declare module 'obsidian' {
          *
          * @param containerEl - The container element.
          * @returns The toggle component instance.
+         * To get the constructor, use `getToggleComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<ToggleComponent>` or `getToggleComponentConstructor()` instead.
          * @since 0.9.7
          */
         constructor__(containerEl: HTMLElement): this;

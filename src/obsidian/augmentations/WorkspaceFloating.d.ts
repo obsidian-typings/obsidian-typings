@@ -18,7 +18,6 @@ declare module 'obsidian' {
          * Constructor.
          *
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<WorkspaceFloating>` or `getWorkspaceFloatingConstructor()` instead.
          */
         constructor__(): this;
 }

@@ -12,7 +12,7 @@ export interface DomEventsHandlers {
      *
      * @param info - The info.
      * @returns The new instance.
-     * @deprecated - Added only for typing purposes. Use `ExtractConstructor<DomEventsHandlers>` or `getDomEventsHandlersConstructor()` instead.
+     * To get the constructor, use `getDomEventsHandlersConstructor()` from `obsidian-dev-utils`.
      */
     constructor__(info: DomEventsHandlersInfo): this;
 

@@ -20,8 +20,8 @@ declare module 'obsidian' {
          * @param vault - The vault.
          * @param path - The path.
          * @returns The new instance.
+         * To get the constructor, use `getTFolderConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
-         * @deprecated - Added only for typing purposes. Use `ExtractConstructor<TFolder>` or `getTFolderConstructor()` instead.
          */
         constructor__(vault: Vault, path: string): this;
 
