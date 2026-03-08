@@ -11,6 +11,8 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getNullValueConstructor} from `obsidian-typings/implementations`.
+         *
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

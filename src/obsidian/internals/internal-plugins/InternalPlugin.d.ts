@@ -69,11 +69,12 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
     /**
      * Constructor.
      *
+     * To get the constructor instance, use {@link getInternalPluginConstructor} from `obsidian-typings/implementations`.
+     *
      * @param app - The app.
      * @param instance - The instance.
      * @param internalPlugins - The internalPlugins.
      * @returns The new instance.
-     * To get the constructor, use `getInternalPluginConstructor()` from `obsidian-typings/implementations`.
      * @deprecated - Added only for typing purposes.
      */
     constructor__(app: App, instance: InternalPluginInstance, internalPlugins: InternalPlugins): this;

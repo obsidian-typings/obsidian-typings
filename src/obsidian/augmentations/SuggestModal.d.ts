@@ -70,11 +70,12 @@ declare module 'obsidian' {
         resultContainerEl: HTMLElement;
 
         /**
-         * Create a suggest modal.
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<SuggestModal>`.
          *
          * @param app - The Obsidian app instance .
          * @returns The suggest modal instance.
-         * To extract the constructor type, use `ExtractConstructor<SuggestModal>`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

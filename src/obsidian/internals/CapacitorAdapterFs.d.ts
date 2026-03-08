@@ -26,6 +26,8 @@ export interface CapacitorAdapterFs {
     /**
      * Constructor.
      *
+     * To extract the constructor type, use `ExtractConstructor<CapacitorAdapterFs>`.
+     *
      * @param dir - The dir.
      * @returns The new instance.
      * @deprecated - Added only for typing purposes.

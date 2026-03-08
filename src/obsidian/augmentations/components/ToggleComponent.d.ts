@@ -23,11 +23,12 @@ declare module 'obsidian' {
         changeCallback?(value: boolean): void;
 
         /**
-         * Create a new toggle component.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getToggleComponentConstructor} from `obsidian-typings/implementations`.
          *
          * @param containerEl - The container element.
          * @returns The toggle component instance.
-         * To get the constructor, use `getToggleComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @since 0.9.7
          * @deprecated - Added only for typing purposes.

@@ -21,11 +21,12 @@ declare module 'obsidian' {
         progressBar: HTMLDivElement;
 
         /**
-         * Creates a new ProgressBarComponent.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getProgressBarComponentConstructor} from `obsidian-typings/implementations`.
          *
          * @param containerEl - The container element.
          * @returns The progress bar component instance.
-         * To get the constructor, use `getProgressBarComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

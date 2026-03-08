@@ -7,11 +7,12 @@ declare module 'obsidian' {
      */
     interface TextAreaComponent extends AbstractTextComponent<HTMLTextAreaElement> {
         /**
-         * Create a new text area component.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getTextAreaComponentConstructor} from `obsidian-typings/implementations`.
          *
          * @param containerEl - The container element.
          * @returns The text area component instance.
-         * To get the constructor, use `getTextAreaComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

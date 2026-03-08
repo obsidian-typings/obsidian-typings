@@ -59,12 +59,13 @@ declare module 'obsidian' {
         close(): void;
 
         /**
-         * Creates a new PopoverSuggest.
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<PopoverSuggest>`.
          *
          * @param app - The Obsidian app instance.
          * @param scope - The scope for the keymaps.
          * @returns The popover suggest instance.
-         * To extract the constructor type, use `ExtractConstructor<PopoverSuggest>`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

@@ -22,11 +22,12 @@ declare module 'obsidian' {
         changeCallback?(value: HexString): void;
 
         /**
-         * Create a new color picker component.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getColorComponentConstructor} from `obsidian-typings/implementations`.
          *
          * @param containerEl - The container element.
          * @returns The color component instance.
-         * To get the constructor, use `getColorComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

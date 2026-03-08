@@ -191,7 +191,7 @@ declare module 'obsidian' {
          * Clear all metadata caches and reset state.
          *
          * @returns A promise that resolves when all caches are cleared.
-         * To get the constructor, use `getMetadataCacheConstructor()` from `obsidian-typings/implementations`.
+         * To get the constructor instance, use {@link getMetadataCacheConstructor} from `obsidian-typings/implementations`.
          * @unofficial
          */
         clear(): Promise<void>;
@@ -216,6 +216,8 @@ declare module 'obsidian' {
 
         /**
          * Constructor.
+         *
+         * To get the constructor instance, use {@link getMetadataCacheConstructor} from `obsidian-typings/implementations`.
          *
          * @param app - The app.
          * @param vault - The vault.

@@ -78,11 +78,12 @@ declare module 'obsidian' {
         clear(): void;
 
         /**
-         * Create a new markdown edit view.
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<MarkdownEditView>`.
          *
          * @param view - The markdown view.
          * @returns The markdown edit view instance.
-         * To extract the constructor type, use `ExtractConstructor<MarkdownEditView>`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

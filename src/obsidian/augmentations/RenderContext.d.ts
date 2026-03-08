@@ -18,9 +18,10 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getRenderContextConstructor} from `obsidian-typings/implementations`.
+         *
          * @param app - The app.
          * @returns The new instance.
-         * To get the constructor, use `getRenderContextConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

@@ -8,12 +8,13 @@ declare module 'obsidian' {
      */
     interface PluginSettingTab extends SettingTab {
         /**
-         * Creates a new PluginSettingTab.
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<PluginSettingTab>`.
          *
          * @param app - The Obsidian app instance.
          * @param plugin - The plugin instance.
          * @returns The plugin setting tab instance.
-         * To extract the constructor type, use `ExtractConstructor<PluginSettingTab>`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

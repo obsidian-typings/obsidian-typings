@@ -21,6 +21,8 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getBasesQueryResultConstructor} from `obsidian-typings/implementations`.
+         *
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

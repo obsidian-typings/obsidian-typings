@@ -20,6 +20,8 @@ export interface EmbedRegistry extends Events {
     /**
      * Constructor.
      *
+     * To get the constructor instance, use {@link getEmbedRegistryConstructor} from `obsidian-typings/implementations`.
+     *
      * @deprecated - Added only for typing purposes.
      */
     constructor__(): this;

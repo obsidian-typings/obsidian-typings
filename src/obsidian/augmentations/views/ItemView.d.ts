@@ -107,7 +107,9 @@ declare module 'obsidian' {
         addAction(icon: IconName, title: string, callback: (evt: MouseEvent) => unknown): HTMLElement;
 
         /**
-         * Create a new item view.
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<ItemView>`.
          *
          * @param leaf - The workspace leaf to create the item view in.
          * @returns The item view instance.

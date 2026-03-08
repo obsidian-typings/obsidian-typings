@@ -100,7 +100,9 @@ declare module 'obsidian' {
         addStatusBarItem(): HTMLElement;
 
         /**
-         * The constructor for the plugin.
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<Plugin>`.
          *
          * @param app - The Obsidian app instance.
          * @param manifest - The plugin manifest.

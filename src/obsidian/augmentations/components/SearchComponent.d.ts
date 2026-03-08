@@ -26,13 +26,15 @@ declare module 'obsidian' {
          *
          * @param decoratorFn - The function that creates the decorator element.
          * @returns The search component.
-         * To get the constructor, use `getSearchComponentConstructor()` from `obsidian-typings/implementations`.
+         * To get the constructor instance, use {@link getSearchComponentConstructor} from `obsidian-typings/implementations`.
          * @unofficial
          */
         addRightDecorator(decoratorFn: (containerEl: HTMLElement) => void): this;
 
         /**
-         * Create a new search component.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getSearchComponentConstructor} from `obsidian-typings/implementations`.
          *
          * @param containerEl - The container element.
          * @returns The search component instance.

@@ -10,9 +10,10 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getFileValueConstructor} from `obsidian-typings/implementations`.
+         *
          * @param leaf - The leaf.
          * @returns The new instance.
-         * To get the constructor, use `getFileValueConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

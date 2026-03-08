@@ -8,12 +8,13 @@ declare module 'obsidian' {
      */
     interface SecretComponent extends BaseComponent {
         /**
-         * Creates a new secret component.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getSecretComponentConstructor} from `obsidian-typings/implementations`.
          *
          * @param app - the application instance.
          * @param containerEl - the container element.
          * @returns the secret component instance.
-         * To get the constructor, use `getSecretComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @since 1.11.1
          * @deprecated - Added only for typing purposes.

@@ -21,7 +21,9 @@ declare module 'obsidian' {
         state: PopoverState;
 
         /**
-         * Create a new hover popover.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getHoverPopoverConstructor} from `obsidian-typings/implementations`.
          *
          * @param parent - The parent of the hover popover.
          * @param targetEl - The target element of the hover popover.

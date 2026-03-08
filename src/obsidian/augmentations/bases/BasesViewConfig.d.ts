@@ -19,11 +19,12 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getBasesViewConfigConstructor} from `obsidian-typings/implementations`.
+         *
          * @param query - The query.
          * @param type - The type.
          * @param name - The name.
          * @returns The new instance.
-         * To get the constructor, use `getBasesViewConfigConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

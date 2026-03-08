@@ -17,11 +17,12 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getWorkspaceSplitConstructor} from `obsidian-typings/implementations`.
+         *
          * @param workspace - The workspace.
          * @param direction - The direction.
          * @param id - The id.
          * @returns The new instance.
-         * To get the constructor, use `getWorkspaceSplitConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

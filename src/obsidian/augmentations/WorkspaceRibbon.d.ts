@@ -9,10 +9,11 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getWorkspaceRibbonConstructor} from `obsidian-typings/implementations`.
+         *
          * @param workspace - The workspace.
          * @param side - The side.
          * @returns The new instance.
-         * To get the constructor, use `getWorkspaceRibbonConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

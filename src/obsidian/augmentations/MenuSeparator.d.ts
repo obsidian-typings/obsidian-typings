@@ -10,9 +10,10 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getMenuSeparatorConstructor} from `obsidian-typings/implementations`.
+         *
          * @param menu - The menu.
          * @returns The new instance.
-         * To get the constructor, use `getMenuSeparatorConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

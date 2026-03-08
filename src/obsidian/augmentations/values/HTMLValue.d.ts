@@ -11,9 +11,10 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getHTMLValueConstructor} from `obsidian-typings/implementations`.
+         *
          * @param value - The value.
          * @returns The new instance.
-         * To get the constructor, use `getHTMLValueConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

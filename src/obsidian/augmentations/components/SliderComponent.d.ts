@@ -22,11 +22,12 @@ declare module 'obsidian' {
         changeCallback?(value: number): void;
 
         /**
-         * Create a new slider component.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getSliderComponentConstructor} from `obsidian-typings/implementations`.
          *
          * @param containerEl - The container element.
          * @returns The slider component instance.
-         * To get the constructor, use `getSliderComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

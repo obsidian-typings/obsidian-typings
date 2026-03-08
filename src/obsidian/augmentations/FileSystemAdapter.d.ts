@@ -83,7 +83,7 @@ declare module 'obsidian' {
          * @param data - The data to append.
          * @param options - The options to append.
          * @returns A promise that resolves when the file is appended.
-         * To get the constructor, use `getFileSystemAdapterConstructor()` from `obsidian-typings/implementations`.
+         * To get the constructor instance, use {@link getFileSystemAdapterConstructor} from `obsidian-typings/implementations`.
          * @example
          * ```ts
          * await app.vault.adapter.append('foo/bar.md', 'baz');
@@ -120,6 +120,8 @@ declare module 'obsidian' {
 
         /**
          * Constructor.
+         *
+         * To get the constructor instance, use {@link getFileSystemAdapterConstructor} from `obsidian-typings/implementations`.
          *
          * @param basePath - The basePath.
          * @returns The new instance.

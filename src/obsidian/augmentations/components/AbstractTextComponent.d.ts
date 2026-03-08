@@ -25,11 +25,12 @@ declare module 'obsidian' {
         changeCallback?(value: string): void;
 
         /**
-         * Creates a new text component.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getAbstractTextComponentConstructor} from `obsidian-typings/implementations`.
          *
          * @param inputEl - The input element.
          * @returns The text component instance.
-         * To get the constructor, use `getAbstractTextComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

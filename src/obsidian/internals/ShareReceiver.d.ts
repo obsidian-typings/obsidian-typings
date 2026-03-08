@@ -13,9 +13,10 @@ export interface ShareReceiver {
     /**
      * Constructor.
      *
+     * To get the constructor instance, use {@link getShareReceiverConstructor} from `obsidian-typings/implementations`.
+     *
      * @param app - The app.
      * @returns The new instance.
-     * To get the constructor, use `getShareReceiverConstructor()` from `obsidian-typings/implementations`.
      * @deprecated - Added only for typing purposes.
      */
     constructor__(app: App): this;

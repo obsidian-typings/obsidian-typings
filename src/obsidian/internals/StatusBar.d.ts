@@ -15,10 +15,11 @@ export interface StatusBar {
     /**
      * Constructor.
      *
+     * To get the constructor instance, use {@link getStatusBarConstructor} from `obsidian-typings/implementations`.
+     *
      * @param app - The app.
      * @param containerEl - The containerEl.
      * @returns The new instance.
-     * To get the constructor, use `getStatusBarConstructor()` from `obsidian-typings/implementations`.
      * @deprecated - Added only for typing purposes.
      */
     constructor__(app: App, containerEl: HTMLElement): this;

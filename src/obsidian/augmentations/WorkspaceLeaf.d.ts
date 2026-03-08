@@ -137,13 +137,15 @@ declare module 'obsidian' {
          * Check whether this leaf can be navigated to a different view.
          *
          * @returns Whether the leaf can be navigated.
-         * To get the constructor, use `getWorkspaceLeafConstructor()` from `obsidian-typings/implementations`.
+         * To get the constructor instance, use {@link getWorkspaceLeafConstructor} from `obsidian-typings/implementations`.
          * @unofficial
          */
         canNavigate(): boolean;
 
         /**
          * Constructor.
+         *
+         * To get the constructor instance, use {@link getWorkspaceLeafConstructor} from `obsidian-typings/implementations`.
          *
          * @param app - The app.
          * @param id - The id.

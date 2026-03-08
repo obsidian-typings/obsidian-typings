@@ -11,9 +11,10 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To extract the constructor type, use `ExtractConstructor<PrimitiveValue>`.
+         *
          * @param value - The value to wrap.
          * @returns The new PrimitiveValue.
-         * To extract the constructor type, use `ExtractConstructor<PrimitiveValue>`.
          * @official
          * @since 1.10.0
          * @deprecated - Added only for typing purposes.

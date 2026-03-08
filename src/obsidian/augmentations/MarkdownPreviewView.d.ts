@@ -51,7 +51,7 @@ declare module 'obsidian' {
          *
          * @param e - The fold information to apply.
          * @returns The result of applying fold information.
-         * To get the constructor, use `getMarkdownPreviewViewConstructor()` from `obsidian-typings/implementations`.
+         * To get the constructor instance, use {@link getMarkdownPreviewViewConstructor} from `obsidian-typings/implementations`.
          * @unofficial
          */
         applyFoldInfo(e: unknown): unknown;
@@ -89,6 +89,8 @@ declare module 'obsidian' {
 
         /**
          * Constructor.
+         *
+         * To get the constructor instance, use {@link getMarkdownPreviewViewConstructor} from `obsidian-typings/implementations`.
          *
          * @param containerEl - The containerEl.
          * @returns The new instance.

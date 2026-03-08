@@ -28,10 +28,11 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getBasesEntryGroupConstructor} from `obsidian-typings/implementations`.
+         *
          * @param entries - The entries.
          * @param key - The key.
          * @returns The new instance.
-         * To get the constructor, use `getBasesEntryGroupConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

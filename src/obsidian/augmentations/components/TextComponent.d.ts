@@ -7,11 +7,12 @@ declare module 'obsidian' {
      */
     interface TextComponent extends AbstractTextComponent<HTMLInputElement> {
         /**
-         * Create a new text component.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getTextComponentConstructor} from `obsidian-typings/implementations`.
          *
          * @param containerEl - The container element.
          * @returns The text component instance.
-         * To get the constructor, use `getTextComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

@@ -23,11 +23,12 @@ declare module 'obsidian' {
         changeCallback?(): void;
 
         /**
-         * Create a new ExtraButtonComponent.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getExtraButtonComponentConstructor} from `obsidian-typings/implementations`.
          *
          * @param containerEl - The container element.
          * @returns The extra button component instance.
-         * To get the constructor, use `getExtraButtonComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

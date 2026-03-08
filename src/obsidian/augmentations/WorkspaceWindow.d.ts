@@ -23,11 +23,12 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getWorkspaceWindowConstructor} from `obsidian-typings/implementations`.
+         *
          * @param workspace - The workspace.
          * @param id - The id.
          * @param size - The size.
          * @returns The new instance.
-         * To get the constructor, use `getWorkspaceWindowConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

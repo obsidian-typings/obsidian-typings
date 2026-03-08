@@ -43,7 +43,9 @@ declare module 'obsidian' {
         canAcceptExtension(extension: string): boolean;
 
         /**
-         * Create a new file view.
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<FileView>`.
          *
          * @param leaf - The workspace leaf to create the file view in.
          * @returns The file view instance.

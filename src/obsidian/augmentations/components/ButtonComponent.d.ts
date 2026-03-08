@@ -23,11 +23,12 @@ declare module 'obsidian' {
         clickCallback?(): void;
 
         /**
-         * The constructor for the button component.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getButtonComponentConstructor} from `obsidian-typings/implementations`.
          *
          * @param containerEl - The container element.
          * @returns The button component instance.
-         * To get the constructor, use `getButtonComponentConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

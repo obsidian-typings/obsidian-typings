@@ -39,7 +39,7 @@ export function getJSDocComment(
     const comments = sourceCode.getCommentsBefore(node);
     for (let i = comments.length - 1; i >= 0; i--) {
         const comment = comments[i];
-        if (comment && comment.type === 'Block' && comment.value.startsWith('*')) {
+        if (comment && (comment.type as string) === 'Block' && comment.value.startsWith('*')) {
             return comment;
         }
     }

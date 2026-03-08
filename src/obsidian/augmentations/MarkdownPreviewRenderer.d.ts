@@ -10,13 +10,14 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getMarkdownPreviewRendererConstructor} from `obsidian-typings/implementations`.
+         *
          * @param owner - The owner.
          * @param containerEl - The containerEl.
          * @param parentEl - The parentEl.
          * @param workerPath - The workerPath.
          * @param observeInsertion - The observeInsertion.
          * @returns The new instance.
-         * To get the constructor, use `getMarkdownPreviewRendererConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

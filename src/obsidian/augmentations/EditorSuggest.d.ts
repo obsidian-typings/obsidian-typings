@@ -26,11 +26,12 @@ declare module 'obsidian' {
         limit: number;
 
         /**
-         * Create a new EditorSuggest.
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<EditorSuggest>`.
          *
          * @param app - The app instance.
          * @returns The editor suggest instance.
-         * To extract the constructor type, use `ExtractConstructor<EditorSuggest>`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

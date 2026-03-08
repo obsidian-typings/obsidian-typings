@@ -20,7 +20,7 @@ declare module 'obsidian' {
          * @param value - The value of the option.
          * @param display - The display of the option.
          * @returns The dropdown component.
-         * To get the constructor, use `getDropdownComponentConstructor()` from `obsidian-typings/implementations`.
+         * To get the constructor instance, use {@link getDropdownComponentConstructor} from `obsidian-typings/implementations`.
          * @example
          * ```ts
          * dropdown.addOption('foo', 'bar');
@@ -53,7 +53,9 @@ declare module 'obsidian' {
         changeCallback?(value: string): void;
 
         /**
-         * Create a dropdown component.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getDropdownComponentConstructor} from `obsidian-typings/implementations`.
          *
          * @param containerEl - The container element.
          * @returns The dropdown component instance.

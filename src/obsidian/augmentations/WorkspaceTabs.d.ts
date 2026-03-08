@@ -15,10 +15,11 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getWorkspaceTabsConstructor} from `obsidian-typings/implementations`.
+         *
          * @param workspace - The workspace.
          * @param id - The id.
          * @returns The new instance.
-         * To get the constructor, use `getWorkspaceTabsConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

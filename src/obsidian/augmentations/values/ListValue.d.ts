@@ -18,7 +18,10 @@ declare module 'obsidian' {
         concat(other: ListValue): ListValue;
 
         /**
-         * The array passed in will be modified!
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getListValueConstructor} from `obsidian-typings/implementations`.
+         *
          * @param value - Contents of the list.
          * @returns The new ListValue.
          * @official

@@ -18,14 +18,13 @@ function isConstructorGetterFile(filename: string): boolean {
  */
 function findAugmentationFile(dir: string, typeName: string): string | null {
     const target = `${typeName}.d.ts`;
-    let entries: string[];
     try {
-        entries = readdirSync(dir, { withFileTypes: true }) as unknown as string[];
+        // Check directory is readable
+        readdirSync(dir);
     } catch {
         return null;
     }
 
-    // readdirSync with withFileTypes returns Dirent objects
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
         if (entry.isFile() && entry.name === target) {
             return join(dir, entry.name);

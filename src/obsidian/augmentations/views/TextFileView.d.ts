@@ -63,7 +63,9 @@ declare module 'obsidian' {
         clear__?(): void;
 
         /**
-         * Create a new text file view.
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<TextFileView>`.
          *
          * @param leaf - The leaf to create the view in.
          * @official

@@ -36,11 +36,12 @@ declare module 'obsidian' {
         tabFocusContainerEl: HTMLElement | null;
 
         /**
-         * Create a new scope.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getScopeConstructor} from `obsidian-typings/implementations`.
          *
          * @param parent - The parent scope.
          * @returns The scope instance.
-         * To get the constructor, use `getScopeConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

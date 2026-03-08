@@ -13,14 +13,15 @@ declare module 'obsidian' {
         containerEl: HTMLElement;
 
         /**
-         * Create a new markdown render child.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getMarkdownRenderChildConstructor} from `obsidian-typings/implementations`.
          *
          * @param containerEl - This HTMLElement will be used to test whether this component is still alive.
          * It should be a child of the Markdown preview sections, and when it's no longer attached
          * (for example, when it is replaced with a new version because the user edited the Markdown source code),
          * this component will be unloaded.
          * @returns The markdown render child instance.
-         * To get the constructor, use `getMarkdownRenderChildConstructor()` from `obsidian-typings/implementations`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

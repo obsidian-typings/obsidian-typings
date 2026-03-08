@@ -36,12 +36,13 @@ declare module 'obsidian' {
         autoReposition(): void;
 
         /**
-         * Accepts an `<input>` text box or a contenteditable div.
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<AbstractInputSuggest>`.
          *
          * @param app - The app instance.
          * @param textInputEl - The text input element.
          * @returns The abstract input suggest instance.
-         * To extract the constructor type, use `ExtractConstructor<AbstractInputSuggest>`.
          * @official
          * @deprecated - Added only for typing purposes.
          */

@@ -82,11 +82,12 @@ declare module 'obsidian' {
         close(): Promise<void>;
 
         /**
-         * Creates a new view.
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<View>`.
          *
          * @param leaf - The leaf of the view.
          * @returns The view instance.
-         * To extract the constructor type, use `ExtractConstructor<View>`.
          * @official
          * @since 0.9.7
          * @deprecated - Added only for typing purposes.

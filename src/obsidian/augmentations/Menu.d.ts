@@ -90,7 +90,7 @@ declare module 'obsidian' {
          *
          * @param cb - The callback function.
          * @returns The menu instance.
-         * To get the constructor, use `getMenuConstructor()` from `obsidian-typings/implementations`.
+         * To get the constructor instance, use {@link getMenuConstructor} from `obsidian-typings/implementations`.
          * @example
          * ```ts
          * menu.addItem((item) => {
@@ -134,7 +134,9 @@ declare module 'obsidian' {
         closeSubmenu(): void;
 
         /**
-         * Create a new menu.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getMenuConstructor} from `obsidian-typings/implementations`.
          *
          * @official
          * @deprecated - Added only for typing purposes.

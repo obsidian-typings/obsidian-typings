@@ -17,10 +17,11 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getTFolderConstructor} from `obsidian-typings/implementations`.
+         *
          * @param vault - The vault.
          * @param path - The path.
          * @returns The new instance.
-         * To get the constructor, use `getTFolderConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

@@ -273,7 +273,7 @@ declare module 'obsidian' {
          *
          * @param workspace - The workspace to change the layout to.
          * @returns A promise that resolves when the layout is changed.
-         * To get the constructor, use `getWorkspaceConstructor()` from `obsidian-typings/implementations`.
+         * To get the constructor instance, use {@link getWorkspaceConstructor} from `obsidian-typings/implementations`.
          * @official
          * @since 0.9.7
          */
@@ -289,6 +289,8 @@ declare module 'obsidian' {
 
         /**
          * Constructor.
+         *
+         * To get the constructor instance, use {@link getWorkspaceConstructor} from `obsidian-typings/implementations`.
          *
          * @param app - The app.
          * @param containerEl - The containerEl.

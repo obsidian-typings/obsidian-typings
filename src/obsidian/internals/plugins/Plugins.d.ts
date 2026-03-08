@@ -61,7 +61,7 @@ export interface Plugins {
      * Check online list for deprecated plugins to automatically disable.
      *
      * @returns A promise that resolves when the deprecation check is complete.
-     * To get the constructor, use `getPluginsConstructor()` from `obsidian-typings/implementations`.
+     * To get the constructor instance, use {@link getPluginsConstructor} from `obsidian-typings/implementations`.
      */
     checkForDeprecations(): Promise<void>;
 
@@ -74,6 +74,8 @@ export interface Plugins {
 
     /**
      * Constructor.
+     *
+     * To get the constructor instance, use {@link getPluginsConstructor} from `obsidian-typings/implementations`.
      *
      * @param app - The app.
      * @returns The new instance.

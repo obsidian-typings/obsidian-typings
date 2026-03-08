@@ -12,12 +12,13 @@ declare module 'obsidian' {
         /**
          * Constructor.
          *
+         * To get the constructor instance, use {@link getQueryControllerConstructor} from `obsidian-typings/implementations`.
+         *
          * @param app - The app.
          * @param plugin - The plugin.
          * @param viewHeaderEl - The viewHeaderEl.
          * @param currentFile - The currentFile.
          * @returns The new instance.
-         * To get the constructor, use `getQueryControllerConstructor()` from `obsidian-typings/implementations`.
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */

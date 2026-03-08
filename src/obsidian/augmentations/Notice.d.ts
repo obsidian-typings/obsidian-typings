@@ -32,13 +32,14 @@ declare module 'obsidian' {
         noticeEl: HTMLElement;
 
         /**
-         * Creates a new notice.
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getNoticeConstructor} from `obsidian-typings/implementations`.
          *
          * @param message - The message to be displayed, can either be a simple string or a {@link DocumentFragment}.
          * @param duration - Time in milliseconds to show the notice for. If this is `0`, the
          * `Notice` will stay visible until the user manually dismisses it.
          * @returns The notice instance.
-         * To get the constructor, use `getNoticeConstructor()` from `obsidian-typings/implementations`.
          * @example
          * ```ts
          * new Notice('foo');
