@@ -76,6 +76,7 @@ export const eslintConfig: Linter.Config[] = [
         },
         rules: {
             'obsidian-typings/augmentation-member-tags': 'error',
+            'obsidian-typings/constructor-getter-placement': 'error',
             'obsidian-typings/file-extension': 'error',
             'obsidian-typings/import-extensions': 'error',
             'obsidian-typings/internals-interface-tags': 'error',
