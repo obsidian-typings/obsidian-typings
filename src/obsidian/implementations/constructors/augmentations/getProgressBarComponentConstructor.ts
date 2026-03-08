@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type ProgressBarComponentConstructor = ExtractConstructor<ProgressBarComponent>;
+
 /**
  * Get the ProgressBarComponent constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getProgressBarComponentConstructor(): ExtractConstructor<ProgressBarComponent> {
-    return ProgressBarComponent as ExtractConstructor<ProgressBarComponent>;
+export function getProgressBarComponentConstructor(): ProgressBarComponentConstructor {
+    return ProgressBarComponent as ProgressBarComponentConstructor;
 }

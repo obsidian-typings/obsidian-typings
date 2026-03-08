@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type WorkspaceRibbonConstructor = ExtractConstructor<WorkspaceRibbon>;
+
 /**
  * Get the WorkspaceRibbon constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getWorkspaceRibbonConstructor(): ExtractConstructor<WorkspaceRibbon> {
-    return WorkspaceRibbon as ExtractConstructor<WorkspaceRibbon>;
+export function getWorkspaceRibbonConstructor(): WorkspaceRibbonConstructor {
+    return WorkspaceRibbon as WorkspaceRibbonConstructor;
 }

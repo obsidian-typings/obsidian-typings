@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type ScopeConstructor = ExtractConstructor<Scope>;
+
 /**
  * Get the Scope constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getScopeConstructor(): ExtractConstructor<Scope> {
-    return Scope as ExtractConstructor<Scope>;
+export function getScopeConstructor(): ScopeConstructor {
+    return Scope as ScopeConstructor;
 }

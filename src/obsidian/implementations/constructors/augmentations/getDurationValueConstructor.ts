@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type DurationValueConstructor = ExtractConstructor<DurationValue>;
+
 /**
  * Get the DurationValue constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getDurationValueConstructor(): ExtractConstructor<DurationValue> {
-    return DurationValue as ExtractConstructor<DurationValue>;
+export function getDurationValueConstructor(): DurationValueConstructor {
+    return DurationValue as DurationValueConstructor;
 }

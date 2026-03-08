@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type MarkdownRenderChildConstructor = ExtractConstructor<MarkdownRenderChild>;
+
 /**
  * Get the MarkdownRenderChild constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getMarkdownRenderChildConstructor(): ExtractConstructor<MarkdownRenderChild> {
-    return MarkdownRenderChild as ExtractConstructor<MarkdownRenderChild>;
+export function getMarkdownRenderChildConstructor(): MarkdownRenderChildConstructor {
+    return MarkdownRenderChild as MarkdownRenderChildConstructor;
 }

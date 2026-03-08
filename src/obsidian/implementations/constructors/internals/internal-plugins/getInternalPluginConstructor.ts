@@ -1,5 +1,8 @@
 import type { App } from 'obsidian';
-import type { InternalPluginConstructor } from '../../../../internals/constructors/internals/internal-plugins/InternalPluginConstructor.d.ts';
+import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
+import type { InternalPlugin } from '../../../../internals/internal-plugins/InternalPlugin.d.ts';
+
+type InternalPluginConstructor<Instance> = ExtractConstructor<InternalPlugin<Instance>>;
 
 /**
  * Get the InternalPlugin constructor.

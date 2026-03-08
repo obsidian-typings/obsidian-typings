@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type MenuSeparatorConstructor = ExtractConstructor<MenuSeparator>;
+
 /**
  * Get the MenuSeparator constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getMenuSeparatorConstructor(): ExtractConstructor<MenuSeparator> {
-    return MenuSeparator as ExtractConstructor<MenuSeparator>;
+export function getMenuSeparatorConstructor(): MenuSeparatorConstructor {
+    return MenuSeparator as MenuSeparatorConstructor;
 }

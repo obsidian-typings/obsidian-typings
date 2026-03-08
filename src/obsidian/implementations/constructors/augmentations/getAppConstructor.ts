@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type AppConstructor = ExtractConstructor<App>;
+
 /**
  * Get the App constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getAppConstructor(): ExtractConstructor<App> {
-    return App as ExtractConstructor<App>;
+export function getAppConstructor(): AppConstructor {
+    return App as AppConstructor;
 }

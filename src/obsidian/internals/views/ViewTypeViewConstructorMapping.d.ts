@@ -20,7 +20,8 @@ import type { WebviewerViewConstructor } from '../internal-plugins/webviewer/Web
 import type { AudioViewConstructor } from './AudioViewConstructor.d.ts';
 import type { EmptyViewConstructor } from './EmptyViewConstructor.d.ts';
 import type { ImageViewConstructor } from './ImageViewConstructor.d.ts';
-import type { MarkdownViewConstructor } from '../constructors/augmentations/MarkdownViewConstructor.d.ts';
+import type { MarkdownView } from 'obsidian';
+import type { ExtractConstructor } from '../constructors/ExtractConstructor.d.ts';
 import type { PdfViewConstructor } from './PdfViewConstructor.d.ts';
 import type { ReleaseNotesViewConstructor } from './ReleaseNotesViewConstructor.d.ts';
 import type { TagViewConstructor } from './TagViewConstructor.d.ts';
@@ -47,7 +48,7 @@ export type ViewTypeViewConstructorMapping = {
     [ViewType.Graph]: GraphViewConstructor;
     [ViewType.Image]: ImageViewConstructor;
     [ViewType.LocalGraph]: LocalGraphViewConstructor;
-    [ViewType.Markdown]: MarkdownViewConstructor;
+    [ViewType.Markdown]: ExtractConstructor<MarkdownView>;
     [ViewType.OutgoingLink]: OutgoingLinkViewConstructor;
     [ViewType.Outline]: OutlineViewConstructor;
     [ViewType.Pdf]: PdfViewConstructor;

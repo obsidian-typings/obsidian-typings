@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type ObjectValueConstructor = ExtractConstructor<ObjectValue>;
+
 /**
  * Get the ObjectValue constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getObjectValueConstructor(): ExtractConstructor<ObjectValue> {
-    return ObjectValue as ExtractConstructor<ObjectValue>;
+export function getObjectValueConstructor(): ObjectValueConstructor {
+    return ObjectValue as ObjectValueConstructor;
 }

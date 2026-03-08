@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type MenuConstructor = ExtractConstructor<Menu>;
+
 /**
  * Get the Menu constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getMenuConstructor(): ExtractConstructor<Menu> {
-    return Menu as ExtractConstructor<Menu>;
+export function getMenuConstructor(): MenuConstructor {
+    return Menu as MenuConstructor;
 }

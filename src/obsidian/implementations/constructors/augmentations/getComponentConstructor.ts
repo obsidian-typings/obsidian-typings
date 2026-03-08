@@ -1,7 +1,9 @@
 import {
     Component
 } from 'obsidian';
-import type { ComponentConstructor } from '../../../internals/constructors/augmentations/ComponentConstructor.d.ts';
+import type { ConstructorBase } from '../../../internals/constructors/ConstructorBase.d.ts';
+
+type ComponentConstructor = ConstructorBase<[], Component>;
 
 /**
  * Get the Component constructor.

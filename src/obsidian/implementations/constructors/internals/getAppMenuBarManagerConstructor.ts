@@ -2,6 +2,8 @@ import type { App } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 import type { AppMenuBarManager } from '../../../internals/AppMenuBarManager.d.ts';
 
+type AppMenuBarManagerConstructor = ExtractConstructor<AppMenuBarManager>;
+
 /**
  * Get the AppMenuBarManager constructor.
  *
@@ -11,6 +13,6 @@ import type { AppMenuBarManager } from '../../../internals/AppMenuBarManager.d.t
  * @public
  * @unofficial
  */
-export function getAppMenuBarManagerConstructor(app: App): ExtractConstructor<AppMenuBarManager> {
-    return app.appMenuBarManager.constructor as ExtractConstructor<AppMenuBarManager>;
+export function getAppMenuBarManagerConstructor(app: App): AppMenuBarManagerConstructor {
+    return app.appMenuBarManager.constructor as AppMenuBarManagerConstructor;
 }

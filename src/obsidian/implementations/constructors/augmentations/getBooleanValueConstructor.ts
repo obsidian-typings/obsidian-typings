@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type BooleanValueConstructor = ExtractConstructor<BooleanValue>;
+
 /**
  * Get the BooleanValue constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getBooleanValueConstructor(): ExtractConstructor<BooleanValue> {
-    return BooleanValue as ExtractConstructor<BooleanValue>;
+export function getBooleanValueConstructor(): BooleanValueConstructor {
+    return BooleanValue as BooleanValueConstructor;
 }

@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type RelativeDateValueConstructor = ExtractConstructor<RelativeDateValue>;
+
 /**
  * Get the RelativeDateValue constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getRelativeDateValueConstructor(): ExtractConstructor<RelativeDateValue> {
-    return RelativeDateValue as ExtractConstructor<RelativeDateValue>;
+export function getRelativeDateValueConstructor(): RelativeDateValueConstructor {
+    return RelativeDateValue as RelativeDateValueConstructor;
 }

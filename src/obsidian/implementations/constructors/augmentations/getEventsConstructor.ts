@@ -1,7 +1,9 @@
 import {
     Events
 } from 'obsidian';
-import type { EventsConstructor } from '../../../internals/constructors/augmentations/EventsConstructor.d.ts';
+import type { ConstructorBase } from '../../../internals/constructors/ConstructorBase.d.ts';
+
+type EventsConstructor = ConstructorBase<[], Events>;
 
 /**
  * Get the Events constructor.

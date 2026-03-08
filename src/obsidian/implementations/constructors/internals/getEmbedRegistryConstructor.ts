@@ -2,6 +2,8 @@ import type { App } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 import type { EmbedRegistry } from '../../../internals/embed-registry/EmbedRegistry.d.ts';
 
+type EmbedRegistryConstructor = ExtractConstructor<EmbedRegistry>;
+
 /**
  * Get the EmbedRegistry constructor.
  *
@@ -11,6 +13,6 @@ import type { EmbedRegistry } from '../../../internals/embed-registry/EmbedRegis
  * @public
  * @unofficial
  */
-export function getEmbedRegistryConstructor(app: App): ExtractConstructor<EmbedRegistry> {
-    return app.embedRegistry.constructor as ExtractConstructor<EmbedRegistry>;
+export function getEmbedRegistryConstructor(app: App): EmbedRegistryConstructor {
+    return app.embedRegistry.constructor as EmbedRegistryConstructor;
 }

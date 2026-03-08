@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type FileSystemAdapterConstructor = ExtractConstructor<FileSystemAdapter>;
+
 /**
  * Get the FileSystemAdapter constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getFileSystemAdapterConstructor(): ExtractConstructor<FileSystemAdapter> {
-    return FileSystemAdapter as ExtractConstructor<FileSystemAdapter>;
+export function getFileSystemAdapterConstructor(): FileSystemAdapterConstructor {
+    return FileSystemAdapter as FileSystemAdapterConstructor;
 }

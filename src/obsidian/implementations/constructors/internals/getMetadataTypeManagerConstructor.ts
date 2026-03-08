@@ -2,6 +2,8 @@ import type { App } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 import type { MetadataTypeManager } from '../../../internals/metadata-type-manager/MetadataTypeManager.d.ts';
 
+type MetadataTypeManagerConstructor = ExtractConstructor<MetadataTypeManager>;
+
 /**
  * Get the MetadataTypeManager constructor.
  *
@@ -11,6 +13,6 @@ import type { MetadataTypeManager } from '../../../internals/metadata-type-manag
  * @public
  * @unofficial
  */
-export function getMetadataTypeManagerConstructor(app: App): ExtractConstructor<MetadataTypeManager> {
-    return app.metadataTypeManager.constructor as ExtractConstructor<MetadataTypeManager>;
+export function getMetadataTypeManagerConstructor(app: App): MetadataTypeManagerConstructor {
+    return app.metadataTypeManager.constructor as MetadataTypeManagerConstructor;
 }

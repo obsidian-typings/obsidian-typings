@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type RegExpValueConstructor = ExtractConstructor<RegExpValue>;
+
 /**
  * Get the RegExpValue constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getRegExpValueConstructor(): ExtractConstructor<RegExpValue> {
-    return RegExpValue as ExtractConstructor<RegExpValue>;
+export function getRegExpValueConstructor(): RegExpValueConstructor {
+    return RegExpValue as RegExpValueConstructor;
 }

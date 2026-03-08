@@ -2,6 +2,8 @@ import type { App } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 import type { ObsidianDOM } from '../../../internals/ObsidianDOM.d.ts';
 
+type ObsidianDOMConstructor = ExtractConstructor<ObsidianDOM>;
+
 /**
  * Get the ObsidianDOM constructor.
  *
@@ -11,6 +13,6 @@ import type { ObsidianDOM } from '../../../internals/ObsidianDOM.d.ts';
  * @public
  * @unofficial
  */
-export function getObsidianDOMConstructor(app: App): ExtractConstructor<ObsidianDOM> {
-    return app.dom.constructor as ExtractConstructor<ObsidianDOM>;
+export function getObsidianDOMConstructor(app: App): ObsidianDOMConstructor {
+    return app.dom.constructor as ObsidianDOMConstructor;
 }

@@ -2,7 +2,7 @@ import type {
     App,
     Debouncer
 } from 'obsidian';
-import type { AppMenuBarManagerConstructor } from './constructors/internals/AppMenuBarManagerConstructor.d.ts';
+import type { ExtractConstructor } from './constructors/ExtractConstructor.d.ts';
 
 /**
  * Manager for the application menu bar (native desktop menu).
@@ -14,7 +14,7 @@ export interface AppMenuBarManager {
     app: App;
 
     /** Constructor reference for the menu bar manager. */
-    constructor: AppMenuBarManagerConstructor;
+    constructor: ExtractConstructor<AppMenuBarManager>;
 
     /** Debounced handler for file open events. */
     onFileOpen: Debouncer<[], unknown>;

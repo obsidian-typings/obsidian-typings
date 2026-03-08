@@ -3,6 +3,8 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
+type TextComponentConstructor = ExtractConstructor<TextComponent>;
+
 /**
  * Get the TextComponent constructor.
  *
@@ -11,6 +13,6 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @public
  * @unofficial
  */
-export function getTextComponentConstructor(): ExtractConstructor<TextComponent> {
-    return TextComponent as ExtractConstructor<TextComponent>;
+export function getTextComponentConstructor(): TextComponentConstructor {
+    return TextComponent as TextComponentConstructor;
 }

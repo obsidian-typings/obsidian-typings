@@ -2,6 +2,8 @@ import type { App } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 import type { AppSetting } from '../../../internals/AppSetting.d.ts';
 
+type AppSettingConstructor = ExtractConstructor<AppSetting>;
+
 /**
  * Get the AppSetting constructor.
  *
@@ -11,6 +13,6 @@ import type { AppSetting } from '../../../internals/AppSetting.d.ts';
  * @public
  * @unofficial
  */
-export function getAppSettingConstructor(app: App): ExtractConstructor<AppSetting> {
-    return app.setting.constructor as ExtractConstructor<AppSetting>;
+export function getAppSettingConstructor(app: App): AppSettingConstructor {
+    return app.setting.constructor as AppSettingConstructor;
 }
