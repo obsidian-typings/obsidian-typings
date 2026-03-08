@@ -1,6 +1,6 @@
-import type { LinkChangeUpdate } from '../internals/LinkUpdate/LinkChangeUpdate.d.ts';
-import type { LinkUpdate } from '../internals/LinkUpdate/LinkUpdate.d.ts';
-import type { LinkUpdatesHandler } from '../internals/LinkUpdate/LinkUpdatesHandler.d.ts';
+import type { LinkChangeUpdate } from '../internals/link-update/LinkChangeUpdate.d.ts';
+import type { LinkUpdate } from '../internals/link-update/LinkUpdate.d.ts';
+import type { LinkUpdatesHandler } from '../internals/link-update/LinkUpdatesHandler.d.ts';
 import type { PositionedReference } from '../internals/PositionedReference.d.ts';
 import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
 

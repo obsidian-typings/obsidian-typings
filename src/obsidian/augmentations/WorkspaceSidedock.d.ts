@@ -1,4 +1,4 @@
-import type { SerializedWorkspaceSidedock } from '../internals/Workspace/SerializedWorkspaceSidedock.d.ts';
+import type { SerializedWorkspaceSidedock } from '../internals/workspace/SerializedWorkspaceSidedock.d.ts';
 
 declare module 'obsidian' {
     /**

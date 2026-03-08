@@ -1,0 +1,43 @@
+import type { TFile } from 'obsidian';
+import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
+import type { InfoFileView } from '../../views/InfoFileView.d.ts';
+import type { GraphEngine } from './GraphEngine.d.ts';
+import type { GraphRenderer } from './GraphRenderer.d.ts';
+
+/**
+ * Obsidian view for a local graph.
+ *
+ * @public
+ * @unofficial
+ */
+export interface LocalGraphView extends InfoFileView {
+    /** Graph engine powering the local graph simulation. */
+    engine: GraphEngine;
+
+    /** Renderer responsible for drawing the local graph. */
+    renderer: GraphRenderer;
+
+    /**
+     * Get the current view type.
+     *
+     * @returns The local graph view type.
+     */
+    getViewType(): typeof ViewType.LocalGraph;
+
+    /**
+     * Requests a update if the changed file is the opened file.
+     *
+     * @param file - The changed file.
+     */
+    onFileChanged(file: TFile): void;
+
+    /**
+     * Updates the options from the plugin when changed in view.
+     */
+    onOptionsChange(): void;
+
+    /**
+     * Renders the graph.
+     */
+    update(): void;
+}

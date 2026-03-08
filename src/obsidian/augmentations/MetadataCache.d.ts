@@ -1,12 +1,12 @@
-import type { CustomArrayDict } from '../internals/Collections/CustomArrayDict.d.ts';
-import type { ItemQueue } from '../internals/Collections/ItemQueue.d.ts';
+import type { CustomArrayDict } from '../internals/collections/CustomArrayDict.d.ts';
+import type { ItemQueue } from '../internals/collections/ItemQueue.d.ts';
 import type { FileCacheEntry } from '../internals/FileCacheEntry.d.ts';
 import type { LinkSuggestion } from '../internals/LinkSuggestion.d.ts';
-import type { LinkUpdaters } from '../internals/LinkUpdate/LinkUpdaters.d.ts';
-import type { MetadataCacheFileCacheRecord } from '../internals/MetadataCacheRecords/MetadataCacheFileCacheRecord.d.ts';
+import type { LinkUpdaters } from '../internals/link-update/LinkUpdaters.d.ts';
+import type { MetadataCacheFileCacheRecord } from '../internals/metadata-cache-records/MetadataCacheFileCacheRecord.d.ts';
 import type {
     MetadataCacheMetadataCacheRecord
-} from '../internals/MetadataCacheRecords/MetadataCacheMetadataCacheRecord.d.ts';
+} from '../internals/metadata-cache-records/MetadataCacheMetadataCacheRecord.d.ts';
 import type { MetadataCacheWorkerMessage } from '../internals/MetadataCacheWorkerMessage.d.ts';
 import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
 import type { PropertyInfo } from '../internals/PropertyInfo.d.ts';

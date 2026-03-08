@@ -1,4 +1,4 @@
-import type { AppVaultConfig } from '../internals/AppVaultConfig/AppVaultConfig.d.ts';
+import type { AppVaultConfig } from '../internals/app-vault-config/AppVaultConfig.d.ts';
 import type { ConfigItem } from '../internals/ConfigItem.d.ts';
 import type { FileSystemWatchHandler } from '../internals/FileSystemWatchHandler.d.ts';
 import type { VaultFileMapRecord } from '../internals/VaultFileMapRecord.d.ts';

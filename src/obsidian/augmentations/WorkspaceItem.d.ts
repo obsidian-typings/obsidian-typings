@@ -1,4 +1,4 @@
-import type { SerializedWorkspaceItem } from '../internals/Workspace/SerializedWorkspaceItem.d.ts';
+import type { SerializedWorkspaceItem } from '../internals/workspace/SerializedWorkspaceItem.d.ts';
 
 declare module 'obsidian' {
     /**

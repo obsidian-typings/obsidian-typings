@@ -1,7 +1,7 @@
-import type { Draggable } from '../internals/DragManager/Draggable.d.ts';
-import type { DropResult } from '../internals/DragManager/DropResult.d.ts';
-import type { WorkspaceLeafHistory } from '../internals/WorkspaceLeafHistory/WorkspaceLeafHistory.d.ts';
-import type { WorkspaceLeafHistoryState } from '../internals/WorkspaceLeafHistory/WorkspaceLeafHistoryState.d.ts';
+import type { Draggable } from '../internals/drag-manager/Draggable.d.ts';
+import type { DropResult } from '../internals/drag-manager/DropResult.d.ts';
+import type { WorkspaceLeafHistory } from '../internals/workspace-leaf-history/WorkspaceLeafHistory.d.ts';
+import type { WorkspaceLeafHistoryState } from '../internals/workspace-leaf-history/WorkspaceLeafHistoryState.d.ts';
 
 export {};
 

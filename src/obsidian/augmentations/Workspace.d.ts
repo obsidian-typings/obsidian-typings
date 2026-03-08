@@ -6,19 +6,19 @@ import type { EditorSuggestEx } from '../internals/EditorSuggestEx.d.ts';
 import type { EnsureSideLeafOptions } from '../internals/EnsureSideLeafOptions.d.ts';
 import type { GetRecentFilesOptions } from '../internals/GetRecentFilesOptions.d.ts';
 import type { HoverLinkEvent } from '../internals/HoverLinkEvent.d.ts';
-import type { CanvasView } from '../internals/InternalPlugins/Canvas/CanvasView.d.ts';
-import type { SearchView } from '../internals/InternalPlugins/GlobalSearch/SearchView.d.ts';
+import type { CanvasView } from '../internals/internal-plugins/canvas/CanvasView.d.ts';
+import type { SearchView } from '../internals/internal-plugins/global-search/SearchView.d.ts';
 import type { LeafEntry } from '../internals/LeafEntry.d.ts';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
 import type { ObsidianTouchEvent } from '../internals/ObsidianTouchEvent.d.ts';
 import type { RecentFileTracker } from '../internals/RecentFileTracker.d.ts';
 import type { StateHistory } from '../internals/StateHistory.d.ts';
 import type { TypedWorkspaceLeaf } from '../internals/TypedWorkspaceLeaf.d.ts';
-import type { ViewTypeType } from '../internals/Views/ViewTypeType.d.ts';
-import type { ViewTypeViewMapping } from '../internals/Views/ViewTypeViewMapping.d.ts';
-import type { SerializedWorkspace } from '../internals/Workspace/SerializedWorkspace.d.ts';
-import type { SetActiveLeafParams } from '../internals/Workspace/SetActiveLeafParams.d.ts';
-import type { WorkspaceHoverLinkSourcesRecord } from '../internals/Workspace/WorkspaceHoverLinkSourcesRecord.d.ts';
+import type { ViewTypeType } from '../internals/views/ViewTypeType.d.ts';
+import type { ViewTypeViewMapping } from '../internals/views/ViewTypeViewMapping.d.ts';
+import type { SerializedWorkspace } from '../internals/workspace/SerializedWorkspace.d.ts';
+import type { SetActiveLeafParams } from '../internals/workspace/SetActiveLeafParams.d.ts';
+import type { WorkspaceHoverLinkSourcesRecord } from '../internals/workspace/WorkspaceHoverLinkSourcesRecord.d.ts';
 
 declare module 'obsidian' {
     /**

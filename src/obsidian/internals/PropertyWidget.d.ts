@@ -1,4 +1,4 @@
-import type { PropertyWidgetComponentBase } from './MetadataTypeManager/PropertyWidgetComponentBase.d.ts';
+import type { PropertyWidgetComponentBase } from './metadata-type-manager/PropertyWidgetComponentBase.d.ts';
 import type { PropertyRenderContext } from './PropertyRenderContext.d.ts';
 
 /**

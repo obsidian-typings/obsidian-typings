@@ -1,23 +1,23 @@
 import type { AppMenuBarManager } from '../internals/AppMenuBarManager.d.ts';
-import type { Cli } from '../internals/Cli/Cli.d.ts';
+import type { Cli } from '../internals/cli/Cli.d.ts';
 import type { AppSetting } from '../internals/AppSetting.d.ts';
-import type { Commands } from '../internals/Commands/Commands.d.ts';
-import type { CustomCSS } from '../internals/CustomCSS/CustomCSS.d.ts';
-import type { DragManager } from '../internals/DragManager/DragManager.d.ts';
-import type { EmbedRegistry } from '../internals/EmbedRegistry/EmbedRegistry.d.ts';
+import type { Commands } from '../internals/commands/Commands.d.ts';
+import type { CustomCSS } from '../internals/custom-css/CustomCSS.d.ts';
+import type { DragManager } from '../internals/drag-manager/DragManager.d.ts';
+import type { EmbedRegistry } from '../internals/embed-registry/EmbedRegistry.d.ts';
 import type { FoldManager } from '../internals/FoldManager.d.ts';
-import type { HotkeyManager } from '../internals/HotkeyManager/HotkeyManager.d.ts';
+import type { HotkeyManager } from '../internals/hotkey-manager/HotkeyManager.d.ts';
 import type { ImportedAttachment } from '../internals/ImportedAttachment.d.ts';
-import type { InternalPlugins } from '../internals/InternalPlugins/InternalPlugins.d.ts';
-import type { MetadataTypeManager } from '../internals/MetadataTypeManager/MetadataTypeManager.d.ts';
+import type { InternalPlugins } from '../internals/internal-plugins/InternalPlugins.d.ts';
+import type { MetadataTypeManager } from '../internals/metadata-type-manager/MetadataTypeManager.d.ts';
 import type { MobileNavbar } from '../internals/MobileNavbar.d.ts';
 import type { MobileTabSwitcher } from '../internals/MobileTabSwitcher.d.ts';
 import type { MobileToolbar } from '../internals/MobileToolbar.d.ts';
 import type { ObsidianDOM } from '../internals/ObsidianDOM.d.ts';
-import type { Plugins } from '../internals/Plugins/Plugins.d.ts';
+import type { Plugins } from '../internals/plugins/Plugins.d.ts';
 import type { ShareReceiver } from '../internals/ShareReceiver.d.ts';
 import type { StatusBar } from '../internals/StatusBar.d.ts';
-import type { ViewRegistry } from '../internals/ViewRegistry/ViewRegistry.d.ts';
+import type { ViewRegistry } from '../internals/view-registry/ViewRegistry.d.ts';
 
 export {};
 

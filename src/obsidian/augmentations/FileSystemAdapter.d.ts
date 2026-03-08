@@ -4,7 +4,7 @@ import type { Stats } from 'node:fs';
 import * as fsPromises from 'node:fs/promises';
 import * as path from 'node:path';
 import type { Btime } from '../internals/Btime.d.ts';
-import type { DataAdapterWatchersRecord } from '../internals/DataAdapterRecords/DataAdapterWatchersRecord.d.ts';
+import type { DataAdapterWatchersRecord } from '../internals/data-adapter-records/DataAdapterWatchersRecord.d.ts';
 
 export {};
 

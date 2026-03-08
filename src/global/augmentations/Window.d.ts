@@ -21,14 +21,14 @@ import type { default as Prism } from 'prismjs';
 import type { default as scrypt } from 'scrypt-js';
 import type { default as TurndownService } from 'turndown';
 import type { CodeMirrorAdapterEx } from '../../@codemirror__view/internals/CodeMirrorAdapterEx.d.ts';
-import type { VimApi } from '../../@codemirror__view/internals/Vim/VimApi.d.ts';
-import type { CapacitorAdapterFsConstructor } from '../../obsidian/internals/Constructors/internals/CapacitorAdapterFsConstructor.d.ts';
+import type { VimApi } from '../../@codemirror__view/internals/vim/VimApi.d.ts';
+import type { CapacitorAdapterFsConstructor } from '../../obsidian/internals/constructors/internals/CapacitorAdapterFsConstructor.d.ts';
 import type { ElectronWindow } from '../../obsidian/internals/ElectronWindow.d.ts';
 import type { FrameDom } from '../../obsidian/internals/FrameDom.d.ts';
 import type { Localization } from '../../obsidian/internals/Localization.d.ts';
-import type { MathJax } from '../../obsidian/internals/MathJax/MathJax.d.ts';
-import type { PdfJsTestingUtils } from '../../obsidian/internals/PdfJs/PdfJsTestingUtils.d.ts';
-import type { Database } from '../../obsidian/internals/WebSQL/Database.d.ts';
+import type { MathJax } from '../../obsidian/internals/math-jax/MathJax.d.ts';
+import type { PdfJsTestingUtils } from '../../obsidian/internals/pdf-js/PdfJsTestingUtils.d.ts';
+import type { Database } from '../../obsidian/internals/web-sql/Database.d.ts';
 
 export {};
 

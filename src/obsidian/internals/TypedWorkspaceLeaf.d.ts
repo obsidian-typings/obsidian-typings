@@ -2,7 +2,7 @@ import type {
     View,
     WorkspaceLeaf
 } from 'obsidian';
-import type { MaybeDeferredView } from './Views/MaybeDeferredView.d.ts';
+import type { MaybeDeferredView } from './views/MaybeDeferredView.d.ts';
 
 /**
  * A workspace leaf with a strongly typed view.

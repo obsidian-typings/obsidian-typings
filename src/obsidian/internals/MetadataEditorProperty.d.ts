@@ -4,7 +4,7 @@ import type {
 } from 'obsidian';
 import type { FocusMode } from './FocusMode.d.ts';
 import type { MetadataEditor } from './MetadataEditor.d.ts';
-import type { TypeInfo } from './MetadataTypeManager/TypeInfo.d.ts';
+import type { TypeInfo } from './metadata-type-manager/TypeInfo.d.ts';
 import type { MetadataWidget } from './MetadataWidget.d.ts';
 import type { PropertyEntryData } from './PropertyEntryData.d.ts';
 

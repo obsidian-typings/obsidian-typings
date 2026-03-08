@@ -5,8 +5,8 @@ import type {
 import type { CodeMirrorAdapterExCommands } from './CodeMirrorAdapterExCommands.d.ts';
 import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 import type { EnclosingTag } from './EnclosingTag.d.ts';
-import type { VimApi } from './Vim/VimApi.d.ts';
-import type { VimEditor } from './Vim/VimEditor.d.ts';
+import type { VimApi } from './vim/VimApi.d.ts';
+import type { VimEditor } from './vim/VimEditor.d.ts';
 
 /**
  * Extended CodeMirror adapter providing CM5-compatible API over CM6.
