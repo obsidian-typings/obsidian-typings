@@ -685,7 +685,7 @@ declare module 'obsidian' {
          * @param _unused - Unused. The method body is empty at runtime.
          * @unofficial
          */
-        iterateCodeMirrors(_unused: (arg: unknown) => void): void;
+        iterateCodeMirrors(_unused: unknown): void;
 
         /**
          * Iterate the leaves of a split.
