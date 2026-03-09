@@ -131,7 +131,6 @@
     "build:static": "jiti scripts/build-static.ts",
     "commit": "jiti scripts/commit.ts",
     "format": "jiti scripts/format.ts",
-    "format:fast": "jiti scripts/format-fast.ts",
     "lint": "jiti scripts/lint.ts",
     "lint:fix": "jiti scripts/lint-fix.ts",
     "postinstall": "node scripts/postinstall.mjs",
