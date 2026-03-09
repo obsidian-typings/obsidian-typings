@@ -1,6 +1,6 @@
 import type {
-    MarkdownEditView,
-    MarkdownPreviewView
+  MarkdownEditView,
+  MarkdownPreviewView
 } from 'obsidian';
 
 /**
@@ -9,9 +9,9 @@ import type {
  * @unofficial
  */
 export interface MarkdownViewModes {
-    /** Reading/preview mode renderer. */
-    preview: MarkdownPreviewView;
+  /** Reading/preview mode renderer. */
+  preview: MarkdownPreviewView;
 
-    /** Source/edit mode renderer. */
-    source: MarkdownEditView;
+  /** Source/edit mode renderer. */
+  source: MarkdownEditView;
 }

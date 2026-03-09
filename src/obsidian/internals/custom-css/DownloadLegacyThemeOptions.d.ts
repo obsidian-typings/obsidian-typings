@@ -4,6 +4,6 @@
  * @unofficial
  */
 export interface DownloadLegacyThemeOptions {
-    /** GitHub repository identifier (e.g. "username/repo"). */
-    repo: string;
+  /** GitHub repository identifier (e.g. "username/repo"). */
+  repo: string;
 }

@@ -7,6 +7,6 @@
  * @unofficial
  */
 export interface WeakMapWrapper<K extends object, V> extends WeakMap<K, V> {
-    /** The underlying WeakMap instance. */
-    map: WeakMap<K, V>;
+  /** The underlying WeakMap instance. */
+  map: WeakMap<K, V>;
 }

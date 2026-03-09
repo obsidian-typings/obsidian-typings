@@ -1,5 +1,5 @@
 import {
-    UrlValue
+  UrlValue
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type UrlValueConstructor = ExtractConstructor<UrlValue>;
  * @unofficial
  */
 export function getUrlValueConstructor(): UrlValueConstructor {
-    return UrlValue as UrlValueConstructor;
+  return UrlValue as UrlValueConstructor;
 }

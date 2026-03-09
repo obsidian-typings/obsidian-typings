@@ -1,14 +1,14 @@
 export {};
 
 declare global {
+  /**
+   * Augments the built-in {@link Touch} interface.
+   */
+  interface Touch {
     /**
-     * Augments the built-in {@link Touch} interface.
+     * The type of touch.
+     * @official
      */
-    interface Touch {
-        /**
-         * The type of touch.
-         * @official
-         */
-        touchType: 'stylus' | 'direct';
-    }
+    touchType: 'stylus' | 'direct';
+  }
 }

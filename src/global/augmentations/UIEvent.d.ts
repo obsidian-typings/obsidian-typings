@@ -1,46 +1,46 @@
 export {};
 
 declare global {
+  /**
+   * Augments the built-in {@link UIEvent} interface.
+   */
+  interface UIEvent extends Event {
     /**
-     * Augments the built-in {@link UIEvent} interface.
+     * The document of the event.
+     * @official
      */
-    interface UIEvent extends Event {
-        /**
-         * The document of the event.
-         * @official
-         */
-        doc: Document;
+    doc: Document;
 
-        /**
-         * The target node of the event.
-         * @official
-         */
-        targetNode: Node | null;
+    /**
+     * The target node of the event.
+     * @official
+     */
+    targetNode: Node | null;
 
-        /**
-         * The window of the event.
-         * @official
-         */
-        win: Window;
+    /**
+     * The window of the event.
+     * @official
+     */
+    win: Window;
 
-        /**
-         * Cross-window capable instanceof check, a drop-in replacement.
-         * for instanceof checks on UIEvents.
-         *
-         * @typeParam T - The type to check.
-         * @param type - The type to check.
-         * @param data - The constructor arguments.
-         * @returns Whether the event is an instance of the type.
-         * @example
-         * ```ts
-         * if (event.instanceOf(MouseEvent)) {
-         *     console.log('event is a mouse event');
-         * }
-         * ```
-         * @official
-         */
-        instanceOf<T>(type: {
-            new(...data: unknown[]): T;
-        }): this is T;
-    }
+    /**
+     * Cross-window capable instanceof check, a drop-in replacement.
+     * for instanceof checks on UIEvents.
+     *
+     * @typeParam T - The type to check.
+     * @param type - The type to check.
+     * @param data - The constructor arguments.
+     * @returns Whether the event is an instance of the type.
+     * @example
+     * ```ts
+     * if (event.instanceOf(MouseEvent)) {
+     *     console.log('event is a mouse event');
+     * }
+     * ```
+     * @official
+     */
+    instanceOf<T>(type: {
+      new(...data: unknown[]): T;
+    }): this is T;
+  }
 }

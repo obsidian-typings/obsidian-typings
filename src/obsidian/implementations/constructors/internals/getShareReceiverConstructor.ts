@@ -14,5 +14,5 @@ type ShareReceiverConstructor = ExtractConstructor<ShareReceiver>;
  * @unofficial
  */
 export function getShareReceiverConstructor(app: App): ShareReceiverConstructor {
-    return app.shareReceiver.constructor as ShareReceiverConstructor;
+  return app.shareReceiver.constructor as ShareReceiverConstructor;
 }

@@ -1,6 +1,6 @@
 import type {
-    LinkCache,
-    Reference
+  LinkCache,
+  Reference
 } from 'obsidian';
 import { isReferenceCache } from './isReferenceCache.ts';
 
@@ -14,5 +14,5 @@ import { isReferenceCache } from './isReferenceCache.ts';
  * @unofficial
  */
 export function isLinkCache(reference: Reference): reference is LinkCache {
-    return isReferenceCache(reference) && reference.original[0] !== '!';
+  return isReferenceCache(reference) && reference.original[0] !== '!';
 }

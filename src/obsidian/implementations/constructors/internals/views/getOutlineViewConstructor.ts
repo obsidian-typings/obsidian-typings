@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getOutlineViewConstructor(app: App): ExtractConstructor<OutlineView> {
-    return getViewConstructorByViewType(app, ViewType.Outline);
+  return getViewConstructorByViewType(app, ViewType.Outline);
 }

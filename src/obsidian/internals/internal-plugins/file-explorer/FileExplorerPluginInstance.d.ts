@@ -1,6 +1,6 @@
 import type {
-    TFile,
-    TFolder
+  TFile,
+  TFolder
 } from 'obsidian';
 import type { App } from 'obsidian';
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
@@ -12,20 +12,20 @@ import type { FileExplorerPlugin } from './FileExplorerPlugin.d.ts';
  * @unofficial
  */
 export interface FileExplorerPluginInstance extends InternalPluginInstance<FileExplorerPlugin> {
-    /** Reference to the app. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 
-    /** Whether this plugin is enabled by default. */
-    defaultOn: true;
+  /** Whether this plugin is enabled by default. */
+  defaultOn: true;
 
-    /** Reference to the file explorer plugin registration. */
-    plugin: FileExplorerPlugin;
+  /** Reference to the file explorer plugin registration. */
+  plugin: FileExplorerPlugin;
 
-    /**
-     * Reveals a file or folder in the file explorer view, opens the view if it is not already.
-     * open/visible.
-     *
-     * @param item - The file or folder to reveal.
-     */
-    revealInFolder(item: TFile | TFolder): void;
+  /**
+   * Reveals a file or folder in the file explorer view, opens the view if it is not already.
+   * open/visible.
+   *
+   * @param item - The file or folder to reveal.
+   */
+  revealInFolder(item: TFile | TFolder): void;
 }

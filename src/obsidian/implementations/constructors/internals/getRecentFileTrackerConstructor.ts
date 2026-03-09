@@ -14,5 +14,5 @@ type RecentFileTrackerConstructor = ExtractConstructor<RecentFileTracker>;
  * @unofficial
  */
 export function getRecentFileTrackerConstructor(app: App): RecentFileTrackerConstructor {
-    return app.workspace.recentFileTracker.constructor as RecentFileTrackerConstructor;
+  return app.workspace.recentFileTracker.constructor as RecentFileTrackerConstructor;
 }

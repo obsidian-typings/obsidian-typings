@@ -1,6 +1,6 @@
 import type {
-    App,
-    Command
+  App,
+  Command
 } from 'obsidian';
 import type { getCommandsConstructor } from '../../implementations/constructors/internals/getCommandsConstructor.d.ts';
 import type { CommandsCommandsRecord } from './CommandsCommandsRecord.d.ts';
@@ -12,79 +12,79 @@ import type { CommandsEditorCommandsRecord } from './CommandsEditorCommandsRecor
  * @unofficial
  */
 export interface Commands {
-    /**
-     * Reference to App.
-     */
-    app: App;
+  /**
+   * Reference to App.
+   */
+  app: App;
 
-    /**
-     * Commands *without* editor callback, will always be available in the command palette.
-     *
-     * @example `app:open-vault` or `app:reload`.
-     */
-    commands: CommandsCommandsRecord;
+  /**
+   * Commands *without* editor callback, will always be available in the command palette.
+   *
+   * @example `app:open-vault` or `app:reload`.
+   */
+  commands: CommandsCommandsRecord;
 
-    /**
-     * Commands *with* editor callback, will only be available when editor is active and callback returns
-     * `true`.
-     *
-     * @example `editor:fold-all` or `command-palette:open`.
-     */
-    editorCommands: CommandsEditorCommandsRecord;
+  /**
+   * Commands *with* editor callback, will only be available when editor is active and callback returns
+   * `true`.
+   *
+   * @example `editor:fold-all` or `command-palette:open`.
+   */
+  editorCommands: CommandsEditorCommandsRecord;
 
-    /**
-     * Add a command to the command registry.
-     *
-     * @param command - Command to add.
-     */
-    addCommand(command: Command): void;
+  /**
+   * Add a command to the command registry.
+   *
+   * @param command - Command to add.
+   */
+  addCommand(command: Command): void;
 
-    /**
-     * Constructor.
-     *
-     * To get the constructor instance, use {@link getCommandsConstructor} from `obsidian-typings/implementations`.
-     *
-     * @param app - The app.
-     * @returns The new instance.
-     * @deprecated - Added only for typing purposes.
-     */
-    constructor__(app: App): this;
+  /**
+   * Constructor.
+   *
+   * To get the constructor instance, use {@link getCommandsConstructor} from `obsidian-typings/implementations`.
+   *
+   * @param app - The app.
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
+   */
+  constructor__(app: App): this;
 
-    /**
-     * Execute a command by reference.
-     *
-     * @param command - Command to execute.
-     * @returns Whether the command was successfully executed.
-     */
-    executeCommand(command: Command, event?: Event): boolean;
+  /**
+   * Execute a command by reference.
+   *
+   * @param command - Command to execute.
+   * @returns Whether the command was successfully executed.
+   */
+  executeCommand(command: Command, event?: Event): boolean;
 
-    /**
-     * Execute a command by ID.
-     *
-     * @param commandId - ID of command to execute.
-     * @returns Whether the command was successfully executed.
-     */
-    executeCommandById(commandId: string, event?: Event): boolean;
+  /**
+   * Execute a command by ID.
+   *
+   * @param commandId - ID of command to execute.
+   * @returns Whether the command was successfully executed.
+   */
+  executeCommandById(commandId: string, event?: Event): boolean;
 
-    /**
-     * Find a command by ID.
-     *
-     * @param commandId - ID of command to find.
-     * @returns The command, or `undefined` if not found.
-     */
-    findCommand(commandId: string): Command | undefined;
+  /**
+   * Find a command by ID.
+   *
+   * @param commandId - ID of command to find.
+   * @returns The command, or `undefined` if not found.
+   */
+  findCommand(commandId: string): Command | undefined;
 
-    /**
-     * Lists **all** commands, both with and without editor callback.
-     *
-     * @returns All registered commands.
-     */
-    listCommands(): Command[];
+  /**
+   * Lists **all** commands, both with and without editor callback.
+   *
+   * @returns All registered commands.
+   */
+  listCommands(): Command[];
 
-    /**
-     * Remove a command from the command registry.
-     *
-     * @param commandId - ID of command to remove.
-     */
-    removeCommand(commandId: string): void;
+  /**
+   * Remove a command from the command registry.
+   *
+   * @param commandId - ID of command to remove.
+   */
+  removeCommand(commandId: string): void;
 }

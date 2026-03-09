@@ -6,8 +6,8 @@ import type { FileSuggestion } from './FileSuggestion.d.ts';
  * Suggestion for a link to a file.
  */
 export interface LinkSuggestion extends FileSuggestion {
-    /**
-     * Resolved link note alias.
-     */
-    alias?: string;
+  /**
+   * Resolved link note alias.
+   */
+  alias?: string;
 }

@@ -1,34 +1,34 @@
 import type {
-    getMarkdownRenderChildConstructor
+  getMarkdownRenderChildConstructor
 } from '../implementations/constructors/augmentations/getMarkdownRenderChildConstructor.d.ts';
 
 export {};
 
 declare module 'obsidian' {
+  /**
+   * A component to register as a child component for the markdown preview.
+   */
+  interface MarkdownRenderChild extends Component {
     /**
-     * A component to register as a child component for the markdown preview.
+     * The container element of the markdown render child.
+     *
+     * @official
      */
-    interface MarkdownRenderChild extends Component {
-        /**
-         * The container element of the markdown render child.
-         *
-         * @official
-         */
-        containerEl: HTMLElement;
+    containerEl: HTMLElement;
 
-        /**
-         * Constructor.
-         *
-         * To get the constructor instance, use {@link getMarkdownRenderChildConstructor} from `obsidian-typings/implementations`.
-         *
-         * @param containerEl - This HTMLElement will be used to test whether this component is still alive.
-         * It should be a child of the Markdown preview sections, and when it's no longer attached
-         * (for example, when it is replaced with a new version because the user edited the Markdown source code),
-         * this component will be unloaded.
-         * @returns The markdown render child instance.
-         * @official
-         * @deprecated - Added only for typing purposes.
-         */
-        constructor2__(containerEl: HTMLElement): this;
-    }
+    /**
+     * Constructor.
+     *
+     * To get the constructor instance, use {@link getMarkdownRenderChildConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param containerEl - This HTMLElement will be used to test whether this component is still alive.
+     * It should be a child of the Markdown preview sections, and when it's no longer attached
+     * (for example, when it is replaced with a new version because the user edited the Markdown source code),
+     * this component will be unloaded.
+     * @returns The markdown render child instance.
+     * @official
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor2__(containerEl: HTMLElement): this;
+  }
 }

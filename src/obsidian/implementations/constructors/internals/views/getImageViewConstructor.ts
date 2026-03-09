@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getImageViewConstructor(app: App): ExtractConstructor<ImageView> {
-    return getViewConstructorByViewType(app, ViewType.Image);
+  return getViewConstructorByViewType(app, ViewType.Image);
 }

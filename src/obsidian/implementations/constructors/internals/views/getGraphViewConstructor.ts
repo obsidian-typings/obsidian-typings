@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getGraphViewConstructor(app: App): ExtractConstructor<GraphView> {
-    return getViewConstructorByViewType(app, ViewType.Graph);
+  return getViewConstructorByViewType(app, ViewType.Graph);
 }

@@ -1,6 +1,6 @@
 import type {
-    Editor,
-    EditorRange
+  Editor,
+  EditorRange
 } from 'obsidian';
 import type { SearchCursor } from '../SearchCursor.d.ts';
 import type { AbstractSearchComponent } from './AbstractSearchComponent.d.ts';
@@ -11,97 +11,97 @@ import type { AbstractSearchComponent } from './AbstractSearchComponent.d.ts';
  * @unofficial
  */
 export interface EditorSearchComponent extends AbstractSearchComponent {
-    /**
-     * Search cursor for editor, handles search and replace functionality for editor.
-     */
-    cursor: null | SearchCursor;
+  /**
+   * Search cursor for editor, handles search and replace functionality for editor.
+   */
+  cursor: null | SearchCursor;
 
-    /**
-     * Linked editor for search component.
-     */
-    editor: Editor;
+  /**
+   * Linked editor for search component.
+   */
+  editor: Editor;
 
-    /**
-     * Whether search component is currently rendering.
-     */
-    isActive: boolean;
+  /**
+   * Whether search component is currently rendering.
+   */
+  isActive: boolean;
 
-    /**
-     * Whether search component is replacing text (includes 'Replace' input field).
-     */
-    isReplace: boolean;
+  /**
+   * Whether search component is replacing text (includes 'Replace' input field).
+   */
+  isReplace: boolean;
 
-    /**
-     * Remove all highlights from editor.
-     */
-    clear(): void;
+  /**
+   * Remove all highlights from editor.
+   */
+  clear(): void;
 
-    /**
-     * Find next search results from cursor and highlights it.
-     */
-    findNext(): void;
+  /**
+   * Find next search results from cursor and highlights it.
+   */
+  findNext(): void;
 
-    /**
-     * Replace cursor with replacement string if not `null` and moves to next search result.
-     */
-    findNextOrReplace(): void;
+  /**
+   * Replace cursor with replacement string if not `null` and moves to next search result.
+   */
+  findNextOrReplace(): void;
 
-    /**
-     * Find previous search results from cursor and highlights it.
-     */
-    findPrevious(): void;
+  /**
+   * Find previous search results from cursor and highlights it.
+   */
+  findPrevious(): void;
 
-    /**
-     * Hide/detaches the search component and removes cursor highlights.
-     */
-    hide(): void;
+  /**
+   * Hide/detaches the search component and removes cursor highlights.
+   */
+  hide(): void;
 
-    /**
-     * Add highlights for specified ranges.
-     *
-     * @param ranges - The editor ranges to highlight.
-     * @remark Invokes editor.addHighlights.
-     */
-    highlight(ranges: EditorRange[]): void;
+  /**
+   * Add highlights for specified ranges.
+   *
+   * @param ranges - The editor ranges to highlight.
+   * @remark Invokes editor.addHighlights.
+   */
+  highlight(ranges: EditorRange[]): void;
 
-    /**
-     * Highlights all matches if search element focused.
-     *
-     * @param e - The keyboard event that triggered the action.
-     */
-    onAltEnter(e?: KeyboardEvent): void;
+  /**
+   * Highlights all matches if search element focused.
+   *
+   * @param e - The keyboard event that triggered the action.
+   */
+  onAltEnter(e?: KeyboardEvent): void;
 
-    /**
-     * Replace all search results with specified text if replace mode and replacement element is focused.
-     *
-     * @param e - The keyboard event that triggered the action.
-     */
-    onModAltEnter(e?: KeyboardEvent): void;
+  /**
+   * Replace all search results with specified text if replace mode and replacement element is focused.
+   *
+   * @param e - The keyboard event that triggered the action.
+   */
+  onModAltEnter(e?: KeyboardEvent): void;
 
-    /**
-     * Updates search cursor on new input query and highlights search results.
-     */
-    onSearchInput(): void;
+  /**
+   * Updates search cursor on new input query and highlights search results.
+   */
+  onSearchInput(): void;
 
-    /**
-     * Replaces all search results with replacement query.
-     */
-    replaceAll(): void;
+  /**
+   * Replaces all search results with replacement query.
+   */
+  replaceAll(): void;
 
-    /**
-     * Replace current search result, if any, with replacement query.
-     */
-    replaceCurrentMatch(): void;
+  /**
+   * Replace current search result, if any, with replacement query.
+   */
+  replaceCurrentMatch(): void;
 
-    /**
-     * Find all matches of search query and highlights them.
-     */
-    searchAll(): void;
+  /**
+   * Find all matches of search query and highlights them.
+   */
+  searchAll(): void;
 
-    /**
-     * Reveal the search (and replace) component.
-     *
-     * @param replace - Whether to show the replace input.
-     */
-    show(replace: boolean): void;
+  /**
+   * Reveal the search (and replace) component.
+   *
+   * @param replace - Whether to show the replace input.
+   */
+  show(replace: boolean): void;
 }

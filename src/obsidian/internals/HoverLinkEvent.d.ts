@@ -8,38 +8,38 @@ import type { HoverLinkEventState } from './HoverLinkEventState.d.ts';
  * @unofficial
  */
 export interface HoverLinkEvent {
-    /**
-     * The mouse event.
-     */
-    event: MouseEvent;
+  /**
+   * The mouse event.
+   */
+  event: MouseEvent;
 
-    /**
-     * The hover parent.
-     */
-    hoverParent: HoverParent;
+  /**
+   * The hover parent.
+   */
+  hoverParent: HoverParent;
 
-    /**
-     * The link text.
-     */
-    linktext: string;
+  /**
+   * The link text.
+   */
+  linktext: string;
 
-    /**
-     * The source of the event.
-     */
-    source: 'search' | 'editor' | 'preview' | 'properties' | 'graph' | 'file-explorer' | 'hover-link';
+  /**
+   * The source of the event.
+   */
+  source: 'search' | 'editor' | 'preview' | 'properties' | 'graph' | 'file-explorer' | 'hover-link';
 
-    /**
-     * The source path.
-     */
-    sourcePath?: string;
+  /**
+   * The source path.
+   */
+  sourcePath?: string;
 
-    /**
-     * The state of the event.
-     */
-    state?: HoverLinkEventState;
+  /**
+   * The state of the event.
+   */
+  state?: HoverLinkEventState;
 
-    /**
-     * The target element.
-     */
-    targetEl: HTMLElement | null;
+  /**
+   * The target element.
+   */
+  targetEl: HTMLElement | null;
 }

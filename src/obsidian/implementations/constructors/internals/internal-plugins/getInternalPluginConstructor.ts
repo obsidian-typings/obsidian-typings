@@ -14,9 +14,9 @@ type InternalPluginConstructor<Instance> = ExtractConstructor<InternalPlugin<Ins
  * @unofficial
  */
 export function getInternalPluginConstructor<Instance>(app: App): InternalPluginConstructor<Instance> {
-    const anyPlugin = Object.values(app.internalPlugins.plugins)[0];
-    if (!anyPlugin) {
-        throw new Error('No internal plugin found');
-    }
-    return anyPlugin.constructor as InternalPluginConstructor<Instance>;
+  const anyPlugin = Object.values(app.internalPlugins.plugins)[0];
+  if (!anyPlugin) {
+    throw new Error('No internal plugin found');
+  }
+  return anyPlugin.constructor as InternalPluginConstructor<Instance>;
 }

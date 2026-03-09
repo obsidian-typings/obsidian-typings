@@ -1,5 +1,5 @@
 import {
-    CapacitorAdapter
+  CapacitorAdapter
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type CapacitorAdapterConstructor = ExtractConstructor<CapacitorAdapter>;
  * @unofficial
  */
 export function getCapacitorAdapterConstructor(): CapacitorAdapterConstructor {
-    return CapacitorAdapter as CapacitorAdapterConstructor;
+  return CapacitorAdapter as CapacitorAdapterConstructor;
 }

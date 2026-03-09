@@ -5,13 +5,13 @@
  * @unofficial
  */
 export interface SerializedBasesSubView {
-    /**
-     * The name.
-     */
-    name: string;
+  /**
+   * The name.
+   */
+  name: string;
 
-    /**
-     * The type.
-     */
-    type: string;
+  /**
+   * The type.
+   */
+  type: string;
 }

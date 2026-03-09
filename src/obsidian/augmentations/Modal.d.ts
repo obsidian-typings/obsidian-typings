@@ -4,257 +4,257 @@ import type { WindowSelection } from '../internals/WindowSelection.d.ts';
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Modal dialog component.
+   */
+  interface Modal extends CloseableComponent {
     /**
-     * Modal dialog component.
+     * The Obsidian app instance.
+     *
+     * @official
      */
-    interface Modal extends CloseableComponent {
-        /**
-         * The Obsidian app instance.
-         *
-         * @official
-         */
-        app: App;
+    app: App;
 
-        /**
-         * Background applied to application to dim it
-         *
-         * @unofficial
-         */
-        bgEl: HTMLElement;
+    /**
+     * Background applied to application to dim it
+     *
+     * @unofficial
+     */
+    bgEl: HTMLElement;
 
-        /**
-         * Opacity percentage of the background
-         *
-         * @unofficial
-         */
-        bgOpacity: string;
+    /**
+     * Opacity percentage of the background
+     *
+     * @unofficial
+     */
+    bgOpacity: string;
 
-        /**
-         * The container HTML element for the modal.
-         *
-         * @official
-         */
-        containerEl: HTMLElement;
+    /**
+     * The container HTML element for the modal.
+     *
+     * @official
+     */
+    containerEl: HTMLElement;
 
-        /**
-         * The HTML element that represents the content of the modal.
-         *
-         * @official
-         */
-        contentEl: HTMLElement;
+    /**
+     * The HTML element that represents the content of the modal.
+     *
+     * @official
+     */
+    contentEl: HTMLElement;
 
-        /**
-         * Whether the background is being dimmed
-         *
-         * @unofficial
-         */
-        dimBackground: boolean;
+    /**
+     * Whether the background is being dimmed
+     *
+     * @unofficial
+     */
+    dimBackground: boolean;
 
-        /**
-         * Header element of the modal dialog.
-         * @unofficial
-         */
-        headerEl: HTMLDivElement;
+    /**
+     * Header element of the modal dialog.
+     * @unofficial
+     */
+    headerEl: HTMLDivElement;
 
-        /**
-         * The HTML element that represents the modal.
-         *
-         * @official
-         */
-        modalEl: HTMLElement;
+    /**
+     * The HTML element that represents the modal.
+     *
+     * @official
+     */
+    modalEl: HTMLElement;
 
-        /**
-         * The scope for the keymaps.
-         *
-         * @official
-         */
-        scope: Scope;
+    /**
+     * The scope for the keymaps.
+     *
+     * @official
+     */
+    scope: Scope;
 
-        /**
-         * Selection logic handler
-         *
-         * @unofficial
-         */
-        selection: WindowSelection | null;
+    /**
+     * Selection logic handler
+     *
+     * @unofficial
+     */
+    selection: WindowSelection | null;
 
-        /**
-         * Whether the modal should animate
-         *
-         * @unofficial
-         */
-        shouldAnimate: boolean;
+    /**
+     * Whether the modal should animate
+     *
+     * @unofficial
+     */
+    shouldAnimate: boolean;
 
-        /**
-         * Whether the modal should restore the selection when it is opened or closed.
-         *
-         * @official
-         * @since 0.9.16
-         */
-        shouldRestoreSelection: boolean;
+    /**
+     * Whether the modal should restore the selection when it is opened or closed.
+     *
+     * @official
+     * @since 0.9.16
+     */
+    shouldRestoreSelection: boolean;
 
-        /**
-         * The HTML element that represents the title of the modal.
-         *
-         * @official
-         */
-        titleEl: HTMLElement;
+    /**
+     * The HTML element that represents the title of the modal.
+     *
+     * @official
+     */
+    titleEl: HTMLElement;
 
-        /**
-         * Reference to the global Window object.
-         *
-         * @unofficial
-         */
-        win: Window | null;
+    /**
+     * Reference to the global Window object.
+     *
+     * @unofficial
+     */
+    win: Window | null;
 
-        /**
-         * Performed when animation is complete
-         *
-         * @returns A promise that resolves when the close animation finishes.
-         * To get the constructor instance, use {@link getModalConstructor} from `obsidian-typings/implementations`.
-         * @unofficial
-         */
-        animateClose(): Promise<void>;
+    /**
+     * Performed when animation is complete
+     *
+     * @returns A promise that resolves when the close animation finishes.
+     * To get the constructor instance, use {@link getModalConstructor} from `obsidian-typings/implementations`.
+     * @unofficial
+     */
+    animateClose(): Promise<void>;
 
-        /**
-         * Performed when animation is started
-         *
-         * @returns A promise that resolves when the open animation finishes.
-         * @unofficial
-         */
-        animateOpen(): Promise<void>;
+    /**
+     * Performed when animation is started
+     *
+     * @returns A promise that resolves when the open animation finishes.
+     * @unofficial
+     */
+    animateOpen(): Promise<void>;
 
-        /**
-         * Close the modal.
-         *
-         * @official
-         */
-        close(): void;
+    /**
+     * Close the modal.
+     *
+     * @official
+     */
+    close(): void;
 
-        /**
-         * Constructor.
-         *
-         * To get the constructor instance, use {@link getModalConstructor} from `obsidian-typings/implementations`.
-         *
-         * @param app - The Obsidian app instance.
-         * @returns The modal instance.
-         * @official
-         * @deprecated - Added only for typing purposes.
-         */
-        constructor__(app: App): this;
+    /**
+     * Constructor.
+     *
+     * To get the constructor instance, use {@link getModalConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param app - The Obsidian app instance.
+     * @returns The modal instance.
+     * @official
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor__(app: App): this;
 
-        /**
-         * Called when the modal is closed.
-         *
-         * @example
-         * ```ts
-         * class MyModal extends Modal {
-         *     public override onClose(): void {
-         *         console.log('MyModal closed');
-         *     }
-         * }
-         * ```
-         * @official
-         */
-        onClose(): void;
+    /**
+     * Called when the modal is closed.
+     *
+     * @example
+     * ```ts
+     * class MyModal extends Modal {
+     *     public override onClose(): void {
+     *         console.log('MyModal closed');
+     *     }
+     * }
+     * ```
+     * @official
+     */
+    onClose(): void;
 
-        /**
-         * On escape key press close modal
-         *
-         * @unofficial
-         */
-        onEscapeKey(): void;
+    /**
+     * On escape key press close modal
+     *
+     * @unofficial
+     */
+    onEscapeKey(): void;
 
-        /**
-         * Called when the modal is opened.
-         *
-         * @example
-         * ```ts
-         * class MyModal extends Modal {
-         *     public override onOpen(): void {
-         *         console.log('MyModal opened');
-         *     }
-         * }
-         * ```
-         * @official
-         */
-        onOpen(): void;
+    /**
+     * Called when the modal is opened.
+     *
+     * @example
+     * ```ts
+     * class MyModal extends Modal {
+     *     public override onOpen(): void {
+     *         console.log('MyModal opened');
+     *     }
+     * }
+     * ```
+     * @official
+     */
+    onOpen(): void;
 
-        /**
-         * On closing of the modal
-         *
-         * @unofficial
-         */
-        onWindowClose(): void;
+    /**
+     * On closing of the modal
+     *
+     * @unofficial
+     */
+    onWindowClose(): void;
 
-        /**
-         * Show the modal on the the active window. On mobile, the modal will animate on screen.
-         *
-         * @official
-         */
-        open(): void;
+    /**
+     * Show the modal on the the active window. On mobile, the modal will animate on screen.
+     *
+     * @official
+     */
+    open(): void;
 
-        /**
-         * Set the background opacity of the dimmed background.
-         *
-         * @param opacity Opacity percentage.
-         * @returns The modal instance.
-         * @unofficial
-         */
-        setBackgroundOpacity(opacity: string): this;
+    /**
+     * Set the background opacity of the dimmed background.
+     *
+     * @param opacity Opacity percentage.
+     * @returns The modal instance.
+     * @unofficial
+     */
+    setBackgroundOpacity(opacity: string): this;
 
-        /**
-         * Set the callback to be called when the modal is closed.
-         *
-         * @param callback - The callback to be called when the modal is closed.
-         * @returns The modal instance.
-         * @example
-         * ```ts
-         * modal.setCloseCallback(() => {
-         *     console.log('Modal closed');
-         * });
-         * ```
-         * @official
-         * @since 1.10.0
-         */
-        setCloseCallback(callback: () => unknown): this;
+    /**
+     * Set the callback to be called when the modal is closed.
+     *
+     * @param callback - The callback to be called when the modal is closed.
+     * @returns The modal instance.
+     * @example
+     * ```ts
+     * modal.setCloseCallback(() => {
+     *     console.log('Modal closed');
+     * });
+     * ```
+     * @official
+     * @since 1.10.0
+     */
+    setCloseCallback(callback: () => unknown): this;
 
-        /**
-         * Set the content of the modal.
-         *
-         * @param content - The content of the modal.
-         * @returns The modal instance.
-         * @example
-         * ```ts
-         * modal.setContent('foo');
-         *
-         * const fragment = createFragment();
-         * fragment.createEl('strong', { text: 'foo' });
-         * modal.setContent(fragment);
-         * ```
-         * @official
-         */
-        setContent(content: string | DocumentFragment): this;
+    /**
+     * Set the content of the modal.
+     *
+     * @param content - The content of the modal.
+     * @returns The modal instance.
+     * @example
+     * ```ts
+     * modal.setContent('foo');
+     *
+     * const fragment = createFragment();
+     * fragment.createEl('strong', { text: 'foo' });
+     * modal.setContent(fragment);
+     * ```
+     * @official
+     */
+    setContent(content: string | DocumentFragment): this;
 
-        /**
-         * Set whether the background should be dimmed.
-         *
-         * @param dim Whether the background should be dimmed.
-         * @returns The modal instance.
-         * @unofficial
-         */
-        setDimBackground(dim: boolean): this;
+    /**
+     * Set whether the background should be dimmed.
+     *
+     * @param dim Whether the background should be dimmed.
+     * @returns The modal instance.
+     * @unofficial
+     */
+    setDimBackground(dim: boolean): this;
 
-        /**
-         * Set the title of the modal.
-         *
-         * @param title - The title of the modal.
-         * @returns The modal instance.
-         * @example
-         * ```ts
-         * modal.setTitle('foo');
-         * ```
-         * @official
-         */
-        setTitle(title: string): this;
-    }
+    /**
+     * Set the title of the modal.
+     *
+     * @param title - The title of the modal.
+     * @returns The modal instance.
+     * @example
+     * ```ts
+     * modal.setTitle('foo');
+     * ```
+     * @official
+     */
+    setTitle(title: string): this;
+  }
 }

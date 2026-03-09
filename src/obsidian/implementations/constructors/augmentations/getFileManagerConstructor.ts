@@ -1,5 +1,5 @@
 import {
-    FileManager
+  FileManager
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type FileManagerConstructor = ExtractConstructor<FileManager>;
  * @unofficial
  */
 export function getFileManagerConstructor(): FileManagerConstructor {
-    return FileManager as FileManagerConstructor;
+  return FileManager as FileManagerConstructor;
 }

@@ -1,44 +1,44 @@
 import type { MetadataEditor } from '../internals/MetadataEditor.d.ts';
 
 declare module 'obsidian' {
+  /**
+   * The markdown file info.
+   */
+  interface MarkdownFileInfo extends HoverParent {
     /**
-     * The markdown file info.
+     * The Obsidian app instance.
+     *
+     * @official
      */
-    interface MarkdownFileInfo extends HoverParent {
-        /**
-         * The Obsidian app instance.
-         *
-         * @official
-         */
-        app: App;
+    app: App;
 
-        /**
-         * The editor associated with the markdown edit view.
-         *
-         * @example
-         * ```ts
-         * console.log(markdownFileInfo.editor);
-         * ```
-         * @official
-         */
-        editor?: Editor;
+    /**
+     * The editor associated with the markdown edit view.
+     *
+     * @example
+     * ```ts
+     * console.log(markdownFileInfo.editor);
+     * ```
+     * @official
+     */
+    editor?: Editor;
 
-        /**
-         * The metadata (frontmatter/properties) editor for this file.
-         * @unofficial
-         */
-        metadataEditor?: MetadataEditor;
+    /**
+     * The metadata (frontmatter/properties) editor for this file.
+     * @unofficial
+     */
+    metadataEditor?: MetadataEditor;
 
-        /**
-         * The associated file.
-         *
-         * @example
-         * ```ts
-         * console.log(markdownFileInfo.file);
-         * ```
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link file} instead.
-         */
-        file__?(): TFile | null;
-    }
+    /**
+     * The associated file.
+     *
+     * @example
+     * ```ts
+     * console.log(markdownFileInfo.file);
+     * ```
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link file} instead.
+     */
+    file__?(): TFile | null;
+  }
 }

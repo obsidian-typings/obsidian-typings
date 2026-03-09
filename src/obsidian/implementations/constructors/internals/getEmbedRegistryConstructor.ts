@@ -14,5 +14,5 @@ type EmbedRegistryConstructor = ExtractConstructor<EmbedRegistry>;
  * @unofficial
  */
 export function getEmbedRegistryConstructor(app: App): EmbedRegistryConstructor {
-    return app.embedRegistry.constructor as EmbedRegistryConstructor;
+  return app.embedRegistry.constructor as EmbedRegistryConstructor;
 }

@@ -1,6 +1,6 @@
 export {};
 
 declare module 'obsidian' {
-    interface FormulaContext {
-    }
+  interface FormulaContext {
+  }
 }

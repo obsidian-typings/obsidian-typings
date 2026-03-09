@@ -1,5 +1,5 @@
 import {
-    NullValue
+  NullValue
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type NullValueConstructor = ExtractConstructor<NullValue>;
  * @unofficial
  */
 export function getNullValueConstructor(): NullValueConstructor {
-    return NullValue as NullValueConstructor;
+  return NullValue as NullValueConstructor;
 }

@@ -8,9 +8,9 @@ import type { PagePreviewPlugin } from './PagePreviewPlugin.d.ts';
  * @unofficial
  */
 export interface PagePreviewPluginInstance extends InternalPluginInstance<PagePreviewPlugin> {
-    /** Reference to the app. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 
-    /** Whether this plugin is enabled by default. */
-    defaultOn: true;
+  /** Whether this plugin is enabled by default. */
+  defaultOn: true;
 }

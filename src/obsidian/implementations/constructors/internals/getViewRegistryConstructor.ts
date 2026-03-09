@@ -14,5 +14,5 @@ type ViewRegistryConstructor = ExtractConstructor<ViewRegistry>;
  * @unofficial
  */
 export function getViewRegistryConstructor(app: App): ViewRegistryConstructor {
-    return app.viewRegistry.constructor as ViewRegistryConstructor;
+  return app.viewRegistry.constructor as ViewRegistryConstructor;
 }

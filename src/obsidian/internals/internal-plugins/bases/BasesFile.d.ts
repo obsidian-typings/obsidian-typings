@@ -8,10 +8,10 @@ import type { BasesList } from './BasesList.d.ts';
  * @unofficial
  */
 export interface BasesFile extends BasesControl {
-    /**
-     * Gets the links.
-     *
-     * @returns The links.
-     */
-    getLinks(): BasesList;
+  /**
+   * Gets the links.
+   *
+   * @returns The links.
+   */
+  getLinks(): BasesList;
 }

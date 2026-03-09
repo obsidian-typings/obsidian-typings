@@ -1,5 +1,5 @@
 import {
-    TFolder
+  TFolder
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type TFolderConstructor = ExtractConstructor<TFolder>;
  * @unofficial
  */
 export function getTFolderConstructor(): TFolderConstructor {
-    return TFolder as TFolderConstructor;
+  return TFolder as TFolderConstructor;
 }

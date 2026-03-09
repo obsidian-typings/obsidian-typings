@@ -6,15 +6,15 @@ import type { IconName } from 'obsidian';
  * @unofficial
  */
 export interface WorkspaceLeafHistoryState {
-    /** Ephemeral editor state (cursor position, scroll, etc.). */
-    eState: unknown;
+  /** Ephemeral editor state (cursor position, scroll, etc.). */
+  eState: unknown;
 
-    /** Icon associated with this history entry. */
-    icon: IconName;
+  /** Icon associated with this history entry. */
+  icon: IconName;
 
-    /** View state data for this history entry. */
-    state: unknown;
+  /** View state data for this history entry. */
+  state: unknown;
 
-    /** Display title for this history entry. */
-    title: string;
+  /** Display title for this history entry. */
+  title: string;
 }

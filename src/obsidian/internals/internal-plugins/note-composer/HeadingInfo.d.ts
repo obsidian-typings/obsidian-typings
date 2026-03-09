@@ -6,12 +6,12 @@ import type { EditorPosition } from 'obsidian';
  * @unofficial
  */
 export interface HeadingInfo {
-    /** End position of the heading section in the editor. */
-    end: EditorPosition;
+  /** End position of the heading section in the editor. */
+  end: EditorPosition;
 
-    /** The heading text content. */
-    heading: string;
+  /** The heading text content. */
+  heading: string;
 
-    /** Start position of the heading section in the editor. */
-    start: EditorPosition;
+  /** Start position of the heading section in the editor. */
+  start: EditorPosition;
 }

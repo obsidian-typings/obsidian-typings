@@ -6,12 +6,12 @@ import type { BookmarkItem } from './BookmarkItem.d.ts';
  * @unofficial
  */
 export interface FileBookmarkItem extends BookmarkItem {
-    /** Vault-relative path to the bookmarked file. */
-    path: string;
+  /** Vault-relative path to the bookmarked file. */
+  path: string;
 
-    /** Subpath within the file (e.g. heading or block reference). */
-    subpath: string;
+  /** Subpath within the file (e.g. heading or block reference). */
+  subpath: string;
 
-    /** Discriminator indicating this is a file bookmark. */
-    type: 'file';
+  /** Discriminator indicating this is a file bookmark. */
+  type: 'file';
 }

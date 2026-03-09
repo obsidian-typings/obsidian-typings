@@ -1,29 +1,29 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * A post processor receives an element which is a section of the preview.
+   *
+   * Post processors can mutate the DOM to render various things, such as mermaid graphs, latex equations, or custom controls.
+   *
+   * If your post processor requires lifecycle management, for example, to clear an interval, kill a subprocess, etc when this element is
+   * removed from the app, look into {@link MarkdownPostProcessorContext.addChild}
+   * @since 0.10.12
+   */
+  interface MarkdownPostProcessor {
     /**
-     * A post processor receives an element which is a section of the preview.
+     * The processor function itself.
      *
-     * Post processors can mutate the DOM to render various things, such as mermaid graphs, latex equations, or custom controls.
-     *
-     * If your post processor requires lifecycle management, for example, to clear an interval, kill a subprocess, etc when this element is
-     * removed from the app, look into {@link MarkdownPostProcessorContext.addChild}
-     * @since 0.10.12
+     * @official
      */
-    interface MarkdownPostProcessor {
-        /**
-         * The processor function itself.
-         *
-         * @official
-         */
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-        (el: HTMLElement, ctx: MarkdownPostProcessorContext): Promise<any> | void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
+    (el: HTMLElement, ctx: MarkdownPostProcessorContext): Promise<any> | void;
 
-        /**
-         * An optional integer sort order. Defaults to 0. Lower number runs before higher numbers.
-         *
-         * @official
-         */
-        sortOrder?: number;
-    }
+    /**
+     * An optional integer sort order. Defaults to 0. Lower number runs before higher numbers.
+     *
+     * @official
+     */
+    sortOrder?: number;
+  }
 }

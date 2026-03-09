@@ -7,9 +7,9 @@ import type { CanvasEmbed } from './CanvasEmbed.d.ts';
  * @unofficial
  */
 export interface CanvasIndexEntry {
-    /** Cached metadata for each node in the canvas, keyed by node ID. */
-    caches: Record<string, CachedMetadata>;
+  /** Cached metadata for each node in the canvas, keyed by node ID. */
+  caches: Record<string, CachedMetadata>;
 
-    /** List of embedded file references within the canvas. */
-    embeds: CanvasEmbed[];
+  /** List of embedded file references within the canvas. */
+  embeds: CanvasEmbed[];
 }

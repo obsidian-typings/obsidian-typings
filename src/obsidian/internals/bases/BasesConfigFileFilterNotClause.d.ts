@@ -7,20 +7,20 @@ import type { BasesConfigFileFilter } from 'obsidian';
  * @unofficial
  */
 export interface BasesConfigFileFilterNotClause {
-    /**
-     * None of the following filters should match.
-     *
-     * @public
-     * @since 1.10.0
-     * @example
-     * ```ts
-     * {
-     *     not: [
-     *         '*.md',
-     *         '*.txt',
-     *     ],
-     * }
-     * ```
-     */
-    not: BasesConfigFileFilter[];
+  /**
+   * None of the following filters should match.
+   *
+   * @public
+   * @since 1.10.0
+   * @example
+   * ```ts
+   * {
+   *     not: [
+   *         '*.md',
+   *         '*.txt',
+   *     ],
+   * }
+   * ```
+   */
+  not: BasesConfigFileFilter[];
 }

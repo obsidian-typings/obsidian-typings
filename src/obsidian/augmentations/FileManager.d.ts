@@ -1,5 +1,5 @@
 import type {
-    getFileManagerConstructor
+  getFileManagerConstructor
 } from '../implementations/constructors/augmentations/getFileManagerConstructor.d.ts';
 import type { LinkChangeUpdate } from '../internals/link-update/LinkChangeUpdate.d.ts';
 import type { LinkUpdate } from '../internals/link-update/LinkUpdate.d.ts';
@@ -10,397 +10,397 @@ import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Manage the creation, deletion and renaming of files from the UI.
+   * @since 0.9.7
+   */
+  interface FileManager {
     /**
-     * Manage the creation, deletion and renaming of files from the UI.
-     * @since 0.9.7
+     * Reference to App.
+     *
+     * @unofficial
      */
-    interface FileManager {
-        /**
-         * Reference to App.
-         *
-         * @unofficial
-         */
-        app: App;
+    app: App;
 
-        /**
-         * Mapping of file extensions to functions that determine the parent folder for new files.
-         * @unofficial
-         */
-        fileParentCreatorByType: Record<string, (path: string) => TFolder>;
+    /**
+     * Mapping of file extensions to functions that determine the parent folder for new files.
+     * @unofficial
+     */
+    fileParentCreatorByType: Record<string, (path: string) => TFolder>;
 
-        /**
-         * Currently in-progress link update operations, or `null` if none.
-         * @unofficial
-         */
-        inProgressUpdates: null | LinkUpdatesHandler[];
+    /**
+     * Currently in-progress link update operations, or `null` if none.
+     * @unofficial
+     */
+    inProgressUpdates: null | LinkUpdatesHandler[];
 
-        /**
-         * Queue for processing link update operations sequentially.
-         * @unofficial
-         */
-        updateQueue: PromisedQueue;
+    /**
+     * Queue for processing link update operations sequentially.
+     * @unofficial
+     */
+    updateQueue: PromisedQueue;
 
-        /**
-         * Reference to Vault.
-         *
-         * @unofficial
-         */
-        vault: Vault;
+    /**
+     * Reference to Vault.
+     *
+     * @unofficial
+     */
+    vault: Vault;
 
-        /**
-         * Check whether a file with the given extension can be created.
-         *
-         * @param extension - The file extension to check.
-         * @returns Whether a file with the given extension can be created.
-         * To get the constructor instance, use {@link getFileManagerConstructor} from `obsidian-typings/implementations`.
-         * @unofficial
-         */
-        canCreateFileWithExt(extension: string): boolean;
+    /**
+     * Check whether a file with the given extension can be created.
+     *
+     * @param extension - The file extension to check.
+     * @returns Whether a file with the given extension can be created.
+     * To get the constructor instance, use {@link getFileManagerConstructor} from `obsidian-typings/implementations`.
+     * @unofficial
+     */
+    canCreateFileWithExt(extension: string): boolean;
 
-        /**
-         * Constructor.
-         *
-         * To get the constructor instance, use {@link getFileManagerConstructor} from `obsidian-typings/implementations`.
-         *
-         * @param app - The app.
-         * @returns The new instance.
-         * @unofficial
-         * @deprecated - Added only for typing purposes.
-         */
-        constructor__(app: App): this;
+    /**
+     * Constructor.
+     *
+     * To get the constructor instance, use {@link getFileManagerConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param app - The app.
+     * @returns The new instance.
+     * @unofficial
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor__(app: App): this;
 
-        /**
-         * Creates a new Markdown file in specified location and opens it in a new view.
-         *
-         * @param path - Path to the file to create (missing folders will be created).
-         * @param location - Where to open the view containing the new file.
-         * @returns A promise that resolves when the file is created and opened.
-         * @unofficial
-         */
-        createAndOpenMarkdownFile(path: string, location: PaneType): Promise<void>;
+    /**
+     * Creates a new Markdown file in specified location and opens it in a new view.
+     *
+     * @param path - Path to the file to create (missing folders will be created).
+     * @param location - Where to open the view containing the new file.
+     * @returns A promise that resolves when the file is created and opened.
+     * @unofficial
+     */
+    createAndOpenMarkdownFile(path: string, location: PaneType): Promise<void>;
 
-        /**
-         * Create a new file in the vault at specified location.
-         *
-         * @param location - Location to create the file in, defaults to root.
-         * @param filename - Name of the file to create, defaults to 'Untitled' (incremented if file already exists).
-         * @param extension - Extension of the file to create, defaults to 'md'.
-         * @param contents - Contents of the file to create, defaults to empty string.
-         * @returns A promise that resolves to the newly created file.
-         * @unofficial
-         */
-        createNewFile(location?: TFolder, filename?: string, extension?: string, contents?: string): Promise<TFile>;
+    /**
+     * Create a new file in the vault at specified location.
+     *
+     * @param location - Location to create the file in, defaults to root.
+     * @param filename - Name of the file to create, defaults to 'Untitled' (incremented if file already exists).
+     * @param extension - Extension of the file to create, defaults to 'md'.
+     * @param contents - Contents of the file to create, defaults to empty string.
+     * @returns A promise that resolves to the newly created file.
+     * @unofficial
+     */
+    createNewFile(location?: TFolder, filename?: string, extension?: string, contents?: string): Promise<TFile>;
 
-        /**
-         * Creates a new untitled folder in the vault at specified location.
-         *
-         * @param location - Location to create the folder in, defaults to root.
-         * @returns A promise that resolves to the newly created folder.
-         * @unofficial
-         */
-        createNewFolder(location: TFolder): Promise<TFolder>;
+    /**
+     * Creates a new untitled folder in the vault at specified location.
+     *
+     * @param location - Location to create the folder in, defaults to root.
+     * @returns A promise that resolves to the newly created folder.
+     * @unofficial
+     */
+    createNewFolder(location: TFolder): Promise<TFolder>;
 
-        /**
-         * Creates a new Markdown file in the vault at specified location.
-         *
-         * @param location - Location to create the file in.
-         * @param filename - Name of the file to create.
-         * @param contents - Contents of the file to create.
-         * @returns A promise that resolves to the new file.
-         * @unofficial
-         */
-        createNewMarkdownFile(location: TFolder, filename: string, contents: string): Promise<TFile>;
+    /**
+     * Creates a new Markdown file in the vault at specified location.
+     *
+     * @param location - Location to create the file in.
+     * @param filename - Name of the file to create.
+     * @param contents - Contents of the file to create.
+     * @returns A promise that resolves to the new file.
+     * @unofficial
+     */
+    createNewMarkdownFile(location: TFolder, filename: string, contents: string): Promise<TFile>;
 
-        /**
-         * Creates a new Markdown file based on linktext and path.
-         *
-         * @param filename - Name of the file to create.
-         * @param path - Path to where the file should be created.
-         * @returns A promise that resolves to the newly created Markdown file.
-         * @unofficial
-         */
-        createNewMarkdownFileFromLinktext(filename: string, path: string): Promise<TFile>;
+    /**
+     * Creates a new Markdown file based on linktext and path.
+     *
+     * @param filename - Name of the file to create.
+     * @param path - Path to where the file should be created.
+     * @returns A promise that resolves to the newly created Markdown file.
+     * @unofficial
+     */
+    createNewMarkdownFileFromLinktext(filename: string, path: string): Promise<TFile>;
 
-        /**
-         * Download attachments for note.
-         *
-         * @param file - The file to download attachments for.
-         * @returns A promise that resolves when the attachments are downloaded.
-         * @unofficial
-         */
-        downloadAttachmentsForNote(file: TFile): Promise<void>;
+    /**
+     * Download attachments for note.
+     *
+     * @param file - The file to download attachments for.
+     * @returns A promise that resolves when the attachments are downloaded.
+     * @unofficial
+     */
+    downloadAttachmentsForNote(file: TFile): Promise<void>;
 
-        /**
-         * Generate a Markdown link based on the user's preferences.
-         *
-         * @param file - the file to link to.
-         * @param sourcePath - where the link is stored in, used to compute relative links.
-         * @param subpath - A subpath, starting with `#`, used for linking to headings or blocks.
-         * @param alias - The display text if it's to be different than the file name. Pass empty string to use file name.
-         * @returns A markdown link.
-         * @example
-         * ```ts
-         * const file = app.vault.getFileByPath('foo/bar.md');
-         * console.log(app.fileManager.generateMarkdownLink(file, 'baz/qux.md', '#heading', 'Display text')); // [[bar#heading|Display text]]
-         * ```
-         * @official
-         * @since 0.12.0
-         */
-        generateMarkdownLink(file: TFile, sourcePath: string, subpath?: string, alias?: string): string;
+    /**
+     * Generate a Markdown link based on the user's preferences.
+     *
+     * @param file - the file to link to.
+     * @param sourcePath - where the link is stored in, used to compute relative links.
+     * @param subpath - A subpath, starting with `#`, used for linking to headings or blocks.
+     * @param alias - The display text if it's to be different than the file name. Pass empty string to use file name.
+     * @returns A markdown link.
+     * @example
+     * ```ts
+     * const file = app.vault.getFileByPath('foo/bar.md');
+     * console.log(app.fileManager.generateMarkdownLink(file, 'baz/qux.md', '#heading', 'Display text')); // [[bar#heading|Display text]]
+     * ```
+     * @official
+     * @since 0.12.0
+     */
+    generateMarkdownLink(file: TFile, sourcePath: string, subpath?: string, alias?: string): string;
 
-        /**
-         * Always returns an empty array.
-         *
-         * @returns An empty array.
-         * @unofficial
-         */
-        getAllLinkResolutions(): [];
+    /**
+     * Always returns an empty array.
+     *
+     * @returns An empty array.
+     * @unofficial
+     */
+    getAllLinkResolutions(): [];
 
-        /**
-         * Resolves a unique path for the attachment file being saved.
-         * Ensures that the parent directory exists and dedupes the
-         * filename if the destination filename already exists.
-         *
-         * @param filename Name of the attachment being saved.
-         * @param sourcePath The path to the note associated with this attachment, defaults to the workspace's active file.
-         * @returns A promise that resolves to the full path for where the attachment should be saved, according to the user's settings.
-         * @example
-         * ```ts
-         * console.log(await app.fileManager.getAvailablePathForAttachment('image.png'));
-         * ```
-         * @official
-         * @since 1.5.7
-         */
-        getAvailablePathForAttachment(filename: string, sourcePath?: string): Promise<string>;
+    /**
+     * Resolves a unique path for the attachment file being saved.
+     * Ensures that the parent directory exists and dedupes the
+     * filename if the destination filename already exists.
+     *
+     * @param filename Name of the attachment being saved.
+     * @param sourcePath The path to the note associated with this attachment, defaults to the workspace's active file.
+     * @returns A promise that resolves to the full path for where the attachment should be saved, according to the user's settings.
+     * @example
+     * ```ts
+     * console.log(await app.fileManager.getAvailablePathForAttachment('image.png'));
+     * ```
+     * @official
+     * @since 1.5.7
+     */
+    getAvailablePathForAttachment(filename: string, sourcePath?: string): Promise<string>;
 
-        /**
-         * Gets the folder that new markdown files should be saved to, based on the current settings.
-         *
-         * @param path - The path of the current opened/focused file, used when the user wants new files to be created in the same folder as the current file.
-         * @returns The folder that new markdown files should be saved to.
-         * @unofficial
-         */
-        getMarkdownNewFileParent(path: string): TFolder;
+    /**
+     * Gets the folder that new markdown files should be saved to, based on the current settings.
+     *
+     * @param path - The path of the current opened/focused file, used when the user wants new files to be created in the same folder as the current file.
+     * @returns The folder that new markdown files should be saved to.
+     * @unofficial
+     */
+    getMarkdownNewFileParent(path: string): TFolder;
 
-        /**
-         * Gets the folder that new files should be saved to, given the user's preferences.
-         *
-         * @param sourcePath - The path to the current open/focused file,
-         * used when the user wants new files to be created 'in the same folder'.
-         * Use an empty string if there is no active file.
-         * @param newFilePath - The path to the file that will be newly created,
-         * used to infer what settings to use based on the path's extension.
-         * @returns The folder that new files should be saved to.
-         * @example
-         * ```ts
-         * console.log(app.fileManager.getNewFileParent('foo/bar.md', 'baz/qux.md'));
-         * ```
-         * @official
-         * @since 1.1.13
-         */
-        getNewFileParent(sourcePath: string, newFilePath?: string): TFolder;
+    /**
+     * Gets the folder that new files should be saved to, given the user's preferences.
+     *
+     * @param sourcePath - The path to the current open/focused file,
+     * used when the user wants new files to be created 'in the same folder'.
+     * Use an empty string if there is no active file.
+     * @param newFilePath - The path to the file that will be newly created,
+     * used to infer what settings to use based on the path's extension.
+     * @returns The folder that new files should be saved to.
+     * @example
+     * ```ts
+     * console.log(app.fileManager.getNewFileParent('foo/bar.md', 'baz/qux.md'));
+     * ```
+     * @official
+     * @since 1.1.13
+     */
+    getNewFileParent(sourcePath: string, newFilePath?: string): TFolder;
 
-        /**
-         * Insert text into a file.
-         *
-         * @param file - The file to insert into.
-         * @param text - The text to insert.
-         * @param position - Where to insert the text.
-         * @returns A promise that resolves when the text is inserted.
-         * @unofficial
-         */
-        insertIntoFile(file: TFile, text: string, position?: 'append' | 'prepend'): Promise<void>;
+    /**
+     * Insert text into a file.
+     *
+     * @param file - The file to insert into.
+     * @param text - The text to insert.
+     * @param position - Where to insert the text.
+     * @returns A promise that resolves when the text is inserted.
+     * @unofficial
+     */
+    insertIntoFile(file: TFile, text: string, position?: 'append' | 'prepend'): Promise<void>;
 
-        /**
-         * Iterate over all links in the vault with callback.
-         *
-         * @param callback - Callback to execute for each link.
-         * @unofficial
-         */
-        iterateAllRefs(callback: (path: string, link: PositionedReference) => void): void;
+    /**
+     * Iterate over all links in the vault with callback.
+     *
+     * @param callback - Callback to execute for each link.
+     * @unofficial
+     */
+    iterateAllRefs(callback: (path: string, link: PositionedReference) => void): void;
 
-        /**
-         * Merge two files.
-         *
-         * @param file - File to merge to.
-         * @param otherFile - File to merge from.
-         * @param override - If not empty, will override the contents of the file with this string.
-         * @param atStart - Whether to insert text at the start or end of the file.
-         * @returns A promise that resolves when the files are merged.
-         * @unofficial
-         */
-        mergeFile(file: TFile, otherFile: TFile, override: string, atStart: boolean): Promise<void>;
+    /**
+     * Merge two files.
+     *
+     * @param file - File to merge to.
+     * @param otherFile - File to merge from.
+     * @param override - If not empty, will override the contents of the file with this string.
+     * @param atStart - Whether to insert text at the start or end of the file.
+     * @returns A promise that resolves when the files are merged.
+     * @unofficial
+     */
+    mergeFile(file: TFile, otherFile: TFile, override: string, atStart: boolean): Promise<void>;
 
-        /**
-         * Atomically read, modify, and save the frontmatter of a note.
-         * The frontmatter is passed in as a JS object, and should be mutated directly to achieve the desired result.
-         *
-         * Remember to handle errors thrown by this method.
-         *
-         * @param file - the file to be modified. Must be a Markdown file.
-         * @param fn - a callback function which mutates the frontmatter object synchronously.
-         * @param options - write options.
-         * @returns A promise that resolves when the frontmatter is processed and saved.
-         * @throws YAMLParseError if the YAML parsing fails.
-         * @throws any errors that your callback function throws.
-         * @example
-         * ```ts
-         * await app.fileManager.processFrontMatter(file, (frontmatter) => {
-         *     frontmatter['key1'] = value;
-         *     delete frontmatter['key2'];
-         * });
-         * ```
-         * @official
-         * @since 1.4.4
-         */
-        processFrontMatter(file: TFile, fn: (frontmatter: unknown) => void, options?: DataWriteOptions): Promise<void>;
+    /**
+     * Atomically read, modify, and save the frontmatter of a note.
+     * The frontmatter is passed in as a JS object, and should be mutated directly to achieve the desired result.
+     *
+     * Remember to handle errors thrown by this method.
+     *
+     * @param file - the file to be modified. Must be a Markdown file.
+     * @param fn - a callback function which mutates the frontmatter object synchronously.
+     * @param options - write options.
+     * @returns A promise that resolves when the frontmatter is processed and saved.
+     * @throws YAMLParseError if the YAML parsing fails.
+     * @throws any errors that your callback function throws.
+     * @example
+     * ```ts
+     * await app.fileManager.processFrontMatter(file, (frontmatter) => {
+     *     frontmatter['key1'] = value;
+     *     delete frontmatter['key2'];
+     * });
+     * ```
+     * @official
+     * @since 1.4.4
+     */
+    processFrontMatter(file: TFile, fn: (frontmatter: unknown) => void, options?: DataWriteOptions): Promise<void>;
 
-        /**
-         * Prompt the user to confirm they want to delete the specified file or folder.
-         *
-         * @param file - the file or folder to delete.
-         * @returns A promise that resolves to `true` if the prompt was confirmed or `false` if it was canceled.
-         * @example
-         * ```ts
-         * const file = app.vault.getFileByPath('foo/bar.md');
-         * await app.fileManager.promptForDeletion(file);
-         * ```
-         * @official
-         * @since 0.15.0
-         */
-        promptForDeletion(file: TAbstractFile): Promise<boolean>;
+    /**
+     * Prompt the user to confirm they want to delete the specified file or folder.
+     *
+     * @param file - the file or folder to delete.
+     * @returns A promise that resolves to `true` if the prompt was confirmed or `false` if it was canceled.
+     * @example
+     * ```ts
+     * const file = app.vault.getFileByPath('foo/bar.md');
+     * await app.fileManager.promptForDeletion(file);
+     * ```
+     * @official
+     * @since 0.15.0
+     */
+    promptForDeletion(file: TAbstractFile): Promise<boolean>;
 
-        /**
-         * Prompt the user to delete a file.
-         *
-         * @param file - The file to delete.
-         * @returns A promise that resolves when the deletion prompt is handled.
-         * @unofficial
-         */
-        promptForFileDeletion(file: TFile): Promise<void>;
+    /**
+     * Prompt the user to delete a file.
+     *
+     * @param file - The file to delete.
+     * @returns A promise that resolves when the deletion prompt is handled.
+     * @unofficial
+     */
+    promptForFileDeletion(file: TFile): Promise<void>;
 
-        /**
-         * Prompt the user to rename a file.
-         *
-         * @param file - The file to rename.
-         * @returns A promise that resolves when the rename prompt is handled.
-         * @unofficial
-         */
-        promptForFileRename(file: TFile): Promise<void>;
+    /**
+     * Prompt the user to rename a file.
+     *
+     * @param file - The file to rename.
+     * @returns A promise that resolves when the rename prompt is handled.
+     * @unofficial
+     */
+    promptForFileRename(file: TFile): Promise<void>;
 
-        /**
-         * Prompt the user to delete a folder.
-         *
-         * @param folder - The folder to delete.
-         * @returns A promise that resolves when the deletion prompt is handled.
-         * @unofficial
-         */
-        promptForFolderDeletion(folder: TFolder): Promise<void>;
+    /**
+     * Prompt the user to delete a folder.
+     *
+     * @param folder - The folder to delete.
+     * @returns A promise that resolves when the deletion prompt is handled.
+     * @unofficial
+     */
+    promptForFolderDeletion(folder: TFolder): Promise<void>;
 
-        /**
-         * Prompt the user to download an image.
-         *
-         * @param urls - The URLs of the images to download.
-         * @returns A promise that resolves to a mapping of URL to file, or `null`/`undefined`.
-         * @unofficial
-         */
-        promptForImageDownload(urls: string[]): Promise<undefined | null | Record<string, TFile>>;
+    /**
+     * Prompt the user to download an image.
+     *
+     * @param urls - The URLs of the images to download.
+     * @returns A promise that resolves to a mapping of URL to file, or `null`/`undefined`.
+     * @unofficial
+     */
+    promptForImageDownload(urls: string[]): Promise<undefined | null | Record<string, TFile>>;
 
-        /**
-         * Register an extension to be the parent for a specific file type.
-         *
-         * @param extension - The file extension.
-         * @param location - The folder to use as parent.
-         * @unofficial
-         */
-        registerFileParentCreator(extension: string, location: TFolder): void;
+    /**
+     * Register an extension to be the parent for a specific file type.
+     *
+     * @param extension - The file extension.
+     * @param location - The folder to use as parent.
+     * @unofficial
+     */
+    registerFileParentCreator(extension: string, location: TFolder): void;
 
-        /**
-         * Rename or move a file or folder safely, and update all links to it depending on the user's preferences.
-         *
-         * @param file - the file or folder to rename.
-         * @param newPath - the new path for the file or folder.
-         * @returns A promise that resolves when the file or folder is renamed.
-         * @example
-         * ```ts
-         * const file = app.vault.getFileByPath('foo/bar.md');
-         * await app.fileManager.renameFile(file, 'baz/qux.md');
-         * ```
-         * @official
-         * @since 0.11.0
-         */
-        renameFile(file: TAbstractFile, newPath: string): Promise<void>;
+    /**
+     * Rename or move a file or folder safely, and update all links to it depending on the user's preferences.
+     *
+     * @param file - the file or folder to rename.
+     * @param newPath - the new path for the file or folder.
+     * @returns A promise that resolves when the file or folder is renamed.
+     * @example
+     * ```ts
+     * const file = app.vault.getFileByPath('foo/bar.md');
+     * await app.fileManager.renameFile(file, 'baz/qux.md');
+     * ```
+     * @official
+     * @since 0.11.0
+     */
+    renameFile(file: TAbstractFile, newPath: string): Promise<void>;
 
-        /**
-         * Rename's a property for all notes currently that have the old key.
-         *
-         * @param oldKey - The old property key.
-         * @param newKey - The new property key.
-         * @returns A promise that resolves when the property is renamed across all notes.
-         * @remark The current property type is maintained.
-         * @remark Is case sensitive, despite Obsidian *typically* ignoring case for property names.
-         * @unofficial
-         */
-        renameProperty(oldKey: string, newKey: string): Promise<void>;
+    /**
+     * Rename's a property for all notes currently that have the old key.
+     *
+     * @param oldKey - The old property key.
+     * @param newKey - The new property key.
+     * @returns A promise that resolves when the property is renamed across all notes.
+     * @remark The current property type is maintained.
+     * @remark Is case sensitive, despite Obsidian *typically* ignoring case for property names.
+     * @unofficial
+     */
+    renameProperty(oldKey: string, newKey: string): Promise<void>;
 
-        /**
-         * Run async link update.
-         *
-         * @param linkUpdatesHandler - The link updates handler.
-         * @returns A promise that resolves when the link update is complete.
-         * @unofficial
-         */
-        runAsyncLinkUpdate(linkUpdatesHandler: LinkUpdatesHandler): Promise<void>;
+    /**
+     * Run async link update.
+     *
+     * @param linkUpdatesHandler - The link updates handler.
+     * @returns A promise that resolves when the link update is complete.
+     * @unofficial
+     */
+    runAsyncLinkUpdate(linkUpdatesHandler: LinkUpdatesHandler): Promise<void>;
 
-        /**
-         * Store text file backup.
-         *
-         * @param path - The path of the file to back up.
-         * @param data - The file content to store.
-         * @unofficial
-         */
-        storeTextFileBackup(path: string, data: string): void;
+    /**
+     * Store text file backup.
+     *
+     * @param path - The path of the file to back up.
+     * @param data - The file content to store.
+     * @unofficial
+     */
+    storeTextFileBackup(path: string, data: string): void;
 
-        /**
-         * Remove a file or a folder from the vault according the user's preferred 'trash'.
-         * options (either moving the file to .trash/ or the OS trash bin).
-         *
-         * @param file - the file or folder to trash.
-         * @returns A promise that resolves when the file or folder is trashed.
-         * @example
-         * ```ts
-         * const file = app.vault.getFileByPath('foo/bar.md');
-         * await app.fileManager.trashFile(file);
-         * ```
-         * @official
-         * @since 1.6.6
-         */
-        trashFile(file: TAbstractFile): Promise<void>;
+    /**
+     * Remove a file or a folder from the vault according the user's preferred 'trash'.
+     * options (either moving the file to .trash/ or the OS trash bin).
+     *
+     * @param file - the file or folder to trash.
+     * @returns A promise that resolves when the file or folder is trashed.
+     * @example
+     * ```ts
+     * const file = app.vault.getFileByPath('foo/bar.md');
+     * await app.fileManager.trashFile(file);
+     * ```
+     * @official
+     * @since 1.6.6
+     */
+    trashFile(file: TAbstractFile): Promise<void>;
 
-        /**
-         * Unregister extension as root input directory for file type.
-         *
-         * @param extension - The file extension to unregister.
-         * @unofficial
-         */
-        unregisterFileCreator(extension: string): void;
+    /**
+     * Unregister extension as root input directory for file type.
+     *
+     * @param extension - The file extension to unregister.
+     * @unofficial
+     */
+    unregisterFileCreator(extension: string): void;
 
-        /**
-         * Update all links.
-         *
-         * @param links - The link updates to apply.
-         * @returns A promise that resolves when all links are updated.
-         * @unofficial
-         */
-        updateAllLinks(links: LinkUpdate[]): Promise<void>;
+    /**
+     * Update all links.
+     *
+     * @param links - The link updates to apply.
+     * @returns A promise that resolves when all links are updated.
+     * @unofficial
+     */
+    updateAllLinks(links: LinkUpdate[]): Promise<void>;
 
-        /**
-         * Update internal links.
-         *
-         * @param data - Map of path to link change updates.
-         * @returns A promise that resolves when the internal links are updated.
-         * @unofficial
-         */
-        updateInternalLinks(data: Map<string, LinkChangeUpdate>): Promise<void>;
-    }
+    /**
+     * Update internal links.
+     *
+     * @param data - Map of path to link change updates.
+     * @returns A promise that resolves when the internal links are updated.
+     * @unofficial
+     */
+    updateInternalLinks(data: Map<string, LinkChangeUpdate>): Promise<void>;
+  }
 }

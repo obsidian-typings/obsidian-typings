@@ -1,5 +1,5 @@
 import {
-    Editor
+  Editor
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type EditorConstructor = ExtractConstructor<Editor>;
  * @unofficial
  */
 export function getEditorConstructor(): EditorConstructor {
-    return Editor as EditorConstructor;
+  return Editor as EditorConstructor;
 }

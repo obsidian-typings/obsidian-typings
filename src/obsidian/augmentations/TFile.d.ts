@@ -3,88 +3,88 @@ import type { getTFileConstructor } from '../implementations/constructors/augmen
 export {};
 
 declare module 'obsidian' {
+  /**
+   * A file.
+   * @since 0.9.7
+   */
+  interface TFile extends TAbstractFile {
     /**
-     * A file.
+     * The basename of the file (name without extension).
+     *
+     * @official
      * @since 0.9.7
      */
-    interface TFile extends TAbstractFile {
-        /**
-         * The basename of the file (name without extension).
-         *
-         * @official
-         * @since 0.9.7
-         */
-        basename: string;
+    basename: string;
 
-        /**
-         * The extension of the file.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        extension: string;
+    /**
+     * The extension of the file.
+     *
+     * @official
+     * @since 0.9.7
+     */
+    extension: string;
 
-        /**
-         * The name of the file (with extension).
-         *
-         * @official
-         */
-        name: string;
+    /**
+     * The name of the file (with extension).
+     *
+     * @official
+     */
+    name: string;
 
-        /**
-         * Whether the file is being saved.
-         *
-         * @unofficial
-         */
-        saving: boolean;
+    /**
+     * Whether the file is being saved.
+     *
+     * @unofficial
+     */
+    saving: boolean;
 
-        /**
-         * The stats of the file.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        stat: FileStats;
+    /**
+     * The stats of the file.
+     *
+     * @official
+     * @since 0.9.7
+     */
+    stat: FileStats;
 
-        /**
-         * Caches file's content, that can be retrieved via `await app.vault.cachedRead(file)`.
-         *
-         * @param content The content to cache. If `null`, the cache is cleared.
-         * @unofficial
-         */
-        cache(content: string | null): void;
+    /**
+     * Caches file's content, that can be retrieved via `await app.vault.cachedRead(file)`.
+     *
+     * @param content The content to cache. If `null`, the cache is cleared.
+     * @unofficial
+     */
+    cache(content: string | null): void;
 
-        /**
-         * Constructor.
-         *
-         * To get the constructor instance, use {@link getTFileConstructor} from `obsidian-typings/implementations`.
-         *
-         * @param vault - The vault.
-         * @param path - The path.
-         * @returns The new instance.
-         * @unofficial
-         * @deprecated - Added only for typing purposes.
-         */
-        constructor__(vault: Vault, path: string): this;
+    /**
+     * Constructor.
+     *
+     * To get the constructor instance, use {@link getTFileConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param vault - The vault.
+     * @param path - The path.
+     * @returns The new instance.
+     * @unofficial
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor__(vault: Vault, path: string): this;
 
-        /**
-         * Gets the short name of the file.
-         *
-         * For `a/b/c.md`, it returns `c`.
-         *
-         * For `a/b/c.any-other-extension` it returns `c.any-other-extension`.
-         *
-         * @returns The short name of the file.
-         * @unofficial
-         */
-        getShortName(): string;
+    /**
+     * Gets the short name of the file.
+     *
+     * For `a/b/c.md`, it returns `c`.
+     *
+     * For `a/b/c.any-other-extension` it returns `c.any-other-extension`.
+     *
+     * @returns The short name of the file.
+     * @unofficial
+     */
+    getShortName(): string;
 
-        /**
-         * Removes the file from the cache if its content length greater than `app.vault.cacheLimit`.
-         *
-         * @returns The result of the cache limit update.
-         * @unofficial
-         */
-        updateCacheLimit(): unknown;
-    }
+    /**
+     * Removes the file from the cache if its content length greater than `app.vault.cacheLimit`.
+     *
+     * @returns The result of the cache limit update.
+     * @unofficial
+     */
+    updateCacheLimit(): unknown;
+  }
 }

@@ -1,6 +1,6 @@
 import type {
-    App,
-    Debouncer
+  App,
+  Debouncer
 } from 'obsidian';
 import type { PromisedQueue } from '../../PromisedQueue.d.ts';
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
@@ -15,30 +15,30 @@ import type { CanvasPluginInstanceOptions } from './CanvasPluginInstanceOptions.
  * @unofficial
  */
 export interface CanvasPluginInstance extends InternalPluginInstance<CanvasPlugin> {
-    /** Reference to the Obsidian app instance. */
-    app: App;
+  /** Reference to the Obsidian app instance. */
+  app: App;
 
-    /** Whether this plugin is enabled by default. */
-    defaultOn: true;
+  /** Whether this plugin is enabled by default. */
+  defaultOn: true;
 
-    /** Index for resolving links and embeds within canvas files. */
-    index: CanvasIndex;
+  /** Index for resolving links and embeds within canvas files. */
+  index: CanvasIndex;
 
-    /** Manager for loading, saving, and handling canvas local data. */
-    localDataManager: CanvasDataManager;
+  /** Manager for loading, saving, and handling canvas local data. */
+  localDataManager: CanvasDataManager;
 
-    /** User-configurable options for the canvas plugin. */
-    options: CanvasPluginInstanceOptions;
+  /** User-configurable options for the canvas plugin. */
+  options: CanvasPluginInstanceOptions;
 
-    /** Reference to the parent canvas plugin. */
-    plugin: CanvasPlugin;
+  /** Reference to the parent canvas plugin. */
+  plugin: CanvasPlugin;
 
-    /** Queue for processing file rename operations sequentially. */
-    renameQueue: PromisedQueue;
+  /** Queue for processing file rename operations sequentially. */
+  renameQueue: PromisedQueue;
 
-    /** Pending rename operations to be processed. */
-    renames: unknown[];
+  /** Pending rename operations to be processed. */
+  renames: unknown[];
 
-    /** Debounced function to process pending rename operations. */
-    requestProcessRename: Debouncer<[], unknown>;
+  /** Debounced function to process pending rename operations. */
+  requestProcessRename: Debouncer<[], unknown>;
 }

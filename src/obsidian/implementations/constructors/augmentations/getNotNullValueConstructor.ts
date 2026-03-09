@@ -1,5 +1,5 @@
 import {
-    NotNullValue
+  NotNullValue
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -12,5 +12,5 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @unofficial
  */
 export function getNotNullValueConstructor(): ExtractConstructor<NotNullValue> {
-    return NotNullValue as unknown as ExtractConstructor<NotNullValue>;
+  return NotNullValue as unknown as ExtractConstructor<NotNullValue>;
 }

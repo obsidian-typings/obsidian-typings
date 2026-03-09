@@ -8,5 +8,5 @@
  * @unofficial
  */
 export function parentFolderPath(path: string): string {
-    return path.replace(/\/?[^\/]*$/, '') || '/';
+  return path.replace(/\/?[^\/]*$/, '') || '/';
 }

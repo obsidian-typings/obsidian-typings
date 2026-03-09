@@ -4,9 +4,9 @@
  * @unofficial
  */
 export interface DragStartEvent {
-    /** The original drag event. */
-    evt: DragEvent;
+  /** The original drag event. */
+  evt: DragEvent;
 
-    /** Whether the dragged item has moved from its starting position. */
-    moved: boolean;
+  /** Whether the dragged item has moved from its starting position. */
+  moved: boolean;
 }

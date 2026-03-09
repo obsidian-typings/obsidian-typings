@@ -14,18 +14,18 @@ import type { ViewTypeViewMapping } from '../../../../internals/views/ViewTypeVi
  * @unofficial
  */
 export function getViewConstructorByViewType<TViewType extends ViewTypeType>(
-    app: App,
-    viewType: TViewType
+  app: App,
+  viewType: TViewType
 ): ExtractConstructor<ViewTypeViewMapping[TViewType]> {
-    const leaf = app.workspace.createLeafInTabGroup();
-    try {
-        const viewCreator = app.viewRegistry.getViewCreatorByType(viewType);
-        if (!viewCreator) {
-            throw new Error('View creator not found');
-        }
-        const view = viewCreator(leaf);
-        return view.constructor as ExtractConstructor<ViewTypeViewMapping[TViewType]>;
-    } finally {
-        leaf.detach();
+  const leaf = app.workspace.createLeafInTabGroup();
+  try {
+    const viewCreator = app.viewRegistry.getViewCreatorByType(viewType);
+    if (!viewCreator) {
+      throw new Error('View creator not found');
     }
+    const view = viewCreator(leaf);
+    return view.constructor as ExtractConstructor<ViewTypeViewMapping[TViewType]>;
+  } finally {
+    leaf.detach();
+  }
 }

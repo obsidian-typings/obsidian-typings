@@ -1,26 +1,26 @@
 import type {
-    getUrlValueConstructor
+  getUrlValueConstructor
 } from '../../implementations/constructors/augmentations/getUrlValueConstructor.d.ts';
 
 export {};
 
 declare module 'obsidian' {
+  /**
+   * {@link Value} wrapping an external link.
+   *
+   * @since 1.10.0
+   */
+  interface UrlValue extends StringValue {
     /**
-     * {@link Value} wrapping an external link.
+     * Constructor.
      *
-     * @since 1.10.0
+     * To get the constructor instance, use {@link getUrlValueConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param value - The value.
+     * @returns The new instance.
+     * @unofficial
+     * @deprecated - Added only for typing purposes.
      */
-    interface UrlValue extends StringValue {
-        /**
-         * Constructor.
-         *
-         * To get the constructor instance, use {@link getUrlValueConstructor} from `obsidian-typings/implementations`.
-         *
-         * @param value - The value.
-         * @returns The new instance.
-         * @unofficial
-         * @deprecated - Added only for typing purposes.
-         */
-        constructor5__(value: string): this;
-    }
+    constructor5__(value: string): this;
+  }
 }

@@ -5,12 +5,12 @@
  * @param {JSX.Element} node
  */
 export const decorateHast = node => {
-    Object.assign(node.data ?? (node.data = {}), {
-        hName: node.tagName,
-        hProperties: node.properties
-    });
+  Object.assign(node.data ?? (node.data = {}), {
+    hName: node.tagName,
+    hProperties: node.properties
+  });
 
-    if (node.children && Array.isArray(node.children)) {
-        node.children.forEach(decorateHast);
-    }
+  if (node.children && Array.isArray(node.children)) {
+    node.children.forEach(decorateHast);
+  }
 };

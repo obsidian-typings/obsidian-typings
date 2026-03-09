@@ -4,12 +4,12 @@
  * @unofficial
  */
 export interface RendererSection {
-    /** DOM element for this section. */
-    el: HTMLElement;
+  /** DOM element for this section. */
+  el: HTMLElement;
 
-    /** Raw HTML content for this section. */
-    html: string;
+  /** Raw HTML content for this section. */
+  html: string;
 
-    /** Whether this section has been rendered to the DOM. */
-    rendered: boolean;
+  /** Whether this section has been rendered to the DOM. */
+  rendered: boolean;
 }

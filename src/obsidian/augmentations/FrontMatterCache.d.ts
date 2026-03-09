@@ -1,31 +1,31 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * The cache of the frontmatter in the note.
+   * Frontmatter is a block of metadata that is used to store information about the note.
+   *
+   * ```markdown
+   * ---
+   * key1: "value1",
+   * key2: 42
+   * ---
+   * ```
+   */
+  interface FrontMatterCache {
     /**
-     * The cache of the frontmatter in the note.
-     * Frontmatter is a block of metadata that is used to store information about the note.
+     * The key-value pairs in the frontmatter.
      *
-     * ```markdown
-     * ---
-     * key1: "value1",
-     * key2: 42
-     * ---
+     * @param key - The frontmatter key to look up.
+     * @returns The value associated with the key.
+     * @example
+     * ```ts
+     * console.log(frontmatterCache['key1']); // value1
+     * console.log(frontmatterCache['key2']); // 42
      * ```
+     * @official
+     * @deprecated - Added only for typing purposes. Use `this[key]` instead.
      */
-    interface FrontMatterCache {
-        /**
-         * The key-value pairs in the frontmatter.
-         *
-         * @param key - The frontmatter key to look up.
-         * @returns The value associated with the key.
-         * @example
-         * ```ts
-         * console.log(frontmatterCache['key1']); // value1
-         * console.log(frontmatterCache['key2']); // 42
-         * ```
-         * @official
-         * @deprecated - Added only for typing purposes. Use `this[key]` instead.
-         */
-        index__(key: string): unknown;
-    }
+    index__(key: string): unknown;
+  }
 }

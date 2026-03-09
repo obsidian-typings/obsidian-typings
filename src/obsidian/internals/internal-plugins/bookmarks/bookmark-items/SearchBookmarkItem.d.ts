@@ -6,9 +6,9 @@ import type { BookmarkItem } from './BookmarkItem.d.ts';
  * @unofficial
  */
 export interface SearchBookmarkItem extends BookmarkItem {
-    /** The saved search query string. */
-    query: string;
+  /** The saved search query string. */
+  query: string;
 
-    /** Discriminator indicating this is a search bookmark. */
-    type: 'search';
+  /** Discriminator indicating this is a search bookmark. */
+  type: 'search';
 }

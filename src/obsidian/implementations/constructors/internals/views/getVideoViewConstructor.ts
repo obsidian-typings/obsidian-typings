@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getVideoViewConstructor(app: App): ExtractConstructor<VideoView> {
-    return getViewConstructorByViewType(app, ViewType.Video);
+  return getViewConstructorByViewType(app, ViewType.Video);
 }

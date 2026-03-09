@@ -8,6 +8,6 @@ import type { BookmarksPluginViews } from './BookmarksPluginViews.d.ts';
  * @unofficial
  */
 export interface BookmarksPlugin extends InternalPlugin<BookmarksPluginInstance> {
-    /** View creators registered by the bookmarks plugin. */
-    views: BookmarksPluginViews;
+  /** View creators registered by the bookmarks plugin. */
+  views: BookmarksPluginViews;
 }

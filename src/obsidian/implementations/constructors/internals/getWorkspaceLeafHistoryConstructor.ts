@@ -14,9 +14,9 @@ type WorkspaceLeafHistoryConstructor = ExtractConstructor<WorkspaceLeafHistory>;
  * @unofficial
  */
 export function getWorkspaceLeafHistoryConstructor(app: App): WorkspaceLeafHistoryConstructor {
-    const leaf = app.workspace.getMostRecentLeaf();
-    if (!leaf) {
-        throw new Error('No workspace leaf available to extract WorkspaceLeafHistory constructor');
-    }
-    return leaf.history.constructor as WorkspaceLeafHistoryConstructor;
+  const leaf = app.workspace.getMostRecentLeaf();
+  if (!leaf) {
+    throw new Error('No workspace leaf available to extract WorkspaceLeafHistory constructor');
+  }
+  return leaf.history.constructor as WorkspaceLeafHistoryConstructor;
 }

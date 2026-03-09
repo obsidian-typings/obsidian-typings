@@ -7,9 +7,9 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface UnknownPropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** The element of the property widget. */
-    el: HTMLSpanElement;
+  /** The element of the property widget. */
+  el: HTMLSpanElement;
 
-    /** The type of the property widget. */
-    type: 'unknown';
+  /** The type of the property widget. */
+  type: 'unknown';
 }

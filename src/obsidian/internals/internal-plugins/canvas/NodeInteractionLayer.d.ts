@@ -6,26 +6,26 @@ import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
  * @unofficial
  */
 export interface NodeInteractionLayer {
-    /** Reference to the parent canvas instance. */
-    canvas: CanvasViewCanvas;
+  /** Reference to the parent canvas instance. */
+  canvas: CanvasViewCanvas;
 
-    /** HTML element used for rendering interaction handles. */
-    interactionEl: HTMLDivElement;
+  /** HTML element used for rendering interaction handles. */
+  interactionEl: HTMLDivElement;
 
-    /** Currently targeted node for interaction, or `null` if none. */
-    target: null;
+  /** Currently targeted node for interaction, or `null` if none. */
+  target: null;
 
-    /**
-     * Render the interaction handles for the current target node.
-     *
-     * @returns The result of rendering the interaction handles.
-     */
-    render(): unknown;
+  /**
+   * Render the interaction handles for the current target node.
+   *
+   * @returns The result of rendering the interaction handles.
+   */
+  render(): unknown;
 
-    /**
-     * Set the target node for interaction.
-     *
-     * @returns The result of setting the target.
-     */
-    setTarget(arg1: unknown): unknown;
+  /**
+   * Set the target node for interaction.
+   *
+   * @returns The result of setting the target.
+   */
+  setTarget(arg1: unknown): unknown;
 }

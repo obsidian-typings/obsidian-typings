@@ -1,17 +1,17 @@
 import type {
-    App,
-    Debouncer,
-    Events
+  App,
+  Debouncer,
+  Events
 } from 'obsidian';
 import type {
-    getMetadataTypeManagerConstructor
+  getMetadataTypeManagerConstructor
 } from '../../implementations/constructors/internals/getMetadataTypeManagerConstructor.d.ts';
 import type { PropertyInfo } from '../PropertyInfo.d.ts';
 import type { PropertyWidget } from '../PropertyWidget.d.ts';
 import type { PropertyWidgetType } from '../PropertyWidgetType.d.ts';
 import type { MetadataTypeManagerPropertiesRecord } from './MetadataTypeManagerPropertiesRecord.d.ts';
 import type {
-    MetadataTypeManagerRegisteredTypeWidgetsRecord
+  MetadataTypeManagerRegisteredTypeWidgetsRecord
 } from './MetadataTypeManagerRegisteredTypeWidgetsRecord.d.ts';
 import type { MetadataTypeManagerTypesRecord } from './MetadataTypeManagerTypesRecord.d.ts';
 import type { TypeInfo } from './TypeInfo.d.ts';
@@ -22,131 +22,131 @@ import type { TypeInfo } from './TypeInfo.d.ts';
  * @unofficial
  */
 export interface MetadataTypeManager extends Events {
-    /**
-     * Reference to App.
-     */
-    app: App;
+  /**
+   * Reference to App.
+   */
+  app: App;
 
-    /**
-     * Associated widget types for each property.
-     */
-    assignedWidgets: MetadataTypeManagerTypesRecord;
+  /**
+   * Associated widget types for each property.
+   */
+  assignedWidgets: MetadataTypeManagerTypesRecord;
 
-    /**
-     * Unix timestamp of the last save
-     */
-    lastSave: number;
+  /**
+   * Unix timestamp of the last save
+   */
+  lastSave: number;
 
-    /** Debounced handler for property type config file changes on disk. */
-    onConfigFileChange: Debouncer<[], Promise<void>>;
+  /** Debounced handler for property type config file changes on disk. */
+  onConfigFileChange: Debouncer<[], Promise<void>>;
 
-    /**
-     * Registered properties of the vault.
-     */
-    properties: MetadataTypeManagerPropertiesRecord;
+  /**
+   * Registered properties of the vault.
+   */
+  properties: MetadataTypeManagerPropertiesRecord;
 
-    /**
-     * Registered type widgets.
-     */
-    registeredTypeWidgets: MetadataTypeManagerRegisteredTypeWidgetsRecord;
+  /**
+   * Registered type widgets.
+   */
+  registeredTypeWidgets: MetadataTypeManagerRegisteredTypeWidgetsRecord;
 
-    /**
-     * Constructor.
-     *
-     * To get the constructor instance, use {@link getMetadataTypeManagerConstructor} from `obsidian-typings/implementations`.
-     *
-     * @param app - The app.
-     * @returns The new instance.
-     * @deprecated - Added only for typing purposes.
-     */
-    constructor2__(app: App): this;
+  /**
+   * Constructor.
+   *
+   * To get the constructor instance, use {@link getMetadataTypeManagerConstructor} from `obsidian-typings/implementations`.
+   *
+   * @param app - The app.
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
+   */
+  constructor2__(app: App): this;
 
-    /**
-     * Get all registered properties of the vault.
-     *
-     * @returns Record of property names to their info.
-     */
-    getAllProperties(): Record<string, PropertyInfo>;
+  /**
+   * Get all registered properties of the vault.
+   *
+   * @returns Record of property names to their info.
+   */
+  getAllProperties(): Record<string, PropertyInfo>;
 
-    /**
-     * Get assigned widget type for property.
-     *
-     * @param property - Property name.
-     * @returns The assigned widget type, or `null`.
-     */
-    getAssignedWidget(property: string): PropertyWidgetType | null;
+  /**
+   * Get assigned widget type for property.
+   *
+   * @param property - Property name.
+   * @returns The assigned widget type, or `null`.
+   */
+  getAssignedWidget(property: string): PropertyWidgetType | null;
 
-    /**
-     * Get info for property.
-     *
-     * @param property - Property name.
-     * @returns Information about the property.
-     */
-    getPropertyInfo(property: string): PropertyInfo;
+  /**
+   * Get info for property.
+   *
+   * @param property - Property name.
+   * @returns Information about the property.
+   */
+  getPropertyInfo(property: string): PropertyInfo;
 
-    /**
-     * Get expected widget type for property and the one inferred from the property value.
-     *
-     * @param property - Property name.
-     * @param value - Property value.
-     * @returns Type information for the property.
-     */
-    getTypeInfo(property: string, value: unknown): TypeInfo;
+  /**
+   * Get expected widget type for property and the one inferred from the property value.
+   *
+   * @param property - Property name.
+   * @param value - Property value.
+   * @returns Type information for the property.
+   */
+  getTypeInfo(property: string, value: unknown): TypeInfo;
 
-    /**
-     * Get property widget.
-     *
-     * @param type - Widget type name.
-     * @returns The property widget.
-     */
-    getWidget(type: string): PropertyWidget;
+  /**
+   * Get property widget.
+   *
+   * @param type - Widget type name.
+   * @returns The property widget.
+   */
+  getWidget(type: string): PropertyWidget;
 
-    /** Load metadata type configuration. */
-    load(): Promise<void>;
+  /** Load metadata type configuration. */
+  load(): Promise<void>;
 
-    /**
-     * Load property types from config.
-     *
-     * @returns A promise that resolves when the property types are loaded.
-     */
-    loadData(): Promise<void>;
+  /**
+   * Load property types from config.
+   *
+   * @returns A promise that resolves when the property types are loaded.
+   */
+  loadData(): Promise<void>;
 
-    /**
-     * Handle raw file system change events for the property type config.
-     *
-     * @param e - The raw file system change event.
-     */
-    onRaw(e: unknown): void;
+  /**
+   * Handle raw file system change events for the property type config.
+   *
+   * @param e - The raw file system change event.
+   */
+  onRaw(e: unknown): void;
 
-    /** Register event listeners for property type config file changes. */
-    registerListeners(): void;
+  /** Register event listeners for property type config file changes. */
+  registerListeners(): void;
 
-    /**
-     * Save property types to config.
-     *
-     * @returns A promise that resolves when the property types are saved.
-     */
-    save(): Promise<void>;
+  /**
+   * Save property types to config.
+   *
+   * @returns A promise that resolves when the property types are saved.
+   */
+  save(): Promise<void>;
 
-    /**
-     * Set widget type for property.
-     *
-     * @param property - Property name.
-     * @param type - Widget type to assign.
-     * @returns A promise that resolves when the widget type is set.
-     */
-    setType(property: string, type: PropertyWidgetType): Promise<void>;
+  /**
+   * Set widget type for property.
+   *
+   * @param property - Property name.
+   * @param type - Widget type to assign.
+   * @returns A promise that resolves when the widget type is set.
+   */
+  setType(property: string, type: PropertyWidgetType): Promise<void>;
 
-    /**
-     * Unset widget type for property.
-     *
-     * @param property - Property name.
-     * @returns A promise that resolves when the widget type is unset.
-     */
-    unsetType(property: string): Promise<void>;
+  /**
+   * Unset widget type for property.
+   *
+   * @param property - Property name.
+   * @returns A promise that resolves when the widget type is unset.
+   */
+  unsetType(property: string): Promise<void>;
 
-    /**
-     * Updates `this.properties` to match the MetadataCache
-     */
-    updatePropertyInfoCache(): void;
+  /**
+   * Updates `this.properties` to match the MetadataCache
+   */
+  updatePropertyInfoCache(): void;
 }

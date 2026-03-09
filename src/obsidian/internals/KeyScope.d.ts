@@ -6,23 +6,23 @@ import type { Scope } from 'obsidian';
  * @unofficial
  */
 export interface KeyScope {
-    /**
-     * Key to match.
-     */
-    key: string | null;
+  /**
+   * Key to match.
+   */
+  key: string | null;
 
-    /**
-     * Modifiers to match.
-     */
-    modifiers: string | null;
+  /**
+   * Modifiers to match.
+   */
+  modifiers: string | null;
 
-    /**
-     * Scope where the key interceptor is registered.
-     */
-    scope: Scope;
+  /**
+   * Scope where the key interceptor is registered.
+   */
+  scope: Scope;
 
-    /**
-     * Callback of function to execute when key is pressed.
-     */
-    func(): void;
+  /**
+   * Callback of function to execute when key is pressed.
+   */
+  func(): void;
 }

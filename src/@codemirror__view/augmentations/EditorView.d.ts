@@ -4,29 +4,29 @@ import type { VimEditor } from '../internals/vim/VimEditor.d.ts';
 export {};
 
 declare module '@codemirror/view' {
+  /**
+   * An editor view represents the editor's user interface. It holds
+   * the editable DOM surface, and possibly other elements such as the
+   * line number gutter. It handles events and dispatches state
+   * transactions for editing actions.
+   */
+  interface EditorView {
     /**
-     * An editor view represents the editor's user interface. It holds
-     * the editable DOM surface, and possibly other elements such as the
-     * line number gutter. It handles events and dispatches state
-     * transactions for editing actions.
+     * The Vim editor instance attached to this view, if Vim mode is enabled.
+     * @unofficial
      */
-    interface EditorView {
-        /**
-         * The Vim editor instance attached to this view, if Vim mode is enabled.
-         * @unofficial
-         */
-        cm?: VimEditor;
+    cm?: VimEditor;
 
-        /**
-         * Internal view state tracking properties like printing mode.
-         * @unofficial
-         */
-        viewState: EditorViewState;
+    /**
+     * Internal view state tracking properties like printing mode.
+     * @unofficial
+     */
+    viewState: EditorViewState;
 
-        /**
-         * Request a layout measurement pass on the editor.
-         * @unofficial
-         */
-        measure(): void;
-    }
+    /**
+     * Request a layout measurement pass on the editor.
+     * @unofficial
+     */
+    measure(): void;
+  }
 }

@@ -17,78 +17,78 @@ import type { GraphForceOptions } from './options/GraphForceOptions.d.ts';
  * @unofficial
  */
 export interface GraphEngine {
-    /** Reference to the Obsidian app instance. */
-    app: App;
+  /** Reference to the Obsidian app instance. */
+  app: App;
 
-    /** UI controls for configuring color group options. */
-    colorGroupOptions: GraphColorGroupOptions;
+  /** UI controls for configuring color group options. */
+  colorGroupOptions: GraphColorGroupOptions;
 
-    /** Container element for the graph settings controls panel. */
-    controlsEl: HTMLDivElement;
+  /** Container element for the graph settings controls panel. */
+  controlsEl: HTMLDivElement;
 
-    /** Path of the currently focused file in the local graph. */
-    currentFocusFile: string;
+  /** Path of the currently focused file in the local graph. */
+  currentFocusFile: string;
 
-    /** UI controls for configuring display options. */
-    displayOptions: GraphDisplayOptions;
+  /** UI controls for configuring display options. */
+  displayOptions: GraphDisplayOptions;
 
-    /** Filter determining which files are included in the graph. */
-    fileFilter: GraphFileFilter;
+  /** Filter determining which files are included in the graph. */
+  fileFilter: GraphFileFilter;
 
-    /** UI controls for configuring filter options. */
-    filterOptions: GraphFilterOptions;
+  /** UI controls for configuring filter options. */
+  filterOptions: GraphFilterOptions;
 
-    /** UI controls for configuring force simulation options. */
-    forceOptions: GraphForceOptions;
+  /** UI controls for configuring force simulation options. */
+  forceOptions: GraphForceOptions;
 
-    /** Whether any search filter is currently active. */
-    hasFilter: boolean;
+  /** Whether any search filter is currently active. */
+  hasFilter: boolean;
 
-    /** Hover popover displayed when hovering over a node. */
-    hoverPopover: unknown;
+  /** Hover popover displayed when hovering over a node. */
+  hoverPopover: unknown;
 
-    /** Last link that was hovered over. */
-    lastHoverLink: unknown;
+  /** Last link that was hovered over. */
+  lastHoverLink: unknown;
 
-    /** Current graph plugin options applied to this engine. */
-    options: GraphPluginInstanceOptions;
+  /** Current graph plugin options applied to this engine. */
+  options: GraphPluginInstanceOptions;
 
-    /** Current animation progression value for graph transitions. */
-    progression: number;
+  /** Current animation progression value for graph transitions. */
+  progression: number;
 
-    /** Speed of the animation progression. */
-    progressionSpeed: number;
+  /** Speed of the animation progression. */
+  progressionSpeed: number;
 
-    /** Renderer responsible for drawing the graph. */
-    renderer: GraphRenderer;
+  /** Renderer responsible for drawing the graph. */
+  renderer: GraphRenderer;
 
-    /** Active color group search queries for node coloring. */
-    searchQueries: GraphColorGroup[];
+  /** Active color group search queries for node coloring. */
+  searchQueries: GraphColorGroup[];
 
-    /** The view (local or global) that owns this engine. */
-    view: LocalGraphView | GraphView;
+  /** The view (local or global) that owns this engine. */
+  view: LocalGraphView | GraphView;
 
-    /**
-     * Gets the engine options.
-     *
-     * @returns The current graph plugin instance options.
-     */
-    getOptions(): GraphPluginInstanceOptions;
+  /**
+   * Gets the engine options.
+   *
+   * @returns The current graph plugin instance options.
+   */
+  getOptions(): GraphPluginInstanceOptions;
 
-    /**
-     * Rerenders the graph.
-     */
-    render(): void;
+  /**
+   * Rerenders the graph.
+   */
+  render(): void;
 
-    /**
-     * Sets the engine options.
-     *
-     * @param options - New options. Undefined elements will not be considered.
-     */
-    setOptions(options: GraphPluginInstanceOptions | undefined): void;
+  /**
+   * Sets the engine options.
+   *
+   * @param options - New options. Undefined elements will not be considered.
+   */
+  setOptions(options: GraphPluginInstanceOptions | undefined): void;
 
-    /**
-     * Updates the engine after the search filter has changed.
-     */
-    updateSearch(): void;
+  /**
+   * Updates the engine after the search filter has changed.
+   */
+  updateSearch(): void;
 }

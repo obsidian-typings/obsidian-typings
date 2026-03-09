@@ -8,23 +8,23 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface TagsPropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** The multiselect component for the property widget. */
-    multiselect: Multiselect;
+  /** The multiselect component for the property widget. */
+  multiselect: Multiselect;
 
-    /** The type of the property widget. */
-    type: 'tags';
+  /** The type of the property widget. */
+  type: 'tags';
 
-    /**
-     * Handle focus event.
-     *
-     * @param mode - The focus mode.
-     */
-    onFocus(): void;
+  /**
+   * Handle focus event.
+   *
+   * @param mode - The focus mode.
+   */
+  onFocus(): void;
 
-    /**
-     * Set the value of the property widget.
-     *
-     * @param value - The value to set.
-     */
-    setValue(value: unknown): void;
+  /**
+   * Set the value of the property widget.
+   *
+   * @param value - The value to set.
+   */
+  setValue(value: unknown): void;
 }

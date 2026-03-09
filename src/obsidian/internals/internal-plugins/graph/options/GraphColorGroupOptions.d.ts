@@ -7,6 +7,6 @@ import type { GraphOptions } from './GraphOptions.d.ts';
  * @unofficial
  */
 export interface GraphColorGroupOptions extends GraphOptions {
-    /** List of UI groups, each representing a user-defined color group entry. */
-    groups: GraphColorGroupOptionsGroup[];
+  /** List of UI groups, each representing a user-defined color group entry. */
+  groups: GraphColorGroupOptionsGroup[];
 }

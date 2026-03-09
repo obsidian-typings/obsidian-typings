@@ -1,6 +1,6 @@
 import type {
-    EditableFileView,
-    TFile
+  EditableFileView,
+  TFile
 } from 'obsidian';
 import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 
@@ -10,25 +10,25 @@ import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
  * @unofficial
  */
 export interface PdfView extends EditableFileView {
-    /** The PDF viewer component used to render the document. */
-    viewer: unknown;
+  /** The PDF viewer component used to render the document. */
+  viewer: unknown;
 
-    /**
-     * Get the current view type.
-     *
-     * @returns The view type identifier.
-     */
-    getViewType(): typeof ViewType.Pdf;
+  /**
+   * Get the current view type.
+   *
+   * @returns The view type identifier.
+   */
+  getViewType(): typeof ViewType.Pdf;
 
-    /**
-     * Is called when the vault has a 'modify' event. Reloads the file if the modified file is the file in this view.
-     *
-     * @param file - The modified file.
-     */
-    onModify(file: TFile): void;
+  /**
+   * Is called when the vault has a 'modify' event. Reloads the file if the modified file is the file in this view.
+   *
+   * @param file - The modified file.
+   */
+  onModify(file: TFile): void;
 
-    /**
-     * Shows the search.
-     */
-    showSearch(): void;
+  /**
+   * Shows the search.
+   */
+  showSearch(): void;
 }

@@ -14,5 +14,5 @@ type CustomCSSConstructor = ExtractConstructor<CustomCSS>;
  * @unofficial
  */
 export function getCustomCSSConstructor(app: App): CustomCSSConstructor {
-    return app.customCss.constructor as CustomCSSConstructor;
+  return app.customCss.constructor as CustomCSSConstructor;
 }

@@ -6,12 +6,12 @@ import type { SQLResultSetRowList } from './SQLResultSetRowList.d.ts';
  * @unofficial
  */
 export interface SQLResultSet {
-    /** Row ID of the last inserted row, if applicable. */
-    insertId: number;
+  /** Row ID of the last inserted row, if applicable. */
+  insertId: number;
 
-    /** List of rows returned by the query. */
-    rows: SQLResultSetRowList;
+  /** List of rows returned by the query. */
+  rows: SQLResultSetRowList;
 
-    /** Number of rows affected by the query. */
-    rowsAffected: number;
+  /** Number of rows affected by the query. */
+  rowsAffected: number;
 }

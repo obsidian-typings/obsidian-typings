@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getWebviewerHistoryViewConstructor(app: App): ExtractConstructor<WebviewerHistoryView> {
-    return getViewConstructorByViewType(app, ViewType.WebviewerHistory);
+  return getViewConstructorByViewType(app, ViewType.WebviewerHistory);
 }

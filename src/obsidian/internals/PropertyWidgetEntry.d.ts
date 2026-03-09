@@ -6,9 +6,9 @@ import type { PropertyWidgetType } from './PropertyWidgetType.d.ts';
  * @unofficial
  */
 export interface PropertyWidgetEntry {
-    /** Display name of the property widget. */
-    name: string;
+  /** Display name of the property widget. */
+  name: string;
 
-    /** The property widget type. */
-    widget: PropertyWidgetType;
+  /** The property widget type. */
+  widget: PropertyWidgetType;
 }

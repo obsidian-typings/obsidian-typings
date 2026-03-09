@@ -1,5 +1,5 @@
 import {
-    ToggleComponent
+  ToggleComponent
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type ToggleComponentConstructor = ExtractConstructor<ToggleComponent>;
  * @unofficial
  */
 export function getToggleComponentConstructor(): ToggleComponentConstructor {
-    return ToggleComponent as ToggleComponentConstructor;
+  return ToggleComponent as ToggleComponentConstructor;
 }

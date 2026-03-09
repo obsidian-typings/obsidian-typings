@@ -12,5 +12,5 @@ type FrameDomConstructor = ExtractConstructor<FrameDom>;
  * @unofficial
  */
 export function getFrameDomConstructor(): FrameDomConstructor {
-    return window.frameDom.constructor as FrameDomConstructor;
+  return window.frameDom.constructor as FrameDomConstructor;
 }

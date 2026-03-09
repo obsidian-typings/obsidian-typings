@@ -1,6 +1,6 @@
 import type {
-    SplitDirection,
-    ViewState
+  SplitDirection,
+  ViewState
 } from 'obsidian';
 
 /**
@@ -9,21 +9,21 @@ import type {
  * @unofficial
  */
 export interface LeafEntry {
-    /** Child leaf entries if this is a split container. */
-    children?: LeafEntry[];
+  /** Child leaf entries if this is a split container. */
+  children?: LeafEntry[];
 
-    /** Split direction if this is a split container. */
-    direction?: SplitDirection;
+  /** Split direction if this is a split container. */
+  direction?: SplitDirection;
 
-    /** Unique identifier for the leaf. */
-    id: string;
+  /** Unique identifier for the leaf. */
+  id: string;
 
-    /** View state of the leaf. */
-    state?: ViewState;
+  /** View state of the leaf. */
+  state?: ViewState;
 
-    /** Type of the leaf entry (e.g. "leaf", "split", "tabs"). */
-    type: string;
+  /** Type of the leaf entry (e.g. "leaf", "split", "tabs"). */
+  type: string;
 
-    /** Width of the leaf in pixels, if applicable. */
-    width?: number;
+  /** Width of the leaf in pixels, if applicable. */
+  width?: number;
 }

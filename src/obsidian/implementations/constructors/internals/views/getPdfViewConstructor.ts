@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getPdfViewConstructor(app: App): ExtractConstructor<PdfView> {
-    return getViewConstructorByViewType(app, ViewType.Pdf);
+  return getViewConstructorByViewType(app, ViewType.Pdf);
 }

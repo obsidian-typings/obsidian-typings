@@ -7,41 +7,41 @@ import type { App } from 'obsidian';
  * @unofficial
  */
 export interface EmbedContext {
-    /**
-     * Reference to the app.
-     */
-    app: App;
+  /**
+   * Reference to the app.
+   */
+  app: App;
 
-    /**
-     * Element where the embed should be displayed.
-     */
-    containerEl: HTMLElement;
+  /**
+   * Element where the embed should be displayed.
+   */
+  containerEl: HTMLElement;
 
-    /**
-     * Depth of the embed within its container (how many levels of embeds are above it).
-     */
-    depth?: number;
+  /**
+   * Depth of the embed within its container (how many levels of embeds are above it).
+   */
+  depth?: number;
 
-    /**
-     * Whether the embed should be dynamic (CM) or static (postProcessed).
-     */
-    displayMode?: boolean;
+  /**
+   * Whether the embed should be dynamic (CM) or static (postProcessed).
+   */
+  displayMode?: boolean;
 
-    /**
-     * Text that should be displayed in the embed.
-     */
-    linktext?: string;
+  /**
+   * Text that should be displayed in the embed.
+   */
+  linktext?: string;
 
-    /**
-     * Whether the embed should be an inline embed.
-     */
-    showInline?: boolean;
+  /**
+   * Whether the embed should be an inline embed.
+   */
+  showInline?: boolean;
 
-    /**
-     * Optional path to the current open file.
-     */
-    sourcePath?: string;
+  /**
+   * Optional path to the current open file.
+   */
+  sourcePath?: string;
 
-    /** Serialized state to restore for the embed. */
-    state?: unknown;
+  /** Serialized state to restore for the embed. */
+  state?: unknown;
 }

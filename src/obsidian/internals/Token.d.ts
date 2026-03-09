@@ -6,9 +6,9 @@ import type { EditorRange } from 'obsidian';
  * @unofficial
  */
 export interface Token extends EditorRange {
-    /** Text content of the token. */
-    text: string;
+  /** Text content of the token. */
+  text: string;
 
-    /** Type of the token. */
-    type: 'tag' | 'external-link' | 'internal-link';
+  /** Type of the token. */
+  type: 'tag' | 'external-link' | 'internal-link';
 }

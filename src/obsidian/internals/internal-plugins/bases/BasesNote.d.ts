@@ -7,16 +7,16 @@ import type { BasesControl } from './BasesControl.d.ts';
  * @unofficial
  */
 export interface BasesNote {
-    /**
-     * Data.
-     */
-    data: Record<string, unknown>;
+  /**
+   * Data.
+   */
+  data: Record<string, unknown>;
 
-    /**
-     * Get control.
-     *
-     * @param key - The key.
-     * @returns The control.
-     */
-    get(key: string): BasesControl;
+  /**
+   * Get control.
+   *
+   * @param key - The key.
+   * @returns The control.
+   */
+  get(key: string): BasesControl;
 }

@@ -6,26 +6,26 @@ import type { App } from 'obsidian';
  * @unofficial
  */
 export interface HeaderDom {
-    /** Reference to the app. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 
-    /** Container element for navigation buttons. */
-    navButtonsEl: HTMLDivElement;
+  /** Container element for navigation buttons. */
+  navButtonsEl: HTMLDivElement;
 
-    /** Container element for the navigation header. */
-    navHeaderEl: HTMLDivElement;
+  /** Container element for the navigation header. */
+  navHeaderEl: HTMLDivElement;
 
-    /**
-     * Add a navigation button to the header.
-     *
-     * @returns The created navigation button element.
-     */
-    addNavButton(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): unknown;
+  /**
+   * Add a navigation button to the header.
+   *
+   * @returns The created navigation button element.
+   */
+  addNavButton(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): unknown;
 
-    /**
-     * Add a sort button to the header.
-     *
-     * @returns The created sort button element.
-     */
-    addSortButton(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): unknown;
+  /**
+   * Add a sort button to the header.
+   *
+   * @returns The created sort button element.
+   */
+  addSortButton(arg1: unknown, arg2: unknown, arg3: unknown, arg4: unknown): unknown;
 }

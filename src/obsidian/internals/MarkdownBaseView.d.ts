@@ -1,14 +1,14 @@
 import type { Extension } from '@codemirror/state';
 import type {
-    EditorView,
-    ViewUpdate
+  EditorView,
+  ViewUpdate
 } from '@codemirror/view';
 import type {
-    App,
-    Component,
-    Editor,
-    MarkdownFileInfo,
-    TFile
+  App,
+  Component,
+  Editor,
+  MarkdownFileInfo,
+  TFile
 } from 'obsidian';
 import type { ClipboardManager } from './ClipboardManager.d.ts';
 import type { EditorSuggests } from './EditorSuggests.d.ts';
@@ -24,293 +24,293 @@ import type { Token } from './Token.d.ts';
  * @unofficial
  */
 export interface MarkdownBaseView extends Component {
-    /**
-     * Reference to the app.
-     */
-    app: App;
+  /**
+   * Reference to the app.
+   */
+  app: App;
 
-    /**
-     * Callback to clear all elements.
-     */
-    cleanupLivePreview: null | (() => void);
+  /**
+   * Callback to clear all elements.
+   */
+  cleanupLivePreview: null | (() => void);
 
-    /**
-     * Manager that handles pasting text, html and images into the editor.
-     */
-    clipboardManager: ClipboardManager;
+  /**
+   * Manager that handles pasting text, html and images into the editor.
+   */
+  clipboardManager: ClipboardManager;
 
-    /**
-     * Codemirror editor instance.
-     */
-    cm: EditorView;
+  /**
+   * Codemirror editor instance.
+   */
+  cm: EditorView;
 
-    /**
-     * Whether CodeMirror is initialized.
-     */
-    cmInit: boolean;
+  /**
+   * Whether CodeMirror is initialized.
+   */
+  cmInit: boolean;
 
-    /**
-     * Container element of the editor view.
-     */
-    containerEl: HTMLElement;
+  /**
+   * Container element of the editor view.
+   */
+  containerEl: HTMLElement;
 
-    /**
-     * Popup element for internal link.
-     */
-    cursorPopupEl: HTMLElement | null;
+  /**
+   * Popup element for internal link.
+   */
+  cursorPopupEl: HTMLElement | null;
 
-    /**
-     * Obsidian editor instance.
-     *
-     * @remark Handles formatting, table creation, highlight adding, etc.
-     */
-    editor?: Editor;
+  /**
+   * Obsidian editor instance.
+   *
+   * @remark Handles formatting, table creation, highlight adding, etc.
+   */
+  editor?: Editor;
 
-    /**
-     * Element in which the CodeMirror editor resides.
-     */
-    editorEl: HTMLElement;
+  /**
+   * Element in which the CodeMirror editor resides.
+   */
+  editorEl: HTMLElement;
 
-    /**
-     * Editor suggester for autocompleting files, links, aliases, etc.
-     */
-    editorSuggest: EditorSuggests;
+  /**
+   * Editor suggester for autocompleting files, links, aliases, etc.
+   */
+  editorSuggest: EditorSuggests;
 
-    /**
-     * The CodeMirror plugins that handle the rendering of, and interaction with Obsidian's Markdown.
-     */
-    livePreviewPlugin: Extension[];
+  /**
+   * The CodeMirror plugins that handle the rendering of, and interaction with Obsidian's Markdown.
+   */
+  livePreviewPlugin: Extension[];
 
-    /**
-     * Local (always active) extensions for the editor.
-     */
-    localExtensions: Extension[];
+  /**
+   * Local (always active) extensions for the editor.
+   */
+  localExtensions: Extension[];
 
-    /**
-     * Controller of the editor view.
-     */
-    owner: MarkdownFileInfo;
+  /**
+   * Controller of the editor view.
+   */
+  owner: MarkdownFileInfo;
 
-    /**
-     * Whether live preview rendering is disabled.
-     */
-    sourceMode: boolean;
+  /**
+   * Whether live preview rendering is disabled.
+   */
+  sourceMode: boolean;
 
-    /**
-     * Reference to editor attached to table cell, if any.
-     */
-    tableCell: null | TableCellEditor;
+  /**
+   * Reference to editor attached to table cell, if any.
+   */
+  tableCell: null | TableCellEditor;
 
-    /**
-     * Currently active CM instance (table cell CM or main CM).
-     *
-     * @returns The active CodeMirror editor view.
-     */
-    get activeCM(): EditorView;
+  /**
+   * Currently active CM instance (table cell CM or main CM).
+   *
+   * @returns The active CodeMirror editor view.
+   */
+  get activeCM(): EditorView;
 
-    /**
-     * Apply fold history to editor.
-     *
-     * @param info - Fold information to apply.
-     */
-    applyFoldInfo(info: FoldInfo): void;
+  /**
+   * Apply fold history to editor.
+   *
+   * @param info - Fold information to apply.
+   */
+  applyFoldInfo(info: FoldInfo): void;
 
-    /**
-     * Constructs local (always active) extensions for the editor.
-     *
-     * @returns Array of CodeMirror extensions.
-     * @remark Creates extensions for handling dom events, editor info state fields, update listener, suggestions.
-     */
-    buildLocalExtensions(): Extension[];
+  /**
+   * Constructs local (always active) extensions for the editor.
+   *
+   * @returns Array of CodeMirror extensions.
+   * @remark Creates extensions for handling dom events, editor info state fields, update listener, suggestions.
+   */
+  buildLocalExtensions(): Extension[];
 
-    /**
-     * Cleanup live preview, remove and then re-add all editor extensions.
-     */
-    clear(): void;
+  /**
+   * Cleanup live preview, remove and then re-add all editor extensions.
+   */
+  clear(): void;
 
-    /**
-     * Clean up live preview, remove all extensions, destroy editor.
-     */
-    destroy(): void;
+  /**
+   * Clean up live preview, remove all extensions, destroy editor.
+   */
+  destroy(): void;
 
-    /**
-     * Removes specified tablecell.
-     *
-     * @param cell - Table cell editor to destroy.
-     */
-    destroyTableCell(cell?: TableCellEditor): void;
+  /**
+   * Removes specified tablecell.
+   *
+   * @param cell - Table cell editor to destroy.
+   */
+  destroyTableCell(cell?: TableCellEditor): void;
 
-    /**
-     * Edit a specified table cell, creating a table cell editor.
-     *
-     * @param cell - Table editor owning the cell.
-     * @param newCell - Table cell to edit.
-     * @returns The created table cell editor.
-     */
-    editTableCell(cell: TableEditor, newCell: TableCell): TableCellEditor;
+  /**
+   * Edit a specified table cell, creating a table cell editor.
+   *
+   * @param cell - Table editor owning the cell.
+   * @param newCell - Table cell to edit.
+   * @returns The created table cell editor.
+   */
+  editTableCell(cell: TableEditor, newCell: TableCell): TableCellEditor;
 
-    /**
-     * Returns attached file of the owner instance.
-     *
-     * @returns The attached file, or `null`.
-     */
-    get file(): TFile | null;
+  /**
+   * Returns attached file of the owner instance.
+   *
+   * @returns The attached file, or `null`.
+   */
+  get file(): TFile | null;
 
-    /**
-     * Get the current editor document as a string.
-     *
-     * @returns The editor document content.
-     */
-    get(): string;
+  /**
+   * Get the current editor document as a string.
+   *
+   * @returns The editor document content.
+   */
+  get(): string;
 
-    /**
-     * Constructs extensions for the editor based on user settings.
-     *
-     * @returns Array of dynamic CodeMirror extensions.
-     * @remark Creates extension for tab size, RTL rendering, spellchecking, pairing markdown syntax, live preview and vim.
-     */
-    getDynamicExtensions(): Extension[];
+  /**
+   * Constructs extensions for the editor based on user settings.
+   *
+   * @returns Array of dynamic CodeMirror extensions.
+   * @remark Creates extension for tab size, RTL rendering, spellchecking, pairing markdown syntax, live preview and vim.
+   */
+  getDynamicExtensions(): Extension[];
 
-    /**
-     * Get the current folds of the editor.
-     *
-     * @returns Current fold information, or `null`.
-     */
-    getFoldInfo(): null | FoldInfo;
+  /**
+   * Get the current folds of the editor.
+   *
+   * @returns Current fold information, or `null`.
+   */
+  getFoldInfo(): null | FoldInfo;
 
-    /**
-     * Builds all local extensions and assigns to `this.localExtensions`.
-     *
-     * @returns The local extensions.
-     * @remark Will build extensions if they were not already built.
-     */
-    getLocalExtensions(): unknown;
+  /**
+   * Builds all local extensions and assigns to `this.localExtensions`.
+   *
+   * @returns The local extensions.
+   * @remark Will build extensions if they were not already built.
+   */
+  getLocalExtensions(): unknown;
 
-    /**
-     * Creates menu on right mouse click.
-     *
-     * @param event - The pointer event.
-     * @param x - Whether the context menu was triggered by keyboard.
-     * @returns A promise that resolves when the context menu is handled.
-     */
-    onContextMenu(event: PointerEvent, x: boolean): Promise<void>;
+  /**
+   * Creates menu on right mouse click.
+   *
+   * @param event - The pointer event.
+   * @param x - Whether the context menu was triggered by keyboard.
+   * @returns A promise that resolves when the context menu is handled.
+   */
+  onContextMenu(event: PointerEvent, x: boolean): Promise<void>;
 
-    /**
-     * Execute click functionality on token on mouse click.
-     *
-     * @param event - The mouse event.
-     * @param element - The clicked element.
-     */
-    onEditorClick(event: MouseEvent, element?: HTMLElement): void;
+  /**
+   * Execute click functionality on token on mouse click.
+   *
+   * @param event - The mouse event.
+   * @param element - The clicked element.
+   */
+  onEditorClick(event: MouseEvent, element?: HTMLElement): void;
 
-    /**
-     * Execute drag functionality on drag start.
-     *
-     * @param event - The drag event.
-     * @remark Interfaces with dragManager.
-     */
-    onEditorDragStart(event: DragEvent): void;
+  /**
+   * Execute drag functionality on drag start.
+   *
+   * @param event - The drag event.
+   * @remark Interfaces with dragManager.
+   */
+  onEditorDragStart(event: DragEvent): void;
 
-    /**
-     * Execute hover functionality on mouse over event.
-     *
-     * @param event - The mouse event.
-     * @param target - The hovered element.
-     */
-    onEditorLinkMouseover(event: MouseEvent, target: HTMLElement): void;
+  /**
+   * Execute hover functionality on mouse over event.
+   *
+   * @param event - The mouse event.
+   * @param target - The hovered element.
+   */
+  onEditorLinkMouseover(event: MouseEvent, target: HTMLElement): void;
 
-    /**
-     * Execute context menu functionality on right mouse click.
-     *
-     * @param event - The mouse event.
-     * @deprecated Use {@link MarkdownBaseView.onContextMenu} instead.
-     */
-    onMenu(event: MouseEvent): void;
+  /**
+   * Execute context menu functionality on right mouse click.
+   *
+   * @param event - The mouse event.
+   * @deprecated Use {@link MarkdownBaseView.onContextMenu} instead.
+   */
+  onMenu(event: MouseEvent): void;
 
-    /**
-     * Reposition suggest and scroll position on resize.
-     */
-    onResize(): void;
+  /**
+   * Reposition suggest and scroll position on resize.
+   */
+  onResize(): void;
 
-    /**
-     * Execute functionality on CM editor state update.
-     *
-     * @param update - The CodeMirror view update.
-     * @param changed - Whether the document content changed.
-     */
-    onUpdate(update: ViewUpdate, changed: boolean): void;
+  /**
+   * Execute functionality on CM editor state update.
+   *
+   * @param update - The CodeMirror view update.
+   * @param changed - Whether the document content changed.
+   */
+  onUpdate(update: ViewUpdate, changed: boolean): void;
 
-    /**
-     * Returns path of the attached file.
-     *
-     * @returns The file path.
-     */
-    get path(): string;
+  /**
+   * Returns path of the attached file.
+   *
+   * @returns The file path.
+   */
+  get path(): string;
 
-    /**
-     * Reinitialize the editor inside new container.
-     */
-    reinit(): void;
+  /**
+   * Reinitialize the editor inside new container.
+   */
+  reinit(): void;
 
-    /**
-     * Move the editor into the new container.
-     *
-     * @param newContainer - New container element for the editor.
-     */
-    reparent(newContainer: HTMLElement): void;
+  /**
+   * Move the editor into the new container.
+   *
+   * @param newContainer - New container element for the editor.
+   */
+  reparent(newContainer: HTMLElement): void;
 
-    /**
-     * Bodge to reset the syntax highlighting.
-     *
-     * @remark Uses single-character replacement transaction.
-     */
-    resetSyntaxHighlighting(): void;
+  /**
+   * Bodge to reset the syntax highlighting.
+   *
+   * @remark Uses single-character replacement transaction.
+   */
+  resetSyntaxHighlighting(): void;
 
-    /**
-     * Save history of file and data (for caching, for faster reopening of same file in editor).
-     */
-    saveHistory(): void;
+  /**
+   * Save history of file and data (for caching, for faster reopening of same file in editor).
+   */
+  saveHistory(): void;
 
-    /**
-     * Set the state of the editor.
-     *
-     * @param data - Document content to set.
-     * @param clear - Whether to clear existing state.
-     */
-    set(data: string, clear: boolean): void;
+  /**
+   * Set the state of the editor.
+   *
+   * @param data - Document content to set.
+   * @param clear - Whether to clear existing state.
+   */
+  set(data: string, clear: boolean): void;
 
-    /**
-     * Enables/disables frontmatter folding.
-     */
-    toggleFoldFrontmatter(): void;
+  /**
+   * Enables/disables frontmatter folding.
+   */
+  toggleFoldFrontmatter(): void;
 
-    /**
-     * Toggle source mode for editor and dispatch effect.
-     */
-    toggleSource(): void;
+  /**
+   * Toggle source mode for editor and dispatch effect.
+   */
+  toggleSource(): void;
 
-    /**
-     * Execute functionality of token (open external link, open internal link in leaf, ...).
-     *
-     * @param token - The clickable token.
-     * @param newLeaf - Whether to open in a new leaf.
-     */
-    triggerClickableToken(token: Token, newLeaf: boolean): void;
+  /**
+   * Execute functionality of token (open external link, open internal link in leaf, ...).
+   *
+   * @param token - The clickable token.
+   * @param newLeaf - Whether to open in a new leaf.
+   */
+  triggerClickableToken(token: Token, newLeaf: boolean): void;
 
-    /**
-     * Callback for onUpdate functionality added as an extension.
-     *
-     * @returns A callback function that handles view updates.
-     */
-    updateEvent(): (update: ViewUpdate) => void;
+  /**
+   * Callback for onUpdate functionality added as an extension.
+   *
+   * @returns A callback function that handles view updates.
+   */
+  updateEvent(): (update: ViewUpdate) => void;
 
-    /**
-     * In mobile, creates a popover link on clickable token, if exists.
-     */
-    updateLinkPopup(): void;
+  /**
+   * In mobile, creates a popover link on clickable token, if exists.
+   */
+  updateLinkPopup(): void;
 
-    /**
-     * Reconfigure/re-add all the dynamic extensions.
-     */
-    updateOptions(): void;
+  /**
+   * Reconfigure/re-add all the dynamic extensions.
+   */
+  updateOptions(): void;
 }

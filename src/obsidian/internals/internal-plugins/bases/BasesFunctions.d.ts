@@ -53,238 +53,238 @@ import type { YearFunction } from './functions/YearFunction.d.ts';
  * @unofficial
  */
 export interface BasesFunctions {
-    /**
-     * The not equal function.
-     */
-    '!=': NotEqualFunction;
+  /**
+   * The not equal function.
+   */
+  '!=': NotEqualFunction;
 
-    /**
-     * The less than function.
-     */
-    '<': LessFunction;
+  /**
+   * The less than function.
+   */
+  '<': LessFunction;
 
-    /**
-     * The less than or equal to function.
-     */
-    '<=': LessOrEqualFunction;
+  /**
+   * The less than or equal to function.
+   */
+  '<=': LessOrEqualFunction;
 
-    /**
-     * The equal function.
-     */
-    '==': EqualFunction;
+  /**
+   * The equal function.
+   */
+  '==': EqualFunction;
 
-    /**
-     * The greater than function.
-     */
-    '>': GreaterFunction;
+  /**
+   * The greater than function.
+   */
+  '>': GreaterFunction;
 
-    /**
-     * The greater than or equal to function.
-     */
-    '>=': GreaterOrEqualFunction;
+  /**
+   * The greater than or equal to function.
+   */
+  '>=': GreaterOrEqualFunction;
 
-    /**
-     * The absolute function.
-     */
-    abs: AbsFunction;
+  /**
+   * The absolute function.
+   */
+  abs: AbsFunction;
 
-    /**
-     * The ceiling function.
-     */
-    ceil: CeilFunction;
+  /**
+   * The ceiling function.
+   */
+  ceil: CeilFunction;
 
-    /**
-     * The concat function.
-     */
-    concat: ConcatFunction;
+  /**
+   * The concat function.
+   */
+  concat: ConcatFunction;
 
-    /**
-     * The contains function.
-     */
-    contains: ContainsFunction;
+  /**
+   * The contains function.
+   */
+  contains: ContainsFunction;
 
-    /**
-     * The contains all function.
-     */
-    containsAll: ContainsAllFunction;
+  /**
+   * The contains all function.
+   */
+  containsAll: ContainsAllFunction;
 
-    /**
-     * The contains any function.
-     */
-    containsAny: ContainsAnyFunction;
+  /**
+   * The contains any function.
+   */
+  containsAny: ContainsAnyFunction;
 
-    /**
-     * The contains none function.
-     */
-    containsNone: ContainsNoneFunction;
+  /**
+   * The contains none function.
+   */
+  containsNone: ContainsNoneFunction;
 
-    /**
-     * The date after function.
-     */
-    dateAfter: DateAfterFunction;
+  /**
+   * The date after function.
+   */
+  dateAfter: DateAfterFunction;
 
-    /**
-     * The date before function.
-     */
-    dateBefore: DateBeforeFunction;
+  /**
+   * The date before function.
+   */
+  dateBefore: DateBeforeFunction;
 
-    /**
-     * The date diff function.
-     */
-    dateDiff: DateDiffFunction;
+  /**
+   * The date diff function.
+   */
+  dateDiff: DateDiffFunction;
 
-    /**
-     * The date equals function.
-     */
-    dateEquals: DateEqualsFunction;
+  /**
+   * The date equals function.
+   */
+  dateEquals: DateEqualsFunction;
 
-    /**
-     * The date modify function.
-     */
-    dateModify: DateModifyFunction;
+  /**
+   * The date modify function.
+   */
+  dateModify: DateModifyFunction;
 
-    /**
-     * The date not equals function.
-     */
-    dateNotEquals: DateNotEqualsFunction;
+  /**
+   * The date not equals function.
+   */
+  dateNotEquals: DateNotEqualsFunction;
 
-    /**
-     * The date on or after function.
-     */
-    dateOnOrAfter: DateOnOrAfterFunction;
+  /**
+   * The date on or after function.
+   */
+  dateOnOrAfter: DateOnOrAfterFunction;
 
-    /**
-     * The date on or before function.
-     */
-    dateOnOrBefore: DateOnOrBeforeFunction;
+  /**
+   * The date on or before function.
+   */
+  dateOnOrBefore: DateOnOrBeforeFunction;
 
-    /**
-     * The day function.
-     */
-    day: DayFunction;
+  /**
+   * The day function.
+   */
+  day: DayFunction;
 
-    /**
-     * The empty function.
-     */
-    empty: EmptyFunction;
+  /**
+   * The empty function.
+   */
+  empty: EmptyFunction;
 
-    /**
-     * The flat function.
-     */
-    flat: FlatFunction;
+  /**
+   * The flat function.
+   */
+  flat: FlatFunction;
 
-    /**
-     * The floor function.
-     */
-    floor: FloorFunction;
+  /**
+   * The floor function.
+   */
+  floor: FloorFunction;
 
-    /**
-     * The hour function.
-     */
-    hour: HourFunction;
+  /**
+   * The hour function.
+   */
+  hour: HourFunction;
 
-    /**
-     * The if function.
-     */
-    if: IfFunction;
+  /**
+   * The if function.
+   */
+  if: IfFunction;
 
-    /**
-     * The index function.
-     */
-    index: IndexFunction;
+  /**
+   * The index function.
+   */
+  index: IndexFunction;
 
-    /**
-     * The in folder function.
-     */
-    inFolder: InFolderFunction;
+  /**
+   * The in folder function.
+   */
+  inFolder: InFolderFunction;
 
-    /**
-     * The join function.
-     */
-    join: JoinFunction;
+  /**
+   * The join function.
+   */
+  join: JoinFunction;
 
-    /**
-     * The length function.
-     */
-    len: LenFunction;
+  /**
+   * The length function.
+   */
+  len: LenFunction;
 
-    /**
-     * The links to function.
-     */
-    linksTo: LinksToFunction;
+  /**
+   * The links to function.
+   */
+  linksTo: LinksToFunction;
 
-    /**
-     * The minimum function.
-     */
-    min: MinFunction;
+  /**
+   * The minimum function.
+   */
+  min: MinFunction;
 
-    /**
-     * The minute function.
-     */
-    minute: MinuteFunction;
+  /**
+   * The minute function.
+   */
+  minute: MinuteFunction;
 
-    /**
-     * The month function.
-     */
-    month: MonthFunction;
+  /**
+   * The month function.
+   */
+  month: MonthFunction;
 
-    /**
-     * The not function.
-     */
-    not: NotFunction;
+  /**
+   * The not function.
+   */
+  not: NotFunction;
 
-    /**
-     * The not contains function.
-     */
-    notContains: NotContainsFunction;
+  /**
+   * The not contains function.
+   */
+  notContains: NotContainsFunction;
 
-    /**
-     * The not empty function.
-     */
-    notEmpty: NotEmptyFunction;
+  /**
+   * The not empty function.
+   */
+  notEmpty: NotEmptyFunction;
 
-    /**
-     * The now function.
-     */
-    now: NowFunction;
+  /**
+   * The now function.
+   */
+  now: NowFunction;
 
-    /**
-     * The round function.
-     */
-    round: RoundFunction;
+  /**
+   * The round function.
+   */
+  round: RoundFunction;
 
-    /**
-     * The second function.
-     */
-    second: SecondFunction;
+  /**
+   * The second function.
+   */
+  second: SecondFunction;
 
-    /**
-     * The slice function.
-     */
-    slice: SliceFunction;
+  /**
+   * The slice function.
+   */
+  slice: SliceFunction;
 
-    /**
-     * The tagged with function.
-     */
-    taggedWith: TaggedWithFunction;
+  /**
+   * The tagged with function.
+   */
+  taggedWith: TaggedWithFunction;
 
-    /**
-     * The title function.
-     */
-    title: TitleFunction;
+  /**
+   * The title function.
+   */
+  title: TitleFunction;
 
-    /**
-     * The trim function.
-     */
-    trim: TrimFunction;
+  /**
+   * The trim function.
+   */
+  trim: TrimFunction;
 
-    /**
-     * The unique function.
-     */
-    unique: UniqueFunction;
+  /**
+   * The unique function.
+   */
+  unique: UniqueFunction;
 
-    /**
-     * The year function.
-     */
-    year: YearFunction;
+  /**
+   * The year function.
+   */
+  year: YearFunction;
 }

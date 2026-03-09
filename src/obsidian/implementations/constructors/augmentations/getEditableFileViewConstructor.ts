@@ -1,5 +1,5 @@
 import {
-    EditableFileView
+  EditableFileView
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type EditableFileViewConstructor = ExtractConstructor<EditableFileView>;
  * @unofficial
  */
 export function getEditableFileViewConstructor(): EditableFileViewConstructor {
-    return EditableFileView as EditableFileViewConstructor;
+  return EditableFileView as EditableFileViewConstructor;
 }

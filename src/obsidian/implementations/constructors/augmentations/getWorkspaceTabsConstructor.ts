@@ -1,5 +1,5 @@
 import {
-    WorkspaceTabs
+  WorkspaceTabs
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type WorkspaceTabsConstructor = ExtractConstructor<WorkspaceTabs>;
  * @unofficial
  */
 export function getWorkspaceTabsConstructor(): WorkspaceTabsConstructor {
-    return WorkspaceTabs as WorkspaceTabsConstructor;
+  return WorkspaceTabs as WorkspaceTabsConstructor;
 }

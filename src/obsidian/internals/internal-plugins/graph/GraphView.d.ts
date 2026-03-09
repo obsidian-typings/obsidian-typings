@@ -10,26 +10,26 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  * @unofficial
  */
 export interface GraphView extends ItemView {
-    /** Graph engine powering the global graph simulation. */
-    dataEngine: GraphEngine;
+  /** Graph engine powering the global graph simulation. */
+  dataEngine: GraphEngine;
 
-    /** Renderer responsible for drawing the global graph. */
-    renderer: GraphRenderer;
+  /** Renderer responsible for drawing the global graph. */
+  renderer: GraphRenderer;
 
-    /**
-     * Get the current view type.
-     *
-     * @returns The graph view type.
-     */
-    getViewType(): typeof ViewType.Graph;
+  /**
+   * Get the current view type.
+   *
+   * @returns The graph view type.
+   */
+  getViewType(): typeof ViewType.Graph;
 
-    /**
-     * Updates the options from the plugin when changed in view.
-     */
-    onOptionsChange(): void;
+  /**
+   * Updates the options from the plugin when changed in view.
+   */
+  onOptionsChange(): void;
 
-    /**
-     * Renders the graph.
-     */
-    update(): void;
+  /**
+   * Renders the graph.
+   */
+  update(): void;
 }

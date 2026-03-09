@@ -1,23 +1,23 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Result of resolving footnotes using {@link resolveSubpath}
+   * @since 1.7.2
+   */
+  interface FootnoteSubpathResult extends SubpathResult {
     /**
-     * Result of resolving footnotes using {@link resolveSubpath}
-     * @since 1.7.2
+     * The found footnote.
+     *
+     * @official
      */
-    interface FootnoteSubpathResult extends SubpathResult {
-        /**
-         * The found footnote.
-         *
-         * @official
-         */
-        footnote: FootnoteCache;
+    footnote: FootnoteCache;
 
-        /**
-         * The type of the subpath result.
-         *
-         * @official
-         */
-        type: 'footnote';
-    }
+    /**
+     * The type of the subpath result.
+     *
+     * @official
+     */
+    type: 'footnote';
+  }
 }

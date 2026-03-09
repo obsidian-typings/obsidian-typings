@@ -1,5 +1,5 @@
 import {
-    Keymap
+  Keymap
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type KeymapConstructor = ExtractConstructor<Keymap>;
  * @unofficial
  */
 export function getKeymapConstructor(): KeymapConstructor {
-    return Keymap as KeymapConstructor;
+  return Keymap as KeymapConstructor;
 }

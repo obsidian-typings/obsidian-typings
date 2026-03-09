@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getBasesViewConstructor(app: App): ExtractConstructor<BasesView> {
-    return getViewConstructorByViewType(app, ViewType.Bases);
+  return getViewConstructorByViewType(app, ViewType.Bases);
 }

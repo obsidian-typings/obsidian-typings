@@ -8,42 +8,42 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface DatePropertyWidgetComponentBase extends PropertyWidgetComponentBase {
-    /** The date of the property widget. */
-    date?: moment.Moment;
+  /** The date of the property widget. */
+  date?: moment.Moment;
 
-    /** Whether the property widget is dirty. */
-    dirty: boolean;
+  /** Whether the property widget is dirty. */
+  dirty: boolean;
 
-    /** The hover popup for the property widget. */
-    hoverPopup: HoverPopover | null;
+  /** The hover popup for the property widget. */
+  hoverPopup: HoverPopover | null;
 
-    /** The input element for the property widget. */
-    inputEl: HTMLInputElement;
+  /** The input element for the property widget. */
+  inputEl: HTMLInputElement;
 
-    /** The value of the property widget. */
-    value: string;
+  /** The value of the property widget. */
+  value: string;
 
-    /**
-     * Build the input element for the property widget.
-     *
-     * @param parentEl - The parent element.
-     * @returns The input element.
-     */
-    buildInput(parentEl: HTMLElement): HTMLInputElement;
+  /**
+   * Build the input element for the property widget.
+   *
+   * @param parentEl - The parent element.
+   * @returns The input element.
+   */
+  buildInput(parentEl: HTMLElement): HTMLInputElement;
 
-    /**
-     * Format the date input.
-     *
-     * @param input - The input to format.
-     * @returns The formatted date.
-     */
-    format(input: moment.Moment): string;
+  /**
+   * Format the date input.
+   *
+   * @param input - The input to format.
+   * @returns The formatted date.
+   */
+  format(input: moment.Moment): string;
 
-    /**
-     * Parse the date input.
-     *
-     * @param input - The input to parse.
-     * @returns The parsed date.
-     */
-    parse(input: moment.MomentInput): void;
+  /**
+   * Parse the date input.
+   *
+   * @param input - The input to parse.
+   * @returns The parsed date.
+   */
+  parse(input: moment.MomentInput): void;
 }

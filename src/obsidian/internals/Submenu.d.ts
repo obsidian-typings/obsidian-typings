@@ -4,9 +4,9 @@
  * @unofficial
  */
 export interface Submenu {
-    /** Icon identifier for the submenu item. */
-    icon: string;
+  /** Icon identifier for the submenu item. */
+  icon: string;
 
-    /** Display title for the submenu item. */
-    title: string;
+  /** Display title for the submenu item. */
+  title: string;
 }

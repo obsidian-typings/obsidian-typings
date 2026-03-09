@@ -1,5 +1,5 @@
 import {
-    WorkspaceMobileDrawer
+  WorkspaceMobileDrawer
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -13,5 +13,5 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @unofficial
  */
 export function getWorkspaceMobileDrawerConstructor(): ExtractConstructor<WorkspaceMobileDrawer> {
-    return WorkspaceMobileDrawer as ExtractConstructor<WorkspaceMobileDrawer>;
+  return WorkspaceMobileDrawer as ExtractConstructor<WorkspaceMobileDrawer>;
 }

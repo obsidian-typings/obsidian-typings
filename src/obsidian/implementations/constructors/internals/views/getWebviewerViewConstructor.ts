@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getWebviewerViewConstructor(app: App): ExtractConstructor<WebviewerView> {
-    return getViewConstructorByViewType(app, ViewType.Webviewer);
+  return getViewConstructorByViewType(app, ViewType.Webviewer);
 }

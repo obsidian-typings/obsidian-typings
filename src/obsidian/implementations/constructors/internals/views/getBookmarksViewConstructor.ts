@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getBookmarksViewConstructor(app: App): ExtractConstructor<BookmarksView> {
-    return getViewConstructorByViewType(app, ViewType.Bookmarks);
+  return getViewConstructorByViewType(app, ViewType.Bookmarks);
 }

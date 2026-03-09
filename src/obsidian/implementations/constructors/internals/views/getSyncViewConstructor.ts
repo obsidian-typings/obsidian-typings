@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getSyncViewConstructor(app: App): ExtractConstructor<SyncView> {
-    return getViewConstructorByViewType(app, ViewType.Sync);
+  return getViewConstructorByViewType(app, ViewType.Sync);
 }

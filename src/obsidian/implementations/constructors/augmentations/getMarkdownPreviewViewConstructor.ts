@@ -1,5 +1,5 @@
 import {
-    MarkdownPreviewView
+  MarkdownPreviewView
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type MarkdownPreviewViewConstructor = ExtractConstructor<MarkdownPreviewView>;
  * @unofficial
  */
 export function getMarkdownPreviewViewConstructor(): MarkdownPreviewViewConstructor {
-    return MarkdownPreviewView as unknown as MarkdownPreviewViewConstructor;
+  return MarkdownPreviewView as unknown as MarkdownPreviewViewConstructor;
 }

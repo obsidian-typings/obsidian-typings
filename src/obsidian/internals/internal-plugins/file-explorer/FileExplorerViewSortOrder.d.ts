@@ -5,9 +5,9 @@
  * @unofficial
  */
 export type FileExplorerViewSortOrder =
-    | 'alphabetical'
-    | 'alphabeticalReverse'
-    | 'byCreatedTime'
-    | 'byCreatedTimeReverse'
-    | 'byModifiedTime'
-    | 'byModifiedTimeReverse';
+  | 'alphabetical'
+  | 'alphabeticalReverse'
+  | 'byCreatedTime'
+  | 'byCreatedTimeReverse'
+  | 'byModifiedTime'
+  | 'byModifiedTimeReverse';

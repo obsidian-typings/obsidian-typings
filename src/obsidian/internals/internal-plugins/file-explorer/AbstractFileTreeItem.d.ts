@@ -12,46 +12,46 @@ import type { FileTreeItemParent } from './FileTreeItemParent.d.ts';
  * @unofficial
  */
 export interface AbstractFileTreeItem<T extends TAbstractFile> extends TreeItem {
-    /**
-     * Associated file with this item.
-     */
-    file: T;
+  /**
+   * Associated file with this item.
+   */
+  file: T;
 
-    /** Tree node metadata and layout information. */
-    info: TreeNodeInfo;
+  /** Tree node metadata and layout information. */
+  info: TreeNodeInfo;
 
-    /** Parent tree item (folder or tree root). */
-    parent: FileTreeItemParent;
+  /** Parent tree item (folder or tree root). */
+  parent: FileTreeItemParent;
 
-    /** Whether this item has been rendered to the DOM. */
-    rendered: boolean;
+  /** Whether this item has been rendered to the DOM. */
+  rendered: boolean;
 
-    /** Reference to the file explorer view containing this item. */
-    view: FileExplorerView;
+  /** Reference to the file explorer view containing this item. */
+  view: FileExplorerView;
 
-    /**
-     * Get the display title for this tree item.
-     *
-     * @returns The display title.
-     */
-    getTitle(): string;
+  /**
+   * Get the display title for this tree item.
+   *
+   * @returns The display title.
+   */
+  getTitle(): string;
 
-    /**
-     * Whether the full timestamp is shown for this item.
-     *
-     * @returns Whether the full timestamp is shown.
-     */
-    isFullTimeShown(): boolean;
+  /**
+   * Whether the full timestamp is shown for this item.
+   *
+   * @returns Whether the full timestamp is shown.
+   */
+  isFullTimeShown(): boolean;
 
-    /** Called when this item is rendered to the DOM. */
-    onRender(): void;
+  /** Called when this item is rendered to the DOM. */
+  onRender(): void;
 
-    /** Begin inline renaming of this tree item. */
-    startRename(): void;
+  /** Begin inline renaming of this tree item. */
+  startRename(): void;
 
-    /** Cancel inline renaming of this tree item. */
-    stopRename(): void;
+  /** Cancel inline renaming of this tree item. */
+  stopRename(): void;
 
-    /** Refresh the displayed title of this tree item. */
-    updateTitle(): void;
+  /** Refresh the displayed title of this tree item. */
+  updateTitle(): void;
 }

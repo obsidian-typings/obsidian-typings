@@ -6,9 +6,9 @@ import type { PropertyWidget } from '../PropertyWidget.d.ts';
  * @unofficial
  */
 export interface TypeInfo {
-    /** The explicitly assigned property widget type. */
-    expected: PropertyWidget;
+  /** The explicitly assigned property widget type. */
+  expected: PropertyWidget;
 
-    /** The property widget type inferred from the value. */
-    inferred: PropertyWidget;
+  /** The property widget type inferred from the value. */
+  inferred: PropertyWidget;
 }

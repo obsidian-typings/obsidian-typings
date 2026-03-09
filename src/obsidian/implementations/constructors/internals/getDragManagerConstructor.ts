@@ -14,5 +14,5 @@ type DragManagerConstructor = ExtractConstructor<DragManager>;
  * @unofficial
  */
 export function getDragManagerConstructor(app: App): DragManagerConstructor {
-    return app.dragManager.constructor as DragManagerConstructor;
+  return app.dragManager.constructor as DragManagerConstructor;
 }

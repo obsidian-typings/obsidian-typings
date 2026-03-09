@@ -1,37 +1,37 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Event reference
+   */
+  interface EventRef {
     /**
-     * Event reference
+     * Context applied to the event callback.
+     *
+     * @unofficial
      */
-    interface EventRef {
-        /**
-         * Context applied to the event callback.
-         *
-         * @unofficial
-         */
-        ctx?: unknown;
+    ctx?: unknown;
 
-        /**
-         * Events object the event was registered on.
-         *
-         * @unofficial
-         */
-        e: Events;
+    /**
+     * Events object the event was registered on.
+     *
+     * @unofficial
+     */
+    e: Events;
 
-        /**
-         * Event name the event was registered on.
-         *
-         * @unofficial
-         */
-        name: string;
+    /**
+     * Event name the event was registered on.
+     *
+     * @unofficial
+     */
+    name: string;
 
-        /**
-         * Function to be called on event trigger on the events object.
-         *
-         * @param arg - The event arguments.
-         * @unofficial
-         */
-        fn(...arg: unknown[]): void;
-    }
+    /**
+     * Function to be called on event trigger on the events object.
+     *
+     * @param arg - The event arguments.
+     * @unofficial
+     */
+    fn(...arg: unknown[]): void;
+  }
 }

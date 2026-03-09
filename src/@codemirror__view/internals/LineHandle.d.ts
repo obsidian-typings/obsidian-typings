@@ -4,9 +4,9 @@
  * @unofficial
  */
 export interface LineHandle {
-    /** Index of the line in the document. */
-    index: number;
+  /** Index of the line in the document. */
+  index: number;
 
-    /** Row number of the line. */
-    row: number;
+  /** Row number of the line. */
+  row: number;
 }

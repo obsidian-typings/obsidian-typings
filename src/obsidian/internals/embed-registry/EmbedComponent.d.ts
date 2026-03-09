@@ -7,8 +7,8 @@ import type { Component } from 'obsidian';
  * @unofficial
  */
 export interface EmbedComponent extends Component {
-    /**
-     * Load the file into the component.
-     */
-    loadFile(): void;
+  /**
+   * Load the file into the component.
+   */
+  loadFile(): void;
 }

@@ -1,5 +1,5 @@
 import {
-    WorkspaceSidedock
+  WorkspaceSidedock
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type WorkspaceSidedockConstructor = ExtractConstructor<WorkspaceSidedock>;
  * @unofficial
  */
 export function getWorkspaceSidedockConstructor(): WorkspaceSidedockConstructor {
-    return WorkspaceSidedock as WorkspaceSidedockConstructor;
+  return WorkspaceSidedock as WorkspaceSidedockConstructor;
 }

@@ -7,9 +7,9 @@ import type { ResultProperty } from './ResultProperty.d.ts';
  * @unofficial
  */
 export interface ResultDomResult {
-    /** Array of content match positions within the document. */
-    content: ContentPosition[];
+  /** Array of content match positions within the document. */
+  content: ContentPosition[];
 
-    /** Array of matched property results. */
-    properties: ResultProperty[];
+  /** Array of matched property results. */
+  properties: ResultProperty[];
 }

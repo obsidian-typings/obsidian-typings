@@ -7,11 +7,11 @@ import type { SQLResultSet } from './SQLResultSet.d.ts';
  * @unofficial
  */
 export interface SQLTransaction {
-    /** Execute a SQL statement within this transaction. */
-    executeSql(
-        sqlStatement: string,
-        arguments?: unknown[],
-        callback?: (transaction: SQLTransaction, resultSet: SQLResultSet) => void,
-        errorCallback?: (transaction: SQLTransaction, error: SQLError) => boolean
-    ): void;
+  /** Execute a SQL statement within this transaction. */
+  executeSql(
+    sqlStatement: string,
+    arguments?: unknown[],
+    callback?: (transaction: SQLTransaction, resultSet: SQLResultSet) => void,
+    errorCallback?: (transaction: SQLTransaction, error: SQLError) => boolean
+  ): void;
 }

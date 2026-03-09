@@ -6,9 +6,9 @@ import type { EditorSuggest } from 'obsidian';
  * @unofficial
  */
 export interface EditorSuggestEx {
-    /** Currently active and rendered editor suggestion popup. */
-    currentSuggest?: EditorSuggest<unknown>;
+  /** Currently active and rendered editor suggestion popup. */
+  currentSuggest?: EditorSuggest<unknown>;
 
-    /** Registered editor suggestion providers. */
-    suggests: EditorSuggest<unknown>[];
+  /** Registered editor suggestion providers. */
+  suggests: EditorSuggest<unknown>[];
 }

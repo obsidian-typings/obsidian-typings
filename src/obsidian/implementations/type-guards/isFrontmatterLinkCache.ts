@@ -1,6 +1,6 @@
 import type {
-    FrontmatterLinkCache,
-    Reference
+  FrontmatterLinkCache,
+  Reference
 } from 'obsidian';
 
 /**
@@ -13,5 +13,5 @@ import type {
  * @unofficial
  */
 export function isFrontmatterLinkCache(reference: Reference): reference is FrontmatterLinkCache {
-    return !!(reference as Partial<FrontmatterLinkCache>).key;
+  return !!(reference as Partial<FrontmatterLinkCache>).key;
 }

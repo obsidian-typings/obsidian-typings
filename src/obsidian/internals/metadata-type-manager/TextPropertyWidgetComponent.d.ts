@@ -8,40 +8,40 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface TextPropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** The container element for the property widget. */
-    containerEl: HTMLElement;
+  /** The container element for the property widget. */
+  containerEl: HTMLElement;
 
-    /** The render context for the property widget. */
-    ctx: PropertyRenderContext;
+  /** The render context for the property widget. */
+  ctx: PropertyRenderContext;
 
-    /** The hover popover for the property widget. */
-    hoverPopover: null;
+  /** The hover popover for the property widget. */
+  hoverPopover: null;
 
-    /** The input element for the property widget. */
-    inputEl: HTMLInputElement;
+  /** The input element for the property widget. */
+  inputEl: HTMLInputElement;
 
-    /** The type of the property widget. */
-    type: 'text';
+  /** The type of the property widget. */
+  type: 'text';
 
-    /** The value of the property widget. */
-    value: string;
+  /** The value of the property widget. */
+  value: string;
 
-    /**
-     * Handle focus event.
-     *
-     * @param mode - The focus mode.
-     */
-    onFocus(): void;
+  /**
+   * Handle focus event.
+   *
+   * @param mode - The focus mode.
+   */
+  onFocus(): void;
 
-    /**
-     * Render the property widget.
-     */
-    render(): void;
+  /**
+   * Render the property widget.
+   */
+  render(): void;
 
-    /**
-     * Set the value of the property widget.
-     *
-     * @param value - The value to set.
-     */
-    setValue(value: unknown): void;
+  /**
+   * Set the value of the property widget.
+   *
+   * @param value - The value to set.
+   */
+  setValue(value: unknown): void;
 }

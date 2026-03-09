@@ -1,47 +1,47 @@
 import type {
-    getLinkValueConstructor
+  getLinkValueConstructor
 } from '../../implementations/constructors/augmentations/getLinkValueConstructor.d.ts';
 
 export {};
 
 declare module 'obsidian' {
+  /**
+   * {@link Value} wrapping an internal wikilink.
+   *
+   * @since 1.10.0
+   */
+  interface LinkValue extends StringValue {
     /**
-     * {@link Value} wrapping an internal wikilink.
+     * Constructor.
      *
-     * @since 1.10.0
+     * To get the constructor instance, use {@link getLinkValueConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param value - The value.
+     * @returns The new instance.
+     * @unofficial
+     * @deprecated - Added only for typing purposes.
      */
-    interface LinkValue extends StringValue {
-        /**
-         * Constructor.
-         *
-         * To get the constructor instance, use {@link getLinkValueConstructor} from `obsidian-typings/implementations`.
-         *
-         * @param value - The value.
-         * @returns The new instance.
-         * @unofficial
-         * @deprecated - Added only for typing purposes.
-         */
-        constructor5__(value: string): this;
-    }
+    constructor5__(value: string): this;
+  }
 
-    namespace LinkValue {
-        /**
-         * Create a new LinkValue from wikilink syntax.
-         *
-         * @param app - The app instance.
-         * @param input - The wikilink syntax.
-         * @param sourcePath - The source path.
-         * @returns The new LinkValue.
-         *
-         * @example
-         * ```typescript
-         * parseFromString("[[Welcome|Example Link]]")
-         * ```
-         *
-         * @official
-         * @since 1.10.0
-         * @deprecated - Added only for typing purposes. Use {@link LinkValue.parseFromString} instead.
-         */
-        function parseFromString__(app: App, input: string, sourcePath: string): LinkValue | null;
-    }
+  namespace LinkValue {
+    /**
+     * Create a new LinkValue from wikilink syntax.
+     *
+     * @param app - The app instance.
+     * @param input - The wikilink syntax.
+     * @param sourcePath - The source path.
+     * @returns The new LinkValue.
+     *
+     * @example
+     * ```typescript
+     * parseFromString("[[Welcome|Example Link]]")
+     * ```
+     *
+     * @official
+     * @since 1.10.0
+     * @deprecated - Added only for typing purposes. Use {@link LinkValue.parseFromString} instead.
+     */
+    function parseFromString__(app: App, input: string, sourcePath: string): LinkValue | null;
+  }
 }

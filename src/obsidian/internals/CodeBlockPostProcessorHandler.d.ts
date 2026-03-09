@@ -7,7 +7,7 @@ import type { MarkdownPostProcessorContext } from 'obsidian';
  * @unofficial
  */
 export type CodeBlockPostProcessorHandler = (
-    source: string,
-    el: HTMLElement,
-    ctx: MarkdownPostProcessorContext
+  source: string,
+  el: HTMLElement,
+  ctx: MarkdownPostProcessorContext
 ) => Promise<void> | void;

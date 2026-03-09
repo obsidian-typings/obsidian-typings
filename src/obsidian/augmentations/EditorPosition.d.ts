@@ -1,23 +1,23 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Represents a position in the editor
+   * @since 0.12.11
+   */
+  interface EditorPosition {
     /**
-     * Represents a position in the editor
-     * @since 0.12.11
+     * The character index (0-based).
+     *
+     * @official
      */
-    interface EditorPosition {
-        /**
-         * The character index (0-based).
-         *
-         * @official
-         */
-        ch: number;
+    ch: number;
 
-        /**
-         * The line number (0-based).
-         *
-         * @official
-         */
-        line: number;
-    }
+    /**
+     * The line number (0-based).
+     *
+     * @official
+     */
+    line: number;
+  }
 }

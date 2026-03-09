@@ -14,5 +14,5 @@ type FoldManagerConstructor = ExtractConstructor<FoldManager>;
  * @unofficial
  */
 export function getFoldManagerConstructor(app: App): FoldManagerConstructor {
-    return app.foldManager.constructor as FoldManagerConstructor;
+  return app.foldManager.constructor as FoldManagerConstructor;
 }

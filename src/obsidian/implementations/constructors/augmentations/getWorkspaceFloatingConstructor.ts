@@ -1,5 +1,5 @@
 import {
-    WorkspaceFloating
+  WorkspaceFloating
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type WorkspaceFloatingConstructor = ExtractConstructor<WorkspaceFloating>;
  * @unofficial
  */
 export function getWorkspaceFloatingConstructor(): WorkspaceFloatingConstructor {
-    return WorkspaceFloating as WorkspaceFloatingConstructor;
+  return WorkspaceFloating as WorkspaceFloatingConstructor;
 }

@@ -1,6 +1,6 @@
 import type {
-    Text,
-    TextStyle
+  Text,
+  TextStyle
 } from 'pixi.js';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
@@ -11,28 +11,28 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  * @unofficial
  */
 export interface PowerTag {
-    /** Whether the power tag graphics have been rendered. */
-    rendered: boolean;
+  /** Whether the power tag graphics have been rendered. */
+  rendered: boolean;
 
-    /** Graph renderer managing this power tag. */
-    renderer: GraphRenderer;
+  /** Graph renderer managing this power tag. */
+  renderer: GraphRenderer;
 
-    /** PixiJS text element displaying the tag label. */
-    text: Text;
+  /** PixiJS text element displaying the tag label. */
+  text: Text;
 
-    /** Destroy the power tag graphics and remove them from the scene. */
-    clearGraphics(): void;
+  /** Destroy the power tag graphics and remove them from the scene. */
+  clearGraphics(): void;
 
-    /**
-     * Get the text style used for rendering the power tag label.
-     *
-     * @returns The text style of the power tag.
-     */
-    getTextStyle(): TextStyle;
+  /**
+   * Get the text style used for rendering the power tag label.
+   *
+   * @returns The text style of the power tag.
+   */
+  getTextStyle(): TextStyle;
 
-    /** Initialize the power tag graphics and add them to the scene. */
-    initGraphics(): void;
+  /** Initialize the power tag graphics and add them to the scene. */
+  initGraphics(): void;
 
-    /** Render the power tag. */
-    render(): void;
+  /** Render the power tag. */
+  render(): void;
 }

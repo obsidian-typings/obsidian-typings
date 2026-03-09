@@ -1,5 +1,5 @@
 import {
-    MarkdownRenderer
+  MarkdownRenderer
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type MarkdownRendererConstructor = ExtractConstructor<MarkdownRenderer>;
  * @unofficial
  */
 export function getMarkdownRendererConstructor(): MarkdownRendererConstructor {
-    return MarkdownRenderer as unknown as MarkdownRendererConstructor;
+  return MarkdownRenderer as unknown as MarkdownRendererConstructor;
 }

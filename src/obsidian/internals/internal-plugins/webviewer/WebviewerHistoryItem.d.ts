@@ -5,23 +5,23 @@
  * @unofficial
  */
 export interface WebviewerHistoryItem {
-    /**
-     * Timestamp when the URL was visited.
-     */
-    accessTs: number;
+  /**
+   * Timestamp when the URL was visited.
+   */
+  accessTs: number;
 
-    /**
-     * Unique ID of history item.
-     */
-    id: number;
+  /**
+   * Unique ID of history item.
+   */
+  id: number;
 
-    /**
-     * Title of the URL.
-     */
-    title: string;
+  /**
+   * Title of the URL.
+   */
+  title: string;
 
-    /**
-     * Destination URL.
-     */
-    url: string;
+  /**
+   * Destination URL.
+   */
+  url: string;
 }

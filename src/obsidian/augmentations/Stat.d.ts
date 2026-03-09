@@ -1,36 +1,36 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * A stat for a file or folder.
+   */
+  interface Stat {
     /**
-     * A stat for a file or folder.
+     * Time of creation, represented as a unix timestamp.
+     *
+     * @official
      */
-    interface Stat {
-        /**
-         * Time of creation, represented as a unix timestamp.
-         *
-         * @official
-         */
-        ctime: number;
+    ctime: number;
 
-        /**
-         * Time of last modification, represented as a unix timestamp.
-         *
-         * @official
-         */
-        mtime: number;
+    /**
+     * Time of last modification, represented as a unix timestamp.
+     *
+     * @official
+     */
+    mtime: number;
 
-        /**
-         * Size on disk in bytes.
-         *
-         * @official
-         */
-        size: number;
+    /**
+     * Size on disk in bytes.
+     *
+     * @official
+     */
+    size: number;
 
-        /**
-         * The type of the stat.
-         *
-         * @official
-         */
-        type: 'file' | 'folder';
-    }
+    /**
+     * The type of the stat.
+     *
+     * @official
+     */
+    type: 'file' | 'folder';
+  }
 }

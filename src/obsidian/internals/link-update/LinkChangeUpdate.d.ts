@@ -6,12 +6,12 @@ import type { ReferenceCache } from 'obsidian';
  * @unofficial
  */
 export interface LinkChangeUpdate {
-    /** New link text to replace the old reference with. */
-    change: string;
+  /** New link text to replace the old reference with. */
+  change: string;
 
-    /** The cached reference that needs to be updated. */
-    reference: ReferenceCache;
+  /** The cached reference that needs to be updated. */
+  reference: ReferenceCache;
 
-    /** Path of the file containing the link to update. */
-    sourcePath: string;
+  /** Path of the file containing the link to update. */
+  sourcePath: string;
 }

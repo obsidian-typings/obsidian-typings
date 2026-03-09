@@ -1,5 +1,5 @@
 import {
-    BasesEntry
+  BasesEntry
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type BasesEntryConstructor = ExtractConstructor<BasesEntry>;
  * @unofficial
  */
 export function getBasesEntryConstructor(): BasesEntryConstructor {
-    return BasesEntry as BasesEntryConstructor;
+  return BasesEntry as BasesEntryConstructor;
 }

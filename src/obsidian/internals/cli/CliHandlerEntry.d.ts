@@ -6,12 +6,12 @@ import type { CliFlag } from 'obsidian';
  * @unofficial
  */
 export interface CliHandlerEntry {
-    /** Description shown in help. */
-    description: string;
+  /** Description shown in help. */
+  description: string;
 
-    /** Flags accepted by this handler. */
-    flags?: Record<string, CliFlag>;
+  /** Flags accepted by this handler. */
+  flags?: Record<string, CliFlag>;
 
-    /** The handler function. */
-    handler(...args: unknown[]): unknown;
+  /** The handler function. */
+  handler(...args: unknown[]): unknown;
 }

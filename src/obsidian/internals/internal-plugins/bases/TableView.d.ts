@@ -8,10 +8,10 @@ import type { ViewType } from '../../../implementations/constants/ViewType.d.ts'
  * @unofficial
  */
 export interface TableView extends View {
-    /**
-     * Get view type.
-     *
-     * @returns The table view type.
-     */
-    getViewType(): typeof ViewType.Table;
+  /**
+   * Get view type.
+   *
+   * @returns The table view type.
+   */
+  getViewType(): typeof ViewType.Table;
 }

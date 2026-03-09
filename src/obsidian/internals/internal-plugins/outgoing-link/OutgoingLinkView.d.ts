@@ -7,13 +7,13 @@ import type { InfoFileView } from '../../views/InfoFileView.d.ts';
  * @unofficial
  */
 export interface OutgoingLinkView extends InfoFileView {
-    /**
-     * Get the current view type.
-     *
-     * @returns The outgoing link view type.
-     */
-    getViewType(): typeof ViewType.OutgoingLink;
+  /**
+   * Get the current view type.
+   *
+   * @returns The outgoing link view type.
+   */
+  getViewType(): typeof ViewType.OutgoingLink;
 
-    /** Refresh the outgoing links list. */
-    update(): void;
+  /** Refresh the outgoing links list. */
+  update(): void;
 }

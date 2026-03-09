@@ -4,8 +4,8 @@
  * @unofficial
  */
 export interface SetActiveLeafParams {
-    /**
-     * Whether to focus the leaf.
-     */
-    focus?: boolean;
+  /**
+   * Whether to focus the leaf.
+   */
+  focus?: boolean;
 }

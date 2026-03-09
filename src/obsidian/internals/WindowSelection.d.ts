@@ -4,12 +4,12 @@
  * @unofficial
  */
 export interface WindowSelection {
-    /** Element that has focus within the selection. */
-    focusEl: HTMLElement;
+  /** Element that has focus within the selection. */
+  focusEl: HTMLElement;
 
-    /** The selected range. */
-    range: Range;
+  /** The selected range. */
+  range: Range;
 
-    /** Window in which the selection exists. */
-    win: Window;
+  /** Window in which the selection exists. */
+  win: Window;
 }

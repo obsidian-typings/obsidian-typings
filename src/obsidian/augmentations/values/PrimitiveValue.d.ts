@@ -1,42 +1,42 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Base type for {@link Values} which wrap a single primitive.
+   *
+   * @typeParam T - The type of the wrapped primitive value.
+   * @since 1.10.0
+   */
+  interface PrimitiveValue<T> extends NotNullValue {
     /**
-     * Base type for {@link Values} which wrap a single primitive.
+     * Constructor.
      *
-     * @typeParam T - The type of the wrapped primitive value.
+     * To extract the constructor type, use `ExtractConstructor<PrimitiveValue>`.
+     *
+     * @param value - The value to wrap.
+     * @returns The new PrimitiveValue.
+     * @official
+     * @since 1.10.0
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor3__(value: T): this;
+
+    /**
+     * Returns a boolean indicating whether this PrimitiveValue is truthy.
+     *
+     * @returns A boolean indicating whether this PrimitiveValue is truthy.
+     * @official
      * @since 1.10.0
      */
-    interface PrimitiveValue<T> extends NotNullValue {
-        /**
-         * Constructor.
-         *
-         * To extract the constructor type, use `ExtractConstructor<PrimitiveValue>`.
-         *
-         * @param value - The value to wrap.
-         * @returns The new PrimitiveValue.
-         * @official
-         * @since 1.10.0
-         * @deprecated - Added only for typing purposes.
-         */
-        constructor3__(value: T): this;
+    isTruthy(): boolean;
 
-        /**
-         * Returns a boolean indicating whether this PrimitiveValue is truthy.
-         *
-         * @returns A boolean indicating whether this PrimitiveValue is truthy.
-         * @official
-         * @since 1.10.0
-         */
-        isTruthy(): boolean;
-
-        /**
-         * Get the string representation of this PrimitiveValue.
-         *
-         * @returns The string representation of this PrimitiveValue.
-         * @official
-         * @since 1.10.0
-         */
-        toString(): string;
-    }
+    /**
+     * Get the string representation of this PrimitiveValue.
+     *
+     * @returns The string representation of this PrimitiveValue.
+     * @official
+     * @since 1.10.0
+     */
+    toString(): string;
+  }
 }

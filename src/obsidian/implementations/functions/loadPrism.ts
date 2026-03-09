@@ -12,5 +12,5 @@ import type { default as Prism } from 'prismjs';
  * @unofficial
  */
 export async function loadPrism(): Promise<typeof Prism> {
-    return (await loadPrismOriginal()) as typeof Prism;
+  return (await loadPrismOriginal()) as typeof Prism;
 }

@@ -1,6 +1,6 @@
 export {};
 
 declare module 'obsidian' {
-    export enum PopoverState {
-    }
+  export enum PopoverState {
+  }
 }

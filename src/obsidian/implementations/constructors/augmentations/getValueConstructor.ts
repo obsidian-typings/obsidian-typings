@@ -1,5 +1,5 @@
 import {
-    Value
+  Value
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -12,5 +12,5 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
  * @unofficial
  */
 export function getValueConstructor(): ExtractConstructor<Value> {
-    return Value as unknown as ExtractConstructor<Value>;
+  return Value as unknown as ExtractConstructor<Value>;
 }

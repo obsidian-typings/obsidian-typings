@@ -1,5 +1,5 @@
 import {
-    App
+  App
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type AppConstructor = ExtractConstructor<App>;
  * @unofficial
  */
 export function getAppConstructor(): AppConstructor {
-    return App as AppConstructor;
+  return App as AppConstructor;
 }

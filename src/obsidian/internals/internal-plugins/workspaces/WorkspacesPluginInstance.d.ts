@@ -8,9 +8,9 @@ import type { WorkspacesPlugin } from './WorkspacesPlugin.d.ts';
  * @unofficial
  */
 export interface WorkspacesPluginInstance extends InternalPluginInstance<WorkspacesPlugin> {
-    /** Reference to the app. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 
-    /** Reference to the workspaces plugin registration. */
-    plugin: WorkspacesPlugin;
+  /** Reference to the workspaces plugin registration. */
+  plugin: WorkspacesPlugin;
 }

@@ -14,5 +14,5 @@ type ObsidianDOMConstructor = ExtractConstructor<ObsidianDOM>;
  * @unofficial
  */
 export function getObsidianDOMConstructor(app: App): ObsidianDOMConstructor {
-    return app.dom.constructor as ObsidianDOMConstructor;
+  return app.dom.constructor as ObsidianDOMConstructor;
 }

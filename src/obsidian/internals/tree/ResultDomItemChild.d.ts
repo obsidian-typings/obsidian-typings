@@ -10,91 +10,91 @@ import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
  * @unofficial
  */
 export interface ResultDomItemChild extends TreeNode {
-    /** Cached metadata for the file containing this match. */
-    cache: CachedMetadata;
+  /** Cached metadata for the file containing this match. */
+  cache: CachedMetadata;
 
-    /** Text content of the matched region. */
-    content: string;
+  /** Text content of the matched region. */
+  content: string;
 
-    /** End offset of the match context within the document. */
-    end: number;
+  /** End offset of the match context within the document. */
+  end: number;
 
-    /** Layout information used by virtual scrolling. */
-    info: TreeNodeInfo;
+  /** Layout information used by virtual scrolling. */
+  info: TreeNodeInfo;
 
-    /** Array of match positions within the content. */
-    matches: ContentPosition[];
+  /** Array of match positions within the content. */
+  matches: ContentPosition[];
 
-    /** Callback to mutate the editor state when navigating to this match. */
-    mutateEState: unknown;
+  /** Callback to mutate the editor state when navigating to this match. */
+  mutateEState: unknown;
 
-    /** Callback for custom rendering of match highlights. */
-    onMatchRender: unknown;
+  /** Callback for custom rendering of match highlights. */
+  onMatchRender: unknown;
 
-    /** Parent result item containing this match child. */
-    parent: ResultDomItem;
+  /** Parent result item containing this match child. */
+  parent: ResultDomItem;
 
-    /** Reference to the parent result item. */
-    parentDom: ResultDomItem;
+  /** Reference to the parent result item. */
+  parentDom: ResultDomItem;
 
-    /** Element for the "show more context after" button. */
-    showMoreAfterEl: HTMLElement;
+  /** Element for the "show more context after" button. */
+  showMoreAfterEl: HTMLElement;
 
-    /** Element for the "show more context before" button. */
-    showMoreBeforeEl: HTMLElement;
+  /** Element for the "show more context before" button. */
+  showMoreBeforeEl: HTMLElement;
 
-    /** Start offset of the match context within the document. */
-    start: number;
+  /** Start offset of the match context within the document. */
+  start: number;
 
-    /**
-     * Get the position of the next match.
-     *
-     * @returns The next match position.
-     */
-    getNextPos(arg1: unknown): number;
+  /**
+   * Get the position of the next match.
+   *
+   * @returns The next match position.
+   */
+  getNextPos(arg1: unknown): number;
 
-    /**
-     * Get the position of the previous match.
-     *
-     * @returns The previous match position.
-     */
-    getPrevPos(arg1: unknown): number;
+  /**
+   * Get the position of the previous match.
+   *
+   * @returns The previous match position.
+   */
+  getPrevPos(arg1: unknown): number;
 
-    /**
-     * Handle focus entering this match item.
-     *
-     * @param event - The UI event that triggered focus.
-     */
-    onFocusEnter(event?: UIEvent): void;
+  /**
+   * Handle focus entering this match item.
+   *
+   * @param event - The UI event that triggered focus.
+   */
+  onFocusEnter(event?: UIEvent): void;
 
-    /**
-     * Handle focus leaving this match item.
-     *
-     * @param event - The UI event that triggered focus exit.
-     */
-    onFocusExit(event?: UIEvent): void;
+  /**
+   * Handle focus leaving this match item.
+   *
+   * @param event - The UI event that triggered focus exit.
+   */
+  onFocusExit(event?: UIEvent): void;
 
-    /**
-     * Handle click on this match to navigate to it.
-     *
-     * @param event - The UI event that triggered the click.
-     */
-    onResultClick(event: UIEvent): void;
+  /**
+   * Handle click on this match to navigate to it.
+   *
+   * @param event - The UI event that triggered the click.
+   */
+  onResultClick(event: UIEvent): void;
 
-    /**
-     * Render this match with optional surrounding text indicators.
-     *
-     * @param hasTextBefore - Whether there is text before this match.
-     * @param hasTextAfter - Whether there is text after this match.
-     */
-    render(hasTextBefore: boolean, hasTextAfter: boolean): void;
+  /**
+   * Render this match with optional surrounding text indicators.
+   *
+   * @param hasTextBefore - Whether there is text before this match.
+   * @param hasTextAfter - Whether there is text after this match.
+   */
+  render(hasTextBefore: boolean, hasTextAfter: boolean): void;
 
-    /** Expand the context to show more text after the match. */
-    showMoreAfter(): void;
+  /** Expand the context to show more text after the match. */
+  showMoreAfter(): void;
 
-    /** Expand the context to show more text before the match. */
-    showMoreBefore(): void;
+  /** Expand the context to show more text before the match. */
+  showMoreBefore(): void;
 
-    /** Toggle visibility of the "show more context" buttons. */
-    toggleShowMoreContextButtons(): void;
+  /** Toggle visibility of the "show more context" buttons. */
+  toggleShowMoreContextButtons(): void;
 }

@@ -11,13 +11,13 @@ import type { ExtractConstructor } from './ExtractConstructor.d.ts';
  * @unofficial
  */
 export interface BasesLinkConstructor extends ExtractConstructor<BasesLink> {
-    /**
-     * Parse {@link BasesLink} from string.
-     *
-     * @param app - The Obsidian application instance.
-     * @param str - The string to parse.
-     * @param sourcePath - The source path.
-     * @returns The parsed {@link BasesLink}.
-     */
-    parseFromString(app: App, str: string, sourcePath: string): BasesLink;
+  /**
+   * Parse {@link BasesLink} from string.
+   *
+   * @param app - The Obsidian application instance.
+   * @param str - The string to parse.
+   * @param sourcePath - The source path.
+   * @returns The parsed {@link BasesLink}.
+   */
+  parseFromString(app: App, str: string, sourcePath: string): BasesLink;
 }

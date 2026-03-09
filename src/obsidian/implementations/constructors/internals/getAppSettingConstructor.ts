@@ -14,5 +14,5 @@ type AppSettingConstructor = ExtractConstructor<AppSetting>;
  * @unofficial
  */
 export function getAppSettingConstructor(app: App): AppSettingConstructor {
-    return app.setting.constructor as AppSettingConstructor;
+  return app.setting.constructor as AppSettingConstructor;
 }

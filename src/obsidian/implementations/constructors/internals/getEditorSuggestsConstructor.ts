@@ -14,5 +14,5 @@ type EditorSuggestsConstructor = ExtractConstructor<EditorSuggests>;
  * @unofficial
  */
 export function getEditorSuggestsConstructor(app: App): EditorSuggestsConstructor {
-    return app.workspace.editorSuggest.constructor as EditorSuggestsConstructor;
+  return app.workspace.editorSuggest.constructor as EditorSuggestsConstructor;
 }

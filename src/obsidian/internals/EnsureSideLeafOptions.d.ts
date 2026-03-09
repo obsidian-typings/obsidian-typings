@@ -4,15 +4,15 @@
  * @unofficial
  */
 export interface EnsureSideLeafOptions {
-    /** @official */
-    active?: boolean;
+  /** @official */
+  active?: boolean;
 
-    /** @official */
-    reveal?: boolean;
+  /** @official */
+  reveal?: boolean;
 
-    /** @official */
-    split?: boolean;
+  /** @official */
+  split?: boolean;
 
-    /** @official */
-    state?: unknown;
+  /** @official */
+  state?: unknown;
 }

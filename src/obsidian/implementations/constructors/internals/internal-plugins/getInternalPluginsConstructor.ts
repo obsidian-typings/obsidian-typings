@@ -14,5 +14,5 @@ type InternalPluginsConstructor = ExtractConstructor<InternalPlugins>;
  * @unofficial
  */
 export function getInternalPluginsConstructor(app: App): InternalPluginsConstructor {
-    return app.internalPlugins.constructor as InternalPluginsConstructor;
+  return app.internalPlugins.constructor as InternalPluginsConstructor;
 }

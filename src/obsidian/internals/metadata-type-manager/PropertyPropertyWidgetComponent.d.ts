@@ -8,26 +8,26 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface PropertyPropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** The combobox component for the property widget. */
-    combobox: PropertyPropertyWidgetComponentComboBox;
+  /** The combobox component for the property widget. */
+  combobox: PropertyPropertyWidgetComponentComboBox;
 
-    /** The input element for the property widget. */
-    inputEl: HTMLInputElement;
+  /** The input element for the property widget. */
+  inputEl: HTMLInputElement;
 
-    /** The type of the property widget. */
-    type: 'property';
+  /** The type of the property widget. */
+  type: 'property';
 
-    /**
-     * Handle focus event.
-     *
-     * @param mode - The focus mode.
-     */
-    onFocus(): void;
+  /**
+   * Handle focus event.
+   *
+   * @param mode - The focus mode.
+   */
+  onFocus(): void;
 
-    /**
-     * Set the value of the property widget.
-     *
-     * @param value - The value to set.
-     */
-    setValue(value: unknown): void;
+  /**
+   * Set the value of the property widget.
+   *
+   * @param value - The value to set.
+   */
+  setValue(value: unknown): void;
 }

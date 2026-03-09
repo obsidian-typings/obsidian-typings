@@ -1,5 +1,5 @@
 import {
-    MarkdownRenderChild
+  MarkdownRenderChild
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type MarkdownRenderChildConstructor = ExtractConstructor<MarkdownRenderChild>;
  * @unofficial
  */
 export function getMarkdownRenderChildConstructor(): MarkdownRenderChildConstructor {
-    return MarkdownRenderChild as MarkdownRenderChildConstructor;
+  return MarkdownRenderChild as MarkdownRenderChildConstructor;
 }

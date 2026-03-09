@@ -1,10 +1,10 @@
 import type {
-    TFile,
-    Vault,
-    Workspace
+  TFile,
+  Vault,
+  Workspace
 } from 'obsidian';
 import type {
-    getRecentFileTrackerConstructor
+  getRecentFileTrackerConstructor
 } from '../implementations/constructors/internals/getRecentFileTrackerConstructor.d.ts';
 import type { GetRecentFilesOptions } from './GetRecentFilesOptions.d.ts';
 
@@ -14,89 +14,89 @@ import type { GetRecentFilesOptions } from './GetRecentFilesOptions.d.ts';
  * @unofficial
  */
 export interface RecentFileTracker {
-    /**
-     * List of last opened file paths, limited to 50.
-     */
-    lastOpenFiles: string[];
+  /**
+   * List of last opened file paths, limited to 50.
+   */
+  lastOpenFiles: string[];
 
-    /**
-     * Reference to Vault.
-     */
-    vault: Vault;
+  /**
+   * Reference to Vault.
+   */
+  vault: Vault;
 
-    /**
-     * Reference to Workspace.
-     */
-    workspace: Workspace;
+  /**
+   * Reference to Workspace.
+   */
+  workspace: Workspace;
 
-    /**
-     * Add a file to the recent files list.
-     *
-     * @param file - File to add.
-     */
-    collect(file: TFile): void;
+  /**
+   * Add a file to the recent files list.
+   *
+   * @param file - File to add.
+   */
+  collect(file: TFile): void;
 
-    /**
-     * Constructor.
-     *
-     * To get the constructor instance, use {@link getRecentFileTrackerConstructor} from `obsidian-typings/implementations`.
-     *
-     * @param workspace - The workspace.
-     * @param vault - The vault.
-     * @returns The new instance.
-     * @deprecated - Added only for typing purposes.
-     */
-    constructor__(workspace: Workspace, vault: Vault): this;
+  /**
+   * Constructor.
+   *
+   * To get the constructor instance, use {@link getRecentFileTrackerConstructor} from `obsidian-typings/implementations`.
+   *
+   * @param workspace - The workspace.
+   * @param vault - The vault.
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
+   */
+  constructor__(workspace: Workspace, vault: Vault): this;
 
-    /**
-     * Returns the last 10 opened files.
-     *
-     * @returns Array of file paths.
-     */
-    getLastOpenFiles(): string[];
+  /**
+   * Returns the last 10 opened files.
+   *
+   * @returns Array of file paths.
+   */
+  getLastOpenFiles(): string[];
 
-    /**
-     * Get last n files of type (defaults to 10).
-     *
-     * @param options - Options for filtering recent files.
-     * @returns Array of file paths.
-     */
-    getRecentFiles(options?: GetRecentFilesOptions): string[];
+  /**
+   * Get last n files of type (defaults to 10).
+   *
+   * @param options - Options for filtering recent files.
+   * @returns Array of file paths.
+   */
+  getRecentFiles(options?: GetRecentFilesOptions): string[];
 
-    /**
-     * Set the last opened files.
-     *
-     * @param savedFiles - Array of file paths to load.
-     */
-    load(savedFiles: string[]): void;
+  /**
+   * Set the last opened files.
+   *
+   * @param savedFiles - Array of file paths to load.
+   */
+  load(savedFiles: string[]): void;
 
-    /**
-     * On file create, save file to last opened files.
-     *
-     * @param file - The created file.
-     */
-    onFileCreated(file: TFile): void;
+  /**
+   * On file create, save file to last opened files.
+   *
+   * @param file - The created file.
+   */
+  onFileCreated(file: TFile): void;
 
-    /**
-     * On file open, save file to last opened files.
-     *
-     * @param prevFile - Previously opened file.
-     * @param file - Newly opened file.
-     */
-    onFileOpen(prevFile: TFile, file: TFile): void;
+  /**
+   * On file open, save file to last opened files.
+   *
+   * @param prevFile - Previously opened file.
+   * @param file - Newly opened file.
+   */
+  onFileOpen(prevFile: TFile, file: TFile): void;
 
-    /**
-     * On file rename, update file path in last opened files.
-     *
-     * @param file - The renamed file.
-     * @param oldPath - Previous file path.
-     */
-    onRename(file: TFile, oldPath: string): void;
+  /**
+   * On file rename, update file path in last opened files.
+   *
+   * @param file - The renamed file.
+   * @param oldPath - Previous file path.
+   */
+  onRename(file: TFile, oldPath: string): void;
 
-    /**
-     * Get last opened files.
-     *
-     * @returns Array of file paths.
-     */
-    serialize(): string[];
+  /**
+   * Get last opened files.
+   *
+   * @returns Array of file paths.
+   */
+  serialize(): string[];
 }

@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getCanvasViewConstructor(app: App): ExtractConstructor<CanvasView> {
-    return getViewConstructorByViewType(app, ViewType.Canvas);
+  return getViewConstructorByViewType(app, ViewType.Canvas);
 }

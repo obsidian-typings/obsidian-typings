@@ -1,5 +1,5 @@
 import type {
-    SerializedWorkspaceLeftRibbonHiddenItemsRecord
+  SerializedWorkspaceLeftRibbonHiddenItemsRecord
 } from './SerializedWorkspaceLeftRibbonHiddenItemsRecord.d.ts';
 
 /**
@@ -8,6 +8,6 @@ import type {
  * @unofficial
  */
 export interface SerializedWorkspaceLeftRibbon {
-    /** Record of ribbon items and whether they are hidden. */
-    hiddenItems: SerializedWorkspaceLeftRibbonHiddenItemsRecord;
+  /** Record of ribbon items and whether they are hidden. */
+  hiddenItems: SerializedWorkspaceLeftRibbonHiddenItemsRecord;
 }

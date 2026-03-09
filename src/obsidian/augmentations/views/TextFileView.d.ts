@@ -1,174 +1,174 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * This class implements a plaintext-based editable file view, which can be loaded and saved given an editor.
+   *
+   * Note that by default, this view only saves when it's closing. To implement auto-save, your editor should
+   * call `this.requestSave()` when the content is changed.
+   * @since 0.10.12
+   */
+  interface TextFileView extends EditableFileView {
     /**
-     * This class implements a plaintext-based editable file view, which can be loaded and saved given an editor.
+     * In-memory data.
      *
-     * Note that by default, this view only saves when it's closing. To implement auto-save, your editor should
-     * call `this.requestSave()` when the content is changed.
+     * @official
      * @since 0.10.12
      */
-    interface TextFileView extends EditableFileView {
-        /**
-         * In-memory data.
-         *
-         * @official
-         * @since 0.10.12
-         */
-        data: string;
+    data: string;
 
-        /**
-         * Whether current file is dirty (different from saved contents).
-         *
-         * @unofficial
-         */
-        dirty: boolean;
+    /**
+     * Whether current file is dirty (different from saved contents).
+     *
+     * @unofficial
+     */
+    dirty: boolean;
 
-        /**
-         * Whether editor should be rendered as plaintext.
-         *
-         * @unofficial
-         */
-        isPlaintext: boolean;
+    /**
+     * Whether editor should be rendered as plaintext.
+     *
+     * @unofficial
+     */
+    isPlaintext: boolean;
 
-        /**
-         * The data that was last saved.
-         *
-         * @unofficial
-         */
-        lastSavedData: null | string;
+    /**
+     * The data that was last saved.
+     *
+     * @unofficial
+     */
+    lastSavedData: null | string;
 
-        /**
-         * Whether on saving, the file should be saved again (for dirtiness checks).
-         *
-         * @unofficial
-         */
-        saveAgain: boolean;
+    /**
+     * Whether on saving, the file should be saved again (for dirtiness checks).
+     *
+     * @unofficial
+     */
+    saveAgain: boolean;
 
-        /**
-         * Whether the file is currently saving.
-         *
-         * @unofficial
-         */
-        saving: boolean;
+    /**
+     * Whether the file is currently saving.
+     *
+     * @unofficial
+     */
+    saving: boolean;
 
-        /**
-         * Clear the editor. This is usually called when we're about to open a completely.
-         * different file, so it's best to clear any editor states like undo-redo history,
-         * and any caches/indexes associated with the previous file contents.
-         *
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link clear} instead.
-         */
-        clear__?(): void;
+    /**
+     * Clear the editor. This is usually called when we're about to open a completely.
+     * different file, so it's best to clear any editor states like undo-redo history,
+     * and any caches/indexes associated with the previous file contents.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link clear} instead.
+     */
+    clear__?(): void;
 
-        /**
-         * Constructor.
-         *
-         * To extract the constructor type, use `ExtractConstructor<TextFileView>`.
-         *
-         * @param leaf - The leaf to create the view in.
-         * @official
-         * @deprecated - Added only for typing purposes.
-         */
-        constructor2__(leaf: WorkspaceLeaf): this;
+    /**
+     * Constructor.
+     *
+     * To extract the constructor type, use `ExtractConstructor<TextFileView>`.
+     *
+     * @param leaf - The leaf to create the view in.
+     * @official
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor2__(leaf: WorkspaceLeaf): this;
 
-        /**
-         * Gets the data from the editor. This will be called to save the editor contents to the file.
-         *
-         * @returns The editor data as a string.
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link getViewData} instead.
-         * @since 0.10.12
-         */
-        getViewData__?(): string;
+    /**
+     * Gets the data from the editor. This will be called to save the editor contents to the file.
+     *
+     * @returns The editor data as a string.
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link getViewData} instead.
+     * @since 0.10.12
+     */
+    getViewData__?(): string;
 
-        /**
-         * Load a file into the editor, optionally clearing existing content.
-         *
-         * @param file - The file to load.
-         * @param clear - Whether to clear the existing content before loading.
-         * @returns A promise that resolves when the file is loaded.
-         * @unofficial
-         * @since 0.10.12
-         */
-        loadFileInternal(file: TFile, clear: boolean): Promise<unknown>;
+    /**
+     * Load a file into the editor, optionally clearing existing content.
+     *
+     * @param file - The file to load.
+     * @param clear - Whether to clear the existing content before loading.
+     * @returns A promise that resolves when the file is loaded.
+     * @unofficial
+     * @since 0.10.12
+     */
+    loadFileInternal(file: TFile, clear: boolean): Promise<unknown>;
 
-        /**
-         * On load file.
-         *
-         * @param file - The file to load.
-         * @returns The promise that resolves when the file is loaded.
-         * @official
-         * @since 0.10.12
-         */
-        onLoadFile(file: TFile): Promise<void>;
+    /**
+     * On load file.
+     *
+     * @param file - The file to load.
+     * @returns The promise that resolves when the file is loaded.
+     * @official
+     * @since 0.10.12
+     */
+    onLoadFile(file: TFile): Promise<void>;
 
-        /**
-         * Is called when the vault has a 'modify' event. Reloads the file if the view is currently not saving the file and the modified file is the file in this view.
-         *
-         * @param file - The modified file.
-         * @unofficial
-         */
-        onModify(file: TFile): void;
+    /**
+     * Is called when the vault has a 'modify' event. Reloads the file if the view is currently not saving the file and the modified file is the file in this view.
+     *
+     * @param file - The modified file.
+     * @unofficial
+     */
+    onModify(file: TFile): void;
 
-        /**
-         * On unload file.
-         *
-         * @param file - The file to unload.
-         * @returns The promise that resolves when the file is unloaded.
-         * @official
-         * @since 0.10.12
-         */
-        onUnloadFile(file: TFile): Promise<void>;
+    /**
+     * On unload file.
+     *
+     * @param file - The file to unload.
+     * @returns The promise that resolves when the file is unloaded.
+     * @official
+     * @since 0.10.12
+     */
+    onUnloadFile(file: TFile): Promise<void>;
 
-        /**
-         * Debounced save in 2 seconds from now.
-         *
-         * @official
-         * @since 0.10.12
-         */
-        requestSave: () => void;
+    /**
+     * Debounced save in 2 seconds from now.
+     *
+     * @official
+     * @since 0.10.12
+     */
+    requestSave: () => void;
 
-        /**
-         * Save the file.
-         *
-         * @param clear - Whether to clear the file.
-         * @returns The promise that resolves when the file is saved.
-         * @official
-         * @since 0.10.12
-         */
-        save(clear?: boolean): Promise<void>;
+    /**
+     * Save the file.
+     *
+     * @param clear - Whether to clear the file.
+     * @returns The promise that resolves when the file is saved.
+     * @official
+     * @since 0.10.12
+     */
+    save(clear?: boolean): Promise<void>;
 
-        /**
-         * If any changes(dirty = `true`) in the file forces the file to save.
-         *
-         * @unofficial
-         */
-        saveImmediately(): void;
+    /**
+     * If any changes(dirty = `true`) in the file forces the file to save.
+     *
+     * @unofficial
+     */
+    saveImmediately(): void;
 
-        /**
-         * Set the data to the editor. This is used to load the file contents.
-         *
-         * @param data - The new data.
-         * @param clear - If clear is set, then it means we're opening a completely different file. In that case, you should call clear(), or implement a slightly more efficient clearing mechanism given the new data to be set.
-         * @unofficial
-         */
-        setData(data: string, clear: boolean): void;
+    /**
+     * Set the data to the editor. This is used to load the file contents.
+     *
+     * @param data - The new data.
+     * @param clear - If clear is set, then it means we're opening a completely different file. In that case, you should call clear(), or implement a slightly more efficient clearing mechanism given the new data to be set.
+     * @unofficial
+     */
+    setData(data: string, clear: boolean): void;
 
-        /**
-         * Set the data to the editor. This is used to load the file contents.
-         *
-         * If `clear` is set, then it means we're opening a completely different file.
-         * In that case, you should call {@link TextFileView.clear}(), or implement a slightly more efficient
-         * clearing mechanism given the new data to be set.
-         *
-         * @param data - The data to set.
-         * @param clear - Whether to clear the file.
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link setViewData} instead.
-         * @since 0.10.12
-         */
-        setViewData__(data: string, clear: boolean): void;
-    }
+    /**
+     * Set the data to the editor. This is used to load the file contents.
+     *
+     * If `clear` is set, then it means we're opening a completely different file.
+     * In that case, you should call {@link TextFileView.clear}(), or implement a slightly more efficient
+     * clearing mechanism given the new data to be set.
+     *
+     * @param data - The data to set.
+     * @param clear - Whether to clear the file.
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link setViewData} instead.
+     * @since 0.10.12
+     */
+    setViewData__(data: string, clear: boolean): void;
+  }
 }

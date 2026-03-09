@@ -1,5 +1,5 @@
 import {
-    ExtraButtonComponent
+  ExtraButtonComponent
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type ExtraButtonComponentConstructor = ExtractConstructor<ExtraButtonComponent>;
  * @unofficial
  */
 export function getExtraButtonComponentConstructor(): ExtraButtonComponentConstructor {
-    return ExtraButtonComponent as ExtraButtonComponentConstructor;
+  return ExtraButtonComponent as ExtraButtonComponentConstructor;
 }

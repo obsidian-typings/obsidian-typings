@@ -14,5 +14,5 @@ type CliConstructor = ExtractConstructor<Cli>;
  * @unofficial
  */
 export function getCliConstructor(app: App): CliConstructor {
-    return app.cli.constructor as CliConstructor;
+  return app.cli.constructor as CliConstructor;
 }

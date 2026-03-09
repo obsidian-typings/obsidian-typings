@@ -7,12 +7,12 @@ import type { CanvasViewCanvasEdge } from './CanvasViewCanvasEdge.d.ts';
  * @unofficial
  */
 export interface EdgeIndexData extends BBox {
-    /** Child edges contained in this index node. */
-    children: CanvasViewCanvasEdge[];
+  /** Child edges contained in this index node. */
+  children: CanvasViewCanvasEdge[];
 
-    /** Height of the subtree rooted at this node. */
-    height: number;
+  /** Height of the subtree rooted at this node. */
+  height: number;
 
-    /** Whether this is a leaf node in the index. */
-    leaf: boolean;
+  /** Whether this is a leaf node in the index. */
+  leaf: boolean;
 }

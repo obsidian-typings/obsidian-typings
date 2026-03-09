@@ -1,6 +1,6 @@
 import type {
-    CacheItem,
-    Reference
+  CacheItem,
+  Reference
 } from 'obsidian';
 
 /**

@@ -1,5 +1,5 @@
 import {
-    SettingGroup
+  SettingGroup
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type SettingGroupConstructor = ExtractConstructor<SettingGroup>;
  * @unofficial
  */
 export function getSettingGroupConstructor(): SettingGroupConstructor {
-    return SettingGroup as SettingGroupConstructor;
+  return SettingGroup as SettingGroupConstructor;
 }

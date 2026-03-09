@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getSearchViewConstructor(app: App): ExtractConstructor<SearchView> {
-    return getViewConstructorByViewType(app, ViewType.Search);
+  return getViewConstructorByViewType(app, ViewType.Search);
 }

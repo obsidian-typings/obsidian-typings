@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getBacklinkViewConstructor(app: App): ExtractConstructor<BacklinkView> {
-    return getViewConstructorByViewType(app, ViewType.Backlink);
+  return getViewConstructorByViewType(app, ViewType.Backlink);
 }

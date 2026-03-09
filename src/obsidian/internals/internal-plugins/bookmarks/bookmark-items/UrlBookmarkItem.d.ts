@@ -6,12 +6,12 @@ import type { BookmarkItem } from './BookmarkItem.d.ts';
  * @unofficial
  */
 export interface UrlBookmarkItem extends BookmarkItem {
-    /** Display title of this URL bookmark. */
-    title: string;
+  /** Display title of this URL bookmark. */
+  title: string;
 
-    /** Discriminator indicating this is a URL bookmark. */
-    type: 'url';
+  /** Discriminator indicating this is a URL bookmark. */
+  type: 'url';
 
-    /** The bookmarked URL. */
-    url: string;
+  /** The bookmarked URL. */
+  url: string;
 }

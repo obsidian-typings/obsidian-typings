@@ -4,6 +4,6 @@
  * @unofficial
  */
 export interface VimStateVimLastMotion {
-    /** Name of the last executed motion. */
-    name?: string;
+  /** Name of the last executed motion. */
+  name?: string;
 }

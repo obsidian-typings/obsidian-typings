@@ -1,122 +1,122 @@
 import type {
-    getDropdownComponentConstructor
+  getDropdownComponentConstructor
 } from '../../implementations/constructors/augmentations/getDropdownComponentConstructor.d.ts';
 
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Dropdown component
+   * @since 0.9.7
+   */
+  interface DropdownComponent extends ValueComponent<string> {
     /**
-     * Dropdown component
+     * The HTML element representation of the dropdown.
+     *
+     * @official
      * @since 0.9.7
      */
-    interface DropdownComponent extends ValueComponent<string> {
-        /**
-         * The HTML element representation of the dropdown.
-         *
-         * @official
-         * @since 0.9.7
-         */
-        selectEl: HTMLSelectElement;
+    selectEl: HTMLSelectElement;
 
-        /**
-         * Add an option to the dropdown.
-         *
-         * @param value - The value of the option.
-         * @param display - The display of the option.
-         * @returns The dropdown component.
-         * To get the constructor instance, use {@link getDropdownComponentConstructor} from `obsidian-typings/implementations`.
-         * @example
-         * ```ts
-         * dropdown.addOption('foo', 'bar');
-         * ```
-         * @official
-         * @since 0.9.7
-         */
-        addOption(value: string, display: string): this;
+    /**
+     * Add an option to the dropdown.
+     *
+     * @param value - The value of the option.
+     * @param display - The display of the option.
+     * @returns The dropdown component.
+     * To get the constructor instance, use {@link getDropdownComponentConstructor} from `obsidian-typings/implementations`.
+     * @example
+     * ```ts
+     * dropdown.addOption('foo', 'bar');
+     * ```
+     * @official
+     * @since 0.9.7
+     */
+    addOption(value: string, display: string): this;
 
-        /**
-         * Add multiple options to the dropdown.
-         *
-         * @param options - The options to add.
-         * @returns The dropdown component.
-         * @example
-         * ```ts
-         * dropdown.addOptions({ foo: 'bar', baz: 'qux' });
-         * ```
-         * @official
-         * @since 0.9.7
-         */
-        addOptions(options: Record<string, string>): this;
+    /**
+     * Add multiple options to the dropdown.
+     *
+     * @param options - The options to add.
+     * @returns The dropdown component.
+     * @example
+     * ```ts
+     * dropdown.addOptions({ foo: 'bar', baz: 'qux' });
+     * ```
+     * @official
+     * @since 0.9.7
+     */
+    addOptions(options: Record<string, string>): this;
 
-        /**
-         * The function that's called after changing the value of the component.
-         *
-         * @remark Using `DropdownComponent.onChange(callback)` assigns the callback to this method.
-         * @unofficial
-         */
-        changeCallback?(value: string): void;
+    /**
+     * The function that's called after changing the value of the component.
+     *
+     * @remark Using `DropdownComponent.onChange(callback)` assigns the callback to this method.
+     * @unofficial
+     */
+    changeCallback?(value: string): void;
 
-        /**
-         * Constructor.
-         *
-         * To get the constructor instance, use {@link getDropdownComponentConstructor} from `obsidian-typings/implementations`.
-         *
-         * @param containerEl - The container element.
-         * @returns The dropdown component instance.
-         * @official
-         * @deprecated - Added only for typing purposes.
-         */
-        constructor3__(containerEl: HTMLElement): this;
+    /**
+     * Constructor.
+     *
+     * To get the constructor instance, use {@link getDropdownComponentConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param containerEl - The container element.
+     * @returns The dropdown component instance.
+     * @official
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor3__(containerEl: HTMLElement): this;
 
-        /**
-         * Get the selected value of the dropdown.
-         *
-         * @returns The selected value of the dropdown.
-         * @official
-         * @since 0.9.7
-         */
-        getValue(): string;
+    /**
+     * Get the selected value of the dropdown.
+     *
+     * @returns The selected value of the dropdown.
+     * @official
+     * @since 0.9.7
+     */
+    getValue(): string;
 
-        /**
-         * Set the callback function to be called when the dropdown value changes.
-         *
-         * @param callback - The callback function.
-         * @returns The dropdown component.
-         * @example
-         * ```ts
-         * dropdown.onChange((value) => console.log(value));
-         * ```
-         * @official
-         * @since 0.9.7
-         */
-        onChange(callback: (value: string) => unknown): this;
+    /**
+     * Set the callback function to be called when the dropdown value changes.
+     *
+     * @param callback - The callback function.
+     * @returns The dropdown component.
+     * @example
+     * ```ts
+     * dropdown.onChange((value) => console.log(value));
+     * ```
+     * @official
+     * @since 0.9.7
+     */
+    onChange(callback: (value: string) => unknown): this;
 
-        /**
-         * Set the disabled state of the dropdown.
-         *
-         * @param disabled - Whether the dropdown is disabled.
-         * @returns The dropdown component.
-         * @example
-         * ```ts
-         * dropdown.setDisabled(true);
-         * ```
-         * @official
-         * @since 1.2.3
-         */
-        setDisabled(disabled: boolean): this;
+    /**
+     * Set the disabled state of the dropdown.
+     *
+     * @param disabled - Whether the dropdown is disabled.
+     * @returns The dropdown component.
+     * @example
+     * ```ts
+     * dropdown.setDisabled(true);
+     * ```
+     * @official
+     * @since 1.2.3
+     */
+    setDisabled(disabled: boolean): this;
 
-        /**
-         * Set the selected value of the dropdown.
-         *
-         * @param value - The value to set.
-         * @returns The dropdown component.
-         * @example
-         * ```ts
-         * dropdown.setValue('foo');
-         * ```
-         * @official
-         * @since 0.9.7
-         */
-        setValue(value: string): this;
-    }
+    /**
+     * Set the selected value of the dropdown.
+     *
+     * @param value - The value to set.
+     * @returns The dropdown component.
+     * @example
+     * ```ts
+     * dropdown.setValue('foo');
+     * ```
+     * @official
+     * @since 0.9.7
+     */
+    setValue(value: string): this;
+  }
 }

@@ -8,6 +8,6 @@ import type { SlidesPlugin } from './SlidesPlugin.d.ts';
  * @unofficial
  */
 export interface SlidesPluginInstance extends InternalPluginInstance<SlidesPlugin> {
-    /** Reference to the app. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 }

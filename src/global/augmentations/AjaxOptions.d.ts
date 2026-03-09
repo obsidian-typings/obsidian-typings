@@ -1,58 +1,58 @@
 export {};
 
 declare global {
+  /**
+   * Options for an {@link ajax} request.
+   */
+  interface AjaxOptions {
     /**
-     * Options for an {@link ajax} request.
+     * The data of the AJAX request.
+     * @official
      */
-    interface AjaxOptions {
-        /**
-         * The data of the AJAX request.
-         * @official
-         */
-        data?: object | string | ArrayBuffer;
+    data?: object | string | ArrayBuffer;
 
-        /**
-         * The headers of the AJAX request.
-         * @official
-         */
-        headers?: Record<string, string>;
+    /**
+     * The headers of the AJAX request.
+     * @official
+     */
+    headers?: Record<string, string>;
 
-        /**
-         * The method of the AJAX request.
-         * @official
-         */
-        method?: 'GET' | 'POST';
+    /**
+     * The method of the AJAX request.
+     * @official
+     */
+    method?: 'GET' | 'POST';
 
-        /**
-         * The XMLHttpRequest object.
-         * @official
-         */
-        req?: XMLHttpRequest;
+    /**
+     * The XMLHttpRequest object.
+     * @official
+     */
+    req?: XMLHttpRequest;
 
-        /**
-         * The URL of the AJAX request.
-         * @official
-         */
-        url: string;
+    /**
+     * The URL of the AJAX request.
+     * @official
+     */
+    url: string;
 
-        /**
-         * Whether to send credentials with the AJAX request.
-         * @official
-         */
-        withCredentials?: boolean;
+    /**
+     * Whether to send credentials with the AJAX request.
+     * @official
+     */
+    withCredentials?: boolean;
 
-        /**
-         * The error callback of the AJAX request.
-         * @official
-         */
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-        error?: (error: any, req: XMLHttpRequest) => any;
+    /**
+     * The error callback of the AJAX request.
+     * @official
+     */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
+    error?: (error: any, req: XMLHttpRequest) => any;
 
-        /**
-         * The success callback of the AJAX request.
-         * @official
-         */
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-        success?: (response: any, req: XMLHttpRequest) => any;
-    }
+    /**
+     * The success callback of the AJAX request.
+     * @official
+     */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
+    success?: (response: any, req: XMLHttpRequest) => any;
+  }
 }

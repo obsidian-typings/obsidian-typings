@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getAudioViewConstructor(app: App): ExtractConstructor<AudioView> {
-    return getViewConstructorByViewType(app, ViewType.Audio);
+  return getViewConstructorByViewType(app, ViewType.Audio);
 }

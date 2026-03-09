@@ -1,109 +1,109 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * A setting tab.
+   *
+   * @see {@link https://docs.obsidian.md/Plugins/User+interface/Settings#Register+a+settings+tab}.
+   * @since 0.9.7
+   */
+  interface SettingTab {
     /**
-     * A setting tab.
+     * Reference to the app instance.
      *
-     * @see {@link https://docs.obsidian.md/Plugins/User+interface/Settings#Register+a+settings+tab}.
-     * @since 0.9.7
+     * @official
      */
-    interface SettingTab {
-        /**
-         * Reference to the app instance.
-         *
-         * @official
-         */
-        app: App;
+    app: App;
 
-        /**
-         * HTML element for the setting tab content.
-         *
-         * @official
-         */
-        containerEl: HTMLElement;
+    /**
+     * HTML element for the setting tab content.
+     *
+     * @official
+     */
+    containerEl: HTMLElement;
 
-        /**
-         * The icon to display in the settings sidebar.
-         *
-         * @official
-         * @since 1.11.0
-         */
-        icon: IconName;
+    /**
+     * The icon to display in the settings sidebar.
+     *
+     * @official
+     * @since 1.11.0
+     */
+    icon: IconName;
 
-        /**
-         * Unique ID of the tab.
-         *
-         * @unofficial
-         */
-        id: string;
+    /**
+     * Unique ID of the tab.
+     *
+     * @unofficial
+     */
+    id: string;
 
-        /**
-         * Reference to installed plugins element.
-         *
-         * Tab is the community plugins tab.
-         *
-         * @unofficial
-         */
-        installedPluginsEl?: HTMLElement;
+    /**
+     * Reference to installed plugins element.
+     *
+     * Tab is the community plugins tab.
+     *
+     * @unofficial
+     */
+    installedPluginsEl?: HTMLElement;
 
-        /**
-         * Sidebar name of the tab.
-         *
-         * @unofficial
-         */
-        name: string;
+    /**
+     * Sidebar name of the tab.
+     *
+     * @unofficial
+     */
+    name: string;
 
-        /**
-         * Sidebar navigation element of the tab.
-         *
-         * @unofficial
-         */
-        navEl: HTMLElement;
+    /**
+     * Sidebar navigation element of the tab.
+     *
+     * @unofficial
+     */
+    navEl: HTMLElement;
 
-        /**
-         * Reference to the plugin that initialized the tab.
-         *
-         * Tab is a plugin tab.
-         *
-         * @unofficial
-         */
-        plugin?: Plugin;
+    /**
+     * Reference to the plugin that initialized the tab.
+     *
+     * Tab is a plugin tab.
+     *
+     * @unofficial
+     */
+    plugin?: Plugin;
 
-        /**
-         * Reference to the settings modal.
-         *
-         * @unofficial
-         */
-        setting: Setting;
+    /**
+     * Reference to the settings modal.
+     *
+     * @unofficial
+     */
+    setting: Setting;
 
-        /**
-         * Constructor.
-         *
-         * To extract the constructor type, use `ExtractConstructor<SettingTab>`.
-         *
-         * @param app - The app instance.
-         * @param setting - The setting.
-         * @returns The new instance.
-         * @unofficial
-         * @deprecated - Added only for typing purposes.
-         */
-        constructor2__(app: App, setting: Setting): this;
+    /**
+     * Constructor.
+     *
+     * To extract the constructor type, use `ExtractConstructor<SettingTab>`.
+     *
+     * @param app - The app instance.
+     * @param setting - The setting.
+     * @returns The new instance.
+     * @unofficial
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor2__(app: App, setting: Setting): this;
 
-        /**
-         * Called when the settings tab should be rendered.
-         * @see {@link https://docs.obsidian.md/Plugins/User+interface/Settings#Register+a+settings+tab}.
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link display} instead.
-         */
-        display__?(): void;
+    /**
+     * Called when the settings tab should be rendered.
+     * @see {@link https://docs.obsidian.md/Plugins/User+interface/Settings#Register+a+settings+tab}.
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link display} instead.
+     */
+    display__?(): void;
 
-        /**
-         * Hides the contents of the setting tab.
-         * Any registered components should be unloaded when the view is hidden.
-         * Override this if you need to perform additional cleanup.
-         *
-         * @official
-         */
-        hide(): void;
-    }
+    /**
+     * Hides the contents of the setting tab.
+     * Any registered components should be unloaded when the view is hidden.
+     * Override this if you need to perform additional cleanup.
+     *
+     * @official
+     */
+    hide(): void;
+  }
 }

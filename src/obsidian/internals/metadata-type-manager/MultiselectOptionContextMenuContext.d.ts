@@ -5,9 +5,9 @@
  * @unofficial
  */
 export interface MultiselectOptionContextMenuContext {
-    /** The element of the option context. */
-    el: HTMLDivElement;
+  /** The element of the option context. */
+  el: HTMLDivElement;
 
-    /** The pill element of the option context. */
-    pillEl: HTMLDivElement;
+  /** The pill element of the option context. */
+  pillEl: HTMLDivElement;
 }

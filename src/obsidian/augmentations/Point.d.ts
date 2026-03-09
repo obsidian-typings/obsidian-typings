@@ -1,22 +1,22 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Represents a point in a 2D coordinate system.
+   */
+  interface Point {
     /**
-     * Represents a point in a 2D coordinate system.
+     * The x coordinate.
+     *
+     * @official
      */
-    interface Point {
-        /**
-         * The x coordinate.
-         *
-         * @official
-         */
-        x: number;
+    x: number;
 
-        /**
-         * The y coordinate.
-         *
-         * @official
-         */
-        y: number;
-    }
+    /**
+     * The y coordinate.
+     *
+     * @official
+     */
+    y: number;
+  }
 }

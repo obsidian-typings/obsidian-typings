@@ -4,9 +4,9 @@
  * @unofficial
  */
 export interface SQLError {
-    /** Numeric error code identifying the type of error. */
-    code: number;
+  /** Numeric error code identifying the type of error. */
+  code: number;
 
-    /** Human-readable error message. */
-    message: string;
+  /** Human-readable error message. */
+  message: string;
 }

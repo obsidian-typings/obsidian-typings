@@ -7,6 +7,6 @@ import type { LinkUpdater } from './LinkUpdater.d.ts';
  * @unofficial
  */
 export interface LinkUpdaters extends Record<string, LinkUpdater> {
-    /** Link updater for canvas files. */
-    canvas?: CanvasLinkUpdater;
+  /** Link updater for canvas files. */
+  canvas?: CanvasLinkUpdater;
 }

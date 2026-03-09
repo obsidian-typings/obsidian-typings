@@ -11,15 +11,15 @@ import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
  * @unofficial
  */
 export interface TreeRoot<Item extends TreeItem> extends TreeNode {
-    /** Container element for the root's child items. */
-    childrenEl: HTMLElement;
+  /** Container element for the root's child items. */
+  childrenEl: HTMLElement;
 
-    /** Layout information for the root node used by virtual scrolling. */
-    info: TreeNodeInfo;
+  /** Layout information for the root node used by virtual scrolling. */
+  info: TreeNodeInfo;
 
-    /** Spacer element used to maintain correct scroll height for virtual scrolling. */
-    pusherEl: HTMLElement;
+  /** Spacer element used to maintain correct scroll height for virtual scrolling. */
+  pusherEl: HTMLElement;
 
-    /** Virtual children manager for the root's child items. */
-    vChildren: TreeNodeVChildren<Item, TreeRoot<Item>>;
+  /** Virtual children manager for the root's child items. */
+  vChildren: TreeNodeVChildren<Item, TreeRoot<Item>>;
 }

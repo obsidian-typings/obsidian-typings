@@ -1,6 +1,6 @@
 import {
-    type App,
-    TFolder
+  type App,
+  TFolder
 } from 'obsidian';
 import { getTFolderConstructor } from '../constructors/augmentations/getTFolderConstructor.ts';
 import { parentFolderPath } from '../utils/PathUtils.ts';
@@ -13,13 +13,13 @@ import { parentFolderPath } from '../utils/PathUtils.ts';
  * @unofficial
  */
 export function createTFolderInstance(app: App, path: string): TFolder {
-    let folder = app.vault.getFolderByPath(path);
-    if (folder) {
-        return folder;
-    }
-
-    folder = new (getTFolderConstructor())(app.vault, path);
-    folder.parent = createTFolderInstance(app, parentFolderPath(path));
-    folder.deleted = true;
+  let folder = app.vault.getFolderByPath(path);
+  if (folder) {
     return folder;
+  }
+
+  folder = new (getTFolderConstructor())(app.vault, path);
+  folder.parent = createTFolderInstance(app, parentFolderPath(path));
+  folder.deleted = true;
+  return folder;
 }

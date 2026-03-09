@@ -1,5 +1,5 @@
 import {
-    MomentFormatComponent
+  MomentFormatComponent
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type MomentFormatComponentConstructor = ExtractConstructor<MomentFormatComponent
  * @unofficial
  */
 export function getMomentFormatComponentConstructor(): MomentFormatComponentConstructor {
-    return MomentFormatComponent as MomentFormatComponentConstructor;
+  return MomentFormatComponent as MomentFormatComponentConstructor;
 }

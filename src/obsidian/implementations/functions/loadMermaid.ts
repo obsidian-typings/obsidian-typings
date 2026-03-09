@@ -12,5 +12,5 @@ import { loadMermaid as loadMermaidOriginal } from 'obsidian';
  * @unofficial
  */
 export async function loadMermaid(): Promise<Mermaid> {
-    return (await loadMermaidOriginal()) as Mermaid;
+  return (await loadMermaidOriginal()) as Mermaid;
 }

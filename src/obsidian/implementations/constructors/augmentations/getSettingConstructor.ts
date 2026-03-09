@@ -1,5 +1,5 @@
 import {
-    Setting
+  Setting
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type SettingConstructor = ExtractConstructor<Setting>;
  * @unofficial
  */
 export function getSettingConstructor(): SettingConstructor {
-    return Setting as SettingConstructor;
+  return Setting as SettingConstructor;
 }

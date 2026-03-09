@@ -14,5 +14,5 @@ type StatusBarConstructor = ExtractConstructor<StatusBar>;
  * @unofficial
  */
 export function getStatusBarConstructor(app: App): StatusBarConstructor {
-    return app.statusBar.constructor as StatusBarConstructor;
+  return app.statusBar.constructor as StatusBarConstructor;
 }

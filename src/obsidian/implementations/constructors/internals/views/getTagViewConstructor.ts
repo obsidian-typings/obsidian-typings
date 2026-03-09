@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getTagViewConstructor(app: App): ExtractConstructor<TagView> {
-    return getViewConstructorByViewType(app, ViewType.Tag);
+  return getViewConstructorByViewType(app, ViewType.Tag);
 }

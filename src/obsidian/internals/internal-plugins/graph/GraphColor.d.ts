@@ -5,14 +5,14 @@
  * @unofficial
  */
 export type GraphColor =
-    | 'arrow'
-    | 'circle'
-    | 'fill'
-    | 'fillAttachment'
-    | 'fillFocused'
-    | 'fillHighlight'
-    | 'fillTag'
-    | 'fillUnresolved'
-    | 'line'
-    | 'lineHighlight'
-    | 'text';
+  | 'arrow'
+  | 'circle'
+  | 'fill'
+  | 'fillAttachment'
+  | 'fillFocused'
+  | 'fillHighlight'
+  | 'fillTag'
+  | 'fillUnresolved'
+  | 'line'
+  | 'lineHighlight'
+  | 'text';

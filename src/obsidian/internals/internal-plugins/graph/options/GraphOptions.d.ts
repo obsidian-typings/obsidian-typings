@@ -6,19 +6,19 @@ import type { TreeCollapsibleItem } from '../../../tree/TreeCollapsibleItem.d.ts
  * @unofficial
  */
 export interface GraphOptions extends TreeCollapsibleItem {
-    /**
-     * Get the current values of this options section.
-     *
-     * @param e - The options context.
-     * @returns The current option values.
-     */
-    getOptions(e: unknown): unknown;
+  /**
+   * Get the current values of this options section.
+   *
+   * @param e - The options context.
+   * @returns The current option values.
+   */
+  getOptions(e: unknown): unknown;
 
-    /**
-     * Apply new values to this options section.
-     *
-     * @param e - The options to apply.
-     * @returns The applied option values.
-     */
-    setOptions(e: unknown): unknown;
+  /**
+   * Apply new values to this options section.
+   *
+   * @param e - The options to apply.
+   * @returns The applied option values.
+   */
+  setOptions(e: unknown): unknown;
 }

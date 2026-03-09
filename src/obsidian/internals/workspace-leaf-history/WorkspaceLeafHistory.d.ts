@@ -1,6 +1,6 @@
 import type { WorkspaceLeaf } from 'obsidian';
 import type {
-    getWorkspaceLeafHistoryConstructor
+  getWorkspaceLeafHistoryConstructor
 } from '../../implementations/constructors/internals/getWorkspaceLeafHistoryConstructor.d.ts';
 import type { SerializedWorkspaceLeafHistory } from './SerializedWorkspaceLeafHistory.d.ts';
 import type { WorkspaceLeafHistoryState } from './WorkspaceLeafHistoryState.d.ts';
@@ -11,75 +11,75 @@ import type { WorkspaceLeafHistoryState } from './WorkspaceLeafHistoryState.d.ts
  * @unofficial
  */
 export interface WorkspaceLeafHistory {
-    /** List of previous navigation states. */
-    backHistory: WorkspaceLeafHistoryState[];
+  /** List of previous navigation states. */
+  backHistory: WorkspaceLeafHistoryState[];
 
-    /** List of forward navigation states (after going back). */
-    forwardHistory: WorkspaceLeafHistoryState[];
+  /** List of forward navigation states (after going back). */
+  forwardHistory: WorkspaceLeafHistoryState[];
 
-    /** The workspace leaf that owns this history. */
-    owner: WorkspaceLeaf;
+  /** The workspace leaf that owns this history. */
+  owner: WorkspaceLeaf;
 
-    /**
-     * Navigate back to the previous state.
-     *
-     * @returns A promise that resolves when navigation is complete.
-     * To get the constructor instance, use {@link getWorkspaceLeafHistoryConstructor} from `obsidian-typings/implementations`.
-     */
-    back(): Promise<void>;
+  /**
+   * Navigate back to the previous state.
+   *
+   * @returns A promise that resolves when navigation is complete.
+   * To get the constructor instance, use {@link getWorkspaceLeafHistoryConstructor} from `obsidian-typings/implementations`.
+   */
+  back(): Promise<void>;
 
-    /**
-     * Constructor.
-     *
-     * To get the constructor instance, use {@link getWorkspaceLeafHistoryConstructor} from `obsidian-typings/implementations`.
-     *
-     * @param owner - The owner.
-     * @returns The new instance.
-     * @deprecated - Added only for typing purposes.
-     */
-    constructor__(owner: WorkspaceLeaf): this;
+  /**
+   * Constructor.
+   *
+   * To get the constructor instance, use {@link getWorkspaceLeafHistoryConstructor} from `obsidian-typings/implementations`.
+   *
+   * @param owner - The owner.
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
+   */
+  constructor__(owner: WorkspaceLeaf): this;
 
-    /**
-     * Restore history from a serialized representation.
-     *
-     * @param e - The serialized history data.
-     */
-    deserialize(e: SerializedWorkspaceLeafHistory): void;
+  /**
+   * Restore history from a serialized representation.
+   *
+   * @param e - The serialized history data.
+   */
+  deserialize(e: SerializedWorkspaceLeafHistory): void;
 
-    /**
-     * Navigate forward to the next state.
-     *
-     * @returns A promise that resolves when navigation is complete.
-     */
-    forward(): Promise<void>;
+  /**
+   * Navigate forward to the next state.
+   *
+   * @returns A promise that resolves when navigation is complete.
+   */
+  forward(): Promise<void>;
 
-    /**
-     * Navigate by the given number of steps (negative for back, positive for forward).
-     *
-     * @param step - The number of steps to navigate.
-     * @returns A promise that resolves when navigation is complete.
-     */
-    go(step: number): Promise<void>;
+  /**
+   * Navigate by the given number of steps (negative for back, positive for forward).
+   *
+   * @param step - The number of steps to navigate.
+   * @returns A promise that resolves when navigation is complete.
+   */
+  go(step: number): Promise<void>;
 
-    /**
-     * Push a new state onto the back history stack.
-     *
-     * @param state - The history state to push.
-     */
-    pushState(state: WorkspaceLeafHistoryState): void;
+  /**
+   * Push a new state onto the back history stack.
+   *
+   * @param state - The history state to push.
+   */
+  pushState(state: WorkspaceLeafHistoryState): void;
 
-    /**
-     * Serialize the history for persistence.
-     *
-     * @returns The serialized history data.
-     */
-    serialize(): SerializedWorkspaceLeafHistory;
+  /**
+   * Serialize the history for persistence.
+   *
+   * @returns The serialized history data.
+   */
+  serialize(): SerializedWorkspaceLeafHistory;
 
-    /**
-     * Update the current state in the history.
-     *
-     * @param state - The history state to update with.
-     * @returns A promise that resolves when the state is updated.
-     */
-    updateState(state: WorkspaceLeafHistoryState): Promise<void>;
+  /**
+   * Update the current state in the history.
+   *
+   * @param state - The history state to update with.
+   * @returns A promise that resolves when the state is updated.
+   */
+  updateState(state: WorkspaceLeafHistoryState): Promise<void>;
 }

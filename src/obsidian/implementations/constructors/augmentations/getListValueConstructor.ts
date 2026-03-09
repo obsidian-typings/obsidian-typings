@@ -1,5 +1,5 @@
 import {
-    ListValue
+  ListValue
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type ListValueConstructor = ExtractConstructor<ListValue>;
  * @unofficial
  */
 export function getListValueConstructor(): ListValueConstructor {
-    return ListValue as ListValueConstructor;
+  return ListValue as ListValueConstructor;
 }

@@ -7,9 +7,9 @@ import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
  * @unofficial
  */
 export interface GraphColorGroup {
-    /** Color associated to the group. */
-    color: GraphColorAttributes;
+  /** Color associated to the group. */
+  color: GraphColorAttributes;
 
-    /** Query associated to the group. */
-    query: string;
+  /** Query associated to the group. */
+  query: string;
 }

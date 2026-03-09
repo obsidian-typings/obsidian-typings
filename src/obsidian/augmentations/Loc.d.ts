@@ -1,26 +1,26 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Location within a Markdown document
+   */
+  interface Loc {
     /**
-     * Location within a Markdown document
+     * Column number. 0-based.
+     * @official
      */
-    interface Loc {
-        /**
-         * Column number. 0-based.
-         * @official
-         */
-        col: number;
+    col: number;
 
-        /**
-         * Line number. 0-based.
-         * @official
-         */
-        line: number;
+    /**
+     * Line number. 0-based.
+     * @official
+     */
+    line: number;
 
-        /**
-         * Number of characters from the beginning of the file.
-         * @official
-         */
-        offset: number;
-    }
+    /**
+     * Number of characters from the beginning of the file.
+     * @official
+     */
+    offset: number;
+  }
 }

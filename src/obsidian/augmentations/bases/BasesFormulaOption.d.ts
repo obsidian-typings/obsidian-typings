@@ -1,34 +1,34 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * A text input supporting formula evaluation.
+   *
+   * @since 1.10.2
+   */
+  interface BasesFormulaOption extends BasesOption {
     /**
-     * A text input supporting formula evaluation.
+     * The default value of the option.
      *
+     * @official
      * @since 1.10.2
      */
-    interface BasesFormulaOption extends BasesOption {
-        /**
-         * The default value of the option.
-         *
-         * @official
-         * @since 1.10.2
-         */
-        default?: string;
+    default?: string;
 
-        /**
-         * The placeholder of the option.
-         *
-         * @official
-         * @since 1.10.2
-         */
-        placeholder?: string;
+    /**
+     * The placeholder of the option.
+     *
+     * @official
+     * @since 1.10.2
+     */
+    placeholder?: string;
 
-        /**
-         * The type of the option.
-         *
-         * @official
-         * @since 1.10.2
-         */
-        type: 'formula';
-    }
+    /**
+     * The type of the option.
+     *
+     * @official
+     * @since 1.10.2
+     */
+    type: 'formula';
+  }
 }

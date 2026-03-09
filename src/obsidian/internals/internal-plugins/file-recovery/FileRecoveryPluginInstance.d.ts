@@ -8,9 +8,9 @@ import type { FileRecoveryPlugin } from './FileRecoveryPlugin.d.ts';
  * @unofficial
  */
 export interface FileRecoveryPluginInstance extends InternalPluginInstance<FileRecoveryPlugin> {
-    /** Reference to the app. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 
-    /** Whether this plugin is enabled by default. */
-    defaultOn: true;
+  /** Whether this plugin is enabled by default. */
+  defaultOn: true;
 }

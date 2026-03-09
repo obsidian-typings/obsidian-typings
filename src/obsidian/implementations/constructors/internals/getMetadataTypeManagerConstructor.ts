@@ -14,5 +14,5 @@ type MetadataTypeManagerConstructor = ExtractConstructor<MetadataTypeManager>;
  * @unofficial
  */
 export function getMetadataTypeManagerConstructor(app: App): MetadataTypeManagerConstructor {
-    return app.metadataTypeManager.constructor as MetadataTypeManagerConstructor;
+  return app.metadataTypeManager.constructor as MetadataTypeManagerConstructor;
 }

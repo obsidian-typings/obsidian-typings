@@ -12,5 +12,5 @@ import type { default as pdfjsLib } from 'pdfjs-dist';
  * @unofficial
  */
 export async function loadPdfJs(): Promise<typeof pdfjsLib> {
-    return (await loadPdfJsOriginal()) as typeof pdfjsLib;
+  return (await loadPdfJsOriginal()) as typeof pdfjsLib;
 }

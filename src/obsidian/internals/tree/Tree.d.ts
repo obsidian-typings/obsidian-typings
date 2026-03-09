@@ -1,7 +1,7 @@
 import type {
-    App,
-    Scope,
-    View
+  App,
+  Scope,
+  View
 } from 'obsidian';
 import type { InfinityScroll } from './InfinityScroll.d.ts';
 import type { TreeItem } from './TreeItem.d.ts';
@@ -15,222 +15,222 @@ import type { TreeRoot } from './TreeRoot.d.ts';
  * @unofficial
  */
 export interface Tree<T extends TreeItem> {
-    /**
-     * Currently active item in tree view.
-     */
-    activeDom: T | null;
+  /**
+   * Currently active item in tree view.
+   */
+  activeDom: T | null;
 
-    /**
-     * Reference to App.
-     */
-    app: App;
+  /**
+   * Reference to App.
+   */
+  app: App;
 
-    /**
-     * Container element of the tree view.
-     */
-    containerEl: HTMLElement;
+  /**
+   * Container element of the tree view.
+   */
+  containerEl: HTMLElement;
 
-    /**
-     * Currently focused item in tree view.
-     */
-    focusedItem: T | null;
+  /**
+   * Currently focused item in tree view.
+   */
+  focusedItem: T | null;
 
-    /**
-     * ID of the view the tree is associated with.
-     */
-    id: string;
+  /**
+   * ID of the view the tree is associated with.
+   */
+  id: string;
 
-    /**
-     * Facilitates rendering of tree view.
-     */
-    infinityScroll: InfinityScroll;
+  /**
+   * Facilitates rendering of tree view.
+   */
+  infinityScroll: InfinityScroll;
 
-    /**
-     * Whether all items in the tree are collapsed.
-     */
-    isAllCollapsed: boolean;
+  /**
+   * Whether all items in the tree are collapsed.
+   */
+  isAllCollapsed: boolean;
 
-    /**
-     * Whether tree items should default to collapsed state.
-     */
-    prefersCollapsed: boolean;
+  /**
+   * Whether tree items should default to collapsed state.
+   */
+  prefersCollapsed: boolean;
 
-    /**
-     * Key scope for tree view.
-     */
-    scope: Scope;
+  /**
+   * Key scope for tree view.
+   */
+  scope: Scope;
 
-    /**
-     * Currently selected items in tree view.
-     */
-    selectedDoms: Set<T>;
+  /**
+   * Currently selected items in tree view.
+   */
+  selectedDoms: Set<T>;
 
-    /**
-     * The view the tree is associated with.
-     */
-    view: View;
+  /**
+   * The view the tree is associated with.
+   */
+  view: View;
 
-    /**
-     * Change the focused item to the next item in specified direction.
-     *
-     * @param direction - The direction to move focus.
-     */
-    changeFocusedItem(direction: 'forwards' | 'backwards'): void;
+  /**
+   * Change the focused item to the next item in specified direction.
+   *
+   * @param direction - The direction to move focus.
+   */
+  changeFocusedItem(direction: 'forwards' | 'backwards'): void;
 
-    /**
-     * Unselect all selected items in the tree view.
-     */
-    clearSelectedDoms(): void;
+  /**
+   * Unselect all selected items in the tree view.
+   */
+  clearSelectedDoms(): void;
 
-    /**
-     * Mark tree item as deselected.
-     *
-     * @param node - The tree item to deselect.
-     */
-    deselectItem(node: T): void;
+  /**
+   * Mark tree item as deselected.
+   *
+   * @param node - The tree item to deselect.
+   */
+  deselectItem(node: T): void;
 
-    /**
-     * Get the local storage key for the saved tree view folds.
-     *
-     * @returns The local storage key string.
-     */
-    getFoldKey(): string;
+  /**
+   * Get the local storage key for the saved tree view folds.
+   *
+   * @returns The local storage key string.
+   */
+  getFoldKey(): string;
 
-    /**
-     * Gets the ID of a tree item given its Node.
-     *
-     * @param node - The tree item to get the ID for.
-     * @returns The node ID, or `undefined` if not found.
-     */
-    getNodeId(node: T): string | undefined;
+  /**
+   * Gets the ID of a tree item given its Node.
+   *
+   * @param node - The tree item to get the ID for.
+   * @returns The node ID, or `undefined` if not found.
+   */
+  getNodeId(node: T): string | undefined;
 
-    /**
-     * Handle collapsing of all nodes.
-     */
-    handleCollapseAll: () => void;
+  /**
+   * Handle collapsing of all nodes.
+   */
+  handleCollapseAll: () => void;
 
-    /**
-     * Handle deletion of selected nodes.
-     *
-     * @param event - The keyboard event that triggered the deletion.
-     * @returns A promise that resolves when the selected items are deleted.
-     */
-    handleDeleteSelectedItems(event: KeyboardEvent): Promise<void>;
+  /**
+   * Handle deletion of selected nodes.
+   *
+   * @param event - The keyboard event that triggered the deletion.
+   * @returns A promise that resolves when the selected items are deleted.
+   */
+  handleDeleteSelectedItems(event: KeyboardEvent): Promise<void>;
 
-    /**
-     * Handle selection of tree item via keyboard event.
-     *
-     * @param event - The mouse event that triggered the selection.
-     * @param node - The tree item being selected.
-     */
-    handleItemSelection(event: MouseEvent, node: T): void;
+  /**
+   * Handle selection of tree item via keyboard event.
+   *
+   * @param event - The mouse event that triggered the selection.
+   * @param node - The tree item being selected.
+   */
+  handleItemSelection(event: MouseEvent, node: T): void;
 
-    /**
-     * Handle renaming of focused item.
-     *
-     * @param event - The keyboard event that triggered the rename.
-     */
-    handleRenameFocusedItem: (event: KeyboardEvent) => void;
+  /**
+   * Handle renaming of focused item.
+   *
+   * @param event - The keyboard event that triggered the rename.
+   */
+  handleRenameFocusedItem: (event: KeyboardEvent) => void;
 
-    /**
-     * Registers all keyboard actions to the tree view keyscope.
-     */
-    initializeKeyboardNav(): void;
+  /**
+   * Registers all keyboard actions to the tree view keyscope.
+   */
+  initializeKeyboardNav(): void;
 
-    /**
-     * Check whether item is a valid tree item.
-     *
-     * @param node - The item to check.
-     * @returns Whether the item is a valid tree item.
-     */
-    isItem(node: T | undefined): boolean;
+  /**
+   * Check whether item is a valid tree item.
+   *
+   * @param node - The item to check.
+   * @returns Whether the item is a valid tree item.
+   */
+  isItem(node: T | undefined): boolean;
 
-    /**
-     * Load the saved fold states of the tree view from local storage.
-     */
-    loadFolds(): void;
+  /**
+   * Load the saved fold states of the tree view from local storage.
+   */
+  loadFolds(): void;
 
-    /**
-     * Handle keyboard event for moving/selecting tree item below.
-     *
-     * @param event - The keyboard event.
-     */
-    onKeyArrowDown(event: KeyboardEvent): void;
+  /**
+   * Handle keyboard event for moving/selecting tree item below.
+   *
+   * @param event - The keyboard event.
+   */
+  onKeyArrowDown(event: KeyboardEvent): void;
 
-    /**
-     * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding).
-     *
-     * @param event - The keyboard event.
-     */
-    onKeyArrowLeft(event: KeyboardEvent): void;
+  /**
+   * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding).
+   *
+   * @param event - The keyboard event.
+   */
+  onKeyArrowLeft(event: KeyboardEvent): void;
 
-    /**
-     * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding).
-     *
-     * @param event - The keyboard event.
-     */
-    onKeyArrowRight(event: KeyboardEvent): void;
+  /**
+   * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding).
+   *
+   * @param event - The keyboard event.
+   */
+  onKeyArrowRight(event: KeyboardEvent): void;
 
-    /**
-     * Handle keyboard event for moving/selecting tree item above.
-     *
-     * @param event - The keyboard event.
-     */
-    onKeyArrowUp(event: KeyboardEvent): void;
+  /**
+   * Handle keyboard event for moving/selecting tree item above.
+   *
+   * @param event - The keyboard event.
+   */
+  onKeyArrowUp(event: KeyboardEvent): void;
 
-    /**
-     * Handle keyboard event for opening tree item.
-     *
-     * @param event - The keyboard event.
-     */
-    onKeyOpen(event: KeyboardEvent): void;
+  /**
+   * Handle keyboard event for opening tree item.
+   *
+   * @param event - The keyboard event.
+   */
+  onKeyOpen(event: KeyboardEvent): void;
 
-    /**
-     * Update scroll representation on resize.
-     */
-    onResize(): void;
+  /**
+   * Update scroll representation on resize.
+   */
+  onResize(): void;
 
-    /**
-     * Request saving of the current fold states.
-     */
-    requestSaveFolds: () => void;
+  /**
+   * Request saving of the current fold states.
+   */
+  requestSaveFolds: () => void;
 
-    /**
-     * Root item of the tree view.
-     *
-     * @returns The root tree item.
-     */
-    get root(): TreeRoot<T>;
+  /**
+   * Root item of the tree view.
+   *
+   * @returns The root tree item.
+   */
+  get root(): TreeRoot<T>;
 
-    /**
-     * Save the current fold states of the tree view to local storage.
-     */
-    saveFolds(): void;
+  /**
+   * Save the current fold states of the tree view to local storage.
+   */
+  saveFolds(): void;
 
-    /**
-     * Mark tree item as selected.
-     *
-     * @param node - The tree item to select.
-     */
-    selectItem(node: T): void;
+  /**
+   * Mark tree item as selected.
+   *
+   * @param node - The tree item to select.
+   */
+  selectItem(node: T): void;
 
-    /**
-     * Set all items in the tree view to be collapsed or expanded.
-     *
-     * @param collapse - Whether to collapse all items.
-     */
-    setCollapseAll(collapse: boolean): void;
+  /**
+   * Set all items in the tree view to be collapsed or expanded.
+   *
+   * @param collapse - Whether to collapse all items.
+   */
+  setCollapseAll(collapse: boolean): void;
 
-    /**
-     * Set the focused item in the tree view.
-     *
-     * @param node - The tree item to focus.
-     * @param scrollIntoView - Whether to scroll the item into view.
-     */
-    setFocusedItem(node: T, scrollIntoView?: boolean): void;
+  /**
+   * Set the focused item in the tree view.
+   *
+   * @param node - The tree item to focus.
+   * @param scrollIntoView - Whether to scroll the item into view.
+   */
+  setFocusedItem(node: T, scrollIntoView?: boolean): void;
 
-    /**
-     * (Un)Collapse all items in the tree view.
-     */
-    toggleCollapseAll(): void;
+  /**
+   * (Un)Collapse all items in the tree view.
+   */
+  toggleCollapseAll(): void;
 }

@@ -1,6 +1,6 @@
 import type {
-    Reference,
-    ReferenceCache
+  Reference,
+  ReferenceCache
 } from 'obsidian';
 
 /**
@@ -13,5 +13,5 @@ import type {
  * @unofficial
  */
 export function isReferenceCache(reference: Reference): reference is ReferenceCache {
-    return !!(reference as Partial<ReferenceCache>).position;
+  return !!(reference as Partial<ReferenceCache>).position;
 }

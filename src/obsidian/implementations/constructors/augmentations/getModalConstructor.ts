@@ -1,5 +1,5 @@
 import {
-    Modal
+  Modal
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type ModalConstructor = ExtractConstructor<Modal>;
  * @unofficial
  */
 export function getModalConstructor(): ModalConstructor {
-    return Modal as ModalConstructor;
+  return Modal as ModalConstructor;
 }

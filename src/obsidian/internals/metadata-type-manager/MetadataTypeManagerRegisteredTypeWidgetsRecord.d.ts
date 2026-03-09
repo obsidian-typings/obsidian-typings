@@ -19,36 +19,36 @@ import type { TextPropertyWidgetComponent } from './TextPropertyWidgetComponent.
  * @unofficial
  */
 export interface MetadataTypeManagerRegisteredTypeWidgetsRecord extends Record<PropertyWidgetType, PropertyWidget> {
-    /** Property widget for aliases. */
-    aliases: PropertyWidget<AliasesPropertyWidgetComponent>;
+  /** Property widget for aliases. */
+  aliases: PropertyWidget<AliasesPropertyWidgetComponent>;
 
-    /** Property widget for checkboxes. */
-    checkbox: PropertyWidget<CheckboxPropertyWidgetComponent>;
+  /** Property widget for checkboxes. */
+  checkbox: PropertyWidget<CheckboxPropertyWidgetComponent>;
 
-    /** Property widget for dates. */
-    date: PropertyWidget<DatePropertyWidgetComponent>;
+  /** Property widget for dates. */
+  date: PropertyWidget<DatePropertyWidgetComponent>;
 
-    /** Property widget for datetimes. */
-    datetime: PropertyWidget<DatetimePropertyWidgetComponent>;
+  /** Property widget for datetimes. */
+  datetime: PropertyWidget<DatetimePropertyWidgetComponent>;
 
-    /** Property widget for files. */
-    file: PropertyWidget<FilePropertyWidgetComponent>;
+  /** Property widget for files. */
+  file: PropertyWidget<FilePropertyWidgetComponent>;
 
-    /** Property widget for folders. */
-    folder: PropertyWidget<FolderPropertyWidgetComponent>;
+  /** Property widget for folders. */
+  folder: PropertyWidget<FolderPropertyWidgetComponent>;
 
-    /** Property widget for multitexts. */
-    multitext: PropertyWidget<MultitextPropertyWidgetComponent>;
+  /** Property widget for multitexts. */
+  multitext: PropertyWidget<MultitextPropertyWidgetComponent>;
 
-    /** Property widget for numbers. */
-    number: PropertyWidget<NumberPropertyWidgetComponent>;
+  /** Property widget for numbers. */
+  number: PropertyWidget<NumberPropertyWidgetComponent>;
 
-    /** Property widget for properties. */
-    property: PropertyWidget<PropertyPropertyWidgetComponent>;
+  /** Property widget for properties. */
+  property: PropertyWidget<PropertyPropertyWidgetComponent>;
 
-    /** Property widget for tags. */
-    tags: PropertyWidget<TagsPropertyWidgetComponent>;
+  /** Property widget for tags. */
+  tags: PropertyWidget<TagsPropertyWidgetComponent>;
 
-    /** Property widget for text. */
-    text: PropertyWidget<TextPropertyWidgetComponent>;
+  /** Property widget for text. */
+  text: PropertyWidget<TextPropertyWidgetComponent>;
 }

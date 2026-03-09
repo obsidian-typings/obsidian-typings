@@ -7,23 +7,23 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface FilePropertyWidgetComponent extends PropertyWidgetComponentBase {
-    /** The input element for the property widget. */
-    inputEl: HTMLInputElement;
+  /** The input element for the property widget. */
+  inputEl: HTMLInputElement;
 
-    /** The type of the property widget. */
-    type: 'file';
+  /** The type of the property widget. */
+  type: 'file';
 
-    /**
-     * Handle focus event.
-     *
-     * @param mode - The focus mode.
-     */
-    onFocus(): void;
+  /**
+   * Handle focus event.
+   *
+   * @param mode - The focus mode.
+   */
+  onFocus(): void;
 
-    /**
-     * Set the value of the property widget.
-     *
-     * @param value - The value to set.
-     */
-    setValue(value: unknown): void;
+  /**
+   * Set the value of the property widget.
+   *
+   * @param value - The value to set.
+   */
+  setValue(value: unknown): void;
 }

@@ -10,14 +10,14 @@ import type { FileTreeItem } from './FileTreeItem.d.ts';
  * @unofficial
  */
 export interface FolderTreeItem extends AbstractFileTreeItem<TFile>, TreeCollapsibleItem {
-    /** Spacer element used for indentation in the tree. */
-    pusherEl: HTMLElement;
+  /** Spacer element used for indentation in the tree. */
+  pusherEl: HTMLElement;
 
-    /** Virtual children container managing child file and folder tree items. */
-    vChildren: TreeNodeVChildren<FolderTreeItem | FileTreeItem, FolderTreeItem>;
+  /** Virtual children container managing child file and folder tree items. */
+  vChildren: TreeNodeVChildren<FolderTreeItem | FileTreeItem, FolderTreeItem>;
 
-    /**
-     * Sort file items inside by current sort order.
-     */
-    sort(): void;
+  /**
+   * Sort file items inside by current sort order.
+   */
+  sort(): void;
 }

@@ -1,5 +1,5 @@
 import {
-    ObjectValue
+  ObjectValue
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type ObjectValueConstructor = ExtractConstructor<ObjectValue>;
  * @unofficial
  */
 export function getObjectValueConstructor(): ObjectValueConstructor {
-    return ObjectValue as ObjectValueConstructor;
+  return ObjectValue as ObjectValueConstructor;
 }

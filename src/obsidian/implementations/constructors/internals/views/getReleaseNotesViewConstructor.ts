@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getReleaseNotesViewConstructor(app: App): ExtractConstructor<ReleaseNotesView> {
-    return getViewConstructorByViewType(app, ViewType.ReleaseNotes);
+  return getViewConstructorByViewType(app, ViewType.ReleaseNotes);
 }

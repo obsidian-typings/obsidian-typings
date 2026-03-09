@@ -7,9 +7,9 @@ import type { GraphNodeData } from './GraphNodeData.d.ts';
  * @unofficial
  */
 export interface GraphData {
-    /** Record of nodes selected to be rendered. Their IDs are used as keys. */
-    nodes: Record<string, GraphNodeData>;
+  /** Record of nodes selected to be rendered. Their IDs are used as keys. */
+  nodes: Record<string, GraphNodeData>;
 
-    /** Number of links. */
-    numLinks: number;
+  /** Number of links. */
+  numLinks: number;
 }

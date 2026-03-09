@@ -6,15 +6,15 @@ import type { FileStats } from 'obsidian';
  * @unofficial
  */
 export interface FileSystemWatchHandler {
-    /** Handle raw, folder-created, folder-removed, or file-removed events. */
-    (eventType: 'raw' | 'folder-created' | 'folder-removed' | 'file-removed', path: string): void;
+  /** Handle raw, folder-created, folder-removed, or file-removed events. */
+  (eventType: 'raw' | 'folder-created' | 'folder-removed' | 'file-removed', path: string): void;
 
-    /** Handle modified or file-created events with file stats. */
-    (eventType: 'modified' | 'file-created', path: string, oldPath: undefined, stats: FileStats): void;
+  /** Handle modified or file-created events with file stats. */
+  (eventType: 'modified' | 'file-created', path: string, oldPath: undefined, stats: FileStats): void;
 
-    /** Handle file rename events with old and new paths. */
-    (eventType: 'renamed', path: string, oldPath: string): void;
+  /** Handle file rename events with old and new paths. */
+  (eventType: 'renamed', path: string, oldPath: string): void;
 
-    /** Handle watcher closed events. */
-    (eventType: 'closed'): void;
+  /** Handle watcher closed events. */
+  (eventType: 'closed'): void;
 }

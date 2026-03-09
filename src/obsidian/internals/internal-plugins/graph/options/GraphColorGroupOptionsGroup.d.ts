@@ -1,6 +1,6 @@
 import type {
-    ColorComponent,
-    TextComponent
+  ColorComponent,
+  TextComponent
 } from 'obsidian';
 
 /**
@@ -9,12 +9,12 @@ import type {
  * @unofficial
  */
 export interface GraphColorGroupOptionsGroup {
-    /** Color picker component for selecting the group color. */
-    color: ColorComponent;
+  /** Color picker component for selecting the group color. */
+  color: ColorComponent;
 
-    /** Container element for this color group entry. */
-    el: HTMLDivElement;
+  /** Container element for this color group entry. */
+  el: HTMLDivElement;
 
-    /** Text input component for the search query that defines this group. */
-    query: TextComponent;
+  /** Text input component for the search query that defines this group. */
+  query: TextComponent;
 }

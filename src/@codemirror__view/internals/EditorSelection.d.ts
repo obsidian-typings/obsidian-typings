@@ -6,9 +6,9 @@ import type { EditorPosition } from 'obsidian';
  * @unofficial
  */
 export interface EditorSelection {
-    /** The fixed end of the selection (where selection started). */
-    anchor: EditorPosition;
+  /** The fixed end of the selection (where selection started). */
+  anchor: EditorPosition;
 
-    /** The moving end of the selection (where the cursor is). */
-    head: EditorPosition;
+  /** The moving end of the selection (where the cursor is). */
+  head: EditorPosition;
 }

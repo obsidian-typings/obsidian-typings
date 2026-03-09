@@ -1,37 +1,37 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * The cache of the reference link in the note.
+   *
+   * ```markdown
+   * [google]
+   *
+   * [google]: https://google.com
+   * ```
+   * @since 1.8.7
+   */
+  interface ReferenceLinkCache extends CacheItem {
     /**
-     * The cache of the reference link in the note.
+     * The ID of the reference link.
      *
-     * ```markdown
-     * [google]
-     *
-     * [google]: https://google.com
+     * @example
+     * ```ts
+     * console.log(referenceLinkCache.id); // google
      * ```
-     * @since 1.8.7
+     * @official
      */
-    interface ReferenceLinkCache extends CacheItem {
-        /**
-         * The ID of the reference link.
-         *
-         * @example
-         * ```ts
-         * console.log(referenceLinkCache.id); // google
-         * ```
-         * @official
-         */
-        id: string;
+    id: string;
 
-        /**
-         * The link of the reference link.
-         *
-         * @example
-         * ```ts
-         * console.log(referenceLinkCache.link); // https://google.com
-         * ```
-         * @official
-         */
-        link: string;
-    }
+    /**
+     * The link of the reference link.
+     *
+     * @example
+     * ```ts
+     * console.log(referenceLinkCache.link); // https://google.com
+     * ```
+     * @official
+     */
+    link: string;
+  }
 }

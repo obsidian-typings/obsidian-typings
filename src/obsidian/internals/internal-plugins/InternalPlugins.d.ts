@@ -1,10 +1,10 @@
 import type {
-    App,
-    Debouncer,
-    Events
+  App,
+  Debouncer,
+  Events
 } from 'obsidian';
 import type {
-    getInternalPluginsConstructor
+  getInternalPluginsConstructor
 } from '../../implementations/constructors/internals/internal-plugins/getInternalPluginsConstructor.d.ts';
 import type { InternalPlugin } from './InternalPlugin.d.ts';
 import type { InternalPluginInstance } from './InternalPluginInstance.d.ts';
@@ -19,88 +19,88 @@ import type { InternalPluginsConfigRecord } from './InternalPluginsConfigRecord.
  * @unofficial
  */
 export interface InternalPlugins extends Events {
-    /**
-     * Reference to App.
-     */
-    app: App;
+  /**
+   * Reference to App.
+   */
+  app: App;
 
-    /**
-     * Mapping of whether an internal plugin is enabled.
-     */
-    config: InternalPluginsConfigRecord;
+  /**
+   * Mapping of whether an internal plugin is enabled.
+   */
+  config: InternalPluginsConfigRecord;
 
-    /**
-     * Plugin configs for internal plugins.
-     *
-     * @remark Prefer usage of getPluginById to access a plugin.
-     */
-    plugins: InternalPluginNamePluginsMapping;
+  /**
+   * Plugin configs for internal plugins.
+   *
+   * @remark Prefer usage of getPluginById to access a plugin.
+   */
+  plugins: InternalPluginNamePluginsMapping;
 
-    /**
-     * Request save of plugin configs.
-     */
-    requestSaveConfig: Debouncer<[], Promise<void>>;
+  /**
+   * Request save of plugin configs.
+   */
+  requestSaveConfig: Debouncer<[], Promise<void>>;
 
-    /**
-     * Constructor.
-     *
-     * To get the constructor instance, use {@link getInternalPluginsConstructor} from `obsidian-typings/implementations`.
-     *
-     * @param app - The app.
-     * @returns The new instance.
-     * @deprecated - Added only for typing purposes.
-     */
-    constructor2__(app: App): this;
+  /**
+   * Constructor.
+   *
+   * To get the constructor instance, use {@link getInternalPluginsConstructor} from `obsidian-typings/implementations`.
+   *
+   * @param app - The app.
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
+   */
+  constructor2__(app: App): this;
 
-    /**
-     * - Load plugin configs and enable plugins.
-     *
-     * @returns A promise that resolves when all plugins are enabled.
-     */
-    enable(): Promise<void>;
+  /**
+   * - Load plugin configs and enable plugins.
+   *
+   * @returns A promise that resolves when all plugins are enabled.
+   */
+  enable(): Promise<void>;
 
-    /**
-     * Get an enabled internal plugin by ID.
-     *
-     * @param id - ID of the plugin to get.
-     * @returns The plugin instance, or `null` if not enabled.
-     */
-    getEnabledPluginById<ID extends InternalPluginNameType>(id: ID): InternalPluginNameInstancesMapping[ID] | null;
+  /**
+   * Get an enabled internal plugin by ID.
+   *
+   * @param id - ID of the plugin to get.
+   * @returns The plugin instance, or `null` if not enabled.
+   */
+  getEnabledPluginById<ID extends InternalPluginNameType>(id: ID): InternalPluginNameInstancesMapping[ID] | null;
 
-    /**
-     * Get all enabled internal plugins.
-     *
-     * @returns The list of enabled internal plugins.
-     */
-    getEnabledPlugins(): InternalPlugin<unknown>[];
+  /**
+   * Get all enabled internal plugins.
+   *
+   * @returns The list of enabled internal plugins.
+   */
+  getEnabledPlugins(): InternalPlugin<unknown>[];
 
-    /**
-     * Get an internal plugin by ID.
-     *
-     * @param id - ID of the plugin to get.
-     * @returns The internal plugin, or `null` if not found.
-     */
-    getPluginById<ID extends InternalPluginNameType>(id: ID): InternalPluginNamePluginsMapping[ID] | null;
+  /**
+   * Get an internal plugin by ID.
+   *
+   * @param id - ID of the plugin to get.
+   * @returns The internal plugin, or `null` if not found.
+   */
+  getPluginById<ID extends InternalPluginNameType>(id: ID): InternalPluginNamePluginsMapping[ID] | null;
 
-    /**
-     * Load and register an internal plugin instance.
-     *
-     * @param internalPluginInstance - The plugin instance to load.
-     * @returns The loaded plugin instance.
-     */
-    loadPlugin<Instance extends InternalPluginInstance<unknown>>(internalPluginInstance: Instance): Instance;
+  /**
+   * Load and register an internal plugin instance.
+   *
+   * @param internalPluginInstance - The plugin instance to load.
+   * @returns The loaded plugin instance.
+   */
+  loadPlugin<Instance extends InternalPluginInstance<unknown>>(internalPluginInstance: Instance): Instance;
 
-    /**
-     * Handle raw file change events for the config path.
-     *
-     * @param configPath - The path of the changed config file.
-     */
-    onRaw(configPath: string): void;
+  /**
+   * Handle raw file change events for the config path.
+   *
+   * @param configPath - The path of the changed config file.
+   */
+  onRaw(configPath: string): void;
 
-    /**
-     * - Save current plugin configs.
-     *
-     * @returns A promise that resolves when the config is saved.
-     */
-    saveConfig(): Promise<void>;
+  /**
+   * - Save current plugin configs.
+   *
+   * @returns A promise that resolves when the config is saved.
+   */
+  saveConfig(): Promise<void>;
 }

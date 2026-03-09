@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getFileExplorerViewConstructor(app: App): ExtractConstructor<FileExplorerView> {
-    return getViewConstructorByViewType(app, ViewType.FileExplorer);
+  return getViewConstructorByViewType(app, ViewType.FileExplorer);
 }

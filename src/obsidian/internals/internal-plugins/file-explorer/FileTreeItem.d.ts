@@ -7,16 +7,16 @@ import type { AbstractFileTreeItem } from './AbstractFileTreeItem.d.ts';
  * @unofficial
  */
 export interface FileTreeItem extends AbstractFileTreeItem<TFile> {
-    /**
-     * Element that indicates associated file extension,
-     * if it wasn't a Markdown file.
-     */
-    tagEl: HTMLElement | null;
+  /**
+   * Element that indicates associated file extension,
+   * if it wasn't a Markdown file.
+   */
+  tagEl: HTMLElement | null;
 
-    /**
-     * Check whether the file type is supported for opening.
-     *
-     * @returns Whether the file type is supported.
-     */
-    isSupported(): boolean;
+  /**
+   * Check whether the file type is supported for opening.
+   *
+   * @returns Whether the file type is supported.
+   */
+  isSupported(): boolean;
 }

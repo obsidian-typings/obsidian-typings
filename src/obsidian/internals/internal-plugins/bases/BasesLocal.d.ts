@@ -8,13 +8,13 @@ import type { BasesNote } from './BasesNote.d.ts';
  * @unofficial
  */
 export interface BasesLocal {
-    /**
-     * Implicit.
-     */
-    implicit: BasesFile;
+  /**
+   * Implicit.
+   */
+  implicit: BasesFile;
 
-    /**
-     * Note.
-     */
-    note: BasesNote;
+  /**
+   * Note.
+   */
+  note: BasesNote;
 }

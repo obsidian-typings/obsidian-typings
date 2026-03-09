@@ -1,109 +1,109 @@
 import type {
-    getMarkdownPreviewRendererConstructor
+  getMarkdownPreviewRendererConstructor
 } from '../implementations/constructors/augmentations/getMarkdownPreviewRendererConstructor.d.ts';
 import type { CodeBlockPostProcessorHandler } from '../internals/CodeBlockPostProcessorHandler.d.ts';
 import type { DomEventsHandlers } from '../internals/DomEventsHandlers.d.ts';
 
 declare module 'obsidian' {
+  /**
+   * The renderer of the markdown preview.
+   * @since 0.9.7
+   */
+  interface MarkdownPreviewRenderer {
     /**
-     * The renderer of the markdown preview.
+     * Constructor.
+     *
+     * To get the constructor instance, use {@link getMarkdownPreviewRendererConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param owner - The owner.
+     * @param containerEl - The containerEl.
+     * @param parentEl - The parentEl.
+     * @param workerPath - The workerPath.
+     * @param observeInsertion - The observeInsertion.
+     * @returns The new instance.
+     * @unofficial
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor__(
+      owner: unknown,
+      containerEl: HTMLElement,
+      parentEl: HTMLElement,
+      workerPath: unknown,
+      observeInsertion?: boolean
+    ): this;
+  }
+
+  namespace MarkdownPreviewRenderer {
+    /**
+     * The currently registered code block post processors.
+     *
+     * @unofficial
+     */
+    const codeBlockPostProcessors: Record<string, CodeBlockPostProcessorHandler>;
+    /**
+     * Create a code block post processor.
+     *
+     * @param language - The language of the code block.
+     * @param handler - The handler of the code block.
+     * @param ctx - The context of the code block post processor.
+     * @returns The code block post processor.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link createCodeBlockPostProcessor} instead.
+     * @since 0.12.11
+     */
+    function createCodeBlockPostProcessor__(
+      language: string,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
+      handler: (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => Promise<any> | void
+    ): (el: HTMLElement, ctx: MarkdownPostProcessorContext) => void;
+
+    /**
+     * Registers the DOM events.
+     *
+     * @param el - The element to register the events on.
+     * @param handlers - The handlers to register.
+     * @param childElFn - The function to determine if `childEl` belongs to the `el`.
+     *
+     * @unofficial
+     */
+    function registerDomEvents(
+      el: HTMLElement,
+      handlers: DomEventsHandlers,
+      childElFn?: (childEl: HTMLElement) => boolean
+    ): void;
+
+    /**
+     * Register a post processor.
+     *
+     * @param postProcessor - The post processor to register.
+     * @param sortOrder - The sort order of the post processor.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link registerPostProcessor} instead.
+     * @since 0.10.12
+     */
+    function registerPostProcessor__(postProcessor: MarkdownPostProcessor, sortOrder?: number): void;
+
+    /**
+     * Remove the code block post processor currently registered with the given language.
+     *
+     * @param language - The language to unregister the post processor for.
+     *
+     * @remark Views will not reflect the removal until being re-rendered.
+     * @unofficial
+     */
+    function unregisterCodeBlockPostProcessor(language: string): void;
+
+    /**
+     * Unregister a post processor.
+     *
+     * @param postProcessor - The post processor to unregister.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link unregisterPostProcessor} instead.
      * @since 0.9.7
      */
-    interface MarkdownPreviewRenderer {
-        /**
-         * Constructor.
-         *
-         * To get the constructor instance, use {@link getMarkdownPreviewRendererConstructor} from `obsidian-typings/implementations`.
-         *
-         * @param owner - The owner.
-         * @param containerEl - The containerEl.
-         * @param parentEl - The parentEl.
-         * @param workerPath - The workerPath.
-         * @param observeInsertion - The observeInsertion.
-         * @returns The new instance.
-         * @unofficial
-         * @deprecated - Added only for typing purposes.
-         */
-        constructor__(
-            owner: unknown,
-            containerEl: HTMLElement,
-            parentEl: HTMLElement,
-            workerPath: unknown,
-            observeInsertion?: boolean
-        ): this;
-    }
-
-    namespace MarkdownPreviewRenderer {
-        /**
-         * The currently registered code block post processors.
-         *
-         * @unofficial
-         */
-        const codeBlockPostProcessors: Record<string, CodeBlockPostProcessorHandler>;
-        /**
-         * Create a code block post processor.
-         *
-         * @param language - The language of the code block.
-         * @param handler - The handler of the code block.
-         * @param ctx - The context of the code block post processor.
-         * @returns The code block post processor.
-         *
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link createCodeBlockPostProcessor} instead.
-         * @since 0.12.11
-         */
-        function createCodeBlockPostProcessor__(
-            language: string,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-            handler: (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => Promise<any> | void
-        ): (el: HTMLElement, ctx: MarkdownPostProcessorContext) => void;
-
-        /**
-         * Registers the DOM events.
-         *
-         * @param el - The element to register the events on.
-         * @param handlers - The handlers to register.
-         * @param childElFn - The function to determine if `childEl` belongs to the `el`.
-         *
-         * @unofficial
-         */
-        function registerDomEvents(
-            el: HTMLElement,
-            handlers: DomEventsHandlers,
-            childElFn?: (childEl: HTMLElement) => boolean
-        ): void;
-
-        /**
-         * Register a post processor.
-         *
-         * @param postProcessor - The post processor to register.
-         * @param sortOrder - The sort order of the post processor.
-         *
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link registerPostProcessor} instead.
-         * @since 0.10.12
-         */
-        function registerPostProcessor__(postProcessor: MarkdownPostProcessor, sortOrder?: number): void;
-
-        /**
-         * Remove the code block post processor currently registered with the given language.
-         *
-         * @param language - The language to unregister the post processor for.
-         *
-         * @remark Views will not reflect the removal until being re-rendered.
-         * @unofficial
-         */
-        function unregisterCodeBlockPostProcessor(language: string): void;
-
-        /**
-         * Unregister a post processor.
-         *
-         * @param postProcessor - The post processor to unregister.
-         *
-         * @official
-         * @deprecated - Added only for typing purposes. Use {@link unregisterPostProcessor} instead.
-         * @since 0.9.7
-         */
-        function unregisterPostProcessor__(postProcessor: MarkdownPostProcessor): void;
-    }
+    function unregisterPostProcessor__(postProcessor: MarkdownPostProcessor): void;
+  }
 }

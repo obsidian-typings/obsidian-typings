@@ -7,9 +7,9 @@ import type { CanvasViewDataNode } from './CanvasViewDataNode.d.ts';
  * @unofficial
  */
 export interface CanvasViewData {
-    /** Array of serialized edge data for all connections in the canvas. */
-    edges: CanvasViewDataEdge[];
+  /** Array of serialized edge data for all connections in the canvas. */
+  edges: CanvasViewDataEdge[];
 
-    /** Array of serialized node data for all nodes in the canvas. */
-    nodes: CanvasViewDataNode[];
+  /** Array of serialized node data for all nodes in the canvas. */
+  nodes: CanvasViewDataNode[];
 }

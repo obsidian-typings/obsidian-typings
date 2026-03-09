@@ -14,5 +14,5 @@ type CommandsConstructor = ExtractConstructor<Commands>;
  * @unofficial
  */
 export function getCommandsConstructor(app: App): CommandsConstructor {
-    return app.commands.constructor as CommandsConstructor;
+  return app.commands.constructor as CommandsConstructor;
 }

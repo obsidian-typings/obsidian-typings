@@ -14,5 +14,5 @@ type PluginsConstructor = ExtractConstructor<Plugins>;
  * @unofficial
  */
 export function getPluginsConstructor(app: App): PluginsConstructor {
-    return app.plugins.constructor as PluginsConstructor;
+  return app.plugins.constructor as PluginsConstructor;
 }

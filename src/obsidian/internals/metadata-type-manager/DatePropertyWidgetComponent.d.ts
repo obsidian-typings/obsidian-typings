@@ -7,9 +7,9 @@ import type { DatePropertyWidgetComponentBase } from './DatePropertyWidgetCompon
  * @unofficial
  */
 export interface DatePropertyWidgetComponent extends DatePropertyWidgetComponentBase {
-    /** The button element for the property widget. */
-    buttonEl: HTMLDivElement | null;
+  /** The button element for the property widget. */
+  buttonEl: HTMLDivElement | null;
 
-    /** The type of the property widget. */
-    type: 'date';
+  /** The type of the property widget. */
+  type: 'date';
 }

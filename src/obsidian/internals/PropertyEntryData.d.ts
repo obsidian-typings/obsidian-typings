@@ -6,18 +6,18 @@
  * @unofficial
  */
 export interface PropertyEntryData<T> {
-    /**
-     * Property key.
-     */
-    key: string;
+  /**
+   * Property key.
+   */
+  key: string;
 
-    /**
-     * Property widget type.
-     */
-    type: string;
+  /**
+   * Property widget type.
+   */
+  type: string;
 
-    /**
-     * Property value.
-     */
-    value: T;
+  /**
+   * Property value.
+   */
+  value: T;
 }

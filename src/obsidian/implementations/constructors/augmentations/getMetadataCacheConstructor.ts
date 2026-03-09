@@ -1,5 +1,5 @@
 import {
-    MetadataCache
+  MetadataCache
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type MetadataCacheConstructor = ExtractConstructor<MetadataCache>;
  * @unofficial
  */
 export function getMetadataCacheConstructor(): MetadataCacheConstructor {
-    return MetadataCache as MetadataCacheConstructor;
+  return MetadataCache as MetadataCacheConstructor;
 }

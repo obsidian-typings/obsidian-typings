@@ -8,12 +8,12 @@ import type { PropertiesPlugin } from './PropertiesPlugin.d.ts';
  * @unofficial
  */
 export interface PropertiesPluginInstance extends InternalPluginInstance<PropertiesPlugin> {
-    /** Reference to the app. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 
-    /** Whether this plugin is enabled by default. */
-    defaultOn: false;
+  /** Whether this plugin is enabled by default. */
+  defaultOn: false;
 
-    /** Reference to the properties plugin registration. */
-    plugin: PropertiesPlugin;
+  /** Reference to the properties plugin registration. */
+  plugin: PropertiesPlugin;
 }

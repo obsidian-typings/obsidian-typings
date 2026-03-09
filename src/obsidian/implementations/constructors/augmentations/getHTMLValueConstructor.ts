@@ -1,5 +1,5 @@
 import {
-    HTMLValue
+  HTMLValue
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type HTMLValueConstructor = ExtractConstructor<HTMLValue>;
  * @unofficial
  */
 export function getHTMLValueConstructor(): HTMLValueConstructor {
-    return HTMLValue as HTMLValueConstructor;
+  return HTMLValue as HTMLValueConstructor;
 }

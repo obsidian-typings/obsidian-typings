@@ -14,5 +14,5 @@ import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts'
  * @unofficial
  */
 export function getTableViewConstructor(app: App): ExtractConstructor<TableView> {
-    return getViewConstructorByViewType(app, ViewType.Table);
+  return getViewConstructorByViewType(app, ViewType.Table);
 }

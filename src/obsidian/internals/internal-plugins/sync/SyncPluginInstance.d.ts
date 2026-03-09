@@ -8,9 +8,9 @@ import type { SyncPlugin } from './SyncPlugin.d.ts';
  * @unofficial
  */
 export interface SyncPluginInstance extends InternalPluginInstance<SyncPlugin> {
-    /** Reference to the app. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 
-    /** Reference to the sync plugin registration. */
-    plugin: SyncPlugin;
+  /** Reference to the sync plugin registration. */
+  plugin: SyncPlugin;
 }

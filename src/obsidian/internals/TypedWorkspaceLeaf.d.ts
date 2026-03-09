@@ -1,6 +1,6 @@
 import type {
-    View,
-    WorkspaceLeaf
+  View,
+  WorkspaceLeaf
 } from 'obsidian';
 import type { MaybeDeferredView } from './views/MaybeDeferredView.d.ts';
 
@@ -12,6 +12,6 @@ import type { MaybeDeferredView } from './views/MaybeDeferredView.d.ts';
  * @unofficial
  */
 export interface TypedWorkspaceLeaf<TView extends View> extends WorkspaceLeaf {
-    /** The typed view attached to this leaf. */
-    view: MaybeDeferredView<TView>;
+  /** The typed view attached to this leaf. */
+  view: MaybeDeferredView<TView>;
 }

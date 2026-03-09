@@ -1,5 +1,5 @@
 import {
-    SecretStorage
+  SecretStorage
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type SecretStorageConstructor = ExtractConstructor<SecretStorage>;
  * @unofficial
  */
 export function getSecretStorageConstructor(): SecretStorageConstructor {
-    return SecretStorage as SecretStorageConstructor;
+  return SecretStorage as SecretStorageConstructor;
 }

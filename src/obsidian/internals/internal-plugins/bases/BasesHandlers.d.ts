@@ -8,8 +8,8 @@ import type { ViewFactory } from './ViewFactory.d.ts';
  * @unofficial
  */
 export interface BasesHandlers extends Record<string, ViewFactory> {
-    /**
-     * The table view factory.
-     */
-    table: ViewFactory<TableView>;
+  /**
+   * The table view factory.
+   */
+  table: ViewFactory<TableView>;
 }

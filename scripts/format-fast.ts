@@ -6,7 +6,7 @@ const untracked = execSync('git ls-files --others --exclude-standard', { encodin
 const filePaths = (`${addedModified}\n${untracked}`).split('\n').filter((line) => line.startsWith('src/'));
 
 for (const filePath of filePaths) {
-    execSync(`bun run scripts/sort-interfaces.ts ${filePath}`, { encoding: 'utf-8', stdio: 'inherit' });
+  execSync(`bun run scripts/sort-interfaces.ts ${filePath}`, { encoding: 'utf-8', stdio: 'inherit' });
 }
 
 execSync('bun dprint fmt', { encoding: 'utf-8', stdio: 'inherit' });

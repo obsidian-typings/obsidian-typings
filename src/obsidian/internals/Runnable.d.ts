@@ -4,41 +4,41 @@
  * @unofficial
  */
 export interface Runnable {
-    /** Whether the runnable has been cancelled. */
-    cancelled: boolean;
+  /** Whether the runnable has been cancelled. */
+  cancelled: boolean;
 
-    /** Callback invoked when the runnable is cancelled. */
-    onCancel: null | (() => void);
+  /** Callback invoked when the runnable is cancelled. */
+  onCancel: null | (() => void);
 
-    /** Callback invoked when the runnable starts. */
-    onStart: null | (() => void);
+  /** Callback invoked when the runnable starts. */
+  onStart: null | (() => void);
 
-    /** Callback invoked when the runnable stops. */
-    onStop: null | (() => void);
+  /** Callback invoked when the runnable stops. */
+  onStop: null | (() => void);
 
-    /** Whether the runnable is currently running. */
-    running: boolean;
+  /** Whether the runnable is currently running. */
+  running: boolean;
 
-    /** Cancel the runnable. */
-    cancel(): void;
+  /** Cancel the runnable. */
+  cancel(): void;
 
-    /**
-     * Check whether the runnable has been cancelled.
-     *
-     * @returns Whether the runnable has been cancelled.
-     */
-    isCancelled(): boolean;
+  /**
+   * Check whether the runnable has been cancelled.
+   *
+   * @returns Whether the runnable has been cancelled.
+   */
+  isCancelled(): boolean;
 
-    /**
-     * Check whether the runnable is currently running.
-     *
-     * @returns Whether the runnable is currently running.
-     */
-    isRunning(): boolean;
+  /**
+   * Check whether the runnable is currently running.
+   *
+   * @returns Whether the runnable is currently running.
+   */
+  isRunning(): boolean;
 
-    /** Start the runnable. */
-    start(): void;
+  /** Start the runnable. */
+  start(): void;
 
-    /** Stop the runnable. */
-    stop(): void;
+  /** Stop the runnable. */
+  stop(): void;
 }

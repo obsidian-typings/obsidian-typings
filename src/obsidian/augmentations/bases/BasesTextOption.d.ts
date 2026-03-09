@@ -1,34 +1,34 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Text option.
+   *
+   * @since 1.10.0
+   */
+  interface BasesTextOption extends BasesOption {
     /**
-     * Text option.
+     * Default value.
      *
+     * @official
      * @since 1.10.0
      */
-    interface BasesTextOption extends BasesOption {
-        /**
-         * Default value.
-         *
-         * @official
-         * @since 1.10.0
-         */
-        default?: string;
+    default?: string;
 
-        /**
-         * Placeholder.
-         *
-         * @official
-         * @since 1.10.0
-         */
-        placeholder?: string;
+    /**
+     * Placeholder.
+     *
+     * @official
+     * @since 1.10.0
+     */
+    placeholder?: string;
 
-        /**
-         * Type.
-         *
-         * @official
-         * @since 1.10.0
-         */
-        type: 'text';
-    }
+    /**
+     * Type.
+     *
+     * @official
+     * @since 1.10.0
+     */
+    type: 'text';
+  }
 }

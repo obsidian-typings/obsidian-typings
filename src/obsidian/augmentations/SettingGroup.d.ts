@@ -1,135 +1,135 @@
 import type {
-    getSettingGroupConstructor
+  getSettingGroupConstructor
 } from '../implementations/constructors/augmentations/getSettingGroupConstructor.d.ts';
 
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Setting group.
+   *
+   * @since 1.11.0
+   */
+  interface SettingGroup {
     /**
-     * Setting group.
+     * The components of the setting group.
      *
+     * @unofficial
+     */
+    components: BaseComponent[];
+
+    /**
+     * The control element of the setting group.
+     *
+     * @unofficial
+     */
+    controlEl: HTMLDivElement;
+
+    /**
+     * The group element of the setting group.
+     *
+     * @unofficial
+     */
+    groupEl: HTMLDivElement;
+
+    /**
+     * The header element of the setting group.
+     *
+     * @unofficial
+     */
+    headerEl: HTMLDivElement;
+
+    /**
+     * The header inner element of the setting group.
+     *
+     * @unofficial
+     */
+    headerInnerEl: HTMLDivElement;
+
+    /**
+     * The list element of the setting group.
+     *
+     * @unofficial
+     */
+    listEl: HTMLDivElement;
+
+    /**
+     * Add a CSS class to the setting group.
+     *
+     * @param cls - The CSS class to add.
+     * @returns The setting group.
+     * To get the constructor instance, use {@link getSettingGroupConstructor} from `obsidian-typings/implementations`.
+     * @example
+     * ```ts
+     * settingGroup.addClass('foo');
+     * ```
+     * @official
      * @since 1.11.0
      */
-    interface SettingGroup {
-        /**
-         * The components of the setting group.
-         *
-         * @unofficial
-         */
-        components: BaseComponent[];
+    addClass(cls: string): this;
 
-        /**
-         * The control element of the setting group.
-         *
-         * @unofficial
-         */
-        controlEl: HTMLDivElement;
+    /**
+     * Add an extra button to the setting group.
+     *
+     * @param cb - the callback function.
+     * @returns the setting group.
+     * @official
+     * @since 1.11.0
+     */
+    addExtraButton(cb: (component: ExtraButtonComponent) => unknown): this;
 
-        /**
-         * The group element of the setting group.
-         *
-         * @unofficial
-         */
-        groupEl: HTMLDivElement;
+    /**
+     * Add a search input at the beginning of the setting group. Useful for filtering
+     * results or adding an input for quick entry.
+     *
+     * @param cb - the callback function.
+     * @returns the setting group.
+     * @official
+     * @since 1.11.0
+     */
+    addSearch(cb: (component: SearchComponent) => unknown): this;
 
-        /**
-         * The header element of the setting group.
-         *
-         * @unofficial
-         */
-        headerEl: HTMLDivElement;
+    /**
+     * Add a setting to the setting group.
+     *
+     * @param cb - The callback to add the setting.
+     * @returns The setting group.
+     * @example
+     * ```ts
+     * settingGroup.addSetting((setting) => {
+     *     setting.setName('foo');
+     * });
+     * ```
+     * @official
+     * @since 1.11.0
+     */
+    addSetting(cb: (setting: Setting) => void): this;
 
-        /**
-         * The header inner element of the setting group.
-         *
-         * @unofficial
-         */
-        headerInnerEl: HTMLDivElement;
+    /**
+     * Constructor.
+     *
+     * To get the constructor instance, use {@link getSettingGroupConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param containerEl - The container element.
+     * @returns The setting group.
+     * @official
+     * @since 1.11.0
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor__(containerEl: HTMLElement): this;
 
-        /**
-         * The list element of the setting group.
-         *
-         * @unofficial
-         */
-        listEl: HTMLDivElement;
-
-        /**
-         * Add a CSS class to the setting group.
-         *
-         * @param cls - The CSS class to add.
-         * @returns The setting group.
-         * To get the constructor instance, use {@link getSettingGroupConstructor} from `obsidian-typings/implementations`.
-         * @example
-         * ```ts
-         * settingGroup.addClass('foo');
-         * ```
-         * @official
-         * @since 1.11.0
-         */
-        addClass(cls: string): this;
-
-        /**
-         * Add an extra button to the setting group.
-         *
-         * @param cb - the callback function.
-         * @returns the setting group.
-         * @official
-         * @since 1.11.0
-         */
-        addExtraButton(cb: (component: ExtraButtonComponent) => unknown): this;
-
-        /**
-         * Add a search input at the beginning of the setting group. Useful for filtering
-         * results or adding an input for quick entry.
-         *
-         * @param cb - the callback function.
-         * @returns the setting group.
-         * @official
-         * @since 1.11.0
-         */
-        addSearch(cb: (component: SearchComponent) => unknown): this;
-
-        /**
-         * Add a setting to the setting group.
-         *
-         * @param cb - The callback to add the setting.
-         * @returns The setting group.
-         * @example
-         * ```ts
-         * settingGroup.addSetting((setting) => {
-         *     setting.setName('foo');
-         * });
-         * ```
-         * @official
-         * @since 1.11.0
-         */
-        addSetting(cb: (setting: Setting) => void): this;
-
-        /**
-         * Constructor.
-         *
-         * To get the constructor instance, use {@link getSettingGroupConstructor} from `obsidian-typings/implementations`.
-         *
-         * @param containerEl - The container element.
-         * @returns The setting group.
-         * @official
-         * @since 1.11.0
-         * @deprecated - Added only for typing purposes.
-         */
-        constructor__(containerEl: HTMLElement): this;
-
-        /**
-         * Set the heading of the setting group.
-         *
-         * @param text - The text to set the heading to.
-         * @returns The setting group.
-         * @example
-         * ```ts
-         * settingGroup.setHeading('foo');
-         * ```
-         * @official
-         * @since 1.11.0
-         */
-        setHeading(text: string | DocumentFragment): this;
-    }
+    /**
+     * Set the heading of the setting group.
+     *
+     * @param text - The text to set the heading to.
+     * @returns The setting group.
+     * @example
+     * ```ts
+     * settingGroup.setHeading('foo');
+     * ```
+     * @official
+     * @since 1.11.0
+     */
+    setHeading(text: string | DocumentFragment): this;
+  }
 }

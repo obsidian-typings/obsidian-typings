@@ -6,6 +6,6 @@ import type { EditorPosition } from 'obsidian';
  * @unofficial
  */
 export interface MatchingBracket {
-    /** Position of the matching bracket, if found. */
-    to?: EditorPosition;
+  /** Position of the matching bracket, if found. */
+  to?: EditorPosition;
 }

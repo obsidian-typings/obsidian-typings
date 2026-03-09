@@ -1,7 +1,7 @@
 {
   "typescript": {
     "lineWidth": 120,
-    "indentWidth": 4,
+    "indentWidth": 2,
     "useTabs": false,
     "semiColons": "prefer",
     "quoteStyle": "alwaysSingle",

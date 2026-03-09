@@ -1,5 +1,5 @@
 import {
-    Menu
+  Menu
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type MenuConstructor = ExtractConstructor<Menu>;
  * @unofficial
  */
 export function getMenuConstructor(): MenuConstructor {
-    return Menu as MenuConstructor;
+  return Menu as MenuConstructor;
 }

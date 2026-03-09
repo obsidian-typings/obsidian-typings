@@ -14,5 +14,5 @@ type AppMenuBarManagerConstructor = ExtractConstructor<AppMenuBarManager>;
  * @unofficial
  */
 export function getAppMenuBarManagerConstructor(app: App): AppMenuBarManagerConstructor {
-    return app.appMenuBarManager.constructor as AppMenuBarManagerConstructor;
+  return app.appMenuBarManager.constructor as AppMenuBarManagerConstructor;
 }

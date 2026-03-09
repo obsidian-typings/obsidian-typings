@@ -1,5 +1,5 @@
 import {
-    StringValue
+  StringValue
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type StringValueConstructor = ExtractConstructor<StringValue>;
  * @unofficial
  */
 export function getStringValueConstructor(): StringValueConstructor {
-    return StringValue as StringValueConstructor;
+  return StringValue as StringValueConstructor;
 }

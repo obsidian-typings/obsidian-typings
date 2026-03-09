@@ -8,6 +8,6 @@ import type { RandomNotePlugin } from './RandomNotePlugin.d.ts';
  * @unofficial
  */
 export interface RandomNotePluginInstance extends InternalPluginInstance<RandomNotePlugin> {
-    /** Reference to the app. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 }

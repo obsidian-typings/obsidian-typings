@@ -7,28 +7,28 @@ import type { getStatusBarConstructor } from '../implementations/constructors/in
  * @unofficial
  */
 export interface StatusBar {
-    /** Reference to the app. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 
-    /** Container element for the status bar. */
-    containerEl: HTMLElement;
+  /** Container element for the status bar. */
+  containerEl: HTMLElement;
 
-    /**
-     * Constructor.
-     *
-     * To get the constructor instance, use {@link getStatusBarConstructor} from `obsidian-typings/implementations`.
-     *
-     * @param app - The app.
-     * @param containerEl - The containerEl.
-     * @returns The new instance.
-     * @deprecated - Added only for typing purposes.
-     */
-    constructor__(app: App, containerEl: HTMLElement): this;
+  /**
+   * Constructor.
+   *
+   * To get the constructor instance, use {@link getStatusBarConstructor} from `obsidian-typings/implementations`.
+   *
+   * @param app - The app.
+   * @param containerEl - The containerEl.
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
+   */
+  constructor__(app: App, containerEl: HTMLElement): this;
 
-    /**
-     * Register a new status bar item element.
-     *
-     * @returns The newly created status bar item element.
-     */
-    registerStatusBarItem(): HTMLElement;
+  /**
+   * Register a new status bar item element.
+   *
+   * @returns The newly created status bar item element.
+   */
+  registerStatusBarItem(): HTMLElement;
 }

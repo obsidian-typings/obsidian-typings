@@ -1,18 +1,18 @@
 export {};
 
 declare module '@codemirror/language' {
+  /**
+   * Encapsulates a single line of input. Given to stream syntax code,
+   * which uses it to tokenize the content.
+   */
+  interface StringStream {
     /**
-     * Encapsulates a single line of input. Given to stream syntax code,
-     * which uses it to tokenize the content.
+     * Look ahead n lines from the current position and return the content.
+     *
+     * @see https://github.com/lishid/cm-language/blob/main/src/stringstream.ts
+     * @remark This only exists and can only be used in Obsidian.
+     * @unofficial
      */
-    interface StringStream {
-        /**
-         * Look ahead n lines from the current position and return the content.
-         *
-         * @see https://github.com/lishid/cm-language/blob/main/src/stringstream.ts
-         * @remark This only exists and can only be used in Obsidian.
-         * @unofficial
-         */
-        lookAhead: (n: number) => string;
-    }
+    lookAhead: (n: number) => string;
+  }
 }

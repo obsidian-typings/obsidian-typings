@@ -14,5 +14,5 @@ type HotkeyManagerConstructor = ExtractConstructor<HotkeyManager>;
  * @unofficial
  */
 export function getHotkeyManagerConstructor(app: App): HotkeyManagerConstructor {
-    return app.hotkeyManager.constructor as HotkeyManagerConstructor;
+  return app.hotkeyManager.constructor as HotkeyManagerConstructor;
 }

@@ -1,29 +1,29 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * File stats
+   */
+  interface FileStats {
     /**
-     * File stats
+     * Time of creation, represented as a unix timestamp, in milliseconds.
+     *
+     * @official
      */
-    interface FileStats {
-        /**
-         * Time of creation, represented as a unix timestamp, in milliseconds.
-         *
-         * @official
-         */
-        ctime: number;
+    ctime: number;
 
-        /**
-         * Time of last modification, represented as a unix timestamp, in milliseconds.
-         *
-         * @official
-         */
-        mtime: number;
+    /**
+     * Time of last modification, represented as a unix timestamp, in milliseconds.
+     *
+     * @official
+     */
+    mtime: number;
 
-        /**
-         * Size on disk, as bytes.
-         *
-         * @official
-         */
-        size: number;
-    }
+    /**
+     * Size on disk, as bytes.
+     *
+     * @official
+     */
+    size: number;
+  }
 }

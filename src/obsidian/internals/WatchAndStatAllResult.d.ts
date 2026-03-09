@@ -6,6 +6,6 @@ import type { CapacitorFileEntry } from './CapacitorFileEntry.d.ts';
  * @unofficial
  */
 export interface WatchAndStatAllResult {
-    /** File entries found in the watched directory. */
-    children: CapacitorFileEntry[];
+  /** File entries found in the watched directory. */
+  children: CapacitorFileEntry[];
 }

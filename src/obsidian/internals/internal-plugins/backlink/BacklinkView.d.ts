@@ -8,21 +8,21 @@ import type { BacklinkComponent } from './BacklinkComponent.d.ts';
  * @unofficial
  */
 export interface BacklinkView extends InfoFileView {
-    /** The backlink component rendering linked and unlinked mentions. */
-    backlink: BacklinkComponent;
+  /** The backlink component rendering linked and unlinked mentions. */
+  backlink: BacklinkComponent;
 
-    /**
-     * Get the current view type.
-     *
-     * @returns The backlink view type.
-     */
-    getViewType(): typeof ViewType.Backlink;
+  /**
+   * Get the current view type.
+   *
+   * @returns The backlink view type.
+   */
+  getViewType(): typeof ViewType.Backlink;
 
-    /**
-     * Shows the search.
-     */
-    showSearch(): void;
+  /**
+   * Shows the search.
+   */
+  showSearch(): void;
 
-    /** Refresh the backlink results. */
-    update(): void;
+  /** Refresh the backlink results. */
+  update(): void;
 }

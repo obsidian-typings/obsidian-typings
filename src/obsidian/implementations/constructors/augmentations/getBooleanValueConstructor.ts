@@ -1,5 +1,5 @@
 import {
-    BooleanValue
+  BooleanValue
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
@@ -14,5 +14,5 @@ type BooleanValueConstructor = ExtractConstructor<BooleanValue>;
  * @unofficial
  */
 export function getBooleanValueConstructor(): BooleanValueConstructor {
-    return BooleanValue as BooleanValueConstructor;
+  return BooleanValue as BooleanValueConstructor;
 }

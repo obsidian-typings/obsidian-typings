@@ -4,13 +4,13 @@
  * @unofficial
  */
 export interface ParsedLinktext {
-    /**
-     * The path.
-     */
-    path: string;
+  /**
+   * The path.
+   */
+  path: string;
 
-    /**
-     * The subpath.
-     */
-    subpath: string;
+  /**
+   * The subpath.
+   */
+  subpath: string;
 }

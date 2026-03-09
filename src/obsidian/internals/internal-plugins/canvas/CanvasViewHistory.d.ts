@@ -6,61 +6,61 @@ import type { CanvasViewData } from './CanvasData.d.ts';
  * @unofficial
  */
 export interface CanvasViewHistory {
-    /** Index of the current state in the history stack. */
-    current: number;
+  /** Index of the current state in the history stack. */
+  current: number;
 
-    /** Array of historical canvas states. */
-    data: CanvasViewData[];
+  /** Array of historical canvas states. */
+  data: CanvasViewData[];
 
-    /** Maximum number of history entries to retain. */
-    max: number;
+  /** Maximum number of history entries to retain. */
+  max: number;
 
-    /**
-     * Check whether a redo operation is available.
-     *
-     * @returns Whether redo is available.
-     */
-    canRedo(): unknown;
+  /**
+   * Check whether a redo operation is available.
+   *
+   * @returns Whether redo is available.
+   */
+  canRedo(): unknown;
 
-    /**
-     * Check whether an undo operation is available.
-     *
-     * @returns Whether undo is available.
-     */
-    canUndo(): unknown;
+  /**
+   * Check whether an undo operation is available.
+   *
+   * @returns Whether undo is available.
+   */
+  canUndo(): unknown;
 
-    /**
-     * Clear all history entries.
-     *
-     * @returns The result of clearing the history.
-     */
-    clear(): unknown;
+  /**
+   * Clear all history entries.
+   *
+   * @returns The result of clearing the history.
+   */
+  clear(): unknown;
 
-    /**
-     * Push a new state onto the history stack.
-     *
-     * @returns The result of pushing the state.
-     */
-    push(arg1: unknown): unknown;
+  /**
+   * Push a new state onto the history stack.
+   *
+   * @returns The result of pushing the state.
+   */
+  push(arg1: unknown): unknown;
 
-    /**
-     * Redo the last undone action and return the restored state.
-     *
-     * @returns The restored state.
-     */
-    redo(): unknown;
+  /**
+   * Redo the last undone action and return the restored state.
+   *
+   * @returns The restored state.
+   */
+  redo(): unknown;
 
-    /**
-     * Replace the current history entry with a new state.
-     *
-     * @returns The result of replacing the history entry.
-     */
-    replace(arg1: unknown): unknown;
+  /**
+   * Replace the current history entry with a new state.
+   *
+   * @returns The result of replacing the history entry.
+   */
+  replace(arg1: unknown): unknown;
 
-    /**
-     * Undo the last action and return the previous state.
-     *
-     * @returns The previous state.
-     */
-    undo(): unknown;
+  /**
+   * Undo the last action and return the previous state.
+   *
+   * @returns The previous state.
+   */
+  undo(): unknown;
 }

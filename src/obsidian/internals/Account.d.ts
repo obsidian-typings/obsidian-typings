@@ -4,38 +4,38 @@
  * @unofficial
  */
 export interface Account {
-    /**
-     * The company associated with the activated commercial license.
-     */
-    company: string;
+  /**
+   * The company associated with the activated commercial license.
+   */
+  company: string;
 
-    /**
-     * The email address associated with the account.
-     */
-    email: string;
+  /**
+   * The email address associated with the account.
+   */
+  email: string;
 
-    /** Unix timestamp of the license expiry date. */
-    expiry: number;
+  /** Unix timestamp of the license expiry date. */
+  expiry: number;
 
-    /** License key string. */
-    key: string | undefined;
+  /** License key string. */
+  key: string | undefined;
 
-    /** Validation status or hash for the license key. */
-    keyValidation: string;
+  /** Validation status or hash for the license key. */
+  keyValidation: string;
 
-    /**
-     * The license available to the account.
-     */
-    license: '' | 'insider';
+  /**
+   * The license available to the account.
+   */
+  license: '' | 'insider';
 
-    /**
-     * Profile name.
-     */
-    name: string;
+  /**
+   * Profile name.
+   */
+  name: string;
 
-    /** Number of seats available on the commercial license. */
-    seats: number;
+  /** Number of seats available on the commercial license. */
+  seats: number;
 
-    /** Authentication token for the account. */
-    token: string;
+  /** Authentication token for the account. */
+  token: string;
 }

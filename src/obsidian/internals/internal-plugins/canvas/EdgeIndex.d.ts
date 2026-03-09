@@ -7,26 +7,26 @@ import type { EdgeIndexData } from './EdgeIndexData.d.ts';
  * @unofficial
  */
 export interface EdgeIndex extends EdgeIndexBase {
-    /** Maximum number of entries per R-tree node before splitting. */
-    _maxEntries: number;
+  /** Maximum number of entries per R-tree node before splitting. */
+  _maxEntries: number;
 
-    /** Minimum number of entries per R-tree node before merging. */
-    _minEntries: number;
+  /** Minimum number of entries per R-tree node before merging. */
+  _minEntries: number;
 
-    /** Root data node of the R-tree. */
-    data: EdgeIndexData;
+  /** Root data node of the R-tree. */
+  data: EdgeIndexData;
 
-    /**
-     * Compare two items by their minimum X coordinate for sorting.
-     *
-     * @returns The comparison result.
-     */
-    compareMinX(arg1: unknown, arg2: unknown): unknown;
+  /**
+   * Compare two items by their minimum X coordinate for sorting.
+   *
+   * @returns The comparison result.
+   */
+  compareMinX(arg1: unknown, arg2: unknown): unknown;
 
-    /**
-     * Compare two items by their minimum Y coordinate for sorting.
-     *
-     * @returns The comparison result.
-     */
-    compareMinY(arg1: unknown, arg2: unknown): unknown;
+  /**
+   * Compare two items by their minimum Y coordinate for sorting.
+   *
+   * @returns The comparison result.
+   */
+  compareMinY(arg1: unknown, arg2: unknown): unknown;
 }

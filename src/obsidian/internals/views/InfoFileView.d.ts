@@ -1,6 +1,6 @@
 import type {
-    FileView,
-    TFile
+  FileView,
+  TFile
 } from 'obsidian';
 
 /**
@@ -11,10 +11,10 @@ import type {
  * @unofficial
  */
 export interface InfoFileView extends FileView {
-    /**
-     * Called when a file is opened. Loads the file and requests a content update.
-     *
-     * @param file - The opened file.
-     */
-    onFileOpen(file: TFile): void;
+  /**
+   * Called when a file is opened. Loads the file and requests a content update.
+   *
+   * @param file - The opened file.
+   */
+  onFileOpen(file: TFile): void;
 }

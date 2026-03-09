@@ -8,32 +8,32 @@ import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
  * @unofficial
  */
 export interface Bookmark {
-    /** Association direction for the bookmark (-1 for left, 1 for right). */
-    assoc: number;
+  /** Association direction for the bookmark (-1 for left, 1 for right). */
+  assoc: number;
 
-    /** The CodeMirror editor instance this bookmark belongs to. */
-    cm: CodeMirrorEditor;
+  /** The CodeMirror editor instance this bookmark belongs to. */
+  cm: CodeMirrorEditor;
 
-    /** Unique identifier for this bookmark. */
-    id: number;
+  /** Unique identifier for this bookmark. */
+  id: number;
 
-    /** Character offset of the bookmark within its line. */
-    offset: number;
+  /** Character offset of the bookmark within its line. */
+  offset: number;
 
-    /** Remove this bookmark from the editor. */
-    clear(): void;
+  /** Remove this bookmark from the editor. */
+  clear(): void;
 
-    /**
-     * Find the current position of this bookmark, or null if cleared.
-     *
-     * @returns The current position, or null if the bookmark has been cleared.
-     */
-    find(): EditorPosition | null;
+  /**
+   * Find the current position of this bookmark, or null if cleared.
+   *
+   * @returns The current position, or null if the bookmark has been cleared.
+   */
+  find(): EditorPosition | null;
 
-    /**
-     * Update the bookmark position in response to a document change.
-     *
-     * @param changeDesc - The change description to apply.
-     */
-    update(changeDesc: ChangeDesc): void;
+  /**
+   * Update the bookmark position in response to a document change.
+   *
+   * @param changeDesc - The change description to apply.
+   */
+  update(changeDesc: ChangeDesc): void;
 }

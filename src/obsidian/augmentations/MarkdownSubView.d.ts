@@ -1,49 +1,49 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * A sub view of the markdown view.
+   */
+  interface MarkdownSubView {
     /**
-     * A sub view of the markdown view.
+     * Apply the scroll position.
+     *
+     * @param scroll - The scroll position.
+     * @example
+     * ```ts
+     * markdownSubView.applyScroll(100);
+     * ```
+     * @official
      */
-    interface MarkdownSubView {
-        /**
-         * Apply the scroll position.
-         *
-         * @param scroll - The scroll position.
-         * @example
-         * ```ts
-         * markdownSubView.applyScroll(100);
-         * ```
-         * @official
-         */
-        applyScroll(scroll: number): void;
+    applyScroll(scroll: number): void;
 
-        /**
-         * Get the markdown content.
-         *
-         * @returns The markdown content.
-         * @official
-         */
-        get(): string;
+    /**
+     * Get the markdown content.
+     *
+     * @returns The markdown content.
+     * @official
+     */
+    get(): string;
 
-        /**
-         * Get the scroll position.
-         *
-         * @returns The scroll position.
-         * @official
-         */
-        getScroll(): number;
+    /**
+     * Get the scroll position.
+     *
+     * @returns The scroll position.
+     * @official
+     */
+    getScroll(): number;
 
-        /**
-         * Set the markdown content.
-         *
-         * @param data - The markdown content.
-         * @param clear - Whether to clear the content before setting it.
-         * @example
-         * ```ts
-         * markdownSubView.set('**foo** bar', true);
-         * ```
-         * @official
-         */
-        set(data: string, clear: boolean): void;
-    }
+    /**
+     * Set the markdown content.
+     *
+     * @param data - The markdown content.
+     * @param clear - Whether to clear the content before setting it.
+     * @example
+     * ```ts
+     * markdownSubView.set('**foo** bar', true);
+     * ```
+     * @official
+     */
+    set(data: string, clear: boolean): void;
+  }
 }

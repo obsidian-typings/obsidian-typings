@@ -1,49 +1,49 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * The response from the {@link requestUrl} function.
+   */
+  interface RequestUrlResponse {
     /**
-     * The response from the {@link requestUrl} function.
+     * The body of the response as an ArrayBuffer.
+     *
+     * @official
      */
-    interface RequestUrlResponse {
-        /**
-         * The body of the response as an ArrayBuffer.
-         *
-         * @official
-         */
-        arrayBuffer: ArrayBuffer;
+    arrayBuffer: ArrayBuffer;
 
-        /**
-         * The headers of the response.
-         *
-         * @example
-         * ```ts
-         * { 'Content-Type': 'application/json' }
-         * ```
-         * @official
-         */
-        headers: Record<string, string>;
+    /**
+     * The headers of the response.
+     *
+     * @example
+     * ```ts
+     * { 'Content-Type': 'application/json' }
+     * ```
+     * @official
+     */
+    headers: Record<string, string>;
 
-        /**
-         * The body of the response as a JSON object.
-         *
-         * @official
-         */
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-        json: any;
+    /**
+     * The body of the response as a JSON object.
+     *
+     * @official
+     */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
+    json: any;
 
-        /**
-         * The status code of the response.
-         *
-         * @example 200
-         * @official
-         */
-        status: number;
+    /**
+     * The status code of the response.
+     *
+     * @example 200
+     * @official
+     */
+    status: number;
 
-        /**
-         * The body of the response as a string.
-         *
-         * @official
-         */
-        text: string;
-    }
+    /**
+     * The body of the response as a string.
+     *
+     * @official
+     */
+    text: string;
+  }
 }

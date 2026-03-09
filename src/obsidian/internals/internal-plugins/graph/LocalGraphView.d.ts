@@ -11,33 +11,33 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  * @unofficial
  */
 export interface LocalGraphView extends InfoFileView {
-    /** Graph engine powering the local graph simulation. */
-    engine: GraphEngine;
+  /** Graph engine powering the local graph simulation. */
+  engine: GraphEngine;
 
-    /** Renderer responsible for drawing the local graph. */
-    renderer: GraphRenderer;
+  /** Renderer responsible for drawing the local graph. */
+  renderer: GraphRenderer;
 
-    /**
-     * Get the current view type.
-     *
-     * @returns The local graph view type.
-     */
-    getViewType(): typeof ViewType.LocalGraph;
+  /**
+   * Get the current view type.
+   *
+   * @returns The local graph view type.
+   */
+  getViewType(): typeof ViewType.LocalGraph;
 
-    /**
-     * Requests a update if the changed file is the opened file.
-     *
-     * @param file - The changed file.
-     */
-    onFileChanged(file: TFile): void;
+  /**
+   * Requests a update if the changed file is the opened file.
+   *
+   * @param file - The changed file.
+   */
+  onFileChanged(file: TFile): void;
 
-    /**
-     * Updates the options from the plugin when changed in view.
-     */
-    onOptionsChange(): void;
+  /**
+   * Updates the options from the plugin when changed in view.
+   */
+  onOptionsChange(): void;
 
-    /**
-     * Renders the graph.
-     */
-    update(): void;
+  /**
+   * Renders the graph.
+   */
+  update(): void;
 }

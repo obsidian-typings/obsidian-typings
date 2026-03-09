@@ -7,9 +7,9 @@ import type { VimStateVimPlugin } from './VimStateVimPlugin.d.ts';
  * @unofficial
  */
 export interface VimState {
-    /** Core Vim mode and command state. */
-    vim: VimStateVim;
+  /** Core Vim mode and command state. */
+  vim: VimStateVim;
 
-    /** Vim plugin state for tracking key events. */
-    vimPlugin: VimStateVimPlugin;
+  /** Vim plugin state for tracking key events. */
+  vimPlugin: VimStateVimPlugin;
 }

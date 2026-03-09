@@ -6,9 +6,9 @@ import type { WorkspaceLeafHistoryState } from './WorkspaceLeafHistoryState.d.ts
  * @unofficial
  */
 export interface SerializedWorkspaceLeafHistory {
-    /** List of previous navigation states. */
-    backHistory: WorkspaceLeafHistoryState[];
+  /** List of previous navigation states. */
+  backHistory: WorkspaceLeafHistoryState[];
 
-    /** List of forward navigation states (after going back). */
-    forwardHistory: WorkspaceLeafHistoryState[];
+  /** List of forward navigation states (after going back). */
+  forwardHistory: WorkspaceLeafHistoryState[];
 }

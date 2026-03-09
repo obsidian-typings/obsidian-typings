@@ -7,6 +7,6 @@ import type { SlashCommandPlugin } from './SlashCommandPlugin.d.ts';
  * @unofficial
  */
 export interface SlashCommandPluginInstance extends InternalPluginInstance<SlashCommandPlugin> {
-    /** Whether this plugin is enabled by default. */
-    defaultOn: false;
+  /** Whether this plugin is enabled by default. */
+  defaultOn: false;
 }

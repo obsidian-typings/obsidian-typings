@@ -6,12 +6,12 @@ import type { FileStats } from 'obsidian';
  * @unofficial
  */
 export interface CapacitorFileEntry extends Partial<FileStats> {
-    /** Name of the file or directory. */
-    name: string;
+  /** Name of the file or directory. */
+  name: string;
 
-    /** Whether this entry is a file or directory. */
-    type: 'file' | 'directory';
+  /** Whether this entry is a file or directory. */
+  type: 'file' | 'directory';
 
-    /** URI of the file or directory. */
-    uri: string;
+  /** URI of the file or directory. */
+  uri: string;
 }

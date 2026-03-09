@@ -4,12 +4,12 @@
  * @unofficial
  */
 export interface NoteComposerPluginOptions {
-    /** Whether to prompt for confirmation before merging notes. */
-    askBeforeMerging?: boolean;
+  /** Whether to prompt for confirmation before merging notes. */
+  askBeforeMerging?: boolean;
 
-    /** What to leave in place of extracted content: a link, an embed, or nothing. */
-    replacementText?: 'link' | 'embed' | 'none';
+  /** What to leave in place of extracted content: a link, an embed, or nothing. */
+  replacementText?: 'link' | 'embed' | 'none';
 
-    /** Path to the template file used when extracting content into a new note. */
-    template?: string;
+  /** Path to the template file used when extracting content into a new note. */
+  template?: string;
 }

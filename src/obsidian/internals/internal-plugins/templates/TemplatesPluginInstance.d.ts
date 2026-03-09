@@ -8,12 +8,12 @@ import type { TemplatesPlugin } from './TemplatesPlugin.d.ts';
  * @unofficial
  */
 export interface TemplatesPluginInstance extends InternalPluginInstance<TemplatesPlugin> {
-    /** Reference to the app. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 
-    /** Whether this plugin is enabled by default. */
-    defaultOn: true;
+  /** Whether this plugin is enabled by default. */
+  defaultOn: true;
 
-    /** Reference to the templates plugin registration. */
-    plugin: TemplatesPlugin;
+  /** Reference to the templates plugin registration. */
+  plugin: TemplatesPlugin;
 }

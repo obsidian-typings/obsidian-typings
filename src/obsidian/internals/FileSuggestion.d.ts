@@ -6,13 +6,13 @@ import type { TFile } from 'obsidian';
  * @unofficial
  */
 export interface FileSuggestion {
-    /**
-     * The file.
-     */
-    file: TFile | null;
+  /**
+   * The file.
+   */
+  file: TFile | null;
 
-    /**
-     * The path.
-     */
-    path: string;
+  /**
+   * The path.
+   */
+  path: string;
 }
