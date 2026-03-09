@@ -23,7 +23,8 @@ export const eslintConfig: Linter.Config[] = [
     },
     // TypeScript parser (no type-checking — fast)
     ...tseslint.configs.recommended.map((config) => {
-        const { files: _files, ...rest } = config;
+        const rest = { ...config };
+        delete (rest as Record<string, unknown>)['files'];
         return rest;
     }),
     // Perfectionist sorting rules

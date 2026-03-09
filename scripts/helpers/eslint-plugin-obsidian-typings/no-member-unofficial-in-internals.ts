@@ -13,7 +13,9 @@ import {
 export const noMemberUnofficialInInternals = {
     meta: {
         type: 'problem' as const,
-        docs: { description: 'Members in internals files must not repeat @unofficial (interface-level tag covers them)' },
+        docs: {
+            description: 'Members in internals files must not repeat @unofficial (interface-level tag covers them)'
+        },
         messages: {
             redundant: 'Member "{{name}}" must not have @unofficial tag (interface-level tag covers it).'
         }

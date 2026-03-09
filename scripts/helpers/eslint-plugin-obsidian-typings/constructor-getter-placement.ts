@@ -1,5 +1,13 @@
-import { existsSync, readFileSync, readdirSync } from 'fs';
-import { dirname, join, resolve } from 'path';
+import {
+    existsSync,
+    readdirSync,
+    readFileSync
+} from 'fs';
+import {
+    dirname,
+    join,
+    resolve
+} from 'path';
 
 import type { TSESTree } from '@typescript-eslint/utils';
 
@@ -85,8 +93,7 @@ export const constructorGetterPlacement = {
     meta: {
         type: 'problem' as const,
         docs: {
-            description:
-                'Ensure types used in constructor getters have a constructorN__ method'
+            description: 'Ensure types used in constructor getters have a constructorN__ method'
         },
         messages: {
             missingConstructorMethod:

@@ -17,8 +17,7 @@ export const constructorBaseRestricted = {
     meta: {
         type: 'problem' as const,
         docs: {
-            description:
-                'ConstructorBase may only be imported in files inside a constructors/ directory'
+            description: 'ConstructorBase may only be imported in files inside a constructors/ directory'
         },
         messages: {
             restrictedImport:

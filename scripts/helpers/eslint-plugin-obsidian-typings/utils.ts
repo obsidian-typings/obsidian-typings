@@ -1,11 +1,10 @@
-import type { AST } from 'eslint';
 import type { TSESTree } from '@typescript-eslint/utils';
+import type {
+    Rule,
+    SourceCode
+} from 'eslint';
 
-export interface RuleContext {
-    filename: string;
-    report: Function;
-    sourceCode: { getCommentsBefore(node: TSESTree.Node): AST.Token[] };
-}
+export type RuleContext = Rule.RuleContext;
 
 export function normalizePath(filename: string): string {
     return filename.replace(/\\/g, '/');
@@ -33,10 +32,10 @@ export function isConstructorsFile(filename: string): boolean {
 }
 
 export function getJSDocComment(
-    sourceCode: { getCommentsBefore(node: TSESTree.Node): AST.Token[] },
+    sourceCode: SourceCode,
     node: TSESTree.Node
-): AST.Token | null {
-    const comments = sourceCode.getCommentsBefore(node);
+): { type: string; value: string } | null {
+    const comments = sourceCode.getCommentsBefore(node as unknown as Parameters<SourceCode['getCommentsBefore']>[0]);
     for (let i = comments.length - 1; i >= 0; i--) {
         const comment = comments[i];
         if (comment && (comment.type as string) === 'Block' && comment.value.startsWith('*')) {
@@ -46,7 +45,7 @@ export function getJSDocComment(
     return null;
 }
 
-export function hasJSDocTag(comment: AST.Token, tagName: string): boolean {
+export function hasJSDocTag(comment: { value: string }, tagName: string): boolean {
     return new RegExp(`@${tagName}\\b`).test(comment.value);
 }
 
