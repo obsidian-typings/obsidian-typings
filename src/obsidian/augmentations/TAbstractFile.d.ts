@@ -1,4 +1,6 @@
-import type { getTAbstractFileConstructor } from '../implementations/constructors/augmentations/getTAbstractFileConstructor.d.ts';
+import type {
+    getTAbstractFileConstructor
+} from '../implementations/constructors/augmentations/getTAbstractFileConstructor.d.ts';
 
 export {};
 

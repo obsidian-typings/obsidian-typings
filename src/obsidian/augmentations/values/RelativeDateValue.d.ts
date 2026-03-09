@@ -1,4 +1,6 @@
-import type { getRelativeDateValueConstructor } from '../../implementations/constructors/augmentations/getRelativeDateValueConstructor.d.ts';
+import type {
+    getRelativeDateValueConstructor
+} from '../../implementations/constructors/augmentations/getRelativeDateValueConstructor.d.ts';
 
 export {};
 
@@ -10,7 +12,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     interface RelativeDateValue extends DateValue {
-    
         /**
          * Constructor.
          *
@@ -20,5 +21,5 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes.
          */
         constructor__(): this;
-}
+    }
 }

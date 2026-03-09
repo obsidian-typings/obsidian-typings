@@ -1,4 +1,6 @@
-import type { getObjectValueConstructor } from '../../implementations/constructors/augmentations/getObjectValueConstructor.d.ts';
+import type {
+    getObjectValueConstructor
+} from '../../implementations/constructors/augmentations/getObjectValueConstructor.d.ts';
 
 export {};
 
@@ -47,7 +49,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         isTruthy(): boolean;
-    
+
         /**
          * Get the string representation of this ObjectValue.
          *
@@ -56,7 +58,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         toString(): string;
-}
+    }
 
     namespace ObjectValue {
         /**

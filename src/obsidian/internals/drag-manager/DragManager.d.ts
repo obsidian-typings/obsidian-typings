@@ -4,7 +4,9 @@ import type {
     TFile,
     TFolder
 } from 'obsidian';
-import type { getDragManagerConstructor } from '../../implementations/constructors/internals/getDragManagerConstructor.d.ts';
+import type {
+    getDragManagerConstructor
+} from '../../implementations/constructors/internals/getDragManagerConstructor.d.ts';
 import type { Draggable } from './Draggable.d.ts';
 import type { DragStartEvent } from './DragStartEvent.d.ts';
 import type { DropResult } from './DropResult.d.ts';

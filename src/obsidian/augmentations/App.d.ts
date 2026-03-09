@@ -1,7 +1,7 @@
 import type { getAppConstructor } from '../implementations/constructors/augmentations/getAppConstructor.d.ts';
 import type { AppMenuBarManager } from '../internals/AppMenuBarManager.d.ts';
-import type { Cli } from '../internals/cli/Cli.d.ts';
 import type { AppSetting } from '../internals/AppSetting.d.ts';
+import type { Cli } from '../internals/cli/Cli.d.ts';
 import type { Commands } from '../internals/commands/Commands.d.ts';
 import type { CustomCSS } from '../internals/custom-css/CustomCSS.d.ts';
 import type { DragManager } from '../internals/drag-manager/DragManager.d.ts';
@@ -700,14 +700,14 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateUseNativeMenu(): void;
-    
+
         /**
          * Update the view header display in notes.
          *
          * @unofficial
          */
         updateViewHeaderDisplay(): void;
-}
+    }
 
     namespace App {
         /**

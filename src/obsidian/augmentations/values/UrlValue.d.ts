@@ -1,4 +1,6 @@
-import type { getUrlValueConstructor } from '../../implementations/constructors/augmentations/getUrlValueConstructor.d.ts';
+import type {
+    getUrlValueConstructor
+} from '../../implementations/constructors/augmentations/getUrlValueConstructor.d.ts';
 
 export {};
 
@@ -9,7 +11,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     interface UrlValue extends StringValue {
-    
         /**
          * Constructor.
          *
@@ -21,5 +22,5 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes.
          */
         constructor5__(value: string): this;
-}
+    }
 }

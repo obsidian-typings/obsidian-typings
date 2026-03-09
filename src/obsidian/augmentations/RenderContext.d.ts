@@ -1,4 +1,6 @@
-import type { getRenderContextConstructor } from '../implementations/constructors/augmentations/getRenderContextConstructor.d.ts';
+import type {
+    getRenderContextConstructor
+} from '../implementations/constructors/augmentations/getRenderContextConstructor.d.ts';
 
 export {};
 
@@ -16,7 +18,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         hoverPopover: HoverPopover | null;
-    
+
         /**
          * Constructor.
          *
@@ -28,5 +30,5 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes.
          */
         constructor__(app: App): this;
-}
+    }
 }

@@ -1,4 +1,6 @@
-import type { getWorkspaceSidedockConstructor } from '../implementations/constructors/augmentations/getWorkspaceSidedockConstructor.d.ts';
+import type {
+    getWorkspaceSidedockConstructor
+} from '../implementations/constructors/augmentations/getWorkspaceSidedockConstructor.d.ts';
 import type { SerializedWorkspaceSidedock } from '../internals/workspace/SerializedWorkspaceSidedock.d.ts';
 
 declare module 'obsidian' {
@@ -135,7 +137,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         setSize(size: number): void;
-    
+
         /**
          * Toggle the sidedock.
          *
@@ -143,5 +145,5 @@ declare module 'obsidian' {
          * @since 0.12.11
          */
         toggle(): void;
-}
+    }
 }

@@ -1,10 +1,14 @@
-import type { getMetadataCacheConstructor } from '../implementations/constructors/augmentations/getMetadataCacheConstructor.d.ts';
+import type {
+    getMetadataCacheConstructor
+} from '../implementations/constructors/augmentations/getMetadataCacheConstructor.d.ts';
 import type { CustomArrayDict } from '../internals/collections/CustomArrayDict.d.ts';
 import type { ItemQueue } from '../internals/collections/ItemQueue.d.ts';
 import type { FileCacheEntry } from '../internals/FileCacheEntry.d.ts';
-import type { LinkSuggestion } from '../internals/LinkSuggestion.d.ts';
 import type { LinkUpdaters } from '../internals/link-update/LinkUpdaters.d.ts';
-import type { MetadataCacheFileCacheRecord } from '../internals/metadata-cache-records/MetadataCacheFileCacheRecord.d.ts';
+import type { LinkSuggestion } from '../internals/LinkSuggestion.d.ts';
+import type {
+    MetadataCacheFileCacheRecord
+} from '../internals/metadata-cache-records/MetadataCacheFileCacheRecord.d.ts';
 import type {
     MetadataCacheMetadataCacheRecord
 } from '../internals/metadata-cache-records/MetadataCacheMetadataCacheRecord.d.ts';
@@ -463,7 +467,11 @@ declare module 'obsidian' {
          * You must hook the {@link Vault.on | Vault.on(name: 'rename')} event for those.
          * @official
          */
-        on(name: 'changed', callback: (file: TFile, data: string, cache: CachedMetadata) => unknown, ctx?: unknown): EventRef;
+        on(
+            name: 'changed',
+            callback: (file: TFile, data: string, cache: CachedMetadata) => unknown,
+            ctx?: unknown
+        ): EventRef;
 
         /**
          * Called when a file has been deleted. A best-effort previous version of the cached metadata is presented,.
@@ -481,7 +489,11 @@ declare module 'obsidian' {
          * ```
          * @official
          */
-        on(name: 'deleted', callback: (file: TFile, prevCache: CachedMetadata | null) => unknown, ctx?: unknown): EventRef;
+        on(
+            name: 'deleted',
+            callback: (file: TFile, prevCache: CachedMetadata | null) => unknown,
+            ctx?: unknown
+        ): EventRef;
 
         /**
          * Called whenever the metadatacache has finished updating.
@@ -653,7 +665,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         watchVaultChanges(): void;
-    
+
         /**
          * Send message to worker to update metadata cache
          *
@@ -662,5 +674,5 @@ declare module 'obsidian' {
          * @unofficial
          */
         work(arrayBuffer: ArrayBuffer): Promise<CachedMetadata>;
-}
+    }
 }

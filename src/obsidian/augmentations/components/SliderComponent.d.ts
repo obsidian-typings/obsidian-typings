@@ -1,4 +1,6 @@
-import type { getSliderComponentConstructor } from '../../implementations/constructors/augmentations/getSliderComponentConstructor.d.ts';
+import type {
+    getSliderComponentConstructor
+} from '../../implementations/constructors/augmentations/getSliderComponentConstructor.d.ts';
 
 export {};
 

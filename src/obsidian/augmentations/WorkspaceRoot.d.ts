@@ -1,4 +1,6 @@
-import type { getWorkspaceRootConstructor } from '../implementations/constructors/augmentations/getWorkspaceRootConstructor.d.ts';
+import type {
+    getWorkspaceRootConstructor
+} from '../implementations/constructors/augmentations/getWorkspaceRootConstructor.d.ts';
 
 export {};
 
@@ -21,7 +23,7 @@ declare module 'obsidian' {
          * @official
          */
         win: Window;
-    
+
         /**
          * Constructor.
          *
@@ -35,5 +37,5 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes.
          */
         constructor4__(workspace: Workspace, direction: string, id?: string): this;
-}
+    }
 }

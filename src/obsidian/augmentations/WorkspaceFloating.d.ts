@@ -1,4 +1,6 @@
-import type { getWorkspaceFloatingConstructor } from '../implementations/constructors/augmentations/getWorkspaceFloatingConstructor.d.ts';
+import type {
+    getWorkspaceFloatingConstructor
+} from '../implementations/constructors/augmentations/getWorkspaceFloatingConstructor.d.ts';
 
 export {};
 
@@ -15,7 +17,7 @@ declare module 'obsidian' {
          * @since 0.15.2
          */
         parent: WorkspaceParent;
-    
+
         /**
          * Constructor.
          *
@@ -25,5 +27,5 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes.
          */
         constructor__(): this;
-}
+    }
 }

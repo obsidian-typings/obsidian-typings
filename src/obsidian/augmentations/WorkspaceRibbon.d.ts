@@ -1,4 +1,6 @@
-import type { getWorkspaceRibbonConstructor } from '../implementations/constructors/augmentations/getWorkspaceRibbonConstructor.d.ts';
+import type {
+    getWorkspaceRibbonConstructor
+} from '../implementations/constructors/augmentations/getWorkspaceRibbonConstructor.d.ts';
 
 export {};
 
@@ -7,7 +9,6 @@ declare module 'obsidian' {
      * Workspace ribbon.
      */
     interface WorkspaceRibbon {
-    
         /**
          * Constructor.
          *
@@ -20,5 +21,5 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes.
          */
         constructor2__(workspace: Workspace, side: string): this;
-}
+    }
 }

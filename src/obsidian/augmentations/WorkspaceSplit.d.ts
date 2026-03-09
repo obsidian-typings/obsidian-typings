@@ -1,5 +1,7 @@
 /** Augmentations for the WorkspaceSplit interface. */
-import type { getWorkspaceSplitConstructor } from '../implementations/constructors/augmentations/getWorkspaceSplitConstructor.d.ts';
+import type {
+    getWorkspaceSplitConstructor
+} from '../implementations/constructors/augmentations/getWorkspaceSplitConstructor.d.ts';
 
 export {};
 

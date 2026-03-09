@@ -1,4 +1,6 @@
-import type { getEditableFileViewConstructor } from '../../implementations/constructors/augmentations/getEditableFileViewConstructor.d.ts';
+import type {
+    getEditableFileViewConstructor
+} from '../../implementations/constructors/augmentations/getEditableFileViewConstructor.d.ts';
 
 export {};
 

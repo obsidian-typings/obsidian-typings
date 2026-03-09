@@ -37,26 +37,43 @@ interface GenerateTypesOptions {
 }
 
 interface Entry<T = unknown> {
-    obj: T;
-    inArray?: boolean | undefined;
-    path: string;
     depth: number;
+    inArray?: boolean | undefined;
+    obj: T;
     options: GenerateTypesOptions;
+    path: string;
 }
 
 interface PathIndex {
-    path: string;
     index: number;
+    path: string;
 }
 
 class CustomTypes {
     private counter = 0;
-    private typeDefinitionMap = new Map<string, string>();
+
     private definitionTypeMap = new Map<string, string>();
+
+    private typeDefinitionMap = new Map<string, string>();
+
+    public getByDefinition(definition: string): string | undefined {
+        return this.definitionTypeMap.get(definition);
+    }
 
     public nextCounter() {
         this.counter++;
         return this.counter;
+    }
+
+    public set({
+        type,
+        definition
+    }: {
+        type: string;
+        definition: string;
+    }): void {
+        this.typeDefinitionMap.set(type, definition);
+        this.definitionTypeMap.set(definition, type);
     }
 
     public toString(): string {
@@ -85,21 +102,6 @@ class CustomTypes {
             .join('\n\n');
         return str || rootType;
     }
-
-    public set({
-        type,
-        definition
-    }: {
-        type: string;
-        definition: string;
-    }): void {
-        this.typeDefinitionMap.set(type, definition);
-        this.definitionTypeMap.set(definition, type);
-    }
-
-    public getByDefinition(definition: string): string | undefined {
-        return this.definitionTypeMap.get(definition);
-    }
 }
 
 let isInitialized = false;
@@ -109,7 +111,9 @@ const DEPTH_LIMIT_REACHED_TYPE_NAME = 'DepthLimitReached';
 let customTypes = new CustomTypes();
 const objectTypeMap = new Map<object, string>();
 const objectPathDepthMap = new Map<object, string>();
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 const functionObjectMap = new Map<Function, object>();
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 const fixDuplicatesMap = new Map<Function, object | null>();
 
 function initBuiltInPrototypeNameMap(): void {
@@ -123,7 +127,7 @@ function initBuiltInPrototypeNameMap(): void {
 
     isInitialized = true;
 
-    let obsidian = window.require('obsidian') as typeof import('obsidian');
+    const obsidian = window.require('obsidian') as typeof import('obsidian');
 
     for (const [key, value] of entriesSafe(obsidian)) {
         if (typeof value === 'function') {
@@ -298,7 +302,7 @@ function entriesSafe(obj: object): [string, unknown][] {
     return Object.getOwnPropertyNames(record).map((key) => {
         try {
             return [key, record[key]];
-        } catch (e) {
+        } catch {
             return [key, undefined];
         }
     });
@@ -390,6 +394,7 @@ function inferType({
 
         if (!options.pathsToSkip.includes(path) && hasAdditionalKeys(obj)) {
             const objType = inferObjectType({
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
                 obj: functionObjectMap.get(obj as Function) ?? {},
                 path,
                 depth,
@@ -434,7 +439,7 @@ function inferObjectType({
 }: Entry<object>): string {
     console.debug(`Inferring object type: ${path} (depth: ${depth})`);
     const proto = Object.getPrototypeOf(obj);
-    let builtInType = builtInPrototypeNameMap.get(obj) ?? '';
+    const builtInType = builtInPrototypeNameMap.get(obj) ?? '';
     if (builtInType) {
         return builtInType;
     }
@@ -508,6 +513,7 @@ function inferFunctionSignature({
     path,
     inArray,
     depth
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 }: Entry<Function>): string {
     console.debug(`Inferring function type: ${path} (depth: ${depth})`);
     const fnStr = fn.toString();

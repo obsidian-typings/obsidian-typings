@@ -1,5 +1,7 @@
 import type { WorkspaceLeaf } from 'obsidian';
-import type { getWorkspaceLeafHistoryConstructor } from '../../implementations/constructors/internals/getWorkspaceLeafHistoryConstructor.d.ts';
+import type {
+    getWorkspaceLeafHistoryConstructor
+} from '../../implementations/constructors/internals/getWorkspaceLeafHistoryConstructor.d.ts';
 import type { SerializedWorkspaceLeafHistory } from './SerializedWorkspaceLeafHistory.d.ts';
 import type { WorkspaceLeafHistoryState } from './WorkspaceLeafHistoryState.d.ts';
 

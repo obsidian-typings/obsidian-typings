@@ -78,7 +78,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         getShortName(): string;
-    
+
         /**
          * Removes the file from the cache if its content length greater than `app.vault.cacheLimit`.
          *
@@ -86,5 +86,5 @@ declare module 'obsidian' {
          * @unofficial
          */
         updateCacheLimit(): unknown;
-}
+    }
 }

@@ -32,7 +32,7 @@ async function convertRecursive(dir: string): Promise<void> {
                 if (moduleSpecifier.startsWith('.')) {
                     const moduleSourceFile = importDeclaration.getModuleSpecifierSourceFileOrThrow();
                     const relativePath = relative(srcDir, moduleSourceFile.getFilePath());
-                    let indexDirectory = indexDirectories.find(indexDirectory =>
+                    const indexDirectory = indexDirectories.find(indexDirectory =>
                         relativePath.startsWith(indexDirectory)
                     );
                     if (indexDirectory) {
@@ -50,9 +50,9 @@ async function convertRecursive(dir: string): Promise<void> {
                 }
             }
 
-            for (let module of sourceFile.getModules()) {
+            for (const module of sourceFile.getModules()) {
                 const path = sourceFile.getFilePath().slice(srcDir.length - 20);
-                for (let declaration of module.getFunctions()) {
+                for (const declaration of module.getFunctions()) {
                     declaration.insertJsDoc(0, {
                         tags: [{
                             tagName: 'source',
@@ -60,7 +60,7 @@ async function convertRecursive(dir: string): Promise<void> {
                         }]
                     });
                 }
-                for (let declaration of module.getInterfaces()) {
+                for (const declaration of module.getInterfaces()) {
                     declaration.addJsDoc({
                         tags: [{
                             tagName: 'source',
@@ -68,7 +68,7 @@ async function convertRecursive(dir: string): Promise<void> {
                         }]
                     });
                 }
-                for (let declaration of module.getClasses()) {
+                for (const declaration of module.getClasses()) {
                     declaration.addJsDoc({
                         tags: [{
                             tagName: 'source',
@@ -116,14 +116,14 @@ const augmentationsNamespace = augmentations.get('augmentations');
 augmentations.set('obsidian', obsidianNamespace + augmentationsNamespace);
 augmentations.delete('augmentations');
 
-for (let [augmentationsDirName, augmentation] of augmentations) {
+for (const [augmentationsDirName, augmentation] of augmentations) {
     const namespaceName = '_' + augmentationsDirName.replace(/[^a-zA-Z0-9]/g, '_');
     if (augmentationsDirName === 'obsidian') {
-        augmentation = 'export * from \'obsidian\';\n' + augmentation;
+        const statements = 'export * from \'obsidian\';\n' + augmentation;
         typesSourceFile.addModule({
             name: namespaceName,
             isExported: true,
-            statements: augmentation,
+            statements,
             docs: [{
                 tags: [{
                     tagName: 'source',

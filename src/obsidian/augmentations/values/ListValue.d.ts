@@ -1,4 +1,6 @@
-import type { getListValueConstructor } from '../../implementations/constructors/augmentations/getListValueConstructor.d.ts';
+import type {
+    getListValueConstructor
+} from '../../implementations/constructors/augmentations/getListValueConstructor.d.ts';
 
 export {};
 

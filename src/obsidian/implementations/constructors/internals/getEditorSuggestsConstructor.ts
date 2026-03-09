@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
-import type { EditorSuggests } from '../../../internals/EditorSuggests.d.ts';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
+import type { EditorSuggests } from '../../../internals/EditorSuggests.d.ts';
 
 type EditorSuggestsConstructor = ExtractConstructor<EditorSuggests>;
 

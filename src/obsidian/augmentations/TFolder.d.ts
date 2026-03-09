@@ -55,7 +55,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         getParentPrefix(): string;
-    
+
         /**
          * Check if the folder is the root folder.
          *
@@ -64,5 +64,5 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         isRoot(): boolean;
-}
+    }
 }

@@ -1,9 +1,11 @@
-import type { getFileSystemAdapterConstructor } from '../implementations/constructors/augmentations/getFileSystemAdapterConstructor.d.ts';
 import type { IpcRenderer } from 'electron';
 import * as fs from 'node:fs';
 import type { Stats } from 'node:fs';
 import * as fsPromises from 'node:fs/promises';
 import * as path from 'node:path';
+import type {
+    getFileSystemAdapterConstructor
+} from '../implementations/constructors/augmentations/getFileSystemAdapterConstructor.d.ts';
 import type { Btime } from '../internals/Btime.d.ts';
 import type { DataAdapterWatchersRecord } from '../internals/data-adapter-records/DataAdapterWatchersRecord.d.ts';
 
@@ -470,7 +472,7 @@ declare module 'obsidian' {
          * @official
          */
         write(normalizedPath: string, data: string, options?: DataWriteOptions): Promise<void>;
-    
+
         /**
          * Writes a file as a binary buffer.
          *
@@ -485,7 +487,7 @@ declare module 'obsidian' {
          * @official
          */
         writeBinary(normalizedPath: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
-}
+    }
 
     namespace FileSystemAdapter {
         /**

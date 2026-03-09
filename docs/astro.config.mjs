@@ -2,7 +2,7 @@ import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
 import starlightLinksValidator from 'starlight-links-validator';
 import starlightThemeObsidian from 'starlight-theme-obsidian';
-import starlightTypeDoc, { typeDocSidebarGroup } from 'starlight-typedoc';
+import starlightTypeDoc from 'starlight-typedoc';
 import {
     admonitionRenderer,
     githubLocationRenderer

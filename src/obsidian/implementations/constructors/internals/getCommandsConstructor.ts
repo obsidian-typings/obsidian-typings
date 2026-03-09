@@ -1,6 +1,6 @@
 import type { App } from 'obsidian';
-import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 import type { Commands } from '../../../internals/commands/Commands.d.ts';
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 type CommandsConstructor = ExtractConstructor<Commands>;
 

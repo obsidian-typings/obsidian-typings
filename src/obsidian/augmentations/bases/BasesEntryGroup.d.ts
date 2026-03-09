@@ -1,4 +1,6 @@
-import type { getBasesEntryGroupConstructor } from '../../implementations/constructors/augmentations/getBasesEntryGroupConstructor.d.ts';
+import type {
+    getBasesEntryGroupConstructor
+} from '../../implementations/constructors/augmentations/getBasesEntryGroupConstructor.d.ts';
 
 export {};
 
@@ -39,7 +41,7 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes.
          */
         constructor__(entries: BasesEntry[], key: unknown): this;
-    
+
         /**
          * Whether this entry group has a non-null key.
          *
@@ -48,5 +50,5 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         hasKey(): boolean;
-}
+    }
 }

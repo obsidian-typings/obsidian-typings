@@ -1,4 +1,6 @@
-import type { getBooleanValueConstructor } from '../../implementations/constructors/augmentations/getBooleanValueConstructor.d.ts';
+import type {
+    getBooleanValueConstructor
+} from '../../implementations/constructors/augmentations/getBooleanValueConstructor.d.ts';
 
 export {};
 

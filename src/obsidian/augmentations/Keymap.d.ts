@@ -30,7 +30,7 @@ declare module 'obsidian' {
          * @since 0.13.9
          */
         popScope(scope: Scope): void;
-    
+
         /**
          * Push a scope onto the scope stack, setting it as the active scope to handle all key events.
          *
@@ -43,7 +43,7 @@ declare module 'obsidian' {
          * @since 0.13.9
          */
         pushScope(scope: Scope): void;
-}
+    }
 
     namespace Keymap {
         /**

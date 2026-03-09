@@ -1,4 +1,6 @@
-import type { getNullValueConstructor } from '../../implementations/constructors/augmentations/getNullValueConstructor.d.ts';
+import type {
+    getNullValueConstructor
+} from '../../implementations/constructors/augmentations/getNullValueConstructor.d.ts';
 
 export {};
 
@@ -28,7 +30,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         isTruthy(): boolean;
-    
+
         /**
          * Get the string representation of this NullValue.
          *
@@ -37,7 +39,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         toString(): string;
-}
+    }
 
     namespace NullValue {
         /**

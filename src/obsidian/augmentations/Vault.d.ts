@@ -767,7 +767,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         writeJson(path: string, data: object, pretty?: boolean): Promise<void>;
-    
+
         /**
          * Write a plugin config file (path relative to vault root) to disk.
          *
@@ -778,7 +778,7 @@ declare module 'obsidian' {
          * @unofficial
          */
         writePluginData(path: string, data: object, pretty?: boolean): Promise<void>;
-}
+    }
 
     namespace Vault {
         /**

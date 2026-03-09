@@ -1,4 +1,6 @@
-import type { getTextAreaComponentConstructor } from '../../implementations/constructors/augmentations/getTextAreaComponentConstructor.d.ts';
+import type {
+    getTextAreaComponentConstructor
+} from '../../implementations/constructors/augmentations/getTextAreaComponentConstructor.d.ts';
 
 export {};
 

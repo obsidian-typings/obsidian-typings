@@ -1,4 +1,6 @@
-import type { getBasesEntryConstructor } from '../../implementations/constructors/augmentations/getBasesEntryConstructor.d.ts';
+import type {
+    getBasesEntryConstructor
+} from '../../implementations/constructors/augmentations/getBasesEntryConstructor.d.ts';
 
 export {};
 
@@ -29,7 +31,7 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes.
          */
         constructor__(ctx: unknown, file: TFile): this;
-    
+
         /**
          * Get the value of the property.
          * Note: Errors are returned as {@link ErrorValue}
@@ -40,5 +42,5 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         getValue(propertyId: BasesPropertyId): Value | null;
-}
+    }
 }

@@ -1,4 +1,6 @@
-import type { getQueryControllerConstructor } from '../../implementations/constructors/augmentations/getQueryControllerConstructor.d.ts';
+import type {
+    getQueryControllerConstructor
+} from '../../implementations/constructors/augmentations/getQueryControllerConstructor.d.ts';
 
 export {};
 
@@ -10,7 +12,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     interface QueryController extends Component {
-    
         /**
          * Constructor.
          *
@@ -25,5 +26,5 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes.
          */
         constructor2__(app: App, plugin: unknown, viewHeaderEl: HTMLElement, currentFile?: TFile | null): this;
-}
+    }
 }

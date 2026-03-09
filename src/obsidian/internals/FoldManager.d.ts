@@ -1,5 +1,7 @@
 import type { App } from 'obsidian';
-import type { getFoldManagerConstructor } from '../implementations/constructors/internals/getFoldManagerConstructor.d.ts';
+import type {
+    getFoldManagerConstructor
+} from '../implementations/constructors/internals/getFoldManagerConstructor.d.ts';
 
 /**
  * Manager for persisting and restoring editor fold states.

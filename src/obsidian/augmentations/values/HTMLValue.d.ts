@@ -1,4 +1,6 @@
-import type { getHTMLValueConstructor } from '../../implementations/constructors/augmentations/getHTMLValueConstructor.d.ts';
+import type {
+    getHTMLValueConstructor
+} from '../../implementations/constructors/augmentations/getHTMLValueConstructor.d.ts';
 
 export {};
 

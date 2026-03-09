@@ -1,4 +1,6 @@
-import type { getCapacitorAdapterConstructor } from '../implementations/constructors/augmentations/getCapacitorAdapterConstructor.d.ts';
+import type {
+    getCapacitorAdapterConstructor
+} from '../implementations/constructors/augmentations/getCapacitorAdapterConstructor.d.ts';
 import type { CapacitorAdapterFs } from '../internals/CapacitorAdapterFs.d.ts';
 import type { CapacitorFileEntry } from '../internals/CapacitorFileEntry.d.ts';
 import type { FileEntry } from '../internals/FileEntry.d.ts';
@@ -402,7 +404,7 @@ declare module 'obsidian' {
          * @since 1.7.2
          */
         write(normalizedPath: string, data: string, options?: DataWriteOptions): Promise<void>;
-    
+
         /**
          * Writes a file as a binary buffer.
          *
@@ -418,5 +420,5 @@ declare module 'obsidian' {
          * @since 1.7.2
          */
         writeBinary(normalizedPath: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
-}
+    }
 }

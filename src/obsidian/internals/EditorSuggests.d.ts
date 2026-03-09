@@ -3,7 +3,9 @@ import type {
     EditorSuggest,
     TFile
 } from 'obsidian';
-import type { getEditorSuggestsConstructor } from '../implementations/constructors/internals/getEditorSuggestsConstructor.d.ts';
+import type {
+    getEditorSuggestsConstructor
+} from '../implementations/constructors/internals/getEditorSuggestsConstructor.d.ts';
 import type { MarkdownBaseView } from './MarkdownBaseView.d.ts';
 
 /**

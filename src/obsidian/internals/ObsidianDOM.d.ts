@@ -1,4 +1,6 @@
-import type { getObsidianDOMConstructor } from '../implementations/constructors/internals/getObsidianDOMConstructor.d.ts';
+import type {
+    getObsidianDOMConstructor
+} from '../implementations/constructors/internals/getObsidianDOMConstructor.d.ts';
 /**
  * Core DOM elements of the Obsidian application layout.
  * @public

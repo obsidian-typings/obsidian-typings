@@ -1,4 +1,6 @@
-import type { getMarkdownPreviewRendererConstructor } from '../implementations/constructors/augmentations/getMarkdownPreviewRendererConstructor.d.ts';
+import type {
+    getMarkdownPreviewRendererConstructor
+} from '../implementations/constructors/augmentations/getMarkdownPreviewRendererConstructor.d.ts';
 import type { CodeBlockPostProcessorHandler } from '../internals/CodeBlockPostProcessorHandler.d.ts';
 import type { DomEventsHandlers } from '../internals/DomEventsHandlers.d.ts';
 
@@ -22,8 +24,14 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(owner: unknown, containerEl: HTMLElement, parentEl: HTMLElement, workerPath: unknown, observeInsertion?: boolean): this;
-}
+        constructor__(
+            owner: unknown,
+            containerEl: HTMLElement,
+            parentEl: HTMLElement,
+            workerPath: unknown,
+            observeInsertion?: boolean
+        ): this;
+    }
 
     namespace MarkdownPreviewRenderer {
         /**

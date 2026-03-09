@@ -1,4 +1,6 @@
-import type { getMomentFormatComponentConstructor } from '../../implementations/constructors/augmentations/getMomentFormatComponentConstructor.d.ts';
+import type {
+    getMomentFormatComponentConstructor
+} from '../../implementations/constructors/augmentations/getMomentFormatComponentConstructor.d.ts';
 
 export {};
 
@@ -75,7 +77,7 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         setValue(value: string): this;
-    
+
         /**
          * Updates the sample value.
          *
@@ -83,5 +85,5 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         updateSample(): void;
-}
+    }
 }

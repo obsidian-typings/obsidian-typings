@@ -1,4 +1,6 @@
-import type { getAbstractTextComponentConstructor } from '../../implementations/constructors/augmentations/getAbstractTextComponentConstructor.d.ts';
+import type {
+    getAbstractTextComponentConstructor
+} from '../../implementations/constructors/augmentations/getAbstractTextComponentConstructor.d.ts';
 
 export {};
 

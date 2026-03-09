@@ -1,4 +1,6 @@
-import type { getFileValueConstructor } from '../../implementations/constructors/augmentations/getFileValueConstructor.d.ts';
+import type {
+    getFileValueConstructor
+} from '../../implementations/constructors/augmentations/getFileValueConstructor.d.ts';
 
 export {};
 
@@ -29,7 +31,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         isTruthy(): boolean;
-    
+
         /**
          * String representation of this FileValue.
          *
@@ -38,5 +40,5 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         toString(): string;
-}
+    }
 }

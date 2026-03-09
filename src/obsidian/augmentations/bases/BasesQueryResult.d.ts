@@ -1,4 +1,6 @@
-import type { getBasesQueryResultConstructor } from '../../implementations/constructors/augmentations/getBasesQueryResultConstructor.d.ts';
+import type {
+    getBasesQueryResultConstructor
+} from '../../implementations/constructors/augmentations/getBasesQueryResultConstructor.d.ts';
 
 export {};
 
@@ -58,7 +60,7 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link groupedData} instead.
          */
         groupedData__(): BasesEntryGroup[];
-    
+
         /**
          * Visible properties defined by the user.
          *
@@ -68,5 +70,5 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes. Use {@link properties} instead.
          */
         properties__(): BasesPropertyId[];
-}
+    }
 }

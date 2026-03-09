@@ -1,4 +1,6 @@
-import type { getBasesViewConfigConstructor } from '../../implementations/constructors/augmentations/getBasesViewConfigConstructor.d.ts';
+import type {
+    getBasesViewConfigConstructor
+} from '../../implementations/constructors/augmentations/getBasesViewConfigConstructor.d.ts';
 
 export {};
 
@@ -103,7 +105,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         getSort(): BasesSortConfig[];
-    
+
         /**
          * Store configuration data for the view. Views should prefer `BasesViewRegistration.options`
          * to allow users to configure options where appropriate.
@@ -114,5 +116,5 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         set(key: string, value: unknown | null): void;
-}
+    }
 }

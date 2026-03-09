@@ -1,4 +1,6 @@
-import type { getRegExpValueConstructor } from '../../implementations/constructors/augmentations/getRegExpValueConstructor.d.ts';
+import type {
+    getRegExpValueConstructor
+} from '../../implementations/constructors/augmentations/getRegExpValueConstructor.d.ts';
 
 export {};
 
@@ -27,7 +29,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         isTruthy(): boolean;
-    
+
         /**
          * Get the string representation of this RegExpValue.
          *
@@ -36,5 +38,5 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         toString(): string;
-}
+    }
 }

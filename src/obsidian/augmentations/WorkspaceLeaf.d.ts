@@ -1,4 +1,6 @@
-import type { getWorkspaceLeafConstructor } from '../implementations/constructors/augmentations/getWorkspaceLeafConstructor.d.ts';
+import type {
+    getWorkspaceLeafConstructor
+} from '../implementations/constructors/augmentations/getWorkspaceLeafConstructor.d.ts';
 import type { Draggable } from '../internals/drag-manager/Draggable.d.ts';
 import type { DropResult } from '../internals/drag-manager/DropResult.d.ts';
 import type { WorkspaceLeafHistory } from '../internals/workspace-leaf-history/WorkspaceLeafHistory.d.ts';
@@ -434,11 +436,11 @@ declare module 'obsidian' {
          * @unofficial
          */
         unhighlight(): void;
-    
+
         /**
          * Update the tab header display (icon, title, status indicators).
          * @unofficial
          */
         updateHeader(): void;
-}
+    }
 }

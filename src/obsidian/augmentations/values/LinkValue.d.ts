@@ -1,4 +1,6 @@
-import type { getLinkValueConstructor } from '../../implementations/constructors/augmentations/getLinkValueConstructor.d.ts';
+import type {
+    getLinkValueConstructor
+} from '../../implementations/constructors/augmentations/getLinkValueConstructor.d.ts';
 
 export {};
 
@@ -9,7 +11,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     interface LinkValue extends StringValue {
-    
         /**
          * Constructor.
          *
@@ -21,7 +22,7 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes.
          */
         constructor5__(value: string): this;
-}
+    }
 
     namespace LinkValue {
         /**

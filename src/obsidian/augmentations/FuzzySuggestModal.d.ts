@@ -1,4 +1,6 @@
-import type { getFuzzySuggestModalConstructor } from '../implementations/constructors/augmentations/getFuzzySuggestModalConstructor.d.ts';
+import type {
+    getFuzzySuggestModalConstructor
+} from '../implementations/constructors/augmentations/getFuzzySuggestModalConstructor.d.ts';
 
 export {};
 

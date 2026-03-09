@@ -1,4 +1,6 @@
-import type { getDurationValueConstructor } from '../../implementations/constructors/augmentations/getDurationValueConstructor.d.ts';
+import type {
+    getDurationValueConstructor
+} from '../../implementations/constructors/augmentations/getDurationValueConstructor.d.ts';
 
 export {};
 
@@ -49,7 +51,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         isTruthy(): boolean;
-    
+
         /**
          * String representation of this DurationValue.
          *
@@ -58,7 +60,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         toString(): string;
-}
+    }
 
     namespace DurationValue {
         /**

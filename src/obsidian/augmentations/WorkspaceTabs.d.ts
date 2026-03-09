@@ -1,4 +1,6 @@
-import type { getWorkspaceTabsConstructor } from '../implementations/constructors/augmentations/getWorkspaceTabsConstructor.d.ts';
+import type {
+    getWorkspaceTabsConstructor
+} from '../implementations/constructors/augmentations/getWorkspaceTabsConstructor.d.ts';
 
 export {};
 
@@ -13,7 +15,7 @@ declare module 'obsidian' {
          * @official
          */
         parent: WorkspaceSplit;
-    
+
         /**
          * Constructor.
          *
@@ -26,5 +28,5 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes.
          */
         constructor3__(workspace: Workspace, id?: string): this;
-}
+    }
 }

@@ -1,4 +1,6 @@
-import type { getSecretStorageConstructor } from '../implementations/constructors/augmentations/getSecretStorageConstructor.d.ts';
+import type {
+    getSecretStorageConstructor
+} from '../implementations/constructors/augmentations/getSecretStorageConstructor.d.ts';
 
 export {};
 
@@ -38,7 +40,7 @@ declare module 'obsidian' {
          * @since 1.11.4
          */
         listSecrets(): string[];
-    
+
         /**
          * Sets a secret in the storage.
          *
@@ -49,5 +51,5 @@ declare module 'obsidian' {
          * @since 1.11.4
          */
         setSecret(id: string, secret: string): void;
-}
+    }
 }

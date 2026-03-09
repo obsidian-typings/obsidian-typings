@@ -1,4 +1,6 @@
-import type { getMenuSeparatorConstructor } from '../implementations/constructors/augmentations/getMenuSeparatorConstructor.d.ts';
+import type {
+    getMenuSeparatorConstructor
+} from '../implementations/constructors/augmentations/getMenuSeparatorConstructor.d.ts';
 
 export {};
 
@@ -8,7 +10,6 @@ declare module 'obsidian' {
      * @since 0.15.3
      */
     interface MenuSeparator {
-    
         /**
          * Constructor.
          *
@@ -20,5 +21,5 @@ declare module 'obsidian' {
          * @deprecated - Added only for typing purposes.
          */
         constructor__(menu: Menu): this;
-}
+    }
 }

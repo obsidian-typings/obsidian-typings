@@ -1,4 +1,6 @@
-import type { getDateValueConstructor } from '../../implementations/constructors/augmentations/getDateValueConstructor.d.ts';
+import type {
+    getDateValueConstructor
+} from '../../implementations/constructors/augmentations/getDateValueConstructor.d.ts';
 
 export {};
 
@@ -45,7 +47,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         relative(): string;
-    
+
         /**
          * String representation of this DateValue.
          *
@@ -54,7 +56,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          */
         toString(): string;
-}
+    }
 
     namespace DateValue {
         /**
