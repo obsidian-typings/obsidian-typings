@@ -19,7 +19,7 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(leaf: WorkspaceLeaf): this;
+        constructor3__(leaf: WorkspaceLeaf): this;
 
         /**
          * Returns a boolean indicating whether this FileValue is truthy.

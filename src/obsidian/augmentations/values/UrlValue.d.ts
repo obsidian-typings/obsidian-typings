@@ -20,6 +20,6 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(value: string): this;
+        constructor5__(value: string): this;
 }
 }

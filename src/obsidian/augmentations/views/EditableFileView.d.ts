@@ -1,3 +1,5 @@
+import type { getEditableFileViewConstructor } from '../../implementations/constructors/augmentations/getEditableFileViewConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -12,6 +14,18 @@ declare module 'obsidian' {
          * @unofficial
          */
         fileBeingRenamed: null | TFile;
+
+        /**
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<EditableFileView>`.
+         *
+         * @param leaf - The workspace leaf.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor3__(leaf: WorkspaceLeaf): this;
 
         /**
          * Is called when the titleEl looses focus.

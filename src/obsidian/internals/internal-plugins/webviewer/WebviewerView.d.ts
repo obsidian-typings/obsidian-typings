@@ -1,5 +1,9 @@
-import type { ItemView } from 'obsidian';
+import type {
+    ItemView,
+    WorkspaceLeaf
+} from 'obsidian';
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
+import type { WebviewerPluginInstance } from './WebviewerPluginInstance.d.ts';
 
 /**
  * View that renders an embedded web browser for browsing web pages within Obsidian.
@@ -19,6 +23,16 @@ export interface WebviewerView extends ItemView {
 
     /** Configure the web contents settings for the webview. */
     configureWebContents(): void;
+
+    /**
+     * Constructor.
+     *
+     * @param leaf - The workspace leaf.
+     * @param browserPluginInstance - The webviewer plugin instance.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor3__(leaf: WorkspaceLeaf, browserPluginInstance: WebviewerPluginInstance): this;
 
     /**
      * Build context menu items for an image element.

@@ -64,7 +64,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(containerEl: HTMLElement): this;
+        constructor3__(containerEl: HTMLElement): this;
 
         /**
          * Get the selected value of the dropdown.

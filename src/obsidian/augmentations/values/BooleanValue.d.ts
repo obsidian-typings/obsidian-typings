@@ -9,7 +9,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     interface BooleanValue extends PrimitiveValue<boolean> {
-    
         /**
          * Constructor.
          *
@@ -20,8 +19,8 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(value: boolean): this;
-}
+        constructor4__(value: boolean): this;
+    }
 
     namespace BooleanValue {
         /**

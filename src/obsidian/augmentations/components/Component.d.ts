@@ -42,6 +42,17 @@ declare module 'obsidian' {
         addChild<T extends Component>(component: T): T;
 
         /**
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<Component>`.
+         *
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor__(): this;
+
+        /**
          * Load this component and its children.
          *
          * @official

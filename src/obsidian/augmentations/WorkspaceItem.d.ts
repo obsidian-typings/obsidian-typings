@@ -1,3 +1,4 @@
+import type { getWorkspaceItemConstructor } from '../implementations/constructors/augmentations/getWorkspaceItemConstructor.d.ts';
 import type { SerializedWorkspaceItem } from '../internals/workspace/SerializedWorkspaceItem.d.ts';
 
 declare module 'obsidian' {
@@ -62,6 +63,19 @@ declare module 'obsidian' {
          * @unofficial
          */
         workspace: Workspace;
+
+        /**
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getWorkspaceItemConstructor} from `obsidian-typings/implementations`.
+         *
+         * @param workspace - The workspace.
+         * @param id - The id.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor2__(workspace: Workspace, id?: string): this;
 
         /**
          * Detach this item from its parent.

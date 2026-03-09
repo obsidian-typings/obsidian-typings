@@ -1,3 +1,5 @@
+import type { getValueComponentConstructor } from '../../implementations/constructors/augmentations/getValueComponentConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -8,6 +10,17 @@ declare module 'obsidian' {
      * @since 0.9.7
      */
     interface ValueComponent<T> extends BaseComponent {
+        /**
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getValueComponentConstructor} from `obsidian-typings/implementations`.
+         *
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor2__(): this;
+
         /**
          * Get the value of the component.
          *

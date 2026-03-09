@@ -1,4 +1,5 @@
 import { augmentationMemberTags } from './augmentation-member-tags.ts';
+import { constructorBaseRestricted } from './constructor-base-restricted.ts';
 import { constructorGetterPlacement } from './constructor-getter-placement.ts';
 import { fileExtension } from './file-extension.ts';
 import { importExtensions } from './import-extensions.ts';
@@ -12,6 +13,7 @@ export const obsidianTypingsPlugin = {
     meta: { name: 'obsidian-typings' },
     rules: {
         'augmentation-member-tags': augmentationMemberTags,
+        'constructor-base-restricted': constructorBaseRestricted,
         'constructor-getter-placement': constructorGetterPlacement,
         'file-extension': fileExtension,
         'import-extensions': importExtensions,

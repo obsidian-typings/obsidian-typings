@@ -98,7 +98,7 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(containerEl: HTMLElement): this;
+        constructor2__(containerEl: HTMLElement): this;
 
         /**
          * Switch to edit mode for the given element or selection.

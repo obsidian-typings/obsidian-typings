@@ -9,7 +9,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     interface ImageValue extends StringValue {
-    
         /**
          * Constructor.
          *
@@ -20,6 +19,6 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(value: string): this;
-}
+        constructor5__(value: string): this;
+    }
 }

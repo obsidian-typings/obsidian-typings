@@ -10,6 +10,17 @@ declare module 'obsidian' {
      */
     interface Value {
         /**
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<Value>`.
+         *
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor__(): this;
+
+        /**
          * Returns a boolean indicating whether this Value is equal to the provided Value.
          *
          * @param other - The Value to compare to.

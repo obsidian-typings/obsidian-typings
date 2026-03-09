@@ -1,4 +1,5 @@
 import type { EditorView } from '@codemirror/view';
+import type { getEditorConstructor } from '../implementations/constructors/augmentations/getEditorConstructor.d.ts';
 import type { Coords } from '../../@codemirror__view/internals/Coords.d.ts';
 import type { ClickableToken } from '../internals/ClickableToken.d.ts';
 import type { CoordsLeftTop } from '../internals/CoordsLeftTop.d.ts';
@@ -78,6 +79,17 @@ declare module 'obsidian' {
          * @since 0.11.11
          */
         blur__?(): void;
+
+        /**
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<Editor>`.
+         *
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor__(): this;
 
         /**
          * Convert editor position to screen position.

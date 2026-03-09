@@ -36,7 +36,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(inputEl: T): this;
+        constructor3__(inputEl: T): this;
 
         /**
          * Gets the value of the input element.

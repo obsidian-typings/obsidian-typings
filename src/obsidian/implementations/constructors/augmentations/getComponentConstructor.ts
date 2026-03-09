@@ -1,9 +1,7 @@
 import {
     Component
 } from 'obsidian';
-import type { ConstructorBase } from '../../../internals/constructors/ConstructorBase.d.ts';
-
-type ComponentConstructor = ConstructorBase<[], Component>;
+import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
  * Get the Component constructor.
@@ -13,6 +11,6 @@ type ComponentConstructor = ConstructorBase<[], Component>;
  * @public
  * @unofficial
  */
-export function getComponentConstructor(): ComponentConstructor {
-    return Component as ComponentConstructor;
+export function getComponentConstructor(): ExtractConstructor<Component> {
+    return Component as ExtractConstructor<Component>;
 }

@@ -1,7 +1,8 @@
 import type {
     FileView,
     TextFileView,
-    TFile
+    TFile,
+    WorkspaceLeaf
 } from 'obsidian';
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { BasesController } from './BasesController.d.ts';
@@ -34,6 +35,16 @@ export interface BasesView extends TextFileView {
      * The query for the view.
      */
     query: BasesQuery;
+
+    /**
+     * Constructor.
+     *
+     * @param leaf - The workspace leaf.
+     * @param basesPluginInstance - The bases plugin instance.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor4__(leaf: WorkspaceLeaf, basesPluginInstance: BasesPluginInstance): this;
 
     /**
      * Get view type.

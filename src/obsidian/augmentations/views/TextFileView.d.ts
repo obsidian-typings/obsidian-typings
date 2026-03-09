@@ -71,7 +71,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(leaf: WorkspaceLeaf): this;
+        constructor2__(leaf: WorkspaceLeaf): this;
 
         /**
          * Gets the data from the editor. This will be called to save the editor contents to the file.

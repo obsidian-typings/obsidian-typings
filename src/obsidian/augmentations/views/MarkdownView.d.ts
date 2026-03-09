@@ -161,7 +161,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(leaf: WorkspaceLeaf): this;
+        constructor2__(leaf: WorkspaceLeaf): this;
 
         /**
          * Edit the focused property in the metadata editor.

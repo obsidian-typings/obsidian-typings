@@ -1,3 +1,5 @@
+import type { getMarkdownRendererConstructor } from '../implementations/constructors/augmentations/getMarkdownRendererConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -19,6 +21,20 @@ declare module 'obsidian' {
          * @official
          */
         hoverPopover: HoverPopover | null;
+
+        /**
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<MarkdownRenderer>`.
+         *
+         * @param app - The app instance.
+         * @param containerEl - The container element.
+         * @param supportWorker - Whether to use a web worker for rendering.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor3__(app: App, containerEl: HTMLElement, supportWorker?: boolean): this;
 
         /**
          * The file of the markdown renderer.

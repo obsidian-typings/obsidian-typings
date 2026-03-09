@@ -1,3 +1,5 @@
+import type { getTAbstractFileConstructor } from '../implementations/constructors/augmentations/getTAbstractFileConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -44,6 +46,19 @@ declare module 'obsidian' {
          * @since 0.9.7
          */
         vault: Vault;
+
+        /**
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<TAbstractFile>`.
+         *
+         * @param vault - The vault.
+         * @param path - The path.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor__(vault: Vault, path: string): this;
 
         /**
          * Gets the path after renaming the file or folder.

@@ -5,6 +5,7 @@ import type {
 } from 'obsidian';
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { InfoFileView } from '../../views/InfoFileView.d.ts';
+import type { OutlinePluginInstance } from './OutlinePluginInstance.d.ts';
 
 /**
  * View that displays the headings outline for the current file.
@@ -12,6 +13,16 @@ import type { InfoFileView } from '../../views/InfoFileView.d.ts';
  * @unofficial
  */
 export interface OutlineView extends InfoFileView {
+    /**
+     * Constructor.
+     *
+     * @param leaf - The workspace leaf.
+     * @param outlinePluginInstance - The outline plugin instance.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor3__(leaf: WorkspaceLeaf, outlinePluginInstance: OutlinePluginInstance): this;
+
     /**
      * Create a DOM element for an outline heading item.
      *

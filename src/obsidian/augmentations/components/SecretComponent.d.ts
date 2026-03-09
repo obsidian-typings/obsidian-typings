@@ -21,7 +21,7 @@ declare module 'obsidian' {
          * @since 1.11.1
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(app: App, containerEl: HTMLElement): this;
+        constructor2__(app: App, containerEl: HTMLElement): this;
 
         /**
          * Sets the callback function to be called when the value of the secret component changes.

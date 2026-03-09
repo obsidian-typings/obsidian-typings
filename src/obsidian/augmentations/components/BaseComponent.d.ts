@@ -15,6 +15,17 @@ declare module 'obsidian' {
         disabled: boolean;
 
         /**
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<BaseComponent>`.
+         *
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor__(): this;
+
+        /**
          * Sets the disabled state of the component.
          *
          * @param disabled - Whether to disable the component.

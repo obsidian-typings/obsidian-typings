@@ -9,7 +9,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     interface StringValue extends PrimitiveValue<string> {
-    
         /**
          * Constructor.
          *
@@ -20,8 +19,8 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(value: string): this;
-}
+        constructor4__(value: string): this;
+    }
 
     namespace StringValue {
         /**

@@ -226,7 +226,7 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(app: App, vault: Vault): this;
+        constructor2__(app: App, vault: Vault): this;
 
         /**
          * Remove all entries that contain deleted path

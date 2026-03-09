@@ -18,6 +18,6 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(containerEl: HTMLElement): this;
+        constructor4__(containerEl: HTMLElement): this;
     }
 }

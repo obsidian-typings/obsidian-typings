@@ -34,6 +34,6 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */
-        constructor2__(workspace: Workspace, id?: string, size?: Record<string, number>): this;
+        constructor4__(workspace: Workspace, id?: string, size?: Record<string, number>): this;
 }
 }

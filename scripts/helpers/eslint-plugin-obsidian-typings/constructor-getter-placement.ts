@@ -40,12 +40,12 @@ function findAugmentationFile(dir: string, typeName: string): string | null {
 }
 
 /**
- * Check if a file contains `constructor__` or `constructor2__` as an interface method.
+ * Check if a file contains `constructor__`, `constructor2__`, `constructor3__`, `constructor4__`, or `constructor5__` as an interface method.
  */
 function fileHasConstructorMethod(filePath: string): boolean {
     try {
         const content = readFileSync(filePath, 'utf8');
-        return /\bconstructor2?__\s*[<(]/.test(content);
+        return /\bconstructor[2345]?__\s*[<(]/.test(content);
     } catch {
         return false;
     }
@@ -86,11 +86,11 @@ export const constructorGetterPlacement = {
         type: 'problem' as const,
         docs: {
             description:
-                'Ensure types used in constructor getters have a constructor__ or constructor2__ method'
+                'Ensure types used in constructor getters have a constructorN__ method'
         },
         messages: {
             missingConstructorMethod:
-                'Type \'{{typeName}}\' (from \'{{importSource}}\') must have a `constructor__` or `constructor2__` method.'
+                'Type \'{{typeName}}\' (from \'{{importSource}}\') must have a `constructor[N]__` method.'
         }
     },
     create(context: RuleContext) {

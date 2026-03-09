@@ -14,5 +14,5 @@ type MarkdownPreviewViewConstructor = ExtractConstructor<MarkdownPreviewView>;
  * @unofficial
  */
 export function getMarkdownPreviewViewConstructor(): MarkdownPreviewViewConstructor {
-    return MarkdownPreviewView as MarkdownPreviewViewConstructor;
+    return MarkdownPreviewView as unknown as MarkdownPreviewViewConstructor;
 }

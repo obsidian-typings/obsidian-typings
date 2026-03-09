@@ -13,6 +13,17 @@ declare module 'obsidian' {
         _: Record<string, EventsEntry[]>;
 
         /**
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<Events>`.
+         *
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor__(): this;
+
+        /**
          * Remove an event listener.
          *
          * @param name - The name of the event.

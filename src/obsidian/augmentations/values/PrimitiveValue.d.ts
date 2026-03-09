@@ -19,7 +19,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(value: T): this;
+        constructor3__(value: T): this;
 
         /**
          * Returns a boolean indicating whether this PrimitiveValue is truthy.

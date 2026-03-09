@@ -84,10 +84,11 @@ declare module 'obsidian' {
          *
          * @param view - The markdown view.
          * @returns The markdown edit view instance.
+         * @remark Constructor is `null`. See {@link https://forum.obsidian.md/t/api-bug-tasks-class/98993}.
          * @official
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(view: MarkdownView): this;
+        constructor2__(view: MarkdownView): this;
 
         /**
          * Destroy/Detach the editor view.

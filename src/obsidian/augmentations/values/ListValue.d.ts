@@ -30,7 +30,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(value: (unknown | Value)[]): this;
+        constructor3__(value: (unknown | Value)[]): this;
 
         /**
          * Get the value at the provided index.

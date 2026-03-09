@@ -57,7 +57,7 @@ export interface MetadataTypeManager extends Events {
      * @returns The new instance.
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(app: App): this;
+    constructor2__(app: App): this;
 
     /**
      * Get all registered properties of the vault.

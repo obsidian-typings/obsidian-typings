@@ -77,6 +77,19 @@ declare module 'obsidian' {
         setting: Setting;
 
         /**
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<SettingTab>`.
+         *
+         * @param app - The app instance.
+         * @param setting - The setting.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor2__(app: App, setting: Setting): this;
+
+        /**
          * Called when the settings tab should be rendered.
          * @see {@link https://docs.obsidian.md/Plugins/User+interface/Settings#Register+a+settings+tab}.
          * @official

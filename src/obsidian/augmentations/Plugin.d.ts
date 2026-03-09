@@ -110,7 +110,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(app: App, manifest: PluginManifest): this;
+        constructor2__(app: App, manifest: PluginManifest): this;
 
         /**
          * Load settings data from disk.

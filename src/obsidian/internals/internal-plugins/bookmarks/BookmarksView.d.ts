@@ -1,8 +1,10 @@
 import type {
     ItemView,
-    TFile
+    TFile,
+    WorkspaceLeaf
 } from 'obsidian';
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
+import type { BookmarksPluginInstance } from './BookmarksPluginInstance.d.ts';
 
 /**
  * View that displays the bookmarks sidebar, showing all bookmarked items in a tree.
@@ -36,6 +38,16 @@ export interface BookmarksView extends ItemView {
      * Attaches the handleDrop of DragManager to containerEl.
      */
     attachDropHandler(): void;
+
+    /**
+     * Constructor.
+     *
+     * @param leaf - The workspace leaf.
+     * @param bookmarksPluginInstance - The bookmarks plugin instance.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor3__(leaf: WorkspaceLeaf, bookmarksPluginInstance: BookmarksPluginInstance): this;
 
     /**
      * Create a new bookmark group.

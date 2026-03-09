@@ -1,6 +1,10 @@
-import type { TFile } from 'obsidian';
+import type {
+    TFile,
+    WorkspaceLeaf
+} from 'obsidian';
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { InfoFileView } from '../../views/InfoFileView.d.ts';
+import type { PropertiesPluginInstance } from './PropertiesPluginInstance.d.ts';
 
 /**
  * View that displays frontmatter properties for the current file.
@@ -8,6 +12,16 @@ import type { InfoFileView } from '../../views/InfoFileView.d.ts';
  * @unofficial
  */
 export interface FilePropertiesView extends InfoFileView {
+    /**
+     * Constructor.
+     *
+     * @param leaf - The workspace leaf.
+     * @param propertiesPluginInstance - The properties plugin instance.
+     * @returns The new instance.
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor3__(leaf: WorkspaceLeaf, propertiesPluginInstance: PropertiesPluginInstance): this;
+
     /**
      * Returns the file.
      *

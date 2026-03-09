@@ -9,7 +9,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     interface NumberValue extends PrimitiveValue<number> {
-    
         /**
          * Constructor.
          *
@@ -20,8 +19,8 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(value: number): this;
-}
+        constructor4__(value: number): this;
+    }
 
     namespace NumberValue {
         /**

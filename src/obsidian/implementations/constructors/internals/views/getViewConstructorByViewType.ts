@@ -1,6 +1,7 @@
 import type { App } from 'obsidian';
+import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 import type { ViewTypeType } from '../../../../internals/views/ViewTypeType.d.d.ts';
-import type { ViewTypeViewConstructorMapping } from '../../../../internals/views/ViewTypeViewConstructorMapping.d.d.ts';
+import type { ViewTypeViewMapping } from '../../../../internals/views/ViewTypeViewMapping.d.ts';
 
 /**
  * Get the view constructor by view type.
@@ -15,7 +16,7 @@ import type { ViewTypeViewConstructorMapping } from '../../../../internals/views
 export function getViewConstructorByViewType<TViewType extends ViewTypeType>(
     app: App,
     viewType: TViewType
-): ViewTypeViewConstructorMapping[TViewType] {
+): ExtractConstructor<ViewTypeViewMapping[TViewType]> {
     const leaf = app.workspace.createLeafInTabGroup();
     try {
         const viewCreator = app.viewRegistry.getViewCreatorByType(viewType);
@@ -23,7 +24,7 @@ export function getViewConstructorByViewType<TViewType extends ViewTypeType>(
             throw new Error('View creator not found');
         }
         const view = viewCreator(leaf);
-        return view.constructor as ViewTypeViewConstructorMapping[TViewType];
+        return view.constructor as ExtractConstructor<ViewTypeViewMapping[TViewType]>;
     } finally {
         leaf.detach();
     }

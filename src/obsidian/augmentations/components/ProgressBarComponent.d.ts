@@ -32,7 +32,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(containerEl: HTMLElement): this;
+        constructor3__(containerEl: HTMLElement): this;
 
         /**
          * Get the current value of the progress bar (0-100).

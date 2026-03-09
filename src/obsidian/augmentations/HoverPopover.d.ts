@@ -34,7 +34,7 @@ declare module 'obsidian' {
          * @official
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(
+        constructor2__(
             parent: HoverParent,
             targetEl: HTMLElement | null,
             waitTime?: number,

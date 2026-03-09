@@ -1,3 +1,5 @@
+import type { getWorkspaceMobileDrawerConstructor } from '../implementations/constructors/augmentations/getWorkspaceMobileDrawerConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -26,6 +28,18 @@ declare module 'obsidian' {
          * @official
          */
         collapse(): void;
+
+        /**
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getWorkspaceMobileDrawerConstructor} from `obsidian-typings/implementations`.
+         *
+         * @returns The new instance.
+         * @remark Constructor is `null`. See {@link https://forum.obsidian.md/t/api-bug-tasks-class/98993}.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor3__(): this;
 
         /**
          * Expand the mobile drawer.

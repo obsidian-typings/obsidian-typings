@@ -57,7 +57,7 @@ declare module 'obsidian' {
          * @since 1.10.0
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(controller: QueryController): this;
+        constructor2__(controller: QueryController): this;
 
         /**
          * Display the new note menu for a file with the provided filename and optionally a function to modify the frontmatter.

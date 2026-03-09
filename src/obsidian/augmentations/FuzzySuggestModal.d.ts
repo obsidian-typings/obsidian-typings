@@ -1,3 +1,5 @@
+import type { getFuzzySuggestModalConstructor } from '../implementations/constructors/augmentations/getFuzzySuggestModalConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -8,6 +10,18 @@ declare module 'obsidian' {
      * @since 0.9.20
      */
     interface FuzzySuggestModal<T> extends SuggestModal<FuzzyMatch<T>> {
+        /**
+         * Constructor.
+         *
+         * To extract the constructor type, use `ExtractConstructor<FuzzySuggestModal>`.
+         *
+         * @param app - The app instance.
+         * @returns The new instance.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor2__(app: App): this;
+
         /**
          * Get the items to be used in the fuzzy search.
          *

@@ -25,6 +25,6 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(workspace: Workspace, id?: string): this;
+        constructor3__(workspace: Workspace, id?: string): this;
 }
 }

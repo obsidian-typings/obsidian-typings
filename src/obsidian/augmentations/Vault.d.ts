@@ -158,7 +158,7 @@ declare module 'obsidian' {
          * @unofficial
          * @deprecated - Added only for typing purposes.
          */
-        constructor__(adapter: DataAdapter): this;
+        constructor2__(adapter: DataAdapter): this;
 
         /**
          * Create a copy of a file or folder.

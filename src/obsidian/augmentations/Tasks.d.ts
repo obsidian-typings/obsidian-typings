@@ -1,3 +1,5 @@
+import type { getTasksConstructor } from '../implementations/constructors/augmentations/getTasksConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -25,6 +27,18 @@ declare module 'obsidian' {
          */
         // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
         addPromise(promise: Promise<any>): void;
+
+        /**
+         * Constructor.
+         *
+         * To get the constructor instance, use {@link getTasksConstructor} from `obsidian-typings/implementations`.
+         *
+         * @returns The new instance.
+         * @remark Constructor is `null`. See {@link https://forum.obsidian.md/t/api-bug-tasks-class/98993}.
+         * @unofficial
+         * @deprecated - Added only for typing purposes.
+         */
+        constructor__(): this;
 
         /**
          * Check if the tasks are empty.
