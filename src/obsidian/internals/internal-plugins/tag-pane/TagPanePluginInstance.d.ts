@@ -3,7 +3,7 @@ import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { TagPanePlugin } from './TagPanePlugin.d.ts';
 
 /**
- * Plugin instance for the tag pane, displaying a browsable list of tags in the sidebar.
+ * Plugin instance for the tag pane, displaying a browseable list of tags in the sidebar.
  * @public
  * @unofficial
  */
