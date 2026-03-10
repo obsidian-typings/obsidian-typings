@@ -85,6 +85,7 @@
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "latest",
     "@commitlint/types": "latest",
+    "@eslint/compat": "latest",
     "@microsoft/api-extractor": "latest",
     "@tsconfig/strictest": "latest",
     "@typescript-eslint/utils": "latest",
