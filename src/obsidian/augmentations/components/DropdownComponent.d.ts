@@ -1,6 +1,6 @@
 import type {
   getDropdownComponentConstructor
-} from '../../implementations/constructors/augmentations/getDropdownComponentConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/components/getDropdownComponentConstructor.d.ts';
 
 export {};
 

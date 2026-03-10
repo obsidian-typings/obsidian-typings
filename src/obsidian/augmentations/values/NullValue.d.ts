@@ -1,6 +1,6 @@
 import type {
   getNullValueConstructor
-} from '../../implementations/constructors/augmentations/getNullValueConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/values/getNullValueConstructor.d.ts';
 
 export {};
 

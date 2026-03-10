@@ -1,6 +1,6 @@
 import type {
   getImageValueConstructor
-} from '../../implementations/constructors/augmentations/getImageValueConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/values/getImageValueConstructor.d.ts';
 
 export {};
 

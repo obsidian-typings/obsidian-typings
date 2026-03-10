@@ -1,6 +1,6 @@
 import type {
   getUrlValueConstructor
-} from '../../implementations/constructors/augmentations/getUrlValueConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/values/getUrlValueConstructor.d.ts';
 
 export {};
 

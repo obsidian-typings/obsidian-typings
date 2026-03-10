@@ -1,6 +1,6 @@
 import type {
   getRegExpValueConstructor
-} from '../../implementations/constructors/augmentations/getRegExpValueConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/values/getRegExpValueConstructor.d.ts';
 
 export {};
 

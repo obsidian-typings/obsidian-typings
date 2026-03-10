@@ -1,6 +1,6 @@
 import type {
   getBasesEntryConstructor
-} from '../../implementations/constructors/augmentations/getBasesEntryConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/bases/getBasesEntryConstructor.d.ts';
 
 export {};
 

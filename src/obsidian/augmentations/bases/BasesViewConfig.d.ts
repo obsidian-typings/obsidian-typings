@@ -1,6 +1,6 @@
 import type {
   getBasesViewConfigConstructor
-} from '../../implementations/constructors/augmentations/getBasesViewConfigConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/bases/getBasesViewConfigConstructor.d.ts';
 
 export {};
 

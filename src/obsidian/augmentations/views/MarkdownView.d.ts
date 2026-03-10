@@ -1,7 +1,7 @@
 import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 import type {
   getMarkdownViewConstructor
-} from '../../implementations/constructors/augmentations/getMarkdownViewConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/views/getMarkdownViewConstructor.d.ts';
 import type { FocusMetadataOptions } from '../../internals/FocusMetadataOptions.d.ts';
 import type { BacklinkComponent } from '../../internals/internal-plugins/backlink/BacklinkComponent.d.ts';
 import type { MarkdownViewEphemeralState } from '../../internals/MarkdownViewEphemeralState.d.ts';

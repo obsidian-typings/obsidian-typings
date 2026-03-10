@@ -89,6 +89,27 @@ function resolveTypeSourceFile(
   return null;
 }
 
+/**
+ * Extract the subdirectory under `augmentations/` from a full augmentation file path.
+ * Returns the subdirectory name (e.g., 'bases', 'components', 'values', 'views')
+ * or `null` if the file is directly under `augmentations/`.
+ */
+function getAugmentationSubdir(augFilePath: string): string | null {
+  const normalized = normalizePath(augFilePath);
+  const match = /\/augmentations\/([^/]+)\/[^/]+$/.exec(normalized);
+  return match ? match[1] ?? null : null;
+}
+
+/**
+ * Extract the subdirectory under `implementations/constructors/augmentations/` from a getter file path.
+ * Returns the subdirectory name or `null` if the file is directly under `augmentations/`.
+ */
+function getGetterSubdir(getterFilePath: string): string | null {
+  const normalized = normalizePath(getterFilePath);
+  const match = /\/implementations\/constructors\/augmentations\/([^/]+)\/[^/]+$/.exec(normalized);
+  return match ? match[1] ?? null : null;
+}
+
 export const constructorGetterPlacement = {
   meta: {
     type: 'problem' as const,
@@ -97,7 +118,9 @@ export const constructorGetterPlacement = {
     },
     messages: {
       missingConstructorMethod:
-        'Type \'{{typeName}}\' (from \'{{importSource}}\') must have a `constructor[N]__` method.'
+        'Type \'{{typeName}}\' (from \'{{importSource}}\') must have a `constructor[N]__` method.',
+      subdirectoryMismatch:
+        'Constructor getter is in \'{{getterSubdir}}\' but augmentation \'{{typeName}}\' is in \'{{augSubdir}}\'. They must be in the same subdirectory.'
     }
   },
   create(context: RuleContext) {
@@ -163,6 +186,21 @@ export const constructorGetterPlacement = {
             node,
             messageId: 'missingConstructorMethod',
             data: { typeName, importSource }
+          });
+        }
+
+        // Check parallel folder structure: getter subdirectory must match augmentation subdirectory
+        const augSubdir = getAugmentationSubdir(sourceFile);
+        const getterSubdir = getGetterSubdir(context.filename);
+        if (augSubdir !== getterSubdir) {
+          context.report({
+            node,
+            messageId: 'subdirectoryMismatch',
+            data: {
+              typeName,
+              augSubdir: augSubdir ?? '(root)',
+              getterSubdir: getterSubdir ?? '(root)'
+            }
           });
         }
       }

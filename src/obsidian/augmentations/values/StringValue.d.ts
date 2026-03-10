@@ -1,6 +1,6 @@
 import type {
   getStringValueConstructor
-} from '../../implementations/constructors/augmentations/getStringValueConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/values/getStringValueConstructor.d.ts';
 
 export {};
 

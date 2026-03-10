@@ -1,6 +1,6 @@
 import type {
   getProgressBarComponentConstructor
-} from '../../implementations/constructors/augmentations/getProgressBarComponentConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/components/getProgressBarComponentConstructor.d.ts';
 
 export {};
 

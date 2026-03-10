@@ -1,6 +1,6 @@
 import type {
   getToggleComponentConstructor
-} from '../../implementations/constructors/augmentations/getToggleComponentConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/components/getToggleComponentConstructor.d.ts';
 
 export {};
 

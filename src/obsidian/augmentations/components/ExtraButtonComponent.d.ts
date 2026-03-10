@@ -1,6 +1,6 @@
 import type {
   getExtraButtonComponentConstructor
-} from '../../implementations/constructors/augmentations/getExtraButtonComponentConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/components/getExtraButtonComponentConstructor.d.ts';
 
 export {};
 

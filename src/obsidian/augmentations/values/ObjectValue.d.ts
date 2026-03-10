@@ -1,6 +1,6 @@
 import type {
   getObjectValueConstructor
-} from '../../implementations/constructors/augmentations/getObjectValueConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/values/getObjectValueConstructor.d.ts';
 
 export {};
 

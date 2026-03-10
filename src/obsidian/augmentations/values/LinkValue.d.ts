@@ -1,6 +1,6 @@
 import type {
   getLinkValueConstructor
-} from '../../implementations/constructors/augmentations/getLinkValueConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/values/getLinkValueConstructor.d.ts';
 
 export {};
 

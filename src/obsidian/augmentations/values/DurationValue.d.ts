@@ -1,6 +1,6 @@
 import type {
   getDurationValueConstructor
-} from '../../implementations/constructors/augmentations/getDurationValueConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/values/getDurationValueConstructor.d.ts';
 
 export {};
 

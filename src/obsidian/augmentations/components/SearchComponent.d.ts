@@ -1,6 +1,6 @@
 import type {
   getSearchComponentConstructor
-} from '../../implementations/constructors/augmentations/getSearchComponentConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/components/getSearchComponentConstructor.d.ts';
 
 export {};
 

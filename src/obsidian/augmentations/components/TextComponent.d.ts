@@ -1,6 +1,6 @@
 import type {
   getTextComponentConstructor
-} from '../../implementations/constructors/augmentations/getTextComponentConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/components/getTextComponentConstructor.d.ts';
 
 export {};
 

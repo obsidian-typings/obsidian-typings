@@ -1,6 +1,6 @@
 import type {
   getRelativeDateValueConstructor
-} from '../../implementations/constructors/augmentations/getRelativeDateValueConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/values/getRelativeDateValueConstructor.d.ts';
 
 export {};
 

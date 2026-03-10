@@ -1,6 +1,6 @@
 import type {
   getSecretComponentConstructor
-} from '../../implementations/constructors/augmentations/getSecretComponentConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/components/getSecretComponentConstructor.d.ts';
 
 export {};
 

@@ -25,6 +25,13 @@ These are standalone exported interfaces for Obsidian's internal objects.
 - One interface per file, file named after the interface (e.g., `Cli.d.ts` for `Cli`).
 - When an interface has helper types (sub-records, entry types, etc.), place them in a directory named after the main interface, each in its own file (e.g., `Cli/Cli.d.ts`, `Cli/CliTreeNode.d.ts`, `Cli/CliHandlerEntry.d.ts`).
 
+### Parallel Folder Structure (Augmentations ↔ Implementations)
+
+- `implementations/constructors/augmentations/` must mirror the subdirectory structure of `augmentations/`.
+- If an augmentation type is in `augmentations/{subdir}/Foo.d.ts`, its constructor getter must be in `implementations/constructors/augmentations/{subdir}/getFooConstructor.ts`.
+- Types directly under `augmentations/` (not in a subdirectory) keep their getter directly under `implementations/constructors/augmentations/`.
+- Enforced by ESLint rule `constructor-getter-placement` (`subdirectoryMismatch` message).
+
 ### Shared Conventions
 
 - All imports use `import type` with explicit `.d.ts` extension in relative paths.

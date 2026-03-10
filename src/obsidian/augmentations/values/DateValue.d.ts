@@ -1,6 +1,6 @@
 import type {
   getDateValueConstructor
-} from '../../implementations/constructors/augmentations/getDateValueConstructor.d.ts';
+} from '../../implementations/constructors/augmentations/values/getDateValueConstructor.d.ts';
 
 export {};
 
