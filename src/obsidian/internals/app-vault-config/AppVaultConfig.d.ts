@@ -8,64 +8,64 @@ import type { PdfExportSettings } from './PdfExportSettings.d.ts';
  */
 export interface AppVaultConfig {
   /**
-   * Appearance \> Accent color.
+   * Appearance &gt; Accent color.
    */
   accentColor: '' | string;
 
   /**
-   * Files & Links \> Automatically update internal links.
+   * Files & Links &gt; Automatically update internal links.
    */
   alwaysUpdateLinks?: false | boolean;
 
   /**
-   * Files & Links \> Attachment folder path.
+   * Files & Links &gt; Attachment folder path.
    */
   attachmentFolderPath?: '/' | string;
 
   /**
-   * Editor \> Auto convert HTML.
+   * Editor &gt; Auto convert HTML.
    */
   autoConvertHtml?: true | boolean;
 
   /**
-   * Editor \> Auto pair brackets.
+   * Editor &gt; Auto pair brackets.
    */
   autoPairBrackets?: true | boolean;
 
   /**
-   * Editor \> Auto pair Markdown syntax.
+   * Editor &gt; Auto pair Markdown syntax.
    */
   autoPairMarkdown?: true | boolean;
 
   /**
-   * Appearance \> Font size.
+   * Appearance &gt; Font size.
    */
   baseFontSize?: 16 | number;
 
   /**
-   * Appearance \> Quick font size adjustment.
+   * Appearance &gt; Quick font size adjustment.
    */
   baseFontSizeAction?: true | boolean;
 
   /**
-   * Community Plugins \> Browse \> Sort order.
+   * Community Plugins &gt; Browse &gt; Sort order.
    */
   communityPluginSortOrder: 'download' | 'update' | 'release' | 'alphabetical';
 
   /**
-   * Themes \> Browse \> Sort order.
+   * Themes &gt; Browse &gt; Sort order.
    */
   communityThemeSortOrder: 'download' | 'update' | 'release' | 'alphabetical';
 
   /**
-   * Appearance \> Theme.
+   * Appearance &gt; Theme.
    *
    * @remark is the default Obsidian theme.
    */
   cssTheme?: '' | string;
 
   /**
-   * Editor \> Default view for new tabs.
+   * Editor &gt; Default view for new tabs.
    */
   defaultViewMode?: 'source' | 'preview';
 
@@ -73,7 +73,7 @@ export interface AppVaultConfig {
   emacsyKeys?: true | boolean;
 
   /**
-   * Appearance \> CSS snippets.
+   * Appearance &gt; CSS snippets.
    */
   enabledCssSnippets?: string[];
 
@@ -81,17 +81,17 @@ export interface AppVaultConfig {
   fileSortOrder?: 'alphabetical';
 
   /**
-   * Editor \> Always focus new tabs.
+   * Editor &gt; Always focus new tabs.
    */
   focusNewTab?: true | boolean;
 
   /**
-   * Editor \> Fold heading.
+   * Editor &gt; Fold heading.
    */
   foldHeading?: true | boolean;
 
   /**
-   * Editor \> Fold indent.
+   * Editor &gt; Fold indent.
    */
   foldIndent?: true | boolean;
 
@@ -103,12 +103,12 @@ export interface AppVaultConfig {
   hotkeys?: AppVaultConfigHotkeysRecord;
 
   /**
-   * Appearance \> Interface font.
+   * Appearance &gt; Interface font.
    */
   interfaceFontFamily?: '' | string;
 
   /**
-   * Editor \> Use legacy editor.
+   * Editor &gt; Use legacy editor.
    */
   legacyEditor?: false | boolean;
 
@@ -116,7 +116,7 @@ export interface AppVaultConfig {
   livePreview?: true | boolean;
 
   /**
-   * Mobile \> Configure mobile Quick Action.
+   * Mobile &gt; Configure mobile Quick Action.
    */
   mobilePullAction?: 'command-palette:open' | string;
 
@@ -124,30 +124,30 @@ export interface AppVaultConfig {
   mobileQuickRibbonItem?: '' | string;
 
   /**
-   * Mobile \> Manage toolbar options.
+   * Mobile &gt; Manage toolbar options.
    */
   mobileToolbarCommands?: string[];
 
-  /** Appearance > Monospace font. */
+  /** Appearance &gt; Monospace font. */
   monospaceFontFamily?: '' | string;
 
   /**
-   * Appearance \> Native menus.
+   * Appearance &gt; Native menus.
    */
   nativeMenus?: null | boolean;
 
   /**
-   * Files & Links \> Default location for new notes | 'folder' \> Folder to create new notes in.
+   * Files & Links &gt; Default location for new notes | 'folder' &gt; Folder to create new notes in.
    */
   newFileFolderPath?: '/' | string;
 
   /**
-   * Files & Links \> Default location for new notes.
+   * Files & Links &gt; Default location for new notes.
    */
   newFileLocation?: 'root' | 'current' | 'folder';
 
   /**
-   * Files & Links \> New link format.
+   * Files & Links &gt; New link format.
    */
   newLinkFormat?: 'shortest' | 'relative' | 'absolute';
 
@@ -157,87 +157,87 @@ export interface AppVaultConfig {
   pdfExportSettings?: PdfExportSettings;
 
   /**
-   * Files & Links \> Confirm line deletion.
+   * Files & Links &gt; Confirm line deletion.
    */
   promptDelete?: true | boolean;
 
   /**
-   * Editor \> Properties in document.
+   * Editor &gt; Properties in document.
    */
   propertiesInDocument?: 'visible' | 'hidden' | 'source';
 
   /**
-   * Editor \> Readable line length.
+   * Editor &gt; Readable line length.
    */
   readableLineLength?: true | boolean;
 
   /**
-   * Editor \> Right-to-left (RTL).
+   * Editor &gt; Right-to-left (RTL).
    */
   rightToLeft?: false | boolean;
 
   /**
-   * Editor \> Show indentation guides.
+   * Editor &gt; Show indentation guides.
    */
   showIndentGuide?: true | boolean;
 
   /**
-   * Editor \> Show inline title.
+   * Editor &gt; Show inline title.
    */
   showInlineTitle?: true | boolean;
 
   /**
-   * Editor \> Show line numbers.
+   * Editor &gt; Show line numbers.
    */
   showLineNumber?: false | boolean;
 
   /**
-   * Appearance \> Show ribbon.
+   * Appearance &gt; Show ribbon.
    */
   showRibbon?: true | boolean;
 
   /**
-   * Files & Links \> Detect all file extensions.
+   * Files & Links &gt; Detect all file extensions.
    */
   showUnsupportedFiles?: false | boolean;
 
   /**
-   * Appearance \> Show tab title bar.
+   * Appearance &gt; Show tab title bar.
    */
   showViewHeader?: false | boolean;
 
   /**
-   * Editor \> Smart indent lists.
+   * Editor &gt; Smart indent lists.
    */
   smartIndentList?: true | boolean;
 
   /**
-   * Editor \> Spellcheck.
+   * Editor &gt; Spellcheck.
    */
   spellcheck?: false | boolean;
 
   /**
-   * Editor \> Spellcheck languages.
+   * Editor &gt; Spellcheck languages.
    */
   spellcheckLanguages?: null | string[];
 
   /**
-   * Editor \> Strict line breaks.
+   * Editor &gt; Strict line breaks.
    */
   strictLineBreaks?: false | boolean;
 
   /**
-   * Editor \> Tab indent size.
+   * Editor &gt; Tab indent size.
    */
   tabSize?: 4 | number;
 
   /**
-   * Appearance \> Text font.
+   * Appearance &gt; Text font.
    */
   textFontFamily?: '' | string;
 
   /**
-   * Appearance \> Base color scheme.
+   * Appearance &gt; Base color scheme.
    *
    * @remark Not be confused with cssTheme, this setting is for the light/dark mode.
    * @remark moonstone is light theme, 'obsidian' is dark theme.
@@ -245,12 +245,12 @@ export interface AppVaultConfig {
   theme?: 'moonstone' | 'obsidian';
 
   /**
-   * Appearance \> Translucent window.
+   * Appearance &gt; Translucent window.
    */
   translucency?: false | boolean;
 
   /**
-   * Files & Links \> Deleted files.
+   * Files & Links &gt; Deleted files.
    */
   trashOption?: 'system' | 'local' | 'none';
 
@@ -258,22 +258,22 @@ export interface AppVaultConfig {
   types: object;
 
   /**
-   * Files & Links \> Use [[Wikilinks]].
+   * Files & Links &gt; Use [[Wikilinks]].
    */
   useMarkdownLinks?: false | boolean;
 
   /**
-   * Files & Links \> Excluded files.
+   * Files & Links &gt; Excluded files.
    */
   userIgnoreFilters?: null | string[];
 
   /**
-   * Editor \> Indent using tabs.
+   * Editor &gt; Indent using tabs.
    */
   useTab?: true | boolean;
 
   /**
-   * Editor \> Vim key bindings.
+   * Editor &gt; Vim key bindings.
    */
   vimMode?: false | boolean;
 }

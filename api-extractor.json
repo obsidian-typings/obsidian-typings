@@ -20,7 +20,7 @@
   "messages": {
     "compilerMessageReporting": {
       "default": {
-        "logLevel": "warning"
+        "logLevel": "error"
       },
       "TS2411": {
         "logLevel": "none"
@@ -28,7 +28,7 @@
     },
     "extractorMessageReporting": {
       "default": {
-        "logLevel": "warning"
+        "logLevel": "error"
       },
       "ae-forgotten-export": {
         "logLevel": "error"
@@ -36,7 +36,7 @@
     },
     "tsdocMessageReporting": {
       "default": {
-        "logLevel": "warning"
+        "logLevel": "error"
       }
     }
   }

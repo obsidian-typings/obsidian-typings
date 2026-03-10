@@ -15,6 +15,6 @@ export function getAbstractTextComponentConstructor(): ExtractConstructor<
   AbstractTextComponent<HTMLInputElement | HTMLTextAreaElement>
 > {
   return AbstractTextComponent as ExtractConstructor<
-  AbstractTextComponent<HTMLInputElement | HTMLTextAreaElement>
->;
+    AbstractTextComponent<HTMLInputElement | HTMLTextAreaElement>
+  >;
 }
