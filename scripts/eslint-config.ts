@@ -1,46 +1,39 @@
+import { includeIgnoreFile } from '@eslint/compat';
 import type { Linter } from 'eslint';
-
 import perfectionist from 'eslint-plugin-perfectionist';
+import { resolve } from 'node:path';
 import tseslint from 'typescript-eslint';
 
 import { obsidianTypingsPlugin } from './helpers/eslint-plugin-obsidian-typings/index.ts';
 
-export const eslintConfig: Linter.Config[] = [
+const gitignorePath = resolve(import.meta.dirname, '..', '.gitignore');
+
+export const config: Linter.Config[] = [
   {
     files: ['**/*.d.ts', '**/*.ts']
   },
+  includeIgnoreFile(gitignorePath),
   {
     ignores: [
-      'dist/**',
-      'node_modules/**',
       'scripts/**',
-      'workflow-scripts/**',
-      // Generated during compilation (also in .gitignore).
-      // The file-extension rule enforces .ts in implementations/ for source files;
-      // .gitignore prevents generated .d.ts files from being committed.
-      'src/obsidian/implementations/**/*.d.ts'
+      'workflow-scripts/**'
     ]
   },
-  // TypeScript parser (no type-checking — fast)
   ...tseslint.configs.recommended.map((config) => {
     const rest = { ...config };
     delete (rest as Record<string, unknown>)['files'];
     return rest;
   }),
-  // Perfectionist sorting rules
   {
     plugins: {
       perfectionist: perfectionist
     },
     rules: {
-      // Sort interface members: properties first (alphabetical), then methods (alphabetical).
-      // Note: perfectionist classifies getters as methods — accepted limitation.
       'perfectionist/sort-interfaces': ['error', {
         groups: ['property', 'method'],
         order: 'asc',
         type: 'alphabetical'
       }],
-      // Sort class members: properties first, then methods
       'perfectionist/sort-classes': ['error', {
         groups: [
           'property',
@@ -52,7 +45,6 @@ export const eslintConfig: Linter.Config[] = [
         order: 'asc',
         type: 'alphabetical'
       }],
-      // Sort named imports/exports alphabetically
       'perfectionist/sort-named-exports': ['error', {
         order: 'asc',
         type: 'alphabetical'
@@ -61,15 +53,12 @@ export const eslintConfig: Linter.Config[] = [
         order: 'asc',
         type: 'alphabetical'
       }],
-      // Import/export statement sorting handled by dprint
-      'perfectionist/sort-exports': 'off',
-      'perfectionist/sort-imports': 'off',
-      // Union/intersection type sorting disabled — `null` last is idiomatic
-      'perfectionist/sort-intersection-types': 'off',
-      'perfectionist/sort-union-types': 'off'
+      'perfectionist/sort-exports': 'error',
+      'perfectionist/sort-imports': 'error',
+      'perfectionist/sort-intersection-types': 'error',
+      'perfectionist/sort-union-types': 'error'
     }
   },
-  // Custom obsidian-typings rules (src/ only)
   {
     files: ['src/**/*.d.ts', 'src/**/*.ts'],
     plugins: {
@@ -88,7 +77,6 @@ export const eslintConfig: Linter.Config[] = [
       'obsidian-typings/one-export-per-file': 'error'
     }
   },
-  // Disable rules that don't apply to declaration files (src/ only)
   {
     files: ['src/**/*.d.ts', 'src/**/*.ts'],
     rules: {
