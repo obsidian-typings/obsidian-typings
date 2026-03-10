@@ -95,12 +95,12 @@ declare module 'obsidian' {
      *
      * To get the constructor instance, use {@link getMarkdownPreviewViewConstructor} from `obsidian-typings/implementations`.
      *
-     * @param containerEl - The containerEl.
+     * @param markdownView - The markdown view.
      * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(containerEl: HTMLElement): this;
+    constructor4__(markdownView: MarkdownView): this;
 
     /**
      * Switch to edit mode for the given element or selection.
