@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
-type SearchComponentConstructor = ExtractConstructor<SearchComponent>;
-
 /**
  * Get the SearchComponent constructor.
  *
@@ -13,6 +11,6 @@ type SearchComponentConstructor = ExtractConstructor<SearchComponent>;
  * @public
  * @unofficial
  */
-export function getSearchComponentConstructor(): SearchComponentConstructor {
-  return SearchComponent as SearchComponentConstructor;
+export function getSearchComponentConstructor(): ExtractConstructor<SearchComponent> {
+  return SearchComponent as ExtractConstructor<SearchComponent>;
 }

@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
-type MomentFormatComponentConstructor = ExtractConstructor<MomentFormatComponent>;
-
 /**
  * Get the MomentFormatComponent constructor.
  *
@@ -13,6 +11,6 @@ type MomentFormatComponentConstructor = ExtractConstructor<MomentFormatComponent
  * @public
  * @unofficial
  */
-export function getMomentFormatComponentConstructor(): MomentFormatComponentConstructor {
-  return MomentFormatComponent as MomentFormatComponentConstructor;
+export function getMomentFormatComponentConstructor(): ExtractConstructor<MomentFormatComponent> {
+  return MomentFormatComponent as ExtractConstructor<MomentFormatComponent>;
 }

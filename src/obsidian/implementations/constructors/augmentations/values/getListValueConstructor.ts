@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
-type ListValueConstructor = ExtractConstructor<ListValue>;
-
 /**
  * Get the ListValue constructor.
  *
@@ -13,6 +11,6 @@ type ListValueConstructor = ExtractConstructor<ListValue>;
  * @public
  * @unofficial
  */
-export function getListValueConstructor(): ListValueConstructor {
-  return ListValue as ListValueConstructor;
+export function getListValueConstructor(): ExtractConstructor<ListValue> {
+  return ListValue as ExtractConstructor<ListValue>;
 }

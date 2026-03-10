@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
-type VaultConstructor = ExtractConstructor<Vault>;
-
 /**
  * Get the Vault constructor.
  *
@@ -13,6 +11,6 @@ type VaultConstructor = ExtractConstructor<Vault>;
  * @public
  * @unofficial
  */
-export function getVaultConstructor(): VaultConstructor {
-  return Vault as VaultConstructor;
+export function getVaultConstructor(): ExtractConstructor<Vault> {
+  return Vault as ExtractConstructor<Vault>;
 }

@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
-type BasesEntryConstructor = ExtractConstructor<BasesEntry>;
-
 /**
  * Get the BasesEntry constructor.
  *
@@ -13,6 +11,6 @@ type BasesEntryConstructor = ExtractConstructor<BasesEntry>;
  * @public
  * @unofficial
  */
-export function getBasesEntryConstructor(): BasesEntryConstructor {
-  return BasesEntry as BasesEntryConstructor;
+export function getBasesEntryConstructor(): ExtractConstructor<BasesEntry> {
+  return BasesEntry as ExtractConstructor<BasesEntry>;
 }

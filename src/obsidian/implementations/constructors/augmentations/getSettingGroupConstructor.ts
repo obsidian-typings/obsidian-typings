@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
-type SettingGroupConstructor = ExtractConstructor<SettingGroup>;
-
 /**
  * Get the SettingGroup constructor.
  *
@@ -13,6 +11,6 @@ type SettingGroupConstructor = ExtractConstructor<SettingGroup>;
  * @public
  * @unofficial
  */
-export function getSettingGroupConstructor(): SettingGroupConstructor {
-  return SettingGroup as SettingGroupConstructor;
+export function getSettingGroupConstructor(): ExtractConstructor<SettingGroup> {
+  return SettingGroup as ExtractConstructor<SettingGroup>;
 }

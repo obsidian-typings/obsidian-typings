@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
-type NoticeConstructor = ExtractConstructor<Notice>;
-
 /**
  * Get the Notice constructor.
  *
@@ -13,6 +11,6 @@ type NoticeConstructor = ExtractConstructor<Notice>;
  * @public
  * @unofficial
  */
-export function getNoticeConstructor(): NoticeConstructor {
-  return Notice as NoticeConstructor;
+export function getNoticeConstructor(): ExtractConstructor<Notice> {
+  return Notice as ExtractConstructor<Notice>;
 }

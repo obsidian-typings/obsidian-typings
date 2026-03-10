@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
-type HoverPopoverConstructor = ExtractConstructor<HoverPopover>;
-
 /**
  * Get the HoverPopover constructor.
  *
@@ -13,6 +11,6 @@ type HoverPopoverConstructor = ExtractConstructor<HoverPopover>;
  * @public
  * @unofficial
  */
-export function getHoverPopoverConstructor(): HoverPopoverConstructor {
-  return HoverPopover as HoverPopoverConstructor;
+export function getHoverPopoverConstructor(): ExtractConstructor<HoverPopover> {
+  return HoverPopover as ExtractConstructor<HoverPopover>;
 }

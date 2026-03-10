@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
-type DropdownComponentConstructor = ExtractConstructor<DropdownComponent>;
-
 /**
  * Get the DropdownComponent constructor.
  *
@@ -13,6 +11,6 @@ type DropdownComponentConstructor = ExtractConstructor<DropdownComponent>;
  * @public
  * @unofficial
  */
-export function getDropdownComponentConstructor(): DropdownComponentConstructor {
-  return DropdownComponent as DropdownComponentConstructor;
+export function getDropdownComponentConstructor(): ExtractConstructor<DropdownComponent> {
+  return DropdownComponent as ExtractConstructor<DropdownComponent>;
 }

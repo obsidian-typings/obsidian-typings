@@ -1,8 +1,6 @@
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 import type { FrameDom } from '../../../internals/FrameDom.d.ts';
 
-type FrameDomConstructor = ExtractConstructor<FrameDom>;
-
 /**
  * Get the FrameDom constructor.
  *
@@ -11,6 +9,6 @@ type FrameDomConstructor = ExtractConstructor<FrameDom>;
  * @public
  * @unofficial
  */
-export function getFrameDomConstructor(): FrameDomConstructor {
-  return window.frameDom.constructor as FrameDomConstructor;
+export function getFrameDomConstructor(): ExtractConstructor<FrameDom> {
+  return window.frameDom.constructor as ExtractConstructor<FrameDom>;
 }

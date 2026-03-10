@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
-type ColorComponentConstructor = ExtractConstructor<ColorComponent>;
-
 /**
  * Get the ColorComponent constructor.
  *
@@ -13,6 +11,6 @@ type ColorComponentConstructor = ExtractConstructor<ColorComponent>;
  * @public
  * @unofficial
  */
-export function getColorComponentConstructor(): ColorComponentConstructor {
-  return ColorComponent as ColorComponentConstructor;
+export function getColorComponentConstructor(): ExtractConstructor<ColorComponent> {
+  return ColorComponent as ExtractConstructor<ColorComponent>;
 }

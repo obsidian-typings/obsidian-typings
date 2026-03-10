@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
-type ModalConstructor = ExtractConstructor<Modal>;
-
 /**
  * Get the Modal constructor.
  *
@@ -13,6 +11,6 @@ type ModalConstructor = ExtractConstructor<Modal>;
  * @public
  * @unofficial
  */
-export function getModalConstructor(): ModalConstructor {
-  return Modal as ModalConstructor;
+export function getModalConstructor(): ExtractConstructor<Modal> {
+  return Modal as ExtractConstructor<Modal>;
 }

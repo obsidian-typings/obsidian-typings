@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
-type BasesQueryResultConstructor = ExtractConstructor<BasesQueryResult>;
-
 /**
  * Get the BasesQueryResult constructor.
  *
@@ -13,6 +11,6 @@ type BasesQueryResultConstructor = ExtractConstructor<BasesQueryResult>;
  * @public
  * @unofficial
  */
-export function getBasesQueryResultConstructor(): BasesQueryResultConstructor {
-  return BasesQueryResult as BasesQueryResultConstructor;
+export function getBasesQueryResultConstructor(): ExtractConstructor<BasesQueryResult> {
+  return BasesQueryResult as ExtractConstructor<BasesQueryResult>;
 }

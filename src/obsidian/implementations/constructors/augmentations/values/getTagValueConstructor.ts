@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
-type TagValueConstructor = ExtractConstructor<TagValue>;
-
 /**
  * Get the TagValue constructor.
  *
@@ -13,6 +11,6 @@ type TagValueConstructor = ExtractConstructor<TagValue>;
  * @public
  * @unofficial
  */
-export function getTagValueConstructor(): TagValueConstructor {
-  return TagValue as TagValueConstructor;
+export function getTagValueConstructor(): ExtractConstructor<TagValue> {
+  return TagValue as ExtractConstructor<TagValue>;
 }

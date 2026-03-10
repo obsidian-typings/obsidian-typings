@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
-type ButtonComponentConstructor = ExtractConstructor<ButtonComponent>;
-
 /**
  * Get the ButtonComponent constructor.
  *
@@ -13,6 +11,6 @@ type ButtonComponentConstructor = ExtractConstructor<ButtonComponent>;
  * @public
  * @unofficial
  */
-export function getButtonComponentConstructor(): ButtonComponentConstructor {
-  return ButtonComponent as ButtonComponentConstructor;
+export function getButtonComponentConstructor(): ExtractConstructor<ButtonComponent> {
+  return ButtonComponent as ExtractConstructor<ButtonComponent>;
 }

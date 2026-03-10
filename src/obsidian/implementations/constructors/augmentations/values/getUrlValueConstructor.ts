@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
-type UrlValueConstructor = ExtractConstructor<UrlValue>;
-
 /**
  * Get the UrlValue constructor.
  *
@@ -13,6 +11,6 @@ type UrlValueConstructor = ExtractConstructor<UrlValue>;
  * @public
  * @unofficial
  */
-export function getUrlValueConstructor(): UrlValueConstructor {
-  return UrlValue as UrlValueConstructor;
+export function getUrlValueConstructor(): ExtractConstructor<UrlValue> {
+  return UrlValue as ExtractConstructor<UrlValue>;
 }

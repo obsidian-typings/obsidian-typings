@@ -2,8 +2,6 @@ import type { App } from 'obsidian';
 import type { Cli } from '../../../internals/cli/Cli.d.ts';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
-type CliConstructor = ExtractConstructor<Cli>;
-
 /**
  * Get the Cli constructor.
  *
@@ -13,6 +11,6 @@ type CliConstructor = ExtractConstructor<Cli>;
  * @public
  * @unofficial
  */
-export function getCliConstructor(app: App): CliConstructor {
-  return app.cli.constructor as CliConstructor;
+export function getCliConstructor(app: App): ExtractConstructor<Cli> {
+  return app.cli.constructor as ExtractConstructor<Cli>;
 }

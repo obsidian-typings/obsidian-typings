@@ -2,8 +2,6 @@ import type { App } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 import type { InternalPlugin } from '../../../../internals/internal-plugins/InternalPlugin.d.ts';
 
-type InternalPluginConstructor<Instance> = ExtractConstructor<InternalPlugin<Instance>>;
-
 /**
  * Get the InternalPlugin constructor.
  *
@@ -13,10 +11,10 @@ type InternalPluginConstructor<Instance> = ExtractConstructor<InternalPlugin<Ins
  * @public
  * @unofficial
  */
-export function getInternalPluginConstructor<Instance>(app: App): InternalPluginConstructor<Instance> {
+export function getInternalPluginConstructor<Instance>(app: App): ExtractConstructor<InternalPlugin<Instance>> {
   const anyPlugin = Object.values(app.internalPlugins.plugins)[0];
   if (!anyPlugin) {
     throw new Error('No internal plugin found');
   }
-  return anyPlugin.constructor as InternalPluginConstructor<Instance>;
+  return anyPlugin.constructor as ExtractConstructor<InternalPlugin<Instance>>;
 }

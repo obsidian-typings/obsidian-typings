@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ConstructorBase } from '../../../internals/constructors/ConstructorBase.d.ts';
 
-type TasksConstructor = ConstructorBase<[], Tasks>;
-
 /**
  * Get the Tasks constructor.
  *
@@ -14,6 +12,6 @@ type TasksConstructor = ConstructorBase<[], Tasks>;
  * @public
  * @unofficial
  */
-export function getTasksConstructor(): TasksConstructor {
-  return Tasks as TasksConstructor;
+export function getTasksConstructor(): ConstructorBase<[], Tasks> {
+  return Tasks as ConstructorBase<[], Tasks>;
 }

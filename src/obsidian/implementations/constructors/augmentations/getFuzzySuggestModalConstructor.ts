@@ -3,8 +3,6 @@ import {
 } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
-type FuzzySuggestModalConstructor = ExtractConstructor<FuzzySuggestModal<unknown>>;
-
 /**
  * Get the FuzzySuggestModal constructor.
  *
@@ -13,6 +11,6 @@ type FuzzySuggestModalConstructor = ExtractConstructor<FuzzySuggestModal<unknown
  * @public
  * @unofficial
  */
-export function getFuzzySuggestModalConstructor(): FuzzySuggestModalConstructor {
-  return FuzzySuggestModal as FuzzySuggestModalConstructor;
+export function getFuzzySuggestModalConstructor(): ExtractConstructor<FuzzySuggestModal<unknown>> {
+  return FuzzySuggestModal as ExtractConstructor<FuzzySuggestModal<unknown>>;
 }

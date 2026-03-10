@@ -2,8 +2,6 @@ import type { App } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 import type { StatusBar } from '../../../internals/StatusBar.d.ts';
 
-type StatusBarConstructor = ExtractConstructor<StatusBar>;
-
 /**
  * Get the StatusBar constructor.
  *
@@ -13,6 +11,6 @@ type StatusBarConstructor = ExtractConstructor<StatusBar>;
  * @public
  * @unofficial
  */
-export function getStatusBarConstructor(app: App): StatusBarConstructor {
-  return app.statusBar.constructor as StatusBarConstructor;
+export function getStatusBarConstructor(app: App): ExtractConstructor<StatusBar> {
+  return app.statusBar.constructor as ExtractConstructor<StatusBar>;
 }
