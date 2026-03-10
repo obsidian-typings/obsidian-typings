@@ -17,10 +17,11 @@ declare module 'obsidian' {
      *
      * To get the constructor instance, use {@link getNullValueConstructor} from `obsidian-typings/implementations`.
      *
+     * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor2__(): this;
 
     /**
      * Returns a boolean indicating whether this NullValue is truthy.

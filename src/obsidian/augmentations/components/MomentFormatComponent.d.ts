@@ -23,10 +23,12 @@ declare module 'obsidian' {
      *
      * To get the constructor instance, use {@link getMomentFormatComponentConstructor} from `obsidian-typings/implementations`.
      *
+     * @param containerEl - The container element.
+     * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor5__(containerEl: HTMLElement): this;
 
     /**
      * Called when the value of the component changes.

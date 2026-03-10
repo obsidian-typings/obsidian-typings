@@ -13,12 +13,11 @@ declare module 'obsidian' {
    */
   interface DurationValue extends NotNullValue {
     /**
-     * Modifies the provided {@DateValue} by this duration.
+     * Modifies the provided {@link DateValue} by this duration.
      *
      * @param value - The DateValue to modify.
      * @param subtract - Whether to subtract the duration from the DateValue.
      * @returns The modified DateValue.
-     * To get the constructor instance, use {@link getDurationValueConstructor} from `obsidian-typings/implementations`.
      * @official
      * @since 1.10.0
      */
@@ -29,10 +28,18 @@ declare module 'obsidian' {
      *
      * To get the constructor instance, use {@link getDurationValueConstructor} from `obsidian-typings/implementations`.
      *
+     * @param years - The years.
+     * @param months - The months.
+     * @param days - The days.
+     * @param hours - The hours.
+     * @param minutes - The minutes.
+     * @param seconds - The seconds.
+     * @param milliseconds - The milliseconds.
+     * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor3__(years: number, months: number, days: number, hours: number, minutes: number, seconds: number, milliseconds: number): this;
 
     /**
      * Convert this duration into milliseconds.

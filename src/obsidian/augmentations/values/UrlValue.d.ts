@@ -17,10 +17,11 @@ declare module 'obsidian' {
      * To get the constructor instance, use {@link getUrlValueConstructor} from `obsidian-typings/implementations`.
      *
      * @param value - The value.
+     * @param display - The display text.
      * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor5__(value: string): this;
+    constructor5__(value: string, display?: string | null): this;
   }
 }

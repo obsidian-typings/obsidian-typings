@@ -16,10 +16,13 @@ declare module 'obsidian' {
      *
      * To get the constructor instance, use {@link getDateValueConstructor} from `obsidian-typings/implementations`.
      *
+     * @param date - The date.
+     * @param showTime - Whether to show time. Defaults to `true`.
+     * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor3__(date: unknown, showTime?: boolean): this;
 
     /**
      * Returns a new DateValue with any time portion in this DateValue removed.

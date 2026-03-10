@@ -16,10 +16,12 @@ declare module 'obsidian' {
      *
      * To get the constructor instance, use {@link getObjectValueConstructor} from `obsidian-typings/implementations`.
      *
+     * @param data - The data.
+     * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor3__(data: unknown): this;
 
     /**
      * Get the {@link Value} associated with the provided key, or {@link NullValue}.

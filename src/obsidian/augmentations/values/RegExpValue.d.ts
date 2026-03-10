@@ -16,10 +16,12 @@ declare module 'obsidian' {
      *
      * To get the constructor instance, use {@link getRegExpValueConstructor} from `obsidian-typings/implementations`.
      *
+     * @param regexp - The regular expression.
+     * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor3__(regexp: RegExp): this;
 
     /**
      * Returns a boolean indicating whether this RegExpValue is truthy.

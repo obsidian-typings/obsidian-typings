@@ -16,12 +16,15 @@ declare module 'obsidian' {
      *
      * To get the constructor instance, use {@link getLinkValueConstructor} from `obsidian-typings/implementations`.
      *
+     * @param app - The app instance.
      * @param value - The value.
+     * @param sourcePath - The source path.
+     * @param display - The display text.
      * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor5__(value: string): this;
+    constructor5__(app: App, value: string, sourcePath: string, display?: string | null): this;
   }
 
   namespace LinkValue {

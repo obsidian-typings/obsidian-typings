@@ -68,6 +68,7 @@ declare module 'obsidian' {
      * To extract the constructor type, use `ExtractConstructor<TextFileView>`.
      *
      * @param leaf - The leaf to create the view in.
+     * @returns The new instance.
      * @official
      * @deprecated - Added only for typing purposes.
      */

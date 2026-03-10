@@ -27,10 +27,15 @@ declare module 'obsidian' {
      *
      * To get the constructor instance, use {@link getBasesQueryResultConstructor} from `obsidian-typings/implementations`.
      *
+     * @param app - The app instance.
+     * @param config - The view config.
+     * @param allProperties - All properties.
+     * @param data - The entry data.
+     * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor__(app: App, config: BasesViewConfig, allProperties: BasesProperty[], data: BasesEntry[]): this;
 
     /**
      * Applies a summary function to a single property over a set of entries.

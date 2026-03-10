@@ -14,5 +14,5 @@ type LinkValueConstructor = ExtractConstructor<LinkValue>;
  * @unofficial
  */
 export function getLinkValueConstructor(): LinkValueConstructor {
-  return LinkValue as LinkValueConstructor;
+  return LinkValue as unknown as LinkValueConstructor;
 }

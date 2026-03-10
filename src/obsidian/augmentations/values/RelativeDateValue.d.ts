@@ -17,9 +17,12 @@ declare module 'obsidian' {
      *
      * To get the constructor instance, use {@link getRelativeDateValueConstructor} from `obsidian-typings/implementations`.
      *
+     * @param date - The date.
+     * @param showTime - Whether to show time. Defaults to `true`.
+     * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor4__(date: unknown, showTime?: boolean): this;
   }
 }

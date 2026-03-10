@@ -16,12 +16,13 @@ declare module 'obsidian' {
      *
      * To get the constructor instance, use {@link getFileValueConstructor} from `obsidian-typings/implementations`.
      *
-     * @param leaf - The leaf.
+     * @param app - The app instance.
+     * @param file - The file.
      * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(leaf: WorkspaceLeaf): this;
+    constructor3__(app: App, file: TFile): this;
 
     /**
      * Returns a boolean indicating whether this FileValue is truthy.
