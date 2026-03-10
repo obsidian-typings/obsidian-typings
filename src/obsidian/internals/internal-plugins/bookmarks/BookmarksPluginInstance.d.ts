@@ -14,6 +14,7 @@ import type {
   WorkspaceLeaf,
   WorkspaceTabs
 } from 'obsidian';
+
 import type { TypedWorkspaceLeaf } from '../../TypedWorkspaceLeaf.d.ts';
 import type { SearchView } from '../global-search/SearchView.d.ts';
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
@@ -124,7 +125,7 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
    * @param editor - The active editor.
    * @param info - The active markdown view or file info.
    */
-  onEditorMenu(menu: Menu, editor: Editor, info: MarkdownView | MarkdownFileInfo): void;
+  onEditorMenu(menu: Menu, editor: Editor, info: MarkdownFileInfo | MarkdownView): void;
 
   /**
    * Called when the plugin is enabled.
@@ -205,7 +206,7 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
    * @param newLeaf2 - Optional secondary pane type.
    * @returns A promise that resolves when the bookmark is opened.
    */
-  openBookmark(item: BookmarkItem, newLeaf: PaneType | boolean, newLeaf2?: PaneType | boolean): Promise<void>;
+  openBookmark(item: BookmarkItem, newLeaf: boolean | PaneType, newLeaf2?: boolean | PaneType): Promise<void>;
 
   /**
    * Open a bookmark item in a specific workspace leaf.
@@ -215,7 +216,7 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
    * @param newLeaf - Optional pane type override.
    * @returns A promise that resolves when the bookmark is opened in the leaf.
    */
-  openBookmarkInLeaf(item: BookmarkItem, leaf: WorkspaceLeaf, newLeaf?: PaneType | boolean): Promise<void>;
+  openBookmarkInLeaf(item: BookmarkItem, leaf: WorkspaceLeaf, newLeaf?: boolean | PaneType): Promise<void>;
 
   /**
    * Open multiple bookmark items at once.
@@ -224,7 +225,7 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
    * @param newLeaf - Optional pane type for opening.
    * @returns A promise that resolves when all bookmarks are opened.
    */
-  openBookmarks(items: BookmarkItem[], newLeaf?: PaneType | boolean): Promise<void>;
+  openBookmarks(items: BookmarkItem[], newLeaf?: boolean | PaneType): Promise<void>;
 
   /** Rebuild the internal bookmark lookup caches. */
   rebuildBookmarkCache(): void;

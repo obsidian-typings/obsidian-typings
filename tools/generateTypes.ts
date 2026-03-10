@@ -112,7 +112,7 @@ const objectPathDepthMap = new Map<object, string>();
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 const functionObjectMap = new Map<Function, object>();
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-const fixDuplicatesMap = new Map<Function, object | null>();
+const fixDuplicatesMap = new Map<Function, null | object>();
 
 function initBuiltInPrototypeNameMap(): void {
   if (isInitialized) {

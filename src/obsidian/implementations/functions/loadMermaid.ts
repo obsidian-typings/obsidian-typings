@@ -1,4 +1,5 @@
 import type { Mermaid } from 'mermaid' with { 'resolution-mode': 'import' };
+
 import { loadMermaid as loadMermaidOriginal } from 'obsidian';
 
 /**

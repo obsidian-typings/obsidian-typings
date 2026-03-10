@@ -3,6 +3,7 @@ import type {
   Component,
   Debouncer
 } from 'obsidian';
+
 import type {
   getCustomCSSConstructor
 } from '../../implementations/constructors/internals/getCustomCSSConstructor.d.ts';

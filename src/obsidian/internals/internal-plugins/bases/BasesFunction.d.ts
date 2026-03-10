@@ -1,4 +1,5 @@
 import type { App } from 'obsidian';
+
 import type { BasesFunctionArg } from './BasesFunctionArg.d.ts';
 
 /**

@@ -52,7 +52,7 @@ declare module 'obsidian' {
      * @param content The content to cache. If `null`, the cache is cleared.
      * @unofficial
      */
-    cache(content: string | null): void;
+    cache(content: null | string): void;
 
     /**
      * Constructor.

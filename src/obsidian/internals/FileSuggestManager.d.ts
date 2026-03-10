@@ -5,6 +5,7 @@ import type {
   SearchResult,
   TFile
 } from 'obsidian';
+
 import type { FileSuggestion } from './FileSuggestion.d.ts';
 import type { Runnable } from './Runnable.d.ts';
 
@@ -22,7 +23,7 @@ export interface FileSuggestManager {
   /**
    * Selection of files and their paths that can be matched to.
    */
-  fileSuggestions: null | FileSuggestion[];
+  fileSuggestions: FileSuggestion[] | null;
 
   /**
    * Whether search should be vault-wide rather than scoped to current file.
@@ -32,7 +33,7 @@ export interface FileSuggestManager {
   /**
    * Type of suggestions that should be provided.
    */
-  mode: 'file' | 'heading' | 'block' | 'display' | string;
+  mode: 'block' | 'display' | 'file' | 'heading' | string;
 
   /**
    * Executor of the search.
@@ -139,5 +140,5 @@ export interface FileSuggestManager {
     sourcePath: null | string,
     content: string,
     textParts: string[]
-  ): SearchResult | null;
+  ): null | SearchResult;
 }

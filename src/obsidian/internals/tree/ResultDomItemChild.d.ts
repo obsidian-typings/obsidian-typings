@@ -1,4 +1,5 @@
 import type { CachedMetadata } from 'obsidian';
+
 import type { ContentPosition } from './ContentPosition.d.ts';
 import type { ResultDomItem } from './ResultDomItem.d.ts';
 import type { TreeNode } from './TreeNode.d.ts';

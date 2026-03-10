@@ -11,7 +11,7 @@ export interface InfinityScroll {
   lastScroll: number;
 
   /** Queued computation task, or `null` if none is pending. */
-  queued: unknown | null;
+  queued: null | unknown;
 
   /** Number of items to render per block. */
   renderBlockSize: number;

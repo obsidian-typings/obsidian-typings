@@ -2,6 +2,7 @@ import type {
   App,
   Debouncer
 } from 'obsidian';
+
 import type {
   getAppMenuBarManagerConstructor
 } from '../implementations/constructors/internals/getAppMenuBarManagerConstructor.d.ts';

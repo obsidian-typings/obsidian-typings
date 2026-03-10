@@ -7,6 +7,7 @@ import type {
   TFolder,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { BasesFunction } from './BasesFunction.d.ts';
 import type { BasesFunctions } from './BasesFunctions.d.ts';
@@ -94,7 +95,7 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
    * @param type - The view type to get the factory for.
    * @returns The view factory, or `null` if not found.
    */
-  getViewFactory(type: string): ViewFactory | null;
+  getViewFactory(type: string): null | ViewFactory;
 
   /**
    * Gets the view types.

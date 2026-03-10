@@ -2,6 +2,7 @@ import type {
   View,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { MaybeDeferredView } from './views/MaybeDeferredView.d.ts';
 
 /**

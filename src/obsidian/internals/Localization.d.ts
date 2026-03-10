@@ -5,5 +5,5 @@
  */
 export interface Localization {
   /** Localized string value, or nested localization group. */
-  [key: string]: string | Localization;
+  [key: string]: Localization | string;
 }

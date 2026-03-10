@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlightLinksValidator from 'starlight-links-validator';
 import starlightThemeObsidian from 'starlight-theme-obsidian';
 import starlightTypeDoc from 'starlight-typedoc';
+
 import {
   admonitionRenderer,
   githubLocationRenderer

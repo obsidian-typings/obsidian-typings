@@ -122,7 +122,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.7
      */
-    setLimits(min: number, max: number, step: number | 'any'): this;
+    setLimits(min: number, max: number, step: 'any' | number): this;
 
     /**
      * Set the value of the slider.

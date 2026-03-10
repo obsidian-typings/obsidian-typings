@@ -9,6 +9,6 @@ declare global {
      * The type of touch.
      * @official
      */
-    touchType: 'stylus' | 'direct';
+    touchType: 'direct' | 'stylus';
   }
 }

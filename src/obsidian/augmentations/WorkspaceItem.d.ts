@@ -31,7 +31,7 @@ declare module 'obsidian' {
      * The flex-grow dimension of this item within its parent split.
      * @unofficial
      */
-    dimension: number | null;
+    dimension: null | number;
 
     /**
      * Unique identifier for this workspace item.
@@ -143,7 +143,7 @@ declare module 'obsidian' {
      * @param dimension - The flex-grow value, or `null` to reset.
      * @unofficial
      */
-    setDimension(dimension: number | null): void;
+    setDimension(dimension: null | number): void;
 
     /**
      * Set the parent split for this workspace item.

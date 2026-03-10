@@ -111,7 +111,7 @@ declare module 'obsidian' {
    */
   function displayTooltip(
     newTargetEl: HTMLElement,
-    content: string | DocumentFragment,
+    content: DocumentFragment | string,
     options?: TooltipOptions
   ): void;
 
@@ -131,7 +131,7 @@ declare module 'obsidian' {
    *
    * @unofficial
    */
-  function fuzzySearch(queryForFuzzySearch: QueryForFuzzySearch, text: string): SearchResult | null;
+  function fuzzySearch(queryForFuzzySearch: QueryForFuzzySearch, text: string): null | SearchResult;
 
   /**
    * Combines all tags from frontmatter and note content into a single array.
@@ -157,7 +157,7 @@ declare module 'obsidian' {
    *
    * @official
    */
-  function getAllTags(cache: CachedMetadata): string[] | null;
+  function getAllTags(cache: CachedMetadata): null | string[];
 
   /**
    * Converts a Blob to an ArrayBuffer.
@@ -207,7 +207,7 @@ declare module 'obsidian' {
    *
    * @official
    */
-  function getIcon(iconId: string): SVGSVGElement | null;
+  function getIcon(iconId: string): null | SVGSVGElement;
 
   /**
    * Get the list of registered icons.
@@ -271,7 +271,7 @@ declare module 'obsidian' {
    *
    * @official
    */
-  function htmlToMarkdown(html: string | HTMLElement | Document | DocumentFragment): string;
+  function htmlToMarkdown(html: Document | DocumentFragment | HTMLElement | string): string;
 
   /**
    * Iterate links and embeds.
@@ -415,7 +415,7 @@ declare module 'obsidian' {
    *
    * @official
    */
-  function parseFrontMatterAliases(frontmatter: unknown | null): string[] | null;
+  function parseFrontMatterAliases(frontmatter: null | unknown): null | string[];
 
   /**
    * Parses a frontmatter entry from the frontmatter object.
@@ -432,7 +432,7 @@ declare module 'obsidian' {
    *
    * @official
    */
-  function parseFrontMatterEntry(frontmatter: unknown | null, key: string | RegExp): unknown | null;
+  function parseFrontMatterEntry(frontmatter: null | unknown, key: RegExp | string): null | unknown;
 
   /**
    * Parses a frontmatter string array from the frontmatter object.
@@ -456,10 +456,10 @@ declare module 'obsidian' {
    * @official
    */
   function parseFrontMatterStringArray(
-    frontmatter: unknown | null,
-    key: string | RegExp,
+    frontmatter: null | unknown,
+    key: RegExp | string,
     nospaces?: boolean
-  ): string[] | null;
+  ): null | string[];
 
   /**
    * Parses the frontmatter tags from the frontmatter object.
@@ -476,7 +476,7 @@ declare module 'obsidian' {
    *
    * @official
    */
-  function parseFrontMatterTags(frontmatter: unknown | null): string[] | null;
+  function parseFrontMatterTags(frontmatter: null | unknown): null | string[];
 
   /**
    * Parses the linktext of a wikilink into its component parts.
@@ -527,7 +527,7 @@ declare module 'obsidian' {
    *
    * @official
    */
-  function prepareFuzzySearch(query: string): (text: string) => SearchResult | null;
+  function prepareFuzzySearch(query: string): (text: string) => null | SearchResult;
 
   /**
    * Prepare a query for fuzzy search.
@@ -547,7 +547,7 @@ declare module 'obsidian' {
    *
    * @official
    */
-  function prepareSimpleSearch(query: string): (text: string) => SearchResult | null;
+  function prepareSimpleSearch(query: string): (text: string) => null | SearchResult;
 
   /**
    * Remove a custom icon from the library.
@@ -579,9 +579,9 @@ declare module 'obsidian' {
    * @official
    */
   function renderMatches(
-    el: HTMLElement | DocumentFragment,
+    el: DocumentFragment | HTMLElement,
     text: string,
-    matches: SearchMatches | null,
+    matches: null | SearchMatches,
     offset?: number
   ): void;
 
@@ -693,7 +693,7 @@ declare module 'obsidian' {
   function resolveSubpath(
     cache: CachedMetadata,
     subpath: string
-  ): HeadingSubpathResult | BlockSubpathResult | FootnoteSubpathResult | null;
+  ): BlockSubpathResult | FootnoteSubpathResult | HeadingSubpathResult | null;
 
   /**
    * Sanitize HTML to a DOM fragment.

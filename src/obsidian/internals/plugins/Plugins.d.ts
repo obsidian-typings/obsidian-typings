@@ -4,6 +4,7 @@ import type {
   Plugin,
   PluginManifest
 } from 'obsidian';
+
 import type { getPluginsConstructor } from '../../implementations/constructors/internals/getPluginsConstructor.d.ts';
 import type { PluginUpdateManifest } from '../PluginUpdateManifest.d.ts';
 import type { PluginsManifestsRecord } from './PluginsManifestsRecord.d.ts';
@@ -36,7 +37,7 @@ export interface Plugins {
   /**
    * Plugin ID that is currently being enabled.
    */
-  loadingPluginId: string | null;
+  loadingPluginId: null | string;
 
   /**
    * Manifests of all the plugins that are installed.
@@ -122,7 +123,7 @@ export interface Plugins {
    * @param id - Plugin ID.
    * @returns The plugin instance or `null` if not found.
    */
-  getPlugin(id: string): Plugin | null;
+  getPlugin(id: string): null | Plugin;
 
   /**
    * Get the folder where plugins are stored.

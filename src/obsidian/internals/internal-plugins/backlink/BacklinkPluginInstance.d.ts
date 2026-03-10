@@ -5,6 +5,7 @@ import type {
   TFile,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { BacklinkPlugin } from './BacklinkPlugin.d.ts';
 import type { BacklinkPluginInstanceOptions } from './BacklinkPluginInstanceOptions.d.ts';
@@ -22,7 +23,7 @@ export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkP
   defaultOn: true;
 
   /** The currently tracked file for backlinks. */
-  file?: TFile | null;
+  file?: null | TFile;
 
   /** Configuration options for the backlink plugin. */
   options: BacklinkPluginInstanceOptions;

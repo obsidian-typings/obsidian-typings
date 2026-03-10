@@ -4,6 +4,7 @@ import type {
   TFile,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { BasesController } from './BasesController.d.ts';
 import type { BasesPluginInstance } from './BasesPluginInstance.d.ts';
@@ -82,5 +83,5 @@ export interface BasesView extends TextFileView {
    *
    * @param file - The file to update.
    */
-  updateCurrentFile(file: TFile | null): void;
+  updateCurrentFile(file: null | TFile): void;
 }

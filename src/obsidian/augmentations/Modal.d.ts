@@ -75,7 +75,7 @@ declare module 'obsidian' {
      *
      * @unofficial
      */
-    selection: WindowSelection | null;
+    selection: null | WindowSelection;
 
     /**
      * Whether the modal should animate
@@ -104,7 +104,7 @@ declare module 'obsidian' {
      *
      * @unofficial
      */
-    win: Window | null;
+    win: null | Window;
 
     /**
      * Performed when animation is complete
@@ -233,7 +233,7 @@ declare module 'obsidian' {
      * ```
      * @official
      */
-    setContent(content: string | DocumentFragment): this;
+    setContent(content: DocumentFragment | string): this;
 
     /**
      * Set whether the background should be dimmed.

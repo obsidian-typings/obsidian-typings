@@ -109,7 +109,7 @@ declare global {
      */
     createSvg<K extends keyof SVGElementTagNameMap>(
       tag: K,
-      o?: SvgElementInfo | string,
+      o?: string | SvgElementInfo,
       callback?: (el: SVGElementTagNameMap[K]) => void
     ): SVGElementTagNameMap[K];
 

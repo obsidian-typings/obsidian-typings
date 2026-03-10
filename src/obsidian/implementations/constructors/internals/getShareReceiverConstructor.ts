@@ -1,4 +1,5 @@
 import type { App } from 'obsidian';
+
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 import type { ShareReceiver } from '../../../internals/ShareReceiver.d.ts';
 

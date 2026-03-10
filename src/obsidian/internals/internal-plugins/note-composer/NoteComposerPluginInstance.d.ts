@@ -6,6 +6,7 @@ import type {
   Menu,
   TFile
 } from 'obsidian';
+
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { HeadingInfo } from './HeadingInfo.d.ts';
 import type { NoteComposerPlugin } from './NoteComposerPlugin.d.ts';
@@ -64,7 +65,7 @@ export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteC
    * @param editor - The active editor.
    * @param info - The active markdown view or file info.
    */
-  onEditorMenu(menu: Menu, editor: Editor, info: MarkdownView | MarkdownFileInfo): void;
+  onEditorMenu(menu: Menu, editor: Editor, info: MarkdownFileInfo | MarkdownView): void;
 
   /** Called when the plugin is enabled. */
   onEnable: (app: App, plugin: NoteComposerPlugin) => Promise<void>;

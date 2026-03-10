@@ -1,5 +1,6 @@
 import type { App } from 'electron';
 import type { TFile } from 'obsidian';
+
 import type { ResultDom } from './ResultDom.d.ts';
 import type { ResultDomItemChild } from './ResultDomItemChild.d.ts';
 import type { ResultDomResult } from './ResultDomResult.d.ts';

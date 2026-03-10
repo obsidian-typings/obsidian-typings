@@ -2,6 +2,7 @@ import type {
   App,
   Command
 } from 'obsidian';
+
 import type { getCommandsConstructor } from '../../implementations/constructors/internals/getCommandsConstructor.d.ts';
 import type { CommandsCommandsRecord } from './CommandsCommandsRecord.d.ts';
 import type { CommandsEditorCommandsRecord } from './CommandsEditorCommandsRecord.d.ts';

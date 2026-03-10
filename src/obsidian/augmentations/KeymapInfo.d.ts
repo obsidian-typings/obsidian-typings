@@ -12,7 +12,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.10.4
      */
-    key: string | null;
+    key: null | string;
 
     /**
      * The modifiers of the keymap.
@@ -20,6 +20,6 @@ declare module 'obsidian' {
      * @official
      * @since 0.10.4
      */
-    modifiers: string | null;
+    modifiers: null | string;
   }
 }

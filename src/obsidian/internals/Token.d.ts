@@ -10,5 +10,5 @@ export interface Token extends EditorRange {
   text: string;
 
   /** Type of the token. */
-  type: 'tag' | 'external-link' | 'internal-link';
+  type: 'external-link' | 'internal-link' | 'tag';
 }

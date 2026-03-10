@@ -6,5 +6,5 @@ declare module 'obsidian' {
    *
    * @deprecated - Added only for typing purposes. Use {@link SplitDirection} instead.
    */
-  type SplitDirection__ = 'vertical' | 'horizontal';
+  type SplitDirection__ = 'horizontal' | 'vertical';
 }

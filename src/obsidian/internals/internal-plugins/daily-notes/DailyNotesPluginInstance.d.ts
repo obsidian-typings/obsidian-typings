@@ -3,6 +3,7 @@ import type {
   App,
   TFile
 } from 'obsidian';
+
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { DailyNotesOptions } from './DailyNotesOptions.d.ts';
 import type { DailyNotesPlugin } from './DailyNotesPlugin.d.ts';
@@ -38,7 +39,7 @@ export interface DailyNotesPluginInstance extends InternalPluginInstance<DailyNo
    * @param date - The moment date to get the daily note for.
    * @returns The daily note file, or `null`/`undefined`.
    */
-  getDailyNote(date: typeof moment): Promise<TFile | null | undefined>;
+  getDailyNote(date: typeof moment): Promise<null | TFile | undefined>;
 
   /**
    * Get the configured date format string for daily note filenames.

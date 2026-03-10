@@ -6,5 +6,5 @@ declare module 'obsidian' {
    *
    * @deprecated - Added only for typing purposes. Use {@link UserEvent} instead.
    */
-  type UserEvent__ = MouseEvent | KeyboardEvent | TouchEvent | PointerEvent;
+  type UserEvent__ = KeyboardEvent | MouseEvent | PointerEvent | TouchEvent;
 }

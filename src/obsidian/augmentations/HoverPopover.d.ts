@@ -40,7 +40,7 @@ declare module 'obsidian' {
       parent: HoverParent,
       targetEl: HTMLElement | null,
       waitTime?: number,
-      staticPos?: Point | null
+      staticPos?: null | Point
     ): this;
 
     /**

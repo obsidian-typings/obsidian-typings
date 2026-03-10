@@ -1,5 +1,6 @@
 import type { Extension } from '@codemirror/state';
 import type { ViewUpdate } from '@codemirror/view';
+
 import type { FoldInfo } from '../internals/FoldInfo.d.ts';
 import type { MarkdownEditViewEphemeralState } from '../internals/MarkdownEditViewEphemeralState.d.ts';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
@@ -141,7 +142,7 @@ declare module 'obsidian' {
      * @returns The fold info or `null`.
      * @unofficial
      */
-    getFoldInfo(): null | FoldInfo;
+    getFoldInfo(): FoldInfo | null;
 
     /**
      * Get the scroll position of the edit view.

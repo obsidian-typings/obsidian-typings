@@ -13,7 +13,7 @@ export interface ItemQueue<T> {
   items: ItemQueueItems<T>;
 
   /** Promise resolvers for awaiting the next item. */
-  promise: PromiseWithResolvers<T> | null;
+  promise: null | PromiseWithResolvers<T>;
 
   /** Runnable controlling the queue's start/stop lifecycle. */
   runnable: Runnable;

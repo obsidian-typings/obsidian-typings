@@ -4,6 +4,7 @@ import type {
   TAbstractFile,
   TFile
 } from 'obsidian';
+
 import type { EmbeddedEditorView } from './EmbeddedEditorView.d.ts';
 import type { FoldInfo } from './FoldInfo.d.ts';
 
@@ -85,7 +86,7 @@ export interface WidgetEditorView extends EmbeddedEditorView {
    *
    * @returns Current fold information, or `null`.
    */
-  getFoldInfo(): null | FoldInfo;
+  getFoldInfo(): FoldInfo | null;
 
   /**
    * Splice incoming data at according to subpath for correct reference, then update heading and render.

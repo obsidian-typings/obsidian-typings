@@ -4,6 +4,7 @@ import type {
   TAbstractFile,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { GraphPlugin } from './GraphPlugin.d.ts';
 import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.d.ts';

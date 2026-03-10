@@ -1,4 +1,5 @@
 import type { App } from 'obsidian';
+
 import type { CanvasPluginInstance } from '../internal-plugins/canvas/CanvasPluginInstance.d.ts';
 import type { LinkUpdater } from './LinkUpdater.d.ts';
 

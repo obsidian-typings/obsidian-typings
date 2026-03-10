@@ -1,4 +1,5 @@
 import type { EditorSuggest } from 'obsidian';
+
 import type { FileSuggestManager } from './FileSuggestManager.d.ts';
 
 /**

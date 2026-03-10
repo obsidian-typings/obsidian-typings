@@ -2,6 +2,7 @@ import type {
   View,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { SyncPluginInstance } from './SyncPluginInstance.d.ts';
 

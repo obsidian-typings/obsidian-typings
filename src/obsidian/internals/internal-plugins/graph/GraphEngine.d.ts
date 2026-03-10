@@ -1,4 +1,5 @@
 import type { App } from 'obsidian';
+
 import type { GraphColorGroup } from './GraphColorGroup.d.ts';
 import type { GraphFileFilter } from './GraphFileFilter.d.ts';
 import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.d.ts';
@@ -66,7 +67,7 @@ export interface GraphEngine {
   searchQueries: GraphColorGroup[];
 
   /** The view (local or global) that owns this engine. */
-  view: LocalGraphView | GraphView;
+  view: GraphView | LocalGraphView;
 
   /**
    * Gets the engine options.

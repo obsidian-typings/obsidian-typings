@@ -3,6 +3,7 @@ import type {
   View,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { InfoFileView } from '../../views/InfoFileView.d.ts';
 import type { OutlinePluginInstance } from './OutlinePluginInstance.d.ts';
@@ -40,14 +41,14 @@ export interface OutlineView extends InfoFileView {
    * @param e - The cursor position or context.
    * @returns The active heading, or `undefined` if none found.
    */
-  findActiveHeading(e: unknown): unknown | undefined;
+  findActiveHeading(e: unknown): undefined | unknown;
 
   /**
    * Finds the active leaf.
    *
    * @returns The corresponding workspace leaf, or `null`.
    */
-  findCorrespondingLeaf(): WorkspaceLeaf | null;
+  findCorrespondingLeaf(): null | WorkspaceLeaf;
 
   /**
    * Returns the headings of the active file.
@@ -61,7 +62,7 @@ export interface OutlineView extends InfoFileView {
    *
    * @returns The owner view, or `null`.
    */
-  getOwner(): View | null;
+  getOwner(): null | View;
 
   /**
    * Get the current view type.

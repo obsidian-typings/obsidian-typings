@@ -1,5 +1,6 @@
-import { loadPdfJs as loadPdfJsOriginal } from 'obsidian';
 import type { default as pdfjsLib } from 'pdfjs-dist';
+
+import { loadPdfJs as loadPdfJsOriginal } from 'obsidian';
 
 /**
  * Load PDF.js and return a promise to the global pdfjsLib object.

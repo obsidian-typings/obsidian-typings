@@ -96,7 +96,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link onChooseSuggestion} instead.
      * @since 0.9.20
      */
-    onChooseItem__(item: T, evt: MouseEvent | KeyboardEvent): void;
+    onChooseItem__(item: T, evt: KeyboardEvent | MouseEvent): void;
 
     /**
      * Called when a suggestion is chosen.
@@ -114,7 +114,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.20
      */
-    onChooseSuggestion(item: FuzzyMatch<T>, evt: MouseEvent | KeyboardEvent): void;
+    onChooseSuggestion(item: FuzzyMatch<T>, evt: KeyboardEvent | MouseEvent): void;
 
     /**
      * Render the suggestion.

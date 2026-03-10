@@ -65,7 +65,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link isModEvent} instead.
      * @since 0.16.0
      */
-    function isModEvent__(evt?: UserEvent | null): PaneType | boolean;
+    function isModEvent__(evt?: null | UserEvent): boolean | PaneType;
 
     /**
      * Checks whether the modifier key is pressed during this event.
@@ -85,6 +85,6 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link isModifier} instead.
      * @since 0.12.17
      */
-    function isModifier__(evt: MouseEvent | TouchEvent | KeyboardEvent, modifier: Modifier): boolean;
+    function isModifier__(evt: KeyboardEvent | MouseEvent | TouchEvent, modifier: Modifier): boolean;
   }
 }

@@ -23,7 +23,7 @@ declare module 'obsidian' {
      * The linked group this leaf belongs to, or `null` if ungrouped.
      * @unofficial
      */
-    group: string | null;
+    group: null | string;
 
     /**
      * Current height of the leaf in pixels.
@@ -54,7 +54,7 @@ declare module 'obsidian' {
      *
      * @official
      */
-    parent: WorkspaceTabs | WorkspaceMobileDrawer;
+    parent: WorkspaceMobileDrawer | WorkspaceTabs;
 
     /**
      * Whether this leaf is pinned (prevented from being navigated away).
@@ -66,7 +66,7 @@ declare module 'obsidian' {
      * Observer that tracks size changes of this leaf.
      * @unofficial
      */
-    resizeObserver: ResizeObserver | null;
+    resizeObserver: null | ResizeObserver;
 
     /**
      * Close button element in the tab header.
@@ -380,7 +380,7 @@ declare module 'obsidian' {
      * @param flexgrow - Sets the flex-grow of the leaf. (0-100).
      * @unofficial
      */
-    setDimension(flexgrow?: number | null): void;
+    setDimension(flexgrow?: null | number): void;
 
     /**
      * Set the ephemeral state of this leaf.

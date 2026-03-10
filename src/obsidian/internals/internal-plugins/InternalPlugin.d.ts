@@ -8,6 +8,7 @@ import type {
   PluginSettingTab,
   ViewCreator
 } from 'obsidian';
+
 import type {
   getInternalPluginConstructor
 } from '../../implementations/constructors/internals/internal-plugins/getInternalPluginConstructor.d.ts';
@@ -126,7 +127,7 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
    *
    * @returns The loaded data, or `null` if none exists.
    */
-  loadData(): Promise<object | null>;
+  loadData(): Promise<null | object>;
 
   /**
    * Register a global command for this plugin.

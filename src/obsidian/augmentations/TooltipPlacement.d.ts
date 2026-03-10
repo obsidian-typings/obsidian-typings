@@ -6,5 +6,5 @@ declare module 'obsidian' {
    *
    * @deprecated - Added only for typing purposes. Use {@link TooltipPlacement} instead.
    */
-  type TooltipPlacement__ = 'bottom' | 'right' | 'left' | 'top';
+  type TooltipPlacement__ = 'bottom' | 'left' | 'right' | 'top';
 }

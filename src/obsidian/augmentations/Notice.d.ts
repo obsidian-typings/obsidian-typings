@@ -56,7 +56,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(message: string | DocumentFragment, duration?: number): this;
+    constructor__(message: DocumentFragment | string, duration?: number): this;
 
     /**
      * Hide the notice.
@@ -82,6 +82,6 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.7
      */
-    setMessage(message: string | DocumentFragment): this;
+    setMessage(message: DocumentFragment | string): this;
   }
 }

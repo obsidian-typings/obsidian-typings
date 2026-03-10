@@ -2,6 +2,7 @@ import type {
   LinkCache,
   Reference
 } from 'obsidian';
+
 import { isReferenceCache } from './isReferenceCache.ts';
 
 /**

@@ -5,7 +5,6 @@ import {
   join,
   relative
 } from 'node:path/posix';
-
 import { Project } from 'ts-morph';
 
 const project = new Project();

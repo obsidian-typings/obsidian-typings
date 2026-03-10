@@ -333,7 +333,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.7.2
      */
-    stat(normalizedPath: string): Promise<Stat | null>;
+    stat(normalizedPath: string): Promise<null | Stat>;
 
     /**
      * Stop watching for file system changes.

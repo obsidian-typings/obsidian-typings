@@ -1,4 +1,5 @@
 import type { TFile } from 'obsidian';
+
 import type { TreeCollapsibleItem } from '../../tree/TreeCollapsibleItem.d.ts';
 import type { TreeNodeVChildren } from '../../tree/TreeNodeVChildren.d.ts';
 import type { AbstractFileTreeItem } from './AbstractFileTreeItem.d.ts';
@@ -14,7 +15,7 @@ export interface FolderTreeItem extends AbstractFileTreeItem<TFile>, TreeCollaps
   pusherEl: HTMLElement;
 
   /** Virtual children container managing child file and folder tree items. */
-  vChildren: TreeNodeVChildren<FolderTreeItem | FileTreeItem, FolderTreeItem>;
+  vChildren: TreeNodeVChildren<FileTreeItem | FolderTreeItem, FolderTreeItem>;
 
   /**
    * Sort file items inside by current sort order.

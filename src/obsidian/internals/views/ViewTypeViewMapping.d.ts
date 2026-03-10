@@ -1,4 +1,5 @@
 import type { MarkdownView } from 'obsidian';
+
 import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 import type { BacklinkView } from '../internal-plugins/backlink/BacklinkView.d.ts';
 import type { BasesView } from '../internal-plugins/bases/BasesView.d.ts';

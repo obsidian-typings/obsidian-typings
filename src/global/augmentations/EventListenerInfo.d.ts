@@ -21,7 +21,7 @@ declare global {
      * The options of the event listener.
      * @official
      */
-    options?: boolean | AddEventListenerOptions;
+    options?: AddEventListenerOptions | boolean;
 
     /**
      * The selector of the event target.

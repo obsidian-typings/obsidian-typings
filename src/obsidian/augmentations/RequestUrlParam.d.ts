@@ -15,7 +15,7 @@ declare module 'obsidian' {
      * ```
      * @official
      */
-    body?: string | ArrayBuffer;
+    body?: ArrayBuffer | string;
 
     /**
      * The content type of the request.

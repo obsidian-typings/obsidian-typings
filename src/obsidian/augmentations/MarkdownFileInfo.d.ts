@@ -39,6 +39,6 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link file} instead.
      */
-    file__?(): TFile | null;
+    file__?(): null | TFile;
   }
 }

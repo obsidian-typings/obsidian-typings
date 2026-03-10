@@ -49,7 +49,7 @@ export interface CustomArrayDict<T> {
    * @param key - The key.
    * @returns Array of values, or `null`.
    */
-  get(key: string): T[] | null;
+  get(key: string): null | T[];
 
   /**
    * Get all keys in the dictionary.

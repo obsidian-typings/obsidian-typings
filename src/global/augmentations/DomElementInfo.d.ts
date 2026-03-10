@@ -15,7 +15,7 @@ declare global {
      * @official
      */
     attr?: {
-      [key: string]: string | number | boolean | null;
+      [key: string]: boolean | null | number | string;
     };
 
     /**
@@ -88,7 +88,7 @@ declare global {
      * ```
      * @official
      */
-    text?: string | DocumentFragment;
+    text?: DocumentFragment | string;
 
     /**
      * HTML title (for hover tooltip).

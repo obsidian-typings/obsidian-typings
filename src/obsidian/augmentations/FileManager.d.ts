@@ -32,7 +32,7 @@ declare module 'obsidian' {
      * Currently in-progress link update operations, or `null` if none.
      * @unofficial
      */
-    inProgressUpdates: null | LinkUpdatesHandler[];
+    inProgressUpdates: LinkUpdatesHandler[] | null;
 
     /**
      * Queue for processing link update operations sequentially.
@@ -304,7 +304,7 @@ declare module 'obsidian' {
      * @returns A promise that resolves to a mapping of URL to file, or `null`/`undefined`.
      * @unofficial
      */
-    promptForImageDownload(urls: string[]): Promise<undefined | null | Record<string, TFile>>;
+    promptForImageDownload(urls: string[]): Promise<null | Record<string, TFile> | undefined>;
 
     /**
      * Register an extension to be the parent for a specific file type.

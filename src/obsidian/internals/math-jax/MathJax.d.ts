@@ -78,14 +78,14 @@ export interface MathJax {
    *
    * @param elements - The elements to typeset.
    */
-  typeset(elements?: unknown[] | null): void;
+  typeset(elements?: null | unknown[]): void;
 
   /**
    * Clear typeset math from the given elements.
    *
    * @param elements - The elements to clear.
    */
-  typesetClear(elements?: unknown[] | null): void;
+  typesetClear(elements?: null | unknown[]): void;
 
   /**
    * Typeset math expressions in the given elements asynchronously.
@@ -93,5 +93,5 @@ export interface MathJax {
    * @param elements - The elements to typeset.
    * @returns A promise that resolves when typesetting is complete.
    */
-  typesetPromise(elements?: unknown[] | null): Promise<void>;
+  typesetPromise(elements?: null | unknown[]): Promise<void>;
 }

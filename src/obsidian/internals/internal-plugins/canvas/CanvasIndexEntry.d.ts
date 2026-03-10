@@ -1,4 +1,5 @@
 import type { CachedMetadata } from 'obsidian';
+
 import type { CanvasEmbed } from './CanvasEmbed.d.ts';
 
 /**

@@ -3,6 +3,7 @@ import type {
   Debouncer,
   TFile
 } from 'obsidian';
+
 import type { InfinityScroll } from './InfinityScroll.d.ts';
 import type { ResultDomItem } from './ResultDomItem.d.ts';
 import type { ResultDomResult } from './ResultDomResult.d.ts';

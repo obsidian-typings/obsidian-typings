@@ -73,7 +73,7 @@ declare module 'obsidian' {
      * ```
      * @official
      */
-    register(modifiers: Modifier[] | null, key: string | null, func: KeymapEventListener): KeymapEventHandler;
+    register(modifiers: Modifier[] | null, key: null | string, func: KeymapEventListener): KeymapEventHandler;
 
     /**
      * Set the container element for constraining tab-key focus cycling.

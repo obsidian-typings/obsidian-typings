@@ -275,7 +275,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.11.11
      */
-    getAbstractFileByPath(path: string): TAbstractFile | null;
+    getAbstractFileByPath(path: string): null | TAbstractFile;
 
     /**
      * Get an abstract file by path, insensitive to case.
@@ -284,7 +284,7 @@ declare module 'obsidian' {
      * @returns The abstract file, or `null` if not found.
      * @unofficial
      */
-    getAbstractFileByPathInsensitive(path: string): TAbstractFile | null;
+    getAbstractFileByPathInsensitive(path: string): null | TAbstractFile;
 
     /**
      * Get all folders in the vault.
@@ -324,7 +324,7 @@ declare module 'obsidian' {
      * @returns An available path for the attachment.
      * @unofficial
      */
-    getAvailablePathForAttachments(filename: string, extension: string, file: TFile | null): Promise<string>;
+    getAvailablePathForAttachments(filename: string, extension: string, file: null | TFile): Promise<string>;
 
     /**
      * Get value from config by key.
@@ -352,7 +352,7 @@ declare module 'obsidian' {
      * @returns The direct parent folder, or `null` if none.
      * @unofficial
      */
-    getDirectParent(file: TAbstractFile): TFolder | null;
+    getDirectParent(file: TAbstractFile): null | TFolder;
 
     /**
      * Get a file inside the vault at the given path.
@@ -367,7 +367,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.5.7
      */
-    getFileByPath(path: string): TFile | null;
+    getFileByPath(path: string): null | TFile;
 
     /**
      * Get all files in the vault.
@@ -391,7 +391,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.5.7
      */
-    getFolderByPath(path: string): TFolder | null;
+    getFolderByPath(path: string): null | TFolder;
 
     /**
      * Get all Markdown files in the vault.
@@ -683,7 +683,7 @@ declare module 'obsidian' {
      * @returns The abstract file, or `null` if not found.
      * @unofficial
      */
-    resolveFilePath(path: string): TAbstractFile | null;
+    resolveFilePath(path: string): null | TAbstractFile;
 
     /**
      * Get the file by Obsidian URL
@@ -692,7 +692,7 @@ declare module 'obsidian' {
      * @returns The abstract file, or `null` if not found.
      * @unofficial
      */
-    resolveFileUrl(url: string): TAbstractFile | null;
+    resolveFileUrl(url: string): null | TAbstractFile;
 
     /**
      * Save app and appearance configs to disk

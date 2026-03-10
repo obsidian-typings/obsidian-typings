@@ -5,10 +5,10 @@
  */
 export interface DropResult {
   /** Action identifier describing what happened on drop (e.g. "link", "move"). */
-  action: string | null;
+  action: null | string;
 
   /** The drop effect to apply to the drag event. */
-  dropEffect: 'none' | 'copy' | 'link' | 'move';
+  dropEffect: 'copy' | 'link' | 'move' | 'none';
 
   /** CSS class to apply to the hover target element. */
   hoverClass?: string;

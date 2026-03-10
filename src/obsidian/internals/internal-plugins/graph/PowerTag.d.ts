@@ -2,6 +2,7 @@ import type {
   Text,
   TextStyle
 } from 'pixi.js';
+
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /**

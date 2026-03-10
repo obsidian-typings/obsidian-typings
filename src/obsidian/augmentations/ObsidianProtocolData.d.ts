@@ -30,6 +30,6 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use `this[key]` instead.
      */
-    index__: string | 'true';
+    index__: 'true' | string;
   }
 }

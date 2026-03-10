@@ -32,7 +32,7 @@ export interface MapOfSets<Key, Value> {
    * @param key - The key.
    * @returns Set of values, or `null`.
    */
-  get(key: Key): Set<Value> | null;
+  get(key: Key): null | Set<Value>;
 
   /**
    * Get the values for the given key as an array.

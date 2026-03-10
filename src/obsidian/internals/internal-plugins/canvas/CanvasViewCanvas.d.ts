@@ -3,6 +3,7 @@ import type {
   Debouncer,
   Point
 } from 'obsidian';
+
 import type { MapOfSets } from '../../collections/MapOfSets.d.ts';
 import type { CanvasViewData } from './CanvasData.d.ts';
 import type { CanvasMenu } from './CanvasMenu.d.ts';

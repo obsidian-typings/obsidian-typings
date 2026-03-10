@@ -4,6 +4,7 @@ import type {
   Container,
   ICanvas
 } from 'pixi.js';
+
 import type { Coords } from '../../../../@codemirror__view/internals/Coords.d.ts';
 import type { GraphColor } from './GraphColor.d.ts';
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
@@ -71,10 +72,10 @@ export interface GraphRenderer {
   links: GraphLink[];
 
   /** Mouse x coordinate in the graph view. */
-  mouseX: number | null;
+  mouseX: null | number;
 
   /** Mouse y coordinate in the graph view. */
-  mouseY: number | null;
+  mouseY: null | number;
 
   /** Record of the nodes currently rendered, with `GraphNode.id` used as key. */
   nodeLookup: Record<string, GraphNode>;

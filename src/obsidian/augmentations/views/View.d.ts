@@ -71,7 +71,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.5.7
      */
-    scope: Scope | null;
+    scope: null | Scope;
 
     /**
      * Closes the view.

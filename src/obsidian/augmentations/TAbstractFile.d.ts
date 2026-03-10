@@ -31,7 +31,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.7
      */
-    parent: TFolder | null;
+    parent: null | TFolder;
 
     /**
      * The path of the file.

@@ -1,4 +1,5 @@
 import type { PaneType } from 'obsidian';
+
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { WebviewerDBStore } from './WebviewerDBStore.d.ts';
 import type { WebviewerOpenUrlEventDetail } from './WebviewerOpenUrlEventDetail.d.ts';
@@ -43,7 +44,7 @@ export interface WebviewerPluginInstance extends InternalPluginInstance<Webviewe
    * @param newLeaf - The pane type or whether to open in a new leaf.
    * @param active - Whether to make the new leaf active.
    */
-  openUrl(url: string, newLeaf?: PaneType | boolean, active?: boolean): void;
+  openUrl(url: string, newLeaf?: boolean | PaneType, active?: boolean): void;
 
   /**
    * Open a URL in the system default browser.

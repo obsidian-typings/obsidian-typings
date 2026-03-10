@@ -1,5 +1,6 @@
 import type { SearchQuery } from '@codemirror/search';
 import type { EditorPosition } from 'obsidian';
+
 import type { AddOverlayOptions } from './AddOverlayOptions.d.ts';
 import type { Bookmark } from './Bookmark.d.ts';
 import type { Bracket } from './Bracket.d.ts';
@@ -44,7 +45,7 @@ export interface CodeMirrorEditor {
    * @param mode - The coordinate system to use.
    * @returns The pixel coordinates of the position.
    */
-  charCoords(pos: EditorPosition, mode: 'local' | 'page' | 'window' | 'div'): Coords;
+  charCoords(pos: EditorPosition, mode: 'div' | 'local' | 'page' | 'window'): Coords;
 
   /**
    * Clip a position to be within the document bounds.
@@ -61,7 +62,7 @@ export interface CodeMirrorEditor {
    * @param mode - The coordinate system of the input coordinates.
    * @returns The editor position at the given coordinates.
    */
-  coordsChar(coords: Coords, mode: 'local' | 'page' | 'window' | 'div'): EditorPosition;
+  coordsChar(coords: Coords, mode: 'div' | 'local' | 'page' | 'window'): EditorPosition;
 
   /**
    * Get the default height of a line of text in pixels.
@@ -129,7 +130,7 @@ export interface CodeMirrorEditor {
    * @param type - Which end of the selection to return.
    * @returns The cursor position.
    */
-  getCursor(type?: 'head' | 'anchor' | 'start' | 'end'): EditorPosition;
+  getCursor(type?: 'anchor' | 'end' | 'head' | 'start'): EditorPosition;
 
   /**
    * Get the editor's input field element.
@@ -167,7 +168,7 @@ export interface CodeMirrorEditor {
    * @param handle - The line handle to get the number for.
    * @returns The line number, or `null` if the handle is invalid.
    */
-  getLineNumber(handle: LineHandle): number | null;
+  getLineNumber(handle: LineHandle): null | number;
 
   /**
    * Get the primary selection as anchor and head positions.

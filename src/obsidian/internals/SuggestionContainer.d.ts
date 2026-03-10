@@ -72,7 +72,7 @@ export interface SuggestionContainer<T> {
    *
    * @returns The selected suggestion data, or `null`.
    */
-  getSelectedValue(): SearchResult | null;
+  getSelectedValue(): null | SearchResult;
 
   /**
    * Move selected item to next suggestion.

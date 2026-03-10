@@ -2,6 +2,7 @@ import type {
   ItemView,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { WebviewerPluginInstance } from './WebviewerPluginInstance.d.ts';
 

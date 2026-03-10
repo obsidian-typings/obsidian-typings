@@ -15,7 +15,7 @@ declare global {
      * @official
      */
     attr?: {
-      [key: string]: string | number | boolean | null;
+      [key: string]: boolean | null | number | string;
     };
 
     /**

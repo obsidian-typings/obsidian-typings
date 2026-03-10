@@ -1,6 +1,7 @@
 import {
   Tasks
 } from 'obsidian';
+
 import type { ConstructorBase } from '../../../internals/constructors/ConstructorBase.d.ts';
 
 /**

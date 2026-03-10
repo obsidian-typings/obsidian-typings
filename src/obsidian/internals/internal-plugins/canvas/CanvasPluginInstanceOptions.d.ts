@@ -17,7 +17,7 @@ export interface CanvasPluginInstanceOptions {
   newFileFolderPath?: string;
 
   /** Where to create new files: vault root, current folder, or a specified folder. */
-  newFileLocation?: 'root' | 'current' | 'folder';
+  newFileLocation?: 'current' | 'folder' | 'root';
 
   /** Whether nodes snap to the grid when moved. */
   snapToGrid?: boolean;

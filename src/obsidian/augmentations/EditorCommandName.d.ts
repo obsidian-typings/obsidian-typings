@@ -7,21 +7,21 @@ declare module 'obsidian' {
    * @deprecated - Added only for typing purposes. Use {@link EditorCommandName} instead.
    */
   type EditorCommandName__ =
-    | 'goUp'
+    | 'deleteLine'
+    | 'foldAll'
     | 'goDown'
+    | 'goEnd'
     | 'goLeft'
     | 'goRight'
     | 'goStart'
-    | 'goEnd'
+    | 'goUp'
     | 'goWordLeft'
     | 'goWordRight'
-    | 'indentMore'
     | 'indentLess'
+    | 'indentMore'
     | 'newlineAndIndent'
-    | 'swapLineUp'
     | 'swapLineDown'
-    | 'deleteLine'
+    | 'swapLineUp'
     | 'toggleFold'
-    | 'foldAll'
     | 'unfoldAll';
 }

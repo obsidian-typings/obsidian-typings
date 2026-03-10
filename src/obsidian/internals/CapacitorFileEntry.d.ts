@@ -10,7 +10,7 @@ export interface CapacitorFileEntry extends Partial<FileStats> {
   name: string;
 
   /** Whether this entry is a file or directory. */
-  type: 'file' | 'directory';
+  type: 'directory' | 'file';
 
   /** URI of the file or directory. */
   uri: string;

@@ -1,4 +1,5 @@
 import type { EditorView } from '@codemirror/view';
+
 import type { Coords } from '../../@codemirror__view/internals/Coords.d.ts';
 import type { getEditorConstructor } from '../implementations/constructors/augmentations/getEditorConstructor.d.ts';
 import type { ClickableToken } from '../internals/ClickableToken.d.ts';
@@ -33,7 +34,7 @@ declare module 'obsidian' {
      *
      * @unofficial
      */
-    editorComponent: undefined | MarkdownScrollableEditView;
+    editorComponent: MarkdownScrollableEditView | undefined;
 
     /**
      * Currently active CM instance.
@@ -181,7 +182,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link getCursor} instead.
      * @since 0.11.11
      */
-    getCursor__(string?: 'from' | 'to' | 'head' | 'anchor'): EditorPosition;
+    getCursor__(string?: 'anchor' | 'from' | 'head' | 'to'): EditorPosition;
 
     /**
      * Get the editor instance.
@@ -453,8 +454,8 @@ declare module 'obsidian' {
      * @since 0.13.26
      */
     processLines<T>(
-      read: (line: number, lineText: string) => T | null,
-      write: (line: number, lineText: string, value: T | null) => EditorChange | void,
+      read: (line: number, lineText: string) => null | T,
+      write: (line: number, lineText: string, value: null | T) => EditorChange | void,
       ignoreEmpty?: boolean
     ): void;
 
@@ -546,7 +547,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link scrollTo} instead.
      * @since 0.11.11
      */
-    scrollTo__(x?: number | null, y?: number | null): void;
+    scrollTo__(x?: null | number, y?: null | number): void;
 
     /**
      * Adds a search cursor to the editor.
@@ -670,7 +671,7 @@ declare module 'obsidian' {
      * @unofficial
      */
     toggleMarkdownFormatting(
-      syntax: 'bold' | 'italic' | 'strikethrough' | 'highlight' | 'code' | 'math' | 'comment'
+      syntax: 'bold' | 'code' | 'comment' | 'highlight' | 'italic' | 'math' | 'strikethrough'
     ): void;
 
     /**

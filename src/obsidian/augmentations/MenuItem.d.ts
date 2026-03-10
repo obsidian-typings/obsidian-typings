@@ -95,7 +95,7 @@ declare module 'obsidian' {
      * @param e - Mouse or keyboard event.
      * @unofficial
      */
-    handleEvent(e: MouseEvent | KeyboardEvent): void;
+    handleEvent(e: KeyboardEvent | MouseEvent): void;
 
     /**
      * Set the callback function to be called when the menu item is clicked.
@@ -110,7 +110,7 @@ declare module 'obsidian' {
      * ```
      * @official
      */
-    onClick(callback: (evt: MouseEvent | KeyboardEvent) => unknown): this;
+    onClick(callback: (evt: KeyboardEvent | MouseEvent) => unknown): this;
 
     /**
      * Remove the icon element from the menu item.
@@ -222,7 +222,7 @@ declare module 'obsidian' {
      * ```
      * @official
      */
-    setTitle(title: string | DocumentFragment): this;
+    setTitle(title: DocumentFragment | string): this;
 
     /**
      * Add warning styling to the menu item.

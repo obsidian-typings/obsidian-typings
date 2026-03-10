@@ -3,6 +3,7 @@ import type {
   Debouncer,
   Events
 } from 'obsidian';
+
 import type {
   getInternalPluginsConstructor
 } from '../../implementations/constructors/internals/internal-plugins/getInternalPluginsConstructor.d.ts';

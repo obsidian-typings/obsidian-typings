@@ -27,7 +27,7 @@ declare module 'obsidian' {
      * The text input element this suggest is attached to.
      * @unofficial
      */
-    textInputEl: HTMLInputElement | HTMLDivElement;
+    textInputEl: HTMLDivElement | HTMLInputElement;
 
     /**
      * Automatically reposition the suggestion popover based on the input element.
@@ -46,7 +46,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(app: App, textInputEl: HTMLInputElement | HTMLDivElement): this;
+    constructor2__(app: App, textInputEl: HTMLDivElement | HTMLInputElement): this;
 
     /**
      * Gets the suggestions for the input element.
@@ -72,7 +72,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link getSuggestions} instead.
      * @since 1.5.7
      */
-    getSuggestions__(query: string): T[] | Promise<T[]>;
+    getSuggestions__(query: string): Promise<T[]> | T[];
 
     /**
      * Gets the value from the input element.
@@ -109,7 +109,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.4.10
      */
-    onSelect(callback: (value: T, evt: MouseEvent | KeyboardEvent) => unknown): this;
+    onSelect(callback: (value: T, evt: KeyboardEvent | MouseEvent) => unknown): this;
 
     /**
      * Callback for selecting a suggestion.
@@ -119,7 +119,7 @@ declare module 'obsidian' {
      * @returns The result of the callback.
      * @unofficial
      */
-    selectCb?(value: T, evt: MouseEvent | KeyboardEvent): unknown;
+    selectCb?(value: T, evt: KeyboardEvent | MouseEvent): unknown;
 
     /**
      * Select a suggestion.
@@ -133,7 +133,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.6.6
      */
-    selectSuggestion(value: T, evt: MouseEvent | KeyboardEvent): void;
+    selectSuggestion(value: T, evt: KeyboardEvent | MouseEvent): void;
 
     /**
      * Sets the value into the input element.

@@ -53,6 +53,6 @@ export type ConfigItem =
   | 'types'
   | 'uriCallbacks'
   | 'useMarkdownLinks'
-  | 'useTab'
   | 'userIgnoreFilters'
+  | 'useTab'
   | 'vimMode';

@@ -1,4 +1,5 @@
 import type { Menu } from 'obsidian';
+
 import type { MultiselectOptionContextMenuContext } from './MultiselectOptionContextMenuContext.d.ts';
 
 /**
@@ -29,7 +30,7 @@ export interface Multiselect {
    * @param value - the value of the element.
    * @returns the created element or `null` if the value is not valid.
    */
-  _createElement(value: string): string | null;
+  _createElement(value: string): null | string;
 
   /**
    * Create a new input element for the multiselect.
@@ -191,7 +192,7 @@ export interface Multiselect {
    * @param values - the values to set.
    * @returns the multiselect.
    */
-  setValues(values: string[] | null): this;
+  setValues(values: null | string[]): this;
 
   /** Trigger the change event of the multiselect. */
   triggerChange(): void;

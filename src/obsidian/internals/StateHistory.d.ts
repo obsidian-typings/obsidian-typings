@@ -1,4 +1,5 @@
 import type { ViewState } from 'obsidian';
+
 import type { StateHistoryEphemeralState } from './StateHistoryEphemeralState.d.ts';
 import type { StateHistoryLeafHistory } from './StateHistoryLeafHistory.d.ts';
 

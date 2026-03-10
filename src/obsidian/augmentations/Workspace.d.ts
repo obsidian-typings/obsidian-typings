@@ -1,5 +1,6 @@
 import type { Extension } from '@codemirror/state';
 import type { Constructor } from 'obsidian';
+
 import type {
   getWorkspaceConstructor
 } from '../implementations/constructors/augmentations/getWorkspaceConstructor.d.ts';
@@ -57,7 +58,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.7
      */
-    activeLeaf: WorkspaceLeaf | null;
+    activeLeaf: null | WorkspaceLeaf;
 
     /**
      * Currently active tab group.
@@ -160,7 +161,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.7
      */
-    leftSplit: WorkspaceSidedock | WorkspaceMobileDrawer;
+    leftSplit: WorkspaceMobileDrawer | WorkspaceSidedock;
 
     /**
      * Array of renderCallbacks
@@ -224,7 +225,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.7
      */
-    rightSplit: WorkspaceSidedock | WorkspaceMobileDrawer;
+    rightSplit: WorkspaceMobileDrawer | WorkspaceSidedock;
 
     /**
      * The root split of the workspace.
@@ -377,7 +378,7 @@ declare module 'obsidian' {
      */
     duplicateLeaf(
       leaf: WorkspaceLeaf,
-      leafType: PaneType | boolean,
+      leafType: boolean | PaneType,
       direction?: SplitDirection
     ): Promise<WorkspaceLeaf>;
 
@@ -408,7 +409,7 @@ declare module 'obsidian' {
      * @returns The active file or `null` if no file is active.
      * @official
      */
-    getActiveFile(): TFile | null;
+    getActiveFile(): null | TFile;
 
     /**
      * Get active file view if exists.
@@ -424,7 +425,7 @@ declare module 'obsidian' {
      * @deprecated - Use {@link getActiveViewOfType} instead
      * @unofficial
      */
-    getActiveLeafOfViewType<T extends View>(type: Constructor<T>): T | null;
+    getActiveLeafOfViewType<T extends View>(type: Constructor<T>): null | T;
 
     /**
      * Get the currently active view of a given type.
@@ -434,7 +435,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.16
      */
-    getActiveViewOfType<T extends View>(type: Constructor<T>): T | null;
+    getActiveViewOfType<T extends View>(type: Constructor<T>): null | T;
 
     /**
      * Get adjacent leaf in specified direction.
@@ -447,8 +448,8 @@ declare module 'obsidian' {
      */
     getAdjacentLeafInDirection(
       leaf: WorkspaceLeaf,
-      direction: 'top' | 'bottom' | 'left' | 'right'
-    ): WorkspaceLeaf | null;
+      direction: 'bottom' | 'left' | 'right' | 'top'
+    ): null | WorkspaceLeaf;
 
     /**
      * Get the direction where the leaf should be dropped on dragevent
@@ -465,7 +466,7 @@ declare module 'obsidian' {
       rect: DOMRect,
       directions: ['left', 'right'],
       leaf: WorkspaceLeaf
-    ): 'left' | 'right' | 'top' | 'bottom' | 'center';
+    ): 'bottom' | 'center' | 'left' | 'right' | 'top';
 
     /**
      * Get the leaf where the leaf should be dropped on dragevent.
@@ -474,7 +475,7 @@ declare module 'obsidian' {
      * @returns The leaf at the drop location or `null`.
      * @unofficial
      */
-    getDropLocation(e: DragEvent): WorkspaceLeaf | null;
+    getDropLocation(e: DragEvent): null | WorkspaceLeaf;
 
     /**
      * Get the workspace split for the currently focused container.
@@ -539,7 +540,7 @@ declare module 'obsidian' {
      * @returns The leaf that was created.
      * @official
      */
-    getLeaf(newLeaf?: PaneType | boolean): WorkspaceLeaf;
+    getLeaf(newLeaf?: boolean | PaneType): WorkspaceLeaf;
 
     /**
      * Retrieve a leaf by its id.
@@ -549,7 +550,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.5.1
      */
-    getLeafById(id: string): WorkspaceLeaf | null;
+    getLeafById(id: string): null | WorkspaceLeaf;
 
     /**
      * Get all leaves of a given type.
@@ -580,7 +581,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.7
      */
-    getLeftLeaf(split: boolean): WorkspaceLeaf | null;
+    getLeftLeaf(split: boolean): null | WorkspaceLeaf;
 
     /**
      * Get the most recently active leaf in a given workspace root. Useful for interacting with the leaf in the root split while a sidebar leaf might be active.
@@ -590,7 +591,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.15.4
      */
-    getMostRecentLeaf(root?: WorkspaceParent): WorkspaceLeaf | null;
+    getMostRecentLeaf(root?: WorkspaceParent): null | WorkspaceLeaf;
 
     /**
      * Get n last opened files of type (defaults to 10).
@@ -609,7 +610,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.7
      */
-    getRightLeaf(split: boolean): WorkspaceLeaf | null;
+    getRightLeaf(split: boolean): null | WorkspaceLeaf;
 
     /**
      * Get leaf in the side ribbon/dock and split if necessary.
@@ -619,7 +620,7 @@ declare module 'obsidian' {
      * @returns The side leaf.
      * @unofficial
      */
-    getSideLeaf(sideRibbon: WorkspaceSidedock | WorkspaceMobileDrawer, split: boolean): WorkspaceLeaf;
+    getSideLeaf(sideRibbon: WorkspaceMobileDrawer | WorkspaceSidedock, split: boolean): WorkspaceLeaf;
 
     /**
      * Get the unpinned leaf.
@@ -769,7 +770,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.10.9
      */
-    on(name: 'active-leaf-change', callback: (leaf: WorkspaceLeaf | null) => unknown, ctx?: unknown): EventRef;
+    on(name: 'active-leaf-change', callback: (leaf: null | WorkspaceLeaf) => unknown, ctx?: unknown): EventRef;
 
     /**
      * Triggers when the browser history is updated.
@@ -855,7 +856,7 @@ declare module 'obsidian' {
      */
     on(
       name: 'editor-change',
-      callback: (editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
+      callback: (editor: Editor, info: MarkdownFileInfo | MarkdownView) => unknown,
       ctx?: unknown
     ): EventRef;
 
@@ -878,7 +879,7 @@ declare module 'obsidian' {
      */
     on(
       name: 'editor-drop',
-      callback: (evt: DragEvent, editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
+      callback: (evt: DragEvent, editor: Editor, info: MarkdownFileInfo | MarkdownView) => unknown,
       ctx?: unknown
     ): EventRef;
 
@@ -899,7 +900,7 @@ declare module 'obsidian' {
      */
     on(
       name: 'editor-menu',
-      callback: (menu: Menu, editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
+      callback: (menu: Menu, editor: Editor, info: MarkdownFileInfo | MarkdownView) => unknown,
       ctx?: unknown
     ): EventRef;
 
@@ -922,7 +923,7 @@ declare module 'obsidian' {
      */
     on(
       name: 'editor-paste',
-      callback: (evt: ClipboardEvent, editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
+      callback: (evt: ClipboardEvent, editor: Editor, info: MarkdownFileInfo | MarkdownView) => unknown,
       ctx?: unknown
     ): EventRef;
 
@@ -937,7 +938,7 @@ declare module 'obsidian' {
      */
     on(
       name: 'editor-selection-change',
-      callback: (editor: Editor, info: MarkdownView | MarkdownFileInfo) => unknown,
+      callback: (editor: Editor, info: MarkdownFileInfo | MarkdownView) => unknown,
       ctx?: unknown
     ): EventRef;
 
@@ -978,7 +979,7 @@ declare module 'obsidian' {
      * ```
      * @official
      */
-    on(name: 'file-open', callback: (file: TFile | null) => unknown, ctx?: unknown): EventRef;
+    on(name: 'file-open', callback: (file: null | TFile) => unknown, ctx?: unknown): EventRef;
 
     /**
      * Triggered when the user opens the context menu with multiple files selected in the File Explorer.
@@ -1308,7 +1309,7 @@ declare module 'obsidian' {
     openLinkText(
       linktext: string,
       sourcePath: string,
-      newLeaf?: PaneType | boolean,
+      newLeaf?: boolean | PaneType,
       openViewState?: OpenViewState
     ): Promise<void>;
 
@@ -1359,7 +1360,7 @@ declare module 'obsidian' {
      * @returns The target tab group or `null`.
      * @unofficial
      */
-    recursiveGetTarget(e: DragEvent, leaf: WorkspaceLeaf): WorkspaceTabs | null;
+    recursiveGetTarget(e: DragEvent, leaf: WorkspaceLeaf): null | WorkspaceTabs;
 
     /**
      * Register a CodeMirror editor extension.

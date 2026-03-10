@@ -2,6 +2,7 @@ import type {
   Command,
   FuzzySuggestModal
 } from 'obsidian';
+
 import type { CommandPalettePluginInstance } from './CommandPalettePluginInstance.d.ts';
 
 /**

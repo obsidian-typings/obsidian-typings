@@ -1,5 +1,6 @@
-import { loadPrism as loadPrismOriginal } from 'obsidian';
 import type { default as Prism } from 'prismjs';
+
+import { loadPrism as loadPrismOriginal } from 'obsidian';
 
 /**
  * Load Prism.js and return a promise to the global Prism object.

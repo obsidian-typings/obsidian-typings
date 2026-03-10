@@ -78,7 +78,7 @@ declare module 'obsidian' {
      * Queue of files pending link resolution.
      * @unofficial
      */
-    linkResolverQueue: ItemQueue<TFile | null> | null;
+    linkResolverQueue: ItemQueue<null | TFile> | null;
 
     /**
      * Registered link updater strategies for different file types.
@@ -104,7 +104,7 @@ declare module 'obsidian' {
      * Promise that resolves when the preload is complete, or `null` if not started.
      * @unofficial
      */
-    preloadPromise: Promise<void> | null;
+    preloadPromise: null | Promise<void>;
 
     /**
      * Contains all resolved links. This object maps each source file's path to an object of destination file paths with the link count.
@@ -145,7 +145,7 @@ declare module 'obsidian' {
      * Compiled regular expressions for user-defined ignore filters.
      * @unofficial
      */
-    userIgnoreFilters: RegExp[] | null;
+    userIgnoreFilters: null | RegExp[];
 
     /**
      * Raw string representation of user-defined ignore filters.
@@ -335,7 +335,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.12.5
      */
-    getFirstLinkpathDest(linkpath: string, sourcePath: string): TFile | null;
+    getFirstLinkpathDest(linkpath: string, sourcePath: string): null | TFile;
 
     /**
      * Get property values for frontmatter property key.
@@ -609,7 +609,7 @@ declare module 'obsidian' {
      * @param file - The file to queue for link resolution, or `null`.
      * @unofficial
      */
-    queueFileForLinkResolution(file: TFile | null): void;
+    queueFileForLinkResolution(file: null | TFile): void;
 
     /**
      * Check editor for unresolved links and mark these as unresolved

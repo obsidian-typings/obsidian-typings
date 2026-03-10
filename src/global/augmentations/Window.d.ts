@@ -20,6 +20,7 @@ import type { default as PIXI } from 'pixi.js';
 import type { default as Prism } from 'prismjs';
 import type { default as scrypt } from 'scrypt-js';
 import type { default as TurndownService } from 'turndown';
+
 import type { CodeMirrorAdapterEx } from '../../@codemirror__view/internals/CodeMirrorAdapterEx.d.ts';
 import type { VimApi } from '../../@codemirror__view/internals/vim/VimApi.d.ts';
 import type { CapacitorAdapterFs } from '../../obsidian/internals/CapacitorAdapterFs.d.ts';
@@ -431,7 +432,7 @@ declare global {
      */
     createSvg<K extends keyof SVGElementTagNameMap>(
       tag: K,
-      o?: SvgElementInfo | string,
+      o?: string | SvgElementInfo,
       callback?: (el: SVGElementTagNameMap[K]) => void
     ): SVGElementTagNameMap[K];
 

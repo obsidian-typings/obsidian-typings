@@ -1,5 +1,6 @@
 import type { Extension } from '@codemirror/state';
 import type { ViewUpdate } from '@codemirror/view';
+
 import type { MarkdownScrollableEditView } from './MarkdownScrollableEditView.d.ts';
 
 /**
@@ -11,12 +12,12 @@ export interface IFramedMarkdownEditor extends MarkdownScrollableEditView {
   /**
    * Function that cleans up the iframe and listeners.
    */
-  cleanup: null | (() => void);
+  cleanup: (() => void) | null;
 
   /**
    * Element where the editor is embedded into.
    */
-  iframeEl: null | HTMLIFrameElement;
+  iframeEl: HTMLIFrameElement | null;
 
   /**
    * Executes cleanup function if exists.

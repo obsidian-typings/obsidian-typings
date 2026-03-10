@@ -3,6 +3,7 @@ import type {
   EditorSuggest,
   TFile
 } from 'obsidian';
+
 import type {
   getEditorSuggestsConstructor
 } from '../implementations/constructors/internals/getEditorSuggestsConstructor.d.ts';
@@ -17,7 +18,7 @@ export interface EditorSuggests {
   /**
    * Currently active and rendered editor suggestion popup.
    */
-  currentSuggest: null | EditorSuggest<unknown>;
+  currentSuggest: EditorSuggest<unknown> | null;
 
   /**
    * Registered editor suggestions.

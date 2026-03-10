@@ -32,7 +32,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.10.0
      */
-    get(key: string): Value | null;
+    get(key: string): null | Value;
 
     /**
      * Returns a boolean indicating whether this ObjectValue is empty.

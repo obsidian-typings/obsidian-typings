@@ -8,7 +8,7 @@ export interface NoteComposerPluginOptions {
   askBeforeMerging?: boolean;
 
   /** What to leave in place of extracted content: a link, an embed, or nothing. */
-  replacementText?: 'link' | 'embed' | 'none';
+  replacementText?: 'embed' | 'link' | 'none';
 
   /** Path to the template file used when extracting content into a new note. */
   template?: string;

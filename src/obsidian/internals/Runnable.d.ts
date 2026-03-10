@@ -8,13 +8,13 @@ export interface Runnable {
   cancelled: boolean;
 
   /** Callback invoked when the runnable is cancelled. */
-  onCancel: null | (() => void);
+  onCancel: (() => void) | null;
 
   /** Callback invoked when the runnable starts. */
-  onStart: null | (() => void);
+  onStart: (() => void) | null;
 
   /** Callback invoked when the runnable stops. */
-  onStop: null | (() => void);
+  onStop: (() => void) | null;
 
   /** Whether the runnable is currently running. */
   running: boolean;

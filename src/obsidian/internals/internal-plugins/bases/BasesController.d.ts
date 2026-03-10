@@ -6,6 +6,7 @@ import type {
   TFile,
   View
 } from 'obsidian';
+
 import type { PromisedQueue } from '../../PromisedQueue.d.ts';
 import type { BasesContext } from './BasesContext.d.ts';
 import type { BasesFilter } from './BasesFilter.d.ts';
@@ -40,12 +41,12 @@ export interface BasesController extends Component {
   /**
    * The current file.
    */
-  currentFile: TFile | null;
+  currentFile: null | TFile;
 
   /**
    * The current error.
    */
-  error: string | null;
+  error: null | string;
 
   /**
    * The error element.
@@ -208,14 +209,14 @@ export interface BasesController extends Component {
    * @param viewType - The view type to search for.
    * @returns The active view of the given type, or `null`.
    */
-  getActiveBasesViewOfType(viewType: string): View | null;
+  getActiveBasesViewOfType(viewType: string): null | View;
 
   /**
    * Gets the current file.
    *
    * @returns The current file, or `null`.
    */
-  getCurrentFile(): TFile | null;
+  getCurrentFile(): null | TFile;
 
   /**
    * Gets the editor language support.

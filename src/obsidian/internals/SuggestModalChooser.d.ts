@@ -26,14 +26,14 @@ export interface SuggestModalChooser<T, TModal> {
   suggestions: HTMLDivElement[];
 
   /** Current suggestion values, or `null` if none. */
-  values: T[] | null;
+  values: null | T[];
 
   /**
    * Display a message in the suggestion list.
    *
    * @param text - Message text or document fragment to display.
    */
-  addMessage(text: string | DocumentFragment): void;
+  addMessage(text: DocumentFragment | string): void;
 
   /**
    * Add a suggestion value to the list.
@@ -48,7 +48,7 @@ export interface SuggestModalChooser<T, TModal> {
    * @param index - Index of the item to select.
    * @param evt - The triggering event.
    */
-  forceSetSelectedItem(index: number, evt: MouseEvent | KeyboardEvent): void;
+  forceSetSelectedItem(index: number, evt: KeyboardEvent | MouseEvent): void;
 
   /**
    * Move selection to the next suggestion.
@@ -104,19 +104,19 @@ export interface SuggestModalChooser<T, TModal> {
    * @param index - Index of the item to select.
    * @param evt - The triggering event.
    */
-  setSelectedItem(index: number, evt: MouseEvent | KeyboardEvent): void;
+  setSelectedItem(index: number, evt: KeyboardEvent | MouseEvent): void;
 
   /**
    * Replace all suggestions with new values.
    *
    * @param values - Suggestion values to display, or `null`.
    */
-  setSuggestions(values: T[] | null): void;
+  setSuggestions(values: null | T[]): void;
 
   /**
    * Accept the currently selected suggestion.
    *
    * @param evt - The triggering event.
    */
-  useSelectedItem(evt: MouseEvent | KeyboardEvent): void;
+  useSelectedItem(evt: KeyboardEvent | MouseEvent): void;
 }

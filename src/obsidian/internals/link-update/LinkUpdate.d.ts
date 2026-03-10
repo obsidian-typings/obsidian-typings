@@ -2,6 +2,7 @@ import type {
   App,
   TFile
 } from 'obsidian';
+
 import type { PositionedReference } from '../PositionedReference.d.ts';
 
 /**

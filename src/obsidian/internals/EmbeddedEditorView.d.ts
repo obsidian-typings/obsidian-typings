@@ -6,6 +6,7 @@ import type {
   MarkdownPreviewView,
   TFile
 } from 'obsidian';
+
 import type { IFramedMarkdownEditor } from './IFramedMarkdownEditor.d.ts';
 
 /**
@@ -55,7 +56,7 @@ export interface EmbeddedEditorView extends Component {
   /**
    * Hover element container.
    */
-  hoverPopover: null | HoverPopover;
+  hoverPopover: HoverPopover | null;
 
   /**
    * Element containing the preview for the embedded markdown.
@@ -101,7 +102,7 @@ export interface EmbeddedEditorView extends Component {
    *
    * @returns The current view mode.
    */
-  getMode(): 'source' | 'preview';
+  getMode(): 'preview' | 'source';
 
   /**
    * On load of editor, show preview.

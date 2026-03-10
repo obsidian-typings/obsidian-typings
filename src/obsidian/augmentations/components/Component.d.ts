@@ -122,7 +122,7 @@ declare module 'obsidian' {
       el: Document,
       type: K,
       callback: (this: HTMLElement, ev: DocumentEventMap[K]) => unknown,
-      options?: boolean | AddEventListenerOptions
+      options?: AddEventListenerOptions | boolean
     ): void;
 
     /**
@@ -145,7 +145,7 @@ declare module 'obsidian' {
       el: HTMLElement,
       type: K,
       callback: (this: HTMLElement, ev: HTMLElementEventMap[K]) => unknown,
-      options?: boolean | AddEventListenerOptions
+      options?: AddEventListenerOptions | boolean
     ): void;
 
     /**
@@ -168,7 +168,7 @@ declare module 'obsidian' {
       el: Window,
       type: K,
       callback: (this: HTMLElement, ev: WindowEventMap[K]) => unknown,
-      options?: boolean | AddEventListenerOptions
+      options?: AddEventListenerOptions | boolean
     ): void;
 
     /**

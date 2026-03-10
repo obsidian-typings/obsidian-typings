@@ -296,7 +296,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.7
      */
-    setDesc(desc: string | DocumentFragment): this;
+    setDesc(desc: DocumentFragment | string): this;
 
     /**
      * Disable the setting.
@@ -341,7 +341,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.12.16
      */
-    setName(name: string | DocumentFragment): this;
+    setName(name: DocumentFragment | string): this;
 
     /**
      * Hide the info section of the setting.

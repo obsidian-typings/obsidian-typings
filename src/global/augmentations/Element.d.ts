@@ -96,7 +96,7 @@ declare global {
      * ```
      * @official
      */
-    getAttr(qualifiedName: string): string | null;
+    getAttr(qualifiedName: string): null | string;
 
     /**
      * Gets the value of a CSS property of the element.
@@ -224,7 +224,7 @@ declare global {
      * ```
      * @official
      */
-    setAttr(qualifiedName: string, value: string | number | boolean | null): void;
+    setAttr(qualifiedName: string, value: boolean | null | number | string): void;
 
     /**
      * Sets multiple attributes on the element.
@@ -243,7 +243,7 @@ declare global {
      * @official
      */
     setAttrs(obj: {
-      [key: string]: string | number | boolean | null;
+      [key: string]: boolean | null | number | string;
     }): void;
 
     /**
@@ -262,7 +262,7 @@ declare global {
      * ```
      * @official
      */
-    setText(val: string | DocumentFragment): void;
+    setText(val: DocumentFragment | string): void;
 
     /**
      * Toggles a class on the element.

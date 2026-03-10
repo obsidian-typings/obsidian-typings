@@ -3,6 +3,7 @@ import type {
   Text,
   TextStyle
 } from 'pixi.js';
+
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 import type { GraphLink } from './GraphLink.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
@@ -30,10 +31,10 @@ export interface GraphNode {
   forward: Record<string, GraphLink>;
 
   /** Forced x position when the node is dragged. */
-  fx: number | null;
+  fx: null | number;
 
   /** Forced y position when the node is dragged. */
-  fy: number | null;
+  fy: null | number;
 
   /** Colored circle added if the node is highlighted, child of `GraphNode.circle`. */
   highlight: Graphics | null;
@@ -54,7 +55,7 @@ export interface GraphNode {
   reverse: Record<string, GraphLink>;
 
   /** PixiJS element for the name, child of `GraphNode.circle`. */
-  text: Text | null;
+  text: null | Text;
 
   /** Type of the node, can be of value `"tag"`, `"unresolved"`, `"attachment"`, or an empty string for markdown nodes. */
   type: string;

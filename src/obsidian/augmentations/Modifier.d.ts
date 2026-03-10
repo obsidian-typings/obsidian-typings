@@ -8,5 +8,5 @@ declare module 'obsidian' {
    *
    * @deprecated - Added only for typing purposes. Use {@link Modifier} instead.
    */
-  type Modifier__ = 'Mod' | 'Ctrl' | 'Meta' | 'Shift' | 'Alt';
+  type Modifier__ = 'Alt' | 'Ctrl' | 'Meta' | 'Mod' | 'Shift';
 }

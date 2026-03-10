@@ -1,8 +1,10 @@
 import type { IpcRenderer } from 'electron';
-import * as fs from 'node:fs';
 import type { Stats } from 'node:fs';
+
+import * as fs from 'node:fs';
 import * as fsPromises from 'node:fs/promises';
 import * as path from 'node:path';
+
 import type {
   getFileSystemAdapterConstructor
 } from '../implementations/constructors/augmentations/getFileSystemAdapterConstructor.d.ts';
@@ -50,7 +52,7 @@ declare module 'obsidian' {
      *
      * @unofficial
      */
-    killLastAction: null | ((e: Error) => void);
+    killLastAction: ((e: Error) => void) | null;
 
     /**
      * Reference to node path module.
@@ -404,7 +406,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.12.2
      */
-    stat(normalizedPath: string): Promise<Stat | null>;
+    stat(normalizedPath: string): Promise<null | Stat>;
 
     /**
      * Remove listener on specific path.

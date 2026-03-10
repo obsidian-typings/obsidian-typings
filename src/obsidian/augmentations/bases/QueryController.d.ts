@@ -25,6 +25,6 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(app: App, plugin: unknown, viewHeaderEl: HTMLElement, currentFile?: TFile | null): this;
+    constructor2__(app: App, plugin: unknown, viewHeaderEl: HTMLElement, currentFile?: null | TFile): this;
   }
 }

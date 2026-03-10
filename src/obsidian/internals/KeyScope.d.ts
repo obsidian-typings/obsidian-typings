@@ -9,12 +9,12 @@ export interface KeyScope {
   /**
    * Key to match.
    */
-  key: string | null;
+  key: null | string;
 
   /**
    * Modifiers to match.
    */
-  modifiers: string | null;
+  modifiers: null | string;
 
   /**
    * Scope where the key interceptor is registered.

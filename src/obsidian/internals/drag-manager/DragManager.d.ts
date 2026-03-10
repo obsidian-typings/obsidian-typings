@@ -4,6 +4,7 @@ import type {
   TFile,
   TFolder
 } from 'obsidian';
+
 import type {
   getDragManagerConstructor
 } from '../../implementations/constructors/internals/getDragManagerConstructor.d.ts';
@@ -180,7 +181,7 @@ export interface DragManager {
    *
    * @param action - Action label text, or `null` to clear.
    */
-  setAction(action: string | null): void;
+  setAction(action: null | string): void;
 
   /**
    * Show the drop zone overlay at the specified position.

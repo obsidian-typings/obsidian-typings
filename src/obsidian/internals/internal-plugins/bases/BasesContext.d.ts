@@ -3,6 +3,7 @@ import type {
   Component,
   TFile
 } from 'obsidian';
+
 import type { BasesFilter } from './BasesFilter.d.ts';
 import type { BasesFormula } from './BasesFormula.d.ts';
 import type { BasesLocal } from './BasesLocal.d.ts';
@@ -33,6 +34,6 @@ export interface BasesContext extends Component {
     app: App,
     filter: Record<string, BasesFilter>,
     formulas: Record<string, BasesFormula>,
-    file: TFile | null
+    file: null | TFile
   ): this;
 }

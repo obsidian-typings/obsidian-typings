@@ -2,6 +2,7 @@ import type {
   EmbedCache,
   Reference
 } from 'obsidian';
+
 import { isReferenceCache } from './isReferenceCache.ts';
 
 /**

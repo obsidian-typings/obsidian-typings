@@ -1,4 +1,5 @@
 import type { TAbstractFile } from 'obsidian';
+
 import type { TreeItem } from '../../tree/TreeItem.d.ts';
 import type { TreeNodeInfo } from '../../tree/TreeNodeInfo.d.ts';
 import type { FileExplorerView } from './FileExplorerView.d.ts';

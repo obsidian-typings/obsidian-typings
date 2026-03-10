@@ -1,4 +1,5 @@
 import type { EditableFileView } from 'obsidian';
+
 import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 
 /**

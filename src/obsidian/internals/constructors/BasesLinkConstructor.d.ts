@@ -1,4 +1,5 @@
 import type { App } from 'obsidian';
+
 import type { BasesLink } from '../internal-plugins/bases/BasesLink.d.ts';
 import type { ExtractConstructor } from './ExtractConstructor.d.ts';
 

@@ -14,7 +14,7 @@ export interface WebviewerOpenUrlEventDetail {
   /**
    * The new leaf.
    */
-  newLeaf?: PaneType | boolean;
+  newLeaf?: boolean | PaneType;
 
   /**
    * The URL.

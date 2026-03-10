@@ -6,6 +6,6 @@ declare module 'obsidian' {
    *
    * @since 1.12.2
    */
-  export interface CliData extends Record<string, string | 'true'> {
+  export interface CliData extends Record<string, 'true' | string> {
   }
 }

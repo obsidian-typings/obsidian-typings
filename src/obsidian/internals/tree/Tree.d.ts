@@ -3,6 +3,7 @@ import type {
   Scope,
   View
 } from 'obsidian';
+
 import type { InfinityScroll } from './InfinityScroll.d.ts';
 import type { TreeItem } from './TreeItem.d.ts';
 import type { TreeRoot } from './TreeRoot.d.ts';
@@ -18,7 +19,7 @@ export interface Tree<T extends TreeItem> {
   /**
    * Currently active item in tree view.
    */
-  activeDom: T | null;
+  activeDom: null | T;
 
   /**
    * Reference to App.
@@ -33,7 +34,7 @@ export interface Tree<T extends TreeItem> {
   /**
    * Currently focused item in tree view.
    */
-  focusedItem: T | null;
+  focusedItem: null | T;
 
   /**
    * ID of the view the tree is associated with.
@@ -75,7 +76,7 @@ export interface Tree<T extends TreeItem> {
    *
    * @param direction - The direction to move focus.
    */
-  changeFocusedItem(direction: 'forwards' | 'backwards'): void;
+  changeFocusedItem(direction: 'backwards' | 'forwards'): void;
 
   /**
    * Unselect all selected items in the tree view.

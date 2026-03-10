@@ -3,6 +3,7 @@ import type {
   SearchComponent,
   SearchResult
 } from 'obsidian';
+
 import type { PropertyPropertyWidgetComponentComboBoxItem } from './PropertyPropertyWidgetComponentComboBoxItem.d.ts';
 
 /**
@@ -36,7 +37,7 @@ export interface PropertyPropertyWidgetComponentComboBox
   searchComponent: SearchComponent;
 
   /** The current value of the combobox. */
-  value: PropertyPropertyWidgetComponentComboBoxItem | null;
+  value: null | PropertyPropertyWidgetComponentComboBoxItem;
 
   /**
    * Callback for `onClose`.

@@ -11,5 +11,5 @@ declare module 'obsidian' {
    * @since 1.10.0
    * @deprecated - Added only for typing purposes. Use {@link BasesPropertyType} instead.
    */
-  type BasesPropertyType__ = 'note' | 'formula' | 'file';
+  type BasesPropertyType__ = 'file' | 'formula' | 'note';
 }

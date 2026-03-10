@@ -3,6 +3,7 @@ import type {
   Debouncer,
   Events
 } from 'obsidian';
+
 import type {
   getMetadataTypeManagerConstructor
 } from '../../implementations/constructors/internals/getMetadataTypeManagerConstructor.d.ts';
@@ -74,7 +75,7 @@ export interface MetadataTypeManager extends Events {
    * @param property - Property name.
    * @returns The assigned widget type, or `null`.
    */
-  getAssignedWidget(property: string): PropertyWidgetType | null;
+  getAssignedWidget(property: string): null | PropertyWidgetType;
 
   /**
    * Get info for property.

@@ -63,7 +63,7 @@ export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
   /**
    * @todo Documentation incomplete.
    */
-  public get(key: string): T[] | null {
+  public get(key: string): null | T[] {
     return this.data.get(key) || null;
   }
 

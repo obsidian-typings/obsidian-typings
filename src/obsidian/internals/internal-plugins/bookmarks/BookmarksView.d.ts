@@ -3,6 +3,7 @@ import type {
   TFile,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { BookmarksPluginInstance } from './BookmarksPluginInstance.d.ts';
 
@@ -63,7 +64,7 @@ export interface BookmarksView extends ItemView {
    * @param t - The drag target information.
    * @returns The drag data, or `null`.
    */
-  dragSelectedBookmarks(e: unknown, t: unknown): unknown | null;
+  dragSelectedBookmarks(e: unknown, t: unknown): null | unknown;
 
   /**
    * Get the DOM element for a bookmark item.

@@ -9,7 +9,7 @@ export interface FileSuggestion {
   /**
    * The file.
    */
-  file: TFile | null;
+  file: null | TFile;
 
   /**
    * The path.

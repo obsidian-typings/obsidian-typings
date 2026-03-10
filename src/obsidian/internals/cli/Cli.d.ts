@@ -3,6 +3,7 @@ import type {
   CliFlag,
   TFile
 } from 'obsidian';
+
 import type { getCliConstructor } from '../../implementations/constructors/internals/getCliConstructor.d.ts';
 import type { CliHandlerEntry } from './CliHandlerEntry.d.ts';
 import type { CliTreeNode } from './CliTreeNode.d.ts';
@@ -67,7 +68,7 @@ export interface Cli {
    * @param format - Output format.
    * @returns The formatted table string.
    */
-  formatTable(headers: string[], rows: string[][], format: 'json' | 'csv' | 'tsv'): string;
+  formatTable(headers: string[], rows: string[][], format: 'csv' | 'json' | 'tsv'): string;
 
   /**
    * Initialize the CLI handler, registering the global `handleCli` function.
@@ -85,7 +86,7 @@ export interface Cli {
   registerHandler(
     id: string,
     description: string,
-    flags: Record<string, CliFlag> | null,
+    flags: null | Record<string, CliFlag>,
     handler: (...args: unknown[]) => unknown
   ): void;
 

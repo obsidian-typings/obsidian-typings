@@ -30,7 +30,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.11.4
      */
-    getSecret(id: string): string | null;
+    getSecret(id: string): null | string;
 
     /**
      * Lists all secrets in storage

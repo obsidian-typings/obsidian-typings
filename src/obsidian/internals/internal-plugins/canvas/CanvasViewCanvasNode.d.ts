@@ -2,6 +2,7 @@ import type {
   App,
   TFile
 } from 'obsidian';
+
 import type { WidgetEditorView } from '../../WidgetEditorView.d.ts';
 import type { BBox } from './BBox.d.ts';
 import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';

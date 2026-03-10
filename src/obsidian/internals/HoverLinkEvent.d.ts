@@ -1,4 +1,5 @@
 import type { HoverParent } from 'obsidian';
+
 import type { HoverLinkEventState } from './HoverLinkEventState.d.ts';
 
 /**
@@ -26,7 +27,7 @@ export interface HoverLinkEvent {
   /**
    * The source of the event.
    */
-  source: 'search' | 'editor' | 'preview' | 'properties' | 'graph' | 'file-explorer' | 'hover-link';
+  source: 'editor' | 'file-explorer' | 'graph' | 'hover-link' | 'preview' | 'properties' | 'search';
 
   /**
    * The source path.

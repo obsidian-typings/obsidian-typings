@@ -41,6 +41,6 @@ declare module 'obsidian' {
      * @official
      * @since 1.10.0
      */
-    getValue(propertyId: BasesPropertyId): Value | null;
+    getValue(propertyId: BasesPropertyId): null | Value;
   }
 }

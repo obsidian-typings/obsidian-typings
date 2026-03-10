@@ -2,6 +2,7 @@ import type {
   StateEffectType,
   StateField
 } from '@codemirror/state';
+
 import type { LanguageState } from '../internals/LanguageState.d.ts';
 
 export {};

@@ -3,6 +3,7 @@ import type {
   TextFileView,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { CanvasPluginInstance } from './CanvasPluginInstance.d.ts';
 import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
@@ -17,7 +18,7 @@ export interface CanvasView extends TextFileView {
   canvas: CanvasViewCanvas;
 
   /** Hover popover associated with this view, or `null` if none is active. */
-  hoverPopover: null | HoverPopover;
+  hoverPopover: HoverPopover | null;
 
   /** Reference to the canvas plugin instance. */
   plugin: CanvasPluginInstance;

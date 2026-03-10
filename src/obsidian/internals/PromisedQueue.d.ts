@@ -13,5 +13,5 @@ export interface PromisedQueue {
    * @param fn - The function to enqueue.
    * @returns A promise that resolves with the function's result.
    */
-  queue<T>(fn: () => T | Promise<T>): Promise<T>;
+  queue<T>(fn: () => Promise<T> | T): Promise<T>;
 }

@@ -3,6 +3,7 @@ import type {
   Graphics,
   Sprite
 } from 'pixi.js';
+
 import type { GraphNode } from './GraphNode.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
@@ -17,7 +18,7 @@ export interface GraphLink {
   arrow: Graphics | null;
 
   /** PixiJS element for the line. */
-  line: Sprite | null;
+  line: null | Sprite;
 
   /** Parent of `GraphLink.line`, child of `GraphRenderer.hanger`. */
   px: Container | null;

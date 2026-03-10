@@ -129,7 +129,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link selectSuggestion} instead.
      */
-    selectSuggestion__(value: T, evt: MouseEvent | KeyboardEvent): void;
+    selectSuggestion__(value: T, evt: KeyboardEvent | MouseEvent): void;
 
     /**
      * Set the element that triggers automatic destruction of the popover when removed.

@@ -1,6 +1,7 @@
 import { fromHtml } from 'hast-util-from-html';
 import { h } from 'hastscript';
 import { visit } from 'unist-util-visit';
+
 import { decorateHast } from './util.js';
 
 const acceptableCalloutTypes = {

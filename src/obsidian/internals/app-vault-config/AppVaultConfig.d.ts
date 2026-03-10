@@ -15,7 +15,7 @@ export interface AppVaultConfig {
   /**
    * Files & Links &gt; Automatically update internal links.
    */
-  alwaysUpdateLinks?: false | boolean;
+  alwaysUpdateLinks?: boolean | false;
 
   /**
    * Files & Links &gt; Attachment folder path.
@@ -25,17 +25,17 @@ export interface AppVaultConfig {
   /**
    * Editor &gt; Auto convert HTML.
    */
-  autoConvertHtml?: true | boolean;
+  autoConvertHtml?: boolean | true;
 
   /**
    * Editor &gt; Auto pair brackets.
    */
-  autoPairBrackets?: true | boolean;
+  autoPairBrackets?: boolean | true;
 
   /**
    * Editor &gt; Auto pair Markdown syntax.
    */
-  autoPairMarkdown?: true | boolean;
+  autoPairMarkdown?: boolean | true;
 
   /**
    * Appearance &gt; Font size.
@@ -45,17 +45,17 @@ export interface AppVaultConfig {
   /**
    * Appearance &gt; Quick font size adjustment.
    */
-  baseFontSizeAction?: true | boolean;
+  baseFontSizeAction?: boolean | true;
 
   /**
    * Community Plugins &gt; Browse &gt; Sort order.
    */
-  communityPluginSortOrder: 'download' | 'update' | 'release' | 'alphabetical';
+  communityPluginSortOrder: 'alphabetical' | 'download' | 'release' | 'update';
 
   /**
    * Themes &gt; Browse &gt; Sort order.
    */
-  communityThemeSortOrder: 'download' | 'update' | 'release' | 'alphabetical';
+  communityThemeSortOrder: 'alphabetical' | 'download' | 'release' | 'update';
 
   /**
    * Appearance &gt; Theme.
@@ -67,10 +67,10 @@ export interface AppVaultConfig {
   /**
    * Editor &gt; Default view for new tabs.
    */
-  defaultViewMode?: 'source' | 'preview';
+  defaultViewMode?: 'preview' | 'source';
 
   /** Whether Emacs-style keybindings are enabled. */
-  emacsyKeys?: true | boolean;
+  emacsyKeys?: boolean | true;
 
   /**
    * Appearance &gt; CSS snippets.
@@ -83,17 +83,17 @@ export interface AppVaultConfig {
   /**
    * Editor &gt; Always focus new tabs.
    */
-  focusNewTab?: true | boolean;
+  focusNewTab?: boolean | true;
 
   /**
    * Editor &gt; Fold heading.
    */
-  foldHeading?: true | boolean;
+  foldHeading?: boolean | true;
 
   /**
    * Editor &gt; Fold indent.
    */
-  foldIndent?: true | boolean;
+  foldIndent?: boolean | true;
 
   /**
    * Hotkeys.
@@ -110,10 +110,10 @@ export interface AppVaultConfig {
   /**
    * Editor &gt; Use legacy editor.
    */
-  legacyEditor?: false | boolean;
+  legacyEditor?: boolean | false;
 
   /** Whether live preview mode is enabled in the editor. */
-  livePreview?: true | boolean;
+  livePreview?: boolean | true;
 
   /**
    * Mobile &gt; Configure mobile Quick Action.
@@ -134,7 +134,7 @@ export interface AppVaultConfig {
   /**
    * Appearance &gt; Native menus.
    */
-  nativeMenus?: null | boolean;
+  nativeMenus?: boolean | null;
 
   /**
    * Files & Links &gt; Default location for new notes | 'folder' &gt; Folder to create new notes in.
@@ -144,12 +144,12 @@ export interface AppVaultConfig {
   /**
    * Files & Links &gt; Default location for new notes.
    */
-  newFileLocation?: 'root' | 'current' | 'folder';
+  newFileLocation?: 'current' | 'folder' | 'root';
 
   /**
    * Files & Links &gt; New link format.
    */
-  newLinkFormat?: 'shortest' | 'relative' | 'absolute';
+  newLinkFormat?: 'absolute' | 'relative' | 'shortest';
 
   /**
    * Saved on executing 'Export to PDF' command.
@@ -159,62 +159,62 @@ export interface AppVaultConfig {
   /**
    * Files & Links &gt; Confirm line deletion.
    */
-  promptDelete?: true | boolean;
+  promptDelete?: boolean | true;
 
   /**
    * Editor &gt; Properties in document.
    */
-  propertiesInDocument?: 'visible' | 'hidden' | 'source';
+  propertiesInDocument?: 'hidden' | 'source' | 'visible';
 
   /**
    * Editor &gt; Readable line length.
    */
-  readableLineLength?: true | boolean;
+  readableLineLength?: boolean | true;
 
   /**
    * Editor &gt; Right-to-left (RTL).
    */
-  rightToLeft?: false | boolean;
+  rightToLeft?: boolean | false;
 
   /**
    * Editor &gt; Show indentation guides.
    */
-  showIndentGuide?: true | boolean;
+  showIndentGuide?: boolean | true;
 
   /**
    * Editor &gt; Show inline title.
    */
-  showInlineTitle?: true | boolean;
+  showInlineTitle?: boolean | true;
 
   /**
    * Editor &gt; Show line numbers.
    */
-  showLineNumber?: false | boolean;
+  showLineNumber?: boolean | false;
 
   /**
    * Appearance &gt; Show ribbon.
    */
-  showRibbon?: true | boolean;
+  showRibbon?: boolean | true;
 
   /**
    * Files & Links &gt; Detect all file extensions.
    */
-  showUnsupportedFiles?: false | boolean;
+  showUnsupportedFiles?: boolean | false;
 
   /**
    * Appearance &gt; Show tab title bar.
    */
-  showViewHeader?: false | boolean;
+  showViewHeader?: boolean | false;
 
   /**
    * Editor &gt; Smart indent lists.
    */
-  smartIndentList?: true | boolean;
+  smartIndentList?: boolean | true;
 
   /**
    * Editor &gt; Spellcheck.
    */
-  spellcheck?: false | boolean;
+  spellcheck?: boolean | false;
 
   /**
    * Editor &gt; Spellcheck languages.
@@ -224,7 +224,7 @@ export interface AppVaultConfig {
   /**
    * Editor &gt; Strict line breaks.
    */
-  strictLineBreaks?: false | boolean;
+  strictLineBreaks?: boolean | false;
 
   /**
    * Editor &gt; Tab indent size.
@@ -247,12 +247,12 @@ export interface AppVaultConfig {
   /**
    * Appearance &gt; Translucent window.
    */
-  translucency?: false | boolean;
+  translucency?: boolean | false;
 
   /**
    * Files & Links &gt; Deleted files.
    */
-  trashOption?: 'system' | 'local' | 'none';
+  trashOption?: 'local' | 'none' | 'system';
 
   /** @deprecated Probably left-over code from old properties type storage */
   types: object;
@@ -260,7 +260,7 @@ export interface AppVaultConfig {
   /**
    * Files & Links &gt; Use [[Wikilinks]].
    */
-  useMarkdownLinks?: false | boolean;
+  useMarkdownLinks?: boolean | false;
 
   /**
    * Files & Links &gt; Excluded files.
@@ -270,10 +270,10 @@ export interface AppVaultConfig {
   /**
    * Editor &gt; Indent using tabs.
    */
-  useTab?: true | boolean;
+  useTab?: boolean | true;
 
   /**
    * Editor &gt; Vim key bindings.
    */
-  vimMode?: false | boolean;
+  vimMode?: boolean | false;
 }

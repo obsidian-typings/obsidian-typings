@@ -207,7 +207,7 @@ declare module 'obsidian' {
      * @param normalizedPath - The path that changed.
      * @unofficial
      */
-    onFileChange(normalizedPath: string | null): void;
+    onFileChange(normalizedPath: null | string): void;
 
     /**
      * Atomically read, modify, and save the contents of a plaintext file.
@@ -372,7 +372,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.12.2
      */
-    stat(normalizedPath: string): Promise<Stat | null>;
+    stat(normalizedPath: string): Promise<null | Stat>;
 
     /**
      * Remove all listeners.

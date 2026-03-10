@@ -91,7 +91,7 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link Value.equals} instead.
      */
-    function equals__(a: Value | null, b: Value | null): boolean;
+    function equals__(a: null | Value, b: null | Value): boolean;
 
     /**
      * Loose equals.
@@ -104,6 +104,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link Value.looseEquals} instead.
      */
-    function looseEquals__(a: Value | null, b: Value | null): boolean;
+    function looseEquals__(a: null | Value, b: null | Value): boolean;
   }
 }

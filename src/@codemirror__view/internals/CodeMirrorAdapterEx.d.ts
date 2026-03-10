@@ -2,6 +2,7 @@ import type {
   EditorPosition,
   Pos
 } from 'obsidian';
+
 import type { CodeMirrorAdapterExCommands } from './CodeMirrorAdapterExCommands.d.ts';
 import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 import type { EnclosingTag } from './EnclosingTag.d.ts';

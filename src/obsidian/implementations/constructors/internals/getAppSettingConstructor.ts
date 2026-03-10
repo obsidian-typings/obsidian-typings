@@ -1,4 +1,5 @@
 import type { App } from 'obsidian';
+
 import type { AppSetting } from '../../../internals/AppSetting.d.ts';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

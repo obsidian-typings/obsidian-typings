@@ -1,4 +1,5 @@
 import type { ItemView } from 'obsidian';
+
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { GraphEngine } from './GraphEngine.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';

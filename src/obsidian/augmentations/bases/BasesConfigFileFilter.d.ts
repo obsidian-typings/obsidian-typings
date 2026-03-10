@@ -10,8 +10,8 @@ declare module 'obsidian' {
    * @deprecated - Added only for typing purposes. Use {@link BasesConfigFileFilter} instead.
    */
   type BasesConfigFileFilter__ =
-    | string
     | BasesConfigFileFilterAndClause
+    | BasesConfigFileFilterNotClause
     | BasesConfigFileFilterOrClause
-    | BasesConfigFileFilterNotClause;
+    | string;
 }

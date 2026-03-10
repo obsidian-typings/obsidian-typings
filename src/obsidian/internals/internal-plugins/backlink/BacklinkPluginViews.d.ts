@@ -2,6 +2,7 @@ import type {
   ViewCreator,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { BacklinkView } from './BacklinkView.d.ts';
 
 /**

@@ -4,6 +4,7 @@ import type {
   HoverPopover,
   MarkdownView
 } from 'obsidian';
+
 import type { FocusMode } from './FocusMode.d.ts';
 import type { MetadataEditorProperty } from './MetadataEditorProperty.d.ts';
 import type { PropertyEntryData } from './PropertyEntryData.d.ts';
@@ -42,7 +43,7 @@ export interface MetadataEditor extends Component {
   /**
    * The currently focused property.
    */
-  focusedLine: null | MetadataEditorProperty;
+  focusedLine: MetadataEditorProperty | null;
 
   /**
    * Fold button for folding away the frontmatter editor on hovering over headingEl.
@@ -57,7 +58,7 @@ export interface MetadataEditor extends Component {
   /**
    * Hover element container.
    */
-  hoverPopover: null | HoverPopover;
+  hoverPopover: HoverPopover | null;
 
   /**
    * Owner of the metadata editor.

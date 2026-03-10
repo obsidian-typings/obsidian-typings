@@ -2,6 +2,7 @@ import type {
   App,
   Debouncer
 } from 'obsidian';
+
 import type { PromisedQueue } from '../../PromisedQueue.d.ts';
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { CanvasDataManager } from './CanvasDataManager.d.ts';

@@ -6,5 +6,5 @@ declare module 'obsidian' {
    *
    * @deprecated - Added only for typing purposes. Use {@link PaneType} instead.
    */
-  type PaneType__ = 'tab' | 'split' | 'window';
+  type PaneType__ = 'split' | 'tab' | 'window';
 }

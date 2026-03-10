@@ -10,6 +10,7 @@ import type {
   MarkdownFileInfo,
   TFile
 } from 'obsidian';
+
 import type { ClipboardManager } from './ClipboardManager.d.ts';
 import type { EditorSuggests } from './EditorSuggests.d.ts';
 import type { FoldInfo } from './FoldInfo.d.ts';
@@ -32,7 +33,7 @@ export interface MarkdownBaseView extends Component {
   /**
    * Callback to clear all elements.
    */
-  cleanupLivePreview: null | (() => void);
+  cleanupLivePreview: (() => void) | null;
 
   /**
    * Manager that handles pasting text, html and images into the editor.
@@ -154,7 +155,7 @@ export interface MarkdownBaseView extends Component {
    *
    * @returns The attached file, or `null`.
    */
-  get file(): TFile | null;
+  get file(): null | TFile;
 
   /**
    * Get the current editor document as a string.
@@ -176,7 +177,7 @@ export interface MarkdownBaseView extends Component {
    *
    * @returns Current fold information, or `null`.
    */
-  getFoldInfo(): null | FoldInfo;
+  getFoldInfo(): FoldInfo | null;
 
   /**
    * Builds all local extensions and assigns to `this.localExtensions`.

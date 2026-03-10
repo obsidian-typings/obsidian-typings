@@ -6,5 +6,5 @@ declare module 'obsidian' {
    *
    * @deprecated - Added only for typing purposes. Use {@link MarkdownViewModeType} instead.
    */
-  type MarkdownViewModeType__ = 'source' | 'preview';
+  type MarkdownViewModeType__ = 'preview' | 'source';
 }

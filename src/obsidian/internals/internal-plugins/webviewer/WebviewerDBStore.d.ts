@@ -1,4 +1,5 @@
 import type { App } from 'obsidian';
+
 import type { WebviewerHistoryItem } from './WebviewerHistoryItem.d.ts';
 
 /**
@@ -59,7 +60,7 @@ export interface WebviewerDBStore {
    * Used as a fallback source if there is no icon stored with corresponding domain.
    * @returns Icon in Base64 encoded string.
    */
-  loadIcon(domain: string, source?: string): Promise<string | null>;
+  loadIcon(domain: string, source?: string): Promise<null | string>;
 
   /**
    * Remove specific history item based on its {@link WebviewerHistoryItem.id | id}.
@@ -86,5 +87,5 @@ export interface WebviewerDBStore {
    * @param source - Source url of the icon, e.g. "https://obsidian.md/favicon.ico".
    * @returns Icon in Base64 encoded string.
    */
-  storeIcon(domain: string, source?: string): Promise<string | null>;
+  storeIcon(domain: string, source?: string): Promise<null | string>;
 }

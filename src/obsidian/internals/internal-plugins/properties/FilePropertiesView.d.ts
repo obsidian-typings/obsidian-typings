@@ -2,6 +2,7 @@ import type {
   TFile,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { InfoFileView } from '../../views/InfoFileView.d.ts';
 import type { PropertiesPluginInstance } from './PropertiesPluginInstance.d.ts';

@@ -6,6 +6,7 @@ import type {
   TFolder,
   View
 } from 'obsidian';
+
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { Tree } from '../../tree/Tree.d.ts';
 import type { WeakMapWrapper } from '../../WeakMapWrapper.d.ts';
@@ -37,7 +38,7 @@ export interface FileExplorerView extends View {
   lastDropTargetEl: HTMLElement | null;
 
   /** Timeout ID for expanding a folder on mouseover during drag, or `null`. */
-  mouseoverExpandTimeout: number | null;
+  mouseoverExpandTimeout: null | number;
 
   /**
    * Indicate ready state of the view.
@@ -73,7 +74,7 @@ export interface FileExplorerView extends View {
    * @param newLeaf - Where to open the view for this file.
    * @returns A promise that resolves when the file is opened and/or rename is started.
    */
-  afterCreate(file: TFile, newLeaf: PaneType | boolean): Promise<void>;
+  afterCreate(file: TFile, newLeaf: boolean | PaneType): Promise<void>;
 
   /**
    * Used internally to attach drop handler to the tree root and folder items.
@@ -98,7 +99,7 @@ export interface FileExplorerView extends View {
    * @param newLeaf - Where to open the view for this file.
    * @returns A promise that resolves when the file or folder is created.
    */
-  createAbstractFile(type: 'file' | 'folder', location: TFolder, newLeaf: PaneType | boolean): Promise<void>;
+  createAbstractFile(type: 'file' | 'folder', location: TFolder, newLeaf: boolean | PaneType): Promise<void>;
 
   /**
    * Create a tree item DOM element for the given folder.

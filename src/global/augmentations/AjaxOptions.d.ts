@@ -9,7 +9,7 @@ declare global {
      * The data of the AJAX request.
      * @official
      */
-    data?: object | string | ArrayBuffer;
+    data?: ArrayBuffer | object | string;
 
     /**
      * The headers of the AJAX request.

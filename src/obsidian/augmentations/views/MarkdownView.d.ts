@@ -185,7 +185,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link file} instead.
      */
-    file__?(): TFile | null;
+    file__?(): null | TFile;
 
     /**
      * Focus on the metadata editor given property information.
@@ -209,7 +209,7 @@ declare module 'obsidian' {
      * @returns The file or `null`.
      * @unofficial
      */
-    getFile(): TFile | null;
+    getFile(): null | TFile;
 
     /**
      * Get the hover source of the editor.

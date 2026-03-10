@@ -2,6 +2,7 @@ import type {
   App,
   Command
 } from 'obsidian';
+
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { CommandPaletteModal } from './CommandPaletteModal.d.ts';
 import type { CommandPaletteOptions } from './CommandPaletteOptions.d.ts';

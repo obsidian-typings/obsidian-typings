@@ -2,6 +2,7 @@ import type {
   ViewCreator,
   WorkspaceLeaf
 } from 'obsidian';
+
 import type { BookmarksView } from './BookmarksView.d.ts';
 
 /**

@@ -3,6 +3,7 @@ import type {
   EditorView,
   ViewPlugin
 } from '@codemirror/view';
+
 import type { PlatformEx } from '../internals/PlatformEx.d.ts';
 
 export {};

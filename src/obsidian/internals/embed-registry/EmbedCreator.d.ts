@@ -1,6 +1,7 @@
 import type {
   TFile
 } from 'obsidian';
+
 import type { EmbedComponent } from './EmbedComponent.d.ts';
 import type { EmbedContext } from './EmbedContext.d.ts';
 

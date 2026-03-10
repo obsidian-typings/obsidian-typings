@@ -1,4 +1,5 @@
 import type { View } from 'obsidian';
+
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 
 /**

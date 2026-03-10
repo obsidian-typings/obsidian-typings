@@ -38,7 +38,7 @@ export interface BookmarkItem {
   /**
    * The type of the bookmark item.
    */
-  type: 'file' | 'folder' | 'group' | 'graph' | 'search' | 'url';
+  type: 'file' | 'folder' | 'graph' | 'group' | 'search' | 'url';
 
   /**
    * The URL of the bookmark item.

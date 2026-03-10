@@ -1,4 +1,5 @@
 import type { App } from 'obsidian';
+
 import type {
   getFoldManagerConstructor
 } from '../implementations/constructors/internals/getFoldManagerConstructor.d.ts';

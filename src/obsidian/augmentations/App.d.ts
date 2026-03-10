@@ -138,7 +138,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.12.17
      */
-    lastEvent: UserEvent | null;
+    lastEvent: null | UserEvent;
 
     /**
      * Manages the gathering and updating of metadata for all files in the vault.
@@ -193,7 +193,7 @@ declare module 'obsidian' {
      *
      * @unofficial
      */
-    nextFrameTimer: number | null;
+    nextFrameTimer: null | number;
 
     /**
      * Manages loading and enabling of community (non-core) plugins.
@@ -432,7 +432,7 @@ declare module 'obsidian' {
      * @returns A promise that resolves when all attachments are imported.
      * @unofficial
      */
-    importAttachments(attachmentsToImport: ImportedAttachment[], folder: TFolder | null): Promise<void>;
+    importAttachments(attachmentsToImport: ImportedAttachment[], folder: null | TFolder): Promise<void>;
 
     /**
      * Initialize the entire application using the provided FS adapter
@@ -580,7 +580,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.8.7
      */
-    saveLocalStorage(key: string, data: unknown | null): void;
+    saveLocalStorage(key: string, data: null | unknown): void;
 
     /**
      * Set the accent color of the application.
@@ -717,6 +717,6 @@ declare module 'obsidian' {
      * @returns The override config directory or `null`.
      * @unofficial
      */
-    function getOverrideConfigDir(appId: string): string | null;
+    function getOverrideConfigDir(appId: string): null | string;
   }
 }

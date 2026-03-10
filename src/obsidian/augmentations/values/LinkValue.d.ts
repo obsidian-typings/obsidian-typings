@@ -24,7 +24,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor5__(app: App, value: string, sourcePath: string, display?: string | null): this;
+    constructor5__(app: App, value: string, sourcePath: string, display?: null | string): this;
   }
 
   namespace LinkValue {

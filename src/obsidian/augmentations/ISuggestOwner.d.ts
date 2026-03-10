@@ -39,6 +39,6 @@ declare module 'obsidian' {
      * ```
      * @official
      */
-    selectSuggestion(value: T, evt: MouseEvent | KeyboardEvent): void;
+    selectSuggestion(value: T, evt: KeyboardEvent | MouseEvent): void;
   }
 }

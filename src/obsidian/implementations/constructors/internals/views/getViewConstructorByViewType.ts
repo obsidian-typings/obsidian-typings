@@ -1,4 +1,5 @@
 import type { App } from 'obsidian';
+
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 import type { ViewTypeType } from '../../../../internals/views/ViewTypeType.d.d.ts';
 import type { ViewTypeViewMapping } from '../../../../internals/views/ViewTypeViewMapping.d.ts';

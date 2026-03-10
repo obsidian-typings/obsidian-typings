@@ -130,6 +130,6 @@ declare module 'obsidian' {
      * @official
      * @since 1.11.0
      */
-    setHeading(text: string | DocumentFragment): this;
+    setHeading(text: DocumentFragment | string): this;
   }
 }

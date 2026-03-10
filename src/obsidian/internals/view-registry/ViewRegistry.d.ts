@@ -3,6 +3,7 @@ import type {
   Events,
   ViewCreator
 } from 'obsidian';
+
 import type {
   getViewRegistryConstructor
 } from '../../implementations/constructors/internals/getViewRegistryConstructor.d.ts';
@@ -51,7 +52,7 @@ export interface ViewRegistry extends Events {
    * @param type - The view type identifier.
    * @returns The view creator function, or `undefined` if not registered.
    */
-  getViewCreatorByType(type: string): ViewCreator | undefined;
+  getViewCreatorByType(type: string): undefined | ViewCreator;
 
   /**
    * Get the view constructor associated with a view type.

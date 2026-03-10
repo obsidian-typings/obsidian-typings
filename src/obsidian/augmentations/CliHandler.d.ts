@@ -7,5 +7,5 @@ declare module 'obsidian' {
    * @deprecated - Added only for typing purposes. Use {@link CliHandler} instead.
    * @since 1.12.2
    */
-  type CliHandler__ = (params: CliData) => string | Promise<string>;
+  type CliHandler__ = (params: CliData) => Promise<string> | string;
 }

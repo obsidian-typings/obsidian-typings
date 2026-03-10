@@ -74,7 +74,7 @@ declare global {
       type: K,
       selector: string,
       listener: (this: HTMLElement, ev: HTMLElementEventMap[K], delegateTarget: HTMLElement) => unknown,
-      options?: boolean | AddEventListenerOptions
+      options?: AddEventListenerOptions | boolean
     ): void;
 
     /**
@@ -99,7 +99,7 @@ declare global {
       type: K,
       selector: string,
       listener: (this: HTMLElement, ev: HTMLElementEventMap[K], delegateTarget: HTMLElement) => unknown,
-      options?: boolean | AddEventListenerOptions
+      options?: AddEventListenerOptions | boolean
     ): void;
 
     /**
@@ -119,7 +119,7 @@ declare global {
     onClickEvent(
       this: HTMLElement,
       listener: (this: HTMLElement, ev: MouseEvent) => unknown,
-      options?: boolean | AddEventListenerOptions
+      options?: AddEventListenerOptions | boolean
     ): void;
 
     /**

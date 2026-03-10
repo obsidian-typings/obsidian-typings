@@ -106,7 +106,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link getSuggestions} instead.
      * @since 1.5.7
      */
-    getSuggestions__(query: string): T[] | Promise<T[]>;
+    getSuggestions__(query: string): Promise<T[]> | T[];
 
     /**
      * Choose a suggestion.
@@ -124,7 +124,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link onChooseSuggestion} instead.
      * @since 1.5.7
      */
-    onChooseSuggestion__(item: T, evt: MouseEvent | KeyboardEvent): void;
+    onChooseSuggestion__(item: T, evt: KeyboardEvent | MouseEvent): void;
 
     /**
      * Handle input change in the suggest modal.
@@ -167,7 +167,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.7.2
      */
-    selectActiveSuggestion(evt: MouseEvent | KeyboardEvent): void;
+    selectActiveSuggestion(evt: KeyboardEvent | MouseEvent): void;
 
     /**
      * Select a suggestion.
@@ -177,7 +177,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.20
      */
-    selectSuggestion(value: T, evt: MouseEvent | KeyboardEvent): void;
+    selectSuggestion(value: T, evt: KeyboardEvent | MouseEvent): void;
 
     /**
      * Set the instructions.

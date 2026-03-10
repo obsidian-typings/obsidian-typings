@@ -11,5 +11,5 @@ declare module 'obsidian' {
    *
    * @deprecated - Added only for typing purposes. Use {@link BasesAllOptions} instead.
    */
-  type BasesAllOptions__ = BasesOptions | BasesOptionGroup<BasesOptions>;
+  type BasesAllOptions__ = BasesOptionGroup<BasesOptions> | BasesOptions;
 }

@@ -4,6 +4,7 @@ import type {
   SearchComponent,
   TFile
 } from 'obsidian';
+
 import type { ItemQueue } from '../../collections/ItemQueue.d.ts';
 import type { ResultDom } from '../../tree/ResultDom.d.ts';
 import type { HeaderDom } from './HeaderDom.d.ts';
@@ -27,7 +28,7 @@ export interface BacklinkComponent extends Component {
   backlinkDom: ResultDom;
 
   /** File for which backlinks are currently displayed. */
-  backlinkFile: TFile | null;
+  backlinkFile: null | TFile;
 
   /** Header element for the backlinks section. */
   backlinkHeaderEl: HTMLDivElement;
@@ -48,7 +49,7 @@ export interface BacklinkComponent extends Component {
   extraContextButtonEl: HTMLDivElement;
 
   /** The file whose backlinks are being shown. */
-  file: TFile | null;
+  file: null | TFile;
 
   /** Header DOM for navigation buttons and sort controls. */
   headerDom: HeaderDom;
@@ -181,7 +182,7 @@ export interface BacklinkComponent extends Component {
    *
    * @param backlinkFile - The file to recompute backlinks for, or `null`.
    */
-  recomputeBacklink(backlinkFile: TFile | null): void;
+  recomputeBacklink(backlinkFile: null | TFile): void;
 
   /**
    * Recompute unlinked mentions for the current file.
