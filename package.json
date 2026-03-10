@@ -100,7 +100,6 @@
     "eslint-plugin-perfectionist": "latest",
     "husky": "latest",
     "jiti": "latest",
-    "npm-run-all": "latest",
     "patch-package": "latest",
     "semver": "latest",
     "ts-morph": "latest",
@@ -117,7 +116,7 @@
     "typescript": "$typescript"
   },
   "scripts": {
-    "build": "npm-run-all build:clean build:compile build:generate-index build:bundle-types build:fix-bundle-types build:implementations build:implementations:generate-types build:implementations:bundle-types build:fix-implementations-bundle-types build:static build:extract-api",
+    "build": "jiti scripts/build.ts",
     "build:bundle-types": "jiti scripts/build-bundle-types.ts",
     "build:clean": "jiti scripts/build-clean.ts",
     "build:compile": "jiti scripts/build-compile.ts",
