@@ -415,7 +415,7 @@ declare module 'obsidian' {
    *
    * @official
    */
-  function parseFrontMatterAliases(frontmatter: null | unknown): null | string[];
+  function parseFrontMatterAliases(frontmatter: unknown): null | string[];
 
   /**
    * Parses a frontmatter entry from the frontmatter object.
@@ -432,14 +432,13 @@ declare module 'obsidian' {
    *
    * @official
    */
-  function parseFrontMatterEntry(frontmatter: null | unknown, key: RegExp | string): null | unknown;
+  function parseFrontMatterEntry(frontmatter: unknown, key: RegExp | string): unknown;
 
   /**
    * Parses a frontmatter string array from the frontmatter object.
    *
    * @param frontmatter - The frontmatter object.
    * @param key - The key to parse.
-   * @param nospaces - Whether to remove spaces from the array.
    * @returns The parsed entry or `null` if the key is not found.
    *
    * @example
@@ -448,17 +447,16 @@ declare module 'obsidian' {
    * console.log(parseFrontMatterStringArray({ foo: 'bar,baz' }, 'foo')); // ['bar', 'baz']
    * console.log(parseFrontMatterStringArray({ foo: 'bar\nbaz' }, 'foo')); // ['bar', 'baz']
    * console.log(parseFrontMatterStringArray({ foo: 'bar baz' }, 'foo')); // ['bar baz']
-   * console.log(parseFrontMatterStringArray({ foo: 'bar baz' }, 'foo', false)); // ['bar baz']
-   * console.log(parseFrontMatterStringArray({ foo: 'bar baz' }, 'foo', true)); // ['bar', 'baz']
+   * console.log(parseFrontMatterStringArray({ foo: 'bar baz' }, 'foo')); // ['bar baz']
+   * console.log(parseFrontMatterStringArray({ foo: 'bar baz' }, 'foo')); // ['bar', 'baz']
    * console.log(parseFrontMatterStringArray({ foo: ['bar', 'baz'] }, /fo./)); // ['bar', 'baz']
    * ```
    *
    * @official
    */
   function parseFrontMatterStringArray(
-    frontmatter: null | unknown,
-    key: RegExp | string,
-    nospaces?: boolean
+    frontmatter: unknown,
+    key: RegExp | string
   ): null | string[];
 
   /**
@@ -476,7 +474,7 @@ declare module 'obsidian' {
    *
    * @official
    */
-  function parseFrontMatterTags(frontmatter: null | unknown): null | string[];
+  function parseFrontMatterTags(frontmatter: unknown): null | string[];
 
   /**
    * Parses the linktext of a wikilink into its component parts.
