@@ -39,7 +39,15 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(years: number, months: number, days: number, hours: number, minutes: number, seconds: number, milliseconds: number): this;
+    constructor3__(
+      years: number,
+      months: number,
+      days: number,
+      hours: number,
+      minutes: number,
+      seconds: number,
+      milliseconds: number
+    ): this;
 
     /**
      * Convert this duration into milliseconds.
