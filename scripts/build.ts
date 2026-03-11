@@ -4,7 +4,7 @@ const BUILD_STEPS = [
   'build:clean',
   'spellcheck',
   'lint',
-  'format',
+  'format:check',
   'build:compile',
   'build:generate-index',
   'build:bundle-types',
