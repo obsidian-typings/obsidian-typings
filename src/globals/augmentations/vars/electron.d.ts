@@ -1,4 +1,4 @@
-import type { default as electron2 } from 'electron';
+import type { CrossProcessExports } from 'electron';
 
 export {};
 
@@ -7,5 +7,5 @@ declare global {
    * Electron module for desktop platform APIs.
    * @unofficial
    */
-  const electron: typeof electron2;
+  const electron: CrossProcessExports;
 }

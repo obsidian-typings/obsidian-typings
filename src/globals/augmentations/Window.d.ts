@@ -1,25 +1,26 @@
 import type {
-  Capacitor,
-  CapacitorPlatforms
+  Capacitor as CapacitorInstance,
+  CapacitorPlatforms as CapacitorPlatformsInstance
 } from '@capacitor/core';
-import type { default as CodeMirror } from 'codemirror';
-import type { default as DOMPurify } from 'dompurify';
-import type * as electron from 'electron';
-import type { default as i18next } from 'i18next';
+import type { default as CodeMirrorInstance } from 'codemirror';
+import type { default as DOMPurifyInstance } from 'dompurify';
+import type { CrossProcessExports } from 'electron';
+import type { WebviewTag } from 'electron';
+import type { default as i18nextInstance } from 'i18next';
 import type { Mermaid } from 'mermaid';
 import type { moment } from 'obsidian';
 import type {
   App,
   Notice,
   ObsidianProtocolHandler,
-  request,
-  requestUrl
+  request as requestInstance,
+  requestUrl as requestUrlInstance
 } from 'obsidian';
-import type { default as pdfjsLib } from 'pdfjs-dist';
-import type { default as PIXI } from 'pixi.js';
-import type { default as Prism } from 'prismjs';
-import type { default as scrypt } from 'scrypt-js';
-import type { default as TurndownService } from 'turndown';
+import type { default as pdfjsLibInstance } from 'pdfjs-dist';
+import type { default as PIXIInstance } from 'pixi.js';
+import type { default as PrismInstance } from 'prismjs';
+import type { default as scryptInstance } from 'scrypt-js';
+import type { default as TurndownServiceInstance } from 'turndown';
 
 import type { CodeMirrorAdapterEx } from '../../@codemirror__view/internals/CodeMirrorAdapterEx.d.ts';
 import type { VimApi } from '../../@codemirror__view/internals/vim/VimApi.d.ts';
@@ -28,7 +29,7 @@ import type { ExtractConstructor } from '../../obsidian/internals/constructors/E
 import type { ElectronWindow } from '../../obsidian/internals/ElectronWindow.d.ts';
 import type { FrameDom } from '../../obsidian/internals/FrameDom.d.ts';
 import type { Localization } from '../../obsidian/internals/Localization.d.ts';
-import type { MathJax } from '../../obsidian/internals/math-jax/MathJax.d.ts';
+import type { MathJax as MathJaxType } from '../../obsidian/internals/math-jax/MathJax.d.ts';
 import type { PdfJsTestingUtils } from '../../obsidian/internals/pdf-js/PdfJsTestingUtils.d.ts';
 import type { Database } from '../../obsidian/internals/web-sql/Database.d.ts';
 
@@ -113,13 +114,13 @@ declare global {
      * Capacitor runtime for accessing native device APIs on mobile.
      * @unofficial
      */
-    Capacitor: typeof Capacitor;
+    Capacitor: typeof CapacitorInstance;
 
     /**
      * Registry of available Capacitor platform implementations.
      * @unofficial
      */
-    CapacitorPlatforms: typeof CapacitorPlatforms;
+    CapacitorPlatforms: typeof CapacitorPlatformsInstance;
 
     /**
      * Minified reference to `Object.getOwnPropertyDescriptors`.
@@ -131,7 +132,7 @@ declare global {
      * Global CodeMirror 5 instance.
      * @unofficial
      */
-    CodeMirror: typeof CodeMirror;
+    CodeMirror: typeof CodeMirrorInstance;
 
     /**
      * CodeMirror adapter providing CM5-compatible API over CM6.
@@ -144,7 +145,7 @@ declare global {
      *
      * @unofficial
      */
-    DOMPurify: typeof DOMPurify;
+    DOMPurify: typeof DOMPurifyInstance;
 
     /**
      * Minified reference to `Object.propertyIsEnumerable`.
@@ -156,7 +157,7 @@ declare global {
      * Electron module for desktop platform APIs.
      * @unofficial
      */
-    electron: typeof electron;
+    electron: CrossProcessExports;
 
     /**
      * Electron BrowserWindow instance for the current window.
@@ -181,13 +182,13 @@ declare global {
      * Global i18next internationalization framework instance.
      * @unofficial
      */
-    i18next: typeof i18next;
+    i18next: typeof i18nextInstance;
 
     /**
      * MathJax instance for rendering mathematical notation.
      * @unofficial
      */
-    MathJax?: MathJax;
+    MathJax?: MathJaxType;
 
     /**
      * Mermaid library instance for rendering diagrams and charts.
@@ -234,7 +235,7 @@ declare global {
      * PDF.js library for parsing and rendering PDF documents.
      * @unofficial
      */
-    pdfjsLib?: typeof pdfjsLib;
+    pdfjsLib?: typeof pdfjsLibInstance;
 
     /**
      * Testing utilities for PDF.js.
@@ -246,13 +247,13 @@ declare global {
      * PixiJS library for 2D rendering (used for canvas views).
      * @unofficial
      */
-    PIXI: typeof PIXI;
+    PIXI: typeof PIXIInstance;
 
     /**
      * Prism.js syntax highlighting library instance.
      * @unofficial
      */
-    Prism?: typeof Prism;
+    Prism?: typeof PrismInstance;
 
     /**
      * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
@@ -260,20 +261,20 @@ declare global {
      * Returns the text value of the response.
      * @unofficial
      */
-    request: typeof request;
+    request: typeof requestInstance;
 
     /**
      * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
      *
      * @unofficial
      */
-    requestUrl: typeof requestUrl;
+    requestUrl: typeof requestUrlInstance;
 
     /**
      * Scrypt key derivation function library for password-based encryption.
      * @unofficial
      */
-    scrypt: typeof scrypt;
+    scrypt: typeof scryptInstance;
 
     /**
      * Minified reference to `Object.defineProperties`.
@@ -297,13 +298,13 @@ declare global {
      * TurndownService for converting HTML to Markdown.
      * @unofficial
      */
-    TurndownService: typeof TurndownService;
+    TurndownService: typeof TurndownServiceInstance;
 
     /**
      * Electron WebView tag for embedding external web content.
      * @unofficial
      */
-    WebView: electron.WebviewTag;
+    WebView: WebviewTag;
 
     /**
      * Minified reference to `Object.defineProperty`.
