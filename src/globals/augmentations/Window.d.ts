@@ -21,16 +21,16 @@ import type { default as Prism } from 'prismjs';
 import type { default as scrypt } from 'scrypt-js';
 import type { default as TurndownService } from 'turndown';
 
-import type { CodeMirrorAdapterEx } from '../../@codemirror__view/internals/CodeMirrorAdapterEx.d.ts';
-import type { VimApi } from '../../@codemirror__view/internals/vim/VimApi.d.ts';
-import type { CapacitorAdapterFs } from '../../obsidian/internals/CapacitorAdapterFs.d.ts';
-import type { ExtractConstructor } from '../../obsidian/internals/constructors/ExtractConstructor.d.ts';
-import type { ElectronWindow } from '../../obsidian/internals/ElectronWindow.d.ts';
-import type { FrameDom } from '../../obsidian/internals/FrameDom.d.ts';
-import type { Localization } from '../../obsidian/internals/Localization.d.ts';
-import type { MathJax } from '../../obsidian/internals/math-jax/MathJax.d.ts';
-import type { PdfJsTestingUtils } from '../../obsidian/internals/pdf-js/PdfJsTestingUtils.d.ts';
-import type { Database } from '../../obsidian/internals/web-sql/Database.d.ts';
+import type { CodeMirrorAdapterEx } from '../../@codemirror__view/internals/CodeMirrorAdapterEx.js';
+import type { VimApi } from '../../@codemirror__view/internals/vim/VimApi.js';
+import type { CapacitorAdapterFs } from '../../obsidian/internals/CapacitorAdapterFs.js';
+import type { ExtractConstructor } from '../../obsidian/internals/constructors/ExtractConstructor.js';
+import type { ElectronWindow } from '../../obsidian/internals/ElectronWindow.js';
+import type { FrameDom } from '../../obsidian/internals/FrameDom.js';
+import type { Localization } from '../../obsidian/internals/Localization.js';
+import type { MathJax } from '../../obsidian/internals/math-jax/MathJax.js';
+import type { PdfJsTestingUtils } from '../../obsidian/internals/pdf-js/PdfJsTestingUtils.js';
+import type { Database } from '../../obsidian/internals/web-sql/Database.js';
 
 export {};
 

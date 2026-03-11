@@ -15,12 +15,12 @@ import type { RuleContext } from './utils.ts';
 
 import { normalizePath } from './utils.ts';
 
-const WINDOWS_FILE_SUFFIX = '/globals/augmentations/Windows.d.ts';
+const WINDOW_FILE_SUFFIX = '/globals/augmentations/Window.d.ts';
 const FUNCTIONS_DIR = 'functions';
 const VARS_DIR = 'vars';
 
 function isWindowsFile(filename: string): boolean {
-  return normalizePath(filename).endsWith(WINDOWS_FILE_SUFFIX);
+  return normalizePath(filename).endsWith(WINDOW_FILE_SUFFIX);
 }
 
 function isGlobalsFunctionFile(filename: string): boolean {
