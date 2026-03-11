@@ -106,7 +106,7 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
    *
    * @param normalizedPath - normalized path to file.
    * @param normalizedNewPath - normalized new path to file.
-   * @param shouldSkipDeletionTimeout - whether the deletion timeout should be skipped - applies only to {@link reconcileDeletion}.
+   * @param shouldSkipDeletionTimeout - whether the deletion timeout should be skipped - applies only to `reconcileDeletion`.
    * @returns A promise that resolves when the file is reconciled.
    */
   reconcileFile(
