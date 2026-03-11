@@ -1,6 +1,8 @@
-import type { DataAdapter } from 'obsidian';
-import type { CapacitorAdapter } from 'obsidian';
-import type { FileSystemAdapter } from 'obsidian';
+import type {
+  CapacitorAdapter,
+  DataAdapter,
+  FileSystemAdapter
+} from 'obsidian';
 
 import type { DataAdapterFilesRecord } from './data-adapter-records/DataAdapterFilesRecord.d.ts';
 import type { FileSystemWatchHandler } from './FileSystemWatchHandler.d.ts';
@@ -14,7 +16,7 @@ import type { PromisedQueue } from './PromisedQueue.d.ts';
  */
 export interface DataAdapterEx extends DataAdapter, PromisedQueue {
   /**
-   * Base OS path for the vault (e.g. /home/user/vault, or C:\Users\user\documents\vault).
+   * Base OS path for the vault (e.g. `/home/user/vault`, or `C:\Users\user\documents\vault`).
    */
   basePath: string;
 
@@ -41,8 +43,8 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
   /**
    * Check if a file exists.
    *
-   * @param fullPath Full path to the file.
-   * @param sensitive Whether to check case-sensitive.
+   * @param fullPath - full path to the file.
+   * @param sensitive - whether to check case-sensitive.
    * @returns A promise that resolves to `true` if the file exists, `false` otherwise.
    */
   _exists(fullPath: string, sensitive?: boolean): Promise<boolean>;
@@ -50,7 +52,7 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
   /**
    * Get canonical full path of file.
    *
-   * @param path Path to file.
+   * @param path - path to file.
    * @returns Full path to file.
    */
   getFullPath(path: string): string;
@@ -58,7 +60,7 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
   /**
    * Get canonical full path of file.
    *
-   * @param normalizedPath Normalized path to file.
+   * @param normalizedPath - normalized path to file.
    * @returns String full path to file.
    */
   getFullRealPath(normalizedPath: string): string;
@@ -69,7 +71,7 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
    * For vault-relative path, it's normalized vault-relative path.
    * For absolute path, it's path as is.
    *
-   * @param path Path to file.
+   * @param path - path to file.
    * @returns Normalized path.
    */
   getRealPath(path: string): string;
@@ -92,9 +94,9 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
   /**
    * Reconcile a deletion.
    *
-   * @param normalizedPath Path to file.
-   * @param normalizedNewPath New path to file.
-   * @param shouldSkipDeletionTimeout Whether the deletion timeout should be skipped (default: `true`).
+   * @param normalizedPath - path to file.
+   * @param normalizedNewPath - new path to file.
+   * @param shouldSkipDeletionTimeout - whether the deletion timeout should be skipped (default: `true`).
    * @returns A promise that resolves when the file is reconciled.
    */
   reconcileDeletion(
@@ -106,9 +108,9 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
   /**
    * Reconcile a file.
    *
-   * @param normalizedPath Path to file.
-   * @param normalizedNewPath New path to file.
-   * @param shouldSkipDeletionTimeout Whether the deletion timeout should be skipped - applies only to {@link reconcileDeletion}.
+   * @param normalizedPath - normalized path to file.
+   * @param normalizedNewPath - normalized new path to file.
+   * @param shouldSkipDeletionTimeout - whether the deletion timeout should be skipped - applies only to {@link reconcileDeletion}.
    * @returns A promise that resolves when the file is reconciled.
    */
   reconcileFile(
@@ -121,7 +123,7 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
    * Reconcile a folder creation between old and new paths.
    *
    * @param normalizedPath - The original path.
-   * @param normalizedNewPath - The new path.
+   * @param normalizedNewPath - normalized new path.
    * @returns A promise that resolves when the folder creation is reconciled.
    */
   reconcileFolderCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
@@ -129,7 +131,7 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
   /**
    * Reconcile changes to an internal (config) file.
    *
-   * @param normalizedPath - The path to the internal file.
+   * @param normalizedPath - normalized path to the internal file.
    * @returns A promise that resolves when the internal file is reconciled.
    */
   reconcileInternalFile(normalizedPath: string): Promise<void>;
@@ -138,7 +140,7 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
    * Reconcile a symbolic link creation between old and new paths.
    *
    * @param normalizedPath - The original path.
-   * @param normalizedNewPath - The new path.
+   * @param normalizedNewPath - normalized new path.
    * @returns A promise that resolves when the symbolic link creation is reconciled.
    */
   reconcileSymbolicLinkCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
@@ -146,7 +148,7 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
   /**
    * Remove file from files listing and trigger deletion event.
    *
-   * @param normalizedPath - The path of the file to remove.
+   * @param normalizedPath - normalized path of the file to remove.
    */
   removeFile(normalizedPath: string): void;
 
@@ -158,7 +160,7 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
   /**
    * Set whether OS is insensitive to case.
    *
-   * @param normalizedPath - The path to update.
+   * @param normalizedPath - normalized path to update.
    * @returns A promise that resolves when the update is complete.
    */
   update(normalizedPath: string): Promise<void>;
@@ -166,7 +168,7 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
   /**
    * Add change watcher to path.
    *
-   * @param handler - The handler for file system changes.
+   * @param handler - handler for file system changes.
    * @returns A promise that resolves when the watcher is registered.
    */
   watch(handler: FileSystemWatchHandler): Promise<void>;
