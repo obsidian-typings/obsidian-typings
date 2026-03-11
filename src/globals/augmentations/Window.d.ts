@@ -4,7 +4,7 @@ import type {
 } from '@capacitor/core';
 import type { default as CodeMirrorInstance } from 'codemirror';
 import type { default as DOMPurifyInstance } from 'dompurify';
-import type { CrossProcessExports } from 'electron';
+import type { default as electronInstance } from 'electron';
 import type { WebviewTag } from 'electron';
 import type { default as i18nextInstance } from 'i18next';
 import type { Mermaid } from 'mermaid';
@@ -157,7 +157,7 @@ declare global {
      * Electron module for desktop platform APIs.
      * @unofficial
      */
-    electron: CrossProcessExports;
+    electron: typeof electronInstance;
 
     /**
      * Electron BrowserWindow instance for the current window.
