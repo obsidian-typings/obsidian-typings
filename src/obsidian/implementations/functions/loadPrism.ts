@@ -1,4 +1,4 @@
-import type { default as Prism } from 'prismjs';
+import type { default as PrismInstance } from 'prismjs';
 
 import { loadPrism as loadPrismOriginal } from 'obsidian';
 
@@ -12,6 +12,6 @@ import { loadPrism as loadPrismOriginal } from 'obsidian';
  * @public
  * @unofficial
  */
-export async function loadPrism(): Promise<typeof Prism> {
-  return (await loadPrismOriginal()) as typeof Prism;
+export async function loadPrism(): Promise<typeof PrismInstance> {
+  return (await loadPrismOriginal()) as typeof PrismInstance;
 }

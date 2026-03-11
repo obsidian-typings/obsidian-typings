@@ -1,6 +1,6 @@
 import type {
   Graphics,
-  Text,
+  Text as PIXIText,
   TextStyle
 } from 'pixi.js';
 
@@ -55,7 +55,7 @@ export interface GraphNode {
   reverse: Record<string, GraphLink>;
 
   /** PixiJS element for the name, child of `GraphNode.circle`. */
-  text: null | Text;
+  text: null | PIXIText;
 
   /** Type of the node, can be of value `"tag"`, `"unresolved"`, `"attachment"`, or an empty string for markdown nodes. */
   type: string;

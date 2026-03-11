@@ -8,7 +8,7 @@ import type { default as electronInstance } from 'electron';
 import type { WebviewTag } from 'electron';
 import type { default as i18nextInstance } from 'i18next';
 import type { Mermaid } from 'mermaid';
-import type { moment } from 'obsidian';
+import type { moment as momentInstance } from 'obsidian';
 import type {
   App,
   Notice,
@@ -203,7 +203,7 @@ declare global {
      *
      * Commented out because the global variable is already declared in the `moment` package.
      */
-    moment: typeof moment;
+    moment: typeof momentInstance;
 
     /**
      * Minified reference to `Object.getOwnPropertySymbols`.

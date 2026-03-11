@@ -1,4 +1,4 @@
-import type { moment } from 'obsidian';
+import type { moment as momentInstance } from 'obsidian';
 
 export {};
 
@@ -9,5 +9,5 @@ declare global {
    * @unofficial
    * @deprecated - Added only for typing purposes. Use {@link moment} instead.
    */
-  const moment__: typeof moment;
+  const moment__: typeof momentInstance;
 }

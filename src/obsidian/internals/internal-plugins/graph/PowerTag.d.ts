@@ -1,5 +1,5 @@
 import type {
-  Text,
+  Text as PIXIText,
   TextStyle
 } from 'pixi.js';
 
@@ -19,7 +19,7 @@ export interface PowerTag {
   renderer: GraphRenderer;
 
   /** PixiJS text element displaying the tag label. */
-  text: Text;
+  text: PIXIText;
 
   /** Destroy the power tag graphics and remove them from the scene. */
   clearGraphics(): void;
