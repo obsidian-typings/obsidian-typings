@@ -1,4 +1,5 @@
 export {};
+import type { App } from 'obsidian';
 
 declare global {
   /**
@@ -7,5 +8,5 @@ declare global {
    * @unofficial
    * @deprecated - Prefer not to use this value directly.
    */
-  var app: Window['app'];
+  const app: App;
 }
