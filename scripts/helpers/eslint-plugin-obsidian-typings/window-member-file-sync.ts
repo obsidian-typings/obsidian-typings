@@ -15,10 +15,11 @@ import type { RuleContext } from './utils.ts';
 import { normalizePath } from './utils.ts';
 
 const WINDOW_FILE_SUFFIX = '/globals/augmentations/Window.d.ts';
+const WINDOW_FILE_NAME = 'Window.d.ts';
 const FUNCTIONS_DIR = 'functions';
 const VARS_DIR = 'vars';
 
-function isWindowsFile(filename: string): boolean {
+function isWindowFile(filename: string): boolean {
   return normalizePath(filename).endsWith(WINDOW_FILE_SUFFIX);
 }
 
@@ -54,9 +55,9 @@ function listDtsFiles(dirPath: string): string[] {
   }
 }
 
-function windowsFileHasMember(windowsFilePath: string, memberName: string, kind: 'method' | 'property'): boolean {
+function windowFileHasMember(windowFilePath: string, memberName: string, kind: 'method' | 'property'): boolean {
   try {
-    const content = readFileSync(windowsFilePath, 'utf8');
+    const content = readFileSync(windowFilePath, 'utf8');
     if (kind === 'method') {
       // Match method declarations like: memberName(...) or memberName<...>(...)
       return new RegExp(`\\b${escapeRegExp(memberName)}\\s*[<(]`).test(content);
@@ -77,24 +78,24 @@ export const windowMemberFileSync = {
     type: 'problem' as const,
     docs: {
       description:
-        'Ensure globals/augmentations/functions/ and globals/augmentations/vars/ files are in sync with Windows.d.ts Window interface members'
+        `Ensure globals/augmentations/functions/ and globals/augmentations/vars/ files are in sync with ${WINDOW_FILE_NAME} Window interface members`
     },
     messages: {
       missingFile:
         'Window interface {{kind}} \'{{memberName}}\' has no corresponding file in \'{{dir}}/{{memberName}}.d.ts\'.',
-      missingWindowMember: 'File \'{{fileName}}\' has no corresponding {{kind}} in Windows.d.ts Window interface.'
+      missingWindowMember:
+        `File \'{{fileName}}\' has no corresponding {{kind}} in ${WINDOW_FILE_NAME} Window interface.`
     }
   },
   create(context: RuleContext) {
     const filename = normalizePath(context.filename);
 
-    // --- Running on a function file: check it has a matching method in Windows.d.ts ---
     if (isGlobalsFunctionFile(filename)) {
       const memberName = getMemberNameFromFilename(filename);
       const augDir = getGlobalsAugmentationsDir(filename);
-      const windowsFilePath = join(augDir, 'Windows.d.ts');
+      const windowFilePath = join(augDir, WINDOW_FILE_NAME);
 
-      if (!windowsFileHasMember(windowsFilePath, memberName, 'method')) {
+      if (!windowFileHasMember(windowFilePath, memberName, 'method')) {
         return {
           Program(node: TSESTree.Program): void {
             context.report({
@@ -108,13 +109,12 @@ export const windowMemberFileSync = {
       return {};
     }
 
-    // --- Running on a var file: check it has a matching property in Windows.d.ts ---
     if (isGlobalsVarFile(filename)) {
       const memberName = getMemberNameFromFilename(filename);
       const augDir = getGlobalsAugmentationsDir(filename);
-      const windowsFilePath = join(augDir, 'Windows.d.ts');
+      const windowFilePath = join(augDir, WINDOW_FILE_NAME);
 
-      if (!windowsFileHasMember(windowsFilePath, memberName, 'property')) {
+      if (!windowFileHasMember(windowFilePath, memberName, 'property')) {
         return {
           Program(node: TSESTree.Program): void {
             context.report({
@@ -128,8 +128,7 @@ export const windowMemberFileSync = {
       return {};
     }
 
-    // --- Running on Windows.d.ts: check each Window member has a corresponding file ---
-    if (!isWindowsFile(filename)) {
+    if (!isWindowFile(filename)) {
       return {};
     }
 
