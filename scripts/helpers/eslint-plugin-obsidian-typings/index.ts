@@ -8,6 +8,7 @@ import { noDeclareModuleInInternals } from './no-declare-module-in-internals.ts'
 import { noInterfaceTagsInAugmentations } from './no-interface-tags-in-augmentations.ts';
 import { noMemberUnofficialInInternals } from './no-member-unofficial-in-internals.ts';
 import { oneExportPerFile } from './one-export-per-file.ts';
+import { windowMemberFileSync } from './window-member-file-sync.ts';
 
 export const obsidianTypingsPlugin = {
     meta: { name: 'obsidian-typings' },
@@ -21,6 +22,7 @@ export const obsidianTypingsPlugin = {
         'no-declare-module-in-internals': noDeclareModuleInInternals,
         'no-interface-tags-in-augmentations': noInterfaceTagsInAugmentations,
         'no-member-unofficial-in-internals': noMemberUnofficialInInternals,
-        'one-export-per-file': oneExportPerFile
+        'one-export-per-file': oneExportPerFile,
+        'window-member-file-sync': windowMemberFileSync
     }
 };

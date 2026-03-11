@@ -74,7 +74,8 @@ export const config: Linter.Config[] = [
       'obsidian-typings/no-declare-module-in-internals': 'error',
       'obsidian-typings/no-interface-tags-in-augmentations': 'error',
       'obsidian-typings/no-member-unofficial-in-internals': 'error',
-      'obsidian-typings/one-export-per-file': 'error'
+      'obsidian-typings/one-export-per-file': 'error',
+      'obsidian-typings/window-member-file-sync': 'error'
     }
   },
   {
