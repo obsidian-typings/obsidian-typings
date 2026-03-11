@@ -19,7 +19,7 @@ import type {
 import type { default as pdfjsLibInstance } from 'pdfjs-dist';
 import type { default as PIXIInstance } from 'pixi.js';
 import type { default as PrismInstance } from 'prismjs';
-import type { default as scryptInstance } from 'scrypt-js';
+import type { scrypt as scryptInstance } from 'scrypt-js';
 import type { default as TurndownServiceInstance } from 'turndown';
 
 import type { CodeMirrorAdapterEx } from '../../@codemirror__view/internals/CodeMirrorAdapterEx.d.ts';
