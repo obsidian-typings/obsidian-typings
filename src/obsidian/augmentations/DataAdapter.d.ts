@@ -1,7 +1,3 @@
-import type { DataAdapterFilesRecord } from '../internals/data-adapter-records/DataAdapterFilesRecord.d.ts';
-import type { FileSystemWatchHandler } from '../internals/FileSystemWatchHandler.d.ts';
-import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
-
 export {};
 
 declare module 'obsidian' {
@@ -9,51 +5,7 @@ declare module 'obsidian' {
    * Work directly with files and folders inside a vault.
    * If possible prefer using the {@link Vault} API over this.
    */
-  interface DataAdapter extends PromisedQueue {
-    /**
-     * Base OS path for the vault (e.g. /home/user/vault, or C:\Users\user\documents\vault).
-     *
-     * @unofficial
-     */
-    basePath: string;
-
-    /**
-     * Mapping of file/folder path to vault entry, includes non-MD files.
-     *
-     * @unofficial
-     */
-    files: DataAdapterFilesRecord;
-
-    /**
-     * Handles vault events.
-     *
-     * @unofficial
-     */
-    handler: FileSystemWatchHandler | null;
-
-    /**
-     * Whether the file system is case-insensitive.
-     * @unofficial
-     */
-    insensitive: boolean;
-
-    /**
-     * Triggers handler for vault events.
-     *
-     * @unofficial
-     */
-    trigger: FileSystemWatchHandler;
-
-    /**
-     * Check if a file exists.
-     *
-     * @param fullPath Full path to the file.
-     * @param sensitive Whether to check case-sensitive.
-     * @returns A promise that resolves to `true` if the file exists, `false` otherwise.
-     * @unofficial
-     */
-    _exists(fullPath: string, sensitive?: boolean): Promise<boolean>;
-
+  interface DataAdapter {
     /**
      * Add text to the end of a plaintext file.
      *
@@ -116,42 +68,12 @@ declare module 'obsidian' {
     exists(normalizedPath: string, sensitive?: boolean): Promise<boolean>;
 
     /**
-     * Get canonical full path of file.
-     *
-     * @param path Path to file.
-     * @returns Full path to file.
-     * @unofficial
-     */
-    getFullPath(path: string): string;
-
-    /**
-     * Get canonical full path of file.
-     *
-     * @param normalizedPath Normalized path to file.
-     * @returns String full path to file.
-     * @unofficial
-     */
-    getFullRealPath(normalizedPath: string): string;
-
-    /**
      * Gets the name of the vault.
      *
      * @returns The name of the vault.
      * @official
      */
     getName(): string;
-
-    /**
-     * Get normalized path.
-     *
-     * For vault-relative path, it's normalized vault-relative path.
-     * For absolute path, it's path as is.
-     *
-     * @param path Path to file.
-     * @returns Normalized path.
-     * @unofficial
-     */
-    getRealPath(path: string): string;
 
     /**
      * Returns a URI for the browser engine to use, for example to embed an image.
@@ -180,15 +102,6 @@ declare module 'obsidian' {
     list(normalizedPath: string): Promise<ListedFiles>;
 
     /**
-     * Generates `this.files` for specific directory of the vault
-     *
-     * @param normalizedPath - The path to list recursively.
-     * @returns A promise that resolves when the recursive listing is complete.
-     * @unofficial
-     */
-    listRecursive(normalizedPath: string): Promise<void>;
-
-    /**
      * Create a directory.
      *
      * @param normalizedPath - path to use for new folder, use {@link normalizePath} to normalize beforehand.
@@ -200,14 +113,6 @@ declare module 'obsidian' {
      * @official
      */
     mkdir(normalizedPath: string): Promise<void>;
-
-    /**
-     * Handle a file change event for the given path.
-     *
-     * @param normalizedPath - The path that changed.
-     * @unofficial
-     */
-    onFileChange(normalizedPath: null | string): void;
 
     /**
      * Atomically read, modify, and save the contents of a plaintext file.
@@ -253,65 +158,6 @@ declare module 'obsidian' {
     readBinary(normalizedPath: string): Promise<ArrayBuffer>;
 
     /**
-     * Reconcile a deletion.
-     *
-     * @param normalizedPath Path to file.
-     * @param normalizedNewPath New path to file.
-     * @param shouldSkipDeletionTimeout Whether the deletion timeout should be skipped (default: `true`).
-     * @returns A promise that resolves when the file is reconciled.
-     * @unofficial
-     */
-    reconcileDeletion(
-      normalizedPath: string,
-      normalizedNewPath: string,
-      shouldSkipDeletionTimeout?: boolean
-    ): Promise<void>;
-
-    /**
-     * Reconcile a file.
-     *
-     * @param normalizedPath Path to file.
-     * @param normalizedNewPath New path to file.
-     * @param shouldSkipDeletionTimeout Whether the deletion timeout should be skipped - applies only to {@link reconcileDeletion}.
-     * @returns A promise that resolves when the file is reconciled.
-     * @unofficial
-     */
-    reconcileFile(
-      normalizedPath: string,
-      normalizedNewPath: string,
-      shouldSkipDeletionTimeout?: boolean
-    ): Promise<void>;
-
-    /**
-     * Reconcile a folder creation between old and new paths.
-     *
-     * @param normalizedPath - The original path.
-     * @param normalizedNewPath - The new path.
-     * @returns A promise that resolves when the folder creation is reconciled.
-     * @unofficial
-     */
-    reconcileFolderCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
-
-    /**
-     * Reconcile changes to an internal (config) file.
-     *
-     * @param normalizedPath - The path to the internal file.
-     * @returns A promise that resolves when the internal file is reconciled.
-     * @unofficial
-     */
-    reconcileInternalFile(normalizedPath: string): Promise<void>;
-
-    /**
-     * Reconcile a symbolic link creation between old and new paths.
-     *
-     * @param normalizedPath - The original path.
-     * @param normalizedNewPath - The new path.
-     * @returns A promise that resolves when the symbolic link creation is reconciled.
-     * @unofficial
-     */
-    reconcileSymbolicLinkCreation(normalizedPath: string, normalizedNewPath: string): Promise<void>;
-
-    /**
      * Delete a file.
      *
      * @param normalizedPath - path to file, use {@link normalizePath} to normalize beforehand.
@@ -323,14 +169,6 @@ declare module 'obsidian' {
      * @official
      */
     remove(normalizedPath: string): Promise<void>;
-
-    /**
-     * Remove file from files listing and trigger deletion event.
-     *
-     * @param normalizedPath - The path of the file to remove.
-     * @unofficial
-     */
-    removeFile(normalizedPath: string): void;
 
     /**
      * Rename a file or folder.
@@ -375,13 +213,6 @@ declare module 'obsidian' {
     stat(normalizedPath: string): Promise<null | Stat>;
 
     /**
-     * Remove all listeners.
-     *
-     * @unofficial
-     */
-    stopWatch(): void;
-
-    /**
      * Move to local trash.
      * Files will be moved into the `.trash` folder at the root of the vault.
      *
@@ -407,24 +238,6 @@ declare module 'obsidian' {
      * @official
      */
     trashSystem(normalizedPath: string): Promise<boolean>;
-
-    /**
-     * Set whether OS is insensitive to case.
-     *
-     * @param normalizedPath - The path to update.
-     * @returns A promise that resolves when the update is complete.
-     * @unofficial
-     */
-    update(normalizedPath: string): Promise<void>;
-
-    /**
-     * Add change watcher to path.
-     *
-     * @param handler - The handler for file system changes.
-     * @returns A promise that resolves when the watcher is registered.
-     * @unofficial
-     */
-    watch(handler: FileSystemWatchHandler): Promise<void>;
 
     /**
      * Write to a plaintext file.

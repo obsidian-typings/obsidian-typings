@@ -3,6 +3,7 @@ import type {
 } from '../implementations/constructors/augmentations/getCapacitorAdapterConstructor.d.ts';
 import type { CapacitorAdapterFs } from '../internals/CapacitorAdapterFs.d.ts';
 import type { CapacitorFileEntry } from '../internals/CapacitorFileEntry.d.ts';
+import type { DataAdapterEx } from '../internals/DataAdapterEx.d.ts';
 import type { FileEntry } from '../internals/FileEntry.d.ts';
 
 export {};
@@ -14,7 +15,7 @@ declare module 'obsidian' {
    * `app.vault.adapter` returns an instance of `CapacitorAdapter` on mobile devices.
    * @since 1.7.2
    */
-  interface CapacitorAdapter extends DataAdapter {
+  interface CapacitorAdapter extends DataAdapterEx {
     /**
      * Reference to the Capacitor file system API.
      * @unofficial

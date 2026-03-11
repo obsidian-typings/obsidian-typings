@@ -10,6 +10,7 @@ import type {
 } from '../implementations/constructors/augmentations/getFileSystemAdapterConstructor.d.ts';
 import type { Btime } from '../internals/Btime.d.ts';
 import type { DataAdapterWatchersRecord } from '../internals/data-adapter-records/DataAdapterWatchersRecord.d.ts';
+import type { DataAdapterEx } from '../internals/DataAdapterEx.d.ts';
 
 export {};
 
@@ -19,7 +20,7 @@ declare module 'obsidian' {
    *
    * `app.vault.adapter` returns an instance of `FileSystemAdapter` on desktop devices.
    */
-  interface FileSystemAdapter extends DataAdapter {
+  interface FileSystemAdapter extends DataAdapterEx {
     /**
      * Handler for retrieving and setting birth time (creation time) of files.
      * @unofficial
