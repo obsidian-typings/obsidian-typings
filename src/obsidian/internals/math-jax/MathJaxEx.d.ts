@@ -5,7 +5,7 @@ import type { ExtendedMetrics } from './ExtendedMetrics.d.ts';
  * @public
  * @unofficial
  */
-export interface MathJax {
+export interface MathJaxEx {
   /** MathJax configuration object. */
   config: unknown;
 

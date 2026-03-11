@@ -29,7 +29,7 @@ import type { ExtractConstructor } from '../../obsidian/internals/constructors/E
 import type { ElectronWindow } from '../../obsidian/internals/ElectronWindow.d.ts';
 import type { FrameDom } from '../../obsidian/internals/FrameDom.d.ts';
 import type { Localization } from '../../obsidian/internals/Localization.d.ts';
-import type { MathJax as MathJaxType } from '../../obsidian/internals/math-jax/MathJax.d.ts';
+import type { MathJaxEx } from '../../obsidian/internals/math-jax/MathJaxEx.d.ts';
 import type { PdfJsTestingUtils } from '../../obsidian/internals/pdf-js/PdfJsTestingUtils.d.ts';
 import type { Database } from '../../obsidian/internals/web-sql/Database.d.ts';
 
@@ -188,7 +188,7 @@ declare global {
      * MathJax instance for rendering mathematical notation.
      * @unofficial
      */
-    MathJax?: MathJaxType;
+    MathJax?: MathJaxEx;
 
     /**
      * Mermaid library instance for rendering diagrams and charts.
