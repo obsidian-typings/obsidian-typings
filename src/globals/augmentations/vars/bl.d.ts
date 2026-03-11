@@ -4,7 +4,7 @@ declare global {
   /**
    * Minified reference to `Object.hasOwnProperty`.
    *
-   * @official
+   * @unofficial
    */
   const bl: typeof Object.hasOwnProperty;
 }
