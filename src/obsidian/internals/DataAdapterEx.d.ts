@@ -1,15 +1,11 @@
-import type {
-  CapacitorAdapter,
-  DataAdapter,
-  FileSystemAdapter
-} from 'obsidian';
+import type { DataAdapter } from 'obsidian';
 
 import type { DataAdapterFilesRecord } from './data-adapter-records/DataAdapterFilesRecord.d.ts';
 import type { FileSystemWatchHandler } from './FileSystemWatchHandler.d.ts';
 import type { PromisedQueue } from './PromisedQueue.d.ts';
 
 /**
- * Common members for {@link CapacitorAdapter} and {@link FileSystemAdapter}.
+ * Common members for `CapacitorAdapter` and `FileSystemAdapter`.
  *
  * @public
  * @unofficial
@@ -122,7 +118,7 @@ export interface DataAdapterEx extends DataAdapter, PromisedQueue {
   /**
    * Reconcile a folder creation between old and new paths.
    *
-   * @param normalizedPath - The original path.
+   * @param normalizedPath - normalized original path.
    * @param normalizedNewPath - normalized new path.
    * @returns A promise that resolves when the folder creation is reconciled.
    */
