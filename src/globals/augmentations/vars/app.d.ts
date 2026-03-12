@@ -9,5 +9,5 @@ declare global {
    * @unofficial
    * @deprecated - Prefer not to use this value directly.
    */
-  const app: App;
+  var app: App;
 }

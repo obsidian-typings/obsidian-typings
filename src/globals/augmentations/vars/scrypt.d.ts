@@ -8,5 +8,5 @@ declare global {
    * @unofficial
    * @deprecated - Added only for typing purposes. Use {@link scrypt} instead.
    */
-  const scrypt__: typeof scryptInstance;
+  var scrypt__: typeof scryptInstance;
 }

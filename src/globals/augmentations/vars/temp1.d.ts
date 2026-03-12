@@ -7,5 +7,5 @@ declare global {
    * Temporary reference to the WebSQL database `changeVersion` method.
    * @unofficial
    */
-  const temp1: Database['changeVersion'];
+  var temp1: Database['changeVersion'];
 }

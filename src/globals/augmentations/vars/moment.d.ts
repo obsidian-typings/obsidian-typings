@@ -9,5 +9,5 @@ declare global {
    * @unofficial
    * @deprecated - Added only for typing purposes. Use {@link moment} instead.
    */
-  const moment__: typeof momentInstance;
+  var moment__: typeof momentInstance;
 }

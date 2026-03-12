@@ -8,5 +8,5 @@ declare global {
    * @official
    * @deprecated - Added only for typing purposes. Use {@link activeWindow} instead.
    */
-  let activeWindow__: Window;
+  var activeWindow__: Window;
 }

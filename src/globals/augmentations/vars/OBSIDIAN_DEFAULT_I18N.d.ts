@@ -7,5 +7,5 @@ declare global {
    * Default internationalization strings bundled with Obsidian.
    * @unofficial
    */
-  const OBSIDIAN_DEFAULT_I18N: Localization;
+  var OBSIDIAN_DEFAULT_I18N: Localization;
 }

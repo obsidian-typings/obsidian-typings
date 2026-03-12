@@ -9,5 +9,5 @@ declare global {
    * @unofficial
    */
   // eslint-disable-next-line import-x/no-deprecated -- No other way.
-  const CapacitorPlatforms: typeof CapacitorPlatformsInstance;
+  var CapacitorPlatforms: typeof CapacitorPlatformsInstance;
 }

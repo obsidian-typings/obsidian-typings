@@ -5,5 +5,5 @@ declare global {
    * Minified reference to `Object.propertyIsEnumerable`.
    * @unofficial
    */
-  const El: typeof Object.propertyIsEnumerable;
+  var El: typeof Object.propertyIsEnumerable;
 }

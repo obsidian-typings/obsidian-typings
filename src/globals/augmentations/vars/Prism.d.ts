@@ -6,5 +6,5 @@ declare global {
    * @unofficial
    * @deprecated - Added only for typing purposes. Use {@link Prism} instead.
    */
-  const Prism__: typeof import('prismjs');
+  var Prism__: typeof import('prismjs');
 }

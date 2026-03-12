@@ -7,5 +7,5 @@ declare global {
    * Electron BrowserWindow instance for the current window.
    * @unofficial
    */
-  const frameDom: FrameDom;
+  var frameDom: FrameDom;
 }

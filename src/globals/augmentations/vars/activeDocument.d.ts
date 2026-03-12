@@ -8,5 +8,5 @@ declare global {
    * @official
    * @deprecated - Added only for typing purposes. Use {@link activeDocument} instead.
    */
-  let activeDocument__: Document;
+  var activeDocument__: Document;
 }

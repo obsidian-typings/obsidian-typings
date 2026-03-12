@@ -7,5 +7,5 @@ declare global {
    * Electron BrowserWindow instance for the current window.
    * @unofficial
    */
-  const electronWindow: ElectronWindow;
+  var electronWindow: ElectronWindow;
 }

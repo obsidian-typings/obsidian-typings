@@ -6,5 +6,5 @@ declare global {
    *
    * @unofficial
    */
-  const bl: typeof Object.hasOwnProperty;
+  var bl: typeof Object.hasOwnProperty;
 }

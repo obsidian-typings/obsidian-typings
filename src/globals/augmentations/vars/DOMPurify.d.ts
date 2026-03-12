@@ -7,5 +7,5 @@ declare global {
    * @unofficial
    * @deprecated - Added only for typing purposes. Use {@link DOMPurify} instead.
    */
-  const DOMPurify__: typeof import('dompurify');
+  var DOMPurify__: typeof import('dompurify');
 }

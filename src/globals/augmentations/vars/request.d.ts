@@ -9,5 +9,5 @@ declare global {
    * Returns the text value of the response.
    * @unofficial
    */
-  const request: typeof requestInstance;
+  var request: typeof requestInstance;
 }

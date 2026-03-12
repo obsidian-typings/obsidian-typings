@@ -7,5 +7,5 @@ declare global {
    * Mermaid library instance for rendering diagrams and charts.
    * @unofficial
    */
-  const mermaid: Mermaid;
+  var mermaid: Mermaid;
 }

@@ -5,5 +5,5 @@ declare global {
    * Native Blink engine FormData constructor.
    * @unofficial
    */
-  const blinkFormData: typeof FormData;
+  var blinkFormData: typeof FormData;
 }

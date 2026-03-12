@@ -7,5 +7,5 @@ declare global {
    * Electron WebView tag for embedding external web content.
    * @unofficial
    */
-  const WebView: WebviewTag;
+  var WebView: WebviewTag;
 }

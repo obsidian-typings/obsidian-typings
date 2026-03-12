@@ -8,5 +8,5 @@ declare global {
    *
    * @unofficial
    */
-  const requestUrl: typeof requestUrlInstance;
+  var requestUrl: typeof requestUrlInstance;
 }

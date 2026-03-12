@@ -7,5 +7,5 @@ declare global {
    * MathJax instance for rendering mathematical notation.
    * @unofficial
    */
-  const MathJax: MathJaxEx;
+  var MathJax: MathJaxEx;
 }

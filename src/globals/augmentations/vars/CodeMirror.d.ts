@@ -6,5 +6,5 @@ declare global {
    * @unofficial
    * @deprecated - Added only for typing purposes. Use {@link CodeMirror} instead.
    */
-  const CodeMirror__: typeof import('codemirror');
+  var CodeMirror__: typeof import('codemirror');
 }

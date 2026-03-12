@@ -6,5 +6,5 @@ declare global {
    * @unofficial
    * @hidden
    */
-  const blinkfetch: typeof fetch;
+  var blinkfetch: typeof fetch;
 }

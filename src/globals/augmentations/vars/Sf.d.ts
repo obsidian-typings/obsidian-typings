@@ -5,5 +5,5 @@ declare global {
    * Minified reference to `Object.defineProperties`.
    * @unofficial
    */
-  const Sf: typeof Object.defineProperties;
+  var Sf: typeof Object.defineProperties;
 }

@@ -7,7 +7,7 @@ declare global {
    * Notification component. Use to present timely, high-value information.
    *
    * @unofficial
-   * @deprecated - Added only for typing purposes. Use {@link Notice} instead.
+   * @deprecated - Added only for typing purposes. Use `window.Notice` or `import { Notice } from 'obsidian'` instead.
    */
-  const Notice__: typeof Notice;
+  var Notice__: typeof Notice;
 }

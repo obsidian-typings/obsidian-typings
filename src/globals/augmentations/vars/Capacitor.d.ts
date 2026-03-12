@@ -7,5 +7,5 @@ declare global {
    * Registry of available Capacitor platform implementations.
    * @unofficial
    */
-  const Capacitor: typeof CapacitorInstance;
+  var Capacitor: typeof CapacitorInstance;
 }

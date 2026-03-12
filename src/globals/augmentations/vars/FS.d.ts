@@ -9,5 +9,5 @@ declare global {
    *
    * @unofficial
    */
-  const FS: ExtractConstructor<CapacitorAdapterFs>;
+  var FS: ExtractConstructor<CapacitorAdapterFs>;
 }
