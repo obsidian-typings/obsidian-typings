@@ -76,6 +76,7 @@ export const config: Linter.Config[] = defineConfig([
       'obsidian-typings/file-extension': 'error',
       'obsidian-typings/import-extensions': 'error',
       'obsidian-typings/internals-interface-tags': 'error',
+      'obsidian-typings/jsdoc-empty-line-before-tags': 'error',
       'obsidian-typings/no-declare-module-in-internals': 'error',
       'obsidian-typings/no-import-alias-in-declare-global': 'error',
       'obsidian-typings/no-interface-tags-in-augmentations': 'error',

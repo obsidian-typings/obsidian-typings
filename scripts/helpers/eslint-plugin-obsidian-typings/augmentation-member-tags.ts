@@ -15,6 +15,7 @@ export const augmentationMemberTags = {
     type: 'problem' as const,
     docs: { description: 'Members in augmentation files must have @official or @unofficial JSDoc tag' },
     messages: {
+      both: 'Member "{{name}}" must not have both @official and @unofficial JSDoc tags.',
       missing: 'Member "{{name}}" in augmentation file must have @official or @unofficial JSDoc tag.'
     }
   },
@@ -30,8 +31,12 @@ export const augmentationMemberTags = {
 
       const name = getMemberName(node);
       const jsDoc = getJSDocComment(context.sourceCode, node);
-      if (!jsDoc || (!hasJSDocTag(jsDoc, 'official') && !hasJSDocTag(jsDoc, 'unofficial'))) {
+      const hasOfficial = jsDoc && hasJSDocTag(jsDoc, 'official');
+      const hasUnofficial = jsDoc && hasJSDocTag(jsDoc, 'unofficial');
+      if (!hasOfficial && !hasUnofficial) {
         context.report({ node, messageId: 'missing', data: { name } });
+      } else if (hasOfficial && hasUnofficial) {
+        context.report({ node, messageId: 'both', data: { name } });
       }
     }
 
@@ -45,8 +50,12 @@ export const augmentationMemberTags = {
           return;
         }
         const jsDoc = getJSDocComment(context.sourceCode, node);
-        if (!jsDoc || (!hasJSDocTag(jsDoc, 'official') && !hasJSDocTag(jsDoc, 'unofficial'))) {
+        const hasOfficial = jsDoc && hasJSDocTag(jsDoc, 'official');
+        const hasUnofficial = jsDoc && hasJSDocTag(jsDoc, 'unofficial');
+        if (!hasOfficial && !hasUnofficial) {
           context.report({ node, messageId: 'missing', data: { name: '[index]' } });
+        } else if (hasOfficial && hasUnofficial) {
+          context.report({ node, messageId: 'both', data: { name: '[index]' } });
         }
       }
     };

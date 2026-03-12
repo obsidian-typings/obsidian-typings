@@ -14,10 +14,11 @@ export const noMemberUnofficialInInternals = {
   meta: {
     type: 'problem' as const,
     docs: {
-      description: 'Members in internals files must not repeat @unofficial (interface-level tag covers them)'
+      description: 'Members in internals files must not have @unofficial or @official (interface-level tags cover them)'
     },
     messages: {
-      redundant: 'Member "{{name}}" must not have @unofficial tag (interface-level tag covers it).'
+      redundantOfficial: 'Member "{{name}}" must not have @official tag (internals are always unofficial).',
+      redundantUnofficial: 'Member "{{name}}" must not have @unofficial tag (interface-level tag covers it).'
     }
   },
   create(context: RuleContext) {
@@ -33,7 +34,10 @@ export const noMemberUnofficialInInternals = {
       const name = getMemberName(node);
       const jsDoc = getJSDocComment(context.sourceCode, node);
       if (jsDoc && hasJSDocTag(jsDoc, 'unofficial')) {
-        context.report({ node, messageId: 'redundant', data: { name } });
+        context.report({ node, messageId: 'redundantUnofficial', data: { name } });
+      }
+      if (jsDoc && hasJSDocTag(jsDoc, 'official')) {
+        context.report({ node, messageId: 'redundantOfficial', data: { name } });
       }
     }
 

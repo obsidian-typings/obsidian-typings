@@ -4,6 +4,7 @@ import { constructorGetterPlacement } from './constructor-getter-placement.ts';
 import { fileExtension } from './file-extension.ts';
 import { importExtensions } from './import-extensions.ts';
 import { internalsInterfaceTags } from './internals-interface-tags.ts';
+import { jsdocEmptyLineBeforeTags } from './jsdoc-empty-line-before-tags.ts';
 import { noDeclareModuleInInternals } from './no-declare-module-in-internals.ts';
 import { noImportAliasInDeclareGlobal } from './no-import-alias-in-declare-global.ts';
 import { noInterfaceTagsInAugmentations } from './no-interface-tags-in-augmentations.ts';
@@ -23,6 +24,7 @@ export const obsidianTypingsPlugin = {
     'constructor-getter-placement': constructorGetterPlacement,
     'file-extension': fileExtension,
     'import-extensions': importExtensions,
+    'jsdoc-empty-line-before-tags': jsdocEmptyLineBeforeTags,
     'internals-interface-tags': internalsInterfaceTags,
     'no-declare-module-in-internals': noDeclareModuleInInternals,
     'no-import-alias-in-declare-global': noImportAliasInDeclareGlobal,
