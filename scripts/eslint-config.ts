@@ -17,8 +17,9 @@ import { obsidianTypingsPlugin } from './helpers/eslint-plugin-obsidian-typings/
 const gitignorePath = resolve(import.meta.dirname, '..', '.gitignore');
 
 const typeScriptFiles = [
-  '**/*.ts',
-  '**/*.d.ts'
+  'src/**/*.ts',
+  'src/**/*.d.ts',
+  'scripts/**/*.ts'
 ];
 
 export const config: Linter.Config[] = defineConfig([
