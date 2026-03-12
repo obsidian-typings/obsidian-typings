@@ -1,5 +1,7 @@
-import type { App } from 'electron';
-import type { HoverParent } from 'obsidian';
+import type {
+  App,
+  HoverParent
+} from 'obsidian';
 
 /**
  * Information about the DOM events handlers.

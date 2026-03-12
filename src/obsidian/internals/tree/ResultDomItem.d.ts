@@ -1,5 +1,7 @@
-import type { App } from 'electron';
-import type { TFile } from 'obsidian';
+import type {
+  App,
+  TFile
+} from 'obsidian';
 
 import type { ResultDom } from './ResultDom.d.ts';
 import type { ResultDomItemChild } from './ResultDomItemChild.d.ts';
