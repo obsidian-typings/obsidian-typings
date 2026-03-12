@@ -7,13 +7,14 @@ import type { CustomArrayDict } from '../../internals/collections/CustomArrayDic
  * @unofficial
  */
 export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
-  /**
-   * @todo Documentation incomplete.
-   */
+  /** Internal map storing key-to-array mappings. */
   public data: Map<string, T[]> = new Map();
 
   /**
-   * @todo Documentation incomplete.
+   * Add a value to the array associated with the given key.
+   *
+   * @param key - The key.
+   * @param value - The value to add.
    */
   public add(key: string, value: T): void {
     let values = this.get(key);
@@ -28,28 +29,34 @@ export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
   }
 
   /**
-   * @todo Documentation incomplete.
+   * Remove all values for the given key.
+   *
+   * @param key - The key to clear.
    */
   public clear(key: string): void {
     this.data.delete(key);
   }
 
-  /**
-   * @todo Documentation incomplete.
-   */
+  /** Remove all keys and their values. */
   public clearAll(): void {
     this.data.clear();
   }
 
   /**
-   * @todo Documentation incomplete.
+   * Check whether the array for the given key contains the specified value.
+   *
+   * @param key - The key.
+   * @param value - The value to check.
+   * @returns Whether the value exists.
    */
   public contains(key: string, value: T): boolean {
     return !!this.get(key)?.contains(value);
   }
 
   /**
-   * @todo Documentation incomplete.
+   * Get the total number of values across all keys.
+   *
+   * @returns Total value count.
    */
   public count(): number {
     let ans = 0;
@@ -61,21 +68,29 @@ export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
   }
 
   /**
-   * @todo Documentation incomplete.
+   * Get the array of values for the given key, or `null` if not found.
+   *
+   * @param key - The key.
+   * @returns Array of values, or `null`.
    */
   public get(key: string): null | T[] {
     return this.data.get(key) || null;
   }
 
   /**
-   * @todo Documentation incomplete.
+   * Get all keys in the dictionary.
+   *
+   * @returns Array of keys.
    */
   public keys(): string[] {
     return Array.from(this.data.keys());
   }
 
   /**
-   * @todo Documentation incomplete.
+   * Remove a specific value from the array associated with the given key.
+   *
+   * @param key - The key.
+   * @param value - The value to remove.
    */
   public remove(key: string, value: T): void {
     const values = this.get(key);
