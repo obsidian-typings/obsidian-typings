@@ -77,9 +77,11 @@ export const config: Linter.Config[] = defineConfig([
       'obsidian-typings/import-extensions': 'error',
       'obsidian-typings/internals-interface-tags': 'error',
       'obsidian-typings/no-declare-module-in-internals': 'error',
+      'obsidian-typings/no-import-alias-in-declare-global': 'error',
       'obsidian-typings/no-interface-tags-in-augmentations': 'error',
       'obsidian-typings/no-member-unofficial-in-internals': 'error',
       'obsidian-typings/one-export-per-file': 'error',
+      'obsidian-typings/require-export-empty-in-augmentations': 'error',
       'obsidian-typings/window-member-file-sync': 'error'
     }
   },
