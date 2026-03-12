@@ -1,7 +1,3 @@
-import type { UserConfig } from '@commitlint/types';
+import { config } from './scripts/commitlint-config.ts';
 
-const Configuration: UserConfig = {
-  extends: ['@commitlint/config-conventional']
-};
-
-export default Configuration;
+export default config;
