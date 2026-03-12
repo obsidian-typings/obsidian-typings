@@ -254,7 +254,11 @@ export interface AppVaultConfig {
    */
   trashOption?: 'local' | 'none' | 'system';
 
-  /** @deprecated Probably left-over code from old properties type storage */
+  /**
+   * Left-over storage for old properties types.
+   *
+   * @deprecated Probably left-over code from old properties type storage
+   */
   types: object;
 
   /**

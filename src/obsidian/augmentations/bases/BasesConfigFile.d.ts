@@ -8,6 +8,8 @@ declare module 'obsidian' {
    */
   interface BasesConfigFile {
     /**
+     * Configuration for filters applied to this Base.
+     *
      * @official
      * @since 1.10.0
      */

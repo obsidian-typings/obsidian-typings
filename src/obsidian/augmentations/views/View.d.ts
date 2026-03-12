@@ -184,6 +184,8 @@ declare module 'obsidian' {
     onClose__?(): Promise<void>;
 
     /**
+     * Called when the header context menu is triggered.
+     *
      * @param e - The menu event.
      * @deprecated use {@link onPaneMenu} instead
      * @unofficial

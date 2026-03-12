@@ -420,6 +420,8 @@ declare module 'obsidian' {
     getActiveFileView(): FileView | null;
 
     /**
+     * Get the active leaf of the given view type.
+     *
      * @param type - The type of the view to get.
      * @returns The active leaf of the given type or `null`.
      * @deprecated - Use {@link getActiveViewOfType} instead

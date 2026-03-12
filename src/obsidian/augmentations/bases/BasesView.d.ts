@@ -17,6 +17,7 @@ declare module 'obsidian' {
     allProperties: BasesPropertyId[];
 
     /**
+     * Reference to the app instance.
      * @official
      * @since 1.10.0
      */

@@ -114,6 +114,8 @@ declare module 'obsidian' {
     showBacklinks: boolean;
 
     /**
+     * The CM5 source mode editor component.
+     *
      * @deprecated - CM5 Editor
      * @unofficial
      */

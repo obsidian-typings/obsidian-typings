@@ -511,6 +511,8 @@ declare module 'obsidian' {
     replaceRange__(replacement: string, from: EditorPosition, to?: EditorPosition, origin?: string): void;
 
     /**
+     * Replace the current selection with the given text.
+     *
      * @param replacement - The replacement text.
      * @param origin - The user event that triggered the replacement.
      * @official
@@ -682,6 +684,8 @@ declare module 'obsidian' {
     toggleNumberList(): void;
 
     /**
+     * Apply a transaction to the editor.
+     *
      * @param tx - The editor transaction to apply.
      * @param origin - The user event that triggered the transaction.
      * @official

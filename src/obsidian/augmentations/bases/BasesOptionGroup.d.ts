@@ -9,6 +9,8 @@ declare module 'obsidian' {
    */
   export interface BasesOptionGroup<T extends BasesOption> {
     /**
+     * Display name of the option group.
+     *
      * @public
      * @since 1.10.0
      * @unofficial ERROR: Missing `@unofficial` or `@official` tag
@@ -16,6 +18,8 @@ declare module 'obsidian' {
     displayName: string;
 
     /**
+     * The options contained in this group.
+     *
      * @public
      * @since 1.10.0
      * @unofficial ERROR: Missing `@unofficial` or `@official` tag
@@ -23,6 +27,8 @@ declare module 'obsidian' {
     items: T[];
 
     /**
+     * Discriminant indicating this is a group container.
+     *
      * @public
      * @since 1.10.0
      * @unofficial ERROR: Missing `@unofficial` or `@official` tag
