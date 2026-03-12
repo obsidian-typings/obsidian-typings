@@ -3,13 +3,7 @@ import type {
   // eslint-disable-next-line import-x/no-deprecated -- No other way.
   CapacitorPlatforms as CapacitorPlatformsInstance
 } from '@capacitor/core';
-import type { default as CodeMirrorInstance } from 'codemirror';
-import type { default as DOMPurifyInstance } from 'dompurify';
-import type {
-  default as electronInstance,
-  WebviewTag
-} from 'electron';
-import type { default as i18nextInstance } from 'i18next';
+import type { WebviewTag } from 'electron';
 import type { Mermaid } from 'mermaid';
 import type {
   App,
@@ -19,11 +13,7 @@ import type {
   request as requestInstance,
   requestUrl as requestUrlInstance
 } from 'obsidian';
-import type { default as pdfjsLibInstance } from 'pdfjs-dist';
-import type { default as PIXIInstance } from 'pixi.js';
-import type { default as PrismInstance } from 'prismjs';
 import type { scrypt as scryptInstance } from 'scrypt-js';
-import type { default as TurndownServiceInstance } from 'turndown';
 
 import type { CodeMirrorAdapterEx } from '../../@codemirror__view/internals/CodeMirrorAdapterEx.d.ts';
 import type { VimApi } from '../../@codemirror__view/internals/vim/VimApi.d.ts';
@@ -128,7 +118,7 @@ declare global {
      * Global CodeMirror 5 instance.
      * @unofficial
      */
-    CodeMirror: typeof CodeMirrorInstance;
+    CodeMirror: typeof import('codemirror');
 
     /**
      * CodeMirror adapter providing CM5-compatible API over CM6.
@@ -141,7 +131,7 @@ declare global {
      *
      * @unofficial
      */
-    DOMPurify: typeof DOMPurifyInstance;
+    DOMPurify: typeof import('dompurify');
 
     /**
      * Minified reference to `Object.propertyIsEnumerable`.
@@ -153,7 +143,7 @@ declare global {
      * Electron module for desktop platform APIs.
      * @unofficial
      */
-    electron: typeof electronInstance;
+    electron: typeof import('electron');
 
     /**
      * Electron BrowserWindow instance for the current window.
@@ -178,7 +168,7 @@ declare global {
      * Global i18next internationalization framework instance.
      * @unofficial
      */
-    i18next: typeof i18nextInstance;
+    i18next: typeof import('i18next');
 
     /**
      * MathJax instance for rendering mathematical notation.
@@ -231,7 +221,7 @@ declare global {
      * PDF.js library for parsing and rendering PDF documents.
      * @unofficial
      */
-    pdfjsLib?: typeof pdfjsLibInstance;
+    pdfjsLib?: typeof import('pdfjs-dist');
 
     /**
      * Testing utilities for PDF.js.
@@ -243,13 +233,13 @@ declare global {
      * PixiJS library for 2D rendering (used for canvas views).
      * @unofficial
      */
-    PIXI: typeof PIXIInstance;
+    PIXI: typeof import('pixi.js');
 
     /**
      * Prism.js syntax highlighting library instance.
      * @unofficial
      */
-    Prism?: typeof PrismInstance;
+    Prism?: typeof import('prismjs');
 
     /**
      * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
@@ -294,7 +284,7 @@ declare global {
      * TurndownService for converting HTML to Markdown.
      * @unofficial
      */
-    TurndownService: typeof TurndownServiceInstance;
+    TurndownService: typeof import('turndown');
 
     /**
      * Electron WebView tag for embedding external web content.

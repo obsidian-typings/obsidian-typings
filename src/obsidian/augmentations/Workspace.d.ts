@@ -22,6 +22,8 @@ import type { SerializedWorkspace } from '../internals/workspace/SerializedWorks
 import type { SetActiveLeafParams } from '../internals/workspace/SetActiveLeafParams.d.ts';
 import type { WorkspaceHoverLinkSourcesRecord } from '../internals/workspace/WorkspaceHoverLinkSourcesRecord.d.ts';
 
+export {};
+
 declare module 'obsidian' {
   /**
    * A workspace.

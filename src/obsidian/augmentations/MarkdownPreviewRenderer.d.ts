@@ -2,6 +2,8 @@ import type { getMarkdownPreviewRendererConstructor } from '../implementations/c
 import type { CodeBlockPostProcessorHandler } from '../internals/CodeBlockPostProcessorHandler.d.ts';
 import type { DomEventsHandlers } from '../internals/DomEventsHandlers.d.ts';
 
+export {};
+
 declare module 'obsidian' {
   /**
    * The renderer of the markdown preview.

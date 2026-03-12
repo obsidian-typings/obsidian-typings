@@ -1,5 +1,3 @@
-import type { default as pdfjsLibInstance } from 'pdfjs-dist';
-
 import { loadPdfJs as loadPdfJsOriginal } from 'obsidian';
 
 /**
@@ -12,6 +10,6 @@ import { loadPdfJs as loadPdfJsOriginal } from 'obsidian';
  * @public
  * @unofficial
  */
-export async function loadPdfJs(): Promise<typeof pdfjsLibInstance> {
-  return (await loadPdfJsOriginal()) as typeof pdfjsLibInstance;
+export async function loadPdfJs(): Promise<typeof import('pdfjs-dist')> {
+  return (await loadPdfJsOriginal()) as typeof import('pdfjs-dist');
 }

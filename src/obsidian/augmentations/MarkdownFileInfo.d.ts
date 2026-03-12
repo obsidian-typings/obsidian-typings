@@ -1,5 +1,7 @@
 import type { MetadataEditor } from '../internals/MetadataEditor.d.ts';
 
+export {};
+
 declare module 'obsidian' {
   /**
    * The markdown file info.

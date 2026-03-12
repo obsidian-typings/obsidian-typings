@@ -1,4 +1,4 @@
-import type { default as CodeMirrorInstance } from 'codemirror';
+export {};
 
 declare global {
   /**
@@ -6,5 +6,5 @@ declare global {
    * @unofficial
    * @deprecated - Added only for typing purposes. Use {@link CodeMirror} instead.
    */
-  const CodeMirror__: typeof CodeMirrorInstance;
+  const CodeMirror__: typeof import('codemirror');
 }

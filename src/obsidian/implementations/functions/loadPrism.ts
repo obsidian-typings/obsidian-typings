@@ -1,5 +1,3 @@
-import type { default as PrismInstance } from 'prismjs';
-
 import { loadPrism as loadPrismOriginal } from 'obsidian';
 
 /**
@@ -12,6 +10,6 @@ import { loadPrism as loadPrismOriginal } from 'obsidian';
  * @public
  * @unofficial
  */
-export async function loadPrism(): Promise<typeof PrismInstance> {
-  return (await loadPrismOriginal()) as typeof PrismInstance;
+export async function loadPrism(): Promise<typeof import('prismjs')> {
+  return (await loadPrismOriginal()) as typeof import('prismjs');
 }

@@ -1,5 +1,3 @@
-import type { default as PIXIInstance } from 'pixi.js';
-
 export {};
 
 declare global {
@@ -7,5 +5,5 @@ declare global {
    * PixiJS library for 2D rendering (used for canvas views).
    * @unofficial
    */
-  const PIXI: typeof PIXIInstance;
+  const PIXI: typeof import('pixi.js');
 }

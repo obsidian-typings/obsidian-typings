@@ -1,5 +1,7 @@
 import type { EventsEntry } from '../internals/EventsEntry.d.ts';
 
+export {};
+
 declare module 'obsidian' {
   /**
    * Event emitter implementation

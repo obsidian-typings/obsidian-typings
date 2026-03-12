@@ -1,5 +1,3 @@
-import type { default as DOMPurifyInstance } from 'dompurify';
-
 export {};
 
 declare global {
@@ -9,5 +7,5 @@ declare global {
    * @unofficial
    * @deprecated - Added only for typing purposes. Use {@link DOMPurify} instead.
    */
-  const DOMPurify__: typeof DOMPurifyInstance;
+  const DOMPurify__: typeof import('dompurify');
 }

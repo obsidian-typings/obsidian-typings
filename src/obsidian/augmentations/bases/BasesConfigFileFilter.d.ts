@@ -2,6 +2,8 @@ import type { BasesConfigFileFilterAndClause } from '../../internals/bases/Bases
 import type { BasesConfigFileFilterNotClause } from '../../internals/bases/BasesConfigFileFilterNotClause.d.ts';
 import type { BasesConfigFileFilterOrClause } from '../../internals/bases/BasesConfigFileFilterOrClause.d.ts';
 
+export {};
+
 declare module 'obsidian' {
   /**
    * A filter clause used in Bases config files, supporting AND, OR, NOT, and string conditions.

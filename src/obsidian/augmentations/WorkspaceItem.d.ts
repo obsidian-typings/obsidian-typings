@@ -1,6 +1,8 @@
 import type { getWorkspaceItemConstructor } from '../implementations/constructors/augmentations/getWorkspaceItemConstructor.d.ts';
 import type { SerializedWorkspaceItem } from '../internals/workspace/SerializedWorkspaceItem.d.ts';
 
+export {};
+
 declare module 'obsidian' {
   /**
    * Workspace item.

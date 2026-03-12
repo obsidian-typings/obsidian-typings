@@ -1,5 +1,3 @@
-import type { default as PrismInstance } from 'prismjs';
-
 export {};
 
 declare global {
@@ -8,5 +6,5 @@ declare global {
    * @unofficial
    * @deprecated - Added only for typing purposes. Use {@link Prism} instead.
    */
-  const Prism__: typeof PrismInstance;
+  const Prism__: typeof import('prismjs');
 }
