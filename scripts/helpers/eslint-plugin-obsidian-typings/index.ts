@@ -8,8 +8,10 @@ import { noDeclareModuleInInternals } from './no-declare-module-in-internals.ts'
 import { noImportAliasInDeclareGlobal } from './no-import-alias-in-declare-global.ts';
 import { noInterfaceTagsInAugmentations } from './no-interface-tags-in-augmentations.ts';
 import { noMemberUnofficialInInternals } from './no-member-unofficial-in-internals.ts';
+import { noTodoTag } from './no-todo-tag.ts';
 import { oneExportPerFile } from './one-export-per-file.ts';
 import { requireExportEmptyInAugmentations } from './require-export-empty-in-augmentations.ts';
+import { requireMemberDescription } from './require-member-description.ts';
 import { requireVarInGlobalVars } from './require-var-in-global-vars.ts';
 import { windowMemberFileSync } from './window-member-file-sync.ts';
 
@@ -26,8 +28,10 @@ export const obsidianTypingsPlugin = {
     'no-import-alias-in-declare-global': noImportAliasInDeclareGlobal,
     'no-interface-tags-in-augmentations': noInterfaceTagsInAugmentations,
     'no-member-unofficial-in-internals': noMemberUnofficialInInternals,
+    'no-todo-tag': noTodoTag,
     'one-export-per-file': oneExportPerFile,
     'require-export-empty-in-augmentations': requireExportEmptyInAugmentations,
+    'require-member-description': requireMemberDescription,
     'require-var-in-global-vars': requireVarInGlobalVars,
     'window-member-file-sync': windowMemberFileSync
   }

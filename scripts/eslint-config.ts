@@ -80,8 +80,10 @@ export const config: Linter.Config[] = defineConfig([
       'obsidian-typings/no-import-alias-in-declare-global': 'error',
       'obsidian-typings/no-interface-tags-in-augmentations': 'error',
       'obsidian-typings/no-member-unofficial-in-internals': 'error',
+      'obsidian-typings/no-todo-tag': 'error',
       'obsidian-typings/one-export-per-file': 'error',
       'obsidian-typings/require-export-empty-in-augmentations': 'error',
+      'obsidian-typings/require-member-description': 'error',
       'obsidian-typings/require-var-in-global-vars': 'error',
       'obsidian-typings/window-member-file-sync': 'error'
     }
