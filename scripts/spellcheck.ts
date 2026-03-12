@@ -1,11 +1,3 @@
-import type { Glob } from '@cspell/cspell-types';
-
-import {
-  checkFilenameMatchesGlob,
-  isBinaryFile,
-  loadConfig
-} from 'cspell-lib';
-
 import { execFromRoot } from './helpers/exec.ts';
 
 async function main() {
@@ -14,23 +6,11 @@ async function main() {
 }
 
 export async function spellcheck(paths: string[] = []): Promise<void> {
-  let filteredPaths = await filterPaths(paths);
-  if (filteredPaths.length === 0) {
-    if (paths.length === 0) {
-      filteredPaths = ['.'];
-    } else {
-      return;
-    }
+  if (paths.length === 0) {
+    paths = ['.'];
   }
-  await execFromRoot(['npx', 'cspell', ...filteredPaths, '--no-progress']);
-}
 
-async function filterPaths(paths: string[]): Promise<string[]> {
-  const config = await loadConfig('cspell.json');
-  const ignorePaths = config.ignorePaths ?? [];
-  const globs = ignorePaths.map((p: Glob): string => typeof p === 'string' ? p : p.glob);
-
-  return paths.filter((path) => !isBinaryFile(path) && !checkFilenameMatchesGlob(path, globs));
+  await execFromRoot(['npx', 'cspell', ...paths, '--no-progress', '--no-must-find-files']);
 }
 
 await main();
