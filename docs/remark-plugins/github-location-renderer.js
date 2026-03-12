@@ -7,7 +7,7 @@ import { decorateHast } from './util.js';
  * Removes the "Defined in" headings, and moves the github link to the previous heading (the actual definition)
  */
 export default function remarkToc() {
-  return function(tree) {
+  return function (tree) {
     visit(tree, (node, index, parent) => {
       if (node.type !== 'heading' || node.children[0].value !== 'Defined in') {
         return;

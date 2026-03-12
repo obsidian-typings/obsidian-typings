@@ -19,7 +19,7 @@ export declare class HighlightOutliner {
    * @param isLTR - `true` if we're in LTR mode. It's used to determine.
    *   the last point of the boxes.
    */
-  constructor(boxes: Array<Object>, borderWidth?: number, innerMargin?: number, isLTR?: boolean);
+  constructor(boxes: Array<object>, borderWidth?: number, innerMargin?: number, isLTR?: boolean);
 
   /**
    * Compute and return the highlight outlines for the given boxes.

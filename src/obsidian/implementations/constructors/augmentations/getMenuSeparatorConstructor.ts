@@ -1,6 +1,4 @@
-import {
-  MenuSeparator
-} from 'obsidian';
+import { MenuSeparator } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

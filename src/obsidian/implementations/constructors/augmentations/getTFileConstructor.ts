@@ -1,6 +1,4 @@
-import {
-  TFile
-} from 'obsidian';
+import { TFile } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

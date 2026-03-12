@@ -1,6 +1,4 @@
-import {
-  SecretComponent
-} from 'obsidian';
+import { SecretComponent } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 

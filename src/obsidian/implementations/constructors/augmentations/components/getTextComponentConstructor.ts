@@ -1,6 +1,4 @@
-import {
-  TextComponent
-} from 'obsidian';
+import { TextComponent } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 

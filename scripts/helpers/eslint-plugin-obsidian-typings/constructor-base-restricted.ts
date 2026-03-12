@@ -20,8 +20,7 @@ export const constructorBaseRestricted = {
       description: 'ConstructorBase may only be imported in files inside a constructors/ directory'
     },
     messages: {
-      restrictedImport:
-        '`ConstructorBase` may only be imported in files inside a `constructors/` directory. Use `ExtractConstructor` instead.'
+      restrictedImport: '`ConstructorBase` may only be imported in files inside a `constructors/` directory. Use `ExtractConstructor` instead.'
     }
   },
   create(context: RuleContext) {

@@ -23,7 +23,7 @@ export const augmentationMemberTags = {
       return {};
     }
 
-    function checkMember(node: TSESTree.Node & { key?: TSESTree.Node }): void {
+    function checkMember(node: { key?: TSESTree.Node } & TSESTree.Node): void {
       if (!isDirectInterfaceMember(node)) {
         return;
       }

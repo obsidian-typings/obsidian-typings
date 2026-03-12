@@ -1,6 +1,4 @@
-import type {
-  getBasesQueryResultConstructor
-} from '../../implementations/constructors/augmentations/bases/getBasesQueryResultConstructor.d.ts';
+import type { getBasesQueryResultConstructor } from '../../implementations/constructors/augmentations/bases/getBasesQueryResultConstructor.d.ts';
 
 export {};
 

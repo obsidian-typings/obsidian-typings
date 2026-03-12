@@ -1,6 +1,4 @@
-import type {
-  getHoverPopoverConstructor
-} from '../implementations/constructors/augmentations/getHoverPopoverConstructor.d.ts';
+import type { getHoverPopoverConstructor } from '../implementations/constructors/augmentations/getHoverPopoverConstructor.d.ts';
 
 export {};
 

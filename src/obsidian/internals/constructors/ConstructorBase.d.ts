@@ -13,7 +13,7 @@ export interface ConstructorBase<Args extends unknown[], Instance> {
    * @param args - The constructor arguments.
    * @returns The constructed instance.
    */
-  new(...args: Args): Instance;
+  new (...args: Args): Instance;
 
   /** Prototype of the constructed instances. */
   prototype: Instance;

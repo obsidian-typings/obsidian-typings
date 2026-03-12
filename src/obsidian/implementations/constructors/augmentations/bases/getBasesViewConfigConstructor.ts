@@ -1,6 +1,4 @@
-import {
-  BasesViewConfig
-} from 'obsidian';
+import { BasesViewConfig } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 

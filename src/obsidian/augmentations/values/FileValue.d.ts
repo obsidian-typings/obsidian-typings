@@ -1,6 +1,4 @@
-import type {
-  getFileValueConstructor
-} from '../../implementations/constructors/augmentations/values/getFileValueConstructor.d.ts';
+import type { getFileValueConstructor } from '../../implementations/constructors/augmentations/values/getFileValueConstructor.d.ts';
 
 export {};
 

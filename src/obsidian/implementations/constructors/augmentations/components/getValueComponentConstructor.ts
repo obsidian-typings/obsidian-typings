@@ -1,6 +1,4 @@
-import {
-  ValueComponent
-} from 'obsidian';
+import { ValueComponent } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 

@@ -1,6 +1,4 @@
-import type {
-  getBooleanValueConstructor
-} from '../../implementations/constructors/augmentations/values/getBooleanValueConstructor.d.ts';
+import type { getBooleanValueConstructor } from '../../implementations/constructors/augmentations/values/getBooleanValueConstructor.d.ts';
 
 export {};
 
@@ -32,6 +30,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link BooleanValue.type} instead.
      */
-    var type__: string;
+    const type__: string;
   }
 }

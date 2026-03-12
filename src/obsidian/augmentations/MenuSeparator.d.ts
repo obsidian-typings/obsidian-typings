@@ -1,6 +1,4 @@
-import type {
-  getMenuSeparatorConstructor
-} from '../implementations/constructors/augmentations/getMenuSeparatorConstructor.d.ts';
+import type { getMenuSeparatorConstructor } from '../implementations/constructors/augmentations/getMenuSeparatorConstructor.d.ts';
 
 export {};
 

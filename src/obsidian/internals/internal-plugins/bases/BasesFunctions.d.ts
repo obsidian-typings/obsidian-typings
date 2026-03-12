@@ -86,205 +86,205 @@ export interface BasesFunctions {
   /**
    * The absolute function.
    */
-  abs: AbsFunction;
+  'abs': AbsFunction;
 
   /**
    * The ceiling function.
    */
-  ceil: CeilFunction;
+  'ceil': CeilFunction;
 
   /**
    * The concat function.
    */
-  concat: ConcatFunction;
+  'concat': ConcatFunction;
 
   /**
    * The contains function.
    */
-  contains: ContainsFunction;
+  'contains': ContainsFunction;
 
   /**
    * The contains all function.
    */
-  containsAll: ContainsAllFunction;
+  'containsAll': ContainsAllFunction;
 
   /**
    * The contains any function.
    */
-  containsAny: ContainsAnyFunction;
+  'containsAny': ContainsAnyFunction;
 
   /**
    * The contains none function.
    */
-  containsNone: ContainsNoneFunction;
+  'containsNone': ContainsNoneFunction;
 
   /**
    * The date after function.
    */
-  dateAfter: DateAfterFunction;
+  'dateAfter': DateAfterFunction;
 
   /**
    * The date before function.
    */
-  dateBefore: DateBeforeFunction;
+  'dateBefore': DateBeforeFunction;
 
   /**
    * The date diff function.
    */
-  dateDiff: DateDiffFunction;
+  'dateDiff': DateDiffFunction;
 
   /**
    * The date equals function.
    */
-  dateEquals: DateEqualsFunction;
+  'dateEquals': DateEqualsFunction;
 
   /**
    * The date modify function.
    */
-  dateModify: DateModifyFunction;
+  'dateModify': DateModifyFunction;
 
   /**
    * The date not equals function.
    */
-  dateNotEquals: DateNotEqualsFunction;
+  'dateNotEquals': DateNotEqualsFunction;
 
   /**
    * The date on or after function.
    */
-  dateOnOrAfter: DateOnOrAfterFunction;
+  'dateOnOrAfter': DateOnOrAfterFunction;
 
   /**
    * The date on or before function.
    */
-  dateOnOrBefore: DateOnOrBeforeFunction;
+  'dateOnOrBefore': DateOnOrBeforeFunction;
 
   /**
    * The day function.
    */
-  day: DayFunction;
+  'day': DayFunction;
 
   /**
    * The empty function.
    */
-  empty: EmptyFunction;
+  'empty': EmptyFunction;
 
   /**
    * The flat function.
    */
-  flat: FlatFunction;
+  'flat': FlatFunction;
 
   /**
    * The floor function.
    */
-  floor: FloorFunction;
+  'floor': FloorFunction;
 
   /**
    * The hour function.
    */
-  hour: HourFunction;
+  'hour': HourFunction;
 
   /**
    * The if function.
    */
-  if: IfFunction;
+  'if': IfFunction;
 
   /**
    * The index function.
    */
-  index: IndexFunction;
+  'index': IndexFunction;
 
   /**
    * The in folder function.
    */
-  inFolder: InFolderFunction;
+  'inFolder': InFolderFunction;
 
   /**
    * The join function.
    */
-  join: JoinFunction;
+  'join': JoinFunction;
 
   /**
    * The length function.
    */
-  len: LenFunction;
+  'len': LenFunction;
 
   /**
    * The links to function.
    */
-  linksTo: LinksToFunction;
+  'linksTo': LinksToFunction;
 
   /**
    * The minimum function.
    */
-  min: MinFunction;
+  'min': MinFunction;
 
   /**
    * The minute function.
    */
-  minute: MinuteFunction;
+  'minute': MinuteFunction;
 
   /**
    * The month function.
    */
-  month: MonthFunction;
+  'month': MonthFunction;
 
   /**
    * The not function.
    */
-  not: NotFunction;
+  'not': NotFunction;
 
   /**
    * The not contains function.
    */
-  notContains: NotContainsFunction;
+  'notContains': NotContainsFunction;
 
   /**
    * The not empty function.
    */
-  notEmpty: NotEmptyFunction;
+  'notEmpty': NotEmptyFunction;
 
   /**
    * The now function.
    */
-  now: NowFunction;
+  'now': NowFunction;
 
   /**
    * The round function.
    */
-  round: RoundFunction;
+  'round': RoundFunction;
 
   /**
    * The second function.
    */
-  second: SecondFunction;
+  'second': SecondFunction;
 
   /**
    * The slice function.
    */
-  slice: SliceFunction;
+  'slice': SliceFunction;
 
   /**
    * The tagged with function.
    */
-  taggedWith: TaggedWithFunction;
+  'taggedWith': TaggedWithFunction;
 
   /**
    * The title function.
    */
-  title: TitleFunction;
+  'title': TitleFunction;
 
   /**
    * The trim function.
    */
-  trim: TrimFunction;
+  'trim': TrimFunction;
 
   /**
    * The unique function.
    */
-  unique: UniqueFunction;
+  'unique': UniqueFunction;
 
   /**
    * The year function.
    */
-  year: YearFunction;
+  'year': YearFunction;
 }

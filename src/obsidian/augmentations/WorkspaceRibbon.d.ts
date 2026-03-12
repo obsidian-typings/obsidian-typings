@@ -1,6 +1,4 @@
-import type {
-  getWorkspaceRibbonConstructor
-} from '../implementations/constructors/augmentations/getWorkspaceRibbonConstructor.d.ts';
+import type { getWorkspaceRibbonConstructor } from '../implementations/constructors/augmentations/getWorkspaceRibbonConstructor.d.ts';
 
 export {};
 

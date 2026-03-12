@@ -1,4 +1,5 @@
 import type { PlatformEx } from '../internals/PlatformEx.d.ts';
+
 export {};
 
 declare module 'obsidian' {

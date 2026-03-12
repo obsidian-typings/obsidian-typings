@@ -1,6 +1,4 @@
-import {
-  FileSystemAdapter
-} from 'obsidian';
+import { FileSystemAdapter } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

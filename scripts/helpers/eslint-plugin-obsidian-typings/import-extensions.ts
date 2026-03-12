@@ -15,7 +15,7 @@ export const importExtensions = {
     const isDeclarationFile = context.filename.endsWith('.d.ts');
 
     function isTypeOnly(
-      node: TSESTree.ImportDeclaration | TSESTree.ExportNamedDeclaration | TSESTree.ExportAllDeclaration
+      node: TSESTree.ExportAllDeclaration | TSESTree.ExportNamedDeclaration | TSESTree.ImportDeclaration
     ): boolean {
       if (isDeclarationFile) {
         return true;
@@ -30,7 +30,7 @@ export const importExtensions = {
     }
 
     function check(
-      node: TSESTree.ImportDeclaration | TSESTree.ExportNamedDeclaration | TSESTree.ExportAllDeclaration
+      node: TSESTree.ExportAllDeclaration | TSESTree.ExportNamedDeclaration | TSESTree.ImportDeclaration
     ): void {
       const source = node.source;
       if (!source) {

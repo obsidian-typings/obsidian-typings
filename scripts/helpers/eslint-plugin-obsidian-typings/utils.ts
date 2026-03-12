@@ -53,7 +53,7 @@ export function isDirectInterfaceMember(node: TSESTree.Node): boolean {
   return node.parent?.type === 'TSInterfaceBody';
 }
 
-export function getMemberName(node: TSESTree.Node & { key?: TSESTree.Node }): string {
+export function getMemberName(node: { key?: TSESTree.Node } & TSESTree.Node): string {
   const key = node.key;
   if (key && 'name' in key) {
     return (key as TSESTree.Identifier).name;

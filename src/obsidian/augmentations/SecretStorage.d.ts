@@ -1,6 +1,4 @@
-import type {
-  getSecretStorageConstructor
-} from '../implementations/constructors/augmentations/getSecretStorageConstructor.d.ts';
+import type { getSecretStorageConstructor } from '../implementations/constructors/augmentations/getSecretStorageConstructor.d.ts';
 
 export {};
 

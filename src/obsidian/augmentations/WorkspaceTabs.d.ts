@@ -1,6 +1,4 @@
-import type {
-  getWorkspaceTabsConstructor
-} from '../implementations/constructors/augmentations/getWorkspaceTabsConstructor.d.ts';
+import type { getWorkspaceTabsConstructor } from '../implementations/constructors/augmentations/getWorkspaceTabsConstructor.d.ts';
 
 export {};
 

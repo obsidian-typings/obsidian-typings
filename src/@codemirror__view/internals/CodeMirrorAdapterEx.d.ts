@@ -21,7 +21,7 @@ export interface CodeMirrorAdapterEx {
    * @param cm6 - The Vim editor instance to wrap.
    * @returns The created CodeMirror editor.
    */
-  new(cm6: VimEditor): CodeMirrorEditor;
+  new (cm6: VimEditor): CodeMirrorEditor;
 
   /** Built-in editor commands (undo, redo, indent, etc.). */
   commands: CodeMirrorAdapterExCommands;
@@ -42,7 +42,7 @@ export interface CodeMirrorAdapterEx {
    * @param ch - The character offset.
    * @returns The created editor position.
    */
-  Pos: new(line: number, ch: number) => EditorPosition;
+  Pos: new (line: number, ch: number) => EditorPosition;
 
   /** StringStream class for tokenizing input. */
   StringStream: unknown;

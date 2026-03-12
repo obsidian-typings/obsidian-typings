@@ -17,7 +17,7 @@ export const oneExportPerFile = {
       return {};
     }
 
-    const exports: TSESTree.Node[] = [];
+    const exportNodes: TSESTree.Node[] = [];
 
     return {
       ExportNamedDeclaration(node: TSESTree.ExportNamedDeclaration): void {
@@ -29,21 +29,21 @@ export const oneExportPerFile = {
         if (!node.declaration && node.source) {
           return;
         }
-        exports.push(node);
+        exportNodes.push(node);
       },
       ExportDefaultDeclaration(node: TSESTree.ExportDefaultDeclaration): void {
-        exports.push(node);
+        exportNodes.push(node);
       },
       ExportAllDeclaration(node: TSESTree.ExportAllDeclaration): void {
-        exports.push(node);
+        exportNodes.push(node);
       },
       'Program:exit'(): void {
-        if (exports.length > 1) {
-          for (const exp of exports) {
+        if (exportNodes.length > 1) {
+          for (const exp of exportNodes) {
             context.report({
               node: exp,
               messageId: 'tooMany',
-              data: { count: String(exports.length) }
+              data: { count: String(exportNodes.length) }
             });
           }
         }

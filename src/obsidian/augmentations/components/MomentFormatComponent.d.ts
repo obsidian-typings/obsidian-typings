@@ -1,6 +1,4 @@
-import type {
-  getMomentFormatComponentConstructor
-} from '../../implementations/constructors/augmentations/components/getMomentFormatComponentConstructor.d.ts';
+import type { getMomentFormatComponentConstructor } from '../../implementations/constructors/augmentations/components/getMomentFormatComponentConstructor.d.ts';
 
 export {};
 

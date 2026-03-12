@@ -1,5 +1,6 @@
-export {};
 import type { App } from 'obsidian';
+
+export {};
 
 declare global {
   /**

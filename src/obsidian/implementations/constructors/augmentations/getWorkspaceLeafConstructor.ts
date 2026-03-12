@@ -1,6 +1,4 @@
-import {
-  WorkspaceLeaf
-} from 'obsidian';
+import { WorkspaceLeaf } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

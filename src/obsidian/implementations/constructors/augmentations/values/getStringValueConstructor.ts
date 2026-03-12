@@ -1,6 +1,4 @@
-import {
-  StringValue
-} from 'obsidian';
+import { StringValue } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 

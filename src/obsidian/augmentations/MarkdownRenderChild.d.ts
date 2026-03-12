@@ -1,6 +1,4 @@
-import type {
-  getMarkdownRenderChildConstructor
-} from '../implementations/constructors/augmentations/getMarkdownRenderChildConstructor.d.ts';
+import type { getMarkdownRenderChildConstructor } from '../implementations/constructors/augmentations/getMarkdownRenderChildConstructor.d.ts';
 
 export {};
 

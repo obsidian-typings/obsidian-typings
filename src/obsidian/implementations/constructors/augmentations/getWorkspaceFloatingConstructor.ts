@@ -1,6 +1,4 @@
-import {
-  WorkspaceFloating
-} from 'obsidian';
+import { WorkspaceFloating } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

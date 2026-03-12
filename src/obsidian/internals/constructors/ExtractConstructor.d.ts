@@ -22,8 +22,7 @@ import type { ConstructorBase } from './ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export type ExtractConstructor<T> = T extends { constructor5__(...args: infer Args): infer Instance }
-  ? ConstructorBase<Args, Instance>
+export type ExtractConstructor<T> = T extends { constructor5__(...args: infer Args): infer Instance } ? ConstructorBase<Args, Instance>
   : T extends { constructor4__(...args: infer Args): infer Instance } ? ConstructorBase<Args, Instance>
   : T extends { constructor3__(...args: infer Args): infer Instance } ? ConstructorBase<Args, Instance>
   : T extends { constructor2__(...args: infer Args): infer Instance } ? ConstructorBase<Args, Instance>

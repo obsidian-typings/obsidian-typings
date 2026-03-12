@@ -1,6 +1,4 @@
-import {
-  Modal
-} from 'obsidian';
+import { Modal } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

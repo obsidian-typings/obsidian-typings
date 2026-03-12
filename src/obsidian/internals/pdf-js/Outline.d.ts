@@ -53,7 +53,7 @@ export declare class Outline {
    *
    * @returns The bounding box of the outline.
    */
-  get box(): null | Object;
+  get box(): null | object;
 
   /**
    * Create cubic bezier control points between two endpoints.

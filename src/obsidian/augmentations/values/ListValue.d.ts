@@ -1,6 +1,4 @@
-import type {
-  getListValueConstructor
-} from '../../implementations/constructors/augmentations/values/getListValueConstructor.d.ts';
+import type { getListValueConstructor } from '../../implementations/constructors/augmentations/values/getListValueConstructor.d.ts';
 
 export {};
 
@@ -90,6 +88,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link ListValue.type} instead.
      */
-    var type__: string;
+    const type__: string;
   }
 }

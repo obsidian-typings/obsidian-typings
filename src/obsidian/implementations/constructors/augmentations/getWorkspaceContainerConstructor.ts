@@ -1,6 +1,4 @@
-import {
-  WorkspaceContainer
-} from 'obsidian';
+import { WorkspaceContainer } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

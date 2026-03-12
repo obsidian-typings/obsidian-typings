@@ -1,6 +1,4 @@
-import type {
-  getStringValueConstructor
-} from '../../implementations/constructors/augmentations/values/getStringValueConstructor.d.ts';
+import type { getStringValueConstructor } from '../../implementations/constructors/augmentations/values/getStringValueConstructor.d.ts';
 
 export {};
 
@@ -32,6 +30,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link StringValue.type} instead.
      */
-    var type__: string;
+    const type__: string;
   }
 }

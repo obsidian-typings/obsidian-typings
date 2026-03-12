@@ -1,6 +1,4 @@
-import type {
-  SerializedWorkspaceLeftRibbonHiddenItemsRecord
-} from './SerializedWorkspaceLeftRibbonHiddenItemsRecord.d.ts';
+import type { SerializedWorkspaceLeftRibbonHiddenItemsRecord } from './SerializedWorkspaceLeftRibbonHiddenItemsRecord.d.ts';
 
 /**
  * Serialized representation of the left ribbon bar state.

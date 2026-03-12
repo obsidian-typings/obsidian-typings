@@ -4,9 +4,7 @@ import type {
   ViewCreator
 } from 'obsidian';
 
-import type {
-  getViewRegistryConstructor
-} from '../../implementations/constructors/internals/getViewRegistryConstructor.d.ts';
+import type { getViewRegistryConstructor } from '../../implementations/constructors/internals/getViewRegistryConstructor.d.ts';
 import type { TypedViewCreator } from '../views/TypedViewCreator.d.ts';
 import type { ViewTypeType } from '../views/ViewTypeType.d.ts';
 import type { ViewTypeViewMapping } from '../views/ViewTypeViewMapping.d.ts';

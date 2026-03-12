@@ -1,5 +1,7 @@
-import type { WorkspaceLeaf } from 'obsidian';
-import type { View } from 'obsidian';
+import type {
+  View,
+  WorkspaceLeaf
+} from 'obsidian';
 
 /**
  * Factory function type that creates a typed view instance for a given workspace leaf.

@@ -1,6 +1,4 @@
-import type {
-  getWorkspaceMobileDrawerConstructor
-} from '../implementations/constructors/augmentations/getWorkspaceMobileDrawerConstructor.d.ts';
+import type { getWorkspaceMobileDrawerConstructor } from '../implementations/constructors/augmentations/getWorkspaceMobileDrawerConstructor.d.ts';
 
 export {};
 

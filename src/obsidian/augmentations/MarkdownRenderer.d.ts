@@ -1,6 +1,4 @@
-import type {
-  getMarkdownRendererConstructor
-} from '../implementations/constructors/augmentations/getMarkdownRendererConstructor.d.ts';
+import type { getMarkdownRendererConstructor } from '../implementations/constructors/augmentations/getMarkdownRendererConstructor.d.ts';
 
 export {};
 

@@ -1,6 +1,4 @@
-import type {
-  getIconValueConstructor
-} from '../../implementations/constructors/augmentations/values/getIconValueConstructor.d.ts';
+import type { getIconValueConstructor } from '../../implementations/constructors/augmentations/values/getIconValueConstructor.d.ts';
 
 export {};
 

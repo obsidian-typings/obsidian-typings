@@ -1,6 +1,4 @@
-import {
-  NumberValue
-} from 'obsidian';
+import { NumberValue } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 

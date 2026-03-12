@@ -1,3 +1,5 @@
+import type { TSESTree } from '@typescript-eslint/utils';
+
 import {
   readdirSync,
   readFileSync
@@ -8,8 +10,6 @@ import {
   join,
   resolve
 } from 'path';
-
-import type { TSESTree } from '@typescript-eslint/utils';
 
 import type { RuleContext } from './utils.ts';
 
@@ -75,10 +75,14 @@ function escapeRegExp(str: string): string {
 }
 
 interface ImportSpec {
-  originalModule: string;
-  resolvedModule: string;
   imported: string;
   local: string;
+  originalModule: string;
+  resolvedModule: string;
+}
+
+function stripComments(text: string): string {
+  return text.replace(/\/\/[^\n]*/g, '').replace(/\/\*[\s\S]*?\*\//g, '');
 }
 
 function parseImportSpecsFromContent(content: string, fileDir: string): ImportSpec[] {
@@ -86,7 +90,7 @@ function parseImportSpecsFromContent(content: string, fileDir: string): ImportSp
   const importRegex = /import\s+type\s+\{([\s\S]*?)\}\s+from\s+['"]([^'"]+)['"]/g;
   let match;
   while ((match = importRegex.exec(content)) !== null) {
-    const specText = match[1] ?? '';
+    const specText = stripComments(match[1] ?? '');
     const modulePath = match[2] ?? '';
     const resolvedModule = modulePath.startsWith('.')
       ? normalizePath(resolve(fileDir, modulePath))
@@ -94,7 +98,9 @@ function parseImportSpecsFromContent(content: string, fileDir: string): ImportSp
 
     for (const raw of specText.split(',')) {
       const trimmed = raw.trim();
-      if (!trimmed) { continue; }
+      if (!trimmed) {
+        continue;
+      }
       const asMatch = trimmed.match(/^(.+?)\s+as\s+(.+)$/);
       if (asMatch) {
         const imported = asMatch[1] ?? '';
@@ -113,7 +119,7 @@ function formatSpecifier(spec: ImportSpec): string {
 }
 
 function specExistsIn(spec: ImportSpec, specs: ImportSpec[]): boolean {
-  return specs.some(s =>
+  return specs.some((s) =>
     s.resolvedModule === spec.resolvedModule
     && s.imported === spec.imported
     && s.local === spec.local
@@ -180,12 +186,12 @@ function checkWindowMemberImportsInFile(
 ): void {
   try {
     const memberTypeText = getMemberTypeText(context, node);
-    const allLocals = windowImports.map(s => s.local);
+    const allLocals = windowImports.map((s) => s.local);
     const referencedLocals = new Set(
-      allLocals.filter(local => new RegExp(`\\b${escapeRegExp(local)}\\b`).test(memberTypeText))
+      allLocals.filter((local) => new RegExp(`\\b${escapeRegExp(local)}\\b`).test(memberTypeText))
     );
 
-    const neededSpecs = windowImports.filter(s => referencedLocals.has(s.local));
+    const neededSpecs = windowImports.filter((s) => referencedLocals.has(s.local));
 
     const filePath = join(memberDir, `${memberName}.d.ts`);
     const fileContent = readFileSync(filePath, 'utf8');
@@ -209,17 +215,13 @@ export const windowMemberFileSync = {
   meta: {
     type: 'problem' as const,
     docs: {
-      description:
-        `Ensure globals/augmentations/functions/ and globals/augmentations/vars/ files are in sync with ${WINDOW_FILE_NAME} Window interface members`
+      description: `Ensure globals/augmentations/functions/ and globals/augmentations/vars/ files are in sync with ${WINDOW_FILE_NAME} Window interface members`
     },
     messages: {
-      importMismatchInFile:
-        `Import '{{specifier}}' from '{{module}}' for member '{{memberName}}' does not match '{{dir}}/{{memberName}}.d.ts'.`,
+      importMismatchInFile: 'Import \'{{specifier}}\' from \'{{module}}\' for member \'{{memberName}}\' does not match \'{{dir}}/{{memberName}}.d.ts\'.',
       importMismatchInWindow: `Import '{{specifier}}' from '{{module}}' does not match ${WINDOW_FILE_NAME}.`,
-      missingFile:
-        'Window interface {{kind}} \'{{memberName}}\' has no corresponding file in \'{{dir}}/{{memberName}}.d.ts\'.',
-      missingWindowMember:
-        `File \'{{fileName}}\' has no corresponding {{kind}} in ${WINDOW_FILE_NAME} Window interface.`
+      missingFile: 'Window interface {{kind}} \'{{memberName}}\' has no corresponding file in \'{{dir}}/{{memberName}}.d.ts\'.',
+      missingWindowMember: `File \'{{fileName}}\' has no corresponding {{kind}} in ${WINDOW_FILE_NAME} Window interface.`
     }
   },
   create(context: RuleContext) {
@@ -339,7 +341,7 @@ function isWindowInterfaceMember(node: TSESTree.Node): boolean {
   return iface.id.name === 'Window';
 }
 
-function getKeyName(node: TSESTree.TSMethodSignature | TSESTree.TSPropertySignature): string | null {
+function getKeyName(node: TSESTree.TSMethodSignature | TSESTree.TSPropertySignature): null | string {
   const key = node.key;
   if (key.type === 'Identifier') {
     return key.name;

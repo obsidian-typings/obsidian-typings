@@ -1,6 +1,4 @@
-import type {
-  getWorkspaceRootConstructor
-} from '../implementations/constructors/augmentations/getWorkspaceRootConstructor.d.ts';
+import type { getWorkspaceRootConstructor } from '../implementations/constructors/augmentations/getWorkspaceRootConstructor.d.ts';
 
 export {};
 

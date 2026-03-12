@@ -1,6 +1,4 @@
-import {
-  Scope
-} from 'obsidian';
+import { Scope } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

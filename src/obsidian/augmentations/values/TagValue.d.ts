@@ -1,6 +1,4 @@
-import type {
-  getTagValueConstructor
-} from '../../implementations/constructors/augmentations/values/getTagValueConstructor.d.ts';
+import type { getTagValueConstructor } from '../../implementations/constructors/augmentations/values/getTagValueConstructor.d.ts';
 
 export {};
 

@@ -50,7 +50,7 @@ const acceptableCalloutTypes = {
 };
 
 export default function remarkToc() {
-  return function(tree) {
+  return function (tree) {
     visit(tree, (node) => {
       if (
         !(

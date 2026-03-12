@@ -1,4 +1,5 @@
 import type { moment as momentInstance } from 'obsidian';
+
 export {};
 
 declare module 'obsidian' {

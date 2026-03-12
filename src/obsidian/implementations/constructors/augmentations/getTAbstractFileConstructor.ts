@@ -1,6 +1,4 @@
-import {
-  TAbstractFile
-} from 'obsidian';
+import { TAbstractFile } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

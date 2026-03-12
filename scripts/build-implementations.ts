@@ -1,8 +1,7 @@
+import type { Plugin } from 'esbuild';
+
 import builtins from 'builtin-modules';
-import {
-  context,
-  type Plugin
-} from 'esbuild';
+import { context } from 'esbuild';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path/posix';
 import { exit } from 'node:process';
@@ -59,7 +58,7 @@ function typescriptResolutionPlugin(): Plugin {
   return {
     name: 'typescript-resolution',
     setup(build) {
-      build.onResolve({ filter: /\.js$/ }, args => {
+      build.onResolve({ filter: /\.js$/ }, (args) => {
         const extensions = ['.ts', '.d.ts'];
         for (const ext of extensions) {
           const fullPath = join(args.resolveDir.replace(/\\/g, '/'), args.path.replace('.js', ext));

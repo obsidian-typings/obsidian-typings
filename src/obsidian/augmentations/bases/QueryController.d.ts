@@ -1,6 +1,4 @@
-import type {
-  getQueryControllerConstructor
-} from '../../implementations/constructors/augmentations/bases/getQueryControllerConstructor.d.ts';
+import type { getQueryControllerConstructor } from '../../implementations/constructors/augmentations/bases/getQueryControllerConstructor.d.ts';
 
 export {};
 

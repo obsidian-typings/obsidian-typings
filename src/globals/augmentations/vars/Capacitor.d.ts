@@ -1,6 +1,6 @@
-export {};
-
 import type { Capacitor as CapacitorInstance } from '@capacitor/core';
+
+export {};
 
 declare global {
   /**

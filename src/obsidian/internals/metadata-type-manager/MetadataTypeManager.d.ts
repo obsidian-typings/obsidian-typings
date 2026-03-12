@@ -4,16 +4,12 @@ import type {
   Events
 } from 'obsidian';
 
-import type {
-  getMetadataTypeManagerConstructor
-} from '../../implementations/constructors/internals/getMetadataTypeManagerConstructor.d.ts';
+import type { getMetadataTypeManagerConstructor } from '../../implementations/constructors/internals/getMetadataTypeManagerConstructor.d.ts';
 import type { PropertyInfo } from '../PropertyInfo.d.ts';
 import type { PropertyWidget } from '../PropertyWidget.d.ts';
 import type { PropertyWidgetType } from '../PropertyWidgetType.d.ts';
 import type { MetadataTypeManagerPropertiesRecord } from './MetadataTypeManagerPropertiesRecord.d.ts';
-import type {
-  MetadataTypeManagerRegisteredTypeWidgetsRecord
-} from './MetadataTypeManagerRegisteredTypeWidgetsRecord.d.ts';
+import type { MetadataTypeManagerRegisteredTypeWidgetsRecord } from './MetadataTypeManagerRegisteredTypeWidgetsRecord.d.ts';
 import type { MetadataTypeManagerTypesRecord } from './MetadataTypeManagerTypesRecord.d.ts';
 import type { TypeInfo } from './TypeInfo.d.ts';
 

@@ -1,6 +1,4 @@
-import type {
-  getNullValueConstructor
-} from '../../implementations/constructors/augmentations/values/getNullValueConstructor.d.ts';
+import type { getNullValueConstructor } from '../../implementations/constructors/augmentations/values/getNullValueConstructor.d.ts';
 
 export {};
 
@@ -50,6 +48,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link NullValue.value} instead.
      */
-    var value__: NullValue;
+    const value__: NullValue;
   }
 }

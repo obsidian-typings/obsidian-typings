@@ -1,6 +1,4 @@
-import {
-  UrlValue
-} from 'obsidian';
+import { UrlValue } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 

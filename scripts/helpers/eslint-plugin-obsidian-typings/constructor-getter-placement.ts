@@ -1,3 +1,5 @@
+import type { TSESTree } from '@typescript-eslint/utils';
+
 import {
   existsSync,
   readdirSync,
@@ -8,8 +10,6 @@ import {
   join,
   resolve
 } from 'path';
-
-import type { TSESTree } from '@typescript-eslint/utils';
 
 import type { RuleContext } from './utils.ts';
 
@@ -24,7 +24,7 @@ function isConstructorGetterFile(filename: string): boolean {
 /**
  * Recursively search for `<typeName>.d.ts` under a directory.
  */
-function findAugmentationFile(dir: string, typeName: string): string | null {
+function findAugmentationFile(dir: string, typeName: string): null | string {
   const target = `${typeName}.d.ts`;
   try {
     // Check directory is readable
@@ -68,7 +68,7 @@ function resolveTypeSourceFile(
   importSource: string,
   typeName: string,
   getterFilePath: string
-): string | null {
+): null | string {
   if (importSource === 'obsidian') {
     // Find the project root by walking up from the getter file
     const normalized = normalizePath(getterFilePath);
@@ -94,7 +94,7 @@ function resolveTypeSourceFile(
  * Returns the subdirectory name (e.g., 'bases', 'components', 'values', 'views')
  * or `null` if the file is directly under `augmentations/`.
  */
-function getAugmentationSubdir(augFilePath: string): string | null {
+function getAugmentationSubdir(augFilePath: string): null | string {
   const normalized = normalizePath(augFilePath);
   const match = /\/augmentations\/([^/]+)\/[^/]+$/.exec(normalized);
   return match ? match[1] ?? null : null;
@@ -104,7 +104,7 @@ function getAugmentationSubdir(augFilePath: string): string | null {
  * Extract the subdirectory under `implementations/constructors/augmentations/` from a getter file path.
  * Returns the subdirectory name or `null` if the file is directly under `augmentations/`.
  */
-function getGetterSubdir(getterFilePath: string): string | null {
+function getGetterSubdir(getterFilePath: string): null | string {
   const normalized = normalizePath(getterFilePath);
   const match = /\/implementations\/constructors\/augmentations\/([^/]+)\/[^/]+$/.exec(normalized);
   return match ? match[1] ?? null : null;
@@ -117,8 +117,7 @@ export const constructorGetterPlacement = {
       description: 'Ensure types used in constructor getters have a constructorN__ method'
     },
     messages: {
-      missingConstructorMethod:
-        'Type \'{{typeName}}\' (from \'{{importSource}}\') must have a `constructor[N]__` method.',
+      missingConstructorMethod: 'Type \'{{typeName}}\' (from \'{{importSource}}\') must have a `constructor[N]__` method.',
       subdirectoryMismatch:
         'Constructor getter is in \'{{getterSubdir}}\' but augmentation \'{{typeName}}\' is in \'{{augSubdir}}\'. They must be in the same subdirectory.'
     }
@@ -161,7 +160,7 @@ export const constructorGetterPlacement = {
           return;
         }
 
-        let typeName: string | null = null;
+        let typeName: null | string = null;
         if (param.type === 'TSTypeReference' && param.typeName.type === 'Identifier') {
           typeName = param.typeName.name;
         }

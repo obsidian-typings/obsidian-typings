@@ -3,9 +3,7 @@ import type {
   Debouncer
 } from 'obsidian';
 
-import type {
-  getAppMenuBarManagerConstructor
-} from '../implementations/constructors/internals/getAppMenuBarManagerConstructor.d.ts';
+import type { getAppMenuBarManagerConstructor } from '../implementations/constructors/internals/getAppMenuBarManagerConstructor.d.ts';
 import type { ExtractConstructor } from './constructors/ExtractConstructor.d.ts';
 
 /**

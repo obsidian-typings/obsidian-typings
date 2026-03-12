@@ -1,6 +1,4 @@
-import type {
-  getWorkspaceFloatingConstructor
-} from '../implementations/constructors/augmentations/getWorkspaceFloatingConstructor.d.ts';
+import type { getWorkspaceFloatingConstructor } from '../implementations/constructors/augmentations/getWorkspaceFloatingConstructor.d.ts';
 
 export {};
 

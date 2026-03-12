@@ -1,6 +1,4 @@
-import type {
-  getColorComponentConstructor
-} from '../../implementations/constructors/augmentations/components/getColorComponentConstructor.d.ts';
+import type { getColorComponentConstructor } from '../../implementations/constructors/augmentations/components/getColorComponentConstructor.d.ts';
 
 export {};
 

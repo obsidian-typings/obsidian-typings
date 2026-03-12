@@ -1,6 +1,4 @@
-import {
-  HoverPopover
-} from 'obsidian';
+import { HoverPopover } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

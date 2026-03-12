@@ -1,6 +1,4 @@
-import {
-  MarkdownPreviewRenderer
-} from 'obsidian';
+import { MarkdownPreviewRenderer } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

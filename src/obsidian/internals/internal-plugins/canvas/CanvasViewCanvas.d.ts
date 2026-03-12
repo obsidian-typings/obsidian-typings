@@ -89,7 +89,7 @@ export interface CanvasViewCanvas {
   isHoldingSpace: boolean;
 
   /** Map of currently pressed keyboard keys. */
-  keys: Object;
+  keys: object;
 
   /** Set of edges that were visible in the viewport on the last render frame. */
   lastEdgesInViewport: Set<CanvasViewCanvasEdge>;

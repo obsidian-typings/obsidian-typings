@@ -1,6 +1,4 @@
-import {
-  RenderContext
-} from 'obsidian';
+import { RenderContext } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 

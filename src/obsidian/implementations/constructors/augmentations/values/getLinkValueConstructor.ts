@@ -1,6 +1,4 @@
-import {
-  LinkValue
-} from 'obsidian';
+import { LinkValue } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 

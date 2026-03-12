@@ -12,9 +12,7 @@ import type { PropertyPropertyWidgetComponentComboBoxItem } from './PropertyProp
  * @public
  * @unofficial
  */
-export interface PropertyPropertyWidgetComponentComboBox
-  extends PopoverSuggest<PropertyPropertyWidgetComponentComboBoxItem>
-{
+export interface PropertyPropertyWidgetComponentComboBox extends PopoverSuggest<PropertyPropertyWidgetComponentComboBoxItem> {
   /** The items of the combobox. */
   _items: PropertyPropertyWidgetComponentComboBoxItem[];
 

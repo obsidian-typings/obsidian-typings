@@ -1,4 +1,3 @@
-import '@codemirror/language';
 import type {
   Extension,
   Facet

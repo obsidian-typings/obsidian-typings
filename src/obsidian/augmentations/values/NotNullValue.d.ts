@@ -1,6 +1,4 @@
-import type {
-  getNotNullValueConstructor
-} from '../../implementations/constructors/augmentations/values/getNotNullValueConstructor.d.ts';
+import type { getNotNullValueConstructor } from '../../implementations/constructors/augmentations/values/getNotNullValueConstructor.d.ts';
 
 export {};
 

@@ -1,6 +1,4 @@
-import {
-  FileValue
-} from 'obsidian';
+import { FileValue } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 

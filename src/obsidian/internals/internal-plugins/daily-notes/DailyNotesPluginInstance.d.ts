@@ -1,6 +1,6 @@
-import type { moment as momentInstance } from 'obsidian';
 import type {
   App,
+  moment as momentInstance,
   TFile
 } from 'obsidian';
 

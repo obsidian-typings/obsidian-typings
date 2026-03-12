@@ -1,6 +1,4 @@
-import type {
-  getWorkspaceWindowConstructor
-} from '../implementations/constructors/augmentations/getWorkspaceWindowConstructor.d.ts';
+import type { getWorkspaceWindowConstructor } from '../implementations/constructors/augmentations/getWorkspaceWindowConstructor.d.ts';
 
 export {};
 

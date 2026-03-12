@@ -1,6 +1,4 @@
-import type {
-  getRenderContextConstructor
-} from '../implementations/constructors/augmentations/getRenderContextConstructor.d.ts';
+import type { getRenderContextConstructor } from '../implementations/constructors/augmentations/getRenderContextConstructor.d.ts';
 
 export {};
 

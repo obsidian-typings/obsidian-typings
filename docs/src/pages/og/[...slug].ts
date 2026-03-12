@@ -1,4 +1,5 @@
 import { OGImageRoute } from 'astro-og-canvas';
+// eslint-disable-next-line import-x/no-unresolved -- No other way.
 import { getCollection } from 'astro:content';
 
 // Get all entries from the `docs` content collection.
@@ -25,7 +26,7 @@ export const { getStaticPaths, GET } = OGImageRoute({
       title: page.data.title,
       description: page.data.description || '',
       // Customize various colors and add a border.
-      bgGradient: [[17, 18, 19] as const /*, [24, 21, 13] as const*/],
+      bgGradient: [[17, 18, 19] as const],
       border: { color: [103, 172, 172], width: 10, side: 'block-end' },
       font: {
         title: {

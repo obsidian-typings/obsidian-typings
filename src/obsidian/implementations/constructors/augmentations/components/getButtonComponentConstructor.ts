@@ -1,6 +1,4 @@
-import {
-  ButtonComponent
-} from 'obsidian';
+import { ButtonComponent } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 

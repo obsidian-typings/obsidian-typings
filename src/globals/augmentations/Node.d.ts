@@ -189,7 +189,7 @@ declare global {
      * @official
      */
     instanceOf<T>(type: {
-      new(): T;
+      new (): T;
     }): this is T;
 
     /**

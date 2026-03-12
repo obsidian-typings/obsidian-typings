@@ -1,16 +1,19 @@
 import type {
   Capacitor as CapacitorInstance,
+  // eslint-disable-next-line import-x/no-deprecated -- No other way.
   CapacitorPlatforms as CapacitorPlatformsInstance
 } from '@capacitor/core';
 import type { default as CodeMirrorInstance } from 'codemirror';
 import type { default as DOMPurifyInstance } from 'dompurify';
-import type { default as electronInstance } from 'electron';
-import type { WebviewTag } from 'electron';
+import type {
+  default as electronInstance,
+  WebviewTag
+} from 'electron';
 import type { default as i18nextInstance } from 'i18next';
 import type { Mermaid } from 'mermaid';
-import type { moment as momentInstance } from 'obsidian';
 import type {
   App,
+  moment as momentInstance,
   Notice,
   ObsidianProtocolHandler,
   request as requestInstance,
@@ -40,15 +43,7 @@ declare global {
    * Augments the built-in {@link Window} interface.
    */
   interface Window
-    extends
-      EventTarget,
-      AnimationFrameProvider,
-      GlobalEventHandlers,
-      WindowEventHandlers,
-      WindowLocalStorage,
-      WindowOrWorkerGlobalScope,
-      WindowSessionStorage
-  {
+    extends EventTarget, AnimationFrameProvider, GlobalEventHandlers, WindowEventHandlers, WindowLocalStorage, WindowOrWorkerGlobalScope, WindowSessionStorage {
     /**
      * The actively focused Document object. This is usually the same as `document` but.
      * it will be different when using popout windows.
@@ -120,6 +115,7 @@ declare global {
      * Registry of available Capacitor platform implementations.
      * @unofficial
      */
+    // eslint-disable-next-line import-x/no-deprecated -- No other way.
     CapacitorPlatforms: typeof CapacitorPlatformsInstance;
 
     /**

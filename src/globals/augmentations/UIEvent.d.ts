@@ -40,7 +40,7 @@ declare global {
      * @official
      */
     instanceOf<T>(type: {
-      new(...data: unknown[]): T;
+      new (...data: unknown[]): T;
     }): this is T;
   }
 }

@@ -17,7 +17,7 @@ export declare class HighlightOutline extends Outline {
    *
    * @returns The bounding box, or `null`.
    */
-  get box(): null | Object;
+  get box(): null | object;
 
   /**
    * CSS class names applied when outlining this highlight.

@@ -14,8 +14,7 @@ export const noInterfaceTagsInAugmentations = {
     docs: { description: 'Augmentation interface-level TSDoc must not use @public/@unofficial' },
     messages: {
       noPublic: 'Interface "{{name}}" in augmentation file must not have @public tag (per-member tags handle it).',
-      noUnofficial:
-        'Interface "{{name}}" in augmentation file must not have @unofficial tag (per-member tags handle it).'
+      noUnofficial: 'Interface "{{name}}" in augmentation file must not have @unofficial tag (per-member tags handle it).'
     }
   },
   create(context: RuleContext) {

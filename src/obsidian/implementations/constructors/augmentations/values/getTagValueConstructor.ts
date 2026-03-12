@@ -1,6 +1,4 @@
-import {
-  TagValue
-} from 'obsidian';
+import { TagValue } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 

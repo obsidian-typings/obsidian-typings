@@ -31,14 +31,14 @@ async function convertRecursive(dir: string): Promise<void> {
         if (moduleSpecifier.startsWith('.')) {
           const moduleSourceFile = importDeclaration.getModuleSpecifierSourceFileOrThrow();
           const relativePath = relative(srcDir, moduleSourceFile.getFilePath());
-          const indexDirectory = indexDirectories.find(indexDirectory => relativePath.startsWith(indexDirectory));
+          const indexDirectory = indexDirectories.find((indexDirectory) => relativePath.startsWith(indexDirectory));
           if (indexDirectory) {
             moduleSpecifier = `./${indexDirectory}/index.js`;
           } else {
             moduleSpecifier = './' + relativePath.replace(/(\.d)?\.ts$/, '.js');
           }
         }
-        const importedNames = importDeclaration.getNamedImports().map(namedImport => namedImport.getName());
+        const importedNames = importDeclaration.getNamedImports().map((namedImport) => namedImport.getName());
         if (!imports.has(moduleSpecifier)) {
           imports.set(moduleSpecifier, new Set());
         }
@@ -95,7 +95,7 @@ for (const [moduleSpecifier, importedNames] of imports) {
   } else {
     typesSourceFile.addImportDeclaration({
       moduleSpecifier: moduleSpecifier,
-      namedImports: Array.from(importedNames).map(importedName => ({
+      namedImports: Array.from(importedNames).map((importedName) => ({
         name: importedName
       }))
     });
@@ -124,7 +124,7 @@ for (const [augmentationsDirName, augmentation] of augmentations) {
       docs: [{
         tags: [{
           tagName: 'source',
-          text: `node_modules/obsidian/obsidian.d.ts`
+          text: 'node_modules/obsidian/obsidian.d.ts'
         }]
       }]
     });
@@ -151,7 +151,7 @@ typesSourceFile.addModule({
   docs: [{
     tags: [{
       tagName: 'source',
-      text: `node_modules/obsidian/canvas.d.ts#` + (typesSourceFile.getEndLineNumber() + 3)
+      text: 'node_modules/obsidian/canvas.d.ts#' + (typesSourceFile.getEndLineNumber() + 3)
     }]
   }]
 });
@@ -164,7 +164,7 @@ typesSourceFile.addModule({
   docs: [{
     tags: [{
       tagName: 'source',
-      text: `node_modules/obsidian/publish.d.ts#` + (typesSourceFile.getEndLineNumber() + 3)
+      text: 'node_modules/obsidian/publish.d.ts#' + (typesSourceFile.getEndLineNumber() + 3)
     }]
   }]
 });

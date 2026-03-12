@@ -1,6 +1,4 @@
-import type {
-  getValueComponentConstructor
-} from '../../implementations/constructors/augmentations/components/getValueComponentConstructor.d.ts';
+import type { getValueComponentConstructor } from '../../implementations/constructors/augmentations/components/getValueComponentConstructor.d.ts';
 
 export {};
 

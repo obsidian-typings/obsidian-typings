@@ -4,9 +4,7 @@ import type {
   Debouncer
 } from 'obsidian';
 
-import type {
-  getCustomCSSConstructor
-} from '../../implementations/constructors/internals/getCustomCSSConstructor.d.ts';
+import type { getCustomCSSConstructor } from '../../implementations/constructors/internals/getCustomCSSConstructor.d.ts';
 import type { PromisedQueue } from '../PromisedQueue.d.ts';
 import type { ThemeManifest } from '../ThemeManifest.d.ts';
 import type { CustomCSSThemesRecord } from './CustomCSSThemesRecord.d.ts';

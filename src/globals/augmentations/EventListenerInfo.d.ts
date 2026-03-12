@@ -9,12 +9,14 @@ declare global {
      * Wrapper function of the event listener.
      * @official
      */
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type -- No other way.
     callback: Function;
 
     /**
      * The listener of the event.
      * @official
      */
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type -- No other way.
     listener: Function;
 
     /**

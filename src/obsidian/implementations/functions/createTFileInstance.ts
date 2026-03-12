@@ -1,7 +1,6 @@
-import {
-  type App,
-  TFile
-} from 'obsidian';
+import type { App } from 'obsidian';
+
+import { TFile } from 'obsidian';
 
 import { getTFileConstructor } from '../constructors/augmentations/getTFileConstructor.ts';
 import { parentFolderPath } from '../utils/PathUtils.ts';

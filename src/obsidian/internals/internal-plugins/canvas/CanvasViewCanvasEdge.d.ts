@@ -57,7 +57,7 @@ export interface CanvasViewCanvasEdge {
   toLineEnd: CanvasViewCanvasEdgeLineEnd | null;
 
   /** Additional data properties not covered by known fields. */
-  unknownData: Object;
+  unknownData: object;
 
   /**
    * Attach the edge to the canvas DOM.
