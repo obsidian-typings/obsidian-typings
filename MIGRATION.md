@@ -7,6 +7,8 @@ Some breaking changes were made between `1.x.x` and `2.0.0` versions of this pac
 - If you were using in your `tsconfig.json`, `"moduleResolution": "classic"`, you will need to switch to a more modern option (such as `bundler`, `nodenext`, `node16`, `node`, `node10`).
 - Importing undocumented methods now requires you to import from `obsidian-typings`, rather than the `obsidian` package. This is done in order to make it more apparent that you are making use of undocumented and possibly volatile API. These should be imported as `import { X } from 'obsidian-typings'` instead of `import { X } from 'obsidian'`. See below for the full list of interfaces:
 
+<!-- markdownlint-disable MD033 -->
+
   <details>
     <summary>Full list of interfaces that need to be imported from <code>obsidian-typings</code> module</summary>
     <pre><code>AbstractSearchComponent
@@ -156,6 +158,8 @@ Some breaking changes were made between `1.x.x` and `2.0.0` versions of this pac
   </code></pre>
   </details>
 
+<!-- markdownlint-enable MD033 -->
+
 - If you used to register your own plugins using a declaration like:
 
     ```ts
@@ -174,7 +178,13 @@ Some breaking changes were made between `1.x.x` and `2.0.0` versions of this pac
 
 While these changes are not strictly required, they will help to keep your code more modern, future-proof and avoids the need to use legacy workarounds.
 
-- Switch to latest `TypeScript` version `npm install typescript@latest --save-dev` to support modern `TypeScript` features.<br>The sample plugin has version 4.7.6 set as its default, so it is likely that you need to upgrade.
-- Set in `tsconfig.json`, `moduleResolution` option to `nodenext` or `bundler`. <br>With `nodenext` you will have to add extensions to all your relative imports such as `import { fn1 } from './module2.js';`. <br>With `bundler` you can keep using `import { fn1 } from './module2';`
+- Switch to latest `TypeScript` version `npm install typescript@latest --save-dev` to support modern `TypeScript` features.
+
+  The sample plugin has version 4.7.6 set as its default, so it is likely that you need to upgrade.
+- Set in `tsconfig.json`, `moduleResolution` option to `nodenext` or `bundler`.
+
+  With `nodenext` you will have to add extensions to all your relative imports such as `import { fn1 } from './module2.js';`.
+
+  With `bundler` you can keep using `import { fn1 } from './module2';`
 - Set in `tsconfig.json`, `skipLibCheck` to `false`. This will compile your `.d.ts` definitions and allow you to detect the errors earlier.
 - Switch to the [Add `types` setting to `tsconfig.json`](https://github.com/Fevol/obsidian-typings/blob/main/README.md#add-types-setting-to-tsconfig-json) approach, as it is the most robust.

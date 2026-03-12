@@ -1,46 +1,13 @@
-<center>
-
 # Obsidian Typings
 
-</center>
-
----
-
-<div align="center">
-    <a href="https://www.npmjs.com/package/obsidian-typings" style="text-decoration: none">
-        <img alt="NPM downloads" src="https://img.shields.io/npm/v/obsidian-typings?color=red&label=Version%3A&logo=npm&logoColor=white&labelColor=red">
-    </a>
-    <a href="https://www.npmjs.com/package/obsidian-typings" style="text-decoration: none">
-        <img alt="NPM downloads" src="https://img.shields.io/npm/dw/obsidian-typings?style=flat&label=Downloads">
-    </a>
-    <a href="https://github.com/Fevol/obsidian-typings/stargazers" style="text-decoration: none">
-        <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/fevol/obsidian-typings?color=yellow&label=Stargazers%3A&logo=OpenTelemetry&logoColor=yellow">
-    </a><br>
-    <a href="https://www.typescriptlang.org/" style="text-decoration: none">
-        <img alt="Typescript" src="https://img.shields.io/badge/-Typescript-3178C6?logo=Typescript&logoColor=white&style=flat&">
-    </a>
-</div>
-
----
-
-<div align="center">
-<h4>
- <a href="https://fevol.github.io/obsidian-typings">DOCS</a>
- <span>&nbsp;·&nbsp;</span>
- <a href="https://fevol.github.io/obsidian-typings/resources/obsidian-typings-changelog">CHANGELOG</a>
- <span>&nbsp;·&nbsp;</span>
- <a href="https://www.npmjs.com/package/obsidian-typings">NPM</a>
- <span>&nbsp;·&nbsp;</span>
- <a href="https://fevol.github.io/obsidian-typings/contributing">CONTRIBUTING</a>
-
-</h4>
-</div>
-
----
+[![NPM downloads](https://img.shields.io/npm/v/obsidian-typings?color=red&label=Version%3A&logo=npm&logoColor=white&labelColor=red)](https://www.npmjs.com/package/obsidian-typings)
+[![NPM downloads](https://img.shields.io/npm/dw/obsidian-typings?style=flat&label=Downloads)](https://www.npmjs.com/package/obsidian-typings)
+[![GitHub Repo stars](https://img.shields.io/github/stars/fevol/obsidian-typings?color=yellow&label=Stargazers%3A&logo=OpenTelemetry&logoColor=yellow)](https://github.com/Fevol/obsidian-typings/stargazers)
 
 **Obsidian Typings** provides **TypeScript definitions** for Obsidian’s **undocumented and internal APIs**.
 
 It extends the official [Obsidian API](https://github.com/obsidianmd/obsidian-api/) with:
+
 - Additional type definitions for internal methods, properties, and plugins.
 - Explanations and usage examples to make undocumented parts easier to understand.
 - Helper utilities and interfaces for working with Obsidian’s internals in a safer, type-safe way.
@@ -80,14 +47,14 @@ In most cases, we recommend to always use the latest release.
 ### 1. Install via `npm`
 
 - Latest `public` release (recommended):
-    - `npm install --save-dev obsidian-typings`
+  - `npm install --save-dev obsidian-typings`
 - Explicitly install latest `public` release:
-    - `npm pkg set "dependencies.obsidian-typings=obsidian-public-latest" && npm install`
+  - `npm pkg set "dependencies.obsidian-typings=obsidian-public-latest" && npm install`
 - Install the latest `catalyst` (`beta`) release:
-    - `npm pkg set "dependencies.obsidian-typings=obsidian-catalyst-latest" && npm install`
+  - `npm pkg set "dependencies.obsidian-typings=obsidian-catalyst-latest" && npm install`
 - Install a specific release (should match `minAppVersion` in your plugin's `manifest.json`):
-    - `npm pkg set "dependencies.obsidian-typings=obsidian-public-1.8.10" && npm install`
-    - `npm pkg set "dependencies.obsidian-typings=obsidian-catalyst-1.9.9" && npm install`
+  - `npm pkg set "dependencies.obsidian-typings=obsidian-public-1.8.10" && npm install`
+  - `npm pkg set "dependencies.obsidian-typings=obsidian-catalyst-1.9.9" && npm install`
 
 > [!IMPORTANT]
 >
@@ -95,13 +62,19 @@ In most cases, we recommend to always use the latest release.
 >
 > If you run `npm install obsidian-typings` instead, the most likely, the library will not get updated.
 
+&nbsp;
+
 > [!WARNING]
 >
 > The package installs several libraries that trigger `npm audit` warnings.
 >
 > Those packages cannot be updated because they should match the exact versions Obsidian uses internally.
 
+<!-- markdownlint-disable MD033 -->
+
 ### 2. Enable in `tsconfig.json` (recommended) <span id="add-types-setting-to-tsconfig-json"></span>
+
+<!-- markdownlint-enable MD033 -->
 
 Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all extended typings available globally without explicit importing them:
 
@@ -119,6 +92,7 @@ Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all 
 > [!WARNING]
 >
 > If other `@types/*` packages stop being recognized after adding `obsidian-typings` to the `types`, you may need to re-add them to the `types` list.
+>
 > ```json
 > {
 >     "compilerOptions": {
@@ -203,9 +177,9 @@ declare module 'obsidian-typings' {
 
 Please be aware that there is a good reason why (some of) the functions and types defined here are not included with the official API definitions:
 
--   The methods are not fully defined, and will be changed or removed in the near-future
--   There is a high risk of the code behaving unexpectedly if used improperly
--   The function was never meant to be used
+- The methods are not fully defined, and will be changed or removed in the near-future
+- There is a high risk of the code behaving unexpectedly if used improperly
+- The function was never meant to be used
 
 Please use the functions and variables provided by this package with caution.
 Be prepared to update your code if the API changes, and only use the functions if you are confident that you understand what they will do.
@@ -219,6 +193,8 @@ Always verify that your code behaves as expected, both in terms of types and run
 > [!WARNING]
 >
 > While the typings themselves were hand-written by the package maintainers and contributors, the majority of the `@tsdoc` documentation has been minimally completed using generative AI and may be inaccurate.
+
+&nbsp;
 
 > [!TIP]
 >
@@ -236,7 +212,6 @@ With these scary disclaimers out of the way, hopefully these typings will help y
 ## Migration
 
 If you were using a `1.x.x` version of this package, see the [Migration guide](https://github.com/Fevol/obsidian-typings/blob/main/MIGRATION.md) for upgrading to `2.0.0` or newer.
-
 
 ## Contributing
 

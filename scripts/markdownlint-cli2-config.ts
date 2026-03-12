@@ -10,7 +10,9 @@ export const config: MarkdownlintCli2ConfigurationSchema = {
     },
     'MD052': {
       ignored_labels: [
+        '!important',
         '!note',
+        '!tip',
         '!warning'
       ],
 

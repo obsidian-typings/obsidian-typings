@@ -1,21 +1,23 @@
-# Introduction
+# CONTRIBUTING
 
-## General Notes
+## Introduction
+
+### General Notes
 
 Feel free to start typing any part of the Obsidian API that is not yet typed, or fixing/adding additional descriptions to existing typings.
 If you are unsure about anything, don't hesitate to open an issue.
 
 > [!WARNING]
 >
-> Please base your PR on the [branch](./README.md#git-branching) matching the Obsidian versions you confirmed your changes are valid.
+> Please base your PR on the [branch](./README.md#versioning-and-release-channels) matching the Obsidian versions you confirmed your changes are valid.
 
-## Conventional Commits
+### Conventional Commits
 
 The project is using [Conventional Commits](https://www.conventionalcommits.org/). All commit messages are validated to follow the conventions.
 
 To get interactive prompt to simplify creating such commits, use `npm run commit` command.
 
-### TSDoc
+#### TSDoc
 
 Please use [TSDoc](https://tsdoc.org/) to document the typings. This will allow the documentation to be automatically generated
 within your IDE, and can help with the discoverability of the typings.
@@ -41,11 +43,11 @@ interface someObject {
 
 See [docs](./README.md#tags) to understand the meaning of some used `TSDoc` tags.
 
-# Tutorial
+## Tutorial
 
-## Adding new typings
+### Adding new typings
 
-### Finding/Discovering new typings
+#### Finding/Discovering new typings
 
 The first step to add new typings, is finding the object/interface/module you want to add typings for within the Obsidian app.
 One of the easiest way to do this, is to open the Obsidian DevTools Console (`Ctrl + Shift + I`), and start searching for the interface you wish to
@@ -84,7 +86,7 @@ To keep it simple, we first add `unknown` as type to every variable and method -
 
 Next up, is the most tedious part of adding typings: finding the correct types for each of the methods and variables.
 
-### `generateTypes` helper
+#### `generateTypes` helper
 
 We built a helper to simplify discoverability process. The generated types contain all the properties and functions that could be reached from the provided objects.
 
@@ -120,7 +122,7 @@ interface GenerateTypesOptions {
 }
 ```
 
-### Typing variables
+#### Typing variables
 
 The easiest way to start, is by tackling the variables first. For example, in the console output, you can see that `config`
 is mapping a string to `true`. In this case, it would be safe to assume that the type of `config` is `Record<string, boolean>`.
@@ -172,7 +174,7 @@ Make sure to also add brief descriptions (using [TSDoc](https://tsdoc.org/)) to 
 
 Feel free to copy descriptions from previous typings, or from the official API.
 
-### Typing methods
+#### Typing methods
 
 Typing methods is a bit more difficult, as aside you will need to know what the method does, and what the expected input and output is.
 
@@ -214,7 +216,7 @@ interface InternalPlugins extends Events {
 }
 ```
 
-## Traversing and analyzing the source code
+### Traversing and analyzing the source code
 
 Finally, this is both the most tedious but also the most important technique: finding the definition of the method in the minified source code.
 
@@ -232,9 +234,9 @@ With access to the minified code, you can now start searching through it and fin
 
 For any method "XYZ", start by just searching for "XYZ". Generally, the method is defined as either:
 
--   `t.XYZ = ...` (for static methods)
--   `t.prototype.XYZ = ...` (for prototype methods)
--   `function XYZ(` (for internal/minified methods)
+- `t.XYZ = ...` (for static methods)
+- `t.prototype.XYZ = ...` (for prototype methods)
+- `function XYZ(` (for internal/minified methods)
 
 At this stage, you might get lucky and get a single definition, or you may get multiple definitions of the method.
 In the latter case,
@@ -253,9 +255,9 @@ n.requestSaveConfig = at(n.saveConfig.bind(n), 1e3, !0),
 
 Here, we find the following three things:
 
--   `at` is a minified function that takes three arguments, and its return value is the return value of the method
--   `1e3` is shorthand notation for `1000`
--   `!0` is shorthand notation for `true`
+- `at` is a minified function that takes three arguments, and its return value is the return value of the method
+- `1e3` is shorthand notation for `1000`
+- `!0` is shorthand notation for `true`
 
 (There are many shorthands and structural changes that you will need to get used to in the minified code)
 
@@ -281,7 +283,7 @@ function at(e, t, n) {
 You may want to pass the code through your favorite flavour of LLM or de-minifier to make the code at least somewhat understandable.
 Depending on whether you manage to decipher the code, you can now explicitly define the behavior and/or types of the method.
 
-### Async functions
+#### Async functions
 
 Reverse engineering the async functions is more challenging.
 
@@ -294,11 +296,11 @@ In the `app.js`, you won't see many `async` functions. Most of them are converte
 
 For more details how exactly it works, see [The `__generator` helper](https://github.com/microsoft/tslib/blob/main/docs/generator.md) documentation.
 
-### Class hierarchies
+#### Class hierarchies
 
 Detecting class hierarchies is a bit tricky.
 
-#### Static analysis
+##### Static analysis
 
 In the `app.js` code, the pattern looks like:
 
@@ -353,7 +355,7 @@ AbstractTextComponent: () => MO,
 ...
 ```
 
-#### Runtime analysis
+##### Runtime analysis
 
 If you have an instance `obj` of an unknown class and you want to understand its class hierarchy, you can use
 
