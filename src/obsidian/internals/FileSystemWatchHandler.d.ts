@@ -2,6 +2,7 @@ import type { FileStats } from 'obsidian';
 
 /**
  * Callback interface for handling file system watch events.
+ *
  * @public
  * @unofficial
  */

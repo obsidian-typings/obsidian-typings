@@ -2,6 +2,7 @@ import type { EditorPosition } from 'obsidian';
 
 /**
  * Represents a bracket character found at a specific position in the editor.
+ *
  * @public
  * @unofficial
  */

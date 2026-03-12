@@ -1,5 +1,6 @@
 /**
  * Represents a captured text selection within a window.
+ *
  * @public
  * @unofficial
  */

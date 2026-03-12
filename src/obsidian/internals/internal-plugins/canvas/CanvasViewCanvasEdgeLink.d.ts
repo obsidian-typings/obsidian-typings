@@ -2,6 +2,7 @@ import type { CanvasViewCanvasNode } from './CanvasViewCanvasNode.d.ts';
 
 /**
  * Represents one endpoint of a canvas edge, linking it to a specific side of a node.
+ *
  * @public
  * @unofficial
  */

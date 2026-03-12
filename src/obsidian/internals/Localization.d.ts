@@ -1,5 +1,6 @@
 /**
  * Nested dictionary of localization strings for internationalization.
+ *
  * @public
  * @unofficial
  */

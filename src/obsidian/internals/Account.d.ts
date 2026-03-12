@@ -1,5 +1,6 @@
 /**
  * Represents the user's Obsidian account information and license details.
+ *
  * @public
  * @unofficial
  */

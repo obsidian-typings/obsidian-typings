@@ -4,6 +4,7 @@ import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 
 /**
  * View for displaying Obsidian release notes.
+ *
  * @public
  * @unofficial
  */

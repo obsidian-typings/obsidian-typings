@@ -9,6 +9,7 @@ import type { PropertiesPluginInstance } from './PropertiesPluginInstance.d.ts';
 
 /**
  * View that displays frontmatter properties for the current file.
+ *
  * @public
  * @unofficial
  */

@@ -5,6 +5,7 @@ import type { TagPanePlugin } from './TagPanePlugin.d.ts';
 
 /**
  * Plugin instance for the tag pane, displaying a browseable list of tags in the sidebar.
+ *
  * @public
  * @unofficial
  */

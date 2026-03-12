@@ -11,6 +11,7 @@ import type { Runnable } from './Runnable.d.ts';
 
 /**
  * File suggest manager.
+ *
  * @public
  * @unofficial
  */

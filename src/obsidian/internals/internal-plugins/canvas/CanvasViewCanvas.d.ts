@@ -18,6 +18,7 @@ import type { NodeInteractionLayer } from './NodeInteractionLayer.d.ts';
 
 /**
  * Main canvas controller that manages rendering, selection, drag, zoom, pan, nodes, and edges for the canvas view.
+ *
  * @public
  * @unofficial
  */

@@ -9,6 +9,7 @@ import type { MarkdownBaseView } from './MarkdownBaseView.d.ts';
 
 /**
  * Manager for editor suggestion popups providing autocompletion in the editor.
+ *
  * @public
  * @unofficial
  */

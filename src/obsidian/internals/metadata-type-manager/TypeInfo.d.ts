@@ -2,6 +2,7 @@ import type { PropertyWidget } from '../PropertyWidget.d.ts';
 
 /**
  * Information about a property's expected and inferred widget types.
+ *
  * @public
  * @unofficial
  */

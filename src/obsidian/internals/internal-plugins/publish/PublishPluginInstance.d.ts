@@ -5,6 +5,7 @@ import type { PublishPlugin } from './PublishPlugin.d.ts';
 
 /**
  * Plugin instance for Obsidian Publish, managing cloud publishing of vault content.
+ *
  * @public
  * @unofficial
  */

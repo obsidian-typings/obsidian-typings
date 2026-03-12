@@ -4,6 +4,7 @@ import type { getFoldManagerConstructor } from '../implementations/constructors/
 
 /**
  * Manager for persisting and restoring editor fold states.
+ *
  * @public
  * @unofficial
  */

@@ -2,6 +2,7 @@ import type { EditorPosition } from 'obsidian';
 
 /**
  * Represents a selection in the editor with anchor and head positions.
+ *
  * @public
  * @unofficial
  */

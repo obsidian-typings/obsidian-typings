@@ -5,6 +5,7 @@ import type { SwitcherPlugin } from './SwitcherPlugin.d.ts';
 
 /**
  * Plugin instance for the quick switcher, providing fuzzy file search and navigation.
+ *
  * @public
  * @unofficial
  */

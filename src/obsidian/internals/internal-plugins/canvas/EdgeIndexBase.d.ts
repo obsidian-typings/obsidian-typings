@@ -2,6 +2,7 @@ import type { EdgeIndexBaseBase } from './EdgeIndexBaseBase.d.ts';
 
 /**
  * Base interface for the spatial edge index, extending the R-tree with custom insert/remove behavior.
+ *
  * @public
  * @unofficial
  */

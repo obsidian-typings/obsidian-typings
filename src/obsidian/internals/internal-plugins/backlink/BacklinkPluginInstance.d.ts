@@ -12,6 +12,7 @@ import type { BacklinkPluginInstanceOptions } from './BacklinkPluginInstanceOpti
 
 /**
  * Plugin instance for backlinks, managing backlink view lifecycle and file event handling.
+ *
  * @public
  * @unofficial
  */

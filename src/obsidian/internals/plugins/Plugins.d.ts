@@ -12,6 +12,7 @@ import type { PluginsPluginsRecord } from './PluginsPluginsRecord.d.ts';
 
 /**
  * Manager for community plugins, handling installation, enabling, and lifecycle.
+ *
  * @public
  * @unofficial
  */

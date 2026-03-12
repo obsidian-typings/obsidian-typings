@@ -3,6 +3,7 @@ import type { FootnotesPluginInstance } from './FootnotesPluginInstance.d.ts';
 
 /**
  * Internal plugin registration for the footnotes feature.
+ *
  * @public
  * @unofficial
  */

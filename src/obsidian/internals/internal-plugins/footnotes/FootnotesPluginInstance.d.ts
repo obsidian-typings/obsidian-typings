@@ -3,6 +3,7 @@ import type { FootnotesPlugin } from './FootnotesPlugin.d.ts';
 
 /**
  * Plugin instance for footnotes, providing footnote creation and navigation.
+ *
  * @public
  * @unofficial
  */

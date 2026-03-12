@@ -2,6 +2,7 @@ import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /**
  * Bookmark item representing a bookmarked file.
+ *
  * @public
  * @unofficial
  */

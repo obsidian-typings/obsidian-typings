@@ -2,6 +2,7 @@ import type { CanvasViewData } from './CanvasData.d.ts';
 
 /**
  * Manages undo/redo history for canvas state changes.
+ *
  * @public
  * @unofficial
  */

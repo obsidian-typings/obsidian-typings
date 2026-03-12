@@ -7,6 +7,7 @@ import type { FileTreeItem } from './FileTreeItem.d.ts';
 
 /**
  * Tree item representing a folder in the file explorer, supporting collapse and child items.
+ *
  * @public
  * @unofficial
  */

@@ -32,6 +32,7 @@ declare module 'obsidian' {
 
     /**
      * Container element that constrains tab-key focus cycling.
+     *
      * @unofficial
      */
     tabFocusContainerEl: HTMLElement | null;

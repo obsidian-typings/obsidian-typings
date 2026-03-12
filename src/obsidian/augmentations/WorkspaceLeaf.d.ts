@@ -13,24 +13,28 @@ declare module 'obsidian' {
   interface WorkspaceLeaf extends WorkspaceItem, HoverParent {
     /**
      * Timestamp of when this leaf was last activated.
+     *
      * @unofficial
      */
     activeTime: number;
 
     /**
      * The linked group this leaf belongs to, or `null` if ungrouped.
+     *
      * @unofficial
      */
     group: null | string;
 
     /**
      * Current height of the leaf in pixels.
+     *
      * @unofficial
      */
     height: number;
 
     /**
      * Navigation history for this leaf (back/forward).
+     *
      * @unofficial
      */
     history: WorkspaceLeafHistory;
@@ -56,60 +60,70 @@ declare module 'obsidian' {
 
     /**
      * Whether this leaf is pinned (prevented from being navigated away).
+     *
      * @unofficial
      */
     pinned: boolean;
 
     /**
      * Observer that tracks size changes of this leaf.
+     *
      * @unofficial
      */
     resizeObserver: null | ResizeObserver;
 
     /**
      * Close button element in the tab header.
+     *
      * @unofficial
      */
     tabHeaderCloseEl: HTMLDivElement | null;
 
     /**
      * The tab header element for this leaf.
+     *
      * @unofficial
      */
     tabHeaderEl: HTMLElement;
 
     /**
      * Icon element inside the tab header.
+     *
      * @unofficial
      */
     tabHeaderInnerIconEl: HTMLElement;
 
     /**
      * Title element inside the tab header.
+     *
      * @unofficial
      */
     tabHeaderInnerTitleEl: HTMLElement;
 
     /**
      * Container element for tab header status indicators.
+     *
      * @unofficial
      */
     tabHeaderStatusContainerEl: HTMLDivElement | null;
 
     /**
      * Status element indicating linked group membership in the tab header.
+     *
      * @unofficial
      */
     tabHeaderStatusLinkEl: HTMLDivElement | null;
 
     /**
      * Status element indicating pinned state in the tab header.
+     *
      * @unofficial
      */
     tabHeaderStatusPinEl: HTMLDivElement | null;
 
     /**
      * The workspace item type identifier for this leaf.
+     *
      * @unofficial
      */
     type: 'leaf';
@@ -124,12 +138,14 @@ declare module 'obsidian' {
 
     /**
      * Current width of the leaf in pixels.
+     *
      * @unofficial
      */
     width: number;
 
     /**
      * Whether this leaf is currently loading or processing.
+     *
      * @unofficial
      */
     working: boolean;
@@ -216,6 +232,7 @@ declare module 'obsidian' {
 
     /**
      * Highlight this leaf's tab header.
+     *
      * @unofficial
      */
     highlight(): void;
@@ -431,12 +448,14 @@ declare module 'obsidian' {
 
     /**
      * Remove highlight from this leaf's tab header.
+     *
      * @unofficial
      */
     unhighlight(): void;
 
     /**
      * Update the tab header display (icon, title, status indicators).
+     *
      * @unofficial
      */
     updateHeader(): void;

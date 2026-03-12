@@ -7,6 +7,7 @@ import type { BookmarksView } from './BookmarksView.d.ts';
 
 /**
  * View creators registered by the bookmarks plugin.
+ *
  * @public
  * @unofficial
  */

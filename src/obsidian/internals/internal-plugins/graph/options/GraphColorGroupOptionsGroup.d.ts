@@ -5,6 +5,7 @@ import type {
 
 /**
  * UI components for a single color group entry in the graph settings panel.
+ *
  * @public
  * @unofficial
  */

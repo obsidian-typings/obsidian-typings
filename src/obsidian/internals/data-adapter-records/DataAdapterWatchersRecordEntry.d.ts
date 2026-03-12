@@ -2,6 +2,7 @@ import type { FSWatcher } from 'node:fs';
 
 /**
  * Entry for a file system watcher registered by the data adapter.
+ *
  * @public
  * @unofficial
  */

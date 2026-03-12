@@ -8,7 +8,7 @@ import type { Mermaid } from 'mermaid';
 import type {
   App,
   moment as momentInstance,
-  Notice,
+  Notice as NoticeInstance,
   ObsidianProtocolHandler,
   request as requestInstance,
   requestUrl as requestUrlInstance
@@ -60,49 +60,56 @@ declare global {
 
     /**
      * Minified reference to `Object.hasOwnProperty`.
+     *
      * @unofficial
      */
     bl: typeof Object.hasOwnProperty;
 
     /**
      * Native Blink engine fetch, used to bypass patched fetch implementations.
+     *
      * @unofficial
-     * @hidden
      */
     blinkfetch: typeof fetch;
 
     /**
      * Native Blink engine FormData constructor.
+     *
      * @unofficial
      */
     blinkFormData: typeof FormData;
 
     /**
      * Native Blink engine Headers constructor.
+     *
      * @unofficial
      */
     blinkHeaders: typeof Headers;
 
     /**
      * Native Blink engine Request constructor.
+     *
      * @unofficial
      */
     blinkRequest: typeof Request;
 
     /**
      * Native Blink engine Response constructor.
+     *
      * @unofficial
      */
     blinkResponse: typeof Response;
 
     /**
      * Capacitor runtime for accessing native device APIs on mobile.
+     *
      * @unofficial
      */
     Capacitor: typeof CapacitorInstance;
 
     /**
      * Registry of available Capacitor platform implementations.
+     *
      * @unofficial
      */
     // eslint-disable-next-line import-x/no-deprecated -- No other way.
@@ -110,18 +117,21 @@ declare global {
 
     /**
      * Minified reference to `Object.getOwnPropertyDescriptors`.
+     *
      * @unofficial
      */
     Cf: typeof Object.getOwnPropertyDescriptors;
 
     /**
      * Global CodeMirror 5 instance.
+     *
      * @unofficial
      */
     CodeMirror: typeof import('codemirror');
 
     /**
      * CodeMirror adapter providing CM5-compatible API over CM6.
+     *
      * @unofficial
      */
     CodeMirrorAdapter: CodeMirrorAdapterEx;
@@ -135,24 +145,28 @@ declare global {
 
     /**
      * Minified reference to `Object.propertyIsEnumerable`.
+     *
      * @unofficial
      */
     El: typeof Object.propertyIsEnumerable;
 
     /**
      * Electron module for desktop platform APIs.
+     *
      * @unofficial
      */
     electron: typeof import('electron');
 
     /**
      * Electron BrowserWindow instance for the current window.
+     *
      * @unofficial
      */
     electronWindow: ElectronWindow;
 
     /**
      * DOM elements and helpers for the app frame/window chrome.
+     *
      * @unofficial
      */
     frameDom: FrameDom;
@@ -166,18 +180,21 @@ declare global {
 
     /**
      * Global i18next internationalization framework instance.
+     *
      * @unofficial
      */
     i18next: typeof import('i18next');
 
     /**
      * MathJax instance for rendering mathematical notation.
+     *
      * @unofficial
      */
     MathJax?: MathJaxEx;
 
     /**
      * Mermaid library instance for rendering diagrams and charts.
+     *
      * @unofficial
      */
     mermaid?: Mermaid;
@@ -186,13 +203,12 @@ declare global {
      * Parse, validate, manipulate, and display dates in javascript.
      *
      * @unofficial
-     *
-     * Commented out because the global variable is already declared in the `moment` package.
      */
     moment: typeof momentInstance;
 
     /**
      * Minified reference to `Object.getOwnPropertySymbols`.
+     *
      * @unofficial
      */
     mr: typeof Object.getOwnPropertySymbols;
@@ -202,7 +218,7 @@ declare global {
      *
      * @unofficial
      */
-    Notice: typeof Notice;
+    Notice: typeof NoticeInstance;
 
     /**
      * Invoke obsidian protocol action.
@@ -213,30 +229,35 @@ declare global {
 
     /**
      * Default internationalization strings bundled with Obsidian.
+     *
      * @unofficial
      */
     OBSIDIAN_DEFAULT_I18N: Localization;
 
     /**
      * PDF.js library for parsing and rendering PDF documents.
+     *
      * @unofficial
      */
     pdfjsLib?: typeof import('pdfjs-dist');
 
     /**
      * Testing utilities for PDF.js.
+     *
      * @unofficial
      */
     pdfjsTestingUtils: PdfJsTestingUtils;
 
     /**
      * PixiJS library for 2D rendering (used for canvas views).
+     *
      * @unofficial
      */
     PIXI: typeof import('pixi.js');
 
     /**
      * Prism.js syntax highlighting library instance.
+     *
      * @unofficial
      */
     Prism?: typeof import('prismjs');
@@ -245,6 +266,7 @@ declare global {
      * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
      *
      * Returns the text value of the response.
+     *
      * @unofficial
      */
     request: typeof requestInstance;
@@ -258,42 +280,49 @@ declare global {
 
     /**
      * Scrypt key derivation function library for password-based encryption.
+     *
      * @unofficial
      */
     scrypt: typeof scryptInstance;
 
     /**
      * Minified reference to `Object.defineProperties`.
+     *
      * @unofficial
      */
     Sf: typeof Object.defineProperties;
 
     /**
      * Temporary reference to the WebSQL database `changeVersion` method.
+     *
      * @unofficial
      */
     temp1: Database['changeVersion'];
 
     /**
      * The style of the window title bar (e.g., "hidden", "default").
+     *
      * @unofficial
      */
     titlebarStyle: string;
 
     /**
      * TurndownService for converting HTML to Markdown.
+     *
      * @unofficial
      */
     TurndownService: typeof import('turndown');
 
     /**
      * Electron WebView tag for embedding external web content.
+     *
      * @unofficial
      */
     WebView: WebviewTag;
 
     /**
      * Minified reference to `Object.defineProperty`.
+     *
      * @unofficial
      */
     wf: typeof Object.defineProperty;
@@ -458,6 +487,7 @@ declare global {
 
     /**
      * Apply global DOM enhancements and polyfills used by Obsidian.
+     *
      * @unofficial
      */
     globalEnhance(): void;

@@ -3,6 +3,7 @@ import type { SyncPluginInstance } from './SyncPluginInstance.d.ts';
 
 /**
  * Internal plugin registration for the Obsidian Sync cloud sync feature.
+ *
  * @public
  * @unofficial
  */

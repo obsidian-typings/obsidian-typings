@@ -1,5 +1,6 @@
 /**
  * Source mode configuration for a markdown view.
+ *
  * @public
  * @unofficial
  */

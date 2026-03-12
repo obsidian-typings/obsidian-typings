@@ -3,6 +3,7 @@ import type { WordCountPluginInstance } from './WordCountPluginInstance.d.ts';
 
 /**
  * Internal plugin registration for the word/character count status bar feature.
+ *
  * @public
  * @unofficial
  */

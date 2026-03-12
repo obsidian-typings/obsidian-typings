@@ -1,5 +1,6 @@
 /**
  * Configuration options for the backlink plugin instance.
+ *
  * @public
  * @unofficial
  */

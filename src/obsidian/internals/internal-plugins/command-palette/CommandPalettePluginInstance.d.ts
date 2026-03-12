@@ -10,6 +10,7 @@ import type { CommandPalettePlugin } from './CommandPalettePlugin.d.ts';
 
 /**
  * Plugin instance for the command palette, providing the fuzzy command search modal.
+ *
  * @public
  * @unofficial
  */

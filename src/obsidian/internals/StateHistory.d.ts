@@ -5,6 +5,7 @@ import type { StateHistoryLeafHistory } from './StateHistoryLeafHistory.d.ts';
 
 /**
  * Captured state of a workspace leaf for history navigation.
+ *
  * @public
  * @unofficial
  */

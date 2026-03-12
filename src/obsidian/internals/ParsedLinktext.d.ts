@@ -1,5 +1,6 @@
 /**
  * Parsed link text result.
+ *
  * @public
  * @unofficial
  */

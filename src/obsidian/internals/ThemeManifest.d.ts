@@ -1,5 +1,6 @@
 /**
  * Manifest metadata for an installed theme.
+ *
  * @public
  * @unofficial
  */

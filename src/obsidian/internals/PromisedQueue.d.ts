@@ -1,5 +1,6 @@
 /**
  * A sequential promise queue that ensures functions execute one at a time.
+ *
  * @public
  * @unofficial
  */

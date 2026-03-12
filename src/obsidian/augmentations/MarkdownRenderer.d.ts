@@ -74,6 +74,7 @@ declare module 'obsidian' {
 
     /**
      * Called when the renderer is loaded.
+     *
      * @unofficial
      */
     onload(): void;

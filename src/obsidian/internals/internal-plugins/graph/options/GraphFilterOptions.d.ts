@@ -7,6 +7,7 @@ import type { GraphOptions } from './GraphOptions.d.ts';
 
 /**
  * Options section for graph filter settings controlling which files appear in the graph.
+ *
  * @public
  * @unofficial
  */

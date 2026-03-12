@@ -2,6 +2,7 @@ import type { Point } from 'obsidian';
 
 /**
  * Bezier curve used for rendering canvas edge connections.
+ *
  * @public
  * @unofficial
  */

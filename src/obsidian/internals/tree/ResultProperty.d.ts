@@ -2,6 +2,7 @@ import type { ContentPosition } from './ContentPosition.d.ts';
 
 /**
  * Represents a matched property within a search result.
+ *
  * @public
  * @unofficial
  */

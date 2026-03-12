@@ -1,5 +1,6 @@
 /**
  * Serialized representation of a single workspace item (leaf, split, or tab group).
+ *
  * @public
  * @unofficial
  */

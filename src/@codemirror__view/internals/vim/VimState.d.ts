@@ -3,6 +3,7 @@ import type { VimStateVimPlugin } from './VimStateVimPlugin.d.ts';
 
 /**
  * Top-level Vim state container for the editor.
+ *
  * @public
  * @unofficial
  */

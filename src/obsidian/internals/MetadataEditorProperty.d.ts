@@ -11,6 +11,7 @@ import type { PropertyEntryData } from './PropertyEntryData.d.ts';
 
 /**
  * Component representing a single property field in the metadata editor.
+ *
  * @public
  * @unofficial
  */

@@ -9,6 +9,7 @@ import type { HotkeyManagerDefaultKeysRecord } from './HotkeyManagerDefaultKeysR
 
 /**
  * Manager for keyboard shortcut registration, storage, and triggering.
+ *
  * @public
  * @unofficial
  */

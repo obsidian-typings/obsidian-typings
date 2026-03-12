@@ -1,5 +1,6 @@
 /**
  * SVG path elements for rendering a canvas edge, with separate paths for display and interaction.
+ *
  * @public
  * @unofficial
  */

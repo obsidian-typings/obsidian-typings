@@ -10,6 +10,7 @@ import type { CliTreeNode } from './CliTreeNode.d.ts';
 
 /**
  * Command-line interface handler for Obsidian.
+ *
  * @public
  * @unofficial
  */

@@ -11,6 +11,7 @@ import type { VimEditor } from './vim/VimEditor.d.ts';
 
 /**
  * Extended CodeMirror adapter providing CM5-compatible API over CM6.
+ *
  * @public
  * @unofficial
  */

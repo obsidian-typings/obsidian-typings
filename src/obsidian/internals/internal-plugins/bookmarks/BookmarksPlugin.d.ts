@@ -4,6 +4,7 @@ import type { BookmarksPluginViews } from './BookmarksPluginViews.d.ts';
 
 /**
  * Internal plugin registration for the bookmarks feature.
+ *
  * @public
  * @unofficial
  */

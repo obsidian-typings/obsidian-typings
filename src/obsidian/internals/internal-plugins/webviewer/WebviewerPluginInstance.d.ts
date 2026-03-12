@@ -7,6 +7,7 @@ import type { WebviewerPlugin } from './WebviewerPlugin.d.ts';
 
 /**
  * Plugin instance for the web viewer, providing an embedded web browser within Obsidian.
+ *
  * @public
  * @unofficial
  */

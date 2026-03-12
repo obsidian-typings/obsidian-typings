@@ -3,6 +3,7 @@ import type { SlashCommandPlugin } from './SlashCommandPlugin.d.ts';
 
 /**
  * Plugin instance for slash commands, providing inline command suggestions when typing "/".
+ *
  * @public
  * @unofficial
  */

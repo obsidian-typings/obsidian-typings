@@ -4,6 +4,7 @@ import type { AbstractFileTreeItem } from './AbstractFileTreeItem.d.ts';
 
 /**
  * Tree item representing a file in the file explorer.
+ *
  * @public
  * @unofficial
  */

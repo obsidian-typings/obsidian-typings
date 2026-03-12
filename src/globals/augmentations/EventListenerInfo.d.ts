@@ -7,6 +7,7 @@ declare global {
   interface EventListenerInfo {
     /**
      * Wrapper function of the event listener.
+     *
      * @official
      */
     // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type -- No other way.
@@ -14,6 +15,7 @@ declare global {
 
     /**
      * The listener of the event.
+     *
      * @official
      */
     // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type -- No other way.
@@ -21,12 +23,14 @@ declare global {
 
     /**
      * The options of the event listener.
+     *
      * @official
      */
     options?: AddEventListenerOptions | boolean;
 
     /**
      * The selector of the event target.
+     *
      * @official
      */
     selector: string;

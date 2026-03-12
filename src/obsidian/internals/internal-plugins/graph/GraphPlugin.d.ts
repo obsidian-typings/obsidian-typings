@@ -3,6 +3,7 @@ import type { GraphPluginInstance } from './GraphPluginInstance.d.ts';
 
 /**
  * Internal plugin that provides graph view functionality.
+ *
  * @public
  * @unofficial
  */

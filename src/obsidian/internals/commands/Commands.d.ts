@@ -9,6 +9,7 @@ import type { CommandsEditorCommandsRecord } from './CommandsEditorCommandsRecor
 
 /**
  * Manager for registering, finding, and executing commands.
+ *
  * @public
  * @unofficial
  */

@@ -2,6 +2,7 @@ import type { EditorPosition } from 'obsidian';
 
 /**
  * Information about a heading section in a note, including its text and position range.
+ *
  * @public
  * @unofficial
  */

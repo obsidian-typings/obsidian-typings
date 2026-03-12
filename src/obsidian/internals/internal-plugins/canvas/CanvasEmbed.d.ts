@@ -1,5 +1,6 @@
 /**
  * Represents an embedded file reference within a canvas node.
+ *
  * @public
  * @unofficial
  */

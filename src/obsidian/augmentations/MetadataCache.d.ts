@@ -30,6 +30,7 @@ declare module 'obsidian' {
 
     /**
      * Cache for block references in the vault.
+     *
      * @unofficial
      */
     blockCache: BlockCache;
@@ -43,6 +44,7 @@ declare module 'obsidian' {
 
     /**
      * Debounced callback that fires when the metadata cache finishes processing.
+     *
      * @unofficial
      */
     didFinish: Debouncer<[], void>;
@@ -70,12 +72,14 @@ declare module 'obsidian' {
 
     /**
      * Queue of files pending link resolution.
+     *
      * @unofficial
      */
     linkResolverQueue: ItemQueue<null | TFile> | null;
 
     /**
      * Registered link updater strategies for different file types.
+     *
      * @unofficial
      */
     linkUpdaters: LinkUpdaters;
@@ -96,6 +100,7 @@ declare module 'obsidian' {
 
     /**
      * Promise that resolves when the preload is complete, or `null` if not started.
+     *
      * @unofficial
      */
     preloadPromise: null | Promise<void>;
@@ -110,6 +115,7 @@ declare module 'obsidian' {
 
     /**
      * Debounced function for saving caches to the database.
+     *
      * @unofficial
      */
     transactionSave: Debouncer<[], void>;
@@ -131,18 +137,21 @@ declare module 'obsidian' {
 
     /**
      * Cache of paths checked against user ignore filters.
+     *
      * @unofficial
      */
     userIgnoreFilterCache: Record<string, boolean>;
 
     /**
      * Compiled regular expressions for user-defined ignore filters.
+     *
      * @unofficial
      */
     userIgnoreFilters: null | RegExp[];
 
     /**
      * Raw string representation of user-defined ignore filters.
+     *
      * @unofficial
      */
     userIgnoreFiltersString: string;
@@ -156,18 +165,21 @@ declare module 'obsidian' {
 
     /**
      * Web Worker used for parsing metadata in the background.
+     *
      * @unofficial
      */
     worker: Worker;
 
     /**
      * Resolve function for the current worker promise, or `null` if idle.
+     *
      * @unofficial
      */
     workerResolve: ((value: CachedMetadata | PromiseLike<CachedMetadata>) => void) | null;
 
     /**
      * Queue for processing metadata computation tasks sequentially.
+     *
      * @unofficial
      */
     workQueue: PromisedQueue;
@@ -439,6 +451,7 @@ declare module 'obsidian' {
 
     /**
      * Process the link resolver queue to resolve file links.
+     *
      * @unofficial
      */
     linkResolver(): void;
@@ -593,6 +606,7 @@ declare module 'obsidian' {
 
     /**
      * Preload the metadata cache from the database.
+     *
      * @unofficial
      */
     preload: () => Promise<void>;

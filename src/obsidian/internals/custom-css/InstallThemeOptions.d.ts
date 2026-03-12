@@ -1,5 +1,6 @@
 /**
  * Options for installing a theme from a repository.
+ *
  * @public
  * @unofficial
  */

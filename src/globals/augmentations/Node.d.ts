@@ -7,18 +7,21 @@ declare global {
   interface Node {
     /**
      * Global window object.
+     *
      * @official
      */
     constructorWin: Window;
 
     /**
      * The document this node belongs to, or the global document.
+     *
      * @official
      */
     doc: Document;
 
     /**
      * The window object this node belongs to, or the global window.
+     *
      * @official
      */
     win: Window;

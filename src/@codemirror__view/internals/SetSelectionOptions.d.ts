@@ -1,5 +1,6 @@
 /**
  * Options for setting a selection in the editor.
+ *
  * @public
  * @unofficial
  */

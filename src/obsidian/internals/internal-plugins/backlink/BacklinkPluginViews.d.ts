@@ -7,6 +7,7 @@ import type { BacklinkView } from './BacklinkView.d.ts';
 
 /**
  * View creators registered by the backlink plugin.
+ *
  * @public
  * @unofficial
  */

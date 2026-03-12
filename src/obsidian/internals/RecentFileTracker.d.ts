@@ -9,6 +9,7 @@ import type { GetRecentFilesOptions } from './GetRecentFilesOptions.d.ts';
 
 /**
  * Tracks recently opened files for quick access and navigation.
+ *
  * @public
  * @unofficial
  */

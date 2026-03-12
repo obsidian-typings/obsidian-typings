@@ -1,5 +1,6 @@
 /**
  * Information about the editor's scroll position and dimensions.
+ *
  * @public
  * @unofficial
  */

@@ -8,6 +8,7 @@ import type { FileExplorerPluginInstance } from './FileExplorerPluginInstance.d.
 
 /**
  * Internal plugin registration for the file explorer sidebar.
+ *
  * @public
  * @unofficial
  */

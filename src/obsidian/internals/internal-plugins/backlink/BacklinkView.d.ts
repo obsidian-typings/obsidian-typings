@@ -4,6 +4,7 @@ import type { BacklinkComponent } from './BacklinkComponent.d.ts';
 
 /**
  * View that displays backlinks to the current file.
+ *
  * @public
  * @unofficial
  */

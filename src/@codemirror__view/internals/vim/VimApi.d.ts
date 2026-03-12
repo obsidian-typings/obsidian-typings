@@ -3,6 +3,7 @@ import type { VimState } from './VimState.d.ts';
 
 /**
  * Public API for interacting with the Vim emulation layer.
+ *
  * @public
  * @unofficial
  */

@@ -22,18 +22,21 @@ declare module 'obsidian' {
 
     /**
      * Mapping of file extensions to functions that determine the parent folder for new files.
+     *
      * @unofficial
      */
     fileParentCreatorByType: Record<string, (path: string) => TFolder>;
 
     /**
      * Currently in-progress link update operations, or `null` if none.
+     *
      * @unofficial
      */
     inProgressUpdates: LinkUpdatesHandler[] | null;
 
     /**
      * Queue for processing link update operations sequentially.
+     *
      * @unofficial
      */
     updateQueue: PromisedQueue;

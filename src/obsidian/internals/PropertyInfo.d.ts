@@ -1,5 +1,6 @@
 /**
  * Information about a frontmatter property across the vault.
+ *
  * @public
  * @unofficial
  */

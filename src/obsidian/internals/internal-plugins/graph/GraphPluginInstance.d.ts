@@ -11,6 +11,7 @@ import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.d.
 
 /**
  * Instance of the graph internal plugin, managing graph views and options.
+ *
  * @public
  * @unofficial
  */

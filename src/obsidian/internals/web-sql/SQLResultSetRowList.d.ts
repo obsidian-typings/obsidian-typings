@@ -1,5 +1,6 @@
 /**
  * List of rows returned from a WebSQL query result.
+ *
  * @public
  * @unofficial
  */

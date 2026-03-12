@@ -2,6 +2,7 @@ import type { Submenu } from './Submenu.d.ts';
 
 /**
  * Menu submenu configuration record.
+ *
  * @public
  * @unofficial
  */

@@ -8,6 +8,7 @@ import type { AbstractSearchComponent } from './AbstractSearchComponent.d.ts';
 
 /**
  * Search component embedded in the editor for find-and-replace functionality.
+ *
  * @public
  * @unofficial
  */

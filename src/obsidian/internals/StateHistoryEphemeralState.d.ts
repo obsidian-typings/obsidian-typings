@@ -2,6 +2,7 @@ import type { EditorRange } from 'obsidian';
 
 /**
  * Ephemeral editor state stored in the state history (cursor and scroll position).
+ *
  * @public
  * @unofficial
  */

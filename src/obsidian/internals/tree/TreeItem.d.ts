@@ -2,6 +2,7 @@ import type { TreeNode } from './TreeNode.d.ts';
 
 /**
  * Represents a single interactive item within a tree view UI component.
+ *
  * @public
  * @unofficial
  */

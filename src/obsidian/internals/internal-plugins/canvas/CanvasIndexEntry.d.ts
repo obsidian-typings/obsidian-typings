@@ -4,6 +4,7 @@ import type { CanvasEmbed } from './CanvasEmbed.d.ts';
 
 /**
  * Represents a single entry in the canvas index, containing cached metadata and embeds for a canvas file.
+ *
  * @public
  * @unofficial
  */

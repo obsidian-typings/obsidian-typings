@@ -3,6 +3,7 @@ import type { GraphOptions } from './GraphOptions.d.ts';
 
 /**
  * Options section for managing color groups that visually categorize graph nodes.
+ *
  * @public
  * @unofficial
  */

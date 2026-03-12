@@ -1,5 +1,6 @@
 /**
  * Represents the last motion executed in Vim mode.
+ *
  * @public
  * @unofficial
  */

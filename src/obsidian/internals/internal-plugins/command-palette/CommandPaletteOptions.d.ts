@@ -1,5 +1,6 @@
 /**
  * Configuration options for the command palette plugin.
+ *
  * @public
  * @unofficial
  */

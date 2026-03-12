@@ -1,5 +1,6 @@
 /**
  * Interface for setting the birth time (creation time) of a file.
+ *
  * @public
  * @unofficial
  */

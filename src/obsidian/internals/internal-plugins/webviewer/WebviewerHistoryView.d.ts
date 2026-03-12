@@ -8,6 +8,7 @@ import type { WebviewerPluginInstance } from './WebviewerPluginInstance.d.ts';
 
 /**
  * View that displays the web browser browsing history.
+ *
  * @public
  * @unofficial
  */

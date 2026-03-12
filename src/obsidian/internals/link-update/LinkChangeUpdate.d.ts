@@ -2,6 +2,7 @@ import type { ReferenceCache } from 'obsidian';
 
 /**
  * Describes a single link change to apply when a file is renamed or moved.
+ *
  * @public
  * @unofficial
  */

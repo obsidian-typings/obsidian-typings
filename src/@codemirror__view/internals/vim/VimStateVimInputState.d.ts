@@ -1,5 +1,6 @@
 /**
  * Tracks the current input state of the Vim command parser.
+ *
  * @public
  * @unofficial
  */

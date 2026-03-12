@@ -2,6 +2,7 @@ import type { CanvasViewCanvasNodeBaseBase } from './CanvasViewCanvasNodeBaseBas
 
 /**
  * Base interface for canvas nodes, providing core editing and interaction methods.
+ *
  * @public
  * @unofficial
  */

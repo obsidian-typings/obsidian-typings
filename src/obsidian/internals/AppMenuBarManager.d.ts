@@ -8,6 +8,7 @@ import type { ExtractConstructor } from './constructors/ExtractConstructor.d.ts'
 
 /**
  * Manager for the application menu bar (native desktop menu).
+ *
  * @public
  * @unofficial
  */

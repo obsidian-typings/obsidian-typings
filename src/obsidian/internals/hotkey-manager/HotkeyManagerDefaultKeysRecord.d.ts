@@ -2,6 +2,7 @@ import type { KeymapInfo } from 'obsidian';
 
 /**
  * Record mapping command IDs to their default hotkey bindings.
+ *
  * @public
  * @unofficial
  */

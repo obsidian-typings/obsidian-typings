@@ -2,6 +2,7 @@ import type { EditorPosition } from 'obsidian';
 
 /**
  * A cursor for iterating over search matches in the editor document.
+ *
  * @public
  * @unofficial
  */

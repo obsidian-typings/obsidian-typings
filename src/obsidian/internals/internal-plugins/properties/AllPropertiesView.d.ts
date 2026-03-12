@@ -4,6 +4,7 @@ import type { ViewType } from '../../../implementations/constants/ViewType.d.ts'
 
 /**
  * View that displays all properties (frontmatter keys) across the vault.
+ *
  * @public
  * @unofficial
  */

@@ -5,6 +5,7 @@ import type { SharedFile } from './SharedFile.d.ts';
 
 /**
  * Handler for receiving shared files and text from other apps on mobile.
+ *
  * @public
  * @unofficial
  */

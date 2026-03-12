@@ -3,6 +3,7 @@ import type { SwitcherPluginInstance } from './SwitcherPluginInstance.d.ts';
 
 /**
  * Internal plugin registration for the quick switcher feature.
+ *
  * @public
  * @unofficial
  */

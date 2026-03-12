@@ -3,6 +3,7 @@ import type { FileRecoveryPluginInstance } from './FileRecoveryPluginInstance.d.
 
 /**
  * Internal plugin registration for the file recovery/snapshots feature.
+ *
  * @public
  * @unofficial
  */

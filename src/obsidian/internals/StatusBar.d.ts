@@ -4,6 +4,7 @@ import type { getStatusBarConstructor } from '../implementations/constructors/in
 
 /**
  * The status bar displayed at the bottom of the application window.
+ *
  * @public
  * @unofficial
  */

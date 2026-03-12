@@ -11,18 +11,21 @@ declare module 'obsidian' {
   interface WorkspaceSidedock extends WorkspaceSplit {
     /**
      * Whether the sidedock allows only a single child tab group.
+     *
      * @unofficial
      */
     allowSingleChild: boolean;
 
     /**
      * Whether the sidedock automatically manages its DOM elements.
+     *
      * @unofficial
      */
     autoManageDOM: boolean;
 
     /**
      * Child tab groups within this sidedock.
+     *
      * @unofficial
      */
     children: WorkspaceTabs[];
@@ -37,42 +40,49 @@ declare module 'obsidian' {
 
     /**
      * Layout direction of the sidedock split.
+     *
      * @unofficial
      */
     direction: string;
 
     /**
      * Element displayed when the sidedock has no content.
+     *
      * @unofficial
      */
     emptyStateEl: HTMLDivElement;
 
     /**
      * Whether the sidedock is currently being resized.
+     *
      * @unofficial
      */
     isResizing: boolean;
 
     /**
      * Original sizes of children before a resize operation.
+     *
      * @unofficial
      */
     originalSizes: null;
 
     /**
      * Starting position of the current resize operation.
+     *
      * @unofficial
      */
     resizeStartPos: null;
 
     /**
      * Which side of the workspace this sidedock is on (e.g. 'left' or 'right').
+     *
      * @unofficial
      */
     side: string;
 
     /**
      * Width of the sidedock in pixels.
+     *
      * @unofficial
      */
     size: number;
@@ -118,6 +128,7 @@ declare module 'obsidian' {
 
     /**
      * Recalculate the dimensions of child tab groups.
+     *
      * @unofficial
      */
     recomputeChildrenDimensions(): void;

@@ -10,6 +10,7 @@ import type { FoldInfo } from './FoldInfo.d.ts';
 
 /**
  * Editable widget view for embedded file sections (headings, blocks) within the editor.
+ *
  * @public
  * @unofficial
  */

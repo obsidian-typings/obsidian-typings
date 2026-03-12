@@ -1,5 +1,6 @@
 /**
  * Represents a submenu entry in a context menu.
+ *
  * @public
  * @unofficial
  */

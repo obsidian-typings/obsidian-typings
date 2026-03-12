@@ -3,6 +3,7 @@ import type { AudioRecorderPluginInstance } from './AudioRecorderPluginInstance.
 
 /**
  * Internal plugin registration for the audio recorder feature.
+ *
  * @public
  * @unofficial
  */

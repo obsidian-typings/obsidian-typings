@@ -5,6 +5,7 @@ import type {
 
 /**
  * Serialized representation of a workspace leaf or split for layout persistence.
+ *
  * @public
  * @unofficial
  */

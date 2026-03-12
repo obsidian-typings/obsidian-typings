@@ -3,6 +3,7 @@ import type { MarkdownImporterPluginInstance } from './MarkdownImporterPluginIns
 
 /**
  * Internal plugin registration for the Markdown importer feature.
+ *
  * @public
  * @unofficial
  */

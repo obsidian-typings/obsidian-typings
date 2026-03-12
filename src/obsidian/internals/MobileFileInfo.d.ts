@@ -1,5 +1,6 @@
 /**
  * Interface for rendering file information on mobile.
+ *
  * @public
  * @unofficial
  */

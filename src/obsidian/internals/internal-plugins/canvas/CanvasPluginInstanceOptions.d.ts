@@ -1,5 +1,6 @@
 /**
  * User-configurable options for the Canvas plugin.
+ *
  * @public
  * @unofficial
  */

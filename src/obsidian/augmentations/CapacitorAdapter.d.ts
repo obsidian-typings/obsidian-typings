@@ -16,6 +16,7 @@ declare module 'obsidian' {
   interface CapacitorAdapter extends DataAdapterEx {
     /**
      * Reference to the Capacitor file system API.
+     *
      * @unofficial
      */
     fs: CapacitorAdapterFs;

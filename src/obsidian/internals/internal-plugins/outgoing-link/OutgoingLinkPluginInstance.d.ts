@@ -5,6 +5,7 @@ import type { OutgoingLinkPlugin } from './OutgoingLinkPlugin.d.ts';
 
 /**
  * Plugin instance for outgoing links, displaying links from the current file.
+ *
  * @public
  * @unofficial
  */

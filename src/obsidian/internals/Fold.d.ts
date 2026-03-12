@@ -1,5 +1,6 @@
 /**
  * Represents a folded range in the editor.
+ *
  * @public
  * @unofficial
  */

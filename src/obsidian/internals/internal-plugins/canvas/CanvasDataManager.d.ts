@@ -2,6 +2,7 @@ import type { App } from 'obsidian';
 
 /**
  * Manages saving, loading, and maintaining canvas local data on disk.
+ *
  * @public
  * @unofficial
  */

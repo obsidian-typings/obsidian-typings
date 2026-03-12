@@ -3,6 +3,7 @@ import type { SQLResultSet } from './SQLResultSet.d.ts';
 
 /**
  * Represents a SQL transaction for executing queries against a WebSQL database.
+ *
  * @public
  * @unofficial
  */

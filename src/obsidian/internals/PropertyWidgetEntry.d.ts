@@ -2,6 +2,7 @@ import type { PropertyWidgetType } from './PropertyWidgetType.d.ts';
 
 /**
  * Entry associating a display name with a property widget type.
+ *
  * @public
  * @unofficial
  */

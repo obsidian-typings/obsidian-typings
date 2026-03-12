@@ -2,6 +2,7 @@ import type { StateHistory } from './StateHistory.d.ts';
 
 /**
  * Back and forward history stacks for a workspace leaf.
+ *
  * @public
  * @unofficial
  */

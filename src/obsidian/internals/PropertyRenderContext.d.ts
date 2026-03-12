@@ -4,6 +4,7 @@ import type { MetadataEditor } from './MetadataEditor.d.ts';
 
 /**
  * Context provided to property widgets for rendering and interaction.
+ *
  * @public
  * @unofficial
  */

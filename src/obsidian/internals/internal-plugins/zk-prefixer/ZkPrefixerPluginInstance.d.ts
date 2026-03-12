@@ -5,6 +5,7 @@ import type { ZkPrefixerPlugin } from './ZkPrefixerPlugin.d.ts';
 
 /**
  * Plugin instance for the Zettelkasten prefixer, prepending unique IDs to new note filenames.
+ *
  * @public
  * @unofficial
  */

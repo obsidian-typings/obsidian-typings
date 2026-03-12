@@ -3,6 +3,7 @@ import type { PdfExportSettings } from './PdfExportSettings.d.ts';
 
 /**
  * Vault-level configuration settings stored in the `.obsidian` config folder.
+ *
  * @public
  * @unofficial
  */

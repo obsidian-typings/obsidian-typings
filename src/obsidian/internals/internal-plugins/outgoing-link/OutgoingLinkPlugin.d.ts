@@ -3,6 +3,7 @@ import type { OutgoingLinkPluginInstance } from './OutgoingLinkPluginInstance.d.
 
 /**
  * Internal plugin registration for the outgoing links feature.
+ *
  * @public
  * @unofficial
  */

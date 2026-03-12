@@ -1,5 +1,6 @@
 /**
  * Ephemeral state for a markdown view, storing scroll position.
+ *
  * @public
  * @unofficial
  */

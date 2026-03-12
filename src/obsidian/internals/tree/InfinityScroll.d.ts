@@ -1,5 +1,6 @@
 /**
  * Virtual scrolling component that renders only visible items in large lists for performance.
+ *
  * @public
  * @unofficial
  */

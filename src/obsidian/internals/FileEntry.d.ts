@@ -2,6 +2,7 @@ import type { FileStats } from 'obsidian';
 
 /**
  * Represents a file or folder entry in the data adapter's file listing.
+ *
  * @public
  * @unofficial
  */

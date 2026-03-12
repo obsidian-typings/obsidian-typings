@@ -2,6 +2,7 @@ import type { PaneType } from 'obsidian';
 
 /**
  * Webviewer open URL event detail.
+ *
  * @public
  * @unofficial
  */

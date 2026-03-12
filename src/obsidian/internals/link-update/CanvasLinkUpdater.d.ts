@@ -5,6 +5,7 @@ import type { LinkUpdater } from './LinkUpdater.d.ts';
 
 /**
  * Link updater for canvas files, handling link updates when files are renamed or moved.
+ *
  * @public
  * @unofficial
  */

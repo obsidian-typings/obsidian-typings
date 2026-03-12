@@ -2,6 +2,7 @@ import type { ExtendedMetrics } from './ExtendedMetrics.d.ts';
 
 /**
  * MathJax library interface for rendering LaTeX math expressions.
+ *
  * @public
  * @unofficial
  */

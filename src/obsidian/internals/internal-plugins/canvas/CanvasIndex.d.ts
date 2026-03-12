@@ -7,6 +7,7 @@ import type { CanvasIndexEntry } from './CanvasIndexEntry.d.ts';
 
 /**
  * Index that tracks and resolves links, embeds, and metadata across all canvas files.
+ *
  * @public
  * @unofficial
  */

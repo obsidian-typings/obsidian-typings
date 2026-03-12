@@ -2,6 +2,7 @@ import type { TAbstractFile } from 'obsidian';
 
 /**
  * Represents a draggable item in the drag-and-drop system.
+ *
  * @public
  * @unofficial
  */

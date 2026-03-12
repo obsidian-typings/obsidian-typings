@@ -3,6 +3,7 @@ import type { EditorStatusPluginInstance } from './EditorStatusPluginInstance.d.
 
 /**
  * Internal plugin registration for the editor status bar feature.
+ *
  * @public
  * @unofficial
  */

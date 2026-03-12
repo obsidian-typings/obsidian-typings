@@ -7,6 +7,7 @@ import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 
 /**
  * View for rendering and interacting with PDF files.
+ *
  * @public
  * @unofficial
  */

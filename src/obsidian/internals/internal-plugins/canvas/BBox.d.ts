@@ -1,5 +1,6 @@
 /**
  * Axis-aligned bounding box.
+ *
  * @public
  * @unofficial
  */

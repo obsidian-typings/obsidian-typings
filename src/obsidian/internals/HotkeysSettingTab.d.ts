@@ -5,6 +5,7 @@ import type {
 
 /**
  * Setting tab for viewing and editing keyboard hotkeys.
+ *
  * @public
  * @unofficial
  */

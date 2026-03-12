@@ -2,6 +2,7 @@ import type { GraphColorGroup } from './GraphColorGroup.d.ts';
 
 /**
  * User-configurable options for the graph plugin, persisted in graph.json.
+ *
  * @public
  * @unofficial
  */

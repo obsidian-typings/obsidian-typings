@@ -2,6 +2,7 @@ import type { FileStats } from 'obsidian';
 
 /**
  * File or directory entry from the Capacitor (mobile) file system.
+ *
  * @public
  * @unofficial
  */

@@ -1,5 +1,6 @@
 /**
  * Cache entry storing file hash, modification time, and size.
+ *
  * @public
  * @unofficial
  */

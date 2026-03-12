@@ -2,6 +2,7 @@ import type { SerializedWorkspaceLeftRibbonHiddenItemsRecord } from './Serialize
 
 /**
  * Serialized representation of the left ribbon bar state.
+ *
  * @public
  * @unofficial
  */

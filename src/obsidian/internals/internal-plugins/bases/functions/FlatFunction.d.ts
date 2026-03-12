@@ -2,6 +2,7 @@ import type { BasesFunction } from '../BasesFunction.d.ts';
 
 /**
  * Function `Flat`.
+ *
  * @public
  * @unofficial
  */

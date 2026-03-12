@@ -7,18 +7,21 @@ declare global {
   interface UIEvent extends Event {
     /**
      * The document of the event.
+     *
      * @official
      */
     doc: Document;
 
     /**
      * The target node of the event.
+     *
      * @official
      */
     targetNode: Node | null;
 
     /**
      * The window of the event.
+     *
      * @official
      */
     win: Window;

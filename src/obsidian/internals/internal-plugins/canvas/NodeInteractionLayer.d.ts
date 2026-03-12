@@ -2,6 +2,7 @@ import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /**
  * Layer that handles user interactions with canvas nodes, such as resizing and connecting.
+ *
  * @public
  * @unofficial
  */

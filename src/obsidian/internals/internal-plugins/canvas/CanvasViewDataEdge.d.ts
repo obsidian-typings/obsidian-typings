@@ -1,5 +1,6 @@
 /**
  * Serialized data representation of an edge (connection) between two nodes in the canvas.
+ *
  * @public
  * @unofficial
  */

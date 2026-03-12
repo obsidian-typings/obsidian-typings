@@ -8,6 +8,7 @@ import type { SyncPluginInstance } from './SyncPluginInstance.d.ts';
 
 /**
  * View that displays the Obsidian Sync status and settings.
+ *
  * @public
  * @unofficial
  */

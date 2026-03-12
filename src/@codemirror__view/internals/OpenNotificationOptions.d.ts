@@ -1,5 +1,6 @@
 /**
  * Options for opening a notification in the editor.
+ *
  * @public
  * @unofficial
  */

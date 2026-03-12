@@ -7,6 +7,7 @@ declare global {
   interface Document {
     /**
      * The event listeners of the document.
+     *
      * @official
      */
     _EVENTS?: {

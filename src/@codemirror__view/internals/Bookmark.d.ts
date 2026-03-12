@@ -5,6 +5,7 @@ import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 
 /**
  * A bookmark marking a specific position in the editor document that tracks changes.
+ *
  * @public
  * @unofficial
  */

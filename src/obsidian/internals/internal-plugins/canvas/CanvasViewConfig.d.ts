@@ -2,6 +2,7 @@ import type { Dimensions } from '../../Dimensions.d.ts';
 
 /**
  * Configuration options for the canvas view.
+ *
  * @public
  * @unofficial
  */

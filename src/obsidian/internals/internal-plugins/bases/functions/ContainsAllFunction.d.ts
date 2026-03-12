@@ -4,6 +4,7 @@ import type { HasGetRHSWidgetType } from '../HasGetRHSWidgetType.d.ts';
 
 /**
  * Function `ContainsAll`.
+ *
  * @public
  * @unofficial
  */

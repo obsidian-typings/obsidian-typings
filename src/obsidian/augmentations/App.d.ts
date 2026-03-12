@@ -38,12 +38,14 @@ declare module 'obsidian' {
 
     /**
      * Manager for the application menu bar (desktop only).
+     *
      * @unofficial
      */
     appMenuBarManager: AppMenuBarManager;
 
     /**
      * CLI handler for the app.
+     *
      * @unofficial
      */
     cli: Cli;
@@ -73,6 +75,7 @@ declare module 'obsidian' {
 
     /**
      * Manager for drag-and-drop operations within the app.
+     *
      * @unofficial
      */
     dragManager: DragManager;
@@ -94,6 +97,7 @@ declare module 'obsidian' {
 
     /**
      * Manager for editor fold (collapse) state persistence.
+     *
      * @unofficial
      */
     foldManager: FoldManager;
@@ -159,24 +163,28 @@ declare module 'obsidian' {
 
     /**
      * Navigation bar for mobile devices, or `null` on desktop.
+     *
      * @unofficial
      */
     mobileNavbar: MobileNavbar | null;
 
     /**
      * Quick actions for mobile, `null` on desktop.
+     *
      * @unofficial
      */
     mobileQuickActions: unknown;
 
     /**
      * Tab switcher for mobile devices, or `null` on desktop.
+     *
      * @unofficial
      */
     mobileTabSwitcher: MobileTabSwitcher | null;
 
     /**
      * Toolbar for mobile devices, or `null` on desktop.
+     *
      * @unofficial
      */
     mobileToolbar: MobileToolbar | null;
@@ -240,6 +248,7 @@ declare module 'obsidian' {
 
     /**
      * Handler for receiving shared content from external apps (mobile).
+     *
      * @unofficial
      */
     shareReceiver: ShareReceiver;
@@ -490,6 +499,7 @@ declare module 'obsidian' {
 
     /**
      * Register an event listener on the app.
+     *
      * @unofficial
      */
     on(): void;

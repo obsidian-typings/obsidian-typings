@@ -14,6 +14,7 @@ import type { InstallThemeOptions } from './InstallThemeOptions.d.ts';
 
 /**
  * Manager for custom CSS themes and snippets.
+ *
  * @public
  * @unofficial
  */

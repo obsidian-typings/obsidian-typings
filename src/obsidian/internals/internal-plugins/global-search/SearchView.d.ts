@@ -4,6 +4,7 @@ import type { ViewType } from '../../../implementations/constants/ViewType.d.ts'
 
 /**
  * View that displays the global search results pane.
+ *
  * @public
  * @unofficial
  */

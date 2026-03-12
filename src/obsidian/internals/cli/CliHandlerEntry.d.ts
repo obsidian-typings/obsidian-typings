@@ -2,6 +2,7 @@ import type { CliFlag } from 'obsidian';
 
 /**
  * Entry stored in the CLI handlers map.
+ *
  * @public
  * @unofficial
  */

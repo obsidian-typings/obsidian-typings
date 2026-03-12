@@ -1,5 +1,6 @@
 /**
  * Options for setting a bookmark in the editor.
+ *
  * @public
  * @unofficial
  */

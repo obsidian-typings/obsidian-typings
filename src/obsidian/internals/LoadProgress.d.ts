@@ -1,5 +1,6 @@
 /**
  * Represents a loading progress indicator.
+ *
  * @public
  * @unofficial
  */

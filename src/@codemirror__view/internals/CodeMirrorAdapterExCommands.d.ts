@@ -2,6 +2,7 @@ import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 
 /**
  * Built-in editor commands available through the CodeMirror adapter.
+ *
  * @public
  * @unofficial
  */

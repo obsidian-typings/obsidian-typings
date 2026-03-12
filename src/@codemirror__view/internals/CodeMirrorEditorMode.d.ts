@@ -1,5 +1,6 @@
 /**
  * Describes the active editor language mode.
+ *
  * @public
  * @unofficial
  */

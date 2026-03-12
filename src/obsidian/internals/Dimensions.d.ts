@@ -1,5 +1,6 @@
 /**
  * Width and height dimensions.
+ *
  * @public
  * @unofficial
  */

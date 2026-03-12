@@ -10,6 +10,7 @@ import type { DailyNotesPlugin } from './DailyNotesPlugin.d.ts';
 
 /**
  * Plugin instance for daily notes, providing date-based note creation and navigation.
+ *
  * @public
  * @unofficial
  */

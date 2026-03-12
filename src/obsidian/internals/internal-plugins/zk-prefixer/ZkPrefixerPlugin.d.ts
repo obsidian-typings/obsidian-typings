@@ -3,6 +3,7 @@ import type { ZkPrefixerPluginInstance } from './ZkPrefixerPluginInstance.d.ts';
 
 /**
  * Internal plugin registration for the Zettelkasten ID prefixer feature.
+ *
  * @public
  * @unofficial
  */

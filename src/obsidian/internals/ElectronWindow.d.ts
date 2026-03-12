@@ -2,6 +2,7 @@ import type { BrowserWindow } from 'electron';
 
 /**
  * Extended Electron BrowserWindow with internal properties.
+ *
  * @public
  * @unofficial
  */

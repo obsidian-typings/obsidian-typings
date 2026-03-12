@@ -19,6 +19,7 @@ import type { WorkerResults } from './WorkerResults.d.ts';
 
 /**
  * Renderer for the graph view, managing PixiJS rendering, user interactions, and layout.
+ *
  * @public
  * @unofficial
  */

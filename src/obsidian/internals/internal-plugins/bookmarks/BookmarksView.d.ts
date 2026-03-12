@@ -9,6 +9,7 @@ import type { BookmarksPluginInstance } from './BookmarksPluginInstance.d.ts';
 
 /**
  * View that displays the bookmarks sidebar, showing all bookmarked items in a tree.
+ *
  * @public
  * @unofficial
  */

@@ -11,6 +11,7 @@ import type { PropertyEntryData } from './PropertyEntryData.d.ts';
 
 /**
  * Editor component for managing frontmatter property fields in a markdown view.
+ *
  * @public
  * @unofficial
  */

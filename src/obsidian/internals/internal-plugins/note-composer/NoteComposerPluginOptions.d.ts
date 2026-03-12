@@ -1,5 +1,6 @@
 /**
  * Configuration options for the note composer plugin.
+ *
  * @public
  * @unofficial
  */

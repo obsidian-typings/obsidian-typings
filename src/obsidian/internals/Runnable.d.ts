@@ -1,5 +1,6 @@
 /**
  * A controllable task with start, stop, and cancel lifecycle.
+ *
  * @public
  * @unofficial
  */

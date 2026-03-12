@@ -3,6 +3,7 @@ import type { GlobalSearchPluginInstance } from './GlobalSearchPluginInstance.d.
 
 /**
  * Internal plugin registration for the global search feature.
+ *
  * @public
  * @unofficial
  */

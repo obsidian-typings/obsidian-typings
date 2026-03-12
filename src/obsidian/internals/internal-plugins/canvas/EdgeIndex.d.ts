@@ -3,6 +3,7 @@ import type { EdgeIndexData } from './EdgeIndexData.d.ts';
 
 /**
  * Spatial index (R-tree) for efficient hit-testing and spatial queries on canvas edges and nodes.
+ *
  * @public
  * @unofficial
  */

@@ -23,6 +23,7 @@ import type { BookmarksPlugin } from './BookmarksPlugin.d.ts';
 
 /**
  * Plugin instance for bookmarks, managing bookmarked files, folders, URLs, searches, and graphs.
+ *
  * @public
  * @unofficial
  */

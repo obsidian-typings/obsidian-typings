@@ -3,6 +3,7 @@ import type { PropertiesPluginInstance } from './PropertiesPluginInstance.d.ts';
 
 /**
  * Internal plugin registration for the properties (frontmatter metadata) feature.
+ *
  * @public
  * @unofficial
  */

@@ -11,6 +11,7 @@ declare module 'obsidian' {
   interface BasesView extends Component {
     /**
      * All available properties from the dataset.
+     *
      * @official
      * @since 1.10.0
      */
@@ -18,6 +19,7 @@ declare module 'obsidian' {
 
     /**
      * Reference to the app instance.
+     *
      * @official
      * @since 1.10.0
      */
@@ -25,6 +27,7 @@ declare module 'obsidian' {
 
     /**
      * The config object for this view.
+     *
      * @official
      * @since 1.10.0
      */
@@ -34,6 +37,7 @@ declare module 'obsidian' {
      * The most recent output from executing the bases query, applying filters, and evaluating formulas.
      * This object will be replaced with a new result set when changes to the vault or Bases config occur,
      * so views should not keep a reference to it. Also note the contained BasesEntry objects will be recreated.
+     *
      * @official
      * @since 1.10.0
      */
@@ -41,6 +45,7 @@ declare module 'obsidian' {
 
     /**
      * The type ID of this view
+     *
      * @official
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link type} instead.
@@ -73,6 +78,7 @@ declare module 'obsidian' {
 
     /**
      * Called when there is new data for the query. This view should rerender with the updated data.
+     *
      * @official
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link onDataUpdated} instead.

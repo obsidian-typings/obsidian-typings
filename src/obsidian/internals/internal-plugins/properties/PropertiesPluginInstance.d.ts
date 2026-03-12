@@ -5,6 +5,7 @@ import type { PropertiesPlugin } from './PropertiesPlugin.d.ts';
 
 /**
  * Plugin instance for properties, managing frontmatter metadata views.
+ *
  * @public
  * @unofficial
  */

@@ -2,6 +2,7 @@ import type { CanvasViewCanvasNodeUnknownData } from './CanvasViewCanvasNodeUnkn
 
 /**
  * Serialized data for a canvas node.
+ *
  * @public
  * @unofficial
  */

@@ -4,6 +4,7 @@ import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 
 /**
  * View displayed when a workspace leaf has no content or file open.
+ *
  * @public
  * @unofficial
  */

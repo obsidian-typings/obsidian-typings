@@ -31,18 +31,21 @@ declare module 'obsidian' {
 
     /**
      * Search instance for in-document search, or `null` if inactive.
+     *
      * @unofficial
      */
     search: null | unknown;
 
     /**
      * The subview type identifier (e.g. 'preview').
+     *
      * @unofficial
      */
     type: 'preview' | string;
 
     /**
      * The parent MarkdownView containing this preview.
+     *
      * @unofficial
      */
     view: MarkdownView;
@@ -168,6 +171,7 @@ declare module 'obsidian' {
 
     /**
      * Hide the preview view.
+     *
      * @unofficial
      */
     hide(): void;
@@ -182,6 +186,7 @@ declare module 'obsidian' {
 
     /**
      * Called when the preview view is loaded.
+     *
      * @unofficial
      */
     onload(): void;
@@ -246,6 +251,7 @@ declare module 'obsidian' {
 
     /**
      * Show the preview view.
+     *
      * @unofficial
      */
     show(): void;

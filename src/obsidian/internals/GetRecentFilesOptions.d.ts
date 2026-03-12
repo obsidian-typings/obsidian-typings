@@ -1,5 +1,6 @@
 /**
  * Options for getting recent files.
+ *
  * @public
  * @unofficial
  */

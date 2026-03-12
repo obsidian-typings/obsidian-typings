@@ -10,6 +10,7 @@ import type { OutlinePluginInstance } from './OutlinePluginInstance.d.ts';
 
 /**
  * View that displays the headings outline for the current file.
+ *
  * @public
  * @unofficial
  */

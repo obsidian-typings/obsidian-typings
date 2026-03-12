@@ -11,6 +11,7 @@ import type { IFramedMarkdownEditor } from './IFramedMarkdownEditor.d.ts';
 
 /**
  * View for an embedded markdown editor, supporting preview and edit modes.
+ *
  * @public
  * @unofficial
  */

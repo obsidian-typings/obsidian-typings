@@ -1,5 +1,6 @@
 /**
  * Information about the initial drag start event.
+ *
  * @public
  * @unofficial
  */

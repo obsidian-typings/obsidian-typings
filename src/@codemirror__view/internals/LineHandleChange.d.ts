@@ -2,6 +2,7 @@ import type { ChangeDesc } from '@codemirror/state';
 
 /**
  * Describes a change applied to a line handle.
+ *
  * @public
  * @unofficial
  */

@@ -3,6 +3,7 @@ import type { SlashCommandPluginInstance } from './SlashCommandPluginInstance.d.
 
 /**
  * Internal plugin registration for the slash command suggestions feature.
+ *
  * @public
  * @unofficial
  */

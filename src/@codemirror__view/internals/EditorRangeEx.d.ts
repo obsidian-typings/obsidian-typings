@@ -2,6 +2,7 @@ import type { EditorPosition } from 'obsidian';
 
 /**
  * An extended editor range with nullable start and end positions.
+ *
  * @public
  * @unofficial
  */

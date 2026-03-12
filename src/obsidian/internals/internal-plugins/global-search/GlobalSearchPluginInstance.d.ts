@@ -5,6 +5,7 @@ import type { GlobalSearchPlugin } from './GlobalSearchPlugin.d.ts';
 
 /**
  * Plugin instance for global search, providing vault-wide text search functionality.
+ *
  * @public
  * @unofficial
  */

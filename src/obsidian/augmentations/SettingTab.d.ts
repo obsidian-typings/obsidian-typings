@@ -91,6 +91,7 @@ declare module 'obsidian' {
 
     /**
      * Called when the settings tab should be rendered.
+     *
      * @see {@link https://docs.obsidian.md/Plugins/User+interface/Settings#Register+a+settings+tab}.
      * @official
      * @deprecated - Added only for typing purposes. Use {@link display} instead.

@@ -1,5 +1,6 @@
 /**
  * Vim plugin state tracking the last keydown event.
+ *
  * @public
  * @unofficial
  */

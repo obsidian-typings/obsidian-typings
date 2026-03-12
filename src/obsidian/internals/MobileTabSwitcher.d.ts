@@ -5,6 +5,7 @@ import type {
 
 /**
  * Tab switcher component for navigating between open tabs on mobile.
+ *
  * @public
  * @unofficial
  */

@@ -12,6 +12,7 @@ import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
 
 /**
  * Represents a single file's search result in the result DOM tree.
+ *
  * @public
  * @unofficial
  */

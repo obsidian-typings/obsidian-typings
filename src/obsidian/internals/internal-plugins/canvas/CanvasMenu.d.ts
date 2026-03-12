@@ -3,6 +3,7 @@ import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /**
  * Context menu and toolbar displayed on the canvas for node/edge actions.
+ *
  * @public
  * @unofficial
  */

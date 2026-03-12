@@ -5,6 +5,7 @@ import type { SlidesPlugin } from './SlidesPlugin.d.ts';
 
 /**
  * Plugin instance for slides, providing presentation mode for Markdown files.
+ *
  * @public
  * @unofficial
  */

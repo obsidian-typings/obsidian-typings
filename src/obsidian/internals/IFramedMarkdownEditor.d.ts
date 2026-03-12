@@ -5,6 +5,7 @@ import type { MarkdownScrollableEditView } from './MarkdownScrollableEditView.d.
 
 /**
  * A markdown editor that runs inside an iframe, used for embedded editable views.
+ *
  * @public
  * @unofficial
  */

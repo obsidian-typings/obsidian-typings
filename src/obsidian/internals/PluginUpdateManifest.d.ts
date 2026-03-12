@@ -2,6 +2,7 @@ import type { PluginManifest } from 'obsidian';
 
 /**
  * Information about an available plugin update.
+ *
  * @public
  * @unofficial
  */

@@ -1,5 +1,6 @@
 /**
  * Represents an error returned from a WebSQL database operation.
+ *
  * @public
  * @unofficial
  */

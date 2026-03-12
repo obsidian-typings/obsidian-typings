@@ -3,6 +3,7 @@ import type { HasExtract } from '../HasExtract.d.ts';
 
 /**
  * Function `Year`.
+ *
  * @public
  * @unofficial
  */

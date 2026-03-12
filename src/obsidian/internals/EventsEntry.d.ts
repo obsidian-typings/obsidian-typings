@@ -2,6 +2,7 @@ import type { Events } from 'obsidian';
 
 /**
  * An entry representing a registered event handler.
+ *
  * @public
  * @unofficial
  */

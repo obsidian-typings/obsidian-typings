@@ -2,6 +2,7 @@ import type { EditorRange } from 'obsidian';
 
 /**
  * A clickable token in the editor with position, text, and type information.
+ *
  * @public
  * @unofficial
  */

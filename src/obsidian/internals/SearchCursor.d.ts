@@ -2,6 +2,7 @@ import type { EditorRange } from 'obsidian';
 
 /**
  * Cursor for navigating through search results in the editor.
+ *
  * @public
  * @unofficial
  */

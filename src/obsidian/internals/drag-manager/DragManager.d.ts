@@ -12,6 +12,7 @@ import type { DropResult } from './DropResult.d.ts';
 
 /**
  * Manager for drag-and-drop operations throughout the application.
+ *
  * @public
  * @unofficial
  */

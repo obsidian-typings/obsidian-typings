@@ -7,6 +7,7 @@ declare global {
   interface Touch {
     /**
      * The type of touch.
+     *
      * @official
      */
     touchType: 'direct' | 'stylus';

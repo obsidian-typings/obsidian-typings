@@ -7,6 +7,7 @@ import type { LinkChangeUpdate } from './LinkChangeUpdate.d.ts';
 
 /**
  * Handler for updating links within a specific file type when files are renamed or moved.
+ *
  * @public
  * @unofficial
  */

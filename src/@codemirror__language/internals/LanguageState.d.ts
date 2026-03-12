@@ -4,6 +4,7 @@ import type { Tree as LezerTree } from '@lezer/common';
 
 /**
  * Internal state for a language's parser, tracking the parse tree and context.
+ *
  * @see https://github.com/codemirror/language/blob/main/src/language.ts
  * @unofficial
  * @public

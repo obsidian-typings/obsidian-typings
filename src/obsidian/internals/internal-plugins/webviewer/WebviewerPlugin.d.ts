@@ -3,6 +3,7 @@ import type { WebviewerPluginInstance } from './WebviewerPluginInstance.d.ts';
 
 /**
  * Internal plugin registration for the embedded web browser feature.
+ *
  * @public
  * @unofficial
  */

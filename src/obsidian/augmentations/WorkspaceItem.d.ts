@@ -11,30 +11,35 @@ declare module 'obsidian' {
   interface WorkspaceItem extends Events {
     /**
      * Reference to the app instance.
+     *
      * @unofficial
      */
     app: App;
 
     /**
      * The component managing the lifecycle of this workspace item.
+     *
      * @unofficial
      */
     component: Component;
 
     /**
      * Container element for this workspace item.
+     *
      * @unofficial
      */
     containerEl: HTMLDivElement;
 
     /**
      * The flex-grow dimension of this item within its parent split.
+     *
      * @unofficial
      */
     dimension: null | number;
 
     /**
      * Unique identifier for this workspace item.
+     *
      * @unofficial
      */
     id: string;
@@ -50,18 +55,21 @@ declare module 'obsidian' {
 
     /**
      * The resize handle element used for adjusting item dimensions.
+     *
      * @unofficial
      */
     resizeHandleEl: HTMLHRElement;
 
     /**
      * The type identifier for this workspace item (e.g. 'leaf', 'split', 'tabs').
+     *
      * @unofficial
      */
     type: string;
 
     /**
      * Reference to the workspace this item belongs to.
+     *
      * @unofficial
      */
     workspace: Workspace;
@@ -81,6 +89,7 @@ declare module 'obsidian' {
 
     /**
      * Detach this item from its parent.
+     *
      * @unofficial
      */
     detach(): void;

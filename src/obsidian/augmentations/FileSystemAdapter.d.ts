@@ -21,6 +21,7 @@ declare module 'obsidian' {
   interface FileSystemAdapter extends DataAdapterEx {
     /**
      * Handler for retrieving and setting birth time (creation time) of files.
+     *
      * @unofficial
      */
     btime: Btime;
@@ -76,6 +77,7 @@ declare module 'obsidian' {
 
     /**
      * Record of active file system watchers by path.
+     *
      * @unofficial
      */
     watchers: DataAdapterWatchersRecord;

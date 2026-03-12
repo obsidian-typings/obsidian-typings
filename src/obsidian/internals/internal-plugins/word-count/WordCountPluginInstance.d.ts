@@ -5,6 +5,7 @@ import type { WordCountPlugin } from './WordCountPlugin.d.ts';
 
 /**
  * Plugin instance for word count, displaying word and character counts in the status bar.
+ *
  * @public
  * @unofficial
  */

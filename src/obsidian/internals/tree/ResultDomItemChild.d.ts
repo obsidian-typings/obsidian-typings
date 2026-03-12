@@ -7,6 +7,7 @@ import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
 
 /**
  * Represents an individual match segment within a search result item.
+ *
  * @public
  * @unofficial
  */

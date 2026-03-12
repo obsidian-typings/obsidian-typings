@@ -7,6 +7,7 @@ import type { CommandPalettePluginInstance } from './CommandPalettePluginInstanc
 
 /**
  * Fuzzy suggest modal used by the command palette to search and execute commands.
+ *
  * @public
  * @unofficial
  */

@@ -7,6 +7,7 @@ import type { PositionedReference } from '../PositionedReference.d.ts';
 
 /**
  * Represents a link that needs to be updated due to a file rename or move.
+ *
  * @public
  * @unofficial
  */

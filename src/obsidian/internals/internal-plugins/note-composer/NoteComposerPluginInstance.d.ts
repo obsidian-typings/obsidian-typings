@@ -14,6 +14,7 @@ import type { NoteComposerPluginOptions } from './NoteComposerPluginOptions.d.ts
 
 /**
  * Plugin instance for note composer, providing note merging and splitting functionality.
+ *
  * @public
  * @unofficial
  */

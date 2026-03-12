@@ -3,6 +3,7 @@ import type { DailyNotesPluginInstance } from './DailyNotesPluginInstance.d.ts';
 
 /**
  * Internal plugin registration for the daily notes feature.
+ *
  * @public
  * @unofficial
  */

@@ -7,6 +7,7 @@ declare global {
   interface HTMLElement extends Element {
     /**
      * The event listeners of the element.
+     *
      * @official
      */
     _EVENTS?: {
@@ -15,12 +16,14 @@ declare global {
 
     /**
      * Get the inner height of this element without padding.
+     *
      * @official
      */
     readonly innerHeight: number;
 
     /**
      * Get the inner width of this element without padding.
+     *
      * @official
      */
     readonly innerWidth: number;

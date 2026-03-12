@@ -11,6 +11,7 @@ import type { HeaderDom } from './HeaderDom.d.ts';
 
 /**
  * Main UI component that renders backlinks and unlinked mentions for a file.
+ *
  * @public
  * @unofficial
  */

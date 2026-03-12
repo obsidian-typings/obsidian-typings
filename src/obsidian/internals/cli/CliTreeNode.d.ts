@@ -1,5 +1,6 @@
 /**
  * A node in a CLI ASCII tree.
+ *
  * @public
  * @unofficial
  */

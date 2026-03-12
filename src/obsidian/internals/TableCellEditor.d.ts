@@ -3,6 +3,7 @@ import type { TableCell } from './TableCell.d.ts';
 
 /**
  * Editor for a single table cell, combining markdown editing with cell properties.
+ *
  * @public
  * @unofficial
  */

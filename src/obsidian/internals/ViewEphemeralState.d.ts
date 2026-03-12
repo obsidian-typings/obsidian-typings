@@ -2,6 +2,7 @@ import type { EditorRangeOrCaret } from 'obsidian';
 
 /**
  * Ephemeral state for a view, storing cursor position and focus information.
+ *
  * @public
  * @unofficial
  */

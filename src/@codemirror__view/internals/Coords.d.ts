@@ -1,5 +1,6 @@
 /**
  * Represents a bounding rectangle with top, bottom, left, and right coordinates.
+ *
  * @public
  * @unofficial
  */

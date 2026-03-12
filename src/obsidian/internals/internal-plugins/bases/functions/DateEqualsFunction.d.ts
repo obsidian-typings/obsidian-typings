@@ -5,6 +5,7 @@ import type { HasGetRHSWidgetType } from '../HasGetRHSWidgetType.d.ts';
 
 /**
  * Function `DateEquals`.
+ *
  * @public
  * @unofficial
  */

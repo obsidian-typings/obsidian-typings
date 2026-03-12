@@ -19,6 +19,7 @@ declare module 'obsidian' {
 
     /**
      * Internal cache data for block references.
+     *
      * @unofficial
      */
     cache: unknown;

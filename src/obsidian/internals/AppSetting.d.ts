@@ -10,6 +10,7 @@ import type { HotkeysSettingTab } from './HotkeysSettingTab.d.ts';
 
 /**
  * The settings modal for the application, managing core and plugin setting tabs.
+ *
  * @public
  * @unofficial
  */

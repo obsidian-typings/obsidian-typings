@@ -18,6 +18,7 @@ declare module 'obsidian' {
     /**
      * Icon ID to be used in the Bases view selector.
      * See {@link https://docs.obsidian.md/Plugins/User+interface/Icons} for available icons and how to add your own.
+     *
      * @official
      * @since 1.10.0
      */

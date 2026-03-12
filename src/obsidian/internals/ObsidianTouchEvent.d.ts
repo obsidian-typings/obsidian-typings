@@ -2,6 +2,7 @@ import type { ObsidianTouchEventRegisterCallback } from './ObsidianTouchEventReg
 
 /**
  * Represents a touch event processed by Obsidian's gesture system.
+ *
  * @public
  * @unofficial
  */

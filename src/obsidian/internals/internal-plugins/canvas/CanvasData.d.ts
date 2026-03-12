@@ -3,6 +3,7 @@ import type { CanvasViewDataNode } from './CanvasViewDataNode.d.ts';
 
 /**
  * Serialized canvas data containing all nodes and edges.
+ *
  * @public
  * @unofficial
  */

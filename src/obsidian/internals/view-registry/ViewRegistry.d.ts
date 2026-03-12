@@ -13,6 +13,7 @@ import type { ViewRegistryViewByTypeRecord } from './ViewRegistryViewByTypeRecor
 
 /**
  * Registry that maps view types to their constructors and file extensions to view types.
+ *
  * @public
  * @unofficial
  */

@@ -2,6 +2,7 @@ import type { App } from 'obsidian';
 
 /**
  * Renders navigation buttons and sort controls for a section header in the backlink view.
+ *
  * @public
  * @unofficial
  */

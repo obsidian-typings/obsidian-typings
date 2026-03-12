@@ -1,5 +1,6 @@
 /**
  * Options for hard-wrapping text in the editor.
+ *
  * @public
  * @unofficial
  */

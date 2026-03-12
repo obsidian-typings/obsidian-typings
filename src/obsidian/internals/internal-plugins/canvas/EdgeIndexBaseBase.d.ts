@@ -1,5 +1,6 @@
 /**
  * R-tree spatial index base implementation for efficient spatial queries on canvas elements.
+ *
  * @public
  * @unofficial
  */

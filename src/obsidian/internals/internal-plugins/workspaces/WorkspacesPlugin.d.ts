@@ -3,6 +3,7 @@ import type { WorkspacesPluginInstance } from './WorkspacesPluginInstance.d.ts';
 
 /**
  * Internal plugin registration for the workspaces (layout saving/loading) feature.
+ *
  * @public
  * @unofficial
  */

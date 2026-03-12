@@ -10,6 +10,7 @@ declare module 'obsidian' {
   interface Events {
     /**
      * Internal storage of registered event handlers by event name.
+     *
      * @unofficial
      */
     _: Record<string, EventsEntry[]>;

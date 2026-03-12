@@ -1,5 +1,6 @@
 /**
  * Represents the visual endpoint (arrow, dot, etc.) at one end of a canvas edge.
+ *
  * @public
  * @unofficial
  */

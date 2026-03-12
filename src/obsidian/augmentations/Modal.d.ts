@@ -52,6 +52,7 @@ declare module 'obsidian' {
 
     /**
      * Header element of the modal dialog.
+     *
      * @unofficial
      */
     headerEl: HTMLDivElement;

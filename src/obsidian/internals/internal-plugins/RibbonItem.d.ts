@@ -2,6 +2,7 @@ import type { IconName } from 'obsidian';
 
 /**
  * Represents a button item in the sidebar ribbon.
+ *
  * @public
  * @unofficial
  */

@@ -3,6 +3,7 @@ import type { NoteComposerPluginInstance } from './NoteComposerPluginInstance.d.
 
 /**
  * Internal plugin registration for the note composer (merge/split) feature.
+ *
  * @public
  * @unofficial
  */

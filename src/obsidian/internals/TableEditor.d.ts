@@ -1,5 +1,6 @@
 /**
  * Editor for managing markdown tables.
+ *
  * @public
  * @unofficial
  */

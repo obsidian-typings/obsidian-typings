@@ -1,5 +1,6 @@
 /**
  * Layout information for a tree node used by the virtual scrolling system.
+ *
  * @public
  * @unofficial
  */

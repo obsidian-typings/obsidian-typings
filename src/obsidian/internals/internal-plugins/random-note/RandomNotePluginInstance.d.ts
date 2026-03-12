@@ -5,6 +5,7 @@ import type { RandomNotePlugin } from './RandomNotePlugin.d.ts';
 
 /**
  * Plugin instance for opening a random note from the vault.
+ *
  * @public
  * @unofficial
  */

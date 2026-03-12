@@ -2,6 +2,7 @@ import type { IconName } from 'obsidian';
 
 /**
  * A single state entry in a workspace leaf's navigation history.
+ *
  * @public
  * @unofficial
  */

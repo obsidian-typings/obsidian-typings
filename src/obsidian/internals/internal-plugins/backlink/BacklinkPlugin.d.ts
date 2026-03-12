@@ -4,6 +4,7 @@ import type { BacklinkPluginViews } from './BacklinkPluginViews.d.ts';
 
 /**
  * Internal plugin registration for the backlinks feature.
+ *
  * @public
  * @unofficial
  */

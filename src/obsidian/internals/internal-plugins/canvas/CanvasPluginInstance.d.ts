@@ -12,6 +12,7 @@ import type { CanvasPluginInstanceOptions } from './CanvasPluginInstanceOptions.
 
 /**
  * Plugin instance for the Canvas internal plugin, managing canvas indexing, data, and rename operations.
+ *
  * @public
  * @unofficial
  */

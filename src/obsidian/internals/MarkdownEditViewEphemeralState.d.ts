@@ -2,6 +2,7 @@ import type { EditorRange } from 'obsidian';
 
 /**
  * Ephemeral state for the markdown edit view, storing cursor position.
+ *
  * @public
  * @unofficial
  */

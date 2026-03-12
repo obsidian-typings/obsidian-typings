@@ -25,6 +25,7 @@ declare module 'obsidian' {
 
     /**
      * Type
+     *
      * @official
      * @since 1.10.0
      */

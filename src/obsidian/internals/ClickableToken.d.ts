@@ -2,6 +2,7 @@ import type { EditorPosition } from 'obsidian';
 
 /**
  * Represents a clickable token in the editor (e.g. link, tag).
+ *
  * @public
  * @unofficial
  */

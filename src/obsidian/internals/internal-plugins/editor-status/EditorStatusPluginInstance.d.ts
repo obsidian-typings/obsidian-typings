@@ -5,6 +5,7 @@ import type { EditorStatusPlugin } from './EditorStatusPlugin.d.ts';
 
 /**
  * Plugin instance for editor status, displaying editor information in the status bar.
+ *
  * @public
  * @unofficial
  */

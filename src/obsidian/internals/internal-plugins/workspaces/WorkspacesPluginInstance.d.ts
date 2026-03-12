@@ -5,6 +5,7 @@ import type { WorkspacesPlugin } from './WorkspacesPlugin.d.ts';
 
 /**
  * Plugin instance for workspaces, managing saving and loading of workspace layouts.
+ *
  * @public
  * @unofficial
  */

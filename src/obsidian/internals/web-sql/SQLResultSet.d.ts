@@ -2,6 +2,7 @@ import type { SQLResultSetRowList } from './SQLResultSetRowList.d.ts';
 
 /**
  * Result set returned from a WebSQL query execution.
+ *
  * @public
  * @unofficial
  */

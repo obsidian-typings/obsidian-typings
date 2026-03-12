@@ -5,6 +5,7 @@ import type { MarkdownImporterPlugin } from './MarkdownImporterPlugin.d.ts';
 
 /**
  * Plugin instance for the Markdown importer, providing conversion from other formats to Markdown.
+ *
  * @public
  * @unofficial
  */

@@ -3,6 +3,7 @@ import type { SQLTransaction } from './SQLTransaction.d.ts';
 
 /**
  * Represents a WebSQL database instance.
+ *
  * @public
  * @unofficial
  */

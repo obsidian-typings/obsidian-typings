@@ -2,6 +2,7 @@ import type { Scope } from 'obsidian';
 
 /**
  * A registered keyboard shortcut interceptor within a scope.
+ *
  * @public
  * @unofficial
  */

@@ -2,6 +2,7 @@ import type { TFile } from 'obsidian';
 
 /**
  * File suggestion.
+ *
  * @public
  * @unofficial
  */

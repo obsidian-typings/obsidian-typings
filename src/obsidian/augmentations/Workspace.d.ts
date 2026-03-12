@@ -76,6 +76,7 @@ declare module 'obsidian' {
 
     /**
      * Backlink in document plugin instance, if enabled.
+     *
      * @unofficial
      */
     backlinkInDocument?: unknown;
@@ -97,18 +98,21 @@ declare module 'obsidian' {
 
     /**
      * The global editor suggest manager for live autocomplete.
+     *
      * @unofficial
      */
     editorSuggest: EditorSuggestEx;
 
     /**
      * The workspace split that contains popout (floating) windows.
+     *
      * @unofficial
      */
     floatingSplit: WorkspaceSplit;
 
     /**
      * Registered sources for hover link previews.
+     *
      * @unofficial
      */
     hoverLinkSources: WorkspaceHoverLinkSourcesRecord;
@@ -122,12 +126,14 @@ declare module 'obsidian' {
 
     /**
      * Whether the last active tab group had stacked tabs enabled.
+     *
      * @unofficial
      */
     lastTabGroupStacked: boolean;
 
     /**
      * Queue of layout items pending initialization.
+     *
      * @unofficial
      */
     layoutItemQueue: unknown[];
@@ -151,6 +157,7 @@ declare module 'obsidian' {
 
     /**
      * Button element for toggling the left sidebar.
+     *
      * @unofficial
      */
     leftSidebarToggleButtonEl: HTMLElement;
@@ -172,6 +179,7 @@ declare module 'obsidian' {
 
     /**
      * Callbacks queued to run when the layout is ready.
+     *
      * @unofficial
      */
     onLayoutReadyCallbacks?: unknown;
@@ -215,6 +223,7 @@ declare module 'obsidian' {
 
     /**
      * Button element for toggling the right sidebar.
+     *
      * @unofficial
      */
     rightSidebarToggleButtonEl: HTMLElement;
@@ -1281,6 +1290,7 @@ declare module 'obsidian' {
 
     /**
      * Handle a resize event on the workspace.
+     *
      * @unofficial
      */
     onResize(): void;
@@ -1567,6 +1577,7 @@ declare module 'obsidian' {
 
     /**
      * Update the frameless window chrome (title bar) display.
+     *
      * @unofficial
      */
     updateFrameless(): void;

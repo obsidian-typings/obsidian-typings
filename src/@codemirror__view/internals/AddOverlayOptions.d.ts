@@ -1,5 +1,6 @@
 /**
  * Options for adding a search overlay to the editor.
+ *
  * @public
  * @unofficial
  */

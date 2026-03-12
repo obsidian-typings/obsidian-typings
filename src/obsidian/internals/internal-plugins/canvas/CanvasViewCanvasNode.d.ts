@@ -11,6 +11,7 @@ import type { CanvasViewCanvasNodeUnknownData } from './CanvasViewCanvasNodeUnkn
 
 /**
  * Represents a node on the canvas with position, size, content, and connection capabilities.
+ *
  * @public
  * @unofficial
  */

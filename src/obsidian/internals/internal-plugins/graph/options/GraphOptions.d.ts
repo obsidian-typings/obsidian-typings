@@ -2,6 +2,7 @@ import type { TreeCollapsibleItem } from '../../../tree/TreeCollapsibleItem.d.ts
 
 /**
  * Base interface for a collapsible graph options section in the settings panel.
+ *
  * @public
  * @unofficial
  */

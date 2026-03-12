@@ -4,6 +4,7 @@ import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 
 /**
  * View for browsing and navigating tags in the vault.
+ *
  * @public
  * @unofficial
  */

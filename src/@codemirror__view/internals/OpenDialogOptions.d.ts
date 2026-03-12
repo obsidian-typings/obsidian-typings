@@ -1,5 +1,6 @@
 /**
  * Options for opening an interactive dialog in the editor (e.g., Vim command line).
+ *
  * @public
  * @unofficial
  */

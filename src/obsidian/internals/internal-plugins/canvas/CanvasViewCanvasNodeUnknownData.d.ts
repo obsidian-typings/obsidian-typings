@@ -1,5 +1,6 @@
 /**
  * Base data shared by all canvas node types.
+ *
  * @public
  * @unofficial
  */

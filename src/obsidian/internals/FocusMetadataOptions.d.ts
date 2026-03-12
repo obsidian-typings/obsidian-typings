@@ -1,5 +1,6 @@
 /**
  * Options for focusing a specific property or heading in the metadata editor.
+ *
  * @public
  * @unofficial
  */

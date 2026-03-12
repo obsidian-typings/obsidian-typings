@@ -1,5 +1,6 @@
 /**
  * Internal view state of the editor.
+ *
  * @public
  * @unofficial
  */

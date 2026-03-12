@@ -3,6 +3,7 @@ import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /**
  * Manages the visual selection state on the canvas, including selection bounds and resize handles.
+ *
  * @public
  * @unofficial
  */

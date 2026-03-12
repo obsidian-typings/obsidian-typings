@@ -5,6 +5,7 @@ import type { TemplatesPlugin } from './TemplatesPlugin.d.ts';
 
 /**
  * Plugin instance for templates, providing template file insertion into notes.
+ *
  * @public
  * @unofficial
  */

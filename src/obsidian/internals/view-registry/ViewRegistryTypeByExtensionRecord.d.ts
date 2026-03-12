@@ -3,6 +3,7 @@ import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 
 /**
  * Record mapping file extensions to their default view types.
+ *
  * @public
  * @unofficial
  */

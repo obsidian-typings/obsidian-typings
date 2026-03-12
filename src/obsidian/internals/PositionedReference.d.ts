@@ -5,6 +5,7 @@ import type {
 
 /**
  * A reference with position information in the source file.
+ *
  * @public
  * @unofficial
  */

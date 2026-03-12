@@ -131,6 +131,7 @@ declare module 'obsidian' {
 
     /**
      * Handle a linked group change event.
+     *
      * @unofficial
      */
     onGroupChange(): void;
@@ -153,6 +154,7 @@ declare module 'obsidian' {
 
     /**
      * Update the state of the back/forward navigation buttons.
+     *
      * @unofficial
      */
     updateNavButtons(): void;

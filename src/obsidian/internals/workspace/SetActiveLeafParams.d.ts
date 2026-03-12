@@ -1,5 +1,6 @@
 /**
  * Parameters for setting the active leaf.
+ *
  * @public
  * @unofficial
  */

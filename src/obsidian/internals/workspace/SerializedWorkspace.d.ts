@@ -3,6 +3,7 @@ import type { SerializedWorkspaceLeftRibbon } from './SerializedWorkspaceLeftRib
 
 /**
  * Serialized representation of the full workspace layout and state.
+ *
  * @public
  * @unofficial
  */

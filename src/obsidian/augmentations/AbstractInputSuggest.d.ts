@@ -11,6 +11,7 @@ declare module 'obsidian' {
   interface AbstractInputSuggest<T> extends PopoverSuggest<T> {
     /**
      * The last bounding rectangle used for positioning the suggestion popover.
+     *
      * @unofficial
      */
     lastRect: DOMRect;
@@ -25,12 +26,14 @@ declare module 'obsidian' {
 
     /**
      * The text input element this suggest is attached to.
+     *
      * @unofficial
      */
     textInputEl: HTMLDivElement | HTMLInputElement;
 
     /**
      * Automatically reposition the suggestion popover based on the input element.
+     *
      * @unofficial
      */
     autoReposition(): void;
@@ -85,12 +88,14 @@ declare module 'obsidian' {
 
     /**
      * Handle changes to the input element's value.
+     *
      * @unofficial
      */
     onInputChange(): void;
 
     /**
      * Handle the input element receiving focus.
+     *
      * @unofficial
      */
     onInputFocus(): void;

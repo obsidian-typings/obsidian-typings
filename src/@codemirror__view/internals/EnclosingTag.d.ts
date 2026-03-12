@@ -2,6 +2,7 @@ import type { EditorRangeEx } from './EditorRangeEx.d.ts';
 
 /**
  * Represents an enclosing HTML/XML tag pair with open and close ranges.
+ *
  * @public
  * @unofficial
  */

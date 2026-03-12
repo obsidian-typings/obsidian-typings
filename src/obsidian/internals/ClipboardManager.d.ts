@@ -8,6 +8,7 @@ import type { ImportedAttachment } from './ImportedAttachment.d.ts';
 
 /**
  * Manager for clipboard operations in the markdown editor, handling paste, drag, and drop.
+ *
  * @public
  * @unofficial
  */

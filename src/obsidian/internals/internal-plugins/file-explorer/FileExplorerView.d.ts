@@ -17,6 +17,7 @@ import type { FolderTreeItem } from './FolderTreeItem.d.ts';
 
 /**
  * View that renders the file explorer tree sidebar for navigating vault files and folders.
+ *
  * @public
  * @unofficial
  */

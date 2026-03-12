@@ -3,6 +3,7 @@ import type { PagePreviewPluginInstance } from './PagePreviewPluginInstance.d.ts
 
 /**
  * Internal plugin registration for the page preview (hover preview) feature.
+ *
  * @public
  * @unofficial
  */

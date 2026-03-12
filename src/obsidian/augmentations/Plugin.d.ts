@@ -26,6 +26,7 @@ declare module 'obsidian' {
 
     /**
      * Debounced handler for config file changes.
+     *
      * @unofficial
      */
     onConfigFileChange: Debouncer<[], Promise<void>>;
@@ -78,6 +79,7 @@ declare module 'obsidian' {
 
     /**
      * Register a settings tab, which allows users to change settings.
+     *
      * @see {@link https://docs.obsidian.md/Plugins/User+interface/Settings#Register+a+settings+tab}.
      * @param settingTab - The setting tab to register.
      * @example
@@ -92,6 +94,7 @@ declare module 'obsidian' {
     /**
      * Adds a status bar item to the bottom of the app.
      * Not available on mobile.
+     *
      * @see {@link https://docs.obsidian.md/Plugins/User+interface/Status+bar}.
      * @returns The HTMLElement for the status bar item.
      * @official
@@ -115,6 +118,7 @@ declare module 'obsidian' {
     /**
      * Load settings data from disk.
      * Data is stored in `data.json` in the plugin folder.
+     *
      * @see {@link https://docs.obsidian.md/Plugins/User+interface/Settings}.
      * @returns The promise that resolves to the settings data.
      * @official
@@ -185,6 +189,7 @@ declare module 'obsidian' {
      * Registers a CodeMirror 6 extension.
      * To reconfigure cm6 extensions for a plugin on the fly, an array should be passed in, and modified dynamically.
      * Once this array is modified, calling {@link Workspace.updateOptions} will apply the changes.
+     *
      * @param extension - must be a CodeMirror 6 `Extension`, or an array of Extensions.
      * @example
      * ```ts
@@ -246,6 +251,7 @@ declare module 'obsidian' {
      * Register a special post processor that handles fenced code given a language and a handler.
      * This special post processor takes care of removing the `<pre><code>` and create a `<div>` that
      * will be passed to the handler, and is expected to be filled with custom elements.
+     *
      * @see {@link https://docs.obsidian.md/Plugins/Editor/Markdown+post+processing#Post-process+Markdown+code+blocks}.
      * @param language - The language of the code block to register.
      * @param handler - The handler to register.
@@ -269,6 +275,7 @@ declare module 'obsidian' {
 
     /**
      * Registers a post processor, to change how the document looks in reading mode.
+     *
      * @see {@link https://docs.obsidian.md/Plugins/Editor/Markdown+post+processing}.
      * @param postProcessor - The post processor to register.
      * @param sortOrder - The sort order of the post processor.
@@ -334,6 +341,7 @@ declare module 'obsidian' {
     /**
      * Write settings data to disk.
      * Data is stored in `data.json` in the plugin folder.
+     *
      * @see {@link https://docs.obsidian.md/Plugins/User+interface/Settings}.
      * @param data - The settings data to save.
      * @returns The promise that resolves when the data is saved.

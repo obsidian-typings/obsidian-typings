@@ -3,6 +3,7 @@ import type { CommandPalettePluginInstance } from './CommandPalettePluginInstanc
 
 /**
  * Internal plugin registration for the command palette feature.
+ *
  * @public
  * @unofficial
  */

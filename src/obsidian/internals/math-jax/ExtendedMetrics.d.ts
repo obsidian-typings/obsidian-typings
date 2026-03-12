@@ -1,5 +1,6 @@
 /**
  * Font metrics used by MathJax for scaling and positioning math output.
+ *
  * @public
  * @unofficial
  */

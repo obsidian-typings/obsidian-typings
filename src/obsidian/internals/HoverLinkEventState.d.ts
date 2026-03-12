@@ -1,5 +1,6 @@
 /**
  * State passed with hover link events.
+ *
  * @public
  * @unofficial
  */

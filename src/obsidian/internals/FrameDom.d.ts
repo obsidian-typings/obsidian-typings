@@ -1,6 +1,7 @@
 import type { getFrameDomConstructor } from '../implementations/constructors/internals/getFrameDomConstructor.d.ts';
 /**
  * DOM elements for the custom window frame (title bar) on desktop.
+ *
  * @public
  * @unofficial
  */

@@ -1,5 +1,6 @@
 /**
  * Represents a file shared to Obsidian from another app on mobile.
+ *
  * @public
  * @unofficial
  */

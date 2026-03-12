@@ -2,6 +2,7 @@ import type { CachedMetadata } from 'obsidian';
 
 /**
  * Message received from the metadata cache web worker.
+ *
  * @public
  * @unofficial
  */

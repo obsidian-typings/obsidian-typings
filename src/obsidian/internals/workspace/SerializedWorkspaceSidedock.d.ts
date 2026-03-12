@@ -2,6 +2,7 @@ import type { SerializedWorkspaceItem } from './SerializedWorkspaceItem.d.ts';
 
 /**
  * Serialized representation of a workspace sidedock (left or right sidebar).
+ *
  * @public
  * @unofficial
  */

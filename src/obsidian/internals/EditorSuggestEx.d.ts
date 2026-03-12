@@ -2,6 +2,7 @@ import type { EditorSuggest } from 'obsidian';
 
 /**
  * Extended editor suggest interface for managing editor suggestion providers.
+ *
  * @public
  * @unofficial
  */

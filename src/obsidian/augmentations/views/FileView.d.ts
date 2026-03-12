@@ -157,6 +157,7 @@ declare module 'obsidian' {
 
     /**
      * Render the breadcrumb navigation for this file view.
+     *
      * @unofficial
      */
     renderBreadcrumbs(): void;

@@ -2,6 +2,7 @@ import type { Fold } from './Fold.d.ts';
 
 /**
  * Information about all folds in a document.
+ *
  * @public
  * @unofficial
  */

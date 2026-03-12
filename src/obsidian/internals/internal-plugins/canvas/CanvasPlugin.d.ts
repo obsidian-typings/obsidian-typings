@@ -3,6 +3,7 @@ import type { CanvasPluginInstance } from './CanvasPluginInstance.d.ts';
 
 /**
  * Internal plugin definition for the Canvas feature.
+ *
  * @public
  * @unofficial
  */

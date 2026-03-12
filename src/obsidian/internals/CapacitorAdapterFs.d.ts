@@ -3,6 +3,7 @@ import type { WatchAndStatAllResult } from './WatchAndStatAllResult.d.ts';
 
 /**
  * File system adapter for Capacitor (mobile) platform.
+ *
  * @public
  * @unofficial
  */

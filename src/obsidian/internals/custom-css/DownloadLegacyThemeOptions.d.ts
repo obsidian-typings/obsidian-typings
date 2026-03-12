@@ -1,5 +1,6 @@
 /**
  * Options for downloading a pre-v1.0.0 legacy theme.
+ *
  * @public
  * @unofficial
  */

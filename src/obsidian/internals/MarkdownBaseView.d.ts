@@ -21,6 +21,7 @@ import type { Token } from './Token.d.ts';
 
 /**
  * Base interface for markdown editor views, providing CodeMirror integration and editing capabilities.
+ *
  * @public
  * @unofficial
  */

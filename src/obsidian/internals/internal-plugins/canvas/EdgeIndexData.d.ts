@@ -3,6 +3,7 @@ import type { CanvasViewCanvasEdge } from './CanvasViewCanvasEdge.d.ts';
 
 /**
  * Node in the spatial index (R-tree) for canvas edges.
+ *
  * @public
  * @unofficial
  */

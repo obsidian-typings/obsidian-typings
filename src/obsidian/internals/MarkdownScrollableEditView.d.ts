@@ -7,6 +7,7 @@ import type { MarkdownBaseView } from './MarkdownBaseView.d.ts';
 
 /**
  * Extended markdown editor view with scrolling, search, and CSS class management.
+ *
  * @public
  * @unofficial
  */

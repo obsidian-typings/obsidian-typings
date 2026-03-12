@@ -4,6 +4,7 @@ import type { HasGetRHSWidgetType } from '../HasGetRHSWidgetType.d.ts';
 
 /**
  * Function `NotEmpty`.
+ *
  * @public
  * @unofficial
  */

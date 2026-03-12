@@ -3,6 +3,7 @@ import type { HasGetDisplayName } from '../HasGetDisplayName.d.ts';
 
 /**
  * Function `Floor`.
+ *
  * @public
  * @unofficial
  */

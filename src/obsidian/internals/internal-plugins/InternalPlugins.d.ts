@@ -14,6 +14,7 @@ import type { InternalPluginsConfigRecord } from './InternalPluginsConfigRecord.
 
 /**
  * Manager for all internal (core) plugins, handling registration, enabling, and configuration.
+ *
  * @public
  * @unofficial
  */

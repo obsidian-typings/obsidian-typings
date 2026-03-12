@@ -1,5 +1,6 @@
 /**
  * Handle referencing a specific line in the editor document.
+ *
  * @public
  * @unofficial
  */

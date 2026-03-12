@@ -3,6 +3,7 @@ import type { InfoFileView } from '../../views/InfoFileView.d.ts';
 
 /**
  * View that displays outgoing links from the current file.
+ *
  * @public
  * @unofficial
  */

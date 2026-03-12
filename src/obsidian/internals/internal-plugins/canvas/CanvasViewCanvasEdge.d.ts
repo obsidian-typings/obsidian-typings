@@ -7,6 +7,7 @@ import type { CanvasViewCanvasEdgePath } from './CanvasViewCanvasEdgePath.d.ts';
 
 /**
  * Represents a connection (edge) between two nodes on the canvas.
+ *
  * @public
  * @unofficial
  */

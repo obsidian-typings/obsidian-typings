@@ -3,6 +3,7 @@ import type { FolderTreeItem } from './FolderTreeItem.d.ts';
 
 /**
  * Record mapping file paths to their corresponding file or folder tree items.
+ *
  * @public
  * @unofficial
  */

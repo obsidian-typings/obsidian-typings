@@ -15,6 +15,7 @@ type Mapping = {
 };
 /**
  * Record mapping view type strings to their corresponding view creator functions.
+ *
  * @public
  * @unofficial
  */

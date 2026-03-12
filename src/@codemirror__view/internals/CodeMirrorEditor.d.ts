@@ -20,6 +20,7 @@ import type { SetSelectionOptions } from './SetSelectionOptions.d.ts';
 
 /**
  * CM5-compatible editor interface wrapping a CodeMirror 6 editor view.
+ *
  * @public
  * @unofficial
  */

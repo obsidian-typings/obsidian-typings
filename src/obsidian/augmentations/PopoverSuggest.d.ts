@@ -47,6 +47,7 @@ declare module 'obsidian' {
 
     /**
      * Automatically destroy the popover when its associated element is removed.
+     *
      * @unofficial
      */
     autoDestroy?(): void;
@@ -73,6 +74,7 @@ declare module 'obsidian' {
 
     /**
      * Handle the escape key to close the popover.
+     *
      * @unofficial
      */
     onEscapeKey(): void;

@@ -2,6 +2,7 @@ import type { TreeItem } from './TreeItem.d.ts';
 
 /**
  * A tree item that can be collapsed to hide its children.
+ *
  * @public
  * @unofficial
  */

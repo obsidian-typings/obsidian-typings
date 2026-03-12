@@ -6,6 +6,7 @@ import type { WorkspaceLeafHistoryState } from './WorkspaceLeafHistoryState.d.ts
 
 /**
  * Navigation history for a workspace leaf, supporting back/forward navigation.
+ *
  * @public
  * @unofficial
  */

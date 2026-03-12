@@ -5,6 +5,7 @@ import type {
 
 /**
  * Available view modes for a markdown view.
+ *
  * @public
  * @unofficial
  */

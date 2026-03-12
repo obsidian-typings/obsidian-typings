@@ -5,6 +5,7 @@ import type { OutlinePlugin } from './OutlinePlugin.d.ts';
 
 /**
  * Plugin instance for the outline, displaying headings for the current file.
+ *
  * @public
  * @unofficial
  */

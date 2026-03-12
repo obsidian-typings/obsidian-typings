@@ -1,5 +1,6 @@
 /**
  * Parameters for setting a highlight match in the editor.
+ *
  * @public
  * @unofficial
  */

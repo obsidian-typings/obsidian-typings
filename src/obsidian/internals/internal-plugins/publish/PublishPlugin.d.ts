@@ -3,6 +3,7 @@ import type { PublishPluginInstance } from './PublishPluginInstance.d.ts';
 
 /**
  * Internal plugin registration for the Obsidian Publish feature.
+ *
  * @public
  * @unofficial
  */

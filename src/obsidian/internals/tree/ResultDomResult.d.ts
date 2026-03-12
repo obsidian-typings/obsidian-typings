@@ -3,6 +3,7 @@ import type { ResultProperty } from './ResultProperty.d.ts';
 
 /**
  * Search result data containing matched content positions and property matches.
+ *
  * @public
  * @unofficial
  */

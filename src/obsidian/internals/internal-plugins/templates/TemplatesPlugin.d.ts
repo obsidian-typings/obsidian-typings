@@ -3,6 +3,7 @@ import type { TemplatesPluginInstance } from './TemplatesPluginInstance.d.ts';
 
 /**
  * Internal plugin registration for the templates feature.
+ *
  * @public
  * @unofficial
  */

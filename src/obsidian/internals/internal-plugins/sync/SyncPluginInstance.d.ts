@@ -5,6 +5,7 @@ import type { SyncPlugin } from './SyncPlugin.d.ts';
 
 /**
  * Plugin instance for Obsidian Sync, managing cloud synchronization of vault data.
+ *
  * @public
  * @unofficial
  */

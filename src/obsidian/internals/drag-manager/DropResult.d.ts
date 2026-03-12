@@ -1,5 +1,6 @@
 /**
  * Result returned from a drop handler indicating the outcome of a drop operation.
+ *
  * @public
  * @unofficial
  */

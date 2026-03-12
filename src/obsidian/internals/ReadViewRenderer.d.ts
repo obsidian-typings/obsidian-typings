@@ -2,6 +2,7 @@ import type { RendererSection } from './RendererSection.d.ts';
 
 /**
  * Renderer for the reading/preview view, managing section-based markdown rendering.
+ *
  * @public
  * @unofficial
  */

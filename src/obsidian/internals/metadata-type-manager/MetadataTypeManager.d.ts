@@ -15,6 +15,7 @@ import type { TypeInfo } from './TypeInfo.d.ts';
 
 /**
  * Manager for frontmatter property types, handling registration and assignment of property widgets.
+ *
  * @public
  * @unofficial
  */

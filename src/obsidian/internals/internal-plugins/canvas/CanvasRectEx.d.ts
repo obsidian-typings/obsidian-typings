@@ -1,5 +1,6 @@
 /**
  * Extended rectangle representation for the canvas, providing both min/max and position/size properties.
+ *
  * @public
  * @unofficial
  */

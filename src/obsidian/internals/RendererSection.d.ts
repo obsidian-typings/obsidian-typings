@@ -1,5 +1,6 @@
 /**
  * A section of the read view renderer representing a block of rendered content.
+ *
  * @public
  * @unofficial
  */

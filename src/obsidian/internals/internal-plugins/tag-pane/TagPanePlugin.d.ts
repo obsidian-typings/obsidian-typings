@@ -3,6 +3,7 @@ import type { TagPanePluginInstance } from './TagPanePluginInstance.d.ts';
 
 /**
  * Internal plugin registration for the tag browser sidebar feature.
+ *
  * @public
  * @unofficial
  */

@@ -3,6 +3,7 @@ import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /**
  * Bookmark item representing a saved graph view configuration.
+ *
  * @public
  * @unofficial
  */

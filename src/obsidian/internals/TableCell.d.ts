@@ -2,6 +2,7 @@ import type { TableCellEditor } from './TableCellEditor.d.ts';
 
 /**
  * Represents a single cell in a markdown table.
+ *
  * @public
  * @unofficial
  */

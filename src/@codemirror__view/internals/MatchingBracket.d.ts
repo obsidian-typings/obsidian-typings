@@ -2,6 +2,7 @@ import type { EditorPosition } from 'obsidian';
 
 /**
  * Result of a matching bracket search.
+ *
  * @public
  * @unofficial
  */

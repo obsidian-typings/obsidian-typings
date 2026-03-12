@@ -5,6 +5,7 @@ import type { FileRecoveryPlugin } from './FileRecoveryPlugin.d.ts';
 
 /**
  * Plugin instance for file recovery, managing file snapshots for restoration.
+ *
  * @public
  * @unofficial
  */

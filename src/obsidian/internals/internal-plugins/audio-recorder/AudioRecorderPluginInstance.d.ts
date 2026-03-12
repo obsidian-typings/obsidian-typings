@@ -5,6 +5,7 @@ import type { AudioRecorderPlugin } from './AudioRecorderPlugin.d.ts';
 
 /**
  * Plugin instance for the audio recorder, providing methods to record and save audio clips.
+ *
  * @public
  * @unofficial
  */

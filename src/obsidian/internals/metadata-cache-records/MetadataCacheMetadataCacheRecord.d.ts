@@ -2,6 +2,7 @@ import type { CachedMetadata } from 'obsidian';
 
 /**
  * Record mapping file paths to their parsed cached metadata.
+ *
  * @public
  * @unofficial
  */

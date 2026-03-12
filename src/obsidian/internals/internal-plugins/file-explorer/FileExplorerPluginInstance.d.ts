@@ -9,6 +9,7 @@ import type { FileExplorerPlugin } from './FileExplorerPlugin.d.ts';
 
 /**
  * Plugin instance for the file explorer, managing the file tree sidebar view.
+ *
  * @public
  * @unofficial
  */

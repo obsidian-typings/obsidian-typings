@@ -3,6 +3,7 @@ import type { VimStateVimLastMotion } from './VimStateVimLastMotion.d.ts';
 
 /**
  * Core Vim state holding mode, input state, and edit history.
+ *
  * @public
  * @unofficial
  */

@@ -10,6 +10,7 @@ import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /**
  * View for displaying and editing canvas files, extending TextFileView.
+ *
  * @public
  * @unofficial
  */

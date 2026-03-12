@@ -2,6 +2,7 @@ import type { WorkspaceLeafHistoryState } from './WorkspaceLeafHistoryState.d.ts
 
 /**
  * Serialized form of a workspace leaf's navigation history for persistence.
+ *
  * @public
  * @unofficial
  */

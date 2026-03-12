@@ -1,5 +1,6 @@
 /**
  * Callbacks for controlling a touch gesture's lifecycle.
+ *
  * @public
  * @unofficial
  */

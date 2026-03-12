@@ -11,18 +11,21 @@ declare module 'obsidian' {
   interface SuggestModal<T> extends Modal, ISuggestOwner<T> {
     /**
      * The suggestion chooser that manages selection and rendering.
+     *
      * @unofficial
      */
     chooser: SuggestModalChooser<T, this>;
 
     /**
      * Button element to clear the input field.
+     *
      * @unofficial
      */
     clearButtonEl: HTMLDivElement;
 
     /**
      * Call-to-action element displayed in the modal.
+     *
      * @unofficial
      */
     ctaEl: HTMLDivElement;
@@ -44,12 +47,14 @@ declare module 'obsidian' {
 
     /**
      * Element displaying keyboard shortcut instructions.
+     *
      * @unofficial
      */
     instructionsEl: HTMLDivElement;
 
     /**
      * Whether the suggest modal is currently open.
+     *
      * @unofficial
      */
     isOpen: boolean;
@@ -128,6 +133,7 @@ declare module 'obsidian' {
 
     /**
      * Handle input change in the suggest modal.
+     *
      * @unofficial
      */
     onInput(): void;
@@ -199,6 +205,7 @@ declare module 'obsidian' {
 
     /**
      * Refresh the displayed suggestions based on the current query.
+     *
      * @unofficial
      */
     updateSuggestions(): void;

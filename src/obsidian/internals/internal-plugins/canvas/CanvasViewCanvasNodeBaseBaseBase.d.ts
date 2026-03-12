@@ -1,5 +1,6 @@
 /**
  * Lowest-level base interface for canvas nodes, providing core properties and interaction methods.
+ *
  * @public
  * @unofficial
  */

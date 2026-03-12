@@ -5,6 +5,7 @@ import type { PagePreviewPlugin } from './PagePreviewPlugin.d.ts';
 
 /**
  * Plugin instance for page preview, showing hover previews of linked notes.
+ *
  * @public
  * @unofficial
  */
