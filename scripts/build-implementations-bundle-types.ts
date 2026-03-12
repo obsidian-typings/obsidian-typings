@@ -1,7 +1,3 @@
-import { spawnSync } from 'child_process';
+import { execFromRoot } from './helpers/exec.ts';
 
-const result = spawnSync(
-  'dts-bundle-generator ./src/obsidian/implementations/index.ts --out-file ./dist/cjs/implementations.d.cts --sort --no-check',
-  { stdio: 'inherit', shell: true }
-);
-process.exit(result.status ?? 1);
+await execFromRoot('dts-bundle-generator ./src/obsidian/implementations/index.ts --out-file ./dist/cjs/implementations.d.cts --sort --no-check');

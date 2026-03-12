@@ -1,4 +1,3 @@
-import { spawnSync } from 'child_process';
+import { execFromRoot } from './helpers/exec.ts';
 
-const result = spawnSync('api-extractor run --local', { stdio: 'inherit', shell: true });
-process.exit(result.status ?? 1);
+await execFromRoot('api-extractor run --local');

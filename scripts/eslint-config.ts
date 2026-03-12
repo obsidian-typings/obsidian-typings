@@ -5,10 +5,7 @@ import stylistic from '@stylistic/eslint-plugin';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { flatConfigs as eslintPluginImportXFlatConfigs } from 'eslint-plugin-import-x';
 import perfectionist from 'eslint-plugin-perfectionist';
-import {
-  defineConfig,
-  globalIgnores
-} from 'eslint/config';
+import { defineConfig } from 'eslint/config';
 import { resolve } from 'node:path';
 import tseslint from 'typescript-eslint';
 

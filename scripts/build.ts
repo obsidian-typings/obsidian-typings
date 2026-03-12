@@ -1,4 +1,4 @@
-import { spawnSync } from 'child_process';
+import { execFromRoot } from './helpers/exec.ts';
 
 const BUILD_STEPS = [
   'build:clean',
@@ -19,11 +19,5 @@ const BUILD_STEPS = [
 
 for (const step of BUILD_STEPS) {
   console.log(`Executing ${step}...`);
-  const result = spawnSync(`npm run ${step}`, { stdio: 'inherit', shell: true });
-  if (result.status !== 0) {
-    console.error(`Error executing ${step}: ${result.stderr}`);
-    process.exit(result.status ?? 1);
-  }
+  await execFromRoot(`npm run ${step}`);
 }
-
-process.exit(0);

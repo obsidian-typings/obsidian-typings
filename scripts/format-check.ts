@@ -1,4 +1,9 @@
-import { spawnSync } from 'child_process';
+import { execFromRoot } from './helpers/exec.ts';
 
-const result = spawnSync('dprint check', { stdio: 'inherit', shell: true });
-process.exit(result.status ?? 1);
+const [, , ...paths] = process.argv;
+
+if (paths.length === 0) {
+  paths.push('**/*');
+}
+
+await execFromRoot(['dprint', 'check', ...paths]);

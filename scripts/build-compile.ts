@@ -1,4 +1,3 @@
-import { spawnSync } from 'child_process';
+import { execFromRoot } from './helpers/exec.ts';
 
-const result = spawnSync('tsc --build --force', { stdio: 'inherit', shell: true });
-process.exit(result.status ?? 1);
+await execFromRoot('tsc --build --force');

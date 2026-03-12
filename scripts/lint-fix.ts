@@ -1,4 +1,11 @@
-import { spawnSync } from 'child_process';
+import process from 'node:process';
 
-const result = spawnSync('eslint --fix', { stdio: 'inherit', shell: true });
-process.exit(result.status ?? 1);
+import { execFromRoot } from './helpers/exec.ts';
+
+const [, , ...paths] = process.argv;
+
+if (paths.length === 0) {
+  paths.push('.');
+}
+
+await execFromRoot(['eslint', '--fix', ...paths]);
