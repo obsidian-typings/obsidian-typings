@@ -30,7 +30,7 @@ declare module 'obsidian' {
      * @returns the secret component instance.
      * @public
      * @since 1.11.4
-     * @unofficial ERROR: Missing `@unofficial` or `@official` tag
+     * @official
      */
     onChange(cb: (value: string) => unknown): this;
 
@@ -41,7 +41,7 @@ declare module 'obsidian' {
      * @returns the secret component instance.
      * @public
      * @since 1.11.4
-     * @unofficial ERROR: Missing `@unofficial` or `@official` tag
+     * @official
      */
     setValue(value: string): this;
   }

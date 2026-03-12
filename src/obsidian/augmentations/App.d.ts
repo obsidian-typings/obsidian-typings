@@ -225,7 +225,7 @@ declare module 'obsidian' {
      *
      * @public
      * @since 1.11.4
-     * @unofficial ERROR: Missing `@unofficial` or `@official` tag
+     * @official
      */
     secretStorage: SecretStorage;
 

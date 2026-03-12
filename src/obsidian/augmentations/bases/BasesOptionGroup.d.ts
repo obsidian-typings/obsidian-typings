@@ -13,7 +13,7 @@ declare module 'obsidian' {
      *
      * @public
      * @since 1.10.0
-     * @unofficial ERROR: Missing `@unofficial` or `@official` tag
+     * @official
      */
     displayName: string;
 
@@ -22,7 +22,7 @@ declare module 'obsidian' {
      *
      * @public
      * @since 1.10.0
-     * @unofficial ERROR: Missing `@unofficial` or `@official` tag
+     * @official
      */
     items: T[];
 
@@ -31,7 +31,7 @@ declare module 'obsidian' {
      *
      * @public
      * @since 1.10.0
-     * @unofficial ERROR: Missing `@unofficial` or `@official` tag
+     * @official
      */
     type: 'group';
 
@@ -41,7 +41,7 @@ declare module 'obsidian' {
      * @public
      * @since 1.10.2
      * @param config - Read-only copy of the current view configuration.
-     * @unofficial ERROR: Missing `@unofficial` or `@official` tag
+     * @official
      */
     shouldHide?: () => boolean;
   }
