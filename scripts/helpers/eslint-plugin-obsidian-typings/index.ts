@@ -10,6 +10,7 @@ import { noInterfaceTagsInAugmentations } from './no-interface-tags-in-augmentat
 import { noMemberUnofficialInInternals } from './no-member-unofficial-in-internals.ts';
 import { oneExportPerFile } from './one-export-per-file.ts';
 import { requireExportEmptyInAugmentations } from './require-export-empty-in-augmentations.ts';
+import { requireVarInGlobalVars } from './require-var-in-global-vars.ts';
 import { windowMemberFileSync } from './window-member-file-sync.ts';
 
 export const obsidianTypingsPlugin = {
@@ -27,6 +28,7 @@ export const obsidianTypingsPlugin = {
     'no-member-unofficial-in-internals': noMemberUnofficialInInternals,
     'one-export-per-file': oneExportPerFile,
     'require-export-empty-in-augmentations': requireExportEmptyInAugmentations,
+    'require-var-in-global-vars': requireVarInGlobalVars,
     'window-member-file-sync': windowMemberFileSync
   }
 };
