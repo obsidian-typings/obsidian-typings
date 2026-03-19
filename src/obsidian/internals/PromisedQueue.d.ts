@@ -1,12 +1,18 @@
 /**
- * @todo Documentation incomplete.
+ * A sequential promise queue that ensures functions execute one at a time.
+ *
  * @public
  * @unofficial
  */
 export interface PromisedQueue {
-    /** @todo Documentation incomplete. */
-    promise: Promise<unknown>;
+  /** The current promise in the queue chain. */
+  promise: Promise<unknown>;
 
-    /** @todo Documentation incomplete. */
-    queue<T>(fn: () => T | Promise<T>): Promise<T>;
+  /**
+   * Add a function to the queue and return a promise for its result.
+   *
+   * @param fn - The function to enqueue.
+   * @returns A promise that resolves with the function's result.
+   */
+  queue<T>(fn: () => Promise<T> | T): Promise<T>;
 }

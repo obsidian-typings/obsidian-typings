@@ -1,14 +1,15 @@
 import type { PropertyWidgetType } from './PropertyWidgetType.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Entry associating a display name with a property widget type.
+ *
  * @public
  * @unofficial
  */
 export interface PropertyWidgetEntry {
-    /** @todo Documentation incomplete. */
-    name: string;
+  /** Display name of the property widget. */
+  name: string;
 
-    /** @todo Documentation incomplete. */
-    widget: PropertyWidgetType;
+  /** The property widget type. */
+  widget: PropertyWidgetType;
 }

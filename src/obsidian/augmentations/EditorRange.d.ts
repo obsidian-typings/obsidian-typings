@@ -1,23 +1,23 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Represents a range in the editor
+   * @since 0.12.11
+   */
+  interface EditorRange {
     /**
-     * Represents a range in the editor
-     * @since 0.12.11
+     * The start position.
+     *
+     * @official
      */
-    interface EditorRange {
-        /**
-         * The start position.
-         *
-         * @official
-         */
-        from: EditorPosition;
+    from: EditorPosition;
 
-        /**
-         * The end position.
-         *
-         * @official
-         */
-        to: EditorPosition;
-    }
+    /**
+     * The end position.
+     *
+     * @official
+     */
+    to: EditorPosition;
+  }
 }

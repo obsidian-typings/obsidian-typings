@@ -1,33 +1,47 @@
+import type { getFrameDomConstructor } from '../implementations/constructors/internals/getFrameDomConstructor.d.ts';
 /**
- * @todo Documentation incomplete.
+ * DOM elements for the custom window frame (title bar) on desktop.
+ *
  * @public
  * @unofficial
  */
 export interface FrameDom {
-    /** @todo Documentation incomplete. */
-    eWin: Electron.BrowserWindow;
+  /** Reference to the Electron browser window. */
+  eWin: Electron.BrowserWindow;
 
-    /** @todo Documentation incomplete. */
-    isMac: boolean;
+  /** Whether the current platform is macOS. */
+  isMac: boolean;
 
-    /** @todo Documentation incomplete. */
-    leftButtonContainerEl: HTMLDivElement;
+  /** Container for window control buttons on the left side. */
+  leftButtonContainerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
-    titleBarEl: HTMLDivElement;
+  /** The title bar element. */
+  titleBarEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
-    titleBarInnerEl: HTMLDivElement;
+  /** Inner container of the title bar. */
+  titleBarInnerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
-    titleBarTextEl: HTMLDivElement;
+  /** Element displaying the title bar text. */
+  titleBarTextEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
-    win: Window;
+  /** Reference to the window object. */
+  win: Window;
 
-    /** @todo Documentation incomplete. */
-    updateStatus(): void;
+  /**
+   * Constructor.
+   *
+   * To get the constructor instance, use {@link getFrameDomConstructor} from `obsidian-typings/implementations`.
+   *
+   * @param electronWindow - The electronWindow.
+   * @param win - The win.
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
+   */
+  constructor__(electronWindow: Electron.BrowserWindow, win: Window): this;
 
-    /** @todo Documentation incomplete. */
-    updateTitle(): void;
+  /** Update the window status indicators in the title bar. */
+  updateStatus(): void;
+
+  /** Update the displayed title in the title bar. */
+  updateTitle(): void;
 }

@@ -5,15 +5,15 @@
  * @unofficial
  */
 export interface ImportedAttachment {
-    /** Promise that resolves to the attachment file content. */
-    data: Promise<ArrayBuffer>;
+  /** Promise that resolves to the attachment file content. */
+  data: Promise<ArrayBuffer>;
 
-    /** An attachment file extension. */
-    extension: string;
+  /** An attachment file extension. */
+  extension: string;
 
-    /** An attachment file path. */
-    filepath: string;
+  /** An attachment file path. */
+  filepath: string;
 
-    /** An attachment file name. */
-    name: string;
+  /** An attachment file name. */
+  name: string;
 }

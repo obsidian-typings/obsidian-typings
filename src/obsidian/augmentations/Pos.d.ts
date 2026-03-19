@@ -1,22 +1,22 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Describes a text range in a Markdown document.
+   */
+  interface Pos {
     /**
-     * Describes a text range in a Markdown document.
+     * End location.
+     *
+     * @official
      */
-    interface Pos {
-        /**
-         * End location.
-         *
-         * @official
-         */
-        end: Loc;
+    end: Loc;
 
-        /**
-         * Starting location.
-         *
-         * @official
-         */
-        start: Loc;
-    }
+    /**
+     * Starting location.
+     *
+     * @official
+     */
+    start: Loc;
+  }
 }

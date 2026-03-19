@@ -1,11 +1,12 @@
 import type { CachedMetadata } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Message received from the metadata cache web worker.
+ *
  * @public
  * @unofficial
  */
 export interface MetadataCacheWorkerMessage {
-    /** @todo Documentation incomplete. */
-    data: CachedMetadata;
+  /** Parsed cached metadata returned by the worker. */
+  data: CachedMetadata;
 }

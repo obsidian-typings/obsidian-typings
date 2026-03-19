@@ -1,164 +1,186 @@
 import type { EditorState } from '@codemirror/state';
 import type {
-    App,
-    Component,
-    HoverPopover,
-    MarkdownPreviewView,
-    TFile
+  App,
+  Component,
+  HoverPopover,
+  MarkdownPreviewView,
+  TFile
 } from 'obsidian';
+
 import type { IFramedMarkdownEditor } from './IFramedMarkdownEditor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * View for an embedded markdown editor, supporting preview and edit modes.
+ *
  * @public
  * @unofficial
  */
 export interface EmbeddedEditorView extends Component {
-    /**
-     * Reference to the app.
-     */
-    app: App;
+  /**
+   * Reference to the app.
+   */
+  app: App;
 
-    /**
-     * Container element for the embedded view.
-     */
-    containerEl: HTMLElement;
+  /**
+   * Container element for the embedded view.
+   */
+  containerEl: HTMLElement;
 
-    /**
-     * Whether the view is currently saving.
-     */
-    dirty: boolean;
+  /**
+   * Whether the view is currently saving.
+   */
+  dirty: boolean;
 
-    /**
-     * Whether the editor may be edited.
-     *
-     * @remark Fun fact, setting this to true and calling showEditor() for embedded MD views, allows them to be edited.
-     *          Though the experience is a little buggy.
-     */
-    editable: boolean;
+  /**
+   * Whether the editor may be edited.
+   *
+   * @remark Fun fact, setting this to `true` and calling showEditor() for embedded MD views, allows them to be edited.
+   *          Though the experience is a little buggy.
+   */
+  editable: boolean;
 
-    /**
-     * Editor component of the view.
-     */
-    editMode?: IFramedMarkdownEditor | undefined;
+  /**
+   * Editor component of the view.
+   */
+  editMode?: IFramedMarkdownEditor | undefined;
 
-    /**
-     * Container in which the editor is embedded.
-     */
-    editorEl: HTMLElement;
+  /**
+   * Container in which the editor is embedded.
+   */
+  editorEl: HTMLElement;
 
-    /**
-     * File to which the view is attached.
-     */
-    file: null | TFile;
+  /**
+   * File to which the view is attached.
+   */
+  file: null | TFile;
 
-    /**
-     * Hover element container.
-     */
-    hoverPopover: null | HoverPopover;
+  /**
+   * Hover element container.
+   */
+  hoverPopover: HoverPopover | null;
 
-    /**
-     * Element containing the preview for the embedded markdown.
-     */
-    previewEl: HTMLElement;
+  /**
+   * Element containing the preview for the embedded markdown.
+   */
+  previewEl: HTMLElement;
 
-    /**
-     * Preview component of the view.
-     */
-    previewMode: MarkdownPreviewView;
+  /**
+   * Preview component of the view.
+   */
+  previewMode: MarkdownPreviewView;
 
-    /**
-     * Current state of the editor.
-     */
-    state: unknown;
+  /**
+   * Current state of the editor.
+   */
+  state: unknown;
 
-    /**
-     * Text contents being embedded.
-     */
-    text: string;
+  /**
+   * Text contents being embedded.
+   */
+  text: string;
 
-    /**
-     * Whether the view renders contents using an iFrame.
-     */
-    useIframe: boolean;
+  /**
+   * Whether the view renders contents using an iFrame.
+   */
+  useIframe: boolean;
 
-    /**
-     * Get the preview editor, if exists.
-     */
-    get editor(): IFramedMarkdownEditor | null;
+  /**
+   * Destroy edit component editor and save contents if specified.
+   *
+   * @param save - Whether to save before destroying.
+   */
+  destroyEditor(save?: boolean): void;
 
-    /**
-     * Get the path to the file, if any file registered.
-     */
-    get path(): string;
+  /**
+   * Get the preview editor, if exists.
+   *
+   * @returns The iframed markdown editor, or `null`.
+   */
+  get editor(): IFramedMarkdownEditor | null;
 
-    /**
-     * Get the scroll of the file renderer component.
-     */
-    get scroll(): unknown;
+  /**
+   * Gets currently active mode (editMode returns 'source').
+   *
+   * @returns The current view mode.
+   */
+  getMode(): 'preview' | 'source';
 
-    /**
-     * Destroy edit component editor and save contents if specified.
-     */
-    destroyEditor(save?: boolean): void;
+  /**
+   * On load of editor, show preview.
+   */
+  onload(): void;
 
-    /**
-     * Gets currently active mode (editMode returns 'source').
-     */
-    getMode(): 'source' | 'preview';
+  /**
+   * Trigger markdown scroll on workspace.
+   */
+  onMarkdownScroll(): void;
 
-    /**
-     * On load of editor, show preview.
-     */
-    onload(): void;
+  /**
+   * On unload of editor, destroy editor and unset workspace activeEditor.
+   */
+  onunload(): void;
 
-    /**
-     * Trigger markdown scroll on workspace.
-     */
-    onMarkdownScroll(): void;
+  /**
+   * Get the path to the file, if any file registered.
+   *
+   * @returns The file path.
+   */
+  get path(): string;
 
-    /**
-     * On unload of editor, destroy editor and unset workspace activeEditor.
-     */
-    onunload(): void;
+  /**
+   * Debounced save of contents.
+   */
+  requestSave(): void;
 
-    /**
-     * Debounced save of contents.
-     */
-    requestSave(): void;
+  /**
+   * Debounced save of editor folds.
+   */
+  requestSaveFolds(): void;
 
-    /**
-     * Debounced save of editor folds.
-     */
-    requestSaveFolds(): void;
+  /**
+   * Set file contents.
+   *
+   * @param data - Content to save.
+   * @param save - Whether to persist to disk.
+   */
+  save(data: string, save?: boolean): void;
 
-    /**
-     * Set file contents.
-     */
-    save(data: string, save?: boolean): void;
+  /**
+   * Get the scroll of the file renderer component.
+   *
+   * @returns The scroll position.
+   */
+  get scroll(): unknown;
 
-    /**
-     * Set the state of the editor.
-     */
-    set(data: string, clear: boolean): void;
+  /**
+   * Set the state of the editor.
+   *
+   * @param data - Document content to set.
+   * @param clear - Whether to clear existing state.
+   */
+  set(data: string, clear: boolean): void;
 
-    /**
-     * Reveal the editor if editable widget and applies saved state.
-     */
-    showEditor(): void;
+  /**
+   * Reveal the editor if editable widget and applies saved state.
+   */
+  showEditor(): void;
 
-    /**
-     * Reveal preview mode and destroy editor, save if specified.
-     */
-    showPreview(save?: boolean): void;
+  /**
+   * Reveal preview mode and destroy editor, save if specified.
+   *
+   * @param save - Whether to save before switching to preview.
+   */
+  showPreview(save?: boolean): void;
 
-    /**
-     * Reveal search component in file renderer component.
-     */
-    showSearch(replace?: boolean): void;
+  /**
+   * Reveal search component in file renderer component.
+   *
+   * @param replace - Whether to show the replace input.
+   */
+  showSearch(replace?: boolean): void;
 
-    /**
-     * Toggle between edit and preview mode.
-     */
-    toggleMode(): void;
+  /**
+   * Toggle between edit and preview mode.
+   */
+  toggleMode(): void;
 }

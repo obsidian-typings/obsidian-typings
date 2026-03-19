@@ -1,23 +1,23 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * A search result.
+   * @since 0.9.21
+   */
+  interface SearchResult {
     /**
-     * A search result.
-     * @since 0.9.21
+     * The matches of the search result.
+     *
+     * @official
      */
-    interface SearchResult {
-        /**
-         * The matches of the search result.
-         *
-         * @official
-         */
-        matches: SearchMatches;
+    matches: SearchMatches;
 
-        /**
-         * The score of the search result.
-         *
-         * @official
-         */
-        score: number;
-    }
+    /**
+     * The score of the search result.
+     *
+     * @official
+     */
+    score: number;
+  }
 }

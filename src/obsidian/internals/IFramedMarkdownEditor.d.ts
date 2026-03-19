@@ -1,47 +1,53 @@
 import type { Extension } from '@codemirror/state';
 import type { ViewUpdate } from '@codemirror/view';
+
 import type { MarkdownScrollableEditView } from './MarkdownScrollableEditView.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * A markdown editor that runs inside an iframe, used for embedded editable views.
+ *
  * @public
  * @unofficial
  */
 export interface IFramedMarkdownEditor extends MarkdownScrollableEditView {
-    /**
-     * Function that cleans up the iframe and listeners.
-     */
-    cleanup: null | (() => void);
+  /**
+   * Function that cleans up the iframe and listeners.
+   */
+  cleanup: (() => void) | null;
 
-    /**
-     * Element where the editor is embedded into.
-     */
-    iframeEl: null | HTMLIFrameElement;
+  /**
+   * Element where the editor is embedded into.
+   */
+  iframeEl: HTMLIFrameElement | null;
 
-    /**
-     * Executes cleanup function if exists.
-     */
-    cleanupIframe(): void;
+  /**
+   * Executes cleanup function if exists.
+   */
+  cleanupIframe(): void;
 
-    /**
-     * Constructs extensions for the editor based on user settings.
-     *
-     * @remark Creates extension for overriding escape keymap to showPreview.
-     */
-    getDynamicExtensions(): Extension[];
+  /**
+   * Constructs extensions for the editor based on user settings.
+   *
+   * @returns Array of dynamic CodeMirror extensions.
+   * @remark Creates extension for overriding escape keymap to showPreview.
+   */
+  getDynamicExtensions(): Extension[];
 
-    /**
-     * Loads the iframe element and prepare cleanup function.
-     */
-    onIframeLoad(): void;
+  /**
+   * Loads the iframe element and prepare cleanup function.
+   */
+  onIframeLoad(): void;
 
-    /**
-     * Execute cleanup of the iframe.
-     */
-    onunload(): void;
+  /**
+   * Execute cleanup of the iframe.
+   */
+  onunload(): void;
 
-    /**
-     * Execute functionality on CM editor state update.
-     */
-    onUpdate(update: ViewUpdate, changed: boolean): void;
+  /**
+   * Execute functionality on CM editor state update.
+   *
+   * @param update - The CodeMirror view update.
+   * @param changed - Whether the document content changed.
+   */
+  onUpdate(update: ViewUpdate, changed: boolean): void;
 }

@@ -1,9 +1,10 @@
 /**
- * @todo Documentation incomplete.
+ * State passed with hover link events.
+ *
  * @public
  * @unofficial
  */
 export interface HoverLinkEventState {
-    /** @todo Documentation incomplete. */
-    scroll: unknown;
+  /** Scroll position at the time of the hover event. */
+  scroll: unknown;
 }

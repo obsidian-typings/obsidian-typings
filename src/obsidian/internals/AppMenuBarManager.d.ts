@@ -1,56 +1,99 @@
-/** @todo Documentation incomplete */
-
 import type {
-    App,
-    Debouncer
+  App,
+  Debouncer
 } from 'obsidian';
-import type { AppMenuBarManagerConstructor } from './AppMenuBarManagerConstructor.d.ts';
+
+import type { getAppMenuBarManagerConstructor } from '../implementations/constructors/internals/getAppMenuBarManagerConstructor.d.ts';
+import type { ExtractConstructor } from './constructors/ExtractConstructor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Manager for the application menu bar (native desktop menu).
+ *
  * @public
  * @unofficial
  */
 export interface AppMenuBarManager {
-    /** @todo Documentation incomplete. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 
-    /** @todo Documentation incomplete. */
-    constructor: AppMenuBarManagerConstructor;
+  /** Constructor reference for the menu bar manager. */
+  constructor: ExtractConstructor<AppMenuBarManager>;
 
-    /** @todo Documentation incomplete. */
-    onLayoutChange: Debouncer<[], unknown>;
+  /** Debounced handler for file open events. */
+  onFileOpen: Debouncer<[], unknown>;
 
-    /** @todo Documentation incomplete. */
-    onWindowFrameChange: Debouncer<[], unknown>;
+  /** Debounced handler for window frame changes. */
+  onWindowFrameChange: Debouncer<[], unknown>;
 
-    /** @todo Documentation incomplete. */
-    requestRender: Debouncer<[], unknown>;
+  /** Debounced function to re-render the menu bar. */
+  requestRender: Debouncer<[], unknown>;
 
-    /** @todo Documentation incomplete. */
-    _onLayoutChange(): unknown;
+  /** Internal handler for file open events. */
+  _onFileOpen(): void;
 
-    /** @todo Documentation incomplete. */
-    applyHotkeys(arg1: unknown): unknown;
+  /**
+   * Apply hotkey accelerators to menu items.
+   *
+   * @returns The result of applying hotkeys.
+   * To get the constructor instance, use {@link getAppMenuBarManagerConstructor} from `obsidian-typings/implementations`.
+   */
+  applyHotkeys(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
-    buildMenu(): unknown;
+  /**
+   * Build the native menu bar structure.
+   *
+   * @returns The built menu structure.
+   */
+  buildMenu(): unknown;
 
-    /** @todo Documentation incomplete. */
-    getAcceleratorFromHotkey(arg1: unknown): unknown;
+  /**
+   * Constructor.
+   *
+   * To get the constructor instance, use {@link getAppMenuBarManagerConstructor} from `obsidian-typings/implementations`.
+   *
+   * @param app - The app.
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
+   */
+  constructor__(app: App): this;
 
-    /** @todo Documentation incomplete. */
-    hideUnregisteredCommands(arg1: unknown): unknown;
+  /**
+   * Convert a hotkey binding to a native accelerator string.
+   *
+   * @returns The native accelerator string.
+   */
+  getAcceleratorFromHotkey(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
-    render(): unknown;
+  /**
+   * Hide menu items for commands that are not registered.
+   *
+   * @returns The result of hiding unregistered commands.
+   */
+  hideUnregisteredCommands(arg1: unknown): unknown;
 
-    /** @todo Documentation incomplete. */
-    updateShareMenuItem(arg1: unknown): unknown;
+  /**
+   * Render the menu bar.
+   *
+   * @returns The result of the render operation.
+   */
+  render(): unknown;
 
-    /** @todo Documentation incomplete. */
-    updateViewState(): unknown;
+  /**
+   * Update the share menu item state.
+   */
+  updateShareMenuItem(): void;
 
-    /** @todo Documentation incomplete. */
-    updateWorkspace(): unknown;
+  /**
+   * Update the menu bar based on the current view state.
+   *
+   * @returns The result of updating the view state.
+   */
+  updateViewState(): unknown;
+
+  /**
+   * Update the menu bar based on workspace changes.
+   *
+   * @returns The result of updating the workspace.
+   */
+  updateWorkspace(): unknown;
 }

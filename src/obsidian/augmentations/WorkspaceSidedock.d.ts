@@ -1,125 +1,160 @@
-import type { SerializedWorkspaceSidedock } from '../internals/Workspace/SerializedWorkspaceSidedock.d.ts';
+import type { getWorkspaceSidedockConstructor } from '../implementations/constructors/augmentations/getWorkspaceSidedockConstructor.d.ts';
+import type { SerializedWorkspaceSidedock } from '../internals/workspace/SerializedWorkspaceSidedock.d.ts';
+
+export {};
 
 declare module 'obsidian' {
+  /**
+   * Workspace sidedock.
+   * @since 0.15.4
+   */
+  interface WorkspaceSidedock extends WorkspaceSplit {
     /**
-     * Workspace sidedock.
-     * @since 0.15.4
+     * Whether the sidedock allows only a single child tab group.
+     *
+     * @unofficial
      */
-    interface WorkspaceSidedock extends WorkspaceSplit {
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        allowSingleChild: boolean;
+    allowSingleChild: boolean;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        autoManageDOM: boolean;
+    /**
+     * Whether the sidedock automatically manages its DOM elements.
+     *
+     * @unofficial
+     */
+    autoManageDOM: boolean;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        children: WorkspaceTabs[];
+    /**
+     * Child tab groups within this sidedock.
+     *
+     * @unofficial
+     */
+    children: WorkspaceTabs[];
 
-        /**
-         * Whether the sidedock is collapsed.
-         *
-         * @official
-         * @since 0.12.11
-         */
-        collapsed: boolean;
+    /**
+     * Whether the sidedock is collapsed.
+     *
+     * @official
+     * @since 0.12.11
+     */
+    collapsed: boolean;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        direction: string;
+    /**
+     * Layout direction of the sidedock split.
+     *
+     * @unofficial
+     */
+    direction: string;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        emptyStateEl: HTMLDivElement;
+    /**
+     * Element displayed when the sidedock has no content.
+     *
+     * @unofficial
+     */
+    emptyStateEl: HTMLDivElement;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        isResizing: boolean;
+    /**
+     * Whether the sidedock is currently being resized.
+     *
+     * @unofficial
+     */
+    isResizing: boolean;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        originalSizes: null;
+    /**
+     * Original sizes of children before a resize operation.
+     *
+     * @unofficial
+     */
+    originalSizes: null;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        resizeStartPos: null;
+    /**
+     * Starting position of the current resize operation.
+     *
+     * @unofficial
+     */
+    resizeStartPos: null;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        side: string;
+    /**
+     * Which side of the workspace this sidedock is on (e.g. 'left' or 'right').
+     *
+     * @unofficial
+     */
+    side: string;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        size: number;
+    /**
+     * Width of the sidedock in pixels.
+     *
+     * @unofficial
+     */
+    size: number;
 
-        /**
-         * Collapse the sidedock.
-         *
-         * @official
-         * @since 0.12.11
-         */
-        collapse(): void;
+    /**
+     * Collapse the sidedock.
+     *
+     * @official
+     * @since 0.12.11
+     */
+    collapse(): void;
 
-        /**
-         * Expand the sidedock.
-         *
-         * @official
-         * @since 0.12.11
-         */
-        expand(): void;
+    /**
+     * Constructor.
+     *
+     * To get the constructor instance, use {@link getWorkspaceSidedockConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param workspace - The workspace.
+     * @param direction - The direction.
+     * @param side - The side.
+     * @param id - The id.
+     * @returns The new instance.
+     * @unofficial
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor4__(workspace: Workspace, direction: string, side: string, id?: string): this;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        onSidedockResizeStart(evt: MouseEvent): void;
+    /**
+     * Expand the sidedock.
+     *
+     * @official
+     * @since 0.12.11
+     */
+    expand(): void;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        recomputeChildrenDimensions(): void;
+    /**
+     * Handle the start of a sidedock resize operation.
+     *
+     * @param evt - The mouse event that initiated the resize.
+     * @unofficial
+     */
+    onSidedockResizeStart(evt: MouseEvent): void;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        serialize(): SerializedWorkspaceSidedock;
+    /**
+     * Recalculate the dimensions of child tab groups.
+     *
+     * @unofficial
+     */
+    recomputeChildrenDimensions(): void;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        setSize(size: number): void;
+    /**
+     * Serialize the sidedock state for persistence.
+     *
+     * @returns The serialized sidedock state.
+     * @unofficial
+     */
+    serialize(): SerializedWorkspaceSidedock;
 
-        /**
-         * Toggle the sidedock.
-         *
-         * @official
-         * @since 0.12.11
-         */
-        toggle(): void;
-    }
+    /**
+     * Set the width of the sidedock in pixels.
+     *
+     * @param size - The width in pixels.
+     * @unofficial
+     */
+    setSize(size: number): void;
+
+    /**
+     * Toggle the sidedock.
+     *
+     * @official
+     * @since 0.12.11
+     */
+    toggle(): void;
+  }
 }

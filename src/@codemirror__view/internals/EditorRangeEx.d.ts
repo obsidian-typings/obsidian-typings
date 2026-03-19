@@ -1,14 +1,15 @@
 import type { EditorPosition } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * An extended editor range with nullable start and end positions.
+ *
  * @public
  * @unofficial
  */
 export interface EditorRangeEx {
-    /** @todo Documentation incomplete. */
-    from: EditorPosition | null;
+  /** Start position of the range, or null if unset. */
+  from: EditorPosition | null;
 
-    /** @todo Documentation incomplete. */
-    to: EditorPosition | null;
+  /** End position of the range, or null if unset. */
+  to: EditorPosition | null;
 }

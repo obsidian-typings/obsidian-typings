@@ -1,5 +1,5 @@
 /**
- * @todo Documentation incomplete.
+ * Specifies which part of an input to focus: start, end, or select both.
  * @public
  * @unofficial
  */

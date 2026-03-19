@@ -1,14 +1,15 @@
 import type { Fold } from './Fold.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Information about all folds in a document.
+ *
  * @public
  * @unofficial
  */
 export interface FoldInfo {
-    /** @todo Documentation incomplete. */
-    folds: Fold[];
+  /** Array of folded ranges. */
+  folds: Fold[];
 
-    /** @todo Documentation incomplete. */
-    lines: number;
+  /** Total number of lines in the document. */
+  lines: number;
 }

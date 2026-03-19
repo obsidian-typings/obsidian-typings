@@ -1,10 +1,11 @@
 import type {
-    CacheItem,
-    Reference
+  CacheItem,
+  Reference
 } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * A reference with position information in the source file.
+ *
  * @public
  * @unofficial
  */

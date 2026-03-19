@@ -1,34 +1,38 @@
 import type { App } from 'obsidian';
+
 import type { MetadataEditor } from './MetadataEditor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Context provided to property widgets for rendering and interaction.
+ *
  * @public
  * @unofficial
  */
 export interface PropertyRenderContext {
-    /**
-     * Reference to the app.
-     */
-    app: App;
+  /**
+   * Reference to the app.
+   */
+  app: App;
 
-    /**
-     * Key of the property field.
-     */
-    key: string;
+  /**
+   * Key of the property field.
+   */
+  key: string;
 
-    /**
-     * Determine the source path of current context.
-     */
-    sourcePath: string;
+  /**
+   * Determine the source path of current context.
+   */
+  sourcePath: string;
 
-    /**
-     * Callback called on property field unfocus.
-     */
-    blur(): void;
+  /**
+   * Callback called on property field unfocus.
+   */
+  blur(): void;
 
-    /**
-     * Callback called on property value change.
-     */
-    onChange(value: unknown): void;
+  /**
+   * Callback called on property value change.
+   *
+   * @param value - The new property value.
+   */
+  onChange(value: unknown): void;
 }

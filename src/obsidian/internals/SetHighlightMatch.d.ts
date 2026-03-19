@@ -1,21 +1,22 @@
 /**
- * @todo Documentation incomplete.
+ * Parameters for setting a highlight match in the editor.
+ *
  * @public
  * @unofficial
  */
 export interface SetHighlightMatch {
-    /** @todo Documentation incomplete. */
-    endLoc?: number;
+  /** End character offset of the highlight. */
+  endLoc?: number;
 
-    /** @todo Documentation incomplete. */
-    focus: boolean;
+  /** Whether to focus the editor on the highlighted match. */
+  focus: boolean;
 
-    /** @todo Documentation incomplete. */
-    line?: number;
+  /** Line number of the highlight. */
+  line?: number;
 
-    /** @todo Documentation incomplete. */
-    match?: unknown;
+  /** The match data associated with this highlight. */
+  match?: unknown;
 
-    /** @todo Documentation incomplete. */
-    startLoc?: number;
+  /** Start character offset of the highlight. */
+  startLoc?: number;
 }

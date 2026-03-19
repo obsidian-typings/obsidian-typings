@@ -1,23 +1,23 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Represents a selection in the editor
+   * @since 0.12.11
+   */
+  interface EditorSelection {
     /**
-     * Represents a selection in the editor
-     * @since 0.12.11
+     * The selection start position.
+     *
+     * @official
      */
-    interface EditorSelection {
-        /**
-         * The selection start position.
-         *
-         * @official
-         */
-        anchor: EditorPosition;
+    anchor: EditorPosition;
 
-        /**
-         * The selection end position.
-         *
-         * @official
-         */
-        head: EditorPosition;
-    }
+    /**
+     * The selection end position.
+     *
+     * @official
+     */
+    head: EditorPosition;
+  }
 }

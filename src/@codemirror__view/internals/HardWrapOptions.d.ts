@@ -1,18 +1,19 @@
 /**
- * @todo Documentation incomplete.
+ * Options for hard-wrapping text in the editor.
+ *
  * @public
  * @unofficial
  */
 export interface HardWrapOptions {
-    /** @todo Documentation incomplete. */
-    allowMerge?: boolean;
+  /** Whether to allow merging short lines together. */
+  allowMerge?: boolean;
 
-    /** @todo Documentation incomplete. */
-    column?: number;
+  /** The column number at which to wrap lines. */
+  column?: number;
 
-    /** @todo Documentation incomplete. */
-    from?: number;
+  /** Starting line number to begin wrapping from. */
+  from?: number;
 
-    /** @todo Documentation incomplete. */
-    to?: number;
+  /** Ending line number to stop wrapping at. */
+  to?: number;
 }

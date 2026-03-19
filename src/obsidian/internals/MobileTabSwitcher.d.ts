@@ -1,56 +1,69 @@
 import type {
-    App,
-    Debouncer
+  App,
+  Debouncer
 } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Tab switcher component for navigating between open tabs on mobile.
+ *
  * @public
  * @unofficial
  */
 export interface MobileTabSwitcher {
-    /** @todo Documentation incomplete. */
-    app: App;
+  /** Reference to the app. */
+  app: App;
 
-    /** @todo Documentation incomplete. */
-    cacheDir: string;
+  /** Directory path for cached tab previews. */
+  cacheDir: string;
 
-    /** @todo Documentation incomplete. */
-    containerEl: HTMLDivElement;
+  /** Container element for the tab switcher. */
+  containerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
-    innerScrollEl: HTMLDivElement;
+  /** Inner scrollable element containing tab previews. */
+  innerScrollEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
-    isVisible: boolean;
+  /** Whether the tab switcher is currently visible. */
+  isVisible: boolean;
 
-    /** @todo Documentation incomplete. */
-    requestRender: Debouncer<[], void>;
+  /** Debounced function to re-render the tab switcher. */
+  requestRender: Debouncer<[], void>;
 
-    /** @todo Documentation incomplete. */
-    scrollEl: HTMLDivElement;
+  /** Scroll container element. */
+  scrollEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
-    tabPreviewLookup: WeakMap<object, unknown>;
+  /** Weak map caching tab preview images by leaf reference. */
+  tabPreviewLookup: WeakMap<object, unknown>;
 
-    /** @todo Documentation incomplete. */
-    close(): void;
+  /** Close the currently selected tab. */
+  close(): void;
 
-    /** @todo Documentation incomplete. */
-    hide(): void;
+  /** Hide the tab switcher UI. */
+  hide(): void;
 
-    /** @todo Documentation incomplete. */
-    onLayoutChange(): void;
+  /** Handle workspace layout changes by updating the tab list. */
+  onLayoutChange(): void;
 
-    /** @todo Documentation incomplete. */
-    render(): void;
+  /** Render the tab switcher content. */
+  render(): void;
 
-    /** @todo Documentation incomplete. */
-    setupCacheDir(): Promise<void>;
+  /**
+   * Set up the directory for caching tab preview images.
+   *
+   * @returns A promise that resolves when the cache directory has been set up.
+   */
+  setupCacheDir(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
-    show(): Promise<void>;
+  /**
+   * Show the tab switcher UI.
+   *
+   * @returns A promise that resolves when the tab switcher is shown.
+   */
+  show(): Promise<void>;
 
-    /** @todo Documentation incomplete. */
-    showTabManagementMenu(e: MouseEvent): void;
+  /**
+   * Display the tab management context menu.
+   *
+   * @param e - The mouse event.
+   */
+  showTabManagementMenu(e: MouseEvent): void;
 }

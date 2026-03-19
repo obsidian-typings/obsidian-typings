@@ -1,14 +1,15 @@
 import type { EditorRange } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Ephemeral editor state stored in the state history (cursor and scroll position).
+ *
  * @public
  * @unofficial
  */
 export interface StateHistoryEphemeralState {
-    /** @todo Documentation incomplete. */
-    cursor: EditorRange;
+  /** Cursor selection range in the editor. */
+  cursor: EditorRange;
 
-    /** @todo Documentation incomplete. */
-    scroll: number;
+  /** Scroll position in the editor. */
+  scroll: number;
 }

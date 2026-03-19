@@ -1,128 +1,153 @@
 import type {
-    CloseableComponent,
-    Modal,
-    SettingTab
+  App,
+  CloseableComponent,
+  Modal,
+  SettingTab
 } from 'obsidian';
+
+import type { getAppSettingConstructor } from '../implementations/constructors/internals/getAppSettingConstructor.d.ts';
 import type { HotkeysSettingTab } from './HotkeysSettingTab.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * The settings modal for the application, managing core and plugin setting tabs.
+ *
  * @public
  * @unofficial
  */
 export interface AppSetting extends Modal {
-    /**
-     * Current active tab of the settings modal.
-     */
-    activeTab: SettingTab | null;
+  /**
+   * Current active tab of the settings modal.
+   */
+  activeTab: null | SettingTab;
 
-    /**
-     * Closeable component for the active tab.
-     */
-    activeTabCloseable: CloseableComponent | null;
+  /**
+   * Closeable component for the active tab.
+   */
+  activeTabCloseable: CloseableComponent | null;
 
-    /**
-     * Container element containing the community plugins
-     */
-    communityPluginTabContainer: HTMLElement;
+  /**
+   * Container element containing the community plugins
+   */
+  communityPluginTabContainer: HTMLElement;
 
-    /**
-     * Container element containing the community plugins header.
-     */
-    communityPluginTabHeaderGroup: HTMLElement;
+  /**
+   * Container element containing the community plugins header.
+   */
+  communityPluginTabHeaderGroup: HTMLElement;
 
-    /**
-     * Container element containing the core plugins.
-     */
-    corePluginTabContainer: HTMLElement;
+  /**
+   * Container element containing the core plugins.
+   */
+  corePluginTabContainer: HTMLElement;
 
-    /**
-     * Container element containing the core plugins header.
-     */
-    corePluginTabHeaderGroup: HTMLElement;
+  /**
+   * Container element containing the core plugins header.
+   */
+  corePluginTabHeaderGroup: HTMLElement;
 
-    /**
-     * Previously opened tab ID.
-     */
-    lastTabId: string;
+  /** Feedback banner element. */
+  feedbackBanner: unknown;
 
-    /**
-     * List of all plugin tabs (core and community, ordered by precedence).
-     */
-    pluginTabs: SettingTab[];
+  /**
+   * Previously opened tab ID.
+   */
+  lastTabId: string;
 
-    /**
-     * List of all core settings tabs (editor, files & links, ...).
-     */
-    settingTabs: SettingTab[];
+  /**
+   * List of all plugin tabs (core and community, ordered by precedence).
+   */
+  pluginTabs: SettingTab[];
 
-    /**
-     * Container element containing the core settings.
-     */
-    tabContainer: HTMLElement;
+  /**
+   * List of all core settings tabs (editor, files & links, ...).
+   */
+  settingTabs: SettingTab[];
 
-    /**
-     * Container for currently active settings tab.
-     */
-    tabContentContainer: HTMLElement;
+  /**
+   * Container element containing the core settings.
+   */
+  tabContainer: HTMLElement;
 
-    /**
-     * Container for all settings tabs.
-     */
-    tabHeadersEl: HTMLElement;
+  /**
+   * Container for currently active settings tab.
+   */
+  tabContentContainer: HTMLElement;
 
-    /**
-     * Add a new plugin tab to the settings modal.
-     *
-     * @param tab - Tab to add.
-     */
-    addSettingTab(tab: SettingTab): void;
+  /**
+   * Container for all settings tabs.
+   */
+  tabHeadersEl: HTMLElement;
 
-    /**
-     * Closes the currently active tab.
-     */
-    closeActiveTab(): void;
+  /**
+   * Add a new plugin tab to the settings modal.
+   *
+   * @param tab - Tab to add.
+   */
+  addSettingTab(tab: SettingTab): void;
 
-    /**
-     * Check whether tab is a plugin tab.
-     *
-     * @param tab - Tab to check.
-     */
-    isPluginSettingTab(tab: SettingTab): boolean;
+  /**
+   * Closes the currently active tab.
+   */
+  closeActiveTab(): void;
 
-    /**
-     * Open a specific tab by tab reference.
-     *
-     * @param tab - Tab to open.
-     */
-    openTab(tab: SettingTab): void;
+  /**
+   * Constructor.
+   *
+   * To get the constructor instance, use {@link getAppSettingConstructor} from `obsidian-typings/implementations`.
+   *
+   * @param app - The app.
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
+   */
+  constructor__(app: App): this;
 
-    /** @todo Documentation incomplete. */
-    openTabById(id: 'hotkeys'): HotkeysSettingTab;
+  /**
+   * Check whether tab is a plugin tab.
+   *
+   * @param tab - Tab to check.
+   * @returns Whether the tab is a plugin setting tab.
+   */
+  isPluginSettingTab(tab: SettingTab): boolean;
 
-    /**
-     * Open a specific tab by ID.
-     *
-     * @param id - ID of the tab to open.
-     */
-    openTabById(id: string): SettingTab;
+  /**
+   * Open a specific tab by tab reference.
+   *
+   * @param tab - Tab to open.
+   */
+  openTab(tab: SettingTab): void;
 
-    /**
-     * Remove a plugin tab from the settings modal.
-     *
-     * @param tab - Tab to remove.
-     */
-    removeSettingTab(tab: SettingTab): void;
+  /**
+   * Open the hotkeys setting tab by ID.
+   *
+   * @param id - The hotkeys tab ID.
+   * @returns The hotkeys setting tab.
+   */
+  openTabById(id: 'hotkeys'): HotkeysSettingTab;
 
-    /**
-     * Update the title of the modal.
-     *
-     * @param tab - Tab to update the title to.
-     */
-    updateModalTitle(tab: SettingTab): void;
+  /**
+   * Open a specific tab by ID.
+   *
+   * @param id - ID of the tab to open.
+   * @returns The opened setting tab.
+   */
+  openTabById(id: string): SettingTab;
 
-    /**
-     * Update a tab section.
-     */
-    updatePluginSection(): void;
+  /**
+   * Remove a plugin tab from the settings modal.
+   *
+   * @param tab - Tab to remove.
+   */
+  removeSettingTab(tab: SettingTab): void;
+
+  /**
+   * Update the title of the modal.
+   *
+   * @param tab - Tab to update the title to.
+   */
+  updateModalTitle(tab: SettingTab): void;
+
+  /**
+   * Update a tab section.
+   */
+  updatePluginSection(): void;
 }

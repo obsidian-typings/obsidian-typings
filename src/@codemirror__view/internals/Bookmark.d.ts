@@ -1,31 +1,41 @@
 import type { ChangeDesc } from '@codemirror/state';
 import type { EditorPosition } from 'obsidian';
+
 import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * A bookmark marking a specific position in the editor document that tracks changes.
+ *
  * @public
  * @unofficial
  */
 export interface Bookmark {
-    /** @todo Documentation incomplete. */
-    assoc: number;
+  /** Association direction for the bookmark (-1 for left, 1 for right). */
+  assoc: number;
 
-    /** @todo Documentation incomplete. */
-    cm: CodeMirrorEditor;
+  /** The CodeMirror editor instance this bookmark belongs to. */
+  cm: CodeMirrorEditor;
 
-    /** @todo Documentation incomplete. */
-    id: number;
+  /** Unique identifier for this bookmark. */
+  id: number;
 
-    /** @todo Documentation incomplete. */
-    offset: number;
+  /** Character offset of the bookmark within its line. */
+  offset: number;
 
-    /** @todo Documentation incomplete. */
-    clear(): void;
+  /** Remove this bookmark from the editor. */
+  clear(): void;
 
-    /** @todo Documentation incomplete. */
-    find(): EditorPosition | null;
+  /**
+   * Find the current position of this bookmark, or null if cleared.
+   *
+   * @returns The current position, or null if the bookmark has been cleared.
+   */
+  find(): EditorPosition | null;
 
-    /** @todo Documentation incomplete. */
-    update(changeDesc: ChangeDesc): void;
+  /**
+   * Update the bookmark position in response to a document change.
+   *
+   * @param changeDesc - The change description to apply.
+   */
+  update(changeDesc: ChangeDesc): void;
 }

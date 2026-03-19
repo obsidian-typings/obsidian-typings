@@ -1,114 +1,162 @@
 import type {
-    EditorSuggest,
-    SearchResult
+  EditorSuggest,
+  SearchResult
 } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Container for displaying and navigating editor suggestion items.
+ *
+ * @typeParam T - The type of the suggestion items.
  * @public
  * @unofficial
  */
 export interface SuggestionContainer<T> {
-    /**
-     * Which suggestions should be picked from.
-     */
-    chooser: EditorSuggest<T>;
+  /**
+   * Which suggestions should be picked from.
+   */
+  chooser: EditorSuggest<T>;
 
-    /**
-     * Pop-up element that displays the suggestions.
-     */
-    containerEl: HTMLElement;
+  /**
+   * Pop-up element that displays the suggestions.
+   */
+  containerEl: HTMLElement;
 
-    /**
-     * The currently focused item.
-     */
-    selectedItem: number;
+  /**
+   * The currently focused item.
+   */
+  selectedItem: number;
 
-    /**
-     * List of all possible suggestions as elements.
-     */
-    suggestions: HTMLElement[];
+  /**
+   * List of all possible suggestions as elements.
+   */
+  suggestions: HTMLElement[];
 
-    /**
-     * List of all possible suggestions as data.
-     */
-    values: SearchResult[];
+  /**
+   * List of all possible suggestions as data.
+   */
+  values: SearchResult[];
 
-    /**
-     * Amount of suggestions that can be displayed at once within containerEl.
-     */
-    get numVisibleItems(): number;
+  /**
+   * Add an empty message with provided text.
+   *
+   * @param text - Message text to display.
+   * @returns The created message element.
+   */
+  addMessage(text: string): HTMLElement;
 
-    /**
-     * Height in pixels of the selected item.
-     */
-    get rowHeight(): number;
+  /**
+   * Add suggestion to container.
+   *
+   * @param suggestion - Suggestion to add.
+   */
+  addSuggestion(suggestion: SearchResult): void;
 
-    /**
-     * Add an empty message with provided text.
-     */
-    addMessage(text: string): HTMLElement;
+  /**
+   * Set selected item to one specified by index, if keyboard navigation, force scroll into view.
+   *
+   * @param index - Index of the item to select.
+   * @param event - The triggering event.
+   * @remark Prefer setSelectedItem, which clamps the index to within suggestions array.
+   */
+  forceSetSelectedItem(index: number, event: Event): void;
 
-    /**
-     * Add suggestion to container.
-     */
-    addSuggestion(suggestion: SearchResult): void;
+  /**
+   * Get the DOM element of the currently selected suggestion.
+   *
+   * @returns The selected element, or `null`.
+   */
+  getSelectedElement(): HTMLElement | null;
 
-    /**
-     * Set selected item to one specified by index, if keyboard navigation, force scroll into view.
-     *
-     * @remark Prefer setSelectedItem, which clamps the index to within suggestions array.
-     */
-    forceSetSelectedItem(index: number, event: Event): void;
+  /**
+   * Get the data value of the currently selected suggestion.
+   *
+   * @returns The selected suggestion data, or `null`.
+   */
+  getSelectedValue(): null | SearchResult;
 
-    /** @todo Documentation incomplete. */
-    getSelectedElement(): HTMLElement | null;
+  /**
+   * Move selected item to next suggestion.
+   *
+   * @param event - The keyboard event.
+   * @returns Whether the move was handled.
+   */
+  moveDown(event: KeyboardEvent): boolean;
 
-    /** @todo Documentation incomplete. */
-    getSelectedValue(): SearchResult | null;
+  /**
+   * Move selected item to previous suggestion.
+   *
+   * @param event - The keyboard event.
+   * @returns Whether the move was handled.
+   */
+  moveUp(event: KeyboardEvent): boolean;
 
-    /**
-     * Move selected item to next suggestion.
-     */
-    moveDown(event: KeyboardEvent): boolean;
+  /**
+   * Amount of suggestions that can be displayed at once within containerEl.
+   *
+   * @returns The number of visible items.
+   */
+  get numVisibleItems(): number;
 
-    /**
-     * Move selected item to previous suggestion.
-     */
-    moveUp(event: KeyboardEvent): boolean;
+  /**
+   * Process click on suggestion item.
+   *
+   * @param event - The mouse event.
+   * @param element - The clicked suggestion element.
+   */
+  onSuggestionClick(event: MouseEvent, element: HTMLElement): void;
 
-    /**
-     * Process click on suggestion item.
-     */
-    onSuggestionClick(event: MouseEvent, element: HTMLElement): void;
+  /**
+   * Process hover on suggestion item.
+   *
+   * @param event - The mouse event.
+   * @param element - The hovered suggestion element.
+   * @returns The result of handling the mouseover.
+   */
+  onSuggestionMouseover(event: MouseEvent, element: HTMLElement): unknown;
 
-    /**
-     * Process hover on suggestion item.
-     */
-    onSuggestionMouseover(event: MouseEvent, element: HTMLElement): unknown;
+  /**
+   * Move selected item to the one in the next 'page' (next visible block).
+   *
+   * @param event - The keyboard event.
+   * @returns Whether the page-down was handled.
+   */
+  pageDown(event: KeyboardEvent): boolean;
 
-    /**
-     * Move selected item to the one in the next 'page' (next visible block).
-     */
-    pageDown(event: KeyboardEvent): boolean;
+  /**
+   * Move selected item to the one in the previous 'page' (previous visible block).
+   *
+   * @param event - The keyboard event.
+   * @returns Whether the page-up was handled.
+   */
+  pageUp(event: KeyboardEvent): boolean;
 
-    /**
-     * Move selected item to the one in the previous 'page' (previous visible block).
-     */
-    pageUp(event: KeyboardEvent): boolean;
+  /**
+   * Height in pixels of the selected item.
+   *
+   * @returns The row height in pixels.
+   */
+  get rowHeight(): number;
 
-    /**
-     * Set selected item to one specified by index, invokes forceSetSelectedItem.
-     */
-    setSelectedItem(index: number, event: Event): void;
+  /**
+   * Set selected item to one specified by index, invokes forceSetSelectedItem.
+   *
+   * @param index - Index of the item to select.
+   * @param event - The triggering event.
+   */
+  setSelectedItem(index: number, event: Event): void;
 
-    /**
-     * Empties original container and adds multiple suggestions.
-     */
-    setSuggestions(suggestions: SearchResult[]): void;
+  /**
+   * Empties original container and adds multiple suggestions.
+   *
+   * @param suggestions - Suggestions to display.
+   */
+  setSuggestions(suggestions: SearchResult[]): void;
 
-    /**
-     * Use currently selected suggestion as the accepted one.
-     */
-    useSelectedItem(event: Event): boolean;
+  /**
+   * Use currently selected suggestion as the accepted one.
+   *
+   * @param event - The triggering event.
+   * @returns Whether a suggestion was accepted.
+   */
+  useSelectedItem(event: Event): boolean;
 }

@@ -1,63 +1,122 @@
 /**
- * @todo Documentation incomplete.
+ * Chooser component for a suggest modal, managing suggestion selection and navigation.
+ *
+ * @typeParam T - The type of the suggestion items.
+ * @typeParam TModal - The type of the modal.
  * @public
  * @unofficial
  */
 export interface SuggestModalChooser<T, TModal> {
-    /** @todo Documentation incomplete. */
-    chooser: TModal;
+  /** Reference to the owning modal. */
+  chooser: TModal;
 
-    /** @todo Documentation incomplete. */
-    containerEl: HTMLDivElement;
+  /** Container element for the suggestion list. */
+  containerEl: HTMLDivElement;
 
-    /** @todo Documentation incomplete. */
-    numVisibleItems: number;
+  /** Number of suggestions visible at once. */
+  numVisibleItems: number;
 
-    /** @todo Documentation incomplete. */
-    rowHeight: number;
+  /** Height of each suggestion row in pixels. */
+  rowHeight: number;
 
-    /** @todo Documentation incomplete. */
-    selectedItem: number;
+  /** Index of the currently selected suggestion. */
+  selectedItem: number;
 
-    /** @todo Documentation incomplete. */
-    suggestions: HTMLDivElement[];
+  /** DOM elements for each suggestion row. */
+  suggestions: HTMLDivElement[];
 
-    /** @todo Documentation incomplete. */
-    values: T[] | null;
+  /** Current suggestion values, or `null` if none. */
+  values: null | T[];
 
-    /** @todo Documentation incomplete. */
-    addMessage(text: string | DocumentFragment): void;
+  /**
+   * Display a message in the suggestion list.
+   *
+   * @param text - Message text or document fragment to display.
+   */
+  addMessage(text: DocumentFragment | string): void;
 
-    /** @todo Documentation incomplete. */
-    addSuggestion(value: T): void;
+  /**
+   * Add a suggestion value to the list.
+   *
+   * @param value - Suggestion value to add.
+   */
+  addSuggestion(value: T): void;
 
-    /** @todo Documentation incomplete. */
-    forceSetSelectedItem(index: number, evt: MouseEvent | KeyboardEvent): void;
+  /**
+   * Set the selected item by index, forcing scroll into view.
+   *
+   * @param index - Index of the item to select.
+   * @param evt - The triggering event.
+   */
+  forceSetSelectedItem(index: number, evt: KeyboardEvent | MouseEvent): void;
 
-    /** @todo Documentation incomplete. */
-    moveDown(evt: KeyboardEvent): false | void;
+  /**
+   * Move selection to the next suggestion.
+   *
+   * @param evt - The keyboard event.
+   * @returns False if already at the end, void otherwise.
+   */
+  moveDown(evt: KeyboardEvent): false | void;
 
-    /** @todo Documentation incomplete. */
-    moveUp(evt: KeyboardEvent): false | void;
+  /**
+   * Move selection to the previous suggestion.
+   *
+   * @param evt - The keyboard event.
+   * @returns False if already at the start, void otherwise.
+   */
+  moveUp(evt: KeyboardEvent): false | void;
 
-    /** @todo Documentation incomplete. */
-    onSuggestionClick(evt: MouseEvent, suggestion: HTMLDivElement): void;
+  /**
+   * Handle click on a suggestion element.
+   *
+   * @param evt - The mouse event.
+   * @param suggestion - The clicked suggestion element.
+   */
+  onSuggestionClick(evt: MouseEvent, suggestion: HTMLDivElement): void;
 
-    /** @todo Documentation incomplete. */
-    onSuggestionMouseover(evt: MouseEvent, suggestion: HTMLDivElement): void;
+  /**
+   * Handle mouseover on a suggestion element.
+   *
+   * @param evt - The mouse event.
+   * @param suggestion - The hovered suggestion element.
+   */
+  onSuggestionMouseover(evt: MouseEvent, suggestion: HTMLDivElement): void;
 
-    /** @todo Documentation incomplete. */
-    pageDown(evt: KeyboardEvent): false | void;
+  /**
+   * Move selection down by one page of visible items.
+   *
+   * @param evt - The keyboard event.
+   * @returns False if already at the end, void otherwise.
+   */
+  pageDown(evt: KeyboardEvent): false | void;
 
-    /** @todo Documentation incomplete. */
-    pageUp(evt: KeyboardEvent): false | void;
+  /**
+   * Move selection up by one page of visible items.
+   *
+   * @param evt - The keyboard event.
+   * @returns False if already at the start, void otherwise.
+   */
+  pageUp(evt: KeyboardEvent): false | void;
 
-    /** @todo Documentation incomplete. */
-    setSelectedItem(index: number, evt: MouseEvent | KeyboardEvent): void;
+  /**
+   * Set the selected item by index.
+   *
+   * @param index - Index of the item to select.
+   * @param evt - The triggering event.
+   */
+  setSelectedItem(index: number, evt: KeyboardEvent | MouseEvent): void;
 
-    /** @todo Documentation incomplete. */
-    setSuggestions(values: T[] | null): void;
+  /**
+   * Replace all suggestions with new values.
+   *
+   * @param values - Suggestion values to display, or `null`.
+   */
+  setSuggestions(values: null | T[]): void;
 
-    /** @todo Documentation incomplete. */
-    useSelectedItem(evt: MouseEvent | KeyboardEvent): void;
+  /**
+   * Accept the currently selected suggestion.
+   *
+   * @param evt - The triggering event.
+   */
+  useSelectedItem(evt: KeyboardEvent | MouseEvent): void;
 }

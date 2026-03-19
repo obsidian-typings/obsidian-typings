@@ -1,56 +1,61 @@
 import type { RendererSection } from './RendererSection.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Renderer for the reading/preview view, managing section-based markdown rendering.
+ *
  * @public
  * @unofficial
  */
 export interface ReadViewRenderer {
-    /** @todo Documentation incomplete. */
-    addBottomPadding: boolean;
+  /** Whether to add bottom padding to the preview. */
+  addBottomPadding: boolean;
 
-    /** @todo Documentation incomplete. */
-    asyncSections: unknown[];
+  /** Sections that are being rendered asynchronously. */
+  asyncSections: unknown[];
 
-    /** @todo Documentation incomplete. */
-    lastRender: number;
+  /** Timestamp of the last render operation. */
+  lastRender: number;
 
-    /** @todo Documentation incomplete. */
-    lastScroll: number;
+  /** Last recorded scroll position. */
+  lastScroll: number;
 
-    /** @todo Documentation incomplete. */
-    lastText: string;
+  /** Text content from the last render. */
+  lastText: string;
 
-    /** @todo Documentation incomplete. */
-    previewEl: HTMLElement;
+  /** Container element for the rendered preview. */
+  previewEl: HTMLElement;
 
-    /** @todo Documentation incomplete. */
-    pusherEl: HTMLElement;
+  /** Element used to push content for scroll height calculation. */
+  pusherEl: HTMLElement;
 
-    /** @todo Documentation incomplete. */
-    recycledSections: unknown[];
+  /** Pool of recycled section elements for reuse. */
+  recycledSections: unknown[];
 
-    /** @todo Documentation incomplete. */
-    rendered: unknown[];
+  /** Currently rendered section data. */
+  rendered: unknown[];
 
-    /** @todo Documentation incomplete. */
-    sections: RendererSection[];
+  /** All sections in the rendered document. */
+  sections: RendererSection[];
 
-    /** @todo Documentation incomplete. */
-    text: string;
+  /** Current text content being rendered. */
+  text: string;
 
-    /** @todo Documentation incomplete. */
-    clear(): void;
+  /** Clear all rendered sections and reset the renderer. */
+  clear(): void;
 
-    /** @todo Documentation incomplete. */
-    parseAsync(): void;
+  /** Parse the text content asynchronously into sections. */
+  parseAsync(): void;
 
-    /** @todo Documentation incomplete. */
-    parseSync(): void;
+  /** Parse the text content synchronously into sections. */
+  parseSync(): void;
 
-    /** @todo Documentation incomplete. */
-    queueRender(): void;
+  /** Queue a render update for the next animation frame. */
+  queueRender(): void;
 
-    /** @todo Documentation incomplete. */
-    set(text: string): void;
+  /**
+   * Set the text content and trigger a re-render.
+   *
+   * @param text - The text content to render.
+   */
+  set(text: string): void;
 }

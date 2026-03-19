@@ -1,30 +1,30 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * The trigger info for the suggestion
+   * @since 0.12.17
+   */
+  interface EditorSuggestTriggerInfo {
     /**
-     * The trigger info for the suggestion
-     * @since 0.12.17
+     * The end position of the triggering text. This is used to position the popover.
+     *
+     * @official
      */
-    interface EditorSuggestTriggerInfo {
-        /**
-         * The end position of the triggering text. This is used to position the popover.
-         *
-         * @official
-         */
-        end: EditorPosition;
+    end: EditorPosition;
 
-        /**
-         * They query string (usually the text between start and end) that will be used to generate the suggestion content.
-         *
-         * @official
-         */
-        query: string;
+    /**
+     * They query string (usually the text between start and end) that will be used to generate the suggestion content.
+     *
+     * @official
+     */
+    query: string;
 
-        /**
-         * The start position of the triggering text. This is used to position the popover.
-         *
-         * @official
-         */
-        start: EditorPosition;
-    }
+    /**
+     * The start position of the triggering text. This is used to position the popover.
+     *
+     * @official
+     */
+    start: EditorPosition;
+  }
 }

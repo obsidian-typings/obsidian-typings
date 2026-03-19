@@ -1,14 +1,15 @@
 import type { EditorPosition } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a bracket character found at a specific position in the editor.
+ *
  * @public
  * @unofficial
  */
 export interface Bracket {
-    /** @todo Documentation incomplete. */
-    ch: string;
+  /** The bracket character. */
+  ch: string;
 
-    /** @todo Documentation incomplete. */
-    pos: EditorPosition;
+  /** Position of the bracket in the document. */
+  pos: EditorPosition;
 }

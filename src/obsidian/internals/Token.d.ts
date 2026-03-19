@@ -1,14 +1,15 @@
 import type { EditorRange } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * A clickable token in the editor with position, text, and type information.
+ *
  * @public
  * @unofficial
  */
 export interface Token extends EditorRange {
-    /** @todo Documentation incomplete. */
-    text: string;
+  /** Text content of the token. */
+  text: string;
 
-    /** @todo Documentation incomplete. */
-    type: 'tag' | 'external-link' | 'internal-link';
+  /** Type of the token. */
+  type: 'external-link' | 'internal-link' | 'tag';
 }

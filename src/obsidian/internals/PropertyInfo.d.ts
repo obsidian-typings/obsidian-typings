@@ -1,21 +1,22 @@
 /**
- * @todo Documentation incomplete.
+ * Information about a frontmatter property across the vault.
+ *
  * @public
  * @unofficial
  */
 export interface PropertyInfo {
-    /**
-     * Name of property.
-     */
-    name: string;
+  /**
+   * Name of property.
+   */
+  name: string;
 
-    /**
-     * Usage count of property.
-     */
-    occurrences: number;
+  /**
+   * Usage count of property.
+   */
+  occurrences: number;
 
-    /**
-     * Type of property.
-     */
-    widget: string;
+  /**
+   * Type of property.
+   */
+  widget: string;
 }

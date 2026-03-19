@@ -1,0 +1,10 @@
+import type { InternalPlugin } from '../InternalPlugin.d.ts';
+import type { SyncPluginInstance } from './SyncPluginInstance.d.ts';
+
+/**
+ * Internal plugin registration for the Obsidian Sync cloud sync feature.
+ *
+ * @public
+ * @unofficial
+ */
+export interface SyncPlugin extends InternalPlugin<SyncPluginInstance> {}

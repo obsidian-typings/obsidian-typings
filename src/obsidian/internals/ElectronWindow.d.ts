@@ -1,20 +1,21 @@
 import type { BrowserWindow } from 'electron';
 
 /**
- * @todo Documentation incomplete.
+ * Extended Electron BrowserWindow with internal properties.
+ *
  * @public
  * @unofficial
  */
 export interface ElectronWindow extends BrowserWindow {
-    /** @todo Documentation incomplete. */
-    _browserViews: unknown;
+  /** Internal browser views attached to the window. */
+  _browserViews: unknown;
 
-    /** @todo Documentation incomplete. */
-    _events: unknown;
+  /** Internal event handlers map. */
+  _events: unknown;
 
-    /** @todo Documentation incomplete. */
-    _eventsCount: unknown;
+  /** Number of registered event handlers. */
+  _eventsCount: unknown;
 
-    /** @todo Documentation incomplete. */
-    devToolsWebContents: unknown;
+  /** Web contents for the developer tools panel. */
+  devToolsWebContents: unknown;
 }

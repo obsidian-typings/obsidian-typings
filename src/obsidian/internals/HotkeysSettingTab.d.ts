@@ -1,17 +1,18 @@
 import type {
-    SearchComponent,
-    SettingTab
+  SearchComponent,
+  SettingTab
 } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Setting tab for viewing and editing keyboard hotkeys.
+ *
  * @public
  * @unofficial
  */
 export interface HotkeysSettingTab extends SettingTab {
-    /** @todo Documentation incomplete. */
-    searchComponent: SearchComponent;
+  /** Search component for filtering hotkeys by name. */
+  searchComponent: SearchComponent;
 
-    /** @todo Documentation incomplete. */
-    updateHotkeyVisibility(): void;
+  /** Update visibility of hotkey entries based on the current search filter. */
+  updateHotkeyVisibility(): void;
 }

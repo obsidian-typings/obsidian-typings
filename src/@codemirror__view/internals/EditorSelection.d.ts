@@ -1,14 +1,15 @@
 import type { EditorPosition } from 'obsidian';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a selection in the editor with anchor and head positions.
+ *
  * @public
  * @unofficial
  */
 export interface EditorSelection {
-    /** @todo Documentation incomplete. */
-    anchor: EditorPosition;
+  /** The fixed end of the selection (where selection started). */
+  anchor: EditorPosition;
 
-    /** @todo Documentation incomplete. */
-    head: EditorPosition;
+  /** The moving end of the selection (where the cursor is). */
+  head: EditorPosition;
 }

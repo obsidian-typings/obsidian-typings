@@ -6,6 +6,9 @@
     "noEmit": false
   },
   "include": [
-    "./src/obsidian/implementations/**/*.ts"
+    "./src/global/**/*.d.ts",
+    "./src/obsidian/augmentations/**/*.d.ts",
+    "./src/obsidian/implementations/**/*.ts",
+    "./src/obsidian/internals/**/*.d.ts"
   ]
 }

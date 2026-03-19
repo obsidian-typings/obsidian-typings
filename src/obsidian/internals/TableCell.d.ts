@@ -1,41 +1,42 @@
 import type { TableCellEditor } from './TableCellEditor.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Represents a single cell in a markdown table.
+ *
  * @public
  * @unofficial
  */
 export interface TableCell {
-    /** @todo Documentation incomplete. */
-    col: number;
+  /** Column index of the cell. */
+  col: number;
 
-    /** @todo Documentation incomplete. */
-    contentEl: HTMLElement;
+  /** Element containing the cell's content. */
+  contentEl: HTMLElement;
 
-    /** @todo Documentation incomplete. */
-    dirty: boolean;
+  /** Whether the cell has been modified since the last save. */
+  dirty: boolean;
 
-    /** @todo Documentation incomplete. */
-    el: HTMLElement;
+  /** DOM element for the cell. */
+  el: HTMLElement;
 
-    /** @todo Documentation incomplete. */
-    end: number;
+  /** End offset of the cell content in the document. */
+  end: number;
 
-    /** @todo Documentation incomplete. */
-    padEnd: number;
+  /** Trailing padding characters in the cell. */
+  padEnd: number;
 
-    /** @todo Documentation incomplete. */
-    padStart: number;
+  /** Leading padding characters in the cell. */
+  padStart: number;
 
-    /** @todo Documentation incomplete. */
-    row: number;
+  /** Row index of the cell. */
+  row: number;
 
-    /** @todo Documentation incomplete. */
-    start: number;
+  /** Start offset of the cell content in the document. */
+  start: number;
 
-    /** @todo Documentation incomplete. */
-    table: TableCellEditor;
+  /** Table cell editor that manages this cell. */
+  table: TableCellEditor;
 
-    /** @todo Documentation incomplete. */
-    text: string;
+  /** Text content of the cell. */
+  text: string;
 }

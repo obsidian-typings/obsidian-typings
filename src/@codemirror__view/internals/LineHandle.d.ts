@@ -1,12 +1,13 @@
 /**
- * @todo Documentation incomplete.
+ * Handle referencing a specific line in the editor document.
+ *
  * @public
  * @unofficial
  */
 export interface LineHandle {
-    /** @todo Documentation incomplete. */
-    index: number;
+  /** Index of the line in the document. */
+  index: number;
 
-    /** @todo Documentation incomplete. */
-    row: number;
+  /** Row number of the line. */
+  row: number;
 }

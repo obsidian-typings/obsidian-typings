@@ -1,22 +1,22 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Listed content of the folder.
+   */
+  interface ListedFiles {
     /**
-     * Listed content of the folder.
+     * List of files in the folder.
+     *
+     * @official
      */
-    interface ListedFiles {
-        /**
-         * List of files in the folder.
-         *
-         * @official
-         */
-        files: string[];
+    files: string[];
 
-        /**
-         * List of subfolders in the folder.
-         *
-         * @official
-         */
-        folders: string[];
-    }
+    /**
+     * List of subfolders in the folder.
+     *
+     * @official
+     */
+    folders: string[];
+  }
 }

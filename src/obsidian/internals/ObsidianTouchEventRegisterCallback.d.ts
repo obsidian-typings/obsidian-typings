@@ -1,15 +1,26 @@
 /**
- * @todo Documentation incomplete.
+ * Callbacks for controlling a touch gesture's lifecycle.
+ *
  * @public
  * @unofficial
  */
 export interface ObsidianTouchEventRegisterCallback {
-    /** @todo Documentation incomplete. */
-    cancel(): void;
+  /** Cancel the current touch gesture. */
+  cancel(): void;
 
-    /** @todo Documentation incomplete. */
-    finish(x: number, y: number, z: number): void;
+  /**
+   * Complete the touch gesture with the final coordinates and velocity.
+   *
+   * @param x - The final X coordinate.
+   * @param y - The final Y coordinate.
+   * @param z - The velocity of the gesture.
+   */
+  finish(x: number, y: number, z: number): void;
 
-    /** @todo Documentation incomplete. */
-    move(x: number): void;
+  /**
+   * Update the gesture with the current position during movement.
+   *
+   * @param x - The current X coordinate.
+   */
+  move(x: number): void;
 }

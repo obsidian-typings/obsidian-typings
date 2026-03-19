@@ -1,14 +1,15 @@
 import type { StateHistory } from './StateHistory.d.ts';
 
 /**
- * @todo Documentation incomplete.
+ * Back and forward history stacks for a workspace leaf.
+ *
  * @public
  * @unofficial
  */
 export interface StateHistoryLeafHistory {
-    /** @todo Documentation incomplete. */
-    backHistory: StateHistory[];
+  /** Stack of previous leaf states for back navigation. */
+  backHistory: StateHistory[];
 
-    /** @todo Documentation incomplete. */
-    forwardHistory: StateHistory[];
+  /** Stack of forward leaf states for forward navigation. */
+  forwardHistory: StateHistory[];
 }

@@ -1,36 +1,36 @@
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Transaction for the editor
+   */
+  interface EditorTransaction {
     /**
-     * Transaction for the editor
+     * The changes to the editor.
+     *
+     * @official
      */
-    interface EditorTransaction {
-        /**
-         * The changes to the editor.
-         *
-         * @official
-         */
-        changes?: EditorChange[];
+    changes?: EditorChange[];
 
-        /**
-         * The replacement text.
-         *
-         * @official
-         */
-        replaceSelection?: string;
+    /**
+     * The replacement text.
+     *
+     * @official
+     */
+    replaceSelection?: string;
 
-        /**
-         * The main selection.
-         *
-         * @official
-         */
-        selection?: EditorRangeOrCaret;
+    /**
+     * The main selection.
+     *
+     * @official
+     */
+    selection?: EditorRangeOrCaret;
 
-        /**
-         * List of selections for multiple cursors.
-         *
-         * @official
-         */
-        selections?: EditorRangeOrCaret[];
-    }
+    /**
+     * List of selections for multiple cursors.
+     *
+     * @official
+     */
+    selections?: EditorRangeOrCaret[];
+  }
 }

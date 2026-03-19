@@ -1,363 +1,424 @@
+import type { getCapacitorAdapterConstructor } from '../implementations/constructors/augmentations/getCapacitorAdapterConstructor.d.ts';
 import type { CapacitorAdapterFs } from '../internals/CapacitorAdapterFs.d.ts';
 import type { CapacitorFileEntry } from '../internals/CapacitorFileEntry.d.ts';
+import type { DataAdapterEx } from '../internals/DataAdapterEx.d.ts';
 import type { FileEntry } from '../internals/FileEntry.d.ts';
 
 export {};
 
 declare module 'obsidian' {
+  /**
+   * Implementation of the vault adapter for mobile devices.
+   *
+   * `app.vault.adapter` returns an instance of `CapacitorAdapter` on mobile devices.
+   * @since 1.7.2
+   */
+  interface CapacitorAdapter extends DataAdapterEx {
     /**
-     * Implementation of the vault adapter for mobile devices.
+     * Reference to the Capacitor file system API.
      *
-     * `app.vault.adapter` returns an instance of `CapacitorAdapter` on mobile devices.
+     * @unofficial
+     */
+    fs: CapacitorAdapterFs;
+
+    /**
+     * Appends data to a file.
+     *
+     * @param normalizedPath - The path to append.
+     * @param data - The data to append.
+     * @param options - The options to append.
+     * @returns A promise that resolves when the file is appended.
+     * To get the constructor instance, use {@link getCapacitorAdapterConstructor} from `obsidian-typings/implementations`.
+     * @example
+     * ```ts
+     * await app.vault.adapter.append('foo/bar.md', 'baz');
+     * ```
+     * @official
      * @since 1.7.2
      */
-    interface CapacitorAdapter extends DataAdapter {
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        fs: CapacitorAdapterFs;
+    append(normalizedPath: string, data: string, options?: DataWriteOptions): Promise<void>;
 
-        /**
-         * Appends data to a file.
-         *
-         * @param normalizedPath - The path to append.
-         * @param data - The data to append.
-         * @param options - The options to append.
-         * @returns A promise that resolves when the file is appended.
-         * @example
-         * ```ts
-         * await app.vault.adapter.append('foo/bar.md', 'baz');
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        append(normalizedPath: string, data: string, options?: DataWriteOptions): Promise<void>;
+    /**
+     * Add data to the end of a binary file.
+     *
+     * @param normalizedPath - Path to file, use {@link normalizePath} to normalize beforehand.
+     * @param data - The data to append.
+     * @param options - (Optional) options
+     * @returns A promise that resolves when the file is appended.
+     * @example
+     * ```ts
+     * await app.vault.adapter.appendBinary('foo/bar.md', new Uint8Array([1, 2, 3]).buffer);
+     * ```
+     * @official
+     * @since 1.12.3
+     */
+    appendBinary(normalizedPath: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
 
-        /**
-         * Copies a file.
-         *
-         * @param normalizedPath - The path to copy.
-         * @param normalizedNewPath - The new path.
-         * @returns A promise that resolves when the file is copied.
-         * @example
-         * ```ts
-         * await app.vault.adapter.copy('foo/bar.md', 'baz/qux.md');
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        copy(normalizedPath: string, normalizedNewPath: string): Promise<void>;
+    /**
+     * Constructor.
+     *
+     * To get the constructor instance, use {@link getCapacitorAdapterConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param basePath - The basePath.
+     * @param fs - The fs.
+     * @returns The new instance.
+     * @unofficial
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor__(basePath: string, fs: CapacitorAdapterFs): this;
 
-        /**
-         * Checks if a file exists.
-         *
-         * @param normalizedPath - The path to check.
-         * @param sensitive - Whether to check case-sensitivity.
-         * @returns A promise that resolves with whether the file exists.
-         * @example
-         * ```ts
-         * console.log(await app.vault.adapter.exists('foo/bar.md'));
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        exists(normalizedPath: string, sensitive?: boolean): Promise<boolean>;
+    /**
+     * Copies a file.
+     *
+     * @param normalizedPath - The path to copy.
+     * @param normalizedNewPath - The new path.
+     * @returns A promise that resolves when the file is copied.
+     * @example
+     * ```ts
+     * await app.vault.adapter.copy('foo/bar.md', 'baz/qux.md');
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    copy(normalizedPath: string, normalizedNewPath: string): Promise<void>;
 
-        /**
-         * Gets the full path for a file.
-         *
-         * @param normalizedPath - The path to get the full path for.
-         * @returns The full path for the file.
-         * @example
-         * ```ts
-         * console.log(app.vault.adapter.getFullPath('foo/bar.md')) // /storage/emulated/0/path/to/vault/foo/bar.md
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        getFullPath(normalizedPath: string): string;
+    /**
+     * Checks if a file exists.
+     *
+     * @param normalizedPath - The path to check.
+     * @param sensitive - Whether to check case-sensitivity.
+     * @returns A promise that resolves with whether the file exists.
+     * @example
+     * ```ts
+     * console.log(await app.vault.adapter.exists('foo/bar.md'));
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    exists(normalizedPath: string, sensitive?: boolean): Promise<boolean>;
 
-        /**
-         * Get the name of the vault.
-         *
-         * @returns The name of the vault.
-         * @official
-         * @since 1.7.2
-         */
-        getName(): string;
+    /**
+     * Gets the full path for a file.
+     *
+     * @param normalizedPath - The path to get the full path for.
+     * @returns The full path for the file.
+     * @example
+     * ```ts
+     * console.log(app.vault.adapter.getFullPath('foo/bar.md')) // /storage/emulated/0/path/to/vault/foo/bar.md
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    getFullPath(normalizedPath: string): string;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        getNativePath(normalizedPath: string): string;
+    /**
+     * Get the name of the vault.
+     *
+     * @returns The name of the vault.
+     * @official
+     * @since 1.7.2
+     */
+    getName(): string;
 
-        /**
-         * Returns a URI for the browser engine to use, for example to embed an image.
-         *
-         * @param normalizedPath - The path to get the resource path for.
-         * @returns A URI for the browser engine to use.
-         * @example
-         * ```ts
-         * console.log(app.vault.adapter.getResourcePath('foo/bar.jpg'));
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        getResourcePath(normalizedPath: string): string;
+    /**
+     * Get the native device path for a normalized vault path.
+     *
+     * @param normalizedPath - The normalized vault path.
+     * @returns The native device path.
+     * @unofficial
+     */
+    getNativePath(normalizedPath: string): string;
 
-        /**
-         * Lists all files and folders inside a folder.
-         *
-         * @param normalizedPath - The path to list.
-         * @returns A promise that resolves with the listed files.
-         * @example
-         * ```ts
-         * console.log(await app.vault.adapter.list('foo'));
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        list(normalizedPath: string): Promise<ListedFiles>;
+    /**
+     * Returns a URI for the browser engine to use, for example to embed an image.
+     *
+     * @param normalizedPath - The path to get the resource path for.
+     * @returns A URI for the browser engine to use.
+     * @example
+     * ```ts
+     * console.log(app.vault.adapter.getResourcePath('foo/bar.jpg'));
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    getResourcePath(normalizedPath: string): string;
 
-        /**
-         * Helper function for `listRecursive` reads children of directory.
-         *
-         * @param normalizedPath Path to directory.
-         * @unofficial
-         */
-        listRecursiveChild(normalizedPath: string, child: FileEntry): Promise<void>;
+    /**
+     * Lists all files and folders inside a folder.
+     *
+     * @param normalizedPath - The path to list.
+     * @returns A promise that resolves with the listed files.
+     * @example
+     * ```ts
+     * console.log(await app.vault.adapter.list('foo'));
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    list(normalizedPath: string): Promise<ListedFiles>;
 
-        /**
-         * Creates a new directory.
-         *
-         * @param normalizedPath - The path to create the directory.
-         * @returns A promise that resolves when the directory is created.
-         * @example
-         * ```ts
-         * await app.vault.adapter.mkdir('foo');
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        mkdir(normalizedPath: string): Promise<void>;
+    /**
+     * Helper function for `listRecursive` reads children of directory.
+     *
+     * @param normalizedPath Path to directory.
+     * @param child - The file entry child.
+     * @returns A promise that resolves when the child is listed.
+     * @unofficial
+     */
+    listRecursiveChild(normalizedPath: string, child: FileEntry): Promise<void>;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        onFileChange(normalizedPath: string): void;
+    /**
+     * Creates a new directory.
+     *
+     * @param normalizedPath - The path to create the directory.
+     * @returns A promise that resolves when the directory is created.
+     * @example
+     * ```ts
+     * await app.vault.adapter.mkdir('foo');
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    mkdir(normalizedPath: string): Promise<void>;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        open(normalizedPath: string): Promise<void>;
+    /**
+     * Handle a file change event for the given path.
+     *
+     * @param normalizedPath - The path that changed.
+     * @unofficial
+     */
+    onFileChange(normalizedPath: string): void;
 
-        /**
-         * Atomically read, modify, and save the contents of a plaintext file.
-         *
-         * @param normalizedPath - The path to process.
-         * @param fn - The function to process the file.
-         * @param options - The options to process the file.
-         * @returns A promise that resolves with the processed file.
-         * @example
-         * ```ts
-         * await app.vault.adapter.process('foo/bar.md', (data) => {
-         *     return data.replace('foo', 'bar');
-         * });
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        process(normalizedPath: string, fn: (data: string) => string, options?: DataWriteOptions): Promise<string>;
+    /**
+     * Open a file using the native device handler.
+     *
+     * @param normalizedPath - The path to the file to open.
+     * @returns A promise that resolves when the file is opened.
+     * @unofficial
+     */
+    open(normalizedPath: string): Promise<void>;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        quickList(normalizedFolderPath: string, fileEntry: FileEntry): void;
+    /**
+     * Atomically read, modify, and save the contents of a plaintext file.
+     *
+     * @param normalizedPath - The path to process.
+     * @param fn - The function to process the file.
+     * @param options - The options to process the file.
+     * @returns A promise that resolves with the processed file.
+     * @example
+     * ```ts
+     * await app.vault.adapter.process('foo/bar.md', (data) => {
+     *     return data.replace('foo', 'bar');
+     * });
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    process(normalizedPath: string, fn: (data: string) => string, options?: DataWriteOptions): Promise<string>;
 
-        /**
-         * Reads a file.
-         *
-         * @param normalizedPath - The path to read.
-         * @returns A promise that resolves with the file content.
-         * @example
-         * ```ts
-         * console.log(await app.vault.adapter.read('foo/bar.md'));
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        read(normalizedPath: string): Promise<string>;
+    /**
+     * Quickly list files in a folder and add them to the file entry.
+     *
+     * @param normalizedFolderPath - The folder path.
+     * @param fileEntry - The file entry to populate.
+     * @unofficial
+     */
+    quickList(normalizedFolderPath: string, fileEntry: FileEntry): void;
 
-        /**
-         * Reads a file as a binary buffer.
-         *
-         * @param normalizedPath - The path to read.
-         * @returns A promise that resolves with the file content.
-         * @example
-         * ```ts
-         * console.log(await app.vault.adapter.readBinary('foo/bar.jpg'));
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        readBinary(normalizedPath: string): Promise<ArrayBuffer>;
+    /**
+     * Reads a file.
+     *
+     * @param normalizedPath - The path to read.
+     * @returns A promise that resolves with the file content.
+     * @example
+     * ```ts
+     * console.log(await app.vault.adapter.read('foo/bar.md'));
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    read(normalizedPath: string): Promise<string>;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        reconcileFileCreation(
-            normalizedPath: string,
-            normalizedNewPath: string,
-            fileEntry: CapacitorFileEntry
-        ): Promise<void>;
+    /**
+     * Reads a file as a binary buffer.
+     *
+     * @param normalizedPath - The path to read.
+     * @returns A promise that resolves with the file content.
+     * @example
+     * ```ts
+     * console.log(await app.vault.adapter.readBinary('foo/bar.jpg'));
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    readBinary(normalizedPath: string): Promise<ArrayBuffer>;
 
-        /**
-         * Removes a file.
-         *
-         * @param normalizedPath - The path to remove.
-         * @returns A promise that resolves when the file is removed.
-         * @example
-         * ```ts
-         * await app.vault.adapter.remove('foo/bar.md');
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        remove(normalizedPath: string): Promise<void>;
+    /**
+     * Reconcile a file creation event between old and new paths.
+     *
+     * @param normalizedPath - The original path.
+     * @param normalizedNewPath - The new path.
+     * @param fileEntry - The capacitor file entry.
+     * @returns A promise that resolves when the file creation is reconciled.
+     * @unofficial
+     */
+    reconcileFileCreation(
+      normalizedPath: string,
+      normalizedNewPath: string,
+      fileEntry: CapacitorFileEntry
+    ): Promise<void>;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        removeFile(normalizedPath: string): Promise<void>;
+    /**
+     * Removes a file.
+     *
+     * @param normalizedPath - The path to remove.
+     * @returns A promise that resolves when the file is removed.
+     * @example
+     * ```ts
+     * await app.vault.adapter.remove('foo/bar.md');
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    remove(normalizedPath: string): Promise<void>;
 
-        /**
-         * Renames a file.
-         *
-         * @param normalizedPath - The path to rename.
-         * @param normalizedNewPath - The new path.
-         * @returns A promise that resolves when the file is renamed.
-         * @example
-         * ```ts
-         * await app.vault.adapter.rename('foo/bar.md', 'baz/qux.md');
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        rename(normalizedPath: string, normalizedNewPath: string): Promise<void>;
+    /**
+     * Remove a file from the internal file listing and trigger events.
+     *
+     * @param normalizedPath - The path of the file to remove.
+     * @returns A promise that resolves when the file is removed from the listing.
+     * @unofficial
+     */
+    removeFile(normalizedPath: string): Promise<void>;
 
-        /**
-         * Deletes a directory.
-         *
-         * @param normalizedPath - The path to delete.
-         * @param recursive - Whether to delete the directory recursively.
-         * @returns A promise that resolves when the directory is deleted.
-         * @example
-         * ```ts
-         * await app.vault.adapter.rmdir('foo', true);
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        rmdir(normalizedPath: string, recursive: boolean): Promise<void>;
+    /**
+     * Renames a file.
+     *
+     * @param normalizedPath - The path to rename.
+     * @param normalizedNewPath - The new path.
+     * @returns A promise that resolves when the file is renamed.
+     * @example
+     * ```ts
+     * await app.vault.adapter.rename('foo/bar.md', 'baz/qux.md');
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    rename(normalizedPath: string, normalizedNewPath: string): Promise<void>;
 
-        /**
-         * Retrieves file stats about a file.
-         *
-         * @param normalizedPath - The path to retrieve stats for.
-         * @returns A promise that resolves with the stats.
-         * @example
-         * ```ts
-         * console.log(await app.vault.adapter.stat('foo/bar.md'));
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        stat(normalizedPath: string): Promise<Stat | null>;
+    /**
+     * Deletes a directory.
+     *
+     * @param normalizedPath - The path to delete.
+     * @param recursive - Whether to delete the directory recursively.
+     * @returns A promise that resolves when the directory is deleted.
+     * @example
+     * ```ts
+     * await app.vault.adapter.rmdir('foo', true);
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    rmdir(normalizedPath: string, recursive: boolean): Promise<void>;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        stopWatch(): Promise<void>;
+    /**
+     * Retrieves file stats about a file.
+     *
+     * @param normalizedPath - The path to retrieve stats for.
+     * @returns A promise that resolves with the stats.
+     * @example
+     * ```ts
+     * console.log(await app.vault.adapter.stat('foo/bar.md'));
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    stat(normalizedPath: string): Promise<null | Stat>;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        testInsensitive(): Promise<void>;
+    /**
+     * Stop watching for file system changes.
+     *
+     * @returns A promise that resolves when the watcher is stopped.
+     * @unofficial
+     */
+    stopWatch(): Promise<void>;
 
-        /**
-         * Move to local trash.
-         * Files will be moved into the `.trash` folder at the root of the vault.
-         *
-         * @param normalizedPath - The path to delete.
-         * @returns A promise that resolves when the file or directory is deleted.
-         * @example
-         * ```ts
-         * await app.vault.adapter.trashLocal('foo/bar.md');
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        trashLocal(normalizedPath: string): Promise<void>;
+    /**
+     * Test whether the file system is case-insensitive.
+     *
+     * @returns A promise that resolves when the case-sensitivity test is complete.
+     * @unofficial
+     */
+    testInsensitive(): Promise<void>;
 
-        /**
-         * Try moving to system trash.
-         *
-         * @param normalizedPath - path to file/folder, use {@link normalizePath} to normalize beforehand.
-         * @returns Returns a promise that resolves to `true` if succeeded. This can fail due to system trash being disabled.
-         * @example
-         * ```ts
-         * console.log(await app.vault.adapter.trashSystem('foo/bar.jpg'));
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        trashSystem(normalizedPath: string): Promise<boolean>;
+    /**
+     * Move to local trash.
+     * Files will be moved into the `.trash` folder at the root of the vault.
+     *
+     * @param normalizedPath - The path to delete.
+     * @returns A promise that resolves when the file or directory is deleted.
+     * @example
+     * ```ts
+     * await app.vault.adapter.trashLocal('foo/bar.md');
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    trashLocal(normalizedPath: string): Promise<void>;
 
-        /**
-         * @todo Documentation incomplete.
-         * @unofficial
-         */
-        update(normalizedPath: string): Promise<void>;
+    /**
+     * Try moving to system trash.
+     *
+     * @param normalizedPath - path to file/folder, use {@link normalizePath} to normalize beforehand.
+     * @returns Returns a promise that resolves to `true` if succeeded. This can fail due to system trash being disabled.
+     * @example
+     * ```ts
+     * console.log(await app.vault.adapter.trashSystem('foo/bar.jpg'));
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    trashSystem(normalizedPath: string): Promise<boolean>;
 
-        /**
-         * Writes a file.
-         *
-         * @param normalizedPath - The path to write.
-         * @param data - The data to write.
-         * @param options - The options to write.
-         * @returns A promise that resolves when the file is written.
-         * @example
-         * ```ts
-         * await app.vault.adapter.write('foo/bar.md', 'baz');
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        write(normalizedPath: string, data: string, options?: DataWriteOptions): Promise<void>;
+    /**
+     * Update the internal file listing for the given path.
+     *
+     * @param normalizedPath - The path to update.
+     * @returns A promise that resolves when the file listing is updated.
+     * @unofficial
+     */
+    update(normalizedPath: string): Promise<void>;
 
-        /**
-         * Writes a file as a binary buffer.
-         *
-         * @param normalizedPath - The path to write.
-         * @param data - The data to write.
-         * @param options - The options to write.
-         * @returns A promise that resolves when the file is written.
-         * @example
-         * ```ts
-         * await app.vault.adapter.writeBinary('foo/bar.jpg', new Uint8Array([1, 2, 3]).buffer);
-         * ```
-         * @official
-         * @since 1.7.2
-         */
-        writeBinary(normalizedPath: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
-    }
+    /**
+     * Writes a file.
+     *
+     * @param normalizedPath - The path to write.
+     * @param data - The data to write.
+     * @param options - The options to write.
+     * @returns A promise that resolves when the file is written.
+     * @example
+     * ```ts
+     * await app.vault.adapter.write('foo/bar.md', 'baz');
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    write(normalizedPath: string, data: string, options?: DataWriteOptions): Promise<void>;
+
+    /**
+     * Writes a file as a binary buffer.
+     *
+     * @param normalizedPath - The path to write.
+     * @param data - The data to write.
+     * @param options - The options to write.
+     * @returns A promise that resolves when the file is written.
+     * @example
+     * ```ts
+     * await app.vault.adapter.writeBinary('foo/bar.jpg', new Uint8Array([1, 2, 3]).buffer);
+     * ```
+     * @official
+     * @since 1.7.2
+     */
+    writeBinary(normalizedPath: string, data: ArrayBuffer, options?: DataWriteOptions): Promise<void>;
+  }
 }

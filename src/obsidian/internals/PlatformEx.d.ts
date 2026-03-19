@@ -13,122 +13,97 @@
  * ```
  */
 export interface PlatformEx {
-    /** @todo Documentation incomplete. */
-    canDisplayRibbon: boolean;
+  /** Whether the platform supports displaying the sidebar ribbon. */
+  canDisplayRibbon: boolean;
 
-    /** @todo Documentation incomplete. */
-    canExportPdf: boolean;
+  /** Whether the platform supports exporting to PDF. */
+  canExportPdf: boolean;
 
-    /** @todo Documentation incomplete. */
-    canPopoutWindow: boolean;
+  /** Whether the platform supports popping out windows. */
+  canPopoutWindow: boolean;
 
-    /** @todo Documentation incomplete. */
-    canSplit: boolean;
+  /** Whether the platform supports splitting panes. */
+  canSplit: boolean;
 
-    /** @todo Documentation incomplete. */
-    canStackTabs: boolean;
+  /** Whether the platform supports stacking tabs. */
+  canStackTabs: boolean;
 
-    /**
-     * We're running the `Android` app.
-     *
-     * @official
-     */
-    isAndroidApp: boolean;
+  /**
+   * We're running the `Android` app.
+   */
+  isAndroidApp: boolean;
 
-    /**
-     * The UI is in desktop mode.
-     *
-     * @official
-     */
-    isDesktop: boolean;
+  /**
+   * The UI is in desktop mode.
+   */
+  isDesktop: boolean;
 
-    /**
-     * We're running the `Electron`-based desktop app.
-     *
-     * @official
-     */
-    isDesktopApp: boolean;
+  /**
+   * We're running the `Electron`-based desktop app.
+   */
+  isDesktopApp: boolean;
 
-    /**
-     * We're running the `iOS` app.
-     *
-     * @official
-     */
-    isIosApp: boolean;
+  /**
+   * We're running the `iOS` app.
+   */
+  isIosApp: boolean;
 
-    /**
-     * We're on a Linux device.
-     *
-     * @official
-     */
-    isLinux: boolean;
+  /**
+   * We're on a Linux device.
+   */
+  isLinux: boolean;
 
-    /**
-     * We're on a macOS device, or a device that pretends to be one (like iPhones and iPads).
-     * Typically used to detect whether to use command-based hotkeys vs ctrl-based hotkeys.
-     *
-     * @official
-     */
-    isMacOS: boolean;
+  /**
+   * We're on a macOS device, or a device that pretends to be one (like iPhones and iPads).
+   * Typically used to detect whether to use command-based hotkeys vs ctrl-based hotkeys.
+   */
+  isMacOS: boolean;
 
-    /**
-     * The UI is in mobile mode.
-     *
-     * @official
-     */
-    isMobile: boolean;
+  /**
+   * The UI is in mobile mode.
+   */
+  isMobile: boolean;
 
-    /**
-     * We're running the `Capacitor` mobile app.
-     *
-     * @official
-     */
-    isMobileApp: boolean;
+  /**
+   * We're running the `Capacitor` mobile app.
+   */
+  isMobileApp: boolean;
 
-    /**
-     * We're in a mobile app that has very limited screen space.
-     *
-     * @official
-     */
-    isPhone: boolean;
+  /**
+   * We're in a mobile app that has very limited screen space.
+   */
+  isPhone: boolean;
 
-    /**
-     * We're running in Safari.
-     * Typically used to provide workarounds for Safari bugs.
-     *
-     * @official
-     */
-    isSafari: boolean;
+  /**
+   * We're running in Safari.
+   * Typically used to provide workarounds for Safari bugs.
+   */
+  isSafari: boolean;
 
-    /**
-     * We're in a mobile app that has sufficiently large screen space.
-     * @official
-     */
-    isTablet: boolean;
+  /**
+   * We're in a mobile app that has sufficiently large screen space.
+   */
+  isTablet: boolean;
 
-    /**
-     * We're on a Windows device.
-     *
-     * @official
-     */
-    isWin: boolean;
+  /**
+   * We're on a Windows device.
+   */
+  isWin: boolean;
 
-    /** @todo Documentation incomplete. */
-    mobileDeviceHeight: number;
+  /** Height of the mobile device screen in pixels. */
+  mobileDeviceHeight: number;
 
-    /** @todo Documentation incomplete. */
-    mobileKeyboardHeight: number;
+  /** Height of the software keyboard in pixels on mobile. */
+  mobileKeyboardHeight: number;
 
-    /** @todo Documentation incomplete. */
-    mobileSoftKeyboardVisible: boolean;
+  /** Whether the software keyboard is currently visible on mobile. */
+  mobileSoftKeyboardVisible: boolean;
 
-    /**
-     * The path prefix for resolving local files on this platform.
-     * This returns:
-     * - `file:///` on mobile.
-     * - `app://random-id/` on desktop (Replaces the old format of `app://local/`).
-     *
-     * @official
-     */
-    resourcePathPrefix: string;
+  /**
+   * The path prefix for resolving local files on this platform.
+   * This returns:
+   * - `file:///` on mobile.
+   * - `app://random-id/` on desktop (Replaces the old format of `app://local/`).
+   */
+  resourcePathPrefix: string;
 }
