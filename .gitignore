@@ -9,7 +9,6 @@ index.ts
 /tsconfig.tsbuildinfo
 docs/src/content/docs/api/namespaces/**/*
 
-/docs/.astro
 /docs/src/content/docs/api/README.md
 /src/full-types.d.ts
 

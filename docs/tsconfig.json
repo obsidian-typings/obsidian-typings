@@ -1,12 +1,22 @@
 {
-    "extends": "../tsconfig.json",
-    "compilerOptions": {
-        "skipLibCheck": true,
-        "composite": true
-    },
-    "exclude": [
-        "node_modules",
-        "dist",
-        "obsidian-typings"
-    ]
+  "extends": "@tsconfig/strictest/tsconfig.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "lib": ["DOM", "ES2024"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2024"
+  },
+  "include": [
+    "**/*.ts",
+    "../src/full-types.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

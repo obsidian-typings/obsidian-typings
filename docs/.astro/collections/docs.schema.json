@@ -1,0 +1,1472 @@
+{
+  "$ref": "#/definitions/docs",
+  "definitions": {
+    "docs": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "editUrl": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uri"
+                },
+                {
+                  "type": "boolean"
+                }
+              ],
+              "default": true
+            },
+            "head": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "tag": {
+                    "type": "string",
+                    "enum": [
+                      "title",
+                      "base",
+                      "link",
+                      "style",
+                      "meta",
+                      "script",
+                      "noscript",
+                      "template"
+                    ]
+                  },
+                  "attrs": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "not": {}
+                        }
+                      ]
+                    }
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "tag"
+                ],
+                "additionalProperties": false
+              },
+              "default": []
+            },
+            "tableOfContents": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "minHeadingLevel": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 6,
+                      "default": 2
+                    },
+                    "maxHeadingLevel": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 6,
+                      "default": 3
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "boolean"
+                }
+              ],
+              "default": {
+                "minHeadingLevel": 2,
+                "maxHeadingLevel": 3
+              }
+            },
+            "template": {
+              "type": "string",
+              "enum": [
+                "doc",
+                "splash"
+              ],
+              "default": "doc"
+            },
+            "hero": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "tagline": {
+                  "type": "string"
+                },
+                "image": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "alt": {
+                          "type": "string",
+                          "default": ""
+                        },
+                        "file": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "file"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "alt": {
+                          "type": "string",
+                          "default": ""
+                        },
+                        "dark": {
+                          "type": "string"
+                        },
+                        "light": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "dark",
+                        "light"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "html": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "html"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "actions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      },
+                      "link": {
+                        "type": "string"
+                      },
+                      "variant": {
+                        "type": "string",
+                        "enum": [
+                          "primary",
+                          "secondary",
+                          "minimal"
+                        ],
+                        "default": "primary"
+                      },
+                      "icon": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "enum": [
+                              "up-caret",
+                              "down-caret",
+                              "right-caret",
+                              "left-caret",
+                              "up-arrow",
+                              "down-arrow",
+                              "right-arrow",
+                              "left-arrow",
+                              "bars",
+                              "translate",
+                              "pencil",
+                              "pen",
+                              "document",
+                              "add-document",
+                              "setting",
+                              "external",
+                              "download",
+                              "cloud-download",
+                              "moon",
+                              "sun",
+                              "laptop",
+                              "open-book",
+                              "information",
+                              "magnifier",
+                              "forward-slash",
+                              "close",
+                              "error",
+                              "warning",
+                              "approve-check-circle",
+                              "approve-check",
+                              "rocket",
+                              "star",
+                              "puzzle",
+                              "list-format",
+                              "random",
+                              "comment",
+                              "comment-alt",
+                              "heart",
+                              "github",
+                              "gitlab",
+                              "bitbucket",
+                              "codePen",
+                              "farcaster",
+                              "discord",
+                              "gitter",
+                              "twitter",
+                              "x.com",
+                              "mastodon",
+                              "codeberg",
+                              "youtube",
+                              "threads",
+                              "linkedin",
+                              "twitch",
+                              "azureDevOps",
+                              "microsoftTeams",
+                              "instagram",
+                              "stackOverflow",
+                              "telegram",
+                              "rss",
+                              "facebook",
+                              "email",
+                              "phone",
+                              "reddit",
+                              "patreon",
+                              "signal",
+                              "slack",
+                              "matrix",
+                              "hackerOne",
+                              "openCollective",
+                              "blueSky",
+                              "discourse",
+                              "zulip",
+                              "pinterest",
+                              "tiktok",
+                              "astro",
+                              "alpine",
+                              "pnpm",
+                              "biome",
+                              "bun",
+                              "mdx",
+                              "apple",
+                              "linux",
+                              "homebrew",
+                              "nix",
+                              "starlight",
+                              "pkl",
+                              "node",
+                              "cloudflare",
+                              "vercel",
+                              "netlify",
+                              "deno",
+                              "jsr",
+                              "nostr",
+                              "backstage",
+                              "confluence",
+                              "jira",
+                              "storybook",
+                              "vscode",
+                              "jetbrains",
+                              "zed",
+                              "vim",
+                              "figma",
+                              "sketch",
+                              "npm",
+                              "sourcehut",
+                              "substack",
+                              "seti:folder",
+                              "seti:bsl",
+                              "seti:mdo",
+                              "seti:salesforce",
+                              "seti:asm",
+                              "seti:bicep",
+                              "seti:bazel",
+                              "seti:c",
+                              "seti:c-sharp",
+                              "seti:html",
+                              "seti:cpp",
+                              "seti:clojure",
+                              "seti:coldfusion",
+                              "seti:config",
+                              "seti:crystal",
+                              "seti:crystal_embedded",
+                              "seti:json",
+                              "seti:css",
+                              "seti:csv",
+                              "seti:xls",
+                              "seti:cu",
+                              "seti:cake",
+                              "seti:cake_php",
+                              "seti:d",
+                              "seti:word",
+                              "seti:elixir",
+                              "seti:elixir_script",
+                              "seti:hex",
+                              "seti:elm",
+                              "seti:favicon",
+                              "seti:f-sharp",
+                              "seti:git",
+                              "seti:go",
+                              "seti:godot",
+                              "seti:gradle",
+                              "seti:grails",
+                              "seti:graphql",
+                              "seti:hacklang",
+                              "seti:haml",
+                              "seti:mustache",
+                              "seti:haskell",
+                              "seti:haxe",
+                              "seti:jade",
+                              "seti:java",
+                              "seti:javascript",
+                              "seti:jinja",
+                              "seti:julia",
+                              "seti:karma",
+                              "seti:kotlin",
+                              "seti:dart",
+                              "seti:liquid",
+                              "seti:livescript",
+                              "seti:lua",
+                              "seti:markdown",
+                              "seti:argdown",
+                              "seti:info",
+                              "seti:clock",
+                              "seti:maven",
+                              "seti:nim",
+                              "seti:github",
+                              "seti:notebook",
+                              "seti:nunjucks",
+                              "seti:npm",
+                              "seti:ocaml",
+                              "seti:odata",
+                              "seti:perl",
+                              "seti:php",
+                              "seti:pipeline",
+                              "seti:pddl",
+                              "seti:plan",
+                              "seti:happenings",
+                              "seti:powershell",
+                              "seti:prisma",
+                              "seti:pug",
+                              "seti:puppet",
+                              "seti:purescript",
+                              "seti:python",
+                              "seti:react",
+                              "seti:rescript",
+                              "seti:R",
+                              "seti:ruby",
+                              "seti:rust",
+                              "seti:sass",
+                              "seti:spring",
+                              "seti:slim",
+                              "seti:smarty",
+                              "seti:sbt",
+                              "seti:scala",
+                              "seti:ethereum",
+                              "seti:stylus",
+                              "seti:svelte",
+                              "seti:swift",
+                              "seti:db",
+                              "seti:terraform",
+                              "seti:tex",
+                              "seti:default",
+                              "seti:twig",
+                              "seti:typescript",
+                              "seti:tsconfig",
+                              "seti:vala",
+                              "seti:vite",
+                              "seti:vue",
+                              "seti:wasm",
+                              "seti:wat",
+                              "seti:xml",
+                              "seti:yml",
+                              "seti:prolog",
+                              "seti:zig",
+                              "seti:zip",
+                              "seti:wgt",
+                              "seti:illustrator",
+                              "seti:photoshop",
+                              "seti:pdf",
+                              "seti:font",
+                              "seti:image",
+                              "seti:svg",
+                              "seti:sublime",
+                              "seti:code-search",
+                              "seti:shell",
+                              "seti:video",
+                              "seti:audio",
+                              "seti:windows",
+                              "seti:jenkins",
+                              "seti:babel",
+                              "seti:bower",
+                              "seti:docker",
+                              "seti:code-climate",
+                              "seti:eslint",
+                              "seti:firebase",
+                              "seti:firefox",
+                              "seti:gitlab",
+                              "seti:grunt",
+                              "seti:gulp",
+                              "seti:ionic",
+                              "seti:platformio",
+                              "seti:rollup",
+                              "seti:stylelint",
+                              "seti:yarn",
+                              "seti:webpack",
+                              "seti:lock",
+                              "seti:license",
+                              "seti:makefile",
+                              "seti:heroku",
+                              "seti:todo",
+                              "seti:ignored"
+                            ]
+                          },
+                          {
+                            "type": "string",
+                            "pattern": "^\\<svg"
+                          }
+                        ]
+                      },
+                      "attrs": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": [
+                            "string",
+                            "number",
+                            "boolean"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "text",
+                      "link"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "default": []
+                }
+              },
+              "additionalProperties": false
+            },
+            "lastUpdated": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    {
+                      "type": "integer",
+                      "format": "unix-time"
+                    }
+                  ]
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "prev": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "link": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "next": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "link": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "sidebar": {
+              "type": "object",
+              "properties": {
+                "order": {
+                  "type": "number"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "hidden": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "badge": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "variant": {
+                          "type": "string",
+                          "enum": [
+                            "note",
+                            "danger",
+                            "success",
+                            "caution",
+                            "tip",
+                            "default"
+                          ],
+                          "default": "default"
+                        },
+                        "class": {
+                          "type": "string"
+                        },
+                        "text": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "text"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "attrs": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "not": {}
+                      }
+                    ]
+                  },
+                  "default": {}
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "banner": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "content"
+              ],
+              "additionalProperties": false
+            },
+            "pagefind": {
+              "type": "boolean",
+              "default": true
+            },
+            "draft": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          "required": [
+            "title"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "links": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "sitemap": {
+              "type": "object",
+              "properties": {
+                "include": {
+                  "type": "boolean"
+                },
+                "pageTitle": {
+                  "type": "string"
+                },
+                "linkInclusionRules": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "default": []
+                }
+              },
+              "additionalProperties": false,
+              "default": {
+                "linkInclusionRules": [
+                  "**/*"
+                ]
+              }
+            },
+            "graph": {
+              "type": "object",
+              "properties": {
+                "actions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "fullscreen",
+                      "depth",
+                      "reset-zoom",
+                      "render-arrows",
+                      "render-external",
+                      "render-unresolved",
+                      "settings"
+                    ]
+                  },
+                  "default": [
+                    "fullscreen",
+                    "depth",
+                    "reset-zoom",
+                    "render-arrows",
+                    "settings"
+                  ]
+                },
+                "tagStyles": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "shape": {
+                        "type": "string",
+                        "enum": [
+                          "circle",
+                          "square",
+                          "triangle",
+                          "polygon",
+                          "star"
+                        ],
+                        "default": "circle"
+                      },
+                      "shapeSize": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "errorMessage": {
+                          "exclusiveMinimum": "Shape size may not be zero or negative"
+                        },
+                        "default": 10
+                      },
+                      "shapeColor": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "enum": [
+                              "inherit",
+                              "backgroundColor",
+                              "nodeColor",
+                              "nodeColorVisited",
+                              "nodeColorCurrent",
+                              "nodeColorUnresolved",
+                              "nodeColorExternal",
+                              "nodeColorTag",
+                              "nodeColor1",
+                              "nodeColor2",
+                              "nodeColor3",
+                              "nodeColor4",
+                              "nodeColor5",
+                              "nodeColor6",
+                              "nodeColor7",
+                              "nodeColor8",
+                              "nodeColor9",
+                              "linkColor"
+                            ]
+                          },
+                          {
+                            "type": "string",
+                            "const": "stroke"
+                          }
+                        ],
+                        "default": "nodeColor"
+                      },
+                      "shapePoints": {
+                        "type": "number",
+                        "minimum": 2,
+                        "errorMessage": {
+                          "minimum": "The number of points for the shape may not be smaller than 2"
+                        }
+                      },
+                      "shapeRotation": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "string",
+                            "const": "random"
+                          }
+                        ]
+                      },
+                      "shapeCornerRadius": {
+                        "anyOf": [
+                          {
+                            "type": "number",
+                            "minimum": 0,
+                            "errorMessage": {
+                              "minimum": "Shape corner radius may not be negative"
+                            }
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "cornerType": {
+                        "type": "string",
+                        "enum": [
+                          "normal",
+                          "round",
+                          "bevel"
+                        ]
+                      },
+                      "strokeWidth": {
+                        "type": "number",
+                        "minimum": 0,
+                        "default": 0
+                      },
+                      "strokeColor": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeColor/anyOf/0"
+                          },
+                          {
+                            "type": "string",
+                            "const": "inherit"
+                          }
+                        ]
+                      },
+                      "strokeCornerRadius": {
+                        "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeCornerRadius"
+                      },
+                      "colliderScale": {
+                        "type": "number",
+                        "minimum": 0,
+                        "default": 1
+                      },
+                      "nodeScale": {
+                        "type": "number",
+                        "minimum": 0,
+                        "default": 1
+                      },
+                      "neighborScale": {
+                        "type": "number",
+                        "minimum": 0,
+                        "default": 0.5
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "default": {}
+                },
+                "tagRenderMode": {
+                  "type": "string",
+                  "enum": [
+                    "none",
+                    "node",
+                    "same",
+                    "both"
+                  ],
+                  "default": "none"
+                },
+                "prefetchPages": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "enableDrag": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "enableZoom": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "enablePan": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "enableHover": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "enableClick": {
+                  "type": "string",
+                  "enum": [
+                    "auto",
+                    "disable",
+                    "click",
+                    "dblclick"
+                  ],
+                  "default": "auto"
+                },
+                "nodeInclusionRules": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "default": [
+                    "**/*"
+                  ]
+                },
+                "depth": {
+                  "type": "number",
+                  "default": 1
+                },
+                "depthDirection": {
+                  "type": "string",
+                  "enum": [
+                    "both",
+                    "incoming",
+                    "outgoing"
+                  ],
+                  "default": "both"
+                },
+                "followLink": {
+                  "type": "string",
+                  "enum": [
+                    "same",
+                    "new-tab",
+                    "graph"
+                  ],
+                  "default": "same"
+                },
+                "scale": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "errorMessage": {
+                    "exclusiveMinimum": "Graph scale may not be zero or negative"
+                  },
+                  "default": 1.1
+                },
+                "minZoom": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "errorMessage": {
+                    "exclusiveMinimum": "Graph zoom may not be zero or negative"
+                  },
+                  "default": 0.05
+                },
+                "maxZoom": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "errorMessage": {
+                    "exclusiveMinimum": "Graph zoom may not be zero or negative"
+                  },
+                  "default": 4
+                },
+                "renderLabels": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "renderArrows": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "renderUnresolved": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "renderExternal": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "scaleLinks": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "scaleArrows": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "minZoomArrows": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Minimum zoom for arrow rendering may not be negative"
+                  },
+                  "default": 0.8
+                },
+                "labelOpacityScale": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Opacity scale for labels may not be negative"
+                  },
+                  "default": 1.3
+                },
+                "labelMutedOpacity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Opacity scale for muted labels may not be negative"
+                  },
+                  "default": 0
+                },
+                "labelHoverOpacity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Opacity scale for hovered labels may not be negative"
+                  },
+                  "default": 1
+                },
+                "labelAdjacentOpacity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Opacity scale for hovered labels may not be negative"
+                  },
+                  "default": 1
+                },
+                "labelFontSize": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Label font size may not be negative"
+                  },
+                  "default": 12
+                },
+                "labelHoverScale": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Label hover scale may not be negative"
+                  },
+                  "default": 1
+                },
+                "labelOffset": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Label offset may not be negative"
+                  },
+                  "default": 10
+                },
+                "labelHoverOffset": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Label hover offset may not be negative"
+                  },
+                  "default": 14
+                },
+                "zoomDuration": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Zoom duration may not be negative"
+                  },
+                  "default": 75
+                },
+                "zoomEase": {
+                  "type": "string",
+                  "enum": [
+                    "in_quad",
+                    "out_quad",
+                    "in_out_quad",
+                    "linear"
+                  ],
+                  "default": "out_quad"
+                },
+                "hoverDuration": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Hover duration may not be negative"
+                  },
+                  "default": 200
+                },
+                "hoverEase": {
+                  "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/zoomEase",
+                  "default": "out_quad"
+                },
+                "nodeDefaultStyle": {
+                  "type": "object",
+                  "properties": {
+                    "shape": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shape"
+                    },
+                    "shapeSize": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeSize"
+                    },
+                    "shapeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeColor"
+                    },
+                    "shapePoints": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapePoints"
+                    },
+                    "shapeRotation": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeRotation"
+                    },
+                    "shapeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeCornerRadius"
+                    },
+                    "cornerType": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/cornerType"
+                    },
+                    "strokeWidth": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeWidth"
+                    },
+                    "strokeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeColor"
+                    },
+                    "strokeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeCornerRadius"
+                    },
+                    "colliderScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/colliderScale"
+                    },
+                    "nodeScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/nodeScale"
+                    },
+                    "neighborScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/neighborScale"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "nodeVisitedStyle": {
+                  "type": "object",
+                  "properties": {
+                    "shape": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shape"
+                    },
+                    "shapeSize": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeSize"
+                    },
+                    "shapeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeColor"
+                    },
+                    "shapePoints": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapePoints"
+                    },
+                    "shapeRotation": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeRotation"
+                    },
+                    "shapeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeCornerRadius"
+                    },
+                    "cornerType": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/cornerType"
+                    },
+                    "strokeWidth": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeWidth"
+                    },
+                    "strokeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeColor"
+                    },
+                    "strokeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeCornerRadius"
+                    },
+                    "colliderScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/colliderScale"
+                    },
+                    "nodeScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/nodeScale"
+                    },
+                    "neighborScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/neighborScale"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "nodeCurrentStyle": {
+                  "type": "object",
+                  "properties": {
+                    "shape": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shape"
+                    },
+                    "shapeSize": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeSize"
+                    },
+                    "shapeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeColor"
+                    },
+                    "shapePoints": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapePoints"
+                    },
+                    "shapeRotation": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeRotation"
+                    },
+                    "shapeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeCornerRadius"
+                    },
+                    "cornerType": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/cornerType"
+                    },
+                    "strokeWidth": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeWidth"
+                    },
+                    "strokeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeColor"
+                    },
+                    "strokeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeCornerRadius"
+                    },
+                    "colliderScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/colliderScale"
+                    },
+                    "nodeScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/nodeScale"
+                    },
+                    "neighborScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/neighborScale"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "nodeUnresolvedStyle": {
+                  "type": "object",
+                  "properties": {
+                    "shape": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shape"
+                    },
+                    "shapeSize": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeSize"
+                    },
+                    "shapeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeColor"
+                    },
+                    "shapePoints": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapePoints"
+                    },
+                    "shapeRotation": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeRotation"
+                    },
+                    "shapeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeCornerRadius"
+                    },
+                    "cornerType": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/cornerType"
+                    },
+                    "strokeWidth": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeWidth"
+                    },
+                    "strokeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeColor"
+                    },
+                    "strokeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeCornerRadius"
+                    },
+                    "colliderScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/colliderScale"
+                    },
+                    "nodeScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/nodeScale"
+                    },
+                    "neighborScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/neighborScale"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "nodeExternalStyle": {
+                  "type": "object",
+                  "properties": {
+                    "shape": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shape"
+                    },
+                    "shapeSize": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeSize"
+                    },
+                    "shapeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeColor"
+                    },
+                    "shapePoints": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapePoints"
+                    },
+                    "shapeRotation": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeRotation"
+                    },
+                    "shapeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeCornerRadius"
+                    },
+                    "cornerType": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/cornerType"
+                    },
+                    "strokeWidth": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeWidth"
+                    },
+                    "strokeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeColor"
+                    },
+                    "strokeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeCornerRadius"
+                    },
+                    "colliderScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/colliderScale"
+                    },
+                    "nodeScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/nodeScale"
+                    },
+                    "neighborScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/neighborScale"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "tagDefaultStyle": {
+                  "type": "object",
+                  "properties": {
+                    "shape": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shape"
+                    },
+                    "shapeSize": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeSize"
+                    },
+                    "shapeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeColor"
+                    },
+                    "shapePoints": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapePoints"
+                    },
+                    "shapeRotation": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeRotation"
+                    },
+                    "shapeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeCornerRadius"
+                    },
+                    "cornerType": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/cornerType"
+                    },
+                    "strokeWidth": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeWidth"
+                    },
+                    "strokeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeColor"
+                    },
+                    "strokeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeCornerRadius"
+                    },
+                    "colliderScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/colliderScale"
+                    },
+                    "nodeScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/nodeScale"
+                    },
+                    "neighborScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/neighborScale"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "linkWidth": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Link width may not be negative"
+                  },
+                  "default": 1
+                },
+                "linkHoverWidth": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Hover link width may not be negative"
+                  },
+                  "default": 1
+                },
+                "arrowSize": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Arrow size may not be negative"
+                  },
+                  "default": 5
+                },
+                "arrowAngle": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Arrow angle may not be negative"
+                  },
+                  "default": 0.5235987755982988
+                },
+                "centerForce": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Center force may not be negative"
+                  },
+                  "default": 0.05
+                },
+                "colliderPadding": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Collider padding may not be negative"
+                  },
+                  "default": 20
+                },
+                "repelForce": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Repel force may not be negative"
+                  },
+                  "default": 200
+                },
+                "linkDistance": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Link distance may not be negative"
+                  },
+                  "default": 0
+                },
+                "alphaDecay": {
+                  "type": "number",
+                  "minimum": 0,
+                  "errorMessage": {
+                    "minimum": "Alpha decay may not be negative",
+                    "maximum": "Alpha decay may not be greater than 1"
+                  },
+                  "maximum": 1,
+                  "default": 0.0228
+                },
+                "visible": {
+                  "type": "boolean"
+                },
+                "nodeStyle": {
+                  "type": "object",
+                  "properties": {
+                    "shape": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shape"
+                    },
+                    "shapeSize": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeSize"
+                    },
+                    "shapeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeColor"
+                    },
+                    "shapePoints": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapePoints"
+                    },
+                    "shapeRotation": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeRotation"
+                    },
+                    "shapeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/shapeCornerRadius"
+                    },
+                    "cornerType": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/cornerType"
+                    },
+                    "strokeWidth": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeWidth"
+                    },
+                    "strokeColor": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeColor"
+                    },
+                    "strokeCornerRadius": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/strokeCornerRadius"
+                    },
+                    "colliderScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/colliderScale"
+                    },
+                    "nodeScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/nodeScale"
+                    },
+                    "neighborScale": {
+                      "$ref": "#/definitions/docs/allOf/1/properties/graph/properties/tagStyles/additionalProperties/properties/neighborScale"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
+            "backlinks": {
+              "type": "object",
+              "properties": {
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

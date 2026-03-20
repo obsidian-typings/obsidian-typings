@@ -23,5 +23,8 @@
     "./scripts/**/*.ts",
     "./src/**/*.ts",
     "./workflow-scripts/**/*.ts"
+  ],
+  "exclude": [
+    "docs"
   ]
 }

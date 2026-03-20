@@ -19,6 +19,7 @@ import { getRootFolder } from './helpers/exec.ts';
 
 const typeScriptFiles = [
   'src/**/*.ts',
+  'docs/**/*.ts',
   'scripts/**/*.ts'
 ];
 
@@ -31,8 +32,53 @@ export const config: Linter.Config[] = defineConfig(
   ...getImportXConfigs(),
   ...getPerfectionistConfigs(),
   ...getEslintImportResolverTypescriptConfigs(),
-  ...getEslintCommentsConfigs()
+  ...getEslintCommentsConfigs(),
+  ...getDocsOverrideConfigs()
 );
+
+function getDocsOverrideConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      files: ['docs/scripts/astro-config.ts'],
+      rules: {
+        'no-magic-numbers': 'off'
+      }
+    },
+    {
+      files: ['docs/.astro/**/*.ts', 'docs/.astro/**/*.d.ts'],
+      rules: {
+        '@stylistic/no-tabs': 'off',
+        '@typescript-eslint/no-empty-object-type': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-unnecessary-type-parameters': 'off',
+        '@typescript-eslint/triple-slash-reference': 'off',
+        '@typescript-eslint/unified-signatures': 'off',
+        'camelcase': 'off',
+        'import-x/no-anonymous-default-export': 'off',
+        'import-x/no-default-export': 'off',
+        'no-magic-numbers': 'off',
+        'no-restricted-syntax': 'off'
+      }
+    },
+    {
+      files: ['docs/src/pages/**/*.ts'],
+      rules: {
+        '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-call': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/no-unsafe-return': 'off',
+        '@typescript-eslint/prefer-nullish-coalescing': 'off',
+        '@typescript-eslint/restrict-template-expressions': 'off',
+        'import-x/no-anonymous-default-export': 'off',
+        'import-x/no-default-export': 'off',
+        'import-x/no-unresolved': 'off',
+        'no-magic-numbers': 'off',
+        'no-restricted-syntax': 'off'
+      }
+    }
+  ]);
+}
 
 function getEslintCommentsConfigs(): Linter.Config[] {
   return defineConfig([
@@ -357,7 +403,7 @@ function getImportXConfigs(): Linter.Config[] {
       }
     },
     {
-      files: ['scripts/**/*.ts', 'src/script-utils/**/*.ts'],
+      files: ['**/scripts/**/*.ts'],
       rules: {
         'import-x/no-nodejs-modules': 'off'
       }
