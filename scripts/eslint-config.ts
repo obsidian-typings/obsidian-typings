@@ -23,7 +23,7 @@ const typeScriptFiles = [
 ];
 
 export const config: Linter.Config[] = defineConfig(
-  ...getGitignoreConfigs(),
+  ...getGitIgnoreConfigs(),
   ...getEslintConfigs(),
   ...getLocalPluginConfigs(),
   ...getTseslintConfigs(),
@@ -298,7 +298,7 @@ function getEslintImportResolverTypescriptConfigs(): Linter.Config[] {
   ]);
 }
 
-function getGitignoreConfigs(): Linter.Config[] {
+function getGitIgnoreConfigs(): Linter.Config[] {
   const gitignorePath = join(getRootFolder() ?? '', '.gitignore');
   if (!existsSync(gitignorePath)) {
     return [];
