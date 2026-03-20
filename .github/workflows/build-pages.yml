@@ -1,0 +1,61 @@
+name: Build Github Pages
+on:
+  workflow_run:
+    workflows: [Push Release Tag]
+    types: [completed]
+  push:
+    branches: [main]
+    paths: [docs/**]
+  workflow_dispatch:
+jobs:
+  build-and-deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Checkout scripts from main branch
+        run: |
+          git fetch origin main
+          git restore --source=origin/main --worktree -- ./workflow-scripts
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Install script deps
+        run: npm ci
+        working-directory: ./workflow-scripts
+      - name: Restore public docs cache
+        uses: actions/cache@v4
+        with:
+          path: ./cache/public
+          key: docs-public-${{ github.run_id }}
+          restore-keys: docs-public-
+      - name: Restore catalyst docs cache
+        uses: actions/cache@v4
+        with:
+          path: ./cache/catalyst
+          key: docs-catalyst-${{ github.run_id }}
+          restore-keys: docs-catalyst-
+      - name: Build docs
+        run: npx -y jiti ./workflow-scripts/build-pages.ts
+        env:
+          OUTPUT_DIR: ./site
+          CACHE_DIR: ./cache
+          EVENT_NAME: ${{ github.event_name }}
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
