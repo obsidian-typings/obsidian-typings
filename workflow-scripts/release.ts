@@ -1,24 +1,21 @@
-import { execSync } from 'node:child_process';
 import {
   basename,
   dirname
 } from 'node:path/posix';
 
-function main(): void {
-  const nodeModulesPath = exec('npm root').replace(/\\/g, '/');
+import { execFromRoot } from './scripts/helpers/exec.ts';
+
+async function main(): Promise<void> {
+  const nodeModulesPath = (await execFromRoot('npm root', { isQuiet: true })).replace(/\\/g, '/');
   let projectRoot = dirname(nodeModulesPath);
   const parentDir = dirname(projectRoot);
   if (basename(parentDir) === 'workflow-scripts') {
     projectRoot = dirname(parentDir);
   }
 
-  exec(`git -C ${projectRoot} restore --source=origin/main --worktree -- ./workflow-scripts`);
-  exec(`npm install -C ${projectRoot}/workflow-scripts`);
-  exec(`bun ${projectRoot}/workflow-scripts/release-impl.ts`);
+  execFromRoot(`git -C ${projectRoot} restore --source=origin/main --worktree -- ./workflow-scripts`);
+  execFromRoot(`npm install -C ${projectRoot}/workflow-scripts`);
+  execFromRoot(`jiti ${projectRoot}/workflow-scripts/release-impl.ts`);
 }
 
-function exec(command: string): string {
-  return execSync(command, { encoding: 'utf-8' });
-}
-
-main();
+await main();

@@ -79,6 +79,7 @@ export interface MarkdownlintCli2ConfigurationSchema {
  * Markdownlint configuration schema : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/schema/.markdownlint.jsonc
  */
 export interface MarkdownlintConfigurationSchema {
+  [k: string]: unknown;
   /**
    * JSON Schema URI (expected by some editors)
    */
@@ -1333,5 +1334,4 @@ export interface MarkdownlintConfigurationSchema {
    * Whitespace : MD009, MD010, MD012, MD027, MD028, MD030, MD037, MD038, MD039
    */
   'whitespace'?: boolean;
-  [k: string]: unknown;
 }

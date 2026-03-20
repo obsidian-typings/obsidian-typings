@@ -2,22 +2,34 @@
   "name": "scripts",
   "private": true,
   "devDependencies": {
-    "bun": "^1.2.20",
-    "typescript": "^5.9.2"
+    "@eslint-community/eslint-plugin-eslint-comments": "latest",
+    "@eslint/compat": "latest",
+    "@eslint/js": "latest",
+    "@stylistic/eslint-plugin": "latest",
+    "@tsconfig/strictest": "latest",
+    "@types/semver": "latest",
+    "@typescript-eslint/utils": "latest",
+    "dprint": "latest",
+    "esbuild": "latest",
+    "eslint-import-resolver-typescript": "latest",
+    "eslint-plugin-import-x": "latest",
+    "eslint-plugin-perfectionist": "latest",
+    "eslint": "latest",
+    "globals": "latest",
+    "husky": "latest",
+    "jiti": "latest",
+    "semver": "latest",
+    "type-fest": "latest",
+    "typescript-eslint": "latest",
+    "typescript": "latest"
   },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "@tsconfig/strictest": "^2.0.5",
-    "@types/semver": "^7.7.0",
-    "dotenv": "^17.2.1",
-    "obsidian-dev-utils": "^33.1.0",
-    "semver": "^7.7.2"
+  "overrides": {
+    "eslint-plugin-import": "npm:eslint-plugin-import-x@latest",
+    "type-fest": "latest"
   },
   "type": "module",
   "scripts": {
-    "format": "obsidian-dev-utils format",
-    "lint:fix": "obsidian-dev-utils lint:fix"
+    "format": "jiti scripts/format.ts",
+    "lint:fix": "jiti scripts/lint-fix.ts"
   }
 }

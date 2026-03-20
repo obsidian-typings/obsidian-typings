@@ -1,4 +1,4 @@
-import { exec } from 'obsidian-dev-utils/ScriptUtils/Exec';
+import { execFromRoot } from '../scripts/helpers/exec.ts';
 import { generateBranchName } from './branchSpec.ts';
 import { getLatestVersion } from './version.ts';
 
@@ -18,8 +18,8 @@ export async function checkout(targetBranch: string, withScripts: boolean): Prom
 
   targetBranch = generateBranchName({ channel, obsidianVersion: version });
 
-  await exec(`git checkout "${targetBranch}"`);
+  await execFromRoot(`git checkout "${targetBranch}"`);
   if (withScripts) {
-    await exec('git restore --source=main --worktree -- ./workflow-scripts');
+    await execFromRoot('git restore --source=main --worktree -- ./workflow-scripts');
   }
 }

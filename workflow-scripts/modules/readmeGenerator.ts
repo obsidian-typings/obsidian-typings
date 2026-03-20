@@ -1,8 +1,8 @@
-import { exec } from 'obsidian-dev-utils/ScriptUtils/Exec';
 import {
   readFile,
   writeFile
-} from 'obsidian-dev-utils/ScriptUtils/NodeModules';
+} from 'node:fs/promises';
+import { execFromRoot } from '../scripts/helpers/exec.ts';
 
 import {
   type BranchSpec,
@@ -20,9 +20,9 @@ export async function generateReadme(branchSpec: BranchSpec, changelogUrl: strin
     return;
   }
   await writeFile('README.md', updatedReadme, 'utf-8');
-  await exec('git add README.md');
+  await execFromRoot('git add README.md');
   await commit('chore: generate README.md from template');
-  await exec('git push');
+  await execFromRoot('git push');
 }
 
 function fillReadmeTemplate(readmeTemplate: string, branchSpec: BranchSpec, changelogUrl: string): string {
@@ -33,7 +33,7 @@ function fillReadmeTemplate(readmeTemplate: string, branchSpec: BranchSpec, chan
 }
 
 export async function generateMainReadme(): Promise<void> {
-  await exec('git checkout main');
+  await execFromRoot('git checkout main');
 
   const readme = await readFile('README.md', 'utf-8');
   let updatedReadme = readme;
@@ -49,9 +49,9 @@ export async function generateMainReadme(): Promise<void> {
   }
 
   await writeFile('README.md', updatedReadme, 'utf-8');
-  await exec('git add README.md');
+  await execFromRoot('git add README.md');
   await commit('chore: generate README.md from template');
-  await exec('git push');
+  await execFromRoot('git push');
 }
 
 function generateMainReadmeLine(branchSpec: BranchSpec): string {

@@ -1,5 +1,3 @@
-import { wrapCliTask } from 'obsidian-dev-utils/ScriptUtils/CliUtils';
-import { exec } from 'obsidian-dev-utils/ScriptUtils/Exec';
 import { compare } from 'semver';
 
 import { generateBranchName } from './modules/branchSpec.ts';
@@ -9,15 +7,15 @@ import {
   generateReadme
 } from './modules/readmeGenerator.ts';
 import { getLatestVersion } from './modules/version.ts';
+import { execFromRoot } from './scripts/helpers/exec.ts';
 
-await wrapCliTask(async () => {
-  // eslint-disable-next-line no-magic-numbers
+async function main(): Promise<void> {
   const newVersion = process.argv[2] ?? '';
-  // eslint-disable-next-line no-magic-numbers
+
   const newVersionChannel = process.argv[3] as 'catalyst' | 'public' | undefined;
   const changelogUrl = process.argv[4] ?? '';
   if (!newVersion || !newVersionChannel || !['catalyst', 'public'].includes(newVersionChannel) || !changelogUrl) {
-    throw new Error('Usage: bun ./workflow-scripts/create-new-release-branch.ts <newVersion> <public|catalyst> <changelogUrl>');
+    throw new Error('Usage: jiti ./workflow-scripts/create-new-release-branch.ts <newVersion> <public|catalyst> <changelogUrl>');
   }
 
   const latestPublicVersion = await getLatestVersion('public');
@@ -52,8 +50,10 @@ await wrapCliTask(async () => {
   const newBranch = generateBranchName({ channel: newVersionChannel, obsidianVersion: newVersion });
 
   await checkout(latestBranch, true);
-  await exec(`git checkout -b "${newBranch}"`);
-  await exec(`git push -u origin "${newBranch}"`);
+  await execFromRoot(`git checkout -b "${newBranch}"`);
+  await execFromRoot(`git push -u origin "${newBranch}"`);
   await generateReadme({ channel: newVersionChannel, obsidianVersion: newVersion }, changelogUrl);
   await generateMainReadme();
-});
+}
+
+await main();

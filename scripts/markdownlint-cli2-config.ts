@@ -2,6 +2,8 @@ import relativeLinksRule from 'markdownlint-rule-relative-links';
 
 import type { MarkdownlintCli2ConfigurationSchema } from './helpers/@types/markdownlint-cli2-config-schema.d.ts';
 
+/* eslint-disable camelcase -- The property names are the same as the ones in the schema. */
+
 export const config: MarkdownlintCli2ConfigurationSchema = {
   config: {
     'MD013': false,
@@ -15,7 +17,6 @@ export const config: MarkdownlintCli2ConfigurationSchema = {
         '!tip',
         '!warning'
       ],
-
       shortcut_syntax: true
     },
     'relative-links': true
@@ -34,3 +35,5 @@ export const config: MarkdownlintCli2ConfigurationSchema = {
     'workflow-scripts/**'
   ]
 };
+
+/* eslint-enable camelcase -- The property names are the same as the ones in the schema. */

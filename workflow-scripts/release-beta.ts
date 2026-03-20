@@ -14,7 +14,7 @@ function main(): void {
 
   exec(`git -C ${projectRoot} restore --source=origin/main --worktree -- ./workflow-scripts`);
   exec(`npm install -C ${projectRoot}/workflow-scripts`);
-  exec(`bun ${projectRoot}/workflow-scripts/release-impl.ts beta`);
+  exec(`jiti ${projectRoot}/workflow-scripts/release-impl.ts beta`);
 }
 
 function exec(command: string): string {

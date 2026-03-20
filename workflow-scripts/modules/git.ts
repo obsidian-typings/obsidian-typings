@@ -1,4 +1,4 @@
-import { exec } from 'obsidian-dev-utils/ScriptUtils/Exec';
+import { execFromRoot } from '../scripts/helpers/exec.ts';
 
 function gitWithBotUser() {
   const USER_NAME = 'github-actions[bot]';
@@ -7,7 +7,7 @@ function gitWithBotUser() {
 }
 
 export async function commit(message: string): Promise<void> {
-  await exec(`${gitWithBotUser()} commit -m "${message}"`);
+  await execFromRoot(`${gitWithBotUser()} commit -m "${message}"`);
 }
 
 export async function assertHeadMatches(target: string): Promise<void> {
@@ -16,22 +16,24 @@ export async function assertHeadMatches(target: string): Promise<void> {
   if (head !== want) {
     const headBranches = await getBranchNames('HEAD');
     throw new Error(
-      `HEAD ${head} (${headBranches.join(', ')}) does not match ${want} (${target}.\nConsider using bun ./workflow-scripts/checkout.ts ${target} --with-scripts`
+      `HEAD ${head} (${
+        headBranches.join(', ')
+      }) does not match ${want} (${target}.\nConsider using jiti ./workflow-scripts/checkout.ts ${target} --with-scripts`
     );
   }
 }
 
 async function resolveCommitHash(target: string): Promise<string> {
-  const hash = await exec(`git rev-parse "${target}^{commit}"`);
+  const hash = await execFromRoot(`git rev-parse "${target}^{commit}"`);
   return hash.trim();
 }
 
 export async function getBranchNames(rev: string): Promise<string[]> {
-  const branchesStr = await exec(`git branch -r --points-at ${rev}`);
+  const branchesStr = await execFromRoot(`git branch -r --points-at ${rev}`);
   const branches = branchesStr.split('\n').map((branch) => branch.trim().replace('origin/', ''));
   return branches;
 }
 
 export async function annotateTag(tag: string, message: string): Promise<void> {
-  await exec(`${gitWithBotUser()} tag -a ${tag} -m "${message}"`);
+  await execFromRoot(`${gitWithBotUser()} tag -a ${tag} -m "${message}"`);
 }

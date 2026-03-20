@@ -1,9 +1,11 @@
-import { exec } from "obsidian-dev-utils/ScriptUtils/Exec";
-import { generateBranchName } from "./modules/branchSpec.ts";
-import { checkout } from "./modules/checkout.ts";
-import { commit } from "./modules/git.ts";
-import { getLatestVersion } from "./modules/version.ts";
-import { readPackageJson } from 'obsidian-dev-utils/ScriptUtils/Npm';
+import { generateBranchName } from './modules/branchSpec.ts';
+import { checkout } from './modules/checkout.ts';
+import { commit } from './modules/git.ts';
+import { getLatestVersion } from './modules/version.ts';
+import {
+  execFromRoot,
+  readPackageJson
+} from './scripts/helpers/exec.ts';
 
 async function main(): Promise<void> {
   const latestPublicBranchVersion = await getLatestVersion('public');
@@ -19,14 +21,14 @@ async function main(): Promise<void> {
     return;
   }
 
-  await exec(`npm install --save-exact obsidian@${latestObsidianVersion}`);
-  await exec(`git add package.json package-lock.json`);
+  await execFromRoot(`npm install --save-exact obsidian@${latestObsidianVersion}`);
+  await execFromRoot('git add package.json package-lock.json');
   await commit(`chore: update obsidian API version to ${latestObsidianVersion}`);
-  await exec(`npm run release`);
+  await execFromRoot('npm run release');
 
   // NOTE: Manually invoke the workflow if running in GitHub Actions, because it's not be triggered automatically.
   if (process.env['GITHUB_ACTIONS']) {
-    await exec(`gh workflow run push-release-tag-proxy.yml --ref ${latestBranch}`);
+    await execFromRoot(`gh workflow run push-release-tag-proxy.yml --ref ${latestBranch}`);
   }
 }
 
@@ -40,7 +42,7 @@ async function getLatestObsidianVersion(): Promise<string> {
   const json = await response.json();
 
   if (typeof json !== 'object' || json === null || Array.isArray(json)) {
-    throw new Error(`Invalid response from npm registry for obsidian`);
+    throw new Error('Invalid response from npm registry for obsidian');
   }
 
   return json['version'] as string;

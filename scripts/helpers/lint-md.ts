@@ -12,7 +12,7 @@ export async function lintMd(params: LintMdParams): Promise<void> {
 
   await execFromRoot(['npx', 'markdownlint-cli2', ...(shouldFix ? ['--fix'] : []), ...paths]);
 
-  const mdFiles = paths?.length
+  const mdFiles = paths.length
     ? paths
     : await toArray(glob(['**/*.md'], {
       exclude: [
