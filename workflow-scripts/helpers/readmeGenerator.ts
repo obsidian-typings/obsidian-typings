@@ -2,7 +2,7 @@ import {
   readFile,
   writeFile
 } from 'node:fs/promises';
-import { execFromRoot } from '../scripts/helpers/exec.ts';
+import { execFromRoot } from './exec.ts';
 
 import {
   type BranchSpec,

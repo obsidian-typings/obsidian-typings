@@ -1,4 +1,4 @@
-import { checkout } from './modules/checkout.ts';
+import { checkout } from './helpers/checkout.ts';
 
 async function main(): Promise<void> {
   const targetBranch = process.argv[2];

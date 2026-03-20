@@ -1,13 +1,13 @@
 import { compare } from 'semver';
 
-import { generateBranchName } from './modules/branchSpec.ts';
-import { checkout } from './modules/checkout.ts';
+import { generateBranchName } from './helpers/branchSpec.ts';
+import { checkout } from './helpers/checkout.ts';
+import { execFromRoot } from './helpers/exec.ts';
 import {
   generateMainReadme,
   generateReadme
-} from './modules/readmeGenerator.ts';
-import { getLatestVersion } from './modules/version.ts';
-import { execFromRoot } from './scripts/helpers/exec.ts';
+} from './helpers/readmeGenerator.ts';
+import { getLatestVersion } from './helpers/version.ts';
 
 async function main(): Promise<void> {
   const newVersion = process.argv[2] ?? '';

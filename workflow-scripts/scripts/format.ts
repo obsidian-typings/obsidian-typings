@@ -1,4 +1,4 @@
-import { execFromRoot } from './helpers/exec.ts';
+import { execFromRoot } from '../helpers/exec.ts';
 
 const [, , ...paths] = process.argv;
 

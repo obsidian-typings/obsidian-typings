@@ -1,20 +1,20 @@
 import { writeFile } from 'node:fs/promises';
 import { inc } from 'semver';
 
-import { parseBranchSpec } from './modules/branchSpec.ts';
-import {
-  annotateTag,
-  assertHeadMatches,
-  commit,
-  getBranchNames
-} from './modules/git.ts';
-import { getLatestVersion } from './modules/version.ts';
+import { parseBranchSpec } from './helpers/branchSpec.ts';
 import {
   editPackageJson,
   editPackageLockJson,
   execFromRoot,
   readPackageJson
-} from './scripts/helpers/exec.ts';
+} from './helpers/exec.ts';
+import {
+  annotateTag,
+  assertHeadMatches,
+  commit,
+  getBranchNames
+} from './helpers/git.ts';
+import { getLatestVersion } from './helpers/version.ts';
 
 const TAG_NAME = 'release-candidate';
 const TAG_NAME_BETA = 'release-candidate-beta';

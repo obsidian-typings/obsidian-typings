@@ -3,7 +3,7 @@ import {
   dirname
 } from 'node:path/posix';
 
-import { execFromRoot } from './scripts/helpers/exec.ts';
+import { execFromRoot } from './helpers/exec.ts';
 
 async function main(): Promise<void> {
   const nodeModulesPath = (await execFromRoot('npm root', { isQuiet: true })).replace(/\\/g, '/');

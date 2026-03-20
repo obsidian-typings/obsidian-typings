@@ -1,4 +1,4 @@
-import { execFromRoot } from './scripts/helpers/exec.ts';
+import { execFromRoot } from './helpers/exec.ts';
 
 async function main(): Promise<void> {
   await checkGitRepoClean();

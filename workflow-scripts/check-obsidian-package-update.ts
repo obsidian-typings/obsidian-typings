@@ -1,11 +1,11 @@
-import { generateBranchName } from './modules/branchSpec.ts';
-import { checkout } from './modules/checkout.ts';
-import { commit } from './modules/git.ts';
-import { getLatestVersion } from './modules/version.ts';
+import { generateBranchName } from './helpers/branchSpec.ts';
+import { checkout } from './helpers/checkout.ts';
 import {
   execFromRoot,
   readPackageJson
-} from './scripts/helpers/exec.ts';
+} from './helpers/exec.ts';
+import { commit } from './helpers/git.ts';
+import { getLatestVersion } from './helpers/version.ts';
 
 async function main(): Promise<void> {
   const latestPublicBranchVersion = await getLatestVersion('public');

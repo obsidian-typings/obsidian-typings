@@ -14,8 +14,8 @@ import { join } from 'node:path/posix';
 // eslint-disable-next-line import-x/no-rename-default -- The default export name `_default` is too confusing.
 import tseslint from 'typescript-eslint';
 
-import { localPlugin } from './helpers/eslint/local-plugin.ts';
-import { getRootFolder } from './helpers/exec.ts';
+import { localPlugin } from '../helpers/eslint/local-plugin.ts';
+import { getRootFolder } from '../helpers/exec.ts';
 
 const typeScriptFiles = [
   'src/**/*.ts',

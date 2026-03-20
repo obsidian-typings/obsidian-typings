@@ -1,4 +1,4 @@
-import { execFromRoot } from '../scripts/helpers/exec.ts';
+import { execFromRoot } from './exec.ts';
 
 function gitWithBotUser() {
   const USER_NAME = 'github-actions[bot]';
