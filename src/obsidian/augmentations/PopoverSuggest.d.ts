@@ -99,7 +99,6 @@ declare module 'obsidian' {
      *     }
      * }
      * ```
-     * @inheritDoc
      * @official
      * @deprecated - Added only for typing purposes. Use {@link renderSuggestion} instead.
      */
@@ -127,7 +126,6 @@ declare module 'obsidian' {
      *     }
      * }
      * ```
-     * @inheritDoc
      * @official
      * @deprecated - Added only for typing purposes. Use {@link selectSuggestion} instead.
      */
