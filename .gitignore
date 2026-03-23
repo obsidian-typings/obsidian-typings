@@ -12,6 +12,12 @@ docs/src/content/docs/api/namespaces/**/*
 /docs/src/content/docs/api/README.md
 /src/full-types.d.ts
 
+/docs/.astro/*
+!/docs/.astro/content.d.ts
+!/docs/.astro/types.d.ts
+!/docs/.astro/integrations/
+!/docs/.astro/integrations/_astrojs_starlight/
+!/docs/.astro/integrations/_astrojs_starlight/i18n-plugins.d.ts
 /docs/.cache
 
 /workflow-scripts/.env

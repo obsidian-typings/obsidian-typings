@@ -151,7 +151,7 @@ function readPackageVersion(path: string): string {
 function setAllSources(ref: ReflectionWithSources, packages: Partial<Record<string, PackageInfo>>, fileName = '', filePath = '', offset = 0): void {
   setSources(ref, packages, fileName, filePath, offset);
   if ('signatures' in ref) {
-    for (const sig of ref.signatures) {
+    for (const sig of ref.signatures ?? []) {
       setSources(sig, packages, fileName, filePath, offset);
     }
   }
