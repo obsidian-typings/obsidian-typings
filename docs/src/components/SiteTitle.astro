@@ -1,0 +1,115 @@
+---
+import { logos } from 'virtual:starlight/user-images';
+import config from 'virtual:starlight/user-config';
+
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+
+const channel = process.env['CURRENT_CHANNEL'] || null;
+const publicVersion = process.env['LATEST_PUBLIC_TYPINGS_VERSION'] || '';
+const catalystVersion = process.env['LATEST_CATALYST_TYPINGS_VERSION'] || '';
+const currentVersion = channel === 'catalyst' ? catalystVersion : publicVersion;
+const otherVersion = channel === 'catalyst' ? publicVersion : catalystVersion;
+const channelLabel = channel === 'catalyst' ? 'Catalyst' : 'Public';
+const otherChannel = channel === 'catalyst' ? 'public' : 'catalyst';
+const otherLabel = channel === 'catalyst' ? 'Public' : 'Catalyst';
+---
+
+<div class="site-title-wrapper">
+<a href={siteTitleHref} class="site-title sl-flex">
+	{
+		config.logo && logos.dark && (
+			<>
+				<img
+					class:list={{ 'light:sl-hidden print:hidden': !('src' in config.logo) }}
+					alt={config.logo.alt}
+					src={logos.dark.src}
+					width={logos.dark.width}
+					height={logos.dark.height}
+				/>
+				{!('src' in config.logo) && (
+					<img
+						class="dark:sl-hidden print:block"
+						alt={config.logo.alt}
+						src={logos.light?.src}
+						width={logos.light?.width}
+						height={logos.light?.height}
+					/>
+				)}
+			</>
+		)
+	}
+	<span class:list={{ 'sr-only': config.logo?.replacesTitle }} translate="no">
+		{siteTitle}
+	</span>
+</a>
+
+{channel && (
+	<div class="channel-switcher">
+		<span class="channel-current">{channelLabel} ({currentVersion})</span>
+		<span class="channel-separator">|</span>
+		<a href={`/obsidian-typings/${otherChannel}/`} class="channel-link">
+			{otherLabel}{otherVersion ? ` (${otherVersion})` : ''}
+		</a>
+	</div>
+)}
+</div>
+
+<style>
+	.site-title-wrapper {
+		display: flex;
+		flex-direction: column;
+	}
+
+	@layer starlight.core {
+		.site-title {
+			align-items: center;
+			gap: var(--sl-nav-gap);
+			font-size: var(--sl-text-h4);
+			font-weight: 600;
+			color: var(--sl-color-text-accent);
+			text-decoration: none;
+			white-space: nowrap;
+			min-width: 0;
+		}
+		span {
+			overflow: hidden;
+		}
+		img {
+			height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
+			width: auto;
+			max-width: 100%;
+			object-fit: contain;
+			object-position: 0 50%;
+		}
+	}
+
+	.channel-switcher {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		padding: 0.25rem 0.5rem;
+		margin-top: 0.25rem;
+		font-size: var(--sl-text-xs);
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 999rem;
+		width: fit-content;
+	}
+
+	.channel-separator {
+		color: var(--sl-color-gray-5);
+	}
+
+	.channel-current {
+		font-weight: 600;
+		color: var(--sl-color-text-accent);
+	}
+
+	.channel-link {
+		color: var(--sl-color-gray-3);
+		text-decoration: none;
+	}
+
+	.channel-link:hover {
+		color: var(--sl-color-text-accent);
+	}
+</style>
