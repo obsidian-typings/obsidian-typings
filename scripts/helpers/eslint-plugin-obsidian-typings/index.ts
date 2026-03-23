@@ -7,6 +7,7 @@ import { internalsInterfaceTags } from './internals-interface-tags.ts';
 import { jsdocEmptyLineBeforeTags } from './jsdoc-empty-line-before-tags.ts';
 import { noDeclareModuleInInternals } from './no-declare-module-in-internals.ts';
 import { noImportAliasInDeclareGlobal } from './no-import-alias-in-declare-global.ts';
+import { noInheritDocTag } from './no-inherit-doc-tag.ts';
 import { noInterfaceTagsInAugmentations } from './no-interface-tags-in-augmentations.ts';
 import { noMemberUnofficialInInternals } from './no-member-unofficial-in-internals.ts';
 import { noTodoTag } from './no-todo-tag.ts';
@@ -27,6 +28,7 @@ export const obsidianTypingsPlugin = {
     'jsdoc-empty-line-before-tags': jsdocEmptyLineBeforeTags,
     'internals-interface-tags': internalsInterfaceTags,
     'no-declare-module-in-internals': noDeclareModuleInInternals,
+    'no-inherit-doc-tag': noInheritDocTag,
     'no-import-alias-in-declare-global': noImportAliasInDeclareGlobal,
     'no-interface-tags-in-augmentations': noInterfaceTagsInAugmentations,
     'no-member-unofficial-in-internals': noMemberUnofficialInInternals,

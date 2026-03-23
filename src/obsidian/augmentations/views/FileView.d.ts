@@ -22,7 +22,6 @@ declare module 'obsidian' {
     /**
      * Whether the file view can be navigated (`true` by default).
      *
-     * @inheritDoc
      * @official
      */
     navigation: boolean;

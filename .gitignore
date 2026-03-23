@@ -1,13 +1,10 @@
 .vscode
-/docs/.astro
-/docs/.cache
-/docs/src/content/docs/api/README.md
 /src/full-types.d.ts
 /src/obsidian/implementations/**/*.d.ts
 /tsconfig.tsbuildinfo
 /workflow-scripts
 dist/
-docs/src/content/docs/api/namespaces/**/*
+/docs
 index.d.ts
 index.ts
 node_modules/
