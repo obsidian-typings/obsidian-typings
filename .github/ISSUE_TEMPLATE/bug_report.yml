@@ -1,0 +1,63 @@
+name: Bug report
+description: Report a bug and help improve the library
+title: "[BUG] Don't forget to write a meaningful title"
+labels: bug
+assignees: mnaoumov
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug report
+
+        > [!WARNING]
+        >
+        > Incomplete, vague, or poorly described bug reports will be closed.
+        >
+        > The bug report and all attachments (screenshots, videos) must be in English. Exception: the bug is directly related to non-English language usage. Non-English bug reports will be closed.
+  - type: textarea
+    attributes:
+      label: Description
+      description: A clear and concise description of the bug. Include any relevant details.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: Provide a step-by-step description.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Notice that '...'
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Actual behavior
+      description: What actually happened? Include error messages if available.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Package version
+      description: "⚠️ Must be the latest version. If not, explain why above."
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Attachments
+      description: Attach relevant files, screenshots, or a minimal reproduction repository.
+      placeholder: Drag and drop files here.
+  - type: checkboxes
+    attributes:
+      label: Confirmations
+      description: Ensure the following conditions are met
+      options:
+        - label: I have checked the repository and haven't found any similar bugs
+          required: true

@@ -1,0 +1,58 @@
+name: Feature request
+description: Request a feature and help improve the library
+title: "[FR] Don't forget to write a meaningful title"
+labels: enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature request
+
+        > [!WARNING]
+        >
+        > Incomplete, vague, or poorly described requests will be closed.
+        >
+        > The feature request and all attachments (screenshots, videos) must be in English. Exception: the request is directly related to non-English language usage. Non-English feature requests will be closed.
+  - type: textarea
+    attributes:
+      label: Description
+      description: A clear and concise description of the feature request. Include any relevant details.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Use case
+      description: Describe a scenario where this feature would be useful.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Desired behavior
+      description: What do you want to happen?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Current behavior
+      description: What actually happens?
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Package version
+      description: "⚠️ Must be the latest version. If not, explain why above."
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Attachments
+      description: Attach relevant files or screenshots.
+      placeholder: Drag and drop files here.
+  - type: checkboxes
+    attributes:
+      label: Confirmations
+      description: Ensure the following conditions are met
+      options:
+        - label: I have checked the repository and haven't found any similar feature requests
+          required: true
