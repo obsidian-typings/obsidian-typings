@@ -1,6 +1,7 @@
 import type { Linter } from 'eslint';
 
 import commentsConfigs from '@eslint-community/eslint-plugin-eslint-comments/configs';
+// eslint-disable-next-line import-x/named -- False positive: CJS .d.cts uses `export = types` hiding named exports from static analysis.
 import { includeIgnoreFile } from '@eslint/compat';
 import eslint from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
