@@ -13,13 +13,14 @@ index 171a26d..0c7e6c3 100644
 +    instanceOf<T>(type: { new(...data: any[]): T }): this is T;
  }
 diff --git a/node_modules/@pixi/events/lib/FederatedPointerEvent.d.ts b/node_modules/@pixi/events/lib/FederatedPointerEvent.d.ts
-index 89c2d5c..ad761ab 100644
+index 89c2d5c..b518b9a 100644
 --- a/node_modules/@pixi/events/lib/FederatedPointerEvent.d.ts
 +++ b/node_modules/@pixi/events/lib/FederatedPointerEvent.d.ts
-@@ -62,4 +62,6 @@ export declare class FederatedPointerEvent extends FederatedMouseEvent implement
+@@ -62,4 +62,7 @@ export declare class FederatedPointerEvent extends FederatedMouseEvent implement
      detail: number;
      getCoalescedEvents(): PointerEvent[];
      getPredictedEvents(): PointerEvent[];
 +    altitudeAngle: number;
 +    azimuthAngle: number;
++    persistentDeviceId: number;
  }

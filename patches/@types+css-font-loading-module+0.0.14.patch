@@ -1,8 +1,8 @@
 diff --git a/node_modules/@types/css-font-loading-module/index.d.ts b/node_modules/@types/css-font-loading-module/index.d.ts
-index 728dd9c..e9cd295 100644
+index 728dd9c..be3ae85 100644
 --- a/node_modules/@types/css-font-loading-module/index.d.ts
 +++ b/node_modules/@types/css-font-loading-module/index.d.ts
-@@ -85,7 +85,7 @@ declare global {
+@@ -85,18 +85,13 @@ declare global {
  
      var FontFace: {
          prototype: FontFace;
@@ -11,3 +11,15 @@ index 728dd9c..e9cd295 100644
      };
  
      interface FontFaceSetLoadEvent extends Event {
+-        readonly fontfaces: readonly FontFace[];
++        readonly fontfaces: ReadonlyArray<FontFace>;
+     }
+ 
+-    var FontFaceSetLoadEvent: {
+-        prototype: FontFaceSetLoadEvent;
+-        new(type: string, eventInitDict?: FontFaceSetLoadEventInit): FontFaceSetLoadEvent;
+-    };
+-
+     interface Document {
+         fonts: FontFaceSet;
+     }
