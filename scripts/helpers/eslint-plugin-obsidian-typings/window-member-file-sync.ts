@@ -39,7 +39,7 @@ function isGlobalsVarFile(filename: string): boolean {
 function getGlobalsAugmentationsDir(filename: string): string {
   const normalized = normalizePath(filename);
   const idx = normalized.indexOf('/globals/augmentations/');
-  return normalized.substring(0, idx) + '/globals/augmentations/';
+  return `${normalized.substring(0, idx)}/globals/augmentations/`;
 }
 
 function getMemberNameFromFilename(filename: string): string {
@@ -221,7 +221,7 @@ export const windowMemberFileSync = {
       importMismatchInFile: 'Import \'{{specifier}}\' from \'{{module}}\' for member \'{{memberName}}\' does not match \'{{dir}}/{{memberName}}.d.ts\'.',
       importMismatchInWindow: `Import '{{specifier}}' from '{{module}}' does not match ${WINDOW_FILE_NAME}.`,
       missingFile: 'Window interface {{kind}} \'{{memberName}}\' has no corresponding file in \'{{dir}}/{{memberName}}.d.ts\'.',
-      missingWindowMember: `File \'{{fileName}}\' has no corresponding {{kind}} in ${WINDOW_FILE_NAME} Window interface.`
+      missingWindowMember: `File '{{fileName}}' has no corresponding {{kind}} in ${WINDOW_FILE_NAME} Window interface.`
     }
   },
   create(context: RuleContext) {

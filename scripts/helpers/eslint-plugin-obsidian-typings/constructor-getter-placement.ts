@@ -76,7 +76,7 @@ function resolveTypeSourceFile(
     if (srcIndex === -1) {
       return null;
     }
-    const augDir = normalized.substring(0, srcIndex) + '/src/obsidian/augmentations';
+    const augDir = `${normalized.substring(0, srcIndex)}/src/obsidian/augmentations`;
     return findAugmentationFile(augDir, typeName);
   }
 

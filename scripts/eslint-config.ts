@@ -1,6 +1,8 @@
 import type { Linter } from 'eslint';
 
+import commentsConfigs from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import { includeIgnoreFile } from '@eslint/compat';
+import eslint from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { flatConfigs as eslintPluginImportXFlatConfigs } from 'eslint-plugin-import-x';
@@ -10,141 +12,135 @@ import { resolve } from 'node:path';
 import tseslint from 'typescript-eslint';
 
 import { obsidianTypingsPlugin } from './helpers/eslint-plugin-obsidian-typings/index.ts';
+import { customEslintPlugin } from './helpers/eslint-rules/custom-eslint-plugin.ts';
 
 const gitignorePath = resolve(import.meta.dirname, '..', '.gitignore');
 
-const typeScriptFiles = [
-  'src/**/*.ts',
-  'src/**/*.d.ts',
-  'scripts/**/*.ts'
-];
+const sourceFiles = ['src/**/*.ts', 'src/**/*.d.ts'];
+const scriptFiles = ['scripts/**/*.ts'];
+const typeScriptFiles = [...sourceFiles, ...scriptFiles];
 
 export const config: Linter.Config[] = defineConfig([
   {
     files: typeScriptFiles
   },
   includeIgnoreFile(gitignorePath),
-  ...tseslint.configs.recommended.map((config) => {
-    const rest = { ...config };
-    delete (rest as Record<string, unknown>)['files'];
-    return rest;
-  }),
-  {
-    plugins: {
-      perfectionist: perfectionist
-    },
-    rules: {
-      'perfectionist/sort-interfaces': ['error', {
-        groups: ['property', 'method'],
-        order: 'asc',
-        type: 'alphabetical'
-      }],
-      'perfectionist/sort-classes': ['error', {
-        groups: [
-          'property',
-          'constructor',
-          'method'
+  ...getEslintConfigs(),
+  ...getTseslintConfigs(),
+  ...getStylisticConfigs(),
+  ...getImportXConfigs(),
+  ...getPerfectionistConfigs(),
+  ...getEslintImportResolverTypescriptConfigs(),
+  ...getEslintCommentsConfigs(),
+  ...getCustomPluginConfigs(),
+  ...getNoRestrictedSyntaxRulesConfigs(),
+  ...getObsidianTypingsConfigs(),
+  ...getOverrideConfigs()
+]);
+
+function getCustomPluginConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      files: typeScriptFiles,
+      plugins: {
+        custom: customEslintPlugin
+      },
+      rules: {
+        'custom/no-used-underscore-variables': 'error'
+      }
+    }
+  ]);
+}
+
+function getEslintCommentsConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      extends: [commentsConfigs.recommended],
+      files: typeScriptFiles,
+      rules: {
+        '@eslint-community/eslint-comments/require-description': 'error'
+      }
+    }
+  ]);
+}
+
+function getEslintConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      extends: [eslint.configs.recommended],
+      files: typeScriptFiles,
+      rules: {
+        'curly': 'error',
+        'eqeqeq': 'error',
+        'no-console': [
+          'error',
+          {
+            allow: [
+              'warn',
+              'error'
+            ]
+          }
         ],
-        newlinesBetween: 1,
-        newlinesInside: 1,
-        order: 'asc',
-        type: 'alphabetical'
-      }],
-      'perfectionist/sort-named-exports': ['error', {
-        order: 'asc',
-        type: 'alphabetical'
-      }],
-      'perfectionist/sort-named-imports': ['error', {
-        order: 'asc',
-        type: 'alphabetical'
-      }],
-      'perfectionist/sort-exports': 'error',
-      'perfectionist/sort-imports': 'error',
-      'perfectionist/sort-intersection-types': 'error',
-      'perfectionist/sort-union-types': 'error'
-    }
-  },
-  {
-    files: ['src/**/*.ts', 'src/**/*.d.ts'],
-    plugins: {
-      'obsidian-typings': obsidianTypingsPlugin
+        'no-else-return': [
+          'error',
+          {
+            allowElseIf: false
+          }
+        ],
+        'no-implicit-coercion': [
+          'error',
+          {
+            allow: [
+              '!!'
+            ]
+          }
+        ],
+        'no-lonely-if': 'error',
+        'no-nested-ternary': 'error',
+        'no-return-assign': 'error',
+        'no-sequences': 'error',
+        'no-template-curly-in-string': 'error',
+        'no-unneeded-ternary': 'error',
+        'no-useless-computed-key': 'error',
+        'no-useless-concat': 'error',
+        'no-useless-rename': 'error',
+        'no-useless-return': 'error',
+        'no-var': 'error',
+        'object-shorthand': 'error',
+        'prefer-arrow-callback': 'error',
+        'prefer-const': 'error',
+        'prefer-object-spread': 'error',
+        'prefer-rest-params': 'error',
+        'prefer-spread': 'error',
+        'prefer-template': 'error',
+        'yoda': 'error'
+      }
     },
-    rules: {
-      'obsidian-typings/augmentation-member-tags': 'error',
-      'obsidian-typings/constructor-base-restricted': 'error',
-      'obsidian-typings/constructor-getter-placement': 'error',
-      'obsidian-typings/file-extension': 'error',
-      'obsidian-typings/import-extensions': 'error',
-      'obsidian-typings/internals-interface-tags': 'error',
-      'obsidian-typings/jsdoc-empty-line-before-tags': 'error',
-      'obsidian-typings/no-declare-module-in-internals': 'error',
-      'obsidian-typings/no-inherit-doc-tag': 'error',
-      'obsidian-typings/no-import-alias-in-declare-global': 'error',
-      'obsidian-typings/no-interface-tags-in-augmentations': 'error',
-      'obsidian-typings/no-member-unofficial-in-internals': 'error',
-      'obsidian-typings/no-todo-tag': 'error',
-      'obsidian-typings/one-export-per-file': 'error',
-      'obsidian-typings/require-export-empty-in-augmentations': 'error',
-      'obsidian-typings/require-member-description': 'error',
-      'obsidian-typings/require-var-in-global-vars': 'error',
-      'obsidian-typings/window-member-file-sync': 'error'
+    {
+      files: scriptFiles,
+      rules: {
+        'no-console': 'off'
+      }
     }
-  },
-  {
-    files: typeScriptFiles,
-    rules: {
-      '@typescript-eslint/no-empty-object-type': 'off',
-      '@typescript-eslint/no-unused-vars': 'off'
+  ]);
+}
+
+function getEslintImportResolverTypescriptConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      settings: {
+        'import-x/resolver-next': [
+          createTypeScriptImportResolver({
+            alwaysTryTypes: true
+          })
+        ]
+      }
     }
-  },
-  ...defineConfig({
-    extends: [
-      stylistic.configs.recommended,
-      stylistic.configs.customize({
-        arrowParens: true,
-        braceStyle: '1tbs',
-        commaDangle: 'never',
-        semi: true
-      })
-    ],
-    files: typeScriptFiles,
-    rules: {
-      '@stylistic/indent': 'off',
-      '@stylistic/indent-binary-ops': 'off',
-      '@stylistic/jsx-one-expression-per-line': 'off',
-      '@stylistic/no-extra-semi': 'error',
-      '@stylistic/object-curly-newline': [
-        'error',
-        {
-          ExportDeclaration: {
-            minProperties: 2,
-            multiline: true
-          },
-          ImportDeclaration: {
-            minProperties: 2,
-            multiline: true
-          }
-        }
-      ],
-      '@stylistic/operator-linebreak': [
-        'error',
-        'before',
-        {
-          overrides: {
-            '=': 'after'
-          }
-        }
-      ],
-      '@stylistic/quotes': [
-        'error',
-        'single',
-        {
-          allowTemplateLiterals: 'never'
-        }
-      ]
-    }
-  }),
-  ...defineConfig([
+  ]);
+}
+
+function getImportXConfigs(): Linter.Config[] {
+  return defineConfig([
     {
       extends: [
         eslintPluginImportXFlatConfigs.recommended as Linter.Config,
@@ -196,21 +192,172 @@ export const config: Linter.Config[] = defineConfig([
       }
     },
     {
-      files: ['scripts/**/*.ts'],
+      files: scriptFiles,
       rules: {
         'import-x/no-nodejs-modules': 'off'
       }
     }
-  ]),
-  ...defineConfig([
+  ]);
+}
+
+function getNoRestrictedSyntaxRulesConfigs(): Linter.Config[] {
+  return defineConfig([
     {
-      settings: {
-        'import-x/resolver-next': [
-          createTypeScriptImportResolver({
-            alwaysTryTypes: true
-          })
+      files: typeScriptFiles,
+      rules: {
+        'no-restricted-syntax': [
+          'error',
+          {
+            message: 'Avoid dynamic import(). Use static imports instead. Only use dynamic imports for lazy/conditional loading (G10a).',
+            selector: 'ImportExpression'
+          }
         ]
       }
     }
-  ])
-]);
+  ]);
+}
+
+function getObsidianTypingsConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      files: sourceFiles,
+      plugins: {
+        'obsidian-typings': obsidianTypingsPlugin
+      },
+      rules: {
+        'obsidian-typings/augmentation-member-tags': 'error',
+        'obsidian-typings/constructor-base-restricted': 'error',
+        'obsidian-typings/constructor-getter-placement': 'error',
+        'obsidian-typings/file-extension': 'error',
+        'obsidian-typings/import-extensions': 'error',
+        'obsidian-typings/internals-interface-tags': 'error',
+        'obsidian-typings/jsdoc-empty-line-before-tags': 'error',
+        'obsidian-typings/no-declare-module-in-internals': 'error',
+        'obsidian-typings/no-inherit-doc-tag': 'error',
+        'obsidian-typings/no-import-alias-in-declare-global': 'error',
+        'obsidian-typings/no-interface-tags-in-augmentations': 'error',
+        'obsidian-typings/no-member-unofficial-in-internals': 'error',
+        'obsidian-typings/no-todo-tag': 'error',
+        'obsidian-typings/one-export-per-file': 'error',
+        'obsidian-typings/require-export-empty-in-augmentations': 'error',
+        'obsidian-typings/require-member-description': 'error',
+        'obsidian-typings/require-var-in-global-vars': 'error',
+        'obsidian-typings/window-member-file-sync': 'error'
+      }
+    }
+  ]);
+}
+
+function getOverrideConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      files: typeScriptFiles,
+      rules: {
+        '@typescript-eslint/no-empty-object-type': 'off',
+        '@typescript-eslint/no-unused-vars': 'off'
+      }
+    }
+  ]);
+}
+
+function getPerfectionistConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      plugins: {
+        perfectionist
+      },
+      rules: {
+        'perfectionist/sort-classes': ['error', {
+          groups: [
+            'property',
+            'constructor',
+            'method'
+          ],
+          newlinesBetween: 1,
+          newlinesInside: 1,
+          order: 'asc',
+          type: 'alphabetical'
+        }],
+        'perfectionist/sort-exports': 'error',
+        'perfectionist/sort-imports': 'error',
+        'perfectionist/sort-interfaces': ['error', {
+          groups: ['property', 'method'],
+          order: 'asc',
+          type: 'alphabetical'
+        }],
+        'perfectionist/sort-intersection-types': 'error',
+        'perfectionist/sort-named-exports': ['error', {
+          order: 'asc',
+          type: 'alphabetical'
+        }],
+        'perfectionist/sort-named-imports': ['error', {
+          order: 'asc',
+          type: 'alphabetical'
+        }],
+        'perfectionist/sort-union-types': 'error'
+      }
+    }
+  ]);
+}
+
+function getStylisticConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      extends: [
+        stylistic.configs.recommended,
+        stylistic.configs.customize({
+          arrowParens: true,
+          braceStyle: '1tbs',
+          commaDangle: 'never',
+          semi: true
+        })
+      ],
+      files: typeScriptFiles,
+      rules: {
+        '@stylistic/indent': 'off',
+        '@stylistic/indent-binary-ops': 'off',
+        '@stylistic/jsx-one-expression-per-line': 'off',
+        '@stylistic/no-extra-semi': 'error',
+        '@stylistic/object-curly-newline': [
+          'error',
+          {
+            ExportDeclaration: {
+              minProperties: 2,
+              multiline: true
+            },
+            ImportDeclaration: {
+              minProperties: 2,
+              multiline: true
+            }
+          }
+        ],
+        '@stylistic/operator-linebreak': [
+          'error',
+          'before',
+          {
+            overrides: {
+              '=': 'after'
+            }
+          }
+        ],
+        '@stylistic/quotes': [
+          'error',
+          'single',
+          {
+            allowTemplateLiterals: 'never'
+          }
+        ]
+      }
+    }
+  ]);
+}
+
+function getTseslintConfigs(): Linter.Config[] {
+  return defineConfig([
+    ...tseslint.configs.recommended.map((config) => {
+      const rest = { ...config };
+      delete (rest as Record<string, unknown>)['files'];
+      return rest;
+    })
+  ]);
+}

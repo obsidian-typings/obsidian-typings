@@ -1,6 +1,6 @@
 import { createJiti } from 'jiti';
 
-import { execFromRoot } from './helpers/exec.ts';
+import { execFromRoot } from './helpers/root.ts';
 
 const jiti = createJiti(import.meta.url);
 

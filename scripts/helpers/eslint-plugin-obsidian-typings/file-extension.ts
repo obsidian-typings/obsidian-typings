@@ -25,10 +25,8 @@ export const fileExtension = {
           if (normalized.endsWith('.d.ts')) {
             context.report({ node, messageId: 'shouldBeTs' });
           }
-        } else {
-          if (normalized.endsWith('.ts') && !normalized.endsWith('.d.ts')) {
-            context.report({ node, messageId: 'shouldBeDts' });
-          }
+        } else if (normalized.endsWith('.ts') && !normalized.endsWith('.d.ts')) {
+          context.report({ node, messageId: 'shouldBeDts' });
         }
       }
     };

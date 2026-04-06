@@ -1,11 +1,29 @@
+# IDE
 .vscode
+.idea
+*.iml
+
+# npm
+node_modules/
+
+# Build output
+dist/
+/docs
 /src/full-types.d.ts
 /src/obsidian/implementations/**/*.d.ts
 /tsconfig.tsbuildinfo
 /workflow-scripts
-dist/
-/docs
 index.d.ts
 index.ts
-node_modules/
+
+# Exclude sourcemaps
+*.map
+
+# Exclude macOS Finder (System Explorer) View States
+.DS_Store
+
+# Environment
+/.env
+
+# Claude Code
 .claude/settings.local.json
