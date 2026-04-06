@@ -5,6 +5,7 @@ import type {
 } from 'obsidian';
 
 import type { getHotkeyManagerConstructor } from '../../implementations/constructors/internals/getHotkeyManagerConstructor.d.ts';
+import type { HotkeyManagerCustomKeysRecord } from './HotkeyManagerCustomKeysRecord.d.ts';
 import type { HotkeyManagerDefaultKeysRecord } from './HotkeyManagerDefaultKeysRecord.d.ts';
 
 /**
@@ -33,6 +34,11 @@ export interface HotkeyManager {
    * Array of hotkey index to command ID.
    */
   bakedIds: string[];
+
+  /**
+   * Custom (non-Obsidian default) hotkeys, one to many mapping of command ID to assigned hotkey.
+   */
+  customKeys: HotkeyManagerCustomKeysRecord;
 
   /**
    * Default hotkeys, one to many mapping of command ID to assigned hotkey.

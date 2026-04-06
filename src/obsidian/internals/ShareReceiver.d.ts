@@ -43,9 +43,10 @@ export interface ShareReceiver {
   /**
    * Imports shared files.
    *
+   * @param files - Shared files.
    * @returns A promise that resolves when the files are imported.
    */
-  importFiles(): Promise<void>;
+  importFiles(files: SharedFile[]): Promise<void>;
 
   /**
    * Configures mobile native events to handle file and text sharing.

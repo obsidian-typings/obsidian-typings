@@ -185,6 +185,13 @@ declare module 'obsidian' {
     workQueue: PromisedQueue;
 
     /**
+     * Called by preload() which is in turn called by initialize()
+     *
+     * @unofficial
+     */
+    _preload(): Promise<void>;
+
+    /**
      * Execute onCleanCache callbacks if cache is clean.
      *
      * @unofficial
