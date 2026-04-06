@@ -54,6 +54,7 @@
     "@microsoft/api-extractor": "latest",
     "@stylistic/eslint-plugin": "latest",
     "@tsconfig/strictest": "latest",
+    "@types/markdown-it": "latest",
     "@types/semver": "latest",
     "@typescript-eslint/utils": "latest",
     "builtin-modules": "latest",

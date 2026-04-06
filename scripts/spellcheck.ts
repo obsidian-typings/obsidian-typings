@@ -1,4 +1,4 @@
-import { execFromRoot } from './helpers/exec.ts';
+import { execFromRoot } from './helpers/root.ts';
 
 export async function spellcheck(paths: string[] = []): Promise<void> {
   if (paths.length === 0) {

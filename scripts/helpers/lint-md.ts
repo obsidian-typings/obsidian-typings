@@ -1,6 +1,6 @@
 import { glob } from 'node:fs/promises';
 
-import { execFromRoot } from './exec.ts';
+import { execFromRoot } from './root.ts';
 
 interface LintMdParams {
   paths?: string[] | undefined;
