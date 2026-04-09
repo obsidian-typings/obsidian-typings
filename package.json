@@ -83,7 +83,9 @@
     "typescript-eslint": "latest"
   },
   "overrides": {
+    "eslint": "latest",
     "eslint-plugin-import": "npm:eslint-plugin-import-x@latest",
-    "type-fest": "latest"
+    "type-fest": "latest",
+    "typescript": "latest"
   }
 }

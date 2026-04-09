@@ -218,19 +218,19 @@ function getEslintConfigs(): Linter.Config[] {
             selector: 'TSTypeAnnotation TSTypeLiteral'
           },
           {
-            message: 'Do not use override on __ methods. Use a numbered variant instead, e.g., method2__() (L10).',
+            message: 'Do not use override on __ methods. Use a numbered variant instead, e.g., method2__().',
             selector: 'MethodDefinition[override=true][key.name=/.*__$/]'
           },
           {
-            message: 'Do not use double type assertions (as X as Y). Use createMockOf<T>() from src/internal/cast.ts instead (G10e).',
+            message: 'Do not use double type assertions (as X as Y). Use createMockOf<T>() from src/internal/cast.ts instead.',
             selector: 'TSAsExpression > TSAsExpression'
           },
           {
-            message: 'Do not use _ prefix on methods or functions. The _ prefix is for unused parameters only (G10e).',
+            message: 'Do not use _ prefix on methods or functions. The _ prefix is for unused parameters only.',
             selector: 'MethodDefinition[key.name=/^_/]:not([override=true])'
           },
           {
-            message: 'Do not use _ prefix on methods or functions. The _ prefix is for unused parameters only (G10e).',
+            message: 'Do not use _ prefix on methods or functions. The _ prefix is for unused parameters only.',
             selector: 'FunctionDeclaration[id.name=/^_/]'
           },
           {
@@ -238,11 +238,11 @@ function getEslintConfigs(): Linter.Config[] {
             selector: 'ImportSpecifier[local.name=/Mock/]:not([imported.name=/Mock/])'
           },
           {
-            message: 'Avoid dynamic import(). Use static imports instead. Only use dynamic imports for lazy/conditional loading (G10a).',
+            message: 'Avoid dynamic import(). Use static imports instead. Only use dynamic imports for lazy/conditional loading.',
             selector: 'ImportExpression'
           },
           {
-            message: 'Do not use `{} as T`. Use `createMockOf<T>()` from src/internal/cast.ts instead (G10e).',
+            message: 'Do not use `{} as T`. Use `createMockOf<T>()` from src/internal/cast.ts instead.',
             selector: 'TSAsExpression > ObjectExpression[properties.length=0]'
           },
           {
@@ -299,12 +299,12 @@ function getEslintConfigs(): Linter.Config[] {
         'no-constructor-return': 'off',
         'no-restricted-imports': ['error', {
           paths: [{
-            message: 'Do not import obsidian-typings in src/obsidian/. Inline needed type shapes in src/internal/types.ts instead (L3).',
+            message: 'Do not import obsidian-typings in src/obsidian/. Inline needed type shapes in src/internal/types.ts instead.',
             name: 'obsidian-typings'
           }],
           patterns: [{
             group: ['obsidian-typings/*'],
-            message: 'Do not import obsidian-typings in src/obsidian/. Inline needed type shapes in src/internal/types.ts instead (L3).'
+            message: 'Do not import obsidian-typings in src/obsidian/. Inline needed type shapes in src/internal/types.ts instead.'
           }]
         }]
       }

@@ -44,7 +44,7 @@ export const noUsedUnderscoreParams: Rule.RuleModule = {
           if (hasBodyReferences) {
             context.report({
               data: { name: variable.name },
-              message: 'Parameter "{{ name }}" has a `_` prefix but is used. Remove the `_` prefix since the parameter is not unused (G10e).',
+              message: 'Parameter "{{ name }}" has a `_` prefix but is used. Remove the `_` prefix since the parameter is not unused.',
               node: defNode.name
             });
           }

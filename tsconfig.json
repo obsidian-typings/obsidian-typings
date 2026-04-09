@@ -16,6 +16,9 @@
     "moduleResolution": "NodeNext",
     "noEmit": true,
     "target": "ES2024",
+    "types": [
+      "node"
+    ],
     "skipLibCheck": false,
     "verbatimModuleSyntax": true
   },
