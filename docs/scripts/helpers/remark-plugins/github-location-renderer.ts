@@ -19,6 +19,11 @@ interface HeadingChild {
   value?: string;
 }
 
+interface HeadingNodeWithChildren {
+  children: HeadingChild[];
+  depth: number;
+}
+
 interface LinkListNode {
   children: LinkNode[];
 }
@@ -56,7 +61,7 @@ export function githubLocationRenderer(): (tree: Root) => void {
         return;
       }
 
-      const headingNode = node as { children: HeadingChild[]; depth: number } & typeof node;
+      const headingNode = node as HeadingNodeWithChildren & typeof node;
       const firstChild = headingNode.children[0];
       if (firstChild?.value !== 'Defined in') {
         return;

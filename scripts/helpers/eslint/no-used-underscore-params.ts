@@ -8,6 +8,10 @@
  */
 import type { Rule } from 'eslint';
 
+interface NodeWithBody {
+  body?: Rule.Node;
+}
+
 export const noUsedUnderscoreParams: Rule.RuleModule = {
   create(context) {
     return {
@@ -27,7 +31,7 @@ export const noUsedUnderscoreParams: Rule.RuleModule = {
 
           // Check if the parameter has references in the function body (not just
           // In the return type annotation, e.g., type predicates like `asserts _obj is T`).
-          const funcBody = (node as { body?: Rule.Node }).body;
+          const funcBody = (node as NodeWithBody).body;
           const bodyRange = funcBody?.range;
           const hasBodyReferences = variable.references.some((ref) => {
             if (!ref.isRead()) {

@@ -218,6 +218,10 @@ function getEslintConfigs(): Linter.Config[] {
             selector: 'TSTypeAnnotation TSTypeLiteral'
           },
           {
+            message: 'Do not use anonymous inline object types in type assertions. Define a named interface instead.',
+            selector: 'TSAsExpression TSTypeLiteral'
+          },
+          {
             message: 'Do not use override on __ methods. Use a numbered variant instead, e.g., method2__().',
             selector: 'MethodDefinition[override=true][key.name=/.*__$/]'
           },
