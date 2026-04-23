@@ -184,9 +184,10 @@ export interface Plugins {
    * Load a plugin by its ID.
    *
    * @param id - Plugin ID.
+   * @param isUserEnabled - Whether the plugin was enabled by the user.
    * @returns The loaded plugin instance.
    */
-  loadPlugin(id: string): Promise<Plugin>;
+  loadPlugin(id: string, isUserEnabled?: boolean): Promise<Plugin>;
 
   /**
    * Handle raw file system change events for plugin config files.
@@ -225,7 +226,8 @@ export interface Plugins {
    * Unload a plugin by ID.
    *
    * @param id - Plugin ID.
+   * @param isUserDisabled - Whether the plugin was disabled by the user.
    * @returns A promise that resolves when the plugin is unloaded.
    */
-  unloadPlugin(id: string): Promise<void>;
+  unloadPlugin(id: string, isUserDisabled?: boolean): Promise<void>;
 }

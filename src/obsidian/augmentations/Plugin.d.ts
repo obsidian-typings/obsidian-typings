@@ -9,6 +9,20 @@ declare module 'obsidian' {
    */
   interface Plugin extends Component {
     /**
+     * The last time the plugin's data was modified.
+     *
+     * @unofficial
+     */
+    _lastDataModifiedTime: number;
+
+    /**
+     * Whether the plugin was disabled by the user.
+     *
+     * @unofficial
+     */
+    _userDisabled: boolean;
+
+    /**
      * The Obsidian app instance.
      *
      * @official
