@@ -34,12 +34,12 @@ declare module 'obsidian' {
     /**
      * If provided, the option will be hidden if the function returns `true`.
      *
-     * @param config - Read-only copy of the current view configuration.
      * @returns Whether the option should be hidden.
      *
      * @official
      * @since 1.10.2
+     * @deprecated - Added only for typing purposes. Use {@link BasesOption.shouldHide} instead.
      */
-    shouldHide?(config?: BasesViewConfig): boolean;
+    shouldHide__?(): boolean;
   }
 }

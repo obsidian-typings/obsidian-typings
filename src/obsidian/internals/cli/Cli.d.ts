@@ -7,6 +7,7 @@ import type {
 import type { getCliConstructor } from '../../implementations/constructors/internals/getCliConstructor.d.ts';
 import type { CliHandlerEntry } from './CliHandlerEntry.d.ts';
 import type { CliTreeNode } from './CliTreeNode.d.ts';
+import type { TryResolveFileParams } from './TryResolveFileParams.d.ts';
 
 /**
  * Command-line interface handler for Obsidian.

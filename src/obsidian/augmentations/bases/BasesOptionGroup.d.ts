@@ -38,13 +38,13 @@ declare module 'obsidian' {
     /**
      * If provided, the group will be hidden if the function returns `true`.
      *
-     * @param config - Read-only copy of the current view configuration.
      * @returns Whether the group should be hidden.
      *
      * @public
      * @since 1.10.2
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link BasesOptionGroup.shouldHide} instead.
      */
-    shouldHide?(config?: BasesViewConfig): boolean;
+    shouldHide__?(): boolean;
   }
 }
