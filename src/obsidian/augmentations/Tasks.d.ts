@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * A task manager.
+   *
    * @since 0.10.2
    */
   interface Tasks {

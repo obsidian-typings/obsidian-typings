@@ -10,6 +10,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Manage the creation, deletion and renaming of files from the UI.
+   *
    * @since 0.9.7
    */
   interface FileManager {

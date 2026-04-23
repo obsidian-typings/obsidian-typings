@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Manages keymap lifecycle for different {@link Scope}s.
+   *
    * @since 0.13.9
    */
   interface Keymap {

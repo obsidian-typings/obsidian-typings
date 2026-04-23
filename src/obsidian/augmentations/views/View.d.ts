@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Base class for all views.
+   *
    * @since 0.9.7
    */
   interface View extends Component {

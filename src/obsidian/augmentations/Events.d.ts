@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Event emitter implementation
+   *
    * @since 0.9.7
    */
   interface Events {

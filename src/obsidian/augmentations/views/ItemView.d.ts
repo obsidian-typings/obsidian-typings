@@ -6,6 +6,7 @@ export {};
 declare module 'obsidian' {
   /**
    * A view that displays an item.
+   *
    * @since 0.9.7
    */
   interface ItemView extends View {

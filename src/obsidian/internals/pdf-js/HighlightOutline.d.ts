@@ -2,6 +2,7 @@ import type { Outline } from './Outline.d.ts';
 
 /**
  * Outline representing a PDF text highlight annotation.
+ *
  * @public
  * @unofficial
  */

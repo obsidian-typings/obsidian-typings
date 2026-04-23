@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Notification component. Use to present timely, high-value information.
+   *
    * @since 0.9.7
    */
   interface Notice {

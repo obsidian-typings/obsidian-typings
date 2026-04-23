@@ -6,6 +6,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Workspace sidedock.
+   *
    * @since 0.15.4
    */
   interface WorkspaceSidedock extends WorkspaceSplit {

@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * A renderer for markdown.
+   *
    * @since 0.9.7
    */
   interface MarkdownRenderer extends MarkdownRenderChild, MarkdownPreviewEvents, HoverParent {

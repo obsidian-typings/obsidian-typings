@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Base class for all plugins.
+   *
    * @since 0.9.7
    */
   interface Plugin extends Component {

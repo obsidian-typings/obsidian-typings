@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * A secret storage.
+   *
    * @since 1.11.4
    */
   interface SecretStorage {

@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * A setting.
+   *
    * @since 0.9.7
    */
   interface Setting {

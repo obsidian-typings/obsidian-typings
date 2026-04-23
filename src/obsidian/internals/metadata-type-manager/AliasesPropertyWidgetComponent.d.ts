@@ -36,8 +36,6 @@ export interface AliasesPropertyWidgetComponent extends PropertyWidgetComponentB
 
   /**
    * Handle focus event.
-   *
-   * @param mode - The focus mode.
    */
   onFocus(): void;
 

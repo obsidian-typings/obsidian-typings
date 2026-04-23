@@ -19,8 +19,6 @@ export interface FilePropertyWidgetComponent extends PropertyWidgetComponentBase
 
   /**
    * Handle focus event.
-   *
-   * @param mode - The focus mode.
    */
   onFocus(): void;
 

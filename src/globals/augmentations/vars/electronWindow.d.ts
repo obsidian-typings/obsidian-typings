@@ -5,6 +5,7 @@ export {};
 declare global {
   /**
    * Electron BrowserWindow instance for the current window.
+   *
    * @unofficial
    */
   var electronWindow: ElectronWindow;

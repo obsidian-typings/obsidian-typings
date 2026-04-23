@@ -11,6 +11,7 @@ declare module 'obsidian' {
    * Implementation of the vault adapter for mobile devices.
    *
    * `app.vault.adapter` returns an instance of `CapacitorAdapter` on mobile devices.
+   *
    * @since 1.7.2
    */
   interface CapacitorAdapter extends DataAdapterEx {

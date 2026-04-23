@@ -2,6 +2,7 @@ import type { HighlightOutline } from './HighlightOutline.d.ts';
 
 /**
  * Generates outlines around highlighted regions in a PDF document.
+ *
  * @public
  * @unofficial
  */

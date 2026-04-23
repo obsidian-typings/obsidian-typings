@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Dropdown component
+   *
    * @since 0.9.7
    */
   interface DropdownComponent extends ValueComponent<string> {

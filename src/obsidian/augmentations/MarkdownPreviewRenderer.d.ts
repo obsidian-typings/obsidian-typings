@@ -7,6 +7,7 @@ export {};
 declare module 'obsidian' {
   /**
    * The renderer of the markdown preview.
+   *
    * @since 0.9.7
    */
   interface MarkdownPreviewRenderer {
@@ -45,7 +46,6 @@ declare module 'obsidian' {
      *
      * @param language - The language of the code block.
      * @param handler - The handler of the code block.
-     * @param ctx - The context of the code block post processor.
      * @returns The code block post processor.
      *
      * @official

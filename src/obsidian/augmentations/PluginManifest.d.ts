@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Metadata about a Community plugin.
+   *
    * @see {@link https://docs.obsidian.md/Reference/Manifest}.
    */
   interface PluginManifest {

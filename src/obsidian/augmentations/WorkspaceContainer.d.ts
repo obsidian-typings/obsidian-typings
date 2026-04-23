@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Workspace container.
+   *
    * @since 0.15.4
    */
   interface WorkspaceContainer extends WorkspaceSplit {

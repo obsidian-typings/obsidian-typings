@@ -25,6 +25,7 @@ export {};
 declare module 'obsidian' {
   /**
    * The main app object.
+   *
    * @since 0.9.7
    */
   interface App {

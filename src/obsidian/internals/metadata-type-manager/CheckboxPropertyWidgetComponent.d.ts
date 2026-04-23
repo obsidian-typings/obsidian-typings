@@ -19,8 +19,6 @@ export interface CheckboxPropertyWidgetComponent extends PropertyWidgetComponent
 
   /**
    * Handle focus event.
-   *
-   * @param mode - The focus mode.
    */
   onFocus(): void;
 

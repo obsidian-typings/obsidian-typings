@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * A file.
+   *
    * @since 0.9.7
    */
   interface TFile extends TAbstractFile {

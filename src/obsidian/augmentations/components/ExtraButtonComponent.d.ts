@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Extra button component, for secondary actions.
+   *
    * @since 0.9.7
    */
   interface ExtraButtonComponent extends BaseComponent {

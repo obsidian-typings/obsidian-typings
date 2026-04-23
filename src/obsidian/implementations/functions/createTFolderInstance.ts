@@ -1,13 +1,18 @@
-import type { App } from 'obsidian';
-
-import { TFolder } from 'obsidian';
+import type {
+  App,
+  TFolder
+} from 'obsidian';
 
 import { getTFolderConstructor } from '../constructors/augmentations/getTFolderConstructor.ts';
 import { parentFolderPath } from '../utils/PathUtils.ts';
 
 /**
- * Creates and properly initializes the instance of TFolder even the underlying folder does not exist.
+ * Creates and properly initializes the instance of {@link TFolder} even the underlying folder does not exist.
  * This doesn't create the missing folder on the file system.
+ *
+ * @param app - The Obsidian app instance.
+ * @param path - The path to the folder.
+ * @returns The created {@link TFolder} instance.
  *
  * @public
  * @unofficial

@@ -1,5 +1,6 @@
 /**
  * The direction of the text.
+ *
  * @public
  * @unofficial
  */

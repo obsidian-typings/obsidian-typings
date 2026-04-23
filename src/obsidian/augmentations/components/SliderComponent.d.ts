@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * A slider component.
+   *
    * @since 0.9.7
    */
   interface SliderComponent extends ValueComponent<number> {

@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * A component that allows you to format dates using `Moment.js`.
+   *
    * @since 0.9.7
    */
   interface MomentFormatComponent extends TextComponent {

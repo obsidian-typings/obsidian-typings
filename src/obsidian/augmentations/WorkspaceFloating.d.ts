@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Workspace floating.
+   *
    * @since 0.15.2
    */
   interface WorkspaceFloating extends WorkspaceParent {

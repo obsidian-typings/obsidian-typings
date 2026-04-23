@@ -9,7 +9,7 @@ declare module 'obsidian' {
    * If performance is a problem, consider using `prepareSimpleSearch` instead.
    *
    * @param query - the fuzzy query.
-   * @return fn - the callback export function to apply the search on or `null` if the query is empty.
+   * @returns fn - the callback export function to apply the search on or `null` if the query is empty.
    *
    * @official
    */

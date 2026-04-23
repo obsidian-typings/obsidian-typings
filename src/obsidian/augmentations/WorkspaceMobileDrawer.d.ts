@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Workspace mobile drawer.
+   *
    * @since 1.6.6
    */
   interface WorkspaceMobileDrawer extends WorkspaceParent {

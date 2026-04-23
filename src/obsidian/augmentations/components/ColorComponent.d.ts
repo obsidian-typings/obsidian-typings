@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Color picker component. Values are by default 6-digit hash-prefixed hex strings like `#000000`.
+   *
    * @since 1.0.0
    */
   interface ColorComponent extends ValueComponent<string> {

@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Information about the key combination.
+   *
    * @since 0.10.4
    */
   interface KeymapInfo {

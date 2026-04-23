@@ -5,6 +5,7 @@ export {};
 declare global {
   /**
    * Testing utilities for PDF.js.
+   *
    * @unofficial
    */
   var pdfjsTestingUtils: PdfJsTestingUtils;

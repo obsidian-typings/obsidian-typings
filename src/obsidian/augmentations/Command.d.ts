@@ -83,7 +83,7 @@ declare module 'obsidian' {
     /**
      * Whether holding the hotkey should repeatedly trigger this command.
      *
-     * @defaultValue false.
+     * @default `false`.
      * @official
      */
     repeatable?: boolean;

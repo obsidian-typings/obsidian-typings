@@ -1,3 +1,4 @@
+import type { FocusMode } from '../FocusMode.d.ts';
 import type { PropertyRenderContext } from '../PropertyRenderContext.d.ts';
 import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.d.ts';
 
@@ -43,7 +44,7 @@ export interface TextPropertyWidgetComponent extends PropertyWidgetComponentBase
    *
    * @param mode - The focus mode.
    */
-  onFocus(): void;
+  onFocus(mode?: FocusMode): void;
 
   /**
    * Render the property widget.

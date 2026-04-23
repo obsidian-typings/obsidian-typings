@@ -5,6 +5,7 @@ export {};
 declare global {
   /**
    * Scrypt key derivation function library for password-based encryption.
+   *
    * @unofficial
    * @deprecated - Added only for typing purposes. Use {@link scrypt} instead.
    */

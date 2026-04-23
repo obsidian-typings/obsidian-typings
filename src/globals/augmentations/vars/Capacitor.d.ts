@@ -5,6 +5,7 @@ export {};
 declare global {
   /**
    * Registry of available Capacitor platform implementations.
+   *
    * @unofficial
    */
   var Capacitor: typeof CapacitorInstance;

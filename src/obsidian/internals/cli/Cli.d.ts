@@ -98,11 +98,11 @@ export interface Cli {
   /**
    * Try to resolve a file from CLI input parameters.
    *
-   * @param params - Object with optional `path` or `file` properties.
+   * @param params - Parameters for trying to resolve a file.
    * @param requireFile - Whether a file is required (throws if not found when `true`).
    * @returns The resolved file.
    */
-  tryResolveFile(params: { path?: string; file?: string }, requireFile?: boolean): TFile;
+  tryResolveFile(params: TryResolveFileParams, requireFile?: boolean): TFile;
 
   /**
    * Unregister a CLI command handler.

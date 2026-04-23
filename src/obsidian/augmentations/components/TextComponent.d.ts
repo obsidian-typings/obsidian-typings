@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * A text component.
+   *
    * @since 0.9.21
    */
   interface TextComponent extends AbstractTextComponent<HTMLInputElement> {

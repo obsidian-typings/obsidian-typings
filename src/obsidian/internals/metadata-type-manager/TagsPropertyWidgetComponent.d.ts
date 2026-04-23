@@ -20,8 +20,6 @@ export interface TagsPropertyWidgetComponent extends PropertyWidgetComponentBase
 
   /**
    * Handle focus event.
-   *
-   * @param mode - The focus mode.
    */
   onFocus(): void;
 

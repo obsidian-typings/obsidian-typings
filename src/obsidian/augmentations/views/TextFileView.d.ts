@@ -6,6 +6,7 @@ declare module 'obsidian' {
    *
    * Note that by default, this view only saves when it's closing. To implement auto-save, your editor should
    * call `this.requestSave()` when the content is changed.
+   *
    * @since 0.10.12
    */
   interface TextFileView extends EditableFileView {

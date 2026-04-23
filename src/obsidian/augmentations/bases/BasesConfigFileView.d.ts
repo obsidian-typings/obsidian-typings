@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Configuration for a single view in a Bases config file.
+   *
    * @since 1.10.0
    */
   interface BasesConfigFileView {

@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * A search component.
+   *
    * @since 0.9.21
    */
   interface SearchComponent extends AbstractTextComponent<HTMLInputElement> {

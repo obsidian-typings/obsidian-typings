@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * A button component.
+   *
    * @since 0.9.7
    */
   interface ButtonComponent extends BaseComponent {

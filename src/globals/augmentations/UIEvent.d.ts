@@ -1,3 +1,5 @@
+import type { UIEventConstructor } from '../../obsidian/internals/constructors/UIEventConstructor.d.ts';
+
 export {};
 
 declare global {
@@ -32,7 +34,6 @@ declare global {
      *
      * @typeParam T - The type to check.
      * @param type - The type to check.
-     * @param data - The constructor arguments.
      * @returns Whether the event is an instance of the type.
      * @example
      * ```ts
@@ -42,8 +43,6 @@ declare global {
      * ```
      * @official
      */
-    instanceOf<T>(type: {
-      new (...data: unknown[]): T;
-    }): this is T;
+    instanceOf<T>(type: UIEventConstructor<T>): this is T;
   }
 }

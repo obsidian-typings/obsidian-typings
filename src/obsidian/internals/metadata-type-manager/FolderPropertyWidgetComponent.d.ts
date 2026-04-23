@@ -19,8 +19,6 @@ export interface FolderPropertyWidgetComponent extends PropertyWidgetComponentBa
 
   /**
    * Handle focus event.
-   *
-   * @param mode - The focus mode.
    */
   onFocus(): void;
 

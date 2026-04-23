@@ -1,3 +1,5 @@
+import type { NodeConstructor } from '../../obsidian/internals/constructors/NodeConstructor.d.ts';
+
 export {};
 
 declare global {
@@ -191,9 +193,7 @@ declare global {
      * ```
      * @official
      */
-    instanceOf<T>(type: {
-      new (): T;
-    }): this is T;
+    instanceOf<T>(type: NodeConstructor<T>): this is T;
 
     /**
      * Sets the children of the node.

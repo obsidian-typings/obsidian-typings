@@ -71,7 +71,7 @@ declare module 'obsidian' {
      *   }
      * }
      * ```
-     * @virtual
+     * @abstract
      * @official
      * @since 0.9.7
      */
@@ -80,7 +80,7 @@ declare module 'obsidian' {
     /**
      * Override this to unload your component
      *
-     * @virtual
+     * @abstract
      * @official
      * @since 0.9.7
      */
@@ -235,7 +235,7 @@ declare module 'obsidian' {
      *   }
      * }
      * ```
-     * @virtual
+     * @abstract
      * @official
      * @since 0.9.7
      */

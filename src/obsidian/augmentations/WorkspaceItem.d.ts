@@ -6,6 +6,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Workspace item.
+   *
    * @since 0.10.2
    */
   interface WorkspaceItem extends Events {

@@ -5,6 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * A toggle component.
+   *
    * @since 0.9.7
    */
   interface ToggleComponent extends ValueComponent<boolean> {

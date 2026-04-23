@@ -141,7 +141,6 @@ declare module 'obsidian' {
     /**
      * Set the callback to be called when there are no suggestions.
      *
-     * @param callback - The callback to be called when there are no suggestions.
      * @official
      * @since 0.9.20
      */

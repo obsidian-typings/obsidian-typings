@@ -9,6 +9,7 @@ export {};
 declare module 'obsidian' {
   /**
    * Work with files and folders stored inside a vault.
+   *
    * @see {@link https://docs.obsidian.md/Plugins/Vault}.
    * @since 0.9.7
    */

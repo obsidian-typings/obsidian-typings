@@ -3,6 +3,7 @@ export {};
 declare module 'obsidian' {
   /**
    * The base class for all components.
+   *
    * @since 0.10.3
    */
   interface BaseComponent {

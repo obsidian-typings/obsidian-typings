@@ -6,6 +6,7 @@ export {};
 declare global {
   /**
    * Registry of available Capacitor platform implementations.
+   *
    * @unofficial
    */
   // eslint-disable-next-line import-x/no-deprecated -- No other way.

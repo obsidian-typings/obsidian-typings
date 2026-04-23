@@ -112,24 +112,28 @@ export interface GraphNode {
 
   /**
    * Get the displayed text associated to the node.
+   *
    * @returns The displayed text of the node.
    */
   getDisplayText(): string;
 
   /**
    * Get the current fill color.
+   *
    * @returns The color of the node.
    */
   getFillColor(): GraphColorAttributes;
 
   /**
    * Get the ids of connected nodes (back and forward links).
+   *
    * @returns An array of string ids of connected nodes.
    */
   getRelated(): string[];
 
   /**
    * Get the current size of the node, after weight and node size multiplier have been applied.
+   *
    * @returns The size of the node.
    */
   getSize(): number;

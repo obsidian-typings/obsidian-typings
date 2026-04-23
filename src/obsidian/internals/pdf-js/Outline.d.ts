@@ -1,5 +1,6 @@
 /**
  * Represents an SVG outline path for PDF annotations.
+ *
  * @public
  * @unofficial
  */
