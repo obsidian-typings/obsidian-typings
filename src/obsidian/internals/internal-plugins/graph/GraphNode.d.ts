@@ -15,58 +15,94 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  * @unofficial
  */
 export interface GraphNode {
-  /** PixiJS element for the circle, child of `GraphRenderer.hanger`. */
+  /**
+   * PixiJS element for the circle, child of `GraphRenderer.hanger`.
+   */
   circle: Graphics | null;
 
-  /** Computed color for the node. */
+  /**
+   * Computed color for the node.
+   */
   color: GraphColorAttributes;
 
-  /** Current fade alpha value controlling the node's transparency during transitions. */
+  /**
+   * Current fade alpha value controlling the node's transparency during transitions.
+   */
   fadeAlpha: number;
 
-  /** Indicates if the text needs to be re-rendered when the node is rendered. */
+  /**
+   * Indicates if the text needs to be re-rendered when the node is rendered.
+   */
   fontDirty: boolean;
 
-  /** Record of forward links. Keys are the id of the neighbor nodes. */
+  /**
+   * Record of forward links. Keys are the id of the neighbor nodes.
+   */
   forward: Record<string, GraphLink>;
 
-  /** Forced x position when the node is dragged. */
+  /**
+   * Forced x position when the node is dragged.
+   */
   fx: null | number;
 
-  /** Forced y position when the node is dragged. */
+  /**
+   * Forced y position when the node is dragged.
+   */
   fy: null | number;
 
-  /** Colored circle added if the node is highlighted, child of `GraphNode.circle`. */
+  /**
+   * Colored circle added if the node is highlighted, child of `GraphNode.circle`.
+   */
   highlight: Graphics | null;
 
-  /** ID of the node (path, tag, or name for non-existing files). */
+  /**
+   * ID of the node (path, tag, or name for non-existing files).
+   */
   id: string;
 
-  /** Displacement of the text, changed when the node is hovered */
+  /**
+   * Displacement of the text, changed when the node is hovered
+   */
   moveText: number;
 
-  /** Whether the node graphics have been rendered. */
+  /**
+   * Whether the node graphics have been rendered.
+   */
   rendered: boolean;
 
-  /** `GraphRenderer` managing this node */
+  /**
+   * `GraphRenderer` managing this node
+   */
   renderer: GraphRenderer;
 
-  /** Record of backward links. Keys are the id of the neighbor nodes. */
+  /**
+   * Record of backward links. Keys are the id of the neighbor nodes.
+   */
   reverse: Record<string, GraphLink>;
 
-  /** PixiJS element for the name, child of `GraphNode.circle`. */
+  /**
+   * PixiJS element for the name, child of `GraphNode.circle`.
+   */
   text: null | PIXIText;
 
-  /** Type of the node, can be of value `"tag"`, `"unresolved"`, `"attachment"`, or an empty string for markdown nodes. */
+  /**
+   * Type of the node, can be of value `"tag"`, `"unresolved"`, `"attachment"`, or an empty string for markdown nodes.
+   */
   type: string;
 
-  /** Weight of the node depending on the number of related nodes (forwards and backward). */
+  /**
+   * Weight of the node depending on the number of related nodes (forwards and backward).
+   */
   weight: number;
 
-  /** X-axis position of the node in the graph */
+  /**
+   * X-axis position of the node in the graph
+   */
   x: number;
 
-  /** Y-axis position of the node in the graph */
+  /**
+   * Y-axis position of the node in the graph
+   */
   y: number;
 
   /**

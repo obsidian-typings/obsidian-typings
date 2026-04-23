@@ -8,10 +8,14 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface TagsPropertyWidgetComponent extends PropertyWidgetComponentBase {
-  /** The multiselect component for the property widget. */
+  /**
+   * The multiselect component for the property widget.
+   */
   multiselect: Multiselect;
 
-  /** The type of the property widget. */
+  /**
+   * The type of the property widget.
+   */
   type: 'tags';
 
   /**

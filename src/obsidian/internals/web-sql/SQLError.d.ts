@@ -5,9 +5,13 @@
  * @unofficial
  */
 export interface SQLError {
-  /** Numeric error code identifying the type of error. */
+  /**
+   * Numeric error code identifying the type of error.
+   */
   code: number;
 
-  /** Human-readable error message. */
+  /**
+   * Human-readable error message.
+   */
   message: string;
 }

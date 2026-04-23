@@ -8,13 +8,19 @@ import type { EdgeIndexData } from './EdgeIndexData.d.ts';
  * @unofficial
  */
 export interface EdgeIndex extends EdgeIndexBase {
-  /** Maximum number of entries per R-tree node before splitting. */
+  /**
+   * Maximum number of entries per R-tree node before splitting.
+   */
   _maxEntries: number;
 
-  /** Minimum number of entries per R-tree node before merging. */
+  /**
+   * Minimum number of entries per R-tree node before merging.
+   */
   _minEntries: number;
 
-  /** Root data node of the R-tree. */
+  /**
+   * Root data node of the R-tree.
+   */
   data: EdgeIndexData;
 
   /**

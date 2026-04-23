@@ -5,9 +5,13 @@
  * @unofficial
  */
 export interface CanvasEmbed {
-  /** Path to the embedded file. */
+  /**
+   * Path to the embedded file.
+   */
   file: string;
 
-  /** Optional subpath within the file (e.g., heading or block reference). */
+  /**
+   * Optional subpath within the file (e.g., heading or block reference).
+   */
   subpath?: string;
 }

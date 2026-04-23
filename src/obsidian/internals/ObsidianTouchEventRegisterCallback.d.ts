@@ -5,7 +5,9 @@
  * @unofficial
  */
 export interface ObsidianTouchEventRegisterCallback {
-  /** Cancel the current touch gesture. */
+  /**
+   * Cancel the current touch gesture.
+   */
   cancel(): void;
 
   /**

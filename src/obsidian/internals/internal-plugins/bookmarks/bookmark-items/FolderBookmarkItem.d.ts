@@ -7,9 +7,13 @@ import type { BookmarkItem } from './BookmarkItem.d.ts';
  * @unofficial
  */
 export interface FolderBookmarkItem extends BookmarkItem {
-  /** Vault-relative path to the bookmarked folder. */
+  /**
+   * Vault-relative path to the bookmarked folder.
+   */
   path: string;
 
-  /** Discriminator indicating this is a folder bookmark. */
+  /**
+   * Discriminator indicating this is a folder bookmark.
+   */
   type: 'folder';
 }

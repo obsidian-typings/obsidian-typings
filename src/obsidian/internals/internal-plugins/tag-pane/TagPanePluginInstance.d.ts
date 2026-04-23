@@ -10,12 +10,18 @@ import type { TagPanePlugin } from './TagPanePlugin.d.ts';
  * @unofficial
  */
 export interface TagPanePluginInstance extends InternalPluginInstance<TagPanePlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Whether this plugin is enabled by default. */
+  /**
+   * Whether this plugin is enabled by default.
+   */
   defaultOn: true;
 
-  /** Reference to the tag pane plugin registration. */
+  /**
+   * Reference to the tag pane plugin registration.
+   */
   plugin: TagPanePlugin;
 }

@@ -15,6 +15,8 @@ export interface OutgoingLinkView extends InfoFileView {
    */
   getViewType(): typeof ViewType.OutgoingLink;
 
-  /** Refresh the outgoing links list. */
+  /**
+   * Refresh the outgoing links list.
+   */
   update(): void;
 }

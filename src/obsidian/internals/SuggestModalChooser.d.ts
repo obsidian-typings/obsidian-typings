@@ -7,25 +7,39 @@
  * @unofficial
  */
 export interface SuggestModalChooser<T, TModal> {
-  /** Reference to the owning modal. */
+  /**
+   * Reference to the owning modal.
+   */
   chooser: TModal;
 
-  /** Container element for the suggestion list. */
+  /**
+   * Container element for the suggestion list.
+   */
   containerEl: HTMLDivElement;
 
-  /** Number of suggestions visible at once. */
+  /**
+   * Number of suggestions visible at once.
+   */
   numVisibleItems: number;
 
-  /** Height of each suggestion row in pixels. */
+  /**
+   * Height of each suggestion row in pixels.
+   */
   rowHeight: number;
 
-  /** Index of the currently selected suggestion. */
+  /**
+   * Index of the currently selected suggestion.
+   */
   selectedItem: number;
 
-  /** DOM elements for each suggestion row. */
+  /**
+   * DOM elements for each suggestion row.
+   */
   suggestions: HTMLDivElement[];
 
-  /** Current suggestion values, or `null` if none. */
+  /**
+   * Current suggestion values, or `null` if none.
+   */
   values: null | T[];
 
   /**

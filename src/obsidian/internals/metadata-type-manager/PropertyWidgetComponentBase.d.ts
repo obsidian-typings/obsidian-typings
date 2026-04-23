@@ -7,7 +7,9 @@ import type { FocusMode } from '../FocusMode.d.ts';
  * @unofficial
  */
 export interface PropertyWidgetComponentBase {
-  /** The type of the property widget. */
+  /**
+   * The type of the property widget.
+   */
   type: string;
 
   /**

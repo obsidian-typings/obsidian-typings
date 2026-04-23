@@ -7,10 +7,14 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface CheckboxPropertyWidgetComponent extends PropertyWidgetComponentBase {
-  /** The checkbox element for the property widget. */
+  /**
+   * The checkbox element for the property widget.
+   */
   checkboxEl: HTMLInputElement;
 
-  /** The type of the property widget. */
+  /**
+   * The type of the property widget.
+   */
   type: 'checkbox';
 
   /**

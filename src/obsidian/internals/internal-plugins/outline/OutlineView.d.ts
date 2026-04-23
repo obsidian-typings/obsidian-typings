@@ -33,7 +33,9 @@ export interface OutlineView extends InfoFileView {
    */
   createItemDom(e: unknown): unknown;
 
-  /** Filter the outline items based on the current search query. */
+  /**
+   * Filter the outline items based on the current search query.
+   */
   filterSearchResults(): void;
 
   /**
@@ -79,7 +81,9 @@ export interface OutlineView extends InfoFileView {
    */
   handleCollapseAll(e: unknown): void;
 
-  /** Handle editor selection changes and highlight the active heading. */
+  /**
+   * Handle editor selection changes and highlight the active heading.
+   */
   handleSelectionChange(): void;
 
   /**
@@ -120,7 +124,9 @@ export interface OutlineView extends InfoFileView {
    */
   showSearch(): void;
 
-  /** Refresh the outline view with current headings. */
+  /**
+   * Refresh the outline view with current headings.
+   */
   update(): void;
 
   /**

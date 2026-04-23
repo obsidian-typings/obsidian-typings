@@ -18,16 +18,24 @@ export interface AbstractFileTreeItem<T extends TAbstractFile> extends TreeItem 
    */
   file: T;
 
-  /** Tree node metadata and layout information. */
+  /**
+   * Tree node metadata and layout information.
+   */
   info: TreeNodeInfo;
 
-  /** Parent tree item (folder or tree root). */
+  /**
+   * Parent tree item (folder or tree root).
+   */
   parent: FileTreeItemParent;
 
-  /** Whether this item has been rendered to the DOM. */
+  /**
+   * Whether this item has been rendered to the DOM.
+   */
   rendered: boolean;
 
-  /** Reference to the file explorer view containing this item. */
+  /**
+   * Reference to the file explorer view containing this item.
+   */
   view: FileExplorerView;
 
   /**
@@ -44,15 +52,23 @@ export interface AbstractFileTreeItem<T extends TAbstractFile> extends TreeItem 
    */
   isFullTimeShown(): boolean;
 
-  /** Called when this item is rendered to the DOM. */
+  /**
+   * Called when this item is rendered to the DOM.
+   */
   onRender(): void;
 
-  /** Begin inline renaming of this tree item. */
+  /**
+   * Begin inline renaming of this tree item.
+   */
   startRename(): void;
 
-  /** Cancel inline renaming of this tree item. */
+  /**
+   * Cancel inline renaming of this tree item.
+   */
   stopRename(): void;
 
-  /** Refresh the displayed title of this tree item. */
+  /**
+   * Refresh the displayed title of this tree item.
+   */
   updateTitle(): void;
 }

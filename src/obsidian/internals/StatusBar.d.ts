@@ -9,10 +9,14 @@ import type { getStatusBarConstructor } from '../implementations/constructors/in
  * @unofficial
  */
 export interface StatusBar {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Container element for the status bar. */
+  /**
+   * Container element for the status bar.
+   */
   containerEl: HTMLElement;
 
   /**

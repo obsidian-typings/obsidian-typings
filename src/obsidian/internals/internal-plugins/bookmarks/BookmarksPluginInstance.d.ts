@@ -28,31 +28,49 @@ import type { BookmarksPlugin } from './BookmarksPlugin.d.ts';
  * @unofficial
  */
 export interface BookmarksPluginInstance extends InternalPluginInstance<BookmarksPlugin>, Events {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Weak map tracking bookmarked views and their indicator elements. */
+  /**
+   * Weak map tracking bookmarked views and their indicator elements.
+   */
   bookmarkedViews: WeakMap<View, HTMLElement>;
 
-  /** Lookup table mapping paths to bookmark items. */
+  /**
+   * Lookup table mapping paths to bookmark items.
+   */
   bookmarkLookup: Record<string, BookmarkItem>;
 
-  /** Whether this plugin is enabled by default. */
+  /**
+   * Whether this plugin is enabled by default.
+   */
   defaultOn: true;
 
-  /** Whether the bookmark data has been successfully loaded and validated. */
+  /**
+   * Whether the bookmark data has been successfully loaded and validated.
+   */
   hasValidData: boolean;
 
-  /** List of all bookmark items. */
+  /**
+   * List of all bookmark items.
+   */
   items: BookmarkItem[];
 
-  /** Debounced handler triggered when bookmark items change. */
+  /**
+   * Debounced handler triggered when bookmark items change.
+   */
   onItemsChanged: Debouncer<[boolean], void>;
 
-  /** Reference to the bookmarks plugin registration. */
+  /**
+   * Reference to the bookmarks plugin registration.
+   */
   plugin: BookmarksPlugin;
 
-  /** Lookup table mapping URLs to bookmark items. */
+  /**
+   * Lookup table mapping URLs to bookmark items.
+   */
   urlBookmarkLookup: Record<string, BookmarkItem>;
 
   /**
@@ -100,7 +118,9 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
    */
   getItemTitle(item: BookmarkItem): string;
 
-  /** Initialize the bookmarks view leaf. */
+  /**
+   * Initialize the bookmarks view leaf.
+   */
   initLeaf(): void;
 
   /**
@@ -196,7 +216,9 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
    */
   onTabGroupMenu(menu: Menu, tabsLeaf: WorkspaceTabs): void;
 
-  /** Called when the user enables the plugin. */
+  /**
+   * Called when the user enables the plugin.
+   */
   onUserEnable(): void;
 
   /**
@@ -228,7 +250,9 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
    */
   openBookmarks(items: BookmarkItem[], newLeaf?: boolean | PaneType): Promise<void>;
 
-  /** Rebuild the internal bookmark lookup caches. */
+  /**
+   * Rebuild the internal bookmark lookup caches.
+   */
   rebuildBookmarkCache(): void;
 
   /**
@@ -238,9 +262,13 @@ export interface BookmarksPluginInstance extends InternalPluginInstance<Bookmark
    */
   removeItem(item: BookmarkItem): void;
 
-  /** Persist the current bookmark data to storage. */
+  /**
+   * Persist the current bookmark data to storage.
+   */
   saveData(): void;
 
-  /** Update bookmark indicator icons on tab headers. */
+  /**
+   * Update bookmark indicator icons on tab headers.
+   */
   updateTabHeaders(): void;
 }

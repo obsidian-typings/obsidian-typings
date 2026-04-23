@@ -10,19 +10,29 @@ import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
  * @unofficial
  */
 export interface Bookmark {
-  /** Association direction for the bookmark (-1 for left, 1 for right). */
+  /**
+   * Association direction for the bookmark (-1 for left, 1 for right).
+   */
   assoc: number;
 
-  /** The CodeMirror editor instance this bookmark belongs to. */
+  /**
+   * The CodeMirror editor instance this bookmark belongs to.
+   */
   cm: CodeMirrorEditor;
 
-  /** Unique identifier for this bookmark. */
+  /**
+   * Unique identifier for this bookmark.
+   */
   id: number;
 
-  /** Character offset of the bookmark within its line. */
+  /**
+   * Character offset of the bookmark within its line.
+   */
   offset: number;
 
-  /** Remove this bookmark from the editor. */
+  /**
+   * Remove this bookmark from the editor.
+   */
   clear(): void;
 
   /**

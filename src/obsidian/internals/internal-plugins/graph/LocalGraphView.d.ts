@@ -12,10 +12,14 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  * @unofficial
  */
 export interface LocalGraphView extends InfoFileView {
-  /** Graph engine powering the local graph simulation. */
+  /**
+   * Graph engine powering the local graph simulation.
+   */
   engine: GraphEngine;
 
-  /** Renderer responsible for drawing the local graph. */
+  /**
+   * Renderer responsible for drawing the local graph.
+   */
   renderer: GraphRenderer;
 
   /**

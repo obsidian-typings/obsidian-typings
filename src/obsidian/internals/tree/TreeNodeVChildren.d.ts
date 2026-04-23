@@ -9,10 +9,14 @@ import type { TreeNode } from './TreeNode.d.ts';
  * @unofficial
  */
 export interface TreeNodeVChildren<Item extends TreeNode, Owner extends TreeNode> {
-  /** Internal array of child items. */
+  /**
+   * Internal array of child items.
+   */
   _children: Item[];
 
-  /** The tree node that owns these children. */
+  /**
+   * The tree node that owns these children.
+   */
   owner: Owner;
 
   /**
@@ -29,7 +33,9 @@ export interface TreeNodeVChildren<Item extends TreeNode, Owner extends TreeNode
    */
   get children(): Item[];
 
-  /** Remove all children from this node. */
+  /**
+   * Remove all children from this node.
+   */
   clear(): void;
 
   /**

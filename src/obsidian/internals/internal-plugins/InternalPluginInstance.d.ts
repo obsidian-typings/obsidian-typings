@@ -8,13 +8,19 @@ import type { App } from 'obsidian';
  * @unofficial
  */
 export interface InternalPluginInstance<InternalPlugin> {
-  /** Human-readable description of this plugin. */
+  /**
+   * Human-readable description of this plugin.
+   */
   description: string;
 
-  /** Unique identifier for this plugin. */
+  /**
+   * Unique identifier for this plugin.
+   */
   id: string;
 
-  /** Human-readable display name of this plugin. */
+  /**
+   * Human-readable display name of this plugin.
+   */
   name: string;
 
   /**

@@ -7,13 +7,19 @@ import type { CanvasViewData } from './CanvasData.d.ts';
  * @unofficial
  */
 export interface CanvasViewHistory {
-  /** Index of the current state in the history stack. */
+  /**
+   * Index of the current state in the history stack.
+   */
   current: number;
 
-  /** Array of historical canvas states. */
+  /**
+   * Array of historical canvas states.
+   */
   data: CanvasViewData[];
 
-  /** Maximum number of history entries to retain. */
+  /**
+   * Maximum number of history entries to retain.
+   */
   max: number;
 
   /**

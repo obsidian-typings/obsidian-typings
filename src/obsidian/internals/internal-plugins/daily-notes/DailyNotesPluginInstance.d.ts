@@ -15,16 +15,24 @@ import type { DailyNotesPlugin } from './DailyNotesPlugin.d.ts';
  * @unofficial
  */
 export interface DailyNotesPluginInstance extends InternalPluginInstance<DailyNotesPlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Whether this plugin is enabled by default. */
+  /**
+   * Whether this plugin is enabled by default.
+   */
   defaultOn: true;
 
-  /** Configuration options for daily notes. */
+  /**
+   * Configuration options for daily notes.
+   */
   options: DailyNotesOptions;
 
-  /** Reference to the daily notes plugin registration. */
+  /**
+   * Reference to the daily notes plugin registration.
+   */
   plugin: DailyNotesPlugin;
 
   /**

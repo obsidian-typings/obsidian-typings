@@ -148,6 +148,8 @@ export interface BookmarksView extends ItemView {
    */
   onRenameKey(event: KeyboardEvent): void;
 
-  /** Refresh the bookmarks view. */
+  /**
+   * Refresh the bookmarks view.
+   */
   update(): void;
 }

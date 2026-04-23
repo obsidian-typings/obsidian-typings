@@ -13,7 +13,9 @@ import type { WebviewerPluginInstance } from './WebviewerPluginInstance.d.ts';
  * @unofficial
  */
 export interface WebviewerView extends ItemView {
-  /** Close the in-page search bar. */
+  /**
+   * Close the in-page search bar.
+   */
   closeSearch(): void;
 
   /**
@@ -23,7 +25,9 @@ export interface WebviewerView extends ItemView {
    */
   commitPageLoad(): unknown;
 
-  /** Configure the web contents settings for the webview. */
+  /**
+   * Configure the web contents settings for the webview.
+   */
   configureWebContents(): void;
 
   /**
@@ -62,7 +66,9 @@ export interface WebviewerView extends ItemView {
    */
   contextMenuItemsForSelection(e: unknown, t: unknown): unknown;
 
-  /** Display a blank page in the webview. */
+  /**
+   * Display a blank page in the webview.
+   */
   displayBlank(): void;
 
   /**
@@ -103,7 +109,9 @@ export interface WebviewerView extends ItemView {
    */
   getViewType(): typeof ViewType.Webviewer;
 
-  /** Hide all view content (webview, reader, error). */
+  /**
+   * Hide all view content (webview, reader, error).
+   */
   hideAll(): void;
 
   /**
@@ -147,7 +155,9 @@ export interface WebviewerView extends ItemView {
    */
   onExternalLinkRightClick(e: unknown, t: unknown, n: unknown): void;
 
-  /** Handle a fold/collapse state change in reader mode. */
+  /**
+   * Handle a fold/collapse state change in reader mode.
+   */
   onFoldChange(): void;
 
   /**
@@ -193,10 +203,14 @@ export interface WebviewerView extends ItemView {
    */
   onReaderModeContextMenu(e: unknown): void;
 
-  /** Called when the reader mode rendering is complete. */
+  /**
+   * Called when the reader mode rendering is complete.
+   */
   onRenderComplete(): void;
 
-  /** Handle scroll events in the webview. */
+  /**
+   * Handle scroll events in the webview.
+   */
   onScroll(): void;
 
   /**
@@ -256,7 +270,9 @@ export interface WebviewerView extends ItemView {
    */
   setFavicon(e: unknown): unknown;
 
-  /** Show the in-page search bar. */
+  /**
+   * Show the in-page search bar.
+   */
   showSearch(): void;
 
   /**

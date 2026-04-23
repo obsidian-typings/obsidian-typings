@@ -8,7 +8,9 @@ import type { SQLResultSet } from './SQLResultSet.d.ts';
  * @unofficial
  */
 export interface SQLTransaction {
-  /** Execute a SQL statement within this transaction. */
+  /**
+   * Execute a SQL statement within this transaction.
+   */
   executeSql(
     sqlStatement: string,
     arguments?: unknown[],

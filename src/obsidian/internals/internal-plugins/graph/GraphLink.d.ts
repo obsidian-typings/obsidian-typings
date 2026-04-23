@@ -14,25 +14,39 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  * @unofficial
  */
 export interface GraphLink {
-  /** PixiJS element for the arrow, child of `GraphRenderer.hanger`. */
+  /**
+   * PixiJS element for the arrow, child of `GraphRenderer.hanger`.
+   */
   arrow: Graphics | null;
 
-  /** PixiJS element for the line. */
+  /**
+   * PixiJS element for the line.
+   */
   line: null | Sprite;
 
-  /** Parent of `GraphLink.line`, child of `GraphRenderer.hanger`. */
+  /**
+   * Parent of `GraphLink.line`, child of `GraphRenderer.hanger`.
+   */
   px: Container | null;
 
-  /** Whether the link graphics have been rendered. */
+  /**
+   * Whether the link graphics have been rendered.
+   */
   rendered: boolean;
 
-  /** `GraphRenderer` managing this node. */
+  /**
+   * `GraphRenderer` managing this node.
+   */
   renderer: GraphRenderer;
 
-  /** Source node of the link. */
+  /**
+   * Source node of the link.
+   */
   source: GraphNode;
 
-  /** Target node of the link. */
+  /**
+   * Target node of the link.
+   */
   target: GraphNode;
 
   /**

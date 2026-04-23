@@ -5,7 +5,9 @@
  * @unofficial
  */
 export interface SQLResultSetRowList {
-  /** Number of rows in the result set. */
+  /**
+   * Number of rows in the result set.
+   */
   length: number;
 
   /**

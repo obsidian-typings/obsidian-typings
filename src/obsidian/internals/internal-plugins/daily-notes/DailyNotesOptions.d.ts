@@ -5,10 +5,14 @@
  * @unofficial
  */
 export interface DailyNotesOptions {
-  /** Open the daily note automatically whenever the vault is opened. */
+  /**
+   * Open the daily note automatically whenever the vault is opened.
+   */
   autorun?: boolean;
 
-  /** New daily notes will be placed here. */
+  /**
+   * New daily notes will be placed here.
+   */
   folder?: string;
 
   /**
@@ -17,6 +21,8 @@ export interface DailyNotesOptions {
    */
   format?: string;
 
-  /** Path to the file to use as a template. */
+  /**
+   * Path to the file to use as a template.
+   */
   template?: string;
 }

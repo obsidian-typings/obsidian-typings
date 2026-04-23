@@ -10,9 +10,13 @@ import type { ZkPrefixerPlugin } from './ZkPrefixerPlugin.d.ts';
  * @unofficial
  */
 export interface ZkPrefixerPluginInstance extends InternalPluginInstance<ZkPrefixerPlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Reference to the Zettelkasten prefixer plugin registration. */
+  /**
+   * Reference to the Zettelkasten prefixer plugin registration.
+   */
   plugin: ZkPrefixerPlugin;
 }

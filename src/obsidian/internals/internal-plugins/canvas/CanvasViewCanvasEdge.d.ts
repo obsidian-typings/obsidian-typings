@@ -12,52 +12,84 @@ import type { CanvasViewCanvasEdgePath } from './CanvasViewCanvasEdgePath.d.ts';
  * @unofficial
  */
 export interface CanvasViewCanvasEdge {
-  /** Bounding box of the edge for spatial indexing. */
+  /**
+   * Bounding box of the edge for spatial indexing.
+   */
   bbox: BBox;
 
-  /** Bezier curve data used for rendering the edge path. */
+  /**
+   * Bezier curve data used for rendering the edge path.
+   */
   bezier: Bezier;
 
-  /** Reference to the parent canvas instance. */
+  /**
+   * Reference to the parent canvas instance.
+   */
   canvas: CanvasViewCanvas;
 
-  /** Color of the edge line (CSS color string or preset name). */
+  /**
+   * Color of the edge line (CSS color string or preset name).
+   */
   color: string;
 
-  /** Link information for the source endpoint of the edge. */
+  /**
+   * Link information for the source endpoint of the edge.
+   */
   from: CanvasViewCanvasEdgeLink;
 
-  /** Line end marker at the source endpoint, or `null` if none. */
+  /**
+   * Line end marker at the source endpoint, or `null` if none.
+   */
   fromLineEnd: CanvasViewCanvasEdgeLineEnd | null;
 
-  /** Unique identifier for this edge. */
+  /**
+   * Unique identifier for this edge.
+   */
   id: string;
 
-  /** Whether the edge has been initialized. */
+  /**
+   * Whether the edge has been initialized.
+   */
   initialized: boolean;
 
-  /** Whether the edge is currently attached to the canvas DOM. */
+  /**
+   * Whether the edge is currently attached to the canvas DOM.
+   */
   isAttached?: unknown;
 
-  /** Text label displayed on the edge. */
+  /**
+   * Text label displayed on the edge.
+   */
   label: string;
 
-  /** SVG group element containing the line end markers. */
+  /**
+   * SVG group element containing the line end markers.
+   */
   lineEndGroupEl: SVGGElement;
 
-  /** SVG group element containing the edge line paths. */
+  /**
+   * SVG group element containing the edge line paths.
+   */
   lineGroupEl: SVGGElement;
 
-  /** SVG path elements for the edge (display and interaction). */
+  /**
+   * SVG path elements for the edge (display and interaction).
+   */
   path: CanvasViewCanvasEdgePath;
 
-  /** Link information for the target endpoint of the edge. */
+  /**
+   * Link information for the target endpoint of the edge.
+   */
   to: CanvasViewCanvasEdgeLink;
 
-  /** Line end marker at the target endpoint, or `null` if none. */
+  /**
+   * Line end marker at the target endpoint, or `null` if none.
+   */
   toLineEnd: CanvasViewCanvasEdgeLineEnd | null;
 
-  /** Additional data properties not covered by known fields. */
+  /**
+   * Additional data properties not covered by known fields.
+   */
   unknownData: object;
 
   /**

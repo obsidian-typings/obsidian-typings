@@ -5,18 +5,28 @@
  * @unofficial
  */
 export interface CanvasViewDataEdge {
-  /** ID of the source node. */
+  /**
+   * ID of the source node.
+   */
   fromNode: string;
 
-  /** Side of the source node where the edge originates (e.g., 'top', 'bottom', 'left', 'right'). */
+  /**
+   * Side of the source node where the edge originates (e.g., 'top', 'bottom', 'left', 'right').
+   */
   fromSide: string;
 
-  /** Unique identifier for this edge. */
+  /**
+   * Unique identifier for this edge.
+   */
   id: string;
 
-  /** ID of the target node. */
+  /**
+   * ID of the target node.
+   */
   toNode: string;
 
-  /** Side of the target node where the edge terminates (e.g., 'top', 'bottom', 'left', 'right'). */
+  /**
+   * Side of the target node where the edge terminates (e.g., 'top', 'bottom', 'left', 'right').
+   */
   toSide: string;
 }

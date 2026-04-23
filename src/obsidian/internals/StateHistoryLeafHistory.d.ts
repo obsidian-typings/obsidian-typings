@@ -7,9 +7,13 @@ import type { StateHistory } from './StateHistory.d.ts';
  * @unofficial
  */
 export interface StateHistoryLeafHistory {
-  /** Stack of previous leaf states for back navigation. */
+  /**
+   * Stack of previous leaf states for back navigation.
+   */
   backHistory: StateHistory[];
 
-  /** Stack of forward leaf states for forward navigation. */
+  /**
+   * Stack of forward leaf states for forward navigation.
+   */
   forwardHistory: StateHistory[];
 }

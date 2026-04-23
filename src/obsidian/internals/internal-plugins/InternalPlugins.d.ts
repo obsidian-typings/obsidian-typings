@@ -53,7 +53,7 @@ export interface InternalPlugins extends Events {
   constructor2__(app: App): this;
 
   /**
-   * - Load plugin configs and enable plugins.
+   * Load plugin configs and enable plugins.
    *
    * @returns A promise that resolves when all plugins are enabled.
    */
@@ -98,7 +98,7 @@ export interface InternalPlugins extends Events {
   onRaw(configPath: string): void;
 
   /**
-   * - Save current plugin configs.
+   * Save current plugin configs.
    *
    * @returns A promise that resolves when the config is saved.
    */

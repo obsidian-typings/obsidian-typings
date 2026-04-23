@@ -10,9 +10,13 @@ import type { LinkUpdater } from './LinkUpdater.d.ts';
  * @unofficial
  */
 export interface CanvasLinkUpdater extends LinkUpdater {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Canvas plugin instance used to access canvas data. */
+  /**
+   * Canvas plugin instance used to access canvas data.
+   */
   canvas: CanvasPluginInstance;
 }

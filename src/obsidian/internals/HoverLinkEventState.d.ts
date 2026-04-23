@@ -5,6 +5,8 @@
  * @unofficial
  */
 export interface HoverLinkEventState {
-  /** Scroll position at the time of the hover event. */
+  /**
+   * Scroll position at the time of the hover event.
+   */
   scroll: unknown;
 }

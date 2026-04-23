@@ -10,12 +10,18 @@ import type { SwitcherPlugin } from './SwitcherPlugin.d.ts';
  * @unofficial
  */
 export interface SwitcherPluginInstance extends InternalPluginInstance<SwitcherPlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Whether this plugin is enabled by default. */
+  /**
+   * Whether this plugin is enabled by default.
+   */
   defaultOn: true;
 
-  /** Reference to the switcher plugin registration. */
+  /**
+   * Reference to the switcher plugin registration.
+   */
   plugin: SwitcherPlugin;
 }

@@ -5,9 +5,13 @@
  * @unofficial
  */
 export interface CanvasViewCanvasEdgePath {
-  /** SVG path element used for the visible edge rendering. */
+  /**
+   * SVG path element used for the visible edge rendering.
+   */
   display: SVGPathElement;
 
-  /** SVG path element used as a wider invisible hit area for interaction. */
+  /**
+   * SVG path element used as a wider invisible hit area for interaction.
+   */
   interaction: SVGPathElement;
 }

@@ -8,6 +8,8 @@ import type { FootnotesPlugin } from './FootnotesPlugin.d.ts';
  * @unofficial
  */
 export interface FootnotesPluginInstance extends InternalPluginInstance<FootnotesPlugin> {
-  /** Initialize the footnotes view leaf. */
+  /**
+   * Initialize the footnotes view leaf.
+   */
   initLeaf(): void;
 }

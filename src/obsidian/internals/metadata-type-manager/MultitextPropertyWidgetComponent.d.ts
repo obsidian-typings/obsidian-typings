@@ -8,16 +8,24 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface MultitextPropertyWidgetComponent extends PropertyWidgetComponentBase {
-  /** The hover popover for the property widget. */
+  /**
+   * The hover popover for the property widget.
+   */
   hoverPopover: null;
 
-  /** The multiselect component for the property widget. */
+  /**
+   * The multiselect component for the property widget.
+   */
   multiselect: Multiselect;
 
-  /** The type of the property widget. */
+  /**
+   * The type of the property widget.
+   */
   type: 'multitext';
 
-  /** The values of the property widget. */
+  /**
+   * The values of the property widget.
+   */
   valueSet: Set<string>;
 
   /**

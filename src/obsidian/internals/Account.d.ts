@@ -15,13 +15,19 @@ export interface Account {
    */
   email: string;
 
-  /** Unix timestamp of the license expiry date. */
+  /**
+   * Unix timestamp of the license expiry date.
+   */
   expiry: number;
 
-  /** License key string. */
+  /**
+   * License key string.
+   */
   key: string | undefined;
 
-  /** Validation status or hash for the license key. */
+  /**
+   * Validation status or hash for the license key.
+   */
   keyValidation: string;
 
   /**
@@ -34,9 +40,13 @@ export interface Account {
    */
   name: string;
 
-  /** Number of seats available on the commercial license. */
+  /**
+   * Number of seats available on the commercial license.
+   */
   seats: number;
 
-  /** Authentication token for the account. */
+  /**
+   * Authentication token for the account.
+   */
   token: string;
 }

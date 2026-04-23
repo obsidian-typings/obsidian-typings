@@ -5,12 +5,18 @@
  * @unofficial
  */
 export interface RendererSection {
-  /** DOM element for this section. */
+  /**
+   * DOM element for this section.
+   */
   el: HTMLElement;
 
-  /** Raw HTML content for this section. */
+  /**
+   * Raw HTML content for this section.
+   */
   html: string;
 
-  /** Whether this section has been rendered to the DOM. */
+  /**
+   * Whether this section has been rendered to the DOM.
+   */
   rendered: boolean;
 }

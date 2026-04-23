@@ -10,40 +10,64 @@ import type {
  * @unofficial
  */
 export interface MobileTabSwitcher {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Directory path for cached tab previews. */
+  /**
+   * Directory path for cached tab previews.
+   */
   cacheDir: string;
 
-  /** Container element for the tab switcher. */
+  /**
+   * Container element for the tab switcher.
+   */
   containerEl: HTMLDivElement;
 
-  /** Inner scrollable element containing tab previews. */
+  /**
+   * Inner scrollable element containing tab previews.
+   */
   innerScrollEl: HTMLDivElement;
 
-  /** Whether the tab switcher is currently visible. */
+  /**
+   * Whether the tab switcher is currently visible.
+   */
   isVisible: boolean;
 
-  /** Debounced function to re-render the tab switcher. */
+  /**
+   * Debounced function to re-render the tab switcher.
+   */
   requestRender: Debouncer<[], void>;
 
-  /** Scroll container element. */
+  /**
+   * Scroll container element.
+   */
   scrollEl: HTMLDivElement;
 
-  /** Weak map caching tab preview images by leaf reference. */
+  /**
+   * Weak map caching tab preview images by leaf reference.
+   */
   tabPreviewLookup: WeakMap<object, unknown>;
 
-  /** Close the currently selected tab. */
+  /**
+   * Close the currently selected tab.
+   */
   close(): void;
 
-  /** Hide the tab switcher UI. */
+  /**
+   * Hide the tab switcher UI.
+   */
   hide(): void;
 
-  /** Handle workspace layout changes by updating the tab list. */
+  /**
+   * Handle workspace layout changes by updating the tab list.
+   */
   onLayoutChange(): void;
 
-  /** Render the tab switcher content. */
+  /**
+   * Render the tab switcher content.
+   */
   render(): void;
 
   /**

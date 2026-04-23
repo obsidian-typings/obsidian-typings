@@ -7,7 +7,9 @@ import type { TreeItem } from './TreeItem.d.ts';
  * @unofficial
  */
 export interface TreeCollapsibleItem extends TreeItem {
-  /** Container element for the child items of this collapsible node. */
+  /**
+   * Container element for the child items of this collapsible node.
+   */
   childrenEl: HTMLElement;
 
   /**
@@ -15,7 +17,9 @@ export interface TreeCollapsibleItem extends TreeItem {
    */
   collapsed: boolean;
 
-  /** Element for the collapse/expand toggle indicator, or `null` if not rendered. */
+  /**
+   * Element for the collapse/expand toggle indicator, or `null` if not rendered.
+   */
   collapseEl: HTMLElement | null;
 
   /**

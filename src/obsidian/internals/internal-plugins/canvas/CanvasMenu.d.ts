@@ -8,16 +8,24 @@ import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
  * @unofficial
  */
 export interface CanvasMenu {
-  /** Reference to the parent canvas instance. */
+  /**
+   * Reference to the parent canvas instance.
+   */
   canvas: CanvasViewCanvas;
 
-  /** Outer container element for the menu. */
+  /**
+   * Outer container element for the menu.
+   */
   containerEl: HTMLDivElement;
 
-  /** Element containing the menu buttons and controls. */
+  /**
+   * Element containing the menu buttons and controls.
+   */
   menuEl: HTMLDivElement;
 
-  /** Reference to the current canvas selection. */
+  /**
+   * Reference to the current canvas selection.
+   */
   selection: CanvasSelection;
 
   /**

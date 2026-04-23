@@ -5,12 +5,18 @@
  * @unofficial
  */
 export interface CanvasViewCanvasNodeUnknownData {
-  /** Path to the associated file. */
+  /**
+   * Path to the associated file.
+   */
   file: string;
 
-  /** Unique identifier of the node. */
+  /**
+   * Unique identifier of the node.
+   */
   id: string;
 
-  /** Type of the canvas node (e.g. "text", "file", "link", "group"). */
+  /**
+   * Type of the canvas node (e.g. "text", "file", "link", "group").
+   */
   type: string;
 }

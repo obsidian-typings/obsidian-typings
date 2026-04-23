@@ -6,25 +6,39 @@ import type { getFrameDomConstructor } from '../implementations/constructors/int
  * @unofficial
  */
 export interface FrameDom {
-  /** Reference to the Electron browser window. */
+  /**
+   * Reference to the Electron browser window.
+   */
   eWin: Electron.BrowserWindow;
 
-  /** Whether the current platform is macOS. */
+  /**
+   * Whether the current platform is macOS.
+   */
   isMac: boolean;
 
-  /** Container for window control buttons on the left side. */
+  /**
+   * Container for window control buttons on the left side.
+   */
   leftButtonContainerEl: HTMLDivElement;
 
-  /** The title bar element. */
+  /**
+   * The title bar element.
+   */
   titleBarEl: HTMLDivElement;
 
-  /** Inner container of the title bar. */
+  /**
+   * Inner container of the title bar.
+   */
   titleBarInnerEl: HTMLDivElement;
 
-  /** Element displaying the title bar text. */
+  /**
+   * Element displaying the title bar text.
+   */
   titleBarTextEl: HTMLDivElement;
 
-  /** Reference to the window object. */
+  /**
+   * Reference to the window object.
+   */
   win: Window;
 
   /**
@@ -39,9 +53,13 @@ export interface FrameDom {
    */
   constructor__(electronWindow: Electron.BrowserWindow, win: Window): this;
 
-  /** Update the window status indicators in the title bar. */
+  /**
+   * Update the window status indicators in the title bar.
+   */
   updateStatus(): void;
 
-  /** Update the displayed title in the title bar. */
+  /**
+   * Update the displayed title in the title bar.
+   */
   updateTitle(): void;
 }

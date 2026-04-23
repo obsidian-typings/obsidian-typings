@@ -17,58 +17,94 @@ import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
  * @unofficial
  */
 export interface ResultDomItem extends TreeNode {
-  /** Reference to the App instance. */
+  /**
+   * Reference to the App instance.
+   */
   app: App;
 
-  /** Container element for child match items. */
+  /**
+   * Container element for child match items.
+   */
   childrenEl: HTMLDivElement;
 
-  /** Whether this result item is currently collapsed. */
+  /**
+   * Whether this result item is currently collapsed.
+   */
   collapsed: boolean;
 
-  /** Element for the collapse/expand toggle. */
+  /**
+   * Element for the collapse/expand toggle.
+   */
   collapseEl: HTMLDivElement;
 
-  /** Whether this result item can be collapsed. */
+  /**
+   * Whether this result item can be collapsed.
+   */
   collapsible: boolean;
 
-  /** Outer container element for this result item. */
+  /**
+   * Outer container element for this result item.
+   */
   containerEl: HTMLDivElement;
 
-  /** Text content of the file associated with this result. */
+  /**
+   * Text content of the file associated with this result.
+   */
   content: string;
 
-  /** Whether extra surrounding context is shown around matches. */
+  /**
+   * Whether extra surrounding context is shown around matches.
+   */
   extraContext: boolean;
 
-  /** The file associated with this search result. */
+  /**
+   * The file associated with this search result.
+   */
   file: TFile;
 
-  /** Layout information used by virtual scrolling. */
+  /**
+   * Layout information used by virtual scrolling.
+   */
   info: TreeNodeInfo;
 
-  /** Callback for custom match rendering, or `null` if not set. */
+  /**
+   * Callback for custom match rendering, or `null` if not set.
+   */
   onMatchRender: null;
 
-  /** Parent result DOM container. */
+  /**
+   * Parent result DOM container.
+   */
   parent: ResultDom;
 
-  /** Reference to the parent result DOM container. */
+  /**
+   * Reference to the parent result DOM container.
+   */
   parentDom: ResultDom;
 
-  /** Spacer element used to maintain correct scroll height. */
+  /**
+   * Spacer element used to maintain correct scroll height.
+   */
   pusherEl: HTMLDivElement;
 
-  /** Search result data containing match positions. */
+  /**
+   * Search result data containing match positions.
+   */
   result: ResultDomResult;
 
-  /** Whether matches are displayed as separate items. */
+  /**
+   * Whether matches are displayed as separate items.
+   */
   separateMatches: boolean;
 
-  /** Whether the file title is shown above matches. */
+  /**
+   * Whether the file title is shown above matches.
+   */
   showTitle: boolean;
 
-  /** Virtual children manager for match child items. */
+  /**
+   * Virtual children manager for match child items.
+   */
   vChildren: TreeNodeVChildren<ResultDomItem, ResultDomItemChild>;
 
   /**
@@ -113,7 +149,9 @@ export interface ResultDomItem extends TreeNode {
    */
   onResultMouseover(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
 
-  /** Render the content matches for this result item. */
+  /**
+   * Render the content matches for this result item.
+   */
   renderContentMatches(): void;
 
   /**

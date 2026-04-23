@@ -12,19 +12,29 @@ import type { CanvasIndexEntry } from './CanvasIndexEntry.d.ts';
  * @unofficial
  */
 export interface CanvasIndex extends Component {
-  /** Reference to the Obsidian app instance. */
+  /**
+   * Reference to the Obsidian app instance.
+   */
   app: App;
 
-  /** Queue of files waiting to be processed by the indexer. */
+  /**
+   * Queue of files waiting to be processed by the indexer.
+   */
   fileQueue: unknown[];
 
-  /** Current animation frame request, or `null` when idle. */
+  /**
+   * Current animation frame request, or `null` when idle.
+   */
   frame: null;
 
-  /** Index of canvas entries keyed by file path. */
+  /**
+   * Index of canvas entries keyed by file path.
+   */
   index: Record<string, CanvasIndexEntry>;
 
-  /** Weak map tracking reference node IDs for canvas files. */
+  /**
+   * Weak map tracking reference node IDs for canvas files.
+   */
   refNodeIds: WeakMap<object, unknown>;
 
   /**

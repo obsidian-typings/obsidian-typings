@@ -5,19 +5,29 @@
  * @unofficial
  */
 export interface OpenDialogOptions {
-  /** Whether to display the dialog at the bottom of the editor. */
+  /**
+   * Whether to display the dialog at the bottom of the editor.
+   */
   bottom: number;
 
-  /** Whether to close the dialog when it loses focus. */
+  /**
+   * Whether to close the dialog when it loses focus.
+   */
   closeOnBlur: boolean;
 
-  /** Whether to close the dialog when the Enter key is pressed. */
+  /**
+   * Whether to close the dialog when the Enter key is pressed.
+   */
   closeOnEnter: boolean;
 
-  /** Whether to select the input value when the dialog opens. */
+  /**
+   * Whether to select the input value when the dialog opens.
+   */
   selectValueOnOpen: boolean;
 
-  /** Initial value for the dialog input. */
+  /**
+   * Initial value for the dialog input.
+   */
   value: string;
 
   /**

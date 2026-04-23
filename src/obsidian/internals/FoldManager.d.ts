@@ -9,7 +9,9 @@ import type { getFoldManagerConstructor } from '../implementations/constructors/
  * @unofficial
  */
 export interface FoldManager {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
   /**

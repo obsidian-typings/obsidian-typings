@@ -44,16 +44,24 @@ export interface CustomCSS extends Component {
    */
   oldThemes: string[];
 
-  /** Queue for sequential CSS processing operations. */
+  /**
+   * Queue for sequential CSS processing operations.
+   */
   queue: PromisedQueue;
 
-  /** Debounced function to reload CSS snippets. */
+  /**
+   * Debounced function to reload CSS snippets.
+   */
   requestLoadSnippets: Debouncer<[], void>;
 
-  /** Debounced function to reload the active theme. */
+  /**
+   * Debounced function to reload the active theme.
+   */
   requestLoadTheme: Debouncer<[], void>;
 
-  /** Debounced function to re-read available themes from disk. */
+  /**
+   * Debounced function to re-read available themes from disk.
+   */
   requestReadThemes: Debouncer<[], void>;
 
   /**
@@ -61,7 +69,9 @@ export interface CustomCSS extends Component {
    */
   snippets: string[];
 
-  /** Main style element for the active theme. */
+  /**
+   * Main style element for the active theme.
+   */
   styleEl: HTMLStyleElement;
 
   /**
@@ -76,7 +86,9 @@ export interface CustomCSS extends Component {
    */
   themes: CustomCSSThemesRecord;
 
-  /** Record of available theme updates. */
+  /**
+   * Record of available theme updates.
+   */
   updates: CustomCSSUpdatesRecord;
 
   /**
@@ -192,7 +204,9 @@ export interface CustomCSS extends Component {
    */
   installTheme(options: InstallThemeOptions, version: string): Promise<void>;
 
-  /** Check whether the current theme is dark mode. */
+  /**
+   * Check whether the current theme is dark mode.
+   */
   isDarkMode(): boolean;
 
   /**
@@ -231,7 +245,9 @@ export interface CustomCSS extends Component {
    */
   loadTheme(arg1: unknown): unknown;
 
-  /** Lifecycle hook called when the component is loaded. */
+  /**
+   * Lifecycle hook called when the component is loaded.
+   */
   onload(): void;
 
   /**
@@ -255,7 +271,9 @@ export interface CustomCSS extends Component {
    */
   readThemes(reload?: boolean): void;
 
-  /** Reload the active theme CSS. */
+  /**
+   * Reload the active theme CSS.
+   */
   reloadTheme(): void;
 
   /**

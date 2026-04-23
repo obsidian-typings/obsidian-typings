@@ -5,30 +5,48 @@
  * @unofficial
  */
 export interface VimStateVimInputState {
-  /** Queue of pending changes to apply. */
+  /**
+   * Queue of pending changes to apply.
+   */
   changeQueue: null;
 
-  /** Buffer of keys pressed for the current command sequence. */
+  /**
+   * Buffer of keys pressed for the current command sequence.
+   */
   keyBuffer: [];
 
-  /** Current pending motion command. */
+  /**
+   * Current pending motion command.
+   */
   motion: null;
 
-  /** Arguments for the current pending motion. */
+  /**
+   * Arguments for the current pending motion.
+   */
   motionArgs: null;
 
-  /** Repeat count for the current motion. */
+  /**
+   * Repeat count for the current motion.
+   */
   motionRepeat: [];
 
-  /** Current pending operator command. */
+  /**
+   * Current pending operator command.
+   */
   operator: null;
 
-  /** Arguments for the current pending operator. */
+  /**
+   * Arguments for the current pending operator.
+   */
   operatorArgs: null;
 
-  /** Prefix repeat count for the current command. */
+  /**
+   * Prefix repeat count for the current command.
+   */
   prefixRepeat: [];
 
-  /** Name of the currently specified register. */
+  /**
+   * Name of the currently specified register.
+   */
   registerName: null;
 }

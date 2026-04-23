@@ -9,19 +9,29 @@ import type { MultiselectOptionContextMenuContext } from './MultiselectOptionCon
  * @unofficial
  */
 export interface Multiselect {
-  /** The elements of the multiselect. */
+  /**
+   * The elements of the multiselect.
+   */
   elements: HTMLDivElement[];
 
-  /** The input element of the multiselect. */
+  /**
+   * The input element of the multiselect.
+   */
   inputEl: HTMLDivElement;
 
-  /** The text of the input element of the multiselect. */
+  /**
+   * The text of the input element of the multiselect.
+   */
   readonly inputText: string;
 
-  /** The root element of the multiselect. */
+  /**
+   * The root element of the multiselect.
+   */
   rootEl: HTMLDivElement;
 
-  /** The values of the multiselect. */
+  /**
+   * The values of the multiselect.
+   */
   values: string[];
 
   /**
@@ -108,7 +118,9 @@ export interface Multiselect {
    */
   onOptionContextmenu?(this: Multiselect, menu: Menu, value: string, ctx: MultiselectOptionContextMenuContext): void;
 
-  /** The renderer for the options of the multiselect. */
+  /**
+   * The renderer for the options of the multiselect.
+   */
   optionRenderer?(value: string, ctx: MultiselectOptionContextMenuContext): void;
 
   /**
@@ -127,7 +139,9 @@ export interface Multiselect {
    */
   removeElement(index: number, shouldFocus?: boolean): void;
 
-  /** Render the values of the multiselect. */
+  /**
+   * Render the values of the multiselect.
+   */
   renderValues(): void;
 
   /**
@@ -194,6 +208,8 @@ export interface Multiselect {
    */
   setValues(values: null | string[]): this;
 
-  /** Trigger the change event of the multiselect. */
+  /**
+   * Trigger the change event of the multiselect.
+   */
   triggerChange(): void;
 }

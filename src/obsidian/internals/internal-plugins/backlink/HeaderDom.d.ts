@@ -7,13 +7,19 @@ import type { App } from 'obsidian';
  * @unofficial
  */
 export interface HeaderDom {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Container element for navigation buttons. */
+  /**
+   * Container element for navigation buttons.
+   */
   navButtonsEl: HTMLDivElement;
 
-  /** Container element for the navigation header. */
+  /**
+   * Container element for the navigation header.
+   */
   navHeaderEl: HTMLDivElement;
 
   /**

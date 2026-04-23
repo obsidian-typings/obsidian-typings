@@ -7,9 +7,13 @@ import type { EditorPosition } from 'obsidian';
  * @unofficial
  */
 export interface Bracket {
-  /** The bracket character. */
+  /**
+   * The bracket character.
+   */
   ch: string;
 
-  /** Position of the bracket in the document. */
+  /**
+   * Position of the bracket in the document.
+   */
   pos: EditorPosition;
 }

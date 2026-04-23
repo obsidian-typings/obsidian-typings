@@ -22,7 +22,9 @@ export interface Plugins {
    */
   app: App;
 
-  /** Whether automatic update checking is enabled. */
+  /**
+   * Whether automatic update checking is enabled.
+   */
   autoCheckForUpdates: boolean;
 
   /**
@@ -32,7 +34,9 @@ export interface Plugins {
    */
   enabledPlugins: Set<string>;
 
-  /** Timestamp of the last update check. */
+  /**
+   * Timestamp of the last update check.
+   */
   lastUpdateCheck: number;
 
   /**
@@ -52,7 +56,9 @@ export interface Plugins {
    */
   plugins: PluginsPluginsRecord;
 
-  /** Debounced function to save the plugin configuration. */
+  /**
+   * Debounced function to save the plugin configuration.
+   */
   requestSaveConfig: Debouncer<[], Promise<void>>;
 
   /**
@@ -197,13 +203,15 @@ export interface Plugins {
   onRaw(e: unknown): void;
 
   /**
-   * - Save current plugin configs.
+   * Save current plugin configs.
    *
    * @returns A promise that resolves when the config is saved.
    */
   saveConfig(): Promise<void>;
 
-  /** Set whether automatic update checking is enabled. */
+  /**
+   * Set whether automatic update checking is enabled.
+   */
   setAutomaticUpdateCheck(enabled: boolean): void;
 
   /**

@@ -5,9 +5,13 @@
  * @unofficial
  */
 export interface Fold {
-  /** Start line of the fold. */
+  /**
+   * Start line of the fold.
+   */
   from: number;
 
-  /** End line of the fold. */
+  /**
+   * End line of the fold.
+   */
   to: number;
 }

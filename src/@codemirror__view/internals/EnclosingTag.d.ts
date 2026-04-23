@@ -7,9 +7,13 @@ import type { EditorRangeEx } from './EditorRangeEx.d.ts';
  * @unofficial
  */
 export interface EnclosingTag {
-  /** Range of the closing tag. */
+  /**
+   * Range of the closing tag.
+   */
   close: EditorRangeEx;
 
-  /** Range of the opening tag. */
+  /**
+   * Range of the opening tag.
+   */
   open: EditorRangeEx;
 }

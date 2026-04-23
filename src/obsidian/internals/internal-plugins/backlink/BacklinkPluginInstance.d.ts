@@ -17,22 +17,34 @@ import type { BacklinkPluginInstanceOptions } from './BacklinkPluginInstanceOpti
  * @unofficial
  */
 export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkPlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Whether this plugin is enabled by default. */
+  /**
+   * Whether this plugin is enabled by default.
+   */
   defaultOn: true;
 
-  /** The currently tracked file for backlinks. */
+  /**
+   * The currently tracked file for backlinks.
+   */
   file?: null | TFile;
 
-  /** Configuration options for the backlink plugin. */
+  /**
+   * Configuration options for the backlink plugin.
+   */
   options: BacklinkPluginInstanceOptions;
 
-  /** Reference to the backlink plugin registration. */
+  /**
+   * Reference to the backlink plugin registration.
+   */
   plugin: BacklinkPlugin;
 
-  /** Initialize the backlink view leaf. */
+  /**
+   * Initialize the backlink view leaf.
+   */
   initLeaf(): void;
 
   /**
@@ -75,7 +87,9 @@ export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkP
    */
   onUserDisable(app: App): void;
 
-  /** Called when the user enables the plugin. */
+  /**
+   * Called when the user enables the plugin.
+   */
   onUserEnable(): void;
 
   /**
@@ -94,6 +108,8 @@ export interface BacklinkPluginInstance extends InternalPluginInstance<BacklinkP
    */
   toggleBacklinksInDocument(skip: boolean): boolean | undefined;
 
-  /** Refresh the backlink results for the current file. */
+  /**
+   * Refresh the backlink results for the current file.
+   */
   updateBacklinks(): void;
 }

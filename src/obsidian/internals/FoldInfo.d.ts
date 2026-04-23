@@ -7,9 +7,13 @@ import type { Fold } from './Fold.d.ts';
  * @unofficial
  */
 export interface FoldInfo {
-  /** Array of folded ranges. */
+  /**
+   * Array of folded ranges.
+   */
   folds: Fold[];
 
-  /** Total number of lines in the document. */
+  /**
+   * Total number of lines in the document.
+   */
   lines: number;
 }

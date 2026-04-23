@@ -7,6 +7,8 @@ import type { ChangeDesc } from '@codemirror/state';
  * @unofficial
  */
 export interface LineHandleChange {
-  /** The change description associated with this line handle update. */
+  /**
+   * The change description associated with this line handle update.
+   */
   changes: ChangeDesc;
 }

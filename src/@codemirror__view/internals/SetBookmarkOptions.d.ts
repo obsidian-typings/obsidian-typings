@@ -5,6 +5,8 @@
  * @unofficial
  */
 export interface SetBookmarkOptions {
-  /** Whether the bookmark should be inserted to the left of the character at the position. */
+  /**
+   * Whether the bookmark should be inserted to the left of the character at the position.
+   */
   insertLeft?: boolean;
 }

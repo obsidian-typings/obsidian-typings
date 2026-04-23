@@ -77,16 +77,24 @@ export interface FilePropertiesView extends InfoFileView {
    */
   saveFrontmatter(e: unknown): void;
 
-  /** Move focus to the next property field. */
+  /**
+   * Move focus to the next property field.
+   */
   shiftFocusAfter(): void;
 
-  /** Move focus to the previous property field. */
+  /**
+   * Move focus to the previous property field.
+   */
   shiftFocusBefore(): void;
 
-  /** Refresh the file properties view. */
+  /**
+   * Refresh the file properties view.
+   */
   update(): void;
 
-  /** Update the empty state display when no properties exist. */
+  /**
+   * Update the empty state display when no properties exist.
+   */
   updateEmptyState(): void;
 
   /**

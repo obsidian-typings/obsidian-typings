@@ -7,6 +7,8 @@ import type { DatePropertyWidgetComponentBase } from './DatePropertyWidgetCompon
  * @unofficial
  */
 export interface DatetimePropertyWidgetComponent extends DatePropertyWidgetComponentBase {
-  /** The type of the property widget. */
+  /**
+   * The type of the property widget.
+   */
   type: 'datetime';
 }

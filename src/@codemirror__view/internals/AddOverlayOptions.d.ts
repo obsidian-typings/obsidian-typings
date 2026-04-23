@@ -5,6 +5,8 @@
  * @unofficial
  */
 export interface AddOverlayOptions {
-  /** Regular expression pattern to highlight in the editor. */
+  /**
+   * Regular expression pattern to highlight in the editor.
+   */
   query: RegExp;
 }

@@ -45,7 +45,9 @@ export interface HotkeyManager {
    */
   defaultKeys: HotkeyManagerDefaultKeysRecord;
 
-  /** Debounced handler for hotkey config file changes on disk. */
+  /**
+   * Debounced handler for hotkey config file changes on disk.
+   */
   onConfigFileChange: Debouncer<[], Promise<void>>;
 
   /**
@@ -117,7 +119,9 @@ export interface HotkeyManager {
    */
   printHotkeyForCommand(commandId: string): string;
 
-  /** Register event listeners for hotkey config file changes. */
+  /**
+   * Register event listeners for hotkey config file changes.
+   */
   registerListeners(): void;
 
   /**

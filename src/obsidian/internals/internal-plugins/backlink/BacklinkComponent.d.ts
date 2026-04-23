@@ -16,82 +16,134 @@ import type { HeaderDom } from './HeaderDom.d.ts';
  * @unofficial
  */
 export interface BacklinkComponent extends Component {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Whether the backlink section is collapsed. */
+  /**
+   * Whether the backlink section is collapsed.
+   */
   backlinkCollapsed: boolean;
 
-  /** Element displaying the count of backlinks. */
+  /**
+   * Element displaying the count of backlinks.
+   */
   backlinkCountEl: HTMLSpanElement;
 
-  /** DOM tree rendering backlink search results. */
+  /**
+   * DOM tree rendering backlink search results.
+   */
   backlinkDom: ResultDom;
 
-  /** File for which backlinks are currently displayed. */
+  /**
+   * File for which backlinks are currently displayed.
+   */
   backlinkFile: null | TFile;
 
-  /** Header element for the backlinks section. */
+  /**
+   * Header element for the backlinks section.
+   */
   backlinkHeaderEl: HTMLDivElement;
 
-  /** Queue of files to process for backlink computation. */
+  /**
+   * Queue of files to process for backlink computation.
+   */
   backlinkQueue: ItemQueue<TFile> | null;
 
-  /** Whether all result items are collapsed. */
+  /**
+   * Whether all result items are collapsed.
+   */
   collapseAll: boolean;
 
-  /** Button element to toggle collapse all results. */
+  /**
+   * Button element to toggle collapse all results.
+   */
   collapseAllButtonEl: HTMLDivElement;
 
-  /** Whether extra context lines are shown around matches. */
+  /**
+   * Whether extra context lines are shown around matches.
+   */
   extraContext: boolean;
 
-  /** Button element to toggle extra context display. */
+  /**
+   * Button element to toggle extra context display.
+   */
   extraContextButtonEl: HTMLDivElement;
 
-  /** The file whose backlinks are being shown. */
+  /**
+   * The file whose backlinks are being shown.
+   */
   file: null | TFile;
 
-  /** Header DOM for navigation buttons and sort controls. */
+  /**
+   * Header DOM for navigation buttons and sort controls.
+   */
   headerDom: HeaderDom;
 
-  /** Whether the search filter is currently visible. */
+  /**
+   * Whether the search filter is currently visible.
+   */
   isShowingSearch: boolean;
 
-  /** Search input component for filtering results. */
+  /**
+   * Search input component for filtering results.
+   */
   searchComponent: SearchComponent;
 
-  /** Current search query string. */
+  /**
+   * Current search query string.
+   */
   searchQuery: null;
 
-  /** Button element to toggle the search filter visibility. */
+  /**
+   * Button element to toggle the search filter visibility.
+   */
   showSearchButtonEl: HTMLDivElement;
 
-  /** Current sort order for results. */
+  /**
+   * Current sort order for results.
+   */
   sortOrder: string;
 
-  /** Placement direction for tooltips. */
+  /**
+   * Placement direction for tooltips.
+   */
   tooltipPlacement: string;
 
-  /** Comma-separated aliases used for unlinked mention matching. */
+  /**
+   * Comma-separated aliases used for unlinked mention matching.
+   */
   unlinkedAliases: string;
 
-  /** Whether the unlinked mentions section is collapsed. */
+  /**
+   * Whether the unlinked mentions section is collapsed.
+   */
   unlinkedCollapsed: boolean;
 
-  /** Element displaying the count of unlinked mentions. */
+  /**
+   * Element displaying the count of unlinked mentions.
+   */
   unlinkedCountEl: HTMLSpanElement;
 
-  /** DOM tree rendering unlinked mention search results. */
+  /**
+   * DOM tree rendering unlinked mention search results.
+   */
   unlinkedDom: ResultDom;
 
-  /** File for which unlinked mentions are being computed. */
+  /**
+   * File for which unlinked mentions are being computed.
+   */
   unlinkedFile: null;
 
-  /** Header element for the unlinked mentions section. */
+  /**
+   * Header element for the unlinked mentions section.
+   */
   unlinkedHeaderEl: HTMLDivElement;
 
-  /** Queue of files to process for unlinked mention computation. */
+  /**
+   * Queue of files to process for unlinked mention computation.
+   */
   unlinkedQueue: null;
 
   /**
@@ -248,7 +300,9 @@ export interface BacklinkComponent extends Component {
    */
   setUnlinkedCollapsed(arg1: unknown, arg2: unknown): Promise<unknown>;
 
-  /** Cancel the current backlink search computation. */
+  /**
+   * Cancel the current backlink search computation.
+   */
   stopBacklinkSearch(): void;
 
   /**

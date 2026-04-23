@@ -5,13 +5,19 @@
  * @unofficial
  */
 export interface CanvasViewCanvasNodeBaseBaseBase {
-  /** Whether the node is currently attached to the canvas DOM. */
+  /**
+   * Whether the node is currently attached to the canvas DOM.
+   */
   isAttached?: unknown;
 
-  /** Whether the node currently has focus. */
+  /**
+   * Whether the node currently has focus.
+   */
   isFocused?: unknown;
 
-  /** Bounding rectangle of the node. */
+  /**
+   * Bounding rectangle of the node.
+   */
   rect: CanvasRect;
 
   /**

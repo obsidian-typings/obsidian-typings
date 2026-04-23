@@ -7,16 +7,24 @@ import type { ExtendedMetrics } from './ExtendedMetrics.d.ts';
  * @unofficial
  */
 export interface MathJaxEx {
-  /** MathJax configuration object. */
+  /**
+   * MathJax configuration object.
+   */
   config: unknown;
 
-  /** MathJax component loader. */
+  /**
+   * MathJax component loader.
+   */
   loader: unknown;
 
-  /** MathJax runtime options. */
+  /**
+   * MathJax runtime options.
+   */
   options: unknown;
 
-  /** MathJax library version string. */
+  /**
+   * MathJax library version string.
+   */
   version: string;
 
   /**
@@ -71,7 +79,9 @@ export interface MathJaxEx {
    */
   tex2mmlPromise(math: string, options?: Record<string, unknown>): Promise<string>;
 
-  /** Reset the TeX input jax, clearing equation numbering and labels. */
+  /**
+   * Reset the TeX input jax, clearing equation numbering and labels.
+   */
   texReset(): void;
 
   /**

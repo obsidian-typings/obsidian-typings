@@ -5,9 +5,13 @@
  * @unofficial
  */
 export interface Dimensions {
-  /** The height. */
+  /**
+   * The height.
+   */
   height: number;
 
-  /** The width. */
+  /**
+   * The width.
+   */
   width: number;
 }

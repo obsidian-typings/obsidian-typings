@@ -10,9 +10,13 @@ import type { PublishPlugin } from './PublishPlugin.d.ts';
  * @unofficial
  */
 export interface PublishPluginInstance extends InternalPluginInstance<PublishPlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Reference to the publish plugin registration. */
+  /**
+   * Reference to the publish plugin registration.
+   */
   plugin: PublishPlugin;
 }

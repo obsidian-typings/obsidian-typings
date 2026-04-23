@@ -5,9 +5,13 @@
  * @unofficial
  */
 export interface CanvasViewCanvasEdgeLineEnd {
-  /** SVG group element containing the line end marker. */
+  /**
+   * SVG group element containing the line end marker.
+   */
   el: SVGGElement;
 
-  /** Type of the line end marker (e.g., 'arrow', 'none'). */
+  /**
+   * Type of the line end marker (e.g., 'arrow', 'none').
+   */
   type: string;
 }

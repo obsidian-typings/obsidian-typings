@@ -7,6 +7,8 @@ import type { CachedMetadata } from 'obsidian';
  * @unofficial
  */
 export interface MetadataCacheWorkerMessage {
-  /** Parsed cached metadata returned by the worker. */
+  /**
+   * Parsed cached metadata returned by the worker.
+   */
   data: CachedMetadata;
 }

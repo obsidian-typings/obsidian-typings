@@ -10,12 +10,18 @@ import type { OutgoingLinkPlugin } from './OutgoingLinkPlugin.d.ts';
  * @unofficial
  */
 export interface OutgoingLinkPluginInstance extends InternalPluginInstance<OutgoingLinkPlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Whether this plugin is enabled by default. */
+  /**
+   * Whether this plugin is enabled by default.
+   */
   defaultOn: true;
 
-  /** Reference to the outgoing link plugin registration. */
+  /**
+   * Reference to the outgoing link plugin registration.
+   */
   plugin: OutgoingLinkPlugin;
 }

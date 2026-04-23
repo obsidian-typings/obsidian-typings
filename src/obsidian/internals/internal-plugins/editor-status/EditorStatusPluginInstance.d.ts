@@ -10,15 +10,23 @@ import type { EditorStatusPlugin } from './EditorStatusPlugin.d.ts';
  * @unofficial
  */
 export interface EditorStatusPluginInstance extends InternalPluginInstance<EditorStatusPlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Whether this plugin is enabled by default. */
+  /**
+   * Whether this plugin is enabled by default.
+   */
   defaultOn: true;
 
-  /** Whether this plugin is hidden from the plugin list in settings. */
+  /**
+   * Whether this plugin is hidden from the plugin list in settings.
+   */
   hiddenFromList: true;
 
-  /** Reference to the editor status plugin registration. */
+  /**
+   * Reference to the editor status plugin registration.
+   */
   plugin: EditorStatusPlugin;
 }

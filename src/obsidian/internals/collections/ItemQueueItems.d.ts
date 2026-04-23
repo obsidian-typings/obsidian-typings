@@ -6,16 +6,24 @@
  * @unofficial
  */
 export interface ItemQueueItems<T> {
-  /** Number of items in the queue. */
+  /**
+   * Number of items in the queue.
+   */
   length: number;
 
-  /** Index offset for the next dequeue operation. */
+  /**
+   * Index offset for the next dequeue operation.
+   */
   offset: number;
 
-  /** Internal array holding queued items. */
+  /**
+   * Internal array holding queued items.
+   */
   queue: T[];
 
-  /** Remove all items from the queue. */
+  /**
+   * Remove all items from the queue.
+   */
   clear(): void;
 
   /**

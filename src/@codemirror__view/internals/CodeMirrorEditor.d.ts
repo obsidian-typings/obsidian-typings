@@ -25,7 +25,9 @@ import type { SetSelectionOptions } from './SetSelectionOptions.d.ts';
  * @unofficial
  */
 export interface CodeMirrorEditor {
-  /** Pending line handle changes to be processed. */
+  /**
+   * Pending line handle changes to be processed.
+   */
   $lineHandleChanges: LineHandleChange[] | undefined;
 
   /**
@@ -36,7 +38,9 @@ export interface CodeMirrorEditor {
    */
   addOverlay(options: AddOverlayOptions): SearchQuery | undefined;
 
-  /** Remove focus from the editor. */
+  /**
+   * Remove focus from the editor.
+   */
   blur(): void;
 
   /**
@@ -72,7 +76,9 @@ export interface CodeMirrorEditor {
    */
   defaultTextHeight(): number;
 
-  /** Destroy and clean up resources. */
+  /**
+   * Destroy and clean up resources.
+   */
   destroy(): void;
 
   /**
@@ -108,7 +114,9 @@ export interface CodeMirrorEditor {
    */
   firstLine(): number;
 
-  /** Focus the editor. */
+  /**
+   * Focus the editor.
+   */
   focus(): void;
 
   /**
@@ -261,7 +269,9 @@ export interface CodeMirrorEditor {
    */
   hardWrap(options: HardWrapOptions): void;
 
-  /** Decrease the indentation of the selection. */
+  /**
+   * Decrease the indentation of the selection.
+   */
   indentLess(): void;
 
   /**
@@ -272,7 +282,9 @@ export interface CodeMirrorEditor {
    */
   indentLine(line: number, more?: boolean): void;
 
-  /** Increase the indentation of the selection. */
+  /**
+   * Increase the indentation of the selection.
+   */
   indentMore(): void;
 
   /**
@@ -348,7 +360,9 @@ export interface CodeMirrorEditor {
    */
   on(event: string, listener: EventListenerOrEventListenerObject): void;
 
-  /** Handle pre-operation-end cleanup. */
+  /**
+   * Handle pre-operation-end cleanup.
+   */
   onBeforeEndOperation(): void;
 
   /**
@@ -358,7 +372,9 @@ export interface CodeMirrorEditor {
    */
   onChange(lineHandleChange: LineHandleChange): void;
 
-  /** Handle a selection change event. */
+  /**
+   * Handle a selection change event.
+   */
   onSelectionChange(): void;
 
   /**
@@ -407,10 +423,14 @@ export interface CodeMirrorEditor {
    */
   posFromIndex(index: number): EditorPosition;
 
-  /** Refresh the editor display. */
+  /**
+   * Refresh the editor display.
+   */
   refresh(): void;
 
-  /** Release all tracked line handles. */
+  /**
+   * Release all tracked line handles.
+   */
   releaseLineHandles(): void;
 
   /**

@@ -7,6 +7,8 @@ import type { HighlightOutliner } from './HighlightOutliner.d.ts';
  * @unofficial
  */
 export interface PdfJsTestingUtils {
-  /** Constructor for creating highlight outliners for PDF annotations. */
+  /**
+   * Constructor for creating highlight outliners for PDF annotations.
+   */
   HighlightOutliner: HighlightOutliner;
 }

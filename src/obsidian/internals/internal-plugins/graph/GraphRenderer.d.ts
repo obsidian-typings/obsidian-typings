@@ -24,118 +24,194 @@ import type { WorkerResults } from './WorkerResults.d.ts';
  * @unofficial
  */
 export interface GraphRenderer {
-  /** General colors of the elements in the graph view, computed from the app CSS. */
+  /**
+   * General colors of the elements in the graph view, computed from the app CSS.
+   */
   colors: Record<GraphColor, GraphColorAttributes>;
 
-  /** `<div>` element containing the graph, with class `.view-content`. */
+  /**
+   * `<div>` element containing the graph, with class `.view-content`.
+   */
   containerEl: HTMLDivElement;
 
-  /** Node currently being dragged, if any. */
+  /**
+   * Node currently being dragged, if any.
+   */
   dragNode: GraphNode | null;
 
-  /** Factor for the thickness of the links. */
+  /**
+   * Factor for the thickness of the links.
+   */
   fLineSizeMult: number;
 
-  /** Factor for the size of the nodes. */
+  /**
+   * Factor for the size of the nodes.
+   */
   fNodeSizeMult: number;
 
-  /** Indicates if arrows should be displayed. */
+  /**
+   * Indicates if arrows should be displayed.
+   */
   fShowArrow: boolean;
 
-  /** Text fade threshold. */
+  /**
+   * Text fade threshold.
+   */
   fTextShowMult: number;
 
-  /** Main container to which nodes, links and arrows are added. */
+  /**
+   * Main container to which nodes, links and arrows are added.
+   */
   hanger: Container;
 
-  /** Height of the graph view, in pixel. */
+  /**
+   * Height of the graph view, in pixel.
+   */
   height: number;
 
-  /** Whether to hide the power tag indicator in the graph view. */
+  /**
+   * Whether to hide the power tag indicator in the graph view.
+   */
   hidePowerTag: boolean;
 
-  /** Node currently being highlighted, if any. */
+  /**
+   * Node currently being highlighted, if any.
+   */
   highlightNode: GraphNode | null;
 
-  /** Number of idle frames. The simulation stops running at 60. */
+  /**
+   * Number of idle frames. The simulation stops running at 60.
+   */
   idleFrames: number;
 
-  /** `<iframe>` element in which the graph is rendered. */
+  /**
+   * `<iframe>` element in which the graph is rendered.
+   */
   iframeEl: HTMLIFrameElement;
 
-  /** `<canvas>` element bound to the event system of `GraphRenderer.px` to capture events. */
+  /**
+   * `<canvas>` element bound to the event system of `GraphRenderer.px` to capture events.
+   */
   interactiveEl: HTMLCanvasElement;
 
-  /** Keyboard action bindings for graph interaction. */
+  /**
+   * Keyboard action bindings for graph interaction.
+   */
   keyboardActions: KeyboardActions;
 
-  /** List of links currently rendered. */
+  /**
+   * List of links currently rendered.
+   */
   links: GraphLink[];
 
-  /** Mouse x coordinate in the graph view. */
+  /**
+   * Mouse x coordinate in the graph view.
+   */
   mouseX: null | number;
 
-  /** Mouse y coordinate in the graph view. */
+  /**
+   * Mouse y coordinate in the graph view.
+   */
   mouseY: null | number;
 
-  /** Record of the nodes currently rendered, with `GraphNode.id` used as key. */
+  /**
+   * Record of the nodes currently rendered, with `GraphNode.id` used as key.
+   */
   nodeLookup: Record<string, GraphNode>;
 
-  /** List of nodes currently rendered. */
+  /**
+   * List of nodes currently rendered.
+   */
   nodes: GraphNode[];
 
-  /** Scale of the nodes based on the zoom level of the graph view. */
+  /**
+   * Scale of the nodes based on the zoom level of the graph view.
+   */
   nodeScale: number;
 
-  /** Whether the user is currently panning the graph view. */
+  /**
+   * Whether the user is currently panning the graph view.
+   */
   panning: boolean;
 
-  /** Current pan velocity along the x axis. */
+  /**
+   * Current pan velocity along the x axis.
+   */
   panvX: number;
 
-  /** Current pan velocity along the y axis. */
+  /**
+   * Current pan velocity along the y axis.
+   */
   panvY: number;
 
-  /** Current pan offset along the x axis. */
+  /**
+   * Current pan offset along the x axis.
+   */
   panX: number;
 
-  /** Current pan offset along the y axis. */
+  /**
+   * Current pan offset along the y axis.
+   */
   panY: number;
 
-  /** Power tag configuration for the graph view. */
+  /**
+   * Power tag configuration for the graph view.
+   */
   powerTag: PowerTag;
 
-  /** PixiJS application rendering everything. */
+  /**
+   * PixiJS application rendering everything.
+   */
   px: Application;
 
-  /** Timer (request ID) associated to the requestAnimationFrame rendering the graph. */
+  /**
+   * Timer (request ID) associated to the requestAnimationFrame rendering the graph.
+   */
   renderTimer: null | number;
 
-  /** Current zoom level of the graph view, interpolated between the previous one and the `targetScale`. */
+  /**
+   * Current zoom level of the graph view, interpolated between the previous one and the `targetScale`.
+   */
   scale: number;
 
-  /** Target zoom level of the graph view. */
+  /**
+   * Target zoom level of the graph view.
+   */
   targetScale: number;
 
-  /** Current alpha of the nodes names based on the graph scale. */
+  /**
+   * Current alpha of the nodes names based on the graph scale.
+   */
   textAlpha: number;
 
-  /** Current visible viewport bounds of the graph view. */
+  /**
+   * Current visible viewport bounds of the graph view.
+   */
   viewport: Coords;
 
-  /** Width of the graph view, in pixel. */
+  /**
+   * Width of the graph view, in pixel.
+   */
   width: number;
 
-  /** Web Worker thread running the graph simulation. */
+  /**
+   * Web Worker thread running the graph simulation.
+   */
   worker: Worker;
 
-  /** Results received from the graph simulation worker. */
+  /**
+   * Results received from the graph simulation worker.
+   */
   workerResults: WorkerResults;
 
-  /** X coordinate of the zoom action. */
+  /**
+   * X coordinate of the zoom action.
+   */
   zoomCenterX: number;
 
-  /** Y coordinate of the zoom action. */
+  /**
+   * Y coordinate of the zoom action.
+   */
   zoomCenterY: number;
 
   /**
@@ -143,10 +219,14 @@ export interface GraphRenderer {
    */
   changed(): void;
 
-  /** Destroy the renderer and release all resources. */
+  /**
+   * Destroy the renderer and release all resources.
+   */
   destroy(): void;
 
-  /** Destroy all the graphics of the graph. */
+  /**
+   * Destroy all the graphics of the graph.
+   */
   destroyGraphics(): void;
 
   /**
@@ -170,13 +250,19 @@ export interface GraphRenderer {
    */
   getTransparentScreenshot(): ICanvas;
 
-  /** Initialize all the graphics of the graph. */
+  /**
+   * Initialize all the graphics of the graph.
+   */
   initGraphics(): void;
 
-  /** Called when the graph iframe finishes loading. */
+  /**
+   * Called when the graph iframe finishes loading.
+   */
   onIframeLoad(): void;
 
-  /** Called when the graph iframe is unloaded. */
+  /**
+   * Called when the graph iframe is unloaded.
+   */
   onIframeUnload(): void;
 
   /**
@@ -213,7 +299,9 @@ export interface GraphRenderer {
    */
   onNodeRightClick(evt: MouseEvent, id: string, type: string): void;
 
-  /** Handle the pointer leaving a graph node. */
+  /**
+   * Handle the pointer leaving a graph node.
+   */
   onNodeUnhover(): void;
 
   /**
@@ -224,7 +312,9 @@ export interface GraphRenderer {
    */
   onPointerDown(renderer: GraphRenderer, evt: PointerEvent): void;
 
-  /** Handle the pointer leaving the graph view. */
+  /**
+   * Handle the pointer leaving the graph view.
+   */
   onPointerOut(): void;
 
   /**
@@ -235,7 +325,9 @@ export interface GraphRenderer {
    */
   onPointerOver(renderer: GraphRenderer, evt: PointerEvent): void;
 
-  /** Handle a resize of the graph container. */
+  /**
+   * Handle a resize of the graph container.
+   */
   onResize(): void;
 
   /**
@@ -245,13 +337,19 @@ export interface GraphRenderer {
    */
   onWheel(evt: WheelEvent): void;
 
-  /** Queue a render frame to be executed on the next animation frame. */
+  /**
+   * Queue a render frame to be executed on the next animation frame.
+   */
   queueRender(): void;
 
-  /** Callback invoked on each render frame. */
+  /**
+   * Callback invoked on each render frame.
+   */
   renderCallback(): void;
 
-  /** Reset the pan offset to the origin. */
+  /**
+   * Reset the pan offset to the origin.
+   */
   resetPan(): void;
 
   /**
@@ -290,10 +388,14 @@ export interface GraphRenderer {
    */
   setScale(scale: number): void;
 
-  /** Re-read CSS variables and update the graph colors accordingly. */
+  /**
+   * Re-read CSS variables and update the graph colors accordingly.
+   */
   testCSS(): void;
 
-  /** Interpolate the current zoom level towards the target scale. */
+  /**
+   * Interpolate the current zoom level towards the target scale.
+   */
   updateZoom(): void;
 
   /**

@@ -10,12 +10,18 @@ import type { OutlinePlugin } from './OutlinePlugin.d.ts';
  * @unofficial
  */
 export interface OutlinePluginInstance extends InternalPluginInstance<OutlinePlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Whether this plugin is enabled by default. */
+  /**
+   * Whether this plugin is enabled by default.
+   */
   defaultOn: true;
 
-  /** Reference to the outline plugin registration. */
+  /**
+   * Reference to the outline plugin registration.
+   */
   plugin: OutlinePlugin;
 }

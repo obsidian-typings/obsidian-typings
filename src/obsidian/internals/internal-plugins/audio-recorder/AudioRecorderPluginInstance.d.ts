@@ -10,19 +10,29 @@ import type { AudioRecorderPlugin } from './AudioRecorderPlugin.d.ts';
  * @unofficial
  */
 export interface AudioRecorderPluginInstance extends InternalPluginInstance<AudioRecorderPlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** File extension used for saved audio recordings. */
+  /**
+   * File extension used for saved audio recordings.
+   */
   extension: string;
 
-  /** Reference to the audio recorder plugin registration. */
+  /**
+   * Reference to the audio recorder plugin registration.
+   */
   plugin: AudioRecorderPlugin;
 
-  /** Active MediaRecorder instance, or `null` when not recording. */
+  /**
+   * Active MediaRecorder instance, or `null` when not recording.
+   */
   recorder: MediaRecorder | null;
 
-  /** Whether audio is currently being recorded. */
+  /**
+   * Whether audio is currently being recorded.
+   */
   recording: boolean;
 
   /**
@@ -46,7 +56,9 @@ export interface AudioRecorderPluginInstance extends InternalPluginInstance<Audi
    */
   onStartRecording(): Promise<void>;
 
-  /** Stop the current audio recording session. */
+  /**
+   * Stop the current audio recording session.
+   */
   onStopRecording(): void;
 
   /**

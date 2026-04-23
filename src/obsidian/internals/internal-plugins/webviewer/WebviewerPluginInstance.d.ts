@@ -17,10 +17,14 @@ export interface WebviewerPluginInstance extends InternalPluginInstance<Webviewe
    */
   db: WebviewerDBStore;
 
-  /** Whether this plugin is enabled by default. */
+  /**
+   * Whether this plugin is enabled by default.
+   */
   defaultOn: false;
 
-  /** URLs that are pending to be added to the ignore list. */
+  /**
+   * URLs that are pending to be added to the ignore list.
+   */
   pendingIgnoredURLs: string[];
 
   /**
@@ -54,6 +58,8 @@ export interface WebviewerPluginInstance extends InternalPluginInstance<Webviewe
    */
   openUrlExternally(url: string): void;
 
-  /** Update the current browsing session state. */
+  /**
+   * Update the current browsing session state.
+   */
   updateSession(): void;
 }

@@ -18,55 +18,89 @@ import type { GraphForceOptions } from './options/GraphForceOptions.d.ts';
  * @unofficial
  */
 export interface GraphEngine {
-  /** Reference to the Obsidian app instance. */
+  /**
+   * Reference to the Obsidian app instance.
+   */
   app: App;
 
-  /** UI controls for configuring color group options. */
+  /**
+   * UI controls for configuring color group options.
+   */
   colorGroupOptions: GraphColorGroupOptions;
 
-  /** Container element for the graph settings controls panel. */
+  /**
+   * Container element for the graph settings controls panel.
+   */
   controlsEl: HTMLDivElement;
 
-  /** Path of the currently focused file in the local graph. */
+  /**
+   * Path of the currently focused file in the local graph.
+   */
   currentFocusFile: string;
 
-  /** UI controls for configuring display options. */
+  /**
+   * UI controls for configuring display options.
+   */
   displayOptions: GraphDisplayOptions;
 
-  /** Filter determining which files are included in the graph. */
+  /**
+   * Filter determining which files are included in the graph.
+   */
   fileFilter: GraphFileFilter;
 
-  /** UI controls for configuring filter options. */
+  /**
+   * UI controls for configuring filter options.
+   */
   filterOptions: GraphFilterOptions;
 
-  /** UI controls for configuring force simulation options. */
+  /**
+   * UI controls for configuring force simulation options.
+   */
   forceOptions: GraphForceOptions;
 
-  /** Whether any search filter is currently active. */
+  /**
+   * Whether any search filter is currently active.
+   */
   hasFilter: boolean;
 
-  /** Hover popover displayed when hovering over a node. */
+  /**
+   * Hover popover displayed when hovering over a node.
+   */
   hoverPopover: unknown;
 
-  /** Last link that was hovered over. */
+  /**
+   * Last link that was hovered over.
+   */
   lastHoverLink: unknown;
 
-  /** Current graph plugin options applied to this engine. */
+  /**
+   * Current graph plugin options applied to this engine.
+   */
   options: GraphPluginInstanceOptions;
 
-  /** Current animation progression value for graph transitions. */
+  /**
+   * Current animation progression value for graph transitions.
+   */
   progression: number;
 
-  /** Speed of the animation progression. */
+  /**
+   * Speed of the animation progression.
+   */
   progressionSpeed: number;
 
-  /** Renderer responsible for drawing the graph. */
+  /**
+   * Renderer responsible for drawing the graph.
+   */
   renderer: GraphRenderer;
 
-  /** Active color group search queries for node coloring. */
+  /**
+   * Active color group search queries for node coloring.
+   */
   searchQueries: GraphColorGroup[];
 
-  /** The view (local or global) that owns this engine. */
+  /**
+   * The view (local or global) that owns this engine.
+   */
   view: GraphView | LocalGraphView;
 
   /**

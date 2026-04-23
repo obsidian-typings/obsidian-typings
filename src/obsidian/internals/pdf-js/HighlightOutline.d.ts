@@ -6,10 +6,14 @@ import type { Outline } from './Outline.d.ts';
  * @unofficial
  */
 export declare class HighlightOutline extends Outline {
-  /** The last point of the highlight used for directional calculations. */
+  /**
+   * The last point of the highlight used for directional calculations.
+   */
   lastPoint: unknown;
 
-  /** Create a highlight outline from the given outlines, bounding box, and last point. */
+  /**
+   * Create a highlight outline from the given outlines, bounding box, and last point.
+   */
   constructor(outlines: unknown, box: unknown, lastPoint: unknown);
 
   /**

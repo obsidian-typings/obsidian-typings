@@ -5,22 +5,34 @@
  * @unofficial
  */
 export interface Runnable {
-  /** Whether the runnable has been cancelled. */
+  /**
+   * Whether the runnable has been cancelled.
+   */
   cancelled: boolean;
 
-  /** Callback invoked when the runnable is cancelled. */
+  /**
+   * Callback invoked when the runnable is cancelled.
+   */
   onCancel: (() => void) | null;
 
-  /** Callback invoked when the runnable starts. */
+  /**
+   * Callback invoked when the runnable starts.
+   */
   onStart: (() => void) | null;
 
-  /** Callback invoked when the runnable stops. */
+  /**
+   * Callback invoked when the runnable stops.
+   */
   onStop: (() => void) | null;
 
-  /** Whether the runnable is currently running. */
+  /**
+   * Whether the runnable is currently running.
+   */
   running: boolean;
 
-  /** Cancel the runnable. */
+  /**
+   * Cancel the runnable.
+   */
   cancel(): void;
 
   /**
@@ -37,9 +49,13 @@ export interface Runnable {
    */
   isRunning(): boolean;
 
-  /** Start the runnable. */
+  /**
+   * Start the runnable.
+   */
   start(): void;
 
-  /** Stop the runnable. */
+  /**
+   * Stop the runnable.
+   */
   stop(): void;
 }

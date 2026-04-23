@@ -7,7 +7,9 @@ import type { CustomArrayDict } from '../../internals/collections/CustomArrayDic
  * @unofficial
  */
 export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
-  /** Internal map storing key-to-array mappings. */
+  /**
+   * Internal map storing key-to-array mappings.
+   */
   public data: Map<string, T[]> = new Map();
 
   /**
@@ -37,7 +39,9 @@ export class CustomArrayDictImpl<T> implements CustomArrayDict<T> {
     this.data.delete(key);
   }
 
-  /** Remove all keys and their values. */
+  /**
+   * Remove all keys and their values.
+   */
   public clearAll(): void {
     this.data.clear();
   }

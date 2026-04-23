@@ -16,88 +16,144 @@ import type { CanvasViewCanvasNodeUnknownData } from './CanvasViewCanvasNodeUnkn
  * @unofficial
  */
 export interface CanvasViewCanvasNode extends CanvasViewCanvasNodeBase {
-  /** Whether this node should always remain loaded even when off-screen. */
+  /**
+   * Whether this node should always remain loaded even when off-screen.
+   */
   alwaysKeepLoaded: boolean;
 
-  /** Reference to the Obsidian app instance. */
+  /**
+   * Reference to the Obsidian app instance.
+   */
   app: App;
 
-  /** Aspect ratio of the node (width / height). */
+  /**
+   * Aspect ratio of the node (width / height).
+   */
   aspectRatio: number;
 
-  /** Bounding box of the node for spatial indexing. */
+  /**
+   * Bounding box of the node for spatial indexing.
+   */
   bbox: BBox;
 
-  /** Reference to the parent canvas instance. */
+  /**
+   * Reference to the parent canvas instance.
+   */
   canvas: CanvasViewCanvas;
 
-  /** Child editor view for the node's content. */
+  /**
+   * Child editor view for the node's content.
+   */
   child: WidgetEditorView;
 
-  /** Color of the node (CSS color string or preset name). */
+  /**
+   * Color of the node (CSS color string or preset name).
+   */
   color: string;
 
-  /** Outermost container element of the node. */
+  /**
+   * Outermost container element of the node.
+   */
   containerEl: HTMLDivElement;
 
-  /** Overlay element that blocks interaction with content when not editing. */
+  /**
+   * Overlay element that blocks interaction with content when not editing.
+   */
   contentBlockerEl: HTMLDivElement;
 
-  /** Element containing the node's editable content. */
+  /**
+   * Element containing the node's editable content.
+   */
   contentEl: HTMLDivElement;
 
-  /** Whether the node has been destroyed. */
+  /**
+   * Whether the node has been destroyed.
+   */
   destroyed: boolean;
 
-  /** Reference to the associated file, if this is a file node. */
+  /**
+   * Reference to the associated file, if this is a file node.
+   */
   file: TFile;
 
-  /** Path to the associated file, if this is a file node. */
+  /**
+   * Path to the associated file, if this is a file node.
+   */
   filePath: string;
 
-  /** Height of the node in canvas units. */
+  /**
+   * Height of the node in canvas units.
+   */
   height: number;
 
-  /** Unique identifier for this node. */
+  /**
+   * Unique identifier for this node.
+   */
   id: string;
 
-  /** Whether the node has been initialized. */
+  /**
+   * Whether the node has been initialized.
+   */
   initialized: boolean;
 
-  /** Whether the node's content is currently mounted in the DOM. */
+  /**
+   * Whether the node's content is currently mounted in the DOM.
+   */
   isContentMounted: boolean;
 
-  /** Whether the node is currently in editing mode. */
+  /**
+   * Whether the node is currently in editing mode.
+   */
   isEditing: boolean;
 
-  /** Main node element for rendering. */
+  /**
+   * Main node element for rendering.
+   */
   nodeEl: HTMLDivElement;
 
-  /** Placeholder element shown while the node content is loading. */
+  /**
+   * Placeholder element shown while the node content is loading.
+   */
   placeholderEl: HTMLDivElement;
 
-  /** The last rendered z-index value. */
+  /**
+   * The last rendered z-index value.
+   */
   renderedZIndex: number;
 
-  /** Whether the node needs to recalculate its size. */
+  /**
+   * Whether the node needs to recalculate its size.
+   */
   resizeDirty: boolean;
 
-  /** Subpath within the linked file (e.g., heading or block reference). */
+  /**
+   * Subpath within the linked file (e.g., heading or block reference).
+   */
   subpath: string;
 
-  /** Additional data properties not covered by known fields. */
+  /**
+   * Additional data properties not covered by known fields.
+   */
   unknownData: CanvasViewCanvasNodeUnknownData;
 
-  /** Width of the node in canvas units. */
+  /**
+   * Width of the node in canvas units.
+   */
   width: number;
 
-  /** X coordinate of the node's top-left corner in canvas space. */
+  /**
+   * X coordinate of the node's top-left corner in canvas space.
+   */
   x: number;
 
-  /** Y coordinate of the node's top-left corner in canvas space. */
+  /**
+   * Y coordinate of the node's top-left corner in canvas space.
+   */
   y: number;
 
-  /** Z-index stacking order of the node. */
+  /**
+   * Z-index stacking order of the node.
+   */
   zIndex: number;
 
   /**

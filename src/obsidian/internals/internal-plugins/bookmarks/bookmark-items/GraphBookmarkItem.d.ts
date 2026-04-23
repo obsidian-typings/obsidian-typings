@@ -8,12 +8,18 @@ import type { BookmarkItem } from './BookmarkItem.d.ts';
  * @unofficial
  */
 export interface GraphBookmarkItem extends BookmarkItem {
-  /** Graph view options saved with this bookmark. */
+  /**
+   * Graph view options saved with this bookmark.
+   */
   options: GraphPluginInstanceOptions;
 
-  /** Display title of this graph bookmark. */
+  /**
+   * Display title of this graph bookmark.
+   */
   title: string;
 
-  /** Discriminator indicating this is a graph bookmark. */
+  /**
+   * Discriminator indicating this is a graph bookmark.
+   */
   type: 'graph';
 }

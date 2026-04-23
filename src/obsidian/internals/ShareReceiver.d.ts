@@ -10,7 +10,9 @@ import type { SharedFile } from './SharedFile.d.ts';
  * @unofficial
  */
 export interface ShareReceiver {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
   /**

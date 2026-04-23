@@ -5,7 +5,9 @@
  * @unofficial
  */
 export interface PromisedQueue {
-  /** The current promise in the queue chain. */
+  /**
+   * The current promise in the queue chain.
+   */
   promise: Promise<unknown>;
 
   /**

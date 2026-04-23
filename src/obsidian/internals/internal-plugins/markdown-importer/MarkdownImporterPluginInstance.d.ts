@@ -10,6 +10,8 @@ import type { MarkdownImporterPlugin } from './MarkdownImporterPlugin.d.ts';
  * @unofficial
  */
 export interface MarkdownImporterPluginInstance extends InternalPluginInstance<MarkdownImporterPlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 }

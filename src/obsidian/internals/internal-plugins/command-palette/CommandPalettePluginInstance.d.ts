@@ -15,22 +15,34 @@ import type { CommandPalettePlugin } from './CommandPalettePlugin.d.ts';
  * @unofficial
  */
 export interface CommandPalettePluginInstance extends InternalPluginInstance<CommandPalettePlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Whether this plugin is enabled by default. */
+  /**
+   * Whether this plugin is enabled by default.
+   */
   defaultOn: true;
 
-  /** The command palette fuzzy suggest modal. */
+  /**
+   * The command palette fuzzy suggest modal.
+   */
   modal: CommandPaletteModal;
 
-  /** Configuration options for the command palette. */
+  /**
+   * Configuration options for the command palette.
+   */
   options: CommandPaletteOptions;
 
-  /** Reference to the command palette plugin registration. */
+  /**
+   * Reference to the command palette plugin registration.
+   */
   plugin: CommandPalettePlugin;
 
-  /** List of recently used command IDs. */
+  /**
+   * List of recently used command IDs.
+   */
   recentCommands: string[];
 
   /**

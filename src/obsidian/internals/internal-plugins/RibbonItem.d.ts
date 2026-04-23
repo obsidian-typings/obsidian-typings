@@ -7,16 +7,24 @@ import type { IconName } from 'obsidian';
  * @unofficial
  */
 export interface RibbonItem {
-  /** Whether this ribbon item is hidden. */
+  /**
+   * Whether this ribbon item is hidden.
+   */
   hidden: boolean;
 
-  /** Icon name displayed for this ribbon item. */
+  /**
+   * Icon name displayed for this ribbon item.
+   */
   icon: IconName;
 
-  /** Unique identifier for this ribbon item. */
+  /**
+   * Unique identifier for this ribbon item.
+   */
   id: string;
 
-  /** Tooltip title displayed on hover. */
+  /**
+   * Tooltip title displayed on hover.
+   */
   title: string;
 
   /**

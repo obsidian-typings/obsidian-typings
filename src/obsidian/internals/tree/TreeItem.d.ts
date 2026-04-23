@@ -7,13 +7,19 @@ import type { TreeNode } from './TreeNode.d.ts';
  * @unofficial
  */
 export interface TreeItem extends TreeNode {
-  /** Overlay element covering the tree item, used for visual effects. */
+  /**
+   * Overlay element covering the tree item, used for visual effects.
+   */
   coverEl: HTMLElement;
 
-  /** Inner container element holding the tree item content. */
+  /**
+   * Inner container element holding the tree item content.
+   */
   innerEl: HTMLElement;
 
-  /** The main element representing this tree item in the DOM. */
+  /**
+   * The main element representing this tree item in the DOM.
+   */
   selfEl: HTMLElement;
 
   /**

@@ -10,21 +10,33 @@ import type {
  * @unofficial
  */
 export interface LeafEntry {
-  /** Child leaf entries if this is a split container. */
+  /**
+   * Child leaf entries if this is a split container.
+   */
   children?: LeafEntry[];
 
-  /** Split direction if this is a split container. */
+  /**
+   * Split direction if this is a split container.
+   */
   direction?: SplitDirection;
 
-  /** Unique identifier for the leaf. */
+  /**
+   * Unique identifier for the leaf.
+   */
   id: string;
 
-  /** View state of the leaf. */
+  /**
+   * View state of the leaf.
+   */
   state?: ViewState;
 
-  /** Type of the leaf entry (e.g. "leaf", "split", "tabs"). */
+  /**
+   * Type of the leaf entry (e.g. "leaf", "split", "tabs").
+   */
   type: string;
 
-  /** Width of the leaf in pixels, if applicable. */
+  /**
+   * Width of the leaf in pixels, if applicable.
+   */
   width?: number;
 }

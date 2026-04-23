@@ -12,9 +12,13 @@ import type { CommandPalettePluginInstance } from './CommandPalettePluginInstanc
  * @unofficial
  */
 export interface CommandPaletteModal extends FuzzySuggestModal<Command> {
-  /** Cached list of available commands, or `null` if not yet populated. */
+  /**
+   * Cached list of available commands, or `null` if not yet populated.
+   */
   commands: Command[] | null;
 
-  /** Reference to the command palette plugin instance. */
+  /**
+   * Reference to the command palette plugin instance.
+   */
   plugin: CommandPalettePluginInstance;
 }

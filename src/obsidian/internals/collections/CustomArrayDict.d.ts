@@ -6,7 +6,9 @@
  * @unofficial
  */
 export interface CustomArrayDict<T> {
-  /** Internal map storing key-to-array mappings. */
+  /**
+   * Internal map storing key-to-array mappings.
+   */
   data: Map<string, T[]>;
 
   /**
@@ -24,7 +26,9 @@ export interface CustomArrayDict<T> {
    */
   clear(key: string): void;
 
-  /** Remove all keys and their values. */
+  /**
+   * Remove all keys and their values.
+   */
   clearAll(): void;
 
   /**

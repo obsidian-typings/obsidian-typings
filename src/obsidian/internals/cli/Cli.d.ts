@@ -15,10 +15,14 @@ import type { CliTreeNode } from './CliTreeNode.d.ts';
  * @unofficial
  */
 export interface Cli {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Registered CLI command handlers. */
+  /**
+   * Registered CLI command handlers.
+   */
   handlers: Map<string, CliHandlerEntry>;
 
   /**

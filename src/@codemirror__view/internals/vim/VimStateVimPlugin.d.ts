@@ -5,6 +5,8 @@
  * @unofficial
  */
 export interface VimStateVimPlugin {
-  /** The last keydown event key string. */
+  /**
+   * The last keydown event key string.
+   */
   lastKeydown: string;
 }

@@ -9,7 +9,9 @@ import type { BacklinkComponent } from './BacklinkComponent.d.ts';
  * @unofficial
  */
 export interface BacklinkView extends InfoFileView {
-  /** The backlink component rendering linked and unlinked mentions. */
+  /**
+   * The backlink component rendering linked and unlinked mentions.
+   */
   backlink: BacklinkComponent;
 
   /**
@@ -24,6 +26,8 @@ export interface BacklinkView extends InfoFileView {
    */
   showSearch(): void;
 
-  /** Refresh the backlink results. */
+  /**
+   * Refresh the backlink results.
+   */
   update(): void;
 }

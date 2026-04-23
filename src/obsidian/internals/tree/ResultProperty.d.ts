@@ -7,12 +7,18 @@ import type { ContentPosition } from './ContentPosition.d.ts';
  * @unofficial
  */
 export interface ResultProperty {
-  /** Property key name that was matched. */
+  /**
+   * Property key name that was matched.
+   */
   key: string;
 
-  /** Position of the match within the content. */
+  /**
+   * Position of the match within the content.
+   */
   pos: ContentPosition;
 
-  /** Path of sub-keys for nested property matches. */
+  /**
+   * Path of sub-keys for nested property matches.
+   */
   subkey: (number | string)[];
 }

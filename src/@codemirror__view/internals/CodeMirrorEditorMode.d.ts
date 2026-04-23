@@ -5,6 +5,8 @@
  * @unofficial
  */
 export interface CodeMirrorEditorMode {
-  /** Name of the active language mode. */
+  /**
+   * Name of the active language mode.
+   */
   name: string;
 }

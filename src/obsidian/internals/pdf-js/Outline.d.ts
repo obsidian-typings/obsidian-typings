@@ -4,7 +4,9 @@
  * @unofficial
  */
 export declare class Outline {
-  /** Number of decimal places used when rounding SVG coordinates. */
+  /**
+   * Number of decimal places used when rounding SVG coordinates.
+   */
   static PRECISION: number;
 
   /**

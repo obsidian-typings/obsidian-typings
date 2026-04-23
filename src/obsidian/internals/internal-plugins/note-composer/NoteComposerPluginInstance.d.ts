@@ -19,16 +19,24 @@ import type { NoteComposerPluginOptions } from './NoteComposerPluginOptions.d.ts
  * @unofficial
  */
 export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteComposerPlugin> {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Whether this plugin is enabled by default. */
+  /**
+   * Whether this plugin is enabled by default.
+   */
   defaultOn: true;
 
-  /** Configuration options for the note composer. */
+  /**
+   * Configuration options for the note composer.
+   */
   options: NoteComposerPluginOptions;
 
-  /** Reference to the note composer plugin registration. */
+  /**
+   * Reference to the note composer plugin registration.
+   */
   pluginInstance: NoteComposerPlugin;
 
   /**
@@ -68,7 +76,9 @@ export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteC
    */
   onEditorMenu(menu: Menu, editor: Editor, info: MarkdownFileInfo | MarkdownView): void;
 
-  /** Called when the plugin is enabled. */
+  /**
+   * Called when the plugin is enabled.
+   */
   onEnable: (app: App, plugin: NoteComposerPlugin) => Promise<void>;
 
   /**

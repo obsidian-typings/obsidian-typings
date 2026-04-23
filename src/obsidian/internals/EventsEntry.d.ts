@@ -7,13 +7,19 @@ import type { Events } from 'obsidian';
  * @unofficial
  */
 export interface EventsEntry {
-  /** Context (`this` value) for the event handler callback. */
+  /**
+   * Context (`this` value) for the event handler callback.
+   */
   ctx: unknown;
 
-  /** Events object this handler is registered on. */
+  /**
+   * Events object this handler is registered on.
+   */
   e: Events;
 
-  /** Event name this handler listens for. */
+  /**
+   * Event name this handler listens for.
+   */
   name: string;
 
   /**

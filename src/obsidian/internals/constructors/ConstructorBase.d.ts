@@ -15,6 +15,8 @@ export interface ConstructorBase<Args extends unknown[], Instance> {
    */
   new (...args: Args): Instance;
 
-  /** Prototype of the constructed instances. */
+  /**
+   * Prototype of the constructed instances.
+   */
   prototype: Instance;
 }

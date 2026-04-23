@@ -9,19 +9,29 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface DatePropertyWidgetComponentBase extends PropertyWidgetComponentBase {
-  /** The date of the property widget. */
+  /**
+   * The date of the property widget.
+   */
   date?: moment.Moment;
 
-  /** Whether the property widget is dirty. */
+  /**
+   * Whether the property widget is dirty.
+   */
   dirty: boolean;
 
-  /** The hover popup for the property widget. */
+  /**
+   * The hover popup for the property widget.
+   */
   hoverPopup: HoverPopover | null;
 
-  /** The input element for the property widget. */
+  /**
+   * The input element for the property widget.
+   */
   inputEl: HTMLInputElement;
 
-  /** The value of the property widget. */
+  /**
+   * The value of the property widget.
+   */
   value: string;
 
   /**

@@ -87,7 +87,9 @@ export interface AllPropertiesView extends ItemView {
    */
   startRename(e: unknown): Promise<unknown>;
 
-  /** Refresh the properties list. */
+  /**
+   * Refresh the properties list.
+   */
   update(): void;
 
   /**

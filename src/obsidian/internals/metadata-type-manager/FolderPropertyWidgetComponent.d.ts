@@ -7,10 +7,14 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface FolderPropertyWidgetComponent extends PropertyWidgetComponentBase {
-  /** The input element for the property widget. */
+  /**
+   * The input element for the property widget.
+   */
   inputEl: HTMLInputElement;
 
-  /** The type of the property widget. */
+  /**
+   * The type of the property widget.
+   */
   type: 'folder';
 
   /**

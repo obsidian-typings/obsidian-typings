@@ -5,15 +5,23 @@
  * @unofficial
  */
 export interface Coords {
-  /** Bottom edge coordinate. */
+  /**
+   * Bottom edge coordinate.
+   */
   bottom: number;
 
-  /** Left edge coordinate. */
+  /**
+   * Left edge coordinate.
+   */
   left: number;
 
-  /** Right edge coordinate. */
+  /**
+   * Right edge coordinate.
+   */
   right: number;
 
-  /** Top edge coordinate. */
+  /**
+   * Top edge coordinate.
+   */
   top: number;
 }

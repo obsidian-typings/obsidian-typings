@@ -22,43 +22,69 @@ import type { RibbonItem } from './RibbonItem.d.ts';
  * @unofficial
  */
 export interface InternalPlugin<InternalPluginInstance> extends Component {
-  /** Button elements added by this plugin. */
+  /**
+   * Button elements added by this plugin.
+   */
   addedButtonEls: HTMLDivElement[];
 
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Commands registered by this plugin. */
+  /**
+   * Commands registered by this plugin.
+   */
   commands: Command[];
 
-  /** Whether this plugin is currently enabled. */
+  /**
+   * Whether this plugin is currently enabled.
+   */
   enabled: boolean;
 
-  /** Whether this plugin has a status bar item. */
+  /**
+   * Whether this plugin has a status bar item.
+   */
   hasStatusBarItem: boolean;
 
-  /** The plugin instance containing the actual logic. */
+  /**
+   * The plugin instance containing the actual logic.
+   */
   instance: InternalPluginInstance;
 
-  /** Timestamp of the last settings save. */
+  /**
+   * Timestamp of the last settings save.
+   */
   lastSave: number;
 
-  /** Reference to the internal plugins manager. */
+  /**
+   * Reference to the internal plugins manager.
+   */
   manager: InternalPlugins;
 
-  /** Mobile file info renderers registered by this plugin. */
+  /**
+   * Mobile file info renderers registered by this plugin.
+   */
   mobileFileInfo: MobileFileInfo[];
 
-  /** Debounced handler for config file changes. */
+  /**
+   * Debounced handler for config file changes.
+   */
   onConfigFileChange: Debouncer<[], Promise<void>>;
 
-  /** Ribbon items registered by this plugin. */
+  /**
+   * Ribbon items registered by this plugin.
+   */
   ribbonItems: RibbonItem[];
 
-  /** Status bar element for this plugin, or `null` if none. */
+  /**
+   * Status bar element for this plugin, or `null` if none.
+   */
   statusBarEl: HTMLDivElement | null;
 
-  /** View creators registered by this plugin, keyed by view type. */
+  /**
+   * View creators registered by this plugin, keyed by view type.
+   */
   views: Record<string, ViewCreator>;
 
   /**
@@ -117,7 +143,9 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
    */
   handleConfigFileChange(): Promise<void>;
 
-  /** Initialize this plugin. */
+  /**
+   * Initialize this plugin.
+   */
   init(): void;
 
   /**
@@ -150,7 +178,9 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
    */
   registerRibbonItem(title: string, icon: IconName, callback: () => Promise<void>): void;
 
-  /** Register a status bar item for this plugin. */
+  /**
+   * Register a status bar item for this plugin.
+   */
   registerStatusBarItem(): void;
 
   /**

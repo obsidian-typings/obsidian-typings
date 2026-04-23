@@ -8,16 +8,24 @@ import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
  * @unofficial
  */
 export interface CanvasSelection {
-  /** Bounding box encompassing all selected items. */
+  /**
+   * Bounding box encompassing all selected items.
+   */
   bbox: BBox;
 
-  /** Reference to the parent canvas instance. */
+  /**
+   * Reference to the parent canvas instance.
+   */
   canvas: CanvasViewCanvas;
 
-  /** Array of resize handle elements around the selection. */
+  /**
+   * Array of resize handle elements around the selection.
+   */
   resizerEls: HTMLDivElement[];
 
-  /** Element displaying the selection highlight rectangle. */
+  /**
+   * Element displaying the selection highlight rectangle.
+   */
   selectionEl: HTMLDivElement;
 
   /**

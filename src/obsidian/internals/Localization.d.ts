@@ -5,6 +5,8 @@
  * @unofficial
  */
 export interface Localization {
-  /** Localized string value, or nested localization group. */
+  /**
+   * Localized string value, or nested localization group.
+   */
   [key: string]: Localization | string;
 }

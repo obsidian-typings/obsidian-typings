@@ -12,40 +12,64 @@ import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
  * @unofficial
  */
 export interface ResultDomItemChild extends TreeNode {
-  /** Cached metadata for the file containing this match. */
+  /**
+   * Cached metadata for the file containing this match.
+   */
   cache: CachedMetadata;
 
-  /** Text content of the matched region. */
+  /**
+   * Text content of the matched region.
+   */
   content: string;
 
-  /** End offset of the match context within the document. */
+  /**
+   * End offset of the match context within the document.
+   */
   end: number;
 
-  /** Layout information used by virtual scrolling. */
+  /**
+   * Layout information used by virtual scrolling.
+   */
   info: TreeNodeInfo;
 
-  /** Array of match positions within the content. */
+  /**
+   * Array of match positions within the content.
+   */
   matches: ContentPosition[];
 
-  /** Callback to mutate the editor state when navigating to this match. */
+  /**
+   * Callback to mutate the editor state when navigating to this match.
+   */
   mutateEState: unknown;
 
-  /** Callback for custom rendering of match highlights. */
+  /**
+   * Callback for custom rendering of match highlights.
+   */
   onMatchRender: unknown;
 
-  /** Parent result item containing this match child. */
+  /**
+   * Parent result item containing this match child.
+   */
   parent: ResultDomItem;
 
-  /** Reference to the parent result item. */
+  /**
+   * Reference to the parent result item.
+   */
   parentDom: ResultDomItem;
 
-  /** Element for the "show more context after" button. */
+  /**
+   * Element for the "show more context after" button.
+   */
   showMoreAfterEl: HTMLElement;
 
-  /** Element for the "show more context before" button. */
+  /**
+   * Element for the "show more context before" button.
+   */
   showMoreBeforeEl: HTMLElement;
 
-  /** Start offset of the match context within the document. */
+  /**
+   * Start offset of the match context within the document.
+   */
   start: number;
 
   /**
@@ -91,12 +115,18 @@ export interface ResultDomItemChild extends TreeNode {
    */
   render(hasTextBefore: boolean, hasTextAfter: boolean): void;
 
-  /** Expand the context to show more text after the match. */
+  /**
+   * Expand the context to show more text after the match.
+   */
   showMoreAfter(): void;
 
-  /** Expand the context to show more text before the match. */
+  /**
+   * Expand the context to show more text before the match.
+   */
   showMoreBefore(): void;
 
-  /** Toggle visibility of the "show more context" buttons. */
+  /**
+   * Toggle visibility of the "show more context" buttons.
+   */
   toggleShowMoreContextButtons(): void;
 }

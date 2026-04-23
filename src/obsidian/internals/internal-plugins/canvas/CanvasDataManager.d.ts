@@ -7,7 +7,9 @@ import type { App } from 'obsidian';
  * @unofficial
  */
 export interface CanvasDataManager {
-  /** Reference to the Obsidian app instance. */
+  /**
+   * Reference to the Obsidian app instance.
+   */
   app: App;
 
   /**

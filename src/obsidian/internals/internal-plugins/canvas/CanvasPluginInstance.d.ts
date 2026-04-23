@@ -17,30 +17,48 @@ import type { CanvasPluginInstanceOptions } from './CanvasPluginInstanceOptions.
  * @unofficial
  */
 export interface CanvasPluginInstance extends InternalPluginInstance<CanvasPlugin> {
-  /** Reference to the Obsidian app instance. */
+  /**
+   * Reference to the Obsidian app instance.
+   */
   app: App;
 
-  /** Whether this plugin is enabled by default. */
+  /**
+   * Whether this plugin is enabled by default.
+   */
   defaultOn: true;
 
-  /** Index for resolving links and embeds within canvas files. */
+  /**
+   * Index for resolving links and embeds within canvas files.
+   */
   index: CanvasIndex;
 
-  /** Manager for loading, saving, and handling canvas local data. */
+  /**
+   * Manager for loading, saving, and handling canvas local data.
+   */
   localDataManager: CanvasDataManager;
 
-  /** User-configurable options for the canvas plugin. */
+  /**
+   * User-configurable options for the canvas plugin.
+   */
   options: CanvasPluginInstanceOptions;
 
-  /** Reference to the parent canvas plugin. */
+  /**
+   * Reference to the parent canvas plugin.
+   */
   plugin: CanvasPlugin;
 
-  /** Queue for processing file rename operations sequentially. */
+  /**
+   * Queue for processing file rename operations sequentially.
+   */
   renameQueue: PromisedQueue;
 
-  /** Pending rename operations to be processed. */
+  /**
+   * Pending rename operations to be processed.
+   */
   renames: unknown[];
 
-  /** Debounced function to process pending rename operations. */
+  /**
+   * Debounced function to process pending rename operations.
+   */
   requestProcessRename: Debouncer<[], unknown>;
 }

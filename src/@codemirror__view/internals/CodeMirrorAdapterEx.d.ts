@@ -24,16 +24,24 @@ export interface CodeMirrorAdapterEx {
    */
   new (cm6: VimEditor): CodeMirrorEditor;
 
-  /** Built-in editor commands (undo, redo, indent, etc.). */
+  /**
+   * Built-in editor commands (undo, redo, indent, etc.).
+   */
   commands: CodeMirrorAdapterExCommands;
 
-  /** Whether the current platform is macOS. */
+  /**
+   * Whether the current platform is macOS.
+   */
   isMac: boolean;
 
-  /** Map of key binding names to their handlers. */
+  /**
+   * Map of key binding names to their handlers.
+   */
   keyMap: Record<string, unknown>;
 
-  /** Map of key names to their handlers. */
+  /**
+   * Map of key names to their handlers.
+   */
   keys: Record<string, unknown>;
 
   /**
@@ -45,10 +53,14 @@ export interface CodeMirrorAdapterEx {
    */
   Pos: new (line: number, ch: number) => EditorPosition;
 
-  /** StringStream class for tokenizing input. */
+  /**
+   * StringStream class for tokenizing input.
+   */
   StringStream: unknown;
 
-  /** The Vim API instance. */
+  /**
+   * The Vim API instance.
+   */
   Vim: VimApi;
 
   /**

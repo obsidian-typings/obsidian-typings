@@ -11,13 +11,19 @@ import type { WorkspaceLeafHistoryState } from './WorkspaceLeafHistoryState.d.ts
  * @unofficial
  */
 export interface WorkspaceLeafHistory {
-  /** List of previous navigation states. */
+  /**
+   * List of previous navigation states.
+   */
   backHistory: WorkspaceLeafHistoryState[];
 
-  /** List of forward navigation states (after going back). */
+  /**
+   * List of forward navigation states (after going back).
+   */
   forwardHistory: WorkspaceLeafHistoryState[];
 
-  /** The workspace leaf that owns this history. */
+  /**
+   * The workspace leaf that owns this history.
+   */
   owner: WorkspaceLeaf;
 
   /**

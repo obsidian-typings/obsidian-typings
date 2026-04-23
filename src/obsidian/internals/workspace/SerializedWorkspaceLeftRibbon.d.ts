@@ -7,6 +7,8 @@ import type { SerializedWorkspaceLeftRibbonHiddenItemsRecord } from './Serialize
  * @unofficial
  */
 export interface SerializedWorkspaceLeftRibbon {
-  /** Record of ribbon items and whether they are hidden. */
+  /**
+   * Record of ribbon items and whether they are hidden.
+   */
   hiddenItems: SerializedWorkspaceLeftRibbonHiddenItemsRecord;
 }

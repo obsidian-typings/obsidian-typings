@@ -13,22 +13,34 @@ import type { ExtractConstructor } from './constructors/ExtractConstructor.d.ts'
  * @unofficial
  */
 export interface AppMenuBarManager {
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Constructor reference for the menu bar manager. */
+  /**
+   * Constructor reference for the menu bar manager.
+   */
   constructor: ExtractConstructor<AppMenuBarManager>;
 
-  /** Debounced handler for file open events. */
+  /**
+   * Debounced handler for file open events.
+   */
   onFileOpen: Debouncer<[], unknown>;
 
-  /** Debounced handler for window frame changes. */
+  /**
+   * Debounced handler for window frame changes.
+   */
   onWindowFrameChange: Debouncer<[], unknown>;
 
-  /** Debounced function to re-render the menu bar. */
+  /**
+   * Debounced function to re-render the menu bar.
+   */
   requestRender: Debouncer<[], unknown>;
 
-  /** Internal handler for file open events. */
+  /**
+   * Internal handler for file open events.
+   */
   _onFileOpen(): void;
 
   /**

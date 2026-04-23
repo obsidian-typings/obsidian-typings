@@ -10,9 +10,13 @@ import type {
  * @unofficial
  */
 export interface MarkdownViewModes {
-  /** Reading/preview mode renderer. */
+  /**
+   * Reading/preview mode renderer.
+   */
   preview: MarkdownPreviewView;
 
-  /** Source/edit mode renderer. */
+  /**
+   * Source/edit mode renderer.
+   */
   source: MarkdownEditView;
 }

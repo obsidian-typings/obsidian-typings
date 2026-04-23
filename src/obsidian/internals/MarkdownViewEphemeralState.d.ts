@@ -5,6 +5,8 @@
  * @unofficial
  */
 export interface MarkdownViewEphemeralState extends Record<string, unknown> {
-  /** Scroll position in the view. */
+  /**
+   * Scroll position in the view.
+   */
   scroll: number;
 }

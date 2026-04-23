@@ -19,36 +19,58 @@ import type { TextPropertyWidgetComponent } from './TextPropertyWidgetComponent.
  * @unofficial
  */
 export interface MetadataTypeManagerRegisteredTypeWidgetsRecord extends Record<PropertyWidgetType, PropertyWidget> {
-  /** Property widget for aliases. */
+  /**
+   * Property widget for aliases.
+   */
   aliases: PropertyWidget<AliasesPropertyWidgetComponent>;
 
-  /** Property widget for checkboxes. */
+  /**
+   * Property widget for checkboxes.
+   */
   checkbox: PropertyWidget<CheckboxPropertyWidgetComponent>;
 
-  /** Property widget for dates. */
+  /**
+   * Property widget for dates.
+   */
   date: PropertyWidget<DatePropertyWidgetComponent>;
 
-  /** Property widget for datetimes. */
+  /**
+   * Property widget for datetimes.
+   */
   datetime: PropertyWidget<DatetimePropertyWidgetComponent>;
 
-  /** Property widget for files. */
+  /**
+   * Property widget for files.
+   */
   file: PropertyWidget<FilePropertyWidgetComponent>;
 
-  /** Property widget for folders. */
+  /**
+   * Property widget for folders.
+   */
   folder: PropertyWidget<FolderPropertyWidgetComponent>;
 
-  /** Property widget for multitexts. */
+  /**
+   * Property widget for multitexts.
+   */
   multitext: PropertyWidget<MultitextPropertyWidgetComponent>;
 
-  /** Property widget for numbers. */
+  /**
+   * Property widget for numbers.
+   */
   number: PropertyWidget<NumberPropertyWidgetComponent>;
 
-  /** Property widget for properties. */
+  /**
+   * Property widget for properties.
+   */
   property: PropertyWidget<PropertyPropertyWidgetComponent>;
 
-  /** Property widget for tags. */
+  /**
+   * Property widget for tags.
+   */
   tags: PropertyWidget<TagsPropertyWidgetComponent>;
 
-  /** Property widget for text. */
+  /**
+   * Property widget for text.
+   */
   text: PropertyWidget<TextPropertyWidgetComponent>;
 }

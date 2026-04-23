@@ -7,12 +7,18 @@ import type { BookmarkItem } from './BookmarkItem.d.ts';
  * @unofficial
  */
 export interface GroupBookmarkItem extends BookmarkItem {
-  /** Child bookmark items contained in this group. */
+  /**
+   * Child bookmark items contained in this group.
+   */
   items: BookmarkItem[];
 
-  /** Display title of this bookmark group. */
+  /**
+   * Display title of this bookmark group.
+   */
   title: string;
 
-  /** Discriminator indicating this is a group bookmark. */
+  /**
+   * Discriminator indicating this is a group bookmark.
+   */
   type: 'group';
 }

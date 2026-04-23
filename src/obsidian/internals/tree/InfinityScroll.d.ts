@@ -5,28 +5,44 @@
  * @unofficial
  */
 export interface InfinityScroll {
-  /** Current visible height of the scroll container. */
+  /**
+   * Current visible height of the scroll container.
+   */
   height: number;
 
-  /** Last recorded scroll position. */
+  /**
+   * Last recorded scroll position.
+   */
   lastScroll: number;
 
-  /** Queued computation task, or `null` if none is pending. */
+  /**
+   * Queued computation task, or `null` if none is pending.
+   */
   queued: null | unknown;
 
-  /** Number of items to render per block. */
+  /**
+   * Number of items to render per block.
+   */
   renderBlockSize: number;
 
-  /** Root element of the virtual scroll container. */
+  /**
+   * Root element of the virtual scroll container.
+   */
   rootEl: unknown;
 
-  /** Scrollable element that handles scroll events. */
+  /**
+   * Scrollable element that handles scroll events.
+   */
   scrollEl: HTMLElement;
 
-  /** Whether the width should be explicitly set on items. */
+  /**
+   * Whether the width should be explicitly set on items.
+   */
   setWidth: boolean;
 
-  /** Current visible width of the scroll container. */
+  /**
+   * Current visible width of the scroll container.
+   */
   width: number;
 
   /**

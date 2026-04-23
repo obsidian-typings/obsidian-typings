@@ -17,52 +17,84 @@ import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
  * @unofficial
  */
 export interface ResultDom {
-  /** Reference to the App instance. */
+  /**
+   * Reference to the App instance.
+   */
   app: App;
 
-  /** Debounced callback triggered when results change. */
+  /**
+   * Debounced callback triggered when results change.
+   */
   changed: Debouncer<[], unknown>;
 
-  /** Container element for child result items. */
+  /**
+   * Container element for child result items.
+   */
   childrenEl: HTMLDivElement;
 
-  /** Whether all result items are collapsed. */
+  /**
+   * Whether all result items are collapsed.
+   */
   collapseAll: boolean;
 
-  /** Root element of the result DOM. */
+  /**
+   * Root element of the result DOM.
+   */
   el: HTMLDivElement;
 
-  /** Element displayed when there are no search results. */
+  /**
+   * Element displayed when there are no search results.
+   */
   emptyStateEl: HTMLDivElement;
 
-  /** Whether extra surrounding context is shown around matches. */
+  /**
+   * Whether extra surrounding context is shown around matches.
+   */
   extraContext: boolean;
 
-  /** Currently focused result item, or `null` if none. */
+  /**
+   * Currently focused result item, or `null` if none.
+   */
   focusedItem: null;
 
-  /** Virtual scrolling component for rendering visible results. */
+  /**
+   * Virtual scrolling component for rendering visible results.
+   */
   infinityScroll: InfinityScroll;
 
-  /** Layout information used by virtual scrolling. */
+  /**
+   * Layout information used by virtual scrolling.
+   */
   info: TreeNodeInfo;
 
-  /** Spacer element used to maintain correct scroll height. */
+  /**
+   * Spacer element used to maintain correct scroll height.
+   */
   pusherEl: HTMLDivElement;
 
-  /** Lookup map from file to its corresponding result DOM item. */
+  /**
+   * Lookup map from file to its corresponding result DOM item.
+   */
   resultDomLookup: Map<TFile, ResultDomItem>;
 
-  /** Whether the empty state placeholder is currently displayed. */
+  /**
+   * Whether the empty state placeholder is currently displayed.
+   */
   showingEmptyState: boolean;
 
-  /** Current sort order for search results. */
+  /**
+   * Current sort order for search results.
+   */
   sortOrder: string;
 
-  /** Virtual children manager for result items. */
+  /**
+   * Virtual children manager for result items.
+   */
   vChildren: TreeNodeVChildren<ResultDomItem, ResultDom>;
 
-  /** Whether a search operation is currently in progress. */
+  /**
+   * Whether a search operation is currently in progress.
+   */
   working: boolean;
 
   /**

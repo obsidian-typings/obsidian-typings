@@ -7,10 +7,14 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface NumberPropertyWidgetComponent extends PropertyWidgetComponentBase {
-  /** The input element for the property widget. */
+  /**
+   * The input element for the property widget.
+   */
   inputEl: HTMLInputElement;
 
-  /** The type of the property widget. */
+  /**
+   * The type of the property widget.
+   */
   type: 'number';
 
   /**
@@ -27,6 +31,8 @@ export interface NumberPropertyWidgetComponent extends PropertyWidgetComponentBa
    */
   setValue(value: unknown): void;
 
-  /** Show the error message. */
+  /**
+   * Show the error message.
+   */
   showError(): void;
 }

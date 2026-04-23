@@ -5,12 +5,18 @@
  * @unofficial
  */
 export interface FocusMetadataOptions {
-  /** Whether to focus the metadata heading element. */
+  /**
+   * Whether to focus the metadata heading element.
+   */
   focusHeading: boolean;
 
-  /** Index of the property to focus on. */
+  /**
+   * Index of the property to focus on.
+   */
   propertyIdx?: number;
 
-  /** Key of the property to focus on. */
+  /**
+   * Key of the property to focus on.
+   */
   propertyKey?: string;
 }

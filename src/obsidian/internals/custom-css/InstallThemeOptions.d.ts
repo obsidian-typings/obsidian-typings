@@ -5,12 +5,18 @@
  * @unofficial
  */
 export interface InstallThemeOptions {
-  /** Author of the theme. */
+  /**
+   * Author of the theme.
+   */
   author: string;
 
-  /** Display name of the theme. */
+  /**
+   * Display name of the theme.
+   */
   name: string;
 
-  /** GitHub repository identifier (e.g. "username/repo"). */
+  /**
+   * GitHub repository identifier (e.g. "username/repo").
+   */
   repo: string;
 }

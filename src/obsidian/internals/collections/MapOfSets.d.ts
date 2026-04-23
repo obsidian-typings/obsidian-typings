@@ -7,7 +7,9 @@
  * @unofficial
  */
 export interface MapOfSets<Key, Value> {
-  /** Internal map storing key-to-set mappings. */
+  /**
+   * Internal map storing key-to-set mappings.
+   */
   data: Map<Key, Set<Value>>;
 
   /**

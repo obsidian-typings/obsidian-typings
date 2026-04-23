@@ -5,9 +5,13 @@
  * @unofficial
  */
 export interface SharedFile {
-  /** Name of the shared file. */
+  /**
+   * Name of the shared file.
+   */
   name: string;
 
-  /** URI of the shared file. */
+  /**
+   * URI of the shared file.
+   */
   uri: string;
 }

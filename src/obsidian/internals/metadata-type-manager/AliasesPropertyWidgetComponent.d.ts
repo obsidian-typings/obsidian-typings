@@ -9,19 +9,29 @@ import type { PropertyWidgetComponentBase } from './PropertyWidgetComponentBase.
  * @unofficial
  */
 export interface AliasesPropertyWidgetComponent extends PropertyWidgetComponentBase {
-  /** The container element for the property widget. */
+  /**
+   * The container element for the property widget.
+   */
   containerEl: HTMLElement;
 
-  /** The render context for the property widget. */
+  /**
+   * The render context for the property widget.
+   */
   ctx: PropertyRenderContext;
 
-  /** The hover popover for the property widget. */
+  /**
+   * The hover popover for the property widget.
+   */
   hoverPopover: null;
 
-  /** The multiselect component for the property widget. */
+  /**
+   * The multiselect component for the property widget.
+   */
   multiselect: Multiselect;
 
-  /** The type of the property widget. */
+  /**
+   * The type of the property widget.
+   */
   type: 'aliases';
 
   /**

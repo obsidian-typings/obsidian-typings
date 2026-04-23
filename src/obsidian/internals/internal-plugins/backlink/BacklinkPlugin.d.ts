@@ -9,6 +9,8 @@ import type { BacklinkPluginViews } from './BacklinkPluginViews.d.ts';
  * @unofficial
  */
 export interface BacklinkPlugin extends InternalPlugin<BacklinkPluginInstance> {
-  /** View creators registered by the backlink plugin. */
+  /**
+   * View creators registered by the backlink plugin.
+   */
   views: BacklinkPluginViews;
 }

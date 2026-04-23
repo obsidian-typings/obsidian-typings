@@ -70,7 +70,9 @@ export interface AppVaultConfig {
    */
   defaultViewMode?: 'preview' | 'source';
 
-  /** Whether Emacs-style keybindings are enabled. */
+  /**
+   * Whether Emacs-style keybindings are enabled.
+   */
   emacsyKeys?: boolean | true;
 
   /**
@@ -78,7 +80,9 @@ export interface AppVaultConfig {
    */
   enabledCssSnippets?: string[];
 
-  /** Sort order for files in the file explorer. */
+  /**
+   * Sort order for files in the file explorer.
+   */
   fileSortOrder?: 'alphabetical';
 
   /**
@@ -113,7 +117,9 @@ export interface AppVaultConfig {
    */
   legacyEditor?: boolean | false;
 
-  /** Whether live preview mode is enabled in the editor. */
+  /**
+   * Whether live preview mode is enabled in the editor.
+   */
   livePreview?: boolean | true;
 
   /**
@@ -121,7 +127,9 @@ export interface AppVaultConfig {
    */
   mobilePullAction?: 'command-palette:open' | string;
 
-  /** Command ID for the mobile quick ribbon action item. */
+  /**
+   * Command ID for the mobile quick ribbon action item.
+   */
   mobileQuickRibbonItem?: '' | string;
 
   /**
@@ -129,7 +137,9 @@ export interface AppVaultConfig {
    */
   mobileToolbarCommands?: string[];
 
-  /** Appearance &gt; Monospace font. */
+  /**
+   * Appearance &gt; Monospace font.
+   */
   monospaceFontFamily?: '' | string;
 
   /**

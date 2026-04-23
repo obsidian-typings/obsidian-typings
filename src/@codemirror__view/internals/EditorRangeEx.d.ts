@@ -7,9 +7,13 @@ import type { EditorPosition } from 'obsidian';
  * @unofficial
  */
 export interface EditorRangeEx {
-  /** Start position of the range, or null if unset. */
+  /**
+   * Start position of the range, or null if unset.
+   */
   from: EditorPosition | null;
 
-  /** End position of the range, or null if unset. */
+  /**
+   * End position of the range, or null if unset.
+   */
   to: EditorPosition | null;
 }

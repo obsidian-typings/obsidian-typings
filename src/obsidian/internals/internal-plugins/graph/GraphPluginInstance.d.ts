@@ -16,16 +16,24 @@ import type { GraphPluginInstanceOptions } from './GraphPluginInstanceOptions.d.
  * @unofficial
  */
 export interface GraphPluginInstance extends InternalPluginInstance<GraphPlugin> {
-  /** Reference to the Obsidian app instance. */
+  /**
+   * Reference to the Obsidian app instance.
+   */
   app: App;
 
-  /** Whether the graph plugin is enabled by default. */
+  /**
+   * Whether the graph plugin is enabled by default.
+   */
   defaultOn: true;
 
-  /** User-configurable options for the graph plugin. */
+  /**
+   * User-configurable options for the graph plugin.
+   */
   options: GraphPluginInstanceOptions;
 
-  /** Reference to the parent graph plugin. */
+  /**
+   * Reference to the parent graph plugin.
+   */
   plugin: GraphPlugin;
 
   /**

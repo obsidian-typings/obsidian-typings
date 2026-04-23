@@ -5,6 +5,8 @@
  * @unofficial
  */
 export interface MarkdownViewSourceMode {
-  /** The CodeMirror editor instance used in source mode. */
+  /**
+   * The CodeMirror editor instance used in source mode.
+   */
   cmEditor: unknown;
 }

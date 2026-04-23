@@ -13,28 +13,44 @@ import type { PropertyPropertyWidgetComponentComboBoxItem } from './PropertyProp
  * @unofficial
  */
 export interface PropertyPropertyWidgetComponentComboBox extends PopoverSuggest<PropertyPropertyWidgetComponentComboBoxItem> {
-  /** The items of the combobox. */
+  /**
+   * The items of the combobox.
+   */
   _items: PropertyPropertyWidgetComponentComboBoxItem[];
 
-  /** The background element of the combobox. */
+  /**
+   * The background element of the combobox.
+   */
   bgEl: HTMLDivElement;
 
-  /** The button element of the combobox. */
+  /**
+   * The button element of the combobox.
+   */
   buttonEl: HTMLDivElement;
 
-  /** Whether the combobox is clearable. */
+  /**
+   * Whether the combobox is clearable.
+   */
   clearable: boolean;
 
-  /** The icon element of the combobox. */
+  /**
+   * The icon element of the combobox.
+   */
   iconEl: HTMLDivElement;
 
-  /** The label element of the combobox. */
+  /**
+   * The label element of the combobox.
+   */
   labelEl: HTMLDivElement;
 
-  /** The search component of the combobox. */
+  /**
+   * The search component of the combobox.
+   */
   searchComponent: SearchComponent;
 
-  /** The current value of the combobox. */
+  /**
+   * The current value of the combobox.
+   */
   value: null | PropertyPropertyWidgetComponentComboBoxItem;
 
   /**
@@ -47,7 +63,9 @@ export interface PropertyPropertyWidgetComponentComboBox extends PopoverSuggest<
    */
   _onOpen?(): void;
 
-  /** Attach the DOM of the combobox. */
+  /**
+   * Attach the DOM of the combobox.
+   */
   attachDom(): void;
 
   /**
@@ -57,7 +75,9 @@ export interface PropertyPropertyWidgetComponentComboBox extends PopoverSuggest<
    */
   detachDom(): Promise<void>;
 
-  /** Focus the combobox. */
+  /**
+   * Focus the combobox.
+   */
   focus(): void;
 
   /**
@@ -103,7 +123,9 @@ export interface PropertyPropertyWidgetComponentComboBox extends PopoverSuggest<
    */
   onSelect(callback: (item: PropertyPropertyWidgetComponentComboBoxItem) => void): this;
 
-  /** Render the label of the combobox. */
+  /**
+   * Render the label of the combobox.
+   */
   renderLabel(): void;
 
   /**

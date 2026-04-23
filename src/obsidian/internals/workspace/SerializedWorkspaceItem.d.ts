@@ -5,12 +5,18 @@
  * @unofficial
  */
 export interface SerializedWorkspaceItem {
-  /** Size dimension of the workspace item (width or height depending on split direction). */
+  /**
+   * Size dimension of the workspace item (width or height depending on split direction).
+   */
   dimension?: number;
 
-  /** Unique identifier of the workspace item. */
+  /**
+   * Unique identifier of the workspace item.
+   */
   id: string;
 
-  /** Type of the workspace item (e.g., 'split', 'tabs', 'leaf'). */
+  /**
+   * Type of the workspace item (e.g., 'split', 'tabs', 'leaf').
+   */
   type: string;
 }

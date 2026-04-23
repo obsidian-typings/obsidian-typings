@@ -35,7 +35,9 @@ export interface MetadataTypeManager extends Events {
    */
   lastSave: number;
 
-  /** Debounced handler for property type config file changes on disk. */
+  /**
+   * Debounced handler for property type config file changes on disk.
+   */
   onConfigFileChange: Debouncer<[], Promise<void>>;
 
   /**
@@ -99,7 +101,9 @@ export interface MetadataTypeManager extends Events {
    */
   getWidget(type: string): PropertyWidget;
 
-  /** Load metadata type configuration. */
+  /**
+   * Load metadata type configuration.
+   */
   load(): Promise<void>;
 
   /**
@@ -116,7 +120,9 @@ export interface MetadataTypeManager extends Events {
    */
   onRaw(e: unknown): void;
 
-  /** Register event listeners for property type config file changes. */
+  /**
+   * Register event listeners for property type config file changes.
+   */
   registerListeners(): void;
 
   /**

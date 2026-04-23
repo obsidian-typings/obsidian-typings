@@ -8,7 +8,9 @@ import type { VimState } from './VimState.d.ts';
  * @unofficial
  */
 export interface VimApi {
-  /** Whether to suppress error logging from the Vim layer. */
+  /**
+   * Whether to suppress error logging from the Vim layer.
+   */
   suppressErrorLogging: boolean;
 
   /**
@@ -19,7 +21,9 @@ export interface VimApi {
    */
   _mapCommand(command: unknown): unknown;
 
-  /** Build the key map from the current configuration. */
+  /**
+   * Build the key map from the current configuration.
+   */
   buildKeyMap(): void;
 
   /**

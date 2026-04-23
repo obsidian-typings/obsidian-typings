@@ -17,40 +17,64 @@ import type { DropResult } from './DropResult.d.ts';
  * @unofficial
  */
 export interface DragManager {
-  /** Element displaying the current drop action label. */
+  /**
+   * Element displaying the current drop action label.
+   */
   actionEl: HTMLElement | null;
 
-  /** Reference to the app. */
+  /**
+   * Reference to the app.
+   */
   app: App;
 
-  /** Currently active draggable item. */
+  /**
+   * Currently active draggable item.
+   */
   draggable: Draggable | null;
 
-  /** Information about the initial drag start event. */
+  /**
+   * Information about the initial drag start event.
+   */
   dragStart: DragStartEvent | null;
 
-  /** Ghost element shown while dragging. */
+  /**
+   * Ghost element shown while dragging.
+   */
   ghostEl: HTMLElement | null;
 
-  /** CSS class currently applied to the hover target. */
+  /**
+   * CSS class currently applied to the hover target.
+   */
   hoverClass: string;
 
-  /** Element currently being hovered over during drag. */
+  /**
+   * Element currently being hovered over during drag.
+   */
   hoverEl: HTMLElement | null;
 
-  /** Whether the drag-over event has been handled by a drop target. */
+  /**
+   * Whether the drag-over event has been handled by a drop target.
+   */
   isDragOverHandled: boolean;
 
-  /** Overlay element shown during drag operations to indicate drop zones. */
+  /**
+   * Overlay element shown during drag operations to indicate drop zones.
+   */
   overlayEl: HTMLElement;
 
-  /** Whether the overlay should be hidden on the next update. */
+  /**
+   * Whether the overlay should be hidden on the next update.
+   */
   shouldHideOverlay: boolean;
 
-  /** CSS class applied to the source elements during drag. */
+  /**
+   * CSS class applied to the source elements during drag.
+   */
   sourceClass: string;
 
-  /** Elements from which the drag originated. */
+  /**
+   * Elements from which the drag originated.
+   */
   sourceEls: HTMLElement[] | null;
 
   /**
@@ -127,10 +151,14 @@ export interface DragManager {
     draggable?: boolean
   ): void;
 
-  /** Hide the drop zone overlay. */
+  /**
+   * Hide the drop zone overlay.
+   */
   hideOverlay(): void;
 
-  /** Handle the end of a drag operation, cleaning up state. */
+  /**
+   * Handle the end of a drag operation, cleaning up state.
+   */
   onDragEnd(): void;
 
   /**
@@ -147,7 +175,9 @@ export interface DragManager {
    */
   onDragOver(event: DragEvent): void;
 
-  /** Handle the first drag-over event when entering a drop zone. */
+  /**
+   * Handle the first drag-over event when entering a drop zone.
+   */
   onDragOverFirst(): void;
 
   /**
@@ -172,7 +202,9 @@ export interface DragManager {
    */
   onTouchEnd(event: TouchEvent): void;
 
-  /** Remove the drop zone overlay element from the DOM. */
+  /**
+   * Remove the drop zone overlay element from the DOM.
+   */
   removeOverlay(): void;
 
   /**
