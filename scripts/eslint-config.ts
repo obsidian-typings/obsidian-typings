@@ -7,7 +7,10 @@ import eslint from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { flatConfigs as eslintPluginImportXFlatConfigs } from 'eslint-plugin-import-x';
+// eslint-disable-next-line import-x/no-named-as-default -- The default export name `index` is too confusing.
+import jsdoc from 'eslint-plugin-jsdoc';
 import perfectionist from 'eslint-plugin-perfectionist';
+import eslintPluginTsdoc from 'eslint-plugin-tsdoc';
 import { defineConfig } from 'eslint/config';
 import { resolve } from 'node:path';
 import tseslint from 'typescript-eslint';
@@ -36,7 +39,9 @@ export const config: Linter.Config[] = defineConfig([
   ...getCustomPluginConfigs(),
   ...getNoRestrictedSyntaxRulesConfigs(),
   ...getObsidianTypingsConfigs(),
-  ...getOverrideConfigs()
+  ...getOverrideConfigs(),
+  ...getJsdocsConfigs(),
+  ...getTsdocsConfigs()
 ]);
 
 function getCustomPluginConfigs(): Linter.Config[] {
@@ -60,6 +65,17 @@ function getEslintCommentsConfigs(): Linter.Config[] {
       files: typeScriptFiles,
       rules: {
         '@eslint-community/eslint-comments/require-description': 'error'
+      }
+    }
+  ]);
+}
+
+function getTsdocsConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      files: sourceFiles,
+      plugins: {
+        tsdoc: eslintPluginTsdoc
       }
     }
   ]);
@@ -360,5 +376,108 @@ function getTseslintConfigs(): Linter.Config[] {
       delete (rest as Record<string, unknown>)['files'];
       return rest;
     })
+  ]);
+}
+
+function getJsdocsConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      ...jsdoc.configs['flat/recommended-typescript-error'],
+      files: sourceFiles
+    },
+    {
+      files: sourceFiles,
+      plugins: {
+        jsdoc
+      },
+      rules: {
+        'jsdoc/check-tag-names': [
+          'error',
+          {
+            definedTags: [
+              'official',
+              'remark',
+              'typeParam',
+              'unofficial'
+            ]
+          }
+        ],
+        'jsdoc/require-jsdoc': [
+          'error',
+          {
+            contexts: [
+              {
+                context: 'ExportNamedDeclaration > FunctionDeclaration'
+              },
+              {
+                context: 'ExportDefaultDeclaration > FunctionDeclaration'
+              },
+              {
+                context: 'ExportNamedDeclaration > VariableDeclaration > VariableDeclarator > ArrowFunctionExpression'
+              },
+              {
+                context: 'ExportDefaultDeclaration > ArrowFunctionExpression'
+              },
+              {
+                context: 'ExportNamedDeclaration MethodDefinition:not([accessibility="private"])'
+              },
+              {
+                context: 'ExportDefaultDeclaration MethodDefinition:not([accessibility="private"])'
+              },
+              {
+                context: 'ExportNamedDeclaration > ClassDeclaration > ClassBody > PropertyDefinition:not([accessibility=\'private\'])'
+              },
+              {
+                context: 'ExportDefaultDeclaration > ClassDeclaration > ClassBody > PropertyDefinition:not([accessibility=\'private\'])'
+              },
+              {
+                context: 'ExportNamedDeclaration > ClassDeclaration > ClassBody > TSAbstractPropertyDefinition:not([accessibility=\'private\'])'
+              },
+              {
+                context: 'ExportDefaultDeclaration > ClassDeclaration > ClassBody > TSAbstractPropertyDefinition:not([accessibility=\'private\'])'
+              },
+              {
+                context: 'ExportNamedDeclaration > TSInterfaceDeclaration'
+              },
+              {
+                context: 'ExportNamedDeclaration > TSTypeAliasDeclaration'
+              },
+              {
+                context: 'ExportNamedDeclaration > TSEnumDeclaration'
+              },
+              {
+                context: 'ExportNamedDeclaration > ClassDeclaration'
+              },
+              {
+                context: 'ExportDefaultDeclaration > ClassDeclaration'
+              }
+            ],
+            publicOnly: false,
+            require: {
+              ArrowFunctionExpression: false,
+              ClassDeclaration: false,
+              ClassExpression: false,
+              FunctionDeclaration: false,
+              MethodDefinition: false
+            }
+          }
+        ],
+        'jsdoc/require-throws-type': 'off',
+        'jsdoc/tag-lines': [
+          'error',
+          'any',
+          {
+            startLines: 1
+          }
+        ]
+      },
+      settings: {
+        jsdoc: {
+          tagNamePreference: {
+            template: 'typeParam'
+          }
+        }
+      }
+    }
   ]);
 }
