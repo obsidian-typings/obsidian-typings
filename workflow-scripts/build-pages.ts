@@ -27,11 +27,15 @@ async function main(): Promise<void> {
   const cacheDir = process.env['CACHE_DIR'] ?? './cache';
   const shouldForce = process.env['EVENT_NAME'] === 'workflow_dispatch';
 
+  // Read static assets before the loop — processChannel checks out release
+  // branches where workflow-scripts/static/ does not exist.
+  const redirectHtml = await readFile(`${SCRIPT_DIR}/static/pages-redirect.html`, 'utf-8');
+
   for (const channel of CHANNELS) {
     await processChannel(channel, outputDir, cacheDir, shouldForce);
   }
 
-  await createRedirectPage(outputDir);
+  await createRedirectPage(outputDir, redirectHtml);
 }
 
 async function getCurrentBuildInfo(channel: Channel): Promise<BuildInfo> {
@@ -89,9 +93,9 @@ async function processChannel(channel: Channel, outputDir: string, cacheDir: str
   await writeFile(`${channelCacheDir}/build-info.json`, JSON.stringify(current));
 }
 
-async function createRedirectPage(outputDir: string): Promise<void> {
+async function createRedirectPage(outputDir: string, redirectHtml: string): Promise<void> {
   await mkdir(outputDir, { recursive: true });
-  await cp(`${SCRIPT_DIR}/static/pages-redirect.html`, `${outputDir}/index.html`);
+  await writeFile(`${outputDir}/index.html`, redirectHtml);
   console.log(`Created redirect page at ${outputDir}/index.html`);
 }
 
