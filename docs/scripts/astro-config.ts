@@ -11,12 +11,15 @@ import starlightTypeDocPlugin from 'starlight-typedoc';
 
 import { admonitionRenderer } from './helpers/remark-plugins/custom-admonition-renderer.ts';
 import { githubLocationRenderer } from './helpers/remark-plugins/github-location-renderer.ts';
+import { remarkRelativeLinks } from './helpers/remark-plugins/remark-relative-links.ts';
 
 const FULL_TYPES_PATH = resolve(import.meta.dirname, '../../src/full-types.d.ts');
 const HAS_FULL_TYPES = existsSync(FULL_TYPES_PATH);
 
+const BASE = '/obsidian-typings';
+
 export const astroConfig = defineConfig({
-  base: '/obsidian-typings',
+  base: BASE,
   devToolbar: {
     enabled: false
   },
@@ -103,6 +106,7 @@ export const astroConfig = defineConfig({
   ],
   markdown: {
     remarkPlugins: [
+      remarkRelativeLinks(BASE),
       admonitionRenderer,
       githubLocationRenderer
     ]
