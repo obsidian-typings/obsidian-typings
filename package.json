@@ -2,9 +2,34 @@
   "name": "obsidian-typings",
   "version": "5.21.0",
   "description": "Extended type definitions for the Obsidian API (https://obsidian.md)",
-  "main": "",
-  "module": "",
-  "types": "./dist/cjs/types.d.cts",
+  "keywords": [
+    "obsdmd",
+    "obsidian",
+    "typings",
+    "API"
+  ],
+  "homepage": "https://github.com/Fevol/obsidian-typings#readme",
+  "bugs": {
+    "url": "https://github.com/Fevol/obsidian-typings/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fevol/obsidian-typings.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Fevol",
+    "email": "fevolmail@gmail.com",
+    "url": "https://github.com/fevol"
+  },
+  "contributors": [
+    {
+      "name": "Michael Naumov",
+      "email": "mnaoumov@gmail.com",
+      "url": "https://github.com/mnaoumov"
+    }
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "require": {
@@ -25,34 +50,52 @@
       }
     }
   },
-  "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Fevol/obsidian-typings.git"
-  },
-  "keywords": [
-    "obsdmd",
-    "obsidian",
-    "typings",
-    "API"
+  "main": "",
+  "module": "",
+  "types": "./dist/cjs/types.d.cts",
+  "files": [
+    "dist/",
+    "implementations/",
+    "patches/",
+    "scripts/postinstall.mjs",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md",
+    "package.json"
   ],
-  "author": {
-    "name": "Fevol",
-    "url": "https://github.com/fevol",
-    "email": "fevolmail@gmail.com"
+  "scripts": {
+    "build": "jiti scripts/build.ts",
+    "build:bundle-types": "jiti scripts/build-bundle-types.ts",
+    "build:clean": "jiti scripts/build-clean.ts",
+    "build:compile": "jiti scripts/build-compile.ts",
+    "build:extract-api": "jiti scripts/build-extract-api.ts",
+    "build:fix-bundle-types": "jiti scripts/build-fix-bundle-types.ts",
+    "build:fix-implementations-bundle-types": "jiti scripts/build-fix-implementations-bundle-types.ts",
+    "build:generate-index": "jiti scripts/build-generate-index.ts",
+    "build:implementations": "jiti scripts/build-implementations.ts",
+    "build:implementations:bundle-types": "jiti scripts/build-implementations-bundle-types.ts",
+    "build:implementations:generate-types": "jiti scripts/build-implementations-generate-types.ts",
+    "build:static": "jiti scripts/build-static.ts",
+    "commit": "jiti scripts/commit.ts",
+    "format": "jiti scripts/format.ts",
+    "format:check": "jiti scripts/format-check.ts",
+    "postinstall": "node scripts/postinstall.mjs",
+    "lint": "jiti scripts/lint.ts",
+    "lint:fix": "jiti scripts/lint-fix.ts",
+    "lint:md": "jiti scripts/lint-md.ts",
+    "lint:md:fix": "jiti scripts/lint-md-fix.ts",
+    "prepare": "jiti scripts/prepare.ts",
+    "release": "jiti scripts/release.ts",
+    "release:beta": "jiti scripts/release-beta.ts",
+    "spellcheck": "jiti scripts/spellcheck.ts"
   },
-  "contributors": [
-    {
-      "name": "Michael Naumov",
-      "url": "https://github.com/mnaoumov",
-      "email": "mnaoumov@gmail.com"
-    }
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Fevol/obsidian-typings/issues"
+  "overrides": {
+    "@antfu/utils": "9.2.0",
+    "boolean": "npm:dry-uninstall",
+    "dompurify": "3.0.1",
+    "eslint-plugin-import": "$eslint-plugin-import-x",
+    "typescript": "$typescript"
   },
-  "homepage": "https://github.com/Fevol/obsidian-typings#readme",
   "dependencies": {
     "@antfu/utils": "9.2.0",
     "@capacitor/core": "5.7.8",
@@ -123,48 +166,5 @@
   },
   "peerDependencies": {
     "typescript": ">=4.8.0"
-  },
-  "overrides": {
-    "@antfu/utils": "9.2.0",
-    "boolean": "npm:dry-uninstall",
-    "dompurify": "3.0.1",
-    "eslint-plugin-import": "$eslint-plugin-import-x",
-    "typescript": "$typescript"
-  },
-  "scripts": {
-    "build": "jiti scripts/build.ts",
-    "build:bundle-types": "jiti scripts/build-bundle-types.ts",
-    "build:clean": "jiti scripts/build-clean.ts",
-    "build:compile": "jiti scripts/build-compile.ts",
-    "build:extract-api": "jiti scripts/build-extract-api.ts",
-    "build:fix-bundle-types": "jiti scripts/build-fix-bundle-types.ts",
-    "build:fix-implementations-bundle-types": "jiti scripts/build-fix-implementations-bundle-types.ts",
-    "build:generate-index": "jiti scripts/build-generate-index.ts",
-    "build:implementations": "jiti scripts/build-implementations.ts",
-    "build:implementations:bundle-types": "jiti scripts/build-implementations-bundle-types.ts",
-    "build:implementations:generate-types": "jiti scripts/build-implementations-generate-types.ts",
-    "build:static": "jiti scripts/build-static.ts",
-    "commit": "jiti scripts/commit.ts",
-    "format": "jiti scripts/format.ts",
-    "format:check": "jiti scripts/format-check.ts",
-    "lint": "jiti scripts/lint.ts",
-    "lint:fix": "jiti scripts/lint-fix.ts",
-    "lint:md": "jiti scripts/lint-md.ts",
-    "lint:md:fix": "jiti scripts/lint-md-fix.ts",
-    "postinstall": "node scripts/postinstall.mjs",
-    "prepare": "jiti scripts/prepare.ts",
-    "release": "jiti scripts/release.ts",
-    "release:beta": "jiti scripts/release-beta.ts",
-    "spellcheck": "jiti scripts/spellcheck.ts"
-  },
-  "files": [
-    "dist/",
-    "implementations/",
-    "patches/",
-    "scripts/postinstall.mjs",
-    "CHANGELOG.md",
-    "LICENSE",
-    "README.md",
-    "package.json"
-  ]
+  }
 }
