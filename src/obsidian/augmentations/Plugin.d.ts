@@ -1,4 +1,4 @@
-import { Extension } from '@codemirror/state';
+import type { Extension } from '../../@codemirror__state/internals/Extension.d.ts';
 
 export {};
 

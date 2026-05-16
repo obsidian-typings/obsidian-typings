@@ -1,8 +1,5 @@
-import type {
-  Text as PIXIText,
-  TextStyle
-} from 'pixi.js';
-
+import type { PixiText as PIXIText } from '../../../../pixi.js/internals/PixiText.d.ts';
+import type { TextStyle } from '../../../../pixi.js/internals/TextStyle.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 
 /**

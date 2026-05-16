@@ -1,3 +1,5 @@
+import type { ElectronModule } from '../../../electron/internals/ElectronModule.d.ts';
+
 export {};
 
 declare global {
@@ -6,5 +8,5 @@ declare global {
    *
    * @unofficial
    */
-  var electron: typeof import('electron');
+  var electron: ElectronModule;
 }

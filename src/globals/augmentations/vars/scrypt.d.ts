@@ -1,4 +1,4 @@
-import type { scrypt as scryptInstance } from 'scrypt-js';
+import type { scrypt as scryptInstance } from '../../../scrypt-js/internals/functions/scrypt.d.ts';
 
 export {};
 

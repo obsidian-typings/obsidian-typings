@@ -1,11 +1,9 @@
 import type { Point } from 'obsidian';
-import type {
-  Application,
-  Container,
-  ICanvas
-} from 'pixi.js';
 
 import type { Coords } from '../../../../@codemirror__view/internals/Coords.d.ts';
+import type { Application } from '../../../../pixi.js/internals/Application.d.ts';
+import type { Container } from '../../../../pixi.js/internals/Container.d.ts';
+import type { ICanvas } from '../../../../pixi.js/internals/ICanvas.d.ts';
 import type { GraphColor } from './GraphColor.d.ts';
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 import type { GraphData } from './GraphData.d.ts';

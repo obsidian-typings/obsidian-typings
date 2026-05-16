@@ -1,3 +1,5 @@
+import type { PrismModule } from '../../../prismjs/internals/PrismModule.d.ts';
+
 export {};
 
 declare global {
@@ -7,5 +9,5 @@ declare global {
    * @unofficial
    * @deprecated - Added only for typing purposes. Use {@link Prism} instead.
    */
-  var Prism__: typeof import('prismjs');
+  var Prism__: PrismModule;
 }

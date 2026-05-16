@@ -1,4 +1,4 @@
-import type { BrowserWindow } from 'electron';
+import type { BrowserWindow } from '../../electron/internals/BrowserWindow.d.ts';
 
 /**
  * Extended Electron BrowserWindow with internal properties.

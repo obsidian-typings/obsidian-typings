@@ -1,11 +1,4 @@
 import type {
-  Capacitor as CapacitorInstance,
-  // eslint-disable-next-line import-x/no-deprecated -- No other way.
-  CapacitorPlatforms as CapacitorPlatformsInstance
-} from '@capacitor/core';
-import type { WebviewTag } from 'electron';
-import type { Mermaid } from 'mermaid';
-import type {
   App,
   moment as momentInstance,
   Notice as NoticeInstance,
@@ -13,10 +6,17 @@ import type {
   request as requestInstance,
   requestUrl as requestUrlInstance
 } from 'obsidian';
-import type { scrypt as scryptInstance } from 'scrypt-js';
 
+import type { Capacitor as CapacitorInstance } from '../../@capacitor__core/internals/vars/Capacitor.d.ts';
+// eslint-disable-next-line import-x/no-deprecated -- No other way.
+import type { CapacitorPlatforms as CapacitorPlatformsInstance } from '../../@capacitor__core/internals/vars/CapacitorPlatforms.d.ts';
 import type { CodeMirrorAdapterEx } from '../../@codemirror__view/internals/CodeMirrorAdapterEx.d.ts';
 import type { VimApi } from '../../@codemirror__view/internals/vim/VimApi.d.ts';
+import type { CodeMirrorModule } from '../../codemirror/internals/CodeMirrorModule.d.ts';
+import type { ElectronModule } from '../../electron/internals/ElectronModule.d.ts';
+import type { WebviewTag } from '../../electron/internals/WebviewTag.d.ts';
+import type { I18n } from '../../i18next/internals/I18n.d.ts';
+import type { Mermaid } from '../../mermaid/internals/Mermaid.d.ts';
 import type { CapacitorAdapterFs } from '../../obsidian/internals/CapacitorAdapterFs.d.ts';
 import type { ExtractConstructor } from '../../obsidian/internals/constructors/ExtractConstructor.d.ts';
 import type { ElectronWindow } from '../../obsidian/internals/ElectronWindow.d.ts';
@@ -25,6 +25,10 @@ import type { Localization } from '../../obsidian/internals/Localization.d.ts';
 import type { MathJaxEx } from '../../obsidian/internals/math-jax/MathJaxEx.d.ts';
 import type { PdfJsTestingUtils } from '../../obsidian/internals/pdf-js/PdfJsTestingUtils.d.ts';
 import type { Database } from '../../obsidian/internals/web-sql/Database.d.ts';
+import type { PdfJsModule } from '../../pdfjs-dist/internals/PdfJsModule.d.ts';
+import type { PixiModule } from '../../pixi.js/internals/PixiModule.d.ts';
+import type { PrismModule } from '../../prismjs/internals/PrismModule.d.ts';
+import type { scrypt as scryptInstance } from '../../scrypt-js/internals/functions/scrypt.d.ts';
 
 export {};
 
@@ -127,7 +131,7 @@ declare global {
      *
      * @unofficial
      */
-    CodeMirror: typeof import('codemirror');
+    CodeMirror: CodeMirrorModule;
 
     /**
      * CodeMirror adapter providing CM5-compatible API over CM6.
@@ -141,7 +145,7 @@ declare global {
      *
      * @unofficial
      */
-    DOMPurify: typeof import('dompurify');
+    DOMPurify: import('../../dompurify/internals/DOMPurify.d.ts').DOMPurify;
 
     /**
      * Minified reference to `Object.propertyIsEnumerable`.
@@ -155,7 +159,7 @@ declare global {
      *
      * @unofficial
      */
-    electron: typeof import('electron');
+    electron: ElectronModule;
 
     /**
      * Electron BrowserWindow instance for the current window.
@@ -183,7 +187,7 @@ declare global {
      *
      * @unofficial
      */
-    i18next: typeof import('i18next');
+    i18next: I18n;
 
     /**
      * MathJax instance for rendering mathematical notation.
@@ -239,7 +243,7 @@ declare global {
      *
      * @unofficial
      */
-    pdfjsLib?: typeof import('pdfjs-dist');
+    pdfjsLib?: PdfJsModule;
 
     /**
      * Testing utilities for PDF.js.
@@ -253,14 +257,14 @@ declare global {
      *
      * @unofficial
      */
-    PIXI: typeof import('pixi.js');
+    PIXI: PixiModule;
 
     /**
      * Prism.js syntax highlighting library instance.
      *
      * @unofficial
      */
-    Prism?: typeof import('prismjs');
+    Prism?: PrismModule;
 
     /**
      * Similar to `fetch()`, request a URL using HTTP/HTTPS, without any CORS restrictions.
@@ -311,7 +315,7 @@ declare global {
      *
      * @unofficial
      */
-    TurndownService: typeof import('turndown');
+    TurndownService: import('../../turndown/internals/TurndownService/TurndownService.d.ts').TurndownService;
 
     /**
      * Electron WebView tag for embedding external web content.

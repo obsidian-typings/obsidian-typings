@@ -1,6 +1,6 @@
-import type { ChangeDesc } from '@codemirror/state';
 import type { EditorPosition } from 'obsidian';
 
+import type { ChangeDesc } from '../../@codemirror__state/internals/ChangeDesc.d.ts';
 import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 
 /**

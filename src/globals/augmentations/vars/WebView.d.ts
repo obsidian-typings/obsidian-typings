@@ -1,4 +1,4 @@
-import type { WebviewTag } from 'electron';
+import type { WebviewTag } from '../../../electron/internals/WebviewTag.d.ts';
 
 export {};
 

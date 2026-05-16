@@ -1,4 +1,4 @@
-import type { Capacitor as CapacitorInstance } from '@capacitor/core';
+import type { Capacitor as CapacitorInstance } from '../../../@capacitor__core/internals/vars/Capacitor.d.ts';
 
 export {};
 

@@ -1,3 +1,5 @@
+import type { PdfJsModule } from '../../../pdfjs-dist/internals/PdfJsModule.d.ts';
+
 export {};
 
 declare global {
@@ -6,5 +8,5 @@ declare global {
    *
    * @unofficial
    */
-  var pdfjsLib: typeof import('pdfjs-dist');
+  var pdfjsLib: PdfJsModule;
 }

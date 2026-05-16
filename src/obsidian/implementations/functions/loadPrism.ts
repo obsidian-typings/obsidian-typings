@@ -1,5 +1,7 @@
 import { loadPrism as loadPrismOriginal } from 'obsidian';
 
+import type { PrismModule } from '../../../prismjs/internals/PrismModule.d.ts';
+
 /**
  * Load Prism.js and return a promise to the global Prism object.
  * Can also use `window.Prism` after this promise resolves to get the same reference.
@@ -10,6 +12,6 @@ import { loadPrism as loadPrismOriginal } from 'obsidian';
  * @public
  * @unofficial
  */
-export async function loadPrism(): Promise<typeof import('prismjs')> {
-  return (await loadPrismOriginal()) as typeof import('prismjs');
+export async function loadPrism(): Promise<PrismModule> {
+  return (await loadPrismOriginal()) as PrismModule;
 }

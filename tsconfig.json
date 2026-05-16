@@ -20,7 +20,8 @@
     "skipLibCheck": false,
     "verbatimModuleSyntax": true,
     "types": [
-      "@total-typescript/ts-reset"
+      "@total-typescript/ts-reset",
+      "node"
     ]
   },
   "include": [

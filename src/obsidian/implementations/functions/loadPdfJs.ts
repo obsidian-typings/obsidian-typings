@@ -1,5 +1,7 @@
 import { loadPdfJs as loadPdfJsOriginal } from 'obsidian';
 
+import type { PdfJsModule } from '../../../pdfjs-dist/internals/PdfJsModule.d.ts';
+
 /**
  * Load PDF.js and return a promise to the global pdfjsLib object.
  * Can also use `window.pdfjsLib` after this promise resolves to get the same reference.
@@ -10,6 +12,6 @@ import { loadPdfJs as loadPdfJsOriginal } from 'obsidian';
  * @public
  * @unofficial
  */
-export async function loadPdfJs(): Promise<typeof import('pdfjs-dist')> {
-  return (await loadPdfJsOriginal()) as typeof import('pdfjs-dist');
+export async function loadPdfJs(): Promise<PdfJsModule> {
+  return (await loadPdfJsOriginal()) as PdfJsModule;
 }

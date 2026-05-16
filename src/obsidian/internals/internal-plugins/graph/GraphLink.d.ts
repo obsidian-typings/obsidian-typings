@@ -1,9 +1,6 @@
-import type {
-  Container,
-  Graphics,
-  Sprite
-} from 'pixi.js';
-
+import type { Container } from '../../../../pixi.js/internals/Container.d.ts';
+import type { Graphics } from '../../../../pixi.js/internals/Graphics.d.ts';
+import type { Sprite } from '../../../../pixi.js/internals/Sprite.d.ts';
 import type { GraphNode } from './GraphNode.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 

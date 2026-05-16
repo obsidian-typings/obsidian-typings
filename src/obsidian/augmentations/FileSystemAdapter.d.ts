@@ -1,10 +1,10 @@
-import type { IpcRenderer } from 'electron';
 import type { Stats } from 'node:fs';
 
 import * as fs from 'node:fs';
 import * as fsPromises from 'node:fs/promises';
 import * as path from 'node:path';
 
+import type { IpcRenderer } from '../../electron/internals/IpcRenderer.d.ts';
 import type { getFileSystemAdapterConstructor } from '../implementations/constructors/augmentations/getFileSystemAdapterConstructor.d.ts';
 import type { Btime } from '../internals/Btime.d.ts';
 import type { DataAdapterWatchersRecord } from '../internals/data-adapter-records/DataAdapterWatchersRecord.d.ts';

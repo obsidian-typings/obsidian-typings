@@ -1,6 +1,6 @@
-import type { Extension } from '@codemirror/state';
 import type { Constructor } from 'obsidian';
 
+import type { Extension } from '../../@codemirror__state/internals/Extension.d.ts';
 import type { getWorkspaceConstructor } from '../implementations/constructors/augmentations/getWorkspaceConstructor.d.ts';
 import type { CanvasConnection } from '../internals/CanvasConnection.d.ts';
 import type { CanvasNode } from '../internals/CanvasNode.d.ts';

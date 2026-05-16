@@ -1,3 +1,5 @@
+import type { PixiModule } from '../../../pixi.js/internals/PixiModule.d.ts';
+
 export {};
 
 declare global {
@@ -6,5 +8,5 @@ declare global {
    *
    * @unofficial
    */
-  var PIXI: typeof import('pixi.js');
+  var PIXI: PixiModule;
 }

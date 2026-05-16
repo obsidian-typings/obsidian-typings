@@ -1,3 +1,5 @@
+import type { CodeMirrorModule } from '../../../codemirror/internals/CodeMirrorModule.d.ts';
+
 export {};
 
 declare global {
@@ -7,5 +9,5 @@ declare global {
    * @unofficial
    * @deprecated - Added only for typing purposes. Use {@link CodeMirror} instead.
    */
-  var CodeMirror__: typeof import('codemirror');
+  var CodeMirror__: CodeMirrorModule;
 }

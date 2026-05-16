@@ -1,6 +1,6 @@
-import type { SearchQuery } from '@codemirror/search';
 import type { EditorPosition } from 'obsidian';
 
+import type { SearchQuery } from '../../@codemirror__search/internals/SearchQuery.d.ts';
 import type { AddOverlayOptions } from './AddOverlayOptions.d.ts';
 import type { Bookmark } from './Bookmark.d.ts';
 import type { Bracket } from './Bracket.d.ts';

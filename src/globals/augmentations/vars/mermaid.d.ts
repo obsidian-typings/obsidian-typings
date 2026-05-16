@@ -1,4 +1,4 @@
-import type { Mermaid } from 'mermaid';
+import type { Mermaid } from '../../../mermaid/internals/Mermaid.d.ts';
 
 export {};
 

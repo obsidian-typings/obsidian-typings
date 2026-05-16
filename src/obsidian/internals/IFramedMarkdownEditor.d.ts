@@ -1,6 +1,5 @@
-import type { Extension } from '@codemirror/state';
-import type { ViewUpdate } from '@codemirror/view';
-
+import type { Extension } from '../../@codemirror__state/internals/Extension.d.ts';
+import type { ViewUpdate } from '../../@codemirror__view/internals/ViewUpdate.d.ts';
 import type { MarkdownScrollableEditView } from './MarkdownScrollableEditView.d.ts';
 
 /**

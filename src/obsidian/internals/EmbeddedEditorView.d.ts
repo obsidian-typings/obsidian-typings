@@ -1,4 +1,3 @@
-import type { EditorState } from '@codemirror/state';
 import type {
   App,
   Component,
@@ -7,6 +6,7 @@ import type {
   TFile
 } from 'obsidian';
 
+import type { EditorState } from '../../@codemirror__state/internals/EditorState.d.ts';
 import type { IFramedMarkdownEditor } from './IFramedMarkdownEditor.d.ts';
 
 /**

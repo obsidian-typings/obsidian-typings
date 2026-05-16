@@ -1,9 +1,6 @@
-import type {
-  Graphics,
-  Text as PIXIText,
-  TextStyle
-} from 'pixi.js';
-
+import type { Graphics } from '../../../../pixi.js/internals/Graphics.d.ts';
+import type { PixiText as PIXIText } from '../../../../pixi.js/internals/PixiText.d.ts';
+import type { TextStyle } from '../../../../pixi.js/internals/TextStyle.d.ts';
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 import type { GraphLink } from './GraphLink.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
