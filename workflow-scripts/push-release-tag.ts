@@ -18,6 +18,7 @@ import { getLatestVersion } from './helpers/version.ts';
 
 const TAG_NAME = 'release-candidate';
 const TAG_NAME_BETA = 'release-candidate-beta';
+const SCOPE = '@obsidian-typings';
 
 async function main(): Promise<void> {
   await assertHeadMatches(TAG_NAME);
@@ -48,42 +49,132 @@ async function main(): Promise<void> {
 
   const nextVersion = await updateNpmVersions(branchName, isBeta);
 
+  const scopedPackageName = `${SCOPE}/obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}`;
   const zipFileName = `obsidian-typings-${nextVersion}-obsidian-${branchSpec.obsidianVersion}-${branchSpec.channel}.zip`;
-  const tags: string[] = [];
-  const suffix = isBeta ? '-beta' : '';
-  const mainNpmTag = `obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}${suffix}`;
-  tags.push(mainNpmTag);
 
   const latestVersion = await getLatestVersion(branchSpec.channel);
+  const isLatest = branchSpec.obsidianVersion === latestVersion;
 
-  if (branchSpec.obsidianVersion === latestVersion) {
-    tags.push(`obsidian-${branchSpec.channel}-latest${suffix}`);
+  await releaseNpmPackage(nextVersion, zipFileName, scopedPackageName);
+
+  // Use main README for the wrapper packages and zip artifact
+  await execFromRoot('git restore --source=origin/main --worktree -- ./README.md');
+
+  if (isLatest) {
+    await updateLatestWrapper(branchSpec.channel, scopedPackageName, nextVersion);
     if (branchSpec.channel === 'public') {
-      tags.push(`latest${suffix}`);
+      await updateLegacyWrapper(nextVersion);
     }
   }
 
-  await execFromRoot('git restore --source=origin/main --worktree -- ./README.md');
-  await releaseNpmPackage(nextVersion, zipFileName, tags);
   await writeOutput({
     isBeta,
-    releaseName: `${nextVersion} (${mainNpmTag})`,
+    releaseName: `${nextVersion} (${scopedPackageName})`,
     tagName: nextVersion,
     zipFileName
   });
 }
 
-async function releaseNpmPackage(nextVersion: string, zipFileName: string, tags: string[]): Promise<void> {
-  await execFromRoot('npm publish --tag published-latest');
+async function releaseNpmPackage(_nextVersion: string, zipFileName: string, scopedPackageName: string): Promise<void> {
+  // Publish as scoped package
+  await editPackageJson((packageJson) => {
+    packageJson.name = scopedPackageName;
+  });
 
-  for (const tag of tags) {
-    await execFromRoot(['npm', 'dist-tag', 'add', `obsidian-typings@${nextVersion}`, tag]);
-  }
+  await execFromRoot('npm publish --access public');
+
+  // Restore original name for zip artifact
+  await editPackageJson((packageJson) => {
+    packageJson.name = 'obsidian-typings';
+  });
 
   await execFromRoot('mkdir build');
   await execFromRoot('cp -r dist build');
   await execFromRoot('cp README.md LICENSE CHANGELOG.md package.json build');
   await execFromRoot(['zip', '-r', zipFileName, '.'], { cwd: 'build' });
+}
+
+async function updateLatestWrapper(channel: 'catalyst' | 'public', scopedPackageName: string, version: string): Promise<void> {
+  const wrapperName = `${SCOPE}/obsidian-${channel}-latest`;
+
+  // Create a temporary directory for the wrapper package
+  await execFromRoot('mkdir -p .wrapper-tmp');
+
+  const wrapperPackageJson = {
+    dependencies: {
+      [scopedPackageName]: `^${version}`
+    },
+    description: `Latest obsidian-typings for Obsidian ${channel} releases.`,
+    exports: {
+      '.': {
+        import: { types: './types.d.mts' },
+        require: { types: './types.d.cts' }
+      },
+      './implementations': {
+        import: { default: './implementations.mjs', types: './implementations.d.mts' },
+        require: { default: './implementations.cjs', types: './implementations.d.cts' }
+      }
+    },
+    license: 'MIT',
+    main: '',
+    name: wrapperName,
+    type: 'module',
+    types: './types.d.cts',
+    version
+  };
+
+  await execFromRoot(`cat > .wrapper-tmp/package.json << 'EOF'\n${JSON.stringify(wrapperPackageJson, null, 2)}\nEOF`);
+  await execFromRoot('cp README.md .wrapper-tmp/README.md');
+  await execFromRoot(`echo 'export type * from "${scopedPackageName}";' > .wrapper-tmp/types.d.mts`);
+  await execFromRoot(`echo 'export type * from "${scopedPackageName}";' > .wrapper-tmp/types.d.cts`);
+  await execFromRoot(`echo 'export type * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.d.mts`);
+  await execFromRoot(`echo 'export type * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.d.cts`);
+  await execFromRoot(`echo 'module.exports = require("${scopedPackageName}/implementations");' > .wrapper-tmp/implementations.cjs`);
+  await execFromRoot(`echo 'export * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.mjs`);
+
+  await execFromRoot('npm publish --access public', { cwd: '.wrapper-tmp' });
+  await execFromRoot('rm -rf .wrapper-tmp');
+}
+
+async function updateLegacyWrapper(version: string): Promise<void> {
+  const latestWrapperName = `${SCOPE}/obsidian-public-latest`;
+
+  await execFromRoot('mkdir -p .legacy-tmp');
+
+  const legacyPackageJson = {
+    dependencies: {
+      [latestWrapperName]: `^${version}`
+    },
+    description: 'TypeScript type definitions for Obsidian\'s internal/unofficial APIs. Wrapper for @obsidian-typings/obsidian-public-latest.',
+    exports: {
+      '.': {
+        import: { types: './types.d.mts' },
+        require: { types: './types.d.cts' }
+      },
+      './implementations': {
+        import: { default: './implementations.mjs', types: './implementations.d.mts' },
+        require: { default: './implementations.cjs', types: './implementations.d.cts' }
+      }
+    },
+    license: 'MIT',
+    main: '',
+    name: 'obsidian-typings',
+    type: 'module',
+    types: './types.d.cts',
+    version
+  };
+
+  await execFromRoot(`cat > .legacy-tmp/package.json << 'EOF'\n${JSON.stringify(legacyPackageJson, null, 2)}\nEOF`);
+  await execFromRoot('cp README.md .legacy-tmp/README.md');
+  await execFromRoot(`echo 'export type * from "${latestWrapperName}";' > .legacy-tmp/types.d.mts`);
+  await execFromRoot(`echo 'export type * from "${latestWrapperName}";' > .legacy-tmp/types.d.cts`);
+  await execFromRoot(`echo 'export type * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.d.mts`);
+  await execFromRoot(`echo 'export type * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.d.cts`);
+  await execFromRoot(`echo 'module.exports = require("${latestWrapperName}/implementations");' > .legacy-tmp/implementations.cjs`);
+  await execFromRoot(`echo 'export * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.mjs`);
+
+  await execFromRoot('npm publish --access public', { cwd: '.legacy-tmp' });
+  await execFromRoot('rm -rf .legacy-tmp');
 }
 
 async function updateNpmVersion(nextVersion: string): Promise<void> {

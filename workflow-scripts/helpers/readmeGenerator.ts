@@ -56,5 +56,6 @@ export async function generateMainReadme(): Promise<void> {
 
 function generateMainReadmeLine(branchSpec: BranchSpec): string {
   const branchName = generateBranchName(branchSpec);
-  return `\n- Latest \`${branchSpec.channel}\` release: [\`${branchName}\`](https://github.com/obsidian-typings/obsidian-typings/tree/${branchName})`;
+  const npmPackage = `@obsidian-typings/obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}`;
+  return `\n- Latest \`${branchSpec.channel}\` release: [\`${branchName}\`](https://github.com/obsidian-typings/obsidian-typings/tree/${branchName}) | [\`${npmPackage}\`](https://www.npmjs.com/package/${npmPackage})`;
 }
