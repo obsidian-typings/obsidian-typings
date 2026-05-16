@@ -1,8 +1,8 @@
 diff --git a/node_modules/starlight-typedoc/libs/starlight.ts b/node_modules/starlight-typedoc/libs/starlight.ts
-index 8d05d94..ac435b0 100644
+index ff3579b..6462713 100644
 --- a/node_modules/starlight-typedoc/libs/starlight.ts
 +++ b/node_modules/starlight-typedoc/libs/starlight.ts
-@@ -271,11 +271,36 @@ export function getRelativeURL(url: string, baseUrl: string, pageUrl?: string):
+@@ -268,11 +268,36 @@ export function getRelativeURL(url: string, baseUrl: string, pageUrl?: string):
      .map((segment) => slug(segment))
      .filter((segment) => segment !== '')
  
