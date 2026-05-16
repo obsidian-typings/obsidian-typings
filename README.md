@@ -47,20 +47,14 @@ In most cases, we recommend to always use the latest release.
 ### 1. Install via `npm`
 
 - Latest `public` release (recommended):
+  - `npm install --save-dev @obsidian-typings/obsidian-public-latest`
+- Latest `catalyst` (`beta`) release:
+  - `npm install --save-dev @obsidian-typings/obsidian-catalyst-latest`
+- Specific Obsidian version (should match `minAppVersion` in your plugin's `manifest.json`):
+  - `npm install --save-dev @obsidian-typings/obsidian-public-1.12.7`
+  - `npm install --save-dev @obsidian-typings/obsidian-catalyst-1.12.6`
+- Legacy package name (alias for `@obsidian-typings/obsidian-public-latest`):
   - `npm install --save-dev obsidian-typings`
-- Explicitly install latest `public` release:
-  - `npm pkg set "dependencies.obsidian-typings=obsidian-public-latest" && npm install`
-- Install the latest `catalyst` (`beta`) release:
-  - `npm pkg set "dependencies.obsidian-typings=obsidian-catalyst-latest" && npm install`
-- Install a specific release (should match `minAppVersion` in your plugin's `manifest.json`):
-  - `npm pkg set "dependencies.obsidian-typings=obsidian-public-1.8.10" && npm install`
-  - `npm pkg set "dependencies.obsidian-typings=obsidian-catalyst-1.9.9" && npm install`
-
-> [!IMPORTANT]
->
-> If you installed library using `npm pkg set` approach, you will have to update it using `npm update obsidian-typings` command.
->
-> If you run `npm install obsidian-typings` instead, the most likely, the library will not get updated.
 
 <!-- markdownlint-disable MD033 -->
 
@@ -68,14 +62,14 @@ In most cases, we recommend to always use the latest release.
 
 <!-- markdownlint-enable MD033 -->
 
-Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all extended typings available globally without explicit importing them:
+Add the package to the `types` array of your `tsconfig.json` to make all extended typings available globally without explicit importing them:
 
 ```json
 {
     "compilerOptions": {
         "...": "...",
         "types": [
-            "obsidian-typings"
+            "@obsidian-typings/obsidian-public-latest"
         ]
     }
 }
@@ -83,14 +77,14 @@ Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all 
 
 > [!WARNING]
 >
-> If other `@types/*` packages stop being recognized after adding `obsidian-typings` to the `types`, you may need to re-add them to the `types` list.
+> If other `@types/*` packages stop being recognized after adding the typings to the `types`, you may need to re-add them to the `types` list.
 >
 > ```json
 > {
 >     "compilerOptions": {
 >         "...": "...",
 >         "types": [
->             "obsidian-typings",
+>             "@obsidian-typings/obsidian-public-latest",
 >             "some-package-name"
 >         ]
 >     }
@@ -98,10 +92,10 @@ Add `obsidian-typings` to the `types` array of your `tsconfig.json` to make all 
 
 ### 3. Importing explicitly (alternative)
 
-Instead of adding `obsidian-typings` to your `types`, you can also import the package directly:
+Instead of adding the package to your `types`, you can also import it directly:
 
 ```ts
-import type {} from 'obsidian-typings';
+import type {} from '@obsidian-typings/obsidian-public-latest';
 ```
 
 ## Usage
@@ -118,27 +112,27 @@ function printInternalPlugins(app: App): void {
 }
 ```
 
-### `obsidian-typings` additional interfaces
+### Additional interfaces
 
 Additional interfaces added by this package (which do not exist in the official API), can be imported as:
 
 ```ts
-import type { InternalPlugins } from 'obsidian-typings';
+import type { InternalPlugins } from '@obsidian-typings/obsidian-public-latest';
 
 function getInternalPlugins(app: App): InternalPlugins {
   return app.internalPlugins;
 }
 ```
 
-### `obsidian-typings/implementations`
+### Implementations
 
-Additional helper functions/types/... added by this package can be used by importing from `obsidian-typings/implementations`:
+Additional helper functions/types/... added by this package can be used by importing from the `/implementations` subpath:
 
 ```ts
-import { InternalPluginName } from 'obsidian-typings/implementations';
+import { InternalPluginName } from '@obsidian-typings/obsidian-public-latest/implementations';
 
 // If you forget the `/implementations` part:
-// import { InternalPluginName } from 'obsidian-typings';
+// import { InternalPluginName } from '@obsidian-typings/obsidian-public-latest';
 // You will not be able to use the runtime values and the code below will not compile.
 
 this.app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
@@ -152,7 +146,7 @@ If you need to extend the typings provided by this package, add the following to
 
 ```ts
 export {}; // This line is required. If there are no top-level `import/export` statements, your typings will work not as expected.
-declare module 'obsidian-typings' {
+declare module '@obsidian-typings/obsidian-public-latest' {
     interface PluginsPluginsRecord {
         ['my-plugin-id']: MyPlugin;
     }
