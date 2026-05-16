@@ -128,8 +128,8 @@ async function updateLatestWrapper(channel: 'catalyst' | 'public', scopedPackage
   await execFromRoot('cp README.md .wrapper-tmp/README.md');
   await execFromRoot(`echo 'export type * from "${scopedPackageName}";' > .wrapper-tmp/types.d.mts`);
   await execFromRoot(`echo 'export type * from "${scopedPackageName}";' > .wrapper-tmp/types.d.cts`);
-  await execFromRoot(`echo 'export type * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.d.mts`);
-  await execFromRoot(`echo 'export type * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.d.cts`);
+  await execFromRoot(`echo 'export * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.d.mts`);
+  await execFromRoot(`echo 'export * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.d.cts`);
   await execFromRoot(`echo 'module.exports = require("${scopedPackageName}/implementations");' > .wrapper-tmp/implementations.cjs`);
   await execFromRoot(`echo 'export * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.mjs`);
 
@@ -169,8 +169,8 @@ async function updateLegacyWrapper(version: string): Promise<void> {
   await execFromRoot('cp README.md .legacy-tmp/README.md');
   await execFromRoot(`echo 'export type * from "${latestWrapperName}";' > .legacy-tmp/types.d.mts`);
   await execFromRoot(`echo 'export type * from "${latestWrapperName}";' > .legacy-tmp/types.d.cts`);
-  await execFromRoot(`echo 'export type * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.d.mts`);
-  await execFromRoot(`echo 'export type * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.d.cts`);
+  await execFromRoot(`echo 'export * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.d.mts`);
+  await execFromRoot(`echo 'export * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.d.cts`);
   await execFromRoot(`echo 'module.exports = require("${latestWrapperName}/implementations");' > .legacy-tmp/implementations.cjs`);
   await execFromRoot(`echo 'export * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.mjs`);
 
