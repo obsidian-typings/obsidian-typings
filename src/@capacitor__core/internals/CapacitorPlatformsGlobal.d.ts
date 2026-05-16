@@ -1,12 +1,12 @@
 import type { CapacitorPlatform } from './CapacitorPlatform.d.ts';
 
 /**
- * Capacitor platforms instance.
+ * Capacitor platforms global.
  *
  * @public
  * @unofficial
  */
-export interface CapacitorPlatformsInstance {
+export interface CapacitorPlatformsGlobal {
   /** Current platform. */
   currentPlatform: CapacitorPlatform;
   /** Registered platforms. */

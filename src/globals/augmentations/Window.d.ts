@@ -8,7 +8,7 @@ import type {
 } from 'obsidian';
 
 import type { CapacitorGlobal } from '../../@capacitor__core/internals/CapacitorGlobal.d.ts';
-import type { CapacitorPlatformsInstance } from '../../@capacitor__core/internals/CapacitorPlatformsInstance.d.ts';
+import type { CapacitorPlatformsGlobal } from '../../@capacitor__core/internals/CapacitorPlatformsGlobal.d.ts';
 import type { CodeMirrorAdapterEx } from '../../@codemirror__view/internals/CodeMirrorAdapterEx.d.ts';
 import type { VimApi } from '../../@codemirror__view/internals/vim/VimApi.d.ts';
 import type { CodeMirrorModule } from '../../codemirror/internals/CodeMirrorModule.d.ts';
@@ -115,7 +115,7 @@ declare global {
      *
      * @unofficial
      */
-    CapacitorPlatforms: CapacitorPlatformsInstance;
+    CapacitorPlatforms: CapacitorPlatformsGlobal;
 
     /**
      * Minified reference to `Object.getOwnPropertyDescriptors`.

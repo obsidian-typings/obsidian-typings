@@ -1,4 +1,4 @@
-import type { CapacitorPlatformsInstance } from '../CapacitorPlatformsInstance.d.ts';
+import type { CapacitorPlatformsGlobal } from '../CapacitorPlatformsGlobal.d.ts';
 
 /**
  * Capacitor platforms instance.
@@ -7,4 +7,4 @@ import type { CapacitorPlatformsInstance } from '../CapacitorPlatformsInstance.d
  * @public
  * @unofficial
  */
-export declare const CapacitorPlatforms: CapacitorPlatformsInstance;
+export declare const CapacitorPlatforms: CapacitorPlatformsGlobal;
