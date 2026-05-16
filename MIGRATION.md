@@ -172,7 +172,7 @@ Some breaking changes were made between `1.x.x` and `2.0.0` versions of this pac
     }
     ```
 
-    You will have to change it to the [new approach](https://github.com/Fevol/obsidian-typings/blob/main/README.md#extend-with-your-own-typings).
+    You will have to change it to the [new approach](https://github.com/obsidian-typings/obsidian-typings/blob/main/README.md#extend-with-your-own-typings).
 
 ## Recommended optional changes
 
@@ -187,4 +187,4 @@ While these changes are not strictly required, they will help to keep your code 
 
   With `bundler` you can keep using `import { fn1 } from './module2';`
 - Set in `tsconfig.json`, `skipLibCheck` to `false`. This will compile your `.d.ts` definitions and allow you to detect the errors earlier.
-- Switch to the [Add `types` setting to `tsconfig.json`](https://github.com/Fevol/obsidian-typings/blob/main/README.md#add-types-setting-to-tsconfig-json) approach, as it is the most robust.
+- Switch to the [Add `types` setting to `tsconfig.json`](https://github.com/obsidian-typings/obsidian-typings/blob/main/README.md#add-types-setting-to-tsconfig-json) approach, as it is the most robust.

@@ -18,12 +18,12 @@ function printInternalPlugins(app: App): void {
 }
 ```
 
-### Import from&nbsp;`obsidian-typings`
+### Import from&nbsp;`@obsidian-typings/obsidian-public-latest`
 
 Additional interfaces added by this package (which are not documented anywhere in the official API) can be imported using:
 
 ```ts
-import { InternalPlugins } from 'obsidian-typings';
+import { InternalPlugins } from '@obsidian-typings/obsidian-public-latest';
 
 const internalPlugins: InternalPlugins = this.app.internalPlugins;
 ```
@@ -38,7 +38,7 @@ add the following to any `.d.ts` file in your project:
 // If you don't have any other top-level `import/export` statements,
 //      the typings listed below will work not as expected.
 export {};
-declare module 'obsidian-typings' {
+declare module '@obsidian-typings/obsidian-public-latest' {
   interface PluginsPluginsRecord {
     myPlugin: MyPlugin;
   }
@@ -46,16 +46,16 @@ declare module 'obsidian-typings' {
 ```
 
 ## Using implementations
-### Via&nbsp;`obsidian-typings/implementations`
+### Via&nbsp;`/implementations`
 
-Additional helper functions/types/... added by this package, can be added by importing from `obsidian-typings/implementations`:
+Additional helper functions/types/... added by this package, can be added by importing from the `/implementations` subpath:
 
 ```ts
-import { InternalPluginName } from 'obsidian-typings/implementations';
+import { InternalPluginName } from '@obsidian-typings/obsidian-public-latest/implementations';
 
 this.app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
 ```
 
-(The list of all available implementations can be found in the [implementations](https://github.com/Fevol/obsidian-typings/tree/main/src/implementations) folder.)
+(The list of all available implementations can be found in the [implementations](https://github.com/obsidian-typings/obsidian-typings/tree/main/src/implementations) folder.)
 
 

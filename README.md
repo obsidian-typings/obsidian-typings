@@ -2,7 +2,7 @@
 
 [![NPM downloads](https://img.shields.io/npm/v/obsidian-typings?color=red&label=Version%3A&logo=npm&logoColor=white&labelColor=red)](https://www.npmjs.com/package/obsidian-typings)
 [![NPM downloads](https://img.shields.io/npm/dw/obsidian-typings?style=flat&label=Downloads)](https://www.npmjs.com/package/obsidian-typings)
-[![GitHub Repo stars](https://img.shields.io/github/stars/fevol/obsidian-typings?color=yellow&label=Stargazers%3A&logo=OpenTelemetry&logoColor=yellow)](https://github.com/Fevol/obsidian-typings/stargazers)
+[![GitHub Repo stars](https://img.shields.io/github/stars/obsidian-typings/obsidian-typings?color=yellow&label=Stargazers%3A&logo=OpenTelemetry&logoColor=yellow)](https://github.com/obsidian-typings/obsidian-typings/stargazers)
 
 **Obsidian Typings** provides **TypeScript definitions** for Obsidian’s **undocumented and internal APIs**.
 
@@ -36,8 +36,8 @@ To make it easier to adapt to these differences, this package provides typings f
 
 Typings for each `Obsidian` version can be found in their own git branches: namely `release/obsidian-public/*` and `release/obsidian-catalyst/*`:
 
-- Latest `public` release: [`release/obsidian-public/1.12.7`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.12.7)
-- Latest `catalyst` release: [`release/obsidian-catalyst/1.12.6`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-catalyst/1.12.6)
+- Latest `public` release: [`release/obsidian-public/1.12.7`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.12.7)
+- Latest `catalyst` release: [`release/obsidian-catalyst/1.12.6`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.12.6)
 
 Older versions of the package are available, but support for them is limited.
 In most cases, we recommend to always use the latest release.
@@ -138,7 +138,7 @@ import { InternalPluginName } from '@obsidian-typings/obsidian-public-latest/imp
 this.app.internalPlugins.getEnabledPluginById(InternalPluginName.FileExplorer);
 ```
 
-The list of all available implementations can be found in the `src/obsidian/implementations` folder in the corresponding release branch ([example for `1.9.10 public`](https://github.com/Fevol/obsidian-typings/tree/release/obsidian-public/1.9.10/src/obsidian/implementations)).
+The list of all available implementations can be found in the `src/obsidian/implementations` folder in the corresponding release branch ([example for `1.9.10 public`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.9.10/src/obsidian/implementations)).
 
 ### Extend with your own typings
 
@@ -184,7 +184,7 @@ Always verify that your code behaves as expected, both in terms of types and run
 
 > [!TIP]
 >
-> If you find any issues with the typings or documentation, please feel free to [open an issue](https://github.com/Fevol/obsidian-typings/issues) or submit a pull request.
+> If you find any issues with the typings or documentation, please feel free to [open an issue](https://github.com/obsidian-typings/obsidian-typings/issues) or submit a pull request.
 
 With these scary disclaimers out of the way, hopefully these typings will help you in removing 90% of the `@ts-ignore`/`@ts-expect-error` you have in your codebase, or discover solutions that didn't seem possible before.
 
@@ -197,10 +197,10 @@ With these scary disclaimers out of the way, hopefully these typings will help y
 
 ## Migration
 
-If you were using a `1.x.x` version of this package, see the [Migration guide](https://github.com/Fevol/obsidian-typings/blob/main/MIGRATION.md) for upgrading to `2.0.0` or newer.
+If you were using a `1.x.x` version of this package, see the [Migration guide](https://github.com/obsidian-typings/obsidian-typings/blob/main/MIGRATION.md) for upgrading to `2.0.0` or newer.
 
 ## Contributing
 
 Feel free to start typing any part of the Obsidian API that is not yet typed, or fixing/adding additional descriptions to existing typings. If you are unsure about anything, don't hesitate to open an issue.
 
-A brief tutorial is available on how you can get started with adding new typings, or fixing existing ones, see: [CONTRIBUTING.md](https://github.com/Fevol/obsidian-typings/blob/main/CONTRIBUTING.md).
+A brief tutorial is available on how you can get started with adding new typings, or fixing existing ones, see: [CONTRIBUTING.md](https://github.com/obsidian-typings/obsidian-typings/blob/main/CONTRIBUTING.md).

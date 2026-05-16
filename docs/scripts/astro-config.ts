@@ -32,7 +32,7 @@ export const astroConfig = defineConfig({
         './src/styles/global.css'
       ],
       editLink: {
-        baseUrl: 'https://github.com/Fevol/obsidian-typings/tree/main/docs/'
+        baseUrl: 'https://github.com/obsidian-typings/obsidian-typings/tree/main/docs/'
       },
       favicon: './favicon.png',
       plugins: [
@@ -102,7 +102,7 @@ export const astroConfig = defineConfig({
         }
       ],
       social: [
-        { href: 'https://github.com/fevol/obsidian-typings', icon: 'github', label: 'Github' }
+        { href: 'https://github.com/obsidian-typings/obsidian-typings', icon: 'github', label: 'Github' }
       ],
       title: 'Obsidian Typings'
     })

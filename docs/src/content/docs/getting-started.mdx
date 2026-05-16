@@ -25,17 +25,23 @@ import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
     1. **Installation** <br/>
-        Obsidian Typings is a [NPM package](https://www.npmjs.com/package/obsidian-typings) that you can install using your favorite package manager:
-        <PackageManagers pkg="obsidian-typings" dev={true} pkgManagers={["npm", "yarn", "pnpm", "bun"]}/>
-    2. **Add `obsidian-typings` to `types` in `tsconfig.json`** (_recommended_) <br/>
-        Register the types from `obsidian-typings` to your project with the `tsconfig.json` file.
+        Obsidian Typings is available as scoped packages under the [`@obsidian-typings`](https://www.npmjs.com/org/obsidian-typings) org on NPM. Install using your favorite package manager:
+        <PackageManagers pkg="@obsidian-typings/obsidian-public-latest" dev={true} pkgManagers={["npm", "yarn", "pnpm", "bun"]}/>
+
+        Other install options:
+        - Latest catalyst (beta) release: `@obsidian-typings/obsidian-catalyst-latest`
+        - Specific Obsidian version: `@obsidian-typings/obsidian-public-1.12.7`
+        - Legacy package name (alias): `obsidian-typings`
+
+    2. **Add the package to `types` in `tsconfig.json`** (_recommended_) <br/>
+        Register the types to your project with the `tsconfig.json` file.
         ```diff lang="json"
             // tsconfig.json
             {
                 "compilerOptions": {
                     "...": "...",
         +           "types": [
-        +               "obsidian-typings"
+        +               "@obsidian-typings/obsidian-public-latest"
         +           ]
                 }
             }
@@ -48,7 +54,7 @@ import { PackageManagers } from 'starlight-package-managers'
             "compilerOptions": {
                 "...": "...",
                 "types": [
-                    "obsidian-typings",
+                    "@obsidian-typings/obsidian-public-latest",
         +            "some-package-name"
                 ]
             }
@@ -56,10 +62,10 @@ import { PackageManagers } from 'starlight-package-managers'
         ```
         :::
 	3. **Explicit type importing** <br/>
-        If you prefer not to add `obsidian-typings` to your `types`, you can also add `import type {} from 'obsidian-typings';` to any project file.
+        If you prefer not to add the package to your `types`, you can also add `import type {} from '@obsidian-typings/obsidian-public-latest';` to any project file.
 
-    4. **Using `obsidian-typings/implementations`** <br/>
-        Depending on how your project is set up, `import { X } from 'obsidian-typings/implementations';` may not work straight out of the box, e.g., if you have `"moduleResolution": "node"` or `"node10"` in your `tsconfig.json`. <br/><br/>
+    4. **Using implementations** <br/>
+        Depending on how your project is set up, `import { X } from '@obsidian-typings/obsidian-public-latest/implementations';` may not work straight out of the box, e.g., if you have `"moduleResolution": "node"` or `"node10"` in your `tsconfig.json`. <br/><br/>
         To solve this, you can add the following to your `tsconfig.json`:
 
         ```diff lang="json"
@@ -68,9 +74,9 @@ import { PackageManagers } from 'starlight-package-managers'
             "compilerOptions": {
                 "...": "...",
                 "paths": {
-        +           "obsidian-typings/implementations": [
-        +               "./node_modules/obsidian-typings/dist/implementations.d.ts",
-        +               "./node_modules/obsidian-typings/dist/implementations.cjs"
+        +           "@obsidian-typings/obsidian-public-latest/implementations": [
+        +               "./node_modules/@obsidian-typings/obsidian-public-latest/implementations.d.ts",
+        +               "./node_modules/@obsidian-typings/obsidian-public-latest/implementations.cjs"
         +           ]
                 }
             }

@@ -18,4 +18,4 @@ npm run dev
 > The website can only be built if dependencies in both the root and `docs` directories are installed.
 
 For more information about the Obsidian Typings package, visit the [website](https://fevol.github.io/obsidian-typings/),
-or the repository's [README](https://github.com/fevol/obsidian-typings/blob/main/README.md).
+or the repository's [README](https://github.com/obsidian-typings/obsidian-typings/blob/main/README.md).
