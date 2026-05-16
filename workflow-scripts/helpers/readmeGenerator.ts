@@ -56,5 +56,5 @@ export async function generateMainReadme(): Promise<void> {
 
 function generateMainReadmeLine(branchSpec: BranchSpec): string {
   const branchName = generateBranchName(branchSpec);
-  return `\n- Latest \`${branchSpec.channel}\` release: [\`${branchName}\`](https://github.com/Fevol/obsidian-typings/tree/${branchName})`;
+  return `\n- Latest \`${branchSpec.channel}\` release: [\`${branchName}\`](https://github.com/obsidian-typings/obsidian-typings/tree/${branchName})`;
 }
