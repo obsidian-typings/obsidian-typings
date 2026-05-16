@@ -60,9 +60,11 @@ async function main(): Promise<void> {
   await execFromRoot('git restore --source=origin/main --worktree -- ./README.md');
 
   if (isLatest) {
-    await updateLatestWrapper(branchSpec.channel, scopedPackageName, nextVersion);
+    const latestWrapperName = `${SCOPE}/obsidian-${branchSpec.channel}-latest`;
+    const wrapperVersion = await getNextWrapperVersion(latestWrapperName, isBeta);
+    await updateLatestWrapper(branchSpec.channel, scopedPackageName, nextVersion, wrapperVersion);
     if (branchSpec.channel === 'public') {
-      await updateLegacyWrapper(nextVersion);
+      await updateLegacyWrapper(wrapperVersion);
     }
   }
 
@@ -93,7 +95,7 @@ async function releaseNpmPackage(_nextVersion: string, zipFileName: string, scop
   await execFromRoot(['zip', '-r', zipFileName, '.'], { cwd: 'build' });
 }
 
-async function updateLatestWrapper(channel: 'catalyst' | 'public', scopedPackageName: string, version: string): Promise<void> {
+async function updateLatestWrapper(channel: 'catalyst' | 'public', scopedPackageName: string, scopedVersion: string, wrapperVersion: string): Promise<void> {
   const wrapperName = `${SCOPE}/obsidian-${channel}-latest`;
 
   // Create a temporary directory for the wrapper package
@@ -101,7 +103,7 @@ async function updateLatestWrapper(channel: 'catalyst' | 'public', scopedPackage
 
   const wrapperPackageJson = {
     dependencies: {
-      [scopedPackageName]: `^${version}`
+      [scopedPackageName]: `^${scopedVersion}`
     },
     description: `Latest obsidian-typings for Obsidian ${channel} releases.`,
     exports: {
@@ -119,7 +121,7 @@ async function updateLatestWrapper(channel: 'catalyst' | 'public', scopedPackage
     name: wrapperName,
     type: 'module',
     types: './types.d.cts',
-    version
+    version: wrapperVersion
   };
 
   await execFromRoot(`cat > .wrapper-tmp/package.json << 'EOF'\n${JSON.stringify(wrapperPackageJson, null, 2)}\nEOF`);
@@ -193,6 +195,15 @@ async function updateNpmVersion(nextVersion: string): Promise<void> {
   await execFromRoot('git add package.json package-lock.json');
   await commit(`chore(release): ${nextVersion}`);
   await execFromRoot('git push');
+}
+
+async function getNextWrapperVersion(packageName: string, isBeta: boolean): Promise<string> {
+  const currentVersion = (await execFromRoot(`npm view ${packageName} version`, { isQuiet: true })).trim();
+  const nextVersion = isBeta ? inc(currentVersion, 'preminor', 'beta') : inc(currentVersion, 'minor');
+  if (!nextVersion) {
+    throw new Error(`Failed to increment wrapper version for ${packageName} (current: ${currentVersion})`);
+  }
+  return nextVersion;
 }
 
 async function updateNpmVersions(_branchName: string, isBeta: boolean): Promise<string> {
