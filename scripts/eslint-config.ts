@@ -1,7 +1,7 @@
 import type { Linter } from 'eslint';
 
 import commentsConfigs from '@eslint-community/eslint-plugin-eslint-comments/configs';
-import { includeIgnoreFile } from '@eslint/compat';
+import { includeIgnoreFile } from '@eslint/config-helpers';
 import eslint from '@eslint/js';
 // eslint-disable-next-line import-x/no-rename-default -- The default export name `plugin` is too confusing.
 import stylistic from '@stylistic/eslint-plugin';
@@ -360,10 +360,10 @@ function getImportXConfigs(): Linter.Config[] {
   return defineConfig([
     {
       extends: [
-        eslintPluginImportXFlatConfigs.recommended as Linter.Config,
-        eslintPluginImportXFlatConfigs.typescript as Linter.Config,
-        eslintPluginImportXFlatConfigs.errors as Linter.Config,
-        eslintPluginImportXFlatConfigs.warnings as Linter.Config
+        eslintPluginImportXFlatConfigs.recommended,
+        eslintPluginImportXFlatConfigs.typescript,
+        eslintPluginImportXFlatConfigs.errors,
+        eslintPluginImportXFlatConfigs.warnings
       ],
       files: typeScriptFiles,
       rules: {
