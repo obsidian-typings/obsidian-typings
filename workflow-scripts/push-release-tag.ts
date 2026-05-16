@@ -5,8 +5,7 @@ import { parseBranchSpec } from './helpers/branchSpec.ts';
 import {
   editPackageJson,
   editPackageLockJson,
-  execFromRoot,
-  readPackageJson
+  execFromRoot
 } from './helpers/exec.ts';
 import {
   annotateTag,
@@ -196,21 +195,13 @@ async function updateNpmVersion(nextVersion: string): Promise<void> {
   await execFromRoot('git push');
 }
 
-async function updateNpmVersions(branchName: string, isBeta: boolean): Promise<string> {
-  await execFromRoot('git fetch origin');
-  await execFromRoot('git checkout main --force');
-  const packageJson = await readPackageJson();
-  if (!packageJson.version) {
-    throw new Error('package.json version is not set');
-  }
-  const nextVersion = isBeta ? inc(packageJson.version, 'preminor', 'beta') : inc(packageJson.version, 'minor');
+async function updateNpmVersions(_branchName: string, isBeta: boolean): Promise<string> {
+  const currentVersion = (await execFromRoot('node -p "require(\'./package.json\').version"', { isQuiet: true })).trim();
+  const nextVersion = isBeta ? inc(currentVersion, 'preminor', 'beta') : inc(currentVersion, 'minor');
   if (!nextVersion) {
     throw new Error('Failed to increment version');
   }
 
-  await updateNpmVersion(nextVersion);
-
-  await execFromRoot(`git checkout ${branchName} --force`);
   await updateNpmVersion(nextVersion);
 
   await annotateTag(nextVersion, nextVersion);
