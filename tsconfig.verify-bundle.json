@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": true
+  },
+  "include": [
+    "./scripts/verify-bundle/*.cts",
+    "./scripts/verify-bundle/*.mts"
+  ]
+}

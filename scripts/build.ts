@@ -14,6 +14,7 @@ const BUILD_STEPS = [
   'build:implementations:bundle-types',
   'build:fix-implementations-bundle-types',
   'build:static',
+  'build:verify-bundle',
   'build:extract-api'
 ];
 
