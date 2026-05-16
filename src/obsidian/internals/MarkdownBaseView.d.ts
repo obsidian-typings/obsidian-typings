@@ -1,3 +1,8 @@
+import type { Extension } from '@codemirror/state';
+import type {
+  EditorView,
+  ViewUpdate
+} from '@codemirror/view';
 import type {
   App,
   Component,
@@ -6,9 +11,6 @@ import type {
   TFile
 } from 'obsidian';
 
-import type { Extension } from '../../@codemirror__state/internals/Extension.d.ts';
-import type { EditorView } from '../../@codemirror__view/internals/EditorView.d.ts';
-import type { ViewUpdate } from '../../@codemirror__view/internals/ViewUpdate.d.ts';
 import type { ClipboardManager } from './ClipboardManager.d.ts';
 import type { EditorSuggests } from './EditorSuggests.d.ts';
 import type { FoldInfo } from './FoldInfo.d.ts';

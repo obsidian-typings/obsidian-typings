@@ -1,5 +1,6 @@
+import type { RangeValue } from '@codemirror/state';
+
 import type { CmRange } from './CmRange.d.ts';
-import type { RangeValue } from './RangeValue.d.ts';
 
 /**
  * Configuration passed to `RangeSet.update`.

@@ -1,4 +1,4 @@
-import type { WidgetType } from './WidgetType.d.ts';
+import type { WidgetType } from '@codemirror/view';
 
 /**
  * Specification for a replace decoration that replaces a range of text.

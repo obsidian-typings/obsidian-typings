@@ -74,6 +74,7 @@
     "build:implementations:bundle-types": "jiti scripts/build-implementations-bundle-types.ts",
     "build:implementations:generate-types": "jiti scripts/build-implementations-generate-types.ts",
     "build:static": "jiti scripts/build-static.ts",
+    "build:validate-bundle": "jiti scripts/build-validate-bundle.ts",
     "commit": "jiti scripts/commit.ts",
     "format": "jiti scripts/format.ts",
     "format:check": "jiti scripts/format-check.ts",
@@ -131,5 +132,8 @@
     "type-fest": "^5.6.0",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.3"
+  },
+  "peerDependencies": {
+    "@types/node": ">=16.0.0"
   }
 }

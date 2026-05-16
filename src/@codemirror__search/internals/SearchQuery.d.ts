@@ -1,5 +1,6 @@
+import type { EditorState } from '@codemirror/state';
+
 import type { CmText } from '../../@codemirror__state/internals/CmText.d.ts';
-import type { EditorState } from '../../@codemirror__state/internals/EditorState.d.ts';
 
 /**
  * Represents a search query with its configuration and methods for searching.

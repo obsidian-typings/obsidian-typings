@@ -1,4 +1,4 @@
-import type { EditorState } from '../../@codemirror__state/internals/EditorState.d.ts';
+import type { EditorState } from '@codemirror/state';
 
 /**
  * A parse context that can be used to track parsing progress.

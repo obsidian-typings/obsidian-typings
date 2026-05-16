@@ -1,4 +1,4 @@
-import type { ViewPlugin } from '../../@codemirror__view/internals/ViewPlugin.d.ts';
+import type { ViewPlugin } from '@codemirror/view';
 
 export {};
 

@@ -1,4 +1,7 @@
-import type { EditorPosition } from 'obsidian';
+import type {
+  EditorPosition,
+  EditorSelection
+} from 'obsidian';
 
 import type { SearchQuery } from '../../@codemirror__search/internals/SearchQuery.d.ts';
 import type { AddOverlayOptions } from './AddOverlayOptions.d.ts';
@@ -7,7 +10,6 @@ import type { Bracket } from './Bracket.d.ts';
 import type { CodeMirrorEditorMode } from './CodeMirrorEditorMode.d.ts';
 import type { CodeMirrorEditorSearchCursor } from './CodeMirrorEditorSearchCursor.d.ts';
 import type { Coords } from './Coords.d.ts';
-import type { EditorSelection } from './EditorSelection.d.ts';
 import type { HardWrapOptions } from './HardWrapOptions.d.ts';
 import type { LineHandle } from './LineHandle.d.ts';
 import type { LineHandleChange } from './LineHandleChange.d.ts';

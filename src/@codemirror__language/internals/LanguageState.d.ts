@@ -1,4 +1,5 @@
-import type { Transaction } from '../../@codemirror__state/internals/Transaction.d.ts';
+import type { Transaction } from '@codemirror/state';
+
 import type { LezerTree } from '../../@lezer__common/internals/LezerTree.d.ts';
 import type { ParseContext } from './ParseContext.d.ts';
 

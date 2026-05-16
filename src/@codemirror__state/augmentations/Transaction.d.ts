@@ -1,35 +1,83 @@
+import type {
+  AnnotationType,
+  ChangeSet,
+  EditorSelection as CmEditorSelection,
+  EditorState,
+  StateEffect,
+  Text
+} from '@codemirror/state';
+
 export {};
 
 declare module '@codemirror/state' {
-  /**
-   * Changes to the editor state are grouped into transactions.
-   * Typically, a user action creates a single transaction, which may
-   * contain any number of document changes, may change the selection,
-   * or have other effects. Create a transaction by calling
-   * [`EditorState.update`](https://codemirror.net/6/docs/ref/#state.EditorState.update), or immediately
-   * dispatch one by calling
-   * [`EditorView.dispatch`](https://codemirror.net/6/docs/ref/#view.EditorView.dispatch).
-   */
   interface Transaction {
     /**
-     * Check whether the user deletes backward from the selection.
-     * Included in `'delete'` event.
+     * The document changes made by this transaction.
      *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link changes} instead.
      */
-    isUserEvent(event: 'delete.backward'): boolean;
+    readonly changes__: ChangeSet;
 
     /**
-     * Check whether the user cuts a content to the clipboard.
-     * Included in `'delete'` event.
+     * The effects added to the transaction.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link effects} instead.
+     */
+    readonly effects__: readonly StateEffect<unknown>[];
+
+    /**
+     * Whether the selection should be scrolled into view after this transaction is dispatched.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link scrollIntoView} instead.
+     */
+    readonly scrollIntoView__: boolean;
+
+    /**
+     * The selection set by this transaction, or `undefined` if it doesn't explicitly set a
+     * selection.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link selection} instead.
+     */
+    readonly selection__: CmEditorSelection | undefined;
+
+    /**
+     * The state from which the transaction starts.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link startState} instead.
+     */
+    readonly startState__: EditorState;
+
+    /**
+     * Get the value of the given annotation type, if any.
+     *
+     * @param type - The annotation type.
+     * @returns The annotation value, or `undefined`.
+     * @official
+     */
+    annotation<T>(type: AnnotationType<T>): T | undefined;
+
+    /**
+     * Indicates whether the transaction changed the document.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link docChanged} instead.
+     */
+    get docChanged__(): boolean;
+
+    /**
+     * Returns `true` if the transaction has a user event annotation that is equal to or more
+     * specific than `event`.
      *
      * @param event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @official
      */
-    isUserEvent(event: 'delete.cut'): boolean;
+    isUserEvent(event: string): boolean;
 
     /**
      * Check whether the user dedents a line or lines, usually by typing `Shift + Tab` keys.
@@ -42,16 +90,6 @@ declare module '@codemirror/state' {
     isUserEvent(event: 'delete.dedent'): boolean;
 
     /**
-     * Check whether the user deletes forward from the selection.
-     * Included in `'delete'` event.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'delete.forward'): boolean;
-
-    /**
      * Check whether the user deletes a line or lines, usually by typing `Ctrl + Shift + K` keys.
      * Included in `'delete'` event.
      *
@@ -60,25 +98,6 @@ declare module '@codemirror/state' {
      * @unofficial
      */
     isUserEvent(event: 'delete.line'): boolean;
-
-    /**
-     * Check whether the user deletes selected content.
-     * Included in `'delete'` event.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'delete.selection'): boolean;
-
-    /**
-     * Check whether the user deletes a content.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'delete'): boolean;
 
     /**
      * Check whether the user inputs a content through Obsidian editor suggest autocompletion.
@@ -92,16 +111,6 @@ declare module '@codemirror/state' {
     isUserEvent(event: 'input.autocomplete'): boolean;
 
     /**
-     * Check whether the user inputs a content through CodeMirror native autocompletion.
-     * Included in `'input'` event.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'input.complete'): boolean;
-
-    /**
      * Check whether the user creates a copy of the selected lines.
      * Usually dispatched when performing [`copyLineUp`](https://codemirror.net/docs/ref/#commands.copyLineUp) or [`copyLineDown`](https://codemirror.net/docs/ref/#commands.copyLineDown) commands.
      * Included in `'input'` event.
@@ -111,17 +120,6 @@ declare module '@codemirror/state' {
      * @unofficial
      */
     isUserEvent(event: 'input.copyline'): boolean;
-
-    /**
-     * Check whether the user inputs a content through drop event.
-     * Included in `'input'` event.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'input.drop'): boolean;
-
     /**
      * Check whether the user indents a line or lines, usually by typing `Tab` key.
      * Included in `'input'` event.
@@ -131,27 +129,6 @@ declare module '@codemirror/state' {
      * @unofficial
      */
     isUserEvent(event: 'input.indent'): boolean;
-
-    /**
-     * Check whether the user pastes a content into the editor.
-     * Included in `'input'` event.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'input.paste'): boolean;
-
-    /**
-     * Check whether the user input triggers auto-renumbering ordered list.
-     * Included in `'input'` event.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @remark This event cannot be captured since Obsidian will filtered it out as soon as it was dispatched.
-     * @official
-     */
-    isUserEvent(event: 'input.renumber'): boolean;
 
     /**
      * Check whether the user replaces all search matches.
@@ -188,35 +165,6 @@ declare module '@codemirror/state' {
     isUserEvent(event: 'input.type.compose.start'): boolean;
 
     /**
-     * Check whether the user inputs a content through composition.
-     * Included in `'input'` and `'input.type'` events.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'input.type.compose'): boolean;
-
-    /**
-     * Check whether the user inputs a content through typed input.
-     * Included in `'input'` event.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'input.type'): boolean;
-
-    /**
-     * Check whether the user inputs a content.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'input'): boolean;
-
-    /**
      * Check whether the user flips the characters before and after the cursor(s).
      * Usually dispatched when performing [`transposeChars`](https://codemirror.net/docs/ref/#commands.transposeChars) command.
      * Included in `'move'` event.
@@ -226,16 +174,6 @@ declare module '@codemirror/state' {
      * @unofficial
      */
     isUserEvent(event: 'move.character'): boolean;
-
-    /**
-     * Check whether the user moves a content within the editor through drag-and-drop.
-     * Included in `'move'` event.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'move.drop'): boolean;
 
     /**
      * Check whether the user moves the selected line up or down.
@@ -249,24 +187,6 @@ declare module '@codemirror/state' {
     isUserEvent(event: 'move.line'): boolean;
 
     /**
-     * Check whether the user moves a content.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'move'): boolean;
-
-    /**
-     * Check whether the user redoes a content change.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'redo'): boolean;
-
-    /**
      * Check whether the transaction is triggered by a scroll action.
      *
      * @param event - The event type to check.
@@ -274,16 +194,6 @@ declare module '@codemirror/state' {
      * @unofficial
      */
     isUserEvent(event: 'scroll'): boolean;
-
-    /**
-     * Check whether the user changes the selection with mouse or other pointing device.
-     * Included in `'select'` event.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'select.pointer'): boolean;
 
     /**
      * Check whether the user redoes a selection change.
@@ -332,15 +242,6 @@ declare module '@codemirror/state' {
     isUserEvent(event: 'select.undo'): boolean;
 
     /**
-     * Check whether the user explicitly changes the selection.
-     *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
-     * @official
-     */
-    isUserEvent(event: 'select'): boolean;
-
-    /**
      * Check whether a content change is not made explicitly by the user. It happens in some circumstances, for instance:
      * - Change made externally, e.g. by other text editor programs.
      * - Change made by another editor view that holds the same note.
@@ -353,12 +254,71 @@ declare module '@codemirror/state' {
     isUserEvent(event: 'set'): boolean;
 
     /**
-     * Check whether the user undoes a content change.
+     * The new document produced by the transaction.
      *
-     * @param event - The event type to check.
-     * @returns Whether the transaction matches the event.
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link newDoc} instead.
      */
-    isUserEvent(event: 'undo'): boolean;
+    get newDoc__(): Text;
+
+    /**
+     * The new selection produced by the transaction.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link newSelection} instead.
+     */
+    get newSelection__(): CmEditorSelection;
+
+    /**
+     * Indicates whether this transaction reconfigures the state.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link reconfigured} instead.
+     */
+    get reconfigured__(): boolean;
+
+    /**
+     * The new state created by the transaction.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link state} instead.
+     */
+    get state__(): EditorState;
+  }
+
+  namespace Transaction {
+    /**
+     * Annotation used to store transaction timestamps. Automatically added to every transaction,
+     * holding `Date.now()`.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link Transaction.time} instead.
+     */
+    const time__: AnnotationType<number>;
+
+    /**
+     * Annotation used to associate a transaction with a user interface event.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link Transaction.userEvent} instead.
+     */
+    const userEvent__: AnnotationType<string>;
+
+    /**
+     * Annotation indicating whether a transaction should be added to the undo history or not.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link Transaction.addToHistory} instead.
+     */
+    const addToHistory__: AnnotationType<boolean>;
+
+    /**
+     * Annotation indicating (when present and `true`) that a transaction represents a change
+     * made by some other actor, not the user.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link Transaction.remote} instead.
+     */
+    const remote__: AnnotationType<boolean>;
   }
 }

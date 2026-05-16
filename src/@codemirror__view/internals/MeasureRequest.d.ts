@@ -1,4 +1,4 @@
-import type { EditorView } from './EditorView.d.ts';
+import type { EditorView } from '@codemirror/view';
 
 /**
  * A request for a layout measurement on the editor view.

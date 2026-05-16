@@ -1,4 +1,4 @@
-import type { ChangeDesc } from '../../@codemirror__state/internals/ChangeDesc.d.ts';
+import type { ChangeDesc } from '@codemirror/state';
 
 /**
  * Describes a change applied to a line handle.

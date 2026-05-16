@@ -1,4 +1,4 @@
-import type { StateField } from '../../@codemirror__state/internals/StateField.d.ts';
+import type { StateField } from '@codemirror/state';
 
 export {};
 

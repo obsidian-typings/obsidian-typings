@@ -1,4 +1,4 @@
-import type { Line } from './Line.d.ts';
+import type { Line } from '@codemirror/state';
 
 /**
  * The document data type used in CodeMirror.

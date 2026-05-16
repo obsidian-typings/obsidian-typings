@@ -1,5 +1,8 @@
-import type { Extension } from '../../@codemirror__state/internals/Extension.d.ts';
-import type { Facet } from '../../@codemirror__state/internals/Facet.d.ts';
+import type {
+  Extension,
+  Facet
+} from '@codemirror/state';
+
 import type { NodeProp } from '../../@lezer__common/internals/NodeProp.d.ts';
 
 export {};

@@ -1,4 +1,4 @@
-import type { RangeValue } from './RangeValue.d.ts';
+import type { RangeValue } from '@codemirror/state';
 
 /**
  * A range associates a value with a range of positions.

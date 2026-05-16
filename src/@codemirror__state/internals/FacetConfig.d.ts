@@ -1,5 +1,7 @@
-import type { Extension } from './Extension.d.ts';
-import type { Facet } from './Facet.d.ts';
+import type {
+  Extension,
+  Facet
+} from '@codemirror/state';
 
 /**
  * Configuration for defining a facet.

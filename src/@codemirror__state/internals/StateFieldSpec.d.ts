@@ -1,7 +1,9 @@
-import type { EditorState } from './EditorState.d.ts';
-import type { Extension } from './Extension.d.ts';
-import type { StateField } from './StateField.d.ts';
-import type { Transaction } from './Transaction.d.ts';
+import type {
+  EditorState,
+  Extension,
+  StateField,
+  Transaction
+} from '@codemirror/state';
 
 /**
  * Configuration for defining a state field.
