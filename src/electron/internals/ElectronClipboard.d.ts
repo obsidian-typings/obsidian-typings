@@ -1,4 +1,4 @@
-import type { NativeImage } from './NativeImage.d.ts';
+import type { ElectronNativeImage } from './ElectronNativeImage.d.ts';
 
 /**
  * Electron Clipboard for reading and writing system clipboard data.
@@ -63,12 +63,12 @@ export interface ElectronClipboard {
   readHTML(type?: 'clipboard' | 'selection'): string;
 
   /**
-   * Reads the clipboard content as a NativeImage.
+   * Reads the clipboard content as a ElectronNativeImage.
    *
    * @param type - The clipboard type.
    * @returns The clipboard image.
    */
-  readImage(type?: 'clipboard' | 'selection'): NativeImage;
+  readImage(type?: 'clipboard' | 'selection'): ElectronNativeImage;
 
   /**
    * Reads the clipboard content as plain text.
@@ -96,12 +96,12 @@ export interface ElectronClipboard {
   writeHTML(markup: string, type?: 'clipboard' | 'selection'): void;
 
   /**
-   * Writes a NativeImage to the clipboard.
+   * Writes a ElectronNativeImage to the clipboard.
    *
    * @param image - The image to write.
    * @param type - The clipboard type.
    */
-  writeImage(image: NativeImage, type?: 'clipboard' | 'selection'): void;
+  writeImage(image: ElectronNativeImage, type?: 'clipboard' | 'selection'): void;
 
   /**
    * Writes text to the clipboard.

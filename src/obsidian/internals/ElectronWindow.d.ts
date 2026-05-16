@@ -1,4 +1,4 @@
-import type { BrowserWindow } from '../../electron/internals/BrowserWindow.d.ts';
+import type { ElectronBrowserWindow } from '../../electron/internals/ElectronBrowserWindow.d.ts';
 
 /**
  * Extended Electron BrowserWindow with internal properties.
@@ -6,7 +6,7 @@ import type { BrowserWindow } from '../../electron/internals/BrowserWindow.d.ts'
  * @public
  * @unofficial
  */
-export interface ElectronWindow extends BrowserWindow {
+export interface ElectronWindow extends ElectronBrowserWindow {
   /**
    * Internal browser views attached to the window.
    */

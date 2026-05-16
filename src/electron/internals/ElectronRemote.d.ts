@@ -1,6 +1,6 @@
-import type { BrowserWindow } from './BrowserWindow.d.ts';
 import type { ElectronApp } from './ElectronApp.d.ts';
-import type { WebContents } from './WebContents.d.ts';
+import type { ElectronBrowserWindow } from './ElectronBrowserWindow.d.ts';
+import type { ElectronWebContents } from './ElectronWebContents.d.ts';
 
 /**
  * Electron Remote module for accessing main process modules from the renderer.
@@ -8,24 +8,24 @@ import type { WebContents } from './WebContents.d.ts';
  * @public
  * @unofficial
  */
-export interface Remote {
+export interface ElectronRemote {
   /** The main process app instance. */
   app: ElectronApp;
 
   /** The BrowserWindow constructor. */
-  BrowserWindow: typeof BrowserWindow;
+  BrowserWindow: typeof ElectronBrowserWindow;
 
   /**
    * Returns the web contents of the current renderer process.
    *
    * @returns The current web contents.
    */
-  getCurrentWebContents(): WebContents;
+  getCurrentWebContents(): ElectronWebContents;
 
   /**
    * Returns the BrowserWindow of the current renderer process.
    *
    * @returns The current BrowserWindow.
    */
-  getCurrentWindow(): BrowserWindow;
+  getCurrentWindow(): ElectronBrowserWindow;
 }

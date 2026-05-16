@@ -1,3 +1,4 @@
+import type { ElectronBrowserWindow } from '../../electron/internals/ElectronBrowserWindow.d.ts';
 import type { getFrameDomConstructor } from '../implementations/constructors/internals/getFrameDomConstructor.d.ts';
 /**
  * DOM elements for the custom window frame (title bar) on desktop.
@@ -9,7 +10,7 @@ export interface FrameDom {
   /**
    * Reference to the Electron browser window.
    */
-  eWin: Electron.BrowserWindow;
+  eWin: ElectronBrowserWindow;
 
   /**
    * Whether the current platform is macOS.
@@ -51,7 +52,7 @@ export interface FrameDom {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(electronWindow: Electron.BrowserWindow, win: Window): this;
+  constructor__(electronWindow: ElectronBrowserWindow, win: Window): this;
 
   /**
    * Update the window status indicators in the title bar.

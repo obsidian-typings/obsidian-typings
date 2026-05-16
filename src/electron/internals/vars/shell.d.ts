@@ -1,4 +1,4 @@
-import type { Shell } from '../Shell.d.ts';
+import type { ElectronShell } from '../ElectronShell.d.ts';
 
 /**
  * Electron shell instance for managing files and URLs.
@@ -6,4 +6,4 @@ import type { Shell } from '../Shell.d.ts';
  * @public
  * @unofficial
  */
-export declare const shell: Shell;
+export declare const shell: ElectronShell;

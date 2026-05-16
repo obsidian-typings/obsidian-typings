@@ -7,14 +7,13 @@ import type {
   requestUrl as requestUrlInstance
 } from 'obsidian';
 
-import type { Capacitor as CapacitorInstance } from '../../@capacitor__core/internals/vars/Capacitor.d.ts';
-// eslint-disable-next-line import-x/no-deprecated -- No other way.
-import type { CapacitorPlatforms as CapacitorPlatformsInstance } from '../../@capacitor__core/internals/vars/CapacitorPlatforms.d.ts';
+import type { CapacitorGlobal } from '../../@capacitor__core/internals/CapacitorGlobal.d.ts';
+import type { CapacitorPlatformsInstance } from '../../@capacitor__core/internals/CapacitorPlatformsInstance.d.ts';
 import type { CodeMirrorAdapterEx } from '../../@codemirror__view/internals/CodeMirrorAdapterEx.d.ts';
 import type { VimApi } from '../../@codemirror__view/internals/vim/VimApi.d.ts';
 import type { CodeMirrorModule } from '../../codemirror/internals/CodeMirrorModule.d.ts';
 import type { ElectronModule } from '../../electron/internals/ElectronModule.d.ts';
-import type { WebviewTag } from '../../electron/internals/WebviewTag.d.ts';
+import type { ElectronWebviewTag } from '../../electron/internals/ElectronWebviewTag.d.ts';
 import type { I18n } from '../../i18next/internals/I18n.d.ts';
 import type { Mermaid } from '../../mermaid/internals/Mermaid.d.ts';
 import type { CapacitorAdapterFs } from '../../obsidian/internals/CapacitorAdapterFs.d.ts';
@@ -109,15 +108,14 @@ declare global {
      *
      * @unofficial
      */
-    Capacitor: typeof CapacitorInstance;
+    Capacitor: CapacitorGlobal;
 
     /**
      * Registry of available Capacitor platform implementations.
      *
      * @unofficial
      */
-    // eslint-disable-next-line import-x/no-deprecated -- No other way.
-    CapacitorPlatforms: typeof CapacitorPlatformsInstance;
+    CapacitorPlatforms: CapacitorPlatformsInstance;
 
     /**
      * Minified reference to `Object.getOwnPropertyDescriptors`.
@@ -322,7 +320,7 @@ declare global {
      *
      * @unofficial
      */
-    WebView: WebviewTag;
+    WebView: ElectronWebviewTag;
 
     /**
      * Minified reference to `Object.defineProperty`.

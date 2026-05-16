@@ -4,7 +4,7 @@
  * @public
  * @unofficial
  */
-export interface NativeImage {
+export interface ElectronNativeImage {
   /**
    * Returns the size of the image.
    *

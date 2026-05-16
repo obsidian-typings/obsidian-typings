@@ -1,4 +1,4 @@
-import type { BrowserWindow } from './BrowserWindow.d.ts';
+import type { ElectronBrowserWindow } from './ElectronBrowserWindow.d.ts';
 import type { ElectronMenuItem } from './ElectronMenuItem.d.ts';
 
 /**
@@ -23,7 +23,7 @@ export interface ElectronMenu {
    *
    * @param browserWindow - The window to close the popup in.
    */
-  closePopup(browserWindow?: BrowserWindow): void;
+  closePopup(browserWindow?: ElectronBrowserWindow): void;
 
   /**
    * Inserts a menu item at the specified position.
@@ -39,6 +39,6 @@ export interface ElectronMenu {
    *
    * @param options - Options for the popup including `window`, `x`, and `y`.
    */
-  popup(options?: { window?: BrowserWindow; x?: number; y?: number }): void;
+  popup(options?: { window?: ElectronBrowserWindow; x?: number; y?: number }): void;
   /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
 }

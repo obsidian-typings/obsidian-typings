@@ -6,7 +6,7 @@ import type { Session } from './Session.d.ts';
  * @public
  * @unofficial
  */
-export interface WebContents {
+export interface ElectronWebContents {
   /** The unique identifier for this web contents. */
   id: number;
 

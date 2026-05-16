@@ -1,5 +1,4 @@
-// eslint-disable-next-line import-x/no-deprecated -- No other way.
-import type { CapacitorPlatforms as CapacitorPlatformsInstance } from '../../../@capacitor__core/internals/vars/CapacitorPlatforms.d.ts';
+import type { CapacitorPlatformsInstance } from '../../../@capacitor__core/internals/CapacitorPlatformsInstance.d.ts';
 
 export {};
 
@@ -9,6 +8,5 @@ declare global {
    *
    * @unofficial
    */
-  // eslint-disable-next-line import-x/no-deprecated -- No other way.
-  var CapacitorPlatforms: typeof CapacitorPlatformsInstance;
+  var CapacitorPlatforms: CapacitorPlatformsInstance;
 }

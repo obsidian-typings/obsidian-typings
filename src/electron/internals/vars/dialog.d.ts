@@ -1,4 +1,4 @@
-import type { Dialog } from '../Dialog.d.ts';
+import type { ElectronDialog } from '../ElectronDialog.d.ts';
 
 /**
  * Electron dialog instance for showing native system dialogs.
@@ -6,4 +6,4 @@ import type { Dialog } from '../Dialog.d.ts';
  * @public
  * @unofficial
  */
-export declare const dialog: Dialog;
+export declare const dialog: ElectronDialog;

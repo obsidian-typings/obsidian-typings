@@ -1,6 +1,6 @@
 import type { BrowserWindowConstructorOptions } from './BrowserWindowConstructorOptions.d.ts';
 import type { ElectronRectangle } from './ElectronRectangle.d.ts';
-import type { WebContents } from './WebContents.d.ts';
+import type { ElectronWebContents } from './ElectronWebContents.d.ts';
 
 /**
  * Electron BrowserWindow for creating and managing application windows.
@@ -8,12 +8,12 @@ import type { WebContents } from './WebContents.d.ts';
  * @public
  * @unofficial
  */
-export declare class BrowserWindow {
+export declare class ElectronBrowserWindow {
   /** The unique identifier for this window. */
   readonly id: number;
 
   /** The web contents associated with this window. */
-  readonly webContents: WebContents;
+  readonly webContents: ElectronWebContents;
 
   /** */
   constructor(options?: BrowserWindowConstructorOptions);
@@ -36,7 +36,7 @@ export declare class BrowserWindow {
    * @param id - The window id.
    * @returns The BrowserWindow or `null` if not found.
    */
-  static fromId(id: number): BrowserWindow | null;
+  static fromId(id: number): ElectronBrowserWindow | null;
 
   /**
    * Returns the BrowserWindow that owns the given web contents.
@@ -44,14 +44,14 @@ export declare class BrowserWindow {
    * @param webContents - The web contents to look up.
    * @returns The BrowserWindow or `null` if not found.
    */
-  static fromWebContents(webContents: WebContents): BrowserWindow | null;
+  static fromWebContents(webContents: ElectronWebContents): ElectronBrowserWindow | null;
 
   /**
    * Returns all open BrowserWindow instances.
    *
    * @returns An array of all BrowserWindow instances.
    */
-  static getAllWindows(): BrowserWindow[];
+  static getAllWindows(): ElectronBrowserWindow[];
 
   /**
    * Returns the bounds of the window.
@@ -72,7 +72,7 @@ export declare class BrowserWindow {
    *
    * @returns The focused BrowserWindow or `null` if none is focused.
    */
-  static getFocusedWindow(): BrowserWindow | null;
+  static getFocusedWindow(): ElectronBrowserWindow | null;
 
   /**
    * Returns the position of the window.

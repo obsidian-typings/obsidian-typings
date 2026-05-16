@@ -4,7 +4,7 @@
  * @public
  * @unofficial
  */
-export interface Shell {
+export interface ElectronShell {
   /** Plays the system beep sound. */
   beep(): void;
 

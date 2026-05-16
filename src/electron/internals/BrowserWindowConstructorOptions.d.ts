@@ -1,4 +1,4 @@
-import type { BrowserWindow } from './BrowserWindow.d.ts';
+import type { ElectronBrowserWindow } from './ElectronBrowserWindow.d.ts';
 import type { WebPreferences } from './WebPreferences.d.ts';
 
 /**
@@ -18,7 +18,7 @@ export interface BrowserWindowConstructorOptions {
   modal?: boolean;
 
   /** The parent window. */
-  parent?: BrowserWindow;
+  parent?: ElectronBrowserWindow;
 
   /** Whether the window should be shown when created. */
   show?: boolean;

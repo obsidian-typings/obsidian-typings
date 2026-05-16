@@ -1,4 +1,4 @@
-import type { WebviewTag } from '../../../electron/internals/WebviewTag.d.ts';
+import type { ElectronWebviewTag } from '../../../electron/internals/ElectronWebviewTag.d.ts';
 
 export {};
 
@@ -8,5 +8,5 @@ declare global {
    *
    * @unofficial
    */
-  var WebView: WebviewTag;
+  var WebView: ElectronWebviewTag;
 }

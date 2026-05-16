@@ -1,4 +1,4 @@
-import type { BrowserWindow } from './BrowserWindow.d.ts';
+import type { ElectronBrowserWindow } from './ElectronBrowserWindow.d.ts';
 
 /**
  * Electron MenuItem for adding items to native application menus.
@@ -20,5 +20,5 @@ export interface ElectronMenuItem {
   visible: boolean;
 
   /** The click handler for the menu item. */
-  click: (menuItem: ElectronMenuItem, browserWindow: BrowserWindow | undefined, event: KeyboardEvent) => void;
+  click: (menuItem: ElectronMenuItem, browserWindow: ElectronBrowserWindow | undefined, event: KeyboardEvent) => void;
 }

@@ -1,4 +1,4 @@
-import type { Capacitor as CapacitorInstance } from '../../../@capacitor__core/internals/vars/Capacitor.d.ts';
+import type { CapacitorGlobal } from '../../../@capacitor__core/internals/CapacitorGlobal.d.ts';
 
 export {};
 
@@ -8,5 +8,5 @@ declare global {
    *
    * @unofficial
    */
-  var Capacitor: typeof CapacitorInstance;
+  var Capacitor: CapacitorGlobal;
 }

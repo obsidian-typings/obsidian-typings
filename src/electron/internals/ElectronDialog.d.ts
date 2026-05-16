@@ -1,4 +1,4 @@
-import type { BrowserWindow } from './BrowserWindow.d.ts';
+import type { ElectronBrowserWindow } from './ElectronBrowserWindow.d.ts';
 import type { ElectronMessageBoxOptions } from './ElectronMessageBoxOptions.d.ts';
 import type { ElectronMessageBoxReturnValue } from './ElectronMessageBoxReturnValue.d.ts';
 import type { ElectronOpenDialogOptions } from './ElectronOpenDialogOptions.d.ts';
@@ -12,7 +12,7 @@ import type { ElectronSaveDialogReturnValue } from './ElectronSaveDialogReturnVa
  * @public
  * @unofficial
  */
-export interface Dialog {
+export interface ElectronDialog {
   /**
    * Shows an error message box.
    *
@@ -28,7 +28,7 @@ export interface Dialog {
    * @param options - The message box options.
    * @returns The user's response.
    */
-  showMessageBox(browserWindow: BrowserWindow, options: ElectronMessageBoxOptions): Promise<ElectronMessageBoxReturnValue>;
+  showMessageBox(browserWindow: ElectronBrowserWindow, options: ElectronMessageBoxOptions): Promise<ElectronMessageBoxReturnValue>;
 
   /**
    * Shows a message box dialog.
@@ -45,7 +45,7 @@ export interface Dialog {
    * @param options - The open dialog options.
    * @returns The selected file paths.
    */
-  showOpenDialog(browserWindow: BrowserWindow, options: ElectronOpenDialogOptions): Promise<ElectronOpenDialogReturnValue>;
+  showOpenDialog(browserWindow: ElectronBrowserWindow, options: ElectronOpenDialogOptions): Promise<ElectronOpenDialogReturnValue>;
 
   /**
    * Shows an open file dialog.
@@ -62,7 +62,7 @@ export interface Dialog {
    * @param options - The save dialog options.
    * @returns The selected file path.
    */
-  showSaveDialog(browserWindow: BrowserWindow, options: ElectronSaveDialogOptions): Promise<ElectronSaveDialogReturnValue>;
+  showSaveDialog(browserWindow: ElectronBrowserWindow, options: ElectronSaveDialogOptions): Promise<ElectronSaveDialogReturnValue>;
 
   /**
    * Shows a save file dialog.

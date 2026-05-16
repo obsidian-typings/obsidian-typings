@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "skipLibCheck": true
+    "skipLibCheck": false
   },
   "include": [
     "./scripts/verify-bundle/*.cts",

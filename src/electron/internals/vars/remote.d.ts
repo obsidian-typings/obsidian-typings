@@ -1,4 +1,4 @@
-import type { Remote } from '../Remote.d.ts';
+import type { ElectronRemote } from '../ElectronRemote.d.ts';
 
 /**
  * Electron remote module instance for accessing main process modules.
@@ -6,4 +6,4 @@ import type { Remote } from '../Remote.d.ts';
  * @public
  * @unofficial
  */
-export declare const remote: Remote;
+export declare const remote: ElectronRemote;

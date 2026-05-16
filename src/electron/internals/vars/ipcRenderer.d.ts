@@ -1,4 +1,4 @@
-import type { IpcRenderer } from '../IpcRenderer.d.ts';
+import type { ElectronIpcRenderer } from '../ElectronIpcRenderer.d.ts';
 
 /**
  * Electron IPC renderer instance for the current renderer process.
@@ -6,4 +6,4 @@ import type { IpcRenderer } from '../IpcRenderer.d.ts';
  * @public
  * @unofficial
  */
-export declare const ipcRenderer: IpcRenderer;
+export declare const ipcRenderer: ElectronIpcRenderer;

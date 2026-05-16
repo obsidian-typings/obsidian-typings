@@ -6,7 +6,7 @@ import type { IpcRendererEvent } from './IpcRendererEvent.d.ts';
  * @public
  * @unofficial
  */
-export interface IpcRenderer {
+export interface ElectronIpcRenderer {
   /**
    * Sends an asynchronous message to the main process and returns a promise with the reply.
    *

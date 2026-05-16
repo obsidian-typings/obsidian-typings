@@ -1,5 +1,5 @@
+import type { ElectronNativeImage } from './ElectronNativeImage.d.ts';
 import type { ElectronRectangle } from './ElectronRectangle.d.ts';
-import type { NativeImage } from './NativeImage.d.ts';
 
 /**
  * Electron WebviewTag for embedding external web content in the application.
@@ -7,7 +7,7 @@ import type { NativeImage } from './NativeImage.d.ts';
  * @public
  * @unofficial
  */
-export interface WebviewTag extends HTMLElement {
+export interface ElectronWebviewTag extends HTMLElement {
   /** Whether to allow popups. */
   allowpopups: boolean;
 
@@ -84,7 +84,7 @@ export interface WebviewTag extends HTMLElement {
    * @param rect - The area to capture.
    * @returns The captured image.
    */
-  capturePage(rect?: ElectronRectangle): Promise<NativeImage>;
+  capturePage(rect?: ElectronRectangle): Promise<ElectronNativeImage>;
 
   /** Closes the developer tools. */
   closeDevTools(): void;
