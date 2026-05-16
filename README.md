@@ -62,14 +62,6 @@ In most cases, we recommend to always use the latest release.
 >
 > If you run `npm install obsidian-typings` instead, the most likely, the library will not get updated.
 
-&nbsp;
-
-> [!WARNING]
->
-> The package installs several libraries that trigger `npm audit` warnings.
->
-> Those packages cannot be updated because they should match the exact versions Obsidian uses internally.
-
 <!-- markdownlint-disable MD033 -->
 
 ### 2. Enable in `tsconfig.json` (recommended) <span id="add-types-setting-to-tsconfig-json"></span>
