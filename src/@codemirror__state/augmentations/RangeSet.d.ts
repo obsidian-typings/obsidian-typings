@@ -77,7 +77,8 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link RangeSet.empty} instead.
      */
-    const empty__: RangeSet<unknown>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Matches real @codemirror/state API signature.
+    const empty__: RangeSet<any>;
 
     /**
      * Iterate over the ranges in a collection of sets, in order.
