@@ -1,3 +1,3 @@
 # CONTRIBUTING
 
-See <https://github.com/Fevol/obsidian-typings/blob/main/CONTRIBUTING.md>
+See <https://github.com/obsidian-typings/obsidian-typings/blob/main/CONTRIBUTING.md>

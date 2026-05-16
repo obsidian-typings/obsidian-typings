@@ -1,3 +1,3 @@
 # MIGRATION
 
-See <https://github.com/Fevol/obsidian-typings/blob/main/MIGRATION.md>
+See <https://github.com/obsidian-typings/obsidian-typings/blob/main/MIGRATION.md>

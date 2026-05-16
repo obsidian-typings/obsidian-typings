@@ -1,3 +1,3 @@
 # CHANGELOG
 
-See <https://github.com/Fevol/obsidian-typings/blob/main/CHANGELOG.md>
+See <https://github.com/obsidian-typings/obsidian-typings/blob/main/CHANGELOG.md>
