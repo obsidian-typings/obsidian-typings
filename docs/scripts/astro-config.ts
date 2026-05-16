@@ -25,6 +25,9 @@ export const astroConfig = defineConfig({
   },
   integrations: [
     StarlightIntegration({
+      components: {
+        SiteTitle: './src/components/SiteTitle.astro'
+      },
       customCss: [
         './src/styles/global.css'
       ],

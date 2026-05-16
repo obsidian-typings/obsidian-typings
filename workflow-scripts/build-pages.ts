@@ -31,8 +31,14 @@ async function main(): Promise<void> {
   // branches where workflow-scripts/static/ does not exist.
   const redirectHtml = await readFile(`${SCRIPT_DIR}/static/pages-redirect.html`, 'utf-8');
 
+  // Collect both channel versions upfront so the version switcher can display them.
+  const versions: Record<Channel, string> = {
+    catalyst: await getLatestVersion('catalyst'),
+    public: await getLatestVersion('public')
+  };
+
   for (const channel of CHANNELS) {
-    await processChannel(channel, outputDir, cacheDir, shouldForce);
+    await processChannel(channel, outputDir, cacheDir, shouldForce, versions);
   }
 
   await createRedirectPage(outputDir, redirectHtml);
@@ -55,7 +61,7 @@ async function getCachedBuildInfo(cacheDir: string, channel: Channel): Promise<B
   return JSON.parse(content) as BuildInfo;
 }
 
-async function processChannel(channel: Channel, outputDir: string, cacheDir: string, shouldForce: boolean): Promise<void> {
+async function processChannel(channel: Channel, outputDir: string, cacheDir: string, shouldForce: boolean, versions: Record<Channel, string>): Promise<void> {
   const current = await getCurrentBuildInfo(channel);
   const cached = await getCachedBuildInfo(cacheDir, channel);
   const channelCacheDir = `${cacheDir}/${channel}`;
@@ -83,6 +89,10 @@ async function processChannel(channel: Channel, outputDir: string, cacheDir: str
   await execFromRoot('npm ci');
   await execFromRoot('npm ci', { cwd: 'docs' });
   await execFromRoot('npm run setup', { cwd: 'docs' });
+
+  process.env['CURRENT_CHANNEL'] = channel;
+  process.env['LATEST_PUBLIC_TYPINGS_VERSION'] = versions.public;
+  process.env['LATEST_CATALYST_TYPINGS_VERSION'] = versions.catalyst;
   await execFromRoot(`npm run build -- --base /obsidian-typings/${channel}`, { cwd: 'docs' });
 
   await mkdir(channelOutputDir, { recursive: true });
