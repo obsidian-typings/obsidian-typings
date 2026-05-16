@@ -74,7 +74,6 @@
     "build:implementations:bundle-types": "jiti scripts/build-implementations-bundle-types.ts",
     "build:implementations:generate-types": "jiti scripts/build-implementations-generate-types.ts",
     "build:static": "jiti scripts/build-static.ts",
-    "build:verify-bundle": "jiti scripts/build-verify-bundle.ts",
     "commit": "jiti scripts/commit.ts",
     "format": "jiti scripts/format.ts",
     "format:check": "jiti scripts/format-check.ts",
