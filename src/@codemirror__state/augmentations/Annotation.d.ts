@@ -16,7 +16,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link value} instead.
      */
-    readonly value__: T;
+    readonly value__?: T;
   }
 
   namespace Annotation {

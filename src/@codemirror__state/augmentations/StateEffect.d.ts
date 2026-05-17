@@ -14,7 +14,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link value} instead.
      */
-    readonly value__: Value;
+    readonly value__?: Value;
 
     /**
      * Tells you whether this effect object is of a given type.
