@@ -22,7 +22,7 @@ export interface FacetConfig<Input, Output> {
    * @param values - The input values.
    * @returns The combined output.
    */
-  combine?: (values: readonly Input[]) => Output;
+  combine?(values: readonly Input[]): Output;
 
   /**
    * Compare two output values.
@@ -31,7 +31,7 @@ export interface FacetConfig<Input, Output> {
    * @param b - The second value.
    * @returns Whether the values are equal.
    */
-  compare?: (a: Output, b: Output) => boolean;
+  compare?(a: Output, b: Output): boolean;
 
   /**
    * Compare two input values.
@@ -40,5 +40,5 @@ export interface FacetConfig<Input, Output> {
    * @param b - The second value.
    * @returns Whether the values are equal.
    */
-  compareInput?: (a: Input, b: Input) => boolean;
+  compareInput?(a: Input, b: Input): boolean;
 }

@@ -30,7 +30,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link decorations} instead.
      */
-    decorations__?: (value: V) => DecorationSet;
+    decorations__?(value: V): DecorationSet;
 
     /**
      * Specify that the plugin provides additional extensions when added to an editor
@@ -40,6 +40,6 @@ declare module '@codemirror/view' {
      * @deprecated - Added only for typing purposes. Use {@link provide} instead.
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Matches real @codemirror/view API signature.
-    provide__?: (plugin: ViewPlugin<V, any>) => Extension;
+    provide__?(plugin: ViewPlugin<V, any>): Extension;
   }
 }

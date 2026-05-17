@@ -130,7 +130,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.10.12
      */
-    requestSave: () => void;
+    requestSave(): void;
 
     /**
      * Save the file.

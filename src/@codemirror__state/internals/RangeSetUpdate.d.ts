@@ -29,5 +29,5 @@ export interface RangeSetUpdate<T extends RangeValue> {
    * @param value - The range value.
    * @returns Whether to keep the range.
    */
-  filter?: (from: number, to: number, value: T) => boolean;
+  filter?(from: number, to: number, value: T): boolean;
 }

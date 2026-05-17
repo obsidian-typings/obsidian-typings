@@ -16,5 +16,5 @@ export interface RenderTask {
   cancel(extraDelay?: number): void;
 
   /** Callback invoked to allow continuation of rendering. */
-  onContinue?: (cont: () => void) => void;
+  onContinue?(cont: () => void): void;
 }

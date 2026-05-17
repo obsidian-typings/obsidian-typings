@@ -39,6 +39,6 @@ declare module 'obsidian' {
      * @official
      * @since 1.10.2
      */
-    filter?: (folder: TFolder) => boolean;
+    filter?(folder: TFolder): boolean;
   }
 }

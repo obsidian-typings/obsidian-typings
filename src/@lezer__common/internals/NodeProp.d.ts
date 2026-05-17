@@ -39,7 +39,7 @@ export declare class NodeProp<T> {
    * @param config - Configuration for the prop.
    */
   constructor(config?: {
-    deserialize?: (str: string) => T;
+    deserialize?(str: string): T;
     perNode?: boolean;
   });
 

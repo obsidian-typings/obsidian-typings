@@ -79,7 +79,7 @@ export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteC
   /**
    * Called when the plugin is enabled.
    */
-  onEnable: (app: App, plugin: NoteComposerPlugin) => Promise<void>;
+  onEnable(app: App, plugin: NoteComposerPlugin): Promise<void>;
 
   /**
    * Handle external settings file changes and reload configuration.

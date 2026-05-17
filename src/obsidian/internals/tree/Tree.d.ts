@@ -108,7 +108,7 @@ export interface Tree<T extends TreeItem> {
   /**
    * Handle collapsing of all nodes.
    */
-  handleCollapseAll: () => void;
+  handleCollapseAll(): void;
 
   /**
    * Handle deletion of selected nodes.
@@ -131,7 +131,7 @@ export interface Tree<T extends TreeItem> {
    *
    * @param event - The keyboard event that triggered the rename.
    */
-  handleRenameFocusedItem: (event: KeyboardEvent) => void;
+  handleRenameFocusedItem(event: KeyboardEvent): void;
 
   /**
    * Registers all keyboard actions to the tree view keyscope.
@@ -194,7 +194,7 @@ export interface Tree<T extends TreeItem> {
   /**
    * Request saving of the current fold states.
    */
-  requestSaveFolds: () => void;
+  requestSaveFolds(): void;
 
   /**
    * Root item of the tree view.

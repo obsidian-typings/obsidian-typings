@@ -112,7 +112,7 @@ declare module 'obsidian' {
      * @official
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    callback?: () => any;
+    callback?(): any;
 
     /**
      * Complex callback, overrides the simple callback.
@@ -146,7 +146,7 @@ declare module 'obsidian' {
      * ```
      * @official
      */
-    checkCallback?: (checking: boolean) => boolean | void;
+    checkCallback?(checking: boolean): boolean | void;
 
     /**
      * A command callback that is only triggered when the user is in an editor.
@@ -168,7 +168,7 @@ declare module 'obsidian' {
      * @since 0.12.2
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    editorCallback?: (editor: Editor, ctx: MarkdownFileInfo | MarkdownView) => any;
+    editorCallback?(editor: Editor, ctx: MarkdownFileInfo | MarkdownView): any;
 
     /**
      * A command callback that is only triggered when the user is in an editor.
@@ -197,10 +197,10 @@ declare module 'obsidian' {
      * @official
      * @since 0.12.2
      */
-    editorCheckCallback?: (
+    editorCheckCallback?(
       checking: boolean,
       editor: Editor,
       ctx: MarkdownFileInfo | MarkdownView
-    ) => boolean | void;
+    ): boolean | void;
   }
 }

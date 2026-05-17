@@ -45,7 +45,7 @@ export interface Mermaid {
   parse(text: string, parseOptions?: ParseOptions): Promise<false | ParseResult>;
 
   /** Error handler for parse errors. */
-  parseError?: (err: string, hash: unknown) => void;
+  parseError?(err: string, hash: unknown): void;
 
   /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**

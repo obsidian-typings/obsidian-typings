@@ -616,7 +616,7 @@ declare module 'obsidian' {
      *
      * @unofficial
      */
-    preload: () => Promise<void>;
+    preload(): Promise<void>;
 
     /**
      * Queue a file for link resolution.

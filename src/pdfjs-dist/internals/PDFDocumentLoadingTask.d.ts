@@ -15,8 +15,8 @@ export interface PDFDocumentLoadingTask {
   destroy(): void;
 
   /** Callback for password-protected documents. */
-  onPassword?: (updateCallback: (password: string) => void, reason: number) => void;
+  onPassword?(updateCallback: (password: string) => void, reason: number): void;
 
   /** Callback for loading progress updates. */
-  onProgress?: (progressData: OnProgressParameters) => void;
+  onProgress?(progressData: OnProgressParameters): void;
 }

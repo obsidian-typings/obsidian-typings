@@ -19,7 +19,7 @@ export interface StateFieldSpec<Value> {
    * @param b - The second value.
    * @returns Whether the values are equal.
    */
-  compare?: (a: Value, b: Value) => boolean;
+  compare?(a: Value, b: Value): boolean;
 
   /**
    * Create the initial value for this field.
@@ -35,7 +35,7 @@ export interface StateFieldSpec<Value> {
    * @param field - The state field.
    * @returns The extension.
    */
-  provide?: (field: StateField<Value>) => Extension;
+  provide?(field: StateField<Value>): Extension;
 
   /**
    * Compute a new value from the field's previous value and a transaction.

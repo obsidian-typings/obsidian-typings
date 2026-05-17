@@ -39,6 +39,6 @@ declare module 'obsidian' {
      * @official
      * @since 1.10.0
      */
-    filter?: (prop: BasesPropertyId) => boolean;
+    filter?(prop: BasesPropertyId): boolean;
   }
 }

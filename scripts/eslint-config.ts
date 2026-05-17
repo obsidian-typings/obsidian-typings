@@ -374,7 +374,13 @@ function getTseslintConfigs(): Linter.Config[] {
       const rest = { ...config };
       delete (rest as Record<string, unknown>)['files'];
       return rest;
-    })
+    }),
+    {
+      files: typeScriptFiles,
+      rules: {
+        '@typescript-eslint/method-signature-style': ['error', 'method']
+      }
+    }
   ]);
 }
 

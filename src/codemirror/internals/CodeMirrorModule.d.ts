@@ -20,7 +20,7 @@ export interface CodeMirrorModule {
   version: string;
 
   /** Computes the end position of a change. */
-  changeEnd: (change: Cm5EditorChange) => Position;
+  changeEnd(change: Cm5EditorChange): Position;
 
   /**
    * Registers a new editor extension method.
@@ -105,7 +105,7 @@ export interface CodeMirrorModule {
    * @param sticky - The sticky direction.
    * @returns The created position.
    */
-  Pos: (line: number, ch?: number, sticky?: string) => Position;
+  Pos(line: number, ch?: number, sticky?: string): Position;
 
   /**
    * Registers a global helper with a predicate.

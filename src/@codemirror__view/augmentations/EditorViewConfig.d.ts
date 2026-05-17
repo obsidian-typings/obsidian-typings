@@ -47,7 +47,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link dispatch} instead.
      */
-    dispatch__?: (tr: Transaction, view: EditorView) => void;
+    dispatch__?(tr: Transaction, view: EditorView): void;
 
     /**
      * Override the way transactions are dispatched for this editor view.
@@ -55,6 +55,6 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link dispatchTransactions} instead.
      */
-    dispatchTransactions__?: (trs: readonly Transaction[], view: EditorView) => void;
+    dispatchTransactions__?(trs: readonly Transaction[], view: EditorView): void;
   }
 }

@@ -20,5 +20,5 @@ export interface ElectronMenuItem {
   visible: boolean;
 
   /** The click handler for the menu item. */
-  click: (menuItem: ElectronMenuItem, browserWindow: ElectronBrowserWindow | undefined, event: KeyboardEvent) => void;
+  click(menuItem: ElectronMenuItem, browserWindow: ElectronBrowserWindow | undefined, event: KeyboardEvent): void;
 }

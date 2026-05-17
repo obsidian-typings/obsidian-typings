@@ -53,7 +53,7 @@ declare global {
      * @official
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    error?: (error: any, req: XMLHttpRequest) => any;
+    error?(error: any, req: XMLHttpRequest): any;
 
     /**
      * The success callback of the AJAX request.
@@ -61,6 +61,6 @@ declare global {
      * @official
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    success?: (response: any, req: XMLHttpRequest) => any;
+    success?(response: any, req: XMLHttpRequest): any;
   }
 }

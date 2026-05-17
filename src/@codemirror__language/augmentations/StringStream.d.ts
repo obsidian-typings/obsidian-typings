@@ -13,6 +13,6 @@ declare module '@codemirror/language' {
      * @remark This only exists and can only be used in Obsidian.
      * @unofficial
      */
-    lookAhead: (n: number) => string;
+    lookAhead(n: number): string;
   }
 }
