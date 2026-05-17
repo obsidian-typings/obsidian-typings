@@ -29,8 +29,9 @@ import {
 } from 'node:path';
 import { Project } from 'ts-morph';
 
-const UNOFFICIAL_ICON = '<span title="Unofficial API — reverse-engineered, may change without notice">🔍</span>';
-const OFFICIAL_ICON = '<span title="Official API — part of the public Obsidian API">📋</span>';
+const ICON_SIZE = '1.2em';
+const UNOFFICIAL_ICON = `<svg xmlns="http://www.w3.org/2000/svg" width="${ICON_SIZE}" height="${ICON_SIZE}" viewBox="0 0 24 24" fill="none" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle"><title>Unofficial API — reverse-engineered, may change without notice</title><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>`;
+const OFFICIAL_ICON = `<svg xmlns="http://www.w3.org/2000/svg" width="${ICON_SIZE}" height="${ICON_SIZE}" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle"><title>Official API — part of the public Obsidian API</title><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>`;
 
 interface MemberInfo {
   description: string;
@@ -628,17 +629,17 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
 
   const lines: string[] = [];
 
+  const badgeText = info.isOfficial ? 'Official' : 'Unofficial';
+  const badgeVariant = info.isOfficial ? 'success' : 'caution';
   lines.push('---');
   lines.push(`title: ${name}`);
   lines.push('editUrl: false');
   lines.push('sidebar:');
   lines.push(`  label: ${name}`);
+  lines.push('  badge:');
+  lines.push(`    text: ${badgeText}`);
+  lines.push(`    variant: ${badgeVariant}`);
   lines.push('---');
-  lines.push('');
-
-  const typeIcon = info.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
-  const typeLabel = info.isOfficial ? 'Official' : 'Unofficial';
-  lines.push(`${typeIcon} **${typeLabel}**`);
   lines.push('');
 
   if (info.description) {
