@@ -30,13 +30,9 @@ import {
 import { Project } from 'ts-morph';
 
 const ICON_SIZE = '1.2em';
-// Full SVG icons for page headers (rendered in HTML blocks)
-const UNOFFICIAL_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="${ICON_SIZE}" height="${ICON_SIZE}" viewBox="0 0 24 24" fill="none" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle"><title>Unofficial API — reverse-engineered, may change without notice</title><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>`;
-const OFFICIAL_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="${ICON_SIZE}" height="${ICON_SIZE}" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle"><title>Official API — part of the public Obsidian API</title><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>`;
-
-// Simple icons for markdown table cells (SVG breaks tables)
-const UNOFFICIAL_ICON = '🟡';
-const OFFICIAL_ICON = '🟢';
+// Icons encoded as data URI <img> tags — works in both tables and inline text
+const UNOFFICIAL_ICON = `<img src="data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>`)}" width="${ICON_SIZE}" height="${ICON_SIZE}" alt="Unofficial" title="Unofficial API — reverse-engineered, may change without notice" style="vertical-align: middle" />`;
+const OFFICIAL_ICON = `<img src="data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>`)}" width="${ICON_SIZE}" height="${ICON_SIZE}" alt="Official" title="Official API — part of the public Obsidian API" style="vertical-align: middle" />`;
 
 interface MemberInfo {
   description: string;
@@ -659,9 +655,9 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
   lines.push('---');
   lines.push('');
 
-  const typeIconSvg = info.isOfficial ? OFFICIAL_ICON_SVG : UNOFFICIAL_ICON_SVG;
+  const typeIcon = info.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
   const typeLabel = info.isOfficial ? 'Official' : 'Unofficial';
-  lines.push(`<p>${typeIconSvg} <strong>${typeLabel}</strong></p>`);
+  lines.push(`${typeIcon} **${typeLabel}**`);
   lines.push('');
 
   if (info.description) {
