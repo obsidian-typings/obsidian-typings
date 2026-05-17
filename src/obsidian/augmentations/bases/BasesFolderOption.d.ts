@@ -37,8 +37,9 @@ declare module 'obsidian' {
      * @param folder - The folder to filter.
      * @returns `true` if the folder should be displayed, `false` otherwise.
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link filter} instead.
      * @since 1.10.2
      */
-    filter?(folder: TFolder): boolean;
+    filter__?(folder: TFolder): boolean;
   }
 }

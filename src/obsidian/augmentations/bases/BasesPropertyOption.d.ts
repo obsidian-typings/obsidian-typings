@@ -37,8 +37,9 @@ declare module 'obsidian' {
      * @param prop - The property to filter.
      * @returns A boolean indicating whether the property should be included.
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link filter} instead.
      * @since 1.10.0
      */
-    filter?(prop: BasesPropertyId): boolean;
+    filter__?(prop: BasesPropertyId): boolean;
   }
 }

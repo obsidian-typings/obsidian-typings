@@ -128,9 +128,10 @@ declare module 'obsidian' {
      * Debounced save in 2 seconds from now.
      *
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link requestSave} instead.
      * @since 0.10.12
      */
-    requestSave(): void;
+    requestSave__?(): void;
 
     /**
      * Save the file.

@@ -37,8 +37,9 @@ declare module 'obsidian' {
      * @param file - The file to filter.
      * @returns `true` if the file should be displayed, `false` otherwise.
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link filter} instead.
      * @since 1.10.2
      */
-    filter?(file: TFile): boolean;
+    filter__?(file: TFile): boolean;
   }
 }

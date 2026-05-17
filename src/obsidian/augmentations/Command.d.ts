@@ -110,9 +110,10 @@ declare module 'obsidian' {
      * });
      * ```
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link callback} instead.
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    callback?(): any;
+    callback__?(): any;
 
     /**
      * Complex callback, overrides the simple callback.
@@ -145,8 +146,9 @@ declare module 'obsidian' {
      * });
      * ```
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link checkCallback} instead.
      */
-    checkCallback?(checking: boolean): boolean | void;
+    checkCallback__?(checking: boolean): boolean | void;
 
     /**
      * A command callback that is only triggered when the user is in an editor.
@@ -165,10 +167,11 @@ declare module 'obsidian' {
      * });
      * ```
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link editorCallback} instead.
      * @since 0.12.2
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    editorCallback?(editor: Editor, ctx: MarkdownFileInfo | MarkdownView): any;
+    editorCallback__?(editor: Editor, ctx: MarkdownFileInfo | MarkdownView): any;
 
     /**
      * A command callback that is only triggered when the user is in an editor.
@@ -195,9 +198,10 @@ declare module 'obsidian' {
      * });
      * ```
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link editorCheckCallback} instead.
      * @since 0.12.2
      */
-    editorCheckCallback?(
+    editorCheckCallback__?(
       checking: boolean,
       editor: Editor,
       ctx: MarkdownFileInfo | MarkdownView

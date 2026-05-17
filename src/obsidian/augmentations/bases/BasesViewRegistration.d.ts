@@ -36,8 +36,9 @@ declare module 'obsidian' {
      * Options.
      *
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link options} instead.
      * @since 1.10.0
      */
-    options?(config: BasesViewConfig): BasesAllOptions[];
+    options__?(config: BasesViewConfig): BasesAllOptions[];
   }
 }
