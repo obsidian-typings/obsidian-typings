@@ -429,29 +429,33 @@ function extractMethodSignatureInfo(method: MethodSignature, isOfficial: boolean
 }
 
 function extractPropertyInfo(prop: PropertyDeclaration, isOfficial: boolean): MemberInfo {
+  const name = prop.getName();
+  const optionalSuffix = prop.hasQuestionToken() ? '?' : '';
   return {
     description: getDescription(prop),
     inheritedFrom: '',
     isOfficial: checkIsOfficial(prop, isOfficial),
-    name: prop.getName(),
+    name: `${name}${optionalSuffix}`,
     overloadKey: '',
     parameters: [],
     returnType: '',
-    signature: prop.getName(),
+    signature: `${name}${optionalSuffix}`,
     type: simplifyType(prop.getType().getText())
   };
 }
 
 function extractPropertySignatureInfo(prop: PropertySignature, isOfficial: boolean): MemberInfo {
+  const name = prop.getName();
+  const optionalSuffix = prop.hasQuestionToken() ? '?' : '';
   return {
     description: getDescription(prop),
     inheritedFrom: '',
     isOfficial: checkIsOfficial(prop, isOfficial),
-    name: prop.getName(),
+    name: `${name}${optionalSuffix}`,
     overloadKey: '',
     parameters: [],
     returnType: '',
-    signature: prop.getName(),
+    signature: `${name}${optionalSuffix}`,
     type: simplifyType(prop.getType().getText())
   };
 }
