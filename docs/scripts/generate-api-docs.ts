@@ -429,9 +429,17 @@ function extractMethodSignatureInfo(method: MethodSignature, isOfficial: boolean
   return info;
 }
 
+function stripTrailingUndefined(typeText: string, isOptional: boolean): string {
+  if (!isOptional) {
+    return typeText;
+  }
+  return typeText.replace(/\s*\|\s*undefined$/, '');
+}
+
 function extractPropertyInfo(prop: PropertyDeclaration, isOfficial: boolean): MemberInfo {
   const name = prop.getName();
-  const optionalSuffix = prop.hasQuestionToken() ? '?' : '';
+  const isOptional = prop.hasQuestionToken();
+  const optionalSuffix = isOptional ? '?' : '';
   return {
     description: getDescription(prop),
     inheritedFrom: '',
@@ -441,13 +449,14 @@ function extractPropertyInfo(prop: PropertyDeclaration, isOfficial: boolean): Me
     parameters: [],
     returnType: '',
     signature: `${name}${optionalSuffix}`,
-    type: simplifyType(prop.getType().getText())
+    type: stripTrailingUndefined(simplifyType(prop.getType().getText()), isOptional)
   };
 }
 
 function extractPropertySignatureInfo(prop: PropertySignature, isOfficial: boolean): MemberInfo {
   const name = prop.getName();
-  const optionalSuffix = prop.hasQuestionToken() ? '?' : '';
+  const isOptional = prop.hasQuestionToken();
+  const optionalSuffix = isOptional ? '?' : '';
   return {
     description: getDescription(prop),
     inheritedFrom: '',
@@ -457,7 +466,7 @@ function extractPropertySignatureInfo(prop: PropertySignature, isOfficial: boole
     parameters: [],
     returnType: '',
     signature: `${name}${optionalSuffix}`,
-    type: simplifyType(prop.getType().getText())
+    type: stripTrailingUndefined(simplifyType(prop.getType().getText()), isOptional)
   };
 }
 
