@@ -4,8 +4,8 @@
  * Creates a git worktree on the latest public release branch,
  * copies docs/ from main, installs dependencies, and generates API docs.
  *
- * Usage: npm run dev:setup
- * Then:  npm run dev
+ * Usage: npm run dev:setup [-- public|catalyst]
+ * Then:  cd ../obsidian-typings-docs-dev/docs && npm run dev
  */
 
 import { existsSync } from 'node:fs';
@@ -32,8 +32,14 @@ const ROOT_DIR = resolve(DOCS_DIR, '..');
 const WORKTREE_DIR = resolve(ROOT_DIR, '../obsidian-typings-docs-dev');
 
 async function main(): Promise<void> {
-  const latestVersion = await getLatestVersion('public');
-  const latestBranch = generateBranchName({ channel: 'public', obsidianVersion: latestVersion });
+  const channelArg = process.argv[2] ?? 'public';
+  if (channelArg !== 'public' && channelArg !== 'catalyst') {
+    console.error(`Invalid channel: ${channelArg}. Use "public" or "catalyst".`);
+    process.exit(1);
+  }
+  const channel = channelArg;
+  const latestVersion = await getLatestVersion(channel);
+  const latestBranch = generateBranchName({ channel, obsidianVersion: latestVersion });
   console.warn(`Using release branch: ${latestBranch}`);
 
   // Create or update worktree
