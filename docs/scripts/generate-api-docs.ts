@@ -429,11 +429,14 @@ function extractMethodSignatureInfo(method: MethodSignature, isOfficial: boolean
   return info;
 }
 
-function stripTrailingUndefined(typeText: string, isOptional: boolean): string {
-  if (!isOptional) {
-    return typeText;
+/** Strip `| undefined` only when it was implicitly added by ts-morph for optional properties */
+function getPropertyType(prop: PropertyDeclaration | PropertySignature): string {
+  // Use the type node text (what's written in source) if available, otherwise fall back to resolved type
+  const typeNode = prop.getTypeNode();
+  if (typeNode) {
+    return simplifyType(typeNode.getText());
   }
-  return typeText.replace(/\s*\|\s*undefined$/, '');
+  return simplifyType(prop.getType().getText());
 }
 
 function extractPropertyInfo(prop: PropertyDeclaration, isOfficial: boolean): MemberInfo {
@@ -449,7 +452,7 @@ function extractPropertyInfo(prop: PropertyDeclaration, isOfficial: boolean): Me
     parameters: [],
     returnType: '',
     signature: `${name}${optionalSuffix}`,
-    type: stripTrailingUndefined(simplifyType(prop.getType().getText()), isOptional)
+    type: getPropertyType(prop)
   };
 }
 
@@ -466,7 +469,7 @@ function extractPropertySignatureInfo(prop: PropertySignature, isOfficial: boole
     parameters: [],
     returnType: '',
     signature: `${name}${optionalSuffix}`,
-    type: stripTrailingUndefined(simplifyType(prop.getType().getText()), isOptional)
+    type: getPropertyType(prop)
   };
 }
 
