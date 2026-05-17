@@ -23,6 +23,13 @@ async function main(): Promise<void> {
 
   await execFromRoot(`npm install --save-exact obsidian@${latestObsidianVersion}`);
   await execFromRoot('git add package.json package-lock.json');
+
+  const hasChanges = (await execFromRoot('git diff --staged --name-only', { isQuiet: true })).trim() !== '';
+  if (!hasChanges) {
+    console.log(`No file changes after npm install obsidian@${latestObsidianVersion}, skipping release.`);
+    return;
+  }
+
   await commit(`chore: update obsidian API version to ${latestObsidianVersion}`);
   await execFromRoot('npm run release');
 
