@@ -94,6 +94,37 @@
     }
 }
 
+/* Widen content area for API reference tables */
+:root {
+    --sl-content-width: 65rem;
+    --sl-content-pad-x: 1rem;
+}
+
+/* API reference tables */
+.sl-markdown-content table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
+/* Icon column — minimal width */
+.sl-markdown-content table th:nth-child(1),
+.sl-markdown-content table td:nth-child(1) {
+    width: 1.5rem;
+    text-align: center;
+}
+
+/* Type column — prevent wrapping */
+.sl-markdown-content table th:nth-child(3),
+.sl-markdown-content table td:nth-child(3) {
+    white-space: nowrap;
+}
+
+/* Hide graph view on API pages — not useful for reference docs */
+.slsg-graph-panel {
+    display: none;
+}
+
 .group-label {
     text-transform: capitalize;
 }

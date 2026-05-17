@@ -135,9 +135,14 @@ function getTypeDocPlugin(): StarlightPlugin[] {
       },
       tsconfig: './tsconfig.json',
       typeDoc: {
+        classPropertiesFormat: 'table',
         entryPointStrategy: 'expand',
+        enumMembersFormat: 'table',
         excludeExternals: false,
         githubPages: false,
+        indexFormat: 'table',
+        interfacePropertiesFormat: 'table',
+        parametersFormat: 'table',
         plugin: [
           'typedoc-plugin-mdn-links',
           'typedoc-plugin-frontmatter',
@@ -148,6 +153,12 @@ function getTypeDocPlugin(): StarlightPlugin[] {
         // FIXME: Prevent Readme from being generated, as it creates invalid links
         readme: 'none',
         skipErrorChecking: true,
+        tableColumnSettings: {
+          hideInherited: true,
+          hideModifiers: true,
+          hideSources: true,
+          leftAlignHeaders: true
+        },
         theme: 'starlight-typedoc'
       }
     })
