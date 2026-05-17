@@ -9,8 +9,7 @@ import {
 const DOCS_DIR = dirname(dirname(toPosixPath(fileURLToPath(import.meta.url))));
 
 async function main(): Promise<void> {
-  await execFromRoot(['npm', 'run', 'build:generate-index'], { cwd: dirname(DOCS_DIR) });
-  await execFromRoot(['jiti', './scripts/preprocess.ts'], { cwd: DOCS_DIR });
+  await execFromRoot(['jiti', './scripts/generate-api-docs.ts'], { cwd: DOCS_DIR });
 }
 
 await main();
