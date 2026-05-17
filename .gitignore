@@ -25,8 +25,9 @@ index.ts
 # Environment
 /.env
 
-# Bundle compat test lock files
+# Bundle compat tests
 tests/bundle-compat/*/package-lock.json
+!tests/bundle-compat/*/index.ts
 
 # Claude Code
 .claude/settings.local.json

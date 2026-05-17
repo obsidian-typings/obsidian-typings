@@ -11,9 +11,9 @@ export interface WindowSelection {
   focusEl: HTMLElement;
 
   /**
-   * The selected range.
+   * The selected DOM range.
    */
-  range: Range;
+  range: globalThis.Range;
 
   /**
    * Window in which the selection exists.
