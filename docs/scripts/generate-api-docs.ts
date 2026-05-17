@@ -632,6 +632,10 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
   lines.push('---');
   lines.push('');
 
+  const typeIcon = info.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
+  lines.push(typeIcon);
+  lines.push('');
+
   if (info.description) {
     lines.push(info.description);
     lines.push('');
