@@ -637,7 +637,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
 async function generateOverviewPage(name: string, info: TypeInfo): Promise<void> {
   const nsDir = getNamespaceDir(info.namespace);
   const typeSlug = kebabCase(name);
-  const filePath = join(OUTPUT_DIR, nsDir, `${typeSlug}.md`);
+  const filePath = join(OUTPUT_DIR, nsDir, typeSlug, 'index.md');
   await ensureDir(filePath);
 
   const lines: string[] = [];
@@ -691,7 +691,7 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
       const inherited = prop.inheritedFrom ? `<br/>*(Inherited from ${prop.inheritedFrom})*` : '';
       const desc = escapeMarkdown(prop.description) + inherited;
       const type = renderTypeWithLinks(prop.type, nsDir);
-      const propLink = `[${prop.name}](./${typeSlug}/${memberSlug(prop.name)}/)`;
+      const propLink = `[${prop.name}](./${memberSlug(prop.name)}/)`;
       lines.push(`| ${icon} | ${propLink} | ${type} | ${desc} |`);
     }
     lines.push('');
@@ -711,7 +711,7 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
       const escapedSig = escapeMarkdown(method.signature);
       // Each overload gets its own page slug
       const slug = overloadSlug(method.overloadKey);
-      const link = `[${escapedSig}](./${typeSlug}/${slug}/)`;
+      const link = `[${escapedSig}](./${slug}/)`;
       const returnType = renderTypeWithLinks(method.returnType, nsDir);
       const inheritedHtml = method.inheritedFrom ? `<br/>*(Inherited from ${method.inheritedFrom})*` : '';
       lines.push(`| ${icon} | ${link} | ${returnType} | ${desc}${inheritedHtml} |`);
@@ -767,7 +767,7 @@ function simplifyType(typeText: string): string {
     .replace(/import\('[^']+'\)\./g, '');
 }
 
-/** Create a link to a type. Links are relative to the overview page (nsDir/typeSlug.md) */
+/** Create a link to a type. Links are relative to the overview page (nsDir/typeSlug/index.md) */
 function typeLink(typeName: string, currentNsDir: string): string {
   const cleanName = typeName.replace(/<.*>$/, '').trim();
   const info = allTypes.get(cleanName);
@@ -776,9 +776,9 @@ function typeLink(typeName: string, currentNsDir: string): string {
   }
   const targetNsDir = getNamespaceDir(info.namespace);
   if (targetNsDir === currentNsDir) {
-    return `[${typeName}](./${kebabCase(cleanName)}/)`;
+    return `[${typeName}](../${kebabCase(cleanName)}/)`;
   }
-  return `[${typeName}](../${targetNsDir}/${kebabCase(cleanName)}/)`;
+  return `[${typeName}](../../${targetNsDir}/${kebabCase(cleanName)}/)`;
 }
 
 /** Single-letter and common generic type parameter names — not linkable */
