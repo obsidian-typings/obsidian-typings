@@ -41,6 +41,9 @@ async function main(): Promise<void> {
     throw new Error(`Expected 1 branch, got ${String(branchNames.length)}: ${branchNames.join(', ')}`);
   }
 
+  // Checkout the branch so we're not in detached HEAD state (CI checks out the tag, leaving us detached)
+  await execFromRoot(`git checkout -B ${branchName} --track origin/${branchName}`);
+
   const branchSpec = parseBranchSpec(branchName);
 
   await execFromRoot('npm install');
