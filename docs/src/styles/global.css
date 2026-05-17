@@ -103,30 +103,43 @@
 /* API reference tables */
 .sl-markdown-content table {
     width: 100%;
-    overflow-x: auto;
-    display: block;
+    table-layout: fixed;
 }
 
-/* Icon column — minimal width */
+/* Icon column */
 .sl-markdown-content table th:nth-child(1),
 .sl-markdown-content table td:nth-child(1) {
-    width: 1.5rem;
+    width: 2rem;
     text-align: center;
 }
 
-/* Type column — prevent wrapping */
+/* Property/Method name column — 20% */
+.sl-markdown-content table th:nth-child(2),
+.sl-markdown-content table td:nth-child(2) {
+    width: 20%;
+    word-break: break-word;
+}
+
+/* Type/Returns column — 30% */
 .sl-markdown-content table th:nth-child(3),
 .sl-markdown-content table td:nth-child(3) {
-    white-space: nowrap;
+    width: 30%;
+    word-break: break-word;
+}
+
+/* Description column — 50% */
+.sl-markdown-content table th:nth-child(4),
+.sl-markdown-content table td:nth-child(4) {
+    width: 50%;
 }
 
 /* Hide graph view on API pages — not useful for reference docs */
-.slsg-graph-panel {
+.slsg-graph-panel { /* cspell:disable-line */
     display: none;
 }
 
 .group-label {
-    text-transform: capitalize;
+    text-transform: none;
 }
 
 
