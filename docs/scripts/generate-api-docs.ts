@@ -180,12 +180,16 @@ async function main(): Promise<void> {
 function mergeClassIntoType(target: TypeInfo, cls: ClassDeclaration, isOfficial: boolean): void {
   for (const method of cls.getMethods()) {
     const info = extractMethodInfo(method, isOfficial);
-    const existing = target.methods.find((m) => m.name === info.name && m.signature === info.signature);
-    if (existing) {
+    const existingByKey = target.methods.find((m) => m.overloadKey === info.overloadKey);
+    const existingExact = target.methods.find((m) => m.name === info.name && m.signature === info.signature);
+    if (existingExact) {
       if (!isOfficial && info.description) {
-        existing.description = info.description;
+        existingExact.description = info.description;
       }
-    } else {
+    } else if (existingByKey && !isOfficial) {
+      const idx = target.methods.indexOf(existingByKey);
+      target.methods[idx] = info;
+    } else if (!existingByKey) {
       target.methods.push(info);
     }
   }
@@ -209,12 +213,18 @@ function mergeClassIntoType(target: TypeInfo, cls: ClassDeclaration, isOfficial:
 function mergeInterfaceIntoType(target: TypeInfo, iface: InterfaceDeclaration, isOfficial: boolean): void {
   for (const method of iface.getMethods()) {
     const info = extractMethodSignatureInfo(method, isOfficial);
-    const existing = target.methods.find((m) => m.name === info.name && m.signature === info.signature);
-    if (existing) {
+    // Deduplicate by overload key — prefer our (unofficial) version over official
+    const existingByKey = target.methods.find((m) => m.overloadKey === info.overloadKey);
+    const existingExact = target.methods.find((m) => m.name === info.name && m.signature === info.signature);
+    if (existingExact) {
       if (!isOfficial && info.description) {
-        existing.description = info.description;
+        existingExact.description = info.description;
       }
-    } else {
+    } else if (existingByKey && !isOfficial) {
+      // Replace official version with our augmented version (more precise types)
+      const idx = target.methods.indexOf(existingByKey);
+      target.methods[idx] = info;
+    } else if (!existingByKey) {
       target.methods.push(info);
     }
   }
