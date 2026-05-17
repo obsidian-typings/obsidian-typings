@@ -654,6 +654,11 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
   lines.push('---');
   lines.push('');
 
+  const typeIcon = info.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
+  const typeLabel = info.isOfficial ? 'Official' : 'Unofficial';
+  lines.push(`<p>${typeIcon} <strong>${typeLabel}</strong></p>`);
+  lines.push('');
+
   if (info.description) {
     lines.push(info.description);
     lines.push('');
