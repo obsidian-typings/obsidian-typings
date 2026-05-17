@@ -19,6 +19,9 @@ import {
 } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { generateBranchName } from '../../workflow-scripts/helpers/branchSpec.ts';
+import { getLatestVersion } from '../../workflow-scripts/helpers/version.ts';
+
 import {
   execFromRoot,
   toPosixPath
@@ -29,7 +32,8 @@ const ROOT_DIR = resolve(DOCS_DIR, '..');
 const WORKTREE_DIR = resolve(ROOT_DIR, '../obsidian-typings-docs-dev');
 
 async function main(): Promise<void> {
-  const latestBranch = await getLatestPublicBranch();
+  const latestVersion = await getLatestVersion('public');
+  const latestBranch = generateBranchName({ channel: 'public', obsidianVersion: latestVersion });
   console.warn(`Using release branch: ${latestBranch}`);
 
   // Create or update worktree
@@ -61,21 +65,5 @@ async function main(): Promise<void> {
   console.warn(`  cd "${WORKTREE_DIR}/docs" && npm run dev`);
 }
 
-async function getLatestPublicBranch(): Promise<string> {
-  await execFromRoot('git fetch origin', { isQuiet: true });
-  const branches = await execFromRoot('git branch -r --list "origin/release/obsidian-public/*"', { isQuiet: true });
-  const versions = branches
-    .split('\n')
-    .map((b) => b.trim())
-    .filter((b) => b.length > 0)
-    .map((b) => b.replace('origin/', ''))
-    .sort();
-
-  const latest = versions[versions.length - 1];
-  if (!latest) {
-    throw new Error('No release/obsidian-public/* branches found');
-  }
-  return latest;
-}
 
 await main();
