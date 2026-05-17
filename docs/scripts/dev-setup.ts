@@ -19,20 +19,22 @@ import {
 } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { generateBranchName } from '../../workflow-scripts/helpers/branchSpec.ts';
-import { getLatestVersion } from '../../workflow-scripts/helpers/version.ts';
-
 import {
   execFromRoot,
   toPosixPath
 } from './helpers/exec.ts';
+import {
+  generateBranchName,
+  getLatestVersion
+} from './helpers/version.ts';
 
 const DOCS_DIR = dirname(dirname(toPosixPath(fileURLToPath(import.meta.url))));
 const ROOT_DIR = resolve(DOCS_DIR, '..');
 const WORKTREE_DIR = resolve(ROOT_DIR, '../obsidian-typings-docs-dev');
 
 async function main(): Promise<void> {
-  const channelArg = process.argv[2] ?? 'public';
+  const CHANNEL_ARG_INDEX = 2;
+  const channelArg = process.argv[CHANNEL_ARG_INDEX] ?? 'public';
   if (channelArg !== 'public' && channelArg !== 'catalyst') {
     console.error(`Invalid channel: ${channelArg}. Use "public" or "catalyst".`);
     process.exit(1);
@@ -42,13 +44,13 @@ async function main(): Promise<void> {
   const latestBranch = generateBranchName({ channel, obsidianVersion: latestVersion });
   console.warn(`Using release branch: ${latestBranch}`);
 
-  // Create or update worktree
+  // Create or update worktree (detached to avoid locking the branch)
   if (existsSync(WORKTREE_DIR)) {
     console.warn(`Worktree already exists at ${WORKTREE_DIR}, updating...`);
-    await execFromRoot(`git -C "${WORKTREE_DIR}" checkout ${latestBranch}`);
+    await execFromRoot(`git -C "${WORKTREE_DIR}" checkout --detach ${latestBranch}`);
   } else {
     console.warn(`Creating worktree at ${WORKTREE_DIR}...`);
-    await execFromRoot(`git worktree add "${WORKTREE_DIR}" ${latestBranch}`);
+    await execFromRoot(`git worktree add --detach "${WORKTREE_DIR}" ${latestBranch}`);
   }
 
   // Copy docs/ from main into the worktree
@@ -70,6 +72,5 @@ async function main(): Promise<void> {
   console.warn('To start the dev server:');
   console.warn(`  cd "${WORKTREE_DIR}/docs" && npm run dev`);
 }
-
 
 await main();
