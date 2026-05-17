@@ -5,6 +5,7 @@
   "scripts": {
     "build": "jiti scripts/build.ts",
     "dev": "jiti scripts/dev.ts",
+    "dev:setup": "jiti scripts/dev-setup.ts",
     "postinstall": "patch-package",
     "preview": "jiti scripts/preview.ts",
     "setup": "jiti scripts/setup.ts"
