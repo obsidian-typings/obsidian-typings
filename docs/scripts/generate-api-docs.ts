@@ -31,8 +31,8 @@ import { Project } from 'ts-morph';
 
 const ICON_SIZE = '16';
 // Icons encoded as data URI <img> tags — works in both tables and inline text
-const UNOFFICIAL_ICON = `<img src="data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>`)}" width="${ICON_SIZE}" height="${ICON_SIZE}" alt="Unofficial" title="Unofficial API — reverse-engineered, may change without notice" style="vertical-align: middle" />`;
-const OFFICIAL_ICON = `<img src="data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>`)}" width="${ICON_SIZE}" height="${ICON_SIZE}" alt="Official" title="Official API — part of the public Obsidian API" style="vertical-align: middle" />`;
+const UNOFFICIAL_ICON = `<img src="data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>')}" width="${ICON_SIZE}" height="${ICON_SIZE}" alt="Unofficial" title="Unofficial API — reverse-engineered, may change without notice" style="vertical-align: middle" />`;
+const OFFICIAL_ICON = `<img src="data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>')}" width="${ICON_SIZE}" height="${ICON_SIZE}" alt="Official" title="Official API — part of the public Obsidian API" style="vertical-align: middle" />`;
 
 interface MemberInfo {
   description: string;
@@ -61,6 +61,10 @@ interface TypeInfo {
   name: string;
   namespace: string;
   properties: MemberInfo[];
+}
+
+interface WebApiEntry {
+  url: string;
 }
 
 const NAMESPACE_DISPLAY_NAMES: Record<string, string> = {
@@ -170,7 +174,7 @@ async function main(): Promise<void> {
   // Generate sidebar JSON for astro config
   await generateSidebarJson(types);
 
-  console.log(`Generated docs for ${String(pageCount)} types, ${String(types.size)} total types`);
+  console.warn(`Generated docs for ${String(pageCount)} types, ${String(types.size)} total types`);
 }
 
 function mergeClassIntoType(target: TypeInfo, cls: ClassDeclaration, isOfficial: boolean): void {
@@ -251,7 +255,10 @@ function processModuleDeclaration(mod: ReturnType<SourceFile['getModules']>[numb
   for (const iface of mod.getInterfaces()) {
     const name = iface.getName();
     if (types.has(name)) {
-      mergeInterfaceIntoType(types.get(name)!, iface, isOfficial);
+      const existing = types.get(name);
+      if (existing) {
+        mergeInterfaceIntoType(existing, iface, isOfficial);
+      }
     } else {
       types.set(name, extractInterfaceInfo(iface, isOfficial, namespace));
     }
@@ -262,7 +269,10 @@ function processModuleDeclaration(mod: ReturnType<SourceFile['getModules']>[numb
       continue;
     }
     if (types.has(name)) {
-      mergeClassIntoType(types.get(name)!, cls, isOfficial);
+      const existing = types.get(name);
+      if (existing) {
+        mergeClassIntoType(existing, cls, isOfficial);
+      }
     } else {
       types.set(name, extractClassInfo(cls, isOfficial, namespace));
     }
@@ -305,7 +315,10 @@ function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOffi
   for (const iface of src.getInterfaces()) {
     const name = iface.getName();
     if (types.has(name)) {
-      mergeInterfaceIntoType(types.get(name)!, iface, isOfficial);
+      const existing = types.get(name);
+      if (existing) {
+        mergeInterfaceIntoType(existing, iface, isOfficial);
+      }
     } else {
       types.set(name, extractInterfaceInfo(iface, isOfficial, namespace));
     }
@@ -317,7 +330,10 @@ function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOffi
       continue;
     }
     if (types.has(name)) {
-      mergeClassIntoType(types.get(name)!, cls, isOfficial);
+      const existing = types.get(name);
+      if (existing) {
+        mergeClassIntoType(existing, cls, isOfficial);
+      }
     } else {
       types.set(name, extractClassInfo(cls, isOfficial, namespace));
     }
@@ -428,16 +444,6 @@ function extractMethodSignatureInfo(method: MethodSignature, isOfficial: boolean
   };
   info.overloadKey = computeOverloadKey(info);
   return info;
-}
-
-/** Strip `| undefined` only when it was implicitly added by ts-morph for optional properties */
-function getPropertyType(prop: PropertyDeclaration | PropertySignature): string {
-  // Use the type node text (what's written in source) if available, otherwise fall back to resolved type
-  const typeNode = prop.getTypeNode();
-  if (typeNode) {
-    return simplifyType(typeNode.getText());
-  }
-  return simplifyType(prop.getType().getText());
 }
 
 function extractPropertyInfo(prop: PropertyDeclaration, isOfficial: boolean): MemberInfo {
@@ -707,7 +713,6 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
     for (const method of methods) {
       const icon = method.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
       const desc = escapeMarkdown(method.description);
-      const inherited = method.inheritedFrom ? ` *(Inherited from ${method.inheritedFrom})*` : '';
       const escapedSig = escapeMarkdown(method.signature);
       // Each overload gets its own page slug
       const slug = overloadSlug(method.overloadKey);
@@ -732,6 +737,16 @@ function getDescription(node: JSDocableNode): string {
 
 function getNamespaceDir(namespace: string): string {
   return NAMESPACE_DIR_NAMES[namespace] ?? kebabCase(namespace);
+}
+
+/** Strip `| undefined` only when it was implicitly added by ts-morph for optional properties */
+function getPropertyType(prop: PropertyDeclaration | PropertySignature): string {
+  // Use the type node text (what's written in source) if available, otherwise fall back to resolved type
+  const typeNode = prop.getTypeNode();
+  if (typeNode) {
+    return simplifyType(typeNode.getText());
+  }
+  return simplifyType(prop.getType().getText());
 }
 
 function kebabCase(name: string): string {
@@ -813,8 +828,8 @@ let webApiTypes: Record<string, unknown> = {};
 function loadExternalTypeMaps(): void {
   try {
     const dataPath = join(process.cwd(), 'node_modules/typedoc-plugin-mdn-links/data/web-api.json');
-    webApiTypes = JSON.parse(readFileSync(dataPath, 'utf-8'));
-    console.log(`Loaded ${String(Object.keys(webApiTypes).length)} Web API type links`);
+    webApiTypes = JSON.parse(readFileSync(dataPath, 'utf-8')) as Record<string, unknown>;
+    console.warn(`Loaded ${String(Object.keys(webApiTypes).length)} Web API type links`);
   } catch {
     console.warn('typedoc-plugin-mdn-links data not found — Web API links will be unavailable.');
   }
@@ -826,7 +841,8 @@ function resolveWebApiUrl(name: string): string | undefined {
     return entry;
   }
   if (typeof entry === 'object' && entry !== null && 'url' in entry) {
-    return (entry as { url: string }).url;
+    const typedEntry = entry as WebApiEntry;
+    return typedEntry.url;
   }
   return undefined;
 }
@@ -931,10 +947,6 @@ const TS_GLOBAL_TYPES: Record<string, string> = {
 };
 // Cspell:enable
 
-function escapeHtml(text: string): string {
-  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-
 function escapeYaml(text: string): string {
   return text.replace(/["']/g, '');
 }
@@ -970,13 +982,14 @@ async function generateSidebarJson(types: Map<string, TypeInfo>): Promise<void> 
   }
 
   const sidebarPath = join(process.cwd(), 'src/generated-sidebar.json');
-  await writeFile(sidebarPath, JSON.stringify(sidebar, null, 2), 'utf-8');
-  console.log(`Generated sidebar with ${String(sidebar.length)} namespaces`);
+  const JSON_INDENT = 2;
+  await writeFile(sidebarPath, JSON.stringify(sidebar, null, JSON_INDENT), 'utf-8');
+  console.warn(`Generated sidebar with ${String(sidebar.length)} namespaces`);
 }
 
 /** Render a type string with clickable links for known types */
 function renderTypeWithLinks(typeText: string, currentNsDir: string): string {
-  return escapeMarkdown(typeText).replace(/\b([a-zA-Z][a-zA-Z0-9]*)\b/g, (match) => {
+  return escapeMarkdown(typeText).replace(/\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match) => {
     // Skip generic type parameters
     if (GENERIC_TYPE_PARAMS.has(match)) {
       return match;
