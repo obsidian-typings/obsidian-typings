@@ -12,6 +12,7 @@
   },
   "overrides": {
     "@astrojs/sitemap": "3.4.0",
+    "typescript": "$typescript",
     "zod": "3.24.4",
     "zod-to-json-schema": "3.24.5"
   },
