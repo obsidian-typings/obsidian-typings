@@ -29,11 +29,8 @@ import {
 } from 'node:path';
 import { Project } from 'ts-morph';
 
-const ICON_SIZE = '16';
-// Icons encoded as data URI <img> tags — works in both tables and inline text
-const ICON_STYLE = `width: ${ICON_SIZE}px; height: ${ICON_SIZE}px; vertical-align: middle; display: inline-block`;
-const UNOFFICIAL_ICON = `<img src="data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>')}" alt="Unofficial" title="Unofficial API — reverse-engineered, may change without notice" style="${ICON_STYLE}" />`;
-const OFFICIAL_ICON = `<img src="data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>')}" alt="Official" title="Official API — part of the public Obsidian API" style="${ICON_STYLE}" />`;
+const UNOFFICIAL_ICON = '<span class="icon-unofficial" title="Unofficial API — reverse-engineered, may change without notice"></span>';
+const OFFICIAL_ICON = '<span class="icon-official" title="Official API — part of the public Obsidian API"></span>';
 
 interface MemberInfo {
   description: string;
