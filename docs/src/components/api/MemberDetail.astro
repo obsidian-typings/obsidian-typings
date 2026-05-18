@@ -1,0 +1,101 @@
+---
+import { ApiStatus } from './types.ts';
+
+interface ParameterInfo {
+  description: string;
+  name: string;
+  type: string;
+}
+
+interface Props {
+  description?: string;
+  examples?: string[];
+  parameters?: ParameterInfo[];
+  remarks?: string;
+  returnDescription?: string;
+  returnType?: string;
+  signature?: string;
+  since?: string;
+  status: ApiStatus;
+  type?: string;
+}
+
+const {
+  status,
+  type,
+  description,
+  signature,
+  parameters = [],
+  returnType,
+  returnDescription,
+  remarks,
+  examples = [],
+  since
+} = Astro.props;
+
+const isOfficial = status === ApiStatus.Official;
+const iconClass = isOfficial ? 'icon-official' : 'icon-unofficial';
+const title = isOfficial
+  ? 'Official API — part of the public Obsidian API'
+  : 'Unofficial API — reverse-engineered, may change without notice';
+const label = isOfficial ? 'Official' : 'Unofficial';
+---
+
+<p><span class={iconClass} title={title}></span> <strong>{label}</strong></p>
+
+{type && <p><strong>Type:</strong> <span set:html={type} /></p>}
+
+{description && <Fragment set:html={description} />}
+
+{signature && (
+  <>
+    <p><strong>Signature:</strong></p>
+    <pre><code class="language-ts">{signature}</code></pre>
+  </>
+)}
+
+{parameters.length > 0 && (
+  <>
+    <p><strong>Parameters:</strong></p>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: left">Parameter</th>
+          <th style="text-align: left">Type</th>
+          <th style="text-align: left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {parameters.map((param) => (
+          <tr>
+            <td style="text-align: left">{param.name}</td>
+            <td style="text-align: left" set:html={param.type} />
+            <td style="text-align: left" set:html={param.description} />
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </>
+)}
+
+{returnType && (
+  <p><strong>Returns:</strong> <span set:html={returnType} />
+    {returnDescription && <> — <span set:html={returnDescription} /></>}
+  </p>
+)}
+
+{since && <p><strong>Since:</strong> {since}</p>}
+
+{remarks && (
+  <>
+    <p><strong>Remarks:</strong></p>
+    <Fragment set:html={remarks} />
+  </>
+)}
+
+{examples.map((example) => (
+  <>
+    <p><strong>Example:</strong></p>
+    <Fragment set:html={example} />
+  </>
+))}

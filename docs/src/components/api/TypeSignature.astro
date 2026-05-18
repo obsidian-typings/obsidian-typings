@@ -1,0 +1,16 @@
+---
+interface Props {
+  extends?: string[];
+  kind: 'class' | 'interface';
+  name: string;
+  typeParams?: string[];
+}
+
+const { kind, name, typeParams = [], extends: baseTypes = [] } = Astro.props;
+const typeParamsStr = typeParams.length > 0 ? `<${typeParams.join(', ')}>` : '';
+const extendsClause = baseTypes.length > 0 ? ` extends ${baseTypes.join(', ')}` : '';
+const signature = `export ${kind} ${name}${typeParamsStr}${extendsClause}`;
+---
+
+<p><strong>Signature:</strong></p>
+<pre><code class="language-ts">{signature}</code></pre>

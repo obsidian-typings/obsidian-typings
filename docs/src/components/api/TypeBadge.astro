@@ -1,0 +1,17 @@
+---
+import { ApiStatus } from './types.ts';
+
+interface Props {
+  status: ApiStatus;
+}
+
+const { status } = Astro.props;
+const isOfficial = status === ApiStatus.Official;
+const iconClass = isOfficial ? 'icon-official' : 'icon-unofficial';
+const title = isOfficial
+  ? 'Official API — part of the public Obsidian API'
+  : 'Unofficial API — reverse-engineered, may change without notice';
+const label = isOfficial ? 'Official' : 'Unofficial';
+---
+
+<p><span class={iconClass} title={title}></span> <strong>{label}</strong></p>

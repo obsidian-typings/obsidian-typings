@@ -1,0 +1,49 @@
+---
+import { ApiStatus } from './types.ts';
+
+interface PropertyRow {
+  description: string;
+  href: string;
+  inheritedFrom?: string;
+  name: string;
+  status: ApiStatus;
+  type: string;
+}
+
+interface Props {
+  rows: PropertyRow[];
+}
+
+const { rows } = Astro.props;
+---
+
+<h2>Properties</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"></th>
+      <th style="text-align: left">Property</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {rows.map((row) => {
+      const iconClass = row.status === ApiStatus.Official ? 'icon-official' : 'icon-unofficial';
+      const title = row.status === ApiStatus.Official
+        ? 'Official API — part of the public Obsidian API'
+        : 'Unofficial API — reverse-engineered, may change without notice';
+      const inherited = row.inheritedFrom
+        ? `<br/><em>(Inherited from ${row.inheritedFrom})</em>`
+        : '';
+      return (
+        <tr>
+          <td style="text-align: center"><span class={iconClass} title={title}></span></td>
+          <td style="text-align: left"><a href={row.href}>{row.name}</a></td>
+          <td style="text-align: left" set:html={row.type} />
+          <td style="text-align: left" set:html={row.description + inherited} />
+        </tr>
+      );
+    })}
+  </tbody>
+</table>

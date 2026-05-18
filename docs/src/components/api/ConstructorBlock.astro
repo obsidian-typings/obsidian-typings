@@ -1,0 +1,12 @@
+---
+interface Props {
+  description?: string;
+  signature: string;
+}
+
+const { signature, description } = Astro.props;
+---
+
+<h2>Constructor</h2>
+<pre><code class="language-ts">{signature}</code></pre>
+{description && <p set:html={description} />}
