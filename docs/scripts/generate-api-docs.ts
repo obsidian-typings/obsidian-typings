@@ -894,15 +894,13 @@ function getParamDescriptions(node: JSDocableNode): Map<string, string> {
   for (const doc of docs) {
     for (const tag of doc.getTags()) {
       if (tag.getTagName() === 'param') {
-        const text = tag.getCommentText()?.trim() ?? '';
-        // Tag text format: "paramName - description" or "paramName description"
-        const tagText = tag.getText().replace('@param', '').trim();
-        const dashMatch = /^(?<paramName>\w+)\s*-\s*(?<desc>.*)/s.exec(tagText);
-        const spaceMatch = /^(?<paramName>\w+)\s+(?<desc>.*)/s.exec(tagText);
-        if (dashMatch?.groups) {
-          result.set(dashMatch.groups['paramName'] ?? '', dashMatch.groups['desc']?.trim() ?? '');
-        } else if (spaceMatch?.groups && text) {
-          result.set(spaceMatch.groups['paramName'] ?? '', text);
+        // Use getCommentText() for clean description without JSDoc artifacts
+        const comment = tag.getCommentText()?.trim().replace(/\s*\*\s*$/g, '').replace(/^-\s*/, '').trim() ?? '';
+        // Get param name from the tag structure
+        const tagText = tag.getText();
+        const nameMatch = /@param\s+(?:\{[^}]*\}\s+)?(?<paramName>\w+)/.exec(tagText);
+        if (nameMatch?.groups) {
+          result.set(nameMatch.groups['paramName'] ?? '', comment);
         }
       }
     }
