@@ -10,7 +10,8 @@
     "setup": "jiti scripts/setup.ts"
   },
   "overrides": {
-    "typescript": "$typescript"
+    "typescript": "$typescript",
+    "yaml": "$yaml"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
@@ -33,6 +34,7 @@
     "@types/d3": "^7.4.3",
     "@types/semver": "^7.7.1",
     "ts-morph": "^28.0.0",
-    "type-fest": "^5.6.0"
+    "type-fest": "^5.6.0",
+    "yaml": "^2.8.3"
   }
 }
