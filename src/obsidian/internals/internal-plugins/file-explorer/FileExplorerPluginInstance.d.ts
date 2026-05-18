@@ -1,7 +1,6 @@
 import type {
   App,
-  TFile,
-  TFolder
+  TAbstractFile
 } from 'obsidian';
 
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
