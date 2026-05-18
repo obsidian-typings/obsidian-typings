@@ -183,6 +183,9 @@ async function main(): Promise<void> {
 
   allTypes = types;
 
+  // Build backlinks map
+  const backlinks = buildBacklinks(types);
+
   await rm(OUTPUT_DIR, { force: true, recursive: true });
   await mkdir(OUTPUT_DIR, { recursive: true });
 
@@ -193,7 +196,7 @@ async function main(): Promise<void> {
     if (info.properties.length === 0 && info.methods.length === 0) {
       continue;
     }
-    await generateOverviewPage(name, info);
+    await generateOverviewPage(name, info, backlinks.get(name) ?? []);
     if (info.kind !== 'function') {
       await generateMemberPages(name, info);
     }
@@ -406,6 +409,48 @@ function resolveInheritedMembers(types: Map<string, TypeInfo>): void {
 /** Event-like method names that should be split by string literal first param */
 const EVENT_METHODS = new Set(['off', 'on', 'trigger', 'tryTrigger']);
 
+/** Build a map of type name → list of type names that reference it */
+function buildBacklinks(types: Map<string, TypeInfo>): Map<string, string[]> {
+  const backlinks = new Map<string, string[]>();
+
+  for (const [sourceName, info] of types) {
+    const referencedTypes = new Set<string>();
+
+    // Base types
+    for (const baseType of info.baseTypes) {
+      const clean = baseType.replace(/<.*>$/, '').trim();
+      if (types.has(clean)) {
+        referencedTypes.add(clean);
+      }
+    }
+
+    // Property types
+    for (const prop of info.properties) {
+      findTypeReferences(prop.type, types, referencedTypes);
+    }
+
+    // Method return types and param types
+    for (const method of info.methods) {
+      findTypeReferences(method.returnType, types, referencedTypes);
+      for (const param of method.parameters) {
+        findTypeReferences(param.type, types, referencedTypes);
+      }
+    }
+
+    for (const ref of referencedTypes) {
+      if (ref === sourceName) {
+        continue;
+      }
+      if (!backlinks.has(ref)) {
+        backlinks.set(ref, []);
+      }
+      backlinks.get(ref)?.push(sourceName);
+    }
+  }
+
+  return backlinks;
+}
+
 function checkIsOfficial(node: JSDocableNode, defaultIsOfficial: boolean): boolean {
   const docs = node.getJsDocs();
   for (const doc of docs) {
@@ -584,6 +629,16 @@ function extractPropertySignatureInfo(prop: PropertySignature, isOfficial: boole
   };
 }
 
+function findTypeReferences(typeText: string, types: Map<string, TypeInfo>, result: Set<string>): void {
+  const matches = typeText.matchAll(/\b(?<typeName>[A-Z][a-zA-Z0-9]*)\b/g);
+  for (const match of matches) {
+    const name = match.groups?.['typeName'] ?? '';
+    if (types.has(name)) {
+      result.add(name);
+    }
+  }
+}
+
 async function generateMemberPages(name: string, info: TypeInfo): Promise<void> {
   const nsDir = getNamespaceDir(info.namespace);
   const typeDir = kebabCase(name);
@@ -602,6 +657,10 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     lines.push('sidebar:');
     lines.push(`  label: "${escapeYaml(propTitle)}"`);
     lines.push('---');
+    lines.push('');
+
+    // Breadcrumb
+    lines.push(`[${name}](/api/${nsDir}/${typeDir}/) › ${prop.name}`);
     lines.push('');
 
     const icon = prop.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
@@ -664,6 +723,10 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     lines.push('sidebar:');
     lines.push(`  label: "${escapeYaml(`${name}.${overloadKey}`)}"`);
     lines.push('---');
+    lines.push('');
+
+    // Breadcrumb
+    lines.push(`[${name}](/api/${nsDir}/${typeDir}/) › ${overloadKey}`);
     lines.push('');
 
     for (const overload of overloads) {
@@ -747,7 +810,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
   }
 }
 
-async function generateOverviewPage(name: string, info: TypeInfo): Promise<void> {
+async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks: string[]): Promise<void> {
   const nsDir = getNamespaceDir(info.namespace);
   const typeSlug = kebabCase(name);
   const filePath = join(OUTPUT_DIR, nsDir, typeSlug, 'index.md');
@@ -863,6 +926,8 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
     }
     lines.push('');
   }
+
+  renderBacklinks(lines, typeBacklinks);
 
   await writeFile(filePath, lines.join('\n'), 'utf-8');
 }
@@ -1004,6 +1069,25 @@ function overloadSlug(overloadKey: string): string {
     .trim()
     .replace(/\s+/g, '-')
     .toLowerCase();
+}
+
+function renderBacklinks(lines: string[], typeBacklinks: string[]): void {
+  if (typeBacklinks.length === 0) {
+    return;
+  }
+  const sortedBacklinks = [...typeBacklinks].sort((a, b) => a.localeCompare(b));
+  lines.push('---');
+  lines.push('');
+  lines.push('**Links to this page:**');
+  lines.push('');
+  for (const bl of sortedBacklinks) {
+    const blInfo = allTypes.get(bl);
+    if (blInfo) {
+      const blNsDir = getNamespaceDir(blInfo.namespace);
+      lines.push(`- [${bl}](/api/${blNsDir}/${kebabCase(bl)}/)`);
+    }
+  }
+  lines.push('');
 }
 
 function renderFunctionPage(lines: string[], info: TypeInfo): void {
