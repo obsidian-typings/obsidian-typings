@@ -60,7 +60,11 @@ export const astroConfig = defineConfig({
           items: [{ autogenerate: { directory: 'resources' } }],
           label: 'Resources'
         },
-        ...getApiSidebar()
+        {
+          collapsed: false,
+          items: getApiSidebar(),
+          label: 'TypeScript API'
+        }
       ],
       social: [
         { href: 'https://github.com/obsidian-typings/obsidian-typings', icon: 'github', label: 'Github' }
