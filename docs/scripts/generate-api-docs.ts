@@ -844,6 +844,14 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   lines.push(`<p>${typeIcon} <strong>${typeLabel}</strong></p>`);
   lines.push('');
 
+  // Description
+  if (info.description) {
+    lines.push('**Description:**');
+    lines.push('');
+    lines.push(resolveLinks(info.description));
+    lines.push('');
+  }
+
   // Import statement
   const importStatement = getImportStatement(info);
   if (importStatement) {
@@ -862,11 +870,7 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
     return;
   }
 
-  if (info.description) {
-    lines.push(resolveLinks(info.description));
-    lines.push('');
-  }
-
+  // Signature
   const extendsClause = info.baseTypes.length > 0 ? ` extends ${info.baseTypes.join(', ')}` : '';
   lines.push('**Signature:**');
   lines.push('');
