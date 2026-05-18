@@ -90,6 +90,9 @@ const NAMESPACE_DIR_NAMES: Record<string, string> = {
   'obsidian': 'obsidian'
 };
 
+const CHANNEL = process.env['CURRENT_CHANNEL'] === 'catalyst' ? 'catalyst' : 'public';
+const TYPINGS_PACKAGE = `@obsidian-typings/obsidian-${CHANNEL}-latest`;
+
 const OUTPUT_DIR = join(process.cwd(), 'src/content/docs/api');
 
 // Global type map for cross-referencing
@@ -752,6 +755,12 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
   lines.push(`<p>${typeIcon} <strong>${typeLabel}</strong></p>`);
   lines.push('');
 
+  // Import statement
+  lines.push('```ts');
+  lines.push(getImportStatement(info));
+  lines.push('```');
+  lines.push('');
+
   // Functions render like method detail pages — signature, params, returns
   if (info.kind === 'function') {
     renderFunctionPage(lines, info, nsDir);
@@ -854,6 +863,16 @@ function getDescription(node: JSDocableNode): string {
     return '';
   }
   return docs[docs.length - 1]?.getDescription().trim() ?? '';
+}
+
+function getImportStatement(info: TypeInfo): string {
+  if (info.kind === 'function' && info.namespace === 'implementations') {
+    return `import { ${info.name} } from '${TYPINGS_PACKAGE}/implementations';`;
+  }
+  if (info.namespace === 'obsidian' && info.isOfficial) {
+    return `import type { ${info.name} } from 'obsidian';`;
+  }
+  return `import type { ${info.name} } from '${TYPINGS_PACKAGE}';`;
 }
 
 function getNamespaceDir(namespace: string): string {
