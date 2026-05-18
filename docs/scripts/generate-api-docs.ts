@@ -135,6 +135,16 @@ async function main(): Promise<void> {
   }
 
   const augSrc = project.addSourceFileAtPath(join(rootDir, 'dist/cjs/types.d.cts'));
+
+  // Load implementations types (constructor getters, etc.)
+  const implPath = join(rootDir, 'dist/cjs/implementations.d.cts');
+  let implSrc: SourceFile | undefined;
+  try {
+    implSrc = project.addSourceFileAtPath(implPath);
+  } catch {
+    console.warn('implementations.d.cts not found — implementation functions will not be included.');
+  }
+
   const types = new Map<string, TypeInfo>();
 
   if (obsidianSrc) {
@@ -142,6 +152,11 @@ async function main(): Promise<void> {
   }
 
   processSourceFile(augSrc, types, false, 'internals');
+  collectFunctions(augSrc, types, false, 'internals');
+
+  if (implSrc) {
+    collectFunctions(implSrc, types, false, 'internals');
+  }
 
   for (const mod of augSrc.getModules()) {
     const modName = mod.getName().replace(/['"]/g, '');
@@ -392,6 +407,26 @@ function checkIsOfficial(node: JSDocableNode, defaultIsOfficial: boolean): boole
     }
   }
   return defaultIsOfficial;
+}
+
+/** Collect standalone functions into the types map for link resolution and doc generation */
+function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOfficial: boolean, namespace: string): void {
+  for (const fn of src.getFunctions()) {
+    const name = fn.getName();
+    if (!name || types.has(name)) {
+      continue;
+    }
+    types.set(name, {
+      baseTypes: [],
+      description: getDescription(fn),
+      isOfficial,
+      kind: 'interface',
+      methods: [],
+      name,
+      namespace,
+      properties: []
+    });
+  }
 }
 
 /** Compute an overload key for methods with distinguishing first param (e.g. on('changed',...)) */
