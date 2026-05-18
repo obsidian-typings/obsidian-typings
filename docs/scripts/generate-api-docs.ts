@@ -1531,8 +1531,24 @@ async function generateSidebarJson(types: Map<string, TypeInfo>): Promise<void> 
   const root = buildSidebarTree(types);
 
   const sidebar: SidebarEntry[] = [];
-  const sortedTopLevels = [...root.children.keys()].sort((a, b) => a.localeCompare(b));
-  for (const topLevel of sortedTopLevels) {
+  const PRIORITY_GROUPS = ['obsidian', 'globals'];
+  const allTopLevels = [...root.children.keys()];
+  const prioritized = PRIORITY_GROUPS.filter((g) => allTopLevels.includes(g));
+  const rest = allTopLevels.filter((g) => !PRIORITY_GROUPS.includes(g)).sort((a, b) => a.localeCompare(b));
+
+  for (const topLevel of prioritized) {
+    const child = root.children.get(topLevel);
+    if (child) {
+      sidebar.push(sidebarTreeToEntries(child, topLevel.replace(/__/g, '/')));
+    }
+  }
+
+  if (prioritized.length > 0 && rest.length > 0) {
+    // Visual separator — empty group with a line label and custom CSS class
+    sidebar.push({ collapsed: false, items: [], label: '───' });
+  }
+
+  for (const topLevel of rest) {
     const child = root.children.get(topLevel);
     if (child) {
       sidebar.push(sidebarTreeToEntries(child, topLevel.replace(/__/g, '/')));
