@@ -375,6 +375,19 @@ function resolveInheritedMembers(types: Map<string, TypeInfo>): void {
 /** Event-like method names that should be split by string literal first param */
 const EVENT_METHODS = new Set(['off', 'on', 'trigger', 'tryTrigger']);
 
+/** Pick the highest-numbered constructorN__ pseudo-method (matches ExtractConstructor logic) */
+function getConstructorMethod(methods: MemberInfo[]): MemberInfo | undefined {
+  const constructors = methods.filter((m) => /^constructor\d*__$/.test(m.name));
+  if (constructors.length === 0) {
+    return undefined;
+  }
+  return constructors.sort((a, b) => {
+    const numA = parseInt(a.name.replace(/\D/g, '') || '0', 10);
+    const numB = parseInt(b.name.replace(/\D/g, '') || '0', 10);
+    return numB - numA;
+  })[0];
+}
+
 function checkIsOfficial(node: JSDocableNode, defaultIsOfficial: boolean): boolean {
   const docs = node.getJsDocs();
   for (const doc of docs) {
@@ -691,6 +704,21 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
     const linkedTypes = info.baseTypes.map((t) => typeLink(t, nsDir));
     lines.push(`**Extends:** ${linkedTypes.join(', ')}`);
     lines.push('');
+  }
+
+  // Constructor section — extract from constructorN__ pseudo-methods
+  const constructorMethod = getConstructorMethod(info.methods);
+  if (constructorMethod) {
+    lines.push('## Constructor');
+    lines.push('');
+    lines.push('```ts');
+    lines.push(`new ${name}${constructorMethod.signature.replace(/^constructor\d*__/, '')}`);
+    lines.push('```');
+    lines.push('');
+    if (constructorMethod.description) {
+      lines.push(constructorMethod.description);
+      lines.push('');
+    }
   }
 
   // Properties table
