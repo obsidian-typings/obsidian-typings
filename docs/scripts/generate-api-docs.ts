@@ -59,7 +59,7 @@ interface TypeInfo {
   baseTypes: string[];
   description: string;
   isOfficial: boolean;
-  kind: 'class' | 'interface';
+  kind: 'class' | 'function' | 'interface';
   methods: MemberInfo[];
   name: string;
   namespace: string;
@@ -188,7 +188,9 @@ async function main(): Promise<void> {
       continue;
     }
     await generateOverviewPage(name, info);
-    await generateMemberPages(name, info);
+    if (info.kind !== 'function') {
+      await generateMemberPages(name, info);
+    }
     pageCount++;
   }
 
@@ -419,8 +421,9 @@ function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOffic
     if (!name || types.has(name)) {
       continue;
     }
+    const paramDescriptions = getParamDescriptions(fn);
     const params = fn.getParameters().map((p) => ({
-      description: '',
+      description: paramDescriptions.get(p.getName()) ?? '',
       name: p.getName(),
       type: simplifyType(p.getType().getText())
     }));
@@ -432,7 +435,7 @@ function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOffic
       baseTypes: [],
       description: getDescription(fn),
       isOfficial: checkIsOfficial(fn, isOfficial),
-      kind: 'interface',
+      kind: 'function',
       methods: [{
         description: getDescription(fn),
         inheritedFrom: '',
@@ -706,6 +709,19 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
       lines.push('');
     }
 
+    const functions = nsTypes.filter((t) => t.kind === 'function').sort((a, b) => a.name.localeCompare(b.name));
+
+    if (functions.length > 0) {
+      lines.push('## Functions');
+      lines.push('');
+      lines.push('| Function | Description |');
+      lines.push('| :-- | :-- |');
+      for (const fn of functions) {
+        lines.push(`| [${fn.name}](./${kebabCase(fn.name)}/) | ${escapeMarkdown(resolveLinks(fn.description, nsDir))} |`);
+      }
+      lines.push('');
+    }
+
     await writeFile(filePath, lines.join('\n'), 'utf-8');
   }
 }
@@ -735,6 +751,13 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
   const typeLabel = info.isOfficial ? 'Official' : 'Unofficial';
   lines.push(`<p>${typeIcon} <strong>${typeLabel}</strong></p>`);
   lines.push('');
+
+  // Functions render like method detail pages — signature, params, returns
+  if (info.kind === 'function') {
+    renderFunctionPage(lines, info, nsDir);
+    await writeFile(filePath, lines.join('\n'), 'utf-8');
+    return;
+  }
 
   if (info.description) {
     lines.push(resolveLinks(info.description, nsDir));
@@ -837,6 +860,29 @@ function getNamespaceDir(namespace: string): string {
   return NAMESPACE_DIR_NAMES[namespace] ?? kebabCase(namespace);
 }
 
+/** Extract @param descriptions from JSDoc tags */
+function getParamDescriptions(node: JSDocableNode): Map<string, string> {
+  const result = new Map<string, string>();
+  const docs = node.getJsDocs();
+  for (const doc of docs) {
+    for (const tag of doc.getTags()) {
+      if (tag.getTagName() === 'param') {
+        const text = tag.getCommentText()?.trim() ?? '';
+        // Tag text format: "paramName - description" or "paramName description"
+        const tagText = tag.getText().replace('@param', '').trim();
+        const dashMatch = /^(?<paramName>\w+)\s*-\s*(?<desc>.*)/s.exec(tagText);
+        const spaceMatch = /^(?<paramName>\w+)\s+(?<desc>.*)/s.exec(tagText);
+        if (dashMatch?.groups) {
+          result.set(dashMatch.groups['paramName'] ?? '', dashMatch.groups['desc']?.trim() ?? '');
+        } else if (spaceMatch?.groups && text) {
+          result.set(spaceMatch.groups['paramName'] ?? '', text);
+        }
+      }
+    }
+  }
+  return result;
+}
+
 /** Strip `| undefined` only when it was implicitly added by ts-morph for optional properties */
 function getPropertyType(prop: PropertyDeclaration | PropertySignature): string {
   // Use the type node text (what's written in source) if available, otherwise fall back to resolved type
@@ -872,6 +918,39 @@ function overloadSlug(overloadKey: string): string {
     .trim()
     .replace(/\s+/g, '-')
     .toLowerCase();
+}
+
+function renderFunctionPage(lines: string[], info: TypeInfo, nsDir: string): void {
+  const fn = info.methods[0];
+  if (!fn) {
+    return;
+  }
+
+  lines.push('**Signature:**');
+  lines.push('');
+  lines.push('```ts');
+  lines.push(`${fn.signature}: ${fn.returnType}`);
+  lines.push('```');
+  lines.push('');
+
+  if (info.description) {
+    lines.push(resolveLinks(info.description, nsDir));
+    lines.push('');
+  }
+
+  if (fn.parameters.length > 0) {
+    lines.push('**Parameters:**');
+    lines.push('');
+    lines.push('| Parameter | Type | Description |');
+    lines.push('| :-- | :-- | :-- |');
+    for (const param of fn.parameters) {
+      lines.push(`| \`${param.name}\` | ${renderTypeWithLinks(param.type, nsDir)} | ${escapeMarkdown(resolveLinks(param.description, nsDir))} |`);
+    }
+    lines.push('');
+  }
+
+  lines.push(`**Returns:** ${renderTypeWithLinks(fn.returnType, nsDir)}`);
+  lines.push('');
 }
 
 /** Resolve {@link Name} and {@link Name | display text} tags in description text */
