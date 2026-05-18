@@ -1498,69 +1498,44 @@ interface SidebarLink {
   link: string;
 }
 
-function escapeYaml(text: string): string {
-  return text.replace(/["']/g, '');
+/** Recursive tree node for building the sidebar */
+interface SidebarTreeNode {
+  children: Map<string, SidebarTreeNode>;
+  types: TypeInfo[];
 }
 
-async function generateSidebarJson(types: Map<string, TypeInfo>): Promise<void> {
-  // Group types by their namespace path segments: "obsidian/augmentations" → ["obsidian", "augmentations"]
-  const tree = new Map<string, Map<string, TypeInfo[]>>();
+function buildSidebarTree(types: Map<string, TypeInfo>): SidebarTreeNode {
+  const root: SidebarTreeNode = { children: new Map(), types: [] };
   for (const [_name, info] of types) {
     if (info.properties.length === 0 && info.methods.length === 0) {
       continue;
     }
     const parts = info.namespace.split('/');
-    const topLevel = parts[0] ?? info.namespace;
-    const subPath = parts.slice(1).join('/') || '';
-
-    if (!tree.has(topLevel)) {
-      tree.set(topLevel, new Map());
+    let node = root;
+    for (const part of parts) {
+      if (!node.children.has(part)) {
+        node.children.set(part, { children: new Map(), types: [] });
+      }
+      node = node.children.get(part) ?? node;
     }
-    const subGroups = tree.get(topLevel);
-    if (!subGroups?.has(subPath)) {
-      subGroups?.set(subPath, []);
-    }
-    subGroups?.get(subPath)?.push(info);
+    node.types.push(info);
   }
+  return root;
+}
+
+function escapeYaml(text: string): string {
+  return text.replace(/["']/g, '');
+}
+
+async function generateSidebarJson(types: Map<string, TypeInfo>): Promise<void> {
+  const root = buildSidebarTree(types);
 
   const sidebar: SidebarEntry[] = [];
-  const sortedTopLevels = [...tree.keys()].sort((a, b) => a.localeCompare(b));
-
+  const sortedTopLevels = [...root.children.keys()].sort((a, b) => a.localeCompare(b));
   for (const topLevel of sortedTopLevels) {
-    const subGroups = tree.get(topLevel);
-    if (!subGroups) {
-      continue;
-    }
-
-    const topLevelLabel = topLevel.replace(/__/g, '/');
-
-    if (subGroups.size === 1 && subGroups.has('')) {
-      // Single flat group (no subdirectories)
-      const items = (subGroups.get('') ?? [])
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .map((t): SidebarLink => ({
-          label: t.name,
-          link: `/api/${t.namespace}/${t.name}/`
-        }));
-      sidebar.push({ collapsed: true, items, label: topLevelLabel });
-    } else {
-      // Nested group — each subdirectory becomes a child group
-      const childGroups: SidebarEntry[] = [];
-      const sortedSubs = [...subGroups.keys()].sort((a, b) => a.localeCompare(b));
-
-      for (const sub of sortedSubs) {
-        const subTypes = subGroups.get(sub) ?? [];
-        const items = subTypes
-          .sort((a, b) => a.name.localeCompare(b.name))
-          .map((t): SidebarLink => ({
-            label: t.name,
-            link: `/api/${t.namespace}/${t.name}/`
-          }));
-        const subLabel = sub || topLevelLabel;
-        childGroups.push({ collapsed: true, items, label: subLabel });
-      }
-
-      sidebar.push({ collapsed: true, items: childGroups, label: topLevelLabel });
+    const child = root.children.get(topLevel);
+    if (child) {
+      sidebar.push(sidebarTreeToEntries(child, topLevel.replace(/__/g, '/')));
     }
   }
 
@@ -1625,6 +1600,27 @@ function resolveTsUtilityUrl(name: string): string | undefined {
     return `https://www.typescriptlang.org/docs/handbook/utility-types.html#${hash}`;
   }
   return undefined;
+}
+
+function sidebarTreeToEntries(node: SidebarTreeNode, label: string): SidebarEntry {
+  const items: (SidebarEntry | SidebarLink)[] = [];
+
+  // Add type links at this level
+  const sortedTypes = [...node.types].sort((a, b) => a.name.localeCompare(b.name));
+  for (const t of sortedTypes) {
+    items.push({ label: t.name, link: `/api/${t.namespace}/${t.name}/` });
+  }
+
+  // Add child directory groups
+  const sortedChildren = [...node.children.keys()].sort((a, b) => a.localeCompare(b));
+  for (const childName of sortedChildren) {
+    const child = node.children.get(childName);
+    if (child) {
+      items.push(sidebarTreeToEntries(child, childName.replace(/__/g, '/')));
+    }
+  }
+
+  return { collapsed: true, items, label };
 }
 
 await main();
