@@ -39,11 +39,14 @@ interface LinkMatchGroups {
 
 interface MemberInfo {
   description: string;
+  examples: string[];
   inheritedFrom: string;
   isOfficial: boolean;
   name: string;
   overloadKey: string;
   parameters: ParameterInfo[];
+  remarks: string;
+  returnDescription: string;
   returnType: string;
   signature: string;
   type: string;
@@ -441,11 +444,14 @@ function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOffic
       kind: 'function',
       methods: [{
         description: getDescription(fn),
+        examples: getExamples(fn),
         inheritedFrom: '',
         isOfficial: checkIsOfficial(fn, isOfficial),
         name,
         overloadKey: name,
         parameters: params,
+        remarks: getRemarks(fn),
+        returnDescription: getReturnDescription(fn),
         returnType,
         signature,
         type: ''
@@ -491,11 +497,14 @@ function extractMethodInfo(method: MethodDeclaration, isOfficial: boolean): Memb
   const paramStr = params.map((p) => `${p.name}: ${p.type}`).join(', ');
   const info: MemberInfo = {
     description: getDescription(method),
+    examples: getExamples(method),
     inheritedFrom: '',
     isOfficial: checkIsOfficial(method, isOfficial),
     name,
     overloadKey: '',
     parameters: params,
+    remarks: getRemarks(method),
+    returnDescription: getReturnDescription(method),
     returnType: simplifyType(method.getReturnType().getText()),
     signature: `${name}(${paramStr})`,
     type: ''
@@ -519,11 +528,14 @@ function extractMethodSignatureInfo(method: MethodSignature, isOfficial: boolean
   const paramStr = params.map((p) => `${p.name}: ${p.type}`).join(', ');
   const info: MemberInfo = {
     description: getDescription(method),
+    examples: getExamples(method),
     inheritedFrom: '',
     isOfficial: checkIsOfficial(method, isOfficial),
     name,
     overloadKey: '',
     parameters: params,
+    remarks: getRemarks(method),
+    returnDescription: getReturnDescription(method),
     returnType: simplifyType(method.getReturnType().getText()),
     signature: `${name}(${paramStr})`,
     type: ''
@@ -538,11 +550,14 @@ function extractPropertyInfo(prop: PropertyDeclaration, isOfficial: boolean): Me
   const optionalSuffix = isOptional ? '?' : '';
   return {
     description: getDescription(prop),
+    examples: getExamples(prop),
     inheritedFrom: '',
     isOfficial: checkIsOfficial(prop, isOfficial),
     name: `${name}${optionalSuffix}`,
     overloadKey: '',
     parameters: [],
+    remarks: getRemarks(prop),
+    returnDescription: '',
     returnType: '',
     signature: `${name}${optionalSuffix}`,
     type: getPropertyType(prop)
@@ -555,11 +570,14 @@ function extractPropertySignatureInfo(prop: PropertySignature, isOfficial: boole
   const optionalSuffix = isOptional ? '?' : '';
   return {
     description: getDescription(prop),
+    examples: getExamples(prop),
     inheritedFrom: '',
     isOfficial: checkIsOfficial(prop, isOfficial),
     name: `${name}${optionalSuffix}`,
     overloadKey: '',
     parameters: [],
+    remarks: getRemarks(prop),
+    returnDescription: '',
     returnType: '',
     signature: `${name}${optionalSuffix}`,
     type: getPropertyType(prop)
@@ -590,16 +608,30 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     const label = prop.isOfficial ? 'Official' : 'Unofficial';
     lines.push(`<p>${icon} <strong>${label}</strong></p>`);
     lines.push('');
-    lines.push(`**Type:** ${renderTypeWithLinks(prop.type)}`);
-    lines.push('');
 
+    // Description before type (matching official docs order)
     if (prop.description) {
       lines.push(resolveLinks(prop.description));
       lines.push('');
     }
 
+    if (prop.remarks) {
+      lines.push(`> ${resolveLinks(prop.remarks)}`);
+      lines.push('');
+    }
+
+    lines.push(`**Type:** ${renderTypeWithLinks(prop.type)}`);
+    lines.push('');
+
     if (prop.inheritedFrom) {
       lines.push(`*Inherited from ${prop.inheritedFrom}*`);
+      lines.push('');
+    }
+
+    for (const example of prop.examples) {
+      lines.push('**Example:**');
+      lines.push('');
+      lines.push(example);
       lines.push('');
     }
 
@@ -622,50 +654,20 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     const filePath = join(OUTPUT_DIR, nsDir, typeDir, `${slug}.md`);
     await ensureDir(filePath);
 
-    const displayName = overloads.length === 1
-      ? `${name}.${overloads[0]?.name ?? overloadKey}()`
-      : `${name}.${overloadKey}`;
+    // Title: include overload discriminator and "method" suffix
+    const displayName = `${name}.${overloadKey} method`;
 
     const lines: string[] = [];
     lines.push('---');
     lines.push(`title: "${escapeYaml(displayName)}"`);
     lines.push('editUrl: false');
     lines.push('sidebar:');
-    lines.push(`  label: "${escapeYaml(displayName)}"`);
+    lines.push(`  label: "${escapeYaml(`${name}.${overloadKey}`)}"`);
     lines.push('---');
     lines.push('');
 
     for (const overload of overloads) {
-      const icon = overload.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
-      const label = overload.isOfficial ? 'Official' : 'Unofficial';
-      lines.push(`<p>${icon} <strong>${label}</strong></p>`);
-      lines.push('');
-      lines.push('**Signature:**');
-      lines.push('');
-      lines.push('```ts');
-      lines.push(`${overload.signature}: ${overload.returnType}`);
-      lines.push('```');
-      lines.push('');
-
-      if (overload.description) {
-        lines.push(resolveLinks(overload.description));
-        lines.push('');
-      }
-
-      if (overload.parameters.length > 0) {
-        lines.push('**Parameters:**');
-        lines.push('');
-        lines.push('| Parameter | Type | Description |');
-        lines.push('| :-- | :-- | :-- |');
-        for (const param of overload.parameters) {
-          lines.push(`| \`${param.name}\` | ${renderTypeWithLinks(param.type)} | ${escapeMarkdown(param.description)} |`);
-        }
-        lines.push('');
-      }
-
-      lines.push(`**Returns:** ${renderTypeWithLinks(overload.returnType)}`);
-      lines.push('');
-
+      renderMethodOverload(lines, overload);
       if (overloads.length > 1) {
         lines.push('---');
         lines.push('');
@@ -886,6 +888,22 @@ function getDescription(node: JSDocableNode): string {
   return docs[docs.length - 1]?.getDescription().trim() ?? '';
 }
 
+/** Extract @example blocks from JSDoc */
+function getExamples(node: JSDocableNode): string[] {
+  const examples: string[] = [];
+  for (const doc of node.getJsDocs()) {
+    for (const tag of doc.getTags()) {
+      if (tag.getTagName() === 'example') {
+        const text = tag.getCommentText()?.trim() ?? '';
+        if (text) {
+          examples.push(text);
+        }
+      }
+    }
+  }
+  return examples;
+}
+
 function getImportStatement(info: TypeInfo): string | undefined {
   if (info.namespace === 'global') {
     return undefined;
@@ -937,6 +955,30 @@ function getPropertyType(prop: PropertyDeclaration | PropertySignature): string 
   return simplifyType(prop.getType().getText());
 }
 
+/** Extract @remarks text from JSDoc */
+function getRemarks(node: JSDocableNode): string {
+  for (const doc of node.getJsDocs()) {
+    for (const tag of doc.getTags()) {
+      if (tag.getTagName() === 'remarks' || tag.getTagName() === 'remark') {
+        return tag.getCommentText()?.trim().replace(/\s*\*\s*$/g, '').trim() ?? '';
+      }
+    }
+  }
+  return '';
+}
+
+/** Extract @returns description from JSDoc */
+function getReturnDescription(node: JSDocableNode): string {
+  for (const doc of node.getJsDocs()) {
+    for (const tag of doc.getTags()) {
+      if (tag.getTagName() === 'returns') {
+        return tag.getCommentText()?.trim().replace(/^-\s*/, '').replace(/\s*\*\s*$/g, '').trim() ?? '';
+      }
+    }
+  }
+  return '';
+}
+
 function kebabCase(name: string): string {
   return name.replace(/[A-Z]/g, (c, i) => (i > 0 ? '-' : '') + c.toLowerCase());
 }
@@ -970,17 +1012,23 @@ function renderFunctionPage(lines: string[], info: TypeInfo): void {
     return;
   }
 
+  // Description before signature
+  if (info.description) {
+    lines.push(resolveLinks(info.description));
+    lines.push('');
+  }
+
+  if (fn.remarks) {
+    lines.push(`> ${resolveLinks(fn.remarks)}`);
+    lines.push('');
+  }
+
   lines.push('**Signature:**');
   lines.push('');
   lines.push('```ts');
   lines.push(`function ${fn.signature}: ${fn.returnType}`);
   lines.push('```');
   lines.push('');
-
-  if (info.description) {
-    lines.push(resolveLinks(info.description));
-    lines.push('');
-  }
 
   if (fn.parameters.length > 0) {
     lines.push('**Parameters:**');
@@ -993,8 +1041,69 @@ function renderFunctionPage(lines: string[], info: TypeInfo): void {
     lines.push('');
   }
 
-  lines.push(`**Returns:** ${renderTypeWithLinks(fn.returnType)}`);
+  const returnDesc = fn.returnDescription ? ` — ${resolveLinks(fn.returnDescription)}` : '';
+  lines.push(`**Returns:** ${renderTypeWithLinks(fn.returnType)}${returnDesc}`);
   lines.push('');
+
+  for (const example of fn.examples) {
+    lines.push('**Example:**');
+    lines.push('');
+    lines.push(example);
+    lines.push('');
+  }
+}
+
+function renderMethodOverload(lines: string[], overload: MemberInfo): void {
+  const icon = overload.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
+  const label = overload.isOfficial ? 'Official' : 'Unofficial';
+  lines.push(`<p>${icon} <strong>${label}</strong></p>`);
+  lines.push('');
+
+  // Description before signature (matching official docs order)
+  if (overload.description) {
+    lines.push(resolveLinks(overload.description));
+    lines.push('');
+  }
+
+  if (overload.remarks) {
+    lines.push(`> ${resolveLinks(overload.remarks)}`);
+    lines.push('');
+  }
+
+  lines.push('**Signature:**');
+  lines.push('');
+  lines.push('```ts');
+  lines.push(`${overload.signature}: ${overload.returnType}`);
+  lines.push('```');
+  lines.push('');
+
+  if (overload.parameters.length > 0) {
+    lines.push('**Parameters:**');
+    lines.push('');
+    lines.push('| Parameter | Type | Description |');
+    lines.push('| :-- | :-- | :-- |');
+    for (const param of overload.parameters) {
+      let paramDesc = '';
+      if (param.description) {
+        paramDesc = escapeMarkdown(param.description);
+      } else if (param.name.endsWith('?')) {
+        paramDesc = '*(Optional)*';
+      }
+      lines.push(`| \`${param.name}\` | ${renderTypeWithLinks(param.type)} | ${paramDesc} |`);
+    }
+    lines.push('');
+  }
+
+  const returnDesc = overload.returnDescription ? ` — ${resolveLinks(overload.returnDescription)}` : '';
+  lines.push(`**Returns:** ${renderTypeWithLinks(overload.returnType)}${returnDesc}`);
+  lines.push('');
+
+  for (const example of overload.examples) {
+    lines.push('**Example:**');
+    lines.push('');
+    lines.push(example);
+    lines.push('');
+  }
 }
 
 /** Resolve {@link Name} and {@link Name | display text} tags in description text */
