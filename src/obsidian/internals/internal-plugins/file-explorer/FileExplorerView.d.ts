@@ -299,7 +299,7 @@ export interface FileExplorerView extends View {
    *
    * @param file - The file or folder to reveal.
    */
-  revealInFolder(file: TFile | TFolder): void;
+  revealInFolder(file: TAbstractFile): void;
 
   /**
    * Set whether all folders are collapsed.

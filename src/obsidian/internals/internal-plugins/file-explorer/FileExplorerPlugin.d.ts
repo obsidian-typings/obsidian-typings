@@ -19,5 +19,5 @@ export interface FileExplorerPlugin extends InternalPlugin<FileExplorerPluginIns
    *
    * @param item - The file or folder to reveal.
    */
-  revealInFolder(item: TFile | TFolder): void;
+  revealInFolder(item: TAbstractFile): void;
 }
