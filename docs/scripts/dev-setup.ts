@@ -2,7 +2,8 @@
  * Sets up the docs development environment.
  *
  * Creates a git worktree on the latest public release branch,
- * installs dependencies, builds types, copies docs/ from main, and generates API docs.
+ * installs dependencies, copies docs/ from main, and generates API docs
+ * directly from source .d.ts files (no build step needed).
  *
  * Usage: npm run dev:setup [-- public|catalyst]
  * Then:  cd ../obsidian-typings-docs-dev/docs && npm run dev
@@ -53,15 +54,13 @@ async function main(): Promise<void> {
     await execFromRoot(`git worktree add --detach "${WORKTREE_DIR}" ${latestBranch}`);
   }
 
-  // Remove stale docs/ from worktree before build (avoids spellcheck conflicts)
-  const worktreeDocsDir = resolve(WORKTREE_DIR, 'docs');
-  await rm(worktreeDocsDir, { force: true, recursive: true });
-
-  // Install root dependencies and build types
+  // Install root dependencies (needed for node_modules/obsidian/obsidian.d.ts)
   console.warn('Installing root dependencies...');
   await execFromRoot('npm ci', { cwd: WORKTREE_DIR });
-  console.warn('Building types...');
-  await execFromRoot('npm run build', { cwd: WORKTREE_DIR });
+
+  // Remove stale docs/ from worktree before copying fresh docs
+  const worktreeDocsDir = resolve(WORKTREE_DIR, 'docs');
+  await rm(worktreeDocsDir, { force: true, recursive: true });
 
   // Copy docs/ from main into the worktree
   await cp(DOCS_DIR, worktreeDocsDir, { recursive: true });
