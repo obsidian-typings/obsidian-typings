@@ -14,6 +14,7 @@ const BASE = '/obsidian-typings';
 
 export const astroConfig = defineConfig({
   base: BASE,
+  trailingSlash: 'always',
   devToolbar: {
     enabled: false
   },
