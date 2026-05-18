@@ -590,11 +590,11 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     const label = prop.isOfficial ? 'Official' : 'Unofficial';
     lines.push(`<p>${icon} <strong>${label}</strong></p>`);
     lines.push('');
-    lines.push(`**Type:** ${renderTypeWithLinks(prop.type, nsDir)}`);
+    lines.push(`**Type:** ${renderTypeWithLinks(prop.type)}`);
     lines.push('');
 
     if (prop.description) {
-      lines.push(resolveLinks(prop.description, nsDir));
+      lines.push(resolveLinks(prop.description));
       lines.push('');
     }
 
@@ -648,7 +648,7 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
       lines.push('');
 
       if (overload.description) {
-        lines.push(resolveLinks(overload.description, nsDir));
+        lines.push(resolveLinks(overload.description));
         lines.push('');
       }
 
@@ -658,12 +658,12 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
         lines.push('| Parameter | Type | Description |');
         lines.push('| :-- | :-- | :-- |');
         for (const param of overload.parameters) {
-          lines.push(`| \`${param.name}\` | ${renderTypeWithLinks(param.type, nsDir)} | ${escapeMarkdown(param.description)} |`);
+          lines.push(`| \`${param.name}\` | ${renderTypeWithLinks(param.type)} | ${escapeMarkdown(param.description)} |`);
         }
         lines.push('');
       }
 
-      lines.push(`**Returns:** ${renderTypeWithLinks(overload.returnType, nsDir)}`);
+      lines.push(`**Returns:** ${renderTypeWithLinks(overload.returnType)}`);
       lines.push('');
 
       if (overloads.length > 1) {
@@ -712,7 +712,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
       lines.push('| Class | Description |');
       lines.push('| :-- | :-- |');
       for (const cls of classes) {
-        lines.push(`| [${cls.name}](./${kebabCase(cls.name)}/) | ${escapeMarkdown(resolveLinks(cls.description, nsDir))} |`);
+        lines.push(`| [${cls.name}](./${kebabCase(cls.name)}/) | ${escapeMarkdown(resolveLinks(cls.description))} |`);
       }
       lines.push('');
     }
@@ -723,7 +723,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
       lines.push('| Interface | Description |');
       lines.push('| :-- | :-- |');
       for (const iface of interfaces) {
-        lines.push(`| [${iface.name}](./${kebabCase(iface.name)}/) | ${escapeMarkdown(resolveLinks(iface.description, nsDir))} |`);
+        lines.push(`| [${iface.name}](./${kebabCase(iface.name)}/) | ${escapeMarkdown(resolveLinks(iface.description))} |`);
       }
       lines.push('');
     }
@@ -736,7 +736,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
       lines.push('| Function | Description |');
       lines.push('| :-- | :-- |');
       for (const fn of functions) {
-        lines.push(`| [${fn.name}](./${kebabCase(fn.name)}/) | ${escapeMarkdown(resolveLinks(fn.description, nsDir))} |`);
+        lines.push(`| [${fn.name}](./${kebabCase(fn.name)}/) | ${escapeMarkdown(resolveLinks(fn.description))} |`);
       }
       lines.push('');
     }
@@ -784,13 +784,13 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
 
   // Functions render like method detail pages — signature, params, returns
   if (info.kind === 'function') {
-    renderFunctionPage(lines, info, nsDir);
+    renderFunctionPage(lines, info);
     await writeFile(filePath, lines.join('\n'), 'utf-8');
     return;
   }
 
   if (info.description) {
-    lines.push(resolveLinks(info.description, nsDir));
+    lines.push(resolveLinks(info.description));
     lines.push('');
   }
 
@@ -803,7 +803,7 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
   lines.push('');
 
   if (info.baseTypes.length > 0) {
-    const linkedTypes = info.baseTypes.map((t) => typeLink(t, nsDir));
+    const linkedTypes = info.baseTypes.map((t) => typeLink(t));
     lines.push(`**Extends:** ${linkedTypes.join(', ')}`);
     lines.push('');
   }
@@ -818,7 +818,7 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
     lines.push('```');
     lines.push('');
     if (constructorMethod.description) {
-      lines.push(resolveLinks(constructorMethod.description, nsDir));
+      lines.push(resolveLinks(constructorMethod.description));
       lines.push('');
     }
   }
@@ -833,8 +833,8 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
     for (const prop of props) {
       const icon = prop.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
       const inherited = prop.inheritedFrom ? `<br/>*(Inherited from ${prop.inheritedFrom})*` : '';
-      const desc = escapeMarkdown(resolveLinks(prop.description, nsDir)) + inherited;
-      const type = renderTypeWithLinks(prop.type, nsDir);
+      const desc = escapeMarkdown(resolveLinks(prop.description)) + inherited;
+      const type = renderTypeWithLinks(prop.type);
       const propLink = `[${prop.name}](./${memberSlug(prop.name)}/)`;
       lines.push(`| ${icon} | ${propLink} | ${type} | ${desc} |`);
     }
@@ -850,12 +850,12 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
     lines.push('| :--: | :-- | :-- | :-- |');
     for (const method of methods) {
       const icon = method.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
-      const desc = escapeMarkdown(resolveLinks(method.description, nsDir));
+      const desc = escapeMarkdown(resolveLinks(method.description));
       const escapedSig = escapeMarkdown(method.signature);
       // Each overload gets its own page slug
       const slug = overloadSlug(method.overloadKey);
       const link = `[${escapedSig}](./${slug}/)`;
-      const returnType = renderTypeWithLinks(method.returnType, nsDir);
+      const returnType = renderTypeWithLinks(method.returnType);
       const inheritedHtml = method.inheritedFrom ? `<br/>*(Inherited from ${method.inheritedFrom})*` : '';
       lines.push(`| ${icon} | ${link} | ${returnType} | ${desc}${inheritedHtml} |`);
     }
@@ -964,7 +964,7 @@ function overloadSlug(overloadKey: string): string {
     .toLowerCase();
 }
 
-function renderFunctionPage(lines: string[], info: TypeInfo, nsDir: string): void {
+function renderFunctionPage(lines: string[], info: TypeInfo): void {
   const fn = info.methods[0];
   if (!fn) {
     return;
@@ -978,7 +978,7 @@ function renderFunctionPage(lines: string[], info: TypeInfo, nsDir: string): voi
   lines.push('');
 
   if (info.description) {
-    lines.push(resolveLinks(info.description, nsDir));
+    lines.push(resolveLinks(info.description));
     lines.push('');
   }
 
@@ -988,17 +988,17 @@ function renderFunctionPage(lines: string[], info: TypeInfo, nsDir: string): voi
     lines.push('| Parameter | Type | Description |');
     lines.push('| :-- | :-- | :-- |');
     for (const param of fn.parameters) {
-      lines.push(`| \`${param.name}\` | ${renderTypeWithLinks(param.type, nsDir)} | ${escapeMarkdown(resolveLinks(param.description, nsDir))} |`);
+      lines.push(`| \`${param.name}\` | ${renderTypeWithLinks(param.type)} | ${escapeMarkdown(resolveLinks(param.description))} |`);
     }
     lines.push('');
   }
 
-  lines.push(`**Returns:** ${renderTypeWithLinks(fn.returnType, nsDir)}`);
+  lines.push(`**Returns:** ${renderTypeWithLinks(fn.returnType)}`);
   lines.push('');
 }
 
 /** Resolve {@link Name} and {@link Name | display text} tags in description text */
-function resolveLinks(text: string, currentNsDir: string): string {
+function resolveLinks(text: string): string {
   return text.replace(/\{@link\s+(?<target>[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\}/g, (...args) => {
     const groups = args[args.length - 1] as LinkMatchGroups;
     const target = groups.target.trim();
@@ -1006,10 +1006,7 @@ function resolveLinks(text: string, currentNsDir: string): string {
     const info = allTypes.get(target);
     if (info) {
       const targetNsDir = getNamespaceDir(info.namespace);
-      if (targetNsDir === currentNsDir) {
-        return `[${display}](../${kebabCase(target)}/)`;
-      }
-      return `[${display}](../../${targetNsDir}/${kebabCase(target)}/)`;
+      return `[${display}](/api/${targetNsDir}/${kebabCase(target)}/)`;
     }
     return `\`${display}\``;
   });
@@ -1022,17 +1019,15 @@ function simplifyType(typeText: string): string {
 }
 
 /** Create a link to a type. Links are relative to the overview page (nsDir/typeSlug/index.md) */
-function typeLink(typeName: string, currentNsDir: string): string {
+/** Create an absolute link to a type page */
+function typeLink(typeName: string): string {
   const cleanName = typeName.replace(/<.*>$/, '').trim();
   const info = allTypes.get(cleanName);
   if (!info) {
     return `\`${typeName}\``;
   }
   const targetNsDir = getNamespaceDir(info.namespace);
-  if (targetNsDir === currentNsDir) {
-    return `[${typeName}](../${kebabCase(cleanName)}/)`;
-  }
-  return `[${typeName}](../../${targetNsDir}/${kebabCase(cleanName)}/)`;
+  return `[${typeName}](/api/${targetNsDir}/${kebabCase(cleanName)}/)`;
 }
 
 /** Single-letter and common generic type parameter names — not linkable */
@@ -1227,7 +1222,7 @@ async function generateSidebarJson(types: Map<string, TypeInfo>): Promise<void> 
 }
 
 /** Render a type string with clickable links for known types */
-function renderTypeWithLinks(typeText: string, currentNsDir: string): string {
+function renderTypeWithLinks(typeText: string): string {
   return escapeMarkdown(typeText).replace(/\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match) => {
     // Skip generic type parameters
     if (GENERIC_TYPE_PARAMS.has(match)) {
@@ -1238,10 +1233,7 @@ function renderTypeWithLinks(typeText: string, currentNsDir: string): string {
     const info = allTypes.get(match);
     if (info) {
       const targetNsDir = getNamespaceDir(info.namespace);
-      if (targetNsDir === currentNsDir) {
-        return `[${match}](../${kebabCase(match)}/)`;
-      }
-      return `[${match}](../../${targetNsDir}/${kebabCase(match)}/)`;
+      return `[${match}](/api/${targetNsDir}/${kebabCase(match)}/)`;
     }
 
     // TypeScript utility types
