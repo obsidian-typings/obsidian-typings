@@ -29,9 +29,6 @@ import {
 } from 'node:path';
 import { Project } from 'ts-morph';
 
-const UNOFFICIAL_ICON = '<span class="icon-unofficial" title="Unofficial API — reverse-engineered, may change without notice"></span>';
-const OFFICIAL_ICON = '<span class="icon-official" title="Official API — part of the public Obsidian API"></span>';
-
 interface LinkMatchGroups {
   display?: string;
   target: string;
@@ -559,6 +556,10 @@ async function ensureDir(filePath: string): Promise<void> {
   await mkdir(dirname(filePath), { recursive: true });
 }
 
+function escapeJsx(text: string): string {
+  return text.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, ' ');
+}
+
 function escapeMarkdown(text: string): string {
   return text.replace(/\|/g, '\\|').replace(/\n/g, ' ');
 }
@@ -682,11 +683,12 @@ function findTypeReferences(typeText: string, types: Map<string, TypeInfo>, resu
 async function generateMemberPages(name: string, info: TypeInfo): Promise<void> {
   const nsDir = getNamespaceDir(info.namespace);
   const typeDir = kebabCase(name);
+  const componentImport = 'import { MemberDetail, ApiStatus } from "../../../../components/api";';
 
   // Property pages
   const props = info.properties.filter((p) => !p.name.includes('__'));
   for (const prop of props) {
-    const filePath = join(OUTPUT_DIR, nsDir, typeDir, `${memberSlug(prop.name)}.md`);
+    const filePath = join(OUTPUT_DIR, nsDir, typeDir, `${memberSlug(prop.name)}.mdx`);
     await ensureDir(filePath);
 
     const lines: string[] = [];
@@ -698,29 +700,21 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     lines.push(`  label: "${escapeYaml(propTitle)}"`);
     lines.push('---');
     lines.push('');
+    lines.push(componentImport);
+    lines.push('');
 
     // Breadcrumb
     lines.push(`[${name}](${BASE_PATH}/api/${nsDir}/${typeDir}/) › ${prop.name}`);
     lines.push('');
 
-    const icon = prop.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
-    const label = prop.isOfficial ? 'Official' : 'Unofficial';
-    const sinceText = prop.since ? ` · v${prop.since}` : '';
-    lines.push(`<p>${icon} <strong>${label}</strong>${sinceText}</p>`);
-    lines.push('');
+    const statusEnum = prop.isOfficial ? 'ApiStatus.Official' : 'ApiStatus.Unofficial';
+    const typeAttr = ` type="${escapeJsx(renderTypeWithLinks(prop.type))}"`;
+    const descAttr = prop.description ? ` description="${escapeJsx(resolveLinks(prop.description))}"` : '';
+    const remarksAttr = prop.remarks ? ` remarks="${escapeJsx(resolveLinks(prop.remarks))}"` : '';
+    const sinceAttr = prop.since ? ` since="${escapeJsx(prop.since)}"` : '';
+    const examplesAttr = prop.examples.length > 0 ? ` examples={${JSON.stringify(prop.examples)}}` : '';
 
-    // Description before type (matching official docs order)
-    if (prop.description) {
-      lines.push(resolveLinks(prop.description));
-      lines.push('');
-    }
-
-    if (prop.remarks) {
-      lines.push(`> ${resolveLinks(prop.remarks)}`);
-      lines.push('');
-    }
-
-    lines.push(`**Type:** ${renderTypeWithLinks(prop.type)}`);
+    lines.push(`<MemberDetail status={${statusEnum}}${typeAttr}${descAttr}${remarksAttr}${sinceAttr}${examplesAttr} />`);
     lines.push('');
 
     if (prop.inheritedFrom) {
@@ -728,17 +722,10 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
       lines.push('');
     }
 
-    for (const example of prop.examples) {
-      lines.push('**Example:**');
-      lines.push('');
-      lines.push(example);
-      lines.push('');
-    }
-
     await writeFile(filePath, lines.join('\n'), 'utf-8');
   }
 
-  // Method pages — each overload key gets its own page (fix #9)
+  // Method pages — each overload key gets its own page
   const methods = info.methods.filter((m) => !m.name.includes('__'));
   const overloadGroups = new Map<string, MemberInfo[]>();
   for (const method of methods) {
@@ -751,10 +738,9 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
 
   for (const [overloadKey, overloads] of overloadGroups) {
     const slug = overloadSlug(overloadKey);
-    const filePath = join(OUTPUT_DIR, nsDir, typeDir, `${slug}.md`);
+    const filePath = join(OUTPUT_DIR, nsDir, typeDir, `${slug}.mdx`);
     await ensureDir(filePath);
 
-    // Title: include overload discriminator and "method" suffix
     const displayName = `${name}.${overloadKey} method`;
 
     const lines: string[] = [];
@@ -765,13 +751,15 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     lines.push(`  label: "${escapeYaml(`${name}.${overloadKey}`)}"`);
     lines.push('---');
     lines.push('');
+    lines.push(componentImport);
+    lines.push('');
 
     // Breadcrumb
     lines.push(`[${name}](${BASE_PATH}/api/${nsDir}/${typeDir}/) › ${overloadKey}`);
     lines.push('');
 
     for (const overload of overloads) {
-      renderMethodOverload(lines, overload);
+      renderMethodOverloadMdx(lines, overload);
       if (overloads.length > 1) {
         lines.push('---');
         lines.push('');
@@ -797,7 +785,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
   for (const [namespace, nsTypes] of namespaces) {
     const nsDir = getNamespaceDir(namespace);
     const displayName = NAMESPACE_DISPLAY_NAMES[namespace] ?? namespace;
-    const filePath = join(OUTPUT_DIR, nsDir, 'index.md');
+    const filePath = join(OUTPUT_DIR, nsDir, 'index.mdx');
     await ensureDir(filePath);
 
     const lines: string[] = [];
@@ -854,16 +842,38 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
 async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks: string[]): Promise<void> {
   const nsDir = getNamespaceDir(info.namespace);
   const typeSlug = kebabCase(name);
-  const filePath = join(OUTPUT_DIR, nsDir, typeSlug, 'index.md');
+  const filePath = join(OUTPUT_DIR, nsDir, typeSlug, 'index.mdx');
   await ensureDir(filePath);
 
   const lines: string[] = [];
-  renderOverviewFrontmatter(lines, name, info);
+
+  // Frontmatter
+  const displayName = getDisplayName(name, info);
+  const badgeText = info.isOfficial ? 'Official' : 'Unofficial';
+  const badgeVariant = info.isOfficial ? 'success' : 'caution';
+  lines.push('---');
+  lines.push(`title: "${displayName}"`);
+  lines.push('editUrl: false');
+  lines.push('sidebar:');
+  lines.push(`  label: "${displayName}"`);
+  lines.push('  badge:');
+  lines.push(`    text: ${badgeText}`);
+  lines.push(`    variant: ${badgeVariant}`);
+  lines.push('---');
+  lines.push('');
+
+  // Component imports
+  lines.push(
+    'import { TypeBadge, TypeSignature, ImportStatement, ConstructorBlock, PropertyTable, MethodTable, ApiStatus } from "../../../../components/api";'
+  );
+  lines.push('');
+
+  // Status badge
+  lines.push(`<TypeBadge status={${renderApiStatus(info.isOfficial)}} />`);
+  lines.push('');
 
   // Description
   if (info.description) {
-    lines.push('**Description:**');
-    lines.push('');
     lines.push(resolveLinks(info.description));
     lines.push('');
   }
@@ -871,11 +881,7 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   // Import statement
   const importStatement = getImportStatement(info);
   if (importStatement) {
-    lines.push('**Import:**');
-    lines.push('');
-    lines.push('```ts');
-    lines.push(importStatement);
-    lines.push('```');
+    lines.push(`<ImportStatement text="${escapeJsx(importStatement)}" />`);
     lines.push('');
   }
 
@@ -887,13 +893,9 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   }
 
   // Signature
-  const typeParamsStr = info.typeParameters.length > 0 ? `<${info.typeParameters.join(', ')}>` : '';
-  const extendsClause = info.baseTypes.length > 0 ? ` extends ${info.baseTypes.join(', ')}` : '';
-  lines.push('**Signature:**');
-  lines.push('');
-  lines.push('```ts');
-  lines.push(`export ${info.kind} ${name}${typeParamsStr}${extendsClause}`);
-  lines.push('```');
+  const typeParamsAttr = info.typeParameters.length > 0 ? ` typeParams={${JSON.stringify(info.typeParameters)}}` : '';
+  const extendsAttr = info.baseTypes.length > 0 ? ` extends={${JSON.stringify(info.baseTypes)}}` : '';
+  lines.push(`<TypeSignature kind="${info.kind}" name="${name}"${typeParamsAttr}${extendsAttr} />`);
   lines.push('');
 
   if (info.baseTypes.length > 0) {
@@ -902,59 +904,9 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
     lines.push('');
   }
 
-  // Constructor section — extract from constructorN__ pseudo-methods
-  const constructorMethod = getConstructorMethod(info.methods);
-  if (constructorMethod) {
-    lines.push('## Constructor');
-    lines.push('');
-    lines.push('```ts');
-    lines.push(`new ${name}${constructorMethod.signature.replace(/^constructor\d*__/, '')}`);
-    lines.push('```');
-    lines.push('');
-    if (constructorMethod.description) {
-      lines.push(resolveLinks(constructorMethod.description));
-      lines.push('');
-    }
-  }
-
-  // Properties table
-  const props = info.properties.filter((p) => !p.name.includes('__'));
-  if (props.length > 0) {
-    lines.push('## Properties');
-    lines.push('');
-    lines.push('| | Property | Type | Description |');
-    lines.push('| :--: | :-- | :-- | :-- |');
-    for (const prop of props) {
-      const icon = prop.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
-      const inherited = prop.inheritedFrom ? `<br/>*(Inherited from ${prop.inheritedFrom})*` : '';
-      const desc = escapeMarkdown(resolveLinks(prop.description)) + inherited;
-      const type = renderTypeWithLinks(prop.type);
-      const propLink = `[${prop.name}](./${memberSlug(prop.name)}/)`;
-      lines.push(`| ${icon} | ${propLink} | ${type} | ${desc} |`);
-    }
-    lines.push('');
-  }
-
-  // Methods table — each overload gets its own row and link
-  const methods = info.methods.filter((m) => !m.name.includes('__'));
-  if (methods.length > 0) {
-    lines.push('## Methods');
-    lines.push('');
-    lines.push('| | Method | Returns | Description |');
-    lines.push('| :--: | :-- | :-- | :-- |');
-    for (const method of methods) {
-      const icon = method.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
-      const desc = escapeMarkdown(resolveLinks(method.description));
-      const escapedSig = escapeMarkdown(method.signature);
-      // Each overload gets its own page slug
-      const slug = overloadSlug(method.overloadKey);
-      const link = `[${escapedSig}](./${slug}/)`;
-      const returnType = renderTypeWithLinks(method.returnType);
-      const inheritedHtml = method.inheritedFrom ? `<br/>*(Inherited from ${method.inheritedFrom})*` : '';
-      lines.push(`| ${icon} | ${link} | ${returnType} | ${desc}${inheritedHtml} |`);
-    }
-    lines.push('');
-  }
+  renderConstructorMdx(lines, name, info);
+  renderPropertyTableMdx(lines, info);
+  renderMethodTableMdx(lines, info);
 
   renderBacklinks(lines, typeBacklinks);
 
@@ -1120,6 +1072,10 @@ function overloadSlug(overloadKey: string): string {
     .toLowerCase();
 }
 
+function renderApiStatus(isOfficial: boolean): string {
+  return isOfficial ? 'ApiStatus.Official' : 'ApiStatus.Unofficial';
+}
+
 function renderBacklinks(lines: string[], typeBacklinks: string[]): void {
   if (typeBacklinks.length === 0) {
     return;
@@ -1136,6 +1092,17 @@ function renderBacklinks(lines: string[], typeBacklinks: string[]): void {
       lines.push(`- [${bl}](${BASE_PATH}/api/${blNsDir}/${kebabCase(bl)}/)`);
     }
   }
+  lines.push('');
+}
+
+function renderConstructorMdx(lines: string[], name: string, info: TypeInfo): void {
+  const constructorMethod = getConstructorMethod(info.methods);
+  if (!constructorMethod) {
+    return;
+  }
+  const ctorSig = `new ${name}${constructorMethod.signature.replace(/^constructor\d*__/, '')}`;
+  const ctorDesc = constructorMethod.description ? ` description="${escapeJsx(resolveLinks(constructorMethod.description))}"` : '';
+  lines.push(`<ConstructorBlock signature="${escapeJsx(ctorSig)}"${ctorDesc} />`);
   lines.push('');
 }
 
@@ -1186,78 +1153,70 @@ function renderFunctionPage(lines: string[], info: TypeInfo): void {
   }
 }
 
-function renderMethodOverload(lines: string[], overload: MemberInfo): void {
-  const icon = overload.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
-  const label = overload.isOfficial ? 'Official' : 'Unofficial';
-  const sinceText = overload.since ? ` · v${overload.since}` : '';
-  lines.push(`<p>${icon} <strong>${label}</strong>${sinceText}</p>`);
+function renderMethodOverloadMdx(lines: string[], overload: MemberInfo): void {
+  const statusEnum = overload.isOfficial ? 'ApiStatus.Official' : 'ApiStatus.Unofficial';
+  const sig = `${overload.signature}: ${overload.returnType}`;
+  const descAttr = overload.description ? ` description="${escapeJsx(resolveLinks(overload.description))}"` : '';
+  const remarksAttr = overload.remarks ? ` remarks="${escapeJsx(resolveLinks(overload.remarks))}"` : '';
+  const sinceAttr = overload.since ? ` since="${escapeJsx(overload.since)}"` : '';
+  const returnTypeAttr = ` returnType="${escapeJsx(renderTypeWithLinks(overload.returnType))}"`;
+  const returnDescAttr = overload.returnDescription ? ` returnDescription="${escapeJsx(resolveLinks(overload.returnDescription))}"` : '';
+  const examplesAttr = overload.examples.length > 0 ? ` examples={${JSON.stringify(overload.examples)}}` : '';
+
+  const params = overload.parameters.map((p) => ({
+    description: p.description || (p.name.endsWith('?') ? '*(Optional)*' : ''),
+    name: p.name,
+    type: renderTypeWithLinks(p.type)
+  }));
+  const paramsAttr = params.length > 0 ? ` parameters={${JSON.stringify(params)}}` : '';
+
+  lines.push(
+    `<MemberDetail status={${statusEnum}} signature="${
+      escapeJsx(sig)
+    }"${descAttr}${remarksAttr}${sinceAttr}${returnTypeAttr}${returnDescAttr}${paramsAttr}${examplesAttr} />`
+  );
   lines.push('');
-
-  // Description before signature (matching official docs order)
-  if (overload.description) {
-    lines.push(resolveLinks(overload.description));
-    lines.push('');
-  }
-
-  if (overload.remarks) {
-    lines.push(`> ${resolveLinks(overload.remarks)}`);
-    lines.push('');
-  }
-
-  lines.push('**Signature:**');
-  lines.push('');
-  lines.push('```ts');
-  lines.push(`${overload.signature}: ${overload.returnType}`);
-  lines.push('```');
-  lines.push('');
-
-  if (overload.parameters.length > 0) {
-    lines.push('**Parameters:**');
-    lines.push('');
-    lines.push('| Parameter | Type | Description |');
-    lines.push('| :-- | :-- | :-- |');
-    for (const param of overload.parameters) {
-      let paramDesc = '';
-      if (param.description) {
-        paramDesc = escapeMarkdown(param.description);
-      } else if (param.name.endsWith('?')) {
-        paramDesc = '*(Optional)*';
-      }
-      lines.push(`| \`${param.name}\` | ${renderTypeWithLinks(param.type)} | ${paramDesc} |`);
-    }
-    lines.push('');
-  }
-
-  const returnDesc = overload.returnDescription ? ` — ${resolveLinks(overload.returnDescription)}` : '';
-  lines.push(`**Returns:** ${renderTypeWithLinks(overload.returnType)}${returnDesc}`);
-  lines.push('');
-
-  for (const example of overload.examples) {
-    lines.push('**Example:**');
-    lines.push('');
-    lines.push(example);
-    lines.push('');
-  }
 }
 
-function renderOverviewFrontmatter(lines: string[], name: string, info: TypeInfo): void {
-  const badgeText = info.isOfficial ? 'Official' : 'Unofficial';
-  const badgeVariant = info.isOfficial ? 'success' : 'caution';
-  const displayName = getDisplayName(name, info);
-  lines.push('---');
-  lines.push(`title: "${displayName}"`);
-  lines.push('editUrl: false');
-  lines.push('sidebar:');
-  lines.push(`  label: "${displayName}"`);
-  lines.push('  badge:');
-  lines.push(`    text: ${badgeText}`);
-  lines.push(`    variant: ${badgeVariant}`);
-  lines.push('---');
+function renderMethodTableMdx(lines: string[], info: TypeInfo): void {
+  const methods = info.methods.filter((m) => !m.name.includes('__'));
+  if (methods.length === 0) {
+    return;
+  }
+  lines.push('<MethodTable rows={[');
+  for (const method of methods) {
+    const status = renderApiStatus(method.isOfficial);
+    const desc = escapeJsx(resolveLinks(method.description));
+    const sig = escapeJsx(method.signature);
+    const slug = overloadSlug(method.overloadKey);
+    const returnType = renderTypeWithLinks(method.returnType);
+    const inheritedAttr = method.inheritedFrom ? `, inheritedFrom: "${escapeJsx(method.inheritedFrom)}"` : '';
+    lines.push(
+      `  { status: ${status}, signature: "${sig}", href: "./${slug}/", returns: "${escapeJsx(returnType)}", description: "${desc}"${inheritedAttr} },`
+    );
+  }
+  lines.push(']} />');
   lines.push('');
+}
 
-  const typeIcon = info.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
-  const typeLabel = info.isOfficial ? 'Official' : 'Unofficial';
-  lines.push(`<p>${typeIcon} <strong>${typeLabel}</strong></p>`);
+function renderPropertyTableMdx(lines: string[], info: TypeInfo): void {
+  const props = info.properties.filter((p) => !p.name.includes('__'));
+  if (props.length === 0) {
+    return;
+  }
+  lines.push('<PropertyTable rows={[');
+  for (const prop of props) {
+    const status = renderApiStatus(prop.isOfficial);
+    const desc = escapeJsx(resolveLinks(prop.description));
+    const type = renderTypeWithLinks(prop.type);
+    const inheritedAttr = prop.inheritedFrom ? `, inheritedFrom: "${escapeJsx(prop.inheritedFrom)}"` : '';
+    lines.push(
+      `  { status: ${status}, name: "${escapeJsx(prop.name)}", href: "./${memberSlug(prop.name)}/", type: "${
+        escapeJsx(type)
+      }", description: "${desc}"${inheritedAttr} },`
+    );
+  }
+  lines.push(']} />');
   lines.push('');
 }
 
