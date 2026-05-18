@@ -32,6 +32,11 @@ import { Project } from 'ts-morph';
 const UNOFFICIAL_ICON = '<span class="icon-unofficial" title="Unofficial API — reverse-engineered, may change without notice"></span>';
 const OFFICIAL_ICON = '<span class="icon-official" title="Official API — part of the public Obsidian API"></span>';
 
+interface LinkMatchGroups {
+  display?: string;
+  target: string;
+}
+
 interface MemberInfo {
   description: string;
   inheritedFrom: string;
@@ -375,19 +380,6 @@ function resolveInheritedMembers(types: Map<string, TypeInfo>): void {
 /** Event-like method names that should be split by string literal first param */
 const EVENT_METHODS = new Set(['off', 'on', 'trigger', 'tryTrigger']);
 
-/** Pick the highest-numbered constructorN__ pseudo-method (matches ExtractConstructor logic) */
-function getConstructorMethod(methods: MemberInfo[]): MemberInfo | undefined {
-  const constructors = methods.filter((m) => /^constructor\d*__$/.test(m.name));
-  if (constructors.length === 0) {
-    return undefined;
-  }
-  return constructors.sort((a, b) => {
-    const numA = parseInt(a.name.replace(/\D/g, '') || '0', 10);
-    const numB = parseInt(b.name.replace(/\D/g, '') || '0', 10);
-    return numB - numA;
-  })[0];
-}
-
 function checkIsOfficial(node: JSDocableNode, defaultIsOfficial: boolean): boolean {
   const docs = node.getJsDocs();
   for (const doc of docs) {
@@ -526,7 +518,7 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     lines.push('');
 
     if (prop.description) {
-      lines.push(prop.description);
+      lines.push(resolveLinks(prop.description, nsDir));
       lines.push('');
     }
 
@@ -577,7 +569,7 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
       lines.push('');
 
       if (overload.description) {
-        lines.push(overload.description);
+        lines.push(resolveLinks(overload.description, nsDir));
         lines.push('');
       }
 
@@ -641,7 +633,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
       lines.push('| Class | Description |');
       lines.push('| :-- | :-- |');
       for (const cls of classes) {
-        lines.push(`| [${cls.name}](./${kebabCase(cls.name)}/) | ${escapeMarkdown(cls.description)} |`);
+        lines.push(`| [${cls.name}](./${kebabCase(cls.name)}/) | ${escapeMarkdown(resolveLinks(cls.description, nsDir))} |`);
       }
       lines.push('');
     }
@@ -652,7 +644,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
       lines.push('| Interface | Description |');
       lines.push('| :-- | :-- |');
       for (const iface of interfaces) {
-        lines.push(`| [${iface.name}](./${kebabCase(iface.name)}/) | ${escapeMarkdown(iface.description)} |`);
+        lines.push(`| [${iface.name}](./${kebabCase(iface.name)}/) | ${escapeMarkdown(resolveLinks(iface.description, nsDir))} |`);
       }
       lines.push('');
     }
@@ -688,7 +680,7 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
   lines.push('');
 
   if (info.description) {
-    lines.push(info.description);
+    lines.push(resolveLinks(info.description, nsDir));
     lines.push('');
   }
 
@@ -716,7 +708,7 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
     lines.push('```');
     lines.push('');
     if (constructorMethod.description) {
-      lines.push(constructorMethod.description);
+      lines.push(resolveLinks(constructorMethod.description, nsDir));
       lines.push('');
     }
   }
@@ -731,7 +723,7 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
     for (const prop of props) {
       const icon = prop.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
       const inherited = prop.inheritedFrom ? `<br/>*(Inherited from ${prop.inheritedFrom})*` : '';
-      const desc = escapeMarkdown(prop.description) + inherited;
+      const desc = escapeMarkdown(resolveLinks(prop.description, nsDir)) + inherited;
       const type = renderTypeWithLinks(prop.type, nsDir);
       const propLink = `[${prop.name}](./${memberSlug(prop.name)}/)`;
       lines.push(`| ${icon} | ${propLink} | ${type} | ${desc} |`);
@@ -748,7 +740,7 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
     lines.push('| :--: | :-- | :-- | :-- |');
     for (const method of methods) {
       const icon = method.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
-      const desc = escapeMarkdown(method.description);
+      const desc = escapeMarkdown(resolveLinks(method.description, nsDir));
       const escapedSig = escapeMarkdown(method.signature);
       // Each overload gets its own page slug
       const slug = overloadSlug(method.overloadKey);
@@ -761,6 +753,19 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
   }
 
   await writeFile(filePath, lines.join('\n'), 'utf-8');
+}
+
+/** Pick the highest-numbered constructorN__ pseudo-method (matches ExtractConstructor logic) */
+function getConstructorMethod(methods: MemberInfo[]): MemberInfo | undefined {
+  const constructors = methods.filter((m) => /^constructor\d*__$/.test(m.name));
+  if (constructors.length === 0) {
+    return undefined;
+  }
+  return constructors.sort((a, b) => {
+    const numA = parseInt(a.name.replace(/\D/g, '') || '0', 10);
+    const numB = parseInt(b.name.replace(/\D/g, '') || '0', 10);
+    return numB - numA;
+  })[0];
 }
 
 function getDescription(node: JSDocableNode): string {
@@ -810,6 +815,24 @@ function overloadSlug(overloadKey: string): string {
     .trim()
     .replace(/\s+/g, '-')
     .toLowerCase();
+}
+
+/** Resolve {@link Name} and {@link Name | display text} tags in description text */
+function resolveLinks(text: string, currentNsDir: string): string {
+  return text.replace(/\{@link\s+(?<target>[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\}/g, (...args) => {
+    const groups = args[args.length - 1] as LinkMatchGroups;
+    const target = groups.target.trim();
+    const display = groups.display?.trim() ?? target;
+    const info = allTypes.get(target);
+    if (info) {
+      const targetNsDir = getNamespaceDir(info.namespace);
+      if (targetNsDir === currentNsDir) {
+        return `[${display}](../${kebabCase(target)}/)`;
+      }
+      return `[${display}](../../${targetNsDir}/${kebabCase(target)}/)`;
+    }
+    return `\`${display}\``;
+  });
 }
 
 function simplifyType(typeText: string): string {
