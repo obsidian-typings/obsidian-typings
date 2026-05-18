@@ -1487,44 +1487,87 @@ const TS_GLOBAL_TYPES: Record<string, string> = {
 };
 // Cspell:enable
 
+interface SidebarEntry {
+  collapsed: boolean;
+  items: (SidebarEntry | SidebarLink)[];
+  label: string;
+}
+
+interface SidebarLink {
+  label: string;
+  link: string;
+}
+
 function escapeYaml(text: string): string {
   return text.replace(/["']/g, '');
 }
 
 async function generateSidebarJson(types: Map<string, TypeInfo>): Promise<void> {
-  const namespaces = new Map<string, TypeInfo[]>();
+  // Group types by their namespace path segments: "obsidian/augmentations" → ["obsidian", "augmentations"]
+  const tree = new Map<string, Map<string, TypeInfo[]>>();
   for (const [_name, info] of types) {
     if (info.properties.length === 0 && info.methods.length === 0) {
       continue;
     }
-    if (!namespaces.has(info.namespace)) {
-      namespaces.set(info.namespace, []);
+    const parts = info.namespace.split('/');
+    const topLevel = parts[0] ?? info.namespace;
+    const subPath = parts.slice(1).join('/') || '';
+
+    if (!tree.has(topLevel)) {
+      tree.set(topLevel, new Map());
     }
-    namespaces.get(info.namespace)?.push(info);
+    const subGroups = tree.get(topLevel);
+    if (!subGroups?.has(subPath)) {
+      subGroups?.set(subPath, []);
+    }
+    subGroups?.get(subPath)?.push(info);
   }
 
-  const sidebar = [];
-  for (const [namespace, nsTypes] of namespaces) {
-    const nsDir = getNamespaceDir(namespace);
-    const displayName = namespace;
-    const items = nsTypes
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .map((t) => ({
-        label: t.name,
-        link: `/api/${nsDir}/${t.name}/`
-      }));
+  const sidebar: SidebarEntry[] = [];
+  const sortedTopLevels = [...tree.keys()].sort((a, b) => a.localeCompare(b));
 
-    sidebar.push({
-      collapsed: true,
-      items,
-      label: displayName
-    });
+  for (const topLevel of sortedTopLevels) {
+    const subGroups = tree.get(topLevel);
+    if (!subGroups) {
+      continue;
+    }
+
+    const topLevelLabel = topLevel.replace(/__/g, '/');
+
+    if (subGroups.size === 1 && subGroups.has('')) {
+      // Single flat group (no subdirectories)
+      const items = (subGroups.get('') ?? [])
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((t): SidebarLink => ({
+          label: t.name,
+          link: `/api/${t.namespace}/${t.name}/`
+        }));
+      sidebar.push({ collapsed: true, items, label: topLevelLabel });
+    } else {
+      // Nested group — each subdirectory becomes a child group
+      const childGroups: SidebarEntry[] = [];
+      const sortedSubs = [...subGroups.keys()].sort((a, b) => a.localeCompare(b));
+
+      for (const sub of sortedSubs) {
+        const subTypes = subGroups.get(sub) ?? [];
+        const items = subTypes
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((t): SidebarLink => ({
+            label: t.name,
+            link: `/api/${t.namespace}/${t.name}/`
+          }));
+        const subLabel = sub || topLevelLabel;
+        childGroups.push({ collapsed: true, items, label: subLabel });
+      }
+
+      sidebar.push({ collapsed: true, items: childGroups, label: topLevelLabel });
+    }
   }
 
   const sidebarPath = join(process.cwd(), 'src/generated-sidebar.json');
   const JSON_INDENT = 2;
   await writeFile(sidebarPath, JSON.stringify(sidebar, null, JSON_INDENT), 'utf-8');
-  console.warn(`Generated sidebar with ${String(sidebar.length)} namespaces`);
+  console.warn(`Generated sidebar with ${String(sidebar.length)} top-level groups`);
 }
 
 /** Render a type string with clickable links for known types */

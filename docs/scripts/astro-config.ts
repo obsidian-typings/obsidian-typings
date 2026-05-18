@@ -12,11 +12,11 @@ import { remarkRelativeLinks } from './helpers/remark-plugins/remark-relative-li
 
 interface SidebarGroup {
   collapsed: boolean;
-  items: SidebarItem[];
+  items: (SidebarGroup | SidebarLink)[];
   label: string;
 }
 
-interface SidebarItem {
+interface SidebarLink {
   label: string;
   link: string;
 }
