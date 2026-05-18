@@ -95,6 +95,7 @@ const NAMESPACE_DIR_NAMES: Record<string, string> = {
 };
 
 const CHANNEL = process.env['CURRENT_CHANNEL'] === 'catalyst' ? 'catalyst' : 'public';
+const BASE_PATH = process.env['BASE_PATH'] ?? '/obsidian-typings';
 const TYPINGS_PACKAGE = `@obsidian-typings/obsidian-${CHANNEL}-latest`;
 
 const OUTPUT_DIR = join(process.cwd(), 'src/content/docs/api');
@@ -666,7 +667,7 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     lines.push('');
 
     // Breadcrumb
-    lines.push(`[${name}](/api/${nsDir}/${typeDir}/) › ${prop.name}`);
+    lines.push(`[${name}](${BASE_PATH}/api/${nsDir}/${typeDir}/) › ${prop.name}`);
     lines.push('');
 
     const icon = prop.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
@@ -733,7 +734,7 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     lines.push('');
 
     // Breadcrumb
-    lines.push(`[${name}](/api/${nsDir}/${typeDir}/) › ${overloadKey}`);
+    lines.push(`[${name}](${BASE_PATH}/api/${nsDir}/${typeDir}/) › ${overloadKey}`);
     lines.push('');
 
     for (const overload of overloads) {
@@ -1103,7 +1104,7 @@ function renderBacklinks(lines: string[], typeBacklinks: string[]): void {
     const blInfo = allTypes.get(bl);
     if (blInfo) {
       const blNsDir = getNamespaceDir(blInfo.namespace);
-      lines.push(`- [${bl}](/api/${blNsDir}/${kebabCase(bl)}/)`);
+      lines.push(`- [${bl}](${BASE_PATH}/api/${blNsDir}/${kebabCase(bl)}/)`);
     }
   }
   lines.push('');
@@ -1216,10 +1217,24 @@ function resolveLinks(text: string): string {
     const groups = args[args.length - 1] as LinkMatchGroups;
     const target = groups.target.trim();
     const display = groups.display?.trim() ?? target;
+
+    // Handle Type.member references (e.g., Vault.on)
+    const dotMatch = /^(?<typeName>[A-Za-z]\w*)\.(?<memberName>\w+)$/.exec(target);
+    if (dotMatch?.groups) {
+      const typeName = dotMatch.groups['typeName'] ?? '';
+      const memberName = dotMatch.groups['memberName'] ?? '';
+      const typeInfo = allTypes.get(typeName);
+      if (typeInfo) {
+        const targetNsDir = getNamespaceDir(typeInfo.namespace);
+        return `[${display}](${BASE_PATH}/api/${targetNsDir}/${kebabCase(typeName)}/${kebabCase(memberName)}/)`;
+      }
+    }
+
+    // Handle simple type references
     const info = allTypes.get(target);
     if (info) {
       const targetNsDir = getNamespaceDir(info.namespace);
-      return `[${display}](/api/${targetNsDir}/${kebabCase(target)}/)`;
+      return `[${display}](${BASE_PATH}/api/${targetNsDir}/${kebabCase(target)}/)`;
     }
     return `\`${display}\``;
   });
@@ -1240,7 +1255,7 @@ function typeLink(typeName: string): string {
     return `\`${typeName}\``;
   }
   const targetNsDir = getNamespaceDir(info.namespace);
-  return `[${typeName}](/api/${targetNsDir}/${kebabCase(cleanName)}/)`;
+  return `[${typeName}](${BASE_PATH}/api/${targetNsDir}/${kebabCase(cleanName)}/)`;
 }
 
 /** Single-letter and common generic type parameter names — not linkable */
@@ -1446,7 +1461,7 @@ function renderTypeWithLinks(typeText: string): string {
     const info = allTypes.get(match);
     if (info) {
       const targetNsDir = getNamespaceDir(info.namespace);
-      return `[${match}](/api/${targetNsDir}/${kebabCase(match)}/)`;
+      return `[${match}](${BASE_PATH}/api/${targetNsDir}/${kebabCase(match)}/)`;
     }
 
     // TypeScript utility types
