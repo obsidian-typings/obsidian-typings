@@ -288,7 +288,7 @@ function execString(command: string, options: ExecOption = {}): Promise<ExecResu
         exitSignal,
         stderr,
         stdout
-      } as ExecResult);
+      });
     });
 
     child.on('error', (err) => {
@@ -307,7 +307,7 @@ function execString(command: string, options: ExecOption = {}): Promise<ExecResu
         exitSignal: null,
         stderr,
         stdout
-      } as ExecResult);
+      });
     });
   });
 }
@@ -324,7 +324,7 @@ async function executeBatches(baseCommand: string, batches: string[][], options:
   }
 
   if (options.shouldIncludeDetails) {
-    return { exitCode: 0, exitSignal: null, stderr: '', stdout: results.join('\n') } as ExecResult;
+    return { exitCode: 0, exitSignal: null, stderr: '', stdout: results.join('\n') };
   }
 
   return results.join('\n');

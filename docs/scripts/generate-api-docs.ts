@@ -68,6 +68,7 @@ interface TypeInfo {
   name: string;
   namespace: string;
   properties: MemberInfo[];
+  typeParameters: string[];
 }
 
 interface WebApiEntry {
@@ -113,7 +114,8 @@ function extractClassInfo(cls: ClassDeclaration, isOfficial: boolean, namespace:
     methods: cls.getMethods().map((m) => extractMethodInfo(m, isOfficial)),
     name,
     namespace,
-    properties: cls.getProperties().map((p) => extractPropertyInfo(p, isOfficial))
+    properties: cls.getProperties().map((p) => extractPropertyInfo(p, isOfficial)),
+    typeParameters: cls.getTypeParameters().map((tp) => tp.getText())
   };
 }
 
@@ -126,7 +128,8 @@ function extractInterfaceInfo(iface: InterfaceDeclaration, isOfficial: boolean, 
     methods: iface.getMethods().map((m) => extractMethodSignatureInfo(m, isOfficial)),
     name: iface.getName(),
     namespace,
-    properties: iface.getProperties().map((p) => extractPropertySignatureInfo(p, isOfficial))
+    properties: iface.getProperties().map((p) => extractPropertySignatureInfo(p, isOfficial)),
+    typeParameters: iface.getTypeParameters().map((tp) => tp.getText())
   };
 }
 
@@ -185,6 +188,15 @@ async function main(): Promise<void> {
 
   allTypes = types;
 
+  // Register all type parameter names so renderTypeWithLinks won't hyperlink them
+  for (const [_name, info] of types) {
+    for (const tp of info.typeParameters) {
+      // Strip constraints: "T extends Foo" → "T"
+      const bareParam = tp.replace(/\s+extends\s+.*$/, '');
+      GENERIC_TYPE_PARAMS.add(bareParam);
+    }
+  }
+
   // Build backlinks map
   const backlinks = buildBacklinks(types);
 
@@ -212,6 +224,12 @@ async function main(): Promise<void> {
 }
 
 function mergeClassIntoType(target: TypeInfo, cls: ClassDeclaration, isOfficial: boolean): void {
+  if (target.typeParameters.length === 0) {
+    const typeParams = cls.getTypeParameters().map((tp) => tp.getText());
+    if (typeParams.length > 0) {
+      target.typeParameters = typeParams;
+    }
+  }
   for (const method of cls.getMethods()) {
     const info = extractMethodInfo(method, isOfficial);
     const existingByKey = target.methods.find((m) => m.overloadKey === info.overloadKey);
@@ -245,6 +263,12 @@ function mergeClassIntoType(target: TypeInfo, cls: ClassDeclaration, isOfficial:
 }
 
 function mergeInterfaceIntoType(target: TypeInfo, iface: InterfaceDeclaration, isOfficial: boolean): void {
+  if (target.typeParameters.length === 0) {
+    const typeParams = iface.getTypeParameters().map((tp) => tp.getText());
+    if (typeParams.length > 0) {
+      target.typeParameters = typeParams;
+    }
+  }
   for (const method of iface.getMethods()) {
     const info = extractMethodSignatureInfo(method, isOfficial);
     // Deduplicate by overload key — prefer our (unofficial) version over official
@@ -279,7 +303,12 @@ function mergeInterfaceIntoType(target: TypeInfo, iface: InterfaceDeclaration, i
   }
 }
 
-function processModuleDeclaration(mod: ReturnType<SourceFile['getModules']>[number], types: Map<string, TypeInfo>, isOfficial: boolean, namespace: string): void {
+function processModuleDeclaration(
+  mod: ReturnType<SourceFile['getModules']>[number],
+  types: Map<string, TypeInfo>,
+  isOfficial: boolean,
+  namespace: string
+): void {
   for (const alias of mod.getTypeAliases()) {
     const name = alias.getName();
     if (!types.has(name)) {
@@ -291,7 +320,8 @@ function processModuleDeclaration(mod: ReturnType<SourceFile['getModules']>[numb
         methods: [],
         name,
         namespace,
-        properties: []
+        properties: [],
+        typeParameters: alias.getTypeParameters().map((tp) => tp.getText())
       });
     }
   }
@@ -336,7 +366,8 @@ function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOffi
         methods: [],
         name,
         namespace,
-        properties: []
+        properties: [],
+        typeParameters: alias.getTypeParameters().map((tp) => tp.getText())
       });
     }
   }
@@ -351,7 +382,8 @@ function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOffi
         methods: [],
         name,
         namespace,
-        properties: []
+        properties: [],
+        typeParameters: []
       });
     }
   }
@@ -506,7 +538,8 @@ function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOffic
       }],
       name,
       namespace,
-      properties: []
+      properties: [],
+      typeParameters: fn.getTypeParameters().map((tp) => tp.getText())
     });
   }
 }
@@ -825,24 +858,7 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   await ensureDir(filePath);
 
   const lines: string[] = [];
-
-  const badgeText = info.isOfficial ? 'Official' : 'Unofficial';
-  const badgeVariant = info.isOfficial ? 'success' : 'caution';
-  lines.push('---');
-  lines.push(`title: ${name}`);
-  lines.push('editUrl: false');
-  lines.push('sidebar:');
-  lines.push(`  label: ${name}`);
-  lines.push('  badge:');
-  lines.push(`    text: ${badgeText}`);
-  lines.push(`    variant: ${badgeVariant}`);
-  lines.push('---');
-  lines.push('');
-
-  const typeIcon = info.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
-  const typeLabel = info.isOfficial ? 'Official' : 'Unofficial';
-  lines.push(`<p>${typeIcon} <strong>${typeLabel}</strong></p>`);
-  lines.push('');
+  renderOverviewFrontmatter(lines, name, info);
 
   // Description
   if (info.description) {
@@ -871,11 +887,12 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   }
 
   // Signature
+  const typeParamsStr = info.typeParameters.length > 0 ? `<${info.typeParameters.join(', ')}>` : '';
   const extendsClause = info.baseTypes.length > 0 ? ` extends ${info.baseTypes.join(', ')}` : '';
   lines.push('**Signature:**');
   lines.push('');
   lines.push('```ts');
-  lines.push(`export ${info.kind} ${name}${extendsClause}`);
+  lines.push(`export ${info.kind} ${name}${typeParamsStr}${extendsClause}`);
   lines.push('```');
   lines.push('');
 
@@ -963,6 +980,14 @@ function getDescription(node: JSDocableNode): string {
     return '';
   }
   return docs[docs.length - 1]?.getDescription().trim() ?? '';
+}
+
+function getDisplayName(name: string, info: TypeInfo): string {
+  if (info.typeParameters.length === 0) {
+    return name;
+  }
+  const bareParams = info.typeParameters.map((tp) => tp.replace(/\s+extends\s+.*$/, ''));
+  return `${name}<${bareParams.join(', ')}>`;
 }
 
 /** Extract @example blocks from JSDoc */
@@ -1215,6 +1240,27 @@ function renderMethodOverload(lines: string[], overload: MemberInfo): void {
   }
 }
 
+function renderOverviewFrontmatter(lines: string[], name: string, info: TypeInfo): void {
+  const badgeText = info.isOfficial ? 'Official' : 'Unofficial';
+  const badgeVariant = info.isOfficial ? 'success' : 'caution';
+  const displayName = getDisplayName(name, info);
+  lines.push('---');
+  lines.push(`title: "${displayName}"`);
+  lines.push('editUrl: false');
+  lines.push('sidebar:');
+  lines.push(`  label: "${displayName}"`);
+  lines.push('  badge:');
+  lines.push(`    text: ${badgeText}`);
+  lines.push(`    variant: ${badgeVariant}`);
+  lines.push('---');
+  lines.push('');
+
+  const typeIcon = info.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
+  const typeLabel = info.isOfficial ? 'Official' : 'Unofficial';
+  lines.push(`<p>${typeIcon} <strong>${typeLabel}</strong></p>`);
+  lines.push('');
+}
+
 /** Resolve {@link Name} and {@link Name | display text} tags in description text */
 function resolveLinks(text: string): string {
   return text.replace(/\{@link\s+(?<target>[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\}/g, (...args) => {
@@ -1264,12 +1310,40 @@ function typeLink(typeName: string): string {
 
 /** Single-letter and common generic type parameter names — not linkable */
 const GENERIC_TYPE_PARAMS = new Set([
-  'Arg', 'Args', // Short identifiers / enum-like values that aren't types
-  'ASC', 'Callback', 'ComponentType', 'DESC', 'DOMContentLoaded',
-  'GET', 'HookCallback', 'HookName', 'ID', 'Input', 'Instance', 'Item', 'K', 'Key', 'Marked',
-  'O', 'Output', 'Owner', 'P', 'POST', 'R', 'S', 'Suspects',
-  'T', 'TFunction', 'TModal', 'TView', 'TViewType',
-  'U', 'UserProperties', 'V', 'VIEW'
+  'Arg',
+  'Args', // Short identifiers / enum-like values that aren't types
+  'ASC',
+  'Callback',
+  'ComponentType',
+  'DESC',
+  'DOMContentLoaded',
+  'GET',
+  'HookCallback',
+  'HookName',
+  'ID',
+  'Input',
+  'Instance',
+  'Item',
+  'K',
+  'Key',
+  'Marked',
+  'O',
+  'Output',
+  'Owner',
+  'P',
+  'POST',
+  'R',
+  'S',
+  'Suspects',
+  'T',
+  'TFunction',
+  'TModal',
+  'TView',
+  'TViewType',
+  'U',
+  'UserProperties',
+  'V',
+  'VIEW'
 ]);
 
 const TS_HANDBOOK = 'https://www.typescriptlang.org/docs/handbook';
@@ -1346,7 +1420,6 @@ const TS_GLOBAL_TYPES: Record<string, string> = {
   Array: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array',
   // TypeScript lib built-ins
   ArrayBufferLike: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer',
-  ArrayLike: 'https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html',
   ArrayLike: 'https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html',
   // Fetch API
   BodyInit: 'https://developer.mozilla.org/docs/Web/API/Request/Request#body',
