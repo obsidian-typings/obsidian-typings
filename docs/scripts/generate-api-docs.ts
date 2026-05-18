@@ -577,7 +577,10 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     lines.push('');
 
     const icon = prop.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
-    lines.push(`${icon} **Type:** ${renderTypeWithLinks(prop.type, nsDir)}`);
+    const label = prop.isOfficial ? 'Official' : 'Unofficial';
+    lines.push(`<p>${icon} <strong>${label}</strong></p>`);
+    lines.push('');
+    lines.push(`**Type:** ${renderTypeWithLinks(prop.type, nsDir)}`);
     lines.push('');
 
     if (prop.description) {
@@ -624,7 +627,10 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
 
     for (const overload of overloads) {
       const icon = overload.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
-      lines.push(`${icon} **Signature:**`);
+      const label = overload.isOfficial ? 'Official' : 'Unofficial';
+      lines.push(`<p>${icon} <strong>${label}</strong></p>`);
+      lines.push('');
+      lines.push('**Signature:**');
       lines.push('');
       lines.push('```ts');
       lines.push(`${overload.signature}: ${overload.returnType}`);
@@ -756,6 +762,8 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
   lines.push('');
 
   // Import statement
+  lines.push('**Import:**');
+  lines.push('');
   lines.push('```ts');
   lines.push(getImportStatement(info));
   lines.push('```');
@@ -948,7 +956,7 @@ function renderFunctionPage(lines: string[], info: TypeInfo, nsDir: string): voi
   lines.push('**Signature:**');
   lines.push('');
   lines.push('```ts');
-  lines.push(`${fn.signature}: ${fn.returnType}`);
+  lines.push(`function ${fn.signature}: ${fn.returnType}`);
   lines.push('```');
   lines.push('');
 
