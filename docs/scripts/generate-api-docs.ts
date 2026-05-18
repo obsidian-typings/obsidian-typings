@@ -1555,10 +1555,17 @@ async function generateSidebarJson(types: Map<string, TypeInfo>): Promise<void> 
     }
   }
 
+  // Wrap all API groups under a single "TypeScript API" parent
+  const wrappedSidebar = [{
+    collapsed: false,
+    items: sidebar,
+    label: 'TypeScript API'
+  }];
+
   const sidebarPath = join(process.cwd(), 'src/generated-sidebar.json');
   const JSON_INDENT = 2;
-  await writeFile(sidebarPath, JSON.stringify(sidebar, null, JSON_INDENT), 'utf-8');
-  console.warn(`Generated sidebar with ${String(sidebar.length)} top-level groups`);
+  await writeFile(sidebarPath, JSON.stringify(wrappedSidebar, null, JSON_INDENT), 'utf-8');
+  console.warn(`Generated sidebar with ${String(sidebar.length)} module groups`);
 }
 
 /** Render a type string with clickable links for known types */
