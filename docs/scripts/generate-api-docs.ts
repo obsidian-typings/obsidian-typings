@@ -478,11 +478,16 @@ function escapeMarkdown(text: string): string {
 
 function extractMethodInfo(method: MethodDeclaration, isOfficial: boolean): MemberInfo {
   const name = method.getName();
-  const params = method.getParameters().map((p) => ({
-    description: '',
-    name: p.getName(),
-    type: simplifyType(p.getType().getText())
-  }));
+  const paramDescriptions = getParamDescriptions(method);
+  const params = method.getParameters().map((p) => {
+    const isOptional = p.isOptional();
+    const optionalSuffix = isOptional ? '?' : '';
+    return {
+      description: paramDescriptions.get(p.getName()) ?? (isOptional ? '*(Optional)*' : ''),
+      name: `${p.getName()}${optionalSuffix}`,
+      type: simplifyType(p.getType().getText())
+    };
+  });
   const paramStr = params.map((p) => `${p.name}: ${p.type}`).join(', ');
   const info: MemberInfo = {
     description: getDescription(method),
@@ -501,11 +506,16 @@ function extractMethodInfo(method: MethodDeclaration, isOfficial: boolean): Memb
 
 function extractMethodSignatureInfo(method: MethodSignature, isOfficial: boolean): MemberInfo {
   const name = method.getName();
-  const params = method.getParameters().map((p) => ({
-    description: '',
-    name: p.getName(),
-    type: simplifyType(p.getType().getText())
-  }));
+  const paramDescriptions = getParamDescriptions(method);
+  const params = method.getParameters().map((p) => {
+    const isOptional = p.isOptional();
+    const optionalSuffix = isOptional ? '?' : '';
+    return {
+      description: paramDescriptions.get(p.getName()) ?? (isOptional ? '*(Optional)*' : ''),
+      name: `${p.getName()}${optionalSuffix}`,
+      type: simplifyType(p.getType().getText())
+    };
+  });
   const paramStr = params.map((p) => `${p.name}: ${p.type}`).join(', ');
   const info: MemberInfo = {
     description: getDescription(method),
