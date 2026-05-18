@@ -1,20 +1,30 @@
 import StarlightIntegration from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
-import { existsSync, readFileSync } from 'node:fs';
+import {
+  existsSync,
+  readFileSync
+} from 'node:fs';
 import { resolve } from 'node:path';
-import starlightLinksValidatorPlugin from 'starlight-links-validator';
-// eslint-disable-next-line import-x/no-rename-default -- Default export name `plugin` is too generic.
-import starlightThemeObsidian from 'starlight-theme-obsidian';
 
 import { admonitionRenderer } from './helpers/remark-plugins/custom-admonition-renderer.ts';
 import { githubLocationRenderer } from './helpers/remark-plugins/github-location-renderer.ts';
 import { remarkRelativeLinks } from './helpers/remark-plugins/remark-relative-links.ts';
 
+interface SidebarGroup {
+  collapsed: boolean;
+  items: SidebarItem[];
+  label: string;
+}
+
+interface SidebarItem {
+  label: string;
+  link: string;
+}
+
 const BASE = '/obsidian-typings';
 
 export const astroConfig = defineConfig({
   base: BASE,
-  trailingSlash: 'always',
   devToolbar: {
     enabled: false
   },
@@ -30,15 +40,7 @@ export const astroConfig = defineConfig({
         baseUrl: 'https://github.com/obsidian-typings/obsidian-typings/tree/main/docs/'
       },
       favicon: './favicon.png',
-      plugins: [
-        // Disabled for now — too slow with 5000+ pages
-        // starlightLinksValidatorPlugin({
-        //   errorOnInvalidHashes: false,
-        //   errorOnRelativeLinks: false
-        // }),
-        // Disabled for now — too slow with 5000+ pages
-        // starlightThemeObsidian({...})
-      ],
+      plugins: [],
       sidebar: [
         {
           items: [
@@ -51,11 +53,11 @@ export const astroConfig = defineConfig({
           label: 'Start Here'
         },
         {
-          autogenerate: { directory: 'guides' },
+          items: [{ autogenerate: { directory: 'guides' } }],
           label: 'Guides'
         },
         {
-          autogenerate: { directory: 'resources' },
+          items: [{ autogenerate: { directory: 'resources' } }],
           label: 'Resources'
         },
         ...getApiSidebar()
@@ -73,14 +75,15 @@ export const astroConfig = defineConfig({
       githubLocationRenderer
     ]
   },
-  site: 'https://fevol.github.io'
+  site: 'https://fevol.github.io',
+  trailingSlash: 'always'
 });
 
-function getApiSidebar(): Array<{ collapsed: boolean; items: Array<{ label: string; link: string }>; label: string }> {
+function getApiSidebar(): SidebarGroup[] {
   const sidebarPath = resolve(import.meta.dirname, '../src/generated-sidebar.json');
   if (!existsSync(sidebarPath)) {
     console.warn('[astro-config] generated-sidebar.json not found. Run generate-api-docs first.');
     return [];
   }
-  return JSON.parse(readFileSync(sidebarPath, 'utf-8'));
+  return JSON.parse(readFileSync(sidebarPath, 'utf-8')) as SidebarGroup[];
 }
