@@ -49,6 +49,7 @@ interface MemberInfo {
   returnDescription: string;
   returnType: string;
   signature: string;
+  since: string;
   type: string;
 }
 
@@ -499,6 +500,7 @@ function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOffic
         returnDescription: getReturnDescription(fn),
         returnType,
         signature,
+        since: getSince(fn),
         type: ''
       }],
       name,
@@ -552,6 +554,7 @@ function extractMethodInfo(method: MethodDeclaration, isOfficial: boolean): Memb
     returnDescription: getReturnDescription(method),
     returnType: simplifyType(method.getReturnType().getText()),
     signature: `${name}(${paramStr})`,
+    since: getSince(method),
     type: ''
   };
   info.overloadKey = computeOverloadKey(info);
@@ -583,6 +586,7 @@ function extractMethodSignatureInfo(method: MethodSignature, isOfficial: boolean
     returnDescription: getReturnDescription(method),
     returnType: simplifyType(method.getReturnType().getText()),
     signature: `${name}(${paramStr})`,
+    since: getSince(method),
     type: ''
   };
   info.overloadKey = computeOverloadKey(info);
@@ -605,6 +609,7 @@ function extractPropertyInfo(prop: PropertyDeclaration, isOfficial: boolean): Me
     returnDescription: '',
     returnType: '',
     signature: `${name}${optionalSuffix}`,
+    since: getSince(prop),
     type: getPropertyType(prop)
   };
 }
@@ -625,6 +630,7 @@ function extractPropertySignatureInfo(prop: PropertySignature, isOfficial: boole
     returnDescription: '',
     returnType: '',
     signature: `${name}${optionalSuffix}`,
+    since: getSince(prop),
     type: getPropertyType(prop)
   };
 }
@@ -665,7 +671,8 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
 
     const icon = prop.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
     const label = prop.isOfficial ? 'Official' : 'Unofficial';
-    lines.push(`<p>${icon} <strong>${label}</strong></p>`);
+    const sinceText = prop.since ? ` · v${prop.since}` : '';
+    lines.push(`<p>${icon} <strong>${label}</strong>${sinceText}</p>`);
     lines.push('');
 
     // Description before type (matching official docs order)
@@ -1044,6 +1051,18 @@ function getReturnDescription(node: JSDocableNode): string {
   return '';
 }
 
+/** Extract @since version from JSDoc */
+function getSince(node: JSDocableNode): string {
+  for (const doc of node.getJsDocs()) {
+    for (const tag of doc.getTags()) {
+      if (tag.getTagName() === 'since') {
+        return tag.getCommentText()?.trim().replace(/\s*\*\s*$/g, '').trim() ?? '';
+      }
+    }
+  }
+  return '';
+}
+
 function kebabCase(name: string): string {
   return name.replace(/[A-Z]/g, (c, i) => (i > 0 ? '-' : '') + c.toLowerCase());
 }
@@ -1140,7 +1159,8 @@ function renderFunctionPage(lines: string[], info: TypeInfo): void {
 function renderMethodOverload(lines: string[], overload: MemberInfo): void {
   const icon = overload.isOfficial ? OFFICIAL_ICON : UNOFFICIAL_ICON;
   const label = overload.isOfficial ? 'Official' : 'Unofficial';
-  lines.push(`<p>${icon} <strong>${label}</strong></p>`);
+  const sinceText = overload.since ? ` · v${overload.since}` : '';
+  lines.push(`<p>${icon} <strong>${label}</strong>${sinceText}</p>`);
   lines.push('');
 
   // Description before signature (matching official docs order)
