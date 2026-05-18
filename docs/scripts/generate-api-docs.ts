@@ -75,6 +75,7 @@ const NAMESPACE_DISPLAY_NAMES: Record<string, string> = {
   '@codemirror/state': '@codemirror/state',
   '@codemirror/view': '@codemirror/view',
   'global': 'obsidian globals',
+  'implementations': 'obsidian-typings implementations',
   'internals': 'obsidian internals',
   'obsidian': 'obsidian'
 };
@@ -84,6 +85,7 @@ const NAMESPACE_DIR_NAMES: Record<string, string> = {
   '@codemirror/state': 'codemirror-state',
   '@codemirror/view': 'codemirror-view',
   'global': 'globals',
+  'implementations': 'implementations',
   'internals': 'internals',
   'obsidian': 'obsidian'
 };
@@ -151,12 +153,13 @@ async function main(): Promise<void> {
     processSourceFile(obsidianSrc, types, true, 'obsidian');
   }
 
+  // Process implementations first so their functions get the 'implementations' namespace
+  if (implSrc) {
+    collectFunctions(implSrc, types, false, 'implementations');
+  }
+
   processSourceFile(augSrc, types, false, 'internals');
   collectFunctions(augSrc, types, false, 'internals');
-
-  if (implSrc) {
-    collectFunctions(implSrc, types, false, 'internals');
-  }
 
   for (const mod of augSrc.getModules()) {
     const modName = mod.getName().replace(/['"]/g, '');
@@ -416,12 +419,31 @@ function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOffic
     if (!name || types.has(name)) {
       continue;
     }
+    const params = fn.getParameters().map((p) => ({
+      description: '',
+      name: p.getName(),
+      type: simplifyType(p.getType().getText())
+    }));
+    const paramStr = params.map((p) => `${p.name}: ${p.type}`).join(', ');
+    const returnType = simplifyType(fn.getReturnType().getText());
+    const signature = `${name}(${paramStr})`;
+    // Store function as a type with a single method representing the function call
     types.set(name, {
       baseTypes: [],
       description: getDescription(fn),
-      isOfficial,
+      isOfficial: checkIsOfficial(fn, isOfficial),
       kind: 'interface',
-      methods: [],
+      methods: [{
+        description: getDescription(fn),
+        inheritedFrom: '',
+        isOfficial: checkIsOfficial(fn, isOfficial),
+        name,
+        overloadKey: name,
+        parameters: params,
+        returnType,
+        signature,
+        type: ''
+      }],
       name,
       namespace,
       properties: []
