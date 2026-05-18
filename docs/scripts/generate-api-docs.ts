@@ -16,7 +16,9 @@ import type {
   SourceFile
 } from 'ts-morph';
 
+import { createHash } from 'node:crypto';
 import {
+  existsSync,
   readdirSync,
   readFileSync
 } from 'node:fs';
@@ -128,12 +130,40 @@ function findDtsFiles(dir: string): string[] {
   return results;
 }
 
+const CACHE_FILE = join(process.cwd(), 'src/content/docs/api/.cache-hash');
+
+/** Compute a hash of all source files + the generator script itself */
+function computeCacheHash(srcDir: string): string {
+  const hash = createHash('sha256');
+
+  // Hash the generator script itself
+  const generatorPath = resolve(import.meta.dirname, 'generate-api-docs.ts');
+  hash.update(readFileSync(generatorPath, 'utf-8'));
+
+  // Hash all source .d.ts files
+  const dtsFiles = findDtsFiles(srcDir).sort();
+  for (const filePath of dtsFiles) {
+    hash.update(filePath);
+    hash.update(readFileSync(filePath, 'utf-8'));
+  }
+
+  return hash.digest('hex');
+}
+
 async function main(): Promise<void> {
   loadExternalTypeMaps();
 
-  const project = new Project({ skipAddingFilesFromTsConfig: true });
   const rootDir = resolve(process.cwd(), '..');
   const srcDir = join(rootDir, 'src');
+
+  // Check cache — skip generation if nothing changed
+  const currentHash = computeCacheHash(srcDir);
+  if (existsSync(CACHE_FILE) && readFileSync(CACHE_FILE, 'utf-8').trim() === currentHash) {
+    console.warn('Source files and generator unchanged — skipping generation.');
+    return;
+  }
+
+  const project = new Project({ skipAddingFilesFromTsConfig: true });
 
   // Load official obsidian.d.ts for merging
   const obsidianPath = join(rootDir, 'node_modules/obsidian/obsidian.d.ts');
@@ -214,6 +244,9 @@ async function main(): Promise<void> {
 
   // Generate sidebar JSON for astro config
   await generateSidebarJson(types);
+
+  // Write cache hash on successful generation
+  await writeFile(CACHE_FILE, currentHash, 'utf-8');
 
   console.warn(`Generated docs for ${String(pageCount)} types, ${String(types.size)} total types`);
 }
