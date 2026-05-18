@@ -772,12 +772,15 @@ async function generateOverviewPage(name: string, info: TypeInfo): Promise<void>
   lines.push('');
 
   // Import statement
-  lines.push('**Import:**');
-  lines.push('');
-  lines.push('```ts');
-  lines.push(getImportStatement(info));
-  lines.push('```');
-  lines.push('');
+  const importStatement = getImportStatement(info);
+  if (importStatement) {
+    lines.push('**Import:**');
+    lines.push('');
+    lines.push('```ts');
+    lines.push(importStatement);
+    lines.push('```');
+    lines.push('');
+  }
 
   // Functions render like method detail pages — signature, params, returns
   if (info.kind === 'function') {
@@ -883,12 +886,18 @@ function getDescription(node: JSDocableNode): string {
   return docs[docs.length - 1]?.getDescription().trim() ?? '';
 }
 
-function getImportStatement(info: TypeInfo): string {
+function getImportStatement(info: TypeInfo): string | undefined {
+  if (info.namespace === 'global') {
+    return undefined;
+  }
   if (info.kind === 'function' && info.namespace === 'implementations') {
     return `import { ${info.name} } from '${TYPINGS_PACKAGE}/implementations';`;
   }
   if (info.namespace === 'obsidian' && info.isOfficial) {
     return `import type { ${info.name} } from 'obsidian';`;
+  }
+  if (info.namespace.startsWith('@codemirror/')) {
+    return `import type { ${info.name} } from '${info.namespace}';`;
   }
   return `import type { ${info.name} } from '${TYPINGS_PACKAGE}';`;
 }
