@@ -16,7 +16,10 @@ import type {
   SourceFile
 } from 'ts-morph';
 
-import { readFileSync } from 'node:fs';
+import {
+  readdirSync,
+  readFileSync
+} from 'node:fs';
 import {
   mkdir,
   rm,
@@ -25,6 +28,7 @@ import {
 import {
   dirname,
   join,
+  relative,
   resolve
 } from 'node:path';
 import { Project } from 'ts-morph';
@@ -72,26 +76,6 @@ interface WebApiEntry {
   url: string;
 }
 
-const NAMESPACE_DISPLAY_NAMES: Record<string, string> = {
-  '@codemirror/language': '@codemirror/language',
-  '@codemirror/state': '@codemirror/state',
-  '@codemirror/view': '@codemirror/view',
-  'global': 'obsidian globals',
-  'implementations': 'obsidian-typings implementations',
-  'internals': 'obsidian internals',
-  'obsidian': 'obsidian'
-};
-
-const NAMESPACE_DIR_NAMES: Record<string, string> = {
-  '@codemirror/language': 'codemirror-language',
-  '@codemirror/state': 'codemirror-state',
-  '@codemirror/view': 'codemirror-view',
-  'global': 'globals',
-  'implementations': 'implementations',
-  'internals': 'internals',
-  'obsidian': 'obsidian'
-};
-
 const CHANNEL = process.env['CURRENT_CHANNEL'] === 'catalyst' ? 'catalyst' : 'public';
 const BASE_PATH = process.env['BASE_PATH'] ?? '/obsidian-typings';
 const TYPINGS_PACKAGE = `@obsidian-typings/obsidian-${CHANNEL}-latest`;
@@ -130,12 +114,28 @@ function extractInterfaceInfo(iface: InterfaceDeclaration, isOfficial: boolean, 
   };
 }
 
+/** Recursively find all .d.ts files under a directory */
+function findDtsFiles(dir: string): string[] {
+  const results: string[] = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results.push(...findDtsFiles(fullPath));
+    } else if (entry.name.endsWith('.d.ts') && entry.name !== 'index.d.ts') {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
+
 async function main(): Promise<void> {
   loadExternalTypeMaps();
 
   const project = new Project({ skipAddingFilesFromTsConfig: true });
   const rootDir = resolve(process.cwd(), '..');
+  const srcDir = join(rootDir, 'src');
 
+  // Load official obsidian.d.ts for merging
   const obsidianPath = join(rootDir, 'node_modules/obsidian/obsidian.d.ts');
   let obsidianSrc: SourceFile | undefined;
   try {
@@ -144,35 +144,33 @@ async function main(): Promise<void> {
     console.warn('obsidian.d.ts not found — base types will not be included.');
   }
 
-  const augSrc = project.addSourceFileAtPath(join(rootDir, 'dist/cjs/types.d.cts'));
-
-  // Load implementations types (constructor getters, etc.)
-  const implPath = join(rootDir, 'dist/cjs/implementations.d.cts');
-  let implSrc: SourceFile | undefined;
-  try {
-    implSrc = project.addSourceFileAtPath(implPath);
-  } catch {
-    console.warn('implementations.d.cts not found — implementation functions will not be included.');
-  }
-
   const types = new Map<string, TypeInfo>();
 
+  // Process official obsidian.d.ts first (all types marked as official)
   if (obsidianSrc) {
-    processSourceFile(obsidianSrc, types, true, 'obsidian');
+    processSourceFile(obsidianSrc, types, true, 'obsidian/augmentations');
   }
 
-  // Process implementations first so their functions get the 'implementations' namespace
-  if (implSrc) {
-    collectFunctions(implSrc, types, false, 'implementations');
-  }
+  // Walk all source .d.ts files
+  const dtsFiles = findDtsFiles(srcDir);
+  console.warn(`Found ${String(dtsFiles.length)} source .d.ts files`);
 
-  processSourceFile(augSrc, types, false, 'internals');
-  collectFunctions(augSrc, types, false, 'internals');
+  for (const filePath of dtsFiles) {
+    const relPath = relative(srcDir, filePath).replace(/\\/g, '/');
+    const dirPath = dirname(relPath);
+    const src = project.addSourceFileAtPath(filePath);
 
-  for (const mod of augSrc.getModules()) {
-    const modName = mod.getName().replace(/['"]/g, '');
-    const namespace = modName === 'global' ? 'global' : modName;
-    processModuleDeclaration(mod, types, false, namespace);
+    // Check if file contains module declarations (augmentations)
+    const modules = src.getModules();
+    if (modules.length > 0) {
+      for (const mod of modules) {
+        processModuleDeclaration(mod, types, false, dirPath);
+      }
+    }
+
+    // Process top-level exports (internals, standalone types)
+    processSourceFile(src, types, false, dirPath);
+    collectFunctions(src, types, false, dirPath);
   }
 
   resolveInheritedMembers(types);
@@ -682,8 +680,8 @@ function findTypeReferences(typeText: string, types: Map<string, TypeInfo>, resu
 
 async function generateMemberPages(name: string, info: TypeInfo): Promise<void> {
   const nsDir = getNamespaceDir(info.namespace);
-  const typeDir = kebabCase(name);
-  const componentImport = 'import { MemberDetail, ApiStatus } from "../../../../components/api";';
+  const typeDir = name;
+  const componentImport = `import { MemberDetail, ApiStatus } from "${getComponentImportPath(nsDir, typeDir)}";`;
 
   // Property pages
   const props = info.properties.filter((p) => !p.name.includes('__'));
@@ -784,7 +782,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
 
   for (const [namespace, nsTypes] of namespaces) {
     const nsDir = getNamespaceDir(namespace);
-    const displayName = NAMESPACE_DISPLAY_NAMES[namespace] ?? namespace;
+    const displayName = namespace;
     const filePath = join(OUTPUT_DIR, nsDir, 'index.mdx');
     await ensureDir(filePath);
 
@@ -806,7 +804,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
       lines.push('| Class | Description |');
       lines.push('| :-- | :-- |');
       for (const cls of classes) {
-        lines.push(`| [${cls.name}](./${kebabCase(cls.name)}/) | ${escapeMarkdown(resolveLinks(cls.description))} |`);
+        lines.push(`| [${cls.name}](./${cls.name}/) | ${escapeMarkdown(resolveLinks(cls.description))} |`);
       }
       lines.push('');
     }
@@ -817,7 +815,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
       lines.push('| Interface | Description |');
       lines.push('| :-- | :-- |');
       for (const iface of interfaces) {
-        lines.push(`| [${iface.name}](./${kebabCase(iface.name)}/) | ${escapeMarkdown(resolveLinks(iface.description))} |`);
+        lines.push(`| [${iface.name}](./${iface.name}/) | ${escapeMarkdown(resolveLinks(iface.description))} |`);
       }
       lines.push('');
     }
@@ -830,7 +828,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
       lines.push('| Function | Description |');
       lines.push('| :-- | :-- |');
       for (const fn of functions) {
-        lines.push(`| [${fn.name}](./${kebabCase(fn.name)}/) | ${escapeMarkdown(resolveLinks(fn.description))} |`);
+        lines.push(`| [${fn.name}](./${fn.name}/) | ${escapeMarkdown(resolveLinks(fn.description))} |`);
       }
       lines.push('');
     }
@@ -841,7 +839,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
 
 async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks: string[]): Promise<void> {
   const nsDir = getNamespaceDir(info.namespace);
-  const typeSlug = kebabCase(name);
+  const typeSlug = name;
   const filePath = join(OUTPUT_DIR, nsDir, typeSlug, 'index.mdx');
   await ensureDir(filePath);
 
@@ -862,9 +860,10 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   lines.push('---');
   lines.push('');
 
-  // Component imports
+  // Component imports — compute relative path from generated page to components
+  const componentPath = getComponentImportPath(nsDir, typeSlug);
   lines.push(
-    'import { TypeBadge, TypeSignature, ImportStatement, ConstructorBlock, PropertyTable, MethodTable, ApiStatus } from "../../../../components/api";'
+    `import { TypeBadge, TypeSignature, ImportStatement, ConstructorBlock, PropertyTable, MethodTable, ApiStatus } from "${componentPath}";`
   );
   lines.push('');
 
@@ -913,6 +912,18 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   await writeFile(filePath, lines.join('\n'), 'utf-8');
 }
 
+/** Compute relative import path from a generated page to the components directory */
+function getComponentImportPath(nsDir: string, typeDir: string): string {
+  // Page is at: src/content/docs/api/{nsDir}/{typeDir}/index.mdx
+  // Components are at: src/components/api/
+  // We need to go up from content/docs/api/{nsDir}/{typeDir}/ to src/, then into components/api
+  // Full path from src/ root: content/docs/api/{nsDir}/{typeDir}
+  const fullPageDir = join('content', 'docs', 'api', nsDir, typeDir);
+  const depth = fullPageDir.split('/').length;
+  const ups = '../'.repeat(depth);
+  return `${ups}components/api`;
+}
+
 /** Pick the highest-numbered constructorN__ pseudo-method (matches ExtractConstructor logic) */
 function getConstructorMethod(methods: MemberInfo[]): MemberInfo | undefined {
   const constructors = methods.filter((m) => /^constructor\d*__$/.test(m.name));
@@ -959,23 +970,25 @@ function getExamples(node: JSDocableNode): string[] {
 }
 
 function getImportStatement(info: TypeInfo): string | undefined {
-  if (info.namespace === 'global') {
+  if (info.namespace.startsWith('globals')) {
     return undefined;
   }
-  if (info.kind === 'function' && info.namespace === 'implementations') {
+  if (info.kind === 'function' && info.namespace.includes('implementations')) {
     return `import { ${info.name} } from '${TYPINGS_PACKAGE}/implementations';`;
   }
-  if (info.namespace === 'obsidian' && info.isOfficial) {
+  if (info.namespace.startsWith('obsidian/augmentations') && info.isOfficial) {
     return `import type { ${info.name} } from 'obsidian';`;
   }
-  if (info.namespace.startsWith('@codemirror/')) {
-    return `import type { ${info.name} } from '${info.namespace}';`;
+  if (info.namespace.startsWith('@codemirror')) {
+    // Convert directory name back to package name: @codemirror__state → @codemirror/state
+    const packageName = info.namespace.split('/')[0]?.replace('__', '/') ?? info.namespace;
+    return `import type { ${info.name} } from '${packageName}';`;
   }
   return `import type { ${info.name} } from '${TYPINGS_PACKAGE}';`;
 }
 
 function getNamespaceDir(namespace: string): string {
-  return NAMESPACE_DIR_NAMES[namespace] ?? kebabCase(namespace);
+  return namespace;
 }
 
 /** Extract @param descriptions from JSDoc tags */
@@ -1045,21 +1058,17 @@ function getSince(node: JSDocableNode): string {
   return '';
 }
 
-function kebabCase(name: string): string {
-  return name.replace(/[A-Z]/g, (c, i) => (i > 0 ? '-' : '') + c.toLowerCase());
-}
-
 /** Sanitize a member name for use as a filename */
 function memberSlug(name: string): string {
   const cleaned = name
     .replace(/^["']|["']$/g, '')
-    .replace(/[^a-zA-Z0-9]/g, ' ')
-    .trim()
-    .replace(/\s+/g, '-');
+    .replace(/[^a-zA-Z0-9]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
   if (!cleaned) {
     return 'unnamed';
   }
-  return kebabCase(cleaned);
+  return cleaned;
 }
 
 /** Slugify an overload key for URLs: on("changed") -> on-changed */
@@ -1089,7 +1098,7 @@ function renderBacklinks(lines: string[], typeBacklinks: string[]): void {
     const blInfo = allTypes.get(bl);
     if (blInfo) {
       const blNsDir = getNamespaceDir(blInfo.namespace);
-      lines.push(`- [${bl}](${BASE_PATH}/api/${blNsDir}/${kebabCase(bl)}/)`);
+      lines.push(`- [${bl}](${BASE_PATH}/api/${blNsDir}/${bl}/)`);
     }
   }
   lines.push('');
@@ -1235,7 +1244,7 @@ function resolveLinks(text: string): string {
       const typeInfo = allTypes.get(typeName);
       if (typeInfo) {
         const targetNsDir = getNamespaceDir(typeInfo.namespace);
-        return `[${display}](${BASE_PATH}/api/${targetNsDir}/${kebabCase(typeName)}/${kebabCase(memberName)}/)`;
+        return `[${display}](${BASE_PATH}/api/${targetNsDir}/${typeName}/${memberSlug(memberName)}/)`;
       }
     }
 
@@ -1243,7 +1252,7 @@ function resolveLinks(text: string): string {
     const info = allTypes.get(target);
     if (info) {
       const targetNsDir = getNamespaceDir(info.namespace);
-      return `[${display}](${BASE_PATH}/api/${targetNsDir}/${kebabCase(target)}/)`;
+      return `[${display}](${BASE_PATH}/api/${targetNsDir}/${target}/)`;
     }
     return `\`${display}\``;
   });
@@ -1264,7 +1273,7 @@ function typeLink(typeName: string): string {
     return `\`${typeName}\``;
   }
   const targetNsDir = getNamespaceDir(info.namespace);
-  return `[${typeName}](${BASE_PATH}/api/${targetNsDir}/${kebabCase(cleanName)}/)`;
+  return `[${typeName}](${BASE_PATH}/api/${targetNsDir}/${cleanName}/)`;
 }
 
 /** Single-letter and common generic type parameter names — not linkable */
@@ -1464,12 +1473,12 @@ async function generateSidebarJson(types: Map<string, TypeInfo>): Promise<void> 
   const sidebar = [];
   for (const [namespace, nsTypes] of namespaces) {
     const nsDir = getNamespaceDir(namespace);
-    const displayName = NAMESPACE_DISPLAY_NAMES[namespace] ?? namespace;
+    const displayName = namespace;
     const items = nsTypes
       .sort((a, b) => a.name.localeCompare(b.name))
       .map((t) => ({
         label: t.name,
-        link: `/api/${nsDir}/${kebabCase(t.name)}/`
+        link: `/api/${nsDir}/${t.name}/`
       }));
 
     sidebar.push({
@@ -1497,7 +1506,7 @@ function renderTypeWithLinks(typeText: string): string {
     const info = allTypes.get(match);
     if (info) {
       const targetNsDir = getNamespaceDir(info.namespace);
-      return `[${match}](${BASE_PATH}/api/${targetNsDir}/${kebabCase(match)}/)`;
+      return `[${match}](${BASE_PATH}/api/${targetNsDir}/${match}/)`;
     }
 
     // TypeScript utility types
