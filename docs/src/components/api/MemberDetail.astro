@@ -41,6 +41,16 @@ const title = isOfficial
   ? 'Official API — part of the public Obsidian API'
   : 'Unofficial API — reverse-engineered, may change without notice';
 const label = isOfficial ? 'Official' : 'Unofficial';
+
+/** Strip markdown code fence markers and extract language + code */
+function parseCodeFence(raw: string): { code: string; lang: string } {
+  const match = /^```(\w*)\n([\s\S]*?)(?:\n```)?$/.exec(raw.trim());
+  if (match) {
+    return { code: match[2]?.trimEnd() ?? '', lang: match[1] || 'ts' };
+  }
+  return { code: raw.trim(), lang: 'ts' };
+}
+const parsedExamples = examples.map(parseCodeFence);
 ---
 
 <p><span class={iconClass} title={title}></span> <strong>{label}</strong></p>
@@ -95,9 +105,9 @@ const label = isOfficial ? 'Official' : 'Unofficial';
   </>
 )}
 
-{examples.map((example) => (
+{parsedExamples.map(({ code, lang }) => (
   <>
     <p><strong>Example:</strong></p>
-    <Fragment set:html={example} />
+    <Code code={code} lang={lang} />
   </>
 ))}
