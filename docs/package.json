@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "jiti scripts/build.ts",
+    "clean": "jiti scripts/clean.ts",
     "dev": "jiti scripts/dev.ts",
     "dev:setup": "jiti scripts/dev-setup.ts",
     "preview": "jiti scripts/preview.ts",
