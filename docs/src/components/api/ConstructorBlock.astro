@@ -1,12 +1,19 @@
 ---
+import { ApiStatus } from './types.ts';
+
 interface Props {
   description?: string;
   signature: string;
+  status?: ApiStatus;
 }
 
-const { signature, description } = Astro.props;
+const { signature, description, status } = Astro.props;
+const iconClass = status === ApiStatus.Official ? 'icon-official' : 'icon-unofficial';
+const title = status === ApiStatus.Official
+  ? 'Official API — part of the public Obsidian API'
+  : 'Unofficial API — reverse-engineered, may change without notice';
 ---
 
-<h2>Constructor</h2>
+<h2><span class={iconClass} title={title}></span> Constructor</h2>
 <pre><code class="language-ts">{signature}</code></pre>
 {description && <p set:html={description} />}

@@ -601,6 +601,17 @@ function escapeMdxAngleBrackets(text: string): string {
   return text.replace(/</g, '\\<').replace(/>/g, '\\>');
 }
 
+/** Convert inline markdown to HTML for use in component props with set:html */
+function markdownToHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\n/g, '<br/>');
+}
+
 function escapeMarkdown(text: string): string {
   return text.replace(/\|/g, '\\|').replace(/\n/g, ' ');
 }
@@ -749,9 +760,9 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     lines.push('');
 
     const statusEnum = prop.isOfficial ? 'ApiStatus.Official' : 'ApiStatus.Unofficial';
-    const typeAttr = ` type="${escapeJsxAttr(renderTypeWithLinks(prop.type))}"`;
-    const descAttr = prop.description ? ` description="${escapeJsxAttr(resolveLinks(prop.description))}"` : '';
-    const remarksAttr = prop.remarks ? ` remarks="${escapeJsxAttr(resolveLinks(prop.remarks))}"` : '';
+    const typeAttr = ` type="${escapeJsxAttr(markdownToHtml(renderTypeWithLinks(prop.type)))}"`;
+    const descAttr = prop.description ? ` description="${escapeJsxAttr(markdownToHtml(resolveLinks(prop.description)))}"` : '';
+    const remarksAttr = prop.remarks ? ` remarks="${escapeJsxAttr(markdownToHtml(resolveLinks(prop.remarks)))}"` : '';
     const sinceAttr = prop.since ? ` since="${escapeJsxAttr(prop.since)}"` : '';
     const examplesAttr = prop.examples.length > 0 ? ` examples={${JSON.stringify(prop.examples)}}` : '';
 
@@ -1151,8 +1162,9 @@ function renderConstructorMdx(lines: string[], name: string, info: TypeInfo): vo
     return;
   }
   const ctorSig = `new ${name}${constructorMethod.signature.replace(/^constructor\d*__/, '')}`;
-  const ctorDesc = constructorMethod.description ? ` description="${escapeJsxAttr(resolveLinks(constructorMethod.description))}"` : '';
-  lines.push(`<ConstructorBlock signature="${escapeJsxAttr(ctorSig)}"${ctorDesc} />`);
+  const ctorDesc = constructorMethod.description ? ` description="${escapeJsxAttr(markdownToHtml(resolveLinks(constructorMethod.description)))}"` : '';
+  const ctorStatus = renderApiStatus(constructorMethod.isOfficial);
+  lines.push(`<ConstructorBlock status={${ctorStatus}} signature="${escapeJsxAttr(ctorSig)}"${ctorDesc} />`);
   lines.push('');
 }
 
@@ -1206,17 +1218,17 @@ function renderFunctionPage(lines: string[], info: TypeInfo): void {
 function renderMethodOverloadMdx(lines: string[], overload: MemberInfo): void {
   const statusEnum = overload.isOfficial ? 'ApiStatus.Official' : 'ApiStatus.Unofficial';
   const sig = `${overload.signature}: ${overload.returnType}`;
-  const descAttr = overload.description ? ` description="${escapeJsxAttr(resolveLinks(overload.description))}"` : '';
-  const remarksAttr = overload.remarks ? ` remarks="${escapeJsxAttr(resolveLinks(overload.remarks))}"` : '';
+  const descAttr = overload.description ? ` description="${escapeJsxAttr(markdownToHtml(resolveLinks(overload.description)))}"` : '';
+  const remarksAttr = overload.remarks ? ` remarks="${escapeJsxAttr(markdownToHtml(resolveLinks(overload.remarks)))}"` : '';
   const sinceAttr = overload.since ? ` since="${escapeJsxAttr(overload.since)}"` : '';
-  const returnTypeAttr = ` returnType="${escapeJsxAttr(renderTypeWithLinks(overload.returnType))}"`;
-  const returnDescAttr = overload.returnDescription ? ` returnDescription="${escapeJsxAttr(resolveLinks(overload.returnDescription))}"` : '';
+  const returnTypeAttr = ` returnType="${escapeJsxAttr(markdownToHtml(renderTypeWithLinks(overload.returnType)))}"`;
+  const returnDescAttr = overload.returnDescription ? ` returnDescription="${escapeJsxAttr(markdownToHtml(resolveLinks(overload.returnDescription)))}"` : '';
   const examplesAttr = overload.examples.length > 0 ? ` examples={${JSON.stringify(overload.examples)}}` : '';
 
   const params = overload.parameters.map((p) => ({
-    description: p.description || (p.name.endsWith('?') ? '*(Optional)*' : ''),
+    description: markdownToHtml(p.description || (p.name.endsWith('?') ? '*(Optional)*' : '')),
     name: p.name,
-    type: renderTypeWithLinks(p.type)
+    type: markdownToHtml(renderTypeWithLinks(p.type))
   }));
   const paramsAttr = params.length > 0 ? ` parameters={${JSON.stringify(params)}}` : '';
 
@@ -1236,10 +1248,10 @@ function renderMethodTableMdx(lines: string[], info: TypeInfo): void {
   lines.push('<MethodTable rows={[');
   for (const method of methods) {
     const status = renderApiStatus(method.isOfficial);
-    const desc = escapeJsString(resolveLinks(method.description));
+    const desc = escapeJsString(markdownToHtml(resolveLinks(method.description)));
     const sig = escapeJsString(method.signature);
     const slug = overloadSlug(method.overloadKey);
-    const returnType = renderTypeWithLinks(method.returnType);
+    const returnType = markdownToHtml(renderTypeWithLinks(method.returnType));
     const inheritedAttr = method.inheritedFrom ? `, inheritedFrom: "${escapeJsString(method.inheritedFrom)}"` : '';
     lines.push(
       `  { status: ${status}, signature: "${sig}", href: "./${slug}/", returns: "${escapeJsString(returnType)}", description: "${desc}"${inheritedAttr} },`
@@ -1257,8 +1269,8 @@ function renderPropertyTableMdx(lines: string[], info: TypeInfo): void {
   lines.push('<PropertyTable rows={[');
   for (const prop of props) {
     const status = renderApiStatus(prop.isOfficial);
-    const desc = escapeJsString(resolveLinks(prop.description));
-    const type = renderTypeWithLinks(prop.type);
+    const desc = escapeJsString(markdownToHtml(resolveLinks(prop.description)));
+    const type = markdownToHtml(renderTypeWithLinks(prop.type));
     const inheritedAttr = prop.inheritedFrom ? `, inheritedFrom: "${escapeJsString(prop.inheritedFrom)}"` : '';
     lines.push(
       `  { status: ${status}, name: "${escapeJsString(prop.name)}", href: "./${memberSlug(prop.name)}/", type: "${
