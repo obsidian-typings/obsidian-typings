@@ -1140,8 +1140,7 @@ function overloadSlug(overloadKey: string): string {
     .replace(/["'()]/g, ' ')
     .replace(/[^a-zA-Z0-9\s]/g, '')
     .trim()
-    .replace(/\s+/g, '-')
-    .toLowerCase();
+    .replace(/\s+/g, '-');
 }
 
 function renderApiStatus(isOfficial: boolean): string {
