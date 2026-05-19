@@ -1,4 +1,6 @@
 ---
+import { Code } from 'astro:components';
+
 interface Props {
   extends?: string[];
   kind: 'class' | 'interface';
@@ -13,4 +15,4 @@ const signature = `export ${kind} ${name}${typeParamsStr}${extendsClause}`;
 ---
 
 <p><strong>Signature:</strong></p>
-<pre><code class="language-ts">{signature}</code></pre>
+<Code code={signature} lang="ts" />

@@ -1,4 +1,6 @@
 ---
+import { Code } from 'astro:components';
+
 import { ApiStatus } from './types.ts';
 
 interface ParameterInfo {
@@ -50,7 +52,7 @@ const label = isOfficial ? 'Official' : 'Unofficial';
 {signature && (
   <>
     <p><strong>Signature:</strong></p>
-    <pre><code class="language-ts">{signature}</code></pre>
+    <Code code={signature} lang="ts" />
   </>
 )}
 

@@ -1,4 +1,6 @@
 ---
+import { Code } from 'astro:components';
+
 import { ApiStatus } from './types.ts';
 
 interface Props {
@@ -15,5 +17,5 @@ const title = status === ApiStatus.Official
 ---
 
 <h2><span class={iconClass} title={title}></span> Constructor</h2>
-<pre><code class="language-ts">{signature}</code></pre>
+<Code code={signature} lang="ts" />
 {description && <p set:html={description} />}
