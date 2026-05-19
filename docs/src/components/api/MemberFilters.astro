@@ -1,0 +1,89 @@
+---
+/**
+ * Filter toggles for member tables (properties, methods).
+ * Uses client-side JS to show/hide rows based on data attributes.
+ */
+
+interface Props {
+  /** Unique ID prefix for this filter group (to support multiple tables per page) */
+  group: string;
+  hasInherited: boolean;
+  hasOfficial: boolean;
+  hasUnofficial: boolean;
+}
+
+const { group, hasOfficial, hasUnofficial, hasInherited } = Astro.props;
+---
+
+<div class="member-filters" data-filter-group={group}>
+  {hasOfficial && hasUnofficial && (
+    <>
+      <label>
+        <input type="checkbox" data-filter="official" checked />
+        Official
+      </label>
+      <label>
+        <input type="checkbox" data-filter="unofficial" checked />
+        Unofficial
+      </label>
+    </>
+  )}
+  {hasInherited && (
+    <label>
+      <input type="checkbox" data-filter="inherited" checked />
+      Inherited
+    </label>
+  )}
+</div>
+
+<script>
+  function initFilters(): void {
+    for (const container of document.querySelectorAll<HTMLDivElement>('.member-filters')) {
+      const group = container.dataset['filterGroup'];
+      if (!group) {
+        continue;
+      }
+      const table = container.nextElementSibling;
+      if (!table || table.tagName !== 'TABLE') {
+        continue;
+      }
+      const rows = table.querySelectorAll<HTMLTableRowElement>('tbody tr[data-status]');
+
+      container.addEventListener('change', () => {
+        const showOfficial = container.querySelector<HTMLInputElement>('[data-filter="official"]')?.checked ?? true;
+        const showUnofficial = container.querySelector<HTMLInputElement>('[data-filter="unofficial"]')?.checked ?? true;
+        const showInherited = container.querySelector<HTMLInputElement>('[data-filter="inherited"]')?.checked ?? true;
+
+        for (const row of rows) {
+          const isOfficial = row.dataset['status'] === 'official';
+          const isInherited = row.dataset['inherited'] === 'true';
+
+          const statusVisible = isOfficial ? showOfficial : showUnofficial;
+          const inheritedVisible = isInherited ? showInherited : true;
+
+          row.style.display = statusVisible && inheritedVisible ? '' : 'none';
+        }
+      });
+    }
+  }
+
+  // Run on initial load and on Astro view transitions
+  initFilters();
+  document.addEventListener('astro:after-swap', initFilters);
+</script>
+
+<style>
+  .member-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+  }
+  .member-filters label {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    user-select: none;
+  }
+</style>

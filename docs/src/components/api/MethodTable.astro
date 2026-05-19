@@ -1,5 +1,6 @@
 ---
 import { ApiStatus } from './types.ts';
+import MemberFilters from './MemberFilters.astro';
 
 interface MethodRow {
   description: string;
@@ -15,9 +16,13 @@ interface Props {
 }
 
 const { rows } = Astro.props;
+const hasOfficial = rows.some((r) => r.status === ApiStatus.Official);
+const hasUnofficial = rows.some((r) => r.status !== ApiStatus.Official);
+const hasInherited = rows.some((r) => !!r.inheritedFrom);
 ---
 
 <h2>Methods</h2>
+<MemberFilters group="methods" hasOfficial={hasOfficial} hasUnofficial={hasUnofficial} hasInherited={hasInherited} />
 <table>
   <colgroup>
     <col style="width: auto" />
@@ -42,8 +47,9 @@ const { rows } = Astro.props;
       const inherited = row.inheritedFrom
         ? `<br/><em>(Inherited from ${row.inheritedFrom})</em>`
         : '';
+      const statusAttr = row.status === ApiStatus.Official ? 'official' : 'unofficial';
       return (
-        <tr>
+        <tr data-status={statusAttr} data-inherited={row.inheritedFrom ? 'true' : 'false'}>
           <td style="text-align: center"><span class={iconClass} title={title}></span></td>
           <td style="text-align: left"><a href={row.href} set:html={row.signature} /></td>
           <td style="text-align: left" set:html={row.returns} />
