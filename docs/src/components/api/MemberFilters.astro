@@ -1,11 +1,10 @@
 ---
 /**
  * Filter toggles for member tables (properties, methods).
- * Uses client-side JS to show/hide rows based on data attributes.
+ * Uses segmented toggle buttons: Official/Unofficial/Both, Own/Inherited/Both.
  */
 
 interface Props {
-  /** Unique ID prefix for this filter group (to support multiple tables per page) */
   group: string;
   hasInherited: boolean;
   hasOfficial: boolean;
@@ -13,26 +12,23 @@ interface Props {
 }
 
 const { group, hasOfficial, hasUnofficial, hasInherited } = Astro.props;
+const showStatusFilter = hasOfficial && hasUnofficial;
 ---
 
 <div class="member-filters" data-filter-group={group}>
-  {hasOfficial && hasUnofficial && (
-    <>
-      <label>
-        <input type="checkbox" data-filter="official" checked />
-        Official
-      </label>
-      <label>
-        <input type="checkbox" data-filter="unofficial" checked />
-        Unofficial
-      </label>
-    </>
+  {showStatusFilter && (
+    <div class="filter-group" data-filter-type="status">
+      <button class="filter-btn active" data-value="both">Both</button>
+      <button class="filter-btn" data-value="official">Official</button>
+      <button class="filter-btn" data-value="unofficial">Unofficial</button>
+    </div>
   )}
   {hasInherited && (
-    <label>
-      <input type="checkbox" data-filter="inherited" checked />
-      Inherited
-    </label>
+    <div class="filter-group" data-filter-type="scope">
+      <button class="filter-btn active" data-value="both">Both</button>
+      <button class="filter-btn" data-value="own">Own</button>
+      <button class="filter-btn" data-value="inherited">Inherited</button>
+    </div>
   )}
 </div>
 
@@ -43,31 +39,57 @@ const { group, hasOfficial, hasUnofficial, hasInherited } = Astro.props;
       if (!group) {
         continue;
       }
-      const table = container.nextElementSibling;
-      if (!table || table.tagName !== 'TABLE') {
+      let table = container.nextElementSibling;
+      while (table && table.tagName !== 'TABLE') {
+        table = table.nextElementSibling;
+      }
+      if (!table) {
         continue;
       }
       const rows = table.querySelectorAll<HTMLTableRowElement>('tbody tr[data-status]');
 
-      container.addEventListener('change', () => {
-        const showOfficial = container.querySelector<HTMLInputElement>('[data-filter="official"]')?.checked ?? true;
-        const showUnofficial = container.querySelector<HTMLInputElement>('[data-filter="unofficial"]')?.checked ?? true;
-        const showInherited = container.querySelector<HTMLInputElement>('[data-filter="inherited"]')?.checked ?? true;
-
-        for (const row of rows) {
-          const isOfficial = row.dataset['status'] === 'official';
-          const isInherited = row.dataset['inherited'] === 'true';
-
-          const statusVisible = isOfficial ? showOfficial : showUnofficial;
-          const inheritedVisible = isInherited ? showInherited : true;
-
-          row.style.display = statusVisible && inheritedVisible ? '' : 'none';
+      for (const filterGroup of container.querySelectorAll<HTMLDivElement>('.filter-group')) {
+        for (const btn of filterGroup.querySelectorAll<HTMLButtonElement>('.filter-btn')) {
+          btn.addEventListener('click', () => {
+            for (const sibling of filterGroup.querySelectorAll('.filter-btn')) {
+              sibling.classList.remove('active');
+            }
+            btn.classList.add('active');
+            applyFilters(container, rows);
+          });
         }
-      });
+      }
     }
   }
 
-  // Run on initial load and on Astro view transitions
+  function applyFilters(container: HTMLDivElement, rows: NodeListOf<HTMLTableRowElement>): void {
+    const statusBtn = container.querySelector<HTMLButtonElement>('[data-filter-type="status"] .filter-btn.active');
+    const scopeBtn = container.querySelector<HTMLButtonElement>('[data-filter-type="scope"] .filter-btn.active');
+    const statusFilter = statusBtn?.dataset['value'] ?? 'both';
+    const scopeFilter = scopeBtn?.dataset['value'] ?? 'both';
+
+    for (const row of rows) {
+      const isOfficial = row.dataset['status'] === 'official';
+      const isInherited = row.dataset['inherited'] === 'true';
+
+      let statusVisible = true;
+      if (statusFilter === 'official') {
+        statusVisible = isOfficial;
+      } else if (statusFilter === 'unofficial') {
+        statusVisible = !isOfficial;
+      }
+
+      let scopeVisible = true;
+      if (scopeFilter === 'own') {
+        scopeVisible = !isInherited;
+      } else if (scopeFilter === 'inherited') {
+        scopeVisible = isInherited;
+      }
+
+      row.style.display = statusVisible && scopeVisible ? '' : 'none';
+    }
+  }
+
   initFilters();
   document.addEventListener('astro:after-swap', initFilters);
 </script>
@@ -76,19 +98,33 @@ const { group, hasOfficial, hasUnofficial, hasInherited } = Astro.props;
   .member-filters {
     display: flex;
     gap: 1rem;
-    margin-bottom: 0.5rem;
-    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
   }
-  .member-filters label {
+  .filter-group {
     display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    cursor: pointer;
-    user-select: none;
-    line-height: 1;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.375rem;
+    overflow: hidden;
+    font-size: 0.8125rem;
   }
-  .member-filters input[type="checkbox"] {
-    margin: 0;
-    vertical-align: middle;
+  .filter-btn {
+    padding: 0.25rem 0.625rem;
+    border: none;
+    background: transparent;
+    color: var(--sl-color-gray-2);
+    cursor: pointer;
+    font-size: inherit;
+    line-height: 1.4;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .filter-btn:not(:last-child) {
+    border-right: 1px solid var(--sl-color-gray-5);
+  }
+  .filter-btn:hover {
+    background: var(--sl-color-gray-6);
+  }
+  .filter-btn.active {
+    background: var(--sl-color-accent);
+    color: var(--sl-color-white);
   }
 </style>

@@ -1263,7 +1263,7 @@ function renderMethodTableMdx(lines: string[], info: TypeInfo): void {
     const sig = escapeJsString(shortSig);
     const slug = overloadSlug(method.overloadKey);
     const returnType = markdownToHtml(renderTypeWithLinks(method.returnType));
-    const inheritedAttr = method.inheritedFrom ? `, inheritedFrom: "${escapeJsString(method.inheritedFrom)}"` : '';
+    const inheritedAttr = method.inheritedFrom ? `, inheritedFrom: "${escapeJsString(markdownToHtml(typeLink(method.inheritedFrom)))}"` : '';
     lines.push(
       `  { status: ${status}, signature: "${sig}", href: "./${slug}/", returns: "${escapeJsString(returnType)}", description: "${desc}"${inheritedAttr} },`
     );
@@ -1282,7 +1282,7 @@ function renderPropertyTableMdx(lines: string[], info: TypeInfo): void {
     const status = renderApiStatus(prop.isOfficial);
     const desc = escapeJsString(markdownToHtml(resolveLinks(prop.description)));
     const type = markdownToHtml(renderTypeWithLinks(prop.type));
-    const inheritedAttr = prop.inheritedFrom ? `, inheritedFrom: "${escapeJsString(prop.inheritedFrom)}"` : '';
+    const inheritedAttr = prop.inheritedFrom ? `, inheritedFrom: "${escapeJsString(markdownToHtml(typeLink(prop.inheritedFrom)))}"` : '';
     lines.push(
       `  { status: ${status}, name: "${escapeJsString(prop.name)}", href: "./${memberSlug(prop.name)}/", type: "${
         escapeJsString(type)
