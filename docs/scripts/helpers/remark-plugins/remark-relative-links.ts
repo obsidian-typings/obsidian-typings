@@ -55,9 +55,9 @@ export function remarkRelativeLinks(base: string): () => (tree: Root, file: VFil
 }
 
 /**
- * Extracts the lowercased content-relative path from an absolute file path.
+ * Extracts the content-relative path from an absolute file path, preserving case.
  *
- * Given `.../content/docs/api/.../interfaces/Foo.md`, returns `api/.../interfaces/foo`.
+ * Given `.../content/docs/api/.../interfaces/Foo.md`, returns `api/.../interfaces/Foo`.
  */
 function getContentSlug(filePath: string): null | string {
   const normalized = filePath.replaceAll('\\', '/');
@@ -69,5 +69,5 @@ function getContentSlug(filePath: string): null | string {
 
   const relative = normalized.slice(markerIndex + marker.length);
   const withoutExt = relative.replace(/\.\w+$/, '');
-  return withoutExt.toLowerCase();
+  return withoutExt;
 }

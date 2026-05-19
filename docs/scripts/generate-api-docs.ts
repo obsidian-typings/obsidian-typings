@@ -153,7 +153,7 @@ function computeCacheHash(srcDir: string): string {
 async function main(): Promise<void> {
   loadExternalTypeMaps();
 
-  const rootDir = resolve(process.cwd(), '..');
+  const rootDir = process.env['TYPINGS_ROOT'] ?? resolve(process.cwd(), '..');
   const srcDir = join(rootDir, 'src');
 
   // Check cache — skip generation if nothing changed
@@ -587,8 +587,18 @@ async function ensureDir(filePath: string): Promise<void> {
   await mkdir(dirname(filePath), { recursive: true });
 }
 
-function escapeJsx(text: string): string {
+/** Escape text for use inside a JSX attribute: attr="..." (MDX uses HTML-style parsing) */
+function escapeJsxAttr(text: string): string {
+  return text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/\n/g, ' ');
+}
+
+/** Escape text for use inside a JS string within a JSX expression: {...{key: "..."}} */
+function escapeJsString(text: string): string {
   return text.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, ' ');
+}
+
+function escapeMdxAngleBrackets(text: string): string {
+  return text.replace(/</g, '\\<').replace(/>/g, '\\>');
 }
 
 function escapeMarkdown(text: string): string {
@@ -739,10 +749,10 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     lines.push('');
 
     const statusEnum = prop.isOfficial ? 'ApiStatus.Official' : 'ApiStatus.Unofficial';
-    const typeAttr = ` type="${escapeJsx(renderTypeWithLinks(prop.type))}"`;
-    const descAttr = prop.description ? ` description="${escapeJsx(resolveLinks(prop.description))}"` : '';
-    const remarksAttr = prop.remarks ? ` remarks="${escapeJsx(resolveLinks(prop.remarks))}"` : '';
-    const sinceAttr = prop.since ? ` since="${escapeJsx(prop.since)}"` : '';
+    const typeAttr = ` type="${escapeJsxAttr(renderTypeWithLinks(prop.type))}"`;
+    const descAttr = prop.description ? ` description="${escapeJsxAttr(resolveLinks(prop.description))}"` : '';
+    const remarksAttr = prop.remarks ? ` remarks="${escapeJsxAttr(resolveLinks(prop.remarks))}"` : '';
+    const sinceAttr = prop.since ? ` since="${escapeJsxAttr(prop.since)}"` : '';
     const examplesAttr = prop.examples.length > 0 ? ` examples={${JSON.stringify(prop.examples)}}` : '';
 
     lines.push(`<MemberDetail status={${statusEnum}}${typeAttr}${descAttr}${remarksAttr}${sinceAttr}${examplesAttr} />`);
@@ -913,7 +923,7 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   // Import statement
   const importStatement = getImportStatement(info);
   if (importStatement) {
-    lines.push(`<ImportStatement text="${escapeJsx(importStatement)}" />`);
+    lines.push(`<ImportStatement text="${escapeJsxAttr(importStatement)}" />`);
     lines.push('');
   }
 
@@ -950,10 +960,8 @@ function getComponentImportPath(nsDir: string, typeDir: string): string {
   // Page is at: src/content/docs/api/{nsDir}/{typeDir}/index.mdx
   // Components are at: src/components/api/
   // We need to go up from content/docs/api/{nsDir}/{typeDir}/ to src/, then into components/api
-  // Full path from src/ root: content/docs/api/{nsDir}/{typeDir}
-  const fullPageDir = join('content', 'docs', 'api', nsDir, typeDir);
-  const depth = fullPageDir.split('/').length;
-  const ups = '../'.repeat(depth);
+  const segments = ['content', 'docs', 'api', ...nsDir.split('/'), ...typeDir.split('/')].filter(Boolean);
+  const ups = '../'.repeat(segments.length);
   return `${ups}components/api`;
 }
 
@@ -1143,8 +1151,8 @@ function renderConstructorMdx(lines: string[], name: string, info: TypeInfo): vo
     return;
   }
   const ctorSig = `new ${name}${constructorMethod.signature.replace(/^constructor\d*__/, '')}`;
-  const ctorDesc = constructorMethod.description ? ` description="${escapeJsx(resolveLinks(constructorMethod.description))}"` : '';
-  lines.push(`<ConstructorBlock signature="${escapeJsx(ctorSig)}"${ctorDesc} />`);
+  const ctorDesc = constructorMethod.description ? ` description="${escapeJsxAttr(resolveLinks(constructorMethod.description))}"` : '';
+  lines.push(`<ConstructorBlock signature="${escapeJsxAttr(ctorSig)}"${ctorDesc} />`);
   lines.push('');
 }
 
@@ -1178,13 +1186,13 @@ function renderFunctionPage(lines: string[], info: TypeInfo): void {
     lines.push('| Parameter | Type | Description |');
     lines.push('| :-- | :-- | :-- |');
     for (const param of fn.parameters) {
-      lines.push(`| \`${param.name}\` | ${renderTypeWithLinks(param.type)} | ${escapeMarkdown(resolveLinks(param.description))} |`);
+      lines.push(`| \`${param.name}\` | ${escapeMarkdown(escapeMdxAngleBrackets(renderTypeWithLinks(param.type)))} | ${escapeMarkdown(resolveLinks(param.description))} |`);
     }
     lines.push('');
   }
 
-  const returnDesc = fn.returnDescription ? ` — ${resolveLinks(fn.returnDescription)}` : '';
-  lines.push(`**Returns:** ${renderTypeWithLinks(fn.returnType)}${returnDesc}`);
+  const returnDesc = fn.returnDescription ? ` — ${escapeMdxAngleBrackets(resolveLinks(fn.returnDescription))}` : '';
+  lines.push(`**Returns:** ${escapeMdxAngleBrackets(renderTypeWithLinks(fn.returnType))}${returnDesc}`);
   lines.push('');
 
   for (const example of fn.examples) {
@@ -1198,11 +1206,11 @@ function renderFunctionPage(lines: string[], info: TypeInfo): void {
 function renderMethodOverloadMdx(lines: string[], overload: MemberInfo): void {
   const statusEnum = overload.isOfficial ? 'ApiStatus.Official' : 'ApiStatus.Unofficial';
   const sig = `${overload.signature}: ${overload.returnType}`;
-  const descAttr = overload.description ? ` description="${escapeJsx(resolveLinks(overload.description))}"` : '';
-  const remarksAttr = overload.remarks ? ` remarks="${escapeJsx(resolveLinks(overload.remarks))}"` : '';
-  const sinceAttr = overload.since ? ` since="${escapeJsx(overload.since)}"` : '';
-  const returnTypeAttr = ` returnType="${escapeJsx(renderTypeWithLinks(overload.returnType))}"`;
-  const returnDescAttr = overload.returnDescription ? ` returnDescription="${escapeJsx(resolveLinks(overload.returnDescription))}"` : '';
+  const descAttr = overload.description ? ` description="${escapeJsxAttr(resolveLinks(overload.description))}"` : '';
+  const remarksAttr = overload.remarks ? ` remarks="${escapeJsxAttr(resolveLinks(overload.remarks))}"` : '';
+  const sinceAttr = overload.since ? ` since="${escapeJsxAttr(overload.since)}"` : '';
+  const returnTypeAttr = ` returnType="${escapeJsxAttr(renderTypeWithLinks(overload.returnType))}"`;
+  const returnDescAttr = overload.returnDescription ? ` returnDescription="${escapeJsxAttr(resolveLinks(overload.returnDescription))}"` : '';
   const examplesAttr = overload.examples.length > 0 ? ` examples={${JSON.stringify(overload.examples)}}` : '';
 
   const params = overload.parameters.map((p) => ({
@@ -1214,7 +1222,7 @@ function renderMethodOverloadMdx(lines: string[], overload: MemberInfo): void {
 
   lines.push(
     `<MemberDetail status={${statusEnum}} signature="${
-      escapeJsx(sig)
+      escapeJsxAttr(sig)
     }"${descAttr}${remarksAttr}${sinceAttr}${returnTypeAttr}${returnDescAttr}${paramsAttr}${examplesAttr} />`
   );
   lines.push('');
@@ -1228,13 +1236,13 @@ function renderMethodTableMdx(lines: string[], info: TypeInfo): void {
   lines.push('<MethodTable rows={[');
   for (const method of methods) {
     const status = renderApiStatus(method.isOfficial);
-    const desc = escapeJsx(resolveLinks(method.description));
-    const sig = escapeJsx(method.signature);
+    const desc = escapeJsString(resolveLinks(method.description));
+    const sig = escapeJsString(method.signature);
     const slug = overloadSlug(method.overloadKey);
     const returnType = renderTypeWithLinks(method.returnType);
-    const inheritedAttr = method.inheritedFrom ? `, inheritedFrom: "${escapeJsx(method.inheritedFrom)}"` : '';
+    const inheritedAttr = method.inheritedFrom ? `, inheritedFrom: "${escapeJsString(method.inheritedFrom)}"` : '';
     lines.push(
-      `  { status: ${status}, signature: "${sig}", href: "./${slug}/", returns: "${escapeJsx(returnType)}", description: "${desc}"${inheritedAttr} },`
+      `  { status: ${status}, signature: "${sig}", href: "./${slug}/", returns: "${escapeJsString(returnType)}", description: "${desc}"${inheritedAttr} },`
     );
   }
   lines.push(']} />');
@@ -1249,12 +1257,12 @@ function renderPropertyTableMdx(lines: string[], info: TypeInfo): void {
   lines.push('<PropertyTable rows={[');
   for (const prop of props) {
     const status = renderApiStatus(prop.isOfficial);
-    const desc = escapeJsx(resolveLinks(prop.description));
+    const desc = escapeJsString(resolveLinks(prop.description));
     const type = renderTypeWithLinks(prop.type);
-    const inheritedAttr = prop.inheritedFrom ? `, inheritedFrom: "${escapeJsx(prop.inheritedFrom)}"` : '';
+    const inheritedAttr = prop.inheritedFrom ? `, inheritedFrom: "${escapeJsString(prop.inheritedFrom)}"` : '';
     lines.push(
-      `  { status: ${status}, name: "${escapeJsx(prop.name)}", href: "./${memberSlug(prop.name)}/", type: "${
-        escapeJsx(type)
+      `  { status: ${status}, name: "${escapeJsString(prop.name)}", href: "./${memberSlug(prop.name)}/", type: "${
+        escapeJsString(type)
       }", description: "${desc}"${inheritedAttr} },`
     );
   }
@@ -1306,7 +1314,7 @@ function typeLink(typeName: string): string {
     return `\`${typeName}\``;
   }
   const targetNsDir = getNamespaceDir(info.namespace);
-  return `[${typeName}](${BASE_PATH}/api/${targetNsDir}/${cleanName}/)`;
+  return `[${escapeMdxAngleBrackets(typeName)}](${BASE_PATH}/api/${targetNsDir}/${cleanName}/)`;
 }
 
 /** Single-letter and common generic type parameter names — not linkable */
@@ -1570,7 +1578,7 @@ async function generateSidebarJson(types: Map<string, TypeInfo>): Promise<void> 
 
 /** Render a type string with clickable links for known types */
 function renderTypeWithLinks(typeText: string): string {
-  return escapeMarkdown(typeText).replace(/\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match) => {
+  return typeText.replace(/\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match) => {
     // Skip generic type parameters
     if (GENERIC_TYPE_PARAMS.has(match)) {
       return match;
