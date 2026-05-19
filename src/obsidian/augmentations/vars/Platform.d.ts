@@ -1,4 +1,4 @@
-import type { PlatformEx } from '../internals/PlatformEx.d.ts';
+import type { PlatformEx } from '../../internals/PlatformEx.d.ts';
 
 export {};
 
