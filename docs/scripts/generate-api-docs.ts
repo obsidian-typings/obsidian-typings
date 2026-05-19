@@ -1249,7 +1249,8 @@ function renderMethodTableMdx(lines: string[], info: TypeInfo): void {
   for (const method of methods) {
     const status = renderApiStatus(method.isOfficial);
     const desc = escapeJsString(markdownToHtml(resolveLinks(method.description)));
-    const sig = escapeJsString(method.signature);
+    const shortSig = `${method.name}(${method.parameters.map((p) => p.name).join(', ')})`;
+    const sig = escapeJsString(shortSig);
     const slug = overloadSlug(method.overloadKey);
     const returnType = markdownToHtml(renderTypeWithLinks(method.returnType));
     const inheritedAttr = method.inheritedFrom ? `, inheritedFrom: "${escapeJsString(method.inheritedFrom)}"` : '';
