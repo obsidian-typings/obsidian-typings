@@ -299,27 +299,38 @@ function mergeInterfaceIntoType(target: TypeInfo, iface: InterfaceDeclaration, i
   }
   for (const method of iface.getMethods()) {
     const info = extractMethodSignatureInfo(method, isOfficial);
+    // Strip __ suffix for matching: getSuggestions__ should match getSuggestions
+    const baseName = info.name.replace(/__$/, '');
+    const baseKey = info.overloadKey.replace(/__(?=\(|$)/, '');
     // Deduplicate by overload key — prefer our (unofficial) version over official
-    const existingByKey = target.methods.find((m) => m.overloadKey === info.overloadKey);
+    const existingByKey = target.methods.find((m) => m.overloadKey === info.overloadKey || m.overloadKey === baseKey);
     const existingExact = target.methods.find((m) => m.name === info.name && m.signature === info.signature);
     if (existingExact) {
       if (!isOfficial && info.description) {
         existingExact.description = info.description;
       }
     } else if (existingByKey && !isOfficial) {
-      // Replace official version with our augmented version (more precise types)
+      // Replace official version with our augmented version (more precise types/docs)
+      // Keep the official name (without __) but use our description, examples, etc.
       const idx = target.methods.indexOf(existingByKey);
-      target.methods[idx] = info;
+      target.methods[idx] = {
+        ...info,
+        name: baseName,
+        overloadKey: baseKey,
+        signature: info.signature.replace(new RegExp(`^${info.name}`), baseName)
+      };
     } else if (!existingByKey) {
       target.methods.push(info);
     }
   }
   for (const prop of iface.getProperties()) {
     const info = extractPropertySignatureInfo(prop, isOfficial);
-    const existing = target.properties.find((p) => p.name === info.name);
+    const propBaseName = info.name.replace(/__$/, '');
+    const existing = target.properties.find((p) => p.name === info.name || p.name === propBaseName);
     if (existing) {
-      if (!isOfficial && info.description) {
-        existing.description = info.description;
+      if (!isOfficial) {
+        // Replace official version with our augmented version
+        Object.assign(existing, { ...info, name: propBaseName });
       }
     } else {
       target.properties.push(info);
@@ -639,7 +650,7 @@ function extractMethodInfo(method: MethodDeclaration, isOfficial: boolean): Memb
     parameters: params,
     remarks: getRemarks(method),
     returnDescription: getReturnDescription(method),
-    returnType: simplifyType(method.getReturnType().getText()),
+    returnType: getDeclaredReturnType(method),
     signature: `${name}(${paramStr})`,
     since: getSince(method),
     type: ''
@@ -671,7 +682,7 @@ function extractMethodSignatureInfo(method: MethodSignature, isOfficial: boolean
     parameters: params,
     remarks: getRemarks(method),
     returnDescription: getReturnDescription(method),
-    returnType: simplifyType(method.getReturnType().getText()),
+    returnType: getDeclaredReturnType(method),
     signature: `${name}(${paramStr})`,
     since: getSince(method),
     type: ''
@@ -1310,6 +1321,15 @@ function resolveLinks(text: string): string {
     }
     return `\`${display}\``;
   });
+}
+
+/** Get the return type as declared in source (preserves union order), falling back to resolved type */
+function getDeclaredReturnType(method: { getReturnType(): { getText(): string }; getReturnTypeNode?(): { getText(): string } | undefined }): string {
+  const annotation = method.getReturnTypeNode?.()?.getText();
+  if (annotation) {
+    return simplifyType(annotation);
+  }
+  return simplifyType(method.getReturnType().getText());
 }
 
 function simplifyType(typeText: string): string {
