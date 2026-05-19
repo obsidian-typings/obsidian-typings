@@ -80,10 +80,15 @@ const { group, hasOfficial, hasUnofficial, hasInherited } = Astro.props;
     font-size: 0.875rem;
   }
   .member-filters label {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.3rem;
     cursor: pointer;
     user-select: none;
+    line-height: 1;
+  }
+  .member-filters input[type="checkbox"] {
+    margin: 0;
+    vertical-align: middle;
   }
 </style>
