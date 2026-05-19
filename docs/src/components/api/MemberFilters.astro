@@ -108,23 +108,25 @@ const showStatusFilter = hasOfficial && hasUnofficial;
     font-size: 0.8125rem;
   }
   .filter-btn {
-    padding: 0.25rem 0.625rem;
+    padding: 0.3rem 0.75rem;
     border: none;
     background: transparent;
-    color: var(--sl-color-gray-2);
+    color: var(--sl-color-text);
     cursor: pointer;
+    font-family: inherit;
     font-size: inherit;
     line-height: 1.4;
+    white-space: nowrap;
     transition: background-color 0.15s, color 0.15s;
   }
   .filter-btn:not(:last-child) {
     border-right: 1px solid var(--sl-color-gray-5);
   }
-  .filter-btn:hover {
+  .filter-btn:hover:not(.active) {
     background: var(--sl-color-gray-6);
   }
   .filter-btn.active {
     background: var(--sl-color-accent);
-    color: var(--sl-color-white);
+    color: white;
   }
 </style>
