@@ -129,6 +129,26 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='orange' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E");
 }
 
+.icon-own {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3C/svg%3E");
+}
+
+.icon-inherited {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 7 10 10'/%3E%3Cpath d='M17 7v10H7'/%3E%3C/svg%3E");
+}
+
 /* Hide graph view on API pages — not useful for reference docs */
 .slsg-graph-panel { /* cspell:disable-line */
     display: none;

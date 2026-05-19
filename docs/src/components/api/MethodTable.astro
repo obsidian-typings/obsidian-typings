@@ -48,9 +48,11 @@ const hasInherited = rows.some((r) => !!r.inheritedFrom);
         ? `<br/><em>(Inherited from ${row.inheritedFrom})</em>`
         : '';
       const statusAttr = row.status === ApiStatus.Official ? 'official' : 'unofficial';
+      const scopeIcon = row.inheritedFrom ? 'icon-inherited' : 'icon-own';
+      const scopeTitle = row.inheritedFrom ? 'Inherited from parent type' : 'Defined on this type';
       return (
         <tr data-status={statusAttr} data-inherited={row.inheritedFrom ? 'true' : 'false'}>
-          <td style="text-align: center"><span class={iconClass} title={title}></span></td>
+          <td style="text-align: center; white-space: nowrap; width: 1px"><span class={iconClass} title={title}></span><span class={scopeIcon} title={scopeTitle}></span></td>
           <td style="text-align: left"><a href={row.href} set:html={row.signature} /></td>
           <td style="text-align: left" set:html={row.returns} />
           <td style="text-align: left" set:html={row.description + inherited} />
