@@ -41,9 +41,9 @@ export function remarkRelativeLinks(base: string): () => (tree: Root, file: VFil
         const anchor = anchorParts.length > 0 ? `#${anchorParts.join('#')}` : '';
 
         const targetSlug = pathPart.replace(/\/$/, '');
-        const currentDir = posix.dirname(currentSlug);
-
-        let relativePath = posix.relative(currentDir, targetSlug);
+        // Use the slug itself as the "directory" — each page gets its own URL directory
+        // e.g., slug "api/.../getsuggestions" → URL "/api/.../getsuggestions/"
+        let relativePath = posix.relative(currentSlug, targetSlug);
         if (!relativePath.startsWith('.')) {
           relativePath = `./${relativePath}`;
         }
