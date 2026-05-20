@@ -45,7 +45,7 @@ async function main(): Promise<void> {
   const tempDir = toPosixPath(join(toPosixPath(tmpdir()), `obsidian-typings-docs-${channel}`));
   if (existsSync(tempDir)) {
     console.warn('Removing stale worktree...');
-    await execFromRoot(`git worktree remove --force "${tempDir}"`, { cwd: ROOT_DIR, shouldIgnoreExitCode: true, isQuiet: true });
+    await execFromRoot(`git worktree remove --force "${tempDir}"`, { cwd: ROOT_DIR, isQuiet: true, shouldIgnoreExitCode: true });
     await rm(tempDir, { force: true, recursive: true });
   }
 
@@ -74,7 +74,7 @@ async function main(): Promise<void> {
   } finally {
     delete process.env['TYPINGS_ROOT'];
     console.warn('Cleaning up worktree...');
-    await execFromRoot(`git worktree remove --force "${tempDir}"`, { cwd: ROOT_DIR, shouldIgnoreExitCode: true, isQuiet: true });
+    await execFromRoot(`git worktree remove --force "${tempDir}"`, { cwd: ROOT_DIR, isQuiet: true, shouldIgnoreExitCode: true });
     await rm(tempDir, { force: true, recursive: true });
   }
 }

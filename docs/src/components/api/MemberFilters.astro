@@ -6,30 +6,22 @@
 
 interface Props {
   group: string;
-  hasInherited: boolean;
-  hasOfficial: boolean;
-  hasUnofficial: boolean;
 }
 
-const { group, hasOfficial, hasUnofficial, hasInherited } = Astro.props;
-const showStatusFilter = hasOfficial && hasUnofficial;
+const { group } = Astro.props;
 ---
 
 <div class="member-filters" data-filter-group={group}>
-  {showStatusFilter && (
-    <div class="filter-group" data-filter-type="status">
-      <button class="filter-btn active" data-value="both">Both</button>
-      <button class="filter-btn" data-value="official"><span class="icon-official"></span> Official</button>
-      <button class="filter-btn" data-value="unofficial"><span class="icon-unofficial"></span> Unofficial</button>
-    </div>
-  )}
-  {hasInherited && (
-    <div class="filter-group" data-filter-type="scope">
-      <button class="filter-btn active" data-value="both">Both</button>
-      <button class="filter-btn" data-value="own"><span class="icon-own"></span> Own</button>
-      <button class="filter-btn" data-value="inherited"><span class="icon-inherited"></span> Inherited</button>
-    </div>
-  )}
+  <div class="filter-group" data-filter-type="status">
+    <button class="filter-btn active" data-value="both">Both</button>
+    <button class="filter-btn" data-value="official"><span class="icon-official"></span> Official</button>
+    <button class="filter-btn" data-value="unofficial"><span class="icon-unofficial"></span> Unofficial</button>
+  </div>
+  <div class="filter-group" data-filter-type="scope">
+    <button class="filter-btn active" data-value="both">Both</button>
+    <button class="filter-btn" data-value="own"><span class="icon-own"></span> Own</button>
+    <button class="filter-btn" data-value="inherited"><span class="icon-inherited"></span> Inherited</button>
+  </div>
 </div>
 
 <script>

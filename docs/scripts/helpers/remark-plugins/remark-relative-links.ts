@@ -42,7 +42,7 @@ export function remarkRelativeLinks(base: string): () => (tree: Root, file: VFil
 
         const targetSlug = pathPart.replace(/\/$/, '');
         // Use the slug itself as the "directory" — each page gets its own URL directory
-        // e.g., slug "api/.../getsuggestions" → URL "/api/.../getsuggestions/"
+        // E.g., slug "api/.../getSuggestions" → URL "/api/.../getSuggestions/"
         let relativePath = posix.relative(currentSlug, targetSlug);
         if (!relativePath.startsWith('.')) {
           relativePath = `./${relativePath}`;
@@ -69,5 +69,6 @@ function getContentSlug(filePath: string): null | string {
 
   const relative = normalized.slice(markerIndex + marker.length);
   const withoutExt = relative.replace(/\.\w+$/, '');
-  return withoutExt;
+  // Strip trailing /index — index pages represent the directory, not a child
+  return withoutExt.replace(/\/index$/, '');
 }

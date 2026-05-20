@@ -28,6 +28,7 @@ import {
   writeFile
 } from 'node:fs/promises';
 import {
+  basename,
   dirname,
   join,
   relative,
@@ -45,6 +46,7 @@ interface MemberInfo {
   examples: string[];
   inheritedFrom: string;
   isOfficial: boolean;
+  isStatic: boolean;
   name: string;
   overloadKey: string;
   parameters: ParameterInfo[];
@@ -116,21 +118,164 @@ function extractInterfaceInfo(iface: InterfaceDeclaration, isOfficial: boolean, 
   };
 }
 
-/** Recursively find all .d.ts files under a directory */
+/** Recursively find all .d.ts and .ts source files under a directory */
 function findDtsFiles(dir: string): string[] {
   const results: string[] = [];
+  const tsFiles: string[] = [];
+  const dtsNames = new Set<string>();
+
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const fullPath = join(dir, entry.name);
     if (entry.isDirectory()) {
       results.push(...findDtsFiles(fullPath));
     } else if (entry.name.endsWith('.d.ts') && entry.name !== 'index.d.ts') {
       results.push(fullPath);
+      dtsNames.add(entry.name.replace(/\.d\.ts$/, ''));
+    } else if (entry.name.endsWith('.ts') && !entry.name.endsWith('.d.ts') && entry.name !== 'index.ts') {
+      tsFiles.push(fullPath);
     }
   }
+
+  // Include .ts files only when no corresponding .d.ts exists (e.g., implementation files)
+  for (const tsFile of tsFiles) {
+    const baseName = basename(tsFile, '.ts');
+    if (!dtsNames.has(baseName)) {
+      results.push(tsFile);
+    }
+  }
+
   return results;
 }
 
 const CACHE_FILE = join(process.cwd(), 'src/content/docs/api/.cache-hash');
+
+/** Collect functions declared inside module declarations */
+function collectModuleFunctions(
+  mod: ReturnType<SourceFile['getModules']>[number],
+  types: Map<string, TypeInfo>,
+  isOfficial: boolean,
+  namespace: string
+): void {
+  for (const fn of mod.getFunctions()) {
+    const name = fn.getName();
+    if (!name || types.has(name)) {
+      continue;
+    }
+    const paramDescriptions = getParamDescriptions(fn);
+    const params = fn.getParameters().map((p) => ({
+      description: paramDescriptions.get(p.getName()) ?? '',
+      name: p.getName(),
+      type: simplifyType(p.getType().getText())
+    }));
+    const paramStr = params.map((p) => `${p.name}: ${p.type}`).join(', ');
+    const returnType = simplifyType(fn.getReturnType().getText());
+    const signature = `${name}(${paramStr})`;
+    types.set(name, {
+      baseTypes: [],
+      description: getDescription(fn),
+      isOfficial: checkIsOfficial(fn, isOfficial),
+      kind: 'function',
+      methods: [{
+        description: getDescription(fn),
+        examples: getExamples(fn),
+        inheritedFrom: '',
+        isOfficial: checkIsOfficial(fn, isOfficial),
+        isStatic: false,
+        name,
+        overloadKey: name,
+        parameters: params,
+        remarks: getRemarks(fn),
+        returnDescription: getReturnDescription(fn),
+        returnType,
+        signature,
+        since: getSince(fn),
+        type: ''
+      }],
+      name,
+      namespace,
+      properties: [],
+      typeParameters: fn.getTypeParameters().map((tp) => tp.getText())
+    });
+  }
+}
+
+/** Collect variable declarations (e.g., const Platform__, let apiVersion__) */
+function collectModuleVariables(
+  mod: ReturnType<SourceFile['getModules']>[number],
+  types: Map<string, TypeInfo>,
+  isOfficial: boolean,
+  namespace: string
+): void {
+  for (const varStmt of mod.getVariableStatements()) {
+    for (const decl of varStmt.getDeclarations()) {
+      const rawName = decl.getName();
+      const name = rawName.replace(/__$/, '');
+      if (!name || types.has(name)) {
+        continue;
+      }
+      types.set(name, {
+        baseTypes: [simplifyType(decl.getType().getText())],
+        description: getDescription(varStmt),
+        isOfficial: checkIsOfficial(varStmt, isOfficial),
+        kind: 'interface',
+        methods: [],
+        name,
+        namespace,
+        properties: [],
+        typeParameters: []
+      });
+    }
+  }
+}
+
+/** Collect static functions from namespace declarations (e.g., namespace App { function getOverrideConfigDir(...) }) */
+function collectNamespaceStaticFunctions(
+  mod: ReturnType<SourceFile['getModules']>[number],
+  types: Map<string, TypeInfo>,
+  isOfficial: boolean
+): void {
+  for (const nestedNs of mod.getModules()) {
+    const nsName = nestedNs.getName();
+    const parentType = types.get(nsName);
+    if (!parentType) {
+      continue;
+    }
+    for (const fn of nestedNs.getFunctions()) {
+      const fnName = fn.getName();
+      if (!fnName) {
+        continue;
+      }
+      const paramDescriptions = getParamDescriptions(fn);
+      const params = fn.getParameters().map((p) => ({
+        description: paramDescriptions.get(p.getName()) ?? '',
+        name: p.getName(),
+        type: simplifyType(p.getType().getText())
+      }));
+      const paramStr = params.map((p) => `${p.name}: ${p.type}`).join(', ');
+      const returnType = simplifyType(fn.getReturnType().getText());
+      const signature = `${fnName}(${paramStr})`;
+      const existing = parentType.methods.find((m) => m.name === fnName);
+      if (!existing) {
+        parentType.methods.push({
+          description: getDescription(fn),
+          examples: getExamples(fn),
+          inheritedFrom: '',
+          isOfficial: checkIsOfficial(fn, isOfficial),
+          isStatic: true,
+          name: fnName,
+          overloadKey: fnName,
+          parameters: params,
+          remarks: getRemarks(fn),
+          returnDescription: getReturnDescription(fn),
+          returnType,
+          signature: `static ${signature}`,
+          since: getSince(fn),
+          type: ''
+        });
+      }
+    }
+  }
+}
 
 /** Compute a hash of all source files + the generator script itself */
 function computeCacheHash(srcDir: string): string {
@@ -232,7 +377,7 @@ async function main(): Promise<void> {
 
   let pageCount = 0;
   for (const [name, info] of types) {
-    if (info.properties.length === 0 && info.methods.length === 0) {
+    if (info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
       continue;
     }
     await generateOverviewPage(name, info, backlinks.get(name) ?? []);
@@ -371,6 +516,7 @@ function processModuleDeclaration(
       const existing = types.get(name);
       if (existing) {
         mergeInterfaceIntoType(existing, iface, isOfficial);
+        updateNamespaceIfMoreSpecific(existing, namespace, isOfficial);
       }
     } else {
       types.set(name, extractInterfaceInfo(iface, isOfficial, namespace));
@@ -385,11 +531,16 @@ function processModuleDeclaration(
       const existing = types.get(name);
       if (existing) {
         mergeClassIntoType(existing, cls, isOfficial);
+        updateNamespaceIfMoreSpecific(existing, namespace, isOfficial);
       }
     } else {
       types.set(name, extractClassInfo(cls, isOfficial, namespace));
     }
   }
+
+  collectModuleFunctions(mod, types, isOfficial, namespace);
+  collectNamespaceStaticFunctions(mod, types, isOfficial);
+  collectModuleVariables(mod, types, isOfficial, namespace);
 }
 
 function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOfficial: boolean, namespace: string): void {
@@ -433,6 +584,7 @@ function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOffi
       const existing = types.get(name);
       if (existing) {
         mergeInterfaceIntoType(existing, iface, isOfficial);
+        updateNamespaceIfMoreSpecific(existing, namespace, isOfficial);
       }
     } else {
       types.set(name, extractInterfaceInfo(iface, isOfficial, namespace));
@@ -448,6 +600,7 @@ function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOffi
       const existing = types.get(name);
       if (existing) {
         mergeClassIntoType(existing, cls, isOfficial);
+        updateNamespaceIfMoreSpecific(existing, namespace, isOfficial);
       }
     } else {
       types.set(name, extractClassInfo(cls, isOfficial, namespace));
@@ -479,8 +632,28 @@ function resolveInheritedMembers(types: Map<string, TypeInfo>): void {
   }
 }
 
+/**
+ * Update namespace to the more specific path from source files.
+ * Source files in subdirectories (e.g., obsidian/augmentations/components) should
+ * override the flat namespace (obsidian/augmentations) assigned from obsidian.d.ts.
+ */
+function updateNamespaceIfMoreSpecific(existing: TypeInfo, namespace: string, isOfficial: boolean): void {
+  if (!isOfficial && namespace.startsWith(`${existing.namespace}/`)) {
+    existing.namespace = namespace;
+  }
+}
+
 /** Event-like method names that should be split by string literal first param */
 const EVENT_METHODS = new Set(['off', 'on', 'trigger', 'tryTrigger']);
+
+interface ReturnTypeProvider {
+  getReturnType(): TextProvider;
+  getReturnTypeNode?(): TextProvider | undefined;
+}
+
+interface TextProvider {
+  getText(): string;
+}
 
 /** Build a map of type name → list of type names that reference it */
 function buildBacklinks(types: Map<string, TypeInfo>): Map<string, string[]> {
@@ -565,6 +738,7 @@ function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOffic
         examples: getExamples(fn),
         inheritedFrom: '',
         isOfficial: checkIsOfficial(fn, isOfficial),
+        isStatic: false,
         name,
         overloadKey: name,
         parameters: params,
@@ -587,8 +761,9 @@ function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOffic
 function computeOverloadKey(method: MemberInfo): string {
   if (EVENT_METHODS.has(method.name) && method.parameters.length > 0) {
     const firstParam = method.parameters[0];
-    if (firstParam?.type.startsWith('"')) {
-      return `${method.name}(${firstParam.type})`;
+    if (firstParam?.type.startsWith('"') || firstParam?.type.startsWith('\'')) {
+      const normalizedType = firstParam.type.replace(/"/g, '\'');
+      return `${method.name}(${normalizedType})`;
     }
   }
   return method.name;
@@ -598,33 +773,27 @@ async function ensureDir(filePath: string): Promise<void> {
   await mkdir(dirname(filePath), { recursive: true });
 }
 
+/** Escape text for use inside a JS string within a JSX expression: {...{key: "..."}} */
+function escapeJsString(text: string): string {
+  return text.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, ' ');
+}
+
 /** Escape text for use inside a JSX attribute: attr="..." (MDX uses HTML-style parsing) */
 function escapeJsxAttr(text: string): string {
   return text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/\n/g, ' ');
 }
 
-/** Escape text for use inside a JS string within a JSX expression: {...{key: "..."}} */
-function escapeJsString(text: string): string {
-  return text.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, ' ');
+function escapeMarkdown(text: string): string {
+  return text.replace(/\|/g, '\\|').replace(/\n/g, ' ').replace(/\{/g, '\\{').replace(/\}/g, '\\}');
 }
 
 function escapeMdxAngleBrackets(text: string): string {
   return text.replace(/</g, '\\<').replace(/>/g, '\\>');
 }
 
-/** Convert inline markdown to HTML for use in component props with set:html */
-function markdownToHtml(text: string): string {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\n/g, '<br/>');
-}
-
-function escapeMarkdown(text: string): string {
-  return text.replace(/\|/g, '\\|').replace(/\n/g, ' ');
+/** Escape curly braces in MDX markdown content to prevent JSX expression parsing */
+function escapeMdxBraces(text: string): string {
+  return text.replace(/\{/g, '\\{').replace(/\}/g, '\\}');
 }
 
 function extractMethodInfo(method: MethodDeclaration, isOfficial: boolean): MemberInfo {
@@ -645,6 +814,7 @@ function extractMethodInfo(method: MethodDeclaration, isOfficial: boolean): Memb
     examples: getExamples(method),
     inheritedFrom: '',
     isOfficial: checkIsOfficial(method, isOfficial),
+    isStatic: false,
     name,
     overloadKey: '',
     parameters: params,
@@ -677,6 +847,7 @@ function extractMethodSignatureInfo(method: MethodSignature, isOfficial: boolean
     examples: getExamples(method),
     inheritedFrom: '',
     isOfficial: checkIsOfficial(method, isOfficial),
+    isStatic: false,
     name,
     overloadKey: '',
     parameters: params,
@@ -700,6 +871,7 @@ function extractPropertyInfo(prop: PropertyDeclaration, isOfficial: boolean): Me
     examples: getExamples(prop),
     inheritedFrom: '',
     isOfficial: checkIsOfficial(prop, isOfficial),
+    isStatic: false,
     name: `${name}${optionalSuffix}`,
     overloadKey: '',
     parameters: [],
@@ -721,6 +893,7 @@ function extractPropertySignatureInfo(prop: PropertySignature, isOfficial: boole
     examples: getExamples(prop),
     inheritedFrom: '',
     isOfficial: checkIsOfficial(prop, isOfficial),
+    isStatic: false,
     name: `${name}${optionalSuffix}`,
     overloadKey: '',
     parameters: [],
@@ -748,8 +921,8 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
   const typeDir = name;
   const componentImport = `import { MemberDetail, ApiStatus } from "${getComponentImportPath(nsDir, typeDir)}";`;
 
-  // Property pages
-  const props = info.properties.filter((p) => !p.name.includes('__'));
+  // Property pages (skip inherited — they live on the parent type)
+  const props = info.properties.filter((p) => !p.name.includes('__') && !p.inheritedFrom);
   for (const prop of props) {
     const filePath = join(OUTPUT_DIR, nsDir, typeDir, `${memberSlug(prop.name)}.mdx`);
     await ensureDir(filePath);
@@ -788,8 +961,8 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     await writeFile(filePath, lines.join('\n'), 'utf-8');
   }
 
-  // Method pages — each overload key gets its own page
-  const methods = info.methods.filter((m) => !m.name.includes('__'));
+  // Method pages — each overload key gets its own page (skip inherited)
+  const methods = info.methods.filter((m) => !m.name.includes('__') && !m.inheritedFrom);
   const overloadGroups = new Map<string, MemberInfo[]>();
   for (const method of methods) {
     const key = method.overloadKey;
@@ -822,7 +995,7 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     lines.push('');
 
     for (const overload of overloads) {
-      renderMethodOverloadMdx(lines, overload);
+      renderMethodOverloadMdx(lines, overload, name);
       if (overloads.length > 1) {
         lines.push('---');
         lines.push('');
@@ -836,7 +1009,7 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
 async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promise<void> {
   const namespaces = new Map<string, TypeInfo[]>();
   for (const [_name, info] of types) {
-    if (info.properties.length === 0 && info.methods.length === 0) {
+    if (info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
       continue;
     }
     if (!namespaces.has(info.namespace)) {
@@ -938,7 +1111,7 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
 
   // Description
   if (info.description) {
-    lines.push(resolveLinks(info.description));
+    lines.push(escapeMdxBraces(resolveLinks(info.description)));
     lines.push('');
   }
 
@@ -998,6 +1171,15 @@ function getConstructorMethod(methods: MemberInfo[]): MemberInfo | undefined {
     const numB = parseInt(b.name.replace(/\D/g, '') || '0', 10);
     return numB - numA;
   })[0];
+}
+
+/** Get the return type as declared in source (preserves union order), falling back to resolved type */
+function getDeclaredReturnType(method: ReturnTypeProvider): string {
+  const annotation = method.getReturnTypeNode?.()?.getText();
+  if (annotation) {
+    return simplifyType(annotation);
+  }
+  return simplifyType(method.getReturnType().getText());
 }
 
 function getDescription(node: JSDocableNode): string {
@@ -1121,6 +1303,30 @@ function getSince(node: JSDocableNode): string {
   return '';
 }
 
+/** Convert inline markdown to HTML for use in component props with set:html */
+function markdownToHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\[(?<text>[^\]]+)\]\((?<url>[^)]+)\)/g, '<a href="$<url>">$<text></a>')
+    .replace(/`(?<code>[^`]+)`/g, '<code>$<code></code>')
+    .replace(/\n/g, '<br/>');
+}
+
+/** Build the href for a member, pointing to the parent type's page if inherited */
+function memberHref(memberSlugStr: string, inheritedFrom: string): string {
+  if (!inheritedFrom) {
+    return `./${memberSlugStr}/`;
+  }
+  const parentInfo = allTypes.get(inheritedFrom);
+  if (!parentInfo) {
+    return `./${memberSlugStr}/`;
+  }
+  const parentNsDir = getNamespaceDir(parentInfo.namespace);
+  return `${BASE_PATH}/api/${parentNsDir}/${inheritedFrom}/${memberSlugStr}/`;
+}
+
 /** Sanitize a member name for use as a filename */
 function memberSlug(name: string): string {
   const cleaned = name
@@ -1184,12 +1390,6 @@ function renderFunctionPage(lines: string[], info: TypeInfo): void {
     return;
   }
 
-  // Description before signature
-  if (info.description) {
-    lines.push(resolveLinks(info.description));
-    lines.push('');
-  }
-
   if (fn.remarks) {
     lines.push(`> ${resolveLinks(fn.remarks)}`);
     lines.push('');
@@ -1208,7 +1408,11 @@ function renderFunctionPage(lines: string[], info: TypeInfo): void {
     lines.push('| Parameter | Type | Description |');
     lines.push('| :-- | :-- | :-- |');
     for (const param of fn.parameters) {
-      lines.push(`| \`${param.name}\` | ${escapeMarkdown(escapeMdxAngleBrackets(renderTypeWithLinks(param.type)))} | ${escapeMarkdown(resolveLinks(param.description))} |`);
+      lines.push(
+        `| \`${param.name}\` | ${escapeMarkdown(escapeMdxAngleBrackets(renderTypeWithLinks(param.type)))} | ${
+          escapeMarkdown(resolveLinks(param.description))
+        } |`
+      );
     }
     lines.push('');
   }
@@ -1225,7 +1429,7 @@ function renderFunctionPage(lines: string[], info: TypeInfo): void {
   }
 }
 
-function renderMethodOverloadMdx(lines: string[], overload: MemberInfo): void {
+function renderMethodOverloadMdx(lines: string[], overload: MemberInfo, _typeName: string): void {
   const statusEnum = overload.isOfficial ? 'ApiStatus.Official' : 'ApiStatus.Unofficial';
   const sig = `${overload.signature}: ${overload.returnType}`;
   const descAttr = overload.description ? ` description="${escapeJsxAttr(markdownToHtml(resolveLinks(overload.description)))}"` : '';
@@ -1251,7 +1455,14 @@ function renderMethodOverloadMdx(lines: string[], overload: MemberInfo): void {
 }
 
 function renderMethodTableMdx(lines: string[], info: TypeInfo): void {
-  const methods = info.methods.filter((m) => !m.name.includes('__'));
+  const methods = info.methods
+    .filter((m) => !m.name.includes('__'))
+    .sort((a, b) => {
+      if (a.isStatic !== b.isStatic) {
+        return a.isStatic ? 1 : -1;
+      }
+      return a.name.localeCompare(b.name);
+    });
   if (methods.length === 0) {
     return;
   }
@@ -1259,13 +1470,23 @@ function renderMethodTableMdx(lines: string[], info: TypeInfo): void {
   for (const method of methods) {
     const status = renderApiStatus(method.isOfficial);
     const desc = escapeJsString(markdownToHtml(resolveLinks(method.description)));
-    const shortSig = `${method.name}(${method.parameters.map((p) => p.name).join(', ')})`;
+    const staticPrefix = method.isStatic ? 'static ' : '';
+    const shortParams = method.parameters.map((p, i) => {
+      if (i === 0 && EVENT_METHODS.has(method.name) && (p.type.startsWith('"') || p.type.startsWith('\''))) {
+        return p.type.replace(/"/g, '\'');
+      }
+      return p.name;
+    }).join(', ');
+    const shortSig = `${staticPrefix}${method.name}(${shortParams})`;
     const sig = escapeJsString(shortSig);
     const slug = overloadSlug(method.overloadKey);
     const returnType = markdownToHtml(renderTypeWithLinks(method.returnType));
     const inheritedAttr = method.inheritedFrom ? `, inheritedFrom: "${escapeJsString(markdownToHtml(typeLink(method.inheritedFrom)))}"` : '';
+    const href = memberHref(slug, method.inheritedFrom);
     lines.push(
-      `  { status: ${status}, signature: "${sig}", href: "./${slug}/", returns: "${escapeJsString(returnType)}", description: "${desc}"${inheritedAttr} },`
+      `  { status: ${status}, signature: "${sig}", href: "${escapeJsString(href)}", returns: "${
+        escapeJsString(returnType)
+      }", description: "${desc}"${inheritedAttr} },`
     );
   }
   lines.push(']} />');
@@ -1283,8 +1504,9 @@ function renderPropertyTableMdx(lines: string[], info: TypeInfo): void {
     const desc = escapeJsString(markdownToHtml(resolveLinks(prop.description)));
     const type = markdownToHtml(renderTypeWithLinks(prop.type));
     const inheritedAttr = prop.inheritedFrom ? `, inheritedFrom: "${escapeJsString(markdownToHtml(typeLink(prop.inheritedFrom)))}"` : '';
+    const href = memberHref(memberSlug(prop.name), prop.inheritedFrom);
     lines.push(
-      `  { status: ${status}, name: "${escapeJsString(prop.name)}", href: "./${memberSlug(prop.name)}/", type: "${
+      `  { status: ${status}, name: "${escapeJsString(prop.name)}", href: "${escapeJsString(href)}", type: "${
         escapeJsString(type)
       }", description: "${desc}"${inheritedAttr} },`
     );
@@ -1320,15 +1542,6 @@ function resolveLinks(text: string): string {
     }
     return `\`${display}\``;
   });
-}
-
-/** Get the return type as declared in source (preserves union order), falling back to resolved type */
-function getDeclaredReturnType(method: { getReturnType(): { getText(): string }; getReturnTypeNode?(): { getText(): string } | undefined }): string {
-  const annotation = method.getReturnTypeNode?.()?.getText();
-  if (annotation) {
-    return simplifyType(annotation);
-  }
-  return simplifyType(method.getReturnType().getText());
 }
 
 function simplifyType(typeText: string): string {
@@ -1547,7 +1760,7 @@ interface SidebarTreeNode {
 function buildSidebarTree(types: Map<string, TypeInfo>): SidebarTreeNode {
   const root: SidebarTreeNode = { children: new Map(), types: [] };
   for (const [_name, info] of types) {
-    if (info.properties.length === 0 && info.methods.length === 0) {
+    if (info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
       continue;
     }
     const parts = info.namespace.split('/');
@@ -1564,7 +1777,7 @@ function buildSidebarTree(types: Map<string, TypeInfo>): SidebarTreeNode {
 }
 
 function escapeYaml(text: string): string {
-  return text.replace(/["']/g, '');
+  return text.replace(/"/g, '\\"');
 }
 
 async function generateSidebarJson(types: Map<string, TypeInfo>): Promise<void> {
@@ -1668,19 +1881,19 @@ function resolveTsUtilityUrl(name: string): string | undefined {
 function sidebarTreeToEntries(node: SidebarTreeNode, label: string): SidebarEntry {
   const items: (SidebarEntry | SidebarLink)[] = [];
 
-  // Add type links at this level
-  const sortedTypes = [...node.types].sort((a, b) => a.name.localeCompare(b.name));
-  for (const t of sortedTypes) {
-    items.push({ label: t.name, link: `/api/${t.namespace}/${t.name}/` });
-  }
-
-  // Add child directory groups
+  // Add child directory groups first (before individual types)
   const sortedChildren = [...node.children.keys()].sort((a, b) => a.localeCompare(b));
   for (const childName of sortedChildren) {
     const child = node.children.get(childName);
     if (child) {
       items.push(sidebarTreeToEntries(child, childName.replace(/__/g, '/')));
     }
+  }
+
+  // Add type links at this level
+  const sortedTypes = [...node.types].sort((a, b) => a.name.localeCompare(b.name));
+  for (const t of sortedTypes) {
+    items.push({ label: t.name, link: `/api/${t.namespace}/${t.name}/` });
   }
 
   return { collapsed: true, items, label };

@@ -16,13 +16,10 @@ interface Props {
 }
 
 const { rows } = Astro.props;
-const hasOfficial = rows.some((r) => r.status === ApiStatus.Official);
-const hasUnofficial = rows.some((r) => r.status !== ApiStatus.Official);
-const hasInherited = rows.some((r) => !!r.inheritedFrom);
 ---
 
 <h2>Properties</h2>
-<MemberFilters group="properties" hasOfficial={hasOfficial} hasUnofficial={hasUnofficial} hasInherited={hasInherited} />
+<MemberFilters group="properties" />
 <table>
   <colgroup>
     <col style="width: auto" />
