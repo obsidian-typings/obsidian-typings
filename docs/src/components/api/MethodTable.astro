@@ -1,6 +1,5 @@
 ---
 import { ApiStatus } from './types.ts';
-import MemberFilters from './MemberFilters.astro';
 
 interface MethodRow {
   description: string;
@@ -19,7 +18,6 @@ const { rows } = Astro.props;
 ---
 
 <h2>Methods</h2>
-<MemberFilters group="methods" />
 <table>
   <colgroup>
     <col style="width: auto" />

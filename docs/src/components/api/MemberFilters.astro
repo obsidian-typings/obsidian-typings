@@ -1,17 +1,12 @@
 ---
 /**
- * Filter toggles for member tables (properties, methods).
+ * Page-level filter toggles for all member tables (properties, methods).
  * Segmented toggle buttons: Official/Unofficial/Both, Own/Inherited/Both.
+ * Renders once per page and controls all tables with data-status rows.
  */
-
-interface Props {
-  group: string;
-}
-
-const { group } = Astro.props;
 ---
 
-<div class="member-filters" data-filter-group={group}>
+<div class="member-filters">
   <div class="filter-group" data-filter-type="status">
     <button class="filter-btn active" data-value="both">Both</button>
     <button class="filter-btn" data-value="official"><span class="icon-official"></span> Official</button>
@@ -26,30 +21,22 @@ const { group } = Astro.props;
 
 <script>
   function initFilters(): void {
-    for (const container of document.querySelectorAll<HTMLDivElement>('.member-filters')) {
-      const group = container.dataset['filterGroup'];
-      if (!group) {
-        continue;
-      }
-      let table = container.nextElementSibling;
-      while (table && table.tagName !== 'TABLE') {
-        table = table.nextElementSibling;
-      }
-      if (!table) {
-        continue;
-      }
-      const rows = table.querySelectorAll<HTMLTableRowElement>('tbody tr[data-status]');
+    const container = document.querySelector<HTMLDivElement>('.member-filters');
+    if (!container) {
+      return;
+    }
 
-      for (const filterGroup of container.querySelectorAll<HTMLDivElement>('.filter-group')) {
-        for (const btn of filterGroup.querySelectorAll<HTMLButtonElement>('.filter-btn')) {
-          btn.addEventListener('click', () => {
-            for (const sibling of filterGroup.querySelectorAll('.filter-btn')) {
-              sibling.classList.remove('active');
-            }
-            btn.classList.add('active');
-            applyFilters(container, rows);
-          });
-        }
+    const rows = document.querySelectorAll<HTMLTableRowElement>('table tbody tr[data-status]');
+
+    for (const filterGroup of container.querySelectorAll<HTMLDivElement>('.filter-group')) {
+      for (const btn of filterGroup.querySelectorAll<HTMLButtonElement>('.filter-btn')) {
+        btn.addEventListener('click', () => {
+          for (const sibling of filterGroup.querySelectorAll('.filter-btn')) {
+            sibling.classList.remove('active');
+          }
+          btn.classList.add('active');
+          applyFilters(container, rows);
+        });
       }
     }
   }

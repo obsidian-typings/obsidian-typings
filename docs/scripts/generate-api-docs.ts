@@ -1184,7 +1184,7 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   // Component imports — compute relative path from generated page to components
   const componentPath = getComponentImportPath(nsDir, typeSlug);
   lines.push(
-    `import { TypeBadge, TypeSignature, ImportStatement, ConstructorBlock, PropertyTable, MethodTable, ApiStatus } from "${componentPath}";`
+    `import { TypeBadge, TypeSignature, ImportStatement, ConstructorBlock, MemberFilters, PropertyTable, MethodTable, ApiStatus } from "${componentPath}";`
   );
   lines.push('');
 
@@ -1225,6 +1225,12 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   }
 
   renderConstructorMdx(lines, name, info);
+
+  if (info.properties.length > 0 || info.methods.length > 0) {
+    lines.push('<MemberFilters />');
+    lines.push('');
+  }
+
   renderPropertyTableMdx(lines, info);
   renderMethodTableMdx(lines, info);
 
