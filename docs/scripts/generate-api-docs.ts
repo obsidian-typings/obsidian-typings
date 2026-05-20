@@ -67,12 +67,14 @@ interface ParameterInfo {
 interface TypeInfo {
   baseTypes: string[];
   description: string;
+  examples: string[];
   isOfficial: boolean;
   kind: 'class' | 'function' | 'interface' | 'variable';
   methods: MemberInfo[];
   name: string;
   namespace: string;
   properties: MemberInfo[];
+  remarks: string;
   typeParameters: string[];
   /** For variables: the declaration keyword (let/const/var) */
   variableKeyword?: string;
@@ -98,12 +100,14 @@ function extractClassInfo(cls: ClassDeclaration, isOfficial: boolean, namespace:
   return {
     baseTypes: cls.getExtends() ? [cls.getExtends()?.getText() ?? ''] : [],
     description: getDescription(cls),
+    examples: getExamples(cls),
     isOfficial,
     kind: 'class',
     methods: cls.getMethods().map((m) => extractMethodInfo(m, isOfficial)),
     name,
     namespace,
     properties: cls.getProperties().map((p) => extractPropertyInfo(p, isOfficial)),
+    remarks: getRemarks(cls),
     typeParameters: cls.getTypeParameters().map((tp) => tp.getText())
   };
 }
@@ -112,12 +116,14 @@ function extractInterfaceInfo(iface: InterfaceDeclaration, isOfficial: boolean, 
   return {
     baseTypes: iface.getExtends().map((e) => e.getText()),
     description: getDescription(iface),
+    examples: getExamples(iface),
     isOfficial,
     kind: 'interface',
     methods: iface.getMethods().map((m) => extractMethodSignatureInfo(m, isOfficial)),
     name: iface.getName(),
     namespace,
     properties: iface.getProperties().map((p) => extractPropertySignatureInfo(p, isOfficial)),
+    remarks: getRemarks(iface),
     typeParameters: iface.getTypeParameters().map((tp) => tp.getText())
   };
 }
@@ -196,6 +202,7 @@ function collectModuleFunctions(
     types.set(name, {
       baseTypes: [],
       description: getDescription(fn),
+      examples: getExamples(fn),
       isOfficial: checkIsOfficial(fn, isOfficial),
       kind: 'function',
       methods: [{
@@ -217,6 +224,7 @@ function collectModuleFunctions(
       name,
       namespace,
       properties: [],
+      remarks: getRemarks(fn),
       typeParameters: fn.getTypeParameters().map((tp) => tp.getText())
     });
   }
@@ -241,12 +249,14 @@ function collectModuleVariables(
       types.set(name, {
         baseTypes: [],
         description: getDescription(varStmt),
+        examples: getExamples(varStmt),
         isOfficial: checkIsOfficial(varStmt, isOfficial),
         kind: 'variable',
         methods: [],
         name,
         namespace,
         properties: [],
+        remarks: getRemarks(varStmt),
         typeParameters: [],
         variableKeyword: declKind,
         variableType: varType
@@ -385,14 +395,7 @@ async function main(): Promise<void> {
 
   allTypes = types;
 
-  // Register all type parameter names so renderTypeWithLinks won't hyperlink them
-  for (const [_name, info] of types) {
-    for (const tp of info.typeParameters) {
-      // Strip constraints: "T extends Foo" → "T"
-      const bareParam = tp.replace(/\s+extends\s+.*$/, '');
-      GENERIC_TYPE_PARAMS.add(bareParam);
-    }
-  }
+  registerGenericTypeParams(types);
 
   // Build backlinks map
   const backlinks = buildBacklinks(types);
@@ -404,7 +407,7 @@ async function main(): Promise<void> {
 
   let pageCount = 0;
   for (const [name, info] of types) {
-    if (info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
+    if (info.kind !== 'variable' && info.kind !== 'function' && info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
       continue;
     }
     await generateOverviewPage(name, info, backlinks.get(name) ?? []);
@@ -512,6 +515,14 @@ function mergeInterfaceIntoType(target: TypeInfo, iface: InterfaceDeclaration, i
   if (!isOfficial && desc) {
     target.description = desc;
   }
+  const examples = getExamples(iface);
+  if (!isOfficial && examples.length > 0) {
+    target.examples = examples;
+  }
+  const remarks = getRemarks(iface);
+  if (!isOfficial && remarks) {
+    target.remarks = remarks;
+  }
 }
 
 /**
@@ -560,12 +571,14 @@ function processModuleDeclaration(
       types.set(name, {
         baseTypes: [],
         description: getDescription(alias),
+        examples: getExamples(alias),
         isOfficial,
         kind: 'interface',
         methods: [],
         name,
         namespace,
         properties: [],
+        remarks: getRemarks(alias),
         typeParameters: alias.getTypeParameters().map((tp) => tp.getText())
       });
     }
@@ -612,12 +625,14 @@ function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOffi
       types.set(name, {
         baseTypes: [],
         description: getDescription(alias),
+        examples: getExamples(alias),
         isOfficial,
         kind: 'interface',
         methods: [],
         name,
         namespace,
         properties: [],
+        remarks: getRemarks(alias),
         typeParameters: alias.getTypeParameters().map((tp) => tp.getText())
       });
     }
@@ -628,12 +643,14 @@ function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOffi
       types.set(name, {
         baseTypes: [],
         description: getDescription(enumDecl),
+        examples: getExamples(enumDecl),
         isOfficial,
         kind: 'interface',
         methods: [],
         name,
         namespace,
         properties: [],
+        remarks: getRemarks(enumDecl),
         typeParameters: []
       });
     }
@@ -665,6 +682,22 @@ function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOffi
       }
     } else {
       types.set(name, extractClassInfo(cls, isOfficial, namespace));
+    }
+  }
+}
+
+/**
+ * Register all type parameter names so renderTypeWithLinks won't hyperlink them.
+ * Skip names that are also known types — those should still be linkable.
+ */
+function registerGenericTypeParams(types: Map<string, TypeInfo>): void {
+  for (const [_name, info] of types) {
+    for (const tp of info.typeParameters) {
+      // Strip constraints: "T extends Foo" → "T"
+      const bareParam = tp.replace(/\s+extends\s+.*$/, '');
+      if (!types.has(bareParam)) {
+        GENERIC_TYPE_PARAMS.add(bareParam);
+      }
     }
   }
 }
@@ -822,6 +855,7 @@ function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOffic
     types.set(name, {
       baseTypes: [],
       description: getDescription(fn),
+      examples: getExamples(fn),
       isOfficial: checkIsOfficial(fn, isOfficial),
       kind: 'function',
       methods: [{
@@ -843,6 +877,7 @@ function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOffic
       name,
       namespace,
       properties: [],
+      remarks: getRemarks(fn),
       typeParameters: fn.getTypeParameters().map((tp) => tp.getText())
     });
   }
@@ -1100,7 +1135,7 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
 async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promise<void> {
   const namespaces = new Map<string, TypeInfo[]>();
   for (const [_name, info] of types) {
-    if (info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
+    if (info.kind !== 'variable' && info.kind !== 'function' && info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
       continue;
     }
     if (!namespaces.has(info.namespace)) {
@@ -1218,6 +1253,20 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
     lines.push('');
   }
 
+  // Remarks
+  if (info.remarks) {
+    lines.push(`> ${escapeMdxBraces(resolveLinks(info.remarks))}`);
+    lines.push('');
+  }
+
+  // Examples
+  for (const example of info.examples) {
+    lines.push('**Example:**');
+    lines.push('');
+    lines.push(example);
+    lines.push('');
+  }
+
   // Functions render like method detail pages — signature, params, returns
   if (info.kind === 'function') {
     renderFunctionPage(lines, info);
@@ -1235,7 +1284,7 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
     lines.push(`${keyword} ${name}: ${varType}`);
     lines.push('```');
     lines.push('');
-    lines.push(`**Type:** ${escapeMdxAngleBrackets(renderTypeWithLinks(varType))}`);
+    lines.push(`**Type:** ${escapeMdxBraces(escapeMdxAngleBrackets(renderTypeWithLinks(varType)))}`);
     lines.push('');
     renderBacklinks(lines, typeBacklinks);
     await writeFile(filePath, lines.join('\n'), 'utf-8');
@@ -1762,6 +1811,9 @@ function loadExternalTypeMaps(): void {
 }
 
 function resolveWebApiUrl(name: string): string | undefined {
+  if (!Object.hasOwn(webApiTypes, name)) {
+    return undefined;
+  }
   const entry = webApiTypes[name];
   if (typeof entry === 'string') {
     return entry;
@@ -1803,6 +1855,7 @@ const TS_UTILITY_TYPES = new Map<string, string>([
 const TS_GLOBAL_TYPES: Record<string, string> = {
   // DOM event/element maps (TypeScript lib.dom.d.ts)
   AddEventListenerOptions: 'https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener#options',
+  AnimationFrameProvider: 'https://developer.mozilla.org/docs/Web/API/Window/requestAnimationFrame',
   Array: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array',
   // TypeScript lib built-ins
   ArrayBufferLike: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer',
@@ -1829,6 +1882,7 @@ const TS_GLOBAL_TYPES: Record<string, string> = {
   FacetReader: 'https://codemirror.net/docs/ref/#state.FacetReader',
   FSWatcher: 'https://nodejs.org/api/fs.html#class-fsfswatcher',
   Function: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Function',
+  GlobalEventHandlers: 'https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers',
   HeadersInit: 'https://developer.mozilla.org/docs/Web/API/Headers/Headers#init',
   HTMLElementEventMap: 'https://developer.mozilla.org/docs/Web/API/HTMLElement#events',
 
@@ -1840,6 +1894,7 @@ const TS_GLOBAL_TYPES: Record<string, string> = {
   // Moment.js
   Moment: 'https://momentjs.com/docs/#/parsing/',
   MomentInput: 'https://momentjs.com/docs/#/parsing/',
+  NonElementParentNode: 'https://developer.mozilla.org/docs/Web/API/Document/getElementById',
   Object: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object',
   ParentNode: 'https://developer.mozilla.org/docs/Web/API/ParentNode',
   Promise: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise',
@@ -1868,7 +1923,11 @@ const TS_GLOBAL_TYPES: Record<string, string> = {
   WeakSet: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/WeakSet',
   WebGLContextAttributes: 'https://developer.mozilla.org/docs/Web/API/WebGLRenderingContext/getContextAttributes',
   WebGLPowerPreference: 'https://developer.mozilla.org/docs/Web/API/WebGLRenderingContext/getContextAttributes',
-  WindowEventMap: 'https://developer.mozilla.org/docs/Web/API/Window#events'
+  WindowEventHandlers: 'https://developer.mozilla.org/docs/Web/API/WindowEventHandlers',
+  WindowEventMap: 'https://developer.mozilla.org/docs/Web/API/Window#events',
+  WindowLocalStorage: 'https://developer.mozilla.org/docs/Web/API/Window/localStorage',
+  WindowOrWorkerGlobalScope: 'https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope',
+  WindowSessionStorage: 'https://developer.mozilla.org/docs/Web/API/Window/sessionStorage'
 };
 // Cspell:enable
 
@@ -1892,7 +1951,7 @@ interface SidebarTreeNode {
 function buildSidebarTree(types: Map<string, TypeInfo>): SidebarTreeNode {
   const root: SidebarTreeNode = { children: new Map(), types: [] };
   for (const [_name, info] of types) {
-    if (info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
+    if (info.kind !== 'variable' && info.kind !== 'function' && info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
       continue;
     }
     const parts = info.namespace.split('/');
@@ -1984,7 +2043,7 @@ function renderTypeWithLinks(typeText: string, selfTypeName?: string): string {
     }
 
     // JS global types (Array, Promise, Map, etc.)
-    const globalUrl = TS_GLOBAL_TYPES[match];
+    const globalUrl = Object.hasOwn(TS_GLOBAL_TYPES, match) ? TS_GLOBAL_TYPES[match] : undefined;
     if (globalUrl) {
       return `[${match}](${globalUrl})`;
     }
@@ -1996,7 +2055,7 @@ function renderTypeWithLinks(typeText: string, selfTypeName?: string): string {
     }
 
     // TypeScript primitive types
-    const primitiveUrl = TS_PRIMITIVE_TYPES[match];
+    const primitiveUrl = Object.hasOwn(TS_PRIMITIVE_TYPES, match) ? TS_PRIMITIVE_TYPES[match] : undefined;
     if (primitiveUrl) {
       return `[${match}](${primitiveUrl})`;
     }
