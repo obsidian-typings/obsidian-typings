@@ -1188,8 +1188,13 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   );
   lines.push('');
 
-  // Status badge
-  lines.push(`<TypeBadge status={${renderApiStatus(info.isOfficial)}} />`);
+  // Status badge + filters
+  const hasMembers = info.properties.length > 0 || info.methods.length > 0;
+  if (hasMembers && info.kind !== 'function') {
+    lines.push(`<TypeBadge status={${renderApiStatus(info.isOfficial)}}><MemberFilters /></TypeBadge>`);
+  } else {
+    lines.push(`<TypeBadge status={${renderApiStatus(info.isOfficial)}} />`);
+  }
   lines.push('');
 
   // Description
@@ -1221,11 +1226,6 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   if (info.baseTypes.length > 0) {
     const linkedTypes = info.baseTypes.map((t) => linkBaseType(t));
     lines.push(`**Extends:** ${linkedTypes.join(', ')}`);
-    lines.push('');
-  }
-
-  if (info.properties.length > 0 || info.methods.length > 0) {
-    lines.push('<MemberFilters />');
     lines.push('');
   }
 

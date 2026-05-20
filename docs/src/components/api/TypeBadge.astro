@@ -14,4 +14,19 @@ const title = isOfficial
 const label = isOfficial ? 'Official' : 'Unofficial';
 ---
 
-<p><span class={iconClass} title={title}></span> <strong>{label}</strong></p>
+<div class="type-badge-row">
+  <p><span class={iconClass} title={title}></span> <strong>{label}</strong></p>
+  <slot />
+</div>
+
+<style>
+  .type-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .type-badge-row > p {
+    margin: 0;
+  }
+</style>

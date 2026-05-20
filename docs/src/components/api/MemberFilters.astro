@@ -26,7 +26,7 @@
       return;
     }
 
-    const rows = document.querySelectorAll<HTMLTableRowElement>('table tbody tr[data-status]');
+    const items = document.querySelectorAll<HTMLElement>('table tbody tr[data-status], .filterable-block[data-status]');
 
     for (const filterGroup of container.querySelectorAll<HTMLDivElement>('.filter-group')) {
       for (const btn of filterGroup.querySelectorAll<HTMLButtonElement>('.filter-btn')) {
@@ -35,21 +35,21 @@
             sibling.classList.remove('active');
           }
           btn.classList.add('active');
-          applyFilters(container, rows);
+          applyFilters(container, items);
         });
       }
     }
   }
 
-  function applyFilters(container: HTMLDivElement, rows: NodeListOf<HTMLTableRowElement>): void {
+  function applyFilters(container: HTMLDivElement, items: NodeListOf<HTMLElement>): void {
     const statusBtn = container.querySelector<HTMLButtonElement>('[data-filter-type="status"] .filter-btn.active');
     const scopeBtn = container.querySelector<HTMLButtonElement>('[data-filter-type="scope"] .filter-btn.active');
     const statusFilter = statusBtn?.dataset['value'] ?? 'both';
     const scopeFilter = scopeBtn?.dataset['value'] ?? 'both';
 
-    for (const row of rows) {
-      const isOfficial = row.dataset['status'] === 'official';
-      const isInherited = row.dataset['inherited'] === 'true';
+    for (const item of items) {
+      const isOfficial = item.dataset['status'] === 'official';
+      const isInherited = item.dataset['inherited'] === 'true';
 
       let statusVisible = true;
       if (statusFilter === 'official') {
@@ -65,7 +65,7 @@
         scopeVisible = isInherited;
       }
 
-      row.style.display = statusVisible && scopeVisible ? '' : 'none';
+      item.style.display = statusVisible && scopeVisible ? '' : 'none';
     }
   }
 
@@ -77,8 +77,8 @@
   .member-filters {
     display: flex;
     gap: 1rem;
-    margin-top: 2.5rem;
-    margin-bottom: 0.75rem;
+    margin-top: 0;
+    margin-bottom: 0;
   }
   .filter-group {
     display: inline-flex;

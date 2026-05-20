@@ -14,8 +14,11 @@ const iconClass = status === ApiStatus.Official ? 'icon-official' : 'icon-unoffi
 const title = status === ApiStatus.Official
   ? 'Official API — part of the public Obsidian API'
   : 'Unofficial API — reverse-engineered, may change without notice';
+const statusAttr = status === ApiStatus.Official ? 'official' : 'unofficial';
 ---
 
-<h2><span class={iconClass} title={title}></span> Constructor</h2>
-<Code code={signature} lang="ts" />
-{description && <p set:html={description} />}
+<div class="filterable-block" data-status={statusAttr} data-inherited="false">
+  <h2><span class={iconClass} title={title}></span><span class="icon-own" title="Defined on this type"></span> Constructor</h2>
+  <Code code={signature} lang="ts" />
+  {description && <p set:html={description} />}
+</div>
