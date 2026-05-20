@@ -1311,7 +1311,8 @@ function getImportStatement(info: TypeInfo): string | undefined {
     return `import { ${info.name} } from '${TYPINGS_PACKAGE}/implementations';`;
   }
   if (info.namespace.startsWith('obsidian/augmentations') && info.isOfficial) {
-    return `import type { ${info.name} } from 'obsidian';`;
+    const importKeyword = info.kind === 'interface' ? 'import type' : 'import';
+    return `${importKeyword} { ${info.name} } from 'obsidian';`;
   }
   if (info.namespace.startsWith('@codemirror')) {
     // Convert directory name back to package name: @codemirror__state → @codemirror/state
