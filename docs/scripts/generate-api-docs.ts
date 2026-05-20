@@ -1027,7 +1027,7 @@ async function generateMemberPages(name: string, info: TypeInfo): Promise<void> 
     lines.push('');
 
     const statusEnum = prop.isOfficial ? 'ApiStatus.Official' : 'ApiStatus.Unofficial';
-    const typeAttr = ` type="${escapeJsxAttr(markdownToHtml(renderTypeWithLinks(prop.type)))}"`;
+    const typeAttr = ` type="${escapeJsxAttr(markdownToHtml(renderTypeWithLinks(prop.type, name)))}"`;
     const descAttr = prop.description ? ` description="${escapeJsxAttr(markdownToHtml(resolveLinks(prop.description)))}"` : '';
     const remarksAttr = prop.remarks ? ` remarks="${escapeJsxAttr(markdownToHtml(resolveLinks(prop.remarks)))}"` : '';
     const sinceAttr = prop.since ? ` since="${escapeJsxAttr(prop.since)}"` : '';
@@ -1533,20 +1533,20 @@ function renderFunctionPage(lines: string[], info: TypeInfo): void {
   }
 }
 
-function renderMethodOverloadMdx(lines: string[], overload: MemberInfo, _typeName: string): void {
+function renderMethodOverloadMdx(lines: string[], overload: MemberInfo, typeName: string): void {
   const statusEnum = overload.isOfficial ? 'ApiStatus.Official' : 'ApiStatus.Unofficial';
   const sig = `${overload.signature}: ${overload.returnType}`;
   const descAttr = overload.description ? ` description="${escapeJsxAttr(markdownToHtml(resolveLinks(overload.description)))}"` : '';
   const remarksAttr = overload.remarks ? ` remarks="${escapeJsxAttr(markdownToHtml(resolveLinks(overload.remarks)))}"` : '';
   const sinceAttr = overload.since ? ` since="${escapeJsxAttr(overload.since)}"` : '';
-  const returnTypeAttr = ` returnType="${escapeJsxAttr(markdownToHtml(renderTypeWithLinks(overload.returnType)))}"`;
+  const returnTypeAttr = ` returnType="${escapeJsxAttr(markdownToHtml(renderTypeWithLinks(overload.returnType, typeName)))}"`;
   const returnDescAttr = overload.returnDescription ? ` returnDescription="${escapeJsxAttr(markdownToHtml(resolveLinks(overload.returnDescription)))}"` : '';
   const examplesAttr = overload.examples.length > 0 ? ` examples={${JSON.stringify(overload.examples)}}` : '';
 
   const params = overload.parameters.map((p) => ({
     description: markdownToHtml(p.description || (p.name.endsWith('?') ? '*(Optional)*' : '')),
     name: p.name,
-    type: markdownToHtml(renderTypeWithLinks(p.type))
+    type: markdownToHtml(renderTypeWithLinks(p.type, typeName))
   }));
   const paramsAttr = params.length > 0 ? ` parameters={${JSON.stringify(params)}}` : '';
 
@@ -1584,7 +1584,7 @@ function renderMethodTableMdx(lines: string[], info: TypeInfo): void {
     const shortSig = `${staticPrefix}${method.name}(${shortParams})`;
     const sig = escapeJsString(shortSig);
     const slug = overloadSlug(method.overloadKey);
-    const returnType = markdownToHtml(renderTypeWithLinks(method.returnType));
+    const returnType = markdownToHtml(renderTypeWithLinks(method.returnType, info.name));
     const inheritedAttr = method.inheritedFrom ? `, inheritedFrom: "${escapeJsString(markdownToHtml(typeLink(method.inheritedFrom)))}"` : '';
     const href = memberHref(slug, method.inheritedFrom);
     lines.push(
@@ -1606,7 +1606,7 @@ function renderPropertyTableMdx(lines: string[], info: TypeInfo): void {
   for (const prop of props) {
     const status = renderApiStatus(prop.isOfficial);
     const desc = escapeJsString(markdownToHtml(resolveLinks(prop.description)));
-    const type = markdownToHtml(renderTypeWithLinks(prop.type));
+    const type = markdownToHtml(renderTypeWithLinks(prop.type, info.name));
     const inheritedAttr = prop.inheritedFrom ? `, inheritedFrom: "${escapeJsString(markdownToHtml(typeLink(prop.inheritedFrom)))}"` : '';
     const href = memberHref(memberSlug(prop.name), prop.inheritedFrom);
     lines.push(
@@ -1624,7 +1624,8 @@ function resolveLinks(text: string): string {
   return text.replace(/\{@link\s+(?<target>[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\}/g, (...args) => {
     const groups = args[args.length - 1] as LinkMatchGroups;
     const target = groups.target.trim();
-    const display = groups.display?.trim() ?? target;
+    // Strip TSDoc backslash escapes (e.g., \< \> \{ \}) from display text
+    const display = (groups.display?.trim() ?? target).replace(/\\(?=[<>{}])/g, '');
 
     // Handle Type.member references (e.g., Vault.on)
     const dotMatch = /^(?<typeName>[A-Za-z]\w*)\.(?<memberName>\w+)$/.exec(target);
@@ -1638,9 +1639,12 @@ function resolveLinks(text: string): string {
       }
     }
 
-    // Handle simple type references
+    // Handle simple type references — if display contains generic args, link each type individually
     const info = allTypes.get(target);
     if (info) {
+      if (display !== target && display.includes('<')) {
+        return renderTypeWithLinks(display);
+      }
       const targetNsDir = getNamespaceDir(info.namespace);
       return `[${display}](${BASE_PATH}/api/${targetNsDir}/${target}/)`;
     }
@@ -1925,8 +1929,17 @@ async function generateSidebarJson(types: Map<string, TypeInfo>): Promise<void> 
 }
 
 /** Render a type string with clickable links for known types */
-function renderTypeWithLinks(typeText: string): string {
+function renderTypeWithLinks(typeText: string, selfTypeName?: string): string {
   return typeText.replace(/\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match) => {
+    // Link `this` return type to the current type's page
+    if (match === 'this' && selfTypeName) {
+      const selfInfo = allTypes.get(selfTypeName);
+      if (selfInfo) {
+        const targetNsDir = getNamespaceDir(selfInfo.namespace);
+        return `[${match}](${BASE_PATH}/api/${targetNsDir}/${selfTypeName}/)`;
+      }
+    }
+
     // Skip generic type parameters
     if (GENERIC_TYPE_PARAMS.has(match)) {
       return match;
