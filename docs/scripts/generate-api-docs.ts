@@ -1872,7 +1872,7 @@ const TS_UTILITY_TYPES = new Map<string, string>([
 const TS_GLOBAL_TYPES: Record<string, string> = {
   // DOM event/element maps (TypeScript lib.dom.d.ts)
   AddEventListenerOptions: 'https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener#options',
-  AnimationFrameProvider: 'https://developer.mozilla.org/docs/Web/API/Window/requestAnimationFrame',
+  AnimationFrameProvider: 'https://developer.mozilla.org/docs/Web/API/Window#instance_methods',
   Array: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array',
   // TypeScript lib built-ins
   ArrayBufferLike: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer',
@@ -1899,7 +1899,7 @@ const TS_GLOBAL_TYPES: Record<string, string> = {
   FacetReader: 'https://codemirror.net/docs/ref/#state.FacetReader',
   FSWatcher: 'https://nodejs.org/api/fs.html#class-fsfswatcher',
   Function: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Function',
-  GlobalEventHandlers: 'https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers',
+  GlobalEventHandlers: 'https://developer.mozilla.org/docs/Web/API/Window#events',
   HeadersInit: 'https://developer.mozilla.org/docs/Web/API/Headers/Headers#init',
   HTMLElementEventMap: 'https://developer.mozilla.org/docs/Web/API/HTMLElement#events',
 
@@ -1940,10 +1940,10 @@ const TS_GLOBAL_TYPES: Record<string, string> = {
   WeakSet: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/WeakSet',
   WebGLContextAttributes: 'https://developer.mozilla.org/docs/Web/API/WebGLRenderingContext/getContextAttributes',
   WebGLPowerPreference: 'https://developer.mozilla.org/docs/Web/API/WebGLRenderingContext/getContextAttributes',
-  WindowEventHandlers: 'https://developer.mozilla.org/docs/Web/API/WindowEventHandlers',
+  WindowEventHandlers: 'https://developer.mozilla.org/docs/Web/API/Window#events',
   WindowEventMap: 'https://developer.mozilla.org/docs/Web/API/Window#events',
   WindowLocalStorage: 'https://developer.mozilla.org/docs/Web/API/Window/localStorage',
-  WindowOrWorkerGlobalScope: 'https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope',
+  WindowOrWorkerGlobalScope: 'https://developer.mozilla.org/docs/Web/API/Window#instance_properties',
   WindowSessionStorage: 'https://developer.mozilla.org/docs/Web/API/Window/sessionStorage'
 };
 // Cspell:enable
