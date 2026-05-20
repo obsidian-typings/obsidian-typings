@@ -31,6 +31,7 @@ export const astroConfig = defineConfig({
   integrations: [
     StarlightIntegration({
       components: {
+        Search: './src/components/Search.astro',
         SiteTitle: './src/components/SiteTitle.astro'
       },
       customCss: [
