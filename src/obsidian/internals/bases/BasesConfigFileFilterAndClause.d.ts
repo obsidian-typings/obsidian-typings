@@ -10,8 +10,6 @@ export interface BasesConfigFileFilterAndClause {
   /**
    * All of the following filters must match.
    *
-   * @public
-   * @since 1.10.0
    * @example
    * ```ts
    * {
@@ -21,6 +19,8 @@ export interface BasesConfigFileFilterAndClause {
    *     ],
    * }
    * ```
+   * @public
+   * @since 1.10.0
    */
   and: BasesConfigFileFilter[];
 }

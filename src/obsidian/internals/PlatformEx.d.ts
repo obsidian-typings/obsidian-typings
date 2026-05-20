@@ -1,8 +1,6 @@
 /**
- * @public
- * @unofficial
- *
  * Due to limitations of TypeScript, we cannot extend the `Platform` constant directly.
+ *
  * @example
  *
  * ```ts
@@ -11,6 +9,9 @@
  * const platformEx = Platform as PlatformEx;
  * console.log(platformEx.canDisplayRibbon);
  * ```
+ *
+ * @public
+ * @unofficial
  */
 export interface PlatformEx {
   /**

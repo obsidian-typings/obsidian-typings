@@ -69,11 +69,11 @@ export interface CapacitorGlobal {
   /**
    * No-op for plugin methods.
    *
-   * @deprecated Deprecated.
    * @param target - Target object.
    * @param key - Property key.
    * @param pluginName - Plugin name.
    * @returns Never-resolving promise.
+   * @deprecated Deprecated.
    */
   pluginMethodNoop(target: unknown, key: PropertyKey, pluginName: string): Promise<never>;
 

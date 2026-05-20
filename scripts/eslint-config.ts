@@ -258,6 +258,7 @@ function getObsidianTypingsConfigs(): Linter.Config[] {
         'obsidian-typings/require-export-empty-in-augmentations': 'error',
         'obsidian-typings/require-member-description': 'error',
         'obsidian-typings/require-var-in-global-vars': 'error',
+        'obsidian-typings/visibility-tags-last': 'error',
         'obsidian-typings/window-member-file-sync': 'error'
       }
     }
