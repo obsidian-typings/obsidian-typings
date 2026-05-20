@@ -1224,13 +1224,12 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
     lines.push('');
   }
 
-  renderConstructorMdx(lines, name, info);
-
   if (info.properties.length > 0 || info.methods.length > 0) {
     lines.push('<MemberFilters />');
     lines.push('');
   }
 
+  renderConstructorMdx(lines, name, info);
   renderPropertyTableMdx(lines, info);
   renderMethodTableMdx(lines, info);
 
