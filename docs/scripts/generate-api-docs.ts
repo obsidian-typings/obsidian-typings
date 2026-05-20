@@ -68,12 +68,16 @@ interface TypeInfo {
   baseTypes: string[];
   description: string;
   isOfficial: boolean;
-  kind: 'class' | 'function' | 'interface';
+  kind: 'class' | 'function' | 'interface' | 'variable';
   methods: MemberInfo[];
   name: string;
   namespace: string;
   properties: MemberInfo[];
   typeParameters: string[];
+  /** For variables: the declaration keyword (let/const/var) */
+  variableKeyword?: string;
+  /** For variables: the type annotation */
+  variableType?: string;
 }
 
 interface WebApiEntry {
@@ -226,22 +230,26 @@ function collectModuleVariables(
   namespace: string
 ): void {
   for (const varStmt of mod.getVariableStatements()) {
+    const declKind = varStmt.getDeclarationKind();
     for (const decl of varStmt.getDeclarations()) {
       const rawName = decl.getName();
       const name = rawName.replace(/__$/, '');
       if (!name || types.has(name)) {
         continue;
       }
+      const varType = simplifyType(decl.getType().getText());
       types.set(name, {
-        baseTypes: [simplifyType(decl.getType().getText())],
+        baseTypes: [],
         description: getDescription(varStmt),
         isOfficial: checkIsOfficial(varStmt, isOfficial),
-        kind: 'interface',
+        kind: 'variable',
         methods: [],
         name,
         namespace,
         properties: [],
-        typeParameters: []
+        typeParameters: [],
+        variableKeyword: declKind,
+        variableType: varType
       });
     }
   }
@@ -1213,6 +1221,23 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   // Functions render like method detail pages — signature, params, returns
   if (info.kind === 'function') {
     renderFunctionPage(lines, info);
+    await writeFile(filePath, lines.join('\n'), 'utf-8');
+    return;
+  }
+
+  // Variables render with declaration keyword and type
+  if (info.kind === 'variable') {
+    const keyword = info.variableKeyword ?? 'let';
+    const varType = info.variableType ?? 'unknown';
+    lines.push('**Signature:**');
+    lines.push('');
+    lines.push('```ts');
+    lines.push(`${keyword} ${name}: ${varType}`);
+    lines.push('```');
+    lines.push('');
+    lines.push(`**Type:** ${escapeMdxAngleBrackets(renderTypeWithLinks(varType))}`);
+    lines.push('');
+    renderBacklinks(lines, typeBacklinks);
     await writeFile(filePath, lines.join('\n'), 'utf-8');
     return;
   }
