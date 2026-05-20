@@ -149,6 +149,25 @@ function findDtsFiles(dir: string): string[] {
 
 const CACHE_FILE = join(process.cwd(), 'src/content/docs/api/.cache-hash');
 
+/**
+ * Build a mapping from parent type parameter names to concrete type arguments.
+ * E.g., parent has `typeParameters: ['Instance extends BaseInstance']` and
+ * child extends `Parent<CanvasPluginInstance>` → `{Instance: 'CanvasPluginInstance'}`
+ */
+function buildTypeParamMap(baseInfo: TypeInfo, typeArgs: string[]): Map<string, string> {
+  const mapping = new Map<string, string>();
+  const count = Math.min(baseInfo.typeParameters.length, typeArgs.length);
+  for (let i = 0; i < count; i++) {
+    const param = baseInfo.typeParameters[i];
+    const arg = typeArgs[i];
+    if (param && arg) {
+      const bareParam = param.replace(/\s+extends\s+.*$/, '');
+      mapping.set(bareParam, arg);
+    }
+  }
+  return mapping;
+}
+
 /** Collect functions declared inside module declarations */
 function collectModuleFunctions(
   mod: ReturnType<SourceFile['getModules']>[number],
@@ -487,6 +506,40 @@ function mergeInterfaceIntoType(target: TypeInfo, iface: InterfaceDeclaration, i
   }
 }
 
+/**
+ * Parse generic type arguments from a base type expression.
+ * E.g., `InternalPlugin<CanvasPluginInstance>` → `['CanvasPluginInstance']`
+ * Handles nested angle brackets: `Foo<Bar<Baz>, Qux>` → `['Bar<Baz>', 'Qux']`
+ */
+function parseTypeArguments(baseTypeName: string): string[] {
+  const openIndex = baseTypeName.indexOf('<');
+  if (openIndex === -1) {
+    return [];
+  }
+  const inner = baseTypeName.slice(openIndex + 1, -1);
+  const args: string[] = [];
+  let depth = 0;
+  let current = '';
+  for (const ch of inner) {
+    if (ch === '<') {
+      depth++;
+      current += ch;
+    } else if (ch === '>') {
+      depth--;
+      current += ch;
+    } else if (ch === ',' && depth === 0) {
+      args.push(current.trim());
+      current = '';
+    } else {
+      current += ch;
+    }
+  }
+  if (current.trim()) {
+    args.push(current.trim());
+  }
+  return args;
+}
+
 function processModuleDeclaration(
   mod: ReturnType<SourceFile['getModules']>[number],
   types: Map<string, TypeInfo>,
@@ -617,19 +670,49 @@ function resolveInheritedMembers(types: Map<string, TypeInfo>): void {
         continue;
       }
 
+      const typeArgs = parseTypeArguments(baseTypeName);
+      const typeParamMap = buildTypeParamMap(baseInfo, typeArgs);
+
       for (const prop of baseInfo.properties) {
         if (!info.properties.some((p) => p.name === prop.name)) {
-          info.properties.push({ ...prop, inheritedFrom: cleanBase });
+          info.properties.push(substituteMemberTypes({ ...prop, inheritedFrom: cleanBase }, typeParamMap));
         }
       }
 
       for (const method of baseInfo.methods) {
         if (!info.methods.some((m) => m.name === method.name && m.signature === method.signature)) {
-          info.methods.push({ ...method, inheritedFrom: cleanBase });
+          info.methods.push(substituteMemberTypes({ ...method, inheritedFrom: cleanBase }, typeParamMap));
         }
       }
     }
   }
+}
+
+/** Apply type parameter substitution to all type-bearing fields of a member */
+function substituteMemberTypes(member: MemberInfo, mapping: Map<string, string>): MemberInfo {
+  if (mapping.size === 0) {
+    return member;
+  }
+  return {
+    ...member,
+    parameters: member.parameters.map((p) => ({
+      ...p,
+      type: substituteTypeParams(p.type, mapping)
+    })),
+    returnType: substituteTypeParams(member.returnType, mapping),
+    signature: substituteTypeParams(member.signature, mapping),
+    type: substituteTypeParams(member.type, mapping)
+  };
+}
+
+/** Substitute generic type parameters in a type string using a mapping */
+function substituteTypeParams(typeText: string, mapping: Map<string, string>): string {
+  if (mapping.size === 0) {
+    return typeText;
+  }
+  return typeText.replace(/\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match) => {
+    return mapping.get(match) ?? match;
+  });
 }
 
 /**
@@ -1136,7 +1219,7 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   lines.push('');
 
   if (info.baseTypes.length > 0) {
-    const linkedTypes = info.baseTypes.map((t) => typeLink(t));
+    const linkedTypes = info.baseTypes.map((t) => linkBaseType(t));
     lines.push(`**Extends:** ${linkedTypes.join(', ')}`);
     lines.push('');
   }
@@ -1301,6 +1384,21 @@ function getSince(node: JSDocableNode): string {
     }
   }
   return '';
+}
+
+/**
+ * Link a base type expression for the "Extends:" line.
+ * Simple type references (identifier + optional generics) use renderTypeWithLinks
+ * so each type argument gets its own link.
+ * Complex expressions (object types, intersections, etc.) fall back to typeLink
+ * to avoid MDX parsing issues with `{`, `}`, `|` etc.
+ */
+function linkBaseType(typeName: string): string {
+  const isSimpleTypeRef = /^[a-zA-Z][a-zA-Z0-9]*(?:<.*>)?$/.test(typeName.trim());
+  if (isSimpleTypeRef) {
+    return escapeMdxAngleBrackets(renderTypeWithLinks(typeName));
+  }
+  return typeLink(typeName);
 }
 
 /** Convert inline markdown to HTML for use in component props with set:html */
@@ -1550,7 +1648,6 @@ function simplifyType(typeText: string): string {
     .replace(/import\('[^']+'\)\./g, '');
 }
 
-/** Create a link to a type. Links are relative to the overview page (nsDir/typeSlug/index.md) */
 /** Create an absolute link to a type page */
 function typeLink(typeName: string): string {
   const cleanName = typeName.replace(/<.*>$/, '').trim();
