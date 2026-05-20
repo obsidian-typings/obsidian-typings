@@ -1,4 +1,5 @@
 import type { getTAbstractFileConstructor } from '../implementations/constructors/augmentations/getTAbstractFileConstructor.d.ts';
+import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
 
 export {};
 
@@ -51,7 +52,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<TAbstractFile>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<TAbstractFile\>}.
      *
      * @param vault - The vault.
      * @param path - The path.

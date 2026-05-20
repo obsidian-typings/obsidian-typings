@@ -1,3 +1,5 @@
+import type { ExtractConstructor } from '../../internals/constructors/ExtractConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -11,7 +13,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<PrimitiveValue>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<PrimitiveValue\>}.
      *
      * @param value - The value to wrap.
      * @returns The new PrimitiveValue.

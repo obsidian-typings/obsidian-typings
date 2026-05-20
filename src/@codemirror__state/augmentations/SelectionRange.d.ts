@@ -109,7 +109,7 @@ declare module '@codemirror/state' {
 
   namespace SelectionRange {
     /**
-     * Convert a JSON representation of a range to a `SelectionRange` instance.
+     * Convert a JSON representation of a range to a {@link SelectionRange} instance.
      *
      * @param json - The JSON representation.
      * @returns The deserialized selection range.

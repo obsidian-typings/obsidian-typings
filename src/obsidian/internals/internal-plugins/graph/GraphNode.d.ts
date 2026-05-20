@@ -68,7 +68,7 @@ export interface GraphNode {
   rendered: boolean;
 
   /**
-   * `GraphRenderer` managing this node
+   * {@link GraphRenderer} managing this node
    */
   renderer: GraphRenderer;
 

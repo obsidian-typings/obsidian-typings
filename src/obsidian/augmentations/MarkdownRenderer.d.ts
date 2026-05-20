@@ -1,4 +1,5 @@
 import type { getMarkdownRendererConstructor } from '../implementations/constructors/augmentations/getMarkdownRendererConstructor.d.ts';
+import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
 
 export {};
 
@@ -26,7 +27,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<MarkdownRenderer>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<MarkdownRenderer\>}.
      *
      * @param app - The app instance.
      * @param containerEl - The container element.

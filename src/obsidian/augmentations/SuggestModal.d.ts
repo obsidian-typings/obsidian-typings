@@ -1,3 +1,4 @@
+import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
 import type { SuggestModalChooser } from '../internals/SuggestModalChooser.d.ts';
 
 export {};
@@ -77,7 +78,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<SuggestModal>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<SuggestModal\>}.
      *
      * @param app - The Obsidian app instance .
      * @returns The suggest modal instance.

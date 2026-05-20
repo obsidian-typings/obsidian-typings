@@ -1,3 +1,4 @@
+import type { ExtractConstructor } from '../../internals/constructors/ExtractConstructor.d.ts';
 import type { Draggable } from '../../internals/drag-manager/Draggable.d.ts';
 import type { DropResult } from '../../internals/drag-manager/DropResult.d.ts';
 
@@ -95,7 +96,7 @@ declare module 'obsidian' {
      * @param title - The title of the action.
      * @param callback - The callback to call when the action is clicked.
      * @returns The DOM element of the action.
-     * To extract the constructor type, use `ExtractConstructor<ItemView>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<ItemView\>}.
      * @example
      * ```ts
      * const action = itemView.addAction('dice', 'foo', () => {
@@ -110,7 +111,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<ItemView>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<ItemView\>}.
      *
      * @param leaf - The workspace leaf to create the item view in.
      * @returns The item view instance.

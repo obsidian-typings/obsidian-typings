@@ -1,4 +1,5 @@
 import type { CapacitorFileEntry } from './CapacitorFileEntry.d.ts';
+import type { ExtractConstructor } from './constructors/ExtractConstructor.d.ts';
 import type { WatchAndStatAllResult } from './WatchAndStatAllResult.d.ts';
 
 /**
@@ -24,14 +25,14 @@ export interface CapacitorAdapterFs {
    * @param realPath - Real file system path.
    * @param data - Text data to append.
    * @returns A promise that resolves when the data is appended.
-   * To extract the constructor type, use `ExtractConstructor<CapacitorAdapterFs>`.
+   * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<CapacitorAdapterFs\>}.
    */
   append(realPath: string, data: string): Promise<void>;
 
   /**
    * Constructor.
    *
-   * To extract the constructor type, use `ExtractConstructor<CapacitorAdapterFs>`.
+   * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<CapacitorAdapterFs\>}.
    *
    * @param dir - The dir.
    * @returns The new instance.

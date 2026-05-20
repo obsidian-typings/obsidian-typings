@@ -49,8 +49,8 @@ declare module 'obsidian' {
     /**
      * The direct parent of the leaf.
      *
-     * On desktop, a leaf is always a child of a `WorkspaceTabs` component.
-     * On mobile, a leaf might be a child of a `WorkspaceMobileDrawer`.
+     * On desktop, a leaf is always a child of a {@link WorkspaceTabs} component.
+     * On mobile, a leaf might be a child of a {@link WorkspaceMobileDrawer}.
      * Perform an `instanceof` check before making an assumption about the
      * `parent`.
      *
@@ -130,7 +130,7 @@ declare module 'obsidian' {
 
     /**
      * The view associated with this leaf. Do not attempt to cast this to your
-     * custom `View` without first checking `instanceof`.
+     * custom {@link View} without first checking `instanceof`.
      *
      * @official
      */

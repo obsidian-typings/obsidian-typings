@@ -1,5 +1,7 @@
 import type { Extension } from '@codemirror/state';
 
+import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -50,7 +52,7 @@ declare module 'obsidian' {
      * Internal handler invoked when the plugin's config file changes on disk.
      *
      * @returns A promise that resolves when the config file change is handled.
-     * To extract the constructor type, use `ExtractConstructor<Plugin>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<Plugin\>}.
      * @unofficial
      */
     _onConfigFileChange(): Promise<void>;
@@ -120,7 +122,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<Plugin>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<Plugin\>}.
      *
      * @param app - The Obsidian app instance.
      * @param manifest - The plugin manifest.

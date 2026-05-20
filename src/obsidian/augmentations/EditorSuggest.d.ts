@@ -1,3 +1,5 @@
+import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -10,7 +12,7 @@ declare module 'obsidian' {
   interface EditorSuggest<T> extends PopoverSuggest<T> {
     /**
      * Current suggestion context, containing the result of `onTrigger`.
-     * This will be `null` any time the `EditorSuggest` is not supposed to run.
+     * This will be `null` any time the {@link EditorSuggest} is not supposed to run.
      *
      * @official
      * @since 0.12.17
@@ -28,7 +30,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<EditorSuggest>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<EditorSuggest\>}.
      *
      * @param app - The app instance.
      * @returns The editor suggest instance.

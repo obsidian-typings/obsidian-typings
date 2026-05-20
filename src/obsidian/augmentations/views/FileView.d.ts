@@ -1,3 +1,5 @@
+import type { ExtractConstructor } from '../../internals/constructors/ExtractConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -31,7 +33,7 @@ declare module 'obsidian' {
      *
      * @param extension - The extension to check.
      * @returns Whether the file view can accept the extension.
-     * To extract the constructor type, use `ExtractConstructor<FileView>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<FileView\>}.
      * @example
      * ```ts
      * console.log(fileView.canAcceptExtension('md'));
@@ -44,7 +46,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<FileView>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<FileView\>}.
      *
      * @param leaf - The workspace leaf to create the file view in.
      * @returns The file view instance.

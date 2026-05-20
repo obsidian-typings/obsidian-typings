@@ -1,4 +1,5 @@
 import type { getFuzzySuggestModalConstructor } from '../implementations/constructors/augmentations/getFuzzySuggestModalConstructor.d.ts';
+import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
 
 export {};
 
@@ -13,7 +14,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<FuzzySuggestModal>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<FuzzySuggestModal\>}.
      *
      * @param app - The app instance.
      * @returns The new instance.

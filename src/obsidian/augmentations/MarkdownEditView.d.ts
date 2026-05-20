@@ -1,6 +1,7 @@
 import type { Extension } from '@codemirror/state';
 import type { ViewUpdate } from '@codemirror/view';
 
+import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
 import type { FoldInfo } from '../internals/FoldInfo.d.ts';
 import type { MarkdownEditViewEphemeralState } from '../internals/MarkdownEditViewEphemeralState.d.ts';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
@@ -81,7 +82,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<MarkdownEditView>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<MarkdownEditView\>}.
      *
      * @param view - The markdown view.
      * @returns The markdown edit view instance.

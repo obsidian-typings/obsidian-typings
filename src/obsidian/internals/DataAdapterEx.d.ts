@@ -5,7 +5,7 @@ import type { FileSystemWatchHandler } from './FileSystemWatchHandler.d.ts';
 import type { PromisedQueue } from './PromisedQueue.d.ts';
 
 /**
- * Common members for `CapacitorAdapter` and `FileSystemAdapter`.
+ * Common members for {@link CapacitorAdapter} and {@link FileSystemAdapter}.
  *
  * @public
  * @unofficial

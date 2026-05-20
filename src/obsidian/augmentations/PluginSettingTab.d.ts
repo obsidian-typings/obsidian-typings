@@ -1,3 +1,5 @@
+import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -11,7 +13,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<PluginSettingTab>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<PluginSettingTab\>}.
      *
      * @param app - The Obsidian app instance.
      * @param plugin - The plugin instance.

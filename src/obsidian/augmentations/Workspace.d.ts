@@ -413,7 +413,7 @@ declare module 'obsidian' {
     focusLeaf(leaf: WorkspaceLeaf): void;
 
     /**
-     * Returns the file for the current view if it's a `FileView`.
+     * Returns the file for the current view if it's a {@link FileView}.
      * Otherwise, it will return the most recently active file.
      *
      * @returns The active file or `null` if no file is active.
@@ -1156,7 +1156,7 @@ declare module 'obsidian' {
     on(name: 'receive-text-menu', callback: (menu: Menu, text: string) => void, ctx?: unknown): EventRef;
 
     /**
-     * Triggered when a `WorkspaceItem` is resized or the workspace layout has changed.
+     * Triggered when a {@link WorkspaceItem} is resized or the workspace layout has changed.
      *
      * @param name - Should be `'resize'`.
      * @param callback - The callback function.

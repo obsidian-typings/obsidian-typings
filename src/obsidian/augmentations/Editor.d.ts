@@ -3,6 +3,7 @@ import type { EditorView } from '@codemirror/view';
 import type { Coords } from '../../@codemirror__view/internals/Coords.d.ts';
 import type { getEditorConstructor } from '../implementations/constructors/augmentations/getEditorConstructor.d.ts';
 import type { ClickableToken } from '../internals/ClickableToken.d.ts';
+import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
 import type { CoordsLeftTop } from '../internals/CoordsLeftTop.d.ts';
 import type { Fold } from '../internals/Fold.d.ts';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
@@ -84,7 +85,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<Editor>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<Editor\>}.
      *
      * @returns The new instance.
      * @unofficial

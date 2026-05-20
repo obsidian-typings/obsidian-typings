@@ -1,3 +1,4 @@
+import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
 import type { EventsEntry } from '../internals/EventsEntry.d.ts';
 
 export {};
@@ -19,7 +20,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<Events>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<Events\>}.
      *
      * @returns The new instance.
      * @unofficial

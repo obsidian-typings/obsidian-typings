@@ -1,3 +1,4 @@
+import type { ExtractConstructor } from '../../internals/constructors/ExtractConstructor.d.ts';
 import type { ViewEphemeralState } from '../../internals/ViewEphemeralState.d.ts';
 
 export {};
@@ -85,7 +86,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<View>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<View\>}.
      *
      * @param leaf - The leaf of the view.
      * @returns The view instance.

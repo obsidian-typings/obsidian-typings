@@ -1,3 +1,5 @@
+import type { ExtractConstructor } from '../../internals/constructors/ExtractConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -12,7 +14,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<Value>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<Value\>}.
      *
      * @returns The new instance.
      * @unofficial

@@ -1,3 +1,4 @@
+import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
 import type { SuggestionContainer } from '../internals/SuggestionContainer.d.ts';
 import type { TextDirection } from '../internals/TextDirection.d.ts';
 
@@ -62,7 +63,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<PopoverSuggest>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<PopoverSuggest\>}.
      *
      * @param app - The Obsidian app instance.
      * @param scope - The scope for the keymaps.

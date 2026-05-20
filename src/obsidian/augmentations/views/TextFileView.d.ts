@@ -1,3 +1,5 @@
+import type { ExtractConstructor } from '../../internals/constructors/ExtractConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -66,7 +68,7 @@ declare module 'obsidian' {
     /**
      * Constructor.
      *
-     * To extract the constructor type, use `ExtractConstructor<TextFileView>`.
+     * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<TextFileView\>}.
      *
      * @param leaf - The leaf to create the view in.
      * @returns The new instance.
