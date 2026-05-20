@@ -8,12 +8,12 @@ import { parentFolderPath } from '../utils/PathUtils.ts';
 import { createTFolderInstance } from './createTFolderInstance.ts';
 
 /**
- * Creates and properly initializes the instance of {@link TFile} even the underlying file does not exist.
+ * Creates and properly initializes the instance of {@link obsidian#TFile} even the underlying file does not exist.
  * This doesn't create the missing file on the file system.
  *
  * @param app - The Obsidian app instance.
  * @param path - The path to the file.
- * @returns The created {@link TFile} instance.
+ * @returns The created {@link obsidian#TFile} instance.
  *
  * @public
  * @unofficial
