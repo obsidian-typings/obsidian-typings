@@ -1425,7 +1425,7 @@ function getPropertyType(prop: PropertyDeclaration | PropertySignature): string 
   // Use the type node text (what's written in source) if available, otherwise fall back to resolved type
   const typeNode = prop.getTypeNode();
   if (typeNode) {
-    return simplifyType(typeNode.getText());
+    return resolveTypeofAliases(simplifyType(typeNode.getText()), prop.getSourceFile());
   }
   return simplifyType(prop.getType().getText());
 }
@@ -1726,6 +1726,23 @@ function resolveLinks(text: string): string {
   });
 }
 
+/**
+ * Resolve `typeof aliasName` patterns where aliasName is an import alias.
+ * E.g., `typeof momentInstance` → `typeof moment` when `import { moment as momentInstance }`.
+ */
+function resolveTypeofAliases(typeText: string, sourceFile: SourceFile): string {
+  return typeText.replace(/\btypeof (?<alias>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match, alias: string) => {
+    for (const importDecl of sourceFile.getImportDeclarations()) {
+      for (const namedImport of importDecl.getNamedImports()) {
+        if (namedImport.getAliasNode()?.getText() === alias) {
+          return `typeof ${namedImport.getName()}`;
+        }
+      }
+    }
+    return match;
+  });
+}
+
 function simplifyType(typeText: string): string {
   return typeText
     .replace(/import\("[^"]+"\)\./g, '')
@@ -2014,54 +2031,73 @@ async function generateSidebarJson(types: Map<string, TypeInfo>): Promise<void> 
 
 /** Render a type string with clickable links for known types */
 function renderTypeWithLinks(typeText: string, selfTypeName?: string): string {
-  return typeText.replace(/\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match) => {
-    // Link `this` return type to the current type's page
-    if (match === 'this' && selfTypeName) {
-      const selfInfo = allTypes.get(selfTypeName);
-      if (selfInfo) {
-        const targetNsDir = getNamespaceDir(selfInfo.namespace);
-        return `[${match}](${BASE_PATH}/api/${targetNsDir}/${selfTypeName}/)`;
+  // Pre-pass: link Object.method patterns to MDN before word-by-word linking
+  const MDN_OBJECT_BASE = 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object';
+  const withObjectMethods = typeText.replace(
+    /\bObject\.(?<method>[a-zA-Z][a-zA-Z0-9]*)\b/g,
+    (_fullMatch, method: string) => `[Object](${MDN_OBJECT_BASE}).[${method}](${MDN_OBJECT_BASE}/${method})`
+  );
+  // Main pass: link individual type names, skipping text already inside markdown links
+  return withObjectMethods.replace(
+    /\[(?<linkText>[^\]]+)\]\([^)]+\)|\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g,
+    (match, _linkText: string | undefined, _unused: unknown, ...rest: unknown[]) => {
+      // If this matched a markdown link, preserve it as-is
+      const groups = rest[rest.length - 1] as Record<string, string | undefined>;
+      if (groups['linkText']) {
+        return match;
       }
-    }
+      const typeName = groups['typeName'];
+      if (!typeName) {
+        return match;
+      }
+      // Link `this` return type to the current type's page
+      if (typeName === 'this' && selfTypeName) {
+        const selfInfo = allTypes.get(selfTypeName);
+        if (selfInfo) {
+          const targetNsDir = getNamespaceDir(selfInfo.namespace);
+          return `[${typeName}](${BASE_PATH}/api/${targetNsDir}/${selfTypeName}/)`;
+        }
+      }
 
-    // Skip generic type parameters
-    if (GENERIC_TYPE_PARAMS.has(match)) {
-      return match;
-    }
+      // Skip generic type parameters
+      if (GENERIC_TYPE_PARAMS.has(typeName)) {
+        return typeName;
+      }
 
-    // Check our own types first
-    const info = allTypes.get(match);
-    if (info) {
-      const targetNsDir = getNamespaceDir(info.namespace);
-      return `[${match}](${BASE_PATH}/api/${targetNsDir}/${match}/)`;
-    }
+      // Check our own types first
+      const info = allTypes.get(typeName);
+      if (info) {
+        const targetNsDir = getNamespaceDir(info.namespace);
+        return `[${typeName}](${BASE_PATH}/api/${targetNsDir}/${typeName}/)`;
+      }
 
-    // TypeScript utility types
-    const tsUrl = resolveTsUtilityUrl(match);
-    if (tsUrl) {
-      return `[${match}](${tsUrl})`;
-    }
+      // TypeScript utility types
+      const tsUrl = resolveTsUtilityUrl(typeName);
+      if (tsUrl) {
+        return `[${typeName}](${tsUrl})`;
+      }
 
-    // JS global types (Array, Promise, Map, etc.)
-    const globalUrl = Object.hasOwn(TS_GLOBAL_TYPES, match) ? TS_GLOBAL_TYPES[match] : undefined;
-    if (globalUrl) {
-      return `[${match}](${globalUrl})`;
-    }
+      // JS global types (Array, Promise, Map, etc.)
+      const globalUrl = Object.hasOwn(TS_GLOBAL_TYPES, typeName) ? TS_GLOBAL_TYPES[typeName] : undefined;
+      if (globalUrl) {
+        return `[${typeName}](${globalUrl})`;
+      }
 
-    // Web API / MDN types (1099 types from typedoc-plugin-mdn-links)
-    const mdnUrl = resolveWebApiUrl(match);
-    if (mdnUrl) {
-      return `[${match}](${mdnUrl})`;
-    }
+      // Web API / MDN types (1099 types from typedoc-plugin-mdn-links)
+      const mdnUrl = resolveWebApiUrl(typeName);
+      if (mdnUrl) {
+        return `[${typeName}](${mdnUrl})`;
+      }
 
-    // TypeScript primitive types
-    const primitiveUrl = Object.hasOwn(TS_PRIMITIVE_TYPES, match) ? TS_PRIMITIVE_TYPES[match] : undefined;
-    if (primitiveUrl) {
-      return `[${match}](${primitiveUrl})`;
-    }
+      // TypeScript primitive types
+      const primitiveUrl = Object.hasOwn(TS_PRIMITIVE_TYPES, typeName) ? TS_PRIMITIVE_TYPES[typeName] : undefined;
+      if (primitiveUrl) {
+        return `[${typeName}](${primitiveUrl})`;
+      }
 
-    return match;
-  });
+      return typeName;
+    }
+  );
 }
 
 function resolveTsUtilityUrl(name: string): string | undefined {
