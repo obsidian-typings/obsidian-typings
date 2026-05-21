@@ -1042,6 +1042,14 @@ function findTypeReferences(typeText: string, types: Map<string, TypeInfo>, resu
   }
 }
 
+/** Collapse single newlines within paragraphs to spaces, preserve double newlines as paragraph breaks. */
+function foldTsDocParagraphs(text: string): string {
+  return text
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.replace(/\n/g, ' '))
+    .join('\n\n');
+}
+
 async function generateMemberPages(name: string, info: TypeInfo): Promise<void> {
   const nsDir = getNamespaceDir(info.namespace);
   const typeDir = name;
@@ -1349,7 +1357,8 @@ function getDescription(node: JSDocableNode): string {
   if (docs.length === 0) {
     return '';
   }
-  return docs[docs.length - 1]?.getDescription().trim() ?? '';
+  const raw = docs[docs.length - 1]?.getDescription().trim() ?? '';
+  return foldTsDocParagraphs(raw);
 }
 
 function getDisplayName(name: string, info: TypeInfo): string {
@@ -1407,7 +1416,7 @@ function getParamDescriptions(node: JSDocableNode): Map<string, string> {
     for (const tag of doc.getTags()) {
       if (tag.getTagName() === 'param') {
         // Use getCommentText() for clean description without JSDoc artifacts
-        const comment = tag.getCommentText()?.trim().replace(/\s*\*\s*$/g, '').replace(/^-\s*/, '').trim() ?? '';
+        const comment = foldTsDocParagraphs(tag.getCommentText()?.trim().replace(/\s*\*\s*$/g, '').replace(/^-\s*/, '').trim() ?? '');
         // Get param name from the tag structure
         const tagText = tag.getText();
         const nameMatch = /@param\s+(?:\{[^}]*\}\s+)?(?<paramName>\w+)/.exec(tagText);
@@ -1435,7 +1444,7 @@ function getRemarks(node: JSDocableNode): string {
   for (const doc of node.getJsDocs()) {
     for (const tag of doc.getTags()) {
       if (tag.getTagName() === 'remarks' || tag.getTagName() === 'remark') {
-        return tag.getCommentText()?.trim().replace(/\s*\*\s*$/g, '').trim() ?? '';
+        return foldTsDocParagraphs(tag.getCommentText()?.trim().replace(/\s*\*\s*$/g, '').trim() ?? '');
       }
     }
   }
@@ -1447,7 +1456,7 @@ function getReturnDescription(node: JSDocableNode): string {
   for (const doc of node.getJsDocs()) {
     for (const tag of doc.getTags()) {
       if (tag.getTagName() === 'returns') {
-        return tag.getCommentText()?.trim().replace(/^-\s*/, '').replace(/\s*\*\s*$/g, '').trim() ?? '';
+        return foldTsDocParagraphs(tag.getCommentText()?.trim().replace(/^-\s*/, '').replace(/\s*\*\s*$/g, '').trim() ?? '');
       }
     }
   }
