@@ -1872,7 +1872,7 @@ const TS_UTILITY_TYPES = new Map<string, string>([
 const TS_GLOBAL_TYPES: Record<string, string> = {
   // DOM event/element maps (TypeScript lib.dom.d.ts)
   AddEventListenerOptions: 'https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener#options',
-  AnimationFrameProvider: 'https://github.com/microsoft/TypeScript/blob/38c3279/src/lib/dom.generated.d.ts#L3756',
+  AnimationFrameProvider: 'https://raw.githubusercontent.com/microsoft/TypeScript/38c3279e29e45c274c408d909394b7bf45c24fdc/src/lib/dom.generated.d.ts#L3756',
   Array: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array',
   // TypeScript lib built-ins
   ArrayBufferLike: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer',
@@ -1899,7 +1899,7 @@ const TS_GLOBAL_TYPES: Record<string, string> = {
   FacetReader: 'https://codemirror.net/docs/ref/#state.FacetReader',
   FSWatcher: 'https://nodejs.org/api/fs.html#class-fsfswatcher',
   Function: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Function',
-  GlobalEventHandlers: 'https://github.com/microsoft/TypeScript/blob/38c3279/src/lib/dom.generated.d.ts#L16746',
+  GlobalEventHandlers: 'https://raw.githubusercontent.com/microsoft/TypeScript/38c3279e29e45c274c408d909394b7bf45c24fdc/src/lib/dom.generated.d.ts#L16746',
   HeadersInit: 'https://developer.mozilla.org/docs/Web/API/Headers/Headers#init',
   HTMLElementEventMap: 'https://developer.mozilla.org/docs/Web/API/HTMLElement#events',
 
@@ -1911,7 +1911,7 @@ const TS_GLOBAL_TYPES: Record<string, string> = {
   // Moment.js
   Moment: 'https://momentjs.com/docs/#/parsing/',
   MomentInput: 'https://momentjs.com/docs/#/parsing/',
-  NonElementParentNode: 'https://github.com/microsoft/TypeScript/blob/38c3279/src/lib/dom.generated.d.ts#L26373',
+  NonElementParentNode: 'https://raw.githubusercontent.com/microsoft/TypeScript/38c3279e29e45c274c408d909394b7bf45c24fdc/src/lib/dom.generated.d.ts#L26373',
   Object: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object',
   ParentNode: 'https://developer.mozilla.org/docs/Web/API/ParentNode',
   Promise: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise',
@@ -1940,11 +1940,12 @@ const TS_GLOBAL_TYPES: Record<string, string> = {
   WeakSet: 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/WeakSet',
   WebGLContextAttributes: 'https://developer.mozilla.org/docs/Web/API/WebGLRenderingContext/getContextAttributes',
   WebGLPowerPreference: 'https://developer.mozilla.org/docs/Web/API/WebGLRenderingContext/getContextAttributes',
-  WindowEventHandlers: 'https://github.com/microsoft/TypeScript/blob/38c3279/src/lib/dom.generated.d.ts#L41634',
+  WindowEventHandlers: 'https://raw.githubusercontent.com/microsoft/TypeScript/38c3279e29e45c274c408d909394b7bf45c24fdc/src/lib/dom.generated.d.ts#L41634',
   WindowEventMap: 'https://developer.mozilla.org/docs/Web/API/Window#events',
-  WindowLocalStorage: 'https://github.com/microsoft/TypeScript/blob/38c3279/src/lib/dom.generated.d.ts#L41685',
-  WindowOrWorkerGlobalScope: 'https://github.com/microsoft/TypeScript/blob/38c3279/src/lib/dom.generated.d.ts#L41690',
-  WindowSessionStorage: 'https://github.com/microsoft/TypeScript/blob/38c3279/src/lib/dom.generated.d.ts#L41736'
+  WindowLocalStorage: 'https://raw.githubusercontent.com/microsoft/TypeScript/38c3279e29e45c274c408d909394b7bf45c24fdc/src/lib/dom.generated.d.ts#L41685',
+  WindowOrWorkerGlobalScope:
+    'https://raw.githubusercontent.com/microsoft/TypeScript/38c3279e29e45c274c408d909394b7bf45c24fdc/src/lib/dom.generated.d.ts#L41690',
+  WindowSessionStorage: 'https://raw.githubusercontent.com/microsoft/TypeScript/38c3279e29e45c274c408d909394b7bf45c24fdc/src/lib/dom.generated.d.ts#L41736'
 };
 // Cspell:enable
 
