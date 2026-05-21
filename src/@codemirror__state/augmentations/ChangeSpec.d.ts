@@ -8,7 +8,7 @@ export {};
 
 declare module '@codemirror/state' {
   /**
-   * Type used as argument to `EditorState.changes` and in the `changes` field of transaction
+   * Type used as argument to {@link EditorState.changes} and in the `changes` field of transaction
    * specs to succinctly describe document changes.
    *
    * @official

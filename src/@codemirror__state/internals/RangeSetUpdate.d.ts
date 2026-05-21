@@ -3,7 +3,7 @@ import type { RangeValue } from '@codemirror/state';
 import type { CmRange } from './CmRange.d.ts';
 
 /**
- * Configuration passed to `RangeSet.update`.
+ * Configuration passed to {@link RangeSet.update}.
  *
  * @public
  * @unofficial

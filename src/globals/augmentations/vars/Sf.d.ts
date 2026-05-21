@@ -2,7 +2,7 @@ export {};
 
 declare global {
   /**
-   * Minified reference to `Object.defineProperties`.
+   * Minified reference to {@link Object.defineProperties}.
    *
    * @unofficial
    */

@@ -12,7 +12,7 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  */
 export interface GraphLink {
   /**
-   * PixiJS element for the arrow, child of `GraphRenderer.hanger`.
+   * PixiJS element for the arrow, child of {@link GraphRenderer.hanger}.
    */
   arrow: Graphics | null;
 
@@ -22,7 +22,7 @@ export interface GraphLink {
   line: null | Sprite;
 
   /**
-   * Parent of `GraphLink.line`, child of `GraphRenderer.hanger`.
+   * Parent of {@link GraphLink.line}, child of {@link GraphRenderer.hanger}.
    */
   px: Container | null;
 

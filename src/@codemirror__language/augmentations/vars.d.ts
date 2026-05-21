@@ -11,16 +11,16 @@ declare module '@codemirror/language' {
   /**
    * A facet that specifies token types for which spellcheck should be ignored.
    *
-   * @see https://github.com/lishid/cm-language/blob/main/src/stream-parser.ts
+   * @see {@link https://github.com/lishid/cm-language/blob/main/src/stream-parser.ts}
    * @remark This only exists and can only be used in Obsidian.
    * @unofficial
    */
   const ignoreSpellcheckToken: Facet<string, string[]>;
 
   /**
-   * The `NodeProp` that holds the CSS class of corresponding line-mode token.
+   * The {@link NodeProp} that holds the CSS class of corresponding line-mode token.
    *
-   * @see https://github.com/lishid/cm-language/blob/main/src/stream-parser.ts
+   * @see {@link https://github.com/lishid/cm-language/blob/main/src/stream-parser.ts}
    * @remark This only exists and can only be used in Obsidian.
    * @unofficial
    */
@@ -30,16 +30,16 @@ declare module '@codemirror/language' {
    * This extension installs a highlighter that highlights lines based on `lineClassNodeProp`
    * and `tokenClassNodeProp`.
    *
-   * @see https://github.com/lishid/cm-language/blob/main/src/stream-parser.ts
+   * @see {@link https://github.com/lishid/cm-language/blob/main/src/stream-parser.ts}
    * @remark This only exists and can only be used in Obsidian.
    * @unofficial
    */
   const lineHighlighter: Extension;
 
   /**
-   * The `NodeProp` that holds the CSS class of corresponding line-level token.
+   * The {@link NodeProp} that holds the CSS class of corresponding line-level token.
    *
-   * @see https://github.com/lishid/cm-language/blob/main/src/stream-parser.ts
+   * @see {@link https://github.com/lishid/cm-language/blob/main/src/stream-parser.ts}
    * @remark This only exists and can only be used in Obsidian.
    * @unofficial
    */

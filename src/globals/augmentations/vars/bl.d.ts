@@ -2,7 +2,7 @@ export {};
 
 declare global {
   /**
-   * Minified reference to `Object.hasOwnProperty`.
+   * Minified reference to {@link Object.hasOwnProperty}.
    *
    * @unofficial
    */

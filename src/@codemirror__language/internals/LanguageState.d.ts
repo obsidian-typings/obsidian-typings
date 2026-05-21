@@ -6,7 +6,7 @@ import type { ParseContext } from './ParseContext.d.ts';
 /**
  * Internal state for a language's parser, tracking the parse tree and context.
  *
- * @see https://github.com/codemirror/language/blob/main/src/language.ts
+ * @see {@link https://github.com/codemirror/language/blob/main/src/language.ts}
  * @unofficial
  * @public
  */

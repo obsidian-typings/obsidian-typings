@@ -107,7 +107,7 @@ declare module 'obsidian' {
 
     /**
      * Contains all resolved links. This object maps each source file's path to an object of destination file paths with the link count.
-     * Source and destination paths are all vault absolute paths that comes from `TFile.path` and can be used with `Vault.getAbstractFileByPath(path)`.
+     * Source and destination paths are all vault absolute paths that comes from {@link TFile.path} and can be used with {@link Vault.getAbstractFileByPath}.
      *
      * @official
      */

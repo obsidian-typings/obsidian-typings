@@ -33,7 +33,7 @@ declare module 'obsidian' {
     constructor__(query: string, type: string, name: string): this;
 
     /**
-     * Retrieve the user-configured value of options exposed in `BasesViewRegistration.options`.
+     * Retrieve the user-configured value of options exposed in {@link BasesViewRegistration.options}.
      *
      * @param key - The option key to retrieve.
      * @returns The configured value for the key.
@@ -105,7 +105,7 @@ declare module 'obsidian' {
     getSort(): BasesSortConfig[];
 
     /**
-     * Store configuration data for the view. Views should prefer `BasesViewRegistration.options`
+     * Store configuration data for the view. Views should prefer {@link BasesViewRegistration.options}
      * to allow users to configure options where appropriate.
      *
      * @param key - The key to set.

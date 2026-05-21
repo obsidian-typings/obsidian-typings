@@ -17,7 +17,8 @@ export interface DailyNotesOptions {
 
   /**
    * Naming syntax for daily note in Moment.js syntax.
-   * https://momentjs.com/docs/#/displaying/format/.
+   *
+   * @see {@link https://momentjs.com/docs/#/displaying/format/}.
    */
   format?: string;
 

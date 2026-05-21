@@ -63,7 +63,7 @@ declare module 'obsidian' {
      * Add a keymap event handler to this scope.
      *
      * @param modifiers - `Mod`, `Ctrl`, `Meta`, `Shift`, or `Alt`. `Mod` translates to `Meta` on macOS and `Ctrl` otherwise. Pass `null` to capture all events matching the `key`, regardless of modifiers.
-     * @param key - Keycode from https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key%5FValues.
+     * @param key - Keycode from {@link https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key%5FValues}.
      * @param func - the callback that will be called when a user triggers the keybind.
      * @returns The keymap event handler.
      * @example

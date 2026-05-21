@@ -62,7 +62,7 @@ declare global {
     app: App;
 
     /**
-     * Minified reference to `Object.hasOwnProperty`.
+     * Minified reference to {@link Object.hasOwnProperty}.
      *
      * @unofficial
      */
@@ -118,7 +118,7 @@ declare global {
     CapacitorPlatforms: CapacitorPlatformsGlobal;
 
     /**
-     * Minified reference to `Object.getOwnPropertyDescriptors`.
+     * Minified reference to {@link Object.getOwnPropertyDescriptors}.
      *
      * @unofficial
      */
@@ -146,7 +146,7 @@ declare global {
     DOMPurify: import('../../dompurify/internals/DOMPurify.d.ts').DOMPurify;
 
     /**
-     * Minified reference to `Object.propertyIsEnumerable`.
+     * Minified reference to {@link Object.propertyIsEnumerable}.
      *
      * @unofficial
      */
@@ -209,7 +209,7 @@ declare global {
     moment: typeof momentInstance;
 
     /**
-     * Minified reference to `Object.getOwnPropertySymbols`.
+     * Minified reference to {@link Object.getOwnPropertySymbols}.
      *
      * @unofficial
      */
@@ -288,7 +288,7 @@ declare global {
     scrypt: typeof scryptInstance;
 
     /**
-     * Minified reference to `Object.defineProperties`.
+     * Minified reference to {@link Object.defineProperties}.
      *
      * @unofficial
      */
@@ -323,7 +323,7 @@ declare global {
     WebView: ElectronWebviewTag;
 
     /**
-     * Minified reference to `Object.defineProperty`.
+     * Minified reference to {@link Object.defineProperty}.
      *
      * @unofficial
      */
@@ -495,13 +495,13 @@ declare global {
     globalEnhance(): void;
 
     /**
-     * vim.js based on https://github.com/codemirror/CodeMirror/commit/793c9e65e09ec7fba3f4f5aaf366b3d36e1a709e (2021-12-04)
+     * vim.js based on {@link https://github.com/codemirror/CodeMirror/commit/793c9e65e09ec7fba3f4f5aaf366b3d36e1a709e} (2021-12-04)
      *
-     * Modified from https://github.com/nightwing/cm6-vim-mode-experiment/blob/master/src/vim.js 103a9b5 2021-12-03
+     * Modified from {@link https://github.com/nightwing/cm6-vim-mode-experiment/blob/master/src/vim.js} 103a9b5 2021-12-03
      *
      * CodeMirror, copyright (c) by Marijn Haverbeke and others
      *
-     * Distributed under an MIT license: https://codemirror.net/5/LICENSE
+     * Distributed under an MIT license: {@link https://codemirror.net/5/LICENSE}
      *
      * Supported keybindings:
      *   Too many to list. Refer to defaultKeymap below.

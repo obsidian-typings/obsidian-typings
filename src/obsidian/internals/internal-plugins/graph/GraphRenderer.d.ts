@@ -88,7 +88,7 @@ export interface GraphRenderer {
   iframeEl: HTMLIFrameElement;
 
   /**
-   * `<canvas>` element bound to the event system of `GraphRenderer.px` to capture events.
+   * `<canvas>` element bound to the event system of {@link GraphRenderer.px} to capture events.
    */
   interactiveEl: HTMLCanvasElement;
 
@@ -113,7 +113,7 @@ export interface GraphRenderer {
   mouseY: null | number;
 
   /**
-   * Record of the nodes currently rendered, with `GraphNode.id` used as key.
+   * Record of the nodes currently rendered, with {@link GraphNode.id} used as key.
    */
   nodeLookup: Record<string, GraphNode>;
 

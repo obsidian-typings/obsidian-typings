@@ -9,7 +9,7 @@ declare module '@codemirror/language' {
     /**
      * Look ahead n lines from the current position and return the content.
      *
-     * @see https://github.com/lishid/cm-language/blob/main/src/stringstream.ts
+     * @see {@link https://github.com/lishid/cm-language/blob/main/src/stringstream.ts}
      * @remark This only exists and can only be used in Obsidian.
      * @unofficial
      */

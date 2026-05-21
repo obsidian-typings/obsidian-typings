@@ -2,9 +2,9 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * Converts an `ArrayBuffer` to a base64 string.
+   * Converts an {@link ArrayBuffer} to a base64 string.
    *
-   * @param buffer - The `ArrayBuffer` to convert.
+   * @param buffer - The {@link ArrayBuffer} to convert.
    * @returns The base64 string.
    *
    * @example

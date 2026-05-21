@@ -2,7 +2,7 @@ export {};
 
 declare global {
   /**
-   * Minified reference to `Object.getOwnPropertySymbols`.
+   * Minified reference to {@link Object.getOwnPropertySymbols}.
    *
    * @unofficial
    */

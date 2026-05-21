@@ -2,9 +2,9 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * Converts an `ArrayBuffer` to a hex string.
+   * Converts an {@link ArrayBuffer} to a hex string.
    *
-   * @param buffer - The `ArrayBuffer` to convert.
+   * @param buffer - The {@link ArrayBuffer} to convert.
    * @returns The hex string.
    *
    * @example

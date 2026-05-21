@@ -13,7 +13,7 @@ import type { GraphRenderer } from './GraphRenderer.d.ts';
  */
 export interface GraphNode {
   /**
-   * PixiJS element for the circle, child of `GraphRenderer.hanger`.
+   * PixiJS element for the circle, child of {@link GraphRenderer.hanger}.
    */
   circle: Graphics | null;
 
@@ -48,7 +48,7 @@ export interface GraphNode {
   fy: null | number;
 
   /**
-   * Colored circle added if the node is highlighted, child of `GraphNode.circle`.
+   * Colored circle added if the node is highlighted, child of {@link GraphNode.circle}.
    */
   highlight: Graphics | null;
 
@@ -78,7 +78,7 @@ export interface GraphNode {
   reverse: Record<string, GraphLink>;
 
   /**
-   * PixiJS element for the name, child of `GraphNode.circle`.
+   * PixiJS element for the name, child of {@link GraphNode.circle}.
    */
   text: null | PIXIText;
 

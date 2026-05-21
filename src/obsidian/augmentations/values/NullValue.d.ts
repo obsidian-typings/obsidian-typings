@@ -5,7 +5,7 @@ export {};
 declare module 'obsidian' {
   /**
    * {@link Value} which represents `null`.
-   * NullValue is a singleton and `NullValue.value` should be used instead of calling the constructor.
+   * NullValue is a singleton and {@link NullValue.value} should be used instead of calling the constructor.
    *
    * @since 1.10.0
    */

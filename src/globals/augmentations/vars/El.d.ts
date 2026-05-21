@@ -2,7 +2,7 @@ export {};
 
 declare global {
   /**
-   * Minified reference to `Object.propertyIsEnumerable`.
+   * Minified reference to {@link Object.propertyIsEnumerable}.
    *
    * @unofficial
    */
