@@ -261,7 +261,7 @@ declare module 'obsidian' {
     generateFiles(e: AsyncGenerator<TFile>, t: boolean): Promise<void>;
 
     /**
-     * Get a file or folder inside the vault at the given path. To check if the return type is.
+     * Get a file or folder inside the vault at the given path. To check if the return type is
      * a file, use `instanceof TFile`. To check if it is a folder, use `instanceof TFolder`.
      *
      * @param path - vault absolute path to the folder or file, with extension, case sensitive.
@@ -666,7 +666,7 @@ declare module 'obsidian' {
     removeChild(file: TAbstractFile): void;
 
     /**
-     * Rename or move a file. To ensure links are automatically renamed,.
+     * Rename or move a file. To ensure links are automatically renamed,
      * use {@link FileManager.renameFile} instead.
      *
      * @param file - The file to rename/move.

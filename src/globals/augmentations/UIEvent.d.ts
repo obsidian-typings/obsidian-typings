@@ -29,7 +29,7 @@ declare global {
     win: Window;
 
     /**
-     * Cross-window capable instanceof check, a drop-in replacement.
+     * Cross-window capable instanceof check, a drop-in replacement
      * for instanceof checks on UIEvents.
      *
      * @typeParam T - The type to check.

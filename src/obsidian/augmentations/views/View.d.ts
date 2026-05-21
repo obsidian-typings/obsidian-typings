@@ -62,7 +62,7 @@ declare module 'obsidian' {
     navigation: boolean;
 
     /**
-     * Assign an optional scope to your view to register hotkeys for when the view.
+     * Assign an optional scope to your view to register hotkeys for when the view
      * is in focus.
      *
      * @example

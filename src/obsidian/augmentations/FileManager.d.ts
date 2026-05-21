@@ -364,7 +364,7 @@ declare module 'obsidian' {
     storeTextFileBackup(path: string, data: string): void;
 
     /**
-     * Remove a file or a folder from the vault according the user's preferred 'trash'.
+     * Remove a file or a folder from the vault according the user's preferred 'trash'
      * options (either moving the file to .trash/ or the OS trash bin).
      *
      * @param file - the file or folder to trash.

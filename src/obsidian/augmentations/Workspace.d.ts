@@ -538,7 +538,7 @@ declare module 'obsidian' {
     getLeaf(newLeaf?: 'split', direction?: SplitDirection): WorkspaceLeaf;
 
     /**
-     * If newLeaf is `false` (or not set) then an existing leaf which can be navigated.
+     * If newLeaf is `false` (or not set) then an existing leaf which can be navigated
      * is returned, or a new leaf will be created if there was no leaf available.
      *
      * If newLeaf is `'tab'` or `true` then a new leaf will be created in the preferred
@@ -976,7 +976,7 @@ declare module 'obsidian' {
     ): EventRef;
 
     /**
-     * Triggered when the active file changes. The file could be in a new leaf, an existing leaf,.
+     * Triggered when the active file changes. The file could be in a new leaf, an existing leaf,
      * or an embed.
      *
      * @param name - Should be `'file-open'`.
@@ -1085,7 +1085,7 @@ declare module 'obsidian' {
     ): EventRef;
 
     /**
-     * Triggered when the active Markdown file is modified. React to file changes before they.
+     * Triggered when the active Markdown file is modified. React to file changes before they
      * are saved to disk.
      *
      * @param name - Should be `'quick-preview'`.
@@ -1265,7 +1265,7 @@ declare module 'obsidian' {
     onLayoutChange(leaf?: WorkspaceLeaf): void;
 
     /**
-     * Runs the callback function right away if layout is already ready,.
+     * Runs the callback function right away if layout is already ready,
      * or push it to a queue to be called later when layout is ready.
      *
      * @param callback - The callback to run.

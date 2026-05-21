@@ -38,7 +38,7 @@ declare global {
   interface Window
     extends EventTarget, AnimationFrameProvider, GlobalEventHandlers, WindowEventHandlers, WindowLocalStorage, WindowOrWorkerGlobalScope, WindowSessionStorage {
     /**
-     * The actively focused Document object. This is usually the same as `document` but.
+     * The actively focused Document object. This is usually the same as `document` but
      * it will be different when using popout windows.
      *
      * @official
@@ -46,7 +46,7 @@ declare global {
     activeDocument: Document;
 
     /**
-     * The actively focused Window object. This is usually the same as `window` but.
+     * The actively focused Window object. This is usually the same as `window` but
      * it will be different when using popout windows.
      *
      * @official

@@ -488,7 +488,7 @@ declare module 'obsidian' {
     ): EventRef;
 
     /**
-     * Called when a file has been deleted. A best-effort previous version of the cached metadata is presented,.
+     * Called when a file has been deleted. A best-effort previous version of the cached metadata is presented,
      * but it could be `null` in case the file was not successfully cached previously.
      *
      * @param name - Should be `'deleted'`.

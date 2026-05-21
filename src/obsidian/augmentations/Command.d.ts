@@ -22,7 +22,7 @@ declare module 'obsidian' {
     allowProperties?: boolean;
 
     /**
-     * Sets the default hotkey. It is recommended for plugins to avoid setting default hotkeys if possible,.
+     * Sets the default hotkey. It is recommended for plugins to avoid setting default hotkeys if possible,
      * to avoid conflicting hotkeys with one that's set by the user, even though customized hotkeys have higher priority.
      *
      * @example

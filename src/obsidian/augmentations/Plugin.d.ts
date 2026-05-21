@@ -167,7 +167,7 @@ declare module 'obsidian' {
     onload(): Promise<void> | void;
 
     /**
-     * Perform any initial setup code. The user has explicitly interacted with the plugin.
+     * Perform any initial setup code. The user has explicitly interacted with the plugin
      * so its safe to engage with the user. If your plugin registers a custom view,
      * you can open it here.
      *

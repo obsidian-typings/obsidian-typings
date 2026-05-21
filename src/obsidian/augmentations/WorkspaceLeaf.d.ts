@@ -385,11 +385,10 @@ declare module 'obsidian' {
     recordHistory(state: WorkspaceLeafHistoryState): void;
 
     /**
-     * Set the vertical height a leaf may occupy if it is in a split. The height is not set directly, but.
-     *
-     * by setting the flex-grow (css) of the element. This means to predictably affect the height, you.
-     * also need to use setDimension on the other leafs of the column. (The flex-grow values of every leaf.
-     * work basically like a ratio, e.g. 1:2 meaning the first leaf takes 33% of the height, and the.
+     * Set the vertical height a leaf may occupy if it is in a split. The height is not set directly, but
+     * by setting the flex-grow (css) of the element. This means to predictably affect the height, you
+     * also need to use setDimension on the other leafs of the column. (The flex-grow values of every leaf
+     * work basically like a ratio, e.g. 1:2 meaning the first leaf takes 33% of the height, and the
      * second 67%.).
      *
      * @param flexgrow - Sets the flex-grow of the leaf. (0-100).

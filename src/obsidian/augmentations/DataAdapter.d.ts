@@ -53,7 +53,7 @@ declare module 'obsidian' {
     copy(normalizedPath: string, normalizedNewPath: string): Promise<void>;
 
     /**
-     * Check if something exists at the given path. For a faster way to synchronously check.
+     * Check if something exists at the given path. For a faster way to synchronously check
      * if a note or attachment is in the vault, use {@link Vault.getAbstractFileByPath}.
      *
      * @param normalizedPath - path to file/folder, use {@link normalizePath} to normalize beforehand.

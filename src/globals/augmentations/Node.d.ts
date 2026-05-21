@@ -178,7 +178,7 @@ declare global {
     insertAfter<T extends Node>(node: T, child: Node | null): T;
 
     /**
-     * Cross-window capable instanceof check, a drop-in replacement.
+     * Cross-window capable instanceof check, a drop-in replacement
      * for instanceof checks on DOM Nodes. Remember to also check
      * for nulls when necessary.
      *

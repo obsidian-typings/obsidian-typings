@@ -40,7 +40,7 @@ declare global {
     hide(): void;
 
     /**
-     * Returns whether this element is shown, when the element is attached to the DOM and.
+     * Returns whether this element is shown, when the element is attached to the DOM and
      * none of the parent and ancestor elements are hidden with `display: none`.
      *
      * Exception: Does not work on `<body>` and `<html>`, or on elements with `position: fixed`.
