@@ -2,6 +2,7 @@
   "version": "0.2",
   "ignorePaths": [
     "dist",
+    "docs",
     "node_modules",
     "tsconfig.tsbuildinfo"
   ],
