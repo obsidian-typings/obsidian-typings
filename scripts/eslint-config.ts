@@ -397,6 +397,15 @@ function getJsdocsConfigs(): Linter.Config[] {
         jsdoc
       },
       rules: {
+        'jsdoc/escape-inline-tags': [
+          'error',
+          {
+            allowedInlineTags: [
+              'codemirror',
+              'lezer'
+            ]
+          }
+        ],
         'jsdoc/check-tag-names': [
           'error',
           {
