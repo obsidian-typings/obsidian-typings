@@ -4,10 +4,10 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * Use this `CodeMirror` {@link StateField} to get {@link MarkdownFileInfo} about this Markdown editor, such as the associated file, or the Editor.
+   * Use this `CodeMirror` {@link @codemirror/state#StateField} to get {@link obsidian#MarkdownFileInfo} about this Markdown editor, such as the associated file, or the Editor.
    *
    * @official
-   * @deprecated - Added only for typing purposes. Use {@link editorInfoField} instead.
+   * @deprecated - Added only for typing purposes. Use {@link obsidian#editorInfoField} instead.
    */
   const editorInfoField__: StateField<MarkdownFileInfo>;
 }

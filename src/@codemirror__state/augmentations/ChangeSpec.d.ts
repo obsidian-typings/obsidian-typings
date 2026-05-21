@@ -8,11 +8,11 @@ export {};
 
 declare module '@codemirror/state' {
   /**
-   * Type used as argument to {@link EditorState.changes} and in the `changes` field of transaction
+   * Type used as argument to {@link @codemirror/state#EditorState.changes} and in the `changes` field of transaction
    * specs to succinctly describe document changes.
    *
    * @official
-   * @deprecated - Added only for typing purposes. Use {@link ChangeSpec} instead.
+   * @deprecated - Added only for typing purposes. Use {@link @codemirror/state#ChangeSpec} instead.
    */
   type ChangeSpec__ =
     | {

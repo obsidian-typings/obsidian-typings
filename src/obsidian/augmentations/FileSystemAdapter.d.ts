@@ -16,7 +16,7 @@ declare module 'obsidian' {
   /**
    * Implementation of the vault adapter for desktop.
    *
-   * `app.vault.adapter` returns an instance of {@link FileSystemAdapter} on desktop devices.
+   * `app.vault.adapter` returns an instance of {@link obsidian#FileSystemAdapter} on desktop devices.
    */
   interface FileSystemAdapter extends DataAdapterEx {
     /**

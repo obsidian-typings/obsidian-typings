@@ -107,7 +107,7 @@ declare module 'obsidian' {
 
     /**
      * Contains all resolved links. This object maps each source file's path to an object of destination file paths with the link count.
-     * Source and destination paths are all vault absolute paths that comes from {@link TFile.path} and can be used with {@link Vault.getAbstractFileByPath}.
+     * Source and destination paths are all vault absolute paths that comes from {@link obsidian#TFile.path} and can be used with {@link obsidian#Vault.getAbstractFileByPath}.
      *
      * @official
      */
@@ -129,7 +129,7 @@ declare module 'obsidian' {
 
     /**
      * Contains all unresolved links. This object maps each source file to an object of unknown destinations with count.
-     * Source paths are all vault absolute paths, similar to {@link resolvedLinks}.
+     * Source paths are all vault absolute paths, similar to {@link obsidian#MetadataCache.resolvedLinks | resolvedLinks}.
      *
      * @official
      */
@@ -478,7 +478,7 @@ declare module 'obsidian' {
      * ```
      *
      * Note: This is not called when a file is renamed for performance reasons.
-     * You must hook the {@link Vault.on | Vault.on(name: 'rename')} event for those.
+     * You must hook the {@link obsidian#Vault.on | Vault.on(name: 'rename')} event for those.
      * @official
      */
     on(
@@ -527,7 +527,7 @@ declare module 'obsidian' {
     on(name: 'initialized', callback: () => void): EventRef;
 
     /**
-     * Called when a file has been resolved for {@link resolvedLinks} and {@link unresolvedLinks | unresolvedLinks}.
+     * Called when a file has been resolved for {@link obsidian#MetadataCache.resolvedLinks | resolvedLinks} and {@link obsidian#MetadataCache.unresolvedLinks | unresolvedLinks}.
      * This happens sometimes after a file has been indexed.
      *
      * @param name - Should be `'resolve'`.

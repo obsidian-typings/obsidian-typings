@@ -33,7 +33,7 @@ declare module 'obsidian' {
     constructor__(query: string, type: string, name: string): this;
 
     /**
-     * Retrieve the user-configured value of options exposed in {@link BasesViewRegistration.options}.
+     * Retrieve the user-configured value of options exposed in {@link obsidian#BasesViewRegistration.options}.
      *
      * @param key - The option key to retrieve.
      * @returns The configured value for the key.
@@ -74,7 +74,7 @@ declare module 'obsidian' {
      *
      * @param view - The view to evaluate the formula in the context of.
      * @param key - The key to evaluate the formula for.
-     * @returns the {@link Value} result from evaluating the formula, or {@link NullValue} if the formula is invalid, or the key is not present.
+     * @returns the {@link obsidian#Value} result from evaluating the formula, or {@link obsidian#NullValue} if the formula is invalid, or the key is not present.
      * @official
      * @since 1.10.2
      */
@@ -96,7 +96,7 @@ declare module 'obsidian' {
      * Removes invalid sort configs. If no (valid) sort config, returns an empty array.
      * Does not validate that the properties exists.
      *
-     * Note that data from {@link BasesQueryResult} will be presorted.
+     * Note that data from {@link obsidian#BasesQueryResult} will be presorted.
      *
      * @returns The array of sort configurations.
      * @official
@@ -105,7 +105,7 @@ declare module 'obsidian' {
     getSort(): BasesSortConfig[];
 
     /**
-     * Store configuration data for the view. Views should prefer {@link BasesViewRegistration.options}
+     * Store configuration data for the view. Views should prefer {@link obsidian#BasesViewRegistration.options}
      * to allow users to configure options where appropriate.
      *
      * @param key - The key to set.

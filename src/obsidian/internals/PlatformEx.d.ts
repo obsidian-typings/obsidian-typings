@@ -1,5 +1,5 @@
 /**
- * Due to limitations of TypeScript, we cannot extend the {@link Platform} constant directly.
+ * Due to limitations of TypeScript, we cannot extend the {@link obsidian#Platform} constant directly.
  *
  * @example
  *

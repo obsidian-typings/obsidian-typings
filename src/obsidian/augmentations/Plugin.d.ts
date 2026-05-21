@@ -79,7 +79,7 @@ declare module 'obsidian' {
     /**
      * Adds a ribbon icon to the left bar.
      *
-     * @param icon - The icon name to be used. See {@link addIcon}.
+     * @param icon - The icon name to be used. See {@link obsidian#addIcon}.
      * @param title - The title to be displayed in the tooltip.
      * @param callback - The `click` callback.
      * @returns The HTMLElement for the ribbon icon.
@@ -205,9 +205,9 @@ declare module 'obsidian' {
     /**
      * Registers a CodeMirror 6 extension.
      * To reconfigure cm6 extensions for a plugin on the fly, an array should be passed in, and modified dynamically.
-     * Once this array is modified, calling {@link Workspace.updateOptions} will apply the changes.
+     * Once this array is modified, calling {@link obsidian#Workspace.updateOptions} will apply the changes.
      *
-     * @param extension - must be a CodeMirror 6 {@link Extension}, or an array of Extensions.
+     * @param extension - must be a CodeMirror 6 {@link @codemirror/state#Extension}, or an array of Extensions.
      * @example
      * ```ts
      * const myViewPlugin = ViewPlugin.fromClass(MyViewPlugin);

@@ -70,7 +70,7 @@ declare module 'obsidian' {
     /**
      * Set the icon of the extra button.
      *
-     * @param icon - ID of the icon, can use any icon loaded with {@link addIcon} or from the inbuilt library.
+     * @param icon - ID of the icon, can use any icon loaded with {@link obsidian#addIcon} or from the inbuilt library.
      * @see The Obsidian icon library includes the {@link https://lucide.dev/ Lucide icon library}, any icon name from their site will work here.
      * @returns The extra button component.
      * @example

@@ -130,7 +130,7 @@ declare module 'obsidian' {
 
     /**
      * The view associated with this leaf. Do not attempt to cast this to your
-     * custom {@link View} without first checking `instanceof`.
+     * custom {@link obsidian#View} without first checking `instanceof`.
      *
      * @official
      */

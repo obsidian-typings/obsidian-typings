@@ -7,7 +7,7 @@ declare module 'obsidian' {
    * Information about the current platform.
    *
    * @official
-   * @deprecated - Added only for typing purposes. Use {@link Platform} instead.
+   * @deprecated - Added only for typing purposes. Use {@link obsidian#Platform} instead.
    */
   const Platform__: PlatformEx;
 }

@@ -4,8 +4,8 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * {@link Value} which represents `null`.
-   * NullValue is a singleton and {@link NullValue.value} should be used instead of calling the constructor.
+   * {@link obsidian#Value} which represents `null`.
+   * NullValue is a singleton and {@link obsidian#NullValue.value} should be used instead of calling the constructor.
    *
    * @since 1.10.0
    */
@@ -46,7 +46,7 @@ declare module 'obsidian' {
      *
      * @official
      * @since 1.10.0
-     * @deprecated - Added only for typing purposes. Use {@link NullValue.value} instead.
+     * @deprecated - Added only for typing purposes. Use {@link obsidian#NullValue.value} instead.
      */
     const value__: NullValue;
   }

@@ -3,13 +3,13 @@ export {};
 declare module 'obsidian' {
   /**
    * Work directly with files and folders inside a vault.
-   * If possible prefer using the {@link Vault} API over this.
+   * If possible prefer using the {@link obsidian#Vault} API over this.
    */
   interface DataAdapter {
     /**
      * Add text to the end of a plaintext file.
      *
-     * @param normalizedPath - path to file, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file, use {@link obsidian#normalizePath} to normalize beforehand.
      * @param data - the text to append.
      * @param options - write options.
      * @returns A promise that resolves when the file is written.
@@ -24,7 +24,7 @@ declare module 'obsidian' {
     /**
      * Add data to the end of a binary file.
      *
-     * @param normalizedPath - Path to file, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - Path to file, use {@link obsidian#normalizePath} to normalize beforehand.
      * @param data - The data to append.
      * @param options - (Optional) options
      * @returns A promise that resolves when the file is appended.
@@ -41,8 +41,8 @@ declare module 'obsidian' {
      * Create a copy of a file.
      * This will fail if there is already a file at `normalizedNewPath`.
      *
-     * @param normalizedPath - path to file, use {@link normalizePath} to normalize beforehand.
-     * @param normalizedNewPath - path to file, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file, use {@link obsidian#normalizePath} to normalize beforehand.
+     * @param normalizedNewPath - path to file, use {@link obsidian#normalizePath} to normalize beforehand.
      * @returns A promise that resolves when the file is copied.
      * @example
      * ```ts
@@ -56,7 +56,7 @@ declare module 'obsidian' {
      * Check if something exists at the given path. For a faster way to synchronously check
      * if a note or attachment is in the vault, use {@link Vault.getAbstractFileByPath}.
      *
-     * @param normalizedPath - path to file/folder, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file/folder, use {@link obsidian#normalizePath} to normalize beforehand.
      * @param sensitive - Some file systems/operating systems are case-insensitive, set to `true` to force a case-sensitivity check.
      * @returns A promise that resolves to `true` if the file/folder exists, `false` otherwise.
      * @example
@@ -78,7 +78,7 @@ declare module 'obsidian' {
     /**
      * Returns a URI for the browser engine to use, for example to embed an image.
      *
-     * @param normalizedPath - path to file/folder, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file/folder, use {@link obsidian#normalizePath} to normalize beforehand.
      * @returns A URI for the browser engine to use.
      * @example
      * ```ts
@@ -91,7 +91,7 @@ declare module 'obsidian' {
     /**
      * Retrieve a list of all files and folders inside the given folder, non-recursive.
      *
-     * @param normalizedPath - path to folder, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to folder, use {@link obsidian#normalizePath} to normalize beforehand.
      * @returns A promise that resolves to the list of files and folders inside the given folder.
      * @example
      * ```ts
@@ -104,7 +104,7 @@ declare module 'obsidian' {
     /**
      * Create a directory.
      *
-     * @param normalizedPath - path to use for new folder, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to use for new folder, use {@link obsidian#normalizePath} to normalize beforehand.
      * @returns A promise that resolves when the directory is created.
      * @example
      * ```ts
@@ -117,7 +117,7 @@ declare module 'obsidian' {
     /**
      * Atomically read, modify, and save the contents of a plaintext file.
      *
-     * @param normalizedPath - path to file/folder, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file/folder, use {@link obsidian#normalizePath} to normalize beforehand.
      * @param fn - a callback function which returns the new content of the file synchronously.
      * @param options - write options.
      * @returns A promise that resolves to the text value of the file that was written.
@@ -134,7 +134,7 @@ declare module 'obsidian' {
     /**
      * Read the contents of a file.
      *
-     * @param normalizedPath - path to file, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file, use {@link obsidian#normalizePath} to normalize beforehand.
      * @returns A promise that resolves to the contents of the file.
      * @example
      * ```ts
@@ -147,7 +147,7 @@ declare module 'obsidian' {
     /**
      * Read the contents of a binary file.
      *
-     * @param normalizedPath - path to file, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file, use {@link obsidian#normalizePath} to normalize beforehand.
      * @returns A promise that resolves to the contents of the file.
      * @example
      * ```ts
@@ -160,7 +160,7 @@ declare module 'obsidian' {
     /**
      * Delete a file.
      *
-     * @param normalizedPath - path to file, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file, use {@link obsidian#normalizePath} to normalize beforehand.
      * @returns A promise that resolves when the file is deleted.
      * @example
      * ```ts
@@ -173,8 +173,8 @@ declare module 'obsidian' {
     /**
      * Rename a file or folder.
      *
-     * @param normalizedPath - current path to file/folder, use {@link normalizePath} to normalize beforehand.
-     * @param normalizedNewPath - new path to file/folder, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - current path to file/folder, use {@link obsidian#normalizePath} to normalize beforehand.
+     * @param normalizedNewPath - new path to file/folder, use {@link obsidian#normalizePath} to normalize beforehand.
      * @returns A promise that resolves when the file is renamed.
      * @example
      * ```ts
@@ -187,7 +187,7 @@ declare module 'obsidian' {
     /**
      * Remove a directory.
      *
-     * @param normalizedPath - path to folder, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to folder, use {@link obsidian#normalizePath} to normalize beforehand.
      * @param recursive - If `true`, delete folders under this folder recursively, if `false` the folder needs to be empty.
      * @returns A promise that resolves when the directory is removed.
      * @example
@@ -201,7 +201,7 @@ declare module 'obsidian' {
     /**
      * Retrieve metadata about the given file/folder.
      *
-     * @param normalizedPath - path to file/folder, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file/folder, use {@link obsidian#normalizePath} to normalize beforehand.
      * @returns A promise that resolves to the stats of the file/folder, or `null` if it does not exist.
      * @example
      * ```ts
@@ -216,7 +216,7 @@ declare module 'obsidian' {
      * Move to local trash.
      * Files will be moved into the `.trash` folder at the root of the vault.
      *
-     * @param normalizedPath - path to file/folder, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file/folder, use {@link obsidian#normalizePath} to normalize beforehand.
      * @returns A promise that resolves when the file is moved to the local trash.
      * @example
      * ```ts
@@ -229,7 +229,7 @@ declare module 'obsidian' {
     /**
      * Try moving to system trash.
      *
-     * @param normalizedPath - path to file/folder, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file/folder, use {@link obsidian#normalizePath} to normalize beforehand.
      * @returns Returns a promise that resolves to `true` if succeeded. This can fail due to system trash being disabled.
      * @example
      * ```ts
@@ -243,7 +243,7 @@ declare module 'obsidian' {
      * Write to a plaintext file.
      * If the file exists its content will be overwritten, otherwise the file will be created.
      *
-     * @param normalizedPath - path to file, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file, use {@link obsidian#normalizePath} to normalize beforehand.
      * @param data - new file content.
      * @param options - write options.
      * @returns A promise that resolves when the file is written.
@@ -259,7 +259,7 @@ declare module 'obsidian' {
      * Write to a binary file.
      * If the file exists its content will be overwritten, otherwise the file will be created.
      *
-     * @param normalizedPath - path to file, use {@link normalizePath} to normalize beforehand.
+     * @param normalizedPath - path to file, use {@link obsidian#normalizePath} to normalize beforehand.
      * @param data - the new file content.
      * @param options - write options.
      * @returns A promise that resolves when the file is written.

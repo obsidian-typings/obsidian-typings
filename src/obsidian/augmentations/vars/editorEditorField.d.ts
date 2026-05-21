@@ -5,10 +5,10 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * Use this `CodeMirror` {@link StateField} to get a reference to the {@link EditorView}
+   * Use this `CodeMirror` {@link @codemirror/state#StateField} to get a reference to the {@link @codemirror/view#EditorView}
    *
    * @official
-   * @deprecated - Added only for typing purposes. Use {@link editorEditorField} instead.
+   * @deprecated - Added only for typing purposes. Use {@link obsidian#editorEditorField} instead.
    */
   const editorEditorField__: StateField<EditorView>;
 }

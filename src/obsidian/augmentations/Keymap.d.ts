@@ -4,7 +4,7 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * Manages keymap lifecycle for different {@link Scope}s.
+   * Manages keymap lifecycle for different {@link obsidian#Scope}s.
    *
    * @since 0.13.9
    */

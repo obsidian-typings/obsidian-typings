@@ -5,7 +5,7 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * This can be either a {@link TFile} or a {@link TFolder}.
+   * This can be either a {@link obsidian#TFile} or a {@link obsidian#TFolder}.
    *
    * @since 0.9.7
    */
