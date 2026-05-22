@@ -1,6 +1,11 @@
+import type { AddResourceOptions } from './AddResourceOptions.d.ts';
 import type { Callback } from './Callback.d.ts';
+import type { GetResourceOptions } from './GetResourceOptions.d.ts';
+import type { HasLoadedNamespaceOptions } from './HasLoadedNamespaceOptions.d.ts';
+import type { I18nModules } from './I18nModules.d.ts';
 import type { InitOptions } from './InitOptions.d.ts';
 import type { Module } from './Module.d.ts';
+import type { ModuleConstructor } from './ModuleConstructor.d.ts';
 import type { ResourceStore } from './ResourceStore.d.ts';
 import type { Services } from './Services.d.ts';
 import type { TFunction } from './TFunction.d.ts';
@@ -25,7 +30,7 @@ export interface I18n {
   languages: readonly string[];
 
   /** Loaded plugin modules. */
-  modules: { external: Module[] };
+  modules: I18nModules;
 
   /** The resolved language, if available. */
   resolvedLanguage?: string;
@@ -39,7 +44,6 @@ export interface I18n {
   /** The translation function. */
   t: TFunction;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Adds a single resource entry.
    *
@@ -50,8 +54,7 @@ export interface I18n {
    * @param options - Additional options including `keySeparator` and `silent`.
    * @returns The i18n instance.
    */
-  addResource(lng: string, ns: string, key: string, value: string, options?: { keySeparator?: string; silent?: boolean }): I18n;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  addResource(lng: string, ns: string, key: string, value: string, options?: AddResourceOptions): I18n;
 
   /**
    * Adds a resource bundle.
@@ -155,7 +158,6 @@ export interface I18n {
    */
   getFixedT(lng: string | string[], ns?: string | string[]): TFunction;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Gets a single resource value.
    *
@@ -165,8 +167,7 @@ export interface I18n {
    * @param options - Additional options including `keySeparator`.
    * @returns The resource value.
    */
-  getResource(lng: string, ns: string, key: string, options?: { keySeparator?: string }): unknown;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  getResource(lng: string, ns: string, key: string, options?: GetResourceOptions): unknown;
 
   /**
    * Gets a resource bundle for a language and namespace.
@@ -177,7 +178,6 @@ export interface I18n {
    */
   getResourceBundle(lng: string, ns: string): Record<string, unknown>;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Checks whether a namespace has been loaded.
    *
@@ -185,8 +185,7 @@ export interface I18n {
    * @param options - Additional options including `lng`.
    * @returns Whether the namespace has been loaded.
    */
-  hasLoadedNamespace(ns: string | string[], options?: { lng?: string }): boolean;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  hasLoadedNamespace(ns: string | string[], options?: HasLoadedNamespaceOptions): boolean;
 
   /**
    * Checks whether a resource bundle exists.
@@ -279,5 +278,5 @@ export interface I18n {
    * @param module - The module, its constructor, or a factory function.
    * @returns The i18n instance.
    */
-  use<T extends Module>(module: ((instance: I18n) => void) | { new (): T } | T): this;
+  use<T extends Module>(module: ((instance: I18n) => void) | ModuleConstructor<T> | T): this;
 }

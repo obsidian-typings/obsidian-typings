@@ -4,16 +4,17 @@ import type {
   CharCategory,
   EditorSelection as CmEditorSelection,
   EditorStateConfig,
-  Extension,
   Facet,
   FacetReader,
   SelectionRange,
-  StateEffect,
   StateField,
   Text,
   Transaction,
   TransactionSpec
 } from '@codemirror/state';
+
+import type { ChangeByRangeResult } from '../internals/ChangeByRangeResult.d.ts';
+import type { ChangeByRangeReturn } from '../internals/ChangeByRangeReturn.d.ts';
 
 export {};
 
@@ -44,16 +45,8 @@ declare module '@codemirror/state' {
      * @official
      */
     changeByRange(
-      f: (range: SelectionRange) => {
-        range: SelectionRange;
-        changes?: ChangeSpec;
-        effects?: readonly StateEffect<unknown>[] | StateEffect<unknown>;
-      }
-    ): {
-      changes: ChangeSet;
-      selection: CmEditorSelection;
-      effects: readonly StateEffect<unknown>[];
-    };
+      f: (range: SelectionRange) => ChangeByRangeResult
+    ): ChangeByRangeReturn;
 
     /**
      * Create a change set from the given change description.
@@ -173,7 +166,7 @@ declare module '@codemirror/state' {
      * @returns The JSON representation.
      * @official
      */
-    toJSON(fields?: { [prop: string]: StateField<unknown> }): unknown;
+    toJSON(fields?: Record<string, StateField<unknown>>): unknown;
 
     /**
      * Using the state's line separator, create a Text instance from the given string.
@@ -214,7 +207,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link EditorState.fromJSON} instead.
      */
-    function fromJSON__(json: unknown, config?: EditorStateConfig, fields?: { [prop: string]: StateField<unknown> }): EditorState;
+    function fromJSON__(json: unknown, config?: EditorStateConfig, fields?: Record<string, StateField<unknown>>): EditorState;
 
     /**
      * Create a new state.
@@ -264,7 +257,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link EditorState.phrases} instead.
      */
-    const phrases__: Facet<{ [key: string]: string }, readonly { [key: string]: string }[]>;
+    const phrases__: Facet<Record<string, string>, readonly Record<string, string>[]>;
 
     /**
      * A facet used to register language data providers.
@@ -273,8 +266,8 @@ declare module '@codemirror/state' {
      * @deprecated - Added only for typing purposes. Use {@link EditorState.languageData} instead.
      */
     const languageData__: Facet<
-      (state: EditorState, pos: number, side: -1 | 0 | 1) => readonly { [name: string]: unknown }[],
-      readonly ((state: EditorState, pos: number, side: -1 | 0 | 1) => readonly { [name: string]: unknown }[])[]
+      (state: EditorState, pos: number, side: -1 | 0 | 1) => readonly Record<string, unknown>[],
+      readonly ((state: EditorState, pos: number, side: -1 | 0 | 1) => readonly Record<string, unknown>[])[]
     >;
 
     /**

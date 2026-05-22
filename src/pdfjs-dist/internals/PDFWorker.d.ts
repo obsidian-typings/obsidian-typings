@@ -1,3 +1,6 @@
+import type { PDFWorkerFromPortParams } from './PDFWorkerFromPortParams.d.ts';
+import type { PDFWorkerParams } from './PDFWorkerParams.d.ts';
+
 /**
  * PDF.js Web Worker wrapper.
  *
@@ -15,7 +18,7 @@ export declare class PDFWorker {
   readonly promise: Promise<void>;
 
   /** Creates a new PDFWorker instance. */
-  constructor(params?: { name?: string; port?: unknown; verbosity?: number });
+  constructor(params?: PDFWorkerParams);
 
   /** Destroys the worker. */
   destroy(): void;
@@ -26,7 +29,7 @@ export declare class PDFWorker {
    * @param params - Parameters including the port.
    * @returns A new PDFWorker instance.
    */
-  static fromPort(params: { port: unknown; verbosity?: number }): PDFWorker;
+  static fromPort(params: PDFWorkerFromPortParams): PDFWorker;
 
   /**
    * Gets the URL of the worker source.

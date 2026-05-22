@@ -1,6 +1,7 @@
 import type { Input } from './Input.d.ts';
 import type { LezerTree } from './LezerTree.d.ts';
 import type { LezerTreeFragment } from './LezerTreeFragment.d.ts';
+import type { LezerTreeRange } from './LezerTreeRange.d.ts';
 import type { PartialParse } from './PartialParse.d.ts';
 
 /**
@@ -21,7 +22,7 @@ export declare abstract class Parser {
   abstract createParse(
     input: Input,
     fragments: readonly LezerTreeFragment[],
-    ranges: readonly { from: number; to: number }[]
+    ranges: readonly LezerTreeRange[]
   ): PartialParse;
 
   /**
@@ -35,6 +36,6 @@ export declare abstract class Parser {
   parse(
     input: Input | string,
     fragments?: readonly LezerTreeFragment[],
-    ranges?: readonly { from: number; to: number }[]
+    ranges?: readonly LezerTreeRange[]
   ): LezerTree;
 }

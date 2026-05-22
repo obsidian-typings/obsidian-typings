@@ -1,3 +1,5 @@
+import type { BasesConfigFileViewGroupBy } from '../../internals/bases/BasesConfigFileViewGroupBy.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -21,7 +23,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.10.0
      */
-    groupBy?: {};
+    groupBy?: BasesConfigFileViewGroupBy;
 
     /**
      * Friendly name for this view, displayed in the UI to select between views.

@@ -14,9 +14,7 @@ declare global {
      * ```
      * @official
      */
-    attr?: {
-      [key: string]: boolean | null | number | string;
-    };
+    attr?: Record<string, boolean | null | number | string>;
 
     /**
      * The class to be assigned. Can be a space-separated string or an array of strings.

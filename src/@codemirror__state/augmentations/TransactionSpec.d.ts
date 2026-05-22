@@ -6,6 +6,8 @@ import type {
   Transaction
 } from '@codemirror/state';
 
+import type { EditorStateSelectionSpec } from '../internals/EditorStateSelectionSpec.d.ts';
+
 export {};
 
 declare module '@codemirror/state' {
@@ -58,7 +60,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link selection} instead.
      */
-    selection__?: { anchor: number; head?: number } | CmEditorSelection | undefined;
+    selection__?: CmEditorSelection | EditorStateSelectionSpec | undefined;
 
     /**
      * When true, positions in this spec refer to the document created by previous specs.

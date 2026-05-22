@@ -4,6 +4,7 @@ import type { LayoutLoaderDefinition } from './LayoutLoaderDefinition.d.ts';
 import type { MermaidConfig } from './MermaidConfig.d.ts';
 import type { ParseOptions } from './ParseOptions.d.ts';
 import type { ParseResult } from './ParseResult.d.ts';
+import type { RegisterExternalDiagramsOptions } from './RegisterExternalDiagramsOptions.d.ts';
 import type { RenderResult } from './RenderResult.d.ts';
 import type { RunOptions } from './RunOptions.d.ts';
 
@@ -47,7 +48,6 @@ export interface Mermaid {
   /** Error handler for parse errors. */
   parseError?(err: string, hash: unknown): void;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Register external diagram definitions.
    *
@@ -55,8 +55,7 @@ export interface Mermaid {
    * @param opts - Registration options including `lazyLoad`.
    * @returns A promise that resolves when registration is complete.
    */
-  registerExternalDiagrams(diagrams: ExternalDiagramDefinition[], opts?: { lazyLoad?: boolean }): Promise<void>;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  registerExternalDiagrams(diagrams: ExternalDiagramDefinition[], opts?: RegisterExternalDiagramsOptions): Promise<void>;
 
   /**
    * Register icon packs.

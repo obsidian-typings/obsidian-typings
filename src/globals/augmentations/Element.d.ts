@@ -242,9 +242,7 @@ declare global {
      * ```
      * @official
      */
-    setAttrs(obj: {
-      [key: string]: boolean | null | number | string;
-    }): void;
+    setAttrs(obj: Record<string, boolean | null | number | string>): void;
 
     /**
      * Sets the text content of the element.

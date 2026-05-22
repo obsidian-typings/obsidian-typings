@@ -1,3 +1,5 @@
+import type { InterpolationOptions } from './InterpolationOptions.d.ts';
+
 /**
  * Configuration options for initializing i18next.
  *
@@ -18,12 +20,7 @@ export interface InitOptions {
   fallbackNS?: false | string | string[];
 
   /** Interpolation options. */
-  interpolation?: {
-    escapeValue?: boolean;
-    prefix?: string;
-    suffix?: string;
-    [key: string]: unknown;
-  };
+  interpolation?: InterpolationOptions;
 
   /** Active language code. */
   lng?: string;

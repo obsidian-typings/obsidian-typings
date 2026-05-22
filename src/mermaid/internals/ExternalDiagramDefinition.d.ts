@@ -1,4 +1,4 @@
-import type { DiagramDefinition } from './DiagramDefinition.d.ts';
+import type { DiagramDefinitionModule } from './DiagramDefinitionModule.d.ts';
 
 /**
  * Definition for registering an external Mermaid diagram type.
@@ -23,5 +23,5 @@ export interface ExternalDiagramDefinition {
    *
    * @returns A promise resolving to the diagram definition.
    */
-  loader(): Promise<{ diagram: DiagramDefinition }>;
+  loader(): Promise<DiagramDefinitionModule>;
 }

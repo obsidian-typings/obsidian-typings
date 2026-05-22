@@ -1,3 +1,4 @@
+import type { ElectronClipboardBookmark } from './ElectronClipboardBookmark.d.ts';
 import type { ElectronNativeImage } from './ElectronNativeImage.d.ts';
 
 /**
@@ -44,7 +45,7 @@ export interface ElectronClipboard {
    *
    * @returns The bookmark title and URL.
    */
-  readBookmark(): { title: string; url: string };
+  readBookmark(): ElectronClipboardBookmark;
 
   /**
    * Reads the clipboard content as a buffer.

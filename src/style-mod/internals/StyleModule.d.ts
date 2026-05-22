@@ -1,4 +1,6 @@
-import type { StyleSpec } from './StyleSpec.d.ts';
+import type { StyleModuleMountOptions } from './StyleModuleMountOptions.d.ts';
+import type { StyleModuleOptions } from './StyleModuleOptions.d.ts';
+import type { StyleModuleSpec } from './StyleModuleSpec.d.ts';
 
 /**
  * A CSS module that can be mounted into a document or shadow root.
@@ -8,9 +10,7 @@ import type { StyleSpec } from './StyleSpec.d.ts';
  */
 export declare class StyleModule {
   /** */
-  constructor(spec: { [selector: string]: StyleSpec }, options?: {
-    finish?(sel: string): string;
-  });
+  constructor(spec: StyleModuleSpec, options?: StyleModuleOptions);
 
   /** Get the generated CSS rules as a string. */
   getRules(): string;
@@ -25,7 +25,7 @@ export declare class StyleModule {
   static mount(
     root: Document | DocumentOrShadowRoot | ShadowRoot,
     module: readonly StyleModule[] | StyleModule,
-    options?: { nonce?: string }
+    options?: StyleModuleMountOptions
   ): void;
 
   /**

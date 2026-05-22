@@ -1,3 +1,6 @@
+import type { GetAnnotationsParams } from './GetAnnotationsParams.d.ts';
+import type { GetTextContentParams } from './GetTextContentParams.d.ts';
+import type { GetViewportParams } from './GetViewportParams.d.ts';
 import type { PageViewport } from './PageViewport.d.ts';
 import type { RenderParameters } from './RenderParameters.d.ts';
 import type { RenderTask } from './RenderTask.d.ts';
@@ -29,15 +32,13 @@ export interface PDFPageProxy {
    */
   cleanup(resetStats?: boolean): boolean;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Gets the annotations for the page.
    *
    * @param params - Optional parameters including `intent` (the rendering intent).
    * @returns A promise resolving to the annotations.
    */
-  getAnnotations(params?: { intent?: string }): Promise<unknown[]>;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  getAnnotations(params?: GetAnnotationsParams): Promise<unknown[]>;
 
   /**
    * Gets the operator list for the page.
@@ -46,25 +47,21 @@ export interface PDFPageProxy {
    */
   getOperatorList(): Promise<unknown>;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Gets the text content of the page.
    *
    * @param params - Optional parameters including `includeMarkedContent` and `disableNormalization`.
    * @returns A promise resolving to the text content.
    */
-  getTextContent(params?: { includeMarkedContent?: boolean; disableNormalization?: boolean }): Promise<TextContent>;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  getTextContent(params?: GetTextContentParams): Promise<TextContent>;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Gets the viewport for the page.
    *
    * @param params - Viewport parameters including `scale`, `rotation`, `offsetX`, `offsetY`, and `dontFlip`.
    * @returns The computed viewport.
    */
-  getViewport(params: { scale: number; rotation?: number; offsetX?: number; offsetY?: number; dontFlip?: boolean }): PageViewport;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  getViewport(params: GetViewportParams): PageViewport;
 
   /** Height of the page. */
   get height(): number;
@@ -77,15 +74,13 @@ export interface PDFPageProxy {
    */
   render(params: RenderParameters): RenderTask;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Streams the text content of the page.
    *
    * @param params - Optional parameters including `includeMarkedContent` and `disableNormalization`.
    * @returns A readable stream of text content.
    */
-  streamTextContent(params?: { includeMarkedContent?: boolean; disableNormalization?: boolean }): ReadableStream;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  streamTextContent(params?: GetTextContentParams): ReadableStream;
 
   /** Width of the page. */
   get width(): number;

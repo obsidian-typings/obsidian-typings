@@ -1,3 +1,4 @@
+import type { DocHistorySize } from './DocHistorySize.d.ts';
 import type { Position } from './Position.d.ts';
 import type { TextMarker } from './TextMarker.d.ts';
 
@@ -67,7 +68,7 @@ export interface Doc {
    *
    * @returns An object with `undo` and `redo` counts.
    */
-  historySize(): { undo: number; redo: number };
+  historySize(): DocHistorySize;
 
   /**
    * Get the last line of the editor.

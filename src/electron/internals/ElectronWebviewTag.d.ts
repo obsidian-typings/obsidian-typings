@@ -1,5 +1,9 @@
+import type { ElectronBrowserWindowLoadURLOptions } from './ElectronBrowserWindowLoadURLOptions.d.ts';
 import type { ElectronNativeImage } from './ElectronNativeImage.d.ts';
 import type { ElectronRectangle } from './ElectronRectangle.d.ts';
+import type { ElectronWebviewTagDownloadURLOptions } from './ElectronWebviewTagDownloadURLOptions.d.ts';
+import type { ElectronWebviewTagFindInPageOptions } from './ElectronWebviewTagFindInPageOptions.d.ts';
+import type { ElectronWebviewTagPrintOptions } from './ElectronWebviewTagPrintOptions.d.ts';
 
 /**
  * Electron WebviewTag for embedding external web content in the application.
@@ -98,15 +102,13 @@ export interface ElectronWebviewTag extends HTMLElement {
   /** Deletes the selected text. */
   delete(): void;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Downloads the given URL.
    *
    * @param url - The URL to download.
    * @param options - Download options including `headers`.
    */
-  downloadURL(url: string, options?: { headers?: Record<string, string> }): void;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  downloadURL(url: string, options?: ElectronWebviewTagDownloadURLOptions): void;
 
   /**
    * Evaluates JavaScript code in the context of the page.
@@ -117,7 +119,6 @@ export interface ElectronWebviewTag extends HTMLElement {
    */
   executeJavaScript(code: string, userGesture?: boolean): Promise<unknown>;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Starts finding text in the page.
    *
@@ -125,8 +126,7 @@ export interface ElectronWebviewTag extends HTMLElement {
    * @param options - Find options including `forward`, `findNext`, and `matchCase`.
    * @returns The request id.
    */
-  findInPage(text: string, options?: { forward?: boolean; findNext?: boolean; matchCase?: boolean }): number;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  findInPage(text: string, options?: ElectronWebviewTagFindInPageOptions): number;
 
   /**
    * Returns the title of the page.
@@ -269,15 +269,13 @@ export interface ElectronWebviewTag extends HTMLElement {
    */
   isWaitingForResponse(): boolean;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Loads the given URL.
    *
    * @param url - The URL to load.
    * @param options - Options for loading the URL including `httpReferrer`, `userAgent`, and `extraHeaders`.
    */
-  loadURL(url: string, options?: { httpReferrer?: string; userAgent?: string; extraHeaders?: string }): Promise<void>;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  loadURL(url: string, options?: ElectronBrowserWindowLoadURLOptions): Promise<void>;
 
   /** Opens the developer tools. */
   openDevTools(): void;
@@ -288,14 +286,12 @@ export interface ElectronWebviewTag extends HTMLElement {
   /** Pastes and matches the style of the current text. */
   pasteAndMatchStyle(): void;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Prints the page.
    *
    * @param options - Print options including `silent`, `printBackground`, and `deviceName`.
    */
-  print(options?: { silent?: boolean; printBackground?: boolean; deviceName?: string }): Promise<void>;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  print(options?: ElectronWebviewTagPrintOptions): Promise<void>;
 
   /** Redoes the last undone action. */
   redo(): void;

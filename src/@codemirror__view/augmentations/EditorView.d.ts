@@ -16,7 +16,15 @@ import type {
   Rect
 } from '@codemirror/view';
 
+import type { EditorViewCoords } from '../internals/EditorViewCoords.d.ts';
+import type { EditorViewDocumentPadding } from '../internals/EditorViewDocumentPadding.d.ts';
+import type { EditorViewDomPosition } from '../internals/EditorViewDomPosition.d.ts';
+import type { EditorViewRange } from '../internals/EditorViewRange.d.ts';
+import type { EditorViewScrollHandlerOptions } from '../internals/EditorViewScrollHandlerOptions.d.ts';
+import type { EditorViewScrollIntoViewOptions } from '../internals/EditorViewScrollIntoViewOptions.d.ts';
 import type { EditorViewState } from '../internals/EditorViewState.d.ts';
+import type { EditorViewThemeOptions } from '../internals/EditorViewThemeOptions.d.ts';
+import type { EditorViewThemeSpec } from '../internals/EditorViewThemeSpec.d.ts';
 import type { MeasureRequest } from '../internals/MeasureRequest.d.ts';
 import type { VimEditor } from '../internals/vim/VimEditor.d.ts';
 
@@ -168,7 +176,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link documentPadding} instead.
      */
-    get documentPadding__(): { top: number; bottom: number };
+    get documentPadding__(): EditorViewDocumentPadding;
 
     /**
      * The top position of the document, in screen coordinates.
@@ -185,7 +193,7 @@ declare module '@codemirror/view' {
      * @returns The DOM node and offset.
      * @official
      */
-    domAtPos(pos: number): { node: Node; offset: number };
+    domAtPos(pos: number): EditorViewDomPosition;
 
     /**
      * Find the text line or block widget at the given vertical position.
@@ -315,7 +323,7 @@ declare module '@codemirror/view' {
      * @returns The document position or `null`.
      * @official
      */
-    posAtCoords(coords: { x: number; y: number }): null | number;
+    posAtCoords(coords: EditorViewCoords): null | number;
 
     /**
      * Get the document position at the given screen coordinates with imprecise mode.
@@ -327,7 +335,7 @@ declare module '@codemirror/view' {
      * @returns The document position.
      * @official
      */
-    posAtCoords(coords: { x: number; y: number }, precise: false): number;
+    posAtCoords(coords: EditorViewCoords, precise: false): number;
 
     /**
      * Find the document position at the given DOM node.
@@ -453,7 +461,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link viewport} instead.
      */
-    get viewport__(): { from: number; to: number };
+    get viewport__(): EditorViewRange;
 
     /**
      * Get the extent and vertical position of all line blocks in the viewport.
@@ -469,7 +477,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link visibleRanges} instead.
      */
-    get visibleRanges__(): readonly { from: number; to: number }[];
+    get visibleRanges__(): readonly EditorViewRange[];
 
     /**
      * Get the cursor position visually at the start or end of a line.
@@ -497,12 +505,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link EditorView.scrollIntoView} instead.
      */
-    function scrollIntoView__(pos: number | SelectionRange, options?: {
-      y?: 'center' | 'end' | 'nearest' | 'start';
-      x?: 'center' | 'end' | 'nearest' | 'start';
-      yMargin?: number;
-      xMargin?: number;
-    }): StateEffect<unknown>;
+    function scrollIntoView__(pos: number | SelectionRange, options?: EditorViewScrollIntoViewOptions): StateEffect<unknown>;
 
     /**
      * Facet to add a style module to an editor view.
@@ -571,12 +574,12 @@ declare module '@codemirror/view' {
       (
         view: EditorView,
         range: SelectionRange,
-        options: { x: 'center' | 'end' | 'nearest' | 'start'; y: 'center' | 'end' | 'nearest' | 'start'; xMargin: number; yMargin: number }
+        options: EditorViewScrollHandlerOptions
       ) => boolean,
       readonly ((
         view: EditorView,
         range: SelectionRange,
-        options: { x: 'center' | 'end' | 'nearest' | 'start'; y: 'center' | 'end' | 'nearest' | 'start'; xMargin: number; yMargin: number }
+        options: EditorViewScrollHandlerOptions
       ) => boolean)[]
     >;
 
@@ -711,7 +714,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link EditorView.theme} instead.
      */
-    function theme__(spec: { [selector: string]: unknown }, options?: { dark?: boolean }): Extension;
+    function theme__(spec: EditorViewThemeSpec, options?: EditorViewThemeOptions): Extension;
 
     /**
      * This facet records whether a dark theme is active.
@@ -729,7 +732,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link EditorView.baseTheme} instead.
      */
-    function baseTheme__(spec: { [selector: string]: unknown }): Extension;
+    function baseTheme__(spec: EditorViewThemeSpec): Extension;
 
     /**
      * Provides a Content Security Policy nonce to use when creating the style sheets for the

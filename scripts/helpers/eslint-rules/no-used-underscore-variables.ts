@@ -2,6 +2,12 @@ import type { Rule } from 'eslint';
 
 import { assertNonNullable } from '../type-guards.ts';
 
+interface NodeBodyFields {
+  body?: Rule.Node;
+}
+
+type NodeWithBody = NodeBodyFields & Rule.Node;
+
 export const MESSAGE_ID = 'noUsedUnderscoreVariables';
 
 export const noUsedUnderscoreVariables: Rule.RuleModule = {
@@ -21,7 +27,7 @@ export const noUsedUnderscoreVariables: Rule.RuleModule = {
           // For parameters, only count references inside the function body
           // (not in type annotations like `asserts _obj is T`).
           // For local variables, any read reference counts.
-          const funcBody = (node as { body?: Rule.Node }).body;
+          const funcBody = (node as NodeWithBody).body;
           const bodyRange = funcBody?.range;
           const isParam = defNode.type === 'Parameter';
           const hasBodyReferences = variable.references.some((ref) => {

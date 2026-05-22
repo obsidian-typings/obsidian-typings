@@ -2,6 +2,11 @@ import type { TSESTree } from '@typescript-eslint/utils';
 
 import type { RuleContext } from './utils.ts';
 
+interface ImportAliasEntry {
+  node: TSESTree.Node;
+  source: string;
+}
+
 export const noImportAliasInDeclareGlobal = {
   meta: {
     type: 'problem' as const,
@@ -15,7 +20,7 @@ export const noImportAliasInDeclareGlobal = {
     }
   },
   create(context: RuleContext) {
-    const importAliases = new Map<string, { node: TSESTree.Node; source: string }>();
+    const importAliases = new Map<string, ImportAliasEntry>();
     const usedOutsideDeclareGlobal = new Set<string>();
     const usedInDeclareGlobal = new Set<string>();
 

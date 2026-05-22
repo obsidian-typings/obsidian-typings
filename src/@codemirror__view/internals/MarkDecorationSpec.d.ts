@@ -1,3 +1,5 @@
+import type { DecorationAttributes } from './DecorationAttributes.d.ts';
+
 /**
  * Specification for a mark decoration that styles a range of text.
  *
@@ -6,7 +8,7 @@
  */
 export interface MarkDecorationSpec {
   /** HTML attributes to add to the wrapping element. */
-  attributes?: { [key: string]: string };
+  attributes?: DecorationAttributes;
 
   /** CSS class to add to the wrapping element. */
   class?: string;

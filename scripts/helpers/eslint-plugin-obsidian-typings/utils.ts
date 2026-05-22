@@ -6,6 +6,21 @@ import type {
 
 export type RuleContext = Rule.RuleContext;
 
+interface CommentValue {
+  value: string;
+}
+
+interface JsDocComment {
+  type: string;
+  value: string;
+}
+
+interface KeyedNodeFields {
+  key?: TSESTree.Node;
+}
+
+export type KeyedNode = KeyedNodeFields & TSESTree.Node;
+
 export function normalizePath(filename: string): string {
   return filename.replace(/\\/g, '/');
 }
@@ -34,7 +49,7 @@ export function isConstructorsFile(filename: string): boolean {
 export function getJSDocComment(
   sourceCode: SourceCode,
   node: TSESTree.Node
-): { type: string; value: string } | null {
+): JsDocComment | null {
   const comments = sourceCode.getCommentsBefore(node as unknown as Parameters<SourceCode['getCommentsBefore']>[0]);
   for (let i = comments.length - 1; i >= 0; i--) {
     const comment = comments[i];
@@ -45,7 +60,7 @@ export function getJSDocComment(
   return null;
 }
 
-export function hasJSDocTag(comment: { value: string }, tagName: string): boolean {
+export function hasJSDocTag(comment: CommentValue, tagName: string): boolean {
   return new RegExp(`@${tagName}\\b`).test(comment.value);
 }
 
@@ -53,7 +68,7 @@ export function isDirectInterfaceMember(node: TSESTree.Node): boolean {
   return node.parent?.type === 'TSInterfaceBody';
 }
 
-export function getMemberName(node: { key?: TSESTree.Node } & TSESTree.Node): string {
+export function getMemberName(node: KeyedNode): string {
   const key = node.key;
   if (key && 'name' in key) {
     return (key as TSESTree.Identifier).name;

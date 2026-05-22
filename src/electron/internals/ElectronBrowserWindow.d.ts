@@ -1,4 +1,6 @@
 import type { BrowserWindowConstructorOptions } from './BrowserWindowConstructorOptions.d.ts';
+import type { ElectronBrowserWindowLoadFileOptions } from './ElectronBrowserWindowLoadFileOptions.d.ts';
+import type { ElectronBrowserWindowLoadURLOptions } from './ElectronBrowserWindowLoadURLOptions.d.ts';
 import type { ElectronRectangle } from './ElectronRectangle.d.ts';
 import type { ElectronWebContents } from './ElectronWebContents.d.ts';
 
@@ -153,7 +155,7 @@ export declare class ElectronBrowserWindow {
    * @param filePath - The path to the file.
    * @param options - Options for loading the file.
    */
-  loadFile(filePath: string, options?: { query?: Record<string, string>; search?: string; hash?: string }): Promise<void>;
+  loadFile(filePath: string, options?: ElectronBrowserWindowLoadFileOptions): Promise<void>;
 
   /**
    * Loads a URL into the window.
@@ -161,7 +163,7 @@ export declare class ElectronBrowserWindow {
    * @param url - The URL to load.
    * @param options - Options for loading the URL.
    */
-  loadURL(url: string, options?: { httpReferrer?: string; userAgent?: string; extraHeaders?: string }): Promise<void>;
+  loadURL(url: string, options?: ElectronBrowserWindowLoadURLOptions): Promise<void>;
 
   /** Maximizes the window. */
   maximize(): void;

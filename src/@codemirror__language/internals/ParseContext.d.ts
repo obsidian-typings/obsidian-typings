@@ -1,5 +1,7 @@
 import type { EditorState } from '@codemirror/state';
 
+import type { ParseContextRange } from './ParseContextRange.d.ts';
+
 /**
  * A parse context that can be used to track parsing progress.
  *
@@ -11,7 +13,7 @@ export declare class ParseContext {
   readonly state: EditorState;
 
   /** The viewport range currently visible. */
-  readonly viewport: { from: number; to: number };
+  readonly viewport: ParseContextRange;
 
   /**
    * Get the current parse context, if any.

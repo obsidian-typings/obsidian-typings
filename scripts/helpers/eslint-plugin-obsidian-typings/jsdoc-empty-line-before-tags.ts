@@ -9,11 +9,15 @@ import {
   isDirectInterfaceMember
 } from './utils.ts';
 
+interface CommentValue {
+  value: string;
+}
+
 /**
  * Checks whether a JSDoc comment has an empty line between description and the first tag.
  * Returns the index of the first tag line if a blank line is missing, or -1 if OK.
  */
-function findMissingBlankLineIndex(comment: { value: string }): number {
+function findMissingBlankLineIndex(comment: CommentValue): number {
   const lines = comment.value.split('\n');
   let lastDescriptionIndex = -1;
   let firstTagIndex = -1;

@@ -1,3 +1,5 @@
+import type { ConstructorBase } from '../../obsidian/internals/constructors/ConstructorBase.d.ts';
+
 /**
  * Plugin implementations map.
  *
@@ -6,5 +8,5 @@
  */
 export interface PluginImplementations {
   /** Plugin implementation for the given platform. */
-  [platform: string]: (() => Promise<{ new (): unknown }>) | { new (): unknown };
+  [platform: string]: (() => Promise<ConstructorBase<[], unknown>>) | ConstructorBase<[], unknown>;
 }

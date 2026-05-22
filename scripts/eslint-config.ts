@@ -224,8 +224,44 @@ function getNoRestrictedSyntaxRulesConfigs(): Linter.Config[] {
         'no-restricted-syntax': [
           'error',
           {
-            message: 'Avoid dynamic import(). Use static imports instead. Only use dynamic imports for lazy/conditional loading (G10a).',
+            message: 'Do not use definite assignment assertions (!). Initialize the field or make it optional.',
+            selector: 'PropertyDefinition[definite=true]'
+          },
+          {
+            message: 'Do not use definite assignment assertions (!) on abstract fields.',
+            selector: 'TSAbstractPropertyDefinition[definite=true]'
+          },
+          {
+            message: 'Do not use anonymous inline object types in function parameters. Define a named interface instead.',
+            selector: ':function > Identifier TSTypeLiteral'
+          },
+          {
+            message: 'Do not use anonymous inline object types in function return types. Define a named interface instead.',
+            selector: ':function > TSTypeAnnotation TSTypeLiteral'
+          },
+          {
+            message: 'Do not use anonymous inline object types in interface/method signatures. Define a named interface instead.',
+            selector: 'TSMethodSignature TSTypeLiteral'
+          },
+          {
+            message: 'Do not use anonymous inline object types as type arguments. Define a named interface instead.',
+            selector: 'TSTypeParameterInstantiation TSTypeLiteral'
+          },
+          {
+            message: 'Do not use anonymous inline object types in type annotations. Define a named interface instead.',
+            selector: 'TSTypeAnnotation TSTypeLiteral'
+          },
+          {
+            message: 'Do not use anonymous inline object types in type assertions. Define a named interface instead.',
+            selector: 'TSAsExpression TSTypeLiteral'
+          },
+          {
+            message: 'Avoid dynamic import(). Use static imports instead. Only use dynamic imports for lazy/conditional loading.',
             selector: 'ImportExpression'
+          },
+          {
+            message: 'Do not use `declare` on class properties. Initialize the property or use a regular type annotation.',
+            selector: 'PropertyDefinition[declare=true]'
           }
         ]
       }
@@ -242,7 +278,6 @@ function getObsidianTypingsConfigs(): Linter.Config[] {
       },
       rules: {
         'obsidian-typings/augmentation-member-tags': 'error',
-        'obsidian-typings/constructor-base-restricted': 'error',
         'obsidian-typings/constructor-getter-placement': 'error',
         'obsidian-typings/file-extension': 'error',
         'obsidian-typings/import-extensions': 'error',
@@ -254,7 +289,7 @@ function getObsidianTypingsConfigs(): Linter.Config[] {
         'obsidian-typings/no-interface-tags-in-augmentations': 'error',
         'obsidian-typings/no-member-unofficial-in-internals': 'error',
         'obsidian-typings/no-todo-tag': 'error',
-        'obsidian-typings/one-export-per-file': 'error',
+        'obsidian-typings/one-declaration-per-file': 'error',
         'obsidian-typings/require-export-empty-in-augmentations': 'error',
         'obsidian-typings/require-member-description': 'error',
         'obsidian-typings/require-var-in-global-vars': 'error',
@@ -272,6 +307,12 @@ function getOverrideConfigs(): Linter.Config[] {
       rules: {
         '@typescript-eslint/no-empty-object-type': 'off',
         '@typescript-eslint/no-unused-vars': 'off'
+      }
+    },
+    {
+      files: ['scripts/helpers/@types/**/*.d.ts'],
+      rules: {
+        'no-restricted-syntax': 'off'
       }
     }
   ]);

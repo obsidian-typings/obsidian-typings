@@ -21,9 +21,7 @@ declare global {
      * @official
      */
     each<T>(
-      object: {
-        [key: string]: T;
-      },
+      object: Record<string, T>,
       callback: (value: T, key?: string) => boolean | void,
       context?: unknown
     ): boolean;

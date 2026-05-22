@@ -1,3 +1,5 @@
+import type { ElectronShellOpenExternalOptions } from './ElectronShellOpenExternalOptions.d.ts';
+
 /**
  * Electron Shell for managing files and URLs using their default applications.
  *
@@ -8,15 +10,13 @@ export interface ElectronShell {
   /** Plays the system beep sound. */
   beep(): void;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Opens the given external protocol URL in the desktop's default manner.
    *
    * @param url - The URL to open.
    * @param options - Options for opening the URL including `activate` and `workingDirectory`.
    */
-  openExternal(url: string, options?: { activate?: boolean; workingDirectory?: string }): Promise<void>;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  openExternal(url: string, options?: ElectronShellOpenExternalOptions): Promise<void>;
 
   /**
    * Opens the given file in the desktop's default manner.

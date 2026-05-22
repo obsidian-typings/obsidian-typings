@@ -1,6 +1,7 @@
-import type { TSESTree } from '@typescript-eslint/utils';
-
-import type { RuleContext } from './utils.ts';
+import type {
+  KeyedNode,
+  RuleContext
+} from './utils.ts';
 
 import {
   getJSDocComment,
@@ -26,7 +27,7 @@ export const noMemberUnofficialInInternals = {
       return {};
     }
 
-    function checkMember(node: { key?: TSESTree.Node } & TSESTree.Node): void {
+    function checkMember(node: KeyedNode): void {
       if (!isDirectInterfaceMember(node)) {
         return;
       }

@@ -4,6 +4,8 @@ import type {
   StateEffectType
 } from '@codemirror/state';
 
+import type { StateEffectDefineSpec } from '../internals/StateEffectDefineSpec.d.ts';
+
 export {};
 
 declare module '@codemirror/state' {
@@ -46,7 +48,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link StateEffect.define} instead.
      */
-    function define__<Value = null>(spec?: { map?(value: Value, mapping: ChangeDesc): undefined | Value }): StateEffectType<Value>;
+    function define__<Value = null>(spec?: StateEffectDefineSpec<Value>): StateEffectType<Value>;
 
     /**
      * Map an array of effects through a change set.

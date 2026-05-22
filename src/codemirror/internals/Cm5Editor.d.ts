@@ -1,3 +1,9 @@
+import type { Cm5EditorCharCoords } from './Cm5EditorCharCoords.d.ts';
+import type { Cm5EditorCoordsCharInput } from './Cm5EditorCoordsCharInput.d.ts';
+import type { Cm5EditorCursorCoords } from './Cm5EditorCursorCoords.d.ts';
+import type { Cm5EditorDisplay } from './Cm5EditorDisplay.d.ts';
+import type { Cm5EditorScrollRect } from './Cm5EditorScrollRect.d.ts';
+import type { Cm5EditorState } from './Cm5EditorState.d.ts';
 import type { Doc } from './Doc.d.ts';
 import type { Position } from './Position.d.ts';
 
@@ -9,9 +15,9 @@ import type { Position } from './Position.d.ts';
  */
 export interface Cm5Editor extends Doc {
   /** The display object containing the wrapper element. */
-  display: { wrapper: HTMLElement };
+  display: Cm5EditorDisplay;
   /** The editor state object. */
-  state: { vim?: unknown };
+  state: Cm5EditorState;
 
   /**
    * Adds a key map to the editor.
@@ -36,9 +42,8 @@ export interface Cm5Editor extends Doc {
    * @param mode - The coordinate system to use.
    * @returns An object with `left`, `right`, `top`, and `bottom` properties.
    */
-  charCoords(pos: Position, mode?: 'local' | 'page' | 'window'): { left: number; right: number; top: number; bottom: number };
+  charCoords(pos: Position, mode?: 'local' | 'page' | 'window'): Cm5EditorCharCoords;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Returns the position corresponding to the given coordinates.
    *
@@ -46,8 +51,7 @@ export interface Cm5Editor extends Doc {
    * @param mode - The coordinate system used.
    * @returns The corresponding position.
    */
-  coordsChar(coords: { left: number; top: number }, mode?: 'local' | 'page' | 'window'): Position;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  coordsChar(coords: Cm5EditorCoordsCharInput, mode?: 'local' | 'page' | 'window'): Position;
 
   /**
    * Returns the coordinates of the cursor.
@@ -56,7 +60,7 @@ export interface Cm5Editor extends Doc {
    * @param mode - The coordinate system to use.
    * @returns An object with `left`, `top`, and `bottom` properties.
    */
-  cursorCoords(where?: boolean | Position, mode?: 'local' | 'page' | 'window'): { left: number; top: number; bottom: number };
+  cursorCoords(where?: boolean | Position, mode?: 'local' | 'page' | 'window'): Cm5EditorCursorCoords;
 
   /**
    * Returns the default character width.
@@ -175,7 +179,7 @@ export interface Cm5Editor extends Doc {
    * @param pos - The position or rectangle to scroll into view.
    * @param margin - Optional margin in pixels.
    */
-  scrollIntoView(pos: { left: number; top: number; right: number; bottom: number } | null | Position, margin?: number): void;
+  scrollIntoView(pos: Cm5EditorScrollRect | null | Position, margin?: number): void;
 
   /**
    * Scrolls the editor to the given coordinates.

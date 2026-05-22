@@ -1,3 +1,4 @@
+import type { ElectronWebContentsDevToolsOptions } from './ElectronWebContentsDevToolsOptions.d.ts';
 import type { Session } from './Session.d.ts';
 
 /**
@@ -60,14 +61,12 @@ export interface ElectronWebContents {
    */
   isLoading(): boolean;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Opens the developer tools.
    *
    * @param options - Options for the developer tools including `mode`.
    */
-  openDevTools(options?: { mode: 'bottom' | 'detach' | 'right' | 'undocked' }): void;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  openDevTools(options?: ElectronWebContentsDevToolsOptions): void;
 
   /**
    * Sends an asynchronous message to the renderer process.

@@ -1,4 +1,7 @@
 import type { Config } from './Config.d.ts';
+import type { ConfigReturnDom } from './ConfigReturnDom.d.ts';
+import type { ConfigReturnDomFragment } from './ConfigReturnDomFragment.d.ts';
+import type { DOMPurifyRemovedItem } from './DOMPurifyRemovedItem.d.ts';
 import type { HookEvent } from './HookEvent.d.ts';
 import type { HookName } from './HookName.d.ts';
 
@@ -13,7 +16,7 @@ export interface DOMPurifyI {
   isSupported: boolean;
 
   /** Array of removed elements and attributes from the last sanitization. */
-  removed: Array<{ attribute?: Attr; element?: Element }>;
+  removed: DOMPurifyRemovedItem[];
 
   /** The version of DOMPurify. */
   version: string;
@@ -71,7 +74,7 @@ export interface DOMPurifyI {
    * @param config - Configuration with RETURN_DOM_FRAGMENT enabled.
    * @returns The sanitized DocumentFragment.
    */
-  sanitize(source: Node | string, config: { RETURN_DOM_FRAGMENT: true } & Config): DocumentFragment;
+  sanitize(source: Node | string, config: Config & ConfigReturnDomFragment): DocumentFragment;
 
   /**
    * Sanitize a string or DOM node and return an HTMLElement.
@@ -80,7 +83,7 @@ export interface DOMPurifyI {
    * @param config - Configuration with RETURN_DOM enabled.
    * @returns The sanitized HTMLElement.
    */
-  sanitize(source: Node | string, config: { RETURN_DOM: true } & Config): HTMLElement;
+  sanitize(source: Node | string, config: Config & ConfigReturnDom): HTMLElement;
 
   /**
    * Sanitize a string or DOM node with custom configuration.

@@ -1,6 +1,8 @@
 import type { EditorState } from '@codemirror/state';
 
 import type { CmText } from '../../@codemirror__state/internals/CmText.d.ts';
+import type { SearchQueryConfig } from './SearchQueryConfig.d.ts';
+import type { SearchQueryMatch } from './SearchQueryMatch.d.ts';
 
 /**
  * Represents a search query with its configuration and methods for searching.
@@ -31,14 +33,7 @@ export declare class SearchQuery {
   readonly wholeWord: boolean;
 
   /** */
-  constructor(config: {
-    search: string;
-    caseSensitive?: boolean;
-    literal?: boolean;
-    regexp?: boolean;
-    replace?: string;
-    wholeWord?: boolean;
-  });
+  constructor(config: SearchQueryConfig);
 
   /**
    * Check whether this query is equal to another.
@@ -56,5 +51,5 @@ export declare class SearchQuery {
    * @param to - Optional end position.
    * @returns An iterator over match ranges.
    */
-  getCursor(state: CmText | EditorState, from?: number, to?: number): Iterator<{ from: number; to: number }>;
+  getCursor(state: CmText | EditorState, from?: number, to?: number): Iterator<SearchQueryMatch>;
 }

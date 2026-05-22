@@ -1,4 +1,4 @@
-import type { Position } from './Position.d.ts';
+import type { TextMarkerRange } from './TextMarkerRange.d.ts';
 
 /**
  * A text marker in a CodeMirror 5 document.
@@ -22,7 +22,7 @@ export interface TextMarker {
    *
    * @returns The marker's range, or `undefined` if the marker has been cleared.
    */
-  find(): { from: Position; to: Position } | undefined;
+  find(): TextMarkerRange | undefined;
 
   /**
    * Removes an event listener.

@@ -1,4 +1,6 @@
 import type { MountedLezerTree } from './MountedLezerTree.d.ts';
+import type { NodePropConfig } from './NodePropConfig.d.ts';
+import type { NodePropSelectorMap } from './NodePropSelectorMap.d.ts';
 import type { NodePropSource } from './NodePropSource.d.ts';
 import type { NodeType } from './NodeType.d.ts';
 
@@ -38,10 +40,7 @@ export declare class NodeProp<T> {
    *
    * @param config - Configuration for the prop.
    */
-  constructor(config?: {
-    deserialize?(str: string): T;
-    perNode?: boolean;
-  });
+  constructor(config?: NodePropConfig<T>);
 
   /**
    * Create a prop source that adds this prop to matching node types.
@@ -49,5 +48,5 @@ export declare class NodeProp<T> {
    * @param match - A mapping from selectors to values, or a function computing values.
    * @returns A prop source.
    */
-  add(match: ((type: NodeType) => T | undefined) | { [selector: string]: T }): NodePropSource;
+  add(match: ((type: NodeType) => T | undefined) | NodePropSelectorMap<T>): NodePropSource;
 }

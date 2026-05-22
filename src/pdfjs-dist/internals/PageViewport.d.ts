@@ -1,3 +1,5 @@
+import type { CloneViewportParams } from './CloneViewportParams.d.ts';
+
 /**
  * Represents a viewport for a PDF page.
  *
@@ -22,15 +24,13 @@ export interface PageViewport {
   /** Width of the viewport. */
   width: number;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Clones the viewport with optional parameter overrides.
    *
    * @param params - Optional parameters to override including `scale`, `rotation`, `offsetX`, `offsetY`, and `dontFlip`.
    * @returns A new PageViewport instance.
    */
-  clone(params?: { scale?: number; rotation?: number; offsetX?: number; offsetY?: number; dontFlip?: boolean }): PageViewport;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  clone(params?: CloneViewportParams): PageViewport;
 
   /**
    * Converts viewport coordinates to PDF coordinates.

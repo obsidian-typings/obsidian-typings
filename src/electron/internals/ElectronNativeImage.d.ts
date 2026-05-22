@@ -1,3 +1,6 @@
+import type { ElectronNativeImageScaleFactorOptions } from './ElectronNativeImageScaleFactorOptions.d.ts';
+import type { ElectronNativeImageSize } from './ElectronNativeImageSize.d.ts';
+
 /**
  * Electron NativeImage for handling tray, dock, and application images.
  *
@@ -11,7 +14,7 @@ export interface ElectronNativeImage {
    * @param scaleFactor - The scale factor to get the size for.
    * @returns The width and height of the image.
    */
-  getSize(scaleFactor?: number): { width: number; height: number };
+  getSize(scaleFactor?: number): ElectronNativeImageSize;
 
   /**
    * Returns whether the image is empty.
@@ -20,14 +23,13 @@ export interface ElectronNativeImage {
    */
   isEmpty(): boolean;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Returns the image as a bitmap buffer.
    *
    * @param options - Options for the bitmap conversion including `scaleFactor`.
    * @returns The bitmap buffer.
    */
-  toBitmap(options?: { scaleFactor?: number }): Buffer;
+  toBitmap(options?: ElectronNativeImageScaleFactorOptions): Buffer;
 
   /**
    * Returns the image as a data URL string.
@@ -35,8 +37,7 @@ export interface ElectronNativeImage {
    * @param options - Options for the conversion including `scaleFactor`.
    * @returns The data URL string.
    */
-  toDataURL(options?: { scaleFactor?: number }): string;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  toDataURL(options?: ElectronNativeImageScaleFactorOptions): string;
 
   /**
    * Returns the image as a JPEG buffer.
@@ -46,13 +47,11 @@ export interface ElectronNativeImage {
    */
   toJPEG(quality: number): Buffer;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Returns the image as a PNG buffer.
    *
    * @param options - Options for the PNG conversion including `scaleFactor`.
    * @returns The PNG buffer.
    */
-  toPNG(options?: { scaleFactor?: number }): Buffer;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  toPNG(options?: ElectronNativeImageScaleFactorOptions): Buffer;
 }

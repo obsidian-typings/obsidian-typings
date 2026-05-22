@@ -1,5 +1,6 @@
 import type { ElectronBrowserWindow } from './ElectronBrowserWindow.d.ts';
 import type { ElectronMenuItem } from './ElectronMenuItem.d.ts';
+import type { ElectronMenuPopupOptions } from './ElectronMenuPopupOptions.d.ts';
 
 /**
  * Electron Menu for creating native application menus and context menus.
@@ -33,12 +34,10 @@ export interface ElectronMenu {
    */
   insert(pos: number, menuItem: ElectronMenuItem): void;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Pops up the context menu.
    *
    * @param options - Options for the popup including `window`, `x`, and `y`.
    */
-  popup(options?: { window?: ElectronBrowserWindow; x?: number; y?: number }): void;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  popup(options?: ElectronMenuPopupOptions): void;
 }

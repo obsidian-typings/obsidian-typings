@@ -1,3 +1,5 @@
+import type { AddResourceOptions } from './AddResourceOptions.d.ts';
+import type { GetResourceOptions } from './GetResourceOptions.d.ts';
 import type { InitOptions } from './InitOptions.d.ts';
 
 /**
@@ -13,7 +15,6 @@ export interface ResourceStore {
   /** The options used by this resource store. */
   options: InitOptions;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Adds a single resource entry.
    *
@@ -24,8 +25,7 @@ export interface ResourceStore {
    * @param options - Additional options including `keySeparator` and `silent`.
    * @returns The resource store instance.
    */
-  addResource(lng: string, ns: string, key: string, value: string, options?: { keySeparator?: string; silent?: boolean }): ResourceStore;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  addResource(lng: string, ns: string, key: string, value: string, options?: AddResourceOptions): ResourceStore;
 
   /**
    * Adds a resource bundle to the store.
@@ -57,7 +57,6 @@ export interface ResourceStore {
    */
   getDataByLanguage(lng: string): Record<string, Record<string, string>> | undefined;
 
-  /* eslint-disable jsdoc/check-param-names -- TSDoc does not support dot-notation sub-params. */
   /**
    * Gets a single resource value.
    *
@@ -67,8 +66,7 @@ export interface ResourceStore {
    * @param options - Additional options including `keySeparator`.
    * @returns The resource value.
    */
-  getResource(lng: string, ns: string, key: string, options?: { keySeparator?: string }): unknown;
-  /* eslint-enable jsdoc/check-param-names -- Re-enable after inline object param. */
+  getResource(lng: string, ns: string, key: string, options?: GetResourceOptions): unknown;
 
   /**
    * Gets a resource bundle for a language and namespace.

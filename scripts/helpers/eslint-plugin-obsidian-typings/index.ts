@@ -1,5 +1,4 @@
 import { augmentationMemberTags } from './augmentation-member-tags.ts';
-import { constructorBaseRestricted } from './constructor-base-restricted.ts';
 import { constructorGetterPlacement } from './constructor-getter-placement.ts';
 import { fileExtension } from './file-extension.ts';
 import { importExtensions } from './import-extensions.ts';
@@ -11,7 +10,7 @@ import { noInheritDocTag } from './no-inherit-doc-tag.ts';
 import { noInterfaceTagsInAugmentations } from './no-interface-tags-in-augmentations.ts';
 import { noMemberUnofficialInInternals } from './no-member-unofficial-in-internals.ts';
 import { noTodoTag } from './no-todo-tag.ts';
-import { oneExportPerFile } from './one-export-per-file.ts';
+import { oneDeclarationPerFile } from './one-declaration-per-file.ts';
 import { requireExportEmptyInAugmentations } from './require-export-empty-in-augmentations.ts';
 import { requireMemberDescription } from './require-member-description.ts';
 import { requireVarInGlobalVars } from './require-var-in-global-vars.ts';
@@ -22,7 +21,6 @@ export const obsidianTypingsPlugin = {
   meta: { name: 'obsidian-typings' },
   rules: {
     'augmentation-member-tags': augmentationMemberTags,
-    'constructor-base-restricted': constructorBaseRestricted,
     'constructor-getter-placement': constructorGetterPlacement,
     'file-extension': fileExtension,
     'import-extensions': importExtensions,
@@ -34,7 +32,7 @@ export const obsidianTypingsPlugin = {
     'no-interface-tags-in-augmentations': noInterfaceTagsInAugmentations,
     'no-member-unofficial-in-internals': noMemberUnofficialInInternals,
     'no-todo-tag': noTodoTag,
-    'one-export-per-file': oneExportPerFile,
+    'one-declaration-per-file': oneDeclarationPerFile,
     'require-export-empty-in-augmentations': requireExportEmptyInAugmentations,
     'require-member-description': requireMemberDescription,
     'require-var-in-global-vars': requireVarInGlobalVars,

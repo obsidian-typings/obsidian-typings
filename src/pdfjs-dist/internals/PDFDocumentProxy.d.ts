@@ -1,3 +1,7 @@
+import type { PDFDownloadInfo } from './PDFDownloadInfo.d.ts';
+import type { PDFLoadingParams } from './PDFLoadingParams.d.ts';
+import type { PDFMarkInfo } from './PDFMarkInfo.d.ts';
+import type { PDFMetadata } from './PDFMetadata.d.ts';
 import type { PDFPageProxy } from './PDFPageProxy.d.ts';
 
 /**
@@ -12,7 +16,7 @@ export interface PDFDocumentProxy {
   /** Whether the document is a pure XFA form. */
   isPureXfa: boolean;
   /** Loading parameters used for the document. */
-  loadingParams: { disableAutoFetch: boolean; disableStream: boolean };
+  loadingParams: PDFLoadingParams;
   /** Total number of pages. */
   numPages: number;
 
@@ -65,21 +69,21 @@ export interface PDFDocumentProxy {
    *
    * @returns A promise resolving to download info.
    */
-  getDownloadInfo(): Promise<{ length: number }>;
+  getDownloadInfo(): Promise<PDFDownloadInfo>;
 
   /**
    * Gets the mark information for the document.
    *
    * @returns A promise resolving to the mark info, or `null` if not available.
    */
-  getMarkInfo(): Promise<{ Marked: boolean; UserProperties: boolean; Suspects: boolean } | null>;
+  getMarkInfo(): Promise<null | PDFMarkInfo>;
 
   /**
    * Gets the document metadata.
    *
    * @returns A promise resolving to the metadata.
    */
-  getMetadata(): Promise<{ info: Record<string, unknown>; metadata: null | unknown; contentDispositionFilename: null | string; contentLength: null | number }>;
+  getMetadata(): Promise<PDFMetadata>;
 
   /**
    * Gets the open action for the document.

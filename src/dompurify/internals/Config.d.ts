@@ -1,3 +1,6 @@
+import type { ConfigUseProfiles } from './ConfigUseProfiles.d.ts';
+import type { CustomElementHandling } from './CustomElementHandling.d.ts';
+
 /**
  * Configuration options for DOMPurify sanitization.
  *
@@ -39,11 +42,7 @@ export interface Config {
   ALLOWED_URI_REGEXP?: RegExp;
 
   /** Custom element handling configuration. */
-  CUSTOM_ELEMENT_HANDLING?: {
-    tagNameCheck?: ((tagName: string) => boolean) | null | RegExp;
-    attributeNameCheck?: ((attributeName: string) => boolean) | null | RegExp;
-    allowCustomizedBuiltInElements?: boolean;
-  };
+  CUSTOM_ELEMENT_HANDLING?: CustomElementHandling;
 
   /** List of forbidden attributes. */
   FORBID_ATTR?: string[];
@@ -91,7 +90,7 @@ export interface Config {
   SANITIZE_NAMED_PROPS?: boolean;
 
   /** Profiles to use for sanitization. */
-  USE_PROFILES?: { mathMl?: boolean; svg?: boolean; svgFilters?: boolean; html?: boolean } | false;
+  USE_PROFILES?: ConfigUseProfiles | false;
 
   /** Whether to sanitize the whole document. */
   WHOLE_DOCUMENT?: boolean;

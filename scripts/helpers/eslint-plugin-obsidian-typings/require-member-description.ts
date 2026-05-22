@@ -1,6 +1,9 @@
 import type { TSESTree } from '@typescript-eslint/utils';
 
-import type { RuleContext } from './utils.ts';
+import type {
+  KeyedNode,
+  RuleContext
+} from './utils.ts';
 
 import {
   getJSDocComment,
@@ -8,10 +11,14 @@ import {
   isDirectInterfaceMember
 } from './utils.ts';
 
+interface CommentValue {
+  value: string;
+}
+
 /**
  * Extracts the description text from a JSDoc comment (text before any `@` tags).
  */
-function getJSDocDescription(comment: { value: string }): string {
+function getJSDocDescription(comment: CommentValue): string {
   const lines = comment.value.split('\n');
   const descriptionLines: string[] = [];
 
@@ -35,7 +42,7 @@ export const requireMemberDescription = {
     }
   },
   create(context: RuleContext) {
-    function checkMember(node: { key?: TSESTree.Node } & TSESTree.Node): void {
+    function checkMember(node: KeyedNode): void {
       if (!isDirectInterfaceMember(node)) {
         return;
       }

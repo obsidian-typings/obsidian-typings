@@ -4,6 +4,8 @@ import type {
   Text
 } from '@codemirror/state';
 
+import type { EditorStateSelectionSpec } from '../internals/EditorStateSelectionSpec.d.ts';
+
 export {};
 
 declare module '@codemirror/state' {
@@ -30,6 +32,6 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link selection} instead.
      */
-    selection__?: { anchor: number; head?: number } | CmEditorSelection;
+    selection__?: CmEditorSelection | EditorStateSelectionSpec;
   }
 }

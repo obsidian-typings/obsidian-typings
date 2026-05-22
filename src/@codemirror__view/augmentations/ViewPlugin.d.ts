@@ -1,5 +1,7 @@
 import type { Extension } from '@codemirror/state';
 
+import type { ConstructorBase } from '../../obsidian/internals/constructors/ConstructorBase.d.ts';
+
 export {};
 
 declare module '@codemirror/view' {
@@ -45,6 +47,9 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link ViewPlugin.fromClass} instead.
      */
-    function fromClass__<V extends PluginValue, Arg = undefined>(cls: { new (view: EditorView, arg: Arg): V }, spec?: PluginSpec<V>): ViewPlugin<V, Arg>;
+    function fromClass__<V extends PluginValue, Arg = undefined>(
+      cls: ConstructorBase<[view: EditorView, arg: Arg], V>,
+      spec?: PluginSpec<V>
+    ): ViewPlugin<V, Arg>;
   }
 }

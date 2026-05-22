@@ -9,6 +9,7 @@ import type { Bookmark } from './Bookmark.d.ts';
 import type { Bracket } from './Bracket.d.ts';
 import type { CodeMirrorEditorMode } from './CodeMirrorEditorMode.d.ts';
 import type { CodeMirrorEditorSearchCursor } from './CodeMirrorEditorSearchCursor.d.ts';
+import type { CodeMirrorEditorSelectionRange } from './CodeMirrorEditorSelectionRange.d.ts';
 import type { Coords } from './Coords.d.ts';
 import type { HardWrapOptions } from './HardWrapOptions.d.ts';
 import type { LineHandle } from './LineHandle.d.ts';
@@ -323,10 +324,7 @@ export interface CodeMirrorEditor {
    *
    * @returns An array of selections with anchor and head positions.
    */
-  listSelections(): Array<{
-    anchor: EditorPosition;
-    head: EditorPosition;
-  }>;
+  listSelections(): Array<CodeMirrorEditorSelectionRange>;
 
   /**
    * Move a position by character in the given direction.
