@@ -5,7 +5,7 @@ import type {
 } from '@codemirror/state';
 
 /**
- * Result returned by the callback passed to {@link EditorState.changeByRange}.
+ * Result returned by the callback passed to {@link @codemirror/state#EditorState.changeByRange}.
  *
  * @public
  * @unofficial
