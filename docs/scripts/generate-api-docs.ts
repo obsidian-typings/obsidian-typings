@@ -58,6 +58,11 @@ interface MemberInfo {
   type: string;
 }
 
+interface PageContent {
+  content: string;
+  filePath: string;
+}
+
 interface ParameterInfo {
   description: string;
   name: string;
@@ -68,6 +73,8 @@ interface TypeInfo {
   baseTypes: string[];
   description: string;
   examples: string[];
+  /** For classes: types in the `implements` clause */
+  implementsTypes: string[];
   isOfficial: boolean;
   kind: 'class' | 'function' | 'interface' | 'variable';
   methods: MemberInfo[];
@@ -101,6 +108,7 @@ function extractClassInfo(cls: ClassDeclaration, isOfficial: boolean, namespace:
     baseTypes: cls.getExtends() ? [cls.getExtends()?.getText() ?? ''] : [],
     description: getDescription(cls),
     examples: getExamples(cls),
+    implementsTypes: cls.getImplements().map((i) => i.getText()),
     isOfficial,
     kind: 'class',
     methods: cls.getMethods().map((m) => extractMethodInfo(m, isOfficial)),
@@ -117,6 +125,7 @@ function extractInterfaceInfo(iface: InterfaceDeclaration, isOfficial: boolean, 
     baseTypes: iface.getExtends().map((e) => e.getText()),
     description: getDescription(iface),
     examples: getExamples(iface),
+    implementsTypes: [],
     isOfficial,
     kind: 'interface',
     methods: iface.getMethods().map((m) => extractMethodSignatureInfo(m, isOfficial)),
@@ -203,6 +212,7 @@ function collectModuleFunctions(
       baseTypes: [],
       description: getDescription(fn),
       examples: getExamples(fn),
+      implementsTypes: [],
       isOfficial: checkIsOfficial(fn, isOfficial),
       kind: 'function',
       methods: [{
@@ -250,6 +260,7 @@ function collectModuleVariables(
         baseTypes: [],
         description: getDescription(varStmt),
         examples: getExamples(varStmt),
+        implementsTypes: [],
         isOfficial: checkIsOfficial(varStmt, isOfficial),
         kind: 'variable',
         methods: [],
@@ -397,25 +408,28 @@ async function main(): Promise<void> {
 
   registerGenericTypeParams(types);
 
-  // Build backlinks map
-  const backlinks = buildBacklinks(types);
-
   await rm(OUTPUT_DIR, { force: true, recursive: true });
   await mkdir(OUTPUT_DIR, { recursive: true });
 
   await generateNamespaceIndexPages(types);
 
+  // Pass 1: generate all pages without backlinks, collect content
+  const pageContents = new Map<string, PageContent>();
   let pageCount = 0;
   for (const [name, info] of types) {
     if (info.kind !== 'variable' && info.kind !== 'function' && info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
       continue;
     }
-    await generateOverviewPage(name, info, backlinks.get(name) ?? []);
+    const { content, filePath } = await generateOverviewPage(name, info);
+    pageContents.set(name, { content, filePath });
     if (info.kind !== 'function') {
       await generateMemberPages(name, info);
     }
     pageCount++;
   }
+
+  // Pass 2–3: scan content for links, append backlinks, write files
+  await appendBacklinksAndWrite(pageContents, types);
 
   // Generate sidebar JSON for astro config
   await generateSidebarJson(types);
@@ -572,6 +586,7 @@ function processModuleDeclaration(
         baseTypes: [],
         description: getDescription(alias),
         examples: getExamples(alias),
+        implementsTypes: [],
         isOfficial,
         kind: 'interface',
         methods: [],
@@ -626,6 +641,7 @@ function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOffi
         baseTypes: [],
         description: getDescription(alias),
         examples: getExamples(alias),
+        implementsTypes: [],
         isOfficial,
         kind: 'interface',
         methods: [],
@@ -644,6 +660,7 @@ function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOffi
         baseTypes: [],
         description: getDescription(enumDecl),
         examples: getExamples(enumDecl),
+        implementsTypes: [],
         isOfficial,
         kind: 'interface',
         methods: [],
@@ -704,7 +721,7 @@ function registerGenericTypeParams(types: Map<string, TypeInfo>): void {
 
 function resolveInheritedMembers(types: Map<string, TypeInfo>): void {
   for (const [_name, info] of types) {
-    for (const baseTypeName of info.baseTypes) {
+    for (const baseTypeName of [...info.baseTypes, ...info.implementsTypes]) {
       const cleanBase = baseTypeName.replace(/<.*>$/, '').trim();
       const baseInfo = types.get(cleanBase);
       if (!baseInfo) {
@@ -779,38 +796,54 @@ interface TextProvider {
   getText(): string;
 }
 
-/** Build a map of type name → list of type names that reference it */
-function buildBacklinks(types: Map<string, TypeInfo>): Map<string, string[]> {
-  const backlinks = new Map<string, string[]>();
+/** Append backlinks to overview pages and write all files */
+async function appendBacklinksAndWrite(
+  pageContents: Map<string, PageContent>,
+  types: Map<string, TypeInfo>
+): Promise<void> {
+  const backlinks = buildBacklinksFromContent(pageContents, types);
 
-  for (const [sourceName, info] of types) {
-    const referencedTypes = new Set<string>();
-
-    // Base types
-    for (const baseType of info.baseTypes) {
-      const clean = baseType.replace(/<.*>$/, '').trim();
-      if (types.has(clean)) {
-        referencedTypes.add(clean);
+  for (const [name, { content, filePath }] of pageContents) {
+    const typeBacklinks = backlinks.get(name) ?? [];
+    const lines = [content];
+    if (typeBacklinks.length > 0) {
+      const sortedBacklinks = [...typeBacklinks].sort((a, b) => a.localeCompare(b));
+      lines.push('');
+      lines.push('---');
+      lines.push('');
+      lines.push('**Links to this page:**');
+      lines.push('');
+      for (const bl of sortedBacklinks) {
+        const blInfo = allTypes.get(bl);
+        if (blInfo) {
+          const blNsDir = getNamespaceDir(blInfo.namespace);
+          lines.push(`- [${bl}](${BASE_PATH}/api/${blNsDir}/${bl}/)`);
+        }
       }
     }
+    await writeFile(filePath, lines.join('\n'), 'utf-8');
+  }
+}
 
-    // Property types
-    for (const prop of info.properties) {
-      findTypeReferences(prop.type, types, referencedTypes);
-    }
+/** Build backlinks by scanning generated page content for internal API links */
+function buildBacklinksFromContent(
+  pageContents: Map<string, PageContent>,
+  types: Map<string, TypeInfo>
+): Map<string, string[]> {
+  const backlinks = new Map<string, string[]>();
+  const escapedBase = BASE_PATH.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const linkPattern = new RegExp(`${escapedBase}/api/(?:[a-zA-Z0-9_@-]+/)+(?<typeName>[a-zA-Z0-9_-]+)/`, 'g');
+  for (const [sourceName, { content }] of pageContents) {
+    const referencedTypes = new Set<string>();
 
-    // Method return types and param types
-    for (const method of info.methods) {
-      findTypeReferences(method.returnType, types, referencedTypes);
-      for (const param of method.parameters) {
-        findTypeReferences(param.type, types, referencedTypes);
+    for (const match of content.matchAll(linkPattern)) {
+      const typeName = match.groups?.['typeName'] ?? '';
+      if (typeName && types.has(typeName) && typeName !== sourceName) {
+        referencedTypes.add(typeName);
       }
     }
 
     for (const ref of referencedTypes) {
-      if (ref === sourceName) {
-        continue;
-      }
       if (!backlinks.has(ref)) {
         backlinks.set(ref, []);
       }
@@ -856,6 +889,7 @@ function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOffic
       baseTypes: [],
       description: getDescription(fn),
       examples: getExamples(fn),
+      implementsTypes: [],
       isOfficial: checkIsOfficial(fn, isOfficial),
       kind: 'function',
       methods: [{
@@ -1032,16 +1066,6 @@ function extractPropertySignatureInfo(prop: PropertySignature, isOfficial: boole
   };
 }
 
-function findTypeReferences(typeText: string, types: Map<string, TypeInfo>, result: Set<string>): void {
-  const matches = typeText.matchAll(/\b(?<typeName>[A-Z][a-zA-Z0-9]*)\b/g);
-  for (const match of matches) {
-    const name = match.groups?.['typeName'] ?? '';
-    if (types.has(name)) {
-      result.add(name);
-    }
-  }
-}
-
 /** Collapse single newlines within paragraphs to spaces, preserve double newlines as paragraph breaks. */
 function foldTsDocParagraphs(text: string): string {
   return text
@@ -1209,7 +1233,7 @@ async function generateNamespaceIndexPages(types: Map<string, TypeInfo>): Promis
   }
 }
 
-async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks: string[]): Promise<void> {
+async function generateOverviewPage(name: string, info: TypeInfo): Promise<PageContent> {
   const nsDir = getNamespaceDir(info.namespace);
   const typeSlug = name;
   const filePath = join(OUTPUT_DIR, nsDir, typeSlug, 'index.mdx');
@@ -1278,8 +1302,7 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
   // Functions render like method detail pages — signature, params, returns
   if (info.kind === 'function') {
     renderFunctionPage(lines, info);
-    await writeFile(filePath, lines.join('\n'), 'utf-8');
-    return;
+    return { content: lines.join('\n'), filePath };
   }
 
   // Variables render with declaration keyword and type
@@ -1294,15 +1317,14 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
     lines.push('');
     lines.push(`**Type:** ${escapeMdxBraces(escapeMdxAngleBrackets(renderTypeWithLinks(varType)))}`);
     lines.push('');
-    renderBacklinks(lines, typeBacklinks);
-    await writeFile(filePath, lines.join('\n'), 'utf-8');
-    return;
+    return { content: lines.join('\n'), filePath };
   }
 
   // Signature
   const typeParamsAttr = info.typeParameters.length > 0 ? ` typeParams={${JSON.stringify(info.typeParameters)}}` : '';
   const extendsAttr = info.baseTypes.length > 0 ? ` extends={${JSON.stringify(info.baseTypes)}}` : '';
-  lines.push(`<TypeSignature kind="${info.kind}" name="${name}"${typeParamsAttr}${extendsAttr} />`);
+  const implementsAttr = info.implementsTypes.length > 0 ? ` implements={${JSON.stringify(info.implementsTypes)}}` : '';
+  lines.push(`<TypeSignature kind="${info.kind}" name="${name}"${typeParamsAttr}${extendsAttr}${implementsAttr} />`);
   lines.push('');
 
   if (info.baseTypes.length > 0) {
@@ -1311,13 +1333,17 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
     lines.push('');
   }
 
+  if (info.implementsTypes.length > 0) {
+    const linkedTypes = info.implementsTypes.map((t) => linkBaseType(t));
+    lines.push(`**Implements:** ${linkedTypes.join(', ')}`);
+    lines.push('');
+  }
+
   renderConstructorMdx(lines, name, info);
   renderPropertyTableMdx(lines, info);
   renderMethodTableMdx(lines, info);
 
-  renderBacklinks(lines, typeBacklinks);
-
-  await writeFile(filePath, lines.join('\n'), 'utf-8');
+  return { content: lines.join('\n'), filePath };
 }
 
 /** Compute relative import path from a generated page to the components directory */
@@ -1548,25 +1574,6 @@ function overloadSlug(overloadKey: string): string {
 
 function renderApiStatus(isOfficial: boolean): string {
   return isOfficial ? 'ApiStatus.Official' : 'ApiStatus.Unofficial';
-}
-
-function renderBacklinks(lines: string[], typeBacklinks: string[]): void {
-  if (typeBacklinks.length === 0) {
-    return;
-  }
-  const sortedBacklinks = [...typeBacklinks].sort((a, b) => a.localeCompare(b));
-  lines.push('---');
-  lines.push('');
-  lines.push('**Links to this page:**');
-  lines.push('');
-  for (const bl of sortedBacklinks) {
-    const blInfo = allTypes.get(bl);
-    if (blInfo) {
-      const blNsDir = getNamespaceDir(blInfo.namespace);
-      lines.push(`- [${bl}](${BASE_PATH}/api/${blNsDir}/${bl}/)`);
-    }
-  }
-  lines.push('');
 }
 
 function renderConstructorMdx(lines: string[], name: string, info: TypeInfo): void {
