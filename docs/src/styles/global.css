@@ -94,6 +94,14 @@
     }
 }
 
+/* Prevent horizontal scroll on mobile — any overflowing element (tables, code blocks,
+   long type names) is clipped at the page level. Individual containers like tables still
+   scroll horizontally via their own overflow:auto. Using `clip` instead of `hidden` avoids
+   creating a new scroll container. */
+body {
+    overflow-x: clip;
+}
+
 /* Widen content area for API reference tables */
 :root {
     --sl-content-width: 65rem;

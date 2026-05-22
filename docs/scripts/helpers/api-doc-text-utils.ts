@@ -140,3 +140,19 @@ export function simplifyType(typeText: string): string {
     .replace(/import\("[^"]+"\)\./g, '')
     .replace(/import\('[^']+'\)\./g, '');
 }
+
+const OG_DESCRIPTION_MAX_LENGTH = 160;
+
+/** Strip markdown formatting to plain text for use in meta descriptions */
+export function stripMarkdown(text: string): string {
+  return text
+    .replace(/\{@link\s+(?:[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\}/g, (...args) => {
+      const groups = args[args.length - 1] as Record<string, string | undefined>;
+      return groups['display'] ?? '';
+    })
+    .replace(/\[(?<text>[^\]]+)\]\([^)]+\)/g, '$<text>')
+    .replace(/[`*_~]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, OG_DESCRIPTION_MAX_LENGTH);
+}

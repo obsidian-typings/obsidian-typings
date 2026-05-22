@@ -76,7 +76,7 @@ export const astroConfig = defineConfig({
       githubLocationRenderer
     ]
   },
-  site: 'https://fevol.github.io',
+  site: 'https://obsidian-typings.github.io',
   trailingSlash: 'always'
 });
 

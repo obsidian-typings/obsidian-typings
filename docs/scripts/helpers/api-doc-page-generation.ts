@@ -37,7 +37,8 @@ import {
   getImportStatement,
   getNamespaceDir,
   memberSlug,
-  overloadSlug
+  overloadSlug,
+  stripMarkdown
 } from './api-doc-text-utils.ts';
 
 /** Append backlinks to overview pages and write all files */
@@ -291,6 +292,9 @@ export async function generateOverviewPage(name: string, info: TypeInfo, allType
   const badgeVariant = info.isOfficial ? 'success' : 'caution';
   lines.push('---');
   lines.push(`title: "${displayName}"`);
+  if (info.description) {
+    lines.push(`description: "${escapeYaml(stripMarkdown(info.description))}"`);
+  }
   lines.push('editUrl: false');
   lines.push('sidebar:');
   lines.push(`  label: "${displayName}"`);
