@@ -21,7 +21,7 @@ interface SidebarLink {
   link: string;
 }
 
-const BASE = '/obsidian-typings';
+const BASE = process.env['BASE_PATH'] ?? '/obsidian-typings';
 
 export const astroConfig = defineConfig({
   base: BASE,

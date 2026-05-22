@@ -88,11 +88,12 @@ async function processChannel(channel: Channel, outputDir: string, cacheDir: str
 
   await execFromRoot('npm ci');
   await execFromRoot('npm ci', { cwd: 'docs' });
-  await execFromRoot('npm run setup', { cwd: 'docs' });
-
   process.env['CURRENT_CHANNEL'] = channel;
+  process.env['BASE_PATH'] = `/obsidian-typings/${channel}`;
   process.env['LATEST_PUBLIC_TYPINGS_VERSION'] = versions.public;
   process.env['LATEST_CATALYST_TYPINGS_VERSION'] = versions.catalyst;
+
+  await execFromRoot('npm run setup', { cwd: 'docs' });
   await execFromRoot(`npm run build -- --base /obsidian-typings/${channel}`, { cwd: 'docs' });
 
   await mkdir(channelOutputDir, { recursive: true });
