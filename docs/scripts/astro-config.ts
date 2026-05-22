@@ -42,6 +42,7 @@ export const astroConfig = defineConfig({
       },
       favicon: './favicon.png',
       plugins: [],
+      routeMiddleware: './src/route-data.ts',
       sidebar: [
         {
           items: [

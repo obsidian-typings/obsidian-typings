@@ -7,9 +7,7 @@ const entries = await getCollection('docs');
 // Map the entry array to an object with the page ID as key and the
 // Frontmatter data as value.
 const pages = Object.fromEntries(
-  entries
-    .map(({ data, id }) => [id, { data }] as const)
-    .filter(([id]) => !id.includes('api/'))
+  entries.map(({ data, id }) => [id, { data }] as const)
 );
 
 export const { GET, getStaticPaths } = await OGImageRoute({
