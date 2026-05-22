@@ -1254,16 +1254,16 @@ async function generateOverviewPage(name: string, info: TypeInfo, typeBacklinks:
     lines.push('');
   }
 
+  // Remarks
+  if (info.remarks) {
+    lines.push(`> ${escapeMdxBraces(resolveLinks(info.remarks))}`);
+    lines.push('');
+  }
+
   // Import statement
   const importStatement = getImportStatement(info);
   if (importStatement) {
     lines.push(`<ImportStatement text="${escapeJsxAttr(importStatement)}" />`);
-    lines.push('');
-  }
-
-  // Remarks
-  if (info.remarks) {
-    lines.push(`> ${escapeMdxBraces(resolveLinks(info.remarks))}`);
     lines.push('');
   }
 
@@ -1386,21 +1386,31 @@ function getExamples(node: JSDocableNode): string[] {
 }
 
 function getImportStatement(info: TypeInfo): string | undefined {
+  // Globals/augmentations → global scope, no import needed
   if (info.namespace.startsWith('globals')) {
     return undefined;
   }
-  if (info.kind === 'function' && info.namespace.includes('implementations')) {
+
+  // Implementations/ → runtime code, import from TYPINGS_PACKAGE/implementations
+  if (info.namespace.includes('implementations')) {
     return `import { ${info.name} } from '${TYPINGS_PACKAGE}/implementations';`;
   }
-  if (info.namespace.startsWith('obsidian/augmentations') && info.isOfficial) {
-    const importKeyword = info.kind === 'interface' ? 'import type' : 'import';
-    return `${importKeyword} { ${info.name} } from 'obsidian';`;
-  }
-  if (info.namespace.startsWith('@codemirror')) {
-    // Convert directory name back to package name: @codemirror__state → @codemirror/state
-    const packageName = info.namespace.split('/')[0]?.replace('__', '/') ?? info.namespace;
+
+  // Augmentations/ → import from the original package
+  if (info.namespace.includes('/augmentations')) {
+    const packageDir = info.namespace.split('/')[0] ?? '';
+
+    if (packageDir === 'obsidian') {
+      const importKeyword = info.kind === 'interface' ? 'import type' : 'import';
+      return `${importKeyword} { ${info.name} } from 'obsidian';`;
+    }
+
+    // @codemirror__state → @codemirror/state, i18next → i18next, etc.
+    const packageName = packageDir.includes('__') ? packageDir.replace('__', '/') : packageDir;
     return `import type { ${info.name} } from '${packageName}';`;
   }
+
+  // Internals/ and everything else → import type from TYPINGS_PACKAGE
   return `import type { ${info.name} } from '${TYPINGS_PACKAGE}';`;
 }
 
@@ -1575,11 +1585,6 @@ function renderFunctionPage(lines: string[], info: TypeInfo): void {
   const fn = info.methods[0];
   if (!fn) {
     return;
-  }
-
-  if (fn.remarks) {
-    lines.push(`> ${resolveLinks(fn.remarks)}`);
-    lines.push('');
   }
 
   lines.push('**Signature:**');
