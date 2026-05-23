@@ -125,9 +125,6 @@ async function main(): Promise<void> {
   const pageContents = new Map<string, PageContent>();
   let pageCount = 0;
   for (const [name, info] of types) {
-    if (info.kind !== 'variable' && info.kind !== 'function' && info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
-      continue;
-    }
     const { content, filePath } = await generateOverviewPage(name, info, allTypes);
     pageContents.set(name, { content, filePath });
     if (info.kind !== 'function') {

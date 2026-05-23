@@ -98,6 +98,7 @@
    long type names) is clipped at the page level. Individual containers like tables still
    scroll horizontally via their own overflow:auto. Using `clip` instead of `hidden` avoids
    creating a new scroll container. */
+html,
 body {
     overflow-x: clip;
 }
@@ -108,9 +109,16 @@ body {
     --sl-content-pad-x: 1rem;
 }
 
+/* Ensure long content scrolls horizontally within its container on mobile */
+.sl-markdown-content pre {
+    overflow-x: auto;
+}
+
 /* API reference tables */
 .sl-markdown-content table {
     width: 100%;
+    display: block;
+    overflow-x: auto;
 }
 
 .sl-markdown-content table th,

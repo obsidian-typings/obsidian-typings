@@ -103,9 +103,6 @@ export function buildBacklinksFromContent(
 export function buildSidebarTree(types: Map<string, TypeInfo>): SidebarTreeNode {
   const root: SidebarTreeNode = { children: new Map(), types: [] };
   for (const [_name, info] of types) {
-    if (info.kind !== 'variable' && info.kind !== 'function' && info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
-      continue;
-    }
     const parts = info.namespace.split('/');
     let node = root;
     for (const part of parts) {
@@ -212,9 +209,6 @@ export async function generateMemberPages(name: string, info: TypeInfo, allTypes
 export async function generateNamespaceIndexPages(types: Map<string, TypeInfo>, allTypes: Map<string, TypeInfo>): Promise<void> {
   const namespaces = new Map<string, TypeInfo[]>();
   for (const [_name, info] of types) {
-    if (info.kind !== 'variable' && info.kind !== 'function' && info.properties.length === 0 && info.methods.length === 0 && info.baseTypes.length === 0) {
-      continue;
-    }
     if (!namespaces.has(info.namespace)) {
       namespaces.set(info.namespace, []);
     }
