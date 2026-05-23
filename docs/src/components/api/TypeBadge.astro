@@ -15,7 +15,9 @@ const label = isOfficial ? 'Official' : 'Unofficial';
 ---
 
 <div class="type-badge-row">
-  <p><span class={iconClass} title={title}></span> <strong>{label}</strong></p>
+  <span class:list={['status-pill', isOfficial ? 'pill-official' : 'pill-unofficial']} title={title}>
+    <span class={iconClass}></span> {label}
+  </span>
   <slot />
 </div>
 
@@ -26,7 +28,29 @@ const label = isOfficial ? 'Official' : 'Unofficial';
     gap: 1.5rem;
     flex-wrap: wrap;
   }
-  .type-badge-row > p {
-    margin: 0;
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+  }
+  :global([data-theme='dark']) .pill-official {
+    background: rgba(74, 222, 128, 0.2);
+    color: #4ade80;
+  }
+  :global([data-theme='light']) .pill-official {
+    background: rgba(22, 163, 74, 0.15);
+    color: #15803d;
+  }
+  :global([data-theme='dark']) .pill-unofficial {
+    background: rgba(251, 146, 60, 0.2);
+    color: #fb923c;
+  }
+  :global([data-theme='light']) .pill-unofficial {
+    background: rgba(234, 88, 12, 0.15);
+    color: #c2410c;
   }
 </style>
