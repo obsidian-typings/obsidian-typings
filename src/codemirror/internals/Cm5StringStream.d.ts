@@ -7,7 +7,7 @@
 export interface Cm5StringStream {
   /** Position in the string where the last column measurement was taken. */
   lastColumnPos: number;
-  /** Cached column value at {@link lastColumnPos}. */
+  /** Cached column value at {@link Cm5StringStream.lastColumnPos}. */
   lastColumnValue: number;
   /** Start offset of the current line within the document. */
   lineStart: number;
