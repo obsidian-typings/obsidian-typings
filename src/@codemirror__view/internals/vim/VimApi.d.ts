@@ -17,9 +17,8 @@ export interface VimApi {
    * Register an internal key mapping command.
    *
    * @param command - The command to register.
-   * @returns The registered command result.
    */
-  _mapCommand(command: unknown): unknown;
+  _mapCommand(command: object): void;
 
   /**
    * Build the key map from the current configuration.
@@ -32,7 +31,7 @@ export interface VimApi {
    * @param name - The name of the action.
    * @param fn - The handler function for the action.
    */
-  defineAction(name: string, fn: (cm: VimEditor, actionArgs: unknown, vim: VimState['vim']) => void): void;
+  defineAction(name: string, fn: (cm: VimEditor, actionArgs: object, vim: VimState['vim']) => void): void;
 
   /**
    * Define a new Ex command with the given name and prefix.
@@ -40,27 +39,24 @@ export interface VimApi {
    * @param name - The name of the Ex command.
    * @param prefix - The prefix for the Ex command.
    * @param func - The function to execute for the Ex command.
-   * @returns The defined Ex command result.
    */
-  defineEx(name: unknown, prefix: unknown, func: unknown): unknown;
+  defineEx(name: string, prefix: string, func: (cm: VimEditor, params: object) => void): void;
 
   /**
    * Define a new Vim motion with the given name and handler.
    *
    * @param name - The name of the motion.
    * @param fn - The handler function for the motion.
-   * @returns The defined motion result.
    */
-  defineMotion(name: unknown, fn: unknown): unknown;
+  defineMotion(name: string, fn: (cm: VimEditor, head: object, motionArgs: object, vim: VimState['vim']) => object): void;
 
   /**
    * Define a new Vim operator with the given name and handler.
    *
    * @param name - The name of the operator.
    * @param fn - The handler function for the operator.
-   * @returns The defined operator result.
    */
-  defineOperator(name: unknown, fn: unknown): unknown;
+  defineOperator(name: string, fn: (cm: VimEditor, operatorArgs: object, ranges: object[], oldAnchor: object, newHead: object) => void): void;
 
   /**
    * Define a new Vim option with default value, type, aliases, and change callback.
@@ -70,52 +66,46 @@ export interface VimApi {
    * @param type - The type of the option.
    * @param aliases - The aliases for the option.
    * @param callback - The callback invoked when the option changes.
-   * @returns The defined option result.
    */
-  defineOption(name: unknown, defaultValue: unknown, type: unknown, aliases: unknown, callback: unknown): unknown;
+  defineOption(name: string, defaultValue: unknown, type: string, aliases?: string[], callback?: (value: unknown, cm?: VimEditor) => void): void;
 
   /**
    * Define a new named register.
    *
    * @param name - The name of the register.
    * @param register - The register object.
-   * @returns The defined register result.
    */
-  defineRegister(name: unknown, register: unknown): unknown;
+  defineRegister(name: string, register: object): void;
 
   /**
    * Enter insert mode in the given editor.
    *
    * @param cm - The editor instance.
-   * @returns The result of entering insert mode.
    */
-  enterInsertMode(cm: unknown): unknown;
+  enterInsertMode(cm: VimEditor): void;
 
   /**
    * Enter Vim mode in the given editor.
    *
    * @param cm - The editor instance.
-   * @returns The result of entering Vim mode.
    */
-  enterVimMode(cm: unknown): unknown;
+  enterVimMode(cm: VimEditor): void;
 
   /**
    * Exit insert mode, optionally keeping the cursor position.
    *
    * @param cm - The editor instance.
    * @param keepCursor - Whether to keep the cursor position.
-   * @returns The result of exiting insert mode.
    */
-  exitInsertMode(cm: unknown, keepCursor: unknown): unknown;
+  exitInsertMode(cm: VimEditor, keepCursor?: boolean): void;
 
   /**
    * Exit visual mode, optionally moving the head of the selection.
    *
    * @param cm - The editor instance.
    * @param moveHead - Whether to move the head of the selection.
-   * @returns The result of exiting visual mode.
    */
-  exitVisualMode(cm: unknown, moveHead: unknown): unknown;
+  exitVisualMode(cm: VimEditor, moveHead?: boolean): void;
 
   /**
    * Look up a key binding in the given editor and origin context.
@@ -123,9 +113,9 @@ export interface VimApi {
    * @param cm - The editor instance.
    * @param key - The key to look up.
    * @param origin - The origin context for the lookup.
-   * @returns The found key binding result.
+   * @returns Whether a binding was found and handled.
    */
-  findKey(cm: unknown, key: unknown, origin: unknown): unknown;
+  findKey(cm: VimEditor, key: string, origin?: string): boolean;
 
   /**
    * Get the value of a Vim option.
@@ -135,30 +125,29 @@ export interface VimApi {
    * @param cfg - The configuration object.
    * @returns The option value.
    */
-  getOption(name: unknown, cm: unknown, cfg: unknown): unknown;
+  getOption(name: string, cm?: VimEditor, cfg?: object): unknown;
 
   /**
    * Get the register controller managing all registers.
    *
    * @returns The register controller.
    */
-  getRegisterController(): unknown;
+  getRegisterController(): object;
 
   /**
    * Get the global Vim state object.
    *
    * @returns The global Vim state.
    */
-  getVimGlobalState_(): unknown;
+  getVimGlobalState_(): object;
 
   /**
    * Handle an Ex command input string.
    *
    * @param cm - The editor instance.
    * @param input - The Ex command input string.
-   * @returns The result of handling the Ex command.
    */
-  handleEx(cm: unknown, input: unknown): unknown;
+  handleEx(cm: VimEditor, input: string): void;
 
   /**
    * Handle a key press in the given editor with the specified origin.
@@ -166,9 +155,9 @@ export interface VimApi {
    * @param cm - The editor instance.
    * @param key - The key that was pressed.
    * @param origin - The origin of the key press.
-   * @returns The result of handling the key.
+   * @returns Whether the key was handled.
    */
-  handleKey(cm: unknown, key: unknown, origin: unknown): unknown;
+  handleKey(cm: VimEditor, key: string, origin?: string): boolean;
 
   /**
    * Create an insert mode key binding for the given key name.
@@ -181,9 +170,8 @@ export interface VimApi {
    * Leave Vim mode in the given editor.
    *
    * @param cm - The editor instance.
-   * @returns The result of leaving Vim mode.
    */
-  leaveVimMode(cm: unknown): unknown;
+  leaveVimMode(cm: VimEditor): void;
 
   /**
    * Create a recursive key mapping from lhs to rhs in the given context.
@@ -191,17 +179,15 @@ export interface VimApi {
    * @param lhs - The left-hand side key sequence.
    * @param rhs - The right-hand side key sequence or command.
    * @param ctx - The mapping context.
-   * @returns The mapping result.
    */
-  map(lhs: unknown, rhs: unknown, ctx: unknown): unknown;
+  map(lhs: string, rhs: string, ctx?: string): void;
 
   /**
    * Clear all key mappings in the given context.
    *
    * @param ctx - The mapping context to clear.
-   * @returns The result of clearing the mappings.
    */
-  mapclear(ctx: unknown): unknown;
+  mapclear(ctx?: string): void;
 
   /**
    * Map a key sequence to a command type, name, args, and extra options.
@@ -211,9 +197,8 @@ export interface VimApi {
    * @param name - The command name.
    * @param args - The command arguments.
    * @param extra - The extra options.
-   * @returns The mapping result.
    */
-  mapCommand(keys: unknown, type: unknown, name: unknown, args: unknown, extra: unknown): unknown;
+  mapCommand(keys: string, type: string, name: string, args?: object, extra?: object): void;
 
   /**
    * Initialize the Vim state for the given editor if not already initialized.
@@ -221,7 +206,7 @@ export interface VimApi {
    * @param cm - The editor instance.
    * @returns The Vim state.
    */
-  maybeInitVimState_(cm: unknown): unknown;
+  maybeInitVimState_(cm: VimEditor): VimState;
 
   /**
    * Handle a key press in multi-select mode.
@@ -229,9 +214,9 @@ export interface VimApi {
    * @param cm - The editor instance.
    * @param key - The key that was pressed.
    * @param origin - The origin of the key press.
-   * @returns The result of handling the key.
+   * @returns Whether the key was handled.
    */
-  multiSelectHandleKey(cm: unknown, key: unknown, origin: unknown): unknown;
+  multiSelectHandleKey(cm: VimEditor, key: string, origin?: string): boolean;
 
   /**
    * Create a non-recursive key mapping from lhs to rhs in the given context.
@@ -239,16 +224,13 @@ export interface VimApi {
    * @param lhs - The left-hand side key sequence.
    * @param rhs - The right-hand side key sequence or command.
    * @param ctx - The mapping context.
-   * @returns The mapping result.
    */
-  noremap(lhs: unknown, rhs: unknown, ctx: unknown): unknown;
+  noremap(lhs: string, rhs: string, ctx?: string): void;
 
   /**
    * Reset the global Vim state to defaults.
-   *
-   * @returns The result of resetting the state.
    */
-  resetVimGlobalState_(): unknown;
+  resetVimGlobalState_(): void;
 
   /**
    * Set the value of a Vim option.
@@ -257,16 +239,14 @@ export interface VimApi {
    * @param value - The value to set.
    * @param cm - The editor instance.
    * @param cfg - The configuration object.
-   * @returns The result of setting the option.
    */
-  setOption(name: unknown, value: unknown, cm: unknown, cfg: unknown): unknown;
+  setOption(name: string, value: unknown, cm?: VimEditor, cfg?: object): void;
 
   /**
    * Remove a key mapping for lhs in the given context.
    *
    * @param lhs - The left-hand side key sequence to unmap.
    * @param ctx - The mapping context.
-   * @returns The result of removing the mapping.
    */
-  unmap(lhs: unknown, ctx: unknown): unknown;
+  unmap(lhs: string, ctx?: string): void;
 }

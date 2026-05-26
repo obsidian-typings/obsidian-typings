@@ -3,6 +3,9 @@ import type {
   Pos
 } from 'obsidian';
 
+import type { Cm5KeyMap } from '../../codemirror/internals/Cm5KeyMap.d.ts';
+import type { Cm5StringStream } from '../../codemirror/internals/Cm5StringStream.d.ts';
+import type { ConstructorBase } from '../../obsidian/internals/constructors/ConstructorBase.d.ts';
 import type { CodeMirrorAdapterExCommands } from './CodeMirrorAdapterExCommands.d.ts';
 import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 import type { EnclosingTag } from './EnclosingTag.d.ts';
@@ -37,12 +40,12 @@ export interface CodeMirrorAdapterEx {
   /**
    * Map of key binding names to their handlers.
    */
-  keyMap: Record<string, unknown>;
+  keyMap: Record<string, Cm5KeyMap>;
 
   /**
    * Map of key names to their handlers.
    */
-  keys: Record<string, unknown>;
+  keys: Cm5KeyMap;
 
   /**
    * Constructor for creating editor position objects.
@@ -56,7 +59,7 @@ export interface CodeMirrorAdapterEx {
   /**
    * StringStream class for tokenizing input.
    */
-  StringStream: unknown;
+  StringStream: ConstructorBase<[text: string], Cm5StringStream>;
 
   /**
    * The Vim API instance.

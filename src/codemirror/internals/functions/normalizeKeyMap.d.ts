@@ -1,3 +1,5 @@
+import type { Cm5KeyMap } from '../Cm5KeyMap.d.ts';
+
 /**
  * Normalizes a key map, expanding multi-stroke key bindings.
  *
@@ -6,4 +8,4 @@
  * @public
  * @unofficial
  */
-export declare function normalizeKeyMap(keymap: Record<string, unknown>): Record<string, unknown>;
+export declare function normalizeKeyMap(keymap: Cm5KeyMap): Cm5KeyMap;

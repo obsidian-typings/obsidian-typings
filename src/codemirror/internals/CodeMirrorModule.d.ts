@@ -1,6 +1,9 @@
 import type { Cm5Editor } from './Cm5Editor.d.ts';
 import type { Cm5EditorChange } from './Cm5EditorChange.d.ts';
 import type { Cm5EditorConfiguration } from './Cm5EditorConfiguration.d.ts';
+import type { Cm5KeyMap } from './Cm5KeyMap.d.ts';
+import type { Cm5Mode } from './Cm5Mode.d.ts';
+import type { Cm5ModeFactory } from './Cm5ModeFactory.d.ts';
 import type { Position } from './Position.d.ts';
 
 /**
@@ -15,7 +18,7 @@ export interface CodeMirrorModule {
   /** Default configuration options for CodeMirror 5 editors. */
   defaults: Record<string, unknown>;
   /** A map of key map definitions for CodeMirror 5. */
-  keyMap: Record<string, Record<string, ((cm: Cm5Editor) => void) | string>>;
+  keyMap: Record<string, Cm5KeyMap>;
   /** The CodeMirror 5 version string. */
   version: string;
 
@@ -41,9 +44,9 @@ export interface CodeMirrorModule {
    * Registers a new editor mode.
    *
    * @param name - The mode name.
-   * @param mode - The mode definition.
+   * @param modeFactory - The factory function that creates the mode.
    */
-  defineMode(name: string, mode: unknown): void;
+  defineMode<T>(name: string, modeFactory: Cm5ModeFactory<T>): void;
 
   /**
    * Registers a new editor option.
@@ -52,7 +55,7 @@ export interface CodeMirrorModule {
    * @param defaultValue - The default value for the option.
    * @param onUpdate - The update handler.
    */
-  defineOption(name: string, defaultValue: unknown, onUpdate: unknown): void;
+  defineOption(name: string, defaultValue: unknown, onUpdate: (editor: Cm5Editor, val: unknown, old: unknown) => void): void;
 
   /**
    * Creates a CodeMirror 5 editor from a textarea element.
@@ -77,7 +80,7 @@ export interface CodeMirrorModule {
    * @param keymap - The key map to normalize.
    * @returns The normalized key map.
    */
-  normalizeKeyMap(keymap: Record<string, unknown>): Record<string, unknown>;
+  normalizeKeyMap(keymap: Cm5KeyMap): Cm5KeyMap;
 
   /**
    * Removes an event handler from the given target.
@@ -115,7 +118,7 @@ export interface CodeMirrorModule {
    * @param predicate - A predicate function to determine applicability.
    * @param value - The helper implementation.
    */
-  registerGlobalHelper(type: string, name: string, predicate: unknown, value: unknown): void;
+  registerGlobalHelper(type: string, name: string, predicate: (mode: Cm5Mode<unknown>, cm: Cm5Editor) => boolean, value: unknown): void;
 
   /**
    * Registers a helper value for a specific type.
