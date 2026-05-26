@@ -9,4 +9,6 @@ export interface Position {
   ch: number;
   /** Line number (zero-based). */
   line: number;
+  /** The sticky direction for cursor placement. */
+  sticky?: string;
 }

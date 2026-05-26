@@ -79,6 +79,14 @@ export interface Cm5StringStream {
   indentation(): number;
 
   /**
+   * Look ahead and return the character n characters ahead without advancing.
+   *
+   * @param n - The number of characters to look ahead.
+   * @returns The character, or `undefined` if past end of line.
+   */
+  lookAhead(n: number): string | undefined;
+
+  /**
    * Matches against a string or regular expression pattern.
    *
    * @param pattern - The string pattern to match.

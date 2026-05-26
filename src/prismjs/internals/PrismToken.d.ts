@@ -11,6 +11,9 @@ export declare class PrismToken {
   /** The content of the token, either a string or nested tokens. */
   content: PrismToken[] | string;
 
+  /** Whether the token was matched greedily. */
+  greedy: boolean;
+
   /** The length of the matched string. */
   length: number;
 
@@ -25,7 +28,7 @@ export declare class PrismToken {
    * @param alias - Optional alias(es) for the token.
    * @param matchedStr - The original matched string.
    */
-  constructor(type: string, content: PrismToken[] | string, alias?: string | string[], matchedStr?: string);
+  constructor(type: string, content: PrismToken[] | string, alias?: string | string[], matchedStr?: string, greedy?: boolean);
 
   /**
    * Converts a token or token stream to an HTML string.
@@ -34,5 +37,5 @@ export declare class PrismToken {
    * @param language - The language identifier.
    * @returns The stringified HTML representation.
    */
-  static stringify(o: Array<PrismToken | string> | PrismToken | string, language: string): string;
+  static stringify(o: Array<PrismToken | string> | PrismToken | string, language: string, parent?: Array<PrismToken | string>): string;
 }

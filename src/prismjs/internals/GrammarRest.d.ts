@@ -9,44 +9,50 @@ import type { GrammarValue } from './GrammarValue.d.ts';
  */
 export interface GrammarRest {
   /** ATRule grammar value. */
-  atrule?: GrammarValue;
+  'atrule'?: GrammarValue;
 
   /** Boolean grammar value. */
-  boolean?: GrammarValue;
+  'boolean'?: GrammarValue;
+
+  /** Class name grammar value. */
+  'class-name'?: GrammarValue;
 
   /** Comment grammar value. */
-  comment?: GrammarValue;
+  'comment'?: GrammarValue;
 
   /** Function grammar value. */
-  function?: GrammarValue;
+  'function'?: GrammarValue;
 
   /** Important grammar value. */
-  important?: GrammarValue;
+  'important'?: GrammarValue;
 
   /** Keyword grammar value. */
-  keyword?: GrammarValue;
+  'keyword'?: GrammarValue;
 
   /** Number grammar value. */
-  number?: GrammarValue;
+  'number'?: GrammarValue;
 
   /** Operator grammar value. */
-  operator?: GrammarValue;
+  'operator'?: GrammarValue;
 
   /** Property grammar value. */
-  property?: GrammarValue;
+  'property'?: GrammarValue;
 
   /** Punctuation grammar value. */
-  punctuation?: GrammarValue;
+  'punctuation'?: GrammarValue;
 
   /** Nested rest grammar. */
-  rest?: Grammar;
+  'rest'?: Grammar;
 
   /** Selector grammar value. */
-  selector?: GrammarValue;
+  'selector'?: GrammarValue;
 
   /** String grammar value. */
-  string?: GrammarValue;
+  'string'?: GrammarValue;
+
+  /** Style grammar value. */
+  'style'?: GrammarValue;
 
   /** URL grammar value. */
-  url?: GrammarValue;
+  'url'?: GrammarValue;
 }
