@@ -16,7 +16,7 @@
     "i18next": "^25.1.3",
     "mermaid": "^11.6.0",
     "moment": "2.29.4",
-    "obsidian": "1.12.3",
+    "obsidian": "1.13.0",
     "obsidian-typings": "file:../../..",
     "pdfjs-dist": "^4.10.38",
     "pixi.js": "^8.9.2",
