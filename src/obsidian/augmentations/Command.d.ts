@@ -112,8 +112,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link callback} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    callback__?(): any;
+    callback__?(): unknown;
 
     /**
      * Complex callback, overrides the simple callback.
@@ -170,8 +169,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link editorCallback} instead.
      * @since 0.12.2
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    editorCallback__?(editor: Editor, ctx: MarkdownFileInfo | MarkdownView): any;
+    editorCallback__?(editor: Editor, ctx: MarkdownFileInfo | MarkdownView): unknown;
 
     /**
      * A command callback that is only triggered when the user is in an editor.

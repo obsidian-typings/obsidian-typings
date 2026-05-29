@@ -20,8 +20,8 @@ declare module 'obsidian' {
      *
      * @official
      * @since 1.13.0
+     * @deprecated - Added only for typing purposes. Use {@link action} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/method-signature-style -- Property syntax required by official API for declaration merging.
-    action: () => void;
+    action__?(): void;
   }
 }

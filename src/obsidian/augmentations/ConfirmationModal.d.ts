@@ -24,8 +24,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.13.0
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    addButton(cb: (btn: ConfirmationButton) => any): this;
+    addButton(cb: (btn: ConfirmationButton) => unknown): this;
 
     /**
      * Add a cancel button to the modal's button row.
@@ -46,8 +45,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.13.0
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    addCheckbox(label: string, cb: (value: boolean) => any | Promise<any>): this;
+    addCheckbox(label: string, cb: (value: boolean) => Promise<unknown> | unknown): this;
 
     /**
      * Add a CSS class to the modal element.

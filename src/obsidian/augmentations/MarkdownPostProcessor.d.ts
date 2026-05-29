@@ -17,8 +17,7 @@ declare module 'obsidian' {
      *
      * @official
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    (el: HTMLElement, ctx: MarkdownPostProcessorContext): Promise<any> | void;
+    (el: HTMLElement, ctx: MarkdownPostProcessorContext): Promise<unknown> | void;
 
     /**
      * An optional integer sort order. Defaults to 0. Lower number runs before higher numbers.

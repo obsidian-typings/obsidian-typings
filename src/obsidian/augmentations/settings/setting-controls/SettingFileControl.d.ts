@@ -30,8 +30,8 @@ declare module 'obsidian' {
      *
      * @official
      * @since 1.13.0
+     * @deprecated - Added only for typing purposes. Use {@link filter} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/method-signature-style -- Property syntax required by official API for declaration merging.
-    filter?: (file: TFile) => boolean;
+    filter__?(file: TFile): boolean;
   }
 }

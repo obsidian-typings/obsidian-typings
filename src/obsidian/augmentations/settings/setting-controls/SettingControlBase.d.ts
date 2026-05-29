@@ -53,8 +53,8 @@ declare module 'obsidian' {
      *
      * @official
      * @since 1.13.0
+     * @deprecated - Added only for typing purposes. Use {@link validate} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/method-signature-style -- Property syntax required by official API for declaration merging.
-    validate?: (value: V) => Promise<string | void> | string | void;
+    validate__?(value: V): Promise<string | void> | string | void;
   }
 }

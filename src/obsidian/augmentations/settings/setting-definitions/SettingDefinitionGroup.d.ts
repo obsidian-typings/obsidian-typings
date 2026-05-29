@@ -23,9 +23,9 @@ declare module 'obsidian' {
      *
      * @official
      * @since 1.13.0
+     * @deprecated - Added only for typing purposes. Use {@link extraButtons} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    extraButtons?: ((component: ExtraButtonComponent) => any)[];
+    extraButtons__?: ((component: ExtraButtonComponent) => unknown)[];
 
     /**
      * Heading text displayed above the group.
@@ -66,8 +66,8 @@ declare module 'obsidian' {
      *
      * @official
      * @since 1.13.0
+     * @deprecated - Added only for typing purposes. Use {@link search} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/method-signature-style -- Property syntax and `any` required by official API for declaration merging.
-    search?: (component: SearchComponent) => any;
+    search__?(component: SearchComponent): unknown;
   }
 }

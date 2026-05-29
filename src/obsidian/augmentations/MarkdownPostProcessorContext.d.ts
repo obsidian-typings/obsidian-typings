@@ -16,9 +16,9 @@ declare module 'obsidian' {
      * The frontmatter of the document.
      *
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link frontmatter} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    frontmatter: any | null | undefined;
+    frontmatter__?: null | undefined | unknown;
 
     /**
      * The path to the associated file. Any links are assumed to be relative to the `sourcePath`.

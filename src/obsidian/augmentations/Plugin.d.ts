@@ -150,8 +150,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.7
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    loadData(): Promise<any>;
+    loadData(): Promise<unknown>;
 
     /**
      * Called when the `data.json` file is modified on disk externally from Obsidian.
@@ -239,8 +238,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.12.7
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    registerEditorSuggest(editorSuggest: EditorSuggest<any>): void;
+    registerEditorSuggest(editorSuggest: EditorSuggest<unknown>): void;
 
     /**
      * Register a set of extensions for a view type.
@@ -294,8 +292,7 @@ declare module 'obsidian' {
      */
     registerMarkdownCodeBlockProcessor(
       language: string,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-      handler: (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => Promise<any> | void,
+      handler: (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => Promise<unknown> | void,
       sortOrder?: number
     ): MarkdownPostProcessor;
 

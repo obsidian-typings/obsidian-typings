@@ -35,9 +35,9 @@ declare module 'obsidian' {
      *
      * @official
      * @since 1.10.0
+     * @deprecated - Added only for typing purposes. Use {@link properties} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    properties?: Record<string, Record<string, any>>;
+    properties__?: Record<string, Record<string, unknown>>;
 
     /**
      * Configuration for summary formulas used in this Base.

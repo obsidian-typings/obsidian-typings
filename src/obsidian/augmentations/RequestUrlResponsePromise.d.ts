@@ -16,9 +16,9 @@ declare module 'obsidian' {
      * The promise that resolves to the body of the response as a JSON object.
      *
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link json} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    json: Promise<any>;
+    json__: Promise<unknown>;
 
     /**
      * The promise that resolves to the body of the response as a string.

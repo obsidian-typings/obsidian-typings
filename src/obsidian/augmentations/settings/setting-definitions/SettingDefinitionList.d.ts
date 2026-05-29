@@ -47,9 +47,9 @@ declare module 'obsidian' {
      *
      * @official
      * @since 1.13.0
+     * @deprecated - Added only for typing purposes. Use {@link onDelete} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/method-signature-style -- Property syntax required by official API for declaration merging.
-    onDelete?: (index: number) => void;
+    onDelete__?(index: number): void;
 
     /**
      * When set, adds a drag handle to each item and enables drag-to-reorder.
@@ -57,8 +57,8 @@ declare module 'obsidian' {
      *
      * @official
      * @since 1.13.0
+     * @deprecated - Added only for typing purposes. Use {@link onReorder} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/method-signature-style -- Property syntax required by official API for declaration merging.
-    onReorder?: (oldIndex: number, newIndex: number) => void;
+    onReorder__?(oldIndex: number, newIndex: number): void;
   }
 }

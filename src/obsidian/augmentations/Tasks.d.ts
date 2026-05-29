@@ -16,8 +16,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.10.2
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    add(callback: () => Promise<any>): void;
+    add(callback: () => Promise<unknown>): void;
 
     /**
      * Add a promise.
@@ -26,8 +25,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.10.2
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    addPromise(promise: Promise<any>): void;
+    addPromise(promise: Promise<unknown>): void;
 
     /**
      * Constructor.
@@ -56,7 +54,6 @@ declare module 'obsidian' {
      * @returns The promise.
      * @official
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    promise(): Promise<any>;
+    promise(): Promise<unknown>;
   }
 }
