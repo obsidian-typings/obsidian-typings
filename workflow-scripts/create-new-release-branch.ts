@@ -2,12 +2,19 @@ import { compare } from 'semver';
 
 import { generateBranchName } from './helpers/branchSpec.ts';
 import { checkout } from './helpers/checkout.ts';
-import { execFromRoot } from './helpers/exec.ts';
+import {
+  editPackageJson,
+  editPackageLockJson,
+  execFromRoot
+} from './helpers/exec.ts';
+import { commit } from './helpers/git.ts';
 import {
   generateMainReadme,
   generateReadme
 } from './helpers/readmeGenerator.ts';
 import { getLatestVersion } from './helpers/version.ts';
+
+const INITIAL_BRANCH_VERSION = '1.0.0';
 
 async function main(): Promise<void> {
   const newVersion = process.argv[2] ?? '';
@@ -51,9 +58,28 @@ async function main(): Promise<void> {
 
   await checkout(latestBranch, true);
   await execFromRoot(`git checkout -b "${newBranch}"`);
+  await resetPackageVersion();
   await execFromRoot(`git push -u origin "${newBranch}"`);
   await generateReadme({ channel: newVersionChannel, obsidianVersion: newVersion }, changelogUrl);
   await generateMainReadme();
+}
+
+async function resetPackageVersion(): Promise<void> {
+  await editPackageJson((packageJson) => {
+    packageJson.version = INITIAL_BRANCH_VERSION;
+  });
+
+  await editPackageLockJson((packageLockJson) => {
+    packageLockJson.version = INITIAL_BRANCH_VERSION;
+
+    const defaultPackage = packageLockJson.packages?.[''];
+    if (defaultPackage) {
+      defaultPackage.version = INITIAL_BRANCH_VERSION;
+    }
+  });
+
+  await execFromRoot('git add package.json package-lock.json');
+  await commit(`chore(release): reset to ${INITIAL_BRANCH_VERSION}`);
 }
 
 await main();

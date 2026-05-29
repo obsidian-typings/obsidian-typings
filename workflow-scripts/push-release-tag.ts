@@ -1,7 +1,10 @@
 import { writeFile } from 'node:fs/promises';
 import { inc } from 'semver';
 
-import { parseBranchSpec } from './helpers/branchSpec.ts';
+import {
+  type BranchSpec,
+  parseBranchSpec
+} from './helpers/branchSpec.ts';
 import {
   editPackageJson,
   editPackageLockJson,
@@ -49,7 +52,8 @@ async function main(): Promise<void> {
   await execFromRoot('npm install');
   await execFromRoot('npm run build');
 
-  const nextVersion = await updateNpmVersions(branchName, isBeta);
+  const nextVersion = await updateNpmVersions(branchSpec, isBeta);
+  const scopedTagName = buildScopedTagName(branchSpec, nextVersion);
 
   const scopedPackageName = `${SCOPE}/obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}`;
   const zipFileName = `obsidian-typings-${nextVersion}-obsidian-${branchSpec.obsidianVersion}-${branchSpec.channel}.zip`;
@@ -74,9 +78,13 @@ async function main(): Promise<void> {
   await writeOutput({
     isBeta,
     releaseName: `${nextVersion} (${scopedPackageName})`,
-    tagName: nextVersion,
+    tagName: scopedTagName,
     zipFileName
   });
+}
+
+function buildScopedTagName(branchSpec: BranchSpec, releaseVersion: string): string {
+  return `obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}-v${releaseVersion}`;
 }
 
 async function releaseNpmPackage(_nextVersion: string, zipFileName: string, scopedPackageName: string): Promise<void> {
@@ -209,7 +217,7 @@ async function getNextWrapperVersion(packageName: string, isBeta: boolean): Prom
   return nextVersion;
 }
 
-async function updateNpmVersions(_branchName: string, isBeta: boolean): Promise<string> {
+async function updateNpmVersions(branchSpec: BranchSpec, isBeta: boolean): Promise<string> {
   const currentVersion = (await execFromRoot('node -p "require(\'./package.json\').version"', { isQuiet: true })).trim();
   const nextVersion = isBeta ? inc(currentVersion, 'preminor', 'beta') : inc(currentVersion, 'minor');
   if (!nextVersion) {
@@ -218,7 +226,8 @@ async function updateNpmVersions(_branchName: string, isBeta: boolean): Promise<
 
   await updateNpmVersion(nextVersion);
 
-  await annotateTag(nextVersion, nextVersion);
+  const scopedTagName = buildScopedTagName(branchSpec, nextVersion);
+  await annotateTag(scopedTagName, nextVersion);
   await execFromRoot('git push origin --follow-tags');
 
   return nextVersion;
