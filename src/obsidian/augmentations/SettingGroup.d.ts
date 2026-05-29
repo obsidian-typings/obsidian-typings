@@ -49,6 +49,7 @@ declare module 'obsidian' {
      *
      * @public
      * @since 1.11.0
+     * @official
      */
     listEl: HTMLElement;
 
