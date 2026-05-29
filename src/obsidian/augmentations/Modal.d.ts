@@ -188,7 +188,7 @@ declare module 'obsidian' {
     onWindowClose(): void;
 
     /**
-     * Show the modal on the the active window. On mobile, the modal will animate on screen.
+     * Show the modal on the the active window. On phones, the modal will animate on screen.
      *
      * @official
      */

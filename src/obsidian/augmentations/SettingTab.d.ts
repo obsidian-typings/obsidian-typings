@@ -79,6 +79,15 @@ declare module 'obsidian' {
     setting: Setting;
 
     /**
+     * Nested setting definitions as returned by {@link getSettingDefinitions}.
+     * Populated by {@link update}.
+     *
+     * @official
+     * @since 1.13.0
+     */
+    settingItems: SettingDefinitionItem[];
+
+    /**
      * Constructor.
      *
      * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<SettingTab\>}.
@@ -92,13 +101,32 @@ declare module 'obsidian' {
     constructor2__(app: App, setting: Setting): this;
 
     /**
-     * Called when the settings tab should be rendered.
+     * Read the current value for a control key. Called on every render of a
+     * `control`-type setting definition.
      *
-     * @see {@link https://docs.obsidian.md/Plugins/User+interface/Settings#Register+a+settings+tab}.
+     * The default implementation reads from `this.app.vault.getConfig` —
+     * appropriate for the app's own setting tabs. `PluginSettingTab` and
+     * `InternalPluginSettingTab` override this to read from their conventional
+     * settings storage; plugins with custom storage override on their
+     * subclass.
+     *
+     * @param key - The setting key to read.
+     * @returns The current value for the key.
      * @official
-     * @deprecated - Added only for typing purposes. Use {@link display} instead.
+     * @since 1.13.0
      */
-    display__?(): void;
+    getControlValue(key: string): unknown;
+
+    /**
+     * Override to provide setting definitions. Return an array of definitions
+     * and inline groups. Called on every {@link display} and once when the tab
+     * is added to the setting modal for search indexing.
+     *
+     * @returns The setting definition items.
+     * @official
+     * @since 1.13.0
+     */
+    getSettingDefinitions(): SettingDefinitionItem[];
 
     /**
      * Hides the contents of the setting tab.
@@ -108,5 +136,45 @@ declare module 'obsidian' {
      * @official
      */
     hide(): void;
+
+    /**
+     * Re-evaluate every `visible` and `disabled` predicate against the
+     * current state and apply the result to the rendered DOM. Call this
+     * from a `render` callback's `onChange` (or any other imperative path)
+     * after mutating state that other settings' predicates depend on.
+     *
+     * Cheap: toggles CSS state in place, no re-render. For changes that
+     * affect the structure of the definitions themselves (added or removed
+     * items), call {@link update} instead.
+     *
+     * @official
+     * @since 1.13.0
+     */
+    refreshDomState(): void;
+
+    /**
+     * Persist a new value for a control key. Called on user change of a
+     * `control`-type setting definition.
+     *
+     * The default implementation writes to `this.app.vault.setConfig`.
+     * Override to persist elsewhere; pair with {@link getControlValue}.
+     *
+     * @param key - The setting key to write.
+     * @param value - The new value to persist.
+     * @returns Void or a promise that resolves once the value is persisted.
+     * @official
+     * @since 1.13.0
+     */
+    setControlValue(key: string, value: unknown): Promise<void> | void;
+
+    /**
+     * Stores the result of {@link getSettingDefinitions} for rendering and
+     * search indexing. Called by `addSettingTab()` and by dynamic tabs when
+     * their data changes.
+     *
+     * @official
+     * @since 1.13.0
+     */
+    update(): void;
   }
 }

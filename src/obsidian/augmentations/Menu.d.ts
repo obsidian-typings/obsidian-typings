@@ -99,6 +99,7 @@ declare module 'obsidian' {
      * });
      * ```
      * @official
+     * @since 0.15.3
      */
     addItem(cb: (item: MenuItem) => unknown): this;
 
@@ -116,6 +117,7 @@ declare module 'obsidian' {
      *
      * @returns The menu instance.
      * @official
+     * @since 0.15.3
      */
     addSeparator(): this;
 
@@ -281,7 +283,8 @@ declare module 'obsidian' {
      *
      * @param el - Element to set as parent.
      * @returns The menu instance.
-     * @unofficial
+     * @official
+     * @since 0.16.0
      */
     setParentElement(el: HTMLElement): this;
 

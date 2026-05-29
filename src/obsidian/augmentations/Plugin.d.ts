@@ -49,6 +49,15 @@ declare module 'obsidian' {
     onConfigFileChange: Debouncer<[], Promise<void>>;
 
     /**
+     * Plugin settings. Assign loaded data here in `onload`. Declare a
+     * concrete type on your subclass to type it.
+     *
+     * @official
+     * @since 1.13.0
+     */
+    settings?: unknown;
+
+    /**
      * Internal handler invoked when the plugin's config file changes on disk.
      *
      * @returns A promise that resolves when the config file change is handled.

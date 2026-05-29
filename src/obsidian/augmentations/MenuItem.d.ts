@@ -139,6 +139,7 @@ declare module 'obsidian' {
      * menuItem.setChecked(true);
      * ```
      * @official
+     * @since 0.16.2
      */
     setChecked(checked: boolean | null): this;
 
@@ -152,6 +153,7 @@ declare module 'obsidian' {
      * menuItem.setDisabled(true);
      * ```
      * @official
+     * @since 0.15.0
      */
     setDisabled(disabled: boolean): this;
 
@@ -166,6 +168,7 @@ declare module 'obsidian' {
      * menuItem.setIcon('dice');
      * ```
      * @official
+     * @since 0.16.2
      */
     setIcon(icon: IconName | null): this;
 
@@ -195,6 +198,7 @@ declare module 'obsidian' {
      * menuItem.setSection('danger');
      * ```
      * @official
+     * @since 0.15.3
      */
     setSection(section: string): this;
 

@@ -22,5 +22,37 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes.
      */
     constructor3__(app: App, plugin: Plugin): this;
+
+    /**
+     * Reads from `this.plugin.settings`. Override to read from a different
+     * data source.
+     *
+     * @param key - The setting key to read.
+     * @returns The current value for the key.
+     * @official
+     * @since 1.13.0
+     */
+    getControlValue(key: string): unknown;
+
+    /**
+     * Return setting definitions for this tab.
+     *
+     * @returns The setting definition items.
+     * @official
+     * @since 1.13.0
+     */
+    getSettingDefinitions(): SettingDefinitionItem[];
+
+    /**
+     * Mutates and persists `this.plugin.settings`. Override to write to a
+     * different data source.
+     *
+     * @param key - The setting key to write.
+     * @param value - The new value to persist.
+     * @returns Void or a promise that resolves once the value is persisted.
+     * @official
+     * @since 1.13.0
+     */
+    setControlValue(key: string, value: unknown): Promise<void> | void;
   }
 }

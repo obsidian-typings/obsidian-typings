@@ -64,6 +64,15 @@ declare module 'obsidian' {
     removeCta(): this;
 
     /**
+     * Removes the destructive style from the button component.
+     *
+     * @returns The button component.
+     * @official
+     * @since 1.13.0
+     */
+    removeDestructive(): this;
+
+    /**
      * Sets the text for the button component.
      *
      * @param name - The name to set.
@@ -103,6 +112,17 @@ declare module 'obsidian' {
      * @since 0.9.7
      */
     setCta(): this;
+
+    /**
+     * Style the button as destructive (e.g. for actions that delete data or are
+     * otherwise hard to undo). Compose with {@link setCta} for a destructive
+     * primary action.
+     *
+     * @returns The button component.
+     * @official
+     * @since 1.13.0
+     */
+    setDestructive(): this;
 
     /**
      * Sets the disabled state of the button component.
@@ -152,6 +172,7 @@ declare module 'obsidian' {
      * @returns The button component.
      * @official
      * @since 0.11.0
+     * @deprecated Use {@link setDestructive} for a destructive button, or `setDestructive().setCta()` for a destructive primary action.
      */
     setWarning(): this;
   }

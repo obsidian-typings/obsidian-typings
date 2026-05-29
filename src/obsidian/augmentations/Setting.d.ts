@@ -34,6 +34,17 @@ declare module 'obsidian' {
     descEl: HTMLElement;
 
     /**
+     * Error message element shown below the input. Lives inside `controlEl`
+     * as a wrapped flex child; `controlEl`'s implicit min-content width keeps
+     * the input row from wrapping so only the error claims its own line.
+     * Lazily created by {@link setErrorMessage}.
+     *
+     * @official
+     * @since 1.13.0
+     */
+    errorEl: HTMLElement | null;
+
+    /**
      * The HTML element for the info.
      *
      * @official
@@ -312,6 +323,18 @@ declare module 'obsidian' {
      * @since 1.2.3
      */
     setDisabled(disabled: boolean): this;
+
+    /**
+     * Show a persistent validation error message below the setting. Pass an
+     * empty string or `null` to clear it. Adds the `is-invalid` class to the
+     * setting row when a message is present.
+     *
+     * @param message - The error message to show, or `null`/empty string to clear it.
+     * @returns The setting.
+     * @official
+     * @since 1.13.0
+     */
+    setErrorMessage(message: null | string): this;
 
     /**
      * Make the setting a heading.
