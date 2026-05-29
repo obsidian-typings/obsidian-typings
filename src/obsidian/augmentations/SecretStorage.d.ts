@@ -8,7 +8,7 @@ declare module 'obsidian' {
    *
    * @since 1.11.4
    */
-  interface SecretStorage {
+  interface SecretStorage extends Events {
     /**
      * Constructor.
      *
@@ -19,7 +19,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(app: App): this;
+    constructor2__(app: App): this;
 
     /**
      * Gets a secret from storage

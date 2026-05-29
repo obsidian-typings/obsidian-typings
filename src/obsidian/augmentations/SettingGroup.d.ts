@@ -47,9 +47,10 @@ declare module 'obsidian' {
     /**
      * The list element of the setting group.
      *
-     * @unofficial
+     * @public
+     * @since 1.11.0
      */
-    listEl: HTMLDivElement;
+    listEl: HTMLElement;
 
     /**
      * Add a CSS class to the setting group.
