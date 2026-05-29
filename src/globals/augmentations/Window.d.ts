@@ -35,8 +35,7 @@ declare global {
   /**
    * Augments the built-in {@link Window} interface.
    */
-  interface Window
-    extends EventTarget, AnimationFrameProvider, GlobalEventHandlers, WindowEventHandlers, WindowLocalStorage, WindowOrWorkerGlobalScope, WindowSessionStorage {
+  interface Window extends EventTarget, AnimationFrameProvider, GlobalEventHandlers, WindowEventHandlers, WindowLocalStorage, WindowOrWorkerGlobalScope, WindowSessionStorage {
     /**
      * The actively focused Document object. This is usually the same as `document` but
      * it will be different when using popout windows.
