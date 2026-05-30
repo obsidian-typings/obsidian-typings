@@ -1,3 +1,5 @@
+import type { getConfirmationButtonConstructor } from '../../../implementations/constructors/augmentations/settings/setting-components/getConfirmationButtonConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -7,6 +9,20 @@ declare module 'obsidian' {
    * @since 1.13.0
    */
   interface ConfirmationButton extends ButtonComponent {
+    /**
+     * Creates a new instance of {@link ConfirmationButton}.
+     *
+     * To get the constructor instance, use {@link getConfirmationButtonConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param containerEl - The container element the button is appended to.
+     * @param handleClose - Callback invoked after a click to close the host modal.
+     * @returns The new instance.
+     * @unofficial
+     * @since 1.13.0
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor3__(containerEl: HTMLElement, handleClose: () => void): this;
+
     /**
      * Sets the click event callback for the confirmation button. The modal
      * is auto-closed after the click unless the handler returns a truthy

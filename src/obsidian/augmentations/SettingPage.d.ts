@@ -1,3 +1,5 @@
+import type { getSettingPageConstructor } from '../implementations/constructors/augmentations/getSettingPageConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -39,6 +41,18 @@ declare module 'obsidian' {
      * @since 1.13.0
      */
     titlebarEl: HTMLElement;
+
+    /**
+     * Creates a new instance of {@link SettingPage}.
+     *
+     * To get the constructor instance, use {@link getSettingPageConstructor} from `obsidian-typings/implementations`.
+     *
+     * @returns A created instance.
+     * @official
+     * @since 1.13.0
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor__(): this;
 
     /**
      * Hides the contents of the page. Any registered components should be

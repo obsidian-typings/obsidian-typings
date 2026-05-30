@@ -1,3 +1,5 @@
+import type { getConfirmationModalConstructor } from '../implementations/constructors/augmentations/getConfirmationModalConstructor.d.ts';
+
 export {};
 
 declare module 'obsidian' {
@@ -56,5 +58,18 @@ declare module 'obsidian' {
      * @since 1.13.0
      */
     addClass(cls: string): this;
+
+    /**
+     * Creates a new instance of {@link ConfirmationModal}.
+     *
+     * To get the constructor instance, use {@link getConfirmationModalConstructor} from `obsidian-typings/implementations`.
+     *
+     * @param app - The Obsidian app instance.
+     * @returns The new instance.
+     * @official
+     * @since 1.13.0
+     * @deprecated - Added only for typing purposes.
+     */
+    constructor__(app: App): this;
   }
 }
