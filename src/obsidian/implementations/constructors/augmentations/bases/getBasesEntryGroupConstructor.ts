@@ -3,9 +3,9 @@ import { BasesEntryGroup } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the BasesEntryGroup constructor.
+ * Get the {@link obsidian#BasesEntryGroup} constructor.
  *
- * @returns The BasesEntryGroup constructor.
+ * @returns The {@link obsidian#BasesEntryGroup} constructor.
  *
  * @public
  * @unofficial

@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { CustomCSS } from '../../../internals/custom-css/CustomCSS.d.ts';
 
 /**
- * Get the CustomCSS constructor.
+ * Get the {@link CustomCSS} constructor.
  *
  * @param app - The app instance.
- * @returns The CustomCSS constructor.
+ * @returns The {@link CustomCSS} constructor.
  *
  * @public
  * @unofficial

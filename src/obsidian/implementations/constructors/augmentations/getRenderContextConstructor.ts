@@ -3,9 +3,9 @@ import { RenderContext } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the RenderContext constructor.
+ * Get the {@link obsidian#RenderContext} constructor.
  *
- * @returns The RenderContext constructor.
+ * @returns The {@link obsidian#RenderContext} constructor.
  *
  * @public
  * @unofficial

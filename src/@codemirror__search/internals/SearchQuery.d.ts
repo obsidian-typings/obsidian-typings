@@ -32,7 +32,11 @@ export declare class SearchQuery {
   /** Whether the search matches whole words only. */
   readonly wholeWord: boolean;
 
-  /** */
+  /**
+   * Create new instance of {@link SearchQuery}
+   *
+   * @param config - Configuration
+   */
   constructor(config: SearchQueryConfig);
 
   /**

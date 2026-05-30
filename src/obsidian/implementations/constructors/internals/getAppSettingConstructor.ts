@@ -4,10 +4,10 @@ import type { AppSetting } from '../../../internals/AppSetting.d.ts';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the AppSetting constructor.
+ * Get the {@link AppSetting} constructor.
  *
  * @param app - The app instance.
- * @returns The AppSetting constructor.
+ * @returns The {@link AppSetting} constructor.
  *
  * @public
  * @unofficial

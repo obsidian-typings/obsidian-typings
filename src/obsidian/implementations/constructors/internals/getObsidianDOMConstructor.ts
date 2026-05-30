@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { ObsidianDOM } from '../../../internals/ObsidianDOM.d.ts';
 
 /**
- * Get the ObsidianDOM constructor.
+ * Get the {@link ObsidianDOM} constructor.
  *
  * @param app - The app instance.
- * @returns The ObsidianDOM constructor.
+ * @returns The {@link ObsidianDOM} constructor.
  *
  * @public
  * @unofficial

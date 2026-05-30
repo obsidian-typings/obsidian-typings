@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { FoldManager } from '../../../internals/FoldManager.d.ts';
 
 /**
- * Get the FoldManager constructor.
+ * Get the {@link FoldManager} constructor.
  *
  * @param app - The app instance.
- * @returns The FoldManager constructor.
+ * @returns The {@link FoldManager} constructor.
  *
  * @public
  * @unofficial

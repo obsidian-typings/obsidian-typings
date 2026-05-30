@@ -3,9 +3,9 @@ import { WorkspaceRibbon } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the WorkspaceRibbon constructor.
+ * Get the {@link obsidian#WorkspaceRibbon} constructor.
  *
- * @returns The WorkspaceRibbon constructor.
+ * @returns The {@link obsidian#WorkspaceRibbon} constructor.
  *
  * @public
  * @unofficial

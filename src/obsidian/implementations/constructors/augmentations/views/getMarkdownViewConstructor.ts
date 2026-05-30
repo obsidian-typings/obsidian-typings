@@ -3,9 +3,9 @@ import { MarkdownView } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the MarkdownView constructor.
+ * Get the {@link obsidian#MarkdownView} constructor.
  *
- * @returns The MarkdownView constructor.
+ * @returns The {@link obsidian#MarkdownView} constructor.
  *
  * @public
  * @unofficial

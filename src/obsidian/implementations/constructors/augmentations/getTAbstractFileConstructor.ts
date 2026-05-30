@@ -3,9 +3,9 @@ import { TAbstractFile } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the TAbstractFile constructor.
+ * Get the {@link obsidian#TAbstractFile} constructor.
  *
- * @returns The TAbstractFile constructor.
+ * @returns The {@link obsidian#TAbstractFile} constructor.
  *
  * @public
  * @unofficial

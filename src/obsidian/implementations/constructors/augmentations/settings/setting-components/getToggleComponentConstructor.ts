@@ -3,9 +3,9 @@ import { ToggleComponent } from 'obsidian';
 import type { ExtractConstructor } from '../../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the ToggleComponent constructor.
+ * Get the {@link obsidian#ToggleComponent} constructor.
  *
- * @returns The ToggleComponent constructor.
+ * @returns The {@link obsidian#ToggleComponent} constructor.
  *
  * @public
  * @unofficial

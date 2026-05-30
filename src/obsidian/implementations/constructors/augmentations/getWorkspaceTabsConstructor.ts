@@ -3,9 +3,9 @@ import { WorkspaceTabs } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the WorkspaceTabs constructor.
+ * Get the {@link obsidian#WorkspaceTabs} constructor.
  *
- * @returns The WorkspaceTabs constructor.
+ * @returns The {@link obsidian#WorkspaceTabs} constructor.
  *
  * @public
  * @unofficial

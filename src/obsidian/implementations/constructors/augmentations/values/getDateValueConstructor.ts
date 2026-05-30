@@ -3,9 +3,9 @@ import { DateValue } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the DateValue constructor.
+ * Get the {@link obsidian#DateValue} constructor.
  *
- * @returns The DateValue constructor.
+ * @returns The {@link obsidian#DateValue} constructor.
  *
  * @public
  * @unofficial

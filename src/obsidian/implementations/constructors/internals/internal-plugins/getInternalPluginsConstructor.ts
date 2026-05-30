@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../../internals/constructors/Extr
 import type { InternalPlugins } from '../../../../internals/internal-plugins/InternalPlugins.d.ts';
 
 /**
- * Get the InternalPlugins constructor.
+ * Get the {@link InternalPlugins} constructor.
  *
  * @param app - The app instance.
- * @returns The InternalPlugins constructor.
+ * @returns The {@link InternalPlugins} constructor.
  *
  * @public
  * @unofficial

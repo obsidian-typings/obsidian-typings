@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { Plugins } from '../../../internals/plugins/Plugins.d.ts';
 
 /**
- * Get the Plugins constructor.
+ * Get the {@link Plugins} constructor.
  *
  * @param app - The app instance.
- * @returns The Plugins constructor.
+ * @returns The {@link Plugins} constructor.
  *
  * @public
  * @unofficial

@@ -3,9 +3,9 @@ import { ConfirmationButton } from 'obsidian';
 import type { ExtractConstructor } from '../../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the ConfirmationButton constructor.
+ * Get the {@link obsidian#ConfirmationButton} constructor.
  *
- * @returns The ConfirmationButton constructor.
+ * @returns The {@link obsidian#ConfirmationButton} constructor.
  *
  * @public
  * @unofficial

@@ -3,9 +3,9 @@ import { TFile } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the TFile constructor.
+ * Get the {@link obsidian#TFile} constructor.
  *
- * @returns The TFile constructor.
+ * @returns The {@link obsidian#TFile} constructor.
  *
  * @public
  * @unofficial

@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { WorkspaceLeafHistory } from '../../../internals/workspace-leaf-history/WorkspaceLeafHistory.d.ts';
 
 /**
- * Get the WorkspaceLeafHistory constructor.
+ * Get the {@link WorkspaceLeafHistory} constructor.
  *
  * @param app - The app instance.
- * @returns The WorkspaceLeafHistory constructor.
+ * @returns The {@link WorkspaceLeafHistory} constructor.
  *
  * @public
  * @unofficial

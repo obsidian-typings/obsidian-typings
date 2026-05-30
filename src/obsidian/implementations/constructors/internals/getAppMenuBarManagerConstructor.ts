@@ -4,10 +4,10 @@ import type { AppMenuBarManager } from '../../../internals/AppMenuBarManager.d.t
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the AppMenuBarManager constructor.
+ * Get the {@link AppMenuBarManager} constructor.
  *
  * @param app - The app instance.
- * @returns The AppMenuBarManager constructor.
+ * @returns The {@link AppMenuBarManager} constructor.
  *
  * @public
  * @unofficial

@@ -3,9 +3,9 @@ import { IconValue } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the IconValue constructor.
+ * Get the {@link obsidian#IconValue} constructor.
  *
- * @returns The IconValue constructor.
+ * @returns The {@link obsidian#IconValue} constructor.
  *
  * @public
  * @unofficial

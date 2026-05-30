@@ -3,9 +3,9 @@ import { ConfirmationModal } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the ConfirmationModal constructor.
+ * Get the {@link obsidian#ConfirmationModal} constructor.
  *
- * @returns The ConfirmationModal constructor.
+ * @returns The {@link obsidian#ConfirmationModal} constructor.
  *
  * @public
  * @unofficial

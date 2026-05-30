@@ -3,9 +3,9 @@ import { MomentFormatComponent } from 'obsidian';
 import type { ExtractConstructor } from '../../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the MomentFormatComponent constructor.
+ * Get the {@link obsidian#MomentFormatComponent} constructor.
  *
- * @returns The MomentFormatComponent constructor.
+ * @returns The {@link obsidian#MomentFormatComponent} constructor.
  *
  * @public
  * @unofficial

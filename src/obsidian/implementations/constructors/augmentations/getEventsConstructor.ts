@@ -3,9 +3,9 @@ import { Events } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the Events constructor.
+ * Get the {@link obsidian#Events} constructor.
  *
- * @returns The Events constructor.
+ * @returns The {@link obsidian#Events} constructor.
  *
  * @public
  * @unofficial

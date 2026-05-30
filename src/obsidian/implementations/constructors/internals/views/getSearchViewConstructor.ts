@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the SearchView constructor.
+ * Get the {@link SearchView} constructor.
  *
  * @param app - The app.
- * @returns The SearchView constructor.
+ * @returns The {@link SearchView} constructor.
  *
  * @public
  * @unofficial

@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the PdfView constructor.
+ * Get the {@link PdfView} constructor.
  *
  * @param app - The app.
- * @returns The PdfView constructor.
+ * @returns The {@link PdfView} constructor.
  *
  * @public
  * @unofficial

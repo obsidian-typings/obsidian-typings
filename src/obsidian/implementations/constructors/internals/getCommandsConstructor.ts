@@ -4,10 +4,10 @@ import type { Commands } from '../../../internals/commands/Commands.d.ts';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the Commands constructor.
+ * Get the {@link Commands} constructor.
  *
  * @param app - The app instance.
- * @returns The Commands constructor.
+ * @returns The {@link Commands} constructor.
  *
  * @public
  * @unofficial

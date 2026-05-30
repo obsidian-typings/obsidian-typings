@@ -3,9 +3,9 @@ import { WorkspaceWindow } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the WorkspaceWindow constructor.
+ * Get the {@link obsidian#WorkspaceWindow} constructor.
  *
- * @returns The WorkspaceWindow constructor.
+ * @returns The {@link obsidian#WorkspaceWindow} constructor.
  *
  * @public
  * @unofficial

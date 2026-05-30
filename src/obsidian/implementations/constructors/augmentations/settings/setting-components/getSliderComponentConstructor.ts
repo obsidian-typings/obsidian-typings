@@ -3,9 +3,9 @@ import { SliderComponent } from 'obsidian';
 import type { ExtractConstructor } from '../../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the SliderComponent constructor.
+ * Get the {@link obsidian#SliderComponent} constructor.
  *
- * @returns The SliderComponent constructor.
+ * @returns The {@link obsidian#SliderComponent} constructor.
  *
  * @public
  * @unofficial

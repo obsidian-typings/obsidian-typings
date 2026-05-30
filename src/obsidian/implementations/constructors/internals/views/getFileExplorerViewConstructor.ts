@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the FileExplorerView constructor.
+ * Get the {@link FileExplorerView} constructor.
  *
  * @param app - The app.
- * @returns The FileExplorerView constructor.
+ * @returns The {@link FileExplorerView} constructor.
  *
  * @public
  * @unofficial

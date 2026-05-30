@@ -3,9 +3,9 @@ import { MenuSeparator } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the MenuSeparator constructor.
+ * Get the {@link obsidian#MenuSeparator} constructor.
  *
- * @returns The MenuSeparator constructor.
+ * @returns The {@link obsidian#MenuSeparator} constructor.
  *
  * @public
  * @unofficial

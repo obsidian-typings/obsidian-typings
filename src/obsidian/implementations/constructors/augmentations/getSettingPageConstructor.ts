@@ -3,9 +3,9 @@ import { SettingPage } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the SettingPage constructor.
+ * Get the {@link obsidian#SettingPage} constructor.
  *
- * @returns The SettingPage constructor.
+ * @returns The {@link obsidian#SettingPage} constructor.
  *
  * @public
  * @unofficial

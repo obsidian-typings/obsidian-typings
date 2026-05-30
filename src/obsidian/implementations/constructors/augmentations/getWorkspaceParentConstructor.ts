@@ -3,9 +3,9 @@ import { WorkspaceParent } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the WorkspaceParent constructor.
+ * Get the {@link obsidian#WorkspaceParent} constructor.
  *
- * @returns The WorkspaceParent constructor.
+ * @returns The {@link obsidian#WorkspaceParent} constructor.
  *
  * @public
  * @unofficial

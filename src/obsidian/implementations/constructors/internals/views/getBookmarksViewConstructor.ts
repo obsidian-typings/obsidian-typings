@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the BookmarksView constructor.
+ * Get the {@link BookmarksView} constructor.
  *
  * @param app - The app.
- * @returns The BookmarksView constructor.
+ * @returns The {@link BookmarksView} constructor.
  *
  * @public
  * @unofficial

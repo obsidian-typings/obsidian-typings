@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the SyncView constructor.
+ * Get the {@link SyncView} constructor.
  *
  * @param app - The app.
- * @returns The SyncView constructor.
+ * @returns The {@link SyncView} constructor.
  *
  * @public
  * @unofficial

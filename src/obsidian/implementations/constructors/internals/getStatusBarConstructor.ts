@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { StatusBar } from '../../../internals/StatusBar.d.ts';
 
 /**
- * Get the StatusBar constructor.
+ * Get the {@link StatusBar} constructor.
  *
  * @param app - The app instance.
- * @returns The StatusBar constructor.
+ * @returns The {@link StatusBar} constructor.
  *
  * @public
  * @unofficial

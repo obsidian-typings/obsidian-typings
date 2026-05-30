@@ -18,7 +18,11 @@ export declare class TurndownService {
   /** Collection of conversion rules. */
   rules: TurndownServiceRules;
 
-  /** */
+  /**
+   * Create new instance of {@link TurndownService}.
+   *
+   * @param options - Options.
+   */
   constructor(options?: TurndownServiceOptions);
 
   /**

@@ -17,7 +17,11 @@ export declare class ElectronBrowserWindow {
   /** The web contents associated with this window. */
   readonly webContents: ElectronWebContents;
 
-  /** */
+  /**
+   * Create new instance of {@link ElectronBrowserWindow}.
+   *
+   * @param options - Options.
+   */
   constructor(options?: BrowserWindowConstructorOptions);
 
   /** Removes focus from the window. */

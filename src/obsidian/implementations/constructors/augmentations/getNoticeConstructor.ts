@@ -3,9 +3,9 @@ import { Notice } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the Notice constructor.
+ * Get the {@link obsidian#Notice} constructor.
  *
- * @returns The Notice constructor.
+ * @returns The {@link obsidian#Notice} constructor.
  *
  * @public
  * @unofficial

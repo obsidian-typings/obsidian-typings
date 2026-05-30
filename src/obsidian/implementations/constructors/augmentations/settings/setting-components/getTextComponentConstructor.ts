@@ -3,9 +3,9 @@ import { TextComponent } from 'obsidian';
 import type { ExtractConstructor } from '../../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the TextComponent constructor.
+ * Get the {@link obsidian#TextComponent} constructor.
  *
- * @returns The TextComponent constructor.
+ * @returns The {@link obsidian#TextComponent} constructor.
  *
  * @public
  * @unofficial

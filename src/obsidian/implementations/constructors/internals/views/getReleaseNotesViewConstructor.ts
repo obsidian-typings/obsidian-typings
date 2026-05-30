@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the ReleaseNotesView constructor.
+ * Get the {@link ReleaseNotesView} constructor.
  *
  * @param app - The app.
- * @returns The ReleaseNotesView constructor.
+ * @returns The {@link ReleaseNotesView} constructor.
  *
  * @public
  * @unofficial

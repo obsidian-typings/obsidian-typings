@@ -9,7 +9,12 @@ import type { StyleModuleSpec } from './StyleModuleSpec.d.ts';
  * @unofficial
  */
 export declare class StyleModule {
-  /** */
+  /**
+   * Create new instance of {@link StyleModule}.
+   *
+   * @param spec - Specification.
+   * @param options - Options.
+   */
   constructor(spec: StyleModuleSpec, options?: StyleModuleOptions);
 
   /** Get the generated CSS rules as a string. */

@@ -3,9 +3,9 @@ import { Setting } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the Setting constructor.
+ * Get the {@link obsidian#Setting} constructor.
  *
- * @returns The Setting constructor.
+ * @returns The {@link obsidian#Setting} constructor.
  *
  * @public
  * @unofficial

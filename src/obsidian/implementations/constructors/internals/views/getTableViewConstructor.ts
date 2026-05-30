@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the TableView constructor.
+ * Get the {@link TableView} constructor.
  *
  * @param app - The app.
- * @returns The TableView constructor.
+ * @returns The {@link TableView} constructor.
  *
  * @public
  * @unofficial

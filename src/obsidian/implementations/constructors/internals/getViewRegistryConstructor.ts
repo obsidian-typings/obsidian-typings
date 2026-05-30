@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { ViewRegistry } from '../../../internals/view-registry/ViewRegistry.d.ts';
 
 /**
- * Get the ViewRegistry constructor.
+ * Get the {@link ViewRegistry} constructor.
  *
  * @param app - The app instance.
- * @returns The ViewRegistry constructor.
+ * @returns The {@link ViewRegistry} constructor.
  *
  * @public
  * @unofficial

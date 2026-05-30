@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { HotkeyManager } from '../../../internals/hotkey-manager/HotkeyManager.d.ts';
 
 /**
- * Get the HotkeyManager constructor.
+ * Get the {@link HotkeyManager} constructor.
  *
  * @param app - The app instance.
- * @returns The HotkeyManager constructor.
+ * @returns The {@link HotkeyManager} constructor.
  *
  * @public
  * @unofficial

@@ -3,9 +3,9 @@ import { Modal } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the Modal constructor.
+ * Get the {@link obsidian#Modal} constructor.
  *
- * @returns The Modal constructor.
+ * @returns The {@link obsidian#Modal} constructor.
  *
  * @public
  * @unofficial

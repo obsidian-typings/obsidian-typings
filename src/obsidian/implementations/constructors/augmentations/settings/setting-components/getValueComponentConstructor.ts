@@ -3,9 +3,9 @@ import { ValueComponent } from 'obsidian';
 import type { ExtractConstructor } from '../../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the ValueComponent constructor.
+ * Get the {@link obsidian#ValueComponent} constructor.
  *
- * @returns The ValueComponent constructor.
+ * @returns The {@link obsidian#ValueComponent} constructor.
  *
  * @public
  * @unofficial

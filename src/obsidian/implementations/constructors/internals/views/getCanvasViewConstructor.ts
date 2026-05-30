@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the CanvasView constructor.
+ * Get the {@link CanvasView} constructor.
  *
  * @param app - The app.
- * @returns The CanvasView constructor.
+ * @returns The {@link CanvasView} constructor.
  *
  * @public
  * @unofficial
