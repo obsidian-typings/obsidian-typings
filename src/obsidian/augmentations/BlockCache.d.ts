@@ -12,7 +12,7 @@ declare module 'obsidian' {
    */
   interface BlockCache extends CacheItem {
     /**
-     * Reference to App.
+     * Reference to the {@link obsidian#App}.
      *
      * @unofficial
      */

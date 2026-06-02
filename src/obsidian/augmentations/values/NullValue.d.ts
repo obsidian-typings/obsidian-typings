@@ -4,8 +4,8 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * {@link obsidian#Value} which represents `null`.
-   * NullValue is a singleton and {@link obsidian#NullValue.value} should be used instead of calling the constructor.
+   * Value which represents `null`.
+   * {@link obsidian#NullValue} is a singleton and {@link obsidian#NullValue.value} should be used instead of calling the constructor.
    *
    * @since 1.10.0
    */
@@ -22,18 +22,18 @@ declare module 'obsidian' {
     constructor2__(): this;
 
     /**
-     * Returns a boolean indicating whether this NullValue is truthy.
+     * Returns a boolean indicating whether this {@link obsidian#NullValue} is truthy.
      *
-     * @returns A boolean indicating whether this NullValue is truthy.
+     * @returns A boolean indicating whether this {@link obsidian#NullValue} is truthy.
      * @official
      * @since 1.10.0
      */
     isTruthy(): boolean;
 
     /**
-     * Get the string representation of this NullValue.
+     * Get the string representation of this {@link obsidian#NullValue}.
      *
-     * @returns The string representation of this NullValue.
+     * @returns The string representation of this {@link obsidian#NullValue}.
      * @official
      * @since 1.10.0
      */

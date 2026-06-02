@@ -4,7 +4,7 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * The BasesQueryResult contains all of the available information from executing the
+   * The {@link obsidian#BasesQueryResult} contains all of the available information from executing the
    * bases query, applying filters, and evaluating formulas. The `data` or `groupedData`
    * should be displayed by your view.
    *

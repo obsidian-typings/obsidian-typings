@@ -16,7 +16,7 @@ declare module 'obsidian' {
      * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<PrimitiveValue\>}.
      *
      * @param value - The value to wrap.
-     * @returns The new PrimitiveValue.
+     * @returns The new {@link obsidian#PrimitiveValue}.
      * @official
      * @since 1.10.0
      * @deprecated - Added only for typing purposes.
@@ -24,18 +24,18 @@ declare module 'obsidian' {
     constructor3__(value: T): this;
 
     /**
-     * Returns a boolean indicating whether this PrimitiveValue is truthy.
+     * Returns a boolean indicating whether this {@link obsidian#PrimitiveValue} is truthy.
      *
-     * @returns A boolean indicating whether this PrimitiveValue is truthy.
+     * @returns A boolean indicating whether this {@link obsidian#PrimitiveValue} is truthy.
      * @official
      * @since 1.10.0
      */
     isTruthy(): boolean;
 
     /**
-     * Get the string representation of this PrimitiveValue.
+     * Get the string representation of this {@link obsidian#PrimitiveValue}.
      *
-     * @returns The string representation of this PrimitiveValue.
+     * @returns The string representation of this {@link obsidian#PrimitiveValue}.
      * @official
      * @since 1.10.0
      */

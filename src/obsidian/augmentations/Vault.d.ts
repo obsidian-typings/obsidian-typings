@@ -75,7 +75,7 @@ declare module 'obsidian' {
     requestSaveConfig: Debouncer<[], Promise<void>>;
 
     /**
-     * The same TFolder object as `.fileMap["/"]`
+     * The same {@link obsidian#TFolder} object as `.fileMap["/"]`
      *
      * @unofficial
      */
@@ -165,7 +165,7 @@ declare module 'obsidian' {
      * Create a copy of a file or folder.
      *
      * @param file - The file or folder.
-     * @param newPath - Vault absolute path for the new copy.
+     * @param newPath - {@link obsidian#Vault} absolute path for the new copy.
      * @returns The promise that resolves to the new copy.
      * @official
      * @since 1.8.7
@@ -175,7 +175,7 @@ declare module 'obsidian' {
     /**
      * Create a new plaintext file inside the vault.
      *
-     * @param path - Vault absolute path for the new file, with extension.
+     * @param path - {@link obsidian#Vault} absolute path for the new file, with extension.
      * @param data - Text content for the new file.
      * @param options - Write options.
      * @returns The promise that resolves to the new file.
@@ -191,7 +191,7 @@ declare module 'obsidian' {
     /**
      * Create a new binary file inside the vault.
      *
-     * @param path - Vault absolute path for the new file, with extension.
+     * @param path - {@link obsidian#Vault} absolute path for the new file, with extension.
      * @param data - Content for the new file.
      * @param options - Write options.
      * @returns The promise that resolves to the new file.
@@ -208,7 +208,7 @@ declare module 'obsidian' {
     /**
      * Create a new folder inside the vault.
      *
-     * @param path - Vault absolute path for the new folder.
+     * @param path - {@link obsidian#Vault} absolute path for the new folder.
      * @throws Error if folder already exists.
      * @returns The promise that resolves to the new folder.
      * @example
@@ -670,7 +670,7 @@ declare module 'obsidian' {
      * use {@link FileManager.renameFile} instead.
      *
      * @param file - The file to rename/move.
-     * @param newPath - Vault absolute path to move file to.
+     * @param newPath - {@link obsidian#Vault} absolute path to move file to.
      * @returns The promise that resolves when the file is renamed.
      * @official
      * @since 0.9.11

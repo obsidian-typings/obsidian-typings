@@ -27,12 +27,12 @@ declare module 'obsidian' {
 
   namespace LinkValue {
     /**
-     * Create a new LinkValue from wikilink syntax.
+     * Create a new {@link obsidian#LinkValue} from wikilink syntax.
      *
      * @param app - The app instance.
      * @param input - The wikilink syntax.
      * @param sourcePath - The source path.
-     * @returns The new LinkValue.
+     * @returns The new {@link obsidian#LinkValue}.
      *
      * @example
      * ```typescript

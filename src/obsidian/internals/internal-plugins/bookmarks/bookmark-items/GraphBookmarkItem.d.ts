@@ -2,7 +2,7 @@ import type { GraphPluginInstanceOptions } from '../../graph/GraphPluginInstance
 import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /**
- * Bookmark item representing a saved graph view configuration.
+ * {@link Bookmark} item representing a saved graph view configuration.
  *
  * @public
  * @unofficial

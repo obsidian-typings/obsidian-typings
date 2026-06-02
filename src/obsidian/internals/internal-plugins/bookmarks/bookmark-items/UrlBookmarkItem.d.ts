@@ -1,7 +1,7 @@
 import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /**
- * Bookmark item representing a bookmarked URL.
+ * {@link Bookmark} item representing a bookmarked URL.
  *
  * @public
  * @unofficial

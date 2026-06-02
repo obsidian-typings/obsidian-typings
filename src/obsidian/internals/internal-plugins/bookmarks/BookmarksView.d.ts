@@ -8,7 +8,7 @@ import type { ViewType } from '../../../implementations/constants/ViewType.d.ts'
 import type { BookmarksPluginInstance } from './BookmarksPluginInstance.d.ts';
 
 /**
- * View that displays the bookmarks sidebar, showing all bookmarked items in a tree.
+ * {@link obsidian#View} that displays the bookmarks sidebar, showing all bookmarked items in a tree.
  *
  * @public
  * @unofficial
@@ -30,14 +30,14 @@ export interface BookmarksView extends ItemView {
   _getActiveBookmarks(): unknown[];
 
   /**
-   * Attaches the handleDrag of DragManager.
+   * Attaches the handleDrag of {@link DragManager}.
    *
    * @param e - The element to attach the drag handler to.
    */
   attachDragHandler(e: unknown): void;
 
   /**
-   * Attaches the handleDrop of DragManager to containerEl.
+   * Attaches the handleDrop of {@link DragManager} to containerEl.
    */
   attachDropHandler(): void;
 

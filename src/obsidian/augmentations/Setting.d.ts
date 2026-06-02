@@ -34,8 +34,8 @@ declare module 'obsidian' {
     descEl: HTMLElement;
 
     /**
-     * Error message element shown below the input. Lives inside `controlEl`
-     * as a wrapped flex child; `controlEl`'s implicit min-content width keeps
+     * Error message element shown below the input. Lives inside {@link controlEl}
+     * as a wrapped flex child; {@link controlEl}'s implicit min-content width keeps
      * the input row from wrapping so only the error claims its own line.
      * Lazily created by {@link setErrorMessage}.
      *

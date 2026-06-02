@@ -45,7 +45,7 @@ declare module 'obsidian' {
     parentMenu: Menu | null;
 
     /**
-     * Scope in which the menu is active.
+     * {@link obsidian#Scope} in which the menu is active.
      *
      * @unofficial
      */
@@ -250,7 +250,7 @@ declare module 'obsidian' {
     /**
      * Registers dom events and scope for the menu.
      *
-     * @param item - Menu item.
+     * @param item - {@link obsidian#Menu} item.
      * @unofficial
      */
     openSubmenu(item: MenuItem): void;
@@ -292,7 +292,7 @@ declare module 'obsidian' {
      * Add a section to the submenu config.
      *
      * @param section - Section to add.
-     * @param submenu - Submenu to add.
+     * @param submenu - {@link Submenu} to add.
      * @returns The menu instance.
      * @unofficial
      */

@@ -279,7 +279,7 @@ export interface CanvasViewCanvas {
   undoBtnEl: HTMLDivElement;
 
   /**
-   * Reference to the parent CanvasView.
+   * Reference to the parent {@link CanvasView}.
    */
   view: CanvasView;
 

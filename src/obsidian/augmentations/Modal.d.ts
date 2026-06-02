@@ -5,7 +5,7 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * Modal dialog component.
+   * {@link obsidian#Modal} dialog component.
    */
   interface Modal extends CloseableComponent {
     /**

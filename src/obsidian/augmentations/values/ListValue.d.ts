@@ -10,10 +10,10 @@ declare module 'obsidian' {
    */
   interface ListValue extends NotNullValue {
     /**
-     * Get a new ListValue containing the elements from this ListValue and the provided ListValue.
+     * Get a new {@link obsidian#ListValue} containing the elements from this {@link obsidian#ListValue} and the provided {@link obsidian#ListValue}.
      *
-     * @param other - The ListValue to concatenate with.
-     * @returns A new ListValue containing the elements from this ListValue and the provided ListValue.
+     * @param other - The {@link obsidian#ListValue} to concatenate with.
+     * @returns A new {@link obsidian#ListValue} containing the elements from this {@link obsidian#ListValue} and the provided {@link obsidian#ListValue}.
      * @official
      * @since 1.10.0
      */
@@ -25,7 +25,7 @@ declare module 'obsidian' {
      * To get the constructor instance, use {@link getListValueConstructor} from `obsidian-typings/implementations`.
      *
      * @param value - Contents of the list.
-     * @returns The new ListValue.
+     * @returns The new {@link obsidian#ListValue}.
      * @official
      * @since 1.10.0
      * @deprecated - Added only for typing purposes.
@@ -53,9 +53,9 @@ declare module 'obsidian' {
     includes(value: Value): boolean;
 
     /**
-     * Returns a boolean indicating whether this ListValue is truthy.
+     * Returns a boolean indicating whether this {@link obsidian#ListValue} is truthy.
      *
-     * @returns A boolean indicating whether this ListValue is truthy.
+     * @returns A boolean indicating whether this {@link obsidian#ListValue} is truthy.
      * @official
      * @since 1.10.0
      */
@@ -71,9 +71,9 @@ declare module 'obsidian' {
     length(): number;
 
     /**
-     * Get the string representation of this ListValue.
+     * Get the string representation of this {@link obsidian#ListValue}.
      *
-     * @returns The string representation of this ListValue.
+     * @returns The string representation of this {@link obsidian#ListValue}.
      * @official
      * @since 1.10.0
      */

@@ -2,7 +2,7 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * BasesOptions and the associated sub-types are configuration-driven settings controls
+   * {@link obsidian#BasesOptions} and the associated sub-types are configuration-driven settings controls
    * which can be provided by a {@link BasesViewRegistration} to expose configuration options
    * to users in the view config menu of the Bases toolbar.
    *

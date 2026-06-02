@@ -117,7 +117,7 @@ declare module 'obsidian' {
     /**
      * Complex callback, overrides the simple callback.
      * Used to 'check' whether your command can be performed in the current circumstances.
-     * For example, if your command requires the active focused pane to be a MarkdownView, then
+     * For example, if your command requires the active focused pane to be a {@link obsidian#MarkdownView}, then
      * you should only return `true` if the condition is satisfied. Returning `false` or `undefined` causes
      * the command to be hidden from the command palette.
      *

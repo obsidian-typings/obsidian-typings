@@ -1,7 +1,7 @@
 import type { Submenu } from './Submenu.d.ts';
 
 /**
- * Menu submenu configuration record.
+ * {@link obsidian#Menu} submenu configuration record.
  *
  * @public
  * @unofficial

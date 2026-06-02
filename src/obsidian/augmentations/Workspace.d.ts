@@ -49,8 +49,8 @@ declare module 'obsidian' {
     /**
      * Indicates the currently focused leaf, if one exists.
      *
-     * Please avoid using `activeLeaf` directly, especially without checking whether
-     * `activeLeaf` is `null`.
+     * Please avoid using {@link activeLeaf} directly, especially without checking whether
+     * {@link activeLeaf} is `null`.
      *
      * @deprecated The use of this field is discouraged.
      * The recommended alternatives are:
@@ -69,7 +69,7 @@ declare module 'obsidian' {
     activeTabGroup: WorkspaceTabs;
 
     /**
-     * Reference to App.
+     * Reference to the {@link obsidian#App}.
      *
      * @unofficial
      */
@@ -598,7 +598,7 @@ declare module 'obsidian' {
     /**
      * Get the most recently active leaf in a given workspace root. Useful for interacting with the leaf in the root split while a sidebar leaf might be active.
      *
-     * @param root - The root to get the most recently active leaf from. If a root is not provided, the `rootSplit` and leaves within pop-outs will be searched.
+     * @param root - The root to get the most recently active leaf from. If a root is not provided, the {@link rootSplit} and leaves within pop-outs will be searched.
      * @returns The most recently active leaf.
      * @official
      * @since 0.15.4
@@ -627,7 +627,7 @@ declare module 'obsidian' {
     /**
      * Get leaf in the side ribbon/dock and split if necessary.
      *
-     * @param sideRibbon Side ribbon to get leaf from.
+     * @param sideRibbon {@link obsidian#Side} ribbon to get leaf from.
      * @param split Whether to split the leaf if it does not exist.
      * @returns The side leaf.
      * @unofficial
@@ -1379,7 +1379,7 @@ declare module 'obsidian' {
      * Register a CodeMirror editor extension.
      *
      * @param extension - The extension to register.
-     * @remark Prefer registering the extension via the Plugin class.
+     * @remark Prefer registering the extension via the {@link obsidian#Plugin} class.
      * @unofficial
      */
     registerEditorExtension(extension: Extension): void;

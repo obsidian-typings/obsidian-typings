@@ -1,5 +1,5 @@
 /**
- * Editor language support.
+ * {@link obsidian#Editor} language support.
  *
  * @public
  * @unofficial

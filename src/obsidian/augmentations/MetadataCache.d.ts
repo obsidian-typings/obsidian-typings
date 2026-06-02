@@ -22,7 +22,7 @@ declare module 'obsidian' {
    */
   interface MetadataCache extends Events {
     /**
-     * Reference to App.
+     * Reference to the {@link obsidian#App}.
      *
      * @unofficial
      */
@@ -157,7 +157,7 @@ declare module 'obsidian' {
     userIgnoreFiltersString: string;
 
     /**
-     * Reference to Vault.
+     * Reference to the {@link obsidian#Vault}.
      *
      * @unofficial
      */

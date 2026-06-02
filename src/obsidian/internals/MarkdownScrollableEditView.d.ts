@@ -23,7 +23,7 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
   isScrolling: boolean;
 
   /**
-   * Scope for the search component, if exists.
+   * {@link obsidian#Scope} for the search component, if exists.
    */
   scope: Scope | undefined;
 

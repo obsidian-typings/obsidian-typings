@@ -18,7 +18,7 @@ declare module 'obsidian' {
     clearButtonEl: HTMLElement;
 
     /**
-     * The containing element for the component's `clearButtonEl` and `inputEl`.
+     * The containing element for the component's {@link clearButtonEl} and {@link inputEl}.
      *
      * @unofficial
      */

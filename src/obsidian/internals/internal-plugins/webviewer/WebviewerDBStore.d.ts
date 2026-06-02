@@ -10,14 +10,14 @@ import type { WebviewerHistoryItem } from './WebviewerHistoryItem.d.ts';
  */
 export interface WebviewerDBStore {
   /**
-   * Reference to App.
+   * Reference to the {@link obsidian#App}.
    */
   app: App;
 
   /**
    * Underlying database used to store history items and fav icons via IndexedDB.
    *
-   * @remark Use methods such as `addHistoryItem` etc. to interact with the stored history.
+   * @remark Use methods such as {@link WebviewerDBStore.addHistoryItem} etc. to interact with the stored history.
    */
   db: IDBDatabase;
 

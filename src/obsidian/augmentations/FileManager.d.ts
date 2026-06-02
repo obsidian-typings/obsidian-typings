@@ -15,7 +15,7 @@ declare module 'obsidian' {
    */
   interface FileManager {
     /**
-     * Reference to App.
+     * Reference to the {@link obsidian#App}.
      *
      * @unofficial
      */
@@ -43,7 +43,7 @@ declare module 'obsidian' {
     updateQueue: PromisedQueue;
 
     /**
-     * Reference to Vault.
+     * Reference to the {@link obsidian#Vault}.
      *
      * @unofficial
      */

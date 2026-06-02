@@ -22,7 +22,7 @@ export interface Tree<T extends TreeItem> {
   activeDom: null | T;
 
   /**
-   * Reference to App.
+   * Reference to the {@link obsidian#App}.
    */
   app: App;
 

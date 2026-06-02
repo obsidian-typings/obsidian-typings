@@ -20,7 +20,7 @@ import type { InstallThemeOptions } from './InstallThemeOptions.d.ts';
  */
 export interface CustomCSS extends Component {
   /**
-   * Reference to App.
+   * Reference to the {@link obsidian#App}.
    */
   app: App;
 
@@ -225,7 +225,7 @@ export interface CustomCSS extends Component {
   loadCss(arg1: unknown): Promise<unknown>;
 
   /**
-   * Load stored CustomCSS configuration data.
+   * Load stored {@link CustomCSS} configuration data.
    *
    * @returns The loaded configuration data.
    */

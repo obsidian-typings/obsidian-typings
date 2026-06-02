@@ -24,7 +24,7 @@ declare module 'obsidian' {
     keys: KeyScope[];
 
     /**
-     * Scope that this scope is a child of
+     * {@link obsidian#Scope} that this scope is a child of
      *
      * @unofficial
      */

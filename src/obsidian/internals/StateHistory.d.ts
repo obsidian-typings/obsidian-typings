@@ -11,7 +11,7 @@ import type { StateHistoryLeafHistory } from './StateHistoryLeafHistory.d.ts';
  */
 export interface StateHistory {
   /**
-   * Ephemeral cursor state within Editor of leaf.
+   * Ephemeral cursor state within {@link obsidian#Editor} of leaf.
    */
   eState: StateHistoryEphemeralState;
 

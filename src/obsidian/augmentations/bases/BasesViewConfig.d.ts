@@ -43,7 +43,7 @@ declare module 'obsidian' {
     get(key: string): unknown;
 
     /**
-     * Retrieve a user-configured value from the config, converting it to a BasesPropertyId.
+     * Retrieve a user-configured value from the config, converting it to a {@link obsidian#BasesPropertyId}.
      * Returns `null` if the requested key is not present in the config, or if the value is invalid.
      *
      * @param key - The key to retrieve.

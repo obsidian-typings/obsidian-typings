@@ -18,7 +18,7 @@ import type { TreeNodeVChildren } from './TreeNodeVChildren.d.ts';
  */
 export interface ResultDom {
   /**
-   * Reference to the App instance.
+   * Reference to the {@link obsidian#App} instance.
    */
   app: App;
 

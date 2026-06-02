@@ -15,7 +15,7 @@ import type { CommandsEditorCommandsRecord } from './CommandsEditorCommandsRecor
  */
 export interface Commands {
   /**
-   * Reference to App.
+   * Reference to the {@link obsidian#App}.
    */
   app: App;
 
@@ -55,7 +55,7 @@ export interface Commands {
   /**
    * Execute a command by reference.
    *
-   * @param command - Command to execute.
+   * @param command - {@link obsidian#Command} to execute.
    * @returns Whether the command was successfully executed.
    */
   executeCommand(command: Command, event?: Event): boolean;

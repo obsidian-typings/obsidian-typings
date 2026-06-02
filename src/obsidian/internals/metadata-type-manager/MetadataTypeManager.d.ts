@@ -21,7 +21,7 @@ import type { TypeInfo } from './TypeInfo.d.ts';
  */
 export interface MetadataTypeManager extends Events {
   /**
-   * Reference to App.
+   * Reference to the {@link obsidian#App}.
    */
   app: App;
 
@@ -150,7 +150,7 @@ export interface MetadataTypeManager extends Events {
   unsetType(property: string): Promise<void>;
 
   /**
-   * Updates `this.properties` to match the MetadataCache
+   * Updates `this.properties` to match the {@link obsidian#MetadataCache}
    */
   updatePropertyInfoCache(): void;
 }

@@ -1,5 +1,5 @@
 /**
- * Backing storage for an ItemQueue, providing queue operations on an array.
+ * Backing storage for an {@link ItemQueue}, providing queue operations on an array.
  *
  * @typeParam T - The type of the items.
  * @public

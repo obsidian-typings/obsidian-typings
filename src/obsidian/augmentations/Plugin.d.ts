@@ -49,7 +49,7 @@ declare module 'obsidian' {
     onConfigFileChange: Debouncer<[], Promise<void>>;
 
     /**
-     * Plugin settings. Assign loaded data here in `onload`. Declare a
+     * {@link obsidian#Plugin} settings. Assign loaded data here in {@link onload}. Declare a
      * concrete type on your subclass to type it.
      *
      * @official
@@ -197,13 +197,13 @@ declare module 'obsidian' {
 
     /**
      * Register a CLI handler to handle a command from the CLI.
-     * Command IDs must be globally unique. Attempting to register a command that is already registered will throw an Error.
+     * {@link obsidian#Command} IDs must be globally unique. Attempting to register a command that is already registered will throw an Error.
      *
      * Use the format `<plugin-id>` for your default command, and `<plugin-id>:<action>` for sub-commands and actions.
      *
      * @param command - The command ID that will be used. Use alphanumeric characters without spaces.
      * @param description - The description text to provide in the help command, and in auto-completion prompts.
-     * @param flags - Command line flags that can be passed in.
+     * @param flags - {@link obsidian#Command} line flags that can be passed in.
      * @param handler - The callback handler to handle a CLI invocation.
      * @official
      * @since 1.12.2
@@ -228,7 +228,7 @@ declare module 'obsidian' {
     registerEditorExtension(extension: Extension): void;
 
     /**
-     * Register an EditorSuggest which can provide live suggestions while the user is typing.
+     * Register an {@link obsidian#EditorSuggest} which can provide live suggestions while the user is typing.
      *
      * @param editorSuggest - The editor suggest to register.
      * @example

@@ -33,27 +33,27 @@ declare module 'obsidian' {
     get(key: string): null | Value;
 
     /**
-     * Returns a boolean indicating whether this ObjectValue is empty.
+     * Returns a boolean indicating whether this {@link obsidian#ObjectValue} is empty.
      *
-     * @returns A boolean indicating whether this ObjectValue is empty.
+     * @returns A boolean indicating whether this {@link obsidian#ObjectValue} is empty.
      * @official
      * @since 1.10.0
      */
     isEmpty(): boolean;
 
     /**
-     * Returns a boolean indicating whether this ObjectValue is truthy.
+     * Returns a boolean indicating whether this {@link obsidian#ObjectValue} is truthy.
      *
-     * @returns A boolean indicating whether this ObjectValue is truthy.
+     * @returns A boolean indicating whether this {@link obsidian#ObjectValue} is truthy.
      * @official
      * @since 1.10.0
      */
     isTruthy(): boolean;
 
     /**
-     * Get the string representation of this ObjectValue.
+     * Get the string representation of this {@link obsidian#ObjectValue}.
      *
-     * @returns The string representation of this ObjectValue.
+     * @returns The string representation of this {@link obsidian#ObjectValue}.
      * @official
      * @since 1.10.0
      */

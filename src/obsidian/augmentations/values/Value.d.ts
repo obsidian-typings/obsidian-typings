@@ -56,7 +56,7 @@ declare module 'obsidian' {
      * Render this value into the provided HTMLElement.
      *
      * @param el - The HTMLElement to render to.
-     * @param ctx - The RenderContext to render to.
+     * @param ctx - The {@link obsidian#RenderContext} to render to.
      * @official
      * @since 1.10.0
      */

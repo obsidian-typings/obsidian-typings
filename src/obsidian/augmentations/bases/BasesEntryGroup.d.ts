@@ -4,7 +4,7 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * A group of BasesEntry objects for a given value of the groupBy key.
+   * A group of {@link obsidian#BasesEntry} objects for a given value of the groupBy key.
    * If there are entries in the results which do not have a value for the
    * groupBy key, the key will be the {@link NullValue}.
    *

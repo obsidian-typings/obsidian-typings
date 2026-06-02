@@ -54,7 +54,7 @@ declare module 'obsidian' {
     /**
      * Factory for a custom {@link SettingPage} subclass. Use this when the
      * sub-page is rendered imperatively rather than from a list of
-     * definitions. Mutually exclusive with `items`. The factory is called
+     * definitions. Mutually exclusive with {@link items}. The factory is called
      * each time the page is opened.
      *
      * @official

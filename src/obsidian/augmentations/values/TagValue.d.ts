@@ -15,7 +15,7 @@ declare module 'obsidian' {
      * To get the constructor instance, use {@link getTagValueConstructor} from `obsidian-typings/implementations`.
      *
      * @param value - The value to wrap.
-     * @returns The new TagValue.
+     * @returns The new {@link obsidian#TagValue}.
      * @official
      * @since 1.10.0
      * @deprecated - Added only for typing purposes.

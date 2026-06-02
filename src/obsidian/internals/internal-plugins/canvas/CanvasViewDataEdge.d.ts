@@ -11,7 +11,7 @@ export interface CanvasViewDataEdge {
   fromNode: string;
 
   /**
-   * Side of the source node where the edge originates (e.g., 'top', 'bottom', 'left', 'right').
+   * {@link obsidian#Side} of the source node where the edge originates (e.g., 'top', 'bottom', 'left', 'right').
    */
   fromSide: string;
 
@@ -26,7 +26,7 @@ export interface CanvasViewDataEdge {
   toNode: string;
 
   /**
-   * Side of the target node where the edge terminates (e.g., 'top', 'bottom', 'left', 'right').
+   * {@link obsidian#Side} of the target node where the edge terminates (e.g., 'top', 'bottom', 'left', 'right').
    */
   toSide: string;
 }

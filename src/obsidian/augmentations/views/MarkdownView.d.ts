@@ -37,7 +37,7 @@ declare module 'obsidian' {
     currentMode: MarkdownSubView;
 
     /**
-     * Editor component of the view.
+     * {@link obsidian#Editor} component of the view.
      *
      * @unofficial
      */
@@ -116,7 +116,7 @@ declare module 'obsidian' {
     /**
      * The CM5 source mode editor component.
      *
-     * @deprecated - CM5 Editor
+     * @deprecated - CM5 {@link obsidian#Editor}
      * @unofficial
      */
     sourceMode: MarkdownViewSourceMode;

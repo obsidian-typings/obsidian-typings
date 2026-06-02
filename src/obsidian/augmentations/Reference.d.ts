@@ -18,7 +18,7 @@ declare module 'obsidian' {
      * ![](bar.jpg)
      * ```
      *
-     * `displayText` will be:
+     * {@link displayText} will be:
      *
      * ```
      * 'bar'

@@ -44,7 +44,7 @@ export interface FileSuggestManager {
   /**
    * Get suggestions for block query.
    *
-   * @param runner - Runnable controlling the search lifecycle.
+   * @param runner - {@link Runnable} controlling the search lifecycle.
    * @param file - File to search within.
    * @param text - Search query text.
    * @returns Matching block suggestions.
@@ -54,7 +54,7 @@ export interface FileSuggestManager {
   /**
    * Get suggestions for display alias query.
    *
-   * @param runner - Runnable controlling the search lifecycle.
+   * @param runner - {@link Runnable} controlling the search lifecycle.
    * @param linkpath - Link path to resolve.
    * @param subpath - Subpath within the file.
    * @param alias - Alias text to search.
@@ -65,7 +65,7 @@ export interface FileSuggestManager {
   /**
    * Get suggestions for file query.
    *
-   * @param runner - Runnable controlling the search lifecycle.
+   * @param runner - {@link Runnable} controlling the search lifecycle.
    * @param text - Search query text.
    * @returns Matching file suggestions.
    */
@@ -74,7 +74,7 @@ export interface FileSuggestManager {
   /**
    * Get suggestions for global block query.
    *
-   * @param runner - Runnable controlling the search lifecycle.
+   * @param runner - {@link Runnable} controlling the search lifecycle.
    * @param text - Search query text.
    * @returns Matching global block suggestions.
    */
@@ -83,7 +83,7 @@ export interface FileSuggestManager {
   /**
    * Get suggestions for global heading query.
    *
-   * @param runner - Runnable controlling the search lifecycle.
+   * @param runner - {@link Runnable} controlling the search lifecycle.
    * @param text - Search query text.
    * @returns Matching global heading suggestions.
    */
@@ -92,7 +92,7 @@ export interface FileSuggestManager {
   /**
    * Get suggestions for file heading query.
    *
-   * @param runner - Runnable controlling the search lifecycle.
+   * @param runner - {@link Runnable} controlling the search lifecycle.
    * @param file - File to search within.
    * @param text - Search query text.
    * @returns Matching heading suggestions.
@@ -116,7 +116,7 @@ export interface FileSuggestManager {
   /**
    * Get suggestions for current input text.
    *
-   * @param runner - Runnable controlling the search lifecycle.
+   * @param runner - {@link Runnable} controlling the search lifecycle.
    * @param text - Search query text.
    * @returns Matching suggestions.
    * @remark Type is determined from text: e.g. [[Thi]] will give completions for files, [[Thi^]] for blocks, etc.

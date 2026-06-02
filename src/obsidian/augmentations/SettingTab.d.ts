@@ -105,7 +105,7 @@ declare module 'obsidian' {
      * `control`-type setting definition.
      *
      * The default implementation reads from `this.app.vault.getConfig` —
-     * appropriate for the app's own setting tabs. `PluginSettingTab` and
+     * appropriate for the app's own setting tabs. {@link obsidian#PluginSettingTab} and
      * `InternalPluginSettingTab` override this to read from their conventional
      * settings storage; plugins with custom storage override on their
      * subclass.

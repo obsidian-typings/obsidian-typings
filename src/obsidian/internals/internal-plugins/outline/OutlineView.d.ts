@@ -9,7 +9,7 @@ import type { InfoFileView } from '../../views/InfoFileView.d.ts';
 import type { OutlinePluginInstance } from './OutlinePluginInstance.d.ts';
 
 /**
- * View that displays the headings outline for the current file.
+ * {@link obsidian#View} that displays the headings outline for the current file.
  *
  * @public
  * @unofficial

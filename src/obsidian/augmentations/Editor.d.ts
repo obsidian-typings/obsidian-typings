@@ -31,7 +31,7 @@ declare module 'obsidian' {
     containerEl: HTMLElement;
 
     /**
-     * Linked Editor manager instance.
+     * Linked {@link obsidian#Editor} manager instance.
      *
      * @unofficial
      */
@@ -41,7 +41,7 @@ declare module 'obsidian' {
      * Currently active CM instance.
      *
      * @returns The active CodeMirror editor view, or `null` when the editor is not instantiated.
-     * @remark Can be `null` when Editor is not instantiated.
+     * @remark Can be `null` when {@link obsidian#Editor} is not instantiated.
      * @unofficial
      */
     get activeCM(): EditorView | null;
@@ -96,7 +96,7 @@ declare module 'obsidian' {
     /**
      * Convert editor position to screen position.
      *
-     * @param pos Editor position.
+     * @param pos {@link obsidian#Editor} position.
      * @param relativeToEditor - Relative to the editor or the application window.
      * @returns The screen coordinates.
      * @unofficial

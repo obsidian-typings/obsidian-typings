@@ -38,7 +38,7 @@ declare module 'obsidian' {
     /**
      * The most recent output from executing the bases query, applying filters, and evaluating formulas.
      * This object will be replaced with a new result set when changes to the vault or Bases config occur,
-     * so views should not keep a reference to it. Also note the contained BasesEntry objects will be recreated.
+     * so views should not keep a reference to it. Also note the contained {@link obsidian#BasesEntry} objects will be recreated.
      *
      * @official
      * @since 1.10.0
@@ -60,7 +60,7 @@ declare module 'obsidian' {
      * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<BasesView\>}.
      *
      * @param controller - The query controller.
-     * @returns The new BasesView.
+     * @returns The new {@link obsidian#BasesView}.
      * @official
      * @since 1.10.0
      * @deprecated - Added only for typing purposes.

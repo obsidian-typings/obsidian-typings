@@ -102,8 +102,8 @@ export interface ViewRegistry extends Events {
    * Register a view type for a file extension.
    *
    * @param extension - File extension.
-   * @param type - View type.
-   * @remark Prefer registering the extension via the Plugin class.
+   * @param type - {@link obsidian#View} type.
+   * @remark Prefer registering the extension via the {@link obsidian#Plugin} class.
    */
   registerExtensions(extension: string[], type: string): void;
 

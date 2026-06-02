@@ -20,12 +20,12 @@ export interface RecentFileTracker {
   lastOpenFiles: string[];
 
   /**
-   * Reference to Vault.
+   * Reference to the {@link obsidian#Vault}.
    */
   vault: Vault;
 
   /**
-   * Reference to Workspace.
+   * Reference to the {@link obsidian#Workspace}.
    */
   workspace: Workspace;
 

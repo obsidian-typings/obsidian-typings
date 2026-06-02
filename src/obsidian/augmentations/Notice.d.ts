@@ -28,7 +28,7 @@ declare module 'obsidian' {
     /**
      * The HTML element that represents the notice.
      *
-     * @deprecated Use `messageEl` instead
+     * @deprecated Use {@link messageEl} instead
      * @official
      * @since 0.9.7
      */

@@ -21,7 +21,7 @@ declare module 'obsidian' {
     frontmatter__?: null | undefined | unknown;
 
     /**
-     * The path to the associated file. Any links are assumed to be relative to the `sourcePath`.
+     * The path to the associated file. Any links are assumed to be relative to the {@link sourcePath}.
      *
      * @official
      */

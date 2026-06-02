@@ -2,7 +2,7 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * A color in RGB format.
+   * A color in {@link obsidian#RGB} format.
    *
    * @since 0.16.0
    */

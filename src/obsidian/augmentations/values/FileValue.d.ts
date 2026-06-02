@@ -23,18 +23,18 @@ declare module 'obsidian' {
     constructor3__(app: App, file: TFile): this;
 
     /**
-     * Returns a boolean indicating whether this FileValue is truthy.
+     * Returns a boolean indicating whether this {@link obsidian#FileValue} is truthy.
      *
-     * @returns A boolean indicating whether this FileValue is truthy.
+     * @returns A boolean indicating whether this {@link obsidian#FileValue} is truthy.
      * @official
      * @since 1.10.0
      */
     isTruthy(): boolean;
 
     /**
-     * String representation of this FileValue.
+     * String representation of this {@link obsidian#FileValue}.
      *
-     * @returns The string representation of this FileValue.
+     * @returns The string representation of this {@link obsidian#FileValue}.
      * @official
      * @since 1.10.0
      */

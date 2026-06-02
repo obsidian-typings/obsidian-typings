@@ -44,7 +44,7 @@ declare module 'obsidian' {
     type: 'preview' | string;
 
     /**
-     * The parent MarkdownView containing this preview.
+     * The parent {@link obsidian#MarkdownView} containing this preview.
      *
      * @unofficial
      */

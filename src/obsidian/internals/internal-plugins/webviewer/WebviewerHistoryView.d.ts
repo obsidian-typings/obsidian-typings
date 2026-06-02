@@ -7,7 +7,7 @@ import type { ViewType } from '../../../implementations/constants/ViewType.d.ts'
 import type { WebviewerPluginInstance } from './WebviewerPluginInstance.d.ts';
 
 /**
- * View that displays the web browser browsing history.
+ * {@link obsidian#View} that displays the web browser browsing history.
  *
  * @public
  * @unofficial

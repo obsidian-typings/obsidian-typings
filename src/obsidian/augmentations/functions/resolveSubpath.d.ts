@@ -9,7 +9,7 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * Resolve the given subpath to a reference in the MetadataCache.
+   * Resolve the given subpath to a reference in the {@link obsidian#MetadataCache}.
    *
    * @param cache - The cached metadata to resolve the subpath in.
    * @param subpath - The subpath to resolve.

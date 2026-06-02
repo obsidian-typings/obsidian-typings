@@ -22,18 +22,18 @@ declare module 'obsidian' {
     constructor3__(regexp: RegExp): this;
 
     /**
-     * Returns a boolean indicating whether this RegExpValue is truthy.
+     * Returns a boolean indicating whether this {@link obsidian#RegExpValue} is truthy.
      *
-     * @returns A boolean indicating whether this RegExpValue is truthy.
+     * @returns A boolean indicating whether this {@link obsidian#RegExpValue} is truthy.
      * @official
      * @since 1.10.0
      */
     isTruthy(): boolean;
 
     /**
-     * Get the string representation of this RegExpValue.
+     * Get the string representation of this {@link obsidian#RegExpValue}.
      *
-     * @returns The string representation of this RegExpValue.
+     * @returns The string representation of this {@link obsidian#RegExpValue}.
      * @official
      * @since 1.10.0
      */

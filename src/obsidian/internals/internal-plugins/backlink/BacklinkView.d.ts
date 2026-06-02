@@ -3,7 +3,7 @@ import type { InfoFileView } from '../../views/InfoFileView.d.ts';
 import type { BacklinkComponent } from './BacklinkComponent.d.ts';
 
 /**
- * View that displays backlinks to the current file.
+ * {@link obsidian#View} that displays backlinks to the current file.
  *
  * @public
  * @unofficial

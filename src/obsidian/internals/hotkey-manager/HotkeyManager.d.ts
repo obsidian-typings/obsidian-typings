@@ -16,7 +16,7 @@ import type { HotkeyManagerDefaultKeysRecord } from './HotkeyManagerDefaultKeysR
  */
 export interface HotkeyManager {
   /**
-   * Reference to App.
+   * Reference to the {@link obsidian#App}.
    */
   app: App;
 
@@ -53,7 +53,7 @@ export interface HotkeyManager {
   /**
    * Add a hotkey to the default hotkeys.
    *
-   * @param command - Command ID to add hotkey to.
+   * @param command - {@link obsidian#Command} ID to add hotkey to.
    * @param keys - Hotkeys to add.
    */
   addDefaultHotkeys(command: string, keys: KeymapInfo[]): void;
@@ -77,7 +77,7 @@ export interface HotkeyManager {
   /**
    * Get hotkey associated with command ID.
    *
-   * @param command - Command ID to get hotkey for.
+   * @param command - {@link obsidian#Command} ID to get hotkey for.
    * @returns The default hotkeys for the command.
    */
   getDefaultHotkeys(command: string): KeymapInfo[];
@@ -85,7 +85,7 @@ export interface HotkeyManager {
   /**
    * Get hotkey associated with command ID.
    *
-   * @param command - Command ID to get hotkey for.
+   * @param command - {@link obsidian#Command} ID to get hotkey for.
    * @returns The hotkeys for the command.
    */
   getHotkeys(command: string): KeymapInfo[];
@@ -114,7 +114,7 @@ export interface HotkeyManager {
   /**
    * Pretty-print hotkey of a command.
    *
-   * @param commandId - Command ID to print hotkey for.
+   * @param commandId - {@link obsidian#Command} ID to print hotkey for.
    * @returns The formatted hotkey string.
    */
   printHotkeyForCommand(commandId: string): string;
@@ -127,14 +127,14 @@ export interface HotkeyManager {
   /**
    * Remove a hotkey from the default hotkeys.
    *
-   * @param command - Command ID to remove hotkey from.
+   * @param command - {@link obsidian#Command} ID to remove hotkey from.
    */
   removeDefaultHotkeys(command: string): void;
 
   /**
    * Remove a hotkey from the custom hotkeys.
    *
-   * @param command - Command ID to remove hotkey from.
+   * @param command - {@link obsidian#Command} ID to remove hotkey from.
    */
   removeHotkeys(command: string): void;
 
@@ -146,7 +146,7 @@ export interface HotkeyManager {
   /**
    * Add a hotkey to the custom hotkeys (overrides default hotkeys).
    *
-   * @param command - Command ID to add hotkey to.
+   * @param command - {@link obsidian#Command} ID to add hotkey to.
    * @param keys - Hotkeys to add.
    */
   setHotkeys(command: string, keys: KeymapInfo[]): void;

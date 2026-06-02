@@ -9,7 +9,7 @@ import type { ViewTypeViewMapping } from '../../../../internals/views/ViewTypeVi
  *
  * @param app - The app.
  * @param viewType - The view type.
- * @returns The {@link view} constructor.
+ * @returns The view constructor.
  *
  * @public
  * @unofficial

@@ -46,9 +46,9 @@ declare module 'obsidian' {
     getValue(): HexString;
 
     /**
-     * Get the current value of the color picker as an HSL object.
+     * Get the current value of the color picker as an {@link obsidian#HSL} object.
      *
-     * @returns The current value of the color picker as an HSL object.
+     * @returns The current value of the color picker as an {@link obsidian#HSL} object.
      * @official
      * @since 1.0.0
      */
@@ -63,9 +63,9 @@ declare module 'obsidian' {
     getValueInt(): number;
 
     /**
-     * Get the current value of the color picker as an RGB object.
+     * Get the current value of the color picker as an {@link obsidian#RGB} object.
      *
-     * @returns The current value of the color picker as an RGB object.
+     * @returns The current value of the color picker as an {@link obsidian#RGB} object.
      * @official
      * @since 1.0.0
      */
@@ -116,9 +116,9 @@ declare module 'obsidian' {
     setValue(value: HexString): this;
 
     /**
-     * Set the current value of the color picker as an HSL object.
+     * Set the current value of the color picker as an {@link obsidian#HSL} object.
      *
-     * @param hsl - The HSL object to set the color picker to.
+     * @param hsl - The {@link obsidian#HSL} object to set the color picker to.
      * @returns The color picker.
      * @example
      * ```ts
@@ -139,9 +139,9 @@ declare module 'obsidian' {
     setValueInt(value: number): this;
 
     /**
-     * Set the current value of the color picker as an RGB object.
+     * Set the current value of the color picker as an {@link obsidian#RGB} object.
      *
-     * @param rgb - The RGB object to set the color picker to.
+     * @param rgb - The {@link obsidian#RGB} object to set the color picker to.
      * @returns The color picker.
      * @example
      * ```ts

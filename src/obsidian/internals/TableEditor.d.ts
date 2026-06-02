@@ -1,5 +1,5 @@
 /**
- * Editor for managing markdown tables.
+ * {@link obsidian#Editor} for managing markdown tables.
  *
  * @public
  * @unofficial

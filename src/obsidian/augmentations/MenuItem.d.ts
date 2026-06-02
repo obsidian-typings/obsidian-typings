@@ -43,7 +43,7 @@ declare module 'obsidian' {
     iconEl: HTMLElement;
 
     /**
-     * Menu the item is in.
+     * {@link obsidian#Menu} the item is in.
      *
      * @unofficial
      */
@@ -120,7 +120,7 @@ declare module 'obsidian' {
     removeIcon(): void;
 
     /**
-     * Calls `setChecked`, prefer usage of that function instead.
+     * Calls {@link setChecked}, prefer usage of that function instead.
      *
      * @param active - Whether the menu item should be checked.
      * @returns The menu item instance.
@@ -232,7 +232,7 @@ declare module 'obsidian' {
      * Add warning styling to the menu item.
      *
      * @param warning - Whether the menu item should be styled as a warning.
-     * If set to `true` the MenuItem's title and icon will become red. Or whatever color is applied to the class 'is-warning' by a theme.
+     * If set to `true` the {@link obsidian#MenuItem}'s title and icon will become red. Or whatever color is applied to the class 'is-warning' by a theme.
      * @returns The menu item instance.
      * @unofficial
      * @since 0.15.0

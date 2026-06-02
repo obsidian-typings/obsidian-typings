@@ -68,7 +68,7 @@ declare module 'obsidian' {
     getSuggestions__(context: EditorSuggestContext): Promise<T[]> | T[];
 
     /**
-     * Based on the editor line and cursor position, determine if this EditorSuggest should be triggered at this moment.
+     * Based on the editor line and cursor position, determine if this {@link obsidian#EditorSuggest} should be triggered at this moment.
      * Typically, you would run a regular expression on the current line text before the cursor.
      * Return `null` to indicate that this editor suggest is not supposed to be triggered.
      *

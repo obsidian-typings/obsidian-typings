@@ -1,7 +1,7 @@
 import type { Command } from 'obsidian';
 
 /**
- * Record mapping command IDs to Command objects without editor callbacks.
+ * Record mapping command IDs to {@link obsidian#Command} objects without editor callbacks.
  *
  * @public
  * @unofficial
