@@ -1,4 +1,4 @@
-import type { PdfJsTestingUtils } from '../../../obsidian/internals/pdf-js/PdfJsTestingUtils.d.ts';
+import type { PdfJsTestingUtils } from '../../../pdfjs-dist/internals/PdfJsTestingUtils.d.ts';
 
 export {};
 
