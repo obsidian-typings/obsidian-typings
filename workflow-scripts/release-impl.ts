@@ -2,6 +2,7 @@ import { execFromRoot } from './helpers/exec.ts';
 
 async function main(): Promise<void> {
   await checkGitRepoClean();
+  await execFromRoot('git pull origin --rebase');
   await execFromRoot('git push origin');
 
   const isBeta = process.argv[2] === 'beta';
