@@ -21,6 +21,7 @@ import type { ViewTypeViewMapping } from '../internals/views/ViewTypeViewMapping
 import type { SerializedWorkspace } from '../internals/workspace/SerializedWorkspace.d.ts';
 import type { SetActiveLeafParams } from '../internals/workspace/SetActiveLeafParams.d.ts';
 import type { WorkspaceHoverLinkSourcesRecord } from '../internals/workspace/WorkspaceHoverLinkSourcesRecord.d.ts';
+import type { WorkspaceProtocolHandler } from '../internals/workspace/WorkspaceProtocolHandler.d.ts';
 
 export {};
 
@@ -197,7 +198,7 @@ declare module 'obsidian' {
      *
      * @unofficial
      */
-    protocolHandlers: Map<string, ObsidianProtocolHandler>;
+    protocolHandler: WorkspaceProtocolHandler;
 
     /**
      * Tracks last opened files in the vault.
