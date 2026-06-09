@@ -12,6 +12,11 @@ async function main(): Promise<void> {
   }
 
   await execFromRoot('git push origin HEAD:refs/tags/release-candidate');
+
+  // Trigger the release workflow on main directly. The release branches no longer
+  // contain a proxy workflow, and a tag push cannot trigger a workflow that lives
+  // only on main, so the workflow is dispatched explicitly here.
+  await execFromRoot('gh workflow run push-release-tag.yml --ref main');
 }
 
 async function checkGitRepoClean(): Promise<void> {

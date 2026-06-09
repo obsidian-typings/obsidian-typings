@@ -1,15 +1,23 @@
 name: Push Release Tag
 on:
-  workflow_call:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref (branch, tag, or SHA) that holds the release to publish.
+        required: false
+        default: release-candidate
+        type: string
 jobs:
   push-release-tag:
     permissions:
+      actions: write
       contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout pushed branch
         uses: actions/checkout@v6
         with:
+          ref: ${{ inputs.ref }}
           fetch-depth: 0
       - name: Checkout scripts from main branch
         run: |
@@ -38,3 +46,7 @@ jobs:
           prerelease: ${{ steps.run-script.outputs.isBeta == 'true' }}
           tag_name: ${{ steps.run-script.outputs.tagName }}
           name: ${{ steps.run-script.outputs.releaseName }}
+      - name: Trigger GitHub Pages build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run build-pages.yml --ref main
