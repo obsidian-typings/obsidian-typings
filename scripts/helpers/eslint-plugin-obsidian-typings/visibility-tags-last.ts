@@ -46,7 +46,7 @@ export const visibilityTagsLast = {
             context.report({
               data: { tag: violatingTag },
               messageId: 'notLast',
-              node: comment as never
+              node: comment
             });
           }
         }
