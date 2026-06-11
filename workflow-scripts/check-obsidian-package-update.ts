@@ -28,7 +28,7 @@ async function main(): Promise<void> {
     const hasChanges = (await execFromRoot('git diff --staged --name-only', { isQuiet: true })).trim() !== '';
     if (!hasChanges) {
       console.log(`No file changes after npm install obsidian@${latestObsidianVersion}, skipping release.`);
-      return;
+      continue;
     }
 
     await commit(`chore: update obsidian API version to ${latestObsidianVersion}`);
