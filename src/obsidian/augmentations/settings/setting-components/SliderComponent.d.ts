@@ -85,11 +85,22 @@ declare module 'obsidian' {
     setDisabled(disabled: boolean): this;
 
     /**
+     * Set a custom formatter for the value shown inline next to the slider.
+     *
+     * @param format - The formatter for the value shown inline next to the slider. Return an empty string to hide the inline value entirely.
+     * @returns The slider.
+     * @official
+     * @since 1.13.0
+     */
+    setDisplayFormat(format: (value: number) => string): this;
+
+    /**
      * Set the dynamic tooltip of the slider.
      *
      * @returns The slider.
      * @official
      * @since 0.9.7
+     * @deprecated The value is now always shown inline next to the slider.
      */
     setDynamicTooltip(): this;
 
@@ -136,13 +147,5 @@ declare module 'obsidian' {
      * @since 0.9.7
      */
     setValue(value: number): this;
-
-    /**
-     * Show the tooltip of the slider.
-     *
-     * @official
-     * @since 0.9.7
-     */
-    showTooltip(): void;
   }
 }

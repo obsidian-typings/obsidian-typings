@@ -38,5 +38,16 @@ declare module 'obsidian' {
      * @since 1.13.0
      */
     type: 'slider';
+
+    /**
+     * Formats the value shown inline next to the slider.
+     *
+     * @param value - The slider value to format.
+     * @returns The formatted value shown inline next to the slider. Return an empty string to hide the inline value entirely.
+     * @official
+     * @since 1.13.1
+     * @deprecated - Added only for typing purposes. Use {@link displayFormat} instead.
+     */
+    displayFormat__?(value: number): string;
   }
 }

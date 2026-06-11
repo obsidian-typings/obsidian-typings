@@ -7,7 +7,7 @@ declare module 'obsidian' {
   /**
    * {@link obsidian#Modal} dialog component.
    */
-  interface Modal extends CloseableComponent {
+  interface Modal extends HistoryHandler {
     /**
      * The Obsidian app instance.
      *

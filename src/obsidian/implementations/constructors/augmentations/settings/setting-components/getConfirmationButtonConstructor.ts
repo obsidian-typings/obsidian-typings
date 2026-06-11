@@ -11,5 +11,5 @@ import type { ExtractConstructor } from '../../../../../internals/constructors/E
  * @unofficial
  */
 export function getConfirmationButtonConstructor(): ExtractConstructor<ConfirmationButton> {
-  return ConfirmationButton as ExtractConstructor<ConfirmationButton>;
+  return ConfirmationButton as unknown as ExtractConstructor<ConfirmationButton>;
 }

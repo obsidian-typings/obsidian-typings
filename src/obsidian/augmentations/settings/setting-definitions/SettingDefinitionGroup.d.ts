@@ -60,14 +60,5 @@ declare module 'obsidian' {
      * @since 1.13.0
      */
     visible?: (() => boolean) | boolean;
-
-    /**
-     * Search component configuration for the header.
-     *
-     * @official
-     * @since 1.13.0
-     * @deprecated - Added only for typing purposes. Use {@link search} instead.
-     */
-    search__?(component: SearchComponent): unknown;
   }
 }

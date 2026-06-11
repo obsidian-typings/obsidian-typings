@@ -33,13 +33,13 @@ declare module 'obsidian' {
     render?: never;
 
     /**
-     * Callback invoked when the action setting is clicked. Receives the row's
-     * current index within its parent group or list.
+     * Callback invoked when the action setting is clicked. Receives the row
+     * element and the row's current index within its parent group or list.
      *
      * @official
      * @since 1.13.0
      * @deprecated - Added only for typing purposes. Use {@link action} instead.
      */
-    action__?(index: number): void;
+    action__?(el: HTMLElement, index: number): void;
   }
 }

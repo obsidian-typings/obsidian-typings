@@ -34,10 +34,7 @@ declare module 'obsidian' {
     descEl: HTMLElement;
 
     /**
-     * Error message element shown below the input. Lives inside {@link controlEl}
-     * as a wrapped flex child; {@link controlEl}'s implicit min-content width keeps
-     * the input row from wrapping so only the error claims its own line.
-     * Lazily created by {@link setErrorMessage}.
+     * Error message element shown below the input. Created by {@link setErrorMessage}.
      *
      * @official
      * @since 1.13.0
@@ -114,6 +111,24 @@ declare module 'obsidian' {
      * @since 1.11.0
      */
     addComponent<T extends BaseComponent>(cb: (el: HTMLElement) => T): this;
+
+    /**
+     * Add a read-only display value to the row. On a navigable row, this
+     * surfaces the value edited on the page the row opens, so the user can see
+     * it without opening that page.
+     *
+     * @param cb - The callback to add the display value component.
+     * @returns The setting.
+     * @example
+     * ```ts
+     * setting.addDisplayValue((displayValue) => {
+     *     displayValue.setValue('foo');
+     * });
+     * ```
+     * @official
+     * @since 1.13.1
+     */
+    addDisplayValue(cb: (component: DisplayValueComponent) => unknown): this;
 
     /**
      * Add a dropdown component to the setting.

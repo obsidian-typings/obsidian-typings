@@ -1,6 +1,5 @@
 import type {
   App,
-  CloseableComponent,
   Modal,
   SettingTab
 } from 'obsidian';
@@ -19,11 +18,6 @@ export interface AppSetting extends Modal {
    * Current active tab of the settings modal.
    */
   activeTab: null | SettingTab;
-
-  /**
-   * Closeable component for the active tab.
-   */
-  activeTabCloseable: CloseableComponent | null;
 
   /**
    * Container element containing the community plugins

@@ -17,6 +17,16 @@ declare module 'obsidian' {
     desc?: DocumentFragment | string;
 
     /**
+     * Surfaces the current value on the entry, so the user can see it without
+     * opening the page where it is edited. Call `update()` on the setting tab
+     * to refresh it after the value changes.
+     *
+     * @official
+     * @since 1.13.1
+     */
+    displayValue?: (() => string) | string;
+
+    /**
      * Inline items rendered as a declarative sub-page. Can include groups
      * and nested pages. Mutually exclusive with `page`.
      *
@@ -32,6 +42,16 @@ declare module 'obsidian' {
      * @since 1.13.0
      */
     name: string;
+
+    /**
+     * Adds a status indicator to the entry. Use `'warning'` when the value on
+     * the page needs the user's attention. Call `update()` on the setting tab
+     * to refresh it after the underlying state changes.
+     *
+     * @official
+     * @since 1.13.1
+     */
+    status?: 'warning' | (() => 'warning' | null) | null;
 
     /**
      * Discriminant identifying this item as a page.

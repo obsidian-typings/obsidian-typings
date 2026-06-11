@@ -16,12 +16,13 @@ declare module 'obsidian' {
     name: string;
 
     /**
-     * Called when the affordance is clicked or tapped.
+     * Called when the affordance is clicked or tapped. Receives the affordance
+     * element (the `+` button on desktop, the add-item row on mobile).
      *
      * @official
      * @since 1.13.0
      * @deprecated - Added only for typing purposes. Use {@link action} instead.
      */
-    action__?(): void;
+    action__?(el: HTMLElement): void;
   }
 }
