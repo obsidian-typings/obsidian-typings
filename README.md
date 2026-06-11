@@ -5,17 +5,17 @@
 </center>
 
 <div align="center">
-    <a href="https://obsidian.md/changelog/2026-05-28-desktop-v1.13.0/"><img src="https://img.shields.io/badge/Obsidian_version-1.13.0_catalyst-blue?logo=obsidian" alt="Obsidian version: 1.13.0 catalyst"></a>
-    <a href="https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.13.0"><img src="https://img.shields.io/badge/Git_branch-release/obsidian--catalyst/1.13.0-red?logo=git" alt="Git branch: release/obsidian-catalyst/1.13.0"></a>
-    <a href="https://www.npmjs.com/package/@obsidian-typings/obsidian-catalyst-1.13.0"><img src="https://img.shields.io/npm/v/@obsidian-typings/obsidian-catalyst-1.13.0?logo=npm&logoColor=white&label=npm" alt="npm: @obsidian-typings/obsidian-catalyst-1.13.0"></a>
+    <a href="https://obsidian.md/changelog/2026-06-09-desktop-v1.13.1/"><img src="https://img.shields.io/badge/Obsidian_version-1.13.1_catalyst-blue?logo=obsidian" alt="Obsidian version: 1.13.1 catalyst"></a>
+    <a href="https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.13.1"><img src="https://img.shields.io/badge/Git_branch-release/obsidian--catalyst/1.13.1-red?logo=git" alt="Git branch: release/obsidian-catalyst/1.13.1"></a>
+    <a href="https://www.npmjs.com/package/@obsidian-typings/obsidian-catalyst-1.13.1"><img src="https://img.shields.io/npm/v/@obsidian-typings/obsidian-catalyst-1.13.1?logo=npm&logoColor=white&label=npm" alt="npm: @obsidian-typings/obsidian-catalyst-1.13.1"></a>
 </div>
 
-This branch contains the typings for Obsidian version [`1.13.0 catalyst`](https://obsidian.md/changelog/2026-05-28-desktop-v1.13.0/).
+This branch contains the typings for Obsidian version [`1.13.1 catalyst`](https://obsidian.md/changelog/2026-06-09-desktop-v1.13.1/).
 
 ## Installation
 
 ```bash
-npm install --save-dev @obsidian-typings/obsidian-catalyst-1.13.0
+npm install --save-dev @obsidian-typings/obsidian-catalyst-1.13.1
 ```
 
 > [!WARNING]
