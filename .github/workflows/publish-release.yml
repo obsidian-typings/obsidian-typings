@@ -1,14 +1,18 @@
-name: Push Release Tag
+name: Publish Release
 on:
   workflow_dispatch:
     inputs:
       ref:
         description: Git ref (branch, tag, or SHA) that holds the release to publish.
-        required: false
-        default: release-candidate
+        required: true
         type: string
+      isBeta:
+        description: Whether to publish as a beta prerelease.
+        required: false
+        default: false
+        type: boolean
 jobs:
-  push-release-tag:
+  publish-release:
     permissions:
       actions: write
       contents: write
@@ -33,9 +37,10 @@ jobs:
         working-directory: ./workflow-scripts
       - name: Run script
         id: run-script
-        run: npx -y jiti ./workflow-scripts/push-release-tag.ts
+        run: npx -y jiti ./workflow-scripts/publish-release.ts
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          IS_BETA: ${{ inputs.isBeta }}
       - name: Create Release
         uses: softprops/action-gh-release@v3
         with:

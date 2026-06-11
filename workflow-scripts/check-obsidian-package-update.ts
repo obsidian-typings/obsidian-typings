@@ -32,7 +32,7 @@ async function main(): Promise<void> {
     }
 
     await commit(`chore: update obsidian API version to ${latestObsidianVersion}`);
-    // `npm run release` dispatches the release workflow (push-release-tag.yml) on main itself.
+    // `npm run release` dispatches the release workflow (publish-release.yml) on main itself.
     await execFromRoot('npm run release');
   }
 }

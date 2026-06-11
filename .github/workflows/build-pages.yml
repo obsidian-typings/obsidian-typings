@@ -2,10 +2,10 @@ name: Build Github Pages
 # Triggers:
 #   - push to main under docs/** (docs source changed)
 #   - manual dispatch
-#   - the release workflow ("Push Release Tag") dispatches this explicitly as its
+#   - the release workflow ("Publish Release") dispatches this explicitly as its
 #     final step (`gh workflow run build-pages.yml`) so the site rebuilds after a release.
 #
-# There is intentionally NO `workflow_run` trigger on "Push Release Tag". The release
+# There is intentionally NO `workflow_run` trigger on "Publish Release". The release
 # workflow is started via workflow_dispatch from the release scripts, and in CI that
 # dispatch runs under GITHUB_TOKEN. Runs initiated by GITHUB_TOKEN do not cascade to
 # `workflow_run` triggers, so such a trigger would never fire. The explicit dispatch
