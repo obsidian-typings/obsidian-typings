@@ -1,67 +1,115 @@
-import process from 'node:process';
-import ts from 'typescript';
+/**
+ * @file
+ *
+ * Type-checks a set of TypeScript files with `skipLibCheck` disabled, but reports only the
+ * diagnostics whose source file we own. This lets the general build run with `skipLibCheck: true`
+ * (so it does not fail on broken upstream `.d.ts` files we do not control, such as a given
+ * version's `obsidian.d.ts`) while still fully validating the declarations we author.
+ *
+ * When upstream types are fixed, the `Ignored N diagnostic(s)` count drops to `0`, signalling the
+ * workaround is no longer doing anything.
+ */
 
+import type {
+  CompilerOptions,
+  Diagnostic,
+  FormatDiagnosticsHost,
+  ParseConfigFileHost
+} from 'typescript';
+
+import process from 'node:process';
+import {
+  createProgram,
+  DiagnosticCategory,
+  formatDiagnostic,
+  formatDiagnostics,
+  formatDiagnosticsWithColorAndContext,
+  getParsedCommandLineOfConfigFile,
+  getPreEmitDiagnostics,
+  sys
+} from 'typescript';
+
+/**
+ * Parameters for {@link checkProjectTypes}.
+ */
 export interface CheckProjectTypesParams {
   /** Compiler options for the program. `skipLibCheck` is always forced to `false`. */
-  readonly options: ts.CompilerOptions;
+  readonly options: CompilerOptions;
 
   /** The root files to type-check. */
   readonly rootNames: readonly string[];
 
   /**
-   * Decides whether a diagnostic's source file is one we care about.
+   * Decides whether a diagnostic should be reported, based on the diagnostic itself rather than its
+   * source file. Runs in addition to {@link CheckProjectTypesParams.shouldKeepFile} — a diagnostic is
+   * reported only when both predicates keep it. Use this to drop diagnostics that are reported in a
+   * file we own but are caused by something we do not control (e.g. a cross-module-format interop
+   * complaint about a third-party import). When omitted, no diagnostic is dropped on this basis.
    *
-   * @param fileName - The diagnostic's source file, already passed through `toCanonical`.
+   * @param diagnostic - The diagnostic to evaluate.
    * @returns `true` to report the diagnostic, `false` to ignore it.
    */
-  shouldKeepFile(fileName: string): boolean;
+  shouldKeepDiagnostic?(this: void, diagnostic: Diagnostic): boolean;
+
+  /**
+   * Decides whether a diagnostic's source file is one we care about.
+   *
+   * @param fileName - The diagnostic's source file, already passed through {@link toCanonical}.
+   * @returns `true` to report the diagnostic, `false` to ignore it.
+   */
+  shouldKeepFile(this: void, fileName: string): boolean;
 }
 
+/**
+ * The resolved result of {@link parseTsConfig}.
+ */
 export interface ParsedTsConfig {
   /** The resolved list of files the config includes (absolute paths). */
   readonly fileNames: readonly string[];
 
   /** The resolved compiler options (with `extends` applied). */
-  readonly options: ts.CompilerOptions;
+  readonly options: CompilerOptions;
 }
 
-const FORMAT_HOST: ts.FormatDiagnosticsHost = {
+const FORMAT_HOST: FormatDiagnosticsHost = {
   getCanonicalFileName: (fileName) => fileName,
-  getCurrentDirectory: () => ts.sys.getCurrentDirectory(),
-  getNewLine: () => ts.sys.newLine
+  getCurrentDirectory: () => sys.getCurrentDirectory(),
+  getNewLine: () => sys.newLine
 };
 
 /**
  * Type-checks a set of files with `skipLibCheck: false`, but reports only the diagnostics whose
  * source file passes `shouldKeepFile`. Diagnostics from files we do not control (e.g. broken
- * third-party `.d.ts` pulled in transitively) are dropped, while still being collected so they
- * can be counted for visibility.
+ * third-party `.d.ts` pulled in transitively) are dropped, while still being counted for
+ * visibility.
  *
  * @param params - The program inputs and the keep predicate.
  * @returns `true` when no reported diagnostic is an error, `false` otherwise.
  */
 export function checkProjectTypes(params: CheckProjectTypesParams): boolean {
-  const options: ts.CompilerOptions = {
+  const options: CompilerOptions = {
     ...params.options,
     skipLibCheck: false
   };
 
-  const program = ts.createProgram({
+  const program = createProgram({
     options,
     rootNames: [...params.rootNames]
   });
 
-  const allDiagnostics = ts.getPreEmitDiagnostics(program);
-  const keptDiagnostics = allDiagnostics.filter((diagnostic) => shouldKeepDiagnostic(diagnostic, params.shouldKeepFile));
+  const allDiagnostics = getPreEmitDiagnostics(program);
+  const keptDiagnostics = allDiagnostics.filter((diagnostic) =>
+    shouldKeepDiagnosticByFile(diagnostic, params.shouldKeepFile) && (params.shouldKeepDiagnostic?.(diagnostic) ?? true)
+  );
   const ignoredCount = allDiagnostics.length - keptDiagnostics.length;
 
   if (keptDiagnostics.length > 0) {
-    process.stdout.write(ts.formatDiagnosticsWithColorAndContext(keptDiagnostics, FORMAT_HOST));
+    process.stdout.write(formatDiagnosticsWithColorAndContext(keptDiagnostics, FORMAT_HOST));
   }
 
-  console.log(`Ignored ${String(ignoredCount)} diagnostic(s) outside the validated set.`);
+  process.stdout.write(`Ignored ${String(ignoredCount)} diagnostic(s) outside the validated set.\n`);
 
-  return !keptDiagnostics.some((diagnostic) => diagnostic.category === ts.DiagnosticCategory.Error);
+  return !keptDiagnostics.some((diagnostic) => diagnostic.category === DiagnosticCategory.Error);
 }
 
 /**
@@ -69,29 +117,29 @@ export function checkProjectTypes(params: CheckProjectTypesParams): boolean {
  * and compiler options.
  *
  * @param tsConfigPath - Absolute path to the config file.
- * @param overrideOptions - Compiler options that override the parsed ones.
  * @returns The resolved file names and options.
+ * @throws If the config cannot be parsed or contains errors.
  */
-export function parseTsConfig(tsConfigPath: string, overrideOptions?: ts.CompilerOptions): ParsedTsConfig {
-  const host: ts.ParseConfigFileHost = {
-    fileExists: (path) => ts.sys.fileExists(path),
-    getCurrentDirectory: () => ts.sys.getCurrentDirectory(),
+export function parseTsConfig(tsConfigPath: string): ParsedTsConfig {
+  const host: ParseConfigFileHost = {
+    fileExists: (path) => sys.fileExists(path),
+    getCurrentDirectory: () => sys.getCurrentDirectory(),
     onUnRecoverableConfigFileDiagnostic: (diagnostic) => {
-      throw new Error(ts.formatDiagnostic(diagnostic, FORMAT_HOST));
+      throw new Error(formatDiagnostic(diagnostic, FORMAT_HOST));
     },
-    readDirectory: (rootDir, extensions, excludes, includes, depth) => ts.sys.readDirectory(rootDir, extensions, excludes, includes, depth),
-    readFile: (path) => ts.sys.readFile(path),
-    useCaseSensitiveFileNames: ts.sys.useCaseSensitiveFileNames
+    readDirectory: (rootDir, extensions, excludes, includes, depth) => sys.readDirectory(rootDir, extensions, excludes, includes, depth),
+    readFile: (path) => sys.readFile(path),
+    useCaseSensitiveFileNames: sys.useCaseSensitiveFileNames
   };
 
-  const parsed = ts.getParsedCommandLineOfConfigFile(tsConfigPath, overrideOptions, host);
+  const parsed = getParsedCommandLineOfConfigFile(tsConfigPath, undefined, host);
 
   if (!parsed) {
     throw new Error(`Failed to parse TypeScript config: ${tsConfigPath}`);
   }
 
   if (parsed.errors.length > 0) {
-    throw new Error(`Errors while parsing TypeScript config ${tsConfigPath}:\n${ts.formatDiagnostics(parsed.errors, FORMAT_HOST)}`);
+    throw new Error(`Errors while parsing TypeScript config ${tsConfigPath}:\n${formatDiagnostics(parsed.errors, FORMAT_HOST)}`);
   }
 
   return {
@@ -109,10 +157,10 @@ export function parseTsConfig(tsConfigPath: string, overrideOptions?: ts.Compile
  */
 export function toCanonical(fileName: string): string {
   const normalized = fileName.replaceAll('\\', '/');
-  return ts.sys.useCaseSensitiveFileNames ? normalized : normalized.toLowerCase();
+  return sys.useCaseSensitiveFileNames ? normalized : normalized.toLowerCase();
 }
 
-function shouldKeepDiagnostic(diagnostic: ts.Diagnostic, shouldKeepFile: (fileName: string) => boolean): boolean {
+function shouldKeepDiagnosticByFile(diagnostic: Diagnostic, shouldKeepFile: (fileName: string) => boolean): boolean {
   if (!diagnostic.file) {
     return true;
   }

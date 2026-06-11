@@ -8,4 +8,4 @@ if (paths.length === 0) {
   paths.push('.');
 }
 
-await execFromRoot(['eslint', '--fix', ...paths]);
+await execFromRoot(['eslint', '--fix', { batchedArgs: paths }]);

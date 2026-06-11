@@ -23,9 +23,9 @@ export const config: MarkdownlintCli2ConfigurationSchema = {
     '**/*.md'
   ],
   ignores: [
-    'node_modules/**',
-    '.git/**',
-    'dist/**',
+    '**/node_modules/**',
+    '**/.git/**',
+    '**/dist/**',
     'docs/**',
     'workflow-scripts/**'
   ]
