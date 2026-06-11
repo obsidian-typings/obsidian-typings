@@ -1,3 +1,4 @@
+import { readdir } from 'node:fs/promises';
 import { join } from 'node:path/posix';
 import process from 'node:process';
 
@@ -8,6 +9,7 @@ import {
 } from './helpers/check-project-types.ts';
 import { exec } from './helpers/exec.ts';
 import {
+  execFromRoot,
   getRootFolder,
   toPosixPath
 } from './helpers/root.ts';
@@ -17,13 +19,6 @@ interface ScenarioResult {
   readonly name: string;
   readonly passed: boolean;
 }
-
-const SCENARIOS = [
-  'scenario-1-standalone',
-  'scenario-2-obsidian',
-  'scenario-3-codemirror',
-  'scenario-4-full'
-];
 
 const NODE_MODULES_SEGMENT = '/node_modules/';
 const OBSIDIAN_TYPINGS_SEGMENT = '/node_modules/obsidian-typings/';
@@ -35,11 +30,15 @@ async function main(): Promise<void> {
     throw new Error('Could not find root folder');
   }
 
+  await execFromRoot('git fetch origin');
+  await execFromRoot('git restore --source=origin/main -- tests');
+
   const rootCanonical = toCanonical(root);
   const bundleCompatDir = join(root, 'tests/bundle-compat');
   const results: ScenarioResult[] = [];
 
-  for (const scenario of SCENARIOS) {
+  const scenarios = await readdir(bundleCompatDir);
+  for (const scenario of scenarios) {
     const scenarioDir = join(bundleCompatDir, scenario);
     const scenarioDirNative = toPosixPath(scenarioDir);
     console.log(`\n=== ${scenario} ===`);
