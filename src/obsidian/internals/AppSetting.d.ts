@@ -1,11 +1,11 @@
 import type {
   App,
-  CloseableComponent,
   Modal,
   SettingTab
 } from 'obsidian';
 
 import type { getAppSettingConstructor } from '../implementations/constructors/internals/getAppSettingConstructor.d.ts';
+import type { CloseableComponent } from './CloseableComponent.d.ts';
 import type { HotkeysSettingTab } from './HotkeysSettingTab.d.ts';
 
 /**

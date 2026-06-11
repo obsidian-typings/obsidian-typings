@@ -1,4 +1,5 @@
 import type { getMenuConstructor } from '../implementations/constructors/augmentations/getMenuConstructor.d.ts';
+import type { CloseableComponent } from '../internals/CloseableComponent.d.ts';
 import type { MenuSubmenuConfigRecord } from '../internals/MenuSubmenuConfigRecord.d.ts';
 import type { Submenu } from '../internals/Submenu.d.ts';
 
@@ -227,6 +228,20 @@ declare module 'obsidian' {
      * @official
      */
     onHide(callback: () => unknown): void;
+
+    /**
+     * Called when the user navigates back in the history.
+     *
+     * @official
+     */
+    onHistoryBack(): void;
+
+    /**
+     * Called when the user navigates forward in the history.
+     *
+     * @official
+     */
+    onHistoryForward(): void;
 
     /**
      * Preemptively closes the menu if click is registered on menu item.

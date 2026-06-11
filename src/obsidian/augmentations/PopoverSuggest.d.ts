@@ -1,3 +1,4 @@
+import type { CloseableComponent } from '../internals/CloseableComponent.d.ts';
 import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
 import type { SuggestionContainer } from '../internals/SuggestionContainer.d.ts';
 import type { TextDirection } from '../internals/TextDirection.d.ts';
@@ -79,6 +80,20 @@ declare module 'obsidian' {
      * @unofficial
      */
     onEscapeKey(): void;
+
+    /**
+     * Called when the user navigates back in the history.
+     *
+     * @official
+     */
+    onHistoryBack(): void;
+
+    /**
+     * Called when the user navigates forward in the history.
+     *
+     * @official
+     */
+    onHistoryForward(): void;
 
     /**
      * Opens the popover.

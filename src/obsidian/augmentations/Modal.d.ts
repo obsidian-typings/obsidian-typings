@@ -1,4 +1,5 @@
 import type { getModalConstructor } from '../implementations/constructors/augmentations/getModalConstructor.d.ts';
+import type { CloseableComponent } from '../internals/CloseableComponent.d.ts';
 import type { WindowSelection } from '../internals/WindowSelection.d.ts';
 
 export {};
@@ -164,6 +165,20 @@ declare module 'obsidian' {
      * @unofficial
      */
     onEscapeKey(): void;
+
+    /**
+     * Called when the user navigates back in the history.
+     *
+     * @official
+     */
+    onHistoryBack(): void;
+
+    /**
+     * Called when the user navigates forward in the history.
+     *
+     * @official
+     */
+    onHistoryForward(): void;
 
     /**
      * Called when the modal is opened.
