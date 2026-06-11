@@ -9,7 +9,7 @@
     "inlineSources": false,
     "module": "Preserve",
     "noEmit": false,
-    "target": "ESNext",
+    "target": "es2022",
     "skipLibCheck": true,
     "verbatimModuleSyntax": true
   },

@@ -10,14 +10,14 @@
     "inlineSources": true,
     "lib": [
       "DOM",
-      "ES2024"
+      "es2022"
     ],
     "libReplacement": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "node16",
+    "moduleResolution": "node16",
     "noEmit": true,
-    "target": "ES2024",
-    "skipLibCheck": false,
+    "target": "es2022",
+    "skipLibCheck": true,
     "verbatimModuleSyntax": true,
     "types": [
       "@total-typescript/ts-reset",

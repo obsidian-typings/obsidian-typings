@@ -1,8 +1,0 @@
-{
-  "name": "bundle-compat-scenario-1-standalone",
-  "private": true,
-  "dependencies": {
-    "@types/node": "^25.8.0",
-    "obsidian-typings": "file:../../.."
-  }
-}
