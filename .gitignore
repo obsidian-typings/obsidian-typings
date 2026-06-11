@@ -20,5 +20,4 @@ docs/src/content/docs/api/namespaces/**/*
 .claude/settings.local.json
 
 /docs/src/content/docs/api/
-
-/tests
+tests/bundle-compat/*/package-lock.json
