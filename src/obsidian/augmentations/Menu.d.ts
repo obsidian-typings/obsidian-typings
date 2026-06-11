@@ -241,7 +241,7 @@ declare module 'obsidian' {
      *
      * @official
      */
-    onHistoryForward(): void;
+    onHistoryForward?(): void;
 
     /**
      * Preemptively closes the menu if click is registered on menu item.

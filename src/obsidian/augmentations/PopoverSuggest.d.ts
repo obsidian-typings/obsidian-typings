@@ -93,7 +93,7 @@ declare module 'obsidian' {
      *
      * @official
      */
-    onHistoryForward(): void;
+    onHistoryForward?(): void;
 
     /**
      * Opens the popover.

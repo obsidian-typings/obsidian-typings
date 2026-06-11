@@ -178,7 +178,7 @@ declare module 'obsidian' {
      *
      * @official
      */
-    onHistoryForward(): void;
+    onHistoryForward?(): void;
 
     /**
      * Called when the modal is opened.
