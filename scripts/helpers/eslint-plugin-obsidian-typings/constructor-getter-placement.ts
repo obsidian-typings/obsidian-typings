@@ -118,8 +118,7 @@ export const constructorGetterPlacement = {
     },
     messages: {
       missingConstructorMethod: 'Type \'{{typeName}}\' (from \'{{importSource}}\') must have a `constructor[N]__` method.',
-      subdirectoryMismatch:
-        'Constructor getter is in \'{{getterSubdir}}\' but augmentation \'{{typeName}}\' is in \'{{augSubdir}}\'. They must be in the same subdirectory.'
+      subdirectoryMismatch: 'Constructor getter is in \'{{getterSubdir}}\' but augmentation \'{{typeName}}\' is in \'{{augSubdir}}\'. They must be in the same subdirectory.'
     }
   },
   create(context: RuleContext) {

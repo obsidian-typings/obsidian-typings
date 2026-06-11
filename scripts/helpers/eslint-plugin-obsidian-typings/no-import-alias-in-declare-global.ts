@@ -11,12 +11,10 @@ export const noImportAliasInDeclareGlobal = {
   meta: {
     type: 'problem' as const,
     docs: {
-      description:
-        'Forbid import aliases used only in declare global blocks. Use `typeof import(\'module\')` instead to avoid dts-bundle-generator dropping the import.'
+      description: 'Forbid import aliases used only in declare global blocks. Use `typeof import(\'module\')` instead to avoid dts-bundle-generator dropping the import.'
     },
     messages: {
-      noImportAlias:
-        'Import alias `{{name}}` is used in a `declare global` block. Use `typeof import(\'{{source}}\')` instead, because dts-bundle-generator drops these imports when inlining declare global.'
+      noImportAlias: 'Import alias `{{name}}` is used in a `declare global` block. Use `typeof import(\'{{source}}\')` instead, because dts-bundle-generator drops these imports when inlining declare global.'
     }
   },
   create(context: RuleContext) {
