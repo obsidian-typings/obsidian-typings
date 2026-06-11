@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@types/node": "^25.8.0",
-    "obsidian": "1.13.0",
+    "obsidian": "file:../../../node_modules/obsidian",
     "obsidian-typings": "file:../../.."
   }
 }

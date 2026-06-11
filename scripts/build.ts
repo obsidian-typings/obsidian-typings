@@ -6,6 +6,7 @@ const BUILD_STEPS = [
   'lint',
   'format:check',
   'build:compile',
+  'build:validate-types',
   'build:generate-index',
   'build:bundle-types',
   'build:fix-bundle-types',
@@ -13,6 +14,7 @@ const BUILD_STEPS = [
   'build:implementations:generate-types',
   'build:implementations:bundle-types',
   'build:fix-implementations-bundle-types',
+  'build:validate-bundle-types',
   'build:static',
   'build:extract-api',
   'build:validate-bundle'

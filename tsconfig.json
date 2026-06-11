@@ -17,7 +17,11 @@
     "moduleResolution": "NodeNext",
     "noEmit": true,
     "target": "ES2022",
-    "skipLibCheck": false,
+    // The general build only type-checks our implementation/script `.ts` files, so it skips all
+    // declaration files (including broken upstream ones such as `obsidian.d.ts`). Validation of our
+    // own `.d.ts` files is delegated to the `build:validate-types` script, which re-enables
+    // `skipLibCheck: false` in-memory and reports diagnostics only for the declarations we author.
+    "skipLibCheck": true,
     "verbatimModuleSyntax": true,
     "types": [
       "@total-typescript/ts-reset",
