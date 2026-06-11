@@ -6,6 +6,7 @@ on:
 jobs:
   check-obsidian-package-update:
     permissions:
+      actions: write
       contents: write
     runs-on: ubuntu-latest
     steps:
