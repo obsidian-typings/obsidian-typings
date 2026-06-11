@@ -8,6 +8,7 @@ import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescrip
 import { flatConfigs as eslintPluginImportXFlatConfigs } from 'eslint-plugin-import-x';
 // eslint-disable-next-line import-x/no-named-as-default -- The default export name `index` is too confusing.
 import jsdoc from 'eslint-plugin-jsdoc';
+import nodePlugin from 'eslint-plugin-n';
 import perfectionist from 'eslint-plugin-perfectionist';
 import eslintPluginTsdoc from 'eslint-plugin-tsdoc';
 import { defineConfig } from 'eslint/config';
@@ -23,6 +24,12 @@ const sourceFiles = ['src/**/*.ts', 'src/**/*.d.ts'];
 const scriptFiles = ['scripts/**/*.ts'];
 const typeScriptFiles = [...sourceFiles, ...scriptFiles];
 
+const declarationFiles = ['src/**/*.d.ts'];
+
+// The minimum Obsidian installer that still receives app updates (0.14.5) ships Electron 18.0.3, which runs Node 16.13.2.
+// Shipped code must therefore avoid Node/ES runtime features unavailable in that version. Scripts are dev-only and exempt.
+const minimumNodeVersion = '>=16.13.2';
+
 export const config: Linter.Config[] = defineConfig([
   {
     files: typeScriptFiles
@@ -37,6 +44,7 @@ export const config: Linter.Config[] = defineConfig([
   ...getEslintCommentsConfigs(),
   ...getCustomPluginConfigs(),
   ...getNoRestrictedSyntaxRulesConfigs(),
+  ...getNodeCompatConfigs(),
   ...getObsidianTypingsConfigs(),
   ...getOverrideConfigs(),
   ...getJsdocsConfigs(),
@@ -262,6 +270,32 @@ function getNoRestrictedSyntaxRulesConfigs(): Linter.Config[] {
           {
             message: 'Do not use `declare` on class properties. Initialize the property or use a regular type annotation.',
             selector: 'PropertyDefinition[declare=true]'
+          }
+        ]
+      }
+    }
+  ]);
+}
+
+function getNodeCompatConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      files: sourceFiles,
+      ignores: declarationFiles,
+      plugins: {
+        n: nodePlugin
+      },
+      rules: {
+        'n/no-unsupported-features/es-builtins': [
+          'error',
+          {
+            version: minimumNodeVersion
+          }
+        ],
+        'n/no-unsupported-features/node-builtins': [
+          'error',
+          {
+            version: minimumNodeVersion
           }
         ]
       }

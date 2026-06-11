@@ -1,5 +1,6 @@
 import type { Runnable } from '../Runnable.d.ts';
 import type { ItemQueueItems } from './ItemQueueItems.d.ts';
+import type { PromiseWithResolvers } from './PromiseWithResolvers.d.ts';
 
 /**
  * An async item queue that supports generator-based consumption.

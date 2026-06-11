@@ -10,13 +10,13 @@
     "inlineSources": true,
     "lib": [
       "DOM",
-      "ES2024"
+      "ES2022"
     ],
     "libReplacement": true,
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "noEmit": true,
-    "target": "ES2024",
+    "target": "ES2022",
     "skipLibCheck": false,
     "verbatimModuleSyntax": true,
     "types": [
