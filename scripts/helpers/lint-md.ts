@@ -3,8 +3,8 @@ import { glob } from 'node:fs/promises';
 import { execFromRoot } from './root.ts';
 
 interface LintMdParams {
-  paths?: string[] | undefined;
-  shouldFix?: boolean | undefined;
+  readonly paths?: string[] | undefined;
+  readonly shouldFix?: boolean | undefined;
 }
 
 export async function lintMd(params: LintMdParams): Promise<void> {

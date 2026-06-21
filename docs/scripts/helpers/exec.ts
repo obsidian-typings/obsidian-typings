@@ -68,10 +68,10 @@ export interface PackageLockJson extends Partial<PackageJson> {
 }
 
 interface ExecDetailedOptions extends ExecOption {
-  withDetails: true;
+  readonly withDetails: true;
 }
 interface ExecSimpleOptions extends ExecOption {
-  withDetails?: false;
+  readonly withDetails?: false;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- The generic type is better for the strong typing.

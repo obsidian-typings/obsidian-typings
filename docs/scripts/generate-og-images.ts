@@ -36,11 +36,11 @@ const CONCURRENCY = 10;
 const PROGRESS_LOG_INTERVAL = 100;
 
 interface GenerateOptions {
-  changedPages: PageEntry[];
-  fonts: Font[];
-  logoBase64: string;
-  manifest: CacheManifest;
-  outputDir: string;
+  readonly changedPages: PageEntry[];
+  readonly fonts: Font[];
+  readonly logoBase64: string;
+  readonly manifest: CacheManifest;
+  readonly outputDir: string;
 }
 
 async function collectPages(contentDocsDir: string): Promise<PageEntry[]> {

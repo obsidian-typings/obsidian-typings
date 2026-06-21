@@ -4,7 +4,7 @@ import { docsSchema } from '@astrojs/starlight/schema';
 import { defineCollection } from 'astro:content';
 
 interface GenerateIdParams {
-  entry: string;
+  readonly entry: string;
 }
 
 /**
