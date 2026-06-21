@@ -406,6 +406,7 @@ function getLocalPluginConfigs(): Linter.Config[] {
       local: localPlugin
     },
     rules: {
+      'local/no-unused-params-members': 'error',
       'local/no-used-underscore-params': 'error',
       'local/readonly-params-options-result-members': 'error'
     }
