@@ -12,8 +12,8 @@
       "DOM",
       "ESNext"
     ],
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "node16",
+    "moduleResolution": "node16",
     "noEmit": true,
     "skipLibCheck": false,
     "target": "ESNext",
