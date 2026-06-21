@@ -54,10 +54,10 @@ export interface ExecOption {
 }
 
 export interface ExecResult {
-  exitCode: null | number;
-  exitSignal: NodeJS.Signals | null;
-  stderr: string;
-  stdout: string;
+  readonly exitCode: null | number;
+  readonly exitSignal: NodeJS.Signals | null;
+  readonly stderr: string;
+  readonly stdout: string;
 }
 
 export interface PackageLockJson extends Partial<PackageJson> {

@@ -152,28 +152,12 @@ function getEslintConfigs(): Linter.Config[] {
             selector: 'TSAbstractPropertyDefinition[definite=true]'
           },
           {
-            message: 'Do not use anonymous inline object types in function parameters. Define a named interface instead.',
-            selector: ':function > Identifier TSTypeLiteral'
+            message: 'Do not use anonymous inline object types. Define a named interface or `type` alias instead.',
+            selector: 'TSTypeLiteral:not(TSTypeAliasDeclaration > TSTypeLiteral)'
           },
           {
-            message: 'Do not use anonymous inline object types in function return types. Define a named interface instead.',
-            selector: ':function > TSTypeAnnotation TSTypeLiteral'
-          },
-          {
-            message: 'Do not use anonymous inline object types in interface/method signatures. Define a named interface instead.',
-            selector: 'TSMethodSignature TSTypeLiteral'
-          },
-          {
-            message: 'Do not use anonymous inline object types as type arguments. Define a named interface instead.',
-            selector: 'TSTypeParameterInstantiation TSTypeLiteral'
-          },
-          {
-            message: 'Do not use anonymous inline object types in type annotations. Define a named interface instead.',
-            selector: 'TSTypeAnnotation TSTypeLiteral'
-          },
-          {
-            message: 'Do not use anonymous inline object types in type assertions. Define a named interface instead.',
-            selector: 'TSAsExpression TSTypeLiteral'
+            message: 'Do not use anonymous inline mapped types. Define a named `type` alias instead.',
+            selector: 'TSMappedType:not(TSTypeAliasDeclaration > TSMappedType)'
           },
           {
             message: 'Do not use override on __ methods. Use a numbered variant instead, e.g., method2__().',
