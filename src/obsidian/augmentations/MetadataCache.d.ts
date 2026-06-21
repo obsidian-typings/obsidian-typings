@@ -660,12 +660,18 @@ declare module 'obsidian' {
     showIndexingNotice(): void;
 
     /**
-     * Re-resolve all links for changed path
+     * Re-queue for link resolution every file that links to any of the changed names.
      *
-     * @param path - The changed path.
+     * Called on file create, delete, and rename. Each entry is a name, not a full path:
+     * resolved links are matched by comparing the basename of each resolved target path
+     * against the entries, and unresolved links are matched by comparing the basename of
+     * each unresolved link (also trying the entry with a trailing `.md` removed). Every
+     * matching file is queued via {@link MetadataCache.queueFileForLinkResolution}.
+     *
+     * @param fileNames - The changed names (basenames, e.g. `note.md` or `image.png`).
      * @unofficial
      */
-    updateRelatedLinks(path: string): void;
+    updateRelatedLinks(fileNames: string[]): void;
 
     /**
      * Update user ignore filters from settings
