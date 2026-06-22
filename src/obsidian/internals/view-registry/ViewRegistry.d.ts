@@ -99,11 +99,11 @@ export interface ViewRegistry extends Events {
   on(name: 'view-unregistered', callback: (viewType: string) => void): EventRef;
 
   /**
-   * Register a view type for a file extension.
+   * Register a view type for file extensions.
    *
-   * @param extensions - File extension.
+   * @param extensions - File extensions.
    * @param viewType - View type.
-   * @remark Prefer registering the extension via the Plugin class.
+   * @remark Prefer registering the extensions via the Plugin class.
    */
   registerExtensions(extensions: string[], viewType: string): void;
 
