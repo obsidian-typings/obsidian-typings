@@ -10,7 +10,7 @@
     "inlineSources": true,
     "lib": [
       "DOM",
-      "es2022"
+      "ES2022"
     ],
     "libReplacement": true,
     "module": "node16",

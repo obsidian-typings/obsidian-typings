@@ -87,7 +87,7 @@ export interface ViewRegistry extends Events {
    * @param callback - The callback to invoke with the registered view type.
    * @returns The event reference.
    */
-  on(name: 'view-registered', callback: (type: string) => void): EventRef;
+  on(name: 'view-registered', callback: (viewType: string) => void): EventRef;
 
   /**
    * Called when a view of type has been unregistered from the registry.
@@ -96,16 +96,16 @@ export interface ViewRegistry extends Events {
    * @param callback - The callback to invoke with the unregistered view type.
    * @returns The event reference.
    */
-  on(name: 'view-unregistered', callback: (type: string) => void): EventRef;
+  on(name: 'view-unregistered', callback: (viewType: string) => void): EventRef;
 
   /**
    * Register a view type for a file extension.
    *
-   * @param extension - File extension.
-   * @param type - {@link obsidian#View} type.
-   * @remark Prefer registering the extension via the {@link obsidian#Plugin} class.
+   * @param extensions - File extension.
+   * @param viewType - View type.
+   * @remark Prefer registering the extension via the Plugin class.
    */
-  registerExtensions(extension: string[], type: string): void;
+  registerExtensions(extensions: string[], viewType: string): void;
 
   /**
    * Register a view constructor for a view type.
@@ -127,9 +127,9 @@ export interface ViewRegistry extends Events {
   /**
    * Unregister extensions for a view type.
    *
-   * @param extension - The file extensions to unregister.
+   * @param extensions - The file extensions to unregister.
    */
-  unregisterExtensions(extension: string[]): void;
+  unregisterExtensions(extensions: string[]): void;
 
   /**
    * Unregister a view type.
