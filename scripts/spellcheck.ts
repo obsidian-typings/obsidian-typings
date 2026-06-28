@@ -1,16 +1,18 @@
+import process from 'node:process';
+
 import { execFromRoot } from './helpers/root.ts';
 
-async function main() {
+async function main(): Promise<void> {
   const [, , ...paths] = process.argv;
   await spellcheck(paths);
 }
 
-export async function spellcheck(paths: string[] = []): Promise<void> {
+async function spellcheck(paths: string[] = []): Promise<void> {
   if (paths.length === 0) {
     paths = ['.'];
   }
 
-  await execFromRoot(['npx', 'cspell', { batchedArgs: paths }, '--no-progress', '--no-must-find-files']);
+  await execFromRoot(['npx', 'cspell', '--no-progress', '--no-must-find-files', { batchedArgs: paths }]);
 }
 
 await main();
