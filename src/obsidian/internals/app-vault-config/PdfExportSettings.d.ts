@@ -6,22 +6,30 @@
  */
 export interface PdfExportSettings {
   /**
-   * Default: 100.
+   * The scale percentage applied to the exported PDF.
+   *
+   * @default `100`
    */
   downscalePercent: number;
 
   /**
-   * Default: `false`.
+   * Whether the PDF is exported in landscape orientation.
+   *
+   * @default `false`
    */
   landscape: boolean;
 
   /**
-   * Default: '0'.
+   * The page margin setting.
+   *
+   * @default `'0'`
    */
   margin: string;
 
   /**
-   * Default: 'letter'.
+   * The page size setting.
+   *
+   * @default `'letter'`
    */
   pageSize: string;
 }

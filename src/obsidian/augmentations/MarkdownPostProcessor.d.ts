@@ -21,8 +21,9 @@ declare module 'obsidian' {
     (el: HTMLElement, ctx: MarkdownPostProcessorContext): Promise<any> | void;
 
     /**
-     * An optional integer sort order. Defaults to 0. Lower number runs before higher numbers.
+     * An optional integer sort order. Lower number runs before higher numbers.
      *
+     * @default `0`
      * @official
      */
     sortOrder?: number;

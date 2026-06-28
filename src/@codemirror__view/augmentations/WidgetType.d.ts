@@ -59,8 +59,9 @@ declare module '@codemirror/view' {
 
     /**
      * For inline widgets that are displayed inline and introduce line breaks, this must
-     * indicate the amount of line breaks they introduce. Defaults to 0.
+     * indicate the amount of line breaks they introduce.
      *
+     * @default `0`
      * @official
      * @deprecated - Added only for typing purposes. Use {@link lineBreaks} instead.
      */

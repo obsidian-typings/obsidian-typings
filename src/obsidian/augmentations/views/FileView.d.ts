@@ -22,8 +22,9 @@ declare module 'obsidian' {
     file: null | TFile;
 
     /**
-     * Whether the file view can be navigated (`true` by default).
+     * Whether the file view can be navigated.
      *
+     * @default `true`
      * @official
      */
     navigation: boolean;
