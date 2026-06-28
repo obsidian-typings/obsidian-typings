@@ -1,4 +1,10 @@
-import { Rule } from 'markdownlint';
+/**
+ * @file
+ *
+ * Typescript equivalent of the markdownlint-cli2 configuration schema.
+ */
+
+import type { Rule } from 'markdownlint';
 
 /**
  * Markdownlint-cli2 configuration schema : https://github.com/DavidAnson/markdownlint-cli2/blob/v0.18.1/schema/markdownlint-cli2-config-schema.json
