@@ -19,8 +19,9 @@ declare module 'obsidian' {
     lastRect: DOMRect;
 
     /**
-     * Limit to the number of elements rendered at once. Set to 0 to disable. Defaults to 100.
+     * Limit to the number of elements rendered at once. Set to 0 to disable.
      *
+     * @default `100`
      * @official
      * @since 1.4.10
      */

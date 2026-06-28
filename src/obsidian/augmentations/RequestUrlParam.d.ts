@@ -47,8 +47,8 @@ declare module 'obsidian' {
 
     /**
      * Whether to throw an error when the status code is 400+.
-     * Defaults to `true`.
      *
+     * @default `true`
      * @official
      */
     throw?: boolean;
