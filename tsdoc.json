@@ -5,6 +5,10 @@
   ],
   "tagDefinitions": [
     {
+      "tagName": "@default",
+      "syntaxKind": "block"
+    },
+    {
       "tagName": "@official",
       "syntaxKind": "block"
     },
@@ -30,6 +34,7 @@
     }
   ],
   "supportForTags": {
+    "@default": true,
     "@official": true,
     "@remark": true,
     "@since": true,
