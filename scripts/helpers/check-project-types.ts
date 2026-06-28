@@ -33,6 +33,15 @@ import {
  * Parameters for {@link checkProjectTypes}.
  */
 export interface CheckProjectTypesParams {
+  /**
+   * When `true`, the ignored diagnostics (those dropped by {@link CheckProjectTypesParams.shouldKeepFile}
+   * or {@link CheckProjectTypesParams.shouldKeepDiagnostic}) are printed in full after the ignored
+   * count, so they can be inspected. When omitted or `false`, only the count is printed.
+   *
+   * @default `false`
+   */
+  readonly isVerbose?: boolean;
+
   /** Compiler options for the program. `skipLibCheck` is always forced to `false`. */
   readonly options: CompilerOptions;
 
@@ -81,7 +90,7 @@ const FORMAT_HOST: FormatDiagnosticsHost = {
  * Type-checks a set of files with `skipLibCheck: false`, but reports only the diagnostics whose
  * source file passes `shouldKeepFile`. Diagnostics from files we do not control (e.g. broken
  * third-party `.d.ts` pulled in transitively) are dropped, while still being counted for
- * visibility.
+ * visibility. When `isVerbose` is set, the dropped diagnostics are also printed in full.
  *
  * @param params - The program inputs and the keep predicate.
  * @returns `true` when no reported diagnostic is an error, `false` otherwise.
@@ -106,6 +115,11 @@ export function checkProjectTypes(params: CheckProjectTypesParams): boolean {
   }
 
   process.stdout.write(`Ignored ${String(ignoredCount)} diagnostic(s) outside the validated set.\n`);
+
+  if (params.isVerbose && ignoredCount > 0) {
+    const ignoredDiagnostics = allDiagnostics.filter((diagnostic) => !keptDiagnostics.includes(diagnostic));
+    process.stdout.write(formatDiagnosticsWithColorAndContext(ignoredDiagnostics, FORMAT_HOST));
+  }
 
   return !keptDiagnostics.some((diagnostic) => diagnostic.category === DiagnosticCategory.Error);
 }
