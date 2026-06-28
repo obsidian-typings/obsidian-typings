@@ -463,9 +463,7 @@ export function renderFunctionPage(lines: string[], info: TypeInfo, allTypes: Ma
     lines.push('| :-- | :-- | :-- |');
     for (const param of fn.parameters) {
       lines.push(
-        `| \`${param.name}\` | ${escapeMarkdown(escapeMdxAngleBrackets(renderTypeWithLinks(param.type, allTypes)))} | ${
-          escapeMarkdown(resolveLinks(param.description, allTypes))
-        } |`
+        `| \`${param.name}\` | ${escapeMarkdown(escapeMdxAngleBrackets(renderTypeWithLinks(param.type, allTypes)))} | ${escapeMarkdown(resolveLinks(param.description, allTypes))} |`
       );
     }
     lines.push('');
@@ -503,9 +501,7 @@ export function renderMethodOverloadMdx(lines: string[], overload: MemberInfo, t
   const paramsAttr = params.length > 0 ? ` parameters={${JSON.stringify(params)}}` : '';
 
   lines.push(
-    `<MemberDetail status={${statusEnum}} signature="${
-      escapeJsxAttr(sig)
-    }"${descAttr}${remarksAttr}${sinceAttr}${returnTypeAttr}${returnDescAttr}${paramsAttr}${examplesAttr} />`
+    `<MemberDetail status={${statusEnum}} signature="${escapeJsxAttr(sig)}"${descAttr}${remarksAttr}${sinceAttr}${returnTypeAttr}${returnDescAttr}${paramsAttr}${examplesAttr} />`
   );
   lines.push('');
 }
@@ -540,9 +536,7 @@ export function renderMethodTableMdx(lines: string[], info: TypeInfo, allTypes: 
     const inheritedAttr = method.inheritedFrom ? `, inheritedFrom: "${escapeJsString(markdownToHtml(typeLink(method.inheritedFrom, allTypes)))}"` : '';
     const href = memberHref(slug, method.inheritedFrom, allTypes);
     lines.push(
-      `  { status: ${status}, signature: "${sig}", href: "${escapeJsString(href)}", returns: "${
-        escapeJsString(returnType)
-      }", description: "${desc}"${inheritedAttr} },`
+      `  { status: ${status}, signature: "${sig}", href: "${escapeJsString(href)}", returns: "${escapeJsString(returnType)}", description: "${desc}"${inheritedAttr} },`
     );
   }
   lines.push(']} />');
@@ -562,9 +556,7 @@ export function renderPropertyTableMdx(lines: string[], info: TypeInfo, allTypes
     const inheritedAttr = prop.inheritedFrom ? `, inheritedFrom: "${escapeJsString(markdownToHtml(typeLink(prop.inheritedFrom, allTypes)))}"` : '';
     const href = memberHref(memberSlug(prop.name), prop.inheritedFrom, allTypes);
     lines.push(
-      `  { status: ${status}, name: "${escapeJsString(prop.name)}", href: "${escapeJsString(href)}", type: "${
-        escapeJsString(type)
-      }", description: "${desc}"${inheritedAttr} },`
+      `  { status: ${status}, name: "${escapeJsString(prop.name)}", href: "${escapeJsString(href)}", type: "${escapeJsString(type)}", description: "${desc}"${inheritedAttr} },`
     );
   }
   lines.push(']} />');

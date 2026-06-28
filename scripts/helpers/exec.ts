@@ -47,9 +47,7 @@ export function exec(command: CommandPart[] | string, options: ExecOption = {}):
     if (commandLine.length > maxCommandLength) {
       return Promise.reject(
         new Error(
-          `Command line is too long (${String(commandLine.length)} chars, max ${
-            String(maxCommandLength)
-          } on ${process.platform}). Consider using ExecArg with batchedArgs.`
+          `Command line is too long (${String(commandLine.length)} chars, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArg with batchedArgs.`
         )
       );
     }
@@ -61,9 +59,7 @@ export function exec(command: CommandPart[] | string, options: ExecOption = {}):
   if (command.length > maxCommandLength) {
     return Promise.reject(
       new Error(
-        `Command line is too long (${String(command.length)} chars, max ${
-          String(maxCommandLength)
-        } on ${process.platform}). Consider using ExecArg with batchedArgs.`
+        `Command line is too long (${String(command.length)} chars, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArg with batchedArgs.`
       )
     );
   }
@@ -252,9 +248,7 @@ function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promis
       if (currentBatch.length === 0) {
         return Promise.reject(
           new Error(
-            `Cannot split command into batches: a single argument (${String(arg.length)} chars) plus the base command (${
-              String(baseCommand.length)
-            } chars) exceeds the max command length (${String(maxCommandLength)}).`
+            `Cannot split command into batches: a single argument (${String(arg.length)} chars) plus the base command (${String(baseCommand.length)} chars) exceeds the max command length (${String(maxCommandLength)}).`
           )
         );
       }

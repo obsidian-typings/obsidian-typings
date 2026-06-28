@@ -166,8 +166,7 @@ export const TS_GLOBAL_TYPES: Record<string, string> = {
   WindowEventHandlers: 'https://raw.githubusercontent.com/microsoft/TypeScript/38c3279e29e45c274c408d909394b7bf45c24fdc/src/lib/dom.generated.d.ts#L41634',
   WindowEventMap: 'https://developer.mozilla.org/docs/Web/API/Window#events',
   WindowLocalStorage: 'https://raw.githubusercontent.com/microsoft/TypeScript/38c3279e29e45c274c408d909394b7bf45c24fdc/src/lib/dom.generated.d.ts#L41685',
-  WindowOrWorkerGlobalScope:
-    'https://raw.githubusercontent.com/microsoft/TypeScript/38c3279e29e45c274c408d909394b7bf45c24fdc/src/lib/dom.generated.d.ts#L41690',
+  WindowOrWorkerGlobalScope: 'https://raw.githubusercontent.com/microsoft/TypeScript/38c3279e29e45c274c408d909394b7bf45c24fdc/src/lib/dom.generated.d.ts#L41690',
   WindowSessionStorage: 'https://raw.githubusercontent.com/microsoft/TypeScript/38c3279e29e45c274c408d909394b7bf45c24fdc/src/lib/dom.generated.d.ts#L41736'
 };
 // Cspell:enable

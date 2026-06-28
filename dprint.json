@@ -6,7 +6,7 @@
     "exportDeclaration.forceMultiLine": "whenMultiple",
     "functionExpression.spaceAfterFunctionKeyword": true,
     "importDeclaration.forceMultiLine": "whenMultiple",
-    "lineWidth": 160,
+    "lineWidth": 1000,
     "quoteStyle": "alwaysSingle",
     "trailingCommas": "never"
   },

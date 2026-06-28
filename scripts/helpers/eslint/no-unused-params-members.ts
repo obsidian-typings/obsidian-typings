@@ -130,8 +130,7 @@ export const noUnusedParamsMembers: Rule.RuleModule = {
       description: 'Flag `*Params`/`*Options` interface members never accessed by the function that receives them'
     },
     messages: {
-      [MESSAGE_ID]:
-        'Member "{{ member }}" of "{{ interfaceName }}" is never accessed by the function that receives it. Remove it (the compiler will catch it if it is still needed elsewhere).'
+      [MESSAGE_ID]: 'Member "{{ member }}" of "{{ interfaceName }}" is never accessed by the function that receives it. Remove it (the compiler will catch it if it is still needed elsewhere).'
     },
     schema: [],
     type: 'suggestion'

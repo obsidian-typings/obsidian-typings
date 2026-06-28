@@ -286,9 +286,7 @@ function initObjectPathMap(obj: unknown, options: GenerateTypesOptions): void {
 }
 
 function sortedEntries(obj: object): [string, unknown][] {
-  return entriesSafe(obj).sort(([key1, value1], [key2, value2]) =>
-    (Number(typeof value1 === 'function') - Number(typeof value2 === 'function')) || key1.localeCompare(key2)
-  );
+  return entriesSafe(obj).sort(([key1, value1], [key2, value2]) => (Number(typeof value1 === 'function') - Number(typeof value2 === 'function')) || key1.localeCompare(key2));
 }
 
 function entriesSafe(obj: object): [string, unknown][] {

@@ -58,11 +58,7 @@ function generateMainReadmeLine(branchSpec: BranchSpec): string {
   const branchName = generateBranchName(branchSpec);
   const npmPackage = `@obsidian-typings/obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}`;
   const npmLatestPackage = `@obsidian-typings/obsidian-${branchSpec.channel}-latest`;
-  const versionBadge = `[![npm](https://img.shields.io/npm/v/${npmPackage}?logo=npm&logoColor=white&label=${
-    encodeURIComponent(npmPackage)
-  })](https://www.npmjs.com/package/${npmPackage})`;
-  const latestBadge = `[![npm](https://img.shields.io/npm/v/${npmLatestPackage}?logo=npm&logoColor=white&label=${
-    encodeURIComponent(npmLatestPackage)
-  })](https://www.npmjs.com/package/${npmLatestPackage})`;
+  const versionBadge = `[![npm](https://img.shields.io/npm/v/${npmPackage}?logo=npm&logoColor=white&label=${encodeURIComponent(npmPackage)})](https://www.npmjs.com/package/${npmPackage})`;
+  const latestBadge = `[![npm](https://img.shields.io/npm/v/${npmLatestPackage}?logo=npm&logoColor=white&label=${encodeURIComponent(npmLatestPackage)})](https://www.npmjs.com/package/${npmLatestPackage})`;
   return `\n- Latest \`${branchSpec.channel}\` release: [\`${branchName}\`](https://github.com/obsidian-typings/obsidian-typings/tree/${branchName}) | ${versionBadge} | ${latestBadge}`;
 }
