@@ -98,9 +98,7 @@ export function checkProjectTypes(params: CheckProjectTypesParams): boolean {
   });
 
   const allDiagnostics = getPreEmitDiagnostics(program);
-  const keptDiagnostics = allDiagnostics.filter((diagnostic) =>
-    shouldKeepDiagnosticByFile(diagnostic, params.shouldKeepFile) && (params.shouldKeepDiagnostic?.(diagnostic) ?? true)
-  );
+  const keptDiagnostics = allDiagnostics.filter((diagnostic) => shouldKeepDiagnosticByFile(diagnostic, params.shouldKeepFile) && (params.shouldKeepDiagnostic?.(diagnostic) ?? true));
   const ignoredCount = allDiagnostics.length - keptDiagnostics.length;
 
   if (keptDiagnostics.length > 0) {
