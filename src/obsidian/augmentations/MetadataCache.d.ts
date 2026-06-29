@@ -660,6 +660,15 @@ declare module 'obsidian' {
     showIndexingNotice(): void;
 
     /**
+     * Applies queued internal-link updates to the affected files.
+     *
+     * @param updates - Map of file path to the link updates to apply to that file.
+     * @returns A promise that resolves when all updates have been applied.
+     * @unofficial
+     */
+    updateInternalLinks(updates: Map<string, unknown>): Promise<void>;
+
+    /**
      * Re-queue for link resolution every file that links to any of the changed names.
      *
      * Called on file create, delete, and rename. Each entry is a name, not a full path:
