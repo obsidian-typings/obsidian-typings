@@ -298,6 +298,15 @@ declare module 'obsidian' {
     constructor__(containerEl: HTMLElement): this;
 
     /**
+     * Makes the whole setting row act as a button, invoking the callback when clicked.
+     *
+     * @param callback - The callback to invoke when the setting is clicked.
+     * @returns The setting instance, for chaining.
+     * @unofficial
+     */
+    setAction(callback: () => void): this;
+
+    /**
      * Set the class of the setting.
      *
      * @param cls - The class of the setting.
@@ -381,6 +390,15 @@ declare module 'obsidian' {
      * @since 0.12.16
      */
     setName(name: DocumentFragment | string): this;
+
+    /**
+     * Makes the setting row navigable (adds a chevron and click handling).
+     *
+     * @param callback - The callback to invoke when the setting is clicked.
+     * @returns The setting instance, for chaining.
+     * @unofficial
+     */
+    setNavigable(callback: () => void): this;
 
     /**
      * Hide the info section of the setting.
