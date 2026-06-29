@@ -1,6 +1,7 @@
 import type {
   App,
-  Command
+  Command,
+  Events
 } from 'obsidian';
 
 import type { getCommandsConstructor } from '../../implementations/constructors/internals/getCommandsConstructor.d.ts';
@@ -13,7 +14,7 @@ import type { CommandsEditorCommandsRecord } from './CommandsEditorCommandsRecor
  * @public
  * @unofficial
  */
-export interface Commands {
+export interface Commands extends Events {
   /**
    * Reference to the {@link obsidian#App}.
    */
