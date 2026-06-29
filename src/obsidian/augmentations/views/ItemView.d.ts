@@ -61,6 +61,13 @@ declare module 'obsidian' {
     iconEl: HTMLElement;
 
     /**
+     * Toggle button for the left sidebar, shown on mobile. `null` on desktop.
+     *
+     * @unofficial
+     */
+    leftSidebarToggleEl: HTMLElement | null;
+
+    /**
      * Anchor button for revealing more view actions.
      *
      * @unofficial

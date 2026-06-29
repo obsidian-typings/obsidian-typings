@@ -158,6 +158,14 @@ declare module 'obsidian' {
     onUnloadFile(file: TFile): Promise<void>;
 
     /**
+     * Receives sync state from another file view, opening the other view's file if it differs.
+     *
+     * @param view - The view to receive sync state from.
+     * @unofficial
+     */
+    receiveSyncState(view: FileView): void;
+
+    /**
      * Render the breadcrumb navigation for this file view.
      *
      * @unofficial

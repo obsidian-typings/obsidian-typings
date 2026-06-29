@@ -268,6 +268,14 @@ declare module 'obsidian' {
     metadataHasFocus(): boolean;
 
     /**
+     * Handles an app config change relevant to the view (e.g. spellcheck).
+     *
+     * @param configKey - The config key that changed.
+     * @unofficial
+     */
+    onConfigChanged(configKey: string): void;
+
+    /**
      * On app css change, update source mode editor.
      *
      * @unofficial
@@ -329,6 +337,14 @@ declare module 'obsidian' {
     onSwitchView(event: KeyboardEvent | MouseEvent): Promise<void>;
 
     /**
+     * The path of the file shown in the view.
+     *
+     * @returns The file path.
+     * @unofficial
+     */
+    get path(): string;
+
+    /**
      * Opens PDF modal for exporting PDF of the current file.
      *
      * @unofficial
@@ -350,6 +366,14 @@ declare module 'obsidian' {
      * @unofficial
      */
     registerMode(mode: MarkdownSubView): MarkdownSubView;
+
+    /**
+     * Replaces the active scope, falling back to the initial scope when `null` is given.
+     *
+     * @param scope - The scope to set, or `null` to restore the initial scope.
+     * @unofficial
+     */
+    replaceScope(scope: null | Scope): void;
 
     /**
      * Save the frontmatter of the file.
@@ -408,6 +432,13 @@ declare module 'obsidian' {
      * @official
      */
     showSearch(replace?: boolean): void;
+
+    /**
+     * Syncs the current scroll position and triggers the markdown-scroll event.
+     *
+     * @unofficial
+     */
+    syncScroll(): void;
 
     /**
      * Toggle backlinks on editor.
