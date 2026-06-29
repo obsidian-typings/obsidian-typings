@@ -28,6 +28,11 @@ export interface Plugins {
   autoCheckForUpdates: boolean;
 
   /**
+   * Debounced callback that fires a `changed` event when the plugin set changes.
+   */
+  didChange: Debouncer<[], void>;
+
+  /**
    * Set of enabled plugin IDs.
    *
    * @remark The plugin ids aren't guaranteed to be either active (in `app.plugins.plugins`) or installed (in `app.plugins.manifests`).
@@ -80,6 +85,13 @@ export interface Plugins {
    * @returns A promise that resolves when the update check is complete.
    */
   checkForUpdates(showNotice?: boolean): Promise<void>;
+
+  /**
+   * Clears the set of enabled plugins and persists the change.
+   *
+   * @returns A promise that resolves when the change has been saved.
+   */
+  clearEnabledPlugins(): Promise<void>;
 
   /**
    * Constructor.

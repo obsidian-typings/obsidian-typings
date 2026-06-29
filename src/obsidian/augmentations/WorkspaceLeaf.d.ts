@@ -160,6 +160,14 @@ declare module 'obsidian' {
     canNavigate(): boolean;
 
     /**
+     * Checks whether this leaf can be pinned (i.e. its parent is a tab group).
+     *
+     * @returns Whether the leaf can be pinned.
+     * @unofficial
+     */
+    canPin(): boolean;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getWorkspaceLeafConstructor} from `obsidian-typings/implementations`.
