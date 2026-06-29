@@ -320,6 +320,13 @@ declare module 'obsidian' {
     insertLink(): void;
 
     /**
+     * Insert a math block (`$$ … $$`) at the current cursor position.
+     *
+     * @unofficial
+     */
+    insertMathBlock(): void;
+
+    /**
      * Insert a mathjax equation block at the current cursor position.
      *
      * @unofficial
@@ -386,6 +393,13 @@ declare module 'obsidian' {
      * @unofficial
      */
     newlineAndIndentOnly(): void;
+
+    /**
+     * Inserts a single newline, replacing the current selection.
+     *
+     * @unofficial
+     */
+    newlineOnly(): void;
 
     /**
      * Convert an offset to a position.
@@ -575,6 +589,14 @@ declare module 'obsidian' {
      * @since 0.11.11
      */
     setCursor(pos: EditorPosition | number, ch?: number): void;
+
+    /**
+     * Sets the markdown heading level of the line(s) under the cursor.
+     *
+     * @param level - The heading level (1 to 6), or 0 to remove the heading.
+     * @unofficial
+     */
+    setHeading(level: number): void;
 
     /**
      * Set the text at line index (0-based).
