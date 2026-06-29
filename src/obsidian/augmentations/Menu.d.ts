@@ -52,6 +52,13 @@ declare module 'obsidian' {
     scope: Scope;
 
     /**
+     * The scrollable container element of the menu.
+     *
+     * @unofficial
+     */
+    scrollEl: HTMLElement;
+
+    /**
      * Sections within the menu.
      *
      * @unofficial
@@ -66,11 +73,25 @@ declare module 'obsidian' {
     selected: number;
 
     /**
+     * Whether to show the macOS writing-tools entries.
+     *
+     * @unofficial
+     */
+    showMacWritingTools: boolean;
+
+    /**
      * Configurations for the submenu configs.
      *
      * @unofficial
      */
     submenuConfig: MenuSubmenuConfigRecord;
+
+    /**
+     * Configuration for menu sections that open as submenus, keyed by section name.
+     *
+     * @unofficial
+     */
+    submenuConfigs: MenuSubmenuConfigRecord;
 
     /**
      * Whether the submenu is currently unloading.
@@ -145,6 +166,14 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes.
      */
     constructor__(): this;
+
+    /**
+     * Hides the menu when a click occurs outside of it.
+     *
+     * @param evt - The mouse event.
+     * @unofficial
+     */
+    handleClickOutside(evt: MouseEvent): void;
 
     /**
      * Hide the menu.
@@ -248,6 +277,14 @@ declare module 'obsidian' {
     onMouseOver(e: MouseEvent): boolean;
 
     /**
+     * Handles the pointer moving over a menu element.
+     *
+     * @param evt - The pointer event.
+     * @unofficial
+     */
+    onPointerOver(evt: PointerEvent): void;
+
+    /**
      * Registers dom events and scope for the menu.
      *
      * @param item - {@link obsidian#Menu} item.
@@ -269,6 +306,15 @@ declare module 'obsidian' {
      * @unofficial
      */
     select(index: number): void;
+
+    /**
+     * Selects the menu item containing the given element, optionally opening its submenu immediately.
+     *
+     * @param el - The element within the item to select.
+     * @param immediate - Whether to open the submenu immediately rather than after a delay.
+     * @unofficial
+     */
+    selectElement(el: Node, immediate?: boolean): void;
 
     /**
      * Set the menu to not use an icon.
@@ -297,6 +343,15 @@ declare module 'obsidian' {
      * @unofficial
      */
     setSectionSubmenu(section: string, submenu: Submenu): this;
+
+    /**
+     * Sets whether to show the macOS writing-tools entries.
+     *
+     * @param show - Whether to show the entries.
+     * @returns The menu instance, for chaining.
+     * @unofficial
+     */
+    setShowMacWritingTools(show: boolean): this;
 
     /**
      * Force this menu to use native or DOM.

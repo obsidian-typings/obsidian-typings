@@ -51,6 +51,13 @@ declare module 'obsidian' {
     dimBackground: boolean;
 
     /**
+     * Whether the modal focuses its first input when opened.
+     *
+     * @unofficial
+     */
+    hasInitialInputFocus: boolean;
+
+    /**
      * Header element of the modal dialog.
      *
      * @unofficial
@@ -142,6 +149,29 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes.
      */
     constructor__(app: App): this;
+
+    /**
+     * The document the modal's root element belongs to.
+     *
+     * @unofficial
+     */
+    get doc(): Document;
+
+    /**
+     * Gets the modal's root element.
+     *
+     * @returns The root element.
+     * @unofficial
+     */
+    getRootEl(): HTMLElement;
+
+    /**
+     * Closes the modal when a click occurs outside of it, unless the event was already handled.
+     *
+     * @param evt - The mouse event.
+     * @unofficial
+     */
+    onClickOutside(evt: MouseEvent): void;
 
     /**
      * Called when the modal is closed.

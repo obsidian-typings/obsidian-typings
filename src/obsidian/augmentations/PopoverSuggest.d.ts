@@ -40,11 +40,32 @@ declare module 'obsidian' {
     suggestEl: HTMLDivElement;
 
     /**
+     * The inner element holding the rendered suggestions.
+     *
+     * @unofficial
+     */
+    suggestInnerEl: HTMLElement;
+
+    /**
      * Handles selection and rendering of the suggestions.
      *
      * @unofficial
      */
     suggestions: SuggestionContainer<T>;
+
+    /**
+     * The window the suggestion popover is shown in, or `null` while closed.
+     *
+     * @unofficial
+     */
+    win: null | Window;
+
+    /**
+     * Attaches the suggestion popover to the document with an open animation.
+     *
+     * @unofficial
+     */
+    attachDom(): void;
 
     /**
      * Automatically destroy the popover when its associated element is removed.
@@ -72,6 +93,13 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes.
      */
     constructor__(app: App, scope?: Scope): this;
+
+    /**
+     * Detaches the suggestion popover from the document.
+     *
+     * @unofficial
+     */
+    detachDom(): void;
 
     /**
      * Handle the escape key to close the popover.

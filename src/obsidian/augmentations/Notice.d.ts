@@ -10,6 +10,13 @@ declare module 'obsidian' {
    */
   interface Notice {
     /**
+     * The container element for action buttons, created lazily by {@link Notice.addButton}. `null` until then.
+     *
+     * @unofficial
+     */
+    buttonContainerEl: HTMLElement | null;
+
+    /**
      * The container HTML element for the notice.
      *
      * @official
@@ -33,6 +40,30 @@ declare module 'obsidian' {
      * @since 0.9.7
      */
     noticeEl: HTMLElement;
+
+    /**
+     * The auto-hide timer handle, or `-1` when no auto-hide is scheduled.
+     *
+     * @unofficial
+     */
+    timerId: number;
+
+    /**
+     * The window the notice is shown in.
+     *
+     * @unofficial
+     */
+    win: Window;
+
+    /**
+     * Adds an action button to the notice.
+     *
+     * @param buttonText - The button label.
+     * @param callback - Called when the button is clicked; the notice is hidden first.
+     * @returns The notice instance, for chaining.
+     * @unofficial
+     */
+    addButton(buttonText: string, callback: (evt: MouseEvent) => void): this;
 
     /**
      * Constructor.
@@ -66,6 +97,15 @@ declare module 'obsidian' {
      * @since 0.9.7
      */
     hide(): void;
+
+    /**
+     * Schedules the notice to auto-hide after the given duration, clearing any existing timer.
+     *
+     * @param timeoutMilliseconds - The delay before hiding, in milliseconds. `0` disables auto-hide.
+     * @returns The notice instance, for chaining.
+     * @unofficial
+     */
+    setAutoHide(timeoutMilliseconds: number): this;
 
     /**
      * Change the message of this notice.

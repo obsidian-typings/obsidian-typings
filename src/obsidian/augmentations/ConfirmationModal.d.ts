@@ -19,6 +19,13 @@ declare module 'obsidian' {
     buttonContainerEl: HTMLElement;
 
     /**
+     * The buttons in the modal's button row.
+     *
+     * @unofficial
+     */
+    buttons: ConfirmationButton[];
+
+    /**
      * Add a button to the modal's button row.
      *
      * @param cb - The callback that configures the button.

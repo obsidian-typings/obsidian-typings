@@ -10,6 +10,20 @@ declare module 'obsidian' {
    */
   interface MenuSeparator {
     /**
+     * The separator's DOM element.
+     *
+     * @unofficial
+     */
+    dom: HTMLElement;
+
+    /**
+     * The menu the separator belongs to.
+     *
+     * @unofficial
+     */
+    menu: Menu;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getMenuSeparatorConstructor} from `obsidian-typings/implementations`.
