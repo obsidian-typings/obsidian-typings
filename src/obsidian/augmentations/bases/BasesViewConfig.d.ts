@@ -19,6 +19,29 @@ declare module 'obsidian' {
     name: string;
 
     /**
+     * The Bases query this view belongs to.
+     *
+     * @unofficial
+     */
+    query: unknown;
+
+    /**
+     * The view type identifier (e.g. `'table'`).
+     *
+     * @unofficial
+     */
+    type: string;
+
+    /**
+     * Creates a copy of this config under a new view name.
+     *
+     * @param name - The name for the cloned view.
+     * @returns The cloned config.
+     * @unofficial
+     */
+    clone(name: string): BasesViewConfig;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getBasesViewConfigConstructor} from `obsidian-typings/implementations`.
@@ -41,6 +64,14 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     get(key: string): unknown;
+
+    /**
+     * Gets all stored configuration data for the view.
+     *
+     * @returns The configuration data.
+     * @unofficial
+     */
+    getAll(): Record<string, unknown>;
 
     /**
      * Retrieve a user-configured value from the config, converting it to a {@link obsidian#BasesPropertyId}.
@@ -81,6 +112,14 @@ declare module 'obsidian' {
     getEvaluatedFormula(view: BasesView, key: string): Value;
 
     /**
+     * Gets the configured row limit for the view.
+     *
+     * @returns The limit, or 0 when unset.
+     * @unofficial
+     */
+    getLimit(): number;
+
+    /**
      * Ordered list of properties to display in this view.
      * In a table, these can be interpreted as the list of visible columns.
      * Order is configured by the user through the properties toolbar menu.
@@ -90,6 +129,15 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     getOrder(): BasesPropertyId[];
+
+    /**
+     * Gets the per-property config for a property.
+     *
+     * @param property - The property identifier.
+     * @returns The property config.
+     * @unofficial
+     */
+    getPropertyConfig(property: BasesPropertyId): unknown;
 
     /**
      * Retrieve the sorting config for this view. Sort is configured by the user through the sort toolbar menu.
@@ -105,6 +153,31 @@ declare module 'obsidian' {
     getSort(): BasesSortConfig[];
 
     /**
+     * Gets the summary function key configured for a property.
+     *
+     * @param property - The property identifier.
+     * @returns The summary key, or `null` if none.
+     * @unofficial
+     */
+    getSummaryKey(property: BasesPropertyId): null | string;
+
+    /**
+     * Gets the user-friendly name of the view.
+     *
+     * @returns The view name.
+     * @unofficial
+     */
+    getViewName(): string;
+
+    /**
+     * Serializes the view config to a plain object.
+     *
+     * @returns The serialized config.
+     * @unofficial
+     */
+    serialize(): Record<string, unknown>;
+
+    /**
      * Store configuration data for the view. Views should prefer {@link obsidian#BasesViewRegistration.options}
      * to allow users to configure options where appropriate.
      *
@@ -114,5 +187,47 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     set(key: string, value: null | unknown): void;
+
+    /**
+     * Sets the group-by config for the view.
+     *
+     * @param groupBy - The group-by config, or `null` to clear it.
+     * @unofficial
+     */
+    setGroupBy(groupBy: BasesSortConfig | null): void;
+
+    /**
+     * Sets the row limit for the view.
+     *
+     * @param limit - The limit.
+     * @unofficial
+     */
+    setLimit(limit: number): void;
+
+    /**
+     * Sets the ordered list of properties to display.
+     *
+     * @param order - The property order.
+     * @unofficial
+     */
+    setOrder(order: BasesPropertyId[]): void;
+
+    /**
+     * Updates the sort config for a property.
+     *
+     * @param property - The property identifier.
+     * @param direction - The sort direction to apply, or a toggle/none action.
+     * @unofficial
+     */
+    setSortProperty(property: BasesPropertyId, direction: 'ASC' | 'DESC' | 'NONE' | 'TOGGLE'): void;
+
+    /**
+     * Sets the summary function key for a property.
+     *
+     * @param property - The property identifier.
+     * @param summaryKey - The summary key, or `null` to clear it.
+     * @unofficial
+     */
+    setSummaryKey(property: BasesPropertyId, summaryKey: null | string): void;
   }
 }

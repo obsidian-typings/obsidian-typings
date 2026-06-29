@@ -21,6 +21,22 @@ declare module 'obsidian' {
     data: BasesEntry[];
 
     /**
+     * Truncates the given entries in place to the configured limit.
+     *
+     * @param entries - The entries to limit.
+     * @unofficial
+     */
+    applyLimit(entries: BasesEntry[]): void;
+
+    /**
+     * Sorts the given entries in place according to the configured sort.
+     *
+     * @param entries - The entries to sort.
+     * @unofficial
+     */
+    applySort(entries: BasesEntry[]): void;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getBasesQueryResultConstructor} from `obsidian-typings/implementations`.
