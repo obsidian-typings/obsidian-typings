@@ -12,6 +12,13 @@ declare module 'obsidian' {
    */
   interface WorkspaceLeaf extends WorkspaceItem, HoverParent {
     /**
+     * The cached empty-state view shown when the leaf has no file open.
+     *
+     * @unofficial
+     */
+    _empty: View;
+
+    /**
      * Timestamp of when this leaf was last activated.
      *
      * @unofficial

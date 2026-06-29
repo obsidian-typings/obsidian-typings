@@ -1,6 +1,7 @@
 import type {
   App,
   Debouncer,
+  Events,
   Plugin,
   PluginManifest
 } from 'obsidian';
@@ -16,7 +17,7 @@ import type { PluginsPluginsRecord } from './PluginsPluginsRecord.d.ts';
  * @public
  * @unofficial
  */
-export interface Plugins {
+export interface Plugins extends Events {
   /**
    * Reference to the {@link obsidian#App}.
    */
