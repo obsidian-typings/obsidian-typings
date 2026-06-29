@@ -10,6 +10,27 @@ declare module 'obsidian' {
    */
   interface LinkValue extends StringValue {
     /**
+     * Reference to the app instance.
+     *
+     * @unofficial
+     */
+    app: App;
+
+    /**
+     * The display text of the link, or `null` if none.
+     *
+     * @unofficial
+     */
+    display: null | StringValue;
+
+    /**
+     * The source path the link is resolved relative to.
+     *
+     * @unofficial
+     */
+    sourcePath: string;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getLinkValueConstructor} from `obsidian-typings/implementations`.
@@ -23,6 +44,14 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes.
      */
     constructor5__(app: App, value: string, sourcePath: string, display?: null | string): this;
+
+    /**
+     * Resolves the link to its target file.
+     *
+     * @returns The target file, or `null` if it cannot be resolved.
+     * @unofficial
+     */
+    resolve(): null | TFile;
   }
 
   namespace LinkValue {

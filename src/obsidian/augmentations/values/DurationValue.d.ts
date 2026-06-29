@@ -11,6 +11,55 @@ declare module 'obsidian' {
    */
   interface DurationValue extends NotNullValue {
     /**
+     * The days component of the duration.
+     *
+     * @unofficial
+     */
+    days: number;
+
+    /**
+     * The hours component of the duration.
+     *
+     * @unofficial
+     */
+    hours: number;
+
+    /**
+     * The milliseconds component of the duration.
+     *
+     * @unofficial
+     */
+    milliseconds: number;
+
+    /**
+     * The minutes component of the duration.
+     *
+     * @unofficial
+     */
+    minutes: number;
+
+    /**
+     * The months component of the duration.
+     *
+     * @unofficial
+     */
+    months: number;
+
+    /**
+     * The seconds component of the duration.
+     *
+     * @unofficial
+     */
+    seconds: number;
+
+    /**
+     * The years component of the duration.
+     *
+     * @unofficial
+     */
+    years: number;
+
+    /**
      * Modifies the provided {@link DateValue} by this duration.
      *
      * @param value - The {@link obsidian#DateValue} to modify.

@@ -21,5 +21,14 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes.
      */
     constructor5__(value: string): this;
+
+    /**
+     * Checks whether this tag matches the given value, treating nested tags as matching their parents.
+     *
+     * @param value - The value to match against.
+     * @returns Whether the tag matches.
+     * @unofficial
+     */
+    tagMatches(value: Value): boolean;
   }
 }

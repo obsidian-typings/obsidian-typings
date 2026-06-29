@@ -12,6 +12,13 @@ declare module 'obsidian' {
    */
   interface Value {
     /**
+     * The lucide icon name representing this value's type.
+     *
+     * @unofficial
+     */
+    icon: string;
+
+    /**
      * Constructor.
      *
      * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<Value\>}.
@@ -43,6 +50,14 @@ declare module 'obsidian' {
     isTruthy__(): boolean;
 
     /**
+     * Returns the property keys accessible on this value via {@link Value.objectAccess}.
+     *
+     * @returns The accessible property keys.
+     * @unofficial
+     */
+    keys(): string[];
+
+    /**
      * Returns a boolean indicating whether this Value is loosely equal to the provided Value.
      *
      * @param other - The Value to compare to.
@@ -51,6 +66,15 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     looseEquals(other: Value): boolean;
+
+    /**
+     * Accesses a named sub-property of this value.
+     *
+     * @param key - The property key to access (case-insensitive).
+     * @returns The wrapped sub-value, or `null` if the key is not accessible.
+     * @unofficial
+     */
+    objectAccess(key: string): null | Value;
 
     /**
      * Render this value into the provided HTMLElement.

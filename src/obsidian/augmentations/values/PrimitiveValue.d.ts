@@ -11,6 +11,13 @@ declare module 'obsidian' {
    */
   interface PrimitiveValue<T> extends NotNullValue {
     /**
+     * The wrapped primitive value.
+     *
+     * @unofficial
+     */
+    data: T;
+
+    /**
      * Constructor.
      *
      * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<PrimitiveValue\>}.

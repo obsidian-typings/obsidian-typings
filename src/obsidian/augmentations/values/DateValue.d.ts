@@ -10,6 +10,20 @@ declare module 'obsidian' {
    */
   interface DateValue extends NotNullValue {
     /**
+     * The wrapped date.
+     *
+     * @unofficial
+     */
+    date: Date;
+
+    /**
+     * Whether this value includes a time portion (as opposed to a date only).
+     *
+     * @unofficial
+     */
+    time: boolean;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getDateValueConstructor} from `obsidian-typings/implementations`.
@@ -39,6 +53,22 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     isTruthy(): boolean;
+
+    /**
+     * Formats the date portion of this value as a string.
+     *
+     * @returns The formatted date.
+     * @unofficial
+     */
+    printDate(): string;
+
+    /**
+     * Formats the time portion of this value as a string.
+     *
+     * @returns The formatted time.
+     * @unofficial
+     */
+    printTime(): string;
 
     /**
      * Returns a new {@link RelativeDateValue} based on this {@link obsidian#DateValue}.

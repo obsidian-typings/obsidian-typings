@@ -10,6 +10,13 @@ declare module 'obsidian' {
    */
   interface ObjectValue extends NotNullValue {
     /**
+     * The wrapped object. Values are lazily wrapped into {@link Value}s on access.
+     *
+     * @unofficial
+     */
+    data: Record<string, unknown>;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getObjectValueConstructor} from `obsidian-typings/implementations`.
@@ -33,6 +40,15 @@ declare module 'obsidian' {
     get(key: string): null | Value;
 
     /**
+     * Gets the {@link Value} for a key, matched case-insensitively.
+     *
+     * @param key - The key to look up (case-insensitive).
+     * @returns The wrapped value, or {@link NullValue} when not found.
+     * @unofficial
+     */
+    getInsensitive(key: string): Value;
+
+    /**
      * Returns a boolean indicating whether this {@link obsidian#ObjectValue} is empty.
      *
      * @returns A boolean indicating whether this {@link obsidian#ObjectValue} is empty.
@@ -51,6 +67,13 @@ declare module 'obsidian' {
     isTruthy(): boolean;
 
     /**
+     * Wraps a raw property value into a {@link Value}.
+     *
+     * @unofficial
+     */
+    lazyEvaluator(key: string, raw: unknown): Value;
+
+    /**
      * Get the string representation of this {@link obsidian#ObjectValue}.
      *
      * @returns The string representation of this {@link obsidian#ObjectValue}.
@@ -58,6 +81,14 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     toString(): string;
+
+    /**
+     * Returns the raw (unwrapped) values of the object's properties.
+     *
+     * @returns The raw property values.
+     * @unofficial
+     */
+    valuesRaw(): unknown[];
   }
 
   namespace ObjectValue {

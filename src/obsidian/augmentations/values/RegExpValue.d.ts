@@ -10,6 +10,13 @@ declare module 'obsidian' {
    */
   interface RegExpValue extends NotNullValue {
     /**
+     * The wrapped regular expression.
+     *
+     * @unofficial
+     */
+    regexp: RegExp;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getRegExpValueConstructor} from `obsidian-typings/implementations`.

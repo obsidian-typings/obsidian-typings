@@ -10,6 +10,13 @@ declare module 'obsidian' {
    */
   interface UrlValue extends StringValue {
     /**
+     * The display text of the link, or `null` if none.
+     *
+     * @unofficial
+     */
+    display: null | StringValue;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getUrlValueConstructor} from `obsidian-typings/implementations`.
