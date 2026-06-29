@@ -445,6 +445,17 @@ declare module 'obsidian' {
     importAttachments(attachmentsToImport: ImportedAttachment[], folder: null | TFolder): Promise<void>;
 
     /**
+     * Import a directory from the file system into the vault (desktop only).
+     *
+     * @param directory - The source directory to import.
+     * @param name - The name of the destination folder to create in the vault.
+     * @param parent - The parent folder to import into. Defaults to the vault root.
+     * @returns A promise that resolves when the import completes.
+     * @unofficial
+     */
+    importDirectory(directory: unknown, name: string, parent?: TFolder): Promise<void>;
+
+    /**
      * Initialize the entire application using the provided FS adapter
      *
      * @param adapter - The data adapter to use.
@@ -557,6 +568,13 @@ declare module 'obsidian' {
      * @unofficial
      */
     registerQuitHook(): void;
+
+    /**
+     * Relaunch the application (desktop) or reload the window (mobile).
+     *
+     * @unofficial
+     */
+    relaunch(): void;
 
     /**
      * Run the vault opening behavior.
