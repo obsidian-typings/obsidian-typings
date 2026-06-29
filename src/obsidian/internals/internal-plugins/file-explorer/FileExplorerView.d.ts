@@ -8,6 +8,7 @@ import type {
 } from 'obsidian';
 
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
+import type { SearchQuery } from '../../SearchQuery.d.ts';
 import type { Tree } from '../../tree/Tree.d.ts';
 import type { WeakMapWrapper } from '../../WeakMapWrapper.d.ts';
 import type { FileExplorerViewFileItemsRecord } from './FileExplorerViewFileItemsRecord.d.ts';
@@ -52,6 +53,11 @@ export interface FileExplorerView extends View {
    * Try to sort tree items.
    */
   requestSort: Debouncer<[], void>;
+
+  /**
+   * The active filter query for the file explorer, or `null` when no filter is applied.
+   */
+  searchQuery: null | SearchQuery;
 
   /**
    * Current sort order of file tree items.
