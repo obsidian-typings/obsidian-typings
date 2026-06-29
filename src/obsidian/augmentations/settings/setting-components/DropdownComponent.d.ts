@@ -10,6 +10,20 @@ declare module 'obsidian' {
    */
   interface DropdownComponent extends ValueComponent<string> {
     /**
+     * Hidden select element used to measure the natural width of the dropdown.
+     *
+     * @unofficial
+     */
+    measureEl: HTMLSelectElement;
+
+    /**
+     * Option element within {@link DropdownComponent.measureEl} used for measuring.
+     *
+     * @unofficial
+     */
+    measureOptionEl: HTMLOptionElement;
+
+    /**
      * The HTML element representation of the dropdown.
      *
      * @official
@@ -89,6 +103,13 @@ declare module 'obsidian' {
      * @since 0.9.7
      */
     onChange(callback: (value: string) => unknown): this;
+
+    /**
+     * Resizes the dropdown to fit the width of its selected option.
+     *
+     * @unofficial
+     */
+    resizeToFit(): void;
 
     /**
      * Set the disabled state of the dropdown.

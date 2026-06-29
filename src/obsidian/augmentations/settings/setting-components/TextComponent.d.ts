@@ -10,6 +10,15 @@ declare module 'obsidian' {
    */
   interface TextComponent extends AbstractTextComponent<HTMLInputElement> {
     /**
+     * Selects the input's text when it receives focus.
+     *
+     * @param force - Whether to enable select-on-focus even without a physical keyboard.
+     * @returns The text component.
+     * @unofficial
+     */
+    autoSelect(force?: boolean): this;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getTextComponentConstructor} from `obsidian-typings/implementations`.

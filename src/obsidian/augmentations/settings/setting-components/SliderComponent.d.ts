@@ -147,5 +147,19 @@ declare module 'obsidian' {
      * @since 0.9.7
      */
     setValue(value: number): this;
+
+    /**
+     * Shows the slider's value tooltip.
+     *
+     * @unofficial
+     */
+    showTooltip(): void;
+
+    /**
+     * Updates the displayed value text of the slider.
+     *
+     * @unofficial
+     */
+    updateDisplay(): void;
   }
 }

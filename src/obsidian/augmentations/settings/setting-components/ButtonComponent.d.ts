@@ -153,6 +153,15 @@ declare module 'obsidian' {
     setIcon(icon: IconName): this;
 
     /**
+     * Toggles the button's loading state.
+     *
+     * @param loading - Whether the button is loading.
+     * @returns The button component.
+     * @unofficial
+     */
+    setLoading(loading: boolean): this;
+
+    /**
      * Sets the tooltip for the button component.
      *
      * @param tooltip - The tooltip to set.

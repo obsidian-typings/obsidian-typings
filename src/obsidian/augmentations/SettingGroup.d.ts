@@ -89,6 +89,15 @@ declare module 'obsidian' {
     addSearch(cb: (component: SearchComponent) => unknown): this;
 
     /**
+     * Adds a search control to the setting group's header.
+     *
+     * @param cb - Callback receiving the created control element.
+     * @returns The setting group.
+     * @unofficial
+     */
+    addSearchControl(cb: (el: HTMLElement) => void): this;
+
+    /**
      * Add a setting to the setting group.
      *
      * @param cb - The callback to add the setting.
@@ -116,6 +125,32 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes.
      */
     constructor__(containerEl: HTMLElement): this;
+
+    /**
+     * Focuses the nearest visible item at or after the given index.
+     *
+     * @param index - The index to start searching from.
+     * @unofficial
+     */
+    focusNearestItem(index: number): void;
+
+    /**
+     * Registers a handler invoked when an item is deleted via the keyboard.
+     *
+     * @param cb - Callback receiving the deleted item's index.
+     * @returns The setting group.
+     * @unofficial
+     */
+    onDeleteItem(cb: (index: number) => void): this;
+
+    /**
+     * Registers a handler invoked when an item is reordered via the keyboard.
+     *
+     * @param cb - Callback receiving the source and destination indices.
+     * @returns The setting group.
+     * @unofficial
+     */
+    onReorderItem(cb: (fromIndex: number, toIndex: number) => void): this;
 
     /**
      * Set the heading of the setting group.

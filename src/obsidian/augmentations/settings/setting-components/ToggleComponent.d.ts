@@ -10,6 +10,13 @@ declare module 'obsidian' {
    */
   interface ToggleComponent extends ValueComponent<boolean> {
     /**
+     * The current on/off state of the toggle.
+     *
+     * @unofficial
+     */
+    on: boolean;
+
+    /**
      * The HTML element that represents the toggle.
      *
      * @official
@@ -84,6 +91,14 @@ declare module 'obsidian' {
      * @since 1.2.3
      */
     setDisabled(disabled: boolean): this;
+
+    /**
+     * Renders the toggle in a smaller size.
+     *
+     * @returns The toggle.
+     * @unofficial
+     */
+    setSmall(): this;
 
     /**
      * Set the tooltip of the toggle.

@@ -35,6 +35,14 @@ declare module 'obsidian' {
     addRightDecorator(decoratorFn: (containerEl: HTMLElement) => void): this;
 
     /**
+     * Selects the input's text when it receives focus.
+     *
+     * @returns The search component.
+     * @unofficial
+     */
+    autoSelect(): this;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getSearchComponentConstructor} from `obsidian-typings/implementations`.
