@@ -72,6 +72,13 @@ declare module 'obsidian' {
     plugin?: Plugin;
 
     /**
+     * The rendered setting items (and groups) currently shown in the tab.
+     *
+     * @unofficial
+     */
+    renderedItems: unknown[];
+
+    /**
      * Reference to the settings modal.
      *
      * @unofficial
@@ -101,6 +108,15 @@ declare module 'obsidian' {
     constructor2__(app: App, setting: Setting): this;
 
     /**
+     * Builds a two-way binding (current value plus an onChange persister) for a control key.
+     *
+     * @param configKey - The setting key to bind.
+     * @returns The control binding.
+     * @unofficial
+     */
+    getControlBinding(configKey: string): unknown;
+
+    /**
      * Read the current value for a control key. Called on every render of a
      * `control`-type setting definition.
      *
@@ -116,6 +132,24 @@ declare module 'obsidian' {
      * @since 1.13.0
      */
     getControlValue(key: string): unknown;
+
+    /**
+     * Finds the setting definition rendered to the given element.
+     *
+     * @param el - The setting item element.
+     * @returns The matching definition, or `undefined` if none.
+     * @unofficial
+     */
+    getDefinitionForElement(el: HTMLElement): unknown;
+
+    /**
+     * Finds the rendered element for a setting definition.
+     *
+     * @param definition - The setting definition.
+     * @returns The matching element, or `undefined` if none.
+     * @unofficial
+     */
+    getElementForDefinition(definition: unknown): HTMLElement | undefined;
 
     /**
      * Override to provide setting definitions. Return an array of definitions
@@ -151,6 +185,13 @@ declare module 'obsidian' {
      * @since 1.13.0
      */
     refreshDomState(): void;
+
+    /**
+     * Re-renders the tab's already-built setting items, or displays the tab if none exist yet.
+     *
+     * @unofficial
+     */
+    renderTab(): void;
 
     /**
      * Persist a new value for a control key. Called on user change of a
