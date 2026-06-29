@@ -30,6 +30,13 @@ export interface RecentFileTracker {
   workspace: Workspace;
 
   /**
+   * Add a file to the recent files list, if the workspace layout is ready.
+   *
+   * @param file - The file to add.
+   */
+  addRecentFile(file: TFile): void;
+
+  /**
    * Add a file to the recent files list.
    *
    * @param file - File to add.
