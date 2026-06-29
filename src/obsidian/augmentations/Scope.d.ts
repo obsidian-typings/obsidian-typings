@@ -38,6 +38,13 @@ declare module 'obsidian' {
     tabFocusContainerEl: HTMLElement | null;
 
     /**
+     * The window this scope is bound to, or `null` when not bound to a specific window.
+     *
+     * @unofficial
+     */
+    win: null | Window;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getScopeConstructor} from `obsidian-typings/implementations`.
@@ -83,6 +90,14 @@ declare module 'obsidian' {
      * @unofficial
      */
     setTabFocusContainer(container: HTMLElement): void;
+
+    /**
+     * Sets the container element used for tab-focus handling.
+     *
+     * @param containerEl - The container element.
+     * @unofficial
+     */
+    setTabFocusContainerEl(containerEl: HTMLElement): void;
 
     /**
      * Remove an existing keymap event handler.
