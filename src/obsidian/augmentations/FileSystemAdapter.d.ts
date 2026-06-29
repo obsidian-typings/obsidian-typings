@@ -62,6 +62,13 @@ declare module 'obsidian' {
     path: typeof path;
 
     /**
+     * The URL prefix used to build resource paths (e.g. `'file:///'`).
+     *
+     * @unofficial
+     */
+    resourcePathPrefix: string;
+
+    /**
      * Reference to node URL module.
      *
      * @unofficial
@@ -418,12 +425,28 @@ declare module 'obsidian' {
     stopWatchPath(normalizedPath: string): void;
 
     /**
+     * Probes the file system for case-insensitivity by writing a temporary file, updating the adapter's case-sensitivity flag.
+     *
+     * @unofficial
+     */
+    testInsensitive(): void;
+
+    /**
      * Debounced handler triggered when file system events occur.
      *
      * @returns The debounced handler.
      * @unofficial
      */
     thingsHappening(): Debouncer<[], void>;
+
+    /**
+     * Moves a file to the OS trash via IPC (desktop only).
+     *
+     * @param fullPath - The absolute file-system path to trash.
+     * @returns Whether the file was successfully trashed.
+     * @unofficial
+     */
+    trash(fullPath: string): boolean;
 
     /**
      * Move to local trash.
