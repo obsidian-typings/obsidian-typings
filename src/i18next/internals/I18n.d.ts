@@ -23,14 +23,26 @@ export interface I18n {
   /** Whether the instance is currently initializing. */
   isInitializing: boolean;
 
+  /** The language a change is currently in progress to, if any. */
+  isLanguageChangingTo?: string;
+
   /** The active language code. */
   language: string;
 
   /** The list of languages in fallback order. */
   languages: readonly string[];
 
+  /** The i18next logger instance. */
+  logger: unknown;
+
   /** Loaded plugin modules. */
   modules: I18nModules;
+
+  /** The registered event observers. */
+  observers: unknown;
+
+  /** The resolved initialization options. */
+  options: InitOptions;
 
   /** The resolved language, if available. */
   resolvedLanguage?: string;
@@ -43,6 +55,9 @@ export interface I18n {
 
   /** The translation function. */
   t: TFunction;
+
+  /** The i18next translator instance. */
+  translator: unknown;
 
   /**
    * Adds a single resource entry.

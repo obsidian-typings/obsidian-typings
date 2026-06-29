@@ -12,8 +12,18 @@ export interface ResourceStore {
   /** The underlying resource data. */
   data: Record<string, Record<string, Record<string, string>>>;
 
+  /** The registered event observers. */
+  observers: unknown;
+
   /** The options used by this resource store. */
   options: InitOptions;
+
+  /**
+   * Adds namespaces to the store's options.
+   *
+   * @param ns - Namespace or namespaces to add.
+   */
+  addNamespaces(ns: string | string[]): void;
 
   /**
    * Adds a single resource entry.
@@ -103,6 +113,13 @@ export interface ResourceStore {
   on(event: string, listener: (...args: unknown[]) => void): void;
 
   /**
+   * Removes namespaces from the store's options.
+   *
+   * @param ns - Namespace or namespaces to remove.
+   */
+  removeNamespaces(ns: string | string[]): void;
+
+  /**
    * Removes a resource bundle.
    *
    * @param lng - Language code.
@@ -110,4 +127,11 @@ export interface ResourceStore {
    * @returns The resource store instance.
    */
   removeResourceBundle(lng: string, ns: string): ResourceStore;
+
+  /**
+   * Serializes the store's resource data.
+   *
+   * @returns The underlying resource data.
+   */
+  toJSON(): Record<string, Record<string, Record<string, string>>>;
 }
