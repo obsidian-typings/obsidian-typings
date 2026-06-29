@@ -120,6 +120,13 @@ declare module 'obsidian' {
     hoverLinkSources: WorkspaceHoverLinkSourcesRecord;
 
     /**
+     * Whether the workspace has finished its initial layout load.
+     *
+     * @unofficial
+     */
+    initialized: boolean;
+
+    /**
      * Last opened file in the vault.
      *
      * @unofficial
@@ -700,6 +707,14 @@ declare module 'obsidian' {
      * @unofficial
      */
     isInSidebar(leaf: WorkspaceLeaf): boolean;
+
+    /**
+     * Checks whether the workspace (the main window or a focused popout window) currently has focus.
+     *
+     * @returns Whether the workspace is focused.
+     * @unofficial
+     */
+    isWorkspaceFocused(): boolean;
 
     /**
      * Iterate through all leaves, including main area leaves, floating leaves, and sidebar leaves.
