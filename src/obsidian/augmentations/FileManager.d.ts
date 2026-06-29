@@ -124,6 +124,15 @@ declare module 'obsidian' {
     createNewMarkdownFileFromLinktext(filename: string, path: string): Promise<TFile>;
 
     /**
+     * Delete a frontmatter property from every note that uses it.
+     *
+     * @param property - The property key to delete.
+     * @returns A promise that resolves when the property has been deleted everywhere.
+     * @unofficial
+     */
+    deleteProperty(property: string): Promise<void>;
+
+    /**
      * Download attachments for note.
      *
      * @param file - The file to download attachments for.
@@ -203,6 +212,15 @@ declare module 'obsidian' {
     getNewFileParent(sourcePath: string, newFilePath?: string): TFolder;
 
     /**
+     * Gets an existing folder by case-insensitive path, creating it (and any missing parents) if absent.
+     *
+     * @param path - The folder path.
+     * @returns A promise that resolves to the existing or newly created folder.
+     * @unofficial
+     */
+    getOrCreateFolder(path: string): Promise<TFolder>;
+
+    /**
      * Insert text into a file.
      *
      * @param file - The file to insert into.
@@ -232,6 +250,15 @@ declare module 'obsidian' {
      * @unofficial
      */
     mergeFile(file: TFile, otherFile: TFile, override: string, atStart: boolean): Promise<void>;
+
+    /**
+     * Shows a notice offering to undo a bulk file modification, reverting each file to its captured state.
+     *
+     * @param records - The pre-modification state of each affected file.
+     * @param duration - How long the notice is shown, in milliseconds. Defaults to 30000.
+     * @unofficial
+     */
+    notifyForBulkUndo(records: BulkUndoRecord[], duration?: number): void;
 
     /**
      * Atomically read, modify, and save the frontmatter of a note.
