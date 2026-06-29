@@ -21,6 +21,11 @@ import type { TypeInfo } from './TypeInfo.d.ts';
  */
 export interface MetadataTypeManager extends Events {
   /**
+   * Whether the component is currently loaded (from the {@link obsidian#Component} lifecycle).
+   */
+  _loaded: boolean;
+
+  /**
    * Reference to the {@link obsidian#App}.
    */
   app: App;

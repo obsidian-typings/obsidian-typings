@@ -58,6 +58,13 @@ declare module 'obsidian' {
     settings?: unknown;
 
     /**
+     * The plugin's registered setting tab, if any.
+     *
+     * @unofficial
+     */
+    settingTab?: SettingTab;
+
+    /**
      * Internal handler invoked when the plugin's config file changes on disk.
      *
      * @returns A promise that resolves when the config file change is handled.
@@ -142,6 +149,22 @@ declare module 'obsidian' {
     constructor2__(app: App, manifest: PluginManifest): this;
 
     /**
+     * Gets the latest modification time across the plugin's files.
+     *
+     * @returns A promise resolving to the modification time in milliseconds, or `0` if unavailable.
+     * @unofficial
+     */
+    getModifiedTime(): Promise<number>;
+
+    /**
+     * Loads the plugin's `styles.css` into the document.
+     *
+     * @returns A promise that resolves when the styles are loaded.
+     * @unofficial
+     */
+    loadCSS(): Promise<void>;
+
+    /**
      * Load settings data from disk.
      * Data is stored in `data.json` in the plugin folder.
      *
@@ -211,6 +234,14 @@ declare module 'obsidian' {
     registerCliHandler(command: string, description: string, flags: CliFlags | null, handler: CliHandler): void;
 
     /**
+     * Registers a legacy CodeMirror 5 callback. No-op in current Obsidian versions.
+     *
+     * @param callback - The CodeMirror 5 registration callback.
+     * @unofficial
+     */
+    registerCodeMirror(callback: unknown): void;
+
+    /**
      * Registers a CodeMirror 6 extension.
      * To reconfigure cm6 extensions for a plugin on the fly, an array should be passed in, and modified dynamically.
      * Once this array is modified, calling {@link obsidian#Workspace.updateOptions} will apply the changes.
@@ -255,6 +286,14 @@ declare module 'obsidian' {
     registerExtensions(extensions: string[], viewType: string): void;
 
     /**
+     * Registers a global Bases formula function, unregistered automatically on unload.
+     *
+     * @param func - The function definition to register.
+     * @unofficial
+     */
+    registerGlobalFunc(func: unknown): void;
+
+    /**
      * Registers a view with the 'Page preview' core plugin as an emitter of the 'hover-link' event.
      *
      * @param id - The id of the view to register.
@@ -270,6 +309,15 @@ declare module 'obsidian' {
      * @since 1.1.0
      */
     registerHoverLinkSource(id: string, info: HoverLinkSource): void;
+
+    /**
+     * Registers a Bases formula function for a specific value type, unregistered automatically on unload.
+     *
+     * @param type - The value type to register the function for.
+     * @param func - The function definition to register.
+     * @unofficial
+     */
+    registerInstanceFunc(type: unknown, func: unknown): void;
 
     /**
      * Register a special post processor that handles fenced code given a language and a handler.
