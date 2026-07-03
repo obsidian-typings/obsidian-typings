@@ -1,4 +1,18 @@
 import type { getQueryControllerConstructor } from '../../implementations/constructors/augmentations/bases/getQueryControllerConstructor.d.ts';
+import type { BasesContext } from '../../internals/internal-plugins/bases/BasesContext.d.ts';
+import type { BasesFilter } from '../../internals/internal-plugins/bases/BasesFilter.d.ts';
+import type { BasesFilterMenu } from '../../internals/internal-plugins/bases/BasesFilterMenu.d.ts';
+import type { BasesMockContext } from '../../internals/internal-plugins/bases/BasesMockContext.d.ts';
+import type { BasesNewItemMenu } from '../../internals/internal-plugins/bases/BasesNewItemMenu.d.ts';
+import type { BasesPluginInstance } from '../../internals/internal-plugins/bases/BasesPluginInstance.d.ts';
+import type { BasesPropertyMenu } from '../../internals/internal-plugins/bases/BasesPropertyMenu.d.ts';
+import type { BasesQuery } from '../../internals/internal-plugins/bases/BasesQuery.d.ts';
+import type { BasesQueryQueue } from '../../internals/internal-plugins/bases/BasesQueryQueue.d.ts';
+import type { BasesResultsMenu } from '../../internals/internal-plugins/bases/BasesResultsMenu.d.ts';
+import type { BasesSearchMenu } from '../../internals/internal-plugins/bases/BasesSearchMenu.d.ts';
+import type { BasesSortMenu } from '../../internals/internal-plugins/bases/BasesSortMenu.d.ts';
+import type { BasesViewMenu } from '../../internals/internal-plugins/bases/BasesViewMenu.d.ts';
+import type { EditorLanguageSupport } from '../../internals/internal-plugins/bases/EditorLanguageSupport.d.ts';
 
 export {};
 
@@ -10,6 +24,209 @@ declare module 'obsidian' {
    * @since 1.10.0
    */
   interface QueryController extends Component {
+    /**
+     * The app instance.
+     *
+     * @unofficial
+     */
+    app: App;
+
+    /**
+     * The current evaluation context, or `null` if none has been built yet.
+     *
+     * @unofficial
+     */
+    ctx: BasesContext | null;
+
+    /**
+     * The file the query is evaluated against, or `null` if none.
+     *
+     * @unofficial
+     */
+    currentFile: null | TFile;
+
+    /**
+     * The category of the currently displayed error (e.g. `'query'` or `'view'`), or `null` if none.
+     *
+     * @unofficial
+     */
+    error: null | string;
+
+    /**
+     * The element that displays errors in place of the view.
+     *
+     * @unofficial
+     */
+    errorEl: HTMLDivElement;
+
+    /**
+     * The error messages collected during the current query run.
+     *
+     * @unofficial
+     */
+    errors: Set<string>;
+
+    /**
+     * The event registry, emitting `'view-changed'` when the active view changes.
+     *
+     * @unofficial
+     */
+    events: Events;
+
+    /**
+     * The filter menu.
+     *
+     * @unofficial
+     */
+    filterMenu: BasesFilterMenu;
+
+    /**
+     * Whether the initial scan of the query results is in progress.
+     *
+     * @unofficial
+     */
+    initialScan: boolean;
+
+    /**
+     * The mock context used to evaluate identifiers and resolve widget types.
+     *
+     * @unofficial
+     */
+    mockContext: BasesMockContext;
+
+    /**
+     * The new item menu.
+     *
+     * @unofficial
+     */
+    newItemMenu: BasesNewItemMenu;
+
+    /**
+     * The Bases plugin instance.
+     *
+     * @unofficial
+     */
+    plugin: BasesPluginInstance;
+
+    /**
+     * The property menu.
+     *
+     * @unofficial
+     */
+    propertyMenu: BasesPropertyMenu;
+
+    /**
+     * The current query, or `null` if none is set.
+     *
+     * @unofficial
+     */
+    query: BasesQuery | null;
+
+    /**
+     * A serialized snapshot of the last-run query state, used to skip redundant re-runs, or `null` when cleared.
+     *
+     * @unofficial
+     */
+    queryState: null | string;
+
+    /**
+     * The scan queue that streams vault files into the query.
+     *
+     * @unofficial
+     */
+    queue: BasesQueryQueue;
+
+    /**
+     * The lowercased property keys relevant to the current results.
+     *
+     * @unofficial
+     */
+    relevantProperties: Set<string>;
+
+    /**
+     * Debounced {@link QueryController.notifyView}.
+     *
+     * @unofficial
+     */
+    requestNotifyView: Debouncer<[], void>;
+
+    /**
+     * The recorded result entries, keyed by file.
+     *
+     * @unofficial
+     */
+    results: Map<TFile, BasesEntry>;
+
+    /**
+     * The results menu.
+     *
+     * @unofficial
+     */
+    resultsMenu: BasesResultsMenu;
+
+    /**
+     * The search menu.
+     *
+     * @unofficial
+     */
+    searchMenu: BasesSearchMenu;
+
+    /**
+     * The current search query, or `null` if none is set.
+     *
+     * @unofficial
+     */
+    searchQuery: null | string;
+
+    /**
+     * The sort menu.
+     *
+     * @unofficial
+     */
+    sortMenu: BasesSortMenu;
+
+    /**
+     * The active Bases view, or `null` if none.
+     *
+     * @unofficial
+     */
+    view: BasesView | null;
+
+    /**
+     * The container element that hosts the active view.
+     *
+     * @unofficial
+     */
+    viewContainerEl: HTMLDivElement;
+
+    /**
+     * Per-view ephemeral state, keyed by view name.
+     *
+     * @unofficial
+     */
+    viewEstates: Record<string, unknown>;
+
+    /**
+     * The view header (toolbar) element.
+     *
+     * @unofficial
+     */
+    viewHeaderEl: HTMLDivElement;
+
+    /**
+     * The view menu.
+     *
+     * @unofficial
+     */
+    viewMenu: BasesViewMenu;
+
+    /**
+     * The name of the currently selected view.
+     *
+     * @unofficial
+     */
+    viewName: string;
+
     /**
      * Records a query result entry for a file.
      *
@@ -32,11 +249,11 @@ declare module 'obsidian' {
     /**
      * Builds the Bases evaluation context from the query's filters and formulas.
      *
-     * @param filters - The additional filters to apply.
+     * @param filters - The additional filters to combine with the query's own filters.
      * @returns The evaluation context.
      * @unofficial
      */
-    buildBasesContext(filters: unknown): unknown;
+    buildBasesContext(filters?: BasesFilter): BasesContext;
 
     /**
      * Clears the current query and view state.
@@ -59,13 +276,13 @@ declare module 'obsidian' {
      *
      * @param app - The app.
      * @param plugin - The plugin.
-     * @param viewHeaderEl - The viewHeaderEl.
-     * @param currentFile - The currentFile.
+     * @param containerEl - The container element the controller renders into (the view header and view container are created inside it).
+     * @param currentFile - The current file the query is evaluated against.
      * @returns The new instance.
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(app: App, plugin: unknown, viewHeaderEl: HTMLElement, currentFile?: null | TFile): this;
+    constructor2__(app: App, plugin: BasesPluginInstance, containerEl: HTMLElement, currentFile?: null | TFile): this;
 
     /**
      * Displays an error in place of the view.
@@ -108,7 +325,7 @@ declare module 'obsidian' {
      * @returns The editor language support.
      * @unofficial
      */
-    getEditorLanguageSupport(): unknown;
+    getEditorLanguageSupport(): EditorLanguageSupport;
 
     /**
      * Gets the controller's ephemeral state.
@@ -202,7 +419,7 @@ declare module 'obsidian' {
      * @param context - The evaluation context.
      * @unofficial
      */
-    runQuery(context: unknown): void;
+    runQuery(context: BasesContext): void;
 
     /**
      * Selects the view with the given name.
@@ -226,7 +443,7 @@ declare module 'obsidian' {
      * @param query - The query to set, or an Error to display.
      * @unofficial
      */
-    setQuery(query: unknown): void;
+    setQuery(query: BasesQuery | Error): void;
 
     /**
      * Sets both the query and the selected view name.
@@ -235,7 +452,7 @@ declare module 'obsidian' {
      * @param viewName - The view name to select.
      * @unofficial
      */
-    setQueryAndView(query: unknown, viewName: string): void;
+    setQueryAndView(query: BasesQuery | Error, viewName: string): void;
 
     /**
      * Starts the loading indicator.
