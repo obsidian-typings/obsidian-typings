@@ -44,7 +44,7 @@ declare module 'obsidian' {
      *
      * @unofficial
      */
-    direction: string;
+    direction: 'horizontal' | 'vertical';
 
     /**
      * Element displayed when the sidedock has no content.
