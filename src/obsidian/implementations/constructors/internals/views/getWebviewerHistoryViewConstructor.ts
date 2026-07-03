@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the WebviewerHistoryView constructor.
+ * Get the {@link WebviewerHistoryView} constructor.
  *
  * @param app - The app.
- * @returns The WebviewerHistoryView constructor.
+ * @returns The {@link WebviewerHistoryView} constructor.
  *
  * @public
  * @unofficial

@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the TagView constructor.
+ * Get the {@link TagView} constructor.
  *
  * @param app - The app.
- * @returns The TagView constructor.
+ * @returns The {@link TagView} constructor.
  *
  * @public
  * @unofficial

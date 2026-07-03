@@ -3,7 +3,7 @@ import type { View } from 'obsidian';
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 
 /**
- * View that displays the global search results pane.
+ * {@link obsidian#View} that displays the global search results pane.
  *
  * @public
  * @unofficial

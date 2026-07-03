@@ -22,7 +22,7 @@ declare module 'obsidian' {
    */
   interface MetadataCache extends Events {
     /**
-     * Reference to App.
+     * Reference to the {@link obsidian#App}.
      *
      * @unofficial
      */
@@ -157,7 +157,7 @@ declare module 'obsidian' {
     userIgnoreFiltersString: string;
 
     /**
-     * Reference to Vault.
+     * Reference to the {@link obsidian#Vault}.
      *
      * @unofficial
      */
@@ -658,6 +658,15 @@ declare module 'obsidian' {
      * @unofficial
      */
     showIndexingNotice(): void;
+
+    /**
+     * Applies queued internal-link updates to the affected files.
+     *
+     * @param updates - Map of file path to the link updates to apply to that file.
+     * @returns A promise that resolves when all updates have been applied.
+     * @unofficial
+     */
+    updateInternalLinks(updates: Map<string, unknown>): Promise<void>;
 
     /**
      * Re-queue for link resolution every file that links to any of the changed names.

@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the GraphView constructor.
+ * Get the {@link GraphView} constructor.
  *
  * @param app - The app.
- * @returns The GraphView constructor.
+ * @returns The {@link GraphView} constructor.
  *
  * @public
  * @unofficial

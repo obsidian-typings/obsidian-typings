@@ -21,7 +21,7 @@ export interface ItemQueue<T> {
   promise: null | PromiseWithResolvers<T>;
 
   /**
-   * Runnable controlling the queue's start/stop lifecycle.
+   * {@link Runnable} controlling the queue's start/stop lifecycle.
    */
   runnable: Runnable;
 

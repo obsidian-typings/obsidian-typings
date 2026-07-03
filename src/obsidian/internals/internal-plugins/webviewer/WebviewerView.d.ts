@@ -7,7 +7,7 @@ import type { ViewType } from '../../../implementations/constants/ViewType.d.ts'
 import type { WebviewerPluginInstance } from './WebviewerPluginInstance.d.ts';
 
 /**
- * View that renders an embedded web browser for browsing web pages within Obsidian.
+ * {@link obsidian#View} that renders an embedded web browser for browsing web pages within Obsidian.
  *
  * @public
  * @unofficial

@@ -3,9 +3,9 @@ import { BasesViewConfig } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the BasesViewConfig constructor.
+ * Get the {@link obsidian#BasesViewConfig} constructor.
  *
- * @returns The BasesViewConfig constructor.
+ * @returns The {@link obsidian#BasesViewConfig} constructor.
  *
  * @public
  * @unofficial

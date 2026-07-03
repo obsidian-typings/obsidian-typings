@@ -3,9 +3,9 @@ import { Scope } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the Scope constructor.
+ * Get the {@link obsidian#Scope} constructor.
  *
- * @returns The Scope constructor.
+ * @returns The {@link obsidian#Scope} constructor.
  *
  * @public
  * @unofficial

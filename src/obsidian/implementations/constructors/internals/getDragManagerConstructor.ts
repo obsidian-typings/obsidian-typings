@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { DragManager } from '../../../internals/drag-manager/DragManager.d.ts';
 
 /**
- * Get the DragManager constructor.
+ * Get the {@link DragManager} constructor.
  *
  * @param app - The app instance.
- * @returns The DragManager constructor.
+ * @returns The {@link DragManager} constructor.
  *
  * @public
  * @unofficial

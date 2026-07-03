@@ -3,9 +3,9 @@ import { HTMLValue } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the HTMLValue constructor.
+ * Get the {@link obsidian#HTMLValue} constructor.
  *
- * @returns The HTMLValue constructor.
+ * @returns The {@link obsidian#HTMLValue} constructor.
  *
  * @public
  * @unofficial

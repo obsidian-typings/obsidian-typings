@@ -3,9 +3,9 @@ import { Keymap } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the Keymap constructor.
+ * Get the {@link obsidian#Keymap} constructor.
  *
- * @returns The Keymap constructor.
+ * @returns The {@link obsidian#Keymap} constructor.
  *
  * @public
  * @unofficial

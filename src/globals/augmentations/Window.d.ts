@@ -15,19 +15,19 @@ import type { CodeMirrorModule } from '../../codemirror/internals/CodeMirrorModu
 import type { ElectronModule } from '../../electron/internals/ElectronModule.d.ts';
 import type { ElectronWebviewTag } from '../../electron/internals/ElectronWebviewTag.d.ts';
 import type { I18n } from '../../i18next/internals/I18n.d.ts';
+import type { MathJaxEx } from '../../mathjax/internals/MathJaxEx.d.ts';
 import type { Mermaid } from '../../mermaid/internals/Mermaid.d.ts';
 import type { CapacitorAdapterFs } from '../../obsidian/internals/CapacitorAdapterFs.d.ts';
 import type { ExtractConstructor } from '../../obsidian/internals/constructors/ExtractConstructor.d.ts';
 import type { ElectronWindow } from '../../obsidian/internals/ElectronWindow.d.ts';
 import type { FrameDom } from '../../obsidian/internals/FrameDom.d.ts';
 import type { Localization } from '../../obsidian/internals/Localization.d.ts';
-import type { MathJaxEx } from '../../obsidian/internals/math-jax/MathJaxEx.d.ts';
-import type { PdfJsTestingUtils } from '../../obsidian/internals/pdf-js/PdfJsTestingUtils.d.ts';
-import type { Database } from '../../obsidian/internals/web-sql/Database.d.ts';
 import type { PdfJsModule } from '../../pdfjs-dist/internals/PdfJsModule.d.ts';
+import type { PdfJsTestingUtils } from '../../pdfjs-dist/internals/PdfJsTestingUtils.d.ts';
 import type { PixiModule } from '../../pixi.js/internals/PixiModule.d.ts';
 import type { PrismModule } from '../../prismjs/internals/PrismModule.d.ts';
 import type { scrypt as scryptInstance } from '../../scrypt-js/internals/functions/scrypt.d.ts';
+import type { Database } from '../../web-sql/internals/Database.d.ts';
 
 export {};
 

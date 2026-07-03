@@ -20,7 +20,7 @@ import type { InternalPluginsConfigRecord } from './InternalPluginsConfigRecord.
  */
 export interface InternalPlugins extends Events {
   /**
-   * Reference to App.
+   * Reference to the {@link obsidian#App}.
    */
   app: App;
 
@@ -30,7 +30,7 @@ export interface InternalPlugins extends Events {
   config: InternalPluginsConfigRecord;
 
   /**
-   * Plugin configs for internal plugins.
+   * {@link obsidian#Plugin} configs for internal plugins.
    *
    * @remark Prefer usage of getPluginById to access a plugin.
    */

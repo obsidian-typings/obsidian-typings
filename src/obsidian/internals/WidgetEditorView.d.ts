@@ -78,7 +78,7 @@ export interface WidgetEditorView extends EmbeddedEditorView {
   /**
    * Push/pop current scope.
    *
-   * @param scope - Scope to apply.
+   * @param scope - {@link obsidian#Scope} to apply.
    */
   applyScope(scope: Scope): void;
 

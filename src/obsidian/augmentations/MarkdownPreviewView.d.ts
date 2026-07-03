@@ -44,7 +44,7 @@ declare module 'obsidian' {
     type: 'preview' | string;
 
     /**
-     * The parent MarkdownView containing this preview.
+     * The parent {@link obsidian#MarkdownView} containing this preview.
      *
      * @unofficial
      */
@@ -177,6 +177,14 @@ declare module 'obsidian' {
     hide(): void;
 
     /**
+     * Handles an app config change relevant to the preview, dispatching to the matching update method.
+     *
+     * @param configKey - The config key that changed.
+     * @unofficial
+     */
+    onConfigChanged(configKey: string): void;
+
+    /**
      * Handle a fold state change in the preview.
      *
      * @returns The result of the fold change handling.
@@ -273,11 +281,60 @@ declare module 'obsidian' {
     unfoldAll(): unknown;
 
     /**
+     * Updates whether headings can be folded in the preview.
+     *
+     * @unofficial
+     */
+    updateFoldHeading(): void;
+
+    /**
+     * Updates whether lists can be folded in the preview.
+     *
+     * @unofficial
+     */
+    updateFoldIndent(): void;
+
+    /**
+     * Updates the indentation-guide display in the preview.
+     *
+     * @unofficial
+     */
+    updateIndentGuide(): void;
+
+    /**
      * Update the rendering options of the preview.
      *
      * @returns The result of updating the options.
      * @unofficial
      */
     updateOptions(): unknown;
+
+    /**
+     * Updates whether properties are shown inline in the document.
+     *
+     * @unofficial
+     */
+    updatePropertiesInDocument(): void;
+
+    /**
+     * Updates the readable-line-length display in the preview.
+     *
+     * @unofficial
+     */
+    updateReadableLineLength(): void;
+
+    /**
+     * Updates the right-to-left text direction of the preview.
+     *
+     * @unofficial
+     */
+    updateRTL(): void;
+
+    /**
+     * Updates strict-line-break handling and re-renders the preview.
+     *
+     * @unofficial
+     */
+    updateStrictLineBreaks(): void;
   }
 }

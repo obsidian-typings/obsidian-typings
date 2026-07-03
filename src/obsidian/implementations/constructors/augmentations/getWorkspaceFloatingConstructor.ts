@@ -3,9 +3,9 @@ import { WorkspaceFloating } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the WorkspaceFloating constructor.
+ * Get the {@link obsidian#WorkspaceFloating} constructor.
  *
- * @returns The WorkspaceFloating constructor.
+ * @returns The {@link obsidian#WorkspaceFloating} constructor.
  *
  * @public
  * @unofficial

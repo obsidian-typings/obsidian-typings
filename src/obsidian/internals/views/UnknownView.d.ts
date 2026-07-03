@@ -1,7 +1,7 @@
 import type { EmptyView } from './EmptyView.d.ts';
 
 /**
- * Views of plugins that have been deactivated become an UnknownView.
+ * Views of plugins that have been deactivated become an {@link UnknownView}.
  *
  * @remark This is probably not the right term.
  * @public

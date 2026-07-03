@@ -207,7 +207,7 @@ declare module 'obsidian' {
     /**
      * Populates the pane menu.
      *
-     * (Replaces the previously removed `onHeaderMenu` and `onMoreOptionsMenu`)
+     * (Replaces the previously removed {@link onHeaderMenu} and `onMoreOptionsMenu`)
      *
      * @param menu - The menu to populate.
      * @param source - The source of the menu.

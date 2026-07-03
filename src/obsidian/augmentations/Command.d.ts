@@ -112,13 +112,12 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link callback} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    callback__?(): any;
+    callback__?(): unknown;
 
     /**
      * Complex callback, overrides the simple callback.
      * Used to 'check' whether your command can be performed in the current circumstances.
-     * For example, if your command requires the active focused pane to be a MarkdownView, then
+     * For example, if your command requires the active focused pane to be a {@link obsidian#MarkdownView}, then
      * you should only return `true` if the condition is satisfied. Returning `false` or `undefined` causes
      * the command to be hidden from the command palette.
      *
@@ -170,8 +169,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link editorCallback} instead.
      * @since 0.12.2
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    editorCallback__?(editor: Editor, ctx: MarkdownFileInfo | MarkdownView): any;
+    editorCallback__?(editor: Editor, ctx: MarkdownFileInfo | MarkdownView): unknown;
 
     /**
      * A command callback that is only triggered when the user is in an editor.

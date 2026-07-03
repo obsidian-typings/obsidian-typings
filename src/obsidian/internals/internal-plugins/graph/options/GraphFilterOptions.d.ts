@@ -18,7 +18,7 @@ export interface GraphFilterOptions extends GraphOptions {
   search: SearchComponent;
 
   /**
-   * Setting element containing the search input.
+   * {@link obsidian#Setting} element containing the search input.
    */
   searchSetting: Setting;
 }

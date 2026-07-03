@@ -54,12 +54,12 @@ export interface PropertyPropertyWidgetComponentComboBox extends PopoverSuggest<
   value: null | PropertyPropertyWidgetComponentComboBoxItem;
 
   /**
-   * Callback for `onClose`.
+   * Callback for {@link PropertyPropertyWidgetComponentComboBox.onClose}.
    */
   _onClose?(): void;
 
   /**
-   * Callback for `onOpen`.
+   * Callback for {@link PropertyPropertyWidgetComponentComboBox.onOpen}.
    */
   _onOpen?(): void;
 
@@ -88,7 +88,7 @@ export interface PropertyPropertyWidgetComponentComboBox extends PopoverSuggest<
   getItems(): PropertyPropertyWidgetComponentComboBoxItem[];
 
   /**
-   * Callback for `getSuggestions`.
+   * Callback for {@link PropertyPropertyWidgetComponentComboBox.getSuggestions}.
    *
    * @param query - The search query string.
    * @returns The matching search results.
@@ -129,7 +129,7 @@ export interface PropertyPropertyWidgetComponentComboBox extends PopoverSuggest<
   renderLabel(): void;
 
   /**
-   * Callback for `onSelect`.
+   * Callback for {@link PropertyPropertyWidgetComponentComboBox.onSelect}.
    *
    * @param item - the item that was selected.
    */

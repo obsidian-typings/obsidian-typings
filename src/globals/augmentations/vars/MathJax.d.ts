@@ -1,4 +1,4 @@
-import type { MathJaxEx } from '../../../obsidian/internals/math-jax/MathJaxEx.d.ts';
+import type { MathJaxEx } from '../../../mathjax/internals/MathJaxEx.d.ts';
 
 export {};
 

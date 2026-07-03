@@ -18,7 +18,7 @@ export interface KeyScope {
   modifiers: null | string;
 
   /**
-   * Scope where the key interceptor is registered.
+   * {@link obsidian#Scope} where the key interceptor is registered.
    */
   scope: Scope;
 

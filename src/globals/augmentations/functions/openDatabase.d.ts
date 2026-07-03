@@ -1,4 +1,4 @@
-import type { Database } from '../../../obsidian/internals/web-sql/Database.d.ts';
+import type { Database } from '../../../web-sql/internals/Database.d.ts';
 
 export {};
 

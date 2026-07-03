@@ -16,7 +16,7 @@ import type { FileTreeItem } from './FileTreeItem.d.ts';
 import type { FolderTreeItem } from './FolderTreeItem.d.ts';
 
 /**
- * View that renders the file explorer tree sidebar for navigating vault files and folders.
+ * {@link obsidian#View} that renders the file explorer tree sidebar for navigating vault files and folders.
  *
  * @public
  * @unofficial
@@ -59,7 +59,7 @@ export interface FileExplorerView extends View {
   sortOrder: FileExplorerViewSortOrder;
 
   /**
-   * Tree view of files.
+   * {@link Tree} view of files.
    */
   tree: Tree<FileTreeItem | FolderTreeItem>;
 

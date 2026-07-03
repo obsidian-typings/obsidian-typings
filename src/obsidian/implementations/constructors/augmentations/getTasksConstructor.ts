@@ -3,9 +3,9 @@ import { Tasks } from 'obsidian';
 import type { ConstructorBase } from '../../../internals/constructors/ConstructorBase.d.ts';
 
 /**
- * Get the Tasks constructor.
+ * Get the {@link obsidian#Tasks} constructor.
  *
- * @returns The Tasks constructor.
+ * @returns The {@link obsidian#Tasks} constructor.
  * @remark Constructor is `null`. See {@link https://forum.obsidian.md/t/api-bug-tasks-class/98993}.
  *
  * @public

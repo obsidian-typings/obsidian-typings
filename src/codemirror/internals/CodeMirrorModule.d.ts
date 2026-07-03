@@ -16,20 +16,88 @@ import type { Position } from './Position.d.ts';
  * @unofficial
  */
 export interface CodeMirrorModule {
+  /** Adds a CSS class to a node. */
+  addClass: unknown;
   /** A map of built-in CodeMirror 5 commands. */
   commands: Record<string, (cm: Cm5Editor) => void>;
+  /** Checks whether one node contains another. */
+  contains: unknown;
+  /** Copies a mode state object. */
+  copyState: unknown;
   /** Default configuration options for CodeMirror 5 editors. */
   defaults: Record<string, unknown>;
+  /** The CodeMirror 5 `Doc` constructor. */
+  Doc: unknown;
+  /** Prevents the default action of an event. */
+  e_preventDefault: unknown;
+  /** Stops an event (prevents default and stops propagation). */
+  e_stop: unknown;
+  /** Stops propagation of an event. */
+  e_stopPropagation: unknown;
+  /** Finds the character offset for a given column. */
+  findColumn: unknown;
+  /** Finds a mode spec by file extension. */
+  findModeByExtension: unknown;
+  /** Finds a mode spec by file name. */
+  findModeByFileName: unknown;
+  /** Finds a mode spec by MIME type. */
+  findModeByMIME: unknown;
+  /** Finds a mode spec by name. */
+  findModeByName: unknown;
+  /** The code-folding helper namespace. */
+  fold: unknown;
+  /** Registered helper namespaces. */
+  helpers: unknown;
+  /** Sentinel value passed as the "old value" on the first option update. */
+  Init: unknown;
+  /** Registered input-style implementations. */
+  inputStyles: unknown;
+  /** Checks whether a keyboard event is a modifier keypress. */
+  isModifierKey: unknown;
   /** A map of key map definitions for CodeMirror 5. */
   keyMap: Record<string, Cm5KeyMap>;
+  /** Gets the key name for a keyboard event. */
+  keyName: unknown;
+  /** A map of key codes to key names. */
+  keyNames: unknown;
+  /** The CodeMirror 5 `Line` constructor. */
+  Line: unknown;
+  /** The CodeMirror 5 `LineWidget` constructor. */
+  LineWidget: unknown;
+  /** Looks up a key binding in a keymap. */
+  lookupKey: unknown;
   /** Maps MIME types to mode specifications. */
   mimeModes: Record<string, Cm5ModeSpec<unknown> | string>;
+  /** Registered mode extensions. */
+  modeExtensions: unknown;
+  /** The list of known mode descriptors. */
+  modeInfo: unknown;
   /** The mode map, mapping mode names to their factory constructors. */
   modes: Record<string, Cm5ModeFactory<unknown>>;
+  /** Creates a fold function for a given fold helper. */
+  newFoldFunction: unknown;
+  /** Registered option handlers. */
+  optionHandlers: unknown;
   /** A sentinel value that key handlers can return to indicate the binding should fall through. */
   Pass: Cm5Pass;
+  /** Resolves a mode spec to a normalized form. */
+  resolveMode: unknown;
+  /** Removes a CSS class from a node. */
+  rmClass: unknown;
+  /** Registered scrollbar-model implementations. */
+  scrollbarModel: unknown;
+  /** The CodeMirror 5 `SharedTextMarker` constructor. */
+  SharedTextMarker: unknown;
+  /** The CodeMirror 5 `StringStream` constructor. */
+  StringStream: unknown;
+  /** The CodeMirror 5 `TextMarker` constructor. */
+  TextMarker: unknown;
   /** The CodeMirror 5 version string. */
   version: string;
+  /** The CodeMirror 5 Vim-mode API. */
+  Vim: unknown;
+  /** Computes pixel deltas for a wheel event. */
+  wheelEventPixels: unknown;
 
   /** Computes the end position of a change. */
   changeEnd(change: Cm5EditorChange): Position;

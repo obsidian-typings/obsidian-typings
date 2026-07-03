@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the OutlineView constructor.
+ * Get the {@link OutlineView} constructor.
  *
  * @param app - The app.
- * @returns The OutlineView constructor.
+ * @returns The {@link OutlineView} constructor.
  *
  * @public
  * @unofficial

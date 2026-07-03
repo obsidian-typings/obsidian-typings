@@ -10,17 +10,13 @@
     "inlineSources": true,
     "lib": [
       "DOM",
-      "ES2022"
+      "es2022"
     ],
     "libReplacement": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "node16",
+    "moduleResolution": "node16",
     "noEmit": true,
-    "target": "ES2022",
-    // The general build only type-checks our implementation/script `.ts` files, so it skips all
-    // declaration files (including broken upstream ones such as `obsidian.d.ts`). Validation of our
-    // own `.d.ts` files is delegated to the `build:validate-types` script, which re-enables
-    // `skipLibCheck: false` in-memory and reports diagnostics only for the declarations we author.
+    "target": "es2022",
     "skipLibCheck": true,
     "verbatimModuleSyntax": true,
     "types": [

@@ -31,7 +31,7 @@ declare module 'obsidian' {
     containerEl: HTMLElement;
 
     /**
-     * Linked Editor manager instance.
+     * Linked {@link obsidian#Editor} manager instance.
      *
      * @unofficial
      */
@@ -41,7 +41,7 @@ declare module 'obsidian' {
      * Currently active CM instance.
      *
      * @returns The active CodeMirror editor view, or `null` when the editor is not instantiated.
-     * @remark Can be `null` when Editor is not instantiated.
+     * @remark Can be `null` when {@link obsidian#Editor} is not instantiated.
      * @unofficial
      */
     get activeCM(): EditorView | null;
@@ -96,7 +96,7 @@ declare module 'obsidian' {
     /**
      * Convert editor position to screen position.
      *
-     * @param pos Editor position.
+     * @param pos {@link obsidian#Editor} position.
      * @param relativeToEditor - Relative to the editor or the application window.
      * @returns The screen coordinates.
      * @unofficial
@@ -320,6 +320,13 @@ declare module 'obsidian' {
     insertLink(): void;
 
     /**
+     * Insert a math block (`$$ … $$`) at the current cursor position.
+     *
+     * @unofficial
+     */
+    insertMathBlock(): void;
+
+    /**
      * Insert a mathjax equation block at the current cursor position.
      *
      * @unofficial
@@ -386,6 +393,13 @@ declare module 'obsidian' {
      * @unofficial
      */
     newlineAndIndentOnly(): void;
+
+    /**
+     * Inserts a single newline, replacing the current selection.
+     *
+     * @unofficial
+     */
+    newlineOnly(): void;
 
     /**
      * Convert an offset to a position.
@@ -575,6 +589,14 @@ declare module 'obsidian' {
      * @since 0.11.11
      */
     setCursor(pos: EditorPosition | number, ch?: number): void;
+
+    /**
+     * Sets the markdown heading level of the line(s) under the cursor.
+     *
+     * @param level - The heading level (1 to 6), or 0 to remove the heading.
+     * @unofficial
+     */
+    setHeading(level: number): void;
 
     /**
      * Set the text at line index (0-based).

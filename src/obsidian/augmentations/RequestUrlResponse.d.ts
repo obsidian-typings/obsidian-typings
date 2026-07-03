@@ -27,9 +27,9 @@ declare module 'obsidian' {
      * The body of the response as a JSON object.
      *
      * @official
+     * @deprecated - Added only for typing purposes. Use {@link json} instead.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    json: any;
+    json__: unknown;
 
     /**
      * The status code of the response.

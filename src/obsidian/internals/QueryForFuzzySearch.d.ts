@@ -5,7 +5,6 @@
  * @unofficial
  */
 export interface QueryForFuzzySearch {
-  /** */
   /**
    * The fuzzy tokens of the query.
    */

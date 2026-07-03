@@ -168,7 +168,7 @@ export interface GraphRenderer {
   renderTimer: null | number;
 
   /**
-   * Current zoom level of the graph view, interpolated between the previous one and the `targetScale`.
+   * Current zoom level of the graph view, interpolated between the previous one and the {@link GraphRenderer.targetScale}.
    */
   scale: number;
 

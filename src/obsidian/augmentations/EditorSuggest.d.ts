@@ -20,6 +20,13 @@ declare module 'obsidian' {
     context: EditorSuggestContext | null;
 
     /**
+     * The element holding the keyboard-shortcut instructions.
+     *
+     * @unofficial
+     */
+    instructionsEl: HTMLElement;
+
+    /**
      * Override this to use a different limit for suggestion items.
      *
      * @official
@@ -68,7 +75,7 @@ declare module 'obsidian' {
     getSuggestions__(context: EditorSuggestContext): Promise<T[]> | T[];
 
     /**
-     * Based on the editor line and cursor position, determine if this EditorSuggest should be triggered at this moment.
+     * Based on the editor line and cursor position, determine if this {@link obsidian#EditorSuggest} should be triggered at this moment.
      * Typically, you would run a regular expression on the current line text before the cursor.
      * Return `null` to indicate that this editor suggest is not supposed to be triggered.
      *
@@ -117,5 +124,23 @@ declare module 'obsidian' {
      * @unofficial
      */
     showSuggestions(results: SearchResult[]): void;
+
+    /**
+     * Evaluates the trigger at the cursor and updates the suggestion context.
+     *
+     * @param editor - The editor.
+     * @param file - The file being edited.
+     * @param force - Whether to (re)open the suggestion popover even if it is not currently open.
+     * @returns Whether a trigger matched.
+     * @unofficial
+     */
+    trigger(editor: Editor, file: TFile, force: boolean): boolean;
+
+    /**
+     * Repositions the suggestion popover at the current trigger location.
+     *
+     * @unofficial
+     */
+    updatePosition(): void;
   }
 }

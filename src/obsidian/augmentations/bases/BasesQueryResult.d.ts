@@ -4,7 +4,7 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * The BasesQueryResult contains all of the available information from executing the
+   * The {@link obsidian#BasesQueryResult} contains all of the available information from executing the
    * bases query, applying filters, and evaluating formulas. The `data` or `groupedData`
    * should be displayed by your view.
    *
@@ -19,6 +19,22 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     data: BasesEntry[];
+
+    /**
+     * Truncates the given entries in place to the configured limit.
+     *
+     * @param entries - The entries to limit.
+     * @unofficial
+     */
+    applyLimit(entries: BasesEntry[]): void;
+
+    /**
+     * Sorts the given entries in place according to the configured sort.
+     *
+     * @param entries - The entries to sort.
+     * @unofficial
+     */
+    applySort(entries: BasesEntry[]): void;
 
     /**
      * Constructor.

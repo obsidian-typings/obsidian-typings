@@ -1,7 +1,7 @@
 import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /**
- * Bookmark item representing a saved search query.
+ * {@link Bookmark} item representing a saved search query.
  *
  * @public
  * @unofficial

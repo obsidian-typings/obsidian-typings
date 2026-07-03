@@ -3,9 +3,9 @@ import { SettingTab } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the SettingTab constructor.
+ * Get the {@link obsidian#SettingTab} constructor.
  *
- * @returns The SettingTab constructor.
+ * @returns The {@link obsidian#SettingTab} constructor.
  *
  * @public
  * @unofficial

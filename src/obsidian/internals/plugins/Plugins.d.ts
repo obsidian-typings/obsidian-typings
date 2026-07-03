@@ -1,6 +1,7 @@
 import type {
   App,
   Debouncer,
+  Events,
   Plugin,
   PluginManifest
 } from 'obsidian';
@@ -16,9 +17,9 @@ import type { PluginsPluginsRecord } from './PluginsPluginsRecord.d.ts';
  * @public
  * @unofficial
  */
-export interface Plugins {
+export interface Plugins extends Events {
   /**
-   * Reference to App.
+   * Reference to the {@link obsidian#App}.
    */
   app: App;
 
@@ -40,7 +41,7 @@ export interface Plugins {
   lastUpdateCheck: number;
 
   /**
-   * Plugin ID that is currently being enabled.
+   * {@link obsidian#Plugin} ID that is currently being enabled.
    */
   loadingPluginId: null | string;
 
@@ -90,12 +91,12 @@ export interface Plugins {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(app: App): this;
+  constructor2__(app: App): this;
 
   /**
    * Unload a plugin by ID.
    *
-   * @param id - Plugin ID.
+   * @param id - {@link obsidian#Plugin} ID.
    * @returns A promise that resolves when the plugin is disabled.
    */
   disablePlugin(id: string): Promise<void>;
@@ -103,7 +104,7 @@ export interface Plugins {
   /**
    * Unload a plugin by ID and save config for persistence.
    *
-   * @param id - Plugin ID.
+   * @param id - {@link obsidian#Plugin} ID.
    * @returns A promise that resolves when the plugin is disabled and the config is saved.
    */
   disablePluginAndSave(id: string): Promise<void>;
@@ -111,7 +112,7 @@ export interface Plugins {
   /**
    * Enable a plugin by ID.
    *
-   * @param id - Plugin ID.
+   * @param id - {@link obsidian#Plugin} ID.
    * @returns A promise that resolves when the plugin is enabled.
    */
   enablePlugin(id: string): Promise<void>;
@@ -119,7 +120,7 @@ export interface Plugins {
   /**
    * Enable a plugin by ID and save config for persistence.
    *
-   * @param id - Plugin ID.
+   * @param id - {@link obsidian#Plugin} ID.
    * @returns A promise that resolves when the plugin is enabled and the config is saved.
    */
   enablePluginAndSave(id: string): Promise<void>;
@@ -127,7 +128,7 @@ export interface Plugins {
   /**
    * Get a plugin by ID.
    *
-   * @param id - Plugin ID.
+   * @param id - {@link obsidian#Plugin} ID.
    * @returns The plugin instance or `null` if not found.
    */
   getPlugin(id: string): null | Plugin;
@@ -151,7 +152,7 @@ export interface Plugins {
    *
    * @param repo - Repository identifier.
    * @param version - Version to install.
-   * @param manifest - Plugin manifest data.
+   * @param manifest - {@link obsidian#Plugin} manifest data.
    * @returns A promise that resolves when the plugin is installed.
    */
   installPlugin(repo: string, version: string, manifest: PluginManifest): Promise<void>;
@@ -159,7 +160,7 @@ export interface Plugins {
   /**
    * Check whether a plugin is deprecated.
    *
-   * @param id - Plugin ID.
+   * @param id - {@link obsidian#Plugin} ID.
    * @returns Whether the plugin is deprecated.
    */
   isDeprecated(id: string): boolean;
@@ -189,7 +190,7 @@ export interface Plugins {
   /**
    * Load a plugin by its ID.
    *
-   * @param id - Plugin ID.
+   * @param id - {@link obsidian#Plugin} ID.
    * @param isUserEnabled - Whether the plugin was enabled by the user.
    * @returns The loaded plugin instance.
    */
@@ -225,7 +226,7 @@ export interface Plugins {
   /**
    * Uninstall a plugin by ID.
    *
-   * @param id - Plugin ID.
+   * @param id - {@link obsidian#Plugin} ID.
    * @returns A promise that resolves when the plugin is uninstalled.
    */
   uninstallPlugin(id: string): Promise<void>;
@@ -233,7 +234,7 @@ export interface Plugins {
   /**
    * Unload a plugin by ID.
    *
-   * @param id - Plugin ID.
+   * @param id - {@link obsidian#Plugin} ID.
    * @param isUserDisabled - Whether the plugin was disabled by the user.
    * @returns A promise that resolves when the plugin is unloaded.
    */

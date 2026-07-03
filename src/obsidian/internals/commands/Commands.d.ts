@@ -1,6 +1,7 @@
 import type {
   App,
-  Command
+  Command,
+  Events
 } from 'obsidian';
 
 import type { getCommandsConstructor } from '../../implementations/constructors/internals/getCommandsConstructor.d.ts';
@@ -13,9 +14,9 @@ import type { CommandsEditorCommandsRecord } from './CommandsEditorCommandsRecor
  * @public
  * @unofficial
  */
-export interface Commands {
+export interface Commands extends Events {
   /**
-   * Reference to App.
+   * Reference to the {@link obsidian#App}.
    */
   app: App;
 
@@ -50,12 +51,12 @@ export interface Commands {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(app: App): this;
+  constructor2__(app: App): this;
 
   /**
    * Execute a command by reference.
    *
-   * @param command - Command to execute.
+   * @param command - {@link obsidian#Command} to execute.
    * @returns Whether the command was successfully executed.
    */
   executeCommand(command: Command, event?: Event): boolean;

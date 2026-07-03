@@ -46,11 +46,18 @@ declare module 'obsidian' {
     parentMenu: Menu | null;
 
     /**
-     * Scope in which the menu is active.
+     * {@link obsidian#Scope} in which the menu is active.
      *
      * @unofficial
      */
     scope: Scope;
+
+    /**
+     * The scrollable container element of the menu.
+     *
+     * @unofficial
+     */
+    scrollEl: HTMLElement;
 
     /**
      * Sections within the menu.
@@ -67,11 +74,25 @@ declare module 'obsidian' {
     selected: number;
 
     /**
+     * Whether to show the macOS writing-tools entries.
+     *
+     * @unofficial
+     */
+    showMacWritingTools: boolean;
+
+    /**
      * Configurations for the submenu configs.
      *
      * @unofficial
      */
     submenuConfig: MenuSubmenuConfigRecord;
+
+    /**
+     * Configuration for menu sections that open as submenus, keyed by section name.
+     *
+     * @unofficial
+     */
+    submenuConfigs: MenuSubmenuConfigRecord;
 
     /**
      * Whether the submenu is currently unloading.
@@ -100,6 +121,7 @@ declare module 'obsidian' {
      * });
      * ```
      * @official
+     * @since 0.15.3
      */
     addItem(cb: (item: MenuItem) => unknown): this;
 
@@ -117,6 +139,7 @@ declare module 'obsidian' {
      *
      * @returns The menu instance.
      * @official
+     * @since 0.15.3
      */
     addSeparator(): this;
 
@@ -144,6 +167,14 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes.
      */
     constructor__(): this;
+
+    /**
+     * Hides the menu when a click occurs outside of it.
+     *
+     * @param evt - The mouse event.
+     * @unofficial
+     */
+    handleClickOutside(evt: MouseEvent): void;
 
     /**
      * Hide the menu.
@@ -230,20 +261,6 @@ declare module 'obsidian' {
     onHide(callback: () => unknown): void;
 
     /**
-     * Called when the user navigates back in the history.
-     *
-     * @official
-     */
-    onHistoryBack(): void;
-
-    /**
-     * Called when the user navigates forward in the history.
-     *
-     * @official
-     */
-    onHistoryForward?(): void;
-
-    /**
      * Preemptively closes the menu if click is registered on menu item.
      *
      * @param e - Mouse event.
@@ -263,7 +280,7 @@ declare module 'obsidian' {
     /**
      * Registers dom events and scope for the menu.
      *
-     * @param item - Menu item.
+     * @param item - {@link obsidian#Menu} item.
      * @unofficial
      */
     openSubmenu(item: MenuItem): void;
@@ -284,6 +301,15 @@ declare module 'obsidian' {
     select(index: number): void;
 
     /**
+     * Selects the menu item containing the given element, optionally opening its submenu immediately.
+     *
+     * @param el - The element within the item to select.
+     * @param immediate - Whether to open the submenu immediately rather than after a delay.
+     * @unofficial
+     */
+    selectElement(el: Node, immediate?: boolean): void;
+
+    /**
      * Set the menu to not use an icon.
      *
      * @returns The menu instance.
@@ -296,7 +322,8 @@ declare module 'obsidian' {
      *
      * @param el - Element to set as parent.
      * @returns The menu instance.
-     * @unofficial
+     * @official
+     * @since 0.16.0
      */
     setParentElement(el: HTMLElement): this;
 
@@ -304,11 +331,20 @@ declare module 'obsidian' {
      * Add a section to the submenu config.
      *
      * @param section - Section to add.
-     * @param submenu - Submenu to add.
+     * @param submenu - {@link Submenu} to add.
      * @returns The menu instance.
      * @unofficial
      */
     setSectionSubmenu(section: string, submenu: Submenu): this;
+
+    /**
+     * Sets whether to show the macOS writing-tools entries.
+     *
+     * @param show - Whether to show the entries.
+     * @returns The menu instance, for chaining.
+     * @unofficial
+     */
+    setShowMacWritingTools(show: boolean): this;
 
     /**
      * Force this menu to use native or DOM.

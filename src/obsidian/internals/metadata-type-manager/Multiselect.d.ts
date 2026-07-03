@@ -3,7 +3,7 @@ import type { Menu } from 'obsidian';
 import type { MultiselectOptionContextMenuContext } from './MultiselectOptionContextMenuContext.d.ts';
 
 /**
- * Multiselect component.
+ * {@link Multiselect} component.
  *
  * @public
  * @unofficial

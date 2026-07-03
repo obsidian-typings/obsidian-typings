@@ -4,10 +4,10 @@ import type { Cli } from '../../../internals/cli/Cli.d.ts';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the Cli constructor.
+ * Get the {@link Cli} constructor.
  *
  * @param app - The app instance.
- * @returns The Cli constructor.
+ * @returns The {@link Cli} constructor.
  *
  * @public
  * @unofficial

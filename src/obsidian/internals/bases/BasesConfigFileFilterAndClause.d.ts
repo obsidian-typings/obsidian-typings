@@ -1,7 +1,7 @@
 import type { BasesConfigFileFilter } from 'obsidian';
 
 /**
- * BasesConfigFileFilter `and` clause.
+ * {@link obsidian#BasesConfigFileFilter} `and` clause.
  *
  * @public
  * @unofficial

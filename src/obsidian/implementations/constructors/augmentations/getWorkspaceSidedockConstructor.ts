@@ -3,9 +3,9 @@ import { WorkspaceSidedock } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the WorkspaceSidedock constructor.
+ * Get the {@link obsidian#WorkspaceSidedock} constructor.
  *
- * @returns The WorkspaceSidedock constructor.
+ * @returns The {@link obsidian#WorkspaceSidedock} constructor.
  *
  * @public
  * @unofficial

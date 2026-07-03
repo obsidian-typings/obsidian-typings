@@ -54,19 +54,18 @@ declare module 'obsidian' {
     listEl: HTMLElement;
 
     /**
-     * Add a CSS class to the setting group.
+     * Add CSS classes to the setting group.
      *
-     * @param cls - The CSS class to add.
+     * @param classes - The CSS classes to add.
      * @returns The setting group.
-     * To get the constructor instance, use {@link getSettingGroupConstructor} from `obsidian-typings/implementations`.
      * @example
      * ```ts
-     * settingGroup.addClass('foo');
+     * settingGroup.addClass('foo', 'bar');
      * ```
      * @official
      * @since 1.11.0
      */
-    addClass(cls: string): this;
+    addClass(...classes: string[]): this;
 
     /**
      * Add an extra button to the setting group.

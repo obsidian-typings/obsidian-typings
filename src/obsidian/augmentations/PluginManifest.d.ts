@@ -29,7 +29,7 @@ declare module 'obsidian' {
     description: string;
 
     /**
-     * Vault path to the plugin folder in the config directory.
+     * {@link obsidian#Vault} path to the plugin folder in the config directory.
      *
      * @official
      */

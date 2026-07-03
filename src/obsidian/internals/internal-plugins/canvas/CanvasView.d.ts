@@ -9,7 +9,7 @@ import type { CanvasPluginInstance } from './CanvasPluginInstance.d.ts';
 import type { CanvasViewCanvas } from './CanvasViewCanvas.d.ts';
 
 /**
- * View for displaying and editing canvas files, extending TextFileView.
+ * View for displaying and editing canvas files, extending {@link obsidian#TextFileView}.
  *
  * @public
  * @unofficial

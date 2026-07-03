@@ -10,6 +10,13 @@ declare module 'obsidian' {
    */
   interface RenderContext extends HoverParent {
     /**
+     * Reference to the app instance.
+     *
+     * @unofficial
+     */
+    app: App;
+
+    /**
      * Hover popover.
      *
      * @official
@@ -28,5 +35,34 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes.
      */
     constructor__(app: App): this;
+
+    /**
+     * Renders an external link into a container element.
+     *
+     * @param url - The link URL.
+     * @param display - The display value, or `null` to use the URL as text.
+     * @param containerEl - The container element to render into.
+     * @unofficial
+     */
+    renderExternalLink(url: string, display: null | Value, containerEl: HTMLElement): void;
+
+    /**
+     * Renders an internal file link into a container element.
+     *
+     * @param file - The target file, or a link path to resolve.
+     * @param display - The display value, or `null` to use the file name as text.
+     * @param containerEl - The container element to render into.
+     * @unofficial
+     */
+    renderFileLink(file: string | TFile, display: null | Value, containerEl: HTMLElement): void;
+
+    /**
+     * Renders a tag link into a container element.
+     *
+     * @param tag - The tag, including its leading `#`.
+     * @param containerEl - The container element to render into.
+     * @unofficial
+     */
+    renderTag(tag: string, containerEl: HTMLElement): void;
   }
 }

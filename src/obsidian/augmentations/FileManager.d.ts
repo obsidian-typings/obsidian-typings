@@ -15,7 +15,7 @@ declare module 'obsidian' {
    */
   interface FileManager {
     /**
-     * Reference to App.
+     * Reference to the {@link obsidian#App}.
      *
      * @unofficial
      */
@@ -43,7 +43,7 @@ declare module 'obsidian' {
     updateQueue: PromisedQueue;
 
     /**
-     * Reference to Vault.
+     * Reference to the {@link obsidian#Vault}.
      *
      * @unofficial
      */
@@ -122,6 +122,15 @@ declare module 'obsidian' {
      * @unofficial
      */
     createNewMarkdownFileFromLinktext(filename: string, path: string): Promise<TFile>;
+
+    /**
+     * Delete a frontmatter property from every note that uses it.
+     *
+     * @param property - The property key to delete.
+     * @returns A promise that resolves when the property has been deleted everywhere.
+     * @unofficial
+     */
+    deleteProperty(property: string): Promise<void>;
 
     /**
      * Download attachments for note.
@@ -232,6 +241,15 @@ declare module 'obsidian' {
      * @unofficial
      */
     mergeFile(file: TFile, otherFile: TFile, override: string, atStart: boolean): Promise<void>;
+
+    /**
+     * Shows a notice offering to undo a bulk file modification, reverting each file to its captured state.
+     *
+     * @param records - The pre-modification state of each affected file.
+     * @param duration - How long the notice is shown, in milliseconds. Defaults to 30000.
+     * @unofficial
+     */
+    notifyForBulkUndo(records: BulkUndoRecord[], duration?: number): void;
 
     /**
      * Atomically read, modify, and save the frontmatter of a note.

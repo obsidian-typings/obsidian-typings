@@ -1,5 +1,5 @@
 /**
- * Multiselect option context menu context.
+ * {@link Multiselect} option context menu context.
  *
  * @public
  * @unofficial

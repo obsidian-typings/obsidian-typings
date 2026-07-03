@@ -12,7 +12,7 @@ export interface ObsidianDOM {
   appContainerEl: HTMLElement;
 
   /**
-   * Child of `appContainerEl` containing the main content of the application.
+   * Child of {@link ObsidianDOM.appContainerEl} containing the main content of the application.
    */
   horizontalMainContainerEl: HTMLElement;
 
@@ -22,7 +22,7 @@ export interface ObsidianDOM {
   statusBarEl: HTMLElement;
 
   /**
-   * Child of `horizontalMainContainerEl` containing the workspace DOM.
+   * Child of {@link ObsidianDOM.horizontalMainContainerEl} containing the workspace DOM.
    */
   workspaceEl: HTMLElement;
 

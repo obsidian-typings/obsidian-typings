@@ -5,7 +5,6 @@ import type {
 } from 'obsidian';
 
 import type { getAppSettingConstructor } from '../implementations/constructors/internals/getAppSettingConstructor.d.ts';
-import type { CloseableComponent } from './CloseableComponent.d.ts';
 import type { HotkeysSettingTab } from './HotkeysSettingTab.d.ts';
 
 /**
@@ -19,11 +18,6 @@ export interface AppSetting extends Modal {
    * Current active tab of the settings modal.
    */
   activeTab: null | SettingTab;
-
-  /**
-   * Closeable component for the active tab.
-   */
-  activeTabCloseable: CloseableComponent | null;
 
   /**
    * Container element containing the community plugins

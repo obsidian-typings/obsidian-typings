@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the BacklinkView constructor.
+ * Get the {@link BacklinkView} constructor.
  *
  * @param app - The app.
- * @returns The BacklinkView constructor.
+ * @returns The {@link BacklinkView} constructor.
  *
  * @public
  * @unofficial

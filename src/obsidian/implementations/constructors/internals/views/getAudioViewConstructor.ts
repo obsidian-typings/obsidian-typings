@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the AudioView constructor.
+ * Get the {@link AudioView} constructor.
  *
  * @param app - The app.
- * @returns The AudioView constructor.
+ * @returns The {@link AudioView} constructor.
  *
  * @public
  * @unofficial

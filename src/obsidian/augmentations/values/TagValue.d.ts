@@ -15,11 +15,20 @@ declare module 'obsidian' {
      * To get the constructor instance, use {@link getTagValueConstructor} from `obsidian-typings/implementations`.
      *
      * @param value - The value to wrap.
-     * @returns The new TagValue.
+     * @returns The new {@link obsidian#TagValue}.
      * @official
      * @since 1.10.0
      * @deprecated - Added only for typing purposes.
      */
     constructor5__(value: string): this;
+
+    /**
+     * Checks whether this tag matches the given value, treating nested tags as matching their parents.
+     *
+     * @param value - The value to match against.
+     * @returns Whether the tag matches.
+     * @unofficial
+     */
+    tagMatches(value: Value): boolean;
   }
 }

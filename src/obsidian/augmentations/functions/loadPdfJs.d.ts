@@ -18,6 +18,5 @@ declare module 'obsidian' {
    * @see {@link https://mozilla.github.io/pdf.js/ Official PDF.js documentation}.
    * @official
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-  export function loadPdfJs(): Promise<any>;
+  export function loadPdfJs(): Promise<unknown>;
 }

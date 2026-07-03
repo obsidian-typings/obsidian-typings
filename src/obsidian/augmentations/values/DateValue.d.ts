@@ -10,6 +10,20 @@ declare module 'obsidian' {
    */
   interface DateValue extends NotNullValue {
     /**
+     * The wrapped date.
+     *
+     * @unofficial
+     */
+    date: Date;
+
+    /**
+     * Whether this value includes a time portion (as opposed to a date only).
+     *
+     * @unofficial
+     */
+    time: boolean;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getDateValueConstructor} from `obsidian-typings/implementations`.
@@ -23,36 +37,52 @@ declare module 'obsidian' {
     constructor3__(date: unknown, showTime?: boolean): this;
 
     /**
-     * Returns a new DateValue with any time portion in this DateValue removed.
+     * Returns a new {@link obsidian#DateValue} with any time portion in this {@link obsidian#DateValue} removed.
      *
-     * @returns a new DateValue with any time portion in this DateValue removed.
+     * @returns a new {@link obsidian#DateValue} with any time portion in this {@link obsidian#DateValue} removed.
      * @official
      * @since 1.10.0
      */
     dateOnly(): DateValue;
 
     /**
-     * Returns a boolean indicating whether this DateValue is truthy.
+     * Returns a boolean indicating whether this {@link obsidian#DateValue} is truthy.
      *
-     * @returns a boolean indicating whether this DateValue is truthy.
+     * @returns a boolean indicating whether this {@link obsidian#DateValue} is truthy.
      * @official
      * @since 1.10.0
      */
     isTruthy(): boolean;
 
     /**
-     * Returns a new {@link RelativeDateValue} based on this DateValue.
+     * Formats the date portion of this value as a string.
      *
-     * @returns a new {@link RelativeDateValue} based on this DateValue.
+     * @returns The formatted date.
+     * @unofficial
+     */
+    printDate(): string;
+
+    /**
+     * Formats the time portion of this value as a string.
+     *
+     * @returns The formatted time.
+     * @unofficial
+     */
+    printTime(): string;
+
+    /**
+     * Returns a new {@link RelativeDateValue} based on this {@link obsidian#DateValue}.
+     *
+     * @returns a new {@link RelativeDateValue} based on this {@link obsidian#DateValue}.
      * @official
      * @since 1.10.0
      */
     relative(): string;
 
     /**
-     * String representation of this DateValue.
+     * String representation of this {@link obsidian#DateValue}.
      *
-     * @returns The string representation of this DateValue.
+     * @returns The string representation of this {@link obsidian#DateValue}.
      * @official
      * @since 1.10.0
      */
@@ -61,10 +91,10 @@ declare module 'obsidian' {
 
   namespace DateValue {
     /**
-     * Create new DateValue from an input string.
+     * Create new {@link obsidian#DateValue} from an input string.
      *
      * @param input - An ISO 8601 date or datetime string.
-     * @returns A new DateValue from the input string.
+     * @returns A new {@link obsidian#DateValue} from the input string.
      *
      * @example
      * ```typescript

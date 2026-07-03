@@ -18,7 +18,7 @@ export interface CanvasViewCanvasEdge {
   bbox: BBox;
 
   /**
-   * Bezier curve data used for rendering the edge path.
+   * {@link Bezier} curve data used for rendering the edge path.
    */
   bezier: Bezier;
 

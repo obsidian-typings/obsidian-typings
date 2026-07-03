@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { MetadataTypeManager } from '../../../internals/metadata-type-manager/MetadataTypeManager.d.ts';
 
 /**
- * Get the MetadataTypeManager constructor.
+ * Get the {@link MetadataTypeManager} constructor.
  *
  * @param app - The app instance.
- * @returns The MetadataTypeManager constructor.
+ * @returns The {@link MetadataTypeManager} constructor.
  *
  * @public
  * @unofficial

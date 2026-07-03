@@ -31,6 +31,32 @@ declare module 'obsidian' {
     constructor__(ctx: unknown, file: TFile): this;
 
     /**
+     * Gets the value for a built-in or property identifier (e.g. `this`, `note`, `file`, `formula`, or a property name).
+     *
+     * @param identifier - The identifier to resolve.
+     * @returns The resolved value.
+     * @unofficial
+     */
+    getByIdentifier(identifier: string): Value;
+
+    /**
+     * Gets the frontmatter property keys of the entry.
+     *
+     * @returns The property keys.
+     * @unofficial
+     */
+    getPropertyKeys(): string[];
+
+    /**
+     * Gets the raw (un-wrapped) frontmatter value for a key.
+     *
+     * @param key - The property key.
+     * @returns The raw value, or `null` if not present.
+     * @unofficial
+     */
+    getRawProperty(key: string): unknown;
+
+    /**
      * Get the value of the property.
      * Note: Errors are returned as {@link ErrorValue}
      *
@@ -40,5 +66,13 @@ declare module 'obsidian' {
      * @since 1.10.0
      */
     getValue(propertyId: BasesPropertyId): null | Value;
+
+    /**
+     * Gets all accessible keys on the entry (frontmatter keys plus `this`, `note`, `file`, `formula`).
+     *
+     * @returns The accessible keys.
+     * @unofficial
+     */
+    keys(): string[];
   }
 }

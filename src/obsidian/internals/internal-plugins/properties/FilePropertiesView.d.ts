@@ -8,7 +8,7 @@ import type { InfoFileView } from '../../views/InfoFileView.d.ts';
 import type { PropertiesPluginInstance } from './PropertiesPluginInstance.d.ts';
 
 /**
- * View that displays frontmatter properties for the current file.
+ * {@link obsidian#View} that displays frontmatter properties for the current file.
  *
  * @public
  * @unofficial

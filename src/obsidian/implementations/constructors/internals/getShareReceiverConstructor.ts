@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { ShareReceiver } from '../../../internals/ShareReceiver.d.ts';
 
 /**
- * Get the ShareReceiver constructor.
+ * Get the {@link ShareReceiver} constructor.
  *
  * @param app - The app instance.
- * @returns The ShareReceiver constructor.
+ * @returns The {@link ShareReceiver} constructor.
  *
  * @public
  * @unofficial

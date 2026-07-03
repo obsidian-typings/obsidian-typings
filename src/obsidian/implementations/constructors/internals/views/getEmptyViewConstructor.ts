@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the EmptyView constructor.
+ * Get the {@link EmptyView} constructor.
  *
  * @param app - The app.
- * @returns The EmptyView constructor.
+ * @returns The {@link EmptyView} constructor.
  *
  * @public
  * @unofficial

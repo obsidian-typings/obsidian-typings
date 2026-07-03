@@ -418,6 +418,13 @@ declare module 'obsidian' {
     stopWatchPath(normalizedPath: string): void;
 
     /**
+     * Probes the file system for case-insensitivity by writing a temporary file, updating the adapter's case-sensitivity flag.
+     *
+     * @unofficial
+     */
+    testInsensitive(): void;
+
+    /**
      * Debounced handler triggered when file system events occur.
      *
      * @returns The debounced handler.

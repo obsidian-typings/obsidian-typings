@@ -20,14 +20,21 @@ export interface RecentFileTracker {
   lastOpenFiles: string[];
 
   /**
-   * Reference to Vault.
+   * Reference to the {@link obsidian#Vault}.
    */
   vault: Vault;
 
   /**
-   * Reference to Workspace.
+   * Reference to the {@link obsidian#Workspace}.
    */
   workspace: Workspace;
+
+  /**
+   * Add a file to the recent files list, if the workspace layout is ready.
+   *
+   * @param file - The file to add.
+   */
+  addRecentFile(file: TFile): void;
 
   /**
    * Add a file to the recent files list.

@@ -72,6 +72,13 @@ declare module 'obsidian' {
     plugin?: Plugin;
 
     /**
+     * The rendered setting items (and groups) currently shown in the tab.
+     *
+     * @unofficial
+     */
+    renderedItems: unknown[];
+
+    /**
      * Reference to the settings modal.
      *
      * @unofficial
@@ -90,15 +97,6 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes.
      */
     constructor2__(app: App, setting: Setting): this;
-
-    /**
-     * Called when the settings tab should be rendered.
-     *
-     * @see {@link https://docs.obsidian.md/Plugins/User+interface/Settings#Register+a+settings+tab}.
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link display} instead.
-     */
-    display__?(): void;
 
     /**
      * Hides the contents of the setting tab.

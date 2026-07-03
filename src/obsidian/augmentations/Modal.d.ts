@@ -145,6 +145,14 @@ declare module 'obsidian' {
     constructor__(app: App): this;
 
     /**
+     * Closes the modal when a click occurs outside of it, unless the event was already handled.
+     *
+     * @param evt - The mouse event.
+     * @unofficial
+     */
+    onClickOutside(evt: MouseEvent): void;
+
+    /**
      * Called when the modal is closed.
      *
      * @example
@@ -165,20 +173,6 @@ declare module 'obsidian' {
      * @unofficial
      */
     onEscapeKey(): void;
-
-    /**
-     * Called when the user navigates back in the history.
-     *
-     * @official
-     */
-    onHistoryBack(): void;
-
-    /**
-     * Called when the user navigates forward in the history.
-     *
-     * @official
-     */
-    onHistoryForward?(): void;
 
     /**
      * Called when the modal is opened.
@@ -203,7 +197,7 @@ declare module 'obsidian' {
     onWindowClose(): void;
 
     /**
-     * Show the modal on the the active window. On mobile, the modal will animate on screen.
+     * Show the modal on the the active window. On phones, the modal will animate on screen.
      *
      * @official
      */

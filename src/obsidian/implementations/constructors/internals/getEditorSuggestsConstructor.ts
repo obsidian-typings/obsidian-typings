@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { EditorSuggests } from '../../../internals/EditorSuggests.d.ts';
 
 /**
- * Get the EditorSuggests constructor.
+ * Get the {@link EditorSuggests} constructor.
  *
  * @param app - The app instance.
- * @returns The EditorSuggests constructor.
+ * @returns The {@link EditorSuggests} constructor.
  *
  * @public
  * @unofficial

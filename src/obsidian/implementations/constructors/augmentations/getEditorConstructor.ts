@@ -3,9 +3,9 @@ import { Editor } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the Editor constructor.
+ * Get the {@link obsidian#Editor} constructor.
  *
- * @returns The Editor constructor.
+ * @returns The {@link obsidian#Editor} constructor.
  *
  * @public
  * @unofficial

@@ -255,6 +255,16 @@ declare module 'obsidian' {
     readBinary(normalizedPath: string): Promise<ArrayBuffer>;
 
     /**
+     * Reconciles a changed file against the in-memory file listing, updating its metadata.
+     *
+     * @param realpath - The real (device) path of the file.
+     * @param normalizedPath - The normalized vault path key.
+     * @param stat - The new file stats.
+     * @unofficial
+     */
+    reconcileFileChanged(realpath: string, normalizedPath: string, stat: Stat): void;
+
+    /**
      * Reconcile a file creation event between old and new paths.
      *
      * @param normalizedPath - The original path.
@@ -389,6 +399,14 @@ declare module 'obsidian' {
      * @unofficial
      */
     update(normalizedPath: string): Promise<void>;
+
+    /**
+     * Starts watching the vault and builds the initial in-memory file listing.
+     *
+     * @returns A promise that resolves when the initial listing is built.
+     * @unofficial
+     */
+    watchAndList(): Promise<void>;
 
     /**
      * Writes a file.

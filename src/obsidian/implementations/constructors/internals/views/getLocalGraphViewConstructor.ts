@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the LocalGraphView constructor.
+ * Get the {@link LocalGraphView} constructor.
  *
  * @param app - The app.
- * @returns The LocalGraphView constructor.
+ * @returns The {@link LocalGraphView} constructor.
  *
  * @public
  * @unofficial

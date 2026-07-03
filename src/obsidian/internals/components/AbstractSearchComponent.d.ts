@@ -16,7 +16,7 @@ export interface AbstractSearchComponent {
   app: App;
 
   /**
-   * The container element in which the search component exists (i.e. Editor).
+   * The container element in which the search component exists (i.e. {@link obsidian#Editor}).
    */
   containerEl: HTMLElement;
 

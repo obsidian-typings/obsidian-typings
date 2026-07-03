@@ -24,5 +24,19 @@ declare module 'obsidian' {
      * @since 0.15.4
      */
     win__: Window;
+
+    /**
+     * Focuses the container's window (restoring it first if minimized, on desktop).
+     *
+     * @unofficial
+     */
+    focus(): void;
+
+    /**
+     * Handles the container's window gaining focus, updating the active leaf.
+     *
+     * @unofficial
+     */
+    onFocus(): void;
   }
 }

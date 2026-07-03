@@ -1,3 +1,5 @@
+import type { Debouncer } from 'obsidian';
+
 import type { ElectronBrowserWindow } from '../../electron/internals/ElectronBrowserWindow.d.ts';
 import type { getFrameDomConstructor } from '../implementations/constructors/internals/getFrameDomConstructor.d.ts';
 /**
@@ -21,6 +23,11 @@ export interface FrameDom {
    * Container for window control buttons on the left side.
    */
   leftButtonContainerEl: HTMLDivElement;
+
+  /**
+   * Debounced request to update the window status indicators in the title bar.
+   */
+  requestUpdateStatus: Debouncer<[], void>;
 
   /**
    * The title bar element.

@@ -2,9 +2,9 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { FrameDom } from '../../../internals/FrameDom.d.ts';
 
 /**
- * Get the FrameDom constructor.
+ * Get the {@link FrameDom} constructor.
  *
- * @returns The FrameDom constructor.
+ * @returns The {@link FrameDom} constructor.
  *
  * @public
  * @unofficial

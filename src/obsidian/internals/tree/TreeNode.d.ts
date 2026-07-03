@@ -1,5 +1,5 @@
 /**
- * Tree node.
+ * {@link Tree} node.
  *
  * @public
  * @unofficial

@@ -3,9 +3,9 @@ import { CapacitorAdapter } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the CapacitorAdapter constructor.
+ * Get the {@link obsidian#CapacitorAdapter} constructor.
  *
- * @returns The CapacitorAdapter constructor.
+ * @returns The {@link obsidian#CapacitorAdapter} constructor.
  *
  * @public
  * @unofficial

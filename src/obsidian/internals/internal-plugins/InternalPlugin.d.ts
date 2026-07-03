@@ -33,7 +33,7 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
   app: App;
 
   /**
-   * Commands registered by this plugin.
+   * {@link Commands} registered by this plugin.
    */
   commands: Command[];
 

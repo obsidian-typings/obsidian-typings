@@ -3,9 +3,9 @@ import { Menu } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the Menu constructor.
+ * Get the {@link obsidian#Menu} constructor.
  *
- * @returns The Menu constructor.
+ * @returns The {@link obsidian#Menu} constructor.
  *
  * @public
  * @unofficial

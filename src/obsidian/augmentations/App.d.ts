@@ -276,7 +276,7 @@ declare module 'obsidian' {
      *
      * @tutorial Used for creating your own files and folders, renaming, ...
      * @tutorial Use `app.vault.adapter` for accessing files outside the vault.
-     * @remark Prefer using the regular `vault` whenever possible.
+     * @remark Prefer using the regular {@link vault} whenever possible.
      * @official
      * @since 0.9.7
      */
@@ -285,7 +285,7 @@ declare module 'obsidian' {
     /**
      * Manages the construction of appropriate views when opening a file of a certain type.
      *
-     * @remark Prefer usage of view registration via the Plugin class.
+     * @remark Prefer usage of view registration via the {@link obsidian#Plugin} class.
      * @unofficial
      */
     viewRegistry: ViewRegistry;

@@ -3,9 +3,9 @@ import { FuzzySuggestModal } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the FuzzySuggestModal constructor.
+ * Get the {@link obsidian#FuzzySuggestModal} constructor.
  *
- * @returns The FuzzySuggestModal constructor.
+ * @returns The {@link obsidian#FuzzySuggestModal} constructor.
  *
  * @public
  * @unofficial

@@ -3,9 +3,9 @@ import { RegExpValue } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the RegExpValue constructor.
+ * Get the {@link obsidian#RegExpValue} constructor.
  *
- * @returns The RegExpValue constructor.
+ * @returns The {@link obsidian#RegExpValue} constructor.
  *
  * @public
  * @unofficial

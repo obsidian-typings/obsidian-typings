@@ -19,7 +19,7 @@ export interface AbstractFileTreeItem<T extends TAbstractFile> extends TreeItem 
   file: T;
 
   /**
-   * Tree node metadata and layout information.
+   * {@link Tree} node metadata and layout information.
    */
   info: TreeNodeInfo;
 

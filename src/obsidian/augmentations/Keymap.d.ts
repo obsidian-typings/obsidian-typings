@@ -10,6 +10,20 @@ declare module 'obsidian' {
    */
   interface Keymap {
     /**
+     * The compiled, sorted, comma-joined string of currently-pressed modifiers (e.g. `'Ctrl,Shift'`).
+     *
+     * @unofficial
+     */
+    modifiers: string;
+
+    /**
+     * The root scope, active when no other scope is pushed.
+     *
+     * @unofficial
+     */
+    rootScope: Scope;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getKeymapConstructor} from `obsidian-typings/implementations`.
@@ -18,6 +32,49 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes.
      */
     constructor__(): this;
+
+    /**
+     * Gets the root scope.
+     *
+     * @returns The root scope.
+     * @unofficial
+     */
+    getRootScope(): Scope;
+
+    /**
+     * Checks whether a modifier is currently pressed.
+     *
+     * @param modifier - The modifier to check.
+     * @returns Whether the modifier is currently pressed.
+     * @unofficial
+     */
+    hasModifier(modifier: Modifier): boolean;
+
+    /**
+     * Checks whether the currently-pressed modifiers exactly match the given compiled modifier string.
+     *
+     * @param modifiers - The compiled, sorted, comma-joined modifier string to compare against.
+     * @returns Whether the modifiers match.
+     * @unofficial
+     */
+    matchModifiers(modifiers: string): boolean;
+
+    /**
+     * Handles a focus-in event for the keymap's tab-focus handling.
+     *
+     * @param evt - The focus event.
+     * @unofficial
+     */
+    onFocusIn(evt: FocusEvent): void;
+
+    /**
+     * Handles a key event, dispatching it to the active scope.
+     *
+     * @param evt - The keyboard event.
+     * @returns `false` when the event was handled and should be swallowed, otherwise `undefined`.
+     * @unofficial
+     */
+    onKeyEvent(evt: KeyboardEvent): false | void;
 
     /**
      * Remove a scope from the scope stack.
@@ -44,6 +101,14 @@ declare module 'obsidian' {
      * @since 0.13.9
      */
     pushScope(scope: Scope): void;
+
+    /**
+     * Updates the currently-pressed modifiers from a keyboard event.
+     *
+     * @param evt - The keyboard event to read modifiers from.
+     * @unofficial
+     */
+    updateModifiers(evt: KeyboardEvent): void;
   }
 
   namespace Keymap {

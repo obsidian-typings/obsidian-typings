@@ -133,6 +133,22 @@ declare module 'obsidian' {
     constructor2__(app: App, manifest: PluginManifest): this;
 
     /**
+     * Gets the latest modification time across the plugin's files.
+     *
+     * @returns A promise resolving to the modification time in milliseconds, or `0` if unavailable.
+     * @unofficial
+     */
+    getModifiedTime(): Promise<number>;
+
+    /**
+     * Loads the plugin's `styles.css` into the document.
+     *
+     * @returns A promise that resolves when the styles are loaded.
+     * @unofficial
+     */
+    loadCSS(): Promise<void>;
+
+    /**
      * Load settings data from disk.
      * Data is stored in `data.json` in the plugin folder.
      *
@@ -141,8 +157,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.9.7
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    loadData(): Promise<any>;
+    loadData(): Promise<unknown>;
 
     /**
      * Called when the `data.json` file is modified on disk externally from Obsidian.
@@ -189,18 +204,26 @@ declare module 'obsidian' {
 
     /**
      * Register a CLI handler to handle a command from the CLI.
-     * Command IDs must be globally unique. Attempting to register a command that is already registered will throw an Error.
+     * {@link obsidian#Command} IDs must be globally unique. Attempting to register a command that is already registered will throw an Error.
      *
      * Use the format `<plugin-id>` for your default command, and `<plugin-id>:<action>` for sub-commands and actions.
      *
      * @param command - The command ID that will be used. Use alphanumeric characters without spaces.
      * @param description - The description text to provide in the help command, and in auto-completion prompts.
-     * @param flags - Command line flags that can be passed in.
+     * @param flags - {@link obsidian#Command} line flags that can be passed in.
      * @param handler - The callback handler to handle a CLI invocation.
      * @official
      * @since 1.12.2
      */
     registerCliHandler(command: string, description: string, flags: CliFlags | null, handler: CliHandler): void;
+
+    /**
+     * Registers a legacy CodeMirror 5 callback. No-op in current Obsidian versions.
+     *
+     * @param callback - The CodeMirror 5 registration callback.
+     * @unofficial
+     */
+    registerCodeMirror(callback: unknown): void;
 
     /**
      * Registers a CodeMirror 6 extension.
@@ -220,7 +243,7 @@ declare module 'obsidian' {
     registerEditorExtension(extension: Extension): void;
 
     /**
-     * Register an EditorSuggest which can provide live suggestions while the user is typing.
+     * Register an {@link obsidian#EditorSuggest} which can provide live suggestions while the user is typing.
      *
      * @param editorSuggest - The editor suggest to register.
      * @example
@@ -230,8 +253,7 @@ declare module 'obsidian' {
      * @official
      * @since 0.12.7
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    registerEditorSuggest(editorSuggest: EditorSuggest<any>): void;
+    registerEditorSuggest(editorSuggest: EditorSuggest<unknown>): void;
 
     /**
      * Register a set of extensions for a view type.
@@ -246,6 +268,14 @@ declare module 'obsidian' {
      * @since 0.9.7
      */
     registerExtensions(extensions: string[], viewType: string): void;
+
+    /**
+     * Registers a global Bases formula function, unregistered automatically on unload.
+     *
+     * @param func - The function definition to register.
+     * @unofficial
+     */
+    registerGlobalFunc(func: unknown): void;
 
     /**
      * Registers a view with the 'Page preview' core plugin as an emitter of the 'hover-link' event.
@@ -263,6 +293,15 @@ declare module 'obsidian' {
      * @since 1.1.0
      */
     registerHoverLinkSource(id: string, info: HoverLinkSource): void;
+
+    /**
+     * Registers a Bases formula function for a specific value type, unregistered automatically on unload.
+     *
+     * @param type - The value type to register the function for.
+     * @param func - The function definition to register.
+     * @unofficial
+     */
+    registerInstanceFunc(type: unknown, func: unknown): void;
 
     /**
      * Register a special post processor that handles fenced code given a language and a handler.
@@ -285,8 +324,7 @@ declare module 'obsidian' {
      */
     registerMarkdownCodeBlockProcessor(
       language: string,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-      handler: (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => Promise<any> | void,
+      handler: (source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext) => Promise<unknown> | void,
       sortOrder?: number
     ): MarkdownPostProcessor;
 

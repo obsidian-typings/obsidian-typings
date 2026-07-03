@@ -7,10 +7,10 @@ import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
 
 /**
- * Get the VideoView constructor.
+ * Get the {@link VideoView} constructor.
  *
  * @param app - The app.
- * @returns The VideoView constructor.
+ * @returns The {@link VideoView} constructor.
  *
  * @public
  * @unofficial

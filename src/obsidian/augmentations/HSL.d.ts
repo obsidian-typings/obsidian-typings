@@ -2,7 +2,7 @@ export {};
 
 declare module 'obsidian' {
   /**
-   * Represents an HSL color.
+   * Represents an {@link obsidian#HSL} color.
    *
    * @since 0.16.0
    */

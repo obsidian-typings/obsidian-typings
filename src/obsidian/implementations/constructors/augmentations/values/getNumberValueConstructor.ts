@@ -3,9 +3,9 @@ import { NumberValue } from 'obsidian';
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the NumberValue constructor.
+ * Get the {@link obsidian#NumberValue} constructor.
  *
- * @returns The NumberValue constructor.
+ * @returns The {@link obsidian#NumberValue} constructor.
  *
  * @public
  * @unofficial

@@ -132,5 +132,13 @@ declare module 'obsidian' {
      * @since 0.9.20
      */
     renderSuggestion(item: FuzzyMatch<T>, el: HTMLElement): void;
+
+    /**
+     * Sorts the fuzzy-match suggestions, highest score first.
+     *
+     * @param suggestions - The suggestions to sort in place.
+     * @unofficial
+     */
+    sortSuggestions(suggestions: FuzzyMatch<T>[]): void;
   }
 }

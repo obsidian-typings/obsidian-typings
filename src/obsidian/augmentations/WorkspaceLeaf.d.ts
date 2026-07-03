@@ -12,6 +12,13 @@ declare module 'obsidian' {
    */
   interface WorkspaceLeaf extends WorkspaceItem, HoverParent {
     /**
+     * The cached empty-state view shown when the leaf has no file open.
+     *
+     * @unofficial
+     */
+    _empty: View;
+
+    /**
      * Timestamp of when this leaf was last activated.
      *
      * @unofficial
@@ -52,7 +59,7 @@ declare module 'obsidian' {
      * On desktop, a leaf is always a child of a {@link WorkspaceTabs} component.
      * On mobile, a leaf might be a child of a {@link WorkspaceMobileDrawer}.
      * Perform an `instanceof` check before making an assumption about the
-     * `parent`.
+     * {@link parent}.
      *
      * @official
      */
@@ -160,6 +167,14 @@ declare module 'obsidian' {
     canNavigate(): boolean;
 
     /**
+     * Checks whether this leaf can be pinned (i.e. its parent is a tab group).
+     *
+     * @returns Whether the leaf can be pinned.
+     * @unofficial
+     */
+    canPin(): boolean;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getWorkspaceLeafConstructor} from `obsidian-typings/implementations`.
@@ -239,8 +254,8 @@ declare module 'obsidian' {
 
     /**
      * Returns `true` if this leaf is currently deferred because it is in the background.
-     * A deferred leaf will have a DeferredView as its view, instead of the View that
-     * it should normally have for its type (like MarkdownView for the `markdown` type).
+     * A deferred leaf will have a {@link DeferredView} as its view, instead of the {@link obsidian#View} that
+     * it should normally have for its type (like {@link obsidian#MarkdownView} for the `markdown` type).
      *
      * @returns Whether the leaf is deferred.
      * @since 1.7.2

@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { EmbedRegistry } from '../../../internals/embed-registry/EmbedRegistry.d.ts';
 
 /**
- * Get the EmbedRegistry constructor.
+ * Get the {@link EmbedRegistry} constructor.
  *
  * @param app - The app instance.
- * @returns The EmbedRegistry constructor.
+ * @returns The {@link EmbedRegistry} constructor.
  *
  * @public
  * @unofficial

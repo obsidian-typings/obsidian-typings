@@ -18,6 +18,5 @@ declare module 'obsidian' {
    * @see {@link https://mermaid.js.org/ Official Mermaid documentation}.
    * @official
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-  export function loadMermaid(): Promise<any>;
+  export function loadMermaid(): Promise<unknown>;
 }

@@ -10,13 +10,6 @@ declare module 'obsidian' {
    */
   interface Scope {
     /**
-     * Callback to execute when scope is matched
-     *
-     * @unofficial
-     */
-    cb: (() => boolean) | undefined;
-
-    /**
      * Overridden keys that exist in this scope.
      *
      * @unofficial
@@ -24,7 +17,7 @@ declare module 'obsidian' {
     keys: KeyScope[];
 
     /**
-     * Scope that this scope is a child of
+     * {@link obsidian#Scope} that this scope is a child of
      *
      * @unofficial
      */
@@ -83,6 +76,14 @@ declare module 'obsidian' {
      * @unofficial
      */
     setTabFocusContainer(container: HTMLElement): void;
+
+    /**
+     * Sets the container element used for tab-focus handling.
+     *
+     * @param containerEl - The container element.
+     * @unofficial
+     */
+    setTabFocusContainerEl(containerEl: HTMLElement): void;
 
     /**
      * Remove an existing keymap event handler.

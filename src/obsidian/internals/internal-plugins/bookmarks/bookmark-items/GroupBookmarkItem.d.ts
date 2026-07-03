@@ -1,7 +1,7 @@
 import type { BookmarkItem } from './BookmarkItem.d.ts';
 
 /**
- * Bookmark item representing a group that contains other bookmark items.
+ * {@link Bookmark} item representing a group that contains other bookmark items.
  *
  * @public
  * @unofficial

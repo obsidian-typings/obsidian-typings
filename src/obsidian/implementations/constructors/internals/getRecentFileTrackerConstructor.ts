@@ -4,10 +4,10 @@ import type { ExtractConstructor } from '../../../internals/constructors/Extract
 import type { RecentFileTracker } from '../../../internals/RecentFileTracker.d.ts';
 
 /**
- * Get the RecentFileTracker constructor.
+ * Get the {@link RecentFileTracker} constructor.
  *
  * @param app - The app instance.
- * @returns The RecentFileTracker constructor.
+ * @returns The {@link RecentFileTracker} constructor.
  *
  * @public
  * @unofficial

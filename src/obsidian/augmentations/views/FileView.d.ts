@@ -130,8 +130,8 @@ declare module 'obsidian' {
      * @returns A promise that resolves when the file is renamed.
      * @example
      * ```ts
-     * class MyFileView extends FileView {
-     *     public override async onRename(file: TFile): Promise<void> {
+     * class MyFileView extends {@link obsidian#FileView} {
+     *     public override async onRename(file: {@link obsidian#TFile}): Promise<void> {
      *         await super.onRename(file);
      *         console.log(file);
      *     }
@@ -147,8 +147,8 @@ declare module 'obsidian' {
      * @returns A promise that resolves when the file is unloaded.
      * @example
      * ```ts
-     * class MyFileView extends FileView {
-     *     public override async onUnloadFile(file: TFile): Promise<void> {
+     * class MyFileView extends {@link obsidian#FileView} {
+     *     public override async onUnloadFile(file: {@link obsidian#TFile}): Promise<void> {
      *         await super.onUnloadFile(file);
      *         console.log(file);
      *     }
@@ -156,6 +156,14 @@ declare module 'obsidian' {
      * @official
      */
     onUnloadFile(file: TFile): Promise<void>;
+
+    /**
+     * Receives sync state from another file view, opening the other view's file if it differs.
+     *
+     * @param view - The view to receive sync state from.
+     * @unofficial
+     */
+    receiveSyncState(view: FileView): void;
 
     /**
      * Render the breadcrumb navigation for this file view.

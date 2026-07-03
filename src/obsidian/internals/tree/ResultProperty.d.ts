@@ -13,7 +13,7 @@ export interface ResultProperty {
   key: string;
 
   /**
-   * Position of the match within the content.
+   * {@link Position} of the match within the content.
    */
   pos: ContentPosition;
 

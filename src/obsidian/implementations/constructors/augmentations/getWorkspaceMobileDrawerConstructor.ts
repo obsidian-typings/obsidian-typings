@@ -3,9 +3,9 @@ import { WorkspaceMobileDrawer } from 'obsidian';
 import type { ExtractConstructor } from '../../../internals/constructors/ExtractConstructor.d.ts';
 
 /**
- * Get the WorkspaceMobileDrawer constructor.
+ * Get the {@link obsidian#WorkspaceMobileDrawer} constructor.
  *
- * @returns The WorkspaceMobileDrawer constructor.
+ * @returns The {@link obsidian#WorkspaceMobileDrawer} constructor.
  * @remark Constructor is `null`. See {@link https://forum.obsidian.md/t/api-bug-tasks-class/98993}.
  *
  * @public

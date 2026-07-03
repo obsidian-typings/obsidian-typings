@@ -5,17 +5,66 @@ export {};
 declare module 'obsidian' {
   /**
    * {@link Value} wrapping a duration. Durations can be used to modify a {@link DateValue} or can
-   * result from subtracting a DateValue from another.
+   * result from subtracting a {@link obsidian#DateValue} from another.
    *
    * @since 1.10.0
    */
   interface DurationValue extends NotNullValue {
     /**
+     * The days component of the duration.
+     *
+     * @unofficial
+     */
+    days: number;
+
+    /**
+     * The hours component of the duration.
+     *
+     * @unofficial
+     */
+    hours: number;
+
+    /**
+     * The milliseconds component of the duration.
+     *
+     * @unofficial
+     */
+    milliseconds: number;
+
+    /**
+     * The minutes component of the duration.
+     *
+     * @unofficial
+     */
+    minutes: number;
+
+    /**
+     * The months component of the duration.
+     *
+     * @unofficial
+     */
+    months: number;
+
+    /**
+     * The seconds component of the duration.
+     *
+     * @unofficial
+     */
+    seconds: number;
+
+    /**
+     * The years component of the duration.
+     *
+     * @unofficial
+     */
+    years: number;
+
+    /**
      * Modifies the provided {@link DateValue} by this duration.
      *
-     * @param value - The DateValue to modify.
-     * @param subtract - Whether to subtract the duration from the DateValue.
-     * @returns The modified DateValue.
+     * @param value - The {@link obsidian#DateValue} to modify.
+     * @param subtract - Whether to subtract the duration from the {@link obsidian#DateValue}.
+     * @returns The modified {@link obsidian#DateValue}.
      * @official
      * @since 1.10.0
      */
@@ -57,18 +106,18 @@ declare module 'obsidian' {
     getMilliseconds(): number;
 
     /**
-     * Returns a boolean indicating whether this DurationValue is truthy.
+     * Returns a boolean indicating whether this {@link obsidian#DurationValue} is truthy.
      *
-     * @returns A boolean indicating whether this DurationValue is truthy.
+     * @returns A boolean indicating whether this {@link obsidian#DurationValue} is truthy.
      * @official
      * @since 1.10.0
      */
     isTruthy(): boolean;
 
     /**
-     * String representation of this DurationValue.
+     * String representation of this {@link obsidian#DurationValue}.
      *
-     * @returns The string representation of this DurationValue.
+     * @returns The string representation of this {@link obsidian#DurationValue}.
      * @official
      * @since 1.10.0
      */
@@ -77,10 +126,10 @@ declare module 'obsidian' {
 
   namespace DurationValue {
     /**
-     * Create a new DurationValue from milliseconds.
+     * Create a new {@link obsidian#DurationValue} from milliseconds.
      *
-     * @param milliseconds - The milliseconds to create a DurationValue from.
-     * @returns The new DurationValue.
+     * @param milliseconds - The milliseconds to create a {@link obsidian#DurationValue} from.
+     * @returns The new {@link obsidian#DurationValue}.
      *
      * @official
      * @since 1.10.0
@@ -89,11 +138,11 @@ declare module 'obsidian' {
     function fromMilliseconds__(milliseconds: number): DurationValue;
 
     /**
-     * Create a new DurationValue using an ISO 8601 duration.
+     * Create a new {@link obsidian#DurationValue} using an ISO 8601 duration.
      * See {@link https://en.wikipedia.org/wiki/ISO_8601#Durations} for duration format details.
      *
      * @param input - The ISO 8601 duration string.
-     * @returns The new DurationValue.
+     * @returns The new {@link obsidian#DurationValue}.
      *
      * @official
      * @since 1.10.0

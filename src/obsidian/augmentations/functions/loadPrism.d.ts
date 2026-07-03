@@ -18,6 +18,5 @@ declare module 'obsidian' {
    * @see {@link https://prismjs.com/ Official Prism documentation}.
    * @official
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-  export function loadPrism(): Promise<any>;
+  export function loadPrism(): Promise<unknown>;
 }
