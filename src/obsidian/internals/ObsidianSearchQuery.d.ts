@@ -10,7 +10,7 @@ import type {
  * @public
  * @unofficial
  */
-export interface SearchQuery {
+export interface ObsidianSearchQuery {
   /**
    * Reference to the app.
    */
