@@ -6,7 +6,7 @@ import type {
 } from 'obsidian';
 
 /**
- * The file-change queue that streams vault files into a {@link QueryController}'s query and keeps the
+ * The file-change queue that streams vault files into a {@link obsidian#QueryController}'s query and keeps the
  * results in sync as files are created, modified, renamed, or deleted.
  *
  * @public

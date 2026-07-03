@@ -8,7 +8,7 @@ import type {
 } from 'obsidian';
 
 /**
- * The search menu of a {@link QueryController}'s toolbar, providing the in-view search bar that filters
+ * The search menu of a {@link obsidian#QueryController}'s toolbar, providing the in-view search bar that filters
  * results by a full-text query.
  *
  * @public
@@ -56,7 +56,7 @@ export interface BasesSearchMenu extends Component {
   searchBarEl: HTMLDivElement;
 
   /**
-   * Debounced update that pushes the typed query to the controller via {@link QueryController.updateSearchQuery}.
+   * Debounced update that pushes the typed query to the controller via {@link obsidian#QueryController.updateSearchQuery}.
    */
   update: Debouncer<[string], void>;
 
