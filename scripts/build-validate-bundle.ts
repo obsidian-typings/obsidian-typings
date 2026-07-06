@@ -21,6 +21,7 @@ interface ScenarioResult {
 }
 
 const NODE_MODULES_SEGMENT = '/node_modules/';
+const OBSIDIAN_SEGMENT = '/node_modules/obsidian/';
 const OBSIDIAN_TYPINGS_SEGMENT = '/node_modules/obsidian-typings/';
 
 async function main(): Promise<void> {
@@ -87,10 +88,13 @@ async function main(): Promise<void> {
 }
 
 /**
- * In a bundle-compat scenario, keeps diagnostics for the scenario's own files and for our
- * published `obsidian-typings` types (resolved via the `file:` symlink to the repo root, or kept
- * under `node_modules/obsidian-typings` when symlinks are preserved). Everything else under
- * `node_modules` — obsidian and any other third-party library — is ignored.
+ * In a bundle-compat scenario, keeps diagnostics for the scenario's own files, for our published
+ * `obsidian-typings` types (resolved via the `file:` symlink to the repo root, or kept under
+ * `node_modules/obsidian-typings` when symlinks are preserved), and for `obsidian` itself. The
+ * `obsidian` package is kept because `obsidian-typings` augments it and is responsible for keeping
+ * the augmented `obsidian.d.ts` internally consistent — e.g. a class declared `implements
+ * HistoryHandler` that lacks the required method is a defect our augmentations must fix, and would
+ * otherwise be silently ignored. Every other third-party library under `node_modules` is ignored.
  *
  * @param fileName - The diagnostic's source file, already passed through `toCanonical`.
  * @param rootCanonical - The repo root, already passed through `toCanonical`.
@@ -101,7 +105,7 @@ function shouldKeepScenarioFile(fileName: string, rootCanonical: string): boolea
     return true;
   }
 
-  return fileName.includes(OBSIDIAN_TYPINGS_SEGMENT);
+  return fileName.includes(OBSIDIAN_TYPINGS_SEGMENT) || fileName.includes(OBSIDIAN_SEGMENT);
 }
 
 await main();
