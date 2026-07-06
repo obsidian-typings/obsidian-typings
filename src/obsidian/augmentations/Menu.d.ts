@@ -9,7 +9,7 @@ declare module 'obsidian' {
   /**
    * A component for context menus.
    */
-  interface Menu extends Component, CloseableComponent {
+  interface Menu extends Component, CloseableComponent, HistoryHandler {
     /**
      * Background for the suggestion menu.
      *

@@ -11,7 +11,7 @@ declare module 'obsidian' {
    *
    * @typeParam T - The type of the suggestion items.
    */
-  interface PopoverSuggest<T> extends ISuggestOwner<T>, CloseableComponent {
+  interface PopoverSuggest<T> extends ISuggestOwner<T>, CloseableComponent, HistoryHandler {
     /**
      * The Obsidian app instance.
      *
