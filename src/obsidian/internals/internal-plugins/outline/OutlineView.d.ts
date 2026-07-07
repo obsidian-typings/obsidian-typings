@@ -23,7 +23,7 @@ export interface OutlineView extends InfoFileView {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor3__(leaf: WorkspaceLeaf, outlinePluginInstance: OutlinePluginInstance): this;
+  constructor3__?(leaf: WorkspaceLeaf, outlinePluginInstance: OutlinePluginInstance): this;
 
   /**
    * Create a DOM element for an outline heading item.

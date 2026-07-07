@@ -119,7 +119,7 @@ export interface CustomCSS extends Component {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor2__(app: App): this;
+  constructor2__?(app: App): this;
 
   /**
    * Disable translucency of application background.

@@ -16,7 +16,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link spec} instead.
      */
-    readonly spec__: unknown;
+    readonly spec__?: unknown;
   }
 
   namespace Decoration {

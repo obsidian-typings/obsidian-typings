@@ -36,7 +36,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(app: App, containerEl: HTMLElement, supportWorker?: boolean): this;
+    constructor3__?(app: App, containerEl: HTMLElement, supportWorker?: boolean): this;
 
     /**
      * The file of the markdown renderer.

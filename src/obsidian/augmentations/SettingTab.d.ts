@@ -105,7 +105,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(app: App, setting: Setting): this;
+    constructor2__?(app: App, setting: Setting): this;
 
     /**
      * Builds a two-way binding (current value plus an onChange persister) for a control key.

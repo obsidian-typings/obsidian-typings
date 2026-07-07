@@ -35,7 +35,7 @@ export interface Cli {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(app: App): this;
+  constructor__?(app: App): this;
 
   /**
    * Format tree nodes as an ASCII tree.

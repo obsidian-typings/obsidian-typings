@@ -27,7 +27,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor__?(): this;
 
     /**
      * Returns a boolean indicating whether this Value is equal to the provided Value.
@@ -47,7 +47,7 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link Value.isTruthy} instead.
      */
-    isTruthy__(): boolean;
+    isTruthy__?(): boolean;
 
     /**
      * Returns the property keys accessible on this value via {@link Value.objectAccess}.
@@ -94,7 +94,7 @@ declare module 'obsidian' {
      * @official
      * @since 1.10.0
      */
-    toString__(): string;
+    toString__?(): string;
   }
 
   namespace Value {

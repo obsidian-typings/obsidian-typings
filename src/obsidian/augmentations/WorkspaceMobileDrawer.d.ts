@@ -40,7 +40,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(): this;
+    constructor3__?(): this;
 
     /**
      * Expand the mobile drawer.

@@ -30,7 +30,7 @@ export interface BasesContext extends Component {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor2__(
+  constructor2__?(
     app: App,
     filter: Record<string, BasesFilter>,
     formulas: Record<string, BasesFormula>,

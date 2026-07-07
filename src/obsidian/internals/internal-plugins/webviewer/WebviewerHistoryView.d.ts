@@ -21,7 +21,7 @@ export interface WebviewerHistoryView extends ItemView {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor3__(leaf: WorkspaceLeaf, browserPluginInstance: WebviewerPluginInstance): this;
+  constructor3__?(leaf: WorkspaceLeaf, browserPluginInstance: WebviewerPluginInstance): this;
 
   /**
    * Get the current view type.

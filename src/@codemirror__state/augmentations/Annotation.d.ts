@@ -8,7 +8,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link type} instead.
      */
-    readonly type__: AnnotationType<T>;
+    readonly type__?: AnnotationType<T>;
 
     /**
      * The value of this annotation.

@@ -18,7 +18,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link json} instead.
      */
-    json__: Promise<unknown>;
+    json__?: Promise<unknown>;
 
     /**
      * The promise that resolves to the body of the response as a string.

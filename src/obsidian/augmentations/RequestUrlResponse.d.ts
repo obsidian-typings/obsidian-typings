@@ -29,7 +29,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link json} instead.
      */
-    json__: unknown;
+    json__?: unknown;
 
     /**
      * The status code of the response.

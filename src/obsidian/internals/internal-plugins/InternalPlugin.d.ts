@@ -105,7 +105,7 @@ export interface InternalPlugin<InternalPluginInstance> extends Component {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor2__(app: App, instance: InternalPluginInstance, internalPlugins: InternalPlugins): this;
+  constructor2__?(app: App, instance: InternalPluginInstance, internalPlugins: InternalPlugins): this;
 
   /**
    * Delete persisted data for this plugin.

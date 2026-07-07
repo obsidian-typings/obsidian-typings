@@ -185,7 +185,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(app: App, id?: string): this;
+    constructor3__?(app: App, id?: string): this;
 
     /**
      * Detach this leaf from its parent.

@@ -19,7 +19,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor4__(value: boolean): this;
+    constructor4__?(value: boolean): this;
   }
 
   namespace BooleanValue {

@@ -57,7 +57,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(workspace: Workspace, direction: string, id?: string): this;
+    constructor3__?(workspace: Workspace, direction: string, id?: string): this;
 
     /**
      * Finishes the current resize, persisting the new child sizes.

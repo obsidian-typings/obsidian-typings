@@ -13,7 +13,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link extension} instead.
      */
-    readonly extension__: Arg extends undefined ? Extension : null;
+    readonly extension__?: Arg extends undefined ? Extension : null;
 
     /**
      * Create an extension for this plugin with the given argument.

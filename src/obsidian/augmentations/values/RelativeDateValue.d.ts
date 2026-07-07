@@ -21,6 +21,6 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor4__(date: unknown, showTime?: boolean): this;
+    constructor4__?(date: unknown, showTime?: boolean): this;
   }
 }

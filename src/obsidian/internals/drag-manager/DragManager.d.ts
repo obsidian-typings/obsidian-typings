@@ -86,7 +86,7 @@ export interface DragManager {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(app: App): this;
+  constructor__?(app: App): this;
 
   /**
    * Start a drag operation for a single file.

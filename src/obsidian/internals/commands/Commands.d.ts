@@ -51,7 +51,7 @@ export interface Commands extends Events {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor2__(app: App): this;
+  constructor2__?(app: App): this;
 
   /**
    * Execute a command by reference.

@@ -91,7 +91,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor__?(): this;
 
     /**
      * Convert editor position to screen position.
@@ -115,7 +115,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link exec} instead.
      * @since 0.12.2
      */
-    exec__(command: EditorCommandName): void;
+    exec__?(command: EditorCommandName): void;
 
     /**
      * Expand text.
@@ -183,7 +183,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link getCursor} instead.
      * @since 0.11.11
      */
-    getCursor__(string?: 'anchor' | 'from' | 'head' | 'to'): EditorPosition;
+    getCursor__?(string?: 'anchor' | 'from' | 'head' | 'to'): EditorPosition;
 
     /**
      * Get the editor instance.
@@ -215,7 +215,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link getLine} instead.
      * @since 0.11.11
      */
-    getLine__(line: number): string;
+    getLine__?(line: number): string;
 
     /**
      * Get the range between two positions.
@@ -231,7 +231,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link getRange} instead.
      * @since 0.11.11
      */
-    getRange__(from: EditorPosition, to: EditorPosition): string;
+    getRange__?(from: EditorPosition, to: EditorPosition): string;
 
     /**
      * Get the scroll info (horizontal and vertical scroll positions).
@@ -414,7 +414,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link offsetToPos} instead.
      * @since 0.11.11
      */
-    offsetToPos__(offset: number): EditorPosition;
+    offsetToPos__?(offset: number): EditorPosition;
 
     /**
      * Get the closest character position to the specified coordinates.
@@ -448,7 +448,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link posToOffset} instead.
      * @since 0.11.11
      */
-    posToOffset__(pos: EditorPosition): number;
+    posToOffset__?(pos: EditorPosition): number;
 
     /**
      * Process lines.
@@ -523,7 +523,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link replaceRange} instead.
      * @since 0.11.11
      */
-    replaceRange__(replacement: string, from: EditorPosition, to?: EditorPosition, origin?: string): void;
+    replaceRange__?(replacement: string, from: EditorPosition, to?: EditorPosition, origin?: string): void;
 
     /**
      * Replace the current selection with the given text.
@@ -534,7 +534,7 @@ declare module 'obsidian' {
      * @since 0.11.11
      * @deprecated - Added only for typing purposes. Use {@link replaceSelection} instead.
      */
-    replaceSelection__(replacement: string, origin?: string): void;
+    replaceSelection__?(replacement: string, origin?: string): void;
 
     /**
      * Scroll into view.
@@ -549,7 +549,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link scrollIntoView} instead.
      * @since 0.13.0
      */
-    scrollIntoView__(range: EditorRange, center?: boolean): void;
+    scrollIntoView__?(range: EditorRange, center?: boolean): void;
 
     /**
      * Scroll to a specific position.
@@ -564,7 +564,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link scrollTo} instead.
      * @since 0.11.11
      */
-    scrollTo__(x?: null | number, y?: null | number): void;
+    scrollTo__?(x?: null | number, y?: null | number): void;
 
     /**
      * Adds a search cursor to the editor.
@@ -625,7 +625,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link setSelection} instead.
      * @since 0.11.11
      */
-    setSelection__(anchor: EditorPosition, head?: EditorPosition): void;
+    setSelection__?(anchor: EditorPosition, head?: EditorPosition): void;
 
     /**
      * Set the selections.
@@ -643,7 +643,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link setSelections} instead.
      * @since 0.12.11
      */
-    setSelections__(ranges: EditorSelectionOrCaret[], main?: number): void;
+    setSelections__?(ranges: EditorSelectionOrCaret[], main?: number): void;
 
     /**
      * Set the content of the editor.
@@ -657,7 +657,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link setValue} instead.
      * @since 0.11.11
      */
-    setValue__(content: string): void;
+    setValue__?(content: string): void;
 
     /**
      * Check if there is a selection.
@@ -715,7 +715,7 @@ declare module 'obsidian' {
      * @since 0.13.0
      * @deprecated - Added only for typing purposes. Use {@link transaction} instead.
      */
-    transaction__(tx: EditorTransaction, origin?: string): void;
+    transaction__?(tx: EditorTransaction, origin?: string): void;
 
     /**
      * Convert word under cursor into a wikilink.
@@ -758,6 +758,6 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link wordAt} instead.
      * @since 0.11.11
      */
-    wordAt__(pos: EditorPosition): EditorRange | null;
+    wordAt__?(pos: EditorPosition): EditorRange | null;
   }
 }

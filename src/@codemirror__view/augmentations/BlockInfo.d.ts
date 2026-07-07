@@ -5,12 +5,20 @@ export {};
 declare module '@codemirror/view' {
   interface BlockInfo {
     /**
+     * The bottom position of the element.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link bottom} instead.
+     */
+    readonly bottom__?: number;
+
+    /**
      * The start of the element in the document.
      *
      * @official
      * @deprecated - Added only for typing purposes. Use {@link from} instead.
      */
-    readonly from__: number;
+    readonly from__?: number;
 
     /**
      * Its height.
@@ -18,7 +26,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link height} instead.
      */
-    readonly height__: number;
+    readonly height__?: number;
 
     /**
      * The length of the element.
@@ -26,23 +34,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link length} instead.
      */
-    readonly length__: number;
-
-    /**
-     * The top position of the element (relative to the top of the document).
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link top} instead.
-     */
-    readonly top__: number;
-
-    /**
-     * The bottom position of the element.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link bottom} instead.
-     */
-    get bottom__(): number;
+    readonly length__?: number;
 
     /**
      * The end of the element as a document position.
@@ -50,7 +42,15 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link to} instead.
      */
-    get to__(): number;
+    readonly to__?: number;
+
+    /**
+     * The top position of the element (relative to the top of the document).
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link top} instead.
+     */
+    readonly top__?: number;
 
     /**
      * The type of element this is.
@@ -58,7 +58,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link type} instead.
      */
-    get type__(): BlockType | readonly BlockInfo[];
+    readonly type__?: BlockType | readonly BlockInfo[];
 
     /**
      * If this is a widget block, this will return the widget associated with it.
@@ -66,7 +66,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link widget} instead.
      */
-    get widget__(): null | WidgetType;
+    readonly widget__?: null | WidgetType;
 
     /**
      * If this is a text block, this holds the number of line breaks that appear in widgets
@@ -75,6 +75,6 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link widgetLineBreaks} instead.
      */
-    get widgetLineBreaks__(): number;
+    readonly widgetLineBreaks__?: number;
   }
 }

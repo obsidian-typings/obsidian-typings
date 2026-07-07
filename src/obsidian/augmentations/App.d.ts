@@ -320,7 +320,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(adapter: DataAdapter, appId: string): this;
+    constructor__?(adapter: DataAdapter, appId: string): this;
 
     /**
      * Copies Obsidian URI of given file to clipboard.

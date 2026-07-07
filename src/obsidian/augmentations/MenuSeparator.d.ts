@@ -33,6 +33,6 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(menu: Menu): this;
+    constructor__?(menu: Menu): this;
   }
 }

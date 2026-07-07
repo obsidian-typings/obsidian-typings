@@ -52,7 +52,7 @@ declare module 'obsidian' {
      * @since 1.13.0
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor__?(): this;
 
     /**
      * Hides the contents of the page. Any registered components should be

@@ -101,7 +101,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor4__(markdownView: MarkdownView): this;
+    constructor4__?(markdownView: MarkdownView): this;
 
     /**
      * Switch to edit mode for the given element or selection.

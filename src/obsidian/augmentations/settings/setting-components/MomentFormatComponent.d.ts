@@ -27,7 +27,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor5__(containerEl: HTMLElement): this;
+    constructor5__?(containerEl: HTMLElement): this;
 
     /**
      * Called when the value of the component changes.

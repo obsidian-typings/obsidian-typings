@@ -148,7 +148,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(app: App): this;
+    constructor__?(app: App): this;
 
     /**
      * The document the modal's root element belongs to.

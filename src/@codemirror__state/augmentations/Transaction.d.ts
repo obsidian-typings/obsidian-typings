@@ -17,7 +17,15 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link changes} instead.
      */
-    readonly changes__: ChangeSet;
+    readonly changes__?: ChangeSet;
+
+    /**
+     * Indicates whether the transaction changed the document.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link docChanged} instead.
+     */
+    readonly docChanged__?: boolean;
 
     /**
      * The effects added to the transaction.
@@ -25,7 +33,31 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link effects} instead.
      */
-    readonly effects__: readonly StateEffect<unknown>[];
+    readonly effects__?: readonly StateEffect<unknown>[];
+
+    /**
+     * The new document produced by the transaction.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link newDoc} instead.
+     */
+    readonly newDoc__?: Text;
+
+    /**
+     * The new selection produced by the transaction.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link newSelection} instead.
+     */
+    readonly newSelection__?: CmEditorSelection;
+
+    /**
+     * Indicates whether this transaction reconfigures the state.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link reconfigured} instead.
+     */
+    readonly reconfigured__?: boolean;
 
     /**
      * Whether the selection should be scrolled into view after this transaction is dispatched.
@@ -33,7 +65,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link scrollIntoView} instead.
      */
-    readonly scrollIntoView__: boolean;
+    readonly scrollIntoView__?: boolean;
 
     /**
      * The selection set by this transaction, or `undefined` if it doesn't explicitly set a
@@ -42,7 +74,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link selection} instead.
      */
-    readonly selection__: CmEditorSelection | undefined;
+    readonly selection__?: CmEditorSelection | undefined;
 
     /**
      * The state from which the transaction starts.
@@ -50,7 +82,15 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link startState} instead.
      */
-    readonly startState__: EditorState;
+    readonly startState__?: EditorState;
+
+    /**
+     * The new state created by the transaction.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link state} instead.
+     */
+    readonly state__?: EditorState;
 
     /**
      * Get the value of the given annotation type, if any.
@@ -62,14 +102,6 @@ declare module '@codemirror/state' {
     annotation<T>(type: AnnotationType<T>): T | undefined;
 
     /**
-     * Indicates whether the transaction changed the document.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link docChanged} instead.
-     */
-    get docChanged__(): boolean;
-
-    /**
      * Returns `true` if the transaction has a user event annotation that is equal to or more
      * specific than `event`.
      *
@@ -78,7 +110,6 @@ declare module '@codemirror/state' {
      * @official
      */
     isUserEvent(event: string): boolean;
-
     /**
      * Check whether the user dedents a line or lines, usually by typing `Shift + Tab` keys.
      * Included in `'delete'` event.
@@ -120,6 +151,7 @@ declare module '@codemirror/state' {
      * @unofficial
      */
     isUserEvent(event: 'input.copyline'): boolean;
+
     /**
      * Check whether the user indents a line or lines, usually by typing `Tab` key.
      * Included in `'input'` event.
@@ -252,38 +284,6 @@ declare module '@codemirror/state' {
      * @unofficial
      */
     isUserEvent(event: 'set'): boolean;
-
-    /**
-     * The new document produced by the transaction.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link newDoc} instead.
-     */
-    get newDoc__(): Text;
-
-    /**
-     * The new selection produced by the transaction.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link newSelection} instead.
-     */
-    get newSelection__(): CmEditorSelection;
-
-    /**
-     * Indicates whether this transaction reconfigures the state.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link reconfigured} instead.
-     */
-    get reconfigured__(): boolean;
-
-    /**
-     * The new state created by the transaction.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link state} instead.
-     */
-    get state__(): EditorState;
   }
 
   namespace Transaction {

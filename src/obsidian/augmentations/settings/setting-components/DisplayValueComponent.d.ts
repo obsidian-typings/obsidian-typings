@@ -30,7 +30,7 @@ declare module 'obsidian' {
      * @since 1.13.1
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(containerEl: HTMLElement): this;
+    constructor__?(containerEl: HTMLElement): this;
 
     /**
      * Show a status indicator on the row. Use `'warning'` when the value needs

@@ -28,7 +28,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(vault: Vault, path: string): this;
+    constructor__?(vault: Vault, path: string): this;
 
     /**
      * Gets the count of files in the folder.

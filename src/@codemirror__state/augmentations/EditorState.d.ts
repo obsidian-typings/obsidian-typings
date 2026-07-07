@@ -26,7 +26,23 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link doc} instead.
      */
-    readonly doc__: Text;
+    readonly doc__?: Text;
+
+    /**
+     * Get the proper line-break string for this state.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link lineBreak} instead.
+     */
+    readonly lineBreak__?: string;
+
+    /**
+     * Returns `true` when the editor is configured to be read-only.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link readOnly} instead.
+     */
+    readonly readOnly__?: boolean;
 
     /**
      * The current selection.
@@ -34,7 +50,15 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link selection} instead.
      */
-    readonly selection__: CmEditorSelection;
+    readonly selection__?: CmEditorSelection;
+
+    /**
+     * The size (in columns) of a tab in the document.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link tabSize} instead.
+     */
+    readonly tabSize__?: number;
 
     /**
      * Create a set of changes and a new selection by running the given function for each range
@@ -107,14 +131,6 @@ declare module '@codemirror/state' {
     languageDataAt<T>(name: string, pos: number, side?: -1 | 0 | 1): readonly T[];
 
     /**
-     * Get the proper line-break string for this state.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link lineBreak} instead.
-     */
-    get lineBreak__(): string;
-
-    /**
      * Look up a translation for the given phrase.
      *
      * @param phrase - The phrase to translate.
@@ -123,14 +139,6 @@ declare module '@codemirror/state' {
      * @official
      */
     phrase(phrase: string, ...insert: unknown[]): string;
-
-    /**
-     * Returns `true` when the editor is configured to be read-only.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link readOnly} instead.
-     */
-    get readOnly__(): boolean;
 
     /**
      * Create a transaction spec that replaces every selection range with the given content.
@@ -150,14 +158,6 @@ declare module '@codemirror/state' {
      * @official
      */
     sliceDoc(from?: number, to?: number): string;
-
-    /**
-     * The size (in columns) of a tab in the document.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link tabSize} instead.
-     */
-    get tabSize__(): number;
 
     /**
      * Convert this state to a JSON-serializable object.

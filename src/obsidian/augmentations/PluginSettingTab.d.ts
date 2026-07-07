@@ -21,7 +21,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(app: App, plugin: Plugin): this;
+    constructor3__?(app: App, plugin: Plugin): this;
 
     /**
      * Reads from `this.plugin.settings`. Override to read from a different

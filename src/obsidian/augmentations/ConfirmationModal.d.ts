@@ -77,6 +77,6 @@ declare module 'obsidian' {
      * @since 1.13.0
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(app: App): this;
+    constructor__?(app: App): this;
   }
 }

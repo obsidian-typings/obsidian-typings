@@ -40,12 +40,69 @@ declare module '@codemirror/view' {
     cm?: VimEditor;
 
     /**
+     * Indicates whether the user is currently composing text via IME, and at least one change
+     * has been made in the current composition.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link composing} instead.
+     */
+    readonly composing__?: boolean;
+
+    /**
+     * Indicates whether the user is currently in composing state.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link compositionStarted} instead.
+     */
+    readonly compositionStarted__?: boolean;
+
+    /**
      * The editable DOM element holding the editor content.
      *
      * @official
      * @deprecated - Added only for typing purposes. Use {@link contentDOM} instead.
      */
-    readonly contentDOM__: HTMLElement;
+    readonly contentDOM__?: HTMLElement;
+
+    /**
+     * The editor's total content height.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link contentHeight} instead.
+     */
+    readonly contentHeight__?: number;
+
+    /**
+     * The default width of a character in the editor.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link defaultCharacterWidth} instead.
+     */
+    readonly defaultCharacterWidth__?: number;
+
+    /**
+     * The default height of a line in the editor.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link defaultLineHeight} instead.
+     */
+    readonly defaultLineHeight__?: number;
+
+    /**
+     * Reports the padding above and below the document.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link documentPadding} instead.
+     */
+    readonly documentPadding__?: EditorViewDocumentPadding;
+
+    /**
+     * The top position of the document, in screen coordinates.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link documentTop} instead.
+     */
+    readonly documentTop__?: number;
 
     /**
      * The DOM element that wraps the entire editor view.
@@ -53,7 +110,55 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link dom} instead.
      */
-    readonly dom__: HTMLElement;
+    readonly dom__?: HTMLElement;
+
+    /**
+     * Check whether the editor has focus.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link hasFocus} instead.
+     */
+    readonly hasFocus__?: boolean;
+
+    /**
+     * Returns `false` when the editor is entirely scrolled out of view or otherwise hidden.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link inView} instead.
+     */
+    readonly inView__?: boolean;
+
+    /**
+     * Whether this editor wraps lines.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link lineWrapping} instead.
+     */
+    readonly lineWrapping__?: boolean;
+
+    /**
+     * The document or shadow root that the view lives in.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link root} instead.
+     */
+    readonly root__?: DocumentOrShadowRoot;
+
+    /**
+     * If the editor is transformed with CSS, this provides the scale along the X axis.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link scaleX} instead.
+     */
+    readonly scaleX__?: number;
+
+    /**
+     * Provide the CSS transformed scale along the Y axis.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link scaleY} instead.
+     */
+    readonly scaleY__?: number;
 
     /**
      * The DOM element that can be styled to scroll.
@@ -61,7 +166,49 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link scrollDOM} instead.
      */
-    readonly scrollDOM__: HTMLElement;
+    readonly scrollDOM__?: HTMLElement;
+
+    /**
+     * The current editor state.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link state} instead.
+     */
+    readonly state__?: EditorState;
+
+    /**
+     * The text direction of the editor's content element.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link textDirection} instead.
+     */
+    readonly textDirection__?: Direction;
+
+    /**
+     * Get the CSS classes for the currently active editor themes.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link themeClasses} instead.
+     */
+    readonly themeClasses__?: string;
+
+    /**
+     * To be able to display large documents without consuming too much memory or overloading
+     * the browser, CodeMirror only draws the code that is visible (plus a margin around it)
+     * to the DOM.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link viewport} instead.
+     */
+    readonly viewport__?: EditorViewRange;
+
+    /**
+     * Get the extent and vertical position of all line blocks in the viewport.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link viewportLineBlocks} instead.
+     */
+    readonly viewportLineBlocks__?: BlockInfo[];
 
     /**
      * Internal view state tracking properties like printing mode.
@@ -71,6 +218,14 @@ declare module '@codemirror/view' {
     viewState: EditorViewState;
 
     /**
+     * The subset of the viewport that is actually drawn.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link visibleRanges} instead.
+     */
+    readonly visibleRanges__?: readonly EditorViewRange[];
+
+    /**
      * Returns the bidirectional text structure of the given line.
      *
      * @param line - The line.
@@ -78,31 +233,6 @@ declare module '@codemirror/view' {
      * @official
      */
     bidiSpans(line: Line): readonly BidiSpan[];
-
-    /**
-     * Indicates whether the user is currently composing text via IME, and at least one change
-     * has been made in the current composition.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link composing} instead.
-     */
-    get composing__(): boolean;
-
-    /**
-     * Indicates whether the user is currently in composing state.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link compositionStarted} instead.
-     */
-    get compositionStarted__(): boolean;
-
-    /**
-     * The editor's total content height.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link contentHeight} instead.
-     */
-    get contentHeight__(): number;
 
     /**
      * Get the screen coordinates at the given document position.
@@ -122,22 +252,6 @@ declare module '@codemirror/view' {
      * @official
      */
     coordsForChar(pos: number): null | Rect;
-
-    /**
-     * The default width of a character in the editor.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link defaultCharacterWidth} instead.
-     */
-    get defaultCharacterWidth__(): number;
-
-    /**
-     * The default height of a line in the editor.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link defaultLineHeight} instead.
-     */
-    get defaultLineHeight__(): number;
 
     /**
      * Clean up this editor view.
@@ -171,22 +285,6 @@ declare module '@codemirror/view' {
     dispatch(...specs: TransactionSpec[]): void;
 
     /**
-     * Reports the padding above and below the document.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link documentPadding} instead.
-     */
-    get documentPadding__(): EditorViewDocumentPadding;
-
-    /**
-     * The top position of the document, in screen coordinates.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link documentTop} instead.
-     */
-    get documentTop__(): number;
-
-    /**
      * Find the DOM parent node and offset at the given document position.
      *
      * @param pos - The document position.
@@ -212,22 +310,6 @@ declare module '@codemirror/view' {
     focus(): void;
 
     /**
-     * Check whether the editor has focus.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link hasFocus} instead.
-     */
-    get hasFocus__(): boolean;
-
-    /**
-     * Returns `false` when the editor is entirely scrolled out of view or otherwise hidden.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link inView} instead.
-     */
-    get inView__(): boolean;
-
-    /**
      * Find the line block around the given document position.
      *
      * @param pos - The document position.
@@ -244,14 +326,6 @@ declare module '@codemirror/view' {
      * @official
      */
     lineBlockAtHeight(height: number): BlockInfo;
-
-    /**
-     * Whether this editor wraps lines.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link lineWrapping} instead.
-     */
-    get lineWrapping__(): boolean;
 
     /**
      * Request a layout measurement pass on the editor.
@@ -357,30 +431,6 @@ declare module '@codemirror/view' {
     requestMeasure<T>(request?: MeasureRequest<T>): void;
 
     /**
-     * The document or shadow root that the view lives in.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link root} instead.
-     */
-    get root__(): DocumentOrShadowRoot;
-
-    /**
-     * If the editor is transformed with CSS, this provides the scale along the X axis.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link scaleX} instead.
-     */
-    get scaleX__(): number;
-
-    /**
-     * Provide the CSS transformed scale along the Y axis.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link scaleY} instead.
-     */
-    get scaleY__(): number;
-
-    /**
      * Return an effect that resets the editor to its current scroll position.
      *
      * @returns The scroll snapshot effect.
@@ -413,22 +463,6 @@ declare module '@codemirror/view' {
     setTabFocusMode(to?: boolean | number): void;
 
     /**
-     * The current editor state.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link state} instead.
-     */
-    get state__(): EditorState;
-
-    /**
-     * The text direction of the editor's content element.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link textDirection} instead.
-     */
-    get textDirection__(): Direction;
-
-    /**
      * Find the text direction of the block at the given position.
      *
      * @param pos - The document position.
@@ -438,46 +472,12 @@ declare module '@codemirror/view' {
     textDirectionAt(pos: number): Direction;
 
     /**
-     * Get the CSS classes for the currently active editor themes.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link themeClasses} instead.
-     */
-    get themeClasses__(): string;
-
-    /**
      * Update the view for the given array of transactions.
      *
      * @param transactions - The transactions.
      * @official
      */
     update(transactions: readonly Transaction[]): void;
-
-    /**
-     * To be able to display large documents without consuming too much memory or overloading
-     * the browser, CodeMirror only draws the code that is visible (plus a margin around it)
-     * to the DOM.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link viewport} instead.
-     */
-    get viewport__(): EditorViewRange;
-
-    /**
-     * Get the extent and vertical position of all line blocks in the viewport.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link viewportLineBlocks} instead.
-     */
-    get viewportLineBlocks__(): BlockInfo[];
-
-    /**
-     * The subset of the viewport that is actually drawn.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link visibleRanges} instead.
-     */
-    get visibleRanges__(): readonly EditorViewRange[];
 
     /**
      * Get the cursor position visually at the start or end of a line.

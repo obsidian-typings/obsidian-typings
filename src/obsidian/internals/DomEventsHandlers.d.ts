@@ -16,7 +16,7 @@ export interface DomEventsHandlers {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(info: DomEventsHandlersInfo): this;
+  constructor__?(info: DomEventsHandlersInfo): this;
 
   /**
    * Handles the external link click event.

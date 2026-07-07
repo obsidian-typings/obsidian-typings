@@ -295,7 +295,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(containerEl: HTMLElement): this;
+    constructor__?(containerEl: HTMLElement): this;
 
     /**
      * Makes the whole setting row act as a button, invoking the callback when clicked.

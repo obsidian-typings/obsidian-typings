@@ -103,7 +103,7 @@ export interface Plugins extends Events {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor2__(app: App): this;
+  constructor2__?(app: App): this;
 
   /**
    * Unload a plugin by ID.

@@ -146,7 +146,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(app: App, manifest: PluginManifest): this;
+    constructor2__?(app: App, manifest: PluginManifest): this;
 
     /**
      * Gets the latest modification time across the plugin's files.

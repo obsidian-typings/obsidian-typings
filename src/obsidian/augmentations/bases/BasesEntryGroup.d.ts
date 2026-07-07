@@ -38,7 +38,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(entries: BasesEntry[], key: unknown): this;
+    constructor__?(entries: BasesEntry[], key: unknown): this;
 
     /**
      * Whether this entry group has a non-null key.

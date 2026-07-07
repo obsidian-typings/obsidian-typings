@@ -14,7 +14,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link doc} instead.
      * @since 0.15.4
      */
-    doc__: Document;
+    doc__?: Document;
 
     /**
      * The window object.
@@ -23,7 +23,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link win} instead.
      * @since 0.15.4
      */
-    win__: Window;
+    win__?: Window;
 
     /**
      * Focuses the container's window (restoring it first if minimized, on desktop).

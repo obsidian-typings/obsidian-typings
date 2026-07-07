@@ -53,7 +53,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(query: string, type: string, name: string): this;
+    constructor__?(query: string, type: string, name: string): this;
 
     /**
      * Retrieve the user-configured value of options exposed in {@link obsidian#BasesViewRegistration.options}.

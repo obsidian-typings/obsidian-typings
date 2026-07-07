@@ -26,7 +26,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor__?(): this;
 
     /**
      * Remove an event listener.

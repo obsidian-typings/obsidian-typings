@@ -38,7 +38,7 @@ export interface WebviewerView extends ItemView {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor3__(leaf: WorkspaceLeaf, browserPluginInstance: WebviewerPluginInstance): this;
+  constructor3__?(leaf: WorkspaceLeaf, browserPluginInstance: WebviewerPluginInstance): this;
 
   /**
    * Build context menu items for an image element.

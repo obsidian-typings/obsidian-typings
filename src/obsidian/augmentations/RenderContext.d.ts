@@ -34,7 +34,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(app: App): this;
+    constructor__?(app: App): this;
 
     /**
      * Renders an external link into a container element.

@@ -326,6 +326,7 @@ function getObsidianTypingsConfigs(): Linter.Config[] {
         'obsidian-typings/one-declaration-per-file': 'error',
         'obsidian-typings/require-export-empty-in-augmentations': 'error',
         'obsidian-typings/require-member-description': 'error',
+        'obsidian-typings/require-optional-underscore-members': 'error',
         'obsidian-typings/require-var-in-global-vars': 'error',
         'obsidian-typings/visibility-tags-last': 'error',
         'obsidian-typings/window-member-file-sync': 'error'

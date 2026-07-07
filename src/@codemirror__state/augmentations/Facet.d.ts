@@ -12,6 +12,14 @@ export {};
 declare module '@codemirror/state' {
   interface Facet<Input, Output> {
     /**
+     * Returns a facet reader for this facet.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link reader} instead.
+     */
+    readonly reader__?: FacetReader<Output>;
+
+    /**
      * Create an extension that computes a value for the facet from a state.
      *
      * @param deps - The dependencies.
@@ -59,14 +67,6 @@ declare module '@codemirror/state' {
      * @official
      */
     of(value: Input): Extension;
-
-    /**
-     * Returns a facet reader for this facet.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link reader} instead.
-     */
-    get reader__(): FacetReader<Output>;
   }
 
   namespace Facet {

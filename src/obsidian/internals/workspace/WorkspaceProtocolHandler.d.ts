@@ -59,7 +59,7 @@ export interface WorkspaceProtocolHandler extends Events {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor2__(app: App, workspace: Workspace): this;
+  constructor2__?(app: App, workspace: Workspace): this;
 
   /**
    * Dispatch a parsed URI action to its registered handler.

@@ -18,6 +18,6 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(): this;
+    constructor2__?(): this;
   }
 }

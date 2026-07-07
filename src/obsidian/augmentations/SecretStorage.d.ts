@@ -54,7 +54,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(app: App): this;
+    constructor2__?(app: App): this;
 
     /**
      * Deletes a secret from storage.

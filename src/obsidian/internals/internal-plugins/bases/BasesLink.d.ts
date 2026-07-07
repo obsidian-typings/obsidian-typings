@@ -24,5 +24,5 @@ export interface BasesLink extends BasesControl {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(app: App, linkText: string, sourcePath: string, displayText: string): this;
+  constructor__?(app: App, linkText: string, sourcePath: string, displayText: string): this;
 }

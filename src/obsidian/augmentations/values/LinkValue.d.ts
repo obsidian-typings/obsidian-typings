@@ -43,7 +43,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor5__(app: App, value: string, sourcePath: string, display?: null | string): this;
+    constructor5__?(app: App, value: string, sourcePath: string, display?: null | string): this;
 
     /**
      * Resolves the link to its target file.

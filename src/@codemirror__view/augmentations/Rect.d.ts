@@ -8,7 +8,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link bottom} instead.
      */
-    readonly bottom__: number;
+    readonly bottom__?: number;
 
     /**
      * The left position.
@@ -16,7 +16,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link left} instead.
      */
-    readonly left__: number;
+    readonly left__?: number;
 
     /**
      * The right position.
@@ -24,7 +24,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link right} instead.
      */
-    readonly right__: number;
+    readonly right__?: number;
 
     /**
      * The top position.
@@ -32,6 +32,6 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link top} instead.
      */
-    readonly top__: number;
+    readonly top__?: number;
   }
 }

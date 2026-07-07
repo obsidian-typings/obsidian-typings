@@ -27,7 +27,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(leaf: WorkspaceLeaf): this;
+    constructor3__?(leaf: WorkspaceLeaf): this;
 
     /**
      * Is called when the titleEl looses focus.

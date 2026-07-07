@@ -320,7 +320,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(app: App, containerEl: HTMLElement): this;
+    constructor2__?(app: App, containerEl: HTMLElement): this;
 
     /**
      * Create a leaf by a split.

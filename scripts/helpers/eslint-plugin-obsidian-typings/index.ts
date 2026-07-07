@@ -13,6 +13,7 @@ import { noTodoTag } from './no-todo-tag.ts';
 import { oneDeclarationPerFile } from './one-declaration-per-file.ts';
 import { requireExportEmptyInAugmentations } from './require-export-empty-in-augmentations.ts';
 import { requireMemberDescription } from './require-member-description.ts';
+import { requireOptionalUnderscoreMembers } from './require-optional-underscore-members.ts';
 import { requireVarInGlobalVars } from './require-var-in-global-vars.ts';
 import { visibilityTagsLast } from './visibility-tags-last.ts';
 import { windowMemberFileSync } from './window-member-file-sync.ts';
@@ -35,6 +36,7 @@ export const obsidianTypingsPlugin = {
     'one-declaration-per-file': oneDeclarationPerFile,
     'require-export-empty-in-augmentations': requireExportEmptyInAugmentations,
     'require-member-description': requireMemberDescription,
+    'require-optional-underscore-members': requireOptionalUnderscoreMembers,
     'require-var-in-global-vars': requireVarInGlobalVars,
     'visibility-tags-last': visibilityTagsLast,
     'window-member-file-sync': windowMemberFileSync

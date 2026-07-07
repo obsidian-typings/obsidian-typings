@@ -21,7 +21,7 @@ declare module 'obsidian' {
      * @since 1.13.0
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(containerEl: HTMLElement, handleClose: () => void): this;
+    constructor3__?(containerEl: HTMLElement, handleClose: () => void): this;
 
     /**
      * Sets the click event callback for the confirmation button. The modal

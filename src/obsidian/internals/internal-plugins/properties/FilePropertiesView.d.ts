@@ -22,7 +22,7 @@ export interface FilePropertiesView extends InfoFileView {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor3__(leaf: WorkspaceLeaf, propertiesPluginInstance: PropertiesPluginInstance): this;
+  constructor3__?(leaf: WorkspaceLeaf, propertiesPluginInstance: PropertiesPluginInstance): this;
 
   /**
    * Returns the file.

@@ -29,7 +29,7 @@ export interface StatusBar {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(app: App, containerEl: HTMLElement): this;
+  constructor__?(app: App, containerEl: HTMLElement): this;
 
   /**
    * Register a new status bar item element.

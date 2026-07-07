@@ -87,7 +87,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(menu: unknown): this;
+    constructor__?(menu: unknown): this;
 
     /**
      * Executes the callback of the onClick event (if not disabled).

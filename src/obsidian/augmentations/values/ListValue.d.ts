@@ -47,7 +47,7 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(value: (unknown | Value)[]): this;
+    constructor3__?(value: (unknown | Value)[]): this;
 
     /**
      * Returns the earliest date among the list's elements.

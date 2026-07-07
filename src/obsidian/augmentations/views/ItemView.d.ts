@@ -125,7 +125,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(leaf: WorkspaceLeaf): this;
+    constructor2__?(leaf: WorkspaceLeaf): this;
 
     /**
      * Handle a drop event on this view.
