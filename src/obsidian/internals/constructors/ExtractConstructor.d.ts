@@ -8,6 +8,13 @@ import type { ConstructorBase } from './ConstructorBase.d.ts';
  * since higher-numbered variants represent deeper subclass constructors when ancestor classes
  * already define lower-numbered ones.
  *
+ * The `constructor[N]__` helpers are declared optional (`constructor[N]__?`), so matching is done via
+ * `'constructor[N]__' extends keyof T` (which sees optional keys) combined with `NonNullable` (which
+ * strips the `| undefined` an optional member carries), rather than
+ * `T extends { constructor[N]__(): … }` (which no longer matches an optional method). The final branch
+ * still accepts a function type passed directly (e.g. `ExtractConstructor<App['constructor__']>`),
+ * `NonNullable` likewise tolerating its optional `| undefined`.
+ *
  * @typeParam T - An interface with a `constructor[N]__` method, or a function type directly.
  *
  * @example
@@ -22,10 +29,10 @@ import type { ConstructorBase } from './ConstructorBase.d.ts';
  * @public
  * @unofficial
  */
-export type ExtractConstructor<T> = T extends { constructor5__(...args: infer Args): infer Instance } ? ConstructorBase<Args, Instance>
-  : T extends { constructor4__(...args: infer Args): infer Instance } ? ConstructorBase<Args, Instance>
-  : T extends { constructor3__(...args: infer Args): infer Instance } ? ConstructorBase<Args, Instance>
-  : T extends { constructor2__(...args: infer Args): infer Instance } ? ConstructorBase<Args, Instance>
-  : T extends { constructor__(...args: infer Args): infer Instance } ? ConstructorBase<Args, Instance>
-  : T extends (...args: infer Args) => infer Instance ? ConstructorBase<Args, Instance>
+export type ExtractConstructor<T> = 'constructor5__' extends keyof T ? NonNullable<T['constructor5__']> extends (...args: infer Args) => infer Instance ? ConstructorBase<Args, Instance> : never
+  : 'constructor4__' extends keyof T ? NonNullable<T['constructor4__']> extends (...args: infer Args) => infer Instance ? ConstructorBase<Args, Instance> : never
+  : 'constructor3__' extends keyof T ? NonNullable<T['constructor3__']> extends (...args: infer Args) => infer Instance ? ConstructorBase<Args, Instance> : never
+  : 'constructor2__' extends keyof T ? NonNullable<T['constructor2__']> extends (...args: infer Args) => infer Instance ? ConstructorBase<Args, Instance> : never
+  : 'constructor__' extends keyof T ? NonNullable<T['constructor__']> extends (...args: infer Args) => infer Instance ? ConstructorBase<Args, Instance> : never
+  : NonNullable<T> extends (...args: infer Args) => infer Instance ? ConstructorBase<Args, Instance>
   : never;
