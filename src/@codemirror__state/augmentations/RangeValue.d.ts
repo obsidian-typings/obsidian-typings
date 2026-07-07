@@ -12,7 +12,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link endSide} instead.
      */
-    endSide__: number;
+    endSide__?: number;
 
     /**
      * The mode with which the location of the range should be mapped when its `from` and `to`
@@ -21,7 +21,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link mapMode} instead.
      */
-    mapMode__: MapMode;
+    mapMode__?: MapMode;
 
     /**
      * Determines whether this value marks a point range.
@@ -29,7 +29,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link point} instead.
      */
-    point__: boolean;
+    point__?: boolean;
 
     /**
      * The bias value at the start of the range.
@@ -37,7 +37,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link startSide} instead.
      */
-    startSide__: number;
+    startSide__?: number;
 
     /**
      * Compare this value with another value. Used when comparing range sets.

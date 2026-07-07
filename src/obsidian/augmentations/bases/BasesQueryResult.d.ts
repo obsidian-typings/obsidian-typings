@@ -49,7 +49,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(app: App, config: BasesViewConfig, allProperties: BasesProperty[], data: BasesEntry[]): this;
+    constructor__?(app: App, config: BasesViewConfig, allProperties: BasesProperty[], data: BasesEntry[]): this;
 
     /**
      * Applies a summary function to a single property over a set of entries.
@@ -78,7 +78,7 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link groupedData} instead.
      */
-    groupedData__(): BasesEntryGroup[];
+    groupedData__?(): BasesEntryGroup[];
 
     /**
      * Visible properties defined by the user.
@@ -88,6 +88,6 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link properties} instead.
      */
-    properties__(): BasesPropertyId[];
+    properties__?(): BasesPropertyId[];
   }
 }

@@ -67,7 +67,7 @@ export interface AppMenuBarManager {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(app: App): this;
+  constructor__?(app: App): this;
 
   /**
    * Convert a hotkey binding to a native accelerator string.

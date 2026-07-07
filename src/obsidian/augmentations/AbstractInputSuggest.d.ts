@@ -52,7 +52,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(app: App, textInputEl: HTMLDivElement | HTMLInputElement): this;
+    constructor2__?(app: App, textInputEl: HTMLDivElement | HTMLInputElement): this;
 
     /**
      * Gets the suggestions for the input element.
@@ -78,7 +78,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link getSuggestions} instead.
      * @since 1.5.7
      */
-    getSuggestions__(query: string): Promise<T[]> | T[];
+    getSuggestions__?(query: string): Promise<T[]> | T[];
 
     /**
      * Gets the value from the input element.

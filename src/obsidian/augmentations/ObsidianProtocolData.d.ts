@@ -30,6 +30,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use `this[key]` instead.
      */
+    // eslint-disable-next-line obsidian-typings/require-optional-underscore-members -- This interface merges with a `[key: string]: string` index signature, so an optional member would be `string | undefined` and fail to satisfy the index type.
     index__: 'true' | string;
   }
 }

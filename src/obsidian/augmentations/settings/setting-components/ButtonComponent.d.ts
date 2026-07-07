@@ -35,7 +35,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(containerEl: HTMLElement): this;
+    constructor2__?(containerEl: HTMLElement): this;
 
     /**
      * Sets the click event callback for the button component.

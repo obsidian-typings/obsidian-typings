@@ -35,5 +35,5 @@ export interface ObsidianDOM {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(containerEl: HTMLElement): this;
+  constructor__?(containerEl: HTMLElement): this;
 }

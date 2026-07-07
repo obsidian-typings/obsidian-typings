@@ -95,7 +95,7 @@ export interface AppSetting extends Modal {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(app: App): this;
+  constructor__?(app: App): this;
 
   /**
    * Check whether tab is a plugin tab.

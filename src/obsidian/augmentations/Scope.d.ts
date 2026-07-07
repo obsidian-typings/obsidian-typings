@@ -40,7 +40,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(parent?: Scope): this;
+    constructor__?(parent?: Scope): this;
 
     /**
      * Execute keypress within this scope.

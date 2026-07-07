@@ -48,7 +48,7 @@ export interface EditorSuggests {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(app: App): this;
+  constructor__?(app: App): this;
 
   /**
    * Whether there is a editor suggestion popup active and visible.

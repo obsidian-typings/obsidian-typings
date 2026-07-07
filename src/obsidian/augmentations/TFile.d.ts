@@ -66,7 +66,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(vault: Vault, path: string): this;
+    constructor__?(vault: Vault, path: string): this;
 
     /**
      * Gets the short name of the file.

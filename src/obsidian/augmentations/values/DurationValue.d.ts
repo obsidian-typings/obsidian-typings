@@ -86,7 +86,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(
+    constructor3__?(
       years: number,
       months: number,
       days: number,

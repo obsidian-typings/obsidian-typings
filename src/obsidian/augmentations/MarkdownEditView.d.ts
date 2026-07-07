@@ -90,7 +90,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(view: MarkdownView): this;
+    constructor2__?(view: MarkdownView): this;
 
     /**
      * Destroy/Detach the editor view.

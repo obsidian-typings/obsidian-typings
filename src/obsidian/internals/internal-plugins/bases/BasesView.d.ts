@@ -45,7 +45,7 @@ export interface BasesView extends TextFileView {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor4__(leaf: WorkspaceLeaf, basesPluginInstance: BasesPluginInstance): this;
+  constructor4__?(leaf: WorkspaceLeaf, basesPluginInstance: BasesPluginInstance): this;
 
   /**
    * Get view type.

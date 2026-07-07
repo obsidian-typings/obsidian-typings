@@ -66,7 +66,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(basePath: string, fs: CapacitorAdapterFs): this;
+    constructor__?(basePath: string, fs: CapacitorAdapterFs): this;
 
     /**
      * Copies a file.

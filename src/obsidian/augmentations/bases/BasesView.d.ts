@@ -66,7 +66,7 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link type} instead.
      */
-    type__: string;
+    type__?: string;
 
     /**
      * The undo stack of transactions.
@@ -86,7 +86,7 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(controller: QueryController): this;
+    constructor2__?(controller: QueryController): this;
 
     /**
      * Copies the current table to the clipboard (as TSV and Markdown).
@@ -172,7 +172,7 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes. Use {@link onDataUpdated} instead.
      */
-    onDataUpdated__(): void;
+    onDataUpdated__?(): void;
 
     /**
      * Handles a resize of the view container.

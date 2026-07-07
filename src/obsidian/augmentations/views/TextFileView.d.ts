@@ -75,7 +75,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(leaf: WorkspaceLeaf): this;
+    constructor2__?(leaf: WorkspaceLeaf): this;
 
     /**
      * Gets the data from the editor. This will be called to save the editor contents to the file.
@@ -174,6 +174,6 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link setViewData} instead.
      * @since 0.10.12
      */
-    setViewData__(data: string, clear: boolean): void;
+    setViewData__?(data: string, clear: boolean): void;
   }
 }

@@ -72,7 +72,7 @@ export interface HotkeyManager {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(app: App): this;
+  constructor__?(app: App): this;
 
   /**
    * Get hotkey associated with command ID.

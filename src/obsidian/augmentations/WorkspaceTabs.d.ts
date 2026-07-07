@@ -74,7 +74,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(workspace: Workspace, id?: string): this;
+    constructor3__?(workspace: Workspace, id?: string): this;
 
     /**
      * Computes where a dragged tab would be inserted for a given horizontal position.

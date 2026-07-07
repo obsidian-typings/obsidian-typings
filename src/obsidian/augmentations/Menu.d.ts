@@ -166,7 +166,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(): this;
+    constructor__?(): this;
 
     /**
      * Hides the menu when a click occurs outside of it.

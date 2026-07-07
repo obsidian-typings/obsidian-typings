@@ -44,7 +44,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(app: App): this;
+    constructor__?(app: App): this;
 
     /**
      * Generate suggestion items based on this context. Can be async, but preferably sync.
@@ -72,7 +72,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link getSuggestions} instead.
      * @since 0.12.17
      */
-    getSuggestions__(context: EditorSuggestContext): Promise<T[]> | T[];
+    getSuggestions__?(context: EditorSuggestContext): Promise<T[]> | T[];
 
     /**
      * Based on the editor line and cursor position, determine if this {@link obsidian#EditorSuggest} should be triggered at this moment.
@@ -102,7 +102,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link onTrigger} instead.
      * @since 1.1.13
      */
-    onTrigger__(cursor: EditorPosition, editor: Editor, file: null | TFile): EditorSuggestTriggerInfo | null;
+    onTrigger__?(cursor: EditorPosition, editor: Editor, file: null | TFile): EditorSuggestTriggerInfo | null;
 
     /**
      * Set the instructions for the suggestion.

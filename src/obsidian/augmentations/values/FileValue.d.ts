@@ -34,7 +34,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(app: App, file: TFile): this;
+    constructor3__?(app: App, file: TFile): this;
 
     /**
      * Gets the backlinks to the file as a list of {@link LinkValue}s.

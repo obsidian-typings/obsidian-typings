@@ -14,6 +14,14 @@ export {};
 declare module '@codemirror/state' {
   interface RangeSet<T extends RangeValue> {
     /**
+     * The number of ranges in the set.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link size} instead.
+     */
+    readonly size__?: number;
+
+    /**
      * Iterate over the ranges that touch the region `from` to `to`.
      *
      * @param from - Start of the region.
@@ -40,14 +48,6 @@ declare module '@codemirror/state' {
      * @official
      */
     map(changes: ChangeDesc): RangeSet<T>;
-
-    /**
-     * The number of ranges in the set.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link size} instead.
-     */
-    get size__(): number;
 
     /**
      * Update the range set, optionally adding new ranges or filtering out existing ones.

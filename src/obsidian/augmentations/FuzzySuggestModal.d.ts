@@ -21,7 +21,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(app: App): this;
+    constructor2__?(app: App): this;
 
     /**
      * Get the items to be used in the fuzzy search.
@@ -58,7 +58,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link getItemText} instead.
      * @since 0.9.20
      */
-    getItemText__(item: T): string;
+    getItemText__?(item: T): string;
 
     /**
      * Get the suggestions for the fuzzy match.
@@ -95,7 +95,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link onChooseSuggestion} instead.
      * @since 0.9.20
      */
-    onChooseItem__(item: T, evt: KeyboardEvent | MouseEvent): void;
+    onChooseItem__?(item: T, evt: KeyboardEvent | MouseEvent): void;
 
     /**
      * Called when a suggestion is chosen.

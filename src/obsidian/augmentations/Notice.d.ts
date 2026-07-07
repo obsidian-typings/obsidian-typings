@@ -88,7 +88,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(message: DocumentFragment | string, duration?: number): this;
+    constructor__?(message: DocumentFragment | string, duration?: number): this;
 
     /**
      * Hide the notice.

@@ -34,7 +34,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(date: unknown, showTime?: boolean): this;
+    constructor3__?(date: unknown, showTime?: boolean): this;
 
     /**
      * Returns a new {@link obsidian#DateValue} with any time portion in this {@link obsidian#DateValue} removed.

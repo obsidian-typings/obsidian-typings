@@ -26,7 +26,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(regexp: RegExp): this;
+    constructor3__?(regexp: RegExp): this;
 
     /**
      * Returns a boolean indicating whether this {@link obsidian#RegExpValue} is truthy.

@@ -86,7 +86,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(app: App, scope?: Scope): this;
+    constructor__?(app: App, scope?: Scope): this;
 
     /**
      * Detaches the suggestion popover from the document.
@@ -125,7 +125,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link renderSuggestion} instead.
      */
-    renderSuggestion__(value: T, el: HTMLElement): void;
+    renderSuggestion__?(value: T, el: HTMLElement): void;
 
     /**
      * Reposition the popover relative to the given bounding rectangle.
@@ -152,7 +152,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link selectSuggestion} instead.
      */
-    selectSuggestion__(value: T, evt: KeyboardEvent | MouseEvent): void;
+    selectSuggestion__?(value: T, evt: KeyboardEvent | MouseEvent): void;
 
     /**
      * Set the element that triggers automatic destruction of the popover when removed.

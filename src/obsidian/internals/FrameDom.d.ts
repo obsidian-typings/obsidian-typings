@@ -59,7 +59,7 @@ export interface FrameDom {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(electronWindow: ElectronBrowserWindow, win: Window): this;
+  constructor__?(electronWindow: ElectronBrowserWindow, win: Window): this;
 
   /**
    * Update the window status indicators in the title bar.

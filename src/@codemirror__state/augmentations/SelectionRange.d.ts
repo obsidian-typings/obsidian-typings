@@ -3,28 +3,12 @@ export {};
 declare module '@codemirror/state' {
   interface SelectionRange {
     /**
-     * The lower boundary of the range.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link from} instead.
-     */
-    readonly from__: number;
-
-    /**
-     * The upper boundary of the range.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link to} instead.
-     */
-    readonly to__: number;
-
-    /**
      * The anchor of the range—the side that doesn't move when you extend it.
      *
      * @official
      * @deprecated - Added only for typing purposes. Use {@link anchor} instead.
      */
-    get anchor__(): number;
+    readonly anchor__?: number;
 
     /**
      * If this is a cursor that is explicitly associated with the character on one of its sides,
@@ -34,7 +18,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link assoc} instead.
      */
-    get assoc__(): -1 | 0 | 1;
+    readonly assoc__?: -1 | 0 | 1;
 
     /**
      * The bidirectional text level associated with this cursor, if any.
@@ -42,7 +26,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link bidiLevel} instead.
      */
-    get bidiLevel__(): null | number;
+    readonly bidiLevel__?: null | number;
 
     /**
      * True when `anchor` and `head` are at the same position.
@@ -50,7 +34,39 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link empty} instead.
      */
-    get empty__(): boolean;
+    readonly empty__?: boolean;
+
+    /**
+     * The lower boundary of the range.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link from} instead.
+     */
+    readonly from__?: number;
+
+    /**
+     * The goal column (stored vertical offset) associated with a cursor.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link goalColumn} instead.
+     */
+    readonly goalColumn__?: number | undefined;
+
+    /**
+     * The head of the range, which is moved when the range is extended.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link head} instead.
+     */
+    readonly head__?: number;
+
+    /**
+     * The upper boundary of the range.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link to} instead.
+     */
+    readonly to__?: number;
 
     /**
      * Compare this range to another range.
@@ -71,22 +87,6 @@ declare module '@codemirror/state' {
      * @official
      */
     extend(from: number, to?: number): SelectionRange;
-
-    /**
-     * The goal column (stored vertical offset) associated with a cursor.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link goalColumn} instead.
-     */
-    get goalColumn__(): number | undefined;
-
-    /**
-     * The head of the range, which is moved when the range is extended.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link head} instead.
-     */
-    get head__(): number;
 
     /**
      * Map this range through a change, producing a valid range in the updated document.

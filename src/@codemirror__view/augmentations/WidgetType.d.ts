@@ -5,6 +5,25 @@ export {};
 declare module '@codemirror/view' {
   interface WidgetType {
     /**
+     * The estimated height this widget will have, to be used when estimating the height of
+     * content that hasn't been drawn. May return -1 to indicate you don't know.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link estimatedHeight} instead.
+     */
+    readonly estimatedHeight__?: number;
+
+    /**
+     * For inline widgets that are displayed inline and introduce line breaks, this must
+     * indicate the amount of line breaks they introduce.
+     *
+     * @default `0`
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link lineBreaks} instead.
+     */
+    readonly lineBreaks__?: number;
+
+    /**
      * Called when a previous DOM element created by a widget of the
      * same type is about to be reused. Equivalent to `updateDOM`, but
      * for when `eq` returns `true`.
@@ -39,15 +58,6 @@ declare module '@codemirror/view' {
     destroy(dom: HTMLElement): void;
 
     /**
-     * The estimated height this widget will have, to be used when estimating the height of
-     * content that hasn't been drawn. May return -1 to indicate you don't know.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link estimatedHeight} instead.
-     */
-    get estimatedHeight__(): number;
-
-    /**
      * Can be used to configure which kinds of events inside the widget should be ignored by
      * the editor. The default is to ignore all events.
      *
@@ -56,16 +66,6 @@ declare module '@codemirror/view' {
      * @official
      */
     ignoreEvent(event: Event): boolean;
-
-    /**
-     * For inline widgets that are displayed inline and introduce line breaks, this must
-     * indicate the amount of line breaks they introduce.
-     *
-     * @default `0`
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link lineBreaks} instead.
-     */
-    get lineBreaks__(): number;
 
     /**
      * Setting this to `true` causes widgets to never be reused. The default

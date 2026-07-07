@@ -5,21 +5,12 @@ export {};
 declare module '@codemirror/state' {
   interface ChangeDesc {
     /**
-     * Compute the combined effect of applying another set of changes after this one.
-     *
-     * @param other - The other change description.
-     * @returns The composed change description.
-     * @official
-     */
-    composeDesc(other: ChangeDesc): ChangeDesc;
-
-    /**
      * False when there are actual changes in this set.
      *
      * @official
      * @deprecated - Added only for typing purposes. Use {@link empty} instead.
      */
-    get empty__(): boolean;
+    readonly empty__?: boolean;
 
     /**
      * Get a description of the inverted form of these changes.
@@ -27,7 +18,32 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link invertedDesc} instead.
      */
-    get invertedDesc__(): ChangeDesc;
+    readonly invertedDesc__?: ChangeDesc;
+
+    /**
+     * The length of the document before the change.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link length} instead.
+     */
+    readonly length__?: number;
+
+    /**
+     * The length of the document after the change.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link newLength} instead.
+     */
+    readonly newLength__?: number;
+
+    /**
+     * Compute the combined effect of applying another set of changes after this one.
+     *
+     * @param other - The other change description.
+     * @returns The composed change description.
+     * @official
+     */
+    composeDesc(other: ChangeDesc): ChangeDesc;
 
     /**
      * Iterate over the ranges changed by these changes.
@@ -45,14 +61,6 @@ declare module '@codemirror/state' {
      * @official
      */
     iterGaps(f: (posA: number, posB: number, length: number) => void): void;
-
-    /**
-     * The length of the document before the change.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link length} instead.
-     */
-    get length__(): number;
 
     /**
      * Map this description over another set of changes.
@@ -84,14 +92,6 @@ declare module '@codemirror/state' {
      * @official
      */
     mapPos(pos: number, assoc: number, mode: MapMode): null | number;
-
-    /**
-     * The length of the document after the change.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link newLength} instead.
-     */
-    get newLength__(): number;
 
     /**
      * Serialize this change desc to a JSON-representable value.

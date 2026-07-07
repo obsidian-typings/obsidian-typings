@@ -96,7 +96,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(app: App, setting: Setting): this;
+    constructor2__?(app: App, setting: Setting): this;
 
     /**
      * Hides the contents of the setting tab.

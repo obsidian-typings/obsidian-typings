@@ -65,7 +65,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(workspace: Workspace, side: string): this;
+    constructor2__?(workspace: Workspace, side: string): this;
 
     /**
      * Hides the ribbon.

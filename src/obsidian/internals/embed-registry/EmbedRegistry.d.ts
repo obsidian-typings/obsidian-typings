@@ -26,7 +26,7 @@ export interface EmbedRegistry extends Events {
    *
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(): this;
+  constructor__?(): this;
 
   /**
    * Get the embed constructor for a specific file type.

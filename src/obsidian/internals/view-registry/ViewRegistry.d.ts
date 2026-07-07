@@ -35,7 +35,7 @@ export interface ViewRegistry extends Events {
    *
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(): this;
+  constructor__?(): this;
 
   /**
    * Get the view type associated with a file extension.

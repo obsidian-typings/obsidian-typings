@@ -19,7 +19,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(): this;
+    constructor2__?(): this;
 
     /**
      * Get the value of the component.
@@ -63,6 +63,6 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link setValue} instead.
      * @since 0.9.7
      */
-    setValue__(value: T): this;
+    setValue__?(value: T): this;
   }
 }

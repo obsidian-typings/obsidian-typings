@@ -85,7 +85,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(app: App): this;
+    constructor__?(app: App): this;
 
     /**
      * Get the suggestions.
@@ -112,7 +112,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link getSuggestions} instead.
      * @since 1.5.7
      */
-    getSuggestions__(query: string): Promise<T[]> | T[];
+    getSuggestions__?(query: string): Promise<T[]> | T[];
 
     /**
      * Choose a suggestion.
@@ -130,7 +130,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link onChooseSuggestion} instead.
      * @since 1.5.7
      */
-    onChooseSuggestion__(item: T, evt: KeyboardEvent | MouseEvent): void;
+    onChooseSuggestion__?(item: T, evt: KeyboardEvent | MouseEvent): void;
 
     /**
      * Handle input change in the suggest modal.
@@ -164,7 +164,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link renderSuggestion} instead.
      * @since 1.5.7
      */
-    renderSuggestion__(value: T, el: HTMLElement): void;
+    renderSuggestion__?(value: T, el: HTMLElement): void;
 
     /**
      * Select the active suggestion.

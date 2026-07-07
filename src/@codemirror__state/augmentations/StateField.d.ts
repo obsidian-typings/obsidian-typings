@@ -15,7 +15,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link extension} instead.
      */
-    get extension__(): Extension;
+    readonly extension__?: Extension;
 
     /**
      * Returns an extension that enables this field and overrides the way it is initialized.

@@ -38,7 +38,7 @@ export interface CapacitorAdapterFs {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(dir: string): this;
+  constructor__?(dir: string): this;
 
   /**
    * Copy a file to a new path.

@@ -26,7 +26,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor3__(data: unknown): this;
+    constructor3__?(data: unknown): this;
 
     /**
      * Get the {@link Value} associated with the provided key, or {@link NullValue}.

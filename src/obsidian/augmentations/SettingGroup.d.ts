@@ -115,7 +115,7 @@ declare module 'obsidian' {
      * @since 1.11.0
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(containerEl: HTMLElement): this;
+    constructor__?(containerEl: HTMLElement): this;
 
     /**
      * Set the heading of the setting group.

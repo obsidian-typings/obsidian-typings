@@ -8,7 +8,15 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link from} instead.
      */
-    readonly from__: number;
+    readonly from__?: number;
+
+    /**
+     * The length of the line (not including any line break after it).
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link length} instead.
+     */
+    readonly length__?: number;
 
     /**
      * This line's line number (1-based).
@@ -16,7 +24,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link number} instead.
      */
-    readonly number__: number;
+    readonly number__?: number;
 
     /**
      * The line's content.
@@ -24,7 +32,7 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link text} instead.
      */
-    readonly text__: string;
+    readonly text__?: string;
 
     /**
      * The position at the end of the line (before the line break, or at the end of document
@@ -33,14 +41,6 @@ declare module '@codemirror/state' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link to} instead.
      */
-    readonly to__: number;
-
-    /**
-     * The length of the line (not including any line break after it).
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link length} instead.
-     */
-    get length__(): number;
+    readonly to__?: number;
   }
 }

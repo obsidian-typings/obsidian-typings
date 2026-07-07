@@ -53,7 +53,7 @@ export interface RecentFileTracker {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(workspace: Workspace, vault: Vault): this;
+  constructor__?(workspace: Workspace, vault: Vault): this;
 
   /**
    * Returns the last 10 opened files.

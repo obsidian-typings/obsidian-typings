@@ -38,7 +38,7 @@ export interface CanvasView extends TextFileView {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor4__(leaf: WorkspaceLeaf, canvasPluginInstance: CanvasPluginInstance): this;
+  constructor4__?(leaf: WorkspaceLeaf, canvasPluginInstance: CanvasPluginInstance): this;
 
   /**
    * Loads the local data of the canvas.

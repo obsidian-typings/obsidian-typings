@@ -20,7 +20,7 @@ declare module 'obsidian' {
      * @since 1.10.0
      * @deprecated - Added only for typing purposes.
      */
-    constructor5__(value: string): this;
+    constructor5__?(value: string): this;
 
     /**
      * Checks whether this tag matches the given value, treating nested tags as matching their parents.

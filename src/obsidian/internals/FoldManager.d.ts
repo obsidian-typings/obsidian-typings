@@ -31,7 +31,7 @@ export interface FoldManager {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(app: App): this;
+  constructor__?(app: App): this;
 
   /**
    * Load fold state for the given file or view.

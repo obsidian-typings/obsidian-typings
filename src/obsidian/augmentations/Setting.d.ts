@@ -269,7 +269,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(containerEl: HTMLElement): this;
+    constructor__?(containerEl: HTMLElement): this;
 
     /**
      * Set the class of the setting.

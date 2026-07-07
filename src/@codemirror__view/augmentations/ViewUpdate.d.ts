@@ -14,39 +14,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link changes} instead.
      */
-    readonly changes__: ChangeSet;
-
-    /**
-     * The previous editor state.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link startState} instead.
-     */
-    readonly startState__: EditorState;
-
-    /**
-     * The new editor state.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link state} instead.
-     */
-    readonly state__: EditorState;
-
-    /**
-     * The transactions involved in the update. May be empty.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link transactions} instead.
-     */
-    readonly transactions__: readonly Transaction[];
-
-    /**
-     * The editor view that the update is associated with.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link view} instead.
-     */
-    readonly view__: EditorView;
+    readonly changes__?: ChangeSet;
 
     /**
      * Whether the document changed in this update.
@@ -54,7 +22,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link docChanged} instead.
      */
-    get docChanged__(): boolean;
+    readonly docChanged__?: boolean;
 
     /**
      * True when this update indicates a focus change.
@@ -62,7 +30,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link focusChanged} instead.
      */
-    get focusChanged__(): boolean;
+    readonly focusChanged__?: boolean;
 
     /**
      * Returns `true` when the document was modified or the size of the editor, or elements
@@ -71,7 +39,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link geometryChanged} instead.
      */
-    get geometryChanged__(): boolean;
+    readonly geometryChanged__?: boolean;
 
     /**
      * Indicates whether the height of a block element in the editor changed in this update.
@@ -79,7 +47,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link heightChanged} instead.
      */
-    get heightChanged__(): boolean;
+    readonly heightChanged__?: boolean;
 
     /**
      * Whether the selection was explicitly set in this update.
@@ -87,7 +55,39 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link selectionSet} instead.
      */
-    get selectionSet__(): boolean;
+    readonly selectionSet__?: boolean;
+
+    /**
+     * The previous editor state.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link startState} instead.
+     */
+    readonly startState__?: EditorState;
+
+    /**
+     * The new editor state.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link state} instead.
+     */
+    readonly state__?: EditorState;
+
+    /**
+     * The transactions involved in the update. May be empty.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link transactions} instead.
+     */
+    readonly transactions__?: readonly Transaction[];
+
+    /**
+     * The editor view that the update is associated with.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link view} instead.
+     */
+    readonly view__?: EditorView;
 
     /**
      * Tells you whether the viewport or visible ranges changed in this update.
@@ -95,7 +95,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link viewportChanged} instead.
      */
-    get viewportChanged__(): boolean;
+    readonly viewportChanged__?: boolean;
 
     /**
      * Returns `true` when viewportChanged is `true` and the viewport change is not just the
@@ -104,6 +104,6 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link viewportMoved} instead.
      */
-    get viewportMoved__(): boolean;
+    readonly viewportMoved__?: boolean;
   }
 }

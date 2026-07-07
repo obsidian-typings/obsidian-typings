@@ -28,7 +28,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(ctx: unknown, file: TFile): this;
+    constructor__?(ctx: unknown, file: TFile): this;
 
     /**
      * Gets the value for a built-in or property identifier (e.g. `this`, `note`, `file`, `formula`, or a property name).

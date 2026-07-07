@@ -49,7 +49,7 @@ export interface BookmarksView extends ItemView {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor3__(leaf: WorkspaceLeaf, bookmarksPluginInstance: BookmarksPluginInstance): this;
+  constructor3__?(leaf: WorkspaceLeaf, bookmarksPluginInstance: BookmarksPluginInstance): this;
 
   /**
    * Create a new bookmark group.

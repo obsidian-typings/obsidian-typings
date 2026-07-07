@@ -19,7 +19,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(): this;
+    constructor2__?(): this;
 
     /**
      * Returns a boolean indicating whether this {@link obsidian#NullValue} is truthy.

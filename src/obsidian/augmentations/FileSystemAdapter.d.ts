@@ -134,7 +134,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(basePath: string): this;
+    constructor__?(basePath: string): this;
 
     /**
      * Copies a file.

@@ -100,7 +100,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(
+    constructor__?(
       owner: unknown,
       containerEl: HTMLElement,
       parentEl: HTMLElement,

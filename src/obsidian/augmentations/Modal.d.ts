@@ -142,7 +142,7 @@ declare module 'obsidian' {
      * @official
      * @deprecated - Added only for typing purposes.
      */
-    constructor__(app: App): this;
+    constructor__?(app: App): this;
 
     /**
      * Closes the modal when a click occurs outside of it, unless the event was already handled.

@@ -8,6 +8,14 @@ export {};
 declare module '@codemirror/state' {
   interface ChangeSet {
     /**
+     * Get a change description for this change set.
+     *
+     * @official
+     * @deprecated - Added only for typing purposes. Use {@link desc} instead.
+     */
+    readonly desc__?: ChangeDesc;
+
+    /**
      * Apply the changes to a document, returning the modified document.
      *
      * @param doc - The document to apply changes to.
@@ -24,14 +32,6 @@ declare module '@codemirror/state' {
      * @official
      */
     compose(other: ChangeSet): ChangeSet;
-
-    /**
-     * Get a change description for this change set.
-     *
-     * @official
-     * @deprecated - Added only for typing purposes. Use {@link desc} instead.
-     */
-    get desc__(): ChangeDesc;
 
     /**
      * Given the document as it existed before the changes, return a change set

@@ -52,7 +52,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link WorkspaceItem.parent} instead.
      * @since 1.6.6
      */
-    parent__: WorkspaceParent;
+    parent__?: WorkspaceParent;
 
     /**
      * The resize handle element used for adjusting item dimensions.
@@ -86,7 +86,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(workspace: Workspace, id?: string): this;
+    constructor2__?(workspace: Workspace, id?: string): this;
 
     /**
      * Detach this item from its parent.

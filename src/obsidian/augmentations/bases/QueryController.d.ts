@@ -282,7 +282,7 @@ declare module 'obsidian' {
      * @unofficial
      * @deprecated - Added only for typing purposes.
      */
-    constructor2__(app: App, plugin: BasesPluginInstance, containerEl: HTMLElement, currentFile?: null | TFile): this;
+    constructor2__?(app: App, plugin: BasesPluginInstance, containerEl: HTMLElement, currentFile?: null | TFile): this;
 
     /**
      * Displays an error in place of the view.

@@ -43,7 +43,7 @@ export interface WorkspaceLeafHistory {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor__(owner: WorkspaceLeaf): this;
+  constructor__?(owner: WorkspaceLeaf): this;
 
   /**
    * Restore history from a serialized representation.

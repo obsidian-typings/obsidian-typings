@@ -21,7 +21,7 @@ export interface SyncView extends View {
    * @returns The new instance.
    * @deprecated - Added only for typing purposes.
    */
-  constructor3__(leaf: WorkspaceLeaf, syncPluginInstance: SyncPluginInstance): this;
+  constructor3__?(leaf: WorkspaceLeaf, syncPluginInstance: SyncPluginInstance): this;
 
   /**
    * Get the current view type.
