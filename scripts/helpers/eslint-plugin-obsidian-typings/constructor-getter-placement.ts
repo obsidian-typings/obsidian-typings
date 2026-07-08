@@ -4,12 +4,12 @@ import {
   existsSync,
   readdirSync,
   readFileSync
-} from 'fs';
+} from 'node:fs';
 import {
   dirname,
   join,
   resolve
-} from 'path';
+} from 'node:path';
 
 import type { RuleContext } from './utils.ts';
 

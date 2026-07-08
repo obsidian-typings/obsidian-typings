@@ -3,13 +3,13 @@ import type { TSESTree } from '@typescript-eslint/utils';
 import {
   readdirSync,
   readFileSync
-} from 'fs';
+} from 'node:fs';
 import {
   basename,
   dirname,
   join,
   resolve
-} from 'path';
+} from 'node:path';
 
 import type { RuleContext } from './utils.ts';
 
