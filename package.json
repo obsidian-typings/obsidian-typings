@@ -134,7 +134,7 @@
     "ts-declaration-location": "^1.0.7",
     "ts-morph": "^28.0.0",
     "type-fest": "^5.6.0",
-    "typescript": "^6.0.3",
+    "typescript": "6.0.3",
     "typescript-eslint": "^8.59.3"
   },
   "peerDependencies": {
