@@ -5,12 +5,24 @@
  * @unofficial
  */
 export interface ElectronWebviewTagFindInPageOptions {
-  /** Whether to continue the find from the last result. */
+  /**
+   * Whether to begin a new text finding session with this request. Should be `true` for initial requests, and `false` for follow-up requests.
+   *
+   * @default `false`
+   */
   findNext?: boolean;
 
-  /** Whether to search forward. */
+  /**
+   * Whether to search forward or backward.
+   *
+   * @default `true`
+   */
   forward?: boolean;
 
-  /** Whether the search should be case-sensitive. */
+  /**
+   * Whether the search should be case-sensitive.
+   *
+   * @default `false`
+   */
   matchCase?: boolean;
 }

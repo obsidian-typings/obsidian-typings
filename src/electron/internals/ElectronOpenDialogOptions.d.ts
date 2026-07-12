@@ -32,6 +32,9 @@ export interface ElectronOpenDialogOptions {
     | 'treatPackageAsDirectory'
   >;
 
+  /** Whether to create security scoped bookmarks when packaged for the Mac App Store (macOS, mas only). */
+  securityScopedBookmarks?: boolean;
+
   /** The dialog title. */
   title?: string;
 }

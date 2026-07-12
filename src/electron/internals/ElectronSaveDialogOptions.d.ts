@@ -25,6 +25,9 @@ export interface ElectronSaveDialogOptions {
   /** The dialog behavior properties. */
   properties?: Array<'createDirectory' | 'dontAddToRecent' | 'showHiddenFiles' | 'showOverwriteConfirmation' | 'treatPackageAsDirectory'>;
 
+  /** Whether to create a security scoped bookmark when packaged for the Mac App Store (macOS, mas only). */
+  securityScopedBookmarks?: boolean;
+
   /** Whether to show the tags field on macOS. */
   showsTagField?: boolean;
 

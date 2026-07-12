@@ -1,7 +1,10 @@
 import type { ElectronBrowserWindowLoadURLOptions } from './ElectronBrowserWindowLoadURLOptions.d.ts';
+import type { ElectronKeyboardInputEvent } from './ElectronKeyboardInputEvent.d.ts';
+import type { ElectronMouseInputEvent } from './ElectronMouseInputEvent.d.ts';
+import type { ElectronMouseWheelInputEvent } from './ElectronMouseWheelInputEvent.d.ts';
 import type { ElectronNativeImage } from './ElectronNativeImage.d.ts';
+import type { ElectronPrintToPDFOptions } from './ElectronPrintToPDFOptions.d.ts';
 import type { ElectronRectangle } from './ElectronRectangle.d.ts';
-import type { ElectronWebviewTagDownloadURLOptions } from './ElectronWebviewTagDownloadURLOptions.d.ts';
 import type { ElectronWebviewTagFindInPageOptions } from './ElectronWebviewTagFindInPageOptions.d.ts';
 import type { ElectronWebviewTagPrintOptions } from './ElectronWebviewTagPrintOptions.d.ts';
 
@@ -85,10 +88,13 @@ export interface ElectronWebviewTag extends HTMLElement {
   /**
    * Captures a snapshot of the page.
    *
-   * @param rect - The area to capture.
+   * @param rect - The area to capture. Omitting it captures the whole visible page.
    * @returns The captured image.
    */
   capturePage(rect?: ElectronRectangle): Promise<ElectronNativeImage>;
+
+  /** Clears the navigation history. */
+  clearHistory(): void;
 
   /** Closes the developer tools. */
   closeDevTools(): void;
@@ -103,12 +109,11 @@ export interface ElectronWebviewTag extends HTMLElement {
   delete(): void;
 
   /**
-   * Downloads the given URL.
+   * Initiates a download of the resource at the given URL without navigating.
    *
    * @param url - The URL to download.
-   * @param options - Download options including `headers`.
    */
-  downloadURL(url: string, options?: ElectronWebviewTagDownloadURLOptions): void;
+  downloadURL(url: string): void;
 
   /**
    * Evaluates JavaScript code in the context of the page.
@@ -213,6 +218,12 @@ export interface ElectronWebviewTag extends HTMLElement {
    */
   inspectElement(x: number, y: number): void;
 
+  /** Opens the developer tools for the service worker context present in the guest page. */
+  inspectServiceWorker(): void;
+
+  /** Opens the developer tools for the shared worker context present in the guest page. */
+  inspectSharedWorker(): void;
+
   /**
    * Returns whether the page audio is muted.
    *
@@ -272,7 +283,7 @@ export interface ElectronWebviewTag extends HTMLElement {
   /**
    * Loads the given URL.
    *
-   * @param url - The URL to load.
+   * @param url - The URL to load. Must contain the protocol prefix, e.g. `http://` or `file://`.
    * @param options - Options for loading the URL including `httpReferrer`, `userAgent`, and `extraHeaders`.
    */
   loadURL(url: string, options?: ElectronBrowserWindowLoadURLOptions): Promise<void>;
@@ -292,6 +303,14 @@ export interface ElectronWebviewTag extends HTMLElement {
    * @param options - Print options including `silent`, `printBackground`, and `deviceName`.
    */
   print(options?: ElectronWebviewTagPrintOptions): Promise<void>;
+
+  /**
+   * Prints the page as a PDF.
+   *
+   * @param options - The PDF print options.
+   * @returns The generated PDF data.
+   */
+  printToPDF(options: ElectronPrintToPDFOptions): Promise<Uint8Array>;
 
   /** Redoes the last undone action. */
   redo(): void;
@@ -344,6 +363,13 @@ export interface ElectronWebviewTag extends HTMLElement {
   send(channel: string, ...args: unknown[]): Promise<void>;
 
   /**
+   * Sends an input event to the page.
+   *
+   * @param inputEvent - The keyboard, mouse, or mouse wheel event to inject.
+   */
+  sendInputEvent(inputEvent: ElectronKeyboardInputEvent | ElectronMouseInputEvent | ElectronMouseWheelInputEvent): Promise<void>;
+
+  /**
    * Sends a message to a specific frame in the renderer process.
    *
    * @param frameId - The frame identifier tuple.
@@ -367,6 +393,14 @@ export interface ElectronWebviewTag extends HTMLElement {
   setUserAgent(userAgent: string): void;
 
   /**
+   * Sets the maximum and minimum pinch-to-zoom level.
+   *
+   * @param minimumLevel - The minimum zoom level.
+   * @param maximumLevel - The maximum zoom level.
+   */
+  setVisualZoomLevelLimits(minimumLevel: number, maximumLevel: number): Promise<void>;
+
+  /**
    * Sets the zoom factor of the page.
    *
    * @param factor - The zoom factor.
@@ -379,6 +413,13 @@ export interface ElectronWebviewTag extends HTMLElement {
    * @param level - The zoom level.
    */
   setZoomLevel(level: number): void;
+
+  /**
+   * Shows a pop-up dictionary that searches the selected word on the page.
+   *
+   * @remarks Only available on macOS (`darwin`).
+   */
+  showDefinitionForSelection(): void;
 
   /** Stops loading the page. */
   stop(): void;

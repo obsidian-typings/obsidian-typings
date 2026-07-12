@@ -1,3 +1,5 @@
+import type { ElectronNativeImage } from './ElectronNativeImage.d.ts';
+
 /**
  * Options for Electron message box dialog.
  *
@@ -5,13 +7,17 @@
  * @unofficial
  */
 export interface ElectronMessageBoxOptions {
-  /** The array of button labels. */
+  /** The array of button labels. On Windows, an empty array will result in one button labeled `OK`. */
   buttons?: string[];
 
   /** The index of the button to be used to cancel the dialog. */
   cancelId?: number;
 
-  /** The initial checked state of the checkbox. */
+  /**
+   * The initial checked state of the checkbox.
+   *
+   * @default `false`
+   */
   checkboxChecked?: boolean;
 
   /** The label for the checkbox. */
@@ -23,14 +29,27 @@ export interface ElectronMessageBoxOptions {
   /** Extra information about the message. */
   detail?: string;
 
+  /** The icon to display in the message box. */
+  icon?: ElectronNativeImage | string;
+
   /** The content of the message box. */
   message: string;
 
   /** Whether to set the no link flag for the message box on Windows. */
   noLink?: boolean;
 
-  /** Whether to normalize keyboard access keys across platforms. */
+  /**
+   * Whether to normalize keyboard access keys across platforms.
+   *
+   * @default `false`
+   */
   normalizeAccessKeys?: boolean;
+
+  /** An `AbortSignal` to optionally close the message box, behaving as if it was cancelled by the user. */
+  signal?: AbortSignal;
+
+  /** Custom width of the text in the message box (macOS only). */
+  textWidth?: number;
 
   /** The title of the message box. */
   title?: string;

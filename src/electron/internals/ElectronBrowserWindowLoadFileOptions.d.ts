@@ -1,16 +1,16 @@
 /**
- * Options for loading a file into a BrowserWindow.
+ * Options for {@link ElectronBrowserWindow.loadFile}.
  *
  * @public
  * @unofficial
  */
 export interface ElectronBrowserWindowLoadFileOptions {
-  /** The hash fragment. */
+  /** Passed to `url.format()`. */
   hash?: string;
 
-  /** The query parameters. */
+  /** Passed to `url.format()`. */
   query?: Record<string, string>;
 
-  /** The search string. */
+  /** Passed to `url.format()`. */
   search?: string;
 }
