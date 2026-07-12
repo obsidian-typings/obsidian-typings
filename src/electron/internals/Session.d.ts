@@ -1,3 +1,5 @@
+import type { ElectronBluetoothPairingHandlerHandlerDetails } from './ElectronBluetoothPairingHandlerHandlerDetails.d.ts';
+import type { ElectronBluetoothPairingResponse } from './ElectronBluetoothPairingResponse.d.ts';
 import type { ElectronClearCodeCachesOptions } from './ElectronClearCodeCachesOptions.d.ts';
 import type { ElectronClearStorageDataOptions } from './ElectronClearStorageDataOptions.d.ts';
 import type { ElectronConfig } from './ElectronConfig.d.ts';
@@ -401,6 +403,13 @@ export interface Session {
    * @returns A promise that resolves with the proxy information.
    */
   resolveProxy(url: string): Promise<string>;
+
+  /**
+   * Sets a handler to respond to Bluetooth pairing requests.
+   *
+   * @param handler - The pairing handler, or `null` to remove it.
+   */
+  setBluetoothPairingHandler(handler: ((details: ElectronBluetoothPairingHandlerHandlerDetails, callback: (response: ElectronBluetoothPairingResponse) => void) => void) | null): void;
 
   /**
    * Sets the certificate verify proc for the session.

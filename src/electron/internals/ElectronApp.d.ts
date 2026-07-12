@@ -591,6 +591,20 @@ export interface ElectronApp {
   getPath(name: 'appData' | 'cache' | 'crashDumps' | 'desktop' | 'documents' | 'downloads' | 'exe' | 'home' | 'logs' | 'module' | 'music' | 'pictures' | 'recent' | 'temp' | 'userData' | 'videos'): string;
 
   /**
+   * Returns the user's preferred system languages, most preferred first, as BCP 47 language tags.
+   *
+   * @returns The preferred system languages.
+   */
+  getPreferredSystemLanguages(): string[];
+
+  /**
+   * Returns the system's current locale as a BCP 47 language tag.
+   *
+   * @returns The system locale.
+   */
+  getSystemLocale(): string;
+
+  /**
    * Returns the version of the loaded application.
    *
    * @returns The version string.
@@ -641,6 +655,13 @@ export interface ElectronApp {
    * @returns Whether native emoji pickers are supported.
    */
   isEmojiPanelSupported(): boolean;
+
+  /**
+   * Returns whether the application is currently hidden. macOS only.
+   *
+   * @returns Whether the app is hidden.
+   */
+  isHidden(): boolean;
 
   /**
    * Returns whether the application is currently running from the system's Application folder. macOS only.
