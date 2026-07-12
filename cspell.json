@@ -213,7 +213,14 @@
     "unintercept",
     "unintercepted",
     "unmutes",
-    "wakeups"
+    "wakeups",
+    "crashpad",
+    "hotlight",
+    "niif",
+    "nosound",
+    "rrggbbaa",
+    "systrace",
+    "unemphasized"
   ],
   "ignoreWords": [],
   "import": [],
