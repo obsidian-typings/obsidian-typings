@@ -8,7 +8,7 @@ export interface ElectronCrashReporterStartOptions {
   /**
    * Deprecated alias for `{ globalExtra: { _companyName: ... } }`.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    */
   companyName?: string;
 

@@ -51,7 +51,7 @@ export interface ElectronSystemPreferences {
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
   addListener(event: 'high-contrast-color-scheme-changed', listener: (event: ElectronEvent, highContrastColorScheme: boolean) => void): this;
@@ -63,7 +63,7 @@ export interface ElectronSystemPreferences {
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
   addListener(event: 'inverted-color-scheme-changed', listener: (event: ElectronEvent, invertedColorScheme: boolean) => void): this;
@@ -110,7 +110,7 @@ export interface ElectronSystemPreferences {
    *
    * @returns The declared app-level appearance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `darwin`.
    */
   getAppLevelAppearance(): 'dark' | 'light' | 'unknown';
@@ -246,7 +246,7 @@ export interface ElectronSystemPreferences {
    *
    * @returns Whether the system is in Dark Mode.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `darwin,win32`.
    */
   isDarkMode(): boolean;
@@ -256,7 +256,7 @@ export interface ElectronSystemPreferences {
    *
    * @returns Whether a high contrast theme is active.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `darwin,win32`.
    */
   isHighContrastColorScheme(): boolean;
@@ -267,7 +267,7 @@ export interface ElectronSystemPreferences {
    *
    * @returns Whether an inverted color scheme is active.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
   isInvertedColorScheme(): boolean;
@@ -316,7 +316,7 @@ export interface ElectronSystemPreferences {
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
   on(event: 'high-contrast-color-scheme-changed', listener: (event: ElectronEvent, highContrastColorScheme: boolean) => void): this;
@@ -328,7 +328,7 @@ export interface ElectronSystemPreferences {
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
   on(event: 'inverted-color-scheme-changed', listener: (event: ElectronEvent, invertedColorScheme: boolean) => void): this;
@@ -360,7 +360,7 @@ export interface ElectronSystemPreferences {
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
   once(event: 'high-contrast-color-scheme-changed', listener: (event: ElectronEvent, highContrastColorScheme: boolean) => void): this;
@@ -373,7 +373,7 @@ export interface ElectronSystemPreferences {
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
   once(event: 'inverted-color-scheme-changed', listener: (event: ElectronEvent, invertedColorScheme: boolean) => void): this;
@@ -457,7 +457,7 @@ export interface ElectronSystemPreferences {
    * @param listener - The event handler to remove.
    * @returns This `ElectronSystemPreferences` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
   removeListener(event: 'high-contrast-color-scheme-changed', listener: (event: ElectronEvent, highContrastColorScheme: boolean) => void): this;
@@ -469,7 +469,7 @@ export interface ElectronSystemPreferences {
    * @param listener - The event handler to remove.
    * @returns This `ElectronSystemPreferences` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
   removeListener(event: 'inverted-color-scheme-changed', listener: (event: ElectronEvent, invertedColorScheme: boolean) => void): this;
@@ -490,7 +490,7 @@ export interface ElectronSystemPreferences {
    *
    * @param appearance - The appearance to set, or `null` to reset.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    * Platform: `darwin`.
    */
   setAppLevelAppearance(appearance: 'dark' | 'light' | null): void;
