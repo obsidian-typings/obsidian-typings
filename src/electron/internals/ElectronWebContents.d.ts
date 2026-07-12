@@ -1,5 +1,6 @@
 import type { ElectronKeyboardInputEvent } from './ElectronKeyboardInputEvent.d.ts';
 import type { ElectronMouseInputEvent } from './ElectronMouseInputEvent.d.ts';
+import type { ElectronMouseWheelInputEvent } from './ElectronMouseWheelInputEvent.d.ts';
 import type { ElectronWebContentsDevToolsOptions } from './ElectronWebContentsDevToolsOptions.d.ts';
 import type { Session } from './Session.d.ts';
 
@@ -82,7 +83,7 @@ export interface ElectronWebContents {
    * Injects a trusted input event into the page, driving the same input pipeline a real user produces
    * (unlike untrusted `dispatchEvent`, which CodeMirror and the CSS `:hover` engine ignore).
    *
-   * @param inputEvent - The keyboard or mouse event to inject.
+   * @param inputEvent - The keyboard, mouse, or mouse wheel event to inject.
    */
-  sendInputEvent(inputEvent: ElectronKeyboardInputEvent | ElectronMouseInputEvent): void;
+  sendInputEvent(inputEvent: ElectronKeyboardInputEvent | ElectronMouseInputEvent | ElectronMouseWheelInputEvent): void;
 }
