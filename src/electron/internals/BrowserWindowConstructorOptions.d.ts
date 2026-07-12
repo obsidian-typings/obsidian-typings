@@ -108,7 +108,7 @@ export interface BrowserWindowConstructorOptions {
    * Shows the title in the title bar in full screen mode on macOS for `hiddenInset` titleBarStyle.
    *
    * @default `false`
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    */
   fullscreenWindowTitle?: boolean;
 
@@ -330,7 +330,7 @@ export interface BrowserWindowConstructorOptions {
 
   /**
    * Controls the behavior on macOS when option-clicking the green stoplight button on the toolbar or by clicking
-   * the Window > Zoom menu item. If `true`, the window will grow to the preferred width of the web page when
+   * the Window \> Zoom menu item. If `true`, the window will grow to the preferred width of the web page when
    * zoomed, `false` will cause it to zoom to the width of the screen.
    *
    * @default `false`

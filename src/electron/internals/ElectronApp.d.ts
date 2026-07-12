@@ -67,7 +67,7 @@ export interface ElectronApp {
   /**
    * Whether the app is currently running under the Rosetta Translator Environment. macOS only.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    */
   readonly runningUnderRosettaTranslation: boolean;
 
@@ -237,7 +237,7 @@ export interface ElectronApp {
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    */
   addListener(event: 'gpu-process-crashed', listener: (event: ElectronEvent, killed: boolean) => void): this;
 
@@ -327,7 +327,7 @@ export interface ElectronApp {
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    */
   addListener(event: 'renderer-process-crashed', listener: (event: ElectronEvent, webContents: ElectronWebContents, killed: boolean) => void): this;
 
@@ -862,7 +862,7 @@ export interface ElectronApp {
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    */
   on(event: 'gpu-process-crashed', listener: (event: ElectronEvent, killed: boolean) => void): this;
 
@@ -952,7 +952,7 @@ export interface ElectronApp {
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    */
   on(event: 'renderer-process-crashed', listener: (event: ElectronEvent, webContents: ElectronWebContents, killed: boolean) => void): this;
 
@@ -1218,7 +1218,7 @@ export interface ElectronApp {
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    */
   once(event: 'gpu-process-crashed', listener: (event: ElectronEvent, killed: boolean) => void): this;
 
@@ -1308,7 +1308,7 @@ export interface ElectronApp {
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    */
   once(event: 'renderer-process-crashed', listener: (event: ElectronEvent, webContents: ElectronWebContents, killed: boolean) => void): this;
 
@@ -1600,7 +1600,7 @@ export interface ElectronApp {
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    */
   removeListener(event: 'gpu-process-crashed', listener: (event: ElectronEvent, killed: boolean) => void): this;
 
@@ -1690,7 +1690,7 @@ export interface ElectronApp {
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
-   * @deprecated
+   * @deprecated Deprecated by Electron.
    */
   removeListener(event: 'renderer-process-crashed', listener: (event: ElectronEvent, webContents: ElectronWebContents, killed: boolean) => void): this;
 

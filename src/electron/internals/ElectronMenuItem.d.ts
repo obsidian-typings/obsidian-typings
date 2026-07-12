@@ -1,6 +1,7 @@
 import type { ElectronAccelerator } from './ElectronAccelerator.d.ts';
 import type { ElectronBrowserWindow } from './ElectronBrowserWindow.d.ts';
 import type { ElectronMenu } from './ElectronMenu.d.ts';
+import type { ElectronMenuItemConstructorOptions } from './ElectronMenuItemConstructorOptions.d.ts';
 import type { ElectronNativeImage } from './ElectronNativeImage.d.ts';
 import type { ElectronSharingItem } from './ElectronSharingItem.d.ts';
 
@@ -10,7 +11,7 @@ import type { ElectronSharingItem } from './ElectronSharingItem.d.ts';
  * @public
  * @unofficial
  */
-export interface ElectronMenuItem {
+export declare class ElectronMenuItem {
   /** The item's accelerator, if set. */
   accelerator?: ElectronAccelerator;
 
@@ -61,6 +62,13 @@ export interface ElectronMenuItem {
 
   /** Whether the item is visible. This property can be dynamically changed. */
   visible: boolean;
+
+  /**
+   * Creates a new menu item.
+   *
+   * @param options - The menu item options.
+   */
+  constructor(options: ElectronMenuItemConstructorOptions);
 
   /**
    * The click handler that is fired when the menu item receives a click event.

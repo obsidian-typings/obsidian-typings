@@ -1,4 +1,3 @@
-import type { ElectronEvent } from './ElectronEvent.d.ts';
 import type { ElectronMessagePortMain } from './ElectronMessagePortMain.d.ts';
 import type { ElectronWebContents } from './ElectronWebContents.d.ts';
 import type { ElectronWebFrameMain } from './ElectronWebFrameMain.d.ts';
@@ -9,7 +8,7 @@ import type { ElectronWebFrameMain } from './ElectronWebFrameMain.d.ts';
  * @public
  * @unofficial
  */
-export interface ElectronIpcMainEvent extends ElectronEvent {
+export interface ElectronIpcMainEvent {
   /** The ID of the renderer frame that sent this message. */
   frameId: number;
 
