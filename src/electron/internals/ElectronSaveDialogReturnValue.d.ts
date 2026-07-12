@@ -5,6 +5,9 @@
  * @unofficial
  */
 export interface ElectronSaveDialogReturnValue {
+  /** Base64 encoded string which contains the security scoped bookmark data for the saved file (macOS, mas only). */
+  bookmark?: string;
+
   /** Whether the dialog was canceled. */
   canceled: boolean;
 

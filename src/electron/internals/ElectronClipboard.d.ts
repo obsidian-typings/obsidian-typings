@@ -1,4 +1,5 @@
 import type { ElectronClipboardBookmark } from './ElectronClipboardBookmark.d.ts';
+import type { ElectronData } from './ElectronData.d.ts';
 import type { ElectronNativeImage } from './ElectronNativeImage.d.ts';
 
 /**
@@ -41,7 +42,7 @@ export interface ElectronClipboard {
   read(format: string): string;
 
   /**
-   * Reads the bookmark from the clipboard.
+   * Reads the bookmark from the clipboard. Only available on `darwin` and `win32`.
    *
    * @returns The bookmark title and URL.
    */
@@ -56,6 +57,13 @@ export interface ElectronClipboard {
   readBuffer(format: string): Buffer;
 
   /**
+   * Reads the text on the find pasteboard. Only available on `darwin`.
+   *
+   * @returns The find pasteboard text.
+   */
+  readFindText(): string;
+
+  /**
    * Reads the clipboard content as HTML.
    *
    * @param type - The clipboard type.
@@ -64,12 +72,20 @@ export interface ElectronClipboard {
   readHTML(type?: 'clipboard' | 'selection'): string;
 
   /**
-   * Reads the clipboard content as a ElectronNativeImage.
+   * Reads the clipboard content as a native image.
    *
    * @param type - The clipboard type.
    * @returns The clipboard image.
    */
   readImage(type?: 'clipboard' | 'selection'): ElectronNativeImage;
+
+  /**
+   * Reads the clipboard content as RTF.
+   *
+   * @param type - The clipboard type.
+   * @returns The RTF content.
+   */
+  readRTF(type?: 'clipboard' | 'selection'): string;
 
   /**
    * Reads the clipboard content as plain text.
@@ -80,13 +96,37 @@ export interface ElectronClipboard {
   readText(type?: 'clipboard' | 'selection'): string;
 
   /**
-   * Writes a bookmark to the clipboard.
+   * Writes data to the clipboard.
+   *
+   * @param data - The data to write.
+   * @param type - The clipboard type.
+   */
+  write(data: ElectronData, type?: 'clipboard' | 'selection'): void;
+
+  /**
+   * Writes a bookmark to the clipboard. The `title` is only used on `darwin`. Only available on `darwin` and `win32`.
    *
    * @param title - The bookmark title.
    * @param url - The bookmark URL.
    * @param type - The clipboard type.
    */
   writeBookmark(title: string, url: string, type?: 'clipboard' | 'selection'): void;
+
+  /**
+   * Writes a buffer to the clipboard as the specified format.
+   *
+   * @param format - The format to write.
+   * @param buffer - The buffer to write.
+   * @param type - The clipboard type.
+   */
+  writeBuffer(format: string, buffer: Buffer, type?: 'clipboard' | 'selection'): void;
+
+  /**
+   * Writes text to the find pasteboard as plain text. Only available on `darwin`.
+   *
+   * @param text - The text to write.
+   */
+  writeFindText(text: string): void;
 
   /**
    * Writes HTML content to the clipboard.
@@ -97,12 +137,20 @@ export interface ElectronClipboard {
   writeHTML(markup: string, type?: 'clipboard' | 'selection'): void;
 
   /**
-   * Writes a ElectronNativeImage to the clipboard.
+   * Writes a native image to the clipboard.
    *
    * @param image - The image to write.
    * @param type - The clipboard type.
    */
   writeImage(image: ElectronNativeImage, type?: 'clipboard' | 'selection'): void;
+
+  /**
+   * Writes text to the clipboard as RTF.
+   *
+   * @param text - The RTF content.
+   * @param type - The clipboard type.
+   */
+  writeRTF(text: string, type?: 'clipboard' | 'selection'): void;
 
   /**
    * Writes text to the clipboard.
