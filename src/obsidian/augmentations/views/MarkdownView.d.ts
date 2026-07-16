@@ -2,6 +2,7 @@ import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 import type { getMarkdownViewConstructor } from '../../implementations/constructors/augmentations/views/getMarkdownViewConstructor.d.ts';
 import type { FocusMetadataOptions } from '../../internals/FocusMetadataOptions.d.ts';
 import type { BacklinkComponent } from '../../internals/internal-plugins/backlink/BacklinkComponent.d.ts';
+import type { LiteralStringUnion } from '../../internals/LiteralStringUnion.d.ts';
 import type { MarkdownViewEphemeralState } from '../../internals/MarkdownViewEphemeralState.d.ts';
 import type { MarkdownViewModes } from '../../internals/MarkdownViewModes.d.ts';
 import type { MarkdownViewSourceMode } from '../../internals/MarkdownViewSourceMode.d.ts';
@@ -247,9 +248,10 @@ declare module 'obsidian' {
      * Get the view type of the markdown view.
      *
      * @returns A string representing the view type.
-     * @official - changed the return type.
+     * @official - widened the return type to an open literal union so `MarkdownView` subclasses may override
+     * `getViewType()` with a custom view type, while `{@link ViewType.Markdown}` stays visible for autocomplete.
      */
-    getViewType(): typeof ViewType.Markdown;
+    getViewType(): LiteralStringUnion<typeof ViewType.Markdown>;
 
     /**
      * Validate correctness of frontmatter and update metadata editor.
