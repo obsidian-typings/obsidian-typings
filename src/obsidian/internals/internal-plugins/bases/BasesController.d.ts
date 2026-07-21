@@ -1,5 +1,6 @@
 import type {
   App,
+  BasesEntry,
   Component,
   Debouncer,
   Events,
@@ -121,7 +122,7 @@ export interface BasesController extends Component {
   /**
    * The results.
    */
-  results: Map<unknown, unknown>;
+  results: Map<TFile, BasesEntry>;
 
   /**
    * The results menu.
