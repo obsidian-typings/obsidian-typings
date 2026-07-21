@@ -57,6 +57,10 @@ The authoritative pre-commit gate for type changes is the **full `npm run build`
 
 Always run the full `npm run build` (plus `lint`, `spellcheck`, `format`) before committing type changes.
 
+## Supported Surfaces
+
+Only the **latest `release/obsidian-public/*`** and the **latest `release/obsidian-catalyst/*`** branches are actively maintained. Older release branches are frozen — type fixes and new modeling land on the two latest branches only. (Referred to by role, not by pinned version, so this stays current across releases.)
+
 ## Documentation
 
-This is a **multi-branch** repo (`main` + long-lived `release/obsidian-public/*` and `release/obsidian-catalyst/*` branches). This `CLAUDE.md` lives **only on `main`** — it is intentionally absent from the release branches to avoid divergence. Edit it here.
+This is a **multi-branch** repo (`main` + long-lived `release/obsidian-public/*` and `release/obsidian-catalyst/*` branches). This `AGENTS.md` lives **only on `main`** — it is intentionally absent from the release branches to avoid divergence. Edit it here.
