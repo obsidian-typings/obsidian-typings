@@ -38,6 +38,14 @@ export interface BasesQuery {
   clone(): this;
 
   /**
+   * Creates a new instance.
+   *
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
+   */
+  constructor__?(): this;
+
+  /**
    * Gets the property config.
    *
    * @param key - The property key.
