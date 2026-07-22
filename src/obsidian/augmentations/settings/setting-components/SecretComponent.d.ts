@@ -32,7 +32,7 @@ declare module 'obsidian' {
      * @since 1.11.4
      * @official
      */
-    onChange(cb: (value: string) => unknown): this;
+    onChange(cb: (value: null | string) => unknown): this;
 
     /**
      * Sets the value of the secret component.
