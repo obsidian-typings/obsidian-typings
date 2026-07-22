@@ -13,6 +13,7 @@ declare module 'obsidian' {
     | SettingFileControl<K>
     | SettingFolderControl<K>
     | SettingNumberControl<K>
+    | SettingSecretControl<K>
     | SettingSliderControl<K>
     | SettingTextAreaControl<K>
     | SettingTextControl<K>
