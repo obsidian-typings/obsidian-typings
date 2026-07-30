@@ -61,6 +61,8 @@ async function main(): Promise<void> {
   await resetPackageVersion();
   await execFromRoot(`git push -u origin "${newBranch}"`);
   await generateReadme({ channel: newVersionChannel, obsidianVersion: newVersion }, changelogUrl);
+  // Publish the new branch right away, so it never sits created-but-unreleased.
+  await execFromRoot('npm run release');
   await generateMainReadme();
 }
 
@@ -79,6 +81,13 @@ async function resetPackageVersion(): Promise<void> {
   });
 
   await execFromRoot('git add package.json package-lock.json');
+
+  const hasChanges = (await execFromRoot('git diff --staged --name-only', { isQuiet: true })).trim() !== '';
+  if (!hasChanges) {
+    console.log(`Version is already ${INITIAL_BRANCH_VERSION}, skipping the reset commit.`);
+    return;
+  }
+
   await commit(`chore(release): reset to ${INITIAL_BRANCH_VERSION}`);
 }
 
