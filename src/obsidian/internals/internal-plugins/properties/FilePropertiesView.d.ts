@@ -15,6 +15,11 @@ import type { PropertiesPluginInstance } from './PropertiesPluginInstance.d.ts';
  */
 export interface FilePropertiesView extends InfoFileView {
   /**
+   * The file whose frontmatter the view is currently editing, or `null` when no supported file is loaded.
+   */
+  modifyingFile: null | TFile;
+
+  /**
    * Constructor.
    *
    * @param leaf - The workspace leaf.
