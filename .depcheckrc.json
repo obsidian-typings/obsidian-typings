@@ -1,0 +1,36 @@
+{
+  "comment": [
+    "Read automatically by depcheck, which update-npm-deps.ps1 runs at the end of every sweep to report declared",
+    "dependencies nothing appears to use. depcheck cannot see a package that is only invoked as a CLI from a script,",
+    "named as a string in a config, or pulled in by a compiler option, so each name below is a verified false positive",
+    "with the reference that proves it. Because this file exists, anything depcheck still reports fails the sweep -",
+    "so a genuinely unused dependency cannot be waved through, and a new entry here needs its reason recorded.",
+    "The key is `ignores`, depcheck's CLI-style rc name; `ignoreMatches` is the API-only spelling and is silently",
+    "ignored in this file.",
+    "",
+    "@commitlint/cli - .husky/commit-msg runs it as the `commitlint` binary.",
+    "@commitlint/config-conventional - extended by name (a string in the commitlint config's `extends`), never imported - either directly, or through obsidian-dev-utils' script-utils/commitlint-config, which extends it without declaring it.",
+    "@types/markdown-it - nothing here imports markdown-it, but markdownlint-rule-relative-links is built on that parser (it refuses to run without a markdownItFactory) and its src/index.d.ts imports it untyped. tsconfig.json sets skipLibCheck false, so that .d.ts is type-checked and TS7016s without these types.",
+    "cspell - run as a CLI by scripts/spellcheck.ts, configured by cspell.json.",
+    "czg - run as a CLI by scripts/commit.ts.",
+    "dprint - run as a CLI by the format scripts, configured by dprint.json.",
+    "husky - installed by scripts/prepare.ts; the hooks in .husky/ are its output.",
+    "linkinator - run as a CLI, named as a string by the markdown lint helper.",
+    "markdownlint-cli2 - run as a CLI by the lint:md scripts, configured by .markdownlint-cli2.mjs.",
+    "nano-staged - .husky/pre-commit runs it; configured by scripts/nano-staged-config.ts.",
+    "type-fest - referenced by the `\"type-fest\": \"$type-fest\"` overrides shorthand, which resolves its version against this declaration."
+  ],
+  "ignores": [
+    "@commitlint/cli",
+    "@commitlint/config-conventional",
+    "@types/markdown-it",
+    "cspell",
+    "czg",
+    "dprint",
+    "husky",
+    "linkinator",
+    "markdownlint-cli2",
+    "nano-staged",
+    "type-fest"
+  ]
+}
