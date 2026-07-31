@@ -25,6 +25,20 @@ declare module 'obsidian' {
     desc?: DocumentFragment | string;
 
     /**
+     * Disables the row: adds `is-disabled` to the setting element and propagates
+     * to every component registered on it. Evaluated on each render; call
+     * `refreshDomState()` on the setting tab to re-evaluate in place.
+     *
+     * Takes precedence over the `disabled` of a {@link SettingDefinitionControl}'s
+     * own control. Precedence is decided by key presence, so setting this to
+     * `undefined` explicitly still suppresses that fallback.
+     *
+     * @unofficial
+     * @since 1.13.0
+     */
+    disabled?: (() => boolean) | boolean;
+
+    /**
      * Display name — used for rendering and search.
      *
      * @official
