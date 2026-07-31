@@ -1,11 +1,6 @@
 {
   "version": "0.2",
-  "ignorePaths": [
-    "dist",
-    "docs",
-    "node_modules",
-    "tsconfig.tsbuildinfo"
-  ],
+  "ignorePaths": [],
   "dictionaryDefinitions": [],
   "dictionaries": [],
   "words": [
@@ -81,6 +76,7 @@
     "Keyscope",
     "lezer",
     "linewise",
+    "linkinator",
     "linkpath",
     "linktext",
     "lngs",
@@ -118,6 +114,7 @@
     "panv",
     "Parens",
     "parsinom",
+    "pathspec",
     "pdfjs",
     "PIXI",
     "pixijs",
@@ -174,6 +171,7 @@
     "unmap",
     "unsetup",
     "unxok",
+    "uppercased",
     "vite",
     "vkey",
     "Watchpath",

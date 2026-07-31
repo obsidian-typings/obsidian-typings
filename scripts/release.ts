@@ -1,6 +1,9 @@
 import { createJiti } from 'jiti';
 
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { execFromRoot } from './helpers/root.ts';
+
+exitIfScriptDisabled();
 
 const jiti = createJiti(import.meta.url);
 

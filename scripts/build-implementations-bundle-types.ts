@@ -1,4 +1,7 @@
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { execFromRoot } from './helpers/root.ts';
+
+exitIfScriptDisabled();
 
 // `--no-check` disables dts-bundle-generator's own output validation, which forces
 // `skipLibCheck: false` and would fail on broken upstream `.d.ts` (e.g. `obsidian.d.ts`). The

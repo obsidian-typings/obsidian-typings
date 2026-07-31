@@ -9,6 +9,10 @@ import {
   join
 } from 'node:path/posix';
 
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
+
+exitIfScriptDisabled();
+
 async function main(): Promise<void> {
   await generateIndex('src', '.d.ts');
   await generateIndex('src/obsidian', '.d.ts');
