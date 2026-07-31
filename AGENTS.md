@@ -76,22 +76,8 @@ Only the **latest `release/obsidian-public/*`** and the **latest `release/obsidi
 Members that exist at runtime but are not modeled yet. Each names the member, the Obsidian version it was
 observed in, and the target branch(es).
 
-- **`SettingDefinitionRender.disabled`** — `disabled?: boolean | (() => boolean)`. Observed in **1.13.4**
-  (public). Target: **`release/obsidian-public/1.13.4`** and **`main`**. Obsidian's own `obsidian.d.ts`
-  declares `disabled` on `SettingDefinitionControl` and `SettingDefinitionAction` only, and this repo's
-  1.13.4 branch mirrors that — but the renderer reads it off **every** definition it draws, `render` rows
-  included:
-
-  ```js
-  // app.js, the predicate pass driven by refreshDomState()
-  var r = 'disabled' in i ? i.disabled : i.control?.disabled;
-  if (r !== undefined) e.setting.setDisabled(z2(r, !1));
-  ```
-
-  A `Setting` is stored for every rendered definition, so the row-level predicate applies to `render` rows,
-  and `Setting.setDisabled` propagates to every component registered on the row. `obsidian-dev-utils` ships a
-  local module augmentation as an interim workaround (`src/@types/obsidian.d.ts`), tracked as `T270-P1`;
-  this addition is `T269-P8`.
+None currently — the last one, `SettingDefinitionBase.disabled`, was modeled on both latest release
+branches by `T269-P8`.
 
 ## Documentation
 
