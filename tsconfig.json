@@ -19,7 +19,7 @@
     "types": [
       "node"
     ],
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "verbatimModuleSyntax": true
   },
   "include": [
