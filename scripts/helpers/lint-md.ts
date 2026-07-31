@@ -1,5 +1,6 @@
 import { glob } from 'node:fs/promises';
 
+import { mdIgnores } from './md-ignores.ts';
 import { execFromRoot } from './root.ts';
 
 interface LintMdParams {
@@ -10,7 +11,17 @@ interface LintMdParams {
 export async function lintMd(params: LintMdParams): Promise<void> {
   const { paths = [], shouldFix = false } = params;
 
-  await execFromRoot(['npx', 'markdownlint-cli2', ...(shouldFix ? ['--fix'] : []), ...paths]);
+  await execFromRoot([
+    'npx',
+    'markdownlint-cli2',
+    ...(shouldFix ? ['--fix'] : []),
+    /*
+     * Explicit paths are merged with the config `globs`, so without this an explicit path would still
+     * re-expand the whole-tree markdown glob.
+     */
+    ...(paths.length ? ['--no-globs'] : []),
+    ...paths
+  ]);
 
   if (shouldFix) {
     return;
@@ -18,19 +29,18 @@ export async function lintMd(params: LintMdParams): Promise<void> {
 
   const mdFiles = paths.length
     ? paths
-    : await toArray(glob(['**/*.md'], {
-      exclude: [
-        '.git/**',
-        'dist/**',
-        'docs/**',
-        'node_modules/**',
-        'workflow-scripts/**'
-      ]
-    }));
+    : await toArray(glob(['**/*.md'], { exclude: mdIgnores }));
   await execFromRoot([
     'npx',
     'linkinator',
     ...mdFiles,
+    /*
+     * GitHub answers 404 to logged-out requests for a repo's stargazers page, so linkinator reports the
+     * README's star badge link as broken even though it resolves fine in a browser. Keep the pattern free of
+     * cmd.exe metacharacters (`^`, `|`, parentheses) - they do not survive the shell on Windows.
+     */
+    '--skip',
+    'https://github\\.com/.+/stargazers$',
     '--retry',
     '--retry-errors',
     '--retry-errors-count',
