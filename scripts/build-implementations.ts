@@ -6,6 +6,10 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path/posix';
 import { exit } from 'node:process';
 
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
+
+exitIfScriptDisabled();
+
 async function main(): Promise<void> {
   await build('cjs');
   await build('esm');

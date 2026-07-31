@@ -1,4 +1,7 @@
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { execFromRoot } from './helpers/root.ts';
+
+exitIfScriptDisabled();
 
 const BUILD_STEPS = [
   'build:clean',

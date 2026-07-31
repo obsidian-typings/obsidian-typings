@@ -8,6 +8,10 @@ import {
   join
 } from 'node:path/posix';
 
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
+
+exitIfScriptDisabled();
+
 for (const dirent of await readdir('static', { withFileTypes: true, recursive: true })) {
   if (!dirent.isFile()) {
     continue;

@@ -1,7 +1,10 @@
 import process from 'node:process';
 
-import { lint } from './helpers/markdownlint.ts';
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
+import { lintMd } from './helpers/lint-md.ts';
+
+exitIfScriptDisabled();
 
 const [, , ...paths] = process.argv;
 
-await lint({ paths, shouldFix: true });
+await lintMd({ paths, shouldFix: true });

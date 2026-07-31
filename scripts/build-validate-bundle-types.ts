@@ -6,7 +6,10 @@ import {
   parseTsConfig,
   toCanonical
 } from './helpers/check-project-types.ts';
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { getRootFolder } from './helpers/root.ts';
+
+exitIfScriptDisabled();
 
 const BUNDLE_FILES = [
   'dist/cjs/types.d.cts',

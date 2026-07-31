@@ -3,6 +3,10 @@ import {
   rm
 } from 'node:fs/promises';
 
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
+
+exitIfScriptDisabled();
+
 await rm('dist', { recursive: true, force: true });
 
 const files = await readdir('src/obsidian/implementations', { recursive: true });

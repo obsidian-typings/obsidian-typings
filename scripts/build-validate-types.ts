@@ -6,7 +6,10 @@ import {
   parseTsConfig,
   toCanonical
 } from './helpers/check-project-types.ts';
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { getRootFolder } from './helpers/root.ts';
+
+exitIfScriptDisabled();
 
 const DECLARATION_FILE_EXTENSIONS = ['.d.ts', '.d.cts', '.d.mts'];
 
