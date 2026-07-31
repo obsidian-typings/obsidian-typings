@@ -7,12 +7,15 @@ import {
   parseTsConfig,
   toCanonical
 } from './helpers/check-project-types.ts';
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { exec } from './helpers/exec.ts';
 import {
   execFromRoot,
   getRootFolder,
   toPosixPath
 } from './helpers/root.ts';
+
+exitIfScriptDisabled();
 
 interface ScenarioResult {
   readonly error: string;
