@@ -57,6 +57,16 @@ The authoritative pre-commit gate for type changes is the **full `npm run build`
 
 Always run the full `npm run build` (plus `lint`, `spellcheck`, `format`) before committing type changes.
 
+## Pinned Versions
+
+An **exact** version (no `^`) is how a dependency is held back here, and it is also what makes it invisible to `update-npm-deps.ps1`: that script upgrades caret ranges and *silently* skips exact pins. Nothing will ever remind you a pin is stale, so every pin carries a row in [`pinned-versions.json`](pinned-versions.json) naming the condition that releases it and the command that tests that condition.
+
+| Package | Pin | Why | Upgrade when |
+| --- | --- | --- | --- |
+| `typescript` | `6.0.3` | `typescript-eslint` peer-requires `>=4.8.4 <6.1.0` and throws `typescript-eslint does not support TS 7.0.` as soon as `scripts/eslint-config.ts` imports it, so `npm run lint` cannot even load its config on TypeScript 7. `npx tsc --noEmit` breaks too — `tsconfig.json` sets `skipLibCheck` to `false`, so `@typescript-eslint`'s own `.d.ts` files fail against the restructured TS 7 API. A dependency sweep bumped this to `^7.0.2` and broke both; the pin is exact so the next sweep cannot drift it back. `6.0.3` is the newest stable `6.x`. Propagates to the whole tree via `overrides.typescript = $typescript`. | `typescript-eslint`'s peer range admits `7.x` — `node -e "console.log(require('typescript-eslint/package.json').peerDependencies.typescript)"`, tracked upstream as [typescript-eslint#10940](https://github.com/typescript-eslint/typescript-eslint/issues/10940) |
+
+`main` carries its own toolchain: the release branches keep a separate `package.json`, and `checkout.ts` only ever restores `./workflow-scripts` from `main`. Pruning a devDependency here does not touch what a release branch builds with.
+
 ## Supported Surfaces
 
 Only the **latest `release/obsidian-public/*`** and the **latest `release/obsidian-catalyst/*`** branches are actively maintained. Older release branches are frozen — type fixes and new modeling land on the two latest branches only. (Referred to by role, not by pinned version, so this stays current across releases.)
