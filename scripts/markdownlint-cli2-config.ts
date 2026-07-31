@@ -2,6 +2,8 @@ import relativeLinksRule from 'markdownlint-rule-relative-links';
 
 import type { MarkdownlintCli2ConfigurationSchema } from './helpers/@types/markdownlint-cli2-config-schema.d.ts';
 
+import { mdIgnores } from './helpers/md-ignores.ts';
+
 /* eslint-disable camelcase -- The property names are the same as the ones in the schema. */
 
 export const config: MarkdownlintCli2ConfigurationSchema = {
@@ -27,13 +29,7 @@ export const config: MarkdownlintCli2ConfigurationSchema = {
   globs: [
     '**/*.md'
   ],
-  ignores: [
-    '.git/**',
-    'dist/**',
-    'docs/**',
-    'node_modules/**',
-    'workflow-scripts/**'
-  ]
+  ignores: mdIgnores
 };
 
 /* eslint-enable camelcase -- The property names are the same as the ones in the schema. */
