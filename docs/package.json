@@ -15,28 +15,28 @@
     "yaml": "$yaml"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.9",
-    "@astrojs/starlight": "^0.39.2",
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/starlight": "^0.41.6",
     "@resvg/resvg-js": "^2.6.2",
-    "@types/node": "^25.8.0",
-    "astro": "^6.3.3",
+    "@types/node": "^26.1.2",
+    "astro": "^7.1.6",
     "gray-matter": "^4.0.3",
     "hast-util-from-html": "^2.0.3",
     "hastscript": "^9.0.1",
     "jiti": "^2.7.0",
     "rfdc": "^1.4.1",
-    "satori": "^0.26.0",
-    "semver": "^7.8.0",
+    "satori": "^0.29.0",
+    "semver": "^7.8.5",
     "starlight-package-managers": "^0.12.0",
     "typedoc-plugin-mdn-links": "^5.1.1",
-    "typescript": "^6.0.3",
+    "typescript": "6.0.3",
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",
     "@types/semver": "^7.7.1",
     "ts-morph": "^28.0.0",
-    "type-fest": "^5.6.0",
-    "yaml": "^2.8.3"
+    "type-fest": "^5.8.0",
+    "yaml": "^2.9.0"
   }
 }

@@ -1,0 +1,22 @@
+{
+  "comment": [
+    "Release conditions for every exact-pinned version in package.json (dependencies, devDependencies and overrides),",
+    "plus any override added to clear an npm audit advisory. An exact pin is invisible to update-npm-deps.ps1 - that",
+    "script upgrades caret ranges and skips exact versions - so nothing would ever remind you a pin is stale. This file",
+    "is what makes that check happen: on every run the script executes each `check` and compares its trimmed stdout to",
+    "`expect`. Equal means the pin is still required; different means the condition that justified the pin has changed",
+    "and the pin should be re-examined. `check: null` means no mechanical test exists - it is reported for manual review",
+    "on every run instead of going quiet. Every exact pin must have an entry here, and every entry must name a package",
+    "that is actually present in the declared section; the script reports either mismatch. See rule G100.",
+    "This package is the repo's docs site; it has its own package.json and node_modules, so the repo-root",
+    "pinned-versions.json does not cover it and the sweep runs here separately."
+  ],
+  "pins": {
+    "typescript": {
+      "section": "dependencies",
+      "why": "TypeScript 7 (tsgo) does not ship the programmatic compiler API that `astro check` drives: @astrojs/language-server aborts with 'The TypeScript module loaded (found 7.0.2) does not expose the programmatic API that `astro check` relies on'. Same native-API break the repo-root pins against, but reached by a different consumer - docs/ has no ESLint, so typescript-eslint is not the reason here. @astrojs/check peer-requires the range below, so 6.x is the last usable major; the `$typescript` override silences the peer conflict, which is how a sweep reached ^7.0.2 unnoticed (npm install was clean and `npm run build` never invokes `astro check`). Hold until astro supports the native compiler - https://github.com/withastro/roadmap/discussions/1321. The check reads the manifest through fs rather than require(), as the root's does: @astrojs/check has an `exports` map that does not list ./package.json, so require() throws ERR_PACKAGE_PATH_NOT_EXPORTED.",
+      "check": "node -e \"process.stdout.write(JSON.parse(require('fs').readFileSync('node_modules/@astrojs/check/package.json','utf8')).peerDependencies.typescript)\"",
+      "expect": "^5.0.0 || ^6.0.0"
+    }
+  }
+}
