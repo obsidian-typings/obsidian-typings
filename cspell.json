@@ -1,11 +1,6 @@
 {
   "version": "0.2",
-  "ignorePaths": [
-    "dist",
-    "docs/.astro",
-    "node_modules",
-    "tsconfig.tsbuildinfo"
-  ],
+  "ignorePaths": [],
   "dictionaryDefinitions": [],
   "dictionaries": [],
   "words": [
@@ -100,6 +95,7 @@
     "panv",
     "Parens",
     "parsinom",
+    "pathspec",
     "pdfjs",
     "PIXI",
     "pixijs",
@@ -149,6 +145,7 @@
     "unmap",
     "unsetup",
     "unxok",
+    "uppercased",
     "vite",
     "vkey",
     "Watchpath",
