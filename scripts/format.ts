@@ -9,4 +9,4 @@ if (paths.length === 0) {
   paths.push('**/*');
 }
 
-await execFromRoot(['dprint', 'fmt', ...paths]);
+await execFromRoot(['dprint', 'fmt', { batchedArgs: paths }]);

@@ -2,6 +2,7 @@ import { compare } from 'semver';
 
 import { generateBranchName } from './helpers/branchSpec.ts';
 import { checkout } from './helpers/checkout.ts';
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import {
   editPackageJson,
   editPackageLockJson,
@@ -13,6 +14,8 @@ import {
   generateReadme
 } from './helpers/readmeGenerator.ts';
 import { getLatestVersion } from './helpers/version.ts';
+
+exitIfScriptDisabled();
 
 const INITIAL_BRANCH_VERSION = '1.0.0';
 

@@ -1,4 +1,7 @@
 import { checkout } from './helpers/checkout.ts';
+import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
+
+exitIfScriptDisabled();
 
 async function main(): Promise<void> {
   const targetBranch = process.argv[2];
