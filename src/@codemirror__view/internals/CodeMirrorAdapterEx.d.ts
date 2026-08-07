@@ -1,3 +1,4 @@
+import type { EditorView } from '@codemirror/view';
 import type {
   EditorPosition,
   Pos
@@ -10,7 +11,6 @@ import type { CodeMirrorAdapterExCommands } from './CodeMirrorAdapterExCommands.
 import type { CodeMirrorEditor } from './CodeMirrorEditor.d.ts';
 import type { EnclosingTag } from './EnclosingTag.d.ts';
 import type { VimApi } from './vim/VimApi.d.ts';
-import type { VimEditor } from './vim/VimEditor.d.ts';
 
 /**
  * Extended CodeMirror adapter providing CM5-compatible API over CM6.
@@ -20,12 +20,12 @@ import type { VimEditor } from './vim/VimEditor.d.ts';
  */
 export interface CodeMirrorAdapterEx {
   /**
-   * Construct a new CodeMirror editor instance from a Vim editor.
+   * Construct a CodeMirror 5 compatible adapter around a CodeMirror 6 view.
    *
-   * @param cm6 - The Vim editor instance to wrap.
-   * @returns The created CodeMirror editor.
+   * @param cm6 - The view to wrap.
+   * @returns The created adapter.
    */
-  new (cm6: VimEditor): CodeMirrorEditor;
+  new (cm6: EditorView): CodeMirrorEditor;
 
   /**
    * Built-in editor commands (undo, redo, indent, etc.).
@@ -36,11 +36,6 @@ export interface CodeMirrorAdapterEx {
    * Whether the current platform is macOS.
    */
   isMac: boolean;
-
-  /**
-   * Map of key binding names to their handlers.
-   */
-  keyMap: Record<string, Cm5KeyMap>;
 
   /**
    * Map of key names to their handlers.
@@ -73,15 +68,6 @@ export interface CodeMirrorAdapterEx {
    * @param className - The CSS class name to add.
    */
   addClass(element: HTMLElement, className: string): void;
-
-  /**
-   * Define a new editor option with a default value and change handler.
-   *
-   * @param option - The name of the option.
-   * @param defaultValue - The default value for the option.
-   * @param handler - The handler invoked when the option changes.
-   */
-  defineOption(option: string, defaultValue: unknown, handler: () => void): void;
 
   /**
    * Call preventDefault on the given event.
@@ -175,12 +161,4 @@ export interface CodeMirrorAdapterEx {
    * @param values - Additional values to pass to the signal handlers.
    */
   signal(target: unknown, type: string, ...values: unknown[]): void;
-
-  /**
-   * Convert a keyboard event to its Vim key representation.
-   *
-   * @param event - The keyboard event.
-   * @returns The Vim key representation string.
-   */
-  vimKey(event: KeyboardEvent): string;
 }
