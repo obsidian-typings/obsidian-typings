@@ -16,6 +16,7 @@ import type {
   Rect
 } from '@codemirror/view';
 
+import type { CodeMirrorEditor } from '../internals/CodeMirrorEditor.d.ts';
 import type { EditorViewCoords } from '../internals/EditorViewCoords.d.ts';
 import type { EditorViewDocumentPadding } from '../internals/EditorViewDocumentPadding.d.ts';
 import type { EditorViewDomPosition } from '../internals/EditorViewDomPosition.d.ts';
@@ -26,18 +27,18 @@ import type { EditorViewState } from '../internals/EditorViewState.d.ts';
 import type { EditorViewThemeOptions } from '../internals/EditorViewThemeOptions.d.ts';
 import type { EditorViewThemeSpec } from '../internals/EditorViewThemeSpec.d.ts';
 import type { MeasureRequest } from '../internals/MeasureRequest.d.ts';
-import type { VimEditor } from '../internals/vim/VimEditor.d.ts';
 
 export {};
 
 declare module '@codemirror/view' {
   interface EditorView {
     /**
-     * The Vim editor instance attached to this view, if Vim mode is enabled.
+     * The CodeMirror 5 compatible adapter wrapping this view, through which the Vim layer drives it.
+     * Only present once Vim mode has been enabled.
      *
      * @unofficial
      */
-    cm?: VimEditor;
+    cm?: CodeMirrorEditor;
 
     /**
      * Indicates whether the user is currently composing text via IME, and at least one change
