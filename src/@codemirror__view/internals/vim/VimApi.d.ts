@@ -34,6 +34,10 @@ import type { VimStringOptionCallback } from './VimStringOptionCallback.d.ts';
  * copy has diverged from all of the above, so these types describe what Obsidian actually ships. Every
  * type in this folder is sourced that way and does not repeat these links.
  *
+ * Two events are signalled on the editor: `vim-mode-change`, whose payload is a `VimModeChangeEvent`,
+ * and `vim-command-done`, which fires once a command completes or no command matched and carries no
+ * payload in Obsidian's build. The `vim-keypress` event the manual documents is **not** signalled here.
+ *
  * @public
  * @unofficial
  */
@@ -65,7 +69,8 @@ export interface VimApi {
 
   /**
    * Register an action, which is a command that does its own work rather than waiting for a motion to
-   * give it a range.
+   * give it a range. Actions may behave however they like, which makes them more flexible than motions
+   * and operators at the cost of orthogonality.
    *
    * @param name - The name mappings refer to the action by.
    * @param fn - The implementation.
@@ -73,11 +78,11 @@ export interface VimApi {
   defineAction(name: string, fn: VimActionFn): void;
 
   /**
-   * Register an Ex command.
+   * Register an Ex command, and map it to `:name`.
    *
    * @param name - The command's full name.
-   * @param prefix - The shortest abbreviation that invokes it, which must be a prefix of `name`.
-   * Defaults to `name`.
+   * @param prefix - The shortest abbreviation that invokes it. The prefix itself, and any substring of
+   * `name` that starts with it, will invoke the command. Falsy leaves `name` as the prefix.
    * @param func - The implementation.
    * @throws When `prefix` is not a prefix of `name`.
    */
@@ -159,8 +164,9 @@ export interface VimApi {
   /**
    * Register a named register, so yanks and pastes can address it.
    *
-   * @param name - The register's one-character name.
-   * @param register - The register implementation.
+   * @param name - The register's one-character name, which is what refers to it.
+   * @param register - The register implementation. It must support `setText`, `pushText`, `clear` and
+   * `toString`.
    * @throws When the name is not one character, or a register of that name already exists.
    */
   defineRegister(name: string, register: VimRegister): void;
@@ -213,9 +219,12 @@ export interface VimApi {
    * Read a Vim option.
    *
    * @param name - The option's name.
-   * @param cm - The editor whose own value is read. Omitted reads the global value.
+   * @param cm - The editor to read the value from.
    * @param cfg - Which copy of the option to read.
    * @returns The option's value, or an `Error` when no option of that name is registered.
+   * @remarks When `cfg.scope` is unset and an editor is given, the editor's own value is returned,
+   * falling back to the global value when the editor has none. When `cfg.scope` is given, only that copy
+   * is consulted and the other is not checked.
    */
   getOption(name: string, cm?: CodeMirrorEditor, cfg?: VimOptionConfig): Error | VimOptionValue;
 
@@ -268,11 +277,13 @@ export interface VimApi {
   leaveVimMode(cm: CodeMirrorEditor): void;
 
   /**
-   * Map one key sequence to another, allowing the result to be remapped further.
+   * Map one key sequence to another, allowing the result to be remapped further. Implements Vim's
+   * `:map` — mapping `;` to `:`, which in Vim is `:map ; :`, is `map(';', ':')` here.
    *
    * @param lhs - The key sequence to map.
    * @param rhs - What it is mapped to.
-   * @param ctx - The mode the mapping applies in. Omitted applies it in every mode.
+   * @param ctx - The mode the mapping applies in, corresponding to `:nmap`, `:vmap` and `:imap`.
+   * Omitted applies it in every mode.
    */
   map(lhs: string, rhs: string, ctx?: VimKeyMappingContext): void;
 
@@ -289,8 +300,10 @@ export interface VimApi {
    * @param keys - The key sequence to map.
    * @param type - Which kind of command the keys run.
    * @param name - The name the command was registered under.
-   * @param args - The arguments passed to the command.
-   * @param extra - Further fields to set on the mapping, such as its context.
+   * @param args - The arguments passed through to the command when the key sequence invokes it.
+   * @param extra - Further fields to set on the mapping. `context` restricts it to one mode, and
+   * `isEdit` — which applies to actions only — decides whether the command is recorded for replay by
+   * the `.` single-repeat command.
    */
   mapCommand(
     keys: string,
@@ -330,6 +343,10 @@ export interface VimApi {
 
   /**
    * Discard the Vim state shared by every editor and rebuild it, resetting every option to its default.
+   *
+   * @remarks The CodeMirror 5 manual says options previously set with `setOption` are re-applied to the
+   * rebuilt state. Obsidian's build does not do that — it assigns each option its declared default, so
+   * earlier `setOption` calls are discarded along with the rest of the state.
    */
   resetVimGlobalState_(): void;
 
@@ -337,10 +354,14 @@ export interface VimApi {
    * Write a Vim option.
    *
    * @param name - The option's name.
-   * @param value - The value to set.
-   * @param cm - The editor whose own value is written. Omitted writes the global value.
+   * @param value - The value to set. An option declared as a boolean takes `true` when this is omitted,
+   * and anything other than `true` or `false` is rejected.
+   * @param cm - The editor to write the value to.
    * @param cfg - Which copy of the option to write.
-   * @returns An `Error` when no option of that name is registered, otherwise nothing.
+   * @returns An `Error` when no option of that name is registered or the value does not suit its type,
+   * otherwise nothing.
+   * @remarks When `cfg.scope` is unset and an editor is given, **both** the global value and that
+   * editor's own value are set. When `cfg.scope` is given, only that copy is written.
    */
   setOption(name: string, value: VimOptionValue, cm?: CodeMirrorEditor, cfg?: VimOptionConfig): Error | undefined;
 
