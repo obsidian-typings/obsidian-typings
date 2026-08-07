@@ -1,3 +1,4 @@
+import type { EditorView } from '@codemirror/view';
 import type {
   EditorPosition,
   EditorSelection
@@ -8,6 +9,7 @@ import type { AddOverlayOptions } from './AddOverlayOptions.d.ts';
 import type { Bookmark } from './Bookmark.d.ts';
 import type { Bracket } from './Bracket.d.ts';
 import type { CodeMirrorEditorMode } from './CodeMirrorEditorMode.d.ts';
+import type { CodeMirrorEditorOperation } from './CodeMirrorEditorOperation.d.ts';
 import type { CodeMirrorEditorSearchCursor } from './CodeMirrorEditorSearchCursor.d.ts';
 import type { CodeMirrorEditorSelectionRange } from './CodeMirrorEditorSelectionRange.d.ts';
 import type { Coords } from './Coords.d.ts';
@@ -20,6 +22,7 @@ import type { OpenNotificationOptions } from './OpenNotificationOptions.d.ts';
 import type { ScrollInfo } from './ScrollInfo.d.ts';
 import type { SetBookmarkOptions } from './SetBookmarkOptions.d.ts';
 import type { SetSelectionOptions } from './SetSelectionOptions.d.ts';
+import type { VimState } from './vim/VimState.d.ts';
 
 /**
  * CM5-compatible editor interface wrapping a CodeMirror 6 editor view.
@@ -29,9 +32,44 @@ import type { SetSelectionOptions } from './SetSelectionOptions.d.ts';
  */
 export interface CodeMirrorEditor {
   /**
+   * Document offset the last change ended at.
+   */
+  $lastChangeEndOffset: number;
+
+  /**
    * Pending line handle changes to be processed.
    */
   $lineHandleChanges: LineHandleChange[] | undefined;
+
+  /**
+   * Identifier distinguishing this adapter from the others in the workspace.
+   */
+  $mid: number;
+
+  /**
+   * The CodeMirror 6 view this adapter wraps.
+   */
+  cm6: EditorView;
+
+  /**
+   * The batch of work currently in progress, or `null` or `undefined` when none is.
+   */
+  curOp: CodeMirrorEditorOperation | null | undefined;
+
+  /**
+   * The bookmarks set in this editor, keyed by their name.
+   */
+  marks: Record<string, Bookmark>;
+
+  /**
+   * Options set on this adapter.
+   */
+  options: Record<string, unknown>;
+
+  /**
+   * The state bag other layers hang their per-editor data off, which is where Vim mode keeps its own.
+   */
+  state: VimState;
 
   /**
    * Add a search overlay to highlight matches in the editor.
@@ -83,6 +121,11 @@ export interface CodeMirrorEditor {
    * Destroy and clean up resources.
    */
   destroy(): void;
+
+  /**
+   * Open the editing prompt for the image the selection is on.
+   */
+  editImage(): void;
 
   /**
    * Execute a named editor command.
@@ -143,6 +186,13 @@ export interface CodeMirrorEditor {
    * @returns The cursor position.
    */
   getCursor(type?: 'anchor' | 'end' | 'head' | 'start'): EditorPosition;
+
+  /**
+   * Get the text deleted during the operation in progress.
+   *
+   * @returns The deleted text, or `null` when nothing was deleted or no operation is in progress.
+   */
+  getDeletedText(): null | string;
 
   /**
    * Get the editor's input field element.
@@ -327,6 +377,17 @@ export interface CodeMirrorEditor {
   listSelections(): Array<CodeMirrorEditorSelectionRange>;
 
   /**
+   * Map a position taken before the changes made during the operation in progress onto where it sits
+   * after them.
+   *
+   * @param pos - The position to map.
+   * @param assoc - Which side of an insertion at that exact position the mapped position ends up on.
+   * Defaults to `1`, after the insertion.
+   * @returns The mapped position, or `pos` unchanged when no operation has made any changes.
+   */
+  mapPos(pos: EditorPosition, assoc?: number): EditorPosition;
+
+  /**
    * Move a position by character in the given direction.
    *
    * @param pos - The starting position.
@@ -400,6 +461,17 @@ export interface CodeMirrorEditor {
   openNotification(message: string, options?: OpenNotificationOptions): () => void;
 
   /**
+   * Run a function as one batch of work, so the editor only reacts to what it did once it finishes.
+   * Nesting is allowed — only the outermost call ends the batch.
+   *
+   * @typeParam T - What the function returns.
+   * @param fn - The function to run.
+   * @param force - Whether to start a batch even when one is already in progress.
+   * @returns Whatever the function returned.
+   */
+  operation<T>(fn: () => T, force?: boolean): T;
+
+  /**
    * Execute a function as a single operation, batching view updates.
    *
    * @typeParam T - The return type of the function.
@@ -462,6 +534,19 @@ export interface CodeMirrorEditor {
    * @param texts - The replacement texts for each selection.
    */
   replaceSelections(texts: string[]): void;
+
+  /**
+   * Restore the image the selection is on to its natural size.
+   */
+  resetImageSize(): void;
+
+  /**
+   * Resize the image the selection is on.
+   *
+   * @param delta - How much to change its width by.
+   * @param step - The multiplier applied to `delta`. Defaults to `1`.
+   */
+  resizeImage(delta: number, step?: number): void;
 
   /**
    * Scan for a bracket from the given position in the specified direction.
@@ -574,6 +659,15 @@ export interface CodeMirrorEditor {
    * @param overwrite - Whether to enable overwrite mode.
    */
   toggleOverwrite(overwrite: boolean): void;
+
+  /**
+   * Give the live preview layer a chance to handle a key before Vim mode does, which is how the
+   * horizontal motions step in and out of a rendered element.
+   *
+   * @param key - The key that was pressed.
+   * @returns Whether the key was handled.
+   */
+  tryHandleKey(key: string): boolean;
 
   /**
    * Check whether the editor is in virtual selection mode.
