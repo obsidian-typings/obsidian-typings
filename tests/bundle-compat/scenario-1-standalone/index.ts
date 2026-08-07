@@ -8,12 +8,12 @@
 import 'obsidian-typings';
 import type {
   EditorViewState,
-  VimEditor
+  VimApi
 } from 'obsidian-typings';
 
 // Internal-only types are directly exported
 declare const viewState: EditorViewState;
-declare const vim: VimEditor;
+declare const vim: VimApi;
 
 // Suppress unused
 void viewState;
