@@ -2,7 +2,10 @@ import { existsSync } from 'node:fs';
 import {
   cp,
   mkdir,
+  readdir,
   readFile,
+  rm,
+  stat,
   writeFile
 } from 'node:fs/promises';
 import { dirname } from 'node:path/posix';
@@ -17,6 +20,14 @@ const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const CHANNELS = ['public', 'catalyst'] as const;
 type Channel = typeof CHANNELS[number];
 
+/**
+ * GitHub Pages rejects artifacts over 1 GB, and the failure mode is terrible: the upload only
+ * warns, then the deploy sits in `deployment_in_progress` until it times out, an hour into the run.
+ * Failing here instead names the cause immediately. The site is ~125 MB for both channels, so this
+ * leaves generous headroom while still catching a regression long before the real cap.
+ */
+const MAX_SITE_SIZE_IN_BYTES = 400 * 1024 * 1024;
+
 interface BuildInfo {
   branch: string;
   docsTreeHash: string;
@@ -25,7 +36,11 @@ interface BuildInfo {
 async function main(): Promise<void> {
   const outputDir = process.env['OUTPUT_DIR'] ?? './site';
   const cacheDir = process.env['CACHE_DIR'] ?? './cache';
-  const shouldForce = process.env['EVENT_NAME'] === 'workflow_dispatch';
+  // Opt-in, not "any manual run": the release workflow dispatches this build, so keying off the
+  // event name forced a full two-channel rebuild (~1 h) after every release and the cache never
+  // once hit. A release changes the branch name of the channel it touched, which invalidates that
+  // channel's cache on its own; the untouched channel is served from cache.
+  const shouldForce = process.env['FORCE'] === 'true';
 
   // Read static assets before the loop — processChannel checks out release
   // branches where workflow-scripts/static/ does not exist.
@@ -42,6 +57,32 @@ async function main(): Promise<void> {
   }
 
   await createRedirectPage(outputDir, redirectHtml);
+  await assertSiteSize(outputDir);
+}
+
+async function assertSiteSize(outputDir: string): Promise<void> {
+  const sizeInBytes = await getDirectorySize(outputDir);
+  const MEGABYTE = 1024 * 1024;
+  const sizeInMegabytes = Math.round(sizeInBytes / MEGABYTE);
+  console.log(`Site size: ${String(sizeInMegabytes)} MB`);
+
+  if (sizeInBytes > MAX_SITE_SIZE_IN_BYTES) {
+    throw new Error(
+      `Site is ${String(sizeInMegabytes)} MB, over the ${String(Math.round(MAX_SITE_SIZE_IN_BYTES / MEGABYTE))} MB budget. `
+        + 'GitHub Pages hard-fails above 1 GB, so this would otherwise surface as a deploy timeout an hour from now.'
+    );
+  }
+}
+
+async function getDirectorySize(dir: string): Promise<number> {
+  let total = 0;
+
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
+    const fullPath = `${dir}/${entry.name}`;
+    total += entry.isDirectory() ? await getDirectorySize(fullPath) : (await stat(fullPath)).size;
+  }
+
+  return total;
 }
 
 async function getCurrentBuildInfo(channel: Channel): Promise<BuildInfo> {
@@ -100,6 +141,9 @@ async function processChannel(channel: Channel, outputDir: string, cacheDir: str
   await cp('docs/dist', channelOutputDir, { recursive: true });
 
   await mkdir(channelCacheDir, { recursive: true });
+  // `cp` merges into whatever the cache restored, so pages deleted upstream would linger forever
+  // and the cache would only ever grow. Replace it outright.
+  await rm(`${channelCacheDir}/dist`, { force: true, recursive: true });
   await cp('docs/dist', `${channelCacheDir}/dist`, { recursive: true });
   await writeFile(`${channelCacheDir}/build-info.json`, JSON.stringify(current));
 }

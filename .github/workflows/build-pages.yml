@@ -15,6 +15,11 @@ on:
     branches: [main]
     paths: [docs/**]
   workflow_dispatch:
+    inputs:
+      force:
+        description: Rebuild both channels even when their caches are current
+        type: boolean
+        default: false
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -58,7 +63,7 @@ jobs:
         env:
           OUTPUT_DIR: ./site
           CACHE_DIR: ./cache
-          EVENT_NAME: ${{ github.event_name }}
+          FORCE: ${{ inputs.force }}
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
