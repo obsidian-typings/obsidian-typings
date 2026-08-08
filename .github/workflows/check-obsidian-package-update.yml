@@ -2,7 +2,13 @@ name: Check Obsidian Package Update
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *' # hourly
+    # Every 3 hours, which is what this effectively ran at anyway. GitHub gives `schedule` the
+    # lowest-priority queue and delays or drops it under load: with an hourly cron only ~7-18 of 24
+    # runs actually landed per day, arriving 24 minutes to 2h50m late and never on the hour. Twice
+    # a queued job waited 15 minutes for a hosted runner, never got one, and was cancelled -- red
+    # marks for work that was never needed, since this check is idempotent and the next run catches
+    # up. Asking for less costs no real detection latency and removes two thirds of that exposure.
+    - cron: '0 */3 * * *'
 jobs:
   check-obsidian-package-update:
     permissions:
