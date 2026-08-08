@@ -1,0 +1,51 @@
+---
+/**
+ * Custom Sidebar component overriding Starlight's default.
+ * Based on @astrojs/starlight 0.41.6 Sidebar.astro.
+ *
+ * Changes from upstream: the server-rendered `SidebarPersister` + `SidebarSublist` tree is replaced
+ * by an iframe embedding `src/pages/sidebar.astro`. Upstream inlines the whole navigation into every
+ * page; with a ~1,600-entry API tree that made the sidebar 99.8% of each of the ~10,700 API pages
+ * (4.5 GB per channel), overflowing the 1 GB GitHub Pages artifact cap and starving the build
+ * runner. As one document it is fetched and cached once for the whole site.
+ *
+ * The `MobileMenuFooter` block is kept outside the frame, exactly as upstream has it.
+ */
+// eslint-disable-next-line import-x/no-unresolved -- Defined as virtual module.
+import MobileMenuFooter from 'virtual:starlight/components/MobileMenuFooter';
+
+const src = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/sidebar/`;
+---
+
+<iframe src={src} title="Site navigation" class="sidebar-frame"></iframe>
+
+<div class="md:sl-hidden">
+	<MobileMenuFooter />
+</div>
+
+<style>
+	.sidebar-frame {
+		display: block;
+		flex: 1 1 auto;
+		width: 100%;
+		min-height: 0;
+		border: 0;
+		color-scheme: normal;
+	}
+
+	/*
+		The frame scrolls internally, so the pane around it must not scroll too, and its padding
+		would otherwise double up with the frame's own. Padding stays inside the frame so that
+		scrolled content keeps its inset.
+	*/
+	:global(#starlight__sidebar) {
+		overflow-y: hidden;
+	}
+
+	:global(#starlight__sidebar .sidebar-content) {
+		height: 100%;
+		min-height: 0;
+		gap: 0;
+		padding: 0;
+	}
+</style>

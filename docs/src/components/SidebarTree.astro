@@ -1,0 +1,177 @@
+---
+/**
+ * Recursive renderer for the standalone sidebar document (`src/pages/sidebar.astro`).
+ *
+ * Deliberately does NOT reuse Starlight's `SidebarSublist.astro`: that component reads
+ * `Astro.locals.starlightRoute` for `isCurrent`, which does not exist outside a Starlight route.
+ * The sidebar document is byte-identical on every page — highlighting is applied client-side from
+ * the parent frame's URL instead — so the markup is owned here.
+ *
+ * Each `<details>` carries a stable `data-key` (its label path) so open state survives navigation.
+ */
+import type { SidebarTreeNode } from '../sidebar-config.ts';
+
+import { isSidebarTreeGroup } from '../sidebar-config.ts';
+
+interface Props {
+	base: string;
+	keyPrefix?: string;
+	nested?: boolean;
+	nodes: SidebarTreeNode[];
+}
+
+const { base, keyPrefix = '', nested, nodes } = Astro.props;
+---
+
+<ul class:list={{ 'top-level': !nested }}>
+	{
+		nodes.map((node) => {
+			if (!isSidebarTreeGroup(node)) {
+				return (
+					<li>
+						<a href={`${base}${node.link}`} class:list={{ large: !nested }}>
+							<span>{node.label}</span>
+						</a>
+					</li>
+				);
+			}
+
+			if (node.items.length === 0) {
+				return (
+					<li class="separator" aria-hidden="true">
+						<span>{node.label}</span>
+					</li>
+				);
+			}
+
+			const key = `${keyPrefix}/${node.label}`;
+
+			return (
+				<li>
+					<details data-key={key} open={node.collapsed === false}>
+						<summary>
+							<span class="group-label">
+								<span class="large">{node.label}</span>
+							</span>
+							<svg
+								class="caret"
+								viewBox="0 0 24 24"
+								width="1.25rem"
+								height="1.25rem"
+								fill="currentColor"
+								aria-hidden="true"
+							>
+								<path d="M9 18a1 1 0 0 1-.707-1.707L12.586 12 8.293 7.707a1 1 0 0 1 1.414-1.414l5 5a1 1 0 0 1 0 1.414l-5 5A1 1 0 0 1 9 18Z" />
+							</svg>
+						</summary>
+						<Astro.self base={base} keyPrefix={key} nested nodes={node.items} />
+					</details>
+				</li>
+			);
+		})
+	}
+</ul>
+
+<style>
+	ul {
+		--sl-sidebar-item-padding-inline: 0.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	li {
+		overflow-wrap: anywhere;
+	}
+
+	ul ul li {
+		margin-inline-start: var(--sl-sidebar-item-padding-inline);
+		border-inline-start: 1px solid var(--sl-color-hairline-light);
+		padding-inline-start: var(--sl-sidebar-item-padding-inline);
+	}
+
+	.large {
+		font-size: var(--sl-text-lg);
+		font-weight: 600;
+		color: var(--sl-color-white);
+	}
+
+	.top-level > li + li {
+		margin-top: 0.75rem;
+	}
+
+	.separator {
+		color: var(--sl-color-gray-3);
+		padding: 0.3em var(--sl-sidebar-item-padding-inline);
+		user-select: none;
+	}
+
+	summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.2em var(--sl-sidebar-item-padding-inline);
+		line-height: 1.4;
+		cursor: pointer;
+		user-select: none;
+	}
+
+	summary::marker,
+	summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.caret {
+		transition: transform 0.2s ease-in-out;
+		flex-shrink: 0;
+	}
+
+	:global([dir='rtl']) .caret {
+		transform: rotateZ(180deg);
+	}
+
+	[open] > summary .caret {
+		transform: rotateZ(90deg);
+	}
+
+	a {
+		display: block;
+		border-radius: 0.25rem;
+		text-decoration: none;
+		color: var(--sl-color-gray-2);
+		padding: 0.3em var(--sl-sidebar-item-padding-inline);
+		line-height: 1.4;
+	}
+
+	a:hover,
+	a:focus {
+		color: var(--sl-color-white);
+	}
+
+	a[aria-current='page'],
+	a[aria-current='page']:hover,
+	a[aria-current='page']:focus {
+		font-weight: 600;
+		color: var(--sl-color-text-invert);
+		background-color: var(--sl-color-text-accent);
+	}
+
+	a > *:not(:last-child),
+	.group-label > *:not(:last-child) {
+		margin-inline-end: 0.25em;
+	}
+
+	@media (min-width: 50rem) {
+		.top-level > li + li {
+			margin-top: 0.5rem;
+		}
+
+		.large {
+			font-size: var(--sl-text-base);
+		}
+
+		a {
+			font-size: var(--sl-text-sm);
+		}
+	}
+</style>
