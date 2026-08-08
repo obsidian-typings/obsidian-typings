@@ -80,6 +80,33 @@ async function assertSiteSize(outputDir: string): Promise<void> {
   }
 }
 
+/**
+ * The whole site navigates through one shared sidebar document, so if that document renders without
+ * the API tree every page loses its navigation at once — and nothing else fails. It shipped that way
+ * exactly once, because the tree was read through a path that is only valid outside the bundle, and
+ * the miss was a console warning nobody reads. Assert the built artifact instead of trusting it.
+ */
+async function assertSidebarHasApiTree(channel: Channel): Promise<void> {
+  const sidebarPath = 'docs/dist/sidebar/index.html';
+  if (!existsSync(sidebarPath)) {
+    throw new Error(`${channel}: ${sidebarPath} was not built. The sidebar every page embeds is missing.`);
+  }
+
+  const html = await readFile(sidebarPath, 'utf-8');
+  const apiLinkCount = html.match(/href="[^"]*\/api\//g)?.length ?? 0;
+  const MIN_EXPECTED_API_LINKS = 100;
+
+  if (apiLinkCount < MIN_EXPECTED_API_LINKS) {
+    throw new Error(
+      `${channel}: the shared sidebar document has only ${String(apiLinkCount)} API links (expected at least `
+        + `${String(MIN_EXPECTED_API_LINKS)}). Every page embeds this document, so the API reference would be `
+        + 'unreachable from the whole site.'
+    );
+  }
+
+  console.log(`${channel}: sidebar contains ${String(apiLinkCount)} API links.`);
+}
+
 async function getDirectorySize(dir: string): Promise<number> {
   let total = 0;
 
@@ -142,6 +169,8 @@ async function processChannel(channel: Channel, outputDir: string, cacheDir: str
 
   await execFromRoot('npm run setup', { cwd: 'docs' });
   await execFromRoot(`npm run build -- --base /obsidian-typings/${channel}`, { cwd: 'docs' });
+
+  await assertSidebarHasApiTree(channel);
 
   await mkdir(channelOutputDir, { recursive: true });
   await cp('docs/dist', channelOutputDir, { recursive: true });

@@ -13,13 +13,18 @@ const SIDEBAR_JSON_PATH = `${dirname(dirname(HELPERS_DIR))}/src/generated-sideba
 /**
  * Reads the API portion of the sidebar produced by `generate-api-docs.ts`.
  *
- * Shared by the Starlight config and the standalone sidebar document so both render the same tree.
- * Returns an empty array when the file is missing — the generator has simply not run yet, which is
- * the normal state of a fresh checkout and must not fail the build.
+ * NODE CONTEXTS ONLY — the Astro config, which is loaded from its real path on disk. Do NOT call
+ * this from a component or page: those are bundled into the SSR output, where `import.meta.url` no
+ * longer points at the source tree, so the path below silently resolves to nothing. That is exactly
+ * how the deployed sidebar once shipped with no API reference at all. Page code should let Vite
+ * resolve the JSON at build time instead (see `src/pages/sidebar.astro`).
+ *
+ * Returns an empty array when the file is missing — at config-load time the generator legitimately
+ * may not have run yet, and that must not fail the build.
  */
 export function getApiSidebar(): SidebarTreeNode[] {
   if (!existsSync(SIDEBAR_JSON_PATH)) {
-    console.warn('[api-sidebar] generated-sidebar.json not found. Run generate-api-docs first.');
+    console.warn(`[api-sidebar] not found at ${SIDEBAR_JSON_PATH}. Run generate-api-docs first.`);
     return [];
   }
 
