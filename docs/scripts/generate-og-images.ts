@@ -35,6 +35,21 @@ interface PageEntry {
 const CONCURRENCY = 10;
 const PROGRESS_LOG_INTERVAL = 100;
 
+/**
+ * The generated API reference is skipped: one image per page came to 10,764 PNGs / 244 MB per
+ * channel of incompressible output — about half the GitHub Pages artifact, which overflowed the
+ * 1 GB cap — and cost 10-13 minutes a channel to render. Those pages share {@link DEFAULT_OG_SLUG}
+ * instead; see `src/route-data.ts`, which must agree on the slug.
+ */
+const API_DIR_NAME = 'api';
+
+const DEFAULT_OG_SLUG = 'default';
+
+const DEFAULT_OG_PARAMS: OgImageParams = {
+  description: 'Typescript typings for undocumented parts of the Obsidian API.',
+  title: 'Obsidian Typings'
+};
+
 interface GenerateOptions {
   readonly changedPages: PageEntry[];
   readonly fonts: Font[];
@@ -44,7 +59,11 @@ interface GenerateOptions {
 }
 
 async function collectPages(contentDocsDir: string): Promise<PageEntry[]> {
-  const pages: PageEntry[] = [];
+  const pages: PageEntry[] = [{
+    hash: computeOgHash(DEFAULT_OG_PARAMS),
+    params: DEFAULT_OG_PARAMS,
+    slug: DEFAULT_OG_SLUG
+  }];
   await walkDir(contentDocsDir, contentDocsDir, pages);
   return pages;
 }
@@ -174,6 +193,9 @@ async function walkDir(dir: string, contentDocsDir: string, pages: PageEntry[]):
   for (const entry of entries) {
     const fullPath = `${dir}/${entry.name}`;
     if (entry.isDirectory()) {
+      if (dir === contentDocsDir && entry.name === API_DIR_NAME) {
+        continue;
+      }
       await walkDir(fullPath, contentDocsDir, pages);
     } else if (entry.name.endsWith('.md') || entry.name.endsWith('.mdx')) {
       const page = await parsePage(fullPath, contentDocsDir);
