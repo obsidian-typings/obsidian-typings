@@ -246,6 +246,13 @@ function execString(command: string, options: ExecOption = {}): Promise<ExecResu
     let stdout = '';
     let stderr = '';
 
+    // A child that exits before reading its stdin makes this write fail with EPIPE. With no
+    // listener that is an unhandled 'error' event, which tears down the whole process instead of
+    // settling this promise. Swallow it: the 'close'/'error' handlers below report the command's
+    // actual outcome, which is the failure worth surfacing.
+    child.stdin.on('error', () => {
+      // Deliberately ignored -- see above.
+    });
     child.stdin.write(stdin);
     child.stdin.end();
 
