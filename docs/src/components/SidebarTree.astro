@@ -48,7 +48,8 @@ const { base, keyPrefix = '', nested, nodes } = Astro.props;
 
 			return (
 				<li>
-					<details data-key={key} open={node.collapsed === false}>
+					{/* Starlight treats an absent `collapsed` as expanded; only an explicit `true` collapses. */}
+					<details data-key={key} open={node.collapsed !== true}>
 						<summary>
 							<span class="group-label">
 								<span class="large">{node.label}</span>

@@ -30,7 +30,8 @@ const src = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/sidebar/`;
 		width: 100%;
 		min-height: 0;
 		border: 0;
-		color-scheme: normal;
+		/* Matches the frame's own background so there is no flash before it paints. */
+		background-color: var(--sl-color-bg-sidebar);
 	}
 
 	/*

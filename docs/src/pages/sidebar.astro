@@ -128,21 +128,29 @@ const nodes: SidebarTreeNode[] = [
 		<script is:inline>
 			(() => {
 				const storageKey = 'obsidian-typings-sidebar-state';
+				const WRITE_DEBOUNCE_IN_MILLISECONDS = 200;
 
-				const readState = () => {
+				const groups = [...document.querySelectorAll('details[data-key]')];
+				const scroller = document.scrollingElement ?? document.documentElement;
+
+				// Absent when this is the first visit of the session. Distinguishing "no stored state"
+				// from "stored state with nothing open" matters: applying the latter's empty set to a
+				// first visit would collapse every group the document rendered open.
+				const state = (() => {
 					try {
-						const parsed = JSON.parse(sessionStorage.getItem(storageKey) || '{}');
+						const raw = sessionStorage.getItem(storageKey);
+						if (!raw) {
+							return undefined;
+						}
+						const parsed = JSON.parse(raw);
 						return {
 							open: Array.isArray(parsed.open) ? parsed.open : [],
 							scroll: typeof parsed.scroll === 'number' ? parsed.scroll : 0
 						};
 					} catch {
-						return { open: [], scroll: 0 };
+						return undefined;
 					}
-				};
-
-				const groups = [...document.querySelectorAll('details[data-key]')];
-				const state = readState();
+				})();
 
 				const writeState = () => {
 					try {
@@ -150,19 +158,28 @@ const nodes: SidebarTreeNode[] = [
 							storageKey,
 							JSON.stringify({
 								open: groups.filter((group) => group.open).map((group) => group.dataset.key),
-								scroll: document.documentElement.scrollTop
+								scroll: scroller.scrollTop
 							})
 						);
 					} catch {}
 				};
 
+				// Serializing ~140 groups on every scroll event is far too hot to run unthrottled.
+				let writeTimer;
+				const scheduleWrite = () => {
+					clearTimeout(writeTimer);
+					writeTimer = setTimeout(writeState, WRITE_DEBOUNCE_IN_MILLISECONDS);
+				};
+
 				// Restore the previous session before highlighting, so `scrollIntoView` below measures
 				// against the restored position and only moves when the current entry is off-screen.
-				const openKeys = new Set(state.open);
-				for (const group of groups) {
-					group.open = openKeys.has(group.dataset.key);
+				if (state) {
+					const openKeys = new Set(state.open);
+					for (const group of groups) {
+						group.open = openKeys.has(group.dataset.key);
+					}
+					scroller.scrollTop = state.scroll;
 				}
-				document.documentElement.scrollTop = state.scroll;
 
 				const currentPath = (() => {
 					try {
@@ -192,9 +209,11 @@ const nodes: SidebarTreeNode[] = [
 				}
 
 				for (const group of groups) {
-					group.addEventListener('toggle', writeState);
+					group.addEventListener('toggle', scheduleWrite);
 				}
-				addEventListener('scroll', writeState, { passive: true });
+				addEventListener('scroll', scheduleWrite, { passive: true });
+				// The frame is torn down on every parent navigation, so flush synchronously here or a
+				// debounced write in flight is lost -- which is most of them.
 				addEventListener('pagehide', writeState);
 			})();
 		</script>
