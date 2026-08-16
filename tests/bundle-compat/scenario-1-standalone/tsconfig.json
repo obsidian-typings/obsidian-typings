@@ -6,9 +6,7 @@
     "skipLibCheck": false,
     "strict": true,
     "target": "es2022",
-    "types": [
-      "node"
-    ]
+    "types": []
   },
   "include": [
     "*.ts"
