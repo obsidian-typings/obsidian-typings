@@ -26,6 +26,17 @@ function main(): void {
   }
 
   const { options } = parseTsConfig(join(root, 'tsconfig.json'));
+
+  // The repo's own `tsconfig.json` sets `types: ['@total-typescript/ts-reset', 'node']`, which puts
+  // the Node types in scope for free and hides whatever the bundle uses without declaring it. A
+  // consumer compiling with `types: []` gets no such help: everything the bundle needs must arrive
+  // through the bundle itself (a `/// <reference types="..." />` directive or an import). Validating
+  // with an empty `types` list is what makes the bundle prove it is self-contained — it is how the
+  // missing `/// <reference types="node" />` went unnoticed until a consumer hit 40 errors.
+  const consumerOptions = {
+    ...options,
+    types: []
+  };
   let isOk = true;
 
   for (const bundleFile of BUNDLE_FILES) {
@@ -34,7 +45,7 @@ function main(): void {
     console.log(`Validating ${bundleFile}...`);
 
     const isBundleOk = checkProjectTypes({
-      options,
+      options: consumerOptions,
       rootNames: [bundlePath],
       shouldKeepFile: (fileName) => fileName === bundleCanonical
     });
