@@ -9,7 +9,7 @@
  * empty `types` list keeps it out of the compiler's scope, so the bundle has to pull in what it
  * needs itself via its own `/// <reference types="node" />`. Scenarios 2-4 keep `types: ["node"]`
  * — they model consumers that do have the Node types in scope. Without this, the bundle shipped
- * for months using `Buffer` / `NodeJS.*` / `node:fs` while referencing nothing (T519).
+ * for months using `Buffer` / `NodeJS.*` / `node:fs` while referencing nothing at all.
  */
 
 import 'obsidian-typings';

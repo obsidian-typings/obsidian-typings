@@ -53,7 +53,8 @@ The authoritative pre-commit gate for type changes is the **full `npm run build`
 
 - `build:validate-types` (`skipLibCheck: false`) — catches `.d.ts` type errors `build:compile` skips (e.g. `typeof` on an `interface` that should be a `declare class`, or an incompatible property override against an inherited DOM type).
 - `build:extract-api` (API Extractor / TSDoc) — requires every `@deprecated` to carry a message, `>`/`<` in TSDoc to be escaped, etc.
-- `build:validate-bundle` — validates the bundled output.
+- `build:validate-bundle-types` (`skipLibCheck: false`, **`types: []`**) — type-checks the emitted `dist/cjs/*.d.cts` the way a consumer that is handed nothing sees them. The empty `types` list is the point: the repo's own `tsconfig.json` lists `node`, and checking the bundle under that hid for months that both bundles use `Buffer`, `NodeJS.*` and `node:fs` while referencing nothing (fixed by prepending `/// <reference types="node" />` in `fix-bundle-types`). Anything a bundle needs must arrive through the bundle itself — a peer dependency puts types on disk, not in scope.
+- `build:validate-bundle` — validates the bundled output against the `tests/bundle-compat` consumer scenarios (restored from `main`, so they are edited here). Scenario 1 is the standalone one and is the only one compiled with `types: []`; scenarios 2-4 model consumers that do have the Node types in scope.
 
 Always run the full `npm run build` (plus `lint`, `spellcheck`, `format`) before committing type changes.
 
