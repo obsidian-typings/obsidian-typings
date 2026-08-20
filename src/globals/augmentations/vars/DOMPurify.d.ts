@@ -1,3 +1,5 @@
+import type { DOMPurifyEx } from '../../../dompurify/internals/DOMPurifyEx.d.ts';
+
 export {};
 
 declare global {
@@ -5,7 +7,6 @@ declare global {
    * DOMPurify is a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG.
    *
    * @unofficial
-   * @deprecated - Added only for typing purposes. Use {@link DOMPurify} instead.
    */
-  var DOMPurify__: import('../../../dompurify/internals/DOMPurify.d.ts').DOMPurify;
+  var DOMPurify: DOMPurifyEx;
 }

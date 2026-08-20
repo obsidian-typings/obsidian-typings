@@ -14,7 +14,7 @@ import type { ProgressCallback } from '../ProgressCallback.d.ts';
  * @public
  * @unofficial
  */
-export declare function scrypt(
+export declare function scryptEx(
   password: ArrayLike<number>,
   salt: ArrayLike<number>,
   N: number,
