@@ -12,6 +12,7 @@ import type { CapacitorPlatformsGlobal } from '../../@capacitor__core/internals/
 import type { CodeMirrorAdapterEx } from '../../@codemirror__view/internals/CodeMirrorAdapterEx.d.ts';
 import type { VimApi } from '../../@codemirror__view/internals/vim/VimApi.d.ts';
 import type { CodeMirrorModule } from '../../codemirror/internals/CodeMirrorModule.d.ts';
+import type { DOMPurifyEx } from '../../dompurify/internals/DOMPurifyEx.d.ts';
 import type { ElectronModule } from '../../electron/internals/ElectronModule.d.ts';
 import type { ElectronWebviewTag } from '../../electron/internals/ElectronWebviewTag.d.ts';
 import type { I18n } from '../../i18next/internals/I18n.d.ts';
@@ -26,7 +27,7 @@ import type { PdfJsModule } from '../../pdfjs-dist/internals/PdfJsModule.d.ts';
 import type { PdfJsTestingUtils } from '../../pdfjs-dist/internals/PdfJsTestingUtils.d.ts';
 import type { PixiModule } from '../../pixi.js/internals/PixiModule.d.ts';
 import type { PrismModule } from '../../prismjs/internals/PrismModule.d.ts';
-import type { scrypt as scryptInstance } from '../../scrypt-js/internals/functions/scrypt.d.ts';
+import type { scryptEx } from '../../scrypt-js/internals/functions/scryptEx.d.ts';
 import type { Database } from '../../web-sql/internals/Database.d.ts';
 
 export {};
@@ -142,7 +143,7 @@ declare global {
      *
      * @unofficial
      */
-    DOMPurify: import('../../dompurify/internals/DOMPurify.d.ts').DOMPurify;
+    DOMPurify: DOMPurifyEx;
 
     /**
      * Minified reference to {@link Object.propertyIsEnumerable}.
@@ -284,7 +285,7 @@ declare global {
      *
      * @unofficial
      */
-    scrypt: typeof scryptInstance;
+    scrypt: typeof scryptEx;
 
     /**
      * Minified reference to {@link Object.defineProperties}.

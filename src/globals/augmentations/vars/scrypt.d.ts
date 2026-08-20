@@ -1,4 +1,4 @@
-import type { scrypt as scryptInstance } from '../../../scrypt-js/internals/functions/scrypt.d.ts';
+import type { scryptEx } from '../../../scrypt-js/internals/functions/scryptEx.d.ts';
 
 export {};
 
@@ -7,7 +7,6 @@ declare global {
    * Scrypt key derivation function library for password-based encryption.
    *
    * @unofficial
-   * @deprecated - Added only for typing purposes. Use {@link scrypt} instead.
    */
-  var scrypt__: typeof scryptInstance;
+  var scrypt: typeof scryptEx;
 }

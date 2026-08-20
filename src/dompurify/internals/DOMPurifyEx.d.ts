@@ -6,6 +6,6 @@ import type { DOMPurifyI } from './DOMPurifyI.d.ts';
  * @public
  * @unofficial
  */
-export type DOMPurify = {
+export type DOMPurifyEx = {
   (window?: Window): DOMPurifyI;
 } & DOMPurifyI;
