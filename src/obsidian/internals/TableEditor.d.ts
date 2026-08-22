@@ -1,17 +1,21 @@
 import type {
   EditorSelection as CmEditorSelection,
-  Text
+  Text,
+  Transaction
 } from '@codemirror/state';
 import type { EditorView } from '@codemirror/view';
 import type {
   App,
   Component,
-  Editor
+  Debouncer,
+  Menu
 } from 'obsidian';
 
 import type { CellDirection } from './CellDirection.d.ts';
 import type { CellPosition } from './CellPosition.d.ts';
+import type { ChildWidgetType } from './ChildWidgetType.d.ts';
 import type { CursorPlacement } from './CursorPlacement.d.ts';
+import type { MarkdownBaseView } from './MarkdownBaseView.d.ts';
 import type { TableAlignment } from './TableAlignment.d.ts';
 import type { TableCell } from './TableCell.d.ts';
 import type { TableCellChange } from './TableCellChange.d.ts';
@@ -22,74 +26,91 @@ import type { TableSelectionBounds } from './TableSelectionBounds.d.ts';
 /**
  * Widget that manages a rendered markdown table in the editor.
  *
- * Extends the CM6 WidgetType class via two intermediate Obsidian classes
- * (ChildWidgetType and ObsidianWidgetType). Manages the full lifecycle of
- * table rendering, cell editing, row/column operations, selection,
+ * Manages the full lifecycle of table rendering, cell editing, row/column operations, selection,
  * clipboard, drag handles, and document synchronization.
  *
  * @public
  * @unofficial
  */
-export interface TableEditor extends Component {
-  /** Element containing table action buttons. */
-  actionsEl: HTMLElement | null;
-
-  /** Column alignment settings for the table. */
+export interface TableEditor extends ChildWidgetType {
+  /**
+   * Column alignment settings for the table.
+   */
   alignments: TableAlignment[];
 
-  /** Reference to the app. */
-  app: App;
+  /**
+   * Map from table cells to the child components rendered inside them.
+   */
+  cellChildMap: Map<TableCell, Component[]>;
 
-  /** Map from table cells to their child components. */
-  cellChildMap: Map<TableCell, Component>;
-
-  /** Child components managed by this widget. */
-  children: Component[];
-
-  /** Computed column widths. */
+  /**
+   * Computed column widths, in characters.
+   */
   colWidths: number[];
 
-  /** Container element for the table widget. */
+  /**
+   * Container element for the table widget.
+   */
   containerEl: HTMLDivElement;
 
-  /** CodeMirror document snapshot for the table region. */
+  /**
+   * CodeMirror document snapshot for the table region.
+   */
   doc: Text;
 
-  /** Obsidian editor instance owning this table. */
-  editor: Editor;
-
-  /** End offset of the table in the document. */
-  end: number;
-
-  /** Estimated height of the widget in pixels. */
+  /**
+   * Estimated height of the widget in pixels.
+   *
+   * @remark Falls back to `50` while the widget has no measurable height.
+   */
   readonly estimatedHeight: number;
 
-  /** Whether the document backing this table is complete. */
+  /**
+   * Whether the document backing this table is complete.
+   */
   isDocComplete: boolean;
 
-  /** Whether the table source is malformed. */
+  /**
+   * Whether the table source is malformed.
+   */
   isMalformed: boolean;
 
-  /** Rows of the table, each containing cells indexed by column. */
+  /**
+   * Rows of the table, each containing cells indexed by column.
+   */
   rows: TableRow[];
 
-  /** Currently selected cells. */
+  /**
+   * Currently selected cells.
+   */
   selectedCells: TableCell[];
 
-  /** Anchor cell of a multi-cell selection. */
+  /**
+   * Anchor cell of a multi-cell selection.
+   */
   selectionAnchor: null | TableCell;
 
-  /** Head cell of a multi-cell selection. */
+  /**
+   * Head cell of a multi-cell selection.
+   */
   selectionHead: null | TableCell;
 
-  /** Start offset of the table in the document. */
-  start: number;
+  /**
+   * Root table DOM element, or `null` until the table has been rendered.
+   */
+  tableEl: HTMLTableElement | null;
 
-  /** Root table DOM element. */
-  tableEl: HTMLTableElement;
-
-  /** Plain text content of the table. */
+  /**
+   * Plain text content of the table.
+   */
   readonly text: string;
+
+  /**
+   * Refresh the readonly state of the focused cell editor.
+   *
+   * @remark Debounced by 50ms.
+   */
+  updateCellReadonly: Debouncer<[], void>;
 
   /**
    * Add a new line before or after the table.
@@ -99,16 +120,16 @@ export interface TableEditor extends Component {
   addNewLine(placement: CursorPlacement): void;
 
   /**
-   * Apply cell content updates to the document.
+   * Apply pending cell content updates to the document.
    *
-   * @param changes - Transaction changes to apply.
-   * @param cellMap - Map of cells to their updated text.
-   * @param annotations - Transaction annotations to attach.
+   * @param tr - The transaction the updates came from.
+   * @param cellMap - Map of cells to the changes made within them, relative to each cell's start.
+   * @param offset - Offset introduced by a change to the alignment row.
    */
-  applyCellUpdates(changes: unknown, cellMap: Map<TableCell, string>, annotations: unknown[]): void;
+  applyCellUpdates(tr: Transaction, cellMap: Map<TableCell, TableCellChange[]>, offset: number): void;
 
   /**
-   * Clean up child components.
+   * Unload the child components of every cell.
    */
   cleanupChildren(): void;
 
@@ -118,29 +139,43 @@ export interface TableEditor extends Component {
   clear(): void;
 
   /**
-   * Check whether the given cell is fully enclosed by the current selection.
+   * Constructor.
    *
-   * @param cell - The cell to test.
-   * @returns Whether the cell is contained by the selection.
+   * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<TableEditor\>}.
+   *
+   * @param app - The app.
+   * @param editor - The edit view that owns the widget.
+   * @param doc - The table's source document.
+   * @param isDocComplete - Whether the source document is complete.
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
    */
-  containedBySelection(cell: TableCell): boolean;
+  constructor3__?(app: App, editor: MarkdownBaseView, doc: Text, isDocComplete: boolean): this;
 
   /**
-   * Check whether a document range overlaps with the table.
+   * Check whether the selection fully encloses the table.
+   *
+   * @param selection - The selection to test.
+   * @returns Whether any range of the selection contains the whole table.
+   */
+  containedBySelection(selection: CmEditorSelection): boolean;
+
+  /**
+   * Check whether a document range lies within the table.
    *
    * @param from - Start offset of the range.
    * @param to - End offset of the range.
-   * @returns Whether the range overlaps with the table.
+   * @returns Whether the range lies within the table.
    */
   containsRange(from: number, to: number): boolean;
 
   /**
-   * Check whether the current selection includes the given cell.
+   * Check whether every range of the selection lies within the table.
    *
-   * @param cell - The cell to test.
-   * @returns Whether the selection contains the cell.
+   * @param selection - The selection to test.
+   * @returns Whether the table contains the selection.
    */
-  containsSelection(cell: TableCell): boolean;
+  containsSelection(selection: CmEditorSelection): boolean;
 
   /**
    * Copy the current cell selection to the clipboard, optionally cutting.
@@ -151,18 +186,17 @@ export interface TableEditor extends Component {
   copySelection(event: ClipboardEvent, cut: boolean): void;
 
   /**
-   * Create a drag handle element for a row or column.
+   * Add a row or column drag handle to a cell.
    *
-   * @param type - Whether the handle is for a row or column.
-   * @param index - Index of the row or column.
-   * @returns The drag handle element.
+   * @param cell - The cell to add the handle to.
+   * @param type - Whether the handle drags a row or a column.
    */
-  createDragHandle(type: 'col' | 'row', index: number): HTMLElement;
+  createDragHandle(cell: TableCell, type: 'col' | 'row'): void;
 
   /**
    * Delete the current cell selection.
    *
-   * @param cut - Whether the deletion is a cut operation.
+   * @param cut - Whether the deletion is part of a cut operation.
    */
   deleteSelection(cut: boolean): void;
 
@@ -177,21 +211,21 @@ export interface TableEditor extends Component {
   deselectTable(): void;
 
   /**
-   * Dispatch a table update transaction to the editor.
+   * Rebuild the table and dispatch it to the editor as a single change.
    *
    * @param focusRow - Row to focus after dispatch.
    * @param focusCol - Column to focus after dispatch.
-   * @param selectionFn - Optional function to compute the selection.
+   * @param selectionFn - Optional function computing the selection inside the focused cell.
    */
   dispatchTable(focusRow?: number, focusCol?: number, selectionFn?: (view: EditorView) => CmEditorSelection): void;
 
   /**
-   * Dispatch an update from the cell editor to the parent document.
+   * Forward an update made inside a cell editor to the parent document.
    *
-   * @param cellEditorUpdate - The cell editor update payload.
-   * @param cellEditorTr - The cell editor transaction.
+   * @param cellEditor - The cell editor the update came from.
+   * @param tr - The cell editor transaction.
    */
-  dispatchUpdate(cellEditorUpdate: unknown, cellEditorTr: unknown): void;
+  dispatchUpdate(cellEditor: TableCellEditor, tr: Transaction): void;
 
   /**
    * Get the cell above the given cell.
@@ -219,7 +253,7 @@ export interface TableEditor extends Component {
   getCellBelow(cell: TableCell): null | TableCell;
 
   /**
-   * Get the closest cell to the given coordinates.
+   * Get the cell closest to the given viewport coordinates.
    *
    * @param x - Horizontal coordinate.
    * @param y - Vertical coordinate.
@@ -228,7 +262,7 @@ export interface TableEditor extends Component {
   getClosestCell(x: number, y: number): TableCell;
 
   /**
-   * Get the next cell in the given direction.
+   * Get the next cell in the given direction, wrapping across rows.
    *
    * @param cell - The reference cell.
    * @param direction - Direction to navigate.
@@ -237,17 +271,17 @@ export interface TableEditor extends Component {
   getNextCell(cell: TableCell, direction: CellDirection): null | TableCell;
 
   /**
-   * Get the selected state of a cell.
+   * Get the single cell that fully contains every range of the selection.
    *
-   * @param cell - The cell to check.
-   * @returns The cell if selected, or `null`.
+   * @param selection - The selection to resolve, relative to the start of the table.
+   * @returns The cell containing the selection, or `null` if it spans more than one cell.
    */
-  getSelectedCell(cell: TableCell): null | TableCell;
+  getSelectedCell(selection: CmEditorSelection): null | TableCell;
 
   /**
    * Get the bounds of the current cell selection.
    *
-   * @returns The selection bounds, or `null` if no selection.
+   * @returns The selection bounds, or `null` if there is no multi-cell selection.
    */
   getSelectionBounds(): null | TableSelectionBounds;
 
@@ -260,9 +294,11 @@ export interface TableEditor extends Component {
   getTableString(bounds: TableSelectionBounds): string;
 
   /**
-   * Initialize the DOM structure for the table widget.
+   * Build the widget's container element.
+   *
+   * @returns The container element.
    */
-  initDOM(): void;
+  initDOM(): HTMLDivElement;
 
   /**
    * Insert a column into the table.
@@ -270,7 +306,7 @@ export interface TableEditor extends Component {
    * @param focusRow - Row to focus after insertion.
    * @param index - Column index at which to insert.
    * @param alignment - Alignment for the new column.
-   * @param copyFromCol - Whether to copy content from an adjacent column.
+   * @param copyFromCol - Whether to copy the width of the column currently at `index`.
    */
   insertColumn(focusRow: number, index: number, alignment: TableAlignment, copyFromCol?: boolean): void;
 
@@ -279,49 +315,50 @@ export interface TableEditor extends Component {
    *
    * @param index - Row index at which to insert.
    * @param focusCol - Column to focus after insertion.
-   * @param copyFromRow - Row content to copy, or `false` for an empty row.
+   * @param copyFromRow - Whether to copy the contents of the row currently at `index`.
    */
-  insertRow(index: number, focusCol: number, copyFromRow?: false | string): void;
+  insertRow(index: number, focusCol: number, copyFromRow?: boolean): void;
 
   /**
-   * Build a column alignment submenu.
+   * Add the alignment items for the given columns to a menu.
    *
    * @param menu - The menu to populate.
-   * @param cols - Column indices to include.
+   * @param cols - Column indices the items apply to.
    */
-  makeAlignmentMenu(menu: unknown, cols: number[]): void;
+  makeAlignmentMenu(menu: Menu, cols: number[]): void;
 
   /**
-   * Build an alignment row in a menu.
+   * Build the markdown alignment (separator) row for a range of columns.
    *
-   * @param menu - The menu to populate.
-   * @param cols - Column indices to include.
+   * @param minCol - First column to include.
+   * @param maxCol - Last column to include.
+   * @returns The separator row, without a trailing newline.
    */
-  makeAlignmentRow(menu: unknown, cols: number[]): void;
+  makeAlignmentRow(minCol: number, maxCol: number): string;
 
   /**
-   * Build a context menu for a column.
+   * Add the column items for a cell's column to a menu.
    *
    * @param menu - The menu to populate.
-   * @param col - Column index.
+   * @param cell - Cell identifying the column.
    */
-  makeColMenu(menu: unknown, col: number): void;
+  makeColMenu(menu: Menu, cell: TableCell): void;
 
   /**
-   * Build a context menu for a row.
+   * Add the row items for a cell's row to a menu.
    *
    * @param menu - The menu to populate.
-   * @param row - Row index.
+   * @param cell - Cell identifying the row.
    */
-  makeRowMenu(menu: unknown, row: number): void;
+  makeRowMenu(menu: Menu, cell: TableCell): void;
 
   /**
-   * Build a sort submenu for a column.
+   * Add the sort items for a cell's column to a menu.
    *
    * @param menu - The menu to populate.
-   * @param col - Column index.
+   * @param cell - Cell identifying the column to sort by.
    */
-  makeSortMenu(menu: unknown, col: number): void;
+  makeSortMenu(menu: Menu, cell: TableCell): void;
 
   /**
    * Move a column to a new position.
@@ -342,7 +379,7 @@ export interface TableEditor extends Component {
   moveRow(from: number, to: number, focusCol: number): void;
 
   /**
-   * Adjust offsets of cells after the given cell.
+   * Shift the document offsets of every cell after the given one.
    *
    * @param cell - The reference cell.
    * @param offset - The offset to apply.
@@ -350,12 +387,12 @@ export interface TableEditor extends Component {
   offsetCellsAfter(cell: TableCell, offset: number): void;
 
   /**
-   * Handle a context menu event on a cell.
+   * Populate the context menu for a cell.
    *
-   * @param event - The mouse event.
    * @param cell - The cell that was right-clicked.
+   * @param menu - The menu to populate.
    */
-  onContextMenu(event: MouseEvent, cell: TableCell): void;
+  onContextMenu(cell: TableCell, menu: Menu): void;
 
   /**
    * Paste clipboard content into the current cell selection.
@@ -365,14 +402,14 @@ export interface TableEditor extends Component {
   pasteSelection(event: ClipboardEvent): void;
 
   /**
-   * Place the cursor before or after the table.
+   * Place the cursor on the line before or after the table, inserting one if needed.
    *
    * @param placement - Whether to place the cursor before or after.
    */
   placeCursorAround(placement: CursorPlacement): void;
 
   /**
-   * Place the cursor inside a cell at the given position.
+   * Focus a cell and place the cursor inside it.
    *
    * @param cell - The target cell.
    * @param position - Where to place the cursor within the cell.
@@ -380,14 +417,14 @@ export interface TableEditor extends Component {
   placeCursorInCell(cell: TableCell, position: CellPosition): void;
 
   /**
-   * Post-process a cell after rendering.
+   * Run the markdown post-processors over a rendered cell.
    *
    * @param cell - The cell to post-process.
    */
   postProcess(cell: TableCell): void;
 
   /**
-   * Rebuild the table document from the current cell contents.
+   * Rebuild the table document from the current cell contents and re-render it.
    *
    * @returns The rebuilt document.
    */
@@ -398,47 +435,48 @@ export interface TableEditor extends Component {
    *
    * @param row - Row index.
    * @param col - Column index.
-   * @param selectionFn - Optional function to compute the editor selection.
+   * @param selectionFn - Optional function computing the selection inside the cell editor.
    * @param isUserInitiated - Whether the focus was triggered by the user.
    * @returns The table cell editor.
    */
   receiveCellFocus(row: number, col: number, selectionFn?: (view: EditorView) => CmEditorSelection, isUserInitiated?: boolean): TableCellEditor;
 
   /**
-   * Handle an incomplete document update from the editor.
+   * Handle a document update while the table's source is still incomplete.
    *
-   * @param viewUpdate - The CodeMirror view update.
-   * @param newDoc - The new document content.
+   * @param tr - The transaction that changed the document.
+   * @param newDoc - The new table document.
+   * @returns Whether the table is up to date with the new document.
    */
-  receiveIncompleteUpdate(viewUpdate: unknown, newDoc: Text): void;
+  receiveIncompleteUpdate(tr: Transaction, newDoc: Text): boolean;
 
   /**
-   * Handle a selection change from the editor.
+   * Handle a selection change from the editor, moving focus into or out of the table.
    *
-   * @param selection - The new editor selection.
+   * @param tr - The transaction that changed the selection.
    */
-  receiveSelection(selection: unknown): void;
+  receiveSelection(tr: Transaction): void;
 
   /**
    * Handle a document update from the editor.
    *
-   * @param viewUpdate - The CodeMirror view update.
-   * @param newDoc - The new document content.
+   * @param tr - The transaction that changed the document.
+   * @param newDoc - The new table document.
    * @returns Whether the table was successfully updated.
    */
-  receiveUpdate(viewUpdate: unknown, newDoc: Text): boolean;
+  receiveUpdate(tr: Transaction, newDoc: Text): boolean;
 
   /**
-   * Reconcile external document changes with the table state.
+   * Try to reconcile external document changes with the table state without a full re-render.
    *
-   * @param viewUpdate - The CodeMirror view update.
-   * @param newDoc - The new document content.
-   * @returns The reconciled changes.
+   * @param newDoc - The new table document.
+   * @param tr - The transaction that changed the document.
+   * @returns The reconciled document, or `null` if the changes cannot be reconciled.
    */
-  reconcileChanges(viewUpdate: unknown, newDoc: Text): unknown;
+  reconcileChanges(newDoc: Text, tr: Transaction): null | Text;
 
   /**
-   * Remove child components from a cell.
+   * Unload the child components of a cell.
    *
    * @param cell - The cell whose children to remove.
    */
@@ -461,7 +499,7 @@ export interface TableEditor extends Component {
   removeRow(index: number, focusCol: number): void;
 
   /**
-   * Render the table widget.
+   * Render the table into the container element.
    */
   render(): void;
 
@@ -473,23 +511,23 @@ export interface TableEditor extends Component {
   rerenderCell(cell: TableCell): void;
 
   /**
-   * Select a range of cells between an anchor and head.
+   * Select the rectangular range of cells between an anchor and a head.
    *
    * @param anchor - The anchor cell of the selection.
    * @param head - The head cell of the selection.
-   * @param force - Whether to force the selection update.
+   * @param force - Whether to update the selection even if it did not change.
    */
   selectCells(anchor: TableCell, head: TableCell, force?: boolean): void;
 
   /**
-   * Select all cells in the table.
+   * Select every cell in the table.
    */
   selectTable(): void;
 
   /**
-   * Show drag handles for a cell.
+   * Show the drag handles belonging to a cell's row and column.
    *
-   * @param cell - The cell to show drag handles for.
+   * @param cell - The cell whose handles to show.
    */
   setActiveDragHandles(cell: TableCell): void;
 
@@ -497,68 +535,63 @@ export interface TableEditor extends Component {
    * Set the alignment of columns.
    *
    * @param cols - Column indices to align.
-   * @param alignment - The alignment to apply.
+   * @param alignment - The alignment to apply, resolved against the table's text direction.
    */
   setAlignment(cols: number[], alignment: 'center' | 'end' | 'start'): void;
 
   /**
-   * Focus a cell without creating an editor.
+   * Focus a cell, rebuilding the table first if its source is malformed.
    *
    * @param row - Row index.
    * @param col - Column index.
-   * @param selectionFn - Optional function to compute the selection.
+   * @param selectionFn - Optional function computing the selection inside the cell editor.
    */
   setCellFocus(row: number, col: number, selectionFn?: (view: EditorView) => CmEditorSelection): void;
 
   /**
-   * Sort the table by a column.
+   * Sort the table's body rows with the given comparator.
    *
-   * @param col - Column index to sort by.
-   * @param direction - Sort direction.
    * @param focusRow - Row to focus after sorting.
+   * @param col - Column index whose cells are passed to the comparator.
+   * @param compareFn - Comparator receiving the two cells of `col` being compared.
    */
-  sortByColumn(col: number, direction: 'asc' | 'desc', focusRow: number): void;
+  sortByColumn(focusRow: number, col: number, compareFn: (a: TableCell, b: TableCell) => number): void;
 
   /**
    * Create the DOM element for this widget.
    *
-   * @returns The root DOM element.
+   * @returns The container element.
    */
-  toDOM(): HTMLElement;
+  toDOM(): HTMLDivElement;
 
   /**
-   * Trim whitespace from a cell's content.
+   * Trim whitespace from a cell's content, marking the table malformed if anything changed.
    *
    * @param cell - The cell to trim.
    */
   trimCell(cell: TableCell): void;
 
   /**
-   * Hide drag handles for a cell.
+   * Hide the drag handles belonging to a cell's row and column.
    *
-   * @param cell - The cell to hide drag handles for.
+   * @param cell - The cell whose handles to hide.
    */
   unsetActiveDragHandles(cell: TableCell): void;
 
   /**
-   * Update a cell's text content.
+   * Update a cell's text and re-pad every cell in its column to the new width.
    *
    * @param cell - The cell to update.
    * @param text - The new text content.
-   * @returns Array of document change specs.
+   * @returns The document changes needed, relative to the start of the table.
    */
   updateCell(cell: TableCell, text: string): TableCellChange[];
 
   /**
-   * Callback to refresh cell readonly state.
-   */
-  updateCellReadonly(): void;
-
-  /**
    * Clamp selection bounds to the table dimensions.
    *
-   * @param bounds - The bounds to validate.
-   * @returns The validated bounds.
+   * @param bounds - The bounds to clamp.
+   * @returns The clamped bounds.
    */
   validateSelectionBounds(bounds: TableSelectionBounds): TableSelectionBounds;
 }

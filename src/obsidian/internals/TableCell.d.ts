@@ -10,43 +10,65 @@ import type { TableEditor } from './TableEditor.d.ts';
  * @unofficial
  */
 export interface TableCell {
-  /** Column index of the cell. */
+  /**
+   * Column index of the cell.
+   */
   col: number;
 
-  /** Element containing the cell's content. */
+  /**
+   * Element containing the cell's content.
+   */
   contentEl: HTMLElement;
 
-  /** Whether the cell has been modified since the last save. */
+  /**
+   * Whether the cell has been modified since the last save.
+   */
   dirty: boolean;
 
-  /** DOM element for the cell. */
+  /**
+   * DOM element for the cell.
+   */
   el: HTMLElement;
 
-  /** End offset of the cell content in the document. */
+  /**
+   * End offset of the cell content, relative to the start of the table.
+   */
   end: number;
 
-  /** Trailing padding characters in the cell. */
+  /**
+   * Number of trailing padding spaces in the cell.
+   */
   padEnd: number;
 
-  /** Leading padding characters in the cell. */
+  /**
+   * Number of leading padding spaces in the cell.
+   */
   padStart: number;
 
-  /** Row index of the cell. */
+  /**
+   * Row index of the cell.
+   */
   row: number;
 
-  /** Start offset of the cell content in the document. */
+  /**
+   * Start offset of the cell content, relative to the start of the table.
+   */
   start: number;
 
-  /** Parent table editor that manages this cell. */
+  /**
+   * Table widget that owns this cell.
+   */
   table: TableEditor;
 
-  /** Text content of the cell. */
+  /**
+   * Text content of the cell, without padding.
+   */
   text: string;
 
   /**
-   * Get the absolute document offsets for the cell.
+   * Get the offsets of the cell within the whole document.
    *
-   * @returns The absolute offsets including start, end, text start, and text end.
+   * @returns The absolute offsets, with and without padding.
    */
   getAbsoluteOffsets(): TableCellOffsets;
 
@@ -58,14 +80,14 @@ export interface TableCell {
   getLength(): number;
 
   /**
-   * Get the cell text with leading and trailing padding characters.
+   * Get the cell text with its leading and trailing padding spaces.
    *
    * @returns The padded text content.
    */
   getTextWithPadding(): string;
 
   /**
-   * Handle mobile caret drag interaction for this cell.
+   * Handle a mobile caret drag interaction for this cell.
    *
    * @param view - The CodeMirror editor view.
    * @param pointerId - The pointer event identifier.
@@ -73,11 +95,11 @@ export interface TableCell {
   handleMobileCaretDrag(view: EditorView, pointerId: number): void;
 
   /**
-   * Initialize the cell with a DOM element and document offsets.
+   * Initialize the cell with a DOM element and its offsets within the table.
    *
    * @param el - The cell's DOM element.
-   * @param start - Start offset in the document.
-   * @param end - End offset in the document.
+   * @param start - Start offset, relative to the start of the table.
+   * @param end - End offset, relative to the start of the table.
    */
   init(el: HTMLElement, start: number, end: number): void;
 
@@ -97,7 +119,7 @@ export interface TableCell {
   setTextDir(): void;
 
   /**
-   * Recalculate the cell's padding based on a target column width and alignment.
+   * Recalculate the cell's padding for a target column width, honouring the column's alignment.
    *
    * @param width - The target column width.
    */

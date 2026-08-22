@@ -1,16 +1,22 @@
 /**
- * Represents a document change produced by updating a table cell.
+ * A document change produced by updating a table cell.
  *
  * @public
  * @unofficial
  */
 export interface TableCellChange {
-  /** Start offset of the change in the document. */
+  /**
+   * Start offset of the change.
+   */
   from: number;
 
-  /** Text to insert at the change position. */
+  /**
+   * Text to insert in place of the replaced range.
+   */
   insert: string;
 
-  /** End offset of the change in the document. */
+  /**
+   * End offset of the change.
+   */
   to: number;
 }
