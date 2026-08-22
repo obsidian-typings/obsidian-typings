@@ -16,6 +16,9 @@ jobs:
     permissions:
       actions: write
       contents: write
+      # Mints the OIDC token that npm trusted publishing exchanges for a short-lived, workflow-scoped
+      # publish credential. Without it `npm publish` falls back to looking for a token and fails.
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout pushed branch
@@ -39,7 +42,9 @@ jobs:
         id: run-script
         run: npx -y jiti ./workflow-scripts/publish-release.ts
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # No NODE_AUTH_TOKEN: publishing authenticates through trusted publishing (OIDC), so there is no
+          # long-lived npm credential in this repo at all. Every package published from here must have a
+          # trusted publisher configured on npmjs.com pointing at this workflow file -- see AGENTS.md.
           IS_BETA: ${{ inputs.isBeta }}
       - name: Create Release
         uses: softprops/action-gh-release@v3

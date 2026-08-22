@@ -31,6 +31,7 @@
   ],
   "type": "module",
   "scripts": {
+    "bootstrap-new-package": "jiti workflow-scripts/bootstrap-new-package.ts",
     "checkout": "jiti workflow-scripts/checkout.ts",
     "commit": "jiti scripts/commit.ts",
     "create-new-release-branch": "jiti workflow-scripts/create-new-release-branch.ts",

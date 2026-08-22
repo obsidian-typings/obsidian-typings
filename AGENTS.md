@@ -74,6 +74,38 @@ An **exact** version (no `^`) is how a dependency is held back here, and it is a
 
 Only the **latest `release/obsidian-public/*`** and the **latest `release/obsidian-catalyst/*`** branches are actively maintained. Older release branches are frozen — type fixes and new modeling land on the two latest branches only. (Referred to by role, not by pinned version, so this stays current across releases.)
 
+## Publishing
+
+There is **no npm token in this repo**. `publish-release.yml` authenticates to npm through [trusted
+publishing](https://docs.npmjs.com/trusted-publishers): the job's `id-token: write` permission mints a
+short-lived OIDC credential scoped to that one workflow file. Nothing to rotate, nothing to leak.
+
+The cost is that npm binds a trusted publisher to a **package**, not to a scope or an org, so **every package
+this repo publishes needs its own publisher configured on npmjs.com** before CI can publish it — the
+per-version packages, both `-latest` wrappers, and the legacy `obsidian-typings`. All of them take identical
+settings: owner `obsidian-typings`, repo `obsidian-typings`, workflow `publish-release.yml`, no environment.
+
+Renaming `publish-release.yml`, or publishing from a second workflow, silently breaks every one of those
+configurations at once — the publisher is pinned to the filename.
+
+### A new Obsidian version needs one manual step
+
+A new release branch mints a package name npm has never seen, and a publisher can only be attached to a
+package that already exists — npm has no pre-registration ([npm/cli#8544](https://github.com/npm/cli/issues/8544)).
+CI has no credential capable of creating it, so `create-new-release-branch` stops instead of dispatching a
+release that could not succeed, and tells you to run:
+
+```bash
+npm run bootstrap-new-package -- <obsidianVersion> <public|catalyst>
+```
+
+That publishes a `0.0.0` placeholder under a `bootstrap` dist-tag — claiming the name, and needing your
+interactive 2FA to do it — then prints the exact fields to enter on npmjs.com. Save the trusted publisher,
+then `npm run release`. Every subsequent release of that package is fully automated.
+
+The placeholder deliberately does not take the `latest` tag, so nothing installs an empty stub in the window
+before the first real release, which starts at `1.1.0`.
+
 ## Reported Gaps
 
 Members that exist at runtime but are not modeled yet. Each names the member, the Obsidian version it was

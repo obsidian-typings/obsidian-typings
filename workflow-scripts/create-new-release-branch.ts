@@ -1,5 +1,7 @@
 import { compare } from 'semver';
 
+import type { BranchSpec } from './helpers/branchSpec.ts';
+
 import { generateBranchName } from './helpers/branchSpec.ts';
 import { checkout } from './helpers/checkout.ts';
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
@@ -9,6 +11,10 @@ import {
   execFromRoot
 } from './helpers/exec.ts';
 import { commit } from './helpers/git.ts';
+import {
+  doesPackageExist,
+  getScopedPackageName
+} from './helpers/npm.ts';
 import {
   generateMainReadme,
   generateReadme
@@ -57,16 +63,44 @@ async function main(): Promise<void> {
   }
 
   const latestBranch = generateBranchName({ channel: latestVersionChannel, obsidianVersion: latestVersion });
-  const newBranch = generateBranchName({ channel: newVersionChannel, obsidianVersion: newVersion });
+  const newBranchSpec: BranchSpec = { channel: newVersionChannel, obsidianVersion: newVersion };
+  const newBranch = generateBranchName(newBranchSpec);
 
   await checkout(latestBranch, true);
   await execFromRoot(`git checkout -b "${newBranch}"`);
   await resetPackageVersion();
   await execFromRoot(`git push -u origin "${newBranch}"`);
-  await generateReadme({ channel: newVersionChannel, obsidianVersion: newVersion }, changelogUrl);
+  await generateReadme(newBranchSpec, changelogUrl);
+
+  // A new Obsidian version means a package name npm has never seen, and CI cannot create one: it publishes
+  // through trusted publishing, which is configured per package and so requires the package to already
+  // exist. Dispatching the release here would burn a version number on a run that cannot succeed, so stop
+  // and hand the one step that needs a human back to the human.
+  const packageName = getScopedPackageName(newBranchSpec);
+  if (!await doesPackageExist(packageName)) {
+    await generateMainReadme();
+    printBootstrapRequired(packageName, newBranchSpec);
+    return;
+  }
+
   // Publish the new branch right away, so it never sits created-but-unreleased.
   await execFromRoot('npm run release');
   await generateMainReadme();
+}
+
+function printBootstrapRequired(packageName: string, branchSpec: BranchSpec): void {
+  console.log([
+    '',
+    `Branch created, but ${packageName} does not exist on npm yet, so the release was NOT dispatched.`,
+    '',
+    'Claim the name and attach its trusted publisher first:',
+    '',
+    `  npm run bootstrap-new-package -- ${branchSpec.obsidianVersion} ${branchSpec.channel}`,
+    '',
+    'That script publishes a placeholder and prints what to enter on npmjs.com. Once the trusted publisher',
+    'is saved, release the branch with `npm run release`.',
+    ''
+  ].join('\n'));
 }
 
 async function resetPackageVersion(): Promise<void> {

@@ -15,9 +15,11 @@ import {
   commit,
   getBranchNames
 } from './helpers/git.ts';
+import {
+  getLatestWrapperPackageName,
+  getScopedPackageName
+} from './helpers/npm.ts';
 import { getLatestVersion } from './helpers/version.ts';
-
-const SCOPE = '@obsidian-typings';
 
 async function main(): Promise<void> {
   const isBeta = process.env['IS_BETA'] === 'true';
@@ -40,7 +42,7 @@ async function main(): Promise<void> {
   const nextVersion = await updateNpmVersions(branchSpec, isBeta);
   const scopedTagName = buildScopedTagName(branchSpec, nextVersion);
 
-  const scopedPackageName = `${SCOPE}/obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}`;
+  const scopedPackageName = getScopedPackageName(branchSpec);
   const zipFileName = `obsidian-typings-${nextVersion}-obsidian-${branchSpec.obsidianVersion}-${branchSpec.channel}.zip`;
 
   const latestVersion = await getLatestVersion(branchSpec.channel);
@@ -52,7 +54,7 @@ async function main(): Promise<void> {
   await execFromRoot('git restore --source=origin/main --worktree -- ./README.md');
 
   if (isLatest) {
-    const latestWrapperName = `${SCOPE}/obsidian-${branchSpec.channel}-latest`;
+    const latestWrapperName = getLatestWrapperPackageName(branchSpec.channel);
     const wrapperVersion = await getNextWrapperVersion(latestWrapperName, isBeta);
     await updateLatestWrapper(branchSpec.channel, scopedPackageName, nextVersion, wrapperVersion);
     if (branchSpec.channel === 'public') {
@@ -78,7 +80,12 @@ async function releaseNpmPackage(_nextVersion: string, zipFileName: string, scop
     packageJson.name = scopedPackageName;
   });
 
-  await execFromRoot('npm publish --access public');
+  // No `--access public`, and no `--provenance`. Every package this script publishes already exists and is
+  // already public, so npm carries the existing access forward and the flag only re-asserts what is already
+  // true -- while counting as a package-access change, the category npm now gates behind an interactive 2FA
+  // challenge. Trusted publishing attaches provenance on its own, so the flag is redundant there too. A
+  // package that does *not* exist yet cannot be published from CI at all; see `bootstrap-new-package.ts`.
+  await execFromRoot('npm publish');
 
   // Restore original name for zip artifact
   await editPackageJson((packageJson) => {
@@ -92,7 +99,7 @@ async function releaseNpmPackage(_nextVersion: string, zipFileName: string, scop
 }
 
 async function updateLatestWrapper(channel: 'catalyst' | 'public', scopedPackageName: string, scopedVersion: string, wrapperVersion: string): Promise<void> {
-  const wrapperName = `${SCOPE}/obsidian-${channel}-latest`;
+  const wrapperName = getLatestWrapperPackageName(channel);
 
   // Create a temporary directory for the wrapper package
   await execFromRoot('mkdir -p .wrapper-tmp');
@@ -129,12 +136,12 @@ async function updateLatestWrapper(channel: 'catalyst' | 'public', scopedPackage
   await execFromRoot(`echo 'module.exports = require("${scopedPackageName}/implementations");' > .wrapper-tmp/implementations.cjs`);
   await execFromRoot(`echo 'export * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.mjs`);
 
-  await execFromRoot('npm publish --access public', { cwd: '.wrapper-tmp' });
+  await execFromRoot('npm publish', { cwd: '.wrapper-tmp' });
   await execFromRoot('rm -rf .wrapper-tmp');
 }
 
 async function updateLegacyWrapper(version: string): Promise<void> {
-  const latestWrapperName = `${SCOPE}/obsidian-public-latest`;
+  const latestWrapperName = getLatestWrapperPackageName('public');
 
   await execFromRoot('mkdir -p .legacy-tmp');
 
@@ -170,7 +177,7 @@ async function updateLegacyWrapper(version: string): Promise<void> {
   await execFromRoot(`echo 'module.exports = require("${latestWrapperName}/implementations");' > .legacy-tmp/implementations.cjs`);
   await execFromRoot(`echo 'export * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.mjs`);
 
-  await execFromRoot('npm publish --access public', { cwd: '.legacy-tmp' });
+  await execFromRoot('npm publish', { cwd: '.legacy-tmp' });
   await execFromRoot('rm -rf .legacy-tmp');
 }
 
