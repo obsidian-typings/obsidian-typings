@@ -20,16 +20,24 @@ on:
         description: Rebuild both channels even when their caches are current
         type: boolean
         default: false
+# Two releases two minutes apart dispatched two full builds that raced each other for the same
+# Pages deployment. Queue them instead of cancelling: the later one carries the newer release.
+concurrency:
+  group: pages
+  cancel-in-progress: false
 jobs:
-  build-and-deploy:
+  # One job per channel. Both channels in a single job put two full ~1700-page Astro builds on one
+  # VM, and a cold cache -- which is the normal state, they expire after a week without a hit --
+  # made that the rule rather than the exception. Split, each channel gets a whole machine.
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        # Kept in step with CHANNELS in workflow-scripts/helpers/branchSpec.ts.
+        channel: [public, catalyst]
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v6
@@ -46,28 +54,12 @@ jobs:
       - name: Install script deps
         run: npm ci
         working-directory: ./workflow-scripts
-      - name: Restore public docs cache
+      - name: Restore ${{ matrix.channel }} docs cache
         uses: actions/cache@v5
         with:
-          path: ./cache/public
-          key: docs-public-${{ github.run_id }}
-          restore-keys: docs-public-
-      - name: Restore catalyst docs cache
-        uses: actions/cache@v5
-        with:
-          path: ./cache/catalyst
-          key: docs-catalyst-${{ github.run_id }}
-          restore-keys: docs-catalyst-
-      # Two runs died inside Astro's `Building static entrypoints` -- the Rollup SSR bundle over
-      # ~1700 generated pages, the memory peak of the build -- with nothing to show for it but
-      # "The runner has received a shutdown signal": no exit code, no V8 `heap out of memory`.
-      # That silence is the diagnosis. V8's default heap ceiling sits at or above the VM's physical
-      # memory, so the kernel OOM-kills the runner agent before node can report a heap limit.
-      #
-      # Capping the heap below physical memory turns that into an outcome that can be read: either
-      # V8 collects hard enough to finish, or it fails with a heap error naming the cause. The
-      # sampler writes to the step's stdout, which streams to the live log, so the last memory
-      # reading before a VM death survives the death.
+          path: ./cache/${{ matrix.channel }}
+          key: docs-${{ matrix.channel }}-${{ github.run_id }}
+          restore-keys: docs-${{ matrix.channel }}-
       # Astro's SSR bundle spikes ~11 GB in under ten seconds and overruns the 16 GB runner, which
       # is why the VM kept dying with nothing in the log. The runner's own 3 GB swapfile is nowhere
       # near that. Swap is what turns "the kernel kills the machine" into "the spike pages out and
@@ -81,6 +73,8 @@ jobs:
           sudo mkswap /swapfile
           sudo swapon /swapfile
           free -m
+      # The sampler writes to the step's stdout, which streams to the live log, so the last reading
+      # before a VM death survives the death -- that is how the spike above was caught at all.
       - name: Build docs
         run: |
           echo "CPUs: $(nproc)"
@@ -97,9 +91,52 @@ jobs:
           trap 'kill "$MEMORY_SAMPLER_PID" 2>/dev/null || true' EXIT
           npx -y jiti ./workflow-scripts/build-pages.ts
         env:
+          CHANNEL: ${{ matrix.channel }}
           OUTPUT_DIR: ./site
           CACHE_DIR: ./cache
           FORCE: ${{ inputs.force }}
+      - name: Upload ${{ matrix.channel }} site
+        uses: actions/upload-artifact@v7
+        with:
+          name: site-${{ matrix.channel }}
+          path: ./site/${{ matrix.channel }}
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 1
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Install script deps
+        run: npm ci
+        working-directory: ./workflow-scripts
+      - name: Download public site
+        uses: actions/download-artifact@v8
+        with:
+          name: site-public
+          path: ./site/public
+      - name: Download catalyst site
+        uses: actions/download-artifact@v8
+        with:
+          name: site-catalyst
+          path: ./site/catalyst
+      - name: Assemble site
+        run: npx -y jiti ./workflow-scripts/assemble-pages.ts
+        env:
+          OUTPUT_DIR: ./site
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
