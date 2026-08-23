@@ -29,6 +29,18 @@ declare global {
     readonly innerWidth: number;
 
     /**
+     * Adds a listener for each event named in the given map.
+     *
+     * @param listeners - The listener to add, keyed by the event it listens for.
+     * @unofficial
+     */
+    addEventListeners(
+      listeners: {
+        [K in keyof HTMLElementEventMap]?: (this: HTMLElement, ev: HTMLElementEventMap[K]) => unknown;
+      }
+    ): void;
+
+    /**
      * Hides the element using css `display` property.
      *
      * @example

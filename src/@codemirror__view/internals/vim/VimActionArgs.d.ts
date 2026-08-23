@@ -1,6 +1,7 @@
 import type { EditorPosition } from 'obsidian';
 
 import type { VimInsertAt } from './VimInsertAt.d.ts';
+import type { VimResizeDirection } from './VimResizeDirection.d.ts';
 import type { VimScrollPosition } from './VimScrollPosition.d.ts';
 
 /**
@@ -28,6 +29,11 @@ export interface VimActionArgs {
    * Whether the action treats the register contents as a visual block.
    */
   blockwise?: boolean;
+
+  /**
+   * Which way a resize action changes the size of its target.
+   */
+  direction?: VimResizeDirection;
 
   /**
    * Whether the action moves towards the end of the document.

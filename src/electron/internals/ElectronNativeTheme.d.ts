@@ -74,6 +74,14 @@ export interface ElectronNativeTheme {
   once(event: 'updated', listener: () => void): this;
 
   /**
+   * Removes every listener for the `updated` event, or every listener of any event when no event is given.
+   *
+   * @param event - The event name.
+   * @returns This `ElectronNativeTheme` instance.
+   */
+  removeAllListeners(event?: 'updated'): this;
+
+  /**
    * Removes the specified listener for the `updated` event.
    *
    * @param event - The event name.

@@ -6,5 +6,5 @@ declare global {
    *
    * @unofficial
    */
-  var TurndownService: import('../../../turndown/internals/TurndownService/TurndownService.d.ts').TurndownService;
+  var TurndownService: import('../../../turndown/internals/TurndownService/TurndownServiceConstructor.d.ts').TurndownServiceConstructor;
 }

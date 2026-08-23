@@ -8,5 +8,5 @@ declare global {
    *
    * @unofficial
    */
-  var OBS_ACT: ObsidianProtocolHandler;
+  var OBS_ACT: ObsidianProtocolHandler | undefined;
 }

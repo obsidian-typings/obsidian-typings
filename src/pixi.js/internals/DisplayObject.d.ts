@@ -4,6 +4,7 @@ import type { IHitArea } from './IHitArea.d.ts';
 import type { IPointData } from './IPointData.d.ts';
 import type { Matrix } from './Matrix.d.ts';
 import type { ObservablePoint } from './ObservablePoint.d.ts';
+import type { PixiEventMode } from './PixiEventMode.d.ts';
 import type { PixiRectangle } from './PixiRectangle.d.ts';
 import type { Transform } from './Transform.d.ts';
 
@@ -22,6 +23,9 @@ export declare abstract class DisplayObject {
 
   /** Cursor style when hovering. */
   cursor: null | string;
+
+  /** How the object takes part in the federated event system. */
+  eventMode: PixiEventMode;
 
   /** Hit area shape. */
   hitArea: IHitArea | null;
