@@ -1,5 +1,6 @@
 import type { DisplayObject } from './DisplayObject.d.ts';
 import type { ICanvas } from './ICanvas.d.ts';
+import type { PixiEventSystem } from './PixiEventSystem.d.ts';
 import type { PixiRectangle } from './PixiRectangle.d.ts';
 
 /**
@@ -9,6 +10,9 @@ import type { PixiRectangle } from './PixiRectangle.d.ts';
  * @unofficial
  */
 export interface IRenderer<VIEW extends ICanvas = ICanvas> {
+  /** The federated event system of this renderer (read-only). */
+  readonly events: PixiEventSystem;
+
   /** Renderer resolution (read-only). */
   readonly resolution: number;
 

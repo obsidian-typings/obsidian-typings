@@ -27,7 +27,7 @@ import type { PdfJsModule } from '../../pdfjs-dist/internals/PdfJsModule.d.ts';
 import type { PdfJsTestingUtils } from '../../pdfjs-dist/internals/PdfJsTestingUtils.d.ts';
 import type { PixiModule } from '../../pixi.js/internals/PixiModule.d.ts';
 import type { PrismModule } from '../../prismjs/internals/PrismModule.d.ts';
-import type { scryptEx } from '../../scrypt-js/internals/functions/scryptEx.d.ts';
+import type { ScryptModule } from '../../scrypt-js/internals/ScryptModule.d.ts';
 import type { Database } from '../../web-sql/internals/Database.d.ts';
 
 export {};
@@ -227,7 +227,7 @@ declare global {
      *
      * @unofficial
      */
-    OBS_ACT: ObsidianProtocolHandler;
+    OBS_ACT?: ObsidianProtocolHandler;
 
     /**
      * Default internationalization strings bundled with Obsidian.
@@ -285,7 +285,7 @@ declare global {
      *
      * @unofficial
      */
-    scrypt: typeof scryptEx;
+    scrypt: ScryptModule;
 
     /**
      * Minified reference to {@link Object.defineProperties}.
@@ -313,7 +313,7 @@ declare global {
      *
      * @unofficial
      */
-    TurndownService: import('../../turndown/internals/TurndownService/TurndownService.d.ts').TurndownService;
+    TurndownService: import('../../turndown/internals/TurndownService/TurndownServiceConstructor.d.ts').TurndownServiceConstructor;
 
     /**
      * Electron WebView tag for embedding external web content.

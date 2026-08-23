@@ -1,4 +1,5 @@
 import type { BrowserWindowConstructorOptions } from './BrowserWindowConstructorOptions.d.ts';
+import type { ElectronAnyInputEvent } from './ElectronAnyInputEvent.d.ts';
 import type { ElectronAuthenticationResponseDetails } from './ElectronAuthenticationResponseDetails.d.ts';
 import type { ElectronAuthInfo } from './ElectronAuthInfo.d.ts';
 import type { ElectronBluetoothDevice } from './ElectronBluetoothDevice.d.ts';
@@ -74,6 +75,9 @@ export interface ElectronWebContents {
 
   /** The top frame of the page's frame hierarchy. */
   readonly mainFrame: ElectronWebFrameMain;
+
+  /** Whether Obsidian suppresses the default context menu of this web contents. */
+  noContextMenu: boolean;
 
   /** The session used by this web contents. */
   readonly session: Session;
@@ -365,6 +369,15 @@ export interface ElectronWebContents {
    * @returns This web contents instance.
    */
   addListener(event: 'frame-created', listener: (event: ElectronEvent, details: ElectronFrameCreatedDetails) => void): this;
+
+  /**
+   * Registers a listener for the `input-event` event.
+   *
+   * @param event - The event name.
+   * @param listener - Called when the `input-event` event is emitted.
+   * @returns This web contents instance.
+   */
+  addListener(event: 'input-event', listener: (event: ElectronEvent, inputEvent: ElectronAnyInputEvent) => void): this;
 
   /**
    * Registers a listener for the `ipc-message` event.
@@ -1284,6 +1297,15 @@ export interface ElectronWebContents {
   on(event: 'frame-created', listener: (event: ElectronEvent, details: ElectronFrameCreatedDetails) => void): this;
 
   /**
+   * Registers a listener for the `input-event` event.
+   *
+   * @param event - The event name.
+   * @param listener - Called when the `input-event` event is emitted.
+   * @returns This web contents instance.
+   */
+  on(event: 'input-event', listener: (event: ElectronEvent, inputEvent: ElectronAnyInputEvent) => void): this;
+
+  /**
    * Registers a listener for the `ipc-message` event.
    *
    * @param event - The event name.
@@ -1777,6 +1799,15 @@ export interface ElectronWebContents {
    * @returns This web contents instance.
    */
   once(event: 'frame-created', listener: (event: ElectronEvent, details: ElectronFrameCreatedDetails) => void): this;
+
+  /**
+   * Registers a one-time listener for the `input-event` event.
+   *
+   * @param event - The event name.
+   * @param listener - Called when the `input-event` event is emitted.
+   * @returns This web contents instance.
+   */
+  once(event: 'input-event', listener: (event: ElectronEvent, inputEvent: ElectronAnyInputEvent) => void): this;
 
   /**
    * Registers a one-time listener for the `ipc-message` event.
@@ -2327,6 +2358,15 @@ export interface ElectronWebContents {
    * @returns This web contents instance.
    */
   removeListener(event: 'frame-created', listener: (event: ElectronEvent, details: ElectronFrameCreatedDetails) => void): this;
+
+  /**
+   * Removes a previously registered `input-event` event listener.
+   *
+   * @param event - The event name.
+   * @param listener - The listener to remove.
+   * @returns This web contents instance.
+   */
+  removeListener(event: 'input-event', listener: (event: ElectronEvent, inputEvent: ElectronAnyInputEvent) => void): this;
 
   /**
    * Removes a previously registered `ipc-message` event listener.

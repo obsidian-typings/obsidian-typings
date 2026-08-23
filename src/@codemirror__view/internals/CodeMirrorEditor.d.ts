@@ -8,6 +8,7 @@ import type { SearchQuery } from '../../@codemirror__search/internals/SearchQuer
 import type { AddOverlayOptions } from './AddOverlayOptions.d.ts';
 import type { Bookmark } from './Bookmark.d.ts';
 import type { Bracket } from './Bracket.d.ts';
+import type { CodeMirrorEditorCharCoords } from './CodeMirrorEditorCharCoords.d.ts';
 import type { CodeMirrorEditorMode } from './CodeMirrorEditorMode.d.ts';
 import type { CodeMirrorEditorOperation } from './CodeMirrorEditorOperation.d.ts';
 import type { CodeMirrorEditorSearchCursor } from './CodeMirrorEditorSearchCursor.d.ts';
@@ -91,7 +92,7 @@ export interface CodeMirrorEditor {
    * @param mode - The coordinate system to use.
    * @returns The pixel coordinates of the position.
    */
-  charCoords(pos: EditorPosition, mode: 'div' | 'local' | 'page' | 'window'): Coords;
+  charCoords(pos: EditorPosition, mode?: 'div' | 'local' | 'page' | 'window'): CodeMirrorEditorCharCoords;
 
   /**
    * Clip a position to be within the document bounds.
@@ -108,7 +109,7 @@ export interface CodeMirrorEditor {
    * @param mode - The coordinate system of the input coordinates.
    * @returns The editor position at the given coordinates.
    */
-  coordsChar(coords: Coords, mode: 'div' | 'local' | 'page' | 'window'): EditorPosition;
+  coordsChar(coords: Coords, mode?: 'div' | 'local' | 'page' | 'window'): EditorPosition;
 
   /**
    * Get the default height of a line of text in pixels.

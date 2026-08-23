@@ -6,6 +6,7 @@ import type { ElectronNativeImageModule } from './ElectronNativeImageModule.d.ts
 import type { ElectronRemote } from './ElectronRemote.d.ts';
 import type { ElectronShell } from './ElectronShell.d.ts';
 import type { ElectronWebFrame } from './ElectronWebFrame.d.ts';
+import type { ElectronWebUtils } from './ElectronWebUtils.d.ts';
 
 /**
  * The Electron library module type, representing the `window.electron` object.
@@ -37,4 +38,7 @@ export interface ElectronModule {
 
   /** Electron `webFrame` module for controlling the current renderer frame. */
   webFrame: ElectronWebFrame;
+
+  /** Electron `webUtils` module for resolving renderer-side objects to file system paths. */
+  webUtils: ElectronWebUtils;
 }

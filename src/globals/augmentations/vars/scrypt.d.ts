@@ -1,4 +1,4 @@
-import type { scryptEx } from '../../../scrypt-js/internals/functions/scryptEx.d.ts';
+import type { ScryptModule } from '../../../scrypt-js/internals/ScryptModule.d.ts';
 
 export {};
 
@@ -8,5 +8,5 @@ declare global {
    *
    * @unofficial
    */
-  var scrypt: typeof scryptEx;
+  var scrypt: ScryptModule;
 }
