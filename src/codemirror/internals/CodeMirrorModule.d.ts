@@ -157,8 +157,9 @@ export interface CodeMirrorModule {
    *
    * @param name - The mode name.
    * @param modeFactory - The factory function that creates the mode.
+   * @param dependencies - The names of the modes this mode is built on top of.
    */
-  defineMode<T>(name: string, modeFactory: Cm5ModeFactory<T>): void;
+  defineMode<T>(name: string, modeFactory: Cm5ModeFactory<T>, ...dependencies: string[]): void;
 
   /**
    * Registers a new editor option.

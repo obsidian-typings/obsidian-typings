@@ -26,4 +26,11 @@ export interface ElectronWindow extends ElectronBrowserWindow {
    * Web contents for the developer tools panel.
    */
   devToolsWebContents: unknown;
+
+  /**
+   * Sets the zoom level of the window frame.
+   *
+   * @param level - The zoom level to apply. `0` is the default size.
+   */
+  setFrameZoomLevel(level: number): void;
 }

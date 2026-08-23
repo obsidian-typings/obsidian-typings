@@ -1,3 +1,4 @@
+import type { Cm5InnerModeResult } from './Cm5InnerModeResult.d.ts';
 import type { Cm5StringStream } from './Cm5StringStream.d.ts';
 
 /**
@@ -39,6 +40,14 @@ export interface Cm5Mode<T> {
   copyState?(state: T): T;
 
   /**
+   * Returns the token type of the current state, for modes that expose one.
+   *
+   * @param state - The current parser state.
+   * @returns The token type, or `null` when the state has none.
+   */
+  getType?(state: T): null | string;
+
+  /**
    * Returns the number of spaces of indentation that should be used.
    *
    * @param state - The current parser state.
@@ -47,6 +56,14 @@ export interface Cm5Mode<T> {
    * @returns The number of spaces to indent.
    */
   indent?(state: T, textAfter: string, line: string): number;
+
+  /**
+   * Returns the innermost mode and state at the given state, for modes that wrap other modes.
+   *
+   * @param state - The current parser state.
+   * @returns The innermost mode and its state.
+   */
+  innerMode?(state: T): Cm5InnerModeResult;
 
   /**
    * Produces a state object to be used at the start of a document.

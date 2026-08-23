@@ -6,6 +6,7 @@ import type { GraphicsGeometry } from './GraphicsGeometry.d.ts';
 import type { Matrix } from './Matrix.d.ts';
 import type { ObservablePoint } from './ObservablePoint.d.ts';
 import type { PixiRectangle } from './PixiRectangle.d.ts';
+import type { PixiSettings } from './PixiSettings.d.ts';
 import type { PixiText } from './PixiText.d.ts';
 import type { Sprite } from './Sprite.d.ts';
 import type { TextStyle } from './TextStyle.d.ts';
@@ -35,6 +36,8 @@ export interface PixiModule {
   ObservablePoint: typeof ObservablePoint;
   /** Rectangle constructor. */
   Rectangle: typeof PixiRectangle;
+  /** Library-wide settings. */
+  settings: PixiSettings;
   /** Sprite constructor. */
   Sprite: typeof Sprite;
   /** PixiJS text display object constructor. */

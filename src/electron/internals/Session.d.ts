@@ -1,6 +1,7 @@
 import type { ElectronBluetoothPairingHandlerHandlerDetails } from './ElectronBluetoothPairingHandlerHandlerDetails.d.ts';
 import type { ElectronBluetoothPairingResponse } from './ElectronBluetoothPairingResponse.d.ts';
 import type { ElectronClearCodeCachesOptions } from './ElectronClearCodeCachesOptions.d.ts';
+import type { ElectronClearDataOptions } from './ElectronClearDataOptions.d.ts';
 import type { ElectronClearStorageDataOptions } from './ElectronClearStorageDataOptions.d.ts';
 import type { ElectronConfig } from './ElectronConfig.d.ts';
 import type { ElectronCookies } from './ElectronCookies.d.ts';
@@ -131,6 +132,14 @@ export interface Session {
    * @returns A promise that resolves when the code cache clear operation is complete.
    */
   clearCodeCaches(options: ElectronClearCodeCachesOptions): Promise<void>;
+
+  /**
+   * Clears various types of browsing data of the session.
+   *
+   * @param options - Options controlling which browsing data is cleared.
+   * @returns A promise that resolves when the browsing data has been cleared.
+   */
+  clearData(options?: ElectronClearDataOptions): Promise<void>;
 
   /**
    * Clears the host resolver cache.
