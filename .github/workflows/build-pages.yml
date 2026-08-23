@@ -68,6 +68,19 @@ jobs:
       # V8 collects hard enough to finish, or it fails with a heap error naming the cause. The
       # sampler writes to the step's stdout, which streams to the live log, so the last memory
       # reading before a VM death survives the death.
+      # Astro's SSR bundle spikes ~11 GB in under ten seconds and overruns the 16 GB runner, which
+      # is why the VM kept dying with nothing in the log. The runner's own 3 GB swapfile is nowhere
+      # near that. Swap is what turns "the kernel kills the machine" into "the spike pages out and
+      # the build finishes slower", and the temp disk has 87 GB going spare.
+      - name: Enlarge swap
+        run: |
+          sudo swapoff -a
+          sudo rm -f /swapfile
+          sudo fallocate -l 24G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          free -m
       - name: Build docs
         run: |
           echo "CPUs: $(nproc)"
@@ -77,8 +90,8 @@ jobs:
           export NODE_OPTIONS="--max-old-space-size=$((TOTAL_MEMORY_IN_MB * 3 / 4))"
           echo "NODE_OPTIONS=$NODE_OPTIONS"
           while true; do
-            sleep 10
-            echo "[mem] $(free -m | awk '/^Mem:/ { print $3 " / " $2 " MB used" }')"
+            sleep 5
+            echo "[mem] $(free -m | awk '/^Mem:/ { printf "%s/%s MB", $3, $2 } /^Swap:/ { printf "  swap %s/%s MB", $3, $2 }')  top: $(ps -eo rss=,comm= --sort=-rss | head -3 | awk '{ printf "%s=%.1fGB ", $2, $1 / 1048576 }')"
           done &
           MEMORY_SAMPLER_PID=$!
           trap 'kill "$MEMORY_SAMPLER_PID" 2>/dev/null || true' EXIT
