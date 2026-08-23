@@ -58,8 +58,31 @@ jobs:
           path: ./cache/catalyst
           key: docs-catalyst-${{ github.run_id }}
           restore-keys: docs-catalyst-
+      # Two runs died inside Astro's `Building static entrypoints` -- the Rollup SSR bundle over
+      # ~1700 generated pages, the memory peak of the build -- with nothing to show for it but
+      # "The runner has received a shutdown signal": no exit code, no V8 `heap out of memory`.
+      # That silence is the diagnosis. V8's default heap ceiling sits at or above the VM's physical
+      # memory, so the kernel OOM-kills the runner agent before node can report a heap limit.
+      #
+      # Capping the heap below physical memory turns that into an outcome that can be read: either
+      # V8 collects hard enough to finish, or it fails with a heap error naming the cause. The
+      # sampler writes to the step's stdout, which streams to the live log, so the last memory
+      # reading before a VM death survives the death.
       - name: Build docs
-        run: npx -y jiti ./workflow-scripts/build-pages.ts
+        run: |
+          echo "CPUs: $(nproc)"
+          free -m
+          df -h /
+          TOTAL_MEMORY_IN_MB=$(free -m | awk '/^Mem:/ { print $2 }')
+          export NODE_OPTIONS="--max-old-space-size=$((TOTAL_MEMORY_IN_MB * 3 / 4))"
+          echo "NODE_OPTIONS=$NODE_OPTIONS"
+          while true; do
+            sleep 10
+            echo "[mem] $(free -m | awk '/^Mem:/ { print $3 " / " $2 " MB used" }')"
+          done &
+          MEMORY_SAMPLER_PID=$!
+          trap 'kill "$MEMORY_SAMPLER_PID" 2>/dev/null || true' EXIT
+          npx -y jiti ./workflow-scripts/build-pages.ts
         env:
           OUTPUT_DIR: ./site
           CACHE_DIR: ./cache
