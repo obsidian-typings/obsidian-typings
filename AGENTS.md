@@ -119,39 +119,8 @@ before the first real release, which starts at `1.1.0`.
 Members that exist at runtime but are not modeled yet. Each names the member, the Obsidian version it was
 observed in, and the target branch(es).
 
-Observed in **1.13.7**, target **both latest release branches**. Found by `T583-P8` while fixing
-[#142](https://github.com/obsidian-typings/obsidian-typings/issues/142), reading the chooser class out of
-`obsidian-1.13.7.asar` rather than from a report.
-
-`SuggestModal.chooser` and `PopoverSuggest.suggestions` are the **same runtime class**, modeled here by
-two separate interfaces — `SuggestModalChooser` and `SuggestionContainer` — so a member missing from both
-has to be added twice, and the two disagree today in ways worth settling at the same time
-(`Event` vs `KeyboardEvent | MouseEvent`; `boolean` vs `false | void` returns on
-`moveUp`/`moveDown`/`pageUp`/`pageDown`).
-
-Missing from **both** interfaces:
-
-- `renderSuggestions(): void` — empties `containerEl`, re-creates one `div.suggestion-item` per value
-  through `chooser.renderSuggestion`, re-applies `is-selected`, and reassigns `suggestions`.
-- `shouldSelectOnHover(value: boolean): this` — setter for `selectOnHover`; returns `this`, so it is
-  meant to be called on the freshly constructed instance.
-- `selectOnHover: boolean` — set to `true` in the constructor; while false, `onSuggestionMouseover`
-  does nothing.
-
-Missing from `SuggestModalChooser` only (`SuggestionContainer` already has both):
-
-- `getSelectedElement(): HTMLDivElement | null`
-- `getSelectedValue(): T | null`
-
-One more on the **chooser** side — the modal, not the container — and so on neither interface above:
-
-- `onSelectedChange?(value: T, evt: KeyboardEvent | MouseEvent | null): void` — an optional hook
-  `forceSetSelectedItem` calls after every selection change. Obsidian's own theme-switcher modal
-  implements it, to preview a theme when the selection moved by keyboard. `evt` is nullable for the same
-  reason `setSelectedItem`'s is (see `T583-P8`), so model it that way from the start.
-
-The previous entry, `SettingDefinitionBase.disabled`, was modeled on both latest release branches by
-`T269-P8`.
+None currently — the last ones, the suggestion-chooser members, were modeled on both latest
+release branches by `T588-P8`.
 
 ## Documentation
 
