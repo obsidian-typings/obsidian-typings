@@ -88,6 +88,14 @@ settings: owner `obsidian-typings`, repo `obsidian-typings`, workflow `publish-r
 Renaming `publish-release.yml`, or publishing from a second workflow, silently breaks every one of those
 configurations at once — the publisher is pinned to the filename.
 
+Provenance is not merely attached, it is **checked**: npm validates the published manifest against the
+statement and rejects the publish outright when the manifest's `repository.url` disagrees with the
+repository the workflow ran from. Three manifests here are generated from object literals rather than being
+the repo's own `package.json` — both wrappers in `publish-release.ts` and the placeholder in
+`bootstrap-new-package.ts` — so each takes `REPOSITORY` from `workflow-scripts/helpers/npm.ts`. Any further
+generated manifest has to do the same, or its publish dies with `E422` after the packages ahead of it in the
+run have already gone out.
+
 ### A new Obsidian version needs one manual step
 
 A new release branch mints a package name npm has never seen, and a publisher can only be attached to a
