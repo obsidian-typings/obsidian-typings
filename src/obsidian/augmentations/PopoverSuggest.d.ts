@@ -1,5 +1,5 @@
 import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
-import type { SuggestionContainer } from '../internals/SuggestionContainer.d.ts';
+import type { SuggestModalChooser } from '../internals/SuggestModalChooser.d.ts';
 import type { TextDirection } from '../internals/TextDirection.d.ts';
 
 export {};
@@ -51,7 +51,7 @@ declare module 'obsidian' {
      *
      * @unofficial
      */
-    suggestions: SuggestionContainer<T>;
+    suggestions: SuggestModalChooser<T, this>;
 
     /**
      * The window the suggestion popover is shown in, or `null` while closed.
@@ -110,7 +110,7 @@ declare module 'obsidian' {
 
     /**
      * Called after every selection change, including the programmatic one that follows
-     * {@link SuggestionContainer.setSuggestions}.
+     * {@link SuggestModalChooser.setSuggestions}.
      *
      * @param value - The newly selected value.
      * @param evt - The event that moved the selection, or `null` / omitted when it moved programmatically.

@@ -118,12 +118,12 @@ declare module 'obsidian' {
     setInstructions(instructions: Instruction[]): void;
 
     /**
-     * Show suggestions.
+     * Display the given values as suggestions, truncated to `limit`, or close the popover if there are none.
      *
-     * @param results - The search results to display as suggestions.
+     * @param results - The suggestion values to display.
      * @unofficial
      */
-    showSuggestions(results: SearchResult[]): void;
+    showSuggestions(results: T[]): void;
 
     /**
      * Evaluates the trigger at the cursor and updates the suggestion context.
