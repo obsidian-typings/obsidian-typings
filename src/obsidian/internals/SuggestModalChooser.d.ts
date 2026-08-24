@@ -57,12 +57,12 @@ export interface SuggestModalChooser<T, TModal> {
   addSuggestion(value: T): void;
 
   /**
-   * Set the selected item by index, forcing scroll into view.
+   * Set the selected item by index, scrolling it into view unless a non-keyboard event triggered the change.
    *
    * @param index - Index of the item to select.
-   * @param evt - The triggering event.
+   * @param evt - The triggering event, or `null` / omitted to always scroll the selected item into view.
    */
-  forceSetSelectedItem(index: number, evt: KeyboardEvent | MouseEvent): void;
+  forceSetSelectedItem(index: number, evt?: KeyboardEvent | MouseEvent | null): void;
 
   /**
    * Move selection to the next suggestion.
@@ -113,12 +113,12 @@ export interface SuggestModalChooser<T, TModal> {
   pageUp(evt: KeyboardEvent): false | void;
 
   /**
-   * Set the selected item by index.
+   * Set the selected item by index, clamping the index to within the suggestions array.
    *
    * @param index - Index of the item to select.
-   * @param evt - The triggering event.
+   * @param evt - The triggering event, or `null` / omitted to always scroll the selected item into view.
    */
-  setSelectedItem(index: number, evt: KeyboardEvent | MouseEvent): void;
+  setSelectedItem(index: number, evt?: KeyboardEvent | MouseEvent | null): void;
 
   /**
    * Replace all suggestions with new values.
