@@ -31,7 +31,8 @@ import type { BranchSpec } from './helpers/branchSpec.ts';
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import {
   doesPackageExist,
-  getScopedPackageName
+  getScopedPackageName,
+  REPOSITORY
 } from './helpers/npm.ts';
 
 exitIfScriptDisabled();
@@ -81,6 +82,7 @@ async function publishPlaceholder(packageName: string): Promise<void> {
       description: `Placeholder claiming the name for ${packageName}. Replaced by the first real release.`,
       license: 'MIT',
       name: packageName,
+      repository: REPOSITORY,
       version: PLACEHOLDER_VERSION
     };
 
