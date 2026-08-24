@@ -129,13 +129,19 @@ has to be added twice, and the two disagree today in ways worth settling at the 
 (`Event` vs `KeyboardEvent | MouseEvent`; `boolean` vs `false | void` returns on
 `moveUp`/`moveDown`/`pageUp`/`pageDown`).
 
-| Member | Shape at runtime | Missing from |
-| --- | --- | --- |
-| `renderSuggestions` | `(): void` — empties `containerEl`, re-creates one `div.suggestion-item` per value through `chooser.renderSuggestion`, re-applies `is-selected`, and reassigns `suggestions` | both |
-| `shouldSelectOnHover` | `(value: boolean): this` — setter for `selectOnHover`, returns `this` so it can be called on the constructed instance | both |
-| `selectOnHover` | `boolean` — set to `true` in the constructor; while false, `onSuggestionMouseover` does nothing | both |
-| `getSelectedElement` | `(): HTMLDivElement | null` | `SuggestModalChooser` |
-| `getSelectedValue` | `(): T | null` | `SuggestModalChooser` |
+Missing from **both** interfaces:
+
+- `renderSuggestions(): void` — empties `containerEl`, re-creates one `div.suggestion-item` per value
+  through `chooser.renderSuggestion`, re-applies `is-selected`, and reassigns `suggestions`.
+- `shouldSelectOnHover(value: boolean): this` — setter for `selectOnHover`; returns `this`, so it is
+  meant to be called on the freshly constructed instance.
+- `selectOnHover: boolean` — set to `true` in the constructor; while false, `onSuggestionMouseover`
+  does nothing.
+
+Missing from `SuggestModalChooser` only (`SuggestionContainer` already has both):
+
+- `getSelectedElement(): HTMLDivElement | null`
+- `getSelectedValue(): T | null`
 
 One more on the **chooser** side — the modal, not the container — and so on neither interface above:
 
