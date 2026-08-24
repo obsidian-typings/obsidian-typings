@@ -52,13 +52,14 @@ export interface SuggestionContainer<T> {
   addSuggestion(suggestion: SearchResult): void;
 
   /**
-   * Set selected item to one specified by index, if keyboard navigation, force scroll into view.
+   * Set selected item to one specified by index, scrolling it into view unless a non-keyboard event
+   * triggered the change.
    *
    * @param index - Index of the item to select.
-   * @param event - The triggering event.
+   * @param event - The triggering event, or `null` / omitted to always scroll the selected item into view.
    * @remark Prefer setSelectedItem, which clamps the index to within suggestions array.
    */
-  forceSetSelectedItem(index: number, event: Event): void;
+  forceSetSelectedItem(index: number, event?: Event | null): void;
 
   /**
    * Get the DOM element of the currently selected suggestion.
@@ -141,9 +142,9 @@ export interface SuggestionContainer<T> {
    * Set selected item to one specified by index, invokes forceSetSelectedItem.
    *
    * @param index - Index of the item to select.
-   * @param event - The triggering event.
+   * @param event - The triggering event, or `null` / omitted to always scroll the selected item into view.
    */
-  setSelectedItem(index: number, event: Event): void;
+  setSelectedItem(index: number, event?: Event | null): void;
 
   /**
    * Empties original container and adds multiple suggestions.
