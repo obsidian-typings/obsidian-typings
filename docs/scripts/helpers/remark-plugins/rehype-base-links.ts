@@ -17,9 +17,9 @@ export function rehypeBaseLinks(base: string): (tree: Root) => void {
       if (node.tagName !== 'a') {
         return;
       }
-      const href = node.properties['href'];
+      const href = node.properties.href;
       if (typeof href === 'string' && href.startsWith('/') && !href.startsWith(normalizedBase)) {
-        node.properties['href'] = normalizedBase + href;
+        node.properties.href = normalizedBase + href;
       }
     });
   };
