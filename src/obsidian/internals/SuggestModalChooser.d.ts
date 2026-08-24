@@ -1,19 +1,24 @@
 /**
- * Chooser component for a suggest modal, managing suggestion selection and navigation.
+ * The component that manages suggestion selection, navigation and rendering for a suggestion owner.
+ *
+ * A single runtime class backs both {@link obsidian#SuggestModal}'s `chooser` and
+ * {@link obsidian#PopoverSuggest}'s `suggestions`; the owner that constructed it is exposed as
+ * {@link SuggestModalChooser.chooser}. {@link SuggestionContainer} is this same type under the name the
+ * popover side uses.
  *
  * @typeParam T - The type of the suggestion items.
- * @typeParam TModal - The type of the modal.
+ * @typeParam TOwner - The type of the owner that constructed the chooser.
  * @public
  * @unofficial
  */
-export interface SuggestModalChooser<T, TModal> {
+export interface SuggestModalChooser<T, TOwner> {
   /**
-   * Reference to the owning modal.
+   * The owner that constructed the chooser and renders and selects its suggestions.
    */
-  chooser: TModal;
+  chooser: TOwner;
 
   /**
-   * Container element for the suggestion list.
+   * Container element the suggestion list is rendered into.
    */
   containerEl: HTMLDivElement;
 
@@ -46,7 +51,7 @@ export interface SuggestModalChooser<T, TModal> {
   addMessage(text: DocumentFragment | string): HTMLDivElement;
 
   /**
-   * Add a suggestion value to the list.
+   * Add a suggestion value to the list. Does nothing while {@link SuggestModalChooser.values} is `null`.
    *
    * @param value - Suggestion value to add.
    */
@@ -57,6 +62,7 @@ export interface SuggestModalChooser<T, TModal> {
    *
    * @param index - Index of the item to select.
    * @param evt - The triggering event, or `null` / omitted to always scroll the selected item into view.
+   * @remark Prefer {@link SuggestModalChooser.setSelectedItem}, which clamps the index to within the suggestions array.
    */
   forceSetSelectedItem(index: number, evt?: KeyboardEvent | MouseEvent | null): void;
 
@@ -91,7 +97,7 @@ export interface SuggestModalChooser<T, TModal> {
   moveUp(evt: KeyboardEvent): false | void;
 
   /**
-   * Number of suggestions visible at once.
+   * Number of suggestions that can be displayed at once within {@link SuggestModalChooser.containerEl}.
    *
    * @returns The number of visible items.
    */
@@ -135,14 +141,15 @@ export interface SuggestModalChooser<T, TModal> {
   renderSuggestions(): void;
 
   /**
-   * Height of each suggestion row in pixels.
+   * Height of the currently selected suggestion row in pixels.
    *
    * @returns The row height in pixels.
    */
   get rowHeight(): number;
 
   /**
-   * Set the selected item by index, clamping the index to within the suggestions array.
+   * Set the selected item by index, clamping the index to within the suggestions array, then invoking
+   * {@link SuggestModalChooser.forceSetSelectedItem}.
    *
    * @param index - Index of the item to select.
    * @param evt - The triggering event, or `null` / omitted to always scroll the selected item into view.
@@ -150,7 +157,7 @@ export interface SuggestModalChooser<T, TModal> {
   setSelectedItem(index: number, evt?: KeyboardEvent | MouseEvent | null): void;
 
   /**
-   * Replace all suggestions with new values.
+   * Empty the container and replace all suggestions with new values.
    *
    * @param values - Suggestion values to display, or `null`.
    */

@@ -157,11 +157,11 @@ declare module 'obsidian' {
     setValue(value: string): void;
 
     /**
-     * Display the given search results as suggestions.
+     * Display the given values as suggestions, truncated to `limit`, or close the popover if there are none.
      *
-     * @param suggestions - The search results to display.
+     * @param suggestions - The suggestion values to display.
      * @unofficial
      */
-    showSuggestions(suggestions: SearchResult[]): void;
+    showSuggestions(suggestions: T[]): void;
   }
 }
