@@ -148,6 +148,16 @@ declare module 'obsidian' {
     onNoSuggestion(): void;
 
     /**
+     * Called after every selection change, including the programmatic one that follows
+     * {@link SuggestModalChooser.setSuggestions}.
+     *
+     * @param value - The newly selected value.
+     * @param evt - The event that moved the selection, or `null` / omitted when it moved programmatically.
+     * @unofficial
+     */
+    onSelectedChange?(value: T, evt?: KeyboardEvent | MouseEvent | null): void;
+
+    /**
      * Render a suggestion.
      *
      * @param value - The value of the suggestion.

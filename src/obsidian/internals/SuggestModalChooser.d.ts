@@ -18,19 +18,14 @@ export interface SuggestModalChooser<T, TModal> {
   containerEl: HTMLDivElement;
 
   /**
-   * Number of suggestions visible at once.
-   */
-  numVisibleItems: number;
-
-  /**
-   * Height of each suggestion row in pixels.
-   */
-  rowHeight: number;
-
-  /**
    * Index of the currently selected suggestion.
    */
   selectedItem: number;
+
+  /**
+   * Whether hovering a suggestion selects it. While `false`, {@link SuggestModalChooser.onSuggestionMouseover} does nothing.
+   */
+  selectOnHover: boolean;
 
   /**
    * DOM elements for each suggestion row.
@@ -46,8 +41,9 @@ export interface SuggestModalChooser<T, TModal> {
    * Display a message in the suggestion list.
    *
    * @param text - Message text or document fragment to display.
+   * @returns The created message element.
    */
-  addMessage(text: DocumentFragment | string): void;
+  addMessage(text: DocumentFragment | string): HTMLDivElement;
 
   /**
    * Add a suggestion value to the list.
@@ -63,6 +59,20 @@ export interface SuggestModalChooser<T, TModal> {
    * @param evt - The triggering event, or `null` / omitted to always scroll the selected item into view.
    */
   forceSetSelectedItem(index: number, evt?: KeyboardEvent | MouseEvent | null): void;
+
+  /**
+   * Get the DOM element of the currently selected suggestion.
+   *
+   * @returns The selected element, or `null`.
+   */
+  getSelectedElement(): HTMLDivElement | null;
+
+  /**
+   * Get the value of the currently selected suggestion.
+   *
+   * @returns The selected value, or `null`.
+   */
+  getSelectedValue(): null | T;
 
   /**
    * Move selection to the next suggestion.
@@ -81,6 +91,13 @@ export interface SuggestModalChooser<T, TModal> {
   moveUp(evt: KeyboardEvent): false | void;
 
   /**
+   * Number of suggestions visible at once.
+   *
+   * @returns The number of visible items.
+   */
+  get numVisibleItems(): number;
+
+  /**
    * Handle click on a suggestion element.
    *
    * @param evt - The mouse event.
@@ -89,7 +106,7 @@ export interface SuggestModalChooser<T, TModal> {
   onSuggestionClick(evt: MouseEvent, suggestion: HTMLDivElement): void;
 
   /**
-   * Handle mouseover on a suggestion element.
+   * Handle mouseover on a suggestion element. Does nothing while {@link SuggestModalChooser.selectOnHover} is `false`.
    *
    * @param evt - The mouse event.
    * @param suggestion - The hovered suggestion element.
@@ -113,6 +130,18 @@ export interface SuggestModalChooser<T, TModal> {
   pageUp(evt: KeyboardEvent): false | void;
 
   /**
+   * Empty the container and re-render one suggestion element per current value, re-applying the selection.
+   */
+  renderSuggestions(): void;
+
+  /**
+   * Height of each suggestion row in pixels.
+   *
+   * @returns The row height in pixels.
+   */
+  get rowHeight(): number;
+
+  /**
    * Set the selected item by index, clamping the index to within the suggestions array.
    *
    * @param index - Index of the item to select.
@@ -128,9 +157,18 @@ export interface SuggestModalChooser<T, TModal> {
   setSuggestions(values: null | T[]): void;
 
   /**
+   * Set whether hovering a suggestion selects it.
+   *
+   * @param value - Whether hovering should select.
+   * @returns The chooser instance, for chaining off the constructor.
+   */
+  shouldSelectOnHover(value: boolean): this;
+
+  /**
    * Accept the currently selected suggestion.
    *
    * @param evt - The triggering event.
+   * @returns Whether a suggestion was accepted.
    */
-  useSelectedItem(evt: KeyboardEvent | MouseEvent): void;
+  useSelectedItem(evt: KeyboardEvent | MouseEvent): boolean;
 }

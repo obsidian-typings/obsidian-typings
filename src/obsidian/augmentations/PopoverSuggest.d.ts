@@ -109,6 +109,16 @@ declare module 'obsidian' {
     onEscapeKey(): void;
 
     /**
+     * Called after every selection change, including the programmatic one that follows
+     * {@link SuggestionContainer.setSuggestions}.
+     *
+     * @param value - The newly selected value.
+     * @param evt - The event that moved the selection, or `null` / omitted when it moved programmatically.
+     * @unofficial
+     */
+    onSelectedChange?(value: T, evt?: KeyboardEvent | MouseEvent | null): void;
+
+    /**
      * Opens the popover.
      *
      * @official
