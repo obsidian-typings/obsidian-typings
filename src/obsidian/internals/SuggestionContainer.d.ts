@@ -27,6 +27,11 @@ export interface SuggestionContainer<T> {
   selectedItem: number;
 
   /**
+   * Whether hovering a suggestion selects it. While `false`, {@link SuggestionContainer.onSuggestionMouseover} does nothing.
+   */
+  selectOnHover: boolean;
+
+  /**
    * List of all possible suggestions as elements.
    */
   suggestions: HTMLElement[];
@@ -39,10 +44,10 @@ export interface SuggestionContainer<T> {
   /**
    * Add an empty message with provided text.
    *
-   * @param text - Message text to display.
+   * @param text - Message text or document fragment to display.
    * @returns The created message element.
    */
-  addMessage(text: string): HTMLElement;
+  addMessage(text: DocumentFragment | string): HTMLElement;
 
   /**
    * Add suggestion to container.
@@ -59,7 +64,7 @@ export interface SuggestionContainer<T> {
    * @param event - The triggering event, or `null` / omitted to always scroll the selected item into view.
    * @remark Prefer setSelectedItem, which clamps the index to within suggestions array.
    */
-  forceSetSelectedItem(index: number, event?: Event | null): void;
+  forceSetSelectedItem(index: number, event?: KeyboardEvent | MouseEvent | null): void;
 
   /**
    * Get the DOM element of the currently selected suggestion.
@@ -79,17 +84,17 @@ export interface SuggestionContainer<T> {
    * Move selected item to next suggestion.
    *
    * @param event - The keyboard event.
-   * @returns Whether the move was handled.
+   * @returns False if already at the end, void otherwise.
    */
-  moveDown(event: KeyboardEvent): boolean;
+  moveDown(event: KeyboardEvent): false | void;
 
   /**
    * Move selected item to previous suggestion.
    *
    * @param event - The keyboard event.
-   * @returns Whether the move was handled.
+   * @returns False if already at the start, void otherwise.
    */
-  moveUp(event: KeyboardEvent): boolean;
+  moveUp(event: KeyboardEvent): false | void;
 
   /**
    * Amount of suggestions that can be displayed at once within containerEl.
@@ -107,29 +112,33 @@ export interface SuggestionContainer<T> {
   onSuggestionClick(event: MouseEvent, element: HTMLElement): void;
 
   /**
-   * Process hover on suggestion item.
+   * Process hover on suggestion item. Does nothing while {@link SuggestionContainer.selectOnHover} is `false`.
    *
    * @param event - The mouse event.
    * @param element - The hovered suggestion element.
-   * @returns The result of handling the mouseover.
    */
-  onSuggestionMouseover(event: MouseEvent, element: HTMLElement): unknown;
+  onSuggestionMouseover(event: MouseEvent, element: HTMLElement): void;
 
   /**
    * Move selected item to the one in the next 'page' (next visible block).
    *
    * @param event - The keyboard event.
-   * @returns Whether the page-down was handled.
+   * @returns False if already at the end, void otherwise.
    */
-  pageDown(event: KeyboardEvent): boolean;
+  pageDown(event: KeyboardEvent): false | void;
 
   /**
    * Move selected item to the one in the previous 'page' (previous visible block).
    *
    * @param event - The keyboard event.
-   * @returns Whether the page-up was handled.
+   * @returns False if already at the start, void otherwise.
    */
-  pageUp(event: KeyboardEvent): boolean;
+  pageUp(event: KeyboardEvent): false | void;
+
+  /**
+   * Empty the container and re-render one suggestion element per current value, re-applying the selection.
+   */
+  renderSuggestions(): void;
 
   /**
    * Height in pixels of the selected item.
@@ -144,7 +153,7 @@ export interface SuggestionContainer<T> {
    * @param index - Index of the item to select.
    * @param event - The triggering event, or `null` / omitted to always scroll the selected item into view.
    */
-  setSelectedItem(index: number, event?: Event | null): void;
+  setSelectedItem(index: number, event?: KeyboardEvent | MouseEvent | null): void;
 
   /**
    * Empties original container and adds multiple suggestions.
@@ -154,10 +163,18 @@ export interface SuggestionContainer<T> {
   setSuggestions(suggestions: SearchResult[]): void;
 
   /**
+   * Set whether hovering a suggestion selects it.
+   *
+   * @param value - Whether hovering should select.
+   * @returns The container instance, for chaining off the constructor.
+   */
+  shouldSelectOnHover(value: boolean): this;
+
+  /**
    * Use currently selected suggestion as the accepted one.
    *
    * @param event - The triggering event.
    * @returns Whether a suggestion was accepted.
    */
-  useSelectedItem(event: Event): boolean;
+  useSelectedItem(event: KeyboardEvent | MouseEvent): boolean;
 }
