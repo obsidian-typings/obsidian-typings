@@ -11,6 +11,7 @@ import type { HoverLinkEvent } from '../internals/HoverLinkEvent.d.ts';
 import type { CanvasView } from '../internals/internal-plugins/canvas/CanvasView.d.ts';
 import type { SearchView } from '../internals/internal-plugins/global-search/SearchView.d.ts';
 import type { LeafEntry } from '../internals/LeafEntry.d.ts';
+import type { LiteralStringUnion } from '../internals/LiteralStringUnion.d.ts';
 import type { MarkdownScrollableEditView } from '../internals/MarkdownScrollableEditView.d.ts';
 import type { ObsidianTouchEvent } from '../internals/ObsidianTouchEvent.d.ts';
 import type { RecentFileTracker } from '../internals/RecentFileTracker.d.ts';
@@ -1092,11 +1093,14 @@ declare module 'obsidian' {
      * @param callback - Callback function.
      * @param ctx - Context.
      * @returns Event reference.
+     * @remark The callback's `mode` is the view mode the menu was opened in; `source` is the part of the
+     * viewport that opened it. Obsidian's own handler compares `mode` against `'source'` to decide whether
+     * the `Line numbers` toggle applies.
      * @unofficial
      */
     on(
       name: 'markdown-viewport-menu',
-      callback: (menu: Menu, view: MarkdownView, sectionName: string, menuItem: string) => unknown,
+      callback: (menu: Menu, view: MarkdownView, mode: MarkdownViewModeType, source: LiteralStringUnion<'gutter'>) => unknown,
       ctx?: unknown
     ): EventRef;
 
