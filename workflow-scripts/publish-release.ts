@@ -17,19 +17,10 @@ import {
 } from './helpers/git.ts';
 import {
   getLatestWrapperPackageName,
-  getScopedPackageName
+  getScopedPackageName,
+  REPOSITORY
 } from './helpers/npm.ts';
 import { getLatestVersion } from './helpers/version.ts';
-
-/*
- * npm validates the published manifest against the provenance statement that trusted publishing attaches,
- * rejecting the publish when they disagree. The generated wrapper manifests below are built from scratch, so
- * they have to carry the same repository as the package.json the release branch publishes.
- */
-const REPOSITORY = {
-  type: 'git',
-  url: 'git+https://github.com/obsidian-typings/obsidian-typings.git'
-};
 
 async function main(): Promise<void> {
   const isBeta = process.env['IS_BETA'] === 'true';

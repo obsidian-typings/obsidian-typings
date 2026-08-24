@@ -1,7 +1,8 @@
 /**
  * @file
  *
- * The npm side of a release: what each branch is called on the registry, and whether that name exists yet.
+ * The npm side of a release: what each branch is called on the registry, whether that name exists yet, and
+ * the repository coordinates every manifest generated for it has to carry.
  *
  * The name derivation lives here rather than in `publish-release.ts` because two scripts now have to agree
  * on it exactly. `bootstrap-new-package.ts` claims the name by hand so a trusted publisher can be attached
@@ -12,6 +13,17 @@
 import type { BranchSpec } from './branchSpec.ts';
 
 export const NPM_SCOPE = '@obsidian-typings';
+
+/*
+ * npm validates a published manifest against the provenance statement that trusted publishing attaches,
+ * rejecting the publish when the two disagree. The manifests that `publish-release.ts` and
+ * `bootstrap-new-package.ts` generate from scratch therefore have to carry the same repository as the
+ * package.json a release branch publishes.
+ */
+export const REPOSITORY = {
+  type: 'git',
+  url: 'git+https://github.com/obsidian-typings/obsidian-typings.git'
+};
 
 /**
  * Determines whether a package name has ever been published.
