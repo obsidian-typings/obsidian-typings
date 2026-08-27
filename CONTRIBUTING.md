@@ -92,7 +92,7 @@ We built a helper to simplify discoverability process. The generated types conta
 
 Most of types, especially for function parameters would be marked as `unknown`, so you would still have to reverse engineer the logic to replace `unknown` with something meaningful, but it's a good starting point.
 
-The only prerequisite to use the helper is to have the [CodeScript Toolkit](https://obsidian.md/plugins?id=fix-require-modules) plugin installed.
+The only prerequisite to use the helper is to have the [CodeScript Toolkit](https://community.obsidian.md/plugins/fix-require-modules) plugin installed.
 
 The following code loads the helper into the console:
 
