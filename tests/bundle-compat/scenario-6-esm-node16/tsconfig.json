@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "node16",
+    "moduleResolution": "node16",
+    "noEmit": true,
+    "skipLibCheck": false,
+    "strict": true,
+    "target": "es2022",
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "*.ts"
+  ]
+}
