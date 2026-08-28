@@ -22,4 +22,10 @@ docs/src/content/docs/api/namespaces/**/*
 /docs/src/content/docs/api/
 tests/bundle-compat/*/package-lock.json
 
+# The bare `index.ts` rule above matches at any depth, so every bundle-compat scenario's entry file
+# lands in it by accident. The existing ones are only tracked because they were force-added; without
+# this a new scenario is silently never committed, and the gate that restores `tests` from `main`
+# then runs without it.
+!tests/bundle-compat/*/index.ts
+
 /.env

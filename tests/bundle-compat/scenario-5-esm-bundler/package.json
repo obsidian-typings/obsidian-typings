@@ -1,0 +1,11 @@
+{
+  "name": "bundle-compat-scenario-5-esm-bundler",
+  "private": true,
+  "dependencies": {
+    "@codemirror/state": "6.5.0",
+    "@codemirror/view": "6.38.6",
+    "@types/node": "^25.8.0",
+    "obsidian": "file:../../../node_modules/obsidian",
+    "obsidian-typings": "file:../../.."
+  }
+}
