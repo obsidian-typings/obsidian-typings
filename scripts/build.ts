@@ -17,8 +17,8 @@ const BUILD_STEPS = [
   'build:implementations:generate-types',
   'build:implementations:bundle-types',
   'build:fix-implementations-bundle-types',
+  'build:copy-esm-bundle-types',
   'build:validate-bundle-types',
-  'build:static',
   'build:extract-api',
   'build:validate-bundle'
 ];
