@@ -15,6 +15,12 @@
  */
 export interface PlatformEx {
   /**
+   * The version of the installer that shipped this app.
+   * It advances independently of {@link PlatformEx.version} and determines which `Electron` version the app runs on.
+   */
+  build: string;
+
+  /**
    * Whether the platform supports displaying the sidebar ribbon.
    */
   canDisplayRibbon: boolean;
@@ -23,6 +29,11 @@ export interface PlatformEx {
    * Whether the platform supports exporting to PDF.
    */
   canExportPdf: boolean;
+
+  /**
+   * Whether the platform supports pinning the sidebar.
+   */
+  canPinSidebar: boolean;
 
   /**
    * Whether the platform supports popping out windows.
@@ -38,6 +49,16 @@ export interface PlatformEx {
    * Whether the platform supports stacking tabs.
    */
   canStackTabs: boolean;
+
+  /**
+   * The name of the device. On desktop this is the host name of the machine.
+   */
+  deviceName: string;
+
+  /**
+   * Whether a hardware keyboard is attached. Always `true` in the desktop app.
+   */
+  hasPhysicalKeyboard: boolean;
 
   /**
    * We're running the `Android` app.
@@ -102,6 +123,11 @@ export interface PlatformEx {
   isWin: boolean;
 
   /**
+   * The manufacturer of the device. Empty on desktop.
+   */
+  manufacturer: string;
+
+  /**
    * Height of the mobile device screen in pixels.
    */
   mobileDeviceHeight: number;
@@ -117,10 +143,35 @@ export interface PlatformEx {
   mobileSoftKeyboardVisible: boolean;
 
   /**
+   * The model of the device. Empty on desktop.
+   */
+  model: string;
+
+  /**
+   * The name of the operating system. On desktop this is the descriptive version string, such as `Windows 11 Pro`.
+   */
+  osName: string;
+
+  /**
+   * The version of the operating system. On desktop this is the kernel release, such as `10.0.26200`.
+   */
+  osVersion: string;
+
+  /**
    * The path prefix for resolving local files on this platform.
    * This returns:
    * - `file:///` on mobile.
    * - `app://random-id/` on desktop (Replaces the old format of `app://local/`).
    */
   resourcePathPrefix: string;
+
+  /**
+   * Whether `IndexedDB` is available on this platform. Features that need it are disabled when it is not.
+   */
+  supportsIndexedDb: boolean;
+
+  /**
+   * The version of the Obsidian app.
+   */
+  version: string;
 }
