@@ -33,7 +33,7 @@ export async function lintMd(params: LintMdParams): Promise<void> {
      * re-expand the whole-tree markdown glob.
      */
     ...(paths.length ? ['--no-globs'] : []),
-    { batchedArgs: paths }
+    { batchedArguments: paths }
   ]);
 
   if (shouldFix) {
@@ -63,7 +63,7 @@ export async function lintMd(params: LintMdParams): Promise<void> {
     'https://www\\.npmjs\\.com/package/',
     '--url-rewrite-replace',
     'https://registry.npmjs.org/',
-    { batchedArgs: mdFiles }
+    { batchedArguments: mdFiles }
   ]);
 }
 
