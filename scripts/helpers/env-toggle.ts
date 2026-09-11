@@ -31,10 +31,14 @@ const OFF_VALUES: ReadonlySet<string> = new Set(['0', 'false', 'no', 'off']);
  */
 const ENV_FILE_PATH = '.env';
 
-/* Matches every run of characters that cannot appear in an environment variable name. */
+/*
+Matches every run of characters that cannot appear in an environment variable name.
+*/
 const NON_ALPHANUMERIC_REG_EXP = /[^a-z0-9]+/gi;
 
-/* The environment variable npm sets to the name of the script it is currently running. */
+/*
+The environment variable npm sets to the name of the script it is currently running.
+*/
 const NPM_SCRIPT_NAME_ENV_VARIABLE = 'npm_lifecycle_event';
 
 /**
