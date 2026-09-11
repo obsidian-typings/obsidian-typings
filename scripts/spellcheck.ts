@@ -33,7 +33,7 @@ async function spellcheck(paths: string[] = []): Promise<void> {
      */
     '--gitignore',
     ...(rootFolder === null ? [] : ['--gitignore-root', rootFolder]),
-    { batchedArgs: paths }
+    { batchedArguments: paths }
   ]);
 }
 

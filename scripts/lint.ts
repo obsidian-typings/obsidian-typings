@@ -11,4 +11,4 @@ if (paths.length === 0) {
   paths.push('.');
 }
 
-await execFromRoot(['eslint', { batchedArgs: paths }]);
+await execFromRoot(['eslint', { batchedArguments: paths }]);
