@@ -1,4 +1,5 @@
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
+import { resolveToolCommand } from './helpers/package-manager.ts';
 import { execFromRoot } from './helpers/root.ts';
 
 exitIfScriptDisabled();
@@ -9,4 +10,4 @@ if (paths.length === 0) {
   paths.push('**/*');
 }
 
-await execFromRoot(['dprint', 'fmt', { batchedArguments: paths }]);
+await execFromRoot([...resolveToolCommand({ tool: 'dprint' }), 'fmt', { batchedArguments: paths }]);

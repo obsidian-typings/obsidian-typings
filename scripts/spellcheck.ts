@@ -1,6 +1,7 @@
 import process from 'node:process';
 
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
+import { resolveToolCommand } from './helpers/package-manager.ts';
 import {
   execFromRoot,
   getRootFolder
@@ -21,8 +22,7 @@ async function spellcheck(paths: string[] = []): Promise<void> {
   const rootFolder = getRootFolder();
 
   await execFromRoot([
-    'npx',
-    'cspell',
+    ...resolveToolCommand({ tool: 'cspell' }),
     '--no-progress',
     '--no-must-find-files',
     /*

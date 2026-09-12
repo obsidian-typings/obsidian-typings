@@ -2,17 +2,26 @@
  * @file
  *
  * Determines which package manager owns the project's dependency tree, so a script hop runs through it
- * instead of through a hardcoded `npm`.
+ * instead of through a hardcoded `npm`, and resolves a locally-installed tool to its own shim instead of
+ * through a hardcoded `npx`.
  *
  * A composite script that shells out to `npm run <step>` reassigns every sub-step to npm, whatever
  * installed the tree. Under `bun` that is not a slower path but a different one: the steps run against a
  * tree npm never resolved, and anything npm has to fetch to satisfy them comes from the registry rather
  * than from the install that is already on disk.
  *
- * This is the run half of `obsidian-dev-utils`' `src/script-utils/package-manager.ts`. The sibling repos
- * deliberately do not depend on that library, so the shared logic is carried here instead and kept
- * byte-for-byte identical across them (G10p). The tool-resolution half (`resolveToolCommand` and the
- * `node_modules/.bin` shim probe) is deliberately not ported.
+ * A hop to a locally-installed tool has the same shape. Delegating to `npx` assumes an npm-installed tree,
+ * and on Windows that assumption is fatal under `bun`: `bun install` writes `node_modules/.bin/<tool>.exe`,
+ * not the `<tool>.cmd` that npm's `npx` looks for, so `npx` misses the local install entirely and downloads
+ * the tool from the registry instead — which for `tsc` is the well-known decoy package, not TypeScript. A
+ * bare `<tool>` is the milder form of the same defect: it resolves through `PATH`, so it finds the local
+ * install only while a package-script runner happens to have put `node_modules/.bin` there, and silently
+ * finds a global one otherwise. Resolving the shim out of `node_modules/.bin` ourselves sidesteps the whole
+ * shim-format question, because every package manager writes one there.
+ *
+ * This is `obsidian-dev-utils`' `src/script-utils/package-manager.ts`. The sibling repos deliberately do
+ * not depend on that library, so the shared logic is carried here instead and kept byte-for-byte identical
+ * across them (G10p).
  */
 
 import type { PackageJson } from 'type-fest';
@@ -21,13 +30,17 @@ import {
   existsSync,
   readFileSync
 } from 'node:fs';
-import { join } from 'node:path/posix';
+import {
+  dirname,
+  join
+} from 'node:path/posix';
 import process from 'node:process';
 
 import {
   getRootFolder,
   toPosixPath
 } from './root.ts';
+import { assertNever } from './type-guards.ts';
 
 /**
  * A package manager that can own a project's dependency tree.
@@ -55,11 +68,26 @@ export enum PackageManager {
 }
 
 /**
+ * Parameters for {@link resolveToolCommand}.
+ */
+export interface ResolveToolCommandParams {
+  /**
+   * The current working folder to resolve from.
+   */
+  readonly cwd?: string | undefined;
+
+  /**
+   * The name of the locally-installed tool, as it appears in `node_modules/.bin`.
+   */
+  readonly tool: string;
+}
+
+/**
  * Determines which package manager owns the project's dependency tree.
  *
  * Every signal is collected before any of them is believed, because a repo carrying two lockfiles used to
- * resolve to whichever sat earlier in a fixed list — silently reassigning every package script to a
- * manager that never installed the tree.
+ * resolve to whichever sat earlier in a fixed list — silently reassigning every package script and every
+ * tool invocation to a manager that never installed the tree.
  *
  * The order is:
  *
@@ -119,6 +147,28 @@ export function getPackageManagerRunCommand(cwd?: string): string[] {
 }
 
 /**
+ * Builds the command parts that run a locally-installed tool, with the tool itself already included.
+ *
+ * Prefers the shim in the nearest `node_modules/.bin`, walking up through ancestor folders so a hoisted
+ * workspace install is still found. Falls back to the owning manager's exec form when no shim resolves —
+ * which is both the previous behavior and the only thing that works under yarn's Plug'n'Play, where
+ * `node_modules/.bin` does not exist at all.
+ *
+ * @param params - The parameters for the resolution.
+ * @returns The command parts, e.g. `['/project/node_modules/.bin/tsc']` or `['bun', 'x', 'tsc']`.
+ */
+export function resolveToolCommand(params: ResolveToolCommandParams): string[] {
+  const { cwd, tool } = params;
+  const shimPath = findBinShim({ cwd, tool });
+
+  if (shimPath !== null) {
+    return [shimPath];
+  }
+
+  return [...getPackageManagerExecCommand(cwd), tool];
+}
+
+/**
  * Matches the leading `<name>@` token of a `package.json` `packageManager` value.
  *
  * The `@` is required, because corepack's format is `<name>@<version>` — a bare name is a malformed
@@ -150,10 +200,25 @@ const PACKAGE_JSON = 'package.json';
 const USER_AGENT_NAME_REG_EXP = /^(?<name>[^/\s]+)\//;
 
 /**
- * The disagreements already reported, so a build that resolves the manager once per script hop still says
- * it only once.
+ * The disagreements already reported, so a build that resolves the manager once per package-script hop and
+ * once per tool invocation still says it only once.
  */
 const reportedDisagreements = new Set<string>();
+
+/**
+ * Parameters for {@link findBinShim}.
+ */
+interface FindBinShimParams {
+  /**
+   * The current working folder to resolve from.
+   */
+  readonly cwd?: string | undefined;
+
+  /**
+   * The name of the locally-installed tool.
+   */
+  readonly tool: string;
+}
 
 /**
  * A lockfile and the package manager whose presence it proves.
@@ -262,6 +327,80 @@ function detectPackageManagerFromUserAgent(): null | PackageManager {
 }
 
 /**
+ * Finds the `node_modules/.bin` shim for a tool, walking up from the project root through ancestor folders.
+ *
+ * @param params - The parameters for the lookup.
+ * @returns The absolute path of the shim, or `null` when none exists.
+ */
+function findBinShim(params: FindBinShimParams): null | string {
+  const { cwd, tool } = params;
+  const candidates = getShimCandidates(tool);
+  let currentFolder = getStartFolder(cwd);
+
+  while (currentFolder !== '.' && currentFolder !== '/') {
+    for (const candidate of candidates) {
+      const shimPath = join(currentFolder, 'node_modules', '.bin', candidate);
+      if (existsSync(shimPath)) {
+        return shimPath;
+      }
+    }
+
+    currentFolder = dirname(currentFolder);
+  }
+
+  return null;
+}
+
+/**
+ * Builds the command parts that run a one-off tool through the manager that owns the tree.
+ *
+ * @param cwd - The current working folder to resolve from.
+ * @returns The command parts, e.g. `['bun', 'x']`. The tool name is appended by the caller.
+ */
+function getPackageManagerExecCommand(cwd?: string): string[] {
+  const packageManager = getPackageManager(cwd);
+
+  switch (packageManager) {
+    case PackageManager.Bun: {
+      return ['bun', 'x'];
+    }
+    case PackageManager.Npm: {
+      return ['npx'];
+    }
+    case PackageManager.Pnpm: {
+      return ['pnpm', 'exec'];
+    }
+    case PackageManager.Yarn: {
+      return ['yarn', 'exec'];
+    }
+    default: {
+      return assertNever(packageManager);
+    }
+  }
+}
+
+/**
+ * Lists the shim file names to try for a tool, most specific first.
+ *
+ * On Windows only the executable forms are viable: npm and pnpm also write a shim with no extension, but
+ * that one is a `sh` script that `cmd.exe` cannot run, so it must never be chosen there.
+ *
+ * @param tool - The name of the locally-installed tool.
+ * @returns The candidate file names, in the order they should be tried.
+ */
+function getShimCandidates(tool: string): string[] {
+  if (process.platform !== 'win32') {
+    return [tool];
+  }
+
+  return [
+    `${tool}.cmd`,
+    `${tool}.exe`,
+    `${tool}.bat`
+  ];
+}
+
+/**
  * Resolves the folder to start a lookup from — the project root when there is one, the working folder
  * otherwise.
  *
@@ -352,7 +491,8 @@ function resolvePackageManager(params: ResolvePackageManagerParams): PackageMana
  *
  * `console.warn` rather than a debug channel: this runs in the build's own terminal, and a message nobody
  * sees unless they already suspect the problem leaves the failure exactly as silent as it was. Each
- * distinct message is printed once, because the manager is resolved once per package-script hop.
+ * distinct message is printed once, because the manager is resolved once per package-script hop and once
+ * per tool invocation.
  *
  * @param params - The parameters for the report.
  */

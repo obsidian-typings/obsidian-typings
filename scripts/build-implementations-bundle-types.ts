@@ -1,4 +1,5 @@
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
+import { resolveToolCommand } from './helpers/package-manager.ts';
 import { execFromRoot } from './helpers/root.ts';
 
 exitIfScriptDisabled();
@@ -7,4 +8,11 @@ exitIfScriptDisabled();
 // `skipLibCheck: false` and would fail on broken upstream `.d.ts` (e.g. `obsidian.d.ts`). The
 // generated bundle is validated instead by `build:validate-bundle-types`, which ignores
 // diagnostics that originate outside the bundle.
-await execFromRoot('dts-bundle-generator ./src/obsidian/implementations/index.ts --out-file ./dist/cjs/implementations.d.cts --sort --no-check');
+await execFromRoot([
+  ...resolveToolCommand({ tool: 'dts-bundle-generator' }),
+  './src/obsidian/implementations/index.ts',
+  '--out-file',
+  './dist/cjs/implementations.d.cts',
+  '--sort',
+  '--no-check'
+]);
