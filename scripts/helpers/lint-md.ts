@@ -11,6 +11,7 @@ import {
   MD_FALLBACK_EXCLUDES,
   UNCHECKED_FOLDERS
 } from './md-ignores.ts';
+import { resolveToolCommand } from './package-manager.ts';
 import { execFromRoot } from './root.ts';
 
 interface LintMdParams {
@@ -25,8 +26,7 @@ export async function lintMd(params: LintMdParams): Promise<void> {
   const { paths = [], shouldFix = false } = params;
 
   await execFromRoot([
-    'npx',
-    'markdownlint-cli2',
+    ...resolveToolCommand({ tool: 'markdownlint-cli2' }),
     ...(shouldFix ? ['--fix'] : []),
     /*
      * Explicit paths are merged with the config `globs`, so without this an explicit path would still
@@ -44,8 +44,7 @@ export async function lintMd(params: LintMdParams): Promise<void> {
     ? paths
     : await getMarkdownFiles();
   await execFromRoot([
-    'npx',
-    'linkinator',
+    ...resolveToolCommand({ tool: 'linkinator' }),
     /*
      * GitHub answers 404 to logged-out requests for a repo's stargazers page, so linkinator reports the
      * README's star badge link as broken even though it resolves fine in a browser. Keep the pattern free of
