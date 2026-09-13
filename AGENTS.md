@@ -120,8 +120,8 @@ before the first real release, which starts at `1.1.0`.
 Members that exist at runtime but are not modeled yet. Each names the member, the Obsidian version it was
 observed in, and the target branch(es).
 
-None currently — the last ones, the suggestion-chooser members, were modeled on both latest
-release branches by `T588-P8`.
+None currently — the last ones, the suggestion-chooser members, are modeled on both latest
+release branches.
 
 ## Documentation
 
