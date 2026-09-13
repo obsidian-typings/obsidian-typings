@@ -7,7 +7,7 @@
     "`expect`. Equal means the pin is still required; different means the condition that justified the pin has changed",
     "and the pin should be re-examined. `check: null` means no mechanical test exists - it is reported for manual review",
     "on every run instead of going quiet. Every exact pin must have an entry here, and every entry must name a package",
-    "that is actually present in the declared section; the script reports either mismatch. See rule G100."
+    "that is actually present in the declared section; the script reports either mismatch."
   ],
   "pins": {
     "typescript": {
