@@ -389,6 +389,18 @@ function getPerfectionistConfigs(): Linter.Config[] {
         }],
         'perfectionist/sort-union-types': 'error'
       }
+    },
+    {
+      /*
+       * Generated declaration files, reproduced from their tools' own JSON schemas. Member order comes from
+       * the generator, so it is not ours to choose: an index signature is emitted first and this rule's
+       * group list sorts it last, and hand-moving it is what made these files diverge from the copies the
+       * sibling projects keep byte-for-byte identical.
+       */
+      files: ['scripts/helpers/@types/**/*.d.ts'],
+      rules: {
+        'perfectionist/sort-interfaces': 'off'
+      }
     }
   ]);
 }
