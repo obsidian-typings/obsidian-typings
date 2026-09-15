@@ -13,6 +13,7 @@ import {
 import { commit } from './helpers/git.ts';
 import {
   doesPackageExist,
+  getNpmUsername,
   getScopedPackageName
 } from './helpers/npm.ts';
 import {
@@ -96,7 +97,12 @@ async function main(): Promise<void> {
   const packageName = getScopedPackageName(newBranchSpec);
   if (!await doesPackageExist(packageName)) {
     await generateMainReadme();
-    printBootstrapRequired(packageName, newBranchSpec);
+
+    // The bootstrap step is the only release step that needs a local npm credential, and this is where the
+    // operator is standing when they are told to run it -- so check the credential HERE, where saying "log in
+    // first" costs one `npm whoami` on a path that is already stopping, rather than letting them discover it
+    // one command later as an E404 npm reports for an unauthorized PUT to a name that does not exist yet.
+    printBootstrapRequired(packageName, newBranchSpec, getNpmUsername());
     return;
   }
 
@@ -105,11 +111,20 @@ async function main(): Promise<void> {
   await generateMainReadme();
 }
 
-function printBootstrapRequired(packageName: string, branchSpec: BranchSpec): void {
+function printBootstrapRequired(packageName: string, branchSpec: BranchSpec, npmUsername: null | string): void {
   console.log([
     '',
     `Branch created, but ${packageName} does not exist on npm yet, so the release was NOT dispatched.`,
     '',
+    ...npmUsername === null
+      ? [
+        'npm does not currently accept this machine\'s credential, and claiming the name needs one. Log in first,',
+        'or the step below dies with an E404 that looks like a registry-side refusal and is not one:',
+        '',
+        '  npm login',
+        ''
+      ]
+      : [`Logged in to npm as ${npmUsername}.`, ''],
     'Claim the name and attach its trusted publisher first:',
     '',
     `  npm run bootstrap-new-package -- ${branchSpec.obsidianVersion} ${branchSpec.channel}`,
