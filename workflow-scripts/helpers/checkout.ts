@@ -20,6 +20,10 @@ export async function checkout(targetBranch: string, withScripts: boolean): Prom
 
   await execFromRoot(`git checkout "${targetBranch}"`);
   if (withScripts) {
-    await execFromRoot('git restore --source=main --worktree -- ./workflow-scripts');
+    await restoreWorkflowScripts();
   }
+}
+
+export async function restoreWorkflowScripts(): Promise<void> {
+  await execFromRoot('git restore --source=main --worktree -- ./workflow-scripts');
 }
