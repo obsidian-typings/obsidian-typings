@@ -97,25 +97,25 @@ the repo's own `package.json` — both wrappers in `publish-release.ts` and the 
 generated manifest has to do the same, or its publish dies with `E422` after the packages ahead of it in the
 run have already gone out.
 
-### A new Obsidian version needs one manual step
+### A new Obsidian version needs two manual steps, and the second is the one that gets skipped
 
-A new release branch mints a package name npm has never seen, and a publisher can only be attached to a
-package that already exists — npm has no pre-registration ([npm/cli#8544](https://github.com/npm/cli/issues/8544)).
-CI has no credential capable of creating it, so `create-new-release-branch` stops instead of dispatching a
-release that could not succeed, and tells you to run:
+A new release branch mints a package name npm has never seen, and a publisher can only be attached to a package that already exists — npm has no pre-registration ([npm/cli#8544](https://github.com/npm/cli/issues/8544)). CI has no credential capable of creating it, so `create-new-release-branch` stops instead of dispatching a release that could not succeed, and tells you to run:
 
 ```bash
 npm run bootstrap-new-package -- <obsidianVersion> <public|catalyst>
 ```
 
-That publishes a `0.0.0` placeholder under a `bootstrap` dist-tag — claiming the name, and needing your
-interactive 2FA to do it — then prints the exact fields to enter on npmjs.com. Save the trusted publisher,
-then `npm run release`. Every subsequent release of that package is fully automated.
+That publishes a `0.0.0` placeholder under a `bootstrap` dist-tag — claiming the name, and needing your interactive 2FA to do it — then prints the exact fields to enter on npmjs.com. **Saving that form is a second, separate step.** The two fail independently and only the first announces itself: claiming the name is interactive and either works or errors in front of you, while attaching the publisher is a form on a web page that nothing checks afterwards. Save it, then `npm run release`. Every subsequent release of that package is fully automated.
 
-The placeholder deliberately does not take the `latest` tag, so nothing installs an empty stub in the window
-before the first real release, which starts at `1.1.0`.
+Skipping the second step is invisible until CI publishes, and then it surfaces as a bare `E404` — the same misreading the local half produces, arriving from the other side. `npm publish` requests an OIDC credential, the registry refuses it because no publisher is attached, and npm treats that refusal as "this registry does not offer OIDC": it logs at `verbose` and publishes anyway, with no credential at all. The registry then answers the unauthorized `PUT` with **404**, so the run dies reporting that a package which plainly exists `could not be found or you do not have permission`. It happened twice on 2026-09-14, on `obsidian-catalyst/1.14.0` and `1.14.1`, and it is not a cheap failure: the version bump is committed, pushed and tagged *before* the first publish, so each attempt burns a minor version and leaves a tag pointing at a release that never happened.
 
-That manual step is also the **only** step in the whole release path that needs a local npm credential — every other publish goes out from CI through trusted publishing, with no token anywhere — so it is the one place a stale `npm login` can surface, and the one place nobody expects it. It surfaces badly: npm answers an *unauthorized* `PUT` to a package that does not exist yet with **404**, not 401, because it will not confirm the existence of something you may not read. A dead credential therefore reads as `E404 ... could not be found or you do not have permission` against the very name you are claiming, as if the registry had refused the scope. Both scripts now ask `npm whoami` first and say `npm login` in those words instead — `bootstrap-new-package` before it builds or publishes anything (but *after* its already-claimed short-circuit, which needs no credential, so re-running stays safe), and `create-new-release-branch` on the path where it hands the step over. The 2FA prompt never appearing is the original tell, if you ever meet the raw error again.
+Two guards now stand in front of that. `publish-release.ts` asks npm the same question `npm publish` asks and discards — the OIDC token exchange — for **every** package the run will publish, before it installs, builds, or bumps anything; a definite refusal aborts the run having changed nothing, while an inconclusive answer is reported and allowed through. And when a publish fails anyway, the error names the likely cause and the `/access` page to fix it instead of passing npm's message through.
+
+**"The package exists" is not the predicate for "the bootstrap is done"**, and both scripts used to treat it as one. There is no way to read a package's trusted publisher — `npm access` has no subcommand for it and the registry exposes no endpoint — so what is asked instead is whether anything has ever published through the name. A package carrying a real release has already published from this workflow, so its publisher is attached; one carrying only the placeholder has not, and `create-new-release-branch` refuses to dispatch into it rather than burning a version to find out.
+
+The placeholder is published under a `bootstrap` dist-tag, but on a brand-new package it takes `latest` as well — there is no other version for `latest` to point at — so installing the name before its first real release gets an empty stub. That window is normally minutes wide, and only stays open when the hand-back above stalls.
+
+Claiming the name is also the **only** step in the whole release path that needs a local npm credential — every other publish goes out from CI through trusted publishing, with no token anywhere — so it is the one place a stale `npm login` can surface, and the one place nobody expects it. It surfaces badly: npm answers an *unauthorized* `PUT` to a package that does not exist yet with **404**, not 401, because it will not confirm the existence of something you may not read. A dead credential therefore reads as `E404 ... could not be found or you do not have permission` against the very name you are claiming, as if the registry had refused the scope. Both scripts now ask `npm whoami` first and say `npm login` in those words instead — `bootstrap-new-package` before it builds or publishes anything (but *after* its already-claimed short-circuit, which needs no credential, so re-running stays safe), and `create-new-release-branch` on the path where it hands the step over. The 2FA prompt never appearing is the original tell, if you ever meet the raw error again.
 
 ### Which branch a new release branch is cut from
 

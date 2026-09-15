@@ -12,8 +12,17 @@
  * whenever a new Obsidian version mints a new package name. It publishes a placeholder version so the name
  * exists and the publisher can be attached, and prints exactly what to enter on npmjs.com.
  *
- * The placeholder is published under its own dist-tag rather than `latest`, so nothing installing the
- * package in the window before the first real release picks up an empty stub. The real release starts at
+ * Note that the step this script covers is the FIRST of two. Claiming the name is what needs a credential and
+ * a 2FA prompt; attaching the trusted publisher afterwards is a form on npmjs.com, and is the half that gets
+ * skipped -- silently, because nothing fails until CI tries to publish and is answered with a bare `E404`.
+ * That is why a re-run against an already-claimed name still prints the instructions rather than declaring
+ * the job done, and why `create-new-release-branch.ts` will not dispatch a release into a name that has only
+ * ever held the placeholder.
+ *
+ * The placeholder is published under its own `bootstrap` dist-tag. That does NOT keep it off `latest`: on a
+ * brand-new package there is no other version for `latest` to point at, so it holds both (measured
+ * 2026-09-14). Installing the name before its first real release therefore gets an empty stub -- a window
+ * normally minutes wide, and only wide open when the hand-back above stalls. The real release starts at
  * `1.1.0`, well above the placeholder, so it takes `latest` when it lands and version ordering is unaffected.
  */
 
@@ -30,21 +39,17 @@ import type { BranchSpec } from './helpers/branchSpec.ts';
 
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import {
-  doesPackageExist,
   getNpmUsername,
+  getPackageRegistryState,
   getScopedPackageName,
+  getTrustedPublisherInstructions,
+  PLACEHOLDER_VERSION,
   REPOSITORY
 } from './helpers/npm.ts';
 
 exitIfScriptDisabled();
 
-/* The GitHub coordinates a trusted publisher is pinned to. All packages here publish from the same workflow. */
-const GITHUB_OWNER = 'obsidian-typings';
-const GITHUB_REPOSITORY = 'obsidian-typings';
-const PUBLISH_WORKFLOW_FILE_NAME = 'publish-release.yml';
-
 const BOOTSTRAP_FOLDER = '.bootstrap-tmp';
-const PLACEHOLDER_VERSION = '0.0.0';
 const PLACEHOLDER_DIST_TAG = 'bootstrap';
 
 async function main(): Promise<void> {
@@ -57,9 +62,18 @@ async function main(): Promise<void> {
 
   const packageName = getScopedPackageName({ channel, obsidianVersion });
 
-  if (await doesPackageExist(packageName)) {
-    console.log(`${packageName} already exists on npm, so there is nothing to claim.`);
-    printTrustedPublisherInstructions(packageName);
+  const registryState = await getPackageRegistryState(packageName);
+
+  if (registryState === 'released') {
+    console.log(`${packageName} already carries a real release, so both halves of this step are long done.`);
+    return;
+  }
+
+  if (registryState === 'placeholderOnly') {
+    console.log(`${packageName} is already claimed, so there is nothing to claim.`);
+    console.log('Nothing has ever published through it, though, so its trusted publisher may still be missing.');
+    console.log('That is the half of this step that gets skipped; it surfaces in CI as a bare E404 and nowhere else.');
+    console.log(getTrustedPublisherInstructions(packageName));
     return;
   }
 
@@ -67,7 +81,7 @@ async function main(): Promise<void> {
   // package that does not exist yet with **404**, not 401 -- it will not confirm the existence of something you
   // may not read -- so a stale login surfaces as `E404 ... could not be found or you do not have permission`
   // against the very name this script is trying to claim, and reads as a registry-side refusal. (Measured
-  // 2026-09-14: the name was genuinely free, `doesPackageExist` above said so over an unauthenticated fetch,
+  // 2026-09-14: the name was genuinely free, `getPackageRegistryState` above said so over an unauthenticated fetch,
   // and the machine's token had simply expired.) The 2FA prompt never appearing is the tell, and asking
   // `npm whoami` first is the cheap way to say so in words.
   //
@@ -88,8 +102,8 @@ async function main(): Promise<void> {
 
   await publishPlaceholder(packageName);
 
-  console.log(`\nClaimed ${packageName}.`);
-  printTrustedPublisherInstructions(packageName);
+  console.log(`\nClaimed ${packageName}. That was the first of two steps, and the second is below.`);
+  console.log(getTrustedPublisherInstructions(packageName));
 }
 
 async function publishPlaceholder(packageName: string): Promise<void> {
@@ -130,25 +144,6 @@ async function publishPlaceholder(packageName: string): Promise<void> {
   } finally {
     await rm(BOOTSTRAP_FOLDER, { force: true, recursive: true });
   }
-}
-
-function printTrustedPublisherInstructions(packageName: string): void {
-  console.log([
-    '',
-    'Now attach the trusted publisher, or CI still will not be able to publish it:',
-    '',
-    `  1. Open https://www.npmjs.com/package/${packageName}/access`,
-    '  2. Under "Trusted Publisher", choose GitHub Actions and enter, exactly (every field is case-sensitive):',
-    '',
-    `       Organization or user: ${GITHUB_OWNER}`,
-    `       Repository:           ${GITHUB_REPOSITORY}`,
-    `       Workflow filename:    ${PUBLISH_WORKFLOW_FILE_NAME}`,
-    '       Environment name:     (leave empty)',
-    '       Allowed actions:      npm publish',
-    '',
-    '  3. Save, then release the branch as usual with `npm run release`.',
-    ''
-  ].join('\n'));
 }
 
 await main();
