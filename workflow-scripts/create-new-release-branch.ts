@@ -12,9 +12,10 @@ import {
 } from './helpers/exec.ts';
 import { commit } from './helpers/git.ts';
 import {
-  doesPackageExist,
   getNpmUsername,
-  getScopedPackageName
+  getPackageRegistryState,
+  getScopedPackageName,
+  getTrustedPublisherInstructions
 } from './helpers/npm.ts';
 import {
   generateMainReadme,
@@ -93,16 +94,31 @@ async function main(): Promise<void> {
   // A new Obsidian version means a package name npm has never seen, and CI cannot create one: it publishes
   // through trusted publishing, which is configured per package and so requires the package to already
   // exist. Dispatching the release here would burn a version number on a run that cannot succeed, so stop
-  // and hand the one step that needs a human back to the human.
+  // and hand the steps that need a human back to the human.
+  //
+  // "Exists" is NOT the predicate for "the hand-back is done", which is what this used to ask. The hand-back
+  // is two steps -- claim the name, then attach its trusted publisher -- and only the first of them is
+  // visible from here, because npm exposes no way to read a package's publisher. So the question asked is
+  // the one that CAN be answered: has anything ever published through this name? A package carrying a real
+  // release has already published from this very workflow, so its publisher is attached. One carrying only
+  // the bootstrap placeholder has not, and dispatching into it burns a version on a run that dies with a
+  // bare `E404` -- measured twice on 2026-09-14, on `obsidian-catalyst/1.14.0` and `1.14.1`.
   const packageName = getScopedPackageName(newBranchSpec);
-  if (!await doesPackageExist(packageName)) {
+  const registryState = await getPackageRegistryState(packageName);
+
+  if (registryState !== 'released') {
     await generateMainReadme();
 
-    // The bootstrap step is the only release step that needs a local npm credential, and this is where the
-    // operator is standing when they are told to run it -- so check the credential HERE, where saying "log in
-    // first" costs one `npm whoami` on a path that is already stopping, rather than letting them discover it
-    // one command later as an E404 npm reports for an unauthorized PUT to a name that does not exist yet.
-    printBootstrapRequired(packageName, newBranchSpec, getNpmUsername());
+    if (registryState === 'missing') {
+      // The bootstrap step is the only release step that needs a local npm credential, and this is where the
+      // operator is standing when they are told to run it -- so check the credential HERE, where saying "log in
+      // first" costs one `npm whoami` on a path that is already stopping, rather than letting them discover it
+      // one command later as an E404 npm reports for an unauthorized PUT to a name that does not exist yet.
+      printBootstrapRequired(packageName, newBranchSpec, getNpmUsername());
+      return;
+    }
+
+    printTrustedPublisherRequired(packageName);
     return;
   }
 
@@ -132,6 +148,19 @@ function printBootstrapRequired(packageName: string, branchSpec: BranchSpec, npm
     'That script publishes a placeholder and prints what to enter on npmjs.com. Once the trusted publisher',
     'is saved, release the branch with `npm run release`.',
     ''
+  ].join('\n'));
+}
+
+function printTrustedPublisherRequired(packageName: string): void {
+  console.log([
+    '',
+    `Branch created, but nothing has ever published through ${packageName}, so the release was NOT dispatched.`,
+    '',
+    'The name is claimed -- a bootstrap placeholder holds it -- so the first half of the hand-back is done.',
+    'Whether the second half is done cannot be read from here: npm offers no way to ask a package who is',
+    'allowed to publish it. If the trusted publisher is already attached, just run `npm run release`. If it is',
+    'not, CI dies with an `E404` on a name that plainly exists, after burning this branch\'s first version.',
+    getTrustedPublisherInstructions(packageName)
   ].join('\n'));
 }
 
