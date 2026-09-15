@@ -31,6 +31,7 @@ import type { BranchSpec } from './helpers/branchSpec.ts';
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import {
   doesPackageExist,
+  getNpmUsername,
   getScopedPackageName,
   REPOSITORY
 } from './helpers/npm.ts';
@@ -62,7 +63,27 @@ async function main(): Promise<void> {
     return;
   }
 
-  console.log(`Claiming ${packageName} with a ${PLACEHOLDER_VERSION} placeholder.`);
+  // Preflight the credential before building or publishing anything. npm answers an *unauthorized* PUT to a
+  // package that does not exist yet with **404**, not 401 -- it will not confirm the existence of something you
+  // may not read -- so a stale login surfaces as `E404 ... could not be found or you do not have permission`
+  // against the very name this script is trying to claim, and reads as a registry-side refusal. (Measured
+  // 2026-09-14: the name was genuinely free, `doesPackageExist` above said so over an unauthenticated fetch,
+  // and the machine's token had simply expired.) The 2FA prompt never appearing is the tell, and asking
+  // `npm whoami` first is the cheap way to say so in words.
+  //
+  // This is deliberately AFTER the existence short-circuit: a re-run against an already-claimed name only
+  // prints instructions, and needs no credential at all. That is what makes the script safe to re-run.
+  const npmUsername = getNpmUsername();
+
+  if (!npmUsername) {
+    throw new Error(
+      `npm rejected this machine's credential, so claiming ${packageName} would fail with a bare E404 that reads`
+        + ' as a registry-side refusal. Run `npm login` in this terminal and re-run this script -- it is safe to'
+        + ' re-run, and it is the only step in the release path that needs a local npm credential at all.'
+    );
+  }
+
+  console.log(`Claiming ${packageName} with a ${PLACEHOLDER_VERSION} placeholder, as npm user ${npmUsername}.`);
   console.log('npm will prompt for your 2FA one-time password -- that prompt is the whole point of this step.');
 
   await publishPlaceholder(packageName);

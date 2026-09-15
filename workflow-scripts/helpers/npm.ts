@@ -10,6 +10,8 @@
  * differently, the bootstrap would claim one package and CI would fail publishing to another.
  */
 
+import { spawnSync } from 'node:child_process';
+
 import type { BranchSpec } from './branchSpec.ts';
 
 export const NPM_SCOPE = '@obsidian-typings';
@@ -55,6 +57,31 @@ export async function doesPackageExist(packageName: string): Promise<boolean> {
  */
 export function getLatestWrapperPackageName(channel: BranchSpec['channel']): string {
   return `${NPM_SCOPE}/obsidian-${channel}-latest`;
+}
+
+/**
+ * Resolves the npm account this machine's credential belongs to, or `null` when the registry will not accept it.
+ *
+ * `npm whoami` is the one npm command that asks the registry who you are without changing anything, and its
+ * failure covers both halves of what goes wrong here (measured 2026-09-14, npm 12.0.2): no token configured at
+ * all exits 1 with `ENEEDAUTH`, and a token the registry no longer accepts exits 1 with `E401`. Both are fixed
+ * by the same `npm login`, so a caller has no reason to tell them apart.
+ *
+ * The exit code is the signal, not stdout: npm writes its diagnostics to stderr and leaves stdout empty on
+ * either failure. `shell: true` because npm is a `.cmd` on Windows, which this script path targets.
+ *
+ * Not routed through `execFromRoot`: reading an exit code needs its detail mode, and that mode is currently
+ * unreachable -- the overloads discriminate on `withDetails` while the implementation branches on
+ * `shouldIncludeDetails`.
+ */
+export function getNpmUsername(): null | string {
+  const result = spawnSync('npm', ['whoami'], { encoding: 'utf-8', shell: true });
+
+  if (result.status !== 0) {
+    return null;
+  }
+
+  return result.stdout.trim() || null;
 }
 
 /**
