@@ -115,6 +115,12 @@ then `npm run release`. Every subsequent release of that package is fully automa
 The placeholder deliberately does not take the `latest` tag, so nothing installs an empty stub in the window
 before the first real release, which starts at `1.1.0`.
 
+### Which branch a new release branch is cut from
+
+`create-new-release-branch` derives the base branch rather than taking it as an argument, from one ordering that is easy to get backwards: **for one and the same Obsidian version the `public` branch is cut AFTER the `catalyst` one**, so on a version tie `public` is the *later* of the two and is the base. The script's channel comparison is `<= 0` for exactly that reason, and the equal-version guard below it encodes the same ordering from the other side — it refuses a new `catalyst` at the latest version and lets a new `public` through. Change either one and they contradict each other; a `< 0` there silently based `1.14.0` on the older of the two `1.13.7` branches.
+
+The base **content** comes from `origin/<baseBranch>`, not from the local ref, because the base branch *name* is chosen by reading the remote refs. The local `release/...` branch is never checked out or moved, so local unpushed commits are neither shipped nor destroyed. `npm run checkout` is the opposite case by design: it checks out your local ref, which is what you want when you have local work in the tree.
+
 ## Reported Gaps
 
 Members that exist at runtime but are not modeled yet. Each names the member, the Obsidian version it was
