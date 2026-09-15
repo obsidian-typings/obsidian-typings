@@ -3,7 +3,7 @@ import { compare } from 'semver';
 import type { BranchSpec } from './helpers/branchSpec.ts';
 
 import { generateBranchName } from './helpers/branchSpec.ts';
-import { checkout } from './helpers/checkout.ts';
+import { restoreWorkflowScripts } from './helpers/checkout.ts';
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import {
   editPackageJson,
@@ -40,7 +40,12 @@ async function main(): Promise<void> {
   let latestVersionChannel: 'catalyst' | 'public';
   let latestVersion: string;
 
-  if (compare(latestCatalystVersion, latestPublicVersion) < 0) {
+  // For one and the same Obsidian version the public branch is cut AFTER the catalyst one, so on a tie
+  // public is the later of the two, and it is the branch a new release has to be based on. The comparison
+  // is therefore `<= 0`, not `< 0`: an equal pair used to fall into the `else` and pick catalyst, the older
+  // of the two. The equal-version guard below encodes the very same ordering -- it refuses a new `catalyst`
+  // at the latest version and lets a new `public` through -- so this used to contradict its own guard.
+  if (compare(latestCatalystVersion, latestPublicVersion) <= 0) {
     latestVersionChannel = 'public';
     latestVersion = latestPublicVersion;
   } else {
@@ -66,8 +71,20 @@ async function main(): Promise<void> {
   const newBranchSpec: BranchSpec = { channel: newVersionChannel, obsidianVersion: newVersion };
   const newBranch = generateBranchName(newBranchSpec);
 
-  await checkout(latestBranch, true);
-  await execFromRoot(`git checkout -b "${newBranch}"`);
+  // The base branch NAME is chosen from the REMOTE refs -- `getLatestVersion()` fetches and reads
+  // `origin/release/obsidian-<channel>/*` -- so the base CONTENT has to come from the remote ref too.
+  // A bare `git checkout "${latestBranch}"` cuts from whatever the LOCAL ref happens to be, which
+  // silently bases a release branch on stale content when the local checkout is behind, and smuggles
+  // local unpushed commits into it when the local checkout is ahead. Branching straight off
+  // `origin/${latestBranch}` also leaves the local branch alone, so local work is neither destroyed
+  // nor shipped. `--no-track` keeps the new branch from inheriting the base's upstream; the
+  // `git push -u` below sets its own. `getLatestVersion()` has already fetched, so `origin/...` is current.
+  await execFromRoot(`git checkout -b "${newBranch}" --no-track "origin/${latestBranch}"`);
+
+  // Release branches `.gitignore` `/workflow-scripts`, so these arrive as ignored untracked files that
+  // survive every later branch switch and are never committed. They have to be in place before
+  // `generateReadme()` (it reads `./workflow-scripts/README.template.md`) and before `npm run release`.
+  await restoreWorkflowScripts();
   await resetPackageVersion();
   await execFromRoot(`git push -u origin "${newBranch}"`);
   await generateReadme(newBranchSpec, changelogUrl);
