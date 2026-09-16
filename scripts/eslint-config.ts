@@ -453,7 +453,7 @@ function getLocalPluginConfigs(): Linter.Config[] {
     },
     rules: {
       'local/no-unused-params-members': 'error',
-      'local/no-used-underscore-params': 'error',
+      'local/no-used-underscore-variables': 'error',
       'local/readonly-params-options-result-members': 'error'
     }
   }]);
