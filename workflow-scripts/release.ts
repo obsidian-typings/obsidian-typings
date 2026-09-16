@@ -13,9 +13,13 @@ async function main(): Promise<void> {
     projectRoot = dirname(parentDir);
   }
 
-  execFromRoot(`git -C ${projectRoot} restore --source=origin/main --worktree -- ./workflow-scripts`);
-  execFromRoot(`npm install -C ${projectRoot}/workflow-scripts`);
-  execFromRoot(`jiti ${projectRoot}/workflow-scripts/release-impl.ts`);
+  // These three are a sequence, not three independent commands: the restore replaces
+  // `workflow-scripts` with `main`'s copy, the install resolves that copy's dependencies, and only then
+  // can `release-impl.ts` be run. Un-awaited they raced, and a rejection in any of them was an unhandled
+  // rejection rather than a failed release.
+  await execFromRoot(`git -C ${projectRoot} restore --source=origin/main --worktree -- ./workflow-scripts`);
+  await execFromRoot(`npm install -C ${projectRoot}/workflow-scripts`);
+  await execFromRoot(`jiti ${projectRoot}/workflow-scripts/release-impl.ts`);
 }
 
 await main();
