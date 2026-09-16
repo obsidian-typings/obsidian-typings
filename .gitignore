@@ -12,6 +12,11 @@ docs/src/content/docs/api/namespaces/**/*
 /docs/src/content/docs/api/README.md
 /src/full-types.d.ts
 
+# Astro's generated type cache, deliberately untracked since `chore(docs): upgrade to Astro 6 +
+# Starlight 0.39` ("Stop tracking docs/.astro/ generated files"). Keep it a whole-directory ignore:
+# a narrower entry tracked three of these files once, and because `typeScriptFiles` covers
+# `docs/**/*.ts` that put ESLint on machine-written code, which needed an eleven-rule exemption
+# block in `scripts/eslint-config.ts` to stay quiet.
 /docs/.astro/
 /docs/.cache
 
