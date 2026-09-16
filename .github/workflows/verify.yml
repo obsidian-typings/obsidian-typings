@@ -1,0 +1,86 @@
+name: Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A second push to the same branch makes the first run's answer worthless, so it is cancelled rather
+# than left to finish. `schedule` already competes for hosted runners here (see
+# check-obsidian-package-update.yml); this keeps `verify` from adding queue pressure of its own.
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # `npm ci` runs `prepare`, which installs husky. A runner has no commits to hook.
+      HUSKY: '0'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            workflow-scripts/package-lock.json
+            docs/package-lock.json
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install workflow-scripts dependencies
+        run: npm ci
+        working-directory: ./workflow-scripts
+
+      # `npm run lint` at the root reaches `docs/` too: that tree has no `eslint.config.mts` of its
+      # own, so the nearest config to its files is the root one, which names `docs/**/*.ts` and
+      # carries three dedicated override blocks. Typed linting there resolves through this install.
+      - name: Install docs dependencies
+        id: install
+        run: npm ci
+        working-directory: ./docs
+
+      # Every gate runs even after an earlier one fails, so one push reports every problem it has
+      # rather than one per fix. They are skipped only when an install failed, where a red gate
+      # would say nothing about the code.
+      - name: Typecheck
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run typecheck
+
+      - name: Lint
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run lint
+
+      - name: Lint markdown
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run lint:md
+
+      - name: Check formatting
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run format:check
+
+      - name: Spellcheck
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run spellcheck
+
+      # A separate npm package with its own tsconfig and its own dependency tree. The root
+      # `typecheck` does `include` these files, but resolves them against the root's deps, `lib` and
+      # `target`, so it is a near-miss rather than a substitute. Its `lint` needs no second
+      # invocation -- the root one already gates it through workflow-scripts/eslint.config.mts.
+      - name: Typecheck workflow-scripts
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run typecheck
+        working-directory: ./workflow-scripts
