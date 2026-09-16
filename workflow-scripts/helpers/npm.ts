@@ -113,6 +113,19 @@ interface TokenExchangeResponse {
  * prompt. Inheriting the terminal is the only way this call can succeed, and it is the same reason
  * `publishPlaceholder` in `bootstrap-new-package.ts` inherits it.
  *
+ * Neither caller reaches this without already knowing the package has no publisher — a name claimed seconds
+ * earlier by `publishPlaceholder`, or a definite `none` from {@link readTrustedPublisherState} — and that is
+ * deliberate, because what a SECOND configuration does to a package that already has one is not known.
+ * `createConfig` in `npm/lib/trust-cmd.js` POSTs `[trustConfig]` and reads nothing beforehand, so the client
+ * cannot reconcile and the registry's answer is the whole of the behavior. npm's own bundled `npm-trust.md`
+ * says the registry "only supports one configuration per package" and that creating a second "will result in
+ * an error", which would make a blind call harmless — but that paragraph was written on 2026-02-11 and last
+ * touched on 2026-06-03, and npmjs.com's trusted-publishers page documented on 2026-09-03 that a package may
+ * carry up to TEN publishers, added and deleted independently. A registry that accepts ten is not one that
+ * refuses the second, so the client doc is stale in exactly the direction that matters: a blind call may
+ * leave a duplicate behind rather than being turned away. Settling it needs a write on that endpoint, and
+ * every write there costs a one-time password — which is why it is still open rather than merely untried.
+ *
  * Returns `false` rather than throwing, because every caller's failure path is to print
  * {@link getTrustedPublisherInstructions} and carry on. A publisher that could not be attached from here
  * leaves the repo in the state it has always been in; that is not worth aborting a script over.

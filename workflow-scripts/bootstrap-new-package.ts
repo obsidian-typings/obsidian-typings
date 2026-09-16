@@ -200,11 +200,13 @@ async function publishPlaceholder(packageName: string): Promise<void> {
  * there is none.
  *
  * Only the definite `none` is acted on. An `unknown` answer is left alone rather than attached "just in
- * case", because `npm trust github` creates a configuration rather than reconciling one -- a second call
- * against a package that already has a publisher adds a duplicate record, and nothing here can tell whether
- * that would be a duplicate or the first. The cost of guessing wrong is a permanent, silent mess in the
- * package's trust list; the cost of not guessing is one question the operator can answer, which is what the
- * `unknown` arm of `offerRelease` is for.
+ * case", because `npm trust github` creates a configuration rather than reconciling one, and what the
+ * registry does with a second one is genuinely unsettled -- {@link attachTrustedPublisher} carries what is
+ * and is not known about that, including the npm doc that reads like an answer and is stale. This arm used
+ * to state flatly that a second call "adds a duplicate record"; nobody had made one, so the claim was as
+ * unverified as the behavior it warned about. The asymmetry is what survives the correction: guessing wrong
+ * risks a duplicate in the package's trust list, while not guessing costs one question the operator can
+ * answer, which is what the `unknown` arm of `offerRelease` is for.
  */
 async function resolvePublisher(packageName: string): Promise<TrustedPublisherState> {
   const publisherState = await readTrustedPublisherState(packageName);
