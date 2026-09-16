@@ -117,6 +117,8 @@ An **exact** version (no `^`) is how a dependency is held back here, and it is a
 
 `main` carries its own toolchain: the release branches keep a separate `package.json`, and `checkout.ts` only ever restores `./workflow-scripts` from `main`. Pruning a devDependency here does not touch what a release branch builds with.
 
+That split is in `package.json`; `node_modules` does **not** follow it. There is one checkout and one install, and `git checkout` leaves the install exactly as the last `npm ci` built it, so moving between `main` and a release branch leaves the wrong dependency tree on disk. In the direction that has been measured it fails loudly and early: a release-branch `npm run build` against `main`'s install dies at the `lint` step with `Cannot find module 'eslint-plugin-jsdoc'`, because `main` carries neither `eslint-plugin-jsdoc` nor `eslint-plugin-tsdoc` while a release branch's `scripts/eslint-config.ts` requires both. **Run `npm ci` after checking out a release branch, and again after switching back** - the second one is the courtesy that keeps the next session on `main` from meeting the mirror image of this.
+
 ## Supported Surfaces
 
 Only the **latest `release/obsidian-public/*`** and the **latest `release/obsidian-catalyst/*`** branches are actively maintained. Older release branches are frozen — type fixes and new modeling land on the two latest branches only. (Referred to by role, not by pinned version, so this stays current across releases.)
