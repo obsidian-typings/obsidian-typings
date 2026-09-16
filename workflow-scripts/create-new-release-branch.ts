@@ -5,13 +5,12 @@ import type { BranchSpec } from './helpers/branchSpec.ts';
 import { generateBranchName } from './helpers/branchSpec.ts';
 import { restoreWorkflowScripts } from './helpers/checkout.ts';
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
-import {
-  editPackageJson,
-  editPackageLockJson,
-  execFromRoot
-} from './helpers/exec.ts';
 import { commit } from './helpers/git.ts';
 import { offerRelease } from './helpers/handBack.ts';
+import {
+  editPackageJson,
+  editPackageLockJson
+} from './helpers/json.ts';
 import {
   getNpmUsername,
   getPackageRegistryState,
@@ -23,6 +22,7 @@ import {
   generateMainReadme,
   generateReadme
 } from './helpers/readmeGenerator.ts';
+import { execFromRoot } from './helpers/root.ts';
 import { getLatestVersion } from './helpers/version.ts';
 
 exitIfScriptDisabled();

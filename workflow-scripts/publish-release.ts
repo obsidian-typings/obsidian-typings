@@ -6,17 +6,16 @@ import type { PackageRegistryState } from './helpers/npm.ts';
 
 import { parseBranchSpec } from './helpers/branchSpec.ts';
 import {
-  editPackageJson,
-  editPackageLockJson,
-  execFromRoot,
-  toJson
-} from './helpers/exec.ts';
-import {
   annotateTag,
   commit,
   getBranchNames
 } from './helpers/git.ts';
 import { assertRunningInGitHubActions } from './helpers/githubActions.ts';
+import {
+  editPackageJson,
+  editPackageLockJson,
+  toJson
+} from './helpers/json.ts';
 import {
   getLatestWrapperPackageName,
   getPackageRegistryState,
@@ -26,6 +25,7 @@ import {
   LEGACY_PACKAGE_NAME,
   REPOSITORY
 } from './helpers/npm.ts';
+import { execFromRoot } from './helpers/root.ts';
 import { getLatestVersion } from './helpers/version.ts';
 
 /**

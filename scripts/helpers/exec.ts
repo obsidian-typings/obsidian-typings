@@ -1,3 +1,19 @@
+/**
+ * @file
+ *
+ * Runs a child process and collects its output.
+ *
+ * This file is one of **three byte-identical copies** - `scripts/helpers/exec.ts`,
+ * `workflow-scripts/helpers/exec.ts` and `docs/scripts/helpers/exec.ts`. The copies are deliberate: each of
+ * those trees is a self-contained island with its own `package.json`, `tsconfig.json` and dependency tree
+ * (`workflow-scripts` is additionally synced into a release branch's working copy with
+ * `git restore --source=main --worktree -- ./workflow-scripts`), so reaching into a sibling tree would tie it
+ * to whichever `scripts/` the host branch happens to carry.
+ *
+ * `npm run check:exec-helpers` asserts the three are identical, so edit one and copy it over the other two
+ * rather than patching them apart. The same holds for `helpers/root.ts` beside it.
+ */
+
 import type { ChildProcessWithoutNullStreams } from 'node:child_process';
 
 import { spawn } from 'node:child_process';
@@ -9,6 +25,16 @@ export interface ExecArgument {
   readonly batchedArguments: readonly string[];
 }
 
+/**
+ * The overload discriminator MUST be the same property `execString` below branches on. It was `withDetails`
+ * until 2026-09-15, and nothing could see the difference: both overloads compiled, both were reachable, and
+ * each resolved to the other one's shape -- `{ withDetails: true }` was typed `Promise<ExecResult>` and
+ * resolved to a bare string, while `{ shouldIncludeDetails: true }` selected the SIMPLE overload (the base
+ * {@link ExecOption} declares that property as `boolean`, so it does not discriminate) and resolved to an
+ * {@link ExecResult} typed as `string`. A caller reading `.exitCode` off the first got `undefined`. No gate
+ * can catch this -- the code is type-*correct*, and the lie sits between the declaration and the branch,
+ * which is why the two must stay one name.
+ */
 export interface ExecDetailedOptions extends ExecOption {
   readonly shouldIncludeDetails: true;
 }
@@ -35,6 +61,51 @@ export interface ExecResult {
 
 export interface ExecSimpleOptions extends ExecOption {
   readonly shouldIncludeDetails?: false;
+}
+
+/**
+ * Quotes one argument by the MSVCRT rules `cmd.exe` and the C runtime agree on: a run of backslashes is
+ * doubled only when a quote follows it or it ends the argument, and an embedded quote is escaped with one
+ * more backslash.
+ *
+ * Exported for `scripts/check-exec-helpers.ts`, which asserts the cases nothing else in the repo exercises --
+ * a trailing backslash, an embedded quote, an embedded newline. Not meant for callers; use {@link exec}.
+ */
+export function argvQuote(argument: string): string {
+  if (argument.length > 0 && !/[\s\t\n\v"]/.test(argument)) {
+    return argument;
+  }
+
+  const BACKSLASH_ESCAPE_FACTOR = 2;
+  let result = '"';
+  for (let index = 0; index < argument.length; index++) {
+    let numberBackslashes = 0;
+    while (index < argument.length && argument[index] === '\\') {
+      index++;
+      numberBackslashes++;
+    }
+
+    if (index === argument.length) {
+      result += '\\'.repeat(numberBackslashes * BACKSLASH_ESCAPE_FACTOR);
+      break;
+    }
+
+    const ch = argument.charAt(index);
+    result += ch === '"' ? `${'\\'.repeat(numberBackslashes * BACKSLASH_ESCAPE_FACTOR + 1)}"` : '\\'.repeat(numberBackslashes) + ch;
+  }
+
+  result += '"';
+  return result;
+}
+
+/**
+ * Escapes the characters `cmd.exe` acts on before a command line reaches it, so an argument holding `&` or
+ * `|` is passed to the program rather than read as shell syntax.
+ *
+ * Exported for `scripts/check-exec-helpers.ts`, as {@link argvQuote} is. Not meant for callers.
+ */
+export function commandEscapeCommandLine(commandLine: string): string {
+  return commandLine.replaceAll(CMD_META_RE, '^$&');
 }
 
 export async function exec(command: CommandPart[] | string, options?: ExecSimpleOptions): Promise<string>;
@@ -72,34 +143,12 @@ export function exec(command: CommandPart[] | string, options: ExecOption = {}):
   return execString(command, options);
 }
 
-function argvQuote(argument: string): string {
-  if (argument.length > 0 && !/[\s\t\n\v"]/.test(argument)) {
-    return argument;
-  }
-
-  const BACKSLASH_ESCAPE_FACTOR = 2;
-  let result = '"';
-  for (let index = 0; index < argument.length; index++) {
-    let numberBackslashes = 0;
-    while (index < argument.length && argument[index] === '\\') {
-      index++;
-      numberBackslashes++;
-    }
-
-    if (index === argument.length) {
-      result += '\\'.repeat(numberBackslashes * BACKSLASH_ESCAPE_FACTOR);
-      break;
-    }
-
-    const ch = argument.charAt(index);
-    result += ch === '"' ? `${'\\'.repeat(numberBackslashes * BACKSLASH_ESCAPE_FACTOR + 1)}"` : '\\'.repeat(numberBackslashes) + ch;
-  }
-
-  result += '"';
-  return result;
-}
-
-function toCommandLine($arguments: string[]): string {
+/**
+ * Joins already-quoted arguments into one `cmd.exe` command line.
+ *
+ * Exported for `scripts/check-exec-helpers.ts`, as {@link argvQuote} is. Not meant for callers.
+ */
+export function toCommandLine($arguments: string[]): string {
   return $arguments.map((argument) => argvQuote(argument)).join(' ');
 }
 
@@ -109,10 +158,6 @@ const CHILD_ENV = {
   DEBUG_COLORS: '1',
   ...process.env
 };
-
-function commandEscapeCommandLine(commandLine: string): string {
-  return commandLine.replaceAll(CMD_META_RE, '^$&');
-}
 
 function execString(command: string, options: ExecOption = {}, rawArguments?: string[]): Promise<ExecResult | string> {
   const {

@@ -1,4 +1,4 @@
-import { execFromRoot } from './helpers/exec.ts';
+import { execFromRoot } from './helpers/root.ts';
 
 // Generate API docs from release branch sources, then start the dev server
 const ARGS_START = 2;

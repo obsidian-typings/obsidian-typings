@@ -85,6 +85,15 @@ jobs:
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         run: npm run spellcheck
 
+      # `helpers/exec.ts` and `helpers/root.ts` exist three times over -- once per self-contained
+      # tree -- and had aged apart. This asserts the copies are byte-identical and exercises the
+      # `cmd.exe` quoting rules nothing else in the repo reaches. The end-to-end argv round trip is
+      # Windows-only and skips itself here; the quoter is asserted as a pure function, so the cases
+      # themselves do run on this runner.
+      - name: Check exec helpers
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: npm run check:exec-helpers
+
       # A separate npm package with its own tsconfig and its own dependency tree. The root
       # `typecheck` does `include` these files, but resolves them against the root's deps, `lib` and
       # `target`, so it is a near-miss rather than a substitute. Its `lint` needs no second

@@ -1,6 +1,6 @@
 import { compare } from 'semver';
 
-import { execFromRoot } from './exec.ts';
+import { execFromRoot } from './root.ts';
 
 export interface BranchSpec {
   channel: 'catalyst' | 'public';

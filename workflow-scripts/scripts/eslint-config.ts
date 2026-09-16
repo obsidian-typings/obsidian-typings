@@ -15,7 +15,7 @@ import { join } from 'node:path/posix';
 import tseslint from 'typescript-eslint';
 
 import { localPlugin } from '../helpers/eslint/local-plugin.ts';
-import { getRootFolder } from '../helpers/exec.ts';
+import { getRootFolder } from '../helpers/root.ts';
 
 const typeScriptFiles = [
   '**/*.ts',

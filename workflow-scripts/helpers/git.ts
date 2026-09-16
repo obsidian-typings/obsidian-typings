@@ -1,4 +1,4 @@
-import { execFromRoot } from './exec.ts';
+import { execFromRoot } from './root.ts';
 
 export async function annotateTag(tag: string, message: string): Promise<void> {
   await execFromRoot(`${gitWithBotUser()} tag -a ${tag} -m "${message}"`);
