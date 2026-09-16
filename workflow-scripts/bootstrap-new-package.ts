@@ -27,9 +27,13 @@
  *
  * The placeholder is published under its own `bootstrap` dist-tag. That does NOT keep it off `latest`: on a
  * brand-new package there is no other version for `latest` to point at, so it holds both (measured
- * 2026-09-14). Installing the name before its first real release therefore gets an empty stub -- a window
+ * 2026-09-14). Installing the name before its first real release therefore resolves to the stub -- a window
  * normally minutes wide, and only wide open when the hand-back above stalls. The real release starts at
  * `1.1.0`, well above the placeholder, so it takes `latest` when it lands and version ordering is unaffected.
+ *
+ * So the placeholder is published DEPRECATED, which is the part that makes that window survivable: the
+ * install still succeeds, but npm says in its own voice what was installed and that there are no types in it.
+ * See `publishPlaceholder` for why this rather than moving `latest` off the placeholder by hand.
  */
 
 import { execFileSync } from 'node:child_process';
@@ -130,7 +134,21 @@ async function publishPlaceholder(packageName: string): Promise<void> {
   await mkdir(BOOTSTRAP_FOLDER, { recursive: true });
 
   try {
+    // The one thing that makes the pre-release window audible to whoever is standing in it. The `bootstrap`
+    // dist-tag does not keep this version off `latest` (see the file header), so `npm install <name>` in that
+    // window succeeds and hands back a package with no types in it -- silently, which is the whole defect.
+    // A `deprecated` field is carried verbatim into the registry's version document at publish time and read
+    // straight back out by the installer, so it costs nothing and nothing has to undo it: the first real
+    // release is simply not deprecated, takes `latest` when it lands, and leaves `0.0.0` labelled as what it
+    // has always been. Verified against the installed npm (12.0.2): `libnpmpublish/lib/publish.js` assigns
+    // the whole manifest into `root.versions[version]`, normalized only by its `fixName` step, and
+    // `@npmcli/arborist/lib/arborist/reify.js` warns off `node.package.deprecated`.
+    //
+    // Deliberately not the alternative of moving `latest` off the placeholder with `npm dist-tag rm`: that is
+    // a second authenticated write needing a second 2FA prompt in the one script that has to be interactive,
+    // and what it buys is a name that answers `No matching version found` -- which says nothing about why.
     const placeholderPackageJson = {
+      deprecated: `Placeholder claiming the name for ${packageName}. It contains no types. Wait for the first real release.`,
       description: `Placeholder claiming the name for ${packageName}. Replaced by the first real release.`,
       license: 'MIT',
       name: packageName,
