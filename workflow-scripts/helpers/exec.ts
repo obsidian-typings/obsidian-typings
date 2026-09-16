@@ -68,6 +68,9 @@ export interface ExecSimpleOptions extends ExecOption {
  * doubled only when a quote follows it or it ends the argument, and an embedded quote is escaped with one
  * more backslash.
  *
+ * This is {@link toCommandLine}'s **Windows** arm only. `/bin/sh` obeys none of these rules -- it gets
+ * {@link posixQuote}.
+ *
  * Exported for `scripts/check-exec-helpers.ts`, which asserts the cases nothing else in the repo exercises --
  * a trailing backslash, an embedded quote, an embedded newline. Not meant for callers; use {@link exec}.
  */
@@ -144,15 +147,46 @@ export function exec(command: CommandPart[] | string, options: ExecOption = {}):
 }
 
 /**
- * Joins already-quoted arguments into one `cmd.exe` command line.
+ * Quotes one argument for `/bin/sh`. An argument built only of characters the shell never acts on is passed
+ * through; anything else is wrapped in **single** quotes, inside which `sh` treats every character literally
+ * -- backslashes, metacharacters and newlines alike -- with each embedded `'` spliced out as `'\''`. The
+ * empty argument becomes `''`, which is the only way to hand `sh` a zero-length word.
+ *
+ * There is deliberately no POSIX counterpart to {@link commandEscapeCommandLine}: `cmd.exe` needs a second
+ * escaping layer because it re-reads its metacharacters after the CRT quoting, and `sh` does not -- a
+ * single-quoted word is already inert.
+ *
+ * Exported for `scripts/check-exec-helpers.ts`, as {@link argvQuote} is. Not meant for callers; use
+ * {@link exec}.
+ */
+export function posixQuote(argument: string): string {
+  if (argument.length > 0 && !POSIX_UNSAFE_RE.test(argument)) {
+    return argument;
+  }
+
+  return `'${argument.replaceAll('\'', String.raw`'\''`)}'`;
+}
+
+/**
+ * Quotes each argument for the shell of the host platform and joins them into one command line: `cmd.exe`
+ * rules on Windows ({@link argvQuote}), `/bin/sh` rules everywhere else ({@link posixQuote}). Quoting every
+ * platform's command line by the Windows rules is how `sh` came to eat the backslashes of a whitespace-free
+ * path and to act on an embedded `&`.
  *
  * Exported for `scripts/check-exec-helpers.ts`, as {@link argvQuote} is. Not meant for callers.
  */
 export function toCommandLine($arguments: string[]): string {
-  return $arguments.map((argument) => argvQuote(argument)).join(' ');
+  const quote = process.platform === 'win32' ? argvQuote : posixQuote;
+  return $arguments.map((argument) => quote(argument)).join(' ');
 }
 
 const CMD_META_RE = /[()%!^"<>&|]/g;
+
+/*
+ * The complement of `shlex.quote`'s safe set: every other character either is shell syntax or can become it
+ * (`~` expands, a space splits, a newline ends the command), so an argument holding one gets single-quoted.
+ */
+const POSIX_UNSAFE_RE = /[^\w@%+=:,./-]/;
 
 const CHILD_ENV = {
   DEBUG_COLORS: '1',

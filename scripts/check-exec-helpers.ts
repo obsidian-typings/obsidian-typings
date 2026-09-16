@@ -9,15 +9,16 @@
  * 1. **The copies have not drifted.** The three trees are self-contained islands on purpose (see the header
  *    of `helpers/exec.ts`), so the files cannot be deduplicated into one import - which leaves byte-identity
  *    as the only thing that keeps them from aging apart, as they had.
- * 2. **The quoting behaves.** `argvQuote` and the `cmd.exe` metacharacter escape carry the rules that make an
- *    argument survive `cmd.exe`, and nothing in this repo exercised them: a trailing backslash on a path with
- *    a space, an embedded quote, an embedded newline. They are asserted here as pure functions, so the cases
- *    run on every platform rather than only where a shell could be spawned.
+ * 2. **The quoting behaves, on both shells.** `argvQuote` plus the `cmd.exe` metacharacter escape carry the
+ *    rules that make an argument survive `cmd.exe`; `posixQuote` carries the ones that make it survive
+ *    `/bin/sh`. Nothing in this repo exercised either: a trailing backslash on a path with a space, an
+ *    embedded quote, an embedded newline, a metacharacter. All three quoters are asserted here as pure
+ *    functions, so every case runs on every platform rather than only on the one whose shell it describes.
  *
- * The end-to-end round trip below - actually spawning a child and reading its `process.argv` back - runs on
- * Windows only. It is not a gap in coverage of the quoter: `exec` applies these Windows rules on every
- * platform and escapes nothing for `/bin/sh`, so on POSIX a backslash-bearing argument does not survive the
- * shell. That is a real defect, tracked separately, and asserting the round trip there would assert the bug.
+ * The end-to-end round trip below - actually spawning a child and reading its `process.argv` back - runs
+ * everywhere. It was Windows-only until 2026-09-16, when `toCommandLine` gained its POSIX arm: before that
+ * `exec` applied the Windows rules on every platform and escaped nothing for `/bin/sh`, so a backslash-bearing
+ * argument did not survive the shell and asserting the round trip there would have asserted the bug.
  */
 
 import {
@@ -32,6 +33,7 @@ import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import {
   argvQuote,
   commandEscapeCommandLine,
+  posixQuote,
   toCommandLine
 } from './helpers/exec.ts';
 import {
@@ -100,7 +102,99 @@ function assertEqual(actual: string, expected: string, label: string): void {
   }
 }
 
-function assertQuoting(): void {
+function assertPlatformCommandLine(): void {
+  const expected = process.platform === 'win32' ? 'git commit -m "a & b"' : 'git commit -m \'a & b\'';
+  assertEqual(toCommandLine(['git', 'commit', '-m', 'a & b']), expected, 'a command line built from parts, quoted for this platform');
+}
+
+/*
+ * `sh` obeys none of the MSVCRT rules {@link assertWindowsQuoting} covers, so quoting a POSIX command line
+ * with them is how a program handed `C:\dir\subdir` received it with every backslash eaten, and how an
+ * embedded `&` split the command. Single quotes are the answer: inside them `sh` treats every character
+ * literally, so the only thing still needing an escape is `'` itself.
+ */
+function assertPosixQuoting(): void {
+  /*
+   * The case that started this. The Windows quoter returns this argument untouched -- there is no whitespace
+   * for `cmd.exe` to split on -- and `sh` then eats every backslash.
+   */
+  assertEqual(
+    posixQuote(String.raw`C:\dir\subdir`),
+    String.raw`'C:\dir\subdir'`,
+    'a backslash-bearing argument with nothing to split on'
+  );
+
+  /*
+   * A trailing backslash needs no special handling at all here: it is the closing quote of a double-quoted
+   * word that would swallow it, and there is no such thing inside single quotes.
+   */
+  assertEqual(
+    posixQuote(String.raw`C:\Program Files` + BACKSLASH),
+    `'${String.raw`C:\Program Files`}${BACKSLASH}'`, // 'C:\Program Files\'
+    'a path with a space and a trailing backslash'
+  );
+
+  assertEqual(posixQuote('a & b | c'), '\'a & b | c\'', 'sh metacharacters');
+
+  /*
+   * A single quote cannot be escaped inside single quotes, so the word is closed, the quote is handed over as
+   * a backslash-escaped one outside it, and the word is reopened: `'` becomes `'\''`.
+   */
+  assertEqual(posixQuote('it\'s here'), String.raw`'it'\''s here'`, 'an embedded single quote');
+
+  /*
+   * Carried through as a real newline, as the Windows quoter does -- `sh` reads a newline inside single
+   * quotes as a literal character rather than as the end of the command.
+   */
+  assertEqual(posixQuote('line1\nline2'), '\'line1\nline2\'', 'an embedded newline');
+
+  /*
+   * An argument built only of characters `sh` never acts on is passed through, which is what keeps an
+   * ordinary command line readable.
+   */
+  assertEqual(posixQuote('--format=%H'), '--format=%H', 'an argument needing no quoting');
+
+  /*
+   * The empty argument is the one case where quoting is what makes the word exist at all: unquoted, `sh`
+   * drops it and the program is handed one fewer argument than the caller passed.
+   */
+  assertEqual(posixQuote(''), '\'\'', 'the empty argument');
+}
+
+/*
+ * The one assertion here that is not a pure function: it spawns a real child through whichever shell this
+ * platform uses and reads `process.argv` back, so it covers the quoter, the `cmd.exe` escape and
+ * `spawnViaShell`'s choice between handing the shell a command line and spawning the program directly.
+ */
+async function assertRoundTrip(): Promise<void> {
+  const echoScriptPath = toPosixPath(join(tmpdir(), 'obsidian-typings-check-exec-helpers-echo-argv.mjs'));
+  await writeFile(echoScriptPath, 'console.log(JSON.stringify(process.argv.slice(2)));\n');
+
+  const expectedArguments = [
+    String.raw`C:\Program Files` + BACKSLASH,
+    'say "hi"',
+    'a & b | c',
+    'line1\nline2',
+    /*
+     * The two cases that made this round trip run everywhere: both are whitespace-free, so the Windows quoter
+     * hands them over untouched, and on `sh` the first lost its backslashes and the second split the command.
+     */
+    String.raw`C:\dir\subdir`,
+    'a&b',
+    ''
+  ];
+
+  const stdout = await execFromRoot([process.execPath, echoScriptPath, ...expectedArguments], { isQuiet: true });
+  const actualArguments = JSON.parse(stdout) as string[];
+
+  assertEqual(
+    JSON.stringify(actualArguments),
+    JSON.stringify(expectedArguments),
+    `the argv round trip through ${process.platform === 'win32' ? 'cmd.exe' : '/bin/sh'}`
+  );
+}
+
+function assertWindowsQuoting(): void {
   /*
    * The case the naive quoter gets wrong: a directory path with a space in it. Quoting it puts the trailing
    * backslash immediately before the closing quote, where `cmd.exe` reads the pair as an escaped quote and
@@ -146,39 +240,17 @@ function assertQuoting(): void {
   assertEqual(commandEscapeCommandLine('a & b | c'), 'a ^& b ^| c', 'cmd.exe metacharacters');
 
   assertEqual(
-    commandEscapeCommandLine(toCommandLine(['git', 'log', '--format=%H'])),
-    'git log --format=^%H',
+    commandEscapeCommandLine(argvQuote('--format=%H')),
+    '--format=^%H',
     'a percent sign reaching cmd.exe'
   );
-
-  assertEqual(toCommandLine(['git', 'commit', '-m', 'a & b']), 'git commit -m "a & b"', 'a command line built from parts');
-}
-
-async function assertRoundTrip(): Promise<void> {
-  if (process.platform !== 'win32') {
-    console.log('Skipping the argv round trip: it is a cmd.exe check, and this is not Windows.');
-    return;
-  }
-
-  const echoScriptPath = toPosixPath(join(tmpdir(), 'obsidian-typings-check-exec-helpers-echo-argv.mjs'));
-  await writeFile(echoScriptPath, 'console.log(JSON.stringify(process.argv.slice(2)));\n');
-
-  const expectedArguments = [
-    String.raw`C:\Program Files` + BACKSLASH,
-    'say "hi"',
-    'a & b | c',
-    'line1\nline2'
-  ];
-
-  const stdout = await execFromRoot([process.execPath, echoScriptPath, ...expectedArguments], { isQuiet: true });
-  const actualArguments = JSON.parse(stdout) as string[];
-
-  assertEqual(JSON.stringify(actualArguments), JSON.stringify(expectedArguments), 'the argv round trip through cmd.exe');
 }
 
 async function main(): Promise<void> {
   await assertCopiesAreIdentical();
-  assertQuoting();
+  assertWindowsQuoting();
+  assertPosixQuoting();
+  assertPlatformCommandLine();
   await assertRoundTrip();
 
   if (failures.length > 0) {
