@@ -1,4 +1,3 @@
-import process from 'node:process';
 import { setTimeout as sleep } from 'node:timers/promises';
 
 import { generateBranchName } from './helpers/branchSpec.ts';
@@ -8,42 +7,9 @@ import {
   readPackageJson
 } from './helpers/exec.ts';
 import { commit } from './helpers/git.ts';
+import { assertRunningInGitHubActions } from './helpers/githubActions.ts';
 import { generateMainReadme } from './helpers/readmeGenerator.ts';
 import { getLatestVersion } from './helpers/version.ts';
-
-/*
- * The variable GitHub Actions sets on every runner. Read directly rather than through
- * `helpers/env-toggle.ts`, whose switches are named after the npm script currently running: this file has no
- * npm script, which is half of why running it by hand is always a mistake.
- */
-const GITHUB_ACTIONS_ENV_VARIABLE_NAME = 'GITHUB_ACTIONS';
-
-/**
- * Refuses to run anywhere but a GitHub Actions runner.
- *
- * This script is unattended automation, not a command: it resets the local release branch onto its remote
- * tip, commits as `github-actions[bot]`, rebases, pushes, and dispatches `publish-release.yml`. Nothing about
- * that is ever wanted in a developer checkout, where the reset could also discard local unpushed commits --
- * `create-new-release-branch` could be fixed without such a guard precisely because it never touches an
- * existing branch, and this one has to be *on* the branch it commits to.
- *
- * It is a typo detector, not a security boundary: the variable is one `export` away for anyone who means it.
- * That is the right strength -- the only caller that matters is
- * `.github/workflows/check-obsidian-package-update.yml`, and the failure being guarded against is a hand-run,
- * not an attacker.
- */
-function assertRunningInGitHubActions(): void {
-  if (process.env[GITHUB_ACTIONS_ENV_VARIABLE_NAME]) {
-    return;
-  }
-
-  throw new Error(
-    'check-obsidian-package-update is CI-only and is run by .github/workflows/check-obsidian-package-update.yml.'
-      + ' By hand it would switch this checkout onto a release branch, reset that branch onto its remote tip,'
-      + ' commit as github-actions[bot], rebase, push, and dispatch a release -- which is why there is no npm'
-      + ` script for it. Set ${GITHUB_ACTIONS_ENV_VARIABLE_NAME} only if you mean every one of those.`
-  );
-}
 
 async function getLatestObsidianVersion(): Promise<string> {
   // This workflow runs hourly, so it is exposed to transient registry failures often enough that
@@ -66,7 +32,18 @@ async function getLatestObsidianVersion(): Promise<string> {
 }
 
 async function main(): Promise<void> {
-  assertRunningInGitHubActions();
+  /*
+   * This script is unattended automation, not a command: it resets the local release branch onto its remote
+   * tip, commits as `github-actions[bot]`, rebases, pushes, and dispatches `publish-release.yml`. Nothing
+   * about that is ever wanted in a developer checkout, where the reset could also discard local unpushed
+   * commits -- `create-new-release-branch` could be fixed without such a guard precisely because it never
+   * touches an existing branch, and this one has to be *on* the branch it commits to.
+   */
+  assertRunningInGitHubActions(
+    'check-obsidian-package-update',
+    'switch this checkout onto a release branch, reset that branch onto its remote tip, commit as'
+      + ' github-actions[bot], rebase, push, and dispatch a release'
+  );
 
   /*
    * Reconcile `main`'s "Latest <channel> release" rows with the registry before touching anything else.
