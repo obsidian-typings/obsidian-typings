@@ -11,9 +11,9 @@
  * differently, the bootstrap would claim one package and CI would fail publishing to another.
  *
  * The trusted-publisher half lives here for the same reason, one step later: claiming the name and attaching
- * the publisher are separate steps with separate failure modes, and all three of reading that publisher,
- * attaching it, and wording the hand-back for when neither can be done from where the caller stands are
- * needed by more than one script.
+ * the publisher are separate steps with separate failure modes, and all four of reading that publisher,
+ * attaching it, settling the two into one answer, and wording the hand-back for when none of that can be done
+ * from where the caller stands are needed by more than one script.
  */
 
 import { execFileSync } from 'node:child_process';
@@ -114,8 +114,9 @@ interface TokenExchangeResponse {
  * `publishPlaceholder` in `bootstrap-new-package.ts` inherits it.
  *
  * Neither caller reaches this without already knowing the package has no publisher — a name claimed seconds
- * earlier by `publishPlaceholder`, or a definite `none` from {@link readTrustedPublisherState} — and that is
- * deliberate, because what a SECOND configuration does to a package that already has one is not known.
+ * earlier by `publishPlaceholder`, or a definite `none` {@link resolveTrustedPublisherState} has just read
+ * out of {@link readTrustedPublisherState} — and that is deliberate, because what a SECOND configuration does
+ * to a package that already has one is not known.
  * `createConfig` in `npm/lib/trust-cmd.js` POSTs `[trustConfig]` and reads nothing beforehand, so the client
  * cannot reconcile and the registry's answer is the whole of the behavior. npm's own bundled `npm-trust.md`
  * says the registry "only supports one configuration per package" and that creating a second "will result in
@@ -272,9 +273,10 @@ export function getTrustedPublisherCommand(packageName: string): string {
 /**
  * The remedy for a package with no trusted publisher attached, worded once.
  *
- * Printed by `bootstrap-new-package.ts` when it cannot attach the publisher itself, printed by
- * `create-new-release-branch.ts` when it refuses to dispatch into a name nothing has published through, and
- * embedded in the error `publish-release.ts` throws when CI meets the consequence.
+ * Printed by `bootstrap-new-package.ts` when it cannot attach the publisher to a name it has just claimed,
+ * printed by {@link resolveTrustedPublisherState} -- and so by both local hand-back scripts -- when the
+ * publisher of an already-claimed name can be neither read nor attached from here, and embedded in the error
+ * `publish-release.ts` throws when CI meets the consequence.
  *
  * It leads with the command, because that is the form the remedy actually takes now: one line, one 2FA code,
  * no browser. The npmjs.com form follows as a fallback rather than as the primary path -- it remains the only
@@ -403,6 +405,62 @@ export async function readTrustedPublisherState(packageName: string): Promise<Tr
   }
 
   return result.stdout.trim() ? 'attached' : 'none';
+}
+
+/**
+ * Settles the trusted-publisher state of an already-claimed name: reads it, and attaches one when npm says
+ * there is none. Resolves to what the package's state actually is once that is done.
+ *
+ * This is the whole of the second half of the hand-back, for a name the first half has already claimed, and
+ * it is shared because both hand-back scripts stand in front of exactly that state.
+ * `bootstrap-new-package.ts` reaches it when it is re-run against a name it claimed on an earlier run;
+ * `create-new-release-branch.ts` reaches it whenever the branch it just cut names a package carrying nothing
+ * but the bootstrap placeholder. Until 2026-09-16 only the first of them acted on the answer -- the second
+ * read the same state with the same helper and then merely *printed*, telling the operator to go and attach
+ * it in another window while the sibling script attached it for them from the terminal it was already
+ * holding. Nothing gave a reason for the asymmetry; it reads like the attach landed in one script and was
+ * never carried to the other.
+ *
+ * Only the definite `none` is acted on. An `unknown` answer is left alone rather than attached "just in
+ * case", because `npm trust github` creates a configuration rather than reconciling one, and what the
+ * registry does with a second one is genuinely unsettled -- {@link attachTrustedPublisher} carries what is
+ * and is not known about that, including the npm doc that reads like an answer and is stale. This arm used
+ * to state flatly that a second call "adds a duplicate record"; nobody had made one, so the claim was as
+ * unverified as the behavior it warned about. The asymmetry is what survives the correction: guessing wrong
+ * risks a duplicate in the package's trust list, while not guessing costs one question the operator can
+ * answer, which is what the `unknown` arm of `offerRelease` is for.
+ *
+ * Every message names the package rather than saying "it". The two callers print very different preambles
+ * ahead of this -- one about a name it declined to re-claim, one about a branch it has just cut -- and a
+ * pronoun that resolves against whichever of them ran is a sentence that reads correctly only by accident.
+ */
+export async function resolveTrustedPublisherState(packageName: string): Promise<TrustedPublisherState> {
+  const publisherState = await readTrustedPublisherState(packageName);
+
+  if (publisherState === 'attached') {
+    console.log(`\nnpm reports a trusted publisher on ${packageName}, so both halves of the hand-back are done.`);
+    return publisherState;
+  }
+
+  if (publisherState === 'unknown') {
+    console.log(`\nnpm would not say whether ${packageName} has a trusted publisher -- that read needs a login`);
+    console.log('and a 2FA code it can prompt for, and this terminal gave it neither.');
+    console.log(getTrustedPublisherInstructions(packageName));
+    return publisherState;
+  }
+
+  console.log(`\nnpm reports no trusted publisher on ${packageName}, so that is the half still outstanding.`);
+  console.log('Attaching it now. npm will ask for a one-time password: it challenges per operation and caches');
+  console.log('nothing between processes, so this code is its own rather than a reuse of any earlier one.');
+
+  if (attachTrustedPublisher(packageName)) {
+    console.log(`\nTrusted publisher attached to ${packageName}.`);
+    return 'attached';
+  }
+
+  console.log(`\nCould not attach the trusted publisher to ${packageName}.`);
+  console.log(getTrustedPublisherInstructions(packageName));
+  return 'none';
 }
 
 /**
