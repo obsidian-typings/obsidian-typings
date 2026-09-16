@@ -267,6 +267,18 @@ const CHILD_ENV = {
   ...process.env
 };
 
+/*
+ * The same two-overload shape `exec` and `execFromRoot` carry, and for the same reason one layer down:
+ * `executeBatches` asks for details whatever its caller asked for, and without this it would be handed back
+ * `ExecResult | string` and have to narrow it with a branch that can never be taken. That branch is exactly
+ * what dropped every batch's output until 2026-09-16 -- it read `typeof result === 'string'`, which a
+ * detailed call never satisfies -- so the narrowing is removed rather than corrected.
+ *
+ * The discriminator is the one property the implementation branches on, per the note on
+ * {@link ExecDetailedOptions}.
+ */
+function execString(command: string, options: ExecDetailedOptions, rawArguments?: string[]): Promise<ExecResult>;
+function execString(command: string, options?: ExecOption, rawArguments?: string[]): Promise<ExecResult | string>;
 function execString(command: string, options: ExecOption = {}, rawArguments?: string[]): Promise<ExecResult | string> {
   const {
     cwd = process.cwd(),
@@ -359,24 +371,49 @@ function execString(command: string, options: ExecOption = {}, rawArguments?: st
  * `execString` the raw argument array beside the string -- which is what lets a batch holding a newline be
  * spawned directly instead of throwing. Both are decided per batch, so a run splits into a mix of
  * directly-spawned and shell-run batches without either noticing the other.
+ *
+ * Every batch is run **detailed** whatever the caller asked for, and the caller's own flag then shapes the
+ * return. Until 2026-09-16 the caller's options went straight through and the results were collected with a
+ * `typeof result === 'string'` test, so a detailed call collected nothing: every batch's stdout and stderr
+ * were dropped and the hand-built result asserted `exitCode: 0`, which -- paired with
+ * `shouldIgnoreExitCode` -- reported a failed batch as a success. Only the split path was affected; the
+ * unsplit one returns `execString`'s own result and always has.
  */
 async function executeBatches(staticParts: string[], batches: string[][], options: ExecOption): Promise<ExecResult | string> {
   const baseCommand = toCommandLine(staticParts);
-  const results: string[] = [];
+  const stdoutParts: string[] = [];
+  const stderrParts: string[] = [];
+
+  /*
+   * The first batch that ended abnormally is the one reported, and `null` counts: it is what `execString`
+   * resolves to when the child could not be spawned at all under `shouldIgnoreExitCode`, which is no more a
+   * success than a non-zero code is.
+   */
+  let exitCode: null | number = 0;
+  let exitSignal: NodeJS.Signals | null = null;
 
   for (const batch of batches) {
     const batchCommand = `${baseCommand} ${toCommandLine(batch)}`;
-    const result = await execString(batchCommand, options, [...staticParts, ...batch]);
-    if (typeof result === 'string') {
-      results.push(result);
+    const result = await execString(batchCommand, { ...options, shouldIncludeDetails: true }, [...staticParts, ...batch]);
+    stdoutParts.push(result.stdout);
+    stderrParts.push(result.stderr);
+    if (exitCode === 0 && result.exitCode !== 0) {
+      exitCode = result.exitCode;
+      exitSignal = result.exitSignal;
     }
   }
 
-  if (options.shouldIncludeDetails) {
-    return { exitCode: 0, exitSignal: null, stderr: '', stdout: results.join('\n') };
+  const stdout = stdoutParts.join('\n');
+  if (!options.shouldIncludeDetails) {
+    return stdout;
   }
 
-  return results.join('\n');
+  return {
+    exitCode,
+    exitSignal,
+    stderr: stderrParts.join('\n'),
+    stdout
+  };
 }
 
 /*

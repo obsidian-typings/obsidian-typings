@@ -4,7 +4,7 @@
  * Gate for the `helpers/exec.ts` + `helpers/root.ts` pair that `scripts/`, `workflow-scripts/` and
  * `docs/scripts/` each carry a copy of.
  *
- * It checks two things nothing else does:
+ * It checks what nothing else does:
  *
  * 1. **The copies have not drifted.** The three trees are self-contained islands on purpose (see the header
  *    of `helpers/exec.ts`), so the files cannot be deduplicated into one import - which leaves byte-identity
@@ -20,6 +20,11 @@
  *    batch sized at 8191 died with `The command line is too long.` The split round trip is run a second
  *    time over padding built of `&` to cover it, and an over-budget command line is asserted to be refused
  *    here rather than by the shell.
+ * 4. **A split batch's result reaches the caller.** Both round trips above read their batches back through
+ *    `execFromRoot`'s simple overload, which is the one shape `executeBatches` handled: asked for details it
+ *    collected nothing, dropped every batch's stdout and stderr, and answered `exitCode: 0` for a batch that
+ *    had failed. The detailed case needs a child that writes stderr and exits non-zero, so it runs against a
+ *    second script rather than the echo one.
  *
  * The end-to-end round trip below - actually spawning a child and reading its `process.argv` back - runs
  * everywhere. It was Windows-only until 2026-09-16, when `toCommandLine` gained its POSIX arm: before that
@@ -81,6 +86,66 @@ const IDENTICAL_FILE_GROUPS: readonly (readonly string[])[] = [
 const failures: string[] = [];
 
 exitIfScriptDisabled();
+
+/*
+ * The split round trip once more, this time asked for details -- the shape that lost everything until
+ * 2026-09-16. `executeBatches` handed each batch the caller's own options and then collected the results with
+ * `typeof result === 'string'`, which a detailed call never satisfies, so it returned a hand-built
+ * `{ exitCode: 0, exitSignal: null, stderr: '', stdout: '' }`: no stdout, no stderr, and a success reported
+ * for a batch that had failed. All three are asserted here.
+ *
+ * It is reachable only in the split form, which is why the two round trips above never saw it: they read
+ * their batches back through `execFromRoot`'s simple overload, and the unsplit path returns `execString`'s
+ * own result whatever the caller asked for.
+ *
+ * The child is a second script rather than the echo one because two of the three fields need a child the
+ * echo script is not: one that writes stderr, and one that exits non-zero.
+ */
+async function assertBatchedDetailedSplitRoundTrip(detailsScriptPath: string): Promise<void> {
+  const LABEL = 'the split batched round trip asked for details';
+  const expectedArguments = [...buildPaddingArguments(), DETAILS_FAILING_ARGUMENT];
+
+  const result = await execFromRoot([process.execPath, detailsScriptPath, { batchedArguments: expectedArguments }], {
+    isQuiet: true,
+    /*
+     * Without this the failing batch rejects rather than returning, which is the unsplit behavior and not
+     * what is under test: the `exitCode` the old code hard-coded is only ever read by a caller that asked for
+     * the failure to be handed back rather than thrown.
+     */
+    shouldIgnoreExitCode: true,
+    shouldIncludeDetails: true
+  });
+
+  /*
+   * Read before parsing, because the very shape this case exists for makes the parse throw rather than
+   * report: the old code returned an empty `stdout`, and `JSON.parse('')` is a `SyntaxError`. The gate went
+   * red either way, but it named the parse instead of the defect.
+   */
+  if (result.stdout === '') {
+    failures.push(`${LABEL}: no batch's stdout came back at all -- the whole result is ${JSON.stringify(result)}`);
+    return;
+  }
+
+  const batchArgumentLists = result.stdout.split('\n').map((line) => JSON.parse(line) as string[]);
+  assertSplitBatches(batchArgumentLists, expectedArguments, LABEL);
+
+  /*
+   * One marker per batch, so this is both "stderr survives" and "every batch's stderr survives" -- the old
+   * code returned the empty string, which the first half alone would also have caught, but the joining is
+   * what the stdout case cannot check independently.
+   */
+  assertEqual(
+    result.stderr,
+    Array.from({ length: batchArgumentLists.length }, () => DETAILS_STDERR_MARKER).join('\n'),
+    `${LABEL}: every batch's stderr is collected`
+  );
+
+  assertEqual(
+    String(result.exitCode),
+    String(DETAILS_EXIT_CODE),
+    `${LABEL}: the failing batch's exit code is carried rather than asserted to be 0`
+  );
+}
 
 /*
  * The split round trip again over padding built of the one character `cmd.exe` charges twice for. This is
@@ -170,6 +235,15 @@ async function assertCopiesAreIdentical(): Promise<void> {
  */
 const BACKSLASH = '\\';
 const QUOTE = '"';
+
+/*
+ * The contract between {@link assertBatchedDetailedSplitRoundTrip} and the script it runs, held here rather
+ * than spelled out on both sides: the script is generated from these, so the case cannot come to assert a
+ * marker or an exit code the child stopped producing.
+ */
+const DETAILS_EXIT_CODE = 3;
+const DETAILS_FAILING_ARGUMENT = 'fail';
+const DETAILS_STDERR_MARKER = 'batch-stderr';
 
 function assertEqual(actual: string, expected: string, label: string): void {
   if (actual !== expected) {
@@ -329,12 +403,12 @@ function assertShellCommandLineLength(): void {
 }
 
 /*
- * The shared body of the two split cases: run the batched command, then check that it split at all, that
- * every argument came back, and that they came back in order.
+ * The checking half of every split case: that the command split at all, that every argument came back, and
+ * that they came back in order. Split out from {@link assertSplitRoundTrip} because the detailed case reads
+ * its batches out of an {@link ExecResult} rather than off the simple overload's string, and only the
+ * reading differs.
  */
-async function assertSplitRoundTrip(echoScriptPath: string, expectedArguments: string[], label: string): Promise<void> {
-  const batchArgumentLists = await execBatchedEchoArgv(echoScriptPath, expectedArguments);
-
+function assertSplitBatches(batchArgumentLists: string[][], expectedArguments: string[], label: string): void {
   /*
    * Guards the callers' sizing: were their padding ever to stop exceeding the budget, this case would
    * quietly become a second copy of the unsplit one rather than failing.
@@ -365,6 +439,13 @@ async function assertSplitRoundTrip(echoScriptPath: string, expectedArguments: s
       `${label}: argument ${String(differenceIndex)} came back as ${JSON.stringify(actualArguments[differenceIndex])}, expected ${JSON.stringify(expectedArguments[differenceIndex])}`
     );
   }
+}
+
+/*
+ * The shared body of the two simple split cases: run the batched command, then check what came back.
+ */
+async function assertSplitRoundTrip(echoScriptPath: string, expectedArguments: string[], label: string): Promise<void> {
+  assertSplitBatches(await execBatchedEchoArgv(echoScriptPath, expectedArguments), expectedArguments, label);
 }
 
 function assertWindowsQuoting(): void {
@@ -499,6 +580,7 @@ async function main(): Promise<void> {
   await assertBatchedRoundTrip(echoScriptPath);
   await assertBatchedSplitRoundTrip(echoScriptPath);
   await assertBatchedEscapedSplitRoundTrip(echoScriptPath);
+  await assertBatchedDetailedSplitRoundTrip(await writeEchoDetailsScript());
   await assertOverBudgetCommandIsRefused();
 
   if (failures.length > 0) {
@@ -517,6 +599,28 @@ async function writeEchoArgvScript(): Promise<string> {
   const echoScriptPath = toPosixPath(join(tmpdir(), 'obsidian-typings-check-exec-helpers-echo-argv.mjs'));
   await writeFile(echoScriptPath, 'console.log(JSON.stringify(process.argv.slice(2)));\n');
   return echoScriptPath;
+}
+
+/*
+ * The echo script plus the two things the detailed case needs it to do and it does not: write something to
+ * stderr, and end non-zero. The ending is set through `process.exitCode` rather than `process.exit`, which
+ * would be free to cut the pipes short of the two lines just written -- the case reads both back.
+ */
+async function writeEchoDetailsScript(): Promise<string> {
+  const detailsScriptPath = toPosixPath(join(tmpdir(), 'obsidian-typings-check-exec-helpers-echo-details.mjs'));
+  await writeFile(
+    detailsScriptPath,
+    [
+      'const $arguments = process.argv.slice(2);',
+      'console.log(JSON.stringify($arguments));',
+      `console.error(${JSON.stringify(DETAILS_STDERR_MARKER)});`,
+      `if ($arguments.includes(${JSON.stringify(DETAILS_FAILING_ARGUMENT)})) {`,
+      `  process.exitCode = ${String(DETAILS_EXIT_CODE)};`,
+      '}',
+      ''
+    ].join('\n')
+  );
+  return detailsScriptPath;
 }
 
 await main();
