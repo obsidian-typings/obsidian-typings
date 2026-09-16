@@ -15,7 +15,17 @@
     "module": "node16",
     "moduleResolution": "node16",
     "noEmit": true,
-    "skipLibCheck": false,
+    // `@tsconfig/strictest` sets this to `false`, and that setting earns its keep only where the `.d.ts`
+    // files ARE the product -- which is the release branches, not here. This package ships no types; it
+    // ships scripts. What `false` bought instead was a permanently red `tsc --noEmit` on somebody else's
+    // declaration file: `eslint-import-context` is a CommonJS package whose `lib/types.d.ts` type-imports
+    // the ESM-only `type-fest` with no `resolution-mode` attribute, which TypeScript 6 rejects as TS1541.
+    // It arrives transitively under `eslint-import-resolver-typescript` / `eslint-plugin-import-x`,
+    // nothing here imports it, and it is still unfixed in the package's latest version (0.2.0, checked
+    // 2026-09-15), so there is no upgrade that clears it. There is no per-package escape hatch either --
+    // `skipLibCheck` is all-or-nothing. The repo root's own `tsconfig.json` already made this same call
+    // for the same reason. Our own `.ts` files are unaffected: `skipLibCheck` only skips declarations.
+    "skipLibCheck": true,
     "target": "ESNext",
     "types": [
       "node"
