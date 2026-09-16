@@ -102,12 +102,24 @@ function getEslintConfigs(): Linter.Config[] {
         'accessor-pairs': 'error',
         'array-callback-return': 'error',
         'camelcase': 'error',
+        /*
+         * The rule reports per comment TOKEN, so every continuation line of a wrapped `//` comment is its own token
+         * that would have to start with a capital — which is how prose ends up with capitals mid-sentence.
+         * `ignoreConsecutiveComments` exempts a line comment that directly follows another one, which is exactly the
+         * shape of a wrapped block, while still holding its FIRST line to a capital. Block comments need no such
+         * option: a block comment is a single token however many lines it spans.
+         * `ignorePattern` covers the half that leaves behind: a comment whose FIRST word is a camelCase identifier is
+         * exempt, so a comment that opens by naming a symbol keeps the name a reader can grep instead of a PascalCase
+         * one that exists nowhere. The rule anchors the pattern at the start of the comment and `[a-zA-Z0-9]` matches
+         * no whitespace, so it can only ever match that first word — ordinary lowercase prose stays reported. Both
+         * option bags need it, and `block` keeps its `v8` exemption by alternation rather than losing it.
+         */
         'capitalized-comments': [
           'error',
           'always',
           {
-            block: { ignorePattern: 'v8' },
-            line: { ignoreConsecutiveComments: true }
+            block: { ignorePattern: 'v8|[a-z][a-zA-Z0-9]*[A-Z]' },
+            line: { ignoreConsecutiveComments: true, ignorePattern: '[a-z][a-zA-Z0-9]*[A-Z]' }
           }
         ],
         'complexity': 'error',
@@ -221,6 +233,14 @@ function getEslintConfigs(): Linter.Config[] {
             selector: 'TSAsExpression > TSAsExpression'
           },
           {
+            message: 'Do not use `as never`. It silently satisfies type constraints by claiming "this value is of every type" — almost always masks a real type mismatch. Fix the underlying types instead.',
+            selector: 'TSAsExpression > TSNeverKeyword'
+          },
+          {
+            message: 'Do not use `<never>` type assertions. Same reasoning as `as never`.',
+            selector: 'TSTypeAssertion > TSNeverKeyword'
+          },
+          {
             message: 'Do not use _ prefix on methods or functions. The _ prefix is for unused parameters only.',
             selector: 'MethodDefinition[key.name=/^_/]:not([override=true])'
           },
@@ -305,6 +325,11 @@ function getEslintConfigs(): Linter.Config[] {
       }
     },
     {
+      /*
+       * The build, lint, format, docs and version scripts are CLI entry points whose output IS their interface, so
+       * printing to stdout is what they are for. Kept as a deliberate local override rather than drift: the shared
+       * config in `obsidian-dev-utils` leaves the rule on everywhere, because nothing in that package prints.
+       */
       files: ['scripts/**/*.ts'],
       rules: {
         'no-console': 'off'
@@ -501,6 +526,14 @@ function getTseslintConfigs(): Linter.Config[] {
       rules: {
         '@typescript-eslint/explicit-function-return-type': 'error',
         '@typescript-eslint/explicit-member-accessibility': 'error',
+        // The rule's own `property` default, spelled as a bare severity so it stays the rule's default rather than a copy of it.
+        // Do NOT pass `'method'` for tidiness: the method form keeps parameters bivariant, drops `readonly` (the rule's own fixer
+        // message says so), and makes `@typescript-eslint/unbound-method` fire on every forwarded bag member, which is what the
+        // `this: void` boilerplate used to pay for. Do NOT delete the line either - the rule is in no preset, so that turns it off.
+        '@typescript-eslint/method-signature-style': 'error',
+        '@typescript-eslint/no-floating-promises': ['error', {
+          checkThenables: true
+        }],
         '@typescript-eslint/no-invalid-void-type': ['error', {
           allowAsThisParameter: true
         }],
