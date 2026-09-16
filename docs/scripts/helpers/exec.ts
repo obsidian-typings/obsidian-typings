@@ -22,6 +22,16 @@ import process from 'node:process';
 export type CommandPart = ExecArgument | string;
 
 export interface ExecArgument {
+  /**
+   * The arguments the command is batched over, quoted by {@link toCommandLine} exactly as the static parts
+   * beside them are. They were interpolated **raw** until 2026-09-16, on every platform: a batched argument
+   * bearing a space arrived as two arguments, and one bearing a quote, a metacharacter (`&`, `|`, `` ` ``,
+   * `$`) or a glob was acted on by the shell. Nothing caught it because every caller in this repo passes
+   * posix-normalized repo-relative paths, which need no quoting.
+   *
+   * The quoting has to happen **before** the length budget is measured rather than after, so that the string
+   * counted against {@link getMaxCommandLength} and the string handed to the shell stay the same one.
+   */
   readonly batchedArguments: readonly string[];
 }
 
@@ -147,6 +157,20 @@ export function exec(command: CommandPart[] | string, options: ExecOption = {}):
 }
 
 /**
+ * The longest command line this platform's shell accepts, which is what decides whether a batched command is
+ * run in one go or split. The budget is measured against the **quoted** command line, so what is counted here
+ * and what reaches the shell are the same string -- see {@link ExecArgument}.
+ *
+ * Exported for `scripts/check-exec-helpers.ts`, which sizes its batch-splitting case from it rather than
+ * restating the constants. Not meant for callers; use {@link exec}.
+ */
+export function getMaxCommandLength(): number {
+  const WINDOWS_MAX_COMMAND_LENGTH = 8191;
+  const UNIX_MAX_COMMAND_LENGTH = 131_072;
+  return process.platform === 'win32' ? WINDOWS_MAX_COMMAND_LENGTH : UNIX_MAX_COMMAND_LENGTH;
+}
+
+/**
  * Quotes one argument for `/bin/sh`. An argument built only of characters the shell never acts on is passed
  * through; anything else is wrapped in **single** quotes, inside which `sh` treats every character literally
  * -- backslashes, metacharacters and newlines alike -- with each embedded `'` spliced out as `'\''`. The
@@ -175,7 +199,7 @@ export function posixQuote(argument: string): string {
  *
  * Exported for `scripts/check-exec-helpers.ts`, as {@link argvQuote} is. Not meant for callers.
  */
-export function toCommandLine($arguments: string[]): string {
+export function toCommandLine($arguments: readonly string[]): string {
   const quote = process.platform === 'win32' ? argvQuote : posixQuote;
   return $arguments.map((argument) => quote(argument)).join(' ');
 }
@@ -283,7 +307,7 @@ async function executeBatches(baseCommand: string, batches: string[][], options:
   const results: string[] = [];
 
   for (const batch of batches) {
-    const batchCommand = `${baseCommand} ${batch.join(' ')}`;
+    const batchCommand = `${baseCommand} ${toCommandLine(batch)}`;
     const result = await execString(batchCommand, options);
     if (typeof result === 'string') {
       results.push(result);
@@ -295,12 +319,6 @@ async function executeBatches(baseCommand: string, batches: string[][], options:
   }
 
   return results.join('\n');
-}
-
-function getMaxCommandLength(): number {
-  const WINDOWS_MAX_COMMAND_LENGTH = 8191;
-  const UNIX_MAX_COMMAND_LENGTH = 131_072;
-  return process.platform === 'win32' ? WINDOWS_MAX_COMMAND_LENGTH : UNIX_MAX_COMMAND_LENGTH;
 }
 
 function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promise<ExecResult | string> | undefined {
@@ -321,7 +339,7 @@ function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promis
   const baseCommand = toCommandLine(staticParts);
   const maxCommandLength = getMaxCommandLength();
 
-  const fullCommand = `${baseCommand} ${execArgument.batchedArguments.join(' ')}`;
+  const fullCommand = `${baseCommand} ${toCommandLine(execArgument.batchedArguments)}`;
   if (fullCommand.length <= maxCommandLength) {
     return execString(fullCommand, options);
   }
@@ -330,12 +348,12 @@ function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promis
   let currentBatch: string[] = [];
 
   for (const argument of execArgument.batchedArguments) {
-    const tentative = `${baseCommand} ${[...currentBatch, argument].join(' ')}`;
+    const tentative = `${baseCommand} ${toCommandLine([...currentBatch, argument])}`;
     if (tentative.length > maxCommandLength) {
       if (currentBatch.length === 0) {
         return Promise.reject(
           new Error(
-            `Cannot split command into batches: a single argument (${String(argument.length)} chars) plus the base command (${String(baseCommand.length)} chars) exceeds the max command length (${String(maxCommandLength)}).`
+            `Cannot split command into batches: a single argument (${String(toCommandLine([argument]).length)} chars once quoted) plus the base command (${String(baseCommand.length)} chars) exceeds the max command length (${String(maxCommandLength)}).`
           )
         );
       }
