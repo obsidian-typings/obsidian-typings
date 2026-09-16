@@ -16,7 +16,8 @@ import {
   getNpmUsername,
   getPackageRegistryState,
   getScopedPackageName,
-  getTrustedPublisherInstructions
+  getTrustedPublisherInstructions,
+  readTrustedPublisherState
 } from './helpers/npm.ts';
 import {
   generateMainReadme,
@@ -98,12 +99,16 @@ async function main(): Promise<void> {
   // exist. So the steps that need a human are handed back to the human rather than dispatched into.
   //
   // "Exists" is NOT the predicate for "the hand-back is done", which is what this used to ask. The hand-back
-  // is two steps -- claim the name, then attach its trusted publisher -- and only the first of them is
-  // visible from here, because npm exposes no way to read a package's publisher. So the question asked is
-  // the one that CAN be answered: has anything ever published through this name? A package carrying a real
-  // release has already published from this very workflow, so its publisher is attached; one carrying only
-  // the bootstrap placeholder is in a state this script cannot resolve on its own, which is why that arm
-  // asks the operator below instead of deciding.
+  // is two steps -- claim the name, then attach its trusted publisher -- and this unauthenticated check sees
+  // only the first of them: has anything ever published through this name? A package carrying a real release
+  // has already published from this very workflow, so its publisher is attached; one carrying only the
+  // bootstrap placeholder has not, and this check cannot tell why.
+  //
+  // It used to be the ONLY question available, on the belief that npm exposes no way to read a package's
+  // publisher. `npm trust list` is that way, and the `placeholderOnly` arm below now asks it -- but only
+  // there, and only as a second question. It is authenticated and 2FA-gated, so it answers from a logged-in
+  // machine and nowhere else, while this one answers anywhere; and it would be a waste on the `released` arm,
+  // which is already certain. See `readTrustedPublisherState` for both measurements.
   //
   // What it does NOT mean any more is that a wrong guess is expensive. The two runs that died with a bare
   // `E404` on 2026-09-14 -- `obsidian-catalyst/1.14.0` and `1.14.1` -- each burned a minor and left a tag
@@ -138,12 +143,20 @@ async function main(): Promise<void> {
     return;
   }
 
-  // `placeholderOnly`. The name is claimed, so the only step that can still be outstanding is the npmjs.com
-  // form -- and that is a question the operator can answer, which is why this arm asks rather than refusing.
-  // A wrong answer is no longer expensive: `publish-release.ts` checks the publish right before it does
-  // anything irreversible, so a dispatch into a package with no publisher attached costs a red run.
-  printTrustedPublisherRequired(packageName);
-  await offerRelease(newBranchSpec, packageName);
+  // `placeholderOnly`. The name is claimed, so the only step that can still be outstanding is the publisher --
+  // and that one CAN be asked about directly, from a machine that is logged in to npm. When the answer comes
+  // back, it is the answer, and `offerRelease` dispatches without putting a question at all. When it does not
+  // -- no login here, or a one-time-password challenge with no terminal to answer it -- the arm falls back to
+  // what it has always done and asks the operator. A wrong answer there is not expensive:
+  // `publish-release.ts` checks the publish right before it does anything irreversible, so a dispatch into a
+  // package with no publisher attached costs a red run.
+  const publisherState = await readTrustedPublisherState(packageName);
+
+  if (publisherState !== 'attached') {
+    printTrustedPublisherRequired(packageName, publisherState === 'none');
+  }
+
+  await offerRelease(newBranchSpec, packageName, publisherState);
 }
 
 function printBootstrapRequired(packageName: string, branchSpec: BranchSpec, npmUsername: null | string): void {
@@ -173,14 +186,18 @@ function printBootstrapRequired(packageName: string, branchSpec: BranchSpec, npm
   ].join('\n'));
 }
 
-function printTrustedPublisherRequired(packageName: string): void {
+function printTrustedPublisherRequired(packageName: string, isPublisherKnownMissing: boolean): void {
   console.log([
     '',
     `Branch created, but nothing has ever published through ${packageName}, so the release was NOT dispatched.`,
     '',
     'The name is claimed -- a bootstrap placeholder holds it -- so the first half of the hand-back is done.',
-    'Whether the second half is done cannot be read from here: npm offers no way to ask a package who is',
-    'allowed to publish it. So the prompt below asks you instead, and dispatches the release on a yes.',
+    ...isPublisherKnownMissing
+      ? ['npm reports no trusted publisher on it, so the second half is definitely still outstanding.']
+      : [
+        'Whether the second half is done could not be read from here: `npm trust list` needs an npm login and',
+        'a terminal it can put a one-time-password challenge to. So the prompt below asks you instead.'
+      ],
     getTrustedPublisherInstructions(packageName)
   ].join('\n'));
 }

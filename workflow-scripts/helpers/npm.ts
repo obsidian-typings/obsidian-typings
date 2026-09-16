@@ -11,10 +11,12 @@
  * differently, the bootstrap would claim one package and CI would fail publishing to another.
  *
  * The trusted-publisher half lives here for the same reason, one step later: claiming the name and attaching
- * the publisher are separate steps with separate failure modes, and the wording of "you still have to attach
- * it" is now needed by three scripts rather than one.
+ * the publisher are separate steps with separate failure modes, and all three of reading that publisher,
+ * attaching it, and wording the hand-back for when neither can be done from where the caller stands are
+ * needed by more than one script.
  */
 
+import { execFileSync } from 'node:child_process';
 import process from 'node:process';
 
 import type { BranchSpec } from './branchSpec.ts';
@@ -29,6 +31,16 @@ import { execFromRoot } from './exec.ts';
  * {@link getPackageRegistryState}.
  */
 export type PackageRegistryState = 'missing' | 'placeholderOnly' | 'released';
+
+/**
+ * What {@link readTrustedPublisherState} was able to find out about a package's trusted publisher.
+ *
+ * `unknown` is a first-class answer rather than a failure. The read is authenticated and 2FA-gated, so
+ * "nobody is logged in on this machine", "the registry wants a one-time password and there is no terminal to
+ * type it into", and "the request never arrived" all land in it — and a caller that cannot tell those apart
+ * must not act as though it can.
+ */
+export type TrustedPublisherState = 'attached' | 'none' | 'unknown';
 
 /** The unscoped package the `public` channel's `-latest` wrapper is itself wrapped by. */
 export const LEGACY_PACKAGE_NAME = 'obsidian-typings';
@@ -72,6 +84,59 @@ interface Packument {
 
 interface TokenExchangeResponse {
   token?: string;
+}
+
+/**
+ * Attaches this repo's trusted publisher to a package, reporting whether npm accepted it.
+ *
+ * This is the npmjs.com form, as a command. `npm trust github` POSTs to `/-/package/<name>/trust`, which is
+ * the record the "Trusted Publisher" panel writes, so the two are interchangeable — and this one can be run
+ * by the script the operator is already standing in front of, which is the whole point. The form is the half
+ * of the hand-back that gets skipped, and it gets skipped because it is somewhere else.
+ *
+ * Three flag choices, each load-bearing:
+ *
+ * - `--allow-publish` is not optional. `npm/lib/trust-cmd.js` throws `At least one permission flag is
+ *   required` when neither it nor `--allow-stage-publish` is given, so a call without it creates nothing at
+ *   all. Staged publishing is not something this repo does, so it takes the one permission.
+ * - `--repo` is passed EXPLICITLY, although npm would infer it from the nearest `package.json`'s `repository`
+ *   field. The inference reads `npm.prefix`, so what it resolves to depends on which directory the command
+ *   was spawned from and which branch is checked out — and both callers here can be standing on `main` or on
+ *   a release branch. Pinning it to the same constants {@link getTrustedPublisherInstructions} prints keeps
+ *   the command, the printed fallback and the web form all saying one thing.
+ * - `--yes` skips npm's own `Do you want to proceed? (y/N)` confirm and nothing else. The 2FA challenge is a
+ *   separate mechanism that no flag suppresses, which is exactly the shape wanted here: one command, one code.
+ *
+ * Deliberately not `execFromRoot`. npm's `otplease` opens with
+ * `if (!process.stdin.isTTY || !process.stdout.isTTY) { throw err }` (npm 12.0.2, `lib/utils/auth.js`), so
+ * redirecting EITHER stream turns the one-time-password challenge into an immediate failure rather than a
+ * prompt. Inheriting the terminal is the only way this call can succeed, and it is the same reason
+ * `publishPlaceholder` in `bootstrap-new-package.ts` inherits it.
+ *
+ * Returns `false` rather than throwing, because every caller's failure path is to print
+ * {@link getTrustedPublisherInstructions} and carry on. A publisher that could not be attached from here
+ * leaves the repo in the state it has always been in; that is not worth aborting a script over.
+ */
+export function attachTrustedPublisher(packageName: string): boolean {
+  try {
+    execFileSync('npm', [
+      'trust',
+      'github',
+      packageName,
+      '--file',
+      PUBLISH_WORKFLOW_FILE_NAME,
+      '--repo',
+      `${GITHUB_OWNER}/${GITHUB_REPOSITORY}`,
+      '--allow-publish',
+      '--yes'
+    ], {
+      shell: true,
+      stdio: 'inherit'
+    });
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -126,14 +191,27 @@ export async function getNpmUsername(): Promise<null | string> {
  *
  * The three states exist because "the package exists" is NOT the predicate for "the bootstrap is done", and
  * two scripts used to treat it as one. The hand-back is two steps -- claim the name, then attach its trusted
- * publisher on npmjs.com -- with separate failure modes, and after the placeholder publishes, mere existence
- * is `true` in both states. It cannot be narrowed further from here, because npm exposes no way to read a
- * package's trusted publisher: `npm access` has no subcommand for it (checked in npm 12.0.2), and the
- * registry offers no unauthenticated endpoint. What CAN be read is the consequence: a package carrying a real
- * release has, by definition, already published through CI, so its publisher is attached. One carrying only
- * the placeholder has not, and its publisher state is simply unknown -- which is the honest answer, and the
- * reason no caller dispatches into that state on its own say-so: `helpers/handBack.ts` asks the operator
- * instead. {@link hasTrustedPublisher} answers the question directly, but only from inside the CI job.
+ * publisher -- with separate failure modes, and once the placeholder publishes, mere existence is `true` in
+ * both states.
+ *
+ * This is still a HEURISTIC, but not for the reason it used to give. Until 2026-09-15 this doc asserted that
+ * npm exposes no way to read a package's trusted publisher -- that `npm access` has no subcommand for it and
+ * the registry offers no endpoint. `npm access` really does not, and the conclusion was then generalized
+ * without looking for a separate top-level command. There is one: `npm trust`, which
+ * {@link readTrustedPublisherState} calls.
+ *
+ * The reason this function survives the correction is narrower than the claim it replaces. That read is
+ * authenticated and 2FA-gated, so it answers only from a logged-in machine and only when the registry does
+ * not challenge the call; this one is an unauthenticated `fetch` that answers everywhere -- from CI, from a
+ * checkout with no npm login, from a script whose stdout is a pipe. They are asked in that order rather than
+ * chosen between.
+ *
+ * What this reads is the *consequence* of a publisher rather than the publisher itself: a package carrying a
+ * real release has, by definition, already published through CI, so its publisher is attached. One carrying
+ * only the placeholder has not, and from here its publisher state is unknown -- which is the honest answer,
+ * and the reason no caller dispatches into that state on this function's say-so alone.
+ * {@link hasTrustedPublisher} answers the question directly from inside the CI job, where there is no npm
+ * credential for {@link readTrustedPublisherState} to authenticate with at all.
  */
 export async function getPackageRegistryState(packageName: string): Promise<PackageRegistryState> {
   const url = `${REGISTRY_URL}/${escapePackageName(packageName)}`;
@@ -166,20 +244,44 @@ export function getScopedPackageName(branchSpec: BranchSpec): string {
 }
 
 /**
+ * The exact `npm trust` invocation that attaches this repo's publisher to a package, as a single line.
+ *
+ * Kept separate from {@link attachTrustedPublisher} so that the command can be *printed* by a script that
+ * cannot *run* it -- CI, or any caller whose stdio is redirected. The two are built from the same constants
+ * on purpose: a printed command that differs from the one the tooling runs is a second, unverified way to
+ * configure the package, and it is the printed one a human would then trust.
+ */
+export function getTrustedPublisherCommand(packageName: string): string {
+  return `npm trust github ${packageName} --file ${PUBLISH_WORKFLOW_FILE_NAME}`
+    + ` --repo ${GITHUB_OWNER}/${GITHUB_REPOSITORY} --allow-publish --yes`;
+}
+
+/**
  * The remedy for a package with no trusted publisher attached, worded once.
  *
- * Printed by `bootstrap-new-package.ts` after it claims a name, printed by `create-new-release-branch.ts`
- * when it refuses to dispatch into a name nothing has published through, and embedded in the error
- * `publish-release.ts` throws when CI meets the consequence. Every field is case-sensitive on npmjs.com, so
- * the list is given verbatim rather than described.
+ * Printed by `bootstrap-new-package.ts` when it cannot attach the publisher itself, printed by
+ * `create-new-release-branch.ts` when it refuses to dispatch into a name nothing has published through, and
+ * embedded in the error `publish-release.ts` throws when CI meets the consequence.
+ *
+ * It leads with the command, because that is the form the remedy actually takes now: one line, one 2FA code,
+ * no browser. The npmjs.com form follows as a fallback rather than as the primary path -- it remains the only
+ * route on a machine with no npm login, and the only one a reader can follow when the command has just failed
+ * in front of them. Its fields are given verbatim because every one of them is case-sensitive.
  */
 export function getTrustedPublisherInstructions(packageName: string): string {
   return [
     '',
     'Attach the trusted publisher, or CI still will not be able to publish it:',
     '',
+    `  ${getTrustedPublisherCommand(packageName)}`,
+    '',
+    'npm asks for one 2FA code and prints the configuration it created. Run it in a real terminal: npm refuses',
+    'the operation outright, rather than prompting, when its input or output is redirected.',
+    '',
+    'The same thing by hand, if that command is unavailable -- every field is case-sensitive:',
+    '',
     `  1. Open https://www.npmjs.com/package/${packageName}/access`,
-    '  2. Under "Trusted Publisher", choose GitHub Actions and enter, exactly (every field is case-sensitive):',
+    '  2. Under "Trusted Publisher", choose GitHub Actions and enter, exactly:',
     '',
     `       Organization or user: ${GITHUB_OWNER}`,
     `       Repository:           ${GITHUB_REPOSITORY}`,
@@ -247,6 +349,47 @@ export async function hasTrustedPublisher(packageName: string): Promise<boolean 
   }
 
   return null;
+}
+
+/**
+ * Asks the registry which trusted publishers a package has, or `unknown` when it will not say from here.
+ *
+ * `npm trust list` GETs `/-/package/<name>/trust`, which is the direct answer to the question three places in
+ * this repo used to say could not be asked at all. It is not a drop-in replacement for
+ * {@link getPackageRegistryState}, for two measured reasons rather than the imagined one:
+ *
+ * 1. **It is 2FA-gated per call, not merely authenticated.** Measured 2026-09-15 against npm 12.0.2 with a
+ *    valid login -- `npm whoami` answered `mnaoumov` seconds earlier -- `npm trust list` on a package this
+ *    account owns came back `EOTP ... This operation requires a one-time password`. The challenge belongs to
+ *    the endpoint, not to the state of the token.
+ * 2. **The challenge cannot be answered by a script that reads the output.** npm's `otplease` opens with
+ *    `if (!process.stdin.isTTY || !process.stdout.isTTY) { throw err }`, and capturing stdout is precisely
+ *    what makes stdout not a TTY. So a caller may have the answer or may have a terminal, never both.
+ *
+ * That second point is also what makes this safe to call unconditionally: it cannot hang waiting for a code
+ * nobody will type, because the prompt is never reached. It fails immediately and lands in `unknown`, and the
+ * caller falls back to the heuristic it would have used anyway.
+ *
+ * The output is deliberately NOT parsed. Reading `npm/lib/trust-cmd.js`: under `--json`, `displayResponseBody`
+ * emits one pretty-printed object PER configuration, so two publishers produce two concatenated objects
+ * rather than an array -- `JSON.parse` would throw on exactly the packages that are most thoroughly
+ * configured. An EMPTY result emits nothing at all, because the "No trust configurations found" line goes
+ * through `dialogue`, which `--json` suppresses. Non-empty stdout on a zero exit is therefore the whole
+ * predicate, and it is the right granularity: the question is whether this package has a publisher, not
+ * which.
+ */
+export async function readTrustedPublisherState(packageName: string): Promise<TrustedPublisherState> {
+  const result = await execFromRoot(`npm trust list "${packageName}" --json`, {
+    isQuiet: true,
+    shouldIgnoreExitCode: true,
+    shouldIncludeDetails: true
+  });
+
+  if (result.exitCode !== 0) {
+    return 'unknown';
+  }
+
+  return result.stdout.trim() ? 'attached' : 'none';
 }
 
 /**

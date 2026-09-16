@@ -10,12 +10,17 @@
  * noticed it had not been run. Two branches sat created-but-unreleased from 2026-09-14 because of exactly
  * that.
  *
- * Asking the operator is what gives it an owner. The question cannot be answered from here -- npm exposes no
- * way to read a package's trusted publisher -- but it no longer has to be answered *correctly*. Since
- * `publish-release.ts` gained `assertCanPublish`, a dispatch into a package whose publisher was never
- * attached is refused at the top of the job, before `npm install`, the build, the version bump, the commit
- * and the tag, and costs nothing but a red run carrying the `/access` link. A wrong "yes" is cheap now; a
- * release nobody dispatches never gets cheaper.
+ * Asking the operator is what gives it an owner, and for a while asking was all that could be done, on the
+ * belief that npm exposes no way to read a package's trusted publisher. It does -- `npm trust list`, wired up
+ * here as `readTrustedPublisherState()` -- so the question is now asked only when that read comes back
+ * `unknown` or `none`. On `attached` there is nothing left to ask about and the release is dispatched
+ * outright, exactly as `create-new-release-branch.ts` has always done for a name carrying a real release.
+ *
+ * Where the question is still asked, it no longer has to be answered *correctly*. Since `publish-release.ts`
+ * gained `assertCanPublish`, a dispatch into a package whose publisher was never attached is refused at the
+ * top of the job, before `npm install`, the build, the version bump, the commit and the tag, and costs
+ * nothing but a red run carrying the `/access` link. A wrong "yes" is cheap; a release nobody dispatches
+ * never gets cheaper.
  *
  * Every path that declines ends where the old instructions did, so nothing is lost by saying no: the exact
  * two commands, printed. TWO, not one -- `npm run release` exists only on a release branch, and both callers
@@ -27,6 +32,7 @@ import process from 'node:process';
 import { createInterface } from 'node:readline/promises';
 
 import type { BranchSpec } from './branchSpec.ts';
+import type { TrustedPublisherState } from './npm.ts';
 
 import { generateBranchName } from './branchSpec.ts';
 import { restoreWorkflowScripts } from './checkout.ts';
@@ -56,28 +62,49 @@ export function getManualReleaseInstructions(branchName: string): string {
 }
 
 /**
- * Offers to dispatch the release for a freshly claimed package, and does it when the operator says the
- * trusted publisher is saved. Resolves to whether the release was actually dispatched.
+ * Dispatches the release for a freshly claimed package, asking first unless npm has already confirmed the
+ * package's trusted publisher. Resolves to whether the release was actually dispatched.
+ *
+ * `publisherState` is what `readTrustedPublisherState()` managed to find out, and it decides whether there is
+ * anything to ask:
+ *
+ * - `attached` -- npm itself says the package can be published, so no question is put and none is needed.
+ *   The dispatch does not require a terminal either, which is why the TTY check sits inside the asking arm
+ *   rather than above it: this is the same unconditional dispatch `create-new-release-branch.ts` has always
+ *   performed for a name that already carries a real release.
+ * - `none` -- npm says there is no publisher. The question is still worth putting, because the operator can
+ *   attach one in another window and answer `y` when they have; it is simply worded as the statement it is
+ *   rather than as an open question.
+ * - `unknown` -- the read could not be made. This is the original behavior, and the reason a wrong `y` had
+ *   to be made cheap in the first place.
  *
  * Declining is a first-class answer, not a failure: it prints the same two commands the hand-back has always
  * ended with and returns. So is having no terminal to ask at -- the prompt is skipped outright rather than
  * reading EOF and guessing, because this module is imported by scripts that a CI job could one day run, and
  * an unattended hang is the one outcome worse than an unreleased branch.
  */
-export async function offerRelease(branchSpec: BranchSpec, packageName: string): Promise<boolean> {
+export async function offerRelease(
+  branchSpec: BranchSpec,
+  packageName: string,
+  publisherState: TrustedPublisherState
+): Promise<boolean> {
   const branchName = generateBranchName(branchSpec);
 
-  if (!process.stdin.isTTY) {
-    console.log('\nNot running on a terminal, so the release was not dispatched.');
-    console.log(getManualReleaseInstructions(branchName));
-    return false;
-  }
+  if (publisherState !== 'attached') {
+    if (!process.stdin.isTTY) {
+      console.log('\nNot running on a terminal, so the release was not dispatched.');
+      console.log(getManualReleaseInstructions(branchName));
+      return false;
+    }
 
-  const isPublisherSaved = await askYesNo(`\nHas the trusted publisher for ${packageName} been saved on npmjs.com? [y/N] `);
+    const question = publisherState === 'none'
+      ? `\nnpm reports no trusted publisher for ${packageName}. Attach it now and answer y when it is saved. [y/N] `
+      : `\nHas the trusted publisher for ${packageName} been saved? [y/N] `;
 
-  if (!isPublisherSaved) {
-    console.log(getManualReleaseInstructions(branchName));
-    return false;
+    if (!await askYesNo(question)) {
+      console.log(getManualReleaseInstructions(branchName));
+      return false;
+    }
   }
 
   // A dirty tree stops this before the branch switch rather than after it. `git checkout` would refuse
@@ -95,8 +122,11 @@ export async function offerRelease(branchSpec: BranchSpec, packageName: string):
   await switchToBranch(branchName);
 
   console.log(`\nDispatching the release for ${branchName}.`);
-  console.log('If the publisher turns out to be missing after all, the workflow refuses before it installs,');
-  console.log('builds, bumps or tags anything -- so a wrong answer above costs a red run and nothing else.');
+
+  if (publisherState !== 'attached') {
+    console.log('If the publisher turns out to be missing after all, the workflow refuses before it installs,');
+    console.log('builds, bumps or tags anything -- so a wrong answer above costs a red run and nothing else.');
+  }
 
   await execFromRoot('npm run release');
   return true;
