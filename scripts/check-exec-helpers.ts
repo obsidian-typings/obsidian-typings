@@ -14,6 +14,12 @@
  *    `/bin/sh`. Nothing in this repo exercised either: a trailing backslash on a path with a space, an
  *    embedded quote, an embedded newline, a metacharacter. All three quoters are asserted here as pure
  *    functions, so every case runs on every platform rather than only on the one whose shell it describes.
+ * 3. **The budget is spent by what the shell is handed.** On Windows that is neither the quoted command line
+ *    nor the whole of it: `commandEscapeCommandLine` can double the line and `cmd.exe /d /s /c "..."` takes
+ *    a fixed bite out of the same ceiling, both of them after the budget was measured until 2026-09-16. So a
+ *    batch sized at 8191 died with `The command line is too long.` The split round trip is run a second
+ *    time over padding built of `&` to cover it, and an over-budget command line is asserted to be refused
+ *    here rather than by the shell.
  *
  * The end-to-end round trip below - actually spawning a child and reading its `process.argv` back - runs
  * everywhere. It was Windows-only until 2026-09-16, when `toCommandLine` gained its POSIX arm: before that
@@ -39,6 +45,7 @@ import {
   argvQuote,
   commandEscapeCommandLine,
   getMaxCommandLength,
+  getShellCommandLineLength,
   posixQuote,
   toCommandLine
 } from './helpers/exec.ts';
@@ -69,6 +76,22 @@ const failures: string[] = [];
 exitIfScriptDisabled();
 
 /*
+ * The split round trip again over padding built of the one character `cmd.exe` charges twice for. This is
+ * the case the budget got wrong: the splitter sized each batch by the quoted command line, then
+ * `commandEscapeCommandLine` doubled it and `cmd.exe /d /s /c "..."` added its own bytes, so every batch
+ * built here arrived over the ceiling and the run died with `The command line is too long.` It is cheap
+ * beside {@link assertBatchedSplitRoundTrip} - the padding is the whole argument list rather than a filler
+ * between two tricky ends, because what is under test is the sizing and not the quoting.
+ */
+async function assertBatchedEscapedSplitRoundTrip(echoScriptPath: string): Promise<void> {
+  await assertSplitRoundTrip(
+    echoScriptPath,
+    buildEscapePaddingArguments(),
+    'the split batched argv round trip over padding the shell escape doubles'
+  );
+}
+
+/*
  * The batched command shape under the length budget, which is the one site of the three that runs without the
  * command line having to exceed it. Its arguments used to be interpolated raw while the static parts beside
  * them were quoted, so `two words` arrived as two arguments and `a & b | c` was read as shell syntax.
@@ -94,45 +117,17 @@ async function assertBatchedRoundTrip(echoScriptPath: string): Promise<void> {
  * The same round trip forced over the budget, so the batches are actually built and spawned. The other two
  * sites that interpolated batched arguments raw - the tentative command the splitter measures, and the one
  * `executeBatches` runs - are reachable only this way, which is why padding this out is worth the extra
- * spawns. The padding arguments are distinct and quoting-free, so the assertion below also proves the batches
- * come back in order.
+ * spawns. The padding arguments are distinct and quoting-free, so the order check in
+ * {@link assertSplitRoundTrip} proves the batches come back in the order they were split into.
  */
 async function assertBatchedSplitRoundTrip(echoScriptPath: string): Promise<void> {
   const trickyArguments = getBatchedTrickyArguments();
-  const expectedArguments = [...trickyArguments, ...buildPaddingArguments(), ...trickyArguments];
 
-  const batchArgumentLists = await execBatchedEchoArgv(echoScriptPath, expectedArguments);
-
-  /*
-   * Guards the sizing above: were the padding ever to stop exceeding the budget, this case would quietly
-   * become a second copy of the unsplit one rather than failing.
-   */
-  const MINIMUM_SPLIT_BATCH_COUNT = 2;
-  if (batchArgumentLists.length < MINIMUM_SPLIT_BATCH_COUNT) {
-    failures.push(
-      `a batched command over the length budget splits into batches: expected more than one batch, got ${String(batchArgumentLists.length)}`
-    );
-    return;
-  }
-
-  const actualArguments = batchArgumentLists.flat();
-  if (actualArguments.length !== expectedArguments.length) {
-    failures.push(
-      `the split batched argv round trip: expected ${String(expectedArguments.length)} arguments back, got ${String(actualArguments.length)}`
-    );
-    return;
-  }
-
-  /*
-   * Reported one argument at a time rather than as two JSON blobs: the arrays run to hundreds of entries, and
-   * a whole-array diff would bury the one that moved.
-   */
-  const differenceIndex = expectedArguments.findIndex((argument, index) => actualArguments[index] !== argument);
-  if (differenceIndex !== -1) {
-    failures.push(
-      `the split batched argv round trip: argument ${String(differenceIndex)} came back as ${JSON.stringify(actualArguments[differenceIndex])}, expected ${JSON.stringify(expectedArguments[differenceIndex])}`
-    );
-  }
+  await assertSplitRoundTrip(
+    echoScriptPath,
+    [...trickyArguments, ...buildPaddingArguments(), ...trickyArguments],
+    'the split batched argv round trip'
+  );
 }
 
 async function assertCopiesAreIdentical(): Promise<void> {
@@ -173,6 +168,45 @@ function assertEqual(actual: string, expected: string, label: string): void {
   if (actual !== expected) {
     failures.push(`${label}: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`);
   }
+}
+
+/*
+ * A command line that is inside the budget as the quoter leaves it and over it as the shell receives it.
+ * Until 2026-09-16 `exec` measured the first of those and handed the second to `cmd.exe`, which answered
+ * `The command line is too long.` - an exit code 1 from somewhere inside the command, with nothing naming
+ * the length as the cause. It has to be refused here, before anything is spawned.
+ */
+async function assertOverBudgetCommandIsRefused(): Promise<void> {
+  const maxCommandLength = getMaxCommandLength();
+  const PREFIX = 'echo ';
+  const METACHARACTER = '&';
+
+  /*
+   * What one more metacharacter costs the budget, read off the helper rather than restated: two bytes where
+   * the escape applies, one where it does not. Sizing this way is what lets the case run on both.
+   */
+  const costPerCharacter = getShellCommandLineLength(PREFIX + METACHARACTER) - getShellCommandLineLength(PREFIX);
+  const count = Math.ceil((maxCommandLength + 1 - getShellCommandLineLength(PREFIX)) / costPerCharacter);
+  const commandLine = PREFIX + METACHARACTER.repeat(count);
+
+  assertEqual(
+    String(commandLine.length <= maxCommandLength),
+    String(process.platform === 'win32'),
+    'the over-budget command line is one the quoted length would have let through, on Windows'
+  );
+
+  let message = '';
+  try {
+    await execFromRoot(commandLine, { isQuiet: true });
+  } catch (error) {
+    message = error instanceof Error ? error.message : String(error);
+  }
+
+  assertEqual(
+    String(message.startsWith('Command line is too long')),
+    'true',
+    `an over-budget command line is refused by exec rather than by the shell, which answered ${JSON.stringify(message.split('\n', 1)[0] ?? '')}`
+  );
 }
 
 function assertPlatformCommandLine(): void {
@@ -264,6 +298,68 @@ async function assertRoundTrip(echoScriptPath: string): Promise<void> {
   );
 }
 
+/*
+ * The budget's two Windows-only layers, asserted as properties rather than by restating the arithmetic the
+ * helper does: a metacharacter costs the line the byte its escape takes, and the wrapper `cmd.exe` is
+ * invoked with costs it a fixed amount. Both are zero everywhere else, where the command string is handed
+ * to `sh` as its own argv entry and shares its budget with nothing.
+ */
+function assertShellCommandLineLength(): void {
+  const isWindows = process.platform === 'win32';
+
+  assertEqual(
+    String(getShellCommandLineLength('echo a&b') - getShellCommandLineLength('echo axb')),
+    isWindows ? '1' : '0',
+    'a cmd.exe metacharacter costs the budget its escape'
+  );
+
+  const PLAIN_COMMAND_LINE = 'echo plain';
+  assertEqual(
+    String(getShellCommandLineLength(PLAIN_COMMAND_LINE) > PLAIN_COMMAND_LINE.length),
+    String(isWindows),
+    'the shell wrapper is spent from the same budget'
+  );
+}
+
+/*
+ * The shared body of the two split cases: run the batched command, then check that it split at all, that
+ * every argument came back, and that they came back in order.
+ */
+async function assertSplitRoundTrip(echoScriptPath: string, expectedArguments: string[], label: string): Promise<void> {
+  const batchArgumentLists = await execBatchedEchoArgv(echoScriptPath, expectedArguments);
+
+  /*
+   * Guards the callers' sizing: were their padding ever to stop exceeding the budget, this case would
+   * quietly become a second copy of the unsplit one rather than failing.
+   */
+  const MINIMUM_SPLIT_BATCH_COUNT = 2;
+  if (batchArgumentLists.length < MINIMUM_SPLIT_BATCH_COUNT) {
+    failures.push(
+      `${label}: expected the command to split into more than one batch, got ${String(batchArgumentLists.length)}`
+    );
+    return;
+  }
+
+  const actualArguments = batchArgumentLists.flat();
+  if (actualArguments.length !== expectedArguments.length) {
+    failures.push(
+      `${label}: expected ${String(expectedArguments.length)} arguments back, got ${String(actualArguments.length)}`
+    );
+    return;
+  }
+
+  /*
+   * Reported one argument at a time rather than as two JSON blobs: the arrays run to hundreds of entries, and
+   * a whole-array diff would bury the one that moved.
+   */
+  const differenceIndex = expectedArguments.findIndex((argument, index) => actualArguments[index] !== argument);
+  if (differenceIndex !== -1) {
+    failures.push(
+      `${label}: argument ${String(differenceIndex)} came back as ${JSON.stringify(actualArguments[differenceIndex])}, expected ${JSON.stringify(expectedArguments[differenceIndex])}`
+    );
+  }
+}
+
 function assertWindowsQuoting(): void {
   /*
    * The case the naive quoter gets wrong: a directory path with a space in it. Quoting it puts the trailing
@@ -317,6 +413,22 @@ function assertWindowsQuoting(): void {
 }
 
 /*
+ * The same padding as {@link buildPaddingArguments}, built out of the one character whose escape costs the
+ * command line a second byte, so a batch sized by the quoted length is over the ceiling by the time
+ * `cmd.exe` parses it. Sized from the raw length as the padding below is, which is a floor on the length the
+ * shell sees and so exceeds the budget on every platform. The index suffix keeps the arguments distinct.
+ */
+function buildEscapePaddingArguments(): string[] {
+  const PADDING_ARGUMENT_LENGTH = 100;
+  const METACHARACTER = '&';
+  const count = Math.ceil(getMaxCommandLength() / (PADDING_ARGUMENT_LENGTH + 1)) + 1;
+  return Array.from(
+    { length: count },
+    (_unused, index) => METACHARACTER.repeat(PADDING_ARGUMENT_LENGTH) + String(index)
+  );
+}
+
+/*
  * Enough distinct, quoting-free arguments to carry a batched command line past the budget whichever platform
  * this runs on, sized from {@link getMaxCommandLength} rather than from a restated constant. Each is exactly
  * {@link PADDING_ARGUMENT_LENGTH} characters of word characters, so the quoter passes it through untouched and
@@ -365,11 +477,14 @@ async function main(): Promise<void> {
   assertWindowsQuoting();
   assertPosixQuoting();
   assertPlatformCommandLine();
+  assertShellCommandLineLength();
 
   const echoScriptPath = await writeEchoArgvScript();
   await assertRoundTrip(echoScriptPath);
   await assertBatchedRoundTrip(echoScriptPath);
   await assertBatchedSplitRoundTrip(echoScriptPath);
+  await assertBatchedEscapedSplitRoundTrip(echoScriptPath);
+  await assertOverBudgetCommandIsRefused();
 
   if (failures.length > 0) {
     console.error(`check:exec-helpers found ${String(failures.length)} problem(s):`);
