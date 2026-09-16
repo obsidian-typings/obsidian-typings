@@ -1,5 +1,5 @@
 import { generateBranchName } from './branchSpec.ts';
-import { execFromRoot } from './exec.ts';
+import { execFromRoot } from './root.ts';
 import { getLatestVersion } from './version.ts';
 
 export async function checkout(targetBranch: string, withScripts: boolean): Promise<void> {

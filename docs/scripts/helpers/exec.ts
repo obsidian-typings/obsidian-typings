@@ -1,52 +1,52 @@
-import type {
-  PackageJson,
-  Promisable,
-  UndefinedOnPartialDeep
-} from 'type-fest';
+/**
+ * @file
+ *
+ * Runs a child process and collects its output.
+ *
+ * This file is one of **three byte-identical copies** - `scripts/helpers/exec.ts`,
+ * `workflow-scripts/helpers/exec.ts` and `docs/scripts/helpers/exec.ts`. The copies are deliberate: each of
+ * those trees is a self-contained island with its own `package.json`, `tsconfig.json` and dependency tree
+ * (`workflow-scripts` is additionally synced into a release branch's working copy with
+ * `git restore --source=main --worktree -- ./workflow-scripts`), so reaching into a sibling tree would tie it
+ * to whichever `scripts/` the host branch happens to carry.
+ *
+ * `npm run check:exec-helpers` asserts the three are identical, so edit one and copy it over the other two
+ * rather than patching them apart. The same holds for `helpers/root.ts` beside it.
+ */
+
+import type { ChildProcessWithoutNullStreams } from 'node:child_process';
 
 import { spawn } from 'node:child_process';
-import { existsSync } from 'node:fs';
-import {
-  readFile,
-  writeFile
-} from 'node:fs/promises';
-import {
-  dirname,
-  join,
-  resolve as posixResolve
-} from 'node:path/posix';
 import process from 'node:process';
 
 export type CommandPart = ExecArgument | string;
 
-/**
- * Options for {@link editJson}.
- */
-export interface EditJsonOptions {
-  /**
-   * If `true`, skips editing if the file does not exist.
-   */
-  readonly shouldSkipIfMissing?: boolean;
-}
-
-export interface EditPackageJsonOptions {
-  /**
-   * A current working folder where `package.json` is located.
-   */
-  readonly cwd?: string;
-
-  /**
-   * If `true`, skips editing if the file does not exist.
-   */
-  readonly shouldSkipIfMissing?: boolean;
-}
 export interface ExecArgument {
-  batchedArguments: string[];
+  readonly batchedArguments: readonly string[];
 }
+
+/**
+ * The overload discriminator MUST be the same property `execString` below branches on. It was `withDetails`
+ * until 2026-09-15, and nothing could see the difference: both overloads compiled, both were reachable, and
+ * each resolved to the other one's shape -- `{ withDetails: true }` was typed `Promise<ExecResult>` and
+ * resolved to a bare string, while `{ shouldIncludeDetails: true }` selected the SIMPLE overload (the base
+ * {@link ExecOption} declares that property as `boolean`, so it does not discriminate) and resolved to an
+ * {@link ExecResult} typed as `string`. A caller reading `.exitCode` off the first got `undefined`. No gate
+ * can catch this -- the code is type-*correct*, and the lie sits between the declaration and the branch,
+ * which is why the two must stay one name.
+ */
+export interface ExecDetailedOptions extends ExecOption {
+  readonly shouldIncludeDetails: true;
+}
+
 export interface ExecOption {
   readonly cwd?: string;
+
+  /**
+   * Extra environment variables for the child, merged over the inherited `process.env`.
+   */
+  readonly env?: Readonly<Record<string, string>>;
   readonly isQuiet?: boolean;
-  readonly shouldFailIfCalledFromOutsideRoot?: boolean;
   readonly shouldIgnoreExitCode?: boolean;
   readonly shouldIncludeDetails?: boolean;
   readonly stdin?: string;
@@ -59,180 +59,110 @@ export interface ExecResult {
   readonly stdout: string;
 }
 
-export interface PackageLockJson extends Partial<PackageJson> {
-  /**
-   * Packages in the `package-lock.json` file.
-   */
-  packages?: Record<string, PackageJson>;
-}
-
-/**
- * The overload discriminator MUST be the same property `execString` below branches on. It was
- * `withDetails` until 2026-09-15, and nothing could see the difference: both overloads compiled, both
- * were reachable, and each resolved to the other one's shape -- `{ withDetails: true }` was typed
- * `Promise<ExecResult>` and resolved to a bare string, while `{ shouldIncludeDetails: true }` selected
- * the SIMPLE overload (the base `ExecOption` declares that property as `boolean`, so it does not
- * discriminate) and resolved to an `ExecResult` typed as `string`. A caller reading `.exitCode` off the
- * first got `undefined`. No gate can catch this -- the code is type-*correct*, and the lie sits between
- * the declaration and the branch, which is why the two must stay one name.
- */
-interface ExecDetailedOptions extends ExecOption {
-  readonly shouldIncludeDetails: true;
-}
-interface ExecSimpleOptions extends ExecOption {
+export interface ExecSimpleOptions extends ExecOption {
   readonly shouldIncludeDetails?: false;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- The generic type is better for the strong typing.
-export async function editJson<T>(
-  path: string,
-  editFunction: (data: T) => Promisable<void>,
-  options: EditJsonOptions = {}
-): Promise<void> {
-  const {
-    shouldSkipIfMissing
-  } = options;
-  if (shouldSkipIfMissing && !existsSync(path)) {
-    return;
-  }
-  const data = await readJson<T>(path);
-  await editFunction(data);
-  await writeJson(path, data);
-}
-export async function editPackageJson(
-  editFunction: (packageJson: PackageJson) => Promisable<void>,
-  options: EditPackageJsonOptions = {}
-): Promise<void> {
-  const {
-    cwd,
-    shouldSkipIfMissing
-  } = options;
-  await editJson<PackageJson>(getPackageJsonPath(cwd), editFunction, normalizeOptionalProperties<EditJsonOptions>({ shouldSkipIfMissing }));
-}
-export async function editPackageLockJson(
-  editFunction: (packageLockJson: PackageLockJson) => Promisable<void>,
-  options: EditPackageJsonOptions = {}
-): Promise<void> {
-  const {
-    cwd,
-    shouldSkipIfMissing
-  } = options;
-  await editJson<PackageJson>(getPackageLockJsonPath(cwd), editFunction, normalizeOptionalProperties<EditJsonOptions>({ shouldSkipIfMissing }));
-}
-
-export function ensureNonNullable<T>(value: null | T | undefined, errorMessage: string): T {
-  if (value === null || value === undefined) {
-    throw new Error(errorMessage);
+/**
+ * Quotes one argument by the MSVCRT rules `cmd.exe` and the C runtime agree on: a run of backslashes is
+ * doubled only when a quote follows it or it ends the argument, and an embedded quote is escaped with one
+ * more backslash.
+ *
+ * Exported for `scripts/check-exec-helpers.ts`, which asserts the cases nothing else in the repo exercises --
+ * a trailing backslash, an embedded quote, an embedded newline. Not meant for callers; use {@link exec}.
+ */
+export function argvQuote(argument: string): string {
+  if (argument.length > 0 && !/[\s\t\n\v"]/.test(argument)) {
+    return argument;
   }
 
-  return value;
-}
-export async function execFromRoot(command: CommandPart[] | string, options?: ExecSimpleOptions): Promise<string>;
-export function execFromRoot(command: CommandPart[] | string, options: ExecDetailedOptions): Promise<ExecResult>;
-export function execFromRoot(command: CommandPart[] | string, options: ExecOption = {}): Promise<ExecResult | string> {
-  let root = getRootFolder(options.cwd);
-
-  if (!root) {
-    if (options.shouldFailIfCalledFromOutsideRoot ?? true) {
-      throw new Error('Could not find root folder');
+  const BACKSLASH_ESCAPE_FACTOR = 2;
+  let result = '"';
+  for (let index = 0; index < argument.length; index++) {
+    let numberBackslashes = 0;
+    while (index < argument.length && argument[index] === '\\') {
+      index++;
+      numberBackslashes++;
     }
 
-    root = options.cwd ?? process.cwd();
-  }
-
-  if (options.shouldIncludeDetails) {
-    return exec(command, { ...options, cwd: root, shouldIncludeDetails: true });
-  }
-
-  return exec(command, { ...options, cwd: root, shouldIncludeDetails: false });
-}
-
-export function getPackageJsonPath(cwd?: string): string {
-  return ensureNonNullable(resolvePathFromRoot('package.json', cwd), 'Could not determine the package.json path');
-}
-
-export function getPackageLockJsonPath(cwd?: string): string {
-  return ensureNonNullable(resolvePathFromRoot('package-lock.json', cwd), 'Could not determine the package-lock.json path');
-}
-
-export function getRootFolder(cwd?: string): null | string {
-  let currentFolder = toPosixPath(cwd ?? process.cwd());
-  while (currentFolder !== '.' && currentFolder !== '/') {
-    if (existsSync(join(currentFolder, 'package.json'))) {
-      return toPosixPath(currentFolder);
+    if (index === argument.length) {
+      result += '\\'.repeat(numberBackslashes * BACKSLASH_ESCAPE_FACTOR);
+      break;
     }
-    currentFolder = dirname(currentFolder);
+
+    const ch = argument.charAt(index);
+    result += ch === '"' ? `${'\\'.repeat(numberBackslashes * BACKSLASH_ESCAPE_FACTOR + 1)}"` : '\\'.repeat(numberBackslashes) + ch;
   }
 
-  return null;
+  result += '"';
+  return result;
 }
 
-export function normalizeOptionalProperties<T>(object: UndefinedOnPartialDeep<T>): T {
-  return object as T;
+/**
+ * Escapes the characters `cmd.exe` acts on before a command line reaches it, so an argument holding `&` or
+ * `|` is passed to the program rather than read as shell syntax.
+ *
+ * Exported for `scripts/check-exec-helpers.ts`, as {@link argvQuote} is. Not meant for callers.
+ */
+export function commandEscapeCommandLine(commandLine: string): string {
+  return commandLine.replaceAll(CMD_META_RE, '^$&');
 }
 
-export async function readJson<T>(path: string): Promise<T> {
-  return JSON.parse(await readFile(path, 'utf-8')) as T;
-}
-
-export async function readPackageJson(cwd?: string): Promise<PackageJson> {
-  return await readJson<PackageJson>(getPackageJsonPath(cwd));
-}
-
-export function resolvePathFromRoot(path: string, cwd?: string): null | string {
-  const rootFolder = getRootFolder(cwd);
-  if (!rootFolder) {
-    return null;
-  }
-
-  return resolveSafe(rootFolder, path);
-}
-
-export function toCommandLine(arguments_: string[]): string {
-  return arguments_
-    .map((argument) => {
-      if (/[\s"\n]/.test(argument)) {
-        let escapedArgument = argument;
-        escapedArgument = escapedArgument.replaceAll('"', String.raw`\"`);
-        escapedArgument = escapedArgument.replaceAll('\n', String.raw`\n`);
-        return `"${escapedArgument}"`;
-      }
-      return argument;
-    })
-    .join(' ');
-}
-
-export function toPosixPath(path: string): string {
-  return path.replaceAll('\\', '/');
-}
-
-export async function writeJson(path: string, data: unknown): Promise<void> {
-  await writeFile(path, `${toJson(data)}\n`);
-}
-async function exec(command: CommandPart[] | string, options?: ExecSimpleOptions): Promise<string>;
-async function exec(command: CommandPart[] | string, options: ExecDetailedOptions): Promise<ExecResult>;
-async function exec(command: CommandPart[] | string, options: ExecOption = {}): Promise<ExecResult | string> {
+export async function exec(command: CommandPart[] | string, options?: ExecSimpleOptions): Promise<string>;
+export function exec(command: CommandPart[] | string, options: ExecDetailedOptions): Promise<ExecResult>;
+export function exec(command: CommandPart[] | string, options: ExecOption = {}): Promise<ExecResult | string> {
   if (Array.isArray(command)) {
     const batchResult = handleBatchedCommand(command, options);
     if (batchResult) {
       return batchResult;
     }
-    command = toCommandLine(command.filter((part): part is string => typeof part === 'string'));
+    const $arguments = command.filter((part): part is string => typeof part === 'string');
+    const commandLine = toCommandLine($arguments);
+
+    const maxCommandLength = getMaxCommandLength();
+    if (commandLine.length > maxCommandLength) {
+      return Promise.reject(
+        new Error(
+          `Command line is too long (${String(commandLine.length)} chars, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArgument with batchedArguments.`
+        )
+      );
+    }
+
+    return execString(commandLine, options, $arguments);
   }
 
   const maxCommandLength = getMaxCommandLength();
   if (command.length > maxCommandLength) {
-    throw new Error(
-      `Command line is too long (${String(command.length)} chars, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArgument with batchedArguments.`
+    return Promise.reject(
+      new Error(
+        `Command line is too long (${String(command.length)} chars, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArgument with batchedArguments.`
+      )
     );
   }
 
   return execString(command, options);
 }
 
-function execString(command: string, options: ExecOption = {}): Promise<ExecResult | string> {
+/**
+ * Joins already-quoted arguments into one `cmd.exe` command line.
+ *
+ * Exported for `scripts/check-exec-helpers.ts`, as {@link argvQuote} is. Not meant for callers.
+ */
+export function toCommandLine($arguments: string[]): string {
+  return $arguments.map((argument) => argvQuote(argument)).join(' ');
+}
+
+const CMD_META_RE = /[()%!^"<>&|]/g;
+
+const CHILD_ENV = {
+  DEBUG_COLORS: '1',
+  ...process.env
+};
+
+function execString(command: string, options: ExecOption = {}, rawArguments?: string[]): Promise<ExecResult | string> {
   const {
     cwd = process.cwd(),
+    env = {},
     isQuiet: quiet = false,
     shouldIgnoreExitCode: ignoreExitCode = false,
     shouldIncludeDetails = false,
@@ -240,23 +170,14 @@ function execString(command: string, options: ExecOption = {}): Promise<ExecResu
   } = options;
 
   return new Promise((resolve, reject) => {
-    const child = spawn(command, [], {
-      cwd,
-      env: {
-        DEBUG_COLORS: '1',
-        ...process.env
-      },
-      shell: true,
-      stdio: 'pipe'
-    });
+    const child = spawnViaShell(command, cwd, env, rawArguments);
 
     let stdout = '';
     let stderr = '';
 
-    // A child that exits before reading its stdin makes this write fail with EPIPE. With no
-    // listener that is an unhandled 'error' event, which tears down the whole process instead of
-    // settling this promise. Swallow it: the 'close'/'error' handlers below report the command's
-    // actual outcome, which is the failure worth surfacing.
+    // A child that exits before reading its stdin makes this write fail with EPIPE.
+    // With no listener that is an unhandled 'error' event, which tears down the whole process instead of settling this promise.
+    // Swallow it: the 'close'/'error' handlers below report the command's actual outcome, which is the failure worth surfacing.
     child.stdin.on('error', () => {
       // Deliberately ignored -- see above.
     });
@@ -287,7 +208,7 @@ function execString(command: string, options: ExecOption = {}): Promise<ExecResu
 
     child.on('close', (exitCode, exitSignal) => {
       if (exitCode !== 0 && !ignoreExitCode) {
-        reject(new Error(`Command failed with exit code ${exitCode ? String(exitCode) : '(null)'}`));
+        reject(new Error(`Command failed with exit code ${exitCode ? String(exitCode) : '(null)'}\n${stderr}`));
         return;
       }
 
@@ -357,10 +278,11 @@ function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promis
     return Promise.reject(new Error('Only one ExecArgument with batchedArguments is allowed per command'));
   }
 
-  const [execArgument] = execArguments;
+  const execArgument = execArguments[0];
   if (!execArgument) {
     return undefined;
   }
+
   const staticParts = parts.filter((part): part is string => typeof part === 'string');
   const baseCommand = toCommandLine(staticParts);
   const maxCommandLength = getMaxCommandLength();
@@ -400,27 +322,41 @@ function isExecArgument(part: CommandPart): part is ExecArgument {
   return typeof part === 'object' && 'batchedArguments' in part;
 }
 
-function resolveSafe(...pathSegments: string[]): string {
-  let path = posixResolve(...pathSegments);
-  path = toPosixPath(path);
-  const WINDOWS_POSIX_LIKE_PATH_REG_EXP = /[a-zA-Z]:\/[^:]*$/;
-  const match = WINDOWS_POSIX_LIKE_PATH_REG_EXP.exec(path);
-  return match?.[0] ?? path;
-}
+function spawnViaShell(
+  command: string,
+  cwd: string,
+  env: Readonly<Record<string, string>>,
+  rawArguments?: string[]
+): ChildProcessWithoutNullStreams {
+  const childEnv = { ...CHILD_ENV, ...env };
 
-function toJson(data: unknown): string {
-  const INDENT = 2;
-  return JSON.stringify(data, null, INDENT);
-}
-
-function trimEnd(string_: string, suffix: string, shouldValidate?: boolean): string {
-  if (string_.endsWith(suffix)) {
-    return string_.slice(0, -suffix.length);
+  if (process.platform === 'win32' && command.includes('\n')) {
+    if (!rawArguments) {
+      throw new Error('Commands containing newlines cannot be executed through cmd.exe on Windows. Pass an argument array instead of a string.');
+    }
+    const [program, ...$arguments] = rawArguments;
+    if (!program) {
+      throw new Error('Command array must not be empty');
+    }
+    return spawn(program, $arguments, {
+      cwd,
+      env: childEnv,
+      stdio: 'pipe'
+    });
   }
 
-  if (shouldValidate) {
-    throw new Error(`String ${string_} does not end with suffix ${suffix}`);
-  }
+  const shellCommand = process.platform === 'win32' ? commandEscapeCommandLine(command) : command;
+  return spawn(shellCommand, [], {
+    cwd,
+    env: childEnv,
+    shell: true,
+    stdio: 'pipe'
+  });
+}
 
-  return string_;
+function trimEnd($string: string, suffix: string): string {
+  if ($string.endsWith(suffix)) {
+    return $string.slice(0, -suffix.length);
+  }
+  return $string;
 }

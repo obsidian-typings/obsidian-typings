@@ -1,5 +1,5 @@
 import { exitIfScriptDisabled } from '../helpers/env-toggle.ts';
-import { execFromRoot } from '../helpers/exec.ts';
+import { execFromRoot } from '../helpers/root.ts';
 
 exitIfScriptDisabled();
 

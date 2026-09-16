@@ -16,13 +16,13 @@ import { fileURLToPath } from 'node:url';
 
 import type { OgImageParams } from './helpers/og-image.ts';
 
-import { toPosixPath } from './helpers/exec.ts';
 import {
   computeOgHash,
   loadFonts,
   loadLogoBase64,
   renderOgImage
 } from './helpers/og-image.ts';
+import { toPosixPath } from './helpers/root.ts';
 
 type CacheManifest = Record<string, string>;
 

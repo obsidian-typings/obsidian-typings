@@ -23,7 +23,7 @@ import { fileURLToPath } from 'node:url';
 import {
   execFromRoot,
   toPosixPath
-} from './helpers/exec.ts';
+} from './helpers/root.ts';
 import {
   generateBranchName,
   getLatestVersion

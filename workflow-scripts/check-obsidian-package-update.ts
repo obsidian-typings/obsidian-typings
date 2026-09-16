@@ -2,13 +2,11 @@ import { setTimeout as sleep } from 'node:timers/promises';
 
 import { generateBranchName } from './helpers/branchSpec.ts';
 import { restoreWorkflowScripts } from './helpers/checkout.ts';
-import {
-  execFromRoot,
-  readPackageJson
-} from './helpers/exec.ts';
 import { commit } from './helpers/git.ts';
 import { assertRunningInGitHubActions } from './helpers/githubActions.ts';
+import { readPackageJson } from './helpers/json.ts';
 import { generateMainReadme } from './helpers/readmeGenerator.ts';
+import { execFromRoot } from './helpers/root.ts';
 import { getLatestVersion } from './helpers/version.ts';
 
 async function getLatestObsidianVersion(): Promise<string> {

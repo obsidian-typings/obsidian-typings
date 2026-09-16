@@ -1,4 +1,4 @@
-import { execFromRoot } from './helpers/exec.ts';
+import { execFromRoot } from './helpers/root.ts';
 
 // Clean, generate API docs from release branch sources, then build the static site
 const ARGS_START = 2;

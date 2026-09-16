@@ -36,7 +36,7 @@ import type { TrustedPublisherState } from './npm.ts';
 
 import { generateBranchName } from './branchSpec.ts';
 import { restoreWorkflowScripts } from './checkout.ts';
-import { execFromRoot } from './exec.ts';
+import { execFromRoot } from './root.ts';
 
 /** The answers taken as a yes. Anything else -- including an empty line -- declines. */
 const YES_ANSWERS: ReadonlySet<string> = new Set(['y', 'yes']);

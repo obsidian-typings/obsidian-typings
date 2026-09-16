@@ -13,7 +13,7 @@ import {
   generateBranchName,
   parseChannel
 } from './helpers/branchSpec.ts';
-import { execFromRoot } from './helpers/exec.ts';
+import { execFromRoot } from './helpers/root.ts';
 import { getLatestVersion } from './helpers/version.ts';
 
 interface BuildInfo {

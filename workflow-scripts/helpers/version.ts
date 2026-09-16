@@ -1,6 +1,6 @@
 import { compare } from 'semver';
 
-import { execFromRoot } from './exec.ts';
+import { execFromRoot } from './root.ts';
 
 export async function getLatestVersion(channel: 'catalyst' | 'public'): Promise<string> {
   await execFromRoot('git fetch');

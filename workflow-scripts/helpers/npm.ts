@@ -21,7 +21,7 @@ import process from 'node:process';
 
 import type { BranchSpec } from './branchSpec.ts';
 
-import { execFromRoot } from './exec.ts';
+import { execFromRoot } from './root.ts';
 
 /**
  * How far along a package name is on the registry.

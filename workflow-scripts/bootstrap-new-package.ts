@@ -51,8 +51,8 @@ import type { BranchSpec } from './helpers/branchSpec.ts';
 import type { TrustedPublisherState } from './helpers/npm.ts';
 
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
-import { writeJson } from './helpers/exec.ts';
 import { offerRelease } from './helpers/handBack.ts';
+import { writeJson } from './helpers/json.ts';
 import {
   attachTrustedPublisher,
   getNpmUsername,

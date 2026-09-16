@@ -15,9 +15,9 @@
  * This is the `workflow-scripts` package's own copy of `scripts/helpers/env-toggle.ts`. The tree is a
  * self-contained island - its own `package.json`, `tsconfig.json` and ESLint config, synced into a release
  * branch's working copy with `git restore --source=main --worktree -- ./workflow-scripts` - so it forks the
- * helpers it needs rather than importing from `../scripts/`, exactly as `helpers/exec.ts` and
- * `helpers/git.ts` already do. Reaching up would tie the tree to whichever `scripts/` the host branch
- * happens to carry.
+ * helpers it needs rather than importing from `../scripts/`, exactly as `helpers/exec.ts`,
+ * `helpers/root.ts` and `helpers/git.ts` already do. Reaching up would tie the tree to whichever `scripts/`
+ * the host branch happens to carry.
  *
  * Keep this file in sync with `scripts/helpers/env-toggle.ts` apart from the table above.
  */

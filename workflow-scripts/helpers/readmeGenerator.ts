@@ -24,13 +24,13 @@ import {
   CHANNELS,
   generateBranchName
 } from './branchSpec.ts';
-import { execFromRoot } from './exec.ts';
 import { commit } from './git.ts';
 import {
   getLatestWrapperPackageName,
   getPackageRegistryState,
   getScopedPackageName
 } from './npm.ts';
+import { execFromRoot } from './root.ts';
 import { getLatestVersion } from './version.ts';
 
 export async function generateMainReadme(): Promise<void> {
