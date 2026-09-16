@@ -15,10 +15,11 @@
  * it" is now needed by three scripts rather than one.
  */
 
-import { spawnSync } from 'node:child_process';
 import process from 'node:process';
 
 import type { BranchSpec } from './branchSpec.ts';
+
+import { execFromRoot } from './exec.ts';
 
 /**
  * How far along a package name is on the registry.
@@ -91,16 +92,23 @@ export function getLatestWrapperPackageName(channel: BranchSpec['channel']): str
  * by the same `npm login`, so a caller has no reason to tell them apart.
  *
  * The exit code is the signal, not stdout: npm writes its diagnostics to stderr and leaves stdout empty on
- * either failure. `shell: true` because npm is a `.cmd` on Windows, which this script path targets.
+ * either failure. That is what `shouldIncludeDetails` is for -- it is the only way to read one -- and
+ * `isQuiet` keeps a raw `ENEEDAUTH` from printing next to the sentence a caller wrote to explain it.
  *
- * Not routed through `execFromRoot`: reading an exit code needs its detail mode, and that mode is currently
- * unreachable -- the overloads discriminate on `withDetails` while the implementation branches on
- * `shouldIncludeDetails`.
+ * This was a bare `spawnSync` until 2026-09-15, because `execFromRoot`'s detail mode was unreachable: see the
+ * discriminator note in `exec.ts`. It is that mode's only caller, which makes it the guard on the fix as well
+ * as its beneficiary: nothing else in this package reads an exit code, so reverting the discriminator turns
+ * `result.exitCode` here into a property on `string` and `npm run typecheck` goes red. Without a caller the
+ * bug is invisible to every gate, which is how it survived unnoticed in the first place.
  */
-export function getNpmUsername(): null | string {
-  const result = spawnSync('npm', ['whoami'], { encoding: 'utf-8', shell: true });
+export async function getNpmUsername(): Promise<null | string> {
+  const result = await execFromRoot('npm whoami', {
+    isQuiet: true,
+    shouldIgnoreExitCode: true,
+    shouldIncludeDetails: true
+  });
 
-  if (result.status !== 0) {
+  if (result.exitCode !== 0) {
     return null;
   }
 

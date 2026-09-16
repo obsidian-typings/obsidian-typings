@@ -89,7 +89,7 @@ async function main(): Promise<void> {
   //
   // This is deliberately AFTER the existence short-circuit: a re-run against an already-claimed name only
   // prints instructions, and needs no credential at all. That is what makes the script safe to re-run.
-  const npmUsername = getNpmUsername();
+  const npmUsername = await getNpmUsername();
 
   if (!npmUsername) {
     throw new Error(

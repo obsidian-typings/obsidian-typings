@@ -115,7 +115,7 @@ async function main(): Promise<void> {
       // operator is standing when they are told to run it -- so check the credential HERE, where saying "log in
       // first" costs one `npm whoami` on a path that is already stopping, rather than letting them discover it
       // one command later as an E404 npm reports for an unauthorized PUT to a name that does not exist yet.
-      printBootstrapRequired(packageName, newBranchSpec, getNpmUsername());
+      printBootstrapRequired(packageName, newBranchSpec, await getNpmUsername());
       return;
     }
 
