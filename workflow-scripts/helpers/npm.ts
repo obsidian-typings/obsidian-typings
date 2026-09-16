@@ -20,7 +20,9 @@ import { execFileSync } from 'node:child_process';
 import process from 'node:process';
 
 import type { BranchSpec } from './branchSpec.ts';
+import type { ExecResult } from './exec.ts';
 
+import { askLine } from './prompt.ts';
 import { execFromRoot } from './root.ts';
 
 /**
@@ -36,9 +38,13 @@ export type PackageRegistryState = 'missing' | 'placeholderOnly' | 'released';
  * What {@link readTrustedPublisherState} was able to find out about a package's trusted publisher.
  *
  * `unknown` is a first-class answer rather than a failure. The read is authenticated and 2FA-gated, so
- * "nobody is logged in on this machine", "the registry wants a one-time password and there is no terminal to
- * type it into", and "the request never arrived" all land in it — and a caller that cannot tell those apart
- * must not act as though it can.
+ * "nobody is logged in on this machine", "the registry challenged for a one-time password and there was
+ * nobody to type one", "the code it was given was wrong or had expired", and "the request never arrived" all
+ * land in it — and a caller that cannot tell those apart must not act as though it can.
+ *
+ * Since 2026-09-16 that list is shorter than it was by its most common member. {@link readTrustedPublisherState}
+ * can now ask for the code and pass it, so a logged-in operator standing at a terminal gets a definite
+ * `attached` or `none` rather than this. `unknown` has gone back to meaning roughly what it says.
  */
 export type TrustedPublisherState = 'attached' | 'none' | 'unknown';
 
@@ -73,6 +79,14 @@ const CLIENT_ERROR_MIN_STATUS = 400;
 const CLIENT_ERROR_MAX_STATUS = 499;
 
 const NOT_FOUND_STATUS = 404;
+
+/*
+ * The error code npm reports when the registry challenged a call for a one-time password. It is the whole of
+ * the test for "this failed only because nobody typed a code": every other way the read can fail -- no npm
+ * login (`ENEEDAUTH`), a credential the registry no longer accepts (`E401`), a network failure -- carries a
+ * different one, and none of them is fixed by asking the operator for six digits.
+ */
+const OTP_ERROR_CODE = 'EOTP';
 
 interface ActionsIdTokenResponse {
   value?: string;
@@ -215,10 +229,10 @@ export async function getNpmUsername(): Promise<null | string> {
  * {@link readTrustedPublisherState} calls.
  *
  * The reason this function survives the correction is narrower than the claim it replaces. That read is
- * authenticated and 2FA-gated, so it answers only from a logged-in machine and only when the registry does
- * not challenge the call; this one is an unauthenticated `fetch` that answers everywhere -- from CI, from a
- * checkout with no npm login, from a script whose stdout is a pipe. They are asked in that order rather than
- * chosen between.
+ * authenticated and 2FA-gated, so it answers only from a machine that is logged in, and only once a one-time
+ * password has been supplied -- which since 2026-09-16 means only where there is an operator to supply one;
+ * this one is an unauthenticated `fetch` that answers everywhere -- from CI, from a checkout with no npm
+ * login, from an unattended script. They are asked in that order rather than chosen between.
  *
  * What this reads is the *consequence* of a publisher rather than the publisher itself: a package carrying a
  * real release has, by definition, already published through CI, so its publisher is attached. One carrying
@@ -371,40 +385,80 @@ export async function hasTrustedPublisher(packageName: string): Promise<boolean 
  *
  * `npm trust list` GETs `/-/package/<name>/trust`, which is the direct answer to the question three places in
  * this repo used to say could not be asked at all. It is not a drop-in replacement for
- * {@link getPackageRegistryState}, for two measured reasons rather than the imagined one:
+ * {@link getPackageRegistryState}, because **it is 2FA-gated per call, not merely authenticated**: measured
+ * 2026-09-15 against npm 12.0.2 with a valid login -- `npm whoami` answered seconds earlier -- this read on a
+ * package the account owns came back `EOTP ... This operation requires a one-time password`. The challenge
+ * belongs to the endpoint, not to the state of the token, so the unauthenticated `fetch` in
+ * {@link getPackageRegistryState} still answers in places this cannot: from CI, from a checkout with no npm
+ * login. They are asked in that order rather than chosen between.
  *
- * 1. **It is 2FA-gated per call, not merely authenticated.** Measured 2026-09-15 against npm 12.0.2 with a
- *    valid login -- `npm whoami` answered `mnaoumov` seconds earlier -- `npm trust list` on a package this
- *    account owns came back `EOTP ... This operation requires a one-time password`. The challenge belongs to
- *    the endpoint, not to the state of the token.
- * 2. **The challenge cannot be answered by a script that reads the output.** npm's `otplease` opens with
- *    `if (!process.stdin.isTTY || !process.stdout.isTTY) { throw err }`, and capturing stdout is precisely
- *    what makes stdout not a TTY. So a caller may have the answer or may have a terminal, never both.
+ * **Until 2026-09-16 that challenge was treated as the end of the road, and it is not.** The reasoning was
+ * that npm's `otplease` opens with `if (!process.stdin.isTTY || !process.stdout.isTTY) { throw err }` and
+ * capturing stdout is exactly what makes stdout not a TTY -- so a caller could have the answer or have a
+ * terminal, never both. The premise is true and the conclusion does not follow: reading `npm/lib/utils/auth.js`,
+ * `otplease` calls `fn(opts)` **first** and reaches that TTY check only from the `catch`. A call already
+ * carrying a code never fails, so it never gets there. `otp` is a real flattened npm config -- `npm trust list`
+ * declares no `--otp` of its own, but per-command definitions only allow-list flags that would otherwise be
+ * *unknown*, and this one is global -- and it rides `this.npm.flatOptions` into `npm-registry-fetch`, which
+ * sets `headers['npm-otp']` from it. So the code goes out on the first request.
  *
- * That second point is also what makes this safe to call unconditionally: it cannot hang waiting for a code
- * nobody will type, because the prompt is never reached. It fails immediately and lands in `unknown`, and the
- * caller falls back to the heuristic it would have used anyway.
+ * **Measured against the live registry, 2026-09-16, at no cost in codes.** The same captured read, run twice
+ * seconds apart on `@obsidian-typings/obsidian-public-latest`:
  *
- * The output is deliberately NOT parsed. Reading `npm/lib/trust-cmd.js`: under `--json`, `displayResponseBody`
- * emits one pretty-printed object PER configuration, so two publishers produce two concatenated objects
- * rather than an array -- `JSON.parse` would throw on exactly the packages that are most thoroughly
- * configured. An EMPTY result emits nothing at all, because the "No trust configurations found" line goes
- * through `dialogue`, which `--json` suppresses. Non-empty stdout on a zero exit is therefore the whole
- * predicate, and it is the right granularity: the question is whether this package has a publisher, not
+ * - without `--otp`: `EOTP`, *"This operation requires a one-time password."*, the body carrying `authUrl`
+ *   and `doneUrl` -- npm's **web** challenge, the branch that wants to open a browser.
+ * - with a deliberately wrong `--otp=000000`: `EOTP`, *"This operation requires a one-time password **from
+ *   your authenticator**. ... If you already provided a one-time password then it is likely that you either
+ *   typoed it, or it timed out."*, and **no** `authUrl`/`doneUrl`.
+ *
+ * The registry's answer changed, which is the proof the flag reached the request rather than being dropped,
+ * and it changed into the registry's own wording for a wrong or expired authenticator code -- so the endpoint
+ * does take a TOTP from this account, and a correct one succeeds where `000000` did not. A wrong code is also
+ * harmless: it lands back in `unknown`, the same place declining lands.
+ *
+ * So the flow is: run the read; if it failed for any reason OTHER than the challenge, answer `unknown`
+ * without troubling anybody, because no code fixes a missing login; if it failed ON the challenge and there
+ * is a terminal to ask at, ask for one code and run it again. Skipping the prompt is a first-class answer and
+ * restores the old behavior exactly.
+ *
+ * Two costs worth knowing before wiring this anywhere else. npm challenges **per operation**, so a read that
+ * finds `none` and an attach that fixes it are two separate codes. And `--otp` is an argv token: npm writes
+ * the full argv into its debug log under `_logs/`, verbatim, so the code is on disk -- single-use and
+ * time-boxed, spent by the time the line is written, but on disk.
+ *
+ * The SUCCESS output is deliberately NOT parsed. Reading `npm/lib/trust-cmd.js`: under `--json`,
+ * `displayResponseBody` emits one pretty-printed object PER configuration, so two publishers produce two
+ * concatenated objects rather than an array -- `JSON.parse` would throw on exactly the packages that are most
+ * thoroughly configured. An EMPTY result emits nothing at all, because the "No trust configurations found"
+ * line goes through `dialogue`, which `--json` suppresses. Non-empty stdout on a zero exit is therefore the
+ * whole predicate, and it is the right granularity: the question is whether this package has a publisher, not
  * which.
  */
 export async function readTrustedPublisherState(packageName: string): Promise<TrustedPublisherState> {
-  const result = await execFromRoot(`npm trust list "${packageName}" --json`, {
-    isQuiet: true,
-    shouldIgnoreExitCode: true,
-    shouldIncludeDetails: true
-  });
+  const firstResult = await runTrustList(packageName);
 
-  if (result.exitCode !== 0) {
+  if (firstResult.exitCode === 0) {
+    return firstResult.stdout.trim() ? 'attached' : 'none';
+  }
+
+  if (!isOneTimePasswordChallenge(firstResult)) {
     return 'unknown';
   }
 
-  return result.stdout.trim() ? 'attached' : 'none';
+  const oneTimePassword = await askOneTimePassword(packageName);
+
+  if (oneTimePassword === null) {
+    return 'unknown';
+  }
+
+  const retryResult = await runTrustList(packageName, oneTimePassword);
+
+  if (retryResult.exitCode !== 0) {
+    console.log(`\nnpm did not accept that one-time password, so ${packageName}'s trusted publisher is still unread.`);
+    return 'unknown';
+  }
+
+  return retryResult.stdout.trim() ? 'attached' : 'none';
 }
 
 /**
@@ -430,6 +484,13 @@ export async function readTrustedPublisherState(packageName: string): Promise<Tr
  * risks a duplicate in the package's trust list, while not guessing costs one question the operator can
  * answer, which is what the `unknown` arm of `offerRelease` is for.
  *
+ * Since 2026-09-16 that arm is also much harder to reach, which is the better fix and the one that did not
+ * need the unsettled question answered. {@link readTrustedPublisherState} asks the operator for a one-time
+ * password when the registry challenges its read, so an operator who is logged in and standing here gets a
+ * definite answer and lands on one of the two arms above. What still arrives as `unknown` is a machine with
+ * no npm login, a code that was skipped or refused, or a request that never got there -- and for those, an
+ * attach would be as blind as it ever was.
+ *
  * Every message names the package rather than saying "it". The two callers print very different preambles
  * ahead of this -- one about a name it declined to re-claim, one about a branch it has just cut -- and a
  * pronoun that resolves against whichever of them ran is a sentence that reads correctly only by accident.
@@ -443,8 +504,9 @@ export async function resolveTrustedPublisherState(packageName: string): Promise
   }
 
   if (publisherState === 'unknown') {
-    console.log(`\nnpm would not say whether ${packageName} has a trusted publisher -- that read needs a login`);
-    console.log('and a 2FA code it can prompt for, and this terminal gave it neither.');
+    console.log(`\nnpm would not say whether ${packageName} has a trusted publisher. That read needs an npm`);
+    console.log('login and a one-time password: either this machine has no login, or no code reached the');
+    console.log('registry -- none was typed, or the one that was had expired.');
     console.log(getTrustedPublisherInstructions(packageName));
     return publisherState;
   }
@@ -461,6 +523,45 @@ export async function resolveTrustedPublisherState(packageName: string): Promise
   console.log(`\nCould not attach the trusted publisher to ${packageName}.`);
   console.log(getTrustedPublisherInstructions(packageName));
   return 'none';
+}
+
+/**
+ * Asks the operator for the one-time password the registry just challenged a read with, or `null` when there
+ * is none to be had.
+ *
+ * The preamble is three lines because every one of them changes what a reader does next. They are being asked
+ * for a code by a script, not by npm, so it says which read wanted it; skipping is a real option rather than
+ * a failure, so it says what skipping costs; and npm challenges per operation, so it says that attaching a
+ * publisher afterwards will ask again rather than reusing this one -- an operator who does not know that
+ * reads the second prompt as the first one having failed.
+ *
+ * The answer is not validated beyond stripping whitespace, which is what npm's own `read.otp` does to a code
+ * pasted as `123 456`. Anything else is the registry's judgement to make: a local pattern strict enough to be
+ * worth having would have to guess at forms this account might use, and being wrong there rejects a code npm
+ * would have accepted. A code the registry refuses costs one more request and lands in `unknown`, which is
+ * where declining lands anyway.
+ */
+async function askOneTimePassword(packageName: string): Promise<null | string> {
+  // The terminal test comes before the preamble rather than being left to `askLine`, which would answer
+  // `null` on its own. Four lines addressed to an operator, printed into a log nobody is reading, describe a
+  // prompt that never appeared -- and the last of them, about a second code for the attach, is simply untrue
+  // where nothing can be attached. Saying nothing is the honest output for an unattended run.
+  if (!process.stdin.isTTY) {
+    return null;
+  }
+
+  console.log(`\nnpm challenged the read of ${packageName}'s trusted publisher for a one-time password.`);
+  console.log('Entering one settles it outright. Skipping is fine: the hand-back then falls back to asking you');
+  console.log('whether the publisher is attached, exactly as it did before it could ask for a code at all.');
+  console.log('npm challenges per operation, so attaching a publisher after this asks for a second, later code.');
+
+  const answer = await askLine('\nOne-time password from your authenticator (empty to skip): ');
+
+  if (answer === null) {
+    return null;
+  }
+
+  return answer.replaceAll(/\s/gu, '') || null;
 }
 
 /**
@@ -506,4 +607,50 @@ async function fetchActionsIdToken(): Promise<null | string> {
   } catch {
     return null;
   }
+}
+
+/**
+ * Reports whether a failed {@link runTrustList} failed only because the registry wanted a one-time password.
+ *
+ * A substring test rather than a parse, and both streams rather than one, because npm says it twice and the
+ * two sayings have different shapes (measured 2026-09-16, npm 12.0.2): stdout carries a single well-formed
+ * `{ "error": { "code": "EOTP", ... } }` under `--json`, while stderr carries the human `npm error code EOTP`
+ * line. Parsing the stdout object would work today and would be the narrower test, but it buys nothing here
+ * -- the only thing being asked is which of the failure codes this was -- and it would put a second
+ * `JSON.parse` of npm's output in a function whose sibling documents at length why the success body must not
+ * be parsed.
+ *
+ * The cost of a false positive bounds how careful this needs to be: one prompt the operator can dismiss with
+ * an empty line.
+ */
+function isOneTimePasswordChallenge(result: ExecResult): boolean {
+  return result.stdout.includes(OTP_ERROR_CODE) || result.stderr.includes(OTP_ERROR_CODE);
+}
+
+/**
+ * Runs the captured `npm trust list` read, carrying a one-time password when one is supplied.
+ *
+ * The command is built as an argument array rather than as a string so that {@link execFromRoot} quotes the
+ * package name for the platform it is actually running on. It used to be interpolated into a command line
+ * inside hand-written double quotes, which is the one form that is wrong on both platforms for the same
+ * reason -- `cmd.exe` and `/bin/sh` disagree about what survives inside them. No package name this repo
+ * generates contains anything that needs quoting, so nothing was broken; the array form simply removes the
+ * question.
+ *
+ * `shouldIgnoreExitCode` because every interesting answer here is a non-zero exit, and `isQuiet` because npm
+ * prints the whole challenge -- including a browser URL that is no use to a captured caller -- to stderr on
+ * the way to the caller deciding what it means.
+ */
+function runTrustList(packageName: string, oneTimePassword?: string): Promise<ExecResult> {
+  const command = ['npm', 'trust', 'list', packageName, '--json'];
+
+  if (oneTimePassword !== undefined) {
+    command.push(`--otp=${oneTimePassword}`);
+  }
+
+  return execFromRoot(command, {
+    isQuiet: true,
+    shouldIgnoreExitCode: true,
+    shouldIncludeDetails: true
+  });
 }
