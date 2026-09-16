@@ -48,7 +48,6 @@ import { join } from 'node:path';
 import process from 'node:process';
 
 import type { BranchSpec } from './helpers/branchSpec.ts';
-import type { TrustedPublisherState } from './helpers/npm.ts';
 
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { offerRelease } from './helpers/handBack.ts';
@@ -60,8 +59,8 @@ import {
   getScopedPackageName,
   getTrustedPublisherInstructions,
   PLACEHOLDER_VERSION,
-  readTrustedPublisherState,
-  REPOSITORY
+  REPOSITORY,
+  resolveTrustedPublisherState
 } from './helpers/npm.ts';
 
 exitIfScriptDisabled();
@@ -91,7 +90,7 @@ async function main(): Promise<void> {
     console.log(`${packageName} is already claimed, so there is nothing to claim.`);
     console.log('Nothing has ever published through it, though, so its trusted publisher may still be missing --');
     console.log('the half that gets skipped, and that surfaces in CI as a bare E404 and nowhere else. Asking npm.');
-    await offerRelease({ channel, obsidianVersion }, packageName, await resolvePublisher(packageName));
+    await offerRelease({ channel, obsidianVersion }, packageName, await resolveTrustedPublisherState(packageName));
     return;
   }
 
@@ -193,45 +192,6 @@ async function publishPlaceholder(packageName: string): Promise<void> {
   } finally {
     await rm(BOOTSTRAP_FOLDER, { force: true, recursive: true });
   }
-}
-
-/**
- * Settles the trusted-publisher state of an already-claimed name: reads it, and attaches one when npm says
- * there is none.
- *
- * Only the definite `none` is acted on. An `unknown` answer is left alone rather than attached "just in
- * case", because `npm trust github` creates a configuration rather than reconciling one, and what the
- * registry does with a second one is genuinely unsettled -- {@link attachTrustedPublisher} carries what is
- * and is not known about that, including the npm doc that reads like an answer and is stale. This arm used
- * to state flatly that a second call "adds a duplicate record"; nobody had made one, so the claim was as
- * unverified as the behavior it warned about. The asymmetry is what survives the correction: guessing wrong
- * risks a duplicate in the package's trust list, while not guessing costs one question the operator can
- * answer, which is what the `unknown` arm of `offerRelease` is for.
- */
-async function resolvePublisher(packageName: string): Promise<TrustedPublisherState> {
-  const publisherState = await readTrustedPublisherState(packageName);
-
-  if (publisherState === 'attached') {
-    console.log('\nnpm reports a trusted publisher on it, so both halves of this step are already done.');
-    return publisherState;
-  }
-
-  if (publisherState === 'unknown') {
-    console.log('\nnpm would not say whether it has one -- the read needs a login and a 2FA code it can prompt for.');
-    console.log(getTrustedPublisherInstructions(packageName));
-    return publisherState;
-  }
-
-  console.log('\nnpm reports no trusted publisher on it, so that is the half still outstanding. Attaching it now.');
-
-  if (attachTrustedPublisher(packageName)) {
-    console.log(`\nTrusted publisher attached to ${packageName}.`);
-    return 'attached';
-  }
-
-  console.log(`\nCould not attach the trusted publisher to ${packageName}.`);
-  console.log(getTrustedPublisherInstructions(packageName));
-  return 'none';
 }
 
 await main();

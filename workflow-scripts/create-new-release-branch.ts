@@ -15,8 +15,7 @@ import {
   getNpmUsername,
   getPackageRegistryState,
   getScopedPackageName,
-  getTrustedPublisherInstructions,
-  readTrustedPublisherState
+  resolveTrustedPublisherState
 } from './helpers/npm.ts';
 import {
   generateMainReadme,
@@ -144,17 +143,18 @@ async function main(): Promise<void> {
   }
 
   // `placeholderOnly`. The name is claimed, so the only step that can still be outstanding is the publisher --
-  // and that one CAN be asked about directly, from a machine that is logged in to npm. When the answer comes
-  // back, it is the answer, and `offerRelease` dispatches without putting a question at all. When it does not
-  // -- no login here, or a one-time-password challenge with no terminal to answer it -- the arm falls back to
-  // what it has always done and asks the operator. A wrong answer there is not expensive:
-  // `publish-release.ts` checks the publish right before it does anything irreversible, so a dispatch into a
-  // package with no publisher attached costs a red run.
-  const publisherState = await readTrustedPublisherState(packageName);
+  // and that one CAN be asked about directly, from a machine that is logged in to npm, and attached from here
+  // when the answer is a definite `none`. `resolveTrustedPublisherState` is the same call
+  // `bootstrap-new-package.ts` makes against the same state; until 2026-09-16 this arm only *read* it and then
+  // told the operator to go and attach it in another window, which is a hand-off whose entire failure mode is
+  // that people forget it. When the read cannot be made at all -- no login here, or a one-time-password
+  // challenge with no terminal to answer it -- it stays a printed instruction and `offerRelease` asks, which
+  // is what this arm has always done. A wrong answer there is not expensive: `publish-release.ts` checks the
+  // publish right before it does anything irreversible, so a dispatch into a package with no publisher
+  // attached costs a red run.
+  printTrustedPublisherPending(packageName);
 
-  if (publisherState !== 'attached') {
-    printTrustedPublisherRequired(packageName, publisherState === 'none');
-  }
+  const publisherState = await resolveTrustedPublisherState(packageName);
 
   await offerRelease(newBranchSpec, packageName, publisherState);
 }
@@ -186,19 +186,22 @@ function printBootstrapRequired(packageName: string, branchSpec: BranchSpec, npm
   ].join('\n'));
 }
 
-function printTrustedPublisherRequired(packageName: string, isPublisherKnownMissing: boolean): void {
+/**
+ * Says where the hand-back stands before it is settled, and deliberately does not say how it ends.
+ *
+ * This used to be `printTrustedPublisherRequired`, which opened with "the release was NOT dispatched" and,
+ * on a definite `none`, went on to state that the second half was "definitely still outstanding". Both
+ * sentences were written when reading the publisher was all this arm could do. It now attaches one, and
+ * `offerRelease` dispatches after it -- so an unconditional message about what did not happen would announce
+ * the opposite of what the next two calls are about to do.
+ */
+function printTrustedPublisherPending(packageName: string): void {
   console.log([
     '',
-    `Branch created, but nothing has ever published through ${packageName}, so the release was NOT dispatched.`,
+    `Branch created. Nothing has ever published through ${packageName} yet.`,
     '',
-    'The name is claimed -- a bootstrap placeholder holds it -- so the first half of the hand-back is done.',
-    ...isPublisherKnownMissing
-      ? ['npm reports no trusted publisher on it, so the second half is definitely still outstanding.']
-      : [
-        'Whether the second half is done could not be read from here: `npm trust list` needs an npm login and',
-        'a terminal it can put a one-time-password challenge to. So the prompt below asks you instead.'
-      ],
-    getTrustedPublisherInstructions(packageName)
+    'The name is claimed -- a bootstrap placeholder holds it -- so the first half of the hand-back is done,',
+    'and its trusted publisher is the only step that can still be outstanding. Asking npm.'
   ].join('\n'));
 }
 

@@ -72,9 +72,11 @@ export function getManualReleaseInstructions(branchName: string): string {
  *   The dispatch does not require a terminal either, which is why the TTY check sits inside the asking arm
  *   rather than above it: this is the same unconditional dispatch `create-new-release-branch.ts` has always
  *   performed for a name that already carries a real release.
- * - `none` -- npm says there is no publisher. The question is still worth putting, because the operator can
- *   attach one in another window and answer `y` when they have; it is simply worded as the statement it is
- *   rather than as an open question.
+ * - `none` -- npm says there is no publisher, AND attaching one from here failed. Since 2026-09-16 both
+ *   callers run `resolveTrustedPublisherState()`, which attaches on a definite `none` rather than reporting
+ *   it, so this state no longer reaches here as a bare read: a `none` that could be fixed has already become
+ *   `attached`. The question is still worth putting, because the operator can attach one in another window --
+ *   the exact command was printed a moment ago -- and answer `y` when they have.
  * - `unknown` -- the read could not be made. This is the original behavior, and the reason a wrong `y` had
  *   to be made cheap in the first place.
  *
@@ -98,7 +100,7 @@ export async function offerRelease(
     }
 
     const question = publisherState === 'none'
-      ? `\nnpm reports no trusted publisher for ${packageName}. Attach it now and answer y when it is saved. [y/N] `
+      ? `\nThe trusted publisher for ${packageName} could not be attached from here. Attach it and answer y when it is saved. [y/N] `
       : `\nHas the trusted publisher for ${packageName} been saved? [y/N] `;
 
     if (!await askYesNo(question)) {
