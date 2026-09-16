@@ -24,7 +24,7 @@ const dataAttributes: DOMStringMap = { 'data-translations': JSON.stringify(pagef
 if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash'] = '';
 ---
 
-<site-search class={Astro.props.class} {...dataAttributes}>
+<site-search class={Astro.props['class']} {...dataAttributes}>
 	<button
 		data-open-modal
 		disabled
@@ -136,10 +136,10 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 
 			let translations = {};
 			try {
-				translations = JSON.parse(this.dataset.translations || '{}');
+				translations = JSON.parse(this.dataset['translations'] || '{}');
 			} catch {}
 
-			const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
+			const shouldStrip = this.dataset['stripTrailingSlash'] !== undefined;
 			const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
 			const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
 

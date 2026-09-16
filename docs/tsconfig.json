@@ -11,8 +11,23 @@
     "strict": true,
     "target": "ES2024"
   },
+  // Starlight splits its virtual-module declarations on purpose: the triple-slash references at the top of
+  // its `index.ts` pull `virtual.d.ts` into a consumer's program, while `virtual-internal.d.ts` is in
+  // neither that set nor the package's `exports` map. The three Starlight component overrides in
+  // `src/components/` import from the private half -- `virtual:starlight/pagefind-config` in `Search.astro`,
+  // `virtual:starlight/components/MobileMenuFooter` in `Sidebar.astro`, `virtual:starlight/user-images` in
+  // `SiteTitle.astro` -- which Vite resolves at build time and nothing types. Loading Starlight's own file
+  // beats re-declaring those three modules locally: a hand-copy goes stale in silence, while an upgrade
+  // that moves this file fails the gate on the next run. It is in `files` rather than `include` because
+  // `exclude` filters `include` and lists `node_modules`; `files` is not filtered.
+  "files": ["node_modules/@astrojs/starlight/virtual-internal.d.ts"],
   "include": [
     "**/*.ts",
+    // `npm run typecheck` is `astro check`, and `astro check` checks exactly what this list names. Without
+    // this line it checked 38 files and not one of the 15 `.astro` components -- a deliberate
+    // `const x: number = 'str'` in a component's frontmatter was reported by nothing. Dropping it narrows
+    // the gate silently rather than breaking it.
+    "**/*.astro",
     "../src/full-types.d.ts"
   ],
   "exclude": [

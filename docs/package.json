@@ -8,7 +8,8 @@
     "dev": "jiti scripts/dev.ts",
     "dev:setup": "jiti scripts/dev-setup.ts",
     "preview": "jiti scripts/preview.ts",
-    "setup": "jiti scripts/setup.ts"
+    "setup": "jiti scripts/setup.ts",
+    "typecheck": "jiti scripts/typecheck.ts"
   },
   "overrides": {
     "typescript": "$typescript",

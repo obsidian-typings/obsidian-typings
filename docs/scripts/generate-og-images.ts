@@ -175,8 +175,14 @@ async function parsePage(filePath: string, contentDocsDirectory: string): Promis
   const badgeText = badge?.['text'];
 
   const slug = filePathToSlug(filePath, contentDocsDirectory);
+  /*
+   * `badge` is OMITTED rather than set to `undefined`: `@tsconfig/strictest` turns on
+   * `exactOptionalPropertyTypes`, so `badge?: string` accepts an absent key but not an explicit
+   * `undefined`. Both consumers - `computeOgHash` via `?? ''` and `buildOgImageMarkup` via a truthiness
+   * test - already read the two the same way, so this changes no output and no hash.
+   */
   const params: OgImageParams = {
-    badge: badgeText,
+    ...badgeText !== undefined && { badge: badgeText },
     description,
     title
   };

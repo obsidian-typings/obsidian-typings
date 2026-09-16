@@ -102,3 +102,13 @@ jobs:
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         run: npm run typecheck
         working-directory: ./workflow-scripts
+
+      # The third package, and the only one the root `typecheck` cannot reach at all: the root
+      # `tsconfig.json` names `docs` in its `exclude`. This is `astro check`, not `tsc --noEmit` --
+      # it resolves `.astro` imports, checks the `.astro` components themselves, and stays quiet
+      # about Starlight's own `.ts` sources, which `skipLibCheck` does not cover. It re-runs the
+      # sync above as its own first step, which costs seconds and keeps the script usable alone.
+      - name: Typecheck docs
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: npm run typecheck
+        working-directory: ./docs
