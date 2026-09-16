@@ -20,6 +20,11 @@
  * step which never announced its own absence no longer depends on somebody remembering to go and do it.
  * The printed npmjs.com instructions survive as the fallback for when the call fails.
  *
+ * Since 2026-09-16 that attach is CAPTURED, so this script can say which way it went wrong rather than
+ * printing the whole hand-back again over a bare boolean, and can read back the configuration npm created.
+ * The second code is asked for here rather than by npm; skipping that question hands the challenge back to
+ * npm exactly as before, browser and all. See `attachTrustedPublisher` in `helpers/npm.ts`.
+ *
  * And then it asks whether to release, rather than ending on a printed instruction. That release was the
  * THIRD step and the only one with no owner at all: `create-new-release-branch.ts` stops before it, nothing
  * else runs it, and nothing notices it was skipped -- two branches sat created-but-unreleased from
@@ -48,16 +53,17 @@ import { join } from 'node:path';
 import process from 'node:process';
 
 import type { BranchSpec } from './helpers/branchSpec.ts';
+import type { TrustedPublisherState } from './helpers/npm.ts';
 
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { offerRelease } from './helpers/handBack.ts';
 import { writeJson } from './helpers/json.ts';
 import {
   attachTrustedPublisher,
+  describeTrustedPublisherAttach,
   getNpmUsername,
   getPackageRegistryState,
   getScopedPackageName,
-  getTrustedPublisherInstructions,
   PLACEHOLDER_VERSION,
   REPOSITORY,
   resolveTrustedPublisherState
@@ -120,16 +126,22 @@ async function main(): Promise<void> {
   await publishPlaceholder(packageName);
 
   console.log(`\nClaimed ${packageName}. That was the first of two steps, and the second follows here.`);
-  console.log('npm will ask for a second one-time password: it challenges per operation and caches nothing');
-  console.log('between processes, so attaching the publisher cannot reuse the code the publish above consumed.');
+  console.log('It needs a second one-time password: npm challenges per operation and caches nothing between');
+  console.log('processes, so attaching the publisher cannot reuse the code the publish above consumed.');
 
-  const publisherState = attachTrustedPublisher(packageName) ? 'attached' : 'unknown';
+  const attachResult = await attachTrustedPublisher(packageName);
+  console.log(describeTrustedPublisherAttach(packageName, attachResult));
+
+  // Every non-`attached` outcome means npm created nothing, and on THIS path that settles the state rather
+  // than merely narrowing it: the name was claimed seconds ago by `publishPlaceholder`, so nothing else can
+  // have attached a publisher in the meantime. It used to be reported as `unknown`, which was the honest
+  // answer while a bare `false` covered "no code was typed", "the code was refused" and "npm said no" alike.
+  // `none` is what `offerRelease` wants to hear: it asks whether the operator has attached one in another
+  // window, rather than the vaguer question it puts when nobody knows.
+  const publisherState: TrustedPublisherState = attachResult.outcome === 'attached' ? 'attached' : 'none';
 
   if (publisherState === 'attached') {
-    console.log(`\nTrusted publisher attached to ${packageName}. Both halves of this step are done.`);
-  } else {
-    console.log(`\nCould not attach the trusted publisher to ${packageName}, so that half is still outstanding.`);
-    console.log(getTrustedPublisherInstructions(packageName));
+    console.log('Both halves of this step are done.');
   }
 
   // And the third step, which was neither manual nor automatic until somebody owned it. This script is where

@@ -11,9 +11,9 @@
  * differently, the bootstrap would claim one package and CI would fail publishing to another.
  *
  * The trusted-publisher half lives here for the same reason, one step later: claiming the name and attaching
- * the publisher are separate steps with separate failure modes, and all four of reading that publisher,
- * attaching it, settling the two into one answer, and wording the hand-back for when none of that can be done
- * from where the caller stands are needed by more than one script.
+ * the publisher are separate steps with separate failure modes, and all five of reading that publisher,
+ * attaching it, saying what the attach did, settling the two into one answer, and wording the hand-back for
+ * when none of that can be done from where the caller stands are needed by more than one script.
  */
 
 import { execFileSync } from 'node:child_process';
@@ -33,6 +33,24 @@ import { execFromRoot } from './root.ts';
  * {@link getPackageRegistryState}.
  */
 export type PackageRegistryState = 'missing' | 'placeholderOnly' | 'released';
+
+/**
+ * How an {@link attachTrustedPublisher} attempt ended.
+ *
+ * Until 2026-09-16 this was a bare `boolean`, and the three failures below were one `false`: everything npm
+ * said about which one it was went to the operator's screen and nowhere a caller could read. They want
+ * different things said about them. A code nobody typed is answered by typing one; a code the registry
+ * refused is answered by a fresh one, since a code is single-use and time-boxed; and a refusal no code fixes
+ * is answered only by reading npm's own words for it.
+ *
+ * `refused` is the catch-all of the three, and it is a narrower state than it sounds. Measured 2026-09-16
+ * against the live registry, the trust endpoint challenges for a one-time password **before** it checks
+ * anything else -- a POST naming a package that does not exist, from an account that does not own it, is
+ * answered `EOTP` rather than 404 -- so the first call almost never fails for its real reason. What lands
+ * here is mostly a machine with no npm login at all (`ENEEDAUTH`, which no code fixes) or a refusal the
+ * registry only gets round to stating once a code has been accepted.
+ */
+export type TrustedPublisherAttachOutcome = 'attached' | 'challenged' | 'oneTimePasswordRejected' | 'refused';
 
 /**
  * What {@link readTrustedPublisherState} was able to find out about a package's trusted publisher.
@@ -88,6 +106,20 @@ const NOT_FOUND_STATUS = 404;
  */
 const OTP_ERROR_CODE = 'EOTP';
 
+/** What {@link attachTrustedPublisher} did, and what npm said while it was doing it. */
+export interface TrustedPublisherAttachResult {
+  /**
+   * What npm said while doing it, verbatim and unparsed: on `attached` the configuration it created, on
+   * every other outcome its diagnostic.
+   *
+   * Empty only when the attempt ended in the inherited-terminal fallback, whose whole point is that npm owns
+   * the operator's screen -- so what it said went there rather than anywhere this process can read.
+   */
+  readonly npmOutput: string;
+
+  readonly outcome: TrustedPublisherAttachOutcome;
+}
+
 interface ActionsIdTokenResponse {
   value?: string;
 }
@@ -101,31 +133,58 @@ interface TokenExchangeResponse {
 }
 
 /**
- * Attaches this repo's trusted publisher to a package, reporting whether npm accepted it.
+ * Attaches this repo's trusted publisher to a package, reporting what npm did and what it said about it.
  *
  * This is the npmjs.com form, as a command. `npm trust github` POSTs to `/-/package/<name>/trust`, which is
  * the record the "Trusted Publisher" panel writes, so the two are interchangeable — and this one can be run
  * by the script the operator is already standing in front of, which is the whole point. The form is the half
  * of the hand-back that gets skipped, and it gets skipped because it is somewhere else.
  *
- * Three flag choices, each load-bearing:
+ * The flags live in {@link getTrustedPublisherArguments}, which is also what
+ * {@link getTrustedPublisherCommand} prints, so the command that runs and the command handed back cannot
+ * drift apart.
  *
- * - `--allow-publish` is not optional. `npm/lib/trust-cmd.js` throws `At least one permission flag is
- *   required` when neither it nor `--allow-stage-publish` is given, so a call without it creates nothing at
- *   all. Staged publishing is not something this repo does, so it takes the one permission.
- * - `--repo` is passed EXPLICITLY, although npm would infer it from the nearest `package.json`'s `repository`
- *   field. The inference reads `npm.prefix`, so what it resolves to depends on which directory the command
- *   was spawned from and which branch is checked out — and both callers here can be standing on `main` or on
- *   a release branch. Pinning it to the same constants {@link getTrustedPublisherInstructions} prints keeps
- *   the command, the printed fallback and the web form all saying one thing.
- * - `--yes` skips npm's own `Do you want to proceed? (y/N)` confirm and nothing else. The 2FA challenge is a
- *   separate mechanism that no flag suppresses, which is exactly the shape wanted here: one command, one code.
+ * **Two paths, and the captured one is tried first.** Until 2026-09-16 there was only the second: this ran
+ * `execFileSync` with `stdio: 'inherit'`, returned a bare `boolean`, and everything npm said went to the
+ * operator's screen. The reason given was npm's `otplease`, which opens with
+ * `if (!process.stdin.isTTY || !process.stdout.isTTY) { throw err }` (npm 12.0.2, `lib/utils/auth.js`) — so
+ * redirecting either stream was held to turn the one-time-password challenge into an immediate failure
+ * rather than a prompt. That is the same reasoning {@link readTrustedPublisherState} retired on the read
+ * side: `otplease` calls `fn(opts)` **first** and reaches that TTY check only from the `catch`, so a call
+ * already carrying `--otp=<code>` never gets there.
  *
- * Deliberately not `execFromRoot`. npm's `otplease` opens with
- * `if (!process.stdin.isTTY || !process.stdout.isTTY) { throw err }` (npm 12.0.2, `lib/utils/auth.js`), so
- * redirecting EITHER stream turns the one-time-password challenge into an immediate failure rather than a
- * prompt. Inheriting the terminal is the only way this call can succeed, and it is the same reason
- * `publishPlaceholder` in `bootstrap-new-package.ts` inherits it.
+ * **Measured on the WRITE endpoint, 2026-09-16, npm 12.0.2, at no cost in codes.** The same captured attach
+ * run twice against a package name that does not exist and that this account does not own — chosen precisely
+ * so that a success would have been impossible:
+ *
+ * - without `--otp`: `EOTP`, *"This operation requires a one-time password."*, followed by npm's **web**
+ *   challenge — the `authUrl`/`doneUrl` branch of `otplease`, the one that wants to open a browser. (npm
+ *   redacts both URLs out of its own error output, so a captured stderr is safe to print.)
+ * - with a deliberately wrong `--otp=000000`: `EOTP`, *"This operation requires a one-time password **from
+ *   your authenticator**. ... If you already provided a one-time password then it is likely that you either
+ *   typoed it, or it timed out."*, and **no** web challenge.
+ *
+ * The registry's answer changed, which is the proof the flag reaches this endpoint too rather than being
+ * dropped. That probe also settled something the read could not: the challenge comes **before** any
+ * existence or ownership check, which is why {@link TrustedPublisherAttachOutcome}'s `refused` is a narrower
+ * state than it sounds.
+ *
+ * So the flow is: run the captured attach; if it failed for any reason OTHER than the challenge, report that
+ * with npm's own words, because no code fixes a missing login; if it failed ON the challenge, ask for one
+ * code and run it again. **Skipping that prompt hands the whole thing back to the inherited-terminal form**,
+ * which is what ran here before and is the ONLY path that can take npm's web challenge — a call carrying a
+ * code on its argv gets no `authUrl` for `otplease` to open a browser at. The two are a pair rather than a
+ * replacement, and which one an operator wants depends on whether they would rather type six digits or
+ * authenticate in a browser.
+ *
+ * Deliberately **not** `--json`, though the read beside it is, and the two reasons are worth keeping apart.
+ * Under `--json`, `logOptions` emits the REQUEST options as one object before the POST and
+ * `displayResponseBody` emits the created configuration as another after it, so a successful attach prints
+ * two concatenated objects that no single `JSON.parse` reads. Captured plain text is npm's own human
+ * wording — with color already off, because chalk sees a pipe — and is exactly what the operator used to
+ * read off the screen. The read needs `--json` for a different reason entirely: it has to tell "no
+ * configurations" from "some", and `--json` is what suppresses the `dialogue` line that would otherwise make
+ * an empty result's stdout non-empty.
  *
  * Neither caller reaches this without already knowing the package has no publisher — a name claimed seconds
  * earlier by `publishPlaceholder`, or a definite `none` {@link resolveTrustedPublisherState} has just read
@@ -140,31 +199,103 @@ interface TokenExchangeResponse {
  * refuses the second, so the client doc is stale in exactly the direction that matters: a blind call may
  * leave a duplicate behind rather than being turned away. Settling it needs a write on that endpoint, and
  * every write there costs a one-time password — which is why it is still open rather than merely untried.
+ * What capturing changes is only how the answer would be READ when somebody does spend that code: the
+ * configurations npm echoes back now arrive in {@link TrustedPublisherAttachResult.npmOutput} instead of
+ * scrolling past on a terminal.
  *
- * Returns `false` rather than throwing, because every caller's failure path is to print
+ * Never throws, because every caller's failure path is to print
  * {@link getTrustedPublisherInstructions} and carry on. A publisher that could not be attached from here
  * leaves the repo in the state it has always been in; that is not worth aborting a script over.
  */
-export function attachTrustedPublisher(packageName: string): boolean {
-  try {
-    execFileSync('npm', [
-      'trust',
-      'github',
-      packageName,
-      '--file',
-      PUBLISH_WORKFLOW_FILE_NAME,
-      '--repo',
-      `${GITHUB_OWNER}/${GITHUB_REPOSITORY}`,
-      '--allow-publish',
-      '--yes'
-    ], {
-      shell: true,
-      stdio: 'inherit'
-    });
-    return true;
-  } catch {
-    return false;
+export async function attachTrustedPublisher(packageName: string): Promise<TrustedPublisherAttachResult> {
+  const firstResult = await runTrustAttach(packageName);
+
+  if (firstResult.exitCode === 0) {
+    return { npmOutput: firstResult.stdout.trim(), outcome: 'attached' };
   }
+
+  if (!isOneTimePasswordChallenge(firstResult)) {
+    return { npmOutput: describeNpmFailure(firstResult), outcome: 'refused' };
+  }
+
+  const oneTimePassword = await askOneTimePassword([
+    `\nnpm challenged the attach of ${packageName}'s trusted publisher for a one-time password.`,
+    'Entering one lets this script read back the configuration npm creates, and say exactly what went wrong',
+    'if it cannot. Skipping is fine: npm is then run again holding this terminal and asks for the code in',
+    'its own voice -- which is the browser flow, the challenge the registry offers a call carrying no code.'
+  ]);
+
+  if (oneTimePassword === null) {
+    return attachTrustedPublisherInteractively(packageName);
+  }
+
+  const retryResult = await runTrustAttach(packageName, oneTimePassword);
+
+  if (retryResult.exitCode === 0) {
+    return { npmOutput: retryResult.stdout.trim(), outcome: 'attached' };
+  }
+
+  return {
+    npmOutput: describeNpmFailure(retryResult),
+    outcome: isOneTimePasswordChallenge(retryResult) ? 'oneTimePasswordRejected' : 'refused'
+  };
+}
+
+/**
+ * The operator-facing account of an attach, worded once for both callers.
+ *
+ * `bootstrap-new-package.ts` and {@link resolveTrustedPublisherState} reach the attach from opposite sides --
+ * a name claimed seconds ago, and a name npm has just said has no publisher -- but what there is to say
+ * afterwards is identical, and it used to be written out twice in two slightly different ways over the same
+ * bare `boolean`.
+ *
+ * Every outcome but `attached` means npm created nothing, which is why both callers map all three onto the
+ * `none` half of {@link TrustedPublisherState}. They are still worth telling apart in words: only one of them
+ * is fixed by typing a code, and only one of them is npm's final answer.
+ *
+ * Each failure ends where the inherited-terminal form always ended, with
+ * {@link getTrustedPublisherInstructions} -- so nothing is lost by any of the ways this can go wrong.
+ */
+export function describeTrustedPublisherAttach(packageName: string, result: TrustedPublisherAttachResult): string {
+  if (result.outcome === 'attached') {
+    const attached = ['', `Trusted publisher attached to ${packageName}.`];
+
+    if (result.npmOutput) {
+      attached.push('', 'npm reports:', '', indentBlock(result.npmOutput), '');
+    }
+
+    return attached.join('\n');
+  }
+
+  const lines = [''];
+
+  if (result.outcome === 'challenged') {
+    lines.push(
+      `npm challenged the attach of ${packageName}'s trusted publisher for a`,
+      'one-time password, and none reached the registry -- none was typed, or there was nobody to type one.'
+    );
+  } else if (result.outcome === 'oneTimePasswordRejected') {
+    lines.push(
+      `npm did not accept that one-time password, so ${packageName} still has no`,
+      'trusted publisher. A code is single-use and time-boxed, so a fresh one from your authenticator is the',
+      'whole of the fix.'
+    );
+  } else {
+    lines.push(
+      // Deliberately does not promise npm's words below it. `npmOutput` is empty when npm never ran at all
+      // -- it is not on the PATH, say -- which `exec` reports as this same outcome with nothing on either
+      // stream, and a sentence pointing at an explanation that is not there is worse than no sentence.
+      `npm refused to attach the trusted publisher to ${packageName}, for a reason`,
+      'no one-time password fixes.'
+    );
+  }
+
+  if (result.npmOutput) {
+    lines.push('', 'npm said:', '', indentBlock(result.npmOutput));
+  }
+
+  lines.push(getTrustedPublisherInstructions(packageName));
+  return lines.join('\n');
 }
 
 /**
@@ -275,13 +406,17 @@ export function getScopedPackageName(branchSpec: BranchSpec): string {
  * The exact `npm trust` invocation that attaches this repo's publisher to a package, as a single line.
  *
  * Kept separate from {@link attachTrustedPublisher} so that the command can be *printed* by a script that
- * cannot *run* it -- CI, or any caller whose stdio is redirected. The two are built from the same constants
- * on purpose: a printed command that differs from the one the tooling runs is a second, unverified way to
- * configure the package, and it is the printed one a human would then trust.
+ * cannot *run* it -- CI, or a caller with no terminal to answer the challenge from. The two are now built
+ * from one {@link getTrustedPublisherArguments} rather than merely from the same constants: a printed command
+ * that differs from the one the tooling runs is a second, unverified way to configure the package, and it is
+ * the printed one a human would then trust. Two hand-written lists of the same eight tokens were one
+ * careless edit away from being exactly that.
+ *
+ * Joined with spaces and not quoted, because nothing in it ever needs quoting -- every token but the package
+ * name is a literal here, and the names this repo generates are npm package names.
  */
 export function getTrustedPublisherCommand(packageName: string): string {
-  return `npm trust github ${packageName} --file ${PUBLISH_WORKFLOW_FILE_NAME}`
-    + ` --repo ${GITHUB_OWNER}/${GITHUB_REPOSITORY} --allow-publish --yes`;
+  return ['npm', ...getTrustedPublisherArguments(packageName)].join(' ');
 }
 
 /**
@@ -304,8 +439,9 @@ export function getTrustedPublisherInstructions(packageName: string): string {
     '',
     `  ${getTrustedPublisherCommand(packageName)}`,
     '',
-    'npm asks for one 2FA code and prints the configuration it created. Run it in a real terminal: npm refuses',
-    'the operation outright, rather than prompting, when its input or output is redirected.',
+    'npm asks for one 2FA code and prints the configuration it created. Run it in a real terminal: carrying no',
+    '`--otp` on its command line, it answers the challenge in a browser, and it will not open one for a process',
+    'whose input or output is redirected.',
     '',
     'The same thing by hand, if that command is unavailable -- every field is case-sensitive:',
     '',
@@ -445,7 +581,12 @@ export async function readTrustedPublisherState(packageName: string): Promise<Tr
     return 'unknown';
   }
 
-  const oneTimePassword = await askOneTimePassword(packageName);
+  const oneTimePassword = await askOneTimePassword([
+    `\nnpm challenged the read of ${packageName}'s trusted publisher for a one-time password.`,
+    'Entering one settles it outright. Skipping is fine: the hand-back then falls back to asking you',
+    'whether the publisher is attached, exactly as it did before it could ask for a code at all.',
+    'npm challenges per operation, so attaching a publisher after this asks for a second, later code.'
+  ]);
 
   if (oneTimePassword === null) {
     return 'unknown';
@@ -491,6 +632,12 @@ export async function readTrustedPublisherState(packageName: string): Promise<Tr
  * no npm login, a code that was skipped or refused, or a request that never got there -- and for those, an
  * attach would be as blind as it ever was.
  *
+ * The `none` this returns when the attach does not land is npm's word rather than this function's guess,
+ * which it was not before 2026-09-16: {@link attachTrustedPublisher} answered a bare `false` covering "no
+ * code was typed", "the code was refused" and "npm said no" alike, and the only thing to do with it was to
+ * print the whole hand-back again. {@link describeTrustedPublisherAttach} now says which of the three it was,
+ * and all three still mean npm created nothing, so the mapping to `none` is unchanged.
+ *
  * Every message names the package rather than saying "it". The two callers print very different preambles
  * ahead of this -- one about a name it declined to re-claim, one about a branch it has just cut -- and a
  * pronoun that resolves against whichever of them ran is a sentence that reads correctly only by accident.
@@ -512,48 +659,45 @@ export async function resolveTrustedPublisherState(packageName: string): Promise
   }
 
   console.log(`\nnpm reports no trusted publisher on ${packageName}, so that is the half still outstanding.`);
-  console.log('Attaching it now. npm will ask for a one-time password: it challenges per operation and caches');
-  console.log('nothing between processes, so this code is its own rather than a reuse of any earlier one.');
+  console.log('Attaching it now. That needs a one-time password of its own: npm challenges per operation and');
+  console.log('caches nothing between processes, so this code cannot be a reuse of any earlier one.');
 
-  if (attachTrustedPublisher(packageName)) {
-    console.log(`\nTrusted publisher attached to ${packageName}.`);
-    return 'attached';
-  }
+  const attachResult = await attachTrustedPublisher(packageName);
+  console.log(describeTrustedPublisherAttach(packageName, attachResult));
 
-  console.log(`\nCould not attach the trusted publisher to ${packageName}.`);
-  console.log(getTrustedPublisherInstructions(packageName));
-  return 'none';
+  return attachResult.outcome === 'attached' ? 'attached' : 'none';
 }
 
 /**
- * Asks the operator for the one-time password the registry just challenged a read with, or `null` when there
- * is none to be had.
+ * Asks the operator for the one-time password the registry just challenged an operation with, or `null` when
+ * there is none to be had.
  *
- * The preamble is three lines because every one of them changes what a reader does next. They are being asked
- * for a code by a script, not by npm, so it says which read wanted it; skipping is a real option rather than
- * a failure, so it says what skipping costs; and npm challenges per operation, so it says that attaching a
- * publisher afterwards will ask again rather than reusing this one -- an operator who does not know that
- * reads the second prompt as the first one having failed.
+ * **The preamble is the caller's, and the asking is shared.** Both the read and the attach reach this, and
+ * every line they print differs: which operation wanted the code, what skipping it costs, and what happens
+ * next if it is skipped -- the read falls back to a question, the attach falls back to npm's own browser
+ * challenge. What they have in common is the asking, and it is the asking that carries the subtleties worth
+ * writing once. Handing the whole preamble in is what lets the two share this without sharing a sentence
+ * that would be wrong for one of them.
+ *
+ * The terminal test comes before the preamble rather than being left to {@link askLine}, which would answer
+ * `null` on its own. Lines addressed to an operator, printed into a log nobody is reading, describe a prompt
+ * that never appeared -- and some of them are simply untrue where nothing is going to happen next. Saying
+ * nothing is the honest output for an unattended run.
  *
  * The answer is not validated beyond stripping whitespace, which is what npm's own `read.otp` does to a code
  * pasted as `123 456`. Anything else is the registry's judgement to make: a local pattern strict enough to be
  * worth having would have to guess at forms this account might use, and being wrong there rejects a code npm
- * would have accepted. A code the registry refuses costs one more request and lands in `unknown`, which is
- * where declining lands anyway.
+ * would have accepted. A code the registry refuses costs one more request and lands where declining lands
+ * anyway.
  */
-async function askOneTimePassword(packageName: string): Promise<null | string> {
-  // The terminal test comes before the preamble rather than being left to `askLine`, which would answer
-  // `null` on its own. Four lines addressed to an operator, printed into a log nobody is reading, describe a
-  // prompt that never appeared -- and the last of them, about a second code for the attach, is simply untrue
-  // where nothing can be attached. Saying nothing is the honest output for an unattended run.
+async function askOneTimePassword(preamble: readonly string[]): Promise<null | string> {
   if (!process.stdin.isTTY) {
     return null;
   }
 
-  console.log(`\nnpm challenged the read of ${packageName}'s trusted publisher for a one-time password.`);
-  console.log('Entering one settles it outright. Skipping is fine: the hand-back then falls back to asking you');
-  console.log('whether the publisher is attached, exactly as it did before it could ask for a code at all.');
-  console.log('npm challenges per operation, so attaching a publisher after this asks for a second, later code.');
+  for (const line of preamble) {
+    console.log(line);
+  }
 
   const answer = await askLine('\nOne-time password from your authenticator (empty to skip): ');
 
@@ -562,6 +706,54 @@ async function askOneTimePassword(packageName: string): Promise<null | string> {
   }
 
   return answer.replaceAll(/\s/gu, '') || null;
+}
+
+/**
+ * Runs the attach the way it ran before 2026-09-16 -- npm holding the terminal, this process reading nothing
+ * back -- as the fallback for an operator who did not supply a code.
+ *
+ * This is not a lesser copy of the captured path; it is the only path that can reach npm's **web** challenge.
+ * `otplease` takes that branch on `err.body.authUrl && err.body.doneUrl`, and the registry sends those two
+ * only to a call carrying no `--otp` (measured 2026-09-16, both here and on the read). So an operator who
+ * would rather authenticate in a browser than read six digits off an authenticator gets there by skipping
+ * the prompt, which is also what an operator who cannot produce a code at all does.
+ *
+ * Gated on a real terminal on BOTH streams, which is the test `otplease` itself makes one line later. Without
+ * it this would run npm only to have it rethrow the challenge it was handed, printing a second copy of the
+ * same failure into a log nobody is reading.
+ *
+ * A non-zero exit is reported as `challenged` rather than as a refusal: the only way here is through a
+ * captured call that already came back `EOTP`, so the challenge is the known cause and npm was given the one
+ * thing that could answer it -- the operator's terminal.
+ */
+function attachTrustedPublisherInteractively(packageName: string): TrustedPublisherAttachResult {
+  if (!process.stdin.isTTY || !process.stdout.isTTY) {
+    return { npmOutput: '', outcome: 'challenged' };
+  }
+
+  console.log('\nHanding the challenge back to npm, which will ask for it in its own way -- a browser, or a');
+  console.log('code typed at its prompt. What it prints below is its own; this script cannot read it back.');
+
+  try {
+    execFileSync('npm', getTrustedPublisherArguments(packageName), {
+      shell: true,
+      stdio: 'inherit'
+    });
+    return { npmOutput: '', outcome: 'attached' };
+  } catch {
+    return { npmOutput: '', outcome: 'challenged' };
+  }
+}
+
+/**
+ * What npm said about a failed run, taken from the stream it actually writes diagnostics to.
+ *
+ * stderr carries the `npm error ...` block. stdout is not empty on a failure either -- `createConfigCommand`
+ * echoes the request options and their URLs before it POSTs anything -- so stdout is the fallback rather than
+ * the first choice: it is what the call was ASKING for, not what went wrong with it.
+ */
+function describeNpmFailure(result: ExecResult): string {
+  return result.stderr.trim() || result.stdout.trim();
 }
 
 /**
@@ -610,7 +802,48 @@ async function fetchActionsIdToken(): Promise<null | string> {
 }
 
 /**
- * Reports whether a failed {@link runTrustList} failed only because the registry wanted a one-time password.
+ * The `npm trust github` argument list, minus the `npm` itself: the one place these flags are written down.
+ *
+ * Three choices, each load-bearing:
+ *
+ * - `--allow-publish` is not optional. `npm/lib/trust-cmd.js` throws `At least one permission flag is
+ *   required` when neither it nor `--allow-stage-publish` is given, so a call without it creates nothing at
+ *   all. Staged publishing is not something this repo does, so it takes the one permission.
+ * - `--repo` is passed EXPLICITLY, although npm would infer it from the nearest `package.json`'s `repository`
+ *   field. The inference reads `npm.prefix`, so what it resolves to depends on which directory the command
+ *   was spawned from and which branch is checked out -- and both callers here can be standing on `main` or on
+ *   a release branch. Pinning it to the same constants {@link getTrustedPublisherInstructions} prints keeps
+ *   the command, the printed fallback and the web form all saying one thing.
+ * - `--yes` skips npm's own `Do you want to proceed? (y/N)` confirm and nothing else. The 2FA challenge is a
+ *   separate mechanism that no flag suppresses, which is exactly the shape wanted here: one command, one code.
+ *
+ * Notably absent is `--dry-run`, and it is worth knowing why a reader should not add one to check something:
+ * `createConfigCommand` returns immediately after echoing the options, before `confirmOperation` and before
+ * the POST -- so a dry run exits **0** having reached no registry at all. It is a safe probe and a worthless
+ * predicate.
+ */
+function getTrustedPublisherArguments(packageName: string): string[] {
+  return [
+    'trust',
+    'github',
+    packageName,
+    '--file',
+    PUBLISH_WORKFLOW_FILE_NAME,
+    '--repo',
+    `${GITHUB_OWNER}/${GITHUB_REPOSITORY}`,
+    '--allow-publish',
+    '--yes'
+  ];
+}
+
+/** Indents a block of npm's own output so it reads as a quotation rather than as this script's voice. */
+function indentBlock(text: string): string {
+  return text.split('\n').map((line) => (line ? `  ${line}` : line)).join('\n');
+}
+
+/**
+ * Reports whether a failed {@link runTrustList} or {@link runTrustAttach} failed only because the registry
+ * wanted a one-time password.
  *
  * A substring test rather than a parse, and both streams rather than one, because npm says it twice and the
  * two sayings have different shapes (measured 2026-09-16, npm 12.0.2): stdout carries a single well-formed
@@ -620,11 +853,36 @@ async function fetchActionsIdToken(): Promise<null | string> {
  * `JSON.parse` of npm's output in a function whose sibling documents at length why the success body must not
  * be parsed.
  *
+ * Testing BOTH streams is what lets one predicate serve both callers, and it stopped being redundant the
+ * moment the attach arrived: the attach runs without `--json`, so its stdout carries no error object at all
+ * and the stderr half is the whole of the test there.
+ *
  * The cost of a false positive bounds how careful this needs to be: one prompt the operator can dismiss with
  * an empty line.
  */
 function isOneTimePasswordChallenge(result: ExecResult): boolean {
   return result.stdout.includes(OTP_ERROR_CODE) || result.stderr.includes(OTP_ERROR_CODE);
+}
+
+/**
+ * Runs the captured `npm trust github` attach, carrying a one-time password when one is supplied.
+ *
+ * The twin of {@link runTrustList}, with the same three options and for the same three reasons -- and
+ * deliberately without that one's `--json`, for the reason {@link attachTrustedPublisher} sets out: the
+ * attach prints two objects under `--json` and clean human text without it.
+ */
+function runTrustAttach(packageName: string, oneTimePassword?: string): Promise<ExecResult> {
+  const command = ['npm', ...getTrustedPublisherArguments(packageName)];
+
+  if (oneTimePassword !== undefined) {
+    command.push(`--otp=${oneTimePassword}`);
+  }
+
+  return execFromRoot(command, {
+    isQuiet: true,
+    shouldIgnoreExitCode: true,
+    shouldIncludeDetails: true
+  });
 }
 
 /**
