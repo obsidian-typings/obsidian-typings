@@ -32,6 +32,10 @@ interface LinkNode {
   url: string;
 }
 
+interface NodeWithLooseChildren {
+  children: unknown[];
+}
+
 interface SiblingNode {
   children?: unknown[];
   className?: string[];
@@ -99,7 +103,12 @@ export function githubLocationRenderer(): (tree: Root) => void {
         }]);
         decorateHast(containerNode);
         parent.children.splice(index, SPLICE_COUNT);
-        parent.children.unshift(containerNode as never);
+        /*
+         * containerNode is a hast Element being embedded into an mdast tree, which is what `decorateHast` marks it
+         * for — the same thing the `prevHeading.children.push()` branch above does through a loosely typed `children`.
+         * Widen the array rather than asserting the node into an mdast union it is deliberately not a member of.
+         */
+        (parent as NodeWithLooseChildren).children.unshift(containerNode);
       }
     });
   };
