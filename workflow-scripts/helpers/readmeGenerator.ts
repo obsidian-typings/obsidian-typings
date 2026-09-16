@@ -2,35 +2,13 @@ import {
   readFile,
   writeFile
 } from 'node:fs/promises';
-import { execFromRoot } from './exec.ts';
 
-import {
-  type BranchSpec,
-  generateBranchName
-} from './branchSpec.ts';
+import type { BranchSpec } from './branchSpec.ts';
+
+import { generateBranchName } from './branchSpec.ts';
+import { execFromRoot } from './exec.ts';
 import { commit } from './git.ts';
 import { getLatestVersion } from './version.ts';
-
-export async function generateReadme(branchSpec: BranchSpec, changelogUrl: string): Promise<void> {
-  const readmeTemplate = await readFile('./workflow-scripts/README.template.md', 'utf-8');
-  const readme = await readFile('README.md', 'utf-8');
-
-  const updatedReadme = fillReadmeTemplate(readmeTemplate, branchSpec, changelogUrl);
-  if (readme === updatedReadme) {
-    return;
-  }
-  await writeFile('README.md', updatedReadme, 'utf-8');
-  await execFromRoot('git add README.md');
-  await commit('chore: generate README.md from template');
-  await execFromRoot('git push');
-}
-
-function fillReadmeTemplate(readmeTemplate: string, branchSpec: BranchSpec, changelogUrl: string): string {
-  return readmeTemplate
-    .replaceAll('{{OBSIDIAN_VERSION}}', branchSpec.obsidianVersion)
-    .replaceAll('{{CHANNEL}}', branchSpec.channel)
-    .replaceAll('{{CHANGELOG_URL}}', changelogUrl);
-}
 
 export async function generateMainReadme(): Promise<void> {
   await execFromRoot('git checkout main');
@@ -52,6 +30,27 @@ export async function generateMainReadme(): Promise<void> {
   await execFromRoot('git add README.md');
   await commit('chore: generate README.md from template');
   await execFromRoot('git push');
+}
+
+export async function generateReadme(branchSpec: BranchSpec, changelogUrl: string): Promise<void> {
+  const readmeTemplate = await readFile('./workflow-scripts/README.template.md', 'utf-8');
+  const readme = await readFile('README.md', 'utf-8');
+
+  const updatedReadme = fillReadmeTemplate(readmeTemplate, branchSpec, changelogUrl);
+  if (readme === updatedReadme) {
+    return;
+  }
+  await writeFile('README.md', updatedReadme, 'utf-8');
+  await execFromRoot('git add README.md');
+  await commit('chore: generate README.md from template');
+  await execFromRoot('git push');
+}
+
+function fillReadmeTemplate(readmeTemplate: string, branchSpec: BranchSpec, changelogUrl: string): string {
+  return readmeTemplate
+    .replaceAll('{{OBSIDIAN_VERSION}}', branchSpec.obsidianVersion)
+    .replaceAll('{{CHANNEL}}', branchSpec.channel)
+    .replaceAll('{{CHANGELOG_URL}}', changelogUrl);
 }
 
 function generateMainReadmeLine(branchSpec: BranchSpec): string {

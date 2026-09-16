@@ -1,4 +1,5 @@
 import { compare } from 'semver';
+
 import { execFromRoot } from './exec.ts';
 
 export async function getLatestVersion(channel: 'catalyst' | 'public'): Promise<string> {

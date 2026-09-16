@@ -4,8 +4,8 @@ import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 exitIfScriptDisabled();
 
 async function main(): Promise<void> {
-  const targetBranch = process.argv[2];
-  const withScripts = process.argv[3] === '--with-scripts';
+  const [, , targetBranch, withScriptsFlag] = process.argv;
+  const withScripts = withScriptsFlag === '--with-scripts';
   if (!targetBranch) {
     throw new Error('Usage: jiti ./workflow-scripts/checkout.ts <targetBranch> [--with-scripts]');
   }

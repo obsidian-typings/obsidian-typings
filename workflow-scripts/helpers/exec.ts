@@ -68,10 +68,10 @@ export interface PackageLockJson extends Partial<PackageJson> {
 }
 
 interface ExecDetailedOptions extends ExecOption {
-  withDetails: true;
+  readonly withDetails: true;
 }
 interface ExecSimpleOptions extends ExecOption {
-  withDetails?: false;
+  readonly withDetails?: false;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- The generic type is better for the strong typing.
@@ -193,10 +193,14 @@ export function toCommandLine(args: string[]): string {
     .join(' ');
 }
 
+export function toJson(data: unknown): string {
+  const INDENT = 2;
+  return JSON.stringify(data, null, INDENT);
+}
+
 export async function writeJson(path: string, data: unknown): Promise<void> {
   await writeFile(path, `${toJson(data)}\n`);
 }
-
 async function exec(command: CommandPart[] | string, options?: ExecSimpleOptions): Promise<string>;
 async function exec(command: CommandPart[] | string, options: ExecDetailedOptions): Promise<ExecResult>;
 async function exec(command: CommandPart[] | string, options: ExecOption = {}): Promise<ExecResult | string> {
@@ -290,7 +294,7 @@ function execString(command: string, options: ExecOption = {}): Promise<ExecResu
         exitSignal,
         stderr,
         stdout
-      } as ExecResult);
+      });
     });
 
     child.on('error', (err) => {
@@ -309,7 +313,7 @@ function execString(command: string, options: ExecOption = {}): Promise<ExecResu
         exitSignal: null,
         stderr,
         stdout
-      } as ExecResult);
+      });
     });
   });
 }
@@ -326,7 +330,7 @@ async function executeBatches(baseCommand: string, batches: string[][], options:
   }
 
   if (options.shouldIncludeDetails) {
-    return { exitCode: 0, exitSignal: null, stderr: '', stdout: results.join('\n') } as ExecResult;
+    return { exitCode: 0, exitSignal: null, stderr: '', stdout: results.join('\n') };
   }
 
   return results.join('\n');
@@ -397,11 +401,6 @@ function resolveSafe(...pathSegments: string[]): string {
   const WINDOWS_POSIX_LIKE_PATH_REG_EXP = /[a-zA-Z]:\/[^:]*$/;
   const match = WINDOWS_POSIX_LIKE_PATH_REG_EXP.exec(path);
   return match?.[0] ?? path;
-}
-
-function toJson(data: unknown): string {
-  const INDENT = 2;
-  return JSON.stringify(data, null, INDENT);
 }
 
 function toPosixPath(path: string): string {

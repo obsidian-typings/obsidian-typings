@@ -1,16 +1,15 @@
 import { writeFile } from 'node:fs/promises';
 import { inc } from 'semver';
 
+import type { BranchSpec } from './helpers/branchSpec.ts';
 import type { PackageRegistryState } from './helpers/npm.ts';
 
-import {
-  type BranchSpec,
-  parseBranchSpec
-} from './helpers/branchSpec.ts';
+import { parseBranchSpec } from './helpers/branchSpec.ts';
 import {
   editPackageJson,
   editPackageLockJson,
-  execFromRoot
+  execFromRoot,
+  toJson
 } from './helpers/exec.ts';
 import {
   annotateTag,
@@ -27,64 +26,6 @@ import {
   REPOSITORY
 } from './helpers/npm.ts';
 import { getLatestVersion } from './helpers/version.ts';
-
-async function main(): Promise<void> {
-  const isBeta = process.env['IS_BETA'] === 'true';
-
-  const branchNames = await getBranchNames('HEAD');
-  const branchName = branchNames[0];
-
-  if (branchNames.length !== 1 || !branchName) {
-    throw new Error(`Expected 1 branch, got ${String(branchNames.length)}: ${branchNames.join(', ')}`);
-  }
-
-  // Checkout the branch so we're not in detached HEAD state (CI checks out the commit SHA, leaving us detached)
-  await execFromRoot(`git checkout -B ${branchName} --track origin/${branchName}`);
-
-  const branchSpec = parseBranchSpec(branchName);
-
-  const latestVersion = await getLatestVersion(branchSpec.channel);
-  const isLatest = branchSpec.obsidianVersion === latestVersion;
-
-  // Before anything this run cannot take back. `updateNpmVersions()` below commits the version bump, pushes
-  // it, and pushes an annotated tag -- all of which happen BEFORE the first `npm publish`, so a publish that
-  // was never going to be allowed still costs a minor version and leaves a tag pointing at a release that
-  // does not exist. That is not a hypothetical: it is what both dispatches did on 2026-09-14. Asking first is
-  // what makes the failure free, and it is also why this sits above `npm install` and `npm run build` rather
-  // than merely above the publish -- there is no reason to spend six minutes building an artifact that cannot
-  // be published.
-  await assertCanPublish(branchSpec, isLatest);
-
-  await execFromRoot('npm install');
-  await execFromRoot('npm run build');
-
-  const nextVersion = await updateNpmVersions(branchSpec, isBeta);
-  const scopedTagName = buildScopedTagName(branchSpec, nextVersion);
-
-  const scopedPackageName = getScopedPackageName(branchSpec);
-  const zipFileName = `obsidian-typings-${nextVersion}-obsidian-${branchSpec.obsidianVersion}-${branchSpec.channel}.zip`;
-
-  await releaseNpmPackage(nextVersion, zipFileName, scopedPackageName);
-
-  // Use main README for the wrapper packages and zip artifact
-  await execFromRoot('git restore --source=origin/main --worktree -- ./README.md');
-
-  if (isLatest) {
-    const latestWrapperName = getLatestWrapperPackageName(branchSpec.channel);
-    const wrapperVersion = await getNextWrapperVersion(latestWrapperName, isBeta);
-    await updateLatestWrapper(branchSpec.channel, scopedPackageName, nextVersion, wrapperVersion);
-    if (branchSpec.channel === 'public') {
-      await updateLegacyWrapper(wrapperVersion);
-    }
-  }
-
-  await writeOutput({
-    isBeta,
-    releaseName: `${nextVersion} (${scopedPackageName})`,
-    tagName: scopedTagName,
-    zipFileName
-  });
-}
 
 /**
  * Refuses the run when npm will not let this workflow publish one of the packages it is about to publish.
@@ -182,6 +123,15 @@ async function describeMissingPublishRight(packageName: string): Promise<string>
   ].join('\n');
 }
 
+async function getNextWrapperVersion(packageName: string, isBeta: boolean): Promise<string> {
+  const currentVersion = (await execFromRoot(`npm view ${packageName} version`, { isQuiet: true })).trim();
+  const nextVersion = isBeta ? inc(currentVersion, 'preminor', 'beta') : inc(currentVersion, 'minor');
+  if (!nextVersion) {
+    throw new Error(`Failed to increment wrapper version for ${packageName} (current: ${currentVersion})`);
+  }
+  return nextVersion;
+}
+
 /** Every package name this run will publish, in the order it will publish them. */
 function getPackageNamesToPublish(branchSpec: BranchSpec, isLatest: boolean): string[] {
   const packageNames = [getScopedPackageName(branchSpec)];
@@ -195,6 +145,64 @@ function getPackageNamesToPublish(branchSpec: BranchSpec, isLatest: boolean): st
   }
 
   return packageNames;
+}
+
+async function main(): Promise<void> {
+  const isBeta = process.env['IS_BETA'] === 'true';
+
+  const branchNames = await getBranchNames('HEAD');
+  const branchName = branchNames[0];
+
+  if (branchNames.length !== 1 || !branchName) {
+    throw new Error(`Expected 1 branch, got ${String(branchNames.length)}: ${branchNames.join(', ')}`);
+  }
+
+  // Checkout the branch so we're not in detached HEAD state (CI checks out the commit SHA, leaving us detached)
+  await execFromRoot(`git checkout -B ${branchName} --track origin/${branchName}`);
+
+  const branchSpec = parseBranchSpec(branchName);
+
+  const latestVersion = await getLatestVersion(branchSpec.channel);
+  const isLatest = branchSpec.obsidianVersion === latestVersion;
+
+  // Before anything this run cannot take back. `updateNpmVersions()` below commits the version bump, pushes
+  // it, and pushes an annotated tag -- all of which happen BEFORE the first `npm publish`, so a publish that
+  // was never going to be allowed still costs a minor version and leaves a tag pointing at a release that
+  // does not exist. That is not a hypothetical: it is what both dispatches did on 2026-09-14. Asking first is
+  // what makes the failure free, and it is also why this sits above `npm install` and `npm run build` rather
+  // than merely above the publish -- there is no reason to spend six minutes building an artifact that cannot
+  // be published.
+  await assertCanPublish(branchSpec, isLatest);
+
+  await execFromRoot('npm install');
+  await execFromRoot('npm run build');
+
+  const nextVersion = await updateNpmVersions(branchSpec, isBeta);
+  const scopedTagName = buildScopedTagName(branchSpec, nextVersion);
+
+  const scopedPackageName = getScopedPackageName(branchSpec);
+  const zipFileName = `obsidian-typings-${nextVersion}-obsidian-${branchSpec.obsidianVersion}-${branchSpec.channel}.zip`;
+
+  await releaseNpmPackage(nextVersion, zipFileName, scopedPackageName);
+
+  // Use main README for the wrapper packages and zip artifact
+  await execFromRoot('git restore --source=origin/main --worktree -- ./README.md');
+
+  if (isLatest) {
+    const latestWrapperName = getLatestWrapperPackageName(branchSpec.channel);
+    const wrapperVersion = await getNextWrapperVersion(latestWrapperName, isBeta);
+    await updateLatestWrapper(branchSpec.channel, scopedPackageName, nextVersion, wrapperVersion);
+    if (branchSpec.channel === 'public') {
+      await updateLegacyWrapper(wrapperVersion);
+    }
+  }
+
+  await writeOutput({
+    isBeta,
+    releaseName: `${nextVersion} (${scopedPackageName})`,
+    tagName: scopedTagName,
+    zipFileName
+  });
 }
 
 /**
@@ -271,7 +279,7 @@ async function updateLatestWrapper(channel: 'catalyst' | 'public', scopedPackage
     version: wrapperVersion
   };
 
-  await execFromRoot(`cat > .wrapper-tmp/package.json << 'EOF'\n${JSON.stringify(wrapperPackageJson, null, 2)}\nEOF`);
+  await execFromRoot(`cat > .wrapper-tmp/package.json << 'EOF'\n${toJson(wrapperPackageJson)}\nEOF`);
   await execFromRoot('cp README.md .wrapper-tmp/README.md');
   await execFromRoot(`echo 'export type * from "${scopedPackageName}";' > .wrapper-tmp/types.d.mts`);
   await execFromRoot(`echo 'export type * from "${scopedPackageName}";' > .wrapper-tmp/types.d.cts`);
@@ -313,7 +321,7 @@ async function updateLegacyWrapper(version: string): Promise<void> {
     version
   };
 
-  await execFromRoot(`cat > .legacy-tmp/package.json << 'EOF'\n${JSON.stringify(legacyPackageJson, null, 2)}\nEOF`);
+  await execFromRoot(`cat > .legacy-tmp/package.json << 'EOF'\n${toJson(legacyPackageJson)}\nEOF`);
   await execFromRoot('cp README.md .legacy-tmp/README.md');
   await execFromRoot(`echo 'export type * from "${latestWrapperName}";' > .legacy-tmp/types.d.mts`);
   await execFromRoot(`echo 'export type * from "${latestWrapperName}";' > .legacy-tmp/types.d.cts`);
@@ -343,15 +351,6 @@ async function updateNpmVersion(nextVersion: string): Promise<void> {
   await execFromRoot('git add package.json package-lock.json');
   await commit(`chore(release): ${nextVersion}`);
   await execFromRoot('git push');
-}
-
-async function getNextWrapperVersion(packageName: string, isBeta: boolean): Promise<string> {
-  const currentVersion = (await execFromRoot(`npm view ${packageName} version`, { isQuiet: true })).trim();
-  const nextVersion = isBeta ? inc(currentVersion, 'preminor', 'beta') : inc(currentVersion, 'minor');
-  if (!nextVersion) {
-    throw new Error(`Failed to increment wrapper version for ${packageName} (current: ${currentVersion})`);
-  }
-  return nextVersion;
 }
 
 async function updateNpmVersions(branchSpec: BranchSpec, isBeta: boolean): Promise<string> {

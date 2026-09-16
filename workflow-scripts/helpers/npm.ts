@@ -38,8 +38,8 @@ export const NPM_SCOPE = '@obsidian-typings';
 export const PLACEHOLDER_VERSION = '0.0.0';
 
 /*
- * npm validates a published manifest against the provenance statement that trusted publishing attaches,
- * rejecting the publish when the two disagree. The manifests that `publish-release.ts` and
+ * A published manifest is validated by npm against the provenance statement that trusted publishing
+ * attaches, and the publish is rejected when the two disagree. The manifests that `publish-release.ts` and
  * `bootstrap-new-package.ts` generate from scratch therefore have to carry the same repository as the
  * package.json a release branch publishes.
  */

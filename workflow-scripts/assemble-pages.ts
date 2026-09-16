@@ -24,16 +24,10 @@ const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
  * budget therefore sits at a bit over 2x today's size: high enough not to fire on ordinary API
  * growth, low enough to catch anything resembling the regression it exists to prevent.
  */
-const MAX_SITE_SIZE_IN_BYTES = 1500 * 1024 * 1024;
-
-async function main(): Promise<void> {
-  const outputDir = process.env['OUTPUT_DIR'] ?? './site';
-  const redirectHtml = await readFile(`${SCRIPT_DIR}/static/pages-redirect.html`, 'utf-8');
-
-  await assertChannelsArePresent(outputDir);
-  await createRedirectPage(outputDir, redirectHtml);
-  await assertSiteSize(outputDir);
-}
+const BYTES_IN_KILOBYTE = 1024;
+const BYTES_IN_MEGABYTE = BYTES_IN_KILOBYTE * BYTES_IN_KILOBYTE;
+const MAX_SITE_SIZE_IN_MEGABYTES = 1500;
+const MAX_SITE_SIZE_IN_BYTES = MAX_SITE_SIZE_IN_MEGABYTES * BYTES_IN_MEGABYTE;
 
 /**
  * Each channel arrives as its own artifact from its own job. A job that failed while the other
@@ -52,16 +46,21 @@ async function assertChannelsArePresent(outputDir: string): Promise<void> {
 
 async function assertSiteSize(outputDir: string): Promise<void> {
   const sizeInBytes = await getDirectorySize(outputDir);
-  const MEGABYTE = 1024 * 1024;
-  const sizeInMegabytes = Math.round(sizeInBytes / MEGABYTE);
+  const sizeInMegabytes = Math.round(sizeInBytes / BYTES_IN_MEGABYTE);
   console.log(`Site size: ${String(sizeInMegabytes)} MB`);
 
   if (sizeInBytes > MAX_SITE_SIZE_IN_BYTES) {
     throw new Error(
-      `Site is ${String(sizeInMegabytes)} MB, over the ${String(Math.round(MAX_SITE_SIZE_IN_BYTES / MEGABYTE))} MB budget. `
+      `Site is ${String(sizeInMegabytes)} MB, over the ${String(MAX_SITE_SIZE_IN_MEGABYTES)} MB budget. `
         + 'GitHub Pages hard-fails above 1 GB, so this would otherwise surface as a deploy timeout an hour from now.'
     );
   }
+}
+
+async function createRedirectPage(outputDir: string, redirectHtml: string): Promise<void> {
+  await mkdir(outputDir, { recursive: true });
+  await writeFile(`${outputDir}/index.html`, redirectHtml);
+  console.log(`Created redirect page at ${outputDir}/index.html`);
 }
 
 async function getDirectorySize(dir: string): Promise<number> {
@@ -75,10 +74,13 @@ async function getDirectorySize(dir: string): Promise<number> {
   return total;
 }
 
-async function createRedirectPage(outputDir: string, redirectHtml: string): Promise<void> {
-  await mkdir(outputDir, { recursive: true });
-  await writeFile(`${outputDir}/index.html`, redirectHtml);
-  console.log(`Created redirect page at ${outputDir}/index.html`);
+async function main(): Promise<void> {
+  const outputDir = process.env['OUTPUT_DIR'] ?? './site';
+  const redirectHtml = await readFile(`${SCRIPT_DIR}/static/pages-redirect.html`, 'utf-8');
+
+  await assertChannelsArePresent(outputDir);
+  await createRedirectPage(outputDir, redirectHtml);
+  await assertSiteSize(outputDir);
 }
 
 await main();

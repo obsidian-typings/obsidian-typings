@@ -21,29 +21,6 @@ interface BuildInfo {
   docsTreeHash: string;
 }
 
-async function main(): Promise<void> {
-  // One channel per job. Both channels in a single job means one VM carrying two full Astro
-  // builds of ~1700 pages each, and that VM has been OOM-killed mid-build; `assemble-pages.ts`
-  // puts the halves back together afterwards.
-  const channel = parseChannel(process.env['CHANNEL']);
-  const outputDir = process.env['OUTPUT_DIR'] ?? './site';
-  const cacheDir = process.env['CACHE_DIR'] ?? './cache';
-  // Opt-in, not "any manual run": the release workflow dispatches this build, so keying off the
-  // event name forced a full two-channel rebuild (~1 h) after every release and the cache never
-  // once hit. A release changes the branch name of the channel it touched, which invalidates that
-  // channel's cache on its own; the untouched channel is served from cache.
-  const shouldForce = process.env['FORCE'] === 'true';
-
-  // Both versions, not just this job's channel: the version switcher rendered into every page
-  // lists them all, so a job that knew only its own channel would ship a switcher missing the other.
-  const versions: Record<Channel, string> = {
-    catalyst: await getLatestVersion('catalyst'),
-    public: await getLatestVersion('public')
-  };
-
-  await processChannel(channel, outputDir, cacheDir, shouldForce, versions);
-}
-
 /**
  * The whole site navigates through one shared sidebar document, so if that document renders without
  * the API tree every page loses its navigation at once — and nothing else fails. It shipped that way
@@ -71,13 +48,6 @@ async function assertSidebarHasApiTree(channel: Channel): Promise<void> {
   console.log(`${channel}: sidebar contains ${String(apiLinkCount)} API links.`);
 }
 
-async function getCurrentBuildInfo(channel: Channel): Promise<BuildInfo> {
-  const latestVersion = await getLatestVersion(channel);
-  const branch = generateBranchName({ channel, obsidianVersion: latestVersion });
-  const docsTreeHash = (await execFromRoot('git rev-parse main:docs', { isQuiet: true })).trim();
-  return { branch, docsTreeHash };
-}
-
 async function getCachedBuildInfo(cacheDir: string, channel: Channel): Promise<BuildInfo | null> {
   const infoPath = `${cacheDir}/${channel}/build-info.json`;
   if (!existsSync(infoPath)) {
@@ -86,6 +56,36 @@ async function getCachedBuildInfo(cacheDir: string, channel: Channel): Promise<B
 
   const content = await readFile(infoPath, 'utf-8');
   return JSON.parse(content) as BuildInfo;
+}
+
+async function getCurrentBuildInfo(channel: Channel): Promise<BuildInfo> {
+  const latestVersion = await getLatestVersion(channel);
+  const branch = generateBranchName({ channel, obsidianVersion: latestVersion });
+  const docsTreeHash = (await execFromRoot('git rev-parse main:docs', { isQuiet: true })).trim();
+  return { branch, docsTreeHash };
+}
+
+async function main(): Promise<void> {
+  // One channel per job. Both channels in a single job means one VM carrying two full Astro
+  // builds of ~1700 pages each, and that VM has been OOM-killed mid-build; `assemble-pages.ts`
+  // puts the halves back together afterwards.
+  const channel = parseChannel(process.env['CHANNEL']);
+  const outputDir = process.env['OUTPUT_DIR'] ?? './site';
+  const cacheDir = process.env['CACHE_DIR'] ?? './cache';
+  // Opt-in, not "any manual run": the release workflow dispatches this build, so keying off the
+  // event name forced a full two-channel rebuild (~1 h) after every release and the cache never
+  // once hit. A release changes the branch name of the channel it touched, which invalidates that
+  // channel's cache on its own; the untouched channel is served from cache.
+  const shouldForce = process.env['FORCE'] === 'true';
+
+  // Both versions, not just this job's channel: the version switcher rendered into every page
+  // lists them all, so a job that knew only its own channel would ship a switcher missing the other.
+  const versions: Record<Channel, string> = {
+    catalyst: await getLatestVersion('catalyst'),
+    public: await getLatestVersion('public')
+  };
+
+  await processChannel(channel, outputDir, cacheDir, shouldForce, versions);
 }
 
 async function processChannel(channel: Channel, outputDir: string, cacheDir: string, shouldForce: boolean, versions: Record<Channel, string>): Promise<void> {

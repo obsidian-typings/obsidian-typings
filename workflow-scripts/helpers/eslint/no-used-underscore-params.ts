@@ -8,6 +8,14 @@
  */
 import type { Rule } from 'eslint';
 
+/**
+ * The subset of a function node this rule reads. `Rule.Node` is a union whose arms do not all carry a
+ * `body`, so the node is narrowed to this instead of being indexed through an inline object type.
+ */
+interface FunctionNodeWithBody {
+  readonly body?: Rule.Node;
+}
+
 export const noUsedUnderscoreParams: Rule.RuleModule = {
   create(context) {
     return {
@@ -26,8 +34,8 @@ export const noUsedUnderscoreParams: Rule.RuleModule = {
           }
 
           // Check if the parameter has references in the function body (not just
-          // In the return type annotation, e.g., type predicates like `asserts _obj is T`).
-          const funcBody = (node as { body?: Rule.Node }).body;
+          // in the return type annotation, e.g., type predicates like `asserts _obj is T`).
+          const funcBody = (node as FunctionNodeWithBody).body;
           const bodyRange = funcBody?.range;
           const hasBodyReferences = variable.references.some((ref) => {
             if (!ref.isRead()) {

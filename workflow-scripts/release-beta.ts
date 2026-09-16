@@ -4,6 +4,10 @@ import {
   dirname
 } from 'node:path/posix';
 
+function exec(command: string): string {
+  return execSync(command, { encoding: 'utf8', stdio: 'inherit' });
+}
+
 function main(): void {
   const nodeModulesPath = exec('npm root').replace(/\\/g, '/');
   let projectRoot = dirname(nodeModulesPath);
@@ -15,10 +19,6 @@ function main(): void {
   exec(`git -C ${projectRoot} restore --source=origin/main --worktree -- ./workflow-scripts`);
   exec(`npm install -C ${projectRoot}/workflow-scripts`);
   exec(`jiti ${projectRoot}/workflow-scripts/release-impl.ts beta`);
-}
-
-function exec(command: string): string {
-  return execSync(command, { encoding: 'utf8', stdio: 'inherit' });
 }
 
 main();

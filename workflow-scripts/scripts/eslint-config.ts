@@ -18,8 +18,8 @@ import { localPlugin } from '../helpers/eslint/local-plugin.ts';
 import { getRootFolder } from '../helpers/exec.ts';
 
 const typeScriptFiles = [
-  'src/**/*.ts',
-  'scripts/**/*.ts'
+  '**/*.ts',
+  '**/*.mts'
 ];
 
 export const config: Linter.Config[] = defineConfig(
@@ -56,7 +56,14 @@ function getEslintConfigs(): Linter.Config[] {
         'accessor-pairs': 'error',
         'array-callback-return': 'error',
         'camelcase': 'error',
-        'capitalized-comments': ['error', 'always', { block: { ignorePattern: 'v8' } }],
+        'capitalized-comments': [
+          'error',
+          'always',
+          {
+            block: { ignorePattern: 'v8|[a-z][a-zA-Z0-9]*[A-Z]' },
+            line: { ignoreConsecutiveComments: true, ignorePattern: '[a-z][a-zA-Z0-9]*[A-Z]' }
+          }
+        ],
         'complexity': 'error',
         'consistent-this': 'error',
         'curly': 'error',
@@ -236,31 +243,14 @@ function getEslintConfigs(): Linter.Config[] {
       }
     },
     {
-      files: ['src/obsidian/**/*.ts'],
-      rules: {
-        'no-constructor-return': 'off',
-        'no-restricted-imports': ['error', {
-          paths: [{
-            message: 'Do not import obsidian-typings in src/obsidian/. Inline needed type shapes in src/internal/types.ts instead.',
-            name: 'obsidian-typings'
-          }],
-          patterns: [{
-            group: ['obsidian-typings/*'],
-            message: 'Do not import obsidian-typings in src/obsidian/. Inline needed type shapes in src/internal/types.ts instead.'
-          }]
-        }]
-      }
-    },
-    {
-      files: ['scripts/**/*.ts'],
+      // Every file in this package is a script run from a terminal or from CI, so printing is the job.
+      // The root copy of this config scopes this to `scripts/**` because the package around it is a
+      // typings surface with a real `src/`; here that glob reached only the three files that build this
+      // package's own tooling and left every release script out. Same reasoning as
+      // `import-x/no-nodejs-modules` below.
+      files: typeScriptFiles,
       rules: {
         'no-console': 'off'
-      }
-    },
-    {
-      files: ['scripts/helpers/@types/markdownlint-cli2-config-schema.d.ts'],
-      rules: {
-        'no-restricted-syntax': 'off'
       }
     },
     {
@@ -345,7 +335,9 @@ function getImportXConfigs(): Linter.Config[] {
       }
     },
     {
-      files: ['scripts/**/*.ts', 'src/script-utils/**/*.ts'],
+      // Package-wide for the same reason `no-console` is: every file here is a script, and a script that
+      // may not import `node:*` cannot spawn git, read a `package.json`, or exit with a code.
+      files: typeScriptFiles,
       rules: {
         'import-x/no-nodejs-modules': 'off'
       }

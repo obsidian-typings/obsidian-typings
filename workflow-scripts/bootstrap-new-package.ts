@@ -38,6 +38,7 @@ import process from 'node:process';
 import type { BranchSpec } from './helpers/branchSpec.ts';
 
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
+import { writeJson } from './helpers/exec.ts';
 import {
   getNpmUsername,
   getPackageRegistryState,
@@ -53,8 +54,9 @@ const BOOTSTRAP_FOLDER = '.bootstrap-tmp';
 const PLACEHOLDER_DIST_TAG = 'bootstrap';
 
 async function main(): Promise<void> {
-  const obsidianVersion = process.argv[2] ?? '';
-  const channel = process.argv[3] as BranchSpec['channel'] | undefined;
+  const [, , obsidianVersionArg, channelArg] = process.argv;
+  const obsidianVersion = obsidianVersionArg ?? '';
+  const channel = channelArg as BranchSpec['channel'] | undefined;
 
   if (!obsidianVersion || !channel || !['catalyst', 'public'].includes(channel)) {
     throw new Error('Usage: jiti ./workflow-scripts/bootstrap-new-package.ts <obsidianVersion> <public|catalyst>');
@@ -121,7 +123,7 @@ async function publishPlaceholder(packageName: string): Promise<void> {
       version: PLACEHOLDER_VERSION
     };
 
-    await writeFile(join(BOOTSTRAP_FOLDER, 'package.json'), `${JSON.stringify(placeholderPackageJson, null, 2)}\n`, 'utf-8');
+    await writeJson(join(BOOTSTRAP_FOLDER, 'package.json'), placeholderPackageJson);
     await writeFile(
       join(BOOTSTRAP_FOLDER, 'README.md'),
       `# ${packageName}\n\nPlaceholder version reserving this package name. See the first real release for the actual typings.\n`,
