@@ -16,6 +16,7 @@ import {
   commit,
   getBranchNames
 } from './helpers/git.ts';
+import { assertRunningInGitHubActions } from './helpers/githubActions.ts';
 import {
   getLatestWrapperPackageName,
   getPackageRegistryState,
@@ -153,13 +154,36 @@ function getPackageNamesToPublish(branchSpec: BranchSpec, isLatest: boolean): st
 }
 
 async function main(): Promise<void> {
+  /*
+   * First, because everything below it is irreversible and none of it belongs in a developer checkout. The
+   * branch resolution underneath used to stand in for this by accident -- on a developer branch no remote ref
+   * points at HEAD, so it threw -- but that check exists to work out which release branch CI dispatched
+   * against, and it passes on the one checkout where a hand-run would do the most damage: a release branch
+   * whose tip equals origin's, which is the ordinary state right after `npm run checkout`.
+   */
+  assertRunningInGitHubActions(
+    'publish-release',
+    'bump the version on this branch, commit and tag it, publish every package of this release to npm, and'
+      + ' push the commit and the tag'
+  );
+
   const isBeta = process.env['IS_BETA'] === 'true';
 
+  /*
+   * Which release branch CI dispatched against -- the workflow checks out a commit SHA, leaving the runner
+   * detached, so the branch has to be recovered from the refs that point at it. Exactly one is expected, and
+   * neither other answer is actionable: none means the commit is on no published branch, several means
+   * nothing here can choose between them.
+   */
   const branchNames = await getBranchNames('HEAD');
   const branchName = branchNames[0];
 
   if (branchNames.length !== 1 || !branchName) {
-    throw new Error(`Expected 1 branch, got ${String(branchNames.length)}: ${branchNames.join(', ')}`);
+    throw new Error(
+      branchNames.length === 0
+        ? 'No remote branch points at HEAD, so there is no release branch to publish from.'
+        : `Expected exactly 1 remote branch pointing at HEAD, got ${String(branchNames.length)}: ${branchNames.join(', ')}.`
+    );
   }
 
   // Checkout the branch so we're not in detached HEAD state (CI checks out the commit SHA, leaving us detached)
