@@ -95,16 +95,21 @@ async function main(): Promise<void> {
 
   // A new Obsidian version means a package name npm has never seen, and CI cannot create one: it publishes
   // through trusted publishing, which is configured per package and so requires the package to already
-  // exist. Dispatching the release here would burn a version number on a run that cannot succeed, so stop
-  // and hand the steps that need a human back to the human.
+  // exist. So the steps that need a human are handed back to the human rather than dispatched into.
   //
   // "Exists" is NOT the predicate for "the hand-back is done", which is what this used to ask. The hand-back
   // is two steps -- claim the name, then attach its trusted publisher -- and only the first of them is
   // visible from here, because npm exposes no way to read a package's publisher. So the question asked is
   // the one that CAN be answered: has anything ever published through this name? A package carrying a real
-  // release has already published from this very workflow, so its publisher is attached. One carrying only
-  // the bootstrap placeholder has not, and dispatching into it burns a version on a run that dies with a
-  // bare `E404` -- measured twice on 2026-09-14, on `obsidian-catalyst/1.14.0` and `1.14.1`.
+  // release has already published from this very workflow, so its publisher is attached; one carrying only
+  // the bootstrap placeholder is in a state this script cannot resolve on its own, which is why that arm
+  // asks the operator below instead of deciding.
+  //
+  // What it does NOT mean any more is that a wrong guess is expensive. The two runs that died with a bare
+  // `E404` on 2026-09-14 -- `obsidian-catalyst/1.14.0` and `1.14.1` -- each burned a minor and left a tag
+  // behind because the publish was attempted after the bump, the commit, the tag and the push.
+  // `publish-release.ts` now asks npm for the publish right before any of that, so the same mistake today
+  // costs a red run and nothing else.
   const packageName = getScopedPackageName(newBranchSpec);
   const registryState = await getPackageRegistryState(packageName);
 
