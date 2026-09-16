@@ -11,6 +11,7 @@ import {
   execFromRoot
 } from './helpers/exec.ts';
 import { commit } from './helpers/git.ts';
+import { offerRelease } from './helpers/handBack.ts';
 import {
   getNpmUsername,
   getPackageRegistryState,
@@ -107,25 +108,37 @@ async function main(): Promise<void> {
   const packageName = getScopedPackageName(newBranchSpec);
   const registryState = await getPackageRegistryState(packageName);
 
-  if (registryState !== 'released') {
+  if (registryState === 'released') {
+    // Publish the new branch right away, so it never sits created-but-unreleased.
+    await execFromRoot('npm run release');
     await generateMainReadme();
-
-    if (registryState === 'missing') {
-      // The bootstrap step is the only release step that needs a local npm credential, and this is where the
-      // operator is standing when they are told to run it -- so check the credential HERE, where saying "log in
-      // first" costs one `npm whoami` on a path that is already stopping, rather than letting them discover it
-      // one command later as an E404 npm reports for an unauthorized PUT to a name that does not exist yet.
-      printBootstrapRequired(packageName, newBranchSpec, await getNpmUsername());
-      return;
-    }
-
-    printTrustedPublisherRequired(packageName);
     return;
   }
 
-  // Publish the new branch right away, so it never sits created-but-unreleased.
-  await execFromRoot('npm run release');
+  // Both remaining arms hand a step back to a human, and everything they hand back runs on the NEW branch --
+  // so this is the last moment that wants to be anywhere else. `generateMainReadme()` opens with
+  // `git checkout main` and never switches back, which used to leave the operator standing on `main` while
+  // being told to run `npm run release`: a script `main`'s `package.json` does not define at all, so the last
+  // step of the hand-back failed with `Missing script: "release"` rather than merely being forgotten.
   await generateMainReadme();
+  await execFromRoot(`git checkout "${newBranch}"`);
+  await restoreWorkflowScripts();
+
+  if (registryState === 'missing') {
+    // The bootstrap step is the only release step that needs a local npm credential, and this is where the
+    // operator is standing when they are told to run it -- so check the credential HERE, where saying "log in
+    // first" costs one `npm whoami` on a path that is already stopping, rather than letting them discover it
+    // one command later as an E404 npm reports for an unauthorized PUT to a name that does not exist yet.
+    printBootstrapRequired(packageName, newBranchSpec, await getNpmUsername());
+    return;
+  }
+
+  // `placeholderOnly`. The name is claimed, so the only step that can still be outstanding is the npmjs.com
+  // form -- and that is a question the operator can answer, which is why this arm asks rather than refusing.
+  // A wrong answer is no longer expensive: `publish-release.ts` checks the publish right before it does
+  // anything irreversible, so a dispatch into a package with no publisher attached costs a red run.
+  printTrustedPublisherRequired(packageName);
+  await offerRelease(newBranchSpec, packageName);
 }
 
 function printBootstrapRequired(packageName: string, branchSpec: BranchSpec, npmUsername: null | string): void {
@@ -146,8 +159,11 @@ function printBootstrapRequired(packageName: string, branchSpec: BranchSpec, npm
     '',
     `  npm run bootstrap-new-package -- ${branchSpec.obsidianVersion} ${branchSpec.channel}`,
     '',
-    'That script publishes a placeholder and prints what to enter on npmjs.com. Once the trusted publisher',
-    'is saved, release the branch with `npm run release`.',
+    'That script publishes a placeholder, prints what to enter on npmjs.com, and then waits: once you have',
+    'saved the form it offers to dispatch the release itself, so this branch is not left created-but-',
+    'unreleased. Decline the offer and it hands back the two commands that do it by hand.',
+    '',
+    `This checkout has been left on ${generateBranchName(branchSpec)}, which is where both of them run.`,
     ''
   ].join('\n'));
 }
@@ -159,8 +175,7 @@ function printTrustedPublisherRequired(packageName: string): void {
     '',
     'The name is claimed -- a bootstrap placeholder holds it -- so the first half of the hand-back is done.',
     'Whether the second half is done cannot be read from here: npm offers no way to ask a package who is',
-    'allowed to publish it. If the trusted publisher is already attached, just run `npm run release`. If it is',
-    'not, CI dies with an `E404` on a name that plainly exists, after burning this branch\'s first version.',
+    'allowed to publish it. So the prompt below asks you instead, and dispatches the release on a yes.',
     getTrustedPublisherInstructions(packageName)
   ].join('\n'));
 }

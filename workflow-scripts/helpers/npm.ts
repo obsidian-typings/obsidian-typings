@@ -132,8 +132,8 @@ export async function getNpmUsername(): Promise<null | string> {
  * registry offers no unauthenticated endpoint. What CAN be read is the consequence: a package carrying a real
  * release has, by definition, already published through CI, so its publisher is attached. One carrying only
  * the placeholder has not, and its publisher state is simply unknown -- which is the honest answer, and the
- * one that stops a caller dispatching a release into it. {@link hasTrustedPublisher} answers the question
- * directly, but only from inside the CI job.
+ * reason no caller dispatches into that state on its own say-so: `helpers/handBack.ts` asks the operator
+ * instead. {@link hasTrustedPublisher} answers the question directly, but only from inside the CI job.
  */
 export async function getPackageRegistryState(packageName: string): Promise<PackageRegistryState> {
   const url = `${REGISTRY_URL}/${escapePackageName(packageName)}`;
@@ -187,7 +187,10 @@ export function getTrustedPublisherInstructions(packageName: string): string {
     '       Environment name:     (leave empty)',
     '       Allowed actions:      npm publish',
     '',
-    '  3. Save, then release the branch as usual with `npm run release`.',
+    // `npm run release` is defined only in a release branch's `package.json`, so naming it without naming
+    // where it runs hands back a command that dies with `Missing script: "release"` on `main` -- which is
+    // exactly where two of this function's three callers can leave the checkout.
+    '  3. Save it. The release is then dispatched from the release branch, where `npm run release` lives.',
     ''
   ].join('\n');
 }
