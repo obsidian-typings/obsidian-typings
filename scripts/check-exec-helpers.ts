@@ -19,6 +19,11 @@
  * everywhere. It was Windows-only until 2026-09-16, when `toCommandLine` gained its POSIX arm: before that
  * `exec` applied the Windows rules on every platform and escaped nothing for `/bin/sh`, so a backslash-bearing
  * argument did not survive the shell and asserting the round trip there would have asserted the bug.
+ *
+ * It round-trips the **batched** command shape too, in both its forms - under the length budget and split
+ * across batches. Until 2026-09-16 `exec` quoted a batched command's static parts and interpolated its
+ * batched ones raw, so a batched argument bearing a space became two arguments; the split form needs its own
+ * case because two of the three sites that built those command lines run only once the budget is exceeded.
  */
 
 import {
@@ -33,6 +38,7 @@ import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import {
   argvQuote,
   commandEscapeCommandLine,
+  getMaxCommandLength,
   posixQuote,
   toCommandLine
 } from './helpers/exec.ts';
@@ -61,6 +67,73 @@ const IDENTICAL_FILE_GROUPS: readonly (readonly string[])[] = [
 const failures: string[] = [];
 
 exitIfScriptDisabled();
+
+/*
+ * The batched command shape under the length budget, which is the one site of the three that runs without the
+ * command line having to exceed it. Its arguments used to be interpolated raw while the static parts beside
+ * them were quoted, so `two words` arrived as two arguments and `a & b | c` was read as shell syntax.
+ */
+async function assertBatchedRoundTrip(echoScriptPath: string): Promise<void> {
+  const expectedArguments = getBatchedTrickyArguments();
+
+  const batchArgumentLists = await execBatchedEchoArgv(echoScriptPath, expectedArguments);
+
+  assertEqual(
+    String(batchArgumentLists.length),
+    '1',
+    'a batched command inside the length budget runs as a single command'
+  );
+  assertEqual(
+    JSON.stringify(batchArgumentLists.flat()),
+    JSON.stringify(expectedArguments),
+    `the batched argv round trip through ${process.platform === 'win32' ? 'cmd.exe' : '/bin/sh'}`
+  );
+}
+
+/*
+ * The same round trip forced over the budget, so the batches are actually built and spawned. The other two
+ * sites that interpolated batched arguments raw - the tentative command the splitter measures, and the one
+ * `executeBatches` runs - are reachable only this way, which is why padding this out is worth the extra
+ * spawns. The padding arguments are distinct and quoting-free, so the assertion below also proves the batches
+ * come back in order.
+ */
+async function assertBatchedSplitRoundTrip(echoScriptPath: string): Promise<void> {
+  const trickyArguments = getBatchedTrickyArguments();
+  const expectedArguments = [...trickyArguments, ...buildPaddingArguments(), ...trickyArguments];
+
+  const batchArgumentLists = await execBatchedEchoArgv(echoScriptPath, expectedArguments);
+
+  /*
+   * Guards the sizing above: were the padding ever to stop exceeding the budget, this case would quietly
+   * become a second copy of the unsplit one rather than failing.
+   */
+  const MINIMUM_SPLIT_BATCH_COUNT = 2;
+  if (batchArgumentLists.length < MINIMUM_SPLIT_BATCH_COUNT) {
+    failures.push(
+      `a batched command over the length budget splits into batches: expected more than one batch, got ${String(batchArgumentLists.length)}`
+    );
+    return;
+  }
+
+  const actualArguments = batchArgumentLists.flat();
+  if (actualArguments.length !== expectedArguments.length) {
+    failures.push(
+      `the split batched argv round trip: expected ${String(expectedArguments.length)} arguments back, got ${String(actualArguments.length)}`
+    );
+    return;
+  }
+
+  /*
+   * Reported one argument at a time rather than as two JSON blobs: the arrays run to hundreds of entries, and
+   * a whole-array diff would bury the one that moved.
+   */
+  const differenceIndex = expectedArguments.findIndex((argument, index) => actualArguments[index] !== argument);
+  if (differenceIndex !== -1) {
+    failures.push(
+      `the split batched argv round trip: argument ${String(differenceIndex)} came back as ${JSON.stringify(actualArguments[differenceIndex])}, expected ${JSON.stringify(expectedArguments[differenceIndex])}`
+    );
+  }
+}
 
 async function assertCopiesAreIdentical(): Promise<void> {
   const root = getRootFolder();
@@ -166,10 +239,7 @@ function assertPosixQuoting(): void {
  * platform uses and reads `process.argv` back, so it covers the quoter, the `cmd.exe` escape and
  * `spawnViaShell`'s choice between handing the shell a command line and spawning the program directly.
  */
-async function assertRoundTrip(): Promise<void> {
-  const echoScriptPath = toPosixPath(join(tmpdir(), 'obsidian-typings-check-exec-helpers-echo-argv.mjs'));
-  await writeFile(echoScriptPath, 'console.log(JSON.stringify(process.argv.slice(2)));\n');
-
+async function assertRoundTrip(echoScriptPath: string): Promise<void> {
   const expectedArguments = [
     String.raw`C:\Program Files` + BACKSLASH,
     'say "hi"',
@@ -246,12 +316,60 @@ function assertWindowsQuoting(): void {
   );
 }
 
+/*
+ * Enough distinct, quoting-free arguments to carry a batched command line past the budget whichever platform
+ * this runs on, sized from {@link getMaxCommandLength} rather than from a restated constant. Each is exactly
+ * {@link PADDING_ARGUMENT_LENGTH} characters of word characters, so the quoter passes it through untouched and
+ * it costs the command line its own length plus the separating space.
+ */
+function buildPaddingArguments(): string[] {
+  const PADDING_ARGUMENT_LENGTH = 200;
+  const PREFIX = 'pad';
+  const count = Math.ceil(getMaxCommandLength() / (PADDING_ARGUMENT_LENGTH + 1)) + 1;
+  return Array.from(
+    { length: count },
+    (_unused, index) => PREFIX + String(index).padStart(PADDING_ARGUMENT_LENGTH - PREFIX.length, '0')
+  );
+}
+
+/*
+ * Runs the echo script over `batchedArguments` and returns one `process.argv` list per batch `exec` actually
+ * spawned - one line of output per batch, joined with a newline, which is why no case below puts a newline in
+ * a batched argument.
+ */
+async function execBatchedEchoArgv(echoScriptPath: string, batchedArguments: string[]): Promise<string[][]> {
+  const stdout = await execFromRoot([process.execPath, echoScriptPath, { batchedArguments }], { isQuiet: true });
+  return stdout.split('\n').map((line) => JSON.parse(line) as string[]);
+}
+
+/*
+ * The batched half of the cases the quoters cover, minus the embedded newline: a batched command is handed to
+ * the shell as a command line with no argument array beside it, and `spawnViaShell` refuses a newline on
+ * Windows without one. Everything else that broke when these were interpolated raw is here - a space, a
+ * quote, `cmd.exe` and `sh` metacharacters, backslashes, and the empty argument the shell drops entirely.
+ */
+function getBatchedTrickyArguments(): string[] {
+  return [
+    String.raw`C:\Program Files` + BACKSLASH,
+    'say "hi"',
+    'a & b | c',
+    String.raw`C:\dir\subdir`,
+    'a&b',
+    'two words',
+    ''
+  ];
+}
+
 async function main(): Promise<void> {
   await assertCopiesAreIdentical();
   assertWindowsQuoting();
   assertPosixQuoting();
   assertPlatformCommandLine();
-  await assertRoundTrip();
+
+  const echoScriptPath = await writeEchoArgvScript();
+  await assertRoundTrip(echoScriptPath);
+  await assertBatchedRoundTrip(echoScriptPath);
+  await assertBatchedSplitRoundTrip(echoScriptPath);
 
   if (failures.length > 0) {
     console.error(`check:exec-helpers found ${String(failures.length)} problem(s):`);
@@ -263,6 +381,12 @@ async function main(): Promise<void> {
   }
 
   console.log('check:exec-helpers passed.');
+}
+
+async function writeEchoArgvScript(): Promise<string> {
+  const echoScriptPath = toPosixPath(join(tmpdir(), 'obsidian-typings-check-exec-helpers-echo-argv.mjs'));
+  await writeFile(echoScriptPath, 'console.log(JSON.stringify(process.argv.slice(2)));\n');
+  return echoScriptPath;
 }
 
 await main();
