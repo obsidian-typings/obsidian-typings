@@ -139,6 +139,14 @@ Claiming the name is also the **only** step in the whole release path that needs
 
 The base **content** comes from `origin/<baseBranch>`, not from the local ref, because the base branch *name* is chosen by reading the remote refs. The local `release/...` branch is never checked out or moved, so local unpushed commits are neither shipped nor destroyed. `npm run checkout` is the opposite case by design: it checks out your local ref, which is what you want when you have local work in the tree.
 
+### `check-obsidian-package-update` is CI-only, and now says so
+
+It is the other script that picks a branch name off the remote refs, and the only one that has to **be on** that branch and commit to it — so it cannot use the trick above of never touching the local ref. It instead resets the local branch onto its remote tip, `git checkout -B "<branch>" --track "origin/<branch>"`, which is the same shape `publish-release.ts` uses to leave CI's detached checkout. `--track` is insurance, not a requirement: the release path ends in `git pull origin --rebase`, which needs `branch.<name>.merge` set, and git's default `branch.autoSetupMerge=true` already sets it when the start point is a remote-tracking ref. It only matters under `branch.autoSetupMerge=false`, where the pull otherwise dies with `you must specify a branch on the command line`.
+
+That reset is right on a runner and hostile in a developer checkout, where it would discard local unpushed commits, so the script now **refuses to run unless `GITHUB_ACTIONS` is set**. Its only caller is [`check-obsidian-package-update.yml`](.github/workflows/check-obsidian-package-update.yml); there is deliberately no npm script for it, and by hand it would switch your checkout onto a release branch, commit as `github-actions[bot]`, push, and dispatch a release. The guard is a typo detector, not a boundary — the variable is one `export` away — which is the right strength for a hand-run mistake.
+
+Before this it was correct **by accident**: a fresh CI clone has no local `release/...` branch, so git's DWIM (do-what-I-mean) shortcut created one at the remote tip and local happened to equal remote. Nothing said so, and a developer checkout breaks the assumption — a local `release/...` branch sitting several commits ahead of `origin` is an ordinary state to be in after a round of tooling fixes, and both 1.13.7 branches were in exactly it.
+
 ## Reported Gaps
 
 Members that exist at runtime but are not modeled yet. Each names the member, the Obsidian version it was
