@@ -165,13 +165,13 @@ async function main(): Promise<void> {
   const latestVersion = await getLatestVersion(branchSpec.channel);
   const isLatest = branchSpec.obsidianVersion === latestVersion;
 
-  // Before anything this run cannot take back. `updateNpmVersions()` below commits the version bump, pushes
-  // it, and pushes an annotated tag -- all of which happen BEFORE the first `npm publish`, so a publish that
-  // was never going to be allowed still costs a minor version and leaves a tag pointing at a release that
-  // does not exist. That is not a hypothetical: it is what both dispatches did on 2026-09-14. Asking first is
-  // what makes the failure free, and it is also why this sits above `npm install` and `npm run build` rather
-  // than merely above the publish -- there is no reason to spend six minutes building an artifact that cannot
-  // be published.
+  // Before anything this run cannot take back. The version bump's commit and tag now stay local until the
+  // publish that spends the version has succeeded (see `pushRelease`), so a refused publish costs nothing
+  // but the run -- and this preflight is what makes even that cheap. It sits above `npm install` and
+  // `npm run build`, not merely above the publish, because there is no reason to spend six minutes building
+  // an artifact that was never going to be published, and because a bare `E404` does not say that the cause
+  // is a form nobody filled in. It is not a hypothetical: it is what both dispatches did on 2026-09-14,
+  // when the bump was pushed first and each attempt burned a minor version on top of the wasted build.
   await assertCanPublish(branchSpec, isLatest);
 
   await execFromRoot('npm install');
@@ -183,7 +183,14 @@ async function main(): Promise<void> {
   const scopedPackageName = getScopedPackageName(branchSpec);
   const zipFileName = `obsidian-typings-${nextVersion}-obsidian-${branchSpec.obsidianVersion}-${branchSpec.channel}.zip`;
 
-  await releaseNpmPackage(nextVersion, zipFileName, scopedPackageName);
+  await publishScopedPackage(scopedPackageName);
+
+  // The moment the version stops being reversible, and therefore the moment the refs describing it belong in
+  // the remote. Everything below this line -- the zip, both wrappers, the GitHub release -- can fail without
+  // costing a version number: the wrappers carry their own, derived from what is already published.
+  await pushRelease(nextVersion, scopedPackageName, scopedTagName);
+
+  await packZipArtifact(zipFileName);
 
   // Use main README for the wrapper packages and zip artifact
   await execFromRoot('git restore --source=origin/main --worktree -- ./README.md');
@@ -203,6 +210,14 @@ async function main(): Promise<void> {
     tagName: scopedTagName,
     zipFileName
   });
+}
+
+/** Packs the release artifact the GitHub release attaches. Runs after the publish, and costs nothing if it fails. */
+async function packZipArtifact(zipFileName: string): Promise<void> {
+  await execFromRoot('mkdir build');
+  await execFromRoot('cp -r dist build');
+  await execFromRoot('cp README.md LICENSE CHANGELOG.md package.json build');
+  await execFromRoot(['zip', '-r', zipFileName, '.'], { cwd: 'build' });
 }
 
 /**
@@ -225,7 +240,8 @@ async function publishPackage(packageName: string, cwd?: string): Promise<void> 
   }
 }
 
-async function releaseNpmPackage(_nextVersion: string, zipFileName: string, scopedPackageName: string): Promise<void> {
+/** Publishes the per-version package. This is the call that spends `package.json`'s version for good. */
+async function publishScopedPackage(scopedPackageName: string): Promise<void> {
   // Publish as scoped package
   await editPackageJson((packageJson) => {
     packageJson.name = scopedPackageName;
@@ -242,11 +258,45 @@ async function releaseNpmPackage(_nextVersion: string, zipFileName: string, scop
   await editPackageJson((packageJson) => {
     packageJson.name = 'obsidian-typings';
   });
+}
 
-  await execFromRoot('mkdir build');
-  await execFromRoot('cp -r dist build');
-  await execFromRoot('cp README.md LICENSE CHANGELOG.md package.json build');
-  await execFromRoot(['zip', '-r', zipFileName, '.'], { cwd: 'build' });
+/**
+ * Pushes the version-bump commit and its tag, once the publish that spends that version has succeeded.
+ *
+ * This ordering is the whole of the fix: `npm publish` ships whatever `package.json` holds, so the bump
+ * cannot move *after* the publish -- but the half that is hard to undo can. Committing and tagging locally
+ * and pushing here means a refused publish leaves nothing but refs this runner discards, where it used to
+ * leave a spent minor version and a tag pointing at a release that never happened. Both dispatches on
+ * 2026-09-14 did exactly that.
+ *
+ * The failure this leaves is the mirror image, and is narrower by everything that used to sit between the
+ * bump and the publish -- an `npm install`, a full build, and the publish itself. It is also the direction
+ * that cannot be allowed to pass quietly: npm holds a version that no branch records, and a runner's
+ * checkout does not outlive its job, so the commit and the tag are gone with it. Hence the diagnosis rather
+ * than the raw git error, and hence a reconstruction that assumes nothing survived.
+ */
+async function pushRelease(nextVersion: string, scopedPackageName: string, scopedTagName: string): Promise<void> {
+  try {
+    await execFromRoot('git push origin --follow-tags');
+  } catch (error) {
+    throw new Error(
+      [
+        `${scopedPackageName}@${nextVersion} IS PUBLISHED, but pushing the commit and tag that record it failed.`,
+        '',
+        'An npm version cannot be republished, and this runner\'s checkout goes away with the job, taking the',
+        `commit and the tag ${scopedTagName} with it. Re-dispatching without fixing this publishes nothing: the`,
+        `run reads the branch's unchanged package.json, computes ${nextVersion} again, and npm answers E403.`,
+        '',
+        'Reconstruct both refs by hand, from a fresh checkout of the release branch:',
+        '',
+        `  npm version ${nextVersion} --no-git-tag-version`,
+        `  git commit -am "chore(release): ${nextVersion}"`,
+        `  git tag -a ${scopedTagName} -m "${nextVersion}"`,
+        '  git push origin --follow-tags'
+      ].join('\n'),
+      { cause: error }
+    );
+  }
 }
 
 async function updateLatestWrapper(channel: 'catalyst' | 'public', scopedPackageName: string, scopedVersion: string, wrapperVersion: string): Promise<void> {
@@ -350,9 +400,14 @@ async function updateNpmVersion(nextVersion: string): Promise<void> {
 
   await execFromRoot('git add package.json package-lock.json');
   await commit(`chore(release): ${nextVersion}`);
-  await execFromRoot('git push');
 }
 
+/**
+ * Records the next version in the working tree, LOCALLY -- bumped, committed and tagged, nothing pushed.
+ *
+ * `npm publish` ships what `package.json` holds, so this has to run before the publish. Nothing it does
+ * reaches the remote: {@link pushRelease} does that afterwards, and only if the publish went through.
+ */
 async function updateNpmVersions(branchSpec: BranchSpec, isBeta: boolean): Promise<string> {
   const currentVersion = (await execFromRoot('node -p "require(\'./package.json\').version"', { isQuiet: true })).trim();
   const nextVersion = isBeta ? inc(currentVersion, 'preminor', 'beta') : inc(currentVersion, 'minor');
@@ -364,7 +419,6 @@ async function updateNpmVersions(branchSpec: BranchSpec, isBeta: boolean): Promi
 
   const scopedTagName = buildScopedTagName(branchSpec, nextVersion);
   await annotateTag(scopedTagName, nextVersion);
-  await execFromRoot('git push origin --follow-tags');
 
   return nextVersion;
 }
