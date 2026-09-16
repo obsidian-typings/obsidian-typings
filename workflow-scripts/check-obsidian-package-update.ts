@@ -8,6 +8,7 @@ import {
   readPackageJson
 } from './helpers/exec.ts';
 import { commit } from './helpers/git.ts';
+import { generateMainReadme } from './helpers/readmeGenerator.ts';
 import { getLatestVersion } from './helpers/version.ts';
 
 /*
@@ -66,6 +67,22 @@ async function getLatestObsidianVersion(): Promise<string> {
 
 async function main(): Promise<void> {
   assertRunningInGitHubActions();
+
+  /*
+   * Reconcile `main`'s "Latest <channel> release" rows with the registry before touching anything else.
+   *
+   * Those rows are written once, by `create-new-release-branch.ts` at the moment a branch is cut -- which is
+   * precisely the moment the branch's npm package does NOT exist yet, because claiming it is a manual step
+   * handed back to a human. So the row is written without its per-version npm badge and there is nothing that
+   * would ever put the badge back: the next `generateMainReadme()` call is the next branch cut, which writes a
+   * badge-less row for the NEXT version. Left alone, the badge simply never returns.
+   *
+   * This is the cheapest place to close that, and it costs nothing when there is nothing to do:
+   * `generateMainReadme()` returns before committing when the README it would write is the one already there,
+   * so the usual 3-hourly run makes two registry requests and stops. It goes first because it is the only part
+   * of this script that wants to be on `main`: the loop below checks out a release branch and stays there.
+   */
+  await generateMainReadme();
 
   for (const channel of ['public', 'catalyst'] as const) {
     const latestBranchVersion = await getLatestVersion(channel);
