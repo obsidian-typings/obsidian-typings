@@ -75,22 +75,6 @@ function getDocsOverrideConfigs(): Linter.Config[] {
       }
     },
     {
-      files: ['docs/.astro/**/*.ts', 'docs/.astro/**/*.d.ts'],
-      rules: {
-        '@stylistic/no-tabs': 'off',
-        '@typescript-eslint/no-empty-object-type': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/no-unnecessary-type-parameters': 'off',
-        '@typescript-eslint/triple-slash-reference': 'off',
-        '@typescript-eslint/unified-signatures': 'off',
-        'camelcase': 'off',
-        'import-x/no-anonymous-default-export': 'off',
-        'import-x/no-default-export': 'off',
-        'no-magic-numbers': 'off',
-        'no-restricted-syntax': 'off'
-      }
-    },
-    {
       files: ['docs/src/pages/**/*.ts'],
       rules: {
         '@typescript-eslint/no-unsafe-argument': 'off',
