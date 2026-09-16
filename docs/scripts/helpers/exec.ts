@@ -50,7 +50,6 @@ export interface ExecOption {
   readonly shouldIgnoreExitCode?: boolean;
   readonly shouldIncludeDetails?: boolean;
   readonly stdin?: string;
-  readonly stdout?: string;
 }
 
 export interface ExecResult {
@@ -67,11 +66,21 @@ export interface PackageLockJson extends Partial<PackageJson> {
   packages?: Record<string, PackageJson>;
 }
 
+/**
+ * The overload discriminator MUST be the same property `execString` below branches on. It was
+ * `withDetails` until 2026-09-15, and nothing could see the difference: both overloads compiled, both
+ * were reachable, and each resolved to the other one's shape -- `{ withDetails: true }` was typed
+ * `Promise<ExecResult>` and resolved to a bare string, while `{ shouldIncludeDetails: true }` selected
+ * the SIMPLE overload (the base `ExecOption` declares that property as `boolean`, so it does not
+ * discriminate) and resolved to an `ExecResult` typed as `string`. A caller reading `.exitCode` off the
+ * first got `undefined`. No gate can catch this -- the code is type-*correct*, and the lie sits between
+ * the declaration and the branch, which is why the two must stay one name.
+ */
 interface ExecDetailedOptions extends ExecOption {
-  readonly withDetails: true;
+  readonly shouldIncludeDetails: true;
 }
 interface ExecSimpleOptions extends ExecOption {
-  readonly withDetails?: false;
+  readonly shouldIncludeDetails?: false;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- The generic type is better for the strong typing.
@@ -228,7 +237,7 @@ function execString(command: string, options: ExecOption = {}): Promise<ExecResu
     cwd = process.cwd(),
     isQuiet: quiet = false,
     shouldIgnoreExitCode: ignoreExitCode = false,
-    shouldIncludeDetails: withDetails = false,
+    shouldIncludeDetails = false,
     stdin = ''
   } = options;
 
@@ -284,7 +293,7 @@ function execString(command: string, options: ExecOption = {}): Promise<ExecResu
         return;
       }
 
-      if (!withDetails) {
+      if (!shouldIncludeDetails) {
         resolve(stdout);
         return;
       }
@@ -302,7 +311,7 @@ function execString(command: string, options: ExecOption = {}): Promise<ExecResu
         return;
       }
 
-      if (!withDetails) {
+      if (!shouldIncludeDetails) {
         resolve(stdout);
         return;
       }
