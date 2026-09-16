@@ -8,10 +8,14 @@ export const OUTPUT_DIR = join(process.cwd(), 'src/content/docs/api');
 
 export const CACHE_FILE = join(process.cwd(), 'src/content/docs/api/.cache-hash');
 
-/** Event-like method names that should be split by string literal first param */
+/**
+Event-like method names that should be split by string literal first param
+*/
 export const EVENT_METHODS = new Set(['off', 'on', 'trigger', 'tryTrigger']);
 
-/** Single-letter and common generic type parameter names — not linkable */
+/**
+Single-letter and common generic type parameter names — not linkable
+*/
 export const GENERIC_TYPE_PARAMS = new Set([
   'Arg',
   'Args', // Short identifiers / enum-like values that aren't types

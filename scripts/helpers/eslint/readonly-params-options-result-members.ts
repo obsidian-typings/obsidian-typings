@@ -26,21 +26,6 @@ export const readonlyParamsOptionsResultMembers: Rule.RuleModule = {
         reportNonReadonly(context, node);
       }
     };
-
-    function reportNonReadonly(ctx: Rule.RuleContext, node: Rule.Node): void {
-      const propertyNode = node as Partial<PropertySignatureNode>;
-      ctx.report({
-        fix(fixer) {
-          const { key } = propertyNode;
-          if (!key) {
-            throw new Error('Property signature is missing its key.');
-          }
-          return fixer.insertTextBefore(key, 'readonly ');
-        },
-        messageId: MESSAGE_ID,
-        node
-      });
-    }
   },
   meta: {
     docs: {
@@ -54,3 +39,18 @@ export const readonlyParamsOptionsResultMembers: Rule.RuleModule = {
     type: 'suggestion'
   }
 };
+
+function reportNonReadonly($context: Rule.RuleContext, node: Rule.Node): void {
+  const propertyNode = node as Partial<PropertySignatureNode>;
+  $context.report({
+    fix(fixer) {
+      const { key } = propertyNode;
+      if (!key) {
+        throw new Error('Property signature is missing its key.');
+      }
+      return fixer.insertTextBefore(key, 'readonly ');
+    },
+    messageId: MESSAGE_ID,
+    node
+  });
+}

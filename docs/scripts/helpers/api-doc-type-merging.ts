@@ -23,15 +23,15 @@ import {
  * E.g., parent has `typeParameters: ['Instance extends BaseInstance']` and
  * child extends `Parent<CanvasPluginInstance>` → `{Instance: 'CanvasPluginInstance'}`
  */
-export function buildTypeParamMap(baseInfo: TypeInfo, typeArgs: string[]): Map<string, string> {
+export function buildTypeParamMap(baseInfo: TypeInfo, typeArguments: string[]): Map<string, string> {
   const mapping = new Map<string, string>();
-  const count = Math.min(baseInfo.typeParameters.length, typeArgs.length);
-  for (let i = 0; i < count; i++) {
-    const param = baseInfo.typeParameters[i];
-    const arg = typeArgs[i];
-    if (param && arg) {
+  const count = Math.min(baseInfo.typeParameters.length, typeArguments.length);
+  for (let index = 0; index < count; index++) {
+    const param = baseInfo.typeParameters[index];
+    const argument = typeArguments[index];
+    if (param && argument) {
       const bareParam = param.replace(/\s+extends\s+.*$/, '');
-      mapping.set(bareParam, arg);
+      mapping.set(bareParam, argument);
     }
   }
   return mapping;
@@ -53,8 +53,8 @@ export function mergeClassIntoType(target: TypeInfo, cls: ClassDeclaration, isOf
         existingExact.description = info.description;
       }
     } else if (existingByKey && !isOfficial) {
-      const idx = target.methods.indexOf(existingByKey);
-      target.methods[idx] = info;
+      const index = target.methods.indexOf(existingByKey);
+      target.methods[index] = info;
     } else if (!existingByKey) {
       target.methods.push(info);
     }
@@ -98,12 +98,14 @@ export function mergeInterfaceIntoType(target: TypeInfo, iface: InterfaceDeclara
     } else if (existingByKey && !isOfficial) {
       // Replace official version with our augmented version (more precise types/docs)
       // Keep the official name (without __) but use our description, examples, etc.
-      const idx = target.methods.indexOf(existingByKey);
-      target.methods[idx] = {
+      const index = target.methods.indexOf(existingByKey);
+      target.methods[index] = {
         ...info,
         name: baseName,
         overloadKey: baseKey,
-        signature: info.signature.replace(new RegExp(`^${info.name}`), baseName)
+        // A function replacer, not a string one: a `$` in `baseName` would otherwise be read as a
+        // replacement pattern rather than as itself.
+        signature: info.signature.replace(new RegExp(`^${info.name}`), () => baseName)
       };
     } else if (!existingByKey) {
       target.methods.push(info);
@@ -147,7 +149,7 @@ export function parseTypeArguments(baseTypeName: string): string[] {
     return [];
   }
   const inner = baseTypeName.slice(openIndex + 1, -1);
-  const args: string[] = [];
+  const arguments_: string[] = [];
   let depth = 0;
   let current = '';
   for (const ch of inner) {
@@ -158,16 +160,16 @@ export function parseTypeArguments(baseTypeName: string): string[] {
       depth--;
       current += ch;
     } else if (ch === ',' && depth === 0) {
-      args.push(current.trim());
+      arguments_.push(current.trim());
       current = '';
     } else {
       current += ch;
     }
   }
   if (current.trim()) {
-    args.push(current.trim());
+    arguments_.push(current.trim());
   }
-  return args;
+  return arguments_;
 }
 
 export function resolveInheritedMembers(types: Map<string, TypeInfo>): void {
@@ -179,17 +181,17 @@ export function resolveInheritedMembers(types: Map<string, TypeInfo>): void {
         continue;
       }
 
-      const typeArgs = parseTypeArguments(baseTypeName);
-      const typeParamMap = buildTypeParamMap(baseInfo, typeArgs);
+      const typeArguments = parseTypeArguments(baseTypeName);
+      const typeParamMap = buildTypeParamMap(baseInfo, typeArguments);
 
       for (const prop of baseInfo.properties) {
-        if (!info.properties.some((p) => p.name === prop.name)) {
+        if (info.properties.every((p) => p.name !== prop.name)) {
           info.properties.push(substituteMemberTypes({ ...prop, inheritedFrom: cleanBase }, typeParamMap));
         }
       }
 
       for (const method of baseInfo.methods) {
-        if (!info.methods.some((m) => m.name === method.name && m.signature === method.signature)) {
+        if (info.methods.every((m) => !(m.name === method.name && m.signature === method.signature))) {
           info.methods.push(substituteMemberTypes({ ...method, inheritedFrom: cleanBase }, typeParamMap));
         }
       }
@@ -197,7 +199,9 @@ export function resolveInheritedMembers(types: Map<string, TypeInfo>): void {
   }
 }
 
-/** Apply type parameter substitution to all type-bearing fields of a member */
+/**
+Apply type parameter substitution to all type-bearing fields of a member
+*/
 export function substituteMemberTypes(member: MemberInfo, mapping: Map<string, string>): MemberInfo {
   if (mapping.size === 0) {
     return member;
@@ -214,12 +218,14 @@ export function substituteMemberTypes(member: MemberInfo, mapping: Map<string, s
   };
 }
 
-/** Substitute generic type parameters in a type string using a mapping */
+/**
+Substitute generic type parameters in a type string using a mapping
+*/
 export function substituteTypeParams(typeText: string, mapping: Map<string, string>): string {
   if (mapping.size === 0) {
     return typeText;
   }
-  return typeText.replace(/\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match) => {
+  return typeText.replaceAll(/\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match) => {
     return mapping.get(match) ?? match;
   });
 }

@@ -11,63 +11,75 @@ import {
   TYPINGS_PACKAGE
 } from './api-doc-constants.ts';
 
-/** Compute an overload key for methods with distinguishing first param (e.g. on('changed',...)) */
+/**
+Compute an overload key for methods with distinguishing first param (e.g. on('changed',...))
+*/
 export function computeOverloadKey(method: MemberInfo): string {
   if (EVENT_METHODS.has(method.name) && method.parameters.length > 0) {
     const firstParam = method.parameters[0];
     if (firstParam?.type.startsWith('"') || firstParam?.type.startsWith('\'')) {
-      const normalizedType = firstParam.type.replace(/"/g, '\'');
+      const normalizedType = firstParam.type.replaceAll('"', '\'');
       return `${method.name}(${normalizedType})`;
     }
   }
   return method.name;
 }
 
-export async function ensureDir(filePath: string): Promise<void> {
+export async function ensureDirectory(filePath: string): Promise<void> {
   await mkdir(dirname(filePath), { recursive: true });
 }
 
-/** Escape text for use inside a JS string within a JSX expression: {...{key: "..."}} */
+/**
+Escape text for use inside a JS string within a JSX expression: {...{key: "..."}}
+*/
 export function escapeJsString(text: string): string {
-  return text.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, ' ');
+  return text.replaceAll('\\', '\\\\').replaceAll('"', String.raw`\"`).replaceAll('\n', ' ');
 }
 
-/** Escape text for use inside a JSX attribute: attr="..." (MDX uses HTML-style parsing) */
+/**
+Escape text for use inside a JSX attribute: attr="..." (MDX uses HTML-style parsing)
+*/
 export function escapeJsxAttr(text: string): string {
-  return text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/\n/g, ' ');
+  return text.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('\n', ' ');
 }
 
 export function escapeMarkdown(text: string): string {
-  return text.replace(/\|/g, '\\|').replace(/\n/g, ' ').replace(/\{/g, '\\{').replace(/\}/g, '\\}');
+  return text.replaceAll('|', String.raw`\|`).replaceAll('\n', ' ').replaceAll('{', String.raw`\{`).replaceAll('}', String.raw`\}`);
 }
 
 export function escapeMdxAngleBrackets(text: string): string {
-  return text.replace(/</g, '\\<').replace(/>/g, '\\>');
+  return text.replaceAll('<', String.raw`\<`).replaceAll('>', String.raw`\>`);
 }
 
-/** Escape curly braces in MDX markdown content to prevent JSX expression parsing */
+/**
+Escape curly braces in MDX markdown content to prevent JSX expression parsing
+*/
 export function escapeMdxBraces(text: string): string {
-  return text.replace(/\{/g, '\\{').replace(/\}/g, '\\}');
+  return text.replaceAll('{', String.raw`\{`).replaceAll('}', String.raw`\}`);
 }
 
 export function escapeYaml(text: string): string {
-  return text.replace(/"/g, '\\"');
+  return text.replaceAll('"', String.raw`\"`);
 }
 
-/** Collapse single newlines within paragraphs to spaces, preserve double newlines as paragraph breaks. */
+/**
+Collapse single newlines within paragraphs to spaces, preserve double newlines as paragraph breaks.
+*/
 export function foldTsDocParagraphs(text: string): string {
   return text
     .split(/\n{2,}/)
-    .map((paragraph) => paragraph.replace(/\n/g, ' '))
+    .map((paragraph) => paragraph.replaceAll('\n', ' '))
     .join('\n\n');
 }
 
-/** Compute relative import path from a generated page to the components directory */
-export function getComponentImportPath(nsDir: string, typeDir: string): string {
+/**
+Compute relative import path from a generated page to the components directory
+*/
+export function getComponentImportPath(nsDirectory: string, typeDirectory: string): string {
   // Page is at: src/content/docs/api/{nsDir}/{typeDir}/index.mdx
   // Components are at: src/components/api/
   // We need to go up from content/docs/api/{nsDir}/{typeDir}/ to src/, then into components/api
-  const segments = ['content', 'docs', 'api', ...nsDir.split('/'), ...typeDir.split('/')].filter(Boolean);
+  const segments = ['content', 'docs', 'api', ...nsDirectory.split('/'), ...typeDirectory.split('/')].filter(Boolean);
   const ups = '../'.repeat(segments.length);
   return `${ups}components/api`;
 }
@@ -93,15 +105,15 @@ export function getImportStatement(info: TypeInfo): string | undefined {
 
   // Augmentations/ → import from the original package
   if (info.namespace.includes('/augmentations')) {
-    const packageDir = info.namespace.split('/')[0] ?? '';
+    const packageDirectory = info.namespace.split('/', 1)[0] ?? '';
 
-    if (packageDir === 'obsidian') {
+    if (packageDirectory === 'obsidian') {
       const importKeyword = info.kind === 'interface' ? 'import type' : 'import';
       return `${importKeyword} { ${info.name} } from 'obsidian';`;
     }
 
     // @codemirror__state → @codemirror/state, i18next → i18next, etc.
-    const packageName = packageDir.includes('__') ? packageDir.replace('__', '/') : packageDir;
+    const packageName = packageDirectory.includes('__') ? packageDirectory.replace('__', '/') : packageDirectory;
     return `import type { ${info.name} } from '${packageName}';`;
   }
 
@@ -109,50 +121,56 @@ export function getImportStatement(info: TypeInfo): string | undefined {
   return `import type { ${info.name} } from '${TYPINGS_PACKAGE}';`;
 }
 
-export function getNamespaceDir(namespace: string): string {
+export function getNamespaceDirectory(namespace: string): string {
   return namespace;
 }
 
-/** Sanitize a member name for use as a filename */
+/**
+Sanitize a member name for use as a filename
+*/
 export function memberSlug(name: string): string {
   const cleaned = name
-    .replace(/^["']|["']$/g, '')
-    .replace(/[^a-zA-Z0-9]/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
+    .replaceAll(/^["']|["']$/g, '')
+    .replaceAll(/[^a-zA-Z0-9]/g, '-')
+    .replaceAll(/-+/g, '-')
+    .replaceAll(/^-|-$/g, '');
   if (!cleaned) {
     return 'unnamed';
   }
   return cleaned;
 }
 
-/** Slugify an overload key for URLs: on("changed") -> on-changed */
+/**
+Slugify an overload key for URLs: on("changed") -> on-changed
+*/
 export function overloadSlug(overloadKey: string): string {
   return overloadKey
-    .replace(/["'()]/g, ' ')
-    .replace(/[^a-zA-Z0-9\s]/g, '')
+    .replaceAll(/["'()]/g, ' ')
+    .replaceAll(/[^a-zA-Z0-9\s]/g, '')
     .trim()
-    .replace(/\s+/g, '-');
+    .replaceAll(/\s+/g, '-');
 }
 
 export function simplifyType(typeText: string): string {
   return typeText
-    .replace(/import\("[^"]+"\)\./g, '')
-    .replace(/import\('[^']+'\)\./g, '');
+    .replaceAll(/import\("[^"]+"\)\./g, '')
+    .replaceAll(/import\('[^']+'\)\./g, '');
 }
 
 const OG_DESCRIPTION_MAX_LENGTH = 160;
 
-/** Strip markdown formatting to plain text for use in meta descriptions */
+/**
+Strip markdown formatting to plain text for use in meta descriptions
+*/
 export function stripMarkdown(text: string): string {
   return text
-    .replace(/\{@link\s+(?:[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\}/g, (...args) => {
-      const groups = args[args.length - 1] as Record<string, string | undefined>;
+    .replaceAll(/\{@link\s+(?:[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\}/g, (...arguments_) => {
+      const groups = arguments_.at(-1) as Record<string, string | undefined>;
       return groups['display'] ?? '';
     })
-    .replace(/\[(?<text>[^\]]+)\]\([^)]+\)/g, '$<text>')
-    .replace(/[`*_~]/g, '')
-    .replace(/\s+/g, ' ')
+    .replaceAll(/\[(?<text>[^\]]+)\]\([^)]+\)/g, '$<text>')
+    .replaceAll(/[`*_~]/g, '')
+    .replaceAll(/\s+/g, ' ')
     .trim()
     .slice(0, OG_DESCRIPTION_MAX_LENGTH);
 }

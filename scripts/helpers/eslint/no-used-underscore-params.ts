@@ -24,15 +24,15 @@ export const noUsedUnderscoreParams: Rule.RuleModule = {
           }
 
           // Must be a parameter (not a local variable)
-          const defNode = variable.defs[0];
-          if (defNode?.type !== 'Parameter') {
+          const definitionNode = variable.defs[0];
+          if (definitionNode?.type !== 'Parameter') {
             continue;
           }
 
           // Check if the parameter has references in the function body (not just
           // In the return type annotation, e.g., type predicates like `asserts _obj is T`).
-          const funcBody = (node as NodeWithBody).body;
-          const bodyRange = funcBody?.range;
+          const functionBody = (node as NodeWithBody).body;
+          const bodyRange = functionBody?.range;
           const hasBodyReferences = variable.references.some((ref) => {
             if (!ref.isRead()) {
               return false;
@@ -49,7 +49,7 @@ export const noUsedUnderscoreParams: Rule.RuleModule = {
             context.report({
               data: { name: variable.name },
               message: 'Parameter "{{ name }}" has a `_` prefix but is used. Remove the `_` prefix since the parameter is not unused.',
-              node: defNode.name
+              node: definitionNode.name
             });
           }
         }

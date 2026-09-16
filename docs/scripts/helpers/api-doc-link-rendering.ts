@@ -16,11 +16,13 @@ import {
 } from './api-doc-constants.ts';
 import {
   escapeMdxAngleBrackets,
-  getNamespaceDir,
+  getNamespaceDirectory,
   memberSlug
 } from './api-doc-text-utils.ts';
 
-/** Loaded from typedoc-plugin-mdn-links data at runtime */
+/**
+Loaded from typedoc-plugin-mdn-links data at runtime
+*/
 let webApiTypes: Record<string, unknown> = {};
 
 /**
@@ -48,44 +50,50 @@ export function loadExternalTypeMaps(): void {
   }
 }
 
-/** Convert inline markdown to HTML for use in component props with set:html */
+/**
+Convert inline markdown to HTML for use in component props with set:html
+*/
 export function markdownToHtml(text: string): string {
   return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/\[(?<text>[^\]]+)\]\((?<url>[^)]+)\)/g, '<a href="$<url>">$<text></a>')
-    .replace(/`(?<code>[^`]+)`/g, '<code>$<code></code>')
-    .replace(/\n/g, '<br/>');
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll(/\[(?<text>[^\]]+)\]\((?<url>[^)]+)\)/g, '<a href="$<url>">$<text></a>')
+    .replaceAll(/`(?<code>[^`]+)`/g, '<code>$<code></code>')
+    .replaceAll('\n', '<br/>');
 }
 
-/** Build the href for a member, pointing to the parent type's page if inherited */
-export function memberHref(memberSlugStr: string, inheritedFrom: string, allTypes: Map<string, TypeInfo>): string {
+/**
+Build the href for a member, pointing to the parent type's page if inherited
+*/
+export function memberHref(memberSlugString: string, inheritedFrom: string, allTypes: Map<string, TypeInfo>): string {
   if (!inheritedFrom) {
-    return `./${memberSlugStr}/`;
+    return `./${memberSlugString}/`;
   }
   const parentInfo = allTypes.get(inheritedFrom);
   if (!parentInfo) {
-    return `./${memberSlugStr}/`;
+    return `./${memberSlugString}/`;
   }
-  const parentNsDir = getNamespaceDir(parentInfo.namespace);
-  return `${BASE_PATH}/api/${parentNsDir}/${inheritedFrom}/${memberSlugStr}/`;
+  const parentNsDirectory = getNamespaceDirectory(parentInfo.namespace);
+  return `${BASE_PATH}/api/${parentNsDirectory}/${inheritedFrom}/${memberSlugString}/`;
 }
 
-/** Render a type string with clickable links for known types */
+/**
+Render a type string with clickable links for known types
+*/
 export function renderTypeWithLinks(typeText: string, allTypes: Map<string, TypeInfo>, selfTypeName?: string): string {
   // Pre-pass: link Object.method patterns to MDN before word-by-word linking
   const MDN_OBJECT_BASE = 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object';
-  const withObjectMethods = typeText.replace(
+  const withObjectMethods = typeText.replaceAll(
     /\bObject\.(?<method>[a-zA-Z][a-zA-Z0-9]*)\b/g,
     (_fullMatch, method: string) => `[Object](${MDN_OBJECT_BASE}).[${method}](${MDN_OBJECT_BASE}/${method})`
   );
   // Main pass: link individual type names, skipping text already inside markdown links
-  return withObjectMethods.replace(
+  return withObjectMethods.replaceAll(
     /\[(?<linkText>[^\]]+)\]\([^)]+\)|\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g,
     (match, _linkText: string | undefined, _unused: unknown, ...rest: unknown[]) => {
       // If this matched a markdown link, preserve it as-is
-      const groups = rest[rest.length - 1] as Record<string, string | undefined>;
+      const groups = rest.at(-1) as Record<string, string | undefined>;
       if (groups['linkText']) {
         return match;
       }
@@ -97,8 +105,8 @@ export function renderTypeWithLinks(typeText: string, allTypes: Map<string, Type
       if (typeName === 'this' && selfTypeName) {
         const selfInfo = allTypes.get(selfTypeName);
         if (selfInfo) {
-          const targetNsDir = getNamespaceDir(selfInfo.namespace);
-          return `[${typeName}](${BASE_PATH}/api/${targetNsDir}/${selfTypeName}/)`;
+          const targetNsDirectory = getNamespaceDirectory(selfInfo.namespace);
+          return `[${typeName}](${BASE_PATH}/api/${targetNsDirectory}/${selfTypeName}/)`;
         }
       }
 
@@ -110,8 +118,8 @@ export function renderTypeWithLinks(typeText: string, allTypes: Map<string, Type
       // Check our own types first
       const info = allTypes.get(typeName);
       if (info) {
-        const targetNsDir = getNamespaceDir(info.namespace);
-        return `[${typeName}](${BASE_PATH}/api/${targetNsDir}/${typeName}/)`;
+        const targetNsDirectory = getNamespaceDirectory(info.namespace);
+        return `[${typeName}](${BASE_PATH}/api/${targetNsDirectory}/${typeName}/)`;
       }
 
       // TypeScript utility types
@@ -143,13 +151,15 @@ export function renderTypeWithLinks(typeText: string, allTypes: Map<string, Type
   );
 }
 
-/** Resolve {@link Name} and {@link Name | display text} tags in description text */
+/**
+Resolve {@link Name} and {@link Name | display text} tags in description text
+*/
 export function resolveLinks(text: string, allTypes: Map<string, TypeInfo>): string {
-  return text.replace(/\{@link\s+(?<target>[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\}/g, (...args) => {
-    const groups = args[args.length - 1] as LinkMatchGroups;
+  return text.replaceAll(/\{@link\s+(?<target>[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\}/g, (...arguments_) => {
+    const groups = arguments_.at(-1) as LinkMatchGroups;
     const target = groups.target.trim();
     // Strip TSDoc backslash escapes (e.g., \< \> \{ \}) from display text
-    const display = (groups.display?.trim() ?? target).replace(/\\(?=[<>{}])/g, '');
+    const display = (groups.display?.trim() ?? target).replaceAll(/\\(?=[<>{}])/g, '');
 
     // Handle Type.member references (e.g., Vault.on)
     const dotMatch = /^(?<typeName>[A-Za-z]\w*)\.(?<memberName>\w+)$/.exec(target);
@@ -158,8 +168,8 @@ export function resolveLinks(text: string, allTypes: Map<string, TypeInfo>): str
       const memberName = dotMatch.groups['memberName'] ?? '';
       const typeInfo = allTypes.get(typeName);
       if (typeInfo) {
-        const targetNsDir = getNamespaceDir(typeInfo.namespace);
-        return `[${display}](${BASE_PATH}/api/${targetNsDir}/${typeName}/${memberSlug(memberName)}/)`;
+        const targetNsDirectory = getNamespaceDirectory(typeInfo.namespace);
+        return `[${display}](${BASE_PATH}/api/${targetNsDirectory}/${typeName}/${memberSlug(memberName)}/)`;
       }
     }
 
@@ -169,8 +179,8 @@ export function resolveLinks(text: string, allTypes: Map<string, TypeInfo>): str
       if (display !== target && display.includes('<')) {
         return renderTypeWithLinks(display, allTypes);
       }
-      const targetNsDir = getNamespaceDir(info.namespace);
-      return `[${display}](${BASE_PATH}/api/${targetNsDir}/${target}/)`;
+      const targetNsDirectory = getNamespaceDirectory(info.namespace);
+      return `[${display}](${BASE_PATH}/api/${targetNsDirectory}/${target}/)`;
     }
     return `\`${display}\``;
   });
@@ -205,13 +215,15 @@ export function resolveWebApiUrl(name: string): string | undefined {
   return undefined;
 }
 
-/** Create an absolute link to a type page */
+/**
+Create an absolute link to a type page
+*/
 export function typeLink(typeName: string, allTypes: Map<string, TypeInfo>): string {
   const cleanName = typeName.replace(/<.*>$/, '').trim();
   const info = allTypes.get(cleanName);
   if (!info) {
     return `\`${typeName}\``;
   }
-  const targetNsDir = getNamespaceDir(info.namespace);
-  return `[${escapeMdxAngleBrackets(typeName)}](${BASE_PATH}/api/${targetNsDir}/${cleanName}/)`;
+  const targetNsDirectory = getNamespaceDirectory(info.namespace);
+  return `[${escapeMdxAngleBrackets(typeName)}](${BASE_PATH}/api/${targetNsDirectory}/${cleanName}/)`;
 }

@@ -9,7 +9,7 @@ import type { Rule } from 'markdownlint';
 /**
  * Markdownlint-cli2 configuration schema : https://github.com/DavidAnson/markdownlint-cli2/blob/v0.18.1/schema/markdownlint-cli2-config-schema.json
  */
-export interface MarkdownlintCli2ConfigurationSchema {
+export interface MarkdownlintCli2ConfigSchema {
   /**
    * JSON Schema URI (expected by some editors)
    */
@@ -17,7 +17,7 @@ export interface MarkdownlintCli2ConfigurationSchema {
   /**
    * Markdownlint configuration schema : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/schema/.markdownlint.jsonc
    */
-  config?: MarkdownlintConfigurationSchema;
+  config?: MarkdownlintConfigSchema;
   /**
    * Module names or paths of custom rules to load and use when linting : https://github.com/DavidAnson/markdownlint-cli2/blob/v0.18.1/README.md#markdownlint-cli2jsonc
    */
@@ -84,7 +84,7 @@ export interface MarkdownlintCli2ConfigurationSchema {
 /**
  * Markdownlint configuration schema : https://github.com/DavidAnson/markdownlint/blob/v0.38.0/schema/.markdownlint.jsonc
  */
-export interface MarkdownlintConfigurationSchema {
+export interface MarkdownlintConfigSchema {
   [k: string]: unknown;
   /**
    * JSON Schema URI (expected by some editors)

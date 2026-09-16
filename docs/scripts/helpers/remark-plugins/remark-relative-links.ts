@@ -68,7 +68,7 @@ function getContentSlug(filePath: string): null | string {
   }
 
   const relative = normalized.slice(markerIndex + marker.length);
-  const withoutExt = relative.replace(/\.\w+$/, '');
+  const withoutExtension = relative.replace(/\.\w+$/, '');
   // Strip trailing /index — index pages represent the directory, not a child
-  return withoutExt.replace(/\/index$/, '');
+  return withoutExtension.replace(/\/index$/, '');
 }

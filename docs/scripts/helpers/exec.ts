@@ -17,7 +17,7 @@ import {
 } from 'node:path/posix';
 import process from 'node:process';
 
-export type CommandPart = ExecArg | string;
+export type CommandPart = ExecArgument | string;
 
 /**
  * Options for {@link editJson}.
@@ -40,8 +40,8 @@ export interface EditPackageJsonOptions {
    */
   readonly shouldSkipIfMissing?: boolean;
 }
-export interface ExecArg {
-  batchedArgs: string[];
+export interface ExecArgument {
+  batchedArguments: string[];
 }
 export interface ExecOption {
   readonly cwd?: string;
@@ -86,7 +86,7 @@ interface ExecSimpleOptions extends ExecOption {
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- The generic type is better for the strong typing.
 export async function editJson<T>(
   path: string,
-  editFn: (data: T) => Promisable<void>,
+  editFunction: (data: T) => Promisable<void>,
   options: EditJsonOptions = {}
 ): Promise<void> {
   const {
@@ -96,28 +96,28 @@ export async function editJson<T>(
     return;
   }
   const data = await readJson<T>(path);
-  await editFn(data);
+  await editFunction(data);
   await writeJson(path, data);
 }
 export async function editPackageJson(
-  editFn: (packageJson: PackageJson) => Promisable<void>,
+  editFunction: (packageJson: PackageJson) => Promisable<void>,
   options: EditPackageJsonOptions = {}
 ): Promise<void> {
   const {
     cwd,
     shouldSkipIfMissing
   } = options;
-  await editJson<PackageJson>(getPackageJsonPath(cwd), editFn, normalizeOptionalProperties<EditJsonOptions>({ shouldSkipIfMissing }));
+  await editJson<PackageJson>(getPackageJsonPath(cwd), editFunction, normalizeOptionalProperties<EditJsonOptions>({ shouldSkipIfMissing }));
 }
 export async function editPackageLockJson(
-  editFn: (packageLockJson: PackageLockJson) => Promisable<void>,
+  editFunction: (packageLockJson: PackageLockJson) => Promisable<void>,
   options: EditPackageJsonOptions = {}
 ): Promise<void> {
   const {
     cwd,
     shouldSkipIfMissing
   } = options;
-  await editJson<PackageJson>(getPackageLockJsonPath(cwd), editFn, normalizeOptionalProperties<EditJsonOptions>({ shouldSkipIfMissing }));
+  await editJson<PackageJson>(getPackageLockJsonPath(cwd), editFunction, normalizeOptionalProperties<EditJsonOptions>({ shouldSkipIfMissing }));
 }
 
 export function ensureNonNullable<T>(value: null | T | undefined, errorMessage: string): T {
@@ -167,8 +167,8 @@ export function getRootFolder(cwd?: string): null | string {
   return null;
 }
 
-export function normalizeOptionalProperties<T>(obj: UndefinedOnPartialDeep<T>): T {
-  return obj as T;
+export function normalizeOptionalProperties<T>(object: UndefinedOnPartialDeep<T>): T {
+  return object as T;
 }
 
 export async function readJson<T>(path: string): Promise<T> {
@@ -188,16 +188,16 @@ export function resolvePathFromRoot(path: string, cwd?: string): null | string {
   return resolveSafe(rootFolder, path);
 }
 
-export function toCommandLine(args: string[]): string {
-  return args
-    .map((arg) => {
-      if (/[\s"\n]/.test(arg)) {
-        let escapedArg = arg;
-        escapedArg = escapedArg.replaceAll(/"/g, '\\"');
-        escapedArg = escapedArg.replaceAll(/\n/g, '\\n');
-        return `"${escapedArg}"`;
+export function toCommandLine(arguments_: string[]): string {
+  return arguments_
+    .map((argument) => {
+      if (/[\s"\n]/.test(argument)) {
+        let escapedArgument = argument;
+        escapedArgument = escapedArgument.replaceAll('"', String.raw`\"`);
+        escapedArgument = escapedArgument.replaceAll('\n', String.raw`\n`);
+        return `"${escapedArgument}"`;
       }
-      return arg;
+      return argument;
     })
     .join(' ');
 }
@@ -222,10 +222,8 @@ async function exec(command: CommandPart[] | string, options: ExecOption = {}): 
 
   const maxCommandLength = getMaxCommandLength();
   if (command.length > maxCommandLength) {
-    return Promise.reject(
-      new Error(
-        `Command line is too long (${String(command.length)} chars, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArg with batchedArgs.`
-      )
+    throw new Error(
+      `Command line is too long (${String(command.length)} chars, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArgument with batchedArguments.`
     );
   }
 
@@ -305,9 +303,9 @@ function execString(command: string, options: ExecOption = {}): Promise<ExecResu
       });
     });
 
-    child.on('error', (err) => {
+    child.on('error', (error) => {
       if (!ignoreExitCode) {
-        reject(err);
+        reject(error);
         return;
       }
 
@@ -346,28 +344,28 @@ async function executeBatches(baseCommand: string, batches: string[][], options:
 
 function getMaxCommandLength(): number {
   const WINDOWS_MAX_COMMAND_LENGTH = 8191;
-  const UNIX_MAX_COMMAND_LENGTH = 131072;
+  const UNIX_MAX_COMMAND_LENGTH = 131_072;
   return process.platform === 'win32' ? WINDOWS_MAX_COMMAND_LENGTH : UNIX_MAX_COMMAND_LENGTH;
 }
 
 function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promise<ExecResult | string> | undefined {
-  const execArgs = parts.filter(isExecArg);
-  if (execArgs.length === 0) {
+  const execArguments = parts.filter(isExecArgument);
+  if (execArguments.length === 0) {
     return undefined;
   }
-  if (execArgs.length > 1) {
-    return Promise.reject(new Error('Only one ExecArg with batchedArgs is allowed per command'));
+  if (execArguments.length > 1) {
+    return Promise.reject(new Error('Only one ExecArgument with batchedArguments is allowed per command'));
   }
 
-  const [execArg] = execArgs;
-  if (!execArg) {
+  const [execArgument] = execArguments;
+  if (!execArgument) {
     return undefined;
   }
   const staticParts = parts.filter((part): part is string => typeof part === 'string');
   const baseCommand = toCommandLine(staticParts);
   const maxCommandLength = getMaxCommandLength();
 
-  const fullCommand = `${baseCommand} ${execArg.batchedArgs.join(' ')}`;
+  const fullCommand = `${baseCommand} ${execArgument.batchedArguments.join(' ')}`;
   if (fullCommand.length <= maxCommandLength) {
     return execString(fullCommand, options);
   }
@@ -375,20 +373,20 @@ function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promis
   const batches: string[][] = [];
   let currentBatch: string[] = [];
 
-  for (const arg of execArg.batchedArgs) {
-    const tentative = `${baseCommand} ${[...currentBatch, arg].join(' ')}`;
+  for (const argument of execArgument.batchedArguments) {
+    const tentative = `${baseCommand} ${[...currentBatch, argument].join(' ')}`;
     if (tentative.length > maxCommandLength) {
       if (currentBatch.length === 0) {
         return Promise.reject(
           new Error(
-            `Cannot split command into batches: a single argument (${String(arg.length)} chars) plus the base command (${String(baseCommand.length)} chars) exceeds the max command length (${String(maxCommandLength)}).`
+            `Cannot split command into batches: a single argument (${String(argument.length)} chars) plus the base command (${String(baseCommand.length)} chars) exceeds the max command length (${String(maxCommandLength)}).`
           )
         );
       }
       batches.push(currentBatch);
-      currentBatch = [arg];
+      currentBatch = [argument];
     } else {
-      currentBatch.push(arg);
+      currentBatch.push(argument);
     }
   }
   if (currentBatch.length > 0) {
@@ -398,8 +396,8 @@ function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promis
   return executeBatches(baseCommand, batches, options);
 }
 
-function isExecArg(part: CommandPart): part is ExecArg {
-  return typeof part === 'object' && 'batchedArgs' in part;
+function isExecArgument(part: CommandPart): part is ExecArgument {
+  return typeof part === 'object' && 'batchedArguments' in part;
 }
 
 function resolveSafe(...pathSegments: string[]): string {
@@ -415,14 +413,14 @@ function toJson(data: unknown): string {
   return JSON.stringify(data, null, INDENT);
 }
 
-function trimEnd(str: string, suffix: string, shouldValidate?: boolean): string {
-  if (str.endsWith(suffix)) {
-    return str.slice(0, -suffix.length);
+function trimEnd(string_: string, suffix: string, shouldValidate?: boolean): string {
+  if (string_.endsWith(suffix)) {
+    return string_.slice(0, -suffix.length);
   }
 
   if (shouldValidate) {
-    throw new Error(`String ${str} does not end with suffix ${suffix}`);
+    throw new Error(`String ${string_} does not end with suffix ${suffix}`);
   }
 
-  return str;
+  return string_;
 }

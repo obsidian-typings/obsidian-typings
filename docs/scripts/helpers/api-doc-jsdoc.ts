@@ -21,7 +21,7 @@ import {
   simplifyType
 } from './api-doc-text-utils.ts';
 
-export function checkIsOfficial(node: JSDocableNode, defaultIsOfficial: boolean): boolean {
+export function checkIsOfficial(node: JSDocableNode, isOfficialByDefault: boolean): boolean {
   const docs = node.getJsDocs();
   for (const doc of docs) {
     const tags = doc.getTags();
@@ -32,7 +32,7 @@ export function checkIsOfficial(node: JSDocableNode, defaultIsOfficial: boolean)
       return true;
     }
   }
-  return defaultIsOfficial;
+  return isOfficialByDefault;
 }
 
 export function extractClassInfo(cls: ClassDeclaration, isOfficial: boolean, namespace: string): TypeInfo {
@@ -41,7 +41,7 @@ export function extractClassInfo(cls: ClassDeclaration, isOfficial: boolean, nam
     baseTypes: cls.getExtends() ? [cls.getExtends()?.getText() ?? ''] : [],
     description: getDescription(cls),
     examples: getExamples(cls),
-    implementsTypes: cls.getImplements().map((i) => i.getText()),
+    implementsTypes: cls.getImplements().map((index) => index.getText()),
     isOfficial,
     kind: 'class',
     methods: cls.getMethods().map((m) => extractMethodInfo(m, isOfficial)),
@@ -55,7 +55,7 @@ export function extractClassInfo(cls: ClassDeclaration, isOfficial: boolean, nam
 
 export function extractInterfaceInfo(iface: InterfaceDeclaration, isOfficial: boolean, namespace: string): TypeInfo {
   return {
-    baseTypes: iface.getExtends().map((e) => e.getText()),
+    baseTypes: iface.getExtends().map((extendsClause) => extendsClause.getText()),
     description: getDescription(iface),
     examples: getExamples(iface),
     implementsTypes: [],
@@ -82,7 +82,7 @@ export function extractMethodInfo(method: MethodDeclaration, isOfficial: boolean
       type: simplifyType(p.getType().getText())
     };
   });
-  const paramStr = params.map((p) => `${p.name}: ${p.type}`).join(', ');
+  const paramString = params.map((p) => `${p.name}: ${p.type}`).join(', ');
   const info: MemberInfo = {
     description: getDescription(method),
     examples: getExamples(method),
@@ -95,7 +95,7 @@ export function extractMethodInfo(method: MethodDeclaration, isOfficial: boolean
     remarks: getRemarks(method),
     returnDescription: getReturnDescription(method),
     returnType: getDeclaredReturnType(method),
-    signature: `${name}(${paramStr})`,
+    signature: `${name}(${paramString})`,
     since: getSince(method),
     type: ''
   };
@@ -115,7 +115,7 @@ export function extractMethodSignatureInfo(method: MethodSignature, isOfficial: 
       type: simplifyType(p.getType().getText())
     };
   });
-  const paramStr = params.map((p) => `${p.name}: ${p.type}`).join(', ');
+  const paramString = params.map((p) => `${p.name}: ${p.type}`).join(', ');
   const info: MemberInfo = {
     description: getDescription(method),
     examples: getExamples(method),
@@ -128,7 +128,7 @@ export function extractMethodSignatureInfo(method: MethodSignature, isOfficial: 
     remarks: getRemarks(method),
     returnDescription: getReturnDescription(method),
     returnType: getDeclaredReturnType(method),
-    signature: `${name}(${paramStr})`,
+    signature: `${name}(${paramString})`,
     since: getSince(method),
     type: ''
   };
@@ -180,20 +180,24 @@ export function extractPropertySignatureInfo(prop: PropertySignature, isOfficial
   };
 }
 
-/** Pick the highest-numbered constructorN__ pseudo-method (matches ExtractConstructor logic) */
+/**
+Pick the highest-numbered constructorN__ pseudo-method (matches ExtractConstructor logic)
+*/
 export function getConstructorMethod(methods: MemberInfo[]): MemberInfo | undefined {
   const constructors = methods.filter((m) => /^constructor\d*__$/.test(m.name));
   if (constructors.length === 0) {
     return undefined;
   }
   return constructors.sort((a, b) => {
-    const numA = parseInt(a.name.replace(/\D/g, '') || '0', 10);
-    const numB = parseInt(b.name.replace(/\D/g, '') || '0', 10);
-    return numB - numA;
+    const numberA = parseInt(a.name.replaceAll(/\D/g, '') || '0', 10);
+    const numberB = parseInt(b.name.replaceAll(/\D/g, '') || '0', 10);
+    return numberB - numberA;
   })[0];
 }
 
-/** Get the return type as declared in source (preserves union order), falling back to resolved type */
+/**
+Get the return type as declared in source (preserves union order), falling back to resolved type
+*/
 export function getDeclaredReturnType(method: ReturnTypeProvider): string {
   const annotation = method.getReturnTypeNode?.()?.getText();
   if (annotation) {
@@ -207,48 +211,58 @@ export function getDescription(node: JSDocableNode): string {
   if (docs.length === 0) {
     return '';
   }
-  const raw = docs[docs.length - 1]?.getDescription().trim() ?? '';
+  const raw = docs.at(-1)?.getDescription().trim() ?? '';
   return foldTsDocParagraphs(raw);
 }
 
-/** Extract @example blocks from JSDoc */
+/**
+Extract @example blocks from JSDoc
+*/
 export function getExamples(node: JSDocableNode): string[] {
   const examples: string[] = [];
   for (const doc of node.getJsDocs()) {
     for (const tag of doc.getTags()) {
-      if (tag.getTagName() === 'example') {
-        const text = tag.getCommentText()?.trim() ?? '';
-        if (text) {
-          examples.push(text);
-        }
+      if (tag.getTagName() !== 'example') {
+        continue;
+      }
+
+      const text = tag.getCommentText()?.trim() ?? '';
+      if (text) {
+        examples.push(text);
       }
     }
   }
   return examples;
 }
 
-/** Extract @param descriptions from JSDoc tags */
+/**
+Extract @param descriptions from JSDoc tags
+*/
 export function getParamDescriptions(node: JSDocableNode): Map<string, string> {
   const result = new Map<string, string>();
   const docs = node.getJsDocs();
   for (const doc of docs) {
     for (const tag of doc.getTags()) {
-      if (tag.getTagName() === 'param') {
-        // Use getCommentText() for clean description without JSDoc artifacts
-        const comment = foldTsDocParagraphs(tag.getCommentText()?.trim().replace(/\s*\*\s*$/g, '').replace(/^-\s*/, '').trim() ?? '');
-        // Get param name from the tag structure
-        const tagText = tag.getText();
-        const nameMatch = /@param\s+(?:\{[^}]*\}\s+)?(?<paramName>\w+)/.exec(tagText);
-        if (nameMatch?.groups) {
-          result.set(nameMatch.groups['paramName'] ?? '', comment);
-        }
+      if (tag.getTagName() !== 'param') {
+        continue;
+      }
+
+      // Use getCommentText() for clean description without JSDoc artifacts
+      const comment = foldTsDocParagraphs(tag.getCommentText()?.trim().replaceAll(/\s*\*\s*$/g, '').replace(/^-\s*/, '').trim() ?? '');
+      // Get param name from the tag structure
+      const tagText = tag.getText();
+      const nameMatch = /@param\s+(?:\{[^}]*\}\s+)?(?<paramName>\w+)/.exec(tagText);
+      if (nameMatch?.groups) {
+        result.set(nameMatch.groups['paramName'] ?? '', comment);
       }
     }
   }
   return result;
 }
 
-/** Strip `| undefined` only when it was implicitly added by ts-morph for optional properties */
+/**
+Strip `| undefined` only when it was implicitly added by ts-morph for optional properties
+*/
 export function getPropertyType(prop: PropertyDeclaration | PropertySignature): string {
   // Use the type node text (what's written in source) if available, otherwise fall back to resolved type
   const typeNode = prop.getTypeNode();
@@ -258,36 +272,42 @@ export function getPropertyType(prop: PropertyDeclaration | PropertySignature): 
   return simplifyType(prop.getType().getText());
 }
 
-/** Extract @remarks text from JSDoc */
+/**
+Extract @remarks text from JSDoc
+*/
 export function getRemarks(node: JSDocableNode): string {
   for (const doc of node.getJsDocs()) {
     for (const tag of doc.getTags()) {
       if (tag.getTagName() === 'remarks' || tag.getTagName() === 'remark') {
-        return foldTsDocParagraphs(tag.getCommentText()?.trim().replace(/\s*\*\s*$/g, '').trim() ?? '');
+        return foldTsDocParagraphs(tag.getCommentText()?.trim().replaceAll(/\s*\*\s*$/g, '').trim() ?? '');
       }
     }
   }
   return '';
 }
 
-/** Extract @returns description from JSDoc */
+/**
+Extract @returns description from JSDoc
+*/
 export function getReturnDescription(node: JSDocableNode): string {
   for (const doc of node.getJsDocs()) {
     for (const tag of doc.getTags()) {
       if (tag.getTagName() === 'returns') {
-        return foldTsDocParagraphs(tag.getCommentText()?.trim().replace(/^-\s*/, '').replace(/\s*\*\s*$/g, '').trim() ?? '');
+        return foldTsDocParagraphs(tag.getCommentText()?.trim().replace(/^-\s*/, '').replaceAll(/\s*\*\s*$/g, '').trim() ?? '');
       }
     }
   }
   return '';
 }
 
-/** Extract @since version from JSDoc */
+/**
+Extract @since version from JSDoc
+*/
 export function getSince(node: JSDocableNode): string {
   for (const doc of node.getJsDocs()) {
     for (const tag of doc.getTags()) {
       if (tag.getTagName() === 'since') {
-        return tag.getCommentText()?.trim().replace(/\s*\*\s*$/g, '').trim() ?? '';
+        return tag.getCommentText()?.trim().replaceAll(/\s*\*\s*$/g, '').trim() ?? '';
       }
     }
   }
@@ -299,9 +319,9 @@ export function getSince(node: JSDocableNode): string {
  * E.g., `typeof momentInstance` → `typeof moment` when `import { moment as momentInstance }`.
  */
 export function resolveTypeofAliases(typeText: string, sourceFile: SourceFile): string {
-  return typeText.replace(/\btypeof (?<alias>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match, alias: string) => {
-    for (const importDecl of sourceFile.getImportDeclarations()) {
-      for (const namedImport of importDecl.getNamedImports()) {
+  return typeText.replaceAll(/\btypeof (?<alias>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match, alias: string) => {
+    for (const importDeclaration of sourceFile.getImportDeclarations()) {
+      for (const namedImport of importDeclaration.getNamedImports()) {
         if (namedImport.getAliasNode()?.getText() === alias) {
           return `typeof ${namedImport.getName()}`;
         }

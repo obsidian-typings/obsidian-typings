@@ -29,12 +29,12 @@ const ROOT_DIR = dirname(DOCS_DIR);
 
 async function main(): Promise<void> {
   const CHANNEL_ARG_INDEX = 2;
-  const channelArg = process.argv[CHANNEL_ARG_INDEX] ?? process.env['CURRENT_CHANNEL'] ?? 'public';
-  if (channelArg !== 'public' && channelArg !== 'catalyst') {
-    console.error(`Invalid channel: ${channelArg}. Use "public" or "catalyst".`);
+  const channelArgument = process.argv[CHANNEL_ARG_INDEX] ?? process.env['CURRENT_CHANNEL'] ?? 'public';
+  if (channelArgument !== 'public' && channelArgument !== 'catalyst') {
+    console.error(`Invalid channel: ${channelArgument}. Use "public" or "catalyst".`);
     process.exit(1);
   }
-  const channel = channelArg;
+  const channel = channelArgument;
 
   // Resolve the release branch
   const latestVersion = await getLatestVersion(channel);
@@ -42,16 +42,16 @@ async function main(): Promise<void> {
   console.warn(`Using release branch: ${latestBranch}`);
 
   // Create temporary worktree
-  const tempDir = toPosixPath(join(toPosixPath(tmpdir()), `obsidian-typings-docs-${channel}`));
-  if (existsSync(tempDir)) {
+  const temporaryDirectory = toPosixPath(join(toPosixPath(tmpdir()), `obsidian-typings-docs-${channel}`));
+  if (existsSync(temporaryDirectory)) {
     console.warn('Removing stale worktree...');
-    await execFromRoot(`git worktree remove --force "${tempDir}"`, { cwd: ROOT_DIR, isQuiet: true, shouldIgnoreExitCode: true });
-    await rm(tempDir, { force: true, recursive: true });
+    await execFromRoot(`git worktree remove --force "${temporaryDirectory}"`, { cwd: ROOT_DIR, isQuiet: true, shouldIgnoreExitCode: true });
+    await rm(temporaryDirectory, { force: true, recursive: true });
   }
 
-  console.warn(`Creating worktree at ${tempDir}...`);
+  console.warn(`Creating worktree at ${temporaryDirectory}...`);
   await execFromRoot(
-    `git worktree add --detach "${tempDir}" "${latestBranch}"`,
+    `git worktree add --detach "${temporaryDirectory}" "${latestBranch}"`,
     { cwd: ROOT_DIR }
   );
 
@@ -60,22 +60,22 @@ async function main(): Promise<void> {
     console.warn('Installing obsidian package...');
     await execFromRoot(
       'npm install obsidian --ignore-scripts',
-      { cwd: tempDir, shouldFailIfCalledFromOutsideRoot: false }
+      { cwd: temporaryDirectory, shouldFailIfCalledFromOutsideRoot: false }
     );
 
-    const obsidianDtsPath = join(tempDir, 'node_modules/obsidian/obsidian.d.ts');
+    const obsidianDtsPath = join(temporaryDirectory, 'node_modules/obsidian/obsidian.d.ts');
     console.warn(existsSync(obsidianDtsPath) ? 'Official obsidian.d.ts found.' : 'WARNING: obsidian.d.ts not found.');
 
     // Run the generator pointing at the worktree
     console.warn('Generating API docs...');
-    process.env['TYPINGS_ROOT'] = tempDir;
+    process.env['TYPINGS_ROOT'] = temporaryDirectory;
     process.env['CURRENT_CHANNEL'] = channel;
     await execFromRoot(['jiti', './scripts/generate-api-docs.ts'], { cwd: DOCS_DIR });
   } finally {
     delete process.env['TYPINGS_ROOT'];
     console.warn('Cleaning up worktree...');
-    await execFromRoot(`git worktree remove --force "${tempDir}"`, { cwd: ROOT_DIR, isQuiet: true, shouldIgnoreExitCode: true });
-    await rm(tempDir, { force: true, recursive: true });
+    await execFromRoot(`git worktree remove --force "${temporaryDirectory}"`, { cwd: ROOT_DIR, isQuiet: true, shouldIgnoreExitCode: true });
+    await rm(temporaryDirectory, { force: true, recursive: true });
   }
 }
 
