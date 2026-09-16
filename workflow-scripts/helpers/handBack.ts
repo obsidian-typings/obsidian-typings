@@ -27,15 +27,14 @@
  * can leave the checkout on `main`, where it dies with `Missing script: "release"`.
  */
 
-import { once } from 'node:events';
 import process from 'node:process';
-import { createInterface } from 'node:readline/promises';
 
 import type { BranchSpec } from './branchSpec.ts';
 import type { TrustedPublisherState } from './npm.ts';
 
 import { generateBranchName } from './branchSpec.ts';
 import { restoreWorkflowScripts } from './checkout.ts';
+import { askLine } from './prompt.ts';
 import { execFromRoot } from './root.ts';
 
 /** The answers taken as a yes. Anything else -- including an empty line -- declines. */
@@ -78,7 +77,11 @@ export function getManualReleaseInstructions(branchName: string): string {
  *   `attached`. The question is still worth putting, because the operator can attach one in another window --
  *   the exact command was printed a moment ago -- and answer `y` when they have.
  * - `unknown` -- the read could not be made. This is the original behavior, and the reason a wrong `y` had
- *   to be made cheap in the first place.
+ *   to be made cheap in the first place. It is a much rarer answer since 2026-09-16, when
+ *   `readTrustedPublisherState()` learned to ask for the one-time password the registry challenges it with:
+ *   an operator who is logged in and standing here now reaches one of the two states above instead. What
+ *   still lands here is a machine with no npm login, a code skipped or refused, or a request that never
+ *   arrived.
  *
  * Declining is a first-class answer, not a failure: it prints the same two commands the hand-back has always
  * ended with and returns. So is having no terminal to ask at -- the prompt is skipped outright rather than
@@ -137,30 +140,14 @@ export async function offerRelease(
 /**
  * Reads one line from the terminal and reports whether it is a yes.
  *
- * The question is written directly rather than handed to `question()`, which echoes its prompt only when
- * readline decides it is driving a terminal -- and it decides that from `output.isTTY`. Redirect this
- * script's stdout to a file or a pager and the prompt silently disappears while the script still waits for a
- * line, which is indistinguishable from a hang. Writing it ourselves makes the question unconditional.
+ * The reading itself lives in `helpers/prompt.ts`, which carries the three measured reasons it is not a bare
+ * `question()` call. What stays here is only the part that is about this question: `null` -- no terminal, or
+ * a stream closed by Ctrl+D -- is a decline, exactly as an empty line and any other non-yes answer are, so
+ * every way of not saying yes ends in the same place.
  */
 async function askYesNo(question: string): Promise<boolean> {
-  const readlineInterface = createInterface({ input: process.stdin, output: process.stdout });
-
-  try {
-    process.stdout.write(question);
-
-    // Ctrl+D closes the stream out from under the pending question, and `question()` then settles NEITHER
-    // way -- measured 2026-09-15: the process ends on Node's `Detected unsettled top-level await` warning
-    // with nothing printed, which reads as a hang at the very last step of the hand-back. Racing the
-    // interface's own `close` turns that into the decline it is.
-    const answer = await Promise.race([
-      readlineInterface.question(''),
-      once(readlineInterface, 'close').then(() => null)
-    ]);
-
-    return answer !== null && YES_ANSWERS.has(answer.trim().toLowerCase());
-  } finally {
-    readlineInterface.close();
-  }
+  const answer = await askLine(question);
+  return answer !== null && YES_ANSWERS.has(answer.toLowerCase());
 }
 
 /**
