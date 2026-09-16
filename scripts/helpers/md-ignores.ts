@@ -10,13 +10,17 @@
  * branches, where `.gitignore` already covers them - which is what keeps this file identical everywhere.
  */
 
-/* Tracked, but deliberately excluded from every markdown check. */
+/*
+Tracked, but deliberately excluded from every markdown check.
+*/
 export const UNCHECKED_FOLDERS = [
   'docs',
   'workflow-scripts'
 ];
 
-/* Git never "ignores" `.git` itself - it is simply outside the working tree - so that one stays explicit. */
+/*
+Git never "ignores" `.git` itself - it is simply outside the working tree - so that one stays explicit.
+*/
 export const MD_IGNORES = [
   '.git/**',
   ...UNCHECKED_FOLDERS.map((folder) => `${folder}/**`)

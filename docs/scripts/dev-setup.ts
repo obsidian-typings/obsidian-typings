@@ -35,12 +35,12 @@ const WORKTREE_DIR = resolve(ROOT_DIR, '../obsidian-typings-docs-dev');
 
 async function main(): Promise<void> {
   const CHANNEL_ARG_INDEX = 2;
-  const channelArg = process.argv[CHANNEL_ARG_INDEX] ?? 'public';
-  if (channelArg !== 'public' && channelArg !== 'catalyst') {
-    console.error(`Invalid channel: ${channelArg}. Use "public" or "catalyst".`);
+  const channelArgument = process.argv[CHANNEL_ARG_INDEX] ?? 'public';
+  if (channelArgument !== 'public' && channelArgument !== 'catalyst') {
+    console.error(`Invalid channel: ${channelArgument}. Use "public" or "catalyst".`);
     process.exit(1);
   }
-  const channel = channelArg;
+  const channel = channelArgument;
   const latestVersion = await getLatestVersion(channel);
   const latestBranch = generateBranchName({ channel, obsidianVersion: latestVersion });
   console.warn(`Using release branch: ${latestBranch}`);
@@ -59,19 +59,19 @@ async function main(): Promise<void> {
   await execFromRoot('npm ci', { cwd: WORKTREE_DIR });
 
   // Remove stale docs/ from worktree before copying fresh docs
-  const worktreeDocsDir = resolve(WORKTREE_DIR, 'docs');
-  await rm(worktreeDocsDir, { force: true, recursive: true });
+  const worktreeDocsDirectory = resolve(WORKTREE_DIR, 'docs');
+  await rm(worktreeDocsDirectory, { force: true, recursive: true });
 
   // Copy docs/ from main into the worktree
-  await cp(DOCS_DIR, worktreeDocsDir, { recursive: true });
+  await cp(DOCS_DIR, worktreeDocsDirectory, { recursive: true });
 
   // Install docs dependencies
   console.warn('Installing docs dependencies...');
-  await execFromRoot('npm ci', { cwd: worktreeDocsDir });
+  await execFromRoot('npm ci', { cwd: worktreeDocsDirectory });
 
   // Generate API docs
   console.warn('Generating API docs...');
-  await execFromRoot('npm run setup', { cwd: worktreeDocsDir });
+  await execFromRoot('npm run setup', { cwd: worktreeDocsDirectory });
 
   console.warn(`\nDocs dev environment ready at ${WORKTREE_DIR}/docs`);
   console.warn('To start the dev server:');

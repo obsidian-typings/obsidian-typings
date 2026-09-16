@@ -14,16 +14,16 @@ const imports = new Map<string, Set<string>>();
 const indexDirectories = ['obsidian'];
 const MODULE_OFFSET = 3;
 
-async function convertRecursive(dir: string): Promise<void> {
-  for (const dirent of await readdir(dir, { withFileTypes: true })) {
+async function convertRecursive(directory: string): Promise<void> {
+  for (const dirent of await readdir(directory, { withFileTypes: true })) {
     if (dirent.isDirectory()) {
-      await convertRecursive(`${dir}/${dirent.name}`);
+      await convertRecursive(`${directory}/${dirent.name}`);
     } else if (dirent.name.endsWith('.d.ts')) {
-      const filePath = `${dir}/${dirent.name}`;
+      const filePath = `${directory}/${dirent.name}`;
       if (!filePath.includes('augmentations')) {
         continue;
       }
-      const augmentationsDirName = basename(dirname(dir));
+      const augmentationsDirectoryName = basename(dirname(directory));
 
       console.warn(`Processing ${filePath}`);
       const sourceFile = project.addSourceFileAtPath(filePath);
@@ -31,13 +31,9 @@ async function convertRecursive(dir: string): Promise<void> {
         let moduleSpecifier = importDeclaration.getModuleSpecifierValue();
         if (moduleSpecifier.startsWith('.')) {
           const moduleSourceFile = importDeclaration.getModuleSpecifierSourceFileOrThrow();
-          const relativePath = relative(srcDir, moduleSourceFile.getFilePath());
-          const matchedIndexDir = indexDirectories.find((indexDir) => relativePath.startsWith(indexDir));
-          if (matchedIndexDir) {
-            moduleSpecifier = `./${matchedIndexDir}/index.js`;
-          } else {
-            moduleSpecifier = `./${relativePath.replace(/(?:\.d)?\.ts$/, '.js')}`;
-          }
+          const relativePath = relative(srcDirectory, moduleSourceFile.getFilePath());
+          const matchedIndexDirectory = indexDirectories.find((indexDirectory) => relativePath.startsWith(indexDirectory));
+          moduleSpecifier = matchedIndexDirectory ? `./${matchedIndexDirectory}/index.js` : `./${relativePath.replace(/(?:\.d)?\.ts$/, '.js')}`;
         }
         const importedNames = importDeclaration.getNamedImports().map((namedImport) => namedImport.getName());
         if (!imports.has(moduleSpecifier)) {
@@ -50,7 +46,7 @@ async function convertRecursive(dir: string): Promise<void> {
 
       for (const module of sourceFile.getModules()) {
         const SRC_PREFIX_LENGTH = 20;
-        const path = sourceFile.getFilePath().slice(srcDir.length - SRC_PREFIX_LENGTH);
+        const path = sourceFile.getFilePath().slice(srcDirectory.length - SRC_PREFIX_LENGTH);
         for (const declaration of module.getFunctions()) {
           declaration.insertJsDoc(0, {
             tags: [{
@@ -77,16 +73,16 @@ async function convertRecursive(dir: string): Promise<void> {
         }
 
         augmentations.set(
-          augmentationsDirName,
-          `${augmentations.get(augmentationsDirName) ?? ''}${module.getBodyText() ?? ''}\n`
+          augmentationsDirectoryName,
+          `${augmentations.get(augmentationsDirectoryName) ?? ''}${module.getBodyText() ?? ''}\n`
         );
       }
     }
   }
 }
 
-const srcDir = join(process.cwd().replaceAll('\\', '/'), '../src');
-await convertRecursive(srcDir);
+const srcDirectory = join(process.cwd().replaceAll('\\', '/'), '../src');
+await convertRecursive(srcDirectory);
 
 // Start creating the final output file starting with the augmentations types as a base
 const typesSourceFile = project.addSourceFileAtPath('../src/obsidian/augmentations/index.d.ts');
@@ -96,7 +92,7 @@ for (const [moduleSpecifier, importedNames] of imports) {
   if (importedNames.size !== 1 || !importedNames.has('default')) {
     typesSourceFile.addImportDeclaration({
       moduleSpecifier,
-      namedImports: Array.from(importedNames).map((importedName) => ({
+      namedImports: [...importedNames].map((importedName) => ({
         name: importedName
       }))
     });
@@ -114,10 +110,10 @@ const augmentationsNamespace = augmentations.get('augmentations');
 augmentations.set('obsidian', (obsidianNamespace ?? '') + (augmentationsNamespace ?? ''));
 augmentations.delete('augmentations');
 
-for (const [augmentationsDirName, augmentation] of augmentations) {
-  const namespaceName = `_${augmentationsDirName.replace(/[^a-zA-Z0-9]/g, '_')}`;
-  const statements = augmentationsDirName === 'obsidian' ? `export * from 'obsidian';\n${augmentation}` : augmentation;
-  if (augmentationsDirName === 'obsidian') {
+for (const [augmentationsDirectoryName, augmentation] of augmentations) {
+  const namespaceName = `_${augmentationsDirectoryName.replaceAll(/[^a-zA-Z0-9]/g, '_')}`;
+  const statements = augmentationsDirectoryName === 'obsidian' ? `export * from 'obsidian';\n${augmentation}` : augmentation;
+  if (augmentationsDirectoryName === 'obsidian') {
     typesSourceFile.addModule({
       docs: [{
         tags: [{

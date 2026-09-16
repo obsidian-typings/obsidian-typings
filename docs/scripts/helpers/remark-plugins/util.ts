@@ -5,7 +5,7 @@ import type { Element } from 'hast';
  * required for remark-directive.
  */
 export function decorateHast(node: Element): void {
-  Object.assign(node.data ?? (node.data = { position: {} }), {
+  Object.assign(node.data ??= { position: {} }, {
     hName: node.tagName,
     hProperties: node.properties
   });

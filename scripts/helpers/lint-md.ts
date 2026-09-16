@@ -19,7 +19,9 @@ interface LintMdParams {
   readonly shouldFix?: boolean | undefined;
 }
 
-/* The git pathspec matching every markdown file in the repository, at any depth. */
+/*
+The git pathspec matching every markdown file in the repository, at any depth.
+*/
 const MARKDOWN_PATHSPEC = '*.md';
 
 export async function lintMd(params: LintMdParams): Promise<void> {
@@ -32,7 +34,7 @@ export async function lintMd(params: LintMdParams): Promise<void> {
      * Explicit paths are merged with the config `globs`, so without this an explicit path would still
      * re-expand the whole-tree markdown glob.
      */
-    ...(paths.length ? ['--no-globs'] : []),
+    ...(paths.length > 0 ? ['--no-globs'] : []),
     { batchedArguments: paths }
   ]);
 
@@ -40,7 +42,7 @@ export async function lintMd(params: LintMdParams): Promise<void> {
     return;
   }
 
-  const mdFiles = paths.length
+  const mdFiles = paths.length > 0
     ? paths
     : await getMarkdownFiles();
   await execFromRoot([
@@ -51,7 +53,7 @@ export async function lintMd(params: LintMdParams): Promise<void> {
      * cmd.exe metacharacters (`^`, `|`, parentheses) - they do not survive the shell on Windows.
      */
     '--skip',
-    'https://github\\.com/.+/stargazers$',
+    String.raw`https://github\.com/.+/stargazers$`,
     '--retry',
     '--retry-errors',
     '--retry-errors-count',
@@ -59,7 +61,7 @@ export async function lintMd(params: LintMdParams): Promise<void> {
     '--retry-errors-jitter',
     '5',
     '--url-rewrite-search',
-    'https://www\\.npmjs\\.com/package/',
+    String.raw`https://www\.npmjs\.com/package/`,
     '--url-rewrite-replace',
     'https://registry.npmjs.org/',
     { batchedArguments: mdFiles }
@@ -88,9 +90,9 @@ async function getMarkdownFiles(): Promise<string[]> {
 }
 
 async function toArray<T>(iter: AsyncIterableIterator<T>): Promise<T[]> {
-  const arr: T[] = [];
+  const array: T[] = [];
   for await (const item of iter) {
-    arr.push(item);
+    array.push(item);
   }
-  return arr;
+  return array;
 }

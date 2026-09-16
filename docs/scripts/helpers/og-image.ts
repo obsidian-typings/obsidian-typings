@@ -53,11 +53,11 @@ export function computeOgHash(params: OgImageParams): string {
   return createHash('sha256').update(input).digest('hex').slice(0, HASH_LENGTH);
 }
 
-export async function loadFonts(docsDir: string): Promise<Font[]> {
-  const fontsDir = `${docsDir}/assets/fonts`;
+export async function loadFonts(docsDirectory: string): Promise<Font[]> {
+  const fontsDirectory = `${docsDirectory}/assets/fonts`;
   const [regularData, boldData] = await Promise.all([
-    readFile(`${fontsDir}/inter-latin-400-normal.ttf`),
-    readFile(`${fontsDir}/inter-latin-700-normal.ttf`)
+    readFile(`${fontsDirectory}/inter-latin-400-normal.ttf`),
+    readFile(`${fontsDirectory}/inter-latin-700-normal.ttf`)
   ]);
 
   return [
@@ -66,8 +66,8 @@ export async function loadFonts(docsDir: string): Promise<Font[]> {
   ];
 }
 
-export async function loadLogoBase64(docsDir: string): Promise<string> {
-  const logoPath = `${docsDir}/assets/icon.png`;
+export async function loadLogoBase64(docsDirectory: string): Promise<string> {
+  const logoPath = `${docsDirectory}/assets/icon.png`;
   const logoData = await readFile(logoPath);
   return `data:image/png;base64,${logoData.toString('base64')}`;
 }

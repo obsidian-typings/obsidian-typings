@@ -47,7 +47,9 @@ export interface SidebarLink {
   link: string;
 }
 
-/** Recursive tree node for building the sidebar */
+/**
+Recursive tree node for building the sidebar
+*/
 export interface SidebarTreeNode {
   children: Map<string, SidebarTreeNode>;
   types: TypeInfo[];
@@ -61,7 +63,9 @@ export interface TypeInfo {
   baseTypes: string[];
   description: string;
   examples: string[];
-  /** For classes: types in the `implements` clause */
+  /**
+  For classes: types in the `implements` clause
+  */
   implementsTypes: string[];
   isOfficial: boolean;
   kind: 'class' | 'function' | 'interface' | 'variable';
@@ -71,9 +75,13 @@ export interface TypeInfo {
   properties: MemberInfo[];
   remarks: string;
   typeParameters: string[];
-  /** For variables: the declaration keyword (let/const/var) */
+  /**
+  For variables: the declaration keyword (let/const/var)
+  */
   variableKeyword?: string;
-  /** For variables: the type annotation */
+  /**
+  For variables: the type annotation
+  */
   variableType?: string;
 }
 

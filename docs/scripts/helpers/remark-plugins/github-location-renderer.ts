@@ -77,24 +77,24 @@ export function githubLocationRenderer(): (tree: Root) => void {
       }
       const href = nextSibling.children[0]?.children[0]?.url;
 
-      let prevHeading: null | SiblingNode = null;
-      for (let i = index - 1; i >= 0; i--) {
-        const sibling = parent.children[i] as SiblingNode;
+      let previousHeading: null | SiblingNode = null;
+      for (let index_ = index - 1; index_ >= 0; index_--) {
+        const sibling = parent.children[index_] as SiblingNode;
 
         if (
           (sibling.tagName === 'div' && sibling.properties?.className?.includes('object-signature'))
           || (sibling.type === 'heading' && (sibling.depth ?? 0) < headingNode.depth)
         ) {
-          prevHeading = sibling;
+          previousHeading = sibling;
           break;
         }
       }
 
       const githubIcon = loadGithubIcon();
 
-      if (prevHeading?.children) {
-        prevHeading.children.push(h('a', { class: 'code-location-icon', href }, [githubIcon]));
-        decorateHast(prevHeading as Element);
+      if (previousHeading?.children) {
+        previousHeading.children.push(h('a', { class: 'code-location-icon', href }, [githubIcon]));
+        decorateHast(previousHeading as Element);
         parent.children.splice(index, SPLICE_COUNT);
       } else {
         const containerNode = h('a', { class: 'code-location-text', href }, [githubIcon, {

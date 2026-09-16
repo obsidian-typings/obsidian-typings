@@ -16,7 +16,7 @@ interface NanoStagedContext {
   filenames: string[];
 }
 
-type NanoStagedHandler = (ctx: NanoStagedContext) => string[];
+type NanoStagedHandler = (context: NanoStagedContext) => string[];
 
 const BATCH_SIZE = 30;
 
@@ -58,8 +58,8 @@ export const config = getNanoStagedConfig();
 
 function batch(filenames: string[]): string[][] {
   const result: string[][] = [];
-  for (let i = 0; i < filenames.length; i += BATCH_SIZE) {
-    result.push(filenames.slice(i, i + BATCH_SIZE));
+  for (let index = 0; index < filenames.length; index += BATCH_SIZE) {
+    result.push(filenames.slice(index, index + BATCH_SIZE));
   }
   return result;
 }

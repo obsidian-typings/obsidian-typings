@@ -54,11 +54,11 @@ import { resolveInheritedMembers } from './helpers/api-doc-type-merging.ts';
 async function main(): Promise<void> {
   loadExternalTypeMaps();
 
-  const rootDir = process.env['TYPINGS_ROOT'] ?? resolve(process.cwd(), '..');
-  const srcDir = join(rootDir, 'src');
+  const rootDirectory = process.env['TYPINGS_ROOT'] ?? resolve(process.cwd(), '..');
+  const srcDirectory = join(rootDirectory, 'src');
 
   // Check cache — skip generation if nothing changed
-  const currentHash = computeCacheHash(srcDir);
+  const currentHash = computeCacheHash(srcDirectory);
   if (existsSync(CACHE_FILE) && readFileSync(CACHE_FILE, 'utf-8').trim() === currentHash) {
     console.warn('Source files and generator unchanged — skipping generation.');
     return;
@@ -67,7 +67,7 @@ async function main(): Promise<void> {
   const project = new Project({ skipAddingFilesFromTsConfig: true });
 
   // Load official obsidian.d.ts for merging
-  const obsidianPath = join(rootDir, 'node_modules/obsidian/obsidian.d.ts');
+  const obsidianPath = join(rootDirectory, 'node_modules/obsidian/obsidian.d.ts');
   let obsidianSrc: SourceFile | undefined;
   try {
     obsidianSrc = project.addSourceFileAtPath(obsidianPath);
@@ -83,25 +83,25 @@ async function main(): Promise<void> {
   }
 
   // Walk all source .d.ts files
-  const dtsFiles = findDtsFiles(srcDir);
+  const dtsFiles = findDtsFiles(srcDirectory);
   console.warn(`Found ${String(dtsFiles.length)} source .d.ts files`);
 
   for (const filePath of dtsFiles) {
-    const relPath = relative(srcDir, filePath).replace(/\\/g, '/');
-    const dirPath = dirname(relPath);
+    const relativePath = relative(srcDirectory, filePath).replaceAll('\\', '/');
+    const directoryPath = dirname(relativePath);
     const src = project.addSourceFileAtPath(filePath);
 
     // Check if file contains module declarations (augmentations)
     const modules = src.getModules();
     if (modules.length > 0) {
-      for (const mod of modules) {
-        processModuleDeclaration(mod, types, false, dirPath);
+      for (const module_ of modules) {
+        processModuleDeclaration(module_, types, false, directoryPath);
       }
     }
 
     // Process top-level exports (internals, standalone types)
-    processSourceFile(src, types, false, dirPath);
-    collectFunctions(src, types, false, dirPath);
+    processSourceFile(src, types, false, directoryPath);
+    collectFunctions(src, types, false, directoryPath);
   }
 
   resolveInheritedMembers(types);

@@ -34,184 +34,190 @@ import {
 } from './api-doc-type-merging.ts';
 
 export function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOfficial: boolean, namespace: string): void {
-  for (const fn of src.getFunctions()) {
-    const name = fn.getName();
+  for (const function_ of src.getFunctions()) {
+    const name = function_.getName();
     if (!name || types.has(name)) {
       continue;
     }
-    const paramDescriptions = getParamDescriptions(fn);
-    const params = fn.getParameters().map((p) => ({
+    const paramDescriptions = getParamDescriptions(function_);
+    const params = function_.getParameters().map((p) => ({
       description: paramDescriptions.get(p.getName()) ?? '',
       name: p.getName(),
       type: simplifyType(p.getType().getText())
     }));
-    const paramStr = params.map((p) => `${p.name}: ${p.type}`).join(', ');
-    const returnType = simplifyType(fn.getReturnType().getText());
-    const signature = `${name}(${paramStr})`;
+    const paramString = params.map((p) => `${p.name}: ${p.type}`).join(', ');
+    const returnType = simplifyType(function_.getReturnType().getText());
+    const signature = `${name}(${paramString})`;
     // Store function as a type with a single method representing the function call
     types.set(name, {
       baseTypes: [],
-      description: getDescription(fn),
-      examples: getExamples(fn),
+      description: getDescription(function_),
+      examples: getExamples(function_),
       implementsTypes: [],
-      isOfficial: checkIsOfficial(fn, isOfficial),
+      isOfficial: checkIsOfficial(function_, isOfficial),
       kind: 'function',
       methods: [{
-        description: getDescription(fn),
-        examples: getExamples(fn),
+        description: getDescription(function_),
+        examples: getExamples(function_),
         inheritedFrom: '',
-        isOfficial: checkIsOfficial(fn, isOfficial),
+        isOfficial: checkIsOfficial(function_, isOfficial),
         isStatic: false,
         name,
         overloadKey: name,
         parameters: params,
-        remarks: getRemarks(fn),
-        returnDescription: getReturnDescription(fn),
+        remarks: getRemarks(function_),
+        returnDescription: getReturnDescription(function_),
         returnType,
         signature,
-        since: getSince(fn),
+        since: getSince(function_),
         type: ''
       }],
       name,
       namespace,
       properties: [],
-      remarks: getRemarks(fn),
-      typeParameters: fn.getTypeParameters().map((tp) => tp.getText())
+      remarks: getRemarks(function_),
+      typeParameters: function_.getTypeParameters().map((tp) => tp.getText())
     });
   }
 }
 
-/** Collect functions declared inside module declarations */
+/**
+Collect functions declared inside module declarations
+*/
 export function collectModuleFunctions(
-  mod: ReturnType<SourceFile['getModules']>[number],
+  module_: ReturnType<SourceFile['getModules']>[number],
   types: Map<string, TypeInfo>,
   isOfficial: boolean,
   namespace: string
 ): void {
-  for (const fn of mod.getFunctions()) {
-    const name = fn.getName();
+  for (const function_ of module_.getFunctions()) {
+    const name = function_.getName();
     if (!name || types.has(name)) {
       continue;
     }
-    const paramDescriptions = getParamDescriptions(fn);
-    const params = fn.getParameters().map((p) => ({
+    const paramDescriptions = getParamDescriptions(function_);
+    const params = function_.getParameters().map((p) => ({
       description: paramDescriptions.get(p.getName()) ?? '',
       name: p.getName(),
       type: simplifyType(p.getType().getText())
     }));
-    const paramStr = params.map((p) => `${p.name}: ${p.type}`).join(', ');
-    const returnType = simplifyType(fn.getReturnType().getText());
-    const signature = `${name}(${paramStr})`;
+    const paramString = params.map((p) => `${p.name}: ${p.type}`).join(', ');
+    const returnType = simplifyType(function_.getReturnType().getText());
+    const signature = `${name}(${paramString})`;
     types.set(name, {
       baseTypes: [],
-      description: getDescription(fn),
-      examples: getExamples(fn),
+      description: getDescription(function_),
+      examples: getExamples(function_),
       implementsTypes: [],
-      isOfficial: checkIsOfficial(fn, isOfficial),
+      isOfficial: checkIsOfficial(function_, isOfficial),
       kind: 'function',
       methods: [{
-        description: getDescription(fn),
-        examples: getExamples(fn),
+        description: getDescription(function_),
+        examples: getExamples(function_),
         inheritedFrom: '',
-        isOfficial: checkIsOfficial(fn, isOfficial),
+        isOfficial: checkIsOfficial(function_, isOfficial),
         isStatic: false,
         name,
         overloadKey: name,
         parameters: params,
-        remarks: getRemarks(fn),
-        returnDescription: getReturnDescription(fn),
+        remarks: getRemarks(function_),
+        returnDescription: getReturnDescription(function_),
         returnType,
         signature,
-        since: getSince(fn),
+        since: getSince(function_),
         type: ''
       }],
       name,
       namespace,
       properties: [],
-      remarks: getRemarks(fn),
-      typeParameters: fn.getTypeParameters().map((tp) => tp.getText())
+      remarks: getRemarks(function_),
+      typeParameters: function_.getTypeParameters().map((tp) => tp.getText())
     });
   }
 }
 
-/** Collect variable declarations (e.g., const Platform__, let apiVersion__) */
+/**
+Collect variable declarations (e.g., const Platform__, let apiVersion__)
+*/
 export function collectModuleVariables(
-  mod: ReturnType<SourceFile['getModules']>[number],
+  module_: ReturnType<SourceFile['getModules']>[number],
   types: Map<string, TypeInfo>,
   isOfficial: boolean,
   namespace: string
 ): void {
-  for (const varStmt of mod.getVariableStatements()) {
-    const declKind = varStmt.getDeclarationKind();
-    for (const decl of varStmt.getDeclarations()) {
-      const rawName = decl.getName();
+  for (const variableStatement of module_.getVariableStatements()) {
+    const declarationKind = variableStatement.getDeclarationKind();
+    for (const declaration of variableStatement.getDeclarations()) {
+      const rawName = declaration.getName();
       const name = rawName.replace(/__$/, '');
       if (!name || types.has(name)) {
         continue;
       }
-      const varType = simplifyType(decl.getType().getText());
+      const variableType = simplifyType(declaration.getType().getText());
       types.set(name, {
         baseTypes: [],
-        description: getDescription(varStmt),
-        examples: getExamples(varStmt),
+        description: getDescription(variableStatement),
+        examples: getExamples(variableStatement),
         implementsTypes: [],
-        isOfficial: checkIsOfficial(varStmt, isOfficial),
+        isOfficial: checkIsOfficial(variableStatement, isOfficial),
         kind: 'variable',
         methods: [],
         name,
         namespace,
         properties: [],
-        remarks: getRemarks(varStmt),
+        remarks: getRemarks(variableStatement),
         typeParameters: [],
-        variableKeyword: declKind,
-        variableType: varType
+        variableKeyword: declarationKind,
+        variableType
       });
     }
   }
 }
 
-/** Collect static functions from namespace declarations (e.g., namespace App { function getOverrideConfigDir(...) }) */
+/**
+Collect static functions from namespace declarations (e.g., namespace App { function getOverrideConfigDir(...) })
+*/
 export function collectNamespaceStaticFunctions(
-  mod: ReturnType<SourceFile['getModules']>[number],
+  module_: ReturnType<SourceFile['getModules']>[number],
   types: Map<string, TypeInfo>,
   isOfficial: boolean
 ): void {
-  for (const nestedNs of mod.getModules()) {
+  for (const nestedNs of module_.getModules()) {
     const nsName = nestedNs.getName();
     const parentType = types.get(nsName);
     if (!parentType) {
       continue;
     }
-    for (const fn of nestedNs.getFunctions()) {
-      const fnName = fn.getName();
-      if (!fnName) {
+    for (const function_ of nestedNs.getFunctions()) {
+      const functionName = function_.getName();
+      if (!functionName) {
         continue;
       }
-      const paramDescriptions = getParamDescriptions(fn);
-      const params = fn.getParameters().map((p) => ({
+      const paramDescriptions = getParamDescriptions(function_);
+      const params = function_.getParameters().map((p) => ({
         description: paramDescriptions.get(p.getName()) ?? '',
         name: p.getName(),
         type: simplifyType(p.getType().getText())
       }));
-      const paramStr = params.map((p) => `${p.name}: ${p.type}`).join(', ');
-      const returnType = simplifyType(fn.getReturnType().getText());
-      const signature = `${fnName}(${paramStr})`;
-      const existing = parentType.methods.find((m) => m.name === fnName);
-      if (!existing) {
+      const paramString = params.map((p) => `${p.name}: ${p.type}`).join(', ');
+      const returnType = simplifyType(function_.getReturnType().getText());
+      const signature = `${functionName}(${paramString})`;
+      const hasExisting = parentType.methods.some((m) => m.name === functionName);
+      if (!hasExisting) {
         parentType.methods.push({
-          description: getDescription(fn),
-          examples: getExamples(fn),
+          description: getDescription(function_),
+          examples: getExamples(function_),
           inheritedFrom: '',
-          isOfficial: checkIsOfficial(fn, isOfficial),
+          isOfficial: checkIsOfficial(function_, isOfficial),
           isStatic: true,
-          name: fnName,
-          overloadKey: fnName,
+          name: functionName,
+          overloadKey: functionName,
           parameters: params,
-          remarks: getRemarks(fn),
-          returnDescription: getReturnDescription(fn),
+          remarks: getRemarks(function_),
+          returnDescription: getReturnDescription(function_),
           returnType,
           signature: `static ${signature}`,
-          since: getSince(fn),
+          since: getSince(function_),
           type: ''
         });
       }
@@ -219,8 +225,10 @@ export function collectNamespaceStaticFunctions(
   }
 }
 
-/** Compute a hash of all source files + the generator script itself */
-export function computeCacheHash(srcDir: string): string {
+/**
+Compute a hash of all source files + the generator script itself
+*/
+export function computeCacheHash(srcDirectory: string): string {
   const hash = createHash('sha256');
 
   // Hash the generator script itself
@@ -228,16 +236,16 @@ export function computeCacheHash(srcDir: string): string {
   hash.update(readFileSync(generatorPath, 'utf-8'));
 
   // Hash all helper modules
-  const rootDir = resolve(import.meta.dirname, '..', '..', '..');
-  const helperFiles = globSync('docs/scripts/helpers/api-doc-*.ts', { cwd: rootDir }).sort();
+  const rootDirectory = resolve(import.meta.dirname, '..', '..', '..');
+  const helperFiles = globSync('docs/scripts/helpers/api-doc-*.ts', { cwd: rootDirectory }).sort();
   for (const helperFile of helperFiles) {
-    const fullPath = resolve(rootDir, helperFile);
+    const fullPath = resolve(rootDirectory, helperFile);
     hash.update(fullPath);
     hash.update(readFileSync(fullPath, 'utf-8'));
   }
 
   // Hash all source .d.ts files
-  const dtsFiles = findDtsFiles(srcDir).sort();
+  const dtsFiles = findDtsFiles(srcDirectory).sort();
   for (const filePath of dtsFiles) {
     hash.update(filePath);
     hash.update(readFileSync(filePath, 'utf-8'));
@@ -246,14 +254,16 @@ export function computeCacheHash(srcDir: string): string {
   return hash.digest('hex');
 }
 
-/** Recursively find all .d.ts and .ts source files under a directory */
-export function findDtsFiles(dir: string): string[] {
+/**
+Recursively find all .d.ts and .ts source files under a directory
+*/
+export function findDtsFiles(directory: string): string[] {
   const results: string[] = [];
   const tsFiles: string[] = [];
   const dtsNames = new Set<string>();
 
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    const fullPath = join(dir, entry.name);
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const fullPath = join(directory, entry.name);
     if (entry.isDirectory()) {
       results.push(...findDtsFiles(fullPath));
     } else if (entry.name.endsWith('.d.ts') && entry.name !== 'index.d.ts') {
@@ -276,12 +286,12 @@ export function findDtsFiles(dir: string): string[] {
 }
 
 export function processModuleDeclaration(
-  mod: ReturnType<SourceFile['getModules']>[number],
+  module_: ReturnType<SourceFile['getModules']>[number],
   types: Map<string, TypeInfo>,
   isOfficial: boolean,
   namespace: string
 ): void {
-  for (const alias of mod.getTypeAliases()) {
+  for (const alias of module_.getTypeAliases()) {
     const name = alias.getName();
     if (!types.has(name)) {
       types.set(name, {
@@ -301,7 +311,7 @@ export function processModuleDeclaration(
     }
   }
 
-  for (const iface of mod.getInterfaces()) {
+  for (const iface of module_.getInterfaces()) {
     const name = iface.getName();
     if (types.has(name)) {
       const existing = types.get(name);
@@ -313,7 +323,7 @@ export function processModuleDeclaration(
       types.set(name, extractInterfaceInfo(iface, isOfficial, namespace));
     }
   }
-  for (const cls of mod.getClasses()) {
+  for (const cls of module_.getClasses()) {
     const name = cls.getName();
     if (!name) {
       continue;
@@ -329,9 +339,9 @@ export function processModuleDeclaration(
     }
   }
 
-  collectModuleFunctions(mod, types, isOfficial, namespace);
-  collectNamespaceStaticFunctions(mod, types, isOfficial);
-  collectModuleVariables(mod, types, isOfficial, namespace);
+  collectModuleFunctions(module_, types, isOfficial, namespace);
+  collectNamespaceStaticFunctions(module_, types, isOfficial);
+  collectModuleVariables(module_, types, isOfficial, namespace);
 }
 
 export function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>, isOfficial: boolean, namespace: string): void {
@@ -355,13 +365,13 @@ export function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>,
       });
     }
   }
-  for (const enumDecl of src.getEnums()) {
-    const name = enumDecl.getName();
+  for (const enumDeclaration of src.getEnums()) {
+    const name = enumDeclaration.getName();
     if (!types.has(name)) {
       types.set(name, {
         baseTypes: [],
-        description: getDescription(enumDecl),
-        examples: getExamples(enumDecl),
+        description: getDescription(enumDeclaration),
+        examples: getExamples(enumDeclaration),
         implementsTypes: [],
         isOfficial,
         kind: 'interface',
@@ -369,7 +379,7 @@ export function processSourceFile(src: SourceFile, types: Map<string, TypeInfo>,
         name,
         namespace,
         properties: [],
-        remarks: getRemarks(enumDecl),
+        remarks: getRemarks(enumDeclaration),
         typeParameters: []
       });
     }

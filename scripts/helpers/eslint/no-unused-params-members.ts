@@ -154,10 +154,10 @@ function classifyReference(reference: object, usage: InterfaceUsage): void {
 }
 
 function collectMemberAccess(node: Rule.Node, usage: InterfaceUsage): void {
-  const computed = record(node)['computed'] === true;
+  const isComputed = record(node)['computed'] === true;
   const property = record(node)['property'] as Rule.Node;
   if (property.type === 'Identifier') {
-    if (!computed) {
+    if (!isComputed) {
       usage.used.add(record(property)['name'] as string);
     }
     return;

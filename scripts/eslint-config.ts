@@ -10,6 +10,8 @@ import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescrip
 import astro from 'eslint-plugin-astro';
 import { flatConfigs as eslintPluginImportXFlatConfigs } from 'eslint-plugin-import-x';
 import { configs as perfectionistConfigs } from 'eslint-plugin-perfectionist';
+// eslint-disable-next-line import-x/no-rename-default -- The default export name `plugin` is too confusing.
+import unicorn from 'eslint-plugin-unicorn';
 import { defineConfig } from 'eslint/config';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path/posix';
@@ -34,6 +36,7 @@ export const config: Linter.Config[] = defineConfig(
   ...getStylisticConfigs(),
   ...getImportXConfigs(),
   ...getPerfectionistConfigs(),
+  ...getUnicornConfigs(),
   ...getEslintImportResolverTypescriptConfigs(),
   ...getEslintCommentsConfigs(),
   ...getDocsOverrideConfigs()
@@ -570,6 +573,193 @@ function getTseslintConfigs(): Linter.Config[] {
         react: {
           version: 'detect'
         }
+      }
+    }
+  ]);
+}
+
+function getUnicornConfigs(): Linter.Config[] {
+  return defineConfig([
+    {
+      extends: [unicorn.configs.recommended],
+      files: typeScriptFiles,
+      rules: {
+        'unicorn/consistent-boolean-name': [
+          'error',
+          {
+            prefixes: {
+              allows: true,
+              check: true,
+              contains: true,
+              does: true,
+              includes: true,
+              must: true,
+              needs: true,
+              supports: true
+            }
+          }
+        ],
+        /*
+         * `node:path` members are imported by name throughout this repo, consistently with every other `node:`
+         * module it uses. Configure the rule to enforce the style actually in use rather than annotate 8 sites
+         * that are not going to change.
+         */
+        'unicorn/import-style': [
+          'error',
+          {
+            styles: {
+              // Keyed by the UNPREFIXED module name: the rule's own table uses `path`, so a `node:path` key never matches.
+              path: {
+                named: true
+              }
+            }
+          }
+        ],
+        /*
+         * The default of 3 reports the ordinary root-resolution idiom this repo opens its scripts with:
+         * `dirname(dirname(toPosixPath(fileURLToPath(import.meta.url))))` is four deep and appears in five
+         * scripts. Raising the limit by one clears every report here while still catching genuinely
+         * unreadable nesting.
+         */
+        'unicorn/max-nested-calls': [
+          'error',
+          {
+            max: 4
+          }
+        ],
+        'unicorn/name-replacements': [
+          'error',
+          {
+            /*
+             * Property names are checked too, so an abbreviation cannot survive by living on an object.
+             *
+             * The entries below are this repo's established vocabulary, not abbreviations to be expanded:
+             *
+             * - `doc` / `docs` name the thing this repo builds. The whole `docs/` tree, the `docsDir` paths and
+             *   the npm scripts all spell it that way, and expanding it picks the wrong word anyway: the
+             *   `api-doc-*` modules generate API *documentation*, not documents.
+             * - `param` / `params` is the parameter-bag convention, and it is load-bearing rather than stylistic:
+             *   the local `readonly-params-options-result-members` rule matches interface names ending `Params`,
+             *   so expanding the word would silently take every bag out of that rule's scope.
+             * - `prop` / `props` is the component and TypeScript-property vocabulary the generator is written in.
+             * - `src` names the `src/` folder; `attr` / `attrs` and `desc` name the HTML attributes the generator
+             *   emits; `ref` / `refs` reads as a pair with the API surface it documents.
+             * - `dev` is Astro's own: `devToolbar` is a key in its config type, and `dev` / `dev-setup` are npm
+             *   script names. Only the `direction` expansion of `dir` is dropped -- every `dir` here is a
+             *   filesystem directory -- so `dir` itself still expands to `directory`.
+             */
+            checkProperties: true,
+            replacements: {
+              attr: false,
+              attrs: false,
+              desc: false,
+              dev: false,
+              dir: {
+                direction: false
+              },
+              doc: false,
+              docs: false,
+              env: false,
+              param: false,
+              params: false,
+              prop: false,
+              props: false,
+              ref: false,
+              refs: false,
+              src: false,
+              util: false,
+              utils: false
+            }
+          }
+        ],
+        /*
+         * `.sort()` here always runs on an array the surrounding function just built, so the mutation the rule
+         * warns about reaches nobody -- but proving that at each of the 11 sites is the whole cost, and this
+         * branch carries no test suite to catch a site where it is not true. Off rather than half-checked; the
+         * shared config in `obsidian-dev-utils` reaches the same answer.
+         */
+        'unicorn/no-array-sort': 'off',
+        'unicorn/no-break-in-nested-loop': 'off',
+        /*
+         * `null` is the not-found sentinel these helpers are built on -- `getRootFolder(): null | string`,
+         * `detectPackageManagerFromPackageJson(): null | PackageManager` -- and several of them are copies
+         * shared with sibling repos that spell it the same way. Swapping 25 sites to `undefined` would change
+         * the published shape of the helpers and diverge the copies at the same time.
+         */
+        'unicorn/no-null': 'off',
+        'unicorn/no-top-level-assignment-in-function': 'off',
+        /*
+         * The only shape it reports here is `const [, , ...rest] = process.argv`, the argv idiom seven script
+         * entry points open with. Its fix rewrites that to `process.argv.slice(2)`, which trades a named skip
+         * for a bare `2` -- and this config runs `no-magic-numbers` with `ignore: [-1, 0, 1]`, so the autofix
+         * only moves the report from one rule to another. Off, as the shared config also has it.
+         */
+        'unicorn/no-unreadable-array-destructuring': 'off',
+        'unicorn/no-unreadable-for-of-expression': 'off',
+        'unicorn/prefer-array-from-async': 'off',
+        'unicorn/prefer-iterator-to-array': 'off',
+        'unicorn/prefer-number-coercion': 'off',
+        'unicorn/prefer-simple-condition-first': 'off',
+        /*
+         * Unsatisfiable alongside `perfectionist/sort-union-types`, which this config takes from
+         * `recommended-alphabetical` as a plain alphabetical sort. This rule wants object type literals last;
+         * the sort wants them wherever the alphabet puts them. Measured rather than assumed: with this rule on
+         * and unfixed, perfectionist reports 0 and this rule reports 66; after its autofix the two counts swap
+         * exactly, 66 to 0. Both are `error` and neither concedes, so no arrangement of those 66 unions
+         * satisfies both. The alphabetical sort is the incumbent, so it keeps precedence.
+         */
+        'unicorn/prefer-type-literal-last': 'off',
+        'unicorn/require-array-sort-compare': 'off',
+        // Every one of the 22 sites already spells it `utf-8`, which is also what the shared config asks for.
+        'unicorn/text-encoding-identifier-case': [
+          'error',
+          {
+            withDash: true
+          }
+        ]
+      }
+    },
+    {
+      /*
+       * The build, lint, format and docs scripts are CLI entry points whose exit status IS their interface --
+       * the same reason `no-console` is relaxed for them above.
+       */
+      files: ['scripts/**/*.ts', 'docs/scripts/**/*.ts'],
+      rules: {
+        'unicorn/no-process-exit': 'off'
+      }
+    },
+    {
+      /*
+       * These modules walk `hast` trees, not the DOM. A hast element has `children` and no `firstElementChild`,
+       * so the rule's advice does not compile here.
+       */
+      files: ['docs/scripts/helpers/remark-plugins/**/*.ts'],
+      rules: {
+        'unicorn/better-dom-traversing': 'off'
+      }
+    },
+    {
+      /*
+       * An Astro component's declaration file has to carry the component's own name -- `LinkCardIcon.astro.d.ts`
+       * declares `LinkCardIcon.astro` -- so kebab-casing it would break the pairing Astro resolves by.
+       */
+      files: ['**/*.astro.d.ts'],
+      rules: {
+        'unicorn/filename-case': 'off'
+      }
+    },
+    {
+      /*
+       * This file names almost nothing of its own: its object keys are other tools' option names.
+       * `tsconfigRootDir` belongs to the `typescript-eslint` parser, `args` / `argsIgnorePattern` /
+       * `varsIgnorePattern` to `@typescript-eslint/no-unused-vars`, and `dir` is a key in this very rule's own
+       * `replacements` bag. Renaming any of them would not rename the thing being configured; it would just
+       * stop configuring it.
+       */
+      files: ['scripts/eslint-config.ts'],
+      rules: {
+        'unicorn/name-replacements': 'off'
       }
     }
   ]);
