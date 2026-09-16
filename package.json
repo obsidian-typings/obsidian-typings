@@ -43,7 +43,8 @@
     "lint:md": "jiti scripts/lint-md.ts",
     "lint:md:fix": "jiti scripts/lint-md-fix.ts",
     "prepare": "jiti scripts/prepare.ts",
-    "spellcheck": "jiti scripts/spellcheck.ts"
+    "spellcheck": "jiti scripts/spellcheck.ts",
+    "typecheck": "jiti scripts/typecheck.ts"
   },
   "overrides": {
     "eslint": "$eslint",

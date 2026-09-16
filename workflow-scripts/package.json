@@ -29,6 +29,8 @@
   "type": "module",
   "scripts": {
     "format": "jiti scripts/format.ts",
-    "lint:fix": "jiti scripts/lint-fix.ts"
+    "lint": "jiti scripts/lint.ts",
+    "lint:fix": "jiti scripts/lint-fix.ts",
+    "typecheck": "jiti scripts/typecheck.ts"
   }
 }
