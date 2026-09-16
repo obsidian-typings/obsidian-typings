@@ -22,6 +22,7 @@
  * can leave the checkout on `main`, where it dies with `Missing script: "release"`.
  */
 
+import { once } from 'node:events';
 import process from 'node:process';
 import { createInterface } from 'node:readline/promises';
 
@@ -101,13 +102,30 @@ export async function offerRelease(branchSpec: BranchSpec, packageName: string):
   return true;
 }
 
-/** Reads one line from the terminal and reports whether it is a yes. */
+/**
+ * Reads one line from the terminal and reports whether it is a yes.
+ *
+ * The question is written directly rather than handed to `question()`, which echoes its prompt only when
+ * readline decides it is driving a terminal -- and it decides that from `output.isTTY`. Redirect this
+ * script's stdout to a file or a pager and the prompt silently disappears while the script still waits for a
+ * line, which is indistinguishable from a hang. Writing it ourselves makes the question unconditional.
+ */
 async function askYesNo(question: string): Promise<boolean> {
   const readlineInterface = createInterface({ input: process.stdin, output: process.stdout });
 
   try {
-    const answer = await readlineInterface.question(question);
-    return YES_ANSWERS.has(answer.trim().toLowerCase());
+    process.stdout.write(question);
+
+    // Ctrl+D closes the stream out from under the pending question, and `question()` then settles NEITHER
+    // way -- measured 2026-09-15: the process ends on Node's `Detected unsettled top-level await` warning
+    // with nothing printed, which reads as a hang at the very last step of the hand-back. Racing the
+    // interface's own `close` turns that into the decline it is.
+    const answer = await Promise.race([
+      readlineInterface.question(''),
+      once(readlineInterface, 'close').then(() => null)
+    ]);
+
+    return answer !== null && YES_ANSWERS.has(answer.trim().toLowerCase());
   } finally {
     readlineInterface.close();
   }
