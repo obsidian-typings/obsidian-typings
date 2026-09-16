@@ -22,7 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      # `npm ci` runs `prepare`, which installs husky. A runner has no commits to hook.
+      # The ROOT `npm ci` runs a `prepare` that installs husky. A runner has no commits to hook.
+      # (`docs`' own `prepare` runs `astro sync` and is not affected by this.)
       HUSKY: '0'
     steps:
       - name: Checkout
@@ -48,18 +49,19 @@ jobs:
       # `npm run lint` at the root reaches `docs/` too: that tree has no `eslint.config.mts` of its
       # own, so the nearest config to its files is the root one, which names `docs/**/*.ts` and
       # carries three dedicated override blocks. Typed linting there resolves through this install.
-      - name: Install docs dependencies
-        run: npm ci
-        working-directory: ./docs
-
-      # `docs/src/env.d.ts` imports `docs/.astro/types.d.ts`, which Astro generates and `.gitignore`
-      # hides. Without it the root `lint` fails with 12 errors on a clean checkout -- one
+      #
+      # It also GENERATES the types every gate below needs, which is why it carries the `id` they
+      # read: `docs/package.json` has a `prepare` script running `astro sync`, and npm runs `prepare`
+      # on `npm ci`. `docs/src/env.d.ts` imports `docs/.astro/types.d.ts`, which Astro generates and
+      # `.gitignore` hides. Without it the root `lint` fails with 12 errors on a clean checkout -- one
       # `import-x/no-unresolved`, then 11 `no-unsafe-*` in `route-middleware.ts`, which loses its
-      # types and degrades to `any`. This is `astro build`'s implicit first step, run on its own: the
-      # full docs build needs ~21 GB and OOM-kills this runner size (see build-pages.yml).
-      - name: Generate Astro types
+      # types and degrades to `any`. `astro sync` is `astro build`'s implicit first step run on its
+      # own (~20 s of this install's ~80): the full docs build needs ~21 GB and OOM-kills this runner
+      # size (see build-pages.yml). A dedicated step here would run it a second time and leave a
+      # contributor's fresh clone -- which gets it from the same install -- with nothing to copy.
+      - name: Install docs dependencies
         id: prepare
-        run: npx astro sync
+        run: npm ci
         working-directory: ./docs
 
       # Every gate runs even after an earlier one fails, so one push reports every problem it has
@@ -107,7 +109,8 @@ jobs:
       # `tsconfig.json` names `docs` in its `exclude`. This is `astro check`, not `tsc --noEmit` --
       # it resolves `.astro` imports, checks the `.astro` components themselves, and stays quiet
       # about Starlight's own `.ts` sources, which `skipLibCheck` does not cover. It re-runs the
-      # sync above as its own first step, which costs seconds and keeps the script usable alone.
+      # sync the install above performed, as its own first step: it costs seconds and keeps the
+      # script usable on its own.
       - name: Typecheck docs
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         run: npm run typecheck

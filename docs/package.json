@@ -7,6 +7,7 @@
     "clean": "jiti scripts/clean.ts",
     "dev": "jiti scripts/dev.ts",
     "dev:setup": "jiti scripts/dev-setup.ts",
+    "prepare": "jiti scripts/prepare.ts",
     "preview": "jiti scripts/preview.ts",
     "setup": "jiti scripts/setup.ts",
     "typecheck": "jiti scripts/typecheck.ts"
