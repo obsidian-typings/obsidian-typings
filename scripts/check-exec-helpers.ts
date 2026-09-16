@@ -30,6 +30,13 @@
  * across batches. Until 2026-09-16 `exec` quoted a batched command's static parts and interpolated its
  * batched ones raw, so a batched argument bearing a space became two arguments; the split form needs its own
  * case because two of the three sites that built those command lines run only once the budget is exceeded.
+ *
+ * The batched set carries an **embedded newline** for a reason the unbatched one does not: a command line
+ * holding a newline is spawned directly rather than through `cmd.exe`, and until 2026-09-16 the batched path
+ * was the only caller of `execString` that passed no argument array to spawn from - so that argument threw on
+ * Windows, advising a fix the batched surface cannot apply. It is therefore the one case whose batched shape
+ * takes a different code path from its unbatched one, and in the split form it takes both: the batch holding it
+ * is spawned directly while the rest still go through the shell.
  */
 
 import {
@@ -446,8 +453,13 @@ function buildPaddingArguments(): string[] {
 
 /*
  * Runs the echo script over `batchedArguments` and returns one `process.argv` list per batch `exec` actually
- * spawned - one line of output per batch, joined with a newline, which is why no case below puts a newline in
- * a batched argument.
+ * spawned - one line of output per batch, joined with a newline.
+ *
+ * A newline *inside* an argument does not disturb that split, though this comment claimed it did until
+ * 2026-09-16: the echo script prints `JSON.stringify`, which escapes a newline rather than emitting one, so a
+ * batch is exactly one line whatever its arguments hold. The claim mattered because it was the second reason
+ * given for keeping a newline out of the batched set, and unlike the first it was never true - so fixing only
+ * the real obstacle would have left a note here still forbidding the case.
  */
 async function execBatchedEchoArgv(echoScriptPath: string, batchedArguments: string[]): Promise<string[][]> {
   const stdout = await execFromRoot([process.execPath, echoScriptPath, { batchedArguments }], { isQuiet: true });
@@ -455,16 +467,19 @@ async function execBatchedEchoArgv(echoScriptPath: string, batchedArguments: str
 }
 
 /*
- * The batched half of the cases the quoters cover, minus the embedded newline: a batched command is handed to
- * the shell as a command line with no argument array beside it, and `spawnViaShell` refuses a newline on
- * Windows without one. Everything else that broke when these were interpolated raw is here - a space, a
- * quote, `cmd.exe` and `sh` metacharacters, backslashes, and the empty argument the shell drops entirely.
+ * The batched half of the cases the quoters cover - a space, a quote, `cmd.exe` and `sh` metacharacters,
+ * backslashes, the empty argument the shell drops entirely, and the embedded newline that was the one
+ * exclusion until 2026-09-16. The exclusion was real while it lasted: a batched command was handed to the
+ * shell as a command line with no argument array beside it, and `spawnViaShell` refuses a newline on Windows
+ * without one. Now that the batched path threads that array like every other array-shaped call, the newline is
+ * the most valuable case in this list rather than the missing one - see the header above.
  */
 function getBatchedTrickyArguments(): string[] {
   return [
     String.raw`C:\Program Files` + BACKSLASH,
     'say "hi"',
     'a & b | c',
+    'line1\nline2',
     String.raw`C:\dir\subdir`,
     'a&b',
     'two words',

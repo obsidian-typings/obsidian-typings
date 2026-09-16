@@ -33,6 +33,12 @@ export interface ExecArgument {
    * counted against {@link getMaxCommandLength} and the string handed to the shell stay the same one. Quoting
    * is not the only layer between those two, though, which is why the budget is spent through
    * {@link getShellCommandLineLength} rather than against a raw `.length`.
+   *
+   * An argument bearing a **newline** is carried like any other, on both platforms. It threw on Windows until
+   * 2026-09-16: `cmd.exe` cannot carry a newline, and the escape hatch for that -- spawning the program
+   * directly from the argument array rather than through the shell -- was reachable only from a caller that
+   * passed one, which the batched branch was alone in not doing. See the comment at that throw in
+   * `spawnViaShell`.
    */
   readonly batchedArguments: readonly string[];
 }
@@ -347,12 +353,20 @@ function execString(command: string, options: ExecOption = {}, rawArguments?: st
   });
 }
 
-async function executeBatches(baseCommand: string, batches: string[][], options: ExecOption): Promise<ExecResult | string> {
+/*
+ * Runs one command line per batch. It is handed the static parts rather than the base command line they quote
+ * into, which buys two things: it derives that line itself, so the two cannot drift apart, and it can hand
+ * `execString` the raw argument array beside the string -- which is what lets a batch holding a newline be
+ * spawned directly instead of throwing. Both are decided per batch, so a run splits into a mix of
+ * directly-spawned and shell-run batches without either noticing the other.
+ */
+async function executeBatches(staticParts: string[], batches: string[][], options: ExecOption): Promise<ExecResult | string> {
+  const baseCommand = toCommandLine(staticParts);
   const results: string[] = [];
 
   for (const batch of batches) {
     const batchCommand = `${baseCommand} ${toCommandLine(batch)}`;
-    const result = await execString(batchCommand, options);
+    const result = await execString(batchCommand, options, [...staticParts, ...batch]);
     if (typeof result === 'string') {
       results.push(result);
     }
@@ -394,7 +408,7 @@ function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promis
 
   const fullCommand = `${baseCommand} ${toCommandLine(execArgument.batchedArguments)}`;
   if (getShellCommandLineLength(fullCommand) <= maxCommandLength) {
-    return execString(fullCommand, options);
+    return execString(fullCommand, options, [...staticParts, ...execArgument.batchedArguments]);
   }
 
   const batches: string[][] = [];
@@ -425,7 +439,7 @@ function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promis
     batches.push(currentBatch);
   }
 
-  return executeBatches(baseCommand, batches, options);
+  return executeBatches(staticParts, batches, options);
 }
 
 function isExecArgument(part: CommandPart): part is ExecArgument {
@@ -441,6 +455,16 @@ function spawnViaShell(
   const childEnv = { ...CHILD_ENV, ...env };
 
   if (process.platform === 'win32' && command.includes('\n')) {
+    /*
+     * The advice in this throw is only reachable by the one caller it fits, and keeping it that way is a
+     * constraint on anything new that calls `execString`. Every ARRAY-shaped call threads `rawArguments` --
+     * `exec`'s array branch, and since 2026-09-16 the batched branch and `executeBatches` too -- so what is
+     * left here is exactly `exec(command: string)`, where passing an array really is the fix. Until that date
+     * the batched path omitted the argument, and a batched argument bearing a newline was told to pass an
+     * array it had already passed: the newline was in `batchedArguments`, and nothing doable from that
+     * surface would have helped. A new call site that drops the array does not merely lose the hatch -- it
+     * re-opens that misdirection.
+     */
     if (!rawArguments) {
       throw new Error('Commands containing newlines cannot be executed through cmd.exe on Windows. Pass an argument array instead of a string.');
     }
