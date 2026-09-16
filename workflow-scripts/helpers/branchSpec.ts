@@ -1,10 +1,14 @@
 export const CHANNELS = ['public', 'catalyst'] as const;
 
-export type Channel = typeof CHANNELS[number];
-
 export interface BranchSpec {
   channel: Channel;
   obsidianVersion: string;
+}
+
+export type Channel = typeof CHANNELS[number];
+
+export function generateBranchName(branchSpec: BranchSpec): string {
+  return `release/obsidian-${branchSpec.channel}/${branchSpec.obsidianVersion}`;
 }
 
 export function parseBranchSpec(refName: string): BranchSpec {
@@ -20,10 +24,6 @@ export function parseBranchSpec(refName: string): BranchSpec {
     channel: (match.groups?.['Channel'] ?? 'public') as Channel,
     obsidianVersion: match.groups?.['Version'] ?? ''
   };
-}
-
-export function generateBranchName(branchSpec: BranchSpec): string {
-  return `release/obsidian-${branchSpec.channel}/${branchSpec.obsidianVersion}`;
 }
 
 export function parseChannel(value: string | undefined): Channel {

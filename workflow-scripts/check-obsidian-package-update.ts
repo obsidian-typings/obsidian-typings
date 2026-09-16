@@ -9,6 +9,26 @@ import {
 import { commit } from './helpers/git.ts';
 import { getLatestVersion } from './helpers/version.ts';
 
+async function getLatestObsidianVersion(): Promise<string> {
+  // This workflow runs hourly, so it is exposed to transient registry failures often enough that
+  // they show up as red runs -- a single `read ECONNRESET` mid-handshake failed the whole job.
+  return await withRetry('fetch the latest obsidian version', async () => {
+    const response = await fetch('https://registry.npmjs.org/obsidian/latest');
+
+    if (!response.ok) {
+      throw new Error(`npm registry returned ${String(response.status)} ${response.statusText}`);
+    }
+
+    const json: unknown = await response.json();
+
+    if (typeof json !== 'object' || json === null || Array.isArray(json) || !('version' in json) || typeof json.version !== 'string') {
+      throw new Error('Invalid response from npm registry for obsidian');
+    }
+
+    return json.version;
+  });
+}
+
 async function main(): Promise<void> {
   for (const channel of ['public', 'catalyst'] as const) {
     const latestBranchVersion = await getLatestVersion(channel);
@@ -37,26 +57,6 @@ async function main(): Promise<void> {
     // `npm run release` dispatches the release workflow (publish-release.yml) on main itself.
     await execFromRoot('npm run release');
   }
-}
-
-async function getLatestObsidianVersion(): Promise<string> {
-  // This workflow runs hourly, so it is exposed to transient registry failures often enough that
-  // they show up as red runs -- a single `read ECONNRESET` mid-handshake failed the whole job.
-  return await withRetry('fetch the latest obsidian version', async () => {
-    const response = await fetch('https://registry.npmjs.org/obsidian/latest');
-
-    if (!response.ok) {
-      throw new Error(`npm registry returned ${response.status} ${response.statusText}`);
-    }
-
-    const json = await response.json();
-
-    if (typeof json !== 'object' || json === null || Array.isArray(json)) {
-      throw new Error('Invalid response from npm registry for obsidian');
-    }
-
-    return json['version'] as string;
-  });
 }
 
 async function withRetry<T>(description: string, fn: () => Promise<T>): Promise<T> {

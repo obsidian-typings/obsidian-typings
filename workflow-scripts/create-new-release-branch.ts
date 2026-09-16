@@ -28,10 +28,11 @@ exitIfScriptDisabled();
 const INITIAL_BRANCH_VERSION = '1.0.0';
 
 async function main(): Promise<void> {
-  const newVersion = process.argv[2] ?? '';
+  const [, , newVersionArg, newVersionChannelArg, changelogUrlArg] = process.argv;
 
-  const newVersionChannel = process.argv[3] as 'catalyst' | 'public' | undefined;
-  const changelogUrl = process.argv[4] ?? '';
+  const newVersion = newVersionArg ?? '';
+  const newVersionChannel = newVersionChannelArg as 'catalyst' | 'public' | undefined;
+  const changelogUrl = changelogUrlArg ?? '';
   if (!newVersion || !newVersionChannel || !['catalyst', 'public'].includes(newVersionChannel) || !changelogUrl) {
     throw new Error('Usage: jiti ./workflow-scripts/create-new-release-branch.ts <newVersion> <public|catalyst> <changelogUrl>');
   }

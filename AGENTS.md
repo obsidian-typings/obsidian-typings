@@ -59,6 +59,22 @@ The authoritative pre-commit gate for type changes is the **full `npm run build`
 
 Always run the full `npm run build` (plus `lint`, `spellcheck`, `format`) before committing type changes.
 
+## Gates on `main`
+
+`main` carries no build — it is the docs and tooling branch — so its whole gate is five npm scripts: `lint`, `lint:md`, `format:check`, `spellcheck` and `typecheck`. **No workflow in `.github/workflows` runs any of them.** They fire from the pre-commit hook (`nano-staged` → `lint:fix` + `format` on staged `.ts`/`.mts`, `spellcheck` on everything staged, `lint:md:fix` on `.md`) and from a human running them, and that is the only thing standing between a broken release script and a release.
+
+`npm run typecheck` is `tsc --noEmit`, and it exists in **both** packages because it has to be run in both. The root `tsconfig.json` does `include` `workflow-scripts/**/*.ts`, but it checks those files against the root's dependencies, `lib` and `target` rather than the subpackage's own — a near-miss, not a substitute for `npm run typecheck` inside `workflow-scripts`.
+
+`workflow-scripts/tsconfig.json` sets `skipLibCheck: true`, against `@tsconfig/strictest`'s `false`, and the file itself carries the reasoning. In short: `false` earns its keep only where the `.d.ts` files *are* the product, which is the release branches; here it bought a permanently red `tsc --noEmit` on a transitive dependency's own declaration file (`eslint-import-context`, still unfixed upstream), and `skipLibCheck` has no per-package escape hatch. It skips declarations only — nothing about the scripts themselves is checked less strictly.
+
+### ESLint resolves the config nearest to each file, and that used to hide 22 of these 25 files
+
+`workflow-scripts` is a separate npm package with its own ESLint config, and ESLint picks the **nearest** `eslint.config.mts` to the file it is linting. So the root `npm run lint` gates that tree through `workflow-scripts/eslint.config.mts`, never through the root config — which makes the subpackage config's `files` globs load-bearing for the root gate.
+
+They were `src/**/*.ts` + `scripts/**/*.ts`, copied from the root config where both name real directories. Here there is no `src/`, and `scripts/` holds only the three files that build this package's own tooling, so **every release-critical script matched no glob at all** — `publish-release.ts`, `create-new-release-branch.ts`, `bootstrap-new-package.ts`, `release.ts`, all of `helpers/`. ESLint reports that as *"File ignored because no matching configuration was supplied"*, a **warning**, so both `npm run lint` and the pre-commit hook stayed green over 22 of the package's 25 files. What it hid, once the globs were widened: three un-awaited `execFromRoot` calls in `release.ts` that must run in sequence, and 150 findings in total.
+
+The globs are now the whole package. `no-console` and `import-x/no-nodejs-modules` are off **package-wide** rather than over a `scripts/` subdirectory, because every file here is a script — the root config scopes those two to `scripts/**` for the opposite reason, that the package around it is a typings surface.
+
 ## Pinned Versions
 
 An **exact** version (no `^`) is how a dependency is held back here, and it is also what makes it invisible to `update-npm-deps.ps1`: that script upgrades caret ranges and *silently* skips exact pins. Nothing will ever remind you a pin is stale, so every pin carries a row in [`pinned-versions.json`](pinned-versions.json) naming the condition that releases it and the command that tests that condition.
