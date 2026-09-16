@@ -219,10 +219,21 @@ async function main(): Promise<void> {
   // costing a version number: the wrappers carry their own, derived from what is already published.
   await pushRelease(nextVersion, scopedPackageName, scopedTagName);
 
-  await packZipArtifact(zipFileName);
-
-  // Use main README for the wrapper packages and zip artifact
+  /*
+   * Everything below this line reads `README.md` off the worktree, and every one of them wants main's -- the
+   * full docs -- rather than the per-version one `readmeGenerator.ts` writes onto a release branch from
+   * `README.template.md`. Only the scoped package published above carries the branch README, which is the
+   * whole reason this restore sits here rather than further up.
+   *
+   * Its position is load-bearing, and has already been silently wrong once. `6f8c1725` moved this call below
+   * the publish so the versioned package would keep the branch README, and the zip went with it: back then
+   * the zip was packed inside the same function as the publish, so one move changed two artifacts. The
+   * comment naming the zip was written by that same commit, so main's README was always the intent and only
+   * the code disagreed. Every release zip from 2026-05-15 until this fix shipped the branch one.
+   */
   await execFromRoot('git restore --source=origin/main --worktree -- ./README.md');
+
+  await packZipArtifact(zipFileName);
 
   if (isLatest) {
     const latestWrapperName = getLatestWrapperPackageName(branchSpec.channel);
