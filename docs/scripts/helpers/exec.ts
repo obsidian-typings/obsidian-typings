@@ -30,7 +30,9 @@ export interface ExecArgument {
    * posix-normalized repo-relative paths, which need no quoting.
    *
    * The quoting has to happen **before** the length budget is measured rather than after, so that the string
-   * counted against {@link getMaxCommandLength} and the string handed to the shell stay the same one.
+   * counted against {@link getMaxCommandLength} and the string handed to the shell stay the same one. Quoting
+   * is not the only layer between those two, though, which is why the budget is spent through
+   * {@link getShellCommandLineLength} rather than against a raw `.length`.
    */
   readonly batchedArguments: readonly string[];
 }
@@ -133,10 +135,11 @@ export function exec(command: CommandPart[] | string, options: ExecOption = {}):
     const commandLine = toCommandLine($arguments);
 
     const maxCommandLength = getMaxCommandLength();
-    if (commandLine.length > maxCommandLength) {
+    const shellCommandLineLength = getShellCommandLineLength(commandLine);
+    if (shellCommandLineLength > maxCommandLength) {
       return Promise.reject(
         new Error(
-          `Command line is too long (${String(commandLine.length)} chars, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArgument with batchedArguments.`
+          `Command line is too long (${String(shellCommandLineLength)} chars as the shell receives it, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArgument with batchedArguments.`
         )
       );
     }
@@ -145,10 +148,11 @@ export function exec(command: CommandPart[] | string, options: ExecOption = {}):
   }
 
   const maxCommandLength = getMaxCommandLength();
-  if (command.length > maxCommandLength) {
+  const shellCommandLineLength = getShellCommandLineLength(command);
+  if (shellCommandLineLength > maxCommandLength) {
     return Promise.reject(
       new Error(
-        `Command line is too long (${String(command.length)} chars, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArgument with batchedArguments.`
+        `Command line is too long (${String(shellCommandLineLength)} chars as the shell receives it, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArgument with batchedArguments.`
       )
     );
   }
@@ -158,8 +162,9 @@ export function exec(command: CommandPart[] | string, options: ExecOption = {}):
 
 /**
  * The longest command line this platform's shell accepts, which is what decides whether a batched command is
- * run in one go or split. The budget is measured against the **quoted** command line, so what is counted here
- * and what reaches the shell are the same string -- see {@link ExecArgument}.
+ * run in one go or split. On Windows this is `cmd.exe`'s own ceiling, and it is spent by everything `cmd.exe`
+ * is handed -- the wrapper it is invoked with included -- so it is measured with
+ * {@link getShellCommandLineLength} rather than against a quoted command line's raw `.length`.
  *
  * Exported for `scripts/check-exec-helpers.ts`, which sizes its batch-splitting case from it rather than
  * restating the constants. Not meant for callers; use {@link exec}.
@@ -168,6 +173,38 @@ export function getMaxCommandLength(): number {
   const WINDOWS_MAX_COMMAND_LENGTH = 8191;
   const UNIX_MAX_COMMAND_LENGTH = 131_072;
   return process.platform === 'win32' ? WINDOWS_MAX_COMMAND_LENGTH : UNIX_MAX_COMMAND_LENGTH;
+}
+
+/**
+ * The length a command line will have by the time this platform's shell parses it, which is the number the
+ * budget in {@link getMaxCommandLength} has to be measured against.
+ *
+ * On Windows that is **not** the length of the quoted command line. Two layers still sit between
+ * {@link toCommandLine} and `cmd.exe`, and both were applied *after* the budget until 2026-09-16:
+ * {@link commandEscapeCommandLine} prefixes `^` to each of `()%!^"<>&|`, which can double the line, and
+ * `spawn(..., { shell: true })` then wraps the result in `<ComSpec> /d /s /c "..."`. So an argument list that
+ * measured at 8191 could still die with `The command line is too long.` -- which a repo or vault path bearing
+ * `&` is enough to trigger, once the file list is long enough to batch. Measured on 2026-09-16: a
+ * metacharacter-free command line is accepted up to 8152 chars, which is 8191 less the 39 of the wrapper.
+ *
+ * Everywhere else the command string is handed to `/bin/sh` as its own argv entry, with no escaping layer and
+ * no wrapper sharing its budget, so the quoted length is already the real one.
+ *
+ * Deliberately conservative in one place: a Windows command line holding a newline is spawned directly
+ * rather than through `cmd.exe` (see `spawnViaShell`), so neither layer applies to it and its real ceiling is
+ * `CreateProcess`'s rather than `cmd.exe`'s. It is still measured as if it went through the shell, as it was
+ * before -- refusing a command line that would have run is the safe direction, and no caller builds an 8 KB
+ * one.
+ *
+ * Exported for `scripts/check-exec-helpers.ts`, as {@link argvQuote} is. Not meant for callers; use
+ * {@link exec}.
+ */
+export function getShellCommandLineLength(commandLine: string): number {
+  if (process.platform !== 'win32') {
+    return commandLine.length;
+  }
+
+  return commandEscapeCommandLine(commandLine).length + getShellWrapperLength();
 }
 
 /**
@@ -205,6 +242,13 @@ export function toCommandLine($arguments: readonly string[]): string {
 }
 
 const CMD_META_RE = /[()%!^"<>&|]/g;
+
+/*
+ * What `spawn(..., { shell: true })` wraps a command line in on Windows: node invokes `<ComSpec> /d /s /c
+ * "<command line>"` verbatim, and every byte of that -- not just the part inside the quotes -- is spent
+ * against the ceiling `cmd.exe` enforces.
+ */
+const CMD_SHELL_WRAPPER = ' /d /s /c ""';
 
 /*
  * The complement of `shlex.quote`'s safe set: every other character either is shell syntax or can become it
@@ -321,6 +365,15 @@ async function executeBatches(baseCommand: string, batches: string[][], options:
   return results.join('\n');
 }
 
+/*
+ * Node picks the shell out of `ComSpec` and falls back to `cmd.exe`, so the wrapper is only as long as
+ * whatever this machine has there -- 39 chars with the usual `C:\Windows\system32\cmd.exe`.
+ */
+function getShellWrapperLength(): number {
+  const DEFAULT_COMSPEC = 'cmd.exe';
+  return (process.env['ComSpec'] ?? DEFAULT_COMSPEC).length + CMD_SHELL_WRAPPER.length;
+}
+
 function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promise<ExecResult | string> | undefined {
   const execArguments = parts.filter(isExecArgument);
   if (execArguments.length === 0) {
@@ -340,7 +393,7 @@ function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promis
   const maxCommandLength = getMaxCommandLength();
 
   const fullCommand = `${baseCommand} ${toCommandLine(execArgument.batchedArguments)}`;
-  if (fullCommand.length <= maxCommandLength) {
+  if (getShellCommandLineLength(fullCommand) <= maxCommandLength) {
     return execString(fullCommand, options);
   }
 
@@ -349,11 +402,16 @@ function handleBatchedCommand(parts: CommandPart[], options: ExecOption): Promis
 
   for (const argument of execArgument.batchedArguments) {
     const tentative = `${baseCommand} ${toCommandLine([...currentBatch, argument])}`;
-    if (tentative.length > maxCommandLength) {
+    const tentativeLength = getShellCommandLineLength(tentative);
+    if (tentativeLength > maxCommandLength) {
       if (currentBatch.length === 0) {
+        /*
+         * Both numbers are the shell's, not the quoter's, and the difference between them is exact: the
+         * escape applies per character and the wrapper is the same on both sides, so it cancels.
+         */
         return Promise.reject(
           new Error(
-            `Cannot split command into batches: a single argument (${String(toCommandLine([argument]).length)} chars once quoted) plus the base command (${String(baseCommand.length)} chars) exceeds the max command length (${String(maxCommandLength)}).`
+            `Cannot split command into batches: a single argument (${String(tentativeLength - getShellCommandLineLength(baseCommand))} chars once quoted and escaped) plus the base command brings the command line to ${String(tentativeLength)} chars as the shell receives it, over the max command length (${String(maxCommandLength)}).`
           )
         );
       }
