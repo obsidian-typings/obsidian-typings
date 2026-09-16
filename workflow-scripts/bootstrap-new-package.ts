@@ -3,27 +3,29 @@
  *
  * Claims the npm name for a brand-new release branch, so that CI can publish to it afterwards.
  *
- * npm attaches a trusted publisher to a *package*, on that package's settings page, which means the package
- * has to exist before the publisher can be configured -- and a package only comes into existence by being
- * published. CI has no npm credential at all under trusted publishing, so it cannot break that cycle;
- * npm has no equivalent of PyPI's pre-registered publisher (npm/cli#8544).
+ * npm attaches a trusted publisher to a *package*, which means the package has to exist before the publisher
+ * can be configured -- and a package only comes into existence by being published. CI has no npm credential
+ * at all under trusted publishing, so it cannot break that cycle; npm has no equivalent of PyPI's
+ * pre-registered publisher (npm/cli#8544).
  *
  * A human can break it, because a human has interactive 2FA. This script is that step: run locally, once,
- * whenever a new Obsidian version mints a new package name. It publishes a placeholder version so the name
- * exists and the publisher can be attached, and prints exactly what to enter on npmjs.com.
+ * whenever a new Obsidian version mints a new package name.
  *
- * Note that the step this script covers is the FIRST of two. Claiming the name is what needs a credential and
- * a 2FA prompt; attaching the trusted publisher afterwards is a form on npmjs.com, and is the half that gets
- * skipped -- silently, because nothing fails until CI tries to publish and is answered with a bare `E404`.
- * That is why a re-run against an already-claimed name still prints the instructions rather than declaring
- * the job done.
+ * It used to cover only the FIRST of the two steps -- claiming the name -- and hand the second back as a form
+ * on npmjs.com, which is the half that then got skipped, silently, because nothing fails until CI tries to
+ * publish and is answered with a bare `E404`. Since 2026-09-15 it does both: `npm trust github` writes the
+ * same `/-/package/<name>/trust` record that form writes, so the script can attach the publisher itself
+ * while it still holds the operator's terminal. What that costs is a second one-time password -- npm's
+ * `otplease` challenges per operation and caches nothing between processes -- and what it buys is that the
+ * step which never announced its own absence no longer depends on somebody remembering to go and do it.
+ * The printed npmjs.com instructions survive as the fallback for when the call fails.
  *
- * And then it asks, rather than ending on a printed instruction. The release that has to follow the form was
- * the THIRD step and the only one with no owner at all: `create-new-release-branch.ts` stops before it,
- * nothing else runs it, and nothing notices it was skipped -- two branches sat created-but-unreleased from
- * 2026-09-14 for exactly that reason. This script is where the operator is standing when the form is the only
- * thing left, so `helpers/handBack.ts` asks them here and dispatches on a yes. See that file for why a wrong
- * yes is now cheap.
+ * And then it asks whether to release, rather than ending on a printed instruction. That release was the
+ * THIRD step and the only one with no owner at all: `create-new-release-branch.ts` stops before it, nothing
+ * else runs it, and nothing notices it was skipped -- two branches sat created-but-unreleased from
+ * 2026-09-14 for exactly that reason. This script is where the operator is standing when it is the only thing
+ * left, so `helpers/handBack.ts` handles it here -- dispatching outright when npm has confirmed the
+ * publisher, and asking when it has not. See that file for why a wrong yes is cheap.
  *
  * The placeholder is published under its own `bootstrap` dist-tag. That does NOT keep it off `latest`: on a
  * brand-new package there is no other version for `latest` to point at, so it holds both (measured
@@ -46,16 +48,19 @@ import { join } from 'node:path';
 import process from 'node:process';
 
 import type { BranchSpec } from './helpers/branchSpec.ts';
+import type { TrustedPublisherState } from './helpers/npm.ts';
 
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { writeJson } from './helpers/exec.ts';
 import { offerRelease } from './helpers/handBack.ts';
 import {
+  attachTrustedPublisher,
   getNpmUsername,
   getPackageRegistryState,
   getScopedPackageName,
   getTrustedPublisherInstructions,
   PLACEHOLDER_VERSION,
+  readTrustedPublisherState,
   REPOSITORY
 } from './helpers/npm.ts';
 
@@ -84,10 +89,9 @@ async function main(): Promise<void> {
 
   if (registryState === 'placeholderOnly') {
     console.log(`${packageName} is already claimed, so there is nothing to claim.`);
-    console.log('Nothing has ever published through it, though, so its trusted publisher may still be missing.');
-    console.log('That is the half of this step that gets skipped; it surfaces in CI as a bare E404 and nowhere else.');
-    console.log(getTrustedPublisherInstructions(packageName));
-    await offerRelease({ channel, obsidianVersion }, packageName);
+    console.log('Nothing has ever published through it, though, so its trusted publisher may still be missing --');
+    console.log('the half that gets skipped, and that surfaces in CI as a bare E404 and nowhere else. Asking npm.');
+    await offerRelease({ channel, obsidianVersion }, packageName, await resolvePublisher(packageName));
     return;
   }
 
@@ -116,15 +120,25 @@ async function main(): Promise<void> {
 
   await publishPlaceholder(packageName);
 
-  console.log(`\nClaimed ${packageName}. That was the first of two steps, and the second is below.`);
-  console.log(getTrustedPublisherInstructions(packageName));
+  console.log(`\nClaimed ${packageName}. That was the first of two steps, and the second follows here.`);
+  console.log('npm will ask for a second one-time password: it challenges per operation and caches nothing');
+  console.log('between processes, so attaching the publisher cannot reuse the code the publish above consumed.');
 
-  // And the third, which is neither manual nor automatic until somebody owns it. This script is where the
-  // operator is standing when the npmjs.com form is the only thing left, and it already holds their terminal
-  // for the 2FA prompt above -- so it is the one place that can ask whether the form is saved and act on the
-  // answer. Leaving `npm run release` as a printed instruction is what left two branches created-but-
-  // unreleased on 2026-09-14.
-  await offerRelease({ channel, obsidianVersion }, packageName);
+  const publisherState = attachTrustedPublisher(packageName) ? 'attached' : 'unknown';
+
+  if (publisherState === 'attached') {
+    console.log(`\nTrusted publisher attached to ${packageName}. Both halves of this step are done.`);
+  } else {
+    console.log(`\nCould not attach the trusted publisher to ${packageName}, so that half is still outstanding.`);
+    console.log(getTrustedPublisherInstructions(packageName));
+  }
+
+  // And the third step, which was neither manual nor automatic until somebody owned it. This script is where
+  // the operator is standing when the release is the only thing left, and it already holds their terminal --
+  // so it is the one place that can dispatch it, or ask when the publisher could not be confirmed. Leaving
+  // `npm run release` as a printed instruction is what left two branches created-but-unreleased on
+  // 2026-09-14.
+  await offerRelease({ channel, obsidianVersion }, packageName, publisherState);
 }
 
 async function publishPlaceholder(packageName: string): Promise<void> {
@@ -179,6 +193,43 @@ async function publishPlaceholder(packageName: string): Promise<void> {
   } finally {
     await rm(BOOTSTRAP_FOLDER, { force: true, recursive: true });
   }
+}
+
+/**
+ * Settles the trusted-publisher state of an already-claimed name: reads it, and attaches one when npm says
+ * there is none.
+ *
+ * Only the definite `none` is acted on. An `unknown` answer is left alone rather than attached "just in
+ * case", because `npm trust github` creates a configuration rather than reconciling one -- a second call
+ * against a package that already has a publisher adds a duplicate record, and nothing here can tell whether
+ * that would be a duplicate or the first. The cost of guessing wrong is a permanent, silent mess in the
+ * package's trust list; the cost of not guessing is one question the operator can answer, which is what the
+ * `unknown` arm of `offerRelease` is for.
+ */
+async function resolvePublisher(packageName: string): Promise<TrustedPublisherState> {
+  const publisherState = await readTrustedPublisherState(packageName);
+
+  if (publisherState === 'attached') {
+    console.log('\nnpm reports a trusted publisher on it, so both halves of this step are already done.');
+    return publisherState;
+  }
+
+  if (publisherState === 'unknown') {
+    console.log('\nnpm would not say whether it has one -- the read needs a login and a 2FA code it can prompt for.');
+    console.log(getTrustedPublisherInstructions(packageName));
+    return publisherState;
+  }
+
+  console.log('\nnpm reports no trusted publisher on it, so that is the half still outstanding. Attaching it now.');
+
+  if (attachTrustedPublisher(packageName)) {
+    console.log(`\nTrusted publisher attached to ${packageName}.`);
+    return 'attached';
+  }
+
+  console.log(`\nCould not attach the trusted publisher to ${packageName}.`);
+  console.log(getTrustedPublisherInstructions(packageName));
+  return 'none';
 }
 
 await main();

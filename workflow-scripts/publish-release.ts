@@ -30,11 +30,16 @@ import { getLatestVersion } from './helpers/version.ts';
 /**
  * Refuses the run when npm will not let this workflow publish one of the packages it is about to publish.
  *
- * Every package published from here needs its own trusted publisher attached on npmjs.com -- a form somebody
- * fills in once per package name, and the half of the new-package hand-back that gets skipped. Skipping it is
- * invisible until the publish: `npm publish` asks for an OIDC credential, is refused, silently carries on
- * without one, and the registry answers the unauthorized `PUT` with `404 Not Found` on a package that plainly
- * exists. {@link hasTrustedPublisher} asks that same question up front.
+ * Every package published from here needs its own trusted publisher attached -- one `npm trust github` call,
+ * or the npmjs.com form it writes the same record as, once per package name. It is the half of the
+ * new-package hand-back that gets skipped, and skipping it is invisible until the publish: `npm publish` asks
+ * for an OIDC credential, is refused, silently carries on without one, and the registry answers the
+ * unauthorized `PUT` with `404 Not Found` on a package that plainly exists. {@link hasTrustedPublisher} asks
+ * that same question up front.
+ *
+ * It asks it the only way CI can. `npm trust list` reads the configuration directly, but it is authenticated,
+ * and this job holds no npm credential at all -- that is the entire point of trusted publishing. So the OIDC
+ * exchange stays the predicate here, and `readTrustedPublisherState` is for the local scripts.
  *
  * All three names are checked, not just the first. The versioned package publishes first, so it is the one
  * that failed on 2026-09-14 -- but a `-latest` wrapper missing its publisher would fail *after* the versioned
