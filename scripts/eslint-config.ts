@@ -27,6 +27,25 @@ const typeScriptFiles = [
   'scripts/**/*.ts'
 ];
 
+/*
+ * `eslint-plugin-jsdoc` and `eslint-plugin-tsdoc` are deliberately absent, and this note exists so the next
+ * comparison against `obsidian-dev-utils` reads that as a decision rather than as drift to close.
+ *
+ * Every repo that loads them scopes them to its published surface -- `src/**` -- and never to its tooling.
+ * Applied here at that scope they reach nothing: `src/` is not committed on `main` (`git ls-files src` is
+ * empty), it appears only once a release branch is checked out, and it is then several thousand `.d.ts`
+ * files transcribing Obsidian's own API. Turning `jsdoc/require-jsdoc` and `tsdoc/syntax` on over THAT is a
+ * documentation project running inside the release gate, not a configuration change.
+ *
+ * Pointing them at the tooling instead is the other option, and it is one nothing else here does. Measured
+ * on 2026-09-15 over `scripts/`, `docs/scripts/` and `docs/src/`: 380 reports, led by `require-jsdoc` (140),
+ * `require-param` (71), `require-file-overview` (54) and `require-returns` (40). Their fixers only insert
+ * empty blocks, which `jsdoc/no-blank-blocks` then rejects, so roughly 305 of those need prose written by
+ * someone who knows what each build script is for.
+ *
+ * Revisit if `src/` ever lands on `main`, which is the condition that makes the ordinary scope meaningful.
+ */
+
 export const config: Linter.Config[] = defineConfig(
   ...getGitIgnoreConfigs(),
   ...getAstroConfigs(),
