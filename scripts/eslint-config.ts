@@ -57,41 +57,12 @@ export const config: Linter.Config[] = defineConfig(
   ...getPerfectionistConfigs(),
   ...getUnicornConfigs(),
   ...getEslintImportResolverTypescriptConfigs(),
-  ...getEslintCommentsConfigs(),
-  ...getDocsOverrideConfigs()
+  ...getEslintCommentsConfigs()
 );
 
 function getAstroConfigs(): Linter.Config[] {
   // eslint-disable-next-line import-x/no-named-as-default-member -- `configs` is the plugin's configuration namespace.
   return defineConfig(astro.configs.recommended);
-}
-
-function getDocsOverrideConfigs(): Linter.Config[] {
-  return defineConfig([
-    {
-      files: ['docs/scripts/astro-config.ts'],
-      rules: {
-        'no-magic-numbers': 'off'
-      }
-    },
-    {
-      files: ['docs/src/pages/**/*.ts'],
-      rules: {
-        '@typescript-eslint/no-unsafe-argument': 'off',
-        '@typescript-eslint/no-unsafe-assignment': 'off',
-        '@typescript-eslint/no-unsafe-call': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off',
-        '@typescript-eslint/no-unsafe-return': 'off',
-        '@typescript-eslint/prefer-nullish-coalescing': 'off',
-        '@typescript-eslint/restrict-template-expressions': 'off',
-        'import-x/no-anonymous-default-export': 'off',
-        'import-x/no-default-export': 'off',
-        'import-x/no-unresolved': 'off',
-        'no-magic-numbers': 'off',
-        'no-restricted-syntax': 'off'
-      }
-    }
-  ]);
 }
 
 function getEslintCommentsConfigs(): Linter.Config[] {
