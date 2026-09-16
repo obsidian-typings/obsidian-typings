@@ -16,8 +16,14 @@
  * a 2FA prompt; attaching the trusted publisher afterwards is a form on npmjs.com, and is the half that gets
  * skipped -- silently, because nothing fails until CI tries to publish and is answered with a bare `E404`.
  * That is why a re-run against an already-claimed name still prints the instructions rather than declaring
- * the job done, and why `create-new-release-branch.ts` will not dispatch a release into a name that has only
- * ever held the placeholder.
+ * the job done.
+ *
+ * And then it asks, rather than ending on a printed instruction. The release that has to follow the form was
+ * the THIRD step and the only one with no owner at all: `create-new-release-branch.ts` stops before it,
+ * nothing else runs it, and nothing notices it was skipped -- two branches sat created-but-unreleased from
+ * 2026-09-14 for exactly that reason. This script is where the operator is standing when the form is the only
+ * thing left, so `helpers/handBack.ts` asks them here and dispatches on a yes. See that file for why a wrong
+ * yes is now cheap.
  *
  * The placeholder is published under its own `bootstrap` dist-tag. That does NOT keep it off `latest`: on a
  * brand-new package there is no other version for `latest` to point at, so it holds both (measured
@@ -39,6 +45,7 @@ import type { BranchSpec } from './helpers/branchSpec.ts';
 
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { writeJson } from './helpers/exec.ts';
+import { offerRelease } from './helpers/handBack.ts';
 import {
   getNpmUsername,
   getPackageRegistryState,
@@ -76,6 +83,7 @@ async function main(): Promise<void> {
     console.log('Nothing has ever published through it, though, so its trusted publisher may still be missing.');
     console.log('That is the half of this step that gets skipped; it surfaces in CI as a bare E404 and nowhere else.');
     console.log(getTrustedPublisherInstructions(packageName));
+    await offerRelease({ channel, obsidianVersion }, packageName);
     return;
   }
 
@@ -106,6 +114,13 @@ async function main(): Promise<void> {
 
   console.log(`\nClaimed ${packageName}. That was the first of two steps, and the second is below.`);
   console.log(getTrustedPublisherInstructions(packageName));
+
+  // And the third, which is neither manual nor automatic until somebody owns it. This script is where the
+  // operator is standing when the npmjs.com form is the only thing left, and it already holds their terminal
+  // for the 2FA prompt above -- so it is the one place that can ask whether the form is saved and act on the
+  // answer. Leaving `npm run release` as a printed instruction is what left two branches created-but-
+  // unreleased on 2026-09-14.
+  await offerRelease({ channel, obsidianVersion }, packageName);
 }
 
 async function publishPlaceholder(packageName: string): Promise<void> {
