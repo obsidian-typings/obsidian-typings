@@ -623,10 +623,11 @@ declare module 'obsidian' {
     /**
      * Set the spellcheck languages.
      *
-     * @param languages - The spellcheck languages to set.
+     * @param languages - The spellcheck languages to set. Pass `null` or an empty array to clear the setting, which makes Obsidian fall back to the OS locale.
+     * @remark Obsidian's own spellcheck setting passes `null` here for its restore-default button.
      * @unofficial
      */
-    setSpellcheckLanguages(languages: string[]): void;
+    setSpellcheckLanguages(languages: null | string[]): void;
 
     /**
      * Set the current color scheme of the application and reload the CSS.
