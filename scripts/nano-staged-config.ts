@@ -37,6 +37,12 @@ const tasks: Record<string, NanoStagedHandler> = {
       `${PACKAGE_MANAGER_RUN_COMMAND} lint:fix -- ${join(b)}`,
       `${PACKAGE_MANAGER_RUN_COMMAND} format -- ${join(b)}`
     ]),
+  /*
+   * Lint only, with no `format` step beside it: dprint loads a TypeScript, a JSON and a markdown plugin, and none
+   * of them formats Astro, so pointing `format` at a `.astro` file would be a no-op at best. ESLint is the whole
+   * of what this repo can run over these 14 files, and the pre-commit hook is the only place any gate runs.
+   */
+  '*.astro': ({ filenames }) => batch(filenames).map((b) => `${PACKAGE_MANAGER_RUN_COMMAND} lint:fix -- ${join(b)}`),
   '*.md': ({ filenames }) => batch(filenames).map((b) => `${PACKAGE_MANAGER_RUN_COMMAND} lint:md:fix -- ${join(b)}`)
 };
 

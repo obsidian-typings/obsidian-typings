@@ -6,6 +6,8 @@ import eslint from '@eslint/js';
 // eslint-disable-next-line import-x/no-rename-default -- The default export name `plugin` is too confusing.
 import stylistic from '@stylistic/eslint-plugin';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
+// eslint-disable-next-line import-x/no-rename-default -- The default export name `plugin` is too confusing.
+import astro from 'eslint-plugin-astro';
 import { flatConfigs as eslintPluginImportXFlatConfigs } from 'eslint-plugin-import-x';
 import { configs as perfectionistConfigs } from 'eslint-plugin-perfectionist';
 import { defineConfig } from 'eslint/config';
@@ -25,6 +27,7 @@ const typeScriptFiles = [
 
 export const config: Linter.Config[] = defineConfig(
   ...getGitIgnoreConfigs(),
+  ...getAstroConfigs(),
   ...getEslintConfigs(),
   ...getLocalPluginConfigs(),
   ...getTseslintConfigs(),
@@ -35,6 +38,11 @@ export const config: Linter.Config[] = defineConfig(
   ...getEslintCommentsConfigs(),
   ...getDocsOverrideConfigs()
 );
+
+function getAstroConfigs(): Linter.Config[] {
+  // eslint-disable-next-line import-x/no-named-as-default-member -- `configs` is the plugin's configuration namespace.
+  return defineConfig(astro.configs.recommended);
+}
 
 function getDocsOverrideConfigs(): Linter.Config[] {
   return defineConfig([
