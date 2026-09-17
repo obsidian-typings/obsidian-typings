@@ -10,6 +10,9 @@ type NodeWithBody = NodeBodyFields & Rule.Node;
 
 export const MESSAGE_ID = 'noUsedUnderscoreVariables';
 
+/**
+ * ESLint rule disallowing `_`-prefixed parameters and local variables that are actually used, since the prefix advertises them as unused.
+ */
 export const noUsedUnderscoreVariables: Rule.RuleModule = {
   create(context) {
     return {

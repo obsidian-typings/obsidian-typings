@@ -16,7 +16,7 @@ import { resolve } from 'node:path';
 import tseslint from 'typescript-eslint';
 
 import { obsidianTypingsPlugin } from './helpers/eslint-plugin-obsidian-typings/index.ts';
-import { customEslintPlugin } from './helpers/eslint-rules/custom-eslint-plugin.ts';
+import { obsidianDevUtilsPlugin } from './helpers/eslint-rules/obsidian-dev-utils-plugin.ts';
 
 const gitignorePath = resolve(import.meta.dirname, '..', '.gitignore');
 
@@ -42,7 +42,7 @@ export const config: Linter.Config[] = defineConfig([
   ...getPerfectionistConfigs(),
   ...getEslintImportResolverTypescriptConfigs(),
   ...getEslintCommentsConfigs(),
-  ...getCustomPluginConfigs(),
+  ...getObsidianDevUtilsPluginConfigs(),
   ...getNoRestrictedSyntaxRulesConfigs(),
   ...getNodeCompatConfigs(),
   ...getObsidianTypingsConfigs(),
@@ -51,15 +51,24 @@ export const config: Linter.Config[] = defineConfig([
   ...getTsdocsConfigs()
 ]);
 
-function getCustomPluginConfigs(): Linter.Config[] {
+function getObsidianDevUtilsPluginConfigs(): Linter.Config[] {
   return defineConfig([
     {
-      files: typeScriptFiles,
+      /*
+       * Scripts only. These rules police how code builds and reads its own `*Params`/`*Options`/`*Result`
+       * bags, and `src/` is declarations that model someone else's objects as they really are:
+       * `readonly-params-options-result-members` alone reports 641 members there, each of them a property
+       * the real object lets its caller assign.
+       */
+      files: scriptFiles,
       plugins: {
-        custom: customEslintPlugin
+        'obsidian-dev-utils': obsidianDevUtilsPlugin
       },
       rules: {
-        'custom/no-used-underscore-variables': 'error'
+        'obsidian-dev-utils/no-unused-params-members': 'error',
+        'obsidian-dev-utils/no-used-underscore-variables': 'error',
+        'obsidian-dev-utils/params-options-name-match': 'error',
+        'obsidian-dev-utils/readonly-params-options-result-members': 'error'
       }
     }
   ]);
@@ -348,6 +357,17 @@ function getOverrideConfigs(): Linter.Config[] {
       files: ['scripts/helpers/@types/**/*.d.ts'],
       rules: {
         'no-restricted-syntax': 'off'
+      }
+    },
+    {
+      /*
+       * The vendored rule sources are byte-identical copies of `obsidian-dev-utils`', whose own lint is
+       * type-aware; this config is not, so a directive aimed at a type-aware rule reads here as unused. Left
+       * to report, `lint:fix` would delete the directive and the copy would stop being a copy.
+       */
+      files: ['scripts/helpers/eslint-rules/**/*.ts'],
+      linterOptions: {
+        reportUnusedDisableDirectives: 'off'
       }
     }
   ]);

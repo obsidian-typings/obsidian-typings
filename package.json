@@ -87,7 +87,8 @@
     "prepare": "jiti scripts/prepare.ts",
     "release": "jiti scripts/release.ts",
     "release:beta": "jiti scripts/release-beta.ts",
-    "spellcheck": "jiti scripts/spellcheck.ts"
+    "spellcheck": "jiti scripts/spellcheck.ts",
+    "test": "jiti scripts/test.ts"
   },
   "overrides": {
     "eslint-plugin-import": "$eslint-plugin-import-x",
@@ -107,6 +108,7 @@
     "@tsconfig/strictest": "^2.0.8",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^25.8.0",
+    "@typescript-eslint/rule-tester": "^8.70.0",
     "@typescript-eslint/utils": "^8.59.3",
     "better-typescript-lib": "^2.12.0",
     "builtin-modules": "^5.2.0",
@@ -136,7 +138,8 @@
     "ts-morph": "^28.0.0",
     "type-fest": "^5.6.0",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.3"
+    "typescript-eslint": "^8.59.3",
+    "vitest": "^5.0.1"
   },
   "peerDependencies": {
     "@types/node": ">=16.0.0"
