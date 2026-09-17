@@ -121,14 +121,16 @@ async function main(): Promise<void> {
 
   // `placeholderOnly`. The name is claimed, so the only step that can still be outstanding is the publisher --
   // and that one CAN be asked about directly, from a machine that is logged in to npm, and attached from here
-  // when the answer is a definite `none`. `resolveTrustedPublisherState` is the same call
+  // whether or not the asking worked. `resolveTrustedPublisherState` is the same call
   // `bootstrap-new-package.ts` makes against the same state; until 2026-09-16 this arm only *read* it and then
   // told the operator to go and attach it in another window, which is a hand-off whose entire failure mode is
-  // that people forget it. When the read cannot be made at all -- no login here, or a one-time-password
-  // challenge with no terminal to answer it -- it stays a printed instruction and `offerRelease` asks, which
-  // is what this arm has always done. A wrong answer there is not expensive: `publish-release.ts` checks the
-  // publish right before it does anything irreversible, so a dispatch into a package with no publisher
-  // attached costs a red run.
+  // that people forget it. Since 2026-09-17 a read that could not be made at all -- no login here, an expired
+  // token, or a one-time-password challenge with no terminal to answer it -- is attached into as well, on the
+  // measurement that the registry refuses an overlapping second configuration rather than duplicating it. Only
+  // an attach that then fails leaves this a printed instruction with `offerRelease` asking, which is what this
+  // arm used to do in every one of those cases. A wrong answer there is not expensive: `publish-release.ts`
+  // checks the publish right before it does anything irreversible, so a dispatch into a package with no
+  // publisher attached costs a red run.
   printTrustedPublisherPending(packageName);
 
   const publisherState = await resolveTrustedPublisherState(packageName);

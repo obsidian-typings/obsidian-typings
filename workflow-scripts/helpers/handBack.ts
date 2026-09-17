@@ -76,12 +76,15 @@ export function getManualReleaseInstructions(branchName: string): string {
  *   it, so this state no longer reaches here as a bare read: a `none` that could be fixed has already become
  *   `attached`. The question is still worth putting, because the operator can attach one in another window --
  *   the exact command was printed a moment ago -- and answer `y` when they have.
- * - `unknown` -- the read could not be made. This is the original behavior, and the reason a wrong `y` had
- *   to be made cheap in the first place. It is a much rarer answer since 2026-09-16, when
- *   `readTrustedPublisherState()` learned to ask for the one-time password the registry challenges it with:
- *   an operator who is logged in and standing here now reaches one of the two states above instead. What
- *   still lands here is a machine with no npm login, a code skipped or refused, or a request that never
- *   arrived.
+ * - `unknown` -- the read could not be made, AND the attach that was tried anyway did not land either. This
+ *   is the original behavior, and the reason a wrong `y` had to be made cheap in the first place. It is a
+ *   much rarer answer than it was, twice over: since 2026-09-16 `readTrustedPublisherState()` asks for the
+ *   one-time password the registry challenges it with, so an operator who is logged in and standing here
+ *   reaches one of the two states above instead; and since 2026-09-17 an unreadable state is attached into
+ *   rather than merely reported, on the measurement that the registry refuses an overlapping second
+ *   configuration with `409 Conflict` instead of duplicating it. What still lands here is a machine that
+ *   could neither read nor write -- no npm login, an expired token, a code skipped or refused, or requests
+ *   that never arrived -- which is exactly the machine that has nothing to tell this question but a guess.
  *
  * Declining is a first-class answer, not a failure: it prints the same two commands the hand-back has always
  * ended with and returns. So is having no terminal to ask at -- the prompt is skipped outright rather than
