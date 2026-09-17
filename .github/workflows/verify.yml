@@ -87,6 +87,13 @@ jobs:
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         run: npm run spellcheck
 
+      # The rule tester for the vendored ESLint rules in `scripts/helpers/eslint-rules/`. Each source
+      # travels with its upstream test, so a sync that changes a rule's behavior brings the cases that
+      # pin it -- and without this step those cases would run nowhere.
+      - name: Test
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: npm test
+
       # `helpers/exec.ts` and `helpers/root.ts` exist three times over -- once per self-contained
       # tree -- and had aged apart. This asserts the copies are byte-identical and exercises the
       # `cmd.exe` quoting rules nothing else in the repo reaches. The end-to-end argv round trip is

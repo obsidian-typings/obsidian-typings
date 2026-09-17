@@ -14,7 +14,7 @@ import {
 } from 'node:path/posix';
 import { fileURLToPath } from 'node:url';
 
-import type { OgImageParams } from './helpers/og-image.ts';
+import type { OgImageContent } from './helpers/og-image.ts';
 
 import {
   computeOgHash,
@@ -27,8 +27,8 @@ import { toPosixPath } from './helpers/root.ts';
 type CacheManifest = Record<string, string>;
 
 interface PageEntry {
+  content: OgImageContent;
   hash: string;
-  params: OgImageParams;
   slug: string;
 }
 
@@ -45,7 +45,7 @@ const API_DIR_NAME = 'api';
 
 const DEFAULT_OG_SLUG = 'default';
 
-const DEFAULT_OG_PARAMS: OgImageParams = {
+const DEFAULT_OG_CONTENT: OgImageContent = {
   description: 'Typescript typings for undocumented parts of the Obsidian API.',
   title: 'Obsidian Typings'
 };
@@ -60,8 +60,8 @@ interface GenerateOptions {
 
 async function collectPages(contentDocsDirectory: string): Promise<PageEntry[]> {
   const pages: PageEntry[] = [{
-    hash: computeOgHash(DEFAULT_OG_PARAMS),
-    params: DEFAULT_OG_PARAMS,
+    content: DEFAULT_OG_CONTENT,
+    hash: computeOgHash(DEFAULT_OG_CONTENT),
     slug: DEFAULT_OG_SLUG
   }];
   await walkDirectory(contentDocsDirectory, contentDocsDirectory, pages);
@@ -92,7 +92,7 @@ async function generateImagesWithPool(options: GenerateOptions): Promise<void> {
       }
       const outputPath = `${outputDirectory}/${page.slug}.png`;
       await mkdir(dirname(outputPath), { recursive: true });
-      const png = await renderOgImage(page.params, fonts, logoBase64);
+      const png = await renderOgImage(page.content, fonts, logoBase64);
       await writeFile(outputPath, png);
       manifest[page.slug] = page.hash;
       completed++;
@@ -181,15 +181,15 @@ async function parsePage(filePath: string, contentDocsDirectory: string): Promis
    * `undefined`. Both consumers - `computeOgHash` via `?? ''` and `buildOgImageMarkup` via a truthiness
    * test - already read the two the same way, so this changes no output and no hash.
    */
-  const params: OgImageParams = {
+  const ogContent: OgImageContent = {
     ...badgeText !== undefined && { badge: badgeText },
     description,
     title
   };
 
   return {
-    hash: computeOgHash(params),
-    params,
+    content: ogContent,
+    hash: computeOgHash(ogContent),
     slug
   };
 }
