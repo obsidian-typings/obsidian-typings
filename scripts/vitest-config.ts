@@ -10,8 +10,8 @@ export const config = defineConfig({
     projects: [
       {
         // The scripts tree is plain Node tooling: the vendored ESLint rules are tested with the typescript-eslint
-        // rule tester, which needs the real Node runtime. `main` carries no other test project, so this is the
-        // only one, but it keeps the name the rest of the fleet gives it so `npm test` reads the same everywhere.
+        // rule tester, which needs the real Node runtime. No branch of this repo has another test project, so this
+        // is the only one; it keeps the name the other repositories vendoring these rules give it.
         test: {
           environment: 'node',
           exclude: [...SHARED_EXCLUDE],
