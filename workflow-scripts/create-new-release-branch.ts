@@ -1,7 +1,9 @@
-import { compare } from 'semver';
-
 import type { BranchSpec } from './helpers/branchSpec.ts';
 
+import {
+  assertNewBranchFollowsLatest,
+  selectLatestBranch
+} from './helpers/baseBranch.ts';
 import { generateBranchName } from './helpers/branchSpec.ts';
 import { restoreWorkflowScripts } from './helpers/checkout.ts';
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
@@ -41,38 +43,13 @@ async function main(): Promise<void> {
   const latestPublicVersion = await getLatestVersion('public');
   const latestCatalystVersion = await getLatestVersion('catalyst');
 
-  let latestVersionChannel: 'catalyst' | 'public';
-  let latestVersion: string;
-
-  // For one and the same Obsidian version the public branch is cut AFTER the catalyst one, so on a tie
-  // public is the later of the two, and it is the branch a new release has to be based on. The comparison
-  // is therefore `<= 0`, not `< 0`: an equal pair used to fall into the `else` and pick catalyst, the older
-  // of the two. The equal-version guard below encodes the very same ordering -- it refuses a new `catalyst`
-  // at the latest version and lets a new `public` through -- so this used to contradict its own guard.
-  if (compare(latestCatalystVersion, latestPublicVersion) <= 0) {
-    latestVersionChannel = 'public';
-    latestVersion = latestPublicVersion;
-  } else {
-    latestVersionChannel = 'catalyst';
-    latestVersion = latestCatalystVersion;
-  }
-
-  if (compare(newVersion, latestVersion) < 0) {
-    throw new Error(`New Obsidian version ${newVersion} is older than the latest version ${latestVersion} ${latestVersionChannel}.`);
-  }
-
-  if (compare(newVersion, latestVersion) === 0) {
-    if (newVersionChannel === latestVersionChannel) {
-      throw new Error(`New Obsidian version ${newVersion} is the same as the latest version ${latestVersion} ${latestVersionChannel}.`);
-    }
-
-    if (newVersionChannel === 'catalyst') {
-      throw new Error(`New Obsidian version ${newVersion} is the same as the latest version ${latestVersion} ${latestVersionChannel}.`);
-    }
-  }
-
-  const latestBranch = generateBranchName({ channel: latestVersionChannel, obsidianVersion: latestVersion });
+  // Both decisions live in `helpers/baseBranch.ts`, where they are pure and tested: this file runs `main()`
+  // the moment it is imported.
+  const latestBranchSpec = selectLatestBranch(latestCatalystVersion, latestPublicVersion);
   const newBranchSpec: BranchSpec = { channel: newVersionChannel, obsidianVersion: newVersion };
+  assertNewBranchFollowsLatest(newBranchSpec, latestBranchSpec);
+
+  const latestBranch = generateBranchName(latestBranchSpec);
   const newBranch = generateBranchName(newBranchSpec);
 
   // The base branch NAME is chosen from the REMOTE refs -- `getLatestVersion()` fetches and reads
