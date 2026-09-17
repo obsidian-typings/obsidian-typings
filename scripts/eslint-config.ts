@@ -672,6 +672,21 @@ function getUnicornConfigs(): Linter.Config[] {
          */
         'unicorn/no-unreadable-array-destructuring': 'off',
         'unicorn/no-unreadable-for-of-expression': 'off',
+        /*
+         * The shared config's options, taken as they are. `checkArrowFunctionBody` reports the
+         * `mockImplementation(() => undefined)` in `helpers/package-manager.test.ts`, a file copied byte-for-byte
+         * from a sibling repo that runs these same options, so editing the copy would diverge it. `checkArguments`
+         * strips `undefined` arguments, which shifts the remaining positional arguments into the wrong slots. The
+         * rule's remaining cases (a bare `undefined` initializer, `return undefined;` in a void function) are
+         * still worth having.
+         */
+        'unicorn/no-useless-undefined': [
+          'error',
+          {
+            checkArguments: false,
+            checkArrowFunctionBody: false
+          }
+        ],
         'unicorn/prefer-array-from-async': 'off',
         'unicorn/prefer-iterator-to-array': 'off',
         'unicorn/prefer-number-coercion': 'off',

@@ -121,6 +121,12 @@ They were `src/**/*.ts` + `scripts/**/*.ts`, copied from the root config where b
 
 The globs are now the whole package. `no-console` and `import-x/no-nodejs-modules` are off **package-wide** rather than over a `scripts/` subdirectory, because every file here is a script — the root config scopes those two to `scripts/**` for the opposite reason, that the package around it is a typings surface.
 
+### `scripts/helpers/package-manager.test.ts` is a copy, not this repo's own suite
+
+It is taken **byte-for-byte** from `obsidian-test-mocks`, where it is maintained, and the same file runs in the other repos that share `package-manager.ts`. Sync it by copying and comparing hashes, never by editing it here: it lays down real directory trees under the OS temp directory and stubs `process.platform`, which is what lets one copy run unchanged everywhere. Its 42 cases cover the lockfile and `packageManager` detection that an npm-only tree cannot reach, and the `node_modules/.bin` shim resolution. When a copy trips a lint rule here, the answer is the shared config's options for that rule, not an edit to the copy — `unicorn/no-useless-undefined` took them for exactly that reason.
+
+It is on `main` and `release/obsidian-catalyst/*`, and **not on `release/obsidian-public/*`**, because that branch's `package-manager.ts` has no `resolveToolCommand` for it to import. It goes there once public's `scripts/` tree catches up with catalyst's.
+
 ## Pinned Versions
 
 An **exact** version (no `^`) is how a dependency is held back here, and it is also what makes it invisible to `update-npm-deps.ps1`: that script upgrades caret ranges and *silently* skips exact pins. Nothing will ever remind you a pin is stale, so every pin carries a row in [`pinned-versions.json`](pinned-versions.json) naming the condition that releases it and the command that tests that condition.
