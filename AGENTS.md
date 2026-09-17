@@ -129,7 +129,7 @@ The globs are now the whole package. `no-console` and `import-x/no-nodejs-module
 
 It is taken **byte-for-byte** from `obsidian-test-mocks`, where it is maintained, and the same file runs in the other repos that share `package-manager.ts`. Sync it by copying and comparing hashes, never by editing it here: it lays down real directory trees under the OS temp directory and stubs `process.platform`, which is what lets one copy run unchanged everywhere. Its 42 cases cover the lockfile and `packageManager` detection that an npm-only tree cannot reach, and the `node_modules/.bin` shim resolution. When a copy trips a lint rule here, the answer is the shared config's options for that rule, not an edit to the copy — `unicorn/no-useless-undefined` took them for exactly that reason.
 
-It is on `main` and `release/obsidian-catalyst/*`, and **not on `release/obsidian-public/*`**, because it has not been copied there yet. The `resolveToolCommand` it imports reached public when public's `scripts/` tree caught up with catalyst's, so nothing blocks the copy any more.
+It is on `main`, `release/obsidian-catalyst/*` and `release/obsidian-public/*`. Public could only take it once its `scripts/` tree had caught up with catalyst's, because the copy imports `resolveToolCommand`, which public's `package-manager.ts` did not export until then. A new release branch is cut from the latest one, so it inherits the copy.
 
 ## Pinned Versions
 
