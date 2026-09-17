@@ -37,32 +37,51 @@ export type PackageRegistryState = 'missing' | 'placeholderOnly' | 'released';
 /**
  * How an {@link attachTrustedPublisher} attempt ended.
  *
- * Until 2026-09-16 this was a bare `boolean`, and the three failures below were one `false`: everything npm
+ * Until 2026-09-16 this was a bare `boolean`, and every non-success below was one `false`: everything npm
  * said about which one it was went to the operator's screen and nowhere a caller could read. They want
  * different things said about them. A code nobody typed is answered by typing one; a code the registry
  * refused is answered by a fresh one, since a code is single-use and time-boxed; and a refusal no code fixes
  * is answered only by reading npm's own words for it.
  *
- * `refused` is the catch-all of the three, and it is a narrower state than it sounds. Measured 2026-09-16
+ * `alreadyConfigured` is the odd one out, and the only one where npm exited non-zero while the caller got
+ * what it wanted. The registry answers a POST that overlaps an existing configuration with `E409` and
+ * creates nothing (measured 2026-09-17 -- see {@link attachTrustedPublisher}), so the package ends up with a
+ * publisher this workflow's token matches, which is the whole of what an attach is for. It is kept apart
+ * from `refused` because folding the two together reports a correctly-configured package as a failure and
+ * sends its operator off to fix what is not broken.
+ *
+ * `refused` is the catch-all of the rest, and it is a narrower state than it sounds. Measured 2026-09-16
  * against the live registry, the trust endpoint challenges for a one-time password **before** it checks
  * anything else -- a POST naming a package that does not exist, from an account that does not own it, is
  * answered `EOTP` rather than 404 -- so the first call almost never fails for its real reason. What lands
  * here is mostly a machine with no npm login at all (`ENEEDAUTH`, which no code fixes) or a refusal the
  * registry only gets round to stating once a code has been accepted.
  */
-export type TrustedPublisherAttachOutcome = 'attached' | 'challenged' | 'oneTimePasswordRejected' | 'refused';
+export type TrustedPublisherAttachOutcome =
+  | 'alreadyConfigured'
+  | 'attached'
+  | 'challenged'
+  | 'oneTimePasswordRejected'
+  | 'refused';
 
 /**
  * What {@link readTrustedPublisherState} was able to find out about a package's trusted publisher.
  *
  * `unknown` is a first-class answer rather than a failure. The read is authenticated and 2FA-gated, so
- * "nobody is logged in on this machine", "the registry challenged for a one-time password and there was
- * nobody to type one", "the code it was given was wrong or had expired", and "the request never arrived" all
- * land in it — and a caller that cannot tell those apart must not act as though it can.
+ * "nobody is logged in on this machine", "this machine's token has expired", "the registry challenged for a
+ * one-time password and there was nobody to type one", "the code it was given was wrong or had expired", and
+ * "the request never arrived" all land in it — and a caller that cannot tell those apart must not act as
+ * though it can.
  *
  * Since 2026-09-16 that list is shorter than it was by its most common member. {@link readTrustedPublisherState}
  * can now ask for the code and pass it, so a logged-in operator standing at a terminal gets a definite
  * `attached` or `none` rather than this. `unknown` has gone back to meaning roughly what it says.
+ *
+ * The expired-token route is the one worth naming separately, because it looks like the logged-in case from
+ * here and is not: an `~/.npmrc` carrying an `_authToken` the registry no longer accepts answers `E401`,
+ * where no credential at all answers `ENEEDAUTH` (measured 2026-09-17, and it nearly cost the measurement
+ * {@link attachTrustedPublisher} records — `--otp` supplies the second factor and nothing about the first).
+ * `npm whoami` tells the two apart and is what {@link getNpmUsername} asks.
  */
 export type TrustedPublisherState = 'attached' | 'none' | 'unknown';
 
@@ -105,6 +124,14 @@ const NOT_FOUND_STATUS = 404;
  * different one, and none of them is fixed by asking the operator for six digits.
  */
 const OTP_ERROR_CODE = 'EOTP';
+
+/*
+ * The error code npm reports when the registry refused to create a trust configuration because the package
+ * already carries one a token from the same workflow would match. It is the whole of the test for "this
+ * failed, and the state it wanted is nevertheless the state the package is in"; every other refusal leaves
+ * the package with no publisher.
+ */
+const CONFLICT_ERROR_CODE = 'E409';
 
 /** What {@link attachTrustedPublisher} did, and what npm said while it was doing it. */
 export interface TrustedPublisherAttachResult {
@@ -186,22 +213,34 @@ interface TokenExchangeResponse {
  * configurations" from "some", and `--json` is what suppresses the `dialogue` line that would otherwise make
  * an empty result's stdout non-empty.
  *
- * Neither caller reaches this without already knowing the package has no publisher — a name claimed seconds
- * earlier by `publishPlaceholder`, or a definite `none` {@link resolveTrustedPublisherState} has just read
- * out of {@link readTrustedPublisherState} — and that is deliberate, because what a SECOND configuration does
- * to a package that already has one is not known.
- * `createConfig` in `npm/lib/trust-cmd.js` POSTs `[trustConfig]` and reads nothing beforehand, so the client
- * cannot reconcile and the registry's answer is the whole of the behavior. npm's own bundled `npm-trust.md`
- * says the registry "only supports one configuration per package" and that creating a second "will result in
- * an error", which would make a blind call harmless — but that paragraph was written on 2026-02-11 and last
- * touched on 2026-06-03, and npmjs.com's trusted-publishers page documented on 2026-09-03 that a package may
- * carry up to TEN publishers, added and deleted independently. A registry that accepts ten is not one that
- * refuses the second, so the client doc is stale in exactly the direction that matters: a blind call may
- * leave a duplicate behind rather than being turned away. Settling it needs a write on that endpoint, and
- * every write there costs a one-time password — which is why it is still open rather than merely untried.
- * What capturing changes is only how the answer would be READ when somebody does spend that code: the
- * configurations npm echoes back now arrive in {@link TrustedPublisherAttachResult.npmOutput} instead of
- * scrolling past on a terminal.
+ * **What a SECOND configuration does to a package that already has one was measured on 2026-09-17, and the
+ * registry REFUSES it.** The question was open until then because settling it needs a write on this
+ * endpoint and every write costs a one-time password: `createConfig` in `npm/lib/trust-cmd.js` POSTs
+ * `[trustConfig]` and reads nothing beforehand, so the client cannot reconcile and the registry's answer is
+ * the whole of the behavior. Run against `@obsidian-typings/obsidian-public-latest`, which already carried a
+ * publisher, with a `npm trust list` taken either side of it, npm answered: `E409`,
+ * *"409 Conflict ... a trusted publisher configuration that a token could also match already exists for this
+ * package; list the package trusted publishers to find it"*. The read taken afterwards was byte-identical to
+ * the one taken before — same configuration id, same permissions, still exactly one entry. So a second POST
+ * is neither a duplicate nor a replacement nor a partial write; it is a no-op that says so. That is what
+ * lets {@link resolveTrustedPublisherState} attach on `unknown` as well as on a definite `none`, and why
+ * `E409` comes back here as `alreadyConfigured` rather than as a refusal.
+ *
+ * **The conflict is judged on what a token would match, not on the fields being equal**, which makes that
+ * guarantee wider than "identical": the existing configuration carried `permissions: publish, stage publish`
+ * while this attach's payload carries `permissions: publish` — `--allow-publish` yields that alone — and the
+ * registry refused anyway, in its own words about *"a configuration that a token could also match"*. Read
+ * the other way, the same sentence is a limitation worth knowing: an attach can never WIDEN an existing
+ * configuration, because it is refused before it gets the chance. Narrowing a publisher is `npm trust
+ * revoke <package> --id=<id>` and a fresh attach, not a second POST.
+ *
+ * **The two npm docs that looked like they disagreed about this never did**, and saying so is the correction
+ * to what stood here until the measurement. npm's own bundled `npm-trust.md` — *"if you attempt to create a
+ * new trust relationship when one already exists, it will result in an error"* — describes exactly what
+ * happened, and was read as stale only because npmjs.com's trusted-publishers page says a package may carry
+ * up to ten publishers, added and deleted independently. Those ten are DISTINCT publishers, a different repo
+ * or a different workflow; neither page says which case it is describing, which is the whole of why they
+ * read as a contradiction.
  *
  * Never throws, because every caller's failure path is to print
  * {@link getTrustedPublisherInstructions} and carry on. A publisher that could not be attached from here
@@ -215,7 +254,7 @@ export async function attachTrustedPublisher(packageName: string): Promise<Trust
   }
 
   if (!isOneTimePasswordChallenge(firstResult)) {
-    return { npmOutput: describeNpmFailure(firstResult), outcome: 'refused' };
+    return { npmOutput: describeNpmFailure(firstResult), outcome: getFailedAttachOutcome(firstResult) };
   }
 
   const oneTimePassword = await askOneTimePassword([
@@ -237,7 +276,7 @@ export async function attachTrustedPublisher(packageName: string): Promise<Trust
 
   return {
     npmOutput: describeNpmFailure(retryResult),
-    outcome: isOneTimePasswordChallenge(retryResult) ? 'oneTimePasswordRejected' : 'refused'
+    outcome: isOneTimePasswordChallenge(retryResult) ? 'oneTimePasswordRejected' : getFailedAttachOutcome(retryResult)
   };
 }
 
@@ -249,11 +288,19 @@ export async function attachTrustedPublisher(packageName: string): Promise<Trust
  * afterwards is identical, and it used to be written out twice in two slightly different ways over the same
  * bare `boolean`.
  *
- * Every outcome but `attached` means npm created nothing, which is why both callers map all three onto the
- * `none` half of {@link TrustedPublisherState}. They are still worth telling apart in words: only one of them
- * is fixed by typing a code, and only one of them is npm's final answer.
+ * Every outcome but `attached` means npm created nothing, and all but one of those also mean the package is
+ * still without a publisher -- which is what {@link getTrustedPublisherStateAfterAttach} turns into a
+ * {@link TrustedPublisherState} for both callers. They are still worth telling apart in words: only one of
+ * them is fixed by typing a code, and only one of them is npm's final answer.
  *
- * Each failure ends where the inherited-terminal form always ended, with
+ * `alreadyConfigured` is the exception in both directions, and it is the reason this cannot be written as
+ * "success, then a paragraph of failure". npm exited non-zero, so it reads like a failure; the package has
+ * the publisher it was asked to have, so saying anything about fixing it is wrong. It therefore ends where
+ * the success does rather than at {@link getTrustedPublisherInstructions}: printing "attach the trusted
+ * publisher, or CI still will not be able to publish it" under a `409 Conflict` sends the reader off to
+ * re-attach what the registry has just declined to duplicate.
+ *
+ * Each real failure ends where the inherited-terminal form always ended, with
  * {@link getTrustedPublisherInstructions} -- so nothing is lost by any of the ways this can go wrong.
  */
 export function describeTrustedPublisherAttach(packageName: string, result: TrustedPublisherAttachResult): string {
@@ -265,6 +312,20 @@ export function describeTrustedPublisherAttach(packageName: string, result: Trus
     }
 
     return attached.join('\n');
+  }
+
+  if (result.outcome === 'alreadyConfigured') {
+    const alreadyConfigured = [
+      '',
+      `npm declined to add a second trusted publisher to ${packageName}, because it already carries one that a`,
+      'token from this workflow would match. Nothing was created, and nothing needed to be.'
+    ];
+
+    if (result.npmOutput) {
+      alreadyConfigured.push('', 'npm said:', '', indentBlock(result.npmOutput), '');
+    }
+
+    return alreadyConfigured.join('\n');
   }
 
   const lines = [''];
@@ -463,6 +524,33 @@ export function getTrustedPublisherInstructions(packageName: string): string {
 }
 
 /**
+ * Turns an attach's outcome into what the package's trusted-publisher state now is, given what was known
+ * about it before the attach ran.
+ *
+ * Two facts live here rather than at the three call sites, because a call site that quietly disagreed with
+ * the others would be wrong in a way nothing would catch.
+ *
+ * **`alreadyConfigured` is `attached`.** The registry answers an overlapping second POST with `E409` and
+ * creates nothing, so the package carries a publisher a token from this workflow matches -- which is the
+ * question every caller is actually asking. Folding it in with the failures would report a correctly
+ * configured package as having none, and send `offerRelease` off to ask whether somebody has attached one by
+ * hand.
+ *
+ * **Every other non-success returns `fallbackState` rather than `none`.** What npm created is known -- and
+ * it is nothing -- but that is not the same as what the package HAS. After a definite `none` read, or a name
+ * claimed seconds earlier by `bootstrap-new-package.ts`, `none` is still the truth and that is what the
+ * caller passes. After an `unknown` read it is not: an attach that failed for want of a login says nothing
+ * about a package whose state could not be read in the first place, and answering `none` there would be a
+ * guess wearing the clothes of a reading.
+ */
+export function getTrustedPublisherStateAfterAttach(
+  outcome: TrustedPublisherAttachOutcome,
+  fallbackState: TrustedPublisherState
+): TrustedPublisherState {
+  return outcome === 'alreadyConfigured' || outcome === 'attached' ? 'attached' : fallbackState;
+}
+
+/**
  * Determines whether this CI job is allowed to publish the package, or `null` when that cannot be told from
  * here.
  *
@@ -616,27 +704,35 @@ export async function readTrustedPublisherState(packageName: string): Promise<Tr
  * holding. Nothing gave a reason for the asymmetry; it reads like the attach landed in one script and was
  * never carried to the other.
  *
- * Only the definite `none` is acted on. An `unknown` answer is left alone rather than attached "just in
- * case", because `npm trust github` creates a configuration rather than reconciling one, and what the
- * registry does with a second one is genuinely unsettled -- {@link attachTrustedPublisher} carries what is
- * and is not known about that, including the npm doc that reads like an answer and is stale. This arm used
- * to state flatly that a second call "adds a duplicate record"; nobody had made one, so the claim was as
- * unverified as the behavior it warned about. The asymmetry is what survives the correction: guessing wrong
- * risks a duplicate in the package's trust list, while not guessing costs one question the operator can
- * answer, which is what the `unknown` arm of `offerRelease` is for.
+ * **Both `none` and `unknown` are acted on, and until 2026-09-17 only the first of them was.** An `unknown`
+ * answer used to be left alone rather than attached "just in case", because `npm trust github` creates a
+ * configuration rather than reconciling one and what the registry did with a second one was unmeasured: an
+ * attach that guessed wrong risked a duplicate in a published package's trust list, while not guessing cost
+ * one question the operator could answer, which is what the `unknown` arm of `offerRelease` is for. That
+ * asymmetry is gone, because the guess is no longer a guess. The registry answers an overlapping second POST
+ * with `E409` and creates nothing -- see {@link attachTrustedPublisher} for the measurement -- so the worst a
+ * blind attach can do here is fail loudly with a code that names the cause, and the question it replaces was
+ * being put to an operator who by definition could not answer it from what this script had shown them.
  *
- * Since 2026-09-16 that arm is also much harder to reach, which is the better fix and the one that did not
- * need the unsettled question answered. {@link readTrustedPublisherState} asks the operator for a one-time
- * password when the registry challenges its read, so an operator who is logged in and standing here gets a
- * definite answer and lands on one of the two arms above. What still arrives as `unknown` is a machine with
- * no npm login, a code that was skipped or refused, or a request that never got there -- and for those, an
- * attach would be as blind as it ever was.
+ * The two arms still differ in what they say and in what they answer with, which is the whole reason they are
+ * not one branch. On `none` the attach is the fix for a state npm has just stated. On `unknown` it is an
+ * attempt at a state nobody could read, so a failure leaves the answer exactly as unread as it was: the
+ * fallback handed to {@link getTrustedPublisherStateAfterAttach} is `unknown` rather than `none`, and the
+ * hand-back {@link describeTrustedPublisherAttach} prints is the one that arm has always ended with.
+ *
+ * Reaching `unknown` at all has been rare since 2026-09-16, which is why this is a smaller change than it
+ * sounds. {@link readTrustedPublisherState} asks the operator for a one-time password when the registry
+ * challenges its read, so an operator who is logged in and standing here gets a definite answer and lands on
+ * one of the other two arms. What still arrives as `unknown` is a machine with no npm login, one whose token
+ * has expired, a code that was skipped or refused, or a request that never got there -- and the first two of
+ * those will fail the attach as well, for the same reason, one `npm trust github` later.
  *
  * The `none` this returns when the attach does not land is npm's word rather than this function's guess,
  * which it was not before 2026-09-16: {@link attachTrustedPublisher} answered a bare `false` covering "no
  * code was typed", "the code was refused" and "npm said no" alike, and the only thing to do with it was to
- * print the whole hand-back again. {@link describeTrustedPublisherAttach} now says which of the three it was,
- * and all three still mean npm created nothing, so the mapping to `none` is unchanged.
+ * print the whole hand-back again. {@link describeTrustedPublisherAttach} now says which of them it was, and
+ * every one of them still means npm created nothing, so the mapping through
+ * {@link getTrustedPublisherStateAfterAttach} is unchanged for this arm.
  *
  * Every message names the package rather than saying "it". The two callers print very different preambles
  * ahead of this -- one about a name it declined to re-claim, one about a branch it has just cut -- and a
@@ -654,18 +750,19 @@ export async function resolveTrustedPublisherState(packageName: string): Promise
     console.log(`\nnpm would not say whether ${packageName} has a trusted publisher. That read needs an npm`);
     console.log('login and a one-time password: either this machine has no login, or no code reached the');
     console.log('registry -- none was typed, or the one that was had expired.');
-    console.log(getTrustedPublisherInstructions(packageName));
-    return publisherState;
+    console.log('\nAttaching one anyway. The registry answers a POST overlapping a configuration it already');
+    console.log('holds with 409 Conflict and creates nothing, so this cannot duplicate a publisher that is');
+    console.log('already there; it can only attach the missing one, or fail and say why.');
+  } else {
+    console.log(`\nnpm reports no trusted publisher on ${packageName}, so that is the half still outstanding.`);
+    console.log('Attaching it now. That needs a one-time password of its own: npm challenges per operation and');
+    console.log('caches nothing between processes, so this code cannot be a reuse of any earlier one.');
   }
-
-  console.log(`\nnpm reports no trusted publisher on ${packageName}, so that is the half still outstanding.`);
-  console.log('Attaching it now. That needs a one-time password of its own: npm challenges per operation and');
-  console.log('caches nothing between processes, so this code cannot be a reuse of any earlier one.');
 
   const attachResult = await attachTrustedPublisher(packageName);
   console.log(describeTrustedPublisherAttach(packageName, attachResult));
 
-  return attachResult.outcome === 'attached' ? 'attached' : 'none';
+  return getTrustedPublisherStateAfterAttach(attachResult.outcome, publisherState);
 }
 
 /**
@@ -725,6 +822,12 @@ async function askOneTimePassword(preamble: readonly string[]): Promise<null | s
  * A non-zero exit is reported as `challenged` rather than as a refusal: the only way here is through a
  * captured call that already came back `EOTP`, so the challenge is the known cause and npm was given the one
  * thing that could answer it -- the operator's terminal.
+ *
+ * That wording sweeps up one case this path cannot see, deliberately. A package that already carries an
+ * overlapping publisher is answered `E409` only once the code npm collected has been accepted, and nothing
+ * here reads either. The operator reads it on their own screen; the caller is left exactly where it started,
+ * which is the honest answer when the whole point of this path is that npm owns the conversation. Reporting
+ * `alreadyConfigured` off a stream nothing captured would be inventing a state.
  */
 function attachTrustedPublisherInteractively(packageName: string): TrustedPublisherAttachResult {
   if (!process.stdin.isTTY || !process.stdout.isTTY) {
@@ -799,6 +902,24 @@ async function fetchActionsIdToken(): Promise<null | string> {
   } catch {
     return null;
   }
+}
+
+/**
+ * Which failure a non-zero {@link runTrustAttach} was, once the one-time-password challenge has been ruled
+ * out by its caller.
+ *
+ * `E409` is the registry saying the package already carries a configuration a token from this workflow would
+ * match -- see {@link attachTrustedPublisher} for the measurement behind that. It is a failure of the POST
+ * and a success for the caller, and it is the one refusal that must not be reported as one.
+ *
+ * A token test over both streams rather than a parse, exactly as {@link isOneTimePasswordChallenge} is and
+ * for the same reasons. The attach runs without `--json`, so stderr's `npm error code E409` line is the whole
+ * of what there is to read; stdout is tested too because that costs nothing and the day this call gains
+ * `--json` is not the day anyone will remember to come back here.
+ */
+function getFailedAttachOutcome(result: ExecResult): TrustedPublisherAttachOutcome {
+  const isConflict = result.stdout.includes(CONFLICT_ERROR_CODE) || result.stderr.includes(CONFLICT_ERROR_CODE);
+  return isConflict ? 'alreadyConfigured' : 'refused';
 }
 
 /**

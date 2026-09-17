@@ -64,6 +64,7 @@ import {
   getNpmUsername,
   getPackageRegistryState,
   getScopedPackageName,
+  getTrustedPublisherStateAfterAttach,
   PLACEHOLDER_VERSION,
   REPOSITORY,
   resolveTrustedPublisherState
@@ -132,13 +133,18 @@ async function main(): Promise<void> {
   const attachResult = await attachTrustedPublisher(packageName);
   console.log(describeTrustedPublisherAttach(packageName, attachResult));
 
-  // Every non-`attached` outcome means npm created nothing, and on THIS path that settles the state rather
-  // than merely narrowing it: the name was claimed seconds ago by `publishPlaceholder`, so nothing else can
-  // have attached a publisher in the meantime. It used to be reported as `unknown`, which was the honest
-  // answer while a bare `false` covered "no code was typed", "the code was refused" and "npm said no" alike.
-  // `none` is what `offerRelease` wants to hear: it asks whether the operator has attached one in another
-  // window, rather than the vaguer question it puts when nobody knows.
-  const publisherState: TrustedPublisherState = attachResult.outcome === 'attached' ? 'attached' : 'none';
+  // `none` is the right fallback on THIS path, and it settles the state rather than merely narrowing it: the
+  // name was claimed seconds ago by `publishPlaceholder`, so a failed attach cannot be hiding a publisher
+  // something else attached in the meantime. It used to be reported as `unknown`, which was the honest answer
+  // while a bare `false` covered "no code was typed", "the code was refused" and "npm said no" alike. `none`
+  // is what `offerRelease` wants to hear: it asks whether the operator has attached one in another window,
+  // rather than the vaguer question it puts when nobody knows.
+  //
+  // Which outcomes survive that fallback is `getTrustedPublisherStateAfterAttach`'s business rather than this
+  // script's -- notably the `E409` the registry answers an overlapping second POST with, which is a failure of
+  // the POST and an `attached` package. It cannot happen here for the same reason `none` is safe, and reading
+  // the answer out of the shared helper is what keeps that from being a claim this file has to make.
+  const publisherState: TrustedPublisherState = getTrustedPublisherStateAfterAttach(attachResult.outcome, 'none');
 
   if (publisherState === 'attached') {
     console.log('Both halves of this step are done.');
