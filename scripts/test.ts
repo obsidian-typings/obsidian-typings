@@ -4,4 +4,4 @@ import { execFromRoot } from './helpers/root.ts';
 
 exitIfScriptDisabled();
 
-await execFromRoot([...resolveToolCommand({ tool: 'vitest' }), 'run', '--project', 'unit-tests:scripts']);
+await execFromRoot([...resolveToolCommand({ tool: 'vitest' }), 'run', '--project', 'unit-tests:scripts', '--project', 'unit-tests:workflow-scripts']);
