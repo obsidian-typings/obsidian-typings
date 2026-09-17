@@ -262,11 +262,6 @@ const CMD_SHELL_WRAPPER = ' /d /s /c ""';
  */
 const POSIX_UNSAFE_RE = /[^\w@%+=:,./-]/;
 
-const CHILD_ENV = {
-  DEBUG_COLORS: '1',
-  ...process.env
-};
-
 /*
  * The same two-overload shape `exec` and `execFromRoot` carry, and for the same reason one layer down:
  * `executeBatches` asks for details whatever its caller asked for, and without this it would be handed back
@@ -489,7 +484,15 @@ function spawnViaShell(
   env: Readonly<Record<string, string>>,
   rawArguments?: string[]
 ): ChildProcessWithoutNullStreams {
-  const childEnv = { ...CHILD_ENV, ...env };
+  /*
+   * Read `process.env` HERE, per spawn, never into a module-level snapshot. Callers set variables for the
+   * children they start long after this module loaded: `build-pages.ts` sets `CURRENT_CHANNEL`, `BASE_PATH`
+   * and both `LATEST_*_TYPINGS_VERSION`s right before `npm run setup`, and `docs/scripts/setup.ts` sets
+   * `TYPINGS_ROOT` before the generator. A snapshot taken at import dropped every one of them, so the
+   * catalyst docs job built the public channel, failed on a branch it had never checked out, and no docs
+   * deployed from 2026-09-16 until the snapshot was removed.
+   */
+  const childEnv = { DEBUG_COLORS: '1', ...process.env, ...env };
 
   if (process.platform === 'win32' && command.includes('\n')) {
     /*
