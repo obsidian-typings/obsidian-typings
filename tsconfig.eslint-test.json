@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["es2022"],
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "target": "es2022"
+  }
+}

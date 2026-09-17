@@ -37,17 +37,17 @@ const OFFICIAL_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" he
 // Lucide "circle-help" icon SVG path (same as global.css .icon-unofficial)
 const UNOFFICIAL_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${UNOFFICIAL_COLOR}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>`;
 
-export interface OgImageParams {
+export interface OgImageContent {
   readonly badge?: string;
   readonly description?: string;
   readonly title: string;
 }
 
-export function computeOgHash(params: OgImageParams): string {
+export function computeOgHash(content: OgImageContent): string {
   const input = JSON.stringify({
-    badge: params.badge ?? '',
-    description: params.description ?? '',
-    title: params.title
+    badge: content.badge ?? '',
+    description: content.description ?? '',
+    title: content.title
   });
   const HASH_LENGTH = 16;
   return createHash('sha256').update(input).digest('hex').slice(0, HASH_LENGTH);
@@ -72,8 +72,8 @@ export async function loadLogoBase64(docsDirectory: string): Promise<string> {
   return `data:image/png;base64,${logoData.toString('base64')}`;
 }
 
-export async function renderOgImage(params: OgImageParams, fonts: Font[], logoBase64: string): Promise<Buffer> {
-  const markup = buildOgImageMarkup(params, logoBase64);
+export async function renderOgImage(content: OgImageContent, fonts: Font[], logoBase64: string): Promise<Buffer> {
+  const markup = buildOgImageMarkup(content, logoBase64);
   const svg = await satori(markup, {
     fonts,
     height: OG_HEIGHT,
@@ -129,8 +129,8 @@ function buildBadgeMarkup(badge: string): null | Record<string, unknown> {
   };
 }
 
-function buildOgImageMarkup(params: OgImageParams, logoBase64: string): Record<string, unknown> {
-  const badgeNode = params.badge ? buildBadgeMarkup(params.badge) : null;
+function buildOgImageMarkup(content: OgImageContent, logoBase64: string): Record<string, unknown> {
+  const badgeNode = content.badge ? buildBadgeMarkup(content.badge) : null;
 
   // Top row with badge
   const topRow = {
@@ -153,7 +153,7 @@ function buildOgImageMarkup(params: OgImageParams, logoBase64: string): Record<s
   // Title
   const title = {
     props: {
-      children: params.title,
+      children: content.title,
       style: {
         color: TITLE_COLOR,
         fontSize: `${String(TITLE_FONT_SIZE)}px`,
@@ -170,7 +170,7 @@ function buildOgImageMarkup(params: OgImageParams, logoBase64: string): Record<s
   // Description
   const description = {
     props: {
-      children: params.description ?? '',
+      children: content.description ?? '',
       style: {
         color: DESCRIPTION_COLOR,
         flex: 1,

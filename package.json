@@ -45,6 +45,7 @@
     "lint:md:fix": "jiti scripts/lint-md-fix.ts",
     "prepare": "jiti scripts/prepare.ts",
     "spellcheck": "jiti scripts/spellcheck.ts",
+    "test": "jiti scripts/test.ts",
     "typecheck": "jiti scripts/typecheck.ts"
   },
   "overrides": {
@@ -64,6 +65,7 @@
     "@tsconfig/strictest": "^2.0.8",
     "@types/markdown-it": "^14.2.0",
     "@types/node": "^26.3.0",
+    "@typescript-eslint/rule-tester": "^8.70.0",
     "@typescript-eslint/utils": "^8.68.0",
     "cspell": "^10.1.0",
     "czg": "^1.14.0",
@@ -83,6 +85,7 @@
     "nano-staged": "^1.0.2",
     "type-fest": "^5.8.0",
     "typescript": "6.0.3",
-    "typescript-eslint": "^8.68.0"
+    "typescript-eslint": "^8.68.0",
+    "vitest": "^5.0.1"
   }
 }
