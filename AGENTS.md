@@ -265,11 +265,7 @@ Freeing that branch-count check from its second job also let it say what it mean
 Members that exist at runtime but are not modeled yet. Each names the member, the Obsidian version it was
 observed in, and the target branch(es).
 
-- `Setting.disabled` (`boolean`), observed in 1.14.2 and 1.13.7, target: both latest release branches. The
-  constructor initializes it to `false`, `setDisabled` is its only writer, and the row-click listener that
-  `setRowClick` installs reads it as its guard — so the setter and the reader are both modeled while the
-  flag itself is not. `BaseComponent.disabled` is a different member on a different class, which is why a
-  grep across the settings tree makes this look covered.
+None currently — the last one, `Setting.disabled`, is modeled on both latest release branches.
 
 ## Documentation
 
