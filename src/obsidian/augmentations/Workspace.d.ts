@@ -864,6 +864,7 @@ declare module 'obsidian' {
      * app.workspace.on('css-change', () => {
      *     console.log('css-change');
      * });
+     * ```
      * @official
      */
     on(name: 'css-change', callback: () => unknown, ctx?: unknown): EventRef;
@@ -1263,6 +1264,7 @@ declare module 'obsidian' {
      * app.workspace.on('window-open', (win, window) => {
      *     console.log(win, window);
      * });
+     * ```
      * @official
      */
     on(name: 'window-open', callback: (win: WorkspaceWindow, window: Window) => unknown, ctx?: unknown): EventRef;

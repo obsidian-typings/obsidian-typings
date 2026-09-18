@@ -10,6 +10,7 @@ declare global {
    * ready(() => {
    *     console.log('DOM is ready');
    * });
+   * ```
    * @official
    */
   function ready(fn: () => unknown): void;

@@ -100,6 +100,7 @@ declare module 'obsidian' {
      * @example
      * ```ts
      * keymap.popScope(new Scope());
+     * ```
      * @official
      * @since 0.13.9
      */

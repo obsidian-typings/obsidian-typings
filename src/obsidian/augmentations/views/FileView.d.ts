@@ -136,6 +136,7 @@ declare module 'obsidian' {
      *         console.log(file);
      *     }
      * }
+     * ```
      * @official
      */
     onRename(file: TFile): Promise<void>;
@@ -153,6 +154,7 @@ declare module 'obsidian' {
      *         console.log(file);
      *     }
      * }
+     * ```
      * @official
      */
     onUnloadFile(file: TFile): Promise<void>;

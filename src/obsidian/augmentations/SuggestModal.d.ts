@@ -126,6 +126,7 @@ declare module 'obsidian' {
      *         console.log(item);
      *     }
      * }
+     * ```
      * @official
      * @deprecated - Added only for typing purposes. Use {@link onChooseSuggestion} instead.
      * @since 1.5.7
