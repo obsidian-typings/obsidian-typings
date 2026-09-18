@@ -234,6 +234,14 @@ declare module 'obsidian' {
     /**
      * Iterate over all links in the vault with callback.
      *
+     * This member does not exist at runtime and is removed only on the next release branch, because
+     * removing a declared member is a breaking change. `iterateAllRefs` is defined exactly once in the
+     * Obsidian bundle, on {@link obsidian#MetadataCache}, and {@link obsidian#FileManager} merely calls it
+     * through `app.metadataCache`. So `app.fileManager.iterateAllRefs(...)` compiles and then throws
+     * `app.fileManager.iterateAllRefs is not a function`. Call `app.metadataCache.iterateAllRefs(...)`
+     * instead, whose callback is a predicate over {@link obsidian#Reference} rather than the `void`
+     * consumer over `PositionedReference` declared here.
+     *
      * @param callback - Callback to execute for each link.
      * @unofficial
      */
