@@ -105,6 +105,7 @@ declare global {
      * @example
      * ```ts
      * createEl('input', { type: 'text' });
+     * ```
      * @official
      */
     type?: string;

@@ -163,6 +163,7 @@ declare global {
      * document.body.onWindowMigrated((win) => {
      *     console.log('window migrated');
      * });
+     * ```
      * @official
      */
     onWindowMigrated(this: HTMLElement, listener: (win: Window) => unknown): () => void;

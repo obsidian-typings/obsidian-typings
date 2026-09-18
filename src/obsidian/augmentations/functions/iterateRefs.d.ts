@@ -14,6 +14,7 @@ declare module 'obsidian' {
    *     console.log(ref);
    *     return true;
    * });
+   * ```
    * @official
    */
 

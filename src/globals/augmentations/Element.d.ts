@@ -14,6 +14,7 @@ declare global {
      * const element = createEl('p');
      * element.addClass('foo', 'bar');
      * console.log(element.className); // foo
+     * ```
      * @official
      */
     addClass(...classes: string[]): void;

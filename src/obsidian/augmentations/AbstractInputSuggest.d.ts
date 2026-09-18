@@ -74,6 +74,7 @@ declare module 'obsidian' {
      *         return await Promise.resolve(['foo', 'bar']);
      *     }
      * }
+     * ```
      * @official
      * @deprecated - Added only for typing purposes. Use {@link getSuggestions} instead.
      * @since 1.5.7
