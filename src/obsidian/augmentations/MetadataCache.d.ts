@@ -442,13 +442,23 @@ declare module 'obsidian' {
     /**
      * Iterate over all link references in the vault with callback.
      *
-     * @param callback - The callback to execute for each reference path.
+     * The callback is invoked with the path of the file the reference was found in and the reference
+     * itself. Returning `true` from it stops the iteration.
+     *
+     * @param callback - The callback to execute for each reference.
      * @unofficial
      */
-    iterateAllRefs(callback: (path: string) => void): void;
+    iterateAllRefs(callback: (path: string, reference: Reference) => boolean | void): void;
 
     /**
      * Iterate over all references for a specific file.
+     *
+     * This declaration does not match the runtime and is corrected only on the next release branch,
+     * because every part of the correction is a breaking change. At runtime the first argument is the
+     * {@link obsidian#TFile} itself rather than its path, and passing a path silently walks nothing;
+     * the callback is a predicate, so returning `true` stops the iteration; and frontmatter links are
+     * visited first, which carry no position, so the reference is not necessarily a
+     * {@link obsidian#ReferenceCache}.
      *
      * @param path - The file path to iterate references for.
      * @param callback - The callback to execute for each reference.
