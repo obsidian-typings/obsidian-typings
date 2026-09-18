@@ -20,6 +20,7 @@ declare module 'obsidian' {
    *     console.log(ref);
    *     return true;
    * });
+   * ```
    * @official
    * @deprecated - Use {@link iterateRefs} instead.
    */

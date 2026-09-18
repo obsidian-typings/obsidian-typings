@@ -325,6 +325,7 @@ function getObsidianTypingsConfigs(): Linter.Config[] {
         'obsidian-typings/file-extension': 'error',
         'obsidian-typings/import-extensions': 'error',
         'obsidian-typings/internals-interface-tags': 'error',
+        'obsidian-typings/jsdoc-balanced-code-fences': 'error',
         'obsidian-typings/jsdoc-empty-line-before-tags': 'error',
         'obsidian-typings/no-declare-module-in-internals': 'error',
         'obsidian-typings/no-inherit-doc-tag': 'error',

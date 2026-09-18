@@ -110,6 +110,7 @@ declare global {
      * document.body.createSvg('svg', { cls: 'foo bar' }, (svg) => {
      *     svg.createSvg('circle');
      * });
+     * ```
      * @official
      */
     createSvg<K extends keyof SVGElementTagNameMap>(
