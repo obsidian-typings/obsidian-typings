@@ -34,6 +34,15 @@ declare module 'obsidian' {
     descEl: HTMLElement;
 
     /**
+     * Whether the setting row is disabled. Initialized to `false`, written only by
+     * {@link Setting.setDisabled}, and read as its guard by the row-click listener that
+     * {@link Setting.setRowClick} attaches, so a disabled row does not invoke {@link Setting.rowClick}.
+     *
+     * @unofficial
+     */
+    disabled: boolean;
+
+    /**
      * Error message element shown below the input. Created by {@link setErrorMessage}.
      *
      * @official
