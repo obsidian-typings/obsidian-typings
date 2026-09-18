@@ -42,8 +42,9 @@ These are standalone exported interfaces for Obsidian's internal objects.
 - Simple methods with no parameters can use short single-line TSDoc.
 - `@param` format: `@param name - Description.`
 - HTML element variables are suffixed with `El` (e.g., `containerEl`, `styleEl`).
-- Prefer method syntax `method(args): returnType` over property-with-function syntax `prop: (args) => returnType` when applicable.
-- Inside interfaces, fields (properties) go first in alphabetical order, then methods in alphabetical order.
+- Function-typed members use method shorthand — `done?(): void`, never `done?: () => void`. `@typescript-eslint/method-signature-style` rejects the property form outright, so this is enforced rather than preferred; a union such as `(() => void) | null` is not a function property signature and stays as it is.
+- Inside interfaces, fields (properties) go first in alphabetical order, then methods in alphabetical order. `perfectionist/sort-interfaces` counts a method-shorthand member as a **method**, so a callback written in shorthand sorts into the method block rather than among the fields it reads like.
+- A member added to an interface a consumer can **construct** is declared **optional**, even where Obsidian always initializes it. `ViewStateResult.close` and `.layout` are the case in point: `WorkspaceLeaf.setViewState` builds both beside the required `history` and neither is ever absent in practice, so required would model the runtime more closely — and would break every consumer that writes its own `{ history: false }` literal, `obsidian-test-mocks` among them. The pipeline only bumps minor, so that break would ship inside a release branch with no version change to signal it.
 
 ## Build Gate
 
