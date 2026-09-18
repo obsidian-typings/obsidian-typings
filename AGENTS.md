@@ -151,6 +151,18 @@ That split is in `package.json`; `node_modules` does **not** follow it. There is
 
 Only the **latest `release/obsidian-public/*`** and the **latest `release/obsidian-catalyst/*`** branches are actively maintained. Older release branches are frozen — type fixes and new modeling land on the two latest branches only. (Referred to by role, not by pinned version, so this stays current across releases.)
 
+### A breaking correction waits for the next branch cut
+
+That sentence covers **additions and compatible corrections** — a new declaration, a new member on an internals interface, a new union member — which land on both maintained branches as soon as they are ready. A **breaking** correction is the one change it must not be read as authorizing: removing a declared member that turned out not to exist, or correcting a signature that was wrong, waits for the next release branch cut. Neither half of that is visible from the type sources; both follow from the release path.
+
+**There is no major bump anywhere in the pipeline.** `updateNpmVersions()` and `getNextWrapperVersion()` in [`publish-release.ts`](workflow-scripts/publish-release.ts) are both `isBeta ? inc(currentVersion, 'preminor', 'beta') : inc(currentVersion, 'minor')`, so every release of every package published from here is a minor whatever it contains. A break landed on a maintained branch therefore ships with **no version signal at all**, and reaches every consumer on a caret range at their next install. "Cut a major for it" is not an option the release path offers.
+
+**A branch cut is where the same break costs least.** [`create-new-release-branch.ts`](workflow-scripts/create-new-release-branch.ts) resets the new branch to `INITIAL_BRANCH_VERSION = '1.0.0'`, and the package name is per Obsidian version — `getScopedPackageName` builds `@obsidian-typings/obsidian-<channel>-<obsidianVersion>` — so that reset happens under a name npm has never seen. Nothing that depends on the previous version's package is moved onto it, and a consumer that needs the old surface keeps it for as long as it keeps that dependency.
+
+**The `-latest` wrappers cross the cut anyway, and that is deliberate rather than a hole in the reasoning.** A newly cut branch is the latest of its channel, so its first release satisfies `isLatest` and rewrites `@obsidian-typings/obsidian-<channel>-latest` — and, on the `public` channel, the legacy `obsidian-typings` — to depend on `^<the new per-version package>`, under a minor bump of the wrapper's own version. A caret consumer of a wrapper does therefore take the break, but it takes it at a new Obsidian version, which is the one moment a changed surface is expected. The per-version package is what opts out of that, and it never moves.
+
+So the question to ask about a correction is **when**, not whether: inside a maintained branch a break is silent, and at a cut the Obsidian version in the package name announces it.
+
 ## Publishing
 
 There is **no npm token in this repo**. `publish-release.yml` authenticates to npm through [trusted
