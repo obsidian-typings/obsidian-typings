@@ -42,6 +42,14 @@ declare module 'obsidian' {
     errorEl: HTMLElement | null;
 
     /**
+     * The HTML element for the icon, prepended to {@link Setting.settingEl}. Created by
+     * {@link Setting.setIcon} on its first call, and `null` until then.
+     *
+     * @unofficial
+     */
+    iconEl: HTMLDivElement | null;
+
+    /**
      * The HTML element for the info.
      *
      * @official
@@ -56,6 +64,14 @@ declare module 'obsidian' {
      * @since 0.9.7
      */
     nameEl: HTMLElement;
+
+    /**
+     * The click handler for the setting row, stored by {@link Setting.setRowClick} and invoked by the
+     * listener it attaches. `null` until that first call.
+     *
+     * @unofficial
+     */
+    rowClick: (() => void) | null;
 
     /**
      * The HTML element for the setting.
@@ -374,6 +390,22 @@ declare module 'obsidian' {
     setHeading(): this;
 
     /**
+     * Set the icon of the setting, shown at the start of the row before the info section.
+     *
+     * Creates {@link Setting.iconEl} on the first call. Passing `null` or an empty string empties that
+     * element instead of removing it.
+     *
+     * @param icon - ID of the icon, can use any icon loaded with {@link obsidian#addIcon} or from the inbuilt library.
+     * @returns The setting.
+     * @example
+     * ```ts
+     * setting.setIcon('dice');
+     * ```
+     * @unofficial
+     */
+    setIcon(icon: IconName | null): this;
+
+    /**
      * Set the name of the setting.
      *
      * @param name - The name of the setting.
@@ -407,6 +439,22 @@ declare module 'obsidian' {
      * @unofficial
      */
     setNoInfo(): this;
+
+    /**
+     * Make the whole setting row invoke a callback when clicked, storing it in
+     * {@link Setting.rowClick}.
+     *
+     * The DOM listener is attached only on the first call, so a later call replaces the handler rather
+     * than adding a second one. The stored handler is skipped while the setting is disabled, or when the
+     * click has already been default-prevented.
+     *
+     * Unlike {@link Setting.setNavigable} and {@link Setting.setAction}, which are both implemented in
+     * terms of it, this returns nothing and so does not chain.
+     *
+     * @param callback - The callback to invoke when the setting row is clicked.
+     * @unofficial
+     */
+    setRowClick(callback: () => void): void;
 
     /**
      * Set the tooltip of the setting.
