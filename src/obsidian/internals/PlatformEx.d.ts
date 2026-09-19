@@ -31,6 +31,13 @@ export interface PlatformEx {
   canExportPdf: boolean;
 
   /**
+   * Whether the platform supports opening files that live outside the vault.
+   * It gates the `app:open-file` command, dropping files from the OS onto the tab bar,
+   * and the external-file fallback in the vault path lookups.
+   */
+  canOpenExternalFiles: boolean;
+
+  /**
    * Whether the platform supports pinning the sidebar.
    */
   canPinSidebar: boolean;
