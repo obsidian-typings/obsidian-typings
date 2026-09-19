@@ -43,7 +43,20 @@ const tasks: Record<string, NanoStagedHandler> = {
    * of what this repo can run over these 14 files, and the pre-commit hook is the only place any gate runs.
    */
   '*.astro': ({ filenames }) => batch(filenames).map((b) => `${PACKAGE_MANAGER_RUN_COMMAND} lint:fix -- ${join(b)}`),
-  '*.md': ({ filenames }) => batch(filenames).map((b) => `${PACKAGE_MANAGER_RUN_COMMAND} lint:md:fix -- ${join(b)}`)
+  '*.md': ({ filenames }) => batch(filenames).map((b) => `${PACKAGE_MANAGER_RUN_COMMAND} lint:md:fix -- ${join(b)}`),
+  /*
+   * The vendored ESLint rule sources, which are hand-copies of `obsidian-dev-utils`' and are supposed to be
+   * the same bytes. Running last is what makes this useful rather than merely present: `lint:fix` and
+   * `format` above rewrite a staged copy in place, which is one of the ways these files drift, so the check
+   * has to read what is about to be committed rather than what was staged. The key sorts to last here on its
+   * own - perfectionist puts a recursive glob after the single-segment ones - so that order is enforced
+   * rather than merely typed in.
+   *
+   * It is the one task here that takes no filenames, because it compares whole trees rather than the files
+   * that happen to be staged. The glob is only what decides whether it runs at all, so an ordinary commit
+   * touching no vendored file fetches nothing.
+   */
+  '**/eslint-rules/*.ts': () => [`${PACKAGE_MANAGER_RUN_COMMAND} check:vendored-eslint-rules`]
 };
 
 /**

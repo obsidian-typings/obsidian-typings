@@ -103,6 +103,18 @@ jobs:
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         run: npm run check:exec-helpers
 
+      # The custom ESLint rules in both `helpers/eslint-rules/` trees are hand-copies of
+      # `obsidian-dev-utils`' and are supposed to be the same bytes after one recorded delta. Nothing
+      # asserted that until 2026-09-19, and both trees were behind -- the `workflow-scripts` one had
+      # never been compared to anything at all. It reads upstream over the network, so it is given the
+      # runner's own token: unauthenticated, GitHub's contents API allows 60 requests an hour per
+      # address, which a shared runner can have spent before this step is reached.
+      - name: Check vendored ESLint rules
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: npm run check:vendored-eslint-rules
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
       # A separate npm package with its own tsconfig and its own dependency tree. The root
       # `typecheck` does `include` these files, but resolves them against the root's deps, `lib` and
       # `target`, so it is a near-miss rather than a substitute. Its `lint` needs no second
