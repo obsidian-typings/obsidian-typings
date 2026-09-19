@@ -26,7 +26,15 @@ import {
 	START_HERE_GROUP_LABEL,
 	START_HERE_LINKS
 } from '../sidebar-config.ts';
-import '../../node_modules/@astrojs/starlight/style/props.css';
+/*
+	Starlight's design tokens. This document is a standalone page rather than a Starlight route, so nothing
+	loads them for it. The path reaches into `node_modules` because the `exports` map publishes exactly one
+	stylesheet, `./style/markdown.css`, and this is not it -- which also means the path is not gated by module
+	resolution and moves under us on an upgrade without a word. It did: it was `.../starlight/style/props.css`
+	until 0.42 restructured the package into `dist/`, and the only report was a 500 on this one page.
+	`npm run check:starlight-virtual-modules` asserts it exists now.
+*/
+import '../../node_modules/@astrojs/starlight/dist/style/props.css';
 import '../styles/global.css';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');

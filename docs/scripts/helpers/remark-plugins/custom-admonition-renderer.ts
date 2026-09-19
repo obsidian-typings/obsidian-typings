@@ -1,5 +1,21 @@
 import type { Element } from 'hast';
-import type { Root } from 'mdast';
+import type {
+  Nodes,
+  Root
+} from 'mdast';
+/*
+ * `mdast-util-directive` is imported for its module augmentation as much as for these two types: it is what puts
+ * `leafDirective` and `containerDirective` into mdast's node union, and without it both comparisons in
+ * `admonitionRendererVisitor` are reported as unintentional (`ts(2367)`). Starlight's markdown pipeline runs
+ * `remark-directive`, so the nodes are there at runtime either way. Up to Starlight 0.41.x the augmentation arrived
+ * by accident, pulled in transitively by the `virtual-internal.d.ts` that `docs/tsconfig.json` loaded out of
+ * `node_modules`, and went with it when 0.42 stopped shipping that file -- so the package is a declared dependency of
+ * this one now rather than a transitive one nothing names.
+ */
+import type {
+  ContainerDirective,
+  LeafDirective
+} from 'mdast-util-directive';
 
 import { fromHtml } from 'hast-util-from-html';
 import { h } from 'hastscript';
@@ -42,7 +58,7 @@ const ACCEPTABLE_CALLOUT_TYPES: Record<string, CalloutType> = {
 export function admonitionRenderer(): (tree: Root) => void {
   return function admonitionRendererVisitor(tree: Root): void {
     visit(tree, (node) => {
-      if (node.type !== 'leafDirective' && node.type !== 'containerDirective') {
+      if (!isDirective(node)) {
         return;
       }
 
@@ -78,6 +94,15 @@ export function admonitionRenderer(): (tree: Root) => void {
       decorateHast(directiveNode as Element);
     });
   };
+}
+
+/*
+ * A predicate rather than the two inline comparisons it replaces, so that the directive types are named where the
+ * narrowing happens: `mdast-util-directive`'s augmentation is what makes both comparisons legal, and an import that
+ * only loaded it would read as unused.
+ */
+function isDirective(node: Nodes): node is ContainerDirective | LeafDirective {
+  return node.type === 'leafDirective' || node.type === 'containerDirective';
 }
 
 function loadIcon(svgFile: string): string {

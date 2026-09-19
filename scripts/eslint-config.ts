@@ -314,8 +314,13 @@ function getEslintConfigs(): Linter.Config[] {
        * The build, lint, format, docs and version scripts are CLI entry points whose output IS their interface, so
        * printing to stdout is what they are for. Kept as a deliberate local override rather than drift: the shared
        * config in `obsidian-dev-utils` leaves the rule on everywhere, because nothing in that package prints.
+       *
+       * `docs/scripts/**` is listed for the same reason, and its absence until 2026-09-19 was an oversight rather
+       * than a narrower decision: the `unicorn/no-process-exit` block below has always covered both trees, and its
+       * comment says "the same reason `no-console` is relaxed for them above" -- of a relaxation that did not in
+       * fact reach the second of them. Nothing there printed, so nothing reported it.
        */
-      files: ['scripts/**/*.ts'],
+      files: ['scripts/**/*.ts', 'docs/scripts/**/*.ts'],
       rules: {
         'no-console': 'off'
       }
@@ -770,6 +775,22 @@ function getUnicornConfigs(): Linter.Config[] {
       files: ['docs/scripts/helpers/root.ts', 'scripts/helpers/root.ts'],
       rules: {
         'unicorn/prefer-minimal-ternary': 'off'
+      }
+    },
+    {
+      /*
+       * Declarations of the `virtual:starlight/*` modules the Starlight component overrides import, which Starlight
+       * 0.42 stopped shipping (see `AGENTS.md`). The file mirrors a module surface it does not own: those modules
+       * export defaults, so `import-x/no-default-export` has nothing to offer -- an ambient declaration cannot rename
+       * an export that already exists, and declaring a named one would describe a module that is not there.
+       *
+       * It sits at the END of this list rather than beside the other file-scoped overrides above, and that placement
+       * is load-bearing: flat config is last-wins, and the block that turns `import-x/no-default-export` on comes
+       * after them. Placed there, this override lints as written and changes nothing.
+       */
+      files: ['docs/src/starlight-virtual-modules.d.ts'],
+      rules: {
+        'import-x/no-default-export': 'off'
       }
     }
   ]);

@@ -134,3 +134,14 @@ jobs:
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         run: npm run typecheck
         working-directory: ./docs
+
+      # `docs/src/starlight-virtual-modules.d.ts` declares the `virtual:starlight/*` modules the three
+      # Starlight component overrides import, because 0.42 stopped shipping the declarations that used
+      # to type them. Every type in it is referenced from a public entry point, so the typecheck above
+      # already catches a rename there -- what it cannot catch is a virtual module being renamed or
+      # dropped, which leaves the declaration valid and fails first in the Pages build. This asserts
+      # the specifiers against Starlight's installed plugin source instead.
+      - name: Check Starlight virtual modules
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        run: npm run check:starlight-virtual-modules
+        working-directory: ./docs
