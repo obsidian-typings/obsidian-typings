@@ -134,10 +134,7 @@ export function memberSlug(name: string): string {
     .replaceAll(/[^a-zA-Z0-9]/g, '-')
     .replaceAll(/-+/g, '-')
     .replaceAll(/^-|-$/g, '');
-  if (!cleaned) {
-    return 'unnamed';
-  }
-  return cleaned;
+  return cleaned || 'unnamed';
 }
 
 /**

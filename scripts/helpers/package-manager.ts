@@ -161,11 +161,7 @@ export function resolveToolCommand(params: ResolveToolCommandParams): string[] {
   const { cwd, tool } = params;
   const shimPath = findBinShim({ cwd, tool });
 
-  if (shimPath !== null) {
-    return [shimPath];
-  }
-
-  return [...getPackageManagerExecCommand(cwd), tool];
+  return shimPath === null ? [...getPackageManagerExecCommand(cwd), tool] : [shimPath];
 }
 
 /**
@@ -302,11 +298,7 @@ function detectPackageManagerFromPackageJson(root: string): null | PackageManage
 
   const declaration = packageJson.packageManager;
 
-  if (!declaration) {
-    return null;
-  }
-
-  return parsePackageManagerName(readName(DECLARATION_NAME_REG_EXP, declaration));
+  return declaration ? parsePackageManagerName(readName(DECLARATION_NAME_REG_EXP, declaration)) : null;
 }
 
 /**
@@ -319,11 +311,7 @@ function detectPackageManagerFromPackageJson(root: string): null | PackageManage
 function detectPackageManagerFromUserAgent(): null | PackageManager {
   const userAgent = process.env['npm_config_user_agent'];
 
-  if (!userAgent) {
-    return null;
-  }
-
-  return parsePackageManagerName(readName(USER_AGENT_NAME_REG_EXP, userAgent));
+  return userAgent ? parsePackageManagerName(readName(USER_AGENT_NAME_REG_EXP, userAgent)) : null;
 }
 
 /**
@@ -389,15 +377,13 @@ function getPackageManagerExecCommand(cwd?: string): string[] {
  * @returns The candidate file names, in the order they should be tried.
  */
 function getShimCandidates(tool: string): string[] {
-  if (process.platform !== 'win32') {
-    return [tool];
-  }
-
-  return [
-    `${tool}.cmd`,
-    `${tool}.exe`,
-    `${tool}.bat`
-  ];
+  return process.platform === 'win32'
+    ? [
+      `${tool}.cmd`,
+      `${tool}.exe`,
+      `${tool}.bat`
+    ]
+    : [tool];
 }
 
 /**
@@ -478,11 +464,7 @@ function resolvePackageManager(params: ResolvePackageManagerParams): PackageMana
 
   const launchedBy = detectPackageManagerFromUserAgent();
 
-  if (launchedBy !== null && claimants.has(launchedBy)) {
-    return launchedBy;
-  }
-
-  return firstLockfileOwner;
+  return launchedBy !== null && claimants.has(launchedBy) ? launchedBy : firstLockfileOwner;
 }
 
 /**

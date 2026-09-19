@@ -10,6 +10,13 @@
     "that is actually present in the declared section; the script reports either mismatch."
   ],
   "pins": {
+    "smol-toml": {
+      "section": "overrides",
+      "why": "Clears GHSA-7w5x-hrqm-74c2 (smol-toml denial of service via malformed TOML documents, <=1.7.0), fixed in 1.7.1. No direct bump reaches it: markdownlint-cli2 pins smol-toml at the exact vulnerable 1.7.0 and is itself already latest, so nothing the caret sweep floats can move that copy. The forced version is not a hopeful one: this tree already carried 1.8.0 under cspell-config-lib alongside the vulnerable copy, so the override collapses the two into one rather than introducing anything, and 1.8.0 is a minor inside 1.x. Caret rather than exact because nothing here needs an upper bound - it is an advisory floor, so the sweep floats it like any other caret. NEVER take the `npm audit fix --force` remedy: it downgrades markdownlint-cli2 to 0.21.0, and a downgrade is never an acceptable way to clear an advisory.",
+      "check": "node -e \"const fs=require('node:fs');process.stdout.write(JSON.parse(fs.readFileSync('node_modules/markdownlint-cli2/package.json','utf8')).dependencies['smol-toml'])\"",
+      "expect": "1.7.0",
+      "manualCheck": "The check reads markdownlint-cli2's own exact pin, not an installed version, because that pin is what makes the override necessary. When it moves to 1.7.1 or later the override and this entry can both go. `npm run lint:md` runs markdownlint-cli2 and is what verifies a change here."
+    },
     "typescript": {
       "section": "devDependencies",
       "why": "TypeScript 7 (tsgo) breaks this toolchain: @typescript-eslint's parser crashes on the native API, so type-aware ESLint cannot run on 7. @typescript-eslint peer-requires the range below, so 6.x is the last usable major. Hold until obsidian-dev-utils migrates.",

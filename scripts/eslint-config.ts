@@ -351,10 +351,7 @@ function getEslintImportResolverTypescriptConfigs(): Linter.Config[] {
 
 function getGitIgnoreConfigs(): Linter.Config[] {
   const gitignorePath = join(getRootFolder() ?? '', '.gitignore');
-  if (!existsSync(gitignorePath)) {
-    return [];
-  }
-  return [includeIgnoreFile(gitignorePath)];
+  return existsSync(gitignorePath) ? [includeIgnoreFile(gitignorePath)] : [];
 }
 
 function getImportXConfigs(): Linter.Config[] {
@@ -751,6 +748,28 @@ function getUnicornConfigs(): Linter.Config[] {
       files: ['scripts/eslint-config.ts'],
       rules: {
         'unicorn/name-replacements': 'off'
+      }
+    },
+    {
+      /*
+       * `execFromRoot` picks between `exec`'s two overloads, which are distinguished by the LITERAL
+       * `shouldIncludeDetails` -- `ExecDetailedOptions` requires `true`, `ExecSimpleOptions` allows only
+       * `false` -- while `ExecOption` declares it `boolean`. Spreading `...options` therefore widens it and
+       * matches neither overload, so both literals have to be written out, one per branch.
+       *
+       * That makes this rule and `unicorn/prefer-ternary` unsatisfiable together at that one site, the same
+       * shape as the `prefer-type-literal-last` clash above: the ternary form reports here, and the
+       * if/return form the rule asks for reports as `prefer-ternary` instead. Measured both ways. The
+       * ternary is the incumbent, so this rule concedes -- for this file only, rather than repo-wide.
+       *
+       * The third byte-identical copy, `workflow-scripts/helpers/root.ts`, is deliberately NOT listed:
+       * `typeScriptFiles` does not reach it, so no unicorn rule fires there and the plugin is not loaded for
+       * it -- naming a unicorn rule against it, in config or in an inline disable comment, is itself the
+       * error "Definition for rule ... was not found".
+       */
+      files: ['docs/scripts/helpers/root.ts', 'scripts/helpers/root.ts'],
+      rules: {
+        'unicorn/prefer-minimal-ternary': 'off'
       }
     }
   ]);

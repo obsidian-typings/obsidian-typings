@@ -142,28 +142,24 @@ export function exec(command: CommandPart[] | string, options: ExecOption = {}):
 
     const maxCommandLength = getMaxCommandLength();
     const shellCommandLineLength = getShellCommandLineLength(commandLine);
-    if (shellCommandLineLength > maxCommandLength) {
-      return Promise.reject(
+    return shellCommandLineLength > maxCommandLength
+      ? Promise.reject(
         new Error(
           `Command line is too long (${String(shellCommandLineLength)} chars as the shell receives it, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArgument with batchedArguments.`
         )
-      );
-    }
-
-    return execString(commandLine, options, $arguments);
+      )
+      : execString(commandLine, options, $arguments);
   }
 
   const maxCommandLength = getMaxCommandLength();
   const shellCommandLineLength = getShellCommandLineLength(command);
-  if (shellCommandLineLength > maxCommandLength) {
-    return Promise.reject(
+  return shellCommandLineLength > maxCommandLength
+    ? Promise.reject(
       new Error(
         `Command line is too long (${String(shellCommandLineLength)} chars as the shell receives it, max ${String(maxCommandLength)} on ${process.platform}). Consider using ExecArgument with batchedArguments.`
       )
-    );
-  }
-
-  return execString(command, options);
+    )
+    : execString(command, options);
 }
 
 /**
@@ -206,11 +202,7 @@ export function getMaxCommandLength(): number {
  * {@link exec}.
  */
 export function getShellCommandLineLength(commandLine: string): number {
-  if (process.platform !== 'win32') {
-    return commandLine.length;
-  }
-
-  return commandEscapeCommandLine(commandLine).length + getShellWrapperLength();
+  return process.platform === 'win32' ? commandEscapeCommandLine(commandLine).length + getShellWrapperLength() : commandLine.length;
 }
 
 /**
@@ -227,11 +219,7 @@ export function getShellCommandLineLength(commandLine: string): number {
  * {@link exec}.
  */
 export function posixQuote(argument: string): string {
-  if (argument.length > 0 && !POSIX_UNSAFE_RE.test(argument)) {
-    return argument;
-  }
-
-  return `'${argument.replaceAll('\'', String.raw`'\''`)}'`;
+  return argument.length > 0 && !POSIX_UNSAFE_RE.test(argument) ? argument : `'${argument.replaceAll('\'', String.raw`'\''`)}'`;
 }
 
 /**
@@ -392,23 +380,23 @@ async function executeBatches(staticParts: string[], batches: string[][], option
     const result = await execString(batchCommand, { ...options, shouldIncludeDetails: true }, [...staticParts, ...batch]);
     stdoutParts.push(result.stdout);
     stderrParts.push(result.stderr);
-    if (exitCode === 0 && result.exitCode !== 0) {
-      exitCode = result.exitCode;
-      exitSignal = result.exitSignal;
+    if (exitCode !== 0 || result.exitCode === 0) {
+      continue;
     }
+
+    exitCode = result.exitCode;
+    exitSignal = result.exitSignal;
   }
 
   const stdout = stdoutParts.join('\n');
-  if (!options.shouldIncludeDetails) {
-    return stdout;
-  }
-
-  return {
-    exitCode,
-    exitSignal,
-    stderr: stderrParts.join('\n'),
-    stdout
-  };
+  return options.shouldIncludeDetails
+    ? {
+      exitCode,
+      exitSignal,
+      stderr: stderrParts.join('\n'),
+      stdout
+    }
+    : stdout;
 }
 
 /*
@@ -529,8 +517,5 @@ function spawnViaShell(
 }
 
 function trimEnd($string: string, suffix: string): string {
-  if ($string.endsWith(suffix)) {
-    return $string.slice(0, -suffix.length);
-  }
-  return $string;
+  return $string.endsWith(suffix) ? $string.slice(0, -suffix.length) : $string;
 }

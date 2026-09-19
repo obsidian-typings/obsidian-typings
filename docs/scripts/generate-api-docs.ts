@@ -93,10 +93,8 @@ async function main(): Promise<void> {
 
     // Check if file contains module declarations (augmentations)
     const modules = src.getModules();
-    if (modules.length > 0) {
-      for (const module_ of modules) {
-        processModuleDeclaration(module_, types, false, directoryPath);
-      }
+    for (const module_ of modules) {
+      processModuleDeclaration(module_, types, false, directoryPath);
     }
 
     // Process top-level exports (internals, standalone types)

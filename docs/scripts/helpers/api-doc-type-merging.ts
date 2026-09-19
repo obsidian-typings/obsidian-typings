@@ -29,10 +29,12 @@ export function buildTypeParamMap(baseInfo: TypeInfo, typeArguments: string[]): 
   for (let index = 0; index < count; index++) {
     const param = baseInfo.typeParameters[index];
     const argument = typeArguments[index];
-    if (param && argument) {
-      const bareParam = param.replace(/\s+extends\s+.*$/, '');
-      mapping.set(bareParam, argument);
+    if (!param || !argument) {
+      continue;
     }
+
+    const bareParam = param.replace(/\s+extends\s+.*$/, '');
+    mapping.set(bareParam, argument);
   }
   return mapping;
 }
@@ -203,31 +205,29 @@ export function resolveInheritedMembers(types: Map<string, TypeInfo>): void {
 Apply type parameter substitution to all type-bearing fields of a member
 */
 export function substituteMemberTypes(member: MemberInfo, mapping: Map<string, string>): MemberInfo {
-  if (mapping.size === 0) {
-    return member;
-  }
-  return {
-    ...member,
-    parameters: member.parameters.map((p) => ({
-      ...p,
-      type: substituteTypeParams(p.type, mapping)
-    })),
-    returnType: substituteTypeParams(member.returnType, mapping),
-    signature: substituteTypeParams(member.signature, mapping),
-    type: substituteTypeParams(member.type, mapping)
-  };
+  return mapping.size === 0
+    ? member
+    : {
+      ...member,
+      parameters: member.parameters.map((p) => ({
+        ...p,
+        type: substituteTypeParams(p.type, mapping)
+      })),
+      returnType: substituteTypeParams(member.returnType, mapping),
+      signature: substituteTypeParams(member.signature, mapping),
+      type: substituteTypeParams(member.type, mapping)
+    };
 }
 
 /**
 Substitute generic type parameters in a type string using a mapping
 */
 export function substituteTypeParams(typeText: string, mapping: Map<string, string>): string {
-  if (mapping.size === 0) {
-    return typeText;
-  }
-  return typeText.replaceAll(/\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match) => {
-    return mapping.get(match) ?? match;
-  });
+  return mapping.size === 0
+    ? typeText
+    : typeText.replaceAll(/\b(?<typeName>[a-zA-Z][a-zA-Z0-9]*)\b/g, (match) => {
+      return mapping.get(match) ?? match;
+    });
 }
 
 /**

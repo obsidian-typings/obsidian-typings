@@ -82,11 +82,7 @@ function checkIsUnchecked(path: string): boolean {
  */
 async function getMarkdownFiles(): Promise<string[]> {
   const nonIgnoredFiles = await getNonIgnoredFiles({ patterns: [MARKDOWN_PATHSPEC] });
-  if (nonIgnoredFiles) {
-    return nonIgnoredFiles.filter((path) => !checkIsUnchecked(path));
-  }
-
-  return await toArray(glob(['**/*.md'], { exclude: MD_FALLBACK_EXCLUDES }));
+  return nonIgnoredFiles ? nonIgnoredFiles.filter((path) => !checkIsUnchecked(path)) : (await toArray(glob(['**/*.md'], { exclude: MD_FALLBACK_EXCLUDES })));
 }
 
 async function toArray<T>(iter: AsyncIterableIterator<T>): Promise<T[]> {

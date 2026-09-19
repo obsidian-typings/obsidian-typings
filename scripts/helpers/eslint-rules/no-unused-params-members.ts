@@ -195,11 +195,13 @@ function collectMemberAccess(node: Rule.Node, usage: InterfaceUsage): void {
     return;
   }
 
-  if (property.type === 'Literal') {
-    const value = record(property)['value'];
-    if (typeof value === 'string') {
-      usage.used.add(value);
-    }
+  if (property.type !== 'Literal') {
+    return;
+  }
+
+  const value = record(property)['value'];
+  if (typeof value === 'string') {
+    usage.used.add(value);
   }
 }
 
@@ -232,10 +234,7 @@ function getInterfaceMembers(node: Rule.Node): Map<string, Rule.Node> {
   const members = new Map<string, Rule.Node>();
   const interfaceBody = record(node)['body'] as Rule.Node;
   for (const signature of record(interfaceBody)['body'] as Rule.Node[]) {
-    if (nodeType(signature) !== 'TSPropertySignature' && nodeType(signature) !== 'TSMethodSignature') {
-      continue;
-    }
-    if (record(signature)['computed'] === true) {
+    if ((nodeType(signature) !== 'TSPropertySignature' && nodeType(signature) !== 'TSMethodSignature') || (record(signature)['computed'] === true)) {
       continue;
     }
     const key = record(signature)['key'] as Rule.Node;
@@ -263,11 +262,7 @@ function getParameterInfo(parameter: Rule.Node): ParameterInfo | undefined {
     return { binding: { name: record(actualParameter)['name'] as string, type: 'identifier' }, typeName };
   }
 
-  if (actualParameter.type === 'ObjectPattern') {
-    return { binding: { pattern: actualParameter, type: 'pattern' }, typeName };
-  }
-
-  return undefined;
+  return actualParameter.type === 'ObjectPattern' ? { binding: { pattern: actualParameter, type: 'pattern' }, typeName } : undefined;
 }
 
 function getTypeReferenceName(parameter: Rule.Node): string | undefined {
@@ -282,10 +277,7 @@ function getTypeReferenceName(parameter: Rule.Node): string | undefined {
   }
 
   const typeName = record(typeNode)['typeName'] as Rule.Node;
-  if (typeName.type !== 'Identifier') {
-    return undefined;
-  }
-  return record(typeName)['name'] as string;
+  return typeName.type === 'Identifier' ? (record(typeName)['name'] as string) : undefined;
 }
 
 function isNode(value: unknown): value is Rule.Node {

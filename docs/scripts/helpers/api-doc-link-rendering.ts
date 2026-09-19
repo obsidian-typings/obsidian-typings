@@ -34,10 +34,7 @@ let webApiTypes: Record<string, unknown> = {};
  */
 export function linkBaseType(typeName: string, allTypes: Map<string, TypeInfo>): string {
   const isSimpleTypeRef = /^[a-zA-Z][a-zA-Z0-9]*(?:<.*>)?$/.test(typeName.trim());
-  if (isSimpleTypeRef) {
-    return escapeMdxAngleBrackets(renderTypeWithLinks(typeName, allTypes));
-  }
-  return typeLink(typeName, allTypes);
+  return isSimpleTypeRef ? escapeMdxAngleBrackets(renderTypeWithLinks(typeName, allTypes)) : typeLink(typeName, allTypes);
 }
 
 export function loadExternalTypeMaps(): void {
@@ -142,11 +139,7 @@ export function renderTypeWithLinks(typeText: string, allTypes: Map<string, Type
 
       // TypeScript primitive types
       const primitiveUrl = Object.hasOwn(TS_PRIMITIVE_TYPES, typeName) ? TS_PRIMITIVE_TYPES[typeName] : undefined;
-      if (primitiveUrl) {
-        return `[${typeName}](${primitiveUrl})`;
-      }
-
-      return typeName;
+      return primitiveUrl ? `[${typeName}](${primitiveUrl})` : typeName;
     }
   );
 }
@@ -192,10 +185,10 @@ export function resolveTsUtilityUrl(name: string): string | undefined {
     if (['Iterable'].includes(name)) {
       return `https://www.typescriptlang.org/docs/handbook/iterators-and-generators.html#${hash}`;
     }
-    if (['Capitalize', 'Lowercase', 'Uncapitalize', 'Uppercase'].includes(name)) { // Cspell:disable-line
-      return `https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html#${hash}`;
-    }
-    return `https://www.typescriptlang.org/docs/handbook/utility-types.html#${hash}`;
+    // Cspell:disable-next-line
+    return ['Capitalize', 'Lowercase', 'Uncapitalize', 'Uppercase'].includes(name)
+      ? `https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html#${hash}`
+      : `https://www.typescriptlang.org/docs/handbook/utility-types.html#${hash}`;
   }
   return undefined;
 }

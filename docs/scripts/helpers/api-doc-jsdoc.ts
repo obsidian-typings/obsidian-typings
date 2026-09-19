@@ -185,14 +185,13 @@ Pick the highest-numbered constructorN__ pseudo-method (matches ExtractConstruct
 */
 export function getConstructorMethod(methods: MemberInfo[]): MemberInfo | undefined {
   const constructors = methods.filter((m) => /^constructor\d*__$/.test(m.name));
-  if (constructors.length === 0) {
-    return undefined;
-  }
-  return constructors.sort((a, b) => {
-    const numberA = parseInt(a.name.replaceAll(/\D/g, '') || '0', 10);
-    const numberB = parseInt(b.name.replaceAll(/\D/g, '') || '0', 10);
-    return numberB - numberA;
-  })[0];
+  return constructors.length === 0
+    ? undefined
+    : constructors.sort((a, b) => {
+      const numberA = parseInt(a.name.replaceAll(/\D/g, '') || '0', 10);
+      const numberB = parseInt(b.name.replaceAll(/\D/g, '') || '0', 10);
+      return numberB - numberA;
+    })[0];
 }
 
 /**
@@ -200,10 +199,7 @@ Get the return type as declared in source (preserves union order), falling back 
 */
 export function getDeclaredReturnType(method: ReturnTypeProvider): string {
   const annotation = method.getReturnTypeNode?.()?.getText();
-  if (annotation) {
-    return simplifyType(annotation);
-  }
-  return simplifyType(method.getReturnType().getText());
+  return simplifyType(annotation ?? method.getReturnType().getText());
 }
 
 export function getDescription(node: JSDocableNode): string {
@@ -266,10 +262,7 @@ Strip `| undefined` only when it was implicitly added by ts-morph for optional p
 export function getPropertyType(prop: PropertyDeclaration | PropertySignature): string {
   // Use the type node text (what's written in source) if available, otherwise fall back to resolved type
   const typeNode = prop.getTypeNode();
-  if (typeNode) {
-    return resolveTypeofAliases(simplifyType(typeNode.getText()), prop.getSourceFile());
-  }
-  return simplifyType(prop.getType().getText());
+  return typeNode ? resolveTypeofAliases(simplifyType(typeNode.getText()), prop.getSourceFile()) : simplifyType(prop.getType().getText());
 }
 
 /**

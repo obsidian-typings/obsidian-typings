@@ -58,11 +58,14 @@ export function execFromRoot(command: CommandPart[] | string, options: ExecFromR
     root = toPosixPath(options.cwd ?? process.cwd());
   }
 
-  if (options.shouldIncludeDetails) {
-    return exec(command, { ...options, cwd: root, shouldIncludeDetails: true });
-  }
-
-  return exec(command, { ...options, cwd: root, shouldIncludeDetails: false });
+  /*
+   * Both branches spell `shouldIncludeDetails` out as a literal because `exec`'s overloads are selected by
+   * that literal (`ExecDetailedOptions` requires `true`, `ExecSimpleOptions` allows only `false`), while
+   * `ExecOption` declares it `boolean` -- so spreading `...options` widens it and matches neither overload.
+   * That makes `unicorn/prefer-minimal-ternary` unsatisfiable here, and the if/return form it asks for trips
+   * `unicorn/prefer-ternary` instead; `scripts/eslint-config.ts` turns the first off for this file alone.
+   */
+  return options.shouldIncludeDetails ? exec(command, { ...options, cwd: root, shouldIncludeDetails: true }) : exec(command, { ...options, cwd: root, shouldIncludeDetails: false });
 }
 
 export function getRootFolder(cwd?: string): null | string {

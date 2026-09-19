@@ -59,10 +59,12 @@ export async function appendBacklinksAndWrite(
       lines.push('', '---', '', '**Links to this page:**', '');
       for (const bl of sortedBacklinks) {
         const blInfo = allTypes.get(bl);
-        if (blInfo) {
-          const blNsDirectory = getNamespaceDirectory(blInfo.namespace);
-          lines.push(`- [${bl}](${BASE_PATH}/api/${blNsDirectory}/${bl}/)`);
+        if (!blInfo) {
+          continue;
         }
+
+        const blNsDirectory = getNamespaceDirectory(blInfo.namespace);
+        lines.push(`- [${bl}](${BASE_PATH}/api/${blNsDirectory}/${bl}/)`);
       }
     }
     await writeFile(filePath, lines.join('\n'), 'utf-8');
@@ -477,10 +479,7 @@ export function renderMethodTableMdx(lines: string[], info: TypeInfo, allTypes: 
     const desc = escapeJsString(markdownToHtml(resolveLinks(method.description, allTypes)));
     const staticPrefix = method.isStatic ? 'static ' : '';
     const shortParams = method.parameters.map((p, index) => {
-      if (index === 0 && EVENT_METHODS.has(method.name) && (p.type.startsWith('"') || p.type.startsWith('\''))) {
-        return p.type.replaceAll('"', '\'');
-      }
-      return p.name;
+      return index === 0 && EVENT_METHODS.has(method.name) && (p.type.startsWith('"') || p.type.startsWith('\'')) ? p.type.replaceAll('"', '\'') : p.name;
     }).join(', ');
     const shortSig = `${staticPrefix}${method.name}(${shortParams})`;
     const sig = escapeJsString(shortSig);

@@ -72,11 +72,7 @@ export const paramsOptionsNameMatch: Rule.RuleModule = {
 
         for (const parameter of functionNode.params) {
           const typeInfo = getTypeAnnotationInfo(parameter);
-          if (!typeInfo) {
-            continue;
-          }
-
-          if (!PARAMS_OPTIONS_SUFFIX_PATTERN.test(typeInfo.name)) {
+          if (!typeInfo || !PARAMS_OPTIONS_SUFFIX_PATTERN.test(typeInfo.name)) {
             continue;
           }
 
@@ -114,22 +110,15 @@ export const paramsOptionsNameMatch: Rule.RuleModule = {
 function getClassName(methodDefinition: Rule.Node): string | undefined {
   const classBody = methodDefinition.parent;
   const classNode = classBody?.parent;
-  if (
-    !classNode || !('id' in classNode) || !classNode.id || typeof classNode.id !== 'object' || !('name' in classNode.id)
-    || typeof classNode.id.name !== 'string'
-  ) {
-    return undefined;
-  }
-  return classNode.id.name;
+  return !classNode || !('id' in classNode) || !classNode.id || typeof classNode.id !== 'object' || !('name' in classNode.id)
+      || typeof classNode.id.name !== 'string'
+    ? undefined
+    : classNode.id.name;
 }
 
 function getExpectedPrefix(node: Rule.Node): string | undefined {
   const methodPrefix = getMethodExpectedPrefix(node);
-  if (methodPrefix !== undefined) {
-    return methodPrefix;
-  }
-
-  return getFunctionExpectedPrefix(node);
+  return methodPrefix ?? getFunctionExpectedPrefix(node);
 }
 
 function getFunctionExpectedPrefix(node: Rule.Node): string | undefined {
@@ -139,14 +128,10 @@ function getFunctionExpectedPrefix(node: Rule.Node): string | undefined {
   }
 
   // Arrow function assigned to a variable: const fooBar = (params: FooBarParams) => ...
-  if (
-    node.parent?.type === 'VariableDeclarator' && 'id' in node.parent && node.parent.id && typeof node.parent.id === 'object' && 'name' in node.parent.id
-    && typeof node.parent.id.name === 'string'
-  ) {
-    return toPascalCase(node.parent.id.name);
-  }
-
-  return undefined;
+  return node.parent?.type === 'VariableDeclarator' && 'id' in node.parent && node.parent.id && typeof node.parent.id === 'object' && 'name' in node.parent.id
+      && typeof node.parent.id.name === 'string'
+    ? toPascalCase(node.parent.id.name)
+    : undefined;
 }
 
 function getMethodExpectedPrefix(node: Rule.Node): string | undefined {
@@ -169,11 +154,7 @@ function getMethodExpectedPrefix(node: Rule.Node): string | undefined {
     return undefined;
   }
 
-  if (methodName === 'constructor') {
-    return `${className}Constructor`;
-  }
-
-  return className + toPascalCase(methodName);
+  return methodName === 'constructor' ? `${className}Constructor` : className + toPascalCase(methodName);
 }
 
 function getTypeAnnotationInfo(parameter: Rule.Node): TypeAnnotationInfo | undefined {
@@ -247,10 +228,7 @@ function isInExportedScope(node: Rule.Node): boolean {
 function isOptionalParameter(parameter: Rule.Node): boolean {
   // `options: FooOptions = {}` is an AssignmentPattern; `options?: FooOptions` carries an
   // `optional` flag. Both make the bag optional → `*Options`.
-  if (parameter.type === 'AssignmentPattern') {
-    return true;
-  }
-  return (parameter as MaybeOptionalNode).optional === true;
+  return parameter.type === 'AssignmentPattern' ? true : (parameter as MaybeOptionalNode).optional === true;
 }
 
 function toPascalCase(name: string): string {
