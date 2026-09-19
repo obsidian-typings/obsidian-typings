@@ -171,8 +171,16 @@ function getEslintConfigs(): Linter.Config[] {
             selector: 'MethodDefinition[override=true][key.name=/.*__$/]'
           },
           {
-            message: 'Do not use double type assertions (as X as Y). Use createMockOf<T>() from src/internal/cast.ts instead.',
+            message: 'Do not use double type assertions (as X as Y).',
             selector: 'TSAsExpression > TSAsExpression'
+          },
+          {
+            message: 'Do not use `as never`. It silently satisfies type constraints by claiming "this value is of every type" — almost always masks a real type mismatch. Fix the underlying types instead.',
+            selector: 'TSAsExpression > TSNeverKeyword'
+          },
+          {
+            message: 'Do not use `<never>` type assertions. Same reasoning as `as never`.',
+            selector: 'TSTypeAssertion > TSNeverKeyword'
           },
           {
             message: 'Do not use _ prefix on methods or functions. The _ prefix is for unused parameters only.',
@@ -183,7 +191,7 @@ function getEslintConfigs(): Linter.Config[] {
             selector: 'FunctionDeclaration[id.name=/^_/]'
           },
           {
-            message: 'Do not rename imports with "Mock" in the alias. Mock classes are the canonical types in this project — use the original name.',
+            message: 'Do not rename imports with "Mock" in the alias. Mock classes are the canonical types — use the original name.',
             selector: 'ImportSpecifier[local.name=/Mock/]:not([imported.name=/Mock/])'
           },
           {
@@ -191,7 +199,7 @@ function getEslintConfigs(): Linter.Config[] {
             selector: 'ImportExpression'
           },
           {
-            message: 'Do not use `{} as T`. Use `createMockOf<T>()` from src/internal/cast.ts instead.',
+            message: 'Do not use `{} as T`. It asserts a shape the value does not have; build the value, or declare the type on the binding.',
             selector: 'TSAsExpression > ObjectExpression[properties.length=0]'
           },
           {
@@ -439,6 +447,14 @@ function getTseslintConfigs(): Linter.Config[] {
       rules: {
         '@typescript-eslint/explicit-function-return-type': 'error',
         '@typescript-eslint/explicit-member-accessibility': 'error',
+        // The rule's own `property` default, spelled as a bare severity so it stays the rule's default rather than a copy of it.
+        // Do NOT pass `'method'` for tidiness: the method form keeps parameters bivariant, drops `readonly` (the rule's own fixer
+        // message says so), and makes `@typescript-eslint/unbound-method` fire on every forwarded bag member, which is what the
+        // `this: void` boilerplate used to pay for. Do NOT delete the line either - the rule is in no preset, so that turns it off.
+        '@typescript-eslint/method-signature-style': 'error',
+        '@typescript-eslint/no-floating-promises': ['error', {
+          checkThenables: true
+        }],
         '@typescript-eslint/no-invalid-void-type': ['error', {
           allowAsThisParameter: true
         }],

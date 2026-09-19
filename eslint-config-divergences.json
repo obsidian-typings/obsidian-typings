@@ -1,0 +1,61 @@
+{
+  "comment": [
+    "Every place this package's ESLint config deliberately differs from obsidian-dev-utils' shared config, and why.",
+    "This package is that package's sibling and resolves no dependency on it, so `scripts/eslint-config.ts` is a HAND",
+    "COPY - and a hand copy drifts silently, which it did for eighteen months. update-npm-deps.ps1 compares the two",
+    "configs on every dependency sweep and fails on anything not recorded here.",
+    "The comparison is DIRECTIONAL: only 'obsidian-dev-utils refined something and this copy never took it' is a",
+    "finding. A rule this package enables that obsidian-dev-utils turns off is printed as information and never fails,",
+    "because this copy is then the stricter one and obsidian-dev-utils' reasons for its own relaxations are",
+    "measurements about its own tree.",
+    "A key is the finding's identity exactly as the check prints it: <role>|<rule>|<kind>[|<detail>]. The",
+    "correspondence runs BOTH ways - an entry describing a divergence that no longer exists fails the sweep too, which",
+    "is what stops this file going stale the way the comments at the call sites did. Add `task` when the entry is an",
+    "adoption intended for later rather than a settled decision; it is then re-reported on every run.",
+    "`roles` names the file compared at each end. Only the `script` role is compared by default, because it is the one",
+    "role that plays the same part in both packages.",
+    "The `workflow-scripts/` subpackage is a SECOND hand copy with its own package.json, node_modules and eslint",
+    "config, and it carries its own copy of this file. Sweeping this package does not sweep that one."
+  ],
+  "roles": {
+    "script": {
+      "here": "scripts/commit.ts",
+      "odu": "scripts/commit.ts"
+    }
+  },
+  "divergences": {
+    "script|no-console|level": {
+      "why": "The build, lint, format, docs and version scripts are CLI entry points whose output IS their interface, so printing to stdout is what they are for. obsidian-dev-utils leaves the rule on everywhere because nothing in that package prints."
+    },
+    "script|obsidian-dev-utils/no-over-cap-wait-in-eval-in-obsidian|level": {
+      "why": "This package vendors a five-rule subset of obsidian-dev-utils' custom rules into `scripts/helpers/eslint-rules/`; its plugin file's `rules` map IS that subset. This rule polices an integration suite's `evalInObsidian` wait budget, and this package has no such suite."
+    },
+    "script|obsidian-dev-utils/prefer-noop-async|level": {
+      "why": "Not vendored - same subset reason. Only `obsidian-test-mocks` vendors this sixth rule, which its own consumer table records."
+    },
+    "script|obsidian-dev-utils/require-component-suffix|level": {
+      "why": "Not vendored - same subset reason. Obsidian `Component` subclasses are a plugin-authoring shape; this package ships type declarations."
+    },
+    "script|obsidian-dev-utils/require-method-template|level": {
+      "why": "Not vendored - same subset reason."
+    },
+    "script|unicorn/name-replacements|option|options[0].replacements.dir.directory": {
+      "why": "Only the `direction` expansion of `dir` is dropped here - every `dir` in this repo is a filesystem directory - so `dir` still expands to `directory` by the rule's own default rather than by an entry saying so."
+    },
+    "script|unicorn/name-replacements|option|options[0].replacements.dist": {
+      "why": "Not in this repo's vocabulary list, so `dist` is expanded here rather than allowed. The list is the established vocabulary of THIS repo (`doc`/`docs`, `param`/`params`, `prop`/`props`, `src`, `attr`, `desc`, `dev`, `ref`), not a copy of obsidian-dev-utils'."
+    },
+    "script|unicorn/name-replacements|option|options[0].replacements.el": {
+      "why": "Not in this repo's vocabulary list - same reason as `dist`."
+    },
+    "script|unicorn/name-replacements|option|options[0].replacements.lib": {
+      "why": "Not in this repo's vocabulary list - same reason as `dist`."
+    },
+    "script|unicorn/no-top-level-assignment-in-function|level": {
+      "why": "Measured with the rule on: four sites, three of them test fixtures assigned from `beforeEach` in `scripts/helpers/package-manager.test.ts` - the shape obsidian-dev-utils exempts over its own test files - and the fourth a module-level memo in `docs/scripts/helpers/api-doc-link-rendering.ts`. Off repo-wide rather than only over test files, because the memo is production code here."
+    },
+    "script|unicorn/prefer-type-literal-last|level": {
+      "why": "Unsatisfiable alongside `perfectionist/sort-union-types`, which this config takes from `recommended-alphabetical`. Measured rather than assumed: with this rule on and unfixed, perfectionist reports 0 and this rule 66; after its autofix the two counts swap exactly. Both are `error` and neither concedes. The alphabetical sort is the incumbent."
+    }
+  }
+}
