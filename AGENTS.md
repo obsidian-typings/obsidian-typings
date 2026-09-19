@@ -163,6 +163,14 @@ That sentence covers **additions and compatible corrections** — a new declarat
 
 So the question to ask about a correction is **when**, not whether: inside a maintained branch a break is silent, and at a cut the Obsidian version in the package name announces it.
 
+### An addition lands on both branches only where the member exists on both
+
+"Both maintained branches" in the section above is the default, not the rule. The two branches model two different Obsidian builds and catalyst is the one that is ahead, so a member introduced in a catalyst build has nothing to declare on a public branch whose Obsidian version predates it. Declaring it there asserts that something exists which does not, and the next branch cut then has to take it back out as a breaking correction — the expensive ending above, paid for a member that was never on that surface at all. So the premise check is per branch, against that branch’s own Obsidian bundle, and a one-sided answer is an ordinary result rather than a sign the check went wrong.
+
+Measured 2026-09-18 on `PlatformEx.canOpenExternalFiles`: the `Platform` literal carries the getter in catalyst `1.14.0`, `1.14.1` and `1.14.2`, and in no public build through `1.13.7`, where the same literal has six `can*` getters instead of seven. It landed on the catalyst branch alone.
+
+Landing on one side loses nothing. A new release branch is based on the highest-version branch that exists when it is cut (see [Which branch a new release branch is cut from](#which-branch-a-new-release-branch-is-cut-from)), so a new `public` branch at a catalyst-only Obsidian version is based on that catalyst branch and carries its declarations across. The catalyst-only member becomes a public one at the cut that makes it true, with no second commit to remember and no window in which the wrong thing was declared.
+
 ## Publishing
 
 There is **no npm token in this repo**. `publish-release.yml` authenticates to npm through [trusted
