@@ -1,0 +1,50 @@
+{
+  "comment": [
+    "Every place THIS subpackage's ESLint config deliberately differs from obsidian-dev-utils' shared config, and why.",
+    "`workflow-scripts/` is a self-contained package - its own package.json, node_modules, tsconfig and eslint config -",
+    "so its `scripts/eslint-config.ts` is a SECOND hand copy of that shared config, separate from the one at the repo",
+    "root. Nothing had ever compared it to anything. update-npm-deps.ps1 compares the two configs on every dependency",
+    "sweep of this directory and fails on anything not recorded here; sweeping the repo root does not sweep this.",
+    "The comparison is DIRECTIONAL: only 'obsidian-dev-utils refined something and this copy never took it' is a",
+    "finding. A rule this package enables that obsidian-dev-utils turns off is printed as information and never fails.",
+    "A key is the finding's identity exactly as the check prints it: <role>|<rule>|<kind>[|<detail>]. The",
+    "correspondence runs BOTH ways - an entry describing a divergence that no longer exists fails the sweep too.",
+    "`roles` names the file compared at each end. This package has no `scripts/commit.ts` - committing is the root",
+    "package's job - so the script role is its own `scripts/lint.ts` against the same file upstream."
+  ],
+  "roles": {
+    "script": {
+      "here": "scripts/lint.ts",
+      "odu": "scripts/lint.ts"
+    }
+  },
+  "divergences": {
+    "script|plugin:unicorn": {
+      "why": "`eslint-plugin-unicorn` is not installed here. This package is four small workflow scripts and a handful of helpers; it carries the tseslint / stylistic / import-x / perfectionist stack and nothing else. Adding the plugin would be a dependency decision, not a config fix."
+    },
+    "script|no-console|level": {
+      "why": "Every module here is a CLI entry point or a helper for one, and their output IS their interface. obsidian-dev-utils leaves the rule on everywhere because nothing in that package prints."
+    },
+    "script|obsidian-dev-utils/no-async-callback-to-unsafe-return|level": {
+      "why": "This package vendors two of obsidian-dev-utils' custom rules into `helpers/eslint-rules/`, and registers exactly those two; its `local/` plugin file's `rules` map IS that subset. The two are the ones its own sources can break."
+    },
+    "script|obsidian-dev-utils/no-over-cap-wait-in-eval-in-obsidian|level": {
+      "why": "Not vendored - same two-rule subset. The rule polices an integration suite's `evalInObsidian` wait budget, and nothing here drives Obsidian."
+    },
+    "script|obsidian-dev-utils/no-unused-params-members|level": {
+      "why": "Not vendored - same two-rule subset."
+    },
+    "script|obsidian-dev-utils/params-options-name-match|level": {
+      "why": "Not vendored - same two-rule subset."
+    },
+    "script|obsidian-dev-utils/prefer-noop-async|level": {
+      "why": "Not vendored - same two-rule subset."
+    },
+    "script|obsidian-dev-utils/require-component-suffix|level": {
+      "why": "Not vendored - same two-rule subset. Obsidian `Component` subclasses are a plugin-authoring shape; these are release-workflow scripts."
+    },
+    "script|obsidian-dev-utils/require-method-template|level": {
+      "why": "Not vendored - same two-rule subset."
+    }
+  }
+}

@@ -214,7 +214,7 @@ function getEslintConfigs(): Linter.Config[] {
             selector: 'MethodDefinition[override=true][key.name=/.*__$/]'
           },
           {
-            message: 'Do not use double type assertions (as X as Y). Use createMockOf<T>() from src/internal/cast.ts instead.',
+            message: 'Do not use double type assertions (as X as Y).',
             selector: 'TSAsExpression > TSAsExpression'
           },
           {
@@ -234,7 +234,7 @@ function getEslintConfigs(): Linter.Config[] {
             selector: 'FunctionDeclaration[id.name=/^_/]'
           },
           {
-            message: 'Do not rename imports with "Mock" in the alias. Mock classes are the canonical types in this project — use the original name.',
+            message: 'Do not rename imports with "Mock" in the alias. Mock classes are the canonical types — use the original name.',
             selector: 'ImportSpecifier[local.name=/Mock/]:not([imported.name=/Mock/])'
           },
           {
@@ -242,7 +242,7 @@ function getEslintConfigs(): Linter.Config[] {
             selector: 'ImportExpression'
           },
           {
-            message: 'Do not use `{} as T`. Use `createMockOf<T>()` from src/internal/cast.ts instead.',
+            message: 'Do not use `{} as T`. It asserts a shape the value does not have; build the value, or declare the type on the binding.',
             selector: 'TSAsExpression > ObjectExpression[properties.length=0]'
           },
           {

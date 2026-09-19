@@ -131,6 +131,16 @@ They were `src/**/*.ts` + `scripts/**/*.ts`, copied from the root config where b
 
 The globs are now the whole package. `no-console` and `import-x/no-nodejs-modules` are off **package-wide** rather than over a `scripts/` subdirectory, because every file here is a script — the root config scopes those two to `scripts/**` for the opposite reason, that the package around it is a typings surface.
 
+### Both ESLint configs are hand copies of `obsidian-dev-utils`', and every deliberate difference is recorded
+
+`scripts/eslint-config.ts` and `workflow-scripts/scripts/eslint-config.ts` copy that package's shared config rather than resolving it, because this repo is its sibling and deliberately carries no dependency on it. A hand copy drifts, and these did: three refinements landed upstream over eighteen months and the fix meant to close that reached one of the four copies — and the `workflow-scripts` one had never been compared to anything at all, exactly as its vendored rule sources had not been.
+
+The dependency sweep (`update-npm-deps.ps1`) now compares each of them against upstream, using ESLint's own `calculateConfigForFile` rather than a regex over the source, at a **matched role** — `scripts/commit.ts` at both ends for the root package, `scripts/lint.ts` for `workflow-scripts`, which has no `commit.ts`. Each package carries its own `eslint-config-divergences.json` recording every deliberate difference with the reason, and the sweep fails on anything that file does not account for. **Sweeping the repo root does not sweep `workflow-scripts`** — it is a separate package with its own `package.json` and `node_modules`, so it takes its own sweep, same as it takes its own `npm ci`.
+
+Two properties keep it usable. It is **directional**: only "upstream enables or refines something this copy does not" is a finding, and a rule enabled here and off there is printed as information, because this copy is then the stricter one and upstream's reasons for its own relaxations are measurements about its own tree. And only rules one of the two configs **names in its source** are compared — ESLint merges each rule's `meta.defaultOptions` into the resolved options, so two configs on different ESLint patch versions otherwise come back disagreeing about rules neither has ever mentioned, and some of those rules accept no options at all on the older one.
+
+The correspondence runs both ways: an entry describing a divergence that no longer exists fails the sweep too, which is what stops the file ageing the way a comment at a call site does.
+
 ### `scripts/helpers/package-manager.test.ts` is a copy, not this repo's own suite
 
 It is taken **byte-for-byte** from `obsidian-test-mocks`, where it is maintained, and the same file runs in the other repos that share `package-manager.ts`. Sync it by copying and comparing hashes, never by editing it here: it lays down real directory trees under the OS temp directory and stubs `process.platform`, which is what lets one copy run unchanged everywhere. Its 42 cases cover the lockfile and `packageManager` detection that an npm-only tree cannot reach, and the `node_modules/.bin` shim resolution. When a copy trips a lint rule here, the answer is the shared config's options for that rule, not an edit to the copy — `unicorn/no-useless-undefined` took them for exactly that reason.
