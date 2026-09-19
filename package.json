@@ -33,6 +33,7 @@
   "scripts": {
     "bootstrap-new-package": "jiti workflow-scripts/bootstrap-new-package.ts",
     "check:exec-helpers": "jiti scripts/check-exec-helpers.ts",
+    "check:vendored-eslint-rules": "jiti scripts/check-vendored-eslint-rules.ts",
     "checkout": "jiti workflow-scripts/checkout.ts",
     "commit": "jiti scripts/commit.ts",
     "create-new-release-branch": "jiti workflow-scripts/create-new-release-branch.ts",
