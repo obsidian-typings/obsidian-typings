@@ -109,9 +109,10 @@ export interface Plugins extends Events {
    * Unload a plugin by ID.
    *
    * @param id - {@link obsidian#Plugin} ID.
+   * @param isUserDisabled - Whether the plugin was disabled by the user.
    * @returns A promise that resolves when the plugin is disabled.
    */
-  disablePlugin(id: string): Promise<void>;
+  disablePlugin(id: string, isUserDisabled?: boolean): Promise<void>;
 
   /**
    * Unload a plugin by ID and save config for persistence.
@@ -125,17 +126,18 @@ export interface Plugins extends Events {
    * Enable a plugin by ID.
    *
    * @param id - {@link obsidian#Plugin} ID.
-   * @returns A promise that resolves when the plugin is enabled.
+   * @param isUserEnabled - Whether the plugin was enabled by the user.
+   * @returns A promise that resolves to `true` if the plugin was loaded, or `false` if it was refused (unknown, deprecated or desktop-only plugin) or threw while loading.
    */
-  enablePlugin(id: string): Promise<void>;
+  enablePlugin(id: string, isUserEnabled?: boolean): Promise<boolean>;
 
   /**
    * Enable a plugin by ID and save config for persistence.
    *
    * @param id - {@link obsidian#Plugin} ID.
-   * @returns A promise that resolves when the plugin is enabled and the config is saved.
+   * @returns A promise that resolves to `true` if the plugin was enabled and the config saved, or `false` if {@link Plugins.enablePlugin} refused it, in which case nothing is saved.
    */
-  enablePluginAndSave(id: string): Promise<void>;
+  enablePluginAndSave(id: string): Promise<boolean>;
 
   /**
    * Get a plugin by ID.
