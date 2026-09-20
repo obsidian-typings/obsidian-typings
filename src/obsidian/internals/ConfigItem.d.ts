@@ -49,7 +49,6 @@ export type ConfigItem =
   | 'slidingSidebar'
   | 'smartIndentList'
   | 'spellcheck'
-  | 'spellcheckLanguages'
   | 'strictLineBreaks'
   | 'tabSize'
   | 'textFontFamily'
