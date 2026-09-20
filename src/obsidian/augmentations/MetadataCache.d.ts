@@ -453,18 +453,15 @@ declare module 'obsidian' {
     /**
      * Iterate over all references for a specific file.
      *
-     * This declaration does not match the runtime and is corrected only on the next release branch,
-     * because every part of the correction is a breaking change. At runtime the first argument is the
-     * {@link obsidian#TFile} itself rather than its path, and passing a path silently walks nothing;
-     * the callback is a predicate, so returning `true` stops the iteration; and frontmatter links are
-     * visited first, which carry no position, so the reference is not necessarily a
-     * {@link obsidian#ReferenceCache}.
+     * The callback is invoked with each reference found in the file, frontmatter links first, so the
+     * reference is not necessarily a {@link obsidian#ReferenceCache} and may carry no position.
+     * Returning `true` from it stops the iteration.
      *
-     * @param path - The file path to iterate references for.
+     * @param file - The file to iterate references for.
      * @param callback - The callback to execute for each reference.
      * @unofficial
      */
-    iterateRefsForFile(path: string, callback: (reference: ReferenceCache) => void): void;
+    iterateRefsForFile(file: TFile, callback: (reference: Reference) => boolean | void): void;
 
     /**
      * Process the link resolver queue to resolve file links.
