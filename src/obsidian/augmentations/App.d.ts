@@ -411,11 +411,12 @@ declare module 'obsidian' {
     /**
      * Get currently active spellcheck languages.
      *
-     * @returns The active spellcheck languages.
+     * @returns The active spellcheck languages, or `null` when none are set.
      * @remark Originally spellcheck languages were stored in app settings, languages are now stored in `localStorage.getItem('spellcheck-languages')`.
+     * @remark `null` is the ordinary answer on a vault that has never set a language, on both maintained branches, so the result must be checked before it is used. Obsidian's own spellcheck setting checks it.
      * @unofficial
      */
-    getSpellcheckLanguages(): string[];
+    getSpellcheckLanguages(): null | string[];
 
     /**
      * Get the current color scheme of the application.
