@@ -46,11 +46,18 @@ const tasks: Record<string, NanoStagedHandler> = {
   '*.md': ({ filenames }) => batch(filenames).map((b) => `${PACKAGE_MANAGER_RUN_COMMAND} lint:md:fix -- ${join(b)}`),
   /*
    * The vendored ESLint rule sources, which are hand-copies of `obsidian-dev-utils`' and are supposed to be
-   * the same bytes. Running last is what makes this useful rather than merely present: `lint:fix` and
-   * `format` above rewrite a staged copy in place, which is one of the ways these files drift, so the check
-   * has to read what is about to be committed rather than what was staged. The key sorts to last here on its
-   * own - perfectionist puts a recursive glob after the single-segment ones - so that order is enforced
-   * rather than merely typed in.
+   * the same bytes. `lint:fix` and `format` above rewrite a staged copy in place, which is one of the ways
+   * these files drift, so the check has to read what is about to be committed - and where this key sits
+   * cannot buy that. **nano-staged builds one task group per pattern and runs the groups with
+   * `Promise.all`** (`node_modules/nano-staged/lib/cmd-runner.js:76`, measured against nano-staged 1.0.2,
+   * 2026-09-19), so this group RACES `lint:fix` rather than following it; sequencing exists within a single
+   * key's command list and nowhere else. Key order here is only what perfectionist sorts it to, and says
+   * nothing about when anything runs.
+   *
+   * So the ordering is not enforced, it is made IRRELEVANT: the check reads its subject out of the git
+   * index rather than off disk (`scripts/helpers/git-content.ts`), which is the same bytes whether
+   * `lint:fix` has run or not. Moving this key, or a future nano-staged ordering the groups differently,
+   * changes nothing.
    *
    * It is the one task here that takes no filenames, because it compares whole trees rather than the files
    * that happen to be staged. The glob is only what decides whether it runs at all, so an ordinary commit
