@@ -2,7 +2,6 @@ import type { getFileManagerConstructor } from '../implementations/constructors/
 import type { LinkChangeUpdate } from '../internals/link-update/LinkChangeUpdate.d.ts';
 import type { LinkUpdate } from '../internals/link-update/LinkUpdate.d.ts';
 import type { LinkUpdatesHandler } from '../internals/link-update/LinkUpdatesHandler.d.ts';
-import type { PositionedReference } from '../internals/PositionedReference.d.ts';
 import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
 
 export {};
@@ -230,22 +229,6 @@ declare module 'obsidian' {
      * @unofficial
      */
     insertIntoFile(file: TFile, text: string, position?: 'append' | 'prepend'): Promise<void>;
-
-    /**
-     * Iterate over all links in the vault with callback.
-     *
-     * This member does not exist at runtime and is removed only on the next release branch, because
-     * removing a declared member is a breaking change. `iterateAllRefs` is defined exactly once in the
-     * Obsidian bundle, on {@link obsidian#MetadataCache}, and {@link obsidian#FileManager} merely calls it
-     * through `app.metadataCache`. So `app.fileManager.iterateAllRefs(...)` compiles and then throws
-     * `app.fileManager.iterateAllRefs is not a function`. Call `app.metadataCache.iterateAllRefs(...)`
-     * instead, whose callback is a predicate over {@link obsidian#Reference} rather than the `void`
-     * consumer over `PositionedReference` declared here.
-     *
-     * @param callback - Callback to execute for each link.
-     * @unofficial
-     */
-    iterateAllRefs(callback: (path: string, link: PositionedReference) => void): void;
 
     /**
      * Merge two files.
