@@ -14,7 +14,7 @@
  * bytes, so there is no "which side is stricter" judgement to make and no ESLint has to resolve anything -
  * which is what makes this check cheap where the same question about the shared ESLint **config** is not.
  *
- * Three things it does deliberately:
+ * Four things it does deliberately:
  *
  * 1. **A deliberate difference is recorded as the TRANSFORM that reproduces it**, in {@link TRANSFORM_ARMS},
  *    rather than as a comment no checker can parse. Each arm carries the reason it exists and the files it
@@ -22,7 +22,15 @@
  * 2. **It enumerates the TREES, not the directories.** Any file anywhere in this repo named after an upstream
  *    rule source is a copy, wherever it sits - including inside a self-contained subpackage with its own
  *    `package.json`. Walking one known path per repo is how a second tree was never compared to anything.
- * 3. **The upstream list comes from upstream**, from the directory listing rather than from a roster restated
+ * 3. **This repo's side is READ FROM THE INDEX**, not from the working tree ({@link readIndexContent}). A
+ *    local autofix rewriting a copy in place is one of the three drift directions above, and `lint:fix` and
+ *    `format` do exactly that to a staged file in the same commit this runs in. nano-staged cannot be made
+ *    to run this after them - it runs its per-pattern task groups with `Promise.all`, so a separate key
+ *    RACES the fixer rather than following it (measured against 1.0.2 in this checkout, 2026-09-19;
+ *    sequencing exists within one key's command list and nowhere else). Reading the index makes that
+ *    ordering irrelevant instead of trying to enforce it, and answers the same question when a developer
+ *    runs this by hand mid-edit. An untracked copy has no staged bytes and is read from disk.
+ * 4. **The upstream list comes from upstream**, from the directory listing rather than from a roster restated
  *    here, so a rule added there is not invisible to this check. The sources are then read from
  *    `raw.githubusercontent.com`: the published npm package ships `dist/` only, so the `.ts` sources are not
  *    in it, and reading them off a sibling checkout would make this check pass only on a machine that happens
@@ -49,6 +57,7 @@ import {
 import process from 'node:process';
 
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
+import { readIndexContent } from './helpers/git-content.ts';
 import {
   getRootFolder,
   toPosixPath
@@ -82,6 +91,18 @@ interface TransformArm {
 interface UpstreamListingEntry {
   name: string;
   type: string;
+}
+
+/**
+ * One vendored copy's bytes, and where they were read from.
+ *
+ * The source is carried rather than inferred, because it is the difference between "this is what your
+ * commit would write" and "this is what is on your disk" - and a failure message that does not say which is
+ * one a reader cannot act on.
+ */
+interface VendoredText {
+  isStaged: boolean;
+  text: string;
 }
 
 const HTTP_STATUS_NOT_FOUND = 404;
@@ -174,14 +195,20 @@ async function compareVendoredFile(vendoredPath: string, root: string, scratchDi
   }
 
   const expected = transform(upstreamText, fileName);
-  const actual = await readFile(vendoredPath, 'utf-8');
+  const { isStaged, text: actual } = await readVendoredText(root, relativePath, vendoredPath);
   if (actual === expected) {
     return;
   }
 
-  const expectedPath = join(scratchDirectory, relativePath.replaceAll('/', '__'));
+  const expectedPath = getScratchPath(relativePath, scratchDirectory, 'upstream');
   await writeFile(expectedPath, expected);
-  failures.push(`${relativePath} differs from upstream after the recorded transform. See how with \`git diff --no-index ${expectedPath} ${relativePath}\`.`);
+
+  const actualPath = getScratchPath(relativePath, scratchDirectory, isStaged ? 'staged' : 'disk');
+  await writeFile(actualPath, actual);
+
+  failures.push(
+    `${relativePath} differs from upstream after the recorded transform. See how with \`git diff --no-index ${expectedPath} ${actualPath}\` - the right-hand side is ${isStaged ? `the STAGED ${relativePath}, which is what a commit would write` : `${relativePath} as it sits on disk, because it is untracked`}.`
+  );
 }
 
 async function fetchUpstreamText(fileName: string): Promise<null | string> {
@@ -195,6 +222,16 @@ async function fetchUpstreamText(fileName: string): Promise<null | string> {
   }
 
   throw new Error(`Could not read ${fileName} from ${UPSTREAM_BASE_URL}: HTTP ${String(response.status)} ${response.statusText}.`);
+}
+
+/**
+ * Where one side of a file's comparison is parked.
+ *
+ * Both sides are written out rather than only upstream's, because this repo's side is read from the index
+ * and so is not readable as a path - see {@link readVendoredText}.
+ */
+function getScratchPath(relativePath: string, scratchDirectory: string, side: 'disk' | 'staged' | 'upstream'): string {
+  return join(scratchDirectory, `${side}__${relativePath.replaceAll('/', '__')}`);
 }
 
 /**
@@ -282,6 +319,26 @@ async function main(): Promise<void> {
   }
 
   console.log(`check:vendored-eslint-rules passed: ${String(vendoredPaths.length)} vendored file(s) match upstream after the recorded transform.`);
+}
+
+/**
+ * Reads one vendored copy as it is about to be committed.
+ *
+ * The index rather than the working tree - see the file header for why, and
+ * `scripts/helpers/git-content.ts` for the nano-staged measurement behind it. The fallback to disk is not a
+ * safety net: this gate finds its copies by WALKING for the name, deliberately, so a vendored tree that has
+ * been added but not yet `git add`ed is an ordinary case, and disk is the only place its bytes exist.
+ *
+ * @param root - The repository root.
+ * @param relativePath - The copy's path relative to `root`.
+ * @param absolutePath - The same file, for the fallback read.
+ * @returns The bytes to compare, and whether they came from the index.
+ */
+async function readVendoredText(root: string, relativePath: string, absolutePath: string): Promise<VendoredText> {
+  const staged = await readIndexContent(root, relativePath);
+  return staged === null
+    ? { isStaged: false, text: await readFile(absolutePath, 'utf-8') }
+    : { isStaged: true, text: staged.toString('utf-8') };
 }
 
 function transform(upstreamText: string, fileName: string): string {
