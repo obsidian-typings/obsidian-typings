@@ -1,6 +1,7 @@
 import type { View } from 'obsidian';
 
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
+import type { ResultDom } from '../../tree/ResultDom.d.ts';
 
 /**
  * {@link obsidian#View} that displays the global search results pane.
@@ -9,6 +10,9 @@ import type { ViewType } from '../../../implementations/constants/ViewType.d.ts'
  * @unofficial
  */
 export interface SearchView extends View {
+  /** DOM tree rendering the search results, inside `div.search-result-container.mod-global-search`. */
+  dom: ResultDom;
+
   /**
    * Returns the value of the search element.
    *
