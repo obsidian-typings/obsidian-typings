@@ -179,6 +179,7 @@
     "unmap",
     "unpushed",
     "unsetup",
+    "unsignalled",
     "unstub",
     "unthrottled",
     "unxok",

@@ -5,6 +5,11 @@ import {
   selectLatestBranch
 } from './helpers/baseBranch.ts';
 import { generateBranchName } from './helpers/branchSpec.ts';
+import {
+  CHANGELOG_FILE_NAME,
+  createInitialChangelog,
+  writeChangelog
+} from './helpers/changelog.ts';
 import { restoreWorkflowScripts } from './helpers/checkout.ts';
 import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { commit } from './helpers/git.ts';
@@ -66,7 +71,7 @@ async function main(): Promise<void> {
   // survive every later branch switch and are never committed. They have to be in place before
   // `generateReadme()` (it reads `./workflow-scripts/README.template.md`) and before `npm run release`.
   await restoreWorkflowScripts();
-  await resetPackageVersion();
+  await resetBranchState();
   await execFromRoot(`git push -u origin "${newBranch}"`);
   await generateReadme(newBranchSpec, changelogUrl);
 
@@ -184,6 +189,33 @@ function printTrustedPublisherPending(packageName: string): void {
   ].join('\n'));
 }
 
+/**
+ * Puts the freshly cut branch into the state a brand-new package starts from.
+ *
+ * TWO things reset, and the second is as load-bearing as the first. A new branch mints a package name npm has
+ * never seen -- `getScopedPackageName` builds it from the Obsidian version -- so its version restarts at
+ * {@link INITIAL_BRANCH_VERSION}, and its changelog has to restart with it. Inheriting the base branch's
+ * changelog would publish another package's history under a numbering that has just gone back to `1.0.0`.
+ *
+ * That was invisible until 2026-09-23, because the file was a three-line stub every branch inherited from
+ * every other and nothing ever wrote it. `publish-release.ts` now writes a real one per release, which is
+ * what makes the reset necessary rather than merely tidy.
+ */
+async function resetBranchState(): Promise<void> {
+  await resetPackageVersion();
+  await writeChangelog(createInitialChangelog());
+
+  await execFromRoot(`git add package.json package-lock.json ${CHANGELOG_FILE_NAME}`);
+
+  const hasChanges = (await execFromRoot('git diff --staged --name-only', { isQuiet: true })).trim() !== '';
+  if (!hasChanges) {
+    console.log(`Version is already ${INITIAL_BRANCH_VERSION} and the changelog is already empty, skipping the reset commit.`);
+    return;
+  }
+
+  await commit(`chore(release): reset to ${INITIAL_BRANCH_VERSION}`);
+}
+
 async function resetPackageVersion(): Promise<void> {
   await editPackageJson((packageJson) => {
     packageJson.version = INITIAL_BRANCH_VERSION;
@@ -197,16 +229,6 @@ async function resetPackageVersion(): Promise<void> {
       defaultPackage.version = INITIAL_BRANCH_VERSION;
     }
   });
-
-  await execFromRoot('git add package.json package-lock.json');
-
-  const hasChanges = (await execFromRoot('git diff --staged --name-only', { isQuiet: true })).trim() !== '';
-  if (!hasChanges) {
-    console.log(`Version is already ${INITIAL_BRANCH_VERSION}, skipping the reset commit.`);
-    return;
-  }
-
-  await commit(`chore(release): reset to ${INITIAL_BRANCH_VERSION}`);
 }
 
 await main();
