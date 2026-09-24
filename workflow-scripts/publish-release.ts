@@ -6,6 +6,18 @@ import type { PackageRegistryState } from './helpers/npm.ts';
 
 import { parseBranchSpec } from './helpers/branchSpec.ts';
 import {
+  CHANGELOG_FILE_NAME,
+  composeChangelogSection,
+  getBreakingChangeSubjects,
+  getChangelogEntries,
+  prependChangelogSection,
+  readChangelog,
+  RELEASE_NOTES_FILE_NAME,
+  resolveCommitRange,
+  writeChangelog,
+  writeReleaseNotes
+} from './helpers/changelog.ts';
+import {
   annotateTag,
   commit,
   getBranchNames
@@ -247,6 +259,7 @@ async function main(): Promise<void> {
   await writeOutput({
     isBeta,
     releaseName: `${nextVersion} (${scopedPackageName})`,
+    releaseNotesFileName: RELEASE_NOTES_FILE_NAME,
     tagName: scopedTagName,
     zipFileName
   });
@@ -337,6 +350,31 @@ async function pushRelease(nextVersion: string, scopedPackageName: string, scope
       { cause: error }
     );
   }
+}
+
+/**
+ * Writes this release's section into `CHANGELOG.md`, and the same section out for the GitHub release body.
+ *
+ * Both destinations get one generated section, deliberately. They are the two places a consumer looks -- the
+ * published tarball and the releases page -- and until 2026-09-23 neither held anything: the tarball shipped
+ * a three-line stub pointing at a `main` file last touched in March, and the release body was empty because
+ * `publish-release.yml` handed `softprops/action-gh-release` neither a `body` nor `generate_release_notes`.
+ * Generating twice would be two chances to disagree about one release.
+ *
+ * The previous release's tag is derived from the version this branch currently holds, which is exactly the
+ * version the previous run published. See `resolveCommitRange` for what happens on a branch's first release,
+ * where no such tag exists.
+ */
+async function updateChangelog(branchSpec: BranchSpec, currentVersion: string, nextVersion: string): Promise<void> {
+  const commitRange = await resolveCommitRange(buildScopedTagName(branchSpec, currentVersion));
+  const section = composeChangelogSection({
+    breakingChangeSubjects: await getBreakingChangeSubjects(commitRange),
+    entries: await getChangelogEntries(commitRange),
+    version: nextVersion
+  });
+
+  await writeReleaseNotes(section);
+  await writeChangelog(prependChangelogSection(await readChangelog(), section));
 }
 
 async function updateLatestWrapper(channel: 'catalyst' | 'public', scopedPackageName: string, scopedVersion: string, wrapperVersion: string): Promise<void> {
@@ -438,7 +476,10 @@ async function updateNpmVersion(nextVersion: string): Promise<void> {
     }
   });
 
-  await execFromRoot('git add package.json package-lock.json');
+  // `CHANGELOG.md` rides in the release commit rather than in one of its own: it describes exactly the
+  // version this commit sets, and `package.json`'s `files` array publishes it, so a release whose tarball
+  // carried a changelog the branch did not would be the same lie in the other direction.
+  await execFromRoot(`git add package.json package-lock.json ${CHANGELOG_FILE_NAME}`);
   await commit(`chore(release): ${nextVersion}`);
 }
 
@@ -454,6 +495,10 @@ async function updateNpmVersions(branchSpec: BranchSpec, isBeta: boolean): Promi
   if (!nextVersion) {
     throw new Error('Failed to increment version');
   }
+
+  // Strictly BEFORE the release commit, and the ordering is the whole of it: the range ends at `HEAD`, so a
+  // changelog generated after the bump would open every release with its own `chore(release):` line.
+  await updateChangelog(branchSpec, currentVersion, nextVersion);
 
   await updateNpmVersion(nextVersion);
 

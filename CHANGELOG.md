@@ -1,5 +1,21 @@
 # CHANGELOG
 
+> [!NOTE]
+>
+> **This file is the archive of the releases published before the move to scoped packages. It stops at
+> `4.110.0`, nothing has written it since 2026-03-11, and nothing will.**
+>
+> The `4.x` numbering above belongs to the single `obsidian-typings` package that predated
+> `@obsidian-typings/obsidian-<channel>-<version>`. Each of those per-version packages lives on its own
+> release branch, versions itself from `1.0.0`, and keeps **its own `CHANGELOG.md`** — written at publish
+> time by [`workflow-scripts/publish-release.ts`](workflow-scripts/publish-release.ts) and shipped inside
+> the package, with the same section as the body of that release on the
+> [releases page](https://github.com/obsidian-typings/obsidian-typings/releases).
+>
+> So the changelog for anything you can install today is in the package you installed, not here. Until
+> 2026-09-23 every published package carried a stub pointing at this file instead, which is what the note
+> exists to end.
+
 ## 4.110.0 (obsidian-public-1.12.4)
 
 - docs: add more tsdocs

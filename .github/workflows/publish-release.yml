@@ -56,6 +56,10 @@ jobs:
           prerelease: ${{ steps.run-script.outputs.isBeta == 'true' }}
           tag_name: ${{ steps.run-script.outputs.tagName }}
           name: ${{ steps.run-script.outputs.releaseName }}
+          # The same section `publish-release.ts` prepended to this release's `CHANGELOG.md`. Every release
+          # body before 2026-09-23 was empty -- the action defaults to one, and nothing here overrode it --
+          # so the releases page recorded which versions existed and nothing about what changed in them.
+          body_path: ${{ steps.run-script.outputs.releaseNotesFileName }}
       - name: Trigger GitHub Pages build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
