@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitest/config';
 
+const DOCS_TEST_FILES = 'docs/scripts/**/*.test.ts';
 const SHARED_EXCLUDE = ['node_modules', 'dist'];
 const SCRIPTS_TEST_FILES = 'scripts/**/*.test.ts';
 const WORKFLOW_SCRIPTS_TEST_FILES = 'workflow-scripts/**/*.test.ts';
@@ -31,6 +32,17 @@ export const config = defineConfig({
           exclude: [...SHARED_EXCLUDE, 'workflow-scripts/node_modules'],
           include: [WORKFLOW_SCRIPTS_TEST_FILES],
           name: 'unit-tests:workflow-scripts'
+        }
+      },
+      {
+        // `docs` is the third npm package, tested from here for the same reason `workflow-scripts` is: its
+        // tests take `vitest` from the root install, and its own imports (`unist-util-visit`) resolve through
+        // its own install, which `verify.yml` also performs before `npm test`.
+        test: {
+          environment: 'node',
+          exclude: [...SHARED_EXCLUDE, 'docs/node_modules'],
+          include: [DOCS_TEST_FILES],
+          name: 'unit-tests:docs'
         }
       }
     ]

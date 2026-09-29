@@ -9,6 +9,7 @@ import {
 import { getApiSidebar } from './helpers/api-sidebar.ts';
 import { admonitionRenderer } from './helpers/remark-plugins/custom-admonition-renderer.ts';
 import { githubLocationRenderer } from './helpers/remark-plugins/github-location-renderer.ts';
+import { remarkGitHubAlerts } from './helpers/remark-plugins/remark-github-alerts.ts';
 import { remarkRelativeLinks } from './helpers/remark-plugins/remark-relative-links.ts';
 
 const BASE = process.env['BASE_PATH'] ?? '/obsidian-typings';
@@ -32,6 +33,14 @@ export const astroConfig = defineConfig({
         baseUrl: 'https://github.com/obsidian-typings/obsidian-typings/tree/main/docs/'
       },
       favicon: './favicon.png',
+      markdown: {
+        // Starlight runs its own Markdown plugins -- the asides among them -- only on files under the docs
+        // collection and these directories. `resources/obsidian-typings-changelog.mdx` renders the repository's
+        // `CHANGELOG.md`, which is outside the collection, so without this a GitHub alert in it is converted to a
+        // directive by `remarkGitHubAlerts` and then rendered as a bare `<div>` instead of an aside.
+        // eslint-disable-next-line unicorn/name-replacements -- `processedDirs` is a Starlight config key.
+        processedDirs: ['../']
+      },
       plugins: [],
       routeMiddleware: './src/route-data.ts',
       // Starlight still receives the full tree: it is what `pagination` (prev/next links) is
@@ -55,7 +64,11 @@ export const astroConfig = defineConfig({
     })
   ],
   markdown: {
+    // These run on the `unified` processor: Astro 7.3 selects it because this list is set and
+    // `@astrojs/markdown-remark` is installed. Starlight appends its own plugins after these, so the
+    // GitHub-alert conversion, which hands Starlight's asides plugin a `containerDirective`, has to be here.
     remarkPlugins: [
+      remarkGitHubAlerts,
       remarkRelativeLinks(BASE),
       admonitionRenderer,
       githubLocationRenderer
