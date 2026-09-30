@@ -228,7 +228,7 @@ function isInExportedScope(node: Rule.Node): boolean {
 function isOptionalParameter(parameter: Rule.Node): boolean {
   // `options: FooOptions = {}` is an AssignmentPattern; `options?: FooOptions` carries an
   // `optional` flag. Both make the bag optional → `*Options`.
-  return parameter.type === 'AssignmentPattern' ? true : (parameter as MaybeOptionalNode).optional === true;
+  return parameter.type === 'AssignmentPattern' || (parameter as MaybeOptionalNode).optional === true;
 }
 
 function toPascalCase(name: string): string {
