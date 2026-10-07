@@ -7,12 +7,11 @@ import type {
   TAbstractFile,
   TFile,
   TFolder,
+  UserEvent,
   WorkspaceLeaf
 } from 'obsidian';
 
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
-import type { BasesFunction } from './BasesFunction.d.ts';
-import type { BasesFunctions } from './BasesFunctions.d.ts';
 import type { BasesPlugin } from './BasesPlugin.d.ts';
 import type { BasesViewRegistrations } from './BasesViewRegistrations.d.ts';
 
@@ -34,11 +33,6 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
   defaultOn: boolean;
 
   /**
-   * The functions.
-   */
-  functions: BasesFunctions;
-
-  /**
    * The Bases view registrations, keyed by view type.
    */
   registrations: BasesViewRegistrations;
@@ -52,6 +46,14 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
   createAndEmbedBase(editor: Editor): Promise<void>;
 
   /**
+   * Creates a new base next to the active file and opens it for renaming.
+   *
+   * @param evt - The event that triggered the creation. Falls back to the app's last event when omitted.
+   * @returns A promise that resolves when the base is created and opened.
+   */
+  createAndOpenBase(evt?: UserEvent): Promise<void>;
+
+  /**
    * Creates a new bases file.
    *
    * @param location - Optional folder location for the new file.
@@ -62,33 +64,11 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
   createNewBasesFile(location?: TFolder, filename?: string, contents?: string): Promise<TFile>;
 
   /**
-   * Deregisters a function.
-   *
-   * @param name - The name of the function to deregister.
-   */
-  deregisterFunction(name: string): void;
-
-  /**
    * Deregisters a view.
    *
    * @param type - The view type to deregister.
    */
   deregisterView(type: string): void;
-
-  /**
-   * Gets a function.
-   *
-   * @param name - The name of the function to get.
-   * @returns The function, or `null` if not found.
-   */
-  getFunction(name: string): BasesFunction | null;
-
-  /**
-   * Gets the operator functions.
-   *
-   * @returns The list of operator functions.
-   */
-  getOperatorFunctions(): BasesFunction[];
 
   /**
    * Gets a Bases view registration.
@@ -114,11 +94,12 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
   getViewFactory(type: string): BasesViewFactory | null;
 
   /**
-   * Gets the view types.
+   * Adds the "new base" item to the editor context menu.
    *
-   * @returns The list of registered view type strings.
+   * @param menu - The context menu to extend.
+   * @param editor - The editor the menu was opened in.
    */
-  getViewTypes(): string[];
+  onEditorMenu(menu: Menu, editor: Editor): void;
 
   /**
    * On file menu.
@@ -129,13 +110,6 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
    * @param leaf - Optional workspace leaf context.
    */
   onFileMenu(menu: Menu, file: TAbstractFile, source: string, leaf?: WorkspaceLeaf): void;
-
-  /**
-   * Registers a function.
-   *
-   * @param fn - The function to register.
-   */
-  registerFunction(fn: BasesFunction): void;
 
   /**
    * Registers a Bases view. Shows an error notice instead when a view of that type is already registered.
