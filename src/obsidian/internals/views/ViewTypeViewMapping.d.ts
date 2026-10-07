@@ -3,7 +3,6 @@ import type { MarkdownView } from 'obsidian';
 import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
 import type { BacklinkView } from '../internal-plugins/backlink/BacklinkView.d.ts';
 import type { BasesView } from '../internal-plugins/bases/BasesView.d.ts';
-import type { TableView } from '../internal-plugins/bases/TableView.d.ts';
 import type { BookmarksView } from '../internal-plugins/bookmarks/BookmarksView.d.ts';
 import type { CanvasView } from '../internal-plugins/canvas/CanvasView.d.ts';
 import type { FileExplorerView } from '../internal-plugins/file-explorer/FileExplorerView.d.ts';
@@ -53,7 +52,6 @@ export type ViewTypeViewMapping = {
   [ViewType.ReleaseNotes]: ReleaseNotesView;
   [ViewType.Search]: SearchView;
   [ViewType.Sync]: SyncView;
-  [ViewType.Table]: TableView;
   [ViewType.Tag]: TagView;
   [ViewType.Video]: VideoView;
 };
