@@ -1,5 +1,7 @@
 import type {
   App,
+  BasesViewFactory,
+  BasesViewRegistration,
   Editor,
   Menu,
   TAbstractFile,
@@ -11,9 +13,8 @@ import type {
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { BasesFunction } from './BasesFunction.d.ts';
 import type { BasesFunctions } from './BasesFunctions.d.ts';
-import type { BasesHandlers } from './BasesHandlers.d.ts';
 import type { BasesPlugin } from './BasesPlugin.d.ts';
-import type { ViewFactory } from './ViewFactory.d.ts';
+import type { BasesViewRegistrations } from './BasesViewRegistrations.d.ts';
 
 /**
  * Bases plugin instance.
@@ -38,9 +39,9 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
   functions: BasesFunctions;
 
   /**
-   * The handlers.
+   * The Bases view registrations, keyed by view type.
    */
-  handlers: BasesHandlers;
+  registrations: BasesViewRegistrations;
 
   /**
    * Creates and embeds a base.
@@ -90,12 +91,27 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
   getOperatorFunctions(): BasesFunction[];
 
   /**
-   * Gets a view factory.
+   * Gets a Bases view registration.
+   *
+   * @param type - The view type to get the registration for.
+   * @returns The registration, or `null` if no view of that type is registered.
+   */
+  getRegistration(type: string): BasesViewRegistration | null;
+
+  /**
+   * Gets all Bases view registrations.
+   *
+   * @returns The registrations, keyed by view type.
+   */
+  getRegistrations(): BasesViewRegistrations;
+
+  /**
+   * Gets the factory of a Bases view registration.
    *
    * @param type - The view type to get the factory for.
-   * @returns The view factory, or `null` if not found.
+   * @returns The view factory, or `null` if no view of that type is registered.
    */
-  getViewFactory(type: string): null | ViewFactory;
+  getViewFactory(type: string): BasesViewFactory | null;
 
   /**
    * Gets the view types.
@@ -122,10 +138,10 @@ export interface BasesPluginInstance extends InternalPluginInstance<BasesPlugin>
   registerFunction(fn: BasesFunction): void;
 
   /**
-   * Registers a view.
+   * Registers a Bases view. Shows an error notice instead when a view of that type is already registered.
    *
    * @param type - The view type identifier.
-   * @param viewFactory - The factory function to create the view.
+   * @param registration - The view registration.
    */
-  registerView(type: string, viewFactory: ViewFactory): void;
+  registerView(type: string, registration: BasesViewRegistration): void;
 }
