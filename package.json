@@ -132,7 +132,7 @@
     "markdownlint-cli2": "^0.23.2",
     "markdownlint-rule-relative-links": "^5.1.0",
     "nano-staged": "^1.0.2",
-    "obsidian": "1.13.1",
+    "obsidian": "1.14.4",
     "semver": "^7.8.0",
     "ts-declaration-location": "^1.0.7",
     "ts-morph": "^28.0.0",
