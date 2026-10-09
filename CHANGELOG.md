@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.3.0
+
+### Breaking changes
+
+- fix!: drop the Bases function registry that 1.14.4 no longer has
+
+### Other changes
+
+- chore: update obsidian API version to 1.14.4
+
 ## 1.2.0
 
 ### Breaking changes
