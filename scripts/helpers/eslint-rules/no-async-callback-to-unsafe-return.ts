@@ -41,6 +41,7 @@ import {
 } from 'typescript';
 
 import { assertNonNullable } from '../type-guards.ts';
+import { toTSESTreeNode } from './ts-estree-node.ts';
 
 /**
 Message ID reported when an async function is passed as a callback to a parameter whose return type is `any`/`unknown`, risking an unhandled promise rejection.
@@ -156,7 +157,7 @@ export const noAsyncCallbackToUnsafeReturn: Rule.RuleModule = {
 
     return {
       CallExpression(node: Rule.Node): void {
-        const callNode = node as TSESTree.CallExpression;
+        const callNode = toTSESTreeNode(node) as TSESTree.CallExpression;
 
         for (let index = 0; index < callNode.arguments.length; index++) {
           const argument = callNode.arguments[index];
