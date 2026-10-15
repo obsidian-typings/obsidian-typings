@@ -99,12 +99,12 @@ declare module 'obsidian' {
      * Display the new note menu for a file with the provided filename and optionally a function to modify the frontmatter.
      *
      * @param baseFileName - The filename of the base file.
-     * @param frontmatterProcessor - A function to modify the frontmatter.
+     * @param frontmatterProcessor - A function to modify the frontmatter, called with the frontmatter and the created file.
      * @returns A promise that resolves when the file is created.
      * @official
      * @since 1.10.2
      */
-    createFileForView(baseFileName?: string, frontmatterProcessor?: (frontmatter: unknown) => void): Promise<void>;
+    createFileForView(baseFileName?: string, frontmatterProcessor?: (frontmatter: unknown, file: TFile) => void): Promise<void>;
 
     /**
      * Creates the heading element for a result group.

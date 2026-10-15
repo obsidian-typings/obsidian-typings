@@ -26,6 +26,15 @@ declare module 'obsidian' {
     groupBy?: BasesConfigFileViewGroupBy;
 
     /**
+     * Ordered list of the groupBy values to show. When set, only these groups appear, in this order.
+     * `null` is the group of entries with no value.
+     *
+     * @official
+     * @since 1.14.3
+     */
+    groupOrder?: FrontmatterValue[];
+
+    /**
      * Friendly name for this view, displayed in the UI to select between views.
      *
      * @official
