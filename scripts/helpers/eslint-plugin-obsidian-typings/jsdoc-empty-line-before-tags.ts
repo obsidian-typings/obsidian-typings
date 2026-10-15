@@ -1,7 +1,14 @@
-import type { TSESTree } from '@typescript-eslint/utils';
-import type { Rule } from 'eslint';
+import type {
+  TSESLint,
+  TSESTree
+} from '@typescript-eslint/utils';
 
-import type { RuleContext } from './utils.ts';
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
+
+import type {
+  RuleContext,
+  RuleListener
+} from './utils.ts';
 
 import {
   getJSDocComment,
@@ -22,15 +29,15 @@ function findMissingBlankLineIndex(comment: CommentValue): number {
   let lastDescriptionIndex = -1;
   let firstTagIndex = -1;
 
-  for (let i = 0; i < lines.length; i++) {
-    const trimmed = lines[i]!.replace(/^\s*\*\s?/, '').trim();
+  for (const [index, line] of lines.entries()) {
+    const trimmed = stripLinePrefix(line);
     if (trimmed.startsWith('@')) {
-      firstTagIndex = i;
+      firstTagIndex = index;
       break;
     }
 
     if (trimmed !== '') {
-      lastDescriptionIndex = i;
+      lastDescriptionIndex = index;
     }
   }
 
@@ -38,31 +45,17 @@ function findMissingBlankLineIndex(comment: CommentValue): number {
     return -1;
   }
 
-  // Check if there's an empty line between description and first tag
-  if (firstTagIndex - lastDescriptionIndex >= 2) {
-    // There's at least one line between them - check if it's empty
-    for (let i = lastDescriptionIndex + 1; i < firstTagIndex; i++) {
-      const trimmed = lines[i]!.replace(/^\s*\*\s?/, '').trim();
-      if (trimmed === '') {
-        return -1;
-      }
-    }
-  }
+  // An empty line anywhere between the description and the first tag is enough.
+  return lines.slice(lastDescriptionIndex + 1, firstTagIndex).some((line) => stripLinePrefix(line) === '') ? -1 : firstTagIndex;
+}
 
-  return firstTagIndex;
+function stripLinePrefix(line: string): string {
+  return line.replace(/^\s*\*\s?/, '').trim();
 }
 
 export const jsdocEmptyLineBeforeTags = {
-  meta: {
-    type: 'problem' as const,
-    docs: { description: 'Require an empty line between JSDoc description and @official/@unofficial tags' },
-    fixable: 'whitespace' as const,
-    messages: {
-      missingEmptyLine: 'JSDoc comment must have an empty line between description and tags.'
-    }
-  },
-  create(context: RuleContext) {
-    function checkComment(node: TSESTree.Node): void {
+  create(context: RuleContext): RuleListener {
+    function validateComment(node: TSESTree.Node): void {
       const jsDoc = getJSDocComment(context.sourceCode, node);
       if (!jsDoc) {
         return;
@@ -76,52 +69,53 @@ export const jsdocEmptyLineBeforeTags = {
         return;
       }
 
-      const commentNode = jsDoc as unknown as TSESTree.Comment;
-
       context.report({
-        loc: commentNode.loc!,
-        messageId: 'missingEmptyLine',
-        fix(fixer: Rule.RuleFixer) {
+        fix(fixer: TSESLint.RuleFixer): TSESLint.RuleFix {
           const lines = jsDoc.value.split('\n');
-          const tagLine = lines[firstTagLineIndex]!;
-          const indent = tagLine.match(/^(\s*)\*/)?.[1] ?? ' ';
+          const indent = /^(?<indent>\s*)\*/.exec(lines[firstTagLineIndex] ?? '')?.groups?.['indent'] ?? ' ';
           const emptyLine = `${indent}*`;
           lines.splice(firstTagLineIndex, 0, emptyLine);
           const newValue = lines.join('\n');
 
           return fixer.replaceTextRange(
-            [commentNode.range![0], commentNode.range![1]],
+            [jsDoc.range[0], jsDoc.range[1]],
             `/*${newValue}*/`
           );
-        }
+        },
+        loc: jsDoc.loc,
+        messageId: 'missingEmptyLine'
       });
     }
 
-    function checkMember(node: TSESTree.Node): void {
+    function validateMember(node: TSESTree.Node): void {
       if (!isDirectInterfaceMember(node)) {
         return;
       }
-      checkComment(node);
+      validateComment(node);
     }
 
     return {
-      MethodDefinition: checkMember,
-      PropertyDefinition: checkMember,
+      MethodDefinition: validateMember,
+      PropertyDefinition: validateMember,
       TSIndexSignature(node: TSESTree.TSIndexSignature): void {
         if (!isDirectInterfaceMember(node)) {
           return;
         }
-        checkComment(node);
+        validateComment(node);
       },
       TSInterfaceDeclaration(node: TSESTree.TSInterfaceDeclaration): void {
-        let target: TSESTree.Node = node;
-        if (node.parent?.type === 'ExportNamedDeclaration') {
-          target = node.parent;
-        }
-        checkComment(target);
+        validateComment(node.parent.type === AST_NODE_TYPES.ExportNamedDeclaration ? node.parent : node);
       },
-      TSMethodSignature: checkMember,
-      TSPropertySignature: checkMember
+      TSMethodSignature: validateMember,
+      TSPropertySignature: validateMember
     };
+  },
+  meta: {
+    docs: { description: 'Require an empty line between JSDoc description and @official/@unofficial tags' },
+    fixable: 'whitespace' as const,
+    messages: {
+      missingEmptyLine: 'JSDoc comment must have an empty line between description and tags.'
+    },
+    type: 'problem' as const
   }
 };

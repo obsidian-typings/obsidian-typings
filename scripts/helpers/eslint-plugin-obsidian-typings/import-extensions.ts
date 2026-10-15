@@ -1,17 +1,14 @@
 import type { TSESTree } from '@typescript-eslint/utils';
 
-import type { RuleContext } from './utils.ts';
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
+
+import type {
+  RuleContext,
+  RuleListener
+} from './utils.ts';
 
 export const importExtensions = {
-  meta: {
-    type: 'problem' as const,
-    docs: { description: 'Enforce .d.ts or .ts extensions on relative imports' },
-    messages: {
-      missing: 'Relative import "{{source}}" must include .d.ts or .ts extension.',
-      wrongExt: 'Import "{{source}}" should use {{expected}} extension.'
-    }
-  },
-  create(context: Pick<RuleContext, 'filename' | 'report'>) {
+  create(context: Pick<RuleContext, 'filename' | 'report'>): RuleListener {
     const isDeclarationFile = context.filename.endsWith('.d.ts');
 
     function isTypeOnly(
@@ -20,13 +17,7 @@ export const importExtensions = {
       if (isDeclarationFile) {
         return true;
       }
-      if (node.type === 'ImportDeclaration') {
-        return node.importKind === 'type';
-      }
-      if (node.type === 'ExportNamedDeclaration' || node.type === 'ExportAllDeclaration') {
-        return (node as TSESTree.ExportNamedDeclaration).exportKind === 'type';
-      }
-      return false;
+      return (node.type === AST_NODE_TYPES.ImportDeclaration ? node.importKind : node.exportKind) === 'type';
     }
 
     function check(
@@ -42,32 +33,40 @@ export const importExtensions = {
       }
       if (!value.endsWith('.d.ts') && !value.endsWith('.ts')) {
         context.report({
-          node: source,
+          data: { source: value },
           messageId: 'missing',
-          data: { source: value }
+          node: source
         });
         return;
       }
 
       if (isTypeOnly(node) && !value.endsWith('.d.ts')) {
         context.report({
-          node: source,
-          messageId: 'wrongExt',
-          data: { source: value, expected: '.d.ts' }
+          data: { expected: '.d.ts', source: value },
+          messageId: 'wrongExtension',
+          node: source
         });
       } else if (!isTypeOnly(node) && value.endsWith('.d.ts')) {
         context.report({
-          node: source,
-          messageId: 'wrongExt',
-          data: { source: value, expected: '.ts' }
+          data: { expected: '.ts', source: value },
+          messageId: 'wrongExtension',
+          node: source
         });
       }
     }
 
     return {
-      ImportDeclaration: check,
+      ExportAllDeclaration: check,
       ExportNamedDeclaration: check,
-      ExportAllDeclaration: check
+      ImportDeclaration: check
     };
+  },
+  meta: {
+    docs: { description: 'Enforce .d.ts or .ts extensions on relative imports' },
+    messages: {
+      missing: 'Relative import "{{source}}" must include .d.ts or .ts extension.',
+      wrongExtension: 'Import "{{source}}" should use {{expected}} extension.'
+    },
+    type: 'problem' as const
   }
 };

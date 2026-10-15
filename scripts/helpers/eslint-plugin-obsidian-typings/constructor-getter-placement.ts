@@ -1,5 +1,6 @@
 import type { TSESTree } from '@typescript-eslint/utils';
 
+import { AST_NODE_TYPES } from '@typescript-eslint/utils';
 import {
   existsSync,
   readdirSync,
@@ -11,52 +12,77 @@ import {
   resolve
 } from 'node:path';
 
-import type { RuleContext } from './utils.ts';
+import type {
+  RuleContext,
+  RuleListener
+} from './utils.ts';
 
 import { normalizePath } from './utils.ts';
-
-function isConstructorGetterFile(filename: string): boolean {
-  const normalized = normalizePath(filename);
-  return normalized.includes('/implementations/constructors/')
-    && /\/get\w+Constructor\.ts$/.test(normalized);
-}
 
 /**
  * Recursively search for `<typeName>.d.ts` under a directory.
  */
-function findAugmentationFile(dir: string, typeName: string): null | string {
+function findAugmentationFile(directory: string, typeName: string): null | string {
   const target = `${typeName}.d.ts`;
   try {
     // Check directory is readable
-    readdirSync(dir);
+    readdirSync(directory);
   } catch {
     return null;
   }
 
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
     if (entry.isFile() && entry.name === target) {
-      return join(dir, entry.name);
+      return join(directory, entry.name);
     }
-    if (entry.isDirectory()) {
-      const found = findAugmentationFile(join(dir, entry.name), typeName);
-      if (found) {
-        return found;
-      }
+    if (!entry.isDirectory()) {
+      continue;
+    }
+    const found = findAugmentationFile(join(directory, entry.name), typeName);
+    if (found) {
+      return found;
     }
   }
   return null;
 }
 
 /**
+ * Extract the subdirectory under `augmentations/` from a full augmentation file path.
+ * Returns the subdirectory name (e.g., 'bases', 'components', 'values', 'views')
+ * or `null` if the file is directly under `augmentations/`.
+ */
+function getAugmentationSubdir(augFilePath: string): null | string {
+  const normalized = normalizePath(augFilePath);
+  const match = /\/augmentations\/(?<subdirectory>[^/]+)\/[^/]+$/.exec(normalized);
+  return match?.groups?.['subdirectory'] ?? null;
+}
+
+/**
+ * Extract the subdirectory under `implementations/constructors/augmentations/` from a getter file path.
+ * Returns the subdirectory name or `null` if the file is directly under `augmentations/`.
+ */
+function getGetterSubdir(getterFilePath: string): null | string {
+  const normalized = normalizePath(getterFilePath);
+  const match = /\/implementations\/constructors\/augmentations\/(?<subdirectory>[^/]+)\/[^/]+$/.exec(normalized);
+  return match?.groups?.['subdirectory'] ?? null;
+}
+
+/**
  * Check if a file contains `constructor__`, `constructor2__`, `constructor3__`, `constructor4__`, or `constructor5__` as an interface method.
  */
-function fileHasConstructorMethod(filePath: string): boolean {
+function hasConstructorMethod(filePath: string): boolean {
   try {
-    const content = readFileSync(filePath, 'utf8');
+    const content = readFileSync(filePath, 'utf-8');
     return /\bconstructor[2345]?__\s*[<(]/.test(content);
   } catch {
     return false;
   }
+}
+
+function isConstructorGetterFile(filename: string): boolean {
+  const normalized = normalizePath(filename);
+  return normalized.includes('/implementations/constructors/')
+    && /\/get\w+Constructor\.ts$/.test(normalized);
 }
 
 /**
@@ -76,52 +102,17 @@ function resolveTypeSourceFile(
     if (srcIndex === -1) {
       return null;
     }
-    const augDir = `${normalized.substring(0, srcIndex)}/src/obsidian/augmentations`;
-    return findAugmentationFile(augDir, typeName);
+    const augmentationsDirectory = `${normalized.slice(0, Math.max(0, srcIndex))}/src/obsidian/augmentations`;
+    return findAugmentationFile(augmentationsDirectory, typeName);
   }
 
   // Relative import — resolve from the getter file's directory
-  const dir = dirname(getterFilePath);
-  const resolved = resolve(dir, importSource);
-  if (existsSync(resolved)) {
-    return resolved;
-  }
-  return null;
-}
-
-/**
- * Extract the subdirectory under `augmentations/` from a full augmentation file path.
- * Returns the subdirectory name (e.g., 'bases', 'components', 'values', 'views')
- * or `null` if the file is directly under `augmentations/`.
- */
-function getAugmentationSubdir(augFilePath: string): null | string {
-  const normalized = normalizePath(augFilePath);
-  const match = /\/augmentations\/([^/]+)\/[^/]+$/.exec(normalized);
-  return match ? match[1] ?? null : null;
-}
-
-/**
- * Extract the subdirectory under `implementations/constructors/augmentations/` from a getter file path.
- * Returns the subdirectory name or `null` if the file is directly under `augmentations/`.
- */
-function getGetterSubdir(getterFilePath: string): null | string {
-  const normalized = normalizePath(getterFilePath);
-  const match = /\/implementations\/constructors\/augmentations\/([^/]+)\/[^/]+$/.exec(normalized);
-  return match ? match[1] ?? null : null;
+  const resolved = resolve(dirname(getterFilePath), importSource);
+  return existsSync(resolved) ? resolved : null;
 }
 
 export const constructorGetterPlacement = {
-  meta: {
-    type: 'problem' as const,
-    docs: {
-      description: 'Ensure types used in constructor getters have a constructorN__ method'
-    },
-    messages: {
-      missingConstructorMethod: 'Type \'{{typeName}}\' (from \'{{importSource}}\') must have a `constructor[N]__` method.',
-      subdirectoryMismatch: 'Constructor getter is in \'{{getterSubdir}}\' but augmentation \'{{typeName}}\' is in \'{{augSubdir}}\'. They must be in the same subdirectory.'
-    }
-  },
-  create(context: RuleContext) {
+  create(context: RuleContext): RuleListener {
     if (!isConstructorGetterFile(context.filename)) {
       return {};
     }
@@ -133,7 +124,7 @@ export const constructorGetterPlacement = {
       ImportDeclaration(node: TSESTree.ImportDeclaration): void {
         const source = node.source.value;
         for (const specifier of node.specifiers) {
-          if (specifier.type === 'ImportSpecifier') {
+          if (specifier.type === AST_NODE_TYPES.ImportSpecifier) {
             importSources.set(specifier.local.name, source);
           }
         }
@@ -142,27 +133,23 @@ export const constructorGetterPlacement = {
       TSTypeAliasDeclaration(node: TSESTree.TSTypeAliasDeclaration): void {
         // Only check aliases that use ExtractConstructor
         const typeAnnotation = node.typeAnnotation;
-        if (typeAnnotation.type !== 'TSTypeReference') {
+        if (typeAnnotation.type !== AST_NODE_TYPES.TSTypeReference) {
           return;
         }
         const typeRef = typeAnnotation;
-        if (typeRef.typeName.type !== 'Identifier' || typeRef.typeName.name !== 'ExtractConstructor') {
-          return;
-        }
-        if (!typeRef.typeArguments || typeRef.typeArguments.params.length === 0) {
+        if (typeRef.typeName.type !== AST_NODE_TYPES.Identifier || typeRef.typeName.name !== 'ExtractConstructor' || !typeRef.typeArguments || typeRef.typeArguments.params.length === 0) {
           return;
         }
 
         // Extract the main type name from ExtractConstructor<TypeName> or ExtractConstructor<TypeName<...>>
-        const param = typeRef.typeArguments.params[0];
-        if (!param) {
+        const typeArgument = typeRef.typeArguments.params[0];
+        if (!typeArgument) {
           return;
         }
 
-        let typeName: null | string = null;
-        if (param.type === 'TSTypeReference' && param.typeName.type === 'Identifier') {
-          typeName = param.typeName.name;
-        }
+        const typeName = typeArgument.type === AST_NODE_TYPES.TSTypeReference && typeArgument.typeName.type === AST_NODE_TYPES.Identifier
+          ? typeArgument.typeName.name
+          : null;
 
         if (!typeName) {
           return;
@@ -179,11 +166,11 @@ export const constructorGetterPlacement = {
           return;
         }
 
-        if (!fileHasConstructorMethod(sourceFile)) {
+        if (!hasConstructorMethod(sourceFile)) {
           context.report({
-            node,
+            data: { importSource, typeName },
             messageId: 'missingConstructorMethod',
-            data: { typeName, importSource }
+            node
           });
         }
 
@@ -192,16 +179,26 @@ export const constructorGetterPlacement = {
         const getterSubdir = getGetterSubdir(context.filename);
         if (augSubdir !== getterSubdir) {
           context.report({
-            node,
-            messageId: 'subdirectoryMismatch',
             data: {
-              typeName,
               augSubdir: augSubdir ?? '(root)',
-              getterSubdir: getterSubdir ?? '(root)'
-            }
+              getterSubdir: getterSubdir ?? '(root)',
+              typeName
+            },
+            messageId: 'subdirectoryMismatch',
+            node
           });
         }
       }
     };
+  },
+  meta: {
+    docs: {
+      description: 'Ensure types used in constructor getters have a constructorN__ method'
+    },
+    messages: {
+      missingConstructorMethod: 'Type \'{{typeName}}\' (from \'{{importSource}}\') must have a `constructor[N]__` method.',
+      subdirectoryMismatch: 'Constructor getter is in \'{{getterSubdir}}\' but augmentation \'{{typeName}}\' is in \'{{augSubdir}}\'. They must be in the same subdirectory.'
+    },
+    type: 'problem' as const
   }
 };

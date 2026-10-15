@@ -1,6 +1,9 @@
 import type { TSESTree } from '@typescript-eslint/utils';
 
-import type { RuleContext } from './utils.ts';
+import type {
+  RuleContext,
+  RuleListener
+} from './utils.ts';
 
 import {
   isAugmentationFile,
@@ -9,14 +12,7 @@ import {
 } from './utils.ts';
 
 export const requireExportEmptyInAugmentations = {
-  meta: {
-    type: 'problem' as const,
-    docs: { description: 'Augmentation files must contain `export {};`.' },
-    messages: {
-      missingExportEmpty: 'Augmentation files must contain `export {};`.'
-    }
-  },
-  create(context: RuleContext) {
+  create(context: RuleContext): RuleListener {
     if (!isAugmentationFile(context.filename) || isImplementationsFile(context.filename) || isIndexFile(context.filename)) {
       return {};
     }
@@ -31,9 +27,16 @@ export const requireExportEmptyInAugmentations = {
       },
       'Program:exit'(node: TSESTree.Program): void {
         if (!hasExportEmpty) {
-          context.report({ node, messageId: 'missingExportEmpty' });
+          context.report({ messageId: 'missingExportEmpty', node });
         }
       }
     };
+  },
+  meta: {
+    docs: { description: 'Augmentation files must contain `export {};`.' },
+    messages: {
+      missingExportEmpty: 'Augmentation files must contain `export {};`.'
+    },
+    type: 'problem' as const
   }
 };

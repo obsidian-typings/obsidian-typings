@@ -1,6 +1,7 @@
 import type {
   KeyedNode,
-  RuleContext
+  RuleContext,
+  RuleListener
 } from './utils.ts';
 
 import {
@@ -12,22 +13,12 @@ import {
 } from './utils.ts';
 
 export const noMemberUnofficialInInternals = {
-  meta: {
-    type: 'problem' as const,
-    docs: {
-      description: 'Members in internals files must not have @unofficial or @official (interface-level tags cover them)'
-    },
-    messages: {
-      redundantOfficial: 'Member "{{name}}" must not have @official tag (internals are always unofficial).',
-      redundantUnofficial: 'Member "{{name}}" must not have @unofficial tag (interface-level tag covers it).'
-    }
-  },
-  create(context: RuleContext) {
+  create(context: RuleContext): RuleListener {
     if (!isInternalsFile(context.filename)) {
       return {};
     }
 
-    function checkMember(node: KeyedNode): void {
+    function validateMember(node: KeyedNode): void {
       if (!isDirectInterfaceMember(node)) {
         return;
       }
@@ -35,16 +26,26 @@ export const noMemberUnofficialInInternals = {
       const name = getMemberName(node);
       const jsDoc = getJSDocComment(context.sourceCode, node);
       if (jsDoc && hasJSDocTag(jsDoc, 'unofficial')) {
-        context.report({ node, messageId: 'redundantUnofficial', data: { name } });
+        context.report({ data: { name }, messageId: 'redundantUnofficial', node });
       }
       if (jsDoc && hasJSDocTag(jsDoc, 'official')) {
-        context.report({ node, messageId: 'redundantOfficial', data: { name } });
+        context.report({ data: { name }, messageId: 'redundantOfficial', node });
       }
     }
 
     return {
-      TSMethodSignature: checkMember,
-      TSPropertySignature: checkMember
+      TSMethodSignature: validateMember,
+      TSPropertySignature: validateMember
     };
+  },
+  meta: {
+    docs: {
+      description: 'Members in internals files must not have @unofficial or @official (interface-level tags cover them)'
+    },
+    messages: {
+      redundantOfficial: 'Member "{{name}}" must not have @official tag (internals are always unofficial).',
+      redundantUnofficial: 'Member "{{name}}" must not have @unofficial tag (interface-level tag covers it).'
+    },
+    type: 'problem' as const
   }
 };

@@ -41,7 +41,7 @@ interface GetMissingAugmentationsParams {
  * @returns The export names with no matching augmentation file.
  */
 export function getMissingAugmentations(params: GetMissingAugmentationsParams): string[] {
-  const augmentationNames = new Set(params.augmentationFilePaths.map(getDeclarationFileBaseName));
+  const augmentationNames = new Set(params.augmentationFilePaths.map((filePath) => getDeclarationFileBaseName(filePath)));
   return [...new Set(params.exportNames)].filter((name) => !augmentationNames.has(name)).sort();
 }
 
@@ -71,10 +71,7 @@ function getDeclarationFileBaseName(filePath: string): string {
 
 function getStatementExportNames(statement: Statement): string[] {
   if (isExportDeclaration(statement)) {
-    if (statement.moduleSpecifier || !statement.exportClause || !isNamedExports(statement.exportClause)) {
-      return [];
-    }
-    return statement.exportClause.elements.map((element) => element.name.text);
+    return statement.moduleSpecifier || !statement.exportClause || !isNamedExports(statement.exportClause) ? [] : statement.exportClause.elements.map((element) => element.name.text);
   }
 
   if (!hasExportModifier(statement)) {
@@ -100,8 +97,5 @@ function getStatementExportNames(statement: Statement): string[] {
 }
 
 function hasExportModifier(statement: Statement): boolean {
-  if (!canHaveModifiers(statement)) {
-    return false;
-  }
-  return getModifiers(statement)?.some((modifier) => modifier.kind === SyntaxKind.ExportKeyword) ?? false;
+  return canHaveModifiers(statement) && (getModifiers(statement)?.some((modifier) => modifier.kind === SyntaxKind.ExportKeyword) ?? false);
 }

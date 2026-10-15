@@ -2,7 +2,8 @@ import type { TSESTree } from '@typescript-eslint/utils';
 
 import type {
   KeyedNode,
-  RuleContext
+  RuleContext,
+  RuleListener
 } from './utils.ts';
 
 import {
@@ -34,15 +35,8 @@ function getJSDocDescription(comment: CommentValue): string {
 }
 
 export const requireMemberDescription = {
-  meta: {
-    type: 'problem' as const,
-    docs: { description: 'Exported interface members must have a non-empty TSDoc description' },
-    messages: {
-      missingDescription: 'Member "{{name}}" must have a non-empty TSDoc description.'
-    }
-  },
-  create(context: RuleContext) {
-    function checkMember(node: KeyedNode): void {
+  create(context: RuleContext): RuleListener {
+    function validateMember(node: KeyedNode): void {
       if (!isDirectInterfaceMember(node)) {
         return;
       }
@@ -50,24 +44,31 @@ export const requireMemberDescription = {
       const name = getMemberName(node);
       const jsDoc = getJSDocComment(context.sourceCode, node);
       if (!jsDoc || getJSDocDescription(jsDoc) === '') {
-        context.report({ node, messageId: 'missingDescription', data: { name } });
+        context.report({ data: { name }, messageId: 'missingDescription', node });
       }
     }
 
     return {
-      MethodDefinition: checkMember,
-      PropertyDefinition: checkMember,
+      MethodDefinition: validateMember,
+      PropertyDefinition: validateMember,
       TSIndexSignature(node: TSESTree.TSIndexSignature): void {
         if (!isDirectInterfaceMember(node)) {
           return;
         }
         const jsDoc = getJSDocComment(context.sourceCode, node);
         if (!jsDoc || getJSDocDescription(jsDoc) === '') {
-          context.report({ node, messageId: 'missingDescription', data: { name: '[index]' } });
+          context.report({ data: { name: '[index]' }, messageId: 'missingDescription', node });
         }
       },
-      TSMethodSignature: checkMember,
-      TSPropertySignature: checkMember
+      TSMethodSignature: validateMember,
+      TSPropertySignature: validateMember
     };
+  },
+  meta: {
+    docs: { description: 'Exported interface members must have a non-empty TSDoc description' },
+    messages: {
+      missingDescription: 'Member "{{name}}" must have a non-empty TSDoc description.'
+    },
+    type: 'problem' as const
   }
 };

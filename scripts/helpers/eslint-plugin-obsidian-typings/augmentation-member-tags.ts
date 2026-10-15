@@ -2,7 +2,8 @@ import type { TSESTree } from '@typescript-eslint/utils';
 
 import type {
   KeyedNode,
-  RuleContext
+  RuleContext,
+  RuleListener
 } from './utils.ts';
 
 import {
@@ -14,20 +15,12 @@ import {
 } from './utils.ts';
 
 export const augmentationMemberTags = {
-  meta: {
-    type: 'problem' as const,
-    docs: { description: 'Members in augmentation files must have @official or @unofficial JSDoc tag' },
-    messages: {
-      both: 'Member "{{name}}" must not have both @official and @unofficial JSDoc tags.',
-      missing: 'Member "{{name}}" in augmentation file must have @official or @unofficial JSDoc tag.'
-    }
-  },
-  create(context: RuleContext) {
+  create(context: RuleContext): RuleListener {
     if (!isAugmentationFile(context.filename)) {
       return {};
     }
 
-    function checkMember(node: KeyedNode): void {
+    function validateMember(node: KeyedNode): void {
       if (!isDirectInterfaceMember(node)) {
         return;
       }
@@ -37,17 +30,15 @@ export const augmentationMemberTags = {
       const hasOfficial = jsDoc && hasJSDocTag(jsDoc, 'official');
       const hasUnofficial = jsDoc && hasJSDocTag(jsDoc, 'unofficial');
       if (!hasOfficial && !hasUnofficial) {
-        context.report({ node, messageId: 'missing', data: { name } });
+        context.report({ data: { name }, messageId: 'missing', node });
       } else if (hasOfficial && hasUnofficial) {
-        context.report({ node, messageId: 'both', data: { name } });
+        context.report({ data: { name }, messageId: 'both', node });
       }
     }
 
     return {
-      TSMethodSignature: checkMember,
-      TSPropertySignature: checkMember,
-      MethodDefinition: checkMember,
-      PropertyDefinition: checkMember,
+      MethodDefinition: validateMember,
+      PropertyDefinition: validateMember,
       TSIndexSignature(node: TSESTree.TSIndexSignature): void {
         if (!isDirectInterfaceMember(node)) {
           return;
@@ -56,11 +47,21 @@ export const augmentationMemberTags = {
         const hasOfficial = jsDoc && hasJSDocTag(jsDoc, 'official');
         const hasUnofficial = jsDoc && hasJSDocTag(jsDoc, 'unofficial');
         if (!hasOfficial && !hasUnofficial) {
-          context.report({ node, messageId: 'missing', data: { name: '[index]' } });
+          context.report({ data: { name: '[index]' }, messageId: 'missing', node });
         } else if (hasOfficial && hasUnofficial) {
-          context.report({ node, messageId: 'both', data: { name: '[index]' } });
+          context.report({ data: { name: '[index]' }, messageId: 'both', node });
         }
-      }
+      },
+      TSMethodSignature: validateMember,
+      TSPropertySignature: validateMember
     };
+  },
+  meta: {
+    docs: { description: 'Members in augmentation files must have @official or @unofficial JSDoc tag' },
+    messages: {
+      both: 'Member "{{name}}" must not have both @official and @unofficial JSDoc tags.',
+      missing: 'Member "{{name}}" in augmentation file must have @official or @unofficial JSDoc tag.'
+    },
+    type: 'problem' as const
   }
 };
