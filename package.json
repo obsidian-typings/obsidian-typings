@@ -74,6 +74,7 @@
     "build:implementations": "jiti scripts/build-implementations.ts",
     "build:implementations:bundle-types": "jiti scripts/build-implementations-bundle-types.ts",
     "build:implementations:generate-types": "jiti scripts/build-implementations-generate-types.ts",
+    "build:validate-augmentation-coverage": "jiti scripts/build-validate-augmentation-coverage.ts",
     "build:validate-bundle": "jiti scripts/build-validate-bundle.ts",
     "build:validate-bundle-types": "jiti scripts/build-validate-bundle-types.ts",
     "build:validate-types": "jiti scripts/build-validate-types.ts",

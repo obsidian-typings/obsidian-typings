@@ -9,6 +9,7 @@ const BUILD_STEPS = [
   'spellcheck',
   'lint',
   'format:check',
+  'build:validate-augmentation-coverage',
   'build:compile',
   'build:validate-types',
   'build:generate-index',
