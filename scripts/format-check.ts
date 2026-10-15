@@ -1,13 +1,13 @@
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
-import { resolveToolCommand } from './helpers/package-manager.ts';
-import { execFromRoot } from './helpers/root.ts';
+import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
+import { resolveToolCommand } from '@mnaoumov/typescript-dev-toolkit/package-manager';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
-exitIfScriptDisabled();
+await wrapCliTask(async () => {
+  const [, , ...paths] = process.argv;
 
-const [, , ...paths] = process.argv;
+  if (paths.length === 0) {
+    paths.push('**/*');
+  }
 
-if (paths.length === 0) {
-  paths.push('**/*');
-}
-
-await execFromRoot([...resolveToolCommand({ tool: 'dprint' }), 'check', { batchedArguments: paths }]);
+  await execFromRoot([...resolveToolCommand({ tool: 'dprint' }), 'check', { batchedArguments: paths }]);
+});
