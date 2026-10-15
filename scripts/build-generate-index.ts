@@ -1,3 +1,4 @@
+import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
 import {
   appendFile,
   readdir,
@@ -8,10 +9,6 @@ import {
   extname,
   join
 } from 'node:path/posix';
-
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
-
-exitIfScriptDisabled();
 
 async function main(): Promise<void> {
   await generateIndex('src', '.d.ts');
@@ -48,4 +45,4 @@ function getExtension(file: string): string {
   return extname(file);
 }
 
-await main();
+await wrapCliTask(main);

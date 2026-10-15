@@ -4,13 +4,12 @@
  * Nano-staged configuration for pre-commit hooks.
  */
 
-import process from 'node:process';
-
 import {
   isEnvVariableOff,
   loadEnvFileIfExists
-} from './helpers/env-toggle.ts';
-import { getPackageManagerRunCommand } from './helpers/package-manager.ts';
+} from '@mnaoumov/typescript-dev-toolkit/env-toggle';
+import { getPackageManagerRunCommand } from '@mnaoumov/typescript-dev-toolkit/package-manager';
+import process from 'node:process';
 
 interface NanoStagedContext {
   filenames: string[];

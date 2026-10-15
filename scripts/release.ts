@@ -1,13 +1,12 @@
+import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { createJiti } from 'jiti';
 
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
-import { execFromRoot } from './helpers/root.ts';
+await wrapCliTask(async () => {
+  const jiti = createJiti(import.meta.url);
 
-exitIfScriptDisabled();
-
-const jiti = createJiti(import.meta.url);
-
-await execFromRoot('git fetch origin');
-await execFromRoot('git checkout origin/main -- workflow-scripts');
-await execFromRoot('git restore --staged workflow-scripts');
-await jiti.import('../workflow-scripts/release.ts');
+  await execFromRoot('git fetch origin');
+  await execFromRoot('git checkout origin/main -- workflow-scripts');
+  await execFromRoot('git restore --staged workflow-scripts');
+  await jiti.import('../workflow-scripts/release.ts');
+});

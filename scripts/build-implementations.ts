@@ -1,14 +1,11 @@
 import type { Plugin } from 'esbuild';
 
+import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
 import builtins from 'builtin-modules';
 import { context } from 'esbuild';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path/posix';
 import { exit } from 'node:process';
-
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
-
-exitIfScriptDisabled();
 
 async function main(): Promise<void> {
   await build('cjs');
@@ -76,4 +73,4 @@ function typescriptResolutionPlugin(): Plugin {
   };
 }
 
-await main();
+await wrapCliTask(main);

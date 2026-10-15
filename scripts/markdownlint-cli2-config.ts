@@ -1,6 +1,6 @@
-import relativeLinksRule from 'markdownlint-rule-relative-links';
+import type { MarkdownlintCli2ConfigurationSchema } from '@mnaoumov/typescript-dev-toolkit/linters/markdownlint-types/@types/markdownlint-cli2-config-schema';
 
-import type { MarkdownlintCli2ConfigurationSchema } from './helpers/@types/markdownlint-cli2-config-schema.d.ts';
+import relativeLinksRule from 'markdownlint-rule-relative-links';
 
 import { MD_IGNORES } from './helpers/md-ignores.ts';
 

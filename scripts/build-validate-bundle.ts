@@ -1,21 +1,21 @@
+import {
+  CliTaskResult,
+  wrapCliTask
+} from '@mnaoumov/typescript-dev-toolkit/cli-utils';
+import { exec } from '@mnaoumov/typescript-dev-toolkit/exec';
+import {
+  execFromRoot,
+  getRootFolder
+} from '@mnaoumov/typescript-dev-toolkit/root';
+import { toPosixPath } from '@mnaoumov/typescript-lib/path';
 import { readdir } from 'node:fs/promises';
 import { join } from 'node:path/posix';
-import process from 'node:process';
 
 import {
   checkProjectTypes,
   parseTsConfig,
   toCanonical
 } from './helpers/check-project-types.ts';
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
-import { exec } from './helpers/exec.ts';
-import {
-  execFromRoot,
-  getRootFolder,
-  toPosixPath
-} from './helpers/root.ts';
-
-exitIfScriptDisabled();
 
 interface ScenarioResult {
   readonly error: string;
@@ -27,7 +27,7 @@ const NODE_MODULES_SEGMENT = '/node_modules/';
 const OBSIDIAN_SEGMENT = '/node_modules/obsidian/';
 const OBSIDIAN_TYPINGS_SEGMENT = '/node_modules/obsidian-typings/';
 
-async function main(): Promise<void> {
+async function main(): Promise<CliTaskResult> {
   const root = getRootFolder();
 
   if (!root) {
@@ -84,10 +84,7 @@ async function main(): Promise<void> {
     console.log(`  ${result.passed ? 'PASS' : 'FAIL'} ${result.name}`);
   }
 
-  const hasFailures = results.some((r) => !r.passed);
-  if (hasFailures) {
-    process.exitCode = 1;
-  }
+  return CliTaskResult.Success(results.every((r) => r.passed));
 }
 
 /**
@@ -111,4 +108,4 @@ function shouldKeepScenarioFile(fileName: string, rootCanonical: string): boolea
   return fileName.includes(OBSIDIAN_TYPINGS_SEGMENT) || fileName.includes(OBSIDIAN_SEGMENT);
 }
 
-await main();
+await wrapCliTask(main);

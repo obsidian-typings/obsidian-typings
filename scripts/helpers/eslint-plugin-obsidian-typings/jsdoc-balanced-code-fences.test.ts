@@ -1,3 +1,4 @@
+import { toRuleTesterModule } from '@mnaoumov/typescript-dev-toolkit/linters/eslint-rules/rule-tester-helper';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 import {
   afterAll,
@@ -5,7 +6,6 @@ import {
   it
 } from 'vitest';
 
-import { toRuleTesterModule } from '../eslint-rules/rule-tester-helper.ts';
 import { jsdocBalancedCodeFences } from './jsdoc-balanced-code-fences.ts';
 
 RuleTester.afterAll = afterAll;

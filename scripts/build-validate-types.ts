@@ -1,21 +1,21 @@
+import {
+  CliTaskResult,
+  wrapCliTask
+} from '@mnaoumov/typescript-dev-toolkit/cli-utils';
+import { getRootFolder } from '@mnaoumov/typescript-dev-toolkit/root';
 import { join } from 'node:path/posix';
-import process from 'node:process';
 
 import {
   checkProjectTypes,
   parseTsConfig,
   toCanonical
 } from './helpers/check-project-types.ts';
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
-import { getRootFolder } from './helpers/root.ts';
-
-exitIfScriptDisabled();
 
 const DECLARATION_FILE_EXTENSIONS = ['.d.ts', '.d.cts', '.d.mts'];
 
-main();
+await wrapCliTask(main);
 
-function main(): void {
+function main(): CliTaskResult {
   const root = getRootFolder();
 
   if (!root) {
@@ -32,9 +32,7 @@ function main(): void {
     shouldKeepFile: (fileName) => declarationFileSet.has(fileName)
   });
 
-  if (!isOk) {
-    process.exitCode = 1;
-  }
+  return CliTaskResult.Success(isOk);
 }
 
 function isDeclarationFile(fileName: string): boolean {

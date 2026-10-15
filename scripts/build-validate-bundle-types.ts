@@ -1,17 +1,17 @@
+import {
+  CliTaskResult,
+  wrapCliTask
+} from '@mnaoumov/typescript-dev-toolkit/cli-utils';
+import { getRootFolder } from '@mnaoumov/typescript-dev-toolkit/root';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path/posix';
-import process from 'node:process';
 
 import {
   checkProjectTypes,
   parseTsConfig,
   toCanonical
 } from './helpers/check-project-types.ts';
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { ESM_BUNDLE_COPIES } from './helpers/esm-bundle-copies.ts';
-import { getRootFolder } from './helpers/root.ts';
-
-exitIfScriptDisabled();
 
 // Both entry points of both bundles. The `.d.mts` copies are checked as root files of their own, not
 // just written and trusted: the repo's `tsconfig.json` is `module: node16`, so a `.d.mts` root file
@@ -20,9 +20,9 @@ exitIfScriptDisabled();
 // because only the two `dist/cjs` files were ever listed here.
 const BUNDLE_FILES = ESM_BUNDLE_COPIES.flatMap((copy) => [copy.cjsPath, copy.esmPath]);
 
-await main();
+await wrapCliTask(main);
 
-async function main(): Promise<void> {
+async function main(): Promise<CliTaskResult> {
   const root = getRootFolder();
 
   if (!root) {
@@ -63,9 +63,7 @@ async function main(): Promise<void> {
     isOk = false;
   }
 
-  if (!isOk) {
-    process.exitCode = 1;
-  }
+  return CliTaskResult.Success(isOk);
 }
 
 /**
