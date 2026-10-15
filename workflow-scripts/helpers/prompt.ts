@@ -4,13 +4,13 @@
  * Reads one line from the operator's terminal.
  *
  * This exists as its own module because two unrelated things now ask the operator a question -- the release
- * offer in `helpers/handBack.ts` and the one-time-password fallback in `helpers/npm.ts` -- and the awkward
+ * offer in `helpers/hand-back.ts` and the one-time-password fallback in `helpers/npm.ts` -- and the awkward
  * parts of asking are the same both times: a prompt that has to be written by hand to be seen at all, a
  * stream that can close mid-question, and a caller that must never be able to hang a CI job. Those were
  * worked out once, for the yes/no question, and copying them into the second caller would have left two
  * copies of a subtlety neither gate can see.
  *
- * `helpers/npm.ts` cannot simply import the asking out of `helpers/handBack.ts`: that module already imports
+ * `helpers/npm.ts` cannot simply import the asking out of `helpers/hand-back.ts`: that module already imports
  * `npm.ts`, and the import it needs is a value rather than a type, so the two would form a real cycle.
  */
 

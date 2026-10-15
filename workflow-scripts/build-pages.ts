@@ -8,12 +8,12 @@ import {
   writeFile
 } from 'node:fs/promises';
 
-import type { Channel } from './helpers/branchSpec.ts';
+import type { Channel } from './helpers/branch-spec.ts';
 
 import {
   generateBranchName,
   parseChannel
-} from './helpers/branchSpec.ts';
+} from './helpers/branch-spec.ts';
 import { getLatestVersion } from './helpers/version.ts';
 
 interface BuildInfo {
@@ -48,8 +48,8 @@ async function assertSidebarHasApiTree(channel: Channel): Promise<void> {
   console.log(`${channel}: sidebar contains ${String(apiLinkCount)} API links.`);
 }
 
-async function getCachedBuildInfo(cacheDir: string, channel: Channel): Promise<BuildInfo | null> {
-  const infoPath = `${cacheDir}/${channel}/build-info.json`;
+async function getCachedBuildInfo(cacheDirectory: string, channel: Channel): Promise<BuildInfo | null> {
+  const infoPath = `${cacheDirectory}/${channel}/build-info.json`;
   if (!existsSync(infoPath)) {
     return null;
   }
@@ -61,7 +61,8 @@ async function getCachedBuildInfo(cacheDir: string, channel: Channel): Promise<B
 async function getCurrentBuildInfo(channel: Channel): Promise<BuildInfo> {
   const latestVersion = await getLatestVersion(channel);
   const branch = generateBranchName({ channel, obsidianVersion: latestVersion });
-  const docsTreeHash = (await execFromRoot('git rev-parse main:docs', { isQuiet: true })).trim();
+  const docsTreeHashOutput = await execFromRoot('git rev-parse main:docs', { isQuiet: true });
+  const docsTreeHash = docsTreeHashOutput.trim();
   return { branch, docsTreeHash };
 }
 
@@ -70,8 +71,8 @@ async function main(): Promise<void> {
   // builds of ~1700 pages each, and that VM has been OOM-killed mid-build; `assemble-pages.ts`
   // puts the halves back together afterwards.
   const channel = parseChannel(process.env['CHANNEL']);
-  const outputDir = process.env['OUTPUT_DIR'] ?? './site';
-  const cacheDir = process.env['CACHE_DIR'] ?? './cache';
+  const outputDirectory = process.env['OUTPUT_DIR'] ?? './site';
+  const cacheDirectory = process.env['CACHE_DIR'] ?? './cache';
   // Opt-in, not "any manual run": the release workflow dispatches this build, so keying off the
   // event name forced a full two-channel rebuild (~1 h) after every release and the cache never
   // once hit. A release changes the branch name of the channel it touched, which invalidates that
@@ -85,14 +86,14 @@ async function main(): Promise<void> {
     public: await getLatestVersion('public')
   };
 
-  await processChannel(channel, outputDir, cacheDir, shouldForce, versions);
+  await processChannel(channel, outputDirectory, cacheDirectory, shouldForce, versions);
 }
 
-async function processChannel(channel: Channel, outputDir: string, cacheDir: string, shouldForce: boolean, versions: Record<Channel, string>): Promise<void> {
+async function processChannel(channel: Channel, outputDirectory: string, cacheDirectory: string, shouldForce: boolean, versions: Record<Channel, string>): Promise<void> {
   const current = await getCurrentBuildInfo(channel);
-  const cached = await getCachedBuildInfo(cacheDir, channel);
-  const channelCacheDir = `${cacheDir}/${channel}`;
-  const channelOutputDir = `${outputDir}/${channel}`;
+  const cached = await getCachedBuildInfo(cacheDirectory, channel);
+  const channelCacheDirectory = `${cacheDirectory}/${channel}`;
+  const channelOutputDirectory = `${outputDirectory}/${channel}`;
 
   const isCacheValid = !shouldForce
     && cached !== null
@@ -101,7 +102,7 @@ async function processChannel(channel: Channel, outputDir: string, cacheDir: str
 
   if (isCacheValid) {
     console.log(`\n=== ${channel}: cache is up to date (${current.branch}), skipping build ===\n`);
-    await cp(`${channelCacheDir}/dist`, channelOutputDir, { recursive: true });
+    await cp(`${channelCacheDirectory}/dist`, channelOutputDirectory, { recursive: true });
     return;
   }
 
@@ -125,15 +126,15 @@ async function processChannel(channel: Channel, outputDir: string, cacheDir: str
 
   await assertSidebarHasApiTree(channel);
 
-  await mkdir(channelOutputDir, { recursive: true });
-  await cp('docs/dist', channelOutputDir, { recursive: true });
+  await mkdir(channelOutputDirectory, { recursive: true });
+  await cp('docs/dist', channelOutputDirectory, { recursive: true });
 
-  await mkdir(channelCacheDir, { recursive: true });
+  await mkdir(channelCacheDirectory, { recursive: true });
   // `cp` merges into whatever the cache restored, so pages deleted upstream would linger forever
   // and the cache would only ever grow. Replace it outright.
-  await rm(`${channelCacheDir}/dist`, { force: true, recursive: true });
-  await cp('docs/dist', `${channelCacheDir}/dist`, { recursive: true });
-  await writeFile(`${channelCacheDir}/build-info.json`, JSON.stringify(current));
+  await rm(`${channelCacheDirectory}/dist`, { force: true, recursive: true });
+  await cp('docs/dist', `${channelCacheDirectory}/dist`, { recursive: true });
+  await writeFile(`${channelCacheDirectory}/build-info.json`, JSON.stringify(current));
 }
 
 await main();

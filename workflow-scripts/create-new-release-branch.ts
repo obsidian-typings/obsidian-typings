@@ -1,13 +1,13 @@
 import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
 import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
-import type { BranchSpec } from './helpers/branchSpec.ts';
+import type { BranchSpec } from './helpers/branch-spec.ts';
 
 import {
   assertNewBranchFollowsLatest,
   selectLatestBranch
-} from './helpers/baseBranch.ts';
-import { generateBranchName } from './helpers/branchSpec.ts';
+} from './helpers/base-branch.ts';
+import { generateBranchName } from './helpers/branch-spec.ts';
 import {
   CHANGELOG_FILE_NAME,
   createInitialChangelog,
@@ -15,7 +15,7 @@ import {
 } from './helpers/changelog.ts';
 import { restoreWorkflowScripts } from './helpers/checkout.ts';
 import { commit } from './helpers/git.ts';
-import { offerRelease } from './helpers/handBack.ts';
+import { offerRelease } from './helpers/hand-back.ts';
 import {
   editPackageJson,
   editPackageLockJson
@@ -29,17 +29,17 @@ import {
 import {
   generateMainReadme,
   generateReadme
-} from './helpers/readmeGenerator.ts';
+} from './helpers/readme-generator.ts';
 import { getLatestVersion } from './helpers/version.ts';
 
 const INITIAL_BRANCH_VERSION = '1.0.0';
 
 async function main(): Promise<void> {
-  const [, , newVersionArg, newVersionChannelArg, changelogUrlArg] = process.argv;
+  const [, , newVersionArgument, newVersionChannelArgument, changelogUrlArgument] = process.argv;
 
-  const newVersion = newVersionArg ?? '';
-  const newVersionChannel = newVersionChannelArg as 'catalyst' | 'public' | undefined;
-  const changelogUrl = changelogUrlArg ?? '';
+  const newVersion = newVersionArgument ?? '';
+  const newVersionChannel = newVersionChannelArgument as 'catalyst' | 'public' | undefined;
+  const changelogUrl = changelogUrlArgument ?? '';
   if (!newVersion || !newVersionChannel || !['catalyst', 'public'].includes(newVersionChannel) || !changelogUrl) {
     throw new Error('Usage: jiti ./workflow-scripts/create-new-release-branch.ts <newVersion> <public|catalyst> <changelogUrl>');
   }
@@ -47,7 +47,7 @@ async function main(): Promise<void> {
   const latestPublicVersion = await getLatestVersion('public');
   const latestCatalystVersion = await getLatestVersion('catalyst');
 
-  // Both decisions live in `helpers/baseBranch.ts`, where they are pure and tested: this file runs `main()`
+  // Both decisions live in `helpers/base-branch.ts`, where they are pure and tested: this file runs `main()`
   // the moment it is imported.
   const latestBranchSpec = selectLatestBranch(latestCatalystVersion, latestPublicVersion);
   const newBranchSpec: BranchSpec = { channel: newVersionChannel, obsidianVersion: newVersion };
@@ -206,7 +206,8 @@ async function resetBranchState(): Promise<void> {
 
   await execFromRoot(`git add package.json package-lock.json ${CHANGELOG_FILE_NAME}`);
 
-  const hasChanges = (await execFromRoot('git diff --staged --name-only', { isQuiet: true })).trim() !== '';
+  const stagedFileNames = await execFromRoot('git diff --staged --name-only', { isQuiet: true });
+  const hasChanges = stagedFileNames.trim() !== '';
   if (!hasChanges) {
     console.log(`Version is already ${INITIAL_BRANCH_VERSION} and the changelog is already empty, skipping the reset commit.`);
     return;

@@ -145,7 +145,7 @@ export function renderTypeWithLinks(typeText: string, allTypes: Map<string, Type
 }
 
 /**
-Resolve {@link Name} and {@link Name | display text} tags in description text
+Resolve TSDoc link tags in description text, with or without display text after a pipe
 */
 export function resolveLinks(text: string, allTypes: Map<string, TypeInfo>): string {
   return text.replaceAll(/\{@link\s+(?<target>[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\}/g, (...arguments_) => {

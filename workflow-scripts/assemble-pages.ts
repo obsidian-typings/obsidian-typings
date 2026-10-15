@@ -8,7 +8,7 @@ import {
 import { dirname } from 'node:path/posix';
 import { fileURLToPath } from 'node:url';
 
-import { CHANNELS } from './helpers/branchSpec.ts';
+import { CHANNELS } from './helpers/branch-spec.ts';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 
@@ -34,18 +34,18 @@ const MAX_SITE_SIZE_IN_BYTES = MAX_SITE_SIZE_IN_MEGABYTES * BYTES_IN_MEGABYTE;
  * succeeded would otherwise deploy a site whose version switcher points at a channel that is not
  * there — a half-site published over a whole one.
  */
-async function assertChannelsArePresent(outputDir: string): Promise<void> {
+async function assertChannelsArePresent(outputDirectory: string): Promise<void> {
   for (const channel of CHANNELS) {
-    const channelDir = `${outputDir}/${channel}`;
-    const entries = await readdir(channelDir).catch(() => []);
+    const channelDirectory = `${outputDirectory}/${channel}`;
+    const entries = await readdir(channelDirectory).catch(() => []);
     if (entries.length === 0) {
-      throw new Error(`${channelDir} is missing or empty. Deploying would publish a site without the ${channel} channel.`);
+      throw new Error(`${channelDirectory} is missing or empty. Deploying would publish a site without the ${channel} channel.`);
     }
   }
 }
 
-async function assertSiteSize(outputDir: string): Promise<void> {
-  const sizeInBytes = await getDirectorySize(outputDir);
+async function assertSiteSize(outputDirectory: string): Promise<void> {
+  const sizeInBytes = await getDirectorySize(outputDirectory);
   const sizeInMegabytes = Math.round(sizeInBytes / BYTES_IN_MEGABYTE);
   console.log(`Site size: ${String(sizeInMegabytes)} MB`);
 
@@ -57,30 +57,36 @@ async function assertSiteSize(outputDir: string): Promise<void> {
   }
 }
 
-async function createRedirectPage(outputDir: string, redirectHtml: string): Promise<void> {
-  await mkdir(outputDir, { recursive: true });
-  await writeFile(`${outputDir}/index.html`, redirectHtml);
-  console.log(`Created redirect page at ${outputDir}/index.html`);
+async function createRedirectPage(outputDirectory: string, redirectHtml: string): Promise<void> {
+  await mkdir(outputDirectory, { recursive: true });
+  await writeFile(`${outputDirectory}/index.html`, redirectHtml);
+  console.log(`Created redirect page at ${outputDirectory}/index.html`);
 }
 
-async function getDirectorySize(dir: string): Promise<number> {
+async function getDirectorySize(directory: string): Promise<number> {
   let total = 0;
 
-  for (const entry of await readdir(dir, { withFileTypes: true })) {
-    const fullPath = `${dir}/${entry.name}`;
-    total += entry.isDirectory() ? await getDirectorySize(fullPath) : (await stat(fullPath)).size;
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const fullPath = `${directory}/${entry.name}`;
+    if (entry.isDirectory()) {
+      total += await getDirectorySize(fullPath);
+      continue;
+    }
+
+    const stats = await stat(fullPath);
+    total += stats.size;
   }
 
   return total;
 }
 
 async function main(): Promise<void> {
-  const outputDir = process.env['OUTPUT_DIR'] ?? './site';
+  const outputDirectory = process.env['OUTPUT_DIR'] ?? './site';
   const redirectHtml = await readFile(`${SCRIPT_DIR}/static/pages-redirect.html`, 'utf-8');
 
-  await assertChannelsArePresent(outputDir);
-  await createRedirectPage(outputDir, redirectHtml);
-  await assertSiteSize(outputDir);
+  await assertChannelsArePresent(outputDirectory);
+  await createRedirectPage(outputDirectory, redirectHtml);
+  await assertSiteSize(outputDirectory);
 }
 
 await main();

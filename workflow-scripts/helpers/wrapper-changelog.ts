@@ -38,7 +38,9 @@ import {
  */
 const RELEASES_URL = 'https://github.com/obsidian-typings/obsidian-typings/releases/tag';
 
-/* The tar header fields {@link readTarballMember} reads, as POSIX ustar lays them out. */
+/*
+The tar header fields {@link readTarballMember} reads, as POSIX ustar lays them out.
+*/
 const TAR_BLOCK_SIZE = 512;
 const TAR_NAME_OFFSET = 0;
 const TAR_NAME_LENGTH = 100;
@@ -51,7 +53,7 @@ const OCTAL_RADIX = 8;
 /**
  * What {@link composeWrapperChangelogSection} needs to write one wrapper version's section.
  */
-export interface WrapperChangelogSectionOptions {
+export interface ComposeWrapperChangelogSectionParams {
   /**
    * The breaking-change subjects of the versioned release this wrapper version resolves to.
    */
@@ -92,16 +94,16 @@ export interface WrapperDependency {
 /**
  * Writes one wrapper version's section of its `CHANGELOG.md`.
  *
- * @param options - See {@link WrapperChangelogSectionOptions}.
+ * @param params - See {@link ComposeWrapperChangelogSectionParams}.
  * @returns The section, with no trailing newline.
  */
-export function composeWrapperChangelogSection(options: WrapperChangelogSectionOptions): string {
+export function composeWrapperChangelogSection(params: ComposeWrapperChangelogSectionParams): string {
   const {
     breakingChangeSubjects,
     resolutionChain,
     tagName,
     version
-  } = options;
+  } = params;
 
   if (resolutionChain.length === 0) {
     throw new Error('A wrapper changelog entry needs at least one package to resolve to.');
@@ -135,7 +137,8 @@ export function composeWrapperChangelogSection(options: WrapperChangelogSectionO
  * @returns The contents.
  */
 export async function readPublishedChangelog(packageName: string, version: string): Promise<string> {
-  const tarballUrl = (await execFromRoot(['npm', 'view', `${packageName}@${version}`, 'dist.tarball'], { isQuiet: true })).trim();
+  const tarballUrlOutput = await execFromRoot(['npm', 'view', `${packageName}@${version}`, 'dist.tarball'], { isQuiet: true });
+  const tarballUrl = tarballUrlOutput.trim();
 
   if (!tarballUrl) {
     throw new Error(`npm reported no tarball for ${packageName}@${version}.`);

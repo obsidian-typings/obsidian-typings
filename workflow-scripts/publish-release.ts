@@ -2,14 +2,14 @@ import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { writeFile } from 'node:fs/promises';
 import { inc } from 'semver';
 
-import type { BranchSpec } from './helpers/branchSpec.ts';
+import type { BranchSpec } from './helpers/branch-spec.ts';
 import type { PackageRegistryState } from './helpers/npm.ts';
 import type {
-  WrapperChangelogSectionOptions,
+  ComposeWrapperChangelogSectionParams,
   WrapperDependency
-} from './helpers/wrapperChangelog.ts';
+} from './helpers/wrapper-changelog.ts';
 
-import { parseBranchSpec } from './helpers/branchSpec.ts';
+import { parseBranchSpec } from './helpers/branch-spec.ts';
 import {
   CHANGELOG_FILE_NAME,
   composeChangelogSection,
@@ -27,7 +27,7 @@ import {
   commit,
   getBranchNames
 } from './helpers/git.ts';
-import { assertRunningInGitHubActions } from './helpers/githubActions.ts';
+import { assertRunningInGitHubActions } from './helpers/github-actions.ts';
 import {
   editPackageJson,
   editPackageLockJson,
@@ -46,19 +46,25 @@ import { getLatestVersion } from './helpers/version.ts';
 import {
   composeWrapperChangelogSection,
   readPublishedChangelog
-} from './helpers/wrapperChangelog.ts';
+} from './helpers/wrapper-changelog.ts';
 
 /**
  * What {@link updateLatestWrapper} needs.
  */
 interface LatestWrapperOptions extends WrapperReleaseOptions {
-  /** The channel whose `-latest` wrapper is published. */
+  /**
+  The channel whose `-latest` wrapper is published.
+  */
   readonly channel: BranchSpec['channel'];
 
-  /** The wrapper version currently published, whose changelog this one extends. */
+  /**
+  The wrapper version currently published, whose changelog this one extends.
+  */
   readonly currentWrapperVersion: string;
 
-  /** The wrapper version this run publishes. */
+  /**
+  The wrapper version this run publishes.
+  */
   readonly wrapperVersion: string;
 }
 
@@ -66,10 +72,14 @@ interface LatestWrapperOptions extends WrapperReleaseOptions {
  * What {@link updateLegacyWrapper} needs.
  */
 interface LegacyWrapperOptions extends WrapperReleaseOptions {
-  /** The legacy package version currently published, whose changelog this one extends. */
+  /**
+  The legacy package version currently published, whose changelog this one extends.
+  */
   readonly currentLegacyVersion: string;
 
-  /** The version this run publishes, which is the public `-latest` wrapper's own. */
+  /**
+  The version this run publishes, which is the public `-latest` wrapper's own.
+  */
   readonly version: string;
 }
 
@@ -77,10 +87,14 @@ interface LegacyWrapperOptions extends WrapperReleaseOptions {
  * What {@link updateNpmVersions} records about the version it bumped to.
  */
 interface NpmVersionsUpdate {
-  /** The breaking-change subjects of the release, for the wrappers' changelogs. */
+  /**
+  The breaking-change subjects of the release, for the wrappers' changelogs.
+  */
   readonly breakingChangeSubjects: readonly string[];
 
-  /** The version the per-version package is about to publish. */
+  /**
+  The version the per-version package is about to publish.
+  */
   readonly nextVersion: string;
 }
 
@@ -88,13 +102,19 @@ interface NpmVersionsUpdate {
  * What a wrapper's changelog entry needs to know about the versioned release this run published.
  */
 interface WrapperReleaseOptions {
-  /** The breaking-change subjects of that release, as `updateChangelog` collected them. */
+  /**
+  The breaking-change subjects of that release, as `updateChangelog` collected them.
+  */
   readonly breakingChangeSubjects: readonly string[];
 
-  /** The versioned package that release published, which every wrapper ends up resolving to. */
+  /**
+  The versioned package that release published, which every wrapper ends up resolving to.
+  */
   readonly scopedDependency: WrapperDependency;
 
-  /** The tag that release wrote, which names its GitHub release page. */
+  /**
+  The tag that release wrote, which names its GitHub release page.
+  */
   readonly tagName: string;
 }
 
@@ -207,7 +227,9 @@ function getNextWrapperVersion(packageName: string, currentVersion: string, isBe
   return nextVersion;
 }
 
-/** Every package name this run will publish, in the order it will publish them. */
+/**
+Every package name this run will publish, in the order it will publish them.
+*/
 function getPackageNamesToPublish(branchSpec: BranchSpec, isLatest: boolean): string[] {
   const packageNames = [getScopedPackageName(branchSpec)];
 
@@ -222,9 +244,12 @@ function getPackageNamesToPublish(branchSpec: BranchSpec, isLatest: boolean): st
   return packageNames;
 }
 
-/** The version npm currently serves for `packageName`, which a wrapper's next version and changelog build on. */
+/**
+The version npm currently serves for `packageName`, which a wrapper's next version and changelog build on.
+*/
 async function getPublishedVersion(packageName: string): Promise<string> {
-  return (await execFromRoot(`npm view ${packageName} version`, { isQuiet: true })).trim();
+  const versionOutput = await execFromRoot(`npm view ${packageName} version`, { isQuiet: true });
+  return versionOutput.trim();
 }
 
 async function main(): Promise<void> {
@@ -298,7 +323,7 @@ async function main(): Promise<void> {
 
   /*
    * Everything below this line reads `README.md` off the worktree, and every one of them wants main's -- the
-   * full docs -- rather than the per-version one `readmeGenerator.ts` writes onto a release branch from
+   * full docs -- rather than the per-version one `readme-generator.ts` writes onto a release branch from
    * `README.template.md`. Only the scoped package published above carries the branch README, which is the
    * whole reason this restore sits here rather than further up.
    *
@@ -347,7 +372,9 @@ async function main(): Promise<void> {
   });
 }
 
-/** Packs the release artifact the GitHub release attaches. Runs after the publish, and costs nothing if it fails. */
+/**
+Packs the release artifact the GitHub release attaches. Runs after the publish, and costs nothing if it fails.
+*/
 async function packZipArtifact(zipFileName: string): Promise<void> {
   await execFromRoot('mkdir build');
   await execFromRoot('cp -r dist build');
@@ -375,7 +402,9 @@ async function publishPackage(packageName: string, cwd?: string): Promise<void> 
   }
 }
 
-/** Publishes the per-version package. This is the call that spends `package.json`'s version for good. */
+/**
+Publishes the per-version package. This is the call that spends `package.json`'s version for good.
+*/
 async function publishScopedPackage(scopedPackageName: string): Promise<void> {
   // Publish as scoped package
   await editPackageJson((packageJson) => {
@@ -492,6 +521,7 @@ async function updateLatestWrapper(options: LatestWrapperOptions): Promise<void>
     license: 'MIT',
     main: '',
     name: wrapperName,
+    // eslint-disable-next-line unicorn/name-replacements -- `repository` is an npm manifest field, so it has to be spelled the way npm reads it.
     repository: REPOSITORY,
     type: 'module',
     types: './types.d.cts',
@@ -544,6 +574,7 @@ async function updateLegacyWrapper(options: LegacyWrapperOptions): Promise<void>
     license: 'MIT',
     main: '',
     name: LEGACY_PACKAGE_NAME,
+    // eslint-disable-next-line unicorn/name-replacements -- `repository` is an npm manifest field, so it has to be spelled the way npm reads it.
     repository: REPOSITORY,
     type: 'module',
     types: './types.d.cts',
@@ -595,7 +626,8 @@ async function updateNpmVersion(nextVersion: string): Promise<void> {
  * reaches the remote: {@link pushRelease} does that afterwards, and only if the publish went through.
  */
 async function updateNpmVersions(branchSpec: BranchSpec, isBeta: boolean): Promise<NpmVersionsUpdate> {
-  const currentVersion = (await execFromRoot('node -p "require(\'./package.json\').version"', { isQuiet: true })).trim();
+  const currentVersionOutput = await execFromRoot('node -p "require(\'./package.json\').version"', { isQuiet: true });
+  const currentVersion = currentVersionOutput.trim();
   const nextVersion = isBeta ? inc(currentVersion, 'preminor', 'beta') : inc(currentVersion, 'minor');
   if (!nextVersion) {
     throw new Error('Failed to increment version');
@@ -613,27 +645,27 @@ async function updateNpmVersions(branchSpec: BranchSpec, isBeta: boolean): Promi
   return { breakingChangeSubjects, nextVersion };
 }
 
-async function writeOutput(obj: Record<string, unknown>): Promise<void> {
+async function writeOutput(object: Record<string, unknown>): Promise<void> {
   const githubOutput = process.env['GITHUB_OUTPUT'] ?? '';
   if (!githubOutput) {
     console.warn('GITHUB_OUTPUT is not set');
     return;
   }
 
-  const lines = Object.entries(obj).map(([key, value]) => `${key}=${String(value)}`);
+  const lines = Object.entries(object).map(([key, value]) => `${key}=${String(value)}`);
   await writeFile(githubOutput, lines.join('\n'), 'utf-8');
 }
 
 /**
  * Writes a wrapper's `CHANGELOG.md` into the folder it is published from: the file its currently published
- * version carries, with this version's section on top. See `helpers/wrapperChangelog.ts` for what the section
+ * version carries, with this version's section on top. See `helpers/wrapper-changelog.ts` for what the section
  * says and why.
  */
 async function writeWrapperChangelog(
   folderName: string,
   packageName: string,
   currentVersion: string,
-  sectionOptions: WrapperChangelogSectionOptions
+  sectionOptions: ComposeWrapperChangelogSectionParams
 ): Promise<void> {
   const section = composeWrapperChangelogSection(sectionOptions);
   const changelog = prependChangelogSection(await readPublishedChangelog(packageName, currentVersion), section);

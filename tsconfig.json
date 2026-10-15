@@ -23,6 +23,8 @@
     "verbatimModuleSyntax": true
   },
   "include": [
+    "./*.mts",
+    "./*.ts",
     "./scripts/**/*.ts",
     "./src/**/*.ts",
     "./workflow-scripts/**/*.ts"

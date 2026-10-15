@@ -30,14 +30,16 @@
 import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import process from 'node:process';
 
-import type { BranchSpec } from './branchSpec.ts';
+import type { BranchSpec } from './branch-spec.ts';
 import type { TrustedPublisherState } from './npm.ts';
 
-import { generateBranchName } from './branchSpec.ts';
+import { generateBranchName } from './branch-spec.ts';
 import { restoreWorkflowScripts } from './checkout.ts';
 import { askLine } from './prompt.ts';
 
-/** The answers taken as a yes. Anything else -- including an empty line -- declines. */
+/**
+The answers taken as a yes. Anything else -- including an empty line -- declines.
+*/
 const YES_ANSWERS: ReadonlySet<string> = new Set(['y', 'yes']);
 
 /**
@@ -95,23 +97,23 @@ export async function offerRelease(
   branchSpec: BranchSpec,
   packageName: string,
   publisherState: TrustedPublisherState
-): Promise<boolean> {
+): Promise<void> {
   const branchName = generateBranchName(branchSpec);
 
   if (publisherState !== 'attached') {
     if (!process.stdin.isTTY) {
       console.log('\nNot running on a terminal, so the release was not dispatched.');
       console.log(getManualReleaseInstructions(branchName));
-      return false;
+      return;
     }
 
     const question = publisherState === 'none'
       ? `\nThe trusted publisher for ${packageName} could not be attached from here. Attach it and answer y when it is saved. [y/N] `
       : `\nHas the trusted publisher for ${packageName} been saved? [y/N] `;
 
-    if (!await askYesNo(question)) {
+    if (!await isAnsweredYes(question)) {
       console.log(getManualReleaseInstructions(branchName));
-      return false;
+      return;
     }
   }
 
@@ -119,12 +121,13 @@ export async function offerRelease(
   // anyway, and `release-impl.ts` refuses a second time on its own check -- but both of those refuse
   // *mid-way*, having already answered the prompt, and a half-done hand-back is the state this whole module
   // exists to remove.
-  const status = (await execFromRoot('git status --porcelain --untracked-files=all', { isQuiet: true })).trim();
+  const statusOutput = await execFromRoot('git status --porcelain --untracked-files=all', { isQuiet: true });
+  const status = statusOutput.trim();
 
   if (status) {
     console.log('\nThe working tree is not clean, so the release was not dispatched. Commit or stash first.');
     console.log(getManualReleaseInstructions(branchName));
-    return false;
+    return;
   }
 
   await switchToBranch(branchName);
@@ -137,7 +140,6 @@ export async function offerRelease(
   }
 
   await execFromRoot('npm run release');
-  return true;
 }
 
 /**
@@ -148,7 +150,7 @@ export async function offerRelease(
  * a stream closed by Ctrl+D -- is a decline, exactly as an empty line and any other non-yes answer are, so
  * every way of not saying yes ends in the same place.
  */
-async function askYesNo(question: string): Promise<boolean> {
+async function isAnsweredYes(question: string): Promise<boolean> {
   const answer = await askLine(question);
   return answer !== null && YES_ANSWERS.has(answer.toLowerCase());
 }
@@ -166,7 +168,8 @@ async function askYesNo(question: string): Promise<boolean> {
  * carrying unpushed work.
  */
 async function switchToBranch(branchName: string): Promise<void> {
-  const currentBranch = (await execFromRoot('git branch --show-current', { isQuiet: true })).trim();
+  const currentBranchOutput = await execFromRoot('git branch --show-current', { isQuiet: true });
+  const currentBranch = currentBranchOutput.trim();
 
   if (currentBranch === branchName) {
     return;

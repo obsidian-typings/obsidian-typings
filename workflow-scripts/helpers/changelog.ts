@@ -123,7 +123,7 @@ const MERGE_SUBJECT_REG_EXP = /^Merge(?: branch| remote-tracking| pull request)?
 /**
  * What {@link composeChangelogSection} needs to write one release's section.
  */
-export interface ChangelogSectionOptions {
+export interface ComposeChangelogSectionParams {
   /**
    * The subjects of the landings this release contains that carry a breaking-change signal, as
    * {@link getBreakingChangeSubjects} collected them.
@@ -164,15 +164,15 @@ interface ReadCommitMessagesOptions {
  * footer written on a branch commit whose merge subject differs. Listing it unmatched is the safe direction
  * -- the alternative is dropping a breaking change from the one document that exists to announce it.
  *
- * @param options - See {@link ChangelogSectionOptions}.
+ * @param params - See {@link ComposeChangelogSectionParams}.
  * @returns The section, with no trailing newline.
  */
-export function composeChangelogSection(options: ChangelogSectionOptions): string {
+export function composeChangelogSection(params: ComposeChangelogSectionParams): string {
   const {
     breakingChangeSubjects,
     entries,
     version
-  } = options;
+  } = params;
 
   const breakingSet = new Set(breakingChangeSubjects);
   const otherEntries = entries.filter((entry) => !breakingSet.has(entry));
@@ -389,7 +389,7 @@ async function hasTag(tagName: string): Promise<boolean> {
  * Whether one full commit message carries either Conventional-Commits breaking signal.
  */
 function isBreakingChange(commitMessage: string): boolean {
-  const subject = commitMessage.split(/\r?\n/)[0] ?? '';
+  const subject = commitMessage.split(/\r?\n/, 1)[0] ?? '';
   return CONVENTIONAL_COMMIT_SUBJECT_REG_EXP.exec(subject)?.groups?.['Breaking'] !== undefined
     || BREAKING_CHANGE_FOOTER_REG_EXP.test(commitMessage);
 }

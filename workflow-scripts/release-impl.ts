@@ -1,6 +1,6 @@
 import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
-async function checkGitRepoClean(): Promise<void> {
+async function assertGitRepoClean(): Promise<void> {
   try {
     const stdout = await execFromRoot('git status --porcelain --untracked-files=all', { isQuiet: true });
     if (stdout) {
@@ -12,13 +12,14 @@ async function checkGitRepoClean(): Promise<void> {
 }
 
 async function main(): Promise<void> {
-  await checkGitRepoClean();
+  await assertGitRepoClean();
   await execFromRoot('git pull origin --rebase');
   await execFromRoot('git push origin');
 
   const [, , releaseKind] = process.argv;
   const isBeta = releaseKind === 'beta';
-  const sha = (await execFromRoot('git rev-parse HEAD', { isQuiet: true })).trim();
+  const shaOutput = await execFromRoot('git rev-parse HEAD', { isQuiet: true });
+  const sha = shaOutput.trim();
 
   // Trigger the release workflow on main directly, passing the exact commit to
   // release as an input. The release branches no longer contain a proxy workflow,

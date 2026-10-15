@@ -1,6 +1,6 @@
 import { compare } from 'semver';
 
-import type { BranchSpec } from './branchSpec.ts';
+import type { BranchSpec } from './branch-spec.ts';
 
 /**
  * Refuses a new branch that would not come after the latest one in the order {@link selectLatestBranch} uses.
@@ -13,14 +13,16 @@ export function assertNewBranchFollowsLatest(newBranchSpec: BranchSpec, latestBr
     throw new Error(`New Obsidian version ${newVersion} is older than the latest version ${latestVersion} ${latestVersionChannel}.`);
   }
 
-  if (compare(newVersion, latestVersion) === 0) {
-    if (newVersionChannel === latestVersionChannel) {
-      throw new Error(`New Obsidian version ${newVersion} is the same as the latest version ${latestVersion} ${latestVersionChannel}.`);
-    }
+  if (compare(newVersion, latestVersion) !== 0) {
+    return;
+  }
 
-    if (newVersionChannel === 'catalyst') {
-      throw new Error(`New Obsidian version ${newVersion} is the same as the latest version ${latestVersion} ${latestVersionChannel}.`);
-    }
+  if (newVersionChannel === latestVersionChannel) {
+    throw new Error(`New Obsidian version ${newVersion} is the same as the latest version ${latestVersion} ${latestVersionChannel}.`);
+  }
+
+  if (newVersionChannel === 'catalyst') {
+    throw new Error(`New Obsidian version ${newVersion} is the same as the latest version ${latestVersion} ${latestVersionChannel}.`);
   }
 }
 
@@ -34,9 +36,5 @@ export function assertNewBranchFollowsLatest(newBranchSpec: BranchSpec, latestBr
  * `catalyst` at the latest version and lets a new `public` through -- so this used to contradict its own guard.
  */
 export function selectLatestBranch(latestCatalystVersion: string, latestPublicVersion: string): BranchSpec {
-  if (compare(latestCatalystVersion, latestPublicVersion) <= 0) {
-    return { channel: 'public', obsidianVersion: latestPublicVersion };
-  }
-
-  return { channel: 'catalyst', obsidianVersion: latestCatalystVersion };
+  return compare(latestCatalystVersion, latestPublicVersion) <= 0 ? { channel: 'public', obsidianVersion: latestPublicVersion } : { channel: 'catalyst', obsidianVersion: latestCatalystVersion };
 }

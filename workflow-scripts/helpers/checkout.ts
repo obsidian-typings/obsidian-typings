@@ -1,9 +1,9 @@
 import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
-import { generateBranchName } from './branchSpec.ts';
+import { generateBranchName } from './branch-spec.ts';
 import { getLatestVersion } from './version.ts';
 
-export async function checkout(targetBranch: string, withScripts: boolean): Promise<void> {
+export async function checkout(targetBranch: string, shouldRestoreScripts: boolean): Promise<void> {
   const REG_EXP = /^(?:release\/)?(?:obsidian-)?(?<Channel>public|catalyst)\/(?<Version>\d+\.\d+\.\d+|latest)$/;
   const match = REG_EXP.exec(targetBranch);
   if (!match) {
@@ -20,7 +20,7 @@ export async function checkout(targetBranch: string, withScripts: boolean): Prom
   targetBranch = generateBranchName({ channel, obsidianVersion: version });
 
   await execFromRoot(`git checkout "${targetBranch}"`);
-  if (withScripts) {
+  if (shouldRestoreScripts) {
     await restoreWorkflowScripts();
   }
 }
