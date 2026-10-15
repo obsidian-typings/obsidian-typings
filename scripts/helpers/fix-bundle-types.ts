@@ -17,8 +17,8 @@ const TYPES_REFERENCE_DIRECTIVES = '/// <reference types="node" />\n';
 export async function fixBundleTypes(bundleTypesFilePath: string): Promise<void> {
   const content = await readFile(bundleTypesFilePath, 'utf-8');
   const newContent = TYPES_REFERENCE_DIRECTIVES + content
-    .replace(/\$\d+/g, '')
-    .replace(/import \{/g, 'import type {');
+    .replaceAll(/\$\d+/g, '')
+    .replaceAll('import {', 'import type {');
 
   await writeFile(bundleTypesFilePath, newContent, 'utf-8');
 }
