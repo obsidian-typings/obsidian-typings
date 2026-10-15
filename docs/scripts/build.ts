@@ -1,4 +1,4 @@
-import { execFromRoot } from './helpers/root.ts';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
 // Clean, generate API docs from release branch sources, build the static site, then check it
 const ARGS_START = 2;

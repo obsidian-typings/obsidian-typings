@@ -9,6 +9,8 @@
  * Then:  cd ../obsidian-typings-docs-dev/docs && npm run dev
  */
 
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
+import { toPosixPath } from '@mnaoumov/typescript-lib/path';
 import { existsSync } from 'node:fs';
 import {
   cp,
@@ -20,10 +22,6 @@ import {
 } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import {
-  execFromRoot,
-  toPosixPath
-} from './helpers/root.ts';
 import {
   generateBranchName,
   getLatestVersion

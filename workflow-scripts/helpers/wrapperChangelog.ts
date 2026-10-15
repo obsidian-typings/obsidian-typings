@@ -25,13 +25,13 @@
  * starts a fresh file, which is the same answer `readChangelog` gives a branch that never had one.
  */
 
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { gunzipSync } from 'node:zlib';
 
 import {
   CHANGELOG_FILE_NAME,
   createInitialChangelog
 } from './changelog.ts';
-import { execFromRoot } from './root.ts';
 
 /**
  * The GitHub release page every release of this repository publishes its notes on.

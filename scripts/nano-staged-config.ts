@@ -4,13 +4,12 @@
  * Nano-staged configuration for pre-commit hooks.
  */
 
-import process from 'node:process';
-
 import {
   isEnvVariableOff,
   loadEnvFileIfExists
-} from './helpers/env-toggle.ts';
-import { getPackageManagerRunCommand } from './helpers/package-manager.ts';
+} from '@mnaoumov/typescript-dev-toolkit/env-toggle';
+import { getPackageManagerRunCommand } from '@mnaoumov/typescript-dev-toolkit/package-manager';
+import process from 'node:process';
 
 interface NanoStagedContext {
   filenames: string[];
@@ -43,27 +42,7 @@ const tasks: Record<string, NanoStagedHandler> = {
    * of what this repo can run over these 14 files, and the pre-commit hook is the only place any gate runs.
    */
   '*.astro': ({ filenames }) => batch(filenames).map((b) => `${PACKAGE_MANAGER_RUN_COMMAND} lint:fix -- ${join(b)}`),
-  '*.md': ({ filenames }) => batch(filenames).map((b) => `${PACKAGE_MANAGER_RUN_COMMAND} lint:md:fix -- ${join(b)}`),
-  /*
-   * The vendored ESLint rule sources, which are hand-copies of `obsidian-dev-utils`' and are supposed to be
-   * the same bytes. `lint:fix` and `format` above rewrite a staged copy in place, which is one of the ways
-   * these files drift, so the check has to read what is about to be committed - and where this key sits
-   * cannot buy that. **nano-staged builds one task group per pattern and runs the groups with
-   * `Promise.all`** (`node_modules/nano-staged/lib/cmd-runner.js:76`, measured against nano-staged 1.0.2,
-   * 2026-09-19), so this group RACES `lint:fix` rather than following it; sequencing exists within a single
-   * key's command list and nowhere else. Key order here is only what perfectionist sorts it to, and says
-   * nothing about when anything runs.
-   *
-   * So the ordering is not enforced, it is made IRRELEVANT: the check reads its subject out of the git
-   * index rather than off disk (`scripts/helpers/git-content.ts`), which is the same bytes whether
-   * `lint:fix` has run or not. Moving this key, or a future nano-staged ordering the groups differently,
-   * changes nothing.
-   *
-   * It is the one task here that takes no filenames, because it compares whole trees rather than the files
-   * that happen to be staged. The glob is only what decides whether it runs at all, so an ordinary commit
-   * touching no vendored file fetches nothing.
-   */
-  '**/eslint-rules/*.ts': () => [`${PACKAGE_MANAGER_RUN_COMMAND} check:vendored-eslint-rules`]
+  '*.md': ({ filenames }) => batch(filenames).map((b) => `${PACKAGE_MANAGER_RUN_COMMAND} lint:md:fix -- ${join(b)}`)
 };
 
 /**

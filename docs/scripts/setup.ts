@@ -6,6 +6,8 @@
  * then runs the API docs generator against the worktree's source files.
  */
 
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
+import { toPosixPath } from '@mnaoumov/typescript-lib/path';
 import { existsSync } from 'node:fs';
 import { rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -15,10 +17,6 @@ import {
 } from 'node:path/posix';
 import { fileURLToPath } from 'node:url';
 
-import {
-  execFromRoot,
-  toPosixPath
-} from './helpers/root.ts';
 import {
   generateBranchName,
   getLatestVersion

@@ -15,7 +15,7 @@
 import process from 'node:process';
 
 /*
- * The variable GitHub Actions sets on every runner. Read directly rather than through `helpers/env-toggle.ts`,
+ * The variable GitHub Actions sets on every runner. Read directly rather than through the toolkit's `env-toggle`,
  * whose switches are named after the npm script currently running: neither caller has an npm script, which is
  * half of why running either by hand is always a mistake.
  */

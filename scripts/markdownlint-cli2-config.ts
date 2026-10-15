@@ -1,12 +1,12 @@
-import relativeLinksRule from 'markdownlint-rule-relative-links';
+import type { MarkdownlintCli2ConfigurationSchema } from '@mnaoumov/typescript-dev-toolkit/linters/markdownlint-types/@types/markdownlint-cli2-config-schema';
 
-import type { MarkdownlintCli2ConfigSchema } from './helpers/@types/markdownlint-cli2-config-schema.d.ts';
+import relativeLinksRule from 'markdownlint-rule-relative-links';
 
 import { MD_IGNORES } from './helpers/md-ignores.ts';
 
 /* eslint-disable camelcase -- The property names are the same as the ones in the schema. */
 
-export const config: MarkdownlintCli2ConfigSchema = {
+export const config: MarkdownlintCli2ConfigurationSchema = {
   config: {
     'MD013': false,
     'MD024': {

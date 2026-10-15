@@ -27,6 +27,7 @@
  * can leave the checkout on `main`, where it dies with `Missing script: "release"`.
  */
 
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import process from 'node:process';
 
 import type { BranchSpec } from './branchSpec.ts';
@@ -35,7 +36,6 @@ import type { TrustedPublisherState } from './npm.ts';
 import { generateBranchName } from './branchSpec.ts';
 import { restoreWorkflowScripts } from './checkout.ts';
 import { askLine } from './prompt.ts';
-import { execFromRoot } from './root.ts';
 
 /** The answers taken as a yes. Anything else -- including an empty line -- declines. */
 const YES_ANSWERS: ReadonlySet<string> = new Set(['y', 'yes']);

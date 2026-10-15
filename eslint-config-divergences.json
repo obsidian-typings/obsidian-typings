@@ -28,16 +28,16 @@
       "why": "The build, lint, format, docs and version scripts are CLI entry points whose output IS their interface, so printing to stdout is what they are for. obsidian-dev-utils leaves the rule on everywhere because nothing in that package prints."
     },
     "script|obsidian-dev-utils/no-over-cap-wait-in-eval-in-obsidian|level": {
-      "why": "This package vendors a five-rule subset of obsidian-dev-utils' custom rules into `scripts/helpers/eslint-rules/`; its plugin file's `rules` map IS that subset. This rule polices an integration suite's `evalInObsidian` wait budget, and this package has no such suite."
+      "why": "This package turns on five of the in-house rules, registered from `@mnaoumov/typescript-dev-toolkit`'s `inHouseEslintPlugin`, and leaves the rest off. This rule polices an integration suite's `evalInObsidian` wait budget, and this package has no such suite."
     },
     "script|obsidian-dev-utils/prefer-noop-async|level": {
-      "why": "Not vendored - same subset reason. Only `obsidian-test-mocks` vendors this sixth rule, which its own consumer table records."
+      "why": "Not turned on - same subset reason."
     },
     "script|obsidian-dev-utils/require-component-suffix|level": {
-      "why": "Not vendored - same subset reason. Obsidian `Component` subclasses are a plugin-authoring shape; this package ships type declarations."
+      "why": "Not turned on - same subset reason. Obsidian `Component` subclasses are a plugin-authoring shape; this package ships type declarations."
     },
     "script|obsidian-dev-utils/require-method-template|level": {
-      "why": "Not vendored - same subset reason."
+      "why": "Not turned on - same subset reason."
     },
     "script|unicorn/name-replacements|option|options[0].replacements.dir.directory": {
       "why": "Only the `direction` expansion of `dir` is dropped here - every `dir` in this repo is a filesystem directory - so `dir` still expands to `directory` by the rule's own default rather than by an entry saying so."
@@ -52,7 +52,7 @@
       "why": "Not in this repo's vocabulary list - same reason as `dist`."
     },
     "script|unicorn/no-top-level-assignment-in-function|level": {
-      "why": "Measured with the rule on: four sites, three of them test fixtures assigned from `beforeEach` in `scripts/helpers/package-manager.test.ts` - the shape obsidian-dev-utils exempts over its own test files - and the fourth a module-level memo in `docs/scripts/helpers/api-doc-link-rendering.ts`. Off repo-wide rather than only over test files, because the memo is production code here."
+      "why": "Measured with the rule on: a module-level memo in `docs/scripts/helpers/api-doc-link-rendering.ts`, which is production code here, so the rule is off repo-wide rather than only over test files the way obsidian-dev-utils scopes it."
     },
     "script|unicorn/prefer-type-literal-last|level": {
       "why": "Unsatisfiable alongside `perfectionist/sort-union-types`, which this config takes from `recommended-alphabetical`. Measured rather than assumed: with this rule on and unfixed, perfectionist reports 0 and this rule 66; after its autofix the two counts swap exactly. Both are `error` and neither concedes. The alphabetical sort is the incumbent."

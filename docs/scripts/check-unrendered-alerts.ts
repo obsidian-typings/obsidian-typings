@@ -11,6 +11,7 @@
  * Usage: `jiti scripts/check-unrendered-alerts.ts [<outDir>]`, where `<outDir>` defaults to `dist`.
  */
 
+import { toPosixPath } from '@mnaoumov/typescript-lib/path';
 import { existsSync } from 'node:fs';
 import {
   readdir,
@@ -23,7 +24,6 @@ import {
 
 import type { BuiltPage } from './helpers/unrendered-alerts.ts';
 
-import { toPosixPath } from './helpers/root.ts';
 import {
   collectUnrenderedAlerts,
   formatUnrenderedAlerts

@@ -1,9 +1,8 @@
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import {
   basename,
   dirname
 } from 'node:path/posix';
-
-import { execFromRoot } from './helpers/root.ts';
 
 async function main(): Promise<void> {
   const nodeModulesPath = (await execFromRoot('npm root', { isQuiet: true })).replace(/\\/g, '/');

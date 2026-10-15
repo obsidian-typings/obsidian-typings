@@ -5,6 +5,8 @@
     "@eslint-community/eslint-plugin-eslint-comments": "^4.8.1",
     "@eslint/config-helpers": "^0.7.0",
     "@eslint/js": "^10.0.1",
+    "@mnaoumov/typescript-dev-toolkit": "^1.0.0",
+    "@mnaoumov/typescript-lib": "^1.0.0",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@tsconfig/strictest": "^2.0.8",
     "@types/semver": "^7.8.0",

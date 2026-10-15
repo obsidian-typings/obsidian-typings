@@ -4,15 +4,15 @@
  * Lint markdown documentation using `markdownlint-cli2` and `linkinator`.
  */
 
+import { getNonIgnoredFiles } from '@mnaoumov/typescript-dev-toolkit/git';
+import { resolveToolCommand } from '@mnaoumov/typescript-dev-toolkit/package-manager';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { glob } from 'node:fs/promises';
 
-import { getNonIgnoredFiles } from './git.ts';
 import {
   MD_FALLBACK_EXCLUDES,
   UNCHECKED_FOLDERS
 } from './md-ignores.ts';
-import { resolveToolCommand } from './package-manager.ts';
-import { execFromRoot } from './root.ts';
 
 interface LintMdParams {
   readonly paths?: string[] | undefined;

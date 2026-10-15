@@ -1,7 +1,7 @@
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
-import { resolveToolCommand } from './helpers/package-manager.ts';
-import { execFromRoot } from './helpers/root.ts';
+import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
+import { resolveToolCommand } from '@mnaoumov/typescript-dev-toolkit/package-manager';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
-exitIfScriptDisabled();
-
-await execFromRoot([...resolveToolCommand({ tool: 'vitest' }), 'run', '--project', 'unit-tests:scripts', '--project', 'unit-tests:workflow-scripts', '--project', 'unit-tests:docs']);
+await wrapCliTask(async () => {
+  await execFromRoot([...resolveToolCommand({ tool: 'vitest' }), 'run', '--project', 'unit-tests:workflow-scripts', '--project', 'unit-tests:docs']);
+});
