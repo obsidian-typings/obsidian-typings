@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.3.0
+
+- feat: reconcile with the obsidian 1.14.4 public API
+
 ## 1.2.0
 
 ### Breaking changes
