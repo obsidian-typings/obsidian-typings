@@ -36,7 +36,8 @@ const GITHUB_ACTIONS_ENV_VARIABLE_NAME = 'GITHUB_ACTIONS';
  * @param consequences - What a hand-run would do, completing "By hand it would ...".
  */
 export function assertRunningInGitHubActions(scriptName: string, consequences: string): void {
-  if (process.env[GITHUB_ACTIONS_ENV_VARIABLE_NAME]) {
+  const gitHubActionsValue = process.env[GITHUB_ACTIONS_ENV_VARIABLE_NAME];
+  if (gitHubActionsValue) {
     return;
   }
 

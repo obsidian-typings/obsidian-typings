@@ -19,12 +19,12 @@ import {
   writeFile
 } from 'node:fs/promises';
 
-import type { BranchSpec } from './branchSpec.ts';
+import type { BranchSpec } from './branch-spec.ts';
 
 import {
   CHANNELS,
   generateBranchName
-} from './branchSpec.ts';
+} from './branch-spec.ts';
 import { commit } from './git.ts';
 import {
   getLatestWrapperPackageName,
@@ -53,7 +53,9 @@ export async function generateMainReadme(): Promise<void> {
     }
 
     const sourceRegExp = new RegExp(`\\n- Latest \`${channel}\` release: .*`, 'g');
-    updatedReadme = updatedReadme.replaceAll(sourceRegExp, generateMainReadmeLine(branchSpec, isPublished));
+    const mainReadmeLine = generateMainReadmeLine(branchSpec, isPublished);
+    // A callback rather than the string itself, so a $ in the line is never read as a replacement pattern.
+    updatedReadme = updatedReadme.replaceAll(sourceRegExp, () => mainReadmeLine);
   }
 
   if (readme === updatedReadme) {
@@ -81,10 +83,11 @@ export async function generateReadme(branchSpec: BranchSpec, changelogUrl: strin
 }
 
 function fillReadmeTemplate(readmeTemplate: string, branchSpec: BranchSpec, changelogUrl: string): string {
+  // Callbacks rather than the values themselves, so a $ in a value is never read as a replacement pattern.
   return readmeTemplate
-    .replaceAll('{{OBSIDIAN_VERSION}}', branchSpec.obsidianVersion)
-    .replaceAll('{{CHANNEL}}', branchSpec.channel)
-    .replaceAll('{{CHANGELOG_URL}}', changelogUrl);
+    .replaceAll('{{OBSIDIAN_VERSION}}', () => branchSpec.obsidianVersion)
+    .replaceAll('{{CHANNEL}}', () => branchSpec.channel)
+    .replaceAll('{{CHANGELOG_URL}}', () => changelogUrl);
 }
 
 function generateMainReadmeLine(branchSpec: BranchSpec, isPublished: boolean): string {

@@ -28,8 +28,8 @@ export async function commit(message: string): Promise<void> {
  * (`feature/origin/foo`), and an unanchored first-occurrence replace would eat that one instead.
  */
 export async function getBranchNames(rev: string): Promise<string[]> {
-  const branchesStr = await execFromRoot(`git branch -r --points-at ${rev}`);
-  const branches = branchesStr
+  const branchesString = await execFromRoot(`git branch -r --points-at ${rev}`);
+  const branches = branchesString
     .split('\n')
     .filter((branch) => !branch.includes(' -> '))
     .map((branch) => branch.trim().replace(/^origin\//, ''));

@@ -1,12 +1,12 @@
 import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { setTimeout as sleep } from 'node:timers/promises';
 
-import { generateBranchName } from './helpers/branchSpec.ts';
+import { generateBranchName } from './helpers/branch-spec.ts';
 import { restoreWorkflowScripts } from './helpers/checkout.ts';
 import { commit } from './helpers/git.ts';
-import { assertRunningInGitHubActions } from './helpers/githubActions.ts';
+import { assertRunningInGitHubActions } from './helpers/github-actions.ts';
 import { readPackageJson } from './helpers/json.ts';
-import { generateMainReadme } from './helpers/readmeGenerator.ts';
+import { generateMainReadme } from './helpers/readme-generator.ts';
 import { getLatestVersion } from './helpers/version.ts';
 
 async function getLatestObsidianVersion(): Promise<string> {
@@ -98,7 +98,8 @@ async function main(): Promise<void> {
     await execFromRoot(`npm install --save-exact obsidian@${latestObsidianVersion}`);
     await execFromRoot('git add package.json package-lock.json');
 
-    const hasChanges = (await execFromRoot('git diff --staged --name-only', { isQuiet: true })).trim() !== '';
+    const stagedFileNames = await execFromRoot('git diff --staged --name-only', { isQuiet: true });
+    const hasChanges = stagedFileNames.trim() !== '';
     if (!hasChanges) {
       console.log(`No file changes after npm install obsidian@${latestObsidianVersion}, skipping release.`);
       continue;
@@ -110,13 +111,13 @@ async function main(): Promise<void> {
   }
 }
 
-async function withRetry<T>(description: string, fn: () => Promise<T>): Promise<T> {
+async function withRetry<T>(description: string, function_: () => Promise<T>): Promise<T> {
   const ATTEMPTS = 3;
   const BASE_DELAY_IN_MILLISECONDS = 2000;
 
   for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
     try {
-      return await fn();
+      return await function_();
     } catch (error) {
       if (attempt === ATTEMPTS) {
         throw error;

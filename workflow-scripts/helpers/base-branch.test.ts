@@ -19,8 +19,8 @@ import {
 import {
   assertNewBranchFollowsLatest,
   selectLatestBranch
-} from './baseBranch.ts';
-import { generateBranchName } from './branchSpec.ts';
+} from './base-branch.ts';
+import { generateBranchName } from './branch-spec.ts';
 
 describe('selectLatestBranch', () => {
   it('selects public when both channels are at the same version', () => {

@@ -4,7 +4,7 @@
  * Tests for the changelog section a release publishes.
  *
  * Only the pure half is tested here -- composing a section, prepending it, and turning a commit message into
- * a line -- following `baseBranch.test.ts` beside it. The git reads are three flags and a NUL split; what is
+ * a line -- following `base-branch.test.ts` beside it. The git reads are three flags and a NUL split; what is
  * worth pinning is the shape of what gets published, because it is published and cannot be taken back.
  *
  * The cases that matter are the ones a release actually meets: a default `Merge pull request` subject

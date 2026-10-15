@@ -29,7 +29,7 @@
  * THIRD step and the only one with no owner at all: `create-new-release-branch.ts` stops before it, nothing
  * else runs it, and nothing notices it was skipped -- two branches sat created-but-unreleased from
  * 2026-09-14 for exactly that reason. This script is where the operator is standing when it is the only thing
- * left, so `helpers/handBack.ts` handles it here -- dispatching outright when npm has confirmed the
+ * left, so `helpers/hand-back.ts` handles it here -- dispatching outright when npm has confirmed the
  * publisher, and asking when it has not. See that file for why a wrong yes is cheap.
  *
  * The placeholder is published under its own `bootstrap` dist-tag. That does NOT keep it off `latest`: on a
@@ -53,10 +53,10 @@ import {
 import { join } from 'node:path';
 import process from 'node:process';
 
-import type { BranchSpec } from './helpers/branchSpec.ts';
+import type { BranchSpec } from './helpers/branch-spec.ts';
 import type { TrustedPublisherState } from './helpers/npm.ts';
 
-import { offerRelease } from './helpers/handBack.ts';
+import { offerRelease } from './helpers/hand-back.ts';
 import { writeJson } from './helpers/json.ts';
 import {
   attachTrustedPublisher,
@@ -74,9 +74,9 @@ const BOOTSTRAP_FOLDER = '.bootstrap-tmp';
 const PLACEHOLDER_DIST_TAG = 'bootstrap';
 
 async function main(): Promise<void> {
-  const [, , obsidianVersionArg, channelArg] = process.argv;
-  const obsidianVersion = obsidianVersionArg ?? '';
-  const channel = channelArg as BranchSpec['channel'] | undefined;
+  const [, , obsidianVersionArgument, channelArgument] = process.argv;
+  const obsidianVersion = obsidianVersionArgument ?? '';
+  const channel = channelArgument as BranchSpec['channel'] | undefined;
 
   if (!obsidianVersion || !channel || !['catalyst', 'public'].includes(channel)) {
     throw new Error('Usage: jiti ./workflow-scripts/bootstrap-new-package.ts <obsidianVersion> <public|catalyst>');
@@ -181,6 +181,7 @@ async function publishPlaceholder(packageName: string): Promise<void> {
       description: `Placeholder claiming the name for ${packageName}. Replaced by the first real release.`,
       license: 'MIT',
       name: packageName,
+      // eslint-disable-next-line unicorn/name-replacements -- `repository` is an npm manifest field, so it has to be spelled the way npm reads it.
       repository: REPOSITORY,
       version: PLACEHOLDER_VERSION
     };

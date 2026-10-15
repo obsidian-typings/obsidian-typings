@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Kept in step with CHANNELS in workflow-scripts/helpers/branchSpec.ts.
+        # Kept in step with CHANNELS in workflow-scripts/helpers/branch-spec.ts.
         channel: [public, catalyst]
     runs-on: ubuntu-latest
     permissions:

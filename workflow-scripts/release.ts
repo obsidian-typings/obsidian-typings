@@ -5,11 +5,12 @@ import {
 } from 'node:path/posix';
 
 async function main(): Promise<void> {
-  const nodeModulesPath = (await execFromRoot('npm root', { isQuiet: true })).replace(/\\/g, '/');
+  const npmRootOutput = await execFromRoot('npm root', { isQuiet: true });
+  const nodeModulesPath = npmRootOutput.replaceAll('\\', '/');
   let projectRoot = dirname(nodeModulesPath);
-  const parentDir = dirname(projectRoot);
-  if (basename(parentDir) === 'workflow-scripts') {
-    projectRoot = dirname(parentDir);
+  const parentDirectory = dirname(projectRoot);
+  if (basename(parentDirectory) === 'workflow-scripts') {
+    projectRoot = dirname(parentDirectory);
   }
 
   // These three are a sequence, not three independent commands: the restore replaces

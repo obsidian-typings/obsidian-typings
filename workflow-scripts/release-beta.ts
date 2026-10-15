@@ -5,15 +5,15 @@ import {
 } from 'node:path/posix';
 
 function exec(command: string): string {
-  return execSync(command, { encoding: 'utf8', stdio: 'inherit' });
+  return execSync(command, { encoding: 'utf-8', stdio: 'inherit' });
 }
 
 function main(): void {
-  const nodeModulesPath = exec('npm root').replace(/\\/g, '/');
+  const nodeModulesPath = exec('npm root').replaceAll('\\', '/');
   let projectRoot = dirname(nodeModulesPath);
-  const parentDir = dirname(projectRoot);
-  if (basename(parentDir) === 'workflow-scripts') {
-    projectRoot = dirname(parentDir);
+  const parentDirectory = dirname(projectRoot);
+  if (basename(parentDirectory) === 'workflow-scripts') {
+    projectRoot = dirname(parentDirectory);
   }
 
   exec(`git -C ${projectRoot} restore --source=origin/main --worktree -- ./workflow-scripts`);

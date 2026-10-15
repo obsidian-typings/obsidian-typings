@@ -34,6 +34,11 @@ export interface EditPackageJsonOptions {
   readonly shouldSkipIfMissing?: boolean;
 }
 
+/**
+ * The options of {@link editPackageLockJson}, which reads package-lock.json from the same folder package.json sits in.
+ */
+export type EditPackageLockJsonOptions = EditPackageJsonOptions;
+
 export interface PackageLockJson extends Partial<PackageJson> {
   /**
    * Packages in the `package-lock.json` file.
@@ -64,7 +69,7 @@ export async function editPackageJson(
 
 export async function editPackageLockJson(
   editFunction: (packageLockJson: PackageLockJson) => Promisable<void>,
-  options: EditPackageJsonOptions = {}
+  options: EditPackageLockJsonOptions = {}
 ): Promise<void> {
   const {
     cwd,
@@ -129,11 +134,7 @@ async function readJson<T>(path: string): Promise<T> {
 
 function resolvePathFromRoot(path: string, cwd?: string): null | string {
   const rootFolder = getRootFolder(cwd);
-  if (!rootFolder) {
-    return null;
-  }
-
-  return resolveSafe(rootFolder, path);
+  return rootFolder ? resolveSafe(rootFolder, path) : null;
 }
 
 function resolveSafe(...pathSegments: string[]): string {

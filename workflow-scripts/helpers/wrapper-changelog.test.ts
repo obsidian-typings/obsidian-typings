@@ -22,7 +22,7 @@ import {
 import {
   composeWrapperChangelogSection,
   readTarballMember
-} from './wrapperChangelog.ts';
+} from './wrapper-changelog.ts';
 
 interface TarEntry {
   readonly content: string;

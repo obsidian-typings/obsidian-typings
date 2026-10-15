@@ -22,7 +22,7 @@ import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { execFileSync } from 'node:child_process';
 import process from 'node:process';
 
-import type { BranchSpec } from './branchSpec.ts';
+import type { BranchSpec } from './branch-spec.ts';
 
 import { askLine } from './prompt.ts';
 
@@ -86,12 +86,16 @@ export type TrustedPublisherAttachOutcome =
  */
 export type TrustedPublisherState = 'attached' | 'none' | 'unknown';
 
-/** The unscoped package the `public` channel's `-latest` wrapper is itself wrapped by. */
+/**
+The unscoped package the `public` channel's `-latest` wrapper is itself wrapped by.
+*/
 export const LEGACY_PACKAGE_NAME = 'obsidian-typings';
 
 export const NPM_SCOPE = '@obsidian-typings';
 
-/** The version `bootstrap-new-package.ts` publishes to claim a name. Real releases start at `1.1.0`. */
+/**
+The version `bootstrap-new-package.ts` publishes to claim a name. Real releases start at `1.1.0`.
+*/
 export const PLACEHOLDER_VERSION = '0.0.0';
 
 /*
@@ -105,14 +109,18 @@ export const REPOSITORY = {
   url: 'git+https://github.com/obsidian-typings/obsidian-typings.git'
 };
 
-/* The GitHub coordinates a trusted publisher is pinned to. All packages here publish from the same workflow. */
+/*
+The GitHub coordinates a trusted publisher is pinned to. All packages here publish from the same workflow.
+*/
 const GITHUB_OWNER = 'obsidian-typings';
 const GITHUB_REPOSITORY = 'obsidian-typings';
 const PUBLISH_WORKFLOW_FILE_NAME = 'publish-release.yml';
 
 const REGISTRY_URL = 'https://registry.npmjs.org';
 
-/* The HTTP status range npm answers a token exchange with when the answer is about THIS request, not the server. */
+/*
+The HTTP status range npm answers a token exchange with when the answer is about THIS request, not the server.
+*/
 const CLIENT_ERROR_MIN_STATUS = 400;
 const CLIENT_ERROR_MAX_STATUS = 499;
 
@@ -134,7 +142,9 @@ const OTP_ERROR_CODE = 'EOTP';
  */
 const CONFLICT_ERROR_CODE = 'E409';
 
-/** What {@link attachTrustedPublisher} did, and what npm said while it was doing it. */
+/**
+What {@link attachTrustedPublisher} did, and what npm said while it was doing it.
+*/
 export interface TrustedPublisherAttachResult {
   /**
    * What npm said while doing it, verbatim and unparsed: on `attached` the configuration it created, on
@@ -394,11 +404,7 @@ export async function getNpmUsername(): Promise<null | string> {
     shouldIncludeDetails: true
   });
 
-  if (result.exitCode !== 0) {
-    return null;
-  }
-
-  return result.stdout.trim() || null;
+  return result.exitCode === 0 ? result.stdout.trim() || null : null;
 }
 
 /**
@@ -449,11 +455,7 @@ export async function getPackageRegistryState(packageName: string): Promise<Pack
   const packument = await response.json() as Packument;
   const versions = Object.keys(packument.versions ?? {});
 
-  if (versions.length === 0 || versions.every((version) => version === PLACEHOLDER_VERSION)) {
-    return 'placeholderOnly';
-  }
-
-  return 'released';
+  return versions.every((version) => version === PLACEHOLDER_VERSION) ? 'placeholderOnly' : 'released';
 }
 
 /**
@@ -598,11 +600,9 @@ export async function hasTrustedPublisher(packageName: string): Promise<boolean 
     return body.token ? true : null;
   }
 
-  if (response.status >= CLIENT_ERROR_MIN_STATUS && response.status <= CLIENT_ERROR_MAX_STATUS) {
-    return false;
-  }
-
-  return null;
+  const isClientError = response.status >= CLIENT_ERROR_MIN_STATUS && response.status <= CLIENT_ERROR_MAX_STATUS;
+  // eslint-disable-next-line unicorn/prefer-logical-operator-over-ternary -- `false` (a definite refusal) and `null` (no answer) are two different results; `!isClientError && null` would hide that.
+  return isClientError ? false : null;
 }
 
 /**
@@ -799,11 +799,7 @@ async function askOneTimePassword(preamble: readonly string[]): Promise<null | s
 
   const answer = await askLine('\nOne-time password from your authenticator (empty to skip): ');
 
-  if (answer === null) {
-    return null;
-  }
-
-  return answer.replaceAll(/\s/gu, '') || null;
+  return answer === null ? null : answer.replaceAll(/\s/gu, '') || null;
 }
 
 /**
@@ -958,7 +954,9 @@ function getTrustedPublisherArguments(packageName: string): string[] {
   ];
 }
 
-/** Indents a block of npm's own output so it reads as a quotation rather than as this script's voice. */
+/**
+Indents a block of npm's own output so it reads as a quotation rather than as this script's voice.
+*/
 function indentBlock(text: string): string {
   return text.split('\n').map((line) => (line ? `  ${line}` : line)).join('\n');
 }
