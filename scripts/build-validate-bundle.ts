@@ -38,26 +38,26 @@ async function main(): Promise<CliTaskResult> {
   await execFromRoot('git restore --source=origin/main -- tests');
 
   const rootCanonical = toCanonical(root);
-  const bundleCompatDir = join(root, 'tests/bundle-compat');
+  const bundleCompatDirectory = join(root, 'tests/bundle-compat');
   const results: ScenarioResult[] = [];
 
-  const scenarios = await readdir(bundleCompatDir);
+  const scenarios = await readdir(bundleCompatDirectory);
   for (const scenario of scenarios) {
-    const scenarioDir = join(bundleCompatDir, scenario);
-    const scenarioDirNative = toPosixPath(scenarioDir);
+    const scenarioDirectory = join(bundleCompatDirectory, scenario);
+    const scenarioDirectoryNative = toPosixPath(scenarioDirectory);
     console.log(`\n=== ${scenario} ===`);
 
     try {
-      await exec('npm install', { cwd: scenarioDirNative, isQuiet: true });
-    } catch (e) {
-      const error = e instanceof Error ? e.message : String(e);
+      await exec('npm install', { cwd: scenarioDirectoryNative, isQuiet: true });
+    } catch (error_) {
+      const error = error_ instanceof Error ? error_.message : String(error_);
       console.log(`  SKIP (npm install failed): ${error}`);
       results.push({ error, name: scenario, passed: false });
       continue;
     }
 
     try {
-      const { fileNames, options } = parseTsConfig(join(scenarioDir, 'tsconfig.json'));
+      const { fileNames, options } = parseTsConfig(join(scenarioDirectory, 'tsconfig.json'));
       const isOk = checkProjectTypes({
         options,
         rootNames: fileNames,
@@ -71,8 +71,8 @@ async function main(): Promise<CliTaskResult> {
         console.log('  FAIL');
         results.push({ error: 'Type errors in scenario files', name: scenario, passed: false });
       }
-    } catch (e) {
-      const error = e instanceof Error ? e.message : String(e);
+    } catch (error_) {
+      const error = error_ instanceof Error ? error_.message : String(error_);
       console.log('  FAIL');
       console.log(error);
       results.push({ error, name: scenario, passed: false });
@@ -101,11 +101,9 @@ async function main(): Promise<CliTaskResult> {
  * @returns `true` to report the diagnostic, `false` to ignore it.
  */
 function shouldKeepScenarioFile(fileName: string, rootCanonical: string): boolean {
-  if (fileName.startsWith(`${rootCanonical}/`) && !fileName.includes(NODE_MODULES_SEGMENT)) {
-    return true;
-  }
-
-  return fileName.includes(OBSIDIAN_TYPINGS_SEGMENT) || fileName.includes(OBSIDIAN_SEGMENT);
+  return (fileName.startsWith(`${rootCanonical}/`) && !fileName.includes(NODE_MODULES_SEGMENT))
+    || fileName.includes(OBSIDIAN_TYPINGS_SEGMENT)
+    || fileName.includes(OBSIDIAN_SEGMENT);
 }
 
 await wrapCliTask(main);

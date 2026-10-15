@@ -46,7 +46,7 @@ describe('getModuleExportNames', () => {
 describe('getMissingAugmentations', () => {
   it('matches files in any subdirectory by base name', () => {
     expect(getMissingAugmentations({
-      augmentationFilePaths: ['App.d.ts', 'bases/BasesView.d.ts', 'bases\\BasesQuery.d.ts', 'bases'],
+      augmentationFilePaths: ['App.d.ts', 'bases/BasesView.d.ts', String.raw`bases\BasesQuery.d.ts`, 'bases'],
       exportNames: ['App', 'BasesQuery', 'BasesView', 'FrontmatterValue', 'Command']
     })).toEqual(['Command', 'FrontmatterValue']);
   });

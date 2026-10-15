@@ -5,7 +5,7 @@ import {
 } from 'node:fs/promises';
 
 await wrapCliTask(async () => {
-  await rm('dist', { recursive: true, force: true });
+  await rm('dist', { force: true, recursive: true });
 
   const files = await readdir('src/obsidian/implementations', { recursive: true });
   const dtsFiles = files.filter((file) => file.endsWith('.d.ts'));

@@ -16,31 +16,32 @@ import { requireExportEmptyInAugmentations } from './require-export-empty-in-aug
 import { requireMemberDescription } from './require-member-description.ts';
 import { requireOptionalUnderscoreMembers } from './require-optional-underscore-members.ts';
 import { requireVarInGlobalVars } from './require-var-in-global-vars.ts';
+import { toEslintRule } from './utils.ts';
 import { visibilityTagsLast } from './visibility-tags-last.ts';
 import { windowMemberFileSync } from './window-member-file-sync.ts';
 
 export const obsidianTypingsPlugin = {
   meta: { name: 'obsidian-typings' },
   rules: {
-    'augmentation-member-tags': augmentationMemberTags,
-    'constructor-getter-placement': constructorGetterPlacement,
-    'file-extension': fileExtension,
-    'import-extensions': importExtensions,
-    'jsdoc-balanced-code-fences': jsdocBalancedCodeFences,
-    'jsdoc-empty-line-before-tags': jsdocEmptyLineBeforeTags,
-    'internals-interface-tags': internalsInterfaceTags,
-    'no-declare-module-in-internals': noDeclareModuleInInternals,
-    'no-inherit-doc-tag': noInheritDocTag,
-    'no-import-alias-in-declare-global': noImportAliasInDeclareGlobal,
-    'no-interface-tags-in-augmentations': noInterfaceTagsInAugmentations,
-    'no-member-unofficial-in-internals': noMemberUnofficialInInternals,
-    'no-todo-tag': noTodoTag,
-    'one-declaration-per-file': oneDeclarationPerFile,
-    'require-export-empty-in-augmentations': requireExportEmptyInAugmentations,
-    'require-member-description': requireMemberDescription,
-    'require-optional-underscore-members': requireOptionalUnderscoreMembers,
-    'require-var-in-global-vars': requireVarInGlobalVars,
-    'visibility-tags-last': visibilityTagsLast,
-    'window-member-file-sync': windowMemberFileSync
+    'augmentation-member-tags': toEslintRule(augmentationMemberTags),
+    'constructor-getter-placement': toEslintRule(constructorGetterPlacement),
+    'file-extension': toEslintRule(fileExtension),
+    'import-extensions': toEslintRule(importExtensions),
+    'jsdoc-balanced-code-fences': toEslintRule(jsdocBalancedCodeFences),
+    'jsdoc-empty-line-before-tags': toEslintRule(jsdocEmptyLineBeforeTags),
+    'internals-interface-tags': toEslintRule(internalsInterfaceTags),
+    'no-declare-module-in-internals': toEslintRule(noDeclareModuleInInternals),
+    'no-inherit-doc-tag': toEslintRule(noInheritDocTag),
+    'no-import-alias-in-declare-global': toEslintRule(noImportAliasInDeclareGlobal),
+    'no-interface-tags-in-augmentations': toEslintRule(noInterfaceTagsInAugmentations),
+    'no-member-unofficial-in-internals': toEslintRule(noMemberUnofficialInInternals),
+    'no-todo-tag': toEslintRule(noTodoTag),
+    'one-declaration-per-file': toEslintRule(oneDeclarationPerFile),
+    'require-export-empty-in-augmentations': toEslintRule(requireExportEmptyInAugmentations),
+    'require-member-description': toEslintRule(requireMemberDescription),
+    'require-optional-underscore-members': toEslintRule(requireOptionalUnderscoreMembers),
+    'require-var-in-global-vars': toEslintRule(requireVarInGlobalVars),
+    'visibility-tags-last': toEslintRule(visibilityTagsLast),
+    'window-member-file-sync': toEslintRule(windowMemberFileSync)
   }
 };

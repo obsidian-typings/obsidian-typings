@@ -7,6 +7,7 @@ import {
 } from 'vitest';
 
 import { jsdocBalancedCodeFences } from './jsdoc-balanced-code-fences.ts';
+import { toEslintRule } from './utils.ts';
 
 RuleTester.afterAll = afterAll;
 RuleTester.describe = describe;
@@ -20,7 +21,7 @@ function lines(...parts: string[]): string {
   return parts.join('\n');
 }
 
-ruleTester.run('jsdoc-balanced-code-fences', toRuleTesterModule(jsdocBalancedCodeFences), {
+ruleTester.run('jsdoc-balanced-code-fences', toRuleTesterModule(toEslintRule(jsdocBalancedCodeFences)), {
   invalid: [
     {
       code: lines(

@@ -15,6 +15,10 @@ const DECLARATION_FILE_EXTENSIONS = ['.d.ts', '.d.cts', '.d.mts'];
 
 await wrapCliTask(main);
 
+function isDeclarationFile(fileName: string): boolean {
+  return DECLARATION_FILE_EXTENSIONS.some((extension) => fileName.endsWith(extension));
+}
+
 function main(): CliTaskResult {
   const root = getRootFolder();
 
@@ -23,8 +27,8 @@ function main(): CliTaskResult {
   }
 
   const { fileNames, options } = parseTsConfig(join(root, 'tsconfig.json'));
-  const declarationFileNames = fileNames.filter(isDeclarationFile);
-  const declarationFileSet = new Set(declarationFileNames.map(toCanonical));
+  const declarationFileNames = fileNames.filter((fileName) => isDeclarationFile(fileName));
+  const declarationFileSet = new Set(declarationFileNames.map((fileName) => toCanonical(fileName)));
 
   const isOk = checkProjectTypes({
     options,
@@ -33,8 +37,4 @@ function main(): CliTaskResult {
   });
 
   return CliTaskResult.Success(isOk);
-}
-
-function isDeclarationFile(fileName: string): boolean {
-  return DECLARATION_FILE_EXTENSIONS.some((extension) => fileName.endsWith(extension));
 }

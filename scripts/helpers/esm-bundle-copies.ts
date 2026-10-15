@@ -2,10 +2,14 @@
  * A CJS declaration bundle and the ESM entry point that must be a byte-for-byte copy of it.
  */
 export interface EsmBundleCopy {
-  /** Repo-relative path of the generated CJS declaration bundle, the copy's source. */
+  /**
+  Repo-relative path of the generated CJS declaration bundle, the copy's source.
+  */
   readonly cjsPath: string;
 
-  /** Repo-relative path of the ESM entry point, the copy's target. */
+  /**
+  Repo-relative path of the ESM entry point, the copy's target.
+  */
   readonly esmPath: string;
 }
 

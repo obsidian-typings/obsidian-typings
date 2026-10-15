@@ -1,10 +1,14 @@
-import type { TSESTree } from '@typescript-eslint/utils';
-import type { Rule } from 'eslint';
+import type { TSESLint } from '@typescript-eslint/utils';
 
-import type { RuleContext } from './utils.ts';
+import type {
+  RuleContext,
+  RuleListener
+} from './utils.ts';
 
-const FENCE_LINE_REG_EXP = /^(`{3,})/;
-const LINE_PREFIX_REG_EXP = /^(\s*\*)/;
+import { isJSDocComment } from './utils.ts';
+
+const FENCE_LINE_REG_EXP = /^(?<fenceMarker>`{3,})/;
+const LINE_PREFIX_REG_EXP = /^(?<prefix>\s*\*)/;
 const LINE_PREFIX_STRIP_REG_EXP = /^\s*\*? ?/;
 const TAG_LINE_REG_EXP = /^@\w/;
 
@@ -13,8 +17,12 @@ interface UnclosedFence {
   openLineIndex: number;
 }
 
-function stripLinePrefix(line: string): string {
-  return line.replace(LINE_PREFIX_STRIP_REG_EXP, '').trim();
+/**
+ * Finds the first tag line after the unclosed fence was opened. The fence has to close before the tag
+ * block starts, so that line is the only place a fix can put the closing fence.
+ */
+function findFirstTagLineIndex(lines: string[], afterIndex: number): number {
+  return lines.findIndex((line, index) => index > afterIndex && TAG_LINE_REG_EXP.test(stripLinePrefix(line)));
 }
 
 /**
@@ -24,50 +32,28 @@ function stripLinePrefix(line: string): string {
 function findUnclosedFence(lines: string[]): null | UnclosedFence {
   let open: null | UnclosedFence = null;
 
-  for (let i = 0; i < lines.length; i++) {
-    const match = FENCE_LINE_REG_EXP.exec(stripLinePrefix(lines[i]!));
-    if (!match) {
+  for (const [index, line] of lines.entries()) {
+    const fenceMarker = FENCE_LINE_REG_EXP.exec(stripLinePrefix(line))?.groups?.['fenceMarker'];
+    if (fenceMarker === undefined) {
       continue;
     }
 
-    if (open) {
-      open = null;
-    } else {
-      open = { fenceMarker: match[1]!, openLineIndex: i };
-    }
+    open = open ? null : { fenceMarker, openLineIndex: index };
   }
 
   return open;
 }
 
-/**
- * Finds the first tag line after the unclosed fence was opened. The fence has to close before the tag
- * block starts, so that line is the only place a fix can put the closing fence.
- */
-function findFirstTagLineIndex(lines: string[], afterIndex: number): number {
-  for (let i = afterIndex + 1; i < lines.length; i++) {
-    if (TAG_LINE_REG_EXP.test(stripLinePrefix(lines[i]!))) {
-      return i;
-    }
-  }
-
-  return -1;
+function stripLinePrefix(line: string): string {
+  return line.replace(LINE_PREFIX_STRIP_REG_EXP, '').trim();
 }
 
 export const jsdocBalancedCodeFences = {
-  meta: {
-    type: 'problem' as const,
-    docs: { description: 'Require every code fence opened in a JSDoc comment to be closed in the same comment' },
-    fixable: 'code' as const,
-    messages: {
-      unclosedFence: 'JSDoc comment opens a code fence that is never closed, so every tag after it is swallowed by the code block.'
-    }
-  },
-  create(context: RuleContext) {
+  create(context: RuleContext): RuleListener {
     return {
       Program(): void {
         for (const comment of context.sourceCode.getAllComments()) {
-          if ((comment.type as string) !== 'Block' || !comment.value.startsWith('*')) {
+          if (!isJSDocComment(comment)) {
             continue;
           }
 
@@ -78,25 +64,31 @@ export const jsdocBalancedCodeFences = {
           }
 
           const tagLineIndex = findFirstTagLineIndex(lines, unclosedFence.openLineIndex);
-          const commentNode = comment as unknown as TSESTree.Comment;
-
           context.report({
             fix: tagLineIndex === -1
               ? null
-              : (fixer: Rule.RuleFixer): Rule.Fix => {
-                const prefix = LINE_PREFIX_REG_EXP.exec(lines[tagLineIndex]!)?.[1] ?? ' *';
+              : (fixer: TSESLint.RuleFixer): TSESLint.RuleFix => {
+                const prefix = LINE_PREFIX_REG_EXP.exec(lines[tagLineIndex] ?? '')?.groups?.['prefix'] ?? ' *';
                 const fixedLines = [...lines];
                 fixedLines.splice(tagLineIndex, 0, `${prefix} ${unclosedFence.fenceMarker}`);
                 return fixer.replaceTextRange(
-                  [commentNode.range![0], commentNode.range![1]],
+                  [comment.range[0], comment.range[1]],
                   `/*${fixedLines.join('\n')}*/`
                 );
               },
-            loc: commentNode.loc!,
+            loc: comment.loc,
             messageId: 'unclosedFence'
           });
         }
       }
     };
+  },
+  meta: {
+    docs: { description: 'Require every code fence opened in a JSDoc comment to be closed in the same comment' },
+    fixable: 'code' as const,
+    messages: {
+      unclosedFence: 'JSDoc comment opens a code fence that is never closed, so every tag after it is swallowed by the code block.'
+    },
+    type: 'problem' as const
   }
 };
