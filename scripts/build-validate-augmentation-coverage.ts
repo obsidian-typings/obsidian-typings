@@ -1,20 +1,20 @@
+import {
+  CliTaskResult,
+  wrapCliTask
+} from '@mnaoumov/typescript-dev-toolkit/cli-utils';
+import { getRootFolder } from '@mnaoumov/typescript-dev-toolkit/root';
 import { readFileSync } from 'node:fs';
 import { readdir } from 'node:fs/promises';
 import { join } from 'node:path/posix';
-import process from 'node:process';
 
 import {
   getMissingAugmentations,
   getModuleExportNames
 } from './helpers/augmentation-coverage.ts';
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
-import { getRootFolder } from './helpers/root.ts';
 
-exitIfScriptDisabled();
+await wrapCliTask(main);
 
-await main();
-
-async function main(): Promise<void> {
+async function main(): Promise<CliTaskResult> {
   const root = getRootFolder();
 
   if (!root) {
@@ -28,12 +28,12 @@ async function main(): Promise<void> {
 
   if (missingNames.length === 0) {
     console.log(`All ${String(exportNames.length)} exports of ${obsidianDeclarationPath} have an augmentation file.`);
-    return;
+    return CliTaskResult.Success();
   }
 
   console.error(`${String(missingNames.length)} export(s) of ${obsidianDeclarationPath} have no file under src/obsidian/augmentations/:`);
   for (const name of missingNames) {
     console.error(`  ${name}`);
   }
-  process.exitCode = 1;
+  return CliTaskResult.Failure();
 }

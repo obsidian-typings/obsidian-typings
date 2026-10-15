@@ -1,15 +1,14 @@
+import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
+import { resolveToolCommand } from '@mnaoumov/typescript-dev-toolkit/package-manager';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import process from 'node:process';
 
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
-import { resolveToolCommand } from './helpers/package-manager.ts';
-import { execFromRoot } from './helpers/root.ts';
+await wrapCliTask(async () => {
+  const [, , ...paths] = process.argv;
 
-exitIfScriptDisabled();
+  if (paths.length === 0) {
+    paths.push('.');
+  }
 
-const [, , ...paths] = process.argv;
-
-if (paths.length === 0) {
-  paths.push('.');
-}
-
-await execFromRoot([...resolveToolCommand({ tool: 'eslint' }), { batchedArguments: paths }]);
+  await execFromRoot([...resolveToolCommand({ tool: 'eslint' }), { batchedArguments: paths }]);
+});

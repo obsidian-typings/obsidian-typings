@@ -3,6 +3,10 @@ import type { Linter } from 'eslint';
 import commentsConfigs from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import { includeIgnoreFile } from '@eslint/config-helpers';
 import eslint from '@eslint/js';
+import {
+  IN_HOUSE_ESLINT_PLUGIN_NAME,
+  inHouseEslintPlugin
+} from '@mnaoumov/typescript-dev-toolkit/linters/eslint-rules/in-house-plugin';
 import stylistic from '@stylistic/eslint-plugin';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { flatConfigs as eslintPluginImportXFlatConfigs } from 'eslint-plugin-import-x';
@@ -16,7 +20,6 @@ import { resolve } from 'node:path';
 import tseslint from 'typescript-eslint';
 
 import { obsidianTypingsPlugin } from './helpers/eslint-plugin-obsidian-typings/index.ts';
-import { obsidianDevUtilsPlugin } from './helpers/eslint-rules/obsidian-dev-utils-plugin.ts';
 
 const gitignorePath = resolve(import.meta.dirname, '..', '.gitignore');
 
@@ -62,7 +65,7 @@ function getObsidianDevUtilsPluginConfigs(): Linter.Config[] {
        */
       files: scriptFiles,
       plugins: {
-        'obsidian-dev-utils': obsidianDevUtilsPlugin
+        [IN_HOUSE_ESLINT_PLUGIN_NAME]: inHouseEslintPlugin
       },
       rules: {
         'obsidian-dev-utils/no-unused-params-members': 'error',
@@ -353,23 +356,6 @@ function getOverrideConfigs(): Linter.Config[] {
         '@typescript-eslint/no-empty-object-type': 'off',
         '@typescript-eslint/no-unused-vars': 'off'
       }
-    },
-    {
-      files: ['scripts/helpers/@types/**/*.d.ts'],
-      rules: {
-        'no-restricted-syntax': 'off'
-      }
-    },
-    {
-      /*
-       * The vendored rule sources are byte-identical copies of `obsidian-dev-utils`', whose own lint is
-       * type-aware; this config is not, so a directive aimed at a type-aware rule reads here as unused. Left
-       * to report, `lint:fix` would delete the directive and the copy would stop being a copy.
-       */
-      files: ['scripts/helpers/eslint-rules/**/*.ts'],
-      linterOptions: {
-        reportUnusedDisableDirectives: 'off'
-      }
     }
   ]);
 }
@@ -409,18 +395,6 @@ function getPerfectionistConfigs(): Linter.Config[] {
           type: 'alphabetical'
         }],
         'perfectionist/sort-union-types': 'error'
-      }
-    },
-    {
-      /*
-       * Generated declaration files, reproduced from their tools' own JSON schemas. Member order comes from
-       * the generator, so it is not ours to choose: an index signature is emitted first and this rule's
-       * group list sorts it last, and hand-moving it is what made these files diverge from the copies the
-       * sibling projects keep byte-for-byte identical.
-       */
-      files: ['scripts/helpers/@types/**/*.d.ts'],
-      rules: {
-        'perfectionist/sort-interfaces': 'off'
       }
     }
   ]);

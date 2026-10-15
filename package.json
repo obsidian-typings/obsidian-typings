@@ -104,6 +104,8 @@
     "@eslint/config-helpers": "^0.6.0",
     "@eslint/js": "^10.0.1",
     "@microsoft/api-extractor": "^7.58.7",
+    "@mnaoumov/typescript-dev-toolkit": "^1.1.0",
+    "@mnaoumov/typescript-lib": "^1.0.0",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@total-typescript/ts-reset": "^0.6.1",
     "@tsconfig/strictest": "^2.0.8",
