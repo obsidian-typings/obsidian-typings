@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.5.0
+
+- feat: add the FrontmatterValue augmentation, and fail the build on an export without one
+
 ## 1.4.0
 
 - feat: reconcile with the obsidian 1.14.4 public API
