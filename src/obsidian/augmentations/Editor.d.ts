@@ -189,6 +189,7 @@ declare module 'obsidian' {
      * Get the editor instance.
      *
      * @returns The editor instance.
+     * @deprecated Use the editor directly. Kept for compatibility with CodeMirror 5.
      * @official
      * @since 0.11.11
      */

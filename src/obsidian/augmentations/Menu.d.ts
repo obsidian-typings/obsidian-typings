@@ -145,7 +145,7 @@ declare module 'obsidian' {
     /**
      * Close the menu.
      *
-     * @returns The menu instance.
+     * @deprecated Previously existed to satisfy ClosableComponent.
      * @official
      */
     close(): void;
@@ -258,6 +258,13 @@ declare module 'obsidian' {
      * @official
      */
     onHide(callback: () => unknown): void;
+
+    /**
+     * Called when the user navigates back in the history.
+     *
+     * @official
+     */
+    onHistoryBack(): void;
 
     /**
      * Preemptively closes the menu if click is registered on menu item.

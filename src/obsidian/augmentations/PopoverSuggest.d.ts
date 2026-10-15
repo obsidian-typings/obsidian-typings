@@ -109,6 +109,13 @@ declare module 'obsidian' {
     onEscapeKey(): void;
 
     /**
+     * Called when the user navigates back in the history.
+     *
+     * @official
+     */
+    onHistoryBack(): void;
+
+    /**
      * Called after every selection change, including the programmatic one that follows
      * {@link SuggestModalChooser.setSuggestions}.
      *
