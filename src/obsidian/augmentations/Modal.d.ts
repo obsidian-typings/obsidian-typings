@@ -196,6 +196,13 @@ declare module 'obsidian' {
     onEscapeKey(): void;
 
     /**
+     * Called when the user navigates back in the history.
+     *
+     * @official
+     */
+    onHistoryBack(): void;
+
+    /**
      * Called when the modal is opened.
      *
      * @example
