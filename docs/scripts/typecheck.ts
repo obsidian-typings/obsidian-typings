@@ -14,7 +14,7 @@
  * check` inherits that list and checks nothing outside it.
  */
 
-import { execFromRoot } from './helpers/root.ts';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
 const ARGS_START = 2;
 await execFromRoot(['astro', 'check', ...process.argv.slice(ARGS_START)]);

@@ -1,4 +1,4 @@
-import { execFromRoot } from './helpers/root.ts';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
 async function checkGitRepoClean(): Promise<void> {
   try {

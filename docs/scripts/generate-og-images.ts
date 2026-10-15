@@ -1,5 +1,6 @@
 import type { Font } from 'satori';
 
+import { toPosixPath } from '@mnaoumov/typescript-lib/path';
 import matter from 'gray-matter';
 import { existsSync } from 'node:fs';
 import {
@@ -22,7 +23,6 @@ import {
   loadLogoBase64,
   renderOgImage
 } from './helpers/og-image.ts';
-import { toPosixPath } from './helpers/root.ts';
 
 type CacheManifest = Record<string, string>;
 

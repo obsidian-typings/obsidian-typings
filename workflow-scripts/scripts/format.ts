@@ -1,12 +1,13 @@
-import { exitIfScriptDisabled } from '../helpers/env-toggle.ts';
-import { execFromRoot } from '../helpers/root.ts';
+import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
+import process from 'node:process';
 
-exitIfScriptDisabled();
+await wrapCliTask(async () => {
+  const [, , ...paths] = process.argv;
 
-const [, , ...paths] = process.argv;
+  if (paths.length === 0) {
+    paths.push('**/*');
+  }
 
-if (paths.length === 0) {
-  paths.push('**/*');
-}
-
-await execFromRoot(['dprint', 'fmt', ...paths]);
+  await execFromRoot(['dprint', 'fmt', ...paths]);
+});

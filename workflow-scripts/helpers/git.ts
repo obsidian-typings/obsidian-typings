@@ -1,4 +1,4 @@
-import { execFromRoot } from './root.ts';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
 export async function annotateTag(tag: string, message: string): Promise<void> {
   await execFromRoot(`${gitWithBotUser()} tag -a ${tag} -m "${message}"`);

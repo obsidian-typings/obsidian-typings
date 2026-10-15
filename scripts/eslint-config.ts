@@ -3,6 +3,11 @@ import type { Linter } from 'eslint';
 import commentsConfigs from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import { includeIgnoreFile } from '@eslint/config-helpers';
 import eslint from '@eslint/js';
+import {
+  IN_HOUSE_ESLINT_PLUGIN_NAME,
+  inHouseEslintPlugin
+} from '@mnaoumov/typescript-dev-toolkit/linters/eslint-rules/in-house-plugin';
+import { getRootFolder } from '@mnaoumov/typescript-dev-toolkit/root';
 // eslint-disable-next-line import-x/no-rename-default -- The default export name `plugin` is too confusing.
 import stylistic from '@stylistic/eslint-plugin';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
@@ -17,9 +22,6 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path/posix';
 // eslint-disable-next-line import-x/no-rename-default -- The default export name `_default` is too confusing.
 import tseslint from 'typescript-eslint';
-
-import { obsidianDevUtilsPlugin } from './helpers/eslint-rules/obsidian-dev-utils-plugin.ts';
-import { getRootFolder } from './helpers/root.ts';
 
 const typeScriptFiles = [
   'src/**/*.ts',
@@ -326,12 +328,6 @@ function getEslintConfigs(): Linter.Config[] {
       }
     },
     {
-      files: ['scripts/helpers/@types/markdownlint-cli2-config-schema.d.ts'],
-      rules: {
-        'no-restricted-syntax': 'off'
-      }
-    },
-    {
       files: ['**/*.test.ts', 'scripts/eslint-config.ts'],
       rules: {
         'no-magic-numbers': 'off'
@@ -422,7 +418,7 @@ function getObsidianDevUtilsPluginConfigs(): Linter.Config[] {
   return defineConfig([{
     files: typeScriptFiles,
     plugins: {
-      'obsidian-dev-utils': obsidianDevUtilsPlugin
+      [IN_HOUSE_ESLINT_PLUGIN_NAME]: inHouseEslintPlugin
     },
     rules: {
       'obsidian-dev-utils/no-async-callback-to-unsafe-return': 'error',
@@ -659,10 +655,9 @@ function getUnicornConfigs(): Linter.Config[] {
         'unicorn/no-array-sort': 'off',
         'unicorn/no-break-in-nested-loop': 'off',
         /*
-         * `null` is the not-found sentinel these helpers are built on -- `getRootFolder(): null | string`,
-         * `detectPackageManagerFromPackageJson(): null | PackageManager` -- and several of them are copies
-         * shared with sibling repos that spell it the same way. Swapping 25 sites to `undefined` would change
-         * the published shape of the helpers and diverge the copies at the same time.
+         * `null` is the not-found sentinel the `@mnaoumov/typescript-dev-toolkit` helpers these scripts call are
+         * built on -- `getRootFolder(): null | string`, `getNonIgnoredFiles(): Promise<null | string[]>` -- so
+         * the call sites have to compare against it.
          */
         'unicorn/no-null': 'off',
         'unicorn/no-top-level-assignment-in-function': 'off',
@@ -675,12 +670,9 @@ function getUnicornConfigs(): Linter.Config[] {
         'unicorn/no-unreadable-array-destructuring': 'off',
         'unicorn/no-unreadable-for-of-expression': 'off',
         /*
-         * The shared config's options, taken as they are. `checkArrowFunctionBody` reports the
-         * `mockImplementation(() => undefined)` in `helpers/package-manager.test.ts`, a file copied byte-for-byte
-         * from a sibling repo that runs these same options, so editing the copy would diverge it. `checkArguments`
-         * strips `undefined` arguments, which shifts the remaining positional arguments into the wrong slots. The
-         * rule's remaining cases (a bare `undefined` initializer, `return undefined;` in a void function) are
-         * still worth having.
+         * The shared config's options, taken as they are. `checkArguments` strips `undefined` arguments, which
+         * shifts the remaining positional arguments into the wrong slots. The rule's remaining cases (a bare
+         * `undefined` initializer, `return undefined;` in a void function) are still worth having.
          */
         'unicorn/no-useless-undefined': [
           'error',
@@ -753,28 +745,6 @@ function getUnicornConfigs(): Linter.Config[] {
       files: ['scripts/eslint-config.ts'],
       rules: {
         'unicorn/name-replacements': 'off'
-      }
-    },
-    {
-      /*
-       * `execFromRoot` picks between `exec`'s two overloads, which are distinguished by the LITERAL
-       * `shouldIncludeDetails` -- `ExecDetailedOptions` requires `true`, `ExecSimpleOptions` allows only
-       * `false` -- while `ExecOption` declares it `boolean`. Spreading `...options` therefore widens it and
-       * matches neither overload, so both literals have to be written out, one per branch.
-       *
-       * That makes this rule and `unicorn/prefer-ternary` unsatisfiable together at that one site, the same
-       * shape as the `prefer-type-literal-last` clash above: the ternary form reports here, and the
-       * if/return form the rule asks for reports as `prefer-ternary` instead. Measured both ways. The
-       * ternary is the incumbent, so this rule concedes -- for this file only, rather than repo-wide.
-       *
-       * The third byte-identical copy, `workflow-scripts/helpers/root.ts`, is deliberately NOT listed:
-       * `typeScriptFiles` does not reach it, so no unicorn rule fires there and the plugin is not loaded for
-       * it -- naming a unicorn rule against it, in config or in an inline disable comment, is itself the
-       * error "Definition for rule ... was not found".
-       */
-      files: ['docs/scripts/helpers/root.ts', 'scripts/helpers/root.ts'],
-      rules: {
-        'unicorn/prefer-minimal-ternary': 'off'
       }
     },
     {

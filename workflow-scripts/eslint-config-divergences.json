@@ -26,25 +26,25 @@
       "why": "Every module here is a CLI entry point or a helper for one, and their output IS their interface. obsidian-dev-utils leaves the rule on everywhere because nothing in that package prints."
     },
     "script|obsidian-dev-utils/no-async-callback-to-unsafe-return|level": {
-      "why": "This package vendors two of obsidian-dev-utils' custom rules into `helpers/eslint-rules/`, and registers exactly those two; its `local/` plugin file's `rules` map IS that subset. The two are the ones its own sources can break."
+      "why": "This package turns on two of the in-house rules, registered from `@mnaoumov/typescript-dev-toolkit`'s `inHouseEslintPlugin`, and leaves the rest off. The two are the ones its own sources can break."
     },
     "script|obsidian-dev-utils/no-over-cap-wait-in-eval-in-obsidian|level": {
-      "why": "Not vendored - same two-rule subset. The rule polices an integration suite's `evalInObsidian` wait budget, and nothing here drives Obsidian."
+      "why": "Not turned on - same two-rule subset. The rule polices an integration suite's `evalInObsidian` wait budget, and nothing here drives Obsidian."
     },
     "script|obsidian-dev-utils/no-unused-params-members|level": {
-      "why": "Not vendored - same two-rule subset."
+      "why": "Not turned on - same two-rule subset."
     },
     "script|obsidian-dev-utils/params-options-name-match|level": {
-      "why": "Not vendored - same two-rule subset."
+      "why": "Not turned on - same two-rule subset."
     },
     "script|obsidian-dev-utils/prefer-noop-async|level": {
-      "why": "Not vendored - same two-rule subset."
+      "why": "Not turned on - same two-rule subset."
     },
     "script|obsidian-dev-utils/require-component-suffix|level": {
-      "why": "Not vendored - same two-rule subset. Obsidian `Component` subclasses are a plugin-authoring shape; these are release-workflow scripts."
+      "why": "Not turned on - same two-rule subset. Obsidian `Component` subclasses are a plugin-authoring shape; these are release-workflow scripts."
     },
     "script|obsidian-dev-utils/require-method-template|level": {
-      "why": "Not vendored - same two-rule subset."
+      "why": "Not turned on - same two-rule subset."
     }
   }
 }

@@ -1,3 +1,4 @@
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { writeFile } from 'node:fs/promises';
 import { inc } from 'semver';
 
@@ -41,7 +42,6 @@ import {
   LEGACY_PACKAGE_NAME,
   REPOSITORY
 } from './helpers/npm.ts';
-import { execFromRoot } from './helpers/root.ts';
 import { getLatestVersion } from './helpers/version.ts';
 import {
   composeWrapperChangelogSection,

@@ -1,7 +1,6 @@
-import { checkout } from './helpers/checkout.ts';
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
+import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
 
-exitIfScriptDisabled();
+import { checkout } from './helpers/checkout.ts';
 
 async function main(): Promise<void> {
   const [, , targetBranch, withScriptsFlag] = process.argv;
@@ -13,4 +12,4 @@ async function main(): Promise<void> {
   await checkout(targetBranch, withScripts);
 }
 
-await main();
+await wrapCliTask(main);

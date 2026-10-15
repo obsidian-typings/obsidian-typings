@@ -39,6 +39,8 @@
  *    remember to run.
  */
 
+import { getRootFolder } from '@mnaoumov/typescript-dev-toolkit/root';
+import { toPosixPath } from '@mnaoumov/typescript-lib/path';
 import {
   existsSync,
   readdirSync,
@@ -47,11 +49,6 @@ import {
 } from 'node:fs';
 import { join } from 'node:path/posix';
 import process from 'node:process';
-
-import {
-  getRootFolder,
-  toPosixPath
-} from './helpers/root.ts';
 
 /**
  * How the plugin names a component override's module: `virtual:starlight/components/${name}`.

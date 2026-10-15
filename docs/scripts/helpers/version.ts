@@ -1,6 +1,5 @@
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { compare } from 'semver';
-
-import { execFromRoot } from './root.ts';
 
 export interface BranchSpec {
   channel: 'catalyst' | 'public';

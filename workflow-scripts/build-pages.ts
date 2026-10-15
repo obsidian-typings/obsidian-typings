@@ -1,3 +1,4 @@
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { existsSync } from 'node:fs';
 import {
   cp,
@@ -13,7 +14,6 @@ import {
   generateBranchName,
   parseChannel
 } from './helpers/branchSpec.ts';
-import { execFromRoot } from './helpers/root.ts';
 import { getLatestVersion } from './helpers/version.ts';
 
 interface BuildInfo {

@@ -37,15 +37,14 @@
  */
 
 import {
+  execFromRoot,
+  getRootFolder
+} from '@mnaoumov/typescript-dev-toolkit/root';
+import {
   readFile,
   writeFile
 } from 'node:fs/promises';
 import { join } from 'node:path/posix';
-
-import {
-  execFromRoot,
-  getRootFolder
-} from './root.ts';
 
 /**
  * A `BREAKING CHANGE:` footer, in both spellings Conventional Commits allows.

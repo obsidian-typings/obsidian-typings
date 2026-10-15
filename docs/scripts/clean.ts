@@ -1,8 +1,7 @@
+import { toPosixPath } from '@mnaoumov/typescript-lib/path';
 import { rm } from 'node:fs/promises';
 import { dirname } from 'node:path/posix';
 import { fileURLToPath } from 'node:url';
-
-import { toPosixPath } from './helpers/root.ts';
 
 const DOCS_DIR = dirname(dirname(toPosixPath(fileURLToPath(import.meta.url))));
 

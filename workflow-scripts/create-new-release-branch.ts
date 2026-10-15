@@ -1,3 +1,6 @@
+import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
+
 import type { BranchSpec } from './helpers/branchSpec.ts';
 
 import {
@@ -11,7 +14,6 @@ import {
   writeChangelog
 } from './helpers/changelog.ts';
 import { restoreWorkflowScripts } from './helpers/checkout.ts';
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { commit } from './helpers/git.ts';
 import { offerRelease } from './helpers/handBack.ts';
 import {
@@ -28,10 +30,7 @@ import {
   generateMainReadme,
   generateReadme
 } from './helpers/readmeGenerator.ts';
-import { execFromRoot } from './helpers/root.ts';
 import { getLatestVersion } from './helpers/version.ts';
-
-exitIfScriptDisabled();
 
 const INITIAL_BRANCH_VERSION = '1.0.0';
 
@@ -231,4 +230,4 @@ async function resetPackageVersion(): Promise<void> {
   });
 }
 
-await main();
+await wrapCliTask(main);

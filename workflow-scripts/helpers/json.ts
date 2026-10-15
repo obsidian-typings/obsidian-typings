@@ -3,7 +3,6 @@
  *
  * Reads and edits the JSON files the release scripts rewrite.
  *
- * Unlike `helpers/exec.ts` and `helpers/root.ts` beside it, this file is NOT copied into the other trees:
  * `scripts/` has never needed it, and `docs/scripts/` carried a copy in which every one of these helpers was
  * dead. It lives here because `create-new-release-branch.ts` and `publish-release.ts` are the only callers.
  */
@@ -14,17 +13,14 @@ import type {
   UndefinedOnPartialDeep
 } from 'type-fest';
 
+import { getRootFolder } from '@mnaoumov/typescript-dev-toolkit/root';
+import { toPosixPath } from '@mnaoumov/typescript-lib/path';
 import { existsSync } from 'node:fs';
 import {
   readFile,
   writeFile
 } from 'node:fs/promises';
 import { resolve as posixResolve } from 'node:path/posix';
-
-import {
-  getRootFolder,
-  toPosixPath
-} from './root.ts';
 
 export interface EditPackageJsonOptions {
   /**

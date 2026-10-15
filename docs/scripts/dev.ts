@@ -1,4 +1,4 @@
-import { execFromRoot } from './helpers/root.ts';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
 // Generate API docs from release branch sources, then start the dev server
 const ARGS_START = 2;

@@ -13,6 +13,7 @@
  * conditional on the registry rather than on the branch.
  */
 
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import {
   readFile,
   writeFile
@@ -30,7 +31,6 @@ import {
   getPackageRegistryState,
   getScopedPackageName
 } from './npm.ts';
-import { execFromRoot } from './root.ts';
 import { getLatestVersion } from './version.ts';
 
 export async function generateMainReadme(): Promise<void> {

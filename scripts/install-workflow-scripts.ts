@@ -1,6 +1,6 @@
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
-import { execFromRoot } from './helpers/root.ts';
+import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
-exitIfScriptDisabled();
-
-await execFromRoot('npm install -C ./workflow-scripts');
+await wrapCliTask(async () => {
+  await execFromRoot('npm install -C ./workflow-scripts');
+});

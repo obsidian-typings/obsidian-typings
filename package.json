@@ -32,8 +32,6 @@
   "type": "module",
   "scripts": {
     "bootstrap-new-package": "jiti workflow-scripts/bootstrap-new-package.ts",
-    "check:exec-helpers": "jiti scripts/check-exec-helpers.ts",
-    "check:vendored-eslint-rules": "jiti scripts/check-vendored-eslint-rules.ts",
     "checkout": "jiti workflow-scripts/checkout.ts",
     "commit": "jiti scripts/commit.ts",
     "create-new-release-branch": "jiti workflow-scripts/create-new-release-branch.ts",
@@ -63,6 +61,8 @@
     "@eslint-community/eslint-plugin-eslint-comments": "^4.8.1",
     "@eslint/config-helpers": "^0.7.0",
     "@eslint/js": "^10.0.1",
+    "@mnaoumov/typescript-dev-toolkit": "^1.0.0",
+    "@mnaoumov/typescript-lib": "^1.0.0",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@tsconfig/strictest": "^2.0.8",
     "@types/markdown-it": "^14.2.0",

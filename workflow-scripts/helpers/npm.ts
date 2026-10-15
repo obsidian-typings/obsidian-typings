@@ -16,14 +16,15 @@
  * when none of that can be done from where the caller stands are needed by more than one script.
  */
 
+import type { ExecResult } from '@mnaoumov/typescript-dev-toolkit/exec';
+
+import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { execFileSync } from 'node:child_process';
 import process from 'node:process';
 
 import type { BranchSpec } from './branchSpec.ts';
-import type { ExecResult } from './exec.ts';
 
 import { askLine } from './prompt.ts';
-import { execFromRoot } from './root.ts';
 
 /**
  * How far along a package name is on the registry.

@@ -43,6 +43,7 @@
  * See `publishPlaceholder` for why this rather than moving `latest` off the placeholder by hand.
  */
 
+import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
 import { execFileSync } from 'node:child_process';
 import {
   mkdir,
@@ -55,7 +56,6 @@ import process from 'node:process';
 import type { BranchSpec } from './helpers/branchSpec.ts';
 import type { TrustedPublisherState } from './helpers/npm.ts';
 
-import { exitIfScriptDisabled } from './helpers/env-toggle.ts';
 import { offerRelease } from './helpers/handBack.ts';
 import { writeJson } from './helpers/json.ts';
 import {
@@ -69,8 +69,6 @@ import {
   REPOSITORY,
   resolveTrustedPublisherState
 } from './helpers/npm.ts';
-
-exitIfScriptDisabled();
 
 const BOOTSTRAP_FOLDER = '.bootstrap-tmp';
 const PLACEHOLDER_DIST_TAG = 'bootstrap';
@@ -212,4 +210,4 @@ async function publishPlaceholder(packageName: string): Promise<void> {
   }
 }
 
-await main();
+await wrapCliTask(main);
