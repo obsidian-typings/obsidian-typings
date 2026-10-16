@@ -1,6 +1,7 @@
 import type { View } from 'obsidian';
 
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
+import type { ObsidianSearchQuery } from '../../search-query/ObsidianSearchQuery.d.ts';
 import type { ResultDom } from '../../tree/ResultDom.d.ts';
 
 /**
@@ -12,6 +13,12 @@ import type { ResultDom } from '../../tree/ResultDom.d.ts';
 export interface SearchView extends View {
   /** DOM tree rendering the search results, inside `div.search-result-container.mod-global-search`. */
   dom: ResultDom;
+
+  /**
+   * The query compiled by the last {@link SearchView.startSearch} that produced a matcher, or `null` before the
+   * first one.
+   */
+  searchQuery: null | ObsidianSearchQuery;
 
   /**
    * Returns the value of the search element.

@@ -13,12 +13,12 @@ export interface ResultProperty {
   key: string;
 
   /**
-   * {@link Position} of the match within the content.
+   * {@link ContentPosition} of the match within the property value, absent for a bare `[key]` match.
    */
-  pos: ContentPosition;
+  pos?: ContentPosition;
 
   /**
-   * Path of sub-keys for nested property matches.
+   * For a match inside an array value, the index of the matched item, as a one-element array.
    */
-  subkey: (number | string)[];
+  subkey?: number[];
 }
