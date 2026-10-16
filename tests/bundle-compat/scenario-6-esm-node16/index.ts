@@ -73,3 +73,12 @@ const _implCm: EditorView = implEditor.cm;
 void _cm;
 void _activeCm;
 void _implCm;
+
+// === A `PluginsPluginsRecord` augmentation must reach `App.plugins` ===
+// `plugins-record.d.ts` adds `bundle-compat-probe`. If that augmentation merges into a copy of the bundle
+// this program never loaded, the read below falls back to the index signature's plain `Plugin` and fails
+// with `TS2339` on `probeValue`.
+import type { App } from 'obsidian';
+declare const app: App;
+const _probeValue: number = app.plugins.plugins['bundle-compat-probe'].probeValue;
+void _probeValue;
