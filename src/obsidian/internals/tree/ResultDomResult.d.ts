@@ -17,4 +17,9 @@ export interface ResultDomResult {
    * Array of matched property results.
    */
   properties: ResultProperty[];
+
+  /**
+   * Match positions within each canvas text node, keyed by `canvas-` plus the node id.
+   */
+  [canvasNodeKey: `canvas-${string}`]: ContentPosition[];
 }
