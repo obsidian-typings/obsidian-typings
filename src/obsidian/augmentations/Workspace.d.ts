@@ -574,17 +574,9 @@ declare module 'obsidian' {
     getLeafById(id: string): null | WorkspaceLeaf;
 
     /**
-     * Get all leaves of a given type.
-     *
-     * @param viewType - The type of the view to get.
-     * @returns The leaves of the given type.
-     * @official
-     * @since 0.9.7
-     */
-    getLeavesOfType(viewType: string): WorkspaceLeaf[];
-
-    /**
      * Get leaves of a specific view type.
+     *
+     * Declared before the `string` overload, which would otherwise match every literal first.
      *
      * @param viewType - The view type to get leaves for.
      * @returns The leaves matching the given view type.
@@ -593,6 +585,16 @@ declare module 'obsidian' {
     getLeavesOfType<TViewType extends ViewTypeType>(
       viewType: TViewType
     ): TypedWorkspaceLeaf<ViewTypeViewMapping[TViewType]>[];
+
+    /**
+     * Get all leaves of a given type.
+     *
+     * @param viewType - The type of the view to get.
+     * @returns The leaves of the given type.
+     * @official
+     * @since 0.9.7
+     */
+    getLeavesOfType(viewType: string): WorkspaceLeaf[];
 
     /**
      * Create a new leaf inside the left sidebar.

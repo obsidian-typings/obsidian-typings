@@ -134,7 +134,7 @@ export interface BacklinkComponent extends Component {
   /**
    * File for which unlinked mentions are being computed.
    */
-  unlinkedFile: null;
+  unlinkedFile: null | TFile;
 
   /**
    * Header element for the unlinked mentions section.
@@ -254,16 +254,16 @@ export interface BacklinkComponent extends Component {
   /**
    * Set whether all results are collapsed.
    *
-   * @returns The result of setting collapse state.
+   * @param collapseAll - Whether all results should be collapsed.
    */
-  setCollapseAll(arg1: unknown): unknown;
+  setCollapseAll(collapseAll: boolean): void;
 
   /**
    * Set whether extra context lines are shown.
    *
-   * @returns The result of setting extra context.
+   * @param extraContext - Whether extra context lines should be shown.
    */
-  setExtraContext(arg1: unknown): unknown;
+  setExtraContext(extraContext: boolean): void;
 
   /**
    * Set the collapsed state of a specific section.
@@ -282,9 +282,9 @@ export interface BacklinkComponent extends Component {
   /**
    * Set the sort order for results.
    *
-   * @returns The result of setting sort order.
+   * @param sortOrder - The sort order to apply.
    */
-  setSortOrder(arg1: unknown): unknown;
+  setSortOrder(sortOrder: string): void;
 
   /**
    * Restore the component from a saved state.
