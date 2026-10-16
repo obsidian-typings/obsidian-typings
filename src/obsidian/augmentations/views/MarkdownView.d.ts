@@ -6,6 +6,7 @@ import type { LiteralStringUnion } from '../../internals/LiteralStringUnion.d.ts
 import type { MarkdownViewEphemeralState } from '../../internals/MarkdownViewEphemeralState.d.ts';
 import type { MarkdownViewModes } from '../../internals/MarkdownViewModes.d.ts';
 import type { MarkdownViewSourceMode } from '../../internals/MarkdownViewSourceMode.d.ts';
+import type { MarkdownViewState } from '../../internals/MarkdownViewState.d.ts';
 import type { MetadataEditor } from '../../internals/MetadataEditor.d.ts';
 import type { Token } from '../../internals/Token.d.ts';
 
@@ -237,6 +238,14 @@ declare module 'obsidian' {
     getSelection(): string;
 
     /**
+     * Get the state of the markdown view.
+     *
+     * @returns The state of the markdown view.
+     * @official - narrowed the return type to the fields `MarkdownView` writes.
+     */
+    getState(): MarkdownViewState;
+
+    /**
      * Get the view data of the markdown view.
      *
      * @returns A string representing the view data.
@@ -384,6 +393,16 @@ declare module 'obsidian' {
      * @unofficial
      */
     saveFrontmatter(properties: Record<string, unknown>): void;
+
+    /**
+     * Set the ephemeral state of the markdown view.
+     *
+     * Resolves `subpath` to a line in the file, then passes the state on to the current mode.
+     *
+     * @param state - The ephemeral state to apply.
+     * @official - narrowed the parameter type to the fields `MarkdownView` reads.
+     */
+    setEphemeralState(state: Partial<MarkdownViewEphemeralState>): void;
 
     /**
      * Set the mode of the editor.
