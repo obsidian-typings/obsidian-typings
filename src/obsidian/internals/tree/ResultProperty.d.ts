@@ -18,7 +18,12 @@ export interface ResultProperty {
   pos?: ContentPosition;
 
   /**
-   * For a match inside an array value, the index of the matched item, as a one-element array.
+   * Path below {@link ResultProperty.key}, one entry per segment.
+   *
+   * The search matcher sets it only for a match inside an array value, to the index of the matched item, as a
+   * one-element array. The backlink recompute always sets it, from a `frontmatterLinks` key split on `.`: the
+   * segments after the first, each a number when it parses as one and the string otherwise, so a bare key gives an
+   * empty array and `a.b` gives `['b']`.
    */
-  subkey?: number[];
+  subkey?: (number | string)[];
 }
