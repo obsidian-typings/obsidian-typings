@@ -20,157 +20,211 @@ import {
   it
 } from 'vitest';
 
+import type {
+  ChangelogEntry,
+  CommitRange,
+  CommitRecord
+} from './changelog.ts';
+
 import {
   composeChangelogSection,
   createInitialChangelog,
   prependChangelogSection,
-  toBreakingChangeSubjects,
+  toBreakingChanges,
   toChangelogEntries
 } from './changelog.ts';
 
+const REPO = 'https://github.com/obsidian-typings/obsidian-typings';
+const BRANCH = 'release/obsidian-public/1.14.4';
+const TAG = 'obsidian-public-1.14.4-v1.7.0';
+const PREVIOUS_TAG = 'obsidian-public-1.14.4-v1.6.0';
+const HASH_A = 'd3c873f0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+const HASH_B = '94e36a9ebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
+
+const PREVIOUS_RELEASE_RANGE: CommitRange = {
+  baseTagName: PREVIOUS_TAG,
+  gitRange: `${PREVIOUS_TAG}..HEAD`,
+  isPreviousReleaseOfBranch: true
+};
+
+const SOURCE_LINES = [
+  `**Branch:** [\`${BRANCH}\`](${REPO}/tree/${BRANCH})`,
+  '',
+  `**Commits:** [\`${PREVIOUS_TAG}...${TAG}\`](${REPO}/compare/${PREVIOUS_TAG}...${TAG})`
+];
+
+function compose(breakingChanges: readonly ChangelogEntry[], entries: readonly ChangelogEntry[], commitRange = PREVIOUS_RELEASE_RANGE): string {
+  return composeChangelogSection({ branchName: BRANCH, breakingChanges, commitRange, entries, tagName: TAG, version: '1.7.0' });
+}
+
+function entry(subject: string, commitHash = HASH_A): ChangelogEntry {
+  return { commitHash, subject };
+}
+
+function line(subject: string, commitHash = HASH_A): string {
+  return `- ${subject} ([\`${commitHash.slice(0, 7)}\`](${REPO}/commit/${commitHash}))`;
+}
+
 describe('composeChangelogSection', () => {
   it('writes a flat list when nothing in the release is breaking', () => {
-    expect(composeChangelogSection({
-      breakingChangeSubjects: [],
-      entries: [
-        'fix(plugins): enable/disablePlugin take the user flag',
-        'fix(app): getSpellcheckLanguages returns null'
-      ],
-      version: '1.11.0'
-    })).toBe([
-      '## 1.11.0',
+    expect(compose([], [
+      entry('fix(plugins): enable/disablePlugin take the user flag', HASH_A),
+      entry('fix(app): getSpellcheckLanguages returns null', HASH_B)
+    ])).toBe([
+      '## 1.7.0',
       '',
-      '- fix(plugins): enable/disablePlugin take the user flag',
-      '- fix(app): getSpellcheckLanguages returns null'
+      ...SOURCE_LINES,
+      '',
+      line('fix(plugins): enable/disablePlugin take the user flag', HASH_A),
+      line('fix(app): getSpellcheckLanguages returns null', HASH_B)
     ].join('\n'));
   });
 
   it('partitions the release rather than repeating a breaking entry in both lists', () => {
-    expect(composeChangelogSection({
-      breakingChangeSubjects: ['fix(app)!: drop getSpellcheckLanguages'],
-      entries: [
-        'fix(app)!: drop getSpellcheckLanguages',
-        'fix(plugins): enable/disablePlugin take the user flag'
-      ],
-      version: '1.11.0'
-    })).toBe([
-      '## 1.11.0',
+    expect(compose([entry('fix(app)!: drop getSpellcheckLanguages', HASH_A)], [
+      entry('fix(app)!: drop getSpellcheckLanguages', HASH_A),
+      entry('fix(plugins): enable/disablePlugin take the user flag', HASH_B)
+    ])).toBe([
+      '## 1.7.0',
+      '',
+      ...SOURCE_LINES,
       '',
       '### Breaking changes',
       '',
-      '- fix(app)!: drop getSpellcheckLanguages',
+      line('fix(app)!: drop getSpellcheckLanguages', HASH_A),
       '',
       '### Other changes',
       '',
-      '- fix(plugins): enable/disablePlugin take the user flag'
+      line('fix(plugins): enable/disablePlugin take the user flag', HASH_B)
     ].join('\n'));
   });
 
   it('omits the Other changes heading when every entry is breaking', () => {
-    expect(composeChangelogSection({
-      breakingChangeSubjects: ['fix(app)!: drop getSpellcheckLanguages'],
-      entries: ['fix(app)!: drop getSpellcheckLanguages'],
-      version: '1.11.0'
-    })).toBe([
-      '## 1.11.0',
+    expect(compose([entry('fix(app)!: drop getSpellcheckLanguages')], [entry('fix(app)!: drop getSpellcheckLanguages')])).toBe([
+      '## 1.7.0',
+      '',
+      ...SOURCE_LINES,
       '',
       '### Breaking changes',
       '',
-      '- fix(app)!: drop getSpellcheckLanguages'
+      line('fix(app)!: drop getSpellcheckLanguages')
     ].join('\n'));
   });
 
-  it('still publishes a breaking subject that matches no entry', () => {
+  it('still publishes a breaking subject that matches no entry, linked to its own commit', () => {
     // The `--first-parent` hole: a `BREAKING CHANGE:` footer written on a branch commit whose merge subject
     // says something else. Dropping it would lose the change from the one document that exists to announce it.
-    expect(composeChangelogSection({
-      breakingChangeSubjects: ['fix(app): widen the declared return'],
-      entries: ['chore: land the September corrections'],
-      version: '1.11.0'
-    })).toBe([
-      '## 1.11.0',
+    expect(compose([entry('fix(app): widen the declared return', HASH_B)], [entry('chore: land the September corrections', HASH_A)])).toBe([
+      '## 1.7.0',
+      '',
+      ...SOURCE_LINES,
       '',
       '### Breaking changes',
       '',
-      '- fix(app): widen the declared return',
+      line('fix(app): widen the declared return', HASH_B),
       '',
       '### Other changes',
       '',
-      '- chore: land the September corrections'
+      line('chore: land the September corrections', HASH_A)
     ].join('\n'));
   });
 
-  it('says so when the range is empty, rather than writing a headed blank', () => {
-    expect(composeChangelogSection({
-      breakingChangeSubjects: [],
-      entries: [],
-      version: '1.11.0'
-    })).toBe([
-      '## 1.11.0',
+  it('says so when the range is empty, and still names the branch and the range', () => {
+    expect(compose([], [])).toBe([
+      '## 1.7.0',
+      '',
+      ...SOURCE_LINES,
       '',
       '- No changes recorded since the previous release.'
     ].join('\n'));
   });
+
+  it('says a branch\'s first release opens at the release it was cut from, not at one of its own', () => {
+    const baseTag = 'obsidian-catalyst-1.14.4-v1.2.0';
+    const section = compose([], [entry('fix: a correction')], {
+      baseTagName: baseTag,
+      gitRange: `${baseTag}..HEAD`,
+      isPreviousReleaseOfBranch: false
+    });
+
+    expect(section).toContain(
+      `**Commits:** [\`${baseTag}...${TAG}\`](${REPO}/compare/${baseTag}...${TAG}) -- the first release from this branch, so the range opens at \`${baseTag}\`, the nearest earlier release it was cut from`
+    );
+  });
+
+  it('links the whole history when no tag is reachable at all', () => {
+    const section = compose([], [entry('feat: the first release of anything')], {
+      baseTagName: null,
+      gitRange: 'HEAD',
+      isPreviousReleaseOfBranch: false
+    });
+
+    expect(section).toContain(`**Commits:** [every commit up to \`${TAG}\`](${REPO}/commits/${TAG})`);
+  });
 });
 
+function commit(message: string, commitHash = HASH_A): CommitRecord {
+  return { commitHash, message };
+}
+
 describe('toChangelogEntries', () => {
-  it('takes the subject of an ordinary commit', () => {
-    expect(toChangelogEntries(['fix(app): widen a declared return\n\nA body nobody publishes.\n']))
-      .toEqual(['fix(app): widen a declared return']);
+  it('takes the subject of an ordinary commit, and keeps its hash', () => {
+    expect(toChangelogEntries([commit('fix(app): widen a declared return\n\nA body nobody publishes.\n', HASH_B)]))
+      .toEqual([entry('fix(app): widen a declared return', HASH_B)]);
   });
 
   it('lifts the body onto a default merge subject, rather than publishing a branch name', () => {
     // 29 of the catalyst branch's 62 merges are pre-workflow pull-request merges, and on a first-parent walk
     // the merge IS the entry.
-    expect(toChangelogEntries(['Merge pull request #17 from obsidian-typings/some-branch\n\nfeat(setting): declare setIcon and iconEl\n']))
-      .toEqual(['feat(setting): declare setIcon and iconEl']);
+    expect(toChangelogEntries([commit('Merge pull request #17 from obsidian-typings/some-branch\n\nfeat(setting): declare setIcon and iconEl\n')]))
+      .toEqual([entry('feat(setting): declare setIcon and iconEl')]);
   });
 
   it('keeps a merge subject an author wrote, which is this repository\'s usual shape', () => {
-    expect(toChangelogEntries(['fix(app): widen a declared return\n\nfix(app): widen a declared return\n']))
-      .toEqual(['fix(app): widen a declared return']);
+    expect(toChangelogEntries([commit('fix(app): widen a declared return\n\nfix(app): widen a declared return\n')]))
+      .toEqual([entry('fix(app): widen a declared return')]);
   });
 
   it('keeps a default merge subject that has no body to lift', () => {
-    expect(toChangelogEntries(['Merge branch \'main\' into release\n'])).toEqual(['Merge branch \'main\' into release']);
+    expect(toChangelogEntries([commit('Merge branch \'main\' into release\n')])).toEqual([entry('Merge branch \'main\' into release')]);
   });
 
   it('drops this repository\'s own release bookkeeping', () => {
     expect(toChangelogEntries([
-      'chore(release): 1.10.0\n',
-      'chore(release): reset to 1.0.0\n',
-      'fix(app): widen a declared return\n'
-    ])).toEqual(['fix(app): widen a declared return']);
+      commit('chore(release): 1.10.0\n'),
+      commit('chore(release): reset to 1.0.0\n'),
+      commit('fix(app): widen a declared return\n', HASH_B)
+    ])).toEqual([entry('fix(app): widen a declared return', HASH_B)]);
   });
 });
 
-describe('toBreakingChangeSubjects', () => {
+describe('toBreakingChanges', () => {
   it('finds a BREAKING CHANGE: footer in a body', () => {
-    expect(toBreakingChangeSubjects(['fix(app): widen a declared return\n\nBREAKING CHANGE: TS2322 on an assignment that compiled before.\n']))
-      .toEqual(['fix(app): widen a declared return']);
+    expect(toBreakingChanges([commit('fix(app): widen a declared return\n\nBREAKING CHANGE: TS2322 on an assignment that compiled before.\n')]))
+      .toEqual([entry('fix(app): widen a declared return')]);
   });
 
   it('accepts the hyphenated spelling Conventional Commits also allows', () => {
-    expect(toBreakingChangeSubjects(['fix(app): widen a declared return\n\nBREAKING-CHANGE: TS2322.\n']))
-      .toEqual(['fix(app): widen a declared return']);
+    expect(toBreakingChanges([commit('fix(app): widen a declared return\n\nBREAKING-CHANGE: TS2322.\n')]))
+      .toEqual([entry('fix(app): widen a declared return')]);
   });
 
   it('finds the ! marker on a subject', () => {
-    expect(toBreakingChangeSubjects(['feat(app)!: drop a member\n'])).toEqual(['feat(app)!: drop a member']);
+    expect(toBreakingChanges([commit('feat(app)!: drop a member\n')])).toEqual([entry('feat(app)!: drop a member')]);
   });
 
-  it('de-duplicates the pair every landing here produces', () => {
-    // The merge copies the branch commit's message whole, so a non-first-parent read sees both.
+  it('de-duplicates the pair every landing here produces, keeping the first commit git reports', () => {
+    // The merge copies the branch commit's message whole, so a non-first-parent read sees both, merge first.
     const message = 'fix(app): widen a declared return\n\nBREAKING CHANGE: TS2322.\n';
-    expect(toBreakingChangeSubjects([message, message])).toEqual(['fix(app): widen a declared return']);
+    expect(toBreakingChanges([commit(message, HASH_A), commit(message, HASH_B)])).toEqual([entry('fix(app): widen a declared return', HASH_A)]);
   });
 
   it('says nothing about a commit carrying neither signal', () => {
-    expect(toBreakingChangeSubjects(['fix(app): widen a declared return\n\nA body mentioning no footer.\n'])).toEqual([]);
+    expect(toBreakingChanges([commit('fix(app): widen a declared return\n\nA body mentioning no footer.\n')])).toEqual([]);
   });
 
   it('does not read a mid-body mention as a footer', () => {
-    expect(toBreakingChangeSubjects(['docs: explain what a BREAKING CHANGE: footer is\n\nIt goes at the bottom.\n']))
+    expect(toBreakingChanges([commit('docs: explain what a BREAKING CHANGE: footer is\n\nIt goes at the bottom.\n')]))
       .toEqual([]);
   });
 });

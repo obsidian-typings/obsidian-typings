@@ -13,7 +13,7 @@ import { parseBranchSpec } from './helpers/branch-spec.ts';
 import {
   CHANGELOG_FILE_NAME,
   composeChangelogSection,
-  getBreakingChangeSubjects,
+  getBreakingChanges,
   getChangelogEntries,
   prependChangelogSection,
   readChangelog,
@@ -308,7 +308,7 @@ async function main(): Promise<void> {
   const {
     breakingChangeSubjects,
     nextVersion
-  } = await updateNpmVersions(branchSpec, isBeta);
+  } = await updateNpmVersions(branchName, branchSpec, isBeta);
   const scopedTagName = buildScopedTagName(branchSpec, nextVersion);
 
   const scopedPackageName = getScopedPackageName(branchSpec);
@@ -368,6 +368,9 @@ async function main(): Promise<void> {
     releaseName: `${nextVersion} (${scopedPackageName})`,
     releaseNotesFileName: RELEASE_NOTES_FILE_NAME,
     tagName: scopedTagName,
+    // The release page names this as the release's branch. Left unset, the action fell back to the default
+    // branch, so every release page said `main` about a tag that is on a release branch alone.
+    targetCommitish: branchName,
     zipFileName
   });
 }
@@ -476,18 +479,21 @@ async function pushRelease(nextVersion: string, scopedPackageName: string, scope
  * version the previous run published. See `resolveCommitRange` for what happens on a branch's first release,
  * where no such tag exists.
  */
-async function updateChangelog(branchSpec: BranchSpec, currentVersion: string, nextVersion: string): Promise<string[]> {
+async function updateChangelog(branchName: string, branchSpec: BranchSpec, currentVersion: string, nextVersion: string): Promise<string[]> {
   const commitRange = await resolveCommitRange(buildScopedTagName(branchSpec, currentVersion));
-  const breakingChangeSubjects = await getBreakingChangeSubjects(commitRange);
+  const breakingChanges = await getBreakingChanges(commitRange);
   const section = composeChangelogSection({
-    breakingChangeSubjects,
+    branchName,
+    breakingChanges,
+    commitRange,
     entries: await getChangelogEntries(commitRange),
+    tagName: buildScopedTagName(branchSpec, nextVersion),
     version: nextVersion
   });
 
   await writeReleaseNotes(section);
   await writeChangelog(prependChangelogSection(await readChangelog(), section));
-  return breakingChangeSubjects;
+  return breakingChanges.map((entry) => entry.subject);
 }
 
 async function updateLatestWrapper(options: LatestWrapperOptions): Promise<void> {
@@ -625,7 +631,7 @@ async function updateNpmVersion(nextVersion: string): Promise<void> {
  * `npm publish` ships what `package.json` holds, so this has to run before the publish. Nothing it does
  * reaches the remote: {@link pushRelease} does that afterwards, and only if the publish went through.
  */
-async function updateNpmVersions(branchSpec: BranchSpec, isBeta: boolean): Promise<NpmVersionsUpdate> {
+async function updateNpmVersions(branchName: string, branchSpec: BranchSpec, isBeta: boolean): Promise<NpmVersionsUpdate> {
   const currentVersionOutput = await execFromRoot('node -p "require(\'./package.json\').version"', { isQuiet: true });
   const currentVersion = currentVersionOutput.trim();
   const nextVersion = isBeta ? inc(currentVersion, 'preminor', 'beta') : inc(currentVersion, 'minor');
@@ -635,7 +641,7 @@ async function updateNpmVersions(branchSpec: BranchSpec, isBeta: boolean): Promi
 
   // Strictly BEFORE the release commit, and the ordering is the whole of it: the range ends at `HEAD`, so a
   // changelog generated after the bump would open every release with its own `chore(release):` line.
-  const breakingChangeSubjects = await updateChangelog(branchSpec, currentVersion, nextVersion);
+  const breakingChangeSubjects = await updateChangelog(branchName, branchSpec, currentVersion, nextVersion);
 
   await updateNpmVersion(nextVersion);
 

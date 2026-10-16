@@ -27,6 +27,7 @@
     "codemirror",
     "collab",
     "colord",
+    "commitish",
     "contentdom",
     "contenteditable",
     "csscache",
