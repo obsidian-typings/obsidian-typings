@@ -1,4 +1,5 @@
 import type { getVaultConstructor } from '../implementations/constructors/augmentations/getVaultConstructor.d.ts';
+import type { AppVaultAppearanceConfig } from '../internals/app-vault-config/AppVaultAppearanceConfig.d.ts';
 import type { AppVaultConfig } from '../internals/app-vault-config/AppVaultConfig.d.ts';
 import type { ConfigItem } from '../internals/ConfigItem.d.ts';
 import type { FileSystemWatchHandler } from '../internals/FileSystemWatchHandler.d.ts';
@@ -330,6 +331,17 @@ declare module 'obsidian' {
     /**
      * Get value from config by key.
      *
+     * @typeParam Key - The config key.
+     * @param key - Key of config value.
+     * @returns The config value.
+     * @remark Default value will be selected if config value was not manually changed.
+     * @unofficial
+     */
+    getConfig<Key extends keyof AppVaultConfig>(key: Key): AppVaultConfig[Key];
+
+    /**
+     * Get value from config by key.
+     *
      * @param string Key of config value.
      * @returns The config value.
      * @remark Default value will be selected if config value was not manually changed.
@@ -615,6 +627,16 @@ declare module 'obsidian' {
     readBinary(file: TFile): Promise<ArrayBuffer>;
 
     /**
+     * Read the `appearance.json` config file from the vault and parse it as JSON.
+     *
+     * @param config - `'appearance'`.
+     * @returns The appearance settings changed from their defaults, `null` if the file does not exist, or `undefined`
+     * if it could not be read or parsed.
+     * @unofficial
+     */
+    readConfigJson(config: 'appearance'): Promise<AppVaultAppearanceConfig | null | undefined>;
+
+    /**
      * Read a config file from the vault and parse it as JSON.
      *
      * @param config Name of config file.
@@ -702,6 +724,16 @@ declare module 'obsidian' {
      * @unofficial
      */
     saveConfig(): Promise<void>;
+
+    /**
+     * Set value of config by key.
+     *
+     * @typeParam Key - The config key.
+     * @param key - Key of config value.
+     * @param value - Value to set; `undefined` removes the key, so it reads back as its default.
+     * @unofficial
+     */
+    setConfig<Key extends keyof AppVaultConfig>(key: Key, value: AppVaultConfig[Key]): void;
 
     /**
      * Set value of config by key.
