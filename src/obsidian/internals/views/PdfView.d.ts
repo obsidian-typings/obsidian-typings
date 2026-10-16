@@ -4,6 +4,7 @@ import type {
 } from 'obsidian';
 
 import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
+import type { PdfViewEphemeralState } from './PdfViewEphemeralState.d.ts';
 
 /**
  * View for rendering and interacting with PDF files.
@@ -30,6 +31,13 @@ export interface PdfView extends EditableFileView {
    * @param file - The modified file.
    */
   onModify(file: TFile): void;
+
+  /**
+   * Set the ephemeral state of the view, applying subpath to the PDF viewer.
+   *
+   * @param state - The ephemeral state to apply.
+   */
+  setEphemeralState(state: PdfViewEphemeralState): void;
 
   /**
    * Shows the search.
