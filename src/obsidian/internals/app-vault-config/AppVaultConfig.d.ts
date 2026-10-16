@@ -29,6 +29,11 @@ export interface AppVaultConfig {
   autoConvertHtml?: boolean | true;
 
   /**
+   * Appearance &gt; Full screen.
+   */
+  autoFullScreen?: boolean | true;
+
+  /**
    * Editor &gt; Auto pair brackets.
    */
   autoPairBrackets?: boolean | true;
@@ -71,6 +76,11 @@ export interface AppVaultConfig {
   defaultViewMode?: 'preview' | 'source';
 
   /**
+   * Files & Links &gt; Delete unlinked attachments.
+   */
+  deleteUnlinkedAttachments?: 'always' | 'ask' | 'never';
+
+  /**
    * Whether Emacs-style keybindings are enabled.
    */
   emacsyKeys?: boolean | true;
@@ -84,6 +94,11 @@ export interface AppVaultConfig {
    * Sort order for files in the file explorer.
    */
   fileSortOrder?: 'alphabetical';
+
+  /**
+   * Appearance &gt; Floating navigation.
+   */
+  floatingNavigation?: boolean | true;
 
   /**
    * Editor &gt; Always focus new tabs.
@@ -163,6 +178,12 @@ export interface AppVaultConfig {
   newLinkFormat?: 'absolute' | 'relative' | 'shortest';
 
   /**
+   * Files & Links &gt; Default file to open: the last opened files (`''`), a new note, the daily note, or a specific file
+   * (`file:` followed by its path).
+   */
+  openBehavior?: '' | 'daily' | 'new' | `file:${string}`;
+
+  /**
    * Saved on executing 'Export to PDF' command.
    */
   pdfExportSettings?: PdfExportSettings;
@@ -186,6 +207,11 @@ export interface AppVaultConfig {
    * Editor &gt; Right-to-left (RTL).
    */
   rightToLeft?: boolean | false;
+
+  /**
+   * Appearance &gt; Open settings in new window.
+   */
+  settingsPopoutWindow?: boolean | true;
 
   /**
    * Editor &gt; Show indentation guides.
@@ -216,6 +242,11 @@ export interface AppVaultConfig {
    * Appearance &gt; Show tab title bar.
    */
   showViewHeader?: boolean | false;
+
+  /**
+   * Appearance &gt; Sliding sidebars.
+   */
+  slidingSidebar?: boolean | true;
 
   /**
    * Editor &gt; Smart indent lists.
@@ -251,9 +282,9 @@ export interface AppVaultConfig {
    * Appearance &gt; Base color scheme.
    *
    * @remark Not be confused with cssTheme, this setting is for the light/dark mode.
-   * @remark moonstone is light theme, 'obsidian' is dark theme.
+   * @remark moonstone is light theme, 'obsidian' is dark theme, 'system' follows the operating system.
    */
-  theme?: 'moonstone' | 'obsidian';
+  theme?: 'moonstone' | 'obsidian' | 'system';
 
   /**
    * Appearance &gt; Translucent window.
@@ -271,6 +302,11 @@ export interface AppVaultConfig {
    * @deprecated Probably left-over code from old properties type storage
    */
   types: object;
+
+  /**
+   * Files & Links &gt; Allow URI callbacks.
+   */
+  uriCallbacks?: boolean | false;
 
   /**
    * Files & Links &gt; Use [[Wikilinks]].
