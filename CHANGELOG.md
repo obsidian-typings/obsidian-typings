@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.10.0
+
+- No changes recorded since the previous release.
+
 ## 1.9.0
 
 ### Breaking changes
