@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 1.9.0
+
+**Branch:** [`release/obsidian-catalyst/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.14.4)
+
+**Commits:** [`obsidian-catalyst-1.14.4-v1.8.0...obsidian-catalyst-1.14.4-v1.9.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-catalyst-1.14.4-v1.8.0...obsidian-catalyst-1.14.4-v1.9.0)
+
+### Breaking changes
+
+- fix(result-dom): widen ResultProperty.subkey to (number | string)[] ([`fe80b0b`](https://github.com/obsidian-typings/obsidian-typings/commit/fe80b0b852bc8aab990e30aa0e20aa46beeee66b))
+- fix(types): make every ResultDomResult member optional, and add the search match keys ([`9f2834a`](https://github.com/obsidian-typings/obsidian-typings/commit/9f2834ac0cf20b0b41778d3ef0026812d670eb2c))
+- fix(types): let App.changeTheme take 'system', and drop App.setTheme's parameter ([`3990491`](https://github.com/obsidian-typings/obsidian-typings/commit/3990491e5fbba53c2ab54eab1d19b78c2ff1fb93))
+
 ## 1.8.0
 
 ### Breaking changes
