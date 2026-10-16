@@ -5,6 +5,7 @@ import type {
 
 import type { ResultDom } from './ResultDom.d.ts';
 import type { ResultDomItemChild } from './ResultDomItemChild.d.ts';
+import type { ResultDomItemPropertyChild } from './ResultDomItemPropertyChild.d.ts';
 import type { ResultDomResult } from './ResultDomResult.d.ts';
 import type { TreeNode } from './TreeNode.d.ts';
 import type { TreeNodeInfo } from './TreeNodeInfo.d.ts';
@@ -103,9 +104,10 @@ export interface ResultDomItem extends TreeNode {
   showTitle: boolean;
 
   /**
-   * Virtual children manager for match child items.
+   * Virtual children manager for the match rows: one {@link ResultDomItemPropertyChild} per matched property,
+   * then the {@link ResultDomItemChild} content rows.
    */
-  vChildren: TreeNodeVChildren<ResultDomItem, ResultDomItemChild>;
+  vChildren: TreeNodeVChildren<ResultDomItemChild | ResultDomItemPropertyChild, ResultDomItem>;
 
   /**
    * Get additional context positions surrounding a match.
