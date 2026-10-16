@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.6.0
+
+### Breaking changes
+
+- feat(search-query): type the global-search matcher tree, SearchView.searchQuery and the property row
+- fix(result-dom): make ResultProperty.pos and subkey optional, and type ResultDomItem's rows
+
 ## 1.5.0
 
 ### Breaking changes
