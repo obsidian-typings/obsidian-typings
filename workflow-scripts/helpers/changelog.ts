@@ -26,7 +26,7 @@
  * `obsidian-dev-utils` generates its changelog this way and found the hole: a `BREAKING CHANGE:` footer
  * written on a branch commit never reaches a first-parent walk at all, because only the merge is on that
  * chain. So {@link getChangelogEntries} reads the first-parent commits and
- * {@link getBreakingChangeSubjects} reads **every** commit in the range. Today the two agree -- of the 7
+ * {@link getBreakingChanges} reads **every** commit in the range. Today the two agree -- of the 7
  * landings across all three branches whose branch commits carry such a footer, all 7 merges carry it too,
  * because the merge message was copied whole -- but that holds by habit rather than by construction, and a
  * habit is not a thing to publish a safety claim on.
@@ -121,19 +121,95 @@ const SECTION_HEADING_REG_EXP = /^## /m;
 const MERGE_SUBJECT_REG_EXP = /^Merge(?: branch| remote-tracking| pull request)?\b/;
 
 /**
+ * The GitHub repository every link a section carries points into.
+ */
+const REPOSITORY_URL = 'https://github.com/obsidian-typings/obsidian-typings';
+
+/**
+ * How many characters of a commit hash a section shows, which is git's own default abbreviation.
+ */
+const SHORT_COMMIT_HASH_LENGTH = 7;
+
+/**
+ * One line a section lists, with the commit it came from so the line can link to it.
+ */
+export interface ChangelogEntry {
+  /**
+   * The full hash of the commit the line came from: on a first-parent walk, the landing's merge.
+   */
+  readonly commitHash: string;
+
+  /**
+   * The line itself, as {@link toChangelogEntries} derives it from the commit message.
+   */
+  readonly subject: string;
+}
+
+/**
+ * The commit range one release covers, as {@link resolveCommitRange} resolved it.
+ */
+export interface CommitRange {
+  /**
+   * The tag the range opens at, or `null` when no tag is reachable and the range is the whole history.
+   */
+  readonly baseTagName: null | string;
+
+  /**
+   * The range, ready to hand to `git log`.
+   */
+  readonly gitRange: string;
+
+  /**
+   * Whether {@link baseTagName} is the previous release of this same branch, rather than the nearest tag a
+   * branch's first release falls back to.
+   */
+  readonly isPreviousReleaseOfBranch: boolean;
+}
+
+/**
+ * One commit as {@link readCommitMessages} read it.
+ */
+export interface CommitRecord {
+  /**
+   * The full commit hash.
+   */
+  readonly commitHash: string;
+
+  /**
+   * The full commit message.
+   */
+  readonly message: string;
+}
+
+/**
  * What {@link composeChangelogSection} needs to write one release's section.
  */
 export interface ComposeChangelogSectionParams {
   /**
-   * The subjects of the landings this release contains that carry a breaking-change signal, as
-   * {@link getBreakingChangeSubjects} collected them.
+   * The release branch the release is published from.
    */
-  readonly breakingChangeSubjects: readonly string[];
+  readonly branchName: string;
+
+  /**
+   * The landings this release contains that carry a breaking-change signal, as {@link getBreakingChanges}
+   * collected them.
+   */
+  readonly breakingChanges: readonly ChangelogEntry[];
+
+  /**
+   * The range the release covers, as {@link resolveCommitRange} resolved it.
+   */
+  readonly commitRange: CommitRange;
 
   /**
    * One line per landing, as {@link getChangelogEntries} collected them.
    */
-  readonly entries: readonly string[];
+  readonly entries: readonly ChangelogEntry[];
+
+  /**
+   * The tag the release writes, which closes the range.
+   */
+  readonly tagName: string;
 
   /**
    * The version this section is headed with.
@@ -164,27 +240,35 @@ interface ReadCommitMessagesOptions {
  * footer written on a branch commit whose merge subject differs. Listing it unmatched is the safe direction
  * -- the alternative is dropping a breaking change from the one document that exists to announce it.
  *
+ * Above the lists the section names where the release came from: the release branch, and the range of
+ * commits as a GitHub compare link, because until 2026-10-15 a release body was only the lists and nothing
+ * said which branch or which commits it described -- while the release page itself named `main`, since the
+ * action was given no `target_commitish`. Each line links its commit for the same reason.
+ *
  * @param params - See {@link ComposeChangelogSectionParams}.
  * @returns The section, with no trailing newline.
  */
 export function composeChangelogSection(params: ComposeChangelogSectionParams): string {
   const {
-    breakingChangeSubjects,
+    branchName,
+    breakingChanges,
+    commitRange,
     entries,
+    tagName,
     version
   } = params;
 
-  const breakingSet = new Set(breakingChangeSubjects);
-  const otherEntries = entries.filter((entry) => !breakingSet.has(entry));
-  const lines = [`## ${version}`, ''];
+  const breakingSet = new Set(breakingChanges.map((entry) => entry.subject));
+  const otherEntries = entries.filter((entry) => !breakingSet.has(entry.subject));
+  const lines = [`## ${version}`, '', ...composeSourceLines(branchName, commitRange, tagName), ''];
 
-  if (entries.length === 0 && breakingChangeSubjects.length === 0) {
+  if (entries.length === 0 && breakingChanges.length === 0) {
     lines.push('- No changes recorded since the previous release.');
     return lines.join('\n');
   }
 
-  if (breakingChangeSubjects.length > 0) {
-    lines.push('### Breaking changes', '', ...toBulletList(breakingChangeSubjects));
+  if (breakingChanges.length > 0) {
+    lines.push('### Breaking changes', '', ...toBulletList(breakingChanges));
 
     if (otherEntries.length > 0) {
       lines.push('', '### Other changes', '', ...toBulletList(otherEntries));
@@ -211,28 +295,28 @@ export function createInitialChangelog(): string {
 }
 
 /**
- * The subjects in `commitRange` carrying a breaking-change signal, read over EVERY commit in the range.
+ * The landings in `commitRange` carrying a breaking-change signal, read over EVERY commit in the range.
  *
  * Not the first-parent ones: see this file's header for why the reads are split. Both Conventional-Commits
  * signals count -- the `!` marker on the subject, and the `BREAKING CHANGE:` footer in the body -- and the
- * result is de-duplicated, because a landing whose merge copied the branch commit's message whole produces
- * the same subject twice.
+ * result is de-duplicated by subject, because a landing whose merge copied the branch commit's message whole
+ * produces the same subject twice.
  *
- * @param commitRange - The range, as {@link resolveCommitRange} produced it.
- * @returns The subjects, in the order git reported them, without duplicates.
+ * @param commitRange - The range, as {@link resolveCommitRange} resolved it.
+ * @returns The entries, in the order git reported them, without duplicate subjects.
  */
-export async function getBreakingChangeSubjects(commitRange: string): Promise<string[]> {
-  return toBreakingChangeSubjects(await readCommitMessages(commitRange, { isFirstParentOnly: false }));
+export async function getBreakingChanges(commitRange: CommitRange): Promise<ChangelogEntry[]> {
+  return toBreakingChanges(await readCommitMessages(commitRange.gitRange, { isFirstParentOnly: false }));
 }
 
 /**
  * One changelog line per landing in `commitRange`.
  *
- * @param commitRange - The range, as {@link resolveCommitRange} produced it.
+ * @param commitRange - The range, as {@link resolveCommitRange} resolved it.
  * @returns The lines, newest first, as git reports them.
  */
-export async function getChangelogEntries(commitRange: string): Promise<string[]> {
-  return toChangelogEntries(await readCommitMessages(commitRange, { isFirstParentOnly: true }));
+export async function getChangelogEntries(commitRange: CommitRange): Promise<ChangelogEntry[]> {
+  return toChangelogEntries(await readCommitMessages(commitRange.gitRange, { isFirstParentOnly: true }));
 }
 
 /**
@@ -298,45 +382,55 @@ export async function readChangelog(): Promise<string> {
  * anything means.
  *
  * @param previousTagName - The tag the previous release wrote, as `buildScopedTagName` names it.
- * @returns The range, ready to hand to `git log`.
+ * @returns The range, with the tag it opens at.
  */
-export async function resolveCommitRange(previousTagName: string): Promise<string> {
+export async function resolveCommitRange(previousTagName: string): Promise<CommitRange> {
   if (await hasTag(previousTagName)) {
-    return `${previousTagName}..HEAD`;
+    return { baseTagName: previousTagName, gitRange: `${previousTagName}..HEAD`, isPreviousReleaseOfBranch: true };
   }
 
   const describedTag = await describeNearestTag();
-  return describedTag === null ? 'HEAD' : `${describedTag}..HEAD`;
+  return describedTag === null
+    ? { baseTagName: null, gitRange: 'HEAD', isPreviousReleaseOfBranch: false }
+    : { baseTagName: describedTag, gitRange: `${describedTag}..HEAD`, isPreviousReleaseOfBranch: false };
 }
 
 /**
- * The breaking subjects among full commit messages, de-duplicated.
+ * The breaking landings among full commit messages, de-duplicated by subject.
  *
  * The de-duplication is not cosmetic: a landing whose merge copied the branch commit's message whole appears
- * twice in a non-first-parent read, which is exactly the shape every landing on these branches has.
+ * twice in a non-first-parent read, which is exactly the shape every landing on these branches has. The first
+ * one git reports is kept, which on that shape is the merge -- the same commit the first-parent entry links.
  *
- * @param commitMessages - The full messages of every commit in the range.
- * @returns The subjects, in the order given, without duplicates.
+ * @param commits - Every commit in the range.
+ * @returns The entries, in the order given, without duplicate subjects.
  */
-export function toBreakingChangeSubjects(commitMessages: readonly string[]): string[] {
-  const subjects = commitMessages
-    .filter((commitMessage) => isBreakingChange(commitMessage))
-    .map((commitMessage) => toChangelogEntry(commitMessage))
-    .filter((subject) => !subject.startsWith(RELEASE_COMMIT_SUBJECT_PREFIX));
+export function toBreakingChanges(commits: readonly CommitRecord[]): ChangelogEntry[] {
+  const seenSubjects = new Set<string>();
+  const breakingChanges: ChangelogEntry[] = [];
 
-  return [...new Set(subjects)];
+  for (const entry of toChangelogEntries(commits.filter((commit) => isBreakingChange(commit.message)))) {
+    if (seenSubjects.has(entry.subject)) {
+      continue;
+    }
+
+    seenSubjects.add(entry.subject);
+    breakingChanges.push(entry);
+  }
+
+  return breakingChanges;
 }
 
 /**
- * One changelog line per full commit message, with this repository's own release bookkeeping dropped.
+ * One changelog line per commit, with this repository's own release bookkeeping dropped.
  *
- * @param commitMessages - The full messages of the first-parent commits in the range.
+ * @param commits - The first-parent commits in the range.
  * @returns The lines, in the order given.
  */
-export function toChangelogEntries(commitMessages: readonly string[]): string[] {
-  return commitMessages
-    .map((commitMessage) => toChangelogEntry(commitMessage))
-    .filter((entry) => !entry.startsWith(RELEASE_COMMIT_SUBJECT_PREFIX));
+export function toChangelogEntries(commits: readonly CommitRecord[]): ChangelogEntry[] {
+  return commits
+    .map((commit) => ({ commitHash: commit.commitHash, subject: toChangelogEntry(commit.message) }))
+    .filter((entry) => !entry.subject.startsWith(RELEASE_COMMIT_SUBJECT_PREFIX));
 }
 
 /**
@@ -357,6 +451,28 @@ export async function writeChangelog(content: string): Promise<void> {
  */
 export async function writeReleaseNotes(section: string): Promise<void> {
   await writeFile(resolveFromRoot(RELEASE_NOTES_FILE_NAME), `${section}\n`, 'utf-8');
+}
+
+/**
+ * The lines naming where a release came from: its branch, and its commits as a GitHub compare link.
+ *
+ * A branch's first release has no previous tag of its own, and says so rather than presenting the base
+ * branch's last release as this branch's. A history with no reachable tag at all links the commit list up to
+ * the new tag, which is what that range is.
+ */
+function composeSourceLines(branchName: string, commitRange: CommitRange, tagName: string): string[] {
+  const branchLine = `**Branch:** [\`${branchName}\`](${REPOSITORY_URL}/tree/${branchName})`;
+
+  if (commitRange.baseTagName === null) {
+    return [branchLine, '', `**Commits:** [every commit up to \`${tagName}\`](${REPOSITORY_URL}/commits/${tagName})`];
+  }
+
+  const compareLine = `**Commits:** [\`${commitRange.baseTagName}...${tagName}\`](${REPOSITORY_URL}/compare/${commitRange.baseTagName}...${tagName})`;
+  const firstReleaseNote = commitRange.isPreviousReleaseOfBranch
+    ? ''
+    : ` -- the first release from this branch, so the range opens at \`${commitRange.baseTagName}\`, the nearest earlier release it was cut from`;
+
+  return [branchLine, '', `${compareLine}${firstReleaseNote}`];
 }
 
 /**
@@ -398,17 +514,27 @@ function isBreakingChange(commitMessage: string): boolean {
  * The full messages of the commits in `commitRange`.
  *
  * `-z` separates the records with NUL, so nothing a commit message contains can be mistaken for a record
- * boundary -- which a newline separator cannot promise, since `%B` is a multi-line body.
+ * boundary -- which a newline separator cannot promise, since `%B` is a multi-line body. The hash is the first
+ * line of each record, and a hash never holds a newline.
  */
-async function readCommitMessages(commitRange: string, options: ReadCommitMessagesOptions): Promise<string[]> {
-  const command = ['git', 'log', commitRange, '--format=%B', '-z'];
+async function readCommitMessages(gitRange: string, options: ReadCommitMessagesOptions): Promise<CommitRecord[]> {
+  const command = ['git', 'log', gitRange, '--format=%H%n%B', '-z'];
 
   if (options.isFirstParentOnly) {
     command.push('--first-parent');
   }
 
   const output = await execFromRoot(command, { isQuiet: true });
-  return output.split('\0').filter((commitMessage) => commitMessage.trim() !== '');
+  return output
+    .split('\0')
+    .map((record) => record.replace(/^\s+/, ''))
+    .filter((record) => record !== '')
+    .map((record) => {
+      const newlineIndex = record.indexOf('\n');
+      return newlineIndex === -1
+        ? { commitHash: record.trim(), message: '' }
+        : { commitHash: record.slice(0, newlineIndex).trim(), message: record.slice(newlineIndex + 1) };
+    });
 }
 
 /**
@@ -429,10 +555,10 @@ function resolveFromRoot(fileName: string): string {
 }
 
 /**
- * Renders subjects as a markdown bullet list.
+ * Renders entries as a markdown bullet list, each linking the commit it came from.
  */
-function toBulletList(subjects: readonly string[]): string[] {
-  return subjects.map((subject) => `- ${subject}`);
+function toBulletList(entries: readonly ChangelogEntry[]): string[] {
+  return entries.map((entry) => `- ${entry.subject} ([\`${entry.commitHash.slice(0, SHORT_COMMIT_HASH_LENGTH)}\`](${REPOSITORY_URL}/commit/${entry.commitHash}))`);
 }
 
 /**

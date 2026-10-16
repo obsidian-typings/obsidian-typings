@@ -55,6 +55,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: ${{ steps.run-script.outputs.isBeta == 'true' }}
           tag_name: ${{ steps.run-script.outputs.tagName }}
+          # The release branch the tag is on. Without it the action falls back to the default branch, and the
+          # release page reported `main` for a tag no commit on `main` carries.
+          target_commitish: ${{ steps.run-script.outputs.targetCommitish }}
           name: ${{ steps.run-script.outputs.releaseName }}
           # The same section `publish-release.ts` prepended to this release's `CHANGELOG.md`. Every release
           # body before 2026-09-23 was empty -- the action defaults to one, and nothing here overrode it --
