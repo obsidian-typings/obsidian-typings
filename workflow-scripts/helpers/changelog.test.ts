@@ -189,6 +189,13 @@ describe('toChangelogEntries', () => {
     expect(toChangelogEntries([commit('Merge branch \'main\' into release\n')])).toEqual([entry('Merge branch \'main\' into release')]);
   });
 
+  it('does not lift the conflict list git leaves in a merge body', () => {
+    // 20 merges on the pre-scoped release branches carry exactly this body, and each one published
+    // `# Conflicts:` as its changelog line until the comment lines were skipped.
+    expect(toChangelogEntries([commit('Merge branch \'a\' into b\n\n# Conflicts:\n#\tpackage-lock.json\n#\tpackage.json\n')]))
+      .toEqual([entry('Merge branch \'a\' into b')]);
+  });
+
   it('drops this repository\'s own release bookkeeping', () => {
     expect(toChangelogEntries([
       commit('chore(release): 1.10.0\n'),

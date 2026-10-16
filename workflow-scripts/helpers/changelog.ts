@@ -565,10 +565,18 @@ function toBulletList(entries: readonly ChangelogEntry[]): string[] {
  * Turns one full commit message into the changelog line it should contribute.
  *
  * Normally that is the subject. The exception is a merge whose subject git wrote itself -- see
- * {@link MERGE_SUBJECT_REG_EXP}.
+ * {@link MERGE_SUBJECT_REG_EXP}. The body line lifted onto it skips the `#` comment lines git leaves there
+ * after a conflicted merge (`# Conflicts:` and the file list under it), which are not a description: 20
+ * merges on the pre-scoped release branches carry nothing else, and published `# Conflicts:` as their line.
  */
 function toChangelogEntry(commitMessage: string): string {
   const lines = commitMessage.split(/\r?\n/).filter((line) => line.trim() !== '');
   const subject = (lines[0] ?? '').trim();
-  return MERGE_SUBJECT_REG_EXP.test(subject) ? (lines[1] ?? subject).trim() : subject;
+
+  if (!MERGE_SUBJECT_REG_EXP.test(subject)) {
+    return subject;
+  }
+
+  const description = lines.slice(1).find((line) => !line.trimStart().startsWith('#'));
+  return (description ?? subject).trim();
 }
