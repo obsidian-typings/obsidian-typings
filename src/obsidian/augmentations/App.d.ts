@@ -302,12 +302,13 @@ declare module 'obsidian' {
     workspace: Workspace;
 
     /**
-     * Sets the accent color of the application (light/dark mode).
+     * Change the base color scheme of the application and store it in the vault config.
      *
-     * @param theme - The theme to set.
+     * @param theme - The color scheme to set: `'moonstone'` is light, `'obsidian'` is dark, `'system'` follows the operating system.
+     * @remark This is what the Appearance > Base color scheme dropdown calls. The value is stored with `app.vault.setConfig('theme', theme)`.
      * @unofficial
      */
-    changeTheme(theme: 'moonstone' | 'obsidian'): void;
+    changeTheme(theme: 'moonstone' | 'obsidian' | 'system'): void;
 
     /**
      * Constructor.
@@ -421,8 +422,8 @@ declare module 'obsidian' {
     /**
      * Get the current color scheme of the application.
      *
-     * @returns The current theme.
-     * @remark Identical to `app.vault.getConfig('theme')`.
+     * @returns The color scheme in effect: `'obsidian'` when dark, `'moonstone'` when light.
+     * @remark Resolved from `app.customCss.isDarkMode()`, so it never returns `'system'`, unlike `app.vault.getConfig('theme')`.
      * @unofficial
      */
     getTheme(): 'moonstone' | 'obsidian';
@@ -631,12 +632,12 @@ declare module 'obsidian' {
     setSpellcheckLanguages(languages: null | string[]): void;
 
     /**
-     * Set the current color scheme of the application and reload the CSS.
+     * Schedule {@link App.updateTheme} for the next tick, applying the color scheme stored in the vault config.
      *
-     * @param theme - The theme to set.
+     * @remark Takes no argument. To change the color scheme, use {@link App.changeTheme}.
      * @unofficial
      */
-    setTheme(theme: 'moonstone' | 'obsidian'): void;
+    setTheme(): void;
 
     /**
      * Open the OS file picker at path location.
