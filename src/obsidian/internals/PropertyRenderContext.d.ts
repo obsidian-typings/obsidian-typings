@@ -30,6 +30,14 @@ export interface PropertyRenderContext {
   blur(): void;
 
   /**
+   * Filter applied by the property-value suggest to its plain-text suggestions.
+   *
+   * @param value - The suggested value.
+   * @returns Whether to keep the suggestion.
+   */
+  filterSuggestion?(value: string): boolean;
+
+  /**
    * Callback called on property value change.
    *
    * @param value - The new property value.

@@ -80,6 +80,45 @@ export interface ElectronIpcRenderer extends NodeJS.EventEmitter {
   send(channel: string, ...args: unknown[]): void;
 
   /**
+   * Reads or sets Obsidian's "Command line interface" setting.
+   *
+   * @param channel - The `cli` channel of Obsidian's main process.
+   * @param isEnabled - `true` or `false` to set the setting; anything else only reads it.
+   * @returns Whether the setting is on, after applying `isEnabled`.
+   */
+  sendSync(channel: 'cli', isEnabled?: boolean | null): boolean;
+
+  /**
+   * Reads or sets Obsidian's "Hardware acceleration" setting, stored as its inverse.
+   *
+   * @param channel - The `disable-gpu` channel of Obsidian's main process.
+   * @param isDisabled - `true` or `false` to set the setting; anything else only reads it.
+   * @returns `true` when hardware acceleration is disabled, `undefined` when it is not. Never `false`, because
+   * Obsidian deletes the stored flag rather than storing `false`.
+   */
+  sendSync(channel: 'disable-gpu', isDisabled?: boolean | null): true | undefined;
+
+  /**
+   * Reads or sets Obsidian's "Automatic updates" setting, stored as its inverse.
+   *
+   * @param channel - The `disable-update` channel of Obsidian's main process.
+   * @param isDisabled - `true` or `false` to set the setting; anything else only reads it.
+   * @returns `true` when automatic updates are disabled, `undefined` when they are not. Never `false`, because
+   * Obsidian deletes the stored flag rather than storing `false`.
+   */
+  sendSync(channel: 'disable-update', isDisabled?: boolean | null): true | undefined;
+
+  /**
+   * Reads or sets Obsidian's "Receive early access versions" setting.
+   *
+   * @param channel - The `insider-build` channel of Obsidian's main process.
+   * @param isEnabled - `true` or `false` to set the setting; anything else only reads it. `true` is ignored
+   * where an organization policy (the `insider` key) forbids early access.
+   * @returns Whether early access versions are received, after applying `isEnabled`.
+   */
+  sendSync(channel: 'insider-build', isEnabled?: boolean | null): boolean;
+
+  /**
    * Sends a message to the main process via `channel` and expects a result synchronously.
    *
    * The main process handles it by listening for `channel` with the `ipcMain` module and replies by
