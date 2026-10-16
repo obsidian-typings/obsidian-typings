@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 1.6.0
+
+### Breaking changes
+
+- feat: type vault config reads by key, and the appearance config file
+
+### Other changes
+
+- build(eslint): lint the tooling with the toolkit's shared ESLint config
+- build(scripts): import the script helpers and ESLint rules from the @mnaoumov packages
+
 ## 1.5.0
 
 - feat: add the FrontmatterValue augmentation, and fail the build on an export without one
