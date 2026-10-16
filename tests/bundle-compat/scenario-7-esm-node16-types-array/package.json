@@ -1,0 +1,10 @@
+{
+  "name": "bundle-compat-scenario-7-esm-node16-types-array",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@types/node": "^25.8.0",
+    "obsidian": "file:../../../node_modules/obsidian",
+    "obsidian-typings": "file:../../.."
+  }
+}

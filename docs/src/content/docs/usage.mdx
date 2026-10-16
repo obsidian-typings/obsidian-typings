@@ -45,6 +45,15 @@ declare module '@obsidian-typings/obsidian-public-latest' {
 }
 ```
 
+The package ships a CommonJS copy and an ES-module copy of its declarations, and the augmentation has to target the copy your project loaded.
+A module augmentation does not load the file it targets, so an augmentation aimed at the other copy compiles without an error and changes nothing.
+
+:::caution[ES-module projects on `node16` / `nodenext`]
+With `"type": "module"` and `"moduleResolution": "node16"` or `"nodenext"`, a `types` entry in `tsconfig.json` still loads the CommonJS copy.
+In that setup, either write the augmentation in a `.d.cts` file, or load the package with `import type {} from '@obsidian-typings/obsidian-public-latest';` instead of `types`.
+CommonJS projects and `"moduleResolution": "bundler"` need neither.
+:::
+
 ## Using implementations
 ### Via&nbsp;`/implementations`
 

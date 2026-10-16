@@ -89,6 +89,9 @@ Add the package to the `types` array of your `tsconfig.json` to make all extende
 >         ]
 >     }
 > }
+> ```
+
+The package ships a CommonJS copy and an ES-module copy of its declarations. With `"moduleResolution": "node16"` or `"nodenext"`, TypeScript resolves a `types` entry under the `require` condition even in a `"type": "module"` project, so it always loads the CommonJS copy. That matters when you [extend the typings](#extend-with-your-own-typings).
 
 ### 3. Importing explicitly (alternative)
 
@@ -97,6 +100,8 @@ Instead of adding the package to your `types`, you can also import it directly:
 ```ts
 import type {} from '@obsidian-typings/obsidian-public-latest';
 ```
+
+An import resolves in the format of the file it is written in. In an ES-module project it loads the ES-module copy, which keeps the typings in the same format as your own code.
 
 ## Usage
 
@@ -152,6 +157,17 @@ declare module '@obsidian-typings/obsidian-public-latest' {
     }
 }
 ```
+
+The augmentation has to target the copy of the package that your project loaded. A module augmentation does not load the file it targets, so an augmentation aimed at the other copy compiles without an error and changes nothing. `app.plugins.plugins['my-plugin-id']` then stays a plain `Plugin`.
+
+| Your project | How the package is loaded | Where to write the augmentation |
+| --- | --- | --- |
+| CommonJS (no `"type": "module"`) | `types` or an import | any `.d.ts` / `.ts` file |
+| `"moduleResolution": "bundler"` | `types` or an import | any `.d.ts` / `.ts` file |
+| `"type": "module"` + `node16` / `nodenext` | an import (step 3) | any `.d.ts` / `.ts` file |
+| `"type": "module"` + `node16` / `nodenext` | `types` (step 2) | a `.d.cts` file |
+
+In the last row, a `types` entry loads the CommonJS copy. A `.d.cts` file is CommonJS in any project, so its `declare module` block reaches that copy. The same block in a `.d.ts` or `.ts` file of an ES-module project targets the ES-module copy, which is never loaded.
 
 ## Disclaimer
 
