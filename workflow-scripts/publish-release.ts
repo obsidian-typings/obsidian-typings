@@ -49,6 +49,12 @@ import {
 } from './helpers/wrapper-changelog.ts';
 
 /**
+ * The npm error code for a provenance entry sigstore refused as a duplicate, the one failure
+ * {@link publishPackage} retries.
+ */
+const TLOG_CREATE_ENTRY_ERROR_CODE = 'TLOG_CREATE_ENTRY_ERROR';
+
+/**
  * What {@link updateLatestWrapper} needs.
  */
 interface LatestWrapperOptions extends WrapperReleaseOptions {
@@ -322,6 +328,24 @@ async function main(): Promise<void> {
   await pushRelease(nextVersion, scopedPackageName, scopedTagName);
 
   /*
+   * Written here, the moment the tag is on the remote, rather than at the end. `Create Release` runs whenever
+   * `tagName` is set, so a failure below -- the zip, either wrapper -- still gets the pushed tag its GitHub
+   * release. Written last, it lost one: on 2026-10-16 `obsidian-public-1.14.4-v1.9.0` was published and tagged,
+   * the `-latest` wrapper's publish then died on a transient sigstore 409, and the release was never created.
+   * A missing zip only costs the release that one asset; the action warns about an unmatched file and goes on.
+   */
+  await writeOutput({
+    isBeta,
+    releaseName: `${nextVersion} (${scopedPackageName})`,
+    releaseNotesFileName: RELEASE_NOTES_FILE_NAME,
+    tagName: scopedTagName,
+    // The release page names this as the release's branch. Left unset, the action fell back to the default
+    // branch, so every release page said `main` about a tag that is on a release branch alone.
+    targetCommitish: branchName,
+    zipFileName
+  });
+
+  /*
    * Everything below this line reads `README.md` off the worktree, and every one of them wants main's -- the
    * full docs -- rather than the per-version one `readme-generator.ts` writes onto a release branch from
    * `README.template.md`. Only the scoped package published above carries the branch README, which is the
@@ -337,42 +361,33 @@ async function main(): Promise<void> {
 
   await packZipArtifact(zipFileName);
 
-  if (isLatest) {
-    const latestWrapperName = getLatestWrapperPackageName(branchSpec.channel);
-    const currentWrapperVersion = await getPublishedVersion(latestWrapperName);
-    const wrapperVersion = getNextWrapperVersion(latestWrapperName, currentWrapperVersion, isBeta);
-    const wrapperRelease: WrapperReleaseOptions = {
-      breakingChangeSubjects,
-      scopedDependency: { name: scopedPackageName, version: nextVersion },
-      tagName: scopedTagName
-    };
-
-    await updateLatestWrapper({
-      ...wrapperRelease,
-      channel: branchSpec.channel,
-      currentWrapperVersion,
-      wrapperVersion
-    });
-
-    if (branchSpec.channel === 'public') {
-      await updateLegacyWrapper({
-        ...wrapperRelease,
-        currentLegacyVersion: await getPublishedVersion(LEGACY_PACKAGE_NAME),
-        version: wrapperVersion
-      });
-    }
+  if (!isLatest) {
+    return;
   }
 
-  await writeOutput({
-    isBeta,
-    releaseName: `${nextVersion} (${scopedPackageName})`,
-    releaseNotesFileName: RELEASE_NOTES_FILE_NAME,
-    tagName: scopedTagName,
-    // The release page names this as the release's branch. Left unset, the action fell back to the default
-    // branch, so every release page said `main` about a tag that is on a release branch alone.
-    targetCommitish: branchName,
-    zipFileName
+  const latestWrapperName = getLatestWrapperPackageName(branchSpec.channel);
+  const currentWrapperVersion = await getPublishedVersion(latestWrapperName);
+  const wrapperVersion = getNextWrapperVersion(latestWrapperName, currentWrapperVersion, isBeta);
+  const wrapperRelease: WrapperReleaseOptions = {
+    breakingChangeSubjects,
+    scopedDependency: { name: scopedPackageName, version: nextVersion },
+    tagName: scopedTagName
+  };
+
+  await updateLatestWrapper({
+    ...wrapperRelease,
+    channel: branchSpec.channel,
+    currentWrapperVersion,
+    wrapperVersion
   });
+
+  if (branchSpec.channel === 'public') {
+    await updateLegacyWrapper({
+      ...wrapperRelease,
+      currentLegacyVersion: await getPublishedVersion(LEGACY_PACKAGE_NAME),
+      version: wrapperVersion
+    });
+  }
 }
 
 /**
@@ -395,8 +410,24 @@ async function packZipArtifact(zipFileName: string): Promise<void> {
  * existence of something you may not read -- and that reads as a registry bug to whoever is looking at it.
  */
 async function publishPackage(packageName: string, cwd?: string): Promise<void> {
+  const publishOptions = cwd === undefined ? {} : { cwd };
   try {
-    await execFromRoot('npm publish', cwd === undefined ? {} : { cwd });
+    try {
+      await execFromRoot('npm publish', publishOptions);
+    } catch (error) {
+      /*
+       * One retry, for one transient: sigstore answering `409 an equivalent entry already exists in the
+       * transparency log`, which is what killed the `-latest` wrapper's publish on 2026-10-16. npm writes the
+       * provenance entry before it uploads anything, so the failed attempt published nothing, and a second
+       * attempt signs afresh and logs a new entry. Every other failure is passed on unchanged.
+       */
+      if (!(error instanceof Error) || !error.message.includes(TLOG_CREATE_ENTRY_ERROR_CODE)) {
+        throw error;
+      }
+
+      console.warn(`Publishing ${packageName} hit ${TLOG_CREATE_ENTRY_ERROR_CODE}; retrying once.`);
+      await execFromRoot('npm publish', publishOptions);
+    }
   } catch (error) {
     throw new Error(
       `Publishing ${packageName} failed.${await describeMissingPublishRight(packageName)}`,
