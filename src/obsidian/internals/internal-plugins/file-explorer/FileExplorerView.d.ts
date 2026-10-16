@@ -8,7 +8,7 @@ import type {
 } from 'obsidian';
 
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
-import type { ObsidianSearchQuery } from '../../ObsidianSearchQuery.d.ts';
+import type { ObsidianSearchQuery } from '../../search-query/ObsidianSearchQuery.d.ts';
 import type { Tree } from '../../tree/Tree.d.ts';
 import type { WeakMapWrapper } from '../../WeakMapWrapper.d.ts';
 import type { FileExplorerViewFileItemsRecord } from './FileExplorerViewFileItemsRecord.d.ts';
@@ -286,6 +286,14 @@ export interface FileExplorerView extends View {
    * @param oldPath - The old file or folder path.
    */
   onRename(file: TAbstractFile, oldPath: string): void;
+
+  /**
+   * Called when the filter query changes. Compiles it into {@link FileExplorerView.searchQuery} and filters the
+   * tree by file path.
+   *
+   * @param query - The new filter query; empty to clear the filter.
+   */
+  onSearchChanged(query: string): void;
 
   /**
    * Called when the title is deselected. Calls acceptRename().
