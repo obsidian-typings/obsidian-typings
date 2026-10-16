@@ -47,6 +47,11 @@ jobs:
           # trusted publisher configured on npmjs.com pointing at this workflow file -- see AGENTS.md.
           IS_BETA: ${{ inputs.isBeta }}
       - name: Create Release
+        # Runs whenever the script got as far as pushing the tag, even if a later part of it failed. The script
+        # sets `tagName` the moment the tag is on the remote, so a tag never goes without its release: on
+        # 2026-10-16 a wrapper publish failing after the push skipped this step, and
+        # `obsidian-public-1.14.4-v1.9.0` was published and tagged with no release. The job still ends red.
+        if: ${{ !cancelled() && steps.run-script.outputs.tagName != '' }}
         uses: softprops/action-gh-release@v3
         with:
           files: |
@@ -64,6 +69,7 @@ jobs:
           # so the releases page recorded which versions existed and nothing about what changed in them.
           body_path: ${{ steps.run-script.outputs.releaseNotesFileName }}
       - name: Trigger GitHub Pages build
+        if: ${{ !cancelled() && steps.run-script.outputs.tagName != '' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh workflow run build-pages.yml --ref main
