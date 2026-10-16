@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.7.0
+
+### Breaking changes
+
+- feat: type ephemeral-state subpath, MarkdownView state, the property-value suggest and IPC toggles
+
 ## 1.6.0
 
 ### Breaking changes
