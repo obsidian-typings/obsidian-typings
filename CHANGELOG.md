@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.9.0
+
+### Breaking changes
+
+- fix(types): type the outgoing-link and backlink pane internals, and reach the typed getLeavesOfType
+
 ## 1.8.0
 
 ### Breaking changes
