@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.12.0
+
+**Branch:** [`release/obsidian-public/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.4)
+
+**Commits:** [`obsidian-public-1.14.4-v1.11.0...obsidian-public-1.14.4-v1.12.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-public-1.14.4-v1.11.0...obsidian-public-1.14.4-v1.12.0)
+
+### Breaking changes
+
+- fix(app): type ImportedAttachment as Obsidian builds it, and importAttachments as returning files ([`70e3eb5`](https://github.com/obsidian-typings/obsidian-typings/commit/70e3eb553900a8efe24725fb5b8539499016f796))
+
 ## 1.11.0
 
 **Branch:** [`release/obsidian-public/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.4)
