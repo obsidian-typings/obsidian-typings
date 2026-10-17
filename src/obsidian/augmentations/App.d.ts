@@ -441,10 +441,10 @@ declare module 'obsidian' {
      *
      * @param attachmentsToImport - The attachments to import.
      * @param folder - The folder to import the attachments to.
-     * @returns A promise that resolves when all attachments are imported.
+     * @returns A promise that resolves to the imported files. A folder contributes every file inside it.
      * @unofficial
      */
-    importAttachments(attachmentsToImport: ImportedAttachment[], folder: null | TFolder): Promise<void>;
+    importAttachments(attachmentsToImport: ImportedAttachment[], folder: null | TFolder): Promise<TFile[]>;
 
     /**
      * Import a directory from the file system into the vault (desktop only).
