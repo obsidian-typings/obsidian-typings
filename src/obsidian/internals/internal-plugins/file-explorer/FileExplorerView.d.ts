@@ -34,6 +34,11 @@ export interface FileExplorerView extends View {
   files: WeakMapWrapper<HTMLElement, TAbstractFile>;
 
   /**
+   * Tree items marked by the last cut, cleared once they are pasted.
+   */
+  itemsBeingCut: (FileTreeItem | FolderTreeItem)[];
+
+  /**
    * Last dragged over folder item element.
    * `null` when there is no folder item being dragged over.
    */
@@ -222,6 +227,15 @@ export interface FileExplorerView extends View {
    * Event: 'extensions-updated'.
    */
   onExtensionsUpdated(): void;
+
+  /**
+   * Build and show the context menu for a file or folder. When the file is one of several selected items, shows
+   * the multi-file menu (`files-menu`) for the whole selection instead of the `file-menu`.
+   *
+   * @param event - The event that opened the menu.
+   * @param file - The file or folder the menu is for.
+   */
+  onFileContextMenu(event: MouseEvent, file: TAbstractFile): void;
 
   /**
    * Called when the mouse pointer moves away from an element.

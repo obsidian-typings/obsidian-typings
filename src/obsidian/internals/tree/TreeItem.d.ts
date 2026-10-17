@@ -18,6 +18,11 @@ export interface TreeItem extends TreeNode {
   innerEl: HTMLElement;
 
   /**
+   * Whether the item can be added to the tree's selection. `false` for rows such as bookmark groups.
+   */
+  selectable: boolean;
+
+  /**
    * The main element representing this tree item in the DOM.
    */
   selfEl: HTMLElement;
