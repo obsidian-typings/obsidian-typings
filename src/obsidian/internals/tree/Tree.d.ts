@@ -106,6 +106,13 @@ export interface Tree<T extends TreeItem> {
   getNodeId(node: T): string | undefined;
 
   /**
+   * Get the items the selection commands act on.
+   *
+   * @returns The selected items, else the focused item alone, else an empty array.
+   */
+  getSelectedItems(): T[];
+
+  /**
    * Handle collapsing of all nodes.
    */
   handleCollapseAll(): void;
@@ -119,12 +126,13 @@ export interface Tree<T extends TreeItem> {
   handleDeleteSelectedItems(event: KeyboardEvent): Promise<void>;
 
   /**
-   * Handle selection of tree item via keyboard event.
+   * Handle a click on a tree item, applying the Alt-click and Shift-click selection rules.
    *
    * @param event - The mouse event that triggered the selection.
-   * @param node - The tree item being selected.
+   * @param node - The tree item clicked on.
+   * @returns `true` when the click was handled as a selection change and the item must not be opened.
    */
-  handleItemSelection(event: MouseEvent, node: T): void;
+  handleItemSelection(event: MouseEvent, node: T): boolean;
 
   /**
    * Handle renaming of focused item.
@@ -145,6 +153,14 @@ export interface Tree<T extends TreeItem> {
    * @returns Whether the item is a valid tree item.
    */
   isItem(node: T | undefined): boolean;
+
+  /**
+   * Check whether the event is an `ArrowUp` or `ArrowDown` keyboard event.
+   *
+   * @param event - The event to check.
+   * @returns Whether the event is a keyboard navigation event.
+   */
+  isKeyboardNavigationEvent(event: Event): boolean;
 
   /**
    * Load the saved fold states of the tree view from local storage.
@@ -180,6 +196,13 @@ export interface Tree<T extends TreeItem> {
   onKeyArrowUp(event: KeyboardEvent): void;
 
   /**
+   * Handle keyboard event for clearing the selection. Does nothing when no item is selected.
+   *
+   * @param event - The keyboard event.
+   */
+  onKeyEscape(event: KeyboardEvent): void;
+
+  /**
    * Handle keyboard event for opening tree item.
    *
    * @param event - The keyboard event.
@@ -190,6 +213,15 @@ export interface Tree<T extends TreeItem> {
    * Update scroll representation on resize.
    */
   onResize(): void;
+
+  /**
+   * Run an action on each item {@link Tree.getSelectedItems} returns, one at a time, deselecting every item it
+   * reports as removed and then moving focus to the nearest item that was not part of the selection.
+   *
+   * @param callback - The action to run on an item; resolves to whether the item was removed.
+   * @returns A promise that resolves when the action has run on every item.
+   */
+  removeSelection(callback: (item: T) => Promise<boolean>): Promise<void>;
 
   /**
    * Request saving of the current fold states.
