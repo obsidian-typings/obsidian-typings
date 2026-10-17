@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.10.0
+
+**Branch:** [`release/obsidian-catalyst/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.14.4)
+
+**Commits:** [`obsidian-catalyst-1.14.4-v1.9.0...obsidian-catalyst-1.14.4-v1.10.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-catalyst-1.14.4-v1.9.0...obsidian-catalyst-1.14.4-v1.10.0)
+
+### Breaking changes
+
+- fix(app): type ImportedAttachment as Obsidian builds it, and importAttachments as returning files ([`a313fa6`](https://github.com/obsidian-typings/obsidian-typings/commit/a313fa6ff231f7e21fce1e37ae7a0108d6efe854))
+
 ## 1.9.0
 
 **Branch:** [`release/obsidian-catalyst/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.14.4)
