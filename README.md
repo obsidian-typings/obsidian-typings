@@ -51,10 +51,24 @@ In most cases, we recommend to always use the latest release.
 - Latest `catalyst` (`beta`) release:
   - `npm install --save-dev @obsidian-typings/obsidian-catalyst-latest`
 - Specific Obsidian version (should match `minAppVersion` in your plugin's `manifest.json`):
-  - `npm install --save-dev @obsidian-typings/obsidian-public-1.12.7`
-  - `npm install --save-dev @obsidian-typings/obsidian-catalyst-1.12.6`
+  - `npm install --save-dev @obsidian-typings/obsidian-public-1.13.7`
+  - `npm install --save-dev @obsidian-typings/obsidian-catalyst-1.13.7`
 - Legacy package name (alias for `@obsidian-typings/obsidian-public-latest`):
   - `npm install --save-dev obsidian-typings`
+
+#### Depend on a specific Obsidian version under a stable name
+
+Each Obsidian version has its own package, so not every Obsidian version has one. To find the packages that exist, look at the [`@obsidian-typings` org on npm](https://www.npmjs.com/org/obsidian-typings) or run `npm search @obsidian-typings`. For a `minAppVersion` of `1.13.0`, pick the oldest `1.13.x` package, which is `@obsidian-typings/obsidian-public-1.13.4`.
+
+To avoid rewriting your imports and your `tsconfig.json` every time you move to another Obsidian version, install the package under an [npm alias](https://docs.npmjs.com/cli/commands/npm-install):
+
+```bash
+npm install --save-dev obsidian-typings@npm:@obsidian-typings/obsidian-public-1.13.4
+```
+
+Your code then always refers to `obsidian-typings` (in `types`, in `import type {} from 'obsidian-typings'`, in `obsidian-typings/implementations` and in `declare module 'obsidian-typings'`). To move to another Obsidian version, run the same command with the new package name. Only the `package.json` entry changes.
+
+The `-latest` packages can be pinned too: each version of `@obsidian-typings/obsidian-public-latest` depends on exactly one per-version package. `npm view @obsidian-typings/obsidian-public-latest@<version> dependencies` names it. Recent versions also name it in the package's `CHANGELOG.md`.
 
 <!-- markdownlint-disable MD033 -->
 

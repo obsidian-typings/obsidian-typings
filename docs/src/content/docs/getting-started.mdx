@@ -30,8 +30,10 @@ import { PackageManagers } from 'starlight-package-managers'
 
         Other install options:
         - Latest catalyst (beta) release: `@obsidian-typings/obsidian-catalyst-latest`
-        - Specific Obsidian version: `@obsidian-typings/obsidian-public-1.12.7`
+        - Specific Obsidian version: `@obsidian-typings/obsidian-public-1.13.7`
         - Legacy package name (alias): `obsidian-typings`
+
+        To depend on a specific Obsidian version without rewriting your imports on every upgrade, install its package under an [npm alias](https://docs.npmjs.com/cli/commands/npm-install), for example `npm install --save-dev obsidian-typings@npm:@obsidian-typings/obsidian-public-1.13.4`. Your code then always refers to `obsidian-typings`. To move to another Obsidian version, you only change the `package.json` entry. The [`@obsidian-typings` org](https://www.npmjs.com/org/obsidian-typings) lists which Obsidian versions have a package.
 
     2. **Add the package to `types` in `tsconfig.json`** (_recommended_) <br/>
         Register the types to your project with the `tsconfig.json` file.
