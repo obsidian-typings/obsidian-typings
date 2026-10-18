@@ -162,12 +162,12 @@ export interface FileExplorerView extends View {
   getNodeId(e: unknown): unknown;
 
   /**
-   * Get a sorted list of the tree items for a specific folder).
+   * Get a sorted list of the tree items for a specific folder's direct children, subfolders first.
    *
    * @param folder - The folder to get sorted items for.
-   * @returns The sorted file tree items.
+   * @returns The sorted tree items, both file and folder ones.
    */
-  getSortedFolderItems(folder: TFolder): FileTreeItem[];
+  getSortedFolderItems(folder: TFolder): (FileTreeItem | FolderTreeItem)[];
 
   /**
    * Get the current view type.
