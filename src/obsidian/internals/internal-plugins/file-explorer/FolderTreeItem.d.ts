@@ -1,4 +1,4 @@
-import type { TFile } from 'obsidian';
+import type { TFolder } from 'obsidian';
 
 import type { TreeCollapsibleItem } from '../../tree/TreeCollapsibleItem.d.ts';
 import type { TreeNodeVChildren } from '../../tree/TreeNodeVChildren.d.ts';
@@ -11,7 +11,7 @@ import type { FileTreeItem } from './FileTreeItem.d.ts';
  * @public
  * @unofficial
  */
-export interface FolderTreeItem extends AbstractFileTreeItem<TFile>, TreeCollapsibleItem {
+export interface FolderTreeItem extends AbstractFileTreeItem<TFolder>, TreeCollapsibleItem {
   /**
    * Spacer element used for indentation in the tree.
    */
