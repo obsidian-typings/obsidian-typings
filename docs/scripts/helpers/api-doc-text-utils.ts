@@ -160,14 +160,32 @@ const OG_DESCRIPTION_MAX_LENGTH = 160;
 Strip markdown formatting to plain text for use in meta descriptions
 */
 export function stripMarkdown(text: string): string {
-  return text
-    .replaceAll(/\{@link\s+(?:[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\}/g, (...arguments_) => {
+  const plainText = text
+    // A bare `{@link Target}` reads as its target, as it does on the rendered page. Replacing it with nothing
+    // Left "via , waits" in every link preview of a description that links a symbol.
+    .replaceAll(/\{@link(?:code|plain)?\s+(?<target>[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\s*\}/g, (...arguments_) => {
       const groups = arguments_.at(-1) as Record<string, string | undefined>;
-      return groups['display'] ?? '';
+      return groups['display'] ?? groups['target'] ?? '';
     })
     .replaceAll(/\[(?<text>[^\]]+)\]\([^)]+\)/g, '$<text>')
     .replaceAll(/[`*_~]/g, '')
     .replaceAll(/\s+/g, ' ')
-    .trim()
-    .slice(0, OG_DESCRIPTION_MAX_LENGTH);
+    .trim();
+
+  return truncateAtWord(plainText, OG_DESCRIPTION_MAX_LENGTH);
+}
+
+/**
+Cut text to at most `maxLength` characters at a word boundary, ending with an ellipsis when anything was cut
+*/
+function truncateAtWord(text: string, maxLength: number): string {
+  if (text.length <= maxLength) {
+    return text;
+  }
+
+  const ELLIPSIS = '…';
+  const cut = text.slice(0, maxLength - ELLIPSIS.length);
+  const lastSpaceIndex = cut.lastIndexOf(' ');
+  const wordCut = lastSpaceIndex > 0 ? cut.slice(0, lastSpaceIndex) : cut;
+  return `${wordCut.replace(/[\s,;:.—-]+$/, '')}${ELLIPSIS}`;
 }
