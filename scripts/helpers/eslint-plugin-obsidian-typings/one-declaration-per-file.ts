@@ -17,7 +17,8 @@ function getDeclarationName(node: TSESTree.Node): null | string {
     case AST_NODE_TYPES.TSTypeAliasDeclaration: {
       return (node as TSESTree.TSInterfaceDeclaration).id.name;
     }
-    case AST_NODE_TYPES.FunctionDeclaration: {
+    case AST_NODE_TYPES.FunctionDeclaration:
+    case AST_NODE_TYPES.TSDeclareFunction: {
       return node.id?.name ?? null;
     }
     case AST_NODE_TYPES.TSModuleDeclaration: {
@@ -135,10 +136,18 @@ export const oneDeclarationPerFile = {
         }
       }
 
-      if (exportNodes.length > 1) {
+      // Group exports by declared name — the overload signatures of one function are one export.
+      const exportNames = new Set<string>();
+      for (const node of exportNodes) {
+        const declaration = node.type === AST_NODE_TYPES.ExportNamedDeclaration ? node.declaration : null;
+        const name = declaration ? getDeclarationName(declaration) : null;
+        exportNames.add(name ?? `__anonymous_${String(exportNames.size)}`);
+      }
+
+      if (exportNames.size > 1) {
         for (const node of exportNodes) {
           context.report({
-            data: { count: String(exportNodes.length) },
+            data: { count: String(exportNames.size) },
             messageId: 'tooManyExports',
             node
           });
