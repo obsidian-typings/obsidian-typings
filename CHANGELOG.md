@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 1.13.0
+
+**Branch:** [`release/obsidian-public/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.4)
+
+**Commits:** [`obsidian-public-1.14.4-v1.12.0...obsidian-public-1.14.4-v1.13.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-public-1.14.4-v1.12.0...obsidian-public-1.14.4-v1.13.0)
+
+### Breaking changes
+
+- fix(read-view-renderer): add header, footer, sizerEl and the section API ([`c3fa457`](https://github.com/obsidian-typings/obsidian-typings/commit/c3fa457952257689c113582da8a3f4117be63ac1))
+- fix(file-explorer): type getSortedFolderItems as returning folder rows too ([`9b2f30a`](https://github.com/obsidian-typings/obsidian-typings/commit/9b2f30a9c95e37b41241ddef47be37cf81362970))
+- fix(file-explorer): type a folder row's file as TFolder ([`0b18da0`](https://github.com/obsidian-typings/obsidian-typings/commit/0b18da0f4107bbd18ab0d1a75e02f6f4562ca7e7))
+
+### Other changes
+
+- feat(implementations): let evaluateBaseHeadless take a .base file or its vault path ([`1f69286`](https://github.com/obsidian-typings/obsidian-typings/commit/1f6928653f7743fb3aa3eab1638393b92b2da3ff))
+- fix(tree): type handleItemSelection as returning boolean, and declare the missing selection members ([`9c84175`](https://github.com/obsidian-typings/obsidian-typings/commit/9c84175b0963febab7866c541923d0d9f846b390))
+
 ## 1.12.0
 
 **Branch:** [`release/obsidian-public/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.4)
