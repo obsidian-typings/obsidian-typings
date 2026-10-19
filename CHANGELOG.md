@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 1.11.0
+
+**Branch:** [`release/obsidian-catalyst/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.14.4)
+
+**Commits:** [`obsidian-catalyst-1.14.4-v1.10.0...obsidian-catalyst-1.14.4-v1.11.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-catalyst-1.14.4-v1.10.0...obsidian-catalyst-1.14.4-v1.11.0)
+
+### Breaking changes
+
+- fix(read-view-renderer): add header, footer, sizerEl and the section API ([`b119ad7`](https://github.com/obsidian-typings/obsidian-typings/commit/b119ad7d8df7fc74ca04db9ad2a89996a9a82038))
+- fix(file-explorer): type getSortedFolderItems as returning folder rows too ([`6db4ad7`](https://github.com/obsidian-typings/obsidian-typings/commit/6db4ad7590b5adebbb50c77b6cfdcfa8d331d21f))
+- fix(file-explorer): type a folder row's file as TFolder ([`4f907e8`](https://github.com/obsidian-typings/obsidian-typings/commit/4f907e8aef745e2afbbb5ed95b81cb41b0315876))
+
+### Other changes
+
+- feat(implementations): let evaluateBaseHeadless take a .base file or its vault path ([`b85bb8d`](https://github.com/obsidian-typings/obsidian-typings/commit/b85bb8da3ce5a977aa776a8d0d18f9e9a7c814c5))
+- fix(tree): type handleItemSelection as returning boolean, and declare the missing selection members ([`ca8ff69`](https://github.com/obsidian-typings/obsidian-typings/commit/ca8ff69841380acf89709836ed0c27af4a7cee47))
+
 ## 1.10.0
 
 **Branch:** [`release/obsidian-catalyst/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.14.4)
