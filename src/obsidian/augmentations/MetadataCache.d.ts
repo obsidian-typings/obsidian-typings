@@ -2,6 +2,7 @@ import type { getMetadataCacheConstructor } from '../implementations/constructor
 import type { CustomArrayDict } from '../internals/collections/CustomArrayDict.d.ts';
 import type { ItemQueue } from '../internals/collections/ItemQueue.d.ts';
 import type { FileCacheEntry } from '../internals/FileCacheEntry.d.ts';
+import type { LinkChangeUpdate } from '../internals/link-update/LinkChangeUpdate.d.ts';
 import type { LinkUpdaters } from '../internals/link-update/LinkUpdaters.d.ts';
 import type { LinkSuggestion } from '../internals/LinkSuggestion.d.ts';
 import type { MetadataCacheFileCacheRecord } from '../internals/metadata-cache-records/MetadataCacheFileCacheRecord.d.ts';
@@ -669,11 +670,11 @@ declare module 'obsidian' {
     /**
      * Applies queued internal-link updates to the affected files.
      *
-     * @param updates - Map of file path to the link updates to apply to that file.
+     * @param updates - Dictionary of file path to the link updates to apply to that file.
      * @returns A promise that resolves when all updates have been applied.
      * @unofficial
      */
-    updateInternalLinks(updates: Map<string, unknown>): Promise<void>;
+    updateInternalLinks(updates: CustomArrayDict<LinkChangeUpdate>): Promise<void>;
 
     /**
      * Re-queue for link resolution every file that links to any of the changed names.
