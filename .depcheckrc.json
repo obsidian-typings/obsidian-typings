@@ -9,7 +9,7 @@
     "ignored in this file.",
     "",
     "@commitlint/cli - .husky/commit-msg runs it as the `commitlint` binary.",
-    "@commitlint/config-conventional - extended by name (a string in the commitlint config's `extends`), never imported - either directly, or through obsidian-dev-utils' script-utils/commitlint-config, which extends it without declaring it.",
+    "@commitlint/config-conventional - extended by name (a string in the commitlint config's `extends`), never imported (scripts/commitlint-config.ts).",
     "@types/markdown-it - nothing here imports markdown-it, but markdownlint-rule-relative-links is built on that parser (it refuses to run without a markdownItFactory) and its src/index.d.ts imports it untyped. tsconfig.json sets skipLibCheck false, so that .d.ts is type-checked and TS7016s without these types.",
     "cspell - run as a CLI by scripts/spellcheck.ts, configured by cspell.json.",
     "czg - run as a CLI by scripts/commit.ts.",

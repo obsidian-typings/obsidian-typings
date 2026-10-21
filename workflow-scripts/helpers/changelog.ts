@@ -23,7 +23,7 @@
  *
  * ## The reads are SPLIT, and that is the one subtlety
  *
- * `obsidian-dev-utils` generates its changelog this way and found the hole: a `BREAKING CHANGE:` footer
+ * `@mnaoumov/typescript-dev-toolkit`'s `version` tool generates its changelog this way and found the hole: a `BREAKING CHANGE:` footer
  * written on a branch commit never reaches a first-parent walk at all, because only the merge is on that
  * chain. So {@link getChangelogEntries} reads the first-parent commits and
  * {@link getBreakingChanges} reads **every** commit in the range. Today the two agree -- of the 7

@@ -601,7 +601,7 @@ export async function hasTrustedPublisher(packageName: string): Promise<boolean 
   }
 
   const isClientError = response.status >= CLIENT_ERROR_MIN_STATUS && response.status <= CLIENT_ERROR_MAX_STATUS;
-  // eslint-disable-next-line unicorn/prefer-logical-operator-over-ternary -- `false` (a definite refusal) and `null` (no answer) are two different results; `!isClientError && null` would hide that.
+  // eslint-disable-next-line typescript-dev-toolkit/prefer-logical-operator-over-ternary -- `false` (a definite refusal) and `null` (no answer) are two different results; `!isClientError && null` would hide that.
   return isClientError ? false : null;
 }
 

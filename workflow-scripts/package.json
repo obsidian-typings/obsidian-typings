@@ -2,7 +2,7 @@
   "name": "scripts",
   "private": true,
   "devDependencies": {
-    "@mnaoumov/typescript-dev-toolkit": "^1.0.0",
+    "@mnaoumov/typescript-dev-toolkit": "^3.7.3",
     "@mnaoumov/typescript-lib": "^1.0.0",
     "@tsconfig/strictest": "^2.0.8",
     "@types/semver": "^7.8.0",
