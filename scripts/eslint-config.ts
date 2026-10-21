@@ -46,7 +46,7 @@ const minimumNodeVersion = '>=16.13.2';
  * switched off: 15,217 findings in `src/`, led by `@typescript-eslint/method-signature-style` (4,890: this repo mandates
  * method shorthand), `@typescript-eslint/unified-signatures` (2,526: the overloads are the real API's),
  * `unicorn/filename-case` (1,705: one interface per file, named after it), `unicorn/name-replacements` (1,251: Obsidian's
- * own member names) and `obsidian-dev-utils/readonly-params-options-result-members` (643: the objects are mutable).
+ * own member names) and `typescript-dev-toolkit/readonly-params-options-result-members` (643: the objects are mutable).
  * Building `src/` on the export would mean turning most of it back off there, which is a hand copy with extra steps.
  * `src/` is linted without type information, so no type-aware rule may be turned on in that layer.
  */
