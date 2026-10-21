@@ -1,5 +1,4 @@
 import type { getFileManagerConstructor } from '../implementations/constructors/augmentations/getFileManagerConstructor.d.ts';
-import type { LinkChangeUpdate } from '../internals/link-update/LinkChangeUpdate.d.ts';
 import type { LinkUpdate } from '../internals/link-update/LinkUpdate.d.ts';
 import type { LinkUpdatesHandler } from '../internals/link-update/LinkUpdatesHandler.d.ts';
 import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
@@ -413,14 +412,5 @@ declare module 'obsidian' {
      * @unofficial
      */
     updateAllLinks(links: LinkUpdate[]): Promise<void>;
-
-    /**
-     * Update internal links.
-     *
-     * @param data - Map of path to link change updates.
-     * @returns A promise that resolves when the internal links are updated.
-     * @unofficial
-     */
-    updateInternalLinks(data: Map<string, LinkChangeUpdate>): Promise<void>;
   }
 }
