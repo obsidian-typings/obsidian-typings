@@ -1,4 +1,4 @@
-import type { KeymapInfo } from 'obsidian';
+import type { Hotkey } from 'obsidian';
 
 /**
  * Record mapping command IDs to their default hotkey bindings.
@@ -6,4 +6,4 @@ import type { KeymapInfo } from 'obsidian';
  * @public
  * @unofficial
  */
-export interface HotkeyManagerDefaultKeysRecord extends Record<string, KeymapInfo[]> {}
+export interface HotkeyManagerDefaultKeysRecord extends Record<string, Hotkey[]> {}
