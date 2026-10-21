@@ -1,6 +1,7 @@
 import type {
   App,
   Debouncer,
+  Hotkey,
   KeymapInfo
 } from 'obsidian';
 
@@ -26,7 +27,9 @@ export interface HotkeyManager {
   baked: boolean;
 
   /**
-   * Assigned hotkeys.
+   * Assigned hotkeys, compiled by {@link HotkeyManager.bake} from the custom hotkeys and then the default hotkeys of
+   * every command without custom ones. Unlike the {@link obsidian#Hotkey} entries they are compiled from, their
+   * `modifiers` is a single string.
    */
   bakedHotkeys: KeymapInfo[];
 
@@ -37,8 +40,11 @@ export interface HotkeyManager {
 
   /**
    * Custom (non-Obsidian default) hotkeys, one to many mapping of command ID to assigned hotkey.
+   *
+   * A getter returning a shallow copy of the stored record, so a key written on it is not persisted. Use
+   * {@link HotkeyManager.setHotkeys} and {@link HotkeyManager.removeHotkeys} instead.
    */
-  customKeys: HotkeyManagerCustomKeysRecord;
+  readonly customKeys: HotkeyManagerCustomKeysRecord;
 
   /**
    * Default hotkeys, one to many mapping of command ID to assigned hotkey.
@@ -56,7 +62,7 @@ export interface HotkeyManager {
    * @param command - {@link obsidian#Command} ID to add hotkey to.
    * @param keys - Hotkeys to add.
    */
-  addDefaultHotkeys(command: string, keys: KeymapInfo[]): void;
+  addDefaultHotkeys(command: string, keys: Hotkey[]): void;
 
   /**
    * Bake hotkeys (create mapping of pressed key to command ID).
@@ -78,17 +84,17 @@ export interface HotkeyManager {
    * Get hotkey associated with command ID.
    *
    * @param command - {@link obsidian#Command} ID to get hotkey for.
-   * @returns The default hotkeys for the command.
+   * @returns The default hotkeys for the command, or `undefined` if it has none.
    */
-  getDefaultHotkeys(command: string): KeymapInfo[];
+  getDefaultHotkeys(command: string): Hotkey[] | undefined;
 
   /**
    * Get hotkey associated with command ID.
    *
    * @param command - {@link obsidian#Command} ID to get hotkey for.
-   * @returns The hotkeys for the command.
+   * @returns The custom hotkeys for the command, or `undefined` if it has none.
    */
-  getHotkeys(command: string): KeymapInfo[];
+  getHotkeys(command: string): Hotkey[] | undefined;
 
   /**
    * Load hotkeys from storage.
@@ -149,5 +155,5 @@ export interface HotkeyManager {
    * @param command - {@link obsidian#Command} ID to add hotkey to.
    * @param keys - Hotkeys to add.
    */
-  setHotkeys(command: string, keys: KeymapInfo[]): void;
+  setHotkeys(command: string, keys: Hotkey[]): void;
 }
