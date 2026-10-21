@@ -14,7 +14,7 @@
   "pins": {
     "typescript": {
       "section": "devDependencies",
-      "why": "TypeScript 7 (tsgo) breaks this toolchain: @typescript-eslint's parser crashes on the native API, so type-aware ESLint cannot run on 7. @typescript-eslint peer-requires the range below, so 6.x is the last usable major. Mirrors the repo-root pin - this sub-package resolves its own copy, and without a pin here a sweep bumps it to 7 on its own (it did: the caret range reached ^7.0.2 before this file existed). Hold until obsidian-dev-utils migrates.",
+      "why": "TypeScript 7 (tsgo) breaks this toolchain: @typescript-eslint's parser crashes on the native API, so type-aware ESLint cannot run on 7. @typescript-eslint peer-requires the range below, so 6.x is the last usable major. Mirrors the repo-root pin - this sub-package resolves its own copy, and without a pin here a sweep bumps it to 7 on its own (it did: the caret range reached ^7.0.2 before this file existed). Hold until typescript-eslint's peer range admits 7.x.",
       "check": "node -e \"process.stdout.write(require('typescript-eslint/package.json').peerDependencies.typescript)\"",
       "expect": ">=4.8.4 <6.1.0"
     }

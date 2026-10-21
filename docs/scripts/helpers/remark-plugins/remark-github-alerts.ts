@@ -16,7 +16,7 @@ import {
  *
  * Starlight has four variants for GitHub's five types, so `IMPORTANT` and `WARNING` share `caution`, and `CAUTION` --
  * GitHub's most severe -- takes `danger`. This is the mapping `starlight-github-alerts` uses, and the one
- * `obsidian-dev-utils`' own copy of this conversion uses.
+ * `@mnaoumov/typescript-dev-toolkit`'s own copy of this conversion uses.
  */
 export const GITHUB_ALERT_ASIDE_VARIANTS: ReadonlyMap<string, string> = new Map([
   ['caution', 'danger'],
@@ -48,8 +48,8 @@ interface Alert {
  * `:::note` parses to, and Starlight's own `remarkAsides` -- which Starlight appends after the site's plugins --
  * renders it. So this has to run before that plugin, and it does by being in `markdown.remarkPlugins` at all.
  *
- * `obsidian-dev-utils` carries the same conversion as a Sätteri plugin; that API is not remark's, and this repository
- * deliberately takes no dependency on that package, so this is a port rather than an import.
+ * `@mnaoumov/typescript-dev-toolkit` carries the same conversion as a Sätteri plugin (`docs-site/satteri-github-alerts.ts`);
+ * that API is not remark's, so this is a port rather than an import.
  *
  * @returns The transformer.
  */
