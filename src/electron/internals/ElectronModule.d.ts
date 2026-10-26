@@ -1,7 +1,7 @@
 import type { ElectronClipboard } from './ElectronClipboard.d.ts';
 import type { ElectronContextBridge } from './ElectronContextBridge.d.ts';
 import type { ElectronCrashReporter } from './ElectronCrashReporter.d.ts';
-import type { ElectronIpcRenderer } from './ElectronIpcRenderer.d.ts';
+import type { ElectronIpcRenderer } from './ElectronIpcRenderer/ElectronIpcRenderer.d.ts';
 import type { ElectronNativeImageModule } from './ElectronNativeImageModule.d.ts';
 import type { ElectronRemote } from './ElectronRemote.d.ts';
 import type { ElectronShell } from './ElectronShell.d.ts';
