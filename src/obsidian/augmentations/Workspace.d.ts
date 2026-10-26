@@ -8,6 +8,7 @@ import type { EditorSuggestEx } from '../internals/EditorSuggestEx.d.ts';
 import type { EnsureSideLeafOptions } from '../internals/EnsureSideLeafOptions.d.ts';
 import type { GetRecentFilesOptions } from '../internals/GetRecentFilesOptions.d.ts';
 import type { HoverLinkEvent } from '../internals/HoverLinkEvent.d.ts';
+import type { BookmarkItem } from '../internals/internal-plugins/bookmarks/bookmark-items/BookmarkItem.d.ts';
 import type { CanvasView } from '../internals/internal-plugins/canvas/CanvasView.d.ts';
 import type { SearchView } from '../internals/internal-plugins/global-search/SearchView.d.ts';
 import type { LeafEntry } from '../internals/LeafEntry.d.ts';
@@ -804,6 +805,23 @@ declare module 'obsidian' {
     on(name: 'active-leaf-change', callback: (leaf: null | WorkspaceLeaf) => unknown, ctx?: unknown): EventRef;
 
     /**
+     * Triggers when the context menu of a bookmark is opened in the Bookmarks view.
+     *
+     * @param name - 'bookmarks:bookmarks-menu'.
+     * @param callback - Callback function.
+     * @param ctx - Context.
+     * @returns Event reference.
+     * @remark `items` holds every selected bookmark when the menu is opened on a multiple selection,
+     * otherwise the one bookmark the menu was opened on.
+     * @unofficial
+     */
+    on(
+      name: 'bookmarks:bookmarks-menu',
+      callback: (menu: Menu, items: BookmarkItem[]) => unknown,
+      ctx?: unknown
+    ): EventRef;
+
+    /**
      * Triggers when the browser history is updated.
      *
      * @param name - 'browser:update-history'.
@@ -1077,6 +1095,18 @@ declare module 'obsidian' {
      * @unofficial
      */
     on(name: 'leaf-menu', callback: (menu: Menu, leaf: WorkspaceLeaf) => unknown, ctx?: unknown): EventRef;
+
+    /**
+     * Triggers when the properties menu of a note's metadata editor is opened.
+     *
+     * @param name - 'markdown-properties-menu'.
+     * @param callback - Callback function.
+     * @param ctx - Context.
+     * @returns Event reference.
+     * @remark `file` is the file of the view that owns the metadata editor.
+     * @unofficial
+     */
+    on(name: 'markdown-properties-menu', callback: (menu: Menu, file: null | TFile) => unknown, ctx?: unknown): EventRef;
 
     /**
      * Triggers when the markdown scroll event is fired.
