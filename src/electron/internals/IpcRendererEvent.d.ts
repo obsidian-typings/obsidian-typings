@@ -1,5 +1,5 @@
 import type { ElectronEvent } from './ElectronEvent.d.ts';
-import type { ElectronIpcRenderer } from './ElectronIpcRenderer.d.ts';
+import type { ElectronIpcRenderer } from './ElectronIpcRenderer/ElectronIpcRenderer.d.ts';
 
 /**
  * Event object passed to IPC renderer event listeners.

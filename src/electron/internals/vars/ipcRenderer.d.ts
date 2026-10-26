@@ -1,4 +1,4 @@
-import type { ElectronIpcRenderer } from '../ElectronIpcRenderer.d.ts';
+import type { ElectronIpcRenderer } from '../ElectronIpcRenderer/ElectronIpcRenderer.d.ts';
 
 /**
  * Electron IPC renderer instance for the current renderer process.
