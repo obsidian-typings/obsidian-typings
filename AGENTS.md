@@ -325,6 +325,8 @@ Both maintained 1.14.4 streams model `SearchView.queue`, `matchingCase` and `sea
 
 The queue's synchronous initial seed and later live additions are different boundaries: candidate narrowing must preserve subsequent additions so core can remove stale results after edits. Reuse `ItemQueue`, `ResultDom`, `ObsidianSearchQuery` and the compiled matcher tree; the exported fuzzy `prepareQuery` is unrelated. Search uses `gm` / `gmi`, without Unicode mode, rather than lowercasing note text. The full candidate-hook, parser and case constraints from the newer public 1.14.5 / catalyst 1.15.0 investigation remain in the `Indexed Search` repository's `AGENTS.md` under `Core Search source map`; the maintained-version verification is in the report here. Carry the types forward and re-verify when newer release branches are created.
 
+The [broader 1.14.4 crawler triage](reports/crawler-triage-1.14.4.md) records the remaining named-type findings against both maintained streams. Its member matrix distinguishes verified gaps, inherited modal members, empty-view attribution and conservative adapter field review; member existence is not a complete declaration signature.
+
 ## Protocol Handler Runtime Model
 
 Both maintained 1.14.4 streams model `WorkspaceProtocolHandler` as a direct dispatcher over its `handlers` map. Its constructor clears the legacy `trusted-uri-actions` storage; it has no trust map, trust prompt, dispatch queue or source-name registry. [The verification report](reports/protocol-handler-1.14.4.md) records the tagged sources, isolated 1.14.4 and 1.15.0 probes, and focused crawler comparison. Do not reintroduce the removed trust members when carrying the interface forward without verifying the target application source.
