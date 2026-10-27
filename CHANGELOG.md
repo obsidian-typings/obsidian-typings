@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 1.15.0
+
+**Branch:** [`release/obsidian-public/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.4)
+
+**Commits:** [`obsidian-public-1.14.4-v1.14.0...obsidian-public-1.14.4-v1.15.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-public-1.14.4-v1.14.0...obsidian-public-1.14.4-v1.15.0)
+
+### Breaking changes
+
+- fix!: remove obsolete protocol action trust declarations ([`39d56a2`](https://github.com/obsidian-typings/obsidian-typings/commit/39d56a2578d23ccda7a3e7942c5beb68f83f5952))
+
+### Other changes
+
+- feat: type core note composer merge flow ([`bce6918`](https://github.com/obsidian-typings/obsidian-typings/commit/bce6918099961e0bbb92e5ad5b692a582de872df))
+- chore: enforce keyword binding names in declarations ([`1926207`](https://github.com/obsidian-typings/obsidian-typings/commit/1926207bb4c1c7ac3225af66e1ec3beb10a267d6))
+
 ## 1.14.0
 
 **Branch:** [`release/obsidian-public/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.4)
