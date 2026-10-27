@@ -21,7 +21,7 @@ export interface ElectronIpcMain extends NodeJS.EventEmitter {
    * @param channel - The IPC channel name.
    * @param listener - Callback invoked to handle the message.
    */
-  handle(channel: string, listener: (event: ElectronIpcMainInvokeEvent, ...args: unknown[]) => unknown): void;
+  handle(channel: string, listener: ($event: ElectronIpcMainInvokeEvent, ...args: unknown[]) => unknown): void;
 
   /**
    * Handles a single `invoke`able IPC message, then removes the listener. See `ipcMain.handle(channel, listener)`.
@@ -29,7 +29,7 @@ export interface ElectronIpcMain extends NodeJS.EventEmitter {
    * @param channel - The IPC channel name.
    * @param listener - Callback invoked to handle the message.
    */
-  handleOnce(channel: string, listener: (event: ElectronIpcMainInvokeEvent, ...args: unknown[]) => unknown): void;
+  handleOnce(channel: string, listener: ($event: ElectronIpcMainInvokeEvent, ...args: unknown[]) => unknown): void;
 
   /**
    * Listens to `channel`; when a new message arrives `listener` is called with `listener(event, args...)`.
@@ -38,7 +38,7 @@ export interface ElectronIpcMain extends NodeJS.EventEmitter {
    * @param listener - Callback invoked when a message is received.
    * @returns This `IpcMain` instance.
    */
-  on(channel: string, listener: (event: ElectronIpcMainEvent, ...args: unknown[]) => void): this;
+  on(channel: string, listener: ($event: ElectronIpcMainEvent, ...args: unknown[]) => void): this;
 
   /**
    * Adds a one-time `listener` function for the event, invoked only the next time a message is sent to
@@ -48,7 +48,7 @@ export interface ElectronIpcMain extends NodeJS.EventEmitter {
    * @param listener - Callback invoked when a message is received.
    * @returns This `IpcMain` instance.
    */
-  once(channel: string, listener: (event: ElectronIpcMainEvent, ...args: unknown[]) => void): this;
+  once(channel: string, listener: ($event: ElectronIpcMainEvent, ...args: unknown[]) => void): this;
 
   /**
    * Removes listeners of the specified `channel`.

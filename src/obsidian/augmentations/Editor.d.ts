@@ -173,7 +173,7 @@ declare module 'obsidian' {
     /**
      * Get the cursor position.
      *
-     * @param string - The type of cursor to get.
+     * @param $string - The type of cursor to get.
      * @returns The cursor position.
      * @example
      * ```ts
@@ -183,7 +183,7 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link getCursor} instead.
      * @since 0.11.11
      */
-    getCursor__?(string?: 'anchor' | 'from' | 'head' | 'to'): EditorPosition;
+    getCursor__?($string?: 'anchor' | 'from' | 'head' | 'to'): EditorPosition;
 
     /**
      * Get the editor instance.

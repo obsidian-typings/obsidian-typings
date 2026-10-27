@@ -11,6 +11,6 @@ declare module '@codemirror/view' {
    * @deprecated - Added only for typing purposes. Use {@link DOMEventHandlers} instead.
    */
   type DOMEventHandlers__<This> = {
-    [event in keyof DOMEventMap]?: (this: This, event: DOMEventMap[event], view: EditorView) => boolean | void;
+    [$event in keyof DOMEventMap]?: (this: This, $event: DOMEventMap[$event], view: EditorView) => boolean | void;
   };
 }

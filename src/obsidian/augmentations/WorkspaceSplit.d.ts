@@ -79,18 +79,18 @@ declare module 'obsidian' {
      * Handles the start of a resize initiated by a child.
      *
      * @param child - The child that initiated the resize.
-     * @param event - The pointer event.
+     * @param $event - The pointer event.
      * @unofficial
      */
-    onChildResizeStart(child: WorkspaceItem, event: PointerEvent): void;
+    onChildResizeStart(child: WorkspaceItem, $event: PointerEvent): void;
 
     /**
      * Handles a proximity-based resize pointer event.
      *
-     * @param event - The pointer event.
+     * @param $event - The pointer event.
      * @unofficial
      */
-    onProximityResize(event: PointerEvent): void;
+    onProximityResize($event: PointerEvent): void;
 
     /**
      * Resizes the given items by a pixel difference.

@@ -49,7 +49,7 @@ export interface ElectronIpcRenderer extends NodeJS.EventEmitter {
    * @param listener - Callback invoked when a message is received.
    * @returns This `IpcRenderer` instance.
    */
-  on(channel: string, listener: (event: IpcRendererEvent, ...args: unknown[]) => void): this;
+  on(channel: string, listener: ($event: IpcRendererEvent, ...args: unknown[]) => void): this;
 
   /**
    * Adds a one-time `listener` function for the event, invoked only the next time a message is sent
@@ -59,7 +59,7 @@ export interface ElectronIpcRenderer extends NodeJS.EventEmitter {
    * @param listener - Callback invoked when a message is received.
    * @returns This `IpcRenderer` instance.
    */
-  once(channel: string, listener: (event: IpcRendererEvent, ...args: unknown[]) => void): this;
+  once(channel: string, listener: ($event: IpcRendererEvent, ...args: unknown[]) => void): this;
 
   /**
    * Sends a message to the main process, optionally transferring ownership of zero or more

@@ -91,9 +91,9 @@ export interface MetadataEditorProperty extends Component {
   /**
    * Reveal the property menu on click event.
    *
-   * @param event - The mouse event.
+   * @param $event - The mouse event.
    */
-  handleItemClick(event: MouseEvent): void;
+  handleItemClick($event: MouseEvent): void;
 
   /**
    * Focus on property on blur event.
@@ -139,7 +139,7 @@ export interface MetadataEditorProperty extends Component {
   /**
    * Reveal property selection menu at mouse event.
    *
-   * @param event - The mouse event.
+   * @param $event - The mouse event.
    */
-  showPropertyMenu(event: MouseEvent): void;
+  showPropertyMenu($event: MouseEvent): void;
 }

@@ -12,7 +12,7 @@ import { getPackageManagerRunCommand } from '@mnaoumov/typescript-dev-toolkit/pa
 import process from 'node:process';
 
 interface NanoStagedContext {
-  filenames: string[];
+  readonly filenames: string[];
 }
 
 type NanoStagedHandler = (context: NanoStagedContext) => string[];

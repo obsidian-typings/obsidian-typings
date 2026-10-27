@@ -72,16 +72,16 @@ export interface CodeMirrorAdapterEx {
   /**
    * Call preventDefault on the given event.
    *
-   * @param event - The event to prevent default on.
+   * @param $event - The event to prevent default on.
    */
-  e_preventDefault(event: Event): void;
+  e_preventDefault($event: Event): void;
 
   /**
    * Stop propagation and prevent default on the given event.
    *
-   * @param event - The event to stop.
+   * @param $event - The event to stop.
    */
-  e_stop(event: Event): void;
+  e_stop($event: Event): void;
 
   /**
    * Find the enclosing HTML/XML tag at the given position.
@@ -111,10 +111,10 @@ export interface CodeMirrorAdapterEx {
   /**
    * Get the key name string from a keyboard event.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    * @returns The key name string.
    */
-  keyName(event: KeyboardEvent): string;
+  keyName($event: KeyboardEvent): string;
 
   /**
    * Look up a key binding and invoke the callback with the associated action.
@@ -132,18 +132,18 @@ export interface CodeMirrorAdapterEx {
   /**
    * Remove an event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event listener to remove.
    */
-  off(event: string, listener: EventListenerOrEventListenerObject): void;
+  off($event: string, listener: EventListenerOrEventListenerObject): void;
 
   /**
    * Add an event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event listener to add.
    */
-  on(event: string, listener: EventListenerOrEventListenerObject): void;
+  on($event: string, listener: EventListenerOrEventListenerObject): void;
 
   /**
    * Remove a CSS class from an HTML element.

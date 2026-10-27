@@ -46,11 +46,11 @@ export interface ElectronWebFrameMain {
   /**
    * Registers a listener for the `dom-ready` event, emitted when the document is loaded.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the document is loaded.
    * @returns This frame instance.
    */
-  addListener(event: 'dom-ready', listener: () => void): this;
+  addListener($event: 'dom-ready', listener: () => void): this;
 
   /**
    * Evaluates `code` in the page.
@@ -64,20 +64,20 @@ export interface ElectronWebFrameMain {
   /**
    * Registers a listener for the `dom-ready` event, emitted when the document is loaded.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the document is loaded.
    * @returns This frame instance.
    */
-  on(event: 'dom-ready', listener: () => void): this;
+  on($event: 'dom-ready', listener: () => void): this;
 
   /**
    * Registers a one-time listener for the `dom-ready` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the document is loaded.
    * @returns This frame instance.
    */
-  once(event: 'dom-ready', listener: () => void): this;
+  once($event: 'dom-ready', listener: () => void): this;
 
   /**
    * Sends a message to the renderer process, optionally transferring ownership of `MessagePortMain` objects.
@@ -98,11 +98,11 @@ export interface ElectronWebFrameMain {
   /**
    * Removes a previously registered `dom-ready` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This frame instance.
    */
-  removeListener(event: 'dom-ready', listener: () => void): this;
+  removeListener($event: 'dom-ready', listener: () => void): this;
 
   /**
    * Sends an asynchronous message to the renderer process via `channel`, along with arguments.

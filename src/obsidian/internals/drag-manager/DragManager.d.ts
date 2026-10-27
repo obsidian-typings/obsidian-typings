@@ -91,44 +91,44 @@ export interface DragManager {
   /**
    * Start a drag operation for a single file.
    *
-   * @param event - The originating drag event.
+   * @param $event - The originating drag event.
    * @param file - File to drag.
    * @param source - Source component initiating the drag.
    * @returns The created draggable item.
    */
-  dragFile(event: DragEvent, file: TFile, source?: unknown): Draggable;
+  dragFile($event: DragEvent, file: TFile, source?: unknown): Draggable;
 
   /**
    * Start a drag operation for multiple files.
    *
-   * @param event - The originating drag event.
+   * @param $event - The originating drag event.
    * @param files - Files to drag.
    * @param source - Source component initiating the drag.
    * @returns The created draggable item, or `null`.
    */
-  dragFiles(event: DragEvent, files: TAbstractFile[], source?: unknown): Draggable | null;
+  dragFiles($event: DragEvent, files: TAbstractFile[], source?: unknown): Draggable | null;
 
   /**
    * Start a drag operation for a folder.
    *
-   * @param event - The originating drag event.
+   * @param $event - The originating drag event.
    * @param folder - Folder to drag.
    * @param source - Source component initiating the drag.
    * @returns The created draggable item.
    */
-  dragFolder(event: DragEvent, folder: TFolder, source?: unknown): Draggable;
+  dragFolder($event: DragEvent, folder: TFolder, source?: unknown): Draggable;
 
   /**
    * Start a drag operation for a link.
    *
-   * @param event - The originating drag event.
+   * @param $event - The originating drag event.
    * @param linkText - Link text to drag.
    * @param sourcePath - Path of the source file for link resolution.
    * @param title - Display title for the drag ghost.
    * @param source - Source component initiating the drag.
    * @returns The created draggable item.
    */
-  dragLink(event: DragEvent, linkText: string, sourcePath: string, title?: string, source?: unknown): Draggable;
+  dragLink($event: DragEvent, linkText: string, sourcePath: string, title?: string, source?: unknown): Draggable;
 
   /**
    * Register an element as a drag source with a callback to produce a draggable.
@@ -136,7 +136,7 @@ export interface DragManager {
    * @param el - Element to register as drag source.
    * @param draggableGetter - Callback returning a draggable on drag start.
    */
-  handleDrag(el: HTMLElement, draggableGetter: (event: DragEvent) => Draggable | null): void;
+  handleDrag(el: HTMLElement, draggableGetter: ($event: DragEvent) => Draggable | null): void;
 
   /**
    * Register an element as a drop target with a handler callback.
@@ -147,7 +147,7 @@ export interface DragManager {
    */
   handleDrop(
     el: HTMLElement,
-    dropHandler: (event: DragEvent, draggable: Draggable, isOver: boolean) => DropResult | null,
+    dropHandler: ($event: DragEvent, draggable: Draggable, isOver: boolean) => DropResult | null,
     draggable?: boolean
   ): void;
 
@@ -164,16 +164,16 @@ export interface DragManager {
   /**
    * Handle the drag-leave event on a drop target.
    *
-   * @param event - The drag-leave event.
+   * @param $event - The drag-leave event.
    */
-  onDragLeave(event: DragEvent): void;
+  onDragLeave($event: DragEvent): void;
 
   /**
    * Handle the drag-over event to update hover state.
    *
-   * @param event - The drag-over event.
+   * @param $event - The drag-over event.
    */
-  onDragOver(event: DragEvent): void;
+  onDragOver($event: DragEvent): void;
 
   /**
    * Handle the first drag-over event when entering a drop zone.
@@ -183,24 +183,24 @@ export interface DragManager {
   /**
    * Handle the start of a drag operation with a draggable item.
    *
-   * @param event - The drag event.
+   * @param $event - The drag event.
    * @param draggable - The draggable item being dragged.
    */
-  onDragStart(event: DragEvent, draggable: Draggable): void;
+  onDragStart($event: DragEvent, draggable: Draggable): void;
 
   /**
    * Handle a global drag start event.
    *
-   * @param event - The drag event.
+   * @param $event - The drag event.
    */
-  onDragStartGlobal(event: DragEvent): void;
+  onDragStartGlobal($event: DragEvent): void;
 
   /**
    * Handle touch end event for mobile drag operations.
    *
-   * @param event - The touch event.
+   * @param $event - The touch event.
    */
-  onTouchEnd(event: TouchEvent): void;
+  onTouchEnd($event: TouchEvent): void;
 
   /**
    * Remove the drop zone overlay element from the DOM.

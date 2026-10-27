@@ -39,23 +39,23 @@ export declare class ElectronClientRequest {
   /**
    * Registers a listener for the given request event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ClientRequest` instance.
    */
-  addListener(event: 'abort', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'abort', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'close', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'close', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'error', listener: (error: Error) => void): this;
+  addListener($event: 'error', listener: (error: Error) => void): this;
   /** */
-  addListener(event: 'finish', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'finish', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'login', listener: (authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+  addListener($event: 'login', listener: (authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
   /** */
-  addListener(event: 'redirect', listener: (statusCode: number, method: string, redirectUrl: string, responseHeaders: Record<string, string[]>) => void): this;
+  addListener($event: 'redirect', listener: (statusCode: number, method: string, redirectUrl: string, responseHeaders: Record<string, string[]>) => void): this;
   /** */
-  addListener(event: 'response', listener: (response: ElectronIncomingMessage) => void): this;
+  addListener($event: 'response', listener: (response: ElectronIncomingMessage) => void): this;
 
   /**
    * Sends the last chunk of the request data. Subsequent write or end operations will not be allowed. The `finish`
@@ -91,44 +91,44 @@ export declare class ElectronClientRequest {
   /**
    * Registers a listener for the given request event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ClientRequest` instance.
    */
-  on(event: 'abort', listener: (...args: unknown[]) => void): this;
+  on($event: 'abort', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'close', listener: (...args: unknown[]) => void): this;
+  on($event: 'close', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'error', listener: (error: Error) => void): this;
+  on($event: 'error', listener: (error: Error) => void): this;
   /** */
-  on(event: 'finish', listener: (...args: unknown[]) => void): this;
+  on($event: 'finish', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'login', listener: (authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+  on($event: 'login', listener: (authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
   /** */
-  on(event: 'redirect', listener: (statusCode: number, method: string, redirectUrl: string, responseHeaders: Record<string, string[]>) => void): this;
+  on($event: 'redirect', listener: (statusCode: number, method: string, redirectUrl: string, responseHeaders: Record<string, string[]>) => void): this;
   /** */
-  on(event: 'response', listener: (response: ElectronIncomingMessage) => void): this;
+  on($event: 'response', listener: (response: ElectronIncomingMessage) => void): this;
 
   /**
    * Registers a one-time listener for the given request event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ClientRequest` instance.
    */
-  once(event: 'abort', listener: (...args: unknown[]) => void): this;
+  once($event: 'abort', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'close', listener: (...args: unknown[]) => void): this;
+  once($event: 'close', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'error', listener: (error: Error) => void): this;
+  once($event: 'error', listener: (error: Error) => void): this;
   /** */
-  once(event: 'finish', listener: (...args: unknown[]) => void): this;
+  once($event: 'finish', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'login', listener: (authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+  once($event: 'login', listener: (authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
   /** */
-  once(event: 'redirect', listener: (statusCode: number, method: string, redirectUrl: string, responseHeaders: Record<string, string[]>) => void): this;
+  once($event: 'redirect', listener: (statusCode: number, method: string, redirectUrl: string, responseHeaders: Record<string, string[]>) => void): this;
   /** */
-  once(event: 'response', listener: (response: ElectronIncomingMessage) => void): this;
+  once($event: 'response', listener: (response: ElectronIncomingMessage) => void): this;
 
   /**
    * Removes a previously set extra header name. This method can be called only before first write. Trying to call it
@@ -141,23 +141,23 @@ export declare class ElectronClientRequest {
   /**
    * Removes the given listener for the given request event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ClientRequest` instance.
    */
-  removeListener(event: 'abort', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'abort', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'close', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'close', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'error', listener: (error: Error) => void): this;
+  removeListener($event: 'error', listener: (error: Error) => void): this;
   /** */
-  removeListener(event: 'finish', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'finish', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'login', listener: (authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+  removeListener($event: 'login', listener: (authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
   /** */
-  removeListener(event: 'redirect', listener: (statusCode: number, method: string, redirectUrl: string, responseHeaders: Record<string, string[]>) => void): this;
+  removeListener($event: 'redirect', listener: (statusCode: number, method: string, redirectUrl: string, responseHeaders: Record<string, string[]>) => void): this;
   /** */
-  removeListener(event: 'response', listener: (response: ElectronIncomingMessage) => void): this;
+  removeListener($event: 'response', listener: (response: ElectronIncomingMessage) => void): this;
 
   /**
    * Adds an extra HTTP header. The header name will be issued as-is without lowercasing. It can be called only before

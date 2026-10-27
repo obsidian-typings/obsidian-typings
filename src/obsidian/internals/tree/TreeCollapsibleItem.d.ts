@@ -30,9 +30,9 @@ export interface TreeCollapsibleItem extends TreeItem {
   /**
    * Execute collapse functionality on mouse click.
    *
-   * @param event - The mouse click event.
+   * @param $event - The mouse click event.
    */
-  onCollapseClick(event: MouseEvent): void;
+  onCollapseClick($event: MouseEvent): void;
 
   /**
    * Set collapsed state of tree item.

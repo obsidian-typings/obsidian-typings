@@ -50,44 +50,44 @@ export interface SearchView extends View {
   /**
    * Handle the copy search results button click.
    *
-   * @param event - The mouse click event.
+   * @param $event - The mouse click event.
    */
-  onCopyResultsClick(event: MouseEvent): void;
+  onCopyResultsClick($event: MouseEvent): void;
 
   /**
    * Handle the down arrow key when a search result is focused.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onKeyArrowDownInFocus(event: KeyboardEvent): void;
+  onKeyArrowDownInFocus($event: KeyboardEvent): void;
 
   /**
    * Handle the left arrow key when a search result is focused.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onKeyArrowLeftInFocus(event: KeyboardEvent): void;
+  onKeyArrowLeftInFocus($event: KeyboardEvent): void;
 
   /**
    * Handle the right arrow key when a search result is focused.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onKeyArrowRightInFocus(event: KeyboardEvent): void;
+  onKeyArrowRightInFocus($event: KeyboardEvent): void;
 
   /**
    * Handle the up arrow key when a search result is focused.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onKeyArrowUpInFocus(event: KeyboardEvent): void;
+  onKeyArrowUpInFocus($event: KeyboardEvent): void;
 
   /**
    * Handle the enter key when a search result is focused.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onKeyEnterInFocus(event: KeyboardEvent): void;
+  onKeyEnterInFocus($event: KeyboardEvent): void;
 
   /**
    * Show more context lines after a match.

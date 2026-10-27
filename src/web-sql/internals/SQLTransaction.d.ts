@@ -13,7 +13,7 @@ export interface SQLTransaction {
    */
   executeSql(
     sqlStatement: string,
-    arguments?: unknown[],
+    $arguments?: unknown[],
     callback?: (transaction: SQLTransaction, resultSet: SQLResultSet) => void,
     errorCallback?: (transaction: SQLTransaction, error: SQLError) => boolean
   ): void;

@@ -142,11 +142,11 @@ export interface FileExplorerView extends View {
   /**
    * Handle dragging files from the file explorer.
    *
-   * @param event - The drag event.
+   * @param $event - The drag event.
    * @param t - The drag target information.
    * @returns The drag result.
    */
-  dragFiles(event: DragEvent, t: unknown): unknown;
+  dragFiles($event: DragEvent, t: unknown): unknown;
 
   /**
    * Quits the rename.
@@ -194,18 +194,18 @@ export interface FileExplorerView extends View {
   /**
    * Is called when on the new folder icon is clicked. Call createAbstractFile().
    *
-   * @param event - The MouseEvent which triggered this function.
+   * @param $event - The MouseEvent which triggered this function.
    * @returns A promise that resolves when the folder is created.
    */
-  onCreateNewFolderClick(event: MouseEvent): Promise<void>;
+  onCreateNewFolderClick($event: MouseEvent): Promise<void>;
 
   /**
    * Is called when on the new note icon is clicked. Call createAbstractFile().
    *
-   * @param event - The MouseEvent which triggered this function.
+   * @param $event - The MouseEvent which triggered this function.
    * @returns A promise that resolves when the note is created.
    */
-  onCreateNewNoteClick(event: MouseEvent): Promise<void>;
+  onCreateNewNoteClick($event: MouseEvent): Promise<void>;
 
   /**
    * Is called when a file in vault is deleted. Updates the file tree.
@@ -217,10 +217,10 @@ export interface FileExplorerView extends View {
   /**
    * Called when delete is requested.
    *
-   * @param event - The event triggered this function.
+   * @param $event - The event triggered this function.
    * @returns The result of the delete operation.
    */
-  onDeleteSelectedFiles(event: unknown): unknown;
+  onDeleteSelectedFiles($event: unknown): unknown;
 
   /**
    * Called when a extensions update is triggered.
@@ -232,28 +232,28 @@ export interface FileExplorerView extends View {
    * Build and show the context menu for a file or folder. When the file is one of several selected items, shows
    * the multi-file menu (`files-menu`) for the whole selection instead of the `file-menu`.
    *
-   * @param event - The event that opened the menu.
+   * @param $event - The event that opened the menu.
    * @param file - The file or folder the menu is for.
    */
-  onFileContextMenu(event: MouseEvent, file: TAbstractFile): void;
+  onFileContextMenu($event: MouseEvent, file: TAbstractFile): void;
 
   /**
    * Called when the mouse pointer moves away from an element.
    * Event: 'mouseout'.
    *
-   * @param event - The event triggered this function.
+   * @param $event - The event triggered this function.
    * @param targetEl - The target Element.
    */
-  onFileMouseout(event: MouseEvent, targetEl: HTMLElement): void;
+  onFileMouseout($event: MouseEvent, targetEl: HTMLElement): void;
 
   /**
    * Called when the mouse pointer is moved over an element. Updates the tooltip information.
    * Event: 'mouseover'.
    *
-   * @param event - The event triggered this function.
+   * @param $event - The event triggered this function.
    * @param targetEl - The target Element.
    */
-  onFileMouseover(event: MouseEvent, targetEl: HTMLElement): void;
+  onFileMouseover($event: MouseEvent, targetEl: HTMLElement): void;
 
   /**
    * Called when a file is opened. Brings the file to the front.
@@ -272,9 +272,9 @@ export interface FileExplorerView extends View {
   /**
    * Called when 'Enter' is pressed while rename. Accepts the rename.
    *
-   * @param event - The event triggered this function.
+   * @param $event - The event triggered this function.
    */
-  onKeyEnterInRename(event: KeyboardEvent): void;
+  onKeyEnterInRename($event: KeyboardEvent): void;
 
   /**
    * Called when 'ESC' is pressed while rename. Denies the rename.
@@ -284,9 +284,9 @@ export interface FileExplorerView extends View {
   /**
    * Called when the rename shortcut is pressed.
    *
-   * @param event - The event triggered this function.
+   * @param $event - The event triggered this function.
    */
-  onKeyRename(event: KeyboardEvent): void;
+  onKeyRename($event: KeyboardEvent): void;
 
   /**
    * Request a sort if not sorted properly.
@@ -317,10 +317,10 @@ export interface FileExplorerView extends View {
   /**
    * Opens the context menu for the file item.
    *
-   * @param event - The event.
+   * @param $event - The event.
    * @param fileItemEl - The file item clicked on.
    */
-  openFileContextMenu(event: Event, fileItemEl: HTMLElement): void;
+  openFileContextMenu($event: Event, fileItemEl: HTMLElement): void;
 
   /**
    * Reveal a file or folder in the file tree.

@@ -10,8 +10,8 @@ import type {
 import { isInsideDeclareGlobal } from './utils.ts';
 
 interface ImportAliasEntry {
-  node: TSESTree.Node;
-  source: string;
+  readonly node: TSESTree.Node;
+  readonly source: string;
 }
 
 export const noImportAliasInDeclareGlobal = {

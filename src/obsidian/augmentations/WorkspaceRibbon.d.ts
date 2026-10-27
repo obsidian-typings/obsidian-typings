@@ -104,10 +104,10 @@ declare module 'obsidian' {
     /**
      * Shows the ribbon's context menu at the pointer.
      *
-     * @param event - The mouse event.
+     * @param $event - The mouse event.
      * @unofficial
      */
-    onContextMenu(event: MouseEvent): void;
+    onContextMenu($event: MouseEvent): void;
 
     /**
      * Removes a ribbon action by id.
