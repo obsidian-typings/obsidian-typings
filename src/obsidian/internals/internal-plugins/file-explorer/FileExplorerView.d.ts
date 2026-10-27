@@ -1,6 +1,7 @@
 import type {
   Debouncer,
   PaneType,
+  Scope,
   TAbstractFile,
   TFile,
   TFolder,
@@ -8,9 +9,12 @@ import type {
 } from 'obsidian';
 
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
+import type { NavigationSearch } from '../../components/NavigationSearch.d.ts';
+import type { PromisedQueue } from '../../PromisedQueue.d.ts';
 import type { ObsidianSearchQuery } from '../../search-query/ObsidianSearchQuery.d.ts';
 import type { Tree } from '../../tree/Tree.d.ts';
 import type { WeakMapWrapper } from '../../WeakMapWrapper.d.ts';
+import type { HeaderDom } from '../backlink/HeaderDom.d.ts';
 import type { FileExplorerViewFileItemsRecord } from './FileExplorerViewFileItemsRecord.d.ts';
 import type { FileExplorerViewSortOrder } from './FileExplorerViewSortOrder.d.ts';
 import type { FileTreeItem } from './FileTreeItem.d.ts';
@@ -23,15 +27,42 @@ import type { FolderTreeItem } from './FolderTreeItem.d.ts';
  * @unofficial
  */
 export interface FileExplorerView extends View {
+  /** Whether revealing the active file is deferred until the view is shown. */
+  _revealActiveFileQueued: boolean;
+
+  /** Whether sorting is deferred until the view is shown. */
+  _sortQueued: boolean;
+
+  /** The active file row, or no row when the active file is absent from the tree. */
+  activeDom: FileTreeItem | FolderTreeItem | null | undefined;
+
+  /** Button that toggles revealing the active file. */
+  autoRevealButtonEl: HTMLDivElement;
+
+  /** Whether the active file is automatically revealed. */
+  autoRevealFile: boolean;
+
+  /** Button that collapses or expands all folders. */
+  collapseOrExpandAllEl: HTMLDivElement;
+
+  /** The file or folder being renamed, or `null`. */
+  fileBeingRenamed: null | TAbstractFile;
+
   /**
    * Mapping of file path to tree item.
    */
   fileItems: FileExplorerViewFileItemsRecord;
 
+  /** Keyboard scope used during inline renaming. */
+  fileRenameScope: Scope;
+
   /**
    * Mapping of tree self element to abstract file.
    */
   files: WeakMapWrapper<HTMLElement, TAbstractFile>;
+
+  /** Navigation header containing the view controls. */
+  headerDom: HeaderDom;
 
   /**
    * Tree items marked by the last cut, cleared once they are pasted.
@@ -49,6 +80,9 @@ export interface FileExplorerView extends View {
    */
   mouseoverExpandTimeout: null | number;
 
+  /** Container for the file tree. */
+  navFileContainerEl: HTMLDivElement;
+
   /**
    * Indicate ready state of the view.
    */
@@ -58,6 +92,9 @@ export interface FileExplorerView extends View {
    * Try to sort tree items.
    */
   requestSort: Debouncer<[], void>;
+
+  /** Search visibility and input controls. */
+  search: NavigationSearch;
 
   /**
    * The active filter query for the file explorer, or `null` when no filter is applied.
@@ -74,12 +111,8 @@ export interface FileExplorerView extends View {
    */
   tree: Tree<FileTreeItem | FolderTreeItem>;
 
-  /**
-   * Try to rename the file.
-   *
-   * @returns A promise that resolves when the rename is accepted.
-   */
-  acceptRename(): Promise<void>;
+  /** Queue serializing file tree updates. */
+  workQueue: PromisedQueue;
 
   /**
    * Is Executed after creating the file or folder and opens the view and/or starts the rename.
@@ -99,13 +132,6 @@ export interface FileExplorerView extends View {
   attachDropHandler(folder: TFolder, el: HTMLElement): void;
 
   /**
-   * Attach file-related event listeners to an element.
-   *
-   * @param e - The element to attach events to.
-   */
-  attachFileEvents(e: unknown): void;
-
-  /**
    * Creates an file or folder.
    *
    * @param type - The type of file to create.
@@ -114,22 +140,6 @@ export interface FileExplorerView extends View {
    * @returns A promise that resolves when the file or folder is created.
    */
   createAbstractFile(type: 'file' | 'folder', location: TFolder, newLeaf: boolean | PaneType): Promise<void>;
-
-  /**
-   * Create a tree item DOM element for the given folder.
-   *
-   * @param folder - The folder to create a tree item for.
-   * @returns The created folder tree item.
-   */
-  createFolderDom(folder: TFolder): unknown;
-
-  /**
-   * Create a tree item DOM element for the given file.
-   *
-   * @param file - The file to create a tree item for.
-   * @returns The created file tree item.
-   */
-  createItemDom(file: TFile): unknown;
 
   /**
    * Display an error message on a file tree item.
@@ -185,6 +195,13 @@ export interface FileExplorerView extends View {
   isItem(item: unknown): boolean;
 
   /**
+   * Handle a vault configuration change.
+   *
+   * @param key - The changed configuration key.
+   */
+  onConfigChanged(key: string): void;
+
+  /**
    * Is called when a new file is created in vault. Updates the file tree.
    *
    * @param file - The new file or folder.
@@ -229,6 +246,14 @@ export interface FileExplorerView extends View {
   onExtensionsUpdated(): void;
 
   /**
+   * Handle a click on a file or folder title.
+   *
+   * @param $event - The click or auxiliary click event.
+   * @param targetEl - The title element.
+   */
+  onFileClick($event: MouseEvent, targetEl: HTMLElement): void;
+
+  /**
    * Build and show the context menu for a file or folder. When the file is one of several selected items, shows
    * the multi-file menu (`files-menu`) for the whole selection instead of the `file-menu`.
    *
@@ -238,29 +263,27 @@ export interface FileExplorerView extends View {
   onFileContextMenu($event: MouseEvent, file: TAbstractFile): void;
 
   /**
-   * Called when the mouse pointer moves away from an element.
-   * Event: 'mouseout'.
-   *
-   * @param $event - The event triggered this function.
-   * @param targetEl - The target Element.
-   */
-  onFileMouseout($event: MouseEvent, targetEl: HTMLElement): void;
-
-  /**
-   * Called when the mouse pointer is moved over an element. Updates the tooltip information.
-   * Event: 'mouseover'.
-   *
-   * @param $event - The event triggered this function.
-   * @param targetEl - The target Element.
-   */
-  onFileMouseover($event: MouseEvent, targetEl: HTMLElement): void;
-
-  /**
    * Called when a file is opened. Brings the file to the front.
    *
    * @param file - The opened file.
    */
   onFileOpen(file: TFile): void;
+
+  /**
+   * Dismiss the title tooltip when the pointer leaves.
+   *
+   * @param $event - The pointer event.
+   * @param targetEl - The title element.
+   */
+  onFilePointerout($event: PointerEvent, targetEl: HTMLElement): void;
+
+  /**
+   * Show the file or folder title tooltip.
+   *
+   * @param $event - The pointer event.
+   * @param targetEl - The title element.
+   */
+  onFilePointerover($event: PointerEvent, targetEl: HTMLElement): void;
 
   /**
    * Handle input events in the file rename text field.
@@ -310,9 +333,14 @@ export interface FileExplorerView extends View {
   onSearchChanged(query: string): void;
 
   /**
-   * Called when the title is deselected. Calls acceptRename().
+   * Save the inline rename when the title loses focus.
    */
   onTitleBlur(): void;
+
+  /**
+   * Toggle automatic revealing and save the layout.
+   */
+  onToggleAutoReveal(): void;
 
   /**
    * Opens the context menu for the file item.
@@ -323,11 +351,30 @@ export interface FileExplorerView extends View {
   openFileContextMenu($event: Event, fileItemEl: HTMLElement): void;
 
   /**
+   * Expand ancestors and scroll the active file into view.
+   */
+  revealActiveFile(): void;
+
+  /**
    * Reveal a file or folder in the file tree.
    *
    * @param file - The file or folder to reveal.
    */
   revealInFolder(file: TAbstractFile): void;
+
+  /**
+   * Save the current inline rename.
+   *
+   * @returns Whether the rename succeeded, including when no rename is active.
+   */
+  saveRename(): Promise<boolean>;
+
+  /**
+   * Set whether the active file is revealed automatically.
+   *
+   * @param value - Whether to reveal the active file.
+   */
+  setAutoReveal(value: boolean): void;
 
   /**
    * Set whether all folders are collapsed.
@@ -344,6 +391,11 @@ export interface FileExplorerView extends View {
   setSortOrder(order: unknown): void;
 
   /**
+   * Show and focus the search input.
+   */
+  showSearch(): void;
+
+  /**
    * Sorts the file items in this view.
    */
   sort(): void;
@@ -357,7 +409,7 @@ export interface FileExplorerView extends View {
   startRenameFile(e: unknown): unknown;
 
   /**
-   * Reloads the config from vault and update all items.
+   * Refresh unsupported-file visibility and tree layout.
    */
-  updateConfig(): void;
+  updateShowUnsupportedFiles(): void;
 }

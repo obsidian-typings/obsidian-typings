@@ -9,6 +9,18 @@ import type { ViewType } from '../../implementations/constants/ViewType.d.ts';
  * @unofficial
  */
 export interface EmptyView extends ItemView {
+  /** Container for the new-tab actions. */
+  actionListEl: HTMLDivElement;
+
+  /** Interactive empty-state container. */
+  clickableAreaEl: HTMLDivElement;
+
+  /** Outer empty-state container. */
+  emptyStateEl: HTMLDivElement;
+
+  /** Empty-state title element. */
+  emptyTitleEl: HTMLDivElement;
+
   /**
    * Get the current view type.
    *

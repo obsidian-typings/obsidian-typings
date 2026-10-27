@@ -1,7 +1,7 @@
 import type { App } from 'obsidian';
 
 import type { ExtractConstructor } from '../../../../internals/constructors/ExtractConstructor.d.ts';
-import type { TagView } from '../../../../internals/views/TagView.d.ts';
+import type { TagView } from '../../../../internals/views/TagView/TagView.d.ts';
 
 import { ViewType } from '../../../constants/ViewType.ts';
 import { getViewConstructorByViewType } from './getViewConstructorByViewType.ts';
