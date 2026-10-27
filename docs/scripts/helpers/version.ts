@@ -2,8 +2,8 @@ import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { compare } from 'semver';
 
 export interface BranchSpec {
-  channel: 'catalyst' | 'public';
-  obsidianVersion: string;
+  readonly channel: 'catalyst' | 'public';
+  readonly obsidianVersion: string;
 }
 
 export function generateBranchName(branchSpec: BranchSpec): string {

@@ -159,15 +159,15 @@ export interface TrustedPublisherAttachResult {
 }
 
 interface ActionsIdTokenResponse {
-  value?: string;
+  readonly value?: string;
 }
 
 interface Packument {
-  versions?: Record<string, unknown>;
+  readonly versions?: Record<string, unknown>;
 }
 
 interface TokenExchangeResponse {
-  token?: string;
+  readonly token?: string;
 }
 
 /**

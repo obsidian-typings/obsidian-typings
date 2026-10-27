@@ -32,16 +32,19 @@ import { decorateHast } from './util.ts';
 const ICONS_DIR = join(dirname(fileURLToPath(import.meta.url).replaceAll('\\', '/')), 'icons');
 
 interface CalloutType {
-  representation: string;
-  svgFile: string;
+  readonly representation: string;
+  readonly svgFile: string;
 }
 
 interface DirectiveNode {
+  // eslint-disable-next-line typescript-dev-toolkit/readonly-interface-members -- The renderer replaces this property while converting the directive into an aside.
   children: Element[];
-  name: string;
+  readonly name: string;
+  // eslint-disable-next-line typescript-dev-toolkit/readonly-interface-members -- The renderer replaces this property while converting the directive into an aside.
   properties: Record<string, string>;
+  // eslint-disable-next-line typescript-dev-toolkit/readonly-interface-members -- The renderer replaces this property while converting the directive into an aside.
   tagName: string;
-  type: string;
+  readonly type: string;
 }
 
 const STARLIGHT_BUILTIN_ASIDES = new Set(['caution', 'danger', 'note', 'tip']);

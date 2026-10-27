@@ -11,12 +11,12 @@ export interface BuiltPage {
   /**
    * The page's HTML.
    */
-  html: string;
+  readonly html: string;
 
   /**
    * The page's path relative to the output root.
    */
-  relativePath: string;
+  readonly relativePath: string;
 }
 
 /**
@@ -26,12 +26,12 @@ export interface UnrenderedAlert {
   /**
    * The alert marker as it appears on the page, e.g. `[!WARNING]`.
    */
-  marker: string;
+  readonly marker: string;
 
   /**
    * The page's path relative to the output root.
    */
-  relativePath: string;
+  readonly relativePath: string;
 }
 
 /**

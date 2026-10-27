@@ -17,8 +17,8 @@ import {
 import { getLatestVersion } from './helpers/version.ts';
 
 interface BuildInfo {
-  branch: string;
-  docsTreeHash: string;
+  readonly branch: string;
+  readonly docsTreeHash: string;
 }
 
 /**

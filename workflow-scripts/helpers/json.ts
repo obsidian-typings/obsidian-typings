@@ -43,7 +43,7 @@ export interface PackageLockJson extends Partial<PackageJson> {
   /**
    * Packages in the `package-lock.json` file.
    */
-  packages?: Record<string, PackageJson>;
+  readonly packages?: Record<string, PackageJson>;
 }
 
 /**

@@ -16,41 +16,41 @@ import { decorateHast } from './util.ts';
 const ICONS_DIR = join(dirname(fileURLToPath(import.meta.url).replaceAll('\\', '/')), 'icons');
 
 interface HeadingChild {
-  value?: string;
+  readonly value?: string;
 }
 
 interface HeadingNodeWithChildren {
-  children: HeadingChild[];
-  depth: number;
+  readonly children: HeadingChild[];
+  readonly depth: number;
 }
 
 interface LinkListNode {
-  children: LinkNode[];
+  readonly children: LinkNode[];
 }
 
 interface LinkNode {
-  url: string;
+  readonly url: string;
 }
 
 interface NodeWithLooseChildren {
-  children: unknown[];
+  readonly children: unknown[];
 }
 
 interface SiblingNode {
-  children?: unknown[];
-  className?: string[];
-  depth?: number;
-  properties?: SiblingProperties;
-  tagName?: string;
-  type: string;
+  readonly children?: unknown[];
+  readonly className?: string[];
+  readonly depth?: number;
+  readonly properties?: SiblingProperties;
+  readonly tagName?: string;
+  readonly type: string;
 }
 
 interface SiblingProperties {
-  className?: string[];
+  readonly className?: string[];
 }
 
 interface SiblingWithLinks {
-  children: LinkListNode[];
+  readonly children: LinkListNode[];
 }
 
 const SPLICE_COUNT = 2;

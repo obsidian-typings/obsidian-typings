@@ -27,19 +27,19 @@ declare module 'virtual:starlight/user-config' {
 
 declare module 'virtual:starlight/project-context' {
   interface ProjectContext {
-    build: ProjectContextBuild;
-    root: string;
+    readonly build: ProjectContextBuild;
+    readonly root: string;
     /*
      * Spelled as the module spells it. The plugin serializes Astro's own config object, so the four members below
      * are the JSON it emits and renaming one here would declare a property that is not there.
      */
     // eslint-disable-next-line unicorn/name-replacements -- See above: the key is upstream's, not this repo's.
-    srcDir: string;
-    trailingSlash: import('astro').AstroConfig['trailingSlash'];
+    readonly srcDir: string;
+    readonly trailingSlash: import('astro').AstroConfig['trailingSlash'];
   }
 
   interface ProjectContextBuild {
-    format: import('astro').AstroConfig['build']['format'];
+    readonly format: import('astro').AstroConfig['build']['format'];
   }
 
   const projectContext: ProjectContext;
@@ -48,8 +48,8 @@ declare module 'virtual:starlight/project-context' {
 
 declare module 'virtual:starlight/user-images' {
   interface UserImages {
-    dark?: import('astro').ImageMetadata;
-    light?: import('astro').ImageMetadata;
+    readonly dark?: import('astro').ImageMetadata;
+    readonly light?: import('astro').ImageMetadata;
   }
 
   export const logos: UserImages;
