@@ -24,6 +24,20 @@ declare module 'obsidian' {
     display: null | StringValue;
 
     /**
+     * The cached target file, or `null` before resolution or when the link cannot be resolved.
+     *
+     * @unofficial
+     */
+    resolvedFile: null | TFile;
+
+    /**
+     * The resolution-cache tick, initially -1 and updated when the link is resolved.
+     *
+     * @unofficial
+     */
+    resolvedTick: number;
+
+    /**
      * The source path the link is resolved relative to.
      *
      * @unofficial

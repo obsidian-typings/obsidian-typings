@@ -197,6 +197,15 @@ declare module 'obsidian' {
     setGroupBy(groupBy: BasesSortConfig | null): void;
 
     /**
+     * Copies the serialized grouping values into the manual group order and saves the query.
+     * An empty array enables manual ordering with no visible groups; `null` disables manual ordering.
+     *
+     * @param order - The serialized grouping values in display order, or `null` to disable manual ordering.
+     * @unofficial
+     */
+    setGroupOrder(order: FrontmatterValue[] | null): void;
+
+    /**
      * Sets the row limit for the view.
      *
      * @param limit - The limit.
