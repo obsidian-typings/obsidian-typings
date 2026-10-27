@@ -1,8 +1,8 @@
 # Crawler discrepancy triage for Obsidian 1.14.4
 
-<!-- cspell:ignore Pointerout Pointerover -->
+<!-- cspell:ignore microtask Pointerout Pointerover -->
 
-Verified on 2026-10-27 against both maintained streams. This report classifies the supplied discrepancy excerpt and records implementation boundaries; it does not change the declarations.
+Verified on 2026-10-27 against both maintained streams. The initial triage classified the supplied discrepancy excerpt without changing declarations. The Bases grouping and link-cache declarations have since been reconciled as recorded below.
 
 ## Reproduction and source identity
 
@@ -31,17 +31,17 @@ The candidate column preserves every missing member in the supplied excerpt. A c
 | `SearchView` | `collapseResultsToggle`, `explainSearch`, `explainSearchToggle`, `extraContextToggle`, `filterSectionToggleEl`, `infoEl`, `matchingCaseButtonEl`, `requestSaveSearch`, `resultCountEl`, `searchContainerEl`, `searchInfoEl`, `searchParamsContainerEl`, `showParams`, `sortOrderDropdown` | `S2`, 157306-157771 | Confirmed UI gaps outside the already-verified queue/matcher surface. |
 | `AllPropertiesView` | `deleteProperty`, `doms`, `emptyStateEl`, `onDeleteSelectedItems`, `onSearchChanged`, `propertyBeingRenamed`, `propertyRenameScope`, `requestUpdate`, `root`, `search`, `searchQuery`, `sortOrder`, `tree` | `une`, 205963-206329 | Confirmed own gaps; three stale search methods. |
 | `BookmarksView` | `collapseOrExpandAllEl`, `emptyEl`, `invalidStateEl`, `itemDoms`, `onSearchChanged`, `plugin`, `requestUpdate`, `root`, `search`, `searchQuery`, `showSearch`, `tree` | `c9`, 189344-189767 | Confirmed own gaps. |
-| `QueryController` | `getAllGroups`, `getGroupFolds`, `loadGroupFolds`, `saveGroupFolds`, `sourcePath` | `w1`, 146773-147534 | Confirmed gaps; sourcePath is an accessor at 147056, not a mutable stored field. |
+| `QueryController` | `getAllGroups`, `getGroupFolds`, `loadGroupFolds`, `saveGroupFolds`, `sourcePath` | `w1`, 146773-147534 | Implemented on both streams; sourcePath is getter-only. See the grouping reconciliation below. |
 | `TExternalFile` | `addUser`, `hasUsers`, `metadata`, `removeUser`, `users` | `nI`, 81273-81310 | Confirmed own gaps on the external-file subclass. |
 | `Modal` | `canAnimate`, `canDismiss`, `isOpen`, `shouldAnimateOpen` | `ST`, 73293-73547 | Confirmed base gaps; fix once here. isOpen and shouldAnimateOpen are stored flags; canAnimate and canDismiss are methods. |
 | `UnknownView` | `actionListEl`, `clickableAreaEl`, `emptyStateEl`, `emptyTitleEl` | `aI`, 82426-82517 | Attribution correction: the sampled _empty object is EmptyView. These fields are initialized by EmptyView; UnknownView inherits them. Add to the base, not to UnknownView alone. |
-| `BasesView` | `isGroupCollapsed`, `onGroupCollapsedChange`, `toggleGroupCollapsed` | `_J`, 144453-144782 | Confirmed methods on the exported base. |
+| `BasesView` | `isGroupCollapsed`, `onGroupCollapsedChange`, `toggleGroupCollapsed` | `_J`, 144453-144782 | Implemented on both streams on the exported base. |
 | `App` | `getBaseFontSize`, `setBaseFontSize` | `xoe`, 230232-230246 | Confirmed methods on App; other views only call them. |
 | `ConfirmationModal` | `isOpen`, `shouldAnimateOpen` | `ST`, 73293-73547 | Inherited Modal gaps, not two independent additions to ConfirmationModal. |
-| `LinkValue` | `resolvedFile`, `resolvedTick` | `xK`, 128065-128153 | Confirmed resolution-cache fields. |
+| `LinkValue` | `resolvedFile`, `resolvedTick` | `xK`, 128065-128153 | Implemented on both streams as a nullable file cache and numeric tick. |
 | `MarkdownView` | `focusAfterMetadata`, `focusBeforeMetadata` | `f2`, 156105-156113 | Confirmed methods on MarkdownView; similarly named methods elsewhere do not establish ownership. |
 | `WorkspaceTabs` | `scheduleTouchUnlock`, `touchUnlockTabWidths` | `eF`, 89161-89879 | Confirmed own field and method; touchUnlockTabWidths holds an AbortController or null. |
-| `BasesViewConfig` | `setGroupOrder` | `h$`, 136334-136487 | Confirmed method. Source copies an order array or stores null and saves the query. |
+| `BasesViewConfig` | `setGroupOrder` | `h$`, 136334-136487 | Implemented on both streams with serialized frontmatter values; see the grouping reconciliation below. |
 | `CapacitorAdapter` | `exportTextFile` | `BA`, 77312-77341 | Confirmed implementation; desktop observation alone would not establish the mobile implementation. |
 | `ConfirmationButton` | `setForm` | `xT`, 73548-73601 | Confirmed method. |
 | `FileSystemAdapter` | `exportTextFile` | `nc`, 32937-34239 | Confirmed export method. Keep reverse field observations separate; see below. |
@@ -70,10 +70,22 @@ The desktop adapter's `ipcRenderer` and `watcher` remain a conservative review c
 ## Implementation boundaries
 
 1. Reconcile the six sidebar views together, including the stale methods and all candidates above. Put the empty-state fields on `EmptyView` so `UnknownView` inherits them.
-2. Reconcile Bases grouping, group persistence and `LinkValue` caching together. Inspect serialized group-fold shapes and order semantics before declaring helper types.
+2. Bases grouping, group persistence and `LinkValue` caching were reconciled together; their verified shapes and validation are recorded below.
 3. Reconcile the remaining Modal, file, adapter and workspace APIs. Fix inherited modal findings at `Modal`, and inspect adapter reverse fields separately.
 
-Each change must be applied to both maintained streams and pass the full type-change build gate, lint, spellcheck and formatting. This triage changes no release declarations and requires no release. The [Search report](core-search-1.14.4.md) remains the authority for the queue and matcher surface.
+Each change must be applied to both maintained streams and pass the full type-change build gate, lint, spellcheck and formatting. The initial triage required no release. The [Search report](core-search-1.14.4.md) remains the authority for the queue and matcher surface.
+
+## Bases grouping and link-cache reconciliation
+
+Implemented on 2026-10-27 in [public](https://github.com/obsidian-typings/obsidian-typings/commit/e8be46ab) and [catalyst](https://github.com/obsidian-typings/obsidian-typings/commit/bc30a44e). Both version tags still resolve to the application blob recorded above. The five declaration files are identical across streams.
+
+1. `QueryController.getAllGroups()` returns `BasesGroupSummary[]`, with a `Value` key, numeric `count` and boolean `isVisible`. It returns an empty array unless both group-by configuration and manual ordering are enabled. Visible groups precede unlisted groups. A missing grouping value becomes a `NullValue`, rather than JavaScript `null`.
+2. `getGroupFolds()` lazily returns the current view's mutable `Set<string>`. `loadGroupFolds()` returns a null-prototype `Record<string, Set<string>>`, accepting stored string arrays only for views still in the query. `saveGroupFolds()` serializes nonempty sets to arrays under `bases-group-fold-<query-file-path>`, clears storage with `null` when no folds remain, and does nothing without a query file or loaded folds. Fold identifiers are opaque strings derived from the grouping value's constructor and string representation.
+3. `sourcePath` is readonly: current file path, then query file path, then `''`. Each of the three `BasesView` collapse methods receives a `BasesQueryResultGroup`; the predicate returns `boolean`, and toggling saves before calling `onGroupCollapsedChange`.
+4. `setGroupOrder(order: FrontmatterValue[] | null)` copies serialized values and saves the query. `[]` enables manual ordering with no visible groups; `null` disables manual ordering. These are stored values, not runtime `Value` instances.
+5. `LinkValue.resolvedFile` is `TFile | null`, initially `null`; `resolvedTick` is a number, initially `-1`. Resolution reuses the file within a cache tick, and a queued microtask advances the shared tick so the next resolution refreshes it.
+
+Validation passed on each stream through the full `npm run build`, including lint, spellcheck, formatting, strict source and bundle checks, API Extractor and all seven consumer scenarios. Isolated probes executed functions extracted from the tagged source to check summary shapes, fold filtering and persistence, path fallbacks, collapse notifications, order copying and link-cache ticks. These probes use controlled dependencies; they are not a live application test. No package release was performed.
 
 ## Additional findings from the fresh run
 
