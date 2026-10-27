@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 1.14.0
+
+**Branch:** [`release/obsidian-public/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.4)
+
+**Commits:** [`obsidian-public-1.14.4-v1.13.0...obsidian-public-1.14.4-v1.14.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-public-1.14.4-v1.13.0...obsidian-public-1.14.4-v1.14.0)
+
+### Breaking changes
+
+- fix(metadata-cache): type updateInternalLinks as taking a CustomArrayDict ([`abbd9c9`](https://github.com/obsidian-typings/obsidian-typings/commit/abbd9c97b9421ef5eaeb567e52de1a7aba1110cd))
+- fix(hotkey-manager): type the stored hotkeys as Hotkey, not KeymapInfo ([`ec892c6`](https://github.com/obsidian-typings/obsidian-typings/commit/ec892c6dbe672b95a8c73c5c3db335b284a04f82))
+
+### Other changes
+
+- feat(search): type the file queue and concrete matcher tree ([`5671412`](https://github.com/obsidian-typings/obsidian-typings/commit/567141221011877d222794248fd5faf4f64c1571))
+- feat(electron): type every IPC channel of Obsidian's main process on the ipcRenderer ([`29ad055`](https://github.com/obsidian-typings/obsidian-typings/commit/29ad055ad40468e9befccb806deaf9bd65e889c2))
+- feat: declare the bookmarks:bookmarks-menu and markdown-properties-menu workspace events ([`56404f2`](https://github.com/obsidian-typings/obsidian-typings/commit/56404f2c573cad9f3bcf94f9d881bdd90bc1122f))
+- build(deps): raise typescript-dev-toolkit to 3.x and point DomEventsHandlers at obsidian-lib ([`c2bd624`](https://github.com/obsidian-typings/obsidian-typings/commit/c2bd624e5cdca5d71faed50bd14352f88663d28f))
+
 ## 1.13.0
 
 **Branch:** [`release/obsidian-public/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.4)
