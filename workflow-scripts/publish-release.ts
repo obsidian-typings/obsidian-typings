@@ -682,14 +682,14 @@ async function updateNpmVersions(branchName: string, branchSpec: BranchSpec, isB
   return { breakingChangeSubjects, nextVersion };
 }
 
-async function writeOutput(object: Record<string, unknown>): Promise<void> {
+async function writeOutput($object: Record<string, unknown>): Promise<void> {
   const githubOutput = process.env['GITHUB_OUTPUT'] ?? '';
   if (!githubOutput) {
     console.warn('GITHUB_OUTPUT is not set');
     return;
   }
 
-  const lines = Object.entries(object).map(([key, value]) => `${key}=${String(value)}`);
+  const lines = Object.entries($object).map(([key, value]) => `${key}=${String(value)}`);
   await writeFile(githubOutput, lines.join('\n'), 'utf-8');
 }
 

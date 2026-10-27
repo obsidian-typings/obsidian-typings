@@ -124,8 +124,8 @@ function getPackageLockJsonPath(cwd?: string): string {
   return ensureNonNullable(resolvePathFromRoot('package-lock.json', cwd), 'Could not determine the package-lock.json path');
 }
 
-function normalizeOptionalProperties<T>(object: UndefinedOnPartialDeep<T>): T {
-  return object as T;
+function normalizeOptionalProperties<T>($object: UndefinedOnPartialDeep<T>): T {
+  return $object as T;
 }
 
 async function readJson<T>(path: string): Promise<T> {

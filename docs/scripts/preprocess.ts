@@ -44,10 +44,10 @@ async function convertRecursive(directory: string): Promise<void> {
         }
       }
 
-      for (const module of sourceFile.getModules()) {
+      for (const $module of sourceFile.getModules()) {
         const SRC_PREFIX_LENGTH = 20;
         const path = sourceFile.getFilePath().slice(srcDirectory.length - SRC_PREFIX_LENGTH);
-        for (const declaration of module.getFunctions()) {
+        for (const declaration of $module.getFunctions()) {
           declaration.insertJsDoc(0, {
             tags: [{
               tagName: 'source',
@@ -55,7 +55,7 @@ async function convertRecursive(directory: string): Promise<void> {
             }]
           });
         }
-        for (const declaration of module.getInterfaces()) {
+        for (const declaration of $module.getInterfaces()) {
           declaration.addJsDoc({
             tags: [{
               tagName: 'source',
@@ -63,7 +63,7 @@ async function convertRecursive(directory: string): Promise<void> {
             }]
           });
         }
-        for (const declaration of module.getClasses()) {
+        for (const declaration of $module.getClasses()) {
           declaration.addJsDoc({
             tags: [{
               tagName: 'source',
@@ -74,7 +74,7 @@ async function convertRecursive(directory: string): Promise<void> {
 
         augmentations.set(
           augmentationsDirectoryName,
-          `${augmentations.get(augmentationsDirectoryName) ?? ''}${module.getBodyText() ?? ''}\n`
+          `${augmentations.get(augmentationsDirectoryName) ?? ''}${$module.getBodyText() ?? ''}\n`
         );
       }
     }
