@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 1.12.0
+
+**Branch:** [`release/obsidian-catalyst/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.14.4)
+
+**Commits:** [`obsidian-catalyst-1.14.4-v1.11.0...obsidian-catalyst-1.14.4-v1.12.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-catalyst-1.14.4-v1.11.0...obsidian-catalyst-1.14.4-v1.12.0)
+
+### Breaking changes
+
+- fix(metadata-cache): type updateInternalLinks as taking a CustomArrayDict ([`95db2fe`](https://github.com/obsidian-typings/obsidian-typings/commit/95db2feae9d6b54b23a93c11e96975e595935af4))
+- fix(hotkey-manager): type the stored hotkeys as Hotkey, not KeymapInfo ([`c157e7a`](https://github.com/obsidian-typings/obsidian-typings/commit/c157e7adb6496d70ff2f20221ccc028b87e411c4))
+
+### Other changes
+
+- feat(search): type the file queue and concrete matcher tree ([`3767fb3`](https://github.com/obsidian-typings/obsidian-typings/commit/3767fb3c52ccab284e90950f64f81d8981b7904e))
+- feat(electron): type every IPC channel of Obsidian's main process on the ipcRenderer ([`0fc022f`](https://github.com/obsidian-typings/obsidian-typings/commit/0fc022f7e983651a662992aa75d0475a5e16a9b9))
+- feat: declare the bookmarks:bookmarks-menu and markdown-properties-menu workspace events ([`8538e29`](https://github.com/obsidian-typings/obsidian-typings/commit/8538e29f95743de340d18c2ceaf7bc8f8b73c2e3))
+- build(deps): raise typescript-dev-toolkit to 3.x and point DomEventsHandlers at obsidian-lib ([`0e8089c`](https://github.com/obsidian-typings/obsidian-typings/commit/0e8089c0c66eb0740c78213992fa35fc4bb6a25d))
+
 ## 1.11.0
 
 **Branch:** [`release/obsidian-catalyst/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.14.4)
