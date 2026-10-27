@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 1.13.0
+
+**Branch:** [`release/obsidian-catalyst/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.14.4)
+
+**Commits:** [`obsidian-catalyst-1.14.4-v1.12.0...obsidian-catalyst-1.14.4-v1.13.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-catalyst-1.14.4-v1.12.0...obsidian-catalyst-1.14.4-v1.13.0)
+
+### Breaking changes
+
+- fix!: remove obsolete protocol action trust declarations ([`8d5ff56`](https://github.com/obsidian-typings/obsidian-typings/commit/8d5ff56ac0b7576f89d29e0912ff2e3eedaac398))
+
+### Other changes
+
+- feat: type core note composer merge flow ([`2562931`](https://github.com/obsidian-typings/obsidian-typings/commit/25629312a5e11e251113ec14c74c6c63df4716bd))
+- chore: enforce keyword binding names in declarations ([`c2f0c3e`](https://github.com/obsidian-typings/obsidian-typings/commit/c2f0c3e4064e69a540c31f1e7860e09dfb31b9cc))
+
 ## 1.12.0
 
 **Branch:** [`release/obsidian-catalyst/1.14.4`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.14.4)
