@@ -1,8 +1,12 @@
-import type { View } from 'obsidian';
+import type {
+  SearchComponent,
+  View
+} from 'obsidian';
 
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
 import type { ObsidianSearchQuery } from '../../search-query/ObsidianSearchQuery.d.ts';
 import type { ResultDom } from '../../tree/ResultDom.d.ts';
+import type { SearchQueueComponent } from './SearchQueueComponent/SearchQueueComponent.d.ts';
 
 /**
  * {@link obsidian#View} that displays the global search results pane.
@@ -13,6 +17,15 @@ import type { ResultDom } from '../../tree/ResultDom.d.ts';
 export interface SearchView extends View {
   /** DOM tree rendering the search results, inside `div.search-result-container.mod-global-search`. */
   dom: ResultDom;
+
+  /** Whether the search is case-sensitive. */
+  matchingCase: boolean;
+
+  /** The component managing the initial batch and subsequent changed files. */
+  queue: SearchQueueComponent;
+
+  /** The search input component. */
+  searchComponent: SearchComponent;
 
   /**
    * The query compiled by the last {@link SearchView.startSearch} that produced a matcher, or `null` before the
