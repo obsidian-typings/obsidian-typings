@@ -1,5 +1,8 @@
 import type {
+  Debouncer,
+  DropdownComponent,
   SearchComponent,
+  ToggleComponent,
   View
 } from 'obsidian';
 
@@ -15,23 +18,65 @@ import type { SearchQueueComponent } from './SearchQueueComponent/SearchQueueCom
  * @unofficial
  */
 export interface SearchView extends View {
+  /** Control for collapsing all results. */
+  collapseResultsToggle: ToggleComponent;
+
   /** DOM tree rendering the search results, inside `div.search-result-container.mod-global-search`. */
   dom: ResultDom;
+
+  /** Whether query explanations are shown. */
+  explainSearch: boolean;
+
+  /** Control for showing query explanations. */
+  explainSearchToggle: ToggleComponent;
+
+  /** Control for showing extra context. */
+  extraContextToggle: ToggleComponent;
+
+  /** Button that toggles the search settings. */
+  filterSectionToggleEl: HTMLDivElement;
+
+  /** Container for result count and sort controls. */
+  infoEl: HTMLDivElement;
 
   /** Whether the search is case-sensitive. */
   matchingCase: boolean;
 
+  /** Button that toggles case sensitivity. */
+  matchingCaseButtonEl: HTMLElement;
+
   /** The component managing the initial batch and subsequent changed files. */
   queue: SearchQueueComponent;
 
+  /** Debounced saving of recent searches. */
+  requestSaveSearch: Debouncer<[], void>;
+
+  /** Element displaying the result count. */
+  resultCountEl: HTMLSpanElement;
+
   /** The search input component. */
   searchComponent: SearchComponent;
+
+  /** Unused search container slot, initialized to `null` in this version. */
+  searchContainerEl: null;
+
+  /** Container for the query explanation. */
+  searchInfoEl: HTMLDivElement;
+
+  /** Container for search settings. */
+  searchParamsContainerEl: HTMLDivElement;
 
   /**
    * The query compiled by the last {@link SearchView.startSearch} that produced a matcher, or `null` before the
    * first one.
    */
   searchQuery: null | ObsidianSearchQuery;
+
+  /** Whether search settings are visible. */
+  showParams: boolean;
+
+  /** Result ordering control. */
+  sortOrderDropdown: DropdownComponent;
 
   /**
    * Returns the value of the search element.

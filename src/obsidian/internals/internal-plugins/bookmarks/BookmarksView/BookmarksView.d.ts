@@ -1,11 +1,18 @@
 import type {
+  Debouncer,
   ItemView,
   TFile,
   WorkspaceLeaf
 } from 'obsidian';
 
-import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
-import type { BookmarksPluginInstance } from './BookmarksPluginInstance.d.ts';
+import type { ViewType } from '../../../../implementations/constants/ViewType.d.ts';
+import type { NavigationSearch } from '../../../components/NavigationSearch.d.ts';
+import type { ObsidianSearchQuery } from '../../../search-query/ObsidianSearchQuery.d.ts';
+import type { Tree } from '../../../tree/Tree.d.ts';
+import type { TreeRoot } from '../../../tree/TreeRoot.d.ts';
+import type { BookmarkItem } from '../bookmark-items/BookmarkItem.d.ts';
+import type { BookmarksPluginInstance } from '../BookmarksPluginInstance.d.ts';
+import type { BookmarkTreeItem } from './BookmarkTreeItem.d.ts';
 
 /**
  * {@link obsidian#View} that displays the bookmarks sidebar, showing all bookmarked items in a tree.
@@ -14,6 +21,36 @@ import type { BookmarksPluginInstance } from './BookmarksPluginInstance.d.ts';
  * @unofficial
  */
 export interface BookmarksView extends ItemView {
+  /** Button that collapses or expands bookmark groups. */
+  collapseOrExpandAllEl: HTMLDivElement;
+
+  /** Message displayed when there are no bookmarks. */
+  emptyEl: HTMLDivElement;
+
+  /** Message displayed when bookmark data is invalid. */
+  invalidStateEl: HTMLDivElement;
+
+  /** Rows keyed by their bookmark data. */
+  itemDoms: WeakMap<BookmarkItem, BookmarkTreeItem>;
+
+  /** Owning bookmarks plugin. */
+  plugin: BookmarksPluginInstance;
+
+  /** Debounced bookmark refresh. */
+  requestUpdate: Debouncer<[], void>;
+
+  /** Root of the bookmarks tree. */
+  readonly root: TreeRoot<BookmarkTreeItem>;
+
+  /** Search visibility and input controls. */
+  search: NavigationSearch;
+
+  /** Compiled bookmark filter, or `null`. */
+  searchQuery: null | ObsidianSearchQuery;
+
+  /** Tree of bookmark rows. */
+  tree: Tree<BookmarkTreeItem>;
+
   /**
    * Copy the selected bookmarks to the clipboard.
    *
@@ -70,10 +107,10 @@ export interface BookmarksView extends ItemView {
   /**
    * Get the DOM element for a bookmark item.
    *
-   * @param e - The bookmark item.
+   * @param item - The bookmark item.
    * @returns The DOM element for the item.
    */
-  getItemDom(e: unknown): unknown;
+  getItemDom(item: BookmarkItem): BookmarkTreeItem;
 
   /**
    * Get the unique node identifier for a bookmark item.
@@ -147,6 +184,18 @@ export interface BookmarksView extends ItemView {
    * @param $event - The event triggered this function.
    */
   onRenameKey($event: KeyboardEvent): void;
+
+  /**
+   * Compile the query and filter the bookmarks tree.
+   *
+   * @param query - The search text.
+   */
+  onSearchChanged(query: string): void;
+
+  /**
+   * Show and focus the search input.
+   */
+  showSearch(): void;
 
   /**
    * Refresh the bookmarks view.

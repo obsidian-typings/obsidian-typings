@@ -3,7 +3,7 @@ import type {
   WorkspaceLeaf
 } from 'obsidian';
 
-import type { BookmarksView } from './BookmarksView.d.ts';
+import type { BookmarksView } from './BookmarksView/BookmarksView.d.ts';
 
 /**
  * View creators registered by the bookmarks plugin.
