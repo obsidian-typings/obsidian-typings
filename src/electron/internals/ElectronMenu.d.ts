@@ -24,19 +24,19 @@ export declare class ElectronMenu {
   /**
    * Registers an event listener that is invoked when a popup is closed either manually or with {@link ElectronMenu.closePopup}.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This menu instance.
    */
-  addListener(event: 'menu-will-close', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'menu-will-close', listener: ($event: ElectronEvent) => void): this;
   /**
    * Registers an event listener that is invoked when {@link ElectronMenu.popup} is called.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This menu instance.
    */
-  addListener(event: 'menu-will-show', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'menu-will-show', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Appends the `menuItem` to the menu.
@@ -90,36 +90,36 @@ export declare class ElectronMenu {
   /**
    * Registers an event listener that is invoked when a popup is closed either manually or with {@link ElectronMenu.closePopup}.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This menu instance.
    */
-  on(event: 'menu-will-close', listener: (event: ElectronEvent) => void): this;
+  on($event: 'menu-will-close', listener: ($event: ElectronEvent) => void): this;
   /**
    * Registers an event listener that is invoked when {@link ElectronMenu.popup} is called.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This menu instance.
    */
-  on(event: 'menu-will-show', listener: (event: ElectronEvent) => void): this;
+  on($event: 'menu-will-show', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a one-time event listener that is invoked when a popup is closed either manually or with {@link ElectronMenu.closePopup}.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This menu instance.
    */
-  once(event: 'menu-will-close', listener: (event: ElectronEvent) => void): this;
+  once($event: 'menu-will-close', listener: ($event: ElectronEvent) => void): this;
   /**
    * Registers a one-time event listener that is invoked when {@link ElectronMenu.popup} is called.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This menu instance.
    */
-  once(event: 'menu-will-show', listener: (event: ElectronEvent) => void): this;
+  once($event: 'menu-will-show', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Pops up this menu as a context menu in the `BrowserWindow`.
@@ -131,19 +131,19 @@ export declare class ElectronMenu {
   /**
    * Removes the event listener for a menu popup being closed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This menu instance.
    */
-  removeListener(event: 'menu-will-close', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'menu-will-close', listener: ($event: ElectronEvent) => void): this;
   /**
    * Removes the event listener for a menu popup being shown.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This menu instance.
    */
-  removeListener(event: 'menu-will-show', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'menu-will-show', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Sends the `action` to the first responder of application. This is used for emulating default macOS menu behaviors. Usually you would use the `role` property of a menu item. `darwin` only.

@@ -109,9 +109,9 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
   /**
    * Close editor suggest and removes highlights on click.
    *
-   * @param event - The mouse event.
+   * @param $event - The mouse event.
    */
-  onViewClick(event?: MouseEvent): void;
+  onViewClick($event?: MouseEvent): void;
 
   /**
    * Add classes to the editor, functions as a toggle.

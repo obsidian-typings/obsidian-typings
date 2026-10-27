@@ -79,356 +79,356 @@ export interface ElectronApp {
    *
    * Emitted when Chrome's accessibility support changes. macOS and Windows only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'accessibility-support-changed', listener: (event: ElectronEvent, accessibilitySupportEnabled: boolean) => void): this;
+  addListener($event: 'accessibility-support-changed', listener: ($event: ElectronEvent, accessibilitySupportEnabled: boolean) => void): this;
 
   /**
    * Adds a listener for the `activate` event.
    *
    * Emitted when the application is activated. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'activate', listener: (event: ElectronEvent, hasVisibleWindows: boolean) => void): this;
+  addListener($event: 'activate', listener: ($event: ElectronEvent, hasVisibleWindows: boolean) => void): this;
 
   /**
    * Adds a listener for the `activity-was-continued` event.
    *
    * Emitted during Handoff after an activity from this device was successfully resumed on another one. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'activity-was-continued', listener: (event: ElectronEvent, type: string, userInfo: unknown) => void): this;
+  addListener($event: 'activity-was-continued', listener: ($event: ElectronEvent, type: string, userInfo: unknown) => void): this;
 
   /**
    * Adds a listener for the `before-quit` event.
    *
    * Emitted before the application starts closing its windows.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'before-quit', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'before-quit', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Adds a listener for the `browser-window-blur` event.
    *
    * Emitted when a browserWindow gets blurred.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'browser-window-blur', listener: (event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
+  addListener($event: 'browser-window-blur', listener: ($event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
 
   /**
    * Adds a listener for the `browser-window-created` event.
    *
    * Emitted when a new browserWindow is created.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'browser-window-created', listener: (event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
+  addListener($event: 'browser-window-created', listener: ($event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
 
   /**
    * Adds a listener for the `browser-window-focus` event.
    *
    * Emitted when a browserWindow gets focused.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'browser-window-focus', listener: (event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
+  addListener($event: 'browser-window-focus', listener: ($event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
 
   /**
    * Adds a listener for the `certificate-error` event.
    *
    * Emitted when failed to verify the certificate for a URL.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'certificate-error', listener: (event: ElectronEvent, webContents: ElectronWebContents, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
+  addListener($event: 'certificate-error', listener: ($event: ElectronEvent, webContents: ElectronWebContents, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
 
   /**
    * Adds a listener for the `child-process-gone` event.
    *
    * Emitted when the child process unexpectedly disappears.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'child-process-gone', listener: (event: ElectronEvent, details: ElectronDetails) => void): this;
+  addListener($event: 'child-process-gone', listener: ($event: ElectronEvent, details: ElectronDetails) => void): this;
 
   /**
    * Adds a listener for the `continue-activity` event.
    *
    * Emitted during Handoff when an activity from a different device wants to be resumed. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'continue-activity', listener: (event: ElectronEvent, type: string, userInfo: unknown, details: ElectronContinueActivityDetails) => void): this;
+  addListener($event: 'continue-activity', listener: ($event: ElectronEvent, type: string, userInfo: unknown, details: ElectronContinueActivityDetails) => void): this;
 
   /**
    * Adds a listener for the `continue-activity-error` event.
    *
    * Emitted during Handoff when an activity from a different device fails to be resumed. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'continue-activity-error', listener: (event: ElectronEvent, type: string, error: string) => void): this;
+  addListener($event: 'continue-activity-error', listener: ($event: ElectronEvent, type: string, error: string) => void): this;
 
   /**
    * Adds a listener for the `did-become-active` event.
    *
    * Emitted every time the app becomes active. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'did-become-active', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'did-become-active', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Adds a listener for the `first-instance-ack` event.
    *
    * Emitted in the second instance during `requestSingleInstanceLock` when the first instance calls the `ackCallback`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'first-instance-ack', listener: (event: ElectronEvent, additionalData: unknown) => void): this;
+  addListener($event: 'first-instance-ack', listener: ($event: ElectronEvent, additionalData: unknown) => void): this;
 
   /**
    * Adds a listener for the `gpu-info-update` event.
    *
    * Emitted whenever there is a GPU info update.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'gpu-info-update', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'gpu-info-update', listener: (...args: unknown[]) => void): this;
 
   /**
    * Adds a listener for the `gpu-process-crashed` event.
    *
    * Emitted when the GPU process crashes or is killed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
    * @deprecated Deprecated by Electron.
    */
-  addListener(event: 'gpu-process-crashed', listener: (event: ElectronEvent, killed: boolean) => void): this;
+  addListener($event: 'gpu-process-crashed', listener: ($event: ElectronEvent, killed: boolean) => void): this;
 
   /**
    * Adds a listener for the `login` event.
    *
    * Emitted when `webContents` wants to do basic auth.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'login', listener: (event: ElectronEvent, webContents: ElectronWebContents, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+  addListener($event: 'login', listener: ($event: ElectronEvent, webContents: ElectronWebContents, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
 
   /**
    * Adds a listener for the `new-window-for-tab` event.
    *
    * Emitted when the user clicks the native macOS new tab button. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'new-window-for-tab', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'new-window-for-tab', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Adds a listener for the `open-file` event.
    *
    * Emitted when the user wants to open a file with the application. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'open-file', listener: (event: ElectronEvent, path: string) => void): this;
+  addListener($event: 'open-file', listener: ($event: ElectronEvent, path: string) => void): this;
 
   /**
    * Adds a listener for the `open-url` event.
    *
    * Emitted when the user wants to open a URL with the application. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'open-url', listener: (event: ElectronEvent, url: string) => void): this;
+  addListener($event: 'open-url', listener: ($event: ElectronEvent, url: string) => void): this;
 
   /**
    * Adds a listener for the `quit` event.
    *
    * Emitted when the application is quitting.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'quit', listener: (event: ElectronEvent, exitCode: number) => void): this;
+  addListener($event: 'quit', listener: ($event: ElectronEvent, exitCode: number) => void): this;
 
   /**
    * Adds a listener for the `ready` event.
    *
    * Emitted once, when Electron has finished initializing.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'ready', listener: (event: ElectronEvent, launchInfo: ElectronNotificationResponse | Record<string, unknown>) => void): this;
+  addListener($event: 'ready', listener: ($event: ElectronEvent, launchInfo: ElectronNotificationResponse | Record<string, unknown>) => void): this;
 
   /**
    * Adds a listener for the `render-process-gone` event.
    *
    * Emitted when the renderer process unexpectedly disappears.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'render-process-gone', listener: (event: ElectronEvent, webContents: ElectronWebContents, details: ElectronRenderProcessGoneDetails) => void): this;
+  addListener($event: 'render-process-gone', listener: ($event: ElectronEvent, webContents: ElectronWebContents, details: ElectronRenderProcessGoneDetails) => void): this;
 
   /**
    * Adds a listener for the `renderer-process-crashed` event.
    *
    * Emitted when the renderer process of `webContents` crashes or is killed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
    * @deprecated Deprecated by Electron.
    */
-  addListener(event: 'renderer-process-crashed', listener: (event: ElectronEvent, webContents: ElectronWebContents, killed: boolean) => void): this;
+  addListener($event: 'renderer-process-crashed', listener: ($event: ElectronEvent, webContents: ElectronWebContents, killed: boolean) => void): this;
 
   /**
    * Adds a listener for the `second-instance` event.
    *
    * Emitted inside the primary instance when a second instance is executed and calls `requestSingleInstanceLock`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'second-instance', listener: (event: ElectronEvent, argv: string[], workingDirectory: string, additionalData: unknown, ackCallback: unknown) => void): this;
+  addListener($event: 'second-instance', listener: ($event: ElectronEvent, argv: string[], workingDirectory: string, additionalData: unknown, ackCallback: unknown) => void): this;
 
   /**
    * Adds a listener for the `select-client-certificate` event.
    *
    * Emitted when a client certificate is requested.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'select-client-certificate', listener: (event: ElectronEvent, webContents: ElectronWebContents, url: string, certificateList: ElectronCertificate[], callback: (certificate?: ElectronCertificate) => void) => void): this;
+  addListener($event: 'select-client-certificate', listener: ($event: ElectronEvent, webContents: ElectronWebContents, url: string, certificateList: ElectronCertificate[], callback: (certificate?: ElectronCertificate) => void) => void): this;
 
   /**
    * Adds a listener for the `session-created` event.
    *
    * Emitted when Electron has created a new `session`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'session-created', listener: (session: Session) => void): this;
+  addListener($event: 'session-created', listener: (session: Session) => void): this;
 
   /**
    * Adds a listener for the `update-activity-state` event.
    *
    * Emitted when Handoff is about to be resumed on another device. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'update-activity-state', listener: (event: ElectronEvent, type: string, userInfo: unknown) => void): this;
+  addListener($event: 'update-activity-state', listener: ($event: ElectronEvent, type: string, userInfo: unknown) => void): this;
 
   /**
    * Adds a listener for the `web-contents-created` event.
    *
    * Emitted when a new `webContents` is created.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'web-contents-created', listener: (event: ElectronEvent, webContents: ElectronWebContents) => void): this;
+  addListener($event: 'web-contents-created', listener: ($event: ElectronEvent, webContents: ElectronWebContents) => void): this;
 
   /**
    * Adds a listener for the `will-continue-activity` event.
    *
    * Emitted during Handoff before an activity from a different device wants to be resumed. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'will-continue-activity', listener: (event: ElectronEvent, type: string) => void): this;
+  addListener($event: 'will-continue-activity', listener: ($event: ElectronEvent, type: string) => void): this;
 
   /**
    * Adds a listener for the `will-finish-launching` event.
    *
    * Emitted when the application has finished basic startup.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'will-finish-launching', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'will-finish-launching', listener: (...args: unknown[]) => void): this;
 
   /**
    * Adds a listener for the `will-quit` event.
    *
    * Emitted when all windows have been closed and the application will quit.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'will-quit', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'will-quit', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Adds a listener for the `window-all-closed` event.
    *
    * Emitted when all windows have been closed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  addListener(event: 'window-all-closed', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'window-all-closed', listener: (...args: unknown[]) => void): this;
 
   /**
    * Adds `path` to the recent documents list. macOS and Windows only.
@@ -704,712 +704,712 @@ export interface ElectronApp {
    *
    * Emitted when Chrome's accessibility support changes. macOS and Windows only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'accessibility-support-changed', listener: (event: ElectronEvent, accessibilitySupportEnabled: boolean) => void): this;
+  on($event: 'accessibility-support-changed', listener: ($event: ElectronEvent, accessibilitySupportEnabled: boolean) => void): this;
 
   /**
    * Registers a listener for the `activate` event.
    *
    * Emitted when the application is activated. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'activate', listener: (event: ElectronEvent, hasVisibleWindows: boolean) => void): this;
+  on($event: 'activate', listener: ($event: ElectronEvent, hasVisibleWindows: boolean) => void): this;
 
   /**
    * Registers a listener for the `activity-was-continued` event.
    *
    * Emitted during Handoff after an activity from this device was successfully resumed on another one. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'activity-was-continued', listener: (event: ElectronEvent, type: string, userInfo: unknown) => void): this;
+  on($event: 'activity-was-continued', listener: ($event: ElectronEvent, type: string, userInfo: unknown) => void): this;
 
   /**
    * Registers a listener for the `before-quit` event.
    *
    * Emitted before the application starts closing its windows.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'before-quit', listener: (event: ElectronEvent) => void): this;
+  on($event: 'before-quit', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a listener for the `browser-window-blur` event.
    *
    * Emitted when a browserWindow gets blurred.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'browser-window-blur', listener: (event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
+  on($event: 'browser-window-blur', listener: ($event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
 
   /**
    * Registers a listener for the `browser-window-created` event.
    *
    * Emitted when a new browserWindow is created.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'browser-window-created', listener: (event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
+  on($event: 'browser-window-created', listener: ($event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
 
   /**
    * Registers a listener for the `browser-window-focus` event.
    *
    * Emitted when a browserWindow gets focused.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'browser-window-focus', listener: (event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
+  on($event: 'browser-window-focus', listener: ($event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
 
   /**
    * Registers a listener for the `certificate-error` event.
    *
    * Emitted when failed to verify the certificate for a URL.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'certificate-error', listener: (event: ElectronEvent, webContents: ElectronWebContents, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
+  on($event: 'certificate-error', listener: ($event: ElectronEvent, webContents: ElectronWebContents, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
 
   /**
    * Registers a listener for the `child-process-gone` event.
    *
    * Emitted when the child process unexpectedly disappears.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'child-process-gone', listener: (event: ElectronEvent, details: ElectronDetails) => void): this;
+  on($event: 'child-process-gone', listener: ($event: ElectronEvent, details: ElectronDetails) => void): this;
 
   /**
    * Registers a listener for the `continue-activity` event.
    *
    * Emitted during Handoff when an activity from a different device wants to be resumed. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'continue-activity', listener: (event: ElectronEvent, type: string, userInfo: unknown, details: ElectronContinueActivityDetails) => void): this;
+  on($event: 'continue-activity', listener: ($event: ElectronEvent, type: string, userInfo: unknown, details: ElectronContinueActivityDetails) => void): this;
 
   /**
    * Registers a listener for the `continue-activity-error` event.
    *
    * Emitted during Handoff when an activity from a different device fails to be resumed. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'continue-activity-error', listener: (event: ElectronEvent, type: string, error: string) => void): this;
+  on($event: 'continue-activity-error', listener: ($event: ElectronEvent, type: string, error: string) => void): this;
 
   /**
    * Registers a listener for the `did-become-active` event.
    *
    * Emitted every time the app becomes active. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'did-become-active', listener: (event: ElectronEvent) => void): this;
+  on($event: 'did-become-active', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a listener for the `first-instance-ack` event.
    *
    * Emitted in the second instance during `requestSingleInstanceLock` when the first instance calls the `ackCallback`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'first-instance-ack', listener: (event: ElectronEvent, additionalData: unknown) => void): this;
+  on($event: 'first-instance-ack', listener: ($event: ElectronEvent, additionalData: unknown) => void): this;
 
   /**
    * Registers a listener for the `gpu-info-update` event.
    *
    * Emitted whenever there is a GPU info update.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'gpu-info-update', listener: (...args: unknown[]) => void): this;
+  on($event: 'gpu-info-update', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `gpu-process-crashed` event.
    *
    * Emitted when the GPU process crashes or is killed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
    * @deprecated Deprecated by Electron.
    */
-  on(event: 'gpu-process-crashed', listener: (event: ElectronEvent, killed: boolean) => void): this;
+  on($event: 'gpu-process-crashed', listener: ($event: ElectronEvent, killed: boolean) => void): this;
 
   /**
    * Registers a listener for the `login` event.
    *
    * Emitted when `webContents` wants to do basic auth.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'login', listener: (event: ElectronEvent, webContents: ElectronWebContents, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+  on($event: 'login', listener: ($event: ElectronEvent, webContents: ElectronWebContents, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
 
   /**
    * Registers a listener for the `new-window-for-tab` event.
    *
    * Emitted when the user clicks the native macOS new tab button. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'new-window-for-tab', listener: (event: ElectronEvent) => void): this;
+  on($event: 'new-window-for-tab', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a listener for the `open-file` event.
    *
    * Emitted when the user wants to open a file with the application. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'open-file', listener: (event: ElectronEvent, path: string) => void): this;
+  on($event: 'open-file', listener: ($event: ElectronEvent, path: string) => void): this;
 
   /**
    * Registers a listener for the `open-url` event.
    *
    * Emitted when the user wants to open a URL with the application. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'open-url', listener: (event: ElectronEvent, url: string) => void): this;
+  on($event: 'open-url', listener: ($event: ElectronEvent, url: string) => void): this;
 
   /**
    * Registers a listener for the `quit` event.
    *
    * Emitted when the application is quitting.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'quit', listener: (event: ElectronEvent, exitCode: number) => void): this;
+  on($event: 'quit', listener: ($event: ElectronEvent, exitCode: number) => void): this;
 
   /**
    * Registers a listener for the `ready` event.
    *
    * Emitted once, when Electron has finished initializing.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'ready', listener: (event: ElectronEvent, launchInfo: ElectronNotificationResponse | Record<string, unknown>) => void): this;
+  on($event: 'ready', listener: ($event: ElectronEvent, launchInfo: ElectronNotificationResponse | Record<string, unknown>) => void): this;
 
   /**
    * Registers a listener for the `render-process-gone` event.
    *
    * Emitted when the renderer process unexpectedly disappears.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'render-process-gone', listener: (event: ElectronEvent, webContents: ElectronWebContents, details: ElectronRenderProcessGoneDetails) => void): this;
+  on($event: 'render-process-gone', listener: ($event: ElectronEvent, webContents: ElectronWebContents, details: ElectronRenderProcessGoneDetails) => void): this;
 
   /**
    * Registers a listener for the `renderer-process-crashed` event.
    *
    * Emitted when the renderer process of `webContents` crashes or is killed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
    * @deprecated Deprecated by Electron.
    */
-  on(event: 'renderer-process-crashed', listener: (event: ElectronEvent, webContents: ElectronWebContents, killed: boolean) => void): this;
+  on($event: 'renderer-process-crashed', listener: ($event: ElectronEvent, webContents: ElectronWebContents, killed: boolean) => void): this;
 
   /**
    * Registers a listener for the `second-instance` event.
    *
    * Emitted inside the primary instance when a second instance is executed and calls `requestSingleInstanceLock`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'second-instance', listener: (event: ElectronEvent, argv: string[], workingDirectory: string, additionalData: unknown, ackCallback: unknown) => void): this;
+  on($event: 'second-instance', listener: ($event: ElectronEvent, argv: string[], workingDirectory: string, additionalData: unknown, ackCallback: unknown) => void): this;
 
   /**
    * Registers a listener for the `select-client-certificate` event.
    *
    * Emitted when a client certificate is requested.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'select-client-certificate', listener: (event: ElectronEvent, webContents: ElectronWebContents, url: string, certificateList: ElectronCertificate[], callback: (certificate?: ElectronCertificate) => void) => void): this;
+  on($event: 'select-client-certificate', listener: ($event: ElectronEvent, webContents: ElectronWebContents, url: string, certificateList: ElectronCertificate[], callback: (certificate?: ElectronCertificate) => void) => void): this;
 
   /**
    * Registers a listener for the `session-created` event.
    *
    * Emitted when Electron has created a new `session`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'session-created', listener: (session: Session) => void): this;
+  on($event: 'session-created', listener: (session: Session) => void): this;
 
   /**
    * Registers a listener for the `update-activity-state` event.
    *
    * Emitted when Handoff is about to be resumed on another device. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'update-activity-state', listener: (event: ElectronEvent, type: string, userInfo: unknown) => void): this;
+  on($event: 'update-activity-state', listener: ($event: ElectronEvent, type: string, userInfo: unknown) => void): this;
 
   /**
    * Registers a listener for the `web-contents-created` event.
    *
    * Emitted when a new `webContents` is created.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'web-contents-created', listener: (event: ElectronEvent, webContents: ElectronWebContents) => void): this;
+  on($event: 'web-contents-created', listener: ($event: ElectronEvent, webContents: ElectronWebContents) => void): this;
 
   /**
    * Registers a listener for the `will-continue-activity` event.
    *
    * Emitted during Handoff before an activity from a different device wants to be resumed. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'will-continue-activity', listener: (event: ElectronEvent, type: string) => void): this;
+  on($event: 'will-continue-activity', listener: ($event: ElectronEvent, type: string) => void): this;
 
   /**
    * Registers a listener for the `will-finish-launching` event.
    *
    * Emitted when the application has finished basic startup.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'will-finish-launching', listener: (...args: unknown[]) => void): this;
+  on($event: 'will-finish-launching', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `will-quit` event.
    *
    * Emitted when all windows have been closed and the application will quit.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'will-quit', listener: (event: ElectronEvent) => void): this;
+  on($event: 'will-quit', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a listener for the `window-all-closed` event.
    *
    * Emitted when all windows have been closed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  on(event: 'window-all-closed', listener: (...args: unknown[]) => void): this;
+  on($event: 'window-all-closed', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `accessibility-support-changed` event.
    *
    * Emitted when Chrome's accessibility support changes. macOS and Windows only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'accessibility-support-changed', listener: (event: ElectronEvent, accessibilitySupportEnabled: boolean) => void): this;
+  once($event: 'accessibility-support-changed', listener: ($event: ElectronEvent, accessibilitySupportEnabled: boolean) => void): this;
 
   /**
    * Registers a one-time listener for the `activate` event.
    *
    * Emitted when the application is activated. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'activate', listener: (event: ElectronEvent, hasVisibleWindows: boolean) => void): this;
+  once($event: 'activate', listener: ($event: ElectronEvent, hasVisibleWindows: boolean) => void): this;
 
   /**
    * Registers a one-time listener for the `activity-was-continued` event.
    *
    * Emitted during Handoff after an activity from this device was successfully resumed on another one. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'activity-was-continued', listener: (event: ElectronEvent, type: string, userInfo: unknown) => void): this;
+  once($event: 'activity-was-continued', listener: ($event: ElectronEvent, type: string, userInfo: unknown) => void): this;
 
   /**
    * Registers a one-time listener for the `before-quit` event.
    *
    * Emitted before the application starts closing its windows.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'before-quit', listener: (event: ElectronEvent) => void): this;
+  once($event: 'before-quit', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a one-time listener for the `browser-window-blur` event.
    *
    * Emitted when a browserWindow gets blurred.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'browser-window-blur', listener: (event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
+  once($event: 'browser-window-blur', listener: ($event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
 
   /**
    * Registers a one-time listener for the `browser-window-created` event.
    *
    * Emitted when a new browserWindow is created.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'browser-window-created', listener: (event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
+  once($event: 'browser-window-created', listener: ($event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
 
   /**
    * Registers a one-time listener for the `browser-window-focus` event.
    *
    * Emitted when a browserWindow gets focused.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'browser-window-focus', listener: (event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
+  once($event: 'browser-window-focus', listener: ($event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
 
   /**
    * Registers a one-time listener for the `certificate-error` event.
    *
    * Emitted when failed to verify the certificate for a URL.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'certificate-error', listener: (event: ElectronEvent, webContents: ElectronWebContents, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
+  once($event: 'certificate-error', listener: ($event: ElectronEvent, webContents: ElectronWebContents, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
 
   /**
    * Registers a one-time listener for the `child-process-gone` event.
    *
    * Emitted when the child process unexpectedly disappears.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'child-process-gone', listener: (event: ElectronEvent, details: ElectronDetails) => void): this;
+  once($event: 'child-process-gone', listener: ($event: ElectronEvent, details: ElectronDetails) => void): this;
 
   /**
    * Registers a one-time listener for the `continue-activity` event.
    *
    * Emitted during Handoff when an activity from a different device wants to be resumed. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'continue-activity', listener: (event: ElectronEvent, type: string, userInfo: unknown, details: ElectronContinueActivityDetails) => void): this;
+  once($event: 'continue-activity', listener: ($event: ElectronEvent, type: string, userInfo: unknown, details: ElectronContinueActivityDetails) => void): this;
 
   /**
    * Registers a one-time listener for the `continue-activity-error` event.
    *
    * Emitted during Handoff when an activity from a different device fails to be resumed. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'continue-activity-error', listener: (event: ElectronEvent, type: string, error: string) => void): this;
+  once($event: 'continue-activity-error', listener: ($event: ElectronEvent, type: string, error: string) => void): this;
 
   /**
    * Registers a one-time listener for the `did-become-active` event.
    *
    * Emitted every time the app becomes active. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'did-become-active', listener: (event: ElectronEvent) => void): this;
+  once($event: 'did-become-active', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a one-time listener for the `first-instance-ack` event.
    *
    * Emitted in the second instance during `requestSingleInstanceLock` when the first instance calls the `ackCallback`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'first-instance-ack', listener: (event: ElectronEvent, additionalData: unknown) => void): this;
+  once($event: 'first-instance-ack', listener: ($event: ElectronEvent, additionalData: unknown) => void): this;
 
   /**
    * Registers a one-time listener for the `gpu-info-update` event.
    *
    * Emitted whenever there is a GPU info update.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'gpu-info-update', listener: (...args: unknown[]) => void): this;
+  once($event: 'gpu-info-update', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `gpu-process-crashed` event.
    *
    * Emitted when the GPU process crashes or is killed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
    * @deprecated Deprecated by Electron.
    */
-  once(event: 'gpu-process-crashed', listener: (event: ElectronEvent, killed: boolean) => void): this;
+  once($event: 'gpu-process-crashed', listener: ($event: ElectronEvent, killed: boolean) => void): this;
 
   /**
    * Registers a one-time listener for the `login` event.
    *
    * Emitted when `webContents` wants to do basic auth.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'login', listener: (event: ElectronEvent, webContents: ElectronWebContents, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+  once($event: 'login', listener: ($event: ElectronEvent, webContents: ElectronWebContents, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
 
   /**
    * Registers a one-time listener for the `new-window-for-tab` event.
    *
    * Emitted when the user clicks the native macOS new tab button. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'new-window-for-tab', listener: (event: ElectronEvent) => void): this;
+  once($event: 'new-window-for-tab', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a one-time listener for the `open-file` event.
    *
    * Emitted when the user wants to open a file with the application. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'open-file', listener: (event: ElectronEvent, path: string) => void): this;
+  once($event: 'open-file', listener: ($event: ElectronEvent, path: string) => void): this;
 
   /**
    * Registers a one-time listener for the `open-url` event.
    *
    * Emitted when the user wants to open a URL with the application. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'open-url', listener: (event: ElectronEvent, url: string) => void): this;
+  once($event: 'open-url', listener: ($event: ElectronEvent, url: string) => void): this;
 
   /**
    * Registers a one-time listener for the `quit` event.
    *
    * Emitted when the application is quitting.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'quit', listener: (event: ElectronEvent, exitCode: number) => void): this;
+  once($event: 'quit', listener: ($event: ElectronEvent, exitCode: number) => void): this;
 
   /**
    * Registers a one-time listener for the `ready` event.
    *
    * Emitted once, when Electron has finished initializing.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'ready', listener: (event: ElectronEvent, launchInfo: ElectronNotificationResponse | Record<string, unknown>) => void): this;
+  once($event: 'ready', listener: ($event: ElectronEvent, launchInfo: ElectronNotificationResponse | Record<string, unknown>) => void): this;
 
   /**
    * Registers a one-time listener for the `render-process-gone` event.
    *
    * Emitted when the renderer process unexpectedly disappears.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'render-process-gone', listener: (event: ElectronEvent, webContents: ElectronWebContents, details: ElectronRenderProcessGoneDetails) => void): this;
+  once($event: 'render-process-gone', listener: ($event: ElectronEvent, webContents: ElectronWebContents, details: ElectronRenderProcessGoneDetails) => void): this;
 
   /**
    * Registers a one-time listener for the `renderer-process-crashed` event.
    *
    * Emitted when the renderer process of `webContents` crashes or is killed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
    * @deprecated Deprecated by Electron.
    */
-  once(event: 'renderer-process-crashed', listener: (event: ElectronEvent, webContents: ElectronWebContents, killed: boolean) => void): this;
+  once($event: 'renderer-process-crashed', listener: ($event: ElectronEvent, webContents: ElectronWebContents, killed: boolean) => void): this;
 
   /**
    * Registers a one-time listener for the `second-instance` event.
    *
    * Emitted inside the primary instance when a second instance is executed and calls `requestSingleInstanceLock`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'second-instance', listener: (event: ElectronEvent, argv: string[], workingDirectory: string, additionalData: unknown, ackCallback: unknown) => void): this;
+  once($event: 'second-instance', listener: ($event: ElectronEvent, argv: string[], workingDirectory: string, additionalData: unknown, ackCallback: unknown) => void): this;
 
   /**
    * Registers a one-time listener for the `select-client-certificate` event.
    *
    * Emitted when a client certificate is requested.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'select-client-certificate', listener: (event: ElectronEvent, webContents: ElectronWebContents, url: string, certificateList: ElectronCertificate[], callback: (certificate?: ElectronCertificate) => void) => void): this;
+  once($event: 'select-client-certificate', listener: ($event: ElectronEvent, webContents: ElectronWebContents, url: string, certificateList: ElectronCertificate[], callback: (certificate?: ElectronCertificate) => void) => void): this;
 
   /**
    * Registers a one-time listener for the `session-created` event.
    *
    * Emitted when Electron has created a new `session`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'session-created', listener: (session: Session) => void): this;
+  once($event: 'session-created', listener: (session: Session) => void): this;
 
   /**
    * Registers a one-time listener for the `update-activity-state` event.
    *
    * Emitted when Handoff is about to be resumed on another device. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'update-activity-state', listener: (event: ElectronEvent, type: string, userInfo: unknown) => void): this;
+  once($event: 'update-activity-state', listener: ($event: ElectronEvent, type: string, userInfo: unknown) => void): this;
 
   /**
    * Registers a one-time listener for the `web-contents-created` event.
    *
    * Emitted when a new `webContents` is created.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'web-contents-created', listener: (event: ElectronEvent, webContents: ElectronWebContents) => void): this;
+  once($event: 'web-contents-created', listener: ($event: ElectronEvent, webContents: ElectronWebContents) => void): this;
 
   /**
    * Registers a one-time listener for the `will-continue-activity` event.
    *
    * Emitted during Handoff before an activity from a different device wants to be resumed. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'will-continue-activity', listener: (event: ElectronEvent, type: string) => void): this;
+  once($event: 'will-continue-activity', listener: ($event: ElectronEvent, type: string) => void): this;
 
   /**
    * Registers a one-time listener for the `will-finish-launching` event.
    *
    * Emitted when the application has finished basic startup.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'will-finish-launching', listener: (...args: unknown[]) => void): this;
+  once($event: 'will-finish-launching', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `will-quit` event.
    *
    * Emitted when all windows have been closed and the application will quit.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'will-quit', listener: (event: ElectronEvent) => void): this;
+  once($event: 'will-quit', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a one-time listener for the `window-all-closed` event.
    *
    * Emitted when all windows have been closed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  once(event: 'window-all-closed', listener: (...args: unknown[]) => void): this;
+  once($event: 'window-all-closed', listener: (...args: unknown[]) => void): this;
 
   /**
    * Tries to close all windows. The `before-quit` event is emitted first; if all windows are
@@ -1442,356 +1442,356 @@ export interface ElectronApp {
    *
    * Emitted when Chrome's accessibility support changes. macOS and Windows only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'accessibility-support-changed', listener: (event: ElectronEvent, accessibilitySupportEnabled: boolean) => void): this;
+  removeListener($event: 'accessibility-support-changed', listener: ($event: ElectronEvent, accessibilitySupportEnabled: boolean) => void): this;
 
   /**
    * Removes a previously added listener for the `activate` event.
    *
    * Emitted when the application is activated. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'activate', listener: (event: ElectronEvent, hasVisibleWindows: boolean) => void): this;
+  removeListener($event: 'activate', listener: ($event: ElectronEvent, hasVisibleWindows: boolean) => void): this;
 
   /**
    * Removes a previously added listener for the `activity-was-continued` event.
    *
    * Emitted during Handoff after an activity from this device was successfully resumed on another one. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'activity-was-continued', listener: (event: ElectronEvent, type: string, userInfo: unknown) => void): this;
+  removeListener($event: 'activity-was-continued', listener: ($event: ElectronEvent, type: string, userInfo: unknown) => void): this;
 
   /**
    * Removes a previously added listener for the `before-quit` event.
    *
    * Emitted before the application starts closing its windows.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'before-quit', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'before-quit', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Removes a previously added listener for the `browser-window-blur` event.
    *
    * Emitted when a browserWindow gets blurred.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'browser-window-blur', listener: (event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
+  removeListener($event: 'browser-window-blur', listener: ($event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
 
   /**
    * Removes a previously added listener for the `browser-window-created` event.
    *
    * Emitted when a new browserWindow is created.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'browser-window-created', listener: (event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
+  removeListener($event: 'browser-window-created', listener: ($event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
 
   /**
    * Removes a previously added listener for the `browser-window-focus` event.
    *
    * Emitted when a browserWindow gets focused.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'browser-window-focus', listener: (event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
+  removeListener($event: 'browser-window-focus', listener: ($event: ElectronEvent, window: ElectronBrowserWindow) => void): this;
 
   /**
    * Removes a previously added listener for the `certificate-error` event.
    *
    * Emitted when failed to verify the certificate for a URL.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'certificate-error', listener: (event: ElectronEvent, webContents: ElectronWebContents, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
+  removeListener($event: 'certificate-error', listener: ($event: ElectronEvent, webContents: ElectronWebContents, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
 
   /**
    * Removes a previously added listener for the `child-process-gone` event.
    *
    * Emitted when the child process unexpectedly disappears.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'child-process-gone', listener: (event: ElectronEvent, details: ElectronDetails) => void): this;
+  removeListener($event: 'child-process-gone', listener: ($event: ElectronEvent, details: ElectronDetails) => void): this;
 
   /**
    * Removes a previously added listener for the `continue-activity` event.
    *
    * Emitted during Handoff when an activity from a different device wants to be resumed. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'continue-activity', listener: (event: ElectronEvent, type: string, userInfo: unknown, details: ElectronContinueActivityDetails) => void): this;
+  removeListener($event: 'continue-activity', listener: ($event: ElectronEvent, type: string, userInfo: unknown, details: ElectronContinueActivityDetails) => void): this;
 
   /**
    * Removes a previously added listener for the `continue-activity-error` event.
    *
    * Emitted during Handoff when an activity from a different device fails to be resumed. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'continue-activity-error', listener: (event: ElectronEvent, type: string, error: string) => void): this;
+  removeListener($event: 'continue-activity-error', listener: ($event: ElectronEvent, type: string, error: string) => void): this;
 
   /**
    * Removes a previously added listener for the `did-become-active` event.
    *
    * Emitted every time the app becomes active. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'did-become-active', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'did-become-active', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Removes a previously added listener for the `first-instance-ack` event.
    *
    * Emitted in the second instance during `requestSingleInstanceLock` when the first instance calls the `ackCallback`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'first-instance-ack', listener: (event: ElectronEvent, additionalData: unknown) => void): this;
+  removeListener($event: 'first-instance-ack', listener: ($event: ElectronEvent, additionalData: unknown) => void): this;
 
   /**
    * Removes a previously added listener for the `gpu-info-update` event.
    *
    * Emitted whenever there is a GPU info update.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'gpu-info-update', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'gpu-info-update', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously added listener for the `gpu-process-crashed` event.
    *
    * Emitted when the GPU process crashes or is killed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
    * @deprecated Deprecated by Electron.
    */
-  removeListener(event: 'gpu-process-crashed', listener: (event: ElectronEvent, killed: boolean) => void): this;
+  removeListener($event: 'gpu-process-crashed', listener: ($event: ElectronEvent, killed: boolean) => void): this;
 
   /**
    * Removes a previously added listener for the `login` event.
    *
    * Emitted when `webContents` wants to do basic auth.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'login', listener: (event: ElectronEvent, webContents: ElectronWebContents, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+  removeListener($event: 'login', listener: ($event: ElectronEvent, webContents: ElectronWebContents, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
 
   /**
    * Removes a previously added listener for the `new-window-for-tab` event.
    *
    * Emitted when the user clicks the native macOS new tab button. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'new-window-for-tab', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'new-window-for-tab', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Removes a previously added listener for the `open-file` event.
    *
    * Emitted when the user wants to open a file with the application. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'open-file', listener: (event: ElectronEvent, path: string) => void): this;
+  removeListener($event: 'open-file', listener: ($event: ElectronEvent, path: string) => void): this;
 
   /**
    * Removes a previously added listener for the `open-url` event.
    *
    * Emitted when the user wants to open a URL with the application. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'open-url', listener: (event: ElectronEvent, url: string) => void): this;
+  removeListener($event: 'open-url', listener: ($event: ElectronEvent, url: string) => void): this;
 
   /**
    * Removes a previously added listener for the `quit` event.
    *
    * Emitted when the application is quitting.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'quit', listener: (event: ElectronEvent, exitCode: number) => void): this;
+  removeListener($event: 'quit', listener: ($event: ElectronEvent, exitCode: number) => void): this;
 
   /**
    * Removes a previously added listener for the `ready` event.
    *
    * Emitted once, when Electron has finished initializing.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'ready', listener: (event: ElectronEvent, launchInfo: ElectronNotificationResponse | Record<string, unknown>) => void): this;
+  removeListener($event: 'ready', listener: ($event: ElectronEvent, launchInfo: ElectronNotificationResponse | Record<string, unknown>) => void): this;
 
   /**
    * Removes a previously added listener for the `render-process-gone` event.
    *
    * Emitted when the renderer process unexpectedly disappears.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'render-process-gone', listener: (event: ElectronEvent, webContents: ElectronWebContents, details: ElectronRenderProcessGoneDetails) => void): this;
+  removeListener($event: 'render-process-gone', listener: ($event: ElectronEvent, webContents: ElectronWebContents, details: ElectronRenderProcessGoneDetails) => void): this;
 
   /**
    * Removes a previously added listener for the `renderer-process-crashed` event.
    *
    * Emitted when the renderer process of `webContents` crashes or is killed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    *
    * @deprecated Deprecated by Electron.
    */
-  removeListener(event: 'renderer-process-crashed', listener: (event: ElectronEvent, webContents: ElectronWebContents, killed: boolean) => void): this;
+  removeListener($event: 'renderer-process-crashed', listener: ($event: ElectronEvent, webContents: ElectronWebContents, killed: boolean) => void): this;
 
   /**
    * Removes a previously added listener for the `second-instance` event.
    *
    * Emitted inside the primary instance when a second instance is executed and calls `requestSingleInstanceLock`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'second-instance', listener: (event: ElectronEvent, argv: string[], workingDirectory: string, additionalData: unknown, ackCallback: unknown) => void): this;
+  removeListener($event: 'second-instance', listener: ($event: ElectronEvent, argv: string[], workingDirectory: string, additionalData: unknown, ackCallback: unknown) => void): this;
 
   /**
    * Removes a previously added listener for the `select-client-certificate` event.
    *
    * Emitted when a client certificate is requested.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'select-client-certificate', listener: (event: ElectronEvent, webContents: ElectronWebContents, url: string, certificateList: ElectronCertificate[], callback: (certificate?: ElectronCertificate) => void) => void): this;
+  removeListener($event: 'select-client-certificate', listener: ($event: ElectronEvent, webContents: ElectronWebContents, url: string, certificateList: ElectronCertificate[], callback: (certificate?: ElectronCertificate) => void) => void): this;
 
   /**
    * Removes a previously added listener for the `session-created` event.
    *
    * Emitted when Electron has created a new `session`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'session-created', listener: (session: Session) => void): this;
+  removeListener($event: 'session-created', listener: (session: Session) => void): this;
 
   /**
    * Removes a previously added listener for the `update-activity-state` event.
    *
    * Emitted when Handoff is about to be resumed on another device. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'update-activity-state', listener: (event: ElectronEvent, type: string, userInfo: unknown) => void): this;
+  removeListener($event: 'update-activity-state', listener: ($event: ElectronEvent, type: string, userInfo: unknown) => void): this;
 
   /**
    * Removes a previously added listener for the `web-contents-created` event.
    *
    * Emitted when a new `webContents` is created.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'web-contents-created', listener: (event: ElectronEvent, webContents: ElectronWebContents) => void): this;
+  removeListener($event: 'web-contents-created', listener: ($event: ElectronEvent, webContents: ElectronWebContents) => void): this;
 
   /**
    * Removes a previously added listener for the `will-continue-activity` event.
    *
    * Emitted during Handoff before an activity from a different device wants to be resumed. macOS only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'will-continue-activity', listener: (event: ElectronEvent, type: string) => void): this;
+  removeListener($event: 'will-continue-activity', listener: ($event: ElectronEvent, type: string) => void): this;
 
   /**
    * Removes a previously added listener for the `will-finish-launching` event.
    *
    * Emitted when the application has finished basic startup.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'will-finish-launching', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'will-finish-launching', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously added listener for the `will-quit` event.
    *
    * Emitted when all windows have been closed and the application will quit.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'will-quit', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'will-quit', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Removes a previously added listener for the `window-all-closed` event.
    *
    * Emitted when all windows have been closed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronApp` instance.
    */
-  removeListener(event: 'window-all-closed', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'window-all-closed', listener: (...args: unknown[]) => void): this;
 
   /**
    * Requests the single instance lock. Returns whether this instance obtained the lock and should

@@ -59,7 +59,7 @@ export interface Commands extends Events {
    * @param command - {@link obsidian#Command} to execute.
    * @returns Whether the command was successfully executed.
    */
-  executeCommand(command: Command, event?: Event): boolean;
+  executeCommand(command: Command, $event?: Event): boolean;
 
   /**
    * Execute a command by ID.
@@ -67,7 +67,7 @@ export interface Commands extends Events {
    * @param commandId - ID of command to execute.
    * @returns Whether the command was successfully executed.
    */
-  executeCommandById(commandId: string, event?: Event): boolean;
+  executeCommandById(commandId: string, $event?: Event): boolean;
 
   /**
    * Find a command by ID.

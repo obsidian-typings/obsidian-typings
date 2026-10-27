@@ -89,10 +89,10 @@ export interface MetadataEditor extends Component {
   /**
    * Convert given properties to a serialized object and store in clipboard as obsidian/properties.
    *
-   * @param event - The clipboard event.
+   * @param $event - The clipboard event.
    * @param properties - Properties to copy.
    */
-  _copyToClipboard(event: ClipboardEvent, properties: MetadataEditorProperty[]): void;
+  _copyToClipboard($event: ClipboardEvent, properties: MetadataEditorProperty[]): void;
 
   /**
    * Uncollapse editor if collapsed and create a new property row.
@@ -141,39 +141,39 @@ export interface MetadataEditor extends Component {
   /**
    * Handle copy event on selection and serialize properties.
    *
-   * @param event - The clipboard event.
+   * @param $event - The clipboard event.
    */
-  handleCopy(event: ClipboardEvent): void;
+  handleCopy($event: ClipboardEvent): void;
 
   /**
    * Handle cut event and serialize and remove properties.
    *
-   * @param event - The clipboard event.
+   * @param $event - The clipboard event.
    */
-  handleCut(event: ClipboardEvent): void;
+  handleCut($event: ClipboardEvent): void;
 
   /**
    * Handle selection of item for drag handling.
    *
-   * @param event - The pointer event.
+   * @param $event - The pointer event.
    * @param property - Property being selected.
    * @returns Whether the selection was handled.
    */
-  handleItemSelection(event: PointerEvent, property: MetadataEditorProperty): boolean;
+  handleItemSelection($event: PointerEvent, property: MetadataEditorProperty): boolean;
 
   /**
    * Handle key press event for controlling selection or movement of property up/down.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  handleKeypress(event: KeyboardEvent): void;
+  handleKeypress($event: KeyboardEvent): void;
 
   /**
    * Handle paste event of properties into metadata editor.
    *
-   * @param event - The clipboard event.
+   * @param $event - The clipboard event.
    */
-  handlePaste(event: ClipboardEvent): void;
+  handlePaste($event: ClipboardEvent): void;
 
   /**
    * Whether the editor has focus.
@@ -262,9 +262,9 @@ export interface MetadataEditor extends Component {
   /**
    * On context menu event on header element, show property menu.
    *
-   * @param event - The mouse event.
+   * @param $event - The mouse event.
    */
-  showPropertiesMenu(event: MouseEvent): void;
+  showPropertiesMenu($event: MouseEvent): void;
 
   /**
    * Synchronize data with given properties and re-render them.

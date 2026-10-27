@@ -342,12 +342,12 @@ declare module 'obsidian' {
     /**
      * Get value from config by key.
      *
-     * @param string Key of config value.
+     * @param $string Key of config value.
      * @returns The config value.
      * @remark Default value will be selected if config value was not manually changed.
      * @unofficial
      */
-    getConfig(string: ConfigItem): unknown;
+    getConfig($string: ConfigItem): unknown;
 
     /**
      * Get path to config file (relative to vault root).

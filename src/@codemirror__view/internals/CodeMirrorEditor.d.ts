@@ -409,18 +409,18 @@ export interface CodeMirrorEditor {
   /**
    * Remove an event listener from the editor.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event listener to remove.
    */
-  off(event: string, listener: EventListenerOrEventListenerObject): void;
+  off($event: string, listener: EventListenerOrEventListenerObject): void;
 
   /**
    * Add an event listener to the editor.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event listener to add.
    */
-  on(event: string, listener: EventListenerOrEventListenerObject): void;
+  on($event: string, listener: EventListenerOrEventListenerObject): void;
 
   /**
    * Handle pre-operation-end cleanup.
@@ -642,10 +642,10 @@ export interface CodeMirrorEditor {
   /**
    * Emit a signal/event on the editor.
    *
-   * @param event - The event name to emit.
+   * @param $event - The event name to emit.
    * @param args - Additional arguments to pass to the event handlers.
    */
-  signal(event: string, ...args: unknown[]): void;
+  signal($event: string, ...args: unknown[]): void;
 
   /**
    * Check whether there is an active selection.

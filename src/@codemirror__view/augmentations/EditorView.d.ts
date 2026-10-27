@@ -647,7 +647,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link EditorView.dragMovesSelection} instead.
      */
-    const dragMovesSelection__: Facet<(event: MouseEvent) => boolean, readonly ((event: MouseEvent) => boolean)[]>;
+    const dragMovesSelection__: Facet<($event: MouseEvent) => boolean, readonly (($event: MouseEvent) => boolean)[]>;
 
     /**
      * Facet used to configure whether a given selecting click adds a new range to the existing
@@ -656,7 +656,7 @@ declare module '@codemirror/view' {
      * @official
      * @deprecated - Added only for typing purposes. Use {@link EditorView.clickAddsSelectionRange} instead.
      */
-    const clickAddsSelectionRange__: Facet<(event: MouseEvent) => boolean, readonly ((event: MouseEvent) => boolean)[]>;
+    const clickAddsSelectionRange__: Facet<($event: MouseEvent) => boolean, readonly (($event: MouseEvent) => boolean)[]>;
 
     /**
      * A facet that determines which decorations are shown in the view.

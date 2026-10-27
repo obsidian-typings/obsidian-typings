@@ -55,24 +55,24 @@ export interface AbstractSearchComponent {
   /**
    * Switch to the next inputElement.
    *
-   * @param event - The keyboard event that triggered the input switch.
+   * @param $event - The keyboard event that triggered the input switch.
    * @returns The result of switching to the next input.
    */
-  goToNextInput(event: KeyboardEvent): unknown;
+  goToNextInput($event: KeyboardEvent): unknown;
 
   /**
    * Invokes findNextOrReplace.
    *
-   * @param event - The keyboard event that triggered the action.
+   * @param $event - The keyboard event that triggered the action.
    * @returns The result of the enter action.
    */
-  onEnter(event: KeyboardEvent): unknown;
+  onEnter($event: KeyboardEvent): unknown;
 
   /**
    * Invokes findPrevious.
    *
-   * @param event - The keyboard event that triggered the action.
+   * @param $event - The keyboard event that triggered the action.
    * @returns The result of the shift-enter action.
    */
-  onShiftEnter(event: KeyboardEvent): unknown;
+  onShiftEnter($event: KeyboardEvent): unknown;
 }

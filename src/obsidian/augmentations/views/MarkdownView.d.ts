@@ -341,11 +341,11 @@ declare module 'obsidian' {
     /**
      * On mod click, opens editor of opposite mode in split view to right.
      *
-     * @param event - The keyboard or mouse event.
+     * @param $event - The keyboard or mouse event.
      * @returns A promise that resolves when the view is switched.
      * @unofficial
      */
-    onSwitchView(event: KeyboardEvent | MouseEvent): Promise<void>;
+    onSwitchView($event: KeyboardEvent | MouseEvent): Promise<void>;
 
     /**
      * The path of the file shown in the view.

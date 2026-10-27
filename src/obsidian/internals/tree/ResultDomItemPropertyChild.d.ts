@@ -59,23 +59,23 @@ export interface ResultDomItemPropertyChild extends TreeNode {
   /**
    * Handle focus entering this row.
    *
-   * @param event - The UI event that triggered focus.
+   * @param $event - The UI event that triggered focus.
    */
-  onFocusEnter(event?: UIEvent): void;
+  onFocusEnter($event?: UIEvent): void;
 
   /**
    * Handle focus leaving this row.
    *
-   * @param event - The UI event that triggered focus exit.
+   * @param $event - The UI event that triggered focus exit.
    */
-  onFocusExit(event?: UIEvent): void;
+  onFocusExit($event?: UIEvent): void;
 
   /**
    * Handle click on this row: opens the file with the property matches highlighted.
    *
-   * @param event - The UI event that triggered the click.
+   * @param $event - The UI event that triggered the click.
    */
-  onResultClick(event: UIEvent): void;
+  onResultClick($event: UIEvent): void;
 
   /**
    * Render the row as `key: value`, reading the value as `cache.frontmatter[matches[0].key]` and highlighting

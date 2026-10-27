@@ -48,60 +48,60 @@ export declare class ElectronIncomingMessage {
   /**
    * Registers a listener for the given response event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `IncomingMessage` instance.
    */
-  addListener(event: 'aborted', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'aborted', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'data', listener: (chunk: Buffer) => void): this;
+  addListener($event: 'data', listener: (chunk: Buffer) => void): this;
   /** */
-  addListener(event: 'end', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'end', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'error', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'error', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the given response event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `IncomingMessage` instance.
    */
-  on(event: 'aborted', listener: (...args: unknown[]) => void): this;
+  on($event: 'aborted', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'data', listener: (chunk: Buffer) => void): this;
+  on($event: 'data', listener: (chunk: Buffer) => void): this;
   /** */
-  on(event: 'end', listener: (...args: unknown[]) => void): this;
+  on($event: 'end', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'error', listener: (...args: unknown[]) => void): this;
+  on($event: 'error', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the given response event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `IncomingMessage` instance.
    */
-  once(event: 'aborted', listener: (...args: unknown[]) => void): this;
+  once($event: 'aborted', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'data', listener: (chunk: Buffer) => void): this;
+  once($event: 'data', listener: (chunk: Buffer) => void): this;
   /** */
-  once(event: 'end', listener: (...args: unknown[]) => void): this;
+  once($event: 'end', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'error', listener: (...args: unknown[]) => void): this;
+  once($event: 'error', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes the given listener for the given response event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `IncomingMessage` instance.
    */
-  removeListener(event: 'aborted', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'aborted', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'data', listener: (chunk: Buffer) => void): this;
+  removeListener($event: 'data', listener: (chunk: Buffer) => void): this;
   /** */
-  removeListener(event: 'end', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'end', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'error', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'error', listener: (...args: unknown[]) => void): this;
 }

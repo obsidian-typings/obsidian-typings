@@ -25,10 +25,10 @@ const FUNCTIONS_DIR = 'functions';
 const VARS_DIR = 'vars';
 
 interface ImportSpec {
-  imported: string;
-  local: string;
-  originalModule: string;
-  resolvedModule: string;
+  readonly imported: string;
+  readonly local: string;
+  readonly originalModule: string;
+  readonly resolvedModule: string;
 }
 
 function doesWindowFileHaveMember(windowFilePath: string, memberName: string, kind: 'method' | 'property'): boolean {

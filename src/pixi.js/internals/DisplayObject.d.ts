@@ -79,11 +79,11 @@ export declare abstract class DisplayObject {
   /**
    * Emits an event.
    *
-   * @param event - Event name.
+   * @param $event - Event name.
    * @param args - Arguments.
    * @returns Whether any listeners were called.
    */
-  emit(event: string | symbol, ...args: unknown[]): boolean;
+  emit($event: string | symbol, ...args: unknown[]): boolean;
 
   /**
    * Returns the bounds of the object.
@@ -105,32 +105,32 @@ export declare abstract class DisplayObject {
   /**
    * Removes an event listener.
    *
-   * @param event - Event name.
+   * @param $event - Event name.
    * @param fn - Callback function.
    * @param context - Callback context.
    * @returns This object for chaining.
    */
-  off(event: string | symbol, fn?: (...args: unknown[]) => void, context?: unknown): this;
+  off($event: string | symbol, fn?: (...args: unknown[]) => void, context?: unknown): this;
 
   /**
    * Adds an event listener.
    *
-   * @param event - Event name.
+   * @param $event - Event name.
    * @param fn - Callback function.
    * @param context - Callback context.
    * @returns This object for chaining.
    */
-  on(event: string | symbol, fn: (...args: unknown[]) => void, context?: unknown): this;
+  on($event: string | symbol, fn: (...args: unknown[]) => void, context?: unknown): this;
 
   /**
    * Adds a one-time event listener.
    *
-   * @param event - Event name.
+   * @param $event - Event name.
    * @param fn - Callback function.
    * @param context - Callback context.
    * @returns This object for chaining.
    */
-  once(event: string | symbol, fn: (...args: unknown[]) => void, context?: unknown): this;
+  once($event: string | symbol, fn: (...args: unknown[]) => void, context?: unknown): this;
 
   /** Pivot point. */
   get pivot(): ObservablePoint;
@@ -147,10 +147,10 @@ export declare abstract class DisplayObject {
   /**
    * Removes all listeners for the given event.
    *
-   * @param event - Event name.
+   * @param $event - Event name.
    * @returns This object for chaining.
    */
-  removeAllListeners(event?: string | symbol): this;
+  removeAllListeners($event?: string | symbol): this;
 
   /** Scale. */
   get scale(): ObservablePoint;

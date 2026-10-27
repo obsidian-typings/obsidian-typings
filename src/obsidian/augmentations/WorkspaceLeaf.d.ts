@@ -237,13 +237,13 @@ declare module 'obsidian' {
     /**
      * Handle a drop event on this leaf.
      *
-     * @param event - The drag event.
+     * @param $event - The drag event.
      * @param draggable - The draggable item.
      * @param isOver - Whether the drag is over this leaf.
      * @returns The drop result, or `null` if not handled.
      * @unofficial
      */
-    handleDrop(event: DragEvent, draggable: Draggable, isOver: boolean): DropResult | null;
+    handleDrop($event: DragEvent, draggable: Draggable, isOver: boolean): DropResult | null;
 
     /**
      * Highlight this leaf's tab header.
