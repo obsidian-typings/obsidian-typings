@@ -14,7 +14,7 @@
     "typescript": "$typescript"
   },
   "devDependencies": {
-    "@mnaoumov/typescript-dev-toolkit": "^4.0.0",
+    "@mnaoumov/typescript-dev-toolkit": "^5.0.0",
     "@mnaoumov/typescript-lib": "^1.0.0",
     "@tsconfig/strictest": "^2.0.8",
     "@types/semver": "^7.8.0",
