@@ -1,6 +1,7 @@
 import type { SearchMatchContext } from './SearchMatchContext.d.ts';
 import type { SearchMatcherTokenContext } from './SearchMatcherTokenContext.d.ts';
 import type { SearchMatchResult } from './SearchMatchResult.d.ts';
+import type { SearchQueryToken } from './SearchQueryToken.d.ts';
 import type { SearchRequiredInputs } from './SearchRequiredInputs.d.ts';
 
 /**
@@ -18,7 +19,7 @@ export interface SearchMatcher {
   /**
    * The query tokens this matcher consumed while the query was parsed.
    */
-  matchedTokens: unknown[];
+  matchedTokens: SearchQueryToken[];
 
   /**
    * Consumes the parser's current token, recording it in {@link SearchMatcher.matchedTokens}.

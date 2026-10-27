@@ -1,4 +1,5 @@
 import type { SearchMatcher } from './SearchMatcher.d.ts';
+import type { SearchQueryToken } from './SearchQueryToken.d.ts';
 
 /**
  * The query token at a cursor offset, and the matchers that own it.
@@ -15,5 +16,5 @@ export interface SearchMatcherTokenContext {
   /**
    * The query token.
    */
-  token: unknown;
+  token: SearchQueryToken;
 }
