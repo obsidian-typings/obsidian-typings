@@ -111,11 +111,11 @@ export interface HotkeyManager {
   /**
    * Trigger a command by keyboard event.
    *
-   * @param event - Keyboard event to trigger command with.
+   * @param $event - Keyboard event to trigger command with.
    * @param keypress - Pressed key information.
    * @returns Whether a command was triggered.
    */
-  onTrigger(event: KeyboardEvent, keypress: KeymapInfo): boolean;
+  onTrigger($event: KeyboardEvent, keypress: KeymapInfo): boolean;
 
   /**
    * Pretty-print hotkey of a command.

@@ -89,23 +89,23 @@ export interface ResultDomItemChild extends TreeNode {
   /**
    * Handle focus entering this match item.
    *
-   * @param event - The UI event that triggered focus.
+   * @param $event - The UI event that triggered focus.
    */
-  onFocusEnter(event?: UIEvent): void;
+  onFocusEnter($event?: UIEvent): void;
 
   /**
    * Handle focus leaving this match item.
    *
-   * @param event - The UI event that triggered focus exit.
+   * @param $event - The UI event that triggered focus exit.
    */
-  onFocusExit(event?: UIEvent): void;
+  onFocusExit($event?: UIEvent): void;
 
   /**
    * Handle click on this match to navigate to it.
    *
-   * @param event - The UI event that triggered the click.
+   * @param $event - The UI event that triggered the click.
    */
-  onResultClick(event: UIEvent): void;
+  onResultClick($event: UIEvent): void;
 
   /**
    * Render this match with optional surrounding text indicators.

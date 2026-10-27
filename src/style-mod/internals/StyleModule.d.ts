@@ -24,12 +24,12 @@ export declare class StyleModule {
    * Mount style module(s) into a document or shadow root.
    *
    * @param root - The document or shadow root to mount into.
-   * @param module - The style module(s) to mount.
+   * @param $module - The style module(s) to mount.
    * @param options - Optional mount options.
    */
   static mount(
     root: Document | DocumentOrShadowRoot | ShadowRoot,
-    module: readonly StyleModule[] | StyleModule,
+    $module: readonly StyleModule[] | StyleModule,
     options?: StyleModuleMountOptions
   ): void;
 

@@ -9,7 +9,7 @@ declare global {
      * Check if all properties in an object satisfy a condition.
      *
      * @typeParam T - The type of the properties in the object.
-     * @param object - The object to check.
+     * @param $object - The object to check.
      * @param callback - The condition to check.
      * @param context - The context passed as `this` to the `callback`.
      * @returns `true` if all properties satisfy the condition, `false` otherwise.
@@ -21,7 +21,7 @@ declare global {
      * @official
      */
     each<T>(
-      object: Record<string, T>,
+      $object: Record<string, T>,
       callback: (value: T, key?: string) => boolean | void,
       context?: unknown
     ): boolean;
@@ -29,7 +29,7 @@ declare global {
     /**
      * Checks if an object is empty.
      *
-     * @param object - The object to check.
+     * @param $object - The object to check.
      * @returns `true` if the object is empty, `false` otherwise.
      * @example
      * ```ts
@@ -39,6 +39,6 @@ declare global {
      * @official
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Required by official API for declaration merging.
-    isEmpty(object: Record<string, any>): boolean;
+    isEmpty($object: Record<string, any>): boolean;
   }
 }

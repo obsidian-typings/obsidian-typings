@@ -82,8 +82,8 @@ export interface ElectronMenuItemConstructorOptions {
    *
    * @param menuItem - The menu item that was clicked.
    * @param browserWindow - The focused window, or `undefined` if none.
-   * @param event - The keyboard event associated with the click.
+   * @param $event - The keyboard event associated with the click.
    * @returns Nothing.
    */
-  click?(menuItem: ElectronMenuItem, browserWindow: ElectronBrowserWindow | undefined, event: KeyboardEvent): void;
+  click?(menuItem: ElectronMenuItem, browserWindow: ElectronBrowserWindow | undefined, $event: KeyboardEvent): void;
 }

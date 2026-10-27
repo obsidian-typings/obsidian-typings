@@ -108,81 +108,81 @@ export declare class ElectronBrowserWindow {
   /**
    * Registers a listener for the given window event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This BrowserWindow instance.
    */
-  addListener(event: 'always-on-top-changed', listener: (event: ElectronEvent, isAlwaysOnTop: boolean) => void): this;
+  addListener($event: 'always-on-top-changed', listener: ($event: ElectronEvent, isAlwaysOnTop: boolean) => void): this;
   /** */
-  addListener(event: 'app-command', listener: (event: ElectronEvent, command: string) => void): this;
+  addListener($event: 'app-command', listener: ($event: ElectronEvent, command: string) => void): this;
   /** */
-  addListener(event: 'blur', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'blur', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'close', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'close', listener: ($event: ElectronEvent) => void): this;
   /** */
-  addListener(event: 'closed', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'closed', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'enter-full-screen', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'enter-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'focus', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'focus', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'hide', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'hide', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'leave-full-screen', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'leave-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'maximize', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'maximize', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'minimize', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'minimize', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'move', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'move', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'moved', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'moved', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'new-window-for-tab', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'new-window-for-tab', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'page-title-updated', listener: (event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
+  addListener($event: 'page-title-updated', listener: ($event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
   /** */
-  addListener(event: 'ready-to-show', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'ready-to-show', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'resize', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'resize', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'resized', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'resized', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'responsive', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'responsive', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'restore', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'restore', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'rotate-gesture', listener: (event: ElectronEvent, rotation: number) => void): this;
+  addListener($event: 'rotate-gesture', listener: ($event: ElectronEvent, rotation: number) => void): this;
   /** */
-  addListener(event: 'scroll-touch-begin', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'scroll-touch-begin', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'scroll-touch-edge', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'scroll-touch-edge', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'scroll-touch-end', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'scroll-touch-end', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'session-end', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'session-end', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'sheet-begin', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'sheet-begin', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'sheet-end', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'sheet-end', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'show', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'show', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'swipe', listener: (event: ElectronEvent, direction: string) => void): this;
+  addListener($event: 'swipe', listener: ($event: ElectronEvent, direction: string) => void): this;
   /** */
-  addListener(event: 'system-context-menu', listener: (event: ElectronEvent, point: ElectronPoint) => void): this;
+  addListener($event: 'system-context-menu', listener: ($event: ElectronEvent, point: ElectronPoint) => void): this;
   /** */
-  addListener(event: 'unmaximize', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'unmaximize', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'unresponsive', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'unresponsive', listener: (...args: unknown[]) => void): this;
   /** */
-  addListener(event: 'will-move', listener: (event: ElectronEvent, newBounds: ElectronRectangle) => void): this;
+  addListener($event: 'will-move', listener: ($event: ElectronEvent, newBounds: ElectronRectangle) => void): this;
   /** */
-  addListener(event: 'will-resize', listener: (event: ElectronEvent, newBounds: ElectronRectangle, details: ElectronWillResizeDetails) => void): this;
+  addListener($event: 'will-resize', listener: ($event: ElectronEvent, newBounds: ElectronRectangle, details: ElectronWillResizeDetails) => void): this;
 
   /**
    * Adds a window as a tab on this window, after the tab for the window instance (macOS only).
@@ -635,160 +635,160 @@ export declare class ElectronBrowserWindow {
   /**
    * Registers a listener for the given window event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This BrowserWindow instance.
    */
-  on(event: 'always-on-top-changed', listener: (event: ElectronEvent, isAlwaysOnTop: boolean) => void): this;
+  on($event: 'always-on-top-changed', listener: ($event: ElectronEvent, isAlwaysOnTop: boolean) => void): this;
   /** */
-  on(event: 'app-command', listener: (event: ElectronEvent, command: string) => void): this;
+  on($event: 'app-command', listener: ($event: ElectronEvent, command: string) => void): this;
   /** */
-  on(event: 'blur', listener: (...args: unknown[]) => void): this;
+  on($event: 'blur', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'close', listener: (event: ElectronEvent) => void): this;
+  on($event: 'close', listener: ($event: ElectronEvent) => void): this;
   /** */
-  on(event: 'closed', listener: (...args: unknown[]) => void): this;
+  on($event: 'closed', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'enter-full-screen', listener: (...args: unknown[]) => void): this;
+  on($event: 'enter-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
+  on($event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'focus', listener: (...args: unknown[]) => void): this;
+  on($event: 'focus', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'hide', listener: (...args: unknown[]) => void): this;
+  on($event: 'hide', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'leave-full-screen', listener: (...args: unknown[]) => void): this;
+  on($event: 'leave-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
+  on($event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'maximize', listener: (...args: unknown[]) => void): this;
+  on($event: 'maximize', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'minimize', listener: (...args: unknown[]) => void): this;
+  on($event: 'minimize', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'move', listener: (...args: unknown[]) => void): this;
+  on($event: 'move', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'moved', listener: (...args: unknown[]) => void): this;
+  on($event: 'moved', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'new-window-for-tab', listener: (...args: unknown[]) => void): this;
+  on($event: 'new-window-for-tab', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'page-title-updated', listener: (event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
+  on($event: 'page-title-updated', listener: ($event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
   /** */
-  on(event: 'ready-to-show', listener: (...args: unknown[]) => void): this;
+  on($event: 'ready-to-show', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'resize', listener: (...args: unknown[]) => void): this;
+  on($event: 'resize', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'resized', listener: (...args: unknown[]) => void): this;
+  on($event: 'resized', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'responsive', listener: (...args: unknown[]) => void): this;
+  on($event: 'responsive', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'restore', listener: (...args: unknown[]) => void): this;
+  on($event: 'restore', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'rotate-gesture', listener: (event: ElectronEvent, rotation: number) => void): this;
+  on($event: 'rotate-gesture', listener: ($event: ElectronEvent, rotation: number) => void): this;
   /** */
-  on(event: 'scroll-touch-begin', listener: (...args: unknown[]) => void): this;
+  on($event: 'scroll-touch-begin', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'scroll-touch-edge', listener: (...args: unknown[]) => void): this;
+  on($event: 'scroll-touch-edge', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'scroll-touch-end', listener: (...args: unknown[]) => void): this;
+  on($event: 'scroll-touch-end', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'session-end', listener: (...args: unknown[]) => void): this;
+  on($event: 'session-end', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'sheet-begin', listener: (...args: unknown[]) => void): this;
+  on($event: 'sheet-begin', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'sheet-end', listener: (...args: unknown[]) => void): this;
+  on($event: 'sheet-end', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'show', listener: (...args: unknown[]) => void): this;
+  on($event: 'show', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'swipe', listener: (event: ElectronEvent, direction: string) => void): this;
+  on($event: 'swipe', listener: ($event: ElectronEvent, direction: string) => void): this;
   /** */
-  on(event: 'system-context-menu', listener: (event: ElectronEvent, point: ElectronPoint) => void): this;
+  on($event: 'system-context-menu', listener: ($event: ElectronEvent, point: ElectronPoint) => void): this;
   /** */
-  on(event: 'unmaximize', listener: (...args: unknown[]) => void): this;
+  on($event: 'unmaximize', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'unresponsive', listener: (...args: unknown[]) => void): this;
+  on($event: 'unresponsive', listener: (...args: unknown[]) => void): this;
   /** */
-  on(event: 'will-move', listener: (event: ElectronEvent, newBounds: ElectronRectangle) => void): this;
+  on($event: 'will-move', listener: ($event: ElectronEvent, newBounds: ElectronRectangle) => void): this;
   /** */
-  on(event: 'will-resize', listener: (event: ElectronEvent, newBounds: ElectronRectangle, details: ElectronWillResizeDetails) => void): this;
+  on($event: 'will-resize', listener: ($event: ElectronEvent, newBounds: ElectronRectangle, details: ElectronWillResizeDetails) => void): this;
 
   /**
    * Registers a one-time listener for the given window event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This BrowserWindow instance.
    */
-  once(event: 'always-on-top-changed', listener: (event: ElectronEvent, isAlwaysOnTop: boolean) => void): this;
+  once($event: 'always-on-top-changed', listener: ($event: ElectronEvent, isAlwaysOnTop: boolean) => void): this;
   /** */
-  once(event: 'app-command', listener: (event: ElectronEvent, command: string) => void): this;
+  once($event: 'app-command', listener: ($event: ElectronEvent, command: string) => void): this;
   /** */
-  once(event: 'blur', listener: (...args: unknown[]) => void): this;
+  once($event: 'blur', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'close', listener: (event: ElectronEvent) => void): this;
+  once($event: 'close', listener: ($event: ElectronEvent) => void): this;
   /** */
-  once(event: 'closed', listener: (...args: unknown[]) => void): this;
+  once($event: 'closed', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'enter-full-screen', listener: (...args: unknown[]) => void): this;
+  once($event: 'enter-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
+  once($event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'focus', listener: (...args: unknown[]) => void): this;
+  once($event: 'focus', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'hide', listener: (...args: unknown[]) => void): this;
+  once($event: 'hide', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'leave-full-screen', listener: (...args: unknown[]) => void): this;
+  once($event: 'leave-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
+  once($event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'maximize', listener: (...args: unknown[]) => void): this;
+  once($event: 'maximize', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'minimize', listener: (...args: unknown[]) => void): this;
+  once($event: 'minimize', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'move', listener: (...args: unknown[]) => void): this;
+  once($event: 'move', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'moved', listener: (...args: unknown[]) => void): this;
+  once($event: 'moved', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'new-window-for-tab', listener: (...args: unknown[]) => void): this;
+  once($event: 'new-window-for-tab', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'page-title-updated', listener: (event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
+  once($event: 'page-title-updated', listener: ($event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
   /** */
-  once(event: 'ready-to-show', listener: (...args: unknown[]) => void): this;
+  once($event: 'ready-to-show', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'resize', listener: (...args: unknown[]) => void): this;
+  once($event: 'resize', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'resized', listener: (...args: unknown[]) => void): this;
+  once($event: 'resized', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'responsive', listener: (...args: unknown[]) => void): this;
+  once($event: 'responsive', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'restore', listener: (...args: unknown[]) => void): this;
+  once($event: 'restore', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'rotate-gesture', listener: (event: ElectronEvent, rotation: number) => void): this;
+  once($event: 'rotate-gesture', listener: ($event: ElectronEvent, rotation: number) => void): this;
   /** */
-  once(event: 'scroll-touch-begin', listener: (...args: unknown[]) => void): this;
+  once($event: 'scroll-touch-begin', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'scroll-touch-edge', listener: (...args: unknown[]) => void): this;
+  once($event: 'scroll-touch-edge', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'scroll-touch-end', listener: (...args: unknown[]) => void): this;
+  once($event: 'scroll-touch-end', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'session-end', listener: (...args: unknown[]) => void): this;
+  once($event: 'session-end', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'sheet-begin', listener: (...args: unknown[]) => void): this;
+  once($event: 'sheet-begin', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'sheet-end', listener: (...args: unknown[]) => void): this;
+  once($event: 'sheet-end', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'show', listener: (...args: unknown[]) => void): this;
+  once($event: 'show', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'swipe', listener: (event: ElectronEvent, direction: string) => void): this;
+  once($event: 'swipe', listener: ($event: ElectronEvent, direction: string) => void): this;
   /** */
-  once(event: 'system-context-menu', listener: (event: ElectronEvent, point: ElectronPoint) => void): this;
+  once($event: 'system-context-menu', listener: ($event: ElectronEvent, point: ElectronPoint) => void): this;
   /** */
-  once(event: 'unmaximize', listener: (...args: unknown[]) => void): this;
+  once($event: 'unmaximize', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'unresponsive', listener: (...args: unknown[]) => void): this;
+  once($event: 'unresponsive', listener: (...args: unknown[]) => void): this;
   /** */
-  once(event: 'will-move', listener: (event: ElectronEvent, newBounds: ElectronRectangle) => void): this;
+  once($event: 'will-move', listener: ($event: ElectronEvent, newBounds: ElectronRectangle) => void): this;
   /** */
-  once(event: 'will-resize', listener: (event: ElectronEvent, newBounds: ElectronRectangle, details: ElectronWillResizeDetails) => void): this;
+  once($event: 'will-resize', listener: ($event: ElectronEvent, newBounds: ElectronRectangle, details: ElectronWillResizeDetails) => void): this;
 
   /**
    * Uses Quick Look to preview a file at a given path (macOS only).
@@ -811,81 +811,81 @@ export declare class ElectronBrowserWindow {
   /**
    * Removes a listener for the given window event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This BrowserWindow instance.
    */
-  removeListener(event: 'always-on-top-changed', listener: (event: ElectronEvent, isAlwaysOnTop: boolean) => void): this;
+  removeListener($event: 'always-on-top-changed', listener: ($event: ElectronEvent, isAlwaysOnTop: boolean) => void): this;
   /** */
-  removeListener(event: 'app-command', listener: (event: ElectronEvent, command: string) => void): this;
+  removeListener($event: 'app-command', listener: ($event: ElectronEvent, command: string) => void): this;
   /** */
-  removeListener(event: 'blur', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'blur', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'close', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'close', listener: ($event: ElectronEvent) => void): this;
   /** */
-  removeListener(event: 'closed', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'closed', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'enter-full-screen', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'enter-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'focus', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'focus', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'hide', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'hide', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'leave-full-screen', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'leave-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'maximize', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'maximize', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'minimize', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'minimize', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'move', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'move', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'moved', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'moved', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'new-window-for-tab', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'new-window-for-tab', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'page-title-updated', listener: (event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
+  removeListener($event: 'page-title-updated', listener: ($event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
   /** */
-  removeListener(event: 'ready-to-show', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'ready-to-show', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'resize', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'resize', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'resized', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'resized', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'responsive', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'responsive', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'restore', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'restore', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'rotate-gesture', listener: (event: ElectronEvent, rotation: number) => void): this;
+  removeListener($event: 'rotate-gesture', listener: ($event: ElectronEvent, rotation: number) => void): this;
   /** */
-  removeListener(event: 'scroll-touch-begin', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'scroll-touch-begin', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'scroll-touch-edge', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'scroll-touch-edge', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'scroll-touch-end', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'scroll-touch-end', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'session-end', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'session-end', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'sheet-begin', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'sheet-begin', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'sheet-end', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'sheet-end', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'show', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'show', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'swipe', listener: (event: ElectronEvent, direction: string) => void): this;
+  removeListener($event: 'swipe', listener: ($event: ElectronEvent, direction: string) => void): this;
   /** */
-  removeListener(event: 'system-context-menu', listener: (event: ElectronEvent, point: ElectronPoint) => void): this;
+  removeListener($event: 'system-context-menu', listener: ($event: ElectronEvent, point: ElectronPoint) => void): this;
   /** */
-  removeListener(event: 'unmaximize', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'unmaximize', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'unresponsive', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'unresponsive', listener: (...args: unknown[]) => void): this;
   /** */
-  removeListener(event: 'will-move', listener: (event: ElectronEvent, newBounds: ElectronRectangle) => void): this;
+  removeListener($event: 'will-move', listener: ($event: ElectronEvent, newBounds: ElectronRectangle) => void): this;
   /** */
-  removeListener(event: 'will-resize', listener: (event: ElectronEvent, newBounds: ElectronRectangle, details: ElectronWillResizeDetails) => void): this;
+  removeListener($event: 'will-resize', listener: ($event: ElectronEvent, newBounds: ElectronRectangle, details: ElectronWillResizeDetails) => void): this;
 
   /** Removes the window's menu bar (Linux and Windows). */
   removeMenu(): void;

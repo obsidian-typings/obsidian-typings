@@ -35,9 +35,9 @@ export interface TagView extends View {
   /**
    * Handle pressing Enter on the currently focused tag item.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onKeyEnterInFocus(event: KeyboardEvent): void;
+  onKeyEnterInFocus($event: KeyboardEvent): void;
 
   /**
    * Set whether all tag groups are collapsed.

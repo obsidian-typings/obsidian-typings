@@ -59,12 +59,12 @@ declare module 'obsidian' {
     /**
      * Execute keypress within this scope.
      *
-     * @param event - Keyboard event.
+     * @param $event - Keyboard event.
      * @param keypress - Pressed key information.
      * @returns The result of the key handler execution.
      * @unofficial
      */
-    handleKey(event: KeyboardEvent, keypress: KeymapInfo): unknown;
+    handleKey($event: KeyboardEvent, keypress: KeymapInfo): unknown;
 
     /**
      * Add a keymap event handler to this scope.

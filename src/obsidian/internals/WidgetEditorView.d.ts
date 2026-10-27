@@ -149,17 +149,17 @@ export interface WidgetEditorView extends EmbeddedEditorView {
   /**
    * On keypress on editor title element.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onTitleKeydown(event: KeyboardEvent): void;
+  onTitleKeydown($event: KeyboardEvent): void;
 
   /**
    * On pasting on editor title element.
    *
    * @param element - The title element.
-   * @param event - The clipboard event.
+   * @param $event - The clipboard event.
    */
-  onTitlePaste(element: HTMLElement, event: ClipboardEvent): void;
+  onTitlePaste(element: HTMLElement, $event: ClipboardEvent): void;
 
   /**
    * On unloading widget, unload component and remove scope.

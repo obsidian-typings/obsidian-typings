@@ -191,43 +191,43 @@ export interface MarkdownBaseView extends Component {
   /**
    * Creates menu on right mouse click.
    *
-   * @param event - The pointer event.
+   * @param $event - The pointer event.
    * @param x - Whether the context menu was triggered by keyboard.
    * @returns A promise that resolves when the context menu is handled.
    */
-  onContextMenu(event: PointerEvent, x: boolean): Promise<void>;
+  onContextMenu($event: PointerEvent, x: boolean): Promise<void>;
 
   /**
    * Execute click functionality on token on mouse click.
    *
-   * @param event - The mouse event.
+   * @param $event - The mouse event.
    * @param element - The clicked element.
    */
-  onEditorClick(event: MouseEvent, element?: HTMLElement): void;
+  onEditorClick($event: MouseEvent, element?: HTMLElement): void;
 
   /**
    * Execute drag functionality on drag start.
    *
-   * @param event - The drag event.
+   * @param $event - The drag event.
    * @remark Interfaces with dragManager.
    */
-  onEditorDragStart(event: DragEvent): void;
+  onEditorDragStart($event: DragEvent): void;
 
   /**
    * Execute hover functionality on mouse over event.
    *
-   * @param event - The mouse event.
+   * @param $event - The mouse event.
    * @param target - The hovered element.
    */
-  onEditorLinkMouseover(event: MouseEvent, target: HTMLElement): void;
+  onEditorLinkMouseover($event: MouseEvent, target: HTMLElement): void;
 
   /**
    * Execute context menu functionality on right mouse click.
    *
-   * @param event - The mouse event.
+   * @param $event - The mouse event.
    * @deprecated Use {@link MarkdownBaseView.onContextMenu} instead.
    */
-  onMenu(event: MouseEvent): void;
+  onMenu($event: MouseEvent): void;
 
   /**
    * Reposition suggest and scroll position on resize.

@@ -14,20 +14,20 @@ export interface ElectronDownloadItem {
   /**
    * Registers a listener for the `done` event, emitted when the download reaches a terminal state.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called with the terminal state of the download.
    * @returns This download item instance.
    */
-  addListener(event: 'done', listener: (event: ElectronEvent, state: 'cancelled' | 'completed' | 'interrupted') => void): this;
+  addListener($event: 'done', listener: ($event: ElectronEvent, state: 'cancelled' | 'completed' | 'interrupted') => void): this;
 
   /**
    * Registers a listener for the `updated` event, emitted when the download has been updated and is not done.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called with the current state of the download.
    * @returns This download item instance.
    */
-  addListener(event: 'updated', listener: (event: ElectronEvent, state: 'interrupted' | 'progressing') => void): this;
+  addListener($event: 'updated', listener: ($event: ElectronEvent, state: 'interrupted' | 'progressing') => void): this;
 
   /** Cancels the download operation. */
   cancel(): void;
@@ -147,38 +147,38 @@ export interface ElectronDownloadItem {
   /**
    * Registers a listener for the `done` event, emitted when the download reaches a terminal state.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called with the terminal state of the download.
    * @returns This download item instance.
    */
-  on(event: 'done', listener: (event: ElectronEvent, state: 'cancelled' | 'completed' | 'interrupted') => void): this;
+  on($event: 'done', listener: ($event: ElectronEvent, state: 'cancelled' | 'completed' | 'interrupted') => void): this;
 
   /**
    * Registers a listener for the `updated` event, emitted when the download has been updated and is not done.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called with the current state of the download.
    * @returns This download item instance.
    */
-  on(event: 'updated', listener: (event: ElectronEvent, state: 'interrupted' | 'progressing') => void): this;
+  on($event: 'updated', listener: ($event: ElectronEvent, state: 'interrupted' | 'progressing') => void): this;
 
   /**
    * Registers a one-time listener for the `done` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called with the terminal state of the download.
    * @returns This download item instance.
    */
-  once(event: 'done', listener: (event: ElectronEvent, state: 'cancelled' | 'completed' | 'interrupted') => void): this;
+  once($event: 'done', listener: ($event: ElectronEvent, state: 'cancelled' | 'completed' | 'interrupted') => void): this;
 
   /**
    * Registers a one-time listener for the `updated` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called with the current state of the download.
    * @returns This download item instance.
    */
-  once(event: 'updated', listener: (event: ElectronEvent, state: 'interrupted' | 'progressing') => void): this;
+  once($event: 'updated', listener: ($event: ElectronEvent, state: 'interrupted' | 'progressing') => void): this;
 
   /** Pauses the download. */
   pause(): void;
@@ -186,20 +186,20 @@ export interface ElectronDownloadItem {
   /**
    * Removes a previously registered `done` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This download item instance.
    */
-  removeListener(event: 'done', listener: (event: ElectronEvent, state: 'cancelled' | 'completed' | 'interrupted') => void): this;
+  removeListener($event: 'done', listener: ($event: ElectronEvent, state: 'cancelled' | 'completed' | 'interrupted') => void): this;
 
   /**
    * Removes a previously registered `updated` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This download item instance.
    */
-  removeListener(event: 'updated', listener: (event: ElectronEvent, state: 'interrupted' | 'progressing') => void): this;
+  removeListener($event: 'updated', listener: ($event: ElectronEvent, state: 'interrupted' | 'progressing') => void): this;
 
   /** Resumes the download that has been paused. */
   resume(): void;

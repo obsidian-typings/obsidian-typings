@@ -29,44 +29,44 @@ export interface ElectronSystemPreferences {
   /**
    * Adds a listener for the `accent-color-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    */
-  addListener(event: 'accent-color-changed', listener: (event: ElectronEvent, newColor: string) => void): this;
+  addListener($event: 'accent-color-changed', listener: ($event: ElectronEvent, newColor: string) => void): this;
 
   /**
    * Adds a listener for the `color-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    */
-  addListener(event: 'color-changed', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'color-changed', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Adds a listener for the `high-contrast-color-scheme-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    *
    * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
-  addListener(event: 'high-contrast-color-scheme-changed', listener: (event: ElectronEvent, highContrastColorScheme: boolean) => void): this;
+  addListener($event: 'high-contrast-color-scheme-changed', listener: ($event: ElectronEvent, highContrastColorScheme: boolean) => void): this;
 
   /**
    * Adds a listener for the `inverted-color-scheme-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    *
    * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
-  addListener(event: 'inverted-color-scheme-changed', listener: (event: ElectronEvent, invertedColorScheme: boolean) => void): this;
+  addListener($event: 'inverted-color-scheme-changed', listener: ($event: ElectronEvent, invertedColorScheme: boolean) => void): this;
 
   /**
    * Prompts the user for access to the given media type. Resolves with `true` if consent was granted and `false` if
@@ -294,123 +294,123 @@ export interface ElectronSystemPreferences {
   /**
    * Registers a listener for the `accent-color-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    */
-  on(event: 'accent-color-changed', listener: (event: ElectronEvent, newColor: string) => void): this;
+  on($event: 'accent-color-changed', listener: ($event: ElectronEvent, newColor: string) => void): this;
 
   /**
    * Registers a listener for the `color-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    */
-  on(event: 'color-changed', listener: (event: ElectronEvent) => void): this;
+  on($event: 'color-changed', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a listener for the `high-contrast-color-scheme-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    *
    * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
-  on(event: 'high-contrast-color-scheme-changed', listener: (event: ElectronEvent, highContrastColorScheme: boolean) => void): this;
+  on($event: 'high-contrast-color-scheme-changed', listener: ($event: ElectronEvent, highContrastColorScheme: boolean) => void): this;
 
   /**
    * Registers a listener for the `inverted-color-scheme-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    *
    * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
-  on(event: 'inverted-color-scheme-changed', listener: (event: ElectronEvent, invertedColorScheme: boolean) => void): this;
+  on($event: 'inverted-color-scheme-changed', listener: ($event: ElectronEvent, invertedColorScheme: boolean) => void): this;
 
   /**
    * Registers a one-time listener for the `accent-color-changed` event. The listener is removed after it is invoked
    * once.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    */
-  once(event: 'accent-color-changed', listener: (event: ElectronEvent, newColor: string) => void): this;
+  once($event: 'accent-color-changed', listener: ($event: ElectronEvent, newColor: string) => void): this;
 
   /**
    * Registers a one-time listener for the `color-changed` event. The listener is removed after it is invoked once.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    */
-  once(event: 'color-changed', listener: (event: ElectronEvent) => void): this;
+  once($event: 'color-changed', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a one-time listener for the `high-contrast-color-scheme-changed` event. The listener is removed after
    * it is invoked once.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    *
    * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
-  once(event: 'high-contrast-color-scheme-changed', listener: (event: ElectronEvent, highContrastColorScheme: boolean) => void): this;
+  once($event: 'high-contrast-color-scheme-changed', listener: ($event: ElectronEvent, highContrastColorScheme: boolean) => void): this;
 
   /**
    * Registers a one-time listener for the `inverted-color-scheme-changed` event. The listener is removed after it is
    * invoked once.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronSystemPreferences` instance.
    *
    * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
-  once(event: 'inverted-color-scheme-changed', listener: (event: ElectronEvent, invertedColorScheme: boolean) => void): this;
+  once($event: 'inverted-color-scheme-changed', listener: ($event: ElectronEvent, invertedColorScheme: boolean) => void): this;
 
   /**
    * Posts `event` as native notifications of macOS. The `userInfo` is an object that contains the user information
    * dictionary sent along with the notification.
    *
-   * @param event - The notification event name.
+   * @param $event - The notification event name.
    * @param userInfo - The user information dictionary sent along with the notification.
    *
    * Platform: `darwin`.
    */
-  postLocalNotification(event: string, userInfo: Record<string, unknown>): void;
+  postLocalNotification($event: string, userInfo: Record<string, unknown>): void;
 
   /**
    * Posts `event` as native notifications of macOS. The `userInfo` is an object that contains the user information
    * dictionary sent along with the notification.
    *
-   * @param event - The notification event name.
+   * @param $event - The notification event name.
    * @param userInfo - The user information dictionary sent along with the notification.
    * @param deliverImmediately - Whether to deliver the notification immediately.
    *
    * Platform: `darwin`.
    */
-  postNotification(event: string, userInfo: Record<string, unknown>, deliverImmediately?: boolean): void;
+  postNotification($event: string, userInfo: Record<string, unknown>, deliverImmediately?: boolean): void;
 
   /**
    * Posts `event` as native notifications of macOS. The `userInfo` is an object that contains the user information
    * dictionary sent along with the notification.
    *
-   * @param event - The notification event name.
+   * @param $event - The notification event name.
    * @param userInfo - The user information dictionary sent along with the notification.
    *
    * Platform: `darwin`.
    */
-  postWorkspaceNotification(event: string, userInfo: Record<string, unknown>): void;
+  postWorkspaceNotification($event: string, userInfo: Record<string, unknown>): void;
 
   /**
    * Prompts the user to authenticate with Touch ID. Resolves if the user has successfully authenticated with
@@ -435,44 +435,44 @@ export interface ElectronSystemPreferences {
   /**
    * Removes the specified listener for the `accent-color-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This `ElectronSystemPreferences` instance.
    */
-  removeListener(event: 'accent-color-changed', listener: (event: ElectronEvent, newColor: string) => void): this;
+  removeListener($event: 'accent-color-changed', listener: ($event: ElectronEvent, newColor: string) => void): this;
 
   /**
    * Removes the specified listener for the `color-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This `ElectronSystemPreferences` instance.
    */
-  removeListener(event: 'color-changed', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'color-changed', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Removes the specified listener for the `high-contrast-color-scheme-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This `ElectronSystemPreferences` instance.
    *
    * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
-  removeListener(event: 'high-contrast-color-scheme-changed', listener: (event: ElectronEvent, highContrastColorScheme: boolean) => void): this;
+  removeListener($event: 'high-contrast-color-scheme-changed', listener: ($event: ElectronEvent, highContrastColorScheme: boolean) => void): this;
 
   /**
    * Removes the specified listener for the `inverted-color-scheme-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This `ElectronSystemPreferences` instance.
    *
    * @deprecated Deprecated by Electron.
    * Platform: `win32`.
    */
-  removeListener(event: 'inverted-color-scheme-changed', listener: (event: ElectronEvent, invertedColorScheme: boolean) => void): this;
+  removeListener($event: 'inverted-color-scheme-changed', listener: ($event: ElectronEvent, invertedColorScheme: boolean) => void): this;
 
   /**
    * Removes the `key` in `NSUserDefaults`. This can be used to restore the default or global value of a `key`
@@ -511,38 +511,38 @@ export interface ElectronSystemPreferences {
    * Same as `subscribeNotification`, but uses `NSNotificationCenter` for local defaults. If `event` is `null`, the
    * `NSNotificationCenter` doesn't use it as criteria for delivery to the observer.
    *
-   * @param event - The notification event name, or `null`.
+   * @param $event - The notification event name, or `null`.
    * @param callback - Called when the corresponding event happens.
    * @returns The ID of this subscription.
    *
    * Platform: `darwin`.
    */
-  subscribeLocalNotification(event: null | string, callback: (event: string, userInfo: Record<string, unknown>, object: string) => void): number;
+  subscribeLocalNotification($event: null | string, callback: ($event: string, userInfo: Record<string, unknown>, $object: string) => void): number;
 
   /**
    * Subscribes to native notifications of macOS, `callback` will be called with `callback(event, userInfo)` when the
    * corresponding `event` happens. If `event` is `null`, the `NSDistributedNotificationCenter` doesn't use it as
    * criteria for delivery to the observer.
    *
-   * @param event - The notification event name, or `null`.
+   * @param $event - The notification event name, or `null`.
    * @param callback - Called when the corresponding event happens.
    * @returns The ID of this subscription.
    *
    * Platform: `darwin`.
    */
-  subscribeNotification(event: null | string, callback: (event: string, userInfo: Record<string, unknown>, object: string) => void): number;
+  subscribeNotification($event: null | string, callback: ($event: string, userInfo: Record<string, unknown>, $object: string) => void): number;
 
   /**
    * Same as `subscribeNotification`, but uses `NSWorkspace.sharedWorkspace.notificationCenter`. If `event` is
    * `null`, the `NSWorkspaceNotificationCenter` doesn't use it as criteria for delivery to the observer.
    *
-   * @param event - The notification event name, or `null`.
+   * @param $event - The notification event name, or `null`.
    * @param callback - Called when the corresponding event happens.
    * @returns The ID of this subscription.
    *
    * Platform: `darwin`.
    */
-  subscribeWorkspaceNotification(event: null | string, callback: (event: string, userInfo: Record<string, unknown>, object: string) => void): number;
+  subscribeWorkspaceNotification($event: null | string, callback: ($event: string, userInfo: Record<string, unknown>, $object: string) => void): number;
 
   /**
    * Same as `unsubscribeNotification`, but removes the subscriber from `NSNotificationCenter`.

@@ -14,11 +14,11 @@ export interface ElectronInAppPurchase {
    *
    * Emitted when one or more transactions have been updated.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronInAppPurchase` instance.
    */
-  addListener(event: 'transactions-updated', listener: (event: ElectronEvent, transactions: ElectronTransaction[]) => void): this;
+  addListener($event: 'transactions-updated', listener: ($event: ElectronEvent, transactions: ElectronTransaction[]) => void): this;
 
   /**
    * Returns whether a user can make a payment.
@@ -57,22 +57,22 @@ export interface ElectronInAppPurchase {
    *
    * Emitted when one or more transactions have been updated.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronInAppPurchase` instance.
    */
-  on(event: 'transactions-updated', listener: (event: ElectronEvent, transactions: ElectronTransaction[]) => void): this;
+  on($event: 'transactions-updated', listener: ($event: ElectronEvent, transactions: ElectronTransaction[]) => void): this;
 
   /**
    * Registers a one-time listener for the `transactions-updated` event.
    *
    * Emitted when one or more transactions have been updated.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronInAppPurchase` instance.
    */
-  once(event: 'transactions-updated', listener: (event: ElectronEvent, transactions: ElectronTransaction[]) => void): this;
+  once($event: 'transactions-updated', listener: ($event: ElectronEvent, transactions: ElectronTransaction[]) => void): this;
 
   /**
    * Adds the specified product to the payment queue. You should listen for the `transactions-updated` event as soon as
@@ -89,11 +89,11 @@ export interface ElectronInAppPurchase {
    *
    * Emitted when one or more transactions have been updated.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronInAppPurchase` instance.
    */
-  removeListener(event: 'transactions-updated', listener: (event: ElectronEvent, transactions: ElectronTransaction[]) => void): this;
+  removeListener($event: 'transactions-updated', listener: ($event: ElectronEvent, transactions: ElectronTransaction[]) => void): this;
 
   /**
    * Restores finished transactions. This method can be called either to install purchases on additional devices, or to

@@ -171,11 +171,11 @@ declare module '@codemirror/state' {
     /**
      * Using the state's line separator, create a Text instance from the given string.
      *
-     * @param string - The string to convert.
+     * @param $string - The string to convert.
      * @returns The created Text instance.
      * @official
      */
-    toText(string: string): Text;
+    toText($string: string): Text;
 
     /**
      * Create a transaction that updates this state.

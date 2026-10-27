@@ -112,13 +112,13 @@ export interface Cm5EditorConfiguration {
   /** How long (ms) the highlighting thread sleeps between work periods. */
   workTime?: number;
   /** Allows you to configure the behavior of mouse selection and dragging. */
-  configureMouse?(cm: Cm5Editor, repeat: 'double' | 'single' | 'triple', event: Event): Cm5MouseSelectionConfiguration;
+  configureMouse?(cm: Cm5Editor, repeat: 'double' | 'single' | 'triple', $event: Event): Cm5MouseSelectionConfiguration;
   /** A function to format line numbers. */
   lineNumberFormatter?(line: number): string;
   /** Deprecated drag event handler. */
-  onDragEvent?(instance: Cm5Editor, event: DragEvent): boolean;
+  onDragEvent?(instance: Cm5Editor, $event: DragEvent): boolean;
   /** Deprecated key event handler. */
-  onKeyEvent?(instance: Cm5Editor, event: KeyboardEvent): boolean;
+  onKeyEvent?(instance: Cm5Editor, $event: KeyboardEvent): boolean;
   /** A function that produces a DOM node for special characters. */
   specialCharPlaceholder?(char: string): HTMLElement;
   /** Additional configuration options. */

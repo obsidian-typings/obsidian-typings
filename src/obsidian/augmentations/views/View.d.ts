@@ -154,26 +154,26 @@ declare module 'obsidian' {
     /**
      * Handle copy event on metadata editor and serialize properties.
      *
-     * @param event - The clipboard event.
+     * @param $event - The clipboard event.
      * @unofficial
      */
-    handleCopy(event: ClipboardEvent): void;
+    handleCopy($event: ClipboardEvent): void;
 
     /**
      * Handle cut event on metadata editor and serialize and remove properties.
      *
-     * @param event - The clipboard event.
+     * @param $event - The clipboard event.
      * @unofficial
      */
-    handleCut(event: ClipboardEvent): void;
+    handleCut($event: ClipboardEvent): void;
 
     /**
      * Handle paste event of properties on metadata editor.
      *
-     * @param event - The clipboard event.
+     * @param $event - The clipboard event.
      * @unofficial
      */
-    handlePaste(event: ClipboardEvent): void;
+    handlePaste($event: ClipboardEvent): void;
 
     /**
      * Called when the view is closed.

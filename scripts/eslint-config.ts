@@ -4,6 +4,7 @@ import commentsConfigs from '@eslint-community/eslint-plugin-eslint-comments/con
 import { includeIgnoreFile } from '@eslint/config-helpers';
 import eslint from '@eslint/js';
 import { defineEslintConfigs } from '@mnaoumov/typescript-dev-toolkit/linters/eslint-config';
+import { inHouseEslintPlugin } from '@mnaoumov/typescript-dev-toolkit/linters/eslint-rules/in-house-plugin';
 import stylistic from '@stylistic/eslint-plugin';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { flatConfigs as eslintPluginImportXFlatConfigs } from 'eslint-plugin-import-x';
@@ -96,7 +97,17 @@ export const config: Linter.Config[] = defineConfig([
   ...getObsidianTypingsConfigs(),
   ...getOverrideConfigs(),
   ...getJsdocsConfigs(),
-  ...getTsdocsConfigs()
+  ...getTsdocsConfigs(),
+  {
+    // Binding names are syntax-only; keep the shared type-aware layers scoped to tooling.
+    files: sourceFiles,
+    plugins: {
+      'typescript-dev-toolkit': inHouseEslintPlugin
+    },
+    rules: {
+      'typescript-dev-toolkit/no-keyword-identifiers': 'error'
+    }
+  }
 ]);
 
 function getEslintCommentsConfigs(): Linter.Config[] {

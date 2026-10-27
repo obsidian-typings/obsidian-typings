@@ -120,26 +120,26 @@ export interface Tree<T extends TreeItem> {
   /**
    * Handle deletion of selected nodes.
    *
-   * @param event - The keyboard event that triggered the deletion.
+   * @param $event - The keyboard event that triggered the deletion.
    * @returns A promise that resolves when the selected items are deleted.
    */
-  handleDeleteSelectedItems(event: KeyboardEvent): Promise<void>;
+  handleDeleteSelectedItems($event: KeyboardEvent): Promise<void>;
 
   /**
    * Handle a click on a tree item, applying the Alt-click and Shift-click selection rules.
    *
-   * @param event - The mouse event that triggered the selection.
+   * @param $event - The mouse event that triggered the selection.
    * @param node - The tree item clicked on.
    * @returns `true` when the click was handled as a selection change and the item must not be opened.
    */
-  handleItemSelection(event: MouseEvent, node: T): boolean;
+  handleItemSelection($event: MouseEvent, node: T): boolean;
 
   /**
    * Handle renaming of focused item.
    *
-   * @param event - The keyboard event that triggered the rename.
+   * @param $event - The keyboard event that triggered the rename.
    */
-  handleRenameFocusedItem(event: KeyboardEvent): void;
+  handleRenameFocusedItem($event: KeyboardEvent): void;
 
   /**
    * Registers all keyboard actions to the tree view keyscope.
@@ -157,10 +157,10 @@ export interface Tree<T extends TreeItem> {
   /**
    * Check whether the event is an `ArrowUp` or `ArrowDown` keyboard event.
    *
-   * @param event - The event to check.
+   * @param $event - The event to check.
    * @returns Whether the event is a keyboard navigation event.
    */
-  isKeyboardNavigationEvent(event: Event): boolean;
+  isKeyboardNavigationEvent($event: Event): boolean;
 
   /**
    * Load the saved fold states of the tree view from local storage.
@@ -170,44 +170,44 @@ export interface Tree<T extends TreeItem> {
   /**
    * Handle keyboard event for moving/selecting tree item below.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onKeyArrowDown(event: KeyboardEvent): void;
+  onKeyArrowDown($event: KeyboardEvent): void;
 
   /**
    * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding).
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onKeyArrowLeft(event: KeyboardEvent): void;
+  onKeyArrowLeft($event: KeyboardEvent): void;
 
   /**
    * Handle keyboard event for moving through the hierarchy of tree items (and/or folding/unfolding).
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onKeyArrowRight(event: KeyboardEvent): void;
+  onKeyArrowRight($event: KeyboardEvent): void;
 
   /**
    * Handle keyboard event for moving/selecting tree item above.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onKeyArrowUp(event: KeyboardEvent): void;
+  onKeyArrowUp($event: KeyboardEvent): void;
 
   /**
    * Handle keyboard event for clearing the selection. Does nothing when no item is selected.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onKeyEscape(event: KeyboardEvent): void;
+  onKeyEscape($event: KeyboardEvent): void;
 
   /**
    * Handle keyboard event for opening tree item.
    *
-   * @param event - The keyboard event.
+   * @param $event - The keyboard event.
    */
-  onKeyOpen(event: KeyboardEvent): void;
+  onKeyOpen($event: KeyboardEvent): void;
 
   /**
    * Update scroll representation on resize.

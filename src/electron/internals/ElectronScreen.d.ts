@@ -16,11 +16,11 @@ export interface ElectronScreen {
    *
    * Emitted when `newDisplay` has been added.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronScreen` instance.
    */
-  addListener(event: 'display-added', listener: (event: ElectronEvent, newDisplay: ElectronDisplay) => void): this;
+  addListener($event: 'display-added', listener: ($event: ElectronEvent, newDisplay: ElectronDisplay) => void): this;
 
   /**
    * Adds a listener for the `display-metrics-changed` event.
@@ -28,22 +28,22 @@ export interface ElectronScreen {
    * Emitted when one or more metrics change in a `display`. The `changedMetrics` is an array of strings that describe
    * the changes. Possible changes are `bounds`, `workArea`, `scaleFactor` and `rotation`.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronScreen` instance.
    */
-  addListener(event: 'display-metrics-changed', listener: (event: ElectronEvent, display: ElectronDisplay, changedMetrics: string[]) => void): this;
+  addListener($event: 'display-metrics-changed', listener: ($event: ElectronEvent, display: ElectronDisplay, changedMetrics: string[]) => void): this;
 
   /**
    * Adds a listener for the `display-removed` event.
    *
    * Emitted when `oldDisplay` has been removed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronScreen` instance.
    */
-  addListener(event: 'display-removed', listener: (event: ElectronEvent, oldDisplay: ElectronDisplay) => void): this;
+  addListener($event: 'display-removed', listener: ($event: ElectronEvent, oldDisplay: ElectronDisplay) => void): this;
 
   /**
    * Converts a screen DIP point to a screen physical point. The DPI scale is performed relative to the display
@@ -110,84 +110,84 @@ export interface ElectronScreen {
   /**
    * Registers a listener for the `display-added` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronScreen` instance.
    */
-  on(event: 'display-added', listener: (event: ElectronEvent, newDisplay: ElectronDisplay) => void): this;
+  on($event: 'display-added', listener: ($event: ElectronEvent, newDisplay: ElectronDisplay) => void): this;
 
   /**
    * Registers a listener for the `display-metrics-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronScreen` instance.
    */
-  on(event: 'display-metrics-changed', listener: (event: ElectronEvent, display: ElectronDisplay, changedMetrics: string[]) => void): this;
+  on($event: 'display-metrics-changed', listener: ($event: ElectronEvent, display: ElectronDisplay, changedMetrics: string[]) => void): this;
 
   /**
    * Registers a listener for the `display-removed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronScreen` instance.
    */
-  on(event: 'display-removed', listener: (event: ElectronEvent, oldDisplay: ElectronDisplay) => void): this;
+  on($event: 'display-removed', listener: ($event: ElectronEvent, oldDisplay: ElectronDisplay) => void): this;
 
   /**
    * Registers a one-time listener for the `display-added` event. The listener is removed after it is invoked once.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronScreen` instance.
    */
-  once(event: 'display-added', listener: (event: ElectronEvent, newDisplay: ElectronDisplay) => void): this;
+  once($event: 'display-added', listener: ($event: ElectronEvent, newDisplay: ElectronDisplay) => void): this;
 
   /**
    * Registers a one-time listener for the `display-metrics-changed` event. The listener is removed after it is
    * invoked once.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronScreen` instance.
    */
-  once(event: 'display-metrics-changed', listener: (event: ElectronEvent, display: ElectronDisplay, changedMetrics: string[]) => void): this;
+  once($event: 'display-metrics-changed', listener: ($event: ElectronEvent, display: ElectronDisplay, changedMetrics: string[]) => void): this;
 
   /**
    * Registers a one-time listener for the `display-removed` event. The listener is removed after it is invoked once.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronScreen` instance.
    */
-  once(event: 'display-removed', listener: (event: ElectronEvent, oldDisplay: ElectronDisplay) => void): this;
+  once($event: 'display-removed', listener: ($event: ElectronEvent, oldDisplay: ElectronDisplay) => void): this;
 
   /**
    * Removes the specified listener for the `display-added` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This `ElectronScreen` instance.
    */
-  removeListener(event: 'display-added', listener: (event: ElectronEvent, newDisplay: ElectronDisplay) => void): this;
+  removeListener($event: 'display-added', listener: ($event: ElectronEvent, newDisplay: ElectronDisplay) => void): this;
 
   /**
    * Removes the specified listener for the `display-metrics-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This `ElectronScreen` instance.
    */
-  removeListener(event: 'display-metrics-changed', listener: (event: ElectronEvent, display: ElectronDisplay, changedMetrics: string[]) => void): this;
+  removeListener($event: 'display-metrics-changed', listener: ($event: ElectronEvent, display: ElectronDisplay, changedMetrics: string[]) => void): this;
 
   /**
    * Removes the specified listener for the `display-removed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This `ElectronScreen` instance.
    */
-  removeListener(event: 'display-removed', listener: (event: ElectronEvent, oldDisplay: ElectronDisplay) => void): this;
+  removeListener($event: 'display-removed', listener: ($event: ElectronEvent, oldDisplay: ElectronDisplay) => void): this;
 
   /**
    * Converts a screen physical point to a screen DIP point. The DPI scale is performed relative to the display

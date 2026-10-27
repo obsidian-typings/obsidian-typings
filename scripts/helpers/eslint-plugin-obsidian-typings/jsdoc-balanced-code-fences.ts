@@ -13,8 +13,8 @@ const LINE_PREFIX_STRIP_REG_EXP = /^\s*\*? ?/;
 const TAG_LINE_REG_EXP = /^@\w/;
 
 interface UnclosedFence {
-  fenceMarker: string;
-  openLineIndex: number;
+  readonly fenceMarker: string;
+  readonly openLineIndex: number;
 }
 
 /**

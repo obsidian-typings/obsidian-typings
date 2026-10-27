@@ -66,35 +66,35 @@ export interface Session {
   readonly webRequest: ElectronWebRequest;
 
   /** Emitted after an extension is loaded. */
-  addListener(event: 'extension-loaded', listener: (event: ElectronEvent, extension: ElectronExtension) => void): this;
+  addListener($event: 'extension-loaded', listener: ($event: ElectronEvent, extension: ElectronExtension) => void): this;
   /** Emitted after an extension is loaded and all necessary browser state is initialized. */
-  addListener(event: 'extension-ready', listener: (event: ElectronEvent, extension: ElectronExtension) => void): this;
+  addListener($event: 'extension-ready', listener: ($event: ElectronEvent, extension: ElectronExtension) => void): this;
   /** Emitted after an extension is unloaded. */
-  addListener(event: 'extension-unloaded', listener: (event: ElectronEvent, extension: ElectronExtension) => void): this;
+  addListener($event: 'extension-unloaded', listener: ($event: ElectronEvent, extension: ElectronExtension) => void): this;
   /** Emitted when a new HID device becomes available. */
-  addListener(event: 'hid-device-added', listener: (event: ElectronEvent, details: ElectronHidDeviceAddedDetails) => void): this;
+  addListener($event: 'hid-device-added', listener: ($event: ElectronEvent, details: ElectronHidDeviceAddedDetails) => void): this;
   /** Emitted when a HID device has been removed. */
-  addListener(event: 'hid-device-removed', listener: (event: ElectronEvent, details: ElectronHidDeviceRemovedDetails) => void): this;
+  addListener($event: 'hid-device-removed', listener: ($event: ElectronEvent, details: ElectronHidDeviceRemovedDetails) => void): this;
   /** Emitted when a render process requests preconnection to a URL. */
-  addListener(event: 'preconnect', listener: (event: ElectronEvent, preconnectUrl: string, allowCredentials: boolean) => void): this;
+  addListener($event: 'preconnect', listener: ($event: ElectronEvent, preconnectUrl: string, allowCredentials: boolean) => void): this;
   /** Emitted when a HID device needs to be selected. */
-  addListener(event: 'select-hid-device', listener: (event: ElectronEvent, details: ElectronSelectHidDeviceDetails, callback: (deviceId?: null | string) => void) => void): this;
+  addListener($event: 'select-hid-device', listener: ($event: ElectronEvent, details: ElectronSelectHidDeviceDetails, callback: (deviceId?: null | string) => void) => void): this;
   /** Emitted when a serial port needs to be selected. */
-  addListener(event: 'select-serial-port', listener: (event: ElectronEvent, portList: ElectronSerialPort[], webContents: ElectronWebContents, callback: (portId: string) => void) => void): this;
+  addListener($event: 'select-serial-port', listener: ($event: ElectronEvent, portList: ElectronSerialPort[], webContents: ElectronWebContents, callback: (portId: string) => void) => void): this;
   /** Emitted after a new serial port becomes available. */
-  addListener(event: 'serial-port-added', listener: (event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
+  addListener($event: 'serial-port-added', listener: ($event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
   /** Emitted after a serial port has been removed. */
-  addListener(event: 'serial-port-removed', listener: (event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
+  addListener($event: 'serial-port-removed', listener: ($event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
   /** Emitted when a hunspell dictionary file starts downloading. */
-  addListener(event: 'spellcheck-dictionary-download-begin', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  addListener($event: 'spellcheck-dictionary-download-begin', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Emitted when a hunspell dictionary file download fails. */
-  addListener(event: 'spellcheck-dictionary-download-failure', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  addListener($event: 'spellcheck-dictionary-download-failure', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Emitted when a hunspell dictionary file has been successfully downloaded. */
-  addListener(event: 'spellcheck-dictionary-download-success', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  addListener($event: 'spellcheck-dictionary-download-success', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Emitted when a hunspell dictionary file has been successfully initialized. */
-  addListener(event: 'spellcheck-dictionary-initialized', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  addListener($event: 'spellcheck-dictionary-initialized', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Emitted when Electron is about to download `item` in `webContents`. */
-  addListener(event: 'will-download', listener: (event: ElectronEvent, item: ElectronDownloadItem, webContents: ElectronWebContents) => void): this;
+  addListener($event: 'will-download', listener: ($event: ElectronEvent, item: ElectronDownloadItem, webContents: ElectronWebContents) => void): this;
 
   /**
    * Writes the word to the custom dictionary. Does not work on non-persistent (in-memory) sessions.
@@ -291,66 +291,66 @@ export interface Session {
   loadExtension(path: string, options?: ElectronLoadExtensionOptions): Promise<ElectronExtension>;
 
   /** Emitted after an extension is loaded. */
-  on(event: 'extension-loaded', listener: (event: ElectronEvent, extension: ElectronExtension) => void): this;
+  on($event: 'extension-loaded', listener: ($event: ElectronEvent, extension: ElectronExtension) => void): this;
   /** Emitted after an extension is loaded and all necessary browser state is initialized. */
-  on(event: 'extension-ready', listener: (event: ElectronEvent, extension: ElectronExtension) => void): this;
+  on($event: 'extension-ready', listener: ($event: ElectronEvent, extension: ElectronExtension) => void): this;
   /** Emitted after an extension is unloaded. */
-  on(event: 'extension-unloaded', listener: (event: ElectronEvent, extension: ElectronExtension) => void): this;
+  on($event: 'extension-unloaded', listener: ($event: ElectronEvent, extension: ElectronExtension) => void): this;
   /** Emitted when a new HID device becomes available. */
-  on(event: 'hid-device-added', listener: (event: ElectronEvent, details: ElectronHidDeviceAddedDetails) => void): this;
+  on($event: 'hid-device-added', listener: ($event: ElectronEvent, details: ElectronHidDeviceAddedDetails) => void): this;
   /** Emitted when a HID device has been removed. */
-  on(event: 'hid-device-removed', listener: (event: ElectronEvent, details: ElectronHidDeviceRemovedDetails) => void): this;
+  on($event: 'hid-device-removed', listener: ($event: ElectronEvent, details: ElectronHidDeviceRemovedDetails) => void): this;
   /** Emitted when a render process requests preconnection to a URL. */
-  on(event: 'preconnect', listener: (event: ElectronEvent, preconnectUrl: string, allowCredentials: boolean) => void): this;
+  on($event: 'preconnect', listener: ($event: ElectronEvent, preconnectUrl: string, allowCredentials: boolean) => void): this;
   /** Emitted when a HID device needs to be selected. */
-  on(event: 'select-hid-device', listener: (event: ElectronEvent, details: ElectronSelectHidDeviceDetails, callback: (deviceId?: null | string) => void) => void): this;
+  on($event: 'select-hid-device', listener: ($event: ElectronEvent, details: ElectronSelectHidDeviceDetails, callback: (deviceId?: null | string) => void) => void): this;
   /** Emitted when a serial port needs to be selected. */
-  on(event: 'select-serial-port', listener: (event: ElectronEvent, portList: ElectronSerialPort[], webContents: ElectronWebContents, callback: (portId: string) => void) => void): this;
+  on($event: 'select-serial-port', listener: ($event: ElectronEvent, portList: ElectronSerialPort[], webContents: ElectronWebContents, callback: (portId: string) => void) => void): this;
   /** Emitted after a new serial port becomes available. */
-  on(event: 'serial-port-added', listener: (event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
+  on($event: 'serial-port-added', listener: ($event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
   /** Emitted after a serial port has been removed. */
-  on(event: 'serial-port-removed', listener: (event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
+  on($event: 'serial-port-removed', listener: ($event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
   /** Emitted when a hunspell dictionary file starts downloading. */
-  on(event: 'spellcheck-dictionary-download-begin', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  on($event: 'spellcheck-dictionary-download-begin', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Emitted when a hunspell dictionary file download fails. */
-  on(event: 'spellcheck-dictionary-download-failure', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  on($event: 'spellcheck-dictionary-download-failure', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Emitted when a hunspell dictionary file has been successfully downloaded. */
-  on(event: 'spellcheck-dictionary-download-success', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  on($event: 'spellcheck-dictionary-download-success', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Emitted when a hunspell dictionary file has been successfully initialized. */
-  on(event: 'spellcheck-dictionary-initialized', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  on($event: 'spellcheck-dictionary-initialized', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Emitted when Electron is about to download `item` in `webContents`. */
-  on(event: 'will-download', listener: (event: ElectronEvent, item: ElectronDownloadItem, webContents: ElectronWebContents) => void): this;
+  on($event: 'will-download', listener: ($event: ElectronEvent, item: ElectronDownloadItem, webContents: ElectronWebContents) => void): this;
 
   /** Emitted after an extension is loaded. */
-  once(event: 'extension-loaded', listener: (event: ElectronEvent, extension: ElectronExtension) => void): this;
+  once($event: 'extension-loaded', listener: ($event: ElectronEvent, extension: ElectronExtension) => void): this;
   /** Emitted after an extension is loaded and all necessary browser state is initialized. */
-  once(event: 'extension-ready', listener: (event: ElectronEvent, extension: ElectronExtension) => void): this;
+  once($event: 'extension-ready', listener: ($event: ElectronEvent, extension: ElectronExtension) => void): this;
   /** Emitted after an extension is unloaded. */
-  once(event: 'extension-unloaded', listener: (event: ElectronEvent, extension: ElectronExtension) => void): this;
+  once($event: 'extension-unloaded', listener: ($event: ElectronEvent, extension: ElectronExtension) => void): this;
   /** Emitted when a new HID device becomes available. */
-  once(event: 'hid-device-added', listener: (event: ElectronEvent, details: ElectronHidDeviceAddedDetails) => void): this;
+  once($event: 'hid-device-added', listener: ($event: ElectronEvent, details: ElectronHidDeviceAddedDetails) => void): this;
   /** Emitted when a HID device has been removed. */
-  once(event: 'hid-device-removed', listener: (event: ElectronEvent, details: ElectronHidDeviceRemovedDetails) => void): this;
+  once($event: 'hid-device-removed', listener: ($event: ElectronEvent, details: ElectronHidDeviceRemovedDetails) => void): this;
   /** Emitted when a render process requests preconnection to a URL. */
-  once(event: 'preconnect', listener: (event: ElectronEvent, preconnectUrl: string, allowCredentials: boolean) => void): this;
+  once($event: 'preconnect', listener: ($event: ElectronEvent, preconnectUrl: string, allowCredentials: boolean) => void): this;
   /** Emitted when a HID device needs to be selected. */
-  once(event: 'select-hid-device', listener: (event: ElectronEvent, details: ElectronSelectHidDeviceDetails, callback: (deviceId?: null | string) => void) => void): this;
+  once($event: 'select-hid-device', listener: ($event: ElectronEvent, details: ElectronSelectHidDeviceDetails, callback: (deviceId?: null | string) => void) => void): this;
   /** Emitted when a serial port needs to be selected. */
-  once(event: 'select-serial-port', listener: (event: ElectronEvent, portList: ElectronSerialPort[], webContents: ElectronWebContents, callback: (portId: string) => void) => void): this;
+  once($event: 'select-serial-port', listener: ($event: ElectronEvent, portList: ElectronSerialPort[], webContents: ElectronWebContents, callback: (portId: string) => void) => void): this;
   /** Emitted after a new serial port becomes available. */
-  once(event: 'serial-port-added', listener: (event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
+  once($event: 'serial-port-added', listener: ($event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
   /** Emitted after a serial port has been removed. */
-  once(event: 'serial-port-removed', listener: (event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
+  once($event: 'serial-port-removed', listener: ($event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
   /** Emitted when a hunspell dictionary file starts downloading. */
-  once(event: 'spellcheck-dictionary-download-begin', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  once($event: 'spellcheck-dictionary-download-begin', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Emitted when a hunspell dictionary file download fails. */
-  once(event: 'spellcheck-dictionary-download-failure', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  once($event: 'spellcheck-dictionary-download-failure', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Emitted when a hunspell dictionary file has been successfully downloaded. */
-  once(event: 'spellcheck-dictionary-download-success', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  once($event: 'spellcheck-dictionary-download-success', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Emitted when a hunspell dictionary file has been successfully initialized. */
-  once(event: 'spellcheck-dictionary-initialized', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  once($event: 'spellcheck-dictionary-initialized', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Emitted when Electron is about to download `item` in `webContents`. */
-  once(event: 'will-download', listener: (event: ElectronEvent, item: ElectronDownloadItem, webContents: ElectronWebContents) => void): this;
+  once($event: 'will-download', listener: ($event: ElectronEvent, item: ElectronDownloadItem, webContents: ElectronWebContents) => void): this;
 
   /**
    * Preconnects the given number of sockets to an origin.
@@ -367,35 +367,35 @@ export interface Session {
   removeExtension(extensionId: string): void;
 
   /** Removes a previously registered `extension-loaded` event listener. */
-  removeListener(event: 'extension-loaded', listener: (event: ElectronEvent, extension: ElectronExtension) => void): this;
+  removeListener($event: 'extension-loaded', listener: ($event: ElectronEvent, extension: ElectronExtension) => void): this;
   /** Removes a previously registered `extension-ready` event listener. */
-  removeListener(event: 'extension-ready', listener: (event: ElectronEvent, extension: ElectronExtension) => void): this;
+  removeListener($event: 'extension-ready', listener: ($event: ElectronEvent, extension: ElectronExtension) => void): this;
   /** Removes a previously registered `extension-unloaded` event listener. */
-  removeListener(event: 'extension-unloaded', listener: (event: ElectronEvent, extension: ElectronExtension) => void): this;
+  removeListener($event: 'extension-unloaded', listener: ($event: ElectronEvent, extension: ElectronExtension) => void): this;
   /** Removes a previously registered `hid-device-added` event listener. */
-  removeListener(event: 'hid-device-added', listener: (event: ElectronEvent, details: ElectronHidDeviceAddedDetails) => void): this;
+  removeListener($event: 'hid-device-added', listener: ($event: ElectronEvent, details: ElectronHidDeviceAddedDetails) => void): this;
   /** Removes a previously registered `hid-device-removed` event listener. */
-  removeListener(event: 'hid-device-removed', listener: (event: ElectronEvent, details: ElectronHidDeviceRemovedDetails) => void): this;
+  removeListener($event: 'hid-device-removed', listener: ($event: ElectronEvent, details: ElectronHidDeviceRemovedDetails) => void): this;
   /** Removes a previously registered `preconnect` event listener. */
-  removeListener(event: 'preconnect', listener: (event: ElectronEvent, preconnectUrl: string, allowCredentials: boolean) => void): this;
+  removeListener($event: 'preconnect', listener: ($event: ElectronEvent, preconnectUrl: string, allowCredentials: boolean) => void): this;
   /** Removes a previously registered `select-hid-device` event listener. */
-  removeListener(event: 'select-hid-device', listener: (event: ElectronEvent, details: ElectronSelectHidDeviceDetails, callback: (deviceId?: null | string) => void) => void): this;
+  removeListener($event: 'select-hid-device', listener: ($event: ElectronEvent, details: ElectronSelectHidDeviceDetails, callback: (deviceId?: null | string) => void) => void): this;
   /** Removes a previously registered `select-serial-port` event listener. */
-  removeListener(event: 'select-serial-port', listener: (event: ElectronEvent, portList: ElectronSerialPort[], webContents: ElectronWebContents, callback: (portId: string) => void) => void): this;
+  removeListener($event: 'select-serial-port', listener: ($event: ElectronEvent, portList: ElectronSerialPort[], webContents: ElectronWebContents, callback: (portId: string) => void) => void): this;
   /** Removes a previously registered `serial-port-added` event listener. */
-  removeListener(event: 'serial-port-added', listener: (event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
+  removeListener($event: 'serial-port-added', listener: ($event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
   /** Removes a previously registered `serial-port-removed` event listener. */
-  removeListener(event: 'serial-port-removed', listener: (event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
+  removeListener($event: 'serial-port-removed', listener: ($event: ElectronEvent, port: ElectronSerialPort, webContents: ElectronWebContents) => void): this;
   /** Removes a previously registered `spellcheck-dictionary-download-begin` event listener. */
-  removeListener(event: 'spellcheck-dictionary-download-begin', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  removeListener($event: 'spellcheck-dictionary-download-begin', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Removes a previously registered `spellcheck-dictionary-download-failure` event listener. */
-  removeListener(event: 'spellcheck-dictionary-download-failure', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  removeListener($event: 'spellcheck-dictionary-download-failure', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Removes a previously registered `spellcheck-dictionary-download-success` event listener. */
-  removeListener(event: 'spellcheck-dictionary-download-success', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  removeListener($event: 'spellcheck-dictionary-download-success', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Removes a previously registered `spellcheck-dictionary-initialized` event listener. */
-  removeListener(event: 'spellcheck-dictionary-initialized', listener: (event: ElectronEvent, languageCode: string) => void): this;
+  removeListener($event: 'spellcheck-dictionary-initialized', listener: ($event: ElectronEvent, languageCode: string) => void): this;
   /** Removes a previously registered `will-download` event listener. */
-  removeListener(event: 'will-download', listener: (event: ElectronEvent, item: ElectronDownloadItem, webContents: ElectronWebContents) => void): this;
+  removeListener($event: 'will-download', listener: ($event: ElectronEvent, item: ElectronDownloadItem, webContents: ElectronWebContents) => void): this;
 
   /**
    * Removes the word from the custom dictionary. Does not work on non-persistent (in-memory) sessions.

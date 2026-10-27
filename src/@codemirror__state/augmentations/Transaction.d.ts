@@ -105,173 +105,173 @@ declare module '@codemirror/state' {
      * Returns `true` if the transaction has a user event annotation that is equal to or more
      * specific than `event`.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @official
      */
-    isUserEvent(event: string): boolean;
+    isUserEvent($event: string): boolean;
     /**
      * Check whether the user dedents a line or lines, usually by typing `Shift + Tab` keys.
      * Included in `'delete'` event.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @unofficial
      */
-    isUserEvent(event: 'delete.dedent'): boolean;
+    isUserEvent($event: 'delete.dedent'): boolean;
 
     /**
      * Check whether the user deletes a line or lines, usually by typing `Ctrl + Shift + K` keys.
      * Included in `'delete'` event.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @unofficial
      */
-    isUserEvent(event: 'delete.line'): boolean;
+    isUserEvent($event: 'delete.line'): boolean;
 
     /**
      * Check whether the user inputs a content through Obsidian editor suggest autocompletion.
      * Currently, this event is only dispatched when autocompleting a wikilink or inserting Markdown link through command.
      * Included in `'input'` event.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @unofficial
      */
-    isUserEvent(event: 'input.autocomplete'): boolean;
+    isUserEvent($event: 'input.autocomplete'): boolean;
 
     /**
      * Check whether the user creates a copy of the selected lines.
      * Usually dispatched when performing [`copyLineUp`](https://codemirror.net/docs/ref/#commands.copyLineUp) or [`copyLineDown`](https://codemirror.net/docs/ref/#commands.copyLineDown) commands.
      * Included in `'input'` event.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @unofficial
      */
-    isUserEvent(event: 'input.copyline'): boolean;
+    isUserEvent($event: 'input.copyline'): boolean;
 
     /**
      * Check whether the user indents a line or lines, usually by typing `Tab` key.
      * Included in `'input'` event.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @unofficial
      */
-    isUserEvent(event: 'input.indent'): boolean;
+    isUserEvent($event: 'input.indent'): boolean;
 
     /**
      * Check whether the user replaces all search matches.
      * Usually dispatched when performing [`replaceAll`](https://codemirror.net/docs/ref/#commands.replaceAll) command.
      * Included in `'input'` and `'input.replace'` events.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @remark Obsidian native editor search does not dispatch this event.
      * @unofficial
      */
-    isUserEvent(event: 'input.replace.matches'): boolean;
+    isUserEvent($event: 'input.replace.matches'): boolean;
 
     /**
      * Check whether the user replaces search match(es).
      * Usually dispatched when performing [`replaceNext`](https://codemirror.net/docs/ref/#commands.replaceNext) or [`replaceAll`](https://codemirror.net/docs/ref/#commands.replaceAll) commands.
      * Included in `'input'` event.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @remark Obsidian native editor search does not dispatch this event.
      * @unofficial
      */
-    isUserEvent(event: 'input.replace'): boolean;
+    isUserEvent($event: 'input.replace'): boolean;
 
     /**
      * Check whether the user starts a composition input sequence.
      * Included in `'input'`, `'input.type'`, and `'input.type.compose'` events.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @unofficial
      */
-    isUserEvent(event: 'input.type.compose.start'): boolean;
+    isUserEvent($event: 'input.type.compose.start'): boolean;
 
     /**
      * Check whether the user flips the characters before and after the cursor(s).
      * Usually dispatched when performing [`transposeChars`](https://codemirror.net/docs/ref/#commands.transposeChars) command.
      * Included in `'move'` event.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @unofficial
      */
-    isUserEvent(event: 'move.character'): boolean;
+    isUserEvent($event: 'move.character'): boolean;
 
     /**
      * Check whether the user moves the selected line up or down.
      * Usually dispatched when performing [`moveLineUp`](https://codemirror.net/docs/ref/#commands.moveLineUp) or [`moveLineDown`](https://codemirror.net/docs/ref/#commands.moveLineDown) commands.
      * Included in `'move'` event.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @unofficial
      */
-    isUserEvent(event: 'move.line'): boolean;
+    isUserEvent($event: 'move.line'): boolean;
 
     /**
      * Check whether the transaction is triggered by a scroll action.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @unofficial
      */
-    isUserEvent(event: 'scroll'): boolean;
+    isUserEvent($event: 'scroll'): boolean;
 
     /**
      * Check whether the user redoes a selection change.
      * Usually dispatched when performing [`redoSelection`](https://codemirror.net/docs/ref/#commands.redoSelection) command.
      * Included in `'select'` event.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @unofficial
      */
-    isUserEvent(event: 'select.redo'): boolean;
+    isUserEvent($event: 'select.redo'): boolean;
 
     /**
      * Check whether the user selects all search matches.
      * Usually dispatched when performing [`selectMatches`](https://codemirror.net/docs/ref/#search.selectMatches) and [`selectSelectionMatches`](https://codemirror.net/docs/ref/#search.selectSelectionMatches) commands.
      * Included in `'select'` event.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @remark Obsidian native editor search does not dispatch this event.
      * @unofficial
      */
-    isUserEvent(event: 'select.search.matches'): boolean;
+    isUserEvent($event: 'select.search.matches'): boolean;
 
     /**
      * Check whether the user selects search match(es).
      * Usually dispatched when performing [`findNext`](https://codemirror.net/docs/ref/#search.findNext) and [`findPrevious`](https://codemirror.net/docs/ref/#search.findPrevious) commands.
      * Included in `'select'` and `'select.search'` events.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @remark Obsidian native editor search does not dispatch this event.
      * @unofficial
      */
-    isUserEvent(event: 'select.search'): boolean;
+    isUserEvent($event: 'select.search'): boolean;
 
     /**
      * Check whether the user undoes a selection change.
      * Usually dispatched when performing [`undoSelection`](https://codemirror.net/docs/ref/#commands.undoSelection) command.
      * Included in `'select'` event.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @unofficial
      */
-    isUserEvent(event: 'select.undo'): boolean;
+    isUserEvent($event: 'select.undo'): boolean;
 
     /**
      * Check whether a content change is not made explicitly by the user. It happens in some circumstances, for instance:
@@ -279,11 +279,11 @@ declare module '@codemirror/state' {
      * - Change made by another editor view that holds the same note.
      * - Change made by the vault, file manager, and file system API.
      *
-     * @param event - The event type to check.
+     * @param $event - The event type to check.
      * @returns Whether the transaction matches the event.
      * @unofficial
      */
-    isUserEvent(event: 'set'): boolean;
+    isUserEvent($event: 'set'): boolean;
   }
 
   namespace Transaction {
