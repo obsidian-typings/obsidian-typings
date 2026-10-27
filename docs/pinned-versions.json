@@ -19,6 +19,13 @@
       "expect": "0.7.3",
       "manualCheck": "The check reads satori's own exact pin, not an installed version, because that pin is what makes the override necessary. When it moves to 0.7.5 or later the override and this entry can both go; if satori moves to a 0.8.x fflate, raise this pin to match rather than dropping it. satori renders the OG images, so `npm run build` is what verifies a change here."
     },
+    "katex": {
+      "section": "overrides",
+      "why": "Clears GHSA-238p-pmpm-9mq7, fixed in KaTeX 0.18.2. micromark-extension-math 3.1.0 requires ^0.16.0, which excludes the fix; compatible audit updates cannot move it. Keep the first patched release exact because this crosses a 0.x minor boundary. Math HTML rendering and the Markdown gates were verified with this override.",
+      "check": "node -e \"process.stdout.write(JSON.parse(require('node:fs').readFileSync('node_modules/micromark-extension-math/package.json','utf8')).dependencies.katex)\"",
+      "expect": "^0.16.0",
+      "manualCheck": "Remove the override when micromark-extension-math admits a patched KaTeX version, then reinstall and rerun npm audit and the Markdown gates."
+    },
     "typescript": {
       "section": "dependencies",
       "why": "TypeScript 7 (tsgo) does not ship the programmatic compiler API that `astro check` drives: @astrojs/language-server aborts with 'The TypeScript module loaded (found 7.0.2) does not expose the programmatic API that `astro check` relies on'. Same native-API break the repo-root pins against, but reached by a different consumer - docs/ has no ESLint, so typescript-eslint is not the reason here. @astrojs/check peer-requires the range below, so 6.x is the last usable major; the `$typescript` override silences the peer conflict, which is how a sweep reached ^7.0.2 unnoticed (npm install was clean and `npm run build` never invokes `astro check`). Hold until astro supports the native compiler - https://github.com/withastro/roadmap/discussions/1321. The check reads the manifest through fs rather than require(), as the root's does: @astrojs/check has an `exports` map that does not list ./package.json, so require() throws ERR_PACKAGE_PATH_NOT_EXPORTED.",

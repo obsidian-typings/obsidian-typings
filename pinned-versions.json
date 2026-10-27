@@ -10,6 +10,13 @@
     "that is actually present in the declared section; the script reports either mismatch."
   ],
   "pins": {
+    "katex": {
+      "section": "overrides",
+      "why": "Clears GHSA-238p-pmpm-9mq7, fixed in KaTeX 0.18.2. micromark-extension-math 3.1.0 requires ^0.16.0, which excludes the fix; compatible audit updates cannot move it. Keep the first patched release exact because this crosses a 0.x minor boundary. Math HTML rendering and the Markdown gates were verified with this override.",
+      "check": "node -e \"process.stdout.write(JSON.parse(require('node:fs').readFileSync('node_modules/micromark-extension-math/package.json','utf8')).dependencies.katex)\"",
+      "expect": "^0.16.0",
+      "manualCheck": "Remove the override when micromark-extension-math admits a patched KaTeX version, then reinstall and rerun npm audit and the Markdown gates."
+    },
     "smol-toml": {
       "section": "overrides",
       "why": "Clears GHSA-7w5x-hrqm-74c2 (smol-toml denial of service via malformed TOML documents, <=1.7.0), fixed in 1.7.1. No direct bump reaches it: markdownlint-cli2 pins smol-toml at the exact vulnerable 1.7.0 and is itself already latest, so nothing the caret sweep floats can move that copy. The forced version is not a hopeful one: this tree already carried 1.8.0 under cspell-config-lib alongside the vulnerable copy, so the override collapses the two into one rather than introducing anything, and 1.8.0 is a minor inside 1.x. Caret rather than exact because nothing here needs an upper bound - it is an advisory floor, so the sweep floats it like any other caret. NEVER take the `npm audit fix --force` remedy: it downgrades markdownlint-cli2 to 0.21.0, and a downgrade is never an acceptable way to clear an advisory.",
