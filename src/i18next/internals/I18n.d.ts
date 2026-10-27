@@ -131,10 +131,10 @@ export interface I18n {
   /**
    * Emits an event.
    *
-   * @param event - Event name.
+   * @param $event - Event name.
    * @param args - Event arguments.
    */
-  emit(event: string, ...args: unknown[]): void;
+  emit($event: string, ...args: unknown[]): void;
 
   /**
    * Checks whether a translation key exists.
@@ -248,18 +248,18 @@ export interface I18n {
   /**
    * Removes a listener for an event.
    *
-   * @param event - Event name.
+   * @param $event - Event name.
    * @param listener - Listener function.
    */
-  off(event: string, listener?: (...args: unknown[]) => void): void;
+  off($event: string, listener?: (...args: unknown[]) => void): void;
 
   /**
    * Registers a listener for an event.
    *
-   * @param event - Event name.
+   * @param $event - Event name.
    * @param listener - Listener function.
    */
-  on(event: string, listener: (...args: unknown[]) => void): void;
+  on($event: string, listener: (...args: unknown[]) => void): void;
 
   /**
    * Reloads resources for the given languages and namespaces.
@@ -290,8 +290,8 @@ export interface I18n {
   /**
    * Registers a plugin module.
    *
-   * @param module - The module, its constructor, or a factory function.
+   * @param $module - The module, its constructor, or a factory function.
    * @returns The i18n instance.
    */
-  use<T extends Module>(module: ((instance: I18n) => void) | ModuleConstructor<T> | T): this;
+  use<T extends Module>($module: ((instance: I18n) => void) | ModuleConstructor<T> | T): this;
 }

@@ -63,10 +63,10 @@ declare module 'obsidian' {
      *
      * Event type: 'keydown'.
      *
-     * @param event - The keyboard event which triggered this function.
+     * @param $event - The keyboard event which triggered this function.
      * @unofficial
      */
-    onTitleKeydown(event: KeyboardEvent): void;
+    onTitleKeydown($event: KeyboardEvent): void;
 
     /**
      * Is called when the titleEl is focused and a paste event is triggered.
@@ -74,10 +74,10 @@ declare module 'obsidian' {
      * Event type: 'paste'.
      *
      * @param titleEl - The title element of the view.
-     * @param event - The clipboard event which triggered this function.
+     * @param $event - The clipboard event which triggered this function.
      * @unofficial
      */
-    onTitlePaste(titleEl: HTMLElement, event: ClipboardEvent): void;
+    onTitlePaste(titleEl: HTMLElement, $event: ClipboardEvent): void;
 
     /**
      * Updates the file to match the updated title.

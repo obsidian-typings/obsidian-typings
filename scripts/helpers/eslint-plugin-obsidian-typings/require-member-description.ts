@@ -13,7 +13,7 @@ import {
 } from './utils.ts';
 
 interface CommentValue {
-  value: string;
+  readonly value: string;
 }
 
 /**

@@ -30,9 +30,9 @@ export interface TreeItem extends TreeNode {
   /**
    * Execute item functionality on clicking tree item.
    *
-   * @param event - The mouse click event.
+   * @param $event - The mouse click event.
    */
-  onSelfClick(event: MouseEvent): void;
+  onSelfClick($event: MouseEvent): void;
 
   /**
    * Set clickable state of tree item.

@@ -49,44 +49,44 @@ export interface ElectronNativeTheme {
    * `shouldUseDarkColors`, `shouldUseHighContrastColors` or `shouldUseInvertedColorScheme` has changed. You will have
    * to check them to determine which one has changed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronNativeTheme` instance.
    */
-  addListener(event: 'updated', listener: () => void): this;
+  addListener($event: 'updated', listener: () => void): this;
 
   /**
    * Registers a listener for the `updated` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronNativeTheme` instance.
    */
-  on(event: 'updated', listener: () => void): this;
+  on($event: 'updated', listener: () => void): this;
 
   /**
    * Registers a one-time listener for the `updated` event. The listener is removed after it is invoked once.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This `ElectronNativeTheme` instance.
    */
-  once(event: 'updated', listener: () => void): this;
+  once($event: 'updated', listener: () => void): this;
 
   /**
    * Removes every listener for the `updated` event, or every listener of any event when no event is given.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @returns This `ElectronNativeTheme` instance.
    */
-  removeAllListeners(event?: 'updated'): this;
+  removeAllListeners($event?: 'updated'): this;
 
   /**
    * Removes the specified listener for the `updated` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This `ElectronNativeTheme` instance.
    */
-  removeListener(event: 'updated', listener: () => void): this;
+  removeListener($event: 'updated', listener: () => void): this;
 }

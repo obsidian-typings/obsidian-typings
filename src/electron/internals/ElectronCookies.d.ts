@@ -13,11 +13,11 @@ export interface ElectronCookies {
   /**
    * Registers a listener for the `changed` event, emitted when a cookie is added, edited, removed, or expired.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called with the changed cookie, the cause of the change, and whether it was removed.
    * @returns This cookies instance.
    */
-  addListener(event: 'changed', listener: (event: ElectronEvent, cookie: ElectronCookie, cause: 'evicted' | 'expired-overwrite' | 'expired' | 'explicit' | 'overwrite', removed: boolean) => void): this;
+  addListener($event: 'changed', listener: ($event: ElectronEvent, cookie: ElectronCookie, cause: 'evicted' | 'expired-overwrite' | 'expired' | 'explicit' | 'overwrite', removed: boolean) => void): this;
 
   /**
    * Writes any unwritten cookies data to disk.
@@ -37,20 +37,20 @@ export interface ElectronCookies {
   /**
    * Registers a listener for the `changed` event, emitted when a cookie is added, edited, removed, or expired.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called with the changed cookie, the cause of the change, and whether it was removed.
    * @returns This cookies instance.
    */
-  on(event: 'changed', listener: (event: ElectronEvent, cookie: ElectronCookie, cause: 'evicted' | 'expired-overwrite' | 'expired' | 'explicit' | 'overwrite', removed: boolean) => void): this;
+  on($event: 'changed', listener: ($event: ElectronEvent, cookie: ElectronCookie, cause: 'evicted' | 'expired-overwrite' | 'expired' | 'explicit' | 'overwrite', removed: boolean) => void): this;
 
   /**
    * Registers a one-time listener for the `changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called with the changed cookie, the cause of the change, and whether it was removed.
    * @returns This cookies instance.
    */
-  once(event: 'changed', listener: (event: ElectronEvent, cookie: ElectronCookie, cause: 'evicted' | 'expired-overwrite' | 'expired' | 'explicit' | 'overwrite', removed: boolean) => void): this;
+  once($event: 'changed', listener: ($event: ElectronEvent, cookie: ElectronCookie, cause: 'evicted' | 'expired-overwrite' | 'expired' | 'explicit' | 'overwrite', removed: boolean) => void): this;
 
   /**
    * Removes the cookies matching `url` and `name`.
@@ -64,11 +64,11 @@ export interface ElectronCookies {
   /**
    * Removes the `changed` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The previously registered listener to remove.
    * @returns This cookies instance.
    */
-  removeListener(event: 'changed', listener: (event: ElectronEvent, cookie: ElectronCookie, cause: 'evicted' | 'expired-overwrite' | 'expired' | 'explicit' | 'overwrite', removed: boolean) => void): this;
+  removeListener($event: 'changed', listener: ($event: ElectronEvent, cookie: ElectronCookie, cause: 'evicted' | 'expired-overwrite' | 'expired' | 'explicit' | 'overwrite', removed: boolean) => void): this;
 
   /**
    * Sets a cookie with `details`.

@@ -42,33 +42,33 @@ export interface ClipboardManager {
   /**
    * Handle an incoming drag-over event.
    *
-   * @param event - The drag event.
+   * @param $event - The drag event.
    */
-  handleDragOver(event: DragEvent): void;
+  handleDragOver($event: DragEvent): void;
 
   /**
    * Handle an incoming drag-drop event.
    *
-   * @param event - The drag event.
+   * @param $event - The drag event.
    * @returns Whether the drop was handled.
    */
-  handleDrop(event: DragEvent): boolean;
+  handleDrop($event: DragEvent): boolean;
 
   /**
    * Process a drop event into the editor.
    *
-   * @param event - The drag event.
+   * @param $event - The drag event.
    * @returns The inserted text, or `null`.
    */
-  handleDropIntoEditor(event: DragEvent): null | string;
+  handleDropIntoEditor($event: DragEvent): null | string;
 
   /**
    * Handle an incoming paste event.
    *
-   * @param event - The clipboard event.
+   * @param $event - The clipboard event.
    * @returns Whether the paste was handled.
    */
-  handlePaste(event: ClipboardEvent): boolean;
+  handlePaste($event: ClipboardEvent): boolean;
 
   /**
    * Insert single file as embed into the editor.

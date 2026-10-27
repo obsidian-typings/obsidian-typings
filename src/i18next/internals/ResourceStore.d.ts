@@ -99,18 +99,18 @@ export interface ResourceStore {
   /**
    * Removes a listener for an event.
    *
-   * @param event - Event name.
+   * @param $event - Event name.
    * @param listener - Listener function.
    */
-  off(event: string, listener?: (...args: unknown[]) => void): void;
+  off($event: string, listener?: (...args: unknown[]) => void): void;
 
   /**
    * Registers a listener for an event.
    *
-   * @param event - Event name.
+   * @param $event - Event name.
    * @param listener - Listener function.
    */
-  on(event: string, listener: (...args: unknown[]) => void): void;
+  on($event: string, listener: (...args: unknown[]) => void): void;
 
   /**
    * Removes namespaces from the store's options.

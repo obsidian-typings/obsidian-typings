@@ -61,11 +61,11 @@ declare module '@codemirror/view' {
      * Can be used to configure which kinds of events inside the widget should be ignored by
      * the editor. The default is to ignore all events.
      *
-     * @param event - The event.
+     * @param $event - The event.
      * @returns Whether to ignore the event.
      * @official
      */
-    ignoreEvent(event: Event): boolean;
+    ignoreEvent($event: Event): boolean;
 
     /**
      * Setting this to `true` causes widgets to never be reused. The default

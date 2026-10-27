@@ -1058,7 +1058,7 @@ declare module 'obsidian' {
      * @remark Used for preparing (Ctrl) hover previews.
      * @unofficial
      */
-    on(name: 'hover-link', callback: (event: HoverLinkEvent) => void, ctx?: unknown): EventRef;
+    on(name: 'hover-link', callback: ($event: HoverLinkEvent) => void, ctx?: unknown): EventRef;
 
     /**
      * Triggered when the layout of the workspace changes.

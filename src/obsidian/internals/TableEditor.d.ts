@@ -180,10 +180,10 @@ export interface TableEditor extends ChildWidgetType {
   /**
    * Copy the current cell selection to the clipboard, optionally cutting.
    *
-   * @param event - The clipboard event.
+   * @param $event - The clipboard event.
    * @param cut - Whether to cut (remove) the selected content.
    */
-  copySelection(event: ClipboardEvent, cut: boolean): void;
+  copySelection($event: ClipboardEvent, cut: boolean): void;
 
   /**
    * Add a row or column drag handle to a cell.
@@ -397,9 +397,9 @@ export interface TableEditor extends ChildWidgetType {
   /**
    * Paste clipboard content into the current cell selection.
    *
-   * @param event - The clipboard event.
+   * @param $event - The clipboard event.
    */
-  pasteSelection(event: ClipboardEvent): void;
+  pasteSelection($event: ClipboardEvent): void;
 
   /**
    * Place the cursor on the line before or after the table, inserting one if needed.

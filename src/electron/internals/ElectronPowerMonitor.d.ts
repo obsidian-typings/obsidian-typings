@@ -17,84 +17,84 @@ export interface ElectronPowerMonitor extends NodeJS.EventEmitter {
   /**
    * Emitted when the system is about to lock the screen.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin,win32`.
    */
-  addListener(event: 'lock-screen', listener: () => void): this;
+  addListener($event: 'lock-screen', listener: () => void): this;
   /**
    * Emitted when the system changes to AC power.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin,win32`.
    */
-  addListener(event: 'on-ac', listener: () => void): this;
+  addListener($event: 'on-ac', listener: () => void): this;
   /**
    * Emitted when the system changes to battery power.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin`.
    */
-  addListener(event: 'on-battery', listener: () => void): this;
+  addListener($event: 'on-battery', listener: () => void): this;
   /**
    * Emitted when the system is resuming.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    */
-  addListener(event: 'resume', listener: () => void): this;
+  addListener($event: 'resume', listener: () => void): this;
   /**
    * Emitted when the system is about to reboot or shut down. If the event handler invokes
    * `event.preventDefault()`, Electron will attempt to delay system shutdown in order for the app to
    * exit cleanly.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `linux,darwin`.
    */
-  addListener(event: 'shutdown', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'shutdown', listener: ($event: ElectronEvent) => void): this;
   /**
    * Emitted when the system is suspending.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    */
-  addListener(event: 'suspend', listener: () => void): this;
+  addListener($event: 'suspend', listener: () => void): this;
   /**
    * Emitted as soon as the system's screen is unlocked.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin,win32`.
    */
-  addListener(event: 'unlock-screen', listener: () => void): this;
+  addListener($event: 'unlock-screen', listener: () => void): this;
   /**
    * Emitted when a login session is activated.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin`.
    */
-  addListener(event: 'user-did-become-active', listener: () => void): this;
+  addListener($event: 'user-did-become-active', listener: () => void): this;
   /**
    * Emitted when a login session is deactivated.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin`.
    */
-  addListener(event: 'user-did-resign-active', listener: () => void): this;
+  addListener($event: 'user-did-resign-active', listener: () => void): this;
 
   /**
    * Calculate the system idle state. `idleThreshold` is the amount of time (in seconds) before
@@ -124,242 +124,242 @@ export interface ElectronPowerMonitor extends NodeJS.EventEmitter {
   /**
    * Emitted when the system is about to lock the screen.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin,win32`.
    */
-  on(event: 'lock-screen', listener: () => void): this;
+  on($event: 'lock-screen', listener: () => void): this;
   /**
    * Emitted when the system changes to AC power.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin,win32`.
    */
-  on(event: 'on-ac', listener: () => void): this;
+  on($event: 'on-ac', listener: () => void): this;
   /**
    * Emitted when the system changes to battery power.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin`.
    */
-  on(event: 'on-battery', listener: () => void): this;
+  on($event: 'on-battery', listener: () => void): this;
   /**
    * Emitted when the system is resuming.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    */
-  on(event: 'resume', listener: () => void): this;
+  on($event: 'resume', listener: () => void): this;
   /**
    * Emitted when the system is about to reboot or shut down. If the event handler invokes
    * `event.preventDefault()`, Electron will attempt to delay system shutdown in order for the app to
    * exit cleanly.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `linux,darwin`.
    */
-  on(event: 'shutdown', listener: (event: ElectronEvent) => void): this;
+  on($event: 'shutdown', listener: ($event: ElectronEvent) => void): this;
   /**
    * Emitted when the system is suspending.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    */
-  on(event: 'suspend', listener: () => void): this;
+  on($event: 'suspend', listener: () => void): this;
   /**
    * Emitted as soon as the system's screen is unlocked.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin,win32`.
    */
-  on(event: 'unlock-screen', listener: () => void): this;
+  on($event: 'unlock-screen', listener: () => void): this;
   /**
    * Emitted when a login session is activated.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin`.
    */
-  on(event: 'user-did-become-active', listener: () => void): this;
+  on($event: 'user-did-become-active', listener: () => void): this;
   /**
    * Emitted when a login session is deactivated.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked when the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin`.
    */
-  on(event: 'user-did-resign-active', listener: () => void): this;
+  on($event: 'user-did-resign-active', listener: () => void): this;
 
   /**
    * Adds a one-time listener for the `lock-screen` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked the next time the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin,win32`.
    */
-  once(event: 'lock-screen', listener: () => void): this;
+  once($event: 'lock-screen', listener: () => void): this;
   /**
    * Adds a one-time listener for the `on-ac` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked the next time the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin,win32`.
    */
-  once(event: 'on-ac', listener: () => void): this;
+  once($event: 'on-ac', listener: () => void): this;
   /**
    * Adds a one-time listener for the `on-battery` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked the next time the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin`.
    */
-  once(event: 'on-battery', listener: () => void): this;
+  once($event: 'on-battery', listener: () => void): this;
   /**
    * Adds a one-time listener for the `resume` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked the next time the event is emitted.
    * @returns This `PowerMonitor` instance.
    */
-  once(event: 'resume', listener: () => void): this;
+  once($event: 'resume', listener: () => void): this;
   /**
    * Adds a one-time listener for the `shutdown` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked the next time the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `linux,darwin`.
    */
-  once(event: 'shutdown', listener: (event: ElectronEvent) => void): this;
+  once($event: 'shutdown', listener: ($event: ElectronEvent) => void): this;
   /**
    * Adds a one-time listener for the `suspend` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked the next time the event is emitted.
    * @returns This `PowerMonitor` instance.
    */
-  once(event: 'suspend', listener: () => void): this;
+  once($event: 'suspend', listener: () => void): this;
   /**
    * Adds a one-time listener for the `unlock-screen` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked the next time the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin,win32`.
    */
-  once(event: 'unlock-screen', listener: () => void): this;
+  once($event: 'unlock-screen', listener: () => void): this;
   /**
    * Adds a one-time listener for the `user-did-become-active` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked the next time the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin`.
    */
-  once(event: 'user-did-become-active', listener: () => void): this;
+  once($event: 'user-did-become-active', listener: () => void): this;
   /**
    * Adds a one-time listener for the `user-did-resign-active` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Callback invoked the next time the event is emitted.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin`.
    */
-  once(event: 'user-did-resign-active', listener: () => void): this;
+  once($event: 'user-did-resign-active', listener: () => void): this;
 
   /**
    * Removes the specified `listener` from the `lock-screen` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin,win32`.
    */
-  removeListener(event: 'lock-screen', listener: () => void): this;
+  removeListener($event: 'lock-screen', listener: () => void): this;
   /**
    * Removes the specified `listener` from the `on-ac` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin,win32`.
    */
-  removeListener(event: 'on-ac', listener: () => void): this;
+  removeListener($event: 'on-ac', listener: () => void): this;
   /**
    * Removes the specified `listener` from the `on-battery` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin`.
    */
-  removeListener(event: 'on-battery', listener: () => void): this;
+  removeListener($event: 'on-battery', listener: () => void): this;
   /**
    * Removes the specified `listener` from the `resume` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This `PowerMonitor` instance.
    */
-  removeListener(event: 'resume', listener: () => void): this;
+  removeListener($event: 'resume', listener: () => void): this;
   /**
    * Removes the specified `listener` from the `shutdown` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This `PowerMonitor` instance.
    * Platform: `linux,darwin`.
    */
-  removeListener(event: 'shutdown', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'shutdown', listener: ($event: ElectronEvent) => void): this;
   /**
    * Removes the specified `listener` from the `suspend` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This `PowerMonitor` instance.
    */
-  removeListener(event: 'suspend', listener: () => void): this;
+  removeListener($event: 'suspend', listener: () => void): this;
   /**
    * Removes the specified `listener` from the `unlock-screen` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin,win32`.
    */
-  removeListener(event: 'unlock-screen', listener: () => void): this;
+  removeListener($event: 'unlock-screen', listener: () => void): this;
   /**
    * Removes the specified `listener` from the `user-did-become-active` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin`.
    */
-  removeListener(event: 'user-did-become-active', listener: () => void): this;
+  removeListener($event: 'user-did-become-active', listener: () => void): this;
   /**
    * Removes the specified `listener` from the `user-did-resign-active` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This `PowerMonitor` instance.
    * Platform: `darwin`.
    */
-  removeListener(event: 'user-did-resign-active', listener: () => void): this;
+  removeListener($event: 'user-did-resign-active', listener: () => void): this;
 }

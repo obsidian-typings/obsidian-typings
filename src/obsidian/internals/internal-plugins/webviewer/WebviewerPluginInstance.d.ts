@@ -38,9 +38,9 @@ export interface WebviewerPluginInstance extends InternalPluginInstance<Webviewe
   /**
    * Handle a custom open URL event from the webview.
    *
-   * @param event - The custom event containing the URL details.
+   * @param $event - The custom event containing the URL details.
    */
-  handleOpenUrl(event: CustomEvent<WebviewerOpenUrlEventDetail>): void;
+  handleOpenUrl($event: CustomEvent<WebviewerOpenUrlEventDetail>): void;
 
   /**
    * Open a URL in the web viewer.

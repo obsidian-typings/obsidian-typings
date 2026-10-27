@@ -234,10 +234,10 @@ export interface Doc {
   /**
    * The reverse of posFromIndex.
    *
-   * @param object - The position.
+   * @param $object - The position.
    * @returns The zero-based index.
    */
-  indexFromPos(object: Position): number;
+  indexFromPos($object: Position): number;
 
   /**
    * Returns whether the document is currently clean.

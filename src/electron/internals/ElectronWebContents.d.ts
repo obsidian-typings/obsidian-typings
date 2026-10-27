@@ -94,506 +94,506 @@ export interface ElectronWebContents {
   /**
    * Registers a listener for the `before-input-event` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `before-input-event` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'before-input-event', listener: (event: ElectronEvent, input: ElectronInput) => void): this;
+  addListener($event: 'before-input-event', listener: ($event: ElectronEvent, input: ElectronInput) => void): this;
 
   /**
    * Registers a listener for the `blur` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `blur` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'blur', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'blur', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `certificate-error` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `certificate-error` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'certificate-error', listener: (event: ElectronEvent, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
+  addListener($event: 'certificate-error', listener: ($event: ElectronEvent, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
 
   /**
    * Registers a listener for the `console-message` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `console-message` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'console-message', listener: (event: ElectronEvent, level: number, message: string, line: number, sourceId: string) => void): this;
+  addListener($event: 'console-message', listener: ($event: ElectronEvent, level: number, message: string, line: number, sourceId: string) => void): this;
 
   /**
    * Registers a listener for the `context-menu` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `context-menu` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'context-menu', listener: (event: ElectronEvent, params: ElectronContextMenuParams) => void): this;
+  addListener($event: 'context-menu', listener: ($event: ElectronEvent, params: ElectronContextMenuParams) => void): this;
 
   /**
    * Registers a listener for the `crashed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `crashed` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'crashed', listener: (event: ElectronEvent, killed: boolean) => void): this;
+  addListener($event: 'crashed', listener: ($event: ElectronEvent, killed: boolean) => void): this;
 
   /**
    * Registers a listener for the `cursor-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `cursor-changed` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'cursor-changed', listener: (event: ElectronEvent, type: string, image: ElectronNativeImage, scale: number, size: ElectronSize, hotspot: ElectronPoint) => void): this;
+  addListener($event: 'cursor-changed', listener: ($event: ElectronEvent, type: string, image: ElectronNativeImage, scale: number, size: ElectronSize, hotspot: ElectronPoint) => void): this;
 
   /**
    * Registers a listener for the `destroyed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `destroyed` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'destroyed', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'destroyed', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `devtools-closed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `devtools-closed` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'devtools-closed', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'devtools-closed', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `devtools-focused` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `devtools-focused` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'devtools-focused', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'devtools-focused', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `devtools-opened` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `devtools-opened` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'devtools-opened', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'devtools-opened', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `devtools-reload-page` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `devtools-reload-page` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'devtools-reload-page', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'devtools-reload-page', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `did-attach-webview` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-attach-webview` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-attach-webview', listener: (event: ElectronEvent, webContents: ElectronWebContents) => void): this;
+  addListener($event: 'did-attach-webview', listener: ($event: ElectronEvent, webContents: ElectronWebContents) => void): this;
 
   /**
    * Registers a listener for the `did-change-theme-color` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-change-theme-color` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-change-theme-color', listener: (event: ElectronEvent, color: null | string) => void): this;
+  addListener($event: 'did-change-theme-color', listener: ($event: ElectronEvent, color: null | string) => void): this;
 
   /**
    * Registers a listener for the `did-create-window` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-create-window` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-create-window', listener: (window: ElectronBrowserWindow, details: ElectronDidCreateWindowDetails) => void): this;
+  addListener($event: 'did-create-window', listener: (window: ElectronBrowserWindow, details: ElectronDidCreateWindowDetails) => void): this;
 
   /**
    * Registers a listener for the `did-fail-load` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-fail-load` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-fail-load', listener: (event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  addListener($event: 'did-fail-load', listener: ($event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-fail-provisional-load` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-fail-provisional-load` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-fail-provisional-load', listener: (event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  addListener($event: 'did-fail-provisional-load', listener: ($event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-finish-load` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-finish-load` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-finish-load', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'did-finish-load', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `did-frame-finish-load` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-frame-finish-load` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-frame-finish-load', listener: (event: ElectronEvent, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  addListener($event: 'did-frame-finish-load', listener: ($event: ElectronEvent, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-frame-navigate` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-frame-navigate` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-frame-navigate', listener: (event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  addListener($event: 'did-frame-navigate', listener: ($event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-navigate` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-navigate` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-navigate', listener: (event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string) => void): this;
+  addListener($event: 'did-navigate', listener: ($event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string) => void): this;
 
   /**
    * Registers a listener for the `did-navigate-in-page` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-navigate-in-page` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-navigate-in-page', listener: (event: ElectronEvent, url: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  addListener($event: 'did-navigate-in-page', listener: ($event: ElectronEvent, url: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-redirect-navigation` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-redirect-navigation` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-redirect-navigation', listener: (event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  addListener($event: 'did-redirect-navigation', listener: ($event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-start-loading` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-start-loading` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-start-loading', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'did-start-loading', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `did-start-navigation` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-start-navigation` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-start-navigation', listener: (event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  addListener($event: 'did-start-navigation', listener: ($event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-stop-loading` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-stop-loading` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'did-stop-loading', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'did-stop-loading', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `dom-ready` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `dom-ready` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'dom-ready', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'dom-ready', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a listener for the `enter-html-full-screen` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `enter-html-full-screen` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `focus` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `focus` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'focus', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'focus', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `found-in-page` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `found-in-page` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'found-in-page', listener: (event: ElectronEvent, result: ElectronResult) => void): this;
+  addListener($event: 'found-in-page', listener: ($event: ElectronEvent, result: ElectronResult) => void): this;
 
   /**
    * Registers a listener for the `frame-created` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `frame-created` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'frame-created', listener: (event: ElectronEvent, details: ElectronFrameCreatedDetails) => void): this;
+  addListener($event: 'frame-created', listener: ($event: ElectronEvent, details: ElectronFrameCreatedDetails) => void): this;
 
   /**
    * Registers a listener for the `input-event` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `input-event` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'input-event', listener: (event: ElectronEvent, inputEvent: ElectronAnyInputEvent) => void): this;
+  addListener($event: 'input-event', listener: ($event: ElectronEvent, inputEvent: ElectronAnyInputEvent) => void): this;
 
   /**
    * Registers a listener for the `ipc-message` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `ipc-message` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'ipc-message', listener: (event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
+  addListener($event: 'ipc-message', listener: ($event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `ipc-message-sync` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `ipc-message-sync` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'ipc-message-sync', listener: (event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
+  addListener($event: 'ipc-message-sync', listener: ($event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `leave-html-full-screen` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `leave-html-full-screen` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `login` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `login` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'login', listener: (event: ElectronEvent, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+  addListener($event: 'login', listener: ($event: ElectronEvent, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
 
   /**
    * Registers a listener for the `media-paused` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `media-paused` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'media-paused', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'media-paused', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `media-started-playing` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `media-started-playing` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'media-started-playing', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'media-started-playing', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `new-window` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `new-window` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'new-window', listener: (event: ElectronNewWindowWebContentsEvent, url: string, frameName: string, disposition: 'background-tab' | 'default' | 'foreground-tab' | 'new-window' | 'other' | 'save-to-disk', options: BrowserWindowConstructorOptions, additionalFeatures: string[], referrer: ElectronReferrer, postBody: ElectronPostBody) => void): this;
+  addListener($event: 'new-window', listener: ($event: ElectronNewWindowWebContentsEvent, url: string, frameName: string, disposition: 'background-tab' | 'default' | 'foreground-tab' | 'new-window' | 'other' | 'save-to-disk', options: BrowserWindowConstructorOptions, additionalFeatures: string[], referrer: ElectronReferrer, postBody: ElectronPostBody) => void): this;
 
   /**
    * Registers a listener for the `page-favicon-updated` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `page-favicon-updated` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'page-favicon-updated', listener: (event: ElectronEvent, favicons: string[]) => void): this;
+  addListener($event: 'page-favicon-updated', listener: ($event: ElectronEvent, favicons: string[]) => void): this;
 
   /**
    * Registers a listener for the `page-title-updated` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `page-title-updated` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'page-title-updated', listener: (event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
+  addListener($event: 'page-title-updated', listener: ($event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
 
   /**
    * Registers a listener for the `paint` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `paint` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'paint', listener: (event: ElectronEvent, dirtyRect: ElectronRectangle, image: ElectronNativeImage) => void): this;
+  addListener($event: 'paint', listener: ($event: ElectronEvent, dirtyRect: ElectronRectangle, image: ElectronNativeImage) => void): this;
 
   /**
    * Registers a listener for the `plugin-crashed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `plugin-crashed` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'plugin-crashed', listener: (event: ElectronEvent, name: string, version: string) => void): this;
+  addListener($event: 'plugin-crashed', listener: ($event: ElectronEvent, name: string, version: string) => void): this;
 
   /**
    * Registers a listener for the `preferred-size-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `preferred-size-changed` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'preferred-size-changed', listener: (event: ElectronEvent, preferredSize: ElectronSize) => void): this;
+  addListener($event: 'preferred-size-changed', listener: ($event: ElectronEvent, preferredSize: ElectronSize) => void): this;
 
   /**
    * Registers a listener for the `preload-error` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `preload-error` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'preload-error', listener: (event: ElectronEvent, preloadPath: string, error: Error) => void): this;
+  addListener($event: 'preload-error', listener: ($event: ElectronEvent, preloadPath: string, error: Error) => void): this;
 
   /**
    * Registers a listener for the `render-process-gone` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `render-process-gone` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'render-process-gone', listener: (event: ElectronEvent, details: ElectronRenderProcessGoneDetails) => void): this;
+  addListener($event: 'render-process-gone', listener: ($event: ElectronEvent, details: ElectronRenderProcessGoneDetails) => void): this;
 
   /**
    * Registers a listener for the `responsive` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `responsive` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'responsive', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'responsive', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `select-bluetooth-device` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `select-bluetooth-device` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'select-bluetooth-device', listener: (event: ElectronEvent, devices: ElectronBluetoothDevice[], callback: (deviceId: string) => void) => void): this;
+  addListener($event: 'select-bluetooth-device', listener: ($event: ElectronEvent, devices: ElectronBluetoothDevice[], callback: (deviceId: string) => void) => void): this;
 
   /**
    * Registers a listener for the `select-client-certificate` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `select-client-certificate` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'select-client-certificate', listener: (event: ElectronEvent, url: string, certificateList: ElectronCertificate[], callback: (certificate: ElectronCertificate) => void) => void): this;
+  addListener($event: 'select-client-certificate', listener: ($event: ElectronEvent, url: string, certificateList: ElectronCertificate[], callback: (certificate: ElectronCertificate) => void) => void): this;
 
   /**
    * Registers a listener for the `unresponsive` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `unresponsive` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'unresponsive', listener: (...args: unknown[]) => void): this;
+  addListener($event: 'unresponsive', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `update-target-url` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `update-target-url` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'update-target-url', listener: (event: ElectronEvent, url: string) => void): this;
+  addListener($event: 'update-target-url', listener: ($event: ElectronEvent, url: string) => void): this;
 
   /**
    * Registers a listener for the `will-attach-webview` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `will-attach-webview` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'will-attach-webview', listener: (event: ElectronEvent, webPreferences: WebPreferences, params: Record<string, string>) => void): this;
+  addListener($event: 'will-attach-webview', listener: ($event: ElectronEvent, webPreferences: WebPreferences, params: Record<string, string>) => void): this;
 
   /**
    * Registers a listener for the `will-navigate` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `will-navigate` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'will-navigate', listener: (event: ElectronEvent, url: string) => void): this;
+  addListener($event: 'will-navigate', listener: ($event: ElectronEvent, url: string) => void): this;
 
   /**
    * Registers a listener for the `will-prevent-unload` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `will-prevent-unload` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'will-prevent-unload', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'will-prevent-unload', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a listener for the `will-redirect` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `will-redirect` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'will-redirect', listener: (event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  addListener($event: 'will-redirect', listener: ($event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `zoom-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `zoom-changed` event is emitted.
    * @returns This web contents instance.
    */
-  addListener(event: 'zoom-changed', listener: (event: ElectronEvent, zoomDirection: 'in' | 'out') => void): this;
+  addListener($event: 'zoom-changed', listener: ($event: ElectronEvent, zoomDirection: 'in' | 'out') => void): this;
 
   /**
    * Adds the specified path to the DevTools workspace.
@@ -1020,1010 +1020,1010 @@ export interface ElectronWebContents {
   /**
    * Registers a listener for the `before-input-event` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `before-input-event` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'before-input-event', listener: (event: ElectronEvent, input: ElectronInput) => void): this;
+  on($event: 'before-input-event', listener: ($event: ElectronEvent, input: ElectronInput) => void): this;
 
   /**
    * Registers a listener for the `blur` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `blur` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'blur', listener: (...args: unknown[]) => void): this;
+  on($event: 'blur', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `certificate-error` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `certificate-error` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'certificate-error', listener: (event: ElectronEvent, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
+  on($event: 'certificate-error', listener: ($event: ElectronEvent, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
 
   /**
    * Registers a listener for the `console-message` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `console-message` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'console-message', listener: (event: ElectronEvent, level: number, message: string, line: number, sourceId: string) => void): this;
+  on($event: 'console-message', listener: ($event: ElectronEvent, level: number, message: string, line: number, sourceId: string) => void): this;
 
   /**
    * Registers a listener for the `context-menu` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `context-menu` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'context-menu', listener: (event: ElectronEvent, params: ElectronContextMenuParams) => void): this;
+  on($event: 'context-menu', listener: ($event: ElectronEvent, params: ElectronContextMenuParams) => void): this;
 
   /**
    * Registers a listener for the `crashed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `crashed` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'crashed', listener: (event: ElectronEvent, killed: boolean) => void): this;
+  on($event: 'crashed', listener: ($event: ElectronEvent, killed: boolean) => void): this;
 
   /**
    * Registers a listener for the `cursor-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `cursor-changed` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'cursor-changed', listener: (event: ElectronEvent, type: string, image: ElectronNativeImage, scale: number, size: ElectronSize, hotspot: ElectronPoint) => void): this;
+  on($event: 'cursor-changed', listener: ($event: ElectronEvent, type: string, image: ElectronNativeImage, scale: number, size: ElectronSize, hotspot: ElectronPoint) => void): this;
 
   /**
    * Registers a listener for the `destroyed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `destroyed` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'destroyed', listener: (...args: unknown[]) => void): this;
+  on($event: 'destroyed', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `devtools-closed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `devtools-closed` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'devtools-closed', listener: (...args: unknown[]) => void): this;
+  on($event: 'devtools-closed', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `devtools-focused` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `devtools-focused` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'devtools-focused', listener: (...args: unknown[]) => void): this;
+  on($event: 'devtools-focused', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `devtools-opened` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `devtools-opened` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'devtools-opened', listener: (...args: unknown[]) => void): this;
+  on($event: 'devtools-opened', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `devtools-reload-page` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `devtools-reload-page` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'devtools-reload-page', listener: (...args: unknown[]) => void): this;
+  on($event: 'devtools-reload-page', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `did-attach-webview` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-attach-webview` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-attach-webview', listener: (event: ElectronEvent, webContents: ElectronWebContents) => void): this;
+  on($event: 'did-attach-webview', listener: ($event: ElectronEvent, webContents: ElectronWebContents) => void): this;
 
   /**
    * Registers a listener for the `did-change-theme-color` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-change-theme-color` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-change-theme-color', listener: (event: ElectronEvent, color: null | string) => void): this;
+  on($event: 'did-change-theme-color', listener: ($event: ElectronEvent, color: null | string) => void): this;
 
   /**
    * Registers a listener for the `did-create-window` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-create-window` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-create-window', listener: (window: ElectronBrowserWindow, details: ElectronDidCreateWindowDetails) => void): this;
+  on($event: 'did-create-window', listener: (window: ElectronBrowserWindow, details: ElectronDidCreateWindowDetails) => void): this;
 
   /**
    * Registers a listener for the `did-fail-load` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-fail-load` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-fail-load', listener: (event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  on($event: 'did-fail-load', listener: ($event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-fail-provisional-load` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-fail-provisional-load` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-fail-provisional-load', listener: (event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  on($event: 'did-fail-provisional-load', listener: ($event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-finish-load` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-finish-load` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-finish-load', listener: (...args: unknown[]) => void): this;
+  on($event: 'did-finish-load', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `did-frame-finish-load` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-frame-finish-load` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-frame-finish-load', listener: (event: ElectronEvent, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  on($event: 'did-frame-finish-load', listener: ($event: ElectronEvent, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-frame-navigate` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-frame-navigate` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-frame-navigate', listener: (event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  on($event: 'did-frame-navigate', listener: ($event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-navigate` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-navigate` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-navigate', listener: (event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string) => void): this;
+  on($event: 'did-navigate', listener: ($event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string) => void): this;
 
   /**
    * Registers a listener for the `did-navigate-in-page` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-navigate-in-page` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-navigate-in-page', listener: (event: ElectronEvent, url: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  on($event: 'did-navigate-in-page', listener: ($event: ElectronEvent, url: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-redirect-navigation` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-redirect-navigation` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-redirect-navigation', listener: (event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  on($event: 'did-redirect-navigation', listener: ($event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-start-loading` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-start-loading` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-start-loading', listener: (...args: unknown[]) => void): this;
+  on($event: 'did-start-loading', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `did-start-navigation` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-start-navigation` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-start-navigation', listener: (event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  on($event: 'did-start-navigation', listener: ($event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `did-stop-loading` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-stop-loading` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'did-stop-loading', listener: (...args: unknown[]) => void): this;
+  on($event: 'did-stop-loading', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `dom-ready` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `dom-ready` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'dom-ready', listener: (event: ElectronEvent) => void): this;
+  on($event: 'dom-ready', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a listener for the `enter-html-full-screen` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `enter-html-full-screen` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
+  on($event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `focus` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `focus` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'focus', listener: (...args: unknown[]) => void): this;
+  on($event: 'focus', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `found-in-page` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `found-in-page` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'found-in-page', listener: (event: ElectronEvent, result: ElectronResult) => void): this;
+  on($event: 'found-in-page', listener: ($event: ElectronEvent, result: ElectronResult) => void): this;
 
   /**
    * Registers a listener for the `frame-created` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `frame-created` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'frame-created', listener: (event: ElectronEvent, details: ElectronFrameCreatedDetails) => void): this;
+  on($event: 'frame-created', listener: ($event: ElectronEvent, details: ElectronFrameCreatedDetails) => void): this;
 
   /**
    * Registers a listener for the `input-event` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `input-event` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'input-event', listener: (event: ElectronEvent, inputEvent: ElectronAnyInputEvent) => void): this;
+  on($event: 'input-event', listener: ($event: ElectronEvent, inputEvent: ElectronAnyInputEvent) => void): this;
 
   /**
    * Registers a listener for the `ipc-message` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `ipc-message` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'ipc-message', listener: (event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
+  on($event: 'ipc-message', listener: ($event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `ipc-message-sync` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `ipc-message-sync` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'ipc-message-sync', listener: (event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
+  on($event: 'ipc-message-sync', listener: ($event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `leave-html-full-screen` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `leave-html-full-screen` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
+  on($event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `login` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `login` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'login', listener: (event: ElectronEvent, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+  on($event: 'login', listener: ($event: ElectronEvent, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
 
   /**
    * Registers a listener for the `media-paused` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `media-paused` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'media-paused', listener: (...args: unknown[]) => void): this;
+  on($event: 'media-paused', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `media-started-playing` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `media-started-playing` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'media-started-playing', listener: (...args: unknown[]) => void): this;
+  on($event: 'media-started-playing', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `new-window` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `new-window` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'new-window', listener: (event: ElectronNewWindowWebContentsEvent, url: string, frameName: string, disposition: 'background-tab' | 'default' | 'foreground-tab' | 'new-window' | 'other' | 'save-to-disk', options: BrowserWindowConstructorOptions, additionalFeatures: string[], referrer: ElectronReferrer, postBody: ElectronPostBody) => void): this;
+  on($event: 'new-window', listener: ($event: ElectronNewWindowWebContentsEvent, url: string, frameName: string, disposition: 'background-tab' | 'default' | 'foreground-tab' | 'new-window' | 'other' | 'save-to-disk', options: BrowserWindowConstructorOptions, additionalFeatures: string[], referrer: ElectronReferrer, postBody: ElectronPostBody) => void): this;
 
   /**
    * Registers a listener for the `page-favicon-updated` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `page-favicon-updated` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'page-favicon-updated', listener: (event: ElectronEvent, favicons: string[]) => void): this;
+  on($event: 'page-favicon-updated', listener: ($event: ElectronEvent, favicons: string[]) => void): this;
 
   /**
    * Registers a listener for the `page-title-updated` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `page-title-updated` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'page-title-updated', listener: (event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
+  on($event: 'page-title-updated', listener: ($event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
 
   /**
    * Registers a listener for the `paint` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `paint` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'paint', listener: (event: ElectronEvent, dirtyRect: ElectronRectangle, image: ElectronNativeImage) => void): this;
+  on($event: 'paint', listener: ($event: ElectronEvent, dirtyRect: ElectronRectangle, image: ElectronNativeImage) => void): this;
 
   /**
    * Registers a listener for the `plugin-crashed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `plugin-crashed` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'plugin-crashed', listener: (event: ElectronEvent, name: string, version: string) => void): this;
+  on($event: 'plugin-crashed', listener: ($event: ElectronEvent, name: string, version: string) => void): this;
 
   /**
    * Registers a listener for the `preferred-size-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `preferred-size-changed` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'preferred-size-changed', listener: (event: ElectronEvent, preferredSize: ElectronSize) => void): this;
+  on($event: 'preferred-size-changed', listener: ($event: ElectronEvent, preferredSize: ElectronSize) => void): this;
 
   /**
    * Registers a listener for the `preload-error` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `preload-error` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'preload-error', listener: (event: ElectronEvent, preloadPath: string, error: Error) => void): this;
+  on($event: 'preload-error', listener: ($event: ElectronEvent, preloadPath: string, error: Error) => void): this;
 
   /**
    * Registers a listener for the `render-process-gone` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `render-process-gone` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'render-process-gone', listener: (event: ElectronEvent, details: ElectronRenderProcessGoneDetails) => void): this;
+  on($event: 'render-process-gone', listener: ($event: ElectronEvent, details: ElectronRenderProcessGoneDetails) => void): this;
 
   /**
    * Registers a listener for the `responsive` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `responsive` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'responsive', listener: (...args: unknown[]) => void): this;
+  on($event: 'responsive', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `select-bluetooth-device` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `select-bluetooth-device` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'select-bluetooth-device', listener: (event: ElectronEvent, devices: ElectronBluetoothDevice[], callback: (deviceId: string) => void) => void): this;
+  on($event: 'select-bluetooth-device', listener: ($event: ElectronEvent, devices: ElectronBluetoothDevice[], callback: (deviceId: string) => void) => void): this;
 
   /**
    * Registers a listener for the `select-client-certificate` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `select-client-certificate` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'select-client-certificate', listener: (event: ElectronEvent, url: string, certificateList: ElectronCertificate[], callback: (certificate: ElectronCertificate) => void) => void): this;
+  on($event: 'select-client-certificate', listener: ($event: ElectronEvent, url: string, certificateList: ElectronCertificate[], callback: (certificate: ElectronCertificate) => void) => void): this;
 
   /**
    * Registers a listener for the `unresponsive` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `unresponsive` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'unresponsive', listener: (...args: unknown[]) => void): this;
+  on($event: 'unresponsive', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a listener for the `update-target-url` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `update-target-url` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'update-target-url', listener: (event: ElectronEvent, url: string) => void): this;
+  on($event: 'update-target-url', listener: ($event: ElectronEvent, url: string) => void): this;
 
   /**
    * Registers a listener for the `will-attach-webview` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `will-attach-webview` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'will-attach-webview', listener: (event: ElectronEvent, webPreferences: WebPreferences, params: Record<string, string>) => void): this;
+  on($event: 'will-attach-webview', listener: ($event: ElectronEvent, webPreferences: WebPreferences, params: Record<string, string>) => void): this;
 
   /**
    * Registers a listener for the `will-navigate` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `will-navigate` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'will-navigate', listener: (event: ElectronEvent, url: string) => void): this;
+  on($event: 'will-navigate', listener: ($event: ElectronEvent, url: string) => void): this;
 
   /**
    * Registers a listener for the `will-prevent-unload` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `will-prevent-unload` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'will-prevent-unload', listener: (event: ElectronEvent) => void): this;
+  on($event: 'will-prevent-unload', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a listener for the `will-redirect` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `will-redirect` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'will-redirect', listener: (event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  on($event: 'will-redirect', listener: ($event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a listener for the `zoom-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `zoom-changed` event is emitted.
    * @returns This web contents instance.
    */
-  on(event: 'zoom-changed', listener: (event: ElectronEvent, zoomDirection: 'in' | 'out') => void): this;
+  on($event: 'zoom-changed', listener: ($event: ElectronEvent, zoomDirection: 'in' | 'out') => void): this;
 
   /**
    * Registers a one-time listener for the `before-input-event` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `before-input-event` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'before-input-event', listener: (event: ElectronEvent, input: ElectronInput) => void): this;
+  once($event: 'before-input-event', listener: ($event: ElectronEvent, input: ElectronInput) => void): this;
 
   /**
    * Registers a one-time listener for the `blur` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `blur` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'blur', listener: (...args: unknown[]) => void): this;
+  once($event: 'blur', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `certificate-error` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `certificate-error` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'certificate-error', listener: (event: ElectronEvent, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
+  once($event: 'certificate-error', listener: ($event: ElectronEvent, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
 
   /**
    * Registers a one-time listener for the `console-message` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `console-message` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'console-message', listener: (event: ElectronEvent, level: number, message: string, line: number, sourceId: string) => void): this;
+  once($event: 'console-message', listener: ($event: ElectronEvent, level: number, message: string, line: number, sourceId: string) => void): this;
 
   /**
    * Registers a one-time listener for the `context-menu` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `context-menu` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'context-menu', listener: (event: ElectronEvent, params: ElectronContextMenuParams) => void): this;
+  once($event: 'context-menu', listener: ($event: ElectronEvent, params: ElectronContextMenuParams) => void): this;
 
   /**
    * Registers a one-time listener for the `crashed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `crashed` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'crashed', listener: (event: ElectronEvent, killed: boolean) => void): this;
+  once($event: 'crashed', listener: ($event: ElectronEvent, killed: boolean) => void): this;
 
   /**
    * Registers a one-time listener for the `cursor-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `cursor-changed` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'cursor-changed', listener: (event: ElectronEvent, type: string, image: ElectronNativeImage, scale: number, size: ElectronSize, hotspot: ElectronPoint) => void): this;
+  once($event: 'cursor-changed', listener: ($event: ElectronEvent, type: string, image: ElectronNativeImage, scale: number, size: ElectronSize, hotspot: ElectronPoint) => void): this;
 
   /**
    * Registers a one-time listener for the `destroyed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `destroyed` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'destroyed', listener: (...args: unknown[]) => void): this;
+  once($event: 'destroyed', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `devtools-closed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `devtools-closed` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'devtools-closed', listener: (...args: unknown[]) => void): this;
+  once($event: 'devtools-closed', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `devtools-focused` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `devtools-focused` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'devtools-focused', listener: (...args: unknown[]) => void): this;
+  once($event: 'devtools-focused', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `devtools-opened` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `devtools-opened` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'devtools-opened', listener: (...args: unknown[]) => void): this;
+  once($event: 'devtools-opened', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `devtools-reload-page` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `devtools-reload-page` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'devtools-reload-page', listener: (...args: unknown[]) => void): this;
+  once($event: 'devtools-reload-page', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `did-attach-webview` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-attach-webview` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-attach-webview', listener: (event: ElectronEvent, webContents: ElectronWebContents) => void): this;
+  once($event: 'did-attach-webview', listener: ($event: ElectronEvent, webContents: ElectronWebContents) => void): this;
 
   /**
    * Registers a one-time listener for the `did-change-theme-color` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-change-theme-color` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-change-theme-color', listener: (event: ElectronEvent, color: null | string) => void): this;
+  once($event: 'did-change-theme-color', listener: ($event: ElectronEvent, color: null | string) => void): this;
 
   /**
    * Registers a one-time listener for the `did-create-window` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-create-window` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-create-window', listener: (window: ElectronBrowserWindow, details: ElectronDidCreateWindowDetails) => void): this;
+  once($event: 'did-create-window', listener: (window: ElectronBrowserWindow, details: ElectronDidCreateWindowDetails) => void): this;
 
   /**
    * Registers a one-time listener for the `did-fail-load` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-fail-load` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-fail-load', listener: (event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  once($event: 'did-fail-load', listener: ($event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a one-time listener for the `did-fail-provisional-load` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-fail-provisional-load` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-fail-provisional-load', listener: (event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  once($event: 'did-fail-provisional-load', listener: ($event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a one-time listener for the `did-finish-load` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-finish-load` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-finish-load', listener: (...args: unknown[]) => void): this;
+  once($event: 'did-finish-load', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `did-frame-finish-load` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-frame-finish-load` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-frame-finish-load', listener: (event: ElectronEvent, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  once($event: 'did-frame-finish-load', listener: ($event: ElectronEvent, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a one-time listener for the `did-frame-navigate` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-frame-navigate` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-frame-navigate', listener: (event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  once($event: 'did-frame-navigate', listener: ($event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a one-time listener for the `did-navigate` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-navigate` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-navigate', listener: (event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string) => void): this;
+  once($event: 'did-navigate', listener: ($event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string) => void): this;
 
   /**
    * Registers a one-time listener for the `did-navigate-in-page` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-navigate-in-page` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-navigate-in-page', listener: (event: ElectronEvent, url: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  once($event: 'did-navigate-in-page', listener: ($event: ElectronEvent, url: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a one-time listener for the `did-redirect-navigation` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-redirect-navigation` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-redirect-navigation', listener: (event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  once($event: 'did-redirect-navigation', listener: ($event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a one-time listener for the `did-start-loading` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-start-loading` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-start-loading', listener: (...args: unknown[]) => void): this;
+  once($event: 'did-start-loading', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `did-start-navigation` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-start-navigation` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-start-navigation', listener: (event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  once($event: 'did-start-navigation', listener: ($event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a one-time listener for the `did-stop-loading` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `did-stop-loading` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'did-stop-loading', listener: (...args: unknown[]) => void): this;
+  once($event: 'did-stop-loading', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `dom-ready` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `dom-ready` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'dom-ready', listener: (event: ElectronEvent) => void): this;
+  once($event: 'dom-ready', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a one-time listener for the `enter-html-full-screen` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `enter-html-full-screen` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
+  once($event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `focus` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `focus` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'focus', listener: (...args: unknown[]) => void): this;
+  once($event: 'focus', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `found-in-page` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `found-in-page` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'found-in-page', listener: (event: ElectronEvent, result: ElectronResult) => void): this;
+  once($event: 'found-in-page', listener: ($event: ElectronEvent, result: ElectronResult) => void): this;
 
   /**
    * Registers a one-time listener for the `frame-created` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `frame-created` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'frame-created', listener: (event: ElectronEvent, details: ElectronFrameCreatedDetails) => void): this;
+  once($event: 'frame-created', listener: ($event: ElectronEvent, details: ElectronFrameCreatedDetails) => void): this;
 
   /**
    * Registers a one-time listener for the `input-event` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `input-event` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'input-event', listener: (event: ElectronEvent, inputEvent: ElectronAnyInputEvent) => void): this;
+  once($event: 'input-event', listener: ($event: ElectronEvent, inputEvent: ElectronAnyInputEvent) => void): this;
 
   /**
    * Registers a one-time listener for the `ipc-message` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `ipc-message` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'ipc-message', listener: (event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
+  once($event: 'ipc-message', listener: ($event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `ipc-message-sync` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `ipc-message-sync` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'ipc-message-sync', listener: (event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
+  once($event: 'ipc-message-sync', listener: ($event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `leave-html-full-screen` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `leave-html-full-screen` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
+  once($event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `login` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `login` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'login', listener: (event: ElectronEvent, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+  once($event: 'login', listener: ($event: ElectronEvent, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
 
   /**
    * Registers a one-time listener for the `media-paused` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `media-paused` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'media-paused', listener: (...args: unknown[]) => void): this;
+  once($event: 'media-paused', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `media-started-playing` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `media-started-playing` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'media-started-playing', listener: (...args: unknown[]) => void): this;
+  once($event: 'media-started-playing', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `new-window` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `new-window` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'new-window', listener: (event: ElectronNewWindowWebContentsEvent, url: string, frameName: string, disposition: 'background-tab' | 'default' | 'foreground-tab' | 'new-window' | 'other' | 'save-to-disk', options: BrowserWindowConstructorOptions, additionalFeatures: string[], referrer: ElectronReferrer, postBody: ElectronPostBody) => void): this;
+  once($event: 'new-window', listener: ($event: ElectronNewWindowWebContentsEvent, url: string, frameName: string, disposition: 'background-tab' | 'default' | 'foreground-tab' | 'new-window' | 'other' | 'save-to-disk', options: BrowserWindowConstructorOptions, additionalFeatures: string[], referrer: ElectronReferrer, postBody: ElectronPostBody) => void): this;
 
   /**
    * Registers a one-time listener for the `page-favicon-updated` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `page-favicon-updated` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'page-favicon-updated', listener: (event: ElectronEvent, favicons: string[]) => void): this;
+  once($event: 'page-favicon-updated', listener: ($event: ElectronEvent, favicons: string[]) => void): this;
 
   /**
    * Registers a one-time listener for the `page-title-updated` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `page-title-updated` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'page-title-updated', listener: (event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
+  once($event: 'page-title-updated', listener: ($event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
 
   /**
    * Registers a one-time listener for the `paint` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `paint` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'paint', listener: (event: ElectronEvent, dirtyRect: ElectronRectangle, image: ElectronNativeImage) => void): this;
+  once($event: 'paint', listener: ($event: ElectronEvent, dirtyRect: ElectronRectangle, image: ElectronNativeImage) => void): this;
 
   /**
    * Registers a one-time listener for the `plugin-crashed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `plugin-crashed` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'plugin-crashed', listener: (event: ElectronEvent, name: string, version: string) => void): this;
+  once($event: 'plugin-crashed', listener: ($event: ElectronEvent, name: string, version: string) => void): this;
 
   /**
    * Registers a one-time listener for the `preferred-size-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `preferred-size-changed` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'preferred-size-changed', listener: (event: ElectronEvent, preferredSize: ElectronSize) => void): this;
+  once($event: 'preferred-size-changed', listener: ($event: ElectronEvent, preferredSize: ElectronSize) => void): this;
 
   /**
    * Registers a one-time listener for the `preload-error` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `preload-error` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'preload-error', listener: (event: ElectronEvent, preloadPath: string, error: Error) => void): this;
+  once($event: 'preload-error', listener: ($event: ElectronEvent, preloadPath: string, error: Error) => void): this;
 
   /**
    * Registers a one-time listener for the `render-process-gone` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `render-process-gone` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'render-process-gone', listener: (event: ElectronEvent, details: ElectronRenderProcessGoneDetails) => void): this;
+  once($event: 'render-process-gone', listener: ($event: ElectronEvent, details: ElectronRenderProcessGoneDetails) => void): this;
 
   /**
    * Registers a one-time listener for the `responsive` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `responsive` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'responsive', listener: (...args: unknown[]) => void): this;
+  once($event: 'responsive', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `select-bluetooth-device` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `select-bluetooth-device` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'select-bluetooth-device', listener: (event: ElectronEvent, devices: ElectronBluetoothDevice[], callback: (deviceId: string) => void) => void): this;
+  once($event: 'select-bluetooth-device', listener: ($event: ElectronEvent, devices: ElectronBluetoothDevice[], callback: (deviceId: string) => void) => void): this;
 
   /**
    * Registers a one-time listener for the `select-client-certificate` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `select-client-certificate` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'select-client-certificate', listener: (event: ElectronEvent, url: string, certificateList: ElectronCertificate[], callback: (certificate: ElectronCertificate) => void) => void): this;
+  once($event: 'select-client-certificate', listener: ($event: ElectronEvent, url: string, certificateList: ElectronCertificate[], callback: (certificate: ElectronCertificate) => void) => void): this;
 
   /**
    * Registers a one-time listener for the `unresponsive` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `unresponsive` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'unresponsive', listener: (...args: unknown[]) => void): this;
+  once($event: 'unresponsive', listener: (...args: unknown[]) => void): this;
 
   /**
    * Registers a one-time listener for the `update-target-url` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `update-target-url` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'update-target-url', listener: (event: ElectronEvent, url: string) => void): this;
+  once($event: 'update-target-url', listener: ($event: ElectronEvent, url: string) => void): this;
 
   /**
    * Registers a one-time listener for the `will-attach-webview` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `will-attach-webview` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'will-attach-webview', listener: (event: ElectronEvent, webPreferences: WebPreferences, params: Record<string, string>) => void): this;
+  once($event: 'will-attach-webview', listener: ($event: ElectronEvent, webPreferences: WebPreferences, params: Record<string, string>) => void): this;
 
   /**
    * Registers a one-time listener for the `will-navigate` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `will-navigate` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'will-navigate', listener: (event: ElectronEvent, url: string) => void): this;
+  once($event: 'will-navigate', listener: ($event: ElectronEvent, url: string) => void): this;
 
   /**
    * Registers a one-time listener for the `will-prevent-unload` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `will-prevent-unload` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'will-prevent-unload', listener: (event: ElectronEvent) => void): this;
+  once($event: 'will-prevent-unload', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a one-time listener for the `will-redirect` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `will-redirect` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'will-redirect', listener: (event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  once($event: 'will-redirect', listener: ($event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Registers a one-time listener for the `zoom-changed` event.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - Called when the `zoom-changed` event is emitted.
    * @returns This web contents instance.
    */
-  once(event: 'zoom-changed', listener: (event: ElectronEvent, zoomDirection: 'in' | 'out') => void): this;
+  once($event: 'zoom-changed', listener: ($event: ElectronEvent, zoomDirection: 'in' | 'out') => void): this;
 
   /**
    * Opens the developer tools.
@@ -2083,506 +2083,506 @@ export interface ElectronWebContents {
   /**
    * Removes a previously registered `before-input-event` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'before-input-event', listener: (event: ElectronEvent, input: ElectronInput) => void): this;
+  removeListener($event: 'before-input-event', listener: ($event: ElectronEvent, input: ElectronInput) => void): this;
 
   /**
    * Removes a previously registered `blur` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'blur', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'blur', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `certificate-error` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'certificate-error', listener: (event: ElectronEvent, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
+  removeListener($event: 'certificate-error', listener: ($event: ElectronEvent, url: string, error: string, certificate: ElectronCertificate, callback: (isTrusted: boolean) => void, isMainFrame: boolean) => void): this;
 
   /**
    * Removes a previously registered `console-message` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'console-message', listener: (event: ElectronEvent, level: number, message: string, line: number, sourceId: string) => void): this;
+  removeListener($event: 'console-message', listener: ($event: ElectronEvent, level: number, message: string, line: number, sourceId: string) => void): this;
 
   /**
    * Removes a previously registered `context-menu` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'context-menu', listener: (event: ElectronEvent, params: ElectronContextMenuParams) => void): this;
+  removeListener($event: 'context-menu', listener: ($event: ElectronEvent, params: ElectronContextMenuParams) => void): this;
 
   /**
    * Removes a previously registered `crashed` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'crashed', listener: (event: ElectronEvent, killed: boolean) => void): this;
+  removeListener($event: 'crashed', listener: ($event: ElectronEvent, killed: boolean) => void): this;
 
   /**
    * Removes a previously registered `cursor-changed` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'cursor-changed', listener: (event: ElectronEvent, type: string, image: ElectronNativeImage, scale: number, size: ElectronSize, hotspot: ElectronPoint) => void): this;
+  removeListener($event: 'cursor-changed', listener: ($event: ElectronEvent, type: string, image: ElectronNativeImage, scale: number, size: ElectronSize, hotspot: ElectronPoint) => void): this;
 
   /**
    * Removes a previously registered `destroyed` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'destroyed', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'destroyed', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `devtools-closed` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'devtools-closed', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'devtools-closed', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `devtools-focused` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'devtools-focused', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'devtools-focused', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `devtools-opened` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'devtools-opened', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'devtools-opened', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `devtools-reload-page` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'devtools-reload-page', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'devtools-reload-page', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `did-attach-webview` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-attach-webview', listener: (event: ElectronEvent, webContents: ElectronWebContents) => void): this;
+  removeListener($event: 'did-attach-webview', listener: ($event: ElectronEvent, webContents: ElectronWebContents) => void): this;
 
   /**
    * Removes a previously registered `did-change-theme-color` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-change-theme-color', listener: (event: ElectronEvent, color: null | string) => void): this;
+  removeListener($event: 'did-change-theme-color', listener: ($event: ElectronEvent, color: null | string) => void): this;
 
   /**
    * Removes a previously registered `did-create-window` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-create-window', listener: (window: ElectronBrowserWindow, details: ElectronDidCreateWindowDetails) => void): this;
+  removeListener($event: 'did-create-window', listener: (window: ElectronBrowserWindow, details: ElectronDidCreateWindowDetails) => void): this;
 
   /**
    * Removes a previously registered `did-fail-load` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-fail-load', listener: (event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  removeListener($event: 'did-fail-load', listener: ($event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Removes a previously registered `did-fail-provisional-load` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-fail-provisional-load', listener: (event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  removeListener($event: 'did-fail-provisional-load', listener: ($event: ElectronEvent, errorCode: number, errorDescription: string, validatedURL: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Removes a previously registered `did-finish-load` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-finish-load', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'did-finish-load', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `did-frame-finish-load` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-frame-finish-load', listener: (event: ElectronEvent, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  removeListener($event: 'did-frame-finish-load', listener: ($event: ElectronEvent, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Removes a previously registered `did-frame-navigate` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-frame-navigate', listener: (event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  removeListener($event: 'did-frame-navigate', listener: ($event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Removes a previously registered `did-navigate` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-navigate', listener: (event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string) => void): this;
+  removeListener($event: 'did-navigate', listener: ($event: ElectronEvent, url: string, httpResponseCode: number, httpStatusText: string) => void): this;
 
   /**
    * Removes a previously registered `did-navigate-in-page` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-navigate-in-page', listener: (event: ElectronEvent, url: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  removeListener($event: 'did-navigate-in-page', listener: ($event: ElectronEvent, url: string, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Removes a previously registered `did-redirect-navigation` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-redirect-navigation', listener: (event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  removeListener($event: 'did-redirect-navigation', listener: ($event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Removes a previously registered `did-start-loading` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-start-loading', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'did-start-loading', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `did-start-navigation` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-start-navigation', listener: (event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  removeListener($event: 'did-start-navigation', listener: ($event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Removes a previously registered `did-stop-loading` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'did-stop-loading', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'did-stop-loading', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `dom-ready` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'dom-ready', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'dom-ready', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Removes a previously registered `enter-html-full-screen` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'enter-html-full-screen', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `focus` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'focus', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'focus', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `found-in-page` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'found-in-page', listener: (event: ElectronEvent, result: ElectronResult) => void): this;
+  removeListener($event: 'found-in-page', listener: ($event: ElectronEvent, result: ElectronResult) => void): this;
 
   /**
    * Removes a previously registered `frame-created` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'frame-created', listener: (event: ElectronEvent, details: ElectronFrameCreatedDetails) => void): this;
+  removeListener($event: 'frame-created', listener: ($event: ElectronEvent, details: ElectronFrameCreatedDetails) => void): this;
 
   /**
    * Removes a previously registered `input-event` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'input-event', listener: (event: ElectronEvent, inputEvent: ElectronAnyInputEvent) => void): this;
+  removeListener($event: 'input-event', listener: ($event: ElectronEvent, inputEvent: ElectronAnyInputEvent) => void): this;
 
   /**
    * Removes a previously registered `ipc-message` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'ipc-message', listener: (event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
+  removeListener($event: 'ipc-message', listener: ($event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `ipc-message-sync` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'ipc-message-sync', listener: (event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
+  removeListener($event: 'ipc-message-sync', listener: ($event: ElectronEvent, channel: string, ...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `leave-html-full-screen` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'leave-html-full-screen', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `login` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'login', listener: (event: ElectronEvent, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
+  removeListener($event: 'login', listener: ($event: ElectronEvent, authenticationResponseDetails: ElectronAuthenticationResponseDetails, authInfo: ElectronAuthInfo, callback: (username?: string, password?: string) => void) => void): this;
 
   /**
    * Removes a previously registered `media-paused` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'media-paused', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'media-paused', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `media-started-playing` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'media-started-playing', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'media-started-playing', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `new-window` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'new-window', listener: (event: ElectronNewWindowWebContentsEvent, url: string, frameName: string, disposition: 'background-tab' | 'default' | 'foreground-tab' | 'new-window' | 'other' | 'save-to-disk', options: BrowserWindowConstructorOptions, additionalFeatures: string[], referrer: ElectronReferrer, postBody: ElectronPostBody) => void): this;
+  removeListener($event: 'new-window', listener: ($event: ElectronNewWindowWebContentsEvent, url: string, frameName: string, disposition: 'background-tab' | 'default' | 'foreground-tab' | 'new-window' | 'other' | 'save-to-disk', options: BrowserWindowConstructorOptions, additionalFeatures: string[], referrer: ElectronReferrer, postBody: ElectronPostBody) => void): this;
 
   /**
    * Removes a previously registered `page-favicon-updated` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'page-favicon-updated', listener: (event: ElectronEvent, favicons: string[]) => void): this;
+  removeListener($event: 'page-favicon-updated', listener: ($event: ElectronEvent, favicons: string[]) => void): this;
 
   /**
    * Removes a previously registered `page-title-updated` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'page-title-updated', listener: (event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
+  removeListener($event: 'page-title-updated', listener: ($event: ElectronEvent, title: string, explicitSet: boolean) => void): this;
 
   /**
    * Removes a previously registered `paint` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'paint', listener: (event: ElectronEvent, dirtyRect: ElectronRectangle, image: ElectronNativeImage) => void): this;
+  removeListener($event: 'paint', listener: ($event: ElectronEvent, dirtyRect: ElectronRectangle, image: ElectronNativeImage) => void): this;
 
   /**
    * Removes a previously registered `plugin-crashed` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'plugin-crashed', listener: (event: ElectronEvent, name: string, version: string) => void): this;
+  removeListener($event: 'plugin-crashed', listener: ($event: ElectronEvent, name: string, version: string) => void): this;
 
   /**
    * Removes a previously registered `preferred-size-changed` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'preferred-size-changed', listener: (event: ElectronEvent, preferredSize: ElectronSize) => void): this;
+  removeListener($event: 'preferred-size-changed', listener: ($event: ElectronEvent, preferredSize: ElectronSize) => void): this;
 
   /**
    * Removes a previously registered `preload-error` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'preload-error', listener: (event: ElectronEvent, preloadPath: string, error: Error) => void): this;
+  removeListener($event: 'preload-error', listener: ($event: ElectronEvent, preloadPath: string, error: Error) => void): this;
 
   /**
    * Removes a previously registered `render-process-gone` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'render-process-gone', listener: (event: ElectronEvent, details: ElectronRenderProcessGoneDetails) => void): this;
+  removeListener($event: 'render-process-gone', listener: ($event: ElectronEvent, details: ElectronRenderProcessGoneDetails) => void): this;
 
   /**
    * Removes a previously registered `responsive` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'responsive', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'responsive', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `select-bluetooth-device` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'select-bluetooth-device', listener: (event: ElectronEvent, devices: ElectronBluetoothDevice[], callback: (deviceId: string) => void) => void): this;
+  removeListener($event: 'select-bluetooth-device', listener: ($event: ElectronEvent, devices: ElectronBluetoothDevice[], callback: (deviceId: string) => void) => void): this;
 
   /**
    * Removes a previously registered `select-client-certificate` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'select-client-certificate', listener: (event: ElectronEvent, url: string, certificateList: ElectronCertificate[], callback: (certificate: ElectronCertificate) => void) => void): this;
+  removeListener($event: 'select-client-certificate', listener: ($event: ElectronEvent, url: string, certificateList: ElectronCertificate[], callback: (certificate: ElectronCertificate) => void) => void): this;
 
   /**
    * Removes a previously registered `unresponsive` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'unresponsive', listener: (...args: unknown[]) => void): this;
+  removeListener($event: 'unresponsive', listener: (...args: unknown[]) => void): this;
 
   /**
    * Removes a previously registered `update-target-url` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'update-target-url', listener: (event: ElectronEvent, url: string) => void): this;
+  removeListener($event: 'update-target-url', listener: ($event: ElectronEvent, url: string) => void): this;
 
   /**
    * Removes a previously registered `will-attach-webview` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'will-attach-webview', listener: (event: ElectronEvent, webPreferences: WebPreferences, params: Record<string, string>) => void): this;
+  removeListener($event: 'will-attach-webview', listener: ($event: ElectronEvent, webPreferences: WebPreferences, params: Record<string, string>) => void): this;
 
   /**
    * Removes a previously registered `will-navigate` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'will-navigate', listener: (event: ElectronEvent, url: string) => void): this;
+  removeListener($event: 'will-navigate', listener: ($event: ElectronEvent, url: string) => void): this;
 
   /**
    * Removes a previously registered `will-prevent-unload` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'will-prevent-unload', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'will-prevent-unload', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Removes a previously registered `will-redirect` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'will-redirect', listener: (event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
+  removeListener($event: 'will-redirect', listener: ($event: ElectronEvent, url: string, isInPlace: boolean, isMainFrame: boolean, frameProcessId: number, frameRoutingId: number) => void): this;
 
   /**
    * Removes a previously registered `zoom-changed` event listener.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The listener to remove.
    * @returns This web contents instance.
    */
-  removeListener(event: 'zoom-changed', listener: (event: ElectronEvent, zoomDirection: 'in' | 'out') => void): this;
+  removeListener($event: 'zoom-changed', listener: ($event: ElectronEvent, zoomDirection: 'in' | 'out') => void): this;
 
   /**
    * Removes the specified path from the DevTools workspace.

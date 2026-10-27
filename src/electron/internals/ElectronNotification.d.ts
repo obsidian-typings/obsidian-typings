@@ -63,51 +63,51 @@ export declare class ElectronNotification {
   /**
    * Registers an event listener that is invoked when one of the notification's actions is activated.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler receiving the event and the index of the activated action.
    * @returns This notification instance.
    */
-  addListener(event: 'action', listener: (event: ElectronEvent, index: number) => void): this;
+  addListener($event: 'action', listener: ($event: ElectronEvent, index: number) => void): this;
   /**
    * Registers an event listener that is invoked when the notification is clicked by the user.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This notification instance.
    */
-  addListener(event: 'click', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'click', listener: ($event: ElectronEvent) => void): this;
   /**
    * Registers an event listener that is invoked when the notification is closed by manual intervention from the user.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This notification instance.
    */
-  addListener(event: 'close', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'close', listener: ($event: ElectronEvent) => void): this;
   /**
    * Registers an event listener that is invoked when an error is encountered while creating and showing the native notification. `win32` only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler receiving the event and the error encountered during execution of the `show()` method.
    * @returns This notification instance.
    */
-  addListener(event: 'failed', listener: (event: ElectronEvent, error: string) => void): this;
+  addListener($event: 'failed', listener: ($event: ElectronEvent, error: string) => void): this;
   /**
    * Registers an event listener that is invoked when the user clicks the "Reply" button on a notification with `hasReply: true`. `darwin` only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler receiving the event and the string the user entered into the inline reply field.
    * @returns This notification instance.
    */
-  addListener(event: 'reply', listener: (event: ElectronEvent, reply: string) => void): this;
+  addListener($event: 'reply', listener: ($event: ElectronEvent, reply: string) => void): this;
   /**
    * Registers an event listener that is invoked when the notification is shown to the user.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This notification instance.
    */
-  addListener(event: 'show', listener: (event: ElectronEvent) => void): this;
+  addListener($event: 'show', listener: ($event: ElectronEvent) => void): this;
 
   /** Dismisses the notification. */
   close(): void;
@@ -122,149 +122,149 @@ export declare class ElectronNotification {
   /**
    * Registers an event listener that is invoked when one of the notification's actions is activated.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler receiving the event and the index of the activated action.
    * @returns This notification instance.
    */
-  on(event: 'action', listener: (event: ElectronEvent, index: number) => void): this;
+  on($event: 'action', listener: ($event: ElectronEvent, index: number) => void): this;
   /**
    * Registers an event listener that is invoked when the notification is clicked by the user.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This notification instance.
    */
-  on(event: 'click', listener: (event: ElectronEvent) => void): this;
+  on($event: 'click', listener: ($event: ElectronEvent) => void): this;
   /**
    * Registers an event listener that is invoked when the notification is closed by manual intervention from the user.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This notification instance.
    */
-  on(event: 'close', listener: (event: ElectronEvent) => void): this;
+  on($event: 'close', listener: ($event: ElectronEvent) => void): this;
   /**
    * Registers an event listener that is invoked when an error is encountered while creating and showing the native notification. `win32` only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler receiving the event and the error encountered during execution of the `show()` method.
    * @returns This notification instance.
    */
-  on(event: 'failed', listener: (event: ElectronEvent, error: string) => void): this;
+  on($event: 'failed', listener: ($event: ElectronEvent, error: string) => void): this;
   /**
    * Registers an event listener that is invoked when the user clicks the "Reply" button on a notification with `hasReply: true`. `darwin` only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler receiving the event and the string the user entered into the inline reply field.
    * @returns This notification instance.
    */
-  on(event: 'reply', listener: (event: ElectronEvent, reply: string) => void): this;
+  on($event: 'reply', listener: ($event: ElectronEvent, reply: string) => void): this;
   /**
    * Registers an event listener that is invoked when the notification is shown to the user.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This notification instance.
    */
-  on(event: 'show', listener: (event: ElectronEvent) => void): this;
+  on($event: 'show', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Registers a one-time event listener that is invoked when one of the notification's actions is activated.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler receiving the event and the index of the activated action.
    * @returns This notification instance.
    */
-  once(event: 'action', listener: (event: ElectronEvent, index: number) => void): this;
+  once($event: 'action', listener: ($event: ElectronEvent, index: number) => void): this;
   /**
    * Registers a one-time event listener that is invoked when the notification is clicked by the user.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This notification instance.
    */
-  once(event: 'click', listener: (event: ElectronEvent) => void): this;
+  once($event: 'click', listener: ($event: ElectronEvent) => void): this;
   /**
    * Registers a one-time event listener that is invoked when the notification is closed by manual intervention from the user.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This notification instance.
    */
-  once(event: 'close', listener: (event: ElectronEvent) => void): this;
+  once($event: 'close', listener: ($event: ElectronEvent) => void): this;
   /**
    * Registers a one-time event listener that is invoked when an error is encountered while creating and showing the native notification. `win32` only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler receiving the event and the error encountered during execution of the `show()` method.
    * @returns This notification instance.
    */
-  once(event: 'failed', listener: (event: ElectronEvent, error: string) => void): this;
+  once($event: 'failed', listener: ($event: ElectronEvent, error: string) => void): this;
   /**
    * Registers a one-time event listener that is invoked when the user clicks the "Reply" button on a notification with `hasReply: true`. `darwin` only.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler receiving the event and the string the user entered into the inline reply field.
    * @returns This notification instance.
    */
-  once(event: 'reply', listener: (event: ElectronEvent, reply: string) => void): this;
+  once($event: 'reply', listener: ($event: ElectronEvent, reply: string) => void): this;
   /**
    * Registers a one-time event listener that is invoked when the notification is shown to the user.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler.
    * @returns This notification instance.
    */
-  once(event: 'show', listener: (event: ElectronEvent) => void): this;
+  once($event: 'show', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Removes the event listener for one of the notification's actions being activated.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This notification instance.
    */
-  removeListener(event: 'action', listener: (event: ElectronEvent, index: number) => void): this;
+  removeListener($event: 'action', listener: ($event: ElectronEvent, index: number) => void): this;
   /**
    * Removes the event listener for the notification being clicked.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This notification instance.
    */
-  removeListener(event: 'click', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'click', listener: ($event: ElectronEvent) => void): this;
   /**
    * Removes the event listener for the notification being closed.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This notification instance.
    */
-  removeListener(event: 'close', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'close', listener: ($event: ElectronEvent) => void): this;
   /**
    * Removes the event listener for the notification failing to show.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This notification instance.
    */
-  removeListener(event: 'failed', listener: (event: ElectronEvent, error: string) => void): this;
+  removeListener($event: 'failed', listener: ($event: ElectronEvent, error: string) => void): this;
   /**
    * Removes the event listener for the notification's inline reply.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This notification instance.
    */
-  removeListener(event: 'reply', listener: (event: ElectronEvent, reply: string) => void): this;
+  removeListener($event: 'reply', listener: ($event: ElectronEvent, reply: string) => void): this;
   /**
    * Removes the event listener for the notification being shown.
    *
-   * @param event - The event name.
+   * @param $event - The event name.
    * @param listener - The event handler to remove.
    * @returns This notification instance.
    */
-  removeListener(event: 'show', listener: (event: ElectronEvent) => void): this;
+  removeListener($event: 'show', listener: ($event: ElectronEvent) => void): this;
 
   /**
    * Immediately shows the notification to the user, please note this means unlike the HTML5 Notification implementation, instantiating a `new Notification` does not immediately show it to the user, you need to call this method before the OS will display it.

@@ -44,16 +44,16 @@ export interface AllPropertiesView extends ItemView {
   /**
    * Select the item in focus if pressed 'Enter'.
    *
-   * @param event - The event triggered this function.
+   * @param $event - The event triggered this function.
    */
-  onKeyEnterInFocus(event: KeyboardEvent): void;
+  onKeyEnterInFocus($event: KeyboardEvent): void;
 
   /**
    * Called when 'Enter' is pressed while rename. Accepts the rename.
    *
-   * @param event - The event triggered this function.
+   * @param $event - The event triggered this function.
    */
-  onKeyEnterInRename(event: KeyboardEvent): void;
+  onKeyEnterInRename($event: KeyboardEvent): void;
 
   /**
    * Toggles the visibility of the search.

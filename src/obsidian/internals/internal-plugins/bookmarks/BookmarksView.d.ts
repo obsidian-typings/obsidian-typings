@@ -108,17 +108,17 @@ export interface BookmarksView extends ItemView {
   /**
    * Handle the context menu event on a bookmark item.
    *
-   * @param event - The context menu event.
+   * @param $event - The context menu event.
    */
-  onContextMenu(event: unknown): void;
+  onContextMenu($event: unknown): void;
 
   /**
    * Called when delete is requested.
    *
-   * @param event - The event triggered this function.
+   * @param $event - The event triggered this function.
    * @returns The result of the delete operation.
    */
-  onDeleteSelectedItems(event: unknown): unknown;
+  onDeleteSelectedItems($event: unknown): unknown;
 
   /**
    * Called when a file is created.
@@ -144,9 +144,9 @@ export interface BookmarksView extends ItemView {
   /**
    * Called when the rename shortcut is pressed.
    *
-   * @param event - The event triggered this function.
+   * @param $event - The event triggered this function.
    */
-  onRenameKey(event: KeyboardEvent): void;
+  onRenameKey($event: KeyboardEvent): void;
 
   /**
    * Refresh the bookmarks view.

@@ -183,8 +183,8 @@ export interface ElectronRemote {
   /**
    * Returns the module required from the main process by the given path.
    *
-   * @param module - The module path to require.
+   * @param $module - The module path to require.
    * @returns The required module.
    */
-  require(module: string): unknown;
+  require($module: string): unknown;
 }
