@@ -1,8 +1,8 @@
 export const CHANNELS = ['public', 'catalyst'] as const;
 
 export interface BranchSpec {
-  channel: Channel;
-  obsidianVersion: string;
+  readonly channel: Channel;
+  readonly obsidianVersion: string;
 }
 
 export type Channel = typeof CHANNELS[number];

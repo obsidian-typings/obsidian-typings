@@ -27,9 +27,9 @@ import {
 type CacheManifest = Record<string, string>;
 
 interface PageEntry {
-  content: OgImageContent;
-  hash: string;
-  slug: string;
+  readonly content: OgImageContent;
+  readonly hash: string;
+  readonly slug: string;
 }
 
 const CONCURRENCY = 10;

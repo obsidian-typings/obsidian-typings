@@ -1,90 +1,97 @@
 export interface LinkMatchGroups {
-  display?: string;
-  target: string;
+  readonly display?: string;
+  readonly target: string;
 }
 
 export interface MemberInfo {
+  // eslint-disable-next-line typescript-dev-toolkit/readonly-interface-members -- Declaration merging replaces official descriptions with augmented documentation.
   description: string;
-  examples: string[];
-  inheritedFrom: string;
-  isOfficial: boolean;
-  isStatic: boolean;
-  name: string;
+  readonly examples: string[];
+  readonly inheritedFrom: string;
+  readonly isOfficial: boolean;
+  readonly isStatic: boolean;
+  readonly name: string;
+  // eslint-disable-next-line typescript-dev-toolkit/readonly-interface-members -- JSDoc extraction fills the overload key after constructing the member.
   overloadKey: string;
-  parameters: ParameterInfo[];
-  remarks: string;
-  returnDescription: string;
-  returnType: string;
-  signature: string;
-  since: string;
-  type: string;
+  readonly parameters: ParameterInfo[];
+  readonly remarks: string;
+  readonly returnDescription: string;
+  readonly returnType: string;
+  readonly signature: string;
+  readonly since: string;
+  readonly type: string;
 }
 
 export interface PageContent {
-  content: string;
-  filePath: string;
+  readonly content: string;
+  readonly filePath: string;
 }
 
 export interface ParameterInfo {
-  description: string;
-  name: string;
-  type: string;
+  readonly description: string;
+  readonly name: string;
+  readonly type: string;
 }
 
 export interface ReturnTypeProvider {
-  getReturnType: () => TextProvider;
-  getReturnTypeNode?: () => TextProvider | undefined;
+  readonly getReturnType: () => TextProvider;
+  readonly getReturnTypeNode?: () => TextProvider | undefined;
 }
 
 export interface SidebarEntry {
-  collapsed: boolean;
-  items: (SidebarEntry | SidebarLink)[];
-  label: string;
+  readonly collapsed: boolean;
+  readonly items: (SidebarEntry | SidebarLink)[];
+  readonly label: string;
 }
 
 export interface SidebarLink {
-  label: string;
-  link: string;
+  readonly label: string;
+  readonly link: string;
 }
 
 /**
 Recursive tree node for building the sidebar
 */
 export interface SidebarTreeNode {
-  children: Map<string, SidebarTreeNode>;
-  types: TypeInfo[];
+  readonly children: Map<string, SidebarTreeNode>;
+  readonly types: TypeInfo[];
 }
 
 export interface TextProvider {
-  getText: () => string;
+  readonly getText: () => string;
 }
 
 export interface TypeInfo {
-  baseTypes: string[];
+  readonly baseTypes: string[];
+  // eslint-disable-next-line typescript-dev-toolkit/readonly-interface-members -- Declaration merging replaces the type description with augmented documentation.
   description: string;
+  // eslint-disable-next-line typescript-dev-toolkit/readonly-interface-members -- Declaration merging replaces examples with the augmented examples.
   examples: string[];
   /**
   For classes: types in the `implements` clause
   */
-  implementsTypes: string[];
-  isOfficial: boolean;
-  kind: 'class' | 'function' | 'interface' | 'variable';
-  methods: MemberInfo[];
-  name: string;
+  readonly implementsTypes: string[];
+  readonly isOfficial: boolean;
+  readonly kind: 'class' | 'function' | 'interface' | 'variable';
+  readonly methods: MemberInfo[];
+  readonly name: string;
+  // eslint-disable-next-line typescript-dev-toolkit/readonly-interface-members -- Namespace discovery fills this property after constructing the type.
   namespace: string;
-  properties: MemberInfo[];
+  readonly properties: MemberInfo[];
+  // eslint-disable-next-line typescript-dev-toolkit/readonly-interface-members -- Declaration merging replaces remarks with the augmented remarks.
   remarks: string;
+  // eslint-disable-next-line typescript-dev-toolkit/readonly-interface-members -- Declaration merging fills missing type parameters from later declarations.
   typeParameters: string[];
   /**
   For variables: the declaration keyword (let/const/var)
   */
-  variableKeyword?: string;
+  readonly variableKeyword?: string;
   /**
   For variables: the type annotation
   */
-  variableType?: string;
+  readonly variableType?: string;
 }
 
 export interface WebApiEntry {
-  url: string;
+  readonly url: string;
 }

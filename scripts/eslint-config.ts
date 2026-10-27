@@ -69,9 +69,7 @@ export const config: Linter.Config[] = defineEslintConfigs({
            * - `doc` / `docs` name the thing this repo builds. The whole `docs/` tree, the `docsDir` paths and the npm
            *   scripts all spell it that way, and expanding it picks the wrong word anyway: the `api-doc-*` modules
            *   generate API *documentation*, not documents.
-           * - `param` / `params` is the parameter-bag convention, and it is load-bearing rather than stylistic: the
-           *   in-house `readonly-params-options-result-members` rule matches interface names ending `Params`, so
-           *   expanding the word would silently take every bag out of that rule's scope.
+           * - `param` / `params` is the established parameter-bag convention used throughout this generator.
            * - `prop` / `props` is the component and TypeScript-property vocabulary the generator is written in.
            * - `src` names the `src/` folder; `attr` / `attrs` and `desc` name the HTML attributes the generator
            *   emits; `ref` / `refs` reads as a pair with the API surface it documents.
