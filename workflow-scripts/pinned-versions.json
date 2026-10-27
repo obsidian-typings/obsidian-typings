@@ -12,6 +12,13 @@
     "repo-root pinned-versions.json does not cover it and the sweep runs here separately."
   ],
   "pins": {
+    "katex": {
+      "section": "overrides",
+      "why": "Clears GHSA-238p-pmpm-9mq7, fixed in KaTeX 0.18.2. micromark-extension-math 3.1.0 requires ^0.16.0, which excludes the fix; compatible audit updates cannot move it. Keep the first patched release exact because this crosses a 0.x minor boundary. Math HTML rendering and the Markdown gates were verified with this override.",
+      "check": "node -e \"process.stdout.write(JSON.parse(require('node:fs').readFileSync('node_modules/micromark-extension-math/package.json','utf8')).dependencies.katex)\"",
+      "expect": "^0.16.0",
+      "manualCheck": "Remove the override when micromark-extension-math admits a patched KaTeX version, then reinstall and rerun npm audit and the Markdown gates."
+    },
     "typescript": {
       "section": "devDependencies",
       "why": "TypeScript 7 (tsgo) breaks this toolchain: @typescript-eslint's parser crashes on the native API, so type-aware ESLint cannot run on 7. @typescript-eslint peer-requires the range below, so 6.x is the last usable major. Mirrors the repo-root pin - this sub-package resolves its own copy, and without a pin here a sweep bumps it to 7 on its own (it did: the caret range reached ^7.0.2 before this file existed). Hold until typescript-eslint's peer range admits 7.x.",

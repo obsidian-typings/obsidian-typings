@@ -10,6 +10,7 @@
   },
   "overrides": {
     "eslint-plugin-import": "$eslint-plugin-import-x",
+    "katex": "0.18.2",
     "type-fest": "$type-fest",
     "typescript": "$typescript"
   },
