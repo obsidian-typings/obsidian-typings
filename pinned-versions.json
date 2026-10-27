@@ -1,0 +1,17 @@
+{
+  "pins": {
+    "katex": {
+      "section": "overrides",
+      "why": "Clears GHSA-238p-pmpm-9mq7, fixed in KaTeX 0.18.2. micromark-extension-math 3.1.0 requires ^0.16.0, which excludes the fix; compatible audit updates cannot move it. Keep the first patched release exact because this crosses a 0.x minor boundary. Math HTML rendering and the Markdown gates were verified with this override.",
+      "check": "node -e \"process.stdout.write(JSON.parse(require('node:fs').readFileSync('node_modules/micromark-extension-math/package.json','utf8')).dependencies.katex)\"",
+      "expect": "^0.16.0",
+      "manualCheck": "Remove the override when micromark-extension-math admits a patched KaTeX version, then reinstall and rerun npm audit and the Markdown gates."
+    },
+    "obsidian": {
+      "section": "devDependencies",
+      "why": "The release stream targets Obsidian 1.14.4. Keep the official API dependency exact so reconciliation and bundle checks use that version.",
+      "check": null,
+      "manualCheck": "Change this pin only when creating or reconciling a release stream for a different Obsidian version."
+    }
+  }
+}
