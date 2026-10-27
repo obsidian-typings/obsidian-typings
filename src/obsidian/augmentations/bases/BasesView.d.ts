@@ -166,6 +166,15 @@ declare module 'obsidian' {
     getViewActions(): unknown[];
 
     /**
+     * Checks whether a result group is collapsed in the current view.
+     *
+     * @param group - The result group.
+     * @returns Whether the group is collapsed.
+     * @unofficial
+     */
+    isGroupCollapsed(group: BasesQueryResultGroup): boolean;
+
+    /**
      * Called when there is new data for the query. This view should rerender with the updated data.
      *
      * @official
@@ -173,6 +182,14 @@ declare module 'obsidian' {
      * @deprecated - Added only for typing purposes. Use {@link onDataUpdated} instead.
      */
     onDataUpdated__?(): void;
+
+    /**
+     * Called after a result group's collapsed state is toggled and saved.
+     *
+     * @param group - The result group whose state changed.
+     * @unofficial
+     */
+    onGroupCollapsedChange(group: BasesQueryResultGroup): void;
 
     /**
      * Handles a resize of the view container.
@@ -196,6 +213,14 @@ declare module 'obsidian' {
      * @unofficial
      */
     setEphemeralState(state: unknown): void;
+
+    /**
+     * Toggles and saves a result group's collapsed state, then notifies the view.
+     *
+     * @param group - The result group to toggle.
+     * @unofficial
+     */
+    toggleGroupCollapsed(group: BasesQueryResultGroup): void;
 
     /**
      * Undoes the most recent transaction.

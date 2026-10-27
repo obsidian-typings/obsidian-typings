@@ -2,6 +2,7 @@ import type { getQueryControllerConstructor } from '../../implementations/constr
 import type { BasesContext } from '../../internals/internal-plugins/bases/BasesContext.d.ts';
 import type { BasesFilter } from '../../internals/internal-plugins/bases/BasesFilter.d.ts';
 import type { BasesFilterMenu } from '../../internals/internal-plugins/bases/BasesFilterMenu.d.ts';
+import type { BasesGroupSummary } from '../../internals/internal-plugins/bases/BasesGroupSummary.d.ts';
 import type { BasesMockContext } from '../../internals/internal-plugins/bases/BasesMockContext.d.ts';
 import type { BasesNewItemMenu } from '../../internals/internal-plugins/bases/BasesNewItemMenu.d.ts';
 import type { BasesPluginInstance } from '../../internals/internal-plugins/bases/BasesPluginInstance.d.ts';
@@ -186,6 +187,13 @@ declare module 'obsidian' {
     sortMenu: BasesSortMenu;
 
     /**
+     * The current file path, falling back to the query file path or an empty string.
+     *
+     * @unofficial
+     */
+    readonly sourcePath: string;
+
+    /**
      * The active Bases view, or `null` if none.
      *
      * @unofficial
@@ -312,6 +320,14 @@ declare module 'obsidian' {
     getActiveBasesViewOfType<T extends BasesView>(type: Constructor<T>): null | T;
 
     /**
+     * Gets visible and unlisted group summaries when manual group ordering is enabled.
+     *
+     * @returns The group summaries, or an empty array when manual grouping is disabled.
+     * @unofficial
+     */
+    getAllGroups(): BasesGroupSummary[];
+
+    /**
      * Gets the current file the query is evaluated against.
      *
      * @returns The current file, or `null` if none.
@@ -334,6 +350,14 @@ declare module 'obsidian' {
      * @unofficial
      */
     getEphemeralState(): QueryControllerEphemeralState;
+
+    /**
+     * Gets the mutable set of collapsed group identifiers for the current view, loading it lazily.
+     *
+     * @returns The current view's collapsed group identifiers.
+     * @unofficial
+     */
+    getGroupFolds(): Set<string>;
 
     /**
      * Gets the property identifiers available to the query.
@@ -375,6 +399,14 @@ declare module 'obsidian' {
      * @unofficial
      */
     getWidgetForIdent(ident: string): string;
+
+    /**
+     * Loads collapsed group identifiers from local storage for views still present in the query.
+     *
+     * @returns Sets of collapsed group identifiers keyed by view name, or an empty record when unavailable.
+     * @unofficial
+     */
+    loadGroupFolds(): Record<string, Set<string>>;
 
     /**
      * Notifies the active view of updated results.
@@ -420,6 +452,14 @@ declare module 'obsidian' {
      * @unofficial
      */
     runQuery(context: BasesContext): void;
+
+    /**
+     * Saves nonempty group-fold sets as arrays in local storage for the query file.
+     * Does nothing without a query file or loaded folds; clears the stored value when all sets are empty.
+     *
+     * @unofficial
+     */
+    saveGroupFolds(): void;
 
     /**
      * Selects the view with the given name.
