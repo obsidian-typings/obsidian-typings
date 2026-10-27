@@ -68,6 +68,16 @@ export interface NoteComposerPluginInstance extends InternalPluginInstance<NoteC
   getSelectionUnderHeading(file: TFile, editor: Editor, line: number): HeadingInfo | null;
 
   /**
+   * Merge a source note into a target note, apply the merge template, update links and trash the source.
+   *
+   * @param target - The note receiving the merged content.
+   * @param source - The note to merge and trash.
+   * @param mode - Where to insert the content. Defaults to `'append'`.
+   * @returns A promise that resolves when the merge and link updates complete.
+   */
+  mergeFile(target: TFile, source: TFile, mode?: 'append' | 'prepend'): Promise<void>;
+
+  /**
    * Add note composer items to the editor context menu.
    *
    * @param menu - The context menu to extend.
