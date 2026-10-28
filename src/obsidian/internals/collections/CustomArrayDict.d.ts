@@ -1,5 +1,11 @@
 /**
- * A dictionary mapping string keys to arrays of values.
+ * A dictionary from string keys to arrays of unique values.
+ *
+ * Adding a value already present under a key does nothing, removing the last value under a key removes the key,
+ * and {@link CustomArrayDict.get} returns the stored array itself rather than a copy.
+ *
+ * Obsidian's bundle defines this class under a minified name only, so `CustomArrayDict` is a name given here rather
+ * than Obsidian's own.
  *
  * @typeParam T - The type of the values.
  * @public
