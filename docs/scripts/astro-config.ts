@@ -1,3 +1,4 @@
+import { unified } from '@astrojs/markdown-remark';
 import StarlightIntegration from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
 
@@ -64,15 +65,18 @@ export const astroConfig = defineConfig({
     })
   ],
   markdown: {
-    // These run on the `unified` processor: Astro 7.3 selects it because this list is set and
-    // `@astrojs/markdown-remark` is installed. Starlight appends its own plugins after these, so the
-    // GitHub-alert conversion, which hands Starlight's asides plugin a `containerDirective`, has to be here.
-    remarkPlugins: [
-      remarkGitHubAlerts,
-      remarkRelativeLinks(BASE),
-      admonitionRenderer,
-      githubLocationRenderer
-    ]
+    // The site runs on the `unified` processor rather than Astro's default Sätteri, named explicitly: Astro 7.4
+    // deprecated `markdown.remarkPlugins`, which used to select it implicitly. Starlight pushes its own plugins onto
+    // this processor's lists after these, so the GitHub-alert conversion, which hands Starlight's asides plugin a
+    // `containerDirective`, has to be here.
+    processor: unified({
+      remarkPlugins: [
+        remarkGitHubAlerts,
+        remarkRelativeLinks(BASE),
+        admonitionRenderer,
+        githubLocationRenderer
+      ]
+    })
   },
   site: 'https://obsidian-typings.github.io',
   trailingSlash: 'always'
