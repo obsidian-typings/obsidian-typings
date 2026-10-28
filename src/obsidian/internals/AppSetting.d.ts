@@ -152,6 +152,10 @@ export interface AppSetting extends Modal {
   unloadHandler: (() => void) | null;
 
   /**
+   * The title given to the popout window.
+   */
+  windowTitle: string;
+  /**
    * Activates the navigable nav item matching the given element.
    *
    * @param el - The nav item element to activate.
@@ -199,12 +203,26 @@ export interface AppSetting extends Modal {
   constructor__?(app: App): this;
 
   /**
+   * Finds a core or plugin setting tab by its ID.
+   *
+   * @param id - The tab ID.
+   * @returns The tab, or `null` if none has that ID.
+   */
+  findTabById(id: string): null | SettingTab;
+  /**
    * Focuses the given nav item.
    *
    * @param navItem - The nav item to focus.
    */
   focusNavItem(navItem: unknown): void;
 
+  /**
+   * Focuses the nav item at the given index. Does nothing when there is no item at that index.
+   *
+   * @param index - The index of the nav item.
+   * @param navItems - The nav items to index into. Defaults to {@link AppSetting.getNavigableNavItems}.
+   */
+  focusNavItemAt(index: number, navItems?: unknown[]): void;
   /**
    * Moves focus to the nav item at the given offset from the current one.
    *
@@ -221,6 +239,10 @@ export interface AppSetting extends Modal {
   focusNextSettingItem(settingEl: HTMLElement, direction: number): void;
 
   /**
+   * Focuses the settings search input and selects its text.
+   */
+  focusSearch(): void;
+  /**
    * Focuses the given setting item element.
    *
    * @param settingEl - The setting item element to focus.
@@ -228,6 +250,13 @@ export interface AppSetting extends Modal {
    */
   focusSettingItem(settingEl: HTMLElement, focusVisible?: boolean): void;
 
+  /**
+   * Focuses the setting item at the given index. Does nothing when there is no item at that index.
+   *
+   * @param index - The index of the setting item.
+   * @param settingItems - The setting items to index into. Defaults to {@link AppSetting.getNavigableSettingItems}.
+   */
+  focusSettingItemAt(index: number, settingItems?: HTMLElement[]): void;
   /**
    * Moves focus to the sidebar.
    */
@@ -262,6 +291,12 @@ export interface AppSetting extends Modal {
   getPopoutOptions(): unknown;
 
   /**
+   * Gets the visible elements of the current page that take part in tab-key focus cycling.
+   *
+   * @returns The setting items and focusable elements in document order.
+   */
+  getTabSequence(): HTMLElement[];
+  /**
    * Check whether tab is a plugin tab.
    *
    * @param tab - Tab to check.
@@ -269,6 +304,21 @@ export interface AppSetting extends Modal {
    */
   isPluginSettingTab(tab: SettingTab): boolean;
 
+  /**
+   * Detects the second `g` of a Vim-style `gg` keypress, at most 500 ms after the first.
+   *
+   * @param $event - The keyboard event of the `g` keypress.
+   * @returns Whether this keypress completes `gg`. Otherwise it is recorded as the first `g`.
+   */
+  isVimGG($event: KeyboardEvent): boolean;
+
+  /**
+   * Opens the given tab and then each sub-page along the given path. Does nothing when that page is already open.
+   *
+   * @param tab - The tab to open.
+   * @param pagePath - The sub-page path within the tab.
+   */
+  navigateToPage(tab: SettingTab, pagePath: string[]): void;
   /**
    * Navigates to a search result, optionally scrolling to a specific definition.
    *
@@ -289,6 +339,14 @@ export interface AppSetting extends Modal {
    */
   openPage(page: unknown): void;
 
+  /**
+   * Opens the tab with the given ID and then the sub-page along the given path.
+   *
+   * @param tabId - The tab ID.
+   * @param pagePath - The sub-page path within the tab.
+   * @returns The tab, or `null` if none has that ID.
+   */
+  openPagePath(tabId: string, pagePath: string[]): null | SettingTab;
   /**
    * Open a specific tab by tab reference.
    *
@@ -344,6 +402,12 @@ export interface AppSetting extends Modal {
    */
   scrollToDefinition(tab: SettingTab, definition: unknown): void;
 
+  /**
+   * Whether the settings open in a popout window, from the vault's `settingsPopoutWindow` setting.
+   *
+   * @returns Whether to use a popout window.
+   */
+  shouldUsePopout(): boolean;
   /**
    * Update the title of the modal.
    *

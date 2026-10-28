@@ -7,6 +7,7 @@ import type {
 
 import type { getDragManagerConstructor } from '../../implementations/constructors/internals/getDragManagerConstructor.d.ts';
 import type { Draggable } from './Draggable.d.ts';
+import type { DragManagerEdgeScroll } from './DragManagerEdgeScroll.d.ts';
 import type { DragStartEvent } from './DragStartEvent.d.ts';
 import type { DropResult } from './DropResult.d.ts';
 
@@ -36,6 +37,11 @@ export interface DragManager {
    * Information about the initial drag start event.
    */
   dragStart: DragStartEvent | null;
+
+  /**
+   * The automatic scroll running while a drag hovers near the edge of a scrollable element, or `null` when none is.
+   */
+  edgeScroll: DragManagerEdgeScroll | null;
 
   /**
    * Ghost element shown while dragging.
