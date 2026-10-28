@@ -456,6 +456,30 @@ export interface ElectronApp {
   /** Disables hardware acceleration for the current app. Can only be called before the app is ready. */
   disableHardwareAcceleration(): void;
 
+  /**
+   * Emits the `open-url` event, as the OS does when the user opens a URL with the application.
+   *
+   * Obsidian's main process handles it by calling `preventDefault()` on the event object and opening
+   * the URL, and ignores any URL that does not start with `obsidian://`. Emitting it from a renderer
+   * through `remote.app` therefore dispatches an `obsidian://` URI natively, including one that targets
+   * another vault.
+   *
+   * @param $event - The event name.
+   * @param openUrlEvent - The event object. Obsidian only calls its `preventDefault()`.
+   * @param url - The URL to open.
+   * @returns Whether the event had listeners.
+   */
+  emit($event: 'open-url', openUrlEvent: Pick<ElectronEvent, 'preventDefault'>, url: string): boolean;
+
+  /**
+   * Synchronously calls each of the listeners registered for the event, in the order they were registered.
+   *
+   * @param $event - The event name.
+   * @param args - The arguments passed to the listeners.
+   * @returns Whether the event had listeners.
+   */
+  emit($event: string | symbol, ...args: unknown[]): boolean;
+
   /** Enables full sandbox mode on the app. Can only be called before the app is ready. */
   enableSandbox(): void;
 
