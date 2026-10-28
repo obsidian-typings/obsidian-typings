@@ -1,7 +1,7 @@
-import type { CustomArrayDict } from '../../internals/collections/CustomArrayDict.d.d.ts';
+import type { CustomArrayDict } from '../../internals/collections/CustomArrayDict.d.ts';
 
 /**
- * A dictionary that maps string keys to arrays of unique values, implementing {@link CustomArrayDict}.
+ * A dictionary from string keys to arrays of unique values, implementing {@link CustomArrayDict}.
  *
  * @public
  * @unofficial
