@@ -99,6 +99,16 @@ declare module 'obsidian' {
     exists(normalizedPath: string, sensitive?: boolean): Promise<boolean>;
 
     /**
+     * Writes text to an export folder in the app cache and opens it with the system file handler.
+     *
+     * @param text - The text to export.
+     * @param filename - The suggested file name.
+     * @returns A promise that resolves after the export is initiated.
+     * @unofficial
+     */
+    exportTextFile(text: string, filename: string): Promise<void>;
+
+    /**
      * Gets the full path for a file.
      *
      * @param normalizedPath - The path to get the full path for.

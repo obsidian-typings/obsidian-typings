@@ -452,6 +452,14 @@ declare module 'obsidian' {
     iterateAllRefs(callback: (path: string, reference: Reference) => boolean | void): void;
 
     /**
+     * Visits cached metadata for non-ignored files; callback return values do not stop iteration.
+     *
+     * @param callback - The callback receiving each path and its available metadata.
+     * @unofficial
+     */
+    iterateFileCache(callback: (path: string, cache: CachedMetadata) => unknown): void;
+
+    /**
      * Iterate over all references for a specific file.
      *
      * The callback is invoked with each reference found in the file, frontmatter links first, so the

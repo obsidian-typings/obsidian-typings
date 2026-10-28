@@ -45,6 +45,15 @@ declare module 'obsidian' {
     setCancel(): this;
 
     /**
+     * Makes the button submit the given form and prevents its click from closing the modal.
+     *
+     * @param formEl - The form to submit, identified by its id.
+     * @returns The confirmation button.
+     * @unofficial
+     */
+    setForm(formEl: HTMLFormElement): this;
+
+    /**
      * Mark this button as the focus target when the modal opens. If multiple
      * buttons in the same modal have this set, the last-marked one wins.
      *

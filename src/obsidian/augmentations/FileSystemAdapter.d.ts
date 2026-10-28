@@ -4,7 +4,6 @@ import * as fs from 'node:fs';
 import * as fsPromises from 'node:fs/promises';
 import * as path from 'node:path';
 
-import type { ElectronIpcRenderer } from '../../electron/internals/ElectronIpcRenderer/ElectronIpcRenderer.d.ts';
 import type { getFileSystemAdapterConstructor } from '../implementations/constructors/augmentations/getFileSystemAdapterConstructor.d.ts';
 import type { Btime } from '../internals/Btime.d.ts';
 import type { DataAdapterWatchersRecord } from '../internals/data-adapter-records/DataAdapterWatchersRecord.d.ts';
@@ -41,13 +40,6 @@ declare module 'obsidian' {
     fsPromises: typeof fsPromises;
 
     /**
-     * Reference to electron ipcRenderer module.
-     *
-     * @unofficial
-     */
-    ipcRenderer?: ElectronIpcRenderer;
-
-    /**
      * Kill last action.
      *
      * @unofficial
@@ -74,13 +66,6 @@ declare module 'obsidian' {
      * @unofficial
      */
     url: typeof URL;
-
-    /**
-     * Seems to always be `null` and unused.
-     *
-     * @unofficial
-     */
-    watcher: null;
 
     /**
      * Record of active file system watchers by path.
@@ -180,6 +165,16 @@ declare module 'obsidian' {
      * @official
      */
     exists(normalizedPath: string, sensitive?: boolean): Promise<boolean>;
+
+    /**
+     * Exports text as a plain-text download.
+     *
+     * @param text - The text to export.
+     * @param filename - The suggested file name.
+     * @returns A promise that resolves after the download is started.
+     * @unofficial
+     */
+    exportTextFile(text: string, filename: string): Promise<void>;
 
     /**
      * Get the absolute path to the vault.
