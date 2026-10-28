@@ -2,6 +2,7 @@ import type { getVaultConstructor } from '../implementations/constructors/augmen
 import type { AppVaultAppearanceConfig } from '../internals/app-vault-config/AppVaultAppearanceConfig.d.ts';
 import type { AppVaultConfig } from '../internals/app-vault-config/AppVaultConfig.d.ts';
 import type { ConfigItem } from '../internals/ConfigItem.d.ts';
+import type { ExternalFileManager } from '../internals/external-files/ExternalFileManager.d.ts';
 import type { FileSystemWatchHandler } from '../internals/FileSystemWatchHandler.d.ts';
 import type { VaultFileMapRecord } from '../internals/VaultFileMapRecord.d.ts';
 
@@ -53,6 +54,13 @@ declare module 'obsidian' {
      * @unofficial
      */
     configTs: number;
+
+    /**
+     * Manager for files outside the vault.
+     *
+     * @unofficial
+     */
+    externalFileManager: ExternalFileManager;
 
     /**
      * Mapping of path to Obsidian folder or file structure

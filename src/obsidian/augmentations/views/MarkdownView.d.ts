@@ -190,6 +190,20 @@ declare module 'obsidian' {
     file__?(): null | TFile;
 
     /**
+     * Focuses the editor at its start, or the preview when no editor is available.
+     *
+     * @unofficial
+     */
+    focusAfterMetadata(): void;
+
+    /**
+     * Focuses the inline title when it is visible.
+     *
+     * @unofficial
+     */
+    focusBeforeMetadata(): void;
+
+    /**
      * Focus on the metadata editor given property information.
      *
      * @param focus - Options for which property to focus.

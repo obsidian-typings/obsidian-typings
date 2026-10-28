@@ -401,6 +401,14 @@ declare module 'obsidian' {
     getAppTitle(title?: string): string;
 
     /**
+     * Gets the base font size, clamped to 10 through 30 pixels.
+     *
+     * @returns The base font size in pixels.
+     * @unofficial
+     */
+    getBaseFontSize(): number;
+
+    /**
      * Get the URI for opening specified file in Obsidian.
      *
      * @param file - The file to generate URI for.
@@ -621,6 +629,14 @@ declare module 'obsidian' {
      * @unofficial
      */
     setAccentColor(color: string): void;
+
+    /**
+     * Saves the base font size, clamped to 10 through 30 pixels, and updates the interface.
+     *
+     * @param size - The requested font size in pixels.
+     * @unofficial
+     */
+    setBaseFontSize(size: number): void;
 
     /**
      * Set the spellcheck languages.

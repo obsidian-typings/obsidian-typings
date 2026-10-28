@@ -193,6 +193,15 @@ declare module 'obsidian' {
     handleDetached(el: HTMLElement): boolean;
 
     /**
+     * Opens the clicked preview image in the image viewer.
+     *
+     * @param evt - The click event.
+     * @param targetEl - The clicked media element.
+     * @unofficial
+     */
+    handleMediaClick(evt: MouseEvent, targetEl: HTMLElement): void;
+
+    /**
      * Briefly highlights an element.
      *
      * @param el - The element to highlight.

@@ -65,6 +65,13 @@ declare module 'obsidian' {
     headerEl: HTMLDivElement;
 
     /**
+     * Whether the modal is currently open.
+     *
+     * @unofficial
+     */
+    isOpen: boolean;
+
+    /**
      * The HTML element that represents the modal.
      *
      * @official
@@ -91,6 +98,13 @@ declare module 'obsidian' {
      * @unofficial
      */
     shouldAnimate: boolean;
+
+    /**
+     * Whether opening the modal should animate.
+     *
+     * @unofficial
+     */
+    shouldAnimateOpen: boolean;
 
     /**
      * Whether the modal should restore the selection when it is opened or closed.
@@ -130,6 +144,22 @@ declare module 'obsidian' {
      * @unofficial
      */
     animateOpen(): Promise<void>;
+
+    /**
+     * Checks whether this device supports modal animation.
+     *
+     * @returns Whether modal animation is supported.
+     * @unofficial
+     */
+    canAnimate(): boolean;
+
+    /**
+     * Checks whether clicking outside may dismiss the modal.
+     *
+     * @returns Whether outside clicks may dismiss the modal.
+     * @unofficial
+     */
+    canDismiss(): boolean;
 
     /**
      * Close the modal.

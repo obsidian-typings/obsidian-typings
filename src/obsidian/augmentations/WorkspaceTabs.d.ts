@@ -64,6 +64,13 @@ declare module 'obsidian' {
     tabsInnerEl: HTMLElement;
 
     /**
+     * Controller for the pending touch tab-width unlock, or `null` when inactive.
+     *
+     * @unofficial
+     */
+    touchUnlockTabWidths: AbortController | null;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getWorkspaceTabsConstructor} from `obsidian-typings/implementations`.
@@ -98,6 +105,13 @@ declare module 'obsidian' {
      * @unofficial
      */
     onContainerScroll(): void;
+
+    /**
+     * Schedules tab-width unlocking after an outside interaction or a one-second timeout.
+     *
+     * @unofficial
+     */
+    scheduleTouchUnlock(): void;
 
     /**
      * Scrolls the tab at the given index into view.
