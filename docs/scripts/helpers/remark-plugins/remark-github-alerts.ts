@@ -39,14 +39,15 @@ interface Alert {
  * Remark plugin that turns GitHub alerts (`> [!NOTE]` and the other four) into Starlight asides.
  *
  * The site's Markdown runs on the `unified` processor, not on Sätteri: `astro-config.ts` sets
- * `markdown.remarkPlugins` and `@astrojs/markdown-remark` is installed, and Astro 7.3 switches the processor to
- * `unified()` for exactly that combination. Nothing in that pipeline knows GitHub's alert syntax, so until this
+ * `markdown.processor` to `unified({ remarkPlugins })` from `@astrojs/markdown-remark`. Nothing in that pipeline
+ * knows GitHub's alert syntax, so until this
  * plugin every alert rendered as a plain blockquote opening with a literal `[!NOTE]` -- the changelog page, which
  * imports the checkout's `CHANGELOG.md`, is where one reaches the site.
  *
  * It replaces the blockquote with a `containerDirective` named after the aside variant, which is exactly what
  * `:::note` parses to, and Starlight's own `remarkAsides` -- which Starlight appends after the site's plugins --
- * renders it. So this has to run before that plugin, and it does by being in `markdown.remarkPlugins` at all.
+ * renders it. So this has to run before that plugin, and it does by being in the processor's `remarkPlugins` at
+ * all.
  *
  * `@mnaoumov/typescript-dev-toolkit` carries the same conversion as a Sätteri plugin (`docs-site/satteri-github-alerts.ts`);
  * that API is not remark's, so this is a port rather than an import.
