@@ -1,7 +1,9 @@
 import type {
   App,
+  CachedMetadata,
   Debouncer,
-  Events
+  Events,
+  TFile
 } from 'obsidian';
 
 import type { getMetadataTypeManagerConstructor } from '../../implementations/constructors/internals/getMetadataTypeManagerConstructor.d.ts';
@@ -90,6 +92,13 @@ export interface MetadataTypeManager extends Events {
   getPropertyInfo(property: string): PropertyInfo;
 
   /**
+   * Counts the notes whose frontmatter carries each property.
+   *
+   * @returns Record of lowercased property names to the number of notes using them.
+   */
+  getPropertyOccurrences(): Record<string, number>;
+
+  /**
    * Get expected widget type for property and the one inferred from the property value.
    *
    * @param property - Property name.
@@ -119,11 +128,38 @@ export interface MetadataTypeManager extends Events {
   loadData(): Promise<void>;
 
   /**
+   * Handles the metadata cache `changed` event: records the frontmatter properties of the changed note, inferring
+   * the widget of each property that has no assigned type.
+   *
+   * @param file - The changed file.
+   * @param data - The file contents.
+   * @param cache - The file's new metadata.
+   */
+  onCacheChanged(file: TFile, data: string, cache: CachedMetadata): void;
+
+  /**
+   * Handles the metadata cache `finished` event once: unsubscribes and rebuilds the properties.
+   */
+  onCacheFinished(): void;
+
+  /**
    * Handle raw file system change events for the property type config.
    *
    * @param e - The raw file system change event.
    */
   onRaw(e: unknown): void;
+
+  /**
+   * Handles a vault config change: rebuilds the properties on the next frame when `userIgnoreFilters` changed.
+   *
+   * @param configKey - The changed config key.
+   */
+  onVaultConfigChanged(configKey: string): void;
+
+  /**
+   * Rebuilds {@link MetadataTypeManager.properties} from the assigned widgets and the frontmatter of every cached note.
+   */
+  rebuildProperties(): void;
 
   /**
    * Register event listeners for property type config file changes.
@@ -153,9 +189,4 @@ export interface MetadataTypeManager extends Events {
    * @returns A promise that resolves when the widget type is unset.
    */
   unsetType(property: string): Promise<void>;
-
-  /**
-   * Updates `this.properties` to match the {@link obsidian#MetadataCache}
-   */
-  updatePropertyInfoCache(): void;
 }

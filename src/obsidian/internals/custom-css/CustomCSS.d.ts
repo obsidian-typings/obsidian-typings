@@ -30,6 +30,11 @@ export interface CustomCSS extends Component {
   csscache: Map<string, string>;
 
   /**
+   * Whether the theme and snippets are globally disabled, as they are while the restricted-mode prompt is shown.
+   */
+  disabled: boolean;
+
+  /**
    * Set of enabled snippet, given by filenames.
    */
   enabledSnippets: Set<string>;
@@ -177,6 +182,21 @@ export interface CustomCSS extends Component {
    * @returns String `.obsidian/themes/${themeName}/theme.css`.
    */
   getThemePath(themeName: string): string;
+
+  /**
+   * Disables the theme and snippets globally and reloads both. Does nothing when already disabled.
+   *
+   * @returns A promise that resolves when the theme and snippets are reloaded.
+   */
+  globallyDisable(): Promise<void>;
+
+  /**
+   * Re-enables the theme and snippets after {@link CustomCSS.globallyDisable} and reloads both. Does nothing when not
+   * disabled.
+   *
+   * @returns A promise that resolves when the theme and snippets are reloaded.
+   */
+  globallyEnable(): Promise<void>;
 
   /**
    * Returns whether there are themes that can be updated.

@@ -10,13 +10,6 @@ declare module 'obsidian' {
    */
   interface Scope {
     /**
-     * Callback to execute when scope is matched
-     *
-     * @unofficial
-     */
-    cb: (() => boolean) | undefined;
-
-    /**
      * Overridden keys that exist in this scope.
      *
      * @unofficial
@@ -82,14 +75,6 @@ declare module 'obsidian' {
      * @official
      */
     register(modifiers: Modifier[] | null, key: null | string, func: KeymapEventListener): KeymapEventHandler;
-
-    /**
-     * Set the container element for constraining tab-key focus cycling.
-     *
-     * @param container - The container element to constrain tab focus within.
-     * @unofficial
-     */
-    setTabFocusContainer(container: HTMLElement): void;
 
     /**
      * Sets the container element used for tab-focus handling.
