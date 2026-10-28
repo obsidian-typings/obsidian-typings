@@ -103,4 +103,19 @@ Validation passed on each stream through the full `npm run build`, including lin
 
 ## Additional findings from the fresh run
 
-The extra named types are `AppSetting`, `MetadataTypeManager`, `CustomCSS`, `AppMenuBarManager`, `DragManager`, `BacklinkView`, `OutgoingLinkView`, `Component`, `FileManager`, `Scope` and `WorkspaceLeaf`. They need their own ownership/source triage. In particular, `Component.app` can arise from derived-group attribution; `FileManager.mergeFile` overlaps the separate investigation of the core Note Composer merge flow. Neither should be blindly added or removed.
+The same harvest names 11 more types. Each was checked against the shared blob and reconciled on 2026-10-28 in [public](https://github.com/obsidian-typings/obsidian-typings/commit/95e9b776) and [catalyst](https://github.com/obsidian-typings/obsidian-typings/commit/bcbaf87e).
+
+| Type | Candidates | Source class and lines | Disposition |
+| --- | --- | --- | --- |
+| `AppSetting` | `canAnimate`, `findTabById`, `focusNavItemAt`, `focusSearch`, `focusSettingItemAt`, `getTabSequence`, `isOpen`, `isVimGG`, `navigateToPage`, `openPagePath`, `shouldAnimateOpen`, `shouldUsePopout`, `windowTitle` | `doe`, 226606-227620, over the popout modal `u3` at 164022 | Added. `isOpen`, `shouldAnimateOpen` and `canAnimate` were already inherited from `Modal` after the reconciliation above. |
+| `MetadataTypeManager` | `getPropertyOccurrences`, `onCacheChanged`, `onCacheFinished`, `onVaultConfigChanged`, `rebuildProperties` | 102112-102220 | Added. The declared `updatePropertyInfoCache` appears nowhere in the bundle, so it was removed. |
+| `CustomCSS` | `disabled`, `globallyDisable`, `globallyEnable` | 74620, 75357-75388 | Added. Both toggles are async and reload the theme and snippets. |
+| `AppMenuBarManager` | `shareMenuFilePath` | 70704-71167 | Added, as `null \| string`. |
+| `DragManager` | `edgeScroll` | 99931-100160 | Added, with the new `DragManagerEdgeScroll` record. |
+| `BacklinkView`, `OutgoingLinkView` | `requestUpdate` | `T2`, 157869 | Added on their shared base `InfoFileView`, which assigns it. |
+| `Component` | `app` | - | No change. The sampled objects are `CustomCSS` and internal plugins, which already declare `app`. |
+| `FileManager` | stale `mergeFile` | - | Removed. Only the Note Composer plugin instance implements it. |
+| `Scope` | stale `setTabFocusContainer`, field `cb` | `vS`, 69159-69182, and `gS`, 69183 | Removed both. The class has `setTabFocusContainerEl`. `cb` belongs to the delegating subclass that `Workspace.scope` is built from (167634), now typed as `WorkspaceScope`. |
+| `WorkspaceLeaf` | stale `setDimension` | `UO`, 88443 | No change. The leaf inherits it from `WorkspaceItem`, so the finding is an attribution miss. |
+
+The removals carry a `BREAKING CHANGE` footer naming the replacement for each. The full `npm run build` passed on each stream, including all seven consumer scenarios. No package release was performed.
