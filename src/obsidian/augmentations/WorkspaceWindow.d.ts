@@ -45,6 +45,13 @@ declare module 'obsidian' {
     constructor4__?(workspace: Workspace, id?: string, size?: Record<string, number>): this;
 
     /**
+     * Cleans up style relaying, closes the window and emits the window-close event.
+     *
+     * @unofficial
+     */
+    destroyWindow(): void;
+
+    /**
      * Updates the stored window size from the current Electron window bounds.
      *
      * @unofficial

@@ -57,6 +57,15 @@ declare module 'obsidian' {
     constructor2__?(leaf: WorkspaceLeaf): this;
 
     /**
+     * Appends a breadcrumb and its separator to the title parent.
+     *
+     * @param text - The breadcrumb label.
+     * @returns The breadcrumb element.
+     * @unofficial
+     */
+    createBreadcrumb(text: string): HTMLSpanElement;
+
+    /**
      * Get the display text for the file view.
      *
      * @returns The display text for the file view.

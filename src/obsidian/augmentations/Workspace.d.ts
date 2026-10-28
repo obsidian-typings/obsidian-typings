@@ -677,16 +677,6 @@ declare module 'obsidian' {
     handleLinkContextMenu(menu: Menu, linkText: string, sourcePath: string, leaf?: WorkspaceLeaf): void;
 
     /**
-     * Handler for x-callback-url actions.
-     *
-     * @param params - The URL parameters from the x-callback-url.
-     * @param file - The file associated with the callback.
-     * @returns Whether the callback was handled.
-     * @unofficial
-     */
-    handleXCallback(params: Record<string, string>, file: TFile): boolean;
-
-    /**
      * Check if there is any undo history available.
      *
      * @returns Whether there is undo history.
@@ -1455,6 +1445,13 @@ declare module 'obsidian' {
      * @unofficial
      */
     registerObsidianProtocolHandler(protocol: string, handler: ObsidianProtocolHandler): void;
+
+    /**
+     * Installs the desktop external-file open handler and processes a pending open request.
+     *
+     * @unofficial
+     */
+    registerOpenFileHandler(): void;
 
     /**
      * Register operator function configurations.
