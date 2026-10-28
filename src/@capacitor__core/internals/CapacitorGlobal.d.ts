@@ -1,5 +1,6 @@
 import type { CapacitorException } from './CapacitorException.d.ts';
 import type { PluginCallback } from './PluginCallback.d.ts';
+import type { PluginHeader } from './PluginHeader.d.ts';
 import type { PluginListenerHandle } from './PluginListenerHandle.d.ts';
 import type { PluginRegistry } from './PluginRegistry.d.ts';
 import type { RegisterPlugin } from './RegisterPlugin.d.ts';
@@ -21,6 +22,11 @@ export interface CapacitorGlobal {
   isNative?: boolean;
   /** Platform name. `@deprecated` Deprecated. */
   platform?: string;
+  /**
+   * Headers of the plugins the native bridge implements, injected by the native platform.
+   * `registerPlugin` and `isPluginAvailable` read it.
+   */
+  PluginHeaders?: PluginHeader[];
   /** Plugin registry. `@deprecated` Deprecated. */
   Plugins: PluginRegistry;
   /** Plugin registration function. */
