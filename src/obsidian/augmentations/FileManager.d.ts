@@ -230,18 +230,6 @@ declare module 'obsidian' {
     insertIntoFile(file: TFile, text: string, position?: 'append' | 'prepend'): Promise<void>;
 
     /**
-     * Merge two files.
-     *
-     * @param file - File to merge to.
-     * @param otherFile - File to merge from.
-     * @param override - If not empty, will override the contents of the file with this string.
-     * @param atStart - Whether to insert text at the start or end of the file.
-     * @returns A promise that resolves when the files are merged.
-     * @unofficial
-     */
-    mergeFile(file: TFile, otherFile: TFile, override: string, atStart: boolean): Promise<void>;
-
-    /**
      * Shows a notice offering to undo a bulk file modification, reverting each file to its captured state.
      *
      * @param records - The pre-modification state of each affected file.

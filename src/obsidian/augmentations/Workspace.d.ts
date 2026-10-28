@@ -24,6 +24,7 @@ import type { SerializedWorkspace } from '../internals/workspace/SerializedWorks
 import type { SetActiveLeafParams } from '../internals/workspace/SetActiveLeafParams.d.ts';
 import type { WorkspaceHoverLinkSourcesRecord } from '../internals/workspace/WorkspaceHoverLinkSourcesRecord.d.ts';
 import type { WorkspaceProtocolHandler } from '../internals/workspace/WorkspaceProtocolHandler.d.ts';
+import type { WorkspaceScope } from '../internals/workspace/WorkspaceScope.d.ts';
 
 export {};
 
@@ -256,11 +257,11 @@ declare module 'obsidian' {
     rootSplit: WorkspaceRoot;
 
     /**
-     * Keyscope registered to the vault
+     * The workspace's key scope, a child of the app scope that delegates to the active leaf's view scope.
      *
      * @unofficial
      */
-    scope: Scope;
+    scope: WorkspaceScope;
 
     /**
      * List of states that were closed and may be reopened.

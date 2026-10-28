@@ -39,6 +39,13 @@ export interface AppMenuBarManager {
   requestRender: Debouncer<[], unknown>;
 
   /**
+   * The full file system path last published to the native Share menu, or `null`.
+   *
+   * Desktop only. Cleared on every menu render, so the next update republishes it.
+   */
+  shareMenuFilePath: null | string;
+
+  /**
    * Internal handler for file open events.
    */
   _onFileOpen(): void;
