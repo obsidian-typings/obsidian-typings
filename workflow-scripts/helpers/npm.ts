@@ -292,6 +292,13 @@ export async function attachTrustedPublisher(packageName: string): Promise<Trust
 }
 
 /**
+ * Names the git tag a release of a release branch writes, e.g. `obsidian-public-1.14.5-v1.1.0`.
+ */
+export function buildScopedTagName(branchSpec: BranchSpec, releaseVersion: string): string {
+  return `obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}-v${releaseVersion}`;
+}
+
+/**
  * The operator-facing account of an attach, worded once for both callers.
  *
  * `bootstrap-new-package.ts` and {@link resolveTrustedPublisherState} reach the attach from opposite sides --
