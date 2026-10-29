@@ -411,11 +411,24 @@ export function renderConstructorMdx(lines: string[], name: string, info: TypeIn
 }
 
 export function renderFunctionPage(lines: string[], info: TypeInfo, allTypes: Map<string, TypeInfo>): void {
-  const function_ = info.methods[0];
-  if (!function_) {
+  if (info.methods.length === 1 && info.methods[0]) {
+    renderFunctionSignature(lines, info.methods[0], allTypes);
     return;
   }
 
+  for (const [index, overload] of info.methods.entries()) {
+    lines.push(`## Overload ${String(index + 1)}`, '');
+    if (overload.description) {
+      lines.push(escapeMdxBraces(resolveLinks(overload.description, allTypes)), '');
+    }
+    if (overload.remarks) {
+      lines.push(`> ${escapeMdxBraces(resolveLinks(overload.remarks, allTypes))}`, '');
+    }
+    renderFunctionSignature(lines, overload, allTypes);
+  }
+}
+
+export function renderFunctionSignature(lines: string[], function_: MemberInfo, allTypes: Map<string, TypeInfo>): void {
   lines.push('**Signature:**', '', '```ts', `function ${function_.signature}: ${function_.returnType}`, '```', '');
 
   if (function_.parameters.length > 0) {
