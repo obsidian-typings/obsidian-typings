@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 1.2.0
+
+**Branch:** [`release/obsidian-public/1.14.5`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.5)
+
+**Commits:** [`obsidian-public-1.14.5-v1.1.0...obsidian-public-1.14.5-v1.2.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-public-1.14.5-v1.1.0...obsidian-public-1.14.5-v1.2.0)
+
+### Breaking changes
+
+- fix(editable-file-view): type saveTitle as resolving a boolean ([`ee1582c`](https://github.com/obsidian-typings/obsidian-typings/commit/ee1582c8abe733d8d3170ce3e187aa5f82799841))
+- fix(types)!: remove Modal.shouldAnimate, renamed to shouldAnimateOpen in 1.14.0 ([`886fb24`](https://github.com/obsidian-typings/obsidian-typings/commit/886fb24d2df5aac035e3bdb735397fbe949da94c))
+- fix: type the hotkey conflict map and correct the canvas edge multimaps ([`fa4ba8c`](https://github.com/obsidian-typings/obsidian-typings/commit/fa4ba8ccdd6b065392782fd79b2a14d0d5ba39e6))
+
+### Other changes
+
+- fix(spellcheck): accept multimaps, so the release changelog commits ([`18a07ad`](https://github.com/obsidian-typings/obsidian-typings/commit/18a07add18604f1af6a47ff11975ce311bded526))
+
 ## 1.1.0
 
 **Branch:** [`release/obsidian-public/1.14.5`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.5)
