@@ -1,13 +1,77 @@
 import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { setTimeout as sleep } from 'node:timers/promises';
 
+import type {
+  BranchSpec,
+  Channel
+} from './helpers/branch-spec.ts';
+import type { PackageRegistryState } from './helpers/npm.ts';
+import type { SkippedRelease } from './helpers/obsidian-releases.ts';
+
+import { selectLatestBranch } from './helpers/base-branch.ts';
 import { generateBranchName } from './helpers/branch-spec.ts';
 import { restoreWorkflowScripts } from './helpers/checkout.ts';
 import { commit } from './helpers/git.ts';
 import { assertRunningInGitHubActions } from './helpers/github-actions.ts';
+import { fileIssueOnce } from './helpers/github-issues.ts';
 import { readPackageJson } from './helpers/json.ts';
+import { getScopedPackageName } from './helpers/npm.ts';
+import {
+  fetchChangelogUrl,
+  fetchLatestAppVersions,
+  planReleaseBranches
+} from './helpers/obsidian-releases.ts';
 import { generateMainReadme } from './helpers/readme-generator.ts';
+import { cutReleaseBranch } from './helpers/release-branch.ts';
 import { getLatestVersion } from './helpers/version.ts';
+
+/**
+ * Cuts a release branch for every Obsidian version that has none, and files what it cannot finish.
+ *
+ * This is the half the workflow was missing. It used to watch the npm `obsidian` API package alone, which is
+ * published far less often than the app: `1.14.4` stayed its `latest` while the app shipped `1.14.5` public
+ * and `1.15.0` catalyst, every three-hourly run logged "no file changes" and went green, and nothing cut a
+ * branch for either version until somebody noticed by hand.
+ *
+ * What it cannot do is claim a new package name on npm, which needs a maintainer's 2FA (see
+ * `bootstrap-new-package.ts`), or bring the typings in line with the new build's internals, which is the
+ * crawler's job and is run by a maintainer. Both are filed as one issue per branch.
+ */
+async function cutBranchesForNewObsidianVersions(): Promise<void> {
+  const latestAppVersions = await withRetry('fetch the latest Obsidian app versions', fetchLatestAppVersions);
+  const latestBranchVersions: Record<Channel, string> = {
+    catalyst: await getLatestVersion('catalyst'),
+    public: await getLatestVersion('public')
+  };
+
+  const plan = planReleaseBranches(latestBranchVersions, latestAppVersions);
+
+  for (const skippedRelease of plan.skipped) {
+    await reportSkippedRelease(skippedRelease);
+  }
+
+  if (plan.branchesToCut.length === 0) {
+    console.log(`Every Obsidian app version has a release branch: public ${latestAppVersions.public}, catalyst ${latestAppVersions.catalyst}.`);
+    return;
+  }
+
+  for (const branchSpec of plan.branchesToCut) {
+    const baseBranchVersions = { ...latestBranchVersions };
+    const changelogUrl = await fetchChangelogUrl(branchSpec.obsidianVersion);
+    const registryState = await cutReleaseBranch(branchSpec, changelogUrl);
+    latestBranchVersions[branchSpec.channel] = branchSpec.obsidianVersion;
+
+    if (registryState === 'released') {
+      // `npm run release` exists only on a release branch, which is where `cutReleaseBranch` leaves us.
+      await execFromRoot('npm run release');
+    } else {
+      await reportBranchNeedingPackage(branchSpec, registryState, baseBranchVersions);
+    }
+
+    // Opens with `git checkout main`, so it goes after anything that has to run on the new branch.
+    await generateMainReadme();
+  }
+}
 
 async function getLatestObsidianVersion(): Promise<string> {
   // This workflow runs hourly, so it is exposed to transient registry failures often enough that
@@ -59,6 +123,9 @@ async function main(): Promise<void> {
    */
   await generateMainReadme();
 
+  // Before the npm loop, so a branch cut here is the latest branch that loop checks out.
+  await cutBranchesForNewObsidianVersions();
+
   for (const channel of ['public', 'catalyst'] as const) {
     const latestBranchVersion = await getLatestVersion(channel);
     const latestBranch = generateBranchName({ channel, obsidianVersion: latestBranchVersion });
@@ -109,6 +176,74 @@ async function main(): Promise<void> {
     // `npm run release` dispatches the release workflow (publish-release.yml) on main itself.
     await execFromRoot('npm run release');
   }
+}
+
+async function reportBranchNeedingPackage(
+  branchSpec: BranchSpec,
+  registryState: Exclude<PackageRegistryState, 'released'>,
+  baseBranchVersions: Readonly<Record<Channel, string>>
+): Promise<void> {
+  const branchName = generateBranchName(branchSpec);
+  const packageName = getScopedPackageName(branchSpec);
+  const { channel, obsidianVersion } = branchSpec;
+  const baseBranchName = generateBranchName(selectLatestBranch(baseBranchVersions.catalyst, baseBranchVersions.public));
+
+  const packageSteps = registryState === 'missing'
+    ? [
+      `\`${packageName}\` does not exist on npm yet. CI publishes through trusted publishing, which can only be attached to a`,
+      'package that already exists, so the name has to be claimed from a maintainer\'s machine, with 2FA. From `main`:',
+      '',
+      '```bash',
+      'git fetch origin',
+      `npm run bootstrap-new-package -- ${obsidianVersion} ${channel}`,
+      '```',
+      '',
+      'It publishes a placeholder, attaches the trusted publisher, and then dispatches the first release.'
+    ]
+    : [
+      `\`${packageName}\` holds only the bootstrap placeholder, so its trusted publisher may not be attached yet. From \`main\`:`,
+      '',
+      '```bash',
+      'git fetch origin',
+      `npm run bootstrap-new-package -- ${obsidianVersion} ${channel}`,
+      '```',
+      '',
+      'It skips the claimed name, attaches the publisher if it is missing, and then dispatches the first release.'
+    ];
+
+  await fileIssueOnce(
+    `Publish the first release of ${branchName}`,
+    [
+      `Obsidian ${obsidianVersion} ${channel} was released, so \`check-obsidian-package-update\` cut \`${branchName}\` from`
+      + ` \`${baseBranchName}\`. Two steps are left that it cannot take by itself.`,
+      '',
+      '## 1. The npm package',
+      '',
+      ...packageSteps,
+      '',
+      '## 2. The typings',
+      '',
+      `The branch carries \`${baseBranchName}\`'s typings unchanged. Bringing them in line with what changed inside`
+      + ` Obsidian ${obsidianVersion} needs a crawler run against that build, which a maintainer runs.`
+    ].join('\n')
+  );
+}
+
+async function reportSkippedRelease(skippedRelease: SkippedRelease): Promise<void> {
+  const { channel, obsidianVersion } = skippedRelease.branchSpec;
+
+  await fileIssueOnce(
+    `Obsidian ${obsidianVersion} ${channel} has no release branch`,
+    [
+      `Obsidian ${obsidianVersion} ${channel} was released, but \`check-obsidian-package-update\` could not cut`
+      + ` \`${generateBranchName(skippedRelease.branchSpec)}\` for it:`,
+      '',
+      `> ${skippedRelease.reason}`,
+      '',
+      'A new release branch is always cut from the latest one, so a version that ranks below it has nothing to be'
+      + ' cut from. Decide whether this version needs typings of its own; close this issue if it does not.'
+    ].join('\n')
+  );
 }
 
 async function withRetry<T>(description: string, function_: () => Promise<T>): Promise<T> {

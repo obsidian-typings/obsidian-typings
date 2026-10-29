@@ -3,36 +3,16 @@ import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
 import type { BranchSpec } from './helpers/branch-spec.ts';
 
-import {
-  assertNewBranchFollowsLatest,
-  selectLatestBranch
-} from './helpers/base-branch.ts';
 import { generateBranchName } from './helpers/branch-spec.ts';
-import {
-  CHANGELOG_FILE_NAME,
-  createInitialChangelog,
-  writeChangelog
-} from './helpers/changelog.ts';
 import { restoreWorkflowScripts } from './helpers/checkout.ts';
-import { commit } from './helpers/git.ts';
 import { offerRelease } from './helpers/hand-back.ts';
 import {
-  editPackageJson,
-  editPackageLockJson
-} from './helpers/json.ts';
-import {
   getNpmUsername,
-  getPackageRegistryState,
   getScopedPackageName,
   resolveTrustedPublisherState
 } from './helpers/npm.ts';
-import {
-  generateMainReadme,
-  generateReadme
-} from './helpers/readme-generator.ts';
-import { getLatestVersion } from './helpers/version.ts';
-
-const INITIAL_BRANCH_VERSION = '1.0.0';
+import { generateMainReadme } from './helpers/readme-generator.ts';
+import { cutReleaseBranch } from './helpers/release-branch.ts';
 
 async function main(): Promise<void> {
   const [, , newVersionArgument, newVersionChannelArgument, changelogUrlArgument] = process.argv;
@@ -44,59 +24,20 @@ async function main(): Promise<void> {
     throw new Error('Usage: jiti ./workflow-scripts/create-new-release-branch.ts <newVersion> <public|catalyst> <changelogUrl>');
   }
 
-  const latestPublicVersion = await getLatestVersion('public');
-  const latestCatalystVersion = await getLatestVersion('catalyst');
-
-  // Both decisions live in `helpers/base-branch.ts`, where they are pure and tested: this file runs `main()`
-  // the moment it is imported.
-  const latestBranchSpec = selectLatestBranch(latestCatalystVersion, latestPublicVersion);
   const newBranchSpec: BranchSpec = { channel: newVersionChannel, obsidianVersion: newVersion };
-  assertNewBranchFollowsLatest(newBranchSpec, latestBranchSpec);
-
-  const latestBranch = generateBranchName(latestBranchSpec);
   const newBranch = generateBranchName(newBranchSpec);
 
-  // The base branch NAME is chosen from the REMOTE refs -- `getLatestVersion()` fetches and reads
-  // `origin/release/obsidian-<channel>/*` -- so the base CONTENT has to come from the remote ref too.
-  // A bare `git checkout "${latestBranch}"` cuts from whatever the LOCAL ref happens to be, which
-  // silently bases a release branch on stale content when the local checkout is behind, and smuggles
-  // local unpushed commits into it when the local checkout is ahead. Branching straight off
-  // `origin/${latestBranch}` also leaves the local branch alone, so local work is neither destroyed
-  // nor shipped. `--no-track` keeps the new branch from inheriting the base's upstream; the
-  // `git push -u` below sets its own. `getLatestVersion()` has already fetched, so `origin/...` is current.
-  await execFromRoot(`git checkout -b "${newBranch}" --no-track "origin/${latestBranch}"`);
-
-  // Release branches `.gitignore` `/workflow-scripts`, so these arrive as ignored untracked files that
-  // survive every later branch switch and are never committed. They have to be in place before
-  // `generateReadme()` (it reads `./workflow-scripts/README.template.md`) and before `npm run release`.
-  await restoreWorkflowScripts();
-  await resetBranchState();
-  await execFromRoot(`git push -u origin "${newBranch}"`);
-  await generateReadme(newBranchSpec, changelogUrl);
-
-  // A new Obsidian version means a package name npm has never seen, and CI cannot create one: it publishes
-  // through trusted publishing, which is configured per package and so requires the package to already
-  // exist. So the steps that need a human are handed back to the human rather than dispatched into.
+  // The cut is shared with `check-obsidian-package-update.ts`, which runs it unattended; what follows it here
+  // is the interactive half. So the steps that need a human are handed back to the human rather than
+  // dispatched into.
   //
-  // "Exists" is NOT the predicate for "the hand-back is done", which is what this used to ask. The hand-back
-  // is two steps -- claim the name, then attach its trusted publisher -- and this unauthenticated check sees
-  // only the first of them: has anything ever published through this name? A package carrying a real release
-  // has already published from this very workflow, so its publisher is attached; one carrying only the
-  // bootstrap placeholder has not, and this check cannot tell why.
-  //
-  // It used to be the ONLY question available, on the belief that npm exposes no way to read a package's
-  // publisher. `npm trust list` is that way, and the `placeholderOnly` arm below now asks it -- but only
-  // there, and only as a second question. It is authenticated and 2FA-gated, so it answers from a logged-in
-  // machine and nowhere else, while this one answers anywhere; and it would be a waste on the `released` arm,
-  // which is already certain. See `readTrustedPublisherState` for both measurements.
-  //
-  // What it does NOT mean any more is that a wrong guess is expensive. The two runs that died with a bare
-  // `E404` on 2026-09-14 -- `obsidian-catalyst/1.14.0` and `1.14.1` -- each burned a minor and left a tag
-  // behind because the publish was attempted after the bump, the commit, the tag and the push.
-  // `publish-release.ts` now asks npm for the publish right before any of that, so the same mistake today
-  // costs a red run and nothing else.
+  // A wrong guess about the publisher is not expensive. The two runs that died with a bare `E404` on
+  // 2026-09-14 -- `obsidian-catalyst/1.14.0` and `1.14.1` -- each burned a minor and left a tag behind
+  // because the publish was attempted after the bump, the commit, the tag and the push. `publish-release.ts`
+  // now asks npm for the publish right before any of that, so the same mistake today costs a red run and
+  // nothing else.
+  const registryState = await cutReleaseBranch(newBranchSpec, changelogUrl);
   const packageName = getScopedPackageName(newBranchSpec);
-  const registryState = await getPackageRegistryState(packageName);
 
   if (registryState === 'released') {
     // Publish the new branch right away, so it never sits created-but-unreleased.
@@ -186,49 +127,6 @@ function printTrustedPublisherPending(packageName: string): void {
     'The name is claimed -- a bootstrap placeholder holds it -- so the first half of the hand-back is done,',
     'and its trusted publisher is the only step that can still be outstanding. Asking npm.'
   ].join('\n'));
-}
-
-/**
- * Puts the freshly cut branch into the state a brand-new package starts from.
- *
- * TWO things reset, and the second is as load-bearing as the first. A new branch mints a package name npm has
- * never seen -- `getScopedPackageName` builds it from the Obsidian version -- so its version restarts at
- * {@link INITIAL_BRANCH_VERSION}, and its changelog has to restart with it. Inheriting the base branch's
- * changelog would publish another package's history under a numbering that has just gone back to `1.0.0`.
- *
- * That was invisible until 2026-09-23, because the file was a three-line stub every branch inherited from
- * every other and nothing ever wrote it. `publish-release.ts` now writes a real one per release, which is
- * what makes the reset necessary rather than merely tidy.
- */
-async function resetBranchState(): Promise<void> {
-  await resetPackageVersion();
-  await writeChangelog(createInitialChangelog());
-
-  await execFromRoot(`git add package.json package-lock.json ${CHANGELOG_FILE_NAME}`);
-
-  const stagedFileNames = await execFromRoot('git diff --staged --name-only', { isQuiet: true });
-  const hasChanges = stagedFileNames.trim() !== '';
-  if (!hasChanges) {
-    console.log(`Version is already ${INITIAL_BRANCH_VERSION} and the changelog is already empty, skipping the reset commit.`);
-    return;
-  }
-
-  await commit(`chore(release): reset to ${INITIAL_BRANCH_VERSION}`);
-}
-
-async function resetPackageVersion(): Promise<void> {
-  await editPackageJson((packageJson) => {
-    packageJson.version = INITIAL_BRANCH_VERSION;
-  });
-
-  await editPackageLockJson((packageLockJson) => {
-    packageLockJson.version = INITIAL_BRANCH_VERSION;
-
-    const defaultPackage = packageLockJson.packages?.[''];
-    if (defaultPackage) {
-      defaultPackage.version = INITIAL_BRANCH_VERSION;
-    }
-  });
 }
 
 await wrapCliTask(main);
