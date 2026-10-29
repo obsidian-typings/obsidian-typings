@@ -47,19 +47,7 @@ export function mergeClassIntoType(target: TypeInfo, cls: ClassDeclaration, isOf
     }
   }
   for (const method of cls.getMethods()) {
-    const info = extractMethodInfo(method, isOfficial);
-    const existingByKey = target.methods.find((m) => m.overloadKey === info.overloadKey);
-    const existingExact = target.methods.find((m) => m.name === info.name && m.signature === info.signature);
-    if (existingExact) {
-      if (!isOfficial && info.description) {
-        existingExact.description = info.description;
-      }
-    } else if (existingByKey && !isOfficial) {
-      const index = target.methods.indexOf(existingByKey);
-      target.methods[index] = info;
-    } else if (!existingByKey) {
-      target.methods.push(info);
-    }
+    mergeMethodOverload(target, extractMethodInfo(method, isOfficial), isOfficial);
   }
   for (const prop of cls.getProperties()) {
     const info = extractPropertyInfo(prop, isOfficial);
@@ -86,32 +74,7 @@ export function mergeInterfaceIntoType(target: TypeInfo, iface: InterfaceDeclara
     }
   }
   for (const method of iface.getMethods()) {
-    const info = extractMethodSignatureInfo(method, isOfficial);
-    // Strip __ suffix for matching: getSuggestions__ should match getSuggestions
-    const baseName = info.name.replace(/__$/, '');
-    const baseKey = info.overloadKey.replace(/__(?=\(|$)/, '');
-    // Deduplicate by overload key — prefer our (unofficial) version over official
-    const existingByKey = target.methods.find((m) => m.overloadKey === info.overloadKey || m.overloadKey === baseKey);
-    const existingExact = target.methods.find((m) => m.name === info.name && m.signature === info.signature);
-    if (existingExact) {
-      if (!isOfficial && info.description) {
-        existingExact.description = info.description;
-      }
-    } else if (existingByKey && !isOfficial) {
-      // Replace official version with our augmented version (more precise types/docs)
-      // Keep the official name (without __) but use our description, examples, etc.
-      const index = target.methods.indexOf(existingByKey);
-      target.methods[index] = {
-        ...info,
-        name: baseName,
-        overloadKey: baseKey,
-        // A function replacer, not a string one: a `$` in `baseName` would otherwise be read as a
-        // replacement pattern rather than as itself.
-        signature: info.signature.replace(new RegExp(`^${info.name}`), () => baseName)
-      };
-    } else if (!existingByKey) {
-      target.methods.push(info);
-    }
+    mergeMethodOverload(target, extractMethodSignatureInfo(method, isOfficial), isOfficial);
   }
   for (const prop of iface.getProperties()) {
     const info = extractPropertySignatureInfo(prop, isOfficial);
@@ -138,6 +101,57 @@ export function mergeInterfaceIntoType(target: TypeInfo, iface: InterfaceDeclara
   if (!isOfficial && remarks) {
     target.remarks = remarks;
   }
+}
+
+/**
+ * Members an augmentation has already redeclared, so a later redeclaration of the same overload key picks a different
+ * official overload instead of overwriting this one.
+ */
+const redeclaredMembers = new WeakSet<MemberInfo>();
+
+/**
+ * Merge one method signature into a type, keeping every overload. TypeScript merges each declaration of a method into
+ * one overload list, so every declaration is a callable signature. The one exception is an augmentation member tagged
+ * `@official` (or named with the `__` suffix): it redeclares an official overload with more precise types and docs, so
+ * it replaces the official overload it matches - same parameter names, else same parameter count, else the first one
+ * left - rather than adding a near-duplicate beside it.
+ */
+export function mergeMethodOverload(target: TypeInfo, info: MemberInfo, isOfficial: boolean): void {
+  // Strip __ suffix for matching: getSuggestions__ should match getSuggestions
+  const baseName = info.name.replace(/__$/, '');
+  const baseKey = info.overloadKey.replace(/__(?=\(|$)/, '');
+  const existingExact = target.methods.find((m) => m.name === info.name && m.signature === info.signature);
+  if (existingExact) {
+    if (!isOfficial && info.description) {
+      existingExact.description = info.description;
+    }
+    if (!isOfficial) {
+      redeclaredMembers.add(existingExact);
+    }
+    return;
+  }
+
+  const isRedeclaration = !isOfficial && (info.isOfficial || baseName !== info.name);
+  const replaced = isRedeclaration ? findRedeclaredOverload(target.methods, info, baseKey) : undefined;
+  if (!replaced) {
+    target.methods.push(info);
+    if (!isOfficial) {
+      redeclaredMembers.add(info);
+    }
+    return;
+  }
+
+  // Keep the official name (without __) but use our description, examples, etc.
+  const merged: MemberInfo = {
+    ...info,
+    name: baseName,
+    overloadKey: baseKey,
+    // A function replacer, not a string one: a `$` in `baseName` would otherwise be read as a
+    // replacement pattern rather than as itself.
+    signature: info.signature.replace(new RegExp(`^${info.name}`), () => baseName)
+  };
+  target.methods[target.methods.indexOf(replaced)] = merged;
+  redeclaredMembers.add(merged);
 }
 
 /**
@@ -239,4 +253,16 @@ export function updateNamespaceIfMoreSpecific(existing: TypeInfo, namespace: str
   if (!isOfficial && namespace.startsWith(`${existing.namespace}/`)) {
     existing.namespace = namespace;
   }
+}
+
+/**
+ * Find the official overload an augmentation redeclares: one with the same overload key that no augmentation has
+ * redeclared yet, preferring the same parameter names, then the same parameter count.
+ */
+function findRedeclaredOverload(methods: MemberInfo[], info: MemberInfo, baseKey: string): MemberInfo | undefined {
+  const candidates = methods.filter((m) => m.isOfficial && !redeclaredMembers.has(m) && (m.overloadKey === info.overloadKey || m.overloadKey === baseKey));
+  const parameterNames = info.parameters.map((p) => p.name).join(',');
+  return candidates.find((m) => m.parameters.map((p) => p.name).join(',') === parameterNames)
+    ?? candidates.find((m) => m.parameters.length === info.parameters.length)
+    ?? candidates[0];
 }
