@@ -29,12 +29,12 @@ export interface MapOfSets<Key, Value> {
   delete(key: Key, value: Value): void;
 
   /**
-   * Get the set of values for the given key, or `null` if not found.
+   * Get the set of values for the given key, or `undefined` if not found.
    *
    * @param key - The key.
-   * @returns Set of values, or `null`.
+   * @returns Set of values, or `undefined`.
    */
-  get(key: Key): null | Set<Value>;
+  get(key: Key): Set<Value> | undefined;
 
   /**
    * Get the values for the given key as an array.
