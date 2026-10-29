@@ -201,8 +201,17 @@ export async function generateMemberPages(name: string, info: TypeInfo, allTypes
       }
     }
 
+    // The bare-name page doubles as the hub when the name also has overloads on pages of their own
+    const siblingKeys = [...overloadGroups.keys()].filter((key) => key !== overloadKey && overloadGroups.get(key)?.[0]?.name === overloadKey);
+    if (siblingKeys.length > 0) {
+      lines.push('## Other overloads', '');
+      renderOverloadHubTable(lines, siblingKeys, overloadGroups, `${BASE_PATH}/api/${nsDirectory}/${typeDirectory}`, allTypes);
+    }
+
     await writeFile(filePath, lines.join('\n'), 'utf-8');
   }
+
+  await generateOverloadHubPages(name, nsDirectory, overloadGroups, new Set(props.map((p) => memberSlug(p.name))), allTypes);
 }
 
 export async function generateNamespaceIndexPages(types: Map<string, TypeInfo>, allTypes: Map<string, TypeInfo>): Promise<void> {
@@ -251,6 +260,50 @@ export async function generateNamespaceIndexPages(types: Map<string, TypeInfo>, 
       lines.push('');
     }
 
+    await writeFile(filePath, lines.join('\n'), 'utf-8');
+  }
+}
+
+/**
+ * Write a hub page for each method name whose overloads live on pages of their own (`on('changed')`, `on('deleted')`,
+ * ...) and that has no bare-name overload page to carry the list, linking every overload of that name.
+ */
+export async function generateOverloadHubPages(
+  typeName: string,
+  nsDirectory: string,
+  overloadGroups: Map<string, MemberInfo[]>,
+  takenSlugs: Set<string>,
+  allTypes: Map<string, TypeInfo>
+): Promise<void> {
+  const keysByName = new Map<string, string[]>();
+  for (const [key, overloads] of overloadGroups) {
+    const methodName = overloads[0]?.name ?? key;
+    keysByName.set(methodName, [...keysByName.get(methodName) ?? [], key]);
+  }
+
+  for (const [methodName, keys] of keysByName) {
+    const slug = overloadSlug(methodName);
+    if (keys.length <= 1 || overloadGroups.has(methodName) || takenSlugs.has(slug)) {
+      continue;
+    }
+
+    const filePath = join(OUTPUT_DIR, nsDirectory, typeName, `${slug}.mdx`);
+    await ensureDirectory(filePath);
+    const title = `${typeName}.${methodName}`;
+    const lines: string[] = [
+      '---',
+      `title: "${escapeYaml(`${title} method`)}"`,
+      'editUrl: false',
+      'sidebar:',
+      `  label: "${escapeYaml(title)}"`,
+      '---',
+      '',
+      `[${typeName}](${BASE_PATH}/api/${nsDirectory}/${typeName}/) › ${methodName}`,
+      '',
+      `\`${methodName}\` has ${String(keys.length)} overloads, each on a page of its own:`,
+      ''
+    ];
+    renderOverloadHubTable(lines, keys, overloadGroups, `${BASE_PATH}/api/${nsDirectory}/${typeName}`, allTypes);
     await writeFile(filePath, lines.join('\n'), 'utf-8');
   }
 }
@@ -490,12 +543,7 @@ export function renderMethodTableMdx(lines: string[], info: TypeInfo, allTypes: 
   for (const method of methods) {
     const status = renderApiStatus(method.isOfficial);
     const desc = escapeJsString(markdownToHtml(resolveLinks(method.description, allTypes)));
-    const staticPrefix = method.isStatic ? 'static ' : '';
-    const shortParams = method.parameters.map((p, index) => {
-      return index === 0 && EVENT_METHODS.has(method.name) && (p.type.startsWith('"') || p.type.startsWith('\'')) ? p.type.replaceAll('"', '\'') : p.name;
-    }).join(', ');
-    const shortSig = `${staticPrefix}${method.name}(${shortParams})`;
-    const sig = escapeJsString(shortSig);
+    const sig = escapeJsString(renderShortSignature(method));
     const slug = overloadSlug(method.overloadKey);
     const returnType = markdownToHtml(renderTypeWithLinks(method.returnType, allTypes, info.name));
     const inheritedAttr = method.inheritedFrom ? `, inheritedFrom: "${escapeJsString(markdownToHtml(typeLink(method.inheritedFrom, allTypes)))}"` : '';
@@ -505,6 +553,26 @@ export function renderMethodTableMdx(lines: string[], info: TypeInfo, allTypes: 
     );
   }
   lines.push(']} />', '');
+}
+
+/**
+ * Render a table with one row per overload of the given overload keys, each linking to its key's page.
+ */
+export function renderOverloadHubTable(
+  lines: string[],
+  keys: string[],
+  overloadGroups: Map<string, MemberInfo[]>,
+  typeHref: string,
+  allTypes: Map<string, TypeInfo>
+): void {
+  lines.push('| Overload | Description |', '| :-- | :-- |');
+  for (const key of [...keys].sort((a, b) => a.localeCompare(b))) {
+    for (const overload of overloadGroups.get(key) ?? []) {
+      const href = `${typeHref}/${overloadSlug(key)}/`;
+      lines.push(`| [\`${renderShortSignature(overload)}\`](${href}) | ${escapeMarkdown(resolveLinks(overload.description, allTypes))} |`);
+    }
+  }
+  lines.push('');
 }
 
 export function renderPropertyTableMdx(lines: string[], info: TypeInfo, allTypes: Map<string, TypeInfo>): void {
@@ -524,6 +592,18 @@ export function renderPropertyTableMdx(lines: string[], info: TypeInfo, allTypes
     );
   }
   lines.push(']} />', '');
+}
+
+/**
+ * Render a method's short signature: its parameter names, or the literal itself for an event method's literal first
+ * parameter, as in `on('changed', callback, ctx?)`.
+ */
+export function renderShortSignature(method: MemberInfo): string {
+  const staticPrefix = method.isStatic ? 'static ' : '';
+  const shortParams = method.parameters.map((p, index) => {
+    return index === 0 && EVENT_METHODS.has(method.name) && (p.type.startsWith('"') || p.type.startsWith('\'')) ? p.type.replaceAll('"', '\'') : p.name;
+  }).join(', ');
+  return `${staticPrefix}${method.name}(${shortParams})`;
 }
 
 export function sidebarTreeToEntries(node: SidebarTreeNode, label: string): SidebarEntry {
