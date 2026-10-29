@@ -1,5 +1,6 @@
 import type { getMenuConstructor } from '../implementations/constructors/augmentations/getMenuConstructor.d.ts';
 import type { MenuSubmenuConfigRecord } from '../internals/MenuSubmenuConfigRecord.d.ts';
+import type { SheetPresenter } from '../internals/SheetPresenter.d.ts';
 import type { Submenu } from '../internals/Submenu.d.ts';
 
 export {};
@@ -9,13 +10,6 @@ declare module 'obsidian' {
    * A component for context menus.
    */
   interface Menu extends Component, HistoryHandler {
-    /**
-     * Background for the suggestion menu.
-     *
-     * @unofficial
-     */
-    bgEl: HTMLElement;
-
     /**
      * The currently active submenu, if any.
      *
@@ -43,6 +37,13 @@ declare module 'obsidian' {
      * @unofficial
      */
     parentMenu: Menu | null;
+
+    /**
+     * Shows the menu in place, or as a sheet on phones; owns the background element the menu used to carry as `bgEl`.
+     *
+     * @unofficial
+     */
+    presenter: SheetPresenter;
 
     /**
      * {@link obsidian#Scope} in which the menu is active.

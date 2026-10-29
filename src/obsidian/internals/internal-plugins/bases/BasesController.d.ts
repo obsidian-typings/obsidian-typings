@@ -1,6 +1,7 @@
 import type {
   App,
   BasesEntry,
+  BasesPropertyId,
   Component,
   Debouncer,
   Events,
@@ -262,12 +263,12 @@ export interface BasesController extends Component {
   getViewConfig(): unknown;
 
   /**
-   * Gets the widget for an ident.
+   * Gets the widget type identifier for a property.
    *
-   * @param type - The identifier type.
+   * @param property - The property.
    * @returns The widget type string.
    */
-  getWidgetForIdent(type: string): string;
+  getWidgetForProperty(property: BasesPropertyId): string;
 
   /**
    * Notifies the view.

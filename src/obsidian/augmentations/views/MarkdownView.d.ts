@@ -469,6 +469,13 @@ declare module 'obsidian' {
     showSearch(replace?: boolean): void;
 
     /**
+     * Switch the leaf to source mode and focus the editor after the properties, used by the "Show source" button of invalid properties.
+     *
+     * @unofficial
+     */
+    showSource(): void;
+
+    /**
      * Syncs the current scroll position and triggers the markdown-scroll event.
      *
      * @unofficial

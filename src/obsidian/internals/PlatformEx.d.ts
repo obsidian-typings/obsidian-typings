@@ -63,6 +63,11 @@ export interface PlatformEx {
   deviceName: string;
 
   /**
+   * Whether the device supports haptic feedback, filled in at startup by the mobile app's haptics plugin. Always `false` in the desktop app.
+   */
+  hasHaptics: boolean;
+
+  /**
    * Whether a hardware keyboard is attached. Always `true` in the desktop app.
    */
   hasPhysicalKeyboard: boolean;

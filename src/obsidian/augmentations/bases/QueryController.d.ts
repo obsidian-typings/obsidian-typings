@@ -302,6 +302,15 @@ declare module 'obsidian' {
     displayError(type: string, error: Error): void;
 
     /**
+     * Evaluates a property against the controller's mock context, without an entry.
+     *
+     * @param property - The property.
+     * @returns The evaluated value.
+     * @unofficial
+     */
+    evaluateProperty(property: BasesPropertyId): Value;
+
+    /**
      * Pre-evaluates the properties relevant to the given entries.
      *
      * @param entries - The entries whose relevant properties to evaluate.
@@ -392,13 +401,13 @@ declare module 'obsidian' {
     getViewConfig(): BasesViewConfig;
 
     /**
-     * Gets the widget type identifier for a property identifier.
+     * Gets the widget type identifier for a property.
      *
-     * @param ident - The property identifier.
+     * @param property - The property.
      * @returns The widget type identifier.
      * @unofficial
      */
-    getWidgetForIdent(ident: string): string;
+    getWidgetForProperty(property: BasesPropertyId): string;
 
     /**
      * Loads collapsed group identifiers from local storage for views still present in the query.

@@ -140,6 +140,15 @@ declare module 'obsidian' {
     getPropertyConfig(property: BasesPropertyId): unknown;
 
     /**
+     * Gets how many of the results the view shows: the result count capped by {@link BasesViewConfig.getLimit} when a limit is set.
+     *
+     * @param resultCount - The number of results.
+     * @returns The number of results shown.
+     * @unofficial
+     */
+    getShownCount(resultCount: number): number;
+
+    /**
      * Retrieve the sorting config for this view. Sort is configured by the user through the sort toolbar menu.
      * Removes invalid sort configs. If no (valid) sort config, returns an empty array.
      * Does not validate that the properties exists.
