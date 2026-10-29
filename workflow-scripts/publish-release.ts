@@ -29,11 +29,16 @@ import {
 } from './helpers/git.ts';
 import { assertRunningInGitHubActions } from './helpers/github-actions.ts';
 import {
+  closeFirstReleaseIssue,
+  getGitHubIssuesContext
+} from './helpers/github-issues.ts';
+import {
   editPackageJson,
   editPackageLockJson,
   toJson
 } from './helpers/json.ts';
 import {
+  buildScopedTagName,
   getLatestWrapperPackageName,
   getPackageRegistryState,
   getScopedPackageName,
@@ -185,8 +190,26 @@ async function assertCanPublish(branchSpec: BranchSpec, isLatest: boolean): Prom
   ].join('\n'));
 }
 
-function buildScopedTagName(branchSpec: BranchSpec, releaseVersion: string): string {
-  return `obsidian-${branchSpec.channel}-${branchSpec.obsidianVersion}-v${releaseVersion}`;
+/**
+ * Closes the branch's first-release issue, now that its package is on npm, and only warns when that fails.
+ *
+ * It runs after the publish and the push, so an issue whose release failed stays open. A failure here must not
+ * fail the release it reports on: the version is already spent, and `check-obsidian-package-update` closes a
+ * first-release issue of a released package on its next run anyway.
+ */
+async function closeFirstReleaseIssueQuietly(branchSpec: BranchSpec, version: string): Promise<void> {
+  const context = getGitHubIssuesContext();
+
+  if (!context) {
+    console.warn('No GITHUB_TOKEN or GITHUB_REPOSITORY, so the first-release issue is left as it is.');
+    return;
+  }
+
+  try {
+    await closeFirstReleaseIssue(context, branchSpec, version);
+  } catch (error) {
+    console.warn(`::warning::Could not close the first-release issue: ${String(error)}`);
+  }
 }
 
 /**
@@ -344,6 +367,8 @@ async function main(): Promise<void> {
     targetCommitish: branchName,
     zipFileName
   });
+
+  await closeFirstReleaseIssueQuietly(branchSpec, nextVersion);
 
   /*
    * Everything below this line reads `README.md` off the worktree, and every one of them wants main's -- the

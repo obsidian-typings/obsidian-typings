@@ -19,6 +19,8 @@ jobs:
       # Mints the OIDC token that npm trusted publishing exchanges for a short-lived, workflow-scoped
       # publish credential. Without it `npm publish` falls back to looking for a token and fails.
       id-token: write
+      # Closes the branch's "Publish the first release of ..." issue once its package is on npm.
+      issues: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout pushed branch
@@ -46,6 +48,7 @@ jobs:
           # long-lived npm credential in this repo at all. Every package published from here must have a
           # trusted publisher configured on npmjs.com pointing at this workflow file -- see AGENTS.md.
           IS_BETA: ${{ inputs.isBeta }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
         # Runs whenever the script got as far as pushing the tag, even if a later part of it failed. The script
         # sets `tagName` the moment the tag is on the remote, so a tag never goes without its release: on

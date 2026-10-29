@@ -13,9 +13,19 @@ import { generateBranchName } from './helpers/branch-spec.ts';
 import { restoreWorkflowScripts } from './helpers/checkout.ts';
 import { commit } from './helpers/git.ts';
 import { assertRunningInGitHubActions } from './helpers/github-actions.ts';
-import { fileIssueOnce } from './helpers/github-issues.ts';
+import {
+  closeIssue,
+  composeFirstReleaseComment,
+  fileIssueOnce,
+  getFirstReleaseIssueTitle,
+  getGitHubIssuesContext,
+  listOpenFirstReleaseIssues
+} from './helpers/github-issues.ts';
 import { readPackageJson } from './helpers/json.ts';
-import { getScopedPackageName } from './helpers/npm.ts';
+import {
+  getPackageRegistryState,
+  getScopedPackageName
+} from './helpers/npm.ts';
 import {
   fetchChangelogUrl,
   fetchLatestAppVersions,
@@ -37,6 +47,35 @@ import { getLatestVersion } from './helpers/version.ts';
  * `bootstrap-new-package.ts`), or bring the typings in line with the new build's internals, which is the
  * crawler's job and is run by a maintainer. Both are filed as one issue per branch.
  */
+/**
+ * Closes every open first-release issue whose package is already released.
+ *
+ * `publish-release` closes the issue itself when it publishes, so this catches what that misses: a release
+ * published before the close existed, or a close that failed after the publish. It reads the registry rather
+ * than any run's outcome, so an issue whose package is still unreleased stays open.
+ */
+async function closeIssuesOfReleasedBranches(): Promise<void> {
+  const context = getGitHubIssuesContext();
+
+  if (!context) {
+    console.warn('No GITHUB_TOKEN or GITHUB_REPOSITORY, so no first-release issue is checked.');
+    return;
+  }
+
+  for (const { branchSpec, issue } of await listOpenFirstReleaseIssues(context)) {
+    const packageName = getScopedPackageName(branchSpec);
+
+    if (await getPackageRegistryState(packageName) !== 'released') {
+      console.log(`${packageName} is not released yet, so ${issue.html_url} stays open.`);
+      continue;
+    }
+
+    const versionOutput = await execFromRoot(`npm view ${packageName} version`, { isQuiet: true });
+    const version = versionOutput.trim();
+    await closeIssue(context, issue, composeFirstReleaseComment(context.repo, branchSpec, version));
+  }
+}
+
 async function cutBranchesForNewObsidianVersions(): Promise<void> {
   const latestAppVersions = await withRetry('fetch the latest Obsidian app versions', fetchLatestAppVersions);
   const latestBranchVersions: Record<Channel, string> = {
@@ -122,6 +161,13 @@ async function main(): Promise<void> {
    * of this script that wants to be on `main`: the loop below checks out a release branch and stays there.
    */
   await generateMainReadme();
+
+  // A GitHub or registry hiccup here must not stop the branch cut below, and the next run tries again.
+  try {
+    await closeIssuesOfReleasedBranches();
+  } catch (error) {
+    console.warn(`::warning::Could not close the first-release issues of released branches: ${String(error)}`);
+  }
 
   // Before the npm loop, so a branch cut here is the latest branch that loop checks out.
   await cutBranchesForNewObsidianVersions();
@@ -212,19 +258,17 @@ async function reportBranchNeedingPackage(
     ];
 
   await fileIssueOnce(
-    `Publish the first release of ${branchName}`,
+    getFirstReleaseIssueTitle(branchName),
     [
       `Obsidian ${obsidianVersion} ${channel} was released, so \`check-obsidian-package-update\` cut \`${branchName}\` from`
-      + ` \`${baseBranchName}\`. Two steps are left that it cannot take by itself.`,
-      '',
-      '## 1. The npm package',
+      + ` \`${baseBranchName}\`. Publishing its first release takes a step it cannot take by itself.`,
       '',
       ...packageSteps,
       '',
-      '## 2. The typings',
+      'This issue closes itself once the first release is on npm.',
       '',
-      `The branch carries \`${baseBranchName}\`'s typings unchanged. Bringing them in line with what changed inside`
-      + ` Obsidian ${obsidianVersion} needs a crawler run against that build, which a maintainer runs.`
+      `It does not cover the typings: the branch carries \`${baseBranchName}\`'s typings unchanged until a crawler`
+      + ` pass against Obsidian ${obsidianVersion} updates them, which is tracked separately.`
     ].join('\n')
   );
 }
