@@ -83,9 +83,10 @@ declare module 'obsidian' {
      * Updates the file to match the updated title.
      *
      * @param titleEl - The current title element.
-     * @returns A promise that resolves when the title is saved.
+     * @returns A promise that resolves to `false` when the new name is invalid and the error is shown on the title,
+     * keeping the rename open; to `true` when the file was renamed, or when no rename of this view's file is active.
      * @unofficial
      */
-    saveTitle(titleEl: HTMLElement): Promise<void>;
+    saveTitle(titleEl: HTMLElement): Promise<boolean>;
   }
 }
