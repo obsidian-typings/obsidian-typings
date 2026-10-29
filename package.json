@@ -51,6 +51,7 @@
     "eslint": "$eslint",
     "eslint-plugin-import": "$eslint-plugin-import-x",
     "katex": "0.18.2",
+    "re2js": "^2.9.1",
     "smol-toml": "^1.8.0",
     "type-fest": "$type-fest",
     "typescript": "$typescript"

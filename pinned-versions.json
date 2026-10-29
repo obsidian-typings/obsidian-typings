@@ -17,6 +17,13 @@
       "expect": "^0.16.0",
       "manualCheck": "Remove the override when micromark-extension-math admits a patched KaTeX version, then reinstall and rerun npm audit and the Markdown gates."
     },
+    "re2js": {
+      "section": "overrides",
+      "why": "Clears GHSA-gg6h-894w-4m9c (RE2JS quadratic-time denial of service in lookbehind matching, >=2.2.0 <2.8.7). Reached only through markdownlint, whose newest release 0.42.0 pins re2js at the exact 2.8.6, and markdownlint-cli2 0.24.0 pins that markdownlint exactly in turn, so no bump reaches the fix. 2.9.1 is the version markdownlint itself moved to upstream, so the forced minor is the one it is tested against. NEVER take the `npm audit fix --force` remedy: it downgrades the toolkit packages.",
+      "check": "node -e \"const fs=require('node:fs');process.stdout.write(JSON.parse(fs.readFileSync('node_modules/markdownlint/package.json','utf8')).dependencies.re2js)\"",
+      "expect": "2.8.6",
+      "manualCheck": "The check reads the exact re2js pin of the installed markdownlint, which moves only when a markdownlint-cli2 release pins a newer markdownlint. When it reads 2.8.7 or later, drop the override and this entry and re-run `npm audit`."
+    },
     "smol-toml": {
       "section": "overrides",
       "why": "Clears GHSA-7w5x-hrqm-74c2 (smol-toml denial of service via malformed TOML documents, <=1.7.0), fixed in 1.7.1. No direct bump reaches it: markdownlint-cli2 pins smol-toml at the exact vulnerable 1.7.0 and is itself already latest, so nothing the caret sweep floats can move that copy. The forced version is not a hopeful one: this tree already carried 1.8.0 under cspell-config-lib alongside the vulnerable copy, so the override collapses the two into one rather than introducing anything, and 1.8.0 is a minor inside 1.x. Caret rather than exact because nothing here needs an upper bound - it is an advisory floor, so the sweep floats it like any other caret. NEVER take the `npm audit fix --force` remedy: it downgrades markdownlint-cli2 to 0.21.0, and a downgrade is never an acceptable way to clear an advisory.",
