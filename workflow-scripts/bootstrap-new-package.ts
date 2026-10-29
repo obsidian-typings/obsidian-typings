@@ -56,6 +56,7 @@ import process from 'node:process';
 import type { BranchSpec } from './helpers/branch-spec.ts';
 import type { TrustedPublisherState } from './helpers/npm.ts';
 
+import { withStartingBranchRestored } from './helpers/git.ts';
 import { offerRelease } from './helpers/hand-back.ts';
 import { writeJson } from './helpers/json.ts';
 import {
@@ -211,4 +212,6 @@ async function publishPlaceholder(packageName: string): Promise<void> {
   }
 }
 
-await wrapCliTask(main);
+// The release hand-back switches onto the release branch, since `npm run release` exists only there. This
+// script is run by hand from `main`, so it has to leave the checkout where it found it, failure included.
+await wrapCliTask(() => withStartingBranchRestored(main));
