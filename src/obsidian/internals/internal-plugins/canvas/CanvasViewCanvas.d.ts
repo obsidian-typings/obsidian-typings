@@ -79,9 +79,9 @@ export interface CanvasViewCanvas {
   edgeEndContainerEl: SVGElement;
 
   /**
-   * Mapping of edges to their source nodes.
+   * Edges grouped by the node they start from.
    */
-  edgeFrom: MapOfSets<CanvasViewCanvasEdge, CanvasViewCanvasNode>;
+  edgeFrom: MapOfSets<CanvasViewCanvasNode, CanvasViewCanvasEdge>;
 
   /**
    * Spatial index (R-tree) for efficient edge hit-testing.
@@ -94,9 +94,9 @@ export interface CanvasViewCanvas {
   edges: Map<string, CanvasViewCanvasEdge>;
 
   /**
-   * Mapping of edges to their target nodes.
+   * Edges grouped by the node they end at.
    */
-  edgeTo: MapOfSets<CanvasViewCanvasEdge, CanvasViewCanvasNode>;
+  edgeTo: MapOfSets<CanvasViewCanvasNode, CanvasViewCanvasEdge>;
 
   /**
    * Whether to finish the current viewport animation on the next frame.
