@@ -42,18 +42,18 @@ declare module 'obsidian' {
     lastSavedData: null | string;
 
     /**
-     * Whether on saving, the file should be saved again (for dirtiness checks).
+     * The write in progress, or `null` when the view is not saving; a save waits for it before starting another.
      *
      * @unofficial
      */
-    saveAgain: boolean;
+    savePromise: null | Promise<void>;
 
     /**
-     * Whether the file is currently saving.
+     * Whether the file is currently saving, i.e. whether {@link TextFileView.savePromise} is set.
      *
      * @unofficial
      */
-    saving: boolean;
+    readonly saving: boolean;
 
     /**
      * Clear the editor. This is usually called when we're about to open a completely
@@ -175,5 +175,16 @@ declare module 'obsidian' {
      * @since 0.10.12
      */
     setViewData__?(data: string, clear: boolean): void;
+
+    /**
+     * Write the data to the file once the adapter is ready. On failure it restores {@link TextFileView.lastSavedData}, shows a notice and stores a backup of the unsaved text before rethrowing.
+     *
+     * @param file - The file to write.
+     * @param data - The data to write.
+     * @param previousData - The last saved data, restored if the write fails.
+     * @returns A promise that resolves when the data is written.
+     * @unofficial
+     */
+    writeData(file: TFile, data: string, previousData: null | string): Promise<void>;
   }
 }

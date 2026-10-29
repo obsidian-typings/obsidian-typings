@@ -56,14 +56,9 @@ export interface WidgetEditorView extends EmbeddedEditorView {
   lastSavedData: null | string;
 
   /**
-   * Whether embedding should be saved twice on save.
+   * The write in progress, or `null` when the widget is not saving; a save waits for it before starting another.
    */
-  saveAgain: boolean;
-
-  /**
-   * Whether the widget is currently saving.
-   */
-  saving: boolean;
+  savePromise: null | Promise<void>;
 
   /**
    * Subpath reference of the path.
@@ -188,4 +183,19 @@ export interface WidgetEditorView extends EmbeddedEditorView {
    * @param show - Whether to show or hide the preview.
    */
   showPreview(show?: boolean): void;
+
+  /**
+   * Reveal the properties source: focus the editor when editing, otherwise open the file in source mode.
+   */
+  showSource(): void;
+
+  /**
+   * Write the full file contents once the adapter is ready. On failure it restores {@link WidgetEditorView.lastSavedData}, shows a notice and stores a backup of the unsaved text before rethrowing.
+   *
+   * @param file - The file to write.
+   * @param data - The full file contents to write.
+   * @param previousData - The last saved data, restored if the write fails.
+   * @returns A promise that resolves when the data is written.
+   */
+  writeData(file: TFile, data: string, previousData: null | string): Promise<void>;
 }

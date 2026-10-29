@@ -59,14 +59,19 @@ export interface DragManager {
   hoverEl: HTMLElement | null;
 
   /**
-   * Whether the drag-over event has been handled by a drop target.
-   */
-  isDragOverHandled: boolean;
-
-  /**
    * Overlay element shown during drag operations to indicate drop zones.
    */
   overlayEl: HTMLElement;
+
+  /**
+   * Whether the drop action text should be cleared after the current drag-over, unless a drop target calls {@link DragManager.setAction} first.
+   */
+  shouldClearAction: boolean;
+
+  /**
+   * Whether the hover highlight should be cleared after the current drag-over, unless a drop target calls {@link DragManager.updateHover} first.
+   */
+  shouldClearHover: boolean;
 
   /**
    * Whether the overlay should be hidden on the next update.

@@ -8,6 +8,7 @@ import type {
 
 import type { getPluginsConstructor } from '../../implementations/constructors/internals/getPluginsConstructor.d.ts';
 import type { PluginUpdateManifest } from '../PluginUpdateManifest.d.ts';
+import type { PluginReleaseFiles } from './PluginReleaseFiles.d.ts';
 import type { PluginsManifestsRecord } from './PluginsManifestsRecord.d.ts';
 import type { PluginsPluginsRecord } from './PluginsPluginsRecord.d.ts';
 
@@ -253,4 +254,13 @@ export interface Plugins extends Events {
    * @returns A promise that resolves when the plugin is unloaded.
    */
   unloadPlugin(id: string, isUserDisabled?: boolean): Promise<void>;
+
+  /**
+   * Write a plugin's release files into its folder under {@link Plugins.getPluginFolder}, creating the folders as needed and removing a stale `styles.css` when the release has none.
+   *
+   * @param id - {@link obsidian#Plugin} ID.
+   * @param files - The downloaded release files.
+   * @returns A promise that resolves to the plugin's folder path.
+   */
+  writePluginFiles(id: string, files: PluginReleaseFiles): Promise<string>;
 }

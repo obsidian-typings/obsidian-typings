@@ -251,11 +251,13 @@ declare global {
     pdfjsTestingUtils: PdfJsTestingUtils;
 
     /**
-     * PixiJS library for 2D rendering (used for canvas views).
+     * PixiJS library for 2D rendering (used for the graph view).
+     *
+     * Not loaded at startup: unset until {@link obsidian#loadPixi} (or a view that needs it) has loaded it.
      *
      * @unofficial
      */
-    PIXI: PixiModule;
+    PIXI?: PixiModule;
 
     /**
      * Prism.js syntax highlighting library instance.

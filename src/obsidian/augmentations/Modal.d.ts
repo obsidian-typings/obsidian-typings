@@ -65,6 +65,13 @@ declare module 'obsidian' {
     headerEl: HTMLDivElement;
 
     /**
+     * Whether the current opening animates, set from {@link Modal.canAnimate} on each {@link Modal.open}; it also gates swipe-to-dismiss on the header.
+     *
+     * @unofficial
+     */
+    isAnimated: boolean;
+
+    /**
      * Whether the modal is currently open.
      *
      * @unofficial

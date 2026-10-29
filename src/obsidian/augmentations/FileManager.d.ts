@@ -1,4 +1,5 @@
 import type { getFileManagerConstructor } from '../implementations/constructors/augmentations/getFileManagerConstructor.d.ts';
+import type { HeadingSectionParts } from '../internals/HeadingSectionParts.d.ts';
 import type { LinkUpdate } from '../internals/link-update/LinkUpdate.d.ts';
 import type { LinkUpdatesHandler } from '../internals/link-update/LinkUpdatesHandler.d.ts';
 import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
@@ -219,15 +220,29 @@ declare module 'obsidian' {
     getOrCreateFolder(path: string): Promise<TFolder>;
 
     /**
-     * Insert text into a file.
+     * Insert text into a file, or into one heading's section of it.
      *
      * @param file - The file to insert into.
      * @param text - The text to insert.
-     * @param position - Where to insert the text.
+     * @param position - Where to insert the text. Defaults to `'append'`.
+     * @param heading - The heading whose section receives the text. Throws when the note has no such heading.
+     * @param spacing - What separates the inserted text from the existing text: nothing, a line break, or (`'auto'`, the default) a blank line unless one is already there.
      * @returns A promise that resolves when the text is inserted.
      * @unofficial
      */
-    insertIntoFile(file: TFile, text: string, position?: 'append' | 'prepend'): Promise<void>;
+    insertIntoFile(file: TFile, text: string, position?: 'append' | 'prepend', heading?: string, spacing?: 'auto' | 'inline' | 'newline'): Promise<void>;
+
+    /**
+     * Insert text at the start or end of a heading's section, after any leading or before any trailing blank lines.
+     *
+     * @param section - The note's text split around the section.
+     * @param text - The text to insert.
+     * @param position - Whether to insert at the start or the end of the section.
+     * @param separator - The text placed between the inserted text and the section's existing text.
+     * @returns The note's whole new text.
+     * @unofficial
+     */
+    insertIntoHeadingSection(section: HeadingSectionParts, text: string, position: 'append' | 'prepend', separator: string): string;
 
     /**
      * Shows a notice offering to undo a bulk file modification, reverting each file to its captured state.
