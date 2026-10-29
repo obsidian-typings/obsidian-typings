@@ -93,13 +93,6 @@ declare module 'obsidian' {
     selection: null | WindowSelection;
 
     /**
-     * Whether the modal should animate
-     *
-     * @unofficial
-     */
-    shouldAnimate: boolean;
-
-    /**
      * Whether opening the modal should animate.
      *
      * @unofficial
