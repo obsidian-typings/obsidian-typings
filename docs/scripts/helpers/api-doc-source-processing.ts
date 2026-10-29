@@ -1,4 +1,7 @@
-import type { SourceFile } from 'ts-morph';
+import type {
+  FunctionDeclaration,
+  SourceFile
+} from 'ts-morph';
 
 import { createHash } from 'node:crypto';
 import {
@@ -18,13 +21,11 @@ import { GENERIC_TYPE_PARAMS } from './api-doc-constants.ts';
 import {
   checkIsOfficial,
   extractClassInfo,
+  extractFunctionSignatures,
   extractInterfaceInfo,
   getDescription,
   getExamples,
-  getParamDescriptions,
-  getRemarks,
-  getReturnDescription,
-  getSince
+  getRemarks
 } from './api-doc-jsdoc.ts';
 import { simplifyType } from './api-doc-text-utils.ts';
 import {
@@ -33,51 +34,37 @@ import {
   updateNamespaceIfMoreSpecific
 } from './api-doc-type-merging.ts';
 
+/**
+ * Store a function as a type whose methods are its public signatures, one per overload. The page-level description
+ * comes from the implementation of an overloaded function when it documents one, else from its first overload.
+ */
+export function addFunctionType(function_: FunctionDeclaration, types: Map<string, TypeInfo>, isOfficial: boolean, namespace: string): void {
+  const name = function_.getName();
+  if (!name || types.has(name)) {
+    return;
+  }
+  const signatures = extractFunctionSignatures(function_, isOfficial, false);
+  const summarySource = function_.isImplementation() && getDescription(function_) ? function_ : function_.getOverloads()[0] ?? function_;
+  types.set(name, {
+    baseTypes: [],
+    description: getDescription(summarySource),
+    // The function page renders each signature's own examples.
+    examples: [],
+    implementsTypes: [],
+    isOfficial: checkIsOfficial(summarySource, isOfficial),
+    kind: 'function',
+    methods: signatures,
+    name,
+    namespace,
+    properties: [],
+    remarks: getRemarks(summarySource),
+    typeParameters: function_.getTypeParameters().map((tp) => tp.getText())
+  });
+}
+
 export function collectFunctions(src: SourceFile, types: Map<string, TypeInfo>, isOfficial: boolean, namespace: string): void {
   for (const function_ of src.getFunctions()) {
-    const name = function_.getName();
-    if (!name || types.has(name)) {
-      continue;
-    }
-    const paramDescriptions = getParamDescriptions(function_);
-    const params = function_.getParameters().map((p) => ({
-      description: paramDescriptions.get(p.getName()) ?? '',
-      name: p.getName(),
-      type: simplifyType(p.getType().getText())
-    }));
-    const paramString = params.map((p) => `${p.name}: ${p.type}`).join(', ');
-    const returnType = simplifyType(function_.getReturnType().getText());
-    const signature = `${name}(${paramString})`;
-    // Store function as a type with a single method representing the function call
-    types.set(name, {
-      baseTypes: [],
-      description: getDescription(function_),
-      examples: getExamples(function_),
-      implementsTypes: [],
-      isOfficial: checkIsOfficial(function_, isOfficial),
-      kind: 'function',
-      methods: [{
-        description: getDescription(function_),
-        examples: getExamples(function_),
-        inheritedFrom: '',
-        isOfficial: checkIsOfficial(function_, isOfficial),
-        isStatic: false,
-        name,
-        overloadKey: name,
-        parameters: params,
-        remarks: getRemarks(function_),
-        returnDescription: getReturnDescription(function_),
-        returnType,
-        signature,
-        since: getSince(function_),
-        type: ''
-      }],
-      name,
-      namespace,
-      properties: [],
-      remarks: getRemarks(function_),
-      typeParameters: function_.getTypeParameters().map((tp) => tp.getText())
-    });
+    addFunctionType(function_, types, isOfficial, namespace);
   }
 }
 
@@ -91,48 +78,7 @@ export function collectModuleFunctions(
   namespace: string
 ): void {
   for (const function_ of module_.getFunctions()) {
-    const name = function_.getName();
-    if (!name || types.has(name)) {
-      continue;
-    }
-    const paramDescriptions = getParamDescriptions(function_);
-    const params = function_.getParameters().map((p) => ({
-      description: paramDescriptions.get(p.getName()) ?? '',
-      name: p.getName(),
-      type: simplifyType(p.getType().getText())
-    }));
-    const paramString = params.map((p) => `${p.name}: ${p.type}`).join(', ');
-    const returnType = simplifyType(function_.getReturnType().getText());
-    const signature = `${name}(${paramString})`;
-    types.set(name, {
-      baseTypes: [],
-      description: getDescription(function_),
-      examples: getExamples(function_),
-      implementsTypes: [],
-      isOfficial: checkIsOfficial(function_, isOfficial),
-      kind: 'function',
-      methods: [{
-        description: getDescription(function_),
-        examples: getExamples(function_),
-        inheritedFrom: '',
-        isOfficial: checkIsOfficial(function_, isOfficial),
-        isStatic: false,
-        name,
-        overloadKey: name,
-        parameters: params,
-        remarks: getRemarks(function_),
-        returnDescription: getReturnDescription(function_),
-        returnType,
-        signature,
-        since: getSince(function_),
-        type: ''
-      }],
-      name,
-      namespace,
-      properties: [],
-      remarks: getRemarks(function_),
-      typeParameters: function_.getTypeParameters().map((tp) => tp.getText())
-    });
+    addFunctionType(function_, types, isOfficial, namespace);
   }
 }
 
@@ -193,33 +139,9 @@ export function collectNamespaceStaticFunctions(
       if (!functionName) {
         continue;
       }
-      const paramDescriptions = getParamDescriptions(function_);
-      const params = function_.getParameters().map((p) => ({
-        description: paramDescriptions.get(p.getName()) ?? '',
-        name: p.getName(),
-        type: simplifyType(p.getType().getText())
-      }));
-      const paramString = params.map((p) => `${p.name}: ${p.type}`).join(', ');
-      const returnType = simplifyType(function_.getReturnType().getText());
-      const signature = `${functionName}(${paramString})`;
       const hasExisting = parentType.methods.some((m) => m.name === functionName);
       if (!hasExisting) {
-        parentType.methods.push({
-          description: getDescription(function_),
-          examples: getExamples(function_),
-          inheritedFrom: '',
-          isOfficial: checkIsOfficial(function_, isOfficial),
-          isStatic: true,
-          name: functionName,
-          overloadKey: functionName,
-          parameters: params,
-          remarks: getRemarks(function_),
-          returnDescription: getReturnDescription(function_),
-          returnType,
-          signature: `static ${signature}`,
-          since: getSince(function_),
-          type: ''
-        });
+        parentType.methods.push(...extractFunctionSignatures(function_, isOfficial, true));
       }
     }
   }

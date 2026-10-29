@@ -1,5 +1,6 @@
 import type {
   ClassDeclaration,
+  FunctionDeclaration,
   InterfaceDeclaration,
   JSDocableNode,
   MethodDeclaration,
@@ -11,6 +12,7 @@ import type {
 
 import type {
   MemberInfo,
+  ParameterInfo,
   ReturnTypeProvider,
   TypeInfo
 } from './api-doc-types.ts';
@@ -53,6 +55,36 @@ export function extractClassInfo(cls: ClassDeclaration, isOfficial: boolean, nam
   };
 }
 
+/**
+ * Extract one member per public signature of a function. An overloaded function yields its overloads only: its
+ * implementation signature is not callable, so it is not documented.
+ */
+export function extractFunctionSignatures(function_: FunctionDeclaration, isOfficial: boolean, isStatic: boolean): MemberInfo[] {
+  const name = function_.getName() ?? '';
+  const overloads = function_.getOverloads();
+  const declarations = overloads.length > 0 ? overloads : [function_];
+  return declarations.map((declaration) => {
+    const params = extractParameters(declaration);
+    const paramString = params.map((p) => `${p.name}: ${p.type}`).join(', ');
+    return {
+      description: getDescription(declaration),
+      examples: getExamples(declaration),
+      inheritedFrom: '',
+      isOfficial: checkIsOfficial(declaration, isOfficial),
+      isStatic,
+      name,
+      overloadKey: name,
+      parameters: params,
+      remarks: getRemarks(declaration),
+      returnDescription: getReturnDescription(declaration),
+      returnType: getDeclaredReturnType(declaration),
+      signature: `${isStatic ? 'static ' : ''}${name}(${paramString})`,
+      since: getSince(declaration),
+      type: ''
+    };
+  });
+}
+
 export function extractInterfaceInfo(iface: InterfaceDeclaration, isOfficial: boolean, namespace: string): TypeInfo {
   return {
     baseTypes: iface.getExtends().map((extendsClause) => extendsClause.getText()),
@@ -72,16 +104,7 @@ export function extractInterfaceInfo(iface: InterfaceDeclaration, isOfficial: bo
 
 export function extractMethodInfo(method: MethodDeclaration, isOfficial: boolean): MemberInfo {
   const name = method.getName();
-  const paramDescriptions = getParamDescriptions(method);
-  const params = method.getParameters().map((p) => {
-    const isOptional = p.isOptional();
-    const optionalSuffix = isOptional ? '?' : '';
-    return {
-      description: paramDescriptions.get(p.getName()) ?? (isOptional ? '*(Optional)*' : ''),
-      name: `${p.getName()}${optionalSuffix}`,
-      type: simplifyType(p.getType().getText())
-    };
-  });
+  const params = extractParameters(method);
   const paramString = params.map((p) => `${p.name}: ${p.type}`).join(', ');
   const info: MemberInfo = {
     description: getDescription(method),
@@ -105,16 +128,7 @@ export function extractMethodInfo(method: MethodDeclaration, isOfficial: boolean
 
 export function extractMethodSignatureInfo(method: MethodSignature, isOfficial: boolean): MemberInfo {
   const name = method.getName();
-  const paramDescriptions = getParamDescriptions(method);
-  const params = method.getParameters().map((p) => {
-    const isOptional = p.isOptional();
-    const optionalSuffix = isOptional ? '?' : '';
-    return {
-      description: paramDescriptions.get(p.getName()) ?? (isOptional ? '*(Optional)*' : ''),
-      name: `${p.getName()}${optionalSuffix}`,
-      type: simplifyType(p.getType().getText())
-    };
-  });
+  const params = extractParameters(method);
   const paramString = params.map((p) => `${p.name}: ${p.type}`).join(', ');
   const info: MemberInfo = {
     description: getDescription(method),
@@ -134,6 +148,24 @@ export function extractMethodSignatureInfo(method: MethodSignature, isOfficial: 
   };
   info.overloadKey = computeOverloadKey(info);
   return info;
+}
+
+/**
+ * Extract the parameters of a function or method. An optional parameter is named `name?` and typed as written in
+ * source, because its resolved type carries the `| undefined` the question mark already says.
+ */
+export function extractParameters(node: FunctionDeclaration | MethodDeclaration | MethodSignature): ParameterInfo[] {
+  const paramDescriptions = getParamDescriptions(node);
+  return node.getParameters().map((p) => {
+    const isOptional = p.isOptional();
+    const optionalSuffix = isOptional ? '?' : '';
+    const typeNode = isOptional ? p.getTypeNode() : undefined;
+    return {
+      description: paramDescriptions.get(p.getName()) ?? (isOptional ? '*(Optional)*' : ''),
+      name: `${p.getName()}${optionalSuffix}`,
+      type: typeNode ? resolveTypeofAliases(simplifyType(typeNode.getText()), p.getSourceFile()) : simplifyType(p.getType().getText())
+    };
+  });
 }
 
 export function extractPropertyInfo(prop: PropertyDeclaration, isOfficial: boolean): MemberInfo {
