@@ -131,6 +131,19 @@ export interface MarkdownBaseView extends Component {
   clear(): void;
 
   /**
+   * Constructor.
+   *
+   * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<MarkdownBaseView\>}.
+   *
+   * @param app - The app.
+   * @param containerEl - The element the editor is created in.
+   * @param owner - The controller of the editor view.
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
+   */
+  constructor2__?(app: App, containerEl: HTMLElement, owner: MarkdownFileInfo): this;
+
+  /**
    * Clean up live preview, remove all extensions, destroy editor.
    */
   destroy(): void;

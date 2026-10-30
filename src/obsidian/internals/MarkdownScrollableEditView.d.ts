@@ -1,9 +1,13 @@
 import type { Extension } from '@codemirror/state';
 import type { ViewUpdate } from '@codemirror/view';
-import type { Scope } from 'obsidian';
+import type {
+  App,
+  Scope
+} from 'obsidian';
 
 import type { EditorSearchComponent } from './components/EditorSearchComponent.d.ts';
 import type { MarkdownBaseView } from './MarkdownBaseView.d.ts';
+import type { MarkdownScrollableEditViewOwner } from './MarkdownScrollableEditViewOwner.d.ts';
 
 /**
  * Extended markdown editor view with scrolling, search, and CSS class management.
@@ -53,6 +57,19 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
   buildLocalExtensions(): Extension[];
 
   /**
+   * Constructor.
+   *
+   * To extract the constructor type, use {@link ExtractConstructor | ExtractConstructor\<MarkdownScrollableEditView\>}.
+   *
+   * @param app - The app.
+   * @param containerEl - The element the editor is created in.
+   * @param owner - The controller of the editor view, which the editor notifies on scroll.
+   * @returns The new instance.
+   * @deprecated - Added only for typing purposes.
+   */
+  constructor2__?(app: App, containerEl: HTMLElement, owner: MarkdownScrollableEditViewOwner): this;
+
+  /**
    * Focus the editor (and for mobile: render keyboard).
    */
   focus(): void;
@@ -74,7 +91,7 @@ export interface MarkdownScrollableEditView extends MarkdownBaseView {
   getScroll(): number;
 
   /**
-   * Invokes onMarkdownScroll on scroll.
+   * Calls the owner's {@link MarkdownScrollableEditViewOwner.syncScroll} on scroll.
    */
   handleScroll(): void;
 
