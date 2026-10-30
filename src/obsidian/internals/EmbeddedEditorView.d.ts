@@ -111,11 +111,6 @@ export interface EmbeddedEditorView extends Component {
   onload(): void;
 
   /**
-   * Trigger markdown scroll on workspace.
-   */
-  onMarkdownScroll(): void;
-
-  /**
    * On unload of editor, destroy editor and unset workspace activeEditor.
    */
   onunload(): void;
@@ -178,6 +173,11 @@ export interface EmbeddedEditorView extends Component {
    * @param replace - Whether to show the replace input.
    */
   showSearch(replace?: boolean): void;
+
+  /**
+   * Trigger markdown scroll on workspace.
+   */
+  syncScroll(): void;
 
   /**
    * Toggle between edit and preview mode.
