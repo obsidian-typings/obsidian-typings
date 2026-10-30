@@ -346,13 +346,6 @@ declare module 'obsidian' {
     onMarkdownFold(): void;
 
     /**
-     * On markdown scroll in editors, update scroll, sync state and trigger markdown scroll event.
-     *
-     * @unofficial
-     */
-    onMarkdownScroll(): void;
-
-    /**
      * On mod click, opens editor of opposite mode in split view to right.
      *
      * @param $event - The keyboard or mouse event.
