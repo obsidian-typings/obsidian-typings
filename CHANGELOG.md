@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 1.3.0
+
+**Branch:** [`release/obsidian-public/1.14.5`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.5)
+
+**Commits:** [`obsidian-public-1.14.5-v1.2.0...obsidian-public-1.14.5-v1.3.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-public-1.14.5-v1.2.0...obsidian-public-1.14.5-v1.3.0)
+
+### Breaking changes
+
+- feat: declare the markdown editor view constructors ([`7d72443`](https://github.com/obsidian-typings/obsidian-typings/commit/7d7244369063f3c8b45ae5c27e0f714c2c449b8e))
+- fix: type Vault.appendBinary as taking a TFile, as Obsidian does ([`fe9ea3d`](https://github.com/obsidian-typings/obsidian-typings/commit/fe9ea3d3daac58ca6eb4c9a42a79dfe77df3f3f3))
+
+### Other changes
+
+- build(deps): override re2js to ^2.9.1 for GHSA-gg6h-894w-4m9c ([`85aaf0d`](https://github.com/obsidian-typings/obsidian-typings/commit/85aaf0d2bb110b2ef6449a412c8dc7ad8cf764e7))
+
 ## 1.2.0
 
 **Branch:** [`release/obsidian-public/1.14.5`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.5)
