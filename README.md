@@ -234,3 +234,9 @@ If you were using a `1.x.x` version of this package, see the [Migration guide](h
 Feel free to start typing any part of the Obsidian API that is not yet typed, or fixing/adding additional descriptions to existing typings. If you are unsure about anything, don't hesitate to open an issue.
 
 A brief tutorial is available on how you can get started with adding new typings, or fixing existing ones, see: [CONTRIBUTING.md](https://github.com/obsidian-typings/obsidian-typings/blob/main/CONTRIBUTING.md).
+
+## Filing an issue (for AI agents and humans)
+
+Open issues through the [issue forms](https://github.com/obsidian-typings/obsidian-typings/issues/new/choose), not as blank issues.
+
+Filing from the CLI or the API (`gh issue create --body`, or an AI agent filing for you) skips the form, and `gh issue create --template` cannot load an issue form. In that case, open the matching form in [`.github/ISSUE_TEMPLATE/`](https://github.com/obsidian-typings/obsidian-typings/tree/HEAD/.github/ISSUE_TEMPLATE), copy every field as a `### <label>` heading in the form's order, and fill in each one. Always state the version you used and your operating system.
