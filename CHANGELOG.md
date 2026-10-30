@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 1.2.0
+
+**Branch:** [`release/obsidian-catalyst/1.15.0`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.15.0)
+
+**Commits:** [`obsidian-catalyst-1.15.0-v1.1.0...obsidian-catalyst-1.15.0-v1.2.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-catalyst-1.15.0-v1.1.0...obsidian-catalyst-1.15.0-v1.2.0)
+
+### Breaking changes
+
+- feat: declare the markdown editor view constructors ([`929c25b`](https://github.com/obsidian-typings/obsidian-typings/commit/929c25b8b13a7c0b556e1b0ab1520a8325962cdc))
+- fix: type Vault.appendBinary as taking a TFile, as Obsidian does ([`42253bd`](https://github.com/obsidian-typings/obsidian-typings/commit/42253bd6e31bda45a89ededbc76e0e6868728599))
+- fix(editable-file-view): type saveTitle as resolving a boolean ([`b23e0db`](https://github.com/obsidian-typings/obsidian-typings/commit/b23e0db149611d7d9245a5b80caf24edc5ecbdb8))
+- fix(types)!: remove Modal.shouldAnimate, renamed to shouldAnimateOpen in 1.14.0 ([`3c212f2`](https://github.com/obsidian-typings/obsidian-typings/commit/3c212f28b6796ab529200e60f86fafa2c0c8454d))
+- fix(types): reconcile Obsidian 1.15.0 runtime changes from the crawler pass ([`0ab369a`](https://github.com/obsidian-typings/obsidian-typings/commit/0ab369aec4bdeb0a3ecaeac383e6d7e502051bc9))
+- fix: type the hotkey conflict map and correct the canvas edge multimaps ([`343a10b`](https://github.com/obsidian-typings/obsidian-typings/commit/343a10ba455486a071110e8c755927dc41618117))
+
+### Other changes
+
+- build(deps): override re2js to ^2.9.1 for GHSA-gg6h-894w-4m9c ([`e67baac`](https://github.com/obsidian-typings/obsidian-typings/commit/e67baacd155806082714630ef3aca9e2faf87c10))
+- fix(spellcheck): accept multimaps, so the release changelog commits ([`0e29f31`](https://github.com/obsidian-typings/obsidian-typings/commit/0e29f31a6ae24541252cb94d50a3d926d6f9051b))
+
 ## 1.1.0
 
 **Branch:** [`release/obsidian-catalyst/1.15.0`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.15.0)
