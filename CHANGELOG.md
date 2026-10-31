@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.4.0
+
+**Branch:** [`release/obsidian-public/1.14.5`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.5)
+
+**Commits:** [`obsidian-public-1.14.5-v1.3.0...obsidian-public-1.14.5-v1.4.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-public-1.14.5-v1.3.0...obsidian-public-1.14.5-v1.4.0)
+
+### Breaking changes
+
+- fix(bases): type BasesView group methods on BasesEntryGroup ([`68a0b24`](https://github.com/obsidian-typings/obsidian-typings/commit/68a0b246a8cbc4d548d2f86b666413b9c20e4c5f))
+
 ## 1.3.0
 
 **Branch:** [`release/obsidian-public/1.14.5`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.5)
