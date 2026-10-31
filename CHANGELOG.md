@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.3.0
+
+**Branch:** [`release/obsidian-catalyst/1.15.0`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.15.0)
+
+**Commits:** [`obsidian-catalyst-1.15.0-v1.2.0...obsidian-catalyst-1.15.0-v1.3.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-catalyst-1.15.0-v1.2.0...obsidian-catalyst-1.15.0-v1.3.0)
+
+### Breaking changes
+
+- fix(bases): type BasesView group methods on BasesEntryGroup ([`0a25866`](https://github.com/obsidian-typings/obsidian-typings/commit/0a2586653088ba8b1388325387ed0aa93153bb55))
+
 ## 1.2.0
 
 **Branch:** [`release/obsidian-catalyst/1.15.0`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.15.0)
