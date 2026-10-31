@@ -344,12 +344,12 @@ export async function generateOverviewPage(name: string, info: TypeInfo, allType
 
   // Description
   if (info.description) {
-    lines.push(escapeMdxBraces(resolveLinks(info.description, allTypes)), '');
+    lines.push(escapeMdxBraces(resolveLinks(info.description, allTypes, name)), '');
   }
 
   // Remarks
   if (info.remarks) {
-    lines.push(`> ${escapeMdxBraces(resolveLinks(info.remarks, allTypes))}`, '');
+    lines.push(`> ${escapeMdxBraces(resolveLinks(info.remarks, allTypes, name))}`, '');
   }
 
   // Import statement
