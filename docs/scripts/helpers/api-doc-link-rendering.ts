@@ -119,22 +119,9 @@ export function renderTypeWithLinks(typeText: string, allTypes: Map<string, Type
         return `[${typeName}](${BASE_PATH}/api/${targetNsDirectory}/${typeName}/)`;
       }
 
-      // TypeScript utility types
-      const tsUrl = resolveTsUtilityUrl(typeName);
-      if (tsUrl) {
-        return `[${typeName}](${tsUrl})`;
-      }
-
-      // JS global types (Array, Promise, Map, etc.)
-      const globalUrl = Object.hasOwn(TS_GLOBAL_TYPES, typeName) ? TS_GLOBAL_TYPES[typeName] : undefined;
-      if (globalUrl) {
-        return `[${typeName}](${globalUrl})`;
-      }
-
-      // Web API / MDN types (1099 types from typedoc-plugin-mdn-links)
-      const mdnUrl = resolveWebApiUrl(typeName);
-      if (mdnUrl) {
-        return `[${typeName}](${mdnUrl})`;
+      const externalUrl = resolveExternalTypeUrl(typeName);
+      if (externalUrl) {
+        return `[${typeName}](${externalUrl})`;
       }
 
       // TypeScript primitive types
@@ -145,9 +132,20 @@ export function renderTypeWithLinks(typeText: string, allTypes: Map<string, Type
 }
 
 /**
-Resolve TSDoc link tags in description text, with or without display text after a pipe
+Resolve the documentation outside this site for a type name: TypeScript utility types, JS global types
+(Array, Promise, Map, etc.), then Web API / MDN types (1099 types from typedoc-plugin-mdn-links)
 */
-export function resolveLinks(text: string, allTypes: Map<string, TypeInfo>): string {
+export function resolveExternalTypeUrl(name: string): string | undefined {
+  return resolveTsUtilityUrl(name) ?? (Object.hasOwn(TS_GLOBAL_TYPES, name) ? TS_GLOBAL_TYPES[name] : undefined) ?? resolveWebApiUrl(name);
+}
+
+/**
+Resolve TSDoc link tags in description text, with or without display text after a pipe.
+A link to `selfTypeName`, the type whose page the text is on, goes to that type's external documentation
+when it has one: the augmentation of a built-in says `Augments the built-in {@link DocumentFragment} interface.`,
+and a link to its own page goes nowhere.
+*/
+export function resolveLinks(text: string, allTypes: Map<string, TypeInfo>, selfTypeName?: string): string {
   return text.replaceAll(/\{@link\s+(?<target>[^|}]+?)(?:\s*\|\s*(?<display>[^}]+?))?\}/g, (...arguments_) => {
     const groups = arguments_.at(-1) as LinkMatchGroups;
     const target = groups.target.trim();
@@ -164,6 +162,11 @@ export function resolveLinks(text: string, allTypes: Map<string, TypeInfo>): str
         const targetNsDirectory = getNamespaceDirectory(typeInfo.namespace);
         return `[${display}](${BASE_PATH}/api/${targetNsDirectory}/${typeName}/${memberSlug(memberName)}/)`;
       }
+    }
+
+    const selfExternalUrl = target === selfTypeName ? resolveExternalTypeUrl(target) : undefined;
+    if (selfExternalUrl) {
+      return `[${display}](${selfExternalUrl})`;
     }
 
     // Handle simple type references — if display contains generic args, link each type individually
