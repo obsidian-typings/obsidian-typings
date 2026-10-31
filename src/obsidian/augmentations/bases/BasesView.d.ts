@@ -113,7 +113,7 @@ declare module 'obsidian' {
      * @returns The heading element, or `null` when the group has no key.
      * @unofficial
      */
-    createGroupHeadingEl(group: BasesQueryResultGroup): HTMLElement | null;
+    createGroupHeadingEl(group: BasesEntryGroup): HTMLElement | null;
 
     /**
      * Creates a property-value renderer for a property within a container element.
@@ -172,7 +172,7 @@ declare module 'obsidian' {
      * @returns Whether the group is collapsed.
      * @unofficial
      */
-    isGroupCollapsed(group: BasesQueryResultGroup): boolean;
+    isGroupCollapsed(group: BasesEntryGroup): boolean;
 
     /**
      * Called when there is new data for the query. This view should rerender with the updated data.
@@ -189,7 +189,7 @@ declare module 'obsidian' {
      * @param group - The result group whose state changed.
      * @unofficial
      */
-    onGroupCollapsedChange(group: BasesQueryResultGroup): void;
+    onGroupCollapsedChange(group: BasesEntryGroup): void;
 
     /**
      * Handles a resize of the view container.
@@ -220,7 +220,7 @@ declare module 'obsidian' {
      * @param group - The result group to toggle.
      * @unofficial
      */
-    toggleGroupCollapsed(group: BasesQueryResultGroup): void;
+    toggleGroupCollapsed(group: BasesEntryGroup): void;
 
     /**
      * Undoes the most recent transaction.
