@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.4.0
+
+**Branch:** [`release/obsidian-catalyst/1.15.0`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.15.0)
+
+**Commits:** [`obsidian-catalyst-1.15.0-v1.3.0...obsidian-catalyst-1.15.0-v1.4.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-catalyst-1.15.0-v1.3.0...obsidian-catalyst-1.15.0-v1.4.0)
+
+- fix(editor-suggest): type the trigger file as nullable ([`1cc2acf`](https://github.com/obsidian-typings/obsidian-typings/commit/1cc2acf122a49a9b0490d6dcd55b79069fbd8917))
+
 ## 1.3.0
 
 **Branch:** [`release/obsidian-catalyst/1.15.0`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.15.0)
