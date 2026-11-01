@@ -1,6 +1,7 @@
 import type { Extension } from '@codemirror/state';
 
 import type { ExtractConstructor } from '../internals/constructors/ExtractConstructor.d.ts';
+import type { FormulaFunction } from '../internals/internal-plugins/bases/FormulaFunction.d.ts';
 
 export {};
 
@@ -286,12 +287,13 @@ declare module 'obsidian' {
     registerExtensions(extensions: string[], viewType: string): void;
 
     /**
-     * Registers a global Bases formula function, unregistered automatically on unload.
+     * Registers a global Bases formula function, such as `now()`, unregistered automatically on unload.
+     * A function registered under the name of an existing one replaces it, and unloading removes the name.
      *
-     * @param func - The function definition to register.
+     * @param func - The function to register.
      * @unofficial
      */
-    registerGlobalFunc(func: unknown): void;
+    registerGlobalFunc(func: FormulaFunction): void;
 
     /**
      * Registers a view with the 'Page preview' core plugin as an emitter of the 'hover-link' event.
@@ -311,13 +313,14 @@ declare module 'obsidian' {
     registerHoverLinkSource(id: string, info: HoverLinkSource): void;
 
     /**
-     * Registers a Bases formula function for a specific value type, unregistered automatically on unload.
+     * Registers a Bases formula function for a value type, such as the `contains()` of a string, unregistered automatically on unload.
+     * The function is also found on every subclass of `type`, and its first parameter is the value it is called on.
      *
-     * @param type - The value type to register the function for.
-     * @param func - The function definition to register.
+     * @param type - The value class to register the function for, such as `StringValue`.
+     * @param func - The function to register.
      * @unofficial
      */
-    registerInstanceFunc(type: unknown, func: unknown): void;
+    registerInstanceFunc(type: Constructor<Value>, func: FormulaFunction): void;
 
     /**
      * Register a special post processor that handles fenced code given a language and a handler.
