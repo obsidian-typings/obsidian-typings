@@ -48,6 +48,8 @@ const PREVIOUS_RELEASE_RANGE: CommitRange = {
 };
 
 const SOURCE_LINES = [
+  '**Models:** Obsidian `1.14.4` (`public` channel). Internal members can differ in other app versions, so guard the ones you use when your `minAppVersion` is older.',
+  '',
   `**Branch:** [\`${BRANCH}\`](${REPO}/tree/${BRANCH})`,
   '',
   `**Commits:** [\`${PREVIOUS_TAG}...${TAG}\`](${REPO}/compare/${PREVIOUS_TAG}...${TAG})`
@@ -160,6 +162,47 @@ describe('composeChangelogSection', () => {
     });
 
     expect(section).toContain(`**Commits:** [every commit up to \`${TAG}\`](${REPO}/commits/${TAG})`);
+  });
+
+  it('appends the declared API changes after the lists, compared with the tag the range opens at', () => {
+    const section = composeChangelogSection({
+      apiSurfaceDiff: { added: ['App.getBaseFontSize'], removed: [] },
+      branchName: BRANCH,
+      breakingChanges: [],
+      commitRange: PREVIOUS_RELEASE_RANGE,
+      entries: [entry('fix: a correction')],
+      tagName: TAG,
+      version: '1.7.0'
+    });
+
+    expect(section.endsWith([
+      line('fix: a correction'),
+      '',
+      '### Declared API changes',
+      '',
+      `Names only, compared with \`${PREVIOUS_TAG}\`.`,
+      '',
+      '**Added (1):**',
+      '',
+      '- `App.getBaseFontSize`'
+    ].join('\n'))).toBe(true);
+  });
+
+  it('omits the declared API changes when the surface did not change', () => {
+    expect(composeChangelogSection({
+      apiSurfaceDiff: { added: [], removed: [] },
+      branchName: BRANCH,
+      breakingChanges: [],
+      commitRange: PREVIOUS_RELEASE_RANGE,
+      entries: [],
+      tagName: TAG,
+      version: '1.7.0'
+    })).toBe(compose([], []));
+  });
+
+  it('names no modelled version for a branch that is not a release branch', () => {
+    expect(composeChangelogSection({ branchName: 'main', breakingChanges: [], commitRange: PREVIOUS_RELEASE_RANGE, entries: [], tagName: TAG, version: '1.7.0' }))
+      .not.toContain('**Models:**');
   });
 });
 

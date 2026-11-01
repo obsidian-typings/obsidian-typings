@@ -22,6 +22,17 @@ while also keeping their code maintainable and less reliant on `@ts-ignore`/`@ts
 > - Typings are based on reverse engineering and may be **inaccurate or unstable**. They can change without notice in future releases.
 > - Always **test thoroughly** and **add fallbacks** when using internal APIs.
 
+## Using internal APIs safely
+
+> [!WARNING]
+>
+> **Internal APIs are unsupported.** The Obsidian team does not support them, and can change or remove them in any release without notice. Treat any advice built on these typings, from this repository or from anyone else, the same way:
+>
+> - Prefer the official API whenever it can do the job.
+> - Check that an internal member exists at runtime before you call it, and handle the case where it does not.
+> - Each package models exactly one Obsidian version: the one in its name. A member it declares can be missing in an older app version your `minAppVersion` still allows, so test against that version too.
+> - Each release's `CHANGELOG.md` and GitHub release page name the Obsidian version it models and list, by name only, the declared members it added or removed.
+
 ## Versioning and Release Channels
 
 [Obsidian](https://obsidian.md) has two main release channels:

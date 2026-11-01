@@ -2,6 +2,7 @@ import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 import { writeFile } from 'node:fs/promises';
 import { inc } from 'semver';
 
+import type { ApiSurfaceDiff } from './helpers/api-surface.ts';
 import type { BranchSpec } from './helpers/branch-spec.ts';
 import type { PackageRegistryState } from './helpers/npm.ts';
 import type {
@@ -9,6 +10,10 @@ import type {
   WrapperDependency
 } from './helpers/wrapper-changelog.ts';
 
+import {
+  diffApiSurfaces,
+  readApiSurface
+} from './helpers/api-surface.ts';
 import { parseBranchSpec } from './helpers/branch-spec.ts';
 import {
   CHANGELOG_FILE_NAME,
@@ -246,6 +251,38 @@ async function describeMissingPublishRight(packageName: string): Promise<string>
     `${packageName} exists on npm, so what is missing is its trusted publisher.`,
     getTrustedPublisherInstructions(packageName)
   ].join('\n');
+}
+
+/**
+ * Writes this release's section into `CHANGELOG.md`, and the same section out for the GitHub release body.
+ *
+ * Both destinations get one generated section, deliberately. They are the two places a consumer looks -- the
+ * published tarball and the releases page -- and until 2026-09-23 neither held anything: the tarball shipped
+ * a three-line stub pointing at a `main` file last touched in March, and the release body was empty because
+ * `publish-release.yml` handed `softprops/action-gh-release` neither a `body` nor `generate_release_notes`.
+ * Generating twice would be two chances to disagree about one release.
+ *
+ * The previous release's tag is derived from the version this branch currently holds, which is exactly the
+ * version the previous run published. See `resolveCommitRange` for what happens on a branch's first release,
+ * where no such tag exists.
+ */
+/**
+ * What the declared surface gained and lost since `baseTagName`, by name, or `null` when it cannot be compared.
+ *
+ * A failure here must not cost a release that is otherwise ready, so it is reported and the section goes out
+ * without the list.
+ */
+async function getApiSurfaceDiff(baseTagName: null | string): Promise<ApiSurfaceDiff | null> {
+  if (baseTagName === null) {
+    return null;
+  }
+
+  try {
+    return diffApiSurfaces(await readApiSurface(baseTagName), await readApiSurface('HEAD'));
+  } catch (error) {
+    console.warn(`Could not compare the declared API with ${baseTagName}; the changelog goes out without that list.`, error);
+    return null;
+  }
 }
 
 function getNextWrapperVersion(packageName: string, currentVersion: string, isBeta: boolean): string {
@@ -522,23 +559,11 @@ async function pushRelease(nextVersion: string, scopedPackageName: string, scope
   }
 }
 
-/**
- * Writes this release's section into `CHANGELOG.md`, and the same section out for the GitHub release body.
- *
- * Both destinations get one generated section, deliberately. They are the two places a consumer looks -- the
- * published tarball and the releases page -- and until 2026-09-23 neither held anything: the tarball shipped
- * a three-line stub pointing at a `main` file last touched in March, and the release body was empty because
- * `publish-release.yml` handed `softprops/action-gh-release` neither a `body` nor `generate_release_notes`.
- * Generating twice would be two chances to disagree about one release.
- *
- * The previous release's tag is derived from the version this branch currently holds, which is exactly the
- * version the previous run published. See `resolveCommitRange` for what happens on a branch's first release,
- * where no such tag exists.
- */
 async function updateChangelog(branchName: string, branchSpec: BranchSpec, currentVersion: string, nextVersion: string): Promise<string[]> {
   const commitRange = await resolveCommitRange(buildScopedTagName(branchSpec, currentVersion));
   const breakingChanges = await getBreakingChanges(commitRange);
   const section = composeChangelogSection({
+    apiSurfaceDiff: await getApiSurfaceDiff(commitRange.baseTagName),
     branchName,
     breakingChanges,
     commitRange,
