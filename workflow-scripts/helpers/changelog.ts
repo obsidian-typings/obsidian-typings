@@ -46,6 +46,11 @@ import {
 } from 'node:fs/promises';
 import { join } from 'node:path/posix';
 
+import type { ApiSurfaceDiff } from './api-surface.ts';
+
+import { composeApiChangeLines } from './api-surface.ts';
+import { parseBranchSpec } from './branch-spec.ts';
+
 /**
  * A `BREAKING CHANGE:` footer, in both spellings Conventional Commits allows.
  *
@@ -186,6 +191,11 @@ export interface CommitRecord {
  */
 export interface ComposeChangelogSectionParams {
   /**
+   * What the release changed in the declared surface, by name, or `null` when it could not be compared.
+   */
+  readonly apiSurfaceDiff?: ApiSurfaceDiff | null;
+
+  /**
    * The release branch the release is published from.
    */
   readonly branchName: string;
@@ -250,6 +260,7 @@ interface ReadCommitMessagesOptions {
  */
 export function composeChangelogSection(params: ComposeChangelogSectionParams): string {
   const {
+    apiSurfaceDiff,
     branchName,
     breakingChanges,
     commitRange,
@@ -261,23 +272,26 @@ export function composeChangelogSection(params: ComposeChangelogSectionParams): 
   const breakingSet = new Set(breakingChanges.map((entry) => entry.subject));
   const otherEntries = entries.filter((entry) => !breakingSet.has(entry.subject));
   const lines = [`## ${version}`, '', ...composeSourceLines(branchName, commitRange, tagName), ''];
+  const apiChangeLines = apiSurfaceDiff && commitRange.baseTagName !== null
+    ? composeApiChangeLines(apiSurfaceDiff, commitRange.baseTagName)
+    : [];
 
   if (entries.length === 0 && breakingChanges.length === 0) {
     lines.push('- No changes recorded since the previous release.');
-    return lines.join('\n');
-  }
-
-  if (breakingChanges.length > 0) {
+  } else if (breakingChanges.length > 0) {
     lines.push('### Breaking changes', '', ...toBulletList(breakingChanges));
 
     if (otherEntries.length > 0) {
       lines.push('', '### Other changes', '', ...toBulletList(otherEntries));
     }
-
-    return lines.join('\n');
+  } else {
+    lines.push(...toBulletList(otherEntries));
   }
 
-  lines.push(...toBulletList(otherEntries));
+  if (apiChangeLines.length > 0) {
+    lines.push('', ...apiChangeLines);
+  }
+
   return lines.join('\n');
 }
 
@@ -454,15 +468,28 @@ export async function writeReleaseNotes(section: string): Promise<void> {
 }
 
 /**
- * The lines naming where a release came from: its branch, and its commits as a GitHub compare link.
+ * The line naming the Obsidian build a release's typings model, or nothing for a branch that names none.
  *
- * A branch's first release has no previous tag of its own, and says so rather than presenting the base
- * branch's last release as this branch's. A history with no reachable tag at all links the commit list up to
- * the new tag, which is what that range is.
+ * The package name carries the version already, but a consumer reading a release page or an installed
+ * `CHANGELOG.md` should not have to decode it -- and a plugin whose `minAppVersion` is older than this build
+ * may meet an internal member these typings declare and its users' app lacks.
  */
-function composeSourceLines(branchName: string, commitRange: CommitRange, tagName: string): string[] {
-  const branchLine = `**Branch:** [\`${branchName}\`](${REPOSITORY_URL}/tree/${branchName})`;
+function composeModelledVersionLines(branchName: string): string[] {
+  try {
+    const { channel, obsidianVersion } = parseBranchSpec(branchName);
+    return [
+      `**Models:** Obsidian \`${obsidianVersion}\` (\`${channel}\` channel). Internal members can differ in other app versions, so guard the ones you use when your \`minAppVersion\` is older.`,
+      ''
+    ];
+  } catch {
+    return [];
+  }
+}
 
+/**
+ * The branch line and the commit-range line, as {@link composeSourceLines} lays them out.
+ */
+function composeRangeLines(branchLine: string, commitRange: CommitRange, tagName: string): string[] {
   if (commitRange.baseTagName === null) {
     return [branchLine, '', `**Commits:** [every commit up to \`${tagName}\`](${REPOSITORY_URL}/commits/${tagName})`];
   }
@@ -473,6 +500,18 @@ function composeSourceLines(branchName: string, commitRange: CommitRange, tagNam
     : ` -- the first release from this branch, so the range opens at \`${commitRange.baseTagName}\`, the nearest earlier release it was cut from`;
 
   return [branchLine, '', `${compareLine}${firstReleaseNote}`];
+}
+
+/**
+ * The lines naming where a release came from: its branch, and its commits as a GitHub compare link.
+ *
+ * A branch's first release has no previous tag of its own, and says so rather than presenting the base
+ * branch's last release as this branch's. A history with no reachable tag at all links the commit list up to
+ * the new tag, which is what that range is.
+ */
+function composeSourceLines(branchName: string, commitRange: CommitRange, tagName: string): string[] {
+  const branchLine = `**Branch:** [\`${branchName}\`](${REPOSITORY_URL}/tree/${branchName})`;
+  return [...composeModelledVersionLines(branchName), ...composeRangeLines(branchLine, commitRange, tagName)];
 }
 
 /**
