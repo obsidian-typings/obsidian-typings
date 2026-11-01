@@ -129,12 +129,12 @@ declare module 'obsidian' {
      * Evaluates the trigger at the cursor and updates the suggestion context.
      *
      * @param editor - The editor.
-     * @param file - The file being edited.
+     * @param file - The file being edited, or `null` for an editor with no file.
      * @param force - Whether to (re)open the suggestion popover even if it is not currently open.
      * @returns Whether a trigger matched.
      * @unofficial
      */
-    trigger(editor: Editor, file: TFile, force: boolean): boolean;
+    trigger(editor: Editor, file: null | TFile, force: boolean): boolean;
 
     /**
      * Repositions the suggestion popover at the current trigger location.

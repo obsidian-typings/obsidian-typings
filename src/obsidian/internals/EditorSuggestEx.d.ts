@@ -63,8 +63,8 @@ export interface EditorSuggestEx {
    * Triggers the registered suggestion providers at the cursor.
    *
    * @param editor - The editor.
-   * @param file - The file being edited.
+   * @param file - The file being edited, or `null` for an editor with no file.
    * @param force - Whether to force the suggestion popup open.
    */
-  trigger(editor: Editor, file: TFile, force: boolean): void;
+  trigger(editor: Editor, file: null | TFile, force: boolean): void;
 }
