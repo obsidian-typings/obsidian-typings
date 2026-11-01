@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.5.0
+
+**Branch:** [`release/obsidian-public/1.14.5`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.5)
+
+**Commits:** [`obsidian-public-1.14.5-v1.4.0...obsidian-public-1.14.5-v1.5.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-public-1.14.5-v1.4.0...obsidian-public-1.14.5-v1.5.0)
+
+- fix(editor-suggest): type the trigger file as nullable ([`1838ab8`](https://github.com/obsidian-typings/obsidian-typings/commit/1838ab851d5dd3a5b28a199918ee1fcf248252fb))
+
 ## 1.4.0
 
 **Branch:** [`release/obsidian-public/1.14.5`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.5)
