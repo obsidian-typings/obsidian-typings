@@ -702,6 +702,10 @@ declare module 'obsidian' {
      * Rename or move a file. To ensure links are automatically renamed,
      * use {@link FileManager.renameFile} instead.
      *
+     * This method only moves the file: links pointing to it are left as they were, so they break.
+     * {@link FileManager.renameFile} moves it the same way and then updates the links,
+     * asking the user first when the "Automatically update internal links" setting is off.
+     *
      * @param file - The file to rename/move.
      * @param newPath - {@link obsidian#Vault} absolute path to move file to.
      * @returns The promise that resolves when the file is renamed.
