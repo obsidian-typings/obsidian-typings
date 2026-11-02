@@ -2,12 +2,18 @@ import {
   lineClassNodeProp,
   tokenClassNodeProp
 } from '@codemirror/language';
+import type { ParseContext } from '@codemirror/language';
+import type { SearchQuery } from '@codemirror/search';
+import type { Text } from '@codemirror/state';
 import type {
   NodeProp,
   SyntaxNode,
   Tree
 } from '@lezer/common';
-import type { LanguageState } from 'obsidian-typings';
+import type {
+  CodeMirrorEditor,
+  LanguageState
+} from 'obsidian-typings';
 
 import 'obsidian-typings';
 
@@ -28,3 +34,11 @@ languageState.tree = tree;
 void tokenClass;
 void lineClass;
 void consumerTree;
+
+// Other public CodeMirror classes must also cross the boundary without local replicas.
+const context: ParseContext = languageState.context;
+declare const editor: CodeMirrorEditor;
+const query: SearchQuery | undefined = editor.addOverlay({ query: /test/ });
+declare const text: Text;
+query?.getCursor(text);
+void context;
