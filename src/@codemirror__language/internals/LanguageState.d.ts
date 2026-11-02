@@ -1,7 +1,6 @@
+import type { ParseContext } from '@codemirror/language';
 import type { Transaction } from '@codemirror/state';
-
-import type { LezerTree } from '../../@lezer__common/internals/LezerTree.d.ts';
-import type { ParseContext } from './ParseContext.d.ts';
+import type { Tree as LezerTree } from '@lezer/common';
 
 /**
  * Internal state for a language's parser, tracking the parse tree and context.
