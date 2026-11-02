@@ -1008,6 +1008,12 @@ declare module 'obsidian' {
      * Triggered when the active file changes. The file could be in a new leaf, an existing leaf,
      * or an embed.
      *
+     * Despite its name, this is a "focused file changed" event, not a "file was opened" one.
+     * It fires whenever {@link Workspace.getActiveFile} returns a different file than it did last time,
+     * so moving the focus to another leaf that already shows another file fires it too,
+     * while opening the file that is already active does not.
+     * The `file` is `null` when the newly active leaf shows no file.
+     *
      * @param name - Should be `'file-open'`.
      * @param callback - The callback function.
      * @param ctx - The context passed as `this` to the `callback` function.
