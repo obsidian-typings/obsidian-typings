@@ -1,4 +1,4 @@
-import type { NodeProp } from '../../../@lezer__common/internals/NodeProp.d.ts';
+import type { NodeProp } from '@lezer/common';
 
 export {};
 
