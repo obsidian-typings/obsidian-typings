@@ -1,0 +1,12 @@
+{
+  "name": "bundle-compat-scenario-8-lezer-cjs",
+  "private": true,
+  "dependencies": {
+    "@codemirror/language": "6.13.1",
+    "@codemirror/state": "6.7.6",
+    "@codemirror/view": "6.43.13",
+    "@lezer/common": "1.5.5",
+    "obsidian": "file:../../../node_modules/obsidian",
+    "obsidian-typings": "file:../../.."
+  }
+}

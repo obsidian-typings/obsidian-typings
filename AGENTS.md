@@ -56,6 +56,8 @@ These are standalone exported interfaces for Obsidian's internal objects.
 
 ## Build Gate
 
+Lezer's public types must come from `@lezer/common`, including the `NodeProp` used by the CodeMirror language augmentations and the `Tree` exposed by `LanguageState`. Local declarations of these classes create different type identities: `NodeProp.add` reaches `NodeType`'s private members, so a structurally similar copy still fails at `SyntaxNode.type.prop`. The declaration bundler imports installed packages by default; copying an upstream declaration into `src/` makes it local and bypasses that behavior. The CommonJS and ESM Lezer consumer scenarios under `tests/bundle-compat/` guard both node properties and tree interoperability. Those scenarios live on `main`, like the other consumer scenarios, and release builds restore them from `origin/main`.
+
 The authoritative pre-commit gate for type changes is the **full `npm run build`**, not `build:compile`.
 
 `build:compile` runs with `skipLibCheck` and does not run API Extractor, so it silently passes real defects. The full build additionally runs:
