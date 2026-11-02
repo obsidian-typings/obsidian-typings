@@ -238,6 +238,10 @@ declare module 'obsidian' {
     /**
      * Get the current mode of the markdown view.
      *
+     * It returns `'source'` for Live Preview as well as for Source mode, because both are the editing mode.
+     * To tell them apart, read `source` from {@link MarkdownView.getState}: it is `true` in Source mode
+     * and `false` in Live Preview.
+     *
      * @returns A string representing the current mode.
      * @official
      */

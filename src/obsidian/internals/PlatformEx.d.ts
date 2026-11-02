@@ -100,11 +100,14 @@ export interface PlatformEx {
 
   /**
    * The UI is in mobile mode.
+   * This is not the same as running the mobile app: `app.emulateMobile(true)` turns it on in the desktop app too.
+   * Use {@link PlatformEx.isMobileApp} to ask whether the code runs in the real mobile app.
    */
   isMobile: boolean;
 
   /**
    * We're running the `Capacitor` mobile app.
+   * Unlike {@link PlatformEx.isMobile}, this stays `false` in the desktop app while it emulates mobile.
    */
   isMobileApp: boolean;
 
