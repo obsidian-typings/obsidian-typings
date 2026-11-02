@@ -1,5 +1,184 @@
 # CHANGELOG
 
+## 1.6.0
+
+**Models:** Obsidian `1.14.5` (`public` channel). Internal members can differ in other app versions, so guard the ones you use when your `minAppVersion` is older.
+
+**Branch:** [`release/obsidian-public/1.14.5`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.5)
+
+**Commits:** [`obsidian-public-1.14.5-v1.5.0...obsidian-public-1.14.5-v1.6.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-public-1.14.5-v1.5.0...obsidian-public-1.14.5-v1.6.0)
+
+### Breaking changes
+
+- fix!: use upstream Lezer and CodeMirror type identities ([`2e74af7`](https://github.com/obsidian-typings/obsidian-typings/commit/2e74af742925a3dfcebdbb5336b15dedc927ec1e))
+- feat(bases): type the formula functions that Plugin.registerGlobalFunc and registerInstanceFunc take ([`5b33471`](https://github.com/obsidian-typings/obsidian-typings/commit/5b334719f42d05c9cfeb3d2f45d93fb8ac28c2c0))
+
+### Other changes
+
+- docs: explain file-open, getMode in Live Preview, isMobile vs isMobileApp and Vault.rename ([`2a1f26c`](https://github.com/obsidian-typings/obsidian-typings/commit/2a1f26c87f4f3e66f97e3b74ad02c1101293f20d))
+
+### Declared API changes
+
+Names only, compared with `obsidian-public-1.14.5-v1.5.0`.
+
+**Added (14):**
+
+- `FormulaFunction`
+- `FormulaFunction.apply`
+- `FormulaFunction.applyWithContext`
+- `FormulaFunction.ctx`
+- `FormulaFunction.docString`
+- `FormulaFunction.name`
+- `FormulaFunction.params`
+- `FormulaFunction.serialize`
+- `FormulaFunctionParam`
+- `FormulaFunctionParam.customWidget`
+- `FormulaFunctionParam.name`
+- `FormulaFunctionParam.optional`
+- `FormulaFunctionParam.type`
+- `FormulaFunctionParam.variadic`
+
+**Removed (138):**
+
+- `CmText`
+- `CmText.empty`
+- `CmText.length`
+- `CmText.line`
+- `CmText.lineAt`
+- `CmText.lines`
+- `CmText.of`
+- `CmText.sliceString`
+- `CmText.toString`
+- `Input`
+- `Input.chunk`
+- `Input.length`
+- `Input.lineChunks`
+- `Input.read`
+- `IterMode`
+- `LezerTree`
+- `LezerTree.children`
+- `LezerTree.constructor`
+- `LezerTree.cursor`
+- `LezerTree.cursorAt`
+- `LezerTree.empty`
+- `LezerTree.length`
+- `LezerTree.positions`
+- `LezerTree.prop`
+- `LezerTree.resolve`
+- `LezerTree.resolveInner`
+- `LezerTree.topNode`
+- `LezerTree.type`
+- `LezerTreeBuffer`
+- `LezerTreeBuffer.buffer`
+- `LezerTreeBuffer.length`
+- `LezerTreeBuffer.set`
+- `LezerTreeCursor`
+- `LezerTreeCursor.firstChild`
+- `LezerTreeCursor.from`
+- `LezerTreeCursor.lastChild`
+- `LezerTreeCursor.name`
+- `LezerTreeCursor.next`
+- `LezerTreeCursor.nextSibling`
+- `LezerTreeCursor.node`
+- `LezerTreeCursor.parent`
+- `LezerTreeCursor.prev`
+- `LezerTreeCursor.prevSibling`
+- `LezerTreeCursor.to`
+- `LezerTreeCursor.tree`
+- `LezerTreeCursor.type`
+- `LezerTreeFragment`
+- `LezerTreeFragment.from`
+- `LezerTreeFragment.offset`
+- `LezerTreeFragment.to`
+- `LezerTreeFragment.tree`
+- `LezerTreeRange`
+- `LezerTreeRange.from`
+- `LezerTreeRange.to`
+- `MountedLezerTree`
+- `MountedLezerTree.overlay`
+- `MountedLezerTree.parser`
+- `MountedLezerTree.tree`
+- `NodeProp`
+- `NodeProp.add`
+- `NodeProp.closedBy`
+- `NodeProp.constructor`
+- `NodeProp.contextHash`
+- `NodeProp.deserialize`
+- `NodeProp.group`
+- `NodeProp.lookAhead`
+- `NodeProp.mounted`
+- `NodeProp.openedBy`
+- `NodeProp.perNode`
+- `NodePropConfig`
+- `NodePropConfig.deserialize`
+- `NodePropConfig.perNode`
+- `NodePropSelectorMap`
+- `NodePropSource`
+- `NodeSet`
+- `NodeSet.types`
+- `NodeType`
+- `NodeType.id`
+- `NodeType.name`
+- `NodeType.none`
+- `NodeType.prop`
+- `ParseContext`
+- `ParseContext.get`
+- `ParseContext.skipUntilInView`
+- `ParseContext.state`
+- `ParseContext.viewport`
+- `ParseContextRange`
+- `ParseContextRange.from`
+- `ParseContextRange.to`
+- `Parser`
+- `Parser.createParse`
+- `Parser.parse`
+- `PartialParse`
+- `PartialParse.advance`
+- `PartialParse.parsedPos`
+- `PartialParse.stopAt`
+- `PartialParse.stoppedAt`
+- `SearchQuery`
+- `SearchQuery.caseSensitive`
+- `SearchQuery.constructor`
+- `SearchQuery.eq`
+- `SearchQuery.getCursor`
+- `SearchQuery.literal`
+- `SearchQuery.regexp`
+- `SearchQuery.replace`
+- `SearchQuery.search`
+- `SearchQuery.valid`
+- `SearchQuery.wholeWord`
+- `SearchQueryConfig`
+- `SearchQueryConfig.caseSensitive`
+- `SearchQueryConfig.literal`
+- `SearchQueryConfig.regexp`
+- `SearchQueryConfig.replace`
+- `SearchQueryConfig.search`
+- `SearchQueryConfig.wholeWord`
+- `SearchQueryMatch`
+- `SearchQueryMatch.from`
+- `SearchQueryMatch.to`
+- `SyntaxNode`
+- `SyntaxNode.cursor`
+- `SyntaxNode.firstChild`
+- `SyntaxNode.from`
+- `SyntaxNode.lastChild`
+- `SyntaxNode.name`
+- `SyntaxNode.nextSibling`
+- `SyntaxNode.parent`
+- `SyntaxNode.prevSibling`
+- `SyntaxNode.resolve`
+- `SyntaxNode.to`
+- `SyntaxNode.tree`
+- `SyntaxNode.type`
+- `SyntaxNodeRef`
+- `SyntaxNodeRef.from`
+- `SyntaxNodeRef.name`
+- `SyntaxNodeRef.node`
+- `SyntaxNodeRef.to`
+- `SyntaxNodeRef.tree`
+- `SyntaxNodeRef.type`
+
 ## 1.5.0
 
 **Branch:** [`release/obsidian-public/1.14.5`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.14.5)
