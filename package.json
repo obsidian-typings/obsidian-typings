@@ -48,6 +48,14 @@
         "types": "./dist/esm/implementations.d.mts",
         "default": "./dist/esm/implementations.mjs"
       }
+    },
+    "./pixi": {
+      "require": {
+        "types": "./dist/cjs/pixi.d.cts"
+      },
+      "import": {
+        "types": "./dist/esm/pixi.d.mts"
+      }
     }
   },
   "main": "",
