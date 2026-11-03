@@ -24,6 +24,11 @@ import type { BookmarksPlugin } from './BookmarksPlugin.d.ts';
 /**
  * Plugin instance for bookmarks, managing bookmarked files, folders, URLs, searches, and graphs.
  *
+ * File and folder bookmarks are retained when their targets are deleted or otherwise missing.
+ * A missing path may also belong to a file that has not synced to this device yet, so its absence
+ * alone is not a reason to remove the bookmark. Normal loading, saving, and cache rebuilding
+ * preserve these entries; remove an unwanted bookmark explicitly with {@link BookmarksPluginInstance.removeItem}.
+ *
  * @public
  * @unofficial
  */
