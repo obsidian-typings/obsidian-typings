@@ -56,6 +56,14 @@
       "import": {
         "types": "./dist/esm/pixi.d.mts"
       }
+    },
+    "./electron": {
+      "require": {
+        "types": "./dist/cjs/electron.d.cts"
+      },
+      "import": {
+        "types": "./dist/esm/electron.d.mts"
+      }
     }
   },
   "main": "",
