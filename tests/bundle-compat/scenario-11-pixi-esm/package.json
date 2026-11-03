@@ -1,0 +1,10 @@
+{
+  "name": "bundle-compat-scenario-11-pixi-esm",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "obsidian": "file:../../../node_modules/obsidian",
+    "obsidian-typings": "file:../../..",
+    "pixi.js-legacy": "7.2.4"
+  }
+}
