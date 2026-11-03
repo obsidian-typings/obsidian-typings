@@ -1,4 +1,4 @@
-import type { PixiModule } from '../../../pixi.js/internals/PixiModule.d.ts';
+import type { InteropPixiModule as PixiModule } from '../../../pixi.js/interop/InteropPixiModule.d.ts';
 
 export {};
 

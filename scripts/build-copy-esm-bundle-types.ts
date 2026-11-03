@@ -12,4 +12,8 @@ await wrapCliTask(async () => {
     await mkdir(dirname(copy.esmPath), { recursive: true });
     await cp(copy.cjsPath, copy.esmPath);
   }
+
+  // Keep the optional upstream import outside the generated standalone indexes and bundles.
+  await cp('integrations/pixi.d.ts', 'dist/cjs/pixi.d.cts');
+  await cp('integrations/pixi.d.ts', 'dist/esm/pixi.d.mts');
 });

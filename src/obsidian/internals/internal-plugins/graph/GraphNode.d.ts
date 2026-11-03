@@ -1,6 +1,6 @@
-import type { Graphics } from '../../../../pixi.js/internals/Graphics.d.ts';
-import type { PixiText as PIXIText } from '../../../../pixi.js/internals/PixiText.d.ts';
-import type { TextStyle } from '../../../../pixi.js/internals/TextStyle.d.ts';
+import type { InteropGraphics as Graphics } from '../../../../pixi.js/interop/InteropGraphics.d.ts';
+import type { InteropPixiText as PIXIText } from '../../../../pixi.js/interop/InteropPixiText.d.ts';
+import type { InteropTextStyle as TextStyle } from '../../../../pixi.js/interop/InteropTextStyle.d.ts';
 import type { GraphColorAttributes } from './GraphColorAttributes.d.ts';
 import type { GraphLink } from './GraphLink.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';

@@ -5,6 +5,7 @@ import {
 import { getRootFolder } from '@mnaoumov/typescript-dev-toolkit/root';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path/posix';
+import { preProcessFile } from 'typescript';
 
 import {
   checkProjectTypes,
@@ -84,6 +85,13 @@ async function main(): Promise<CliTaskResult> {
     const bundlePath = join(root, bundleFile);
     const bundleCanonical = toCanonical(bundlePath);
     console.log(`Validating ${bundleFile}...`);
+
+    const content = await readFile(bundlePath, 'utf-8');
+    const imports = preProcessFile(content).importedFiles;
+    if (imports.some(({ fileName }) => fileName === 'pixi.js-legacy' || fileName === 'pixi.js' || fileName.startsWith('@pixi/') || fileName.includes('/pixi.d.') || fileName.endsWith('/pixi'))) {
+      console.error(`${bundleFile} pulls the optional Pixi integration into the standalone surface.`);
+      isOk = false;
+    }
 
     const isBundleOk = checkProjectTypes({
       options: consumerOptions,
