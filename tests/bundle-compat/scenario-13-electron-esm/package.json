@@ -1,0 +1,14 @@
+{
+  "name": "bundle-compat-scenario-13-electron-esm",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@types/node": "24.9.0",
+    "electron": "43.8.3",
+    "obsidian": "file:../../../node_modules/obsidian",
+    "obsidian-typings": "file:../../.."
+  },
+  "overrides": {
+    "@types/node": "24.9.0"
+  }
+}

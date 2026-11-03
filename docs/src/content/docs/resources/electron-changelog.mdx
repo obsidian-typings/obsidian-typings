@@ -34,8 +34,15 @@ that some features from the Chromium/Electron/Node.js updates are not listed her
 Links have been provided to the official changelogs where all changes can be found.
 :::
 
-**Minimum supported Obsidian installer version:** `0.14.5` (Electron v18) <br/>
-> This is the last version that will still receive Obsidian updates, as communicated by the developers.
+**Minimum installer accepted by the desktop updater:** `1.1.9` (Electron v21), checked 2026-11-03. <br/>
+The [desktop release manifest](https://github.com/obsidianmd/obsidian-releases/blob/master/desktop-releases.json)
+sets this floor for both public and catalyst updates. The [1.1.9 release notes](https://obsidian.md/changelog/2022-12-23-desktop-v1.1.9/)
+identify Electron v21. This is an updater compatibility floor, not a security recommendation.
+
+The [1.14.5 installer](https://obsidian.md/changelog/2026-10-22-desktop-v1.14.5/) ships Electron `43.8.3`.
+An application update does not update the installed Electron runtime: check `process.versions.electron`
+before relying on an Electron API. The copied Electron declarations are a standalone mirror, not a
+version-independent substitute for every upstream Electron declaration.
 
 **Obsidian installer update notice:** `1.5.12` (Electron v28) <br/>
 > From this version onwards, Obsidian will display a notice to the user telling them upgrade

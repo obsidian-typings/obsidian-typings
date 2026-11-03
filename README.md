@@ -252,6 +252,18 @@ Open issues through the [issue forms](https://github.com/obsidian-typings/obsidi
 
 Filing from the CLI or the API (`gh issue create --body`, or an AI agent filing for you) skips the form, and `gh issue create --template` cannot load an issue form. In that case, open the matching form in [`.github/ISSUE_TEMPLATE/`](https://github.com/obsidian-typings/obsidian-typings/tree/HEAD/.github/ISSUE_TEMPLATE), copy every field as a `### <label>` heading in the form's order, and fill in each one. Always state the version you used and your operating system.
 
+## Optional Electron interoperability
+
+The default entry point keeps standalone Electron mirrors and needs no `electron` package. To use installed Electron declarations at Obsidian's window and renderer-module boundaries, install the version matching `process.versions.electron` in your launcher and load the type-only integration:
+
+```ts
+import type {} from 'obsidian-typings/electron';
+```
+
+The same `/electron` subpath is available on scoped per-version and latest packages. The import is erased from JavaScript and loads no Electron runtime. `FrameDom.eWin`, `electronWindow`, `window.electronWindow`, and the public fields of `electron` and `window.electron` then use installed declarations. Obsidian's IPC channel overloads and `ElectronWindow` extensions remain available. The `webContents.noContextMenu` vendor flag is optional so ordinary upstream windows and web contents remain assignable. Other mirror exports, including `ElectronBrowserWindow` and `ElectronNativeImage`, retain their standalone contracts; import full upstream types from `electron` when using that library.
+
+Selection applies to the whole TypeScript program through the reserved `ObsidianElectronTypes` registry, including mixed CommonJS and ESM entry points. The integration does not imply that newer methods exist on an older launcher. Feature-detect APIs and use Electron declarations matching the runtime. The updater currently accepts installers from 1.1.9 (Electron 21); installer 1.14.5 ships Electron 43.8.3. See the [launcher matrix](https://github.com/obsidian-typings/obsidian-typings/blob/main/reports/library-mirror-audit-2026-11-03.md#launcher-matrix-and-interoperability-follow-up) for evidence and compiler pins. In particular, older Electron declarations conflict with recent Node declarations over `Process.noDeprecation`: the consumer checks pin Node declarations 20.17.30 for Electron 21.3.1 and 24.9.0 for Electron 43.8.3, with full declaration checking enabled. These type pins do not change the runtime.
+
 ## Optional Pixi interoperability
 
 The default entry point keeps standalone library mirrors: it does not require `pixi.js-legacy`. For plugins that use the real Pixi declarations, install the exact version Obsidian vendors (currently `pixi.js-legacy@7.2.4`) and explicitly load the type-only integration:
