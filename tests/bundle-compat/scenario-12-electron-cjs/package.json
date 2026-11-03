@@ -1,0 +1,14 @@
+{
+  "name": "bundle-compat-scenario-12-electron-cjs",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "@types/node": "20.17.30",
+    "electron": "21.3.1",
+    "obsidian": "file:../../../node_modules/obsidian",
+    "obsidian-typings": "file:../../.."
+  },
+  "overrides": {
+    "@types/node": "20.17.30"
+  }
+}

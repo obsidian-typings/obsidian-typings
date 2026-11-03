@@ -36,6 +36,23 @@ The copied classes have no TypeScript private/protected declarations. Their name
 
 These are reference-version findings. Establish the supported launcher versions before deleting or replacing members. Preserve IPC channel contracts and the local window extension. A direct import of `electron` would add a module-resolution requirement even with runtime installation scripts disabled; it is unsuitable for the default standalone surface.
 
+### Launcher matrix and interoperability follow-up
+
+Checked 2026-11-03: the [desktop update manifest](https://github.com/obsidianmd/obsidian-releases/blob/master/desktop-releases.json) sets `minimumVersion: "1.1.9"` for both public and catalyst 1.15.0. The archived launcher's updater compares that value with `app.getVersion()`, independently of the application archive version. The [1.1.9 release notes](https://obsidian.md/changelog/2022-12-23-desktop-v1.1.9/) identify Electron 21. The [1.14.5 installer release](https://obsidian.md/changelog/2026-10-22-desktop-v1.14.5/) upgrades Electron from 43.7.5 to 43.8.3. The old documentation's Electron 18 floor is therefore stale. This floor describes updater acceptance, not security support for old Electron versions.
+
+The following declaration probes use TypeScript 6.0.3 with full declaration checking. Patch versions 21.3.1, 28.3.3 and 34.3.3 are published comparison points in historical launcher generations, not assertions that every corresponding Obsidian installer shipped those exact patches. Electron 43.8.3 is an explicitly documented installer pin. The matrix samples changes across the accepted range; it does not certify every intermediate release or distribution repackaging.
+
+| Electron declarations | Node declarations | BrowserWindow, local to upstream | BrowserWindow, upstream to local | NativeImage | Rectangle |
+| --- | --- | --- | --- | --- | --- |
+| 21.3.1 | 20.17.30 | Missing event-emitter and window members | Reaches required local `webContents.noContextMenu` | Both directions pass | Both directions pass |
+| 28.3.3 | 20.17.30 | Missing event-emitter and newer window members | Missing old traffic-light methods | Both directions pass | Both directions pass |
+| 34.3.3 | 20.17.30 | Missing event-emitter and newer window members | Missing old traffic-light methods | Both directions pass | Both directions pass |
+| 43.8.3 | 24.9.0 | Missing event-emitter and newer window members | Missing old traffic-light methods | Upstream to local fails on `getBitmap(): void` | Both directions pass |
+
+All four comparisons have zero upstream declaration diagnostics with those pins. Node 18.19.0 failed against the modern compiler's generic typed arrays; Node 20.17.30 resolves that baseline for the older Electron packages. Electron 43.8.3's own dependency range starts at Node declarations 24.9.0. The pins keep Electron's global `Process.noDeprecation` declaration compatible, rather than suppressing its conflict with newer Node declarations. These are compiler compatibility pins, not runtime Node version claims.
+
+One default mirror cannot have the exact signatures of all these launcher generations. The explicit `/electron` integration selects the consumer's installed Electron contracts at `FrameDom`, the global module handles and `ElectronWindow`. Standalone declarations keep their local copies and import no Electron package. The integration preserves Obsidian IPC channel overloads and the local window extension; it does not replace Obsidian's renderer module with the entire main-process namespace. Consumers must choose Electron declarations matching their actual launcher and still feature-detect newer APIs. The original `ElectronBrowserWindow` and other mirror exports remain standalone contracts, independently of this selection.
+
 ## Pixi: 37 declaration files
 
 Public boundaries include `loadPixi()`, `Window.PIXI`, `PixiModule`, and graph renderer, node, link and power-tag members. The copied `Texture` is especially narrow: it declares static `EMPTY` and `WHITE` but no instance members.
