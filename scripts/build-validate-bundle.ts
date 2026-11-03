@@ -59,6 +59,7 @@ async function main(): Promise<CliTaskResult> {
     try {
       const { fileNames, options } = parseTsConfig(join(scenarioDirectory, 'tsconfig.json'));
       const isOk = checkProjectTypes({
+        isVerbose: scenario.includes('pixi'),
         options,
         rootNames: fileNames,
         shouldKeepFile: (fileName) => shouldKeepScenarioFile(fileName, rootCanonical)

@@ -25,7 +25,7 @@ import type { FrameDom } from '../../obsidian/internals/FrameDom.d.ts';
 import type { Localization } from '../../obsidian/internals/Localization.d.ts';
 import type { PdfJsModule } from '../../pdfjs-dist/internals/PdfJsModule.d.ts';
 import type { PdfJsTestingUtils } from '../../pdfjs-dist/internals/PdfJsTestingUtils.d.ts';
-import type { PixiModule } from '../../pixi.js/internals/PixiModule.d.ts';
+import type { InteropPixiModule as PixiModule } from '../../pixi.js/interop/InteropPixiModule.d.ts';
 import type { PrismModule } from '../../prismjs/internals/PrismModule.d.ts';
 import type { ScryptModule } from '../../scrypt-js/internals/ScryptModule.d.ts';
 import type { Database } from '../../web-sql/internals/Database.d.ts';
