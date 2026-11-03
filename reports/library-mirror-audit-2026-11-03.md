@@ -1,6 +1,6 @@
 # Standalone library mirror audit
 
-Audit date: 2026-11-03. The default declaration entry points must remain usable without installing the libraries whose APIs Obsidian exposes. This audit makes no dependency or declaration changes.
+Audit date: 2026-11-03. The default declaration entry points must remain usable without installing the libraries whose APIs Obsidian exposes. The initial audit made no dependency or declaration changes. Verified follow-up corrections and integrations are recorded below.
 
 ## Scope and evidence
 
@@ -20,7 +20,7 @@ The registry has no `pdfjs-dist@5.3.34`. Published `5.3.31` is the nearby compar
 
 1. **Keep the standalone copies.** No unconditional upstream type imports are justified by this audit. An optional peer still cannot satisfy an import when the package is absent.
 2. **Separate structural gaps from nominal identity.** Missing public methods can be copied after runtime verification. Upstream private and protected members require their original declaration identity. Copying their names cannot supply it. See [TypeScript's compatibility rules](https://www.typescriptlang.org/docs/handbook/type-compatibility.html).
-3. **Use a separate, explicitly imported integration surface when full upstream identity is needed.** This is a direction for implementation and consumer testing, not an adapter delivered by this audit. Its imports must be unreachable from the default declaration bundles. Merely augmenting an upstream module cannot redirect a field whose type still names the local class.
+3. **Use a separate, explicitly imported integration surface when full upstream identity is needed.** The Pixi follow-up below delivers such a surface. Its imports must be unreachable from the default declaration bundles. Merely augmenting an upstream module cannot redirect a field whose type still names the local class.
 4. **Keep vendor additions local.** Obsidian IPC channel overloads, graph records and PDF testing helpers are not replaceable wholesale by a public package export. An opt-in integration needs to retain them alongside the public surface. Selected public facades, including MathJax's startup-generated methods, can also remain useful standalone contracts.
 
 ## Electron: 277 declaration files
@@ -47,7 +47,17 @@ Against `pixi.js-legacy@7.2.4`:
 3. Upstream `DisplayObject` and `Container` also fail assignment to the local shapes. The recursive `parent.addChild` contract reaches incompatible display-object types; a second path reaches `transform.pivot.copyTo`, whose upstream target must implement `IPoint`, while the local target needs only `IPointData`.
 4. Upstream `DisplayObject` declares private `tempDisplayObjectParent` and `_maskRefCount`, plus protected members including `_boundsID` and `_destroyed`. Upstream `Texture` declares protected `_rotate`. Even a complete structural copy would not share their identity.
 
-A full upstream-compatible graph surface therefore needs an opt-in integration or a deliberately limited structural boundary. Copying every public field is insufficient. Keep the default shapes until that integration has both standalone and installed-library consumer tests.
+A full upstream-compatible graph surface therefore needs an opt-in integration or a deliberately limited structural boundary. Copying every public field is insufficient. The default mirrors remain unchanged by the integration below.
+
+### Opt-in interoperability follow-up
+
+The type-only `/pixi` entry point has landed on both maintained 1.15.0 streams: [public](https://github.com/obsidian-typings/obsidian-typings/commit/037f7301d97f897a251c0b12301f71b71b65f649) and [catalyst](https://github.com/obsidian-typings/obsidian-typings/commit/ee8dcd87ffe6f144cc9b4fa656a36c955f317ccb). Loading it with `import type {} from 'obsidian-typings/pixi';` selects the installed `pixi.js-legacy@7.2.4` declarations for `loadPixi()`, `Window.PIXI`, global `PIXI`, and the Pixi boundaries of `GraphRenderer`, `GraphNode`, `GraphLink` and `PowerTag`. All graph records and their vendor members remain available. All 37 original Pixi mirror files are unchanged byte for byte; the default bundles import no Pixi package, and the package adds no Pixi dependency or peer requirement. Both wrapper layers forward the opt-in subpath.
+
+Both fresh full builds pass all eleven consumer scenarios. The [CommonJS](https://github.com/obsidian-typings/obsidian-typings/blob/main/tests/bundle-compat/scenario-10-pixi-cjs/index.ts) and [ESM](https://github.com/obsidian-typings/obsidian-typings/blob/main/tests/bundle-compat/scenario-11-pixi-esm/index.ts) scenarios pin the real published library and check ordinary assignments in both directions, including constructors, textures, transforms, graph fields and graph methods. The standalone scenario installs no Pixi package and reports zero diagnostics. All four default declaration bundles also validate with zero diagnostics.
+
+The two opt-in scenarios each report twelve upstream Pixi, DOM and module-resolution diagnostics separately under `TypeScript 6.0.3`. Declaration checking remains enabled with `skipLibCheck: false`; no casts or `any` bridges supply compatibility. The boundary gates pass, while the upstream declaration baseline retains those errors. Additional compiler probes covered CommonJS, ESM with bundler resolution, and Node16 ESM loading the default bundle through `types`: each checked sixteen initializers that were not `any`, and removing the opt-in import produced 23 boundary diagnostics with the same twelve upstream diagnostics. These probes supplement the persisted consumer scenarios.
+
+The implementations entry point needs the empty ambient registry too. Its bundler normally omits global declarations, so its postprocessor copies that one registry from the source file. Inlining every global instead was rejected by the consumers that load both entry points: it duplicates the existing global event index signature. The optional integration source stays outside index generation, and both packaged Pixi entry points are byte-identical copies of it.
 
 ## PDF.js: 39 declaration files
 
