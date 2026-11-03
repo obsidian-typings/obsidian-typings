@@ -20,6 +20,14 @@ export declare class PDFWorker {
   /** Creates a new PDFWorker instance. */
   constructor(params?: PDFWorkerParams);
 
+  /**
+   * Reuses the worker registered for the supplied port, or creates a new worker.
+   *
+   * @param params - Worker parameters.
+   * @returns The existing or newly created PDFWorker instance.
+   */
+  static create(params?: PDFWorkerParams): PDFWorker;
+
   /** Destroys the worker. */
   destroy(): void;
 
@@ -27,14 +35,11 @@ export declare class PDFWorker {
    * Creates a PDFWorker from an existing port.
    *
    * @param params - Parameters including the port.
-   * @returns A new PDFWorker instance.
+   * @returns The existing or newly created PDFWorker instance.
+   * @deprecated Use {@link PDFWorker.create} instead.
    */
   static fromPort(params: PDFWorkerFromPortParams): PDFWorker;
 
-  /**
-   * Gets the URL of the worker source.
-   *
-   * @returns The worker source URL.
-   */
-  static getWorkerSrc(): string;
+  /** The worker source URL. Throws if no worker source is configured. */
+  static get workerSrc(): string;
 }
