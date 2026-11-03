@@ -1,6 +1,6 @@
-import type { Container } from '../../../../pixi.js/internals/Container.d.ts';
-import type { Graphics } from '../../../../pixi.js/internals/Graphics.d.ts';
-import type { Sprite } from '../../../../pixi.js/internals/Sprite.d.ts';
+import type { InteropContainer as Container } from '../../../../pixi.js/interop/InteropContainer.d.ts';
+import type { InteropGraphics as Graphics } from '../../../../pixi.js/interop/InteropGraphics.d.ts';
+import type { InteropSprite as Sprite } from '../../../../pixi.js/interop/InteropSprite.d.ts';
 import type { GraphNode } from './GraphNode.d.ts';
 import type { GraphRenderer } from './GraphRenderer.d.ts';
 

@@ -21,8 +21,8 @@ import { obsidianTypingsPlugin } from './helpers/eslint-plugin-obsidian-typings/
 
 const gitignorePath = resolve(import.meta.dirname, '..', '.gitignore');
 
-const sourceFiles = ['src/**/*.ts', 'src/**/*.d.ts'];
-const declarationFiles = ['src/**/*.d.ts'];
+const sourceFiles = ['src/**/*.ts', 'src/**/*.d.ts', 'integrations/**/*.d.ts'];
+const declarationFiles = ['src/**/*.d.ts', 'integrations/**/*.d.ts'];
 
 /*
  * The repo's own tooling: the build scripts and the configuration files at the root. This is the scope the shared
@@ -98,6 +98,14 @@ export const config: Linter.Config[] = defineConfig([
   ...getOverrideConfigs(),
   ...getJsdocsConfigs(),
   ...getTsdocsConfigs(),
+  {
+    files: ['integrations/pixi.d.ts'],
+    rules: {
+      // This type-only entry point resolves Pixi from the opting-in consumer, tested by bundle scenarios.
+      'import-x/no-extraneous-dependencies': 'off',
+      'import-x/no-unresolved': 'off'
+    }
+  },
   {
     // Binding names are syntax-only; keep the shared type-aware layers scoped to tooling.
     files: sourceFiles,
