@@ -603,6 +603,10 @@ async function updateLatestWrapper(options: LatestWrapperOptions): Promise<void>
       './implementations': {
         import: { default: './implementations.mjs', types: './implementations.d.mts' },
         require: { default: './implementations.cjs', types: './implementations.d.cts' }
+      },
+      './pixi': {
+        import: { types: './pixi.d.mts' },
+        require: { types: './pixi.d.cts' }
       }
     },
     license: 'MIT',
@@ -624,6 +628,8 @@ async function updateLatestWrapper(options: LatestWrapperOptions): Promise<void>
   });
   await execFromRoot(`echo 'export type * from "${scopedPackageName}";' > .wrapper-tmp/types.d.mts`);
   await execFromRoot(`echo 'export type * from "${scopedPackageName}";' > .wrapper-tmp/types.d.cts`);
+  await execFromRoot(`echo 'export type * from "${scopedPackageName}/pixi";' > .wrapper-tmp/pixi.d.mts`);
+  await execFromRoot(`echo 'export type * from "${scopedPackageName}/pixi";' > .wrapper-tmp/pixi.d.cts`);
   await execFromRoot(`echo 'export * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.d.mts`);
   await execFromRoot(`echo 'export * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.d.cts`);
   await execFromRoot(`echo 'module.exports = require("${scopedPackageName}/implementations");' > .wrapper-tmp/implementations.cjs`);
@@ -656,6 +662,10 @@ async function updateLegacyWrapper(options: LegacyWrapperOptions): Promise<void>
       './implementations': {
         import: { default: './implementations.mjs', types: './implementations.d.mts' },
         require: { default: './implementations.cjs', types: './implementations.d.cts' }
+      },
+      './pixi': {
+        import: { types: './pixi.d.mts' },
+        require: { types: './pixi.d.cts' }
       }
     },
     license: 'MIT',
@@ -676,6 +686,8 @@ async function updateLegacyWrapper(options: LegacyWrapperOptions): Promise<void>
   });
   await execFromRoot(`echo 'export type * from "${latestWrapperName}";' > .legacy-tmp/types.d.mts`);
   await execFromRoot(`echo 'export type * from "${latestWrapperName}";' > .legacy-tmp/types.d.cts`);
+  await execFromRoot(`echo 'export type * from "${latestWrapperName}/pixi";' > .legacy-tmp/pixi.d.mts`);
+  await execFromRoot(`echo 'export type * from "${latestWrapperName}/pixi";' > .legacy-tmp/pixi.d.cts`);
   await execFromRoot(`echo 'export * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.d.mts`);
   await execFromRoot(`echo 'export * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.d.cts`);
   await execFromRoot(`echo 'module.exports = require("${latestWrapperName}/implementations");' > .legacy-tmp/implementations.cjs`);

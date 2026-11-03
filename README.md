@@ -251,3 +251,17 @@ A brief tutorial is available on how you can get started with adding new typings
 Open issues through the [issue forms](https://github.com/obsidian-typings/obsidian-typings/issues/new/choose), not as blank issues.
 
 Filing from the CLI or the API (`gh issue create --body`, or an AI agent filing for you) skips the form, and `gh issue create --template` cannot load an issue form. In that case, open the matching form in [`.github/ISSUE_TEMPLATE/`](https://github.com/obsidian-typings/obsidian-typings/tree/HEAD/.github/ISSUE_TEMPLATE), copy every field as a `### <label>` heading in the form's order, and fill in each one. Always state the version you used and your operating system.
+
+## Optional Pixi interoperability
+
+The default entry point keeps standalone library mirrors: it does not require `pixi.js-legacy`. For plugins that use the real Pixi declarations, install the exact version Obsidian vendors (currently `pixi.js-legacy@7.2.4`) and explicitly load the type-only integration:
+
+```ts
+import type {} from 'obsidian-typings/pixi';
+```
+
+Use the same `/pixi` subpath on a scoped per-version or latest package. This import is erased from JavaScript; it does not load another Pixi runtime. Continue using Obsidian's `loadPixi()` or the graph iframe's Pixi instance.
+
+The integration selects upstream types for `loadPixi()`, `Window.PIXI`, global `PIXI`, and the Pixi fields and methods on graph renderers, nodes, links and power tags. Graph records and vendor members remain available. The exported mirror classes, such as `Container`, remain standalone contracts; import full upstream class types from `pixi.js-legacy` when using that library. Opting in affects the whole TypeScript program through the reserved `ObsidianPixiTypes` registry, including CommonJS and ESM declarations loaded together.
+
+Pixi 7.2.4's own declarations have known errors against modern DOM libraries and Node16 package resolution. The consumer checks report those upstream diagnostics separately from errors in our declarations and consumer assignments; `skipLibCheck` stays disabled. The integration preserves class identity but does not repair the upstream declaration baseline. Do not assume compatibility with another Pixi major or version merely because it installs.
