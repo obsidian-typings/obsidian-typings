@@ -34,7 +34,7 @@ The copied classes have no TypeScript private/protected declarations. Their name
 3. `ElectronNativeImage` is assignable to that upstream `NativeImage`, but the reverse fails: upstream `getBitmap` returns `void`, while the copy returns `Buffer`.
 4. `ElectronRectangle` passes in both directions. A copied structural record is not inherently incompatible.
 
-These are reference-version findings. Establish the supported launcher versions before deleting or replacing members. Preserve IPC channel contracts and the local window extension. A direct import of `electron` would add a module-resolution requirement even with runtime installation scripts disabled; it is unsuitable for the default standalone surface.
+These initial findings used a comparison reference, not a launcher requirement. The launcher matrix below records the follow-up evidence. A direct import of `electron` would add a module-resolution requirement even with runtime installation scripts disabled; it is unsuitable for the default standalone surface.
 
 ### Launcher matrix and interoperability follow-up
 
@@ -52,6 +52,10 @@ The following declaration probes use TypeScript 6.0.3 with full declaration chec
 All four comparisons have zero upstream declaration diagnostics with those pins. Node 18.19.0 failed against the modern compiler's generic typed arrays; Node 20.17.30 resolves that baseline for the older Electron packages. Electron 43.8.3's own dependency range starts at Node declarations 24.9.0. The pins keep Electron's global `Process.noDeprecation` declaration compatible, rather than suppressing its conflict with newer Node declarations. These are compiler compatibility pins, not runtime Node version claims.
 
 One default mirror cannot have the exact signatures of all these launcher generations. The explicit `/electron` integration selects the consumer's installed Electron contracts at `FrameDom`, the global module handles and `ElectronWindow`. Standalone declarations keep their local copies and import no Electron package. The integration preserves Obsidian IPC channel overloads and the local window extension; it does not replace Obsidian's renderer module with the entire main-process namespace. Consumers must choose Electron declarations matching their actual launcher and still feature-detect newer APIs. The original `ElectronBrowserWindow` and other mirror exports remain standalone contracts, independently of this selection.
+
+The integration has landed on both maintained 1.15.0 streams: [public](https://github.com/obsidian-typings/obsidian-typings/commit/73103194f1a943fa2ccd74120672955b7947957c) and [catalyst](https://github.com/obsidian-typings/obsidian-typings/commit/8ab6de93323250d729c7e1577042a69f837a609a). Both fresh full builds pass all thirteen consumer scenarios, all four default declaration-bundle checks and API Extractor. The [Electron CommonJS](https://github.com/obsidian-typings/obsidian-typings/blob/main/tests/bundle-compat/scenario-12-electron-cjs/index.ts) and [Electron ESM](https://github.com/obsidian-typings/obsidian-typings/blob/main/tests/bundle-compat/scenario-13-electron-esm/index.ts) scenarios retain every diagnostic, including upstream files, and report zero. They check ordinary window assignments in both directions, constructors, images, rectangles, vendor extensions and non-`any` typed IPC results. Additional emitted-declaration probes against all four matrix versions in both module formats report zero diagnostics in all eight programs.
+
+All 277 original Electron mirror files are unchanged. The standalone consumer installs no Electron package, and all four default bundles import none. The optional CJS and ESM entries are byte-identical and included in package dry runs; both wrapper layers forward them. Both branches also pass all eighteen script tests with one worker. No dependency or peer requirement was added, and the changes are ready for the next release.
 
 ## Pixi: 37 declaration files
 
