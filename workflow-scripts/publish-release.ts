@@ -608,6 +608,10 @@ async function updateLatestWrapper(options: LatestWrapperOptions): Promise<void>
         import: { default: './implementations.mjs', types: './implementations.d.mts' },
         require: { default: './implementations.cjs', types: './implementations.d.cts' }
       },
+      './pdfjs': {
+        import: { types: './pdfjs.d.mts' },
+        require: { types: './pdfjs.d.cts' }
+      },
       './pixi': {
         import: { types: './pixi.d.mts' },
         require: { types: './pixi.d.cts' }
@@ -636,6 +640,8 @@ async function updateLatestWrapper(options: LatestWrapperOptions): Promise<void>
   await execFromRoot(`echo 'export type * from "${scopedPackageName}/pixi";' > .wrapper-tmp/pixi.d.cts`);
   await execFromRoot(`echo 'export type * from "${scopedPackageName}/electron";' > .wrapper-tmp/electron.d.mts`);
   await execFromRoot(`echo 'export type * from "${scopedPackageName}/electron";' > .wrapper-tmp/electron.d.cts`);
+  await execFromRoot(`echo 'export type * from "${scopedPackageName}/pdfjs";' > .wrapper-tmp/pdfjs.d.mts`);
+  await execFromRoot(`echo 'export type * from "${scopedPackageName}/pdfjs";' > .wrapper-tmp/pdfjs.d.cts`);
   await execFromRoot(`echo 'export * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.d.mts`);
   await execFromRoot(`echo 'export * from "${scopedPackageName}/implementations";' > .wrapper-tmp/implementations.d.cts`);
   await execFromRoot(`echo 'module.exports = require("${scopedPackageName}/implementations");' > .wrapper-tmp/implementations.cjs`);
@@ -673,6 +679,10 @@ async function updateLegacyWrapper(options: LegacyWrapperOptions): Promise<void>
         import: { default: './implementations.mjs', types: './implementations.d.mts' },
         require: { default: './implementations.cjs', types: './implementations.d.cts' }
       },
+      './pdfjs': {
+        import: { types: './pdfjs.d.mts' },
+        require: { types: './pdfjs.d.cts' }
+      },
       './pixi': {
         import: { types: './pixi.d.mts' },
         require: { types: './pixi.d.cts' }
@@ -700,6 +710,8 @@ async function updateLegacyWrapper(options: LegacyWrapperOptions): Promise<void>
   await execFromRoot(`echo 'export type * from "${latestWrapperName}/pixi";' > .legacy-tmp/pixi.d.cts`);
   await execFromRoot(`echo 'export type * from "${latestWrapperName}/electron";' > .legacy-tmp/electron.d.mts`);
   await execFromRoot(`echo 'export type * from "${latestWrapperName}/electron";' > .legacy-tmp/electron.d.cts`);
+  await execFromRoot(`echo 'export type * from "${latestWrapperName}/pdfjs";' > .legacy-tmp/pdfjs.d.cts`);
+  await execFromRoot(`echo 'export type * from "${latestWrapperName}/pdfjs";' > .legacy-tmp/pdfjs.d.mts`);
   await execFromRoot(`echo 'export * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.d.mts`);
   await execFromRoot(`echo 'export * from "${latestWrapperName}/implementations";' > .legacy-tmp/implementations.d.cts`);
   await execFromRoot(`echo 'module.exports = require("${latestWrapperName}/implementations");' > .legacy-tmp/implementations.cjs`);

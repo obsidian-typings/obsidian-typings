@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "obsidian-typings": "file:../../..",
+    "pdfjs-dist": "5.3.31",
+    "@types/node": "24.9.0",
+    "obsidian": "file:../../../node_modules/obsidian"
+  },
+  "private": true,
+  "name": "bundle-compat-scenario-14-pdfjs-cjs"
+}
