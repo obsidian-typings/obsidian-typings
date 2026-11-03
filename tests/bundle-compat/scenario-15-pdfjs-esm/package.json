@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "obsidian-typings": "file:../../..",
+    "pdfjs-dist": "5.3.31",
+    "@types/node": "24.9.0",
+    "obsidian": "file:../../../node_modules/obsidian"
+  },
+  "private": true,
+  "type": "module",
+  "name": "bundle-compat-scenario-15-pdfjs-esm"
+}
