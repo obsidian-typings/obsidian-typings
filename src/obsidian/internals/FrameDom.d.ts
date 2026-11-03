@@ -1,6 +1,6 @@
 import type { Debouncer } from 'obsidian';
 
-import type { ElectronBrowserWindow } from '../../electron/internals/ElectronBrowserWindow.d.ts';
+import type { InteropElectronBrowserWindow as ElectronBrowserWindow } from '../../electron/interop/InteropElectronBrowserWindow.d.ts';
 import type { getFrameDomConstructor } from '../implementations/constructors/internals/getFrameDomConstructor.d.ts';
 /**
  * DOM elements for the custom window frame (title bar) on desktop.

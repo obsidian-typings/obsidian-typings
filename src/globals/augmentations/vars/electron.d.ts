@@ -1,4 +1,4 @@
-import type { ElectronModule } from '../../../electron/internals/ElectronModule.d.ts';
+import type { InteropElectronModule as ElectronModule } from '../../../electron/interop/InteropElectronModule.d.ts';
 
 export {};
 

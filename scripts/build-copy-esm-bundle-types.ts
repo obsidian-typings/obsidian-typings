@@ -16,4 +16,6 @@ await wrapCliTask(async () => {
   // Keep the optional upstream import outside the generated standalone indexes and bundles.
   await cp('integrations/pixi.d.ts', 'dist/cjs/pixi.d.cts');
   await cp('integrations/pixi.d.ts', 'dist/esm/pixi.d.mts');
+  await cp('integrations/electron.d.ts', 'dist/cjs/electron.d.cts');
+  await cp('integrations/electron.d.ts', 'dist/esm/electron.d.mts');
 });

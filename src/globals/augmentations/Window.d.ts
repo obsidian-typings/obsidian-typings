@@ -13,8 +13,8 @@ import type { CodeMirrorAdapterEx } from '../../@codemirror__view/internals/Code
 import type { VimApi } from '../../@codemirror__view/internals/vim/VimApi.d.ts';
 import type { CodeMirrorModule } from '../../codemirror/internals/CodeMirrorModule.d.ts';
 import type { DOMPurifyEx } from '../../dompurify/internals/DOMPurifyEx.d.ts';
-import type { ElectronModule } from '../../electron/internals/ElectronModule.d.ts';
 import type { ElectronWebviewTag } from '../../electron/internals/ElectronWebviewTag.d.ts';
+import type { InteropElectronModule as ElectronModule } from '../../electron/interop/InteropElectronModule.d.ts';
 import type { I18n } from '../../i18next/internals/I18n.d.ts';
 import type { MathJaxEx } from '../../mathjax/internals/MathJaxEx.d.ts';
 import type { Mermaid } from '../../mermaid/internals/Mermaid.d.ts';

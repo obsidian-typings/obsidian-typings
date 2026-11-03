@@ -1,4 +1,4 @@
-import type { ElectronBrowserWindow } from '../../electron/internals/ElectronBrowserWindow.d.ts';
+import type { InteropElectronBrowserWindow as ElectronBrowserWindow } from '../../electron/interop/InteropElectronBrowserWindow.d.ts';
 
 /**
  * Extended Electron BrowserWindow with internal properties.
