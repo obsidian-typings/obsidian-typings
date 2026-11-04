@@ -47,7 +47,7 @@ const task: RenderTask = localPage.render({ canvasContext: canvasContext, viewpo
 const createdWorker: PDFWorker = new pdf.PDFWorker();
 const windowTask: PDFDocumentLoadingTask | undefined = window.pdfjsLib?.getDocument('sample.pdf');
 const globalTask: PDFDocumentLoadingTask = pdfjsLib.getDocument('sample.pdf');
-localRenderTask.onContinue = (resume) => resume();
+localRenderTask.onContinue = (resume: () => void) => resume();
 const testing: PdfJsTestingUtils = window.pdfjsTestingUtils;
 declare const outline: HighlightOutline;
 void outline;
