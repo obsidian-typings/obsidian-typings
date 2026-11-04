@@ -23,8 +23,8 @@ import type { ExtractConstructor } from '../../obsidian/internals/constructors/E
 import type { ElectronWindow } from '../../obsidian/internals/ElectronWindow.d.ts';
 import type { FrameDom } from '../../obsidian/internals/FrameDom.d.ts';
 import type { Localization } from '../../obsidian/internals/Localization.d.ts';
-import type { PdfJsModule } from '../../pdfjs-dist/internals/PdfJsModule.d.ts';
 import type { PdfJsTestingUtils } from '../../pdfjs-dist/internals/PdfJsTestingUtils.d.ts';
+import type { InteropPdfJsModule as PdfJsModule } from '../../pdfjs-dist/interop/InteropPdfJsModule.d.ts';
 import type { InteropPixiModule as PixiModule } from '../../pixi.js/interop/InteropPixiModule.d.ts';
 import type { PrismModule } from '../../prismjs/internals/PrismModule.d.ts';
 import type { ScryptModule } from '../../scrypt-js/internals/ScryptModule.d.ts';

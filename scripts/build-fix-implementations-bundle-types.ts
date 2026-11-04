@@ -15,5 +15,6 @@ await wrapCliTask(async () => {
   const content = await readFile(bundleTypesFilePath, 'utf-8');
   const registry = await readFile('src/globals/augmentations/ObsidianPixiTypes.d.ts', 'utf-8');
   const electronRegistry = await readFile('src/globals/augmentations/ObsidianElectronTypes.d.ts', 'utf-8');
-  await writeFile(bundleTypesFilePath, `${content}\n${registry}\n${electronRegistry}`, 'utf-8');
+  const pdfJsRegistry = await readFile('src/globals/augmentations/ObsidianPdfJsTypes.d.ts', 'utf-8');
+  await writeFile(bundleTypesFilePath, `${content}\n${registry}\n${electronRegistry}\n${pdfJsRegistry}`, 'utf-8');
 });
