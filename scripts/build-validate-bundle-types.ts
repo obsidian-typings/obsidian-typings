@@ -93,6 +93,11 @@ async function main(): Promise<CliTaskResult> {
       isOk = false;
     }
 
+    if (imports.some(({ fileName }) => fileName === 'pdfjs-dist' || fileName.startsWith('pdfjs-dist/') || fileName.includes('/pdfjs.d.') || fileName.endsWith('/pdfjs'))) {
+      console.error(`${bundleFile} pulls the optional PDF.js integration into the standalone surface.`);
+      isOk = false;
+    }
+
     const isBundleOk = checkProjectTypes({
       options: consumerOptions,
       rootNames: [bundlePath],

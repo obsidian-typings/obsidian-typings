@@ -1,6 +1,6 @@
 import { loadPdfJs as loadPdfJsOriginal } from 'obsidian';
 
-import type { PdfJsModule } from '../../../pdfjs-dist/internals/PdfJsModule.d.ts';
+import type { InteropPdfJsModule as PdfJsModule } from '../../../pdfjs-dist/interop/InteropPdfJsModule.d.ts';
 
 /**
  * Load PDF.js and return a promise to the global pdfjsLib object.
