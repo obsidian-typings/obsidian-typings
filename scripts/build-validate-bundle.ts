@@ -59,10 +59,10 @@ async function main(): Promise<CliTaskResult> {
     try {
       const { fileNames, options } = parseTsConfig(join(scenarioDirectory, 'tsconfig.json'));
       const isOk = checkProjectTypes({
-        isVerbose: scenario.includes('pixi') || scenario.includes('electron'),
+        isVerbose: scenario.includes('pixi') || scenario.includes('electron') || scenario.includes('pdfjs'),
         options,
         rootNames: fileNames,
-        shouldKeepFile: (fileName) => scenario.includes('electron') || shouldKeepScenarioFile(fileName, rootCanonical)
+        shouldKeepFile: (fileName) => scenario.includes('electron') || scenario.includes('pdfjs') || shouldKeepScenarioFile(fileName, rootCanonical)
       });
 
       if (isOk) {

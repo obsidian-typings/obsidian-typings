@@ -57,6 +57,14 @@
         "types": "./dist/esm/pixi.d.mts"
       }
     },
+    "./pdfjs": {
+      "require": {
+        "types": "./dist/cjs/pdfjs.d.cts"
+      },
+      "import": {
+        "types": "./dist/esm/pdfjs.d.mts"
+      }
+    },
     "./electron": {
       "require": {
         "types": "./dist/cjs/electron.d.cts"
