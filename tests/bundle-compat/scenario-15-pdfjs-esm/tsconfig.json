@@ -12,7 +12,7 @@
     ],
     "paths": {
       "pdfjs-dist": [
-        "./node_modules/pdfjs-dist"
+        "./node_modules/pdfjs-dist/types/src/pdf.d.ts"
       ]
     }
   },

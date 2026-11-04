@@ -264,6 +264,20 @@ The same `/electron` subpath is available on scoped per-version and latest packa
 
 Selection applies to the whole TypeScript program through the reserved `ObsidianElectronTypes` registry, including mixed CommonJS and ESM entry points. The integration does not imply that newer methods exist on an older launcher. Feature-detect APIs and use Electron declarations matching the runtime. The updater currently accepts installers from 1.1.9 (Electron 21); installer 1.14.5 ships Electron 43.8.3. See the [launcher matrix](https://github.com/obsidian-typings/obsidian-typings/blob/main/reports/library-mirror-audit-2026-11-03.md#launcher-matrix-and-interoperability-follow-up) for evidence and compiler pins. In particular, older Electron declarations conflict with recent Node declarations over `Process.noDeprecation`: the consumer checks pin Node declarations 20.17.30 for Electron 21.3.1 and 24.9.0 for Electron 43.8.3, with full declaration checking enabled. These type pins do not change the runtime.
 
+## Optional PDF.js interoperability
+
+The default declarations keep standalone PDF.js mirrors and require no `pdfjs-dist` package. To use installed public PDF.js declarations, install `pdfjs-dist@5.3.31` as a development dependency and load the type-only integration:
+
+```ts
+import type {} from 'obsidian-typings/pdfjs';
+```
+
+The same `/pdfjs` subpath is available on scoped per-version and latest packages. It selects installed declarations for `loadPdfJs()` from `obsidian-typings/implementations`, `window.pdfjsLib` and global `pdfjsLib`, across the whole TypeScript program including mixed CommonJS and ESM imports. It loads no JavaScript; continue using Obsidian's PDF.js instance.
+
+The exported `InteropPDFDocumentLoadingTask`, `InteropPDFDocumentProxy`, `InteropPDFPageProxy`, `InteropPDFWorker` and `InteropRenderTask` aliases name the selected contracts. Without the integration they select standalone mirrors; with it they retain upstream private-member identity. The original mirror exports and the separate `PdfJsTestingUtils`, `HighlightOutline`, `HighlightOutliner` and testing globals remain available.
+
+The verified Obsidian 1.14.4 and 1.15.0 builds vendor PDF.js 5.3.34, build `cc1e2a3e0`, which was never published to npm. Version 5.3.31 is the tested published comparison, not an exact vendor match or a promise about other versions. Selecting the package's public signatures does not establish that every upstream export exists in every Obsidian build. See the [library mirror audit](reports/library-mirror-audit-2026-11-03.md) for the source evidence and limits.
+
 ## Optional Pixi interoperability
 
 The default entry point keeps standalone library mirrors: it does not require `pixi.js-legacy`. For plugins that use the real Pixi declarations, install the exact version Obsidian vendors (currently `pixi.js-legacy@7.2.4`) and explicitly load the type-only integration:
