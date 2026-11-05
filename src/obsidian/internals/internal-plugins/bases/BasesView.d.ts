@@ -1,12 +1,12 @@
 import type {
   FileView,
+  QueryController,
   TextFileView,
   TFile,
   WorkspaceLeaf
 } from 'obsidian';
 
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
-import type { BasesController } from './BasesController.d.ts';
 import type { BasesPluginInstance } from './BasesPluginInstance.d.ts';
 import type { BasesQuery } from './BasesQuery.d.ts';
 
@@ -20,7 +20,7 @@ export interface BasesView extends TextFileView {
   /**
    * The controller for the view.
    */
-  controller: BasesController;
+  controller: QueryController;
 
   /**
    * The last data of the view.
@@ -33,9 +33,9 @@ export interface BasesView extends TextFileView {
   plugin: BasesPluginInstance;
 
   /**
-   * The query for the view.
+   * The query for the view, or `null` when the file content does not parse.
    */
-  query: BasesQuery;
+  query: BasesQuery | null;
 
   /**
    * Constructor.
