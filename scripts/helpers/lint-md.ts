@@ -4,9 +4,13 @@
  * Lint markdown documentation using `markdownlint-cli2` and `linkinator`.
  */
 
+import { exec } from '@mnaoumov/typescript-dev-toolkit/exec';
 import { getNonIgnoredFiles } from '@mnaoumov/typescript-dev-toolkit/git';
 import { resolveToolCommand } from '@mnaoumov/typescript-dev-toolkit/package-manager';
-import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
+import {
+  execFromRoot,
+  getRootFolder
+} from '@mnaoumov/typescript-dev-toolkit/root';
 import { glob } from 'node:fs/promises';
 
 import {
@@ -17,6 +21,11 @@ import {
 interface LintMdParams {
   readonly paths?: string[] | undefined;
   readonly shouldFix?: boolean | undefined;
+}
+
+interface VerifyLinksParams {
+  readonly files: readonly string[];
+  readonly serverRoot: string;
 }
 
 /*
@@ -42,11 +51,37 @@ export async function lintMd(params: LintMdParams): Promise<void> {
     return;
   }
 
+  const rootFolder = getRootFolder();
+  if (rootFolder === null) {
+    throw new Error('Cannot find the repository root folder.');
+  }
+
   const mdFiles = paths.length > 0
     ? paths
     : await getMarkdownFiles();
-  await execFromRoot([
+  await verifyLinks({ files: mdFiles, serverRoot: rootFolder });
+}
+
+/**
+ * Verifies the links in markdown files with `linkinator`.
+ *
+ * `linkinator` serves the files it checks from a local web server, and when it is handed exactly one file and no
+ * `--server-root`, it serves that file's own folder. A `../` link then climbs above the server root, the URL
+ * clamps it back to the root, and `reports/x.md` linking `../tests/a.ts` is reported as a 404 for
+ * `reports/tests/a.ts`. More than one file makes it serve the working folder instead, so the defect only showed
+ * when a single file (or a batch of one) was checked. Passing the root explicitly makes every invocation agree.
+ *
+ * The root must be absolute: `linkinator` strips as many leading segments from each file path as the root has,
+ * so `.` (one segment) turns `reports/x.md` into `x.md`.
+ *
+ * @param params - The files, relative to `serverRoot`, and the absolute folder they are served from.
+ */
+export async function verifyLinks(params: VerifyLinksParams): Promise<void> {
+  const { files, serverRoot } = params;
+  await exec([
     ...resolveToolCommand({ tool: 'linkinator' }),
+    '--server-root',
+    serverRoot,
     /*
      * GitHub answers 404 to logged-out requests for a repo's stargazers page, so linkinator reports the
      * README's star badge link as broken even though it resolves fine in a browser. Keep the pattern free of
@@ -64,8 +99,8 @@ export async function lintMd(params: LintMdParams): Promise<void> {
     String.raw`https://www\.npmjs\.com/package/`,
     '--url-rewrite-replace',
     'https://registry.npmjs.org/',
-    { batchedArguments: mdFiles }
-  ]);
+    { batchedArguments: files }
+  ], { cwd: serverRoot });
 }
 
 function checkIsUnchecked(path: string): boolean {

@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitest/config';
 
 const DOCS_TEST_FILES = 'docs/scripts/**/*.test.ts';
+const SCRIPTS_TEST_FILES = 'scripts/**/*.test.ts';
 const SHARED_EXCLUDE = ['node_modules', 'dist'];
 const WORKFLOW_SCRIPTS_TEST_FILES = 'workflow-scripts/**/*.test.ts';
 
@@ -31,6 +32,14 @@ export const config = defineConfig({
           exclude: [...SHARED_EXCLUDE, 'docs/node_modules'],
           include: [DOCS_TEST_FILES],
           name: 'unit-tests:docs'
+        }
+      },
+      {
+        // The root package's own tooling, such as the markdown link checker in `scripts/helpers/lint-md.ts`.
+        test: {
+          environment: 'node',
+          include: [SCRIPTS_TEST_FILES],
+          name: 'unit-tests:scripts'
         }
       }
     ]
