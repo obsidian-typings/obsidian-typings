@@ -1,10 +1,10 @@
-import type {
-  App,
-  Modal
-} from 'obsidian';
+import type { App } from 'obsidian';
 
+import type { ExtractConstructor } from '../../constructors/ExtractConstructor.d.ts';
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
+import type { QuickSwitcherModal } from './QuickSwitcherModal.d.ts';
 import type { SwitcherPlugin } from './SwitcherPlugin.d.ts';
+import type { SwitcherPluginOptions } from './SwitcherPluginOptions.d.ts';
 
 /**
  * Plugin instance for the quick switcher, providing fuzzy file search and navigation.
@@ -16,7 +16,7 @@ export interface SwitcherPluginInstance extends InternalPluginInstance<SwitcherP
   /**
    * The currently open quick-switcher modal, or `null` if none is open.
    */
-  activeModal: Modal | null;
+  activeModal: null | QuickSwitcherModal;
 
   /**
    * Reference to the app.
@@ -31,7 +31,7 @@ export interface SwitcherPluginInstance extends InternalPluginInstance<SwitcherP
   /**
    * The plugin's options.
    */
-  options: unknown;
+  options: SwitcherPluginOptions;
 
   /**
    * Reference to the switcher plugin registration.
@@ -39,9 +39,9 @@ export interface SwitcherPluginInstance extends InternalPluginInstance<SwitcherP
   plugin: SwitcherPlugin;
 
   /**
-   * The quick-switcher modal constructor.
+   * The quick-switcher modal constructor, called as `new QuickSwitcherModal(app, options)`.
    */
-  QuickSwitcherModal: unknown;
+  QuickSwitcherModal: ExtractConstructor<QuickSwitcherModal>;
 
   /**
    * Handles a settings change made externally (e.g. by Sync).
