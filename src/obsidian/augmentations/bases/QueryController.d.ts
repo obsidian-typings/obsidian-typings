@@ -527,10 +527,10 @@ declare module 'obsidian' {
     /**
      * Updates the current file and re-runs the query if needed.
      *
-     * @param file - The new current file.
+     * @param file - The new current file, or `null` to clear it.
      * @unofficial
      */
-    updateCurrentFile(file: TFile): void;
+    updateCurrentFile(file: null | TFile): void;
 
     /**
      * Updates the search query and re-notifies the view if it changed.

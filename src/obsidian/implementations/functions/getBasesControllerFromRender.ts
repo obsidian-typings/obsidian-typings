@@ -1,14 +1,13 @@
 import type {
   App,
-  Component
+  Component,
+  QueryController
 } from 'obsidian';
 
 import { MarkdownRenderer } from 'obsidian';
 
-import type { BasesController } from '../../internals/internal-plugins/bases/BasesController.d.ts';
-
 /**
- * Render a base into a detached, off-screen element and return the live {@link BasesController} that drives
+ * Render a base into a detached, off-screen element and return the live {@link obsidian#QueryController} that drives
  * it. This is the leaf-free route to headless base evaluation: it runs Obsidian's own base-embed processor
  * via the public {@link obsidian#MarkdownRenderer.render}, then locates the controller in the render's
  * component tree.
@@ -20,7 +19,7 @@ import type { BasesController } from '../../internals/internal-plugins/bases/Bas
  * @param content - The `.base` file content (the body of a `base` code block).
  * @param sourcePath - The path supplying the query's file context.
  * @param component - The component that owns the render; the caller unloads it.
- * @returns The live {@link BasesController} for the rendered base.
+ * @returns The live {@link obsidian#QueryController} for the rendered base.
  *
  * @public
  * @unofficial
@@ -30,7 +29,7 @@ export async function getBasesControllerFromRender(
   content: string,
   sourcePath: string,
   component: Component
-): Promise<BasesController> {
+): Promise<QueryController> {
   // The `_children` walk plus the controller's `query` / `results` are runtime internals not modeled on
   // Component, so they are typed locally purely to breadth-first search the render tree.
   interface ComponentTreeNode {
@@ -68,7 +67,7 @@ export async function getBasesControllerFromRender(
     seen.add(node);
 
     if (node.results instanceof Map && 'query' in node) {
-      return node as unknown as BasesController;
+      return node as unknown as QueryController;
     }
 
     for (const child of node._children ?? []) {
@@ -76,5 +75,5 @@ export async function getBasesControllerFromRender(
     }
   }
 
-  throw new Error('Could not locate the BasesController in the rendered component tree.');
+  throw new Error('Could not locate the QueryController in the rendered component tree.');
 }
