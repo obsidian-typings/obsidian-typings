@@ -3,5 +3,5 @@ import { resolveToolCommand } from '@mnaoumov/typescript-dev-toolkit/package-man
 import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
 
 await wrapCliTask(async () => {
-  await execFromRoot([...resolveToolCommand({ tool: 'vitest' }), 'run', '--project', 'unit-tests:workflow-scripts', '--project', 'unit-tests:docs']);
+  await execFromRoot([...resolveToolCommand({ tool: 'vitest' }), 'run', '--project', 'unit-tests:workflow-scripts', '--project', 'unit-tests:docs', '--project', 'unit-tests:scripts']);
 });
