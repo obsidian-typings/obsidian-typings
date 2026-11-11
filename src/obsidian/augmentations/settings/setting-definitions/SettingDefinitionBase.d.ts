@@ -30,8 +30,10 @@ declare module 'obsidian' {
      * `refreshDomState()` on the setting tab to re-evaluate in place.
      *
      * Takes precedence over the `disabled` of a {@link SettingDefinitionControl}'s
-     * own control. Precedence is decided by key presence, so setting this to
-     * `undefined` explicitly still suppresses that fallback.
+     * own control. To fall back to the control's own `disabled`, leave this key
+     * out: current builds decide precedence by key presence, so an explicit
+     * `undefined` still suppresses the fallback, but that is an implementation
+     * detail rather than part of the API, and may change.
      *
      * @unofficial
      * @since 1.13.0
