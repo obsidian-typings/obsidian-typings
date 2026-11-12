@@ -30,9 +30,11 @@ const declarationFiles = ['src/**/*.d.ts', 'integrations/**/*.d.ts'];
  */
 const toolingFiles = ['*.mts', '*.ts', 'scripts/**/*.ts'];
 
-// The minimum Obsidian installer that still receives app updates (0.14.5) ships Electron 18.0.3, which runs Node 16.13.2.
+// The oldest Obsidian installer that still receives app updates is the update manifest's `minimumVersion`, 1.1.9
+// (https://github.com/obsidianmd/obsidian-releases/blob/master/desktop-releases.json, checked 2026-11-12).
+// That installer moved to Electron 21, and every Electron 21.x release runs Node 16.16.0.
 // Shipped code must therefore avoid Node/ES runtime features unavailable in that version. Scripts are dev-only and exempt.
-const minimumNodeVersion = '>=16.13.2';
+const minimumNodeVersion = '>=16.16.0';
 
 /*
  * Two layers, over two disjoint sets of files.
