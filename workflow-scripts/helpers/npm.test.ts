@@ -22,7 +22,36 @@ import {
   it
 } from 'vitest';
 
-import { getTrustedPublisherStateAfterAttach } from './npm.ts';
+import {
+  getPlaceholderPublishRefusal,
+  getTrustedPublisherStateAfterAttach
+} from './npm.ts';
+
+describe('getPlaceholderPublishRefusal', () => {
+  it('reads a previously staged placeholder as claimed', () => {
+    const output = [
+      'npm error code E409',
+      'npm error 409 Conflict - PUT https://registry.npmjs.org/@obsidian-typings%2fobsidian-catalyst-1.15.1'
+      + ' - Cannot publish over previously staged version "0.0.0".'
+    ].join('\n');
+    expect(getPlaceholderPublishRefusal(output)).toBe('previouslyStaged');
+  });
+
+  it('reads a previously published placeholder as claimed', () => {
+    const output = [
+      'npm error code E403',
+      'npm error 403 403 Forbidden - PUT https://registry.npmjs.org/@obsidian-typings%2fobsidian-catalyst-1.15.1'
+      + ' - You cannot publish over the previously published versions: 0.0.0.'
+    ].join('\n');
+    expect(getPlaceholderPublishRefusal(output)).toBe('previouslyPublished');
+  });
+
+  it('does not read any other refusal as claimed', () => {
+    expect(getPlaceholderPublishRefusal('npm error code E403\nnpm error 403 Forbidden - You do not have permission to publish')).toBeNull();
+    expect(getPlaceholderPublishRefusal('npm error code E404\nnpm error 404 Not Found - PUT')).toBeNull();
+    expect(getPlaceholderPublishRefusal('npm error code EOTP')).toBeNull();
+  });
+});
 
 describe('getTrustedPublisherStateAfterAttach', () => {
   it('reports a successful attach as attached', () => {

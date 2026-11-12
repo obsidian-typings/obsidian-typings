@@ -36,6 +36,17 @@ import { askLine } from './prompt.ts';
 export type PackageRegistryState = 'missing' | 'placeholderOnly' | 'released';
 
 /**
+ * Why the registry refused the placeholder publish in a way that means the name is already claimed.
+ *
+ * Both were answered on 2026-11-04 to `bootstrap-new-package -- 1.15.1 catalyst`, a minute apart, while the
+ * unauthenticated packument still answered 404: first `E409 Cannot publish over previously staged version
+ * "0.0.0"`, then `E403 You cannot publish over the previously published versions: 0.0.0`. Neither says the
+ * publish failed for a reason worth stopping on: the version the script was trying to put there is already
+ * there. See {@link getPlaceholderPublishRefusal}.
+ */
+export type PlaceholderPublishRefusal = 'previouslyPublished' | 'previouslyStaged';
+
+/**
  * How an {@link attachTrustedPublisher} attempt ended.
  *
  * Until 2026-09-16 this was a bare `boolean`, and every non-success below was one `false`: everything npm
@@ -141,6 +152,21 @@ const OTP_ERROR_CODE = 'EOTP';
  * the package with no publisher.
  */
 const CONFLICT_ERROR_CODE = 'E409';
+
+/*
+ * The registry's own wording for the two refusals {@link PlaceholderPublishRefusal} names. Matched on the
+ * sentence rather than on `E409` / `E403`, because both codes also carry refusals that mean the opposite --
+ * `E403` is what a scope this account cannot publish to answers with too.
+ */
+const PREVIOUSLY_STAGED_PATTERN = /cannot publish over previously staged version/iu;
+const PREVIOUSLY_PUBLISHED_PATTERN = /cannot publish over the previously published version/iu;
+
+/*
+ * The one `npm access get status` answer that proves a name is claimed. The placeholder is published with
+ * `--access public`, and a name nobody has published answers `private` with exit 0 (measured 2026-11-12,
+ * npm 12.2.1, logged out), so `private` proves nothing either way.
+ */
+const PUBLIC_ACCESS_STATUS = 'public';
 
 /**
 What {@link attachTrustedPublisher} did, and what npm said while it was doing it.
@@ -466,6 +492,22 @@ export async function getPackageRegistryState(packageName: string): Promise<Pack
 }
 
 /**
+ * Reads npm's output from a failed placeholder publish and says whether it refused because the placeholder
+ * version is already there -- staged or published -- or `null` for any other failure.
+ *
+ * Either answer means the name is claimed, so `bootstrap-new-package.ts` carries on to the trusted-publisher
+ * attach rather than throwing. Until 2026-11-04 it threw on both, with no hint that the claim it was trying to
+ * make had already happened.
+ */
+export function getPlaceholderPublishRefusal(npmOutput: string): null | PlaceholderPublishRefusal {
+  if (PREVIOUSLY_STAGED_PATTERN.test(npmOutput)) {
+    return 'previouslyStaged';
+  }
+
+  return PREVIOUSLY_PUBLISHED_PATTERN.test(npmOutput) ? 'previouslyPublished' : null;
+}
+
+/**
  * Resolves the registry name of the per-Obsidian-version package a release branch publishes to, e.g.
  * `@obsidian-typings/obsidian-public-1.13.7`.
  */
@@ -610,6 +652,38 @@ export async function hasTrustedPublisher(packageName: string): Promise<boolean 
   const isClientError = response.status >= CLIENT_ERROR_MIN_STATUS && response.status <= CLIENT_ERROR_MAX_STATUS;
   // eslint-disable-next-line typescript-dev-toolkit/prefer-logical-operator-over-ternary -- `false` (a definite refusal) and `null` (no answer) are two different results; `!isClientError && null` would hide that.
   return isClientError ? false : null;
+}
+
+/**
+ * Reports whether npm's access endpoint says a package name is already claimed, as a second opinion for when
+ * {@link getPackageRegistryState} answers `missing`.
+ *
+ * The two can disagree. On 2026-11-04 the unauthenticated packument for
+ * `@obsidian-typings/obsidian-catalyst-1.15.1` answered 404 while `npm access get status` answered `public`
+ * and the placeholder publish was refused with "previously published" -- the packument lags the claim. So a
+ * `missing` that this contradicts is not taken at its word.
+ *
+ * Only `public` counts: a name nobody has published answers `private` with exit 0 (measured 2026-11-12, npm
+ * 12.2.1). The read needs no login. Never throws: any failure answers `false`, which leaves the caller on the
+ * publish path, where {@link getPlaceholderPublishRefusal} catches the same case from the other side.
+ */
+export async function isPackageNameClaimed(packageName: string): Promise<boolean> {
+  const result = await execFromRoot(['npm', 'access', 'get', 'status', packageName, '--json'], {
+    isQuiet: true,
+    shouldIgnoreExitCode: true,
+    shouldIncludeDetails: true
+  });
+
+  if (result.exitCode !== 0) {
+    return false;
+  }
+
+  try {
+    const statuses = JSON.parse(result.stdout) as Record<string, unknown>;
+    return statuses[packageName] === PUBLIC_ACCESS_STATUS;
+  } catch {
+    return false;
+  }
 }
 
 /**
