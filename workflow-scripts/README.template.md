@@ -22,4 +22,8 @@ npm install --save-dev @obsidian-typings/obsidian-{{CHANNEL}}-{{OBSIDIAN_VERSION
 >
 > If you are making a PR to this branch, please make sure to verify that all your changes are applicable to this version.
 
+## Changelog
+
+All notable changes to this project will be documented in the [CHANGELOG](./CHANGELOG.md).
+
 [See full docs](https://github.com/obsidian-typings/obsidian-typings/blob/main/README.md)
