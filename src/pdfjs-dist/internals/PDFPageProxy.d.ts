@@ -63,9 +63,6 @@ export interface PDFPageProxy {
    */
   getViewport(params: GetViewportParams): PageViewport;
 
-  /** Height of the page. */
-  get height(): number;
-
   /**
    * Renders the page to a canvas context.
    *
@@ -81,7 +78,4 @@ export interface PDFPageProxy {
    * @returns A readable stream of text content.
    */
   streamTextContent(params?: GetTextContentParams): ReadableStream;
-
-  /** Width of the page. */
-  get width(): number;
 }
