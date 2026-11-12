@@ -41,10 +41,15 @@
  * So the placeholder is published DEPRECATED, which is the part that makes that window survivable: the
  * install still succeeds, but npm says in its own voice what was installed and that there are no types in it.
  * See `publishPlaceholder` for why this rather than moving `latest` off the placeholder by hand.
+ *
+ * A name an earlier run already claimed is carried on from, not re-claimed. The unauthenticated packument can
+ * still answer 404 for it (2026-11-04, `1.15.1 catalyst`), so `npm access get status` is asked as a second
+ * opinion, and a publish refused as "previously staged" or "previously published" is read the same way: both
+ * go straight on to the trusted-publisher attach and the release offer instead of throwing.
  */
 
 import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
-import { execFileSync } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import {
   mkdir,
   rm,
@@ -54,7 +59,10 @@ import { join } from 'node:path';
 import process from 'node:process';
 
 import type { BranchSpec } from './helpers/branch-spec.ts';
-import type { TrustedPublisherState } from './helpers/npm.ts';
+import type {
+  PlaceholderPublishRefusal,
+  TrustedPublisherState
+} from './helpers/npm.ts';
 
 import { withStartingBranchRestored } from './helpers/git.ts';
 import { offerRelease } from './helpers/hand-back.ts';
@@ -64,8 +72,10 @@ import {
   describeTrustedPublisherAttach,
   getNpmUsername,
   getPackageRegistryState,
+  getPlaceholderPublishRefusal,
   getScopedPackageName,
   getTrustedPublisherStateAfterAttach,
+  isPackageNameClaimed,
   PLACEHOLDER_VERSION,
   REPOSITORY,
   resolveTrustedPublisherState
@@ -73,6 +83,24 @@ import {
 
 const BOOTSTRAP_FOLDER = '.bootstrap-tmp';
 const PLACEHOLDER_DIST_TAG = 'bootstrap';
+
+interface TeedRunResult {
+  readonly exitCode: null | number;
+  readonly stderr: string;
+}
+
+/**
+ * The rest of the hand-back for a name that is already claimed, by this run or an earlier one: read or attach
+ * its trusted publisher, then offer the release.
+ *
+ * Unlike the fresh-claim path, nothing here knows who claimed the name or when, so the publisher state is
+ * READ first rather than assumed to be `none`.
+ */
+async function handBackClaimedName(branchSpec: BranchSpec, packageName: string): Promise<void> {
+  console.log('Nothing has ever published through it, though, so its trusted publisher may still be missing --');
+  console.log('the half that gets skipped, and that surfaces in CI as a bare E404 and nowhere else. Asking npm.');
+  await offerRelease(branchSpec, packageName, await resolveTrustedPublisherState(packageName));
+}
 
 async function main(): Promise<void> {
   const [, , obsidianVersionArgument, channelArgument] = process.argv;
@@ -94,9 +122,17 @@ async function main(): Promise<void> {
 
   if (registryState === 'placeholderOnly') {
     console.log(`${packageName} is already claimed, so there is nothing to claim.`);
-    console.log('Nothing has ever published through it, though, so its trusted publisher may still be missing --');
-    console.log('the half that gets skipped, and that surfaces in CI as a bare E404 and nowhere else. Asking npm.');
-    await offerRelease({ channel, obsidianVersion }, packageName, await resolveTrustedPublisherState(packageName));
+    await handBackClaimedName({ channel, obsidianVersion }, packageName);
+    return;
+  }
+
+  // The packument can lag the claim: on 2026-11-04 it answered 404 for a name `npm access get status` already
+  // reported `public`, and the publish below was refused as "previously published". Asking the access endpoint
+  // first keeps a re-run from spending a one-time password on a publish that cannot succeed. It needs no login.
+  if (await isPackageNameClaimed(packageName)) {
+    console.log(`The registry has no packument for ${packageName} yet, but npm reports the name as public, so it`);
+    console.log('is already claimed -- the packument lags the claim. There is nothing to claim.');
+    await handBackClaimedName({ channel, obsidianVersion }, packageName);
     return;
   }
 
@@ -123,7 +159,15 @@ async function main(): Promise<void> {
   console.log(`Claiming ${packageName} with a ${PLACEHOLDER_VERSION} placeholder, as npm user ${npmUsername}.`);
   console.log('npm will prompt for your 2FA one-time password -- that prompt is the whole point of this step.');
 
-  await publishPlaceholder(packageName);
+  const publishRefusal = await publishPlaceholder(packageName);
+
+  if (publishRefusal !== null) {
+    const what = publishRefusal === 'previouslyStaged' ? 'staged' : 'published';
+    console.log(`\nnpm refused the placeholder because ${PLACEHOLDER_VERSION} is already ${what} under ${packageName},`);
+    console.log('so the name is already claimed -- an earlier run got that far. Carrying on from there.');
+    await handBackClaimedName({ channel, obsidianVersion }, packageName);
+    return;
+  }
 
   console.log(`\nClaimed ${packageName}. That was the first of two steps, and the second follows here.`);
   console.log('It needs a second one-time password: npm challenges per operation and caches nothing between');
@@ -157,7 +201,15 @@ async function main(): Promise<void> {
   await offerRelease({ channel, obsidianVersion }, packageName, publisherState);
 }
 
-async function publishPlaceholder(packageName: string): Promise<void> {
+/**
+ * Publishes the placeholder, resolving to `null` on success or to the refusal that means the name was
+ * already claimed. Every other failure throws, with npm's own words already on the operator's screen.
+ *
+ * stdin and stdout stay the terminal's, because npm's `otplease` prompts only when BOTH are a TTY. stderr is
+ * piped and teed back to the terminal, which is the one stream that has to be read here: it carries the
+ * `npm error` block {@link getPlaceholderPublishRefusal} looks at, and `otplease` does not test it.
+ */
+async function publishPlaceholder(packageName: string): Promise<null | PlaceholderPublishRefusal> {
   // Written with Node's own fs rather than the `mkdir -p` / `cat > file << EOF` shell pattern the CI-only
   // scripts use: this one runs on a maintainer's machine, which is as likely to be Windows as not.
   await rm(BOOTSTRAP_FOLDER, { force: true, recursive: true });
@@ -202,14 +254,48 @@ async function publishPlaceholder(packageName: string): Promise<void> {
     //
     // Not `execFromRoot`: that helper closes the child's stdin immediately, so npm's 2FA prompt would read
     // EOF and the publish would fail without ever showing the prompt. Inheriting the terminal is the point.
-    execFileSync('npm', ['publish', '--access', 'public', '--tag', PLACEHOLDER_DIST_TAG], {
-      cwd: BOOTSTRAP_FOLDER,
-      shell: true,
-      stdio: 'inherit'
-    });
+    const { exitCode, stderr } = await runPublishWithTeedStderr(
+      ['publish', '--access', 'public', '--tag', PLACEHOLDER_DIST_TAG],
+      BOOTSTRAP_FOLDER
+    );
+
+    if (exitCode === 0) {
+      return null;
+    }
+
+    const refusal = getPlaceholderPublishRefusal(stderr);
+
+    if (refusal !== null) {
+      return refusal;
+    }
+
+    throw new Error(`npm publish of the ${packageName} placeholder failed with exit code ${String(exitCode)}; see npm's output above.`);
   } finally {
     await rm(BOOTSTRAP_FOLDER, { force: true, recursive: true });
   }
+}
+
+/**
+ * Runs npm with the terminal's stdin and stdout, and with stderr both shown to the operator and collected.
+ */
+function runPublishWithTeedStderr(npmArguments: readonly string[], cwd: string): Promise<TeedRunResult> {
+  return new Promise((resolve, reject) => {
+    const child = spawn('npm', npmArguments, {
+      cwd,
+      shell: true,
+      stdio: ['inherit', 'inherit', 'pipe']
+    });
+    const chunks: Buffer[] = [];
+
+    child.stderr.on('data', (chunk: Buffer) => {
+      chunks.push(chunk);
+      process.stderr.write(chunk);
+    });
+    child.on('error', reject);
+    child.on('close', (exitCode) => {
+      resolve({ exitCode, stderr: Buffer.concat(chunks).toString('utf-8') });
+    });
+  });
 }
 
 // The release hand-back switches onto the release branch, since `npm run release` exists only there. This
