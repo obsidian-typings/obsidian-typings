@@ -236,6 +236,18 @@ With these scary disclaimers out of the way, hopefully these typings will help y
 - `@official` comes from the [official API](https://github.com/obsidianmd/obsidian-api/blob/master/obsidian.d.ts).
 - `@unofficial` based on reverse engineering.
 
+## See also
+
+[My other Obsidian resources](https://mnaoumov.dev/obsidian/)
+
+| Library | Features | How `Obsidian Typings` differs |
+| --- | --- | --- |
+| [`obsidian`](https://github.com/obsidianmd/obsidian-api) | Official type definitions for the documented Obsidian API; supported by the Obsidian team | Extends `obsidian`: augments its module with undocumented and internal members; adds interfaces it does not declare; adds runtime helpers under `/implementations`; unsupported by the Obsidian team |
+| [`obsidian-extra`](https://github.com/eth-p/obsidian-extra) | Runtime helper functions over the undocumented API; version-agnostic; safe and `/unsafe` entry points; last published in 2023 for Obsidian 1.1.x | Different approach from `obsidian-extra`: types the internal members directly instead of wrapping them in functions; adds a package per Obsidian version; omits its version-agnostic wrappers |
+| [`obsidian-undocumented`](https://github.com/eth-p/obsidian-undocumented) | Type definitions for undocumented and internal APIs, used by casting to its own `App`; safe and `/unsafe` flavors; last published in 2023 for Obsidian 1.1.x | Same goal as `obsidian-undocumented`: augments the `obsidian` module instead of requiring casts; adds packages for current `public` and `catalyst` releases; omits the safe/unsafe split |
+
+Last searched for similar libraries on 2026-11-12.
+
 ## Migration
 
 If you were using a `1.x.x` version of this package, see the [Migration guide](https://github.com/obsidian-typings/obsidian-typings/blob/main/MIGRATION.md) for upgrading to `2.0.0` or newer.
