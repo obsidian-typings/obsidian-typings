@@ -97,9 +97,12 @@ export interface HotkeyManager {
   getHotkeys(command: string): Hotkey[] | undefined;
 
   /**
-   * Load hotkeys from storage.
+   * Load the custom hotkeys from the `hotkeys` config file, replacing the in-memory record when the file holds an
+   * object.
+   *
+   * @returns A promise that resolves once the config file has been read.
    */
-  load(): void;
+  load(): Promise<void>;
 
   /**
    * Handle raw file system change events for the hotkey config.
@@ -145,9 +148,11 @@ export interface HotkeyManager {
   removeHotkeys(command: string): void;
 
   /**
-   * Save custom hotkeys to storage.
+   * Save the custom hotkeys to the `hotkeys` config file.
+   *
+   * @returns A promise that resolves once the config file has been written.
    */
-  save(): void;
+  save(): Promise<void>;
 
   /**
    * Add a hotkey to the custom hotkeys (overrides default hotkeys).
