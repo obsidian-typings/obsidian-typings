@@ -60,6 +60,7 @@ export interface WorkspaceProtocolHandler extends Events {
 
   /**
    * Handle the `x-success` / `x-error` callbacks of an x-callback-url action.
+   * Does nothing unless URI callbacks are enabled, see {@link WorkspaceProtocolHandler.isCallbacksEnabled}.
    *
    * @param params - The parsed URI action parameters.
    * @param file - The file associated with the callback.
@@ -71,6 +72,14 @@ export interface WorkspaceProtocolHandler extends Events {
    * Install the global URI action hook (`window.OBS_ACT`) and, on mobile, the Capacitor app-url listener.
    */
   init(): void;
+
+  /**
+   * Check whether URI callbacks are enabled. They gate `x-success` / `x-error` handling and the `hook-get-address` action.
+   * The setting is stored per device, in the `uri-callbacks` local storage key, and is off by default.
+   *
+   * @returns Whether URI callbacks are enabled.
+   */
+  isCallbacksEnabled(): boolean;
 
   /**
    * Register a handler for an action.
@@ -85,6 +94,13 @@ export interface WorkspaceProtocolHandler extends Events {
    * Register the built-in handlers (`open`, `search`, `new`, etc.).
    */
   registerDefaultHandlers(): void;
+
+  /**
+   * Enable or disable URI callbacks on this device.
+   *
+   * @param enabled - Whether URI callbacks are enabled.
+   */
+  setCallbacksEnabled(enabled: boolean): void;
 
   /**
    * Unregister a handler for an action.

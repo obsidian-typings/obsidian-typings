@@ -27,4 +27,10 @@ export interface EmptyView extends ItemView {
    * @returns The view type identifier.
    */
   getViewType(): typeof ViewType.Empty;
+
+  /**
+   * Rebuild the new-tab actions in {@link EmptyView.actionListEl}: new note, and new base, new canvas, go to file
+   * and open web viewer where the plugin or vault allows them. Runs on open and whenever an internal plugin changes.
+   */
+  updateActions(): void;
 }

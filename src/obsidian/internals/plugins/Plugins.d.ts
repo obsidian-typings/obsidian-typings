@@ -156,6 +156,14 @@ export interface Plugins extends Events {
   getPluginFolder(): string;
 
   /**
+   * Get the loaded manifest of an installed plugin.
+   *
+   * @param id - {@link obsidian#Plugin} ID.
+   * @returns The manifest, or `null` when no plugin with that ID is installed.
+   */
+  getPluginManifest(id: string): null | PluginManifest;
+
+  /**
    * Load plugin manifests and enable plugins from config.
    *
    * @returns A promise that resolves when initialization is complete.
@@ -188,6 +196,15 @@ export interface Plugins extends Events {
   isEnabled(): boolean;
 
   /**
+   * Check whether a plugin is installed: its manifest is loaded, or the given folder holds a manifest with its ID.
+   *
+   * @param id - {@link obsidian#Plugin} ID.
+   * @param dir - The plugin folder to check when no manifest is loaded for the ID.
+   * @returns A promise that resolves to whether the plugin is installed.
+   */
+  isInstalled(id: string, dir: string): Promise<boolean>;
+
+  /**
    * Load a specific plugin's manifest by its folder path.
    *
    * @param path - Folder path containing the manifest.
@@ -217,6 +234,16 @@ export interface Plugins extends Events {
    * @param e - The raw file system change event.
    */
   onRaw(e: unknown): void;
+
+  /**
+   * Read and validate the `manifest.json` in a plugin folder, without loading it.
+   *
+   * Sets the manifest's `dir` to the folder, and clears an `author` that is empty or `Obsidian`.
+   *
+   * @param dir - The plugin folder path.
+   * @returns A promise that resolves to the manifest, or `null` when it is missing, unreadable or invalid.
+   */
+  readManifest(dir: string): Promise<null | PluginManifest>;
 
   /**
    * Save current plugin configs.

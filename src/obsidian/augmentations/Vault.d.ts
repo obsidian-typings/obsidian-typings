@@ -598,6 +598,17 @@ declare module 'obsidian' {
     on(name: 'rename', callback: (file: TAbstractFile, oldPath: string) => unknown, ctx?: unknown): EventRef;
 
     /**
+     * Triggered when the desktop adapter cannot list a path for lack of permission (`EACCES` or `EPERM`).
+     *
+     * @param name - Should be `'unreadable'`.
+     * @param callback - The callback function, called with the unreadable path.
+     * @param ctx - The context passed as `this` to the `callback` function.
+     * @returns The event reference.
+     * @unofficial
+     */
+    on(name: 'unreadable', callback: (path: string) => void, ctx?: unknown): EventRef;
+
+    /**
      * Atomically read, modify, and save the contents of a note.
      *
      * @param file - The file to be read and modified.

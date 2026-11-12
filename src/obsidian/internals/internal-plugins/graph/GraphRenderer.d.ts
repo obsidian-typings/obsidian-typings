@@ -23,6 +23,11 @@ import type { WorkerResults } from './WorkerResults.d.ts';
  */
 export interface GraphRenderer {
   /**
+   * Cancels the animation frame queued to render the graph, or `null` when none is queued.
+   */
+  cancelRender: (() => void) | null;
+
+  /**
    * General colors of the elements in the graph view, computed from the app CSS.
    */
   colors: Record<GraphColor, GraphColorAttributes>;
@@ -161,11 +166,6 @@ export interface GraphRenderer {
    * PixiJS application rendering everything.
    */
   px: Application;
-
-  /**
-   * Timer (request ID) associated to the requestAnimationFrame rendering the graph.
-   */
-  renderTimer: null | number;
 
   /**
    * Current zoom level of the graph view, interpolated between the previous one and the {@link GraphRenderer.targetScale}.

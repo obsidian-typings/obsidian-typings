@@ -58,6 +58,12 @@ export interface PlatformEx {
   canStackTabs: boolean;
 
   /**
+   * Whether the platform can move files to the system trash. It is `false` only in the Android app,
+   * where a `system` trash option falls back to `local`.
+   */
+  canUseSystemTrash: boolean;
+
+  /**
    * The name of the device. On desktop this is the host name of the machine.
    */
   deviceName: string;

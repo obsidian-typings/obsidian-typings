@@ -265,6 +265,16 @@ declare module 'obsidian' {
     readBinary(normalizedPath: string): Promise<ArrayBuffer>;
 
     /**
+     * Reads a text file by fetching its resource URL, bypassing the HTTP cache.
+     * Used to load a community plugin's `main.js`, falling back to {@link read}.
+     *
+     * @param normalizedPath - The path to read.
+     * @returns A promise that resolves with the file content, or `null` when the fetch fails.
+     * @unofficial
+     */
+    readByUrl(normalizedPath: string): Promise<null | string>;
+
+    /**
      * Reconciles a changed file against the in-memory file listing, updating its metadata.
      *
      * @param realpath - The real (device) path of the file.

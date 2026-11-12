@@ -3,6 +3,7 @@ import type {
   TFile
 } from 'obsidian';
 
+import type { SearchRelevance } from '../search-query/SearchRelevance.d.ts';
 import type { ResultDom } from './ResultDom.d.ts';
 import type { ResultDomItemChild } from './ResultDomItemChild.d.ts';
 import type { ResultDomItemPropertyChild } from './ResultDomItemPropertyChild.d.ts';
@@ -94,6 +95,16 @@ export interface ResultDomItem extends TreeNode {
   result: ResultDomResult;
 
   /**
+   * The relevance score cached for {@link ResultDomItem.scoreQuery}.
+   */
+  score: number;
+
+  /**
+   * The relevance scorer {@link ResultDomItem.score} was computed for, or `null` before the first score.
+   */
+  scoreQuery: null | SearchRelevance;
+
+  /**
    * Whether matches are displayed as separate items.
    */
   separateMatches: boolean;
@@ -115,6 +126,14 @@ export interface ResultDomItem extends TreeNode {
    * @returns The extra context positions.
    */
   getMatchExtraPositions(arg1: unknown, arg2: unknown, arg3: unknown): unknown;
+
+  /**
+   * Get this result's relevance score, computing and caching it when the scorer changed.
+   *
+   * @param relevance - The relevance scorer.
+   * @returns The relevance score.
+   */
+  getScore(relevance: SearchRelevance): number;
 
   /**
    * Mark this result item as needing re-render.
