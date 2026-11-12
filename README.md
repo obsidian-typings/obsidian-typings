@@ -252,6 +252,10 @@ Last searched for similar libraries on 2026-11-12.
 
 If you were using a `1.x.x` version of this package, see the [Migration guide](https://github.com/obsidian-typings/obsidian-typings/blob/main/MIGRATION.md) for upgrading to `2.0.0` or newer.
 
+## Changelog
+
+All notable changes to this project will be documented in the [CHANGELOG](./CHANGELOG.md).
+
 ## Contributing
 
 Feel free to start typing any part of the Obsidian API that is not yet typed, or fixing/adding additional descriptions to existing typings. If you are unsure about anything, don't hesitate to open an issue.
