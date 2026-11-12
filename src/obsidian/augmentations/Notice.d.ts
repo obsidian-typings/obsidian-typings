@@ -10,6 +10,13 @@ declare module 'obsidian' {
    */
   interface Notice {
     /**
+     * Whether an auto-hide is scheduled. When the pointer leaves a notice that has one, it is rescheduled for 1 second.
+     *
+     * @unofficial
+     */
+    autoHide: boolean;
+
+    /**
      * The container element for action buttons, created lazily by {@link Notice.addButton}. `null` until then.
      *
      * @unofficial
@@ -23,6 +30,20 @@ declare module 'obsidian' {
      * @since 1.8.7
      */
     containerEl: HTMLElement;
+
+    /**
+     * Whether {@link Notice.hide} has been called.
+     *
+     * @unofficial
+     */
+    hidden: boolean;
+
+    /**
+     * Whether the pointer is over the notice. A hovered notice is not auto-hidden.
+     *
+     * @unofficial
+     */
+    hovered: boolean;
 
     /**
      * The HTML element that represents the message of the notice.
@@ -99,6 +120,14 @@ declare module 'obsidian' {
     hide(): void;
 
     /**
+     * Check whether the notice is hidden, either by {@link Notice.hide} or because its window was closed.
+     *
+     * @returns Whether the notice is hidden.
+     * @unofficial
+     */
+    isHidden(): boolean;
+
+    /**
      * Schedules the notice to auto-hide after the given duration, clearing any existing timer.
      *
      * @param timeoutMilliseconds - The delay before hiding, in milliseconds. `0` disables auto-hide.
@@ -124,5 +153,12 @@ declare module 'obsidian' {
      * @since 0.9.7
      */
     setMessage(message: DocumentFragment | string): this;
+
+    /**
+     * Hide the notice unless the pointer is over it. Called when the auto-hide timer fires.
+     *
+     * @unofficial
+     */
+    tryHide(): void;
   }
 }

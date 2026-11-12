@@ -18,14 +18,14 @@ export interface CanvasIndex extends Component {
   app: App;
 
   /**
+   * Cancels the pending indexer run, or `null` when none is scheduled.
+   */
+  cancelRun: (() => void) | null;
+
+  /**
    * Queue of files waiting to be processed by the indexer.
    */
   fileQueue: unknown[];
-
-  /**
-   * Current animation frame request, or `null` when idle.
-   */
-  frame: null;
 
   /**
    * Index of canvas entries keyed by file path.

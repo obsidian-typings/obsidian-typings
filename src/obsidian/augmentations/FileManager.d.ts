@@ -3,6 +3,7 @@ import type { HeadingSectionParts } from '../internals/HeadingSectionParts.d.ts'
 import type { LinkUpdate } from '../internals/link-update/LinkUpdate.d.ts';
 import type { LinkUpdatesHandler } from '../internals/link-update/LinkUpdatesHandler.d.ts';
 import type { PromisedQueue } from '../internals/PromisedQueue.d.ts';
+import type { SystemTrashFailure } from '../internals/SystemTrashFailure.d.ts';
 
 export {};
 
@@ -33,6 +34,13 @@ declare module 'obsidian' {
      * @unofficial
      */
     inProgressUpdates: LinkUpdatesHandler[] | null;
+
+    /**
+     * The notice reporting failed moves to the system trash, or `null` before the first failure.
+     *
+     * @unofficial
+     */
+    systemTrashFailure: null | SystemTrashFailure;
 
     /**
      * Queue for processing link update operations sequentially.
@@ -220,6 +228,15 @@ declare module 'obsidian' {
     getOrCreateFolder(path: string): Promise<TFolder>;
 
     /**
+     * Gets the `trashOption` setting that deletion actually uses: `system` falls back to `local`
+     * where {@link obsidian#Platform} cannot use the system trash.
+     *
+     * @returns Where deleted files go.
+     * @unofficial
+     */
+    getTrashOption(): 'local' | 'none' | 'system';
+
+    /**
      * Insert text into a file, or into one heading's section of it.
      *
      * @param file - The file to insert into.
@@ -373,6 +390,15 @@ declare module 'obsidian' {
      * @unofficial
      */
     runAsyncLinkUpdate(linkUpdatesHandler: LinkUpdatesHandler): Promise<void>;
+
+    /**
+     * Shows a notice that a file could not be moved to the system trash, with a button to the Files and links settings.
+     * While that notice is still shown, a further failure updates it with the failure count instead.
+     *
+     * @param file - The file that failed to move.
+     * @unofficial
+     */
+    showSystemTrashFailed(file: TAbstractFile): void;
 
     /**
      * Store text file backup.

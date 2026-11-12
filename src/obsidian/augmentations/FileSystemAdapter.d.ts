@@ -61,6 +61,14 @@ declare module 'obsidian' {
     resourcePathPrefix: string;
 
     /**
+     * Paths the last full listing could not read for lack of permission (`EACCES` or `EPERM`).
+     * Sync pauses while one of them is not excluded from it.
+     *
+     * @unofficial
+     */
+    unreadablePaths: string[];
+
+    /**
      * Reference to node URL module.
      *
      * @unofficial

@@ -27,6 +27,12 @@ export interface SearchQueueComponent extends Component {
   queue: ItemQueue<TFile> | null;
 
   /**
+   * Files the current search read and did not match, which a narrowing search skips.
+   * A file leaves the set when it changes or is deleted, and the set is cleared when registered extensions change.
+   */
+  unmatchedFiles: Set<TFile>;
+
+  /**
    * Queues a changed file. Folder events are ignored.
    *
    * @param file - The changed file or folder.
@@ -46,6 +52,15 @@ export interface SearchQueueComponent extends Component {
    * @param file - The changed file or folder.
    */
   onNonMarkdownFileChanged(file: TAbstractFile): void;
+
+  /**
+   * Record whether the current search matched a file it read.
+   * A file that did not match is added to {@link SearchQueueComponent.unmatchedFiles} unless it was deleted.
+   *
+   * @param file - The file.
+   * @param isMatched - Whether the search matched it.
+   */
+  setMatched(file: TFile, isMatched: boolean): void;
 
   /**
    * Creates, stores and synchronously seeds a queue with sorted vault files.

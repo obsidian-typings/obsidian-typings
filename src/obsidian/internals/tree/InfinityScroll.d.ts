@@ -6,9 +6,25 @@
  */
 export interface InfinityScroll {
   /**
+   * Number of items laid out per compute pass. It starts at 50, doubles (up to 1000) after a fast unfinished pass,
+   * halves after a slow one, and resets to 50 once the tree is fully computed or invalidated.
+   */
+  blockSize: number;
+
+  /**
+   * Cancels the pending compute pass, or `null` if none is pending.
+   */
+  cancelCompute: (() => void) | null;
+
+  /**
    * Current visible height of the scroll container.
    */
   height: number;
+
+  /**
+   * The `performance.now()` timestamp of the last compute pass.
+   */
+  lastPass: number;
 
   /**
    * Last recorded scroll position.
@@ -16,14 +32,9 @@ export interface InfinityScroll {
   lastScroll: number;
 
   /**
-   * Queued computation task, or `null` if none is pending.
+   * Minimum time between compute passes, in milliseconds. Search raises it to 100 while it runs.
    */
-  queued: null | unknown;
-
-  /**
-   * Number of items to render per block.
-   */
-  renderBlockSize: number;
+  minPassInterval: number;
 
   /**
    * Root element of the virtual scroll container.
@@ -149,6 +160,13 @@ export interface InfinityScroll {
    * @returns The scroll result.
    */
   scrollIntoView(x: unknown, y: unknown): unknown;
+
+  /**
+   * Set the minimum time between compute passes, rescheduling a pending pass to respect it.
+   *
+   * @param interval - The interval, in milliseconds.
+   */
+  setMinPassInterval(interval: number): void;
 
   /**
    * Update the virtual scroll state with new parameters.

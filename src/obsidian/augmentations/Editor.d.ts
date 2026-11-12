@@ -104,6 +104,16 @@ declare module 'obsidian' {
     coordsAtPos(pos: EditorPosition, relativeToEditor: boolean): Coords;
 
     /**
+     * Check whether every selected line satisfies a predicate.
+     *
+     * @param predicate - The check applied to each selected line's text.
+     * @param skipEmpty - Whether to skip blank lines when the selection spans more than one line.
+     * @returns `true` when at least one line was checked and all of them passed, `false` otherwise.
+     * @unofficial
+     */
+    everyLine(predicate: (lineText: string) => boolean, skipEmpty?: boolean): boolean;
+
+    /**
      * Execute a command.
      *
      * @param command - The command to execute.
@@ -254,6 +264,14 @@ declare module 'obsidian' {
     getSelection__?(): string;
 
     /**
+     * Get the heading level shared by every selected line.
+     *
+     * @returns The heading level (1-6), or `0` when a selected line is not a heading or the levels differ.
+     * @unofficial
+     */
+    getSelectionHeadingLevel(): number;
+
+    /**
      * Get the content of the editor.
      *
      * @returns The content of the editor.
@@ -350,6 +368,48 @@ declare module 'obsidian' {
      * @unofficial
      */
     get inTableCell(): boolean;
+
+    /**
+     * Check whether every selected line is in a blockquote, blank lines included.
+     *
+     * @returns Whether the whole selection is a blockquote.
+     * @unofficial
+     */
+    isSelectionBlockquote(): boolean;
+
+    /**
+     * Check whether every selected non-blank line is a bullet list item that is not a task.
+     *
+     * @returns Whether the whole selection is a bullet list.
+     * @unofficial
+     */
+    isSelectionBulletList(): boolean;
+
+    /**
+     * Check whether every selected non-blank line is a checked task.
+     *
+     * @returns Whether the whole selection is checked tasks.
+     * @unofficial
+     */
+    isSelectionCheckedTask(): boolean;
+
+    /**
+     * Check whether every selected non-blank line is a numbered list item.
+     *
+     * @returns Whether the whole selection is a numbered list.
+     * @unofficial
+     */
+    isSelectionNumberList(): boolean;
+
+    /**
+     * Iterate the line numbers covered by the given selections, each line once.
+     *
+     * @param selections - The selections whose lines to iterate.
+     * @param skipEmpty - Whether to skip blank lines when the selections span more than one line.
+     * @returns A generator of 0-indexed line numbers.
+     * @unofficial
+     */
+    iterateSelectedLines(selections: EditorSelection[], skipEmpty: boolean): Generator<number, void, undefined>;
 
     /**
      * Get the index of the last line (0-indexed).

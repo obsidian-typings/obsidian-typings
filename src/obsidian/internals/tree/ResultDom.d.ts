@@ -4,6 +4,7 @@ import type {
   TFile
 } from 'obsidian';
 
+import type { SearchRelevance } from '../search-query/SearchRelevance.d.ts';
 import type { InfinityScroll } from './InfinityScroll.d.ts';
 import type { ResultDomItem } from './ResultDomItem.d.ts';
 import type { ResultDomResult } from './ResultDomResult.d.ts';
@@ -26,6 +27,12 @@ export interface ResultDom {
    * Debounced callback triggered when results change.
    */
   changed: Debouncer<[], unknown>;
+
+  /**
+   * Debounced {@link ResultDom.onChange} that {@link ResultDom.changed} calls while a search is in progress,
+   * so a running search re-sorts its results at most every 100 ms.
+   */
+  changedDuringSearch: Debouncer<[], unknown>;
 
   /**
    * Container element for child result items.
@@ -71,6 +78,12 @@ export interface ResultDom {
    * Spacer element used to maintain correct scroll height.
    */
   pusherEl: HTMLDivElement;
+
+  /**
+   * The current search's relevance scorer, or `null` when there is no search.
+   * It orders the results only under the `byRelevance` sort order.
+   */
+  relevance: null | SearchRelevance;
 
   /**
    * Lookup map from file to its corresponding result DOM item.
@@ -135,6 +148,21 @@ export interface ResultDom {
    * @returns The total match count.
    */
   getMatchCount(): number;
+
+  /**
+   * Get the order in which the search queue should visit files under the `byRelevance` sort order:
+   * files whose name matches a query term first, then the most recently modified.
+   *
+   * @returns The comparator, or `null` when the results are not sorted by relevance.
+   */
+  getQueueSortFunction(): ((a: TFile, b: TFile) => number) | null;
+
+  /**
+   * Get the relevance scorer that orders the results.
+   *
+   * @returns The scorer in {@link ResultDom.relevance} under the `byRelevance` sort order, `null` otherwise.
+   */
+  getRelevance(): null | SearchRelevance;
 
   /**
    * Get the result DOM item for a specific file.

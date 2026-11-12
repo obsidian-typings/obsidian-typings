@@ -160,6 +160,14 @@ declare module 'obsidian' {
     layoutReady: boolean;
 
     /**
+     * Settles once every callback queued by {@link Workspace.onLayoutReady} before the layout was ready has run,
+     * awaiting those that return a promise. `null` until the layout is ready.
+     *
+     * @unofficial
+     */
+    layoutReadyCallbacksDone: null | Promise<void>;
+
+    /**
      * The left ribbon of the workspace.
      *
      * @official
