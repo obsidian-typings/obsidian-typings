@@ -11,7 +11,7 @@ import type { PDFPageProxy } from './PDFPageProxy.d.ts';
  * @unofficial
  */
 export interface PDFDocumentProxy {
-  /** Document fingerprints. */
+  /** Document fingerprints: always a pair of the original identifier (or content hash) and the modified identifier, or `null` when there is none. */
   fingerprints: [string, null | string];
   /** Whether the document is a pure XFA form. */
   isPureXfa: boolean;
