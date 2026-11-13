@@ -19,6 +19,10 @@ import { ESM_BUNDLE_COPIES } from './helpers/esm-bundle-copies.ts';
 // gets `impliedNodeFormat: ESM` and resolves every bare specifier inside it under the `import`
 // condition. That is the surface the ESM shims silently got wrong for months — nothing validated it,
 // because only the two `dist/cjs` files were ever listed here.
+// The packages only the opt-in `/lezer` integration may import. A `declare module` augmentation of
+// `@codemirror/language` is not an import and stays allowed: it needs nothing installed.
+const LEZER_INTEGRATION_PACKAGES = new Set(['@codemirror/language', '@codemirror/search', '@lezer/common']);
+
 const BUNDLE_FILES = ESM_BUNDLE_COPIES.flatMap((copy) => [copy.cjsPath, copy.esmPath]);
 
 await wrapCliTask(main);
@@ -60,6 +64,24 @@ async function areEsmCopiesValid(root: string): Promise<boolean> {
   return isOk;
 }
 
+/**
+ * Checks whether a declaration file imports any of the given modules, ignoring `declare module` augmentations of them.
+ *
+ * @param content - The declaration file content.
+ * @param moduleNames - The module specifiers to look for.
+ * @returns `true` when an `import`, `export ... from` or `import()` type names one of the modules.
+ */
+function hasModuleImport(content: string, moduleNames: ReadonlySet<string>): boolean {
+  for (const match of content.matchAll(/(?:\bfrom\s*|\bimport\s*\(\s*|\bimport\s+)(?<quote>["'])(?<specifier>[^"']+)\k<quote>/gu)) {
+    const specifier = match.groups?.['specifier'];
+    if (specifier !== undefined && moduleNames.has(specifier)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 async function main(): Promise<CliTaskResult> {
   const root = getRootFolder();
 
@@ -95,6 +117,13 @@ async function main(): Promise<CliTaskResult> {
 
     if (imports.some(({ fileName }) => fileName === 'pdfjs-dist' || fileName.startsWith('pdfjs-dist/') || fileName.includes('/pdfjs.d.') || fileName.endsWith('/pdfjs'))) {
       console.error(`${bundleFile} pulls the optional PDF.js integration into the standalone surface.`);
+      isOk = false;
+    }
+
+    // `preProcessFile` lists a module augmentation's name among the imports, so the Lezer packages are
+    // matched against real `import` / `export ... from` / `import()` specifiers instead.
+    if (imports.some(({ fileName }) => fileName.includes('/lezer.d.') || fileName.endsWith('/lezer')) || hasModuleImport(content, LEZER_INTEGRATION_PACKAGES)) {
+      console.error(`${bundleFile} pulls the optional Lezer integration (@lezer/common, @codemirror/language, @codemirror/search) into the standalone surface.`);
       isOk = false;
     }
 

@@ -1,4 +1,4 @@
-import type { NodeProp } from '@lezer/common';
+import type { InteropStringNodeProp } from '../../../@lezer__common/interop/InteropStringNodeProp.d.ts';
 
 export {};
 
@@ -10,5 +10,5 @@ declare module '@codemirror/language' {
    * @remark This only exists and can only be used in Obsidian.
    * @unofficial
    */
-  const lineClassNodeProp: NodeProp<string>;
+  const lineClassNodeProp: InteropStringNodeProp;
 }
