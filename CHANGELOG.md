@@ -18,30 +18,52 @@
 
 ## 4.110.0 (obsidian-public-1.12.4)
 
-- docs: add more tsdocs
+This release has 1 documentation change.
+
+### Documentation
+
+- add more tsdocs
 
 ## 4.109.0 (obsidian-public-1.12.4)
 
-- feat: iterateReferencesForFile
+This release has 1 new feature.
+
+### New
+
+- iterateReferencesForFile
 
 ## 4.108.0 (obsidian-public-1.12.4)
 
-- feat: get unmerged changes
-- feat: update API changes
+This release has 2 new features.
+
+### New
+
+- get unmerged changes
+- update API changes
 
 ## 4.107.0 (obsidian-public-1.12.4)
 
-- feat: extract anonymous types
-- refactor: remove duplicated interfaces
-- fix: move link updaters
+This release has 1 new feature and 1 fix. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### New
+
+- extract anonymous types
+
+### Fixed
+
+- move link updaters
 
 ## 4.106.0 (obsidian-public-1.12.4)
 
 ## 4.105.0 (obsidian-public-1.11.7)
 
-- feat: update API changes
-- feat: add internals of SettingGroup
-- feat: update obsidian API to 1.12.2
+This release has 3 new features.
+
+### New
+
+- update API changes
+- add internals of SettingGroup
+- update obsidian API to 1.12.2
 
 ## 4.104.0 (obsidian-catalyst-1.12.4)
 
@@ -53,17 +75,29 @@
 
 ## 4.100.0 (obsidian-public-1.11.7)
 
-- feat: update obsidian API to 1.12.2
+This release has 1 new feature.
+
+### New
+
+- update obsidian API to 1.12.2
 
 ## 4.99.0 (obsidian-public-1.11.7)
 
-- feat: add internals of SettingGroup
+This release has 1 new feature.
+
+### New
+
+- add internals of SettingGroup
 
 ## 4.98.0 (obsidian-public-1.11.7)
 
 ## 4.97.0 (obsidian-catalyst-1.12.0)
 
-- feat: update 1.12.0 API changes
+This release has 1 new feature.
+
+### New
+
+- update 1.12.0 API changes
 
 ## 4.96.0 (obsidian-catalyst-1.12.0)
 
@@ -73,48 +107,83 @@
 
 ## 4.93.0 (obsidian-public-1.11.4)
 
-- feat: add internals of SettingGroup
+This release has 1 new feature.
+
+### New
+
+- add internals of SettingGroup
 
 ## 4.92.0 (obsidian-public-1.11.4)
 
 ## 4.91.0 (obsidian-catalyst-1.11.4)
 
-- feat: update API to 1.11.0
-- feat: update widget components
-- feat: add public API changes
-- fix: wrong SecretStorage.loadSecrets type
+This release has 3 new features and 1 fix.
+
+### New
+
+- update API to 1.11.0
+- update widget components
+- add public API changes
+
+### Fixed
+
+- wrong SecretStorage.loadSecrets type
 
 ## 4.90.0 (obsidian-public-1.10.6)
 
 ## 4.89.0 (obsidian-catalyst-1.11.4)
 
-- feat: add public API changes
+This release has 1 new feature.
+
+### New
+
+- add public API changes
 
 ## 4.88.0 (obsidian-catalyst-1.11.1)
 
-- feat: update API to 1.11.0
-- feat: update widget components
+This release has 2 new features.
+
+### New
+
+- update API to 1.11.0
+- update widget components
 
 ## 4.87.0 (obsidian-public-1.10.6)
 
 ## 4.86.0 (obsidian-catalyst-1.11.1)
 
-- feat: update API to 1.11.0
-- feat: update widget components
+This release has 2 new features.
+
+### New
+
+- update API to 1.11.0
+- update widget components
 
 ## 4.85.0 (obsidian-public-1.10.6)
 
-- feat: rename DomEventsHandlers
+This release has 1 new feature.
+
+### New
+
+- rename DomEventsHandlers
 
 ## 4.84.0 (obsidian-catalyst-1.11.1)
 
 ## 4.83.0 (obsidian-catalyst-1.10.6)
 
-- feat: registerDomEvents
+This release has 1 new feature.
+
+### New
+
+- registerDomEvents
 
 ## 4.82.0 (obsidian-catalyst-1.11.1)
 
-- feat: update widget components
+This release has 1 new feature.
+
+### New
+
+- update widget components
 
 ## 4.81.0 (obsidian-catalyst-1.11.1)
 
@@ -134,7 +203,11 @@
 
 ## 4.73.0 (obsidian-catalyst-1.11.0)
 
-- feat: update API to 1.11.0
+This release has 1 new feature.
+
+### New
+
+- update API to 1.11.0
 
 ## 4.72.0 (obsidian-public-1.10.6)
 
@@ -146,9 +219,16 @@
 
 ## 4.68.0 (obsidian-public-1.10.6)
 
-- fix: api-extractor warnings
-- feat: remove moment dependency
-- feat: add BasesPropertyType
+This release has 2 new features and 1 fix.
+
+### New
+
+- remove moment dependency
+- add BasesPropertyType
+
+### Fixed
+
+- api-extractor warnings
 
 ## 4.67.0 (obsidian-catalyst-1.10.5)
 
@@ -160,17 +240,28 @@
 
 ## 4.63.0 (obsidian-public-1.10.3)
 
-- feat: move load... functions to implementations
-- feat: update typings
+This release has 2 new features.
+
+### New
+
+- move load... functions to implementations
+- update typings
 
 ## 4.62.0 (obsidian-public-1.10.3)
 
-- fix: build
-- feat: apply obsidian.d.ts changes
-- feat: add 1.10.0 official API changes
-- feat: include since config
-- fix: add missing import
-- fix: add missing API and @since
+This release has 3 new features and 3 fixes.
+
+### New
+
+- apply obsidian.d.ts changes
+- add 1.10.0 official API changes
+- include since config
+
+### Fixed
+
+- build
+- add missing import
+- add missing API and @since
 
 ## 4.61.0 (obsidian-public-1.9.14)
 
@@ -188,11 +279,19 @@
 
 ## 4.54.0 (obsidian-public-1.9.14)
 
-- fix: build
+This release has 1 fix.
+
+### Fixed
+
+- build
 
 ## 4.53.0 (obsidian-catalyst-1.9.14)
 
-- feat: Command
+This release has 1 new feature.
+
+### New
+
+- Command
 
 ## 4.52.0 (obsidian-catalyst-1.9.13)
 
@@ -200,58 +299,110 @@
 
 ## 4.50.0 (obsidian-public-1.9.12)
 
-- fix: patch @types/css-font-loading-module
+This release has 1 fix.
+
+### Fixed
+
+- patch @types/css-font-loading-module
 
 ## 4.49.0 (obsidian-public-1.9.12)
 
-- feat: Updated MultiSelect #131
+This release has 1 new feature.
+
+### New
+
+- Updated MultiSelect #131
 
 ## 4.48.0 (obsidian-public-1.9.12)
 
-- feat: ImportedAttachment
+This release has 1 new feature.
+
+### New
+
+- ImportedAttachment
 
 ## 4.47.0 (obsidian-public-1.9.12)
 
-- fix: BookmarkItem
+This release has 1 fix.
+
+### Fixed
+
+- BookmarkItem
 
 ## 4.46.0 (obsidian-public-1.9.12)
 
-- fix: GetRecentFilesOptions
+This release has 1 fix.
+
+### Fixed
+
+- GetRecentFilesOptions
 
 ## 4.45.0 (obsidian-public-1.9.12)
 
-- feat: SuggestModalChooser
-- feat: BookmarkItem
-- feat: GetRecentFilesOptions
+This release has 3 new features.
+
+### New
+
+- SuggestModalChooser
+- BookmarkItem
+- GetRecentFilesOptions
 
 ## 4.44.0 (obsidian-public-1.9.12)
 
-- fix: wrong data type
+This release has 1 fix.
+
+### Fixed
+
+- wrong data type
 
 ## 4.43.0 (obsidian-public-1.9.12)
 
-- feat: more bases
+This release has 1 new feature.
+
+### New
+
+- more bases
 
 ## 4.42.0 (obsidian-public-1.9.12)
 
-- fix: data type
+This release has 1 fix.
+
+### Fixed
+
+- data type
 
 ## 4.41.0 (obsidian-public-1.9.12)
 
-- feat: more bases
+This release has 1 new feature.
+
+### New
+
+- more bases
 
 ## 4.40.0 (obsidian-public-1.9.12)
 
-- fix: more bases-related
+This release has 1 fix.
+
+### Fixed
+
+- more bases-related
 
 ## 4.39.0 (obsidian-public-1.9.12)
 
-- fix: don't assume type in widgets
+This release has 1 fix.
+
+### Fixed
+
+- don't assume type in widgets
 
 ## 4.38.0 (obsidian-public-1.9.12)
 
-- feat: cleanup GetTypeInfoOptions
-- feat: Updated MetadataTypeManager.getTypeInfo() #130
+This release has 2 new features.
+
+### New
+
+- cleanup GetTypeInfoOptions
+- Updated MetadataTypeManager.getTypeInfo() #130
 
 ## 4.37.0 (obsidian-catalyst-1.9.12)
 
@@ -265,28 +416,44 @@
 
 ## 4.32.0 (obsidian-catalyst-1.9.12)
 
-- fix: PropertyWidget/render always accepts null
-- fix: render/data add null type
+This release has 2 fixes.
+
+### Fixed
+
+- PropertyWidget/render always accepts null
+- render/data add null type
 
 ## 4.31.0 (obsidian-catalyst-1.9.11)
 
 ## 4.30.0 (obsidian-public-1.9.10)
 
-- fix: missing moment import
+This release has 1 fix.
+
+### Fixed
+
+- missing moment import
 
 ## 4.29.0 (obsidian-catalyst-1.9.11)
 
 ## 4.28.0 (obsidian-public-1.9.10)
 
-- feat: merge editors
+This release has 1 new feature.
+
+### New
+
+- merge editors
 
 ## 4.27.0 (obsidian-catalyst-1.9.11)
 
 ## 4.26.0 (obsidian-public-1.9.10)
 
-- feat: revisit all PropertyWidgetComponents
-- feat: fuzzySearch/prepareQuery
-- feat: Various MetadataTypeManager related updates #128
+This release has 3 new features.
+
+### New
+
+- revisit all PropertyWidgetComponents
+- fuzzySearch/prepareQuery
+- Various MetadataTypeManager related updates #128
 
 ## 4.25.0 (obsidian-catalyst-1.9.11)
 
@@ -300,7 +467,11 @@
 
 ## 4.24.0 (obsidian-public-1.9.10)
 
-- fix: receive-files-menu / receive-text-menu
+This release has 1 fix.
+
+### Fixed
+
+- receive-files-menu / receive-text-menu
 
 ## 4.23.0 (obsidian-catalyst-1.9.10)
 
@@ -318,570 +489,1008 @@
 
 ## 4.1.0
 
-- chore: explicitly mention supported Obsidian version
-- fix: remove deprecated in 1.9.0
-- fix: remove 1.9.0 code
+This release has 2 fixes. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### Fixed
+
+- remove deprecated in 1.9.0
+- remove 1.9.0 code
 
 ## 3.16.6
 
-- fix: name() type
+This release has 1 fix.
+
+### Fixed
+
+- name() type
 
 ## 3.16.4
 
-- fix: revert incorrect watch changes
+This release has 1 fix.
+
+### Fixed
+
+- revert incorrect watch changes
 
 ## 3.16.3
 
-- fix: build
+This release has 1 fix.
+
+### Fixed
+
+- build
 
 ## 3.16.2
 
-- fix: watch typings
+This release has 1 fix.
+
+### Fixed
+
+- watch typings
 
 ## 3.16.1
 
-- fix: include menu separator
+This release has 1 fix.
+
+### Fixed
+
+- include menu separator
 
 ## 3.16.0
 
-- feat: EmberContext
+This release has 1 new feature.
+
+### New
+
+- EmberContext
 
 ## 3.15.0
 
-- feat: AbstractInputSuggest / PopoverSuggest / SuggestionContainer
+This release has 1 new feature.
+
+### New
+
+- AbstractInputSuggest / PopoverSuggest / SuggestionContainer
 
 ## 3.14.1
 
-- fix: allow null to TextProperty
+This release has 1 fix.
+
+### Fixed
+
+- allow null to TextProperty
 
 ## 3.14.0
 
-- feat: extend isUserEvent() with overloads #122
+This release has 1 new feature.
+
+### New
+
+- extend isUserEvent() with overloads #122
 
 ## 3.13.5
 
-- fix: update codemirror packages
+This release has 1 fix.
+
+### Fixed
+
+- update codemirror packages
 
 ## 3.13.4
 
-- fix: missing patch
+This release has 1 fix.
+
+### Fixed
+
+- missing patch
 
 ## 3.13.3
 
-- fix: Use precise versions of dep libs (#109)
+This release has 1 fix.
+
+### Fixed
+
+- Use precise versions of dep libs (#109)
 
 ## 3.13.2
 
-- fix: PropertyWidget. Support both versions:
+This release has 1 fix.
+
+### Fixed
+
+- PropertyWidget. Support both versions:
 
 ## 3.13.1
 
-- fix: PropertyWidget
+This release has 1 fix.
+
+### Fixed
+
+- PropertyWidget
 
 ## 3.13.0
 
-- fix: PropertyWidget
+This release has 1 fix.
+
+### Fixed
+
+- PropertyWidget
 
 ## 3.12.0
 
-- feat: WorkspaceLeaf/WorkspaceItem
+This release has 1 new feature.
+
+### New
+
+- WorkspaceLeaf/WorkspaceItem
 
 ## 3.11.0
 
-- feat: Add documentation for the graph and fix some errors #121
+This release has 1 new feature and 1 other change.
+
+### New
+
+- Add documentation for the graph and fix some errors #121
+
+### Other changes
+
 - Add documentation and fix some errors
 
 ## 3.10.0
 
-- feat: Menu.forEvent
+This release has 1 new feature.
+
+### New
+
+- Menu.forEvent
 
 ## 3.9.6
 
-- fix: patch @antfu/utils
+This release has 1 fix.
+
+### Fixed
+
+- patch @antfu/utils
 
 ## 3.9.5
 
-- fix: dompurify transitive dep
+This release has 1 fix.
+
+### Fixed
+
+- dompurify transitive dep
 
 ## 3.9.4
 
-- fix: build
+This release has 1 fix.
+
+### Fixed
+
+- build
 
 ## 3.9.3
 
-- fix: patch pixi.js
-- fix: rollback capacitor
+This release has 2 fixes.
+
+### Fixed
+
+- patch pixi.js
+- rollback capacitor
 
 ## 3.9.2
 
-- fix: update libs and patches
-- fix: use exact versions for patched libs
+This release has 2 fixes.
+
+### Fixed
+
+- update libs and patches
+- use exact versions for patched libs
 
 ## 3.9.1
 
-- fix: add trust-types dep
+This release has 1 fix.
+
+### Fixed
+
+- add trust-types dep
 
 ## 3.9.0
 
-- feat: Bases/Footnotes internal plugins
+This release has 1 new feature.
+
+### New
+
+- Bases/Footnotes internal plugins
 
 ## 3.8.2
 
-- fix: incorrect type of setState #120
+This release has 1 fix.
+
+### Fixed
+
+- incorrect type of setState #120
 
 ## 3.8.1
 
-- fix: missing bun deps
+This release has 1 fix.
+
+### Fixed
+
+- missing bun deps
 
 ## 3.8.0
 
-- fix: incorrect type of `markdown-viewport-menu`
-- refactor: rename `Browser` to `Webviewer`
-- feat: improve Webviewer plugin typings
-- fix: incorrect getter name `activeCM`
-- fix: JSDoc typo
-- feat: add CodeMirror augmentations based on Obsidian-patched CM modules
-- feat: add `LanguageState` interface
-- feat: Improve Webviewer plugin and CodeMirror typings, and fix editor.activeCM #119
-- fix: build
-- fix: API generator
-- fix: spellcheck
+This release has 4 new features and 6 fixes. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### New
+
+- improve Webviewer plugin typings
+- add CodeMirror augmentations based on Obsidian-patched CM modules
+- add `LanguageState` interface
+- Improve Webviewer plugin and CodeMirror typings, and fix editor.activeCM #119
+
+### Fixed
+
+- incorrect type of `markdown-viewport-menu`
+- incorrect getter name `activeCM`
+- JSDoc typo
+- build
+- API generator
+- spellcheck
 
 ## 3.7.0
 
-- fix: patch to <https://github.com/obsidianmd/obsidian-api/commit/9ab497e64afeac291a2546d2faeded6a7bed626a>
-- fix: update hover types
+This release has 2 fixes.
+
+### Fixed
+
+- patch to <https://github.com/obsidianmd/obsidian-api/commit/9ab497e64afeac291a2546d2faeded6a7bed626a>
+- update hover types
 
 ## 3.6.0
 
-- refactor: rename `TreeDom` to `ResultDom`
-- refactor: rename `ResultDom` to `ResultDomItem`
-- feat: add `ResultDomItemChild`
-- refactor: simplify `TreeNode`
-- fix: remove collapsible props from `TreeItem`
-- refactor: use getter for `children`
-- feat: add `TreeRoot`
-- feat: add `TreeCollapsibleItem`
-- fix: use `TreeItem` and `TreeRoot` as base
-- fix: extend `GraphOptions` with `TreeCollapsibleItem`
-- fix: `FileTreeItem`
-- feat: improve `FileExplorerView`
-- feat: Made some improvements to Tree and FileExplorerView #117 #118
-- fix: simplify definition
-- fix: remove @internal
+This release has 5 new features and 6 fixes. 4 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- add `ResultDomItemChild`
+- add `TreeRoot`
+- add `TreeCollapsibleItem`
+- improve `FileExplorerView`
+- Made some improvements to Tree and FileExplorerView #117 #118
+
+### Fixed
+
+- remove collapsible props from `TreeItem`
+- use `TreeItem` and `TreeRoot` as base
+- extend `GraphOptions` with `TreeCollapsibleItem`
+- `FileTreeItem`
+- simplify definition
+- remove @internal
 
 ## 3.5.1
+
+This release has 1 other change.
+
+### Other changes
 
 - Revert "feat: Made some improvements to Tree and FileExplorerView #117"
 
 ## 3.5.0
 
-- feat: add `ContainerTreeItem`
-- feat: add `TreeRoot`
-- fix: use getter for `children` in `TreeNodeVChildren`
-- refactor: simplify `TreeNode`
-- fix: `Tree` and `TreeItem`
-- feat: add `AbstractFileTreeItem`
-- feat: add `FolderTreeItem`
-- fix: `FileTreeItem` now implements `AbstractFileTreeItem` and `TreeItem`
-- feat: add `FileTreeItemParent` type
-- fix: `FileExplorerViewFileItemsRecord`
-- feat: add sort order for FileExplorerView
-- feat: improve `FileExplorerView`
-- fix: `attachDropHandler` doc
-- fix: CustomArrayDictImpl.count
-- feat: Made some improvements to Tree and FileExplorerView #117
+This release has 8 new features and 6 fixes. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### New
+
+- add `ContainerTreeItem`
+- add `TreeRoot`
+- add `AbstractFileTreeItem`
+- add `FolderTreeItem`
+- add `FileTreeItemParent` type
+- add sort order for FileExplorerView
+- improve `FileExplorerView`
+- Made some improvements to Tree and FileExplorerView #117
+
+### Fixed
+
+- use getter for `children` in `TreeNodeVChildren`
+- `Tree` and `TreeItem`
+- `FileTreeItem` now implements `AbstractFileTreeItem` and `TreeItem`
+- `FileExplorerViewFileItemsRecord`
+- `attachDropHandler` doc
+- CustomArrayDictImpl.count
 
 ## 3.4.0
 
-- fix: FileExplorerView
+This release has 1 fix.
+
+### Fixed
+
+- FileExplorerView
 
 ## 3.3.0
 
-- fix: runAsyncLinkUpdate
+This release has 1 fix.
+
+### Fixed
+
+- runAsyncLinkUpdate
 
 ## 3.2.2
 
-- fix: make fake functions optional
+This release has 1 fix.
+
+### Fixed
+
+- make fake functions optional
 
 ## 3.2.1
 
-- fix: specify typescript dependency
+This release has 1 fix.
+
+### Fixed
+
+- specify typescript dependency
 
 ## 3.2.0
 
-- fix: remove duplicates
+This release has 1 fix.
+
+### Fixed
+
+- remove duplicates
 
 ## 3.1.0
 
-- fix: moment type
+This release has 1 fix.
+
+### Fixed
+
+- moment type
 
 ## 3.0.0
 
-- feat: include all public obsidian API
-- feat: globals
-- feat: DomElementInfo
-- feat: more globals
-- feat: EditorView
-- feat: all functions
-- feat: merge with official typings
-- fix: compilation
+This release has 7 new features and 1 fix.
+
+### New
+
+- include all public obsidian API
+- globals
+- DomElementInfo
+- more globals
+- EditorView
+- all functions
+- merge with official typings
+
+### Fixed
+
+- compilation
 
 ## 2.44.3
 
-- fix: @antfu types
+This release has 1 fix.
+
+### Fixed
+
+- @antfu types
 
 ## 2.44.2
 
-- fix: inline PdfJsTestingUtils
-- fix: move dependencies to peer
+This release has 2 fixes.
+
+### Fixed
+
+- inline PdfJsTestingUtils
+- move dependencies to peer
 
 ## 2.44.1
 
-- fix: compilation
+This release has 1 fix.
+
+### Fixed
+
+- compilation
 
 ## 2.43.3
 
-- fix: force reexport
+This release has 1 fix.
+
+### Fixed
+
+- force reexport
 
 ## 2.43.0
 
-- fix: patch dompurify types
-- feat: refactor vars
-- fix: compilation with moment type
-- feat: MathJax
-- feat: mermaid
-- feat: Prism
-- feat: pdf.js
-- fix: compilation
-- feat: combine functions
+This release has 6 new features and 3 fixes.
+
+### New
+
+- refactor vars
+- MathJax
+- mermaid
+- Prism
+- pdf.js
+- combine functions
+
+### Fixed
+
+- patch dompurify types
+- compilation with moment type
+- compilation
 
 ## 2.42.0
 
+This release has 2 new features, 1 fix and 1 other change.
+
+### New
+
+- Add initGraphics, destroyGraphics and iframeEl to GraphRenderer #116
+- Graph
+
+### Fixed
+
+- posAtCoords
+
+### Other changes
+
 - Add initGraphics, destroyGraphics and iframeEl to GraphRenderer
-- fix: posAtCoords
-- feat: Add initGraphics, destroyGraphics and iframeEl to GraphRenderer #116
-- feat: Graph
 
 ## 2.41.3
 
-- fix: remove duplicated promise property
+This release has 1 fix.
+
+### Fixed
+
+- remove duplicated promise property
 
 ## 2.41.2
 
-- fix: queue signature
+This release has 1 fix.
+
+### Fixed
+
+- queue signature
 
 ## 2.41.1
 
-- feat: improve docs
+This release has 1 new feature.
+
+### New
+
+- improve docs
 
 ## 2.41.0
 
-- feat: reconcileFile
+This release has 1 new feature.
+
+### New
+
+- reconcileFile
 
 ## 2.40.0
 
-- feat: config-changed
+This release has 1 new feature.
+
+### New
+
+- config-changed
 
 ## 2.39.0
 
-- feat: FileManager
+This release has 1 new feature.
+
+### New
+
+- FileManager
 
 ## 2.38.2
 
-- feat: Note composer - HeadingInfo
+This release has 1 new feature.
+
+### New
+
+- Note composer - HeadingInfo
 
 ## 2.38.1
 
-- fix: missing null
+This release has 1 fix.
+
+### Fixed
+
+- missing null
 
 ## 2.38.0
 
-- feat: Note composer
+This release has 1 new feature.
+
+### New
+
+- Note composer
 
 ## 2.37.0
 
-- feat: DataAdapter
+This release has 1 new feature.
+
+### New
+
+- DataAdapter
 
 ## 2.36.2
 
-- feat: onFileChange
+This release has 1 new feature.
+
+### New
+
+- onFileChange
 
 ## 2.36.1
 
-- fix: add missing @public
+This release has 1 fix.
+
+### Fixed
+
+- add missing @public
 
 ## 2.36.0
 
-- feat: CommandPalette
+This release has 1 new feature.
+
+### New
+
+- CommandPalette
 
 ## 2.35.0
 
-- feat: MarkdownView.backlinks
+This release has 1 new feature.
+
+### New
+
+- MarkdownView.backlinks
 
 ## 2.34.1
 
-- fix: possible null
+This release has 1 fix.
+
+### Fixed
+
+- possible null
 
 ## 2.34.0
 
-- feat: getMatchCount
+This release has 1 new feature.
+
+### New
+
+- getMatchCount
 
 ## 2.33.0
 
-- feat: better types for ResultDomResult
+This release has 1 new feature.
+
+### New
+
+- better types for ResultDomResult
 
 ## 2.32.0
 
-- feat: addResult / renderContentMatches
+This release has 1 new feature.
+
+### New
+
+- addResult / renderContentMatches
 
 ## 2.31.0
 
-- feat: improve GraphEngine type #114
+This release has 1 new feature.
+
+### New
+
+- improve GraphEngine type #114
 
 ## 2.30.0
 
-- feat: improve GraphEngine type #114
-- feat: improve FileSystemWatchHandler type
+This release has 2 new features.
+
+### New
+
+- improve GraphEngine type #114
+- improve FileSystemWatchHandler type
 
 ## 2.29.1
 
-- fix: nullable queue
+This release has 1 fix.
+
+### Fixed
+
+- nullable queue
 
 ## 2.29.0
 
-- feat: ItemQueue
-- feat: refactor Tree
-- feat: BacklinkComponent
+This release has 3 new features.
+
+### New
+
+- ItemQueue
+- refactor Tree
+- BacklinkComponent
 
 ## 2.28.0
 
-- feat: improve EmbedRegistryEmbedByExtensionRecord type #112
-- feat: add all EmbeddableConstructors
+This release has 2 new features.
+
+### New
+
+- improve EmbedRegistryEmbedByExtensionRecord type #112
+- add all EmbeddableConstructors
 
 ## 2.27.0
 
-- feat: improve Vault type
-- fix: fix typo in FileSystemAdapter
-- feat: A few minor changes and fixes #111
+This release has 2 new features and 1 fix.
+
+### New
+
+- improve Vault type
+- A few minor changes and fixes #111
+
+### Fixed
+
+- fix typo in FileSystemAdapter
 
 ## 2.26.0
 
-- fix: fix different filesystem API interfaces
-- feat: improve types related to metadataCache and file adapters
-- feat: improve Reference type
-- feat: A few improvements to filesystem-related APIs #110
-- fix: listRecursiveChild
-- fix: reconcileFileCreation
-- fix: CapacitorFileEntry
-- fix: _preload
-- fix: computeFileMetadataAsync
-- fix: Reference
-- fix: rename 2-suffixed
-- fix: replace any with unknown
-- feat: extract nested objects
+This release has 4 new features and 9 fixes.
+
+### New
+
+- improve types related to metadataCache and file adapters
+- improve Reference type
+- A few improvements to filesystem-related APIs #110
+- extract nested objects
+
+### Fixed
+
+- fix different filesystem API interfaces
+- listRecursiveChild
+- reconcileFileCreation
+- CapacitorFileEntry
+- _preload
+- computeFileMetadataAsync
+- Reference
+- rename 2-suffixed
+- replace any with unknown
 
 ## 2.25.0
 
-- feat: CanvasView types
+This release has 1 new feature.
+
+### New
+
+- CanvasView types
 
 ## 2.23.5
 
-- fix: attw for node10
+This release has 1 fix.
+
+### Fixed
+
+- attw for node10
 
 ## 2.23.1
 
-- fix: implementations.d.mts
+This release has 1 fix.
+
+### Fixed
+
+- implementations.d.mts
 
 ## 2.21.0
 
-- feat: Add new typings to the graph core plugin #108
+This release has 1 new feature.
+
+### New
+
+- Add new typings to the graph core plugin #108
 
 ## 2.20.1
 
-- fix: node10 typing
+This release has 1 fix.
+
+### Fixed
+
+- node10 typing
 
 ## 2.19.0
 
-- feat: add missing arg
+This release has 1 new feature.
+
+### New
+
+- add missing arg
 
 ## 2.17.0
 
-- feat: Add BookmarkItems
+This release has 1 new feature.
+
+### New
+
+- Add BookmarkItems
 
 ## 2.16.0
 
-- feat: rename parameter
+This release has 1 new feature.
+
+### New
+
+- rename parameter
 
 ## 2.15.0
 
-- fix: wrong argument name
+This release has 1 fix.
+
+### Fixed
+
+- wrong argument name
 
 ## 2.14.3
 
-- fix: remove package-lock
+This release has 1 fix.
+
+### Fixed
+
+- remove package-lock
 
 ## 2.14.1
 
-- fix: move moment dependency
+This release has 1 fix.
+
+### Fixed
+
+- move moment dependency
 
 ## 2.13.7
 
-- fix: use temporary fork for pixi.js
+This release has 1 fix.
+
+### Fixed
+
+- use temporary fork for pixi.js
 
 ## 2.13.3
 
-- fix: PromiseWithResolvers
+This release has 1 fix.
+
+### Fixed
+
+- PromiseWithResolvers
 
 ## 2.13.0
 
-- feat: Add options to DailyNotesPluginInstance #104
-- feat: more DailyNotesPluginInstance
-- feat: Add engine and renderer to views #105
+This release has 3 new features.
+
+### New
+
+- Add options to DailyNotesPluginInstance #104
+- more DailyNotesPluginInstance
+- Add engine and renderer to views #105
 
 ## 2.12.0
 
-- fix: broken image links
-- feat: Add typings for the graph plugin #103
-- fix: onFileMenu
-- feat: GraphPluginInstance unknowns
-- fix: pixi.js types
+This release has 2 new features and 3 fixes.
+
+### New
+
+- Add typings for the graph plugin #103
+- GraphPluginInstance unknowns
+
+### Fixed
+
+- broken image links
+- onFileMenu
+- pixi.js types
 
 ## 2.11.0
 
-- feat: make createNewFile args optional
+This release has 1 new feature.
+
+### New
+
+- make createNewFile args optional
 
 ## 2.10.0
 
-- feat: openLinkText
+This release has 1 new feature.
+
+### New
+
+- openLinkText
 
 ## 2.8.2
 
-- fix: MenuItem.titleEl
+This release has 1 fix.
+
+### Fixed
+
+- MenuItem.titleEl
 
 ## 2.8.1
 
-- fix: stat type
+This release has 1 fix.
+
+### Fixed
+
+- stat type
 
 ## 2.8.0
 
-- feat: added typings for SearchComponent (#102)
-- feat: update Components
-- fix: registerMode
+This release has 2 new features and 1 fix.
+
+### New
+
+- added typings for SearchComponent (#102)
+- update Components
+
+### Fixed
+
+- registerMode
 
 ## 2.7.0
 
-- feat: browser plugin is no longer disabled starting from Obsidian 1.8.0
+This release has 1 new feature.
+
+### New
+
+- browser plugin is no longer disabled starting from Obsidian 1.8.0
 
 ## 2.6.1
 
-- fix: Bookmarks signatures
+This release has 1 fix.
+
+### Fixed
+
+- Bookmarks signatures
 
 ## 2.6.0
 
-- feat: add all views and leaves
-- feat: add new augmentation
-- fix: properly extend Platform
-- feat: add SyncView
-- feat: refactor constructor functions
-- feat: add hidden Browser plugin
-- feat: add constructors for all views
-- feat: add ViewRegistryTypeByExtensionRecord
-- feat: add UI Plugin Names
-- feat: update defaultOn for plugins
-- feat: make generic
-- feat: add Browser plugin mappings
-- feat: fill ViewRegistryViewByTypeRecord
-- feat: change signature for createTFileInstance/createTFolderInstance
+This release has 13 new features and 1 fix.
+
+### New
+
+- add all views and leaves
+- add new augmentation
+- add SyncView
+- refactor constructor functions
+- add hidden Browser plugin
+- add constructors for all views
+- add ViewRegistryTypeByExtensionRecord
+- add UI Plugin Names
+- update defaultOn for plugins
+- make generic
+- add Browser plugin mappings
+- fill ViewRegistryViewByTypeRecord
+- change signature for createTFileInstance/createTFolderInstance
+
+### Fixed
+
+- properly extend Platform
 
 ## 2.5.0
 
-- feat: add optional plugin functions
+This release has 1 new feature.
+
+### New
+
+- add optional plugin functions
 
 ## 2.4.0
 
-- fix: signature
-- feat: add recomputeBacklink
+This release has 1 new feature and 1 fix.
+
+### New
+
+- add recomputeBacklink
+
+### Fixed
+
+- signature
 
 ## 2.3.4
 
-- fix: MetadataTypeManagerTypesRecord
+This release has 1 fix.
+
+### Fixed
+
+- MetadataTypeManagerTypesRecord
 
 ## 2.3.2
 
-- feat: EditorView
-- fix: CustomArrayDictImpl.add
+This release has 1 new feature and 1 fix.
+
+### New
+
+- EditorView
+
+### Fixed
+
+- CustomArrayDictImpl.add
 
 ## 2.3.0
 
-- feat: FileSystemWatchHandler
-- feat: DataAdapter.handler/trigger
-- fix: mark created fake file/folder as deleted
+This release has 48 new features, 17 fixes and 1 other change.
+
+### New
+
+- FileSystemWatchHandler
+- DataAdapter.handler/trigger
+- PromisedQueue
+- MarkdownFileInfo.metadataEditor
+- add missing public
+- add global app
+- TFolder.getParentPrefix
+- add TFile/TFolder/TAbstractFile methods
+- add ShareReceiver
+- add all Workspace events
+- getLinkSuggestions() sometimes has alias property (#85)
+- Extended typings for MarkdownPreviewRenderer
+- Add typings to MarkdownPreviewRenderer and fix contributing.md formatting (#86)
+- add more hidden exported types
+- extract CapacitorAdapter
+- MarkdownPreviewSection
+- add all global variables
+- fix getAvailablePathForAttachments signature
+- getBacklinksForFile change to return ReferenceCache
+- Updated PropertyRenderContext.onChange
+- Updated PropertyRenderContext.onChange (#87)
+- update LinkResolverQueue
+- use posix
+- MetadataCache
+- Events._
+- add Plugin typings
+- AudioRecorderPluginInstance
+- add constructors
+- update InternalPlugins
+- added fileManager.renameProperty()
+- more internal plugins
+- requestSaveConfig
+- BacklinkPluginInstance
+- bookmarks
+- Bookmark
+- added fileManager.renameProperty() (#89)
+- App
+- more types
+- Canvas plugin
+- Added colorPickerEl property to ColorComponent (#90)
+- add ColorComponent functions
+- WorkspaceItem / WorkspaceSidedock
+- Update Tree.d.ts (#94)
+- Updated typings for ProgressBarComponent (#96)
+- add method
+- add type guards
+- Update ConfigItems
+- add debugMode
+
+### Fixed
+
+- mark created fake file/folder as deleted
+- handle root folder as /
+- ensure style-mod.d.cts is loaded
+- add @deprecated to app
+- `getLinkSuggestions()` sometimes has `alias` property
+- separate AppSetting from existing Setting
+- add null result
+- getBacklinksForFile accept mandatory TFile
+- MetadataCache typings
+- computeMetadataAsync
+- remove unused Starred plugin
+- Debouncer signature
+- Avoid duplicating TFile/TFolder
+- use proper typing
+- changed CustomArrayDict
+- signature for getBacklinksForFile
+- CustomArrayDict
+
+### Other changes
+
 - fix root folder path
-- fix: handle root folder as /
-- feat: PromisedQueue
-- feat: MarkdownFileInfo.metadataEditor
-- fix: ensure style-mod.d.cts is loaded
-- feat: add missing public
-- feat: add global app
-- fix: add @deprecated to app
-- feat: TFolder.getParentPrefix
-- feat: add TFile/TFolder/TAbstractFile methods
-- feat: add ShareReceiver
-- feat: add all Workspace events
-- fix: `getLinkSuggestions()` sometimes has `alias` property
-- feat: getLinkSuggestions() sometimes has alias property (#85)
-- feat: Extended typings for MarkdownPreviewRenderer
-- feat: Add typings to MarkdownPreviewRenderer and fix contributing.md formatting (#86)
-- feat: add more hidden exported types
-- feat: extract CapacitorAdapter
-- feat: MarkdownPreviewSection
-- feat: add all global variables
-- feat: fix getAvailablePathForAttachments signature
-- feat: getBacklinksForFile change to return ReferenceCache
-- feat: Updated PropertyRenderContext.onChange
-- feat: Updated PropertyRenderContext.onChange (#87)
-- fix: separate AppSetting from existing Setting
-- fix: add null result
-- fix: getBacklinksForFile accept mandatory TFile
-- fix: MetadataCache typings
-- feat: update LinkResolverQueue
-- feat: use posix
-- feat: MetadataCache
-- feat: Events._
-- fix: computeMetadataAsync
-- fix: remove unused Starred plugin
-- feat: add Plugin typings
-- feat: AudioRecorderPluginInstance
-- feat: add constructors
-- feat: update InternalPlugins
-- feat: added fileManager.renameProperty()
-- feat: more internal plugins
-- feat: requestSaveConfig
-- feat: BacklinkPluginInstance
-- fix: Debouncer signature
-- feat: bookmarks
-- fix: Avoid duplicating TFile/TFolder
-- feat: Bookmark
-- feat: added fileManager.renameProperty() (#89)
-- feat: App
-- feat: Bookmark
-- feat: more types
-- feat: Canvas plugin
-- feat: more types
-- feat: Added colorPickerEl property to ColorComponent (#90)
-- feat: add ColorComponent functions
-- feat: WorkspaceItem / WorkspaceSidedock
-- feat: Update Tree.d.ts (#94)
-- fix: use proper typing
-- feat: Updated typings for ProgressBarComponent (#96)
-- feat: add method
-- fix: changed CustomArrayDict
-- fix: signature for getBacklinksForFile
-- feat: add type guards
-- feat: Update ConfigItems
-- fix: CustomArrayDict
-- feat: add debugMode
 
 ## 2.2.0
 
