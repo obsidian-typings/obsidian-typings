@@ -6,6 +6,8 @@ import {
 import type { EditorState } from '@codemirror/state';
 
 import 'obsidian-typings';
+// Opt into the upstream Lezer and CodeMirror language/search types at Obsidian's boundaries.
+import type {} from 'obsidian-typings/lezer';
 
 declare const state: EditorState;
 const node = syntaxTree(state).resolveInner(1);

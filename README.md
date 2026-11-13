@@ -294,6 +294,15 @@ The exported `InteropPDFDocumentLoadingTask`, `InteropPDFDocumentProxy`, `Intero
 
 The verified Obsidian 1.14.4 and 1.15.0 builds vendor PDF.js 5.3.34, build `cc1e2a3e0`, which was never published to npm. Version 5.3.31 is the tested published comparison, not an exact vendor match or a promise about other versions. Selecting the package's public signatures does not establish that every upstream export exists in every Obsidian build. See the [library mirror audit](reports/library-mirror-audit-2026-11-03.md) for the source evidence and limits.
 
+## Optional Lezer and CodeMirror language/search interoperability
+
+Obsidian exposes three CodeMirror libraries beyond the `@codemirror/state` and `@codemirror/view` that `obsidian` itself requires: `@lezer/common` (the `tokenClassNodeProp` and `lineClassNodeProp` props and `LanguageState.tree`), `@codemirror/language` (`LanguageState.context`) and `@codemirror/search` (`CodeMirrorEditor.addOverlay` and `removeOverlay`). The default entry point needs none of them: those boundaries use standalone mirrors, exported as `NodeProp`, `LezerTree`, `ParseContext` and `SearchQuery`. To use the installed declarations instead, install the three packages and load the type-only integration:
+
+```ts
+import type {} from 'obsidian-typings/lezer';
+```
+
+The same `/lezer` subpath is available on scoped per-version and latest packages. The import is erased from JavaScript and loads no runtime. It selects the upstream types at every boundary above, across the whole TypeScript program through the reserved `ObsidianLezerTypes` registry, so `node.type.prop(tokenClassNodeProp)` on a real syntax node compiles without a cast. A locally copied `NodeProp` can never do that, because `NodeProp.add` reaches `NodeType`'s private members. The exported `InteropStringNodeProp`, `InteropLezerTree`, `InteropParseContext` and `InteropSearchQuery` aliases name the selected contracts.
 ## Optional Pixi interoperability
 
 The default entry point keeps standalone library mirrors: it does not require `pixi.js-legacy`. For plugins that use the real Pixi declarations, install the exact version Obsidian vendors (currently `pixi.js-legacy@7.2.4`) and explicitly load the type-only integration:

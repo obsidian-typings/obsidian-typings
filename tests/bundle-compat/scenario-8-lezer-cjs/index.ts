@@ -16,6 +16,8 @@ import type {
 } from 'obsidian-typings';
 
 import 'obsidian-typings';
+// Opt into the upstream Lezer and CodeMirror language/search types at Obsidian's boundaries.
+import type {} from 'obsidian-typings/lezer';
 
 // A locally copied NodeProp fails these assignments even when its public members look identical:
 // NodeProp.add reaches NodeType, whose upstream private members give it a distinct identity.
