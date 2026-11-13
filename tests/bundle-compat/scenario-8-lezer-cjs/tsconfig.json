@@ -6,7 +6,18 @@
     "skipLibCheck": false,
     "strict": true,
     "target": "es2022",
-    "types": []
+    "types": [],
+    "paths": {
+      "@codemirror/language": [
+        "./node_modules/@codemirror/language/dist/index.d.cts"
+      ],
+      "@codemirror/search": [
+        "./node_modules/@codemirror/search/dist/index.d.cts"
+      ],
+      "@lezer/common": [
+        "./node_modules/@lezer/common/dist/index.d.cts"
+      ]
+    }
   },
   "include": [
     "*.ts"
