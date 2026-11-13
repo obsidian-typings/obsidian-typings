@@ -1,10 +1,10 @@
-import type { SearchQuery } from '@codemirror/search';
 import type { EditorView } from '@codemirror/view';
 import type {
   EditorPosition,
   EditorSelection
 } from 'obsidian';
 
+import type { InteropSearchQuery } from '../../@codemirror__search/interop/InteropSearchQuery.d.ts';
 import type { AddOverlayOptions } from './AddOverlayOptions.d.ts';
 import type { Bookmark } from './Bookmark.d.ts';
 import type { Bracket } from './Bracket.d.ts';
@@ -78,7 +78,7 @@ export interface CodeMirrorEditor {
    * @param options - The overlay options containing the search pattern.
    * @returns The search query, or `undefined` if the overlay could not be added.
    */
-  addOverlay(options: AddOverlayOptions): SearchQuery | undefined;
+  addOverlay(options: AddOverlayOptions): InteropSearchQuery | undefined;
 
   /**
    * Remove focus from the editor.
@@ -511,7 +511,7 @@ export interface CodeMirrorEditor {
    *
    * @param overlay - The search query overlay to remove.
    */
-  removeOverlay(overlay?: SearchQuery): void;
+  removeOverlay(overlay?: InteropSearchQuery): void;
 
   /**
    * Replace the text in the given range.

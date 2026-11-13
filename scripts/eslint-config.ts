@@ -101,7 +101,7 @@ export const config: Linter.Config[] = defineConfig([
   ...getJsdocsConfigs(),
   ...getTsdocsConfigs(),
   {
-    files: ['integrations/pixi.d.ts', 'integrations/electron.d.ts', 'integrations/pdfjs.d.ts'],
+    files: ['integrations/pixi.d.ts', 'integrations/electron.d.ts', 'integrations/pdfjs.d.ts', 'integrations/lezer.d.ts'],
     rules: {
       // This type-only entry point resolves its upstream library from the opting-in consumer, tested by bundle scenarios.
       'import-x/no-extraneous-dependencies': 'off',
