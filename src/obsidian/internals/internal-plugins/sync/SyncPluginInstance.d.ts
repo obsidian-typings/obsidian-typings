@@ -3,6 +3,8 @@ import type { App } from 'obsidian';
 import type { InternalPluginInstance } from '../InternalPluginInstance.d.ts';
 import type { SyncFilter } from './SyncFilter/SyncFilter.d.ts';
 import type { SyncPlugin } from './SyncPlugin.d.ts';
+import type { SyncServerFile } from './SyncServerFile.d.ts';
+import type { SyncStatus } from './SyncStatus.d.ts';
 
 /**
  * Plugin instance for Obsidian Sync, managing cloud synchronization of vault data.
@@ -23,6 +25,15 @@ export interface SyncPluginInstance extends InternalPluginInstance<SyncPlugin> {
    * Reference to the sync plugin registration.
    */
   plugin: SyncPlugin;
+
+  /** The file records the server pushed, keyed by vault path. */
+  serverFiles: Record<string, SyncServerFile>;
+
+  /** The Sync status icon, in the status bar on desktop or the header on mobile; `null` before it is created. */
+  statusIconEl: HTMLElement | null;
+
+  /** The status text shown in the status icon's tooltip, such as `Connecting to server`. */
+  syncStatus: string;
 
   /** The id of the connected remote vault, `null` when none is connected. */
   vaultId: null | string;
@@ -50,6 +61,13 @@ export interface SyncPluginInstance extends InternalPluginInstance<SyncPlugin> {
    * @returns The vault name, `null` when none is connected.
    */
   getRemoteVaultName(): null | string;
+
+  /**
+   * Get the current sync state.
+   *
+   * @returns The sync state.
+   */
+  getStatus(): SyncStatus;
 
   /**
    * Include or exclude a configuration kind from sync.
