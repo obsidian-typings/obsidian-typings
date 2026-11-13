@@ -303,6 +303,7 @@ import type {} from 'obsidian-typings/lezer';
 ```
 
 The same `/lezer` subpath is available on scoped per-version and latest packages. The import is erased from JavaScript and loads no runtime. It selects the upstream types at every boundary above, across the whole TypeScript program through the reserved `ObsidianLezerTypes` registry, so `node.type.prop(tokenClassNodeProp)` on a real syntax node compiles without a cast. A locally copied `NodeProp` can never do that, because `NodeProp.add` reaches `NodeType`'s private members. The exported `InteropStringNodeProp`, `InteropLezerTree`, `InteropParseContext` and `InteropSearchQuery` aliases name the selected contracts.
+
 ## Optional Pixi interoperability
 
 The default entry point keeps standalone library mirrors: it does not require `pixi.js-legacy`. For plugins that use the real Pixi declarations, install the exact version Obsidian vendors (currently `pixi.js-legacy@7.2.4`) and explicitly load the type-only integration:
