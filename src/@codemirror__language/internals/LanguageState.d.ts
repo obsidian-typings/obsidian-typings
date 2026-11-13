@@ -1,6 +1,7 @@
-import type { ParseContext } from '@codemirror/language';
 import type { Transaction } from '@codemirror/state';
-import type { Tree as LezerTree } from '@lezer/common';
+
+import type { InteropLezerTree } from '../../@lezer__common/interop/InteropLezerTree.d.ts';
+import type { InteropParseContext } from '../interop/InteropParseContext.d.ts';
 
 /**
  * Internal state for a language's parser, tracking the parse tree and context.
@@ -14,12 +15,12 @@ export interface LanguageState {
    * A mutable parse state that is used to preserve work done during
    * the lifetime of a state when moving to the next state.
    */
-  context: ParseContext;
+  context: InteropParseContext;
 
   /**
    * The current tree. Immutable, because directly accessible from the editor state.
    */
-  tree: LezerTree;
+  tree: InteropLezerTree;
 
   /**
    * Apply a transaction to produce an updated language state.

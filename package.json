@@ -65,6 +65,14 @@
         "types": "./dist/esm/pdfjs.d.mts"
       }
     },
+    "./lezer": {
+      "require": {
+        "types": "./dist/cjs/lezer.d.cts"
+      },
+      "import": {
+        "types": "./dist/esm/lezer.d.mts"
+      }
+    },
     "./electron": {
       "require": {
         "types": "./dist/cjs/electron.d.cts"
@@ -171,11 +179,8 @@
     "vitest": "^5.0.1"
   },
   "peerDependencies": {
-    "@codemirror/language": "^6.13.1",
-    "@codemirror/search": "^6.7.2",
     "@codemirror/state": "^6.7.6",
     "@codemirror/view": "^6.43.13",
-    "@lezer/common": "^1.5.5",
     "@types/node": ">=16.0.0"
   }
 }
