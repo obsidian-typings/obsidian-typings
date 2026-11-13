@@ -4,6 +4,9 @@ import type {
 } from 'obsidian';
 
 import type { ViewType } from '../../../implementations/constants/ViewType.d.ts';
+import type { Tree } from '../../tree/Tree.d.ts';
+import type { TreeItem } from '../../tree/TreeItem.d.ts';
+import type { SyncFileTreeItem } from './SyncFileTreeItem.d.ts';
 import type { SyncPluginInstance } from './SyncPluginInstance.d.ts';
 
 /**
@@ -13,6 +16,12 @@ import type { SyncPluginInstance } from './SyncPluginInstance.d.ts';
  * @unofficial
  */
 export interface SyncView extends View {
+  /** The file rows built so far, keyed by vault path. */
+  fileItems: Record<string, SyncFileTreeItem>;
+
+  /** The tree of recent changes, grouped by day. */
+  tree: Tree<TreeItem>;
+
   /**
    * Constructor.
    *
@@ -29,4 +38,11 @@ export interface SyncView extends View {
    * @returns The sync view type.
    */
   getViewType(): typeof ViewType.Sync;
+
+  /**
+   * Rebuild the list of recent changes from the server file records.
+   *
+   * @returns A promise that resolves when the list is rebuilt.
+   */
+  updateRecentChanges(): Promise<void>;
 }
