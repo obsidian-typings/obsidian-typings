@@ -54,7 +54,7 @@ export interface BasesTableView extends ReturnType<BasesViewFactory> {
   /** The header row. */
   header: BasesTableHeaderRow;
 
-  /** The scroll position at the last virtual display update. */
+  /** The scroll position at the last virtual display update, which `getEphemeralState()` returns as `scroll`. */
   lastScroll: BasesTableScrollPosition;
 
   /** The viewport at the last virtual display update, or `null` before the first one. */
@@ -66,7 +66,10 @@ export interface BasesTableView extends ReturnType<BasesViewFactory> {
   /** The minimum column width, in pixels. */
   minColWidth: number;
 
-  /** The scroll position to restore at the next virtual display update, or `null` when there is none. */
+  /**
+   * The scroll position to restore at the next virtual display update, or `null` when there is none. Set by
+   * `setEphemeralState({ scroll })` and by `onDataUpdated()`, and cleared once applied.
+   */
   pendingScroll: BasesTableScrollPosition | null;
 
   /** The pending animation frame request for a column resize, or `0` when none is pending. */
