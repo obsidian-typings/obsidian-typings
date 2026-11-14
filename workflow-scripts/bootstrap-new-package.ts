@@ -67,10 +67,10 @@ import type {
 import { withStartingBranchRestored } from './helpers/git.ts';
 import { offerRelease } from './helpers/hand-back.ts';
 import { writeJson } from './helpers/json.ts';
+import { ensureNpmLogin } from './helpers/npm-login.ts';
 import {
   attachTrustedPublisher,
   describeTrustedPublisherAttach,
-  getNpmUsername,
   getPackageRegistryState,
   getPlaceholderPublishRefusal,
   getScopedPackageName,
@@ -146,15 +146,12 @@ async function main(): Promise<void> {
   //
   // This is deliberately AFTER the existence short-circuit: a re-run against an already-claimed name only
   // prints instructions, and needs no credential at all. That is what makes the script safe to re-run.
-  const npmUsername = await getNpmUsername();
-
-  if (!npmUsername) {
-    throw new Error(
-      `npm rejected this machine's credential, so claiming ${packageName} would fail with a bare E404 that reads`
-        + ' as a registry-side refusal. Run `npm login` in this terminal and re-run this script -- it is safe to'
-        + ' re-run, and it is the only step in the release path that needs a local npm credential at all.'
-    );
-  }
+  //
+  // Since 2026-11-14 a missing login is offered `npm login` on the spot instead of ending the run, because the
+  // script already holds the terminal; see `helpers/npm-login.ts`. Without a terminal it throws as before.
+  const npmUsername = await ensureNpmLogin(
+    `claiming ${packageName} without a login would fail with a bare E404 that reads as a registry-side refusal`
+  );
 
   console.log(`Claiming ${packageName} with a ${PLACEHOLDER_VERSION} placeholder, as npm user ${npmUsername}.`);
   console.log('npm will prompt for your 2FA one-time password -- that prompt is the whole point of this step.');

@@ -240,21 +240,24 @@ async function reportBranchNeedingPackage(
       'package that already exists, so the name has to be claimed from a maintainer\'s machine, with 2FA. From `main`:',
       '',
       '```bash',
+      'npm login',
       'git fetch origin',
       `npm run bootstrap-new-package -- ${obsidianVersion} ${channel}`,
       '```',
       '',
+      'Skip `npm login` if `npm whoami` already names you; the script also offers it when the login is missing.',
       'It publishes a placeholder, attaches the trusted publisher, and then dispatches the first release.'
     ]
     : [
       `\`${packageName}\` holds only the bootstrap placeholder, so its trusted publisher may not be attached yet. From \`main\`:`,
       '',
       '```bash',
+      'npm login',
       'git fetch origin',
       `npm run bootstrap-new-package -- ${obsidianVersion} ${channel}`,
       '```',
       '',
-      'It skips the claimed name, attaches the publisher if it is missing, and then dispatches the first release.'
+      'Skip `npm login` if `npm whoami` already names you. It skips the claimed name, attaches the publisher if it is missing, and then dispatches the first release.'
     ];
 
   await fileIssueOnce(
