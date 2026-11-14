@@ -134,10 +134,10 @@ declare module 'obsidian' {
     /**
      * The parent split containing this item.
      *
-     * @returns The parent workspace container.
+     * @returns The parent workspace container, or `null` for a top-level container such as {@link obsidian#Workspace.rootSplit}.
      * @unofficial
      */
-    get parentSplit(): WorkspaceParent;
+    get parentSplit(): null | WorkspaceParent;
 
     /**
      * Serialize this workspace item's state for persistence.
