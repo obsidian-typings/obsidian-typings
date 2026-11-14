@@ -9,9 +9,9 @@ import type { EmbedContext } from './EmbedContext.d.ts';
  * @param context - Context used to embed the file.
  * @param file - File to embed.
  * @param subpath - Optional subpath within the file.
- * @returns An embed component.
+ * @returns An embed component, or `null` to decline the file, in which case Obsidian falls back to its generic file embed.
  *
  * @public
  * @unofficial
  */
-export type EmbedCreator = (context: EmbedContext, file: TFile, subpath?: string) => EmbedComponent;
+export type EmbedCreator = (context: EmbedContext, file: TFile, subpath?: string) => EmbedComponent | null;
