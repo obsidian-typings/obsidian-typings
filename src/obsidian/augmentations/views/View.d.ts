@@ -19,13 +19,6 @@ declare module 'obsidian' {
     app: App;
 
     /**
-     * Whether the leaf may close the view.
-     *
-     * @unofficial
-     */
-    closeable: boolean;
-
-    /**
      * The container HTML element for the component.
      *
      * @official

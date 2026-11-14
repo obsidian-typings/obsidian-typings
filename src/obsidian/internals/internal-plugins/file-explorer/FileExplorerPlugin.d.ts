@@ -1,8 +1,7 @@
 import type {
   CliFlags,
   CliHandler,
-  SettingTab,
-  TAbstractFile
+  SettingTab
 } from 'obsidian';
 
 import type { InternalPlugin } from '../InternalPlugin.d.ts';
@@ -29,12 +28,4 @@ export interface FileExplorerPlugin extends InternalPlugin<FileExplorerPluginIns
    * @param handler - The handler callback.
    */
   registerCliHandler(command: string, description: string, flags: CliFlags | null, handler: CliHandler): void;
-
-  /**
-   * Reveals a file or folder in the file explorer view, opens the view if it is not already.
-   * open/visible.
-   *
-   * @param item - The file or folder to reveal.
-   */
-  revealInFolder(item: TAbstractFile): void;
 }
