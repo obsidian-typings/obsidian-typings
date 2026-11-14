@@ -39,9 +39,10 @@ declare module 'obsidian' {
     /**
      * IndexedDB database
      *
+     * @remarks `null` until the cache database opens during preload, and for the whole session if it fails to open.
      * @unofficial
      */
-    db: IDBDatabase;
+    db: IDBDatabase | null;
 
     /**
      * Debounced callback that fires when the metadata cache finishes processing.
@@ -113,13 +114,6 @@ declare module 'obsidian' {
      * @official
      */
     resolvedLinks: Record<string, Record<string, number>>;
-
-    /**
-     * Debounced function for saving caches to the database.
-     *
-     * @unofficial
-     */
-    transactionSave: Debouncer<[], void>;
 
     /**
      * Mapping of filename to collection of files that share the same name
@@ -674,6 +668,30 @@ declare module 'obsidian' {
      * @unofficial
      */
     showIndexingNotice(): void;
+
+    /**
+     * Writes a file cache entry to the `file` store of the cache database, or deletes the key when `value` is `null`.
+     *
+     * @remarks Unset until the cache database opens during preload, and for the whole session if it fails to open.
+     * @param storeName - The object store.
+     * @param key - The file path.
+     * @param value - The entry to write, or `null` to delete the key.
+     * @returns The written key, or `undefined` after a delete.
+     * @unofficial
+     */
+    transactionSave?(storeName: 'file', key: string, value: FileCacheEntry | null): Promise<IDBValidKey | undefined>;
+
+    /**
+     * Writes a metadata cache entry to the `metadata` store of the cache database, or deletes the key when `value` is `null`.
+     *
+     * @remarks Unset until the cache database opens during preload, and for the whole session if it fails to open.
+     * @param storeName - The object store.
+     * @param key - The file hash.
+     * @param value - The entry to write, or `null` to delete the key.
+     * @returns The written key, or `undefined` after a delete.
+     * @unofficial
+     */
+    transactionSave?(storeName: 'metadata', key: string, value: CachedMetadata | null): Promise<IDBValidKey | undefined>;
 
     /**
      * Applies queued internal-link updates to the affected files.
