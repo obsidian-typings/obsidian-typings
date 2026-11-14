@@ -43,7 +43,10 @@ The 1.15.1 bundle (`obsidian-versions` tags `1.15.1` and `catalyst/1.15.1`) was 
 
 ### `null` in `onload` only
 
-These are set by the time `onLayoutReady` fires, and they stay non-nullable for now. The design decision below covers them.
+These are set by the time `onLayoutReady` fires. Both maintained branches now type them as the last section describes. The bundle split them into two groups:
+
+1. `activeTabGroup` and `floatingSplit` are `null | ...`. `LayoutReadyWorkspace` holds them non-null, and the `isLayoutReady` guard and the `onLayoutReadyEx` helper return that view.
+2. `db` is `IDBDatabase | null`, and `transactionSave` is an optional method. Neither gets a ready-phase view. Both are assigned only when `MetadataCache._preload` opens the cache database, so if it fails to open they stay unset for the whole session. `transactionSave` was also wrongly typed as a `Debouncer`. It writes a value to the `file` or `metadata` store, and deletes the key when the value is `null`.
 
 | Member | Declared | `onload` |
 | --- | --- | --- |
@@ -62,7 +65,7 @@ These are set by the time `onLayoutReady` fires, and they stay non-nullable for 
 An honest `| null` on every member that is unset in `onload` would make every `onLayoutReady` caller write `!` or a check. That trades a crash for noise. The chosen pattern makes the phase part of the type:
 
 1. Declare each such member as it is: `rootSplit: WorkspaceRoot | null`.
-2. Give the ready phase a narrowed view, `LayoutReadyWorkspace`, in which those members are non-null. `onLayoutReady` passes it to its callback, and an `isLayoutReady(workspace)` guard narrows to it from `workspace.layoutReady`.
+2. Give the ready phase a narrowed view, `LayoutReadyWorkspace`, in which those members are non-null. Two helpers in the implementations entry point produce it. The `onLayoutReadyEx(workspace, callback)` helper passes the view to its callback. A plain `onLayoutReady` overload cannot, because Obsidian calls that callback with no argument. The `isLayoutReady(workspace)` guard narrows to the view from `workspace.layoutReady`.
 3. Code in `onLayoutReady`, or after the guard, keeps the non-null types. Code in `onload` must handle `null`, which is what the runtime requires.
 
 This repository can do that for the members it declares. The official ones go upstream in the same shape, with a plain `| null` plus `@remarks` as the minimal fallback.
