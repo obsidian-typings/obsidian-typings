@@ -380,6 +380,10 @@ The [broader 1.14.4 crawler triage](reports/crawler-triage-1.14.4.md) records th
 
 Both maintained 1.14.4 streams model `WorkspaceProtocolHandler` as a direct dispatcher over its `handlers` map. Its constructor clears the legacy `trusted-uri-actions` storage; it has no trust map, trust prompt, dispatch queue or source-name registry. [The verification report](reports/protocol-handler-1.14.4.md) records the tagged sources, isolated 1.14.4 and 1.15.0 probes, and focused crawler comparison. Do not reintroduce the removed trust members when carrying the interface forward without verifying the target application source.
 
+## Layout-Ready Probe
+
+`npm run probe` in `obsidian-typings-crawler` checks the declarations the other way round from the crawler. It reads every member path declared from `App`, official and typings-only, in a plugin's `onload` on a cold start and again in `onLayoutReady`. It reports a value that is nullish where the type is not nullable, a value of the wrong `typeof` kind, or a read that throws. [The 1.15.1 run](reports/layout-ready-probe-1.15.1.md) records what it found, what was corrected, and the chosen pattern for members that are only unset before the layout loads: declare them nullable, and give the ready phase a narrowed `LayoutReadyWorkspace` view instead of making callers write `!`. Re-run it when a new release branch is cut. A member it reports as `missing` in both phases is a candidate for removal, once the bundle confirms the member is gone.
+
 ## Documentation
 
 This is a **multi-branch** repo (`main` + long-lived `release/obsidian-public/*` and `release/obsidian-catalyst/*` branches). This `AGENTS.md` lives **only on `main`** — it is intentionally absent from the release branches to avoid divergence. Edit it here.
