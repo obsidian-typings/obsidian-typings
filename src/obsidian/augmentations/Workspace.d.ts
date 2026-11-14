@@ -109,11 +109,11 @@ declare module 'obsidian' {
     editorSuggest: EditorSuggestEx;
 
     /**
-     * The workspace split that contains popout (floating) windows.
+     * The workspace container that holds the popout (floating) windows.
      *
      * @unofficial
      */
-    floatingSplit: WorkspaceSplit;
+    floatingSplit: WorkspaceFloating;
 
     /**
      * Registered sources for hover link previews.
@@ -130,11 +130,11 @@ declare module 'obsidian' {
     initialized: boolean;
 
     /**
-     * Last opened file in the vault.
+     * Last opened file in the vault, or `null` when no file has been opened yet.
      *
      * @unofficial
      */
-    lastActiveFile: TFile;
+    lastActiveFile: null | TFile;
 
     /**
      * Whether the last active tab group had stacked tabs enabled.

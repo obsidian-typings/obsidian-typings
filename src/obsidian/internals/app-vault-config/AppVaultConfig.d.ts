@@ -11,7 +11,7 @@ export interface AppVaultConfig {
   /**
    * Appearance &gt; Accent color.
    */
-  accentColor: '' | string;
+  accentColor?: '' | string;
 
   /**
    * Files & Links &gt; Automatically update internal links.
@@ -56,12 +56,12 @@ export interface AppVaultConfig {
   /**
    * Community Plugins &gt; Browse &gt; Sort order.
    */
-  communityPluginSortOrder: 'alphabetical' | 'download' | 'release' | 'update';
+  communityPluginSortOrder?: 'alphabetical' | 'download' | 'release' | 'update';
 
   /**
    * Themes &gt; Browse &gt; Sort order.
    */
-  communityThemeSortOrder: 'alphabetical' | 'download' | 'release' | 'update';
+  communityThemeSortOrder?: 'alphabetical' | 'download' | 'release' | 'update';
 
   /**
    * Appearance &gt; Theme.
@@ -301,7 +301,7 @@ export interface AppVaultConfig {
    *
    * @deprecated Probably left-over code from old properties type storage
    */
-  types: object;
+  types?: object;
 
   /**
    * Files & Links &gt; Allow URI callbacks.

@@ -78,13 +78,6 @@ export interface RecentFileTracker {
   load(savedFiles: string[]): void;
 
   /**
-   * On file create, save file to last opened files.
-   *
-   * @param file - The created file.
-   */
-  onFileCreated(file: TFile): void;
-
-  /**
    * On file open, save file to last opened files.
    *
    * @param prevFile - Previously opened file.

@@ -82,9 +82,9 @@ export interface AppSetting extends Modal {
   popout: unknown;
 
   /**
-   * The local-storage key used to persist the popout-window state.
+   * The local-storage key used to persist the popout-window state, or `null` when the settings are not open in a popout.
    */
-  popoutStorageKey: string;
+  popoutStorageKey: null | string;
 
   /**
    * The event reference for the workspace `quit` hook, or `null`.
