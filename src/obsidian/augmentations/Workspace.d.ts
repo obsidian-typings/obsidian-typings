@@ -68,9 +68,11 @@ declare module 'obsidian' {
     /**
      * Currently active tab group.
      *
+     * @remarks `null` until the layout is loaded, as in a plugin's `onload` on a cold start.
+     * Use `isLayoutReady` or `onLayoutReadyEx` to get a `LayoutReadyWorkspace`, where it is set.
      * @unofficial
      */
-    activeTabGroup: WorkspaceTabs;
+    activeTabGroup: null | WorkspaceTabs;
 
     /**
      * Reference to the {@link obsidian#App}.
@@ -111,9 +113,12 @@ declare module 'obsidian' {
     /**
      * The workspace container that holds the popout (floating) windows.
      *
+     * @remarks `null` until the layout is loaded, as in a plugin's `onload` on a cold start, and while a layout change
+     * replaces the layout. Use `isLayoutReady` or `onLayoutReadyEx` to get a `LayoutReadyWorkspace`,
+     * where it is set.
      * @unofficial
      */
-    floatingSplit: WorkspaceFloating;
+    floatingSplit: null | WorkspaceFloating;
 
     /**
      * Registered sources for hover link previews.
