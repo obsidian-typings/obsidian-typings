@@ -1,5 +1,59 @@
 # CHANGELOG
 
+## 1.2.0
+
+**Models:** Obsidian `1.15.1` (`public` channel). Internal members can differ in other app versions, so guard the ones you use when your `minAppVersion` is older.
+
+**Branch:** [`release/obsidian-public/1.15.1`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.15.1)
+
+**Commits:** [`obsidian-public-1.15.1-v1.1.0...obsidian-public-1.15.1-v1.2.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-public-1.15.1-v1.1.0...obsidian-public-1.15.1-v1.2.0)
+
+### Breaking changes
+
+- feat(workspace): type the members unset before the layout loads as nullable, with a LayoutReadyWorkspace view ([`6ae7e11`](https://github.com/obsidian-typings/obsidian-typings/commit/6ae7e110eb3d109b116480851b079cc56ddd4c43))
+- fix(workspace): correct members whose declared type disagrees with the 1.15.1 runtime ([`fe1fa79`](https://github.com/obsidian-typings/obsidian-typings/commit/fe1fa79a8a0e6307e543f8c5e4731b055e4010c9))
+- fix(embed-registry): let EmbedCreator decline a file and loadFile be async ([`1129934`](https://github.com/obsidian-typings/obsidian-typings/commit/1129934bd4dc5d5ccde22657e0ab6c74573296fb))
+
+### Other changes
+
+- feat(sync): declare the local file records and file-event handlers of SyncPluginInstance ([`e256235`](https://github.com/obsidian-typings/obsidian-typings/commit/e256235946b8b9552996cf16c2adbd85e9841049))
+
+### Declared API changes
+
+Names only, compared with `obsidian-public-1.15.1-v1.1.0`.
+
+**Added (23):**
+
+- `LayoutReadyWorkspace`
+- `LayoutReadyWorkspace.activeTabGroup`
+- `LayoutReadyWorkspace.floatingSplit`
+- `LayoutReadyWorkspace.layoutReady`
+- `SyncLocalFile`
+- `SyncLocalFile.ctime`
+- `SyncLocalFile.folder`
+- `SyncLocalFile.hash`
+- `SyncLocalFile.mtime`
+- `SyncLocalFile.path`
+- `SyncLocalFile.previouspath`
+- `SyncLocalFile.size`
+- `SyncLocalFile.synchash`
+- `SyncLocalFile.synctime`
+- `SyncPluginInstance.boundOnFileAdd`
+- `SyncPluginInstance.boundOnFileRemove`
+- `SyncPluginInstance.boundOnFileRename`
+- `SyncPluginInstance.localFiles`
+- `SyncPluginInstance.onFileAdd`
+- `SyncPluginInstance.onFileRemove`
+- `SyncPluginInstance.onFileRename`
+- `SyncPluginInstance.scanFiles`
+- `SyncPluginInstance.skippedFiles`
+
+**Removed (3):**
+
+- `FileExplorerPlugin.revealInFolder`
+- `RecentFileTracker.onFileCreated`
+- `View.closeable`
+
 ## 1.1.0
 
 **Models:** Obsidian `1.15.1` (`public` channel). Internal members can differ in other app versions, so guard the ones you use when your `minAppVersion` is older.
