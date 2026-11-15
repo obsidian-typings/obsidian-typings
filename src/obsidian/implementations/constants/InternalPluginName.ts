@@ -58,10 +58,6 @@ export const InternalPluginName = {
    */
   Graph: 'graph',
   /**
-   * Plugin name in UI: Format converter.
-   */
-  MarkdownImporter: 'markdown-importer',
-  /**
    * Plugin name in UI: Note composer.
    */
   NoteComposer: 'note-composer',

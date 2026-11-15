@@ -12,7 +12,6 @@ import type { FileRecoveryPluginInstance } from './file-recovery/FileRecoveryPlu
 import type { FootnotesPluginInstance } from './footnotes/FootnotesPluginInstance.d.ts';
 import type { GlobalSearchPluginInstance } from './global-search/GlobalSearchPluginInstance.d.ts';
 import type { GraphPluginInstance } from './graph/GraphPluginInstance.d.ts';
-import type { MarkdownImporterPluginInstance } from './markdown-importer/MarkdownImporterPluginInstance.d.ts';
 import type { NoteComposerPluginInstance } from './note-composer/NoteComposerPluginInstance.d.ts';
 import type { OutgoingLinkPluginInstance } from './outgoing-link/OutgoingLinkPluginInstance.d.ts';
 import type { OutlinePluginInstance } from './outline/OutlinePluginInstance.d.ts';
@@ -52,7 +51,6 @@ export type InternalPluginNameInstancesMapping = {
   [InternalPluginName.Footnotes]: FootnotesPluginInstance;
   [InternalPluginName.GlobalSearch]: GlobalSearchPluginInstance;
   [InternalPluginName.Graph]: GraphPluginInstance;
-  [InternalPluginName.MarkdownImporter]: MarkdownImporterPluginInstance;
   [InternalPluginName.NoteComposer]: NoteComposerPluginInstance;
   [InternalPluginName.OutgoingLink]: OutgoingLinkPluginInstance;
   [InternalPluginName.Outline]: OutlinePluginInstance;
