@@ -5,6 +5,7 @@ import type { FileCacheEntry } from '../internals/FileCacheEntry.d.ts';
 import type { LinkChangeUpdate } from '../internals/link-update/LinkChangeUpdate.d.ts';
 import type { LinkUpdaters } from '../internals/link-update/LinkUpdaters.d.ts';
 import type { LinkSuggestion } from '../internals/LinkSuggestion.d.ts';
+import type { MetadataCacheBlockCache } from '../internals/metadata-cache-block-cache/MetadataCacheBlockCache.d.ts';
 import type { MetadataCacheFileCacheRecord } from '../internals/metadata-cache-records/MetadataCacheFileCacheRecord.d.ts';
 import type { MetadataCacheMetadataCacheRecord } from '../internals/metadata-cache-records/MetadataCacheMetadataCacheRecord.d.ts';
 import type { MetadataCacheWorkerMessage } from '../internals/MetadataCacheWorkerMessage.d.ts';
@@ -30,11 +31,11 @@ declare module 'obsidian' {
     app: App;
 
     /**
-     * Cache for block references in the vault.
+     * Per-file cache of the blocks offered as block-link suggestions.
      *
      * @unofficial
      */
-    blockCache: BlockCache;
+    blockCache: MetadataCacheBlockCache;
 
     /**
      * IndexedDB database
