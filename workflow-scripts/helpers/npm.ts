@@ -19,6 +19,7 @@
 import type { ExecResult } from '@mnaoumov/typescript-dev-toolkit/exec';
 
 import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
+import dedent from 'dedent';
 import { execFileSync } from 'node:child_process';
 import process from 'node:process';
 
@@ -546,33 +547,32 @@ export function getTrustedPublisherCommand(packageName: string): string {
  * in front of them. Its fields are given verbatim because every one of them is case-sensitive.
  */
 export function getTrustedPublisherInstructions(packageName: string): string {
-  return [
-    '',
-    'Attach the trusted publisher, or CI still will not be able to publish it:',
-    '',
-    `  ${getTrustedPublisherCommand(packageName)}`,
-    '',
-    'npm asks for one 2FA code and prints the configuration it created. Run it in a real terminal: carrying no',
-    '`--otp` on its command line, it answers the challenge in a browser, and it will not open one for a process',
-    'whose input or output is redirected.',
-    '',
-    'The same thing by hand, if that command is unavailable -- every field is case-sensitive:',
-    '',
-    `  1. Open https://www.npmjs.com/package/${packageName}/access`,
-    '  2. Under "Trusted Publisher", choose GitHub Actions and enter, exactly:',
-    '',
-    `       Organization or user: ${GITHUB_OWNER}`,
-    `       Repository:           ${GITHUB_REPOSITORY}`,
-    `       Workflow filename:    ${PUBLISH_WORKFLOW_FILE_NAME}`,
-    '       Environment name:     (leave empty)',
-    '       Allowed actions:      npm publish',
-    '',
-    // `npm run release` is defined only in a release branch's `package.json`, so naming it without naming
-    // where it runs hands back a command that dies with `Missing script: "release"` on `main` -- which is
-    // exactly where two of this function's three callers can leave the checkout.
-    '  3. Save it. The release is then dispatched from the release branch, where `npm run release` lives.',
-    ''
-  ].join('\n');
+  // Step 3 names the release branch because `npm run release` is defined only in a release branch's
+  // `package.json`, so naming it without naming where it runs hands back a command that dies with
+  // `Missing script: "release"` on `main` -- which is exactly where two of this function's three callers can
+  // leave the checkout.
+  return `\n${dedent`
+    Attach the trusted publisher, or CI still will not be able to publish it:
+
+      ${getTrustedPublisherCommand(packageName)}
+
+    npm asks for one 2FA code and prints the configuration it created. Run it in a real terminal: carrying no
+    \`--otp\` on its command line, it answers the challenge in a browser, and it will not open one for a process
+    whose input or output is redirected.
+
+    The same thing by hand, if that command is unavailable -- every field is case-sensitive:
+
+      1. Open https://www.npmjs.com/package/${packageName}/access
+      2. Under "Trusted Publisher", choose GitHub Actions and enter, exactly:
+
+           Organization or user: ${GITHUB_OWNER}
+           Repository:           ${GITHUB_REPOSITORY}
+           Workflow filename:    ${PUBLISH_WORKFLOW_FILE_NAME}
+           Environment name:     (leave empty)
+           Allowed actions:      npm publish
+
+      3. Save it. The release is then dispatched from the release branch, where \`npm run release\` lives.
+  `}\n`;
 }
 
 /**

@@ -7,6 +7,7 @@
  * names, diffing two name sets, and rendering the diff. The git read is `ls-tree` plus `cat-file --batch`.
  */
 
+import dedent from 'dedent';
 // eslint-disable-next-line import-x/no-extraneous-dependencies -- Deliberately the ROOT package's vitest, which runs this file; see `scripts/vitest-config.ts`.
 import {
   describe,
@@ -23,33 +24,33 @@ import {
 
 describe('collectApiNames', () => {
   it('names an augmentation and its members, and nothing about their signatures', () => {
-    const text = [
-      'import type { Cli } from \'../internals/cli/Cli.d.ts\';',
-      'export {};',
-      'declare module \'obsidian\' {',
-      '  interface App {',
-      '    /** CLI handler. */',
-      '    cli: Cli;',
-      '    getBaseFontSize(): number;',
-      '    getBaseFontSize(fallback: number): number;',
-      '    \'quoted-name\': string;',
-      '    [key: string]: unknown;',
-      '  }',
-      '}'
-    ].join('\n');
+    const text = dedent`
+      import type { Cli } from '../internals/cli/Cli.d.ts';
+      export {};
+      declare module 'obsidian' {
+        interface App {
+          /** CLI handler. */
+          cli: Cli;
+          getBaseFontSize(): number;
+          getBaseFontSize(fallback: number): number;
+          'quoted-name': string;
+          [key: string]: unknown;
+        }
+      }
+    `;
 
     expect(collectApiNames('App.d.ts', text)).toEqual(['App', 'App.cli', 'App.getBaseFontSize', 'App.getBaseFontSize', 'App.quoted-name']);
   });
 
   it('names top-level internals of every declaration kind', () => {
-    const text = [
-      'export interface Cli { run(): void; }',
-      'export type CliName = string;',
-      'export declare class CliImpl { constructor(); private secret: number; }',
-      'export declare function getCli(): Cli;',
-      'export declare const CLI_VERSION: string;',
-      'export declare enum CliMode { A }'
-    ].join('\n');
+    const text = dedent`
+      export interface Cli { run(): void; }
+      export type CliName = string;
+      export declare class CliImpl { constructor(); private secret: number; }
+      export declare function getCli(): Cli;
+      export declare const CLI_VERSION: string;
+      export declare enum CliMode { A }
+    `;
 
     expect(collectApiNames('Cli.d.ts', text)).toEqual([
       'Cli',

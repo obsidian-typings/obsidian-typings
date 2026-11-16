@@ -19,6 +19,7 @@
     "@mnaoumov/typescript-lib": "^1.0.0",
     "@tsconfig/strictest": "^2.0.8",
     "@types/semver": "^7.8.0",
+    "dedent": "^1.7.2",
     "dprint": "^0.57.4",
     "eslint": "^10.11.0",
     "husky": "^9.1.7",

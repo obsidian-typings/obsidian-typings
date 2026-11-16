@@ -28,6 +28,7 @@
  */
 
 import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
+import dedent from 'dedent';
 import process from 'node:process';
 
 import type { BranchSpec } from './branch-spec.ts';
@@ -52,14 +53,12 @@ const YES_ANSWERS: ReadonlySet<string> = new Set(['y', 'yes']);
  * operator happens to be.
  */
 export function getManualReleaseInstructions(branchName: string): string {
-  return [
-    '',
-    'Release the branch when you are ready:',
-    '',
-    `  git checkout "${branchName}"`,
-    '  npm run release',
-    ''
-  ].join('\n');
+  return `\n${dedent`
+    Release the branch when you are ready:
+
+      git checkout "${branchName}"
+      npm run release
+  `}\n`;
 }
 
 /**

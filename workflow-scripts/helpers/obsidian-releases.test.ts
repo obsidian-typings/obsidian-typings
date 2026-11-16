@@ -8,6 +8,7 @@
  * back as skipped rather than vanish.
  */
 
+import dedent from 'dedent';
 // eslint-disable-next-line import-x/no-extraneous-dependencies -- Deliberately the ROOT package's vitest, which runs this file; see `scripts/vitest-config.ts`.
 import {
   describe,
@@ -33,11 +34,11 @@ describe('parseDesktopReleases', () => {
 });
 
 describe('findDesktopChangelogUrl', () => {
-  const FEED = [
-    '<link>https://obsidian.md/changelog/2026-10-22-mobile-v1.15.0/</link>',
-    '<link>https://obsidian.md/changelog/2026-10-22-desktop-v1.15.0/</link>',
-    '<link>https://obsidian.md/changelog/2026-10-22-desktop-v1.14.5/</link>'
-  ].join('\n');
+  const FEED = dedent`
+    <link>https://obsidian.md/changelog/2026-10-22-mobile-v1.15.0/</link>
+    <link>https://obsidian.md/changelog/2026-10-22-desktop-v1.15.0/</link>
+    <link>https://obsidian.md/changelog/2026-10-22-desktop-v1.14.5/</link>
+  `;
 
   it('finds the desktop entry, not the mobile one', () => {
     expect(findDesktopChangelogUrl(FEED, '1.15.0')).toBe('https://obsidian.md/changelog/2026-10-22-desktop-v1.15.0/');
