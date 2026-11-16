@@ -1,4 +1,5 @@
 import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
+import dedent from 'dedent';
 import { writeFile } from 'node:fs/promises';
 import { inc } from 'semver';
 
@@ -236,14 +237,13 @@ async function describeMissingPublishRight(packageName: string): Promise<string>
   }
 
   if (registryState === 'missing') {
-    return [
-      '',
-      `${packageName} does not exist on npm at all.`,
-      '',
-      'CI cannot create it: a trusted publisher can only be attached to a package that already exists, and',
-      'this workflow holds no credential capable of claiming a name. Claim it locally with',
-      '`npm run bootstrap-new-package`, attach its publisher, then dispatch this workflow again.'
-    ].join('\n');
+    return `\n${dedent`
+      ${packageName} does not exist on npm at all.
+
+      CI cannot create it: a trusted publisher can only be attached to a package that already exists, and
+      this workflow holds no credential capable of claiming a name. Claim it locally with
+      \`npm run bootstrap-new-package\`, attach its publisher, then dispatch this workflow again.
+    `}`;
   }
 
   return [
@@ -540,20 +540,20 @@ async function pushRelease(nextVersion: string, scopedPackageName: string, scope
     await execFromRoot('git push origin --follow-tags');
   } catch (error) {
     throw new Error(
-      [
-        `${scopedPackageName}@${nextVersion} IS PUBLISHED, but pushing the commit and tag that record it failed.`,
-        '',
-        'An npm version cannot be republished, and this runner\'s checkout goes away with the job, taking the',
-        `commit and the tag ${scopedTagName} with it. Re-dispatching without fixing this publishes nothing: the`,
-        `run reads the branch's unchanged package.json, computes ${nextVersion} again, and npm answers E403.`,
-        '',
-        'Reconstruct both refs by hand, from a fresh checkout of the release branch:',
-        '',
-        `  npm version ${nextVersion} --no-git-tag-version`,
-        `  git commit -am "chore(release): ${nextVersion}"`,
-        `  git tag -a ${scopedTagName} -m "${nextVersion}"`,
-        '  git push origin --follow-tags'
-      ].join('\n'),
+      dedent`
+        ${scopedPackageName}@${nextVersion} IS PUBLISHED, but pushing the commit and tag that record it failed.
+
+        An npm version cannot be republished, and this runner's checkout goes away with the job, taking the
+        commit and the tag ${scopedTagName} with it. Re-dispatching without fixing this publishes nothing: the
+        run reads the branch's unchanged package.json, computes ${nextVersion} again, and npm answers E403.
+
+        Reconstruct both refs by hand, from a fresh checkout of the release branch:
+
+          npm version ${nextVersion} --no-git-tag-version
+          git commit -am "chore(release): ${nextVersion}"
+          git tag -a ${scopedTagName} -m "${nextVersion}"
+          git push origin --follow-tags
+      `,
       { cause: error }
     );
   }

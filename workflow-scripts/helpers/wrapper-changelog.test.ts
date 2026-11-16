@@ -7,6 +7,7 @@
  * `tar` member, and what is worth pinning is the shape of what gets published.
  */
 
+import dedent from 'dedent';
 import { gzipSync } from 'node:zlib';
 // eslint-disable-next-line import-x/no-extraneous-dependencies -- Deliberately the ROOT package's vitest, which runs this file; see `scripts/vitest-config.ts`.
 import {
@@ -69,11 +70,11 @@ describe('composeWrapperChangelogSection', () => {
       resolutionChain: [SCOPED],
       tagName: TAG_NAME,
       version: '2.4.0'
-    })).toBe([
-      '## 2.4.0',
-      '',
-      `- Now resolves to \`@obsidian-typings/obsidian-public-1.13.7\` \`^1.11.0\`. See ${RELEASE_LINK}.`
-    ].join('\n'));
+    })).toBe(dedent`
+      ## 2.4.0
+
+      - Now resolves to \`@obsidian-typings/obsidian-public-1.13.7\` \`^1.11.0\`. See ${RELEASE_LINK}.
+    `);
   });
 
   it('walks the legacy package through the -latest wrapper it depends on', () => {
@@ -96,15 +97,15 @@ describe('composeWrapperChangelogSection', () => {
       resolutionChain: [SCOPED],
       tagName: TAG_NAME,
       version: '2.4.0'
-    })).toBe([
-      '## 2.4.0',
-      '',
-      `- Now resolves to \`@obsidian-typings/obsidian-public-1.13.7\` \`^1.11.0\`. See ${RELEASE_LINK}.`,
-      '',
-      '### Breaking changes in that release',
-      '',
-      '- fix(vault)!: drop getConfigFile, which no build answers'
-    ].join('\n'));
+    })).toBe(dedent`
+      ## 2.4.0
+
+      - Now resolves to \`@obsidian-typings/obsidian-public-1.13.7\` \`^1.11.0\`. See ${RELEASE_LINK}.
+
+      ### Breaking changes in that release
+
+      - fix(vault)!: drop getConfigFile, which no build answers
+    `);
   });
 
   it('refuses an entry that resolves to nothing', () => {

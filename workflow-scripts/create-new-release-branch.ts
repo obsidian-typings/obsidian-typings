@@ -1,5 +1,6 @@
 import { wrapCliTask } from '@mnaoumov/typescript-dev-toolkit/cli-utils';
 import { execFromRoot } from '@mnaoumov/typescript-dev-toolkit/root';
+import dedent from 'dedent';
 
 import type { BranchSpec } from './helpers/branch-spec.ts';
 
@@ -120,13 +121,12 @@ function printBootstrapRequired(packageName: string, branchSpec: BranchSpec, npm
  * the opposite of what the next two calls are about to do.
  */
 function printTrustedPublisherPending(packageName: string): void {
-  console.log([
-    '',
-    `Branch created. Nothing has ever published through ${packageName} yet.`,
-    '',
-    'The name is claimed -- a bootstrap placeholder holds it -- so the first half of the hand-back is done,',
-    'and its trusted publisher is the only step that can still be outstanding. Asking npm.'
-  ].join('\n'));
+  console.log(`\n${dedent`
+    Branch created. Nothing has ever published through ${packageName} yet.
+
+    The name is claimed -- a bootstrap placeholder holds it -- so the first half of the hand-back is done,
+    and its trusted publisher is the only step that can still be outstanding. Asking npm.
+  `}`);
 }
 
 await wrapCliTask(main);

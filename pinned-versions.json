@@ -10,6 +10,13 @@
     "that is actually present in the declared section; the script reports either mismatch."
   ],
   "pins": {
+    "glob": {
+      "section": "overrides",
+      "why": "Clears GHSA-3g3m-2fjr-6pw4 (glob >=9.0.0 <=14.0.1, fixed in 14.0.2) and, with it, GHSA-g3hv-75wg-m249 on the minimatch 10 that glob 13 nests. Only linkinator brings glob, and linkinator 8.1.0 (latest) still declares glob ^13.0.0. It calls only the async named `glob(pattern)` export, which glob 14 keeps. Replace glob itself rather than the minimatch under it: glob 10 and 13 read `Minimatch.set`, which minimatch 11 changes. Caret because it is an advisory floor.",
+      "check": "node -e \"process.stdout.write(JSON.parse(require('node:fs').readFileSync('node_modules/linkinator/package.json','utf8')).dependencies.glob)\"",
+      "expect": "^13.0.0",
+      "manualCheck": "Remove the override when linkinator admits glob >=14.0.2, then reinstall and rerun npm audit and `npm run lint:md`, which runs linkinator."
+    },
     "katex": {
       "section": "overrides",
       "why": "Clears GHSA-238p-pmpm-9mq7, fixed in KaTeX 0.18.2. micromark-extension-math 3.1.0 requires ^0.16.0, which excludes the fix; compatible audit updates cannot move it. Keep the first patched release exact because this crosses a 0.x minor boundary. Math HTML rendering and the Markdown gates were verified with this override.",
