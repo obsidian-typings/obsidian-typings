@@ -3,9 +3,15 @@
 > [!NOTE]
 >
 > **This file is the archive of the releases published before the move to scoped packages. It stops at
-> `4.110.0`, nothing has written it since 2026-03-11, and nothing will.**
+> `6.15.0`, the last release tagged and published from this repository's history as the package itself, and
+> nothing will add to it.** The `obsidian-typings` versions after it are the legacy wrapper over the latest
+> public package, and each one carries its own changelog in its tarball.
 >
-> The `4.x` numbering above belongs to the single `obsidian-typings` package that predated
+> Each heading carries the release date and, for a release cut from a release branch, that branch. The
+> `5.x` and `6.x` sections and the regrouped older ones were back-filled on 2026-11-18 from each release's
+> own recorded commits, and the matching GitHub release bodies were rewritten to the same text.
+>
+> The `1.x` to `6.x` numbering belongs to the single `obsidian-typings` package that predated
 > `@obsidian-typings/obsidian-<channel>-<version>`. Each of those per-version packages lives on its own
 > release branch, versions itself from `1.0.0`, and keeps **its own `CHANGELOG.md`** — written at publish
 > time by [`workflow-scripts/publish-release.ts`](workflow-scripts/publish-release.ts) and shipped inside
@@ -16,7 +22,305 @@
 > 2026-09-23 every published package carried a stub pointing at this file instead, which is what the note
 > exists to end.
 
-## 4.110.0 (obsidian-public-1.12.4)
+## 6.15.0 (2026-05-29, obsidian-public-1.12.7)
+
+This release has 1 fix. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### Fixed
+
+- build
+
+## 6.14.0 (2026-05-26, obsidian-public-1.12.7)
+
+This release has 1 new feature.
+
+### New
+
+- add missing members to CM5, PrismJS, and Turndown types
+
+## 6.13.0 (2026-05-26, obsidian-public-1.12.7)
+
+This release has 1 new feature and 1 documentation change.
+
+### New
+
+- replace unknown types with proper CM5 types
+
+### Documentation
+
+- fix link
+
+## 6.12.0 (2026-05-22, obsidian-public-1.12.7)
+
+This release has 1 new feature and 1 documentation change.
+
+### New
+
+- extract multiples
+
+### Documentation
+
+- fix
+
+## 6.11.0 (2026-05-21, obsidian-public-1.12.7)
+
+This release has 3 documentation changes. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### Documentation
+
+- add package# prefix to cross-package @link references
+- convert backtick references to @link tags
+- fix trailing dots
+
+## 6.10.0 (2026-05-20, obsidian-public-1.12.7)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 6.9.0 (2026-05-20, obsidian-public-1.12.7)
+
+- No changes recorded since the previous release.
+
+## 6.7.0 (2026-05-19, obsidian-public-1.12.7)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 6.6.0 (2026-05-18, obsidian-public-1.12.7)
+
+This release has 1 new feature and 1 fix. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### New
+
+- refactor to TAbstractFile
+
+### Fixed
+
+- compilation
+
+## 6.5.0 (2026-05-17, obsidian-public-1.12.7)
+
+This release has 1 new feature and 1 fix.
+
+### New
+
+- switch to method syntax
+
+### Fixed
+
+- duplicates
+
+## 6.4.0 (2026-05-17, obsidian-public-1.12.7)
+
+This release has 2 fixes.
+
+### Fixed
+
+- make `value__` optional on StateEffect and Annotation augmentations
+- resolve bundle type errors and integrate bundle validation into build
+
+## 6.3.0 (2026-05-17, obsidian-public-1.12.7)
+
+This release has 2 fixes. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### Fixed
+
+- use `RangeValue` instead of `unknown` for RangeSet.empty type parameter
+- resolve @codemirror type unification with real packages
+
+## 5.24.0 (2026-05-16, obsidian-public-1.12.7)
+
+- No changes recorded since the previous release.
+
+## 5.22.0 (2026-05-16, obsidian-public-1.12.7)
+
+This release has 1 new feature and 1 documentation change. 7 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- add lib types
+
+### Documentation
+
+- switch links
+
+## 5.21.0 (2026-04-23, obsidian-public-1.12.7)
+
+This release has 1 new feature, 1 fix and 1 documentation change. 4 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- plugin members
+
+### Fixed
+
+- build
+
+### Documentation
+
+- switch to multiline tsdocs
+
+## 5.20.0 (2026-04-06, obsidian-public-1.12.7)
+
+This release has 1 fix.
+
+### Fixed
+
+- update patches for @pixi/events and @types/css-font-loading-module
+
+## 5.19.0 (2026-04-06, obsidian-public-1.12.7)
+
+This release has 1 fix. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### Fixed
+
+- incorrectly removed members
+
+## 5.18.0 (2026-03-23, obsidian-public-1.12.7)
+
+This release has maintenance changes only. 7 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 5.17.0 (2026-03-23)
+
+This release has 1 fix. 5 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### Fixed
+
+- inheritDoc
+
+## 5.16.0 (2026-03-20)
+
+This release has maintenance changes only. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 5.15.0 (2026-03-20)
+
+This release has maintenance changes only. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 5.13.0 (2026-03-12, obsidian-public-1.12.4)
+
+This release has 2 fixes and 1 documentation change. 4 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### Fixed
+
+- generator added $ types
+- missing docs
+
+### Documentation
+
+- fix ERROR
+
+## 5.12.0 (2026-03-12, obsidian-public-1.12.4)
+
+This release has 1 fix and 1 documentation change. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### Fixed
+
+- vars
+
+### Documentation
+
+- missing docs
+
+## 5.8.0 (2026-03-11, obsidian-public-1.12.4)
+
+This release has 2 fixes.
+
+### Fixed
+
+- tsdocs
+- move to DataAdapterEx
+
+## 5.7.0 (2026-03-11, obsidian-public-1.12.4)
+
+This release has 1 fix.
+
+### Fixed
+
+- @unofficial tag
+
+## 5.6.0 (2026-03-11, obsidian-public-1.12.4)
+
+This release has 2 new features and 2 fixes. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- add window-member-file-sync ESLint rule
+- extract functions/vars
+
+### Fixed
+
+- rename Window
+- add missing
+
+## 5.5.0 (2026-03-10, obsidian-public-1.12.4)
+
+This release has 1 fix.
+
+### Fixed
+
+- function signatures
+
+## 5.4.0 (2026-03-10, obsidian-public-1.12.4)
+
+This release has maintenance changes only. 4 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 5.3.0 (2026-03-10, obsidian-public-1.12.4)
+
+This release has maintenance changes only. 8 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 5.2.0 (2026-03-10, obsidian-public-1.12.4)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 5.1.0 (2026-03-09, obsidian-public-1.12.4)
+
+This release has 9 new features, 17 fixes and 3 documentation changes. 19 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- add missing constructor__ methods, view getters, and cascade numbering
+- rewrite constructor-getter-placement rule for cross-file validation
+- add constructor-getter-placement ESLint rule
+- add ESLint config with perfectionist and custom obsidian-typings rules
+- add ConstructorBase-based types for internal constructors
+- add constructor types for remaining classes (Value types, private/protected, null)
+- add constructor types and get*Constructor() for all obsidian.d.ts classes
+- add get*Constructor implementations for all major app objects
+- add constructor types for all major app objects
+
+### Fixed
+
+- use full import path for getDomEventsHandlersConstructor hint
+- add import type for {@link get*Constructor} to enable TSDoc resolution
+- use .d.ts extension for import type in implementations
+- remove constructor types for classes that are null at runtime
+- align constructor args with official typings, remove unnecessary double assertions
+- use method syntax for CliHandlerEntry.handler
+- alphabetize interface members and document ordering convention
+- remove member-level @unofficial tags from internals files
+- iterateCodeMirrors param type to unknown (can't deduce from empty body)
+- rename iterateCodeMirrors param to _unused (empty method body)
+- replace unknown types with proper types and add missing @param docs
+- restore backtick escaping for false in CliFlag prose
+- type fixFileLinks second param as sourcePath string
+- revert incorrect TSDoc escaping for non-null and @defaultValue
+- simplify mobileQuickActions type (null is already in unknown)
+- validate and correct type definitions against runtime
+- correct global Window typings based on runtime validation
+
+### Documentation
+
+- unify constructor__ TSDoc to use {@link} hints and consistent format
+- restore @deprecated tag on constructor__ methods
+- replace @deprecated on constructor__ with usage hints in TSDoc body
+
+## 4.111.0 (2026-03-06, obsidian-catalyst-1.12.5)
+
+This release has 1 new feature. 5 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- update 1.12.0 API changes
+
+## 4.110.0 (2026-03-03, obsidian-public-1.12.4)
 
 This release has 1 documentation change.
 
@@ -24,7 +328,7 @@ This release has 1 documentation change.
 
 - add more tsdocs
 
-## 4.109.0 (obsidian-public-1.12.4)
+## 4.109.0 (2026-03-02, obsidian-public-1.12.4)
 
 This release has 1 new feature.
 
@@ -32,7 +336,7 @@ This release has 1 new feature.
 
 - iterateReferencesForFile
 
-## 4.108.0 (obsidian-public-1.12.4)
+## 4.108.0 (2026-03-02, obsidian-public-1.12.4)
 
 This release has 2 new features.
 
@@ -41,7 +345,7 @@ This release has 2 new features.
 - get unmerged changes
 - update API changes
 
-## 4.107.0 (obsidian-public-1.12.4)
+## 4.107.0 (2026-03-02, obsidian-public-1.12.4)
 
 This release has 1 new feature and 1 fix. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
 
@@ -53,9 +357,15 @@ This release has 1 new feature and 1 fix. 1 maintenance commit (tests, build, CI
 
 - move link updaters
 
-## 4.106.0 (obsidian-public-1.12.4)
+## 4.106.0 (2026-02-27, obsidian-public-1.12.4)
 
-## 4.105.0 (obsidian-public-1.11.7)
+This release has 1 new feature. 6 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- update 1.12.0 API changes
+
+## 4.105.0 (2026-02-25)
 
 This release has 3 new features.
 
@@ -65,15 +375,35 @@ This release has 3 new features.
 - add internals of SettingGroup
 - update obsidian API to 1.12.2
 
-## 4.104.0 (obsidian-catalyst-1.12.4)
+## 4.104.0 (2026-02-25)
 
-## 4.103.0 (obsidian-catalyst-1.12.3)
+This release has 1 new feature. 4 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
 
-## 4.102.0 (obsidian-catalyst-1.12.2)
+### New
 
-## 4.101.0 (obsidian-public-1.11.7)
+- update 1.12.0 API changes
 
-## 4.100.0 (obsidian-public-1.11.7)
+## 4.103.0 (2026-02-24)
+
+This release has 1 new feature. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- update 1.12.0 API changes
+
+## 4.102.0 (2026-02-24)
+
+This release has 1 new feature. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- update 1.12.0 API changes
+
+## 4.101.0 (2026-02-24, obsidian-public-1.11.7)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 4.100.0 (2026-02-22, obsidian-public-1.11.7)
 
 This release has 1 new feature.
 
@@ -81,7 +411,7 @@ This release has 1 new feature.
 
 - update obsidian API to 1.12.2
 
-## 4.99.0 (obsidian-public-1.11.7)
+## 4.99.0 (2026-02-11, obsidian-public-1.11.7)
 
 This release has 1 new feature.
 
@@ -89,9 +419,19 @@ This release has 1 new feature.
 
 - add internals of SettingGroup
 
-## 4.98.0 (obsidian-public-1.11.7)
+## 4.98.0 (2026-02-11, obsidian-public-1.11.7)
 
-## 4.97.0 (obsidian-catalyst-1.12.0)
+This release has 1 fix and 1 documentation change. 7 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### Fixed
+
+- wrong SecretStorage.loadSecrets type
+
+### Documentation
+
+- proper changelog url
+
+## 4.97.0 (2026-02-11)
 
 This release has 1 new feature.
 
@@ -99,13 +439,31 @@ This release has 1 new feature.
 
 - update 1.12.0 API changes
 
-## 4.96.0 (obsidian-catalyst-1.12.0)
+## 4.96.0 (2026-02-11, obsidian-catalyst-1.12.0)
 
-## 4.95.0 (obsidian-catalyst-1.11.7)
+This release has 1 fix. 5 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
 
-## 4.94.0 (obsidian-catalyst-1.11.6)
+### Fixed
 
-## 4.93.0 (obsidian-public-1.11.4)
+- wrong SecretStorage.loadSecrets type
+
+## 4.95.0 (2026-02-11)
+
+This release has 1 fix. 4 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### Fixed
+
+- wrong SecretStorage.loadSecrets type
+
+## 4.94.0 (2026-01-26)
+
+This release has 1 fix. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### Fixed
+
+- wrong SecretStorage.loadSecrets type
+
+## 4.93.0 (2026-01-14, obsidian-public-1.11.4)
 
 This release has 1 new feature.
 
@@ -113,9 +471,15 @@ This release has 1 new feature.
 
 - add internals of SettingGroup
 
-## 4.92.0 (obsidian-public-1.11.4)
+## 4.92.0 (2026-01-12, obsidian-public-1.11.4)
 
-## 4.91.0 (obsidian-catalyst-1.11.4)
+This release has 1 fix. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### Fixed
+
+- wrong SecretStorage.loadSecrets type
+
+## 4.91.0 (2026-01-09)
 
 This release has 3 new features and 1 fix.
 
@@ -129,9 +493,11 @@ This release has 3 new features and 1 fix.
 
 - wrong SecretStorage.loadSecrets type
 
-## 4.90.0 (obsidian-public-1.10.6)
+## 4.90.0 (2026-01-09)
 
-## 4.89.0 (obsidian-catalyst-1.11.4)
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 4.89.0 (2026-01-08, obsidian-catalyst-1.11.4)
 
 This release has 1 new feature.
 
@@ -139,7 +505,7 @@ This release has 1 new feature.
 
 - add public API changes
 
-## 4.88.0 (obsidian-catalyst-1.11.1)
+## 4.88.0 (2025-12-19)
 
 This release has 2 new features.
 
@@ -148,9 +514,15 @@ This release has 2 new features.
 - update API to 1.11.0
 - update widget components
 
-## 4.87.0 (obsidian-public-1.10.6)
+## 4.87.0 (2025-12-19, obsidian-public-1.10.6)
 
-## 4.86.0 (obsidian-catalyst-1.11.1)
+This release has 1 documentation change.
+
+### Documentation
+
+- fix @since
+
+## 4.86.0 (2025-12-18, obsidian-catalyst-1.11.1)
 
 This release has 2 new features.
 
@@ -159,7 +531,7 @@ This release has 2 new features.
 - update API to 1.11.0
 - update widget components
 
-## 4.85.0 (obsidian-public-1.10.6)
+## 4.85.0 (2025-12-18, obsidian-public-1.10.6)
 
 This release has 1 new feature.
 
@@ -167,9 +539,11 @@ This release has 1 new feature.
 
 - rename DomEventsHandlers
 
-## 4.84.0 (obsidian-catalyst-1.11.1)
+## 4.84.0 (2025-12-17, obsidian-catalyst-1.11.1)
 
-## 4.83.0 (obsidian-catalyst-1.10.6)
+- Merge branch 'release/obsidian-public/1.10.6' into release/obsidian-catalyst/1.11.1 ([`cda2656`](https://github.com/obsidian-typings/obsidian-typings/commit/cda2656bba729ae08e74553d9b4245fb33be330b))
+
+## 4.83.0 (2025-12-17, obsidian-public-1.10.6)
 
 This release has 1 new feature.
 
@@ -177,7 +551,7 @@ This release has 1 new feature.
 
 - registerDomEvents
 
-## 4.82.0 (obsidian-catalyst-1.11.1)
+## 4.82.0 (2025-12-15, obsidian-catalyst-1.11.1)
 
 This release has 1 new feature.
 
@@ -185,23 +559,48 @@ This release has 1 new feature.
 
 - update widget components
 
-## 4.81.0 (obsidian-catalyst-1.11.1)
+## 4.81.0 (2025-12-14, obsidian-catalyst-1.11.1)
 
-## 4.80.0 (obsidian-public-1.10.6)
+This release has maintenance changes only. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
 
-## 4.79.0 (obsidian-public-1.10.6)
+## 4.80.0 (2025-12-14, obsidian-public-1.10.6)
 
-## 4.78.0 (obsidian-catalyst-1.11.1)
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
 
-## 4.77.0 (obsidian-public-1.10.6)
+## 4.79.0 (2025-12-14, obsidian-public-1.10.6)
 
-## 4.76.0 (obsidian-catalyst-1.11.1)
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
 
-## 4.75.0 (obsidian-public-1.10.6)
+## 4.78.0 (2025-12-14, obsidian-catalyst-1.11.1)
 
-## 4.74.0 (obsidian-public-1.10.6)
+- Merge branch 'release/obsidian-public/1.10.6' into release/obsidian-catalyst/1.11.1 ([`10d16c0`](https://github.com/obsidian-typings/obsidian-typings/commit/10d16c03fa13f5cc24e458934ad7290b55d58ff4))
+- Merge branch 'release/obsidian-public/1.10.6' into release/obsidian-catalyst/1.11.1 ([`4b44696`](https://github.com/obsidian-typings/obsidian-typings/commit/4b4469655c88aca889ededa03d0df3926abb9252))
 
-## 4.73.0 (obsidian-catalyst-1.11.0)
+## 4.77.0 (2025-12-14, obsidian-public-1.10.6)
+
+This release has 1 documentation change. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### Documentation
+
+- update changelog
+
+## 4.76.0 (2025-12-13, obsidian-catalyst-1.11.1)
+
+This release has 1 new feature. 6 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- update API to 1.11.0
+
+## 4.75.0 (2025-12-13, obsidian-public-1.10.6)
+
+This release has maintenance changes only. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 4.74.0 (2025-12-12, obsidian-public-1.10.6)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 4.73.0 (2025-12-11)
 
 This release has 1 new feature.
 
@@ -209,15 +608,19 @@ This release has 1 new feature.
 
 - update API to 1.11.0
 
-## 4.72.0 (obsidian-public-1.10.6)
+## 4.72.0 (2025-12-11, obsidian-public-1.10.6)
 
-- 614b693 fix: patch electron
+- No changes recorded since the previous release.
 
-## 4.70.0 (obsidian-public-1.10.6)
+## 4.70.0 (2025-12-08, obsidian-public-1.10.6)
 
-## 4.69.0 (obsidian-public-1.10.6)
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
 
-## 4.68.0 (obsidian-public-1.10.6)
+## 4.69.0 (2025-12-08, obsidian-public-1.10.6)
+
+This release has maintenance changes only. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 4.68.0 (2025-11-25, obsidian-public-1.10.6)
 
 This release has 2 new features and 1 fix.
 
@@ -230,15 +633,32 @@ This release has 2 new features and 1 fix.
 
 - api-extractor warnings
 
-## 4.67.0 (obsidian-catalyst-1.10.5)
+## 4.67.0 (2025-11-25)
 
-## 4.66.0 (obsidian-public-1.10.3)
+- Merge branch 'release/obsidian-public/1.10.3' into release/obsidian-catalyst/1.10.5 ([`b85b33c`](https://github.com/obsidian-typings/obsidian-typings/commit/b85b33cbdc4bf8ca28c946be215b65b8ea9c8564))
 
-## 4.65.0 (obsidian-catalyst-1.10.5)
+## 4.66.0 (2025-11-25)
 
-## 4.64.0 (obsidian-catalyst-1.10.4)
+This release has 2 new features and 1 fix. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
 
-## 4.63.0 (obsidian-public-1.10.3)
+### New
+
+- remove moment dependency
+- add BasesPropertyType
+
+### Fixed
+
+- api-extractor warnings
+
+## 4.65.0 (2025-11-19, obsidian-catalyst-1.10.5)
+
+This release has maintenance changes only. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 4.64.0 (2025-11-19)
+
+This release has maintenance changes only. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 4.63.0 (2025-11-12, obsidian-public-1.10.3)
 
 This release has 2 new features.
 
@@ -247,7 +667,7 @@ This release has 2 new features.
 - move load... functions to implementations
 - update typings
 
-## 4.62.0 (obsidian-public-1.10.3)
+## 4.62.0 (2025-11-12, obsidian-public-1.10.3)
 
 This release has 3 new features and 3 fixes.
 
@@ -263,21 +683,71 @@ This release has 3 new features and 3 fixes.
 - add missing import
 - add missing API and @since
 
-## 4.61.0 (obsidian-public-1.9.14)
+## 4.61.0 (2025-11-06)
 
-## 4.60.0 (obsidian-catalyst-1.10.2)
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
 
-## 4.59.0 (obsidian-catalyst-1.10.1)
+## 4.60.0 (2025-10-30)
 
-## 4.58.0 (obsidian-public-1.9.14)
+This release has 2 new features and 1 fix. 7 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
 
-## 4.57.0 (obsidian-catalyst-1.10.0)
+### New
 
-## 4.56.0 (obsidian-public-1.9.14)
+- apply obsidian.d.ts changes
+- add 1.10.0 official API changes
 
-## 4.55.0 (obsidian-catalyst-1.10.0)
+### Fixed
 
-## 4.54.0 (obsidian-public-1.9.14)
+- build
+
+## 4.59.0 (2025-10-30)
+
+This release has 1 new feature. 5 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- add 1.10.0 official API changes
+
+## 4.58.0 (2025-10-02, obsidian-public-1.9.14)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 4.57.0 (2025-10-02)
+
+This release has 1 new feature. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- add 1.10.0 official API changes
+
+## 4.56.0 (2025-10-02, obsidian-public-1.9.14)
+
+This release has 1 new feature, 3 fixes and 2 documentation changes. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### New
+
+- include since config
+
+### Fixed
+
+- build
+- add missing import
+- add missing API and @since
+
+### Documentation
+
+- sort tags
+- parseFromString
+
+## 4.55.0 (2025-10-01, obsidian-catalyst-1.10.0)
+
+This release has 1 documentation change. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### Documentation
+
+- update changelog
+
+## 4.54.0 (2025-10-01, obsidian-public-1.9.14)
 
 This release has 1 fix.
 
@@ -285,7 +755,7 @@ This release has 1 fix.
 
 - build
 
-## 4.53.0 (obsidian-catalyst-1.9.14)
+## 4.53.0 (2025-09-27, obsidian-catalyst-1.9.14)
 
 This release has 1 new feature.
 
@@ -293,11 +763,19 @@ This release has 1 new feature.
 
 - Command
 
-## 4.52.0 (obsidian-catalyst-1.9.13)
+## 4.52.0 (2025-09-22)
 
-## 4.51.0 (obsidian-public-1.9.12)
+This release has maintenance changes only. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
 
-## 4.50.0 (obsidian-public-1.9.12)
+## 4.51.0 (2025-09-16, obsidian-public-1.9.12)
+
+This release has 1 new feature. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### New
+
+- Command
+
+## 4.50.0 (2025-09-07, obsidian-public-1.9.12)
 
 This release has 1 fix.
 
@@ -305,7 +783,7 @@ This release has 1 fix.
 
 - patch @types/css-font-loading-module
 
-## 4.49.0 (obsidian-public-1.9.12)
+## 4.49.0 (2025-08-31, obsidian-public-1.9.12)
 
 This release has 1 new feature.
 
@@ -313,7 +791,7 @@ This release has 1 new feature.
 
 - Updated MultiSelect #131
 
-## 4.48.0 (obsidian-public-1.9.12)
+## 4.48.0 (2025-08-30, obsidian-public-1.9.12)
 
 This release has 1 new feature.
 
@@ -321,7 +799,7 @@ This release has 1 new feature.
 
 - ImportedAttachment
 
-## 4.47.0 (obsidian-public-1.9.12)
+## 4.47.0 (2025-08-29, obsidian-public-1.9.12)
 
 This release has 1 fix.
 
@@ -329,7 +807,7 @@ This release has 1 fix.
 
 - BookmarkItem
 
-## 4.46.0 (obsidian-public-1.9.12)
+## 4.46.0 (2025-08-29, obsidian-public-1.9.12)
 
 This release has 1 fix.
 
@@ -337,7 +815,7 @@ This release has 1 fix.
 
 - GetRecentFilesOptions
 
-## 4.45.0 (obsidian-public-1.9.12)
+## 4.45.0 (2025-08-29, obsidian-public-1.9.12)
 
 This release has 3 new features.
 
@@ -347,7 +825,7 @@ This release has 3 new features.
 - BookmarkItem
 - GetRecentFilesOptions
 
-## 4.44.0 (obsidian-public-1.9.12)
+## 4.44.0 (2025-08-27, obsidian-public-1.9.12)
 
 This release has 1 fix.
 
@@ -355,7 +833,7 @@ This release has 1 fix.
 
 - wrong data type
 
-## 4.43.0 (obsidian-public-1.9.12)
+## 4.43.0 (2025-08-27, obsidian-public-1.9.12)
 
 This release has 1 new feature.
 
@@ -363,7 +841,7 @@ This release has 1 new feature.
 
 - more bases
 
-## 4.42.0 (obsidian-public-1.9.12)
+## 4.42.0 (2025-08-27, obsidian-public-1.9.12)
 
 This release has 1 fix.
 
@@ -371,7 +849,7 @@ This release has 1 fix.
 
 - data type
 
-## 4.41.0 (obsidian-public-1.9.12)
+## 4.41.0 (2025-08-27, obsidian-public-1.9.12)
 
 This release has 1 new feature.
 
@@ -379,7 +857,7 @@ This release has 1 new feature.
 
 - more bases
 
-## 4.40.0 (obsidian-public-1.9.12)
+## 4.40.0 (2025-08-27, obsidian-public-1.9.12)
 
 This release has 1 fix.
 
@@ -387,7 +865,7 @@ This release has 1 fix.
 
 - more bases-related
 
-## 4.39.0 (obsidian-public-1.9.12)
+## 4.39.0 (2025-08-26, obsidian-public-1.9.12)
 
 This release has 1 fix.
 
@@ -395,7 +873,7 @@ This release has 1 fix.
 
 - don't assume type in widgets
 
-## 4.38.0 (obsidian-public-1.9.12)
+## 4.38.0 (2025-08-26, obsidian-public-1.9.12)
 
 This release has 2 new features.
 
@@ -404,17 +882,45 @@ This release has 2 new features.
 - cleanup GetTypeInfoOptions
 - Updated MetadataTypeManager.getTypeInfo() #130
 
-## 4.37.0 (obsidian-catalyst-1.9.12)
+## 4.37.0 (2025-08-26)
 
-## 4.36.0 (obsidian-catalyst-1.9.11)
+- Merge branch 'release/obsidian-catalyst/1.9.11' into release/obsidian-catalyst/1.9.12 ([`88de907`](https://github.com/obsidian-typings/obsidian-typings/commit/88de9076b0c2566d0c049175f91bc6e0fb343ab4))
 
-## 4.35.0 (obsidian-public-1.9.10)
+## 4.36.0 (2025-08-26)
 
-## 4.34.0 (obsidian-public-1.9.12)
+- Merge branch 'release/obsidian-public/1.9.10' into release/obsidian-catalyst/1.9.11 ([`e11586f`](https://github.com/obsidian-typings/obsidian-typings/commit/e11586fe1d2b731ea5f887f88521411d2f98c1c8))
 
-## 4.33.0 (obsidian-public-1.9.12)
+## 4.35.0 (2025-08-26)
 
-## 4.32.0 (obsidian-catalyst-1.9.12)
+This release has 2 new features and 1 fix.
+
+### New
+
+- cleanup GetTypeInfoOptions
+- Updated MetadataTypeManager.getTypeInfo() #130
+
+### Fixed
+
+- render/data add null type
+
+## 4.34.0 (2025-08-26, obsidian-public-1.9.12)
+
+- No changes recorded since the previous release.
+
+## 4.33.0 (2025-08-26, obsidian-public-1.9.12)
+
+This release has 1 fix and 2 documentation changes. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### Fixed
+
+- PropertyWidget/render always accepts null
+
+### Documentation
+
+- update url
+- changelog url
+
+## 4.32.0 (2025-08-26, obsidian-catalyst-1.9.12)
 
 This release has 2 fixes.
 
@@ -423,9 +929,11 @@ This release has 2 fixes.
 - PropertyWidget/render always accepts null
 - render/data add null type
 
-## 4.31.0 (obsidian-catalyst-1.9.11)
+## 4.31.0 (2025-08-24, obsidian-catalyst-1.9.11)
 
-## 4.30.0 (obsidian-public-1.9.10)
+- Merge branch 'release/obsidian-public/1.9.10' into release/obsidian-catalyst/1.9.11 ([`9ffce95`](https://github.com/obsidian-typings/obsidian-typings/commit/9ffce953ba17beaa762293dfd23f37211b60c5b8))
+
+## 4.30.0 (2025-08-24, obsidian-public-1.9.10)
 
 This release has 1 fix.
 
@@ -433,9 +941,11 @@ This release has 1 fix.
 
 - missing moment import
 
-## 4.29.0 (obsidian-catalyst-1.9.11)
+## 4.29.0 (2025-08-24, obsidian-catalyst-1.9.11)
 
-## 4.28.0 (obsidian-public-1.9.10)
+- Merge branch 'release/obsidian-public/1.9.10' into release/obsidian-catalyst/1.9.11 ([`5e0c51d`](https://github.com/obsidian-typings/obsidian-typings/commit/5e0c51df18be4e90a730705df8a121889387c2dc))
+
+## 4.28.0 (2025-08-24, obsidian-public-1.9.10)
 
 This release has 1 new feature.
 
@@ -443,9 +953,11 @@ This release has 1 new feature.
 
 - merge editors
 
-## 4.27.0 (obsidian-catalyst-1.9.11)
+## 4.27.0 (2025-08-23, obsidian-catalyst-1.9.11)
 
-## 4.26.0 (obsidian-public-1.9.10)
+- Merge branch 'release/obsidian-public/1.9.10' into release/obsidian-catalyst/1.9.11 ([`c08591e`](https://github.com/obsidian-typings/obsidian-typings/commit/c08591e98b3d40a8632ed9e1fb40bd3d4fa2a2f3))
+
+## 4.26.0 (2025-08-23, obsidian-public-1.9.10)
 
 This release has 3 new features.
 
@@ -455,7 +967,7 @@ This release has 3 new features.
 - fuzzySearch/prepareQuery
 - Various MetadataTypeManager related updates #128
 
-## 4.25.0 (obsidian-catalyst-1.9.11)
+## 4.25.0 (2025-08-22, obsidian-catalyst-1.9.11)
 
 - Created PropertyPropertyWidgetComponent and updated entry in MetadataTypeManagerRegisteredTypeWidgetsRecord
 - Removed unused import
@@ -465,7 +977,7 @@ This release has 3 new features.
 - Added 'property' type widget'
 - Updated MetadataTypeManager
 
-## 4.24.0 (obsidian-public-1.9.10)
+## 4.24.0 (2025-08-21, obsidian-public-1.9.10)
 
 This release has 1 fix.
 
@@ -473,19 +985,33 @@ This release has 1 fix.
 
 - receive-files-menu / receive-text-menu
 
-## 4.23.0 (obsidian-catalyst-1.9.10)
+## 4.23.0 (2025-08-21)
 
-## 4.22.0 (obsidian-public-1.9.10)
+- No changes recorded since the previous release.
 
-## 4.21.0 (obsidian-catalyst-1.9.10)
+## 4.22.0 (2025-08-19, obsidian-public-1.9.10)
 
-## 4.20.0 (obsidian-catalyst-1.9.9)
+This release has maintenance changes only. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
 
-## 4.19.0 (obsidian-public-1.8.10)
+## 4.21.0 (2025-08-19, obsidian-catalyst-1.9.10)
 
-## 4.18.0 (obsidian-public-1.8.10)
+- Merge branch 'release/obsidian-catalyst/1.9.9' into release/obsidian-catalyst/1.9.10 ([`3101c55`](https://github.com/obsidian-typings/obsidian-typings/commit/3101c55eda90350d121c8660091f98c921a49fe7))
 
-## 4.10.0 (obsidian-public-1.8.10)
+## 4.20.0 (2025-08-19)
+
+- Merge branch 'release/obsidian-public/1.8.10' into release/obsidian-catalyst/1.9.9 ([`77f20e0`](https://github.com/obsidian-typings/obsidian-typings/commit/77f20e0bc642073ffffb7da37f13587bc3619b94))
+
+## 4.19.0 (2025-08-19, obsidian-public-1.8.10)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 4.18.0 (2025-08-19, obsidian-public-1.8.10)
+
+- No changes recorded since the previous release.
+
+## 4.10.0 (2025-08-18, obsidian-public-1.8.10)
+
+- No changes recorded since the previous release.
 
 ## 4.1.0
 
@@ -496,7 +1022,7 @@ This release has 2 fixes. 1 maintenance commit (tests, build, CI, refactoring, d
 - remove deprecated in 1.9.0
 - remove 1.9.0 code
 
-## 3.16.6
+## 3.16.6 (2025-08-16)
 
 This release has 1 fix.
 
@@ -504,7 +1030,15 @@ This release has 1 fix.
 
 - name() type
 
-## 3.16.4
+## 3.16.5 (2025-08-15)
+
+This release has 1 documentation change.
+
+### Documentation
+
+- fix misleading comment
+
+## 3.16.4 (2025-08-14)
 
 This release has 1 fix.
 
@@ -512,7 +1046,7 @@ This release has 1 fix.
 
 - revert incorrect watch changes
 
-## 3.16.3
+## 3.16.3 (2025-08-13)
 
 This release has 1 fix.
 
@@ -528,7 +1062,7 @@ This release has 1 fix.
 
 - watch typings
 
-## 3.16.1
+## 3.16.1 (2025-08-13)
 
 This release has 1 fix.
 
@@ -536,7 +1070,7 @@ This release has 1 fix.
 
 - include menu separator
 
-## 3.16.0
+## 3.16.0 (2025-08-10)
 
 This release has 1 new feature.
 
@@ -544,7 +1078,7 @@ This release has 1 new feature.
 
 - EmberContext
 
-## 3.15.0
+## 3.15.0 (2025-08-04)
 
 This release has 1 new feature.
 
@@ -552,7 +1086,7 @@ This release has 1 new feature.
 
 - AbstractInputSuggest / PopoverSuggest / SuggestionContainer
 
-## 3.14.1
+## 3.14.1 (2025-08-03)
 
 This release has 1 fix.
 
@@ -560,7 +1094,7 @@ This release has 1 fix.
 
 - allow null to TextProperty
 
-## 3.14.0
+## 3.14.0 (2025-08-03)
 
 This release has 1 new feature.
 
@@ -568,7 +1102,7 @@ This release has 1 new feature.
 
 - extend isUserEvent() with overloads #122
 
-## 3.13.5
+## 3.13.5 (2025-07-29)
 
 This release has 1 fix.
 
@@ -592,7 +1126,7 @@ This release has 1 fix.
 
 - Use precise versions of dep libs (#109)
 
-## 3.13.2
+## 3.13.2 (2025-07-28)
 
 This release has 1 fix.
 
@@ -600,7 +1134,7 @@ This release has 1 fix.
 
 - PropertyWidget. Support both versions:
 
-## 3.13.1
+## 3.13.1 (2025-07-26)
 
 This release has 1 fix.
 
@@ -616,7 +1150,11 @@ This release has 1 fix.
 
 - PropertyWidget
 
-## 3.12.0
+## 3.12.1 (2025-07-03)
+
+This release has maintenance changes only. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 3.12.0 (2025-06-19)
 
 This release has 1 new feature.
 
@@ -624,7 +1162,7 @@ This release has 1 new feature.
 
 - WorkspaceLeaf/WorkspaceItem
 
-## 3.11.0
+## 3.11.0 (2025-06-17)
 
 This release has 1 new feature and 1 other change.
 
@@ -636,7 +1174,7 @@ This release has 1 new feature and 1 other change.
 
 - Add documentation and fix some errors
 
-## 3.10.0
+## 3.10.0 (2025-06-16)
 
 This release has 1 new feature.
 
@@ -644,7 +1182,7 @@ This release has 1 new feature.
 
 - Menu.forEvent
 
-## 3.9.6
+## 3.9.6 (2025-06-06)
 
 This release has 1 fix.
 
@@ -652,7 +1190,7 @@ This release has 1 fix.
 
 - patch @antfu/utils
 
-## 3.9.5
+## 3.9.5 (2025-05-26)
 
 This release has 1 fix.
 
@@ -686,7 +1224,7 @@ This release has 2 fixes.
 - update libs and patches
 - use exact versions for patched libs
 
-## 3.9.1
+## 3.9.1 (2025-05-26)
 
 This release has 1 fix.
 
@@ -694,7 +1232,7 @@ This release has 1 fix.
 
 - add trust-types dep
 
-## 3.9.0
+## 3.9.0 (2025-05-23)
 
 This release has 1 new feature.
 
@@ -702,7 +1240,7 @@ This release has 1 new feature.
 
 - Bases/Footnotes internal plugins
 
-## 3.8.2
+## 3.8.2 (2025-05-22)
 
 This release has 1 fix.
 
@@ -710,7 +1248,7 @@ This release has 1 fix.
 
 - incorrect type of setState #120
 
-## 3.8.1
+## 3.8.1 (2025-05-22)
 
 This release has 1 fix.
 
@@ -738,7 +1276,11 @@ This release has 4 new features and 6 fixes. 1 maintenance commit (tests, build,
 - API generator
 - spellcheck
 
-## 3.7.0
+## 3.7.1 (2025-05-11)
+
+This release has maintenance changes only. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 3.7.0 (2025-05-06)
 
 This release has 2 fixes.
 
@@ -747,7 +1289,7 @@ This release has 2 fixes.
 - patch to <https://github.com/obsidianmd/obsidian-api/commit/9ab497e64afeac291a2546d2faeded6a7bed626a>
 - update hover types
 
-## 3.6.0
+## 3.6.0 (2025-05-03)
 
 This release has 5 new features and 6 fixes. 4 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
 
@@ -768,7 +1310,7 @@ This release has 5 new features and 6 fixes. 4 maintenance commits (tests, build
 - simplify definition
 - remove @internal
 
-## 3.5.1
+## 3.5.1 (2025-05-02)
 
 This release has 1 other change.
 
@@ -800,7 +1342,7 @@ This release has 8 new features and 6 fixes. 1 maintenance commit (tests, build,
 - `attachDropHandler` doc
 - CustomArrayDictImpl.count
 
-## 3.4.0
+## 3.4.0 (2025-04-28)
 
 This release has 1 fix.
 
@@ -808,7 +1350,7 @@ This release has 1 fix.
 
 - FileExplorerView
 
-## 3.3.0
+## 3.3.0 (2025-04-26)
 
 This release has 1 fix.
 
@@ -816,7 +1358,7 @@ This release has 1 fix.
 
 - runAsyncLinkUpdate
 
-## 3.2.2
+## 3.2.2 (2025-04-24)
 
 This release has 1 fix.
 
@@ -824,7 +1366,7 @@ This release has 1 fix.
 
 - make fake functions optional
 
-## 3.2.1
+## 3.2.1 (2025-04-23)
 
 This release has 1 fix.
 
@@ -832,7 +1374,7 @@ This release has 1 fix.
 
 - specify typescript dependency
 
-## 3.2.0
+## 3.2.0 (2025-04-23)
 
 This release has 1 fix.
 
@@ -840,7 +1382,7 @@ This release has 1 fix.
 
 - remove duplicates
 
-## 3.1.0
+## 3.1.0 (2025-04-21)
 
 This release has 1 fix.
 
@@ -848,7 +1390,7 @@ This release has 1 fix.
 
 - moment type
 
-## 3.0.0
+## 3.0.0 (2025-04-21)
 
 This release has 7 new features and 1 fix.
 
@@ -866,7 +1408,7 @@ This release has 7 new features and 1 fix.
 
 - compilation
 
-## 2.44.3
+## 2.44.3 (2025-04-18)
 
 This release has 1 fix.
 
@@ -874,7 +1416,7 @@ This release has 1 fix.
 
 - @antfu types
 
-## 2.44.2
+## 2.44.2 (2025-04-18)
 
 This release has 2 fixes.
 
@@ -883,7 +1425,7 @@ This release has 2 fixes.
 - inline PdfJsTestingUtils
 - move dependencies to peer
 
-## 2.44.1
+## 2.44.1 (2025-04-18)
 
 This release has 1 fix.
 
@@ -891,13 +1433,17 @@ This release has 1 fix.
 
 - compilation
 
-## 2.43.3
+## 2.43.3 (2025-04-18)
 
 This release has 1 fix.
 
 ### Fixed
 
 - force reexport
+
+## 2.43.2 (2025-04-18)
+
+This release has maintenance changes only. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
 
 ## 2.43.0
 
@@ -918,7 +1464,7 @@ This release has 6 new features and 3 fixes.
 - compilation with moment type
 - compilation
 
-## 2.42.0
+## 2.42.0 (2025-04-08)
 
 This release has 2 new features, 1 fix and 1 other change.
 
@@ -935,7 +1481,11 @@ This release has 2 new features, 1 fix and 1 other change.
 
 - Add initGraphics, destroyGraphics and iframeEl to GraphRenderer
 
-## 2.41.3
+## 2.41.4 (2025-03-31)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.41.3 (2025-03-31)
 
 This release has 1 fix.
 
@@ -943,7 +1493,7 @@ This release has 1 fix.
 
 - remove duplicated promise property
 
-## 2.41.2
+## 2.41.2 (2025-03-31)
 
 This release has 1 fix.
 
@@ -951,7 +1501,7 @@ This release has 1 fix.
 
 - queue signature
 
-## 2.41.1
+## 2.41.1 (2025-03-30)
 
 This release has 1 new feature.
 
@@ -959,7 +1509,7 @@ This release has 1 new feature.
 
 - improve docs
 
-## 2.41.0
+## 2.41.0 (2025-03-30)
 
 This release has 1 new feature.
 
@@ -967,7 +1517,7 @@ This release has 1 new feature.
 
 - reconcileFile
 
-## 2.40.0
+## 2.40.0 (2025-03-29)
 
 This release has 1 new feature.
 
@@ -975,7 +1525,7 @@ This release has 1 new feature.
 
 - config-changed
 
-## 2.39.0
+## 2.39.0 (2025-03-28)
 
 This release has 1 new feature.
 
@@ -983,7 +1533,7 @@ This release has 1 new feature.
 
 - FileManager
 
-## 2.38.2
+## 2.38.2 (2025-03-27)
 
 This release has 1 new feature.
 
@@ -991,7 +1541,7 @@ This release has 1 new feature.
 
 - Note composer - HeadingInfo
 
-## 2.38.1
+## 2.38.1 (2025-03-27)
 
 This release has 1 fix.
 
@@ -999,7 +1549,7 @@ This release has 1 fix.
 
 - missing null
 
-## 2.38.0
+## 2.38.0 (2025-03-27)
 
 This release has 1 new feature.
 
@@ -1007,7 +1557,7 @@ This release has 1 new feature.
 
 - Note composer
 
-## 2.37.0
+## 2.37.0 (2025-03-20)
 
 This release has 1 new feature.
 
@@ -1015,7 +1565,7 @@ This release has 1 new feature.
 
 - DataAdapter
 
-## 2.36.2
+## 2.36.2 (2025-03-19)
 
 This release has 1 new feature.
 
@@ -1023,7 +1573,7 @@ This release has 1 new feature.
 
 - onFileChange
 
-## 2.36.1
+## 2.36.1 (2025-03-18)
 
 This release has 1 fix.
 
@@ -1031,7 +1581,7 @@ This release has 1 fix.
 
 - add missing @public
 
-## 2.36.0
+## 2.36.0 (2025-03-18)
 
 This release has 1 new feature.
 
@@ -1039,7 +1589,7 @@ This release has 1 new feature.
 
 - CommandPalette
 
-## 2.35.0
+## 2.35.0 (2025-02-26)
 
 This release has 1 new feature.
 
@@ -1047,7 +1597,7 @@ This release has 1 new feature.
 
 - MarkdownView.backlinks
 
-## 2.34.1
+## 2.34.1 (2025-02-25)
 
 This release has 1 fix.
 
@@ -1055,7 +1605,7 @@ This release has 1 fix.
 
 - possible null
 
-## 2.34.0
+## 2.34.0 (2025-02-24)
 
 This release has 1 new feature.
 
@@ -1063,7 +1613,7 @@ This release has 1 new feature.
 
 - getMatchCount
 
-## 2.33.0
+## 2.33.0 (2025-02-24)
 
 This release has 1 new feature.
 
@@ -1071,7 +1621,7 @@ This release has 1 new feature.
 
 - better types for ResultDomResult
 
-## 2.32.0
+## 2.32.0 (2025-02-24)
 
 This release has 1 new feature.
 
@@ -1079,7 +1629,7 @@ This release has 1 new feature.
 
 - addResult / renderContentMatches
 
-## 2.31.0
+## 2.31.0 (2025-02-24)
 
 This release has 1 new feature.
 
@@ -1087,7 +1637,7 @@ This release has 1 new feature.
 
 - improve GraphEngine type #114
 
-## 2.30.0
+## 2.30.0 (2025-02-24)
 
 This release has 2 new features.
 
@@ -1096,7 +1646,7 @@ This release has 2 new features.
 - improve GraphEngine type #114
 - improve FileSystemWatchHandler type
 
-## 2.29.1
+## 2.29.1 (2025-02-24)
 
 This release has 1 fix.
 
@@ -1104,7 +1654,7 @@ This release has 1 fix.
 
 - nullable queue
 
-## 2.29.0
+## 2.29.0 (2025-02-24)
 
 This release has 3 new features.
 
@@ -1114,7 +1664,7 @@ This release has 3 new features.
 - refactor Tree
 - BacklinkComponent
 
-## 2.28.0
+## 2.28.0 (2025-02-23)
 
 This release has 2 new features.
 
@@ -1123,7 +1673,7 @@ This release has 2 new features.
 - improve EmbedRegistryEmbedByExtensionRecord type #112
 - add all EmbeddableConstructors
 
-## 2.27.0
+## 2.27.0 (2025-02-20)
 
 This release has 2 new features and 1 fix.
 
@@ -1136,7 +1686,11 @@ This release has 2 new features and 1 fix.
 
 - fix typo in FileSystemAdapter
 
-## 2.26.0
+## 2.26.1 (2025-02-19)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.26.0 (2025-02-19)
 
 This release has 4 new features and 9 fixes.
 
@@ -1159,7 +1713,7 @@ This release has 4 new features and 9 fixes.
 - rename 2-suffixed
 - replace any with unknown
 
-## 2.25.0
+## 2.25.0 (2025-02-18)
 
 This release has 1 new feature.
 
@@ -1167,7 +1721,15 @@ This release has 1 new feature.
 
 - CanvasView types
 
-## 2.23.5
+## 2.24.0 (2025-02-18)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.23.6 (2025-02-17)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.23.5 (2025-02-17)
 
 This release has 1 fix.
 
@@ -1175,7 +1737,19 @@ This release has 1 fix.
 
 - attw for node10
 
-## 2.23.1
+## 2.23.4 (2025-02-16)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.23.3 (2025-02-16)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.23.2 (2025-02-16)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.23.1 (2025-02-16)
 
 This release has 1 fix.
 
@@ -1183,7 +1757,71 @@ This release has 1 fix.
 
 - implementations.d.mts
 
-## 2.21.0
+## 2.23.0 (2025-02-16)
+
+This release has maintenance changes only. 6 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 2.22.0 (2025-02-14)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.4-beta.16 (2025-02-14)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.4-beta.15 (2025-02-14)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.4-beta.12 (2025-02-14)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.4-beta.11 (2025-02-14)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.4-beta.10 (2025-02-14)
+
+- Ensure postinstall is published ([`a3db8d4`](https://github.com/obsidian-typings/obsidian-typings/commit/a3db8d435184b9edbd72f8d957c9e9f2f66da058))
+
+## 2.21.4-beta.9 (2025-02-14)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.4-beta.8 (2025-02-14)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.4-beta.6 (2025-02-14)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.4-beta.5 (2025-02-14)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.4-beta.4 (2025-02-14)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.4-beta.2 (2025-02-14)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.3 (2025-02-12)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.2 (2025-02-12)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.1 (2025-02-12)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.21.0 (2025-02-12)
 
 This release has 1 new feature.
 
@@ -1191,7 +1829,11 @@ This release has 1 new feature.
 
 - Add new typings to the graph core plugin #108
 
-## 2.20.1
+## 2.20.2 (2025-02-12)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.20.1 (2025-02-11)
 
 This release has 1 fix.
 
@@ -1199,7 +1841,11 @@ This release has 1 fix.
 
 - node10 typing
 
-## 2.19.0
+## 2.20.0 (2025-02-11)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.19.0 (2025-02-10)
 
 This release has 1 new feature.
 
@@ -1207,7 +1853,19 @@ This release has 1 new feature.
 
 - add missing arg
 
-## 2.17.0
+## 2.18.2 (2025-02-10)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.18.1 (2025-02-10)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.18.0 (2025-02-10)
+
+This release has maintenance changes only. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 2.17.0 (2025-02-06)
 
 This release has 1 new feature.
 
@@ -1215,7 +1873,7 @@ This release has 1 new feature.
 
 - Add BookmarkItems
 
-## 2.16.0
+## 2.16.0 (2025-02-02)
 
 This release has 1 new feature.
 
@@ -1223,7 +1881,7 @@ This release has 1 new feature.
 
 - rename parameter
 
-## 2.15.0
+## 2.15.0 (2025-01-26)
 
 This release has 1 fix.
 
@@ -1231,7 +1889,11 @@ This release has 1 fix.
 
 - wrong argument name
 
-## 2.14.3
+## 2.14.6 (2025-01-20)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.14.3 (2025-01-13)
 
 This release has 1 fix.
 
@@ -1239,7 +1901,11 @@ This release has 1 fix.
 
 - remove package-lock
 
-## 2.14.1
+## 2.14.2 (2025-01-13)
+
+This release has maintenance changes only. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 2.14.1 (2025-01-13)
 
 This release has 1 fix.
 
@@ -1247,13 +1913,41 @@ This release has 1 fix.
 
 - move moment dependency
 
-## 2.13.7
+## 2.14.0 (2025-01-13)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.13.9 (2025-01-13)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.13.8 (2025-01-13)
+
+This release has maintenance changes only. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 2.13.7 (2025-01-13)
 
 This release has 1 fix.
 
 ### Fixed
 
 - use temporary fork for pixi.js
+
+## 2.13.6 (2025-01-13)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.13.5 (2025-01-13)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.13.4 (2025-01-13)
+
+This release has 1 fix.
+
+### Fixed
+
+- PromiseWithResolvers
 
 ## 2.13.3
 
@@ -1262,6 +1956,10 @@ This release has 1 fix.
 ### Fixed
 
 - PromiseWithResolvers
+
+## 2.13.2 (2025-01-12)
+
+This release has maintenance changes only. 4 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
 
 ## 2.13.0
 
@@ -1273,7 +1971,7 @@ This release has 3 new features.
 - more DailyNotesPluginInstance
 - Add engine and renderer to views #105
 
-## 2.12.0
+## 2.12.0 (2025-01-12)
 
 This release has 2 new features and 3 fixes.
 
@@ -1288,6 +1986,34 @@ This release has 2 new features and 3 fixes.
 - onFileMenu
 - pixi.js types
 
+## 2.11.2-beta.1 (2025-01-12)
+
+This release has 2 new features, 2 fixes, 3 documentation changes and 1 other change. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- GraphPluginInstance unknowns
+- Add typings for the graph plugin #103
+
+### Fixed
+
+- onFileMenu
+- broken image links
+
+### Documentation
+
+- fix missing class
+- fix missing sentence
+- update Class hierarchies
+
+### Other changes
+
+- Fix pixi.js types
+
+## 2.11.1 (2025-01-08)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
 ## 2.11.0
 
 This release has 1 new feature.
@@ -1296,7 +2022,7 @@ This release has 1 new feature.
 
 - make createNewFile args optional
 
-## 2.10.0
+## 2.10.0 (2025-01-08)
 
 This release has 1 new feature.
 
@@ -1304,7 +2030,11 @@ This release has 1 new feature.
 
 - openLinkText
 
-## 2.8.2
+## 2.9.0 (2025-01-06)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.8.2 (2025-01-06)
 
 This release has 1 fix.
 
@@ -1312,7 +2042,7 @@ This release has 1 fix.
 
 - MenuItem.titleEl
 
-## 2.8.1
+## 2.8.1 (2025-01-02)
 
 This release has 1 fix.
 
@@ -1320,7 +2050,7 @@ This release has 1 fix.
 
 - stat type
 
-## 2.8.0
+## 2.8.0 (2024-12-30)
 
 This release has 2 new features and 1 fix.
 
@@ -1333,7 +2063,7 @@ This release has 2 new features and 1 fix.
 
 - registerMode
 
-## 2.7.0
+## 2.7.0 (2024-12-19)
 
 This release has 1 new feature.
 
@@ -1341,7 +2071,7 @@ This release has 1 new feature.
 
 - browser plugin is no longer disabled starting from Obsidian 1.8.0
 
-## 2.6.1
+## 2.6.1 (2024-12-17)
 
 This release has 1 fix.
 
@@ -1349,7 +2079,7 @@ This release has 1 fix.
 
 - Bookmarks signatures
 
-## 2.6.0
+## 2.6.0 (2024-12-14)
 
 This release has 13 new features and 1 fix.
 
@@ -1373,7 +2103,7 @@ This release has 13 new features and 1 fix.
 
 - properly extend Platform
 
-## 2.5.0
+## 2.5.0 (2024-12-09)
 
 This release has 1 new feature.
 
@@ -1381,7 +2111,7 @@ This release has 1 new feature.
 
 - add optional plugin functions
 
-## 2.4.0
+## 2.4.0 (2024-12-08)
 
 This release has 1 new feature and 1 fix.
 
@@ -1393,7 +2123,7 @@ This release has 1 new feature and 1 fix.
 
 - signature
 
-## 2.3.4
+## 2.3.4 (2024-11-25)
 
 This release has 1 fix.
 
@@ -1401,7 +2131,11 @@ This release has 1 fix.
 
 - MetadataTypeManagerTypesRecord
 
-## 2.3.2
+## 2.3.3 (2024-11-13)
+
+This release has maintenance changes only. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 2.3.2 (2024-11-13)
 
 This release has 1 new feature and 1 fix.
 
@@ -1413,7 +2147,15 @@ This release has 1 new feature and 1 fix.
 
 - CustomArrayDictImpl.add
 
-## 2.3.0
+## 2.3.1-beta.1 (2024-11-08)
+
+This release has 1 new feature.
+
+### New
+
+- EditorView
+
+## 2.3.0 (2024-11-04)
 
 This release has 48 new features, 17 fixes and 1 other change.
 
@@ -1492,14 +2234,366 @@ This release has 48 new features, 17 fixes and 1 other change.
 
 - fix root folder path
 
-## 2.2.0
+## 2.2.1-beta.38 (2024-11-03)
+
+This release has 1 fix.
+
+### Fixed
+
+- CustomArrayDict
+
+## 2.2.1-beta.37 (2024-10-29)
+
+This release has 1 new feature.
+
+### New
+
+- Update ConfigItems
+
+## 2.2.1-beta.36 (2024-10-25)
+
+This release has 1 new feature. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### New
+
+- add type guards
+
+## 2.2.1-beta.35 (2024-10-25)
+
+This release has 1 fix.
+
+### Fixed
+
+- signature for getBacklinksForFile
+
+## 2.2.1-beta.34 (2024-10-24)
+
+This release has 1 fix.
+
+### Fixed
+
+- changed CustomArrayDict
+
+## 2.2.1-beta.33 (2024-10-17)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.2.1-beta.32 (2024-10-16)
+
+This release has 2 new features and 1 fix. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### New
+
+- add method
+- Updated typings for ProgressBarComponent (#96)
+
+### Fixed
+
+- typo
+
+## 2.2.1-beta.31 (2024-10-15)
+
+This release has 1 new feature, 1 fix and 2 documentation changes. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- Update Tree.d.ts (#94)
+
+### Fixed
+
+- use proper typing
+
+### Documentation
+
+- correct terminology
+- switch code samples to single quote
+
+## 2.2.1-beta.30 (2024-10-08)
+
+This release has 16 new features, 2 fixes and 1 other change. 49 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- WorkspaceItem / WorkspaceSidedock
+- add ColorComponent functions
+- Added colorPickerEl property to ColorComponent (#90)
+- more types
+- Canvas plugin
+- Bookmark
+- App
+- added fileManager.renameProperty() (#89)
+- bookmarks
+- BacklinkPluginInstance
+- requestSaveConfig
+- more internal plugins
+- update InternalPlugins
+- add constructors
+- AudioRecorderPluginInstance
+- add Plugin typings
+
+### Fixed
+
+- Debouncer signature
+- remove unused Starred plugin
+
+### Other changes
+
+- Avoid duplicating TFile/TFolder
+
+## 2.2.1-beta.29 (2024-09-23)
+
+This release has 1 new feature and 1 fix.
+
+### New
+
+- Events._
+
+### Fixed
+
+- computeMetadataAsync
+
+## 2.2.1-beta.28 (2024-09-23)
+
+This release has 1 new feature.
+
+### New
+
+- MetadataCache
+
+## 2.2.1-beta.27 (2024-09-23)
+
+This release has 1 new feature.
+
+### New
+
+- MetadataCache
+
+## 2.2.1-beta.26 (2024-09-23)
+
+This release has 1 new feature.
+
+### New
+
+- MetadataCache
+
+## 2.2.1-beta.25 (2024-09-23)
+
+This release has 2 new features. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### New
+
+- use posix
+- update LinkResolverQueue
+
+## 2.2.1-beta.24 (2024-09-22)
+
+This release has 1 fix.
+
+### Fixed
+
+- MetadataCache typings
+
+## 2.2.1-beta.23 (2024-09-21)
+
+This release has 1 fix.
+
+### Fixed
+
+- getBacklinksForFile accept mandatory TFile
+
+## 2.2.1-beta.22 (2024-09-21)
+
+This release has 1 fix.
+
+### Fixed
+
+- add null result
+
+## 2.2.1-beta.21 (2024-09-21)
+
+This release has 1 fix and 1 other change. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### Fixed
+
+- separate AppSetting from existing Setting...
+
+### Other changes
+
+- Reformat
+
+## 2.2.1-beta.20 (2024-09-19)
+
+This release has 1 new feature.
+
+### New
+
+- Updated PropertyRenderContext.onChange (#87)
+
+## 2.2.1-beta.19 (2024-09-18)
+
+This release has 1 new feature.
+
+### New
+
+- getBacklinksForFile change to return ReferenceCache
+
+## 2.2.1-beta.18 (2024-09-18)
+
+This release has 1 new feature.
+
+### New
+
+- fix getAvailablePathForAttachments signature
+
+## 2.2.1-beta.17 (2024-09-17)
+
+This release has maintenance changes only. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+## 2.2.1-beta.16 (2024-09-17)
+
+This release has 4 new features.
+
+### New
+
+- add all global variables
+- MarkdownPreviewSection
+- extract CapacitorAdapter...
+- add more hidden exported types
+
+## 2.2.1-beta.15 (2024-09-15)
+
+This release has 1 new feature and 1 other change. 3 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- Add typings to MarkdownPreviewRenderer and fix contributing.md formatting (#86)
+
+### Other changes
+
+- Add trailing newline
+
+## 2.2.1-beta.14 (2024-09-14)
+
+This release has 1 new feature. 4 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- getLinkSuggestions() sometimes has alias property (#85)
+
+## 2.2.1-beta.13 (2024-09-11)
+
+This release has maintenance changes only. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+## 2.2.1-beta.12 (2024-09-11)
+
+This release has 3 new features. 4 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- add all Workspace events
+- add ShareReceiver
+- add TFile/TFolder/TAbstractFile methods
+
+## 2.2.1-beta.11 (2024-09-08)
+
+This release has 1 new feature.
+
+### New
+
+- TFolder.getParentPrefix
+
+## 2.2.1-beta.10 (2024-08-22)
+
+This release has 1 fix.
+
+### Fixed
+
+- add @deprecated to app
+
+## 2.2.1-beta.9 (2024-08-20)
+
+This release has 1 new feature. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### New
+
+- add global app
+
+## 2.2.1-beta.8 (2024-08-18)
+
+This release has 1 new feature and 1 fix.
+
+### New
+
+- add missing public
+
+### Fixed
+
+- ensure style-mod.d.cts is loaded
+
+## 2.2.1-beta.7 (2024-08-15)
+
+This release has 1 new feature.
+
+### New
+
+- MarkdownFileInfo.metadataEditor
+
+## 2.2.1-beta.6 (2024-08-12)
+
+This release has 1 new feature.
+
+### New
+
+- PromisedQueue
+
+## 2.2.1-beta.5 (2024-08-12)
+
+This release has 1 fix.
+
+### Fixed
+
+- handle root folder as /
+
+## 2.2.1-beta.4 (2024-08-12)
+
+This release has 1 fix. 1 maintenance commit (tests, build, CI, refactoring, dependencies) is not listed.
+
+### Fixed
+
+- fix root folder path
+
+## 2.2.1-beta.3 (2024-08-11)
+
+This release has 1 fix.
+
+### Fixed
+
+- mark created fake file/folder as deleted
+
+## 2.2.1-beta.2 (2024-08-09)
+
+This release has 1 new feature. 2 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- DataAdapter.handler/trigger
+
+## 2.2.1-beta.1 (2024-08-09)
+
+This release has 1 new feature. 7 maintenance commits (tests, build, CI, refactoring, dependencies) are not listed.
+
+### New
+
+- FileSystemWatchHandler
+
+## 2.2.0 (2024-08-09)
 
 - Added typings for `LinkUpdateHandler` for `inProgressUpdates` and `runAsyncLinkUpdate` (`FileManager`)
 - Added typings for `onChange` method (`Vault`)
 - Fix first parameter type of `exists` (`Vault`)
 - Fix optionality of `getAvailablePathForAttachments` (`Vault`)
 
-## 2.1.3
+## 2.1.3 (2024-08-05)
 
 - Added _initial_ typings for following views:
   - `AllPropertiesView`
@@ -1525,7 +2619,7 @@ This release has 48 new features, 17 fixes and 1 other change.
   - `VideoView`
 - Add typings for `queue` method on `FileManager`
 
-## 2.0.0
+## 2.0.0 (2024-07-30)
 
 - Split up typings codebase into separate files
 - Added `/implementations` submodule which provides additional code imports
