@@ -1,8 +1,8 @@
+/* eslint-disable unicorn/name-replacements -- See the comment below. It opens the file because the rule reports the file name at 1:1. */
 /*
  * `var` in this file's names is the keyword the rule requires, and `vars` is the `globals/augmentations/vars/`
  * folder it polices; neither is an abbreviation. The rule's id, `require-var-in-global-vars`, names the file.
  */
-/* eslint-disable unicorn/name-replacements -- See the comment above. */
 import type { TSESTree } from '@typescript-eslint/utils';
 
 import type {
