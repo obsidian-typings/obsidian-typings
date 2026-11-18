@@ -1,3 +1,4 @@
+import dedent from 'dedent';
 import {
   describe,
   expect,
@@ -11,20 +12,20 @@ import {
 
 describe('getModuleExportNames', () => {
   it('lists every kind of top-level export once', () => {
-    const sourceText = [
-      'import { Extension } from \'@codemirror/state\';',
-      'export { Extension };',
-      'export class App {}',
-      'export interface Command {}',
-      'export type IconName = string;',
-      'export enum PopoverState { Shown }',
-      'export function setIcon(): void;',
-      'export function setIcon(name: string): void;',
-      'export const apiVersion: string;',
-      'export namespace Platform {}',
-      'interface Internal {}',
-      'declare class NotExported {}'
-    ].join('\n');
+    const sourceText = dedent`
+      import { Extension } from '@codemirror/state';
+      export { Extension };
+      export class App {}
+      export interface Command {}
+      export type IconName = string;
+      export enum PopoverState { Shown }
+      export function setIcon(): void;
+      export function setIcon(name: string): void;
+      export const apiVersion: string;
+      export namespace Platform {}
+      interface Internal {}
+      declare class NotExported {}
+    `;
 
     expect(getModuleExportNames(sourceText)).toEqual([
       'Extension',
