@@ -1,5 +1,26 @@
 {
   "pins": {
+    "@microsoft/api-extractor": {
+      "section": "overrides",
+      "why": "A nested override, `{ \"minimatch\": \"^11.0.5\" }`, clearing GHSA-g3hv-75wg-m249 (minimatch <11.0.1) for api-extractor alone. api-extractor 7.60.1 (latest) pins minimatch at the exact 10.2.3, and its only call is `minimatch(dependencyName, pattern)` in `Collector.js`, which minimatch 11 keeps. Scoped rather than global because minimatch 11 drops `makeRe`, `matchOne` and the default export, which other consumers may still use.",
+      "check": "node -e \"process.stdout.write(JSON.parse(require('node:fs').readFileSync('node_modules/@microsoft/api-extractor/package.json','utf8')).dependencies.minimatch)\"",
+      "expect": "10.2.3",
+      "manualCheck": "Remove the override when api-extractor admits minimatch >=11.0.1, then reinstall and rerun npm audit and `npm run build`, which runs build:extract-api."
+    },
+    "eslint-plugin-tsdoc": {
+      "section": "overrides",
+      "why": "A nested override, `{ \"minimatch\": \"^11.0.5\" }`, clearing GHSA-g3hv-75wg-m249 for the copy under eslint-plugin-tsdoc alone. eslint-plugin-tsdoc 0.5.4 pins `@typescript-eslint/utils ~8.56.0`, whose typescript-estree 8.56.1 keeps minimatch 10 and calls only `minimatch(filePath, pattern, { dot: true })`, which minimatch 11 keeps.",
+      "check": "node -e \"process.stdout.write(JSON.parse(require('node:fs').readFileSync('node_modules/eslint-plugin-tsdoc/package.json','utf8')).dependencies['@typescript-eslint/utils'])\"",
+      "expect": "~8.56.0",
+      "manualCheck": "Remove the override when eslint-plugin-tsdoc moves to a typescript-eslint that takes minimatch 11, then reinstall and rerun npm audit and `npm run lint`."
+    },
+    "glob": {
+      "section": "overrides",
+      "why": "Clears GHSA-3g3m-2fjr-6pw4 (glob >=9.0.0 <=14.0.1, fixed in 14.0.2) and, with it, GHSA-g3hv-75wg-m249 on the minimatch 10 that glob 13 nests. Only linkinator brings glob, and linkinator 8.1.0 (latest) still declares glob ^13.0.0. It calls only the async named `glob(pattern)` export, which glob 14 keeps. Replace glob itself rather than the minimatch under it: glob 10 and 13 read `Minimatch.set`, which minimatch 11 changes. Caret because it is an advisory floor.",
+      "check": "node -e \"process.stdout.write(JSON.parse(require('node:fs').readFileSync('node_modules/linkinator/package.json','utf8')).dependencies.glob)\"",
+      "expect": "^13.0.0",
+      "manualCheck": "Remove the override when linkinator admits glob >=14.0.2, then reinstall and rerun npm audit and the Markdown gates."
+    },
     "katex": {
       "section": "overrides",
       "why": "Clears GHSA-238p-pmpm-9mq7, fixed in KaTeX 0.18.2. micromark-extension-math 3.1.0 requires ^0.16.0, which excludes the fix; compatible audit updates cannot move it. Keep the first patched release exact because this crosses a 0.x minor boundary. Math HTML rendering and the Markdown gates were verified with this override.",
