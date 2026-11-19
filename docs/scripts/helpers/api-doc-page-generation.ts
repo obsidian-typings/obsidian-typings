@@ -335,12 +335,12 @@ export async function generateOverviewPage(name: string, info: TypeInfo, allType
 
   // Status badge + filters
   const hasMembers = info.properties.length > 0 || info.methods.length > 0;
-  if (hasMembers && info.kind !== 'function') {
-    lines.push(`<TypeBadge status={${renderApiStatus(info.isOfficial)}}><MemberFilters /></TypeBadge>`);
-  } else {
-    lines.push(`<TypeBadge status={${renderApiStatus(info.isOfficial)}} />`);
-  }
-  lines.push('');
+  lines.push(
+    hasMembers && info.kind !== 'function'
+      ? `<TypeBadge status={${renderApiStatus(info.isOfficial)}}><MemberFilters /></TypeBadge>`
+      : `<TypeBadge status={${renderApiStatus(info.isOfficial)}} />`,
+    ''
+  );
 
   // Description
   if (info.description) {
