@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## 1.4.0
+
+**Models:** Obsidian `1.15.1` (`public` channel). Internal members can differ in other app versions, so guard the ones you use when your `minAppVersion` is older.
+
+**Branch:** [`release/obsidian-public/1.15.1`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.15.1)
+
+**Commits:** [`obsidian-public-1.15.1-v1.3.0...obsidian-public-1.15.1-v1.4.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-public-1.15.1-v1.3.0...obsidian-public-1.15.1-v1.4.0)
+
+- fix(bases): take a property name in updateProperty, declare BasesEntry.frontmatter and note ([`ebb4853`](https://github.com/obsidian-typings/obsidian-typings/commit/ebb48538b21c5bd0af98995669b21bfe9c70462a))
+
+### Declared API changes
+
+Names only, compared with `obsidian-public-1.15.1-v1.3.0`.
+
+**Added (2):**
+
+- `BasesEntry.frontmatter`
+- `BasesEntry.note`
+
 ## 1.3.0
 
 **Models:** Obsidian `1.15.1` (`public` channel). Internal members can differ in other app versions, so guard the ones you use when your `minAppVersion` is older.
