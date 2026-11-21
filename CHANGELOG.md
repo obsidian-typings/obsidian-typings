@@ -1,5 +1,68 @@
 # CHANGELOG
 
+## 1.3.0
+
+**Models:** Obsidian `1.15.1` (`catalyst` channel). Internal members can differ in other app versions, so guard the ones you use when your `minAppVersion` is older.
+
+**Branch:** [`release/obsidian-catalyst/1.15.1`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-catalyst/1.15.1)
+
+**Commits:** [`obsidian-catalyst-1.15.1-v1.2.0...obsidian-catalyst-1.15.1-v1.3.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-catalyst-1.15.1-v1.2.0...obsidian-catalyst-1.15.1-v1.3.0)
+
+### Breaking changes
+
+- fix(types): type MetadataCache.blockCache as its own cache and drop the markdown-importer plugin ([`cb44634`](https://github.com/obsidian-typings/obsidian-typings/commit/cb4463407d50e351969765391e7db7a016c5aa89))
+- fix(internal-plugins): drop the markdown-importer core plugin ([`e76b55f`](https://github.com/obsidian-typings/obsidian-typings/commit/e76b55f0188602235df1d8570614b3124c9294e4))
+- fix(metadata-cache): give blockCache its own MetadataCacheBlockCache type ([`43006c6`](https://github.com/obsidian-typings/obsidian-typings/commit/43006c66ea936c34462a4a3685dbe6e368265fad))
+
+### Other changes
+
+- fix(bases): take a property name in updateProperty, declare BasesEntry.frontmatter and note ([`81e7715`](https://github.com/obsidian-typings/obsidian-typings/commit/81e7715bb894372785d91c7690feac0557182e74))
+- fix: re #151 ([`5b45086`](https://github.com/obsidian-typings/obsidian-typings/commit/5b450860180bee69c8156dc32b77a7ee75d2edad))
+- fix(deps): clear the glob and minimatch advisories ([`33f78db`](https://github.com/obsidian-typings/obsidian-typings/commit/33f78db86f2c5b7855e5f3cffe218470291cd0e7))
+
+### Declared API changes
+
+Names only, compared with `obsidian-catalyst-1.15.1-v1.2.0`.
+
+**Added (25):**
+
+- `BasesEntry.frontmatter`
+- `BasesEntry.note`
+- `MetadataCacheBlockCache`
+- `MetadataCacheBlockCache.app`
+- `MetadataCacheBlockCache.cache`
+- `MetadataCacheBlockCache.clear`
+- `MetadataCacheBlockCache.getAll`
+- `MetadataCacheBlockCache.getForFile`
+- `MetadataCacheBlockCacheBlock`
+- `MetadataCacheBlockCacheBlock.display`
+- `MetadataCacheBlockCacheBlock.node`
+- `MetadataCacheBlockCacheFileEntry`
+- `MetadataCacheBlockCacheFileEntry.blocks`
+- `MetadataCacheBlockCacheFileEntry.content`
+- `MetadataCacheBlockCacheFileEntry.file`
+- `MetadataCacheBlockCacheFileEntry.mtime`
+- `MetadataCacheBlockCacheNode`
+- `MetadataCacheBlockCacheNode.children`
+- `MetadataCacheBlockCacheNode.depth`
+- `MetadataCacheBlockCacheNode.id`
+- `MetadataCacheBlockCacheNode.position`
+- `MetadataCacheBlockCacheNode.type`
+- `SettingDefinitionBase.id`
+- `SettingDefinitionGroup.id`
+- `SettingDefinitionPage.id`
+
+**Removed (8):**
+
+- `BlockCache.app`
+- `BlockCache.cache`
+- `BlockCache.clear`
+- `BlockCache.getAll`
+- `BlockCache.getForFile`
+- `MarkdownImporterPlugin`
+- `MarkdownImporterPluginInstance`
+- `MarkdownImporterPluginInstance.app`
+
 ## 1.2.0
 
 **Models:** Obsidian `1.15.1` (`catalyst` channel). Internal members can differ in other app versions, so guard the ones you use when your `minAppVersion` is older.
