@@ -1,8 +1,6 @@
 # Obsidian Typings
 
-[![NPM downloads](https://img.shields.io/npm/v/obsidian-typings?color=red&label=Version%3A&logo=npm&logoColor=white&labelColor=red)](https://www.npmjs.com/package/obsidian-typings)
-[![NPM downloads](https://img.shields.io/npm/dw/obsidian-typings?style=flat&label=Downloads)](https://www.npmjs.com/package/obsidian-typings)
-[![GitHub Repo stars](https://img.shields.io/github/stars/obsidian-typings/obsidian-typings?color=yellow&label=Stargazers%3A&logo=OpenTelemetry&logoColor=yellow)](https://github.com/obsidian-typings/obsidian-typings/stargazers)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/mnaoumov) [![npm version](https://img.shields.io/npm/v/obsidian-typings)](https://www.npmjs.com/package/obsidian-typings) [![npm downloads](https://img.shields.io/npm/dm/obsidian-typings)](https://www.npmjs.com/package/obsidian-typings) [![CI](https://img.shields.io/github/actions/workflow/status/obsidian-typings/obsidian-typings/verify.yml?branch=main&label=CI)](https://github.com/obsidian-typings/obsidian-typings/actions/workflows/verify.yml) [![License](https://img.shields.io/github/license/obsidian-typings/obsidian-typings)](https://github.com/obsidian-typings/obsidian-typings/blob/main/LICENSE) [![Types](https://img.shields.io/npm/types/obsidian-typings)](https://www.npmjs.com/package/obsidian-typings)
 
 **Obsidian Typings** provides **TypeScript definitions** for Obsidian’s **undocumented and internal APIs**.
 
