@@ -444,6 +444,20 @@ declare module 'obsidian' {
     ): (el: HTMLElement, ctx: MarkdownPostProcessorContext) => void;
 
     /**
+     * Register a code block post processor for the given language.
+     *
+     * `Plugin.registerMarkdownCodeBlockProcessor` calls it after registering the post processor, and its cleanup calls {@link unregisterCodeBlockPostProcessor}.
+     *
+     * @param language - The language of the code block.
+     * @param handler - The handler of the code block.
+     * @throws Error if a code block post processor for the language is already registered.
+     *
+     * @remark Views will not reflect the registration until being re-rendered.
+     * @unofficial
+     */
+    function registerCodeBlockPostProcessor(language: string, handler: CodeBlockPostProcessorHandler): void;
+
+    /**
      * Registers the DOM events.
      *
      * @param el - The element to register the events on.
