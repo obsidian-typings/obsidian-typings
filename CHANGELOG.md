@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 1.5.0
+
+**Models:** Obsidian `1.15.1` (`public` channel). Internal members can differ in other app versions, so guard the ones you use when your `minAppVersion` is older.
+
+**Branch:** [`release/obsidian-public/1.15.1`](https://github.com/obsidian-typings/obsidian-typings/tree/release/obsidian-public/1.15.1)
+
+**Commits:** [`obsidian-public-1.15.1-v1.4.0...obsidian-public-1.15.1-v1.5.0`](https://github.com/obsidian-typings/obsidian-typings/compare/obsidian-public-1.15.1-v1.4.0...obsidian-public-1.15.1-v1.5.0)
+
+- feat: type MarkdownPreviewRenderer.registerCodeBlockPostProcessor ([`d7ad73e`](https://github.com/obsidian-typings/obsidian-typings/commit/d7ad73ea8c3ff9cd85c164d2878ee428636e2f5f))
+
+### Declared API changes
+
+Names only, compared with `obsidian-public-1.15.1-v1.4.0`.
+
+**Added (1):**
+
+- `registerCodeBlockPostProcessor`
+
 ## 1.4.0
 
 **Models:** Obsidian `1.15.1` (`public` channel). Internal members can differ in other app versions, so guard the ones you use when your `minAppVersion` is older.
