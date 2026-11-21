@@ -27,6 +27,15 @@ declare module 'obsidian' {
     displayValue?: (() => string) | string;
 
     /**
+     * Unique identifier to differentiate between sibling settings that share
+     * a name, or to keep a stable reference when a setting or setting page
+     * is renamed. If not set, name is used.
+     *
+     * @unofficial
+     * @since 1.14.0
+     */
+    id?: string;
+    /**
      * Inline items rendered as a declarative sub-page. Can include groups
      * and nested pages. Mutually exclusive with `page`.
      *
