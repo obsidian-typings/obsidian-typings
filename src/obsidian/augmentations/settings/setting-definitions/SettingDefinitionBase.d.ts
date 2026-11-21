@@ -41,6 +41,15 @@ declare module 'obsidian' {
     disabled?: (() => boolean) | boolean;
 
     /**
+     * Unique identifier to differentiate between sibling settings that share
+     * a name, or to keep a stable reference when a setting or setting page
+     * is renamed. If not set, name is used.
+     *
+     * @unofficial
+     * @since 1.14.0
+     */
+    id?: string;
+    /**
      * Display name — used for rendering and search.
      *
      * @official
