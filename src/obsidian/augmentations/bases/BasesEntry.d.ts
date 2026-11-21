@@ -18,6 +18,20 @@ declare module 'obsidian' {
     file: TFile;
 
     /**
+     * The file's frontmatter from the metadata cache, or an empty object when the file has none.
+     *
+     * @unofficial
+     */
+    frontmatter: FrontMatterCache;
+
+    /**
+     * The `note` object, wrapping {@link frontmatter} as an {@link ObjectValue}.
+     *
+     * @unofficial
+     */
+    note: ObjectValue;
+
+    /**
      * Constructor.
      *
      * To get the constructor instance, use {@link getBasesEntryConstructor} from `obsidian-typings/implementations`.
@@ -49,8 +63,9 @@ declare module 'obsidian' {
 
     /**
      * Gets the raw (un-wrapped) frontmatter value for a key.
+     * The key is matched exactly first, then case-insensitively.
      *
-     * @param key - The property key.
+     * @param key - The frontmatter property name, without the `note.` prefix.
      * @returns The raw value, or `null` if not present.
      * @unofficial
      */

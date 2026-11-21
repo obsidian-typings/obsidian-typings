@@ -231,14 +231,15 @@ declare module 'obsidian' {
     undoTransaction(): Promise<void>;
 
     /**
-     * Updates a single frontmatter property on a file within a transaction.
+     * Updates a single frontmatter property on a file within a transaction that can be undone.
+     * The key is matched exactly first, then case-insensitively; a nullish value for an absent key writes nothing.
      *
      * @param file - The file to update.
-     * @param property - The property to update.
+     * @param name - The frontmatter property name, without the `note.` prefix.
      * @param value - The new value.
      * @returns A promise that resolves when the update is committed.
      * @unofficial
      */
-    updateProperty(file: TFile, property: BasesPropertyId, value: unknown): Promise<void>;
+    updateProperty(file: TFile, name: string, value: unknown): Promise<void>;
   }
 }
