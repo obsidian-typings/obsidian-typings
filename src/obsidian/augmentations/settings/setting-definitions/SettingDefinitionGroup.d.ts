@@ -36,6 +36,15 @@ declare module 'obsidian' {
     heading?: string;
 
     /**
+     * Unique identifier to differentiate between sibling settings that share
+     * a name, or to keep a stable reference when a setting or setting page
+     * is renamed. If not set, name is used.
+     *
+     * @unofficial
+     * @since 1.14.0
+     */
+    id?: string;
+    /**
      * Settings within this group.
      *
      * @official
