@@ -236,8 +236,6 @@ With these scary disclaimers out of the way, hopefully these typings will help y
 
 ## See also
 
-[My other Obsidian resources](https://mnaoumov.dev/obsidian/)
-
 | Library | Features | How `Obsidian Typings` differs |
 | --- | --- | --- |
 | [`obsidian`](https://github.com/obsidianmd/obsidian-api) | Official type definitions for the documented Obsidian API; supported by the Obsidian team | Extends `obsidian`: augments its module with undocumented and internal members; adds interfaces it does not declare; adds runtime helpers under `/implementations`; unsupported by the Obsidian team |
